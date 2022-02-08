@@ -17,6 +17,8 @@ import {
   StructuredListCell,
   TextInput,
   Tag,
+  Breadcrumb,
+  BreadcrumbItem,
 } from 'carbon-components-react';
 import { ChevronRight16 } from '@carbon/icons-react';
 import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
@@ -27,7 +29,6 @@ const componentName = 'AddSelect';
 export let AddSelect = forwardRef(
   (
     {
-      actions,
       className,
       description,
       influencerTitle,
@@ -39,7 +40,11 @@ export let AddSelect = forwardRef(
       noResultsTitle,
       noSelectionDescription,
       noSelectionTitle,
+      onClose,
+      onCloseButtonText,
       onSearchFilter,
+      onSubmit,
+      onSubmitButtonText,
       open,
       title,
       ...rest
@@ -47,15 +52,9 @@ export let AddSelect = forwardRef(
     ref
   ) => {
     const blockClass = `${pkg.prefix}--add-select`;
-    const commonTearsheetProps = {
-      open,
-      title,
-      actions,
-      description,
-      closeIconDescription: 'temp description',
-    };
 
     // hooks
+    const [path, setPath] = useState([]);
     const [singleSelection, setSingleSelection] = useState('');
     const [multiSelection, setMultiSelection] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -79,13 +78,25 @@ export let AddSelect = forwardRef(
       }
     };
 
-    const onNavigateItem = () => {
-      // TODO figure out navigation
+    const onNavigateItem = ({ id, label }) => {
+      setPath([...path, { id, label }]);
     };
 
     // item filtering
-    const getFilteredItems = () =>
-      items.filter((item) => {
+    const getFilteredItems = () => {
+      const hasPath = path.length > 0;
+      /**
+       * how to traverse the levels of items-
+       * the path represents the ids of each level / item / breadcrumb
+       * using this path we can drill down into the items until we get to the last one the user selected
+       */
+      const itemsToFilter = hasPath
+        ? path.reduce(
+            (prev, cur) => prev.find((item) => item.id === cur.id).children,
+            items
+          )
+        : items;
+      const results = itemsToFilter.filter((item) => {
         if (!searchTerm) {
           return item;
         }
@@ -96,6 +107,8 @@ export let AddSelect = forwardRef(
         // otherwise use the default label filter
         return item.label.toLowerCase().includes(searchTerm);
       });
+      return results;
+    };
 
     const filteredItems = getFilteredItems();
 
@@ -122,6 +135,39 @@ export let AddSelect = forwardRef(
       </div>
     );
 
+    // breadcrumbs
+    const onCrumbClick = (id) => {
+      const newPath = [...path];
+      const pathIdx = newPath.findIndex((entry) => entry.id === id);
+      const finalPath = newPath.splice(0, pathIdx + 1);
+      setPath(finalPath);
+    };
+
+    const getCrumbs = () =>
+      path.map((entry, idx, arr) => {
+        const isCurrentPage = idx === arr.length - 1;
+        const clickHandler = () => {
+          if (!isCurrentPage) {
+            onCrumbClick(entry.id);
+          }
+        };
+        return (
+          <BreadcrumbItem
+            key={entry.id}
+            isCurrentPage={isCurrentPage}
+            onClick={clickHandler}
+          >
+            {entry.label}
+          </BreadcrumbItem>
+        );
+      });
+
+    const crumbs = getCrumbs();
+
+    const resetPath = () => {
+      setPath([]);
+    };
+
     // main content
     const body = (
       <>
@@ -134,8 +180,21 @@ export let AddSelect = forwardRef(
             onChange={handleSearch}
           />
           <div className={`${blockClass}__items-label-container`}>
-            <p className={`${blockClass}__items-label`}>{itemsLabel}</p>
-            <Tag type="gray" size="sm">
+            {path.length ? (
+              <Breadcrumb noTrailingSlash>
+                <BreadcrumbItem onClick={resetPath}>
+                  {itemsLabel}
+                </BreadcrumbItem>
+                {crumbs}
+              </Breadcrumb>
+            ) : (
+              <p className={`${blockClass}__items-label`}>{itemsLabel}</p>
+            )}
+            <Tag
+              type="gray"
+              size="sm"
+              className={`${blockClass}__items-label-tag`}
+            >
               {filteredItems.length}
             </Tag>
           </div>
@@ -173,7 +232,9 @@ export let AddSelect = forwardRef(
                           />
                         )}
                         {item.children && (
-                          <ChevronRight16 onClick={onNavigateItem} />
+                          <ChevronRight16
+                            onClick={() => onNavigateItem(item)}
+                          />
                         )}
                       </div>
                     </StructuredListCell>
@@ -192,6 +253,26 @@ export let AddSelect = forwardRef(
         )}
       </>
     );
+
+    const commonTearsheetProps = {
+      open,
+      title,
+      description,
+      closeIconDescription: 'temp description',
+      actions: [
+        {
+          label: onCloseButtonText,
+          kind: 'secondary',
+          onClick: onClose,
+        },
+        {
+          label: onSubmitButtonText,
+          kind: 'primary',
+          onClick: onSubmit,
+          disabled: multi ? multiSelection.length === 0 : !singleSelection,
+        },
+      ],
+    };
 
     return (
       <div ref={ref} className={cx(className, blockClass)} {...rest}>
@@ -212,7 +293,6 @@ export let AddSelect = forwardRef(
 );
 
 AddSelect.propTypes = {
-  actions: PropTypes.array,
   className: PropTypes.string,
   description: PropTypes.string,
   influencerTitle: PropTypes.string,
@@ -230,7 +310,11 @@ AddSelect.propTypes = {
   noResultsTitle: PropTypes.string,
   noSelectionDescription: PropTypes.string,
   noSelectionTitle: PropTypes.string,
+  onClose: PropTypes.func,
+  onCloseButtonText: PropTypes.string,
   onSearchFilter: PropTypes.func,
+  onSubmit: PropTypes.func,
+  onSubmitButtonText: PropTypes.string,
   open: PropTypes.bool,
   title: PropTypes.string,
 };

@@ -425,6 +425,12 @@ $right-section-alt-width: 100% - $left-section-alt-width;
       white-space: nowrap;
     }
 
+    .#{$block-class}__title--editable {
+      // move to match non-editable version position
+      margin-top: calc(-1 * #{$spacing-01});
+      margin-left: calc(-1 * #{$spacing-05});
+    }
+
     .#{$block-class}__title .#{$pkg-prefix}--inline-edit__value {
       // The heading text sits 2px pixels lower in the inline edit which is aligned center
       // stylelint-disable-next-line carbon/layout-token-use

@@ -80,7 +80,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   $duration: 1000ms;
 
   $animation: background-appear;
-  @if ($with-shadow) {
+  @if $with-shadow {
     $animation: background-and-shadow-appear;
   }
 

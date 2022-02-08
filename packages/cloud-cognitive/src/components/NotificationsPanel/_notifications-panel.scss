@@ -20,7 +20,7 @@
 
 @mixin notifications-panel {
   $block-class: #{$pkg-prefix}--notifications-panel;
-  @keyframes fadeIn {
+  @keyframes fade-in {
     0% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
@@ -32,7 +32,7 @@
     }
   }
 
-  @keyframes fadeOut {
+  @keyframes fade-out {
     0% {
       opacity: 1;
       transform: translateY(0);

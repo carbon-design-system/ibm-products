@@ -6127,16 +6127,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.c4p--page-header .c4p--page-header__title--editable {
-  margin-top: calc(-1 * var(--cds-spacing-01, 0.125rem));
-  margin-left: calc(-1 * var(--cds-spacing-05, 1rem));
-}
 .c4p--page-header .c4p--page-header__title .c4p--inline-edit__value {
   transform: translateY(-2px);
 }
 .c4p--page-header .c4p--page-header__title--editable {
   display: flex;
   overflow: visible;
+  margin-top: calc(-1 * var(--cds-spacing-01, 0.125rem));
+  margin-left: calc(-1 * var(--cds-spacing-05, 1rem));
 }
 .c4p--page-header .c4p--page-header__title-skeleton {
   height: var(--cds-spacing-07, 2rem);

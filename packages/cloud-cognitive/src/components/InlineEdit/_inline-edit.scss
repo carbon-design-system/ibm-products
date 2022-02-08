@@ -115,15 +115,14 @@
       display: inline-block;
       // positions text and placeholder including when showing placeholder
       // NOTE: Using flex does strange things to a caret in content editable
-      line-height: var(--#{$block-class}--size);
-      min-height: var(--#{$block-class}--size);
-      // min-width: $spacing-05; // space for caret when empty
       min-width: calc(100% - 2 * var(--#{$block-class}--size) - $spacing-05);
       max-width: calc(100% - 2 * var(--#{$block-class}--size) - $spacing-05);
-
+      min-height: var(--#{$block-class}--size);
       // stylelint-disable-next-line carbon/layout-token-use
       margin-right: calc(2 * var(--#{$block-class}--size)); // room for controls
       margin-left: $spacing-05;
+      // stylelint-disable-next-line carbon/type-token-use
+      line-height: var(--#{$block-class}--size);
 
       &:focus {
         outline: none;
@@ -132,9 +131,9 @@
 
     .#{$block-class}__input::after {
       display: block;
-      opacity: 0;
-      content: attr(data-placeholder);
       color: $text-05;
+      content: attr(data-placeholder);
+      opacity: 0;
     }
 
     .#{$block-class}__disabled-cover {

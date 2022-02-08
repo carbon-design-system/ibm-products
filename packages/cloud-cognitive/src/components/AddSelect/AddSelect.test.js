@@ -85,15 +85,11 @@ describe(componentName, () => {
 
   it('renders SingleAddSelect', () => {
     const { container } = render(<AddSelect {...defaultProps} />);
-    expect(
-      container.querySelector(`.${blockClass}__selections-radio`)
-    ).toBeVisible();
+    expect(container.querySelector(`.${blockClass}__single`)).toBeVisible();
   });
 
   it('renders MultiAddSelect', () => {
     const { container } = render(<AddSelect {...defaultProps} multi />);
-    expect(
-      container.querySelector(`.${blockClass}__selections-checkbox`)
-    ).toBeVisible();
+    expect(container.querySelector(`.${blockClass}__multi`)).toBeVisible();
   });
 });

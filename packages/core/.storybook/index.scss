@@ -5,8 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../generated/feature-flags/feature-flags';
-
 // Load the C&CS styles first, excluding Carbon styles. We will then load full
 // Carbon styles at the end -- this is to obtain a "worst case" for our own CSS,
 // to ensure we are resilient against different CSS loading orders and our

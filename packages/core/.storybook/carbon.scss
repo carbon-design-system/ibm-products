@@ -7,5 +7,5 @@
 
 // a build of carbon css with our required feature flags set
 
-@import '../generated/feature-flags/feature-flags';
+@import '../../cloud-cognitive/src/global/styles/project-settings';
 @import 'carbon-components/scss/globals/scss/styles';

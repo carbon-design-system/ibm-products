@@ -1,0 +1,44 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+$block-class: #{$pkg-prefix}--edit-and-edit-off;
+
+@mixin edit-and-edit-off {
+  .#{$block-class} .underline {
+    transform: rotate(0);
+    transform-origin: 100% 60%;
+    transition: all $duration--moderate-02 motion(standard, productive);
+  }
+
+  .#{$block-class} .pencil {
+    transition: all $duration--moderate-02 motion(standard, productive);
+  }
+
+  [disabled] > .#{$block-class} .underline {
+    /* 4.2px = width of line * 1.5  */
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: rotate(45deg) scaleX(1.33) translateX(4.2px);
+  }
+
+  .#{$block-class} .mask-black {
+    // stylelint-disable-next-line
+    fill: #000000 !important;
+  }
+
+  .#{$block-class} .mask-white {
+    // stylelint-disable-next-line
+    fill: #ffffff !important;
+  }
+}
+
+@include exports('edit-and-edit-off') {
+  @include edit-and-edit-off;
+}

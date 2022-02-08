@@ -9,20 +9,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
+import { pkg } from '../../settings';
+// The block part of our conventional BEM class names (blockClass__E--M).
+const blockClass = `${pkg.prefix}--edit-and-edit-off`;
+
 // Based on Carbon Icons Edit16 and EditOff16
-export const EditAndEditOff = ({ className }) => {
+export const EditAndEditOff = ({ className, ...rest }) => {
   return (
     <svg
-      className={cx('edit-n-edit-off-svg', className)}
+      className={cx(blockClass, className)}
       focusable="false"
       preserveAspectRatio="xMidYMid meet"
       xmlns="http://www.w3.org/2000/svg"
-      aria-label="Edit"
-      aria-hidden="true"
       width="16"
       height="16"
       viewBox="0 0 32 32"
       role="img"
+      {...rest}
     >
       <g>
         {/* masks */}
@@ -41,7 +44,7 @@ export const EditAndEditOff = ({ className }) => {
           ></path>
         </mask>
         <mask id="line-mask">
-          <g id="line-mask-group" className="underline">
+          <g className="underline">
             <rect
               x="0"
               y="0"
@@ -55,14 +58,15 @@ export const EditAndEditOff = ({ className }) => {
       </g>
       <g fill="currentColor">
         {/* image */}
-        <g mask="url(#line-mask">
+        <g mask="url(#line-mask)">
           <path
+            className="pencil"
             mask="url(#pencil-mask)"
             d="M4 19.6 L4 26 L10.4 26 L27.3 9.1 A2 2 0 0 0 27.3 6.1 L23.7 2.5 A2 2 0 0 0 20.9 2.7 "
           ></path>
         </g>
 
-        <path id="line" className="underline" d="M2 28 H30 V30H2z"></path>
+        <path className="underline" d="M2 28 H30 V30H2z"></path>
       </g>
     </svg>
   );

@@ -25,7 +25,7 @@ import {
   WarningAltFilled16,
 } from '@carbon/icons-react';
 
-import { EditAndEditOff } from './edit-n-edit-off-svg';
+import { EditAndEditOff } from './EditAndEditOff';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--inline-edit`;

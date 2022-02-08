@@ -1,6 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn --silent update-gallery-config
-yarn --silent copy-common-files
-yarn --silent lint-staged
+yarn -s update-gallery-config
+yarn -s lint-staged

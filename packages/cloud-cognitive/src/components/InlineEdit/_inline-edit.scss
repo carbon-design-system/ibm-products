@@ -130,9 +130,32 @@
       }
     }
 
-    .#{$block-class}__placeholder {
+    .#{$block-class}__input::after {
+      display: block;
+      opacity: 0;
+      content: attr(data-placeholder);
+      color: $text-05;
+    }
+
+    .#{$block-class}__disabled-cover {
       position: absolute;
-      left: $spacing-03;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; // act as if not there
+    }
+
+    &.#{$block-class}--disabled .#{$block-class}__disabled-cover {
+      // when disabled prevent pointer events going through to the input
+      cursor: not-allowed;
+      pointer-events: all;
+    }
+
+    .#{$block-class}__input--empty::after {
+      opacity: 1;
+      // only transition fade in
+      transition: opacity $duration--moderate-02 motion(standard, productive);
     }
 
     .#{$block-class}__controls {

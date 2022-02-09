@@ -359,7 +359,7 @@ const title = {
     onSave: () => {
       // gets replaced in template
     },
-    revertDescription: 'Revert',
+    cancelDescription: 'Cancel',
     saveDescription: 'Save',
     text: 'An editable title',
   },

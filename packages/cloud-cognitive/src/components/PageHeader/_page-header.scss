@@ -434,6 +434,9 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     .#{$block-class}__title--editable {
       display: flex;
       overflow: visible;
+      // move to match non-editable version position
+      margin-top: calc(-1 * #{$spacing-01});
+      margin-left: calc(-1 * #{$spacing-05});
     }
 
     .#{$block-class}__title-skeleton {

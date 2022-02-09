@@ -112,24 +112,49 @@
     }
 
     .#{$block-class}__input {
-      display: flex;
-      overflow: hidden;
+      display: inline-block;
+      // positions text and placeholder including when showing placeholder
+      // NOTE: Using flex does strange things to a caret in content editable
+      min-width: calc(100% - 2 * var(--#{$block-class}--size) - $spacing-05);
       max-width: calc(100% - 2 * var(--#{$block-class}--size) - $spacing-05);
-      height: 100%;
-      flex: 1 1 100%;
-      align-items: center;
+      min-height: var(--#{$block-class}--size);
       // stylelint-disable-next-line carbon/layout-token-use
       margin-right: calc(2 * var(--#{$block-class}--size)); // room for controls
       margin-left: $spacing-05;
+      // stylelint-disable-next-line carbon/type-token-use
+      line-height: var(--#{$block-class}--size);
 
       &:focus {
         outline: none;
       }
     }
 
-    .#{$block-class}__placeholder {
+    .#{$block-class}__input::after {
+      display: block;
+      color: $text-05;
+      content: attr(data-placeholder);
+      opacity: 0;
+    }
+
+    .#{$block-class}__disabled-cover {
       position: absolute;
-      left: $spacing-03;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; // act as if not there
+    }
+
+    &.#{$block-class}--disabled .#{$block-class}__disabled-cover {
+      // when disabled prevent pointer events going through to the input
+      cursor: not-allowed;
+      pointer-events: all;
+    }
+
+    .#{$block-class}__input--empty::after {
+      opacity: 1;
+      // only transition fade in
+      transition: opacity $duration--moderate-02 motion(standard, productive);
     }
 
     .#{$block-class}__controls {

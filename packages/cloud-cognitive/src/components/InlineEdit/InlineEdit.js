@@ -52,6 +52,7 @@ export let InlineEdit = React.forwardRef(
       onCancel,
       onSave,
       onChange,
+      placeholder,
       saveDescription,
       saveDisabled,
       size,
@@ -81,6 +82,10 @@ export let InlineEdit = React.forwardRef(
       )
     ) : null;
 
+    const doSetEditing = (value) => {
+      setEditing(!disabled && value);
+    };
+
     const handleEdit = (ev) => {
       if (!disabled) {
         const rightOfInput =
@@ -92,7 +97,7 @@ export let InlineEdit = React.forwardRef(
 
         // clicking on the content editable element should not set either of these to true
         if (rightOfInput || leftOfInput) {
-          setEditing(true);
+          doSetEditing(true);
           setTimeout(() => {
             refInput.current.focus();
             // select all the content
@@ -109,14 +114,15 @@ export let InlineEdit = React.forwardRef(
       }
     };
     const handleFocus = (ev) => {
+      ev.preventDefault();
       if (!editing && ev.target.classList.contains(`${blockClass}__input`)) {
         // console.log(editing);
-        setEditing(true);
+        doSetEditing(true);
       }
     };
 
     const handleSave = () => {
-      setEditing(false);
+      doSetEditing(false);
       document.getSelection().removeAllRanges();
       if (onSave) {
         onSave(refInput.current.innerText);
@@ -166,7 +172,7 @@ export let InlineEdit = React.forwardRef(
     const handleCancel = () => {
       refInput.current.innerText = value;
       handleInput(value);
-      setEditing(false);
+      doSetEditing(false);
       document.getSelection().removeAllRanges();
 
       if (onCancel) {
@@ -175,7 +181,7 @@ export let InlineEdit = React.forwardRef(
     };
     const handleBlur = (ev) => {
       if (!ref.current.contains(ev.relatedTarget)) {
-        setEditing(false);
+        doSetEditing(false);
         handleSave();
       }
     };
@@ -225,6 +231,7 @@ export let InlineEdit = React.forwardRef(
           // `${carbon.prefix}--btn ${carbon.prefix}--btn--ghost`, // make like a ghost button
           {
             // switched classes dependant on props or state
+            [`${blockClass}--disabled`]: disabled,
             [`${blockClass}--editing`]: editing,
             [`${blockClass}--invalid`]: invalid,
             [`${blockClass}--light`]: light,
@@ -238,23 +245,25 @@ export let InlineEdit = React.forwardRef(
           {...rest}
           {...getDevtoolsProps(componentName)}
           {...{ id, size }}
-          className={`${blockClass}__input`}
+          className={cx(`${blockClass}__input`, {
+            [`${blockClass}__input--empty`]:
+              refInput.current && refInput.current.innerText.length === 0,
+          })}
           contentEditable
           aria-label={labelText}
           role="textbox"
-          tabIndex="0"
+          tabIndex={disabled ? -1 : 0}
           onFocus={handleFocus}
           onInput={handleInput}
           onKeyDown={handleKeyDown}
           onPaste={handlePaste}
           suppressContentEditableWarning={true}
           ref={refInput}
+          data-placeholder={placeholder ?? labelText}
         >
           {value}
         </div>
-        {refInput.current && refInput.current.innerText.length === 0 && (
-          <div className={`${blockClass}__placeholder`}>{labelText}</div>
-        )}
+
         {showValidationText && validationText.length > 0 && (
           <div className={`${blockClass}__validation-text`}>
             {validationText}
@@ -306,6 +315,7 @@ export let InlineEdit = React.forwardRef(
             />
           )}
         </div>
+        <div className={cx(`${blockClass}__disabled-cover`)} />
       </div>
     );
   }
@@ -375,6 +385,10 @@ InlineEdit.propTypes = {
    * method called on change event
    */
   onSave: PropTypes.func,
+  /**
+   * placeholder for text input
+   */
+  placeholder: PropTypes.string,
   /**
    * label for save button
    */

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021
+// Copyright IBM Corp. 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,22 +8,13 @@
 import React, { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import {
-  Checkbox,
-  RadioButton,
-  StructuredListRow,
-  StructuredListWrapper,
-  StructuredListBody,
-  StructuredListCell,
-  TextInput,
-  Tag,
-  Breadcrumb,
-  BreadcrumbItem,
-} from 'carbon-components-react';
-import { ChevronRight16 } from '@carbon/icons-react';
+import { TextInput, Tag } from 'carbon-components-react';
 import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
+import { AddSelectSidebar } from './AddSelectSidebar';
+import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs';
+import { AddSelectList } from './AddSelectList';
 const componentName = 'AddSelect';
 
 export let AddSelect = forwardRef(
@@ -64,24 +55,6 @@ export let AddSelect = forwardRef(
       setSearchTerm(e.target.value);
     };
 
-    const handleSingleSelection = (value) => {
-      setSingleSelection(value);
-    };
-
-    const handleMultiSelection = (value, checked) => {
-      if (checked) {
-        const newValues = [...multiSelection, value];
-        setMultiSelection(newValues);
-      } else {
-        const newValues = multiSelection.filter((v) => v !== value);
-        setMultiSelection(newValues);
-      }
-    };
-
-    const onNavigateItem = ({ id, label }) => {
-      setPath([...path, { id, label }]);
-    };
-
     // item filtering
     const getFilteredItems = () => {
       const hasPath = path.length > 0;
@@ -112,62 +85,6 @@ export let AddSelect = forwardRef(
 
     const filteredItems = getFilteredItems();
 
-    // sidebar
-    const influencer = (
-      <div className={`${blockClass}__influencer`}>
-        <div className={`${blockClass}__influencer-header`}>
-          <p className={`${blockClass}__influencer-title`}>{influencerTitle}</p>
-          <Tag type="gray" size="sm">
-            {multiSelection.length}
-          </Tag>
-        </div>
-        <div className={`${blockClass}__influencer-body`}>
-          {multiSelection.length > 0 ? (
-            <p>content</p>
-          ) : (
-            <NoDataEmptyState
-              subtitle={noSelectionDescription}
-              title={noSelectionTitle}
-              size="sm"
-            />
-          )}
-        </div>
-      </div>
-    );
-
-    // breadcrumbs
-    const onCrumbClick = (id) => {
-      const newPath = [...path];
-      const pathIdx = newPath.findIndex((entry) => entry.id === id);
-      const finalPath = newPath.splice(0, pathIdx + 1);
-      setPath(finalPath);
-    };
-
-    const getCrumbs = () =>
-      path.map((entry, idx, arr) => {
-        const isCurrentPage = idx === arr.length - 1;
-        const clickHandler = () => {
-          if (!isCurrentPage) {
-            onCrumbClick(entry.id);
-          }
-        };
-        return (
-          <BreadcrumbItem
-            key={entry.id}
-            isCurrentPage={isCurrentPage}
-            onClick={clickHandler}
-          >
-            {entry.label}
-          </BreadcrumbItem>
-        );
-      });
-
-    const crumbs = getCrumbs();
-
-    const resetPath = () => {
-      setPath([]);
-    };
-
     // main content
     const body = (
       <>
@@ -181,12 +98,11 @@ export let AddSelect = forwardRef(
           />
           <div className={`${blockClass}__items-label-container`}>
             {path.length ? (
-              <Breadcrumb noTrailingSlash>
-                <BreadcrumbItem onClick={resetPath}>
-                  {itemsLabel}
-                </BreadcrumbItem>
-                {crumbs}
-              </Breadcrumb>
+              <AddSelectBreadcrumbs
+                itemsLabel={itemsLabel}
+                path={path}
+                setPath={setPath}
+              />
             ) : (
               <p className={`${blockClass}__items-label`}>{itemsLabel}</p>
             )}
@@ -200,49 +116,16 @@ export let AddSelect = forwardRef(
           </div>
         </div>
         {filteredItems.length > 0 ? (
-          <div className={`${blockClass}__selections-wrapper`}>
-            <StructuredListWrapper
-              selection
-              className={`${blockClass}__selections`}
-            >
-              <StructuredListBody>
-                {filteredItems.map((item) => (
-                  <StructuredListRow key={item.id}>
-                    <StructuredListCell>
-                      <div className={`${blockClass}__selections-cell-wrapper`}>
-                        {multi ? (
-                          <Checkbox
-                            className={`${blockClass}__selections-checkbox`}
-                            onChange={(value) =>
-                              handleMultiSelection(item.value, value)
-                            }
-                            labelText={item.label}
-                            id={item.id}
-                            checked={multiSelection.includes(item.value)}
-                          />
-                        ) : (
-                          <RadioButton
-                            className={`${blockClass}__selections-radio`}
-                            name="add-select-selections"
-                            id={item.id}
-                            value={item.value}
-                            labelText={item.label}
-                            onChange={handleSingleSelection}
-                            selected={item.value === singleSelection}
-                          />
-                        )}
-                        {item.children && (
-                          <ChevronRight16
-                            onClick={() => onNavigateItem(item)}
-                          />
-                        )}
-                      </div>
-                    </StructuredListCell>
-                  </StructuredListRow>
-                ))}
-              </StructuredListBody>
-            </StructuredListWrapper>
-          </div>
+          <AddSelectList
+            filteredItems={filteredItems}
+            multi={multi}
+            multiSelection={multiSelection}
+            path={path}
+            setMultiSelection={setMultiSelection}
+            setPath={setPath}
+            setSingleSelection={setSingleSelection}
+            singleSelection={singleSelection}
+          />
         ) : (
           <div className={`${blockClass}__body`}>
             <NoDataEmptyState
@@ -274,12 +157,24 @@ export let AddSelect = forwardRef(
       ],
     };
 
+    const sidebarProps = {
+      influencerTitle,
+      multiSelection,
+      noSelectionDescription,
+      noSelectionTitle,
+    };
+
+    const classNames = cx(className, blockClass, {
+      [`${blockClass}__single`]: !multi,
+      [`${blockClass}__multi`]: multi,
+    });
+
     return (
-      <div ref={ref} className={cx(className, blockClass)} {...rest}>
+      <div ref={ref} className={classNames} {...rest}>
         {multi ? (
           <Tearsheet
             {...commonTearsheetProps}
-            influencer={multi && influencer}
+            influencer={multi && <AddSelectSidebar {...sidebarProps} />}
             influencerPosition="right"
           >
             {body}

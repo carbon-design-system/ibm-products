@@ -1,7 +1,7 @@
 {
   "name": "@carbon/storybook-addon-theme",
   "description": "Carbon theme switcher for Storybook",
-  "version": "0.22.7",
+  "version": "0.22.8",
   "license": "Apache-2.0",
   "main": "dist/react.js",
   "repository": {

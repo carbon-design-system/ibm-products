@@ -1,6 +1,5 @@
 import { Canary } from './components/_Canary';
 
-import featureFlags from './generated/feature-flags/feature-flags';
 import pkgSettings from './global/js/package-settings';
 import { settings as carbonSettings } from 'carbon-components';
 import React from 'react';
@@ -12,9 +11,6 @@ export const carbon = {
   },
   set prefix(val) {
     carbonSettings.prefix = val;
-  },
-  get flags() {
-    return featureFlags;
   },
   get themes() {
     return themes;

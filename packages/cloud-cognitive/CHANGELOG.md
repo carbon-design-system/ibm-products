@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.5.0...@carbon/ibm-products@1.6.0) (2022-02-09)
+
+
+### Bug Fixes
+
+* adds nested lists ([#1591](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1591)) ([c091c55](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c091c5505c1143f0e506af2c29b48de99cdd8dc9))
+* adds selection functionality to add select ([#1579](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1579)) ([1b5b624](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1b5b62422563d3909a8f30683cf7611fa630af28))
+* **AddSelect:** refactor custom filter and init navigation ([#1583](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1583)) ([8d53206](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8d53206c8627151d22565631aad8369d721e4af8))
+* breakup add select into multiple components ([#1602](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1602)) ([2a271ff](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2a271ff6b18e776cc5bcae8d5f963f9ce049c634))
+* **PageHeader:** title without breadcrumb and action bar remains visible on scroll ([#1562](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1562)) ([1b62c0b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1b62c0b9890ce00107dff2e465bda072f8c4e6c8))
+* productive card button size and props spread ([#1581](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1581)) ([a33b3d8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a33b3d896b010a8305ad9b27e17fa733af7ce7c6))
+* update Carbon versions to latest ([#1587](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1587)) ([d4b5ccc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d4b5cccd9ef4a9df2966063c21f49fe7810245a8))
+* update stylelint to latest version ([#1597](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1597)) ([13d8f9e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/13d8f9eb2885e687ba23f66b019a5629fffa2a85))
+
+
+### Features
+
+* **NotificationsPanel:** support reduced motion ([#1598](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1598)) ([f614e52](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f614e52216fb44769250e60d1a6cb17cc68b7f88))
+* **SidePanel:** add prefers-reduced-motion support for SidePanel animations ([#1586](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1586)) ([8e53e1b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8e53e1b8ba8a0ae75434a78714d1647d1452c4c3))
+
+
+
+
+
 # [1.5.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.4.0...@carbon/ibm-products@1.5.0) (2022-02-01)
 
 

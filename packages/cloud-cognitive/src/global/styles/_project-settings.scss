@@ -6,7 +6,11 @@
 //
 
 // set required feature flags for carbon
-@import '../../generated/feature-flags/feature-flags';
+$feature-flags: (
+  ui-shell: true,
+  grid-columns-16: true,
+  enable-css-custom-properties: true,
+);
 
 // import the carbon import-once mechanism
 @import '@carbon/import-once/scss/import-once';

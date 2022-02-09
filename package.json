@@ -27,7 +27,6 @@
     "clean:finally:files": "rimraf coverage node_modules results",
     "clean:lerna": "lerna clean --yes",
     "clean:packages": "yarn -s run-all --no-sort clean",
-    "copy-common-files": "sh ./scripts/copy-common-files.sh",
     "format": "run-s -s 'lint:es --fix' 'format:prettier --write'",
     "format:prettier": "yarn -s format:prettier:files '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**'",
     "format:prettier:files": "prettier",
@@ -146,9 +145,9 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,md,mdx,scss}": "yarn --silent lint:prettier:files",
-    "**/*.js": "yarn --silent lint:es:files",
-    "**/*.scss": "yarn --silent lint:style:files",
-    "**/*": "yarn --silent spellcheck:files"
+    "**/*.{js,md,mdx,scss}": "yarn -s lint:prettier:files",
+    "**/*.js": "yarn -s lint:es:files",
+    "**/*.scss": "yarn -s lint:style:files",
+    "**/*": "yarn -s spellcheck:files"
   }
 }

@@ -159,6 +159,7 @@ export let AddSelect = forwardRef(
 
     const sidebarProps = {
       influencerTitle,
+      items,
       multiSelection,
       noSelectionDescription,
       noSelectionTitle,

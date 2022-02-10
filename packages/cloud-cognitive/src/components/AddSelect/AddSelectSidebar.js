@@ -6,7 +6,7 @@
 //
 
 import React from 'react';
-import { Tag } from 'carbon-components-react';
+import { Tag, Accordion, AccordionItem } from 'carbon-components-react';
 import PropTypes from 'prop-types';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
@@ -14,11 +14,24 @@ const componentName = 'AddSelectSidebar';
 
 export let AddSelectSidebar = ({
   influencerTitle,
+  items,
   multiSelection,
   noSelectionDescription,
   noSelectionTitle,
 }) => {
   const blockClass = `${pkg.prefix}--add-select__influencer`;
+
+  // utility to flatten the list of items and their children into a single searchable array
+  const flattenItems = (arr) =>
+    arr.reduce((prev, cur) => {
+      const { children, ...item } = cur;
+      return prev.concat(item).concat(children ? flattenItems(children) : []);
+    }, []);
+  const flattenedItems = flattenItems(items);
+  const sidebarItems = multiSelection.map((selectedId) =>
+    flattenedItems.find((item) => item.id === selectedId)
+  );
+
   return (
     <div className={`${blockClass}`}>
       <div className={`${blockClass}-header`}>
@@ -27,23 +40,32 @@ export let AddSelectSidebar = ({
           {multiSelection.length}
         </Tag>
       </div>
-      <div className={`${blockClass}-body`}>
-        {multiSelection.length > 0 ? (
-          multiSelection.map((item) => <p key={item}>{item}</p>)
-        ) : (
+      {multiSelection.length > 0 ? (
+        <Accordion align="start">
+          {sidebarItems.map((item) => (
+            <AccordionItem title={item.value} key={item.id}>
+              {Object.keys(item).map((key) => (
+                <p key={key}>{`${key} - ${item[key]}`}</p>
+              ))}
+            </AccordionItem>
+          ))}
+        </Accordion>
+      ) : (
+        <div className={`${blockClass}-body`}>
           <NoDataEmptyState
             subtitle={noSelectionDescription}
             title={noSelectionTitle}
             size="sm"
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
 
 AddSelectSidebar.propTypes = {
   influencerTitle: PropTypes.string,
+  items: PropTypes.array,
   multiSelection: PropTypes.array,
   noSelectionDescription: PropTypes.string,
   noSelectionTitle: PropTypes.string,

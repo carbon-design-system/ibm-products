@@ -30,13 +30,15 @@ export const EmptyStateContent = ({ action, link, size, subtitle, title }) => {
       >
         {title}
       </h3>
-      <p
-        className={cx(`${blockClass}__subtitle`, {
-          [`${blockClass}__subtitle--small`]: size === 'sm',
-        })}
-      >
-        {subtitle}
-      </p>
+      {subtitle && (
+        <p
+          className={cx(`${blockClass}__subtitle`, {
+            [`${blockClass}__subtitle--small`]: size === 'sm',
+          })}
+        >
+          {subtitle}
+        </p>
+      )}
       {action?.text && action?.onClick && (
         <Button
           {...action}
@@ -91,7 +93,7 @@ EmptyStateContent.propTypes = {
   /**
    * Empty state subtitle
    */
-  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   /**
    * Empty state title
    */

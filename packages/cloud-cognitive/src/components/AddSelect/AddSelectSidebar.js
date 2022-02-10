@@ -19,7 +19,7 @@ export let AddSelectSidebar = ({
   noSelectionDescription,
   noSelectionTitle,
 }) => {
-  const blockClass = `${pkg.prefix}--add-select__influencer`;
+  const blockClass = `${pkg.prefix}--add-select__sidebar`;
 
   // utility to flatten the list of items and their children into a single searchable array
   const flattenItems = (arr) =>
@@ -33,7 +33,7 @@ export let AddSelectSidebar = ({
   );
 
   return (
-    <div className={`${blockClass}`}>
+    <div className={blockClass}>
       <div className={`${blockClass}-header`}>
         <p className={`${blockClass}-title`}>{influencerTitle}</p>
         <Tag type="gray" size="sm">
@@ -45,7 +45,10 @@ export let AddSelectSidebar = ({
           {sidebarItems.map((item) => (
             <AccordionItem title={item.value} key={item.id}>
               {Object.keys(item).map((key) => (
-                <p key={key}>{`${key} - ${item[key]}`}</p>
+                <div className={`${blockClass}-item`} key={key}>
+                  <p className={`${blockClass}-item-header`}>{key}</p>
+                  <p className={`${blockClass}-item-body`}>{item[key]}</p>
+                </div>
               ))}
             </AccordionItem>
           ))}

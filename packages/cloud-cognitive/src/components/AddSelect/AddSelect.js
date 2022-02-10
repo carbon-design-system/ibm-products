@@ -195,9 +195,9 @@ AddSelect.propTypes = {
   inputPlaceholder: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      label: PropTypes.string,
-      value: PropTypes.string,
+      id: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
     })
   ),
   itemsLabel: PropTypes.string,

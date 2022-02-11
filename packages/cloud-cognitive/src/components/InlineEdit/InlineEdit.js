@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -83,6 +83,11 @@ export let InlineEdit = React.forwardRef(
     ) : null;
 
     const doSetEditing = (value) => {
+      if (value === false) {
+        console.log(refInput.current.scrollWidth);
+        // move scroll to start
+        refInput.current.scrollLeft = 0;
+      }
       setEditing(!disabled && value);
     };
 
@@ -116,7 +121,6 @@ export let InlineEdit = React.forwardRef(
     const handleFocus = (ev) => {
       ev.preventDefault();
       if (!editing && ev.target.classList.contains(`${blockClass}__input`)) {
-        // console.log(editing);
         doSetEditing(true);
       }
     };
@@ -234,7 +238,11 @@ export let InlineEdit = React.forwardRef(
             [`${blockClass}--disabled`]: disabled,
             [`${blockClass}--editing`]: editing,
             [`${blockClass}--invalid`]: invalid,
+            [`${blockClass}--warn`]: warn,
             [`${blockClass}--light`]: light,
+            [`${blockClass}--overflows`]:
+              refInput.current &&
+              refInput.current.scrollWidth > refInput.current.offsetWidth,
           }
         )}
         onClick={handleEdit} // disabled eslint for click handler
@@ -264,21 +272,24 @@ export let InlineEdit = React.forwardRef(
           {value}
         </div>
 
-        {showValidationText && validationText.length > 0 && (
-          <div className={`${blockClass}__validation-text`}>
-            {validationText}
-          </div>
-        )}
-        <div className={`${blockClass}__validation-icon`}>{validationIcon}</div>
         <div
           className={cx(`${blockClass}__controls`, {
             [`${blockClass}__controls--animation`]: controlsAnimation,
             [`${blockClass}__controls--saveable`]:
-              invalid ||
-              saveDisabled ||
-              (refInput.current && value !== internalValue),
+              !invalid &&
+              !saveDisabled &&
+              refInput.current &&
+              value !== internalValue,
           })}
+          // tabindex -1 fixes blur target test when clicking on controls background
+          tabIndex="-1"
         >
+          {!editing && <div className={`${blockClass}__ellipsis`}>...</div>}
+          {showValidationText && validationText.length > 0 && (
+            <div className={`${blockClass}__validation-icon`}>
+              {validationIcon}
+            </div>
+          )}
           {editing ? (
             <>
               <Button
@@ -316,6 +327,13 @@ export let InlineEdit = React.forwardRef(
           )}
         </div>
         <div className={cx(`${blockClass}__disabled-cover`)} />
+        {showValidationText && validationText.length > 0 && (
+          <div
+            className={`${blockClass}__validation-text ${carbon.prefix}--form-requirement`}
+          >
+            {validationText}
+          </div>
+        )}
       </div>
     );
   }

@@ -22,5 +22,18 @@ module.exports = {
         ignorePseudoClasses: ['export'],
       },
     ],
+    'function-no-unknown': [
+      true,
+      {
+        ignoreFunctions: [
+          ...require('../../config/stylelint-config-ibm-products/index').rules[
+            'function-no-unknown'
+          ][1].ignoreFunctions,
+          '/^security-/',
+          'get-component-namespace',
+          'deprecate',
+        ],
+      },
+    ],
   },
 };

@@ -28,7 +28,7 @@
   }
 }
 
-@function tooltip-top-bottom-safe-clip() {
+@function --tooltip-top-bottom-safe-clip() {
   @return polygon(
     0 0,
     -100vw 0,
@@ -194,7 +194,7 @@
 
     .#{$block-class}__controls--animation {
       // makes room for the top clip text but hides the side overflow
-      clip-path: tooltip-top-bottom-safe-clip();
+      clip-path: --tooltip-top-bottom-safe-clip();
       // NOTE: The above allows the tooltip to show through when overflowX: hidden would not when at right edge.
       // It is used with margin animation of contained buttons
     }

@@ -72,7 +72,7 @@ $themes: ('light', 'dark');
 
 $block-class: #{$pkg-prefix}--status-icon;
 
-@function clr($name, $theme: light) {
+@function --clr($name, $theme: light) {
   // stylelint-disable-next-line carbon/theme-token-use
   $color: map-get(map-get($colors, $name), $theme);
   @return $color;
@@ -121,14 +121,14 @@ $block-class: #{$pkg-prefix}--status-icon;
           // stylelint-disable-next-line carbon/motion-token-use
           animation: rotating 8000ms infinite linear;
           // stylelint-disable-next-line carbon/theme-token-use
-          fill: clr($icon, $theme);
+          fill: --clr($icon, $theme);
         } @else if $icon == running {
           // stylelint-disable-next-line carbon/theme-token-use
-          fill: clr($icon, $theme);
+          fill: --clr($icon, $theme);
           transform: scaleY(-1);
         } @else {
           // stylelint-disable-next-line carbon/theme-token-use
-          fill: clr($icon, $theme);
+          fill: --clr($icon, $theme);
           @media (prefers-reduced-motion) {
             .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-in-progress {
               animation: none;

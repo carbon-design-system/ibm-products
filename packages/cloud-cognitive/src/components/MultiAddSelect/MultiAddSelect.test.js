@@ -15,6 +15,7 @@ const defaultProps = {
   noSelectionDescription: 'No selection description',
   noResultsTitle: 'No results title',
   noResultsDescription: 'Try again description',
+  textInputLabel: 'test input label',
 };
 
 describe(componentName, () => {

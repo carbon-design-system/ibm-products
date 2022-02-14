@@ -61,6 +61,7 @@ const defaultProps = {
   onCloseButtonText: 'Cancel',
   onSubmitButtonText: 'Add',
   removeIconDescription: 'Remove',
+  textInputLabel: 'test input label',
 };
 
 const Template = (args) => {

@@ -38,6 +38,7 @@ export let AddSelect = forwardRef(
       onSubmitButtonText,
       open,
       removeIconDescription,
+      textInputLabel,
       title,
       ...rest
     },
@@ -79,7 +80,7 @@ export let AddSelect = forwardRef(
           return onSearchFilter(item, searchTerm);
         }
         // otherwise use the default label filter
-        return item.label.toLowerCase().includes(searchTerm);
+        return item.title.toLowerCase().includes(searchTerm);
       });
       return results;
     };
@@ -92,7 +93,7 @@ export let AddSelect = forwardRef(
         <div className={`${blockClass}__header`}>
           <TextInput
             id="temp-id"
-            labelText="temp label"
+            labelText={textInputLabel}
             placeholder={inputPlaceholder}
             value={searchTerm}
             onChange={handleSearch}
@@ -199,7 +200,7 @@ AddSelect.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     })
   ),
@@ -216,6 +217,7 @@ AddSelect.propTypes = {
   onSubmitButtonText: PropTypes.string,
   open: PropTypes.bool,
   removeIconDescription: PropTypes.string,
+  textInputLabel: PropTypes.string,
   title: PropTypes.string,
 };
 

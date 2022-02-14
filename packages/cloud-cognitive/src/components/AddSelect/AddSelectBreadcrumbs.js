@@ -38,7 +38,7 @@ export let AddSelectBreadcrumbs = ({ itemsLabel, path, setPath }) => {
             isCurrentPage={isCurrentPage}
             onClick={crumbHandler}
           >
-            {entry.label}
+            {entry.title}
           </BreadcrumbItem>
         );
       })}

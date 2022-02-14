@@ -283,7 +283,9 @@ export let InlineEdit = React.forwardRef(
           // tabindex -1 fixes blur target test when clicking on controls background
           tabIndex="-1"
         >
-          {!editing && <div className={`${blockClass}__ellipsis`}>&hellip;</div>}
+          {!editing && (
+            <div className={`${blockClass}__ellipsis`}>&hellip;</div>
+          )}
           {showValidationText && validationText.length > 0 && (
             <div className={`${blockClass}__validation-icon`}>
               {validationIcon}

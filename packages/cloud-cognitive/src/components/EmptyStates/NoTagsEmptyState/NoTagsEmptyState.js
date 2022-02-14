@@ -113,7 +113,7 @@ NoTagsEmptyState.propTypes = {
   /**
    * Empty state subtitle
    */
-  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 
   /**
    * Empty state title

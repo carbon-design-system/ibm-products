@@ -1041,7 +1041,7 @@ PageHeader.propTypes = {
    *    - onChange: function to process the live value (React change === HTML Input)
    *    - onSave: function to process a confirmed change
    *    - editableLabel: label for edit required if onChange supplied
-   *    - revertDescription: label for edit revert button
+   *    - cancelDescription: label for edit cancel button
    *    - saveDescription: label for edit save button
    * - Object containing user defined contents. These must fit within the area defined for the title in both main part of the header and the breadcrumb.
    *    - content: title or name of current location shown in main part of page header
@@ -1060,7 +1060,7 @@ PageHeader.propTypes = {
       id: PropTypes.string, // .isRequired.if(inlineEditRequired),
       onChange: PropTypes.func,
       onSave: PropTypes.func,
-      revertDescription: PropTypes.string, //.isRequired.if(inlineEditRequired),
+      cancelDescription: PropTypes.string, //.isRequired.if(inlineEditRequired),
       saveDescription: PropTypes.string, //.isRequired.if(inlineEditRequired),
       // Update docgen if changed
     }),

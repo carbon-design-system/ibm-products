@@ -1,7 +1,6 @@
 module.exports = {
   root: true,
-  extends: ['stylelint-config-carbon'],
-  plugins: ['stylelint-plugin-carbon-tokens'],
+  extends: ['stylelint-config-ibm-products'],
   rules: {
     // set failing rules (not fixed by --fix) to warning
     'max-nesting-depth': [2, { severity: 'warning' }],
@@ -12,7 +11,6 @@ module.exports = {
       },
     ],
     'no-descending-specificity': [true, { severity: 'warning' }],
-    'declaration-property-value-blacklist': null,
     'declaration-property-value-disallowed-list': [
       { '/.*/': ['unset'] },
       { severity: 'warning' },

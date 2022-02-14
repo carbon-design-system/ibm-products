@@ -5,7 +5,11 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../generated/feature-flags/feature-flags';
+$feature-flags: (
+  ui-shell: true,
+  grid-columns-16: true,
+  enable-css-custom-properties: true,
+);
 
 // Here we import carbon settings for use in referring to colors, type, layout tokens etc.
 @import '~@carbon/grid/scss/grid';
@@ -14,4 +18,4 @@
 @import '~@carbon/themes/scss/themes';
 @import '~@carbon/motion/scss/motion';
 @import '~@carbon/colors/scss/colors';
-@import '~carbon-components/scss/globals/scss/_motion.scss';
+@import '~carbon-components/scss/globals/scss/_motion';

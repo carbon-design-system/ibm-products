@@ -185,6 +185,7 @@
       top: 0;
       right: 0;
       display: flex;
+      // width: room for validation, and two buttons
       width: calc(3 * var(--#{$block-class}--size));
       height: 100%;
       justify-content: flex-end;

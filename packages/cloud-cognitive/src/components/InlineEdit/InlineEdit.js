@@ -184,8 +184,8 @@ export let InlineEdit = React.forwardRef(
     };
     const handleBlur = (ev) => {
       if (!ref.current.contains(ev.relatedTarget)) {
-        // doSetEditing(false);
-        // handleSave();
+        doSetEditing(false);
+        handleSave();
       }
     };
 

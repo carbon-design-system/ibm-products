@@ -59,6 +59,10 @@ const s = [
             ],
           },
           {
+            n: 'Edit and update',
+            s: ['c/InlineEdit', 'c/EditSidePanel'],
+          },
+          {
             n: 'Empty state',
             s: [
               'c/EmptyState',
@@ -71,10 +75,6 @@ const s = [
             ],
           },
           { n: 'Export', s: ['c/ExportModal'] },
-          {
-            n: 'Edit and update flows',
-            s: ['c/EditSidePanel'],
-          },
           { n: 'Generating an API key', s: ['c/APIKeyModal'] },
           {
             n: 'HTTP errors',
@@ -102,7 +102,6 @@ const s = [
           'c/CancelableTextEdit',
           'c/ComboButton',
           'c/ExampleComponent',
-          'c/InlineEdit',
           'c/TearsheetShell',
         ],
       },

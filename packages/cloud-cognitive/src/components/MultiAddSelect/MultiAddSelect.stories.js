@@ -31,18 +31,21 @@ const defaultProps = {
   items: [
     {
       id: '1',
-      label: 'Kansas',
+      title: 'Kansas',
       value: 'kansas',
+      subtitle: 'subtitle',
     },
     {
       id: '2',
-      label: 'Texas',
+      title: 'Texas',
       value: 'texas',
+      subtitle: 'subtitle',
     },
     {
       id: '3',
-      label: 'Florida',
+      title: 'Florida',
       value: 'florida',
+      subtitle: 'subtitle',
     },
   ],
   title: 'Add business terms',
@@ -76,17 +79,18 @@ export const WithHierarchy = prepareStory(Template, {
       ...defaultProps.items,
       {
         id: '4',
-        label: 'California',
+        title: 'California',
         value: 'california',
+        subtitle: 'some / other / path',
         children: [
           {
             id: '5',
-            label: 'Los Angeles',
+            title: 'Los Angeles',
             value: 'la',
             children: [
               {
                 id: '453',
-                label: 'Something',
+                title: 'Something',
                 value: 'something',
                 tags: 'list of tags',
               },

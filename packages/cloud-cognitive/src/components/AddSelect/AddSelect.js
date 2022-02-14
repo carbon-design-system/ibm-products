@@ -163,6 +163,7 @@ export let AddSelect = forwardRef(
       multiSelection,
       noSelectionDescription,
       noSelectionTitle,
+      setMultiSelection,
     };
 
     const classNames = cx(className, blockClass, {

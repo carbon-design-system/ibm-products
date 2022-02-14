@@ -6,7 +6,8 @@
 //
 
 import React from 'react';
-import { Tag, Accordion, AccordionItem } from 'carbon-components-react';
+import { Tag, Accordion, AccordionItem, Button } from 'carbon-components-react';
+import { SubtractAlt16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
@@ -18,8 +19,14 @@ export let AddSelectSidebar = ({
   multiSelection,
   noSelectionDescription,
   noSelectionTitle,
+  setMultiSelection,
 }) => {
   const blockClass = `${pkg.prefix}--add-select__sidebar`;
+
+  const handleItemRemove = (id) => {
+    const newSelections = multiSelection.filter((v) => v !== id);
+    setMultiSelection(newSelections);
+  };
 
   // utility to flatten the list of items and their children into a single searchable array
   const flattenItems = (arr) =>
@@ -30,6 +37,22 @@ export let AddSelectSidebar = ({
   const flattenedItems = flattenItems(items);
   const sidebarItems = multiSelection.map((selectedId) =>
     flattenedItems.find((item) => item.id === selectedId)
+  );
+
+  const getTitle = ({ title, subtitle, id }) => (
+    <div className={`${blockClass}-accordion-title`}>
+      <div>
+        <p>{title}</p>
+        <p>{subtitle}</p>
+      </div>
+      <Button
+        renderIcon={SubtractAlt16}
+        iconDescription="Remove"
+        hasIconOnly
+        onClick={() => handleItemRemove(id)}
+        kind="ghost"
+      />
+    </div>
   );
 
   return (
@@ -43,7 +66,7 @@ export let AddSelectSidebar = ({
       {multiSelection.length > 0 ? (
         <Accordion align="start">
           {sidebarItems.map((item) => (
-            <AccordionItem title={item.value} key={item.id}>
+            <AccordionItem title={getTitle(item)} key={item.id}>
               {Object.keys(item).map((key) => (
                 <div className={`${blockClass}-item`} key={key}>
                   <p className={`${blockClass}-item-header`}>{key}</p>
@@ -72,6 +95,7 @@ AddSelectSidebar.propTypes = {
   multiSelection: PropTypes.array,
   noSelectionDescription: PropTypes.string,
   noSelectionTitle: PropTypes.string,
+  setMultiSelection: PropTypes.func,
 };
 
 AddSelectSidebar.displayName = componentName;

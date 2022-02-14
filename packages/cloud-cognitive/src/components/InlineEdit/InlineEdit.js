@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -83,6 +83,10 @@ export let InlineEdit = React.forwardRef(
     ) : null;
 
     const doSetEditing = (value) => {
+      if (value === false) {
+        // move scroll to start
+        refInput.current.scrollLeft = 0;
+      }
       setEditing(!disabled && value);
     };
 
@@ -90,7 +94,7 @@ export let InlineEdit = React.forwardRef(
       if (!disabled) {
         const rightOfInput =
           ev.currentTarget.classList.contains(`${blockClass}__edit`) ||
-          ev.target.classList.contains(`${blockClass}__controls`);
+          ev.target.classList.contains(`${blockClass}__after-input-elements`);
         const leftOfInput = (ev.currentTarget = ev.target.classList.contains(
           `${blockClass}`
         ));
@@ -116,7 +120,6 @@ export let InlineEdit = React.forwardRef(
     const handleFocus = (ev) => {
       ev.preventDefault();
       if (!editing && ev.target.classList.contains(`${blockClass}__input`)) {
-        // console.log(editing);
         doSetEditing(true);
       }
     };
@@ -199,14 +202,14 @@ export let InlineEdit = React.forwardRef(
     <container>
       <!-- margin left of input to match Carbon -->
       <content-editable>
-      <-- margin right of input space for controls -->
-      <controls>
+      <-- margin right of input space for after-input-elements -->
+      <after-input-elements>
     </container>
 
      NOTE:
      - An input is not used as this would not permit a heading tag e.g. <h2>.
      - Some padding is added to the left 16px standard for a Carbon text input
-     - The controls are position absolute with a margin to on the input to reserve space. Using inline-flex
+     - The after-input-elements are position absolute with a margin to on the input to reserve space. Using inline-flex
      - does not measure space properly for the input otherwise.
      - The content editable is not expected to change size when buttons are added, to ensure the text does not move space
       is reserved up front for buttons and invalid icon. Mostly this is only noticed if the width of the component is not 100%.
@@ -219,7 +222,7 @@ export let InlineEdit = React.forwardRef(
      - Placing the cursor at the start or end depending on area clicked (before for left-padding)
     */
 
-    const controlsAnimation = true;
+    const toolbarAnimation = true;
 
     return (
       // eslint-disable-next-line
@@ -234,7 +237,11 @@ export let InlineEdit = React.forwardRef(
             [`${blockClass}--disabled`]: disabled,
             [`${blockClass}--editing`]: editing,
             [`${blockClass}--invalid`]: invalid,
+            [`${blockClass}--warn`]: warn,
             [`${blockClass}--light`]: light,
+            [`${blockClass}--overflows`]:
+              refInput.current &&
+              refInput.current.scrollWidth > refInput.current.offsetWidth,
           }
         )}
         onClick={handleEdit} // disabled eslint for click handler
@@ -264,58 +271,72 @@ export let InlineEdit = React.forwardRef(
           {value}
         </div>
 
+        <div
+          className={cx(`${blockClass}__after-input-elements`)}
+          // tabindex -1 fixes blur target test when clicking on after-input-elements background
+          tabIndex="-1"
+        >
+          <div className={`${blockClass}__ellipsis`} aria-hidden={!editing}>
+            &hellip;
+          </div>
+          <div
+            className={cx(`${blockClass}__toolbar`, {
+              [`${blockClass}__toolbar--animation`]: toolbarAnimation,
+              [`${blockClass}__toolbar--saveable`]:
+                refInput.current && value !== internalValue,
+            })}
+          >
+            {showValidationText && validationText.length > 0 && (
+              <div className={`${blockClass}__validation-icon`}>
+                {validationIcon}
+              </div>
+            )}
+            {editing ? (
+              <>
+                <Button
+                  className={`${blockClass}__cancel`}
+                  kind="ghost"
+                  hasIconOnly
+                  iconDescription={cancelDescription}
+                  onClick={handleCancel}
+                  renderIcon={Close16}
+                />
+                <Button
+                  className={`${blockClass}__save`}
+                  kind="ghost"
+                  hasIconOnly
+                  iconDescription={saveDescription}
+                  onClick={handleSave}
+                  renderIcon={Checkmark16}
+                  disabled={invalid || saveDisabled || value === internalValue}
+                />
+              </>
+            ) : (
+              <Button
+                aria-hidden="true"
+                className={cx(`${blockClass}__edit`, {
+                  [`${blockClass}__edit--hover-visible`]:
+                    editVisibleOnHoverOnly,
+                })}
+                kind="ghost"
+                hasIconOnly
+                iconDescription={editDescription}
+                onClick={handleEdit}
+                renderIcon={disabled ? EditOff16 : Edit16}
+                disabled={disabled}
+                tabIndex={-1}
+              />
+            )}
+          </div>
+        </div>
+        <div className={cx(`${blockClass}__disabled-cover`)} />
         {showValidationText && validationText.length > 0 && (
-          <div className={`${blockClass}__validation-text`}>
+          <div
+            className={`${blockClass}__validation-text ${carbon.prefix}--form-requirement`}
+          >
             {validationText}
           </div>
         )}
-        <div className={`${blockClass}__validation-icon`}>{validationIcon}</div>
-        <div
-          className={cx(`${blockClass}__controls`, {
-            [`${blockClass}__controls--animation`]: controlsAnimation,
-            [`${blockClass}__controls--saveable`]:
-              invalid ||
-              saveDisabled ||
-              (refInput.current && value !== internalValue),
-          })}
-        >
-          {editing ? (
-            <>
-              <Button
-                className={`${blockClass}__cancel`}
-                kind="ghost"
-                hasIconOnly
-                iconDescription={cancelDescription}
-                onClick={handleCancel}
-                renderIcon={Close16}
-              />
-              <Button
-                className={`${blockClass}__save`}
-                kind="ghost"
-                hasIconOnly
-                iconDescription={saveDescription}
-                onClick={handleSave}
-                renderIcon={Checkmark16}
-                disabled={invalid || saveDisabled || value === internalValue}
-              />
-            </>
-          ) : (
-            <Button
-              aria-hidden="true"
-              className={cx(`${blockClass}__edit`, {
-                [`${blockClass}__edit--hover-visible`]: editVisibleOnHoverOnly,
-              })}
-              kind="ghost"
-              hasIconOnly
-              iconDescription={editDescription}
-              onClick={handleEdit}
-              renderIcon={disabled ? EditOff16 : Edit16}
-              disabled={disabled}
-              tabIndex={-1}
-            />
-          )}
-        </div>
-        <div className={cx(`${blockClass}__disabled-cover`)} />
       </div>
     );
   }

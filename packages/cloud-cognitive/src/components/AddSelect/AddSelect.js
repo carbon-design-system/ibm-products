@@ -37,6 +37,7 @@ export let AddSelect = forwardRef(
       onSubmit,
       onSubmitButtonText,
       open,
+      removeIconDescription,
       title,
       ...rest
     },
@@ -163,6 +164,7 @@ export let AddSelect = forwardRef(
       multiSelection,
       noSelectionDescription,
       noSelectionTitle,
+      removeIconDescription,
       setMultiSelection,
     };
 
@@ -213,6 +215,7 @@ AddSelect.propTypes = {
   onSubmit: PropTypes.func,
   onSubmitButtonText: PropTypes.string,
   open: PropTypes.bool,
+  removeIconDescription: PropTypes.string,
   title: PropTypes.string,
 };
 

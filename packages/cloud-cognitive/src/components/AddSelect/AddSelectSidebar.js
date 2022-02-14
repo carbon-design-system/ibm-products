@@ -19,6 +19,7 @@ export let AddSelectSidebar = ({
   multiSelection,
   noSelectionDescription,
   noSelectionTitle,
+  removeIconDescription,
   setMultiSelection,
 }) => {
   const blockClass = `${pkg.prefix}--add-select__sidebar`;
@@ -47,7 +48,7 @@ export let AddSelectSidebar = ({
       </div>
       <Button
         renderIcon={SubtractAlt32}
-        iconDescription="Remove"
+        iconDescription={removeIconDescription}
         hasIconOnly
         onClick={() => handleItemRemove(id)}
         kind="ghost"
@@ -96,6 +97,7 @@ AddSelectSidebar.propTypes = {
   multiSelection: PropTypes.array,
   noSelectionDescription: PropTypes.string,
   noSelectionTitle: PropTypes.string,
+  removeIconDescription: PropTypes.string,
   setMultiSelection: PropTypes.func,
 };
 

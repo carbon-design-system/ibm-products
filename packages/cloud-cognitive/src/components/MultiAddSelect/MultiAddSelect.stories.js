@@ -60,6 +60,7 @@ const defaultProps = {
   noResultsDescription: 'Try again',
   onCloseButtonText: 'Cancel',
   onSubmitButtonText: 'Add',
+  removeIconDescription: 'Remove',
 };
 
 const Template = (args) => {

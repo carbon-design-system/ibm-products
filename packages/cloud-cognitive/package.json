@@ -33,14 +33,14 @@
     "access": "public"
   },
   "scripts": {
-    "build": "run-s clean build-all",
+    "build": "run-s clean build-first build-all",
     "build-all": "run-p build:*",
-    "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules src:css",
-    "build:css-min": "sass --style=compressed --no-source-map --load-path node_modules --load-path ../../node_modules src/index.scss:css/index.min.css src/index-full-carbon.scss:css/index-full-carbon.min.css src/index-without-carbon.scss:css/index-without-carbon.min.css src/index-without-carbon-released-only.scss:css/index-without-carbon-released-only.min.css",
+    "build-first": "copyfiles 'src/**/*.scss' scss -u 1",
+    "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules scss:css",
+    "build:css-min": "sass --style=compressed --load-path node_modules --load-path ../../node_modules scss/index.scss:css/index.min.css scss/index-full-carbon.scss:css/index-full-carbon.min.css scss/index-without-carbon.scss:css/index-without-carbon.min.css scss/index-without-carbon-released-only.scss:css/index-without-carbon-released-only.min.css",
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js:modules -d lib",
     "build:js:modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js','src/utils/**/*'",
-    "build:scss": "copyfiles 'src/**/*.scss' scss -u 1",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate",

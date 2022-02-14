@@ -79,6 +79,10 @@
     margin-bottom: $spacing-03;
   }
 
+  .#{$block-class} .#{$block-class}__sidebar-item-remove-button:hover {
+    background: $disabled-02;
+  }
+
   .#{$block-class} .#{$block-class}__sidebar-accordion-title {
     display: flex;
     align-items: center;

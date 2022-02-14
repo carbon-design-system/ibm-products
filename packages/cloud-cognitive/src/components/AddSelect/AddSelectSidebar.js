@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { Tag, Accordion, AccordionItem, Button } from 'carbon-components-react';
-import { SubtractAlt16 } from '@carbon/icons-react';
+import { SubtractAlt32 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
@@ -46,11 +46,12 @@ export let AddSelectSidebar = ({
         <p>{subtitle}</p>
       </div>
       <Button
-        renderIcon={SubtractAlt16}
+        renderIcon={SubtractAlt32}
         iconDescription="Remove"
         hasIconOnly
         onClick={() => handleItemRemove(id)}
         kind="ghost"
+        className={`${blockClass}-item-remove-button`}
       />
     </div>
   );

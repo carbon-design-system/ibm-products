@@ -29,16 +29,6 @@ export default {
 const defaultProps = {
   open: true,
   title: 'Select category',
-  actions: [
-    {
-      label: 'Cancel',
-      kind: 'secondary',
-    },
-    {
-      label: 'Add',
-      kind: 'primary',
-    },
-  ],
   description: 'select a category lorem ipsum',
   items: [
     {
@@ -61,6 +51,8 @@ const defaultProps = {
   itemsLabel: 'Categories',
   noResultsTitle: 'No results',
   noResultsDescription: 'Try again',
+  onCloseButtonText: 'Cancel',
+  onSubmitButtonText: 'Select',
 };
 
 const Template = (args) => {
@@ -99,9 +91,28 @@ export const WithHierarchy = prepareStory(Template, {
         value: 'california',
         children: [
           {
-            id: '1',
+            id: '5',
             label: 'Los Angeles',
             value: 'la',
+            children: [
+              {
+                id: '6',
+                label: 'Third Level',
+                value: 'third level',
+              },
+              {
+                id: '7',
+                label: 'another Level',
+                value: 'another level',
+                children: [
+                  {
+                    id: '8',
+                    label: 'last level',
+                    value: 'last level',
+                  },
+                ],
+              },
+            ],
           },
         ],
       },

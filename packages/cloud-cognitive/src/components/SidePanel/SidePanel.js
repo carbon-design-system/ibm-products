@@ -699,11 +699,11 @@ export let SidePanel = React.forwardRef(
                 ? `${
                     open
                       ? placement === 'right'
-                        ? `sidePanelEntranceRight ${moderate02}`
-                        : `sidePanelEntranceLeft ${moderate02}`
+                        ? `side-panel-entrance-right ${moderate02}`
+                        : `side-panel-entrance-left ${moderate02}`
                       : placement === 'right'
-                      ? `sidePanelExitRight ${moderate02}`
-                      : `sidePanelExitLeft ${moderate02}`
+                      ? `side-panel-exit-right ${moderate02}`
+                      : `side-panel-exit-left ${moderate02}`
                   }`
                 : null,
             }}
@@ -756,8 +756,8 @@ export let SidePanel = React.forwardRef(
                 animation: !reducedMotion.matches
                   ? `${
                       open
-                        ? `sidePanelOverlayEntrance ${moderate02}`
-                        : `sidePanelOverlayExit ${moderate02}`
+                        ? `side-panel-overlay-entrance ${moderate02}`
+                        : `side-panel-overlay-exit ${moderate02}`
                     }`
                   : null,
               }}

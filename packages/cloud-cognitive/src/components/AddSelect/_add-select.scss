@@ -98,8 +98,8 @@
     justify-content: left;
   }
 
-  .#{$block-class}__selections-wrapper .#{$carbon-prefix}---form-item {
-    display: block;
+  .#{$block-class} .#{$carbon-prefix}--breadcrumb .#{$carbon-prefix}--link {
+    cursor: pointer;
   }
 }
 

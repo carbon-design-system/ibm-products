@@ -28,7 +28,7 @@
   }
 }
 
-@function tooltip-top-bottom-safe-clip() {
+@function --tooltip-top-bottom-safe-clip() {
   @return polygon(
     0 0,
     -100vw 0,
@@ -46,6 +46,7 @@
 }
 
 @mixin input-button-defaults($block-class) {
+  display: inline-flex;
   width: var(--#{$block-class}--size);
   height: 100%;
   min-height: initial;
@@ -53,7 +54,7 @@
 
   // stylelint-disable-next-line carbon/layout-token-use
   padding: calc(
-    0.5 * (var(--#{$block-class}--size) - var(--#{$block-class}--icon-size))
+    0.5 * (var(--#{$block-class}--size) - var(--#{$block-class}--icon-size)) - #{$spacing-01}
   );
   border: 2px solid transparent;
 }
@@ -79,8 +80,8 @@
     }
 
     position: relative;
-    display: inline-flex;
-    // min-width: 250px; // similar to min input box with room for edit-controls
+    display: inline-block;
+    // min-width: 250px; // similar to min input box with room for toolbar
     max-width: 100%;
     height: var(--#{$block-class}--size);
     background-color: var(--#{$block-class}--background-color);
@@ -112,44 +113,98 @@
     }
 
     .#{$block-class}__input {
-      display: flex;
+      display: inline-block;
       overflow: hidden;
-      max-width: calc(100% - 2 * var(--#{$block-class}--size) - $spacing-05);
-      height: 100%;
-      flex: 1 1 100%;
-      align-items: center;
+      // positions text and placeholder including when showing placeholder
+      // NOTE: Using flex does strange things to a caret in content editable
+      min-width: calc(100% - 3 * var(--#{$block-class}--size) - $spacing-05);
+      max-width: calc(100% - 3 * var(--#{$block-class}--size) - $spacing-05);
+      min-height: var(--#{$block-class}--size);
       // stylelint-disable-next-line carbon/layout-token-use
-      margin-right: calc(2 * var(--#{$block-class}--size)); // room for controls
+      margin-right: calc(3 * var(--#{$block-class}--size));
+      // room for toolbar
       margin-left: $spacing-05;
+      // stylelint-disable-next-line carbon/type-token-use
+      line-height: var(--#{$block-class}--size);
 
       &:focus {
         outline: none;
       }
     }
 
-    .#{$block-class}__placeholder {
+    .#{$block-class}__input::after {
       position: absolute;
-      left: $spacing-03;
+      top: 0;
+      left: 0;
+      display: block;
+      margin-left: $spacing-05;
+      color: $text-05;
+      content: attr(data-placeholder);
+      opacity: 0;
     }
 
-    .#{$block-class}__controls {
+    .#{$block-class}__ellipsis {
+      display: inline-block;
+      overflow: hidden;
+      width: 0;
+      height: var(--#{$block-class}--size);
+      // stylelint-disable-next-line carbon/type-token-use
+      line-height: var(--#{$block-class}--size);
+      opacity: 0;
+      pointer-events: none;
+
+      // only transition fade in
+      transition: opacity $duration--moderate-02 motion(standard, productive);
+    }
+
+    &.#{$block-class}--overflows:not(.#{$block-class}--editing)
+      .#{$block-class}__ellipsis {
+      width: initial;
+      opacity: 1;
+    }
+
+    .#{$block-class}__disabled-cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; // act as if not there
+    }
+
+    &.#{$block-class}--disabled .#{$block-class}__disabled-cover {
+      // when disabled prevent pointer events going through to the input
+      cursor: not-allowed;
+      pointer-events: all;
+    }
+
+    .#{$block-class}__input--empty::after {
+      opacity: 1;
+      // only transition fade in
+      transition: opacity $duration--moderate-02 motion(standard, productive);
+    }
+
+    .#{$block-class}__after-input-elements {
       // not simply flexed in as this causes flexbox to mis-measure the size of the input
       position: absolute;
       top: 0;
       right: 0;
-      width: calc(2 * var(--#{$block-class}--size));
+      display: flex;
+      // width: room for validation, and two buttons
+      width: calc(3 * var(--#{$block-class}--size));
       height: 100%;
+      justify-content: space-between;
       cursor: text;
     }
 
-    .#{$block-class}__controls--animation {
+    .#{$block-class}__toolbar--animation {
       // makes room for the top clip text but hides the side overflow
-      clip-path: tooltip-top-bottom-safe-clip();
+      clip-path: --tooltip-top-bottom-safe-clip();
       // NOTE: The above allows the tooltip to show through when overflowX: hidden would not when at right edge.
       // It is used with margin animation of contained buttons
     }
 
-    &.#{$block-class}--editing .#{$block-class}__controls::after {
+    &.#{$block-class}--editing .#{$block-class}__toolbar::after {
       // cover top and bottom when focus within block
       // doing the same on the buttons is problematic when animating
       // and causes visual artifacts when the button is hovered without focus
@@ -197,26 +252,24 @@
       }
     }
 
-    .#{$block-class}__controls .#{$block-class}__edit {
-      margin-left: var(--#{$block-class}--size);
-    }
-
-    .#{$block-class}__controls--animation .#{$block-class}__cancel {
-      margin-left: var(--#{$block-class}--size);
-      transition: margin-left $duration--moderate-02
+    &.#{$block-class}--editing
+      .#{$block-class}__toolbar--animation
+      .#{$block-class}__save {
+      // stylelint-disable-next-line carbon/layout-token-use
+      margin-right: calc(-1 * var(--#{$block-class}--size));
+      transition: margin-right $duration--moderate-02
         motion(standard, productive);
     }
 
-    .#{$block-class}__controls--saveable .#{$block-class}__cancel {
-      margin-left: 0;
+    &.#{$block-class}--editing
+      .#{$block-class}__toolbar--saveable
+      .#{$block-class}__save {
+      margin-right: 0;
     }
 
     &.#{$block-class}.#{$block-class} .#{$block-class}__edit {
       @include input-button-defaults($block-class);
 
-      position: absolute;
-      top: 0;
-      right: 0;
       // pointer-events: none;
 
       &:hover,
@@ -236,6 +289,28 @@
 
     &:hover .#{$block-class}__edit--hover-visible {
       opacity: 1;
+    }
+
+    .#{$block-class}__validation-icon {
+      @include input-button-defaults($block-class);
+    }
+
+    &.#{$block-class}--warn .#{$block-class}__validation-icon {
+      color: $support-warning;
+    }
+
+    &.#{$block-class}--invalid .#{$block-class}__validation-icon {
+      color: $support-error;
+    }
+
+    .#{$block-class}__validation-text {
+      display: block;
+      overflow: visible;
+      margin-left: $spacing-05;
+    }
+
+    &.#{$block-class}--invalid .#{$block-class}__validation-text {
+      color: $support-error;
     }
   }
 }

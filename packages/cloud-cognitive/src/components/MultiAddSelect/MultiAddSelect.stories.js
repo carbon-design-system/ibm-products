@@ -68,3 +68,32 @@ export const Default = prepareStory(Template, {
     ...defaultProps,
   },
 });
+
+export const WithHierarchy = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    items: [
+      ...defaultProps.items,
+      {
+        id: '4',
+        label: 'California',
+        value: 'california',
+        children: [
+          {
+            id: '5',
+            label: 'Los Angeles',
+            value: 'la',
+            children: [
+              {
+                id: '453',
+                label: 'Something',
+                value: 'something',
+                tags: 'list of tags',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+});

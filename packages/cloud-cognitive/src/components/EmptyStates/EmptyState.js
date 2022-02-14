@@ -128,7 +128,7 @@ EmptyState.propTypes = {
   /**
    * Empty state subtext
    */
-  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 
   /**
    * Empty state heading

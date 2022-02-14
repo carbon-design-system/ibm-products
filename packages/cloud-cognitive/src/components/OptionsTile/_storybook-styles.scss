@@ -5,8 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import './index';
-
 @import '../../global/styles/project-settings';
 
 $block-class: #{$pkg-prefix}--options-tile;
@@ -26,8 +24,3 @@ $block-class: #{$pkg-prefix}--options-tile;
 .#{$block-class}__content .#{$carbon-prefix}--dropdown__wrapper:first-of-type {
   margin-bottom: $spacing-06;
 }
-
-// Uncomment next line (which must appear last) to test in storybook
-// that the SCSS styles for this component are sufficiently specific
-// to override Carbon whichever order the styles get loaded in.
-//@import 'carbon-components/css/carbon-components.min';

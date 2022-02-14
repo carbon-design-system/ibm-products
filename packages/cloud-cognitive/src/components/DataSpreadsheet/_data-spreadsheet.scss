@@ -34,7 +34,7 @@
     }
     .#{$block-class}__tr {
       :last-child {
-        .td {
+        .#{$block-class}__td {
           border-bottom: 0;
         }
       }
@@ -42,7 +42,7 @@
 
     .#{$block-class}__th,
     .#{$block-class}__td {
-      height: 2.25rem; // update to be controlled by cellSize prop later
+      // height: 2.25rem; // update to be controlled by cellSize prop later
       padding: 0 $spacing-03;
       border: 0;
       margin: 0;
@@ -70,6 +70,10 @@
 
       color: $text-01;
       text-align: left;
+    }
+    .#{$block-class}__active-cell--highlight {
+      position: absolute;
+      border: 2px solid $interactive-01;
     }
   }
 }

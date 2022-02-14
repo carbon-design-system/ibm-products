@@ -60,12 +60,10 @@ export let AddSelectList = ({
                   {multi ? (
                     <Checkbox
                       className={`${blockClass}-checkbox`}
-                      onChange={(value) =>
-                        handleMultiSelection(item.value, value)
-                      }
+                      onChange={(value) => handleMultiSelection(item.id, value)}
                       labelText={item.label}
                       id={item.id}
-                      checked={multiSelection.includes(item.value)}
+                      checked={multiSelection.includes(item.id)}
                     />
                   ) : (
                     <RadioButton

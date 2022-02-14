@@ -84,7 +84,6 @@ export let InlineEdit = React.forwardRef(
 
     const doSetEditing = (value) => {
       if (value === false) {
-        console.log(refInput.current.scrollWidth);
         // move scroll to start
         refInput.current.scrollLeft = 0;
       }

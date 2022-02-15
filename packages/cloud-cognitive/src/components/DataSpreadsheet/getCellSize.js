@@ -7,15 +7,15 @@
 
 export const getCellSize = (cellSize) => {
   switch (cellSize) {
-    case "comapct":
+    case 'compact':
       return 24;
-    case "standard":
+    case 'standard':
       return 32;
-    case "medium":
+    case 'medium':
       return 40;
-    case "large":
+    case 'large':
       return 48;
-    case "extra-large":
+    case 'extra-large':
       return 56;
     default:
       return 32;

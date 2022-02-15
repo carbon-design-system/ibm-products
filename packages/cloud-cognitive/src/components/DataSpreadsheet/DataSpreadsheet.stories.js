@@ -79,24 +79,28 @@ const Template = ({ ...args }) => {
   const columns = useMemo(() => columnData, []);
 
   const data = useMemo(() => generateData(16), []);
-  return <DataSpreadsheet
-    columns={columns}
-    data={data}
-    id="spreadsheet--id"
-    {...args}
-  />;
+  return (
+    <DataSpreadsheet
+      columns={columns}
+      data={data}
+      id="spreadsheet--id"
+      {...args}
+    />
+  );
 };
 
 const LargeTemplate = ({ ...args }) => {
   const columns = useMemo(() => columnData, []);
 
   const data = useMemo(() => generateData(1000), []);
-  return <DataSpreadsheet
-    columns={columns}
-    data={data}
-    id="spreadsheet--id"
-    {...args}
-  />;
+  return (
+    <DataSpreadsheet
+      columns={columns}
+      data={data}
+      id="spreadsheet--id"
+      {...args}
+    />
+  );
 };
 
 export const dataSpreadsheet = prepareStory(Template, {
@@ -107,6 +111,6 @@ export const dataSpreadsheet = prepareStory(Template, {
 export const largeDatasetSpreadsheet = prepareStory(LargeTemplate, {
   storyName: 'Large dataset',
   args: {
-    cellSize: 'large'
+    cellSize: 'large',
   },
 });

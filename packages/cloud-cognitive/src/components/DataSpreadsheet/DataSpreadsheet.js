@@ -28,20 +28,13 @@ const componentName = 'DataSpreadsheet';
  * DataSpreadsheet: used to organize and display large amounts of structured data, separated by columns and rows in a grid-like format.
  */
 export let DataSpreadsheet = React.forwardRef(
-  ({
-    cellSize,
-    className,
-    columns,
-    data,
-    id,
-    ...rest
-  }, ref) => {
+  ({ cellSize, className, columns, data, id, ...rest }, ref) => {
     const cellSizeValue = getCellSize(cellSize);
     const defaultColumn = useMemo(
       () => ({
         width: 150,
         rowHeaderWidth: 64,
-        height: cellSizeValue,
+        rowHeight: cellSizeValue,
       }),
       [cellSizeValue]
     );
@@ -71,20 +64,24 @@ export let DataSpreadsheet = React.forwardRef(
         if (
           !spreadsheetRef.current ||
           spreadsheetRef.current.contains(event.target) ||
-          event.target.classList.contains(`${blockClass}__active-cell--highlight`)
+          event.target.classList.contains(
+            `${blockClass}__active-cell--highlight`
+          )
         ) {
           return;
         }
-        const activeCellHighlight = spreadsheetRef.current.querySelector(`.${blockClass}__active-cell--highlight`);
-        if (!!activeCellHighlight) {
+        const activeCellHighlight = spreadsheetRef.current.querySelector(
+          `.${blockClass}__active-cell--highlight`
+        );
+        if (activeCellHighlight) {
           activeCellHighlight.remove();
         }
       };
-      document.addEventListener("click", handleOutsideClick);
+      document.addEventListener('click', handleOutsideClick);
       return () => {
-        document.removeEventListener("click", handleOutsideClick);
+        document.removeEventListener('click', handleOutsideClick);
       };
-    }, []);
+    }, [spreadsheetRef]);
 
     const localRef = useRef();
     const spreadsheetRef = ref || localRef;
@@ -106,7 +103,6 @@ export let DataSpreadsheet = React.forwardRef(
 
         {/* BODY */}
         <DataSpreadsheetBody
-          scrollBarSize={scrollBarSize}
           cellSize={cellSize}
           defaultColumn={defaultColumn}
           getTableBodyProps={getTableBodyProps}
@@ -114,7 +110,6 @@ export let DataSpreadsheet = React.forwardRef(
           rows={rows}
           scrollBarSize={scrollBarSize}
           totalColumnsWidth={totalColumnsWidth}
-          ref={spreadsheetRef}
           id={id}
         />
       </div>
@@ -137,11 +132,11 @@ DataSpreadsheet.propTypes = {
    * Specifies the cell height
    */
   cellSize: PropTypes.oneOf([
-    "compact",
-    "standard",
-    "medium",
-    "large",
-    "extra-large"
+    'compact',
+    'standard',
+    'medium',
+    'large',
+    'extra-large',
   ]),
 
   /**

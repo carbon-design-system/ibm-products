@@ -6,15 +6,12 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
-export const DataSpreadsheetHeader = ({
-  cellSizeValue,
-  defaultColumn,
-  headerGroups,
-}) => {
+export const DataSpreadsheetHeader = ({ defaultColumn, headerGroups }) => {
   return (
     <div>
       {headerGroups.map((headerGroup, index) => (
@@ -29,7 +26,7 @@ export const DataSpreadsheetHeader = ({
             className={`${blockClass}__th`}
             style={{
               width: defaultColumn?.rowHeaderWidth,
-              height: defaultColumn?.height
+              height: defaultColumn?.rowHeight,
             }}
           >
             &nbsp;
@@ -39,7 +36,7 @@ export const DataSpreadsheetHeader = ({
             <button
               key={`column_${index}`}
               style={{
-                height: defaultColumn?.height
+                height: defaultColumn?.rowHeight,
               }}
               {...column.getHeaderProps()}
               className={`${blockClass}__th`}
@@ -52,4 +49,20 @@ export const DataSpreadsheetHeader = ({
       ))}
     </div>
   );
+};
+
+DataSpreadsheetHeader.propTypes = {
+  /**
+   * Default spreadsheet sizing values
+   */
+  defaultColumn: PropTypes.shape({
+    rowHeight: PropTypes.number,
+    rowHeaderWidth: PropTypes.number,
+    width: PropTypes.number,
+  }),
+
+  /**
+   * Headers provided from useTable hook
+   */
+  headerGroups: PropTypes.arrayOf(PropTypes.object),
 };

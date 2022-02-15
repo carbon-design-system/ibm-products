@@ -106,5 +106,7 @@ export const dataSpreadsheet = prepareStory(Template, {
 
 export const largeDatasetSpreadsheet = prepareStory(LargeTemplate, {
   storyName: 'Large dataset',
-  args: {},
+  args: {
+    cellSize: 'large'
+  },
 });

@@ -59,6 +59,11 @@
       background-color: $ui-01;
       cursor: pointer;
     }
+    .#{$block-class}__td-th {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
     .#{$block-class}__td {
       @include set-body-borders();
 
@@ -74,6 +79,7 @@
     .#{$block-class}__active-cell--highlight {
       position: absolute;
       border: 2px solid $interactive-01;
+      background-color: transparent;
     }
   }
 }

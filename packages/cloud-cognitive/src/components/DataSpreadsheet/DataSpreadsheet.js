@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import { useBlockLayout, useTable } from 'react-table';
 
 // Other standard imports.
@@ -37,14 +37,13 @@ export let DataSpreadsheet = React.forwardRef(
     ...rest
   }, ref) => {
     const cellSizeValue = getCellSize(cellSize);
-    console.log(cellSizeValue);
     const defaultColumn = useMemo(
       () => ({
         width: 150,
         rowHeaderWidth: 64,
         height: cellSizeValue,
       }),
-      []
+      [cellSizeValue]
     );
 
     const scrollBarSize = useMemo(() => getScrollbarWidth(), []);
@@ -64,6 +63,28 @@ export let DataSpreadsheet = React.forwardRef(
       },
       useBlockLayout
     );
+
+    // Click outside useEffect
+    // Removes the active cell highlight element
+    useEffect(() => {
+      const handleOutsideClick = (event) => {
+        if (
+          !spreadsheetRef.current ||
+          spreadsheetRef.current.contains(event.target) ||
+          event.target.classList.contains(`${blockClass}__active-cell--highlight`)
+        ) {
+          return;
+        }
+        const activeCellHighlight = spreadsheetRef.current.querySelector(`.${blockClass}__active-cell--highlight`);
+        if (!!activeCellHighlight) {
+          activeCellHighlight.remove();
+        }
+      };
+      document.addEventListener("click", handleOutsideClick);
+      return () => {
+        document.removeEventListener("click", handleOutsideClick);
+      };
+    }, []);
 
     const localRef = useRef();
     const spreadsheetRef = ref || localRef;
@@ -85,6 +106,7 @@ export let DataSpreadsheet = React.forwardRef(
 
         {/* BODY */}
         <DataSpreadsheetBody
+          scrollBarSize={scrollBarSize}
           cellSize={cellSize}
           defaultColumn={defaultColumn}
           getTableBodyProps={getTableBodyProps}
@@ -158,5 +180,5 @@ DataSpreadsheet.propTypes = {
 DataSpreadsheet.defaultProps = {
   data: [],
   columns: [],
-  cellSize: 'standard'
+  cellSize: 'standard',
 };

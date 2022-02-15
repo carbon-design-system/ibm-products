@@ -14,7 +14,6 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
 export const DataSpreadsheetBody = React.forwardRef(({
-  cellSize,
   defaultColumn,
   getTableBodyProps,
   id,
@@ -24,39 +23,36 @@ export const DataSpreadsheetBody = React.forwardRef(({
   totalColumnsWidth,
 }, ref) => {
 
+  // onClick fn for each cell in the data spreadsheet body,
+  // adds the active cell highlight
   const handleBodyCellClick = (event, cell) => {
-    const cellCoordinates = event.target.getBoundingClientRect();
-    const parentCoordinates = ref?.current?.getBoundingClientRect();
+    const cellButton = event.target.closest(`.${blockClass}__td`);
+    const cellCoordinates = cellButton.getBoundingClientRect();
+    const rowContainer = document.querySelector(`.${blockClass}__list--container`).firstElementChild;
+    const parentCoordinates = rowContainer?.getBoundingClientRect();
     const relativePosition = {
       top: cellCoordinates.top - parentCoordinates.top,
       left: cellCoordinates.left - parentCoordinates.left,
     };
-    const listContainer = containerRef?.current;
-    const activeCellSpan = listContainer.querySelector(`.${blockClass}__active-cell--highlight`) || document.createElement("span");
-    activeCellSpan.classList.add(`${blockClass}__active-cell--highlight`, `${blockClass}__active-cell--highlight--${cellSize}`);
-    activeCellSpan.style.width = `${cell?.column?.width}px`;
-    activeCellSpan.style.height = `${cell?.column?.height}px`;
-    activeCellSpan.style.left = `${relativePosition.left}px`;
-    activeCellSpan.style.top = `${relativePosition.top - cell?.column?.height}px`; // subtract cell height value to account for column headers
-    listContainer.firstElementChild.appendChild(activeCellSpan);
-    // console.log(activeCellSpan);
-    // console.log(cell.column);
-    // console.log(cell.column.originalWidth);
+    const listContainer = spreadsheetBodyRef?.current;
+    const activeCellButton = listContainer.querySelector(`.${blockClass}__active-cell--highlight`) || document.createElement("button");
+    activeCellButton.focus();
+    activeCellButton.classList.add(`${blockClass}__active-cell--highlight`);
+    activeCellButton.style.width = `${cell?.column?.width - 8 - (scrollBarSize / cell.row.cells.length)}px`; // subtract 8 to account for cell padding and then subtract the scrollbar width divided by total columsn
+    activeCellButton.style.height = `${cell?.column?.height}px`;
+    activeCellButton.style.left = `${relativePosition.left}px`;
+    activeCellButton.style.top = `${relativePosition.top}px`;
+    listContainer.firstElementChild.appendChild(activeCellButton);
   }
 
+  // Renders each cell in the spreadsheet body
   const RenderRow = React.useCallback(
     ({ index, style }) => {
       const row = rows[index];
       prepareRow(row);
-      console.log(style);
       return (
         <div
-          {...row.getRowProps({
-            style: {
-              ...style,
-              height: defaultColumn?.height
-            }
-          })}
+          {...row.getRowProps({ style })}
           className={cx(`${blockClass}__tr`)}
           data-row-index={index}
         >
@@ -66,9 +62,6 @@ export const DataSpreadsheetBody = React.forwardRef(({
             className={cx(`${blockClass}__td`, `${blockClass}__td-th`)}
             style={{
               width: defaultColumn?.rowHeaderWidth,
-              display: 'flex',
-              justifyContent: 'flex-end',
-              alignItems: 'center',
             }}
           >
             {index + 1}
@@ -91,40 +84,37 @@ export const DataSpreadsheetBody = React.forwardRef(({
     [prepareRow, rows, defaultColumn.rowHeaderWidth]
   );
 
-  const containerRef = useRef();
-
+  const spreadsheetBodyRef = useRef();
   return (
     <div
-      ref={containerRef}
+      ref={spreadsheetBodyRef}
       {...getTableBodyProps()}
-      style={{
-        position: 'relative'
-      }}
     >
       <FixedSizeList
         className={cx(`${blockClass}__list--container`, `${blockClass}__list--container--${id}`)}
         height={400}
         itemCount={rows.length}
-        itemSize={36}
+        itemSize={defaultColumn?.height}
         width={totalColumnsWidth + scrollBarSize}
       >
         {RenderRow}
       </FixedSizeList>
-      {/* {renderActiveCell()} */}
     </div>
   );
 });
 
 DataSpreadsheetBody.propTypes = {
   /**
-   * Specifies the cell height
-   */
-   cellSize: PropTypes.oneOf([
-    "compact",
-    "standard",
-    "medium",
-    "large",
-    "extra-large"
-  ]),
+  * Default spreadsheet sizing values
+  */
+  defaultColumn: PropTypes.shape({
+    height: PropTypes.number, // change to rowHeight
+    rowHeaderWidth: PropTypes.number,
+    width: PropTypes.number,
+  }),
 
+  /**
+  * The spreadsheet id
+  */
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 }

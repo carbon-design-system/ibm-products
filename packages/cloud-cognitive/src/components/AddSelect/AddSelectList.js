@@ -45,8 +45,8 @@ export let AddSelectList = ({
     }
   };
 
-  const onNavigateItem = ({ id, label }) => {
-    setPath([...path, { id, label }]);
+  const onNavigateItem = ({ id, title }) => {
+    setPath([...path, { id, title }]);
   };
 
   return (
@@ -61,7 +61,7 @@ export let AddSelectList = ({
                     <Checkbox
                       className={`${blockClass}-checkbox`}
                       onChange={(value) => handleMultiSelection(item.id, value)}
-                      labelText={item.label}
+                      labelText={item.title}
                       id={item.id}
                       checked={multiSelection.includes(item.id)}
                     />
@@ -71,7 +71,7 @@ export let AddSelectList = ({
                       name="add-select-selections"
                       id={item.id}
                       value={item.value}
-                      labelText={item.label}
+                      labelText={item.title}
                       onChange={handleSingleSelection}
                       selected={item.value === singleSelection}
                     />

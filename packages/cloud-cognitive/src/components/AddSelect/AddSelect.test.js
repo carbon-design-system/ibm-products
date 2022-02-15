@@ -17,17 +17,17 @@ const defaultProps = {
   items: [
     {
       id: '1',
-      label: 'item a',
+      title: 'item a',
       value: 'item a',
     },
     {
       id: '2',
-      label: 'item b',
+      title: 'item b',
       value: 'item b',
     },
     {
       id: '3',
-      label: 'item c',
+      title: 'item c',
       value: 'item c',
     },
   ],
@@ -35,6 +35,7 @@ const defaultProps = {
   noSelectionDescription: 'No selection description',
   noResultsTitle: 'No results title',
   noResultsDescription: 'Try again description',
+  textInputLabel: 'test input label',
 };
 
 describe(componentName, () => {

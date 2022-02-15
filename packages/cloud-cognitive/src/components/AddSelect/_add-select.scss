@@ -79,6 +79,16 @@
     margin-bottom: $spacing-03;
   }
 
+  .#{$block-class} .#{$block-class}__sidebar-item-remove-button:hover {
+    background: $disabled-02;
+  }
+
+  .#{$block-class} .#{$block-class}__sidebar-accordion-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   // overrides
 
   // the influencer sidebar needs to be even with the buttons
@@ -110,6 +120,16 @@
 
   .#{$block-class} .#{$carbon-prefix}--breadcrumb .#{$carbon-prefix}--link {
     cursor: pointer;
+  }
+
+  .#{$carbon-prefix}--accordion__item {
+    &:hover .#{$block-class}__sidebar-accordion-title button {
+      opacity: 1;
+    }
+
+    .#{$block-class}__sidebar-accordion-title button {
+      opacity: 0;
+    }
   }
 }
 

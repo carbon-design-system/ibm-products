@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.6.0...@carbon/ibm-products@1.6.1) (2022-02-15)
+
+
+### Bug Fixes
+
+* add select sidebar flatten ([#1619](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1619)) ([c95ea64](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c95ea64397e0bd9d0671f6261301837672f17f08))
+* **EmptyState:** make subtitle optional ([#1620](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1620)) ([508182a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/508182a01d469817d07e487664adc6fb21270abc)), closes [#1605](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1605) [#1605](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1605)
+* inline edit validation presentation ([#1622](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1622)) ([7fdafcb](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7fdafcbafac59b144278363cc358913eb91cc77d))
+* **PageHeader:** Page header title edit transition ([#1601](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1601)) ([e7fd2a7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e7fd2a76077c3512ffdae29bcf7c467230c0e8f5))
+
+
+
+
+
 # [1.6.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.5.0...@carbon/ibm-products@1.6.0) (2022-02-09)
 
 

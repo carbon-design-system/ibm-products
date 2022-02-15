@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -72,15 +72,33 @@ export let InlineEdit = React.forwardRef(
     const ref = refIn || localRef;
     const [editing, setEditing] = useState(false);
     const [internalValue, setInternalValue] = useState(value);
-    const showValidationText = invalid || warn;
+    const [isInvalid, setIsInvalid] = useState(invalid);
+    const [isWarn, setIsWarn] = useState(warn);
+    const [showValidation, setShowValidation] = useState(invalid || warn);
     const validationText = invalidText || warnText;
-    const validationIcon = showValidationText ? (
+    const validationIcon = showValidation ? (
       invalid ? (
         <WarningFilled16 />
       ) : (
         <WarningAltFilled16 />
       )
     ) : null;
+
+    useEffect(() => {
+      setShowValidation(isInvalid || isWarn);
+    }, [isInvalid, isWarn]);
+
+    useEffect(() => {
+      // if invalid, warn or internal value change reassess isInvalid
+      setIsInvalid(invalid);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [invalid, warn, internalValue]);
+
+    useEffect(() => {
+      // if invalid, warn or internal value change reassess isInvalid
+      setIsWarn(warn);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [invalid, warn, internalValue]);
 
     const doSetEditing = (value) => {
       if (value === false) {
@@ -124,11 +142,44 @@ export let InlineEdit = React.forwardRef(
       }
     };
 
+    const processResponse = (response) => {
+      // this function expects a response in the form of
+      // - Boolean false
+      // - { invalid: true }
+      // - { warn: true }
+      let sanitized =
+        typeof response === 'boolean' && response === false
+          ? { invalid: response }
+          : response;
+      if (sanitized) {
+        if (sanitized.invalid) {
+          setIsInvalid(true);
+        } else {
+          setIsWarn(true);
+        }
+      }
+    };
+
     const handleSave = () => {
       doSetEditing(false);
       document.getSelection().removeAllRanges();
-      if (onSave) {
-        onSave(refInput.current.innerText);
+
+      let saved = true;
+      if (saveDisabled || isInvalid) {
+        saved = false;
+      } else {
+        saved = onSave ? onSave(refInput.current.innerText) : true;
+      }
+
+      processResponse(saved);
+    };
+
+    const handleInput = () => {
+      setInternalValue(refInput.current.innerText);
+
+      if (onChange) {
+        let response = onChange(refInput.current.innerText);
+        processResponse(response);
       }
     };
 
@@ -166,12 +217,6 @@ export let InlineEdit = React.forwardRef(
         selection.addRange(range);
       }
     };
-    const handleInput = () => {
-      setInternalValue(refInput.current.innerText);
-      if (onChange) {
-        onChange(refInput.current.innerText);
-      }
-    };
     const handleCancel = () => {
       refInput.current.innerText = value;
       handleInput(value);
@@ -184,7 +229,6 @@ export let InlineEdit = React.forwardRef(
     };
     const handleBlur = (ev) => {
       if (!ref.current.contains(ev.relatedTarget)) {
-        doSetEditing(false);
         handleSave();
       }
     };
@@ -236,8 +280,8 @@ export let InlineEdit = React.forwardRef(
             // switched classes dependant on props or state
             [`${blockClass}--disabled`]: disabled,
             [`${blockClass}--editing`]: editing,
-            [`${blockClass}--invalid`]: invalid,
-            [`${blockClass}--warn`]: warn,
+            [`${blockClass}--invalid`]: isInvalid,
+            [`${blockClass}--warn`]: isWarn,
             [`${blockClass}--light`]: light,
             [`${blockClass}--overflows`]:
               refInput.current &&
@@ -286,7 +330,7 @@ export let InlineEdit = React.forwardRef(
                 refInput.current && value !== internalValue,
             })}
           >
-            {showValidationText && validationText.length > 0 && (
+            {showValidation && (
               <div className={`${blockClass}__validation-icon`}>
                 {validationIcon}
               </div>
@@ -308,7 +352,9 @@ export let InlineEdit = React.forwardRef(
                   iconDescription={saveDescription}
                   onClick={handleSave}
                   renderIcon={Checkmark16}
-                  disabled={invalid || saveDisabled || value === internalValue}
+                  disabled={
+                    isInvalid || saveDisabled || value === internalValue
+                  }
                 />
               </>
             ) : (
@@ -330,7 +376,7 @@ export let InlineEdit = React.forwardRef(
           </div>
         </div>
         <div className={cx(`${blockClass}__disabled-cover`)} />
-        {showValidationText && validationText.length > 0 && (
+        {showValidation && validationText && validationText.length > 0 && (
           <div
             className={`${blockClass}__validation-text ${carbon.prefix}--form-requirement`}
           >
@@ -399,11 +445,17 @@ InlineEdit.propTypes = {
    */
   onCancel: PropTypes.func,
   /**
-   * method called on input event (it's a React thing onChange behaves like on input)
+   * method called on input event (it's a React thing onChange behaves like on input).
+   *
+   * NOTE: return values of false and { invalid: true } will set internal state to invalid,
+   * { warn: true } to warn. These internal state is reassessed on changing of value, warn and invalid properties.
    */
   onChange: PropTypes.func,
   /**
    * method called on change event
+   *
+   * NOTE: return values of false and { invalid: true } will set internal state to invalid,
+   * { warn: true } to warn. These internal state is reassessed on changing of value, warn and invalid properties.
    */
   onSave: PropTypes.func,
   /**

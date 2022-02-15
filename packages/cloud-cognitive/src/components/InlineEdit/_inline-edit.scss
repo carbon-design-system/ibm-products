@@ -102,14 +102,15 @@
       --#{$block-class}--icon-size: #{$spacing-05};
     }
 
+    &.#{$block-class}--invalid {
+      // editing takes precedence over invalid
+      @include input-outline($support-01);
+    }
+
     &.#{$block-class}--editing {
       @include input-outline($focus);
 
       background-color: $ui-01;
-    }
-
-    .#{$block-class}--invalid {
-      @include input-outline($support-01);
     }
 
     .#{$block-class}__input {

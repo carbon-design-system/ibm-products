@@ -3,20 +3,32 @@
 Also refer to
 [contributing in Carbon](https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md).
 
-## 1. Fork the repo
+## Issues, Ideas and Feedback
+
+Contribution comes in many forms and many of them do not need you to write a line of code.
+
+- Have a question, visit our Slack channel and/or ask a question on github <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=type%3A+question+%E2%9D%93&template=question.md&title>=
+- Have an issue you'd like resolved then raise an issue <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=type%3A+bug&template=bug-report.md&title>=
+- Have a new component, pattern or enhancement request then tell us about it <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&template=component-or-pattern.md>
+
+## Code
+
+There's only so many hours in a day, so we welcome contributions of code. Find an issue, or raise one, and follow the guide below. <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues>
+
+### 1. Fork the repo
 
 Go to the
 [Carbon for IBM Products repository on GitHub](https://github.com/carbon-design-system/ibm-cloud-cognitive)
 and [fork the repo](https://help.github.com/articles/fork-a-repo/),
 [syncing with the original repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced).
 
-## 2. Work in a branch
+### 2. Work in a branch
 
 When contributing to Carbon for IBM Products, your work should always be done in
 a
 [branch off your fork](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-and-deleting-branches-within-your-repository).
 
-## 3. Start the development server
+### 3. Start the development server
 
 1. To install the project's dependencies, from the root directory of your fork,
    run `yarn --offline`
@@ -37,7 +49,7 @@ system is set up to automatically bundle your additions / changes. Visit
 [`http://localhost:3000`](http://localhost:3000) to see the changes happen on
 the fly.
 
-### What is this Canary thing?
+#### What is this Canary thing?
 
 In case you were thinking what, why or how with regards to the Canary lines in
 the components...
@@ -56,7 +68,7 @@ See example component enabled via feature flags on
 For more information on how this affects components see
 [CANARY_STRUCTURE.md](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/docs/guides/CANARY_STRUCTURE.md).
 
-## 4. Test your JavaScript code
+### 4. Test your JavaScript code
 
 If you're contributing to our JavaScript code, test your changes by running
 `yarn test`.
@@ -67,13 +79,15 @@ with [Enzyme](https://enzymejs.github.io/enzyme) available for migration
 compatibility, and follow the
 [User Experience Standards Adopter Guide](https://github.ibm.com/IBMPrivateCloud/BedrockServices/blob/master/AdopterGuides/CommonUXStandardsAdoptionGuide.md#testing).
 
-## 5. Make a pull request
+### 5. Make a pull request
 
 **Note:** Before you make a pull request,
 [search the issues](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues)
 to see if a similar issue has already been submitted. If a similar issue has
 been submitted, assign yourself or ask to be assigned to the issue by posting a
 comment. If the issue does not exist, please make a new issue.
+
+**Note 2:** If you are submitting a new component or pattern there are some additional steps we'd like you to take. In brief, use the `New component or pattern` issue template. The new issue should be an epic.
 
 Refer to
 [contributing in Carbon](https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md#what-is-the-contribution-process)
@@ -98,7 +112,7 @@ information about how to write your commit message.
 Also refer to
 [How to write the perfect pull request](https://github.blog/2015-01-21-how-to-write-the-perfect-pull-request).
 
-## 6. Updating a pull request
+### 6. Updating a pull request
 
 Stay up to date with the activity in your pull request. Maintainers will be
 reviewing your work and making comments, asking questions, and suggesting
@@ -109,7 +123,7 @@ When you need to make a change, use the same method detailed above.
 Once all revisions to your pull request are complete, a maintainer will squash
 and merge your commits for you.
 
-## 7. New production dependencies
+### 7. New production dependencies
 
 If you introduce a new dependency to package.json then there will be some
 additional work to do.
@@ -121,3 +135,10 @@ additional work to do.
 - [ ] Verify the dependency [bundle size](https://bundlephobia.com) is
       acceptable
 - [ ] Verify the dependency is [actively maintained](https://www.npmtrends.com)
+
+### 8. New component or pattern
+
+If you started out to create a new component or pattern there are two additional tasks before your component can reach released state.
+
+- [ ] See our design review guidelines <<https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/docs/reviews/DESIGN_REVIEW_GUIDELINES.md> and then create a new issue based on `design-review` template. <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&design-review.md> and complete the steps suggested.
+- [ ] See our release guidelines <https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/docs/reviews/RELEASE_REVIEW_GUIDELINES.md> and then create a new issue based on `design-review` template. <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&design-review.md>

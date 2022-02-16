@@ -70,7 +70,9 @@
   "dependencies": {
     "@babel/runtime": "^7.17.2",
     "@carbon/telemetry": "^0.0.0-alpha.6",
-    "react-resize-detector": "^7.0.0"
+    "react-resize-detector": "^7.0.0",
+    "react-table": "^7.7.0",
+    "react-window": "^1.8.6"
   },
   "peerDependencies": {
     "@carbon/colors": "^10.36.0",

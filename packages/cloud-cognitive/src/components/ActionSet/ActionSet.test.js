@@ -13,8 +13,6 @@ import { expectMultipleError } from '../../global/js/utils/test-helper';
 
 import { pkg } from '../../settings';
 
-import { Loading } from 'carbon-components-react';
-
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { ActionSet } from '.';
@@ -128,7 +126,7 @@ describe(componentName, () => {
 
   it('renders a loading button', () => {
     render(<ActionSet actions={[{ ...actionS, loading: true }]} />);
-    const loader = Loading.defaultProps.description;
+    const loader = 'Active loading indicator';
     expect(screen.getByRole('button').textContent).toEqual(
       `${labelS}${loader}${loader}`
     );

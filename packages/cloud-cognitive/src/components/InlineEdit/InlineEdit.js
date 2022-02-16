@@ -402,15 +402,13 @@ InlineEdit.propTypes = {
   /**
    * method called on input event (it's a React thing onChange behaves like on input).
    *
-   * NOTE: return values of false and { invalid: true } will set internal state to invalid,
-   * { warn: true } to warn. These internal state is reassessed on changing of value, warn and invalid properties.
+   * NOTE: caller to handle invalid/warn states and associated text
    */
   onChange: PropTypes.func,
   /**
    * method called on change event
    *
-   * NOTE: return values of false and { invalid: true } will set internal state to invalid,
-   * { warn: true } to warn. These internal state is reassessed on changing of value, warn and invalid properties.
+   * NOTE: caller to handle invalid/warn states and associated text
    */
   onSave: PropTypes.func,
   /**

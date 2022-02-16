@@ -75,7 +75,7 @@ ActionSetButton.propTypes = {
   loading: PropTypes.bool,
 };
 
-const defaultKind = Button.defaultProps.kind;
+const defaultKind = 'primary';
 
 const willStack = (size, numberOfActions) =>
   size === 'xs' || size === 'sm' || (size === 'md' && numberOfActions > 2);

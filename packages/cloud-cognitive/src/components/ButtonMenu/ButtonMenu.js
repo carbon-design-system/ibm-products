@@ -133,5 +133,5 @@ ButtonMenu.propTypes = {
 };
 
 ButtonMenu.defaultProps = {
-  size: Button.defaultProps.size,
+  size: 'default',
 };

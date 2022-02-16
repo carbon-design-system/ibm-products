@@ -124,28 +124,28 @@ const Template = ({
       (save && validation.onSaveInvalidIfEmpty)
     ) {
       newInvalid = zeroLength;
-      invalidText = 'This field cannot be empty';
+      invalidText = newInvalid ? 'This field cannot be empty' : '';
       updateValidation = true;
     } else if (
       (change && validation.onChangeWarnIfEmpty) ||
       (save && validation.onSaveWarnIfEmpty)
     ) {
       newWarn = zeroLength;
-      warnText = 'Empty fields are not good practice';
+      warnText = newWarn ? 'Empty fields are not good practice' : '';
       updateValidation = true;
     } else if (
       (change && validation.onChangeInvalidWithABC) ||
       (save && validation.onSaveInvalidWithABC)
     ) {
       newInvalid = hasABC;
-      invalidText = 'Cannot contain ABC in the entry';
+      invalidText = newInvalid ? 'Cannot contain ABC in the entry' : '';
       updateValidation = true;
     } else if (
       (change && validation.onChangeWanWithABC) ||
       (save && validation.onSaveWanWithABC)
     ) {
       newWarn = hasABC;
-      warnText = 'ABC should not be used in the entry';
+      warnText = newWarn ? 'ABC should not be used in the entry' : '';
       updateValidation = true;
     }
 

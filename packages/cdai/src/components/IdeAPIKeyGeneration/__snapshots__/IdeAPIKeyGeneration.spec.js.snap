@@ -31,20 +31,10 @@ Array [
         >
           <TextInput
             data-ui-id="IdeAPIKeyGeneration-APIKey"
-            disabled={false}
-            helperText=""
             id="IdeAPIKeyGeneration-APIKey"
-            inline={false}
-            invalid={false}
-            invalidText=""
             labelText="API key"
             light={true}
-            onChange={[Function]}
-            onClick={[Function]}
             readOnly={true}
-            type="text"
-            warn={false}
-            warnText=""
           />
         </div>
       </React.Fragment>

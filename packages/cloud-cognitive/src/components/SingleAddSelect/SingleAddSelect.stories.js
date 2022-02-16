@@ -53,6 +53,7 @@ const defaultProps = {
   noResultsDescription: 'Try again',
   onCloseButtonText: 'Cancel',
   onSubmitButtonText: 'Select',
+  textInputLabel: 'test input label',
 };
 
 const Template = (args) => {

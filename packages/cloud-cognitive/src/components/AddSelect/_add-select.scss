@@ -49,24 +49,44 @@
     }
   }
 
-  // multi select specific
+  // sidebar
 
-  .#{$block-class}__influencer-header {
+  .#{$block-class}__sidebar-header {
     display: flex;
     padding: $spacing-06 $spacing-05 $spacing-03 $spacing-05;
     border-bottom: 1px solid $ui-03;
 
-    .#{$block-class}__influencer-title {
+    .#{$block-class}__sidebar-title {
       @include carbon--type-style('productive-heading-02');
     }
   }
 
-  .#{$block-class}__influencer-title {
+  .#{$block-class}__sidebar-title {
     margin-right: $spacing-03;
   }
 
-  .#{$block-class}__influencer-body {
+  .#{$block-class}__sidebar-body {
     padding: $spacing-05;
+  }
+
+  .#{$block-class} .#{$block-class}__sidebar-item-header {
+    @include carbon--type-style('label-01');
+  }
+
+  .#{$block-class} .#{$block-class}__sidebar-item-body {
+    @include carbon--type-style('body-long-01');
+
+    margin-bottom: $spacing-03;
+  }
+
+  .#{$block-class} .#{$block-class}__sidebar-item-remove-button:hover {
+    background: $disabled-02;
+  }
+
+  .#{$block-class} .#{$block-class}__sidebar-accordion-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   // overrides
@@ -98,8 +118,18 @@
     justify-content: left;
   }
 
-  .#{$block-class}__selections-wrapper .#{$carbon-prefix}---form-item {
-    display: block;
+  .#{$block-class} .#{$carbon-prefix}--breadcrumb .#{$carbon-prefix}--link {
+    cursor: pointer;
+  }
+
+  .#{$carbon-prefix}--accordion__item {
+    &:hover .#{$block-class}__sidebar-accordion-title button {
+      opacity: 1;
+    }
+
+    .#{$block-class}__sidebar-accordion-title button {
+      opacity: 0;
+    }
   }
 }
 

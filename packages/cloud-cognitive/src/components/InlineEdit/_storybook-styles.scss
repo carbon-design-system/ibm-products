@@ -5,14 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import './index';
-
-// TODO: add any additional styles used by InlineEdit.stories.js
-
-// Uncomment next line (which must appear last) to test in storybook
-// that the SCSS styles for this component are sufficiently specific
-// to override Carbon whichever order the styles get loaded in.
-//@import 'carbon-components/css/carbon-components.min';
+@import '../../global/styles/project-settings';
 
 .inline-edit-stories__viewport {
   // width: 300px; // larger than standard size needed by text input at standard font size (html input attribute size)

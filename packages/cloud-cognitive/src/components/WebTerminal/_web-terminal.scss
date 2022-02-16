@@ -4,7 +4,7 @@
 $web-terminal-width: 36.5rem;
 $block-class: #{$pkg-prefix}--web-terminal;
 
-@keyframes webTerminalEntrance {
+@keyframes web-terminal-entrance {
   0% {
     opacity: 0;
     // stylelint-disable-next-line carbon/layout-token-use
@@ -16,7 +16,7 @@ $block-class: #{$pkg-prefix}--web-terminal;
   }
 }
 
-@keyframes webTerminalExit {
+@keyframes web-terminal-exit {
   0% {
     opacity: 1;
     transform: translateX(0);

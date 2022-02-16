@@ -1,0 +1,28 @@
+{
+  "name": "stylelint-config-ibm-products",
+  "private": true,
+  "version": "0.0.3",
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "directory": "config/stylelint-config-ibm-products"
+  },
+  "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
+  "scripts": {
+    "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon$)/'"
+  },
+  "peerDependencies": {
+    "stylelint": "^14.5.0"
+  },
+  "devDependencies": {
+    "stylelint-config-carbon": "^1.7.0",
+    "stylelint-config-idiomatic-order": "^8.1.0",
+    "stylelint-config-standard": "^25.0.0",
+    "stylelint-config-standard-scss": "^3.0.0",
+    "stylelint-no-unsupported-browser-features": "^5.0.2",
+    "stylelint-plugin-carbon-tokens": "^0.11.2"
+  }
+}

@@ -6,8 +6,6 @@
  */
 
 import React, { useMemo } from 'react';
-// TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
 
 import {
   getStoryTitle,
@@ -23,6 +21,11 @@ import styles from './_storybook-styles.scss';
 export default {
   title: getStoryTitle(DataSpreadsheet.displayName),
   component: DataSpreadsheet,
+  argTypes: {
+    onActiveCellChange: {
+      action: 'active cell change',
+    },
+  },
   parameters: {
     styles,
     docs: {

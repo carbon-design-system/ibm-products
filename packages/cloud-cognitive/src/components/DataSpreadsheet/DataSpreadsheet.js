@@ -28,7 +28,10 @@ const componentName = 'DataSpreadsheet';
  * DataSpreadsheet: used to organize and display large amounts of structured data, separated by columns and rows in a grid-like format.
  */
 export let DataSpreadsheet = React.forwardRef(
-  ({ cellSize, className, columns, data, id, ...rest }, ref) => {
+  (
+    { cellSize, className, columns, data, id, onActiveCellChange, ...rest },
+    ref
+  ) => {
     const cellSizeValue = getCellSize(cellSize);
     const defaultColumn = useMemo(
       () => ({
@@ -106,6 +109,7 @@ export let DataSpreadsheet = React.forwardRef(
           cellSize={cellSize}
           defaultColumn={defaultColumn}
           getTableBodyProps={getTableBodyProps}
+          onActiveCellChange={onActiveCellChange}
           prepareRow={prepareRow}
           rows={rows}
           scrollBarSize={scrollBarSize}
@@ -164,6 +168,11 @@ DataSpreadsheet.propTypes = {
    * The spreadsheet id
    */
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+  /**
+   * The event handler that is called when the active cell changes
+   */
+  onActiveCellChange: PropTypes.func,
 
   /* TODO: add types and DocGen for all props. */
 };

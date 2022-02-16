@@ -17,6 +17,7 @@ export const DataSpreadsheetBody = ({
   defaultColumn,
   getTableBodyProps,
   id,
+  onActiveCellChange,
   prepareRow,
   rows,
   scrollBarSize,
@@ -25,7 +26,7 @@ export const DataSpreadsheetBody = ({
   // onClick fn for each cell in the data spreadsheet body,
   // adds the active cell highlight
   const handleBodyCellClick = useCallback(
-    (event, cell) => {
+    (event, cell, columnIndex) => {
       const cellButton = event.target.closest(`.${blockClass}__td`);
       const cellCoordinates = cellButton.getBoundingClientRect();
       const rowContainer = document.querySelector(
@@ -40,17 +41,31 @@ export const DataSpreadsheetBody = ({
       const activeCellButton =
         listContainer.querySelector(`.${blockClass}__active-cell--highlight`) ||
         document.createElement('button');
-      activeCellButton.focus();
       activeCellButton.classList.add(`${blockClass}__active-cell--highlight`);
       activeCellButton.style.width = `${
         cell?.column?.width - 8 - scrollBarSize / cell.row.cells.length
       }px`; // subtract 8 to account for cell padding and then subtract the scrollbar width divided by total columns
+      const activeCellCoords = {
+        row: cell.row.index,
+        column: columnIndex,
+      };
       activeCellButton.style.height = `${cell?.column?.rowHeight}px`;
       activeCellButton.style.left = `${relativePosition.left}px`;
       activeCellButton.style.top = `${relativePosition.top}px`;
+      activeCellButton.setAttribute(
+        'data-active-row-index',
+        activeCellCoords.row
+      );
+      activeCellButton.setAttribute(
+        'data-active-column-index',
+        activeCellCoords.column
+      );
       listContainer.firstElementChild.appendChild(activeCellButton);
+      activeCellButton.focus();
+      const activeCellValue = Object.values(cell.row.values)[columnIndex];
+      onActiveCellChange?.(activeCellValue);
     },
-    [scrollBarSize]
+    [onActiveCellChange, scrollBarSize]
   );
 
   // Renders each cell in the spreadsheet body
@@ -80,7 +95,7 @@ export const DataSpreadsheetBody = ({
               {...cell.getCellProps()}
               className={`${blockClass}__td`}
               key={`cell_${index}`}
-              onClick={(event) => handleBodyCellClick(event, cell)}
+              onClick={(event) => handleBodyCellClick(event, cell, index)}
               type="button"
             >
               {cell.render('Cell')}
@@ -130,6 +145,11 @@ DataSpreadsheetBody.propTypes = {
    * The spreadsheet id
    */
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+  /**
+   * The event handler that is called when the active cell changes
+   */
+  onActiveCellChange: PropTypes.func,
 
   /**
    * Prepare row function from react-table

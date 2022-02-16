@@ -25,10 +25,17 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
 const componentName = 'ImportModal';
 
+// Default values for props
+const defaults = {
+  accept: [],
+};
+
 export let ImportModal = forwardRef(
   (
     {
-      accept,
+      // The component props, in alphabetical order (for consistency).
+
+      accept = defaults.accept,
       className,
       defaultErrorBody,
       defaultErrorHeader,
@@ -54,6 +61,8 @@ export let ImportModal = forwardRef(
       primaryButtonText,
       secondaryButtonText,
       title,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -353,10 +362,6 @@ ImportModal.propTypes = {
    * The text displayed at the top of the modal
    */
   title: PropTypes.string.isRequired,
-};
-
-ImportModal.defaultProps = {
-  accept: [],
 };
 
 ImportModal.displayName = componentName;

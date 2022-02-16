@@ -31,8 +31,6 @@ const ActionSetButton = React.forwardRef(
       kind,
       label,
       loading,
-      onClick,
-      size,
       // Collect any other property values passed in.
       ...rest
     },
@@ -52,7 +50,7 @@ const ActionSetButton = React.forwardRef(
         },
       ])}
       disabled={disabled || loading || false}
-      {...{ kind, onClick, ref, size }}
+      {...{ kind, ref }}
     >
       {label}
       {loading && <InlineLoading />}
@@ -80,6 +78,11 @@ const defaultKind = 'primary';
 const willStack = (size, numberOfActions) =>
   size === 'xs' || size === 'sm' || (size === 'md' && numberOfActions > 2);
 
+// Default values for props
+const defaults = {
+  size: 'md',
+};
+
 /**
  * An ActionSet presents a set of action buttons, constructed from bundles
  * of prop values and applying some layout rules. When the size is 'xs' or 'sm'
@@ -96,10 +99,12 @@ export const ActionSet = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
+
       actions,
       buttonSize,
       className,
-      size,
+      size = defaults.size,
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -293,8 +298,4 @@ ActionSet.propTypes = {
    * different sizes, to make best use of the available space.
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xlg', 'max']),
-};
-
-ActionSet.defaultProps = {
-  size: 'md',
 };

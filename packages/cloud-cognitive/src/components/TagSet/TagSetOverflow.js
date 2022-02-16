@@ -18,16 +18,28 @@ import { noop } from '../../global/js/utils/pconsole';
 const componentName = 'TagSetOverflow';
 const blockClass = `${pkg.prefix}--tag-set-overflow`;
 
+// Default values for props
+const defaults = {
+  allTagsModalSearchThreshold: 10,
+  overflowAlign: 'center',
+  overflowDirection: 'bottom',
+};
+
 export const TagSetOverflow = React.forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
+      allTagsModalSearchThreshold = defaults.allTagsModalSearchThreshold,
       className,
-      overflowTags,
       onShowAllClick,
-      overflowAlign,
-      overflowDirection,
+      overflowAlign = defaults.overflowAlign,
+      overflowDirection = defaults.overflowDirection,
+      overflowTags,
       showAllTagsLabel,
-      allTagsModalSearchThreshold,
+
+      // Collect any other property values passed in.
+      ...rest
     },
     ref
   ) => {
@@ -47,6 +59,10 @@ export const TagSetOverflow = React.forwardRef(
 
     return (
       <span
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
         aria-hidden={overflowTags.length === 0}
         className={cx(`${blockClass}`, {
           [`${blockClass}--hidden`]: overflowTags.length === 0,
@@ -124,10 +140,4 @@ TagSetOverflow.propTypes = {
    * label for the overflow show all tags link
    */
   showAllTagsLabel: PropTypes.string,
-};
-
-TagSetOverflow.defaultProps = {
-  allTagsModalSearchThreshold: 10,
-  overflowAlign: 'center',
-  overflowDirection: 'bottom',
 };

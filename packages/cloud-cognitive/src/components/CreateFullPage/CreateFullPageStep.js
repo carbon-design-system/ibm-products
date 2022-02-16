@@ -17,15 +17,22 @@ import pconsole from '../../global/js/utils/pconsole';
 const componentName = 'CreateFullPageStep';
 const blockClass = `${pkg.prefix}--create-full-page__step`;
 
+// Default values for props
+const defaults = {
+  includeStep: true,
+};
+
 export let CreateFullPageStep = forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       children,
       className,
       subtitle,
       description,
       disableSubmit,
-      includeStep,
+      includeStep = defaults.includeStep,
       introStep,
       title,
       hasFieldset,
@@ -33,6 +40,9 @@ export let CreateFullPageStep = forwardRef(
       onNext,
       onMount,
       secondaryLabel,
+
+      // Collect any other property values passed in.
+      ...rest
     },
     ref
   ) => {
@@ -78,6 +88,10 @@ export let CreateFullPageStep = forwardRef(
 
     return stepsContext ? (
       <section
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
         className={cx(blockClass, className, {
           [`${blockClass}__step--hidden-step`]:
             stepNumber !== stepsContext?.currentStep,
@@ -187,8 +201,4 @@ CreateFullPageStep.propTypes = {
    * Sets the title text for a create full page step
    */
   title: PropTypes.node.isRequired,
-};
-
-CreateFullPageStep.defaultProps = {
-  includeStep: true,
 };

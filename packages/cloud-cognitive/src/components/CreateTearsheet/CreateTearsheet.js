@@ -41,15 +41,23 @@ export const StepsContext = createContext(null);
 // to let it know what number it is in the sequence of steps
 export const StepNumberContext = createContext(-1);
 
+// Default values for props
+const defaults = {
+  verticalPosition: 'normal',
+  influencerWidth: 'narrow',
+};
+
 export let CreateTearsheet = forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       backButtonText,
       cancelButtonText,
       children,
       className,
       description,
-      influencerWidth,
+      influencerWidth = defaults.influencerWidth,
       initialStep,
       label,
       nextButtonText,
@@ -58,7 +66,9 @@ export let CreateTearsheet = forwardRef(
       open,
       submitButtonText,
       title,
-      verticalPosition,
+      verticalPosition = defaults.verticalPosition,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -293,13 +303,4 @@ CreateTearsheet.propTypes = {
    * to allow an action bar navigation or breadcrumbs to also show through.
    */
   verticalPosition: PropTypes.oneOf(['normal', 'lower']),
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-CreateTearsheet.defaultProps = {
-  verticalPosition: 'normal',
-  influencerWidth: 'narrow',
 };

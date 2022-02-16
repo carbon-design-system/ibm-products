@@ -36,43 +36,77 @@ import { usePreviousValue } from '../../global/js/hooks';
 const componentName = 'NotificationsPanel';
 const blockClass = `${pkg.prefix}--notifications-panel`;
 
+// Default values for props
+const defaults = {
+  daysAgoText: (value) => `${value} days ago`,
+  dismissAllLabel: 'Dismiss all',
+  dismissSingleNotificationIconDescription: 'Dismiss',
+  doNotDisturbLabel: 'Do not disturb',
+  emptyStateLabel: 'You do not have any notifications',
+  hourAgoText: (value) => `${value} hour ago`,
+  hoursAgoText: (value) => `${value} hours ago`,
+  minuteAgoText: (value) => `${value} minute ago`,
+  minutesAgoText: (value) => `${value} minutes ago`,
+  monthAgoText: (value) => `${value} month ago`,
+  monthsAgoText: (value) => `${value} months ago`,
+  nowText: 'Now',
+  onDismissAllNotifications: () => {},
+  onDismissSingleNotification: () => {},
+  previousLabel: 'Previous',
+  readLessLabel: 'Read less',
+  readMoreLabel: 'Read more',
+  secondsAgoText: (value) => `${value} seconds ago`,
+  settingsIconDescription: 'Settings',
+  title: 'Notifications',
+  todayLabel: 'Today',
+  viewAllLabel: (value) => `View all (${value})`,
+  yearAgoText: (value) => `${value} year ago`,
+  yearsAgoText: (value) => `${value} years ago`,
+  yesterdayAtText: (value) => `Yesterday at ${value}`,
+  yesterdayLabel: 'Yesterday',
+};
+
 export let NotificationsPanel = React.forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       className,
       data,
-      daysAgoText,
-      dismissAllLabel,
-      dismissSingleNotificationIconDescription,
+      daysAgoText = defaults.daysAgoText,
+      dismissAllLabel = defaults.dismissAllLabel,
+      dismissSingleNotificationIconDescription = defaults.dismissSingleNotificationIconDescription,
       doNotDisturbDefaultToggled,
-      doNotDisturbLabel,
-      emptyStateLabel,
-      hoursAgoText,
-      hourAgoText,
-      minuteAgoText,
-      minutesAgoText,
-      monthsAgoText,
-      monthAgoText,
-      nowText,
+      doNotDisturbLabel = defaults.doNotDisturbLabel,
+      emptyStateLabel = defaults.emptyStateLabel,
+      hourAgoText = defaults.hourAgoText,
+      hoursAgoText = defaults.hoursAgoText,
+      minuteAgoText = defaults.minuteAgoText,
+      minutesAgoText = defaults.minutesAgoText,
+      monthAgoText = defaults.monthAgoText,
+      monthsAgoText = defaults.monthsAgoText,
+      nowText = defaults.nowText,
       onClickOutside,
-      onDismissAllNotifications,
-      onDismissSingleNotification,
+      onDismissAllNotifications = defaults.onDismissAllNotifications,
+      onDismissSingleNotification = defaults.onDismissSingleNotification,
       onDoNotDisturbChange,
       onSettingsClick,
       onViewAllClick,
       open,
-      previousLabel,
-      readLessLabel,
-      readMoreLabel,
-      secondsAgoText,
-      settingsIconDescription,
-      title,
-      todayLabel,
-      viewAllLabel,
-      yearsAgoText,
-      yearAgoText,
-      yesterdayAtText,
-      yesterdayLabel,
+      previousLabel = defaults.previousLabel,
+      readLessLabel = defaults.readLessLabel,
+      readMoreLabel = defaults.readMoreLabel,
+      secondsAgoText = defaults.secondsAgoText,
+      settingsIconDescription = defaults.settingsIconDescription,
+      title = defaults.title,
+      todayLabel = defaults.todayLabel,
+      viewAllLabel = defaults.viewAllLabel,
+      yearAgoText = defaults.yearAgoText,
+      yearsAgoText = defaults.yearsAgoText,
+      yesterdayAtText = defaults.yesterdayAtText,
+      yesterdayLabel = defaults.yesterdayLabel,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -643,37 +677,4 @@ NotificationsPanel.propTypes = {
    * Sets the yesterday label text
    */
   yesterdayLabel: PropTypes.string,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-NotificationsPanel.defaultProps = {
-  daysAgoText: (value) => `${value} days ago`,
-  dismissAllLabel: 'Dismiss all',
-  dismissSingleNotificationIconDescription: 'Dismiss',
-  doNotDisturbLabel: 'Do not disturb',
-  emptyStateLabel: 'You do not have any notifications',
-  hourAgoText: (value) => `${value} hour ago`,
-  hoursAgoText: (value) => `${value} hours ago`,
-  minuteAgoText: (value) => `${value} minute ago`,
-  minutesAgoText: (value) => `${value} minutes ago`,
-  monthAgoText: (value) => `${value} month ago`,
-  monthsAgoText: (value) => `${value} months ago`,
-  nowText: 'Now',
-  onDismissAllNotifications: () => {},
-  onDismissSingleNotification: () => {},
-  previousLabel: 'Previous',
-  readLessLabel: 'Read less',
-  readMoreLabel: 'Read more',
-  secondsAgoText: (value) => `${value} seconds ago`,
-  settingsIconDescription: 'Settings',
-  title: 'Notifications',
-  todayLabel: 'Today',
-  viewAllLabel: (value) => `View all (${value})`,
-  yearsAgoText: (value) => `${value} years ago`,
-  yearAgoText: (value) => `${value} year ago`,
-  yesterdayLabel: 'Yesterday',
-  yesterdayAtText: (value) => `Yesterday at ${value}`,
 };

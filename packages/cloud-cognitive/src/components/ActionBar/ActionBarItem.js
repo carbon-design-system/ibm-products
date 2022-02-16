@@ -57,12 +57,10 @@ const reservedProps = [
 ];
 // Base props on Carbon Button
 const propTypes = { ...Button.propTypes };
-const defaultProps = { ...Button.defaultProps };
 
 // Remove reserved props
 reservedProps.forEach((prop) => {
   delete propTypes[prop];
-  delete defaultProps[prop];
 });
 
 ActionBarItem.displayName = componentName;
@@ -104,5 +102,3 @@ ActionBarItem.propTypes = {
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
-
-ActionBarItem.defaultProps = { ...defaultProps };

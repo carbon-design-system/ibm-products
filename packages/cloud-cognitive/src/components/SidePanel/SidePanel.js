@@ -32,35 +32,48 @@ const componentName = 'SidePanel';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+// Default values for props
+const defaults = {
+  animateTitle: true,
+  closeIconDescription: 'Close',
+  currentStep: 0,
+  navigationBackIconDescription: 'Back',
+  placement: 'right',
+  size: 'md',
+};
+
 /**
  * Side panels keep users in-context of a page while performing tasks like navigating, editing, viewing details, or configuring something new.
  */
 export let SidePanel = React.forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       actionToolbarButtons,
       actions,
-      animateTitle,
+      animateTitle = defaults.animateTitle,
       children,
       className,
-      closeIconDescription,
+      closeIconDescription = defaults.closeIconDescription,
       condensedActions,
-      currentStep,
+      currentStep = defaults.currentStep,
       includeOverlay,
       labelText,
-      navigationBackIconDescription,
+      navigationBackIconDescription = defaults.navigationBackIconDescription,
       onNavigationBack,
       onRequestClose,
       onUnmount,
       open,
-      placement,
+      placement = defaults.placement,
       preventCloseOnClickOutside,
       selectorPageContent,
       selectorPrimaryFocus,
-      size,
+      size = defaults.size,
       slideIn,
       subtitle,
       title,
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -930,17 +943,6 @@ SidePanel.propTypes = {
    * Sets the title text
    */
   title: PropTypes.string.isRequired.if(({ labelText }) => labelText),
-};
-
-SidePanel.defaultProps = {
-  animateTitle: true,
-  placement: 'right',
-  size: 'md',
-  slideIn: false,
-  currentStep: 0,
-  navigationBackIconDescription: 'Back',
-  closeIconDescription: 'Close',
-  preventCloseOnClickOutside: false,
 };
 
 SidePanel.displayName = componentName;

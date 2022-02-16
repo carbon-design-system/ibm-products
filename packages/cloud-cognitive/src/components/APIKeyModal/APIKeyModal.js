@@ -33,19 +33,26 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 const componentName = 'APIKeyModal';
 
+// Default values for props
+const defaults = {
+  apiKeyName: '',
+  customSteps: [],
+};
+
 export let APIKeyModal = forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
       apiKey,
       apiKeyLabel,
-      apiKeyName,
+      apiKeyName = defaults.apiKeyName,
       body,
       className,
       closeButtonText,
       copyButtonText,
       copyErrorText,
       copyIconDescription,
-      customSteps,
+      customSteps = defaults.customSteps,
       downloadBodyText,
       downloadFileName,
       downloadFileType,
@@ -78,6 +85,8 @@ export let APIKeyModal = forwardRef(
       open,
       previousStepButtonText,
       showAPIKeyLabel,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -502,17 +511,6 @@ APIKeyModal.propTypes = {
    * label text that's displayed when hovering over visibility toggler to show key
    */
   showAPIKeyLabel: PropTypes.string,
-};
-
-APIKeyModal.defaultProps = {
-  apiKeyName: '',
-  customSteps: [],
-  error: false,
-  hasAPIKeyVisibilityToggle: false,
-  hasDownloadLink: false,
-  loading: false,
-  nameRequired: false,
-  open: false,
 };
 
 APIKeyModal.displayName = componentName;

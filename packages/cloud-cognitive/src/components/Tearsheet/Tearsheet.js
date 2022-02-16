@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
-import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
+import { allPropTypes } from '../../global/js/utils/props-helper';
 
 import { pkg } from '../../settings';
 
@@ -27,6 +27,13 @@ const componentName = 'Tearsheet';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+// Default values for props
+const defaults = {
+  influencerPosition: 'left',
+  influencerWidth: 'narrow',
+  verticalPosition: 'lower',
+};
+
 /**
  * A tearsheet is a mostly full-screen type of dialog that keeps users
  * in-context and focused by bringing actionable content front and center while
@@ -39,12 +46,29 @@ const componentName = 'Tearsheet';
  * panel on either the left or right side, the main content area, and a set of
  * action buttons.
  */
-export let Tearsheet = React.forwardRef((props, ref) => (
-  <TearsheetShell
-    {...getDevtoolsProps(componentName)}
-    {...prepareProps(props, [], { ref, size: 'wide' })}
-  />
-));
+export let Tearsheet = React.forwardRef(
+  (
+    {
+      influencerPosition = defaults.influencerPosition,
+      influencerWidth = defaults.influencerWidth,
+      verticalPosition = defaults.verticalPosition,
+      ...rest
+    },
+    ref
+  ) => (
+    <TearsheetShell
+      {...{
+        ...rest,
+        influencerPosition,
+        influencerWidth,
+        verticalPosition,
+        ref,
+        size: 'wide',
+        ...getDevtoolsProps(componentName),
+      }}
+    />
+  )
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 Tearsheet = pkg.checkComponentEnabled(Tearsheet, componentName);
@@ -185,14 +209,4 @@ Tearsheet.propTypes = {
   title: PropTypes.node,
 
   ...deprecatedProps,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-Tearsheet.defaultProps = {
-  influencerPosition: 'left',
-  influencerWidth: 'narrow',
-  verticalPosition: 'lower',
 };

@@ -377,7 +377,4 @@ BreadcrumbWithOverflow.propTypes = {
   ),
 };
 
-BreadcrumbWithOverflow.defaultProps = {
-  noTrailingSlash: false,
-};
 BreadcrumbWithOverflow.displayName = componentName;

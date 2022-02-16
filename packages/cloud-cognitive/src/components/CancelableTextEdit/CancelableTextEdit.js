@@ -27,12 +27,19 @@ const componentName = 'CancelableTextEdit';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+// Default values for props
+const defaults = {
+  size: 'md',
+};
+
 /**
  * TODO: A description of the component.
  */
 export let CancelableTextEdit = React.forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       className,
       hideLabel,
       inline,
@@ -45,7 +52,7 @@ export let CancelableTextEdit = React.forwardRef(
       revertDescription,
       saveDescription,
       saveDisabled,
-      size,
+      size = defaults.size,
       value,
       warn,
       warnText,
@@ -257,13 +264,4 @@ CancelableTextEdit.propTypes = {
    * text shown when warn true
    */
   warnText: PropTypes.string,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-CancelableTextEdit.defaultProps = {
-  /* TODO: add defaults for relevant props. */
-  size: 'md',
 };

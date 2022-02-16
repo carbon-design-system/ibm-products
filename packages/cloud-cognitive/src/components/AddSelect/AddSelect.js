@@ -37,6 +37,8 @@ export let AddSelect = forwardRef(
       onSubmit,
       onSubmitButtonText,
       open,
+      removeIconDescription,
+      textInputLabel,
       title,
       ...rest
     },
@@ -78,7 +80,7 @@ export let AddSelect = forwardRef(
           return onSearchFilter(item, searchTerm);
         }
         // otherwise use the default label filter
-        return item.label.toLowerCase().includes(searchTerm);
+        return item.title.toLowerCase().includes(searchTerm);
       });
       return results;
     };
@@ -91,7 +93,7 @@ export let AddSelect = forwardRef(
         <div className={`${blockClass}__header`}>
           <TextInput
             id="temp-id"
-            labelText="temp label"
+            labelText={textInputLabel}
             placeholder={inputPlaceholder}
             value={searchTerm}
             onChange={handleSearch}
@@ -159,9 +161,12 @@ export let AddSelect = forwardRef(
 
     const sidebarProps = {
       influencerTitle,
+      items,
       multiSelection,
       noSelectionDescription,
       noSelectionTitle,
+      removeIconDescription,
+      setMultiSelection,
     };
 
     const classNames = cx(className, blockClass, {
@@ -194,9 +199,9 @@ AddSelect.propTypes = {
   inputPlaceholder: PropTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      label: PropTypes.string,
-      value: PropTypes.string,
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
     })
   ),
   itemsLabel: PropTypes.string,
@@ -211,6 +216,8 @@ AddSelect.propTypes = {
   onSubmit: PropTypes.func,
   onSubmitButtonText: PropTypes.string,
   open: PropTypes.bool,
+  removeIconDescription: PropTypes.string,
+  textInputLabel: PropTypes.string,
   title: PropTypes.string,
 };
 

@@ -41,6 +41,7 @@ const s = [
           { n: 'Progressive loading bar', s: ['c/LoadingBar'] },
           { n: 'Side panel', s: ['c/SidePanel'] },
           { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
+          { n: 'DataSpreadsheet', s: ['c/DataSpreadsheet'] },
         ],
       },
       {
@@ -59,6 +60,10 @@ const s = [
             ],
           },
           {
+            n: 'Edit and update',
+            s: ['c/InlineEdit', 'c/EditSidePanel'],
+          },
+          {
             n: 'Empty state',
             s: [
               'c/EmptyState',
@@ -71,10 +76,6 @@ const s = [
             ],
           },
           { n: 'Export', s: ['c/ExportModal'] },
-          {
-            n: 'Edit and update flows',
-            s: ['c/EditSidePanel'],
-          },
           { n: 'Generating an API key', s: ['c/APIKeyModal'] },
           {
             n: 'HTTP errors',
@@ -102,7 +103,6 @@ const s = [
           'c/CancelableTextEdit',
           'c/ComboButton',
           'c/ExampleComponent',
-          'c/InlineEdit',
           'c/TearsheetShell',
         ],
       },

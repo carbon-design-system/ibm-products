@@ -45,8 +45,8 @@ export let AddSelectList = ({
     }
   };
 
-  const onNavigateItem = ({ id, label }) => {
-    setPath([...path, { id, label }]);
+  const onNavigateItem = ({ id, title }) => {
+    setPath([...path, { id, title }]);
   };
 
   return (
@@ -60,12 +60,10 @@ export let AddSelectList = ({
                   {multi ? (
                     <Checkbox
                       className={`${blockClass}-checkbox`}
-                      onChange={(value) =>
-                        handleMultiSelection(item.value, value)
-                      }
-                      labelText={item.label}
+                      onChange={(value) => handleMultiSelection(item.id, value)}
+                      labelText={item.title}
                       id={item.id}
-                      checked={multiSelection.includes(item.value)}
+                      checked={multiSelection.includes(item.id)}
                     />
                   ) : (
                     <RadioButton
@@ -73,7 +71,7 @@ export let AddSelectList = ({
                       name="add-select-selections"
                       id={item.id}
                       value={item.value}
-                      labelText={item.label}
+                      labelText={item.title}
                       onChange={handleSingleSelection}
                       selected={item.value === singleSelection}
                     />

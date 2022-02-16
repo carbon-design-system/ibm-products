@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -33,14 +33,14 @@
     "access": "public"
   },
   "scripts": {
-    "build": "run-s clean build-all",
+    "build": "run-s clean build-first build-all",
     "build-all": "run-p build:*",
-    "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules src:css",
-    "build:css-min": "sass --style=compressed --no-source-map --load-path node_modules --load-path ../../node_modules src/index.scss:css/index.min.css src/index-full-carbon.scss:css/index-full-carbon.min.css src/index-without-carbon.scss:css/index-without-carbon.min.css src/index-without-carbon-released-only.scss:css/index-without-carbon-released-only.min.css",
+    "build-first": "copyfiles 'src/**/*.scss' scss -u 1",
+    "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules scss:css",
+    "build:css-min": "sass --style=compressed --load-path node_modules --load-path ../../node_modules scss/index.scss:css/index.min.css scss/index-full-carbon.scss:css/index-full-carbon.min.css scss/index-without-carbon.scss:css/index-without-carbon.min.css scss/index-without-carbon-released-only.scss:css/index-without-carbon-released-only.min.css",
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js:modules -d lib",
     "build:js:modules": "babel src --ignore '**/__tests__','**/*.test.js','**/*.stories.js','src/utils/**/*'",
-    "build:scss": "copyfiles 'src/**/*.scss' scss -u 1",
     "ci-check": "node scripts/import",
     "clean": "rimraf es lib css scss",
     "generate": "cross-env FORCE_COLOR=1 node scripts/generate",
@@ -52,7 +52,7 @@
   "devDependencies": {
     "@babel/cli": "^7.17.0",
     "@babel/core": "^7.17.2",
-    "babel-preset-ibm-cloud-cognitive": "^0.14.6",
+    "babel-preset-ibm-cloud-cognitive": "^0.14.7",
     "chalk": "^4.1.2",
     "change-case": "^4.1.2",
     "copyfiles": "^2.4.1",
@@ -60,7 +60,7 @@
     "fs-extra": "^10.0.0",
     "glob": "^7.2.0",
     "jest": "^27.5.1",
-    "jest-config-ibm-cloud-cognitive": "^0.23.7",
+    "jest-config-ibm-cloud-cognitive": "^0.23.8",
     "npm-check-updates": "^12.3.0",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
@@ -70,7 +70,9 @@
   "dependencies": {
     "@babel/runtime": "^7.17.2",
     "@carbon/telemetry": "^0.0.0-alpha.6",
-    "react-resize-detector": "^7.0.0"
+    "react-resize-detector": "^7.0.0",
+    "react-table": "^7.7.0",
+    "react-window": "^1.8.6"
   },
   "peerDependencies": {
     "@carbon/colors": "^10.35.0",

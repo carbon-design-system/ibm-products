@@ -89,6 +89,7 @@
     transition: background-color $duration--fast-01 motion(entrance, productive),
       box-shadow $duration--fast-01 motion(entrance, productive),
       border-color $duration--fast-01 motion(entrance, productive);
+    vertical-align: middle; // mis-aligned items cause height to grow beyond setting.
 
     white-space: nowrap;
 
@@ -102,14 +103,15 @@
       --#{$block-class}--icon-size: #{$spacing-05};
     }
 
+    &.#{$block-class}--invalid {
+      // editing takes precedence over invalid
+      @include input-outline($support-01);
+    }
+
     &.#{$block-class}--editing {
       @include input-outline($focus);
 
       background-color: $ui-01;
-    }
-
-    .#{$block-class}--invalid {
-      @include input-outline($support-01);
     }
 
     .#{$block-class}__input {

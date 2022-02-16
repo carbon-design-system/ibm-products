@@ -89,6 +89,7 @@
     transition: background-color $duration--fast-01 motion(entrance, productive),
       box-shadow $duration--fast-01 motion(entrance, productive),
       border-color $duration--fast-01 motion(entrance, productive);
+    vertical-align: middle; // mis-aligned items cause height to grow beyond setting.
 
     white-space: nowrap;
 

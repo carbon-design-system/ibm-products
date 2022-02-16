@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -54,7 +54,6 @@ export let InlineEdit = React.forwardRef(
       onChange,
       placeholder,
       saveDescription,
-      saveDisabled,
       size,
       value,
       warn,
@@ -72,9 +71,7 @@ export let InlineEdit = React.forwardRef(
     const ref = refIn || localRef;
     const [editing, setEditing] = useState(false);
     const [internalValue, setInternalValue] = useState(value);
-    const [isInvalid, setIsInvalid] = useState(invalid);
-    const [isWarn, setIsWarn] = useState(warn);
-    const [showValidation, setShowValidation] = useState(invalid || warn);
+    const showValidation = invalid || warn;
     const validationText = invalidText || warnText;
     const validationIcon = showValidation ? (
       invalid ? (
@@ -83,22 +80,6 @@ export let InlineEdit = React.forwardRef(
         <WarningAltFilled16 />
       )
     ) : null;
-
-    useEffect(() => {
-      setShowValidation(isInvalid || isWarn);
-    }, [isInvalid, isWarn]);
-
-    useEffect(() => {
-      // if invalid, warn or internal value change reassess isInvalid
-      setIsInvalid(invalid);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [invalid, warn, internalValue]);
-
-    useEffect(() => {
-      // if invalid, warn or internal value change reassess isInvalid
-      setIsWarn(warn);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [invalid, warn, internalValue]);
 
     const doSetEditing = (value) => {
       if (value === false) {
@@ -142,44 +123,20 @@ export let InlineEdit = React.forwardRef(
       }
     };
 
-    const processResponse = (response) => {
-      // this function expects a response in the form of
-      // - Boolean false
-      // - { invalid: true }
-      // - { warn: true }
-      let sanitized =
-        typeof response === 'boolean' && response === false
-          ? { invalid: response }
-          : response;
-      if (sanitized) {
-        if (sanitized.invalid) {
-          setIsInvalid(true);
-        } else {
-          setIsWarn(true);
-        }
-      }
-    };
-
     const handleSave = () => {
       doSetEditing(false);
       document.getSelection().removeAllRanges();
 
-      let saved = true;
-      if (saveDisabled || isInvalid) {
-        saved = false;
-      } else {
-        saved = onSave ? onSave(refInput.current.innerText) : true;
+      if (onSave) {
+        onSave(refInput.current.innerText);
       }
-
-      processResponse(saved);
     };
 
     const handleInput = () => {
       setInternalValue(refInput.current.innerText);
 
       if (onChange) {
-        let response = onChange(refInput.current.innerText);
-        processResponse(response);
+        onChange(refInput.current.innerText);
       }
     };
 
@@ -280,8 +237,8 @@ export let InlineEdit = React.forwardRef(
             // switched classes dependant on props or state
             [`${blockClass}--disabled`]: disabled,
             [`${blockClass}--editing`]: editing,
-            [`${blockClass}--invalid`]: isInvalid,
-            [`${blockClass}--warn`]: isWarn,
+            [`${blockClass}--invalid`]: invalid,
+            [`${blockClass}--warn`]: warn,
             [`${blockClass}--light`]: light,
             [`${blockClass}--overflows`]:
               refInput.current &&
@@ -352,9 +309,7 @@ export let InlineEdit = React.forwardRef(
                   iconDescription={saveDescription}
                   onClick={handleSave}
                   renderIcon={Checkmark16}
-                  disabled={
-                    isInvalid || saveDisabled || value === internalValue
-                  }
+                  disabled={value === internalValue}
                 />
               </>
             ) : (
@@ -466,10 +421,6 @@ InlineEdit.propTypes = {
    * label for save button
    */
   saveDescription: PropTypes.string.isRequired,
-  /**
-   * disabled state of the save button
-   */
-  saveDisabled: PropTypes.bool,
   /**
    * vertical size of control
    */

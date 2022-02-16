@@ -20,8 +20,8 @@ import styles from './_storybook-styles.scss';
 
 const storyClass = 'inline-edit-stories';
 
-const stateOptions = {
-  'Default, no state change': {},
+const validationOptions = {
+  'Default, no validation change': {},
   'On change or save warn if empty': { onChangeWarnIfEmpty: true },
   'On change or save invalid if empty': { onChangeInvalidIfEmpty: true },
   'On change or save includes ABC warn': { onChangeWanWithABC: true },
@@ -46,13 +46,14 @@ export default {
       description:
         'Sets component width `100%`. Used for demonstration purposes, not property of the component.',
     },
-    state: {
+    validation: {
       control: {
         type: 'select',
-        labels: Object.keys(stateOptions),
+        labels: Object.keys(validationOptions),
       },
-      options: Object.values(stateOptions).map((_k, i) => i),
-      mapping: Object.values(stateOptions),
+      options: Object.values(validationOptions).map((_k, i) => i),
+      mapping: Object.values(validationOptions),
+      defaultValue: 0,
     },
   },
   parameters: {
@@ -84,79 +85,94 @@ const Template = ({
   containerWidth,
   inlineEditFullWidth,
   invalid,
+  invalidText,
   editDescription,
   cancelDescription,
   saveDescription,
-  state,
+  validation,
   warn,
+  warnText,
   value: initialValue,
   ...rest
 }) => {
   const [value, setValue] = useState(initialValue);
-  const [isInvalid, setIsInvalid] = useState(invalid);
-  const [isWarn, setIsWarn] = useState(warn);
+  const [liveInvalid, setLiveInvalid] = useState(invalid);
+  const [liveWarn, setLiveWarn] = useState(warn);
+  const [liveInvalidText, setLiveInvalidText] = useState(invalidText);
+  const [liveWarnText, setLiveWarnText] = useState(warnText);
 
   useEffect(() => {
-    setIsInvalid(invalid);
+    setLiveInvalid(invalid);
   }, [invalid]);
 
   useEffect(() => {
-    setIsWarn(warn);
+    setLiveWarn(warn);
   }, [warn]);
 
-  const onSave = (val) => {
+  const handleValidation = (val, change, save) => {
     let newInvalid = false;
     let newWarn = false;
+    let updateValidation = false;
+    let invalidText = '';
+    let warnText = '';
 
-    if (val.length === 0) {
-      if (state.onChangeInvalidIfEmpty || state.onSaveInvalidIfEmpty) {
-        newInvalid = true;
-      } else if (state.onChangeWarnIfEmpty || state.onSaveWarnIfEmpty) {
-        newWarn = true;
-      }
-    } else if (/ABC/.test(val)) {
-      if (state.onChangeInvalidWithABC || state.onSaveInvalidWithABC) {
-        newInvalid = true;
-      } else if (state.onChangeWanWithABC || state.onSaveWanWithABC) {
-        newWarn = true;
-      }
+    const zeroLength = val.length === 0;
+    const hasABC = /ABC/.test(val);
+
+    if (
+      (change && validation.onChangeInvalidIfEmpty) ||
+      (save && validation.onSaveInvalidIfEmpty)
+    ) {
+      newInvalid = zeroLength;
+      invalidText = 'This field cannot be empty';
+      updateValidation = true;
+    } else if (
+      (change && validation.onChangeWarnIfEmpty) ||
+      (save && validation.onSaveWarnIfEmpty)
+    ) {
+      newWarn = zeroLength;
+      warnText = 'Empty fields are not good practice';
+      updateValidation = true;
+    } else if (
+      (change && validation.onChangeInvalidWithABC) ||
+      (save && validation.onSaveInvalidWithABC)
+    ) {
+      newInvalid = hasABC;
+      invalidText = 'Cannot contain ABC in the entry';
+      updateValidation = true;
+    } else if (
+      (change && validation.onChangeWanWithABC) ||
+      (save && validation.onSaveWanWithABC)
+    ) {
+      newWarn = hasABC;
+      warnText = 'ABC should not be used in the entry';
+      updateValidation = true;
     }
 
-    if (newInvalid || newWarn) {
+    if (updateValidation) {
+      setLiveInvalid(newInvalid);
+      setLiveInvalidText(invalidText);
+      setLiveWarn(newWarn);
+      setLiveWarnText(warnText);
+    }
+    return updateValidation && (newWarn || newInvalid);
+  };
+
+  const onSave = (val) => {
+    const reject = handleValidation(val, false, true);
+
+    if (reject) {
       actionRejectSave(val);
-      return newInvalid ? false : { warn: true };
     } else {
       setValue(val);
       actionSave(val);
     }
   };
   const onChange = (val) => {
-    let newInvalid = false;
-    let newWarn = false;
+    const reject = handleValidation(val, true, false);
 
-    if (val.length === 0) {
-      if (state.onChangeInvalidIfEmpty) {
-        newInvalid = true;
-      } else if (state.onChangeWarnIfEmpty) {
-        newWarn = true;
-      }
-    } else if (/ABC/.test(val)) {
-      if (state.onChangeInvalidWithABC) {
-        newInvalid = true;
-      } else if (state.onChangeWanWithABC) {
-        newWarn = true;
-      }
-    }
-
-    setTimeout(() => {
-      // timeout to escape this event
-      setIsInvalid(newInvalid);
-      setIsWarn(newWarn);
-    }, 100);
-
-    if (newInvalid || newWarn) {
+    if (reject) {
       actionRejectChange(val);
-      return newInvalid ? false : { warn: true };
     } else {
       actionChange(val);
     }
@@ -176,13 +192,15 @@ const Template = ({
         {...rest}
         {...{
           editDescription,
-          invalid: isInvalid,
+          invalid: liveInvalid,
+          invalidText: liveInvalidText,
           onSave,
           onChange,
           onCancel,
           cancelDescription,
           saveDescription,
-          warn: isWarn,
+          warn: liveWarn,
+          warnText: liveWarnText,
           value,
         }}
       />

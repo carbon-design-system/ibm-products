@@ -1,0 +1,79 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin set-header-borders {
+  border-right: 1px solid $text-03;
+  border-bottom: 1px solid $text-03;
+}
+@mixin set-body-borders {
+  border-right: 1px solid $ui-03;
+  border-bottom: 1px solid $ui-03;
+}
+@mixin data-spreadsheet {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--data-spreadsheet;
+
+  .#{$block-class} {
+    display: inline-block;
+    border-spacing: 0;
+    // border: 1px solid black;
+
+    button.#{$block-class}__td {
+      margin: 0;
+      background-color: transparent;
+    }
+    .#{$block-class}__tr {
+      :last-child {
+        .td {
+          border-bottom: 0;
+        }
+      }
+    }
+
+    .#{$block-class}__th,
+    .#{$block-class}__td {
+      height: 2.25rem; // update to be controlled by cellSize prop later
+      padding: 0 $spacing-03;
+      border: 0;
+      margin: 0;
+      color: $text-01;
+    }
+    .#{$block-class}__th:last-child,
+    .#{$block-class}__td:last-child {
+      border-right: 1px solid $text-03;
+    }
+    .#{$block-class}__th,
+    button.#{$block-class}__td-th {
+      @include set-header-borders();
+
+      background-color: $ui-01;
+      cursor: pointer;
+    }
+    .#{$block-class}__td {
+      @include set-body-borders();
+
+      cursor: cell;
+      text-align: left;
+    }
+    .#{$block-class}__th {
+      @include carbon--type-style('productive-heading-01');
+
+      color: $text-01;
+      text-align: left;
+    }
+  }
+}
+
+@include exports('data-spreadsheet') {
+  @include data-spreadsheet;
+}

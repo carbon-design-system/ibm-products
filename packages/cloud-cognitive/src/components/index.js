@@ -51,3 +51,4 @@ export { EditSidePanel } from './EditSidePanel';
 export { OptionsTile } from './OptionsTile';
 export { CancelableTextEdit } from './CancelableTextEdit';
 export { InlineEdit } from './InlineEdit';
+export { DataSpreadsheet } from './DataSpreadsheet';

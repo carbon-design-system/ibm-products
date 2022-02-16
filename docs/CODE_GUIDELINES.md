@@ -1,312 +1,145 @@
-# Coding standards and conventions
+# Contributing
 
-The following guidelines reflect our common and desired practice for developing
-components. They are intended to be supportive rather than restrictive, and need
-to stay up-to-date, so do raise a question if anything needs changing or is
-unclear.
+Also refer to
+[contributing in Carbon](https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md).
 
-## Organization and files
+## Issues, Ideas and Feedback
 
-- Each component, or group of closely related components, is in its own
-  directory which will normally contain the following files:
-  - _ComponentName_.js &mdash; the main component and any related components.
-    Additional JS files may be used as needed for complex sets of components.
-  - index.js &mdash; exports all public components and entry points for users,
-    often with something like
-    `export { ComponentName } from './ComponentName';`.
-  - _ComponentName_.test.js &mdash; the Jest test cases for the component.
-  - _ComponentName_.stories.js &mdash; the Storybook stories for the component.
-  - \__component-name_.scss &mdash; the SCSS styles used by the component.
-  - \_index.scss &mdash; imports all the public SCSS for users, often with
-    something like `@import './component-name.scss';`.
-  - \_storybook-styles.scss &mdash; SCSS used by the Storybook stories, which
-    may have additional styles used by the stories. Note that this file does NOT
-    need to import any of the component styles, as these are rolled up
-    separately.
-  - _ComponentName_.mdx &mdash; a Storybook docs page for the component.
-- Each component which is to be publicly available (for use by users of the
-  package) also needs the following:
-  - The JS must be exported in /src/components/index.js, with something like
-    `export { ComponentName } from './DirectoryName';`.
-  - The SCSS must be include in /src/components/\_index.scss, with something
-    like `@import './DirectoryName/index';`. When the component has been
-    reviewed for release, it should also be included in
-    /src/components/\_index-released-only.scss in the same way.
-  - Each public component must also be identified in
-    /src/globals/js/package-settings.js with a boolean flag in the `component`
-    section, of the form `ComponentName: false,`. The flag should be true when
-    the component has been reviewed for release, and false otherwise.
-  - If a component is not intended for public use, and is only an internal
-    helper within the package, it should NOT be exported from the index.js,
-    should NOT be included in \_index.scss, and should NOT have a flag in the
-    package-settings.js. Instead, the JS should be imported, and the SCSS
-    included, wherever the component is needed internally.
+Contribution comes in many forms and many of them do not need you to write a line of code.
 
-## Component JavaScript code
+- Have a question, visit our Slack channel and/or ask a question on github https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=type%3A+question+%E2%9D%93&template=question.md&title=
+- Have an issue you'd like resolved then raise an issue https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=type%3A+bug&template=bug-report.md&title=
+- Have a new component, pattern or enhancement request then tell us about it https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&template=component-or-pattern.md
 
-- Components are built using React, and are functional components using hooks.
-- Each source file should include some or all of the following:
-  - Standard copyright header of the form:
-    ```js
-    /**
-     * Copyright IBM Corp. 2020, 2020
-     *
-     * This source code is licensed under the Apache-2.0 license found in the
-     * LICENSE file in the root directory of this source tree.
-     */
-    ```
-    where the two years are the year of first release and the year of latest
-    significant update.
-  - Import portions of React that are needed:
-    ```js
-    import React from 'react';
-    ```
-  - Other standard imports:
-    ```js
-    import PropTypes from 'prop-types';
-    import cx from 'classnames';
-    import { pkg } from '../../settings';
-    ```
-  - Imports of any Carbon-React components or components from elsewhere in this
-    package that the component is dependent on.
-  - The following standard definitions, which will be used elsewhere in the
-    code:
-    ```js
-    const blockClass = `${pkg.prefix}--component-name`;
-    const componentName = 'ComponentName';
-    ```
-  - Note that a component does not need to import its own SCSS: that is rolled
-    up separately.
-  - One or more component definitions will then follow. Related components can
-    be put into separate source files for clarity unless they are very simple.
-- Each public component definition should include the following:
+## Code
 
-  - The following opening logic, using `forwardRef` to pass a supplied ref to an
-    appropriate node, destructuring the props in alphabetical order (for
-    consistency), and using a `let` to enable the use of `checkComponentEnabled`
-    (see below).
-    ```js
-    export let ComponentName = forwardRef(({
-      className,
-      prop1,
-      prop2,
-      ...
-      ...rest
-    }, ref) => {
-    ```
-  - `{...rest}` should be included on the main DOM element to enable HTML
-    attributes to be passed through. It should appear _first_, so that it cannot
-    override HTML attributes that the component itself sets and requires. If any
-    of the HTML attributes should be overridable by client code, it should be
-    made into a prop so the value(s) can be handled and merged as needed.
-  - The `classnames` helper (imported as `cx`) should be used on the main DOM
-    element to combine needed classes and the block class with the `className`
-    prop:
-    ```js
-    <html-element class={cx(
-      blockClass, {
-      // other classes we might need to attach
-      [className]: className  // this handles className omitted/falsy
-    })} ...
-    ```
-  - `ref={ref}` should be included on a suitable DOM element (often the main DOM
-    element) to enable a supplied ref to be passed to an appropriate node.
-  - All significant DOM objects in the returned component markup should have
-    classes set on them to enable users to attach styling. The `blockClass`
-    constant can help with keeping these consistent:
-    ```js
-    <html-element className={`${blockClass}__some-element`} ...
-    ```
-    Class names should follow the Carbon BEM pattern which is
-    ```
-    <prefix>--<component-name>__<element>--<modifier>
-    ```
-    (and of course there may not always be an element and/or modifier, and there
-    may be more than one). The `blockClass` class should always be applied to
-    the root node, along with any variants with modifiers that might apply, and
-    each `${blockClass}__element` class should always be applied to each
-    significant element, along with any variants with modifiers that might
-    apply.
-  - The exported object should be passed through `checkComponentEnabled`, which
-    enables non-released components to be enable through a feature flag
-    mechanism:
-    ```js
-    // Return a placeholder if not released and not enabled by feature flag
-    ComponentName = pkg.checkComponentEnabled(ComponentName, componentName);
-    ```
-  - The exported object should also have set on it:
-    - `.displayName = componentName;`
-    - `.propTypes = {};` using the PropTypes to specify property types, shapes,
-      and required properties, and including DocGen comments to describe the
-      properties for a user.
-    - `.defaultProps = {};` providing default values for properties that need
-      them. Required props should NOT be given default values. Any property that
-      is not required but which the component needs to make an assumed value for
-      should be given a suitable default. Properties that can be left unset do
-      NOT need default values if the component simply tests for and copes with
-      the value being `undefined`. This includes any property that will be
-      passed directly to a nested component or HTML element in the JSX, because
-      React treats `undefined` as not setting the property/attribute.
+There's only so many hours in a day, so we welcome contributions of code. Find an issue, or raise one, and follow the guide below. https://github.com/carbon-design-system/ibm-cloud-cognitive/issues
 
-- Ensure all code is neatly formatted (use `yarn format` and/or a prettier
-  plugin for an editor to follow the prettier rules set up in the project), and
-  that code is clear, maintainable and follows standard React practices and the
-  [contributing guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md).
 
-## Component SCSS code
+### 1. Fork the repo
 
-- Each source file should include the following:
+Go to the
+[Carbon for IBM Products repository on GitHub](https://github.com/carbon-design-system/ibm-cloud-cognitive)
+and [fork the repo](https://help.github.com/articles/fork-a-repo/),
+[syncing with the original repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced).
 
-  - Standard copyright header of the form:
-    ```scss
-    //
-    // Copyright IBM Corp. FULL_YEAR, FULL_YEAR
-    //
-    // This source code is licensed under the Apache-2.0 license found in the
-    // LICENSE file in the root directory of this source tree.
-    //
-    ```
-    where the two years are the year of first release and the year of latest
-    significant update.
-  - Standard imports:
-    ```scss
-    @import '@carbon/import-once/scss/import-once';
-    @import '../../global/styles/carbon-settings';
-    @import '../../global/styles/project-settings';
-    ```
-  - Imports of styles for any Carbon components or settings or components from
-    elsewhere in this package that the component is dependent on.
-  - The following mixin, which should then contain all the style definitions.
-    This is in order to enable the Carbon import-once mechanism.
+### 2. Work in a branch
 
-    ```scss
-    // Define all component styles in a mixin which is then exported using
-    // the Carbon import-once mechanism.
-    @mixin component-name {
-      $block-class: #{$pkg-prefix}--component-name;
+When contributing to Carbon for IBM Products, your work should always be done in
+a
+[branch off your fork](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-and-deleting-branches-within-your-repository).
 
-      // styles here
-    }
+### 3. Start the development server
 
-    @include exports('component-name') {
-      @include component-name;
-    }
-    ```
+1. To install the project's dependencies, from the root directory of your fork,
+   run `yarn --offline`
+2. To scaffold a new component or pattern, run `yarn generate ComponentName`,
+   where `ComponentName` is the name of the component or pattern
+3. To get your development server running and to start coding, run
+   `yarn storybook`
 
-- Do not use nesting of SCSS.
-- Style directives should use Carbon tokens (theme, layout, motion) are used
-  unless the design specifies otherwise.
-- Begin all selectors with the block class. This helps with specificity, and
-  also helps prevent style 'leakage' to other parts of the page they were not
-  intended to apply to.
-- Ensure all selectors have sufficient specificity to override Carbon styles
-  whether Carbon is loaded before _or after_ the component styles. To test this
-  using Storybook, add a line to `_storybook-styles.scss` for the component,
-  loading Carbon after all other styles, and verify that the styles being
-  applied in the stories are still as expected:
-  ```scss
-  //@import 'carbon-components/css/carbon-components.min';
-  ```
+This will start a development server where you can see any changes you are
+making to components in our Storybook.
 
-## Test cases
+The command to start the server will differ depending on which package you are
+working within. To find out which command you'll need to run, you can check the
+`scripts` property in the package's `package.json`.
 
-- There should be a set of test cases for all components, contained in a file
-  called _ComponentName_.test.js (additional test files may also be used
-  providing they all have names that end with .test.js).
-- Tests are run using `yarn test` for the full test set, and can be filtered to
-  a single component using `yarn test ComponentName`.
-- Use `describe` for test suites and `it` for individual tests, naming each test
-  with a simple predicate (_e.g._ `it('renders a title', ()=>...);`).
-- Use `screen` to explore the rendered content where possible, and use queries
-  that rely on visible aspects (eg text, accessibility roles, labels, _etc_)
-  where possible. Some tests will need to rely on non-visible aspects (_e.g._
-  classes on elements), but only do this when necessary.
-- Use `expect` to assert outcomes (_e.g._ `expect(...).not.toBeNull();`), but
-  note that many of the `screen` queries already include useful assertions: for
-  example, to check that there is a button labelled 'Press me' it suffices to
-  use `screen.getByRole('button', { name: 'Press me' });`, and this does not
-  need to be further enclosed in `expect(...).not.toBeNull();` which would be
-  redundant.
-- A useful approach is to prepare prop values including a random component, for
-  example by using the `uuidv4()` utility function, which can then be reliably
-  searched for in the rendered output.
-- The tests should include all of the following:
-  - A basic test that a component is rendered. Something like:
-    ```jsx
-    it('renders a component ComponentName', () => {
-      render(<ComponentName />);
-      expect(screen.getByRole('main')).toHaveClass(blockClass);
-    });
-    ```
-  - Standard accessibility tests:
-    ```jsx
-    it('has no accessibility violations', async () => {
-      const { container } = render(<ComponentName />);
-      await expect(container).toBeAccessible(componentName);
-      await expect(container).toHaveNoAxeViolations();
-    });
-    ```
-  - A test that `className` is correctly handled. Something like:
-    ```jsx
-    const className = `class-${uuidv4()}`;
-    it('applies className to the containing node', () => {
-      render(<ComponentName className={className} />);
-      expect(screen.getByRole('main')).toHaveClass(className);
-    });
-    ```
-  - A test for each input (props, slots, _etc_), verifying appropriate outputs.
-  - A test to validate each the behaviors and actions as far as is practical.
-  - A test that additional HTML attributes are passed through to an appropriate
-    node. Something like:
-    ```jsx
-    const dataTestId = uuidv4();
-    it('adds additional properties to the containing node', () => {
-      render(<ComponentName data-testid={dataTestId} />);
-      screen.getByTestId(dataTestId);
-    });
-    ```
-  - A test that a supplied ref is forwarded to an appropriate node. Something
-    like:
-    ```jsx
-    it('forwards a ref to an appropriate node', () => {
-      const ref = React.createRef();
-      render(<ComponentName ref={ref} />);
-      expect(ref.current).toEqual(screen.getByRole('main'));
-    });
-    ```
-- The tests should aim to achieve 100% coverage (use
-  `yarn test ComponentName --coverage`). Specific pieces of code that cannot
-  practically be reached can be marked with `istanbul ignore` tags, but these
-  should be used sparingly and only where appropriate.
-- Test cases should not emit warnings, errors or log messages. If the test needs
-  to include something that causes a console log, use the appropriate Jest
-  mechanisms for catching this.
+Once it's done building, you can edit source code or create new components. The
+system is set up to automatically bundle your additions / changes. Visit
+[`http://localhost:3000`](http://localhost:3000) to see the changes happen on
+the fly.
 
-## Stories
+#### What is this Canary thing?
 
-- There should be a set of stories to cover the design scenarios. Note that
-  there does not necessarily need to be a separate story for each scenario,
-  providing each scenario can be experienced using the stories provided.
-- The stories should expose all relevant props in the controls panel. In
-  particular:
-  - Ensure that prop-types and DocGen comment appear in the component source
-    files, in order to fully and usefully populate the storybook controls panel
-    and the props table on the documentation page.
-  - Props that can be directly edited (strings, numbers, colors, etc) should
-    have appropriate controls, which may mean overriding the default control
-    types where necessary.
-  - Props that cannot be directly edited, such as props that take arrays or
-    object structures or DOM fragments incorporating specific assets, should be
-    given useful options, for example by using a 'select' control type with a
-    selection of relevant choices (including 'none').
-  - Some props may require some extra controls to be included in the story in
-    order to illustrate them correctly, in which case they should be disabled in
-    the controls panel so as not to make conflicting changes.
-  - Props that cannot usefully be modified in the story context (for example,
-    handlers) should be disabled in the controls panel.
-- The stories should also expose all relevant actions and behaviors. This may
-  require adding some extra controls to the stories, and coding some handlers
-  and simple actions. Reproducing a full use case isn't necessary, especially
-  where it becomes intricate or complicated.
-- Additional usage documentation and code samples should be made available on
-  the 'Docs' tab along with the props table.
+In case you were thinking what, why or how with regards to the Canary lines in
+the components...
+
+They were added to enable component feature flags, that is the enabling of
+components through user settings.
+
+This allowed the removal of the term/package `experimental` and permitted the
+publication of all components in a single package. Those that have not yet
+completed the release review process are considered to be `canary` and require
+the consumer to enable via a feature flag.
+
+See example component enabled via feature flags on
+[codesandbox](https://codesandbox.io/s/example-component-canary-olif5).
+
+For more information on how this affects components see
+[CANARY_STRUCTURE.md](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/docs/guides/CANARY_STRUCTURE.md).
+
+### 4. Test your JavaScript code
+
+If you're contributing to our JavaScript code, test your changes by running
+`yarn test`.
+
+New tests are written in
+[React Testing Library](https://testing-library.com/docs/react-testing-library/intro),
+with [Enzyme](https://enzymejs.github.io/enzyme) available for migration
+compatibility, and follow the
+[User Experience Standards Adopter Guide](https://github.ibm.com/IBMPrivateCloud/BedrockServices/blob/master/AdopterGuides/CommonUXStandardsAdoptionGuide.md#testing).
+
+### 5. Make a pull request
+
+**Note:** Before you make a pull request,
+[search the issues](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues)
+to see if a similar issue has already been submitted. If a similar issue has
+been submitted, assign yourself or ask to be assigned to the issue by posting a
+comment. If the issue does not exist, please make a new issue.
+
+**Note 2:** If you are submitting a new component or pattern there are some additional steps we'd like you to take. In brief, use the `New component or pattern` issue template. The new issue should be an epic.
+
+Refer to
+[contributing in Carbon](https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md#what-is-the-contribution-process)
+for some contribution quick tips.
+
+According to a
+[SmartBear study of a Cisco Systems programming team](https://smartbear.com/learn/code-review/best-practices-for-peer-code-review),
+an effective pull request should not have more than 400 lines of code changed,
+so do not create one massive PR if it can be
+[scoped down into smaller, focused PRs of independent behaviors and functionality](https://www.netlify.com/blog/2020/03/31/how-to-scope-down-prs/).
+
+When you're at a good stopping place and you're ready for feedback from other
+contributors and maintainers,
+[commit](https://docs.github.com/en/github/managing-files-in-a-repository/adding-a-file-to-a-repository-using-the-command-line),
+[push to your fork](https://docs.github.com/en/github/using-git/pushing-commits-to-a-remote-repository),
+and
+[create a pull request](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork).
+
+See [Conventional Commits](https://www.conventionalcommits.org) for more
+information about how to write your commit message.
+
+Also refer to
+[How to write the perfect pull request](https://github.blog/2015-01-21-how-to-write-the-perfect-pull-request).
+
+### 6. Updating a pull request
+
+Stay up to date with the activity in your pull request. Maintainers will be
+reviewing your work and making comments, asking questions, and suggesting
+changes to be made before they merge your code.
+
+When you need to make a change, use the same method detailed above.
+
+Once all revisions to your pull request are complete, a maintainer will squash
+and merge your commits for you.
+
+### 7. New production dependencies
+
+If you introduce a new dependency to package.json then there will be some
+additional work to do.
+
+- [ ] Verify the dependency has previously been
+      [pedigree reviewed](https://pedigree-service.wdc1a.cirrus.ibm.com)
+- [ ] Verify the dependency
+      [doesn't contain any vulnerabilities](https://snyk.io/vuln)
+- [ ] Verify the dependency [bundle size](https://bundlephobia.com) is
+      acceptable
+- [ ] Verify the dependency is [actively maintained](https://www.npmtrends.com)
+
+### 8. New component or pattern
+
+If you started out to create a new component or pattern there are two additional tasks before your component can reach released state.
+
+- [ ] See our design review guidelines <https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/docs/reviews/DESIGN_REVIEW_GUIDELINES.md and then create a new issue based on `design-review` template. <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&design-review.md> and complete the steps suggested.
+- [ ] See our release guidelines <https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/docs/reviews/RELEASE_REVIEW_GUIDELINES.md> and then create a new issue based on `design-review` template. <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&design-review.md>

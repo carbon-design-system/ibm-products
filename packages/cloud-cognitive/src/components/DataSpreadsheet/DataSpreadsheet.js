@@ -24,12 +24,30 @@ import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 const componentName = 'DataSpreadsheet';
 
+// Default values for props
+const defaults = {
+  cellSize: 'standard',
+  columns: Object.freeze([]),
+  data: Object.freeze([]),
+};
+
 /**
  * DataSpreadsheet: used to organize and display large amounts of structured data, separated by columns and rows in a grid-like format.
  */
 export let DataSpreadsheet = React.forwardRef(
   (
-    { cellSize, className, columns, data, id, onActiveCellChange, ...rest },
+    {
+      // The component props, in alphabetical order (for consistency).
+      cellSize = defaults.cellSize,
+      className,
+      columns = defaults.columns,
+      data = defaults.data,
+      id,
+      onActiveCellChange,
+
+      // Collect any other property values passed in.
+      ...rest
+    },
     ref
   ) => {
     const cellSizeValue = getCellSize(cellSize);
@@ -169,14 +187,4 @@ DataSpreadsheet.propTypes = {
   onActiveCellChange: PropTypes.func,
 
   /* TODO: add types and DocGen for all props. */
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-DataSpreadsheet.defaultProps = {
-  data: [],
-  columns: [],
-  cellSize: 'standard',
 };

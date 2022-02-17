@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FixedSizeList } from 'react-window';
 import cx from 'classnames';
@@ -23,6 +23,18 @@ export const DataSpreadsheetBody = ({
   scrollBarSize,
   totalColumnsWidth,
 }) => {
+  // Make sure that if the cellSize prop changes, the active
+  // cell also gets updated with the new size
+  useEffect(() => {
+    const listContainer = spreadsheetBodyRef?.current;
+    const activeCellButton = listContainer.querySelector(
+      `.${blockClass}__active-cell--highlight`
+    );
+    if (activeCellButton) {
+      activeCellButton.style.height = `${defaultColumn?.rowHeight}px`;
+    }
+  }, [defaultColumn?.rowHeight]);
+
   // onClick fn for each cell in the data spreadsheet body,
   // adds the active cell highlight
   const handleBodyCellClick = useCallback(

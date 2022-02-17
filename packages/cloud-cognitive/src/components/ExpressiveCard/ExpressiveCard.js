@@ -123,13 +123,4 @@ ExpressiveCard.propTypes = {
   title: PropTypes.string,
 };
 
-ExpressiveCard.defaultProps = {
-  actionIcons: [],
-  actionIconsPosition: 'bottom',
-  mediaPosition: 'top',
-  overflowActions: [],
-  primaryButtonKind: 'primary',
-  secondaryButtonKind: 'secondary',
-};
-
 ExpressiveCard.displayName = componentName;

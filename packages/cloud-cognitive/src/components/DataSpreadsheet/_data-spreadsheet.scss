@@ -26,7 +26,6 @@
   .#{$block-class} {
     display: inline-block;
     border-spacing: 0;
-    // border: 1px solid black;
 
     button.#{$block-class}__td {
       margin: 0;
@@ -34,7 +33,7 @@
     }
     .#{$block-class}__tr {
       :last-child {
-        .td {
+        .#{$block-class}__td {
           border-bottom: 0;
         }
       }
@@ -42,7 +41,7 @@
 
     .#{$block-class}__th,
     .#{$block-class}__td {
-      height: 2.25rem; // update to be controlled by cellSize prop later
+      // height: 2.25rem; // update to be controlled by cellSize prop later
       padding: 0 $spacing-03;
       border: 0;
       margin: 0;
@@ -59,6 +58,11 @@
       background-color: $ui-01;
       cursor: pointer;
     }
+    .#{$block-class}__td-th {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
     .#{$block-class}__td {
       @include set-body-borders();
 
@@ -70,6 +74,11 @@
 
       color: $text-01;
       text-align: left;
+    }
+    .#{$block-class}__active-cell--highlight {
+      position: absolute;
+      border: $spacing-01 solid $interactive-01;
+      background-color: transparent;
     }
   }
 }

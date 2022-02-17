@@ -53,10 +53,6 @@ ToolbarButton.propTypes = {
   className: string,
 };
 
-ToolbarButton.defaultProps = {
-  caret: false,
-};
-
 ToolbarButton = pkg.checkComponentEnabled(ToolbarButton, componentName);
 
 export { blockClass, ToolbarButton };

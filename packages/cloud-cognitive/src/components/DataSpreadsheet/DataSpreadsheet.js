@@ -6,33 +6,58 @@
  */
 
 // Import portions of React that are needed.
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useEffect } from 'react';
 import { useBlockLayout, useTable } from 'react-table';
-import { FixedSizeList } from 'react-window';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
+import { pkg } from '../../settings';
 import { getScrollbarWidth } from '../../global/js/utils/getScrollbarWidth';
+import { DataSpreadsheetBody } from './DataSpreadsheetBody';
+import { getCellSize } from './getCellSize';
+import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 const componentName = 'DataSpreadsheet';
 
+// Default values for props
+const defaults = {
+  cellSize: 'standard',
+  columns: Object.freeze([]),
+  data: Object.freeze([]),
+};
+
 /**
  * DataSpreadsheet: used to organize and display large amounts of structured data, separated by columns and rows in a grid-like format.
  */
 export let DataSpreadsheet = React.forwardRef(
-  ({ className, columns, data, ...rest }, ref) => {
+  (
+    {
+      // The component props, in alphabetical order (for consistency).
+      cellSize = defaults.cellSize,
+      className,
+      columns = defaults.columns,
+      data = defaults.data,
+      id,
+      onActiveCellChange,
+
+      // Collect any other property values passed in.
+      ...rest
+    },
+    ref
+  ) => {
+    const cellSizeValue = getCellSize(cellSize);
     const defaultColumn = useMemo(
       () => ({
         width: 150,
         rowHeaderWidth: 64,
+        rowHeight: cellSizeValue,
       }),
-      []
+      [cellSizeValue]
     );
 
     const scrollBarSize = useMemo(() => getScrollbarWidth(), []);
@@ -53,99 +78,62 @@ export let DataSpreadsheet = React.forwardRef(
       useBlockLayout
     );
 
-    const RenderRow = React.useCallback(
-      ({ index, style }) => {
-        const row = rows[index];
-        prepareRow(row);
-        return (
-          <div
-            {...row.getRowProps({ style })}
-            className="tr"
-            data-row-index={index}
-          >
-            {/* ROW HEADER BUTTON */}
-            <button
-              type="button"
-              className={cx(`${blockClass}__td`, `${blockClass}__td-th`)}
-              style={{
-                width: defaultColumn?.rowHeaderWidth,
-                display: 'flex',
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-              }}
-            >
-              {index + 1}
-            </button>
-            {/* CELL BUTTONS */}
-            {row.cells.map((cell, index) => (
-              <button
-                key={`cell_${index}`}
-                {...cell.getCellProps()}
-                type="button"
-                className={`${blockClass}__td`}
-              >
-                {cell.render('Cell')}
-              </button>
-            ))}
-          </div>
+    // Click outside useEffect
+    // Removes the active cell highlight element
+    useEffect(() => {
+      const handleOutsideClick = (event) => {
+        if (
+          !spreadsheetRef.current ||
+          spreadsheetRef.current.contains(event.target) ||
+          event.target.classList.contains(
+            `${blockClass}__active-cell--highlight`
+          )
+        ) {
+          return;
+        }
+        const activeCellHighlight = spreadsheetRef.current.querySelector(
+          `.${blockClass}__active-cell--highlight`
         );
-      },
-      [prepareRow, rows, defaultColumn.rowHeaderWidth]
-    );
+        if (activeCellHighlight) {
+          activeCellHighlight.remove();
+        }
+      };
+      document.addEventListener('click', handleOutsideClick);
+      return () => {
+        document.removeEventListener('click', handleOutsideClick);
+      };
+    }, [spreadsheetRef]);
 
+    const localRef = useRef();
+    const spreadsheetRef = ref || localRef;
     return (
       <div
         {...rest}
         {...getTableProps()}
         {...getDevtoolsProps(componentName)}
         className={cx(blockClass, className)}
-        ref={ref}
+        ref={spreadsheetRef}
         role="grid"
       >
         {/* HEADER */}
-        <div>
-          {headerGroups.map((headerGroup, index) => (
-            <div
-              key={`header_${index}`}
-              {...headerGroup.getHeaderGroupProps()}
-              className={`${blockClass}__tr`}
-            >
-              {/* SELECT ALL BUTTON */}
-              <button
-                type="button"
-                className={`${blockClass}__th`}
-                style={{
-                  width: defaultColumn?.rowHeaderWidth,
-                }}
-              >
-                &nbsp;
-              </button>
-              {/* COLUMN HEADER BUTTONS */}
-              {headerGroup.headers.map((column, index) => (
-                <button
-                  key={`column_${index}`}
-                  {...column.getHeaderProps()}
-                  type="button"
-                  className={`${blockClass}__th`}
-                >
-                  {column.render('Header')}
-                </button>
-              ))}
-            </div>
-          ))}
-        </div>
+        <DataSpreadsheetHeader
+          cellSizeValue={cellSizeValue}
+          defaultColumn={defaultColumn}
+          headerGroups={headerGroups}
+        />
 
         {/* BODY */}
-        <div {...getTableBodyProps()}>
-          <FixedSizeList
-            height={400}
-            itemCount={rows.length}
-            itemSize={36}
-            width={totalColumnsWidth + scrollBarSize}
-          >
-            {RenderRow}
-          </FixedSizeList>
-        </div>
+        <DataSpreadsheetBody
+          cellSize={cellSize}
+          defaultColumn={defaultColumn}
+          getTableBodyProps={getTableBodyProps}
+          onActiveCellChange={onActiveCellChange}
+          prepareRow={prepareRow}
+          rows={rows}
+          scrollBarSize={scrollBarSize}
+          totalColumnsWidth={totalColumnsWidth}
+          id={id}
+        />
       </div>
     );
   }
@@ -162,6 +150,11 @@ DataSpreadsheet.displayName = componentName;
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 DataSpreadsheet.propTypes = {
+  /**
+   * Specifies the cell height
+   */
+  cellSize: PropTypes.oneOf(['compact', 'standard', 'medium', 'large']),
+
   /**
    * Provide an optional class to be applied to the containing node.
    */
@@ -183,14 +176,15 @@ DataSpreadsheet.propTypes = {
    */
   data: PropTypes.arrayOf(PropTypes.shape),
 
-  /* TODO: add types and DocGen for all props. */
-};
+  /**
+   * The spreadsheet id
+   */
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-DataSpreadsheet.defaultProps = {
-  data: [],
-  columns: [],
+  /**
+   * The event handler that is called when the active cell changes
+   */
+  onActiveCellChange: PropTypes.func,
+
+  /* TODO: add types and DocGen for all props. */
 };

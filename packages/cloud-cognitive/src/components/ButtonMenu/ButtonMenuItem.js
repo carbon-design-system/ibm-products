@@ -30,5 +30,3 @@ export let ButtonMenuItem = React.forwardRef((props, ref) => (
 ButtonMenuItem = pkg.checkComponentEnabled(ButtonMenuItem, componentName);
 
 ButtonMenuItem.propTypes = OverflowMenuItem.propTypes;
-
-ButtonMenuItem.defaultProps = OverflowMenuItem.defaultProps;

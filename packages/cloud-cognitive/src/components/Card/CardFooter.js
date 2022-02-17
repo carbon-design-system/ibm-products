@@ -13,7 +13,7 @@ import { pkg } from '../../settings';
 const componentName = 'CardFooter';
 
 const defaults = {
-  actions: [],
+  actions: Object.freeze([]),
   primaryButtonKind: 'primary',
   productive: false,
   secondaryButtonKind: 'secondary',

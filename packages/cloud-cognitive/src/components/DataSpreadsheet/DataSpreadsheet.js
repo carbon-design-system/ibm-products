@@ -22,11 +22,29 @@ import { getScrollbarWidth } from '../../global/js/utils/getScrollbarWidth';
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 const componentName = 'DataSpreadsheet';
 
+// Default values for props
+const defaults = {
+  data: Object.freeze([]),
+  columns: Object.freeze([]),
+};
+
 /**
  * DataSpreadsheet: used to organize and display large amounts of structured data, separated by columns and rows in a grid-like format.
  */
 export let DataSpreadsheet = React.forwardRef(
-  ({ className, columns, data, ...rest }, ref) => {
+  (
+    {
+      // The component props, in alphabetical order (for consistency).
+
+      className,
+      columns = defaults.columns,
+      data = defaults.data,
+
+      // Collect any other property values passed in.
+      ...rest
+    },
+    ref
+  ) => {
     const defaultColumn = useMemo(
       () => ({
         width: 150,
@@ -184,13 +202,4 @@ DataSpreadsheet.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape),
 
   /* TODO: add types and DocGen for all props. */
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-DataSpreadsheet.defaultProps = {
-  data: [],
-  columns: [],
 };

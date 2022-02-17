@@ -27,8 +27,8 @@ const blockClass = `${pkg.prefix}--web-terminal`;
 
 // Default values for props
 const defaults = {
-  actions: [],
-  documentationLinks: [],
+  actions: Object.freeze([]),
+  documentationLinks: Object.freeze([]),
   documentationLinksIconDescription: 'Show documentation links',
 };
 

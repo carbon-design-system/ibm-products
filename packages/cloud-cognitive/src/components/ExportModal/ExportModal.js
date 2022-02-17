@@ -32,8 +32,8 @@ const componentName = 'ExportModal';
 // Default values for props
 const defaults = {
   inputType: 'text',
-  preformattedExtensions: [],
-  validExtensions: [],
+  preformattedExtensions: Object.freeze([]),
+  validExtensions: Object.freeze([]),
 };
 
 export let ExportModal = forwardRef(

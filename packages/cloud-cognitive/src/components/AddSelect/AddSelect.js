@@ -19,7 +19,7 @@ const componentName = 'AddSelect';
 
 // Default values for props
 const defaults = {
-  items: [],
+  items: Object.freeze([]),
 };
 
 export let AddSelect = forwardRef(

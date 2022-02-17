@@ -20,11 +20,11 @@ const componentName = 'Card';
 
 // Default values for props
 const defaults = {
-  actionIcons: [],
+  actionIcons: Object.freeze([]),
   actionsPlacement: 'bottom',
   clickZone: 'one',
   mediaPosition: 'top',
-  overflowActions: [],
+  overflowActions: Object.freeze([]),
   primaryButtonKind: 'primary',
   productive: false,
   secondaryButtonKind: 'secondary',

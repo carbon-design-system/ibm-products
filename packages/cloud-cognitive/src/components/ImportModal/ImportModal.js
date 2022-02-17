@@ -27,7 +27,7 @@ const componentName = 'ImportModal';
 
 // Default values for props
 const defaults = {
-  accept: [],
+  accept: Object.freeze([]),
 };
 
 export let ImportModal = forwardRef(

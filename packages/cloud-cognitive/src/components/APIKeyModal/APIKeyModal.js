@@ -36,7 +36,7 @@ const componentName = 'APIKeyModal';
 // Default values for props
 const defaults = {
   apiKeyName: '',
-  customSteps: [],
+  customSteps: Object.freeze([]),
 };
 
 export let APIKeyModal = forwardRef(

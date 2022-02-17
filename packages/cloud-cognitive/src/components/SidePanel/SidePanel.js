@@ -853,7 +853,7 @@ SidePanel.propTypes = {
   /**
    * Sets the close button icon description
    */
-  closeIconDescription: PropTypes.string.isRequired,
+  closeIconDescription: PropTypes.string,
 
   /**
    * Determines whether the side panel should render the condensed version (affects action buttons primarily)

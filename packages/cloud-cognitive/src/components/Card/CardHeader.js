@@ -11,13 +11,18 @@ import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
 const componentName = 'CardHeader';
 
+const defaults = {
+  hasActions: false,
+  titleSize: 'default',
+};
+
 export let CardHeader = ({
   actions,
   description,
-  hasActions,
+  hasActions = defaults.hasActions,
   label,
   title,
-  titleSize,
+  titleSize = defaults.titleSize,
 }) => {
   const blockClass = `${pkg.prefix}--card`;
   const headerClass = `${blockClass}__header`;
@@ -56,11 +61,6 @@ CardHeader.propTypes = {
   label: PropTypes.string,
   title: PropTypes.string,
   titleSize: PropTypes.oneOf(['default', 'large']),
-};
-
-CardHeader.defaultProps = {
-  hasActions: false,
-  titleSize: 'default',
 };
 
 CardHeader.displayName = componentName;

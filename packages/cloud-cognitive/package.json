@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -75,15 +75,15 @@
     "react-window": "^1.8.6"
   },
   "peerDependencies": {
-    "@carbon/colors": "^10.35.0",
-    "@carbon/icons-react": "^10.45.0",
+    "@carbon/colors": "^10.36.0",
+    "@carbon/icons-react": "^10.46.0",
     "@carbon/import-once": "^10.5.0",
-    "@carbon/layout": "^10.35.0",
-    "@carbon/motion": "^10.27.0",
+    "@carbon/layout": "^10.36.0",
+    "@carbon/motion": "^10.28.0",
     "@carbon/themes": "^10.50.0",
     "@carbon/type": "^10.40.0",
-    "carbon-components": "^10.52.0",
-    "carbon-components-react": "^7.52.0",
+    "carbon-components": "^10.53.0",
+    "carbon-components-react": "^7.53.0",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"

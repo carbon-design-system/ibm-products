@@ -18,35 +18,52 @@ import { CardFooter } from './CardFooter';
 import { pkg } from '../../settings';
 const componentName = 'Card';
 
+// Default values for props
+const defaults = {
+  actionIcons: Object.freeze([]),
+  actionsPlacement: 'bottom',
+  clickZone: 'one',
+  mediaPosition: 'top',
+  overflowActions: Object.freeze([]),
+  primaryButtonKind: 'primary',
+  productive: false,
+  secondaryButtonKind: 'secondary',
+  titleSize: 'default',
+};
+
 export let Card = forwardRef(
   (
     {
-      actionIcons,
-      actionsPlacement,
+      // The component props, in alphabetical order (for consistency).
+
+      actionIcons = defaults.actionIcons,
+      actionsPlacement = defaults.actionsPlacement,
       children,
       className,
-      clickZone,
+      clickZone = defaults.clickZone,
       description,
       label,
       media,
-      mediaPosition,
+      mediaPosition = defaults.mediaPosition,
       onClick,
       onKeyDown,
       onPrimaryButtonClick,
-      overflowActions,
+      overflowActions = defaults.overflowActions,
       onSecondaryButtonClick,
       pictogram: Pictogram,
       primaryButtonHref,
       primaryButtonIcon,
-      primaryButtonKind,
+      primaryButtonKind = defaults.primaryButtonKind,
       primaryButtonText,
-      productive,
+      productive = defaults.productive,
       secondaryButtonHref,
       secondaryButtonIcon,
-      secondaryButtonKind,
+      secondaryButtonKind = defaults.secondaryButtonKind,
       secondaryButtonText,
       title,
-      titleSize,
+      titleSize = defaults.titleSize,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -271,18 +288,6 @@ Card.propTypes = {
   secondaryButtonText: PropTypes.string,
   title: PropTypes.string,
   titleSize: PropTypes.oneOf(['default', 'large']),
-};
-
-Card.defaultProps = {
-  actionIcons: [],
-  actionsPlacement: 'bottom',
-  clickZone: 'one',
-  mediaPosition: 'top',
-  overflowActions: [],
-  primaryButtonKind: 'primary',
-  productive: false,
-  secondaryButtonKind: 'secondary',
-  titleSize: 'default',
 };
 
 Card.displayName = componentName;

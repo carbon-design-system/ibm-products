@@ -32,6 +32,11 @@ const blockClass = `${pkg.prefix}--inline-edit`;
 const componentName = 'InlineEdit';
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+const defaults = {
+  light: true, // defaults to true to reflect design
+  size: 'md',
+};
+
 /**
  * TODO: A description of the component.
  */
@@ -39,6 +44,7 @@ export let InlineEdit = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
+
       cancelDescription,
       className,
       disabled,
@@ -48,19 +54,19 @@ export let InlineEdit = React.forwardRef(
       invalid,
       invalidText,
       labelText,
-      light,
+      light = defaults.light,
       onCancel,
       onSave,
       onChange,
       placeholder,
       saveDescription,
-      size,
+      size = defaults.size,
       value,
       warn,
       warnText,
       // validator,
       // validatorAsync,
-      /* TODO: add other props for InlineEdit */
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -435,13 +441,4 @@ InlineEdit.propTypes = {
    * text shown when warn true
    */
   warnText: PropTypes.string,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-InlineEdit.defaultProps = {
-  light: true, // defaults to true to reflect design
-  size: 'md',
 };

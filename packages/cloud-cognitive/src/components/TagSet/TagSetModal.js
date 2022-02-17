@@ -22,14 +22,25 @@ import { prepareProps } from '../../global/js/utils/props-helper';
 const componentName = 'TagSetModal';
 const blockClass = `${pkg.prefix}--tag-set-modal`;
 
+// Default values for props
+const defaults = {
+  // marked as required by TagSet if needed, default used to satisfy <Search /> component
+  searchLabel: '',
+};
+
 export const TagSetModal = ({
+  // The component props, in alphabetical order (for consistency).
+
   allTags,
   className,
   title,
   onClose,
   open,
-  searchLabel,
+  searchLabel = defaults.searchLabel,
   searchPlaceholder,
+
+  // Collect any other property values passed in.
+  ...rest
 }) => {
   const [filteredModalTags, setFilteredModalTags] = useState([]);
   const [search, setSearch] = useState('');
@@ -65,6 +76,10 @@ export const TagSetModal = ({
 
   return (
     <ComposedModal
+      {
+        // Pass through any other property values as HTML attributes.
+        ...rest
+      }
       containerClassName={`${blockClass}__container`}
       className={cx(className, `${blockClass}`)}
       size="sm"
@@ -105,11 +120,6 @@ TagSetModal.propTypes = {
   searchLabel: PropTypes.string,
   searchPlaceholder: PropTypes.string,
   title: PropTypes.string,
-};
-
-TagSetModal.defaultProps = {
-  // marked as required by TagSet if needed, default used to satisfy <Search /> component
-  searchLabel: '',
 };
 
 TagSetModal.displayName = componentName;

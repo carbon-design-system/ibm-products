@@ -22,6 +22,11 @@ const componentName = 'ButtonMenu';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+// Default values for props
+const defaults = {
+  size: 'default',
+};
+
 /**
  * Combining a standard button with an overflow menu, this component appears
  * as a button and has all the usual carbon Button props and rendering, but
@@ -33,13 +38,15 @@ export let ButtonMenu = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
+
       children,
       className,
       iconDescription,
       label,
       menuOptionsClass,
       renderIcon: Icon,
-      size,
+      size = defaults.size,
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -130,8 +137,4 @@ ButtonMenu.propTypes = {
    * value for the carbon Button component 'size' prop.
    */
   size: Button.propTypes.size,
-};
-
-ButtonMenu.defaultProps = {
-  size: 'default',
 };

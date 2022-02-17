@@ -42,6 +42,8 @@ const isValidChildren =
 export let CreateModal = React.forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       className,
       children,
       onRequestClose,
@@ -54,6 +56,8 @@ export let CreateModal = React.forwardRef(
       primaryButtonText,
       disableSubmit,
       selectorPrimaryFocus,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -158,6 +162,3 @@ CreateModal.propTypes = {
 };
 
 CreateModal.displayName = componentName;
-CreateModal.defaultProps = {
-  disableSubmit: false,
-};

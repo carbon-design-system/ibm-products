@@ -15,8 +15,24 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 const blockClass = `${pkg.prefix}--cascade`;
 const componentName = 'Cascade';
 
+const defaults = {
+  grid: false,
+};
+
 export let Cascade = forwardRef(
-  ({ children, className, grid, ...rest }, ref) => {
+  (
+    {
+      // The component props, in alphabetical order (for consistency).
+
+      children,
+      className,
+      grid = defaults.grid,
+
+      // Collect any other property values passed in.
+      ...rest
+    },
+    ref
+  ) => {
     const props = {
       ...rest,
       className: cx(blockClass, className),
@@ -75,8 +91,4 @@ Cascade.propTypes = {
    * Check the documentation for additional clarification.
    */
   grid: PropTypes.bool,
-};
-
-Cascade.defaultProps = {
-  grid: false,
 };

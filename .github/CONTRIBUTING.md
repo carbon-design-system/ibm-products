@@ -5,15 +5,21 @@ Also refer to
 
 ## Issues, Ideas and Feedback
 
-Contribution comes in many forms and many of them do not need you to write a line of code.
+Contribution comes in many forms and many of them do not need you to write a
+line of code.
 
-- Have a question, visit our Slack channel and/or ask a question on github <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=type%3A+question+%E2%9D%93&template=question.md&title>=
-- Have an issue you'd like resolved then raise an issue <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=type%3A+bug&template=bug-report.md&title>=
-- Have a new component, pattern or enhancement request then tell us about it <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&template=component-or-pattern.md>
+- Have a question, visit our Slack channel and/or ask a question on github
+  <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=type%3A+question+%E2%9D%93&template=question.md&title>=
+- Have an issue you'd like resolved then raise an issue
+  <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=type%3A+bug&template=bug-report.md&title>=
+- Have a new component, pattern or enhancement request then tell us about it
+  <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&template=component-or-pattern.md>
 
 ## Code
 
-There's only so many hours in a day, so we welcome contributions of code. Find an issue, or raise one, and follow the guide below. <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues>
+There's only so many hours in a day, so we welcome contributions of code. Find
+an issue, or raise one, and follow the guide below.
+<https://github.com/carbon-design-system/ibm-cloud-cognitive/issues>
 
 ### 1. Fork the repo
 
@@ -87,7 +93,9 @@ to see if a similar issue has already been submitted. If a similar issue has
 been submitted, assign yourself or ask to be assigned to the issue by posting a
 comment. If the issue does not exist, please make a new issue.
 
-**Note 2:** If you are submitting a new component or pattern there are some additional steps we'd like you to take. In brief, use the `New component or pattern` issue template. The new issue should be an epic.
+**Note 2:** If you are submitting a new component or pattern there are some
+additional steps we'd like you to take. In brief, use the
+`New component or pattern` issue template. The new issue should be an epic.
 
 Refer to
 [contributing in Carbon](https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md#what-is-the-contribution-process)
@@ -138,7 +146,15 @@ additional work to do.
 
 ### 8. New component or pattern
 
-If you started out to create a new component or pattern there are two additional tasks before your component can reach released state.
+If you started out to create a new component or pattern there are two additional
+tasks before your component can reach released state.
 
-- [ ] See our design review guidelines <<https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/docs/reviews/DESIGN_REVIEW_GUIDELINES.md> and then create a new issue based on `design-review` template. <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&design-review.md> and complete the steps suggested.
-- [ ] See our release guidelines <https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/docs/reviews/RELEASE_REVIEW_GUIDELINES.md> and then create a new issue based on `design-review` template. <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&design-review.md>
+- [ ] See our design review guidelines
+      <<https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/docs/reviews/DESIGN_REVIEW_GUIDELINES.md>
+      and then create a new issue based on `design-review` template.
+      <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&design-review.md>
+      and complete the steps suggested.
+- [ ] See our release guidelines
+      <https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/docs/reviews/RELEASE_REVIEW_GUIDELINES.md>
+      and then create a new issue based on `design-review` template.
+      <https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&design-review.md>

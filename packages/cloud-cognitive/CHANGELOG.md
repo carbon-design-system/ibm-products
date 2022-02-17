@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.6.1...@carbon/ibm-products@1.7.0) (2022-02-16)
+
+
+### Bug Fixes
+
+* adds remove item from add select sidebar ([#1639](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1639)) ([f061a4c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f061a4c84071b4afbd16ee83d829f6446538a2d5))
+* avoid relying on defaultProps in carbon components ([#1645](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1645)) ([85718dc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/85718dc0b7b8aff8e73b2e36b5e64e13ea773539))
+* **Tearsheet:** replace useLayoutEffect with useEffect (issue [#1640](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1640)) ([#1647](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1647)) ([f05f92e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f05f92e819d300ee60d3da04a21f61b0c4563a9c))
+
+
+### Features
+
+* **DataSpreadsheet:** add initial component ([#1606](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1606)) ([331a087](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/331a08757d0715aea156027e4f62772febdcf059))
+* **InlineEdit:** add validation ([#1641](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1641)) ([7e75fad](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7e75fadd9ebac18da0faf791ab70582f11418bcc))
+* update Carbon versions to latest ([#1646](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1646)) ([e323739](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e323739ac9a6155aa0fddf39b13e4440d04117fc))
+
+
+
+
+
 ## [1.6.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.6.0...@carbon/ibm-products@1.6.1) (2022-02-15)
 
 

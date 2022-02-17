@@ -82,7 +82,7 @@ export const DataSpreadsheetBody = ({
           {/* ROW HEADER BUTTON */}
           <button
             type="button"
-            className={cx(`${blockClass}__td`, `${blockClass}__td-th`)}
+            className={cx(`${blockClass}__td`, `${blockClass}__td-th`, `${blockClass}--interactive-cell-element`)}
             style={{
               width: defaultColumn?.rowHeaderWidth,
             }}
@@ -93,7 +93,7 @@ export const DataSpreadsheetBody = ({
           {row.cells.map((cell, index) => (
             <button
               {...cell.getCellProps()}
-              className={`${blockClass}__td`}
+              className={cx(`${blockClass}__td`, `${blockClass}--interactive-cell-element`)}
               key={`cell_${index}`}
               onClick={(event) => handleBodyCellClick(event, cell, index)}
               type="button"

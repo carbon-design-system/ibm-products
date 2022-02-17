@@ -27,6 +27,10 @@
     display: inline-block;
     border-spacing: 0;
 
+    &.#{$block-class}__container-has-focus {
+      outline: 2px solid $inverse-link;
+    }
+
     button.#{$block-class}__td {
       margin: 0;
       background-color: transparent;

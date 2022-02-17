@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useMemo, useRef, useEffect } from 'react';
+import React, { useMemo, useRef, useEffect, useState, useCallback } from 'react';
 import { useBlockLayout, useTable } from 'react-table';
 
 // Other standard imports.
@@ -19,6 +19,7 @@ import { getScrollbarWidth } from '../../global/js/utils/getScrollbarWidth';
 import { DataSpreadsheetBody } from './DataSpreadsheetBody';
 import { getCellSize } from './getCellSize';
 import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
+import { useActiveElement } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
@@ -32,6 +33,8 @@ export let DataSpreadsheet = React.forwardRef(
     { cellSize, className, columns, data, id, onActiveCellChange, ...rest },
     ref
   ) => {
+    const focusedElement = useActiveElement();
+    const [containerHasFocus, setContainerHasFocus] = useState(false);
     const cellSizeValue = getCellSize(cellSize);
     const defaultColumn = useMemo(
       () => ({
@@ -60,6 +63,21 @@ export let DataSpreadsheet = React.forwardRef(
       useBlockLayout
     );
 
+    // Reset everything when spreadsheet loses focus
+    useEffect(() => {
+      if (
+        !focusedElement.classList.contains(`${blockClass}--interactive-cell-element`)
+      ) {
+        setContainerHasFocus(false);
+      }
+      if (
+        focusedElement.classList.contains(blockClass) ||
+        focusedElement.classList.contains(`${blockClass}--interactive-cell-element`)
+      ) {
+        setContainerHasFocus(true);
+      }
+    }, [focusedElement]);
+
     // Click outside useEffect
     // Removes the active cell highlight element
     useEffect(() => {
@@ -76,6 +94,7 @@ export let DataSpreadsheet = React.forwardRef(
         const activeCellHighlight = spreadsheetRef.current.querySelector(
           `.${blockClass}__active-cell--highlight`
         );
+        setContainerHasFocus(false);
         if (activeCellHighlight) {
           activeCellHighlight.remove();
         }
@@ -86,6 +105,32 @@ export let DataSpreadsheet = React.forwardRef(
       };
     }, [spreadsheetRef]);
 
+    const handleKeyPress = useCallback((event) => {
+      const { keyCode } = event;
+      // command keys need to be returned as there is default browser behavior with these keys
+      if (keyCode === 91 || keyCode === 93) {
+        return;
+      }
+      // Prevent arrow keys, home key, and end key from scrolling the page when the data spreadsheet container has focus
+      if ([35, 36, 37, 38, 39, 40].indexOf(keyCode) > -1) {
+        event.preventDefault();
+      }
+      switch (keyCode) {
+        case 37:
+          console.log('left');
+          break;
+        case 38:
+          console.log('up');
+          break;
+        case 39:
+          console.log('right');
+          break;
+        case 40:
+          console.log('down');
+          break;
+      }
+    }, []);
+
     const localRef = useRef();
     const spreadsheetRef = ref || localRef;
     return (
@@ -93,9 +138,15 @@ export let DataSpreadsheet = React.forwardRef(
         {...rest}
         {...getTableProps()}
         {...getDevtoolsProps(componentName)}
-        className={cx(blockClass, className)}
+        className={cx(blockClass, className, {
+          [`${blockClass}__container-has-focus`]: containerHasFocus
+        })}
         ref={spreadsheetRef}
         role="grid"
+        tabIndex={0}
+        aria-rowcount={rows?.length || 0}
+        aria-colcount={columns?.length || 0}
+        onKeyDown={handleKeyPress}
       >
         {/* HEADER */}
         <DataSpreadsheetHeader

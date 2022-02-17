@@ -591,12 +591,12 @@ NotificationsPanel.propTypes = {
   /**
    * Function that will dismiss all notifications
    */
-  onDismissAllNotifications: PropTypes.func.isRequired,
+  onDismissAllNotifications: PropTypes.func,
 
   /**
    * Function that will dismiss a single notification
    */
-  onDismissSingleNotification: PropTypes.func.isRequired,
+  onDismissSingleNotification: PropTypes.func,
 
   /**
    * Function that returns the current selected value of the disable notification toggle

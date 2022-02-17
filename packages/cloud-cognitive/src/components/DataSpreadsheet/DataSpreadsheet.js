@@ -186,13 +186,7 @@ DataSpreadsheet.propTypes = {
   /**
    * Specifies the cell height
    */
-  cellSize: PropTypes.oneOf([
-    'compact',
-    'standard',
-    'medium',
-    'large',
-    'extra-large',
-  ]),
+  cellSize: PropTypes.oneOf(['compact', 'standard', 'medium', 'large']),
 
   /**
    * Provide an optional class to be applied to the containing node.

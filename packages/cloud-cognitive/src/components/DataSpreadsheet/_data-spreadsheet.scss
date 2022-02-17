@@ -81,7 +81,7 @@
     }
     .#{$block-class}__active-cell--highlight {
       position: absolute;
-      border: 2px solid $interactive-01;
+      border: $spacing-01 solid $interactive-01;
       background-color: transparent;
     }
   }

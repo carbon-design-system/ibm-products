@@ -15,8 +15,6 @@ export const getCellSize = (cellSize) => {
       return 40;
     case 'large':
       return 48;
-    case 'extra-large':
-      return 56;
     default:
       return 32;
   }

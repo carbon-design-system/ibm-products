@@ -24,20 +24,30 @@ const blockClass = `${pkg.prefix}--tag-set`;
 
 const allTagsModalSearchThreshold = 10;
 
+// Default values for props
+const defaults = {
+  align: 'start',
+  overflowAlign: 'center',
+  overflowDirection: 'bottom',
+};
+
 export let TagSet = React.forwardRef(
   (
     {
-      align,
+      // The component props, in alphabetical order (for consistency).
+
+      align = defaults.align,
       className,
       maxVisible,
-      overflowAlign,
+      overflowAlign = defaults.overflowAlign,
       overflowClassName,
-      overflowDirection,
+      overflowDirection = defaults.overflowDirection,
       allTagsModalTitle,
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
       showAllTagsLabel,
       tags,
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -334,12 +344,6 @@ TagSet.propTypes = {
       type: PropTypes.oneOf(tagTypes),
     })
   ),
-};
-
-TagSet.defaultProps = {
-  align: 'start',
-  overflowAlign: 'center',
-  overflowDirection: 'bottom',
 };
 
 TagSet.displayName = componentName;

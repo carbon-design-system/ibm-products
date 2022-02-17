@@ -22,6 +22,13 @@ const componentName = 'ExampleComponent';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+// Default values for props
+const defaults = {
+  primaryKind: 'primary',
+  secondaryKind: 'secondary',
+  size: 'default',
+};
+
 /**
  * This is an example component to show relevant conventions and usage.
  */
@@ -29,6 +36,7 @@ export let ExampleComponent = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
+
       borderColor,
       boxedBorder,
       className,
@@ -36,11 +44,12 @@ export let ExampleComponent = React.forwardRef(
       onPrimaryClick,
       onSecondaryClick,
       primaryButtonLabel,
-      primaryKind,
+      primaryKind = defaults.primaryKind,
       secondaryButtonLabel,
-      secondaryKind,
-      size,
+      secondaryKind = defaults.secondaryKind,
+      size = defaults.size,
       style,
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -175,15 +184,4 @@ ExampleComponent.propTypes = {
    * Optional style settings for the containing node.
    */
   style: PropTypes.object,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-ExampleComponent.defaultProps = {
-  boxedBorder: false,
-  primaryKind: 'primary',
-  secondaryKind: 'secondary',
-  size: 'default',
 };

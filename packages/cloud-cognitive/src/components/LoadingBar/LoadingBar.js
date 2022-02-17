@@ -22,6 +22,13 @@ const componentName = 'LoadingBar';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+// Default values for props
+const defaults = {
+  active: true,
+  percentage: undefined,
+  ariaLabel: 'Active loading indicator',
+};
+
 /**
  * The LoadingBar component provides a way to communicate the loading state to users.
  * It is intended to fill the space of where it's used, and should persist until the
@@ -38,14 +45,16 @@ export let LoadingBar = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-      active,
-      ariaLabel,
+
+      active = defaults.active,
+      ariaLabel = defaults.ariaLabel,
       className,
       id,
-      percentage,
+      percentage = defaults.percentage,
       percentageIndicatorText,
       showPercentageIndicator,
       small,
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -141,7 +150,7 @@ LoadingBar.propTypes = {
   /**
    * Specify whether you want the loading bar indicator to be active or not
    */
-  active: PropTypes.bool.isRequired,
+  active: PropTypes.bool,
 
   /**
    * Specify a ariaLabel that would be used to best describe the active loading state
@@ -177,18 +186,4 @@ LoadingBar.propTypes = {
    * Specify whether you would like the small variant of this component
    */
   small: PropTypes.bool,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-LoadingBar.defaultProps = {
-  /* add defaults for relevant props. */
-  active: true,
-  small: false,
-  percentage: undefined,
-  showPercentageIndicator: false,
-  percentageIndicatorText: undefined,
-  ariaLabel: 'Active loading indicator',
 };

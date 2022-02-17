@@ -192,8 +192,4 @@ RemoveModal.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
-RemoveModal.defaultProps = {
-  textConfirmation: false,
-};
-
 RemoveModal.displayName = componentName;

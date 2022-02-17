@@ -33,6 +33,8 @@ const componentName = 'ActionBar';
 export let ActionBar = React.forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       actions,
       className,
       maxVisible,
@@ -40,6 +42,7 @@ export let ActionBar = React.forwardRef(
       onWidthChange,
       overflowAriaLabel,
       rightAlign,
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -281,8 +284,4 @@ ActionBar.propTypes = {
    * align tags to right of available space
    */
   rightAlign: PropTypes.bool,
-};
-
-ActionBar.defaultProps = {
-  rightAlign: false,
 };

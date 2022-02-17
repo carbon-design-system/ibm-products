@@ -150,7 +150,7 @@ LoadingBar.propTypes = {
   /**
    * Specify whether you want the loading bar indicator to be active or not
    */
-  active: PropTypes.bool.isRequired,
+  active: PropTypes.bool,
 
   /**
    * Specify a ariaLabel that would be used to best describe the active loading state

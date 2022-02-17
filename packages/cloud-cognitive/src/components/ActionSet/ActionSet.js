@@ -191,7 +191,7 @@ ActionSet.validateActions =
     const problems = [];
 
     if (actions > 0) {
-      const size = sizeFn ? sizeFn(props) : props.size;
+      const size = sizeFn ? sizeFn(props) : props.size || defaults.size;
       const stacking = willStack(size, actions);
 
       const countActions = (kind) =>

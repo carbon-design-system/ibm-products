@@ -58,13 +58,13 @@ export let Tearsheet = React.forwardRef(
   ) => (
     <TearsheetShell
       {...{
+        ...getDevtoolsProps(componentName),
         ...rest,
         influencerPosition,
         influencerWidth,
         verticalPosition,
         ref,
         size: 'wide',
-        ...getDevtoolsProps(componentName),
       }}
     />
   )

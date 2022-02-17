@@ -48,11 +48,11 @@ export let TearsheetNarrow = React.forwardRef(
   ({ verticalPosition = defaults.verticalPosition, ...rest }, ref) => (
     <TearsheetShell
       {...{
+        ...getDevtoolsProps(componentName),
         ...prepareProps(rest, blocked),
         verticalPosition,
         ref,
         size: 'narrow',
-        ...getDevtoolsProps(componentName),
       }}
     />
   )

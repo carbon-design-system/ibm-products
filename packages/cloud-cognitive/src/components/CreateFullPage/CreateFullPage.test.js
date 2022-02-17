@@ -114,7 +114,11 @@ const renderCreateFullPage = ({
       >
         {stepFormField}
       </CreateFullPageStep>
-      <CreateFullPageStep title="Title 2" description="2" formLegendText="2">
+      <CreateFullPageStep
+        title="Title 2"
+        description="2"
+        fieldsetLegendText="2"
+      >
         {stepFormField}
       </CreateFullPageStep>
       <CreateFullPageStep
@@ -262,18 +266,22 @@ describe(componentName, () => {
       >
         <CreateFullPageStep
           title="Title 1"
-          formLegendText="1"
+          fieldsetLegendText="1"
           onNext={onNextStepRejectionFn}
         >
           {stepFormField}
         </CreateFullPageStep>
-        <CreateFullPageStep title="Title 2" description="2" formLegendText="2">
+        <CreateFullPageStep
+          title="Title 2"
+          description="2"
+          fieldsetLegendText="2"
+        >
           {stepFormField}
         </CreateFullPageStep>
         <CreateFullPageStep
           title="Title 3"
           description="3"
-          formLegendText="3"
+          fieldsetLegendText="3"
           onNext={finalStepOnNextRejectFn}
         >
           {stepFormField}
@@ -402,7 +410,7 @@ describe(componentName, () => {
       >
         <CreateFullPageStep
           title="Title 1"
-          formLegendText="1"
+          fieldsetLegendText="1"
           onNext={onNextStepFn}
         >
           {stepFormField}
@@ -410,7 +418,7 @@ describe(componentName, () => {
         <CreateFullPageStep
           title="Title 2"
           description="2"
-          formLegendText="2"
+          fieldsetLegendText="2"
           disableSubmit
         >
           {stepFormField}

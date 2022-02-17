@@ -27,10 +27,4 @@ ComboButtonItem.propTypes = {
   renderIcon: oneOfType([func, object]),
 };
 
-ComboButtonItem.defaultProps = {
-  disabled: null,
-  href: null,
-  renderIcon: null,
-};
-
 export { ComboButtonItem };

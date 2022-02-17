@@ -17,22 +17,33 @@ import { usePreviousValue, useRetrieveStepData } from '../../global/js/hooks';
 const componentName = 'CreateTearsheetStep';
 const blockClass = `${pkg.prefix}--tearsheet-create__step`;
 
+// Default values for props
+const defaults = {
+  hasFieldset: true,
+  includeStep: true,
+};
+
 export let CreateTearsheetStep = forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       children,
       className,
       description,
       disableSubmit,
       fieldsetLegendText,
-      hasFieldset,
-      includeStep,
+      hasFieldset = defaults.hasFieldset,
+      includeStep = defaults.includeStep,
       introStep,
       onNext,
       onMount,
       secondaryLabel,
       subtitle,
       title,
+
+      // Collect any other property values passed in.
+      ...rest
     },
     ref
   ) => {
@@ -79,6 +90,10 @@ export let CreateTearsheetStep = forwardRef(
 
     return stepsContext ? (
       <div
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
         className={cx(blockClass, className, {
           [`${blockClass}__step--hidden-step`]:
             stepNumber !== stepsContext?.currentStep,
@@ -198,13 +213,4 @@ CreateTearsheetStep.propTypes = {
    * Sets the title text for a tearsheet step
    */
   title: PropTypes.node.isRequired,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-CreateTearsheetStep.defaultProps = {
-  hasFieldset: true,
-  includeStep: true,
 };

@@ -23,7 +23,16 @@ const blockClass = 'security--combo-button';
 /**
  * The combo button consolidates similar actions, while exposing the most commonly used one.
  */
-const ComboButton = ({ children, className, overflowMenu, ...rest }) => {
+const ComboButton = ({
+  // The component props, in alphabetical order (for consistency).
+
+  children,
+  className,
+  overflowMenu,
+
+  // Collect any other property values passed in.
+  ...rest
+}) => {
   const { current: instanceId } = useRef(getInstanceId());
   const [isOpen, setIsOpen] = useState(false);
 
@@ -97,11 +106,6 @@ ComboButton.propTypes = {
 
   /** Provide the [props of the `OverflowMenu`](https://react.carbondesignsystem.com/?path=/docs/overflowmenu) */
   overflowMenu: shape(OverflowMenu.propTypes),
-};
-
-ComboButton.defaultProps = {
-  className: null,
-  overflowMenu: OverflowMenu.defaultProps,
 };
 
 export { ComboButton };

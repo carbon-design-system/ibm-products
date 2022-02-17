@@ -31,8 +31,3 @@ ModifiedTabLabelNew.propTypes = {
    */
   onClick: PropTypes.func,
 };
-
-ModifiedTabLabelNew.defaultProps = {
-  label: '',
-  onClick: undefined,
-};

@@ -32,6 +32,11 @@ const componentName = 'OptionsTile';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+// Default values for props
+const defaults = {
+  size: 'xl',
+};
+
 /**
  * TODO: A description of the component.
  */
@@ -39,6 +44,7 @@ export let OptionsTile = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
+
       children,
       className,
       enabled,
@@ -50,10 +56,11 @@ export let OptionsTile = React.forwardRef(
       lockedText,
       onToggle,
       open,
-      size,
+      size = defaults.size,
       summary,
       warn,
       warnText,
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -359,13 +366,4 @@ OptionsTile.propTypes = {
    * Provide a text explaining why the OptionsTile is in warning state.
    */
   warnText: PropTypes.string,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-OptionsTile.defaultProps = {
-  open: false,
-  size: 'xl',
 };

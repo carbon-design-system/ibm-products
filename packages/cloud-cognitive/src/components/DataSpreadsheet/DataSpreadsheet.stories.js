@@ -6,8 +6,6 @@
  */
 
 import React, { useMemo } from 'react';
-// TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
 
 import {
   getStoryTitle,
@@ -23,6 +21,11 @@ import styles from './_storybook-styles.scss';
 export default {
   title: getStoryTitle(DataSpreadsheet.displayName),
   component: DataSpreadsheet,
+  argTypes: {
+    onActiveCellChange: {
+      action: 'active cell change',
+    },
+  },
   parameters: {
     styles,
     docs: {
@@ -79,14 +82,28 @@ const Template = ({ ...args }) => {
   const columns = useMemo(() => columnData, []);
 
   const data = useMemo(() => generateData(16), []);
-  return <DataSpreadsheet columns={columns} data={data} {...args} />;
+  return (
+    <DataSpreadsheet
+      columns={columns}
+      data={data}
+      id="spreadsheet--id"
+      {...args}
+    />
+  );
 };
 
 const LargeTemplate = ({ ...args }) => {
   const columns = useMemo(() => columnData, []);
 
   const data = useMemo(() => generateData(1000), []);
-  return <DataSpreadsheet columns={columns} data={data} {...args} />;
+  return (
+    <DataSpreadsheet
+      columns={columns}
+      data={data}
+      id="spreadsheet--id"
+      {...args}
+    />
+  );
 };
 
 export const dataSpreadsheet = prepareStory(Template, {
@@ -96,5 +113,7 @@ export const dataSpreadsheet = prepareStory(Template, {
 
 export const largeDatasetSpreadsheet = prepareStory(LargeTemplate, {
   storyName: 'Large dataset',
-  args: {},
+  args: {
+    cellSize: 'large',
+  },
 });

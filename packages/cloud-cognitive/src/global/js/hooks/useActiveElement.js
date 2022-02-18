@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export const useActiveElement = () => {
   const [active, setActive] = useState(document.activeElement);
@@ -14,9 +14,9 @@ export const useActiveElement = () => {
   };
 
   useEffect(() => {
-    document.addEventListener("focusin", handleFocusIn);
+    document.addEventListener('focusin', handleFocusIn);
     return () => {
-      document.removeEventListener("focusin", handleFocusIn);
+      document.removeEventListener('focusin', handleFocusIn);
     };
   }, []);
 

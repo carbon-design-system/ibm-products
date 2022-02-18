@@ -17,9 +17,9 @@ export const DataSpreadsheetBody = ({
   defaultColumn,
   getTableBodyProps,
   id,
-  onActiveCellChange,
   prepareRow,
   rows,
+  setActiveCellCoordinates,
   scrollBarSize,
   totalColumnsWidth,
 }) => {
@@ -38,46 +38,13 @@ export const DataSpreadsheetBody = ({
   // onClick fn for each cell in the data spreadsheet body,
   // adds the active cell highlight
   const handleBodyCellClick = useCallback(
-    (event, cell, columnIndex) => {
-      const cellButton = event.target.closest(`.${blockClass}__td`);
-      const cellCoordinates = cellButton.getBoundingClientRect();
-      const rowContainer = document.querySelector(
-        `.${blockClass}__list--container`
-      ).firstElementChild;
-      const parentCoordinates = rowContainer?.getBoundingClientRect();
-      const relativePosition = {
-        top: cellCoordinates.top - parentCoordinates.top,
-        left: cellCoordinates.left - parentCoordinates.left,
-      };
-      const listContainer = spreadsheetBodyRef?.current;
-      const activeCellButton =
-        listContainer.querySelector(`.${blockClass}__active-cell--highlight`) ||
-        document.createElement('button');
-      activeCellButton.classList.add(`${blockClass}__active-cell--highlight`);
-      activeCellButton.style.width = `${
-        cell?.column?.width - 8 - scrollBarSize / cell.row.cells.length
-      }px`; // subtract 8 to account for cell padding and then subtract the scrollbar width divided by total columns
-      const activeCellCoords = {
+    (cell, columnIndex) => {
+      setActiveCellCoordinates({
         row: cell.row.index,
         column: columnIndex,
-      };
-      activeCellButton.style.height = `${cell?.column?.rowHeight}px`;
-      activeCellButton.style.left = `${relativePosition.left}px`;
-      activeCellButton.style.top = `${relativePosition.top}px`;
-      activeCellButton.setAttribute(
-        'data-active-row-index',
-        activeCellCoords.row
-      );
-      activeCellButton.setAttribute(
-        'data-active-column-index',
-        activeCellCoords.column
-      );
-      listContainer.firstElementChild.appendChild(activeCellButton);
-      activeCellButton.focus();
-      const activeCellValue = Object.values(cell.row.values)[columnIndex];
-      onActiveCellChange?.(activeCellValue);
+      });
     },
-    [onActiveCellChange, scrollBarSize]
+    [setActiveCellCoordinates]
   );
 
   // Renders each cell in the spreadsheet body
@@ -93,8 +60,15 @@ export const DataSpreadsheetBody = ({
         >
           {/* ROW HEADER BUTTON */}
           <button
+            tabIndex={-1}
+            data-row-index={index}
+            data-column-index="header"
             type="button"
-            className={cx(`${blockClass}__td`, `${blockClass}__td-th`, `${blockClass}--interactive-cell-element`)}
+            className={cx(
+              `${blockClass}__td`,
+              `${blockClass}__td-th`,
+              `${blockClass}--interactive-cell-element`
+            )}
             style={{
               width: defaultColumn?.rowHeaderWidth,
             }}
@@ -104,10 +78,16 @@ export const DataSpreadsheetBody = ({
           {/* CELL BUTTONS */}
           {row.cells.map((cell, index) => (
             <button
+              tabIndex={-1}
+              data-row-index={cell.row.index}
+              data-column-index={index}
               {...cell.getCellProps()}
-              className={cx(`${blockClass}__td`, `${blockClass}--interactive-cell-element`)}
+              className={cx(
+                `${blockClass}__td`,
+                `${blockClass}--interactive-cell-element`
+              )}
               key={`cell_${index}`}
-              onClick={(event) => handleBodyCellClick(event, cell, index)}
+              onClick={() => handleBodyCellClick(cell, index)}
               type="button"
             >
               {cell.render('Cell')}
@@ -121,7 +101,11 @@ export const DataSpreadsheetBody = ({
 
   const spreadsheetBodyRef = useRef();
   return (
-    <div ref={spreadsheetBodyRef} {...getTableBodyProps()}>
+    <div
+      ref={spreadsheetBodyRef}
+      className={cx(`${blockClass}__body--container`)}
+      {...getTableBodyProps()}
+    >
       <FixedSizeList
         className={cx(
           `${blockClass}__list--container`,
@@ -177,6 +161,11 @@ DataSpreadsheetBody.propTypes = {
    * The scrollbar width
    */
   scrollBarSize: PropTypes.number,
+
+  /**
+   * Setter fn for activeCellCoordinates state value
+   */
+  setActiveCellCoordinates: PropTypes.func,
 
   /**
    * The total columns width

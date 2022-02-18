@@ -261,7 +261,9 @@ export let InlineEdit = React.forwardRef(
           {...{ id, size }}
           className={cx(`${blockClass}__input`, {
             [`${blockClass}__input--empty`]:
-              refInput.current && refInput.current.innerText.length === 0,
+              refInput.current &&
+              refInput.current.innerText &&
+              refInput.current.innerText.length === 0,
           })}
           contentEditable
           aria-label={labelText}

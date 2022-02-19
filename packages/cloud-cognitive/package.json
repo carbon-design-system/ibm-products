@@ -50,8 +50,8 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$)/'"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.0",
-    "@babel/core": "^7.17.2",
+    "@babel/cli": "^7.17.3",
+    "@babel/core": "^7.17.5",
     "babel-preset-ibm-cloud-cognitive": "^0.14.7",
     "chalk": "^4.1.2",
     "change-case": "^4.1.2",
@@ -61,10 +61,10 @@
     "glob": "^7.2.0",
     "jest": "^27.5.1",
     "jest-config-ibm-cloud-cognitive": "^0.23.8",
-    "npm-check-updates": "^12.3.0",
+    "npm-check-updates": "^12.3.1",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
-    "sass": "^1.49.7",
+    "sass": "^1.49.8",
     "yargs": "^17.3.1"
   },
   "dependencies": {

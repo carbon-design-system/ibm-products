@@ -5,9 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import './index';
-
-// TODO: add any additional styles used by EditSidePanel.stories.js
 @import '../../global/styles/project-settings';
 
 $block-class: #{$pkg-prefix}--edit-side-panel;
@@ -28,8 +25,3 @@ $story-prefix: edit-side-panel-stories__;
 .#{$block-class} .#{$carbon-prefix}--number__control-btn::after {
   background-color: $field-02;
 }
-
-// Uncomment next line (which must appear last) to test in storybook
-// that the SCSS styles for this component are sufficiently specific
-// to override Carbon whichever order the styles get loaded in.
-//@import 'carbon-components/css/carbon-components.min';

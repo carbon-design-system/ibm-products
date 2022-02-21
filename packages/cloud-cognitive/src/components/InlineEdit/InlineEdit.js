@@ -197,9 +197,14 @@ export let InlineEdit = React.forwardRef(
     };
 
     const handleKeyDown = (ev) => {
-      if (ev.key === 'Enter') {
-        ev.preventDefault();
-        refInput.current.blur(); // will cause save
+      switch (ev.key) {
+        case 'Enter':
+          ev.preventDefault();
+          refInput.current.blur(); // will cause save
+          break;
+        case 'Escape':
+          refInput.current.blur(); // will cause save
+          break;
       }
     };
 

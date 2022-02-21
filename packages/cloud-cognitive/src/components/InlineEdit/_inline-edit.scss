@@ -284,12 +284,19 @@
       }
     }
 
-    .#{$block-class}__edit--hover-visible {
-      opacity: 0;
-      transition: opacity $duration--fast-01 motion(entrance, productive);
+    @media (hover: hover) {
+      // if hover is the primary input mechanism hide edit button
+      .#{$block-class}__edit {
+        opacity: 0;
+        transition: opacity $duration--fast-01 motion(entrance, productive);
+      }
+
+      &:hover .#{$block-class}__edit {
+        opacity: 1;
+      }
     }
 
-    &:hover .#{$block-class}__edit--hover-visible {
+    .#{$block-class}__edit--always-visible {
       opacity: 1;
     }
 

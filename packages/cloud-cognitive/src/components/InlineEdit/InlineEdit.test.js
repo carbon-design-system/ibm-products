@@ -209,7 +209,7 @@ describe(componentName, () => {
     expect(component).toHaveClass(`${blockClass}--editing`);
   });
 
-  it.skip('Handles clipboard data', async () => {
+  it.skip('Handles clipboard data', () => {
     const startingValue = value;
     const clipboardString = 'AString';
 

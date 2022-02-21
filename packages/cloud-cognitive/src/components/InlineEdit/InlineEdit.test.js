@@ -237,7 +237,7 @@ describe(componentName, () => {
     expect(svg).not.toBeNull();
   });
 
-  it('Can show invalid state', async () => {
+  it('Can show invalid state', () => {
     const invalidText = 'That is not valid';
 
     const { container } = render(

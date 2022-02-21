@@ -106,7 +106,7 @@ describe(componentName, () => {
     // expect(input).toHaveTextContent(startingValue);
   });
 
-  it('can start and cancel an edit using buttons', async () => {
+  it('can start and cancel an edit using buttons', () => {
     const startingValue = value;
     const { container } = render(
       <InlineEdit {...requiredProps} value={startingValue} />

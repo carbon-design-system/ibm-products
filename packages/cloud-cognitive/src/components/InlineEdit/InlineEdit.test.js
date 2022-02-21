@@ -250,7 +250,7 @@ describe(componentName, () => {
     expect(svg).not.toBeNull();
   });
 
-  it('Can show invalid state in preference to warn', async () => {
+  it('Can show invalid state in preference to warn', () => {
     const warnText = 'Do not forget this';
     const invalidText = 'That is not valid';
 

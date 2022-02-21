@@ -184,7 +184,7 @@ describe(componentName, () => {
     expect(component).not.toHaveClass(`${blockClass}--editing`);
   });
 
-  it('Clicking control but not on edit or input starts edit', async () => {
+  it('Clicking control but not on edit or input starts edit', () => {
     const startingValue = value;
 
     const { container } = render(

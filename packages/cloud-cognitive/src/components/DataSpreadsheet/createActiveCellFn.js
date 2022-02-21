@@ -17,6 +17,9 @@ export const createActiveCellFn = ({
   onActiveCellChange,
   activeCellValue,
 }) => {
+  if (!coords) {
+    return;
+  }
   // If the active cell is in the column header row (very first), we need to append this element
   // to `.${blockClass}__header--container`, otherwise it should be appended to `.${blockClass}__listContainer` firstElementChild
   const activeElementContainer = addToHeader

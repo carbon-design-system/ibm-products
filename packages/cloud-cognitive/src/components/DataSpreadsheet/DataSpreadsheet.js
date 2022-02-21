@@ -195,6 +195,13 @@ export let DataSpreadsheet = React.forwardRef(
           event.preventDefault();
         }
         switch (keyCode) {
+          // Tab
+          case 9: {
+            removeActiveCell();
+            setContainerHasFocus(false);
+            setActiveCellCoordinates(null);
+            break;
+          }
           // Left
           case 37: {
             handleInitialArrowPress();
@@ -293,6 +300,7 @@ export let DataSpreadsheet = React.forwardRef(
       [
         handleInitialArrowPress,
         activeCellCoordinates,
+        removeActiveCell,
         columns.length,
         rows.length,
       ]
@@ -340,6 +348,7 @@ export let DataSpreadsheet = React.forwardRef(
         aria-rowcount={rows?.length || 0}
         aria-colcount={columns?.length || 0}
         onKeyDown={handleKeyPress}
+        onFocus={() => setContainerHasFocus(true)}
       >
         {/* HEADER */}
         <DataSpreadsheetHeader

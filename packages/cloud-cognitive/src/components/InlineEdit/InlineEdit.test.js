@@ -170,7 +170,7 @@ describe(componentName, () => {
     expect(handleSave).toBeCalled();
   });
 
-  it('does not allow disabled edit', async () => {
+  it('does not allow disabled edit', () => {
     const startingValue = value;
 
     const { container } = render(

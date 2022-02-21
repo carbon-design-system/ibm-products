@@ -120,29 +120,29 @@ const Template = ({
     const hasABC = /ABC/.test(val);
 
     if (
-      (change && validation.onChangeInvalidIfEmpty) ||
-      (save && validation.onSaveInvalidIfEmpty)
+      (change && validation?.onChangeInvalidIfEmpty) ||
+      (save && validation?.onSaveInvalidIfEmpty)
     ) {
       newInvalid = zeroLength;
       invalidText = newInvalid ? 'This field cannot be empty' : '';
       updateValidation = true;
     } else if (
-      (change && validation.onChangeWarnIfEmpty) ||
-      (save && validation.onSaveWarnIfEmpty)
+      (change && validation?.onChangeWarnIfEmpty) ||
+      (save && validation?.onSaveWarnIfEmpty)
     ) {
       newWarn = zeroLength;
       warnText = newWarn ? 'Empty fields are not good practice' : '';
       updateValidation = true;
     } else if (
-      (change && validation.onChangeInvalidWithABC) ||
-      (save && validation.onSaveInvalidWithABC)
+      (change && validation?.onChangeInvalidWithABC) ||
+      (save && validation?.onSaveInvalidWithABC)
     ) {
       newInvalid = hasABC;
       invalidText = newInvalid ? 'Cannot contain ABC in the entry' : '';
       updateValidation = true;
     } else if (
-      (change && validation.onChangeWanWithABC) ||
-      (save && validation.onSaveWanWithABC)
+      (change && validation?.onChangeWanWithABC) ||
+      (save && validation?.onSaveWanWithABC)
     ) {
       newWarn = hasABC;
       warnText = newWarn ? 'ABC should not be used in the entry' : '';

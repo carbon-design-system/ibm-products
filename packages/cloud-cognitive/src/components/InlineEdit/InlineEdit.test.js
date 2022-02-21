@@ -77,7 +77,7 @@ describe(componentName, () => {
     );
   });
 
-  it('can start and stop edit with focus', async () => {
+  it('can start and stop edit with focus', () => {
     const startingValue = value;
     const { container } = render(
       <InlineEdit {...requiredProps} value={startingValue} />

@@ -157,7 +157,7 @@ describe(componentName, () => {
     expect(input).toHaveTextContent(`${startingValue}ABC`);
 
     // has edit buttons
-    let controls = screen.getAllByRole('button');
+    const controls = screen.getAllByRole('button');
     expect(controls).toHaveLength(2); // cancel and save
 
     // click cancel check result reverts

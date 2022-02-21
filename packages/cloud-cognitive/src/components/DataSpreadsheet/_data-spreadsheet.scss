@@ -27,6 +27,14 @@
     display: inline-block;
     border-spacing: 0;
 
+    &.#{$block-class}__container-has-focus {
+      outline: 2px solid $inverse-link;
+    }
+
+    .#{$block-class}__header--container {
+      position: relative;
+    }
+
     button.#{$block-class}__td {
       margin: 0;
       background-color: transparent;
@@ -59,6 +67,8 @@
       cursor: pointer;
     }
     .#{$block-class}__td-th {
+      @include carbon--font-weight('semibold');
+
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -79,6 +89,10 @@
       position: absolute;
       border: $spacing-01 solid $interactive-01;
       background-color: transparent;
+      &:focus {
+        border: $spacing-01 solid $interactive-01;
+        outline: 0;
+      }
     }
   }
 }

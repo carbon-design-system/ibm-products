@@ -5,17 +5,28 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import {
+  baseFontSize,
+  sizeXSmall as compact,
+  sizeSmall as standard,
+  sizeMedium as medium,
+  sizeLarge as large,
+} from '@carbon/layout';
+
+const getSizeInPixels = (carbonSize) =>
+  Number(carbonSize.replace('rem', '') * baseFontSize);
+
 export const getCellSize = (cellSize) => {
   switch (cellSize) {
     case 'compact':
-      return 24;
+      return getSizeInPixels(compact);
     case 'standard':
-      return 32;
+      return getSizeInPixels(standard);
     case 'medium':
-      return 40;
+      return getSizeInPixels(medium);
     case 'large':
-      return 48;
+      return getSizeInPixels(large);
     default:
-      return 32;
+      return getSizeInPixels(standard);
   }
 };

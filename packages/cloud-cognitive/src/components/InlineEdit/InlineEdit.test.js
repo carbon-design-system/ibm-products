@@ -84,9 +84,9 @@ describe(componentName, () => {
     );
 
     const input = screen.getByRole('textbox');
+    // clicks in
     userEvent.click(input);
     const component = container.querySelector(`.${blockClass}`);
-    // clicks in
     expect(component).toHaveClass(`${blockClass}--editing`);
 
     // tabs out

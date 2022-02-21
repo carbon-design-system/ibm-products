@@ -224,7 +224,7 @@ describe(componentName, () => {
     expect(input).toHaveTextContent(startingValue + clipboardString + 'b');
   });
 
-  it('Can show warn state', async () => {
+  it('Can show warn state', () => {
     const warnText = 'Do not forget this';
 
     const { container } = render(

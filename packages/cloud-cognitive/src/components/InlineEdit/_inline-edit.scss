@@ -139,10 +139,13 @@
       top: 0;
       left: 0;
       display: block;
+      overflow: hidden;
+      width: 0;
       margin-left: $spacing-05;
       color: $text-05;
       content: attr(data-placeholder);
       opacity: 0;
+      visibility: hidden;
     }
 
     .#{$block-class}__ellipsis {
@@ -181,9 +184,11 @@
     }
 
     .#{$block-class}__input--empty::after {
+      width: initial;
       opacity: 1;
       // only transition fade in
       transition: opacity $duration--moderate-02 motion(standard, productive);
+      visibility: visible;
     }
 
     .#{$block-class}__after-input-elements {

@@ -130,7 +130,7 @@ describe(componentName, () => {
     expect(component).not.toHaveClass(`${blockClass}--editing`);
   });
 
-  it('can start and save edit with buttons', async () => {
+  it('can start and save edit with buttons', () => {
     const startingValue = value;
     const { fn } = jest;
     const handleChange = fn();

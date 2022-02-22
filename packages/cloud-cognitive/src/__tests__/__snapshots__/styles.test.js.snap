@@ -2636,8 +2636,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin: 0;
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header--with-close-icon {
-  padding-right: var(--cds-spacing-05, 1rem);
-  margin-right: var(--cds-spacing-09, 3rem);
+  padding-right: var(--cds-spacing-10, 4rem);
 }
 .c4p--tearsheet .c4p--tearsheet__header-content {
   display: flex;

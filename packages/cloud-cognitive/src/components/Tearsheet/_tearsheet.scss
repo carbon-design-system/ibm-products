@@ -152,8 +152,7 @@
     }
 
     &.#{$block-class}--wide .#{$block-class}__header--with-close-icon {
-      padding-right: $spacing-05;
-      margin-right: $spacing-09;
+      padding-right: $spacing-10;
     }
 
     .#{$block-class}__header-content {

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.11.0...@carbon/ibm-security@2.11.1) (2022-02-22)
+
+**Note:** Version bump only for package @carbon/ibm-security
+
+
+
+
+
 # [2.11.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.10.10...@carbon/ibm-security@2.11.0) (2022-02-16)
 
 

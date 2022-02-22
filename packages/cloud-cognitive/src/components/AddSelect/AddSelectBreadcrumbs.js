@@ -12,9 +12,8 @@ const componentName = 'AddSelectBreadcrumbs';
 
 export let AddSelectBreadcrumbs = ({ itemsLabel, path, setPath }) => {
   const clickHandler = (id) => {
-    const newPath = [...path];
-    const pathIdx = newPath.findIndex((entry) => entry.id === id);
-    const finalPath = newPath.splice(0, pathIdx + 1);
+    const pathIdx = path.findIndex((entry) => entry.id === id);
+    const finalPath = [...path].splice(0, pathIdx + 1);
     setPath(finalPath);
   };
 

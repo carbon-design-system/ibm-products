@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useLayoutEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 
 // Other standard imports.
@@ -129,8 +129,7 @@ export const TearsheetShell = React.forwardRef(
       setTimeout(() => element.focus(), 1);
     };
 
-    // Hook called whenever the tearsheet mounts, unmounts, or 'open' changes.
-    useLayoutEffect(() => {
+    useEffect(() => {
       const notify = () =>
         stack.all.forEach((handler) => {
           handler(

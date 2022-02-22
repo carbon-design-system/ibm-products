@@ -39,9 +39,17 @@ import {
 } from './PageHeaderUtils';
 import { PageHeaderTitle } from './PageHeaderTitle';
 
+// Default values for props
+const defaults = {
+  fullWidthGrid: false,
+  narrowGrid: false,
+};
+
 export let PageHeader = React.forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       actionBarItems,
       actionBarMenuOptionsClass,
       actionBarOverflowAriaLabel,
@@ -58,9 +66,9 @@ export let PageHeader = React.forwardRef(
       collapseTitle,
       disableBreadcrumbScroll,
       expandHeaderIconDescription,
-      fullWidthGrid,
+      fullWidthGrid = defaults.fullWidthGrid,
       hasCollapseHeaderToggle,
-      narrowGrid,
+      narrowGrid = defaults.narrowGrid,
       navigation,
       pageActions,
       pageActionsOverflowLabel,
@@ -70,6 +78,8 @@ export let PageHeader = React.forwardRef(
       tags,
       title,
       withoutBackground,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -1077,11 +1087,6 @@ PageHeader.propTypes = {
    */
   withoutBackground: PropTypes.bool,
   ...deprecatedProps,
-};
-
-PageHeader.defaultProps = {
-  fullWidthGrid: false,
-  narrowGrid: false,
 };
 
 PageHeader.displayName = componentName;

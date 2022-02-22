@@ -323,49 +323,6 @@ describe('Notifications', () => {
     expect(onSettingsClickFn).toBeCalled();
   });
 
-  it('should render default prop text as expected', () => {
-    renderNotifications({
-      data,
-    });
-
-    expect(NotificationsPanel.defaultProps.hourAgoText('test')).toEqual(
-      'test hour ago'
-    );
-    expect(NotificationsPanel.defaultProps.hoursAgoText('test')).toEqual(
-      'test hours ago'
-    );
-    expect(NotificationsPanel.defaultProps.minuteAgoText('test')).toEqual(
-      'test minute ago'
-    );
-    expect(NotificationsPanel.defaultProps.minutesAgoText('test')).toEqual(
-      'test minutes ago'
-    );
-    expect(NotificationsPanel.defaultProps.monthAgoText('test')).toEqual(
-      'test month ago'
-    );
-    expect(NotificationsPanel.defaultProps.monthsAgoText('test')).toEqual(
-      'test months ago'
-    );
-    expect(NotificationsPanel.defaultProps.yearAgoText('test')).toEqual(
-      'test year ago'
-    );
-    expect(NotificationsPanel.defaultProps.yearsAgoText('test')).toEqual(
-      'test years ago'
-    );
-    expect(NotificationsPanel.defaultProps.daysAgoText('test')).toEqual(
-      'test days ago'
-    );
-    expect(NotificationsPanel.defaultProps.yesterdayAtText('test')).toEqual(
-      'Yesterday at test'
-    );
-    expect(NotificationsPanel.defaultProps.viewAllLabel('test')).toEqual(
-      'View all (test)'
-    );
-    expect(NotificationsPanel.defaultProps.secondsAgoText('test')).toEqual(
-      'test seconds ago'
-    );
-  });
-
   it('should click onDismissAllNotification and onDismissSingleNotifications buttons to test default props', () => {
     renderNotifications({
       data: testData,

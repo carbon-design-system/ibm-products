@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.34.0...@carbon/ibm-cloud-cognitive-core@0.34.1) (2022-02-22)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+# [0.34.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.33.3...@carbon/ibm-cloud-cognitive-core@0.34.0) (2022-02-16)
+
+
+### Features
+
+* **DataSpreadsheet:** add initial component ([#1606](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1606)) ([331a087](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/331a08757d0715aea156027e4f62772febdcf059))
+* update Carbon versions to latest ([#1646](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1646)) ([e323739](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e323739ac9a6155aa0fddf39b13e4440d04117fc))
+
+
+
+
+
 ## [0.33.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.33.2...@carbon/ibm-cloud-cognitive-core@0.33.3) (2022-02-15)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

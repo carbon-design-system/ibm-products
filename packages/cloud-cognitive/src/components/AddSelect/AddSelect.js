@@ -18,14 +18,21 @@ import { AddSelectList } from './AddSelectList';
 import { AddSelectColumn } from './AddSelectColumn';
 const componentName = 'AddSelect';
 
+// Default values for props
+const defaults = {
+  items: Object.freeze([]),
+};
+
 export let AddSelect = forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       className,
       description,
       influencerTitle,
       inputPlaceholder,
-      items,
+      items = defaults.items,
       itemsLabel,
       multi,
       noResultsDescription,
@@ -41,6 +48,8 @@ export let AddSelect = forwardRef(
       removeIconDescription,
       textInputLabel,
       title,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -292,10 +301,6 @@ AddSelect.propTypes = {
   removeIconDescription: PropTypes.string,
   textInputLabel: PropTypes.string,
   title: PropTypes.string,
-};
-
-AddSelect.defaultProps = {
-  items: [],
 };
 
 AddSelect.displayName = componentName;

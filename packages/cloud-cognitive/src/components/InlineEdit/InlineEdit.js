@@ -32,6 +32,11 @@ const blockClass = `${pkg.prefix}--inline-edit`;
 const componentName = 'InlineEdit';
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+const defaults = {
+  light: true, // defaults to true to reflect design
+  size: 'md',
+};
+
 /**
  * TODO: A description of the component.
  */
@@ -39,6 +44,7 @@ export let InlineEdit = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
+
       cancelDescription,
       className,
       disabled,
@@ -48,20 +54,19 @@ export let InlineEdit = React.forwardRef(
       invalid,
       invalidText,
       labelText,
-      light,
+      light = defaults.light,
       onCancel,
       onSave,
       onChange,
       placeholder,
       saveDescription,
-      saveDisabled,
-      size,
+      size = defaults.size,
       value,
       warn,
       warnText,
       // validator,
       // validatorAsync,
-      /* TODO: add other props for InlineEdit */
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -72,9 +77,9 @@ export let InlineEdit = React.forwardRef(
     const ref = refIn || localRef;
     const [editing, setEditing] = useState(false);
     const [internalValue, setInternalValue] = useState(value);
-    const showValidationText = invalid || warn;
+    const showValidation = invalid || warn;
     const validationText = invalidText || warnText;
-    const validationIcon = showValidationText ? (
+    const validationIcon = showValidation ? (
       invalid ? (
         <WarningFilled16 />
       ) : (
@@ -127,8 +132,17 @@ export let InlineEdit = React.forwardRef(
     const handleSave = () => {
       doSetEditing(false);
       document.getSelection().removeAllRanges();
+
       if (onSave) {
         onSave(refInput.current.innerText);
+      }
+    };
+
+    const handleInput = () => {
+      setInternalValue(refInput.current.innerText);
+
+      if (onChange) {
+        onChange(refInput.current.innerText);
       }
     };
 
@@ -166,12 +180,6 @@ export let InlineEdit = React.forwardRef(
         selection.addRange(range);
       }
     };
-    const handleInput = () => {
-      setInternalValue(refInput.current.innerText);
-      if (onChange) {
-        onChange(refInput.current.innerText);
-      }
-    };
     const handleCancel = () => {
       refInput.current.innerText = value;
       handleInput(value);
@@ -184,7 +192,6 @@ export let InlineEdit = React.forwardRef(
     };
     const handleBlur = (ev) => {
       if (!ref.current.contains(ev.relatedTarget)) {
-        doSetEditing(false);
         handleSave();
       }
     };
@@ -254,7 +261,7 @@ export let InlineEdit = React.forwardRef(
           {...{ id, size }}
           className={cx(`${blockClass}__input`, {
             [`${blockClass}__input--empty`]:
-              refInput.current && refInput.current.innerText.length === 0,
+              refInput.current?.innerText?.length === 0,
           })}
           contentEditable
           aria-label={labelText}
@@ -286,7 +293,7 @@ export let InlineEdit = React.forwardRef(
                 refInput.current && value !== internalValue,
             })}
           >
-            {showValidationText && validationText.length > 0 && (
+            {showValidation && (
               <div className={`${blockClass}__validation-icon`}>
                 {validationIcon}
               </div>
@@ -308,7 +315,7 @@ export let InlineEdit = React.forwardRef(
                   iconDescription={saveDescription}
                   onClick={handleSave}
                   renderIcon={Checkmark16}
-                  disabled={invalid || saveDisabled || value === internalValue}
+                  disabled={value === internalValue}
                 />
               </>
             ) : (
@@ -330,7 +337,7 @@ export let InlineEdit = React.forwardRef(
           </div>
         </div>
         <div className={cx(`${blockClass}__disabled-cover`)} />
-        {showValidationText && validationText.length > 0 && (
+        {showValidation && validationText && validationText.length > 0 && (
           <div
             className={`${blockClass}__validation-text ${carbon.prefix}--form-requirement`}
           >
@@ -399,11 +406,15 @@ InlineEdit.propTypes = {
    */
   onCancel: PropTypes.func,
   /**
-   * method called on input event (it's a React thing onChange behaves like on input)
+   * method called on input event (it's a React thing onChange behaves like on input).
+   *
+   * NOTE: caller to handle invalid/warn states and associated text
    */
   onChange: PropTypes.func,
   /**
    * method called on change event
+   *
+   * NOTE: caller to handle invalid/warn states and associated text
    */
   onSave: PropTypes.func,
   /**
@@ -414,10 +425,6 @@ InlineEdit.propTypes = {
    * label for save button
    */
   saveDescription: PropTypes.string.isRequired,
-  /**
-   * disabled state of the save button
-   */
-  saveDisabled: PropTypes.bool,
   /**
    * vertical size of control
    */
@@ -434,13 +441,4 @@ InlineEdit.propTypes = {
    * text shown when warn true
    */
   warnText: PropTypes.string,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-InlineEdit.defaultProps = {
-  light: true, // defaults to true to reflect design
-  size: 'md',
 };

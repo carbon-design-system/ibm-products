@@ -29,9 +29,18 @@ import { pkg } from '../../settings';
 
 const componentName = 'ExportModal';
 
+// Default values for props
+const defaults = {
+  inputType: 'text',
+  preformattedExtensions: Object.freeze([]),
+  validExtensions: Object.freeze([]),
+};
+
 export let ExportModal = forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       body,
       className,
       error,
@@ -39,14 +48,14 @@ export let ExportModal = forwardRef(
       filename,
       hidePasswordLabel,
       inputLabel,
-      inputType,
+      inputType = defaults.inputType,
       invalidInputText,
       loading,
       loadingMessage,
       onClose,
       onRequestSubmit,
       open,
-      preformattedExtensions,
+      preformattedExtensions = defaults.preformattedExtensions,
       preformattedExtensionsLabel,
       primaryButtonText,
       secondaryButtonText,
@@ -54,7 +63,9 @@ export let ExportModal = forwardRef(
       successMessage,
       successful,
       title,
-      validExtensions,
+      validExtensions = defaults.validExtensions,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -308,12 +319,6 @@ ExportModal.propTypes = {
    * array of valid extensions the file can have
    */
   validExtensions: PropTypes.array,
-};
-
-ExportModal.defaultProps = {
-  inputType: 'text',
-  preformattedExtensions: [],
-  validExtensions: [],
 };
 
 ExportModal.displayName = componentName;

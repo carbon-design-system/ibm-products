@@ -14,12 +14,28 @@ import { ModifiedTabLabelNew } from './ModifiedTabLabelNew';
 import { pkg } from '../../settings';
 const componentName = 'ModifiedTabs';
 
+// Default values for props
+const defaults = {
+  tabs: [
+    {
+      id: 'tab-1',
+      label: 'Tab 1',
+      content: <div>Iam am the content of tab 1.</div>,
+      unsavedContent: false,
+    },
+  ],
+  newTabLabel: 'New tab',
+  newTabContent: 'Your new tab will be here soon',
+  onNewTab: undefined,
+  onCloseTab: undefined,
+};
+
 export let ModifiedTabs = ({
-  tabs,
-  newTabLabel,
-  newTabContent,
-  onNewTab,
-  onCloseTab,
+  tabs = defaults.tabs,
+  newTabLabel = defaults.newTabLabel,
+  newTabContent = defaults.newTabContent,
+  onNewTab = defaults.onNewTab,
+  onCloseTab = defaults.onCloseTab,
 }) => {
   const handleNewTab = () => {
     if (onNewTab) {
@@ -96,21 +112,6 @@ ModifiedTabs.propTypes = {
    * Tabs array containing tab object { id, label, content }
    */
   tabs: PropTypes.array,
-};
-
-ModifiedTabs.defaultProps = {
-  tabs: [
-    {
-      id: 'tab-1',
-      label: 'Tab 1',
-      content: <div>Iam am the content of tab 1.</div>,
-      unsavedContent: false,
-    },
-  ],
-  newTabLabel: 'New tab',
-  newTabContent: 'Your new tab will be here soon',
-  onNewTab: undefined,
-  onCloseTab: undefined,
 };
 
 ModifiedTabs.displayName = componentName;

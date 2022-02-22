@@ -54,9 +54,3 @@ ModifiedTabLabelWithClose.propTypes = {
    */
   unsavedContent: PropTypes.bool,
 };
-
-ModifiedTabLabelWithClose.defaultProps = {
-  unsavedContent: false,
-  label: '',
-  onClose: undefined,
-};

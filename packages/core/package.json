@@ -20,7 +20,7 @@
   "scripts": {
     "build": "run-s build:carbon build:storybook",
     "build:carbon": "sass --style=expanded --load-path node_modules --load-path ../../node_modules .storybook/carbon.scss:css/carbon.css",
-    "build:storybook": "build-storybook -s ./public",
+    "build:storybook": "export \"NODE_OPTIONS=--max_old_space_size=2048\" && build-storybook -s ./public",
     "clean": "rimraf storybook-static css",
     "start": "run-s build:carbon start:storybook",
     "start:storybook": "start-storybook -s ./public -p 3000",

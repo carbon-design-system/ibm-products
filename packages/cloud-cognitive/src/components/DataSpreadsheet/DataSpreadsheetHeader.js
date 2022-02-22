@@ -7,13 +7,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
 export const DataSpreadsheetHeader = ({ defaultColumn, headerGroups }) => {
   return (
-    <div>
+    <div className={cx(`${blockClass}__header--container`)}>
       {headerGroups.map((headerGroup, index) => (
         <div
           key={`header_${index}`}
@@ -22,8 +23,14 @@ export const DataSpreadsheetHeader = ({ defaultColumn, headerGroups }) => {
         >
           {/* SELECT ALL BUTTON */}
           <button
+            data-row-index="header"
+            data-column-index="header"
             type="button"
-            className={`${blockClass}__th`}
+            tabIndex={-1}
+            className={cx(
+              `${blockClass}__th`,
+              `${blockClass}--interactive-cell-element`
+            )}
             style={{
               width: defaultColumn?.rowHeaderWidth,
               height: defaultColumn?.rowHeight,
@@ -35,11 +42,17 @@ export const DataSpreadsheetHeader = ({ defaultColumn, headerGroups }) => {
           {headerGroup.headers.map((column, index) => (
             <button
               key={`column_${index}`}
+              data-row-index="header"
+              data-column-index={index}
+              tabIndex={-1}
               style={{
                 height: defaultColumn?.rowHeight,
               }}
               {...column.getHeaderProps()}
-              className={`${blockClass}__th`}
+              className={cx(
+                `${blockClass}__th`,
+                `${blockClass}--interactive-cell-element`
+              )}
               type="button"
             >
               {column.render('Header')}

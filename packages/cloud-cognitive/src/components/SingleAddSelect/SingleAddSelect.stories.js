@@ -33,17 +33,17 @@ const defaultProps = {
   items: [
     {
       id: '1',
-      label: 'Kansas',
+      title: 'Kansas',
       value: 'kansas',
     },
     {
       id: '2',
-      label: 'Texas',
+      title: 'Texas',
       value: 'texas',
     },
     {
       id: '3',
-      label: 'Florida',
+      title: 'Florida',
       value: 'florida',
     },
   ],
@@ -53,7 +53,7 @@ const defaultProps = {
   noResultsDescription: 'Try again',
   onCloseButtonText: 'Cancel',
   onSubmitButtonText: 'Select',
-  textInputLabel: 'test input label',
+  textInputLabel: 'test input title',
 };
 
 const Template = (args) => {
@@ -88,27 +88,27 @@ export const WithHierarchy = prepareStory(Template, {
       ...defaultProps.items,
       {
         id: '4',
-        label: 'California',
+        title: 'California',
         value: 'california',
         children: [
           {
             id: '5',
-            label: 'Los Angeles',
+            title: 'Los Angeles',
             value: 'la',
             children: [
               {
                 id: '6',
-                label: 'Third Level',
+                title: 'Third Level',
                 value: 'third level',
               },
               {
                 id: '7',
-                label: 'another Level',
+                title: 'another Level',
                 value: 'another level',
                 children: [
                   {
                     id: '8',
-                    label: 'last level',
+                    title: 'last level',
                     value: 'last level',
                   },
                 ],

@@ -1,0 +1,51 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@import '../../global/styles/project-settings';
+
+$block-class: 'ccs-sb--display-box';
+
+/**
+  Adds a box indicating the extent of the available space to the displayed component
+*/
+.#{$block-class} {
+  position: relative;
+  display: inline-block;
+  padding-top: $spacing-09; // space for the indicators
+  color: $text-01;
+}
+
+.#{$block-class}__message {
+  position: absolute;
+  top: 0;
+  white-space: nowrap;
+}
+
+.#{$block-class}__indicator {
+  position: absolute;
+  top: $spacing-06;
+  width: 1px;
+  height: $spacing-06;
+  background-color: $text-01;
+  opacity: 0.5;
+}
+
+.#{$block-class}__indicator:nth-child(2) {
+  right: 0;
+}
+
+.#{$block-class}__indicator::after {
+  position: absolute;
+  // stylelint-disable-next-line carbon/layout-token-use
+  top: -1px;
+  left: calc(-1 * #{$spacing-01});
+  display: block;
+  width: $spacing-02;
+  height: $spacing-02;
+  background-color: $text-01;
+  border-radius: $spacing-01;
+  content: '';
+}

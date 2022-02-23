@@ -13,8 +13,10 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
+import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagSet } from '.';
 import mdx from './TagSet.mdx';
+import styles from './_storybook-styles.scss';
 
 const blockClass = `${pkg.prefix}--tag-set`;
 const blockClassModal = `${blockClass}-modal`;
@@ -134,6 +136,7 @@ export default {
   component: TagSet,
   parameters: {
     docs: { page: mdx },
+    styles,
   },
   argTypes: {
     containerWidth: {
@@ -147,7 +150,7 @@ export default {
           {`.${blockClassModal} { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
           ;
         </style>
-        <div className="ccs-sb__display-box">{story()}</div>
+        <DisplayBox>{story()}</DisplayBox>
       </>
     ),
   ],

@@ -12,6 +12,7 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
+import { DisplayBox } from '../../global/js/utils/DisplayBox';
 
 import { InlineEdit } from '.';
 import mdx from './InlineEdit.mdx';
@@ -65,9 +66,7 @@ export default {
   },
   decorators: [
     (story) => (
-      <div className={`${storyClass}__viewport ccs-sb__display-box`}>
-        {story()}
-      </div>
+      <DisplayBox className={`${storyClass}__viewport`}>{story()}</DisplayBox>
     ),
   ],
 };

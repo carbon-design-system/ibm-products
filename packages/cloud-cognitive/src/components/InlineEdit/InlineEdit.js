@@ -203,7 +203,7 @@ export let InlineEdit = React.forwardRef(
           refInput.current.blur(); // will cause save
           break;
         case 'Escape':
-          refInput.current.blur(); // will cause save
+          handleCancel();
           break;
       }
     };

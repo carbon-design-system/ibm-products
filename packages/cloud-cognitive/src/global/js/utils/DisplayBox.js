@@ -16,11 +16,11 @@ export const DisplayBox = ({ children, className, msg }) => {
     <div className={cx(blockClass, className)}>
       <div className={`${blockClass}__message`}>
         {msg ||
-          'NOTE: The indicators below show the horizontal extent of the component, controlled by the story.'}
+          'NOTE: The indicators below show the horizontal space provided to the component by storybook.'}
       </div>
-      <div className={`${blockClass}__indicator`} />
+      <div className={`${blockClass}__indicator--left`} />
       {children}
-      <div className={`${blockClass}__indicator`} />
+      <div className={`${blockClass}__indicator--right`} />
     </div>
   );
 };

@@ -24,28 +24,22 @@ $block-class: 'ccs-sb--display-box';
   white-space: nowrap;
 }
 
-.#{$block-class}__indicator {
+.#{$block-class}__indicator--left,
+.#{$block-class}__indicator--right {
   position: absolute;
   top: $spacing-06;
-  width: 1px;
-  height: $spacing-06;
-  background-color: $text-01;
+  width: 0;
+  height: 0;
+  border-top: $spacing-06 solid $text-01;
   opacity: 0.5;
 }
 
-.#{$block-class}__indicator:nth-child(2) {
-  right: 0;
+.#{$block-class}__indicator--left {
+  left: calc(-1 * #{$spacing-03});
+  border-left: $spacing-03 solid transparent;
 }
 
-.#{$block-class}__indicator::after {
-  position: absolute;
-  // stylelint-disable-next-line carbon/layout-token-use
-  top: -1px;
-  left: calc(-1 * #{$spacing-01});
-  display: block;
-  width: $spacing-02;
-  height: $spacing-02;
-  background-color: $text-01;
-  border-radius: $spacing-01;
-  content: '';
+.#{$block-class}__indicator--right {
+  right: calc(-1 * #{$spacing-03});
+  border-right: $spacing-03 solid transparent;
 }

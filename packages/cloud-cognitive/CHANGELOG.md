@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.7.0...@carbon/ibm-products@1.8.0) (2022-02-22)
+
+
+### Bug Fixes
+
+* inline edit placeholder blocking input click ([#1675](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1675)) ([277c133](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/277c133f5dfcf91ab20df52bb798b7266974b8c8))
+* make inline edit story validation more robust ([#1678](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1678)) ([75d7628](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/75d762859d34628e1afd62428ffd6e8ff533eda3))
+
+
+### Features
+
+* **DataSpreadsheet:** [#1652](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1652) spreadsheet keyboard active cell ([#1663](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1663)) ([c64b953](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c64b95312ee1ea863e396b3021c8c75c2eed5fc2))
+* **DataSpreadsheet:** data spreadsheet active cell ([#1648](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1648)) ([902cc03](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/902cc039935f6b962aa5601427db1adda3da896a))
+
+
+
+
+
 # [1.7.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.6.1...@carbon/ibm-products@1.7.0) (2022-02-16)
 
 

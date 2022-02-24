@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
-import { APIKeyModal } from '@carbon/ibm-cloud-cognitive';
+
+// ----------------------------------------------------
+// This is an example showing use of the
+// APIKeyModal component
+// from the @carbon/ibm-products component library.
+// ----------------------------------------------------
+
+import { APIKeyModal } from '@carbon/ibm-products';
 import { Button, InlineLoading } from 'carbon-components-react';
 
-export const TestComponent = () => {
+export const Example = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const props = {

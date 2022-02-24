@@ -48,8 +48,8 @@ export let InlineEdit = React.forwardRef(
       cancelDescription,
       className,
       disabled,
+      editAlwaysVisible,
       editDescription,
-      editVisibleOnHoverOnly,
       id,
       invalid,
       invalidText,
@@ -327,8 +327,7 @@ export let InlineEdit = React.forwardRef(
               <Button
                 aria-hidden="true"
                 className={cx(`${blockClass}__edit`, {
-                  [`${blockClass}__edit--hover-visible`]:
-                    editVisibleOnHoverOnly,
+                  [`${blockClass}__edit--always-visible`]: editAlwaysVisible,
                 })}
                 kind="ghost"
                 hasIconOnly
@@ -378,14 +377,13 @@ InlineEdit.propTypes = {
    */
   disabled: PropTypes.bool,
   /**
+   * By default the edit icon is shown on hover only.
+   */
+  editAlwaysVisible: PropTypes.bool,
+  /**
    * Label for the edit button
    */
   editDescription: PropTypes.string.isRequired,
-  /**
-   * In some scenarios the edit icon only needs to be shown on hover. These cases are where continual visibility of
-   * the edit icon is redundant. E.g. a spreadsheet a property panel.
-   */
-  editVisibleOnHoverOnly: PropTypes.bool,
   /**
    * ID for inline edit
    */

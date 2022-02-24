@@ -87,11 +87,29 @@
     }
     .#{$block-class}__active-cell--highlight {
       position: absolute;
+      z-index: 2;
       border: $spacing-01 solid $interactive-01;
       background-color: transparent;
       &:focus {
         border: $spacing-01 solid $interactive-01;
         outline: 0;
+      }
+    }
+    .#{$block-class}__selection-area--element {
+      position: absolute;
+      z-index: 2;
+      border: 1px solid $interactive-01;
+      pointer-events: none;
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: $interactive-01;
+        content: '';
+        opacity: 0.25;
       }
     }
   }

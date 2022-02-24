@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { TextInput, Tag } from 'carbon-components-react';
@@ -15,6 +15,7 @@ import { pkg } from '../../settings';
 import { AddSelectSidebar } from './AddSelectSidebar';
 import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs';
 import { AddSelectList } from './AddSelectList';
+import { AddSelectColumn } from './AddSelectColumn';
 const componentName = 'AddSelect';
 
 // Default values for props
@@ -60,6 +61,56 @@ export let AddSelect = forwardRef(
     const [singleSelection, setSingleSelection] = useState('');
     const [multiSelection, setMultiSelection] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
+    const [normalizedItems, setNormalizedItems] = useState({});
+    const [useNormalizedItems, setUsedNormalizedItems] = useState(false);
+
+    useEffect(() => {
+      const normalize = (arr, parentId) => {
+        return arr.reduce((acc, cur) => {
+          const { children, ...item } = cur;
+          acc[cur.id] = { ...item };
+          if (parentId) {
+            acc[cur.id].parent = parentId;
+          }
+          if (children) {
+            acc[cur.id].children = children.map((child) => child.id);
+            const child = normalize(children, cur.id);
+            return { ...acc, ...child };
+          }
+          return acc;
+        }, {});
+      };
+      if (multi && items.find((item) => item.children)) {
+        const newItems = normalize(items);
+        setNormalizedItems(newItems);
+        setUsedNormalizedItems(true);
+      }
+    }, [items, multi]);
+
+    const getPages = () => {
+      const results = [];
+      const itemIds = Object.keys(normalizedItems);
+      const topLevelItems = [];
+      itemIds.forEach((itemId) => {
+        if (!normalizedItems[itemId].parent) {
+          topLevelItems.push(normalizedItems[itemId]);
+        }
+      });
+      results.push(topLevelItems);
+      if (path.length) {
+        const pathIds = path.map((p) => p.id);
+        pathIds.forEach((pathId) => {
+          const childItems = [];
+          itemIds.forEach((itemId) => {
+            if (normalizedItems[itemId].parent === pathId) {
+              childItems.push(normalizedItems[itemId]);
+            }
+          });
+          results.push(childItems);
+        });
+      }
+      return results;
+    };
 
     // handlers
     const handleSearch = (e) => {
@@ -94,7 +145,7 @@ export let AddSelect = forwardRef(
       return results;
     };
 
-    const filteredItems = getFilteredItems();
+    const itemsToDisplay = useNormalizedItems ? getPages() : getFilteredItems();
 
     // main content
     const body = (
@@ -117,32 +168,54 @@ export let AddSelect = forwardRef(
             ) : (
               <p className={`${blockClass}__items-label`}>{itemsLabel}</p>
             )}
-            <Tag
-              type="gray"
-              size="sm"
-              className={`${blockClass}__items-label-tag`}
-            >
-              {filteredItems.length}
-            </Tag>
+            {!useNormalizedItems && (
+              <Tag
+                type="gray"
+                size="sm"
+                className={`${blockClass}__items-label-tag`}
+              >
+                {itemsToDisplay.length}
+              </Tag>
+            )}
           </div>
         </div>
-        {filteredItems.length > 0 ? (
-          <AddSelectList
-            filteredItems={filteredItems}
-            multi={multi}
-            multiSelection={multiSelection}
-            path={path}
-            setMultiSelection={setMultiSelection}
-            setPath={setPath}
-            setSingleSelection={setSingleSelection}
-            singleSelection={singleSelection}
-          />
+        {useNormalizedItems ? (
+          <div className={`${blockClass}__columns`}>
+            {itemsToDisplay.map((page, idx) => (
+              <AddSelectColumn
+                key={idx}
+                filteredItems={page}
+                multi={multi}
+                multiSelection={multiSelection}
+                path={path}
+                setMultiSelection={setMultiSelection}
+                setPath={setPath}
+                setSingleSelection={setSingleSelection}
+                singleSelection={singleSelection}
+              />
+            ))}
+          </div>
         ) : (
-          <div className={`${blockClass}__body`}>
-            <NoDataEmptyState
-              subtitle={noResultsDescription}
-              title={noResultsTitle}
-            />
+          <div>
+            {itemsToDisplay.length > 0 ? (
+              <AddSelectList
+                filteredItems={itemsToDisplay}
+                multi={multi}
+                multiSelection={multiSelection}
+                path={path}
+                setMultiSelection={setMultiSelection}
+                setPath={setPath}
+                setSingleSelection={setSingleSelection}
+                singleSelection={singleSelection}
+              />
+            ) : (
+              <div className={`${blockClass}__body`}>
+                <NoDataEmptyState
+                  subtitle={noResultsDescription}
+                  title={noResultsTitle}
+                />
+              </div>
+            )}
           </div>
         )}
       </>

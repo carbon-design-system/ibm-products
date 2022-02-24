@@ -31,21 +31,21 @@ const defaultProps = {
   items: [
     {
       id: '1',
-      title: 'Kansas',
-      value: 'kansas',
-      subtitle: 'subtitle',
+      value: '1',
+      title: 'item 1',
+      subtitle: 'item 1',
     },
     {
       id: '2',
-      title: 'Texas',
-      value: 'texas',
-      subtitle: 'subtitle',
+      value: '2',
+      title: 'item 2',
+      subtitle: 'item 2',
     },
     {
       id: '3',
-      title: 'Florida',
-      value: 'florida',
-      subtitle: 'subtitle',
+      value: '3',
+      title: 'item 3',
+      subtitle: 'item 3',
     },
   ],
   title: 'Add business terms',
@@ -78,25 +78,59 @@ export const WithHierarchy = prepareStory(Template, {
   args: {
     ...defaultProps,
     items: [
-      ...defaultProps.items,
       {
-        id: '4',
-        title: 'California',
-        value: 'california',
-        subtitle: 'some / other / path',
+        id: '1',
+        value: '1',
+        title: 'item 1',
+        subtitle: 'item 1',
         children: [
           {
-            id: '5',
-            title: 'Los Angeles',
-            value: 'la',
+            id: '1-1',
+            value: '1-1',
+            title: 'item 1-1',
             children: [
               {
-                id: '453',
-                title: 'Something',
-                value: 'something',
-                tags: 'list of tags',
+                id: '1-1-1',
+                value: '1-1-1',
+                title: 'item 1-1-1',
+              },
+              {
+                id: '1-1-2',
+                value: '1-1-2',
+                title: 'item 1-1-2',
               },
             ],
+          },
+          {
+            id: '1-2',
+            value: '1-2',
+            title: 'item 1-2',
+            children: [
+              {
+                id: '1-2-1',
+                value: '1-2-1',
+                title: 'item 1-2-1',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: '2',
+        value: '2',
+        title: 'item 2',
+        subtitle: 'item 2',
+      },
+      {
+        id: '3',
+        value: '3',
+        title: 'item 3',
+        subtitle: 'item 3',
+        children: [
+          {
+            id: '3-1',
+            value: '3-1',
+            title: 'item 3-1',
           },
         ],
       },

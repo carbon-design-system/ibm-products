@@ -80,7 +80,7 @@ export const DataSpreadsheetBody = ({
           const indexOfItemToUpdate = selectionAreaClone.findIndex(
             (item) => item.matcher === currentMatcher
           );
-          // No items in the array have an object with only one set of key/value pairs
+          // No items in the array have an object that matches the value of currentMatcher
           if (indexOfItemToUpdate === -1) {
             return prev;
           }

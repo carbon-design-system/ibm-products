@@ -62,6 +62,9 @@ export let DataSpreadsheet = React.forwardRef(
     const focusedElement = useActiveElement();
     const [containerHasFocus, setContainerHasFocus] = useState(false);
     const [activeCellCoordinates, setActiveCellCoordinates] = useState(null);
+    const [selectionAreas, setSelectionAreas] = useState([]);
+    const [clickAndHoldActive, setClickAndHoldActive] = useState(false);
+    const [currentMatcher, setCurrentMatcher] = useState(null);
     const cellSizeValue = getCellSize(cellSize);
     const defaultColumn = useMemo(
       () => ({
@@ -120,6 +123,14 @@ export let DataSpreadsheet = React.forwardRef(
       }
     }, [spreadsheetRef]);
 
+    // Removes the cell selection elements
+    const removeCellSelections = useCallback(() => {
+      const cellSelections = spreadsheetRef.current.querySelectorAll(
+        `.${blockClass}__selection-area--element`
+      );
+      Array.from(cellSelections).forEach((element) => element.remove());
+    }, [spreadsheetRef]);
+
     // Click outside useEffect
     useEffect(() => {
       const handleOutsideClick = (event) => {
@@ -132,7 +143,9 @@ export let DataSpreadsheet = React.forwardRef(
         ) {
           return;
         }
+        setSelectionAreas([]);
         removeActiveCell();
+        removeCellSelections();
         setContainerHasFocus(false);
         setActiveCellCoordinates(null);
       };
@@ -140,7 +153,7 @@ export let DataSpreadsheet = React.forwardRef(
       return () => {
         document.removeEventListener('click', handleOutsideClick);
       };
-    }, [spreadsheetRef, removeActiveCell]);
+    }, [spreadsheetRef, removeActiveCell, removeCellSelections]);
 
     const createActiveCell = useCallback(
       ({ placementElement, coords, addToHeader = false }) => {
@@ -194,9 +207,17 @@ export let DataSpreadsheet = React.forwardRef(
         if ([35, 36, 37, 38, 39, 40].indexOf(keyCode) > -1) {
           event.preventDefault();
         }
+        // Clear out all cell selection areas if user uses any arrow key
+        if ([37, 38, 39, 40].indexOf(keyCode) > -1) {
+          if (selectionAreas?.length) {
+            setSelectionAreas([]);
+            removeCellSelections();
+          }
+        }
         switch (keyCode) {
           // Tab
           case 9: {
+            setSelectionAreas([]);
             removeActiveCell();
             setContainerHasFocus(false);
             setActiveCellCoordinates(null);
@@ -300,6 +321,8 @@ export let DataSpreadsheet = React.forwardRef(
       [
         handleInitialArrowPress,
         activeCellCoordinates,
+        selectionAreas?.length,
+        removeCellSelections,
         removeActiveCell,
         columns.length,
         rows.length,
@@ -359,6 +382,13 @@ export let DataSpreadsheet = React.forwardRef(
 
         {/* BODY */}
         <DataSpreadsheetBody
+          clickAndHoldActive={clickAndHoldActive}
+          setClickAndHoldActive={setClickAndHoldActive}
+          currentMatcher={currentMatcher}
+          setCurrentMatcher={setCurrentMatcher}
+          setContainerHasFocus={setContainerHasFocus}
+          selectionAreas={selectionAreas}
+          setSelectionAreas={setSelectionAreas}
           cellSize={cellSize}
           defaultColumn={defaultColumn}
           getTableBodyProps={getTableBodyProps}

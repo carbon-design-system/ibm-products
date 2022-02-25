@@ -42,9 +42,9 @@ export let AddSelectSidebar = ({
 
   const getTitle = ({ title, subtitle, id }) => (
     <div className={`${blockClass}-accordion-title`}>
-      <div>
-        <p>{title}</p>
-        <p>{subtitle}</p>
+      <div className={`${blockClass}-selected-item`}>
+        <p className={`${blockClass}-selected-item-title`}>{title}</p>
+        <p className={`${blockClass}-selected-item-subtitle`}>{subtitle}</p>
       </div>
       <Button
         renderIcon={SubtractAlt32}

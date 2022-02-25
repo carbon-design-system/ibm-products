@@ -89,6 +89,23 @@
     justify-content: space-between;
   }
 
+  // columns
+
+  .#{$block-class}__columns {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .#{$block-class}__columns .#{$block-class}__selections-cell {
+    // stylelint-disable-next-line
+    padding: 0 $spacing-05 !important;
+  }
+
+  .#{$block-class}__column {
+    padding: $spacing-05;
+    border-right: $ui-03;
+  }
+
   // overrides
 
   // the influencer sidebar needs to be even with the buttons

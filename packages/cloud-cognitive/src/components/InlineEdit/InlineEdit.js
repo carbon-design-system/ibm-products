@@ -96,6 +96,7 @@ export let InlineEdit = React.forwardRef(
     };
 
     const handleEdit = (ev) => {
+      /* istanbul ignore else */
       if (!disabled) {
         const rightOfInput =
           ev.currentTarget.classList.contains(`${blockClass}__edit`) ||
@@ -146,7 +147,8 @@ export let InlineEdit = React.forwardRef(
       }
     };
 
-    const handlePaste = (ev) => {
+    // pasting into contentEditable not supported by userEvent
+    const handlePaste = /* istanbul ignore next */ (ev) => {
       ev.preventDefault();
 
       // Get clipboard as plain text

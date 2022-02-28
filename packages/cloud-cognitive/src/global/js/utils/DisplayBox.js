@@ -25,7 +25,6 @@ export const DisplayBox = ({ children, className, msg }) => {
           )}
         </div>
         <div className={`${blockClass}__indicator--left`} />
-        <div className={`${blockClass}__indicator--bar`} />
         <div className={`${blockClass}__indicator--right`} />
       </div>
       {children}

@@ -25,6 +25,7 @@ $indicator-height: $spacing-04;
   position: absolute;
   top: 0;
   width: 100%;
+  border-bottom: 1px solid $text-05;
   white-space: nowrap;
   @include carbon--type-style('helper-text-01');
 }
@@ -58,12 +59,4 @@ $indicator-height: $spacing-04;
 
 .#{$block-class}__indicator--right {
   right: calc(-1 * $indicator-width);
-}
-
-.#{$block-class}__indicator--bar {
-  position: absolute;
-  // stylelint-disable-next-line carbon/layout-token-use
-  bottom: -1px;
-  width: 100%;
-  border-bottom: 1px solid $text-05;
 }

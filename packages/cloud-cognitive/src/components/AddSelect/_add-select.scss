@@ -47,6 +47,18 @@
       align-items: center;
       justify-content: space-between;
     }
+
+    &-cell-title {
+      display: block;
+      color: $text-01;
+    }
+
+    &-cell-subtitle {
+      @include carbon--type-style('label-01');
+
+      display: block;
+      color: $text-02;
+    }
   }
 
   // sidebar
@@ -65,18 +77,33 @@
     margin-right: $spacing-03;
   }
 
+  .#{$block-class}__sidebar-selected-item {
+    &-title {
+      color: $text-01;
+    }
+
+    &-subtitle {
+      @include carbon--type-style('label-01');
+
+      color: $text-02;
+    }
+  }
+
   .#{$block-class}__sidebar-body {
     padding: $spacing-05;
   }
 
   .#{$block-class} .#{$block-class}__sidebar-item-header {
     @include carbon--type-style('label-01');
+
+    margin-bottom: $spacing-03;
+    color: $text-02;
   }
 
   .#{$block-class} .#{$block-class}__sidebar-item-body {
     @include carbon--type-style('body-long-01');
 
-    margin-bottom: $spacing-03;
+    margin-bottom: $spacing-05;
   }
 
   .#{$block-class} .#{$block-class}__sidebar-item-remove-button:hover {
@@ -114,6 +141,10 @@
     flex: 0 0 50%;
   }
 
+  .#{$block-class} .#{$tearsheet-class}__header-description {
+    color: $text-02;
+  }
+
   .#{$block-class} .#{$block-class}__items-label {
     @include carbon--type-style('productive-heading-01');
   }
@@ -129,6 +160,10 @@
     padding-bottom: $spacing-05;
   }
 
+  .#{$block-class} .#{$carbon-prefix}--radio-button__appearance {
+    margin: 0 $spacing-05 0 0;
+  }
+
   .#{$block-class}
     .#{$carbon-prefix}--radio-button-wrapper
     .#{$carbon-prefix}--radio-button__label {
@@ -139,7 +174,7 @@
     cursor: pointer;
   }
 
-  .#{$carbon-prefix}--accordion__item {
+  .#{$block-class} .#{$carbon-prefix}--accordion__item {
     &:hover .#{$block-class}__sidebar-accordion-title button {
       opacity: 1;
     }
@@ -147,6 +182,10 @@
     .#{$block-class}__sidebar-accordion-title button {
       opacity: 0;
     }
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--checkbox-label-text {
+    padding-left: $spacing-05;
   }
 }
 

@@ -33,19 +33,19 @@ const defaultProps = {
       id: '1',
       value: '1',
       title: 'item 1',
-      subtitle: 'item 1',
+      subtitle: 'item 1 subtitle',
     },
     {
       id: '2',
       value: '2',
       title: 'item 2',
-      subtitle: 'item 2',
+      // subtitle: 'item 2 subtitle',
     },
     {
       id: '3',
       value: '3',
       title: 'item 3',
-      subtitle: 'item 3',
+      subtitle: 'item 3 subtitle',
     },
   ],
   title: 'Add business terms',
@@ -82,7 +82,7 @@ export const WithHierarchy = prepareStory(Template, {
         id: '1',
         value: '1',
         title: 'item 1',
-        subtitle: 'item 1',
+        subtitle: 'item 1 subtitle',
         children: [
           {
             id: '1-1',
@@ -119,13 +119,13 @@ export const WithHierarchy = prepareStory(Template, {
         id: '2',
         value: '2',
         title: 'item 2',
-        subtitle: 'item 2',
+        subtitle: 'item 2 subtitle',
       },
       {
         id: '3',
         value: '3',
         title: 'item 3',
-        subtitle: 'item 3',
+        subtitle: 'item 3 subtitle',
         children: [
           {
             id: '3-1',

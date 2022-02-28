@@ -21,6 +21,7 @@ const componentName = 'AddSelectList';
 
 export let AddSelectList = ({
   filteredItems,
+  inColumn,
   multi,
   multiSelection,
   path,
@@ -86,7 +87,20 @@ export let AddSelectList = ({
                     <Checkbox
                       className={`${blockClass}-checkbox`}
                       onChange={(value) => handleMultiSelection(item.id, value)}
-                      labelText={item.title}
+                      labelText={
+                        !inColumn ? (
+                          <>
+                            <span className={`${blockClass}-cell-title`}>
+                              {item.title}
+                            </span>
+                            <span className={`${blockClass}-cell-subtitle`}>
+                              {item.subtitle}
+                            </span>
+                          </>
+                        ) : (
+                          item.title
+                        )
+                      }
                       id={item.id}
                       checked={multiSelection.includes(item.id)}
                     />
@@ -116,6 +130,7 @@ export let AddSelectList = ({
 
 AddSelectList.propTypes = {
   filteredItems: PropTypes.array,
+  inColumn: PropTypes.bool,
   multi: PropTypes.bool,
   multiSelection: PropTypes.array,
   path: PropTypes.array,

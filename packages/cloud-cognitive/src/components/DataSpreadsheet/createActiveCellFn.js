@@ -57,6 +57,6 @@ export const createActiveCellFn = ({
   activeElementContainer.appendChild(activeCellButton);
   activeCellButton.focus();
   if (typeof coords?.column === 'number' && typeof coords?.row === 'number') {
-    onActiveCellChange(activeCellValue);
+    onActiveCellChange?.(activeCellValue);
   }
 };

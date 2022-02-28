@@ -14,13 +14,21 @@ const blockClass = 'ccs-sb--display-box';
 export const DisplayBox = ({ children, className, msg }) => {
   return (
     <div className={cx(blockClass, className)}>
-      <div className={`${blockClass}__message`}>
-        {msg ||
-          'NOTE: The indicators below show the horizontal space provided to the component by storybook.'}
+      <div className={`${blockClass}__indicator`}>
+        <div className={`${blockClass}__message`}>
+          {msg || (
+            <>
+              width available to component
+              <br />
+              (use containerWidth control to adjust)
+            </>
+          )}
+        </div>
+        <div className={`${blockClass}__indicator--left`} />
+        <div className={`${blockClass}__indicator--bar`} />
+        <div className={`${blockClass}__indicator--right`} />
       </div>
-      <div className={`${blockClass}__indicator--left`} />
       {children}
-      <div className={`${blockClass}__indicator--right`} />
     </div>
   );
 };

@@ -8,38 +8,62 @@
 
 $block-class: 'ccs-sb--display-box';
 
+$indicator-width: $spacing-02;
+$indicator-height: $spacing-04;
+
 /**
   Adds a box indicating the extent of the available space to the displayed component
 */
 .#{$block-class} {
   position: relative;
   display: inline-block;
-  padding-top: $spacing-09; // space for the indicators
-  color: $text-01;
+  padding-top: $spacing-05; // space for the indicators
+  color: $text-05;
+}
+
+.#{$block-class}__indicator {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  white-space: nowrap;
+  @include carbon--type-style('helper-text-01');
 }
 
 .#{$block-class}__message {
   position: absolute;
-  top: 0;
-  white-space: nowrap;
+  bottom: $spacing-02;
+}
+
+.sb-main-centered .#{$block-class}__message {
+  left: 50%;
+  min-width: 100vh;
+  text-align: center;
+  transform: translateX(-50%);
 }
 
 .#{$block-class}__indicator--left,
 .#{$block-class}__indicator--right {
   position: absolute;
-  top: $spacing-06;
+  bottom: calc(-1 * $indicator-height);
   width: 0;
   height: 0;
-  border-top: $spacing-06 solid $text-01;
-  opacity: 0.5;
+  border-top: $indicator-height solid $text-05;
+  border-right: $indicator-width solid transparent;
+  border-left: $indicator-width solid transparent;
 }
 
 .#{$block-class}__indicator--left {
-  left: calc(-1 * #{$spacing-03});
-  border-left: $spacing-03 solid transparent;
+  left: calc(-1 * $indicator-width);
 }
 
 .#{$block-class}__indicator--right {
-  right: calc(-1 * #{$spacing-03});
-  border-right: $spacing-03 solid transparent;
+  right: calc(-1 * $indicator-width);
+}
+
+.#{$block-class}__indicator--bar {
+  position: absolute;
+  // stylelint-disable-next-line carbon/layout-token-use
+  bottom: -1px;
+  width: 100%;
+  border-bottom: 1px solid $text-05;
 }

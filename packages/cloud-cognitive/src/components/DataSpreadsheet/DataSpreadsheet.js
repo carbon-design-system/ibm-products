@@ -189,8 +189,8 @@ export let DataSpreadsheet = React.forwardRef(
         const prevCoords = previousState?.activeCellCoordinates;
         // Only create an active cell if the activeCellCoordinates have changed
         if (
-          prevCoords?.row !== coords.row ||
-          prevCoords?.column !== coords.column
+          prevCoords?.row !== coords?.row ||
+          prevCoords?.column !== coords?.column
         ) {
           createActiveCellFn({
             placementElement,

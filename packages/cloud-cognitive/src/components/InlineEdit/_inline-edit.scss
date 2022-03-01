@@ -81,7 +81,9 @@
 
     position: relative;
     display: inline-block;
-    // min-width: 250px; // similar to min input box with room for toolbar
+    // A standard input box is based on size (often around 150px)
+    // In our case there are potentially 2 * size buttons which we double
+    min-width: calc(4 * var(--#{$block-class}--size));
     max-width: 100%;
     height: var(--#{$block-class}--size);
     background-color: var(--#{$block-class}--background-color);
@@ -119,11 +121,11 @@
       overflow: hidden;
       // positions text and placeholder including when showing placeholder
       // NOTE: Using flex does strange things to a caret in content editable
-      min-width: calc(100% - 3 * var(--#{$block-class}--size) - $spacing-05);
-      max-width: calc(100% - 3 * var(--#{$block-class}--size) - $spacing-05);
+      width: calc(100% - 2 * var(--#{$block-class}--size) - $spacing-05);
+      max-width: calc(100% - 2 * var(--#{$block-class}--size) - $spacing-05);
       min-height: var(--#{$block-class}--size);
       // stylelint-disable-next-line carbon/layout-token-use
-      margin-right: calc(3 * var(--#{$block-class}--size));
+      margin-right: calc(2 * var(--#{$block-class}--size));
       // room for toolbar
       margin-left: $spacing-05;
       // stylelint-disable-next-line carbon/type-token-use
@@ -132,6 +134,14 @@
       &:focus {
         outline: none;
       }
+    }
+
+    &.#{$block-class}--invalid .#{$block-class}__input {
+      // add space for validation
+      width: calc(100% - 3 * var(--#{$block-class}--size) - $spacing-05);
+      max-width: calc(100% - 3 * var(--#{$block-class}--size) - $spacing-05);
+      // stylelint-disable-next-line carbon/layout-token-use
+      margin-right: calc(3 * var(--#{$block-class}--size));
     }
 
     .#{$block-class}__input::after {
@@ -198,10 +208,15 @@
       right: 0;
       display: flex;
       // width: room for validation, and two buttons
-      width: calc(3 * var(--#{$block-class}--size));
+      width: calc(2 * var(--#{$block-class}--size));
       height: 100%;
       justify-content: space-between;
       cursor: text;
+    }
+
+    &.#{$block-class}--invalid .#{$block-class}__after-input-elements {
+      // width: room for validation, and two buttons
+      width: calc(3 * var(--#{$block-class}--size));
     }
 
     .#{$block-class}__toolbar--animation {

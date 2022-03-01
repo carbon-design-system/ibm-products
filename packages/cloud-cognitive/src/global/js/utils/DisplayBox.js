@@ -35,5 +35,5 @@ export const DisplayBox = ({ children, className, msg }) => {
 DisplayBox.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  msg: PropTypes.string,
+  msg: PropTypes.node,
 };

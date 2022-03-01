@@ -16,6 +16,7 @@ export const createActiveCellFn = ({
   blockClass = `${pkg.prefix}--data-spreadsheet`,
   onActiveCellChange,
   activeCellValue,
+  handleActiveCellMouseEnter,
 }) => {
   if (!coords) {
     return;
@@ -42,6 +43,7 @@ export const createActiveCellFn = ({
     `${blockClass}__active-cell--highlight`,
     `${blockClass}--interactive-cell-element`
   );
+  activeCellButton.addEventListener('mouseenter', handleActiveCellMouseEnter);
   activeCellButton.style.width = px(placementElement?.offsetWidth);
   activeCellButton.style.height = px(placementElement?.offsetHeight);
   activeCellButton.style.left = px(relativePosition.left);

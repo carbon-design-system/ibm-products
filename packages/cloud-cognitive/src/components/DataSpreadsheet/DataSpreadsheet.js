@@ -27,6 +27,7 @@ import { getCellSize } from './getCellSize';
 import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
 import { useActiveElement } from '../../global/js/hooks';
 import { createActiveCellFn } from './createActiveCellFn';
+import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
 // cspell:words rowcount colcount
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -64,8 +65,9 @@ export let DataSpreadsheet = React.forwardRef(
     const [activeCellCoordinates, setActiveCellCoordinates] = useState(null);
     const [selectionAreas, setSelectionAreas] = useState([]);
     const [clickAndHoldActive, setClickAndHoldActive] = useState(false);
-    const [currentMatcher, setCurrentMatcher] = useState(null);
+    const [currentMatcher, setCurrentMatcher] = useState('');
     const cellSizeValue = getCellSize(cellSize);
+    const currentMatcherRef = useRef();
     const defaultColumn = useMemo(
       () => ({
         width: 150,
@@ -124,12 +126,24 @@ export let DataSpreadsheet = React.forwardRef(
     }, [spreadsheetRef]);
 
     // Removes the cell selection elements
-    const removeCellSelections = useCallback(() => {
-      const cellSelections = spreadsheetRef.current.querySelectorAll(
-        `.${blockClass}__selection-area--element`
-      );
-      Array.from(cellSelections).forEach((element) => element.remove());
-    }, [spreadsheetRef]);
+    const removeCellSelections = useCallback(
+      (matcher) => {
+        if (matcher && typeof matcher === 'string') {
+          const selectionToRemove = spreadsheetRef.current.querySelector(
+            `[data-matcher-id="${matcher}"]`
+          );
+          if (selectionToRemove) {
+            selectionToRemove.remove();
+          }
+        } else {
+          const cellSelections = spreadsheetRef.current.querySelectorAll(
+            `.${blockClass}__selection-area--element`
+          );
+          [...cellSelections].forEach((element) => element.remove());
+        }
+      },
+      [spreadsheetRef]
+    );
 
     // Click outside useEffect
     useEffect(() => {
@@ -143,11 +157,11 @@ export let DataSpreadsheet = React.forwardRef(
         ) {
           return;
         }
+        setActiveCellCoordinates(null);
         setSelectionAreas([]);
         removeActiveCell();
         removeCellSelections();
         setContainerHasFocus(false);
-        setActiveCellCoordinates(null);
       };
       document.addEventListener('click', handleOutsideClick);
       return () => {
@@ -164,6 +178,12 @@ export let DataSpreadsheet = React.forwardRef(
         const activeCellValue = activeCellFullData
           ? Object.values(activeCellFullData.row.values)[coords?.column]
           : null;
+        const handleActiveCellMouseEnter = () => {
+          handleActiveCellMouseEnterCallback(
+            selectionAreas,
+            clickAndHoldActive
+          );
+        };
         createActiveCellFn({
           placementElement,
           coords,
@@ -172,9 +192,17 @@ export let DataSpreadsheet = React.forwardRef(
           blockClass,
           onActiveCellChange,
           activeCellValue,
+          handleActiveCellMouseEnter,
         });
       },
-      [spreadsheetRef, rows, onActiveCellChange]
+      [
+        spreadsheetRef,
+        rows,
+        onActiveCellChange,
+        clickAndHoldActive,
+        handleActiveCellMouseEnterCallback,
+        selectionAreas,
+      ]
     );
 
     const handleInitialArrowPress = useCallback(() => {
@@ -329,6 +357,42 @@ export let DataSpreadsheet = React.forwardRef(
       ]
     );
 
+    // Only update if there are cell selection areas
+    // Find point object that matches currentMatcher and remove the second point
+    // because hovering over the active cell while clicking and holding should
+    // remove the previously existing selection area
+    const handleActiveCellMouseEnterCallback = useCallback(
+      (areas, clickHold) => {
+        const freshMatcherValue = currentMatcherRef.current;
+        if (!freshMatcherValue) {
+          return;
+        }
+        if (areas && areas.length && clickHold && freshMatcherValue) {
+          setSelectionAreas((prev) => {
+            const selectionAreaClone = deepCloneObject(prev);
+            const indexOfItemToUpdate = selectionAreaClone.findIndex(
+              (item) => item.matcher === freshMatcherValue
+            );
+            if (indexOfItemToUpdate === -1) {
+              return prev;
+            }
+            if (
+              typeof selectionAreaClone[indexOfItemToUpdate].point2 ===
+                'object' &&
+              selectionAreaClone[indexOfItemToUpdate].areaCreated
+            ) {
+              selectionAreaClone[indexOfItemToUpdate].point2 = null;
+              selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
+              removeCellSelections(freshMatcherValue);
+              return selectionAreaClone;
+            }
+            return prev;
+          });
+        }
+      },
+      [removeCellSelections]
+    );
+
     // Adds active cell highlight to correct cell onKeyDown
     useEffect(() => {
       const activeCellPlacementElement = spreadsheetRef?.current.querySelector(
@@ -340,12 +404,19 @@ export let DataSpreadsheet = React.forwardRef(
         `[data-row-index="header"][data-column-index="header"]`
       );
       if (containerHasFocus) {
+        const handleActiveCellMouseEnter = () => {
+          handleActiveCellMouseEnterCallback(
+            selectionAreas,
+            clickAndHoldActive
+          );
+        };
         createActiveCell({
           placementElement: activeCellCoordinates
             ? activeCellPlacementElement
             : selectAllElement,
           coords: activeCellCoordinates,
           addToHeader: shouldPlaceActiveCellInHeader,
+          handleActiveCellMouseEnter,
         });
       }
     }, [
@@ -353,6 +424,9 @@ export let DataSpreadsheet = React.forwardRef(
       spreadsheetRef,
       createActiveCell,
       containerHasFocus,
+      selectionAreas,
+      handleActiveCellMouseEnterCallback,
+      clickAndHoldActive,
     ]);
 
     const localRef = useRef();
@@ -382,6 +456,7 @@ export let DataSpreadsheet = React.forwardRef(
 
         {/* BODY */}
         <DataSpreadsheetBody
+          ref={currentMatcherRef}
           clickAndHoldActive={clickAndHoldActive}
           setClickAndHoldActive={setClickAndHoldActive}
           currentMatcher={currentMatcher}

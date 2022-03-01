@@ -1,0 +1,62 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@import '../../global/styles/project-settings';
+
+$block-class: 'ccs-sb--display-box';
+
+$indicator-width: $spacing-02;
+$indicator-height: $spacing-04;
+
+/**
+  Adds a box indicating the extent of the available space to the displayed component
+*/
+.#{$block-class} {
+  position: relative;
+  display: inline-block;
+  padding-top: $spacing-05; // space for the indicators
+  color: $text-05;
+}
+
+.#{$block-class}__indicator {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  border-bottom: 1px solid $text-05;
+  white-space: nowrap;
+  @include carbon--type-style('helper-text-01');
+}
+
+.#{$block-class}__message {
+  position: absolute;
+  bottom: $spacing-02;
+}
+
+.sb-main-centered .#{$block-class}__message {
+  left: 50%;
+  min-width: 100vh;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.#{$block-class}__indicator--left,
+.#{$block-class}__indicator--right {
+  position: absolute;
+  bottom: calc(-1 * $indicator-height);
+  width: 0;
+  height: 0;
+  border-top: $indicator-height solid $text-05;
+  border-right: $indicator-width solid transparent;
+  border-left: $indicator-width solid transparent;
+}
+
+.#{$block-class}__indicator--left {
+  left: calc(-1 * $indicator-width);
+}
+
+.#{$block-class}__indicator--right {
+  right: calc(-1 * $indicator-width);
+}

@@ -14,6 +14,7 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
+import { DisplayBox } from '../../global/js/utils/DisplayBox';
 
 import { ActionSet } from '.';
 import { actionsOptions, actionsLabels, actionsMapping } from './actions.js';
@@ -38,10 +39,15 @@ export default {
       mapping: actionsMapping({}, action),
     },
   },
+  decorators: [
+    (story) => (
+      <DisplayBox msg="width available to component">{story()}</DisplayBox>
+    ),
+  ],
 };
 
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, size, ...args }) => {
+const Template = ({ actions, size = 'md', ...args }) => {
   const validationError = ActionSet.validateActions()(
     { actions, size, ...args },
     'actions',

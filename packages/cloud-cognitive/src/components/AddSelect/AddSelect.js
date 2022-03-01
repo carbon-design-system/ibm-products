@@ -147,6 +147,16 @@ export let AddSelect = forwardRef(
 
     const itemsToDisplay = useNormalizedItems ? getPages() : getFilteredItems();
 
+    const commonListProps = {
+      multi,
+      multiSelection,
+      path,
+      setMultiSelection,
+      setPath,
+      setSingleSelection,
+      singleSelection,
+    };
+
     // main content
     const body = (
       <>
@@ -183,15 +193,9 @@ export let AddSelect = forwardRef(
           <div className={`${blockClass}__columns`}>
             {itemsToDisplay.map((page, idx) => (
               <AddSelectColumn
+                {...commonListProps}
                 key={idx}
                 filteredItems={page}
-                multi={multi}
-                multiSelection={multiSelection}
-                path={path}
-                setMultiSelection={setMultiSelection}
-                setPath={setPath}
-                setSingleSelection={setSingleSelection}
-                singleSelection={singleSelection}
               />
             ))}
           </div>
@@ -199,14 +203,8 @@ export let AddSelect = forwardRef(
           <div>
             {itemsToDisplay.length > 0 ? (
               <AddSelectList
+                {...commonListProps}
                 filteredItems={itemsToDisplay}
-                multi={multi}
-                multiSelection={multiSelection}
-                path={path}
-                setMultiSelection={setMultiSelection}
-                setPath={setPath}
-                setSingleSelection={setSingleSelection}
-                singleSelection={singleSelection}
               />
             ) : (
               <div className={`${blockClass}__body`}>

@@ -1,5 +1,6 @@
 # Netlify build and deploy settings - https://docs.netlify.com/configure-builds/file-based-configuration/#sample-file
 [build]
+ignore = sh ./scripts/ignore_dependabot.sh
 command = "yarn storybook:build"
 publish = "packages/core/storybook-static"
 

@@ -15,7 +15,7 @@ export let AddSelectColumn = (props) => {
   const blockClass = `${pkg.prefix}--add-select__col`;
   return (
     <div className={blockClass}>
-      <AddSelectList {...props} />
+      <AddSelectList {...props} inColumn />
     </div>
   );
 };

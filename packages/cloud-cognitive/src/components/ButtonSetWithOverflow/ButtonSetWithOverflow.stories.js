@@ -14,6 +14,8 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { ButtonSetWithOverflow } from '.';
+import { DisplayBox } from '../../global/js/utils/DisplayBox';
+import styles from './_storybook-styles.scss';
 
 // Carbon and package components we use.
 
@@ -25,7 +27,10 @@ export default {
       control: { type: 'range', min: 20, max: 800, step: 10 },
     },
   },
-  decorators: [(story) => <div className="ccs-sb__display-box">{story()}</div>],
+  parameters: {
+    styles,
+  },
+  decorators: [(story) => <DisplayBox>{story()}</DisplayBox>],
 };
 
 const buttons = [

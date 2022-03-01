@@ -58,22 +58,3 @@
 [storybook-carbon-theme='debug'] body {
   color: initial;
 }
-
-/**
-  Adds a box indicating the extent of the available space to the displayed component
-*/
-.ccs-sb__display-box {
-  position: relative;
-  display: inline-block;
-  border: $layout-02 solid $ui-01;
-  color: $text-01;
-}
-
-.ccs-sb__display-box::before {
-  position: absolute;
-  top: calc(-1 * #{$layout-02});
-  left: 0;
-  margin-top: calc(-1 * #{$layout-02});
-  content: 'NOTE: Border around component shows extent of container, but not part of component.';
-  white-space: nowrap;
-}

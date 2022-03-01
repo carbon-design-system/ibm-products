@@ -6,15 +6,13 @@
 //
 
 @import '../../global/styles/project-settings';
+@import '../../global/styles/display-box';
 
 $block-class: #{$pkg-prefix}--action-set;
 
 .#{$block-class}__story-container {
   width: 96vw;
   min-height: 3rem;
-  border: 1px solid $decorative-01;
-  margin: $spacing-04 auto 0;
-  box-shadow: 0 0 10px 5px $ui-04;
 }
 
 .#{$block-class}__story-container--xlg {

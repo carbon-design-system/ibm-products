@@ -29,6 +29,7 @@ export let AddSelect = forwardRef(
       // The component props, in alphabetical order (for consistency).
 
       className,
+      columnInputPlaceholder,
       description,
       influencerTitle,
       inputPlaceholder,
@@ -168,7 +169,7 @@ export let AddSelect = forwardRef(
             value={searchTerm}
             onChange={handleSearch}
           />
-          <div className={`${blockClass}__items-label-container`}>
+          <div className={`${blockClass}__tag-container`}>
             {path.length ? (
               <AddSelectBreadcrumbs
                 itemsLabel={itemsLabel}
@@ -176,14 +177,12 @@ export let AddSelect = forwardRef(
                 setPath={setPath}
               />
             ) : (
-              <p className={`${blockClass}__items-label`}>{itemsLabel}</p>
+              <p className={`${blockClass}__tag-container-label`}>
+                {itemsLabel}
+              </p>
             )}
             {!useNormalizedItems && (
-              <Tag
-                type="gray"
-                size="sm"
-                className={`${blockClass}__items-label-tag`}
-              >
+              <Tag type="gray" size="sm">
                 {itemsToDisplay.length}
               </Tag>
             )}
@@ -196,6 +195,8 @@ export let AddSelect = forwardRef(
                 {...commonListProps}
                 key={idx}
                 filteredItems={page}
+                header={idx === 0 ? itemsLabel : path[idx - 1]?.title}
+                columnInputPlaceholder={columnInputPlaceholder}
               />
             ))}
           </div>
@@ -274,6 +275,7 @@ export let AddSelect = forwardRef(
 
 AddSelect.propTypes = {
   className: PropTypes.string,
+  columnInputPlaceholder: PropTypes.string,
   description: PropTypes.string,
   influencerTitle: PropTypes.string,
   inputPlaceholder: PropTypes.string,

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.8.0...@carbon/ibm-products@1.9.0) (2022-03-01)
+
+
+### Bug Fixes
+
+* adds mutli select hierarchy support ([#1659](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1659)) ([743938b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/743938b26215859c345b1d26b86e3a2fcc8fe6d5))
+* Using padding instead of margin to prevent border to being cut ([#1683](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1683)) ([991f865](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/991f8657c19fe19d2797ae731970d4272f4aada0))
+
+
+### Features
+
+* **DataSpreadsheet:** [#1674](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1674) add support for cell selection areas ([#1689](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1689)) ([6c5bf94](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6c5bf948249cf9a3e97120d8ab068793c308aeba))
+* **InlineEdit:** add cancel on use of escape key ([#1679](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1679)) ([fee29cd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fee29cda483a8a54fea29e05aeda11254ff024b1))
+* match design for edit button visibility ([#1676](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1676)) ([ba88bf9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ba88bf97f3c431187bd5bd28c6cebcbc938e57fa))
+
+
+
+
+
 # [1.8.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.7.0...@carbon/ibm-products@1.8.0) (2022-02-22)
 
 

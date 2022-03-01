@@ -28,6 +28,7 @@ import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
 import { useActiveElement } from '../../global/js/hooks';
 import { createActiveCellFn } from './createActiveCellFn';
 import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
+import { usePreviousValue } from '../../global/js/hooks';
 // cspell:words rowcount colcount
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -66,6 +67,7 @@ export let DataSpreadsheet = React.forwardRef(
     const [selectionAreas, setSelectionAreas] = useState([]);
     const [clickAndHoldActive, setClickAndHoldActive] = useState(false);
     const [currentMatcher, setCurrentMatcher] = useState('');
+    const previousState = usePreviousValue({ activeCellCoordinates });
     const cellSizeValue = getCellSize(cellSize);
     const currentMatcherRef = useRef();
     const defaultColumn = useMemo(
@@ -184,16 +186,23 @@ export let DataSpreadsheet = React.forwardRef(
             clickAndHoldActive
           );
         };
-        createActiveCellFn({
-          placementElement,
-          coords,
-          addToHeader,
-          contextRef: spreadsheetRef,
-          blockClass,
-          onActiveCellChange,
-          activeCellValue,
-          handleActiveCellMouseEnter,
-        });
+        const prevCoords = previousState?.activeCellCoordinates;
+        // Only create an active cell if the activeCellCoordinates have changed
+        if (
+          prevCoords?.row !== coords.row ||
+          prevCoords?.column !== coords.column
+        ) {
+          createActiveCellFn({
+            placementElement,
+            coords,
+            addToHeader,
+            contextRef: spreadsheetRef,
+            blockClass,
+            onActiveCellChange,
+            activeCellValue,
+            handleActiveCellMouseEnter,
+          });
+        }
       },
       [
         spreadsheetRef,
@@ -202,6 +211,7 @@ export let DataSpreadsheet = React.forwardRef(
         clickAndHoldActive,
         handleActiveCellMouseEnterCallback,
         selectionAreas,
+        previousState?.activeCellCoordinates,
       ]
     );
 
@@ -404,19 +414,12 @@ export let DataSpreadsheet = React.forwardRef(
         `[data-row-index="header"][data-column-index="header"]`
       );
       if (containerHasFocus) {
-        const handleActiveCellMouseEnter = () => {
-          handleActiveCellMouseEnterCallback(
-            selectionAreas,
-            clickAndHoldActive
-          );
-        };
         createActiveCell({
           placementElement: activeCellCoordinates
             ? activeCellPlacementElement
             : selectAllElement,
           coords: activeCellCoordinates,
           addToHeader: shouldPlaceActiveCellInHeader,
-          handleActiveCellMouseEnter,
         });
       }
     }, [
@@ -425,7 +428,6 @@ export let DataSpreadsheet = React.forwardRef(
       createActiveCell,
       containerHasFocus,
       selectionAreas,
-      handleActiveCellMouseEnterCallback,
       clickAndHoldActive,
     ]);
 

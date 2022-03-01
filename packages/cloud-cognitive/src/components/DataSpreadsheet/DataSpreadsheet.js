@@ -427,8 +427,6 @@ export let DataSpreadsheet = React.forwardRef(
       spreadsheetRef,
       createActiveCell,
       containerHasFocus,
-      selectionAreas,
-      clickAndHoldActive,
     ]);
 
     const localRef = useRef();

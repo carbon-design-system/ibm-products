@@ -87,7 +87,7 @@
     }
     .#{$block-class}__active-cell--highlight {
       position: absolute;
-      z-index: 2;
+      z-index: 3;
       border: $spacing-01 solid $interactive-01;
       background-color: transparent;
       &:focus {

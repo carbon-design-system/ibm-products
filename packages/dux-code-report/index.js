@@ -26,29 +26,20 @@ import { export1 , export2 as alias2 } from "@carbon/ibm-cloud-cognitive/es";
 import defaultExport, { export1 } from '@carbon/ibm-cloud-cognitive';
 import defaultExport, * as name from "@carbon/ibm-cloud-cognitive";
 */
-const jsRegex =
+const c4pRegex =
   /import\s(.*)\sfrom\s['"]@carbon\/((ibm-products)|(ibm-cloud-cognitive))(\/((es)|(lib)))?\/?['"]/gi;
 
-const genReport = async () => {
-  // const promises = [];
-
-  console.log('Scanning for use of Carbon for IBM Products\n');
-  console.log(
-    '-----------------------------------------------------------------------------\n'
-  );
-  console.log(
-    '-Start-of-carbon/cloud-cognitive-component-usage-report--------------------------------------------------------------------------\n'
-  );
-
-  const importedMap = {};
+const doScan = () => {
+  const results = [];
   for (let i = 0; i < args.length; i++) {
     const file = args[i];
     const data = fs.readFileSync(file, 'utf8');
-    let match;
 
-    while ((match = jsRegex.exec(data))) {
-      // console.log(match);
+    let components = [];
+    let imports = [];
 
+    const matches = data.matchAll(c4pRegex);
+    for (let match of matches) {
       // Match[0] will contain an array containing various forms of import e.g.
       /*
       defaultExport
@@ -58,14 +49,16 @@ const genReport = async () => {
       defaultExport, { export1, export2 as alias2 }
       */
       // Split by , outside of {}
-      const level1Imports = match[2].split(/,(?![^{]*})/);
+      const level1Imports = match[1].split(/,(?![^{]*})/);
       level1Imports.forEach((level1Import) => {
         const val = level1Import.trim();
+
         if (val.startsWith('{')) {
-          const importsUsedString = val.substr(1, val.length - 2); // remove the {}
-          const importsUsed = importsUsedString.split(',');
-          importsUsed.forEach((importUsed) => {
-            importedMap[importUsed.trim()] = true;
+          const componentsUsedString = val.substr(1, val.length - 2); // remove the {}
+          const componentsUsed = componentsUsedString.split(',');
+
+          componentsUsed.forEach((component) => {
+            components.push(component);
           });
         }
         // } else {
@@ -73,22 +66,47 @@ const genReport = async () => {
         // }
       });
 
-      // write out the whole match line
-      console.log(`${file} (${match.index}): ${match[0]}\n`);
+      imports.push({ index: match.index, match });
+    }
+
+    if (imports.length) {
+      results.push({ file, imports, components });
     }
   }
+  return results;
+};
+
+const genReport = (scanResults) => {
+  console.log('Scanning for use of Carbon for IBM Products\n');
+  console.log(
+    '-----------------------------------------------------------------------------\n'
+  );
+  console.log(
+    '-Start-of-carbon/cloud-cognitive-component-usage-report--------------------------------------------------------------------------\n'
+  );
+
+  // scan results
+  scanResults.forEach((result) => {
+    console.log(`\nFile: '${result.file}'`);
+    console.log(`Components: [${result.components.join(', ')}`);
+    console.log(`Imports:`);
+    result.imports.forEach((item) => {
+      console.log(`\t(${item.index}): ${item.match[0]}`);
+    });
+  });
 
   console.log(
     '-Summary----------------------------------------------------------------------------\n'
   );
-  console.log(
-    `The following @carbon/ibm-products imports were used:\n\n ${Object.keys(
-      importedMap
-    ).join(', ')} were imported.\n`
-  );
+  // console.log(
+  //   `The following @carbon/ibm-products imports were used:\n\n ${Object.keys(
+  //     importedMap
+  //   ).join(', ')} were imported.\n`
+  // );
   console.log(
     '-End-of-carbon/cloud-cognitive-component-usage-code-report----------------------------------------------------------------------------\n'
   );
 };
 
-genReport();
+const scanResults = doScan();
+genReport(scanResults);

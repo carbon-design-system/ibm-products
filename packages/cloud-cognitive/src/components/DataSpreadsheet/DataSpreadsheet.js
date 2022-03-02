@@ -29,6 +29,7 @@ import { useActiveElement } from '../../global/js/hooks';
 import { createActiveCellFn } from './createActiveCellFn';
 import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
 import { usePreviousValue } from '../../global/js/hooks';
+import uuidv4 from '../../global/js/utils/uuidv4';
 // cspell:words rowcount colcount
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -70,6 +71,7 @@ export let DataSpreadsheet = React.forwardRef(
     const previousState = usePreviousValue({ activeCellCoordinates });
     const cellSizeValue = getCellSize(cellSize);
     const currentMatcherRef = useRef();
+    const activeKeys = useRef([]);
     const defaultColumn = useMemo(
       () => ({
         width: 150,
@@ -106,6 +108,7 @@ export let DataSpreadsheet = React.forwardRef(
       ) {
         setContainerHasFocus(false);
         removeActiveCell();
+        activeKeys.current = [];
       }
       if (
         focusedElement.classList.contains(blockClass) ||
@@ -164,6 +167,7 @@ export let DataSpreadsheet = React.forwardRef(
         removeActiveCell();
         removeCellSelections();
         setContainerHasFocus(false);
+        activeKeys.current = [];
       };
       document.addEventListener('click', handleOutsideClick);
       return () => {
@@ -227,12 +231,90 @@ export let DataSpreadsheet = React.forwardRef(
       return;
     }, [activeCellCoordinates]);
 
-    const updateActiveCellCoordinates = ({ coords, updatedValue }) => {
-      setActiveCellCoordinates({
-        ...coords,
-        ...updatedValue,
-      });
-    };
+    const updateActiveCellCoordinates = useCallback(
+      ({ coords, updatedValue }) => {
+        const newActiveCell = {
+          ...coords,
+          ...updatedValue,
+        };
+        setActiveCellCoordinates(newActiveCell);
+        // Only run if the active cell is _not_ a header cell. This will add a point1 object
+        // to selectionAreas every time the active cell changes, allowing us to create cell
+        // selections using keyboard
+        if (
+          newActiveCell.row !== 'header' &&
+          newActiveCell.column !== 'header'
+        ) {
+          const tempMatcher = uuidv4();
+          setSelectionAreas([{ point1: newActiveCell, matcher: tempMatcher }]);
+          setCurrentMatcher(tempMatcher);
+        }
+      },
+      []
+    );
+
+    const handleMultipleKeys = useCallback(() => {
+      const activeKeyValues = activeKeys.current;
+      const selectionAreasClone = deepCloneObject(selectionAreas);
+      const indexOfCurrentArea = selectionAreasClone.findIndex(
+        (item) => item.matcher === currentMatcher
+      );
+      const pointToUpdate = selectionAreasClone[indexOfCurrentArea].point2
+        ? selectionAreasClone[indexOfCurrentArea].point2
+        : selectionAreasClone[indexOfCurrentArea].point1;
+      // Down + Shift
+      if (activeKeyValues.includes(16) && activeKeyValues.includes(40)) {
+        if (rows.length - 1 === pointToUpdate.row) {
+          return;
+        }
+        const newPoint = {
+          row: pointToUpdate.row + 1,
+          column: pointToUpdate.column,
+        };
+        selectionAreasClone[indexOfCurrentArea].point2 = newPoint;
+        selectionAreasClone[indexOfCurrentArea].areaCreated = false;
+        setSelectionAreas(selectionAreasClone);
+      }
+      // Right + Shift
+      if (activeKeyValues.includes(16) && activeKeyValues.includes(39)) {
+        if (columns.length - 1 === pointToUpdate.column) {
+          return;
+        }
+        const newPoint = {
+          row: pointToUpdate.row,
+          column: pointToUpdate.column + 1,
+        };
+        selectionAreasClone[indexOfCurrentArea].point2 = newPoint;
+        selectionAreasClone[indexOfCurrentArea].areaCreated = false;
+        setSelectionAreas(selectionAreasClone);
+      }
+      // Up + Shift
+      if (activeKeyValues.includes(16) && activeKeyValues.includes(38)) {
+        if (pointToUpdate.row === 0) {
+          return;
+        }
+        const newPoint = {
+          row: pointToUpdate.row - 1,
+          column: pointToUpdate.column,
+        };
+        selectionAreasClone[indexOfCurrentArea].point2 = newPoint;
+        selectionAreasClone[indexOfCurrentArea].areaCreated = false;
+        setSelectionAreas(selectionAreasClone);
+      }
+      // Left + Shift
+      if (activeKeyValues.includes(16) && activeKeyValues.includes(37)) {
+        if (pointToUpdate.column === 0) {
+          return;
+        }
+        const newPoint = {
+          row: pointToUpdate.row,
+          column: pointToUpdate.column - 1,
+        };
+        selectionAreasClone[indexOfCurrentArea].point2 = newPoint;
+        selectionAreasClone[indexOfCurrentArea].areaCreated = false;
+        setSelectionAreas(selectionAreasClone);
+      }
+    }, [selectionAreas, currentMatcher, columns, rows]);
 
     const handleKeyPress = useCallback(
       (event) => {
@@ -245,119 +327,141 @@ export let DataSpreadsheet = React.forwardRef(
         if ([35, 36, 37, 38, 39, 40].indexOf(keyCode) > -1) {
           event.preventDefault();
         }
-        // Clear out all cell selection areas if user uses any arrow key
+        // Clear out all cell selection areas if user uses any arrow key, except if the shift key is being held
         if ([37, 38, 39, 40].indexOf(keyCode) > -1) {
-          if (selectionAreas?.length) {
+          if (
+            selectionAreas?.length &&
+            keyCode !== 16 &&
+            !activeKeys.current.includes(16)
+          ) {
             setSelectionAreas([]);
             removeCellSelections();
           }
         }
-        switch (keyCode) {
-          // Tab
-          case 9: {
-            setSelectionAreas([]);
-            removeActiveCell();
-            setContainerHasFocus(false);
-            setActiveCellCoordinates(null);
-            break;
-          }
-          // Left
-          case 37: {
-            handleInitialArrowPress();
-            const coordinatesClone = { ...activeCellCoordinates };
-            if (coordinatesClone.column === 'header') {
-              return;
+        // Update list of activeKeys
+        if (!activeKeys.current?.includes(keyCode)) {
+          const activeClone = [...activeKeys.current];
+          activeKeys.current = [...activeClone, keyCode];
+        }
+        if (activeKeys.current?.length > 1) {
+          handleMultipleKeys();
+        }
+        // Allow arrow key navigation if there are less than two activeKeys OR
+        // if one of the activeCellCoordinates is in a header position
+        if (
+          !activeKeys.current.includes(16) ||
+          activeCellCoordinates.row === 'header' ||
+          activeCellCoordinates.column === 'header'
+        ) {
+          switch (keyCode) {
+            // Tab
+            case 9: {
+              setSelectionAreas([]);
+              removeActiveCell();
+              setContainerHasFocus(false);
+              setActiveCellCoordinates(null);
+              break;
             }
-            if (typeof coordinatesClone.column === 'number') {
-              if (coordinatesClone.column === 0) {
+            // Left
+            case 37: {
+              handleInitialArrowPress();
+              const coordinatesClone = { ...activeCellCoordinates };
+              if (coordinatesClone.column === 'header') {
+                return;
+              }
+              if (typeof coordinatesClone.column === 'number') {
+                if (coordinatesClone.column === 0) {
+                  updateActiveCellCoordinates({
+                    coords: coordinatesClone,
+                    updatedValue: { column: 'header' },
+                  });
+                  return;
+                }
                 updateActiveCellCoordinates({
                   coords: coordinatesClone,
-                  updatedValue: { column: 'header' },
+                  updatedValue: { column: coordinatesClone.column - 1 },
                 });
+              }
+              break;
+            }
+            // Up
+            case 38: {
+              handleInitialArrowPress();
+              const coordinatesClone = { ...activeCellCoordinates };
+              if (coordinatesClone.row === 'header') {
                 return;
               }
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { column: coordinatesClone.column - 1 },
-              });
-            }
-            break;
-          }
-          // Up
-          case 38: {
-            handleInitialArrowPress();
-            const coordinatesClone = { ...activeCellCoordinates };
-            if (coordinatesClone.row === 'header') {
-              return;
-            }
-            if (typeof coordinatesClone.row === 'number') {
-              // set row back to header if we are at index 0
-              if (coordinatesClone.row === 0) {
+              if (typeof coordinatesClone.row === 'number') {
+                // set row back to header if we are at index 0
+                if (coordinatesClone.row === 0) {
+                  updateActiveCellCoordinates({
+                    coords: coordinatesClone,
+                    updatedValue: { row: 'header' },
+                  });
+                  return;
+                }
+                // if we are at any other index than 0, subtract 1 from current row index
                 updateActiveCellCoordinates({
                   coords: coordinatesClone,
-                  updatedValue: { row: 'header' },
+                  updatedValue: { row: coordinatesClone.row - 1 },
                 });
-                return;
               }
-              // if we are at any other index than 0, subtract 1 from current row index
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { row: coordinatesClone.row - 1 },
-              });
+              break;
             }
-            break;
-          }
-          // Right
-          case 39: {
-            handleInitialArrowPress();
-            const coordinatesClone = { ...activeCellCoordinates };
-            if (coordinatesClone.column === 'header') {
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { column: 0 },
-              });
-            }
-            if (typeof coordinatesClone.column === 'number') {
-              // Prevent active cell coordinates from updating if the active
-              // cell is in the last column, ie we can't go any further to the right
-              if (columns.length - 1 === coordinatesClone.column) {
-                return;
+            // Right
+            case 39: {
+              handleInitialArrowPress();
+              const coordinatesClone = { ...activeCellCoordinates };
+              if (coordinatesClone.column === 'header') {
+                updateActiveCellCoordinates({
+                  coords: coordinatesClone,
+                  updatedValue: { column: 0 },
+                });
               }
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { column: coordinatesClone.column + 1 },
-              });
-            }
-            break;
-          }
-          // Down
-          case 40: {
-            handleInitialArrowPress();
-            const coordinatesClone = { ...activeCellCoordinates };
-            if (coordinatesClone.row === 'header') {
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { row: 0 },
-              });
-            }
-            if (typeof coordinatesClone.row === 'number') {
-              // Prevent active cell coordinates from updating if the active
-              // cell is in the last row, ie we can't go any further down since
-              // we are in the last row
-              if (rows.length - 1 === coordinatesClone.row) {
-                return;
+              if (typeof coordinatesClone.column === 'number') {
+                // Prevent active cell coordinates from updating if the active
+                // cell is in the last column, ie we can't go any further to the right
+                if (columns.length - 1 === coordinatesClone.column) {
+                  return;
+                }
+                updateActiveCellCoordinates({
+                  coords: coordinatesClone,
+                  updatedValue: { column: coordinatesClone.column + 1 },
+                });
               }
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { row: coordinatesClone.row + 1 },
-              });
+              break;
             }
-            break;
+            // Down
+            case 40: {
+              handleInitialArrowPress();
+              const coordinatesClone = { ...activeCellCoordinates };
+              if (coordinatesClone.row === 'header') {
+                updateActiveCellCoordinates({
+                  coords: coordinatesClone,
+                  updatedValue: { row: 0 },
+                });
+              }
+              if (typeof coordinatesClone.row === 'number') {
+                // Prevent active cell coordinates from updating if the active
+                // cell is in the last row, ie we can't go any further down since
+                // we are in the last row
+                if (rows.length - 1 === coordinatesClone.row) {
+                  return;
+                }
+                updateActiveCellCoordinates({
+                  coords: coordinatesClone,
+                  updatedValue: { row: coordinatesClone.row + 1 },
+                });
+              }
+              break;
+            }
           }
         }
       },
       [
+        updateActiveCellCoordinates,
         handleInitialArrowPress,
+        handleMultipleKeys,
         activeCellCoordinates,
         selectionAreas?.length,
         removeCellSelections,
@@ -429,6 +533,18 @@ export let DataSpreadsheet = React.forwardRef(
       containerHasFocus,
     ]);
 
+    const handleKeyUp = (event) => {
+      const { keyCode } = event;
+      // Remove key from active keys array on key up
+      if (activeKeys.current?.includes(keyCode)) {
+        const activeKeysClone = [...activeKeys.current];
+        const filteredKeysClone = activeKeysClone.filter(
+          (item) => item !== keyCode
+        );
+        activeKeys.current = filteredKeysClone;
+      }
+    };
+
     const localRef = useRef();
     const spreadsheetRef = ref || localRef;
     return (
@@ -445,6 +561,7 @@ export let DataSpreadsheet = React.forwardRef(
         aria-rowcount={rows?.length || 0}
         aria-colcount={columns?.length || 0}
         onKeyDown={handleKeyPress}
+        onKeyUp={handleKeyUp}
         onFocus={() => setContainerHasFocus(true)}
       >
         {/* HEADER */}

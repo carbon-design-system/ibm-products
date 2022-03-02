@@ -24,19 +24,11 @@
     padding: $spacing-05;
   }
 
-  .#{$block-class}__items-label {
-    margin-right: $spacing-03;
-
-    &-container {
-      display: flex;
-      align-items: center;
-      margin-top: $spacing-05;
-      margin-bottom: $spacing-03;
-    }
-  }
-
   .#{$block-class}__selections {
-    border-top: 1px solid $ui-03;
+    &.#{$carbon-prefix}--structured-list {
+      border-top: 1px solid $ui-03;
+      margin-bottom: 0;
+    }
 
     &-wrapper {
       display: block;
@@ -121,16 +113,32 @@
   .#{$block-class}__columns {
     display: flex;
     flex-direction: row;
+    overflow-x: auto;
   }
 
   .#{$block-class}__columns .#{$block-class}__selections-cell {
     // stylelint-disable-next-line
-    padding: 0 $spacing-05 !important;
+    padding: 0 !important;
   }
 
   .#{$block-class}__column {
+    overflow: auto;
+    max-width: 15rem;
+    flex: 1 0 15rem;
     padding: $spacing-05;
-    border-right: $ui-03;
+    border-top: 1px solid $ui-03;
+    border-right: 1px solid $ui-03;
+  }
+
+  .#{$block-class}__tag-container {
+    display: flex;
+    align-items: center;
+    margin-top: $spacing-05;
+    margin-bottom: $spacing-03;
+
+    &-label {
+      margin-right: $spacing-03;
+    }
   }
 
   // overrides
@@ -143,6 +151,11 @@
 
   .#{$block-class} .#{$tearsheet-class}__header-description {
     color: $text-02;
+  }
+
+  .#{$block-class} .#{$tearsheet-class} .#{$tearsheet-class}__content {
+    display: flex;
+    flex-direction: column;
   }
 
   .#{$block-class} .#{$block-class}__items-label {

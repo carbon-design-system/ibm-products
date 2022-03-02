@@ -88,7 +88,7 @@ const genReport = (scanResults) => {
     '-----------------------------------------------------------------------------\n'
   );
   console.log(
-    '-Start-of-carbon/cloud-cognitive-component-usage-report--------------------------------------------------------------------------\n'
+    '- Start of component usage report --------------------------------------------------------------------------\n'
   );
 
   // scan results
@@ -110,7 +110,7 @@ const genReport = (scanResults) => {
   //   ).join(', ')} were imported.\n`
   // );
   console.log(
-    '-End-of-carbon/cloud-cognitive-component-usage-code-report----------------------------------------------------------------------------\n'
+    '- End of component usage report ----------------------------------------------------------------------------\n'
   );
 };
 

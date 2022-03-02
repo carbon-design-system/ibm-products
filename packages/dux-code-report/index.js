@@ -95,9 +95,9 @@ const genReport = (scanResults) => {
     });
   });
 
-  console.log(
-    '-Summary----------------------------------------------------------------------------\n'
-  );
+  // console.log(
+  //   '-Summary----------------------------------------------------------------------------\n'
+  // );
   // console.log(
   //   `The following @carbon/ibm-products imports were used:\n\n ${Object.keys(
   //     importedMap

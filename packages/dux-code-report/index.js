@@ -29,6 +29,12 @@ import defaultExport, * as name from "@carbon/ibm-cloud-cognitive";
 const c4pRegex =
   /import\s(.*)\sfrom\s['"]@carbon\/((ibm-products)|(ibm-cloud-cognitive))(\/((es)|(lib)))?\/?['"]/gi;
 
+// Todo: ?
+// - Strip out pkg or restrict based on a list of components
+// - Target Carbon, Security, CloudPAL
+// - Note if linter is used
+// - Versions of packages
+
 const doScan = () => {
   const results = [];
   for (let i = 0; i < args.length; i++) {
@@ -88,7 +94,7 @@ const genReport = (scanResults) => {
   // scan results
   scanResults.forEach((result) => {
     console.log(`\nFile: '${result.file}'`);
-    console.log(`Components: [${result.components.join(', ')}`);
+    console.log(`Components: [${result.components.join(', ')}]`);
     console.log(`Imports:`);
     result.imports.forEach((item) => {
       console.log(`\t(${item.index}): ${item.match[0]}`);

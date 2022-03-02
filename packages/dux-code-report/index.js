@@ -10,10 +10,24 @@ const fs = require('fs');
 
 // console.log(args);
 
-const jsRegex = new RegExp(
-  'import {(.*)} from [\'"]@carbon/((ibm-products)|(ibm-cloud-cognitive))[\'"].*',
-  'gi'
-);
+// REGEX targeting the following forms
+/*
+import defaultExport from '@carbon/ibm-products';
+import * as name from '@carbon/ibm-products';
+import { export1 } from '@carbon/ibm-products';
+import { export1 } from '@carbon/ibm-products/';
+import { export1 } from '@carbon/ibm-products/es';
+import { export1 } from '@carbon/ibm-products/lib';
+import { export1 as alias1 } from "@carbon/ibm-products";
+import { export1 , export2 } from '@carbon/ibm-cloud-cognitive';
+import { export1 , export2 as alias2 } from "@carbon/ibm-cloud-cognitive";
+import { export1 , export2 as alias2 } from "@carbon/ibm-cloud-cognitive/lib";
+import { export1 , export2 as alias2 } from "@carbon/ibm-cloud-cognitive/es";
+import defaultExport, { export1 } from '@carbon/ibm-cloud-cognitive';
+import defaultExport, * as name from "@carbon/ibm-cloud-cognitive";
+*/
+const jsRegex =
+  /import\s(.*)\sfrom\s['"]@carbon\/((ibm-products)|(ibm-cloud-cognitive))(\/((es)|(lib)))?\/?['"]/gi;
 
 const genReport = async () => {
   // const promises = [];
@@ -22,12 +36,10 @@ const genReport = async () => {
   console.log(
     '-----------------------------------------------------------------------------\n'
   );
-  console.log('Submit the following as part of your DUX report.\n');
   console.log(
-    '-Start-of-DUX-code-report--------------------------------------------------------------------------\n'
+    '-Start-of-carbon/cloud-cognitive-component-usage-report--------------------------------------------------------------------------\n'
   );
 
-  // This worked in stand along project, but not here. Not sure what was different.
   const importedMap = {};
   for (let i = 0; i < args.length; i++) {
     const file = args[i];
@@ -35,15 +47,36 @@ const genReport = async () => {
     let match;
 
     while ((match = jsRegex.exec(data))) {
-      const importsUsed = match[1].split(',');
-      importsUsed.forEach((importUsed) => {
-        importedMap[importUsed.trim()] = true;
+      // console.log(match);
+
+      // Match[0] will contain an array containing various forms of import e.g.
+      /*
+      defaultExport
+      * as name
+      defaultExport, * as name
+      { export1, export2 as alias2 }
+      defaultExport, { export1, export2 as alias2 }
+      */
+      // Split by , outside of {}
+      const level1Imports = match[2].split(/,(?![^{]*})/);
+      level1Imports.forEach((level1Import) => {
+        const val = level1Import.trim();
+        if (val.startsWith('{')) {
+          const importsUsedString = val.substr(1, val.length - 2); // remove the {}
+          const importsUsed = importsUsedString.split(',');
+          importsUsed.forEach((importUsed) => {
+            importedMap[importUsed.trim()] = true;
+          });
+        }
+        // } else {
+        // top level imports have no further useful information
+        // }
       });
+
+      // write out the whole match line
       console.log(`${file} (${match.index}): ${match[0]}\n`);
     }
   }
-
-  // await Promise.all(promises);
 
   console.log(
     '-Summary----------------------------------------------------------------------------\n'
@@ -54,7 +87,7 @@ const genReport = async () => {
     ).join(', ')} were imported.\n`
   );
   console.log(
-    '-End-of-DUX-code-report----------------------------------------------------------------------------\n'
+    '-End-of-carbon/cloud-cognitive-component-usage-code-report----------------------------------------------------------------------------\n'
   );
 };
 

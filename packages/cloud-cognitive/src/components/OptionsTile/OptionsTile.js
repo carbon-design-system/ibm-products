@@ -201,9 +201,18 @@ export let OptionsTile = React.forwardRef(
       } else if (locked) {
         Icon = Locked16;
         summaryClasses.push(`${blockClass}__summary--locked`);
+
+        if (!text) {
+          text = lockedText;
+        }
       }
 
-      const summaryHidden = enabled === false;
+      const hasValidationState = invalid || warn || locked;
+      const summaryHidden = !hasValidationState && enabled === false;
+
+      if (summaryHidden) {
+        summaryClasses.push(`${blockClass}__summary--hidden`);
+      }
 
       return (
         <div className={`${blockClass}__title`}>

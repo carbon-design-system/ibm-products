@@ -263,7 +263,10 @@ export let DataSpreadsheet = React.forwardRef(
         ? selectionAreasClone[indexOfCurrentArea].point2
         : selectionAreasClone[indexOfCurrentArea].point1;
       // Down + Shift
-      if (activeKeyValues.includes(16) && activeKeyValues.includes(40)) {
+      if (
+        activeKeyValues.includes('Shift') &&
+        activeKeyValues.includes('ArrowDown')
+      ) {
         if (rows.length - 1 === pointToUpdate.row) {
           return;
         }
@@ -276,7 +279,10 @@ export let DataSpreadsheet = React.forwardRef(
         setSelectionAreas(selectionAreasClone);
       }
       // Right + Shift
-      if (activeKeyValues.includes(16) && activeKeyValues.includes(39)) {
+      if (
+        activeKeyValues.includes('Shift') &&
+        activeKeyValues.includes('ArrowRight')
+      ) {
         if (columns.length - 1 === pointToUpdate.column) {
           return;
         }
@@ -289,7 +295,10 @@ export let DataSpreadsheet = React.forwardRef(
         setSelectionAreas(selectionAreasClone);
       }
       // Up + Shift
-      if (activeKeyValues.includes(16) && activeKeyValues.includes(38)) {
+      if (
+        activeKeyValues.includes('Shift') &&
+        activeKeyValues.includes('ArrowUp')
+      ) {
         if (pointToUpdate.row === 0) {
           return;
         }
@@ -302,7 +311,10 @@ export let DataSpreadsheet = React.forwardRef(
         setSelectionAreas(selectionAreasClone);
       }
       // Left + Shift
-      if (activeKeyValues.includes(16) && activeKeyValues.includes(37)) {
+      if (
+        activeKeyValues.includes('Shift') &&
+        activeKeyValues.includes('ArrowLeft')
+      ) {
         if (pointToUpdate.column === 0) {
           return;
         }
@@ -318,30 +330,41 @@ export let DataSpreadsheet = React.forwardRef(
 
     const handleKeyPress = useCallback(
       (event) => {
-        const { keyCode } = event;
+        const { key } = event;
         // Command keys need to be returned as there is default browser behavior with these keys
-        if (keyCode === 91 || keyCode === 93) {
+        if (key === 'Meta' || key === 'Control') {
           return;
         }
         // Prevent arrow keys, home key, and end key from scrolling the page when the data spreadsheet container has focus
-        if ([35, 36, 37, 38, 39, 40].indexOf(keyCode) > -1) {
+        if (
+          [
+            'End',
+            'Home',
+            'ArrowLeft',
+            'ArrowUp',
+            'ArrowRight',
+            'ArrowDown',
+          ].indexOf(key) > -1
+        ) {
           event.preventDefault();
         }
         // Clear out all cell selection areas if user uses any arrow key, except if the shift key is being held
-        if ([37, 38, 39, 40].indexOf(keyCode) > -1) {
+        if (
+          ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'].indexOf(key) > -1
+        ) {
           if (
             selectionAreas?.length &&
-            keyCode !== 16 &&
-            !activeKeys.current.includes(16)
+            key !== 'Shift' &&
+            !activeKeys.current.includes('Shift')
           ) {
             setSelectionAreas([]);
             removeCellSelections();
           }
         }
         // Update list of activeKeys
-        if (!activeKeys.current?.includes(keyCode)) {
+        if (!activeKeys.current?.includes(key)) {
           const activeClone = [...activeKeys.current];
-          activeKeys.current = [...activeClone, keyCode];
+          activeKeys.current = [...activeClone, key];
         }
         if (activeKeys.current?.length > 1) {
           handleMultipleKeys();
@@ -349,13 +372,13 @@ export let DataSpreadsheet = React.forwardRef(
         // Allow arrow key navigation if there are less than two activeKeys OR
         // if one of the activeCellCoordinates is in a header position
         if (
-          !activeKeys.current.includes(16) ||
+          !activeKeys.current.includes('Shift') ||
           activeCellCoordinates.row === 'header' ||
           activeCellCoordinates.column === 'header'
         ) {
-          switch (keyCode) {
+          switch (key) {
             // Tab
-            case 9: {
+            case 'Tab': {
               setSelectionAreas([]);
               removeActiveCell();
               setContainerHasFocus(false);
@@ -363,7 +386,7 @@ export let DataSpreadsheet = React.forwardRef(
               break;
             }
             // Left
-            case 37: {
+            case 'ArrowLeft': {
               handleInitialArrowPress();
               const coordinatesClone = { ...activeCellCoordinates };
               if (coordinatesClone.column === 'header') {
@@ -385,7 +408,7 @@ export let DataSpreadsheet = React.forwardRef(
               break;
             }
             // Up
-            case 38: {
+            case 'ArrowUp': {
               handleInitialArrowPress();
               const coordinatesClone = { ...activeCellCoordinates };
               if (coordinatesClone.row === 'header') {
@@ -409,7 +432,7 @@ export let DataSpreadsheet = React.forwardRef(
               break;
             }
             // Right
-            case 39: {
+            case 'ArrowRight': {
               handleInitialArrowPress();
               const coordinatesClone = { ...activeCellCoordinates };
               if (coordinatesClone.column === 'header') {
@@ -432,7 +455,7 @@ export let DataSpreadsheet = React.forwardRef(
               break;
             }
             // Down
-            case 40: {
+            case 'ArrowDown': {
               handleInitialArrowPress();
               const coordinatesClone = { ...activeCellCoordinates };
               if (coordinatesClone.row === 'header') {
@@ -534,12 +557,12 @@ export let DataSpreadsheet = React.forwardRef(
     ]);
 
     const handleKeyUp = (event) => {
-      const { keyCode } = event;
+      const { key } = event;
       // Remove key from active keys array on key up
-      if (activeKeys.current?.includes(keyCode)) {
+      if (activeKeys.current?.includes(key)) {
         const activeKeysClone = [...activeKeys.current];
         const filteredKeysClone = activeKeysClone.filter(
-          (item) => item !== keyCode
+          (item) => item !== key
         );
         activeKeys.current = filteredKeysClone;
       }

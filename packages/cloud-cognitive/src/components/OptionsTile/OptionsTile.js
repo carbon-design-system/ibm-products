@@ -207,7 +207,12 @@ export let OptionsTile = React.forwardRef(
         }
       }
 
-      const summaryHidden = enabled === false;
+      const hasValidationState = invalid || warn || locked;
+      const summaryHidden = !hasValidationState && enabled === false;
+
+      if (summaryHidden) {
+        summaryClasses.push(`${blockClass}__summary--hidden`);
+      }
 
       return (
         <div className={`${blockClass}__title`}>

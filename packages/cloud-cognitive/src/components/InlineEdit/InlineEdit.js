@@ -33,9 +33,13 @@ const componentName = 'InlineEdit';
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 const defaults = {
+  buttonTipAlign: 'center',
+  buttonTipPosition: 'top',
   light: true, // defaults to true to reflect design
   size: 'md',
 };
+
+const buttons = ['cancel', 'edit', 'save'];
 
 /**
  * TODO: A description of the component.
@@ -44,7 +48,8 @@ export let InlineEdit = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-
+      buttonTipAlign,
+      buttonTipPosition,
       cancelDescription,
       className,
       disabled,
@@ -86,6 +91,21 @@ export let InlineEdit = React.forwardRef(
         <WarningAltFilled16 />
       )
     ) : null;
+
+    // sanitize the tooltip values
+    const alignIsObject = typeof buttonTipAlign === 'object';
+    const directionIsObject = typeof buttonTipPosition === 'object';
+    const tipPositions = buttons.reduce((acc, button) => {
+      const tooltipAlignment =
+        (alignIsObject ? buttonTipAlign[button] : buttonTipAlign) ??
+        defaults.buttonTipAlign;
+      const tooltipPosition =
+        (directionIsObject ? buttonTipPosition[button] : buttonTipPosition) ??
+        defaults.buttonTipPosition;
+
+      acc[button] = { tooltipAlignment, tooltipPosition };
+      return acc;
+    }, {});
 
     const doSetEditing = (value) => {
       if (value === false) {
@@ -314,6 +334,7 @@ export let InlineEdit = React.forwardRef(
                   iconDescription={cancelDescription}
                   onClick={handleCancel}
                   renderIcon={Close16}
+                  {...tipPositions.cancel}
                 />
                 <Button
                   className={`${blockClass}__save`}
@@ -323,6 +344,7 @@ export let InlineEdit = React.forwardRef(
                   onClick={handleSave}
                   renderIcon={Checkmark16}
                   disabled={value === internalValue}
+                  {...tipPositions.save}
                 />
               </>
             ) : (
@@ -338,6 +360,7 @@ export let InlineEdit = React.forwardRef(
                 renderIcon={disabled ? EditOff16 : Edit16}
                 disabled={disabled}
                 tabIndex={-1}
+                {...tipPositions.edit}
               />
             )}
           </div>
@@ -367,9 +390,34 @@ InlineEdit.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 InlineEdit.propTypes = {
   /**
-   * label for cancel button
+   * buttonTipAlign from the standard tooltip. Default center.
+   *
+   * Can be passed either as one of tooltip options or as an object specifying cancel, edit and save separately
    */
-  cancelDescription: PropTypes.string.isRequired,
+  buttonTipAlign: PropTypes.oneOfType([
+    PropTypes.oneOf(['start', 'center', 'end']),
+    PropTypes.shape({
+      cancel: PropTypes.oneOf(['start', 'center', 'end']),
+      edit: PropTypes.oneOf(['start', 'center', 'end']),
+      save: PropTypes.oneOf(['start', 'center', 'end']),
+    }),
+  ]),
+  /**
+   * buttonTipPosition from the standard tooltip
+   *
+   * Can be passed either as one of tooltip options or as an object specifying cancel, edit and save separately
+   */
+  buttonTipPosition: PropTypes.oneOfType([
+    PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+    PropTypes.shape({
+      cancel: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+      edit: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+      save: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+    }),
+  ]),
+  /**
+   * label for cancel button
+   */ cancelDescription: PropTypes.string.isRequired,
   /**
    * Provide an optional class to be applied to the containing node.
    */

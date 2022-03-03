@@ -33,10 +33,48 @@ const validationOptions = {
   'On save includes ABC invalid': { onSaveInvalidWithABC: true },
 };
 
+const buttonTipAlignOptions = {
+  'Default / undefined': undefined,
+  'All start': 'start',
+  'All center': 'center',
+  'All end': 'end',
+  'Edit start, Cancel center, save end': {
+    edit: 'start',
+    cancel: 'center',
+    save: 'end',
+  },
+};
+
+const buttonTipPositionOptions = {
+  'Default / undefined': undefined,
+  'All top': 'top',
+  'All right': 'right',
+  'All bottom': 'bottom',
+  'All left': 'left',
+  'Edit and save right, cancel left': {
+    edit: 'right',
+    cancel: 'left',
+    save: 'right',
+  },
+};
+
 export default {
   title: getStoryTitle(InlineEdit.displayName),
   component: InlineEdit,
   argTypes: {
+    buttonTipAlign: {
+      control: { type: 'select', labels: Object.keys(buttonTipAlignOptions) },
+      options: Object.values(buttonTipAlignOptions).map((_k, i) => i),
+      mapping: Object.values(buttonTipAlignOptions),
+    },
+    buttonTipPosition: {
+      control: {
+        type: 'select',
+        labels: Object.keys(buttonTipPositionOptions),
+      },
+      options: Object.values(buttonTipPositionOptions).map((_k, i) => i),
+      mapping: Object.values(buttonTipPositionOptions),
+    },
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
       description:

@@ -259,7 +259,7 @@ export let DataSpreadsheet = React.forwardRef(
       const indexOfCurrentArea = selectionAreasClone.findIndex(
         (item) => item.matcher === currentMatcher
       );
-      const pointToUpdate = selectionAreasClone[indexOfCurrentArea].point2
+      const pointToUpdate = selectionAreasClone[indexOfCurrentArea]?.point2
         ? selectionAreasClone[indexOfCurrentArea].point2
         : selectionAreasClone[indexOfCurrentArea].point1;
       // Down + Shift
@@ -588,6 +588,7 @@ export let DataSpreadsheet = React.forwardRef(
           prepareRow={prepareRow}
           rows={rows}
           setActiveCellCoordinates={setActiveCellCoordinates}
+          activeCellCoordinates={activeCellCoordinates}
           scrollBarSize={scrollBarSize}
           totalColumnsWidth={totalColumnsWidth}
           id={id}

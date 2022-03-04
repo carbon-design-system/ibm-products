@@ -39,7 +39,6 @@ const defaultProps = {
       id: '2',
       value: '2',
       title: 'item 2',
-      // subtitle: 'item 2 subtitle',
     },
     {
       id: '3',
@@ -62,6 +61,7 @@ const defaultProps = {
   onSubmitButtonText: 'Add',
   removeIconDescription: 'Remove',
   textInputLabel: 'test input label',
+  columnInputPlaceholder: 'Find',
 };
 
 const Template = (args) => {
@@ -82,7 +82,6 @@ export const WithHierarchy = prepareStory(Template, {
         id: '1',
         value: '1',
         title: 'item 1',
-        subtitle: 'item 1 subtitle',
         children: [
           {
             id: '1-1',
@@ -119,13 +118,11 @@ export const WithHierarchy = prepareStory(Template, {
         id: '2',
         value: '2',
         title: 'item 2',
-        subtitle: 'item 2 subtitle',
       },
       {
         id: '3',
         value: '3',
         title: 'item 3',
-        subtitle: 'item 3 subtitle',
         children: [
           {
             id: '3-1',
@@ -133,6 +130,41 @@ export const WithHierarchy = prepareStory(Template, {
             title: 'item 3-1',
           },
         ],
+      },
+      {
+        id: '4',
+        value: '4',
+        title: 'item 4',
+      },
+      {
+        id: '5',
+        value: '5',
+        title: 'item 5',
+      },
+      {
+        id: '6',
+        value: '6',
+        title: 'item 6',
+      },
+      {
+        id: '7',
+        value: '7',
+        title: 'item 7',
+      },
+      {
+        id: '8',
+        value: '8',
+        title: 'item 8',
+      },
+      {
+        id: '9',
+        value: '9',
+        title: 'item 9',
+      },
+      {
+        id: '10',
+        value: '10',
+        title: 'item 10',
       },
     ],
   },

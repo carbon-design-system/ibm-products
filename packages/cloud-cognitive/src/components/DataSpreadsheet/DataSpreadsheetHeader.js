@@ -12,7 +12,11 @@ import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
-export const DataSpreadsheetHeader = ({ defaultColumn, headerGroups }) => {
+export const DataSpreadsheetHeader = ({
+  activeCellCoordinates,
+  defaultColumn,
+  headerGroups,
+}) => {
   return (
     <div className={cx(`${blockClass}__header--container`)}>
       {headerGroups.map((headerGroup, index) => (
@@ -51,7 +55,11 @@ export const DataSpreadsheetHeader = ({ defaultColumn, headerGroups }) => {
               {...column.getHeaderProps()}
               className={cx(
                 `${blockClass}__th`,
-                `${blockClass}--interactive-cell-element`
+                `${blockClass}--interactive-cell-element`,
+                {
+                  [`${blockClass}__th--active-header`]:
+                    activeCellCoordinates?.column === index,
+                }
               )}
               type="button"
             >
@@ -65,6 +73,14 @@ export const DataSpreadsheetHeader = ({ defaultColumn, headerGroups }) => {
 };
 
 DataSpreadsheetHeader.propTypes = {
+  /**
+   * Default spreadsheet sizing values
+   */
+  activeCellCoordinates: PropTypes.shape({
+    row: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    column: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }),
+
   /**
    * Default spreadsheet sizing values
    */

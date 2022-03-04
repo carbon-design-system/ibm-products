@@ -19,6 +19,7 @@ const blockClass = `${pkg.prefix}--data-spreadsheet`;
 export const DataSpreadsheetBody = forwardRef(
   (
     {
+      activeCellCoordinates,
       defaultColumn,
       getTableBodyProps,
       id,
@@ -232,7 +233,11 @@ export const DataSpreadsheetBody = forwardRef(
               className={cx(
                 `${blockClass}__td`,
                 `${blockClass}__td-th`,
-                `${blockClass}--interactive-cell-element`
+                `${blockClass}--interactive-cell-element`,
+                {
+                  [`${blockClass}__td-th--active-header`]:
+                    activeCellCoordinates?.row === index,
+                }
               )}
               style={{
                 width: defaultColumn?.rowHeaderWidth,
@@ -270,6 +275,7 @@ export const DataSpreadsheetBody = forwardRef(
         defaultColumn.rowHeaderWidth,
         handleBodyCellClick,
         handleBodyCellHover,
+        activeCellCoordinates?.row,
       ]
     );
 
@@ -298,6 +304,14 @@ export const DataSpreadsheetBody = forwardRef(
 );
 
 DataSpreadsheetBody.propTypes = {
+  /**
+   * Default spreadsheet sizing values
+   */
+  activeCellCoordinates: PropTypes.shape({
+    row: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    column: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }),
+
   /**
    * Is the user clicking and holding in the data spreadsheet body
    */

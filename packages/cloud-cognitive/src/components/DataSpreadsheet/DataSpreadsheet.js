@@ -611,6 +611,7 @@ export let DataSpreadsheet = React.forwardRef(
           prepareRow={prepareRow}
           rows={rows}
           setActiveCellCoordinates={setActiveCellCoordinates}
+          activeCellCoordinates={activeCellCoordinates}
           scrollBarSize={scrollBarSize}
           totalColumnsWidth={totalColumnsWidth}
           id={id}

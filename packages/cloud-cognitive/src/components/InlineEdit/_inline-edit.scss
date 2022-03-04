@@ -324,10 +324,6 @@
       @include input-button-defaults($block-class);
     }
 
-    &.#{$block-class}--warn .#{$block-class}__validation-icon {
-      color: $support-warning;
-    }
-
     &.#{$block-class}--invalid .#{$block-class}__validation-icon {
       color: $support-error;
     }

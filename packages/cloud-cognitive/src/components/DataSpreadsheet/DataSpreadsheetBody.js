@@ -19,13 +19,13 @@ const blockClass = `${pkg.prefix}--data-spreadsheet`;
 export const DataSpreadsheetBody = forwardRef(
   (
     {
+      activeCellCoordinates,
       defaultColumn,
       getTableBodyProps,
       id,
       prepareRow,
       rows,
       setActiveCellCoordinates,
-      activeCellCoordinates,
       selectionAreas,
       setContainerHasFocus,
       setSelectionAreas,
@@ -273,7 +273,11 @@ export const DataSpreadsheetBody = forwardRef(
               className={cx(
                 `${blockClass}__td`,
                 `${blockClass}__td-th`,
-                `${blockClass}--interactive-cell-element`
+                `${blockClass}--interactive-cell-element`,
+                {
+                  [`${blockClass}__td-th--active-header`]:
+                    activeCellCoordinates?.row === index,
+                }
               )}
               style={{
                 width: defaultColumn?.rowHeaderWidth,
@@ -311,6 +315,7 @@ export const DataSpreadsheetBody = forwardRef(
         defaultColumn.rowHeaderWidth,
         handleBodyCellClick,
         handleBodyCellHover,
+        activeCellCoordinates?.row,
       ]
     );
 

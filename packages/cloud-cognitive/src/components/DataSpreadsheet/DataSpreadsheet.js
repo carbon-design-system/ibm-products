@@ -589,6 +589,7 @@ export let DataSpreadsheet = React.forwardRef(
       >
         {/* HEADER */}
         <DataSpreadsheetHeader
+          activeCellCoordinates={activeCellCoordinates}
           cellSizeValue={cellSizeValue}
           defaultColumn={defaultColumn}
           headerGroups={headerGroups}
@@ -596,6 +597,7 @@ export let DataSpreadsheet = React.forwardRef(
 
         {/* BODY */}
         <DataSpreadsheetBody
+          activeCellCoordinates={activeCellCoordinates}
           ref={currentMatcherRef}
           clickAndHoldActive={clickAndHoldActive}
           setClickAndHoldActive={setClickAndHoldActive}
@@ -611,7 +613,6 @@ export let DataSpreadsheet = React.forwardRef(
           prepareRow={prepareRow}
           rows={rows}
           setActiveCellCoordinates={setActiveCellCoordinates}
-          activeCellCoordinates={activeCellCoordinates}
           scrollBarSize={scrollBarSize}
           totalColumnsWidth={totalColumnsWidth}
           id={id}

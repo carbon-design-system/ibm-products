@@ -102,7 +102,7 @@ export const DataSpreadsheetBody = forwardRef(
             return;
           }
           const notYetCreatedSelections = selectionAreaClone.filter(
-            (item) => !item.point2 && item.matcher === currentMatcher
+            (item) => !item.areaCreated && item.matcher === currentMatcher
           );
           const previouslyCreatedSelectionAreas = selectionAreaClone.filter(
             (item) => item.point2 && item.areaCreated
@@ -253,6 +253,32 @@ export const DataSpreadsheetBody = forwardRef(
       [clickAndHoldActive, currentMatcher, setSelectionAreas]
     );
 
+    const checkSelectionAreaForActiveHeader = useCallback(
+      (headerIndex) => {
+        // Determines if a row header cell should receive a highlight/active background color
+        // Check each object in selectionAreas and see if the headerIndex is between
+        // point1.row and point2.row, inclusive
+        const areasCloned = deepCloneObject(selectionAreas);
+        const activeRowIndexes = [];
+        areasCloned.forEach((area) => {
+          const greatestRowIndex = Math.max(area.point1?.row, area.point2?.row);
+          const lowestRowIndex = Math.min(area.point1?.row, area.point2?.row);
+          for (let i = lowestRowIndex; i <= greatestRowIndex; i++) {
+            activeRowIndexes.push(i);
+          }
+        });
+        const activeRowIndexesNoDuplicates = [...new Set(activeRowIndexes)];
+        if (
+          areasCloned?.length &&
+          activeRowIndexesNoDuplicates.includes(headerIndex)
+        ) {
+          return true;
+        }
+        return false;
+      },
+      [selectionAreas]
+    );
+
     // Renders each cell in the spreadsheet body
     const RenderRow = useCallback(
       ({ index, style }) => {
@@ -276,7 +302,8 @@ export const DataSpreadsheetBody = forwardRef(
                 `${blockClass}--interactive-cell-element`,
                 {
                   [`${blockClass}__td-th--active-header`]:
-                    activeCellCoordinates?.row === index,
+                    activeCellCoordinates?.row === index ||
+                    checkSelectionAreaForActiveHeader(index),
                 }
               )}
               style={{
@@ -316,6 +343,7 @@ export const DataSpreadsheetBody = forwardRef(
         handleBodyCellClick,
         handleBodyCellHover,
         activeCellCoordinates?.row,
+        checkSelectionAreaForActiveHeader,
       ]
     );
 

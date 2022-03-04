@@ -144,62 +144,65 @@ export const DataSpreadsheetBody = forwardRef(
     // onClick fn for each cell in the data spreadsheet body,
     // adds the active cell highlight
     const handleBodyCellClick = useCallback(
-      (event, cell, columnIndex) => {
-        event.preventDefault();
-        const isHoldingCommandKey = event.metaKey || event.ctrlKey;
-        const isHoldingShiftKey = event.shiftKey;
-        setContainerHasFocus(true);
-        const activeCoordinates = {
-          row: cell.row.index,
-          column: columnIndex,
-        };
-        const tempMatcher = uuidv4();
-
-        // prevent multiple selections unless cmd key is held
-        // meaning that selectionAreas should only have one item by default
-        if (isHoldingCommandKey) {
-          setActiveCellCoordinates(activeCoordinates);
-          setCurrentMatcher(tempMatcher);
-          setSelectionAreas((prev) => [
-            ...prev,
-            { point1: activeCoordinates, matcher: tempMatcher },
-          ]);
-        } else if (isHoldingShiftKey) {
+      (cell, columnIndex) => {
+        return (event) => {
+          event.preventDefault();
+          const isHoldingCommandKey = event.metaKey || event.ctrlKey;
+          const isHoldingShiftKey = event.shiftKey;
           setContainerHasFocus(true);
-          const selectionAreaClone = deepCloneObject(selectionAreas);
-          const indexOfItemToUpdate = selectionAreaClone.findIndex(
-            (item) => item.matcher === currentMatcher
-          );
+          const activeCoordinates = {
+            row: cell.row.index,
+            column: columnIndex,
+          };
+          const tempMatcher = uuidv4();
 
-          if (indexOfItemToUpdate === -1) {
-            // There is always a selectionArea with a point1 object that updates
-            // whenever the activeCellCoordinates update, we should always be able
-            // to find an index, but if we do not for some reason we should return
-            // at this point.
-            return;
+          // prevent multiple selections unless cmd key is held
+          // meaning that selectionAreas should only have one item by default
+          if (isHoldingCommandKey) {
+            setActiveCellCoordinates(activeCoordinates);
+            setCurrentMatcher(tempMatcher);
+            setSelectionAreas((prev) => [
+              ...prev,
+              { point1: activeCoordinates, matcher: tempMatcher },
+            ]);
+          } else if (isHoldingShiftKey) {
+            setContainerHasFocus(true);
+            const selectionAreaClone = deepCloneObject(selectionAreas);
+            const indexOfItemToUpdate = selectionAreaClone.findIndex(
+              (item) => item.matcher === currentMatcher
+            );
+
+            if (indexOfItemToUpdate === -1) {
+              // There is always a selectionArea with a point1 object that updates
+              // whenever the activeCellCoordinates update, we should always be able
+              // to find an index, but if we do not for some reason we should return
+              // at this point.
+              return;
+            } else {
+              // Update the selectionArea that was found, do not update currentMatcher
+              selectionAreaClone[indexOfItemToUpdate].point1 =
+                activeCellCoordinates;
+              selectionAreaClone[indexOfItemToUpdate].point2 =
+                activeCoordinates;
+              selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
+              selectionAreaClone[indexOfItemToUpdate].matcher = currentMatcher;
+              setSelectionAreas(selectionAreaClone);
+            }
           } else {
-            // Update the selectionArea that was found, do not update currentMatcher
-            selectionAreaClone[indexOfItemToUpdate].point1 =
-              activeCellCoordinates;
-            selectionAreaClone[indexOfItemToUpdate].point2 = activeCoordinates;
-            selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
-            selectionAreaClone[indexOfItemToUpdate].matcher = currentMatcher;
-            setSelectionAreas(selectionAreaClone);
+            setActiveCellCoordinates(activeCoordinates);
+            // remove all previous cell selections
+            const cellSelections = spreadsheetBodyRef.current.querySelectorAll(
+              `.${blockClass}__selection-area--element`
+            );
+            [...cellSelections].forEach((element) => element.remove());
+            setSelectionAreas([
+              { point1: activeCoordinates, matcher: tempMatcher },
+            ]);
+            setCurrentMatcher(tempMatcher);
           }
-        } else {
-          setActiveCellCoordinates(activeCoordinates);
-          // remove all previous cell selections
-          const cellSelections = spreadsheetBodyRef.current.querySelectorAll(
-            `.${blockClass}__selection-area--element`
-          );
-          [...cellSelections].forEach((element) => element.remove());
-          setSelectionAreas([
-            { point1: activeCoordinates, matcher: tempMatcher },
-          ]);
-          setCurrentMatcher(tempMatcher);
-        }
-        currentMatcherRef.current = tempMatcher;
-        setClickAndHoldActive(true);
+          currentMatcherRef.current = tempMatcher;
+          setClickAndHoldActive(true);
+        };
       },
       [
         currentMatcherRef,
@@ -215,35 +218,37 @@ export const DataSpreadsheetBody = forwardRef(
     );
 
     const handleBodyCellHover = useCallback(
-      (event, cell, columnIndex) => {
-        if (clickAndHoldActive) {
-          const cellCoordinates = {
-            row: cell.row.index,
-            column: columnIndex,
-          };
-          setSelectionAreas((prev) => {
-            const selectionAreaClone = deepCloneObject(prev);
-            const indexOfItemToUpdate = selectionAreaClone.findIndex(
-              (item) => item.matcher === currentMatcher
-            );
-            // No items in the array match up with the currentMatcher value
-            if (indexOfItemToUpdate === -1) {
-              return prev;
-            }
-            // Do not update state if you're still hovering on the same cell
-            if (
-              selectionAreaClone[indexOfItemToUpdate].point2?.row ===
-                cellCoordinates.row &&
-              selectionAreaClone[indexOfItemToUpdate].point2?.column ===
-                cellCoordinates.column
-            ) {
-              return prev;
-            }
-            selectionAreaClone[indexOfItemToUpdate].point2 = cellCoordinates;
-            selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
-            return selectionAreaClone;
-          });
-        }
+      (cell, columnIndex) => {
+        return () => {
+          if (clickAndHoldActive) {
+            const cellCoordinates = {
+              row: cell.row.index,
+              column: columnIndex,
+            };
+            setSelectionAreas((prev) => {
+              const selectionAreaClone = deepCloneObject(prev);
+              const indexOfItemToUpdate = selectionAreaClone.findIndex(
+                (item) => item.matcher === currentMatcher
+              );
+              // No items in the array match up with the currentMatcher value
+              if (indexOfItemToUpdate === -1) {
+                return prev;
+              }
+              // Do not update state if you're still hovering on the same cell
+              if (
+                selectionAreaClone[indexOfItemToUpdate].point2?.row ===
+                  cellCoordinates.row &&
+                selectionAreaClone[indexOfItemToUpdate].point2?.column ===
+                  cellCoordinates.column
+              ) {
+                return prev;
+              }
+              selectionAreaClone[indexOfItemToUpdate].point2 = cellCoordinates;
+              selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
+              return selectionAreaClone;
+            });
+          }
+        };
       },
       [clickAndHoldActive, currentMatcher, setSelectionAreas]
     );
@@ -289,8 +294,8 @@ export const DataSpreadsheetBody = forwardRef(
                   `${blockClass}--interactive-cell-element`
                 )}
                 key={`cell_${index}`}
-                onMouseDown={(event) => handleBodyCellClick(event, cell, index)}
-                onMouseOver={(event) => handleBodyCellHover(event, cell, index)}
+                onMouseDown={handleBodyCellClick(cell, index)}
+                onMouseOver={handleBodyCellHover(cell, index)}
                 onFocus={() => {}}
                 type="button"
               >

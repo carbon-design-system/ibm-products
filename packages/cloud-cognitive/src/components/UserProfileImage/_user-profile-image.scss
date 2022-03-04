@@ -66,6 +66,15 @@ $theme-keys: map-keys($themes);
     }
   }
 
+  .#{$carbon-prefix}--tooltip__trigger.#{$block-class}__tooltip--container {
+    &:hover,
+    &:focus {
+      svg {
+        fill: $ui-01;
+      }
+    }
+  }
+
   .#{$block-class} {
     display: flex;
     flex-direction: column;

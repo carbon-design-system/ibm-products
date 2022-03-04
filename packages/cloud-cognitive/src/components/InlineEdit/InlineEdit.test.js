@@ -333,44 +333,11 @@ describe(componentName, () => {
     expect(input).toHaveTextContent(startingValue + clipboardString + 'b');
   });
 
-  it('Can show warn state', () => {
-    const warnText = 'Do not forget this';
-
-    const { container } = render(
-      <InlineEdit {...requiredProps} warn={true} warnText={warnText} />
-    );
-    const component = container.querySelector(`.${blockClass}`);
-
-    screen.getByText(warnText);
-    const svg = component.querySelector(`.${blockClass}__validation-icon svg`);
-    expect(svg).not.toBeNull();
-  });
-
   it('Can show invalid state', () => {
     const invalidText = 'That is not valid';
 
     const { container } = render(
       <InlineEdit {...requiredProps} invalid={true} invalidText={invalidText} />
-    );
-    const component = container.querySelector(`.${blockClass}`);
-
-    screen.getByText(invalidText);
-    const svg = component.querySelector(`.${blockClass}__validation-icon svg`);
-    expect(svg).not.toBeNull();
-  });
-
-  it('Can show invalid state in preference to warn', () => {
-    const warnText = 'Do not forget this';
-    const invalidText = 'That is not valid';
-
-    const { container } = render(
-      <InlineEdit
-        {...requiredProps}
-        invalid={true}
-        invalidText={invalidText}
-        warn={true}
-        warnText={warnText}
-      />
     );
     const component = container.querySelector(`.${blockClass}`);
 

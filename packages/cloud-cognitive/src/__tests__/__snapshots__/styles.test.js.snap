@@ -1719,19 +1719,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .c4p--side-panel__container.c4p--side-panel__container--xs {
-  min-width: 16rem;
-  max-width: 16rem;
+  width: 16rem;
+  max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
 .c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
 .c4p--side-panel__container.c4p--side-panel__container--xs .c4p--side-panel__actions-container.c4p--action-set--xs {
-  min-width: 16rem;
-  max-width: 16rem;
+  width: 16rem;
+  max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--xs {
-  min-width: 16rem;
-  max-width: 16rem;
+  width: 16rem;
+  max-width: 100%;
   right: 0;
   border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
@@ -1746,8 +1746,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--xs {
-  min-width: 16rem;
-  max-width: 16rem;
+  width: 16rem;
+  max-width: 100%;
   left: 0;
   border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
@@ -1762,19 +1762,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--side-panel__container.c4p--side-panel__container--sm {
-  min-width: 20rem;
-  max-width: 20rem;
+  width: 20rem;
+  max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
 .c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
 .c4p--side-panel__container.c4p--side-panel__container--sm .c4p--side-panel__actions-container.c4p--action-set--sm {
-  min-width: 20rem;
-  max-width: 20rem;
+  width: 20rem;
+  max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--sm {
-  min-width: 20rem;
-  max-width: 20rem;
+  width: 20rem;
+  max-width: 100%;
   right: 0;
   border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
@@ -1789,8 +1789,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--sm {
-  min-width: 20rem;
-  max-width: 20rem;
+  width: 20rem;
+  max-width: 100%;
   left: 0;
   border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
@@ -1805,19 +1805,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--side-panel__container.c4p--side-panel__container--md {
-  min-width: 30rem;
-  max-width: 30rem;
+  width: 30rem;
+  max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
 .c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
 .c4p--side-panel__container.c4p--side-panel__container--md .c4p--side-panel__actions-container.c4p--action-set--md {
-  min-width: 30rem;
-  max-width: 30rem;
+  width: 30rem;
+  max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--md {
-  min-width: 30rem;
-  max-width: 30rem;
+  width: 30rem;
+  max-width: 100%;
   right: 0;
   border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
@@ -1832,8 +1832,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--md {
-  min-width: 30rem;
-  max-width: 30rem;
+  width: 30rem;
+  max-width: 100%;
   left: 0;
   border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
@@ -1848,19 +1848,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--side-panel__container.c4p--side-panel__container--lg {
-  min-width: 40rem;
-  max-width: 40rem;
+  width: 40rem;
+  max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
 .c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
 .c4p--side-panel__container.c4p--side-panel__container--lg .c4p--side-panel__actions-container.c4p--action-set--lg {
-  min-width: 40rem;
-  max-width: 40rem;
+  width: 40rem;
+  max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--lg {
-  min-width: 40rem;
-  max-width: 40rem;
+  width: 40rem;
+  max-width: 100%;
   right: 0;
   border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
@@ -1875,8 +1875,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--lg {
-  min-width: 40rem;
-  max-width: 40rem;
+  width: 40rem;
+  max-width: 100%;
   left: 0;
   border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
@@ -1891,19 +1891,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--side-panel__container.c4p--side-panel__container--max {
-  min-width: 75%;
-  max-width: 75%;
+  width: 75%;
+  max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container--max .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation,
 .c4p--side-panel__container.c4p--side-panel__container--max .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation,
 .c4p--side-panel__container.c4p--side-panel__container--max .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation,
 .c4p--side-panel__container.c4p--side-panel__container--max .c4p--side-panel__actions-container.c4p--action-set--max {
-  min-width: 75%;
-  max-width: 75%;
+  width: 75%;
+  max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--max {
-  min-width: 75%;
-  max-width: 75%;
+  width: 75%;
+  max-width: 100%;
   right: 0;
   border-left: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
@@ -1918,8 +1918,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--max {
-  min-width: 75%;
-  max-width: 75%;
+  width: 75%;
+  max-width: 100%;
   left: 0;
   border-right: 1px solid var(--cds-decorative-01, #e0e0e0);
 }
@@ -2164,7 +2164,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-top: 0;
 }
 .c4p--side-panel__container.c4p--side-panel__container-is-animating .c4p--side-panel__actions-container.c4p--action-set--max {
-  min-width: 100%;
+  width: 100%;
   max-width: 100%;
 }
 .c4p--side-panel__container .c4p--side-panel__actions-container {

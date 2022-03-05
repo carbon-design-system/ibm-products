@@ -70,6 +70,7 @@
 
   .#{$pkg-prefix}--create-modal__form > * {
     margin-bottom: $spacing-05;
+
     &:last-child {
       margin-bottom: 0;
     }

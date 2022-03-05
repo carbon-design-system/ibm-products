@@ -487,6 +487,7 @@ $header__transition__timing-function: $timing-function;
         transition-property: opacity, transform;
       }
     }
+
     &--enter {
       transform: translate3d(0, -#{$carbon--spacing-09}, 0);
 

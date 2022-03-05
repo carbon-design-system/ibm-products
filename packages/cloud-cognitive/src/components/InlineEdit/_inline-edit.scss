@@ -291,9 +291,7 @@
 
     &.#{$block-class}.#{$block-class} .#{$block-class}__edit {
       @include input-button-defaults($block-class);
-
       // pointer-events: none;
-
       &:hover,
       &:active,
       &:focus {

@@ -593,6 +593,7 @@ export let DataSpreadsheet = React.forwardRef(
           cellSizeValue={cellSizeValue}
           defaultColumn={defaultColumn}
           headerGroups={headerGroups}
+          selectionAreas={selectionAreas}
         />
 
         {/* BODY */}

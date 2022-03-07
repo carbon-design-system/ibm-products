@@ -52,6 +52,7 @@
     "storybook:build:storybook": "cd packages/core && yarn -s build",
     "storybook:start": "cd packages/core && yarn -s start",
     "sync": "carbon-cli sync",
+    "test-report": "node ./packages/component-usage-report ./examples/*/**/src/*.js",
     "update-gallery-config": "node scripts/example-gallery-builder/index.js; yarn -s format:prettier:files examples/carbon-for-ibm-products/example-gallery/src/gallery-config/index.js --write",
     "//upgrade:dependencies:top": "# don't upgrade carbon (done globally), react/react-dom (not tested)",
     "upgrade:dependencies:top": "npm-check-updates -u --dep dev,peer,prod --reject '/(carbon|^react$|^react-dom$)/'",

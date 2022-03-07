@@ -106,7 +106,7 @@ export let PageHeader = React.forwardRef(
     const hasActionBar = actionBarItems && actionBarItems.length > 0;
     const hasBreadcrumbRow = !!breadcrumbs || !!actionBarItems;
     const enableBreadcrumbScroll =
-      in_enableBreadcrumbScroll ?? deprecated_disableBreadcrumbScroll ?? false;
+      in_enableBreadcrumbScroll ?? !deprecated_disableBreadcrumbScroll ?? false;
 
     // utility functions
     const checkUpdateVerticalSpace = function () {

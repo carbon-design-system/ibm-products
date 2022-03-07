@@ -12,7 +12,7 @@ import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
 
 import { Grid, Column, Row, Button, Tag } from 'carbon-components-react';
-import { breakpoints } from '@carbon/layout/es';
+import { breakpoints } from '@carbon/layout';
 
 import { useWindowResize, useNearestScroll } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';

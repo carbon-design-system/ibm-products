@@ -10,6 +10,7 @@ $block-class: #{$pkg-prefix}--web-terminal;
     // stylelint-disable-next-line carbon/layout-token-use
     transform: translateX(#{$web-terminal-width});
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -21,6 +22,7 @@ $block-class: #{$pkg-prefix}--web-terminal;
     opacity: 1;
     transform: translateX(0);
   }
+
   100% {
     opacity: 0;
     // stylelint-disable-next-line carbon/layout-token-use

@@ -31,7 +31,7 @@
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.1",
     "inquirer": "^8.2.0",
-    "npm-check-updates": "^12.4.0",
+    "npm-check-updates": "^12.5.2",
     "prettier": "^2.5.1",
     "prettier-config-carbon": "^0.4.0",
     "remark": "^14.0.2",

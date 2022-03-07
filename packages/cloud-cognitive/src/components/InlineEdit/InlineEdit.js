@@ -33,8 +33,8 @@ const componentName = 'InlineEdit';
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 const defaults = {
-  buttonTipAlign: 'center',
-  buttonTipPosition: 'top',
+  buttonTooltipAlign: 'center',
+  buttonTooltipPosition: 'top',
   light: true, // defaults to true to reflect design
   size: 'md',
 };
@@ -48,8 +48,8 @@ export let InlineEdit = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-      buttonTipAlign,
-      buttonTipPosition,
+      buttonTooltipAlign,
+      buttonTooltipPosition,
       cancelDescription,
       className,
       disabled,
@@ -93,15 +93,16 @@ export let InlineEdit = React.forwardRef(
     ) : null;
 
     // sanitize the tooltip values
-    const alignIsObject = typeof buttonTipAlign === 'object';
-    const directionIsObject = typeof buttonTipPosition === 'object';
+    const alignIsObject = typeof buttonTooltipAlign === 'object';
+    const directionIsObject = typeof buttonTooltipPosition === 'object';
     const tipPositions = buttons.reduce((acc, button) => {
       const tooltipAlignment =
-        (alignIsObject ? buttonTipAlign[button] : buttonTipAlign) ??
-        defaults.buttonTipAlign;
+        (alignIsObject ? buttonTooltipAlign[button] : buttonTooltipAlign) ??
+        defaults.buttonTooltipAlign;
       const tooltipPosition =
-        (directionIsObject ? buttonTipPosition[button] : buttonTipPosition) ??
-        defaults.buttonTipPosition;
+        (directionIsObject
+          ? buttonTooltipPosition[button]
+          : buttonTooltipPosition) ?? defaults.buttonTooltipPosition;
 
       acc[button] = { tooltipAlignment, tooltipPosition };
       return acc;
@@ -390,11 +391,11 @@ InlineEdit.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 InlineEdit.propTypes = {
   /**
-   * buttonTipAlign from the standard tooltip. Default center.
+   * buttonTooltipAlign from the standard tooltip. Default center.
    *
    * Can be passed either as one of tooltip options or as an object specifying cancel, edit and save separately
    */
-  buttonTipAlign: PropTypes.oneOfType([
+  buttonTooltipAlign: PropTypes.oneOfType([
     PropTypes.oneOf(['start', 'center', 'end']),
     PropTypes.shape({
       cancel: PropTypes.oneOf(['start', 'center', 'end']),
@@ -403,11 +404,11 @@ InlineEdit.propTypes = {
     }),
   ]),
   /**
-   * buttonTipPosition from the standard tooltip
+   * buttonTooltipPosition from the standard tooltip
    *
    * Can be passed either as one of tooltip options or as an object specifying cancel, edit and save separately
    */
-  buttonTipPosition: PropTypes.oneOfType([
+  buttonTooltipPosition: PropTypes.oneOfType([
     PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
     PropTypes.shape({
       cancel: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),

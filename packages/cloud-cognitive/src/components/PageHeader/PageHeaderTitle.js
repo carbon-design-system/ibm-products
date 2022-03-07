@@ -58,7 +58,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
               revertDescription,
               saveDescription,
             }}
-            buttonTipPosition="bottom"
+            buttonTooltipPosition="bottom"
             {...rest}
           />
         ) : (

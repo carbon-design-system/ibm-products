@@ -33,7 +33,7 @@ const validationOptions = {
   'On save includes ABC invalid': { onSaveInvalidWithABC: true },
 };
 
-const buttonTipAlignOptions = {
+const buttonTooltipAlignOptions = {
   'Default / undefined': undefined,
   'All start': 'start',
   'All center': 'center',
@@ -45,7 +45,7 @@ const buttonTipAlignOptions = {
   },
 };
 
-const buttonTipPositionOptions = {
+const buttonTooltipPositionOptions = {
   'Default / undefined': undefined,
   'All top': 'top',
   'All right': 'right',
@@ -62,18 +62,21 @@ export default {
   title: getStoryTitle(InlineEdit.displayName),
   component: InlineEdit,
   argTypes: {
-    buttonTipAlign: {
-      control: { type: 'select', labels: Object.keys(buttonTipAlignOptions) },
-      options: Object.values(buttonTipAlignOptions).map((_k, i) => i),
-      mapping: Object.values(buttonTipAlignOptions),
-    },
-    buttonTipPosition: {
+    buttonTooltipAlign: {
       control: {
         type: 'select',
-        labels: Object.keys(buttonTipPositionOptions),
+        labels: Object.keys(buttonTooltipAlignOptions),
       },
-      options: Object.values(buttonTipPositionOptions).map((_k, i) => i),
-      mapping: Object.values(buttonTipPositionOptions),
+      options: Object.values(buttonTooltipAlignOptions).map((_k, i) => i),
+      mapping: Object.values(buttonTooltipAlignOptions),
+    },
+    buttonTooltipPosition: {
+      control: {
+        type: 'select',
+        labels: Object.keys(buttonTooltipPositionOptions),
+      },
+      options: Object.values(buttonTooltipPositionOptions).map((_k, i) => i),
+      mapping: Object.values(buttonTooltipPositionOptions),
     },
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },

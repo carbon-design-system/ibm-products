@@ -784,8 +784,7 @@ const tagTypes = Object.keys(TYPES);
 
 export const deprecatedProps = {
   /**
-   * Standard behavior scrolls the breadcrumb off to leave just tabs. This
-   * option preserves vertical space for both the breadcrumb and tabs if they're supplied.
+   * **Deprecated** see property `enableBreadcrumbScroll`
    */
   disableBreadcrumbScroll: deprecateProp(
     PropTypes.bool,

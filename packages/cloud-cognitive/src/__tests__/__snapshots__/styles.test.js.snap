@@ -4447,6 +4447,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: #3ddbd9;
 }
 
+.bx--tooltip__trigger.c4p--user-profile-image__tooltip:hover svg, .bx--tooltip__trigger.c4p--user-profile-image__tooltip:focus svg {
+  fill: var(--cds-ui-01, #f4f4f4);
+}
+
 .c4p--user-profile-image {
   display: flex;
   flex-direction: column;

@@ -82,6 +82,7 @@ $block-class: #{$pkg-prefix}--status-icon;
   0% {
     transform: scaleY(-1) rotate(360deg);
   }
+
   100% {
     transform: scaleY(-1) rotate(0deg);
   }

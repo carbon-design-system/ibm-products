@@ -6,6 +6,7 @@
 //
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -238,16 +239,19 @@ export let TagSet = React.forwardRef(
           </div>
         </div>
 
-        {tags && displayCount < tags.length ? (
-          <TagSetModal
-            allTags={tags}
-            open={showAllModalOpen}
-            title={allTagsModalTitle}
-            onClose={handleModalClose}
-            searchLabel={allTagsModalSearchLabel}
-            searchPlaceholder={allTagsModalSearchPlaceholderText}
-          />
-        ) : null}
+        {tags && displayCount < tags.length
+          ? createPortal(
+              <TagSetModal
+                allTags={tags}
+                open={showAllModalOpen}
+                title={allTagsModalTitle}
+                onClose={handleModalClose}
+                searchLabel={allTagsModalSearchLabel}
+                searchPlaceholder={allTagsModalSearchPlaceholderText}
+              />,
+              document.body
+            )
+          : null}
       </div>
     );
   }

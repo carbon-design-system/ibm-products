@@ -35,11 +35,11 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$)/'"
   },
   "peerDependencies": {
-    "@carbon/elements": "^10.52.0",
-    "@carbon/grid": "^10.41.0",
-    "@carbon/icons-react": "^10.46.0",
-    "carbon-components": "^10.53.0",
-    "carbon-components-react": "^7.53.0",
+    "@carbon/elements": "^10.53.0",
+    "@carbon/grid": "^10.42.0",
+    "@carbon/icons-react": "^10.47.0",
+    "carbon-components": "^10.54.0",
+    "carbon-components-react": "^7.54.2",
     "prop-types": "^15.8.1",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"
@@ -64,7 +64,7 @@
     "jest": "^27.5.1",
     "jest-config-ibm-cloud-cognitive": "^0.23.10",
     "node-sass": "^7.0.1",
-    "npm-check-updates": "^12.4.0",
+    "npm-check-updates": "^12.5.2",
     "rimraf": "^3.0.2",
     "sinon": "^13.0.1"
   },

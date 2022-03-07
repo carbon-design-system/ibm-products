@@ -118,7 +118,7 @@ export let UserProfileImage = React.forwardRef(
       (tooltipText ? (
         <TooltipIcon
           tooltipText={tooltipText}
-          className={`${blockClass}__tooltip--container`}
+          className={`${blockClass}__tooltip`}
         >
           {renderUserProfileImage()}
         </TooltipIcon>

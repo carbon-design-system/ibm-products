@@ -815,7 +815,7 @@ export const demo = prepareStory(TemplateDemo, {
     navigation: 3,
     tags: 3,
     actionBarItems: 4,
-    disableBreadcrumbScroll: true,
+    enableBreadcrumbScroll: false,
     ...commonArgs,
   },
 });

@@ -18,7 +18,7 @@ export const blockClass = `${pkg.prefix}--page-header`;
  * @param {{}} headerRef
  * @param {{}} offsetTopMeasuringRef
  * @param {{}} navigation
- * @param {boolean} disableBreadcrumbScroll
+ * @param {boolean} enableBreadcrumbScroll
  * @param {boolean} hasActionBar
  * @param {boolean} widthIsNarrow
  * @param {()} setMetrics
@@ -27,7 +27,7 @@ export const utilCheckUpdateVerticalSpace = (
   headerRef,
   offsetTopMeasuringRef,
   navigation,
-  disableBreadcrumbScroll,
+  enableBreadcrumbScroll,
   hasActionBar,
   widthIsNarrow,
   setMetrics
@@ -120,13 +120,9 @@ export const utilCheckUpdateVerticalSpace = (
       update.headerTopValue += 8;
     }
 
-    if (disableBreadcrumbScroll || !navigation) {
+    if (!enableBreadcrumbScroll || !navigation) {
       // adjust sticky top if no navigation or breadcrumb is to stay on screen
       update.headerTopValue += update.breadcrumbRowHeight;
-    } else {
-      if (navigation && !widthIsNarrow) {
-        update.headerTopValue -= 8;
-      }
     }
 
     if (window) {

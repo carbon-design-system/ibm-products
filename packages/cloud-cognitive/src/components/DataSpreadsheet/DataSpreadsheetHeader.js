@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
+import { checkActiveHeaderCell } from './checkActiveHeaderCell';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -19,39 +19,6 @@ export const DataSpreadsheetHeader = ({
   headerGroups,
   selectionAreas,
 }) => {
-  const checkSelectionAreaForActiveHeader = useCallback(
-    (headerIndex) => {
-      // Determines if a column header cell should receive a highlight/active background color
-      // Check each object in selectionAreas and see if the headerIndex is between
-      // point1.column and point2.column, inclusive
-
-      const areasCloned = deepCloneObject(selectionAreas);
-      const activeColumnIndexes = [];
-      areasCloned.forEach((area) => {
-        const greatestColumnIndex = Math.max(
-          area.point1?.column,
-          area.point2?.column
-        );
-        const lowestColumnIndex = Math.min(
-          area.point1?.column,
-          area.point2?.column
-        );
-        for (let i = lowestColumnIndex; i <= greatestColumnIndex; i++) {
-          activeColumnIndexes.push(i);
-        }
-      });
-      const activeColumnIndexesNoDuplicates = [...new Set(activeColumnIndexes)];
-      if (
-        areasCloned?.length &&
-        activeColumnIndexesNoDuplicates.includes(headerIndex)
-      ) {
-        return true;
-      }
-      return false;
-    },
-    [selectionAreas]
-  );
-
   return (
     <div className={cx(`${blockClass}__header--container`)}>
       {headerGroups.map((headerGroup, index) => (
@@ -99,7 +66,7 @@ export const DataSpreadsheetHeader = ({
                 {
                   [`${blockClass}__th--active-header`]:
                     activeCellCoordinates?.column === index ||
-                    checkSelectionAreaForActiveHeader(index),
+                    checkActiveHeaderCell(index, selectionAreas, 'column'),
                 }
               )}
               type="button"

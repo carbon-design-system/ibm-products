@@ -14,6 +14,7 @@ import { pkg } from '../../settings';
 import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { createCellSelectionArea } from './createCellSelectionArea';
+import { checkActiveHeaderCell } from './checkActiveHeaderCell';
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
 export const DataSpreadsheetBody = forwardRef(
@@ -102,7 +103,7 @@ export const DataSpreadsheetBody = forwardRef(
             return;
           }
           const notYetCreatedSelections = selectionAreaClone.filter(
-            (item) => !item.point2 && item.matcher === currentMatcher
+            (item) => !item.areaCreated && item.matcher === currentMatcher
           );
           const previouslyCreatedSelectionAreas = selectionAreaClone.filter(
             (item) => item.point2 && item.areaCreated
@@ -276,7 +277,8 @@ export const DataSpreadsheetBody = forwardRef(
                 `${blockClass}--interactive-cell-element`,
                 {
                   [`${blockClass}__td-th--active-header`]:
-                    activeCellCoordinates?.row === index,
+                    activeCellCoordinates?.row === index ||
+                    checkActiveHeaderCell(index, selectionAreas, 'row'),
                 }
               )}
               style={{
@@ -316,6 +318,7 @@ export const DataSpreadsheetBody = forwardRef(
         handleBodyCellClick,
         handleBodyCellHover,
         activeCellCoordinates?.row,
+        selectionAreas,
       ]
     );
 

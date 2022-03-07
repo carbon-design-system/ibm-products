@@ -9,6 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
+import { checkActiveHeaderCell } from './checkActiveHeaderCell';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -16,6 +17,7 @@ export const DataSpreadsheetHeader = ({
   activeCellCoordinates,
   defaultColumn,
   headerGroups,
+  selectionAreas,
 }) => {
   return (
     <div className={cx(`${blockClass}__header--container`)}>
@@ -33,7 +35,12 @@ export const DataSpreadsheetHeader = ({
             tabIndex={-1}
             className={cx(
               `${blockClass}__th`,
-              `${blockClass}--interactive-cell-element`
+              `${blockClass}--interactive-cell-element`,
+              {
+                [`${blockClass}__th--active-header`]:
+                  activeCellCoordinates?.column === 'header' &&
+                  activeCellCoordinates?.row === 'header',
+              }
             )}
             style={{
               width: defaultColumn?.rowHeaderWidth,
@@ -58,7 +65,8 @@ export const DataSpreadsheetHeader = ({
                 `${blockClass}--interactive-cell-element`,
                 {
                   [`${blockClass}__th--active-header`]:
-                    activeCellCoordinates?.column === index,
+                    activeCellCoordinates?.column === index ||
+                    checkActiveHeaderCell(index, selectionAreas, 'column'),
                 }
               )}
               type="button"
@@ -74,7 +82,7 @@ export const DataSpreadsheetHeader = ({
 
 DataSpreadsheetHeader.propTypes = {
   /**
-   * Default spreadsheet sizing values
+   * Object containing the active cell coordinates
    */
   activeCellCoordinates: PropTypes.shape({
     row: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -94,4 +102,9 @@ DataSpreadsheetHeader.propTypes = {
    * Headers provided from useTable hook
    */
   headerGroups: PropTypes.arrayOf(PropTypes.object),
+
+  /**
+   * All of the cell selection area items
+   */
+  selectionAreas: PropTypes.arrayOf(PropTypes.object),
 };

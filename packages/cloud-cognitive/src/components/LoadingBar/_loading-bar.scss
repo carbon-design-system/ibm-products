@@ -23,41 +23,49 @@ $loading-bar__small-height: 4px;
       left: 0;
       width: 0%;
     }
+
     20% {
       right: auto;
       left: 0;
       width: 100%;
     }
+
     28% {
       right: 0;
       left: auto;
       width: 100%;
     }
+
     51% {
       right: 0;
       left: auto;
       width: 0%;
     }
+
     58% {
       right: 0;
       left: auto;
       width: 0%;
     }
+
     82% {
       right: 0;
       left: auto;
       width: 100%;
     }
+
     83% {
       right: auto;
       left: 0;
       width: 100%;
     }
+
     96% {
       right: auto;
       left: 0;
       width: 0%;
     }
+
     100% {
       right: auto;
       left: 0;
@@ -71,6 +79,7 @@ $loading-bar__small-height: 4px;
       left: 0;
       width: 0%;
     }
+
     100% {
       right: auto;
       left: 0;
@@ -84,11 +93,13 @@ $loading-bar__small-height: 4px;
       left: 0;
       width: 0%;
     }
+
     92% {
       right: auto;
       left: 0;
       width: 100%;
     }
+
     100% {
       right: auto;
       left: 0;
@@ -100,9 +111,11 @@ $loading-bar__small-height: 4px;
     0% {
       opacity: 1;
     }
+
     92% {
       opacity: 1;
     }
+
     100% {
       display: none;
       opacity: 0;

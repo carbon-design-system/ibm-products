@@ -73,6 +73,7 @@
   a.#{$prefix}--side-nav__link,
   .#{$prefix}--side-nav__submenu {
     background-color: $ui-05;
+
     &.active {
       // stylelint-disable-next-line declaration-no-important, carbon/theme-token-use
       background-color: $carbon--gray-90 !important; /* simpler/safer than overriding the carbon selector */
@@ -101,6 +102,7 @@
   a.#{$prefix}--side-nav__link--current {
     // stylelint-disable-next-line declaration-no-important
     background-color: $ui-05 !important; /* simpler/safer than overriding the carbon selector */
+
     &:hover {
       // stylelint-disable-next-line declaration-no-important
       background-color: $inverse-02 !important; /* simpler/safer than overriding the carbon selector */

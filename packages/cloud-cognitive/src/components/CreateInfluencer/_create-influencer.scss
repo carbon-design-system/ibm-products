@@ -19,6 +19,7 @@
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX($influencerAnimationStart);
     }
+
     100% {
       opacity: 1;
       transform: translateX(0);
@@ -29,6 +30,7 @@
       opacity: 1;
       transform: translateX(0);
     }
+
     100% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use

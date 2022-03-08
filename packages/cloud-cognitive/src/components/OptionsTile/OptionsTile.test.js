@@ -35,7 +35,11 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<OptionsTile {...props} />);
+    const { container } = render(
+      <main>
+        <OptionsTile {...props} />
+      </main>
+    );
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });

@@ -1,6 +1,6 @@
 {
   "name": "@carbon/component-usage-report",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Creates a @carbon/cloud-cognitive component usage report.",
   "main": "index.js",
   "scripts": {

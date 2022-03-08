@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.9.0...@carbon/ibm-products@1.10.0) (2022-03-08)
+
+
+### Bug Fixes
+
+* add select multi select filtering ([#1714](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1714)) ([7c4b469](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7c4b469fb3c40f3601dd6c46a65be2e7618700db))
+* **DataSpreadsheet:** prevent check on coords that do not exist ([#1716](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1716)) ([236fcfc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/236fcfccc557342a2a736d7418cd59449b4d089e))
+* move show all modal to document body ([#1747](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1747)) ([b94e75d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b94e75d7e11fa1338871c7d8a1aab4a96be568c0))
+* **options-tile:** fix summary behaviour ([#1726](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1726)) ([1c0aa1a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1c0aa1a255e67e2544b3b443860d31e8a43509f7))
+* remove reserved space for invalid icon ([#1710](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1710)) ([5590ce7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5590ce7e7b0ccb510f32bdc24b910e785760d063))
+* SidePanel (enhancement): mobile responsiveness of panels ([#1735](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1735)) ([6a5d94a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6a5d94a5856c27230574c49dcceb23a0a7afc6a3))
+* update Carbon versions to latest ([#1733](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1733)) ([9783faa](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9783faac23d8f03598ef0e5994743c4c5f915705))
+* **UserProfileImage:** fix tooltip version of user profile image ([#1745](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1745)) ([b89c73a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b89c73aa92598ad39b3436c77a973e999a50bec8))
+
+
+### Features
+
+* **DataSpreadsheet:** [#1704](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1704) add spreadsheet shift click behavior ([#1723](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1723)) ([3126859](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/312685957a08fc4bf7f8aec530520a2c9a685ec3))
+* **DataSpreadsheet:** [#1731](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1731) add active highlight to column/row headers ([#1744](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1744)) ([3bac3f9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3bac3f9924a29c4d20ddf8a9f7f619597578db6a))
+* **DataSpreadsheet:** add keyboard support to cell selections ([#1719](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1719)) ([812ade5](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/812ade5669136cd73670566d079a8be5a1159ea8))
+* **DataSpreadsheet:** highlight row/column header on active cell change ([#1732](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1732)) ([b828e9b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b828e9b809bf9349e473830a29c9aef70df1cd08))
+* **DataSpreadsheet:** remove cell selection in certain case ([#1706](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1706)) ([712ac00](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/712ac00e60151b101fc9375e21bb80c4b28f28f7))
+* **PageHeader:** prevent breadcrumb scroll by default ([#1748](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1748)) ([4179840](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/41798401e3625a0850612819573d60010b6a3a32))
+* **TagSet:** add allTagsModalTarget prop ([#1749](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1749)) ([69c3a20](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/69c3a204dda1962d08ad91fab5bf9adde37e2a27))
+
+
+
+
+
 # [1.9.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.8.0...@carbon/ibm-products@1.9.0) (2022-03-01)
 
 

@@ -128,6 +128,22 @@
     padding: $spacing-05;
     border-top: 1px solid $ui-03;
     border-right: 1px solid $ui-03;
+
+    &-search-bar {
+      display: flex;
+
+      label {
+        display: none;
+      }
+    }
+
+    &-sort-filter {
+      display: flex;
+    }
+
+    .bx--overflow-menu {
+      border-bottom: 1px solid $ui-04;
+    }
   }
 
   .#{$block-class}__tag-container {

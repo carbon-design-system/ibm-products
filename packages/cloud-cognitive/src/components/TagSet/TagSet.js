@@ -28,6 +28,7 @@ const allTagsModalSearchThreshold = 10;
 // Default values for props
 const defaults = {
   align: 'start',
+  allTagsModalTarget: document.body,
   overflowAlign: 'center',
   overflowDirection: 'bottom',
 };
@@ -38,6 +39,7 @@ export let TagSet = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
 
       align = defaults.align,
+      allTagsModalTarget = defaults.allTagsModalTarget,
       className,
       maxVisible,
       overflowAlign = defaults.overflowAlign,
@@ -239,7 +241,7 @@ export let TagSet = React.forwardRef(
           </div>
         </div>
 
-        {tags && displayCount < tags.length
+        {allTagsModalTarget && tags && displayCount < tags.length
           ? createPortal(
               <TagSetModal
                 allTags={tags}
@@ -249,7 +251,7 @@ export let TagSet = React.forwardRef(
                 searchLabel={allTagsModalSearchLabel}
                 searchPlaceholder={allTagsModalSearchPlaceholderText}
               />,
-              document.body
+              allTagsModalTarget
             )
           : null}
       </div>
@@ -300,6 +302,10 @@ TagSet.propTypes = {
    * placeholder text for the show all search. **Note: Required if more than 10 tags**
    */
   allTagsModalSearchPlaceholderText: string_required_if_more_than_10_tags,
+  /**
+   * portal target for the all tags modal
+   */
+  allTagsModalTarget: PropTypes.node,
   /**
    * title for the show all modal. **Note: Required if more than 10 tags**
    */

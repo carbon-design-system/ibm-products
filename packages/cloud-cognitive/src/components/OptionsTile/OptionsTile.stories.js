@@ -77,7 +77,7 @@ const Template = (args) => {
   // spell-checker:enable
 
   const id = uuidv4();
-  const headingId = args.headingId ?? `${id}-heading`;
+  const titleId = args.titleId ?? `${id}-title`;
 
   const isInvalid = args.invalid;
   const isWarn = !isInvalid && args.warn;
@@ -86,7 +86,7 @@ const Template = (args) => {
 
   return (
     <OptionsTile onToggle={action('onToggle')} {...args}>
-      <FormGroup aria-labelledby={headingId} legendText="" hasMargin={false}>
+      <FormGroup aria-labelledby={titleId} legendText="" hasMargin={false}>
         <p>
           User interface defines the language the application is displayed in.
           Locale sets the regional display formats for information like time,
@@ -133,7 +133,7 @@ const TemplateStatic = ({ enabled, ...rest }) => {
 
 export const optionsTile = prepareStory(Template, {
   args: {
-    heading: 'Language',
+    title: 'Language',
     summary: 'English | Locale: English',
     invalidText: 'Your system does not support this configuration',
     warnText: 'A restart is required to apply these settings',
@@ -143,7 +143,7 @@ export const optionsTile = prepareStory(Template, {
 
 export const staticOptionsTile = prepareStory(TemplateStatic, {
   args: {
-    heading: 'Hardware acceleration',
+    title: 'Hardware acceleration',
     enabled: true,
   },
 });

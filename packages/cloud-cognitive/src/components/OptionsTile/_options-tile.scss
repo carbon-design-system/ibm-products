@@ -61,11 +61,11 @@
     @include focus-outline('outline');
   }
 
-  .#{$block-class}__title {
+  .#{$block-class}__heading {
     grid-column: 2;
   }
 
-  .#{$block-class}__heading {
+  .#{$block-class}__title {
     @include carbon--type-style('productive-heading-01');
 
     color: $text-01;

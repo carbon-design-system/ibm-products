@@ -23,7 +23,7 @@ const dataTestId = uuidv4();
 
 // common props
 const props = {
-  heading: `heading-${uuidv4()}`,
+  title: `title-${uuidv4()}`,
   'data-testid': dataTestId,
   children,
 };
@@ -84,7 +84,7 @@ describe(componentName, () => {
   });
 
   it('renders as static variant if no children are provided', () => {
-    const { container } = render(<OptionsTile heading="Static variant" />);
+    const { container } = render(<OptionsTile title="Static variant" />);
 
     expect(container.querySelector('details')).toBeFalsy();
   });
@@ -155,14 +155,14 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveClass(`${blockClass}--lg`);
   });
 
-  it('uses props.headingId as the heading id and as the aria-labelledby attribute of the toggle', () => {
-    const headingId = uuidv4();
+  it('uses props.titleId as the title id and as the aria-labelledby attribute of the toggle', () => {
+    const titleId = uuidv4();
 
-    render(<OptionsTile {...props} headingId={headingId} enabled />);
+    render(<OptionsTile {...props} titleId={titleId} enabled />);
 
-    expect(screen.getByRole('heading').id).toBe(headingId);
+    expect(screen.getByRole('heading').id).toBe(titleId);
     // TODO: update to role "switch" for Carbon v11
-    expect(screen.getByRole('checkbox')).toHaveAccessibleName(props.heading);
+    expect(screen.getByRole('checkbox')).toHaveAccessibleName(props.title);
   });
 
   it('expands and collapses on click', () => {

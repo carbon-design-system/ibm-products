@@ -48,8 +48,6 @@ export let OptionsTile = React.forwardRef(
       children,
       className,
       enabled,
-      heading,
-      headingId: userDefinedHeadingId,
       invalid,
       invalidText,
       locked,
@@ -58,6 +56,8 @@ export let OptionsTile = React.forwardRef(
       open,
       size = defaults.size,
       summary,
+      title,
+      titleId: userDefinedTitleId,
       warn,
       warnText,
 
@@ -74,7 +74,7 @@ export let OptionsTile = React.forwardRef(
     const contentRef = useRef(null);
 
     const id = uuidv4();
-    const headingId = userDefinedHeadingId ?? `${id}-heading`;
+    const titleId = userDefinedTitleId ?? `${id}-title`;
 
     const isExpandable = children !== undefined;
 
@@ -215,9 +215,9 @@ export let OptionsTile = React.forwardRef(
       }
 
       return (
-        <div className={`${blockClass}__title`}>
-          <h6 id={headingId} className={`${blockClass}__heading`}>
-            {heading}
+        <div className={`${blockClass}__heading`}>
+          <h6 id={titleId} className={`${blockClass}__title`}>
+            {title}
           </h6>
           {text && (
             <span className={cx(summaryClasses)} aria-hidden={summaryHidden}>
@@ -255,7 +255,7 @@ export let OptionsTile = React.forwardRef(
               toggled={enabled}
               labelA=""
               labelB=""
-              aria-labelledby={headingId}
+              aria-labelledby={titleId}
               onToggle={onToggle}
               size="sm"
               disabled={isLocked}
@@ -316,16 +316,6 @@ OptionsTile.propTypes = {
   enabled: PropTypes.bool,
 
   /**
-   * Provide the heading for this OptionsTile.
-   */
-  heading: PropTypes.string.isRequired,
-
-  /**
-   * Optionally provide an id which should be used for the heading.
-   */
-  headingId: PropTypes.string,
-
-  /**
    * Whether the OptionsTile is in invalid validation state.
    */
   invalid: PropTypes.bool,
@@ -365,6 +355,16 @@ OptionsTile.propTypes = {
    * Optionally provide a text summarizing the current state of the content.
    */
   summary: PropTypes.string,
+
+  /**
+   * Provide the title for this OptionsTile.
+   */
+  title: PropTypes.string.isRequired,
+
+  /**
+   * Optionally provide an id which should be used for the title.
+   */
+  titleId: PropTypes.string,
 
   /**
    * Whether the OptionsTile is in warning validation state.

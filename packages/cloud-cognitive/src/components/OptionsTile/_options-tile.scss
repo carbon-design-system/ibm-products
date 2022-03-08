@@ -12,6 +12,10 @@
 // Other Carbon settings.
 @import 'carbon-components/scss/globals/scss/helper-mixins';
 
+// PageHeader uses the following Carbon components:
+// Toggle
+@import 'carbon-components/scss/components/toggle/toggle';
+
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin options-tile {

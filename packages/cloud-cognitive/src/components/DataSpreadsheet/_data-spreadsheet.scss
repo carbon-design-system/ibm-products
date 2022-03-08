@@ -74,7 +74,7 @@
       @include set-body-borders();
 
       margin: 0;
-      background-color: transparent;
+      background-color: $ui-background;
       cursor: cell;
       text-align: left;
     }
@@ -84,9 +84,23 @@
       color: $text-01;
       text-align: left;
     }
+    .#{$block-class}__cell-editor {
+      position: absolute;
+      z-index: 4;
+      display: none;
+      padding: 0 $spacing-03;
+      background-color: $ui-background;
+      box-shadow: 0 2px 6px 2px $ui-04;
+      resize: none;
+      &.#{$carbon-prefix}--text-area {
+        min-width: initial;
+        min-height: initial;
+      }
+    }
     .#{$block-class}__active-cell--highlight {
       position: absolute;
       z-index: 3;
+      display: none;
       border: $spacing-01 solid $interactive-01;
       background-color: transparent;
 

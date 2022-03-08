@@ -10,9 +10,9 @@
 $block-class: #{$pkg-prefix}--options-tile;
 
 .#{$block-class} {
-  width: 70vw;
-  min-width: 32rem;
-  max-width: 64rem;
+  width: 100%;
+  min-width: 16rem;
+  max-width: 48rem;
 }
 
 .#{$block-class}__content p {

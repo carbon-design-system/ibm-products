@@ -57,6 +57,10 @@
     transition: background-color $duration--fast-01 motion(entrance, productive);
   }
 
+  .#{$block-class}__header::-webkit-details-marker {
+    display: none;
+  }
+
   .#{$block-class}__header:hover {
     background-color: $hover-ui;
   }
@@ -119,6 +123,7 @@
   }
 
   .#{$block-class}__chevron {
+    display: block;
     justify-self: center;
     transition: transform $duration--fast-02 motion(standard, productive);
   }

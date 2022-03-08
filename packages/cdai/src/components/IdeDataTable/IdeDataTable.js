@@ -279,6 +279,8 @@ IdeDataTable.propTypes = {
   size: PropTypes.string,
   /** Number of loading rows */
   skeletonRowCount: PropTypes.number,
+  /** True to add zebra stripes */
+  useZebraStyles: PropTypes.bool,
 };
 
 IdeDataTable.defaultProps = {

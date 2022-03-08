@@ -26,6 +26,7 @@
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateY(-38.5rem); // the height of the notification panel
     }
+
     100% {
       opacity: 1;
       transform: translateY(0);
@@ -37,6 +38,7 @@
       opacity: 1;
       transform: translateY(0);
     }
+
     100% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
@@ -204,6 +206,7 @@
         padding: 0;
         color: $text-01;
         opacity: 0;
+
         &:hover,
         &:focus {
           opacity: 1;

@@ -134,6 +134,16 @@ describe(componentName, () => {
     expect(summary).toHaveClass(`${blockClass}__summary--locked`);
   });
 
+  it('renders lockedText when locked and no summary is set', () => {
+    const lockedText = 'locked explanation';
+
+    render(<OptionsTile {...props} locked lockedText={lockedText} />);
+
+    const summary = screen.getByRole('heading').nextSibling;
+
+    expect(summary.textContent).toBe(lockedText);
+  });
+
   it('renders open state when passed', () => {
     const { container } = render(<OptionsTile {...props} open={true} />);
 

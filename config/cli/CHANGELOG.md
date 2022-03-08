@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.11](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cli@0.18.10...@carbon/ibm-cloud-cognitive-cli@0.18.11) (2022-03-08)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cli
+
+
+
+
+
 ## [0.18.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cli@0.18.9...@carbon/ibm-cloud-cognitive-cli@0.18.10) (2022-03-01)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cli

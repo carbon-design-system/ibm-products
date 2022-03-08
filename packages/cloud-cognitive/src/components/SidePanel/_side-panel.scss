@@ -31,6 +31,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX(#{$size}); // the size width of the side panel
     }
+
     100% {
       opacity: 1;
       transform: translateX(0);
@@ -45,6 +46,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX(-#{$size}); // the size width of the side panel
     }
+
     100% {
       opacity: 1;
       transform: translateX(0);
@@ -56,8 +58,8 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   $placement: 'right',
   $size: map-get($side-panel-sizes, md)
 ) {
-  min-width: $size;
-  max-width: $size;
+  width: $size;
+  max-width: 100%;
   @if $placement == right {
     @include sidePanelEntranceRight($size);
   } @else {
@@ -66,8 +68,8 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
 }
 
 @mixin setPanelSize($size: map-get($side-panel-sizes, md)) {
-  min-width: $size;
-  max-width: $size;
+  width: $size;
+  max-width: 100%;
 }
 
 @mixin setDividerStyles() {
@@ -95,6 +97,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       opacity: 1;
       transform: translateX(0);
     }
+
     100% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
@@ -107,6 +110,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       opacity: 1;
       transform: translateX(0);
     }
+
     100% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
@@ -183,6 +187,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       );
       padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
       background-color: $ui-01;
+
       &::before {
         @include setDividerStyles();
       }
@@ -457,6 +462,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     0% {
       opacity: 0;
     }
+
     100% {
       opacity: 1;
     }
@@ -466,6 +472,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     0% {
       opacity: 1;
     }
+
     100% {
       opacity: 0;
     }

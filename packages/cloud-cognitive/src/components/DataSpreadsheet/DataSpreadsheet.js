@@ -687,7 +687,9 @@ export let DataSpreadsheet = React.forwardRef(
     useEffect(() => {
       if (isEditing) {
         const cellProps =
-          rows[activeCellCoordinates?.row].cells[activeCellCoordinates?.column];
+          rows[activeCellCoordinates?.row]?.cells[
+            activeCellCoordinates?.column
+          ];
         const activeCellLeftPosition = activeCellRef?.current.style.left;
         const activeCellTopPosition = activeCellRef?.current.style.top;
         cellEditorRef.current.style.left = activeCellLeftPosition;
@@ -700,7 +702,7 @@ export let DataSpreadsheet = React.forwardRef(
           (parseInt(activeCellRef?.current.style.height) - 16) / 2
         }px`; // calculate paddingTop based on cellHeight which could be variable depending on the cellSize prop
         cellEditorRef.current.style.textAlign =
-          cellProps.column?.placement === 'right' ? 'right' : 'left';
+          cellProps?.column?.placement === 'right' ? 'right' : 'left';
         cellEditorRef.current?.focus();
       }
       if (!isEditing) {

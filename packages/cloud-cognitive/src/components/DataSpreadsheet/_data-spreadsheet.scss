@@ -90,7 +90,6 @@
       display: none;
       padding: 0 $spacing-03;
       background-color: $ui-background;
-      box-shadow: 0 2px 6px 2px $ui-04;
       resize: none;
       &.#{$carbon-prefix}--text-area {
         min-width: initial;

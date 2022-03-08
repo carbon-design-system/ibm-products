@@ -10,7 +10,7 @@
 $block-class: #{$pkg-prefix}--options-tile;
 
 .#{$block-class} {
-  width: 100%;
+  width: 80vw;
   min-width: 16rem;
   max-width: 48rem;
 }

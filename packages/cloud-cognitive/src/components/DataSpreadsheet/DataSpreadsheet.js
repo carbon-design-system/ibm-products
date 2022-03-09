@@ -27,6 +27,9 @@ import { getCellSize } from './getCellSize';
 import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
 import { useActiveElement } from '../../global/js/hooks';
 import { createActiveCellFn } from './createActiveCellFn';
+import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
+import { usePreviousValue } from '../../global/js/hooks';
+import uuidv4 from '../../global/js/utils/uuidv4';
 // cspell:words rowcount colcount
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -64,8 +67,11 @@ export let DataSpreadsheet = React.forwardRef(
     const [activeCellCoordinates, setActiveCellCoordinates] = useState(null);
     const [selectionAreas, setSelectionAreas] = useState([]);
     const [clickAndHoldActive, setClickAndHoldActive] = useState(false);
-    const [currentMatcher, setCurrentMatcher] = useState(null);
+    const [currentMatcher, setCurrentMatcher] = useState('');
+    const previousState = usePreviousValue({ activeCellCoordinates });
     const cellSizeValue = getCellSize(cellSize);
+    const currentMatcherRef = useRef();
+    const activeKeys = useRef([]);
     const defaultColumn = useMemo(
       () => ({
         width: 150,
@@ -102,6 +108,7 @@ export let DataSpreadsheet = React.forwardRef(
       ) {
         setContainerHasFocus(false);
         removeActiveCell();
+        activeKeys.current = [];
       }
       if (
         focusedElement.classList.contains(blockClass) ||
@@ -124,12 +131,24 @@ export let DataSpreadsheet = React.forwardRef(
     }, [spreadsheetRef]);
 
     // Removes the cell selection elements
-    const removeCellSelections = useCallback(() => {
-      const cellSelections = spreadsheetRef.current.querySelectorAll(
-        `.${blockClass}__selection-area--element`
-      );
-      Array.from(cellSelections).forEach((element) => element.remove());
-    }, [spreadsheetRef]);
+    const removeCellSelections = useCallback(
+      (matcher) => {
+        if (matcher && typeof matcher === 'string') {
+          const selectionToRemove = spreadsheetRef.current.querySelector(
+            `[data-matcher-id="${matcher}"]`
+          );
+          if (selectionToRemove) {
+            selectionToRemove.remove();
+          }
+        } else {
+          const cellSelections = spreadsheetRef.current.querySelectorAll(
+            `.${blockClass}__selection-area--element`
+          );
+          [...cellSelections].forEach((element) => element.remove());
+        }
+      },
+      [spreadsheetRef]
+    );
 
     // Click outside useEffect
     useEffect(() => {
@@ -143,11 +162,12 @@ export let DataSpreadsheet = React.forwardRef(
         ) {
           return;
         }
+        setActiveCellCoordinates(null);
         setSelectionAreas([]);
         removeActiveCell();
         removeCellSelections();
         setContainerHasFocus(false);
-        setActiveCellCoordinates(null);
+        activeKeys.current = [];
       };
       document.addEventListener('click', handleOutsideClick);
       return () => {
@@ -164,17 +184,39 @@ export let DataSpreadsheet = React.forwardRef(
         const activeCellValue = activeCellFullData
           ? Object.values(activeCellFullData.row.values)[coords?.column]
           : null;
-        createActiveCellFn({
-          placementElement,
-          coords,
-          addToHeader,
-          contextRef: spreadsheetRef,
-          blockClass,
-          onActiveCellChange,
-          activeCellValue,
-        });
+        const handleActiveCellMouseEnter = () => {
+          handleActiveCellMouseEnterCallback(
+            selectionAreas,
+            clickAndHoldActive
+          );
+        };
+        const prevCoords = previousState?.activeCellCoordinates;
+        // Only create an active cell if the activeCellCoordinates have changed
+        if (
+          prevCoords?.row !== coords?.row ||
+          prevCoords?.column !== coords?.column
+        ) {
+          createActiveCellFn({
+            placementElement,
+            coords,
+            addToHeader,
+            contextRef: spreadsheetRef,
+            blockClass,
+            onActiveCellChange,
+            activeCellValue,
+            handleActiveCellMouseEnter,
+          });
+        }
       },
-      [spreadsheetRef, rows, onActiveCellChange]
+      [
+        spreadsheetRef,
+        rows,
+        onActiveCellChange,
+        clickAndHoldActive,
+        handleActiveCellMouseEnterCallback,
+        selectionAreas,
+        previousState?.activeCellCoordinates,
+      ]
     );
 
     const handleInitialArrowPress = useCallback(() => {
@@ -189,137 +231,260 @@ export let DataSpreadsheet = React.forwardRef(
       return;
     }, [activeCellCoordinates]);
 
-    const updateActiveCellCoordinates = ({ coords, updatedValue }) => {
-      setActiveCellCoordinates({
-        ...coords,
-        ...updatedValue,
-      });
-    };
+    const updateActiveCellCoordinates = useCallback(
+      ({ coords, updatedValue }) => {
+        const newActiveCell = {
+          ...coords,
+          ...updatedValue,
+        };
+        setActiveCellCoordinates(newActiveCell);
+        // Only run if the active cell is _not_ a header cell. This will add a point1 object
+        // to selectionAreas every time the active cell changes, allowing us to create cell
+        // selections using keyboard
+        if (
+          newActiveCell.row !== 'header' &&
+          newActiveCell.column !== 'header'
+        ) {
+          const tempMatcher = uuidv4();
+          setSelectionAreas([{ point1: newActiveCell, matcher: tempMatcher }]);
+          setCurrentMatcher(tempMatcher);
+        }
+      },
+      []
+    );
+
+    const handleMultipleKeys = useCallback(() => {
+      const activeKeyValues = activeKeys.current;
+      const selectionAreasClone = deepCloneObject(selectionAreas);
+      const indexOfCurrentArea = selectionAreasClone.findIndex(
+        (item) => item.matcher === currentMatcher
+      );
+      const pointToUpdate = selectionAreasClone[indexOfCurrentArea]?.point2
+        ? selectionAreasClone[indexOfCurrentArea].point2
+        : selectionAreasClone[indexOfCurrentArea].point1;
+      // Down + Shift
+      if (
+        activeKeyValues.includes('Shift') &&
+        activeKeyValues.includes('ArrowDown')
+      ) {
+        if (rows.length - 1 === pointToUpdate.row) {
+          return;
+        }
+        const newPoint = {
+          row: pointToUpdate.row + 1,
+          column: pointToUpdate.column,
+        };
+        selectionAreasClone[indexOfCurrentArea].point2 = newPoint;
+        selectionAreasClone[indexOfCurrentArea].areaCreated = false;
+        setSelectionAreas(selectionAreasClone);
+      }
+      // Right + Shift
+      if (
+        activeKeyValues.includes('Shift') &&
+        activeKeyValues.includes('ArrowRight')
+      ) {
+        if (columns.length - 1 === pointToUpdate.column) {
+          return;
+        }
+        const newPoint = {
+          row: pointToUpdate.row,
+          column: pointToUpdate.column + 1,
+        };
+        selectionAreasClone[indexOfCurrentArea].point2 = newPoint;
+        selectionAreasClone[indexOfCurrentArea].areaCreated = false;
+        setSelectionAreas(selectionAreasClone);
+      }
+      // Up + Shift
+      if (
+        activeKeyValues.includes('Shift') &&
+        activeKeyValues.includes('ArrowUp')
+      ) {
+        if (pointToUpdate.row === 0) {
+          return;
+        }
+        const newPoint = {
+          row: pointToUpdate.row - 1,
+          column: pointToUpdate.column,
+        };
+        selectionAreasClone[indexOfCurrentArea].point2 = newPoint;
+        selectionAreasClone[indexOfCurrentArea].areaCreated = false;
+        setSelectionAreas(selectionAreasClone);
+      }
+      // Left + Shift
+      if (
+        activeKeyValues.includes('Shift') &&
+        activeKeyValues.includes('ArrowLeft')
+      ) {
+        if (pointToUpdate.column === 0) {
+          return;
+        }
+        const newPoint = {
+          row: pointToUpdate.row,
+          column: pointToUpdate.column - 1,
+        };
+        selectionAreasClone[indexOfCurrentArea].point2 = newPoint;
+        selectionAreasClone[indexOfCurrentArea].areaCreated = false;
+        setSelectionAreas(selectionAreasClone);
+      }
+    }, [selectionAreas, currentMatcher, columns, rows]);
 
     const handleKeyPress = useCallback(
       (event) => {
-        const { keyCode } = event;
+        const { key } = event;
         // Command keys need to be returned as there is default browser behavior with these keys
-        if (keyCode === 91 || keyCode === 93) {
+        if (key === 'Meta' || key === 'Control') {
           return;
         }
         // Prevent arrow keys, home key, and end key from scrolling the page when the data spreadsheet container has focus
-        if ([35, 36, 37, 38, 39, 40].indexOf(keyCode) > -1) {
+        if (
+          [
+            'End',
+            'Home',
+            'ArrowLeft',
+            'ArrowUp',
+            'ArrowRight',
+            'ArrowDown',
+          ].indexOf(key) > -1
+        ) {
           event.preventDefault();
         }
-        // Clear out all cell selection areas if user uses any arrow key
-        if ([37, 38, 39, 40].indexOf(keyCode) > -1) {
-          if (selectionAreas?.length) {
+        // Clear out all cell selection areas if user uses any arrow key, except if the shift key is being held
+        if (
+          ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'].indexOf(key) > -1
+        ) {
+          if (
+            selectionAreas?.length &&
+            key !== 'Shift' &&
+            !activeKeys.current.includes('Shift')
+          ) {
             setSelectionAreas([]);
             removeCellSelections();
           }
         }
-        switch (keyCode) {
-          // Tab
-          case 9: {
-            setSelectionAreas([]);
-            removeActiveCell();
-            setContainerHasFocus(false);
-            setActiveCellCoordinates(null);
-            break;
-          }
-          // Left
-          case 37: {
-            handleInitialArrowPress();
-            const coordinatesClone = { ...activeCellCoordinates };
-            if (coordinatesClone.column === 'header') {
-              return;
+        // Update list of activeKeys
+        if (!activeKeys.current?.includes(key)) {
+          const activeClone = [...activeKeys.current];
+          activeKeys.current = [...activeClone, key];
+        }
+        if (activeKeys.current?.length > 1) {
+          handleMultipleKeys();
+        }
+        // Allow arrow key navigation if there are less than two activeKeys OR
+        // if one of the activeCellCoordinates is in a header position
+        if (
+          !activeKeys.current.includes('Shift') ||
+          activeCellCoordinates.row === 'header' ||
+          activeCellCoordinates.column === 'header'
+        ) {
+          switch (key) {
+            // Tab
+            case 'Tab': {
+              setSelectionAreas([]);
+              removeActiveCell();
+              setContainerHasFocus(false);
+              setActiveCellCoordinates(null);
+              break;
             }
-            if (typeof coordinatesClone.column === 'number') {
-              if (coordinatesClone.column === 0) {
+            // Left
+            case 'ArrowLeft': {
+              handleInitialArrowPress();
+              const coordinatesClone = { ...activeCellCoordinates };
+              if (coordinatesClone.column === 'header') {
+                return;
+              }
+              if (typeof coordinatesClone.column === 'number') {
+                if (coordinatesClone.column === 0) {
+                  updateActiveCellCoordinates({
+                    coords: coordinatesClone,
+                    updatedValue: { column: 'header' },
+                  });
+                  return;
+                }
                 updateActiveCellCoordinates({
                   coords: coordinatesClone,
-                  updatedValue: { column: 'header' },
+                  updatedValue: { column: coordinatesClone.column - 1 },
                 });
+              }
+              break;
+            }
+            // Up
+            case 'ArrowUp': {
+              handleInitialArrowPress();
+              const coordinatesClone = { ...activeCellCoordinates };
+              if (coordinatesClone.row === 'header') {
                 return;
               }
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { column: coordinatesClone.column - 1 },
-              });
-            }
-            break;
-          }
-          // Up
-          case 38: {
-            handleInitialArrowPress();
-            const coordinatesClone = { ...activeCellCoordinates };
-            if (coordinatesClone.row === 'header') {
-              return;
-            }
-            if (typeof coordinatesClone.row === 'number') {
-              // set row back to header if we are at index 0
-              if (coordinatesClone.row === 0) {
+              if (typeof coordinatesClone.row === 'number') {
+                // set row back to header if we are at index 0
+                if (coordinatesClone.row === 0) {
+                  updateActiveCellCoordinates({
+                    coords: coordinatesClone,
+                    updatedValue: { row: 'header' },
+                  });
+                  return;
+                }
+                // if we are at any other index than 0, subtract 1 from current row index
                 updateActiveCellCoordinates({
                   coords: coordinatesClone,
-                  updatedValue: { row: 'header' },
+                  updatedValue: { row: coordinatesClone.row - 1 },
                 });
-                return;
               }
-              // if we are at any other index than 0, subtract 1 from current row index
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { row: coordinatesClone.row - 1 },
-              });
+              break;
             }
-            break;
-          }
-          // Right
-          case 39: {
-            handleInitialArrowPress();
-            const coordinatesClone = { ...activeCellCoordinates };
-            if (coordinatesClone.column === 'header') {
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { column: 0 },
-              });
-            }
-            if (typeof coordinatesClone.column === 'number') {
-              // Prevent active cell coordinates from updating if the active
-              // cell is in the last column, ie we can't go any further to the right
-              if (columns.length - 1 === coordinatesClone.column) {
-                return;
+            // Right
+            case 'ArrowRight': {
+              handleInitialArrowPress();
+              const coordinatesClone = { ...activeCellCoordinates };
+              if (coordinatesClone.column === 'header') {
+                updateActiveCellCoordinates({
+                  coords: coordinatesClone,
+                  updatedValue: { column: 0 },
+                });
               }
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { column: coordinatesClone.column + 1 },
-              });
-            }
-            break;
-          }
-          // Down
-          case 40: {
-            handleInitialArrowPress();
-            const coordinatesClone = { ...activeCellCoordinates };
-            if (coordinatesClone.row === 'header') {
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { row: 0 },
-              });
-            }
-            if (typeof coordinatesClone.row === 'number') {
-              // Prevent active cell coordinates from updating if the active
-              // cell is in the last row, ie we can't go any further down since
-              // we are in the last row
-              if (rows.length - 1 === coordinatesClone.row) {
-                return;
+              if (typeof coordinatesClone.column === 'number') {
+                // Prevent active cell coordinates from updating if the active
+                // cell is in the last column, ie we can't go any further to the right
+                if (columns.length - 1 === coordinatesClone.column) {
+                  return;
+                }
+                updateActiveCellCoordinates({
+                  coords: coordinatesClone,
+                  updatedValue: { column: coordinatesClone.column + 1 },
+                });
               }
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { row: coordinatesClone.row + 1 },
-              });
+              break;
             }
-            break;
+            // Down
+            case 'ArrowDown': {
+              handleInitialArrowPress();
+              const coordinatesClone = { ...activeCellCoordinates };
+              if (coordinatesClone.row === 'header') {
+                updateActiveCellCoordinates({
+                  coords: coordinatesClone,
+                  updatedValue: { row: 0 },
+                });
+              }
+              if (typeof coordinatesClone.row === 'number') {
+                // Prevent active cell coordinates from updating if the active
+                // cell is in the last row, ie we can't go any further down since
+                // we are in the last row
+                if (rows.length - 1 === coordinatesClone.row) {
+                  return;
+                }
+                updateActiveCellCoordinates({
+                  coords: coordinatesClone,
+                  updatedValue: { row: coordinatesClone.row + 1 },
+                });
+              }
+              break;
+            }
           }
         }
       },
       [
+        updateActiveCellCoordinates,
         handleInitialArrowPress,
+        handleMultipleKeys,
         activeCellCoordinates,
         selectionAreas?.length,
         removeCellSelections,
@@ -327,6 +492,42 @@ export let DataSpreadsheet = React.forwardRef(
         columns.length,
         rows.length,
       ]
+    );
+
+    // Only update if there are cell selection areas
+    // Find point object that matches currentMatcher and remove the second point
+    // because hovering over the active cell while clicking and holding should
+    // remove the previously existing selection area
+    const handleActiveCellMouseEnterCallback = useCallback(
+      (areas, clickHold) => {
+        const freshMatcherValue = currentMatcherRef.current;
+        if (!freshMatcherValue) {
+          return;
+        }
+        if (areas && areas.length && clickHold && freshMatcherValue) {
+          setSelectionAreas((prev) => {
+            const selectionAreaClone = deepCloneObject(prev);
+            const indexOfItemToUpdate = selectionAreaClone.findIndex(
+              (item) => item.matcher === freshMatcherValue
+            );
+            if (indexOfItemToUpdate === -1) {
+              return prev;
+            }
+            if (
+              typeof selectionAreaClone[indexOfItemToUpdate].point2 ===
+                'object' &&
+              selectionAreaClone[indexOfItemToUpdate].areaCreated
+            ) {
+              selectionAreaClone[indexOfItemToUpdate].point2 = null;
+              selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
+              removeCellSelections(freshMatcherValue);
+              return selectionAreaClone;
+            }
+            return prev;
+          });
+        }
+      },
+      [removeCellSelections]
     );
 
     // Adds active cell highlight to correct cell onKeyDown
@@ -355,6 +556,18 @@ export let DataSpreadsheet = React.forwardRef(
       containerHasFocus,
     ]);
 
+    const handleKeyUp = (event) => {
+      const { key } = event;
+      // Remove key from active keys array on key up
+      if (activeKeys.current?.includes(key)) {
+        const activeKeysClone = [...activeKeys.current];
+        const filteredKeysClone = activeKeysClone.filter(
+          (item) => item !== key
+        );
+        activeKeys.current = filteredKeysClone;
+      }
+    };
+
     const localRef = useRef();
     const spreadsheetRef = ref || localRef;
     return (
@@ -371,17 +584,22 @@ export let DataSpreadsheet = React.forwardRef(
         aria-rowcount={rows?.length || 0}
         aria-colcount={columns?.length || 0}
         onKeyDown={handleKeyPress}
+        onKeyUp={handleKeyUp}
         onFocus={() => setContainerHasFocus(true)}
       >
         {/* HEADER */}
         <DataSpreadsheetHeader
+          activeCellCoordinates={activeCellCoordinates}
           cellSizeValue={cellSizeValue}
           defaultColumn={defaultColumn}
           headerGroups={headerGroups}
+          selectionAreas={selectionAreas}
         />
 
         {/* BODY */}
         <DataSpreadsheetBody
+          activeCellCoordinates={activeCellCoordinates}
+          ref={currentMatcherRef}
           clickAndHoldActive={clickAndHoldActive}
           setClickAndHoldActive={setClickAndHoldActive}
           currentMatcher={currentMatcher}

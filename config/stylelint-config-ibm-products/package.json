@@ -1,7 +1,7 @@
 {
   "name": "stylelint-config-ibm-products",
   "private": true,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -18,7 +18,7 @@
     "stylelint": "^14.5.3"
   },
   "devDependencies": {
-    "stylelint-config-carbon": "^1.7.0",
+    "stylelint-config-carbon": "^1.8.0",
     "stylelint-config-idiomatic-order": "^8.1.0",
     "stylelint-config-standard": "^25.0.0",
     "stylelint-config-standard-scss": "^3.0.0",

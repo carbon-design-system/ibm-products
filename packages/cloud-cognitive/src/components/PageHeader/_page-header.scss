@@ -41,6 +41,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   from {
     background-color: var(--from-color);
   }
+
   to {
     background-color: var(--to-color);
   }
@@ -50,6 +51,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     background-color: var(--from-color);
     box-shadow: 0 1px 0 var(--from-color);
   }
+
   to {
     background-color: var(--to-color);
     box-shadow: 0 1px 0 var(--to-color-shadow);

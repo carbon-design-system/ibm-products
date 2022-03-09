@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import {
   getStoryTitle,
@@ -52,6 +52,7 @@ const columnData = [
     Header: 'Row Index',
     accessor: (row, index) => index,
     Cell: ({ cell: { value } }) => <NumericLayout value={value} />,
+    placement: 'right',
   },
   {
     Header: 'Pet type',
@@ -65,27 +66,31 @@ const columnData = [
     Header: 'Age',
     accessor: 'age',
     Cell: ({ cell: { value } }) => <NumericLayout value={value} />,
+    placement: 'right',
   },
   {
     Header: 'Vet visits',
     accessor: 'visits',
     Cell: ({ cell: { value } }) => <NumericLayout value={value} />,
+    placement: 'right',
   },
   {
     Header: 'Health',
     accessor: 'health',
     Cell: ({ cell: { value } }) => <NumericLayout value={value} />,
+    placement: 'right',
   },
 ];
 
 const Template = ({ ...args }) => {
+  const [data, setData] = useState(() => generateData(16));
   const columns = useMemo(() => columnData, []);
 
-  const data = useMemo(() => generateData(16), []);
   return (
     <DataSpreadsheet
       columns={columns}
       data={data}
+      onDataUpdate={setData}
       id="spreadsheet--id"
       {...args}
     />
@@ -93,13 +98,14 @@ const Template = ({ ...args }) => {
 };
 
 const LargeTemplate = ({ ...args }) => {
+  const [data, setData] = useState(() => generateData(16));
   const columns = useMemo(() => columnData, []);
 
-  const data = useMemo(() => generateData(1000), []);
   return (
     <DataSpreadsheet
       columns={columns}
       data={data}
+      onDataUpdate={setData}
       id="spreadsheet--id"
       {...args}
     />

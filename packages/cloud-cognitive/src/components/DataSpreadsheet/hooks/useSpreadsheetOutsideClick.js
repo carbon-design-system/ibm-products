@@ -18,6 +18,7 @@ export const useSpreadsheetOutsideClick = ({
   removeCellSelections,
   setContainerHasFocus,
   activeKeys,
+  removeCellEditor,
 }) => {
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -33,6 +34,7 @@ export const useSpreadsheetOutsideClick = ({
       removeActiveCell();
       removeCellSelections();
       setContainerHasFocus(false);
+      removeCellEditor();
       activeKeys.current = [];
     };
     document.addEventListener('click', handleOutsideClick);
@@ -48,5 +50,6 @@ export const useSpreadsheetOutsideClick = ({
     setActiveCellCoordinates,
     setContainerHasFocus,
     setSelectionAreas,
+    removeCellEditor,
   ]);
 };

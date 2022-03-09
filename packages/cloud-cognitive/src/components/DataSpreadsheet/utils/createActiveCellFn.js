@@ -16,7 +16,8 @@ export const createActiveCellFn = ({
   blockClass = `${pkg.prefix}--data-spreadsheet`,
   onActiveCellChange,
   activeCellValue,
-  handleActiveCellMouseEnter,
+  activeCellRef,
+  cellEditorRef,
 }) => {
   if (!coords) {
     return;
@@ -35,15 +36,8 @@ export const createActiveCellFn = ({
       placementElement.getBoundingClientRect().left -
       activeElementContainer.getBoundingClientRect().left,
   };
-  const activeCellButton =
-    contextRef?.current.querySelector(
-      `.${blockClass}__active-cell--highlight`
-    ) || document.createElement('button');
-  activeCellButton.classList.add(
-    `${blockClass}__active-cell--highlight`,
-    `${blockClass}--interactive-cell-element`
-  );
-  activeCellButton.addEventListener('mouseenter', handleActiveCellMouseEnter);
+  const activeCellButton = activeCellRef?.current;
+  activeCellButton.style.display = 'block';
   activeCellButton.style.width = px(placementElement?.offsetWidth);
   activeCellButton.style.height = px(placementElement?.offsetHeight);
   activeCellButton.style.left = px(relativePosition.left);
@@ -58,6 +52,9 @@ export const createActiveCellFn = ({
   );
   activeElementContainer.appendChild(activeCellButton);
   activeCellButton.focus();
+  if (!addToHeader) {
+    activeElementContainer.appendChild(cellEditorRef.current);
+  }
   if (typeof coords?.column === 'number' && typeof coords?.row === 'number') {
     onActiveCellChange?.(activeCellValue);
   }

@@ -29,6 +29,7 @@ import { useActiveElement } from '../../global/js/hooks';
 import { createActiveCellFn } from './createActiveCellFn';
 import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
 import { usePreviousValue } from '../../global/js/hooks';
+import { removeCellSelections } from './utils/removeCellSelections';
 import uuidv4 from '../../global/js/utils/uuidv4';
 // cspell:words rowcount colcount
 
@@ -62,6 +63,8 @@ export let DataSpreadsheet = React.forwardRef(
     },
     ref
   ) => {
+    const localRef = useRef();
+    const spreadsheetRef = ref || localRef;
     const focusedElement = useActiveElement();
     const [containerHasFocus, setContainerHasFocus] = useState(false);
     const [activeCellCoordinates, setActiveCellCoordinates] = useState(null);
@@ -126,29 +129,9 @@ export let DataSpreadsheet = React.forwardRef(
         `.${blockClass}__active-cell--highlight`
       );
       if (activeCellHighlight) {
-        activeCellHighlight.remove();
+        activeCellHighlight.style.display = 'none';
       }
     }, [spreadsheetRef]);
-
-    // Removes the cell selection elements
-    const removeCellSelections = useCallback(
-      (matcher) => {
-        if (matcher && typeof matcher === 'string') {
-          const selectionToRemove = spreadsheetRef.current.querySelector(
-            `[data-matcher-id="${matcher}"]`
-          );
-          if (selectionToRemove) {
-            selectionToRemove.remove();
-          }
-        } else {
-          const cellSelections = spreadsheetRef.current.querySelectorAll(
-            `.${blockClass}__selection-area--element`
-          );
-          [...cellSelections].forEach((element) => element.remove());
-        }
-      },
-      [spreadsheetRef]
-    );
 
     // Click outside useEffect
     useEffect(() => {
@@ -158,6 +141,9 @@ export let DataSpreadsheet = React.forwardRef(
           spreadsheetRef.current.contains(event.target) ||
           event.target.classList.contains(
             `${blockClass}__active-cell--highlight`
+          ) ||
+          event.target.classList.contains(
+            `${blockClass}--interactive-cell-element`
           )
         ) {
           return;
@@ -165,7 +151,7 @@ export let DataSpreadsheet = React.forwardRef(
         setActiveCellCoordinates(null);
         setSelectionAreas([]);
         removeActiveCell();
-        removeCellSelections();
+        removeCellSelections({ spreadsheetRef });
         setContainerHasFocus(false);
         activeKeys.current = [];
       };
@@ -173,7 +159,7 @@ export let DataSpreadsheet = React.forwardRef(
       return () => {
         document.removeEventListener('click', handleOutsideClick);
       };
-    }, [spreadsheetRef, removeActiveCell, removeCellSelections]);
+    }, [spreadsheetRef, removeActiveCell]);
 
     const createActiveCell = useCallback(
       ({ placementElement, coords, addToHeader = false }) => {
@@ -358,7 +344,7 @@ export let DataSpreadsheet = React.forwardRef(
             !activeKeys.current.includes('Shift')
           ) {
             setSelectionAreas([]);
-            removeCellSelections();
+            removeCellSelections({ spreadsheetRef });
           }
         }
         // Update list of activeKeys
@@ -487,10 +473,10 @@ export let DataSpreadsheet = React.forwardRef(
         handleMultipleKeys,
         activeCellCoordinates,
         selectionAreas?.length,
-        removeCellSelections,
         removeActiveCell,
         columns.length,
         rows.length,
+        spreadsheetRef,
       ]
     );
 
@@ -520,14 +506,17 @@ export let DataSpreadsheet = React.forwardRef(
             ) {
               selectionAreaClone[indexOfItemToUpdate].point2 = null;
               selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
-              removeCellSelections(freshMatcherValue);
+              removeCellSelections({
+                matcher: freshMatcherValue,
+                spreadsheetRef,
+              });
               return selectionAreaClone;
             }
             return prev;
           });
         }
       },
-      [removeCellSelections]
+      [spreadsheetRef]
     );
 
     // Adds active cell highlight to correct cell onKeyDown
@@ -568,8 +557,60 @@ export let DataSpreadsheet = React.forwardRef(
       }
     };
 
-    const localRef = useRef();
-    const spreadsheetRef = ref || localRef;
+    const handleActiveCellClick = () => {
+      // Column header selection
+      if (activeCellCoordinates?.row === 'header') {
+        const point1 = {
+          row: 0,
+          column: activeCellCoordinates?.column,
+        };
+        const point2 = {
+          row: rows.length - 1, // going to always be the last row
+          column: activeCellCoordinates?.column,
+        };
+        const tempMatcher = uuidv4();
+        setActiveCellCoordinates({
+          row: 0,
+          column: activeCellCoordinates?.column,
+        });
+        setCurrentMatcher(tempMatcher);
+        removeCellSelections({ spreadsheetRef });
+        setSelectionAreas([
+          {
+            point1,
+            point2,
+            areaCreated: false,
+            matcher: tempMatcher,
+          },
+        ]);
+      }
+      if (activeCellCoordinates?.column === 'header') {
+        const point1 = {
+          column: 0,
+          row: activeCellCoordinates?.row,
+        };
+        const point2 = {
+          column: columns.length - 1, // going to always be the last row
+          row: activeCellCoordinates?.row,
+        };
+        const tempMatcher = uuidv4();
+        setActiveCellCoordinates({
+          row: activeCellCoordinates?.row,
+          column: 0,
+        });
+        setCurrentMatcher(tempMatcher);
+        removeCellSelections({ spreadsheetRef });
+        setSelectionAreas([
+          {
+            point1,
+            point2,
+            areaCreated: false,
+            matcher: tempMatcher,
+          },
+        ]);
+      }
+    };
+
     return (
       <div
         {...rest}
@@ -589,17 +630,22 @@ export let DataSpreadsheet = React.forwardRef(
       >
         {/* HEADER */}
         <DataSpreadsheetHeader
+          ref={spreadsheetRef}
           activeCellCoordinates={activeCellCoordinates}
           cellSizeValue={cellSizeValue}
           defaultColumn={defaultColumn}
           headerGroups={headerGroups}
+          rows={rows}
           selectionAreas={selectionAreas}
+          setActiveCellCoordinates={setActiveCellCoordinates}
+          setSelectionAreas={setSelectionAreas}
+          setCurrentMatcher={setCurrentMatcher}
         />
 
         {/* BODY */}
         <DataSpreadsheetBody
           activeCellCoordinates={activeCellCoordinates}
-          ref={currentMatcherRef}
+          ref={spreadsheetRef}
           clickAndHoldActive={clickAndHoldActive}
           setClickAndHoldActive={setClickAndHoldActive}
           currentMatcher={currentMatcher}
@@ -617,6 +663,15 @@ export let DataSpreadsheet = React.forwardRef(
           scrollBarSize={scrollBarSize}
           totalColumnsWidth={totalColumnsWidth}
           id={id}
+          columns={columns}
+        />
+        <button
+          onClick={handleActiveCellClick}
+          className={cx(
+            `${blockClass}--interactive-cell-element`,
+            `${blockClass}__active-cell--highlight`
+          )}
+          type="button"
         />
       </div>
     );

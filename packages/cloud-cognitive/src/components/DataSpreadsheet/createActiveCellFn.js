@@ -35,10 +35,9 @@ export const createActiveCellFn = ({
       placementElement.getBoundingClientRect().left -
       activeElementContainer.getBoundingClientRect().left,
   };
-  const activeCellButton =
-    contextRef?.current.querySelector(
-      `.${blockClass}__active-cell--highlight`
-    ) || document.createElement('button');
+  const activeCellButton = contextRef?.current.querySelector(
+    `.${blockClass}__active-cell--highlight`
+  );
   activeCellButton.classList.add(
     `${blockClass}__active-cell--highlight`,
     `${blockClass}--interactive-cell-element`
@@ -48,6 +47,7 @@ export const createActiveCellFn = ({
   activeCellButton.style.height = px(placementElement?.offsetHeight);
   activeCellButton.style.left = px(relativePosition.left);
   activeCellButton.style.top = px(relativePosition.top);
+  activeCellButton.style.display = 'block';
   activeCellButton.setAttribute(
     'data-active-row-index',
     typeof coords?.row === 'number' ? coords.row : 'header'

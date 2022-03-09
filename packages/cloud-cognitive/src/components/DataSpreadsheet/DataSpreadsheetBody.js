@@ -15,11 +15,13 @@ import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { createCellSelectionArea } from './createCellSelectionArea';
 import { checkActiveHeaderCell } from './checkActiveHeaderCell';
+import { removeCellSelections } from './utils/removeCellSelections';
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
 export const DataSpreadsheetBody = forwardRef(
   (
     {
+      columns,
       activeCellCoordinates,
       defaultColumn,
       getTableBodyProps,
@@ -39,7 +41,6 @@ export const DataSpreadsheetBody = forwardRef(
     },
     ref
   ) => {
-    const currentMatcherRef = ref;
     // Create cell selection areas based on selectionAreas array
     useEffect(() => {
       if (selectionAreas && selectionAreas.length) {
@@ -192,21 +193,16 @@ export const DataSpreadsheetBody = forwardRef(
           } else {
             setActiveCellCoordinates(activeCoordinates);
             // remove all previous cell selections
-            const cellSelections = spreadsheetBodyRef.current.querySelectorAll(
-              `.${blockClass}__selection-area--element`
-            );
-            [...cellSelections].forEach((element) => element.remove());
+            removeCellSelections({ spreadsheetRef: ref });
             setSelectionAreas([
               { point1: activeCoordinates, matcher: tempMatcher },
             ]);
             setCurrentMatcher(tempMatcher);
           }
-          currentMatcherRef.current = tempMatcher;
           setClickAndHoldActive(true);
         };
       },
       [
-        currentMatcherRef,
         currentMatcher,
         activeCellCoordinates,
         selectionAreas,
@@ -215,6 +211,7 @@ export const DataSpreadsheetBody = forwardRef(
         setContainerHasFocus,
         setClickAndHoldActive,
         setCurrentMatcher,
+        ref,
       ]
     );
 
@@ -254,6 +251,43 @@ export const DataSpreadsheetBody = forwardRef(
       [clickAndHoldActive, currentMatcher, setSelectionAreas]
     );
 
+    const handleRowHeaderClick = useCallback(
+      (index) => {
+        return () => {
+          const point1 = {
+            column: 0,
+            row: index,
+          };
+          const point2 = {
+            column: columns.length - 1,
+            row: index,
+          };
+          const tempMatcher = uuidv4();
+          setActiveCellCoordinates({
+            row: index,
+            column: 0,
+          });
+          setCurrentMatcher(tempMatcher);
+          removeCellSelections({ spreadsheetRef: ref });
+          setSelectionAreas([
+            {
+              point1,
+              point2,
+              areaCreated: false,
+              matcher: tempMatcher,
+            },
+          ]);
+        };
+      },
+      [
+        columns,
+        ref,
+        setSelectionAreas,
+        setCurrentMatcher,
+        setActiveCellCoordinates,
+      ]
+    );
+
     // Renders each cell in the spreadsheet body
     const RenderRow = useCallback(
       ({ index, style }) => {
@@ -271,6 +305,7 @@ export const DataSpreadsheetBody = forwardRef(
               data-row-index={index}
               data-column-index="header"
               type="button"
+              onClick={handleRowHeaderClick(index)}
               className={cx(
                 `${blockClass}__td`,
                 `${blockClass}__td-th`,
@@ -315,10 +350,11 @@ export const DataSpreadsheetBody = forwardRef(
         prepareRow,
         rows,
         defaultColumn.rowHeaderWidth,
-        handleBodyCellClick,
-        handleBodyCellHover,
         activeCellCoordinates?.row,
         selectionAreas,
+        handleBodyCellClick,
+        handleBodyCellHover,
+        handleRowHeaderClick,
       ]
     );
 
@@ -359,6 +395,11 @@ DataSpreadsheetBody.propTypes = {
    * Is the user clicking and holding in the data spreadsheet body
    */
   clickAndHoldActive: PropTypes.bool,
+
+  /**
+   * All of the spreadsheet columns
+   */
+  columns: PropTypes.array,
 
   /**
    * This represents the id of the current cell selection area

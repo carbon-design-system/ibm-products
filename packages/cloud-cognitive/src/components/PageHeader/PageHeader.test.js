@@ -481,10 +481,10 @@ describe('PageHeader', () => {
     expect(actionBarItems).toHaveLength(1);
   });
 
-  test.skip('disableBreadcrumbScroll works', () => {
+  test.skip('enableBreadcrumbScroll works', () => {
     // Need to figure out how to test this
     expect(
-      'Disabling the breadcrumb scroll stops the breadcrumb scrolling off the screen.'
+      'Enabling the breadcrumb allows the breadcrumb to scroll, pushed by navigation row.'
     ).toBeTruthy();
   });
 

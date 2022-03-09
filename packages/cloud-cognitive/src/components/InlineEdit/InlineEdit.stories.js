@@ -33,7 +33,7 @@ const validationOptions = {
   'On save includes ABC invalid': { onSaveInvalidWithABC: true },
 };
 
-const buttonTooltipAlignOptions = {
+const buttonTooltipAlignmentOptions = {
   'Default / undefined': undefined,
   'All start': 'start',
   'All center': 'center',
@@ -62,13 +62,13 @@ export default {
   title: getStoryTitle(InlineEdit.displayName),
   component: InlineEdit,
   argTypes: {
-    buttonTooltipAlign: {
+    buttonTooltipAlignment: {
       control: {
         type: 'select',
-        labels: Object.keys(buttonTooltipAlignOptions),
+        labels: Object.keys(buttonTooltipAlignmentOptions),
       },
-      options: Object.values(buttonTooltipAlignOptions).map((_k, i) => i),
-      mapping: Object.values(buttonTooltipAlignOptions),
+      options: Object.values(buttonTooltipAlignmentOptions).map((_k, i) => i),
+      mapping: Object.values(buttonTooltipAlignmentOptions),
     },
     buttonTooltipPosition: {
       control: {

@@ -13,7 +13,7 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { DataSpreadsheet } from '.';
-import { generateData } from './generateData';
+import { generateData } from './utils/generateData';
 import mdx from './DataSpreadsheet.mdx';
 
 import styles from './_storybook-styles.scss';

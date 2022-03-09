@@ -6,7 +6,7 @@
  */
 
 import { px } from '@carbon/layout';
-import { pkg } from '../../settings';
+import { pkg } from '../../../settings';
 
 export const createActiveCellFn = ({
   placementElement,

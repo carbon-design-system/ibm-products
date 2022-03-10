@@ -17,7 +17,7 @@ $story-prefix: create-side-panel-stories__;
   grid-template-columns: 1fr 1fr;
 }
 
-.#{$story-prefix}example-form-group .bx--label {
+.#{$story-prefix}example-form-group .#{$carbon-prefix}--label {
   margin-bottom: 0;
 }
 

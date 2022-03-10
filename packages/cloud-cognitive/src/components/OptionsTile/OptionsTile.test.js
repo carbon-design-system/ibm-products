@@ -148,10 +148,24 @@ describe(componentName, () => {
     expect(summary.textContent).toBe(lockedText);
   });
 
-  it('renders open state when passed', () => {
-    const { container } = render(<OptionsTile {...props} open={true} />);
+  it('hides the summary when props.enabled = false', () => {
+    const summaryText = 'hidden summary';
+    render(<OptionsTile {...props} summary={summaryText} enabled={false} />);
 
+    const summary = screen.getByRole('heading').nextSibling;
+    expect(summary.textContent).toBe(summaryText);
+    expect(summary.getAttribute('aria-hidden')).toBe('true');
+  });
+
+  it('it can be controlled by setting props.open', () => {
+    const { container, rerender } = render(<OptionsTile {...props} />);
+    expect(container.querySelector('details').open).toBe(false);
+
+    rerender(<OptionsTile {...props} open={true} />);
     expect(container.querySelector('details').open).toBe(true);
+
+    rerender(<OptionsTile {...props} open={false} />);
+    expect(container.querySelector('details').open).toBe(false);
   });
 
   it('supports "lg" size', () => {
@@ -175,6 +189,8 @@ describe(componentName, () => {
     expect(container.querySelector('details').open).toBe(false);
     fireEvent.click(container.querySelector('summary'));
     expect(container.querySelector('details').open).toBe(true);
+    fireEvent.click(container.querySelector('summary'));
+    expect(container.querySelector('details').open).toBe(false);
   });
 
   it('emits onToggle', () => {

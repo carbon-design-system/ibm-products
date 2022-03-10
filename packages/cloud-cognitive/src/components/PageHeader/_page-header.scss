@@ -209,8 +209,8 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     .#{$block-class}__breadcrumb-row--has-breadcrumbs
       .#{$block-class}__action-bar-column {
       // back button displayed only
-      max-width: $left-section-alt-width;
-      flex: 0 1 $left-section-alt-width;
+      max-width: $right-section-alt-width;
+      flex: 0 1 $right-section-alt-width;
 
       @include carbon--breakpoint(md) {
         max-width: $right-section-std-width;
@@ -253,6 +253,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     }
 
     .#{$block-class}__breadcrumb-column {
+      overflow: hidden; /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
       max-width: 100%;
       flex: 0 0 100%;
 

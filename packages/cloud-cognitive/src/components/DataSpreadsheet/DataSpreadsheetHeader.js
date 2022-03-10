@@ -9,9 +9,9 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { checkActiveHeaderCell } from './checkActiveHeaderCell';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { removeCellSelections } from './utils/removeCellSelections';
+import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 

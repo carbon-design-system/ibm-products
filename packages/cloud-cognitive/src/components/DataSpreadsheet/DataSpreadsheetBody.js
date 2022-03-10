@@ -13,9 +13,9 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { createCellSelectionArea } from './createCellSelectionArea';
-import { checkActiveHeaderCell } from './checkActiveHeaderCell';
 import { removeCellSelections } from './utils/removeCellSelections';
+import { createCellSelectionArea } from './utils/createCellSelectionArea';
+import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
 export const DataSpreadsheetBody = forwardRef(

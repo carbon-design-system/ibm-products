@@ -66,7 +66,7 @@ export let PageHeader = React.forwardRef(
       collapseHeaderIconDescription,
       collapseTitle,
       disableBreadcrumbScroll: deprecated_disableBreadcrumbScroll,
-      enableBreadcrumbScroll: in_enableBreadcrumbScroll,
+      enableBreadcrumbScroll,
       expandHeaderIconDescription,
       fullWidthGrid = defaults.fullWidthGrid,
       hasCollapseHeaderToggle,
@@ -87,8 +87,10 @@ export let PageHeader = React.forwardRef(
     ref
   ) => {
     // handle deprecated props - START
-    // if withoutBackground is null check deprecated_hasBackgroundAlways and default false
+    // if withoutBackground is nullish check deprecated_hasBackgroundAlways and default false
     withoutBackground ??= !(deprecated_hasBackgroundAlways ?? true);
+    // prefer enabled if nullish check deprecated_disableBreadcrumbScroll and default false
+    enableBreadcrumbScroll ??= !(deprecated_disableBreadcrumbScroll ?? true);
     // handle deprecated props - END
 
     const [metrics, setMetrics] = useState({});
@@ -105,8 +107,6 @@ export let PageHeader = React.forwardRef(
     // state based on props only
     const hasActionBar = actionBarItems && actionBarItems.length > 0;
     const hasBreadcrumbRow = !!breadcrumbs || !!actionBarItems;
-    const enableBreadcrumbScroll =
-      in_enableBreadcrumbScroll ?? !deprecated_disableBreadcrumbScroll ?? false;
 
     // utility functions
     const checkUpdateVerticalSpace = function () {

@@ -157,7 +157,7 @@ describe(componentName, () => {
     expect(summary.getAttribute('aria-hidden')).toBe('true');
   });
 
-  it('it can be controlled by setting props.open', () => {
+  it('can be controlled by setting props.open', () => {
     const { container, rerender } = render(<OptionsTile {...props} />);
     expect(container.querySelector('details').open).toBe(false);
 

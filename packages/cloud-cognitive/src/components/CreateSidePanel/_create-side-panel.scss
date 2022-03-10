@@ -68,7 +68,7 @@
   }
 
   .#{$block-class}.#{$side-panel-block-class}
-    .bx--btn.#{$side-panel-block-class}__close-button {
+    .#{$carbon-prefix}--btn.#{$side-panel-block-class}__close-button {
     display: none;
   }
 

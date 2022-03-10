@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
+import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
 
 // Determines if a row or column header cell should receive a highlight/active background color
 // Check each object in selectionAreas and see if the headerIndex is between

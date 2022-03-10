@@ -14,7 +14,12 @@ import {
   OverflowMenuItem,
   Checkbox,
 } from 'carbon-components-react';
-import { Filter32, ArrowsVertical32 } from '@carbon/icons-react';
+import {
+  Filter32,
+  ArrowsVertical32,
+  ArrowUp16,
+  ArrowDown16,
+} from '@carbon/icons-react';
 import { pkg, carbon } from '../../settings';
 import { AddSelectList } from './AddSelectList';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -27,12 +32,93 @@ export let AddSelectColumn = ({
   ...props
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [sortDirection, setSortDirection] = useState('');
+  const [sortAttribute, setSortAttribute] = useState('');
+  const [filters, setFilters] = useState([]);
   const blockClass = `${pkg.prefix}--add-select`;
   const colClass = `${blockClass}__column`;
 
-  const colItems = filteredItems.filter((item) =>
-    item.title.toLowerCase().includes(searchTerm)
-  );
+  // sorting
+  const colSortBy = filteredItems.find((item) => item.sortBy)?.sortBy;
+  const sortByOpts = colSortBy
+    ? colSortBy.reduce((acc, cur) => {
+        const opts = [
+          {
+            id: `${cur}-asc`,
+            itemText: (
+              <>
+                <ArrowUp16 />
+                {cur}
+              </>
+            ),
+            direction: 'asc',
+            attribute: cur,
+          },
+          {
+            id: `${cur}-desc`,
+            itemText: (
+              <>
+                <ArrowDown16 />
+                {cur}
+              </>
+            ),
+            direction: 'desc',
+            attribute: cur,
+          },
+        ];
+        return [...acc, ...opts];
+      }, [])
+    : [];
+
+  // filtering
+  const colFilterBy = filteredItems.find((item) => item.filterBy)?.filterBy;
+  const filterByOpts = colFilterBy
+    ? filteredItems.map((item) => item[colFilterBy])
+    : [];
+
+  // handlers
+  const sortHandler = ({ direction, attribute }) => {
+    setSortAttribute(attribute);
+    setSortDirection(direction);
+  };
+
+  const filterHandler = (checked, opt) => {
+    if (checked) {
+      const newFilters = [...filters, opt];
+      setFilters(newFilters);
+    } else {
+      const newFilters = filters.filter((o) => o !== opt);
+      setFilters(newFilters);
+    }
+  };
+
+  // filter and sort array functions
+  const filterBySearch = (item) =>
+    item.title.toLowerCase().includes(searchTerm);
+
+  const filterByAttribute = (item) => {
+    if (filters.length === 0) {
+      return true;
+    }
+    const { filterBy } = item;
+    const filterByValue = item[filterBy];
+    return filters.some((filter) => filter === filterByValue);
+  };
+
+  const sortItems = (a, b) => {
+    const valueA = a[sortAttribute]?.split(' ').join('');
+    const valueB = b[sortAttribute]?.split(' ').join('');
+    if (sortDirection === 'desc') {
+      return valueA > valueB ? -1 : 1;
+    }
+
+    return valueA < valueB ? -1 : 1;
+  };
+
+  const colItems = filteredItems
+    .filter(filterBySearch) // first check if the item meets the search
+    .filter(filterByAttribute) // then check if the item is included in the filter
+    .sort(sortItems); // then sort the items by whatever criteria
 
   return (
     <div className={colClass}>
@@ -47,25 +133,46 @@ export let AddSelectColumn = ({
           labelText={columnInputPlaceholder}
         />
         <div className={`${colClass}-sort-filter`}>
-          <OverflowMenu
-            renderIcon={ArrowsVertical32}
-            className={`${colClass}-overflow`}
-          >
-            <OverflowMenuItem itemText="Filter A" />
-            <OverflowMenuItem itemText="Filter B" />
-          </OverflowMenu>
-          <OverflowMenu renderIcon={Filter32}>
-            <div className={`${carbon.prefix}--overflow-menu-options__option`}>
-              <div className={`${carbon.prefix}--overflow-menu-options__btn`}>
-                <Checkbox id="opt1" labelText="opt1" />
-              </div>
-            </div>
-            <div className={`${carbon.prefix}--overflow-menu-options__option`}>
-              <div className={`${carbon.prefix}--overflow-menu-options__btn`}>
-                <Checkbox id="opt2" labelText="opt2" />
-              </div>
-            </div>
-          </OverflowMenu>
+          {sortByOpts.length > 0 && (
+            <OverflowMenu
+              renderIcon={ArrowsVertical32}
+              className={`${colClass}-overflow`}
+              flipped
+            >
+              {sortByOpts.map((opt) => (
+                <OverflowMenuItem
+                  key={opt.id}
+                  itemText={opt.itemText}
+                  onClick={() => sortHandler(opt)}
+                />
+              ))}
+            </OverflowMenu>
+          )}
+          {filterByOpts.length > 0 && (
+            <OverflowMenu
+              renderIcon={Filter32}
+              className={`${colClass}-overflow`}
+              flipped
+            >
+              {filterByOpts.map((opt) => (
+                <div
+                  key={opt}
+                  className={`${carbon.prefix}--overflow-menu-options__option`}
+                >
+                  <div
+                    className={`${carbon.prefix}--overflow-menu-options__btn`}
+                  >
+                    <Checkbox
+                      id={opt}
+                      labelText={opt}
+                      onChange={(checked) => filterHandler(checked, opt)}
+                      checked={filters.find((o) => o === opt) ? true : false}
+                    />
+                  </div>
+                </div>
+              ))}
+            </OverflowMenu>
+          )}
         </div>
       </div>
       <div className={`${blockClass}__tag-container`}>

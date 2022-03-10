@@ -33,7 +33,9 @@ export let AddSelectSidebar = ({
   const flattenItems = (arr) =>
     arr.reduce((prev, cur) => {
       const { children, ...item } = cur;
-      return prev.concat(item).concat(children ? flattenItems(children) : []);
+      return prev
+        .concat(item)
+        .concat(children ? flattenItems(children.entries) : []);
     }, []);
   const flattenedItems = flattenItems(items);
   const sidebarItems = multiSelection.map((selectedId) =>

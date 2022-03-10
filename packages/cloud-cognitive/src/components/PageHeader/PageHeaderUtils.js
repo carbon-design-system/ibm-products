@@ -75,10 +75,16 @@ export const utilCheckUpdateVerticalSpace = (
     // behavior. We use this offset as the scroll/fixed threshold.
     const scrollableContainer = scrollableAncestor(headerRef.current);
 
-    /* istanbul ignore next */
+    /* istanbul ignore next */ const scrollableContainerTop =
+      scrollableContainer
+        ? scrollableContainer.scrollTop - scrollableContainer.offsetTop
+        : 0;
+
+    // The header offset calculation is either going to work out at 0 if we have no gap between scrolling container
+    // top and the measuring ref top, or the difference between. It does not change on scroll or resize.
     update.headerOffset =
-      offsetTopMeasuringRef.current.getBoundingClientRect().top -
-        scrollableContainer?.getBoundingClientRect().top || 0;
+      scrollableContainerTop +
+      offsetTopMeasuringRef.current.getBoundingClientRect().top;
 
     /* istanbul ignore next */
     update.breadcrumbRowHeight = breadcrumbRowEl

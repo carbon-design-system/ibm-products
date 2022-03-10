@@ -9,9 +9,9 @@
 import React, {
   useMemo,
   useRef,
-  useEffect,
   useState,
   useCallback,
+  useEffect,
 } from 'react';
 import { useBlockLayout, useTable } from 'react-table';
 
@@ -24,12 +24,16 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 import { getScrollbarWidth } from '../../global/js/utils/getScrollbarWidth';
 import { DataSpreadsheetBody } from './DataSpreadsheetBody';
-import { getCellSize } from './getCellSize';
+import { getCellSize } from './utils/getCellSize';
 import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
 import { useActiveElement } from '../../global/js/hooks';
-import { createActiveCellFn } from './createActiveCellFn';
+import { createActiveCellFn } from './utils/createActiveCellFn';
 import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
 import { usePreviousValue } from '../../global/js/hooks';
+import { useResetSpreadsheetFocus } from './hooks/useResetSpreadsheetFocus';
+import { useSpreadsheetOutsideClick } from './hooks/useSpreadsheetOutsideClick';
+import { useMoveActiveCell } from './hooks/useMoveActiveCell';
+import { handleMultipleKeys } from './utils/handleMultipleKeys';
 import uuidv4 from '../../global/js/utils/uuidv4';
 // cspell:words rowcount colcount
 
@@ -65,6 +69,8 @@ export let DataSpreadsheet = React.forwardRef(
     },
     ref
   ) => {
+    const localRef = useRef();
+    const spreadsheetRef = ref || localRef;
     const focusedElement = useActiveElement();
     const [containerHasFocus, setContainerHasFocus] = useState(false);
     const [activeCellCoordinates, setActiveCellCoordinates] = useState(null);
@@ -124,27 +130,6 @@ export let DataSpreadsheet = React.forwardRef(
       [cellEditorValue, onDataUpdate]
     );
 
-    // Reset everything when spreadsheet loses focus
-    useEffect(() => {
-      if (
-        !focusedElement.classList.contains(
-          `${blockClass}--interactive-cell-element`
-        )
-      ) {
-        setContainerHasFocus(false);
-        removeActiveCell();
-        activeKeys.current = [];
-      }
-      if (
-        focusedElement.classList.contains(blockClass) ||
-        focusedElement.classList.contains(
-          `${blockClass}--interactive-cell-element`
-        )
-      ) {
-        setContainerHasFocus(true);
-      }
-    }, [focusedElement, removeActiveCell]);
-
     // Removes the active cell element
     const removeActiveCell = useCallback(() => {
       const activeCellHighlight = spreadsheetRef.current.querySelector(
@@ -180,37 +165,6 @@ export let DataSpreadsheet = React.forwardRef(
       },
       [spreadsheetRef]
     );
-
-    // Click outside useEffect
-    useEffect(() => {
-      const handleOutsideClick = (event) => {
-        if (
-          !spreadsheetRef.current ||
-          spreadsheetRef.current.contains(event.target) ||
-          event.target.classList.contains(
-            `${blockClass}__active-cell--highlight`
-          )
-        ) {
-          return;
-        }
-        setActiveCellCoordinates(null);
-        setSelectionAreas([]);
-        removeActiveCell();
-        removeCellSelections();
-        setContainerHasFocus(false);
-        removeCellEditor();
-        activeKeys.current = [];
-      };
-      document.addEventListener('click', handleOutsideClick);
-      return () => {
-        document.removeEventListener('click', handleOutsideClick);
-      };
-    }, [
-      spreadsheetRef,
-      removeActiveCell,
-      removeCellSelections,
-      removeCellEditor,
-    ]);
 
     // Remove cell editor if the active cell coordinates change and save with new cell data, this will
     // happen if you click on another cell while isEditing is true
@@ -278,6 +232,31 @@ export let DataSpreadsheet = React.forwardRef(
       ]
     );
 
+    useResetSpreadsheetFocus({
+      activeKeys,
+      focusedElement,
+      removeActiveCell,
+      setContainerHasFocus,
+    });
+
+    useSpreadsheetOutsideClick({
+      spreadsheetRef,
+      setActiveCellCoordinates,
+      setSelectionAreas,
+      removeActiveCell,
+      removeCellSelections,
+      setContainerHasFocus,
+      activeKeys,
+      removeCellEditor,
+    });
+
+    useMoveActiveCell({
+      spreadsheetRef,
+      activeCellCoordinates,
+      containerHasFocus,
+      createActiveCell,
+    });
+
     const handleInitialArrowPress = useCallback(() => {
       // If activeCellCoordinates is null then we need to set an initial value
       // which will place the activeCell on the select all cell/button
@@ -311,81 +290,6 @@ export let DataSpreadsheet = React.forwardRef(
       },
       []
     );
-
-    const handleMultipleKeys = useCallback(() => {
-      const activeKeyValues = activeKeys.current;
-      const selectionAreasClone = deepCloneObject(selectionAreas);
-      const indexOfCurrentArea = selectionAreasClone.findIndex(
-        (item) => item.matcher === currentMatcher
-      );
-      const pointToUpdate = selectionAreasClone[indexOfCurrentArea]?.point2
-        ? selectionAreasClone[indexOfCurrentArea].point2
-        : selectionAreasClone[indexOfCurrentArea].point1;
-      // Down + Shift
-      if (
-        activeKeyValues.includes('Shift') &&
-        activeKeyValues.includes('ArrowDown')
-      ) {
-        if (rows.length - 1 === pointToUpdate.row) {
-          return;
-        }
-        const newPoint = {
-          row: pointToUpdate.row + 1,
-          column: pointToUpdate.column,
-        };
-        selectionAreasClone[indexOfCurrentArea].point2 = newPoint;
-        selectionAreasClone[indexOfCurrentArea].areaCreated = false;
-        setSelectionAreas(selectionAreasClone);
-      }
-      // Right + Shift
-      if (
-        activeKeyValues.includes('Shift') &&
-        activeKeyValues.includes('ArrowRight')
-      ) {
-        if (columns.length - 1 === pointToUpdate.column) {
-          return;
-        }
-        const newPoint = {
-          row: pointToUpdate.row,
-          column: pointToUpdate.column + 1,
-        };
-        selectionAreasClone[indexOfCurrentArea].point2 = newPoint;
-        selectionAreasClone[indexOfCurrentArea].areaCreated = false;
-        setSelectionAreas(selectionAreasClone);
-      }
-      // Up + Shift
-      if (
-        activeKeyValues.includes('Shift') &&
-        activeKeyValues.includes('ArrowUp')
-      ) {
-        if (pointToUpdate.row === 0) {
-          return;
-        }
-        const newPoint = {
-          row: pointToUpdate.row - 1,
-          column: pointToUpdate.column,
-        };
-        selectionAreasClone[indexOfCurrentArea].point2 = newPoint;
-        selectionAreasClone[indexOfCurrentArea].areaCreated = false;
-        setSelectionAreas(selectionAreasClone);
-      }
-      // Left + Shift
-      if (
-        activeKeyValues.includes('Shift') &&
-        activeKeyValues.includes('ArrowLeft')
-      ) {
-        if (pointToUpdate.column === 0) {
-          return;
-        }
-        const newPoint = {
-          row: pointToUpdate.row,
-          column: pointToUpdate.column - 1,
-        };
-        selectionAreasClone[indexOfCurrentArea].point2 = newPoint;
-        selectionAreasClone[indexOfCurrentArea].areaCreated = false;
-        setSelectionAreas(selectionAreasClone);
-      }
-    }, [selectionAreas, currentMatcher, columns, rows]);
 
     const handleKeyPress = useCallback(
       (event) => {
@@ -433,7 +337,14 @@ export let DataSpreadsheet = React.forwardRef(
           activeKeys.current = [...activeClone, key];
         }
         if (activeKeys.current?.length > 1) {
-          handleMultipleKeys();
+          handleMultipleKeys({
+            activeKeys,
+            selectionAreas,
+            currentMatcher,
+            rows,
+            setSelectionAreas,
+            columns,
+          });
         }
         // Allow arrow key navigation if there are less than two activeKeys OR
         // if one of the activeCellCoordinates is in a header position
@@ -551,15 +462,15 @@ export let DataSpreadsheet = React.forwardRef(
       [
         updateActiveCellCoordinates,
         handleInitialArrowPress,
-        handleMultipleKeys,
         activeCellCoordinates,
-        selectionAreas?.length,
         removeCellSelections,
         removeActiveCell,
-        columns.length,
-        rows.length,
+        columns,
+        rows,
         isEditing,
         removeCellEditor,
+        currentMatcher,
+        selectionAreas,
       ]
     );
 
@@ -658,32 +569,6 @@ export let DataSpreadsheet = React.forwardRef(
       [removeCellSelections]
     );
 
-    // Adds active cell highlight to correct cell onKeyDown
-    useEffect(() => {
-      const activeCellPlacementElement = spreadsheetRef?.current.querySelector(
-        `[data-row-index="${activeCellCoordinates?.row}"][data-column-index="${activeCellCoordinates?.column}"]`
-      );
-      const shouldPlaceActiveCellInHeader =
-        activeCellCoordinates?.row === 'header' && true;
-      const selectAllElement = spreadsheetRef?.current.querySelector(
-        `[data-row-index="header"][data-column-index="header"]`
-      );
-      if (containerHasFocus) {
-        createActiveCell({
-          placementElement: activeCellCoordinates
-            ? activeCellPlacementElement
-            : selectAllElement,
-          coords: activeCellCoordinates,
-          addToHeader: shouldPlaceActiveCellInHeader,
-        });
-      }
-    }, [
-      activeCellCoordinates,
-      spreadsheetRef,
-      createActiveCell,
-      containerHasFocus,
-    ]);
-
     useEffect(() => {
       if (isEditing) {
         const cellProps =
@@ -724,8 +609,6 @@ export let DataSpreadsheet = React.forwardRef(
       }
     };
 
-    const localRef = useRef();
-    const spreadsheetRef = ref || localRef;
     return (
       <div
         {...rest}

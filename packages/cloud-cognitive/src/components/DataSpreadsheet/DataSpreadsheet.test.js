@@ -13,7 +13,7 @@ import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { DataSpreadsheet } from '.';
-import { generateData } from './generateData';
+import { generateData } from './utils/generateData';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 const componentName = DataSpreadsheet.displayName;

@@ -14,23 +14,25 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--add-select`;
 const componentName = AddSelect.name;
 const defaultProps = {
-  items: [
-    {
-      id: '1',
-      title: 'item a',
-      value: 'item a',
-    },
-    {
-      id: '2',
-      title: 'item b',
-      value: 'item b',
-    },
-    {
-      id: '3',
-      title: 'item c',
-      value: 'item c',
-    },
-  ],
+  items: {
+    entries: [
+      {
+        id: '1',
+        title: 'item a',
+        value: 'item a',
+      },
+      {
+        id: '2',
+        title: 'item b',
+        value: 'item b',
+      },
+      {
+        id: '3',
+        title: 'item c',
+        value: 'item c',
+      },
+    ],
+  },
   noSelectionTitle: 'No selection title',
   noSelectionDescription: 'No selection description',
   noResultsTitle: 'No results title',

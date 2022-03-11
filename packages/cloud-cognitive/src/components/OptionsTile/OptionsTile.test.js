@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,7 +23,7 @@ const dataTestId = uuidv4();
 
 // common props
 const props = {
-  heading: `heading-${uuidv4()}`,
+  title: `title-${uuidv4()}`,
   'data-testid': dataTestId,
   children,
 };
@@ -35,7 +35,11 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<OptionsTile {...props} />);
+    const { container } = render(
+      <main>
+        <OptionsTile {...props} />
+      </main>
+    );
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
@@ -84,7 +88,7 @@ describe(componentName, () => {
   });
 
   it('renders as static variant if no children are provided', () => {
-    const { container } = render(<OptionsTile heading="Static variant" />);
+    const { container } = render(<OptionsTile title="Static variant" />);
 
     expect(container.querySelector('details')).toBeFalsy();
   });
@@ -144,10 +148,24 @@ describe(componentName, () => {
     expect(summary.textContent).toBe(lockedText);
   });
 
-  it('renders open state when passed', () => {
-    const { container } = render(<OptionsTile {...props} open={true} />);
+  it('hides the summary when props.enabled = false', () => {
+    const summaryText = 'hidden summary';
+    render(<OptionsTile {...props} summary={summaryText} enabled={false} />);
 
+    const summary = screen.getByRole('heading').nextSibling;
+    expect(summary.textContent).toBe(summaryText);
+    expect(summary.getAttribute('aria-hidden')).toBe('true');
+  });
+
+  it('can be controlled by setting props.open', () => {
+    const { container, rerender } = render(<OptionsTile {...props} />);
+    expect(container.querySelector('details').open).toBe(false);
+
+    rerender(<OptionsTile {...props} open={true} />);
     expect(container.querySelector('details').open).toBe(true);
+
+    rerender(<OptionsTile {...props} open={false} />);
+    expect(container.querySelector('details').open).toBe(false);
   });
 
   it('supports "lg" size', () => {
@@ -155,14 +173,14 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveClass(`${blockClass}--lg`);
   });
 
-  it('uses props.headingId as the heading id and as the aria-labelledby attribute of the toggle', () => {
-    const headingId = uuidv4();
+  it('uses props.titleId as the title id and as the aria-labelledby attribute of the toggle', () => {
+    const titleId = uuidv4();
 
-    render(<OptionsTile {...props} headingId={headingId} enabled />);
+    render(<OptionsTile {...props} titleId={titleId} enabled />);
 
-    expect(screen.getByRole('heading').id).toBe(headingId);
+    expect(screen.getByRole('heading').id).toBe(titleId);
     // TODO: update to role "switch" for Carbon v11
-    expect(screen.getByRole('checkbox')).toHaveAccessibleName(props.heading);
+    expect(screen.getByRole('checkbox')).toHaveAccessibleName(props.title);
   });
 
   it('expands and collapses on click', () => {
@@ -171,6 +189,8 @@ describe(componentName, () => {
     expect(container.querySelector('details').open).toBe(false);
     fireEvent.click(container.querySelector('summary'));
     expect(container.querySelector('details').open).toBe(true);
+    fireEvent.click(container.querySelector('summary'));
+    expect(container.querySelector('details').open).toBe(false);
   });
 
   it('emits onToggle', () => {

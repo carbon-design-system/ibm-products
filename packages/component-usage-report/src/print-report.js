@@ -13,7 +13,6 @@ const printReport = (reportResults) => {
     '- Start of component usage report --------------------------------------------------------------------------\n'
   );
 
-  // scan results
   reportResults.forEach((result) => {
     console.log(`\nFile: '${result.file}'`);
     console.log(`Components: [${result.components.join(', ')}]`);
@@ -23,14 +22,6 @@ const printReport = (reportResults) => {
     });
   });
 
-  // console.log(
-  //   '-Summary----------------------------------------------------------------------------\n'
-  // );
-  // console.log(
-  //   `The following @carbon/ibm-products imports were used:\n\n ${Object.keys(
-  //     importedMap
-  //   ).join(', ')} were imported.\n`
-  // );
   console.log(
     '- End of component usage report ----------------------------------------------------------------------------\n'
   );

@@ -9,10 +9,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
+import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
-export const DataSpreadsheetHeader = ({ defaultColumn, headerGroups }) => {
+export const DataSpreadsheetHeader = ({
+  activeCellCoordinates,
+  defaultColumn,
+  headerGroups,
+  selectionAreas,
+}) => {
   return (
     <div className={cx(`${blockClass}__header--container`)}>
       {headerGroups.map((headerGroup, index) => (
@@ -29,7 +35,12 @@ export const DataSpreadsheetHeader = ({ defaultColumn, headerGroups }) => {
             tabIndex={-1}
             className={cx(
               `${blockClass}__th`,
-              `${blockClass}--interactive-cell-element`
+              `${blockClass}--interactive-cell-element`,
+              {
+                [`${blockClass}__th--active-header`]:
+                  activeCellCoordinates?.column === 'header' &&
+                  activeCellCoordinates?.row === 'header',
+              }
             )}
             style={{
               width: defaultColumn?.rowHeaderWidth,
@@ -51,7 +62,12 @@ export const DataSpreadsheetHeader = ({ defaultColumn, headerGroups }) => {
               {...column.getHeaderProps()}
               className={cx(
                 `${blockClass}__th`,
-                `${blockClass}--interactive-cell-element`
+                `${blockClass}--interactive-cell-element`,
+                {
+                  [`${blockClass}__th--active-header`]:
+                    activeCellCoordinates?.column === index ||
+                    checkActiveHeaderCell(index, selectionAreas, 'column'),
+                }
               )}
               type="button"
             >
@@ -66,6 +82,14 @@ export const DataSpreadsheetHeader = ({ defaultColumn, headerGroups }) => {
 
 DataSpreadsheetHeader.propTypes = {
   /**
+   * Object containing the active cell coordinates
+   */
+  activeCellCoordinates: PropTypes.shape({
+    row: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    column: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }),
+
+  /**
    * Default spreadsheet sizing values
    */
   defaultColumn: PropTypes.shape({
@@ -78,4 +102,9 @@ DataSpreadsheetHeader.propTypes = {
    * Headers provided from useTable hook
    */
   headerGroups: PropTypes.arrayOf(PropTypes.object),
+
+  /**
+   * All of the cell selection area items
+   */
+  selectionAreas: PropTypes.arrayOf(PropTypes.object),
 };

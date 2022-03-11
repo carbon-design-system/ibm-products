@@ -18,11 +18,6 @@ import { AddSelectList } from './AddSelectList';
 import { AddSelectColumn } from './AddSelectColumn';
 const componentName = 'AddSelect';
 
-// Default values for props
-const defaults = {
-  items: Object.freeze([]),
-};
-
 export let AddSelect = forwardRef(
   (
     {
@@ -33,7 +28,7 @@ export let AddSelect = forwardRef(
       description,
       influencerTitle,
       inputPlaceholder,
-      items = defaults.items,
+      items,
       itemsLabel,
       multi,
       noResultsDescription,
@@ -66,23 +61,41 @@ export let AddSelect = forwardRef(
     const [useNormalizedItems, setUsedNormalizedItems] = useState(false);
 
     useEffect(() => {
-      const normalize = (arr, parentId) => {
+      const normalize = (arr, parentId, sortBy, filterBy) => {
         return arr.reduce((acc, cur) => {
-          const { children, ...item } = cur;
-          acc[cur.id] = { ...item };
+          const { children, ...entry } = cur;
+          acc[cur.id] = { ...entry };
           if (parentId) {
             acc[cur.id].parent = parentId;
           }
+          if (sortBy?.length) {
+            acc[cur.id].sortBy = sortBy;
+          }
+          if (filterBy) {
+            acc[cur.id].filterBy = filterBy;
+          }
           if (children) {
-            acc[cur.id].children = children.map((child) => child.id);
-            const child = normalize(children, cur.id);
+            acc[cur.id].children = children.entries.map((child) => child.id);
+            const child = normalize(
+              children.entries,
+              cur.id,
+              children.sortBy,
+              children.filterBy
+            );
             return { ...acc, ...child };
           }
           return acc;
         }, {});
       };
-      if (multi && items.find((item) => item.children)) {
-        const newItems = normalize(items);
+
+      // multi select with nested data needs to be normalized
+      if (multi && items.entries.find((entry) => entry.children)) {
+        const newItems = normalize(
+          items.entries,
+          null,
+          items.sortBy,
+          items.filterBy
+        );
         setNormalizedItems(newItems);
         setUsedNormalizedItems(true);
       }
@@ -120,6 +133,7 @@ export let AddSelect = forwardRef(
 
     // item filtering
     const getFilteredItems = () => {
+      const { entries } = items;
       const hasPath = path.length > 0;
       /**
        * how to traverse the levels of items-
@@ -128,10 +142,11 @@ export let AddSelect = forwardRef(
        */
       const itemsToFilter = hasPath
         ? path.reduce(
-            (prev, cur) => prev.find((item) => item.id === cur.id).children,
-            items
+            (prev, cur) =>
+              prev.find((item) => item.id === cur.id)?.children?.entries,
+            entries
           )
-        : items;
+        : entries;
       const results = itemsToFilter.filter((item) => {
         if (!searchTerm) {
           return item;
@@ -242,7 +257,7 @@ export let AddSelect = forwardRef(
 
     const sidebarProps = {
       influencerTitle,
-      items,
+      items: items.entries,
       multiSelection,
       noSelectionDescription,
       noSelectionTitle,
@@ -279,13 +294,18 @@ AddSelect.propTypes = {
   description: PropTypes.string,
   influencerTitle: PropTypes.string,
   inputPlaceholder: PropTypes.string,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    })
-  ),
+  items: PropTypes.shape({
+    sortBy: PropTypes.array,
+    filterBy: PropTypes.array,
+    entries: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+        children: PropTypes.object,
+      })
+    ),
+  }),
   itemsLabel: PropTypes.string,
   multi: PropTypes.bool,
   noResultsDescription: PropTypes.string,
@@ -301,6 +321,12 @@ AddSelect.propTypes = {
   removeIconDescription: PropTypes.string,
   textInputLabel: PropTypes.string,
   title: PropTypes.string,
+};
+
+AddSelect.defaultProps = {
+  items: {
+    entries: [],
+  },
 };
 
 AddSelect.displayName = componentName;

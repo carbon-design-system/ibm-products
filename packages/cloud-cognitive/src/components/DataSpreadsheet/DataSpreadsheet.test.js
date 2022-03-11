@@ -13,7 +13,7 @@ import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { DataSpreadsheet } from '.';
-import { generateData } from './generateData';
+import { generateData } from './utils/generateData';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 const componentName = DataSpreadsheet.displayName;
@@ -102,5 +102,13 @@ describe(componentName, () => {
     );
     expect(activeCellElement).toHaveAttribute('data-active-row-index', '0'); // active row index is 0 because it's the first cell
     expect(activeCellElement).toHaveAttribute('data-active-column-index', '0'); // active column index is 0 because it's the first cell
+    const firstColumnHeader = ref?.current.querySelector(
+      `[data-row-index="header"][data-column-index="0"]`
+    );
+    const firstRowHeader = ref?.current.querySelector(
+      `[data-row-index="0"][data-column-index="header"]`
+    );
+    expect(firstColumnHeader).toHaveClass(`${blockClass}__th--active-header`);
+    expect(firstRowHeader).toHaveClass(`${blockClass}__td-th--active-header`);
   });
 });

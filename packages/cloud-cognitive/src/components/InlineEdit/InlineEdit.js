@@ -24,7 +24,6 @@ import {
   EditOff16,
   Checkmark16,
   WarningFilled16,
-  WarningAltFilled16,
 } from '@carbon/icons-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -67,10 +66,6 @@ export let InlineEdit = React.forwardRef(
       saveDescription,
       size = defaults.size,
       value,
-      warn,
-      warnText,
-      // validator,
-      // validatorAsync,
 
       // Collect any other property values passed in.
       ...rest
@@ -82,15 +77,9 @@ export let InlineEdit = React.forwardRef(
     const ref = refIn || localRef;
     const [editing, setEditing] = useState(false);
     const [internalValue, setInternalValue] = useState(value);
-    const showValidation = invalid || warn;
-    const validationText = invalidText || warnText;
-    const validationIcon = showValidation ? (
-      invalid ? (
-        <WarningFilled16 />
-      ) : (
-        <WarningAltFilled16 />
-      )
-    ) : null;
+    const showValidation = invalid; // || warn;
+    const validationText = invalidText; // || warnText;
+    const validationIcon = showValidation ? <WarningFilled16 /> : null;
 
     // sanitize the tooltip values
     const alignIsObject = typeof buttonTooltipAlignment === 'object';
@@ -273,7 +262,6 @@ export let InlineEdit = React.forwardRef(
             [`${blockClass}--disabled`]: disabled,
             [`${blockClass}--editing`]: editing,
             [`${blockClass}--invalid`]: invalid,
-            [`${blockClass}--warn`]: warn,
             [`${blockClass}--light`]: light,
             [`${blockClass}--overflows`]:
               refInput.current &&
@@ -463,13 +451,13 @@ InlineEdit.propTypes = {
   /**
    * method called on input event (it's a React thing onChange behaves like on input).
    *
-   * NOTE: caller to handle invalid/warn states and associated text
+   * NOTE: caller to handle invalid states and associated text
    */
   onChange: PropTypes.func,
   /**
    * method called on change event
    *
-   * NOTE: caller to handle invalid/warn states and associated text
+   * NOTE: caller to handle invalid states and associated text
    */
   onSave: PropTypes.func,
   /**
@@ -488,12 +476,4 @@ InlineEdit.propTypes = {
    * initial/unedited value
    */
   value: PropTypes.string,
-  /**
-   * set warn state for input
-   */
-  warn: PropTypes.bool,
-  /**
-   * text shown when warn true
-   */
-  warnText: PropTypes.string,
 };

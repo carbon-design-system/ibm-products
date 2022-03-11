@@ -12,6 +12,7 @@ import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
 
 import { Grid, Column, Row, Button, Tag } from 'carbon-components-react';
+import { breakpoints } from '@carbon/layout';
 
 import { useWindowResize, useNearestScroll } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -64,7 +65,8 @@ export let PageHeader = React.forwardRef(
       collapseHeader,
       collapseHeaderIconDescription,
       collapseTitle,
-      disableBreadcrumbScroll,
+      disableBreadcrumbScroll: deprecated_disableBreadcrumbScroll,
+      enableBreadcrumbScroll,
       expandHeaderIconDescription,
       fullWidthGrid = defaults.fullWidthGrid,
       hasCollapseHeaderToggle,
@@ -85,8 +87,10 @@ export let PageHeader = React.forwardRef(
     ref
   ) => {
     // handle deprecated props - START
-    // if withoutBackground is null check deprecated_hasBackgroundAlways and default false
+    // if withoutBackground is nullish check deprecated_hasBackgroundAlways and default false
     withoutBackground ??= !(deprecated_hasBackgroundAlways ?? true);
+    // prefer enabled if nullish check deprecated_disableBreadcrumbScroll and default false
+    enableBreadcrumbScroll ??= !(deprecated_disableBreadcrumbScroll ?? true);
     // handle deprecated props - END
 
     const [metrics, setMetrics] = useState({});
@@ -110,7 +114,7 @@ export let PageHeader = React.forwardRef(
         headerRef,
         offsetTopMeasuringRef,
         navigation,
-        disableBreadcrumbScroll,
+        enableBreadcrumbScroll,
         hasActionBar,
         widthIsNarrow,
         setMetrics
@@ -286,7 +290,7 @@ export let PageHeader = React.forwardRef(
       }));
     }, [
       headerRef,
-      disableBreadcrumbScroll,
+      enableBreadcrumbScroll,
       metrics,
       metrics.breadcrumbRowHeight,
       metrics.breadcrumbRowSpaceBelow,
@@ -338,7 +342,7 @@ export let PageHeader = React.forwardRef(
         metrics.headerHeight,
         metrics.headerTopValue,
         metrics.headerOffset,
-        disableBreadcrumbScroll,
+        enableBreadcrumbScroll,
       ]
     );
 
@@ -346,13 +350,13 @@ export let PageHeader = React.forwardRef(
       ({ current }) => {
         // on window resize and other updates some values may have changed
         checkUpdateVerticalSpace();
-        setWidthIsNarrow(current.innerWidth < 672); // small (below medium) media query
+        setWidthIsNarrow(current.innerWidth < breakpoints.md.width); // small (below medium) media query
       },
       [
         actionBarItems,
         children,
         breadcrumbs,
-        disableBreadcrumbScroll,
+        enableBreadcrumbScroll,
         navigation,
         pageActions,
         subtitle,
@@ -423,7 +427,7 @@ export let PageHeader = React.forwardRef(
     const nextToTabsCheck = () => {
       /* istanbul ignore next */
       return (
-        disableBreadcrumbScroll &&
+        enableBreadcrumbScroll &&
         !actionBarItems &&
         scrollYValue + metrics.headerTopValue >= 0
       );
@@ -660,7 +664,7 @@ export let PageHeader = React.forwardRef(
             </div>
 
             {
-              // this navigation pushes the breadcrumb off or settles underneath it depending on disableBreadcrumbScroll
+              // this navigation pushes the breadcrumb off or settles underneath it depending on enableBreadcrumbScroll
               navigation ? (
                 <Row
                   className={cx(`${blockClass}__navigation-row`, {
@@ -779,6 +783,13 @@ const TYPES = {
 const tagTypes = Object.keys(TYPES);
 
 export const deprecatedProps = {
+  /**
+   * **Deprecated** see property `enableBreadcrumbScroll`
+   */
+  disableBreadcrumbScroll: deprecateProp(
+    PropTypes.bool,
+    'Property replaced by `enableBreadcrumbScroll`'
+  ),
   /**
    * **Deprecated** see property `withoutBackground`
    */
@@ -924,10 +935,10 @@ PageHeader.propTypes = {
    */
   collapseTitle: PropTypes.bool,
   /**
-   * Standard behavior scrolls the breadcrumb off to leave just tabs. This
-   * option preserves vertical space for both the breadcrumb and tabs if they're supplied.
+   * Standard keeps the breadcrumb on the page. This option allows the breadcrumb
+   * to scroll off
    */
-  disableBreadcrumbScroll: PropTypes.bool,
+  enableBreadcrumbScroll: PropTypes.bool,
   /**
    * If `hasCollapseHeaderToggle` is set and `withoutBackground` is unset/falsy then assistive text is
    * required for both the expend and collapse states of the button component used.

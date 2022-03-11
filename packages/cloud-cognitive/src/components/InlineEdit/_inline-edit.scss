@@ -285,9 +285,7 @@
 
     &.#{$block-class}.#{$block-class} .#{$block-class}__edit {
       @include input-button-defaults($block-class);
-
       // pointer-events: none;
-
       &:hover,
       &:active,
       &:focus {
@@ -316,10 +314,6 @@
 
     .#{$block-class}__validation-icon {
       @include input-button-defaults($block-class);
-    }
-
-    &.#{$block-class}--warn .#{$block-class}__validation-icon {
-      color: $support-warning;
     }
 
     &.#{$block-class}--invalid .#{$block-class}__validation-icon {

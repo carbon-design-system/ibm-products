@@ -23,13 +23,9 @@ const storyClass = 'inline-edit-stories';
 
 const validationOptions = {
   'Default, no validation change': {},
-  'On change or save warn if empty': { onChangeWarnIfEmpty: true },
   'On change or save invalid if empty': { onChangeInvalidIfEmpty: true },
-  'On change or save includes ABC warn': { onChangeWanWithABC: true },
   'On change or save includes ABC invalid': { onChangeInvalidWithABC: true },
-  'On save warn if empty': { onSaveWarnIfEmpty: true },
   'On save invalid if empty': { onSaveInvalidIfEmpty: true },
-  'On save includes ABC warn': { onSaveWanWithABC: true },
   'On save includes ABC invalid': { onSaveInvalidWithABC: true },
 };
 
@@ -130,31 +126,21 @@ const Template = ({
   cancelDescription,
   saveDescription,
   validation,
-  warn,
-  warnText,
   value: initialValue,
   ...rest
 }) => {
   const [value, setValue] = useState(initialValue);
   const [liveInvalid, setLiveInvalid] = useState(invalid);
-  const [liveWarn, setLiveWarn] = useState(warn);
   const [liveInvalidText, setLiveInvalidText] = useState(invalidText);
-  const [liveWarnText, setLiveWarnText] = useState(warnText);
 
   useEffect(() => {
     setLiveInvalid(invalid);
   }, [invalid]);
 
-  useEffect(() => {
-    setLiveWarn(warn);
-  }, [warn]);
-
   const handleValidation = (val, change, save) => {
     let newInvalid = false;
-    let newWarn = false;
-    let updateValidation = false;
     let invalidText = '';
-    let warnText = '';
+    let updateValidation = false;
 
     const zeroLength = val.length === 0;
     const hasABC = /ABC/.test(val);
@@ -167,35 +153,19 @@ const Template = ({
       invalidText = newInvalid ? 'This field cannot be empty' : '';
       updateValidation = true;
     } else if (
-      (change && validation?.onChangeWarnIfEmpty) ||
-      (save && validation?.onSaveWarnIfEmpty)
-    ) {
-      newWarn = zeroLength;
-      warnText = newWarn ? 'Empty fields are not good practice' : '';
-      updateValidation = true;
-    } else if (
       (change && validation?.onChangeInvalidWithABC) ||
       (save && validation?.onSaveInvalidWithABC)
     ) {
       newInvalid = hasABC;
       invalidText = newInvalid ? 'Cannot contain ABC in the entry' : '';
       updateValidation = true;
-    } else if (
-      (change && validation?.onChangeWanWithABC) ||
-      (save && validation?.onSaveWanWithABC)
-    ) {
-      newWarn = hasABC;
-      warnText = newWarn ? 'ABC should not be used in the entry' : '';
-      updateValidation = true;
     }
 
     if (updateValidation) {
       setLiveInvalid(newInvalid);
       setLiveInvalidText(invalidText);
-      setLiveWarn(newWarn);
-      setLiveWarnText(warnText);
     }
-    return updateValidation && (newWarn || newInvalid);
+    return updateValidation && newInvalid;
   };
 
   const onSave = (val) => {
@@ -239,8 +209,6 @@ const Template = ({
           onCancel,
           cancelDescription,
           saveDescription,
-          warn: liveWarn,
-          warnText: liveWarnText,
           value,
         }}
       />

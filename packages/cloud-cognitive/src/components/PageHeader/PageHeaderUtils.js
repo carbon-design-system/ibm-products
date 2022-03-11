@@ -131,46 +131,44 @@ export const utilCheckUpdateVerticalSpace = (
       update.headerTopValue += update.breadcrumbRowHeight;
     }
 
-    if (window) {
-      let val;
-      /* don't know how to test resize */
-      /* istanbul ignore if */
-      if (breadcrumbRowEl) {
-        val = parseFloat(
-          window
-            .getComputedStyle(breadcrumbRowEl)
-            .getPropertyValue('margin-bottom'),
-          10
-        );
-        update.breadcrumbRowSpaceBelow = isNaN(val) ? 0 : val;
-      }
-      /* don't know how to test resize */
-      /* istanbul ignore if */
-      if (titleRowEl) {
-        val = parseFloat(
-          window.getComputedStyle(titleRowEl).getPropertyValue('margin-top'),
-          10
-        );
-        update.titleRowSpaceAbove = isNaN(val) ? 0 : val;
-
-        if (pageActionsEl) {
-          val = parseFloat(
-            window
-              .getComputedStyle(pageActionsEl)
-              .getPropertyValue('margin-top'),
-            10
-          );
-          update.pageActionsSpaceAbove =
-            titleRowEl.clientHeight -
-            pageActionsEl.clientHeight +
-            update.titleRowSpaceAbove -
-            (isNaN(val) ? 0 : val);
-        }
-      }
-    } else {
-      update.breadcrumbRowSpaceBelow = 0;
-      update.titleRowSpaceAbove = 0;
+    // if (window) {
+    let val;
+    /* don't know how to test resize */
+    /* istanbul ignore if */
+    if (breadcrumbRowEl) {
+      val = parseFloat(
+        window
+          .getComputedStyle(breadcrumbRowEl)
+          .getPropertyValue('margin-bottom'),
+        10
+      );
+      update.breadcrumbRowSpaceBelow = isNaN(val) ? 0 : val;
     }
+    /* don't know how to test resize */
+    /* istanbul ignore if */
+    if (titleRowEl) {
+      val = parseFloat(
+        window.getComputedStyle(titleRowEl).getPropertyValue('margin-top'),
+        10
+      );
+      update.titleRowSpaceAbove = isNaN(val) ? 0 : val;
+
+      if (pageActionsEl) {
+        val = parseFloat(
+          window.getComputedStyle(pageActionsEl).getPropertyValue('margin-top'),
+          10
+        );
+        update.pageActionsSpaceAbove =
+          titleRowEl.clientHeight -
+          pageActionsEl.clientHeight +
+          update.titleRowSpaceAbove -
+          (isNaN(val) ? 0 : val);
+      }
+    }
+    // } else {
+    //   update.breadcrumbRowSpaceBelow = 0;
+    //   update.titleRowSpaceAbove = 0;
+    // }
 
     return { ...previous, ...update };
   });

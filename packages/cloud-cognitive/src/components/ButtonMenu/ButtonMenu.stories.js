@@ -15,6 +15,7 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
+import { Column, Grid, Row } from 'carbon-components-react';
 import mdx from './ButtonMenu.mdx';
 
 import styles from './_storybook-styles.scss';
@@ -38,25 +39,88 @@ export default {
 
 const Template = (args) => {
   return (
-    <ButtonMenu label="Primary button" renderIcon={Add16} {...args}>
-      <ButtonMenuItem
-        itemText="Option 1a"
-        onClick={action(`Click on Option 1`)}
-      />
-      <ButtonMenuItem
-        itemText="Option 2"
-        onClick={action(`Click on Option 2`)}
-      />
-      <ButtonMenuItem
-        itemText="Option 3"
-        onClick={action(`Click on Option 3`)}
-      />
-      <ButtonMenuItem
-        itemText="Option 4"
-        onClick={action(`Click on Option 4`)}
-        hasDivider
-      />
-    </ButtonMenu>
+    <Grid narrow>
+      <Row>
+        <Column>
+          <ButtonMenu
+            label="Primary button"
+            renderIcon={Add16}
+            kind="primary"
+            {...args}
+          >
+            <ButtonMenuItem
+              itemText="Option 1a"
+              onClick={action(`Click on Option 1`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 2"
+              onClick={action(`Click on Option 2`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 3"
+              onClick={action(`Click on Option 3`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 4"
+              onClick={action(`Click on Option 4`)}
+              hasDivider
+            />
+          </ButtonMenu>
+        </Column>
+        <Column>
+          <ButtonMenu
+            label="Tertiary button"
+            renderIcon={Add16}
+            kind="tertiary"
+            {...args}
+          >
+            <ButtonMenuItem
+              itemText="Option 1a"
+              onClick={action(`Click on Option 1`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 2"
+              onClick={action(`Click on Option 2`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 3"
+              onClick={action(`Click on Option 3`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 4"
+              onClick={action(`Click on Option 4`)}
+              hasDivider
+            />
+          </ButtonMenu>
+        </Column>
+        <Column>
+          <ButtonMenu
+            label="Ghost button"
+            renderIcon={Add16}
+            kind="ghost"
+            {...args}
+          >
+            <ButtonMenuItem
+              itemText="Option 1a"
+              onClick={action(`Click on Option 1`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 2"
+              onClick={action(`Click on Option 2`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 3"
+              onClick={action(`Click on Option 3`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 4"
+              onClick={action(`Click on Option 4`)}
+              hasDivider
+            />
+          </ButtonMenu>
+        </Column>
+      </Row>
+    </Grid>
   );
 };
 

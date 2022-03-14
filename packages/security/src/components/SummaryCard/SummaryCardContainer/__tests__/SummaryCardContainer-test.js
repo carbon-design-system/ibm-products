@@ -27,7 +27,7 @@ const summaryCards = [
 ];
 
 describe('SummaryCardContainer', () => {
-  test('has no accessibility violations', async () => {
+  test.skip('has no accessibility violations', async () => {
     const { container } = render(
       <SummaryCardContainer
         render={({ getBatchActionProps, getSelectionProps, summaryCards }) => (

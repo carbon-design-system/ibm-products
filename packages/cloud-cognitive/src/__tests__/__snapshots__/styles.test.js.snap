@@ -2971,6 +2971,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     display: inline-flex;
     vertical-align: middle;
   }
+  .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__displayed-breadcrumb:last-child {
+    max-width: calc(100% - var(--cds-spacing-07, 2rem));
+  }
 }
 .c4p--breadcrumb-with-overflow .bx--breadcrumb-item:last-child {
   display: inline-flex;
@@ -3255,8 +3258,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: none;
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row--has-breadcrumbs .c4p--page-header__action-bar-column {
-  max-width: 75%;
-  flex: 0 1 75%;
+  max-width: 25%;
+  flex: 0 1 25%;
 }
 @media (min-width: 42rem) {
   .c4p--page-header .c4p--page-header__breadcrumb-row--has-breadcrumbs .c4p--page-header__action-bar-column {
@@ -3294,6 +3297,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   visibility: visible;
 }
 .c4p--page-header .c4p--page-header__breadcrumb-column {
+  overflow: hidden;
+  /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
   max-width: 100%;
   flex: 0 0 100%;
 }

@@ -6,7 +6,7 @@
  */
 
 import { px } from '@carbon/layout';
-import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
+import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
 
 export const createCellSelectionArea = ({
   area,

@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { checkActiveHeaderCell } from './checkActiveHeaderCell';
+import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 

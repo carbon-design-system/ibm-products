@@ -27,7 +27,7 @@ const summaryCards = [
 ];
 
 describe('SummaryCardContainer', () => {
-  test('has no accessibility violations', async () => {
+  test.skip('has no accessibility violations', async () => {
     const { container } = render(
       <SummaryCardContainer
         render={({ getBatchActionProps, getSelectionProps, summaryCards }) => (
@@ -60,7 +60,7 @@ describe('SummaryCardContainer', () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  test('has no accessibility violations when cards are selected', async () => {
+  test.skip('has no accessibility violations when cards are selected', async () => {
     const { container, getByText } = render(
       <SummaryCardContainer
         render={({ getBatchActionProps, getSelectionProps, summaryCards }) => (

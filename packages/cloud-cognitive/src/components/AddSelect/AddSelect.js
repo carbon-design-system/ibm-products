@@ -16,6 +16,7 @@ import { AddSelectSidebar } from './AddSelectSidebar';
 import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs';
 import { AddSelectList } from './AddSelectList';
 import { AddSelectColumn } from './AddSelectColumn';
+import { normalize, flatten } from './add-select-utils';
 const componentName = 'AddSelect';
 
 export let AddSelect = forwardRef(
@@ -59,76 +60,51 @@ export let AddSelect = forwardRef(
     const [searchTerm, setSearchTerm] = useState('');
     const [normalizedItems, setNormalizedItems] = useState({});
     const [useNormalizedItems, setUsedNormalizedItems] = useState(false);
+    const [sidebarItems, setSidebarItems] = useState([]);
 
     useEffect(() => {
-      const normalize = (arr, parentId, sortBy, filterBy) => {
-        return arr.reduce((acc, cur) => {
-          const { children, ...entry } = cur;
-          acc[cur.id] = { ...entry };
-          if (parentId) {
-            acc[cur.id].parent = parentId;
-          }
-          if (sortBy?.length) {
-            acc[cur.id].sortBy = sortBy;
-          }
-          if (filterBy) {
-            acc[cur.id].filterBy = filterBy;
-          }
-          if (children) {
-            acc[cur.id].children = children.entries.map((child) => child.id);
-            const child = normalize(
-              children.entries,
-              cur.id,
-              children.sortBy,
-              children.filterBy
-            );
-            return { ...acc, ...child };
-          }
-          return acc;
-        }, {});
-      };
-
+      const { entries } = items;
+      setSidebarItems(flatten(entries));
       // multi select with nested data needs to be normalized
-      if (multi && items.entries.find((entry) => entry.children)) {
-        const newItems = normalize(
-          items.entries,
-          null,
-          items.sortBy,
-          items.filterBy
-        );
+      if (multi && entries.find((entry) => entry.children)) {
+        const newItems = normalize(items);
         setNormalizedItems(newItems);
         setUsedNormalizedItems(true);
       }
     }, [items, multi]);
 
+    // used to generate columns of results for multi select with hierarchy
     const getPages = () => {
-      const results = [];
+      const pages = [];
       const itemIds = Object.keys(normalizedItems);
+      // top level items are just items with no parents so they're the top results
       const topLevelItems = [];
       itemIds.forEach((itemId) => {
         if (!normalizedItems[itemId].parent) {
           topLevelItems.push(normalizedItems[itemId]);
         }
       });
-      results.push(topLevelItems);
+      pages.push(topLevelItems);
       if (path.length) {
+        /**
+         * the path is set when you initially traverse the child entries
+         * path is an array of item id's
+         * when a path is present the normalized items are searched
+         * any item who's has a matching parent id is added to the results
+         * in the end you have an array of arrays for each column of the hierarchy
+         */
         const pathIds = path.map((p) => p.id);
         pathIds.forEach((pathId) => {
-          const childItems = [];
+          const entries = [];
           itemIds.forEach((itemId) => {
             if (normalizedItems[itemId].parent === pathId) {
-              childItems.push(normalizedItems[itemId]);
+              entries.push(normalizedItems[itemId]);
             }
           });
-          results.push(childItems);
+          pages.push(entries);
         });
       }
-      return results;
-    };
-
-    // handlers
-    const handleSearch = (e) => {
-      setSearchTerm(e.target.value);
+      return pages;
     };
 
     // item filtering
@@ -161,6 +137,7 @@ export let AddSelect = forwardRef(
       return results;
     };
 
+    // only multi select with hierarchy requires the the normalized items
     const itemsToDisplay = useNormalizedItems ? getPages() : getFilteredItems();
 
     const commonListProps = {
@@ -172,6 +149,50 @@ export let AddSelect = forwardRef(
       setSingleSelection,
       singleSelection,
     };
+
+    // handlers
+    const handleSearch = (e) => {
+      setSearchTerm(e.target.value);
+    };
+
+    const submitHandler = () => {
+      onSubmit(multi ? multiSelection : singleSelection);
+    };
+
+    const commonTearsheetProps = {
+      open,
+      title,
+      description,
+      closeIconDescription: 'temp description',
+      actions: [
+        {
+          label: onCloseButtonText,
+          kind: 'secondary',
+          onClick: onClose,
+        },
+        {
+          label: onSubmitButtonText,
+          kind: 'primary',
+          onClick: submitHandler,
+          disabled: multi ? multiSelection.length === 0 : !singleSelection,
+        },
+      ],
+    };
+
+    const sidebarProps = {
+      influencerTitle,
+      items: sidebarItems,
+      multiSelection,
+      noSelectionDescription,
+      noSelectionTitle,
+      removeIconDescription,
+      setMultiSelection,
+    };
+
+    const classNames = cx(className, blockClass, {
+      [`${blockClass}__single`]: !multi,
+      [`${blockClass}__multi`]: multi,
+    });
 
     // main content
     const body = (
@@ -234,41 +255,6 @@ export let AddSelect = forwardRef(
         )}
       </>
     );
-
-    const commonTearsheetProps = {
-      open,
-      title,
-      description,
-      closeIconDescription: 'temp description',
-      actions: [
-        {
-          label: onCloseButtonText,
-          kind: 'secondary',
-          onClick: onClose,
-        },
-        {
-          label: onSubmitButtonText,
-          kind: 'primary',
-          onClick: onSubmit,
-          disabled: multi ? multiSelection.length === 0 : !singleSelection,
-        },
-      ],
-    };
-
-    const sidebarProps = {
-      influencerTitle,
-      items: items.entries,
-      multiSelection,
-      noSelectionDescription,
-      noSelectionTitle,
-      removeIconDescription,
-      setMultiSelection,
-    };
-
-    const classNames = cx(className, blockClass, {
-      [`${blockClass}__single`]: !multi,
-      [`${blockClass}__multi`]: multi,
-    });
 
     return (
       <div ref={ref} className={classNames} {...rest}>

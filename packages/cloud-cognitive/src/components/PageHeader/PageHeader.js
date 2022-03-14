@@ -186,6 +186,7 @@ export let PageHeader = React.forwardRef(
 
     // use effects
     useEffect(() => {
+      /* istanbul ignore else */
       if (pageActions?.content) {
         const { minWidth, maxWidth } = pageActions;
         handlePageActionWidthChange({ minWidth, maxWidth });
@@ -309,6 +310,7 @@ export let PageHeader = React.forwardRef(
     useNearestScroll(
       headerRef,
       // on scroll or various layout changes check updates if needed
+      // istanbul ignore next
       ({ current }) => {
         setPageHeaderStyles((prev) => ({
           ...prev,

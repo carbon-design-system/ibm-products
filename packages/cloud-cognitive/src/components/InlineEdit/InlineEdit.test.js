@@ -345,4 +345,21 @@ describe(componentName, () => {
     const svg = component.querySelector(`.${blockClass}__validation-icon svg`);
     expect(svg).not.toBeNull();
   });
+
+  it('can start and stop edit with escape', () => {
+    const startingValue = value;
+    const { container } = render(
+      <InlineEdit {...requiredProps} value={startingValue} />
+    );
+
+    const input = screen.getByRole('textbox');
+    // clicks in
+    userEvent.click(input);
+    const component = container.querySelector(`.${blockClass}`);
+    expect(component).toHaveClass(`${blockClass}--editing`);
+
+    // Escape cancels edit
+    userEvent.keyboard('{Escape}');
+    expect(component).not.toHaveClass(`${blockClass}--editing`);
+  });
 });

@@ -4,11 +4,7 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-const args = process.argv.slice(2);
-// const path = require('path');
 const fs = require('fs');
-
-// console.log(args);
 
 // REGEX targeting the following forms
 /*
@@ -35,10 +31,10 @@ const c4pRegex =
 // - Note if linter is used
 // - Versions of packages
 
-const doScan = () => {
+const scan = (files) => {
   const results = [];
-  for (let i = 0; i < args.length; i++) {
-    const file = args[i];
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
     const data = fs.readFileSync(file, 'utf8');
 
     let components = [];
@@ -82,37 +78,4 @@ const doScan = () => {
   return results;
 };
 
-const genReport = (scanResults) => {
-  console.log('Scanning for use of Carbon for IBM Products\n');
-  console.log(
-    '-----------------------------------------------------------------------------\n'
-  );
-  console.log(
-    '- Start of component usage report --------------------------------------------------------------------------\n'
-  );
-
-  // scan results
-  scanResults.forEach((result) => {
-    console.log(`\nFile: '${result.file}'`);
-    console.log(`Components: [${result.components.join(', ')}]`);
-    console.log(`Imports:`);
-    result.imports.forEach((item) => {
-      console.log(`\t(${item.index}): ${item.match[0]}`);
-    });
-  });
-
-  // console.log(
-  //   '-Summary----------------------------------------------------------------------------\n'
-  // );
-  // console.log(
-  //   `The following @carbon/ibm-products imports were used:\n\n ${Object.keys(
-  //     importedMap
-  //   ).join(', ')} were imported.\n`
-  // );
-  console.log(
-    '- End of component usage report ----------------------------------------------------------------------------\n'
-  );
-};
-
-const scanResults = doScan();
-genReport(scanResults);
+export default scan;

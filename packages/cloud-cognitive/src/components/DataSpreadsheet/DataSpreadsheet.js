@@ -38,6 +38,7 @@ import { useMoveActiveCell } from './hooks/useMoveActiveCell';
 import { createActiveCellFn } from './utils/createActiveCellFn';
 import { getCellSize } from './utils/getCellSize';
 import { handleMultipleKeys } from './utils/handleMultipleKeys';
+import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 // cspell:words rowcount colcount
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -497,35 +498,6 @@ export let DataSpreadsheet = React.forwardRef(
       setCellEditorValue(activeCellValue);
     };
 
-    const handleHeaderCellSelection = (type) => {
-      const point1 = {
-        row: type === 'column' ? 0 : activeCellCoordinates?.row,
-        column: type === 'column' ? activeCellCoordinates?.column : 0,
-      };
-      const point2 = {
-        row: type === 'column' ? rows.length - 1 : activeCellCoordinates?.row, // going to always be the last row
-        column:
-          type === 'column'
-            ? activeCellCoordinates?.column
-            : columns.length - 1,
-      };
-      const tempMatcher = uuidv4();
-      setActiveCellCoordinates({
-        row: type === 'column' ? 0 : activeCellCoordinates?.row,
-        column: type === 'column' ? activeCellCoordinates?.column : 0,
-      });
-      setCurrentMatcher(tempMatcher);
-      removeCellSelections({ spreadsheetRef });
-      setSelectionAreas([
-        {
-          point1,
-          point2,
-          areaCreated: false,
-          matcher: tempMatcher,
-        },
-      ]);
-    };
-
     // Go into edit mode if 'Enter' key is pressed on activeCellRef
     const handleActiveCellKeyDown = (event) => {
       const { key } = event;
@@ -540,13 +512,29 @@ export let DataSpreadsheet = React.forwardRef(
           activeCellCoordinates?.row === 'header' ||
           activeCellCoordinates?.column === 'header'
         ) {
+          const handleHeaderCellProps = {
+            activeCellCoordinates,
+            rows,
+            columns,
+            setActiveCellCoordinates,
+            setCurrentMatcher,
+            setSelectionAreas,
+            spreadsheetRef,
+            isKeyboard: true,
+          };
           // Select an entire column
           if (activeCellCoordinates?.row === 'header') {
-            handleHeaderCellSelection('column');
+            handleHeaderCellSelection({
+              type: 'column',
+              ...handleHeaderCellProps,
+            });
           }
           // Select an entire row
           if (activeCellCoordinates?.column === 'header') {
-            handleHeaderCellSelection('row');
+            handleHeaderCellSelection({
+              type: 'row',
+              ...handleHeaderCellProps,
+            });
           }
         }
       }
@@ -686,6 +674,7 @@ export let DataSpreadsheet = React.forwardRef(
           ref={spreadsheetRef}
           activeCellCoordinates={activeCellCoordinates}
           cellSizeValue={cellSizeValue}
+          columns={columns}
           defaultColumn={defaultColumn}
           headerGroups={headerGroups}
           rows={rows}

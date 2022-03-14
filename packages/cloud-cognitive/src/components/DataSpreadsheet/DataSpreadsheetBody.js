@@ -13,9 +13,12 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
 import uuidv4 from '../../global/js/utils/uuidv4';
+
 import { removeCellSelections } from './utils/removeCellSelections';
 import { createCellSelectionArea } from './utils/createCellSelectionArea';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
+import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
+
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
 export const DataSpreadsheetBody = forwardRef(
@@ -234,29 +237,17 @@ export const DataSpreadsheetBody = forwardRef(
     const handleRowHeaderClick = useCallback(
       (index) => {
         return () => {
-          const point1 = {
-            column: 0,
-            row: index,
-          };
-          const point2 = {
-            column: columns.length - 1,
-            row: index,
-          };
-          const tempMatcher = uuidv4();
-          setActiveCellCoordinates({
-            row: index,
-            column: 0,
+          handleHeaderCellSelection({
+            type: 'row',
+            activeCellCoordinates,
+            rows,
+            columns,
+            setActiveCellCoordinates,
+            setCurrentMatcher,
+            setSelectionAreas,
+            spreadsheetRef: ref,
+            index,
           });
-          setCurrentMatcher(tempMatcher);
-          removeCellSelections({ spreadsheetRef: ref });
-          setSelectionAreas([
-            {
-              point1,
-              point2,
-              areaCreated: false,
-              matcher: tempMatcher,
-            },
-          ]);
         };
       },
       [
@@ -265,6 +256,8 @@ export const DataSpreadsheetBody = forwardRef(
         setSelectionAreas,
         setCurrentMatcher,
         setActiveCellCoordinates,
+        activeCellCoordinates,
+        rows,
       ]
     );
 

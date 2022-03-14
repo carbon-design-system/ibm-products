@@ -9,9 +9,8 @@ import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import uuidv4 from '../../global/js/utils/uuidv4';
-import { removeCellSelections } from './utils/removeCellSelections';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
+import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -19,6 +18,7 @@ export const DataSpreadsheetHeader = forwardRef(
   (
     {
       activeCellCoordinates,
+      columns,
       defaultColumn,
       headerGroups,
       selectionAreas,
@@ -31,29 +31,17 @@ export const DataSpreadsheetHeader = forwardRef(
   ) => {
     const handleColumnHeaderClick = (index) => {
       return () => {
-        const point1 = {
-          row: 0,
-          column: index,
-        };
-        const point2 = {
-          row: rows.length - 1,
-          column: index,
-        };
-        const tempMatcher = uuidv4();
-        setActiveCellCoordinates({
-          row: 0,
-          column: index,
+        handleHeaderCellSelection({
+          type: 'column',
+          activeCellCoordinates,
+          rows,
+          columns,
+          setActiveCellCoordinates,
+          setCurrentMatcher,
+          setSelectionAreas,
+          spreadsheetRef: ref,
+          index,
         });
-        setCurrentMatcher(tempMatcher);
-        removeCellSelections({ spreadsheetRef: ref });
-        setSelectionAreas([
-          {
-            point1,
-            point2,
-            areaCreated: false,
-            matcher: tempMatcher,
-          },
-        ]);
       };
     };
 
@@ -128,6 +116,11 @@ DataSpreadsheetHeader.propTypes = {
     row: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     column: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }),
+
+  /**
+   * All of the spreadsheet columns
+   */
+  columns: PropTypes.array,
 
   /**
    * Default spreadsheet sizing values

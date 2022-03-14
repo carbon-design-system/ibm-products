@@ -376,8 +376,10 @@ describe('PageHeader', () => {
   });
 
   test('PageHeader space for collapse button without navigation', () => {
+    const dataTestId = uuidv4();
     render(
       <PageHeader
+        data-testid={dataTestId}
         {...testProps}
         hasCollapseHeaderToggle={true}
         navigation={null}
@@ -385,11 +387,16 @@ describe('PageHeader', () => {
         {children}
       </PageHeader>
     );
+
+    // just check in tenders without error
+    screen.getByTestId(dataTestId);
   });
 
   test('PageHeader space for collapse button without navigation or tags', () => {
+    const dataTestId = uuidv4();
     render(
       <PageHeader
+        data-testid={dataTestId}
         {...testProps}
         hasCollapseHeaderToggle={true}
         navigation={null}
@@ -398,6 +405,9 @@ describe('PageHeader', () => {
         {children}
       </PageHeader>
     );
+
+    // just check in tenders without error
+    screen.getByTestId(dataTestId);
   });
 
   test('collapseHeader prop test', () => {
@@ -516,8 +526,10 @@ describe('PageHeader', () => {
   });
 
   test('enableBreadcrumbScroll works', () => {
+    const dataTestId = uuidv4();
     render(
       <PageHeader
+        data-testid={dataTestId}
         {...prepareProps(testProps, 'breadcrumbs')}
         enableBreadcrumbScroll={true}
       >
@@ -525,10 +537,8 @@ describe('PageHeader', () => {
       </PageHeader>
     );
 
-    // Need to figure out how to test this
-    // expect(
-    //   'Enabling the breadcrumb allows the breadcrumb to scroll, pushed by navigation row.'
-    // ).toBeTruthy();
+    // just check in tenders without error
+    screen.getByTestId(dataTestId);
   });
 
   test('renders title as string', () => {

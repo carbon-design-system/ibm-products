@@ -165,10 +165,6 @@ export const utilCheckUpdateVerticalSpace = (
           (isNaN(val) ? 0 : val);
       }
     }
-    // } else {
-    //   update.breadcrumbRowSpaceBelow = 0;
-    //   update.titleRowSpaceAbove = 0;
-    // }
 
     return { ...previous, ...update };
   });

@@ -68,6 +68,14 @@ const pageActions = [
   },
 ];
 const pageActionsOverflowLabel = 'Page actions...';
+const pageActionsCustomContent = 'Custom page action';
+
+const pageActionsCustom = {
+  // eslint-disable-next-line react/button-has-type
+  content: <button>{pageActionsCustomContent}</button>,
+  minWidth: 150,
+  maxWidth: 300,
+};
 
 const subtitle = 'Optional subtitle if necessary';
 const navigation = (
@@ -160,6 +168,7 @@ const testProps = {
   breadcrumbOverflowAriaLabel,
   breadcrumbs,
   className: classNames.join(' '),
+  enableBreadcrumbScroll: false,
   navigation,
   pageActions,
   pageActionsOverflowLabel,
@@ -366,6 +375,41 @@ describe('PageHeader', () => {
     expect(window.scrollTo).toHaveBeenCalledTimes(2);
   });
 
+  test('PageHeader space for collapse button without navigation', () => {
+    const dataTestId = uuidv4();
+    render(
+      <PageHeader
+        data-testid={dataTestId}
+        {...testProps}
+        hasCollapseHeaderToggle={true}
+        navigation={null}
+      >
+        {children}
+      </PageHeader>
+    );
+
+    // just check in tenders without error
+    screen.getByTestId(dataTestId);
+  });
+
+  test('PageHeader space for collapse button without navigation or tags', () => {
+    const dataTestId = uuidv4();
+    render(
+      <PageHeader
+        data-testid={dataTestId}
+        {...testProps}
+        hasCollapseHeaderToggle={true}
+        navigation={null}
+        tags={null}
+      >
+        {children}
+      </PageHeader>
+    );
+
+    // just check in tenders without error
+    screen.getByTestId(dataTestId);
+  });
+
   test('collapseHeader prop test', () => {
     const dataTestId = uuidv4();
     render(
@@ -481,11 +525,20 @@ describe('PageHeader', () => {
     expect(actionBarItems).toHaveLength(1);
   });
 
-  test.skip('enableBreadcrumbScroll works', () => {
-    // Need to figure out how to test this
-    expect(
-      'Enabling the breadcrumb allows the breadcrumb to scroll, pushed by navigation row.'
-    ).toBeTruthy();
+  test('enableBreadcrumbScroll works', () => {
+    const dataTestId = uuidv4();
+    render(
+      <PageHeader
+        data-testid={dataTestId}
+        {...prepareProps(testProps, 'breadcrumbs')}
+        enableBreadcrumbScroll={true}
+      >
+        {children}
+      </PageHeader>
+    );
+
+    // just check in tenders without error
+    screen.getByTestId(dataTestId);
   });
 
   test('renders title as string', () => {
@@ -646,5 +699,11 @@ describe('PageHeader', () => {
     const grid = container.querySelector(`.${carbon.prefix}--grid`);
     expect(grid).toHaveClass(`${carbon.prefix}--grid--narrow`);
     expect(grid).toHaveClass(`${carbon.prefix}--grid--full-width`);
+  });
+
+  test('PageHeader with custom pageActions', () => {
+    render(<PageHeader {...testProps} pageActions={pageActionsCustom} />);
+
+    screen.getAllByText('Custom page action');
   });
 });

@@ -339,7 +339,6 @@ export let InlineEdit = React.forwardRef(
               </>
             ) : (
               <Button
-                aria-hidden="true"
                 className={cx(`${blockClass}__edit`, {
                   [`${blockClass}__edit--always-visible`]: editAlwaysVisible,
                 })}

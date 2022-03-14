@@ -224,6 +224,7 @@ export let DataSpreadsheet = React.forwardRef(
             activeCellValue,
             activeCellRef,
             cellEditorRef,
+            defaultColumn,
           });
         }
       },
@@ -232,6 +233,7 @@ export let DataSpreadsheet = React.forwardRef(
         rows,
         onActiveCellChange,
         previousState?.activeCellCoordinates,
+        defaultColumn,
       ]
     );
 
@@ -495,13 +497,59 @@ export let DataSpreadsheet = React.forwardRef(
       setCellEditorValue(activeCellValue);
     };
 
+    const handleHeaderCellSelection = (type) => {
+      const point1 = {
+        row: type === 'column' ? 0 : activeCellCoordinates?.row,
+        column: type === 'column' ? activeCellCoordinates?.column : 0,
+      };
+      const point2 = {
+        row: type === 'column' ? rows.length - 1 : activeCellCoordinates?.row, // going to always be the last row
+        column:
+          type === 'column'
+            ? activeCellCoordinates?.column
+            : columns.length - 1,
+      };
+      const tempMatcher = uuidv4();
+      setActiveCellCoordinates({
+        row: type === 'column' ? 0 : activeCellCoordinates?.row,
+        column: type === 'column' ? activeCellCoordinates?.column : 0,
+      });
+      setCurrentMatcher(tempMatcher);
+      removeCellSelections({ spreadsheetRef });
+      setSelectionAreas([
+        {
+          point1,
+          point2,
+          areaCreated: false,
+          matcher: tempMatcher,
+        },
+      ]);
+    };
+
     // Go into edit mode if 'Enter' key is pressed on activeCellRef
     const handleActiveCellKeyDown = (event) => {
       const { key } = event;
       if (key === 'Enter') {
-        startEditMode();
+        if (
+          activeCellCoordinates?.column !== 'header' &&
+          activeCellCoordinates?.row !== 'header'
+        ) {
+          startEditMode();
+        }
+        if (
+          activeCellCoordinates?.row === 'header' ||
+          activeCellCoordinates?.column === 'header'
+        ) {
+          // Select an entire column
+          if (activeCellCoordinates?.row === 'header') {
+            handleHeaderCellSelection('column');
+          }
+          // Select an entire row
+          if (activeCellCoordinates?.column === 'header') {
+            handleHeaderCellSelection('row');
+          }
+        }
       }
-      return;
     };
 
     // Go into edit mode if double click is detected on activeCellRef
@@ -616,60 +664,6 @@ export let DataSpreadsheet = React.forwardRef(
       }
     };
 
-    const handleActiveCellClick = () => {
-      // Column header selection
-      if (activeCellCoordinates?.row === 'header') {
-        const point1 = {
-          row: 0,
-          column: activeCellCoordinates?.column,
-        };
-        const point2 = {
-          row: rows.length - 1, // going to always be the last row
-          column: activeCellCoordinates?.column,
-        };
-        const tempMatcher = uuidv4();
-        setActiveCellCoordinates({
-          row: 0,
-          column: activeCellCoordinates?.column,
-        });
-        setCurrentMatcher(tempMatcher);
-        removeCellSelections({ spreadsheetRef });
-        setSelectionAreas([
-          {
-            point1,
-            point2,
-            areaCreated: false,
-            matcher: tempMatcher,
-          },
-        ]);
-      }
-      if (activeCellCoordinates?.column === 'header') {
-        const point1 = {
-          column: 0,
-          row: activeCellCoordinates?.row,
-        };
-        const point2 = {
-          column: columns.length - 1, // going to always be the last row
-          row: activeCellCoordinates?.row,
-        };
-        const tempMatcher = uuidv4();
-        setActiveCellCoordinates({
-          row: activeCellCoordinates?.row,
-          column: 0,
-        });
-        setCurrentMatcher(tempMatcher);
-        removeCellSelections({ spreadsheetRef });
-        setSelectionAreas([
-          {
-            point1,
-            point2,
-            areaCreated: false,
-            matcher: tempMatcher,
-          },
-        ]);
-      }
-    };
-
     return (
       <div
         {...rest}
@@ -724,15 +718,6 @@ export let DataSpreadsheet = React.forwardRef(
           id={id}
           columns={columns}
         />
-        <button
-          onClick={handleActiveCellClick}
-          className={cx(
-            `${blockClass}--interactive-cell-element`,
-            `${blockClass}__active-cell--highlight`
-          )}
-          type="button"
-        />
-
         <button
           onKeyDown={handleActiveCellKeyDown}
           onMouseEnter={handleActiveCellMouseEnter}

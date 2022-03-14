@@ -63,6 +63,7 @@ export const DataSpreadsheetBody = forwardRef(
             createCellSelectionArea({
               area,
               blockClass,
+              defaultColumn,
               selectionAreas,
               setSelectionAreas,
             });
@@ -70,7 +71,7 @@ export const DataSpreadsheetBody = forwardRef(
           return;
         });
       }
-    }, [selectionAreas, setSelectionAreas]);
+    }, [selectionAreas, setSelectionAreas, defaultColumn]);
 
     // Mouse up
     useEffect(() => {
@@ -95,27 +96,6 @@ export const DataSpreadsheetBody = forwardRef(
             selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
             return selectionAreaClone;
           });
-        } else {
-          const selectionAreaClone = deepCloneObject(selectionAreas);
-          const indexOfItemToUpdate = selectionAreaClone.findIndex(
-            (item) => item.matcher === currentMatcher
-          );
-          if (indexOfItemToUpdate === -1) {
-            return;
-          }
-          const notYetCreatedSelections = selectionAreaClone.filter(
-            (item) => !item.areaCreated && item.matcher === currentMatcher
-          );
-          const previouslyCreatedSelectionAreas = selectionAreaClone.filter(
-            (item) => item.point2 && item.areaCreated
-          );
-          // We want to ensure that there is only ever one item in selectionAreas
-          // that has not been created yet. This item's point1 values will always
-          // be equal to the activeCellCoordinates
-          setSelectionAreas([
-            ...notYetCreatedSelections,
-            ...previouslyCreatedSelectionAreas,
-          ]);
         }
       };
       document.addEventListener('mouseup', handleMouseUp);
@@ -157,6 +137,7 @@ export const DataSpreadsheetBody = forwardRef(
             column: columnIndex,
           };
           const tempMatcher = uuidv4();
+          setClickAndHoldActive(true);
 
           // prevent multiple selections unless cmd key is held
           // meaning that selectionAreas should only have one item by default
@@ -199,7 +180,6 @@ export const DataSpreadsheetBody = forwardRef(
             ]);
             setCurrentMatcher(tempMatcher);
           }
-          setClickAndHoldActive(true);
         };
       },
       [
@@ -288,7 +268,7 @@ export const DataSpreadsheetBody = forwardRef(
       ]
     );
 
-    // Renders each cell in the spreadsheet body
+    // Renders each row/cell in the spreadsheet body
     const RenderRow = useCallback(
       ({ index, style }) => {
         const row = rows[index];
@@ -352,9 +332,9 @@ export const DataSpreadsheetBody = forwardRef(
         defaultColumn.rowHeaderWidth,
         activeCellCoordinates?.row,
         selectionAreas,
+        handleRowHeaderClick,
         handleBodyCellClick,
         handleBodyCellHover,
-        handleRowHeaderClick,
       ]
     );
 

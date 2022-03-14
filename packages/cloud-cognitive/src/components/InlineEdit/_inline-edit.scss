@@ -28,23 +28,6 @@
   }
 }
 
-@function --tooltip-top-bottom-safe-clip() {
-  @return polygon(
-    0 0,
-    -100vw 0,
-    -100vw -100vh,
-    100vw -100vh,
-    100vw 0,
-    100% 0,
-    100% 100%,
-    100vw 100%,
-    100vw 100vh,
-    -100vw 100vh,
-    -100vw 100%,
-    0 100%
-  );
-}
-
 @mixin input-button-defaults($block-class) {
   display: inline-flex;
   width: var(--#{$block-class}--size);
@@ -69,6 +52,7 @@
     --#{$block-class}--size: #{$spacing-08};
     --#{$block-class}--icon-size: #{$spacing-05};
     --#{$block-class}--background-color: #{$ui-01};
+    --#{$block-class}--toolbar-width: calc(2 * var(--#{$block-class}--size));
 
     &.#{$block-class}--light {
       --#{$block-class}--background-color: transparent;
@@ -121,11 +105,12 @@
       overflow: hidden;
       // positions text and placeholder including when showing placeholder
       // NOTE: Using flex does strange things to a caret in content editable
-      width: calc(100% - 2 * var(--#{$block-class}--size) - $spacing-05);
-      max-width: calc(100% - 2 * var(--#{$block-class}--size) - $spacing-05);
+      width: calc(100% - var(--#{$block-class}--toolbar-width) - $spacing-05);
+      max-width: calc(
+        100% - var(--#{$block-class}--toolbar-width) - $spacing-05
+      );
       min-height: var(--#{$block-class}--size);
-      // stylelint-disable-next-line carbon/layout-token-use
-      margin-right: calc(2 * var(--#{$block-class}--size));
+      margin-right: var(--#{$block-class}--toolbar-width);
       // room for toolbar
       margin-left: $spacing-05;
       // stylelint-disable-next-line carbon/type-token-use
@@ -138,10 +123,7 @@
 
     &.#{$block-class}--invalid .#{$block-class}__input {
       // add space for validation
-      width: calc(100% - 3 * var(--#{$block-class}--size) - $spacing-05);
-      max-width: calc(100% - 3 * var(--#{$block-class}--size) - $spacing-05);
-      // stylelint-disable-next-line carbon/layout-token-use
-      margin-right: calc(3 * var(--#{$block-class}--size));
+      --#{$block-class}--toolbar-width: calc(3 * var(--#{$block-class}--size));
     }
 
     .#{$block-class}__input::after {
@@ -202,13 +184,15 @@
     }
 
     .#{$block-class}__after-input-elements {
+      --#{$block-class}--toolbar-width: calc(2 * var(--#{$block-class}--size));
+
       // not simply flexed in as this causes flexbox to mis-measure the size of the input
       position: absolute;
       top: 0;
       right: 0;
       display: flex;
       // width: room for validation, and two buttons
-      width: calc(2 * var(--#{$block-class}--size));
+      width: var(--#{$block-class}--toolbar-width);
       height: 100%;
       justify-content: space-between;
       cursor: text;
@@ -216,14 +200,11 @@
 
     &.#{$block-class}--invalid .#{$block-class}__after-input-elements {
       // width: room for validation, and two buttons
-      width: calc(3 * var(--#{$block-class}--size));
+      --#{$block-class}--toolbar-width: calc(3 * var(--#{$block-class}--size));
     }
 
     .#{$block-class}__toolbar--animation {
-      // makes room for the top clip text but hides the side overflow
-      clip-path: --tooltip-top-bottom-safe-clip();
-      // NOTE: The above allows the tooltip to show through when overflowX: hidden would not when at right edge.
-      // It is used with margin animation of contained buttons
+      // width: ;
     }
 
     &.#{$block-class}--editing .#{$block-class}__toolbar::after {
@@ -277,16 +258,29 @@
     &.#{$block-class}--editing
       .#{$block-class}__toolbar--animation
       .#{$block-class}__save {
-      // stylelint-disable-next-line carbon/layout-token-use
-      margin-right: calc(-1 * var(--#{$block-class}--size));
-      transition: margin-right $duration--moderate-02
-        motion(standard, productive);
+      margin-right: 0;
+      transition: all $duration--moderate-02 motion(standard, productive);
+      transition-property: margin, padding;
+
+      svg {
+        transition: width $duration--moderate-02 motion(standard, productive);
+      }
     }
 
     &.#{$block-class}--editing
-      .#{$block-class}__toolbar--saveable
+      .#{$block-class}__toolbar--animation:not(.#{$block-class}__toolbar--saveable)
       .#{$block-class}__save {
-      margin-right: 0;
+      padding-right: 0;
+      padding-left: 0;
+      border-right: 0;
+      border-left: 0;
+      // stylelint-disable-next-line carbon/layout-token-use
+      margin-right: calc(-1 * var(--#{$block-class}--size));
+
+      svg {
+        overflow: hidden;
+        width: 0;
+      }
     }
 
     &.#{$block-class}.#{$block-class} .#{$block-class}__edit {

@@ -98,6 +98,12 @@ const config = [
       ')',
   },
   {
+    label: 'OptionsTile',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/OptionsTile',
+    thumbnail:
+      'url( ' + defaultOrNot(require('./OptionsTile--thumbnail.png')) + ')',
+  },
+  {
     label: 'Page Header Example',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/PageHeader',
     thumbnail:

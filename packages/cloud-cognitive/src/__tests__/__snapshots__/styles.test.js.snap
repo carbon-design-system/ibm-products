@@ -2988,8 +2988,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   width: 100%;
   text-overflow: ellipsis;
 }
-.c4p--breadcrumb-with-overflow .bx--link {
-  max-height: 18px;
+
+.c4p--breadcrumb-with-overflow__overflow-menu-options.c4p--breadcrumb-with-overflow__overflow-menu-options {
+  z-index: 8000;
 }
 
 .c4p--tag-set.c4p--tag-set {

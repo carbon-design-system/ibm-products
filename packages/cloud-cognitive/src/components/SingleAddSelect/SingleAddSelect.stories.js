@@ -56,6 +56,7 @@ const defaultProps = {
   onCloseButtonText: 'Cancel',
   onSubmitButtonText: 'Select',
   textInputLabel: 'test input title',
+  onSubmit: (selection) => console.log(selection),
 };
 
 const Template = (args) => {

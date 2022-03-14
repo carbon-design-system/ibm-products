@@ -64,6 +64,7 @@ const defaultProps = {
   removeIconDescription: 'Remove',
   textInputLabel: 'test input label',
   columnInputPlaceholder: 'Find',
+  onSubmit: (selections) => console.log(selections),
 };
 
 const Template = (args) => {

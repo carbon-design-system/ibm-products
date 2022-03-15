@@ -25,7 +25,12 @@ export const useSpreadsheetOutsideClick = ({
       if (
         !spreadsheetRef.current ||
         spreadsheetRef.current.contains(event.target) ||
-        event.target.classList.contains(`${blockClass}__active-cell--highlight`)
+        event.target.classList.contains(
+          `${blockClass}__active-cell--highlight`
+        ) ||
+        event.target.classList.contains(
+          `${blockClass}--interactive-cell-element`
+        )
       ) {
         return;
       }

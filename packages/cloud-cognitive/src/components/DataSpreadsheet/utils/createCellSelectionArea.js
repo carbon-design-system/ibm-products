@@ -11,6 +11,7 @@ import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
 export const createCellSelectionArea = ({
   area,
   blockClass,
+  defaultColumn,
   selectionAreas,
   setSelectionAreas,
 }) => {
@@ -18,9 +19,10 @@ export const createCellSelectionArea = ({
   const greatestColumn = Math.max(area.point1.column, area.point2.column);
   const lowestRowIndex = Math.min(area.point1.row, area.point2.row);
   const lowestColumnIndex = Math.min(area.point1.column, area.point2.column);
-  const point1Element = document.querySelector(
-    `[data-row-index="${area.point1.row}"][data-column-index="${area.point1.column}"]`
-  );
+  const point1Element =
+    document.querySelector(
+      `[data-row-index="${area.point1.row}"][data-column-index="${area.point1.column}"]`
+    ) || document.querySelector(`.${blockClass}__body--td`); // if we can't find the point1 element (this can happen in the case where a virtualized row is not present anymore in the DOM), we get the default height/width of the first body cell we find
   const selectionAreaCellWidth = point1Element.offsetWidth;
   const selectionAreaCellHeight = point1Element.offsetHeight;
   const selectionAreaTotalWidth =
@@ -34,12 +36,19 @@ export const createCellSelectionArea = ({
     `[data-row-index="${lowestRowIndex}"][data-column-index="${lowestColumnIndex}"]`
   );
   const relativePosition = {
-    top:
-      placementElement.getBoundingClientRect().top -
-      bodyContainer.getBoundingClientRect().top,
-    left:
-      placementElement.getBoundingClientRect().left -
-      bodyContainer.getBoundingClientRect().left,
+    top: placementElement
+      ? placementElement.getBoundingClientRect().top -
+        bodyContainer.getBoundingClientRect().top
+      : lowestRowIndex === 0
+      ? 0
+      : selectionAreaCellHeight * lowestRowIndex, // calculate top value here if virtualized row is not in DOM
+    left: placementElement
+      ? placementElement.getBoundingClientRect().left -
+        bodyContainer.getBoundingClientRect().left
+      : lowestColumnIndex === 0
+      ? 0 + (defaultColumn.rowHeaderWidth - 4)
+      : selectionAreaCellWidth * lowestColumnIndex +
+        (defaultColumn.rowHeaderWidth - 4), // calculate left value here if virtualized row is not in DOM, accounting for row header cell width (including borders)
   };
   const selectionAreaElement =
     document.querySelector(`[data-matcher-id="${area.matcher}"]`) ||

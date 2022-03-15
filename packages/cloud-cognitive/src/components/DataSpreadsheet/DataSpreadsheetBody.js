@@ -13,13 +13,18 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
 import uuidv4 from '../../global/js/utils/uuidv4';
+
+import { removeCellSelections } from './utils/removeCellSelections';
 import { createCellSelectionArea } from './utils/createCellSelectionArea';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
+import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
+
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
 export const DataSpreadsheetBody = forwardRef(
   (
     {
+      columns,
       activeCellCoordinates,
       defaultColumn,
       getTableBodyProps,
@@ -39,7 +44,6 @@ export const DataSpreadsheetBody = forwardRef(
     },
     ref
   ) => {
-    const currentMatcherRef = ref;
     // Create cell selection areas based on selectionAreas array
     useEffect(() => {
       if (selectionAreas && selectionAreas.length) {
@@ -62,6 +66,7 @@ export const DataSpreadsheetBody = forwardRef(
             createCellSelectionArea({
               area,
               blockClass,
+              defaultColumn,
               selectionAreas,
               setSelectionAreas,
             });
@@ -69,7 +74,7 @@ export const DataSpreadsheetBody = forwardRef(
           return;
         });
       }
-    }, [selectionAreas, setSelectionAreas]);
+    }, [selectionAreas, setSelectionAreas, defaultColumn]);
 
     // Mouse up
     useEffect(() => {
@@ -94,27 +99,6 @@ export const DataSpreadsheetBody = forwardRef(
             selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
             return selectionAreaClone;
           });
-        } else {
-          const selectionAreaClone = deepCloneObject(selectionAreas);
-          const indexOfItemToUpdate = selectionAreaClone.findIndex(
-            (item) => item.matcher === currentMatcher
-          );
-          if (indexOfItemToUpdate === -1) {
-            return;
-          }
-          const notYetCreatedSelections = selectionAreaClone.filter(
-            (item) => !item.areaCreated && item.matcher === currentMatcher
-          );
-          const previouslyCreatedSelectionAreas = selectionAreaClone.filter(
-            (item) => item.point2 && item.areaCreated
-          );
-          // We want to ensure that there is only ever one item in selectionAreas
-          // that has not been created yet. This item's point1 values will always
-          // be equal to the activeCellCoordinates
-          setSelectionAreas([
-            ...notYetCreatedSelections,
-            ...previouslyCreatedSelectionAreas,
-          ]);
         }
       };
       document.addEventListener('mouseup', handleMouseUp);
@@ -156,6 +140,7 @@ export const DataSpreadsheetBody = forwardRef(
             column: columnIndex,
           };
           const tempMatcher = uuidv4();
+          setClickAndHoldActive(true);
 
           // prevent multiple selections unless cmd key is held
           // meaning that selectionAreas should only have one item by default
@@ -192,21 +177,15 @@ export const DataSpreadsheetBody = forwardRef(
           } else {
             setActiveCellCoordinates(activeCoordinates);
             // remove all previous cell selections
-            const cellSelections = spreadsheetBodyRef.current.querySelectorAll(
-              `.${blockClass}__selection-area--element`
-            );
-            [...cellSelections].forEach((element) => element.remove());
+            removeCellSelections({ spreadsheetRef: ref });
             setSelectionAreas([
               { point1: activeCoordinates, matcher: tempMatcher },
             ]);
             setCurrentMatcher(tempMatcher);
           }
-          currentMatcherRef.current = tempMatcher;
-          setClickAndHoldActive(true);
         };
       },
       [
-        currentMatcherRef,
         currentMatcher,
         activeCellCoordinates,
         selectionAreas,
@@ -215,6 +194,7 @@ export const DataSpreadsheetBody = forwardRef(
         setContainerHasFocus,
         setClickAndHoldActive,
         setCurrentMatcher,
+        ref,
       ]
     );
 
@@ -254,7 +234,34 @@ export const DataSpreadsheetBody = forwardRef(
       [clickAndHoldActive, currentMatcher, setSelectionAreas]
     );
 
-    // Renders each cell in the spreadsheet body
+    const handleRowHeaderClick = useCallback(
+      (index) => {
+        return () => {
+          handleHeaderCellSelection({
+            type: 'row',
+            activeCellCoordinates,
+            rows,
+            columns,
+            setActiveCellCoordinates,
+            setCurrentMatcher,
+            setSelectionAreas,
+            spreadsheetRef: ref,
+            index,
+          });
+        };
+      },
+      [
+        columns,
+        ref,
+        setSelectionAreas,
+        setCurrentMatcher,
+        setActiveCellCoordinates,
+        activeCellCoordinates,
+        rows,
+      ]
+    );
+
+    // Renders each row/cell in the spreadsheet body
     const RenderRow = useCallback(
       ({ index, style }) => {
         const row = rows[index];
@@ -271,6 +278,7 @@ export const DataSpreadsheetBody = forwardRef(
               data-row-index={index}
               data-column-index="header"
               type="button"
+              onClick={handleRowHeaderClick(index)}
               className={cx(
                 `${blockClass}__td`,
                 `${blockClass}__td-th`,
@@ -315,10 +323,11 @@ export const DataSpreadsheetBody = forwardRef(
         prepareRow,
         rows,
         defaultColumn.rowHeaderWidth,
-        handleBodyCellClick,
-        handleBodyCellHover,
         activeCellCoordinates?.row,
         selectionAreas,
+        handleRowHeaderClick,
+        handleBodyCellClick,
+        handleBodyCellHover,
       ]
     );
 
@@ -359,6 +368,11 @@ DataSpreadsheetBody.propTypes = {
    * Is the user clicking and holding in the data spreadsheet body
    */
   clickAndHoldActive: PropTypes.bool,
+
+  /**
+   * All of the spreadsheet columns
+   */
+  columns: PropTypes.array,
 
   /**
    * This represents the id of the current cell selection area

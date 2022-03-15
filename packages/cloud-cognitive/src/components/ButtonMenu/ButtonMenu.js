@@ -48,6 +48,7 @@ export let ButtonMenu = React.forwardRef(
       menuOptionsClass,
       renderIcon: Icon,
       size = defaults.size,
+      kind = defaults.kind,
 
       // Collect any other property values passed in.
       ...rest

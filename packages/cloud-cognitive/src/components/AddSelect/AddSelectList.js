@@ -36,12 +36,12 @@ export let AddSelectList = ({
     setSingleSelection(value);
   };
 
-  const handleMultiSelection = (value, checked) => {
+  const handleMultiSelection = (id, checked) => {
     if (checked) {
-      const newValues = [...multiSelection, value];
+      const newValues = [...multiSelection, id];
       setMultiSelection(newValues);
     } else {
-      const newValues = multiSelection.filter((v) => v !== value);
+      const newValues = multiSelection.filter((v) => v !== id);
       setMultiSelection(newValues);
     }
   };
@@ -86,7 +86,9 @@ export let AddSelectList = ({
                   {multi ? (
                     <Checkbox
                       className={`${blockClass}-checkbox`}
-                      onChange={(value) => handleMultiSelection(item.id, value)}
+                      onChange={(checked) =>
+                        handleMultiSelection(item.id, checked)
+                      }
                       labelText={
                         !inColumn ? (
                           <>

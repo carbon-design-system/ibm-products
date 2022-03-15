@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   TextInput,
@@ -29,14 +29,24 @@ export let AddSelectColumn = ({
   columnInputPlaceholder,
   filteredItems,
   header,
+  multiSelection,
+  setMultiSelection,
   ...props
 }) => {
+  const [allSelected, setAllSelected] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [sortDirection, setSortDirection] = useState('');
   const [sortAttribute, setSortAttribute] = useState('');
   const [filters, setFilters] = useState([]);
   const blockClass = `${pkg.prefix}--add-select`;
   const colClass = `${blockClass}__column`;
+
+  useEffect(() => {
+    const isAllSelected = filteredItems.every((item) =>
+      multiSelection.includes(item.id)
+    );
+    setAllSelected(isAllSelected);
+  }, [filteredItems, multiSelection]);
 
   // sorting
   const colSortBy = filteredItems.find((item) => item.sortBy)?.sortBy;
@@ -80,6 +90,16 @@ export let AddSelectColumn = ({
   const sortHandler = ({ direction, attribute }) => {
     setSortAttribute(attribute);
     setSortDirection(direction);
+  };
+
+  const selectAllHandler = (checked) => {
+    const itemIds = filteredItems.map((item) => item.id);
+    if (checked) {
+      setMultiSelection([...multiSelection, ...itemIds]);
+    } else {
+      const newItems = multiSelection.filter((i) => !itemIds.includes(i));
+      setMultiSelection(newItems);
+    }
   };
 
   const filterHandler = (checked, opt) => {
@@ -176,12 +196,29 @@ export let AddSelectColumn = ({
         </div>
       </div>
       <div className={`${blockClass}__tag-container`}>
-        <p className={`${blockClass}__tag-container-label`}>{header}</p>
-        <Tag type="gray" size="sm">
-          {colItems.length}
-        </Tag>
+        <Checkbox
+          id={`${uuidv4()}-select-all`}
+          checked={allSelected}
+          onChange={selectAllHandler}
+          labelText={
+            <>
+              <span className={`${blockClass}__tag-container-label`}>
+                {header}
+              </span>
+              <Tag type="gray" size="sm">
+                {colItems.length}
+              </Tag>
+            </>
+          }
+        />
       </div>
-      <AddSelectList {...props} inColumn filteredItems={colItems} />
+      <AddSelectList
+        {...props}
+        inColumn
+        filteredItems={colItems}
+        setMultiSelection={setMultiSelection}
+        multiSelection={multiSelection}
+      />
     </div>
   );
 };
@@ -190,6 +227,8 @@ AddSelectColumn.propTypes = {
   columnInputPlaceholder: PropTypes.string,
   filteredItems: PropTypes.array,
   header: PropTypes.string,
+  multiSelection: PropTypes.array,
+  setMultiSelection: PropTypes.func,
 };
 
 AddSelectColumn.displayName = componentName;

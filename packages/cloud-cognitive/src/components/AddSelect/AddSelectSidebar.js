@@ -46,6 +46,7 @@ export let AddSelectSidebar = ({
         onClick={() => handleItemRemove(id)}
         kind="ghost"
         className={`${blockClass}-item-remove-button`}
+        size="sm"
       />
     </div>
   );

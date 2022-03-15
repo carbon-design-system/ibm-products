@@ -59,6 +59,7 @@ export let BreadcrumbWithOverflow = ({
           ariaLabel={overflowAriaLabel}
           renderIcon={OverflowMenuHorizontal32}
           className={`${blockClass}__overflow-menu`}
+          menuOptionsClass={`${blockClass}__overflow-menu-options`}
         >
           {
             // eslint-disable-next-line react/prop-types

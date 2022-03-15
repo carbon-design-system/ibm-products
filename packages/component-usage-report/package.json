@@ -1,11 +1,21 @@
 {
   "name": "@carbon/component-usage-report",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Creates a @carbon/cloud-cognitive component usage report.",
-  "main": "index.js",
+  "bin": "bin/component-usage-report",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "esm": "^3.2.25"
+  },
+  "files": [
+    "bin/",
+    "src/"
+  ]
 }

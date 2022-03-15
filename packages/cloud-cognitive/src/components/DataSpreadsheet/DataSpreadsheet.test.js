@@ -111,4 +111,46 @@ describe(componentName, () => {
     expect(firstColumnHeader).toHaveClass(`${blockClass}__th--active-header`);
     expect(firstRowHeader).toHaveClass(`${blockClass}__td-th--active-header`);
   });
+
+  it('should select an entire row, adding a selection area', () => {
+    const ref = React.createRef();
+    const { click } = userEvent;
+    const activeCellChangeFn = jest.fn();
+    render(
+      <DataSpreadsheet
+        {...defaultProps}
+        ref={ref}
+        onActiveCellChange={activeCellChangeFn}
+      />
+    );
+    const allCells = ref?.current.querySelectorAll(`.${blockClass}__td-th`);
+    const firstRowHeaderCell = Array.from(allCells)[0]; // the first item is the first row header cell
+    click(firstRowHeaderCell);
+    expect(activeCellChangeFn).toHaveBeenCalledTimes(1);
+    const selectionArea = ref?.current.querySelector(
+      `.${blockClass}__selection-area--element`
+    );
+    expect(selectionArea).toBeInTheDocument();
+  });
+
+  it('should select an entire column, adding a selection area', () => {
+    const ref = React.createRef();
+    const { click } = userEvent;
+    const activeCellChangeFn = jest.fn();
+    render(
+      <DataSpreadsheet
+        {...defaultProps}
+        ref={ref}
+        onActiveCellChange={activeCellChangeFn}
+      />
+    );
+    const allCells = ref?.current.querySelectorAll(`.${blockClass}__th`);
+    const firstColumnHeaderCell = Array.from(allCells)[1]; // the second item is the first column header cell
+    click(firstColumnHeaderCell);
+    expect(activeCellChangeFn).toHaveBeenCalledTimes(1);
+    const selectionArea = ref?.current.querySelector(
+      `.${blockClass}__selection-area--element`
+    );
+    expect(selectionArea).toBeInTheDocument();
+  });
 });

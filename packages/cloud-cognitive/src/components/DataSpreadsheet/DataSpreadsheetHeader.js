@@ -8,6 +8,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { px } from '@carbon/layout';
 import { pkg } from '../../settings';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
@@ -21,6 +22,7 @@ export const DataSpreadsheetHeader = forwardRef(
       columns,
       defaultColumn,
       headerGroups,
+      scrollBarSize,
       selectionAreas,
       setActiveCellCoordinates,
       setCurrentMatcher,
@@ -51,6 +53,13 @@ export const DataSpreadsheetHeader = forwardRef(
           <div
             key={`header_${index}`}
             {...headerGroup.getHeaderGroupProps()}
+            style={{
+              ...headerGroup.getHeaderGroupProps().style,
+              width: px(
+                parseInt(headerGroup.getHeaderGroupProps().style.width) +
+                  scrollBarSize
+              ),
+            }}
             className={`${blockClass}__tr`}
           >
             {/* SELECT ALL BUTTON */}
@@ -140,6 +149,11 @@ DataSpreadsheetHeader.propTypes = {
    * All of the spreadsheet row data
    */
   rows: PropTypes.arrayOf(PropTypes.object),
+
+  /**
+   * The scrollbar width
+   */
+  scrollBarSize: PropTypes.number,
 
   /**
    * All of the cell selection area items

@@ -678,6 +678,7 @@ export let DataSpreadsheet = React.forwardRef(
           defaultColumn={defaultColumn}
           headerGroups={headerGroups}
           rows={rows}
+          scrollBarSize={scrollBarSize}
           selectionAreas={selectionAreas}
           setActiveCellCoordinates={setActiveCellCoordinates}
           setSelectionAreas={setSelectionAreas}

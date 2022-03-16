@@ -121,7 +121,7 @@ ButtonMenu.propTypes = {
   /**
    * The three types the menu button supports: primary, tertiary and ghost.
    */
-  kind: Button.propTypes.kind,
+  kind: PropTypes.oneOf(['primary', 'tertiary', 'ghost']),
 
   /**
    * The button label for the menu trigger.

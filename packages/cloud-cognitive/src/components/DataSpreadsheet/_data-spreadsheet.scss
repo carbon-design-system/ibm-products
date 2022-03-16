@@ -35,10 +35,6 @@
       position: relative;
     }
 
-    button.#{$block-class}__td {
-      margin: 0;
-      background-color: transparent;
-    }
     .#{$block-class}__tr {
       :last-child {
         .#{$block-class}__td {
@@ -60,22 +56,25 @@
       border-right: 1px solid $text-03;
     }
     .#{$block-class}__th,
-    button.#{$block-class}__td-th {
+    .#{$block-class}__td-th.#{$block-class}__td {
       @include set-header-borders();
 
       background-color: $ui-01;
       cursor: pointer;
     }
-    .#{$block-class}__td-th {
+    .#{$block-class}__td-th.#{$block-class}__td {
       @include carbon--font-weight('semibold');
 
       display: flex;
       align-items: center;
       justify-content: flex-end;
     }
+
     .#{$block-class}__td {
       @include set-body-borders();
 
+      margin: 0;
+      background-color: $ui-background;
       cursor: cell;
       text-align: left;
     }
@@ -85,11 +84,25 @@
       color: $text-01;
       text-align: left;
     }
+    .#{$block-class}__cell-editor {
+      position: absolute;
+      z-index: 4;
+      display: none;
+      padding: 0 $spacing-03;
+      background-color: $ui-background;
+      resize: none;
+      &.#{$carbon-prefix}--text-area {
+        min-width: initial;
+        min-height: initial;
+      }
+    }
     .#{$block-class}__active-cell--highlight {
       position: absolute;
-      z-index: 2;
+      z-index: 3;
+      display: none;
       border: $spacing-01 solid $interactive-01;
       background-color: transparent;
+
       &:focus {
         border: $spacing-01 solid $interactive-01;
         outline: 0;
@@ -100,6 +113,7 @@
       z-index: 2;
       border: 1px solid $interactive-01;
       pointer-events: none;
+
       &::before {
         position: absolute;
         top: 0;
@@ -111,6 +125,10 @@
         content: '';
         opacity: 0.25;
       }
+    }
+    .#{$block-class}__th--active-header,
+    .#{$block-class}__td-th--active-header.#{$block-class}__td {
+      background-color: $ui-03;
     }
   }
 }

@@ -16,12 +16,8 @@ import { AddSelectSidebar } from './AddSelectSidebar';
 import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs';
 import { AddSelectList } from './AddSelectList';
 import { AddSelectColumn } from './AddSelectColumn';
+import { normalize, flatten } from './add-select-utils';
 const componentName = 'AddSelect';
-
-// Default values for props
-const defaults = {
-  items: Object.freeze([]),
-};
 
 export let AddSelect = forwardRef(
   (
@@ -29,10 +25,11 @@ export let AddSelect = forwardRef(
       // The component props, in alphabetical order (for consistency).
 
       className,
+      columnInputPlaceholder,
       description,
       influencerTitle,
       inputPlaceholder,
-      items = defaults.items,
+      items,
       itemsLabel,
       multi,
       noResultsDescription,
@@ -63,62 +60,56 @@ export let AddSelect = forwardRef(
     const [searchTerm, setSearchTerm] = useState('');
     const [normalizedItems, setNormalizedItems] = useState({});
     const [useNormalizedItems, setUsedNormalizedItems] = useState(false);
+    const [sidebarItems, setSidebarItems] = useState([]);
 
     useEffect(() => {
-      const normalize = (arr, parentId) => {
-        return arr.reduce((acc, cur) => {
-          const { children, ...item } = cur;
-          acc[cur.id] = { ...item };
-          if (parentId) {
-            acc[cur.id].parent = parentId;
-          }
-          if (children) {
-            acc[cur.id].children = children.map((child) => child.id);
-            const child = normalize(children, cur.id);
-            return { ...acc, ...child };
-          }
-          return acc;
-        }, {});
-      };
-      if (multi && items.find((item) => item.children)) {
+      const { entries } = items;
+      setSidebarItems(flatten(entries));
+      // multi select with nested data needs to be normalized
+      if (multi && entries.find((entry) => entry.children)) {
         const newItems = normalize(items);
         setNormalizedItems(newItems);
         setUsedNormalizedItems(true);
       }
     }, [items, multi]);
 
+    // used to generate columns of results for multi select with hierarchy
     const getPages = () => {
-      const results = [];
+      const pages = [];
       const itemIds = Object.keys(normalizedItems);
+      // top level items are just items with no parents so they're the top results
       const topLevelItems = [];
       itemIds.forEach((itemId) => {
         if (!normalizedItems[itemId].parent) {
           topLevelItems.push(normalizedItems[itemId]);
         }
       });
-      results.push(topLevelItems);
+      pages.push(topLevelItems);
       if (path.length) {
+        /**
+         * the path is set when you initially traverse the child entries
+         * path is an array of item id's
+         * when a path is present the normalized items are searched
+         * any item who's has a matching parent id is added to the results
+         * in the end you have an array of arrays for each column of the hierarchy
+         */
         const pathIds = path.map((p) => p.id);
         pathIds.forEach((pathId) => {
-          const childItems = [];
+          const entries = [];
           itemIds.forEach((itemId) => {
             if (normalizedItems[itemId].parent === pathId) {
-              childItems.push(normalizedItems[itemId]);
+              entries.push(normalizedItems[itemId]);
             }
           });
-          results.push(childItems);
+          pages.push(entries);
         });
       }
-      return results;
-    };
-
-    // handlers
-    const handleSearch = (e) => {
-      setSearchTerm(e.target.value);
+      return pages;
     };
 
     // item filtering
     const getFilteredItems = () => {
+      const { entries } = items;
       const hasPath = path.length > 0;
       /**
        * how to traverse the levels of items-
@@ -127,10 +118,11 @@ export let AddSelect = forwardRef(
        */
       const itemsToFilter = hasPath
         ? path.reduce(
-            (prev, cur) => prev.find((item) => item.id === cur.id).children,
-            items
+            (prev, cur) =>
+              prev.find((item) => item.id === cur.id)?.children?.entries,
+            entries
           )
-        : items;
+        : entries;
       const results = itemsToFilter.filter((item) => {
         if (!searchTerm) {
           return item;
@@ -145,6 +137,7 @@ export let AddSelect = forwardRef(
       return results;
     };
 
+    // only multi select with hierarchy requires the the normalized items
     const itemsToDisplay = useNormalizedItems ? getPages() : getFilteredItems();
 
     const commonListProps = {
@@ -157,6 +150,50 @@ export let AddSelect = forwardRef(
       singleSelection,
     };
 
+    // handlers
+    const handleSearch = (e) => {
+      setSearchTerm(e.target.value);
+    };
+
+    const submitHandler = () => {
+      onSubmit(multi ? multiSelection : singleSelection);
+    };
+
+    const commonTearsheetProps = {
+      open,
+      title,
+      description,
+      closeIconDescription: 'temp description',
+      actions: [
+        {
+          label: onCloseButtonText,
+          kind: 'secondary',
+          onClick: onClose,
+        },
+        {
+          label: onSubmitButtonText,
+          kind: 'primary',
+          onClick: submitHandler,
+          disabled: multi ? multiSelection.length === 0 : !singleSelection,
+        },
+      ],
+    };
+
+    const sidebarProps = {
+      influencerTitle,
+      items: sidebarItems,
+      multiSelection,
+      noSelectionDescription,
+      noSelectionTitle,
+      removeIconDescription,
+      setMultiSelection,
+    };
+
+    const classNames = cx(className, blockClass, {
+      [`${blockClass}__single`]: !multi,
+      [`${blockClass}__multi`]: multi,
+    });
+
     // main content
     const body = (
       <>
@@ -168,7 +205,7 @@ export let AddSelect = forwardRef(
             value={searchTerm}
             onChange={handleSearch}
           />
-          <div className={`${blockClass}__items-label-container`}>
+          <div className={`${blockClass}__tag-container`}>
             {path.length ? (
               <AddSelectBreadcrumbs
                 itemsLabel={itemsLabel}
@@ -176,14 +213,12 @@ export let AddSelect = forwardRef(
                 setPath={setPath}
               />
             ) : (
-              <p className={`${blockClass}__items-label`}>{itemsLabel}</p>
+              <p className={`${blockClass}__tag-container-label`}>
+                {itemsLabel}
+              </p>
             )}
             {!useNormalizedItems && (
-              <Tag
-                type="gray"
-                size="sm"
-                className={`${blockClass}__items-label-tag`}
-              >
+              <Tag type="gray" size="sm">
                 {itemsToDisplay.length}
               </Tag>
             )}
@@ -196,6 +231,8 @@ export let AddSelect = forwardRef(
                 {...commonListProps}
                 key={idx}
                 filteredItems={page}
+                header={idx === 0 ? itemsLabel : path[idx - 1]?.title}
+                columnInputPlaceholder={columnInputPlaceholder}
               />
             ))}
           </div>
@@ -219,41 +256,6 @@ export let AddSelect = forwardRef(
       </>
     );
 
-    const commonTearsheetProps = {
-      open,
-      title,
-      description,
-      closeIconDescription: 'temp description',
-      actions: [
-        {
-          label: onCloseButtonText,
-          kind: 'secondary',
-          onClick: onClose,
-        },
-        {
-          label: onSubmitButtonText,
-          kind: 'primary',
-          onClick: onSubmit,
-          disabled: multi ? multiSelection.length === 0 : !singleSelection,
-        },
-      ],
-    };
-
-    const sidebarProps = {
-      influencerTitle,
-      items,
-      multiSelection,
-      noSelectionDescription,
-      noSelectionTitle,
-      removeIconDescription,
-      setMultiSelection,
-    };
-
-    const classNames = cx(className, blockClass, {
-      [`${blockClass}__single`]: !multi,
-      [`${blockClass}__multi`]: multi,
-    });
-
     return (
       <div ref={ref} className={classNames} {...rest}>
         {multi ? (
@@ -274,16 +276,22 @@ export let AddSelect = forwardRef(
 
 AddSelect.propTypes = {
   className: PropTypes.string,
+  columnInputPlaceholder: PropTypes.string,
   description: PropTypes.string,
   influencerTitle: PropTypes.string,
   inputPlaceholder: PropTypes.string,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    })
-  ),
+  items: PropTypes.shape({
+    sortBy: PropTypes.array,
+    filterBy: PropTypes.array,
+    entries: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired,
+        children: PropTypes.object,
+      })
+    ),
+  }),
   itemsLabel: PropTypes.string,
   multi: PropTypes.bool,
   noResultsDescription: PropTypes.string,
@@ -299,6 +307,12 @@ AddSelect.propTypes = {
   removeIconDescription: PropTypes.string,
   textInputLabel: PropTypes.string,
   title: PropTypes.string,
+};
+
+AddSelect.defaultProps = {
+  items: {
+    entries: [],
+  },
 };
 
 AddSelect.displayName = componentName;

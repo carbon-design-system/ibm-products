@@ -28,26 +28,27 @@ export default {
 
 const defaultProps = {
   open: true,
-  items: [
-    {
-      id: '1',
-      value: '1',
-      title: 'item 1',
-      subtitle: 'item 1 subtitle',
-    },
-    {
-      id: '2',
-      value: '2',
-      title: 'item 2',
-      // subtitle: 'item 2 subtitle',
-    },
-    {
-      id: '3',
-      value: '3',
-      title: 'item 3',
-      subtitle: 'item 3 subtitle',
-    },
-  ],
+  items: {
+    entries: [
+      {
+        id: '1',
+        value: '1',
+        title: 'item 1',
+        subtitle: 'item 1 subtitle',
+      },
+      {
+        id: '2',
+        value: '2',
+        title: 'item 2',
+      },
+      {
+        id: '3',
+        value: '3',
+        title: 'item 3',
+        subtitle: 'item 3 subtitle',
+      },
+    ],
+  },
   title: 'Add business terms',
   description: 'Select business terms from the list',
   inputPlaceholder: 'Find business terms',
@@ -62,6 +63,8 @@ const defaultProps = {
   onSubmitButtonText: 'Add',
   removeIconDescription: 'Remove',
   textInputLabel: 'test input label',
+  columnInputPlaceholder: 'Find',
+  onSubmit: (selections) => console.log(selections),
 };
 
 const Template = (args) => {
@@ -77,63 +80,47 @@ export const Default = prepareStory(Template, {
 export const WithHierarchy = prepareStory(Template, {
   args: {
     ...defaultProps,
-    items: [
-      {
-        id: '1',
-        value: '1',
-        title: 'item 1',
-        subtitle: 'item 1 subtitle',
-        children: [
-          {
-            id: '1-1',
-            value: '1-1',
-            title: 'item 1-1',
-            children: [
+    items: {
+      sortBy: ['title'],
+      entries: [
+        {
+          id: '1',
+          value: 'folder 1',
+          title: 'folder 1',
+          children: {
+            sortBy: ['title', 'size'],
+            filterBy: 'fileType',
+            entries: [
               {
-                id: '1-1-1',
-                value: '1-1-1',
-                title: 'item 1-1-1',
+                id: '1-1',
+                value: 'file1.pdf',
+                title: 'file1.pdf',
+                fileType: 'pdf',
+                size: '100',
               },
               {
-                id: '1-1-2',
-                value: '1-1-2',
-                title: 'item 1-1-2',
+                id: '1-2',
+                value: 'index.js',
+                title: 'index.js',
+                fileType: 'js',
+                size: '200',
               },
-            ],
-          },
-          {
-            id: '1-2',
-            value: '1-2',
-            title: 'item 1-2',
-            children: [
               {
-                id: '1-2-1',
-                value: '1-2-1',
-                title: 'item 1-2-1',
+                id: '1-3',
+                value: 'sitemap.xml',
+                title: 'sitemap.xml',
+                fileType: 'xml',
+                size: '10',
               },
             ],
           },
-        ],
-      },
-      {
-        id: '2',
-        value: '2',
-        title: 'item 2',
-        subtitle: 'item 2 subtitle',
-      },
-      {
-        id: '3',
-        value: '3',
-        title: 'item 3',
-        subtitle: 'item 3 subtitle',
-        children: [
-          {
-            id: '3-1',
-            value: '3-1',
-            title: 'item 3-1',
-          },
-        ],
-      },
-    ],
+        },
+        {
+          id: '2',
+          value: 'folder 2',
+          title: 'folder 2',
+        },
+      ],
+    },
   },
 });

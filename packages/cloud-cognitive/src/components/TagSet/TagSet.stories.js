@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { types as tagTypes } from 'carbon-components-react/es/components/Tag/Tag';
 import { pkg } from '../../settings';
@@ -142,6 +142,10 @@ export default {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
     },
+    allTagsModalTarget_CustomDomNode: {
+      control: { type: 'boolean' },
+      description: 'Optional DOM node: Modal target defaults to document.body',
+    },
   },
   decorators: [
     (story) => (
@@ -157,10 +161,18 @@ export default {
 };
 
 const Template = (argsIn) => {
-  const { containerWidth, ...args } = { ...argsIn };
+  const { containerWidth, allTagsModalTarget_ContainerNode, ...args } = {
+    ...argsIn,
+  };
+  const ref = useRef();
   return (
-    <div style={{ width: containerWidth }}>
-      <TagSet {...args} />
+    <div style={{ width: containerWidth }} ref={ref}>
+      <TagSet
+        {...args}
+        allTagsModalTarget={
+          allTagsModalTarget_ContainerNode ? ref.current : undefined
+        }
+      />
     </div>
   );
 };

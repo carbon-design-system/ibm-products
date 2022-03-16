@@ -83,7 +83,7 @@ export let ButtonMenu = React.forwardRef(
           )}
         </div>
       )}
-      ref={ref}
+      innerRef={ref}
     >
       {children}
     </OverflowMenu>

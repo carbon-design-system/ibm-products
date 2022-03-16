@@ -13,7 +13,7 @@ import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { DataSpreadsheet } from '.';
-import { generateData } from './generateData';
+import { generateData } from './utils/generateData';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 const componentName = DataSpreadsheet.displayName;
@@ -102,5 +102,55 @@ describe(componentName, () => {
     );
     expect(activeCellElement).toHaveAttribute('data-active-row-index', '0'); // active row index is 0 because it's the first cell
     expect(activeCellElement).toHaveAttribute('data-active-column-index', '0'); // active column index is 0 because it's the first cell
+    const firstColumnHeader = ref?.current.querySelector(
+      `[data-row-index="header"][data-column-index="0"]`
+    );
+    const firstRowHeader = ref?.current.querySelector(
+      `[data-row-index="0"][data-column-index="header"]`
+    );
+    expect(firstColumnHeader).toHaveClass(`${blockClass}__th--active-header`);
+    expect(firstRowHeader).toHaveClass(`${blockClass}__td-th--active-header`);
+  });
+
+  it('should select an entire row, adding a selection area', () => {
+    const ref = React.createRef();
+    const { click } = userEvent;
+    const activeCellChangeFn = jest.fn();
+    render(
+      <DataSpreadsheet
+        {...defaultProps}
+        ref={ref}
+        onActiveCellChange={activeCellChangeFn}
+      />
+    );
+    const allCells = ref?.current.querySelectorAll(`.${blockClass}__td-th`);
+    const firstRowHeaderCell = Array.from(allCells)[0]; // the first item is the first row header cell
+    click(firstRowHeaderCell);
+    expect(activeCellChangeFn).toHaveBeenCalledTimes(1);
+    const selectionArea = ref?.current.querySelector(
+      `.${blockClass}__selection-area--element`
+    );
+    expect(selectionArea).toBeInTheDocument();
+  });
+
+  it('should select an entire column, adding a selection area', () => {
+    const ref = React.createRef();
+    const { click } = userEvent;
+    const activeCellChangeFn = jest.fn();
+    render(
+      <DataSpreadsheet
+        {...defaultProps}
+        ref={ref}
+        onActiveCellChange={activeCellChangeFn}
+      />
+    );
+    const allCells = ref?.current.querySelectorAll(`.${blockClass}__th`);
+    const firstColumnHeaderCell = Array.from(allCells)[1]; // the second item is the first column header cell
+    click(firstColumnHeaderCell);
+    expect(activeCellChangeFn).toHaveBeenCalledTimes(1);
+    const selectionArea = ref?.current.querySelector(
+      `.${blockClass}__selection-area--element`
+    );
+    expect(selectionArea).toBeInTheDocument();
   });
 });

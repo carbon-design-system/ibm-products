@@ -29,15 +29,8 @@ export let AddSelectSidebar = ({
     setMultiSelection(newSelections);
   };
 
-  // utility to flatten the list of items and their children into a single searchable array
-  const flattenItems = (arr) =>
-    arr.reduce((prev, cur) => {
-      const { children, ...item } = cur;
-      return prev.concat(item).concat(children ? flattenItems(children) : []);
-    }, []);
-  const flattenedItems = flattenItems(items);
   const sidebarItems = multiSelection.map((selectedId) =>
-    flattenedItems.find((item) => item.id === selectedId)
+    items.find((item) => item.id === selectedId)
   );
 
   const getTitle = ({ title, subtitle, id }) => (

@@ -9,24 +9,36 @@
 import React, {
   useMemo,
   useRef,
-  useEffect,
   useState,
   useCallback,
+  useEffect,
 } from 'react';
 import { useBlockLayout, useTable } from 'react-table';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { TextArea } from 'carbon-components-react';
+
+import { pkg } from '../../settings';
+import { DataSpreadsheetBody } from './DataSpreadsheetBody';
+import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg } from '../../settings';
 import { getScrollbarWidth } from '../../global/js/utils/getScrollbarWidth';
-import { DataSpreadsheetBody } from './DataSpreadsheetBody';
-import { getCellSize } from './getCellSize';
-import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
 import { useActiveElement } from '../../global/js/hooks';
-import { createActiveCellFn } from './createActiveCellFn';
+import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
+import { usePreviousValue } from '../../global/js/hooks';
+import uuidv4 from '../../global/js/utils/uuidv4';
+
+import { useResetSpreadsheetFocus } from './hooks/useResetSpreadsheetFocus';
+import { useSpreadsheetOutsideClick } from './hooks/useSpreadsheetOutsideClick';
+import { useMoveActiveCell } from './hooks/useMoveActiveCell';
+
+import { createActiveCellFn } from './utils/createActiveCellFn';
+import { getCellSize } from './utils/getCellSize';
+import { handleMultipleKeys } from './utils/handleMultipleKeys';
+import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 // cspell:words rowcount colcount
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -38,6 +50,7 @@ const defaults = {
   cellSize: 'standard',
   columns: Object.freeze([]),
   data: Object.freeze([]),
+  onDataUpdate: Object.freeze(() => {}),
 };
 
 /**
@@ -51,6 +64,7 @@ export let DataSpreadsheet = React.forwardRef(
       className,
       columns = defaults.columns,
       data = defaults.data,
+      onDataUpdate = defaults.onDataUpdate,
       id,
       onActiveCellChange,
 
@@ -59,13 +73,22 @@ export let DataSpreadsheet = React.forwardRef(
     },
     ref
   ) => {
+    const localRef = useRef();
+    const spreadsheetRef = ref || localRef;
     const focusedElement = useActiveElement();
     const [containerHasFocus, setContainerHasFocus] = useState(false);
     const [activeCellCoordinates, setActiveCellCoordinates] = useState(null);
     const [selectionAreas, setSelectionAreas] = useState([]);
     const [clickAndHoldActive, setClickAndHoldActive] = useState(false);
-    const [currentMatcher, setCurrentMatcher] = useState(null);
+    const [currentMatcher, setCurrentMatcher] = useState('');
+    const [isEditing, setIsEditing] = useState(false);
+    const [cellEditorValue, setCellEditorValue] = useState('');
+    const previousState = usePreviousValue({ activeCellCoordinates });
     const cellSizeValue = getCellSize(cellSize);
+    const cellEditorRef = useRef();
+    const currentMatcherRef = useRef();
+    const activeKeys = useRef([]);
+    const activeCellRef = useRef();
     const defaultColumn = useMemo(
       () => ({
         width: 150,
@@ -93,25 +116,23 @@ export let DataSpreadsheet = React.forwardRef(
       useBlockLayout
     );
 
-    // Reset everything when spreadsheet loses focus
-    useEffect(() => {
-      if (
-        !focusedElement.classList.contains(
-          `${blockClass}--interactive-cell-element`
-        )
-      ) {
-        setContainerHasFocus(false);
-        removeActiveCell();
-      }
-      if (
-        focusedElement.classList.contains(blockClass) ||
-        focusedElement.classList.contains(
-          `${blockClass}--interactive-cell-element`
-        )
-      ) {
-        setContainerHasFocus(true);
-      }
-    }, [focusedElement, removeActiveCell]);
+    // Update the spreadsheet data after editing a cell
+    const updateData = useCallback(
+      (rowIndex, columnId) => {
+        onDataUpdate((prev) =>
+          prev.map((row, index) => {
+            if (index === rowIndex) {
+              return {
+                ...prev[rowIndex],
+                [columnId]: cellEditorValue,
+              };
+            }
+            return row;
+          })
+        );
+      },
+      [cellEditorValue, onDataUpdate]
+    );
 
     // Removes the active cell element
     const removeActiveCell = useCallback(() => {
@@ -119,41 +140,65 @@ export let DataSpreadsheet = React.forwardRef(
         `.${blockClass}__active-cell--highlight`
       );
       if (activeCellHighlight) {
-        activeCellHighlight.remove();
+        activeCellHighlight.style.display = 'none';
       }
     }, [spreadsheetRef]);
 
-    // Removes the cell selection elements
-    const removeCellSelections = useCallback(() => {
-      const cellSelections = spreadsheetRef.current.querySelectorAll(
-        `.${blockClass}__selection-area--element`
-      );
-      Array.from(cellSelections).forEach((element) => element.remove());
-    }, [spreadsheetRef]);
+    const removeCellEditor = useCallback(() => {
+      setCellEditorValue('');
+      setIsEditing(false);
+      cellEditorRef.current.style.display = 'none';
+    }, []);
 
-    // Click outside useEffect
-    useEffect(() => {
-      const handleOutsideClick = (event) => {
-        if (
-          !spreadsheetRef.current ||
-          spreadsheetRef.current.contains(event.target) ||
-          event.target.classList.contains(
-            `${blockClass}__active-cell--highlight`
-          )
-        ) {
-          return;
+    // Removes the cell selection elements
+    const removeCellSelections = useCallback(
+      (matcher) => {
+        if (matcher && typeof matcher === 'string') {
+          const selectionToRemove = spreadsheetRef.current.querySelector(
+            `[data-matcher-id="${matcher}"]`
+          );
+          if (selectionToRemove) {
+            selectionToRemove.remove();
+          }
+        } else {
+          const cellSelections = spreadsheetRef.current.querySelectorAll(
+            `.${blockClass}__selection-area--element`
+          );
+          [...cellSelections].forEach((element) => element.remove());
         }
-        setSelectionAreas([]);
-        removeActiveCell();
-        removeCellSelections();
-        setContainerHasFocus(false);
-        setActiveCellCoordinates(null);
-      };
-      document.addEventListener('click', handleOutsideClick);
-      return () => {
-        document.removeEventListener('click', handleOutsideClick);
-      };
-    }, [spreadsheetRef, removeActiveCell, removeCellSelections]);
+      },
+      [spreadsheetRef]
+    );
+
+    // Remove cell editor if the active cell coordinates change and save with new cell data, this will
+    // happen if you click on another cell while isEditing is true
+    useEffect(() => {
+      const prevCoords = previousState?.activeCellCoordinates;
+      if (
+        (prevCoords?.row !== activeCellCoordinates?.row ||
+          prevCoords?.column !== activeCellCoordinates?.column) &&
+        isEditing
+      ) {
+        const cellProps = rows[prevCoords?.row].cells[prevCoords?.column];
+        removeCellEditor();
+        updateData(prevCoords?.row, cellProps.column.id);
+      }
+    }, [
+      activeCellCoordinates,
+      previousState?.activeCellCoordinates,
+      updateData,
+      rows,
+      isEditing,
+      removeCellEditor,
+    ]);
+
+    const handleActiveCellMouseEnter = useCallback(() => {
+      handleActiveCellMouseEnterCallback(selectionAreas, clickAndHoldActive);
+    }, [
+      clickAndHoldActive,
+      selectionAreas,
+      handleActiveCellMouseEnterCallback,
+    ]);
 
     const createActiveCell = useCallback(
       ({ placementElement, coords, addToHeader = false }) => {
@@ -164,18 +209,59 @@ export let DataSpreadsheet = React.forwardRef(
         const activeCellValue = activeCellFullData
           ? Object.values(activeCellFullData.row.values)[coords?.column]
           : null;
-        createActiveCellFn({
-          placementElement,
-          coords,
-          addToHeader,
-          contextRef: spreadsheetRef,
-          blockClass,
-          onActiveCellChange,
-          activeCellValue,
-        });
+        const prevCoords = previousState?.activeCellCoordinates;
+        // Only create an active cell if the activeCellCoordinates have changed
+        if (
+          prevCoords?.row !== coords?.row ||
+          prevCoords?.column !== coords?.column
+        ) {
+          createActiveCellFn({
+            placementElement,
+            coords,
+            addToHeader,
+            contextRef: spreadsheetRef,
+            blockClass,
+            onActiveCellChange,
+            activeCellValue,
+            activeCellRef,
+            cellEditorRef,
+            defaultColumn,
+          });
+        }
       },
-      [spreadsheetRef, rows, onActiveCellChange]
+      [
+        spreadsheetRef,
+        rows,
+        onActiveCellChange,
+        previousState?.activeCellCoordinates,
+        defaultColumn,
+      ]
     );
+
+    useResetSpreadsheetFocus({
+      activeKeys,
+      focusedElement,
+      removeActiveCell,
+      setContainerHasFocus,
+    });
+
+    useSpreadsheetOutsideClick({
+      spreadsheetRef,
+      setActiveCellCoordinates,
+      setSelectionAreas,
+      removeActiveCell,
+      removeCellSelections,
+      setContainerHasFocus,
+      activeKeys,
+      removeCellEditor,
+    });
+
+    useMoveActiveCell({
+      spreadsheetRef,
+      activeCellCoordinates,
+      containerHasFocus,
+      createActiveCell,
+    });
 
     const handleInitialArrowPress = useCallback(() => {
       // If activeCellCoordinates is null then we need to set an initial value
@@ -189,174 +275,383 @@ export let DataSpreadsheet = React.forwardRef(
       return;
     }, [activeCellCoordinates]);
 
-    const updateActiveCellCoordinates = ({ coords, updatedValue }) => {
-      setActiveCellCoordinates({
-        ...coords,
-        ...updatedValue,
-      });
-    };
+    const updateActiveCellCoordinates = useCallback(
+      ({ coords, updatedValue }) => {
+        const newActiveCell = {
+          ...coords,
+          ...updatedValue,
+        };
+        setActiveCellCoordinates(newActiveCell);
+        // Only run if the active cell is _not_ a header cell. This will add a point1 object
+        // to selectionAreas every time the active cell changes, allowing us to create cell
+        // selections using keyboard
+        if (
+          newActiveCell.row !== 'header' &&
+          newActiveCell.column !== 'header'
+        ) {
+          const tempMatcher = uuidv4();
+          setSelectionAreas([{ point1: newActiveCell, matcher: tempMatcher }]);
+          setCurrentMatcher(tempMatcher);
+        }
+      },
+      []
+    );
 
     const handleKeyPress = useCallback(
       (event) => {
-        const { keyCode } = event;
+        const { key } = event;
         // Command keys need to be returned as there is default browser behavior with these keys
-        if (keyCode === 91 || keyCode === 93) {
+        if (key === 'Meta' || key === 'Control') {
           return;
         }
         // Prevent arrow keys, home key, and end key from scrolling the page when the data spreadsheet container has focus
-        if ([35, 36, 37, 38, 39, 40].indexOf(keyCode) > -1) {
+        if (
+          [
+            'End',
+            'Home',
+            'ArrowLeft',
+            'ArrowUp',
+            'ArrowRight',
+            'ArrowDown',
+          ].indexOf(key) > -1 &&
+          !isEditing
+        ) {
           event.preventDefault();
         }
-        // Clear out all cell selection areas if user uses any arrow key
-        if ([37, 38, 39, 40].indexOf(keyCode) > -1) {
-          if (selectionAreas?.length) {
+        if (['Tab'].indexOf(key) > -1 && isEditing) {
+          return;
+        }
+        // Clear out all cell selection areas if user uses any arrow key, except if the shift key is being held
+        if (
+          ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'].indexOf(key) > -1
+        ) {
+          if (isEditing) {
+            return;
+          }
+          if (
+            selectionAreas?.length &&
+            key !== 'Shift' &&
+            !activeKeys.current.includes('Shift')
+          ) {
             setSelectionAreas([]);
-            removeCellSelections();
+            removeCellSelections({ spreadsheetRef });
           }
         }
-        switch (keyCode) {
-          // Tab
-          case 9: {
-            setSelectionAreas([]);
-            removeActiveCell();
-            setContainerHasFocus(false);
-            setActiveCellCoordinates(null);
-            break;
-          }
-          // Left
-          case 37: {
-            handleInitialArrowPress();
-            const coordinatesClone = { ...activeCellCoordinates };
-            if (coordinatesClone.column === 'header') {
-              return;
+        // Update list of activeKeys
+        if (!activeKeys.current?.includes(key)) {
+          const activeClone = [...activeKeys.current];
+          activeKeys.current = [...activeClone, key];
+        }
+        if (activeKeys.current?.length > 1) {
+          handleMultipleKeys({
+            activeKeys,
+            selectionAreas,
+            currentMatcher,
+            rows,
+            setSelectionAreas,
+            columns,
+          });
+        }
+        // Allow arrow key navigation if there are less than two activeKeys OR
+        // if one of the activeCellCoordinates is in a header position
+        if (
+          !activeKeys.current.includes('Shift') ||
+          activeCellCoordinates.row === 'header' ||
+          activeCellCoordinates.column === 'header'
+        ) {
+          switch (key) {
+            // Tab
+            case 'Tab': {
+              setSelectionAreas([]);
+              removeActiveCell();
+              removeCellEditor();
+              setContainerHasFocus(false);
+              setActiveCellCoordinates(null);
+              break;
             }
-            if (typeof coordinatesClone.column === 'number') {
-              if (coordinatesClone.column === 0) {
+            // Left
+            case 'ArrowLeft': {
+              handleInitialArrowPress();
+              const coordinatesClone = { ...activeCellCoordinates };
+              if (coordinatesClone.column === 'header') {
+                return;
+              }
+              if (typeof coordinatesClone.column === 'number') {
+                if (coordinatesClone.column === 0) {
+                  updateActiveCellCoordinates({
+                    coords: coordinatesClone,
+                    updatedValue: { column: 'header' },
+                  });
+                  return;
+                }
                 updateActiveCellCoordinates({
                   coords: coordinatesClone,
-                  updatedValue: { column: 'header' },
+                  updatedValue: { column: coordinatesClone.column - 1 },
                 });
+              }
+              break;
+            }
+            // Up
+            case 'ArrowUp': {
+              handleInitialArrowPress();
+              const coordinatesClone = { ...activeCellCoordinates };
+              if (coordinatesClone.row === 'header') {
                 return;
               }
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { column: coordinatesClone.column - 1 },
-              });
-            }
-            break;
-          }
-          // Up
-          case 38: {
-            handleInitialArrowPress();
-            const coordinatesClone = { ...activeCellCoordinates };
-            if (coordinatesClone.row === 'header') {
-              return;
-            }
-            if (typeof coordinatesClone.row === 'number') {
-              // set row back to header if we are at index 0
-              if (coordinatesClone.row === 0) {
+              if (typeof coordinatesClone.row === 'number') {
+                // set row back to header if we are at index 0
+                if (coordinatesClone.row === 0) {
+                  updateActiveCellCoordinates({
+                    coords: coordinatesClone,
+                    updatedValue: { row: 'header' },
+                  });
+                  return;
+                }
+                // if we are at any other index than 0, subtract 1 from current row index
                 updateActiveCellCoordinates({
                   coords: coordinatesClone,
-                  updatedValue: { row: 'header' },
+                  updatedValue: { row: coordinatesClone.row - 1 },
                 });
-                return;
               }
-              // if we are at any other index than 0, subtract 1 from current row index
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { row: coordinatesClone.row - 1 },
-              });
+              break;
             }
-            break;
-          }
-          // Right
-          case 39: {
-            handleInitialArrowPress();
-            const coordinatesClone = { ...activeCellCoordinates };
-            if (coordinatesClone.column === 'header') {
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { column: 0 },
-              });
-            }
-            if (typeof coordinatesClone.column === 'number') {
-              // Prevent active cell coordinates from updating if the active
-              // cell is in the last column, ie we can't go any further to the right
-              if (columns.length - 1 === coordinatesClone.column) {
-                return;
+            // Right
+            case 'ArrowRight': {
+              handleInitialArrowPress();
+              const coordinatesClone = { ...activeCellCoordinates };
+              if (coordinatesClone.column === 'header') {
+                updateActiveCellCoordinates({
+                  coords: coordinatesClone,
+                  updatedValue: { column: 0 },
+                });
               }
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { column: coordinatesClone.column + 1 },
-              });
-            }
-            break;
-          }
-          // Down
-          case 40: {
-            handleInitialArrowPress();
-            const coordinatesClone = { ...activeCellCoordinates };
-            if (coordinatesClone.row === 'header') {
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { row: 0 },
-              });
-            }
-            if (typeof coordinatesClone.row === 'number') {
-              // Prevent active cell coordinates from updating if the active
-              // cell is in the last row, ie we can't go any further down since
-              // we are in the last row
-              if (rows.length - 1 === coordinatesClone.row) {
-                return;
+              if (typeof coordinatesClone.column === 'number') {
+                // Prevent active cell coordinates from updating if the active
+                // cell is in the last column, ie we can't go any further to the right
+                if (columns.length - 1 === coordinatesClone.column) {
+                  return;
+                }
+                updateActiveCellCoordinates({
+                  coords: coordinatesClone,
+                  updatedValue: { column: coordinatesClone.column + 1 },
+                });
               }
-              updateActiveCellCoordinates({
-                coords: coordinatesClone,
-                updatedValue: { row: coordinatesClone.row + 1 },
-              });
+              break;
             }
-            break;
+            // Down
+            case 'ArrowDown': {
+              handleInitialArrowPress();
+              const coordinatesClone = { ...activeCellCoordinates };
+              if (coordinatesClone.row === 'header') {
+                updateActiveCellCoordinates({
+                  coords: coordinatesClone,
+                  updatedValue: { row: 0 },
+                });
+              }
+              if (typeof coordinatesClone.row === 'number') {
+                // Prevent active cell coordinates from updating if the active
+                // cell is in the last row, ie we can't go any further down since
+                // we are in the last row
+                if (rows.length - 1 === coordinatesClone.row) {
+                  return;
+                }
+                updateActiveCellCoordinates({
+                  coords: coordinatesClone,
+                  updatedValue: { row: coordinatesClone.row + 1 },
+                });
+              }
+              break;
+            }
           }
         }
       },
       [
+        updateActiveCellCoordinates,
         handleInitialArrowPress,
         activeCellCoordinates,
-        selectionAreas?.length,
-        removeCellSelections,
         removeActiveCell,
-        columns.length,
-        rows.length,
+        columns,
+        rows,
+        spreadsheetRef,
+        currentMatcher,
+        isEditing,
+        removeCellEditor,
+        removeCellSelections,
+        selectionAreas,
       ]
     );
 
-    // Adds active cell highlight to correct cell onKeyDown
-    useEffect(() => {
-      const activeCellPlacementElement = spreadsheetRef?.current.querySelector(
-        `[data-row-index="${activeCellCoordinates?.row}"][data-column-index="${activeCellCoordinates?.column}"]`
-      );
-      const shouldPlaceActiveCellInHeader =
-        activeCellCoordinates?.row === 'header' && true;
-      const selectAllElement = spreadsheetRef?.current.querySelector(
-        `[data-row-index="header"][data-column-index="header"]`
-      );
-      if (containerHasFocus) {
-        createActiveCell({
-          placementElement: activeCellCoordinates
-            ? activeCellPlacementElement
-            : selectAllElement,
-          coords: activeCellCoordinates,
-          addToHeader: shouldPlaceActiveCellInHeader,
-        });
-      }
-    }, [
-      activeCellCoordinates,
-      spreadsheetRef,
-      createActiveCell,
-      containerHasFocus,
-    ]);
+    const startEditMode = () => {
+      setIsEditing(true);
+      const activeCellFullData =
+        typeof activeCellCoordinates?.column === 'number' &&
+        typeof activeCellCoordinates?.row === 'number'
+          ? rows[activeCellCoordinates?.row].cells[
+              activeCellCoordinates?.column
+            ]
+          : null;
+      const activeCellValue = activeCellFullData
+        ? Object.values(activeCellFullData.row.values)[
+            activeCellCoordinates?.column
+          ]
+        : null;
+      setCellEditorValue(activeCellValue);
+    };
 
-    const localRef = useRef();
-    const spreadsheetRef = ref || localRef;
+    // Go into edit mode if 'Enter' key is pressed on activeCellRef
+    const handleActiveCellKeyDown = (event) => {
+      const { key } = event;
+      if (key === 'Enter') {
+        if (
+          activeCellCoordinates?.column !== 'header' &&
+          activeCellCoordinates?.row !== 'header'
+        ) {
+          startEditMode();
+        }
+        if (
+          activeCellCoordinates?.row === 'header' ||
+          activeCellCoordinates?.column === 'header'
+        ) {
+          const handleHeaderCellProps = {
+            activeCellCoordinates,
+            rows,
+            columns,
+            setActiveCellCoordinates,
+            setCurrentMatcher,
+            setSelectionAreas,
+            spreadsheetRef,
+            isKeyboard: true,
+          };
+          // Select an entire column
+          if (activeCellCoordinates?.row === 'header') {
+            handleHeaderCellSelection({
+              type: 'column',
+              ...handleHeaderCellProps,
+            });
+          }
+          // Select an entire row
+          if (activeCellCoordinates?.column === 'header') {
+            handleHeaderCellSelection({
+              type: 'row',
+              ...handleHeaderCellProps,
+            });
+          }
+        }
+      }
+    };
+
+    // Go into edit mode if double click is detected on activeCellRef
+    const handleActiveCellDoubleClick = () => {
+      startEditMode();
+    };
+
+    // Update the data
+    const handleEditSubmit = (event) => {
+      const { key } = event;
+      const submitEditChanges = () => {
+        const prevCoords = previousState?.activeCellCoordinates;
+        const cellProps = rows[prevCoords?.row].cells[prevCoords?.column];
+        removeCellEditor();
+        updateData(prevCoords?.row, cellProps.column.id);
+      };
+      if (key === 'Enter') {
+        submitEditChanges();
+        setActiveCellCoordinates((prev) => ({
+          ...prev,
+          row: prev.row === rows.length - 1 ? prev.row : prev.row + 1, // do not move to next cell below if we're already in the last row
+        }));
+      }
+      if (key === 'Tab') {
+        event.preventDefault();
+        submitEditChanges();
+        setActiveCellCoordinates((prev) => ({
+          ...prev,
+          column:
+            prev.column === columns.length - 1 ? prev.column : prev.column + 1, // do not move to next cell below if we're already in the last column
+        }));
+      }
+      return;
+    };
+
+    // Only update if there are cell selection areas
+    // Find point object that matches currentMatcher and remove the second point
+    // because hovering over the active cell while clicking and holding should
+    // remove the previously existing selection area
+    const handleActiveCellMouseEnterCallback = useCallback(
+      (areas, clickHold) => {
+        const freshMatcherValue = currentMatcherRef.current;
+        if (!freshMatcherValue) {
+          return;
+        }
+        if (areas && areas.length && clickHold && freshMatcherValue) {
+          setSelectionAreas((prev) => {
+            const selectionAreaClone = deepCloneObject(prev);
+            const indexOfItemToUpdate = selectionAreaClone.findIndex(
+              (item) => item.matcher === freshMatcherValue
+            );
+            if (indexOfItemToUpdate === -1) {
+              return prev;
+            }
+            if (
+              typeof selectionAreaClone[indexOfItemToUpdate].point2 ===
+                'object' &&
+              selectionAreaClone[indexOfItemToUpdate].areaCreated
+            ) {
+              selectionAreaClone[indexOfItemToUpdate].point2 = null;
+              selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
+              removeCellSelections({
+                matcher: freshMatcherValue,
+                spreadsheetRef,
+              });
+              return selectionAreaClone;
+            }
+            return prev;
+          });
+        }
+      },
+      [spreadsheetRef, removeCellSelections]
+    );
+
+    useEffect(() => {
+      if (isEditing) {
+        const cellProps =
+          rows[activeCellCoordinates?.row]?.cells[
+            activeCellCoordinates?.column
+          ];
+        const activeCellLeftPosition = activeCellRef?.current.style.left;
+        const activeCellTopPosition = activeCellRef?.current.style.top;
+        cellEditorRef.current.style.left = activeCellLeftPosition;
+        cellEditorRef.current.style.top = activeCellTopPosition;
+        cellEditorRef.current.style.display = 'block';
+        cellEditorRef.current.style.width = activeCellRef?.current.style.width;
+        cellEditorRef.current.style.height =
+          activeCellRef?.current.style.height;
+        cellEditorRef.current.style.paddingTop = `${
+          (parseInt(activeCellRef?.current.style.height) - 16) / 2
+        }px`; // calculate paddingTop based on cellHeight which could be variable depending on the cellSize prop
+        cellEditorRef.current.style.textAlign =
+          cellProps?.column?.placement === 'right' ? 'right' : 'left';
+        cellEditorRef.current?.focus();
+      }
+      if (!isEditing) {
+        cellEditorRef.current.style.display = 'none';
+        cellEditorRef.current.blur();
+        activeCellRef.current.focus();
+      }
+    }, [isEditing, activeCellCoordinates, rows]);
+
+    const handleKeyUp = (event) => {
+      const { key } = event;
+      // Remove key from active keys array on key up
+      if (activeKeys.current?.includes(key)) {
+        const activeKeysClone = [...activeKeys.current];
+        const filteredKeysClone = activeKeysClone.filter(
+          (item) => item !== key
+        );
+        activeKeys.current = filteredKeysClone;
+      }
+    };
+
     return (
       <div
         {...rest}
@@ -371,17 +666,28 @@ export let DataSpreadsheet = React.forwardRef(
         aria-rowcount={rows?.length || 0}
         aria-colcount={columns?.length || 0}
         onKeyDown={handleKeyPress}
+        onKeyUp={handleKeyUp}
         onFocus={() => setContainerHasFocus(true)}
       >
         {/* HEADER */}
         <DataSpreadsheetHeader
+          ref={spreadsheetRef}
+          activeCellCoordinates={activeCellCoordinates}
           cellSizeValue={cellSizeValue}
+          columns={columns}
           defaultColumn={defaultColumn}
           headerGroups={headerGroups}
+          rows={rows}
+          selectionAreas={selectionAreas}
+          setActiveCellCoordinates={setActiveCellCoordinates}
+          setSelectionAreas={setSelectionAreas}
+          setCurrentMatcher={setCurrentMatcher}
         />
 
         {/* BODY */}
         <DataSpreadsheetBody
+          activeCellCoordinates={activeCellCoordinates}
+          ref={spreadsheetRef}
           clickAndHoldActive={clickAndHoldActive}
           setClickAndHoldActive={setClickAndHoldActive}
           currentMatcher={currentMatcher}
@@ -399,6 +705,38 @@ export let DataSpreadsheet = React.forwardRef(
           scrollBarSize={scrollBarSize}
           totalColumnsWidth={totalColumnsWidth}
           id={id}
+          columns={columns}
+        />
+        <button
+          onKeyDown={handleActiveCellKeyDown}
+          onMouseEnter={handleActiveCellMouseEnter}
+          onDoubleClick={handleActiveCellDoubleClick}
+          ref={activeCellRef}
+          className={cx(
+            `${blockClass}--interactive-cell-element`,
+            `${blockClass}__active-cell--highlight`
+          )}
+          type="button"
+        />
+        <TextArea
+          value={cellEditorValue}
+          onKeyDown={handleEditSubmit}
+          onChange={(event) => setCellEditorValue(event.target.value)}
+          ref={cellEditorRef}
+          labelText=""
+          aria-labelledby={
+            activeCellCoordinates
+              ? `[data-row-index="${activeCellCoordinates?.row}"][data-column-index="${activeCellCoordinates?.column}"]`
+              : null
+          }
+          className={cx(
+            `${blockClass}__cell-editor`,
+            `${blockClass}--interactive-cell-element`,
+            `${blockClass}__cell-editor--${cellSize}`,
+            {
+              [`${blockClass}__cell-editor--active`]: isEditing,
+            }
+          )}
         />
       </div>
     );
@@ -451,6 +789,11 @@ DataSpreadsheet.propTypes = {
    * The event handler that is called when the active cell changes
    */
   onActiveCellChange: PropTypes.func,
+
+  /**
+   * The setter fn for the data prop
+   */
+  onDataUpdate: PropTypes.func,
 
   /* TODO: add types and DocGen for all props. */
 };

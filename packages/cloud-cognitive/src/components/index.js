@@ -31,7 +31,6 @@ export { ExportModal } from './ExportModal';
 export { ExpressiveCard } from './ExpressiveCard';
 export { HTTPError403, HTTPError404, HTTPErrorOther } from './HTTPErrors';
 export { ImportModal } from './ImportModal';
-export { LoadingBar } from './LoadingBar';
 export { ModifiedTabs } from './ModifiedTabs';
 export { MultiAddSelect } from './MultiAddSelect';
 export { NotificationsPanel } from './NotificationsPanel';

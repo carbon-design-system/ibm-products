@@ -53,7 +53,6 @@ const defaults = {
     // other public components not yet reviewed and released:
     MultiAddSelect: false,
     SingleAddSelect: false,
-    LoadingBar: false,
     ModifiedTabs: false,
     Toolbar: false,
     ToolbarButton: false,

@@ -47,6 +47,14 @@ export const DataSpreadsheetHeader = forwardRef(
       };
     };
 
+    const hasScrollBar = () => {
+      const scrollContainer = ref?.current?.querySelector(
+        `.${blockClass}__list--container`
+      );
+      return scrollContainer?.scrollHeight > scrollContainer?.clientHeight;
+    };
+    const scrollBarSizeValue = hasScrollBar() ? scrollBarSize : 0;
+
     return (
       <div className={cx(`${blockClass}__header--container`)}>
         {headerGroups.map((headerGroup, index) => (
@@ -57,7 +65,7 @@ export const DataSpreadsheetHeader = forwardRef(
               ...headerGroup.getHeaderGroupProps().style,
               width: px(
                 parseInt(headerGroup.getHeaderGroupProps().style.width) +
-                  scrollBarSize
+                  scrollBarSizeValue
               ),
             }}
             className={`${blockClass}__tr`}

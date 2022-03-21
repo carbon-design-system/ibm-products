@@ -25,6 +25,7 @@ const componentName = 'ButtonMenu';
 // Default values for props
 const defaults = {
   size: 'default',
+  kind: 'primary',
 };
 
 /**
@@ -42,6 +43,7 @@ export let ButtonMenu = React.forwardRef(
       children,
       className,
       iconDescription,
+      kind = defaults.kind,
       label,
       menuOptionsClass,
       renderIcon: Icon,
@@ -67,7 +69,7 @@ export let ButtonMenu = React.forwardRef(
           className={cx([
             `${blockClass}__trigger`,
             `${carbon.prefix}--btn`,
-            `${carbon.prefix}--btn--primary`,
+            `${carbon.prefix}--btn--${kind}`,
             `${carbon.prefix}--btn--${size}`,
           ])}
         >
@@ -115,6 +117,11 @@ ButtonMenu.propTypes = {
    * be read by screen readers
    */
   iconDescription: Button.propTypes.iconDescription,
+
+  /**
+   * The three types the menu button supports: primary, tertiary and ghost.
+   */
+  kind: PropTypes.oneOf(['primary', 'tertiary', 'ghost']),
 
   /**
    * The button label for the menu trigger.

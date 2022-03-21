@@ -93,6 +93,7 @@
     "timeframe",
     "treeview",
     "uuidv",
-    "webfonts"
+    "webfonts",
+    "Sytlelint"
   ]
 }

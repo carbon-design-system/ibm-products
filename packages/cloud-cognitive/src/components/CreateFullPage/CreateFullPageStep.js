@@ -69,7 +69,6 @@ export let CreateFullPageStep = forwardRef(
         stepNumber === stepsContext?.currentStep &&
         previousState?.currentStep !== stepsContext?.currentStep
       ) {
-        stepsContext?.setOnNext(onNext);
         stepsContext?.setOnMount(onMount);
       }
     }, [onMount, onNext, stepsContext, stepNumber, previousState?.currentStep]);
@@ -78,11 +77,12 @@ export let CreateFullPageStep = forwardRef(
       setShouldIncludeStep(includeStep);
     }, [includeStep, stepsContext, title]);
 
-    // Whenever we are the current step, supply our disableSubmit value to the
+    // Whenever we are the current step, supply our disableSubmit and onNext values to the
     // steps container context so that it can manage the 'Next' button appropriately.
     useEffect(() => {
       if (stepNumber === stepsContext?.currentStep) {
         stepsContext.setIsDisabled(disableSubmit);
+        stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
       }
     }, [stepsContext, stepNumber, disableSubmit, onNext]);
 

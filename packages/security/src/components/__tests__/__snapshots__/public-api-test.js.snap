@@ -5050,6 +5050,8 @@ Map {
     },
   },
   "Link" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "displayName": "Link",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -5093,6 +5095,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "ListBox" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -6450,6 +6453,7 @@ Map {
       "ariaLabel": "open and close list of options",
       "direction": "bottom",
       "flipped": false,
+      "focusTrap": true,
       "iconDescription": "open and close list of options",
       "light": false,
       "menuOffset": [Function],
@@ -6485,6 +6489,9 @@ Map {
         "type": "oneOf",
       },
       "flipped": Object {
+        "type": "bool",
+      },
+      "focusTrap": Object {
         "type": "bool",
       },
       "iconClass": Object {
@@ -14329,19 +14336,6 @@ Map {
       "role": Object {
         "type": "string",
       },
-      "size": Object {
-        "args": Array [
-          Array [
-            "default",
-            "field",
-            "small",
-            "sm",
-            "md",
-            "lg",
-          ],
-        ],
-        "type": "oneOf",
-      },
       "tabIndex": Object {
         "type": "number",
       },
@@ -15114,6 +15108,16 @@ Map {
       },
     },
   },
+  "SkeletonIcon" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
+  },
   "SkeletonPlaceholder" => Object {
     "propTypes": Object {
       "className": Object {
@@ -15354,13 +15358,63 @@ Map {
       },
     },
   },
-  "unstable_DefinitionTooltip" => Object {
+  "unstable_ColumnHang" => Object {
     "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "children": Object {
         "type": "node",
       },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "unstable_DefinitionTooltip" => Object {
+    "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultOpen": Object {
+        "type": "bool",
+      },
       "definition": Object {
         "isRequired": true,
+        "type": "node",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "tooltipText": [Function],
+      "triggerClassName": Object {
         "type": "string",
       },
     },

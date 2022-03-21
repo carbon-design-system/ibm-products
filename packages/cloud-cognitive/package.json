@@ -69,21 +69,21 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.17.7",
-    "@carbon/telemetry": "^0.0.0-alpha.6",
+    "@carbon/telemetry": "^0.1.0",
     "react-resize-detector": "^7.0.0",
     "react-table": "^7.7.0",
     "react-window": "^1.8.6"
   },
   "peerDependencies": {
     "@carbon/colors": "^10.37.0",
-    "@carbon/icons-react": "^10.47.0",
+    "@carbon/icons-react": "^10.48.0",
     "@carbon/import-once": "^10.7.0",
     "@carbon/layout": "^10.37.0",
     "@carbon/motion": "^10.29.0",
-    "@carbon/themes": "^10.52.0",
-    "@carbon/type": "^10.42.0",
-    "carbon-components": "^10.54.0",
-    "carbon-components-react": "^7.54.2",
+    "@carbon/themes": "^10.53.1",
+    "@carbon/type": "^10.43.1",
+    "carbon-components": "^10.55.1",
+    "carbon-components-react": "^7.55.1",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"

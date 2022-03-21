@@ -1455,6 +1455,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   align-items: flex-end;
   transition: visibility 0s linear, background-color 240ms cubic-bezier(0, 0, 0.3, 1), opacity 240ms cubic-bezier(0, 0, 0.3, 1);
 }
+@media (prefers-reduced-motion: reduce) {
+  .c4p--tearsheet.is-visible {
+    transition: none;
+  }
+}
 .c4p--tearsheet.c4p--tearsheet--stacked-1-of-2 {
   z-index: 8999;
   background-color: rgba(22, 22, 22, 0.33);
@@ -2807,6 +2812,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-more-button .bx--btn__icon,
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button .bx--btn__icon {
   transition: transform 240ms ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-more-button .bx--btn__icon,
+.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button .bx--btn__icon {
+    transition: none;
+  }
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-more-button.c4p--notifications-panel__notification-read-more-button .bx--btn__icon,
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button.c4p--notifications-panel__notification-read-more-button .bx--btn__icon {

@@ -8308,6 +8308,11 @@ a.bx--overflow-menu-options__btn::before {
   transition: all 240ms;
   transition-timing-function: cubic-bezier(0, 0, 0.3, 1);
 }
+@media (prefers-reduced-motion: reduce) {
+  .security--panel--v2__transition--appear--active, .security--panel--v2__transition--enter--active {
+    transition: none;
+  }
+}
 .security--panel--v2__transition--leave {
   opacity: 1;
   transform: translate3d(0, 0, 0);
@@ -8317,6 +8322,11 @@ a.bx--overflow-menu-options__btn::before {
   transform: translate3d(20rem, 0, 0);
   transition: all 240ms;
   transition-timing-function: cubic-bezier(0.4, 0.14, 1, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .security--panel--v2__transition--leave--active {
+    transition: none;
+  }
 }
 
 .security--decorator {
@@ -19381,6 +19391,11 @@ optgroup.bx--select-optgroup:disabled,
   transition: all 240ms;
   transition-timing-function: cubic-bezier(0, 0, 0.3, 1);
 }
+@media (prefers-reduced-motion: reduce) {
+  .security--summary-card__action-overlay__transition--appear--active, .security--summary-card__action-overlay__transition--enter--active {
+    transition: none;
+  }
+}
 .security--summary-card__action-overlay__transition--leave {
   opacity: 1;
   transform: translate3d(0, -100%, 0);
@@ -19390,6 +19405,11 @@ optgroup.bx--select-optgroup:disabled,
   transform: translate3d(0, 0, 0);
   transition: all 240ms;
   transition-timing-function: cubic-bezier(0.4, 0.14, 1, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .security--summary-card__action-overlay__transition--leave--active {
+    transition: none;
+  }
 }
 .security--summary-card__action-overlay--transparent {
   position: absolute;

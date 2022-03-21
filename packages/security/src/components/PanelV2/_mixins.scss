@@ -183,6 +183,10 @@
           $name: entrance,
           $mode: expressive
         );
+        @media (prefers-reduced-motion: reduce) {
+          // stylelint-disable-next-line carbon/motion-token-use
+          transition: none;
+        }
       }
     }
 
@@ -198,6 +202,10 @@
           $name: exit,
           $mode: expressive
         );
+        @media (prefers-reduced-motion: reduce) {
+          // stylelint-disable-next-line carbon/motion-token-use
+          transition: none;
+        }
       }
     }
   }

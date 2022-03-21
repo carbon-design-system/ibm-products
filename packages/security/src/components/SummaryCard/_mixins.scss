@@ -219,6 +219,10 @@
           transform: $summary-card__transform--active;
           transition: all $duration--moderate-02;
           transition-timing-function: motion(entrance, expressive);
+          @media (prefers-reduced-motion: reduce) {
+            // stylelint-disable-next-line carbon/motion-token-use
+            transition: none;
+          }
         }
       }
 
@@ -231,6 +235,10 @@
           transform: $summary-card__transform;
           transition: all $duration--moderate-02;
           transition-timing-function: motion(exit, expressive);
+          @media (prefers-reduced-motion: reduce) {
+            // stylelint-disable-next-line carbon/motion-token-use
+            transition: none;
+          }
         }
       }
     }

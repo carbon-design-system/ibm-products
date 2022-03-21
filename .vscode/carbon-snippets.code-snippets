@@ -16,35 +16,35 @@
 	// 	"description": "Log output to console"
 	// }
 // Carbon stylelint snippets
-"Sytlelint disable next line": {
+"Stylelint disable next line": {
 	"scope": "scss",
 	"prefix": [
 		"//",
 	],
 	"body": "// stylelint-disable-next-line"
 },
-"Sytlelint disable next line Carbon Layout": {
+"Stylelint disable next line Carbon Layout": {
 	"scope": "scss",
 	"prefix": [
 		"//la"
 	],
 	"body": "// stylelint-disable-next-line carbon/layout-token-use"
 },
-"Sytlelint disable next line Carbon Motion": {
+"Stylelint disable next line Carbon Motion": {
 	"scope": "scss",
 	"prefix": [
 		"//mo"
 	],
 	"body": "// stylelint-disable-next-line carbon/motion-token-use"
 },
-"Sytlelint disable next line Carbon Type": {
+"Stylelint disable next line Carbon Type": {
 	"scope": "scss",
 	"prefix": [
 		"//ty"
 	],
 	"body": "// stylelint-disable-next-line carbon/type-token-use"
 },
-"Sytlelint disable next line Carbon Theme": {
+"Stylelint disable next line Carbon Theme": {
 	"scope": "scss",
 	"prefix": [
 		"//th"

@@ -51,6 +51,22 @@
       display: block;
       color: $text-02;
     }
+
+    &-cell:hover .#{$block-class}__selections-dropdown {
+      visibility: visible;
+    }
+
+    &-dropdown {
+      visibility: hidden;
+    }
+
+    &-row-selected {
+      background: #e5e5e5;
+    }
+
+    &-row-selected .#{$block-class}__selections-dropdown {
+      visibility: visible;
+    }
   }
 
   // sidebar

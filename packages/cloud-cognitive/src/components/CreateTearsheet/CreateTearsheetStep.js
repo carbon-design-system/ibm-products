@@ -63,7 +63,7 @@ export let CreateTearsheetStep = forwardRef(
       title,
     });
 
-    // This useEffect reports back the onNext and onMount values so that they can be used
+    // This useEffect reports back the onMount value so that they can be used
     // in the appropriate custom hooks.
     useEffect(() => {
       if (
@@ -72,7 +72,7 @@ export let CreateTearsheetStep = forwardRef(
       ) {
         stepsContext?.setOnMount(onMount);
       }
-    }, [onMount, onNext, stepsContext, stepNumber, previousState?.currentStep]);
+    }, [onMount, stepsContext, stepNumber, previousState?.currentStep]);
 
     // Used to take the `includeStep` prop and use it as a local state value
     useEffect(() => {

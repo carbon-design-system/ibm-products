@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/component-usage-report@0.2.0...@carbon/component-usage-report@0.2.1) (2022-03-22)
+
+
+### Bug Fixes
+
+* add publishConfig to component usage package.json ([#1785](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1785)) ([7325a3b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7325a3bbfaaf2b52121f9965142e2856641818e5))
+
+
+
+
+
 # [0.2.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/component-usage-report@0.1.0...@carbon/component-usage-report@0.2.0) (2022-03-15)
 
 

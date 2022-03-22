@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.34.4...@carbon/ibm-cloud-cognitive-core@0.34.5) (2022-03-22)
+
+
+### Bug Fixes
+
+* **LoadingBar:** remove loadingbar component [#1738](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1738) ([#1791](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1791)) ([80c93a6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/80c93a6bd4787ed0e1eed518c08e0ea6466ad0d5))
+* update Carbon versions to latest ([#1793](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1793)) ([9943926](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9943926b5234ce0690417d16483da4caa84790cf)), closes [#1738](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1738) [#1791](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1791) [#1738](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1738) [#1790](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1790)
+
+
+
+
+
 ## [0.34.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.34.3...@carbon/ibm-cloud-cognitive-core@0.34.4) (2022-03-15)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

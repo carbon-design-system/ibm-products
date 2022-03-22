@@ -67,6 +67,25 @@
     &-row-selected .#{$block-class}__selections-dropdown {
       visibility: visible;
     }
+
+    &-checkbox {
+      display: flex;
+      align-items: center;
+    }
+
+    &-checkbox-label-text {
+      display: flex;
+      flex-direction: column;
+      padding-left: $spacing-05;
+    }
+
+    &-checkbox-wrapper.#{$carbon-prefix}--form-item {
+      flex: 0;
+    }
+
+    &-checkbox-wrapper .#{$carbon-prefix}--checkbox-label-text {
+      display: none;
+    }
   }
 
   // sidebar

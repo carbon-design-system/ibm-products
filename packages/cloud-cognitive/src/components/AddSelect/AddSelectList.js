@@ -23,7 +23,6 @@ const componentName = 'AddSelectList';
 
 export let AddSelectList = ({
   filteredItems,
-  inColumn,
   modifiers,
   multi,
   multiSelection,
@@ -80,6 +79,8 @@ export let AddSelectList = ({
 
   const isSelected = (id) => multiSelection.includes(id);
 
+  console.log('fart', multi);
+
   return (
     <div className={`${blockClass}-wrapper`}>
       <StructuredListWrapper selection className={`${blockClass}`}>
@@ -95,28 +96,27 @@ export let AddSelectList = ({
                 <div className={`${blockClass}-cell-wrapper`}>
                   {multi ? (
                     <>
-                      <Checkbox
-                        className={`${blockClass}-checkbox`}
-                        onChange={(checked) =>
-                          handleMultiSelection(item.id, checked)
-                        }
-                        labelText={
-                          !inColumn ? (
-                            <>
-                              <span className={`${blockClass}-cell-title`}>
-                                {item.title}
-                              </span>
-                              <span className={`${blockClass}-cell-subtitle`}>
-                                {item.subtitle}
-                              </span>
-                            </>
-                          ) : (
-                            item.title
-                          )
-                        }
-                        id={item.id}
-                        checked={isSelected(item.id)}
-                      />
+                      <div className={`${blockClass}-checkbox`}>
+                        <Checkbox
+                          onChange={(checked) =>
+                            handleMultiSelection(item.id, checked)
+                          }
+                          labelText={item.title}
+                          id={item.id}
+                          checked={isSelected(item.id)}
+                          wrapperClassName={`${blockClass}-checkbox-wrapper`}
+                        />
+                        <div className={`${blockClass}-checkbox-label-text`}>
+                          <span className={`${blockClass}-cell-title`}>
+                            {item.title}
+                          </span>
+                          {item.subtitle && (
+                            <span className={`${blockClass}-cell-subtitle`}>
+                              {item.subtitle}
+                            </span>
+                          )}
+                        </div>
+                      </div>
                       {modifiers?.options?.length && (
                         <Dropdown
                           id={`${item.id}-modifier`}
@@ -155,7 +155,6 @@ export let AddSelectList = ({
 
 AddSelectList.propTypes = {
   filteredItems: PropTypes.array,
-  inColumn: PropTypes.bool,
   modifiers: PropTypes.object,
   multi: PropTypes.bool,
   multiSelection: PropTypes.array,

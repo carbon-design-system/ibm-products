@@ -79,8 +79,6 @@ export let AddSelectList = ({
 
   const isSelected = (id) => multiSelection.includes(id);
 
-  console.log('fart', multi);
-
   return (
     <div className={`${blockClass}-wrapper`}>
       <StructuredListWrapper selection className={`${blockClass}`}>
@@ -104,7 +102,7 @@ export let AddSelectList = ({
                           labelText={item.title}
                           id={item.id}
                           checked={isSelected(item.id)}
-                          wrapperClassName={`${blockClass}-checkbox-wrapper`}
+                          className={`${blockClass}-checkbox-wrapper`}
                         />
                         <div className={`${blockClass}-checkbox-label-text`}>
                           <span className={`${blockClass}-cell-title`}>

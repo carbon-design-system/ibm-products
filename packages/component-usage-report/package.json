@@ -1,6 +1,6 @@
 {
   "name": "@carbon/component-usage-report",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Creates a @carbon/cloud-cognitive component usage report.",
   "bin": "bin/component-usage-report",
   "publishConfig": {

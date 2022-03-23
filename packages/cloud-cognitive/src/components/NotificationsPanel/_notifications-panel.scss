@@ -183,16 +183,20 @@
           min-width: 5.5rem;
           padding: 0;
 
-          .bx--btn__icon {
+          .#{$carbon-prefix}--btn__icon {
             transition: transform $duration--moderate-02 ease;
+            @media (prefers-reduced-motion: reduce) {
+              // stylelint-disable-next-line carbon/motion-token-use
+              transition: none;
+            }
           }
           &.#{$block-class}__notification-read-more-button {
-            .bx--btn__icon {
+            .#{$carbon-prefix}--btn__icon {
               transform: rotate(0deg);
             }
           }
           &.#{$block-class}__notification-read-less-button {
-            .bx--btn__icon {
+            .#{$carbon-prefix}--btn__icon {
               transform: rotate(180deg);
             }
           }

@@ -15,6 +15,42 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
+// Carbon stylelint snippets
+"Stylelint disable next line": {
+	"scope": "scss",
+	"prefix": [
+		"//",
+	],
+	"body": "// stylelint-disable-next-line"
+},
+"Stylelint disable next line Carbon Layout": {
+	"scope": "scss",
+	"prefix": [
+		"//la"
+	],
+	"body": "// stylelint-disable-next-line carbon/layout-token-use"
+},
+"Stylelint disable next line Carbon Motion": {
+	"scope": "scss",
+	"prefix": [
+		"//mo"
+	],
+	"body": "// stylelint-disable-next-line carbon/motion-token-use"
+},
+"Stylelint disable next line Carbon Type": {
+	"scope": "scss",
+	"prefix": [
+		"//ty"
+	],
+	"body": "// stylelint-disable-next-line carbon/type-token-use"
+},
+"Stylelint disable next line Carbon Theme": {
+	"scope": "scss",
+	"prefix": [
+		"//th"
+	],
+	"body": "// stylelint-disable-next-line carbon/theme-token-use"
+},
 // spacing tokens
 "spacing-01 (0.125rem 2px)": { "scope": "scss", "prefix": ["$sp", "$car"], "body": "$$spacing-01", "description": "Carbon spacing token" },
 "spacing-02 (0.25rem 4px)": { "scope": "scss", "prefix": ["$sp", "$car"], "body": "$$spacing-02", "description": "Carbon spacing token" },

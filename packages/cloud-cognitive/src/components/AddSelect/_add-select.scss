@@ -159,6 +159,10 @@
 
   // overrides
 
+  .#{$block-class}__tag-container .#{$carbon-prefix}--tag {
+    margin: 0;
+  }
+
   // the influencer sidebar needs to be even with the buttons
   .#{$block-class} .#{$tearsheet-class} .#{$tearsheet-class}__influencer {
     max-width: 29rem;

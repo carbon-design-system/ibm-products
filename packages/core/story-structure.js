@@ -38,7 +38,6 @@ const s = [
           { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
           { n: 'Options tile', s: ['c/OptionsTile'] },
           { n: 'Page header', s: ['c/PageHeader'] },
-          { n: 'Progressive loading bar', s: ['c/LoadingBar'] },
           { n: 'Side panel', s: ['c/SidePanel'] },
           { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
           { n: 'DataSpreadsheet', s: ['c/DataSpreadsheet'] },

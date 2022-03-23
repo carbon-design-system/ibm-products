@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.11.1...@carbon/ibm-products@1.11.2) (2022-03-22)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** change onNext initialization ([#1823](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1823)) ([15d5181](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/15d51813b4a415591b19d6dcf3b1d0e4e5bf58d6))
+
+
+
+
+
+## [1.11.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.11.0...@carbon/ibm-products@1.11.1) (2022-03-22)
+
+
+### Bug Fixes
+
+* adds column select functionality in add select ([#1788](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1788)) ([72c2d29](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/72c2d29ccb2c357982c2f7b1153aeca53e8f40f6))
+* **ButtonMenu:** doesn't support ghost kind ([#1779](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1779)) ([30b9d0f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/30b9d0f8cde01b20fe150eff1c0c0dd4209d49b2))
+* **LoadingBar:** remove loadingbar component [#1738](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1738) ([#1791](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1791)) ([80c93a6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/80c93a6bd4787ed0e1eed518c08e0ea6466ad0d5))
+* update Carbon versions to latest ([#1793](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1793)) ([9943926](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9943926b5234ce0690417d16483da4caa84790cf)), closes [#1738](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1738) [#1791](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1791) [#1738](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1738) [#1790](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1790)
+
+
+
+
+
 # [1.11.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.10.0...@carbon/ibm-products@1.11.0) (2022-03-15)
 
 

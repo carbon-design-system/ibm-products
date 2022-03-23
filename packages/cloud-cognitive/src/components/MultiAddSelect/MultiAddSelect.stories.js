@@ -124,3 +124,35 @@ export const WithHierarchy = prepareStory(Template, {
     },
   },
 });
+
+export const WithModifiers = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    items: {
+      modifiers: {
+        label: 'Role',
+        options: ['editor', 'viewer', 'admin'],
+        property: 'role',
+      },
+      entries: [
+        {
+          id: '1',
+          value: '1',
+          title: 'item 1',
+          subtitle: 'item 1 subtitle',
+        },
+        {
+          id: '2',
+          value: '2',
+          title: 'item 2',
+        },
+        {
+          id: '3',
+          value: '3',
+          title: 'item 3',
+          subtitle: 'item 3 subtitle',
+        },
+      ],
+    },
+  },
+});

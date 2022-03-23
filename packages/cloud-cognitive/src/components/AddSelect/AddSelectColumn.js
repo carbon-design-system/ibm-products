@@ -214,7 +214,6 @@ export let AddSelectColumn = ({
       </div>
       <AddSelectList
         {...props}
-        inColumn
         filteredItems={colItems}
         setMultiSelection={setMultiSelection}
         multiSelection={multiSelection}

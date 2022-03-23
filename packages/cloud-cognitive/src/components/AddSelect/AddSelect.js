@@ -242,6 +242,7 @@ export let AddSelect = forwardRef(
               <AddSelectList
                 {...commonListProps}
                 filteredItems={itemsToDisplay}
+                modifiers={items?.modifiers}
               />
             ) : (
               <div className={`${blockClass}__body`}>
@@ -281,6 +282,11 @@ AddSelect.propTypes = {
   influencerTitle: PropTypes.string,
   inputPlaceholder: PropTypes.string,
   items: PropTypes.shape({
+    modifiers: PropTypes.shape({
+      label: PropTypes.string,
+      options: PropTypes.array,
+      property: PropTypes.string,
+    }),
     sortBy: PropTypes.array,
     filterBy: PropTypes.array,
     entries: PropTypes.arrayOf(

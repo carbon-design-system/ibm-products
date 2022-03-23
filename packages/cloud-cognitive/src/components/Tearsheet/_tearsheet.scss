@@ -48,7 +48,6 @@
         background-color $motion-duration motion(entrance, expressive),
         opacity $motion-duration motion(entrance, expressive);
       @media (prefers-reduced-motion: reduce) {
-        // stylelint-disable-next-line carbon/motion-token-use
         transition: none;
       }
     }

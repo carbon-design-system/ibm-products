@@ -151,5 +151,8 @@
     "**/*.js": "yarn -s lint:es:files",
     "**/*.scss": "yarn -s lint:style:files",
     "**/*": "yarn -s spellcheck:files"
+  },
+  "dependencies": {
+    "stylelint-plugin-carbon-tokens": "0.12.0"
   }
 }

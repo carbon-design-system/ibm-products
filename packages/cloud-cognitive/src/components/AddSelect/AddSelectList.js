@@ -13,15 +13,17 @@ import {
   StructuredListWrapper,
   StructuredListBody,
   StructuredListCell,
+  Dropdown,
 } from 'carbon-components-react';
 import { ChevronRight16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { pkg } from '../../settings';
 const componentName = 'AddSelectList';
 
 export let AddSelectList = ({
   filteredItems,
-  inColumn,
+  modifiers,
   multi,
   multiSelection,
   path,
@@ -75,37 +77,56 @@ export let AddSelectList = ({
     }
   };
 
+  const isSelected = (id) => multiSelection.includes(id);
+
   return (
     <div className={`${blockClass}-wrapper`}>
       <StructuredListWrapper selection className={`${blockClass}`}>
         <StructuredListBody>
           {filteredItems.map((item) => (
-            <StructuredListRow key={item.id} className={`${blockClass}-row`}>
+            <StructuredListRow
+              key={item.id}
+              className={cx(`${blockClass}-row`, {
+                [`${blockClass}-row-selected`]: isSelected(item.id),
+              })}
+            >
               <StructuredListCell className={`${blockClass}-cell`}>
                 <div className={`${blockClass}-cell-wrapper`}>
                   {multi ? (
-                    <Checkbox
-                      className={`${blockClass}-checkbox`}
-                      onChange={(checked) =>
-                        handleMultiSelection(item.id, checked)
-                      }
-                      labelText={
-                        !inColumn ? (
-                          <>
-                            <span className={`${blockClass}-cell-title`}>
-                              {item.title}
-                            </span>
+                    <>
+                      <div className={`${blockClass}-checkbox`}>
+                        <Checkbox
+                          onChange={(checked) =>
+                            handleMultiSelection(item.id, checked)
+                          }
+                          labelText={item.title}
+                          id={item.id}
+                          checked={isSelected(item.id)}
+                          className={`${blockClass}-checkbox-wrapper`}
+                        />
+                        <div className={`${blockClass}-checkbox-label-text`}>
+                          <span className={`${blockClass}-cell-title`}>
+                            {item.title}
+                          </span>
+                          {item.subtitle && (
                             <span className={`${blockClass}-cell-subtitle`}>
                               {item.subtitle}
                             </span>
-                          </>
-                        ) : (
-                          item.title
-                        )
-                      }
-                      id={item.id}
-                      checked={multiSelection.includes(item.id)}
-                    />
+                          )}
+                        </div>
+                      </div>
+                      {modifiers?.options?.length && (
+                        <Dropdown
+                          id={`${item.id}-modifier`}
+                          type="inline"
+                          items={modifiers?.options}
+                          light
+                          label={modifiers?.label}
+                          disabled={!isSelected(item.id)}
+                          className={`${blockClass}-dropdown`}
+                        />
+                      )}
+                    </>
                   ) : (
                     <RadioButton
                       className={`${blockClass}-radio`}
@@ -132,7 +153,7 @@ export let AddSelectList = ({
 
 AddSelectList.propTypes = {
   filteredItems: PropTypes.array,
-  inColumn: PropTypes.bool,
+  modifiers: PropTypes.object,
   multi: PropTypes.bool,
   multiSelection: PropTypes.array,
   path: PropTypes.array,

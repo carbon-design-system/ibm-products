@@ -5,13 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { px } from '@carbon/layout';
 import { pkg } from '../../settings';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
+import { usePreviousValue } from '../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -19,6 +20,7 @@ export const DataSpreadsheetHeader = forwardRef(
   (
     {
       activeCellCoordinates,
+      cellSize,
       columns,
       defaultColumn,
       headerGroups,
@@ -31,6 +33,20 @@ export const DataSpreadsheetHeader = forwardRef(
     },
     ref
   ) => {
+    const [scrollBarSizeValue, setScrollBarSizeValue] = useState(0);
+    const previousState = usePreviousValue({ cellSize });
+    useEffect(() => {
+      if (previousState?.cellSize !== cellSize) {
+        const scrollContainer = ref?.current?.querySelector(
+          `.${blockClass}__list--container`
+        );
+        const hasScrollBar =
+          scrollContainer?.scrollHeight > scrollContainer?.clientHeight;
+        const scrollBarValue = hasScrollBar ? 0 : scrollBarSize;
+        setScrollBarSizeValue(scrollBarValue);
+      }
+    }, [cellSize, ref, scrollBarSize, previousState?.cellSize]);
+
     const handleColumnHeaderClick = (index) => {
       return () => {
         handleHeaderCellSelection({
@@ -46,14 +62,6 @@ export const DataSpreadsheetHeader = forwardRef(
         });
       };
     };
-
-    const hasScrollBar = () => {
-      const scrollContainer = ref?.current?.querySelector(
-        `.${blockClass}__list--container`
-      );
-      return scrollContainer?.scrollHeight > scrollContainer?.clientHeight;
-    };
-    const scrollBarSizeValue = hasScrollBar() ? scrollBarSize : 0;
 
     return (
       <div className={cx(`${blockClass}__header--container`)}>
@@ -133,6 +141,11 @@ DataSpreadsheetHeader.propTypes = {
     row: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     column: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   }),
+
+  /**
+   * Specifies the cell height
+   */
+  cellSize: PropTypes.oneOf(['compact', 'standard', 'medium', 'large']),
 
   /**
    * All of the spreadsheet columns

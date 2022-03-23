@@ -673,7 +673,7 @@ export let DataSpreadsheet = React.forwardRef(
         <DataSpreadsheetHeader
           ref={spreadsheetRef}
           activeCellCoordinates={activeCellCoordinates}
-          cellSizeValue={cellSizeValue}
+          cellSize={cellSize}
           columns={columns}
           defaultColumn={defaultColumn}
           headerGroups={headerGroups}

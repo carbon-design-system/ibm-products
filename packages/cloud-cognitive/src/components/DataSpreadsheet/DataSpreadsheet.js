@@ -627,7 +627,7 @@ export let DataSpreadsheet = React.forwardRef(
         cellEditorRef.current.style.height =
           activeCellRef?.current.style.height;
         cellEditorRef.current.style.paddingTop = `${
-          (parseInt(activeCellRef?.current.style.height) - 16) / 2
+          (parseInt(activeCellRef?.current.style.height) - 16) / 2 - 1
         }px`; // calculate paddingTop based on cellHeight which could be variable depending on the cellSize prop
         cellEditorRef.current.style.textAlign =
           cellProps?.column?.placement === 'right' ? 'right' : 'left';

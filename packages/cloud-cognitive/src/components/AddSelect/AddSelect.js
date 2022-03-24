@@ -262,7 +262,7 @@ export let AddSelect = forwardRef(
             )}
           </div>
         </div>
-        {useNormalizedItems && !searchTerm && (
+        {useNormalizedItems && !searchTerm ? (
           <div className={`${blockClass}__columns`}>
             {itemsToDisplay.map((page, idx) => (
               <AddSelectColumn
@@ -274,26 +274,7 @@ export let AddSelect = forwardRef(
               />
             ))}
           </div>
-        )}
-        {useNormalizedItems && searchTerm && (
-          <div>
-            {itemsToDisplay.length > 0 ? (
-              <AddSelectList
-                {...commonListProps}
-                filteredItems={itemsToDisplay}
-                modifiers={items?.modifiers}
-              />
-            ) : (
-              <div className={`${blockClass}__body`}>
-                <NoDataEmptyState
-                  subtitle={noResultsDescription}
-                  title={noResultsTitle}
-                />
-              </div>
-            )}
-          </div>
-        )}
-        {!useNormalizedItems && (
+        ) : (
           <div>
             {itemsToDisplay.length > 0 ? (
               <AddSelectList

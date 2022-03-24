@@ -45,7 +45,8 @@
 
     .#{$block-class}__th,
     .#{$block-class}__td {
-      // height: 2.25rem; // update to be controlled by cellSize prop later
+      @include carbon--type-style('body-short-01');
+
       padding: 0 $spacing-03;
       border: 0;
       margin: 0;
@@ -85,6 +86,8 @@
       text-align: left;
     }
     .#{$block-class}__cell-editor {
+      @include carbon--type-style('body-short-01');
+
       position: absolute;
       z-index: 4;
       display: none;
@@ -97,6 +100,8 @@
       }
     }
     .#{$block-class}__active-cell--highlight {
+      @include carbon--type-style('body-short-01');
+
       position: absolute;
       z-index: 3;
       display: none;

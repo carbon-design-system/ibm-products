@@ -2066,9 +2066,14 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   z-index: 2;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -150%);
+  transform: translate(-50%, -75%);
 }
 @media (min-width: 42rem) {
+  .c4p--http-errors .c4p--http-errors__content {
+    transform: translate(-50%, -100%);
+  }
+}
+@media (min-width: 66rem) {
   .c4p--http-errors .c4p--http-errors__content {
     transform: translate(-50%, -50%);
   }
@@ -2111,14 +2116,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--http-errors .c4p--http-errors__image {
   position: fixed;
-  top: 50%;
-  left: 50%;
+  bottom: 0;
+  left: 0;
   width: 100%;
-  transform: translate(-50%, -40%);
 }
-@media (min-width: 42rem) {
+@media (max-width: 41.98rem) {
   .c4p--http-errors .c4p--http-errors__image {
-    transform: translate(-50%, -50%);
+    left: 10%;
+    transform: scale(1.5);
+  }
+}
+@media (min-width: 82rem) {
+  .c4p--http-errors .c4p--http-errors__image {
+    width: 75%;
   }
 }
 

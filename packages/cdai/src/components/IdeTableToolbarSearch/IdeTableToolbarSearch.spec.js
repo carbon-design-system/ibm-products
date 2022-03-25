@@ -8,6 +8,8 @@
 import React from 'react';
 import { IdeTableToolbarSearch } from '../IdeTableToolbarSearch';
 import { shallow } from 'enzyme';
+import { settings } from 'carbon-components';
+const { prefix } = settings;
 
 describe('IdeTableToolbarSearch', () => {
   describe('Renders as expected by default', () => {
@@ -23,7 +25,9 @@ describe('IdeTableToolbarSearch', () => {
     it('Should have the correct classes', () => {
       expect(wrapper.dive().hasClass('ide-table-toolbar-search')).toBe(true);
       expect(
-        wrapper.dive().hasClass('bx--toolbar-search-container-expandable')
+        wrapper
+          .dive()
+          .hasClass(`${prefix}--toolbar-search-container-expandable`)
       ).toBe(true);
     });
   });
@@ -37,7 +41,9 @@ describe('IdeTableToolbarSearch', () => {
     it('Should have the correct classes', () => {
       expect(wrapper.dive().hasClass('ide-table-toolbar-search')).toBe(true);
       expect(
-        wrapper.dive().hasClass('bx--toolbar-search-container-expandable')
+        wrapper
+          .dive()
+          .hasClass(`${prefix}--toolbar-search-container-expandable`)
       ).toBe(true);
     });
 

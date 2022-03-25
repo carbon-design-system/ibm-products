@@ -21,6 +21,10 @@
     "react-scripts": "latest",
     "sass": "latest"
   },
+  "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
+  "resolutions": {
+    "**/request/minimist": "^1.2.6"
+  },
   "scripts": {
     "start": "react-scripts start"
   },

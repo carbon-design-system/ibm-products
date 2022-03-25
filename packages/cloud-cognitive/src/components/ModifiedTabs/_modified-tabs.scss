@@ -47,7 +47,6 @@
   transition: background-color $duration--fast-02 motion(standard, productive);
   // stylelint-disable-next-line max-nesting-depth
   @media (prefers-reduced-motion: reduce) {
-    // stylelint-disable-next-line carbon/motion-token-use
     transition: none;
   }
 }

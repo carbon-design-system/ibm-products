@@ -11,7 +11,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expectMultipleError } from '../../global/js/utils/test-helper';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -39,9 +39,9 @@ const actionDG = { label: labelDG, kind: 'danger--ghost', dangerDescription };
 const getByRoleAndLabel = (role, label) =>
   screen.getByRole(role, { name: label });
 
-const primaryButton = 'bx--btn--primary';
-const secondaryButton = 'bx--btn--secondary';
-const ghostButton = 'bx--btn--ghost';
+const primaryButton = `${carbon.prefix}--btn--primary`;
+const secondaryButton = `${carbon.prefix}--btn--secondary`;
+const ghostButton = `${carbon.prefix}--btn--ghost`;
 
 describe(componentName, () => {
   it('renders a component ActionSet', () => {

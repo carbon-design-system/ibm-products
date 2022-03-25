@@ -16,6 +16,7 @@ import {
 import { ProductiveCard } from '.';
 import mdx from './ProductiveCard.mdx';
 import { action } from '@storybook/addon-actions';
+import { carbon } from '../../settings';
 
 export default {
   title: getStoryTitle(ProductiveCard.displayName),
@@ -70,7 +71,7 @@ const getColClasses = (col) => cx(`bx--col-lg-${col}`);
 const Template = (opts) => {
   const { children, columnSize, ...args } = opts;
   return (
-    <div className="bx--row">
+    <div className={`${carbon.prefix}--row`}>
       <div className={getColClasses(columnSize)}>
         <ProductiveCard {...args}>{children}</ProductiveCard>
       </div>

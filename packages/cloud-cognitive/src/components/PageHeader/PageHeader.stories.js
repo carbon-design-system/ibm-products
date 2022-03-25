@@ -245,7 +245,7 @@ const pageActions = {
     content: (
       <Button
         type="button"
-        className="bx--button"
+        className={`${carbon.prefix}--button`}
         size="field"
         style={{ maxWidth: '100%' }}
       >
@@ -261,7 +261,7 @@ const pageActions = {
     content: (
       <Button
         type="button"
-        className="bx--button"
+        className={`${carbon.prefix}--button`}
         size="field"
         style={{ maxWidth: '100%' }}
         title="Custom component with long content"

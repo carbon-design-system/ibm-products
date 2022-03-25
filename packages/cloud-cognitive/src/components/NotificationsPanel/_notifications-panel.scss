@@ -75,7 +75,8 @@
         align-items: center;
         justify-content: space-between;
       }
-      .#{$block-class}__do-not-disturb-toggle .bx--toggle__switch {
+      .#{$block-class}__do-not-disturb-toggle
+        .#{$carbon-prefix}--toggle__switch {
         margin-top: $spacing-02;
       }
       .#{$block-class}__dismiss-button {
@@ -279,7 +280,7 @@
         padding: 0;
         color: $text-01;
       }
-      .#{$block-class}__settings-button .bx--btn__icon {
+      .#{$block-class}__settings-button .#{$carbon-prefix}--btn__icon {
         margin: 0;
       }
     }

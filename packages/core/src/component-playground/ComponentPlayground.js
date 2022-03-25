@@ -17,7 +17,7 @@ import {
   TearsheetNarrow,
   TearsheetWide,
 } from './components';
-import { carbon } from '../../../../../cloud-cognitive/src/settings';
+import { carbon } from '../../../cloud-cognitive/src/settings';
 //import { CardData } from './data';
 
 const App = () => {

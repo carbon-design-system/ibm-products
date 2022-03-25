@@ -9,7 +9,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -94,17 +94,19 @@ describe(componentName, () => {
     renderComponent({ primaryKind: 'danger', secondaryKind: 'tertiary' });
     expect(
       screen.getByRole('button', { name: `danger ${primaryButtonLabel}` })
-    ).toHaveClass('bx--btn--danger');
+    ).toHaveClass(`${carbon.prefix}--btn--danger`);
     expect(
       screen.getByRole('button', { name: secondaryButtonLabel })
-    ).toHaveClass('bx--btn--tertiary');
+    ).toHaveClass(`${carbon.prefix}--btn--tertiary`);
   });
 
   it('renders the size property', () => {
     renderComponent({ size: 'small' });
     screen
       .getAllByRole('button')
-      .forEach((button) => expect(button).toHaveClass('bx--btn--sm'));
+      .forEach((button) =>
+        expect(button).toHaveClass(`${carbon.prefix}--btn--sm`)
+      );
   });
 
   it('adds additional properties to the containing node', () => {

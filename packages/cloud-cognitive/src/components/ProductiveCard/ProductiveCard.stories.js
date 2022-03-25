@@ -35,7 +35,11 @@ export default {
       },
     },
   },
-  decorators: [(Story) => <div className="bx--grid card-story">{Story()}</div>],
+  decorators: [
+    (Story) => (
+      <div className={`${carbon.prefix}--grid card-story`}>{Story()}</div>
+    ),
+  ],
 };
 
 const defaultProps = {
@@ -66,7 +70,7 @@ const defaultProps = {
   ],
 };
 
-const getColClasses = (col) => cx(`bx--col-lg-${col}`);
+const getColClasses = (col) => cx(`${carbon.prefix}--col-lg-${col}`);
 
 const Template = (opts) => {
   const { children, columnSize, ...args } = opts;

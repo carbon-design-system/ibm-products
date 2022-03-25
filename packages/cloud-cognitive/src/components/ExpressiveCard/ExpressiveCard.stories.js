@@ -42,7 +42,11 @@ export default {
       options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
     },
   },
-  decorators: [(Story) => <div className="bx--grid card-story">{Story()}</div>],
+  decorators: [
+    (Story) => (
+      <div className={`${carbon.prefix}--grid card-story`}>{Story()}</div>
+    ),
+  ],
 };
 
 const defaultProps = {
@@ -59,7 +63,7 @@ const defaultProps = {
   primaryButtonText: 'Primary',
 };
 
-const getColClasses = (col) => cx(`bx--col-lg-${col}`);
+const getColClasses = (col) => cx(`${carbon.prefix}--col-lg-${col}`);
 
 const Template = (opts) => {
   const { children, columnSize, ...args } = opts;

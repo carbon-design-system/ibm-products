@@ -17,6 +17,7 @@ import {
   TearsheetNarrow,
   TearsheetWide,
 } from './components';
+import { carbon } from '../../../../../cloud-cognitive/src/settings';
 //import { CardData } from './data';
 
 const App = () => {
@@ -116,9 +117,9 @@ const App = () => {
         setIsOpen={setWideTearsheetOpen}
       />
 
-      <div className="bx--grid card-story">
+      <div className={`${carbon.prefix}--grid card-story`}>
         <Cascade>
-          <div className="bx--row">
+          <div className={`${carbon.prefix}--row`}>
             {/* {
           getCards()
         }  */}
@@ -127,7 +128,7 @@ const App = () => {
               return (
                 <div
                   key={card.topic.name}
-                  className="bx--col-lg-4"
+                  className={`${carbon.prefix}--col-lg-4`}
                   style={{
                     // stylelint-disable-next-line carbon/layout-token-use
                     marginTop: '36px',

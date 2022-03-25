@@ -25,6 +25,9 @@ export default {
     onActiveCellChange: {
       action: 'active cell change',
     },
+    onSelectionAreaChange: {
+      action: 'selection area change',
+    },
   },
   parameters: {
     styles,

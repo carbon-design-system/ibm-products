@@ -29,6 +29,7 @@ export const DataSpreadsheetHeader = forwardRef(
       setActiveCellCoordinates,
       setCurrentMatcher,
       setSelectionAreas,
+      setSelectionAreaData,
       rows,
     },
     ref
@@ -59,6 +60,7 @@ export const DataSpreadsheetHeader = forwardRef(
           setSelectionAreas,
           spreadsheetRef: ref,
           index,
+          setSelectionAreaData,
         });
       };
     };
@@ -190,6 +192,11 @@ DataSpreadsheetHeader.propTypes = {
    * Setter fn for currentMatcher value
    */
   setCurrentMatcher: PropTypes.func,
+
+  /**
+   * Setter fn for selectionAreaData state value
+   */
+  setSelectionAreaData: PropTypes.func,
 
   /**
    * Setter fn for selectionAreas value

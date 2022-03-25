@@ -184,7 +184,6 @@
           $mode: expressive
         );
         @media (prefers-reduced-motion: reduce) {
-          // stylelint-disable-next-line carbon/motion-token-use
           transition: none;
         }
       }
@@ -203,7 +202,6 @@
           $mode: expressive
         );
         @media (prefers-reduced-motion: reduce) {
-          // stylelint-disable-next-line carbon/motion-token-use
           transition: none;
         }
       }

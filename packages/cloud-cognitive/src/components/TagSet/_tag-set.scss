@@ -114,6 +114,7 @@ $block-class-modal: #{$block-class}-modal;
     &.#{$block-class-overflow}__tooltip {
       // removes the min width in Carbon
       min-width: initial;
+      text-align: left;
     }
 
     .#{$block-class-overflow}__show-all-tags-link {

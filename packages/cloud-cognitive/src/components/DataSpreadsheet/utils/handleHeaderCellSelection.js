@@ -19,7 +19,9 @@ export const handleHeaderCellSelection = ({
   spreadsheetRef,
   index,
   isKeyboard,
+  setSelectionAreaData,
 }) => {
+  setSelectionAreaData([]);
   const rowValue = isKeyboard ? activeCellCoordinates?.row : index;
   const columnValue = isKeyboard ? activeCellCoordinates?.column : index;
   const point1 = {

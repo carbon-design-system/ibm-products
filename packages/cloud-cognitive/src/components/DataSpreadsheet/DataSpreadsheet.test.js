@@ -137,11 +137,13 @@ describe(componentName, () => {
     const ref = React.createRef();
     const { click } = userEvent;
     const activeCellChangeFn = jest.fn();
+    const onSelectionAreaChangeFn = jest.fn();
     render(
       <DataSpreadsheet
         {...defaultProps}
         ref={ref}
         onActiveCellChange={activeCellChangeFn}
+        onSelectionAreaChange={onSelectionAreaChangeFn}
       />
     );
     const allCells = ref?.current.querySelectorAll(`.${blockClass}__th`);
@@ -152,5 +154,6 @@ describe(componentName, () => {
       `.${blockClass}__selection-area--element`
     );
     expect(selectionArea).toBeInTheDocument();
+    expect(onSelectionAreaChangeFn).toHaveBeenCalledTimes(1);
   });
 });

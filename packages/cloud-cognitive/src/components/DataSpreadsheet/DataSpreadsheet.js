@@ -51,6 +51,8 @@ const defaults = {
   columns: Object.freeze([]),
   data: Object.freeze([]),
   onDataUpdate: Object.freeze(() => {}),
+  onActiveCellChange: Object.freeze(() => {}),
+  onSelectionAreaChange: Object.freeze(() => {}),
 };
 
 /**
@@ -66,7 +68,8 @@ export let DataSpreadsheet = React.forwardRef(
       data = defaults.data,
       onDataUpdate = defaults.onDataUpdate,
       id,
-      onActiveCellChange,
+      onActiveCellChange = defaults.onActiveCellChange,
+      onSelectionAreaChange = defaults.onSelectionAreaChange,
 
       // Collect any other property values passed in.
       ...rest
@@ -79,6 +82,7 @@ export let DataSpreadsheet = React.forwardRef(
     const [containerHasFocus, setContainerHasFocus] = useState(false);
     const [activeCellCoordinates, setActiveCellCoordinates] = useState(null);
     const [selectionAreas, setSelectionAreas] = useState([]);
+    const [selectionAreaData, setSelectionAreaData] = useState([]);
     const [clickAndHoldActive, setClickAndHoldActive] = useState(false);
     const [currentMatcher, setCurrentMatcher] = useState('');
     const [isEditing, setIsEditing] = useState(false);
@@ -334,6 +338,7 @@ export let DataSpreadsheet = React.forwardRef(
             !activeKeys.current.includes('Shift')
           ) {
             setSelectionAreas([]);
+            setSelectionAreaData([]);
             removeCellSelections({ spreadsheetRef });
           }
         }
@@ -627,7 +632,7 @@ export let DataSpreadsheet = React.forwardRef(
         cellEditorRef.current.style.height =
           activeCellRef?.current.style.height;
         cellEditorRef.current.style.paddingTop = `${
-          (parseInt(activeCellRef?.current.style.height) - 16) / 2
+          (parseInt(activeCellRef?.current.style.height) - 16) / 2 - 1
         }px`; // calculate paddingTop based on cellHeight which could be variable depending on the cellSize prop
         cellEditorRef.current.style.textAlign =
           cellProps?.column?.placement === 'right' ? 'right' : 'left';
@@ -673,15 +678,17 @@ export let DataSpreadsheet = React.forwardRef(
         <DataSpreadsheetHeader
           ref={spreadsheetRef}
           activeCellCoordinates={activeCellCoordinates}
-          cellSizeValue={cellSizeValue}
+          cellSize={cellSize}
           columns={columns}
           defaultColumn={defaultColumn}
           headerGroups={headerGroups}
           rows={rows}
+          scrollBarSize={scrollBarSize}
           selectionAreas={selectionAreas}
           setActiveCellCoordinates={setActiveCellCoordinates}
           setSelectionAreas={setSelectionAreas}
           setCurrentMatcher={setCurrentMatcher}
+          setSelectionAreaData={setSelectionAreaData}
         />
 
         {/* BODY */}
@@ -699,8 +706,11 @@ export let DataSpreadsheet = React.forwardRef(
           defaultColumn={defaultColumn}
           getTableBodyProps={getTableBodyProps}
           onActiveCellChange={onActiveCellChange}
+          onSelectionAreaChange={onSelectionAreaChange}
           prepareRow={prepareRow}
           rows={rows}
+          selectionAreaData={selectionAreaData}
+          setSelectionAreaData={setSelectionAreaData}
           setActiveCellCoordinates={setActiveCellCoordinates}
           scrollBarSize={scrollBarSize}
           totalColumnsWidth={totalColumnsWidth}
@@ -794,6 +804,11 @@ DataSpreadsheet.propTypes = {
    * The setter fn for the data prop
    */
   onDataUpdate: PropTypes.func,
+
+  /**
+   * The event handler that is called when the selection area values change
+   */
+  onSelectionAreaChange: PropTypes.func,
 
   /* TODO: add types and DocGen for all props. */
 };

@@ -111,20 +111,6 @@ export const DataSpreadsheetBody = forwardRef(
             });
           }
           if (!area.areaCreated && area.point1 && area.point2 && area.matcher) {
-            // Do not create a cell selection area if point1 and point2 have the same values
-            // Cell selections must have two distinctly different points for an area to be created
-            if (
-              area.point1.row === area.point2.row &&
-              area.point1.column === area.point2.column
-            ) {
-              const selectionAreasClone = deepCloneObject(selectionAreas);
-              const indexOfCurrentArea = selectionAreasClone.findIndex(
-                (item) => item.matcher === area.matcher
-              );
-              selectionAreasClone[indexOfCurrentArea].areaCreated = false;
-              selectionAreasClone[indexOfCurrentArea].point2 = null;
-              return setSelectionAreas(selectionAreasClone);
-            }
             createCellSelectionArea({
               area,
               blockClass,

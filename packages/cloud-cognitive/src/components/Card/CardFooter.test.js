@@ -8,6 +8,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { CardFooter } from '.';
+import { carbon } from '../../settings';
 
 const { name } = CardFooter;
 
@@ -51,6 +52,8 @@ describe(name, () => {
     };
     const { getByText, container } = render(<CardFooter {...props} />);
     expect(getByText(props.primaryButtonText)).toBeVisible();
-    expect(container.querySelector('.bx--btn--ghost')).toBeVisible();
+    expect(
+      container.querySelector(`.${carbon.prefix}--btn--ghost`)
+    ).toBeVisible();
   });
 });

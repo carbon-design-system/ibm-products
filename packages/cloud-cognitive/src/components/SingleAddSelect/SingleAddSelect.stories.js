@@ -57,6 +57,7 @@ const defaultProps = {
   onSubmitButtonText: 'Select',
   textInputLabel: 'test input title',
   onSubmit: (selection) => console.log(selection),
+  searchResultsLabel: 'Search results',
 };
 
 const Template = (args) => {

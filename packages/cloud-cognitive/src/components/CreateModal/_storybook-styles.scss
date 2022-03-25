@@ -15,31 +15,32 @@
 @import 'carbon-components/scss/components/tooltip/tooltip';
 @import 'carbon-components/scss/components/modal/modal';
 
-.bx--number {
+.#{$carbon-prefix}--number {
   min-width: 100%;
 }
 
-.bx--number__control-btn::before {
+.#{$carbon-prefix}--number__control-btn::before {
   background-color: transparent;
 }
 
-.bx--number__control-btn::after {
+.#{$carbon-prefix}--number__control-btn::after {
   background-color: transparent;
 }
 
-.bx--date-picker {
+.#{$carbon-prefix}--date-picker {
   min-width: 100%;
 }
 
-.bx--date-picker-container {
+.#{$carbon-prefix}--date-picker-container {
   min-width: 100%;
 }
 
-.bx--date-picker.bx--date-picker--single .bx--date-picker__input {
+.#{$carbon-prefix}--date-picker.#{$carbon-prefix}--date-picker--single
+  .#{$carbon-prefix}--date-picker__input {
   min-width: 100%;
 }
 
-.bx--list-box__menu-icon {
+.#{$carbon-prefix}--list-box__menu-icon {
   top: $spacing-03;
 }
 

@@ -48,7 +48,6 @@
         background-color $motion-duration motion(entrance, expressive),
         opacity $motion-duration motion(entrance, expressive);
       @media (prefers-reduced-motion: reduce) {
-        // stylelint-disable-next-line carbon/motion-token-use
         transition: none;
       }
     }
@@ -267,7 +266,7 @@
     &.#{$block-class}--wide .#{$block-class}__content {
       background: $ui-background;
 
-      // revert the background colour overridden by bx--modal styles
+      // revert the background color overridden by #{$carbon-prefix}--modal styles
       .#{$prefix}--pagination,
       .#{$prefix}--pagination__control-buttons,
       .#{$prefix}--text-input,

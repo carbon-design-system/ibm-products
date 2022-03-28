@@ -22,7 +22,7 @@ import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 const componentName = 'ImportModal';
 
 // Default values for props
@@ -215,7 +215,9 @@ export let ImportModal = forwardRef(
               {inputButtonText}
             </Button>
           </div>
-          <div className={`bx--file-container ${blockClass}__file-container`}>
+          <div
+            className={`${carbon.prefix}--file-container ${blockClass}__file-container`}
+          >
             {hasFiles && (
               <p className={`${blockClass}__helper-text`}>{fileStatusString}</p>
             )}

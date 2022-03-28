@@ -43,6 +43,7 @@ export let AddSelect = forwardRef(
       onSubmitButtonText,
       open,
       removeIconDescription,
+      searchResultsLabel,
       textInputLabel,
       title,
 
@@ -60,11 +61,12 @@ export let AddSelect = forwardRef(
     const [searchTerm, setSearchTerm] = useState('');
     const [normalizedItems, setNormalizedItems] = useState({});
     const [useNormalizedItems, setUsedNormalizedItems] = useState(false);
-    const [sidebarItems, setSidebarItems] = useState([]);
+    const [flatItems, setFlatItems] = useState([]);
 
     useEffect(() => {
       const { entries } = items;
-      setSidebarItems(flatten(entries));
+      // flatItems is just a single array of all entries including children
+      setFlatItems(flatten(entries));
       // multi select with nested data needs to be normalized
       if (multi && entries.find((entry) => entry.children)) {
         const newItems = normalize(items);
@@ -137,8 +139,21 @@ export let AddSelect = forwardRef(
       return results;
     };
 
+    const getDisplayItems = () => {
+      if (useNormalizedItems) {
+        // when global search is in use the results are not in column format
+        if (searchTerm) {
+          return flatItems.filter((item) =>
+            item.title.toLowerCase().includes(searchTerm)
+          );
+        }
+        return getPages();
+      }
+      return getFilteredItems();
+    };
+
     // only multi select with hierarchy requires the the normalized items
-    const itemsToDisplay = useNormalizedItems ? getPages() : getFilteredItems();
+    const itemsToDisplay = getDisplayItems();
 
     const commonListProps = {
       multi,
@@ -181,7 +196,7 @@ export let AddSelect = forwardRef(
 
     const sidebarProps = {
       influencerTitle,
-      items: sidebarItems,
+      items: flatItems,
       multiSelection,
       noSelectionDescription,
       noSelectionTitle,
@@ -193,6 +208,29 @@ export let AddSelect = forwardRef(
       [`${blockClass}__single`]: !multi,
       [`${blockClass}__multi`]: multi,
     });
+
+    const setShowBreadsCrumbs = () => {
+      if (searchTerm) {
+        return false;
+      }
+      if (path.length) {
+        return true;
+      }
+      return false;
+    };
+
+    const setShowTags = () => {
+      if (searchTerm) {
+        return true;
+      }
+      if (useNormalizedItems) {
+        return false;
+      }
+      return true;
+    };
+
+    const showBreadsCrumbs = setShowBreadsCrumbs();
+    const showTags = setShowTags();
 
     // main content
     const body = (
@@ -206,7 +244,7 @@ export let AddSelect = forwardRef(
             onChange={handleSearch}
           />
           <div className={`${blockClass}__tag-container`}>
-            {path.length ? (
+            {showBreadsCrumbs ? (
               <AddSelectBreadcrumbs
                 itemsLabel={itemsLabel}
                 path={path}
@@ -214,17 +252,17 @@ export let AddSelect = forwardRef(
               />
             ) : (
               <p className={`${blockClass}__tag-container-label`}>
-                {itemsLabel}
+                {searchTerm ? searchResultsLabel : itemsLabel}
               </p>
             )}
-            {!useNormalizedItems && (
+            {showTags && (
               <Tag type="gray" size="sm">
                 {itemsToDisplay.length}
               </Tag>
             )}
           </div>
         </div>
-        {useNormalizedItems ? (
+        {useNormalizedItems && !searchTerm ? (
           <div className={`${blockClass}__columns`}>
             {itemsToDisplay.map((page, idx) => (
               <AddSelectColumn
@@ -242,6 +280,7 @@ export let AddSelect = forwardRef(
               <AddSelectList
                 {...commonListProps}
                 filteredItems={itemsToDisplay}
+                modifiers={items?.modifiers}
               />
             ) : (
               <div className={`${blockClass}__body`}>
@@ -281,6 +320,11 @@ AddSelect.propTypes = {
   influencerTitle: PropTypes.string,
   inputPlaceholder: PropTypes.string,
   items: PropTypes.shape({
+    modifiers: PropTypes.shape({
+      label: PropTypes.string,
+      options: PropTypes.array,
+      property: PropTypes.string,
+    }),
     sortBy: PropTypes.array,
     filterBy: PropTypes.array,
     entries: PropTypes.arrayOf(
@@ -305,6 +349,7 @@ AddSelect.propTypes = {
   onSubmitButtonText: PropTypes.string,
   open: PropTypes.bool,
   removeIconDescription: PropTypes.string,
+  searchResultsLabel: PropTypes.string,
   textInputLabel: PropTypes.string,
   title: PropTypes.string,
 };

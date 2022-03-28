@@ -16,6 +16,7 @@ import {
 import { ProductiveCard } from '.';
 import mdx from './ProductiveCard.mdx';
 import { action } from '@storybook/addon-actions';
+import { carbon } from '../../settings';
 
 export default {
   title: getStoryTitle(ProductiveCard.displayName),
@@ -34,7 +35,11 @@ export default {
       },
     },
   },
-  decorators: [(Story) => <div className="bx--grid card-story">{Story()}</div>],
+  decorators: [
+    (Story) => (
+      <div className={`${carbon.prefix}--grid card-story`}>{Story()}</div>
+    ),
+  ],
 };
 
 const defaultProps = {
@@ -65,12 +70,12 @@ const defaultProps = {
   ],
 };
 
-const getColClasses = (col) => cx(`bx--col-lg-${col}`);
+const getColClasses = (col) => cx(`${carbon.prefix}--col-lg-${col}`);
 
 const Template = (opts) => {
   const { children, columnSize, ...args } = opts;
   return (
-    <div className="bx--row">
+    <div className={`${carbon.prefix}--row`}>
       <div className={getColClasses(columnSize)}>
         <ProductiveCard {...args}>{children}</ProductiveCard>
       </div>

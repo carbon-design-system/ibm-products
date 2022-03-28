@@ -25,6 +25,9 @@ export default {
     onActiveCellChange: {
       action: 'active cell change',
     },
+    onSelectionAreaChange: {
+      action: 'selection area change',
+    },
   },
   parameters: {
     styles,
@@ -98,7 +101,7 @@ const Template = ({ ...args }) => {
 };
 
 const LargeTemplate = ({ ...args }) => {
-  const [data, setData] = useState(() => generateData(16));
+  const [data, setData] = useState(() => generateData(1000));
   const columns = useMemo(() => columnData, []);
 
   return (

@@ -26,7 +26,6 @@
     transition: all $duration--moderate-02;
 
     @media (prefers-reduced-motion: reduce) {
-      // stylelint-disable-next-line carbon/motion-token-use
       transition: none;
     }
 

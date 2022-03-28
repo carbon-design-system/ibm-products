@@ -21,15 +21,15 @@
 @mixin export-modal {
   $block-class: #{$pkg-prefix}--export-modal;
 
-  .#{$block-class} .bx--modal-footer .bx--btn {
+  .#{$block-class} .#{$carbon-prefix}--modal-footer .#{$carbon-prefix}--btn {
     max-width: none;
   }
 
-  .#{$block-class}.#{$carbon-prefix}--modal .bx--modal-content {
+  .#{$block-class}.#{$carbon-prefix}--modal .#{$carbon-prefix}--modal-content {
     padding-right: $spacing-05;
   }
 
-  .#{$block-class} .bx--modal-close {
+  .#{$block-class} .#{$carbon-prefix}--modal-close {
     display: none;
   }
 

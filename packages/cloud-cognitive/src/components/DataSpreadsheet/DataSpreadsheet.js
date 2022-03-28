@@ -26,9 +26,7 @@ import { DataSpreadsheetHeader } from './DataSpreadsheetHeader';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { getScrollbarWidth } from '../../global/js/utils/getScrollbarWidth';
-import { useActiveElement } from '../../global/js/hooks';
-import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
-import { usePreviousValue } from '../../global/js/hooks';
+import { useActiveElement, usePreviousValue } from '../../global/js/hooks';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { useResetSpreadsheetFocus } from './hooks/useResetSpreadsheetFocus';
@@ -51,6 +49,8 @@ const defaults = {
   columns: Object.freeze([]),
   data: Object.freeze([]),
   onDataUpdate: Object.freeze(() => {}),
+  onActiveCellChange: Object.freeze(() => {}),
+  onSelectionAreaChange: Object.freeze(() => {}),
 };
 
 /**
@@ -66,7 +66,8 @@ export let DataSpreadsheet = React.forwardRef(
       data = defaults.data,
       onDataUpdate = defaults.onDataUpdate,
       id,
-      onActiveCellChange,
+      onActiveCellChange = defaults.onActiveCellChange,
+      onSelectionAreaChange = defaults.onSelectionAreaChange,
 
       // Collect any other property values passed in.
       ...rest
@@ -79,6 +80,7 @@ export let DataSpreadsheet = React.forwardRef(
     const [containerHasFocus, setContainerHasFocus] = useState(false);
     const [activeCellCoordinates, setActiveCellCoordinates] = useState(null);
     const [selectionAreas, setSelectionAreas] = useState([]);
+    const [selectionAreaData, setSelectionAreaData] = useState([]);
     const [clickAndHoldActive, setClickAndHoldActive] = useState(false);
     const [currentMatcher, setCurrentMatcher] = useState('');
     const [isEditing, setIsEditing] = useState(false);
@@ -86,7 +88,7 @@ export let DataSpreadsheet = React.forwardRef(
     const previousState = usePreviousValue({ activeCellCoordinates });
     const cellSizeValue = getCellSize(cellSize);
     const cellEditorRef = useRef();
-    const currentMatcherRef = useRef();
+    const [activeCellContent, setActiveCellContent] = useState();
     const activeKeys = useRef([]);
     const activeCellRef = useRef();
     const defaultColumn = useMemo(
@@ -183,6 +185,31 @@ export let DataSpreadsheet = React.forwardRef(
         removeCellEditor();
         updateData(prevCoords?.row, cellProps.column.id);
       }
+      if (
+        prevCoords?.row !== activeCellCoordinates?.row ||
+        prevCoords?.column !== activeCellCoordinates?.column
+      ) {
+        if (
+          activeCellCoordinates &&
+          activeCellCoordinates?.row !== 'header' &&
+          activeCellCoordinates?.column !== 'header'
+        ) {
+          const activeCellFullData =
+            typeof activeCellCoordinates?.column === 'number' &&
+            typeof activeCellCoordinates?.row === 'number'
+              ? rows[activeCellCoordinates?.row].cells[
+                  activeCellCoordinates?.column
+                ]
+              : null;
+          setActiveCellContent(activeCellFullData.render('Cell'));
+        }
+        if (
+          (activeCellCoordinates && activeCellCoordinates?.row === 'header') ||
+          activeCellCoordinates?.column === 'header'
+        ) {
+          setActiveCellContent(null);
+        }
+      }
     }, [
       activeCellCoordinates,
       previousState?.activeCellCoordinates,
@@ -190,14 +217,7 @@ export let DataSpreadsheet = React.forwardRef(
       rows,
       isEditing,
       removeCellEditor,
-    ]);
-
-    const handleActiveCellMouseEnter = useCallback(() => {
-      handleActiveCellMouseEnterCallback(selectionAreas, clickAndHoldActive);
-    }, [
-      clickAndHoldActive,
-      selectionAreas,
-      handleActiveCellMouseEnterCallback,
+      activeCellContent,
     ]);
 
     const createActiveCell = useCallback(
@@ -334,6 +354,7 @@ export let DataSpreadsheet = React.forwardRef(
             !activeKeys.current.includes('Shift')
           ) {
             setSelectionAreas([]);
+            setSelectionAreaData([]);
             removeCellSelections({ spreadsheetRef });
           }
         }
@@ -498,6 +519,20 @@ export let DataSpreadsheet = React.forwardRef(
       setCellEditorValue(activeCellValue);
     };
 
+    const handleActiveCellClick = () => {
+      if (
+        activeCellCoordinates?.row === 'header' ||
+        activeCellCoordinates?.column === 'header'
+      ) {
+        const indexValue =
+          activeCellCoordinates?.row === 'header'
+            ? activeCellCoordinates?.column
+            : activeCellCoordinates?.row;
+        handleRowColumnHeaderClick({ isKeyboard: false, index: indexValue });
+      }
+      return;
+    };
+
     // Go into edit mode if 'Enter' key is pressed on activeCellRef
     const handleActiveCellKeyDown = (event) => {
       const { key } = event;
@@ -512,31 +547,37 @@ export let DataSpreadsheet = React.forwardRef(
           activeCellCoordinates?.row === 'header' ||
           activeCellCoordinates?.column === 'header'
         ) {
-          const handleHeaderCellProps = {
-            activeCellCoordinates,
-            rows,
-            columns,
-            setActiveCellCoordinates,
-            setCurrentMatcher,
-            setSelectionAreas,
-            spreadsheetRef,
-            isKeyboard: true,
-          };
-          // Select an entire column
-          if (activeCellCoordinates?.row === 'header') {
-            handleHeaderCellSelection({
-              type: 'column',
-              ...handleHeaderCellProps,
-            });
-          }
-          // Select an entire row
-          if (activeCellCoordinates?.column === 'header') {
-            handleHeaderCellSelection({
-              type: 'row',
-              ...handleHeaderCellProps,
-            });
-          }
+          handleRowColumnHeaderClick({ isKeyboard: true });
         }
+      }
+    };
+
+    const handleRowColumnHeaderClick = ({ isKeyboard, index = null }) => {
+      const handleHeaderCellProps = {
+        activeCellCoordinates,
+        rows,
+        columns,
+        setActiveCellCoordinates,
+        setCurrentMatcher,
+        setSelectionAreas,
+        spreadsheetRef,
+        isKeyboard,
+        setSelectionAreaData,
+        index,
+      };
+      // Select an entire column
+      if (activeCellCoordinates?.row === 'header') {
+        handleHeaderCellSelection({
+          type: 'column',
+          ...handleHeaderCellProps,
+        });
+      }
+      // Select an entire row
+      if (activeCellCoordinates?.column === 'header') {
+        handleHeaderCellSelection({
+          type: 'row',
+          ...handleHeaderCellProps,
+        });
       }
     };
 
@@ -573,45 +614,6 @@ export let DataSpreadsheet = React.forwardRef(
       return;
     };
 
-    // Only update if there are cell selection areas
-    // Find point object that matches currentMatcher and remove the second point
-    // because hovering over the active cell while clicking and holding should
-    // remove the previously existing selection area
-    const handleActiveCellMouseEnterCallback = useCallback(
-      (areas, clickHold) => {
-        const freshMatcherValue = currentMatcherRef.current;
-        if (!freshMatcherValue) {
-          return;
-        }
-        if (areas && areas.length && clickHold && freshMatcherValue) {
-          setSelectionAreas((prev) => {
-            const selectionAreaClone = deepCloneObject(prev);
-            const indexOfItemToUpdate = selectionAreaClone.findIndex(
-              (item) => item.matcher === freshMatcherValue
-            );
-            if (indexOfItemToUpdate === -1) {
-              return prev;
-            }
-            if (
-              typeof selectionAreaClone[indexOfItemToUpdate].point2 ===
-                'object' &&
-              selectionAreaClone[indexOfItemToUpdate].areaCreated
-            ) {
-              selectionAreaClone[indexOfItemToUpdate].point2 = null;
-              selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
-              removeCellSelections({
-                matcher: freshMatcherValue,
-                spreadsheetRef,
-              });
-              return selectionAreaClone;
-            }
-            return prev;
-          });
-        }
-      },
-      [spreadsheetRef, removeCellSelections]
-    );
-
     useEffect(() => {
       if (isEditing) {
         const cellProps =
@@ -627,7 +629,7 @@ export let DataSpreadsheet = React.forwardRef(
         cellEditorRef.current.style.height =
           activeCellRef?.current.style.height;
         cellEditorRef.current.style.paddingTop = `${
-          (parseInt(activeCellRef?.current.style.height) - 16) / 2
+          (parseInt(activeCellRef?.current.style.height) - 16) / 2 - 1
         }px`; // calculate paddingTop based on cellHeight which could be variable depending on the cellSize prop
         cellEditorRef.current.style.textAlign =
           cellProps?.column?.placement === 'right' ? 'right' : 'left';
@@ -673,15 +675,17 @@ export let DataSpreadsheet = React.forwardRef(
         <DataSpreadsheetHeader
           ref={spreadsheetRef}
           activeCellCoordinates={activeCellCoordinates}
-          cellSizeValue={cellSizeValue}
+          cellSize={cellSize}
           columns={columns}
           defaultColumn={defaultColumn}
           headerGroups={headerGroups}
           rows={rows}
+          scrollBarSize={scrollBarSize}
           selectionAreas={selectionAreas}
           setActiveCellCoordinates={setActiveCellCoordinates}
           setSelectionAreas={setSelectionAreas}
           setCurrentMatcher={setCurrentMatcher}
+          setSelectionAreaData={setSelectionAreaData}
         />
 
         {/* BODY */}
@@ -699,8 +703,11 @@ export let DataSpreadsheet = React.forwardRef(
           defaultColumn={defaultColumn}
           getTableBodyProps={getTableBodyProps}
           onActiveCellChange={onActiveCellChange}
+          onSelectionAreaChange={onSelectionAreaChange}
           prepareRow={prepareRow}
           rows={rows}
+          selectionAreaData={selectionAreaData}
+          setSelectionAreaData={setSelectionAreaData}
           setActiveCellCoordinates={setActiveCellCoordinates}
           scrollBarSize={scrollBarSize}
           totalColumnsWidth={totalColumnsWidth}
@@ -708,8 +715,8 @@ export let DataSpreadsheet = React.forwardRef(
           columns={columns}
         />
         <button
+          onClick={handleActiveCellClick}
           onKeyDown={handleActiveCellKeyDown}
-          onMouseEnter={handleActiveCellMouseEnter}
           onDoubleClick={handleActiveCellDoubleClick}
           ref={activeCellRef}
           className={cx(
@@ -717,7 +724,9 @@ export let DataSpreadsheet = React.forwardRef(
             `${blockClass}__active-cell--highlight`
           )}
           type="button"
-        />
+        >
+          {activeCellContent}
+        </button>
         <TextArea
           value={cellEditorValue}
           onKeyDown={handleEditSubmit}
@@ -794,6 +803,11 @@ DataSpreadsheet.propTypes = {
    * The setter fn for the data prop
    */
   onDataUpdate: PropTypes.func,
+
+  /**
+   * The event handler that is called when the selection area values change
+   */
+  onSelectionAreaChange: PropTypes.func,
 
   /* TODO: add types and DocGen for all props. */
 };

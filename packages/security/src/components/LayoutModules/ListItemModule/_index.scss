@@ -119,7 +119,7 @@
     }
   }
 
-  .bx--tag {
+  .#{$prefix}--tag {
     margin-top: -$carbon--spacing-02;
     margin-bottom: -$carbon--spacing-02;
   }

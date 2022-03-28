@@ -13,13 +13,21 @@
     "react-scripts": "4.0.3",
     "sass": "^1.43.4"
   },
+  "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
+  "resolutions": {
+    "**/request/minimist": "^1.2.6"
+  },
   "scripts": {
     "start": "react-scripts start"
   },
   "keywords": [],
   "description": "",
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

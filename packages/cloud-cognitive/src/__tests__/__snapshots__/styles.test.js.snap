@@ -3091,6 +3091,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--tag-set-overflow__tooltip.c4p--tag-set-overflow__tooltip {
   min-width: initial;
+  text-align: left;
 }
 .c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__show-all-tags-link {
   display: inline-block;

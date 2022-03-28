@@ -13,6 +13,7 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { usePreviousValue } from '../../global/js/hooks';
 
 import { removeCellSelections } from './utils/removeCellSelections';
 import { createCellSelectionArea } from './utils/createCellSelectionArea';
@@ -31,6 +32,8 @@ export const DataSpreadsheetBody = forwardRef(
       id,
       prepareRow,
       rows,
+      selectionAreaData,
+      setSelectionAreaData,
       setActiveCellCoordinates,
       selectionAreas,
       setContainerHasFocus,
@@ -41,28 +44,73 @@ export const DataSpreadsheetBody = forwardRef(
       setClickAndHoldActive,
       currentMatcher,
       setCurrentMatcher,
+      onSelectionAreaChange,
     },
     ref
   ) => {
+    const previousState = usePreviousValue({
+      selectionAreaData,
+      clickAndHoldActive,
+    });
+
+    // Call the `onSelectionAreaChange` handler to send selection area data
+    // back to the consumer
+    useEffect(() => {
+      if (selectionAreaData.length) {
+        if (
+          (!clickAndHoldActive && previousState?.clickAndHoldActive) ||
+          previousState?.selectionAreaData?.length !== selectionAreaData?.length
+        ) {
+          onSelectionAreaChange(selectionAreaData);
+        }
+      }
+    }, [
+      previousState?.selectionAreaData,
+      selectionAreaData,
+      onSelectionAreaChange,
+      clickAndHoldActive,
+      previousState?.clickAndHoldActive,
+    ]);
+
     // Create cell selection areas based on selectionAreas array
     useEffect(() => {
       if (selectionAreas && selectionAreas.length) {
         selectionAreas.map((area) => {
-          if (!area.areaCreated && area.point1 && area.point2 && area.matcher) {
-            // Do not create a cell selection area if point1 and point2 have the same values
-            // Cell selections must have two distinctly different points for an area to be created
-            if (
-              area.point1.row === area.point2.row &&
-              area.point1.column === area.point2.column
-            ) {
-              const selectionAreasClone = deepCloneObject(selectionAreas);
-              const indexOfCurrentArea = selectionAreasClone.findIndex(
-                (item) => item.matcher === area.matcher
+          // Setup selection area data that will be sent back to consumer via onSelectionAreaChange prop
+          if (area.areaCreated) {
+            const rowStart = Math.min(area.point1.row, area.point2.row);
+            const rowEnd = Math.max(area.point1.row, area.point2.row);
+            const columnStart = Math.min(
+              area.point1.column,
+              area.point2.column
+            );
+            const columnEnd = Math.max(area.point1.column, area.point2.column);
+            const selectionData = {
+              rows: {
+                start: rowStart,
+                end: rowEnd,
+              },
+              columns: {
+                start: columnStart,
+                end: columnEnd,
+              },
+              cells: populateSelectionAreaCellData({
+                rowStart,
+                rowEnd,
+                columnStart,
+                columnEnd,
+              }),
+              selectionId: area.matcher,
+            };
+            setSelectionAreaData((prev) => {
+              const prevValues = deepCloneObject(prev);
+              const newAreaData = prevValues.filter(
+                (item) => item.selectionId !== area.matcher
               );
-              selectionAreasClone[indexOfCurrentArea].areaCreated = false;
-              selectionAreasClone[indexOfCurrentArea].point2 = null;
-              return setSelectionAreas(selectionAreasClone);
-            }
+              return [...newAreaData, selectionData];
+            });
+          }
+          if (!area.areaCreated && area.point1 && area.point2 && area.matcher) {
             createCellSelectionArea({
               area,
               blockClass,
@@ -74,7 +122,32 @@ export const DataSpreadsheetBody = forwardRef(
           return;
         });
       }
-    }, [selectionAreas, setSelectionAreas, defaultColumn]);
+    }, [
+      selectionAreas,
+      setSelectionAreas,
+      defaultColumn,
+      onSelectionAreaChange,
+      setSelectionAreaData,
+    ]);
+
+    const populateSelectionAreaCellData = ({
+      rowStart,
+      rowEnd,
+      columnStart,
+      columnEnd,
+    }) => {
+      const cellContainer = [];
+      for (let rowIndex = rowStart; rowIndex <= rowEnd; rowIndex++) {
+        for (
+          let columnIndex = columnStart;
+          columnIndex <= columnEnd;
+          columnIndex++
+        ) {
+          cellContainer.push([rowIndex, columnIndex]);
+        }
+      }
+      return cellContainer;
+    };
 
     // Mouse up
     useEffect(() => {
@@ -182,6 +255,7 @@ export const DataSpreadsheetBody = forwardRef(
               { point1: activeCoordinates, matcher: tempMatcher },
             ]);
             setCurrentMatcher(tempMatcher);
+            setSelectionAreaData([]);
           }
         };
       },
@@ -195,6 +269,7 @@ export const DataSpreadsheetBody = forwardRef(
         setClickAndHoldActive,
         setCurrentMatcher,
         ref,
+        setSelectionAreaData,
       ]
     );
 
@@ -247,6 +322,7 @@ export const DataSpreadsheetBody = forwardRef(
             setSelectionAreas,
             spreadsheetRef: ref,
             index,
+            setSelectionAreaData,
           });
         };
       },
@@ -258,6 +334,7 @@ export const DataSpreadsheetBody = forwardRef(
         setActiveCellCoordinates,
         activeCellCoordinates,
         rows,
+        setSelectionAreaData,
       ]
     );
 
@@ -404,6 +481,11 @@ DataSpreadsheetBody.propTypes = {
   onActiveCellChange: PropTypes.func,
 
   /**
+   * The event handler that is called when the selection areas change
+   */
+  onSelectionAreaChange: PropTypes.func,
+
+  /**
    * Prepare row function from react-table
    */
   prepareRow: PropTypes.func,
@@ -417,6 +499,11 @@ DataSpreadsheetBody.propTypes = {
    * The scrollbar width
    */
   scrollBarSize: PropTypes.number,
+
+  /**
+   * Array of selection area data
+   */
+  selectionAreaData: PropTypes.array,
 
   /**
    * Array of selection areas
@@ -442,6 +529,11 @@ DataSpreadsheetBody.propTypes = {
    * Setter fn for currentMatcher state value
    */
   setCurrentMatcher: PropTypes.func,
+
+  /**
+   * Setter fn for selectionAreaData state value
+   */
+  setSelectionAreaData: PropTypes.func,
 
   /**
    * Setter fn for selectionAreas state value

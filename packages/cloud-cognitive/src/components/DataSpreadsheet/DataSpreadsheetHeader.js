@@ -5,12 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { px } from '@carbon/layout';
 import { pkg } from '../../settings';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
+import { usePreviousValue } from '../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -18,17 +20,34 @@ export const DataSpreadsheetHeader = forwardRef(
   (
     {
       activeCellCoordinates,
+      cellSize,
       columns,
       defaultColumn,
       headerGroups,
+      scrollBarSize,
       selectionAreas,
       setActiveCellCoordinates,
       setCurrentMatcher,
       setSelectionAreas,
+      setSelectionAreaData,
       rows,
     },
     ref
   ) => {
+    const [scrollBarSizeValue, setScrollBarSizeValue] = useState(0);
+    const previousState = usePreviousValue({ cellSize });
+    useEffect(() => {
+      if (previousState?.cellSize !== cellSize) {
+        const scrollContainer = ref?.current?.querySelector(
+          `.${blockClass}__list--container`
+        );
+        const hasScrollBar =
+          scrollContainer?.scrollHeight > scrollContainer?.clientHeight;
+        const scrollBarValue = hasScrollBar ? 0 : scrollBarSize;
+        setScrollBarSizeValue(scrollBarValue);
+      }
+    }, [cellSize, ref, scrollBarSize, previousState?.cellSize]);
+
     const handleColumnHeaderClick = (index) => {
       return () => {
         handleHeaderCellSelection({
@@ -41,6 +60,7 @@ export const DataSpreadsheetHeader = forwardRef(
           setSelectionAreas,
           spreadsheetRef: ref,
           index,
+          setSelectionAreaData,
         });
       };
     };
@@ -51,6 +71,13 @@ export const DataSpreadsheetHeader = forwardRef(
           <div
             key={`header_${index}`}
             {...headerGroup.getHeaderGroupProps()}
+            style={{
+              ...headerGroup.getHeaderGroupProps().style,
+              width: px(
+                parseInt(headerGroup.getHeaderGroupProps().style.width) +
+                  scrollBarSizeValue
+              ),
+            }}
             className={`${blockClass}__tr`}
           >
             {/* SELECT ALL BUTTON */}
@@ -118,6 +145,11 @@ DataSpreadsheetHeader.propTypes = {
   }),
 
   /**
+   * Specifies the cell height
+   */
+  cellSize: PropTypes.oneOf(['compact', 'standard', 'medium', 'large']),
+
+  /**
    * All of the spreadsheet columns
    */
   columns: PropTypes.array,
@@ -142,6 +174,11 @@ DataSpreadsheetHeader.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.object),
 
   /**
+   * The scrollbar width
+   */
+  scrollBarSize: PropTypes.number,
+
+  /**
    * All of the cell selection area items
    */
   selectionAreas: PropTypes.arrayOf(PropTypes.object),
@@ -155,6 +192,11 @@ DataSpreadsheetHeader.propTypes = {
    * Setter fn for currentMatcher value
    */
   setCurrentMatcher: PropTypes.func,
+
+  /**
+   * Setter fn for selectionAreaData state value
+   */
+  setSelectionAreaData: PropTypes.func,
 
   /**
    * Setter fn for selectionAreas value

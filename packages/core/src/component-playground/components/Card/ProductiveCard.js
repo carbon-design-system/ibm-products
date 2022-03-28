@@ -7,6 +7,7 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { carbon } from '../../../../../cloud-cognitive/src/settings';
 
 import { ProductiveCard as CCProductiveCard } from '../../../../../cloud-cognitive/src';
 import { TrashCan16, Edit16 } from '@carbon/icons-react';
@@ -86,17 +87,23 @@ const ProductiveCard = (props) => {
       //primaryButtonText={ props.data[props.index].primaryButtonText ? props.data[props.index].primaryButtonText : "Button action" }
       title={props.data.topic.name}
     >
-      <div className="bx--row">
-        <div className="bx--col-lg-6">Partitions</div>
-        <div className="bx--col-lg-6">{props.data.partitions}</div>
+      <div className={`${carbon.prefix}--row`}>
+        <div className={`${carbon.prefix}--col-lg-6`}>Partitions</div>
+        <div className={`${carbon.prefix}--col-lg-6`}>
+          {props.data.partitions}
+        </div>
       </div>
-      <div className="bx--row">
-        <div className="bx--col-lg-6">Replicas</div>
-        <div className="bx--col-lg-6">{props.data.replicas}</div>
+      <div className={`${carbon.prefix}--row`}>
+        <div className={`${carbon.prefix}--col-lg-6`}>Replicas</div>
+        <div className={`${carbon.prefix}--col-lg-6`}>
+          {props.data.replicas}
+        </div>
       </div>
-      <div className="bx--row">
-        <div className="bx--col-lg-6">Message Retention</div>
-        <div className="bx--col-lg-6">{props.data.retention}</div>
+      <div className={`${carbon.prefix}--row`}>
+        <div className={`${carbon.prefix}--col-lg-6`}>Message Retention</div>
+        <div className={`${carbon.prefix}--col-lg-6`}>
+          {props.data.retention}
+        </div>
       </div>
     </CCProductiveCard>
   );

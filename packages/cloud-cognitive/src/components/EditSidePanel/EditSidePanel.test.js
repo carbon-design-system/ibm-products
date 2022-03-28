@@ -8,7 +8,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { EditSidePanel } from '.';
@@ -24,7 +24,7 @@ const title = uuidv4();
 const subtitle = uuidv4();
 const formDescription = uuidv4();
 const formTitle = uuidv4();
-const selectorPrimaryFocus = '.bx--text-input';
+const selectorPrimaryFocus = `.${carbon.prefix}--text-input`;
 const primaryButtonText = 'Save';
 const secondaryButtonText = 'Cancel';
 const onRequestSubmitFn = jest.fn();

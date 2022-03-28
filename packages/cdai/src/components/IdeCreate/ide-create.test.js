@@ -11,6 +11,8 @@ import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import IdeCreate from './ide-create';
 import IdeCreateStep from './ide-create-step';
+import { settings } from 'carbon-components';
+const { prefix } = settings;
 
 configure({ adapter: new Adapter() });
 
@@ -45,7 +47,7 @@ const propsNoCancel = {
 it('should render correct contents', () => {
   const wrapper = mount(<IdeCreate {...props} />);
   expect(wrapper.find('.ide-create-container')).toHaveLength(1);
-  const secondaryButton = wrapper.find('.bx--btn--secondary');
+  const secondaryButton = wrapper.find(`.${prefix}--btn--secondary`);
   expect(secondaryButton).toHaveLength(1);
   const secondaryNode = secondaryButton.getDOMNode();
   expect(secondaryNode).toBeDefined();
@@ -57,7 +59,7 @@ it('should render correct contents with a launch out link', () => {
   props.externalLink = true;
   const wrapper = mount(<IdeCreate {...props} />);
   expect(wrapper.find('.ide-create-container')).toHaveLength(1);
-  const primaryButton = wrapper.find('.bx--btn--primary');
+  const primaryButton = wrapper.find(`.${prefix}--btn--primary`);
   expect(primaryButton.props().renderIcon).not.toEqual(null);
   wrapper.unmount();
 });
@@ -65,7 +67,7 @@ it('should render correct contents with a launch out link', () => {
 it('should render correct contents with no cancel step', () => {
   const wrapper = mount(<IdeCreate {...propsNoCancel} />);
   expect(wrapper.find('.ide-create-container')).toHaveLength(1);
-  const secondaryButton = wrapper.find('.bx--btn--secondary');
+  const secondaryButton = wrapper.find(`.${prefix}--btn--secondary`);
   expect(secondaryButton).toHaveLength(0);
   props.buttonTextStepNext = 'Next';
   wrapper.unmount();
@@ -80,7 +82,7 @@ it('should render correct contents with hidden next button', () => {
     </IdeCreate>
   );
   expect(wrapper.find('.ide-create-container')).toHaveLength(1);
-  const secondaryButton = wrapper.find('.bx--btn--secondary');
+  const secondaryButton = wrapper.find(`.${prefix}--btn--secondary`);
   expect(secondaryButton).toHaveLength(1);
   const secondaryNode = secondaryButton.getDOMNode();
   expect(secondaryNode).toBeDefined();
@@ -99,7 +101,7 @@ it('should move to the next panel', () => {
   const instance = wrapper.instance();
   instance.setNextPage();
   expect(instance.state.step).toBe(1);
-  const primaryButton = wrapper.find('.bx--btn--primary');
+  const primaryButton = wrapper.find(`.${prefix}--btn--primary`);
   expect(primaryButton).toHaveLength(1);
   const primaryNode = primaryButton.getDOMNode();
   expect(primaryNode).toBeDefined();
@@ -114,7 +116,7 @@ it('should disable the next button when stepNextDisabled is true', () => {
       <IdeCreateStep />
     </IdeCreate>
   );
-  const primaryButton = wrapper.find('.bx--btn--primary');
+  const primaryButton = wrapper.find(`.${prefix}--btn--primary`);
   expect(primaryButton.props().disabled).toBe(true);
   const instance = wrapper.instance();
   instance.setNextPage();
@@ -132,7 +134,7 @@ it('should move to the next panel using internal function', () => {
   const instance = wrapper.instance();
   instance._handleNextButton();
   expect(instance.state.step).toBe(1);
-  const primaryButton = wrapper.find('.bx--btn--primary');
+  const primaryButton = wrapper.find(`.${prefix}--btn--primary`);
   expect(primaryButton).toHaveLength(1);
   const primaryNode = primaryButton.getDOMNode();
   expect(primaryNode).toBeDefined();
@@ -155,7 +157,7 @@ it('should move to the previous panel', () => {
   expect(instance.state.step).toBe(1);
   instance._handleBackButton();
   expect(instance.state.step).toBe(0);
-  const secondaryButton = wrapper.find('.bx--btn--secondary');
+  const secondaryButton = wrapper.find(`.${prefix}--btn--secondary`);
   expect(secondaryButton).toHaveLength(1);
   const secondaryNode = secondaryButton.getDOMNode();
   expect(secondaryNode).toBeDefined();
@@ -170,7 +172,7 @@ it('should render single panel for form only', () => {
       <IdeCreateStep />
     </IdeCreate>
   );
-  const primaryButton = wrapper.find('.bx--btn--primary');
+  const primaryButton = wrapper.find(`.${prefix}--btn--primary`);
   expect(primaryButton).toHaveLength(1);
   const primaryNode = primaryButton.getDOMNode();
   expect(primaryNode).toBeDefined();
@@ -189,7 +191,7 @@ it('should set action button disabled', () => {
   const instance = wrapper.instance();
   instance.setNextPage();
   instance.setActionButtonDisabled(true);
-  const primaryButton = wrapper.find('.bx--btn--primary');
+  const primaryButton = wrapper.find(`.${prefix}--btn--primary`);
   expect(primaryButton).toHaveLength(1);
   const primaryNode = primaryButton.getDOMNode();
   expect(primaryNode).toBeDefined();
@@ -206,14 +208,14 @@ it('should set action button disabled when formActionDisabled is true', () => {
   );
   const instance = wrapper.instance();
   instance.setNextPage();
-  let primaryButton = wrapper.find('.bx--btn--primary');
+  let primaryButton = wrapper.find(`.${prefix}--btn--primary`);
   expect(primaryButton).toHaveLength(1);
   let primaryNode = primaryButton.getDOMNode();
   expect(primaryNode).toBeDefined();
   expect(primaryNode.disabled).toBeTruthy();
   wrapper.setProps({ formActionDisabled: false });
   wrapper.update();
-  primaryButton = wrapper.find('.bx--btn--primary');
+  primaryButton = wrapper.find(`.${prefix}--btn--primary`);
   expect(primaryButton).toHaveLength(1);
   primaryNode = primaryButton.getDOMNode();
   expect(primaryNode).toBeDefined();
@@ -242,15 +244,15 @@ it('should call the callback functions', () => {
       <IdeCreateStep />
     </IdeCreate>
   );
-  const primaryButton = wrapper.find('.bx--btn--primary');
+  const primaryButton = wrapper.find(`.${prefix}--btn--primary`);
   expect(primaryButton).toHaveLength(1);
   primaryButton.simulate('click');
   expect(onFormAction).toHaveBeenCalled();
-  const secondaryButton = wrapper.find('.bx--btn--secondary');
+  const secondaryButton = wrapper.find(`.${prefix}--btn--secondary`);
   expect(secondaryButton).toHaveLength(1);
   secondaryButton.simulate('click');
   expect(onCancel).toHaveBeenCalledTimes(1);
-  const breadcrumb = wrapper.find('.ide-create-breadcrumb .bx--link');
+  const breadcrumb = wrapper.find(`.${prefix}--link`);
   expect(breadcrumb).toHaveLength(1);
   breadcrumb.simulate('click');
   expect(onCancel).toHaveBeenCalledTimes(1);
@@ -267,7 +269,7 @@ it('should call consumers callback on breadcrumb is no breadCrumbURL, but define
       <IdeCreateStep />
     </IdeCreate>
   );
-  const breadcrumb = wrapper.find('.ide-create-breadcrumb .bx--link');
+  const breadcrumb = wrapper.find(`.${prefix}--link`);
   expect(breadcrumb).toHaveLength(1);
   breadcrumb.simulate('click');
   expect(propsWithCallback.breadCrumbCallback).toHaveBeenCalledTimes(1);
@@ -387,7 +389,7 @@ it('should show progress indicator when there are multiple steps', () => {
   const progress = wrapper.find('.ide-create-progress-container');
   expect(progress).toHaveLength(1);
 
-  const steps = progress.find('.bx--progress-step');
+  const steps = progress.find(`.${prefix}--progress-step`);
   expect(steps.length).toEqual(2);
 
   // click on second step
@@ -406,14 +408,14 @@ it('should show progress indicator when there are multiple steps and a pre-check
       <IdeCreateStep label="two" />
     </IdeCreate>
   );
-  const primaryButton = wrapper.find('.bx--btn--primary');
+  const primaryButton = wrapper.find(`.${prefix}--btn--primary`);
   expect(primaryButton).toHaveLength(1);
   primaryButton.simulate('click');
 
   const progress = wrapper.find('.ide-create-progress-container');
   expect(progress).toHaveLength(1);
 
-  const steps = progress.find('.bx--progress-step');
+  const steps = progress.find(`.${prefix}--progress-step`);
   expect(steps.length).toEqual(2);
 
   // click on second step
@@ -451,14 +453,14 @@ it('should not click on a disabled step when usePreCheck is set', () => {
     </IdeCreate>
   );
 
-  const primaryButton = wrapper.find('.bx--btn--primary');
+  const primaryButton = wrapper.find(`.${prefix}--btn--primary`);
   expect(primaryButton).toHaveLength(1);
   primaryButton.simulate('click');
 
   const progress = wrapper.find('.ide-create-progress-container');
   expect(progress).toHaveLength(1);
 
-  const steps = progress.find('.bx--progress-step');
+  const steps = progress.find(`.${prefix}--progress-step`);
   expect(steps.length).toEqual(2);
 
   // click on second step - disabled

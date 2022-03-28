@@ -1,4 +1,4 @@
-name: Update packages
+name: Update packages # Updates dependencies every Friday
 
 on:
   schedule:

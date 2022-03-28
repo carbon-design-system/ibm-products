@@ -176,7 +176,7 @@
       display: flex;
     }
 
-    .bx--overflow-menu {
+    .#{$carbon-prefix}--overflow-menu {
       border-bottom: 1px solid $ui-04;
     }
   }
@@ -219,7 +219,7 @@
 
   .#{$block-class}
     .#{$carbon-prefix}--modal-container--sm
-    .bx--modal-content
+    .#{$carbon-prefix}--modal-content
     p {
     padding-right: 0;
   }

@@ -21,7 +21,7 @@ import {
   TextInput,
   FormGroup,
 } from 'carbon-components-react';
-import { pkg } from '../../../../../cloud-cognitive/src/settings';
+import { pkg, carbon } from '../../../../../cloud-cognitive/src/settings';
 
 import costaPic from '../../_story-assets/costa.jpeg';
 
@@ -66,8 +66,8 @@ const SidePanel = (props) => {
         className={`${blockClass}__form`}
         legendText="Topic information"
       >
-        <div className="bx--row">
-          <div className="bx--col-lg-12">
+        <div className={`${carbon.prefix}--row`}>
+          <div className={`${carbon.prefix}--col-lg-12`}>
             <TextInput
               labelText="Topic name"
               id="tearsheet-multi-step-story-text-input-multi-step-1"
@@ -112,8 +112,8 @@ const SidePanel = (props) => {
           }}
         />
 
-        <div className="bx--row">
-          <div className="bx--col-lg-3">
+        <div className={`${carbon.prefix}--row`}>
+          <div className={`${carbon.prefix}--col-lg-3`}>
             <UserProfileImage
               backgroundColor="light-cyan"
               theme="light"
@@ -123,7 +123,7 @@ const SidePanel = (props) => {
               image={costaPic}
             />
           </div>
-          <div className="bx--col-lg-10">
+          <div className={`${carbon.prefix}--col-lg-10`}>
             <TextInput
               labelText="Author"
               id="tearsheet-multi-step-story-text-input-multi-step-1-input-3"

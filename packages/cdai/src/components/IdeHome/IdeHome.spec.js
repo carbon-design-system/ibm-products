@@ -16,6 +16,8 @@ import {
 } from './test_assets/testProps.js';
 import { idAttributeSelector } from '../../component_helpers/IDHelper';
 import * as jth from '../../component_helpers/jest_test_helper_functions.js';
+import { settings } from 'carbon-components';
+const { prefix } = settings;
 
 describe('IdeHome unit tests', () => {
   let component, unmount;
@@ -38,19 +40,19 @@ describe('IdeHome unit tests', () => {
     const testClassNames = {
       'IdeHome-Header-Text': [
         'ide-home-heading-container',
-        'bx--col-sm-1',
-        'bx--col-md-2',
-        'bx--col-lg-6',
-        'bx--col-xlg-6',
-        'bx--col-max-6',
+        `${prefix}--col-sm-1`,
+        `${prefix}--col-md-2`,
+        `${prefix}--col-lg-6`,
+        `${prefix}--col-xlg-6`,
+        `${prefix}--col-max-6`,
       ],
       'IdeHome-Header-Image': [
         'ide-home-image-container',
-        'bx--col-sm-3',
-        'bx--col-md-6',
-        'bx--col-lg-10',
-        'bx--col-xlg-10',
-        'bx--col-max-10',
+        `${prefix}--col-sm-3`,
+        `${prefix}--col-md-6`,
+        `${prefix}--col-lg-10`,
+        `${prefix}--col-xlg-10`,
+        `${prefix}--col-max-10`,
       ],
     };
     mountTestComponent();
@@ -101,27 +103,27 @@ describe('IdeHome unit tests', () => {
     const testClassNames = {
       'IdeHome-Header-Text': [
         'ide-home-heading-container',
-        'bx--col-sm-2',
-        'bx--col-md-3',
-        'bx--col-lg-6',
-        'bx--col-xlg-6',
-        'bx--col-max-6',
+        `${prefix}--col-sm-2`,
+        `${prefix}--col-md-3`,
+        `${prefix}--col-lg-6`,
+        `${prefix}--col-xlg-6`,
+        `${prefix}--col-max-6`,
       ],
       'IdeHome-Header-Image': [
         'ide-home-image-container',
-        'bx--col-sm-2',
-        'bx--col-md-3',
-        'bx--col-lg-8',
-        'bx--col-xlg-8',
-        'bx--col-max-8',
+        `${prefix}--col-sm-2`,
+        `${prefix}--col-md-3`,
+        `${prefix}--col-lg-8`,
+        `${prefix}--col-xlg-8`,
+        `${prefix}--col-max-8`,
       ],
       'IdeHome-header-toggle-container': [
         'ide-home-header-toggle-container',
-        'bx--col-sm-1',
-        'bx--col-md-2',
-        'bx--col-lg-2',
-        'bx--col-xlg-2',
-        'bx--col-max-2',
+        `${prefix}--col-sm-1`,
+        `${prefix}--col-md-2`,
+        `${prefix}--col-lg-2`,
+        `${prefix}--col-xlg-2`,
+        `${prefix}--col-max-2`,
       ],
     };
     const props = withCollapsibleAbility();
@@ -140,19 +142,19 @@ describe('IdeHome unit tests', () => {
     const testClassNames = {
       'IdeHome-Header-Text': [
         'ide-home-heading-container',
-        'bx--col-sm-3',
-        'bx--col-md-6',
-        'bx--col-lg-14',
-        'bx--col-xlg-14',
-        'bx--col-max-14',
+        `${prefix}--col-sm-3`,
+        `${prefix}--col-md-6`,
+        `${prefix}--col-lg-14`,
+        `${prefix}--col-xlg-14`,
+        `${prefix}--col-max-14`,
       ],
       'IdeHome-header-toggle-container': [
         'ide-home-header-toggle-container',
-        'bx--col-sm-1',
-        'bx--col-md-2',
-        'bx--col-lg-2',
-        'bx--col-xlg-2',
-        'bx--col-max-2',
+        `${prefix}--col-sm-1`,
+        `${prefix}--col-md-2`,
+        `${prefix}--col-lg-2`,
+        `${prefix}--col-xlg-2`,
+        `${prefix}--col-max-2`,
       ],
     };
     let props = withCollapsibleAbility();
@@ -160,7 +162,7 @@ describe('IdeHome unit tests', () => {
     mountTestComponent(null, props);
     expect(
       component.find(idAttributeSelector('IdeHome-Header')).prop('className')
-    ).toEqual('collapsed ide-home-header bx--row');
+    ).toEqual(`collapsed ide-home-header ${prefix}--row`);
     for (let [id, classNames] of Object.entries(testClassNames)) {
       classNames.map((className) => {
         expect(

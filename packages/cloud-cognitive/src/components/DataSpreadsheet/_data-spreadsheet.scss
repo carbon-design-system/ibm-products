@@ -91,7 +91,8 @@
       position: absolute;
       z-index: 4;
       display: none;
-      padding: 0 $spacing-03;
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
       background-color: $ui-background;
       resize: none;
       &.#{$carbon-prefix}--text-area {
@@ -101,12 +102,24 @@
     }
     .#{$block-class}__active-cell--highlight {
       @include carbon--type-style('body-short-01');
+      @include set-body-borders();
 
       position: absolute;
       z-index: 3;
       display: none;
+      // Could be fixed by using border-right but the fact that
+      // this element is positioned absolute prevents that from working
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      padding-right: calc(#{$spacing-03} - 1px);
+      padding-bottom: $spacing-01;
       border: $spacing-01 solid $interactive-01;
-      background-color: transparent;
+      background-color: $ui-background;
+      text-align: left;
+
+      &[data-active-row-index='header'],
+      &[data-active-column-index='header'] {
+        background-color: transparent;
+      }
 
       &:focus {
         border: $spacing-01 solid $interactive-01;

@@ -38,6 +38,7 @@ const defaultProps = {
   noResultsTitle: 'No results title',
   noResultsDescription: 'Try again description',
   textInputLabel: 'test input label',
+  searchResultsLabel: 'Search results',
 };
 
 describe(componentName, () => {

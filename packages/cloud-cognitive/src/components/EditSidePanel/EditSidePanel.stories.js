@@ -27,6 +27,7 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
+import { carbon } from '../../settings';
 
 import { EditSidePanel } from '.';
 import mdx from './EditSidePanel.mdx';
@@ -60,7 +61,7 @@ const defaultStoryProps = {
     'We recommend you fill out and evaluate these details at a minimum before deploying your topic.',
   primaryButtonText: 'Save',
   secondaryButtonText: 'Cancel',
-  selectorPrimaryFocus: '.bx--text-input',
+  selectorPrimaryFocus: `.${carbon.prefix}--text-input`,
 };
 
 const renderUIShellHeader = () => (

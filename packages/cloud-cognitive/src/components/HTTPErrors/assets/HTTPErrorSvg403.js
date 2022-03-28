@@ -18,6 +18,7 @@ export const HTTPErrorSvg403 = ({ className }) => {
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 1584 916"
       className={className}
+      preserveAspectRatio="xMinYMax meet"
     >
       <defs>
         <clipPath id="prefix__clip-path">

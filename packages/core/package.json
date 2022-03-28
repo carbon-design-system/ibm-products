@@ -28,7 +28,7 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$)/'"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.7",
+    "@babel/core": "^7.17.8",
     "@carbon/elements": "^10.54.2",
     "@carbon/grid": "10.43.1",
     "@carbon/icons-react": "10.48.0",
@@ -55,7 +55,7 @@
     "@storybook/manager-webpack5": "^6.4.19",
     "@storybook/react": "^6.4.19",
     "@storybook/theming": "^6.4.19",
-    "babel-loader": "^8.2.3",
+    "babel-loader": "^8.2.4",
     "babel-preset-ibm-cloud-cognitive": "^0.14.11",
     "carbon-components": "^10.55.2",
     "carbon-components-react": "^7.55.2",
@@ -71,7 +71,7 @@
     "rimraf": "^3.0.2",
     "sass": "^1.49.9",
     "style-loader": "^3.3.1",
-    "typescript": "^4.6.2",
+    "typescript": "^4.6.3",
     "webpack": "^5.70.0",
     "webpack-merge": "^5.8.0"
   }

@@ -53,7 +53,7 @@
     "react-dom": "^17.0.2"
   },
   "dependencies": {
-    "@babel/runtime": "^7.17.7",
+    "@babel/runtime": "^7.17.8",
     "@carbon/colors": "10.37.1",
     "@carbon/grid": "10.43.1",
     "@carbon/icons-react": "10.48.0",

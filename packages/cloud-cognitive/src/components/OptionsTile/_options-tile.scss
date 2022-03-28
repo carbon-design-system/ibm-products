@@ -210,7 +210,6 @@
   @media (prefers-reduced-motion: reduce) {
     .#{$block-class}__summary,
     .#{$block-class}__chevron {
-      // stylelint-disable-next-line carbon/motion-token-use
       transition: none;
     }
   }

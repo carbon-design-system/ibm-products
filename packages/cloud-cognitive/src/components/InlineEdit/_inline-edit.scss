@@ -265,7 +265,6 @@
       svg {
         transition: width $duration--moderate-02 motion(standard, productive);
         @media (prefers-reduced-motion: reduce) {
-          // stylelint-disable-next-line carbon/motion-token-use
           transition: none;
         }
       }

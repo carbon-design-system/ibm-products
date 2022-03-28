@@ -91,12 +91,12 @@ describe(componentName, () => {
 
   it('should render the initials when passed the initials prop', () => {
     renderComponent({ initials: 'Display name' });
-    expect(screen.getByText(/DN/g));
+    expect(screen.getByText(/DN/));
   });
 
   it('should render the initials when simply passing two initials to the initials prop', () => {
     renderComponent({ initials: 'DN' });
-    expect(screen.getByText(/DN/g));
+    expect(screen.getByText(/DN/));
   });
 
   it('should render the tooltipIcon component if the tooltipText prop is passed', () => {

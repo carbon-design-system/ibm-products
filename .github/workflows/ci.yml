@@ -1,4 +1,4 @@
-name: CI
+name: CI # Run CI Checks
 
 on:
   pull_request:

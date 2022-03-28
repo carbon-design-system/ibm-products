@@ -65,6 +65,7 @@ const defaultProps = {
   textInputLabel: 'test input label',
   columnInputPlaceholder: 'Find',
   onSubmit: (selections) => console.log(selections),
+  searchResultsLabel: 'Search results',
 };
 
 const Template = (args) => {

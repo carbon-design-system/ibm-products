@@ -104,7 +104,7 @@ describe(name, () => {
     );
     const customIllustrationElement = container.querySelector('img');
     expect(customIllustrationElement).toBeTruthy();
-    screen.getByAltText(/Test alt text/g);
+    screen.getByAltText(/Test alt text/);
   });
 
   it('forwards a ref to an appropriate node', () => {
@@ -123,7 +123,7 @@ describe(name, () => {
 
   it('applies className to the containing node', () => {
     render(<EmptyState {...defaultProps} className={className} />);
-    expect(screen.getByText(/Empty state title/g).parentElement).toHaveClass(
+    expect(screen.getByText(/Empty state title/).parentElement).toHaveClass(
       className
     );
   });
@@ -131,7 +131,7 @@ describe(name, () => {
   it('renders the small size Empty state', () => {
     render(<EmptyState {...defaultProps} size="sm" />);
     const smallTitleClassName = `${blockClass}__header--small`;
-    expect(screen.getByText(/Empty state title/g)).toHaveClass(
+    expect(screen.getByText(/Empty state title/)).toHaveClass(
       smallTitleClassName
     );
   });

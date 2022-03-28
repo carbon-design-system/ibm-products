@@ -10,6 +10,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { ExportModal } from '.';
+import { carbon } from '../../settings';
 
 const componentName = ExportModal.displayName;
 
@@ -68,7 +69,7 @@ describe(componentName, () => {
     };
 
     const { container } = render(<ExportModal {...props} />);
-    const textInput = container.querySelector('.bx--text-input');
+    const textInput = container.querySelector(`.${carbon.prefix}--text-input`);
 
     change(textInput, { target: { value: `${props.filename}.pdf` } });
     blur(textInput);
@@ -88,7 +89,9 @@ describe(componentName, () => {
     };
 
     const { container } = render(<ExportModal {...props} />);
-    const submitBtn = container.querySelector('.bx--btn--primary');
+    const submitBtn = container.querySelector(
+      `.${carbon.prefix}--btn--primary`
+    );
 
     click(submitBtn);
     expect(onRequestSubmit).not.toBeCalled();
@@ -107,7 +110,7 @@ describe(componentName, () => {
     };
 
     const { container } = render(<ExportModal {...props} />);
-    const textInput = container.querySelector('.bx--text-input');
+    const textInput = container.querySelector(`.${carbon.prefix}--text-input`);
 
     change(textInput, { target: { value: `${props.filename}` } });
     blur(textInput);
@@ -160,10 +163,9 @@ describe(componentName, () => {
     const { container } = render(
       <ExportModal {...defaultProps} inputType="password" />
     );
-    expect(container.querySelector('.bx--text-input')).toHaveAttribute(
-      'type',
-      'password'
-    );
+    expect(
+      container.querySelector(`.${carbon.prefix}--text-input`)
+    ).toHaveAttribute('type', 'password');
   });
 
   //@TODO: reinstate this test as soon as https://github.com/carbon-design-system/carbon/issues/10107 is fixed

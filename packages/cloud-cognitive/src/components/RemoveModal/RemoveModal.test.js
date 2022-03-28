@@ -10,6 +10,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { RemoveModal } from '.';
+import { carbon } from '../../settings';
 
 const componentName = RemoveModal.displayName;
 const resourceName = 'bx1001';
@@ -55,11 +56,10 @@ describe(componentName, () => {
       <RemoveModal {...defaultProps} textConfirmation />
     );
     screen.getByText(defaultProps.inputLabelText);
-    container.querySelector('.bx--text-input');
-    expect(container.querySelector('.bx--text-input')).toHaveAttribute(
-      'placeholder',
-      defaultProps.inputPlaceholderText
-    );
+    container.querySelector(`.${carbon.prefix}--text-input`);
+    expect(
+      container.querySelector(`.${carbon.prefix}--text-input`)
+    ).toHaveAttribute('placeholder', defaultProps.inputPlaceholderText);
   });
 
   it('renders without text confirmation functionality', () => {
@@ -97,13 +97,13 @@ describe(componentName, () => {
     click(screen.getByText(props.primaryButtonText));
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(container.querySelector('.bx--text-input'), {
+    change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'bx1002' },
     });
     click(screen.getByText(props.primaryButtonText));
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(container.querySelector('.bx--text-input'), {
+    change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'bx1001' },
     });
     click(screen.getByText(props.primaryButtonText));

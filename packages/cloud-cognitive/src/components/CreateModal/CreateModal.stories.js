@@ -19,7 +19,7 @@ import {
   RadioButtonGroup,
 } from 'carbon-components-react';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import {
   getStoryTitle,
   prepareStory,
@@ -78,7 +78,7 @@ const TemplateWithFormValidation = ({
         open={open}
         onRequestClose={() => setOpen(false)}
         disableSubmit={textInput.length === 0 ? true : false}
-        selectorPrimaryFocus=".bx--text-input"
+        selectorPrimaryFocus={`.${carbon.prefix}--text-input`}
       >
         <TextInput
           id="1"
@@ -126,7 +126,7 @@ const defaultProps = {
   subtitle: 'Your subtitle text will appear here',
   description:
     'This is example description text that will appear here in your modal ',
-  selectorPrimaryFocus: '.bx--text-input',
+  selectorPrimaryFocus: `.${carbon.prefix}--text-input`,
   primaryButtonText: 'Create',
   secondaryButtonText: 'Cancel',
 };

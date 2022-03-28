@@ -39,7 +39,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
         get: function () {
           let width = 0;
 
-          if (this.classList.contains('bx--btn')) {
+          if (this.classList.contains(`${carbon.prefix}--btn`)) {
             width = buttonWidth;
           } else {
             width = window.innerWidth;

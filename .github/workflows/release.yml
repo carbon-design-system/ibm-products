@@ -1,4 +1,4 @@
-name: Release
+name: Release # Builds and releases updated packages every Tuesday
 
 on:
   workflow_dispatch:

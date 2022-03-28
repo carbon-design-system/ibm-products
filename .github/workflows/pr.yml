@@ -1,4 +1,4 @@
-name: PR
+name: PR # Checks the PR title is of the correct format
 
 on:
   pull_request_target:

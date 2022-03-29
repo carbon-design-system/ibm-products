@@ -18,10 +18,6 @@ describe('IdeTableToolbarSearch', () => {
       <IdeTableToolbarSearch />
     );
 
-    it('Renders as a <div>', () => {
-      expect(wrapper.dive().dive().is('div')).toBe(true);
-    });
-
     it('Should have the correct classes', () => {
       expect(wrapper.dive().hasClass('ide-table-toolbar-search')).toBe(true);
       expect(

@@ -1,4 +1,4 @@
-name: CodeQL
+name: CodeQL # Run code security scans
 
 on:
   pull_request:

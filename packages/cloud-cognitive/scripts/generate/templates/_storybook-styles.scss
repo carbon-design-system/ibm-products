@@ -5,11 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import './index';
+@import '../../global/styles/project-settings';
 
 // TODO: add any additional styles used by DISPLAY_NAME.stories.js
-
-// Uncomment next line (which must appear last) to test in storybook
-// that the SCSS styles for this component are sufficiently specific
-// to override Carbon whichever order the styles get loaded in.
-//@import 'carbon-components/css/carbon-components.min';

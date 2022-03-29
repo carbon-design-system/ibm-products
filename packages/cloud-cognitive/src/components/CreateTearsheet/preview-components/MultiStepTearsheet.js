@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,7 @@ import {
   TextInput,
   Toggle,
   NumberInput,
+  Checkbox,
 } from 'carbon-components-react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
@@ -24,6 +25,24 @@ import { CreateTearsheet } from '../CreateTearsheet';
 import { CreateTearsheetStep } from '../CreateTearsheetStep';
 
 const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
+
+const CustomStep = ({ value1, setValue1, ...rest }) => {
+  return (
+    <CreateTearsheetStep {...rest} disableSubmit={!value1}>
+      <Row>
+        <Column xlg={8} lg={8} md={8} sm={8}>
+          <TextInput
+            value={value1}
+            onChange={(event) => setValue1(event.target.value)}
+            id="custom-step-input"
+            labelText="Location"
+            placeholder="Enter location"
+          />
+        </Column>
+      </Row>
+    </CreateTearsheetStep>
+  );
+};
 
 export const MultiStepTearsheet = ({
   backButtonText,
@@ -40,6 +59,7 @@ export const MultiStepTearsheet = ({
   const [open, setOpen] = useState(false);
   const [shouldReject, setShouldReject] = useState(false);
   const [hasSubmitError, setHasSubmitError] = useState(false);
+  const [value1, setValue1] = useState('');
   const [stepOneTextInputValue, setStepOneTextInputValue] = useState('');
   const [topicDescriptionValue, setTopicDescriptionValue] = useState('');
   const [topicVersionValue, setTopicVersionValue] = useState('');
@@ -47,6 +67,8 @@ export const MultiStepTearsheet = ({
   const [stepThreeTextInputValue, setStepThreeTextInputValue] =
     useState('one-day');
   const [isInvalid, setIsInvalid] = useState(false);
+  const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] =
+    useState(false);
 
   const clearCreateData = () => {
     setStepOneTextInputValue('');
@@ -57,6 +79,8 @@ export const MultiStepTearsheet = ({
     setHasSubmitError(false);
     setIsInvalid(false);
     setOpen(false);
+    setValue1('');
+    setShouldIncludeAdditionalStep(false);
   };
 
   return (
@@ -112,9 +136,9 @@ export const MultiStepTearsheet = ({
             <Column xlg={8} lg={8} md={8} sm={8}>
               <TextInput
                 labelText="Topic name"
+                placeholder="Enter topic name"
                 id="tearsheet-multi-step-story-text-input-multi-step-1"
                 value={stepOneTextInputValue}
-                placeholder="Enter topic name"
                 onChange={(event) => {
                   if (event.target.value.length) {
                     setIsInvalid(false);
@@ -160,9 +184,32 @@ export const MultiStepTearsheet = ({
                 labelText="Simulate error"
                 onToggle={(event) => setShouldReject(event)}
               />
+              <Checkbox
+                labelText={`Include additional step`}
+                id="include-additional-step-checkbox"
+                onChange={(value) => setShouldIncludeAdditionalStep(value)}
+                checked={shouldIncludeAdditionalStep}
+              />
             </Column>
           </Row>
         </CreateTearsheetStep>
+        <CreateTearsheetStep
+          title="Dynamic step"
+          subtitle="Dynamic step subtitle"
+          description="This is an example showing how to include a dynamic step into the CreateTearsheet"
+          hasFieldset={false}
+          includeStep={shouldIncludeAdditionalStep}
+        >
+          dynamic step content
+        </CreateTearsheetStep>
+        <CustomStep
+          title="Location"
+          subtitle="Custom step subtitle"
+          description="Custom step description (see storybook implementation for new custom step capability)"
+          value1={value1}
+          setValue1={setValue1}
+          hasFieldset={false}
+        />
         <CreateTearsheetStep
           title="Partitions"
           disableSubmit={!stepTwoTextInputValue}

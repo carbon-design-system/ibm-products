@@ -101,7 +101,9 @@
     flex: 1 1 25%;
   }
 
-  .#{$block-class} .#{$block-class}__action-button .bx--inline-loading {
+  .#{$block-class}
+    .#{$block-class}__action-button
+    .#{$carbon-prefix}--inline-loading {
     position: absolute;
     top: 0;
     right: 0;

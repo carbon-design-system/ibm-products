@@ -5,20 +5,20 @@
 
 $baseClass: 'gallery-card';
 
-.#{$baseClass} {
+.#{$baseClass}.#{$baseClass} {
   position: relative;
   display: inline-flex;
   flex-direction: column;
 }
 
-.#{$baseClass}__thumbnail {
+.#{$baseClass} .#{$baseClass}__thumbnail {
   flex: 1 1 80%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
-.#{$baseClass}__title {
+.#{$baseClass} .#{$baseClass}__title {
   @include carbon--type-style('productive-heading-03');
 
   overflow: hidden;

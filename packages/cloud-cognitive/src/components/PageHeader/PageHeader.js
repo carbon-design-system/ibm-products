@@ -12,6 +12,7 @@ import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
 
 import { Grid, Column, Row, Button, Tag } from 'carbon-components-react';
+import { breakpoints } from '@carbon/layout';
 
 import { useWindowResize, useNearestScroll } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -39,9 +40,17 @@ import {
 } from './PageHeaderUtils';
 import { PageHeaderTitle } from './PageHeaderTitle';
 
+// Default values for props
+const defaults = {
+  fullWidthGrid: false,
+  narrowGrid: false,
+};
+
 export let PageHeader = React.forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       actionBarItems,
       actionBarMenuOptionsClass,
       actionBarOverflowAriaLabel,
@@ -56,11 +65,12 @@ export let PageHeader = React.forwardRef(
       collapseHeader,
       collapseHeaderIconDescription,
       collapseTitle,
-      disableBreadcrumbScroll,
+      disableBreadcrumbScroll: deprecated_disableBreadcrumbScroll,
+      enableBreadcrumbScroll,
       expandHeaderIconDescription,
-      fullWidthGrid,
+      fullWidthGrid = defaults.fullWidthGrid,
       hasCollapseHeaderToggle,
-      narrowGrid,
+      narrowGrid = defaults.narrowGrid,
       navigation,
       pageActions,
       pageActionsOverflowLabel,
@@ -70,13 +80,17 @@ export let PageHeader = React.forwardRef(
       tags,
       title,
       withoutBackground,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
     // handle deprecated props - START
-    // if withoutBackground is null check deprecated_hasBackgroundAlways and default false
+    // if withoutBackground is nullish check deprecated_hasBackgroundAlways and default false
     withoutBackground ??= !(deprecated_hasBackgroundAlways ?? true);
+    // prefer enabled if nullish check deprecated_disableBreadcrumbScroll and default false
+    enableBreadcrumbScroll ??= !(deprecated_disableBreadcrumbScroll ?? true);
     // handle deprecated props - END
 
     const [metrics, setMetrics] = useState({});
@@ -90,20 +104,22 @@ export let PageHeader = React.forwardRef(
     const sizingContainerRef = useRef();
     const offsetTopMeasuringRef = useRef(null);
 
+    // state based on props only
+    const hasActionBar = actionBarItems && actionBarItems.length > 0;
+    const hasBreadcrumbRow = !!breadcrumbs || !!actionBarItems;
+
     // utility functions
     const checkUpdateVerticalSpace = function () {
       return utilCheckUpdateVerticalSpace(
         headerRef,
         offsetTopMeasuringRef,
         navigation,
-        disableBreadcrumbScroll,
+        enableBreadcrumbScroll,
+        hasActionBar,
+        widthIsNarrow,
         setMetrics
       );
     };
-
-    // state based on props only
-    const hasActionBar = actionBarItems && actionBarItems.length > 0;
-    const hasBreadcrumbRow = breadcrumbs || actionBarItems;
 
     // NOTE: The buffer is used to add space between the bottom of the header and the last content
     // Not pre-collapsed and (subtitle or children)
@@ -124,6 +140,7 @@ export let PageHeader = React.forwardRef(
       useState(0);
     const [actionBarColumnWidth, setActionBarColumnWidth] = useState(0);
     const [fullyCollapsed, setFullyCollapsed] = useState(false);
+    const [widthIsNarrow, setWidthIsNarrow] = useState(false);
 
     // handlers
     const handleActionBarWidthChange = ({ minWidth, maxWidth }) => {
@@ -169,6 +186,7 @@ export let PageHeader = React.forwardRef(
 
     // use effects
     useEffect(() => {
+      /* istanbul ignore else */
       if (pageActions?.content) {
         const { minWidth, maxWidth } = pageActions;
         handlePageActionWidthChange({ minWidth, maxWidth });
@@ -180,14 +198,17 @@ export let PageHeader = React.forwardRef(
       /* istanbul ignore next */
       setPageActionsInBreadcrumbRow(
         collapseTitle ||
-          (scrollYValue > metrics.titleRowSpaceAbove && hasActionBar)
+          (hasActionBar && scrollYValue > metrics.titleRowSpaceAbove) ||
+          (widthIsNarrow && scrollYValue > metrics.pageActionsSpaceAbove)
       );
     }, [
       hasActionBar,
       metrics.breadcrumbRowSpaceBelow,
       metrics.titleRowSpaceAbove,
+      metrics.pageActionsSpaceAbove,
       collapseTitle,
       scrollYValue,
+      widthIsNarrow,
     ]);
 
     useEffect(() => {
@@ -270,7 +291,7 @@ export let PageHeader = React.forwardRef(
       }));
     }, [
       headerRef,
-      disableBreadcrumbScroll,
+      enableBreadcrumbScroll,
       metrics,
       metrics.breadcrumbRowHeight,
       metrics.breadcrumbRowSpaceBelow,
@@ -289,6 +310,7 @@ export let PageHeader = React.forwardRef(
     useNearestScroll(
       headerRef,
       // on scroll or various layout changes check updates if needed
+      // istanbul ignore next
       ({ current }) => {
         setPageHeaderStyles((prev) => ({
           ...prev,
@@ -322,24 +344,28 @@ export let PageHeader = React.forwardRef(
         metrics.headerHeight,
         metrics.headerTopValue,
         metrics.headerOffset,
-        disableBreadcrumbScroll,
+        enableBreadcrumbScroll,
       ]
     );
 
-    useWindowResize(() => {
-      // on window resize and other updates some values may have changed
-      checkUpdateVerticalSpace();
-    }, [
-      actionBarItems,
-      children,
-      breadcrumbs,
-      disableBreadcrumbScroll,
-      navigation,
-      pageActions,
-      subtitle,
-      tags,
-      title,
-    ]);
+    useWindowResize(
+      ({ current }) => {
+        // on window resize and other updates some values may have changed
+        checkUpdateVerticalSpace();
+        setWidthIsNarrow(current.innerWidth < breakpoints.md.width); // small (below medium) media query
+      },
+      [
+        actionBarItems,
+        children,
+        breadcrumbs,
+        enableBreadcrumbScroll,
+        navigation,
+        pageActions,
+        subtitle,
+        tags,
+        title,
+      ]
+    );
 
     useEffect(() => {
       checkUpdateVerticalSpace();
@@ -403,7 +429,7 @@ export let PageHeader = React.forwardRef(
     const nextToTabsCheck = () => {
       /* istanbul ignore next */
       return (
-        disableBreadcrumbScroll &&
+        enableBreadcrumbScroll &&
         !actionBarItems &&
         scrollYValue + metrics.headerTopValue >= 0
       );
@@ -473,33 +499,33 @@ export let PageHeader = React.forwardRef(
                     [`${blockClass}__breadcrumb-row--next-to-tabs`]:
                       nextToTabsCheck(),
                     [`${blockClass}__breadcrumb-row--has-breadcrumbs`]:
-                      breadcrumbs,
+                      breadcrumbs || breadcrumbItemForTitle,
                     [`${blockClass}__breadcrumb-row--has-action-bar`]:
-                      hasActionBar,
+                      hasActionBar || widthIsNarrow,
                     [`${blockClass}__has-page-actions-without-action-bar`]:
-                      !hasActionBar && pageActions,
+                      !hasActionBar && !widthIsNarrow && pageActions,
                   })}
                 >
                   <div className={`${blockClass}__breadcrumb-row--container`}>
                     <Column
                       className={cx(`${blockClass}__breadcrumb-column`, {
                         [`${blockClass}__breadcrumb-column--background`]:
-                          !!breadcrumbs || hasActionBar,
+                          !!breadcrumbs || hasActionBar || widthIsNarrow,
                       })}
                     >
                       {/* keeps actionBar right even if empty */}
 
-                      {breadcrumbs ? (
+                      {breadcrumbs || breadcrumbItemForTitle ? (
                         <BreadcrumbWithOverflow
                           className={`${blockClass}__breadcrumb`}
                           noTrailingSlash={!!title}
                           overflowAriaLabel={breadcrumbOverflowAriaLabel}
                           breadcrumbs={
-                            breadcrumbs
-                              ? breadcrumbItemForTitle
-                                ? breadcrumbs.concat(breadcrumbItemForTitle)
-                                : breadcrumbs
-                              : null
+                            breadcrumbs && breadcrumbItemForTitle
+                              ? breadcrumbs.concat(breadcrumbItemForTitle)
+                              : breadcrumbItemForTitle
+                              ? [breadcrumbItemForTitle]
+                              : breadcrumbs // breadcrumbs may be null or undefined
                           }
                         />
                       ) : null}
@@ -535,7 +561,10 @@ export let PageHeader = React.forwardRef(
                               rightAlign={true}
                             />
                           </>
-                        ) : null}
+                        ) : (
+                          widthIsNarrow &&
+                          thePageActions(true, pageActionsInBreadcrumbRow)
+                        )}
                       </div>
                     </Column>
                   </div>
@@ -548,7 +577,7 @@ export let PageHeader = React.forwardRef(
                     [`${blockClass}__title-row--no-breadcrumb-row`]:
                       !hasBreadcrumbRow,
                     [`${blockClass}__title-row--under-action-bar`]:
-                      hasActionBar,
+                      hasActionBar || widthIsNarrow,
                     [`${blockClass}__title-row--has-page-actions`]:
                       !!pageActions,
                     [`${blockClass}__title-row--sticky`]:
@@ -637,7 +666,7 @@ export let PageHeader = React.forwardRef(
             </div>
 
             {
-              // this navigation pushes the breadcrumb off or settles underneath it depending on disableBreadcrumbScroll
+              // this navigation pushes the breadcrumb off or settles underneath it depending on enableBreadcrumbScroll
               navigation ? (
                 <Row
                   className={cx(`${blockClass}__navigation-row`, {
@@ -756,6 +785,13 @@ const TYPES = {
 const tagTypes = Object.keys(TYPES);
 
 export const deprecatedProps = {
+  /**
+   * **Deprecated** see property `enableBreadcrumbScroll`
+   */
+  disableBreadcrumbScroll: deprecateProp(
+    PropTypes.bool,
+    'Property replaced by `enableBreadcrumbScroll`'
+  ),
   /**
    * **Deprecated** see property `withoutBackground`
    */
@@ -901,10 +937,10 @@ PageHeader.propTypes = {
    */
   collapseTitle: PropTypes.bool,
   /**
-   * Standard behavior scrolls the breadcrumb off to leave just tabs. This
-   * option preserves vertical space for both the breadcrumb and tabs if they're supplied.
+   * Standard keeps the breadcrumb on the page. This option allows the breadcrumb
+   * to scroll off
    */
-  disableBreadcrumbScroll: PropTypes.bool,
+  enableBreadcrumbScroll: PropTypes.bool,
   /**
    * If `hasCollapseHeaderToggle` is set and `withoutBackground` is unset/falsy then assistive text is
    * required for both the expend and collapse states of the button component used.
@@ -1025,6 +1061,11 @@ PageHeader.propTypes = {
    *    - text: title string
    *    - icon: optional icon
    *    - loading: boolean shows loading indicator if true
+   *    - onChange: function to process the live value (React change === HTML Input)
+   *    - onSave: function to process a confirmed change
+   *    - editableLabel: label for edit required if onChange supplied
+   *    - cancelDescription: label for edit cancel button
+   *    - saveDescription: label for edit save button
    * - Object containing user defined contents. These must fit within the area defined for the title in both main part of the header and the breadcrumb.
    *    - content: title or name of current location shown in main part of page header
    *    - breadcrumbContent: version of content used in the breadcrumb on scroll. If not supplied
@@ -1036,6 +1077,14 @@ PageHeader.propTypes = {
       text: PropTypes.string.isRequired,
       icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
       loading: PropTypes.bool,
+
+      // inline edit version properties
+      editableLabel: PropTypes.string, // .isRequired.if(inlineEditRequired),
+      id: PropTypes.string, // .isRequired.if(inlineEditRequired),
+      onChange: PropTypes.func,
+      onSave: PropTypes.func,
+      cancelDescription: PropTypes.string, //.isRequired.if(inlineEditRequired),
+      saveDescription: PropTypes.string, //.isRequired.if(inlineEditRequired),
       // Update docgen if changed
     }),
     PropTypes.string,
@@ -1051,11 +1100,6 @@ PageHeader.propTypes = {
    */
   withoutBackground: PropTypes.bool,
   ...deprecatedProps,
-};
-
-PageHeader.defaultProps = {
-  fullWidthGrid: false,
-  narrowGrid: false,
 };
 
 PageHeader.displayName = componentName;

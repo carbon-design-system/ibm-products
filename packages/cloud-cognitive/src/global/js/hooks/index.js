@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+export { useActiveElement } from './useActiveElement';
 export { useNearestScroll, useWindowScroll } from './useWindowScroll';
 export { useWindowResize } from './useWindowResize';
 export { useClickOutside } from './useClickOutside';
@@ -12,4 +13,5 @@ export { useCreateComponentFocus } from './useCreateComponentFocus';
 export { useCreateComponentStepChange } from './useCreateComponentStepChange';
 export { usePreviousValue } from './usePreviousValue';
 export { useResetCreateComponent } from './useResetCreateComponent';
+export { useRetrieveStepData } from './useRetrieveStepData';
 export { useValidCreateStepCount } from './useValidCreateStepCount';

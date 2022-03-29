@@ -60,6 +60,7 @@ Array [
             data-ui-id="IdePageHeader--tabs-container"
           >
             <Tabs
+              scrollDebounceWait={150}
               scrollIntoView={true}
               selected={0}
               selectionMode="automatic"
@@ -90,17 +91,7 @@ Array [
             className="storybook--idepageheader-button"
             data-ui-id="custom"
           >
-            <Button
-              dangerDescription="danger"
-              disabled={false}
-              isExpressive={false}
-              kind="primary"
-              size="default"
-              tabIndex={0}
-              tooltipAlignment="center"
-              tooltipPosition="top"
-              type="button"
-            >
+            <Button>
               Add new topic
             </Button>
           </div>
@@ -178,6 +169,7 @@ Array [
             data-ui-id="IdePageHeader--tabs-container"
           >
             <Tabs
+              scrollDebounceWait={150}
               scrollIntoView={true}
               selected={0}
               selectionMode="automatic"

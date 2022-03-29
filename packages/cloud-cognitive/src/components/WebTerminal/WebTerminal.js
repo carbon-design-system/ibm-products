@@ -25,17 +25,28 @@ import {
 const componentName = 'WebTerminal';
 const blockClass = `${pkg.prefix}--web-terminal`;
 
+// Default values for props
+const defaults = {
+  actions: Object.freeze([]),
+  documentationLinks: Object.freeze([]),
+  documentationLinksIconDescription: 'Show documentation links',
+};
+
 export let WebTerminal = React.forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
+      actions = defaults.actions,
       children,
       className,
-      closeTerminal,
-      documentationLinks,
-      documentationLinksIconDescription,
-      open,
-      actions,
       closeIconDescription,
+      closeTerminal,
+      documentationLinks = defaults.documentationLinks,
+      documentationLinksIconDescription = defaults.documentationLinksIconDescription,
+      open,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -67,16 +78,16 @@ export let WebTerminal = React.forwardRef(
         }
         ref={ref}
         className={cx([
+          className,
           blockClass,
           {
             [`${blockClass}--open`]: open,
             [`${blockClass}--closed`]: !open,
-            [className]: className,
           },
         ])}
         style={{
           animation: `${
-            open ? 'webTerminalEntrance 250ms' : 'webTerminalExit 250ms'
+            open ? 'web-terminal-entrance 250ms' : 'web-terminal-exit 250ms'
           }`,
         }}
         onAnimationEnd={onAnimationEnd}
@@ -183,15 +194,4 @@ WebTerminal.propTypes = {
    * Boolean that determines if the web terminal is opened or closed
    */
   open: PropTypes.bool.isRequired,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-WebTerminal.defaultProps = {
-  actions: [],
-  documentationLinks: [],
-  documentationLinksIconDescription: 'Show documentation links',
-  className: '',
 };

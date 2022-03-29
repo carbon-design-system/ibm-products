@@ -31,6 +31,11 @@ const componentName = 'TearsheetNarrow';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+// Default values for props
+const defaults = {
+  verticalPosition: 'lower',
+};
+
 /**
  * A narrow tearsheet is a slimmer variant of the tearsheet, providing a dialog
  * that keeps users in-context and focused by bringing actionable content front
@@ -39,12 +44,19 @@ const componentName = 'TearsheetNarrow';
  * A narrow tearsheet comprises 3 zones: a heading area including a title, the
  * main content area, and a set of action buttons.
  */
-export let TearsheetNarrow = React.forwardRef((props, ref) => (
-  <TearsheetShell
-    {...getDevtoolsProps(componentName)}
-    {...prepareProps(props, blocked, { ref, size: 'narrow' })}
-  />
-));
+export let TearsheetNarrow = React.forwardRef(
+  ({ verticalPosition = defaults.verticalPosition, ...rest }, ref) => (
+    <TearsheetShell
+      {...{
+        ...getDevtoolsProps(componentName),
+        ...prepareProps(rest, blocked),
+        verticalPosition,
+        ref,
+        size: 'narrow',
+      }}
+    />
+  )
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 TearsheetNarrow = pkg.checkComponentEnabled(TearsheetNarrow, componentName);
@@ -91,7 +103,13 @@ TearsheetNarrow.propTypes = {
     PropTypes.arrayOf(
       PropTypes.shape({
         ...Button.propTypes,
-        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+        kind: PropTypes.oneOf([
+          'ghost',
+          'danger--ghost',
+          'secondary',
+          'danger',
+          'primary',
+        ]),
         label: PropTypes.string,
         loading: PropTypes.bool,
         // we duplicate this Button prop to improve the DocGen here
@@ -153,12 +171,4 @@ TearsheetNarrow.propTypes = {
   title: PropTypes.node,
 
   ...deprecatedProps,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-TearsheetNarrow.defaultProps = {
-  verticalPosition: 'lower',
 };

@@ -183,6 +183,9 @@
           $name: entrance,
           $mode: expressive
         );
+        @media (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
     }
 
@@ -198,6 +201,9 @@
           $name: exit,
           $mode: expressive
         );
+        @media (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
     }
   }

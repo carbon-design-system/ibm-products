@@ -32,11 +32,8 @@
     }
 
     .#{$block-class}__breadcrumb-container.#{$block-class}__breadcrumb-container-with-items {
-      display: none;
+      display: inline-flex; // needed to register a width
       width: 100%;
-      @include carbon--breakpoint(md) {
-        display: inline-flex; // needed to register a width
-      }
     }
 
     .#{$block-class}__breadcrumb-container .#{$carbon-prefix}--breadcrumb {
@@ -50,12 +47,32 @@
       @include measuring-container;
     }
 
+    .#{$block-class}__breadcrumb-back {
+      display: none;
+    }
+
+    @include carbon--breakpoint-down(md) {
+      .#{$carbon-prefix}--breadcrumb-item {
+        display: none;
+      }
+
+      .#{$block-class}__breadcrumb-back,
+      .#{$carbon-prefix}--breadcrumb-item:last-child {
+        display: inline-flex;
+        vertical-align: middle;
+      }
+
+      .#{$block-class}__displayed-breadcrumb:last-child {
+        max-width: calc(100% - $spacing-07); // allow room for breadcrumb back
+      }
+    }
+
     .#{$carbon-prefix}--breadcrumb-item:last-child {
-      display: inline;
+      display: inline-flex; // flex instead of block due to spacing
     }
 
     .#{$block-class}__displayed-breadcrumb:last-child {
-      display: inline;
+      display: inline-flex; // flex instead of block due to spacing
       overflow: hidden;
     }
 
@@ -65,19 +82,10 @@
       width: 100%;
       text-overflow: ellipsis;
     }
+  }
 
-    .#{$carbon-prefix}--link {
-      max-height: 18px; // to match breadcrumb - overflow button is 20 by default
-    }
-
-    .#{$block-class}__breadcrumb-back-button.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger {
-      display: inline-flex;
-      margin-top: calc(-1 * #{$spacing-04});
-
-      @include carbon--breakpoint(md) {
-        display: none;
-      }
-    }
+  .#{$block-class}__overflow-menu-options.#{$block-class}__overflow-menu-options {
+    z-index: z('header');
   }
 }
 

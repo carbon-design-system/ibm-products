@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { types as tagTypes } from 'carbon-components-react/es/components/Tag/Tag';
 import { pkg } from '../../settings';
@@ -13,8 +13,10 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
+import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagSet } from '.';
 import mdx from './TagSet.mdx';
+import styles from './_storybook-styles.scss';
 
 const blockClass = `${pkg.prefix}--tag-set`;
 const blockClassModal = `${blockClass}-modal`;
@@ -134,10 +136,15 @@ export default {
   component: TagSet,
   parameters: {
     docs: { page: mdx },
+    styles,
   },
   argTypes: {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
+    },
+    allTagsModalTarget_CustomDomNode: {
+      control: { type: 'boolean' },
+      description: 'Optional DOM node: Modal target defaults to document.body',
     },
   },
   decorators: [
@@ -147,17 +154,25 @@ export default {
           {`.${blockClassModal} { opacity: 0; visibility: hidden; /* prevents glitch storybook modal css load */ }`}
           ;
         </style>
-        <div className="ccs-sb__display-box">{story()}</div>
+        <DisplayBox>{story()}</DisplayBox>
       </>
     ),
   ],
 };
 
 const Template = (argsIn) => {
-  const { containerWidth, ...args } = { ...argsIn };
+  const { containerWidth, allTagsModalTarget_ContainerNode, ...args } = {
+    ...argsIn,
+  };
+  const ref = useRef();
   return (
-    <div style={{ width: containerWidth }}>
-      <TagSet {...args} />
+    <div style={{ width: containerWidth }} ref={ref}>
+      <TagSet
+        {...args}
+        allTagsModalTarget={
+          allTagsModalTarget_ContainerNode ? ref.current : undefined
+        }
+      />
     </div>
   );
 };

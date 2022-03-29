@@ -20,23 +20,25 @@
 
 @mixin notifications-panel {
   $block-class: #{$pkg-prefix}--notifications-panel;
-  @keyframes fadeIn {
+  @keyframes fade-in {
     0% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateY(-38.5rem); // the height of the notification panel
     }
+
     100% {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
-  @keyframes fadeOut {
+  @keyframes fade-out {
     0% {
       opacity: 1;
       transform: translateY(0);
     }
+
     100% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
@@ -73,7 +75,8 @@
         align-items: center;
         justify-content: space-between;
       }
-      .#{$block-class}__do-not-disturb-toggle .bx--toggle__switch {
+      .#{$block-class}__do-not-disturb-toggle
+        .#{$carbon-prefix}--toggle__switch {
         margin-top: $spacing-02;
       }
       .#{$block-class}__dismiss-button {
@@ -181,16 +184,19 @@
           min-width: 5.5rem;
           padding: 0;
 
-          .bx--btn__icon {
+          .#{$carbon-prefix}--btn__icon {
             transition: transform $duration--moderate-02 ease;
+            @media (prefers-reduced-motion: reduce) {
+              transition: none;
+            }
           }
           &.#{$block-class}__notification-read-more-button {
-            .bx--btn__icon {
+            .#{$carbon-prefix}--btn__icon {
               transform: rotate(0deg);
             }
           }
           &.#{$block-class}__notification-read-less-button {
-            .bx--btn__icon {
+            .#{$carbon-prefix}--btn__icon {
               transform: rotate(180deg);
             }
           }
@@ -204,6 +210,7 @@
         padding: 0;
         color: $text-01;
         opacity: 0;
+
         &:hover,
         &:focus {
           opacity: 1;
@@ -273,7 +280,7 @@
         padding: 0;
         color: $text-01;
       }
-      .#{$block-class}__settings-button .bx--btn__icon {
+      .#{$block-class}__settings-button .#{$carbon-prefix}--btn__icon {
         margin: 0;
       }
     }

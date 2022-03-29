@@ -1,0 +1,19 @@
+@import '../carbon';
+
+.container {
+  width: 80vw;
+  min-width: 16rem;
+}
+
+.#{$prefix}--fieldset.recovery-location {
+  margin: $spacing-06 0;
+}
+
+.recovery-location__button {
+  margin-top: $spacing-04;
+}
+
+.threshold-tile {
+  margin-top: $spacing-04;
+  background-color: $ui-02;
+}

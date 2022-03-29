@@ -19,11 +19,11 @@
     background-color: $ui-background;
   }
 
-  .#{$pkg-prefix}--create-modal .bx--modal-close {
+  .#{$pkg-prefix}--create-modal .#{$carbon-prefix}--modal-close {
     display: none;
   }
 
-  .#{$pkg-prefix}--create-modal .bx--modal-container {
+  .#{$pkg-prefix}--create-modal .#{$carbon-prefix}--modal-container {
     @include carbon--breakpoint(md) {
       max-height: 95%;
     }
@@ -32,14 +32,16 @@
     }
   }
 
-  .#{$pkg-prefix}--create-modal .bx--modal-header {
+  .#{$pkg-prefix}--create-modal .#{$carbon-prefix}--modal-header {
     padding-right: 20%;
     padding-bottom: $spacing-03;
     border-bottom: 1px solid $ui-03;
     margin-bottom: 0;
   }
 
-  .#{$pkg-prefix}--create-modal .bx--modal-footer .bx--btn {
+  .#{$pkg-prefix}--create-modal
+    .#{$carbon-prefix}--modal-footer
+    .#{$carbon-prefix}--btn {
     max-width: none;
   }
 
@@ -63,13 +65,14 @@
     margin: $spacing-03 0 $spacing-05 0;
   }
 
-  .#{$pkg-prefix}--create-modal__form .bx--fieldset {
+  .#{$pkg-prefix}--create-modal__form .#{$carbon-prefix}--fieldset {
     min-width: 100%;
     margin-bottom: 0;
   }
 
   .#{$pkg-prefix}--create-modal__form > * {
     margin-bottom: $spacing-05;
+
     &:last-child {
       margin-bottom: 0;
     }

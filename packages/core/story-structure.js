@@ -14,7 +14,21 @@
 // paths but ignored during searching.
 const s = [
   {
-    n: 'Carbon for IBM Products',
+    n: 'Overview',
+    s: [
+      {
+        n: 'Getting started',
+        s: [],
+      },
+      {
+        n: 'Usage examples',
+        s: [],
+      },
+      'o/Examples',
+    ],
+  },
+  {
+    n: 'IBM Products',
     s: [
       {
         n: 'Components',
@@ -24,14 +38,15 @@ const s = [
           { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
           { n: 'Options tile', s: ['c/OptionsTile'] },
           { n: 'Page header', s: ['c/PageHeader'] },
-          { n: 'Progressive loading bar', s: ['c/LoadingBar'] },
           { n: 'Side panel', s: ['c/SidePanel'] },
           { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
+          { n: 'DataSpreadsheet', s: ['c/DataSpreadsheet'] },
         ],
       },
       {
         n: 'Patterns',
         s: [
+          { n: 'Add Select', s: ['c/SingleAddSelect', 'c/MultiAddSelect'] },
           { n: 'About modal', s: ['c/AboutModal'] },
           {
             n: 'Create flows',
@@ -42,6 +57,10 @@ const s = [
               'c/CreateTearsheetNarrow',
               'c/CreateSidePanel',
             ],
+          },
+          {
+            n: 'Edit and update',
+            s: ['c/InlineEdit', 'c/EditSidePanel'],
           },
           {
             n: 'Empty state',
@@ -56,10 +75,6 @@ const s = [
             ],
           },
           { n: 'Export', s: ['c/ExportModal'] },
-          {
-            n: 'Edit and update flows',
-            s: ['c/EditSidePanel'],
-          },
           { n: 'Generating an API key', s: ['c/APIKeyModal'] },
           {
             n: 'HTTP errors',
@@ -84,6 +99,7 @@ const s = [
           'c/BreadcrumbWithOverflow',
           'c/ButtonMenu',
           'c/ButtonSetWithOverflow',
+          'c/CancelableTextEdit',
           'c/ComboButton',
           'c/ExampleComponent',
           'c/TearsheetShell',
@@ -135,10 +151,6 @@ const s = [
         ],
       },
     ],
-  },
-  {
-    n: 'Getting Started',
-    s: [],
   },
 ];
 

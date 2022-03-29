@@ -6,6 +6,7 @@
  */
 
 import React, { useState } from 'react';
+import { action } from '@storybook/addon-actions';
 
 import { carbon } from '../../settings';
 
@@ -244,7 +245,7 @@ const pageActions = {
     content: (
       <Button
         type="button"
-        className="bx--button"
+        className={`${carbon.prefix}--button`}
         size="field"
         style={{ maxWidth: '100%' }}
       >
@@ -260,7 +261,7 @@ const pageActions = {
     content: (
       <Button
         type="button"
-        className="bx--button"
+        className={`${carbon.prefix}--button`}
         size="field"
         style={{ maxWidth: '100%' }}
         title="Custom component with long content"
@@ -347,6 +348,20 @@ const title = {
       </span>
     ),
     asText: 'User defined title',
+  },
+  'Editable title': {
+    editDescription: 'Edit',
+    editableLabel: 'Label for inline edit',
+    id: 'id for inline edit',
+    onChange: () => {
+      // gets replaced in template
+    },
+    onSave: () => {
+      // gets replaced in template
+    },
+    cancelDescription: 'Cancel',
+    saveDescription: 'Save',
+    text: 'An editable title',
   },
 };
 
@@ -520,15 +535,70 @@ const demoDummyPageContent = (
   </section>
 );
 
+const actionTitleChange = action('title onChange');
+const actionTitleSave = action('title onSave');
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ children, ...props }) => (
-  <>
-    <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
-    <PageHeader {...props}>{children}</PageHeader>
-    {dummyPageContent}
-  </>
-);
+const Template = ({ children, title, ...props }) => {
+  // eslint-disable-next-line react/prop-types
+  const [titleText, setTitleText] = useState(title?.text ?? title);
+  const handleTitleSave = title?.onSave
+    ? (val) => {
+        actionTitleSave(val);
+        setTitleText(val);
+      }
+    : null;
+  const handleTitleChange = title?.onSave ? actionTitleChange : null;
+
+  // const [theTitle, setTheTitle] = useState({});
+
+  // useEffect(() => {
+  //   console.log('effect1', titleText);
+  //   // eslint-disable-next-line react/prop-types
+  //   if (title?.text) {
+  //     setTheTitle({ ...title, text: titleText });
+  //   } else {
+  //     setTheTitle(title);
+  //   }
+  // }, [title, title.text]);
+
+  // useEffect(() => {
+  //   // only used if title property changes
+  //   // eslint-disable-next-line react/prop-types
+  //   if (title?.text) {
+  //     setTheTitle({
+  //       ...title,
+  //       // eslint-disable-next-line react/prop-types
+  //       onChange: title?.onChange && handleTitleChange,
+  //     });
+  //   } else {
+  //     setTitleText(title);
+  //   }
+  // }, [title]);
+
+  // console.log(theTitle);
+  return (
+    <>
+      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+      <PageHeader
+        {...props}
+        title={
+          title?.onSave
+            ? {
+                ...title,
+                text: titleText,
+                onChange: handleTitleChange,
+                onSave: handleTitleSave,
+              }
+            : title
+        }
+      >
+        {children}
+      </PageHeader>
+      {dummyPageContent}
+    </>
+  );
+};
 
 const commonArgs = {
   allTagsModalSearchLabel,
@@ -683,6 +753,7 @@ export const fullyLoadedAndSome = prepareStory(Template, {
 // eslint-disable-next-line react/prop-types
 const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
+
   return (
     <>
       <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
@@ -744,7 +815,6 @@ export const demo = prepareStory(TemplateDemo, {
     navigation: 3,
     tags: 3,
     actionBarItems: 4,
-    disableBreadcrumbScroll: true,
     ...commonArgs,
   },
 });

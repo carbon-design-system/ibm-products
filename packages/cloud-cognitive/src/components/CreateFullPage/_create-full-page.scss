@@ -30,6 +30,7 @@
 @mixin create-full-page {
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--create-full-page;
+  $step-block-class: #{$pkg-prefix}--create-full-page__step;
 
   .#{$block-class} .#{$block-class} {
     color: $text-01;
@@ -41,20 +42,14 @@
     margin-left: 0;
   }
 
-  .#{$block-class} .#{$block-class}__step--hidden-step,
-  .#{$block-class} .#{$block-class}__step--hidden-section {
+  .#{$block-class} .#{$step-block-class}__step--hidden-step {
     display: none;
   }
 
-  .#{$block-class} .#{$block-class}__step--visible-section {
+  .#{$block-class} .#{$step-block-class}__step--visible-step {
     display: block;
   }
 
-  .#{$block-class} .#{$block-class}__step--visible-step {
-    opacity: 1;
-  }
-
-  .#{$block-class} .#{$block-class}__section-subtitle,
   .#{$block-class} .#{$block-class}__step-subtitle {
     @include carbon--type-style('productive-heading-01');
 
@@ -62,7 +57,6 @@
     margin-bottom: $spacing-03;
   }
 
-  .#{$block-class} .#{$block-class}__section-description,
   .#{$block-class} .#{$block-class}__step-description {
     @include carbon--type-style('body-long-01');
 
@@ -150,8 +144,7 @@
     }
   }
 
-  .#{$block-class} .#{$block-class}__step-title,
-  .#{$block-class} .#{$block-class}__section-title {
+  .#{$block-class} .#{$block-class}__step-title {
     @include carbon--type-style('productive-heading-04');
 
     max-width: 50%;

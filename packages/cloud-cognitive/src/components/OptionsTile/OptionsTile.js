@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32,6 +32,11 @@ const componentName = 'OptionsTile';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+// Default values for props
+const defaults = {
+  size: 'xl',
+};
+
 /**
  * TODO: A description of the component.
  */
@@ -39,33 +44,37 @@ export let OptionsTile = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
+
       children,
       className,
       enabled,
-      heading,
-      headingId: userDefinedHeadingId,
       invalid,
       invalidText,
       locked,
       lockedText,
       onToggle,
-      size = 'xl',
+      open,
+      size = defaults.size,
       summary,
+      title,
+      titleId: userDefinedTitleId,
       warn,
       warnText,
+
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
-    const [open, setOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(open);
+    const [prevIsOpen, setPrevIsOpen] = useState(open);
     const [closing, setClosing] = useState(false);
 
     const detailsRef = useRef(null);
     const contentRef = useRef(null);
 
     const id = uuidv4();
-    const headingId = userDefinedHeadingId ?? `${id}-heading`;
+    const titleId = userDefinedTitleId ?? `${id}-title`;
 
     const isExpandable = children !== undefined;
 
@@ -78,9 +87,18 @@ export let OptionsTile = React.forwardRef(
         ? window.matchMedia('(prefers-reduced-motion: reduce)')
         : { matches: true };
 
+    if (open !== prevIsOpen) {
+      if (isOpen && !open) {
+        collapse();
+      } else if (!isOpen && open) {
+        expand();
+      }
+      setPrevIsOpen(open);
+    }
+
     function expand() {
       if (detailsRef.current && contentRef.current && !reducedMotion.matches) {
-        setOpen(true);
+        setIsOpen(true);
 
         detailsRef.current.open = true;
         const { paddingTop, paddingBottom, height } = getComputedStyle(
@@ -111,7 +129,7 @@ export let OptionsTile = React.forwardRef(
         );
       } else {
         // in case the refs are not set or the user prefers reduced motion, skip the animation
-        setOpen(true);
+        setIsOpen(true);
       }
     }
 
@@ -145,7 +163,7 @@ export let OptionsTile = React.forwardRef(
         );
 
         const callback = () => {
-          setOpen(false);
+          setIsOpen(false);
           setClosing(false);
         };
 
@@ -153,14 +171,14 @@ export let OptionsTile = React.forwardRef(
         animation.oncancel = callback;
       } else {
         // in case the ref is not set or the user prefers reduced motion, skip the animation
-        setOpen(false);
+        setIsOpen(false);
       }
     }
 
     function toggle(e) {
       e.preventDefault();
 
-      if (open) {
+      if (isOpen) {
         collapse();
       } else {
         expand();
@@ -183,14 +201,23 @@ export let OptionsTile = React.forwardRef(
       } else if (locked) {
         Icon = Locked16;
         summaryClasses.push(`${blockClass}__summary--locked`);
+
+        if (!text) {
+          text = lockedText;
+        }
       }
 
-      const summaryHidden = enabled === false;
+      const hasValidationState = invalid || warn || locked;
+      const summaryHidden = !hasValidationState && enabled === false;
+
+      if (summaryHidden) {
+        summaryClasses.push(`${blockClass}__summary--hidden`);
+      }
 
       return (
-        <div className={`${blockClass}__title`}>
-          <h6 id={headingId} className={`${blockClass}__heading`}>
-            {heading}
+        <div className={`${blockClass}__heading`}>
+          <h6 id={titleId} className={`${blockClass}__title`}>
+            {title}
           </h6>
           {text && (
             <span className={cx(summaryClasses)} aria-hidden={summaryHidden}>
@@ -228,7 +255,7 @@ export let OptionsTile = React.forwardRef(
               toggled={enabled}
               labelA=""
               labelB=""
-              aria-labelledby={headingId}
+              aria-labelledby={titleId}
               onToggle={onToggle}
               size="sm"
               disabled={isLocked}
@@ -236,7 +263,7 @@ export let OptionsTile = React.forwardRef(
           </div>
         )}
         {isExpandable ? (
-          <details open={open} ref={detailsRef}>
+          <details open={isOpen} ref={detailsRef}>
             <summary className={`${blockClass}__header`} onClick={toggle}>
               <ChevronDown16 className={`${blockClass}__chevron`} />
               {renderTitle()}
@@ -289,16 +316,6 @@ OptionsTile.propTypes = {
   enabled: PropTypes.bool,
 
   /**
-   * Provide the heading for this OptionsTile.
-   */
-  heading: PropTypes.string.isRequired,
-
-  /**
-   * Optionally provide an id which should be used for the heading.
-   */
-  headingId: PropTypes.string,
-
-  /**
    * Whether the OptionsTile is in invalid validation state.
    */
   invalid: PropTypes.bool,
@@ -325,6 +342,11 @@ OptionsTile.propTypes = {
   onToggle: PropTypes.func,
 
   /**
+   * Whether the OptionsTile is in open state.
+   */
+  open: PropTypes.bool,
+
+  /**
    * Define the size of the OptionsTile.
    */
   size: PropTypes.oneOf(['lg', 'xl']),
@@ -335,6 +357,16 @@ OptionsTile.propTypes = {
   summary: PropTypes.string,
 
   /**
+   * Provide the title for this OptionsTile.
+   */
+  title: PropTypes.string.isRequired,
+
+  /**
+   * Optionally provide an id which should be used for the title.
+   */
+  titleId: PropTypes.string,
+
+  /**
    * Whether the OptionsTile is in warning validation state.
    */
   warn: PropTypes.bool,
@@ -343,12 +375,4 @@ OptionsTile.propTypes = {
    * Provide a text explaining why the OptionsTile is in warning state.
    */
   warnText: PropTypes.string,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-OptionsTile.defaultProps = {
-  size: 'xl',
 };

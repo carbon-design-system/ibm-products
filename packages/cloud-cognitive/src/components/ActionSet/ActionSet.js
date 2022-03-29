@@ -31,8 +31,6 @@ const ActionSetButton = React.forwardRef(
       kind,
       label,
       loading,
-      onClick,
-      size,
       // Collect any other property values passed in.
       ...rest
     },
@@ -46,10 +44,13 @@ const ActionSetButton = React.forwardRef(
       isExpressive
       className={cx(className, [
         `${blockClass}__action-button`,
-        { [`${blockClass}__action-button--ghost`]: kind === 'ghost' },
+        {
+          [`${blockClass}__action-button--ghost`]:
+            kind === 'ghost' || kind === 'danger--ghost',
+        },
       ])}
       disabled={disabled || loading || false}
-      {...{ kind, onClick, ref, size }}
+      {...{ kind, ref }}
     >
       {label}
       {loading && <InlineLoading />}
@@ -61,15 +62,26 @@ ActionSetButton.displayName = 'ActionSetButton';
 
 ActionSetButton.propTypes = {
   ...Button.PropTypes,
-  kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+  kind: PropTypes.oneOf([
+    'ghost',
+    'danger--ghost',
+    'secondary',
+    'danger',
+    'primary',
+  ]),
   label: PropTypes.string,
   loading: PropTypes.bool,
 };
 
-const defaultKind = Button.defaultProps.kind;
+const defaultKind = 'primary';
 
 const willStack = (size, numberOfActions) =>
   size === 'xs' || size === 'sm' || (size === 'md' && numberOfActions > 2);
+
+// Default values for props
+const defaults = {
+  size: 'md',
+};
 
 /**
  * An ActionSet presents a set of action buttons, constructed from bundles
@@ -87,10 +99,12 @@ export const ActionSet = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
+
       actions,
       buttonSize,
       className,
-      size,
+      size = defaults.size,
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -101,22 +115,24 @@ export const ActionSet = React.forwardRef(
     // We stack the buttons in a xs/sm set, or if there are three or more in a md set.
     const stacking = willStack(size, buttons.length);
 
-    // order the actions with ghost buttons first and primary buttons last
-    // (and the opposite way if we're stacking)
-    buttons.sort((action1, action2) => {
-      const kind1 = action1.kind || defaultKind;
-      const kind2 = action2.kind || defaultKind;
+    // Order of button kinds: ghost first, then danger--ghost, then most other types,
+    // then danger, and finally primary
+    const buttonOrder = (kind) =>
+      ({
+        ghost: 1,
+        'danger--ghost': 2,
+        danger: 4,
+        primary: 5,
+      }[kind] ?? 3);
 
-      return kind1 === 'ghost' || kind2 === 'primary'
-        ? stacking
-          ? 1
-          : -1
-        : kind1 === 'primary' || kind2 === 'ghost'
-        ? stacking
-          ? -1
-          : 1
-        : 0;
-    });
+    // order the actions with ghost/ghost-danger buttons first and primary/danger buttons last
+    // (or the opposite way if we're stacking)
+    buttons.sort(
+      (action1, action2) =>
+        (buttonOrder(action1.kind || defaultKind) -
+          buttonOrder(action2.kind || defaultKind)) *
+        (stacking ? -1 : 1)
+    );
 
     return (
       <ButtonSet
@@ -175,7 +191,7 @@ ActionSet.validateActions =
     const problems = [];
 
     if (actions > 0) {
-      const size = sizeFn ? sizeFn(props) : props.size;
+      const size = sizeFn ? sizeFn(props) : props.size || defaults.size;
       const stacking = willStack(size, actions);
 
       const countActions = (kind) =>
@@ -183,7 +199,9 @@ ActionSet.validateActions =
 
       const primaryActions = countActions('primary');
       const secondaryActions = countActions('secondary');
-      const ghostActions = countActions('ghost');
+      const dangerActions = countActions('danger');
+      const ghostActions =
+        countActions('ghost') + countActions('danger--ghost');
 
       stacking &&
         actions > 3 &&
@@ -213,9 +231,10 @@ ActionSet.validateActions =
           `you cannot have a 'ghost' button in conjunction with other action types in this size of ${componentName}`
         );
 
-      actions > primaryActions + secondaryActions + ghostActions &&
+      actions >
+        primaryActions + secondaryActions + dangerActions + ghostActions &&
         problems.push(
-          `you can only have 'primary', 'secondary' and 'ghost' buttons in a ${componentName}`
+          `you can only have 'primary', 'danger', 'secondary', 'ghost' and 'danger--ghost' buttons in a ${componentName}`
         );
     }
 
@@ -246,7 +265,13 @@ ActionSet.propTypes = {
     PropTypes.arrayOf(
       PropTypes.shape({
         ...Button.propTypes,
-        kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+        kind: PropTypes.oneOf([
+          'ghost',
+          'danger--ghost',
+          'secondary',
+          'danger',
+          'primary',
+        ]),
         label: PropTypes.string,
         loading: PropTypes.bool,
         // we duplicate this Button prop to improve the DocGen here
@@ -273,8 +298,4 @@ ActionSet.propTypes = {
    * different sizes, to make best use of the available space.
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xlg', 'max']),
-};
-
-ActionSet.defaultProps = {
-  size: 'md',
 };

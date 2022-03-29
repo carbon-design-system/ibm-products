@@ -6,6 +6,7 @@
 //
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -24,20 +25,32 @@ const blockClass = `${pkg.prefix}--tag-set`;
 
 const allTagsModalSearchThreshold = 10;
 
+// Default values for props
+const defaults = {
+  align: 'start',
+  allTagsModalTarget: document.body,
+  overflowAlign: 'center',
+  overflowDirection: 'bottom',
+};
+
 export let TagSet = React.forwardRef(
   (
     {
-      align,
+      // The component props, in alphabetical order (for consistency).
+
+      align = defaults.align,
+      allTagsModalTarget = defaults.allTagsModalTarget,
       className,
       maxVisible,
-      overflowAlign,
+      overflowAlign = defaults.overflowAlign,
       overflowClassName,
-      overflowDirection,
+      overflowDirection = defaults.overflowDirection,
       allTagsModalTitle,
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
       showAllTagsLabel,
       tags,
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -63,14 +76,18 @@ export let TagSet = React.forwardRef(
       // create sizing tags
       setHiddenSizingTags(
         tags && tags.length > 0
-          ? tags.map(({ label, ...other }, index) => {
+          ? tags.map(({ label, id, ...other }, index) => {
               return (
                 <div
                   key={index}
                   className={`${blockClass}__sizing-tag`}
                   ref={(el) => (newSizingTags[index] = el)}
                 >
-                  <Tag {...other} filter={false}>
+                  <Tag
+                    {...other} // ensure id is not duplicated
+                    data-original-id={id}
+                    filter={false}
+                  >
                     {label}
                   </Tag>
                 </div>
@@ -224,16 +241,19 @@ export let TagSet = React.forwardRef(
           </div>
         </div>
 
-        {tags && displayCount < tags.length ? (
-          <TagSetModal
-            allTags={tags}
-            open={showAllModalOpen}
-            title={allTagsModalTitle}
-            onClose={handleModalClose}
-            searchLabel={allTagsModalSearchLabel}
-            searchPlaceholder={allTagsModalSearchPlaceholderText}
-          />
-        ) : null}
+        {allTagsModalTarget && tags && displayCount < tags.length
+          ? createPortal(
+              <TagSetModal
+                allTags={tags}
+                open={showAllModalOpen}
+                title={allTagsModalTitle}
+                onClose={handleModalClose}
+                searchLabel={allTagsModalSearchLabel}
+                searchPlaceholder={allTagsModalSearchPlaceholderText}
+              />,
+              allTagsModalTarget
+            )
+          : null}
       </div>
     );
   }
@@ -283,6 +303,10 @@ TagSet.propTypes = {
    */
   allTagsModalSearchPlaceholderText: string_required_if_more_than_10_tags,
   /**
+   * portal target for the all tags modal
+   */
+  allTagsModalTarget: PropTypes.node,
+  /**
    * title for the show all modal. **Note: Required if more than 10 tags**
    */
   allTagsModalTitle: string_required_if_more_than_10_tags,
@@ -330,12 +354,6 @@ TagSet.propTypes = {
       type: PropTypes.oneOf(tagTypes),
     })
   ),
-};
-
-TagSet.defaultProps = {
-  align: 'start',
-  overflowAlign: 'center',
-  overflowDirection: 'bottom',
 };
 
 TagSet.displayName = componentName;

@@ -30,6 +30,7 @@ const tags = Array.from({ length: 20 }, (v, k) => ({
   type: types[k % types.length],
   ['data-search']: `${k === 11 ? 'dozen 1100' : Number(k + 1).toString(2)}`, // adds binary value for data-search test
   label: tagLabel(k),
+  id: `id-${k}`,
 }));
 const tags10 = tags.slice(0, 10);
 const tagWidth = 100;
@@ -232,6 +233,12 @@ describe(TagSet.displayName, () => {
 
     render(<TagSet data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
+  });
+
+  it('Does not duplicate tag ids', () => {
+    const { container } = render(<TagSet tags={tags10} />);
+
+    expect(container.querySelectorAll(`#${tags10[0].id}`)).toHaveLength(1);
   });
 
   describe(TagSetModal.displayName, () => {

@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -14,8 +14,6 @@ import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
-
-import { CREATE_FULL_PAGE_SECTION, CREATE_FULL_PAGE_STEP } from './constants';
 
 // Carbon and package components we use.
 import {
@@ -35,10 +33,19 @@ import {
   useCreateComponentFocus,
   useCreateComponentStepChange,
 } from '../../global/js/hooks';
-import { hasValidChildrenType } from '../../global/js/utils/hasValidType';
+import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
+
+// This is a general context for the steps container
+// containing information about the state of the container
+// and providing some callback methods for steps to use
+export const StepsContext = createContext(null);
+
+// This is a context supplied separately to each step in the container
+// to let it know what number it is in the sequence of steps
+export const StepNumberContext = createContext(-1);
 
 export let CreateFullPage = React.forwardRef(
   (
@@ -47,7 +54,6 @@ export let CreateFullPage = React.forwardRef(
       cancelButtonText,
       children,
       className,
-      includeViewAllToggle,
       modalDangerButtonText,
       modalDescription,
       modalSecondaryButtonText,
@@ -55,11 +61,7 @@ export let CreateFullPage = React.forwardRef(
       nextButtonText,
       onClose,
       onRequestSubmit,
-      sideNavAriaLabel,
       submitButtonText,
-      viewAllToggleLabelText,
-      viewAllToggleOffLabelText,
-      viewAllToggleOnLabelText,
       ...rest
     },
     ref
@@ -67,42 +69,47 @@ export let CreateFullPage = React.forwardRef(
     const [createFullPageActions, setCreateFullPageActions] = useState([]);
     const [shouldViewAll, setShouldViewAll] = useState(false);
     const [currentStep, setCurrentStep] = useState(1);
-    const [activeSectionIndex, setActiveSectionIndex] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const previousState = usePreviousValue({ currentStep, open });
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [onNext, setOnNext] = useState();
+    const [onMount, setOnMount] = useState();
+    const [stepData, setStepData] = useState([]);
+    const [firstIncludedStep, setFirstIncludedStep] = useState(1);
+    const [lastIncludedStep, setLastIncludedStep] = useState(null);
 
-    // returns an array of full page steps
-    const getFullPageSteps = useCallback(() => {
-      const steps = [];
-      const childrenArray = Array.isArray(children) ? children : [children];
-      const extractedChildren =
-        childrenArray && childrenArray[0]?.type === React.Fragment
-          ? childrenArray[0].props.children
-          : childrenArray;
-      extractedChildren.forEach((child) => {
-        if (isFullPageStep(child)) {
-          steps.push(child);
-        }
-      });
-      return steps;
-    }, [children]);
+    useEffect(() => {
+      const firstItem =
+        stepData.findIndex((item) => item?.shouldIncludeStep) + 1;
+      const lastItem = lastIndexInArray(stepData, 'shouldIncludeStep', true);
+      if (firstItem !== firstIncludedStep) {
+        setFirstIncludedStep(firstItem);
+      }
+      if (lastItem !== lastIncludedStep) {
+        setLastIncludedStep(lastItem);
+      }
+    }, [stepData, firstIncludedStep, lastIncludedStep]);
 
-    useCreateComponentFocus(
+    useCreateComponentFocus({
       previousState,
       currentStep,
-      getFullPageSteps,
-      blockClass
-    );
-    useValidCreateStepCount(getFullPageSteps, componentName);
+      blockClass,
+      onMount,
+    });
+    useValidCreateStepCount(stepData.length, componentName);
     useCreateComponentStepChange({
+      firstIncludedStep,
+      lastIncludedStep,
+      stepData,
+      onNext,
+      isSubmitDisabled: isDisabled,
       setCurrentStep,
       setIsSubmitting,
       setShouldViewAll,
       onClose,
       onRequestSubmit,
       componentName,
-      getComponentSteps: getFullPageSteps,
       currentStep,
       shouldViewAll,
       backButtonText,
@@ -115,218 +122,7 @@ export let CreateFullPage = React.forwardRef(
       setModalIsOpen,
     });
 
-    // Log a warning to the console in the event there are no CreateFullPageSection components
-    // inside of the CreateFullPageSteps when the viewAll toggle is provided and turned on.
-    // currently, we are not supporting the use of FullPageSections -- this may be a future feature
-    /* istanbul ignore next */
-    useEffect(() => {
-      if (includeViewAllToggle && shouldViewAll) {
-        let childrenArray = Array.isArray(children) ? children : [children];
-        const fullPageStepComponents = childrenArray.filter((child) =>
-          isFullPageStep(child)
-        );
-        let fullPageSectionComponents = [];
-        fullPageStepComponents.forEach((child, index) => {
-          // We have received children for a FullPageStep
-          if (shouldViewAll && typeof child.props.children !== 'undefined') {
-            // Only a string was provided as children of CreateFullPageStep, this is not permitted when using view all toggle
-            if (typeof child.props.children === 'string') {
-              console.warn(
-                `${componentName}: You must have at least one CreateFullPageSection component in a CreateFullPageStep when using the 'includeViewAllToggle' prop.`
-              );
-            } else {
-              // The FullPageStep has an array of children, lets check each one to see if it is a FullPageSection
-              if (child.props.children.length) {
-                child.props.children.forEach((stepChild) => {
-                  if (isFullPageSection(stepChild)) {
-                    fullPageSectionComponents.push(stepChild);
-                  }
-                });
-              } else {
-                // The FullPageStep only has a single React element as a child, lets check to see if it is a FullPageSection
-                if (isFullPageSection(child.props.children)) {
-                  fullPageSectionComponents.push(child.props.children);
-                }
-              }
-            }
-          }
-          // If there are fewer CreateFullPageSection components than CreateFullPageStep components
-          // it means that each CreateFullPageStep does not have at least one CreateFullPageSection
-          // this is not permitted when using view all toggle
-          if (
-            fullPageSectionComponents.length < fullPageStepComponents.length &&
-            index === fullPageStepComponents.length - 1 // wait until we've finished checking each FullPageStep before giving a warning
-          ) {
-            console.warn(
-              `${componentName}: You must have at least one CreateFullPageSection component in a CreateFullPageStep when using the 'includeViewAllToggle' prop.`
-            );
-          }
-          // We have received a single child element, lets check to see that it is
-          // a CreateFullPageSection component, if it is not we should add a console
-          // warning, as each CreateFullPageStep required at least one CreateFullPageSection,
-          // when using the view all toggle
-          if (
-            shouldViewAll &&
-            typeof child.props.children !== 'undefined' &&
-            !child.props.children.length
-          ) {
-            if (!isFullPageSection(child.props.children)) {
-              console.warn(
-                `${componentName}: You must have at least one CreateFullPageSection component in a CreateFullPageStep when using the 'includeViewAllToggle' prop.`
-              );
-            }
-          }
-        });
-      }
-    }, [includeViewAllToggle, shouldViewAll, children]);
-
-    // check if child is a full page step component
-    const isFullPageStep = (child) => {
-      if (child && child.props && child.props.type === CREATE_FULL_PAGE_STEP) {
-        return true;
-      }
-      return false;
-    };
-
-    // check if child is a full page section component
-    // currently, we are not supporting the use of FullPageSections -- this may be a future feature
-    /* istanbul ignore next */
-    const isFullPageSection = (child) => {
-      if (
-        child &&
-        child.props &&
-        child.props.type === CREATE_FULL_PAGE_SECTION
-      ) {
-        return true;
-      }
-      return false;
-    };
-
-    // renders the step progression components in the left influencer area
-    const getFullPageComponents = (childrenElements) => {
-      let childrenArray = Array.isArray(childrenElements)
-        ? childrenElements
-        : [childrenElements];
-      const fullPageStepComponents = childrenArray.filter((child) =>
-        isFullPageStep(child)
-      );
-      let sectionChildElements = [];
-      fullPageStepComponents.forEach((child) => {
-        // we have received an array of children, lets check to see that each child is
-        // a FullPageSection component before adding it to sectionChildElements
-        // currently, we are not supporting the use of FullPageSections -- this may be a future feature
-        /* istanbul ignore next */
-        if (shouldViewAll && child.props.children.length) {
-          child.props.children.forEach((stepChild) => {
-            if (isFullPageSection(stepChild)) {
-              sectionChildElements.push(stepChild);
-            }
-          });
-        }
-        // we have received a single child element, lets check to see that it is
-        // a CreateFullPageSection component before adding it to sectionChildElements
-        if (
-          shouldViewAll &&
-          typeof child.props.children !== 'undefined' &&
-          !child.props.children.length
-        ) {
-          // currently, we are not supporting the use of FullPageSections -- this may be a future feature
-          /* istanbul ignore next */
-          if (isFullPageSection(child.props.children)) {
-            sectionChildElements.push(child.props.children);
-          }
-        }
-      });
-      return {
-        sections: sectionChildElements,
-        steps: fullPageStepComponents,
-      };
-    };
-
-    // renders all children (CreateFullPageSteps and regular children elements)
-    const renderChildren = (childrenElements) => {
-      let step = 0;
-      const childrenArray = Array.isArray(childrenElements)
-        ? childrenElements
-        : [childrenElements];
-      const indexOfLastFullPageStep = childrenArray
-        .map((el) => el?.props?.type)
-        .lastIndexOf(CREATE_FULL_PAGE_STEP);
-      return (
-        <>
-          {childrenArray.map((child, stepIndex) => {
-            if (!isFullPageStep(child)) {
-              return child;
-            }
-            step++;
-            return React.cloneElement(
-              child,
-              {
-                className: cx(child.props.className, {
-                  [`${blockClass}__step--hidden-step`]:
-                    !shouldViewAll && currentStep !== step,
-                  [`${blockClass}__step--visible-step`]: currentStep === step,
-                }),
-                key: `key_${stepIndex}`,
-              },
-              <>
-                {renderStepChildren(
-                  child.props.children,
-                  indexOfLastFullPageStep === step - 1
-                )}
-              </>
-            );
-          })}
-        </>
-      );
-    };
-
-    const renderStepChildren = (fullPageStepComponent, isLastFullPageStep) => {
-      const fullPageStepComponents = Array.isArray(fullPageStepComponent)
-        ? fullPageStepComponent
-        : [fullPageStepComponent];
-      return (
-        <>
-          {fullPageStepComponents.map((child, index) => {
-            if (!isFullPageSection(child)) {
-              return child;
-            }
-            // Needed to be able to not render the divider
-            // line on the last section of the last step
-            // currently, we are not supporting the use of FullPageSections -- this may be a future feature
-            /* istanbul ignore next */
-            const isLastSectionOfLastStep =
-              isLastFullPageStep && fullPageStepComponents.length - 1 === index;
-            /* istanbul ignore next */
-            return React.cloneElement(
-              child,
-              {
-                className: cx(child.props.className, {
-                  [`${blockClass}__step--hidden-section`]:
-                    child.props.viewAllOnly && !shouldViewAll,
-                  [`${blockClass}__step--visible-section`]:
-                    !child.props.viewAllOnly ||
-                    (child.props.viewAllOnly && shouldViewAll),
-                }),
-                key: `key_${index}`,
-              },
-              <>
-                {shouldViewAll && (
-                  <h4 className={`${blockClass}__step-title`}>
-                    {child.props.title}
-                  </h4>
-                )}
-                {child}
-                {shouldViewAll && !isLastSectionOfLastStep && (
-                  <span className={`${blockClass}__section-divider`} />
-                )}
-              </>
-            );
-          })}
-        </>
-      );
-    };
-    // currently, we are not supporting the use of 'view all' toggle state or CreateFullPageSection -- this may be a future feature
+    // currently, we are not supporting the use of 'view all' toggle state
     /* istanbul ignore next */
     return (
       <div
@@ -336,29 +132,29 @@ export let CreateFullPage = React.forwardRef(
         {...getDevtoolsProps(componentName)}
       >
         <div className={`${blockClass}__influencer`}>
-          <CreateInfluencer
-            activeSectionIndex={activeSectionIndex}
-            componentBlockClass={blockClass}
-            createComponentName={componentName}
-            currentStep={currentStep}
-            createComponents={getFullPageComponents(children)}
-            includeViewAllToggle={includeViewAllToggle}
-            handleToggleState={(toggleState) => setShouldViewAll(toggleState)}
-            handleActiveSectionIndex={(index) => setActiveSectionIndex(index)}
-            previousState={previousState}
-            sideNavAriaLabel={sideNavAriaLabel}
-            toggleState={shouldViewAll}
-            viewAllToggleLabelText={viewAllToggleLabelText}
-            viewAllToggleOffLabelText={viewAllToggleOffLabelText}
-            viewAllToggleOnLabelText={viewAllToggleOnLabelText}
-          />
+          <CreateInfluencer stepData={stepData} currentStep={currentStep} />
         </div>
         <div className={`${blockClass}__body`}>
           <div className={`${blockClass}__main`}>
             <div className={`${blockClass}__content`}>
               <Grid>
                 <Form className={`${blockClass}__form`}>
-                  {renderChildren(children)}
+                  <StepsContext.Provider
+                    value={{
+                      currentStep,
+                      setIsDisabled,
+                      setOnNext: (fn) => setOnNext(() => fn),
+                      setOnMount: (fn) => setOnMount(() => fn),
+                      setStepData,
+                      stepData,
+                    }}
+                  >
+                    {React.Children.map(children, (child, index) => (
+                      <StepNumberContext.Provider value={index + 1}>
+                        {child}
+                      </StepNumberContext.Provider>
+                    ))}
+                  </StepsContext.Provider>
                 </Form>
               </Grid>
             </div>
@@ -423,21 +219,12 @@ CreateFullPage.propTypes = {
   /**
    * The main content of the full page
    */
-  children: hasValidChildrenType({
-    componentName,
-    childType: CREATE_FULL_PAGE_STEP,
-  }),
+  children: PropTypes.node,
 
   /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-
-  /**
-   * @ignore
-   * An optional prop that provides a toggle element in the left side influencer panel
-   */
-  includeViewAllToggle: PropTypes.bool,
 
   /**
    * The primary 'danger' button text in the modal
@@ -491,26 +278,4 @@ CreateFullPage.propTypes = {
    * The main title of the full page, displayed in the header area.
    */
   title: PropTypes.node,
-
-  /**
-   * @ignore
-   * Sets the label text for the view all toggle component
-   */
-  viewAllToggleLabelText: PropTypes.string,
-
-  /**
-   * @ignore
-   * Sets the label text for the view all toggle `off` text
-   */
-  viewAllToggleOffLabelText: PropTypes.string,
-
-  /**
-   * @ignore
-   * Sets the label text for the view all toggle `on` text
-   */
-  viewAllToggleOnLabelText: PropTypes.string,
-};
-
-CreateFullPage.defaultProps = {
-  includeViewAllToggle: false,
 };

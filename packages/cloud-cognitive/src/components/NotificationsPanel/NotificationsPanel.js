@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,48 +30,83 @@ import {
   Close16,
   Settings16,
 } from '@carbon/icons-react';
+import { usePreviousValue } from '../../global/js/hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'NotificationsPanel';
 const blockClass = `${pkg.prefix}--notifications-panel`;
 
+// Default values for props
+const defaults = {
+  daysAgoText: (value) => `${value} days ago`,
+  dismissAllLabel: 'Dismiss all',
+  dismissSingleNotificationIconDescription: 'Dismiss',
+  doNotDisturbLabel: 'Do not disturb',
+  emptyStateLabel: 'You do not have any notifications',
+  hourAgoText: (value) => `${value} hour ago`,
+  hoursAgoText: (value) => `${value} hours ago`,
+  minuteAgoText: (value) => `${value} minute ago`,
+  minutesAgoText: (value) => `${value} minutes ago`,
+  monthAgoText: (value) => `${value} month ago`,
+  monthsAgoText: (value) => `${value} months ago`,
+  nowText: 'Now',
+  onDismissAllNotifications: () => {},
+  onDismissSingleNotification: () => {},
+  previousLabel: 'Previous',
+  readLessLabel: 'Read less',
+  readMoreLabel: 'Read more',
+  secondsAgoText: (value) => `${value} seconds ago`,
+  settingsIconDescription: 'Settings',
+  title: 'Notifications',
+  todayLabel: 'Today',
+  viewAllLabel: (value) => `View all (${value})`,
+  yearAgoText: (value) => `${value} year ago`,
+  yearsAgoText: (value) => `${value} years ago`,
+  yesterdayAtText: (value) => `Yesterday at ${value}`,
+  yesterdayLabel: 'Yesterday',
+};
+
 export let NotificationsPanel = React.forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       className,
       data,
-      daysAgoText,
-      dismissAllLabel,
-      dismissSingleNotificationIconDescription,
+      daysAgoText = defaults.daysAgoText,
+      dismissAllLabel = defaults.dismissAllLabel,
+      dismissSingleNotificationIconDescription = defaults.dismissSingleNotificationIconDescription,
       doNotDisturbDefaultToggled,
-      doNotDisturbLabel,
-      emptyStateLabel,
-      hoursAgoText,
-      hourAgoText,
-      minuteAgoText,
-      minutesAgoText,
-      monthsAgoText,
-      monthAgoText,
-      nowText,
+      doNotDisturbLabel = defaults.doNotDisturbLabel,
+      emptyStateLabel = defaults.emptyStateLabel,
+      hourAgoText = defaults.hourAgoText,
+      hoursAgoText = defaults.hoursAgoText,
+      minuteAgoText = defaults.minuteAgoText,
+      minutesAgoText = defaults.minutesAgoText,
+      monthAgoText = defaults.monthAgoText,
+      monthsAgoText = defaults.monthsAgoText,
+      nowText = defaults.nowText,
       onClickOutside,
-      onDismissAllNotifications,
-      onDismissSingleNotification,
+      onDismissAllNotifications = defaults.onDismissAllNotifications,
+      onDismissSingleNotification = defaults.onDismissSingleNotification,
       onDoNotDisturbChange,
       onSettingsClick,
       onViewAllClick,
       open,
-      previousLabel,
-      readLessLabel,
-      readMoreLabel,
-      secondsAgoText,
-      settingsIconDescription,
-      title,
-      todayLabel,
-      viewAllLabel,
-      yearsAgoText,
-      yearAgoText,
-      yesterdayAtText,
-      yesterdayLabel,
+      previousLabel = defaults.previousLabel,
+      readLessLabel = defaults.readLessLabel,
+      readMoreLabel = defaults.readMoreLabel,
+      secondsAgoText = defaults.secondsAgoText,
+      settingsIconDescription = defaults.settingsIconDescription,
+      title = defaults.title,
+      todayLabel = defaults.todayLabel,
+      viewAllLabel = defaults.viewAllLabel,
+      yearAgoText = defaults.yearAgoText,
+      yearsAgoText = defaults.yearsAgoText,
+      yesterdayAtText = defaults.yesterdayAtText,
+      yesterdayLabel = defaults.yesterdayLabel,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -79,6 +114,12 @@ export let NotificationsPanel = React.forwardRef(
     const notificationPanelRef = useRef();
     const [shouldRender, setRender] = useState(open);
     const [allNotifications, setAllNotifications] = useState([]);
+    const previousState = usePreviousValue({ open });
+
+    const reducedMotion =
+      window && window.matchMedia
+        ? window.matchMedia('(prefers-reduced-motion: reduce)')
+        : { matches: true };
 
     useEffect(() => {
       // Set the notifications passed to the state within this component
@@ -100,6 +141,12 @@ export let NotificationsPanel = React.forwardRef(
       // initialize the notification panel to close
       !open && setRender(false);
     };
+
+    useEffect(() => {
+      if (!open && previousState?.open && reducedMotion.matches) {
+        setRender(false);
+      }
+    }, [open, reducedMotion.matches, previousState?.open]);
 
     const sortChronologically = (arr) => {
       if (!arr || (arr && !arr.length)) {
@@ -336,7 +383,9 @@ export let NotificationsPanel = React.forwardRef(
         id={blockClass}
         className={cx(blockClass, className, `${blockClass}__container`)}
         style={{
-          animation: `${open ? 'fadeIn 250ms' : 'fadeOut 250ms'}`,
+          animation: !reducedMotion.matches
+            ? `${open ? 'fade-in 250ms' : 'fade-out 250ms'}`
+            : null,
         }}
         onAnimationEnd={onAnimationEnd}
         ref={ref || notificationPanelRef}
@@ -542,12 +591,12 @@ NotificationsPanel.propTypes = {
   /**
    * Function that will dismiss all notifications
    */
-  onDismissAllNotifications: PropTypes.func.isRequired,
+  onDismissAllNotifications: PropTypes.func,
 
   /**
    * Function that will dismiss a single notification
    */
-  onDismissSingleNotification: PropTypes.func.isRequired,
+  onDismissSingleNotification: PropTypes.func,
 
   /**
    * Function that returns the current selected value of the disable notification toggle
@@ -628,37 +677,4 @@ NotificationsPanel.propTypes = {
    * Sets the yesterday label text
    */
   yesterdayLabel: PropTypes.string,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-NotificationsPanel.defaultProps = {
-  daysAgoText: (value) => `${value} days ago`,
-  dismissAllLabel: 'Dismiss all',
-  dismissSingleNotificationIconDescription: 'Dismiss',
-  doNotDisturbLabel: 'Do not disturb',
-  emptyStateLabel: 'You do not have any notifications',
-  hourAgoText: (value) => `${value} hour ago`,
-  hoursAgoText: (value) => `${value} hours ago`,
-  minuteAgoText: (value) => `${value} minute ago`,
-  minutesAgoText: (value) => `${value} minutes ago`,
-  monthAgoText: (value) => `${value} month ago`,
-  monthsAgoText: (value) => `${value} months ago`,
-  nowText: 'Now',
-  onDismissAllNotifications: () => {},
-  onDismissSingleNotification: () => {},
-  previousLabel: 'Previous',
-  readLessLabel: 'Read less',
-  readMoreLabel: 'Read more',
-  secondsAgoText: (value) => `${value} seconds ago`,
-  settingsIconDescription: 'Settings',
-  title: 'Notifications',
-  todayLabel: 'Today',
-  viewAllLabel: (value) => `View all (${value})`,
-  yearsAgoText: (value) => `${value} years ago`,
-  yearAgoText: (value) => `${value} year ago`,
-  yesterdayLabel: 'Yesterday',
-  yesterdayAtText: (value) => `Yesterday at ${value}`,
 };

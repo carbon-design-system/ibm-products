@@ -227,7 +227,7 @@ export const tearsheetNarrow = prepareStory(Template, {
     description,
     onClose: action('onClose called'),
     title,
-    actions: 6,
+    actions: 7,
   },
 });
 
@@ -240,7 +240,7 @@ export const fullyLoaded = prepareStory(Template, {
     label,
     onClose: action('onClose called'),
     title,
-    actions: 3,
+    actions: 0,
   },
 });
 
@@ -251,6 +251,6 @@ export const stacked = prepareStory(StackedTemplate, {
     description,
     height: 'lower',
     label,
-    actions: 6,
+    actions: 7,
   },
 });

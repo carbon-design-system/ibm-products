@@ -13,6 +13,8 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
+import { DisplayBox } from '../../global/js/utils/DisplayBox';
+import styles from './_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(BreadcrumbWithOverflow.displayName),
@@ -34,14 +36,16 @@ export default {
     },
     lastBreadcrumbIsCurrent: { control: { type: 'boolean' } },
   },
-  decorators: [
-    (story) => <div className={`ccs-sb__display-box`}>{story()}</div>,
-  ],
+  parameters: {
+    styles,
+  },
+  decorators: [(story) => <DisplayBox>{story()}</DisplayBox>],
 };
 
 const breadcrumbItems = [
   {
     key: '1',
+    id: 'id-1',
     href: '/#',
     onClick: (ev) => {
       ev.preventDefault();
@@ -51,6 +55,7 @@ const breadcrumbItems = [
   },
   {
     key: '2',
+    id: 'id-2',
     href: '/#',
     onClick: (ev) => {
       ev.preventDefault();
@@ -60,6 +65,7 @@ const breadcrumbItems = [
   },
   {
     key: '3',
+    id: 'id-3',
     href: '/#',
     onClick: (ev) => {
       ev.preventDefault();
@@ -69,6 +75,7 @@ const breadcrumbItems = [
   },
   {
     key: '4',
+    id: 'id-4',
     href: '/#',
     onClick: (ev) => {
       ev.preventDefault();

@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useLayoutEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 
 // Other standard imports.
@@ -129,8 +129,7 @@ export const TearsheetShell = React.forwardRef(
       setTimeout(() => element.focus(), 1);
     };
 
-    // Hook called whenever the tearsheet mounts, unmounts, or 'open' changes.
-    useLayoutEffect(() => {
+    useEffect(() => {
       const notify = () =>
         stack.all.forEach((handler) => {
           handler(
@@ -354,7 +353,13 @@ TearsheetShell.propTypes = {
     // one should ensure appropriate validation is done.
     PropTypes.shape({
       ...Button.propTypes,
-      kind: PropTypes.oneOf(['ghost', 'secondary', 'primary']),
+      kind: PropTypes.oneOf([
+        'ghost',
+        'danger--ghost',
+        'secondary',
+        'danger',
+        'primary',
+      ]),
       label: PropTypes.string,
       loading: PropTypes.bool,
       // we duplicate this Button prop to improve the DocGen here

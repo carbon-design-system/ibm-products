@@ -28,6 +28,12 @@ const componentName = 'EditSidePanel';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+// Default values for props
+const defaults = {
+  placement: 'right',
+  size: 'md',
+};
+
 /**
  * TODO: A description of the component.
  */
@@ -35,6 +41,7 @@ export let EditSidePanel = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
+
       children,
       className,
       disableSubmit,
@@ -43,15 +50,17 @@ export let EditSidePanel = React.forwardRef(
       onRequestClose,
       onRequestSubmit,
       open,
-      placement,
+      placement = defaults.placement,
       primaryButtonText,
       secondaryButtonText,
       selectorPrimaryFocus,
       selectorPageContent,
-      size,
+      size = defaults.size,
       slideIn,
       subtitle,
       title,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -228,13 +237,4 @@ EditSidePanel.propTypes = {
    * The title of the CreateSidePanel is usually the product or service name.
    */
   title: PropTypes.node.isRequired,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-EditSidePanel.defaultProps = {
-  placement: 'right',
-  size: 'md',
 };

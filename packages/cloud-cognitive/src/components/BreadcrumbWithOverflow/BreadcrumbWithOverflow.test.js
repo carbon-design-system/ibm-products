@@ -9,10 +9,11 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { BreadcrumbWithOverflow } from '.';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
-import { carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
+import { pkg, carbon } from '../../settings';
 
 const dataTestId = uuidv4();
+const blockClass = `${pkg.prefix}--breadcrumb-with-overflow`;
 
 const breadcrumbContent = Array.from(
   { length: 5 },
@@ -21,6 +22,7 @@ const breadcrumbContent = Array.from(
 
 const breadcrumbItems = breadcrumbContent.map((item) => ({
   href: '/#',
+  id: `id-${item.replace(' ', '_')}`,
   key: item,
   label: item,
   onClick: () => {},
@@ -111,7 +113,9 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       />
     );
 
-    const visibleBreadcrumbs = screen.getAllByRole('listitem');
+    const visibleBreadcrumbs = screen.getAllByText(/Breadcrumb [0-9]/, {
+      selector: `.${blockClass}__displayed-breadcrumb .${carbon.prefix}--link`,
+    });
     expect(visibleBreadcrumbs.length).toEqual(5); // all should be visible
 
     breadcrumbContent.forEach((item, index) => {
@@ -133,10 +137,13 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       />
     );
 
-    const visibleBreadcrumbs = screen.getAllByRole('listitem');
+    const visibleBreadcrumbs = screen.getAllByText(/Breadcrumb [0-9]/, {
+      selector: `.${blockClass}__displayed-breadcrumb .${carbon.prefix}--link`,
+    });
+
     // not enough room
     expect(visibleBreadcrumbs.length).toEqual(
-      breadcrumbItems.length - reduceSpaceBy
+      breadcrumbItems.length - reduceSpaceBy - 1
     );
 
     expect(visibleBreadcrumbs[0]).toHaveTextContent(breadcrumbContent[0]);
@@ -146,7 +153,9 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     );
 
     // item 2 contains an overflow menu
-    const overflowBtn = screen.getByRole('button');
+    const overflowBtn = screen.getByLabelText(/Open and close/, {
+      selector: `.${blockClass}__overflow-menu`,
+    });
     click(overflowBtn);
 
     // <ul role='menu' /> but default <ul> role of list used for query
@@ -172,15 +181,19 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       />
     );
 
-    const visibleBreadcrumbs = screen.getAllByRole('listitem');
+    const visibleBreadcrumbs = screen.getAllByText(/Breadcrumb [0-9]/, {
+      selector: `.${blockClass}__displayed-breadcrumb .${carbon.prefix}--link`,
+    });
     // not enough room
-    expect(visibleBreadcrumbs.length).toEqual(2); // last + overflow
+    expect(visibleBreadcrumbs.length).toEqual(1);
 
     // last item is last breadcrumb
-    expect(visibleBreadcrumbs[1]).toHaveTextContent(breadcrumbContent[4]);
+    expect(visibleBreadcrumbs[0]).toHaveTextContent(breadcrumbContent[4]);
 
     // item 2 contains an overflow menu
-    const overflowBtn = screen.getByRole('button');
+    const overflowBtn = screen.getByLabelText(/Open and close/, {
+      selector: `.${blockClass}__overflow-menu`,
+    });
     expect(overflowBtn).toBeTruthy();
   });
 
@@ -194,15 +207,19 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       />
     );
 
-    const visibleBreadcrumbs = screen.getAllByRole('listitem');
+    const visibleBreadcrumbs = screen.getAllByText(/Breadcrumb [0-9]/, {
+      selector: `.${blockClass}__displayed-breadcrumb .${carbon.prefix}--link`,
+    });
     // not enough room
-    expect(visibleBreadcrumbs.length).toEqual(4);
+    expect(visibleBreadcrumbs.length).toEqual(3);
 
     // last item is last breadcrumb
-    expect(visibleBreadcrumbs[3]).toHaveTextContent(breadcrumbContent[4]);
+    expect(visibleBreadcrumbs[2]).toHaveTextContent(breadcrumbContent[4]);
 
     // item 2 contains an overflow menu
-    const overflowBtn = screen.getByRole('button');
+    const overflowBtn = screen.getByLabelText(/Open and close/, {
+      selector: `.${blockClass}__overflow-menu`,
+    });
     expect(overflowBtn).toBeTruthy();
   });
 
@@ -216,16 +233,35 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       />
     );
 
-    const visibleBreadcrumbs = screen.getAllByRole('listitem');
+    const visibleBreadcrumbs = screen.getAllByText(/Breadcrumb [0-9]/, {
+      selector: `.${blockClass}__displayed-breadcrumb .${carbon.prefix}--link`,
+    });
     // not enough room
-    expect(visibleBreadcrumbs.length).toEqual(2);
+    expect(visibleBreadcrumbs.length).toEqual(1);
 
     // last item is last breadcrumb
-    expect(visibleBreadcrumbs[1]).toHaveTextContent(breadcrumbContent[4]);
+    expect(visibleBreadcrumbs[0]).toHaveTextContent(breadcrumbContent[4]);
 
     // item 2 contains an overflow menu
-    const overflowBtn = screen.getByRole('button');
+    const overflowBtn = screen.getByLabelText(/Open and close/, {
+      selector: `.${blockClass}__overflow-menu`,
+    });
     expect(overflowBtn).toBeTruthy();
+  });
+
+  it('does not duplicate ids', () => {
+    const plentyOfSpace = (breadcrumbItems.length + 1) * sizes.breadcrumbWidth;
+
+    const { container } = render(
+      <TestBreadcrumbWithOverflow
+        width={plentyOfSpace}
+        overflowAriaLabel="Open and close additional breadcrumb item list."
+        breadcrumbs={breadcrumbItems}
+      />
+    );
+    expect(
+      container.querySelectorAll(`#${breadcrumbItems[0].id}`)
+    ).toHaveLength(1);
   });
 
   it('adds additional properties to an breadcrumb with overflow', () => {

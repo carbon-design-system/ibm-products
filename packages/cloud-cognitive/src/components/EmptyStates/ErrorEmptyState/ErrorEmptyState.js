@@ -18,7 +18,7 @@ import { pkg } from '../../../settings';
 
 import { EmptyStateContent } from '../EmptyStateContent';
 import { ErrorIllustration } from '../assets/ErrorIllustration';
-import { EmptyStateDefaultProps } from '../EmptyState';
+import { defaults } from '../EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
@@ -27,13 +27,17 @@ const componentName = 'ErrorEmptyState';
 export let ErrorEmptyState = React.forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       action,
       className,
       illustrationTheme,
       link,
-      size,
+      size = defaults.size,
       subtitle,
       title,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -113,16 +117,10 @@ ErrorEmptyState.propTypes = {
   /**
    * Empty state subtitle
    */
-  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 
   /**
    * Empty state title
    */
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-ErrorEmptyState.defaultProps = EmptyStateDefaultProps;

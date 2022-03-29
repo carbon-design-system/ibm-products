@@ -22,13 +22,20 @@ import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 const componentName = 'ImportModal';
+
+// Default values for props
+const defaults = {
+  accept: Object.freeze([]),
+};
 
 export let ImportModal = forwardRef(
   (
     {
-      accept,
+      // The component props, in alphabetical order (for consistency).
+
+      accept = defaults.accept,
       className,
       defaultErrorBody,
       defaultErrorHeader,
@@ -54,6 +61,8 @@ export let ImportModal = forwardRef(
       primaryButtonText,
       secondaryButtonText,
       title,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -184,6 +193,7 @@ export let ImportModal = forwardRef(
             labelText={fileDropLabel}
             onAddFiles={onAddFile}
             disabled={hasFiles}
+            data-modal-primary-focus
           />
           {inputLabel && <p className={`${blockClass}__label`}>{inputLabel}</p>}
           <div className={`${blockClass}__input-group`}>
@@ -205,7 +215,9 @@ export let ImportModal = forwardRef(
               {inputButtonText}
             </Button>
           </div>
-          <div className={`bx--file-container ${blockClass}__file-container`}>
+          <div
+            className={`${carbon.prefix}--file-container ${blockClass}__file-container`}
+          >
             {hasFiles && (
               <p className={`${blockClass}__helper-text`}>{fileStatusString}</p>
             )}
@@ -352,10 +364,6 @@ ImportModal.propTypes = {
    * The text displayed at the top of the modal
    */
   title: PropTypes.string.isRequired,
-};
-
-ImportModal.defaultProps = {
-  accept: [],
 };
 
 ImportModal.displayName = componentName;

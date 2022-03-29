@@ -87,11 +87,12 @@
     "subcomponents",
     "tabbable",
     "tagset",
+    "textbox",
     "tearsheet",
     "tearsheets",
     "timeframe",
     "treeview",
     "uuidv",
-    "webfonts"
+    "webfonts",
   ]
 }

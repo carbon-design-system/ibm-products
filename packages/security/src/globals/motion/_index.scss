@@ -52,6 +52,7 @@ $transition-duration--fast: $fast-02;
       transition-timing-function: $timing-function;
     }
   }
+
   &--enter {
     opacity: 0;
 

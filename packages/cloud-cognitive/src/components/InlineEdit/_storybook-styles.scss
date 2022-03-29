@@ -1,0 +1,23 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/project-settings';
+@import '../../global/styles/display-box';
+
+.inline-edit-stories__viewport {
+  // width: 300px; // larger than standard size needed by text input at standard font size (html input attribute size)
+  // stylelint-disable-next-line carbon/layout-token-use
+  margin: 100px;
+}
+
+$block-class: #{$pkg-prefix}--inline-edit;
+
+.component-full-width {
+  .#{$block-class} {
+    width: 100%;
+  }
+}

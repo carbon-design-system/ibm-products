@@ -23,12 +23,13 @@
 @import '../CreateInfluencer/index';
 
 @mixin create-tearsheet {
-  @keyframes stepContentEntrance {
+  @keyframes step-content-entrance {
     0% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateY(-0.75rem);
     }
+
     100% {
       opacity: 1;
       transform: translateY(0);
@@ -36,6 +37,7 @@
   }
 
   $block-class: #{$pkg-prefix}--tearsheet-create;
+  $step-block-class: #{$pkg-prefix}--tearsheet-create__step;
   $section-block-class: #{$pkg-prefix}--tearsheet-create__section;
   $tearsheet-divider-class: #{$pkg-prefix}--tearsheet-create__section--divider;
   $tearsheet-fieldset-class: #{$pkg-prefix}--tearsheet-create__step--fieldset;
@@ -44,24 +46,19 @@
     --#{$block-class}--total-width: 0;
   }
 
-  .#{$block-class} .#{$block-class}__step--hidden-step,
-  .#{$block-class} .#{$block-class}__step--hidden-section {
+  .#{$block-class} .#{$step-block-class}__step--hidden-step {
     display: none;
   }
 
-  .#{$block-class} .#{$block-class}__step--visible-section {
-    display: block;
-  }
-
-  .#{$block-class} .#{$block-class}__step--visible-step {
-    animation: $duration--slow-01 stepContentEntrance;
+  .#{$block-class} .#{$step-block-class}__step--visible-step {
+    animation: $duration--slow-01 step-content-entrance;
     animation-fill-mode: forwards;
     animation-timing-function: $carbon--standard-easing;
     opacity: 0;
   }
 
   @media (prefers-reduced-motion) {
-    .#{$block-class} .#{$block-class}__step--visible-step {
+    .#{$block-class} .#{$step-block-class}__step--visible-step {
       animation: none;
       opacity: 1;
     }

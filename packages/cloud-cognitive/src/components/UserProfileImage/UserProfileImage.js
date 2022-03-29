@@ -116,7 +116,10 @@ export let UserProfileImage = React.forwardRef(
     return (
       FillItem &&
       (tooltipText ? (
-        <TooltipIcon tooltipText={tooltipText}>
+        <TooltipIcon
+          tooltipText={tooltipText}
+          className={`${blockClass}__tooltip`}
+        >
           {renderUserProfileImage()}
         </TooltipIcon>
       ) : (
@@ -164,7 +167,7 @@ UserProfileImage.propTypes = {
   /**
    * When passing the image prop use the imageDescription prop to describe the image for screen reader.
    */
-  imageDescription: PropTypes.string.isRequired.if(({ image }) => image),
+  imageDescription: PropTypes.string.isRequired.if(({ image }) => !!image),
 
   /**
    * When passing the initials prop, either send the initials to be used or the user's display name. The first two capital letters of the display name will be used as the initials.

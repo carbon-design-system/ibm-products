@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-export { default as uuid } from 'uuid';
+export { v4 as uuid } from 'uuid';
 import {
   getExtensionFromFilename,
   hasValidFilename,

@@ -25,6 +25,11 @@ const isEmpty = (children) => {
   return result;
 };
 
+// Default values for props
+const defaults = {
+  element: 'div',
+};
+
 /**
  * A simple conditional wrapper that encloses its children in a <div> (or other
  * element if specified), passing any supplied attributes to the <div> (or other
@@ -36,7 +41,20 @@ const isEmpty = (children) => {
  * remain undefined if it does not render.
  */
 export const Wrap = React.forwardRef(
-  ({ alwaysRender, children, element: Wrapper, neverRender, ...rest }, ref) =>
+  (
+    {
+      // The component props, in alphabetical order (for consistency).
+
+      alwaysRender,
+      children,
+      element: Wrapper = defaults.element,
+      neverRender,
+
+      // Collect any other property values passed in.
+      ...rest
+    },
+    ref
+  ) =>
     (neverRender || isEmpty(children)) && !alwaysRender ? null : (
       <Wrapper {...rest} ref={ref}>
         {children}
@@ -76,5 +94,3 @@ Wrap.propTypes = {
    */
   neverRender: PropTypes.bool,
 };
-
-Wrap.defaultProps = { element: 'div' };

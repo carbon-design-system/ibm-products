@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,13 +8,17 @@
 import { useCallback, useEffect } from 'react';
 
 export const useCreateComponentStepChange = ({
+  firstIncludedStep,
+  lastIncludedStep,
+  stepData,
+  onNext,
+  isSubmitDisabled,
   setCurrentStep,
   setIsSubmitting,
   setShouldViewAll,
   onClose,
   onRequestSubmit,
   componentName,
-  getComponentSteps,
   currentStep,
   shouldViewAll,
   backButtonText,
@@ -46,31 +50,11 @@ export const useCreateComponentStepChange = ({
         console.warn(`${componentName} submit error: ${error}`);
       }
     };
-    const isSubmitDisabled = () => {
-      let step = 0;
-      let submitDisabled = false;
-      let viewAllSubmitDisabled = false;
-      const createComponentSteps = getComponentSteps();
-      createComponentSteps.forEach((child) => {
-        step++;
-        if (currentStep === step) {
-          submitDisabled = child.props.disableSubmit;
-        }
-        if (shouldViewAll && child.props.disableSubmit) {
-          viewAllSubmitDisabled = true;
-        }
-      });
-      if (!shouldViewAll) {
-        return submitDisabled;
-      }
-      return viewAllSubmitDisabled;
-    };
     const handleNext = async () => {
       setIsSubmitting(true);
-      const createSteps = getComponentSteps();
-      if (createSteps[currentStep - 1].props.onNext) {
+      if (typeof onNext === 'function') {
         try {
-          await createSteps[currentStep - 1].props.onNext();
+          await onNext();
           continueToNextStep();
         } catch (error) {
           setIsSubmitting(false);
@@ -82,11 +66,10 @@ export const useCreateComponentStepChange = ({
     };
     const handleSubmit = async () => {
       setIsSubmitting(true);
-      const createSteps = getComponentSteps();
       // last step should have onNext as well
-      if (createSteps[currentStep - 1].props.onNext) {
+      if (typeof onNext === 'function') {
         try {
-          await createSteps[currentStep - 1].props.onNext();
+          await onNext();
           await handleOnRequestSubmit();
         } catch (error) {
           setIsSubmitting(false);
@@ -96,17 +79,24 @@ export const useCreateComponentStepChange = ({
         await handleOnRequestSubmit();
       }
     };
-    if (getComponentSteps()?.length) {
-      const createSteps = getComponentSteps();
-      const total = createSteps.length;
+    if (stepData?.length > 0) {
       const buttons = [];
-      if (total > 1 && !shouldViewAll) {
+      if (stepData?.length > 1 && !shouldViewAll) {
         buttons.push({
           key: 'create-action-button-back',
           label: backButtonText,
-          onClick: () => setCurrentStep((prev) => prev - 1),
+          onClick: () =>
+            setCurrentStep((prev) => {
+              // Find previous included step to render
+              // There will always be a previous step otherwise we will
+              // have disabled the back button since we have reached the first visible step
+              do {
+                prev--;
+              } while (!stepData[prev - 1]?.shouldIncludeStep);
+              return prev;
+            }),
           kind: 'secondary',
-          disabled: currentStep === 1,
+          disabled: currentStep === firstIncludedStep,
         });
       }
       buttons.push({
@@ -122,15 +112,15 @@ export const useCreateComponentStepChange = ({
         key: 'create-action-button-submit',
         label: shouldViewAll
           ? submitButtonText
-          : currentStep < total
+          : currentStep < lastIncludedStep
           ? nextButtonText
           : submitButtonText,
         onClick: shouldViewAll
           ? handleSubmit
-          : currentStep < total
+          : currentStep < lastIncludedStep
           ? handleNext
           : handleSubmit,
-        disabled: isSubmitDisabled(),
+        disabled: isSubmitDisabled,
         kind: 'primary',
         loading: isSubmitting,
         className: `${componentBlockClass}__create-button`,
@@ -138,7 +128,11 @@ export const useCreateComponentStepChange = ({
       setCreateComponentActions(buttons);
     }
   }, [
-    getComponentSteps,
+    firstIncludedStep,
+    lastIncludedStep,
+    stepData,
+    onNext,
+    isSubmitDisabled,
     backButtonText,
     cancelButtonText,
     currentStep,
@@ -160,6 +154,14 @@ export const useCreateComponentStepChange = ({
 
   const continueToNextStep = useCallback(() => {
     setIsSubmitting(false);
-    setCurrentStep((prev) => prev + 1);
-  }, [setCurrentStep, setIsSubmitting]);
+    setCurrentStep((prev) => {
+      // Find next included step to render
+      // There will always be a next step otherwise we will
+      // have reach the onSubmit
+      do {
+        prev++;
+      } while (!stepData[prev - 1]?.shouldIncludeStep);
+      return prev;
+    });
+  }, [setCurrentStep, setIsSubmitting, stepData]);
 };

@@ -33,19 +33,26 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 const componentName = 'APIKeyModal';
 
+// Default values for props
+const defaults = {
+  apiKeyName: '',
+  customSteps: Object.freeze([]),
+};
+
 export let APIKeyModal = forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
       apiKey,
       apiKeyLabel,
-      apiKeyName,
+      apiKeyName = defaults.apiKeyName,
       body,
       className,
       closeButtonText,
       copyButtonText,
       copyErrorText,
       copyIconDescription,
-      customSteps,
+      customSteps = defaults.customSteps,
       downloadBodyText,
       downloadFileName,
       downloadFileType,
@@ -78,6 +85,8 @@ export let APIKeyModal = forwardRef(
       open,
       previousStepButtonText,
       showAPIKeyLabel,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -85,7 +94,6 @@ export let APIKeyModal = forwardRef(
     const [copyError, setCopyError] = useState(false);
     const [name, setName] = useState(apiKeyName);
     const [currentStep, setCurrentStep] = useState(0);
-    const inputRef = useRef();
     const copyRef = useRef();
     const apiKeyInputId = useRef(uuidv4());
     const nameInputId = useRef(uuidv4());
@@ -99,12 +107,6 @@ export let APIKeyModal = forwardRef(
       ref: copyRef,
     };
     const blockClass = `${pkg.prefix}--apikey-modal`;
-
-    useEffect(() => {
-      if (inputRef.current && open) {
-        inputRef.current.focus();
-      }
-    }, [open]);
 
     useEffect(() => {
       if (copyRef.current && open && apiKeyLoaded) {
@@ -168,7 +170,8 @@ export let APIKeyModal = forwardRef(
       onClose();
     };
 
-    const submitHandler = async () => {
+    const submitHandler = async (e) => {
+      e.preventDefault();
       if (hasNextStep) {
         setCurrentStep(currentStep + 1);
       } else if (apiKeyLoaded) {
@@ -245,8 +248,8 @@ export let APIKeyModal = forwardRef(
                     value={name}
                     id={nameInputId.current}
                     disabled={loading}
-                    ref={inputRef}
                     required={nameRequired}
+                    data-modal-primary-focus
                   />
                 </Form>
               )}
@@ -508,17 +511,6 @@ APIKeyModal.propTypes = {
    * label text that's displayed when hovering over visibility toggler to show key
    */
   showAPIKeyLabel: PropTypes.string,
-};
-
-APIKeyModal.defaultProps = {
-  apiKeyName: '',
-  customSteps: [],
-  error: false,
-  hasAPIKeyVisibilityToggle: false,
-  hasDownloadLink: false,
-  loading: false,
-  nameRequired: false,
-  open: false,
 };
 
 APIKeyModal.displayName = componentName;

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.22.4...@carbon/ibm-cloud-cognitive-cdai@1.22.5) (2022-03-29)
+
+
+### Bug Fixes
+
+* update Carbon versions to latest ([#1835](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1835)) ([b9152d1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b9152d15813b7feab937092bbbf46439305aab50))
+
+
+
+
+
 ## [1.22.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.22.3...@carbon/ibm-cloud-cognitive-cdai@1.22.4) (2022-03-22)
 
 

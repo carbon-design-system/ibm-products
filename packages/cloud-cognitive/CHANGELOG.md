@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.11.2...@carbon/ibm-products@1.12.0) (2022-03-29)
+
+
+### Bug Fixes
+
+* add select global search ([#1834](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1834)) ([ee4ac9e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ee4ac9ef78a05ed362535c8a9d25b3bbe31747c8))
+* **DataSpreadsheet:** [#1758](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1758) spreadsheet single cell selection area ([#1840](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1840)) ([f7b388d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f7b388dd1a79f45b17e210360a49cc9f37c1ec7f))
+* **DataSpreadsheet:** address header scrollbar issue ([#1780](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1780)) ([c42819c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c42819c01c8e5ae3dabac4f3540b2689b01af37c))
+* **DataSpreadsheet:** use type token for cells/cell editor/active cell ([#1831](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1831)) ([abf6d3d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/abf6d3d8fdfa2059b5eeb52a0f02a51e0ee563ef))
+* text alignment in tagset overflow ([#1829](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1829)) ([4f651f0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4f651f0ea8bcd80953df54fee22a94f70c815537))
+* update Carbon versions to latest ([#1835](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1835)) ([b9152d1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b9152d15813b7feab937092bbbf46439305aab50))
+
+
+### Features
+
+* **DataSpreadsheet:** add onSelectionAreaChange prop ([#1830](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1830)) ([626f6ba](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/626f6ba2e717a755088cc835a4d1fc76c30a6580))
+
+
+
+
+
 ## [1.11.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.11.1...@carbon/ibm-products@1.11.2) (2022-03-22)
 
 

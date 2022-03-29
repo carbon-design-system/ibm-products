@@ -18,14 +18,15 @@
   $block-class: #{$pkg-prefix}--http-errors;
 
   .#{$block-class} .#{$block-class}__content {
-    @include carbon--breakpoint(sm) {
-      position: fixed;
-      z-index: 2;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -150%);
-    }
+    position: fixed;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -75%);
     @include carbon--breakpoint(md) {
+      transform: translate(-50%, -100%);
+    }
+    @include carbon--breakpoint(lg) {
       transform: translate(-50%, -50%);
     }
   }
@@ -54,15 +55,14 @@
     margin-bottom: $spacing-02;
   }
   .#{$block-class} .#{$block-class}__image {
-    @include carbon--breakpoint(sm) {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: 100%;
-      transform: translate(-50%, -40%);
-    }
-    @include carbon--breakpoint(md) {
-      transform: translate(-50%, -50%);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: 100%;
+    @include carbon--breakpoint-down(md) {
+      left: 10%;
+      transform: scale(1.5);
     }
   }
 }

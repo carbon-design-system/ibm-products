@@ -73,10 +73,14 @@
       align-items: center;
     }
 
+    &-checkbox-label-wrapper {
+      display: flex;
+      margin-left: $spacing-05;
+    }
+
     &-checkbox-label-text {
       display: flex;
       flex-direction: column;
-      padding-left: $spacing-05;
     }
 
     &-checkbox-wrapper.#{$carbon-prefix}--form-item {
@@ -85,6 +89,10 @@
 
     &-checkbox-wrapper .#{$carbon-prefix}--checkbox-label-text {
       display: none;
+    }
+
+    &-cell-avatar {
+      margin-right: $spacing-05;
     }
   }
 

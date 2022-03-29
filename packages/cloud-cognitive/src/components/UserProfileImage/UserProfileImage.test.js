@@ -13,6 +13,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg, carbon } from '../../settings';
 
 import { UserProfileImage } from '.';
+import { Group24 } from '@carbon/icons-react';
 
 const blockClass = `${pkg.prefix}--user-profile-image`;
 const componentName = UserProfileImage.displayName;
@@ -111,4 +112,13 @@ describe(componentName, () => {
     expectError(required('imageDescription', 'UserProfileImage'), () => {
       renderComponent({ image: 'path_to_image.jpg' });
     }));
+
+  it('should display a custom icon if one is provided', () => {
+    const { container } = renderComponent({
+      icon: Group24,
+      kind: null,
+    });
+    const renderedSVG = container.querySelector('svg');
+    expect(renderedSVG).toBeTruthy();
+  });
 });

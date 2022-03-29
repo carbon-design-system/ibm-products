@@ -14,6 +14,8 @@ import {
 import { MultiAddSelect } from '.';
 import mdx from './MultiAddSelect.mdx';
 // import { action } from '@storybook/addon-actions';
+import image from '../UserProfileImage/headshot.png'; // cspell:disable-line
+import { Group24 } from '@carbon/icons-react';
 
 export default {
   title: getStoryTitle(MultiAddSelect.displayName),
@@ -152,6 +154,45 @@ export const WithModifiers = prepareStory(Template, {
           value: '3',
           title: 'item 3',
           subtitle: 'item 3 subtitle',
+        },
+      ],
+    },
+  },
+});
+
+export const WithAvatars = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    items: {
+      entries: [
+        {
+          id: '1',
+          value: '1',
+          title: 'item 1',
+          subtitle: 'item 1 subtitle',
+          avatar: {
+            src: image,
+            alt: 'head shot',
+          },
+        },
+        {
+          id: '2',
+          value: '2',
+          title: 'item 2',
+          subtitle: 'item 2 subtitle',
+          avatar: {
+            icon: Group24,
+            backgroundColor: 'dark-green',
+          },
+        },
+        {
+          id: '3',
+          value: '3',
+          title: 'item 3',
+          subtitle: 'item 3 subtitle',
+          avatar: {
+            icon: Group24,
+          },
         },
       ],
     },

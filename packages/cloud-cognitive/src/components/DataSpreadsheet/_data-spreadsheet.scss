@@ -114,6 +114,7 @@
       padding-bottom: $spacing-01;
       border: $spacing-01 solid $interactive-01;
       background-color: $ui-background;
+      color: $text-01;
       text-align: left;
 
       &[data-active-row-index='header'],

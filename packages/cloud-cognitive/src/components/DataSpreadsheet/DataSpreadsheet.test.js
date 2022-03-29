@@ -156,4 +156,21 @@ describe(componentName, () => {
     expect(selectionArea).toBeInTheDocument();
     expect(onSelectionAreaChangeFn).toHaveBeenCalledTimes(1);
   });
+
+  it('should render an empty spreadsheet with 50 rows', async () => {
+    const ref = React.createRef();
+    const { rerender } = render(
+      <DataSpreadsheet
+        {...defaultProps}
+        ref={ref}
+        data={[]}
+        onDataUpdate={jest.fn()}
+      />
+    );
+    rerender(
+      <DataSpreadsheet {...defaultProps} ref={ref} onDataUpdate={jest.fn()} />
+    );
+    const allRows = ref?.current.querySelectorAll(`.${blockClass}__tr`);
+    expect(Array.from(allRows).length).toEqual(16); // defaultEmptyRowCount value is 16 rows
+  });
 });

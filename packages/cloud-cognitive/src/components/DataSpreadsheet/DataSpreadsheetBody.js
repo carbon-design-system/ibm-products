@@ -28,8 +28,11 @@ export const DataSpreadsheetBody = forwardRef(
       columns,
       activeCellCoordinates,
       defaultColumn,
+      defaultEmptyRowCount,
       getTableBodyProps,
+      headerGroups,
       id,
+      onDataUpdate,
       prepareRow,
       rows,
       selectionAreaData,
@@ -338,63 +341,88 @@ export const DataSpreadsheetBody = forwardRef(
       ]
     );
 
+    // Builds the empty rows and calls `onDataUpdate` to set the new empty rows
+    // using defaultEmptyRowCount to determine how many empty rows are created.
+    useEffect(() => {
+      if (!rows?.length) {
+        const buildEmptyRows = () => {
+          const emptyRowData = [];
+          [...Array(defaultEmptyRowCount)].map(() => {
+            const emptyCell = {};
+            headerGroups[0].headers.map((header) => {
+              emptyCell[header.id] = null;
+            });
+            emptyRowData.push(emptyCell);
+          });
+          onDataUpdate(emptyRowData);
+        };
+        buildEmptyRows();
+      }
+    }, [rows, headerGroups, defaultEmptyRowCount, onDataUpdate]);
+
+    const RenderEmptyRows = () => {
+      return <div />;
+    };
+
     // Renders each row/cell in the spreadsheet body
     const RenderRow = useCallback(
       ({ index, style }) => {
         const row = rows[index];
-        prepareRow(row);
-        return (
-          <div
-            {...row.getRowProps({ style })}
-            className={cx(`${blockClass}__tr`)}
-            data-row-index={index}
-          >
-            {/* ROW HEADER BUTTON */}
-            <button
-              tabIndex={-1}
+        if (rows && rows.length) {
+          prepareRow(row);
+          return (
+            <div
+              {...row.getRowProps({ style })}
+              className={cx(`${blockClass}__tr`)}
               data-row-index={index}
-              data-column-index="header"
-              type="button"
-              onClick={handleRowHeaderClick(index)}
-              className={cx(
-                `${blockClass}__td`,
-                `${blockClass}__td-th`,
-                `${blockClass}--interactive-cell-element`,
-                {
-                  [`${blockClass}__td-th--active-header`]:
-                    activeCellCoordinates?.row === index ||
-                    checkActiveHeaderCell(index, selectionAreas, 'row'),
-                }
-              )}
-              style={{
-                width: defaultColumn?.rowHeaderWidth,
-              }}
             >
-              {index + 1}
-            </button>
-            {/* CELL BUTTONS */}
-            {row.cells.map((cell, index) => (
+              {/* ROW HEADER BUTTON */}
               <button
                 tabIndex={-1}
-                data-row-index={cell.row.index}
-                data-column-index={index}
-                {...cell.getCellProps()}
+                data-row-index={index}
+                data-column-index="header"
+                type="button"
+                onClick={handleRowHeaderClick(index)}
                 className={cx(
                   `${blockClass}__td`,
-                  `${blockClass}__body--td`,
-                  `${blockClass}--interactive-cell-element`
+                  `${blockClass}__td-th`,
+                  `${blockClass}--interactive-cell-element`,
+                  {
+                    [`${blockClass}__td-th--active-header`]:
+                      activeCellCoordinates?.row === index ||
+                      checkActiveHeaderCell(index, selectionAreas, 'row'),
+                  }
                 )}
-                key={`cell_${index}`}
-                onMouseDown={handleBodyCellClick(cell, index)}
-                onMouseOver={handleBodyCellHover(cell, index)}
-                onFocus={() => {}}
-                type="button"
+                style={{
+                  width: defaultColumn?.rowHeaderWidth,
+                }}
               >
-                {cell.render('Cell')}
+                {index + 1}
               </button>
-            ))}
-          </div>
-        );
+              {/* CELL BUTTONS */}
+              {row.cells.map((cell, index) => (
+                <button
+                  tabIndex={-1}
+                  data-row-index={cell.row.index}
+                  data-column-index={index}
+                  {...cell.getCellProps()}
+                  className={cx(
+                    `${blockClass}__td`,
+                    `${blockClass}__body--td`,
+                    `${blockClass}--interactive-cell-element`
+                  )}
+                  key={`cell_${index}`}
+                  onMouseDown={handleBodyCellClick(cell, index)}
+                  onMouseOver={handleBodyCellHover(cell, index)}
+                  onFocus={() => {}}
+                  type="button"
+                >
+                  {cell.render('Cell')}
+                </button>
+              ))}
+            </div>
+          );
+        }
       },
       [
         prepareRow,
@@ -421,11 +449,11 @@ export const DataSpreadsheetBody = forwardRef(
             `${blockClass}__list--container--${id}`
           )}
           height={400}
-          itemCount={rows.length}
+          itemCount={rows.length || defaultEmptyRowCount}
           itemSize={defaultColumn?.rowHeight}
           width={totalColumnsWidth + scrollBarSize}
         >
-          {RenderRow}
+          {rows?.length ? RenderRow : RenderEmptyRows}
         </FixedSizeList>
       </div>
     );
@@ -466,9 +494,19 @@ DataSpreadsheetBody.propTypes = {
   }),
 
   /**
+   * Sets the number of empty rows to be created when there is no data provided
+   */
+  defaultEmptyRowCount: PropTypes.number,
+
+  /**
    * Function to set table body prop values
    */
   getTableBodyProps: PropTypes.func,
+
+  /**
+   * Headers provided from useTable hook
+   */
+  headerGroups: PropTypes.arrayOf(PropTypes.object),
 
   /**
    * The spreadsheet id
@@ -479,6 +517,11 @@ DataSpreadsheetBody.propTypes = {
    * The event handler that is called when the active cell changes
    */
   onActiveCellChange: PropTypes.func,
+
+  /**
+   * The event handler that is called to set the rows for the empty spreadsheet
+   */
+  onDataUpdate: PropTypes.func,
 
   /**
    * The event handler that is called when the selection areas change

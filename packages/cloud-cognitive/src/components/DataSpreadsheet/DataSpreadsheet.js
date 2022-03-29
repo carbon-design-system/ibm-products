@@ -48,6 +48,7 @@ const defaults = {
   cellSize: 'standard',
   columns: Object.freeze([]),
   data: Object.freeze([]),
+  defaultEmptyRowCount: 16,
   onDataUpdate: Object.freeze(() => {}),
   onActiveCellChange: Object.freeze(() => {}),
   onSelectionAreaChange: Object.freeze(() => {}),
@@ -64,6 +65,7 @@ export let DataSpreadsheet = React.forwardRef(
       className,
       columns = defaults.columns,
       data = defaults.data,
+      defaultEmptyRowCount = defaults.defaultEmptyRowCount,
       onDataUpdate = defaults.onDataUpdate,
       id,
       onActiveCellChange = defaults.onActiveCellChange,
@@ -700,8 +702,10 @@ export let DataSpreadsheet = React.forwardRef(
           selectionAreas={selectionAreas}
           setSelectionAreas={setSelectionAreas}
           cellSize={cellSize}
+          headerGroups={headerGroups}
           defaultColumn={defaultColumn}
           getTableBodyProps={getTableBodyProps}
+          onDataUpdate={onDataUpdate}
           onActiveCellChange={onActiveCellChange}
           onSelectionAreaChange={onSelectionAreaChange}
           prepareRow={prepareRow}
@@ -713,6 +717,7 @@ export let DataSpreadsheet = React.forwardRef(
           totalColumnsWidth={totalColumnsWidth}
           id={id}
           columns={columns}
+          defaultEmptyRowCount={defaultEmptyRowCount}
         />
         <button
           onClick={handleActiveCellClick}
@@ -788,6 +793,11 @@ DataSpreadsheet.propTypes = {
    * The spreadsheet data that will be rendered in the body of the spreadsheet component
    */
   data: PropTypes.arrayOf(PropTypes.shape),
+
+  /**
+   * Sets the number of empty rows to be created when there is no data provided
+   */
+  defaultEmptyRowCount: PropTypes.number,
 
   /**
    * The spreadsheet id

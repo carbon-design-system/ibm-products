@@ -115,6 +115,24 @@ const LargeTemplate = ({ ...args }) => {
   );
 };
 
+const EmptyWithCellsTemplate = ({ ...args }) => {
+  const [data, setData] = useState([]);
+  const columnDataClone = useMemo(
+    () => [...columnData.filter((item) => item.Header !== 'Row Index')],
+    []
+  );
+  const columns = useMemo(() => columnDataClone, [columnDataClone]);
+  return (
+    <DataSpreadsheet
+      columns={columns}
+      data={data}
+      onDataUpdate={setData}
+      id="spreadsheet--id"
+      {...args}
+    />
+  );
+};
+
 export const dataSpreadsheet = prepareStory(Template, {
   storyName: 'Basic spreadsheet',
   args: {},
@@ -124,5 +142,12 @@ export const largeDatasetSpreadsheet = prepareStory(LargeTemplate, {
   storyName: 'Large dataset',
   args: {
     cellSize: 'large',
+  },
+});
+
+export const emptyWithCells = prepareStory(EmptyWithCellsTemplate, {
+  storyName: 'Empty with cells',
+  args: {
+    defaultEmptyRowCount: 24,
   },
 });

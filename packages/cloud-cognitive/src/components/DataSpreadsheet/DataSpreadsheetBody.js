@@ -349,7 +349,7 @@ export const DataSpreadsheetBody = forwardRef(
           const emptyRowData = [];
           [...Array(defaultEmptyRowCount)].map(() => {
             const emptyCell = {};
-            headerGroups[0].headers.map((header) => {
+            headerGroups[0]?.headers.map((header) => {
               emptyCell[header.id] = null;
             });
             emptyRowData.push(emptyCell);

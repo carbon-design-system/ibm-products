@@ -9,6 +9,8 @@ import React from 'react';
 import { Add16 } from '@carbon/icons-react';
 import { IdeButton } from '../IdeButton';
 import { shallow, mount } from 'enzyme';
+import { settings } from 'carbon-components';
+const { prefix } = settings;
 
 describe('IdeButton', () => {
   describe('Renders common props as expected', () => {
@@ -103,7 +105,7 @@ describe('IdeButton', () => {
     const icon = iconButton.find('svg');
 
     it('should have the appropriate icon', () => {
-      expect(icon.hasClass('bx--btn__icon')).toBe(true);
+      expect(icon.hasClass(`${prefix}--btn__icon`)).toBe(true);
     });
   });
 
@@ -118,7 +120,7 @@ describe('IdeButton', () => {
     const icon = iconButton.find('svg');
 
     it('should have the appropriate icon', () => {
-      expect(icon.hasClass('bx--btn__icon')).toBe(true);
+      expect(icon.hasClass(`${prefix}--btn__icon`)).toBe(true);
       expect(icon.find(':not(svg):not(title)').html()).toBe(
         originalIcon.children().html()
       );
@@ -144,7 +146,7 @@ describe('Primary Button', () => {
     const wrapper = shallow(<IdeButton className="extra-class" />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.dive().hasClass('bx--btn')).toEqual(true);
+      expect(wrapper.dive().hasClass(`${prefix}--btn`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -160,7 +162,9 @@ describe('Secondary Button', () => {
     );
 
     it('Has the expected classes', () => {
-      expect(wrapper.dive().hasClass('bx--btn--secondary')).toEqual(true);
+      expect(wrapper.dive().hasClass(`${prefix}--btn--secondary`)).toEqual(
+        true
+      );
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -174,7 +178,7 @@ describe('Ghost Button', () => {
     const wrapper = shallow(<IdeButton kind="ghost" className="extra-class" />);
 
     it('Has the expected classes', () => {
-      expect(wrapper.dive().hasClass('bx--btn--ghost')).toEqual(true);
+      expect(wrapper.dive().hasClass(`${prefix}--btn--ghost`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -190,7 +194,7 @@ describe('Small Button', () => {
     );
 
     it('Has the expected classes for small', () => {
-      expect(wrapper.dive().hasClass('bx--btn--sm')).toEqual(true);
+      expect(wrapper.dive().hasClass(`${prefix}--btn--sm`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -206,7 +210,7 @@ describe('DangerButton', () => {
     );
 
     it('Has the expected classes', () => {
-      expect(wrapper.dive().hasClass('bx--btn--danger')).toEqual(true);
+      expect(wrapper.dive().hasClass(`${prefix}--btn--danger`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -222,7 +226,9 @@ describe('danger--primaryButton', () => {
     );
 
     it('Has the expected classes', () => {
-      expect(wrapper.dive().hasClass('bx--btn--danger--primary')).toEqual(true);
+      expect(
+        wrapper.dive().hasClass(`${prefix}--btn--danger--primary`)
+      ).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {
@@ -238,7 +244,7 @@ describe('TertiaryButton', () => {
     );
 
     it('Has the expected classes', () => {
-      expect(wrapper.dive().hasClass('bx--btn--tertiary')).toEqual(true);
+      expect(wrapper.dive().hasClass(`${prefix}--btn--tertiary`)).toEqual(true);
     });
 
     it('Should add extra classes that are passed via className', () => {

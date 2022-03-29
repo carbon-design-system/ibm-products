@@ -37,6 +37,7 @@ const defaults = {
     NoTagsEmptyState: true,
     NotFoundEmptyState: true,
     NotificationsEmptyState: true,
+    OptionsTile: true,
     PageHeader: true,
     ProductiveCard: true,
     RemoveModal: true,
@@ -52,16 +53,15 @@ const defaults = {
     // other public components not yet reviewed and released:
     MultiAddSelect: false,
     SingleAddSelect: false,
-    LoadingBar: false,
     ModifiedTabs: false,
     Toolbar: false,
     ToolbarButton: false,
     ToolbarGroup: false,
     WebTerminal: false,
     EditSidePanel: false,
-    OptionsTile: false,
     CancelableTextEdit: false,
     InlineEdit: false,
+    DataSpreadsheet: false,
     /* new component flags here - comment used by generate CLI */
   },
 

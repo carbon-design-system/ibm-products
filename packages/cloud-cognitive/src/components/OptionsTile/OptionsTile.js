@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32,6 +32,11 @@ const componentName = 'OptionsTile';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+// Default values for props
+const defaults = {
+  size: 'xl',
+};
+
 /**
  * TODO: A description of the component.
  */
@@ -39,21 +44,23 @@ export let OptionsTile = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
+
       children,
       className,
       enabled,
-      heading,
-      headingId: userDefinedHeadingId,
       invalid,
       invalidText,
       locked,
       lockedText,
       onToggle,
       open,
-      size,
+      size = defaults.size,
       summary,
+      title,
+      titleId: userDefinedTitleId,
       warn,
       warnText,
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -67,7 +74,7 @@ export let OptionsTile = React.forwardRef(
     const contentRef = useRef(null);
 
     const id = uuidv4();
-    const headingId = userDefinedHeadingId ?? `${id}-heading`;
+    const titleId = userDefinedTitleId ?? `${id}-title`;
 
     const isExpandable = children !== undefined;
 
@@ -194,14 +201,23 @@ export let OptionsTile = React.forwardRef(
       } else if (locked) {
         Icon = Locked16;
         summaryClasses.push(`${blockClass}__summary--locked`);
+
+        if (!text) {
+          text = lockedText;
+        }
       }
 
-      const summaryHidden = enabled === false;
+      const hasValidationState = invalid || warn || locked;
+      const summaryHidden = !hasValidationState && enabled === false;
+
+      if (summaryHidden) {
+        summaryClasses.push(`${blockClass}__summary--hidden`);
+      }
 
       return (
-        <div className={`${blockClass}__title`}>
-          <h6 id={headingId} className={`${blockClass}__heading`}>
-            {heading}
+        <div className={`${blockClass}__heading`}>
+          <h6 id={titleId} className={`${blockClass}__title`}>
+            {title}
           </h6>
           {text && (
             <span className={cx(summaryClasses)} aria-hidden={summaryHidden}>
@@ -239,7 +255,7 @@ export let OptionsTile = React.forwardRef(
               toggled={enabled}
               labelA=""
               labelB=""
-              aria-labelledby={headingId}
+              aria-labelledby={titleId}
               onToggle={onToggle}
               size="sm"
               disabled={isLocked}
@@ -300,16 +316,6 @@ OptionsTile.propTypes = {
   enabled: PropTypes.bool,
 
   /**
-   * Provide the heading for this OptionsTile.
-   */
-  heading: PropTypes.string.isRequired,
-
-  /**
-   * Optionally provide an id which should be used for the heading.
-   */
-  headingId: PropTypes.string,
-
-  /**
    * Whether the OptionsTile is in invalid validation state.
    */
   invalid: PropTypes.bool,
@@ -351,6 +357,16 @@ OptionsTile.propTypes = {
   summary: PropTypes.string,
 
   /**
+   * Provide the title for this OptionsTile.
+   */
+  title: PropTypes.string.isRequired,
+
+  /**
+   * Optionally provide an id which should be used for the title.
+   */
+  titleId: PropTypes.string,
+
+  /**
    * Whether the OptionsTile is in warning validation state.
    */
   warn: PropTypes.bool,
@@ -359,13 +375,4 @@ OptionsTile.propTypes = {
    * Provide a text explaining why the OptionsTile is in warning state.
    */
   warnText: PropTypes.string,
-};
-
-// Default values for component props. Default values are not required for
-// props that are required, nor for props where the component can apply
-// 'undefined' values reasonably. Default values should be provided when the
-// component needs to make a choice or assumption when a prop is not supplied.
-OptionsTile.defaultProps = {
-  open: false,
-  size: 'xl',
 };

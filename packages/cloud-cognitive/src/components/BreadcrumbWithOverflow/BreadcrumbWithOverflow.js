@@ -59,6 +59,7 @@ export let BreadcrumbWithOverflow = ({
           ariaLabel={overflowAriaLabel}
           renderIcon={OverflowMenuHorizontal32}
           className={`${blockClass}__overflow-menu`}
+          menuOptionsClass={`${blockClass}__overflow-menu-options`}
         >
           {
             // eslint-disable-next-line react/prop-types
@@ -370,12 +371,11 @@ BreadcrumbWithOverflow.propTypes = {
    */
   noTrailingSlash: PropTypes.bool,
   /**
-   * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
+   * overflowAriaLabel label for open close button overflow used for breadcrumb items that do not fit.
    */
-  overflowAriaLabel: PropTypes.string.isRequired,
+  overflowAriaLabel: PropTypes.string.isRequired.if(
+    ({ breadcrumbs }) => breadcrumbs.length > 1
+  ),
 };
 
-BreadcrumbWithOverflow.defaultProps = {
-  noTrailingSlash: false,
-};
 BreadcrumbWithOverflow.displayName = componentName;

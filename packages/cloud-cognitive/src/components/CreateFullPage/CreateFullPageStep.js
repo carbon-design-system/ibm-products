@@ -17,15 +17,22 @@ import pconsole from '../../global/js/utils/pconsole';
 const componentName = 'CreateFullPageStep';
 const blockClass = `${pkg.prefix}--create-full-page__step`;
 
+// Default values for props
+const defaults = {
+  includeStep: true,
+};
+
 export let CreateFullPageStep = forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       children,
       className,
       subtitle,
       description,
       disableSubmit,
-      includeStep,
+      includeStep = defaults.includeStep,
       introStep,
       title,
       hasFieldset,
@@ -33,6 +40,9 @@ export let CreateFullPageStep = forwardRef(
       onNext,
       onMount,
       secondaryLabel,
+
+      // Collect any other property values passed in.
+      ...rest
     },
     ref
   ) => {
@@ -52,32 +62,36 @@ export let CreateFullPageStep = forwardRef(
       title,
     });
 
-    // This useEffect reports back the onNext and onMount values so that they can be used
+    // This useEffect reports back the onMount value so that they can be used
     // in the appropriate custom hooks.
     useEffect(() => {
       if (
         stepNumber === stepsContext?.currentStep &&
         previousState?.currentStep !== stepsContext?.currentStep
       ) {
-        stepsContext?.setOnNext(onNext);
         stepsContext?.setOnMount(onMount);
       }
-    }, [onMount, onNext, stepsContext, stepNumber, previousState?.currentStep]);
+    }, [onMount, stepsContext, stepNumber, previousState?.currentStep]);
 
     useEffect(() => {
       setShouldIncludeStep(includeStep);
     }, [includeStep, stepsContext, title]);
 
-    // Whenever we are the current step, supply our disableSubmit value to the
+    // Whenever we are the current step, supply our disableSubmit and onNext values to the
     // steps container context so that it can manage the 'Next' button appropriately.
     useEffect(() => {
       if (stepNumber === stepsContext?.currentStep) {
         stepsContext.setIsDisabled(disableSubmit);
+        stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
       }
     }, [stepsContext, stepNumber, disableSubmit, onNext]);
 
     return stepsContext ? (
       <section
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
         className={cx(blockClass, className, {
           [`${blockClass}__step--hidden-step`]:
             stepNumber !== stepsContext?.currentStep,
@@ -187,8 +201,4 @@ CreateFullPageStep.propTypes = {
    * Sets the title text for a create full page step
    */
   title: PropTypes.node.isRequired,
-};
-
-CreateFullPageStep.defaultProps = {
-  includeStep: true,
 };

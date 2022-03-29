@@ -3,6 +3,7 @@ cdai
 codeql
 codesandbox
 codesandboxes
+commitlint
 docgen
 dsag
 flatpickr

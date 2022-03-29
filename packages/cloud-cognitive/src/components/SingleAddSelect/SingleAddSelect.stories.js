@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import {
   getStoryTitle,
@@ -29,61 +29,46 @@ export default {
 const defaultProps = {
   open: true,
   title: 'Select category',
-  actions: [
-    {
-      label: 'Cancel',
-      kind: 'secondary',
-    },
-    {
-      label: 'Add',
-      kind: 'primary',
-    },
-  ],
   description: 'select a category lorem ipsum',
-  items: [
-    {
-      id: '1',
-      label: 'Kansas',
-      value: 'kansas',
-    },
-    {
-      id: '2',
-      label: 'Texas',
-      value: 'texas',
-    },
-    {
-      id: '3',
-      label: 'Florida',
-      value: 'florida',
-    },
-  ],
+  items: {
+    entries: [
+      {
+        id: '1',
+        title: 'Kansas',
+        value: 'kansas',
+      },
+      {
+        id: '2',
+        title: 'Texas',
+        value: 'texas',
+      },
+      {
+        id: '3',
+        title: 'Florida',
+        value: 'florida',
+      },
+    ],
+  },
   inputPlaceholder: 'Find categories',
   itemsLabel: 'Categories',
   noResultsTitle: 'No results',
   noResultsDescription: 'Try again',
+  onCloseButtonText: 'Cancel',
+  onSubmitButtonText: 'Select',
+  textInputLabel: 'test input title',
+  onSubmit: (selection) => console.log(selection),
+  searchResultsLabel: 'Search results',
 };
 
 const Template = (args) => {
   return <SingleAddSelect {...args} />;
 };
 
-const CustomFilterTemplate = (args) => {
-  const [items, setItems] = useState(args.items);
-  const filterHandler = (searchTerm) => {
-    if (!searchTerm) {
-      setItems(args.items);
-    } else {
-      // search all attributes for value
-      const newItems = items.filter((i) =>
-        Object.keys(i).some((key) => i[key].includes(searchTerm))
-      );
-      setItems(newItems);
-    }
-  };
+const CustomFilterTemplate = () => {
   const props = {
     ...defaultProps,
-    items,
-    onSearchFilter: filterHandler,
+    onSearchFilter: (item, searchTerm) =>
+      Object.keys(item).some((key) => item[key].includes(searchTerm)),
   };
   return <SingleAddSelect {...props} />;
 };
@@ -97,5 +82,53 @@ export const Default = prepareStory(Template, {
 export const WithCustomFilter = prepareStory(CustomFilterTemplate, {
   args: {
     ...defaultProps,
+  },
+});
+
+export const WithHierarchy = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    items: {
+      entries: [
+        ...defaultProps.items.entries,
+        {
+          id: '4',
+          title: 'California',
+          value: 'california',
+          children: {
+            entries: [
+              {
+                id: '5',
+                title: 'Los Angeles',
+                value: 'la',
+                children: {
+                  entries: [
+                    {
+                      id: '6',
+                      title: 'Third Level',
+                      value: 'third level',
+                    },
+                    {
+                      id: '7',
+                      title: 'another Level',
+                      value: 'another level',
+                      children: {
+                        entries: [
+                          {
+                            id: '8',
+                            title: 'last level',
+                            value: 'last level',
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        },
+      ],
+    },
   },
 });

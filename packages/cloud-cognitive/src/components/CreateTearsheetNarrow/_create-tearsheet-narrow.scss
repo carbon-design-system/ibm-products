@@ -47,6 +47,7 @@
 
   .#{$block-class} .#{$block-class}__form > * {
     margin-bottom: $spacing-05;
+
     &:last-child {
       margin-bottom: 0;
     }

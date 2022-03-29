@@ -61,6 +61,10 @@
         display: inline-flex;
         vertical-align: middle;
       }
+
+      .#{$block-class}__displayed-breadcrumb:last-child {
+        max-width: calc(100% - $spacing-07); // allow room for breadcrumb back
+      }
     }
 
     .#{$carbon-prefix}--breadcrumb-item:last-child {
@@ -78,10 +82,10 @@
       width: 100%;
       text-overflow: ellipsis;
     }
+  }
 
-    .#{$carbon-prefix}--link {
-      max-height: 18px; // to match breadcrumb - overflow button is 20 by default
-    }
+  .#{$block-class}__overflow-menu-options.#{$block-class}__overflow-menu-options {
+    z-index: z('header');
   }
 }
 

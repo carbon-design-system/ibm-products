@@ -48,7 +48,7 @@ const updateGalleryConfig = () => {
   const deleteAndRecreateGalleryConfigDir = () => {
     // delete and recreate config folder
     if (fs.existsSync(galleryConfigDir)) {
-      fs.rmdirSync(galleryConfigDir, { recursive: true });
+      fs.rmSync(galleryConfigDir, { recursive: true });
     }
     fs.mkdirSync(galleryConfigDir);
   };

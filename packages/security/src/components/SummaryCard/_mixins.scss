@@ -219,6 +219,9 @@
           transform: $summary-card__transform--active;
           transition: all $duration--moderate-02;
           transition-timing-function: motion(entrance, expressive);
+          @media (prefers-reduced-motion: reduce) {
+            transition: none;
+          }
         }
       }
 
@@ -231,6 +234,9 @@
           transform: $summary-card__transform;
           transition: all $duration--moderate-02;
           transition-timing-function: motion(exit, expressive);
+          @media (prefers-reduced-motion: reduce) {
+            transition: none;
+          }
         }
       }
     }

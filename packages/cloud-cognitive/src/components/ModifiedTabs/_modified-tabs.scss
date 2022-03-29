@@ -13,15 +13,6 @@
   justify-content: space-between;
 }
 
-.modified-tabs .modified-tabs__tab .bx--btn {
-  // transform: translateY(8px);
-}
-
-.modified-tabs .bx--tabs__nav {
-  /* overflow cannot be tweaked to fix tooltip */
-  // overflow: visible;
-}
-
 .modified-tabs__tab-new,
 .modified-tabs__tab {
   position: relative;
@@ -45,6 +36,10 @@
   border-radius: 0;
   cursor: pointer;
   transition: background-color $duration--fast-02 motion(standard, productive);
+  // stylelint-disable-next-line max-nesting-depth
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 .modified-tabs__tab-new-icon {

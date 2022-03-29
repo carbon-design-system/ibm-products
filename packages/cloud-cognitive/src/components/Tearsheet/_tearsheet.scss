@@ -47,6 +47,9 @@
       transition: visibility 0s linear,
         background-color $motion-duration motion(entrance, expressive),
         opacity $motion-duration motion(entrance, expressive);
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
 
     &.#{$block-class}--stacked-1-of-2 {
@@ -152,8 +155,7 @@
     }
 
     &.#{$block-class}--wide .#{$block-class}__header--with-close-icon {
-      padding-right: $spacing-05;
-      margin-right: $spacing-09;
+      padding-right: $spacing-10;
     }
 
     .#{$block-class}__header-content {
@@ -264,7 +266,7 @@
     &.#{$block-class}--wide .#{$block-class}__content {
       background: $ui-background;
 
-      // revert the background colour overridden by bx--modal styles
+      // revert the background color overridden by #{$carbon-prefix}--modal styles
       .#{$prefix}--pagination,
       .#{$prefix}--pagination__control-buttons,
       .#{$prefix}--text-input,

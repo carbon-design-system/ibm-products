@@ -20,6 +20,7 @@ import { rows, headers } from './fixtures/table.data.js';
 const baseComponent = (props = {}) =>
   jth.getJSXForComponent(IdeDataTable, { rows: [], headers: [] }, props);
 const prefix = (value) => `test-prefix-${value}`;
+import { settings } from 'carbon-components';
 
 describe('<IdeDataTable>', () => {
   beforeAll(() => {
@@ -475,7 +476,7 @@ describe('<IdeDataTable>', () => {
       component
         .find(idAttributeSelector('table-row-0'))
         .at(1)
-        .hasClass('bx--data-table--selected')
+        .hasClass(`${settings.prefix}--data-table--selected`)
     ).toEqual(false);
 
     component
@@ -487,7 +488,7 @@ describe('<IdeDataTable>', () => {
       component
         .find(idAttributeSelector('table-row-0'))
         .at(1)
-        .hasClass('bx--data-table--selected')
+        .hasClass(`${settings.prefix}--data-table--selected`)
     ).toEqual(true);
   });
 

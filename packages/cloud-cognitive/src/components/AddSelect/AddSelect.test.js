@@ -14,27 +14,31 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--add-select`;
 const componentName = AddSelect.name;
 const defaultProps = {
-  items: [
-    {
-      id: '1',
-      label: 'item a',
-      value: 'item a',
-    },
-    {
-      id: '2',
-      label: 'item b',
-      value: 'item b',
-    },
-    {
-      id: '3',
-      label: 'item c',
-      value: 'item c',
-    },
-  ],
+  items: {
+    entries: [
+      {
+        id: '1',
+        title: 'item a',
+        value: 'item a',
+      },
+      {
+        id: '2',
+        title: 'item b',
+        value: 'item b',
+      },
+      {
+        id: '3',
+        title: 'item c',
+        value: 'item c',
+      },
+    ],
+  },
   noSelectionTitle: 'No selection title',
   noSelectionDescription: 'No selection description',
   noResultsTitle: 'No results title',
   noResultsDescription: 'Try again description',
+  textInputLabel: 'test input label',
+  searchResultsLabel: 'Search results',
 };
 
 describe(componentName, () => {
@@ -85,15 +89,11 @@ describe(componentName, () => {
 
   it('renders SingleAddSelect', () => {
     const { container } = render(<AddSelect {...defaultProps} />);
-    expect(
-      container.querySelector(`.${blockClass}__selections-radio`)
-    ).toBeVisible();
+    expect(container.querySelector(`.${blockClass}__single`)).toBeVisible();
   });
 
   it('renders MultiAddSelect', () => {
     const { container } = render(<AddSelect {...defaultProps} multi />);
-    expect(
-      container.querySelector(`.${blockClass}__selections-checkbox`)
-    ).toBeVisible();
+    expect(container.querySelector(`.${blockClass}__multi`)).toBeVisible();
   });
 });

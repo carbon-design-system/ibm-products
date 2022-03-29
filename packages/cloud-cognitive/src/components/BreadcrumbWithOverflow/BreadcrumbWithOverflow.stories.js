@@ -13,6 +13,8 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
+import { DisplayBox } from '../../global/js/utils/DisplayBox';
+import styles from './_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(BreadcrumbWithOverflow.displayName),
@@ -34,9 +36,10 @@ export default {
     },
     lastBreadcrumbIsCurrent: { control: { type: 'boolean' } },
   },
-  decorators: [
-    (story) => <div className={`ccs-sb__display-box`}>{story()}</div>,
-  ],
+  parameters: {
+    styles,
+  },
+  decorators: [(story) => <DisplayBox>{story()}</DisplayBox>],
 };
 
 const breadcrumbItems = [

@@ -15,27 +15,33 @@ import { pkg } from '../../settings';
 
 const componentName = 'ProductiveCard';
 
-export let ProductiveCard = forwardRef((props, ref) => {
-  const validProps = prepareProps(props, [
-    'media',
-    'mediaPosition',
-    'onSecondaryButtonClick',
-    'pictogram',
-    'primaryButtonClick',
-    'productive',
-    'secondaryButtonKind',
-    'secondaryButtonText',
-  ]);
+// Default values for props
+const defaults = {
+  actionsPlacement: 'top',
+};
 
-  return (
-    <Card
-      {...validProps}
-      ref={ref}
-      productive
-      {...getDevtoolsProps(componentName)}
-    />
-  );
-});
+export let ProductiveCard = forwardRef(
+  ({ actionsPlacement = defaults.actionsPlacement, ...rest }, ref) => {
+    const validProps = prepareProps(rest, [
+      'media',
+      'mediaPosition',
+      'onSecondaryButtonClick',
+      'pictogram',
+      'primaryButtonClick',
+      'productive',
+      'secondaryButtonKind',
+      'secondaryButtonText',
+    ]);
+
+    return (
+      <Card
+        {...{ ...validProps, actionsPlacement, ref }}
+        productive
+        {...getDevtoolsProps(componentName)}
+      />
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 ProductiveCard = pkg.checkComponentEnabled(ProductiveCard, componentName);
@@ -117,14 +123,6 @@ ProductiveCard.propTypes = {
    * Determines title size
    */
   titleSize: PropTypes.oneOf(['default', 'large']),
-};
-
-ProductiveCard.defaultProps = {
-  actionIcons: [],
-  actionsPlacement: 'top',
-  clickZone: 'one',
-  overflowActions: [],
-  titleSize: 'default',
 };
 
 ProductiveCard.displayName = componentName;

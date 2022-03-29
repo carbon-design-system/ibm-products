@@ -23,17 +23,26 @@ import { EmptyStateContent } from './EmptyStateContent';
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'EmptyState';
 
+// Default values for props
+export const defaults = {
+  size: 'lg',
+};
+
 export let EmptyState = React.forwardRef(
   (
     {
+      // The component props, in alphabetical order (for consistency).
+
       action,
       className,
       illustration,
       illustrationDescription,
       link,
-      size,
+      size = defaults.size,
       subtitle,
       title,
+
+      // Collect any other property values passed in.
       ...rest
     },
     ref
@@ -76,10 +85,6 @@ export let EmptyState = React.forwardRef(
 
 // Return a placeholder if not released and not enabled by feature flag
 EmptyState = pkg.checkComponentEnabled(EmptyState, componentName);
-
-export const EmptyStateDefaultProps = {
-  size: 'lg',
-};
 
 EmptyState.propTypes = {
   /**
@@ -128,7 +133,7 @@ EmptyState.propTypes = {
   /**
    * Empty state subtext
    */
-  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+  subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 
   /**
    * Empty state heading
@@ -136,5 +141,4 @@ EmptyState.propTypes = {
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
 };
 
-EmptyState.defaultProps = EmptyStateDefaultProps;
 EmptyState.displayName = componentName;

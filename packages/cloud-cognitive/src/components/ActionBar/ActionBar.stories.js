@@ -14,7 +14,11 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
+import { DisplayBox } from '../../global/js/utils/DisplayBox';
+
 import { ActionBar } from './ActionBar';
+
+import styles from './_storybook-styles.scss';
 
 const getActions = (num) =>
   Array.from({ length: num }, (_, num) => ({
@@ -40,9 +44,10 @@ export default {
       control: { type: 'range', min: 20, max: 800, step: 10 },
     },
   },
-  decorators: [
-    (story) => <div className={`ccs-sb__display-box`}>{story()}</div>,
-  ],
+  parameters: {
+    styles,
+  },
+  decorators: [(story) => <DisplayBox>{story()}</DisplayBox>],
 };
 
 const Template = (argsIn) => {

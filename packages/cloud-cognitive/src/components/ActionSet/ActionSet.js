@@ -31,8 +31,6 @@ const ActionSetButton = React.forwardRef(
       kind,
       label,
       loading,
-      onClick,
-      size,
       // Collect any other property values passed in.
       ...rest
     },
@@ -52,7 +50,7 @@ const ActionSetButton = React.forwardRef(
         },
       ])}
       disabled={disabled || loading || false}
-      {...{ kind, onClick, ref, size }}
+      {...{ kind, ref }}
     >
       {label}
       {loading && <InlineLoading />}
@@ -75,10 +73,15 @@ ActionSetButton.propTypes = {
   loading: PropTypes.bool,
 };
 
-const defaultKind = Button.defaultProps.kind;
+const defaultKind = 'primary';
 
 const willStack = (size, numberOfActions) =>
   size === 'xs' || size === 'sm' || (size === 'md' && numberOfActions > 2);
+
+// Default values for props
+const defaults = {
+  size: 'md',
+};
 
 /**
  * An ActionSet presents a set of action buttons, constructed from bundles
@@ -96,10 +99,12 @@ export const ActionSet = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
+
       actions,
       buttonSize,
       className,
-      size,
+      size = defaults.size,
+
       // Collect any other property values passed in.
       ...rest
     },
@@ -186,7 +191,7 @@ ActionSet.validateActions =
     const problems = [];
 
     if (actions > 0) {
-      const size = sizeFn ? sizeFn(props) : props.size;
+      const size = sizeFn ? sizeFn(props) : props.size || defaults.size;
       const stacking = willStack(size, actions);
 
       const countActions = (kind) =>
@@ -293,8 +298,4 @@ ActionSet.propTypes = {
    * different sizes, to make best use of the available space.
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xlg', 'max']),
-};
-
-ActionSet.defaultProps = {
-  size: 'md',
 };

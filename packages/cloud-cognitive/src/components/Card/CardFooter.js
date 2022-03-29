@@ -12,20 +12,27 @@ import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
 const componentName = 'CardFooter';
 
+const defaults = {
+  actions: Object.freeze([]),
+  primaryButtonKind: 'primary',
+  productive: false,
+  secondaryButtonKind: 'secondary',
+};
+
 export let CardFooter = ({
-  actions,
+  actions = defaults.actions,
   hasActions,
   hasButton,
   onPrimaryButtonClick,
   onSecondaryButtonClick,
   primaryButtonHref,
   primaryButtonIcon,
-  primaryButtonKind,
+  primaryButtonKind = defaults.primaryButtonKind,
   primaryButtonText,
-  productive,
+  productive = defaults.productive,
   secondaryButtonHref,
   secondaryButtonIcon,
-  secondaryButtonKind,
+  secondaryButtonKind = defaults.secondaryButtonKind,
   secondaryButtonText,
 }) => {
   const blockClass = `${pkg.prefix}--card`;
@@ -78,13 +85,6 @@ CardFooter.propTypes = {
   secondaryButtonIcon: PropTypes.string,
   secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
   secondaryButtonText: PropTypes.string,
-};
-
-CardFooter.defaultProps = {
-  actions: [],
-  primaryButtonKind: 'primary',
-  productive: false,
-  secondaryButtonKind: 'secondary',
 };
 
 CardFooter.displayName = componentName;

@@ -1,0 +1,11 @@
+@import '../carbon';
+
+.box {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  // stylelint-disable-next-line carbon/layout-token-use
+  margin: 1rem;
+  // stylelint-disable-next-line carbon/theme-token-use
+  background-color: #000000;
+}

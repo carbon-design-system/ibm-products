@@ -21,7 +21,7 @@ import {
   HeaderName,
 } from 'carbon-components-react/lib/components/UIShell';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import {
   getStoryTitle,
   prepareStory,
@@ -55,7 +55,7 @@ const defaultStoryProps = {
     'We recommend you fill out and evaluate these details at a minimum before deploying your topic.',
   primaryButtonText: 'Create',
   secondaryButtonText: 'Cancel',
-  selectorPrimaryFocus: '.bx--text-input',
+  selectorPrimaryFocus: `.${carbon.prefix}--text-input`,
 };
 
 const items = ['Day(s)', 'Month(s)', 'Year(s)'];
@@ -90,7 +90,7 @@ const DefaultTemplate = ({ ...args }) => {
         {...args}
         open={open}
         onRequestClose={() => setOpen(false)}
-        selectorPrimaryFocus=".bx--text-input"
+        selectorPrimaryFocus={`.${carbon.prefix}--text-input`}
       >
         <TextInput
           id="create-side-panel-topic-name-a"

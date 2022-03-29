@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -11,6 +11,10 @@
 
 // Other Carbon settings.
 @import 'carbon-components/scss/globals/scss/helper-mixins';
+
+// PageHeader uses the following Carbon components:
+// Toggle
+@import 'carbon-components/scss/components/toggle/toggle';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
@@ -44,13 +48,17 @@
     box-sizing: border-box;
     align-items: center;
     padding-right: $spacing-05;
-    grid-template-columns: 3rem 1fr 1rem;
+    grid-template-columns: 3rem 1fr 2rem; // chevron container, heading, toggle width
   }
 
   .#{$block-class}__header {
     background-color: transparent;
     cursor: pointer;
     transition: background-color $duration--fast-01 motion(entrance, productive);
+  }
+
+  .#{$block-class}__header::-webkit-details-marker {
+    display: none;
   }
 
   .#{$block-class}__header:hover {
@@ -61,11 +69,11 @@
     @include focus-outline('outline');
   }
 
-  .#{$block-class}__title {
+  .#{$block-class}__heading {
     grid-column: 2;
   }
 
-  .#{$block-class}__heading {
+  .#{$block-class}__title {
     @include carbon--type-style('productive-heading-01');
 
     color: $text-01;
@@ -88,7 +96,7 @@
   .#{$block-class}__summary--warn,
   .#{$block-class}__summary--locked {
     column-gap: $spacing-02;
-    grid-template-columns: 1rem 1fr;
+    grid-template-columns: 1rem 1fr; // icon, text
   }
 
   .#{$block-class}__summary--invalid {
@@ -110,11 +118,15 @@
   .#{$block-class}__summary-text {
     overflow: hidden;
     height: max-content;
+    // spacing-05 + toggle width
+    // stylelint-disable-next-line carbon/layout-token-use
+    padding-right: calc(#{$spacing-05} + 2rem);
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   .#{$block-class}__chevron {
+    display: block;
     justify-self: center;
     transition: transform $duration--fast-02 motion(standard, productive);
   }
@@ -195,22 +207,9 @@
     margin-top: $spacing-01;
   }
 
-  .#{$block-class}--lg .#{$block-class}__summary-text {
-    // spacing-05 + toggle width
-    // stylelint-disable-next-line carbon/layout-token-use
-    padding-right: calc(#{$spacing-05} + 1rem);
-  }
-
-  .#{$block-class}--xl .#{$block-class}__summary-text {
-    // spacing-05 + toggle width
-    // stylelint-disable-next-line carbon/layout-token-use
-    padding-right: calc(#{$spacing-05} + 2rem);
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .#{$block-class}__summary,
     .#{$block-class}__chevron {
-      // stylelint-disable-next-line carbon/motion-token-use
       transition: none;
     }
   }

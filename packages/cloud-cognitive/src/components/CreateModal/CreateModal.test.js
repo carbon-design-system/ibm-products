@@ -10,7 +10,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { TextInput } from 'carbon-components-react';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -25,7 +25,7 @@ const title = 'This is a test title';
 const subtitle = 'This is a test subtitle';
 const description =
   'This is a test description. It has several lines. It should render a modal.';
-const selectorPrimaryFocus = '.bx--text-input';
+const selectorPrimaryFocus = `.${carbon.prefix}--text-input`;
 const dataTestId = uuidv4();
 
 // render a CreateModal with title, subtitle, description, and any other required props

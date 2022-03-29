@@ -3,6 +3,86 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.11.4...@carbon/ibm-security@2.11.5) (2022-03-29)
+
+
+### Bug Fixes
+
+* update Carbon versions to latest ([#1835](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1835)) ([b9152d1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b9152d15813b7feab937092bbbf46439305aab50))
+
+
+
+
+
+## [2.11.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.11.3...@carbon/ibm-security@2.11.4) (2022-03-22)
+
+
+### Bug Fixes
+
+* update Carbon versions to latest ([#1793](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1793)) ([9943926](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9943926b5234ce0690417d16483da4caa84790cf)), closes [#1738](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1738) [#1791](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1791) [#1738](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1738) [#1790](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1790)
+
+
+
+
+
+## [2.11.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.11.2...@carbon/ibm-security@2.11.3) (2022-03-08)
+
+
+### Bug Fixes
+
+* update Carbon versions to latest ([#1733](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1733)) ([9783faa](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9783faac23d8f03598ef0e5994743c4c5f915705))
+
+
+
+
+
+## [2.11.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.11.1...@carbon/ibm-security@2.11.2) (2022-03-01)
+
+**Note:** Version bump only for package @carbon/ibm-security
+
+
+
+
+
+## [2.11.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.11.0...@carbon/ibm-security@2.11.1) (2022-02-22)
+
+**Note:** Version bump only for package @carbon/ibm-security
+
+
+
+
+
+# [2.11.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.10.10...@carbon/ibm-security@2.11.0) (2022-02-16)
+
+
+### Features
+
+* update Carbon versions to latest ([#1646](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1646)) ([e323739](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e323739ac9a6155aa0fddf39b13e4440d04117fc))
+
+
+
+
+
+## [2.10.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.10.9...@carbon/ibm-security@2.10.10) (2022-02-15)
+
+**Note:** Version bump only for package @carbon/ibm-security
+
+
+
+
+
+## [2.10.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.10.8...@carbon/ibm-security@2.10.9) (2022-02-09)
+
+
+### Bug Fixes
+
+* update Carbon versions to latest ([#1587](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1587)) ([d4b5ccc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d4b5cccd9ef4a9df2966063c21f49fe7810245a8))
+* update stylelint to latest version ([#1597](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1597)) ([13d8f9e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/13d8f9eb2885e687ba23f66b019a5629fffa2a85))
+
+
+
+
+
 ## [2.10.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.10.7...@carbon/ibm-security@2.10.8) (2022-02-01)
 
 **Note:** Version bump only for package @carbon/ibm-security

@@ -28,33 +28,27 @@ export default {
 
 const defaultProps = {
   open: true,
-  actions: [
-    {
-      label: 'Cancel',
-      kind: 'secondary',
-    },
-    {
-      label: 'Add',
-      kind: 'primary',
-    },
-  ],
-  items: [
-    {
-      id: '1',
-      label: 'Kansas',
-      value: 'kansas',
-    },
-    {
-      id: '2',
-      label: 'Texas',
-      value: 'texas',
-    },
-    {
-      id: '3',
-      label: 'Florida',
-      value: 'florida',
-    },
-  ],
+  items: {
+    entries: [
+      {
+        id: '1',
+        value: '1',
+        title: 'item 1',
+        subtitle: 'item 1 subtitle',
+      },
+      {
+        id: '2',
+        value: '2',
+        title: 'item 2',
+      },
+      {
+        id: '3',
+        value: '3',
+        title: 'item 3',
+        subtitle: 'item 3 subtitle',
+      },
+    ],
+  },
   title: 'Add business terms',
   description: 'Select business terms from the list',
   inputPlaceholder: 'Find business terms',
@@ -65,6 +59,13 @@ const defaultProps = {
     'Select a term to include the full set of the governance artifacts it contains in the governance scope.',
   noResultsTitle: 'No results',
   noResultsDescription: 'Try again',
+  onCloseButtonText: 'Cancel',
+  onSubmitButtonText: 'Add',
+  removeIconDescription: 'Remove',
+  textInputLabel: 'test input label',
+  columnInputPlaceholder: 'Find',
+  onSubmit: (selections) => console.log(selections),
+  searchResultsLabel: 'Search results',
 };
 
 const Template = (args) => {
@@ -74,5 +75,85 @@ const Template = (args) => {
 export const Default = prepareStory(Template, {
   args: {
     ...defaultProps,
+  },
+});
+
+export const WithHierarchy = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    items: {
+      sortBy: ['title'],
+      entries: [
+        {
+          id: '1',
+          value: 'folder 1',
+          title: 'folder 1',
+          children: {
+            sortBy: ['title', 'size'],
+            filterBy: 'fileType',
+            entries: [
+              {
+                id: '1-1',
+                value: 'file1.pdf',
+                title: 'file1.pdf',
+                fileType: 'pdf',
+                size: '100',
+              },
+              {
+                id: '1-2',
+                value: 'index.js',
+                title: 'index.js',
+                fileType: 'js',
+                size: '200',
+              },
+              {
+                id: '1-3',
+                value: 'sitemap.xml',
+                title: 'sitemap.xml',
+                fileType: 'xml',
+                size: '10',
+              },
+            ],
+          },
+        },
+        {
+          id: '2',
+          value: 'folder 2',
+          title: 'folder 2',
+        },
+      ],
+    },
+  },
+});
+
+export const WithModifiers = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    items: {
+      modifiers: {
+        label: 'Role',
+        options: ['editor', 'viewer', 'admin'],
+        property: 'role',
+      },
+      entries: [
+        {
+          id: '1',
+          value: '1',
+          title: 'item 1',
+          subtitle: 'item 1 subtitle',
+        },
+        {
+          id: '2',
+          value: '2',
+          title: 'item 2',
+        },
+        {
+          id: '3',
+          value: '3',
+          title: 'item 3',
+          subtitle: 'item 3 subtitle',
+        },
+      ],
+    },
   },
 });

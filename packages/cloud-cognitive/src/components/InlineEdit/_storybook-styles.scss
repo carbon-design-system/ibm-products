@@ -5,11 +5,19 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import './index';
+@import '../../global/styles/project-settings';
+@import '../../global/styles/display-box';
 
-// TODO: add any additional styles used by InlineEdit.stories.js
+.inline-edit-stories__viewport {
+  // width: 300px; // larger than standard size needed by text input at standard font size (html input attribute size)
+  // stylelint-disable-next-line carbon/layout-token-use
+  margin: 100px;
+}
 
-// Uncomment next line (which must appear last) to test in storybook
-// that the SCSS styles for this component are sufficiently specific
-// to override Carbon whichever order the styles get loaded in.
-//@import 'carbon-components/css/carbon-components.min';
+$block-class: #{$pkg-prefix}--inline-edit;
+
+.component-full-width {
+  .#{$block-class} {
+    width: 100%;
+  }
+}

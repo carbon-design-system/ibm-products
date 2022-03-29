@@ -17,15 +17,15 @@
 @mixin remove-modal {
   $block-class: #{$pkg-prefix}--remove-modal;
 
-  .#{$block-class} .bx--modal-footer .bx--btn {
+  .#{$block-class} .#{$carbon-prefix}--modal-footer .#{$carbon-prefix}--btn {
     max-width: none;
   }
 
-  .#{$block-class} .bx--modal-content {
+  .#{$block-class} .#{$carbon-prefix}--modal-content {
     padding-right: $spacing-05;
   }
 
-  .#{$block-class} .bx--modal-close {
+  .#{$block-class} .#{$carbon-prefix}--modal-close {
     display: none;
   }
 

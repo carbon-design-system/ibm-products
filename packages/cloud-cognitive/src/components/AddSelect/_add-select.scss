@@ -24,51 +24,193 @@
     padding: $spacing-05;
   }
 
-  .#{$block-class}__items-label {
-    margin-right: $spacing-03;
-
-    &-container {
-      display: flex;
-      align-items: center;
-      margin-top: $spacing-05;
-      margin-bottom: $spacing-03;
-    }
-  }
-
   .#{$block-class}__selections {
-    border-top: 1px solid $ui-03;
+    &.#{$carbon-prefix}--structured-list {
+      border-top: 1px solid $ui-03;
+      margin-bottom: 0;
+    }
 
     &-wrapper {
       display: block;
     }
+
+    &-cell-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &-cell-title {
+      display: block;
+      color: $text-01;
+    }
+
+    &-cell-subtitle {
+      @include carbon--type-style('label-01');
+
+      display: block;
+      color: $text-02;
+    }
+
+    &-cell:hover .#{$block-class}__selections-dropdown {
+      visibility: visible;
+    }
+
+    &-dropdown {
+      visibility: hidden;
+    }
+
+    &-row-selected {
+      background: #e5e5e5;
+    }
+
+    &-row-selected .#{$block-class}__selections-dropdown {
+      visibility: visible;
+    }
+
+    &-checkbox {
+      display: flex;
+      align-items: center;
+    }
+
+    &-checkbox-label-text {
+      display: flex;
+      flex-direction: column;
+      padding-left: $spacing-05;
+    }
+
+    &-checkbox-wrapper.#{$carbon-prefix}--form-item {
+      flex: 0;
+    }
+
+    &-checkbox-wrapper .#{$carbon-prefix}--checkbox-label-text {
+      display: none;
+    }
   }
 
-  // multi select specific
+  // sidebar
 
-  .#{$block-class}__influencer-header {
+  .#{$block-class}__sidebar-header {
     display: flex;
     padding: $spacing-06 $spacing-05 $spacing-03 $spacing-05;
     border-bottom: 1px solid $ui-03;
 
-    .#{$block-class}__influencer-title {
+    .#{$block-class}__sidebar-title {
       @include carbon--type-style('productive-heading-02');
     }
   }
 
-  .#{$block-class}__influencer-title {
+  .#{$block-class}__sidebar-title {
     margin-right: $spacing-03;
   }
 
-  .#{$block-class}__influencer-body {
+  .#{$block-class}__sidebar-selected-item {
+    &-title {
+      color: $text-01;
+    }
+
+    &-subtitle {
+      @include carbon--type-style('label-01');
+
+      color: $text-02;
+    }
+  }
+
+  .#{$block-class}__sidebar-body {
     padding: $spacing-05;
   }
 
+  .#{$block-class} .#{$block-class}__sidebar-item-header {
+    @include carbon--type-style('label-01');
+
+    margin-bottom: $spacing-03;
+    color: $text-02;
+  }
+
+  .#{$block-class} .#{$block-class}__sidebar-item-body {
+    @include carbon--type-style('body-long-01');
+
+    margin-bottom: $spacing-05;
+  }
+
+  .#{$block-class} .#{$block-class}__sidebar-item-remove-button:hover {
+    background: $disabled-02;
+  }
+
+  .#{$block-class} .#{$block-class}__sidebar-accordion-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  // columns
+
+  .#{$block-class}__columns {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .#{$block-class}__columns .#{$block-class}__selections-cell {
+    // stylelint-disable-next-line
+    padding: 0 !important;
+  }
+
+  .#{$block-class}__column {
+    overflow: auto;
+    max-width: 15rem;
+    flex: 1 0 15rem;
+    padding: $spacing-05;
+    border-top: 1px solid $ui-03;
+    border-right: 1px solid $ui-03;
+
+    &-search-bar {
+      display: flex;
+
+      label {
+        display: none;
+      }
+    }
+
+    &-sort-filter {
+      display: flex;
+    }
+
+    .#{$carbon-prefix}--overflow-menu {
+      border-bottom: 1px solid $ui-04;
+    }
+  }
+
+  .#{$block-class}__tag-container {
+    display: flex;
+    align-items: center;
+    margin-top: $spacing-05;
+    margin-bottom: $spacing-03;
+
+    &-label {
+      margin-right: $spacing-03;
+    }
+  }
+
   // overrides
+
+  .#{$block-class}__tag-container .#{$carbon-prefix}--tag {
+    margin: 0;
+  }
 
   // the influencer sidebar needs to be even with the buttons
   .#{$block-class} .#{$tearsheet-class} .#{$tearsheet-class}__influencer {
     max-width: 29rem;
     flex: 0 0 50%;
+  }
+
+  .#{$block-class} .#{$tearsheet-class}__header-description {
+    color: $text-02;
+  }
+
+  .#{$block-class} .#{$tearsheet-class} .#{$tearsheet-class}__content {
+    display: flex;
+    flex-direction: column;
   }
 
   .#{$block-class} .#{$block-class}__items-label {
@@ -77,7 +219,7 @@
 
   .#{$block-class}
     .#{$carbon-prefix}--modal-container--sm
-    .bx--modal-content
+    .#{$carbon-prefix}--modal-content
     p {
     padding-right: 0;
   }
@@ -86,14 +228,32 @@
     padding-bottom: $spacing-05;
   }
 
+  .#{$block-class} .#{$carbon-prefix}--radio-button__appearance {
+    margin: 0 $spacing-05 0 0;
+  }
+
   .#{$block-class}
     .#{$carbon-prefix}--radio-button-wrapper
     .#{$carbon-prefix}--radio-button__label {
     justify-content: left;
   }
 
-  .#{$block-class}__selections-wrapper .#{$carbon-prefix}---form-item {
-    display: block;
+  .#{$block-class} .#{$carbon-prefix}--breadcrumb .#{$carbon-prefix}--link {
+    cursor: pointer;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--accordion__item {
+    &:hover .#{$block-class}__sidebar-accordion-title button {
+      opacity: 1;
+    }
+
+    .#{$block-class}__sidebar-accordion-title button {
+      opacity: 0;
+    }
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--checkbox-label-text {
+    padding-left: $spacing-05;
   }
 }
 

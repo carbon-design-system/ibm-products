@@ -21,6 +21,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
     icon,
     asText,
     onChange,
+    onSave,
     editDescription,
     editableLabel,
     revertDescription,
@@ -28,7 +29,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
     ...rest
   } = title;
   let titleText;
-  let isEditable = !!onChange;
+  let isEditable = !!onSave;
 
   if (text || !content) {
     if (text === undefined && typeof title === 'string') {
@@ -52,10 +53,12 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
             {...{
               editDescription,
               onChange,
+              onSave,
               labelText: editableLabel,
               revertDescription,
               saveDescription,
             }}
+            buttonTooltipPosition="bottom"
             {...rest}
           />
         ) : (
@@ -83,7 +86,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
   );
 };
 
-export const inlineEditRequired = ({ onChange }) => !!onChange;
+export const inlineEditRequired = ({ onSave }) => !!onSave;
 
 PageHeaderTitle.propTypes = {
   // passed from page header
@@ -101,9 +104,10 @@ PageHeaderTitle.propTypes = {
    *    - text: title string
    *    - icon: optional icon
    *    - loading: boolean shows loading indicator if true
-   *    - onChange: function to process edits only supply if in place edit is desired
+   *    - onChange: function to process the live value (React change === HTML Input)
+   *    - onSave: function to process a confirmed change
    *    - editDescription: description for edit button
-   *    - editableLabel: label for edit required if onChange supplied
+   *    - editableLabel: label for edit required if onSave supplied
    *    - revertDescription: description for edit revert button
    *    - saveDescription: description for edit save button
    * - Object containing user defined contents. These must fit within the area defined for the title in both main part of the header and the breadcrumb.
@@ -123,6 +127,7 @@ PageHeaderTitle.propTypes = {
       editableLabel: PropTypes.string.isRequired.if(inlineEditRequired),
       id: PropTypes.string.isRequired.if(inlineEditRequired),
       onChange: PropTypes.func,
+      onSave: PropTypes.func,
       revertDescription: PropTypes.string.isRequired.if(inlineEditRequired),
       saveDescription: PropTypes.string.isRequired.if(inlineEditRequired),
       // Update docgen if changed

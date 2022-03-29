@@ -13,22 +13,24 @@
   $block-class: #{$pkg-prefix}--create-influencer;
   $create-tearsheet-block-class: #{$pkg-prefix}--tearsheet-create;
   $influencerAnimationStart: calc(-1 * #{$spacing-05});
-  @keyframes influencerMenuEntrance {
+  @keyframes influencer-menu-entrance {
     0% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
       transform: translateX($influencerAnimationStart);
     }
+
     100% {
       opacity: 1;
       transform: translateX(0);
     }
   }
-  @keyframes influencerMenuExit {
+  @keyframes influencer-menu-exit {
     0% {
       opacity: 1;
       transform: translateX(0);
     }
+
     100% {
       opacity: 0;
       // stylelint-disable-next-line carbon/layout-token-use
@@ -60,7 +62,7 @@
   .#{$block-class}__side-nav-opening,
   .#{$block-class}__progress-indicator-opening {
     // stylelint-disable-next-line carbon/motion-token-use
-    animation: influencerMenuEntrance $duration--moderate-02 1;
+    animation: influencer-menu-entrance $duration--moderate-02 1;
     animation-fill-mode: forwards;
     @include carbon--motion(entrance, productive);
   }
@@ -68,7 +70,7 @@
   .#{$block-class}__side-nav-closing,
   .#{$block-class}__progress-indicator-closing {
     // stylelint-disable-next-line carbon/motion-token-use
-    animation: influencerMenuExit $duration--moderate-02 1;
+    animation: influencer-menu-exit $duration--moderate-02 1;
     animation-fill-mode: forwards;
     @include carbon--motion(exit, productive);
   }

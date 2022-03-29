@@ -11,9 +11,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expectMultipleError } from '../../global/js/utils/test-helper';
 
-import { pkg } from '../../settings';
-
-import { Loading } from 'carbon-components-react';
+import { pkg, carbon } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -41,9 +39,9 @@ const actionDG = { label: labelDG, kind: 'danger--ghost', dangerDescription };
 const getByRoleAndLabel = (role, label) =>
   screen.getByRole(role, { name: label });
 
-const primaryButton = 'bx--btn--primary';
-const secondaryButton = 'bx--btn--secondary';
-const ghostButton = 'bx--btn--ghost';
+const primaryButton = `${carbon.prefix}--btn--primary`;
+const secondaryButton = `${carbon.prefix}--btn--secondary`;
+const ghostButton = `${carbon.prefix}--btn--ghost`;
 
 describe(componentName, () => {
   it('renders a component ActionSet', () => {
@@ -128,7 +126,7 @@ describe(componentName, () => {
 
   it('renders a loading button', () => {
     render(<ActionSet actions={[{ ...actionS, loading: true }]} />);
-    const loader = Loading.defaultProps.description;
+    const loader = 'Active loading indicator';
     expect(screen.getByRole('button').textContent).toEqual(
       `${labelS}${loader}${loader}`
     );

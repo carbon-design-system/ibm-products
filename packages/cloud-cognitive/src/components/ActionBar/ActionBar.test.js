@@ -141,7 +141,9 @@ describe(ActionBar.displayName, () => {
     expect(menuItemNotSeen).toBeNull();
 
     // Click overflow button and check for last action
-    const ofBtn = screen.getByLabelText(overflowAriaLabel);
+    const ofBtn = screen.getByLabelText(overflowAriaLabel, {
+      selector: `.${blockClass}-overflow-items`,
+    });
     userEvent.click(ofBtn);
 
     // <ul role='menu' /> but default <ul> role of list used for query

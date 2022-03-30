@@ -65,21 +65,26 @@ export let ActionBar = React.forwardRef(
           aria-hidden={true}
           ref={sizingRef}
         >
-          <ActionBarOverflowItems
-            className={`${blockClass}__hidden-sizing-item`}
-            overflowAriaLabel="hidden sizing overflow items"
-            overflowItems={[]}
-            key="hidden-overflow-menu"
-          ></ActionBarOverflowItems>
-          {actions.map(({ key, id, ...rest }) => (
-            <ActionBarItem
-              {...rest}
-              // ensure id is not duplicated
-              data-original-id={id}
-              key={`hidden-item-${key}`}
+          {/* aria-hidden false is needed to prevent accessibility failure */}
+          {/* "Element "button" should not be focusable within the subtree of an */}
+          {/* element with an 'aria-hidden' attribute with value 'true'." */}
+          <span aria-hidden={false}>
+            <ActionBarOverflowItems
               className={`${blockClass}__hidden-sizing-item`}
-            />
-          ))}
+              overflowAriaLabel="hidden sizing overflow items"
+              overflowItems={[]}
+              key="hidden-overflow-menu"
+            ></ActionBarOverflowItems>
+            {actions.map(({ key, id, ...rest }) => (
+              <ActionBarItem
+                {...rest}
+                // ensure id is not duplicated
+                data-original-id={id}
+                key={`hidden-item-${key}`}
+                className={`${blockClass}__hidden-sizing-item`}
+              />
+            ))}
+          </span>
         </div>
       );
     }, [actions]);

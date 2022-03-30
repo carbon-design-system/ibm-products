@@ -23,6 +23,6 @@
   min-width: 11.5rem;
 }
 
-.carbon-theme-dropdown .bx--label {
+.carbon-theme-dropdown .#{$prefix}--label {
   @include carbon--type-style('label-01');
 }

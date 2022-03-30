@@ -9,6 +9,7 @@ import React, { useRef, useCallback, useEffect, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { FixedSizeList } from 'react-window';
 import cx from 'classnames';
+import { px } from '@carbon/layout';
 
 import { pkg } from '../../settings';
 import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
@@ -52,6 +53,14 @@ export const DataSpreadsheetBody = forwardRef(
       selectionAreaData,
       clickAndHoldActive,
     });
+
+    // Set custom css property containing the spreadsheet total width
+    useEffect(() => {
+      ref?.current.style.setProperty(
+        `--${blockClass}--total-width`,
+        px(totalColumnsWidth + scrollBarSize)
+      );
+    }, [ref, scrollBarSize, totalColumnsWidth]);
 
     // Call the `onSelectionAreaChange` handler to send selection area data
     // back to the consumer

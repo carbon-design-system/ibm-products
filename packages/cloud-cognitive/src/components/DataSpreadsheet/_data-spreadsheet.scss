@@ -24,6 +24,8 @@
   $block-class: #{$pkg-prefix}--data-spreadsheet;
 
   .#{$block-class} {
+    --#{$block-class}--total-width: 0;
+
     display: inline-block;
     border-spacing: 0;
 
@@ -74,6 +76,7 @@
     .#{$block-class}__td {
       @include set-body-borders();
 
+      overflow: hidden;
       margin: 0;
       background-color: $ui-background;
       cursor: cell;
@@ -91,6 +94,7 @@
       position: absolute;
       z-index: 4;
       display: none;
+      overflow: hidden;
       /* stylelint-disable-next-line carbon/layout-token-use */
       padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
       background-color: $ui-background;
@@ -99,6 +103,21 @@
         min-width: initial;
         min-height: initial;
       }
+      &.#{$block-class}__cell-editor--active {
+        outline: $spacing-01 solid $interactive-01;
+        outline-offset: -2px;
+      }
+    }
+    .#{$block-class}__cell-editor-ruler {
+      @include carbon--type-style('body-short-01');
+
+      position: absolute;
+      overflow: hidden;
+      width: fit-content;
+      max-width: var(--#{$block-class}--total-width);
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
+      visibility: hidden;
     }
     .#{$block-class}__active-cell--highlight {
       @include carbon--type-style('body-short-01');
@@ -107,6 +126,7 @@
       position: absolute;
       z-index: 3;
       display: none;
+      overflow: hidden;
       // Could be fixed by using border-right but the fact that
       // this element is positioned absolute prevents that from working
       /* stylelint-disable-next-line carbon/layout-token-use */

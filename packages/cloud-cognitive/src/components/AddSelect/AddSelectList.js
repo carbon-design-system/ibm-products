@@ -18,6 +18,7 @@ import {
 import { ChevronRight16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { UserProfileImage } from '../UserProfileImage';
 import { pkg } from '../../settings';
 const componentName = 'AddSelectList';
 
@@ -79,6 +80,16 @@ export let AddSelectList = ({
 
   const isSelected = (id) => multiSelection.includes(id);
 
+  const getAvatarProps = ({ src, alt, icon, backgroundColor }) => ({
+    className: `${blockClass}-cell-avatar`,
+    size: 'lg',
+    theme: 'light',
+    image: src,
+    imageDescription: alt,
+    icon,
+    backgroundColor,
+  });
+
   return (
     <div className={`${blockClass}-wrapper`}>
       <StructuredListWrapper selection className={`${blockClass}`}>
@@ -104,15 +115,22 @@ export let AddSelectList = ({
                           checked={isSelected(item.id)}
                           className={`${blockClass}-checkbox-wrapper`}
                         />
-                        <div className={`${blockClass}-checkbox-label-text`}>
-                          <span className={`${blockClass}-cell-title`}>
-                            {item.title}
-                          </span>
-                          {item.subtitle && (
-                            <span className={`${blockClass}-cell-subtitle`}>
-                              {item.subtitle}
-                            </span>
+                        <div className={`${blockClass}-checkbox-label-wrapper`}>
+                          {item.avatar && (
+                            <UserProfileImage
+                              {...getAvatarProps(item.avatar)}
+                            />
                           )}
+                          <div className={`${blockClass}-checkbox-label-text`}>
+                            <span className={`${blockClass}-cell-title`}>
+                              {item.title}
+                            </span>
+                            {item.subtitle && (
+                              <span className={`${blockClass}-cell-subtitle`}>
+                                {item.subtitle}
+                              </span>
+                            )}
+                          </div>
                         </div>
                       </div>
                       {modifiers?.options?.length && (

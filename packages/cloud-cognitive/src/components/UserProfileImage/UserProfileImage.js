@@ -43,6 +43,7 @@ export let UserProfileImage = React.forwardRef(
       backgroundColor,
       className,
       kind,
+      icon,
       initials,
       image,
       imageDescription,
@@ -81,17 +82,45 @@ export let UserProfileImage = React.forwardRef(
         .toUpperCase();
     };
 
-    const FillItem = image
-      ? () => (
+    const getFillItem = () => {
+      if (image) {
+        return () => (
           <img
             alt={imageDescription}
             src={image}
             className={`${blockClass}__photo ${blockClass}__photo--${size}`}
           />
-        )
-      : initials
-      ? formatInitials
-      : kind && size && icons[kind][size];
+        );
+      }
+      if (initials) {
+        return formatInitials;
+      }
+      if (kind && size) {
+        return icons[kind][size];
+      }
+      return icon;
+    };
+
+    // if user doesn't provide a color just generate a random one
+    const getRandomColor = () => {
+      const colors = [
+        'light-cyan',
+        'dark-cyan',
+        'light-gray',
+        'dark-gray',
+        'light-green',
+        'dark-green',
+        'light-magenta',
+        'dark-magenta',
+        'light-purple',
+        'dark-purple',
+        'light-teal',
+        'dark-teal',
+      ];
+      return colors[Math.floor(Math.random() * colors.length)];
+    };
+
+    const FillItem = getFillItem();
 
     const renderUserProfileImage = () => (
       <div
@@ -105,7 +134,7 @@ export let UserProfileImage = React.forwardRef(
           className,
           `${blockClass}--${size}`,
           `${blockClass}--${theme}`,
-          `${blockClass}--${backgroundColor}`,
+          `${blockClass}--${backgroundColor || getRandomColor()}`,
         ])}
         {...getDevtoolsProps(componentName)}
       >
@@ -158,6 +187,11 @@ UserProfileImage.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
+  /**
+   * Provide a custom icon to use if you need to use an icon other than the included ones
+   */
+  icon: PropTypes.object,
 
   /**
    * When passing the image prop, supply a full path to the image to be displayed.

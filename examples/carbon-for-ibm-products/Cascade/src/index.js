@@ -7,18 +7,21 @@ import './_index.scss';
 
 import { Example } from './Example/Example';
 import { Button } from 'carbon-components-react';
+import { ThemeProvider } from './ThemeSelector/ThemeContext';
+import { ThemeDropdown } from './ThemeSelector/ThemeDropdown';
 
 const handleRestartClick = () =>
   document.getAnimations().forEach((anim) => anim.play());
 
 render(
-  <>
-    <Button kind="secondary" onClick={handleRestartClick}>
-      Restart animations
-    </Button>
+  <ThemeProvider>
     <div className="app">
+      <Button kind="secondary" onClick={handleRestartClick}>
+        Restart animations
+      </Button>
       <Example />
+      <ThemeDropdown />
     </div>
-  </>,
+  </ThemeProvider>,
   document.getElementById('root')
 );

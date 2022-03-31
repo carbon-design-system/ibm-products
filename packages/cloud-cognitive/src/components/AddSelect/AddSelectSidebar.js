@@ -30,10 +30,10 @@ export let AddSelectSidebar = ({
   };
 
   const sidebarItems = multiSelection.reduce((acc, cur) => {
-    const i = items.find((item) => item.id === cur);
+    const selectedItem = items.find((item) => item.id === cur);
     // certain properties should not be displayed in the sidebar
     // eslint-disable-next-line no-unused-vars
-    const { icon, avatar, ...newItem } = i;
+    const { icon, avatar, ...newItem } = selectedItem;
     acc.push(newItem);
     return acc;
   }, []);

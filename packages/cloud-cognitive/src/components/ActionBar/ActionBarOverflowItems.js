@@ -35,9 +35,10 @@ export const ActionBarOverflowItems = ({
       className={cx(blockClass, className)}
       direction="bottom"
       flipped
+      iconDescription={overflowAriaLabel} // also needs setting to avoid a11y "Accessible name does not match or contain the visible label text"
       menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
     >
-      {React.Children.map(overflowItems, (item) => {
+      {React.Children.map(overflowItems, (item, index) => {
         // This uses a copy of a menu item option
         // NOTE: Cannot use a real Tooltip icon below as it uses a <button /> the
         // div equivalent below is based on Carbon 10.25.0
@@ -47,11 +48,11 @@ export const ActionBarOverflowItems = ({
             itemText={
               <div
                 className={`${blockClass}__item-content`}
-                aria-describedby={`${internalId}--item-label`}
+                aria-describedby={`${internalId.current}-${index}--item-label`}
               >
                 <span
                   className={`${blockClass}__item-label`}
-                  id={`${internalId}--item-label`}
+                  id={`${internalId.current}-${index}--item-label`}
                 >
                   {item.props.iconDescription}
                 </span>

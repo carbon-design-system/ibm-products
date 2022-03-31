@@ -38,6 +38,7 @@ import { createActiveCellFn } from './utils/createActiveCellFn';
 import { getCellSize } from './utils/getCellSize';
 import { handleMultipleKeys } from './utils/handleMultipleKeys';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
+import { removeCellSelections } from './utils/removeCellSelections';
 // cspell:words rowcount colcount
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -153,26 +154,6 @@ export let DataSpreadsheet = React.forwardRef(
       setIsEditing(false);
       cellEditorRef.current.style.display = 'none';
     }, []);
-
-    // Removes the cell selection elements
-    const removeCellSelections = useCallback(
-      (matcher) => {
-        if (matcher && typeof matcher === 'string') {
-          const selectionToRemove = spreadsheetRef.current.querySelector(
-            `[data-matcher-id="${matcher}"]`
-          );
-          if (selectionToRemove) {
-            selectionToRemove.remove();
-          }
-        } else {
-          const cellSelections = spreadsheetRef.current.querySelectorAll(
-            `.${blockClass}__selection-area--element`
-          );
-          [...cellSelections].forEach((element) => element.remove());
-        }
-      },
-      [spreadsheetRef]
-    );
 
     // Remove cell editor if the active cell coordinates change and save with new cell data, this will
     // happen if you click on another cell while isEditing is true
@@ -500,7 +481,6 @@ export let DataSpreadsheet = React.forwardRef(
         currentMatcher,
         isEditing,
         removeCellEditor,
-        removeCellSelections,
         selectionAreas,
       ]
     );
@@ -590,32 +570,60 @@ export let DataSpreadsheet = React.forwardRef(
       startEditMode();
     };
 
-    // Update the data
-    const handleEditSubmit = (event) => {
-      const { key } = event;
+    const updateSelectionAreaOnCellEditSubmit = ({ type }) => {
       const submitEditChanges = () => {
         const prevCoords = previousState?.activeCellCoordinates;
         const cellProps = rows[prevCoords?.row].cells[prevCoords?.column];
         removeCellEditor();
         updateData(prevCoords?.row, cellProps.column.id);
       };
+      removeCellSelections({ spreadsheetRef });
+      submitEditChanges();
+      const tempMatcher = uuidv4();
+      const newSelectionArea = {
+        row:
+          type === 'Enter'
+            ? activeCellCoordinates.row === rows.length - 1
+              ? activeCellCoordinates.row
+              : activeCellCoordinates.row + 1
+            : activeCellCoordinates.row,
+        column:
+          type === 'Tab'
+            ? activeCellCoordinates.column === columns.length - 1
+              ? activeCellCoordinates.column
+              : activeCellCoordinates.column + 1
+            : activeCellCoordinates.column,
+      };
+      setSelectionAreas([
+        {
+          point1: newSelectionArea,
+          point2: newSelectionArea,
+          matcher: tempMatcher,
+          areaCreated: false,
+        },
+      ]);
+      setCurrentMatcher(tempMatcher);
+      cellEditorRulerRef.current.textContent = '';
+    };
+
+    // Update the data
+    const handleEditSubmit = (event) => {
+      const { key } = event;
       if (key === 'Enter') {
-        submitEditChanges();
+        updateSelectionAreaOnCellEditSubmit({ type: 'Enter' });
         setActiveCellCoordinates((prev) => ({
           ...prev,
           row: prev.row === rows.length - 1 ? prev.row : prev.row + 1, // do not move to next cell below if we're already in the last row
         }));
-        cellEditorRulerRef.current.textContent = '';
       }
       if (key === 'Tab') {
         event.preventDefault();
-        submitEditChanges();
+        updateSelectionAreaOnCellEditSubmit({ type: 'Tab' });
         setActiveCellCoordinates((prev) => ({
           ...prev,
           column:
             prev.column === columns.length - 1 ? prev.column : prev.column + 1, // do not move to next cell below if we're already in the last column
         }));
-        cellEditorRulerRef.current.textContent = '';
       }
       return;
     };
@@ -706,9 +714,14 @@ export let DataSpreadsheet = React.forwardRef(
         {...rest}
         {...getTableProps()}
         {...getDevtoolsProps(componentName)}
-        className={cx(blockClass, className, {
-          [`${blockClass}__container-has-focus`]: containerHasFocus,
-        })}
+        className={cx(
+          blockClass,
+          className,
+          `${blockClass}--interactive-cell-element`,
+          {
+            [`${blockClass}__container-has-focus`]: containerHasFocus,
+          }
+        )}
         ref={spreadsheetRef}
         role="grid"
         tabIndex={0}

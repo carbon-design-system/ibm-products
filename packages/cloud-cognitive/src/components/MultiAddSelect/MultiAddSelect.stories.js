@@ -15,7 +15,7 @@ import { MultiAddSelect } from '.';
 import mdx from './MultiAddSelect.mdx';
 // import { action } from '@storybook/addon-actions';
 import image from '../UserProfileImage/headshot.png'; // cspell:disable-line
-import { Group24 } from '@carbon/icons-react';
+import { Group24, Document16 } from '@carbon/icons-react';
 
 export default {
   title: getStoryTitle(MultiAddSelect.displayName),
@@ -100,6 +100,7 @@ export const WithHierarchy = prepareStory(Template, {
                 title: 'file1.pdf',
                 fileType: 'pdf',
                 size: '100',
+                icon: Document16,
               },
               {
                 id: '1-2',
@@ -107,6 +108,7 @@ export const WithHierarchy = prepareStory(Template, {
                 title: 'index.js',
                 fileType: 'js',
                 size: '200',
+                icon: Document16,
               },
               {
                 id: '1-3',
@@ -114,6 +116,7 @@ export const WithHierarchy = prepareStory(Template, {
                 title: 'sitemap.xml',
                 fileType: 'xml',
                 size: '10',
+                icon: Document16,
               },
             ],
           },

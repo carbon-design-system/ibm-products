@@ -57,6 +57,7 @@ export let BreadcrumbWithOverflow = ({
       <BreadcrumbItem key={`breadcrumb-overflow-${internalId.current}`}>
         <OverflowMenu
           ariaLabel={overflowAriaLabel}
+          iconDescription={overflowAriaLabel} // also needs setting to avoid a11y "Accessible name does not match or contain the visible label text"
           renderIcon={OverflowMenuHorizontal32}
           className={`${blockClass}__overflow-menu`}
           menuOptionsClass={`${blockClass}__overflow-menu-options`}

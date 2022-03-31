@@ -14,6 +14,7 @@ import React, {
   useEffect,
 } from 'react';
 import { useBlockLayout, useTable } from 'react-table';
+import { px } from '@carbon/layout';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -91,6 +92,7 @@ export let DataSpreadsheet = React.forwardRef(
     const [activeCellContent, setActiveCellContent] = useState();
     const activeKeys = useRef([]);
     const activeCellRef = useRef();
+    const cellEditorRulerRef = useRef();
     const defaultColumn = useMemo(
       () => ({
         width: 150,
@@ -184,6 +186,7 @@ export let DataSpreadsheet = React.forwardRef(
         const cellProps = rows[prevCoords?.row].cells[prevCoords?.column];
         removeCellEditor();
         updateData(prevCoords?.row, cellProps.column.id);
+        cellEditorRulerRef.current.textContent = '';
       }
       if (
         prevCoords?.row !== activeCellCoordinates?.row ||
@@ -517,6 +520,7 @@ export let DataSpreadsheet = React.forwardRef(
           ]
         : null;
       setCellEditorValue(activeCellValue);
+      cellEditorRulerRef.current.textContent = activeCellValue;
     };
 
     const handleActiveCellClick = () => {
@@ -601,6 +605,7 @@ export let DataSpreadsheet = React.forwardRef(
           ...prev,
           row: prev.row === rows.length - 1 ? prev.row : prev.row + 1, // do not move to next cell below if we're already in the last row
         }));
+        cellEditorRulerRef.current.textContent = '';
       }
       if (key === 'Tab') {
         event.preventDefault();
@@ -610,6 +615,7 @@ export let DataSpreadsheet = React.forwardRef(
           column:
             prev.column === columns.length - 1 ? prev.column : prev.column + 1, // do not move to next cell below if we're already in the last column
         }));
+        cellEditorRulerRef.current.textContent = '';
       }
       return;
     };
@@ -634,13 +640,54 @@ export let DataSpreadsheet = React.forwardRef(
         cellEditorRef.current.style.textAlign =
           cellProps?.column?.placement === 'right' ? 'right' : 'left';
         cellEditorRef.current?.focus();
+        const rulerWidth = cellEditorRulerRef.current.offsetWidth;
+        const cellWidth = activeCellRef.current.offsetWidth;
+        if (rulerWidth >= cellWidth) {
+          const widthMultiplier = Math.floor(rulerWidth / cellWidth) + 1;
+          const startingColumnPosition = activeCellCoordinates?.column;
+          const startingRowPosition = activeCellCoordinates?.row;
+          const totalColumns = columns.length;
+          const totalRows = rows.length;
+          const totalMultiplierPossible = totalColumns - startingColumnPosition;
+          const totalCellEditorMaxHeight =
+            (totalRows - startingRowPosition) * defaultColumn.rowHeight;
+          cellEditorRef.current.style.maxHeight = px(totalCellEditorMaxHeight);
+          cellEditorRef.current.style.width = px(
+            cellWidth *
+              (widthMultiplier <= totalMultiplierPossible
+                ? widthMultiplier
+                : totalMultiplierPossible)
+          );
+          cellEditorRef.current.style.height = px(
+            cellEditorRef.current.scrollHeight
+          ); // adds dynamic height to cell editor
+          // Cell editor has reached max height, we need to add the scrolling back.
+          // We also need to subtract 1 to account for the fact that the cell editor
+          // is placed one pixel below the cell being edited to account for the border
+          if (
+            cellEditorRef.current.clientHeight ===
+            totalCellEditorMaxHeight - 1
+          ) {
+            cellEditorRef.current.style.overflow = 'auto';
+          } else {
+            cellEditorRef.current.style.overflow = 'hidden';
+          }
+        }
       }
       if (!isEditing) {
+        cellEditorRef.current.style.overflow = 'hidden';
         cellEditorRef.current.style.display = 'none';
         cellEditorRef.current.blur();
         activeCellRef.current.focus();
       }
-    }, [isEditing, activeCellCoordinates, rows]);
+    }, [
+      isEditing,
+      activeCellCoordinates,
+      rows,
+      cellEditorValue,
+      columns.length,
+      defaultColumn,
+    ]);
 
     const handleKeyUp = (event) => {
       const { key } = event;
@@ -730,7 +777,10 @@ export let DataSpreadsheet = React.forwardRef(
         <TextArea
           value={cellEditorValue}
           onKeyDown={handleEditSubmit}
-          onChange={(event) => setCellEditorValue(event.target.value)}
+          onChange={(event) => {
+            setCellEditorValue(event.target.value);
+            cellEditorRulerRef.current.textContent = event.target.value;
+          }}
           ref={cellEditorRef}
           labelText=""
           aria-labelledby={
@@ -746,6 +796,11 @@ export let DataSpreadsheet = React.forwardRef(
               [`${blockClass}__cell-editor--active`]: isEditing,
             }
           )}
+        />
+        <pre
+          aria-hidden
+          ref={cellEditorRulerRef}
+          className={`${blockClass}__cell-editor-ruler`}
         />
       </div>
     );

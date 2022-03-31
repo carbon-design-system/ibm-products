@@ -29,9 +29,14 @@ export let AddSelectSidebar = ({
     setMultiSelection(newSelections);
   };
 
-  const sidebarItems = multiSelection.map((selectedId) =>
-    items.find((item) => item.id === selectedId)
-  );
+  const sidebarItems = multiSelection.reduce((acc, cur) => {
+    const selectedItem = items.find((item) => item.id === cur);
+    // certain properties should not be displayed in the sidebar
+    // eslint-disable-next-line no-unused-vars
+    const { icon, avatar, ...newItem } = selectedItem;
+    acc.push(newItem);
+    return acc;
+  }, []);
 
   const getTitle = ({ title, subtitle, id }) => (
     <div className={`${blockClass}-accordion-title`}>

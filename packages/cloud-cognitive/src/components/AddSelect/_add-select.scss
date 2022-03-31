@@ -75,7 +75,7 @@
 
     &-checkbox-label-wrapper {
       display: flex;
-      margin-left: $spacing-05;
+      margin-left: $spacing-03;
     }
 
     &-checkbox-label-text {
@@ -92,7 +92,11 @@
     }
 
     &-cell-avatar {
-      margin-right: $spacing-05;
+      margin-right: $spacing-03;
+    }
+
+    &-cell-icon {
+      margin-right: $spacing-03;
     }
   }
 
@@ -261,7 +265,7 @@
   }
 
   .#{$block-class} .#{$carbon-prefix}--checkbox-label-text {
-    padding-left: $spacing-05;
+    padding-left: $spacing-03;
   }
 }
 

@@ -90,6 +90,8 @@ export let AddSelectList = ({
     backgroundColor,
   });
 
+  const getItemIcon = ({ icon: Icon }) => <Icon />;
+
   return (
     <div className={`${blockClass}-wrapper`}>
       <StructuredListWrapper selection className={`${blockClass}`}>
@@ -120,6 +122,11 @@ export let AddSelectList = ({
                             <UserProfileImage
                               {...getAvatarProps(item.avatar)}
                             />
+                          )}
+                          {item.icon && (
+                            <div className={`${blockClass}-cell-icon`}>
+                              {getItemIcon(item)}
+                            </div>
                           )}
                           <div className={`${blockClass}-checkbox-label-text`}>
                             <span className={`${blockClass}-cell-title`}>

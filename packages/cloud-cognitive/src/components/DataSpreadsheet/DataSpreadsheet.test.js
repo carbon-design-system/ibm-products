@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { forwardRef, useState } from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 
@@ -14,6 +14,8 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { DataSpreadsheet } from '.';
 import { generateData } from './utils/generateData';
+
+// cspell:words rowcount
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 const componentName = DataSpreadsheet.displayName;
@@ -155,5 +157,32 @@ describe(componentName, () => {
     );
     expect(selectionArea).toBeInTheDocument();
     expect(onSelectionAreaChangeFn).toHaveBeenCalledTimes(1);
+  });
+
+  const EmptySpreadsheet = forwardRef(({ ...rest }, ref) => {
+    const [data, setData] = useState([]);
+    const columnsClone = [
+      ...defaultProps.columns.filter((item) => item.Header !== 'Row 1'),
+    ];
+    return (
+      <DataSpreadsheet
+        {...defaultProps}
+        {...rest}
+        ref={ref}
+        data={data}
+        columns={columnsClone}
+        onDataUpdate={setData}
+      />
+    );
+  });
+
+  it('should render an empty spreadsheet with 32 rows', async () => {
+    const ref = React.createRef();
+    const defaultEmptyRowCount = 32;
+    render(
+      <EmptySpreadsheet ref={ref} defaultEmptyRowCount={defaultEmptyRowCount} />
+    );
+    const ariaRowCountValue = ref?.current.getAttribute('aria-rowcount');
+    expect(Number(ariaRowCountValue)).toEqual(defaultEmptyRowCount);
   });
 });

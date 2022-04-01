@@ -1,24 +1,26 @@
 {
   "name": "example-gallery",
   "version": "0.1.0",
-  "private": true,
+  "keywords": [
+    "carbon",
+    "ibm",
+    "ibm-products",
+    "component",
+    "apikeymodal"
+  ],
+  "license": "Apache-2.0",
+  "main": "src/index.js",
   "dependencies": {
-    "@carbon/elements": "latest",
-    "@carbon/ibm-cloud-cognitive": "^0.88.0",
-    "@carbon/icons-react": "latest",
-    "@testing-library/jest-dom": "latest",
-    "@testing-library/react": "latest",
-    "@testing-library/user-event": "latest",
-    "carbon-components": "latest",
-    "carbon-components-react": "latest",
-    "carbon-icons": "latest",
-    "classnames": "^2.3.1",
-    "eslint-config-react-app": "^6.0.0",
+    "@carbon/elements": "^10",
+    "@carbon/styles": "^1",
+    "@carbon/ibm-products": "latest",
+    "carbon-components": "^10",
+    "carbon-components-react": "^7",
+    "carbon-icons": "7.0.7",
     "react": "latest",
     "react-dom": "latest",
     "react-scripts": "latest",
-    "sass": "^1.42.1",
-    "web-vitals": "^1.0.1"
+    "sass": "latest"
   },
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
   "resolutions": {
@@ -47,5 +49,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "web-vitals": "^2.1.4"
   }
 }

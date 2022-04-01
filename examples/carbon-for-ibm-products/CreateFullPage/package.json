@@ -3,15 +3,15 @@
   "main": "src/index.js",
   "dependencies": {
     "@carbon/elements": "latest",
-    "@carbon/ibm-cloud-cognitive": "latest",
+    "@carbon/ibm-products": "latest",
     "@carbon/icons-react": "latest",
     "carbon-components": "latest",
     "carbon-components-react": "latest",
     "carbon-icons": "latest",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-scripts": "4.0.3",
-    "sass": "^1.43.4"
+    "react": "latest",
+    "react-dom": "latest",
+    "react-scripts": "latest",
+    "sass": "latest"
   },
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
   "resolutions": {

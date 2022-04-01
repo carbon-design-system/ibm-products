@@ -1,14 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { CreateModalExample } from './CreateModalExample';
-import { ThemeProvider } from './Theme/ThemeContext';
-import { ThemeDropdown } from './Theme/ThemeDropdown';
+import { Example } from './Example/Example';
+import { ThemeProvider } from './ThemeSelector/ThemeContext';
+import { ThemeDropdown } from './ThemeSelector/ThemeDropdown';
 
-import './index.scss';
+import '@carbon/ibm-products/css/index-full-carbon.css';
+import './_index.scss';
 
 const App = () => (
   <div className="app">
-    <CreateModalExample />
+    <Example />
     <ThemeDropdown />
   </div>
 );

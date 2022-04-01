@@ -1,10 +1,5 @@
-@import './carbon';
-@import './ibm-cloud-and-cognitive';
-
-body {
-  background-color: $ui-background;
-  color: $text-01;
-}
+@import '../carbon';
+@import '@carbon/ibm-products/scss/index';
 
 .app {
   display: flex;
@@ -19,7 +14,7 @@ body {
   align-items: center;
 }
 
-$block-class: exp--create-side-panel;
+$block-class: #{$pkg-prefix}--create-side-panel;
 $story-prefix: create-side-panel-stories__;
 
 .#{$story-prefix}example-container {
@@ -29,7 +24,7 @@ $story-prefix: create-side-panel-stories__;
   grid-template-columns: 1fr 1fr;
 }
 
-.#{$story-prefix}example-form-group .bx--label {
+.#{$story-prefix}example-form-group .#{$prefix}--label {
   margin-bottom: 0;
 }
 

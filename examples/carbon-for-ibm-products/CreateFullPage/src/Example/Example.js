@@ -12,11 +12,13 @@ import {
 import {
   CreateFullPage,
   CreateFullPageStep,
-} from '@carbon/ibm-cloud-cognitive';
+} from '@carbon/ibm-products';
+
+import './_example.scss';
 
 const blockClass = `exp--create-full-page-sandbox`;
 
-export const FullPage = () => {
+export const Example = () => {
   const [simulatedDelay] = useState(750);
   const [shouldReject, setShouldReject] = useState(false);
   const [hasSubmitError, setHasSubmitError] = useState(false);

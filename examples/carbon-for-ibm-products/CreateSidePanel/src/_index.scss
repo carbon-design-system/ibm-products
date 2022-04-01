@@ -1,0 +1,8 @@
+@import 'carbon';
+
+body {
+  @include carbon--theme();
+
+  background-color: $ui-background;
+  color: $text-01;
+}

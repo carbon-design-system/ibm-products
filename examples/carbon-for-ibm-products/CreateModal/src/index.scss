@@ -10,7 +10,7 @@ $feature-flags: (
 @import 'carbon-components/scss/components/text-area/text-area';
 
 // Carbon for IBM Products package
-@import '@carbon/ibm-cloud-cognitive/css/index.min.css';
+@import '@carbon/ibm-products/css/index.min.css';
 
 :root {
   @include carbon--theme($carbon--theme, true);

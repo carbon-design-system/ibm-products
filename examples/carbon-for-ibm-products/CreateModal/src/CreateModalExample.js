@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { CreateModal } from '@carbon/ibm-cloud-cognitive/es/components';
+import { CreateModal } from '@carbon/ibm-products/es/components';
 
 import {
   TextInput,

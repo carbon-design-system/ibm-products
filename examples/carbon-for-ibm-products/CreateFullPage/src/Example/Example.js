@@ -9,10 +9,7 @@ import {
   Row,
   Column,
 } from 'carbon-components-react';
-import {
-  CreateFullPage,
-  CreateFullPageStep,
-} from '@carbon/ibm-products';
+import { CreateFullPage, CreateFullPageStep } from '@carbon/ibm-products';
 
 import './_example.scss';
 

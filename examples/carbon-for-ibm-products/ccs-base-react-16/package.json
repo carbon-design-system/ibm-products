@@ -4,10 +4,10 @@
   "private": true,
   "dependencies": {
     "@carbon/elements": "latest",
-    "@carbon/ibm-cloud-cognitive": "latest",
+    "@carbon/ibm-products": "latest",
     "@carbon/icons-react": "latest",
     "@testing-library/jest-dom": "latest",
-    "@testing-library/react": "latest",
+    "@testing-library/react": "^12",
     "@testing-library/user-event": "latest",
     "carbon-components": "latest",
     "carbon-components-react": "latest",
@@ -16,6 +16,7 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-scripts": "4.0.3",
+    "sass": "^1.49.10",
     "web-vitals": "^1.0.1"
   },
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",

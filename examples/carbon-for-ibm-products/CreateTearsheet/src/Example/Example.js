@@ -1,4 +1,6 @@
+import './_example.scss';
 import React, { useState } from 'react';
+
 import {
   Button,
   Column,
@@ -11,14 +13,11 @@ import {
   Toggle,
   NumberInput,
 } from 'carbon-components-react';
-import {
-  CreateTearsheet,
-  CreateTearsheetStep,
-} from '@carbon/ibm-cloud-cognitive';
+import { CreateTearsheet, CreateTearsheetStep } from '@carbon/ibm-products';
 
 const blockClass = `exp--tearsheet-create-multi-step`;
 
-export const MultiStepTearsheet = () => {
+export const Example = () => {
   const [simulatedDelay] = useState(750);
   const [open, setOpen] = useState(false);
   const [shouldReject, setShouldReject] = useState(false);

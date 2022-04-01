@@ -1,10 +1,4 @@
-@import './carbon';
-@import './ibm-cloud-and-cognitive';
-
-body {
-  background-color: $ui-background;
-  color: $text-01;
-}
+@import '../carbon';
 
 .app {
   display: flex;

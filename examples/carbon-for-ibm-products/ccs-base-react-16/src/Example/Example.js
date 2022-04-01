@@ -1,13 +1,20 @@
-import './App.css';
+// cspell:words grafana
 
 import React, { useState } from 'react';
 
-import { AboutModal } from '@carbon/ibm-cloud-cognitive';
+// ----------------------------------------------------
+// This is an example showing use of the
+// AboutModal component
+// from the @carbon/ibm-products component library.
+// ----------------------------------------------------
+
+import { AboutModal } from '@carbon/ibm-products';
 import { Button, Link } from 'carbon-components-react';
 
-import ExampleLogo from './assets/example-logo.svg';
+import ExampleLogo from './media/example-logo.svg';
+import './_example.scss';
 
-const App = () => {
+export const Example = () => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -25,19 +32,19 @@ const App = () => {
         copyrightText={<>Copyright &copy; 2020 IBM corporation</>}
         links={[
           <Link
-            href="https://ibm-cloud-cognitive.netlify.app/"
+            href="https://carbon-for-ibm-products.netlify.app/"
             key="View storybook"
           >
             View the components
           </Link>,
           <Link
-            href="https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/LICENSE"
+            href="https://github.com/carbon-design-system/ibm-products/blob/main/LICENSE"
             key="License"
           >
             License
           </Link>,
           <Link
-            href="https://www.npmjs.com/package/@carbon/ibm-cloud-cognitive"
+            href="https://www.npmjs.com/package/@carbon/ibm-products"
             key="npm"
           >
             Install from npm
@@ -64,5 +71,3 @@ const App = () => {
     </>
   );
 };
-
-export default App;

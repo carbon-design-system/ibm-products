@@ -1,0 +1,34 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+// Other Carbon settings.
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+
+// Datagrid uses the following Carbon components:
+// TODO: @import(s) of Carbon component styles used by Datagrid
+
+// Datagrid uses the following Carbon for IBM Products components:
+// TODO: @import(s) of IBM Products component styles used by Datagrid
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin datagrid {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--datagrid;
+
+  .#{$block-class} {
+    // TODO: Styles.
+  }
+}
+
+@include exports('datagrid') {
+  @include datagrid;
+}

@@ -3,7 +3,7 @@
   "main": "src/index.js",
   "dependencies": {
     "@carbon/elements": "latest",
-    "@carbon/ibm-cloud-cognitive": "latest",
+    "@carbon/ibm-products": "latest",
     "@carbon/icons-react": "latest",
     "carbon-components": "latest",
     "carbon-components-react": "latest",

@@ -7,7 +7,7 @@ This project was bootstrapped with
 
 1. npx create-react-app ccs-base-react-16
 2. Downgraded react dependencies to 16.4.0 and ran yarn
-3. yarn add @carbon/ibm-cloud-cognitive
+3. yarn add @carbon/ibm-products
 4. Install carbon-components-react as per that packages instructions
    <https://www.npmjs.com/package/carbon-components-react>
 5. Install @carbon/icons-react as per package instructions
@@ -16,7 +16,7 @@ This project was bootstrapped with
    <https://www.npmjs.com/package/@carbon/elements>
 7. Clear out `src/index.css` and `src/App.css`
 8. Replace `import './index.css';` with
-   `import '@carbon/ibm-cloud-cognitive/css/index-full-carbon.min.css';` in
+   `import '@carbon/ibm-products/css/index-full-carbon.min.css';` in
    `src/index.js`
 9. Add an example asset `src/assets/example-logo.svg`.
 10. Replace the contents of App.js with
@@ -26,7 +26,7 @@ import './App.css';
 
 import { useState } from 'react';
 
-import { AboutModal } from '@carbon/ibm-cloud-cognitive';
+import { AboutModal } from '@carbon/ibm-products';
 import { Button, Link } from 'carbon-components-react';
 
 import ExampleLogo from './assets/example-logo.svg';
@@ -48,20 +48,17 @@ const App = () => {
         }
         copyrightText={<>Copyright &copy; 2020 IBM corporation</>}
         links={[
-          <Link
-            href="https://ibm-cloud-cognitive.netlify.app/"
-            key="View storybook"
-          >
+          <Link href="https://ibm-products.netlify.app/" key="View storybook">
             View the components
           </Link>,
           <Link
-            href="https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/LICENSE"
+            href="https://github.com/carbon-design-system/ibm-products/blob/main/LICENSE"
             key="link2"
           >
             License
           </Link>,
           <Link
-            href="https://www.npmjs.com/package/@carbon/ibm-cloud-cognitive"
+            href="https://www.npmjs.com/package/@carbon/ibm-products"
             key="npm"
           >
             Install from npm

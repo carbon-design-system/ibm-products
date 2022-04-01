@@ -1,0 +1,34 @@
+@import '../carbon';
+@import '@carbon/ibm-products/scss/index';
+
+.app {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+#ibm-products-page-content {
+  display: flex;
+  align-items: center;
+}
+
+$block-class: #{$pkg-prefix}--create-side-panel;
+$story-prefix: create-side-panel-stories__;
+
+.#{$story-prefix}example-container {
+  display: grid;
+  align-items: flex-end;
+  grid-gap: $spacing-04;
+  grid-template-columns: 1fr 1fr;
+}
+
+.#{$story-prefix}example-form-group .#{$prefix}--label {
+  margin-bottom: 0;
+}
+
+.#{$block-class} .#{$carbon-prefix}--number__control-btn::before,
+.#{$block-class} .#{$carbon-prefix}--number__control-btn::after {
+  background-color: $field-02;
+}

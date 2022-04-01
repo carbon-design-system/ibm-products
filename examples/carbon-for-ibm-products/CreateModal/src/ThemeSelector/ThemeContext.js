@@ -45,8 +45,10 @@ export function ThemeProvider(props) {
 
   return (
     <ThemeContext.Provider value={{ state, dispatch }}>
-      {/* eslint-disable-next-line react/prop-types */}
-      {props.children}
+      {
+        // eslint-disable-next-line react/prop-types
+        props.children
+      }
     </ThemeContext.Provider>
   );
 }

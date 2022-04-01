@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { CreateModal } from '@carbon/ibm-cloud-cognitive/es/components';
+import { CreateModal } from '@carbon/ibm-products/es/components';
 
 import {
   TextInput,
@@ -13,7 +13,9 @@ import {
   Button,
 } from 'carbon-components-react';
 
-export const CreateModalExample = () => {
+import './_example.scss';
+
+export const Example = () => {
   const [open, setOpen] = useState(false);
   const [textInput, setTextInput] = useState('');
   const [selection, setSelection] = useState('');

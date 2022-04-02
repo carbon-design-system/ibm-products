@@ -1,0 +1,55 @@
+/*
+* Licensed Materials - Property of IBM
+* 5724-Q36
+* (c) Copyright IBM Corp. 2020
+* US Government Users Restricted Rights - Use, duplication or disclosure
+* restricted by GSA ADP Schedule Contract with IBM Corp.
+*/
+
+@import './variables';
+
+.#{$block-class}__sortableColumn {
+  .#{$carbon-prefix}--table-header-label .header-title {
+    display: inline-block;
+    width: auto;
+  }
+  .#{$carbon-prefix}--table-header-label {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .#{$carbon-prefix}--table-header-label button:focus,
+  .#{$carbon-prefix}--table-header-label button:active,
+  .#{$carbon-prefix}--table-header-label button:focus svg {
+    /* stylelint-disable-next-line declaration-no-important */
+    background: none !important;
+    /* stylelint-disable-next-line declaration-no-important */
+    color: $text-01 !important;
+    /* stylelint-disable-next-line declaration-no-important */
+    outline: none !important;
+  }
+  .#{$carbon-prefix}--table-header-label button {
+    width: 100%;
+    min-width: 100%;
+    min-height: 0;
+    padding: 0;
+    border: none;
+    /* stylelint-disable-next-line declaration-no-important */
+    background: none !important;
+    box-shadow: none;
+    /* stylelint-disable-next-line declaration-no-important */
+    color: $text-01 !important;
+    font: inherit;
+  }
+  .#{$carbon-prefix}--table-header-label button svg {
+    fill: $text-01;
+    visibility: hidden;
+  }
+}
+
+.#{$block-class}__sortableColumn:hover,
+.#{$block-class}__sortableColumn.#{$block-class}__isSorted {
+  .#{$carbon-prefix}--table-header-label svg {
+    visibility: visible;
+  }
+}

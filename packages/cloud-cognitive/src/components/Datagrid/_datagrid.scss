@@ -1,3 +1,4 @@
+/* stylelint-disable no-invalid-position-at-import-rule */
 //
 // Copyright IBM Corp. 2022, 2022
 //
@@ -8,6 +9,17 @@
 // Standard imports.
 @import '../../global/styles/project-settings';
 @import '../../global/styles/mixins';
+
+@import './styles/datagrid';
+@import './styles/useNestedRows';
+//@import './styles/useNestedTable';
+@import './styles/useSortableColumns';
+@import './styles/useColumnRightAlign';
+@import './styles/useStickyColumn';
+@import './styles/useActionsColumn';
+@import './styles/addons/CustomizeColumnsModal';
+@import './styles/addons/RowSizeDropdown';
+@import './styles/useSelectAllToggle';
 
 // Other Carbon settings.
 // TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
@@ -24,8 +36,29 @@
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--datagrid;
 
-  .#{$block-class} {
-    // TODO: Styles.
+  .#{$block-class}__datagridWrap {
+    display: block;
+    width: 100%;
+    :global(.#{$carbon-prefix}--checkbox) {
+      display: none;
+    }
+  }
+
+  .#{$block-class}__datagridWrap-simple {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+
+    /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+    :global {
+      .#{$carbon-prefix}--pagination {
+        // newer version of carbon pagination has scroll which doesn't make any sense, removing it
+        /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+        overflow-x: unset;
+      }
+    }
   }
 }
 

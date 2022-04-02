@@ -1,4 +1,4 @@
-import { pkg } from '@carbon/ibm-cloud-cognitive/es/settings';
+import { pkg } from '@carbon/ibm-products/es/settings';
 
 // Enable all 'canary' (not yet reviewed/released) components
 // that we want to make use of

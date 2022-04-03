@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { render } from 'react-dom';
+
 import {
   Header,
   HeaderContainer,
@@ -81,7 +81,7 @@ export const Example = () => {
 
             <p>Please see the docs of this component for more information.</p>
 
-            <p>joebob:~$</p>
+            <p>joe bob:~$</p>
           </div>
         </WebTerminal>
       </div>

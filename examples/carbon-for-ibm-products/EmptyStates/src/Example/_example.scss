@@ -1,0 +1,17 @@
+@import '../carbon';
+
+.empty-state-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: $spacing-09;
+}
+
+.#{$prefix}--label {
+  @include carbon--type-style('label-01');
+
+  margin-bottom: $spacing-03;
+}
+
+.#{$prefix}--dropdown__wrapper {
+  max-width: 400px;
+}

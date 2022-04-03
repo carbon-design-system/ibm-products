@@ -1,21 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { StatusIconExample } from './StatusIconExample';
-import { ThemeProvider } from './Theme/ThemeContext';
-import { ThemeDropdown } from './Theme/ThemeDropdown';
 
-import './index.scss';
+// This example uses this CSS build to minimize CodeSandBox transpile times
+import '@carbon/ibm-products/css/index-full-carbon.css';
+import './_index.scss';
 
-const App = () => (
-  <div className="app">
-    <StatusIconExample />
-    <ThemeDropdown />
-  </div>
-);
+import { Example } from './Example/Example';
+import { ThemeProvider } from './ThemeSelector/ThemeContext';
+import { ThemeDropdown } from './ThemeSelector/ThemeDropdown';
 
 render(
   <ThemeProvider>
-    <App />
+    <div className="app">
+      <Example />
+      <ThemeDropdown />
+    </div>
   </ThemeProvider>,
   document.getElementById('root')
 );

@@ -50,7 +50,7 @@ export const Example = () => {
   const [textInput, setTextInput] = useState('');
   const [invalid, setInvalid] = useState(false);
   return (
-    <div className="app">
+    <>
       {renderUIShellHeader()}
       <div id="ibm-products-page-content">
         <Button onClick={() => setOpen(!open)}>
@@ -155,6 +155,6 @@ export const Example = () => {
           />
         </FormGroup>
       </CreateSidePanel>
-    </div>
+    </>
   );
 };

@@ -12,11 +12,11 @@
   "main": "src/index.js",
   "dependencies": {
     "@carbon/elements": "^10",
-    "@carbon/styles": "^1",
     "@carbon/ibm-products": "latest",
+    "@carbon/icons-react": "^10",
     "carbon-components": "^10",
     "carbon-components-react": "^7",
-    "carbon-icons": "7.0.7",
+    "carbon-icons": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-scripts": "latest",

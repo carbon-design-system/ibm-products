@@ -1,14 +1,15 @@
 @import '../carbon';
 @import '@carbon/ibm-products/scss/index';
 
-$preview-block-class: #{$pkg-prefix}--create-full-page-sandbox;
+$block-class: 'full-page-example';
+$preview-block-class: #{full-page-example}--create-full-page-sandbox;
 
-.#{$preview-block-class} .#{$pkg-prefix}--create-full-page__content {
+.#{$preview-block-class} .#{full-page-example}--create-full-page__content {
   background-color: $ui-background;
   color: $text-01;
 }
 
-.#{$preview-block-class}__step-fieldset--no-label .bx--fieldset legend {
+.#{$preview-block-class}__step-fieldset--no-label .#{$prefix}--fieldset legend {
   position: absolute;
   overflow: hidden;
   width: 1px;

@@ -1,19 +1,20 @@
 import React from 'react';
-import { StrictMode } from 'react';
-import ReactDOM from 'react-dom';
-import { ThemeProvider } from './Theme/ThemeContext';
-import { ThemeDropdown } from './Theme/ThemeDropdown';
-import './config';
-import './styles.scss';
-import App from './App';
+import { render } from 'react-dom';
 
-const rootElement = document.getElementById('root');
-ReactDOM.render(
-  <StrictMode>
-    <ThemeProvider>
-      <App />
+// This example uses this CSS build to minimize CodeSandBox transpile times
+import '@carbon/ibm-products/css/index-full-carbon.css';
+import './_index.scss';
+
+import { Example } from './Example/Example';
+import { ThemeProvider } from './ThemeSelector/ThemeContext';
+import { ThemeDropdown } from './ThemeSelector/ThemeDropdown';
+
+render(
+  <ThemeProvider>
+    <div className="app">
+      <Example />
       <ThemeDropdown />
-    </ThemeProvider>
-  </StrictMode>,
-  rootElement
+    </div>
+  </ThemeProvider>,
+  document.getElementById('root')
 );

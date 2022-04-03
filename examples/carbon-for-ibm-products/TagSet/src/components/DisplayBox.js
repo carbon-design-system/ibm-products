@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 
+import './_display-box.scss';
+
 // eslint-disable-next-line react/prop-types
 export const DisplayBox = ({ children, componentName }) => {
   const sliderMin = 0;

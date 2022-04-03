@@ -1,39 +1,48 @@
 {
-  "name": "export-modal",
-  "version": "1.0.0",
-  "description": "",
-  "keywords": [],
+  "name": "export-modal-example",
+  "keywords": [
+    "carbon",
+    "ibm",
+    "ibm-products",
+    "component",
+    "apikeymodal"
+  ],
+  "license": "Apache-2.0",
   "main": "src/index.js",
   "dependencies": {
-    "@carbon/elements": "latest",
-    "@carbon/ibm-cloud-cognitive": "latest",
-    "@carbon/icons-react": "latest",
-    "carbon-components": "latest",
-    "carbon-components-react": "latest",
+    "@carbon/elements": "^10",
+    "@carbon/ibm-products": "latest",
+    "@carbon/icons-react": "^10",
+    "carbon-components": "^10",
+    "carbon-components-react": "^7",
     "carbon-icons": "latest",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-scripts": "4.0.3",
-    "sass": "^1.43.4"
-  },
-  "devDependencies": {
-    "@babel/runtime": "7.13.8",
-    "typescript": "4.1.3"
+    "react": "latest",
+    "react-dom": "latest",
+    "react-scripts": "latest",
+    "sass": "latest"
   },
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
   "resolutions": {
     "**/request/minimist": "^1.2.6"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "react-scripts start"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  }
 }

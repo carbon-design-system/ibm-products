@@ -1,0 +1,12 @@
+@import 'carbon';
+
+body {
+  @include carbon--theme();
+
+  background-color: $ui-background;
+  color: $text-01;
+}
+
+.app {
+  padding: $spacing-09;
+}

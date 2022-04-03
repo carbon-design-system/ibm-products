@@ -13,7 +13,7 @@ import { CreateFullPage, CreateFullPageStep } from '@carbon/ibm-products';
 
 import './_example.scss';
 
-const blockClass = `exp--create-full-page-sandbox`;
+const blockClass = `full-page-example`;
 
 export const Example = () => {
   const [simulatedDelay] = useState(750);

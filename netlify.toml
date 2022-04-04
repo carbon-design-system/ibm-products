@@ -4,6 +4,10 @@ ignore = "sh ./scripts/ignore_dependabot.sh"
 command = "yarn storybook:build"
 publish = "packages/core/storybook-static"
 
+[build.environment]
+YARN_ENABLE_GLOBAL_CACHE = "true"
+YARN_GLOBAL_FOLDER = "/opt/buildhome/.yarn_cache"
+
 [[redirects]]
   from = "https://ibm-cloud-cognitive.netlify.app/*"
   to = "https://carbon-for-ibm-products.netlify.app/:splat"

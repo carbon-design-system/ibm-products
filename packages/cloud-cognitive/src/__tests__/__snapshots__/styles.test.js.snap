@@ -3416,6 +3416,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--page-header .c4p--page-header__title-row {
   margin-top: 0;
   margin-bottom: 0;
+  transform: translateY(var(--cds-spacing-01, 0.125rem));
 }
 @media (min-width: 42rem) {
   .c4p--page-header .c4p--page-header__title-row {
@@ -3425,6 +3426,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--page-header .c4p--page-header__title-row.c4p--page-header__title-row--under-action-bar {
   margin-top: var(--cds-spacing-05, 1rem);
+  transform: translateY(0);
 }
 .c4p--page-header .c4p--page-header__title-row + .c4p--page-header__last-row-buffer--active {
   height: var(--cds-spacing-07, 2rem);

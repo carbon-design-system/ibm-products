@@ -2,7 +2,7 @@ name: Update packages # Updates dependencies every Friday
 
 on:
   schedule:
-    - cron: '45 * * * *'
+    - cron: '0 4 * * FRI'
 
 jobs:
   carbon:
@@ -10,20 +10,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Dump GitHub context
-        id: github_context_step
-        run: echo '${{ toJSON(github) }}'
-      - name: Dump job context
-        run: echo '${{ toJSON(job) }}'
-      - name: Dump steps context
-        run: echo '${{ toJSON(steps) }}'
-      - name: Dump runner context
-        run: echo '${{ toJSON(runner) }}'
-      - name: Dump strategy context
-        run: echo '${{ toJSON(strategy) }}'
-      - name: Dump matrix context
-        run: echo '${{ toJSON(matrix) }}'
 
       - name: Install
         run: yarn --offline

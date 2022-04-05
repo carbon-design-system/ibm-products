@@ -46,13 +46,13 @@ const config = [
       'url( ' + defaultOrNot(require('./CreateSidePanel--thumbnail.png')) + ')',
   },
   {
-    label: 'Canary Tearsheet',
+    label: 'Tearsheet',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/CreateTearsheet',
     thumbnail:
       'url( ' + defaultOrNot(require('./CreateTearsheet--thumbnail.png')) + ')',
   },
   {
-    label: 'Canary Tearsheet Narrow',
+    label: 'Tearsheet Narrow',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/CreateTearsheetNarrow',
     thumbnail:
       'url( ' +
@@ -110,13 +110,13 @@ const config = [
       'url( ' + defaultOrNot(require('./PageHeader--thumbnail.png')) + ')',
   },
   {
-    label: 'Productive Card',
+    label: 'ProductiveCard',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/ProductiveCard',
     thumbnail:
       'url( ' + defaultOrNot(require('./ProductiveCard--thumbnail.png')) + ')',
   },
   {
-    label: 'Remove Modal',
+    label: 'RemoveModal',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/RemoveModal',
     thumbnail:
       'url( ' + defaultOrNot(require('./RemoveModal--thumbnail.png')) + ')',
@@ -127,19 +127,19 @@ const config = [
     thumbnail: 'url( ' + defaultOrNot(require('./Saving--thumbnail.png')) + ')',
   },
   {
-    label: 'Side Panel',
+    label: 'SidePanel',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/SidePanel',
     thumbnail:
       'url( ' + defaultOrNot(require('./SidePanel--thumbnail.png')) + ')',
   },
   {
-    label: 'Status icon',
+    label: 'StatusIcon',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/StatusIcon',
     thumbnail:
       'url( ' + defaultOrNot(require('./StatusIcon--thumbnail.png')) + ')',
   },
   {
-    label: 'Tagset',
+    label: 'TagSet',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/TagSet',
     thumbnail: 'url( ' + defaultOrNot(require('./TagSet--thumbnail.png')) + ')',
   },
@@ -150,7 +150,7 @@ const config = [
       'url( ' + defaultOrNot(require('./Tearsheet--thumbnail.png')) + ')',
   },
   {
-    label: 'User Profile Image',
+    label: 'UserProfileImage',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/UserProfileImage',
     thumbnail:
       'url( ' +
@@ -158,7 +158,7 @@ const config = [
       ')',
   },
   {
-    label: 'Web Terminal',
+    label: 'WebTerminal',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/WebTerminal',
     thumbnail:
       'url( ' + defaultOrNot(require('./WebTerminal--thumbnail.png')) + ')',

@@ -1,0 +1,18 @@
+@import '../carbon';
+
+$story-class: create-tearsheet-narrow--story;
+
+.#{$story-class}__flex-container {
+  display: flex;
+  align-items: baseline;
+}
+
+.#{$story-class}__flex-container .#{$prefix}--form-item {
+  margin-right: $spacing-04;
+}
+
+.#{$story-class}__flex-container .#{$prefix}--form-item,
+.#{$story-class}__flex-container
+  .#{$prefix}--dropdown__wrapper.#{$prefix}--list-box__wrapper {
+  width: 50%;
+}

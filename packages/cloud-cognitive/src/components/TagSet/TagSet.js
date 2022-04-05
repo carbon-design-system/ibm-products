@@ -28,7 +28,7 @@ const allTagsModalSearchThreshold = 10;
 // Default values for props
 const defaults = {
   align: 'start',
-  allTagsModalTarget: document.body,
+  // allTagsModalTarget: document.body,
   overflowAlign: 'center',
   overflowDirection: 'bottom',
 };
@@ -39,7 +39,7 @@ export let TagSet = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
 
       align = defaults.align,
-      allTagsModalTarget = defaults.allTagsModalTarget,
+      allTagsModalTarget: allTagsModalTargetIn, // = defaults.allTagsModalTarget,
       className,
       maxVisible,
       overflowAlign = defaults.overflowAlign,
@@ -66,10 +66,15 @@ export let TagSet = React.forwardRef(
     const displayedArea = useRef(null);
     const [sizingTags, setSizingTags] = useState([]);
     const overflowTag = useRef(null);
+    const [allTagsModalTarget, setAllTagsModalTarget] = useState(null);
 
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);
     };
+
+    useEffect(() => {
+      setAllTagsModalTarget(allTagsModalTargetIn ?? document?.body);
+    }, [allTagsModalTargetIn]);
 
     useEffect(() => {
       const newSizingTags = [];

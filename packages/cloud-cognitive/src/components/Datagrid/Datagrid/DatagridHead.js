@@ -11,7 +11,7 @@ import { DataTable } from 'carbon-components-react';
 const { TableHead } = DataTable;
 
 const DatagridHead = (datagridState) => {
-  const { headerGroups, headRef, HeaderRow } = datagridState;
+  const { headerGroups = [], headRef, HeaderRow } = datagridState;
 
   return (
     <TableHead>

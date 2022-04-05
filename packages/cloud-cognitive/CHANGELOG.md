@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.12.0...@carbon/ibm-products@1.13.0) (2022-04-05)
+
+
+### Bug Fixes
+
+* add select avatar and userprofileimage update ([#1853](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1853)) ([cab0621](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/cab0621605f252ba908aa0e85dff1fb5079b8c57))
+* add select icon support ([#1860](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1860)) ([d11f2b5](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d11f2b5e7b59881324658c2d4ad3eaadbfa503d2))
+* **DataSpreadsheet:** browser fix, update selectionArea on cell updates ([#1861](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1861)) ([8e5764b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8e5764bdf86e2f34ea2c6432b928897d26d83afd))
+* **HTTP errors:** responsive behaviour ([#1828](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1828)) ([9d4b025](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9d4b025971bf913e811b4807f7eb67186a457f6a)), closes [#1826](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1826) [#1780](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1780) [#1829](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1829) [#1831](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1831) [#1830](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1830) [#1827](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1827) [#1834](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1834) [#1758](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1758) [#1840](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1840) [#1839](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1839) [#1838](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1838) [#1842](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1842) [#1841](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1841) [#1835](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1835)
+* issue 1737 page header example ([#1880](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1880)) ([79d0a8e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/79d0a8ef7085666f69e4c3eec7bee36c44937fbf))
+* **PageHeader:** issue1789 a11y issues BreadcrumbWithOverflow & ActionBar ([#1854](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1854)) ([10d3bcc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/10d3bcc868a5415dd95588870f320079c480f778))
+* ssr maybe - moves document.body inside useEffect ([#1881](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1881)) ([5bc6602](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5bc66027aaa2f98685d0702e99f4e42494491d05))
+* update Carbon versions to latest ([#1862](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1862)) ([c0e8024](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c0e8024cf060cec0262c79628077810a92a56619))
+
+
+### Features
+
+* **DataSpreadsheet:** add edit mode overflow enhancements ([#1857](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1857)) ([458933a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/458933a00276062ae189cb1ed51dae5c531feb31))
+* **DataSpreadsheet:** support empty spreadsheets ([#1848](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1848)) ([5010ca7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5010ca794d0ae9bb8f105c702ba6e30b84346836))
+
+
+
+
+
 # [1.12.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.11.2...@carbon/ibm-products@1.12.0) (2022-03-29)
 
 

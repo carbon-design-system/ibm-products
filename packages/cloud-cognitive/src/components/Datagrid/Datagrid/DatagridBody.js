@@ -12,8 +12,12 @@ import DatagridSimpleBody from './DatagridSimpleBody';
 import DatagridRefBody from './DatagridRefBody';
 
 const DatagridBody = (datagridState) => {
-  const { isFetching, rows = [], withVirtualScroll, withStickyColumn } =
-    datagridState;
+  const {
+    isFetching,
+    rows = [],
+    withVirtualScroll,
+    withStickyColumn,
+  } = datagridState;
 
   if (!isFetching && rows.length === 0) {
     return <DatagridEmptyBody {...datagridState} />;

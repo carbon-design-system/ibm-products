@@ -2,7 +2,7 @@ name: Update packages # Updates dependencies every Friday
 
 on:
   schedule:
-    - cron: '35 * * * *'
+    - cron: '45 * * * *'
 
 jobs:
   carbon:

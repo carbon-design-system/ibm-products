@@ -77,7 +77,6 @@ let Datagrid = React.forwardRef((datagridState, ref) => {
       {...rest}
       id={tableId}
       ref={ref}
-      role="main"
       className={cx(
         className,
         blockClass,

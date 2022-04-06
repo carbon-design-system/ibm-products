@@ -94,6 +94,11 @@
     "timeframe",
     "treeview",
     "uuidv",
-    "webfonts"
+    "webfonts",
+    "Datagrid",
+    "datagrid",
+    "namor",
+    "Prefs",
+    "listbox"
   ]
 }

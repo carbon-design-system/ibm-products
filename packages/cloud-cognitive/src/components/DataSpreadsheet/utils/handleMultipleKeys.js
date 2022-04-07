@@ -7,15 +7,37 @@
 
 import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
 
+export const includesShift = (arr) => {
+  if (arr.includes('ShiftLeft') || arr.includes('ShiftRight')) {
+    return true;
+  }
+  return false;
+};
+
+const includesMeta = (arr) => {
+  if (arr.includes('MetaLeft') || arr.includes('MetaRight')) {
+    return true;
+  }
+  return false;
+};
+
+const includesControl = (arr) => {
+  if (arr.includes('ControlLeft') || arr.includes('ControlRight')) {
+    return true;
+  }
+  return false;
+};
+
 export const handleMultipleKeys = ({
-  activeKeys,
+  activeCellCoordinates,
+  event,
+  keysPressedList,
   selectionAreas,
   currentMatcher,
   rows,
   setSelectionAreas,
   columns,
 }) => {
-  const activeKeyValues = activeKeys.current;
   const selectionAreasClone = deepCloneObject(selectionAreas);
   const indexOfCurrentArea = selectionAreasClone.findIndex(
     (item) => item.matcher === currentMatcher
@@ -25,8 +47,9 @@ export const handleMultipleKeys = ({
     : selectionAreasClone[indexOfCurrentArea].point1;
   // Down + Shift
   if (
-    activeKeyValues.includes('Shift') &&
-    activeKeyValues.includes('ArrowDown')
+    includesShift(keysPressedList) &&
+    keysPressedList.includes('ArrowDown') &&
+    keysPressedList.length === 2
   ) {
     if (rows.length - 1 === pointToUpdate.row) {
       return;
@@ -41,8 +64,9 @@ export const handleMultipleKeys = ({
   }
   // Right + Shift
   if (
-    activeKeyValues.includes('Shift') &&
-    activeKeyValues.includes('ArrowRight')
+    includesShift(keysPressedList) &&
+    keysPressedList.includes('ArrowRight') &&
+    keysPressedList.length === 2
   ) {
     if (columns.length - 1 === pointToUpdate.column) {
       return;
@@ -57,8 +81,9 @@ export const handleMultipleKeys = ({
   }
   // Up + Shift
   if (
-    activeKeyValues.includes('Shift') &&
-    activeKeyValues.includes('ArrowUp')
+    includesShift(keysPressedList) &&
+    keysPressedList.includes('ArrowUp') &&
+    keysPressedList.length === 2
   ) {
     if (pointToUpdate.row === 0) {
       return;
@@ -73,8 +98,9 @@ export const handleMultipleKeys = ({
   }
   // Left + Shift
   if (
-    activeKeyValues.includes('Shift') &&
-    activeKeyValues.includes('ArrowLeft')
+    includesShift(keysPressedList) &&
+    keysPressedList.includes('ArrowLeft') &&
+    keysPressedList.length === 2
   ) {
     if (pointToUpdate.column === 0) {
       return;
@@ -84,6 +110,52 @@ export const handleMultipleKeys = ({
       column: pointToUpdate.column - 1,
     };
     selectionAreasClone[indexOfCurrentArea].point2 = newPoint;
+    selectionAreasClone[indexOfCurrentArea].areaCreated = false;
+    setSelectionAreas(selectionAreasClone);
+  }
+  // CMD + a (select all)
+  if (includesMeta(keysPressedList) && keysPressedList.includes('KeyA')) {
+    event.preventDefault();
+    const selectionPoint1 = {
+      row: 0,
+      column: 0,
+    };
+    const selectionPoint2 = {
+      row: rows.length - 1,
+      column: columns.length - 1,
+    };
+    selectionAreasClone[indexOfCurrentArea].point1 = selectionPoint1;
+    selectionAreasClone[indexOfCurrentArea].point2 = selectionPoint2;
+    selectionAreasClone[indexOfCurrentArea].areaCreated = false;
+    setSelectionAreas(selectionAreasClone);
+  }
+  // CONTROL + SPACE (Select current column)
+  if (includesControl(keysPressedList) && keysPressedList.includes('Space')) {
+    const selectionPoint1 = {
+      row: 0,
+      column: activeCellCoordinates?.column,
+    };
+    const selectionPoint2 = {
+      row: rows.length - 1,
+      column: activeCellCoordinates?.column,
+    };
+    selectionAreasClone[indexOfCurrentArea].point1 = selectionPoint1;
+    selectionAreasClone[indexOfCurrentArea].point2 = selectionPoint2;
+    selectionAreasClone[indexOfCurrentArea].areaCreated = false;
+    setSelectionAreas(selectionAreasClone);
+  }
+  // Shift + SPACE (Select current row)
+  if (includesShift(keysPressedList) && keysPressedList.includes('Space')) {
+    const selectionPoint1 = {
+      row: activeCellCoordinates?.row,
+      column: 0,
+    };
+    const selectionPoint2 = {
+      row: activeCellCoordinates?.row,
+      column: columns.length - 1,
+    };
+    selectionAreasClone[indexOfCurrentArea].point1 = selectionPoint1;
+    selectionAreasClone[indexOfCurrentArea].point2 = selectionPoint2;
     selectionAreasClone[indexOfCurrentArea].areaCreated = false;
     setSelectionAreas(selectionAreasClone);
   }

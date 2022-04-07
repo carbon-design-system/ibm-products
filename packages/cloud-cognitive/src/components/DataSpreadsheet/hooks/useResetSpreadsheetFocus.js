@@ -9,7 +9,6 @@ import { useEffect } from 'react';
 import { pkg } from '../../../settings';
 
 export const useResetSpreadsheetFocus = ({
-  activeKeys,
   blockClass = `${pkg.prefix}--data-spreadsheet`,
   focusedElement,
   removeActiveCell,
@@ -24,7 +23,6 @@ export const useResetSpreadsheetFocus = ({
     ) {
       setContainerHasFocus(false);
       removeActiveCell();
-      activeKeys.current = [];
     }
     if (
       focusedElement.classList.contains(blockClass) ||
@@ -34,11 +32,5 @@ export const useResetSpreadsheetFocus = ({
     ) {
       setContainerHasFocus(true);
     }
-  }, [
-    focusedElement,
-    removeActiveCell,
-    activeKeys,
-    blockClass,
-    setContainerHasFocus,
-  ]);
+  }, [focusedElement, removeActiveCell, blockClass, setContainerHasFocus]);
 };

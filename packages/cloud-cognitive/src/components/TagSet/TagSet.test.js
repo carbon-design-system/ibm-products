@@ -12,6 +12,8 @@ import { pkg, carbon } from '../../settings';
 import { TagSet } from '.';
 import { TagSetModal } from './TagSetModal';
 
+import { types as tagTypes } from 'carbon-components-react/lib/components/Tag/Tag.js';
+
 import {
   expectMultipleError,
   mockHTMLElement,
@@ -25,9 +27,8 @@ const blockClass = `${pkg.prefix}--tag-set`;
 const blockClassOverflow = `${prefix}--tag-set-overflow`;
 
 const tagLabel = (index) => `Tag ${index + 1}`;
-const types = ['red', 'blue', 'cyan', 'high-contrast'];
 const tags = Array.from({ length: 20 }, (v, k) => ({
-  type: types[k % types.length],
+  type: tagTypes[k % tagTypes.length],
   ['data-search']: `${k === 11 ? 'dozen 1100' : Number(k + 1).toString(2)}`, // adds binary value for data-search test
   label: tagLabel(k),
   id: `id-${k}`,
@@ -76,6 +77,16 @@ describe(TagSet.displayName, () => {
     mockElement.mockRestore();
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
+  });
+
+  it('Has the same tag types as Carbon Tag', () => {
+    // Same number of tags
+    expect(TagSet.types.length).toEqual(tagTypes.length);
+
+    // Same value for each tag
+    for (let i = 0; i < tagTypes.length; i++) {
+      expect(TagSet.types).toContain(tagTypes[i]);
+    }
   });
 
   it('Renders all as visible tags when space available', () => {

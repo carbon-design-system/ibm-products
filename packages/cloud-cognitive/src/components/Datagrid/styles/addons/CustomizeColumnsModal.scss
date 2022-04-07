@@ -1,0 +1,48 @@
+/*
+* Licensed Materials - Property of IBM
+* 5724-Q36
+* (c) Copyright IBM Corp. 2021
+* US Government Users Restricted Rights - Use, duplication or disclosure
+* restricted by GSA ADP Schedule Contract with IBM Corp.
+*/
+
+@import '../variables';
+
+.#{$block-class}__customize-columns-modal {
+  .#{$carbon-prefix}--modal-content {
+    position: inherit;
+    display: flex;
+    flex-flow: column;
+    /* stylelint-disable-next-line declaration-no-important */
+    padding-top: 0 !important;
+  }
+}
+
+.#{$block-class}__customize-columns-checkbox {
+  display: flex;
+  justify-content: center;
+  /* stylelint-disable-next-line declaration-no-important */
+  margin-bottom: 0 !important; // reset the bottom provided by carbon
+}
+
+.#{$block-class}__customize-columns-modal--actions {
+  display: flex;
+  flex-flow: row;
+  margin-bottom: $spacing-06;
+}
+
+.#{$block-class}__customize-columns-modal--actions > button {
+  margin-left: $spacing-05;
+}
+
+.#{$block-class}__customize-columns-instructions {
+  margin-bottom: $spacing-06;
+  @include carbon--type-style('body-long-01');
+
+  color: $text-01;
+}
+
+.#{$block-class}__customize-columns-column-list {
+  position: relative; // needed for the react-dnd, otherwise the drag preview will not work correctly
+  overflow: auto;
+}

@@ -39,7 +39,11 @@ import {
 
 import { createActiveCellFn } from './utils/createActiveCellFn';
 import { getCellSize } from './utils/getCellSize';
-import { handleMultipleKeys, includesShift } from './utils/handleMultipleKeys';
+import {
+  handleMultipleKeys,
+  includesMeta,
+  includesShift,
+} from './utils/handleMultipleKeys';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 import { removeCellSelections } from './utils/removeCellSelections';
 // cspell:words rowcount colcount
@@ -378,6 +382,11 @@ export let DataSpreadsheet = React.forwardRef(
             rows,
             setSelectionAreas,
             columns,
+            updateActiveCellCoordinates,
+            spreadsheetRef,
+            removeCellSelections,
+            blockClass,
+            setCurrentMatcher,
           });
         }
         // Allow arrow key navigation if there are less than two activeKeys OR
@@ -390,10 +399,16 @@ export let DataSpreadsheet = React.forwardRef(
           switch (key) {
             // HOME
             case 'Home': {
+              if (includesMeta(keysPressedList)) {
+                return;
+              }
               handleHomeEndKey({ type: 'home' });
               break;
             }
             case 'End': {
+              if (includesMeta(keysPressedList)) {
+                return;
+              }
               handleHomeEndKey({ type: 'end' });
               break;
             }

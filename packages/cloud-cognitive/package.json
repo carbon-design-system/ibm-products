@@ -79,15 +79,15 @@
     "react-window": "^1.8.6"
   },
   "peerDependencies": {
-    "@carbon/colors": "^10.37.1",
-    "@carbon/icons-react": "^10.49.0",
+    "@carbon/colors": "^11.0.0",
+    "@carbon/icons-react": "^11.0.2",
     "@carbon/import-once": "^10.7.0",
-    "@carbon/layout": "^10.37.1",
-    "@carbon/motion": "^10.29.0",
-    "@carbon/themes": "^10.54.0",
-    "@carbon/type": "^10.44.0",
+    "@carbon/layout": "^11.0.0",
+    "@carbon/motion": "^11.0.0",
+    "@carbon/themes": "^11.0.1",
+    "@carbon/type": "^11.0.0",
     "carbon-components": "^10.56.0",
-    "carbon-components-react": "^7.56.0",
+    "carbon-components-react": "^8.0.3",
     "carbon-icons": "^7.0.7",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"

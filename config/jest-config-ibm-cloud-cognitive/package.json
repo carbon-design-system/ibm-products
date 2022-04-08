@@ -22,14 +22,14 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^chalk$)/'"
   },
   "devDependencies": {
-    "npm-check-updates": "^12.5.4"
+    "npm-check-updates": "^12.5.8"
   },
   "peerDependencies": {
     "jest": "^27.5.1"
   },
   "dependencies": {
-    "@babel/core": "^7.17.8",
-    "@testing-library/jest-dom": "^5.16.3",
+    "@babel/core": "^7.17.9",
+    "@testing-library/jest-dom": "^5.16.4",
     "accessibility-checker": "^3.1.25",
     "axe-core": "^4.4.1",
     "babel-jest": "^27.5.1",

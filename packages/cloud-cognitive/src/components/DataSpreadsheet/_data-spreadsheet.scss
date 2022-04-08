@@ -111,6 +111,7 @@
       overflow: hidden;
       /* stylelint-disable-next-line carbon/layout-token-use */
       padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
+      margin: 0;
       background-color: $body-cell-background;
       resize: none;
       &.#{$carbon-prefix}--text-area {
@@ -150,6 +151,8 @@
       /* stylelint-disable-next-line carbon/layout-token-use */
       padding-right: calc(#{$spacing-03} - 1px);
       padding-bottom: $spacing-01;
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      padding-left: calc(#{$spacing-03} - #{$spacing-01});
       border: $spacing-01 solid $interactive-01;
       background-color: $body-cell-background;
       color: $text-01;

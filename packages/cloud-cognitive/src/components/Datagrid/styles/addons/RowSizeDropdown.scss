@@ -1,0 +1,23 @@
+/*
+* Licensed Materials - Property of IBM
+* 5724-Q36
+* (c) Copyright IBM Corp. 2021
+* US Government Users Restricted Rights - Use, duplication or disclosure
+* restricted by GSA ADP Schedule Contract with IBM Corp.
+*/
+
+@import '../variables';
+
+.#{$block-class}__row-size-dropdown {
+  position: absolute;
+  padding: $spacing-05;
+  background-color: $ui-background;
+
+  box-shadow: 1px 4px 8px -3px $overlay-01, -1px 6px 8px -5px $overlay-01;
+}
+
+.#{$block-class}__row-size-button--open {
+  background-color: $ui-background;
+
+  box-shadow: 1px 4px 8px -3px $overlay-01, -1px 6px 8px -5px $overlay-01;
+}

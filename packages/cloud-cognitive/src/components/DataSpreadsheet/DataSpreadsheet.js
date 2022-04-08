@@ -93,7 +93,10 @@ export let DataSpreadsheet = React.forwardRef(
     const [currentMatcher, setCurrentMatcher] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [cellEditorValue, setCellEditorValue] = useState('');
-    const previousState = usePreviousValue({ activeCellCoordinates });
+    const previousState = usePreviousValue({
+      activeCellCoordinates,
+      isEditing,
+    });
     const cellSizeValue = getCellSize(cellSize);
     const cellEditorRef = useRef();
     const [activeCellContent, setActiveCellContent] = useState();
@@ -536,6 +539,18 @@ export let DataSpreadsheet = React.forwardRef(
       setCellEditorValue(activeCellValue);
       cellEditorRulerRef.current.textContent = activeCellValue;
     };
+
+    // Sets the initial placement of the cell editor cursor at the end of the text area
+    // this is not done for us by default in Safari
+    useEffect(() => {
+      if (isEditing && !previousState?.isEditing) {
+        cellEditorRef.current.setSelectionRange(
+          cellEditorRulerRef.current.textContent.length,
+          cellEditorRulerRef.current.textContent.length
+        );
+        cellEditorRef.current.focus();
+      }
+    }, [isEditing, previousState?.isEditing]);
 
     const handleActiveCellClick = () => {
       if (

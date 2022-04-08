@@ -107,7 +107,7 @@ export let DataSpreadsheet = React.forwardRef(
       }),
       [cellSizeValue]
     );
-    const keysPressedList = useMultipleKeyTracking({
+    const { keysPressedList } = useMultipleKeyTracking({
       ref: multiKeyTrackingRef,
       containerHasFocus,
       isEditing,

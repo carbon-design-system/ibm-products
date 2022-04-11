@@ -83,6 +83,24 @@ export const Default = prepareStory(Template, {
 export const WithHierarchy = prepareStory(Template, {
   args: {
     ...defaultProps,
+    globalFilters: [
+      {
+        id: 'fileType',
+        label: 'File type',
+      },
+      {
+        id: 'size',
+        label: 'Size',
+      },
+      {
+        id: 'tag',
+        label: 'Tag',
+      },
+    ],
+    globalFiltersIconDescription: 'Filter',
+    globalFiltersPlaceholderText: 'Choose an option',
+    globalFiltersPrimaryButtonText: 'Apply',
+    globalFiltersSecondaryButtonText: 'Reset',
     items: {
       sortBy: ['title'],
       entries: [
@@ -101,6 +119,7 @@ export const WithHierarchy = prepareStory(Template, {
                 fileType: 'pdf',
                 size: '100',
                 icon: Document16,
+                tag: 'business',
               },
               {
                 id: '1-2',

@@ -36,3 +36,32 @@ export const flatten = (entries) =>
     const { children, ...item } = cur;
     return prev.concat(item).concat(children ? flatten(children.entries) : []);
   }, []);
+
+/**
+ * takes in a global filters array and a flat list of items
+ * it then searches through the items and finds any with the matching filter properties
+ * and adds those values to the array
+ * globalFilters looks like [{ id: someProperty }]
+ * the returned array would look like [{ id: someProperty, opts: [value, value]}]
+ * @param {Array} globalFilters - list of filter properties
+ * @param {Array} items - items to search through
+ * @returns an array of filter values
+ */
+export const getGlobalFilterValues = (globalFilters, items) => {
+  const filterOpts = globalFilters.reduce((prevFilter, curFilter) => {
+    const filterId = curFilter.id;
+    const opts = items.reduce((prevItem, curItem) => {
+      const value = curItem[filterId];
+      if (value && !prevItem.includes(value)) {
+        prevItem.push(value);
+      }
+      return prevItem;
+    }, []);
+    prevFilter.push({
+      opts,
+      ...curFilter,
+    });
+    return prevFilter;
+  }, []);
+  return filterOpts;
+};

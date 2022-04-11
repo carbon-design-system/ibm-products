@@ -1,0 +1,66 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+@import './styles/datagrid';
+@import './styles/useNestedRows';
+//@import './styles/useNestedTable';
+@import './styles/useSortableColumns';
+@import './styles/useColumnRightAlign';
+@import './styles/useStickyColumn';
+@import './styles/useActionsColumn';
+@import './styles/addons/CustomizeColumnsModal';
+@import './styles/addons/RowSizeDropdown';
+@import './styles/useSelectAllToggle';
+
+// Other Carbon settings.
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+
+// Datagrid uses the following Carbon components:
+// TODO: @import(s) of Carbon component styles used by Datagrid
+
+// Datagrid uses the following Carbon for IBM Products components:
+// TODO: @import(s) of IBM Products component styles used by Datagrid
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin datagrid {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--datagrid;
+
+  .#{$block-class}__datagridWrap {
+    display: block;
+    width: 100%;
+    :global(.#{$carbon-prefix}--checkbox) {
+      display: none;
+    }
+  }
+
+  .#{$block-class}__datagridWrap-simple {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+
+    /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+    :global {
+      .#{$carbon-prefix}--pagination {
+        // newer version of carbon pagination has scroll which doesn't make any sense, removing it
+        /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+        overflow-x: unset;
+      }
+    }
+  }
+}
+
+@include exports('datagrid') {
+  @include datagrid;
+}

@@ -1,0 +1,38 @@
+/*
+* Licensed Materials - Property of IBM
+* 5724-Q36
+* (c) Copyright IBM Corp. 2021
+* US Government Users Restricted Rights - Use, duplication or disclosure
+* restricted by GSA ADP Schedule Contract with IBM Corp.
+*/
+
+@import './variables';
+
+.#{$block-class}__right-sticky-column-cell {
+  /* stylelint-disable-next-line declaration-no-important */
+  position: sticky !important;
+  right: 0;
+  box-shadow: -2px 1px 3px $overlay-01;
+}
+
+.#{$block-class}__right-sticky-column-header {
+  /* stylelint-disable-next-line declaration-no-important */
+  position: sticky !important;
+  right: 0;
+  box-shadow: -2px 1px 3px $overlay-01;
+}
+
+.#{$block-class}__sticky-noShadow {
+  box-shadow: none;
+}
+
+.#{$block-class}__sticky-column-noShadow {
+  .#{$block-class}__right-sticky-column-cell {
+    box-shadow: none;
+  }
+}
+
+.#{$block-class}__right-sticky-column-offset-scroll {
+  /* stylelint-disable-next-line */
+  right: 6px !important; // offset the vertical scroll bar in the table body
+}

@@ -24,17 +24,17 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
-          commit-message: 'fix: update Carbon versions to latest'
+          commit-message: 'fix: update Carbon v10 compatible versions to latest'
           committer: GitHub <noreply@github.com>
           author:
             ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           branch: 'update-packages'
           branch-suffix: random
-          title: 'fix: update Carbon versions to latest'
+          title: 'fix: update to Carbon v10 compatible versions to latest'
           body: |
-            This PR was automatically generated to update Carbon versions on a regular basis. This is not intended to create any breaking changes, and will be reflected as a minor version bump for affected packages. NB we'll run all tests and do visual verifications, but there is always the opportunity for unexpected regressions. If you're using one of the packages in a stable or production context you may want to check this before taking the next minor version, and do let us know ASAP if you see anything problematic.
+            This PR was automatically generated to update Carbon v10 compatible versions on a regular basis. This is not intended to create any breaking changes, and will be reflected as a minor version bump for affected packages. NB we'll run all tests and do visual verifications, but there is always the opportunity for unexpected regressions. If you're using one of the packages in a stable or production context you may want to check this before taking the next minor version, and do let us know ASAP if you see anything problematic.
 
-            The goal is to update to the latest Carbon versions each Friday, to ensure we remain up-to-date with the latest changes (often published on Thursdays) and to ensure interoperability with other packages that also depend on Carbon. We will normally update all other dependencies at the same time to their latest versions, except for specific cases where we have found the updates to be problematic or require further work before they can be used. By using the latest stable version of each dependency we ensure we get fixes and improvements in a timely fashion and reduce the impact of updating the versions that can arise if versions are allowed to become stale for an extended period.
+            The goal is to update to the latest Carbon V10 compatible versions each Friday, to ensure we remain up-to-date with the latest changes (often published on Thursdays) and to ensure interoperability with other packages that also depend on Carbon. We will normally update all other dependencies at the same time to their latest versions, except for specific cases where we have found the updates to be problematic or require further work before they can be used. By using the latest stable version of each dependency we ensure we get fixes and improvements in a timely fashion and reduce the impact of updating the versions that can arise if versions are allowed to become stale for an extended period.
 
             #### What did you change?
 

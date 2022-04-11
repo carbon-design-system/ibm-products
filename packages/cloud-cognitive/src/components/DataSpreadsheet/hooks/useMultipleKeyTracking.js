@@ -7,6 +7,7 @@
 
 import { useEffect, useState } from 'react';
 import { usePreviousValue } from '../../../global/js/hooks';
+import { includesMeta } from '../utils/handleMultipleKeys';
 
 const hasFocus = () => typeof document !== 'undefined' && document.hasFocus();
 
@@ -43,6 +44,15 @@ export const useMultipleKeyTracking = ({
           // Prevent multiple keys of the same type being added to our keysPressedList array
           if (keysPressedList.includes(event.code)) {
             return;
+          }
+          // Because keyup events are lost when using the Command key
+          // we need to remove the previously pressed key so that we
+          // do not have keys in the pressed list that should not be
+          if (includesMeta(keysPressedList) && keysPressedList.length > 1) {
+            const clonedKeys = [...keysPressedList];
+            clonedKeys.pop();
+            clonedKeys.push(event.code);
+            return setKeysPressedList([...new Set(clonedKeys)]);
           }
           const tempKeys = [...keysPressedList];
           tempKeys.push(event.code);

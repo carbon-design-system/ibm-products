@@ -14,7 +14,7 @@ export const includesShift = (arr) => {
   return false;
 };
 
-const includesMeta = (arr) => {
+export const includesMeta = (arr) => {
   if (arr.includes('MetaLeft') || arr.includes('MetaRight')) {
     return true;
   }

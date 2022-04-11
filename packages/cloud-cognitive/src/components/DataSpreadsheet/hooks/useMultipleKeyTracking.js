@@ -46,13 +46,15 @@ export const useMultipleKeyTracking = ({
             return;
           }
           // Because keyup events are lost when using the Command key
-          // we need to remove the previously pressed key so that we
+          // we need to remove the previously pressed keys so that we
           // do not have keys in the pressed list that should not be
           if (includesMeta(keysPressedList) && keysPressedList.length > 1) {
             const clonedKeys = [...keysPressedList];
-            clonedKeys.pop();
-            clonedKeys.push(event.code);
-            return setKeysPressedList([...new Set(clonedKeys)]);
+            const filteredClonedKeys = clonedKeys.filter(
+              (item) => item === 'MetaLeft' || item === 'MetaRight'
+            );
+            filteredClonedKeys.push(event.code);
+            return setKeysPressedList([...new Set(filteredClonedKeys)]);
           }
           const tempKeys = [...keysPressedList];
           tempKeys.push(event.code);

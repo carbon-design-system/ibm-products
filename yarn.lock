@@ -7622,11 +7622,6 @@ crypto-browserify@^3.11.0:
     randombytes "^2.0.0"
     randomfill "^1.0.3"
 
-crypto-extra@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/crypto-extra/-/crypto-extra-1.0.1.tgz#91d9e3d8d35f9a16d548c073c31b147f34eab11e"
-  integrity sha512-EDJ07p6UDdyX+7GL6Bb6FqCuCHY34GuII9esE/xXZtW7tlB+A7MYT9O/c1M/ov2aGTdwvw0b3z5OcO50zYBG5Q==
-
 crypto-random-string@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-2.0.0.tgz#ef2a7a966ec11083388369baa02ebead229b30d5"
@@ -13712,12 +13707,10 @@ mute-stream@0.0.8, mute-stream@~0.0.4:
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.8.tgz#1630c42b2251ff81e2a283de96a5497ea92e5e0d"
   integrity sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==
 
-namor@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/namor/-/namor-2.0.3.tgz#a42c5e76f6170f9e2fc4ddfc6d403a881f59350d"
-  integrity sha512-BDDfplXUwxcEK1QAwL0k82VyqYyAa3xdQv24ijfLc+5Zqdm3IyfAIBTCRWhKPbbLncmdvG/vCr9JhrVH9FGpNQ==
-  dependencies:
-    crypto-extra "1.0.1"
+namor@^1.1.2:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/namor/-/namor-1.1.3.tgz#e7b2a94d7e6e9b7438a3db10314fe0fded6b96c1"
+  integrity sha512-KCw02Mto4yquFTPUxFAY5ZJMBweClBrDrJXQTdN8dNSb3BHzhRlTLzJ0TTj0cG9n4ApkWJEOqEisCzsodFEvbA==
 
 nan@^2.12.1, nan@^2.13.2:
   version "2.15.0"

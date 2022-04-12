@@ -781,6 +781,7 @@ const TYPES = {
   'cool-gray': 'Cool-Gray',
   'warm-gray': 'Warm-Gray',
   'high-contrast': 'High-Contrast',
+  outline: 'Outline',
 };
 const tagTypes = Object.keys(TYPES);
 
@@ -800,6 +801,8 @@ export const deprecatedProps = {
     'Property replaced by `withoutBackground`'
   ),
 };
+
+PageHeader.tagTypes = tagTypes;
 
 PageHeader.propTypes = {
   /**

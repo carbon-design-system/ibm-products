@@ -23,6 +23,8 @@ import {
   required,
 } from '../../global/js/utils/test-helper';
 
+import { types as tagTypes } from 'carbon-components-react/lib/components/Tag/Tag.js';
+
 const { prefix } = pkg;
 
 const blockClass = `${prefix}--page-header`;
@@ -705,5 +707,15 @@ describe('PageHeader', () => {
     render(<PageHeader {...testProps} pageActions={pageActionsCustom} />);
 
     screen.getAllByText('Custom page action');
+  });
+
+  test('Has the same tag types as Carbon Tag', () => {
+    // Same number of tags
+    expect(PageHeader.tagTypes.length).toEqual(tagTypes.length);
+
+    // Same value for each tag
+    for (let i = 0; i < tagTypes.length; i++) {
+      expect(PageHeader.tagTypes).toContain(tagTypes[i]);
+    }
   });
 });

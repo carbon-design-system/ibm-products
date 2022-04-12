@@ -14,6 +14,7 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--add-select`;
 const componentName = AddSelect.name;
 const defaultProps = {
+  globalSearchLabel: 'test input label',
   items: {
     entries: [
       {
@@ -37,7 +38,6 @@ const defaultProps = {
   noSelectionDescription: 'No selection description',
   noResultsTitle: 'No results title',
   noResultsDescription: 'Try again description',
-  textInputLabel: 'test input label',
   searchResultsLabel: 'Search results',
 };
 
@@ -70,21 +70,6 @@ describe(componentName, () => {
     expect(screen.queryByText('item a')).toBeVisible();
     expect(screen.queryByText('item b')).toBeNull();
     expect(screen.queryByText('item c')).toBeNull();
-  });
-
-  it('uses a custom filter', () => {
-    const { fn } = jest;
-    const { change } = fireEvent;
-    const onSearchFilter = fn();
-    const props = {
-      ...defaultProps,
-      onSearchFilter,
-    };
-    const { container } = render(<AddSelect {...props} />);
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
-      target: { value: 'value' },
-    });
-    expect(onSearchFilter).toHaveBeenCalled();
   });
 
   it('renders SingleAddSelect', () => {

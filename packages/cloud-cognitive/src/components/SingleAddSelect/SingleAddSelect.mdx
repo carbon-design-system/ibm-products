@@ -1,0 +1,57 @@
+<!-- `position:fixed` cause rendering issues, so do not render the modal -->
+
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import { SingleAddSelect } from '.';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+
+# SingleAddSelect
+
+todo
+
+## Structuring items
+
+The `items` object has a lot of customization potential and can greatly effect
+the way the component is displayed and how you interact with it.
+
+Let's walk through an example.
+
+```
+items: {
+  entries: [ // the actual list of items / entries
+    {
+      id: '1', // required unique id for the entry
+      value: '1', // required value of the entry
+      title: 'item 1', // required title to display
+      subtitle: 'item 1 subtitle', // subtitle to display
+      children: { // designates if entry has children. if the children prop is found a hierarchy list will be used
+        entries: [
+          {
+            id: '1-1',
+            value: 'file1.pdf',
+            title: 'file1.pdf',
+          },
+        ],
+      },
+    },
+  ],
+}
+```
+
+## Overview
+
+todo
+
+<Canvas>
+  <Story id={getStoryId(SingleAddSelect.displayName, 'default')} />
+</Canvas>
+
+## Code sample
+
+todo
+
+## Component API
+
+<ArgsTable />

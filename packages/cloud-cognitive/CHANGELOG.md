@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.13.0...@carbon/ibm-products@1.14.0) (2022-04-12)
+
+
+### Bug Fixes
+
+* add select global filter ([#1894](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1894)) ([5f7f47a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5f7f47a3810b9b4ec1f32b16c432a7e1c7c7f9d6))
+* **DataSpreadsheet:** correct cursor placement ([#1883](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1883)) ([4f52dbd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4f52dbd78caab9528134464a40afae90a7270acd))
+* **select:** inline background color on tearsheet ([#1901](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1901)) ([6f67090](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6f67090a0a18839c64c20a2271fc93b864745ac3))
+
+
+### Features
+
+* Datagrid component ([#1877](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1877)) ([f9dd8ce](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f9dd8ce0ab87cea39e91603fdb542091fa757cbe))
+* **DataSpreadsheet:** a11y updates and keyboard shortcuts ([#1892](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1892)) ([aed603a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/aed603abe10de815f8216ee7acc65f1f36deff9d))
+
+
+
+
+
 # [1.13.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.12.0...@carbon/ibm-products@1.13.0) (2022-04-05)
 
 

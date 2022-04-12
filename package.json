@@ -59,7 +59,7 @@
     "upgrade:dependencies:packages": "yarn -s run-all --no-sort --concurrency 1 upgrade-dependencies",
     "upgrade:dependencies:yarn": "yarn set version latest",
     "upgrade:automatic": "run-s -s upgrade:dependencies:*",
-    "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/'",
+    "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/' --target minor",
     "upgrade:manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {
@@ -85,7 +85,7 @@
     "npm-upgrade": "^3.1.0",
     "postcss": "^8.4.12",
     "prettier": "^2.6.1",
-    "prettier-config-carbon": "^0.4.0",
+    "prettier-config-carbon": "^0.6.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "rimraf": "^3.0.2",

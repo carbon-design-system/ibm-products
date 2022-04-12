@@ -1,0 +1,26 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/project-settings';
+
+// TODO: add any additional styles used by Datagrid.stories.js
+// helper class for the nested table
+
+$block-class: #{$pkg-prefix}--datagrid;
+
+.sb-show-main.sb-main-centered #root {
+  width: 100%;
+  padding: 0;
+}
+
+.carbon-nested-table {
+  border-bottom: 1px solid $ui-03;
+
+  .#{$block-class}__virtual-scrollbar > div > div:last-child td {
+    border-bottom: none;
+  }
+}

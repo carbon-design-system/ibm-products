@@ -7,6 +7,7 @@
 
 // Import portions of React that are needed.
 import React, { useEffect, useState, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useResizeDetector } from 'react-resize-detector';
 
 // Other standard imports.
@@ -76,6 +77,7 @@ export const TearsheetShell = React.forwardRef(
       open,
       selectorPrimaryFocus,
       size,
+      portalTarget: portalTargetIn,
       title,
       verticalPosition,
       // Collect any other property values passed in.
@@ -83,6 +85,12 @@ export const TearsheetShell = React.forwardRef(
     },
     ref
   ) => {
+    // node the modal tearsheet is hosted in
+    const [portalTarget, setPortalTarget] = useState(null);
+    useEffect(() => {
+      setPortalTarget(portalTargetIn ?? document?.body);
+    }, [portalTargetIn]);
+
     const localRef = useRef();
     const modalRef = ref || localRef;
     const { width, ref: resizer } = useResizeDetector({ handleHeight: false });
@@ -193,116 +201,122 @@ export const TearsheetShell = React.forwardRef(
       const includeActions = actions && actions?.length > 0;
 
       return (
-        <ComposedModal
-          {
-            // Pass through any other property values.
-            ...rest
-          }
-          aria-label={title}
-          className={cx(bc, className, {
-            [`${bc}--stacked-${position}-of-${depth}`]:
-              // Don't apply this on the initial open of a single tearsheet.
-              depth > 1 || (depth === 1 && prevDepth.current > 1),
-            [`${bc}--wide`]: size === 'wide',
-            [`${bc}--narrow`]: size !== 'wide',
-          })}
-          style={{
-            [`--${bc}--stacking-scale-factor-single`]: (width - 32) / width,
-            [`--${bc}--stacking-scale-factor-double`]: (width - 64) / width,
-          }}
-          containerClassName={cx(`${bc}__container`, {
-            [`${bc}__container--lower`]: verticalPosition === 'lower',
-          })}
-          {...{ onClose, open, selectorPrimaryFocus }}
-          onFocus={handleFocus}
-          preventCloseOnClickOutside={!isPassive}
-          ref={modalRef}
-          selectorsFloatingMenus={[
-            `.${carbon.prefix}--overflow-menu-options`,
-            `.${carbon.prefix}--tooltip`,
-            '.flatpickr-calendar',
-            `.${bc}__container`,
-          ]}
-          size="sm"
-        >
-          {includeHeader && (
-            <ModalHeader
-              className={cx(`${bc}__header`, {
-                [`${bc}__header--with-close-icon`]: effectiveHasCloseIcon,
-                [`${bc}__header--with-nav`]: navigation,
-              })}
-              closeClassName={cx({
-                [`${bc}__header--no-close-icon`]: !effectiveHasCloseIcon,
-              })}
-              iconDescription={closeIconDescription}
-            >
-              <Wrap className={`${bc}__header-content`}>
-                <Wrap className={`${bc}__header-fields`}>
-                  {/* we create the label and title here instead of passing them
+        portalTarget &&
+        createPortal(
+          <ComposedModal
+            {
+              // Pass through any other property values.
+              ...rest
+            }
+            aria-label={title}
+            className={cx(bc, className, {
+              [`${bc}--stacked-${position}-of-${depth}`]:
+                // Don't apply this on the initial open of a single tearsheet.
+                depth > 1 || (depth === 1 && prevDepth.current > 1),
+              [`${bc}--wide`]: size === 'wide',
+              [`${bc}--narrow`]: size !== 'wide',
+            })}
+            style={{
+              [`--${bc}--stacking-scale-factor-single`]: (width - 32) / width,
+              [`--${bc}--stacking-scale-factor-double`]: (width - 64) / width,
+            }}
+            containerClassName={cx(`${bc}__container`, {
+              [`${bc}__container--lower`]: verticalPosition === 'lower',
+            })}
+            {...{ onClose, open, selectorPrimaryFocus }}
+            onFocus={handleFocus}
+            preventCloseOnClickOutside={!isPassive}
+            ref={modalRef}
+            selectorsFloatingMenus={[
+              `.${carbon.prefix}--overflow-menu-options`,
+              `.${carbon.prefix}--tooltip`,
+              '.flatpickr-calendar',
+              `.${bc}__container`,
+            ]}
+            size="sm"
+          >
+            {includeHeader && (
+              <ModalHeader
+                className={cx(`${bc}__header`, {
+                  [`${bc}__header--with-close-icon`]: effectiveHasCloseIcon,
+                  [`${bc}__header--with-nav`]: navigation,
+                })}
+                closeClassName={cx({
+                  [`${bc}__header--no-close-icon`]: !effectiveHasCloseIcon,
+                })}
+                iconDescription={closeIconDescription}
+              >
+                <Wrap className={`${bc}__header-content`}>
+                  <Wrap className={`${bc}__header-fields`}>
+                    {/* we create the label and title here instead of passing them
                       as modal header props so we can wrap them in layout divs */}
-                  <Wrap element="h2" className={`${bcModalHeader}__label`}>
-                    {label}
+                    <Wrap element="h2" className={`${bcModalHeader}__label`}>
+                      {label}
+                    </Wrap>
+                    <Wrap
+                      element="h3"
+                      className={cx(
+                        `${bcModalHeader}__heading`,
+                        `${bc}__heading`
+                      )}
+                    >
+                      {title}
+                    </Wrap>
+                    <Wrap className={`${bc}__header-description`}>
+                      {description}
+                    </Wrap>
+                  </Wrap>
+                  <Wrap className={`${bc}__header-actions`}>
+                    {headerActions}
+                  </Wrap>
+                </Wrap>
+                <Wrap className={`${bc}__header-navigation`}>{navigation}</Wrap>
+              </ModalHeader>
+            )}
+            <Wrap element={ModalBody} className={`${bc}__body`}>
+              <Wrap
+                className={cx({
+                  [`${bc}__influencer`]: true,
+                  [`${bc}__influencer--wide`]: influencerWidth === 'wide',
+                })}
+                neverRender={influencerPosition === 'right'}
+              >
+                {influencer}
+              </Wrap>
+              <Wrap className={`${bc}__right`}>
+                <Wrap alwaysRender={includeActions} className={`${bc}__main`}>
+                  <Wrap
+                    alwaysRender={influencer && influencerPosition === 'right'}
+                    className={`${bc}__content`}
+                  >
+                    {children}
                   </Wrap>
                   <Wrap
-                    element="h3"
-                    className={cx(
-                      `${bcModalHeader}__heading`,
-                      `${bc}__heading`
-                    )}
+                    className={cx({
+                      [`${bc}__influencer`]: true,
+                      [`${bc}__influencer--wide`]: influencerWidth === 'wide',
+                    })}
+                    neverRender={influencerPosition !== 'right'}
                   >
-                    {title}
-                  </Wrap>
-                  <Wrap className={`${bc}__header-description`}>
-                    {description}
+                    {influencer}
                   </Wrap>
                 </Wrap>
-                <Wrap className={`${bc}__header-actions`}>{headerActions}</Wrap>
+                {includeActions && (
+                  <Wrap className={`${bc}__button-container`}>
+                    <ActionSet
+                      actions={actions}
+                      buttonSize={size === 'wide' ? 'xl' : null}
+                      className={`${bc}__buttons`}
+                      size={size === 'wide' ? 'max' : 'lg'}
+                    />
+                  </Wrap>
+                )}
               </Wrap>
-              <Wrap className={`${bc}__header-navigation`}>{navigation}</Wrap>
-            </ModalHeader>
-          )}
-          <Wrap element={ModalBody} className={`${bc}__body`}>
-            <Wrap
-              className={cx({
-                [`${bc}__influencer`]: true,
-                [`${bc}__influencer--wide`]: influencerWidth === 'wide',
-              })}
-              neverRender={influencerPosition === 'right'}
-            >
-              {influencer}
             </Wrap>
-            <Wrap className={`${bc}__right`}>
-              <Wrap alwaysRender={includeActions} className={`${bc}__main`}>
-                <Wrap
-                  alwaysRender={influencer && influencerPosition === 'right'}
-                  className={`${bc}__content`}
-                >
-                  {children}
-                </Wrap>
-                <Wrap
-                  className={cx({
-                    [`${bc}__influencer`]: true,
-                    [`${bc}__influencer--wide`]: influencerWidth === 'wide',
-                  })}
-                  neverRender={influencerPosition !== 'right'}
-                >
-                  {influencer}
-                </Wrap>
-              </Wrap>
-              {includeActions && (
-                <Wrap className={`${bc}__button-container`}>
-                  <ActionSet
-                    actions={actions}
-                    buttonSize={size === 'wide' ? 'xl' : null}
-                    className={`${bc}__buttons`}
-                    size={size === 'wide' ? 'max' : 'lg'}
-                  />
-                </Wrap>
-              )}
-            </Wrap>
-          </Wrap>
-          <div className={`${bc}__resize-detector`} ref={resizer} />
-        </ComposedModal>
+            <div className={`${bc}__resize-detector`} ref={resizer} />
+          </ComposedModal>,
+          portalTarget
+        )
       );
     } else {
       pconsole.warn('Tearsheet not rendered: maximum stacking depth exceeded.');
@@ -454,6 +468,11 @@ TearsheetShell.propTypes = {
    * Specifies whether the tearsheet is currently open.
    */
   open: PropTypes.bool,
+
+  /**
+   * portal target for the all tags modal
+   */
+  portalTarget: PropTypes.node,
 
   /**
    * Specifies the width of the tearsheet, 'narrow' or 'wide'.

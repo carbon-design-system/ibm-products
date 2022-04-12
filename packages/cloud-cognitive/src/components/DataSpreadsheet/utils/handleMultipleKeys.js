@@ -6,6 +6,7 @@
  */
 
 import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
+import uuidv4 from '../../../global/js/utils/uuidv4';
 
 export const includesShift = (arr) => {
   if (arr.includes('ShiftLeft') || arr.includes('ShiftRight')) {
@@ -37,21 +38,30 @@ export const handleMultipleKeys = ({
   rows,
   setSelectionAreas,
   columns,
+  updateActiveCellCoordinates,
+  spreadsheetRef,
+  removeCellSelections,
+  blockClass,
+  setCurrentMatcher,
 }) => {
   const selectionAreasClone = deepCloneObject(selectionAreas);
   const indexOfCurrentArea = selectionAreasClone.findIndex(
     (item) => item.matcher === currentMatcher
   );
   const pointToUpdate = selectionAreasClone[indexOfCurrentArea]?.point2
-    ? selectionAreasClone[indexOfCurrentArea].point2
-    : selectionAreasClone[indexOfCurrentArea].point1;
+    ? selectionAreasClone[indexOfCurrentArea]?.point2
+    : selectionAreasClone[indexOfCurrentArea]?.point1;
   // Down + Shift
   if (
     includesShift(keysPressedList) &&
     keysPressedList.includes('ArrowDown') &&
     keysPressedList.length === 2
   ) {
-    if (rows.length - 1 === pointToUpdate.row) {
+    if (
+      rows.length - 1 === pointToUpdate?.row ||
+      activeCellCoordinates?.row === 'header' ||
+      activeCellCoordinates?.column === 'header'
+    ) {
       return;
     }
     const newPoint = {
@@ -68,7 +78,11 @@ export const handleMultipleKeys = ({
     keysPressedList.includes('ArrowRight') &&
     keysPressedList.length === 2
   ) {
-    if (columns.length - 1 === pointToUpdate.column) {
+    if (
+      columns.length - 1 === pointToUpdate?.column ||
+      activeCellCoordinates?.row === 'header' ||
+      activeCellCoordinates?.column === 'header'
+    ) {
       return;
     }
     const newPoint = {
@@ -85,7 +99,11 @@ export const handleMultipleKeys = ({
     keysPressedList.includes('ArrowUp') &&
     keysPressedList.length === 2
   ) {
-    if (pointToUpdate.row === 0) {
+    if (
+      pointToUpdate?.row === 0 ||
+      activeCellCoordinates?.row === 'header' ||
+      activeCellCoordinates?.column === 'header'
+    ) {
       return;
     }
     const newPoint = {
@@ -102,7 +120,11 @@ export const handleMultipleKeys = ({
     keysPressedList.includes('ArrowLeft') &&
     keysPressedList.length === 2
   ) {
-    if (pointToUpdate.column === 0) {
+    if (
+      pointToUpdate?.column === 0 ||
+      activeCellCoordinates?.row === 'header' ||
+      activeCellCoordinates?.column === 'header'
+    ) {
       return;
     }
     const newPoint = {
@@ -124,6 +146,26 @@ export const handleMultipleKeys = ({
       row: rows.length - 1,
       column: columns.length - 1,
     };
+    // If indexOfCurrentArea is -1, it means the active cell is in a cell header position
+    if (indexOfCurrentArea === -1) {
+      const tempMatcher = uuidv4();
+      const newSelectionArea = {
+        point1: selectionPoint1,
+        point2: selectionPoint2,
+        areaCreated: false,
+        matcher: tempMatcher,
+      };
+      const coordinatesClone = { ...activeCellCoordinates };
+      updateActiveCellCoordinates({
+        coords: coordinatesClone,
+        updatedValue: {
+          column: 0,
+          row: 0,
+        },
+      });
+      setCurrentMatcher(tempMatcher);
+      return setSelectionAreas([newSelectionArea]);
+    }
     selectionAreasClone[indexOfCurrentArea].point1 = selectionPoint1;
     selectionAreasClone[indexOfCurrentArea].point2 = selectionPoint2;
     selectionAreasClone[indexOfCurrentArea].areaCreated = false;
@@ -133,12 +175,44 @@ export const handleMultipleKeys = ({
   if (includesControl(keysPressedList) && keysPressedList.includes('Space')) {
     const selectionPoint1 = {
       row: 0,
-      column: activeCellCoordinates?.column,
+      column:
+        activeCellCoordinates?.column === 'header'
+          ? 0
+          : activeCellCoordinates?.column,
     };
     const selectionPoint2 = {
       row: rows.length - 1,
-      column: activeCellCoordinates?.column,
+      column:
+        activeCellCoordinates?.column === 'header'
+          ? 0
+          : activeCellCoordinates?.column,
     };
+    // If indexOfCurrentArea is -1, it means the active cell is in a cell header position
+    if (indexOfCurrentArea === -1) {
+      const tempMatcher = uuidv4();
+      const newSelectionArea = {
+        point1: selectionPoint1,
+        point2: selectionPoint2,
+        areaCreated: false,
+        matcher: tempMatcher,
+      };
+      const coordinatesClone = { ...activeCellCoordinates };
+      updateActiveCellCoordinates({
+        coords: coordinatesClone,
+        updatedValue: {
+          column:
+            activeCellCoordinates?.column === 'header'
+              ? 0
+              : activeCellCoordinates?.column,
+          row:
+            activeCellCoordinates?.row === 'header'
+              ? 0
+              : activeCellCoordinates?.row,
+        },
+      });
+      setCurrentMatcher(tempMatcher);
+      return setSelectionAreas([newSelectionArea]);
+    }
     selectionAreasClone[indexOfCurrentArea].point1 = selectionPoint1;
     selectionAreasClone[indexOfCurrentArea].point2 = selectionPoint2;
     selectionAreasClone[indexOfCurrentArea].areaCreated = false;
@@ -147,16 +221,96 @@ export const handleMultipleKeys = ({
   // Shift + SPACE (Select current row)
   if (includesShift(keysPressedList) && keysPressedList.includes('Space')) {
     const selectionPoint1 = {
-      row: activeCellCoordinates?.row,
+      row:
+        activeCellCoordinates?.row === 'header'
+          ? 0
+          : activeCellCoordinates?.row,
       column: 0,
     };
     const selectionPoint2 = {
-      row: activeCellCoordinates?.row,
+      row:
+        activeCellCoordinates?.row === 'header'
+          ? 0
+          : activeCellCoordinates?.row,
       column: columns.length - 1,
     };
+    // If indexOfCurrentArea is -1, it means the active cell is in a cell header position
+    if (indexOfCurrentArea === -1) {
+      const tempMatcher = uuidv4();
+      const newSelectionArea = {
+        point1: selectionPoint1,
+        point2: selectionPoint2,
+        areaCreated: false,
+        matcher: tempMatcher,
+      };
+      const coordinatesClone = { ...activeCellCoordinates };
+      updateActiveCellCoordinates({
+        coords: coordinatesClone,
+        updatedValue: {
+          column:
+            activeCellCoordinates?.column === 'header'
+              ? 0
+              : activeCellCoordinates?.column,
+          row:
+            activeCellCoordinates?.row === 'header'
+              ? 0
+              : activeCellCoordinates?.row,
+        },
+      });
+      setCurrentMatcher(tempMatcher);
+      return setSelectionAreas([newSelectionArea]);
+    }
     selectionAreasClone[indexOfCurrentArea].point1 = selectionPoint1;
     selectionAreasClone[indexOfCurrentArea].point2 = selectionPoint2;
     selectionAreasClone[indexOfCurrentArea].areaCreated = false;
     setSelectionAreas(selectionAreasClone);
+  }
+
+  // CMD + HOME (Selects first cell in first row)
+  if (includesMeta(keysPressedList) && keysPressedList.includes('Home')) {
+    const scrollElement = spreadsheetRef.current.querySelector(
+      `.${blockClass}__list--container`
+    );
+    scrollElement.scrollTop = 0;
+    const coordinatesClone = { ...activeCellCoordinates };
+    removeCellSelections({ spreadsheetRef });
+    updateActiveCellCoordinates({
+      coords: coordinatesClone,
+      updatedValue: {
+        column: 0,
+        row: 0,
+      },
+    });
+  }
+
+  // CMD + END (Selects last cell in last row)
+  if (includesMeta(keysPressedList) && keysPressedList.includes('End')) {
+    const scrollElement = spreadsheetRef.current.querySelector(
+      `.${blockClass}__list--container`
+    );
+    scrollElement.scrollTop = scrollElement.scrollHeight;
+    const coordinatesClone = { ...activeCellCoordinates };
+    removeCellSelections({ spreadsheetRef });
+    const lastCellExists = !!rows[rows?.length - 1].cells[columns?.length - 1];
+    const updateToLastCell = () => {
+      updateActiveCellCoordinates({
+        coords: coordinatesClone,
+        updatedValue: {
+          column: columns.length - 1,
+          row: rows.length - 1,
+        },
+      });
+    };
+    // With the spreadsheet supporting virtualized data, it's possible that the last cell
+    // has never been rendered yet, if that's the case we scroll to the bottom of the spreadsheet
+    // and add a timeout to wait for the last row to render to the DOM before updating the active cell coordinates.
+    // If we're able to verify that the last row has been rendered, no timeout is used.
+    if (lastCellExists) {
+      updateToLastCell();
+    } else {
+      setTimeout(() => {
+        updateToLastCell();
+      }, 1);
+    }
   }
 };

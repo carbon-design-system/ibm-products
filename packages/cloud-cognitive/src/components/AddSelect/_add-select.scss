@@ -204,6 +204,43 @@
     }
   }
 
+  .#{$block-class}__global-filter {
+    position: absolute;
+    z-index: 6000;
+    right: 0;
+    width: 100%;
+    max-width: 40rem;
+    background: $ui-01;
+    transform: translate(0, 100%);
+
+    &-search {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    &-content {
+      padding: $spacing-05;
+    }
+
+    &-opts {
+      display: grid;
+      grid-gap: $spacing-05 2rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .#{$block-class}__global-filter-button-set
+    button.#{$block-class}__global-filter-button {
+    max-width: none;
+    flex: 1;
+  }
+
+  button.#{$block-class}__global-filter-toggle {
+    border-bottom-color: $ui-04;
+    background: $field-01;
+  }
+
   // overrides
 
   .#{$block-class}__tag-container .#{$carbon-prefix}--tag {

@@ -8,7 +8,7 @@
 import React, { forwardRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { TextInput, Tag } from 'carbon-components-react';
+import { Tag } from 'carbon-components-react';
 import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
@@ -16,7 +16,8 @@ import { AddSelectSidebar } from './AddSelectSidebar';
 import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs';
 import { AddSelectList } from './AddSelectList';
 import { AddSelectColumn } from './AddSelectColumn';
-import { normalize, flatten } from './add-select-utils';
+import { normalize, flatten, getGlobalFilterValues } from './add-select-utils';
+import { AddSelectFilter } from './AddSelectFilter';
 const componentName = 'AddSelect';
 
 export let AddSelect = forwardRef(
@@ -27,6 +28,11 @@ export let AddSelect = forwardRef(
       className,
       columnInputPlaceholder,
       description,
+      globalFilters,
+      globalFiltersIconDescription,
+      globalFiltersPlaceholderText,
+      globalFiltersPrimaryButtonText,
+      globalFiltersSecondaryButtonText,
       influencerTitle,
       inputPlaceholder,
       items,
@@ -62,18 +68,30 @@ export let AddSelect = forwardRef(
     const [normalizedItems, setNormalizedItems] = useState({});
     const [useNormalizedItems, setUsedNormalizedItems] = useState(false);
     const [flatItems, setFlatItems] = useState([]);
+    const [globalFilterOpts, setGlobalFilterOpts] = useState([]);
+    const [appliedGlobalFilters, setAppliedGlobalFilters] = useState({});
 
     useEffect(() => {
       const { entries } = items;
       // flatItems is just a single array of all entries including children
-      setFlatItems(flatten(entries));
-      // multi select with nested data needs to be normalized
-      if (multi && entries.find((entry) => entry.children)) {
-        const newItems = normalize(items);
-        setNormalizedItems(newItems);
-        setUsedNormalizedItems(true);
+      const flattenedItems = flatten(entries);
+      if (multi) {
+        if (globalFilters?.length) {
+          const globalFilterValues = getGlobalFilterValues(
+            globalFilters,
+            flattenedItems
+          );
+          setGlobalFilterOpts(globalFilterValues);
+        }
+        // multi select with nested data needs to be normalized
+        if (entries.find((entry) => entry.children)) {
+          const newItems = normalize(items);
+          setNormalizedItems(newItems);
+          setUsedNormalizedItems(true);
+        }
       }
-    }, [items, multi]);
+      setFlatItems(flattenedItems);
+    }, [items, multi, globalFilters]);
 
     // used to generate columns of results for multi select with hierarchy
     const getPages = () => {
@@ -141,11 +159,17 @@ export let AddSelect = forwardRef(
 
     const getDisplayItems = () => {
       if (useNormalizedItems) {
-        // when global search is in use the results are not in column format
-        if (searchTerm) {
-          return flatItems.filter((item) =>
-            item.title.toLowerCase().includes(searchTerm)
-          );
+        // when global search or filter is in use the results are not in column format
+        const filters = Object.keys(appliedGlobalFilters);
+        if (searchTerm || filters.length) {
+          const results = flatItems
+            .filter((item) => item.title.toLowerCase().includes(searchTerm))
+            .filter((item) =>
+              filters.every(
+                (filter) => item[filter] === appliedGlobalFilters[filter]
+              )
+            );
+          return results;
         }
         return getPages();
       }
@@ -166,8 +190,12 @@ export let AddSelect = forwardRef(
     };
 
     // handlers
-    const handleSearch = (e) => {
-      setSearchTerm(e.target.value);
+    const handleSearch = (term) => {
+      setSearchTerm(term);
+    };
+
+    const handleFilter = (filters) => {
+      setAppliedGlobalFilters(filters);
     };
 
     const submitHandler = () => {
@@ -231,17 +259,24 @@ export let AddSelect = forwardRef(
 
     const showBreadsCrumbs = setShowBreadsCrumbs();
     const showTags = setShowTags();
+    const globalFiltersApplied = Object.keys(appliedGlobalFilters).length > 0;
 
     // main content
     const body = (
       <>
         <div className={`${blockClass}__header`}>
-          <TextInput
-            id="temp-id"
-            labelText={textInputLabel}
-            placeholder={inputPlaceholder}
-            value={searchTerm}
-            onChange={handleSearch}
+          <AddSelectFilter
+            textInputLabel={textInputLabel}
+            inputPlaceholder={inputPlaceholder}
+            searchTerm={searchTerm}
+            handleSearch={handleSearch}
+            multi={multi}
+            filterOpts={globalFilterOpts}
+            handleFilter={handleFilter}
+            primaryButtonText={globalFiltersPrimaryButtonText}
+            secondaryButtonText={globalFiltersSecondaryButtonText}
+            placeholder={globalFiltersPlaceholderText}
+            iconDescription={globalFiltersIconDescription}
           />
           <div className={`${blockClass}__tag-container`}>
             {showBreadsCrumbs ? (
@@ -262,7 +297,7 @@ export let AddSelect = forwardRef(
             )}
           </div>
         </div>
-        {useNormalizedItems && !searchTerm ? (
+        {useNormalizedItems && !searchTerm && !globalFiltersApplied ? (
           <div className={`${blockClass}__columns`}>
             {itemsToDisplay.map((page, idx) => (
               <AddSelectColumn
@@ -317,6 +352,16 @@ AddSelect.propTypes = {
   className: PropTypes.string,
   columnInputPlaceholder: PropTypes.string,
   description: PropTypes.string,
+  globalFilters: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      label: PropTypes.string,
+    })
+  ),
+  globalFiltersIconDescription: PropTypes.string,
+  globalFiltersPlaceholderText: PropTypes.string,
+  globalFiltersPrimaryButtonText: PropTypes.string,
+  globalFiltersSecondaryButtonText: PropTypes.string,
   influencerTitle: PropTypes.string,
   inputPlaceholder: PropTypes.string,
   items: PropTypes.shape({

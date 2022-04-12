@@ -1632,6 +1632,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--date-picker__input {
   background-color: var(--cds-field-01, #f4f4f4);
 }
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--select--inline .bx--select-input {
+  background-color: transparent;
+}
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--text-input--light,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--text-area--light,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--search--light .bx--search-input,

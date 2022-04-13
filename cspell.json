@@ -104,6 +104,8 @@
     "datagrid",
     "namor",
     "Prefs",
-    "listbox"
+    "listbox",
+    "overscroll",
+    "rowgroup"
   ]
 }

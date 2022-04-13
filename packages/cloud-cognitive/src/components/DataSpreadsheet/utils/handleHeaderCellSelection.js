@@ -5,8 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 import { removeCellSelections } from './removeCellSelections';
+import { checkActiveHeaderCell } from './checkActiveHeaderCell';
 
 export const handleHeaderCellSelection = ({
   type,
@@ -20,8 +22,12 @@ export const handleHeaderCellSelection = ({
   index,
   isKeyboard,
   setSelectionAreaData,
+  isHoldingCommandKey,
 }) => {
-  setSelectionAreaData([]);
+  if (!isHoldingCommandKey) {
+    setSelectionAreaData([]);
+    removeCellSelections({ spreadsheetRef });
+  }
   const rowValue = isKeyboard ? activeCellCoordinates?.row : index;
   const columnValue = isKeyboard ? activeCellCoordinates?.column : index;
   const point1 = {
@@ -38,13 +44,39 @@ export const handleHeaderCellSelection = ({
     column: type === 'column' ? columnValue : 0,
   });
   setCurrentMatcher(tempMatcher);
-  removeCellSelections({ spreadsheetRef });
-  setSelectionAreas([
-    {
-      point1,
-      point2,
-      areaCreated: false,
-      matcher: tempMatcher,
+  const newSelectionArea = {
+    point1,
+    point2,
+    areaCreated: false,
+    matcher: tempMatcher,
+    header: {
+      type,
+      index,
     },
-  ]);
+  };
+  setSelectionAreas((prev) => {
+    const selectionsClone = deepCloneObject(prev);
+    if (isHoldingCommandKey) {
+      const selectionsFromHeaderCell = selectionsClone.filter(
+        (item) => item.header.type
+      );
+      const previouslyCreatedHeaderSelection = selectionsFromHeaderCell.filter(
+        (item) => item.header.type === type
+      );
+      const isHeaderPartOfPreviousSelection = checkActiveHeaderCell(
+        index,
+        previouslyCreatedHeaderSelection,
+        type
+      );
+      // Prevents row/column header selections from being created multiple times
+      if (
+        previouslyCreatedHeaderSelection.length &&
+        isHeaderPartOfPreviousSelection
+      ) {
+        return prev;
+      }
+      return [...prev, newSelectionArea];
+    }
+    return [newSelectionArea];
+  });
 };

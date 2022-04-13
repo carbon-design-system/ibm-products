@@ -7,7 +7,7 @@
 
 import { useEffect, useState } from 'react';
 import { usePreviousValue } from '../../../global/js/hooks';
-import { includesMeta } from '../utils/handleMultipleKeys';
+import { includesResourceKey } from '../utils/handleMultipleKeys';
 
 const hasFocus = () => typeof document !== 'undefined' && document.hasFocus();
 
@@ -16,6 +16,7 @@ export const useMultipleKeyTracking = ({
   containerHasFocus,
   isEditing,
 }) => {
+  const [usingMac, setUsingMac] = useState('');
   const [windowFocused, setWindowFocused] = useState(hasFocus);
   const [keysPressedList, setKeysPressedList] = useState([]);
   const previousState = usePreviousValue({ isEditing, windowFocused });
@@ -23,6 +24,12 @@ export const useMultipleKeyTracking = ({
   // useEffect to check for window focus, if window loses focus
   // we need to clear out the keysPressedList
   useEffect(() => {
+    const userAgentString = window.navigator.userAgent;
+    if (userAgentString.includes('Macintosh')) {
+      setUsingMac(true);
+    } else {
+      setUsingMac(false);
+    }
     setWindowFocused(hasFocus());
     const onWindowFocus = () => setWindowFocused(true);
     const onWindowBlur = () => setWindowFocused(false);
@@ -48,7 +55,10 @@ export const useMultipleKeyTracking = ({
           // Because keyup events are lost when using the Command key
           // we need to remove the previously pressed keys so that we
           // do not have keys in the pressed list that should not be
-          if (includesMeta(keysPressedList) && keysPressedList.length > 1) {
+          if (
+            includesResourceKey(keysPressedList, usingMac) &&
+            keysPressedList.length > 1
+          ) {
             const clonedKeys = [...keysPressedList];
             const filteredClonedKeys = clonedKeys.filter(
               (item) => item === 'MetaLeft' || item === 'MetaRight'
@@ -94,6 +104,7 @@ export const useMultipleKeyTracking = ({
     previousState?.isEditing,
     windowFocused,
     previousState?.windowFocused,
+    usingMac,
   ]);
-  return { keysPressedList, windowFocused };
+  return { keysPressedList, windowFocused, usingMac };
 };

@@ -9,6 +9,15 @@ import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
 import uuidv4 from '../../../global/js/utils/uuidv4';
 import { selectAllCells } from './selectAllCells';
 
+export const includesResourceKey = (arr, usingMac) => {
+  if (usingMac) {
+    return includesMeta(arr);
+  }
+  if (!usingMac) {
+    return includesControl(arr);
+  }
+};
+
 export const includesShift = (arr) => {
   if (arr.includes('ShiftLeft') || arr.includes('ShiftRight')) {
     return true;
@@ -16,7 +25,7 @@ export const includesShift = (arr) => {
   return false;
 };
 
-export const includesMeta = (arr) => {
+const includesMeta = (arr) => {
   if (arr.includes('MetaLeft') || arr.includes('MetaRight')) {
     return true;
   }
@@ -44,6 +53,7 @@ export const handleMultipleKeys = ({
   removeCellSelections,
   blockClass,
   setCurrentMatcher,
+  usingMac,
 }) => {
   const selectionAreasClone = deepCloneObject(selectionAreas);
   const indexOfCurrentArea = selectionAreasClone.findIndex(
@@ -137,7 +147,10 @@ export const handleMultipleKeys = ({
     setSelectionAreas(selectionAreasClone);
   }
   // CMD + a (select all)
-  if (includesMeta(keysPressedList) && keysPressedList.includes('KeyA')) {
+  if (
+    includesResourceKey(keysPressedList, usingMac) &&
+    keysPressedList.includes('KeyA')
+  ) {
     event.preventDefault();
     const selectionPoint1 = {
       row: 0,
@@ -260,7 +273,10 @@ export const handleMultipleKeys = ({
   }
 
   // CMD + HOME (Selects first cell in first row)
-  if (includesMeta(keysPressedList) && keysPressedList.includes('Home')) {
+  if (
+    includesResourceKey(keysPressedList, usingMac) &&
+    keysPressedList.includes('Home')
+  ) {
     const scrollElement = spreadsheetRef.current.querySelector(
       `.${blockClass}__list--container`
     );
@@ -277,7 +293,10 @@ export const handleMultipleKeys = ({
   }
 
   // CMD + END (Selects last cell in last row)
-  if (includesMeta(keysPressedList) && keysPressedList.includes('End')) {
+  if (
+    includesResourceKey(keysPressedList, usingMac) &&
+    keysPressedList.includes('End')
+  ) {
     const scrollElement = spreadsheetRef.current.querySelector(
       `.${blockClass}__list--container`
     );

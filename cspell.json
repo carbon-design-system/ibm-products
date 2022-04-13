@@ -105,6 +105,7 @@
     "namor",
     "Prefs",
     "listbox",
-    "overscroll"
+    "overscroll",
+    "rowgroup"
   ]
 }

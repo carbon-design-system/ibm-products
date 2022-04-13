@@ -323,7 +323,8 @@ export const DataSpreadsheetBody = forwardRef(
 
     const handleRowHeaderClick = useCallback(
       (index) => {
-        return () => {
+        return (event) => {
+          const isHoldingCommandKey = event.metaKey || event.ctrlKey;
           handleHeaderCellSelection({
             type: 'row',
             activeCellCoordinates,
@@ -335,6 +336,7 @@ export const DataSpreadsheetBody = forwardRef(
             spreadsheetRef: ref,
             index,
             setSelectionAreaData,
+            isHoldingCommandKey,
           });
         };
       },
@@ -384,7 +386,7 @@ export const DataSpreadsheetBody = forwardRef(
               {...row.getRowProps({ style })}
               className={cx(`${blockClass}__tr`)}
               data-row-index={index}
-              aria-rowindex={index}
+              aria-rowindex={index + 1}
             >
               {/* ROW HEADER BUTTON */}
               <div role="rowheader">
@@ -415,7 +417,7 @@ export const DataSpreadsheetBody = forwardRef(
               {row.cells.map((cell, index) => (
                 <div
                   key={`cell_${index}`}
-                  aria-colindex={index}
+                  aria-colindex={index + 1}
                   {...cell.getCellProps()}
                   role="gridcell"
                   style={{

@@ -49,7 +49,8 @@ export const DataSpreadsheetHeader = forwardRef(
     }, [cellSize, ref, scrollBarSize, previousState?.cellSize]);
 
     const handleColumnHeaderClick = (index) => {
-      return () => {
+      return (event) => {
+        const isHoldingCommandKey = event.metaKey || event.ctrlKey;
         handleHeaderCellSelection({
           type: 'column',
           activeCellCoordinates,
@@ -61,12 +62,13 @@ export const DataSpreadsheetHeader = forwardRef(
           spreadsheetRef: ref,
           index,
           setSelectionAreaData,
+          isHoldingCommandKey,
         });
       };
     };
 
     return (
-      <div className={cx(`${blockClass}__header--container`)}>
+      <div className={cx(`${blockClass}__header--container`)} role="rowgroup">
         {headerGroups.map((headerGroup, index) => (
           <div
             key={`header_${index}`}

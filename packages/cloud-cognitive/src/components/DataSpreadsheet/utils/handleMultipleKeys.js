@@ -7,6 +7,7 @@
 
 import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
 import uuidv4 from '../../../global/js/utils/uuidv4';
+import { selectAllCells } from './selectAllCells';
 
 export const includesShift = (arr) => {
   if (arr.includes('ShiftLeft') || arr.includes('ShiftRight')) {
@@ -148,23 +149,15 @@ export const handleMultipleKeys = ({
     };
     // If indexOfCurrentArea is -1, it means the active cell is in a cell header position
     if (indexOfCurrentArea === -1) {
-      const tempMatcher = uuidv4();
-      const newSelectionArea = {
-        point1: selectionPoint1,
-        point2: selectionPoint2,
-        areaCreated: false,
-        matcher: tempMatcher,
-      };
-      const coordinatesClone = { ...activeCellCoordinates };
-      updateActiveCellCoordinates({
-        coords: coordinatesClone,
-        updatedValue: {
-          column: 0,
-          row: 0,
-        },
+      selectAllCells({
+        ref: spreadsheetRef,
+        setCurrentMatcher,
+        setSelectionAreas,
+        rows,
+        columns,
+        activeCellCoordinates,
+        updateActiveCellCoordinates,
       });
-      setCurrentMatcher(tempMatcher);
-      return setSelectionAreas([newSelectionArea]);
     }
     selectionAreasClone[indexOfCurrentArea].point1 = selectionPoint1;
     selectionAreasClone[indexOfCurrentArea].point2 = selectionPoint2;

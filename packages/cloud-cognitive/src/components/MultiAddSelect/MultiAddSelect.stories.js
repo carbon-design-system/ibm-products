@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import {
   getStoryTitle,
@@ -13,6 +13,7 @@ import {
 } from '../../global/js/utils/story-helper';
 import { MultiAddSelect } from '.';
 import mdx from './MultiAddSelect.mdx';
+import { Button } from 'carbon-components-react';
 // import { action } from '@storybook/addon-actions';
 import image from '../UserProfileImage/headshot.png'; // cspell:disable-line
 import { Group24, Document16 } from '@carbon/icons-react';
@@ -29,7 +30,12 @@ export default {
 };
 
 const defaultProps = {
-  open: true,
+  className: 'placeholder-class',
+  columnInputPlaceholder: 'Find',
+  description: 'Select business terms from the list',
+  globalSearchLabel: 'test input label',
+  globalSearchPlaceholder: 'Find business terms',
+  influencerTitle: 'Selected business terms',
   items: {
     entries: [
       {
@@ -51,27 +57,28 @@ const defaultProps = {
       },
     ],
   },
-  title: 'Add business terms',
-  description: 'Select business terms from the list',
-  inputPlaceholder: 'Find business terms',
   itemsLabel: 'Business terms',
-  influencerTitle: 'Selected business terms',
-  noSelectionTitle: 'No business terms selected',
+  noResultsTitle: 'No results',
   noSelectionDescription:
     'Select a term to include the full set of the governance artifacts it contains in the governance scope.',
-  noResultsTitle: 'No results',
+  noSelectionTitle: 'No business terms selected',
   noResultsDescription: 'Try again',
   onCloseButtonText: 'Cancel',
+  onSubmit: (selections) => console.log(selections),
   onSubmitButtonText: 'Add',
   removeIconDescription: 'Remove',
-  textInputLabel: 'test input label',
-  columnInputPlaceholder: 'Find',
-  onSubmit: (selections) => console.log(selections),
   searchResultsLabel: 'Search results',
+  title: 'Add business terms',
 };
 
 const Template = (args) => {
-  return <MultiAddSelect {...args} />;
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <MultiAddSelect {...args} open={open} onClose={() => setOpen(false)} />
+      <Button onClick={() => setOpen(true)}>Launch AddSelect</Button>
+    </>
+  );
 };
 
 export const Default = prepareStory(Template, {
@@ -157,7 +164,6 @@ export const WithModifiers = prepareStory(Template, {
       modifiers: {
         label: 'Role',
         options: ['editor', 'viewer', 'admin'],
-        property: 'role',
       },
       entries: [
         {

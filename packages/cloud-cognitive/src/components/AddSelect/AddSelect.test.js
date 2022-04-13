@@ -41,6 +41,11 @@ const defaultProps = {
   searchResultsLabel: 'Search results',
 };
 
+const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
+  'default-portal-target-body',
+  true
+);
+
 describe(componentName, () => {
   const { ResizeObserver } = window;
 
@@ -50,11 +55,13 @@ describe(componentName, () => {
       unobserve: jest.fn(),
       disconnect: jest.fn(),
     }));
+    pkg.feature['default-portal-target-body'] = false;
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
+    pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
   it('renders', () => {

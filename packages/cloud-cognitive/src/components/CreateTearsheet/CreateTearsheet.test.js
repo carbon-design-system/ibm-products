@@ -139,6 +139,11 @@ const renderInvalidCreateTearsheet = ({ ...rest }) =>
     </>
   );
 
+const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
+  'default-portal-target-body',
+  true
+);
+
 describe(CreateTearsheet.displayName, () => {
   const { ResizeObserver } = window;
 
@@ -158,12 +163,14 @@ describe(CreateTearsheet.displayName, () => {
       unobserve: () => null,
     }));
     jest.useFakeTimers();
+    pkg.feature['default-portal-target-body'] = false;
   });
 
   afterEach(() => {
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
     jest.useRealTimers();
+    pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
   it('renders the CreateTearsheet component', () => {

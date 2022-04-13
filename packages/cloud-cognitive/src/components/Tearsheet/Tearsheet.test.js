@@ -288,6 +288,11 @@ const commonTests = (Ts, name, props, testActions) => {
     ));
 };
 
+const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
+  'default-portal-target-body',
+  true
+);
+
 describe(componentName, () => {
   const { ResizeObserver } = window;
 
@@ -297,11 +302,13 @@ describe(componentName, () => {
       unobserve: jest.fn(),
       disconnect: jest.fn(),
     }));
+    pkg.feature['default-portal-target-body'] = false;
   });
 
   afterAll(() => {
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
+    pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
   commonTests(Tearsheet, componentName, {}, true);
@@ -351,11 +358,13 @@ describe(componentNameNarrow, () => {
       unobserve: jest.fn(),
       disconnect: jest.fn(),
     }));
+    pkg.feature['default-portal-target-body'] = false;
   });
 
   afterAll(() => {
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
+    pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
   commonTests(TearsheetNarrow, componentNameNarrow, {}, true);
@@ -370,11 +379,13 @@ describe(componentNameCreateNarrow, () => {
       unobserve: jest.fn(),
       disconnect: jest.fn(),
     }));
+    pkg.feature['default-portal-target-body'] = false;
   });
 
   afterAll(() => {
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
+    pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
   commonTests(

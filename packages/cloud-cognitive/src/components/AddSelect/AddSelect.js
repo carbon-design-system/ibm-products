@@ -48,6 +48,7 @@ export let AddSelect = forwardRef(
       onSubmit,
       onSubmitButtonText,
       open,
+      portalTarget,
       removeIconDescription,
       searchResultsLabel,
       title,
@@ -215,6 +216,7 @@ export let AddSelect = forwardRef(
           disabled: multi ? multiSelection.length === 0 : !singleSelection,
         },
       ],
+      portalTarget,
     };
 
     const sidebarProps = {
@@ -394,6 +396,10 @@ AddSelect.propTypes = {
   onSubmit: PropTypes.func,
   onSubmitButtonText: PropTypes.string,
   open: PropTypes.bool,
+  /**
+   * portal target for the all tags modal
+   */
+  portalTarget: PropTypes.node,
   removeIconDescription: PropTypes.string,
   searchResultsLabel: PropTypes.string,
   title: PropTypes.string,

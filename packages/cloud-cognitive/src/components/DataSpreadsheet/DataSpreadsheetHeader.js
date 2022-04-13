@@ -10,9 +10,10 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { px } from '@carbon/layout';
 import { pkg } from '../../settings';
+import { usePreviousValue } from '../../global/js/hooks';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
-import { usePreviousValue } from '../../global/js/hooks';
+import { selectAllCells } from './utils/selectAllCells';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -31,6 +32,7 @@ export const DataSpreadsheetHeader = forwardRef(
       setSelectionAreas,
       setSelectionAreaData,
       rows,
+      updateActiveCellCoordinates,
     },
     ref
   ) => {
@@ -67,6 +69,18 @@ export const DataSpreadsheetHeader = forwardRef(
       };
     };
 
+    const handleSelectAllClick = () => {
+      selectAllCells({
+        ref,
+        setCurrentMatcher,
+        setSelectionAreas,
+        rows,
+        columns,
+        activeCellCoordinates,
+        updateActiveCellCoordinates,
+      });
+    };
+
     return (
       <div className={cx(`${blockClass}__header--container`)} role="rowgroup">
         {headerGroups.map((headerGroup, index) => (
@@ -95,6 +109,7 @@ export const DataSpreadsheetHeader = forwardRef(
                 data-column-index="header"
                 type="button"
                 tabIndex={-1}
+                onClick={handleSelectAllClick}
                 className={cx(
                   `${blockClass}__th`,
                   `${blockClass}--interactive-cell-element`,
@@ -214,4 +229,9 @@ DataSpreadsheetHeader.propTypes = {
    * Setter fn for selectionAreas value
    */
   setSelectionAreas: PropTypes.func,
+
+  /**
+   * Function used to update the active cell coordinates
+   */
+  updateActiveCellCoordinates: PropTypes.func,
 };

@@ -46,6 +46,7 @@ import {
 } from './utils/handleMultipleKeys';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 import { removeCellSelections } from './utils/removeCellSelections';
+import { selectAllCells } from './utils/selectAllCells';
 // cspell:words rowcount colcount
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -576,6 +577,12 @@ export let DataSpreadsheet = React.forwardRef(
           activeCellCoordinates?.row === 'header'
             ? activeCellCoordinates?.column
             : activeCellCoordinates?.row;
+        if (
+          activeCellCoordinates?.row === 'header' &&
+          activeCellCoordinates?.column === 'header'
+        ) {
+          return;
+        }
         handleRowColumnHeaderClick({ isKeyboard: false, index: indexValue });
       }
       return;
@@ -614,17 +621,37 @@ export let DataSpreadsheet = React.forwardRef(
         index,
       };
       // Select an entire column
-      if (activeCellCoordinates?.row === 'header') {
+      if (
+        activeCellCoordinates?.row === 'header' &&
+        activeCellCoordinates?.column !== 'header'
+      ) {
         handleHeaderCellSelection({
           type: 'column',
           ...handleHeaderCellProps,
         });
       }
       // Select an entire row
-      if (activeCellCoordinates?.column === 'header') {
+      if (
+        activeCellCoordinates?.column === 'header' &&
+        activeCellCoordinates?.row !== 'header'
+      ) {
         handleHeaderCellSelection({
           type: 'row',
           ...handleHeaderCellProps,
+        });
+      }
+      if (
+        activeCellCoordinates?.column === 'header' &&
+        activeCellCoordinates?.row === 'header'
+      ) {
+        selectAllCells({
+          ref: spreadsheetRef,
+          setCurrentMatcher,
+          setSelectionAreas,
+          rows,
+          columns,
+          activeCellCoordinates,
+          updateActiveCellCoordinates,
         });
       }
     };
@@ -798,6 +825,7 @@ export let DataSpreadsheet = React.forwardRef(
             setSelectionAreas={setSelectionAreas}
             setCurrentMatcher={setCurrentMatcher}
             setSelectionAreaData={setSelectionAreaData}
+            updateActiveCellCoordinates={updateActiveCellCoordinates}
           />
 
           {/* BODY */}

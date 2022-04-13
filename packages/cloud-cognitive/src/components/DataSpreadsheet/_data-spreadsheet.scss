@@ -190,6 +190,9 @@
     .#{$block-class}__td-th--active-header.#{$block-class}__td {
       background-color: $hover-selected-ui;
     }
+    .#{$block-class}__list--container {
+      overscroll-behavior: none;
+    }
   }
 }
 

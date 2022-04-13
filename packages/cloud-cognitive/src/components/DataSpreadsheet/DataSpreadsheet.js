@@ -41,7 +41,7 @@ import { createActiveCellFn } from './utils/createActiveCellFn';
 import { getCellSize } from './utils/getCellSize';
 import {
   handleMultipleKeys,
-  includesMeta,
+  includesResourceKey,
   includesShift,
 } from './utils/handleMultipleKeys';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
@@ -115,7 +115,7 @@ export let DataSpreadsheet = React.forwardRef(
       }),
       [cellSizeValue]
     );
-    const { keysPressedList } = useMultipleKeyTracking({
+    const { keysPressedList, usingMac } = useMultipleKeyTracking({
       ref: multiKeyTrackingRef,
       containerHasFocus,
       isEditing,
@@ -391,6 +391,7 @@ export let DataSpreadsheet = React.forwardRef(
             removeCellSelections,
             blockClass,
             setCurrentMatcher,
+            usingMac,
           });
         }
         // Allow arrow key navigation if there are less than two activeKeys OR
@@ -403,14 +404,14 @@ export let DataSpreadsheet = React.forwardRef(
           switch (key) {
             // HOME
             case 'Home': {
-              if (includesMeta(keysPressedList)) {
+              if (includesResourceKey(keysPressedList, usingMac)) {
                 return;
               }
               handleHomeEndKey({ type: 'home' });
               break;
             }
             case 'End': {
-              if (includesMeta(keysPressedList)) {
+              if (includesResourceKey(keysPressedList, usingMac)) {
                 return;
               }
               handleHomeEndKey({ type: 'end' });
@@ -535,6 +536,7 @@ export let DataSpreadsheet = React.forwardRef(
         selectionAreas,
         handleHomeEndKey,
         keysPressedList,
+        usingMac,
       ]
     );
 

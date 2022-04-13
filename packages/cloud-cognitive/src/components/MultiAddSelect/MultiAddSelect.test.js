@@ -11,11 +11,11 @@ import { MultiAddSelect } from './MultiAddSelect';
 
 const componentName = MultiAddSelect.name;
 const defaultProps = {
+  globalSearchLabel: 'test input label',
   noSelectionTitle: 'No selection title',
   noSelectionDescription: 'No selection description',
   noResultsTitle: 'No results title',
   noResultsDescription: 'Try again description',
-  textInputLabel: 'test input label',
 };
 
 describe(componentName, () => {

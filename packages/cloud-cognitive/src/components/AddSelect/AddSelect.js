@@ -33,8 +33,9 @@ export let AddSelect = forwardRef(
       globalFiltersPlaceholderText,
       globalFiltersPrimaryButtonText,
       globalFiltersSecondaryButtonText,
+      globalSearchLabel,
+      globalSearchPlaceholder,
       influencerTitle,
-      inputPlaceholder,
       items,
       itemsLabel,
       multi,
@@ -44,14 +45,12 @@ export let AddSelect = forwardRef(
       noSelectionTitle,
       onClose,
       onCloseButtonText,
-      onSearchFilter,
       onSubmit,
       onSubmitButtonText,
       open,
       portalTarget,
       removeIconDescription,
       searchResultsLabel,
-      textInputLabel,
       title,
 
       // Collect any other property values passed in.
@@ -147,10 +146,6 @@ export let AddSelect = forwardRef(
       const results = itemsToFilter.filter((item) => {
         if (!searchTerm) {
           return item;
-        }
-        // if user provides their own filter function use that
-        if (onSearchFilter) {
-          return onSearchFilter(item, searchTerm);
         }
         // otherwise use the default label filter
         return item.title.toLowerCase().includes(searchTerm);
@@ -268,8 +263,8 @@ export let AddSelect = forwardRef(
       <>
         <div className={`${blockClass}__header`}>
           <AddSelectFilter
-            textInputLabel={textInputLabel}
-            inputPlaceholder={inputPlaceholder}
+            inputLabel={globalSearchLabel}
+            inputPlaceholder={globalSearchPlaceholder}
             searchTerm={searchTerm}
             handleSearch={handleSearch}
             multi={multi}
@@ -364,22 +359,29 @@ AddSelect.propTypes = {
   globalFiltersPlaceholderText: PropTypes.string,
   globalFiltersPrimaryButtonText: PropTypes.string,
   globalFiltersSecondaryButtonText: PropTypes.string,
+  globalSearchLabel: PropTypes.string,
+  globalSearchPlaceholder: PropTypes.string,
   influencerTitle: PropTypes.string,
-  inputPlaceholder: PropTypes.string,
   items: PropTypes.shape({
     modifiers: PropTypes.shape({
       label: PropTypes.string,
       options: PropTypes.array,
-      property: PropTypes.string,
     }),
     sortBy: PropTypes.array,
     filterBy: PropTypes.array,
     entries: PropTypes.arrayOf(
       PropTypes.shape({
+        avatar: PropTypes.shape({
+          alt: PropTypes.string,
+          icon: PropTypes.object,
+          src: PropTypes.string,
+        }),
+        children: PropTypes.object,
+        icon: PropTypes.object,
         id: PropTypes.string.isRequired,
+        subtitle: PropTypes.string,
         title: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
-        children: PropTypes.object,
       })
     ),
   }),
@@ -391,7 +393,6 @@ AddSelect.propTypes = {
   noSelectionTitle: PropTypes.string,
   onClose: PropTypes.func,
   onCloseButtonText: PropTypes.string,
-  onSearchFilter: PropTypes.func,
   onSubmit: PropTypes.func,
   onSubmitButtonText: PropTypes.string,
   open: PropTypes.bool,
@@ -401,7 +402,6 @@ AddSelect.propTypes = {
   portalTarget: PropTypes.node,
   removeIconDescription: PropTypes.string,
   searchResultsLabel: PropTypes.string,
-  textInputLabel: PropTypes.string,
   title: PropTypes.string,
 };
 

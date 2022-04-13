@@ -40,7 +40,7 @@
     }
 
     .#{$block-class}__tr {
-      :last-child {
+      :last-child .#{$block-class}__body--td {
         .#{$block-class}__td {
           border-bottom: 0;
         }
@@ -51,19 +51,23 @@
     .#{$block-class}__td {
       @include carbon--type-style('body-short-01');
 
+      width: 100%;
+      height: 100%;
       padding: 0 $spacing-03;
       border: 0;
       margin: 0;
       color: $text-01;
     }
-    .#{$block-class}__th:last-child,
-    .#{$block-class}__td:last-child {
+
+    [role="'columnheader'"]:last-child,
+    [role="'gridcell'"]:last-child {
       border-right: 1px solid $text-03;
     }
     .#{$block-class}__th,
     .#{$block-class}__td-th.#{$block-class}__td {
       @include set-header-borders();
 
+      height: 100%;
       background-color: $header-cell-background;
       cursor: pointer;
 
@@ -71,6 +75,9 @@
       &:focus {
         background-color: $hover-selected-ui;
       }
+    }
+    .#{$block-class}__th--select-all {
+      min-width: calc(#{$spacing-10} - #{$spacing-02});
     }
     .#{$block-class}__td-th.#{$block-class}__td {
       @include carbon--font-weight('semibold');

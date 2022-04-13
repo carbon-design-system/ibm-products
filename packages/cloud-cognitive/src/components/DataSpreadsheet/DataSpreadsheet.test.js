@@ -159,6 +159,35 @@ describe(componentName, () => {
     expect(onSelectionAreaChangeFn).toHaveBeenCalledTimes(1);
   });
 
+  it('should select all cells when clicking on select all cell button', () => {
+    const ref = React.createRef();
+    const { click } = userEvent;
+    const activeCellChangeFn = jest.fn();
+    const onSelectionAreaChangeFn = jest.fn();
+    render(
+      <DataSpreadsheet
+        {...defaultProps}
+        ref={ref}
+        onActiveCellChange={activeCellChangeFn}
+        onSelectionAreaChange={onSelectionAreaChangeFn}
+      />
+    );
+    const selectAllButton = ref?.current.querySelector(
+      `.${blockClass}__th--select-all`
+    );
+    click(selectAllButton);
+    expect(activeCellChangeFn).toHaveBeenCalledTimes(1);
+    const selectionArea = ref?.current.querySelector(
+      `.${blockClass}__selection-area--element`
+    );
+    const activeCell = ref?.current.querySelector(
+      `.${blockClass}__active-cell--highlight[data-active-row-index="0"][data-active-column-index="0"]`
+    );
+    expect(selectionArea).toBeInTheDocument();
+    expect(activeCell).toBeInTheDocument();
+    expect(onSelectionAreaChangeFn).toHaveBeenCalledTimes(1);
+  });
+
   const EmptySpreadsheet = forwardRef(({ ...rest }, ref) => {
     const [data, setData] = useState([]);
     const columnsClone = [

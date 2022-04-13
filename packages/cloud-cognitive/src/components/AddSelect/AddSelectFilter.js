@@ -22,13 +22,13 @@ export let AddSelectFilter = ({
   handleFilter,
   handleSearch,
   iconDescription,
+  inputLabel,
   inputPlaceholder,
   multi,
   placeholder,
   primaryButtonText,
   searchTerm,
   secondaryButtonText,
-  textInputLabel,
 }) => {
   const [filters, setFilters] = useState({});
   const [open, setOpen] = useState(false);
@@ -64,7 +64,7 @@ export let AddSelectFilter = ({
     <div className={`${blockClass}-search`}>
       <TextInput
         id="temp-id"
-        labelText={textInputLabel}
+        labelText={inputLabel}
         placeholder={inputPlaceholder}
         value={searchTerm}
         onChange={searchHandler}
@@ -126,13 +126,13 @@ AddSelectFilter.propTypes = {
   handleFilter: PropTypes.func,
   handleSearch: PropTypes.func,
   iconDescription: PropTypes.string,
+  inputLabel: PropTypes.string,
   inputPlaceholder: PropTypes.string,
   multi: PropTypes.bool,
   placeholder: PropTypes.string,
   primaryButtonText: PropTypes.string,
   searchTerm: PropTypes.string,
   secondaryButtonText: PropTypes.string,
-  textInputLabel: PropTypes.string,
 };
 
 AddSelectFilter.displayName = componentName;

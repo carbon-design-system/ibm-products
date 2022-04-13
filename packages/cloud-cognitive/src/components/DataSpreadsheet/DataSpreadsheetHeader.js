@@ -10,9 +10,10 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { px } from '@carbon/layout';
 import { pkg } from '../../settings';
+import { usePreviousValue } from '../../global/js/hooks';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
-import { usePreviousValue } from '../../global/js/hooks';
+import { selectAllCells } from './utils/selectAllCells';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -31,6 +32,7 @@ export const DataSpreadsheetHeader = forwardRef(
       setSelectionAreas,
       setSelectionAreaData,
       rows,
+      updateActiveCellCoordinates,
     },
     ref
   ) => {
@@ -65,6 +67,18 @@ export const DataSpreadsheetHeader = forwardRef(
       };
     };
 
+    const handleSelectAllClick = () => {
+      selectAllCells({
+        ref,
+        setCurrentMatcher,
+        setSelectionAreas,
+        rows,
+        columns,
+        activeCellCoordinates,
+        updateActiveCellCoordinates,
+      });
+    };
+
     return (
       <div className={cx(`${blockClass}__header--container`)}>
         {headerGroups.map((headerGroup, index) => (
@@ -81,52 +95,63 @@ export const DataSpreadsheetHeader = forwardRef(
             className={`${blockClass}__tr`}
           >
             {/* SELECT ALL BUTTON */}
-            <button
-              data-row-index="header"
-              data-column-index="header"
-              type="button"
-              tabIndex={-1}
-              className={cx(
-                `${blockClass}__th`,
-                `${blockClass}--interactive-cell-element`,
-                {
-                  [`${blockClass}__th--active-header`]:
-                    activeCellCoordinates?.column === 'header' &&
-                    activeCellCoordinates?.row === 'header',
-                }
-              )}
+            <div
+              role="columnheader"
               style={{
-                width: defaultColumn?.rowHeaderWidth,
+                width: defaultColumn?.rowHeaderWidth - 4,
                 height: defaultColumn?.rowHeight,
               }}
             >
-              &nbsp;
-            </button>
-            {/* COLUMN HEADER BUTTONS */}
-            {headerGroup.headers.map((column, index) => (
               <button
-                key={`column_${index}`}
                 data-row-index="header"
-                data-column-index={index}
+                data-column-index="header"
+                type="button"
                 tabIndex={-1}
-                onClick={handleColumnHeaderClick(index)}
-                style={{
-                  height: defaultColumn?.rowHeight,
-                }}
-                {...column.getHeaderProps()}
+                onClick={handleSelectAllClick}
                 className={cx(
                   `${blockClass}__th`,
                   `${blockClass}--interactive-cell-element`,
+                  `${blockClass}__th--select-all`,
                   {
                     [`${blockClass}__th--active-header`]:
-                      activeCellCoordinates?.column === index ||
-                      checkActiveHeaderCell(index, selectionAreas, 'column'),
+                      activeCellCoordinates?.column === 'header' &&
+                      activeCellCoordinates?.row === 'header',
                   }
                 )}
-                type="button"
               >
-                {column.render('Header')}
+                &nbsp;
               </button>
+            </div>
+            {/* COLUMN HEADER BUTTONS */}
+            {headerGroup.headers.map((column, index) => (
+              <div
+                key={`column_${index}`}
+                role="columnheader"
+                className={`${blockClass}__columnheader`}
+                {...column.getHeaderProps()}
+              >
+                <button
+                  data-row-index="header"
+                  data-column-index={index}
+                  tabIndex={-1}
+                  onClick={handleColumnHeaderClick(index)}
+                  style={{
+                    height: defaultColumn?.rowHeight,
+                  }}
+                  className={cx(
+                    `${blockClass}__th`,
+                    `${blockClass}--interactive-cell-element`,
+                    {
+                      [`${blockClass}__th--active-header`]:
+                        activeCellCoordinates?.column === index ||
+                        checkActiveHeaderCell(index, selectionAreas, 'column'),
+                    }
+                  )}
+                  type="button"
+                >
+                  {column.render('Header')}
+                </button>
+              </div>
             ))}
           </div>
         ))}
@@ -202,4 +227,9 @@ DataSpreadsheetHeader.propTypes = {
    * Setter fn for selectionAreas value
    */
   setSelectionAreas: PropTypes.func,
+
+  /**
+   * Function used to update the active cell coordinates
+   */
+  updateActiveCellCoordinates: PropTypes.func,
 };

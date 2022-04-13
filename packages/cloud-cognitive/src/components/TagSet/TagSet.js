@@ -73,7 +73,13 @@ export let TagSet = React.forwardRef(
     };
 
     useEffect(() => {
-      setAllTagsModalTarget(allTagsModalTargetIn ?? document?.body);
+      if (allTagsModalTargetIn) {
+        setAllTagsModalTarget(allTagsModalTargetIn);
+      } else {
+        if (pkg.isFeatureEnabled('default-portal-target-body')) {
+          setAllTagsModalTarget(document.body);
+        }
+      }
     }, [allTagsModalTargetIn]);
 
     useEffect(() => {
@@ -246,19 +252,17 @@ export let TagSet = React.forwardRef(
           </div>
         </div>
 
-        {allTagsModalTarget && tags && displayCount < tags.length
-          ? createPortal(
-              <TagSetModal
-                allTags={tags}
-                open={showAllModalOpen}
-                title={allTagsModalTitle}
-                onClose={handleModalClose}
-                searchLabel={allTagsModalSearchLabel}
-                searchPlaceholder={allTagsModalSearchPlaceholderText}
-              />,
-              allTagsModalTarget
-            )
-          : null}
+        {(allTagsModalTarget ? createPortal : (children) => children)(
+          <TagSetModal
+            allTags={tags}
+            open={showAllModalOpen}
+            title={allTagsModalTitle}
+            onClose={handleModalClose}
+            searchLabel={allTagsModalSearchLabel}
+            searchPlaceholder={allTagsModalSearchPlaceholderText}
+          />,
+          allTagsModalTarget
+        )}
       </div>
     );
   }

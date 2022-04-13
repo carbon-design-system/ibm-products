@@ -391,6 +391,7 @@ export const DataSpreadsheetBody = forwardRef(
               {/* ROW HEADER BUTTON */}
               <div role="rowheader">
                 <button
+                  id={`${blockClass}__cell--${index}--header`}
                   tabIndex={-1}
                   data-row-index={index}
                   data-column-index="header"
@@ -426,6 +427,7 @@ export const DataSpreadsheetBody = forwardRef(
                   }}
                 >
                   <button
+                    id={`${blockClass}__cell--${cell.row.index}--${index}`}
                     tabIndex={-1}
                     data-row-index={cell.row.index}
                     data-column-index={index}

@@ -7,6 +7,7 @@
 
 // Import portions of React that are needed.
 import React, { useEffect, useState, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useResizeDetector } from 'react-resize-detector';
 
 // Other standard imports.
@@ -76,6 +77,7 @@ export const TearsheetShell = React.forwardRef(
       open,
       selectorPrimaryFocus,
       size,
+      portalTarget: portalTargetIn,
       title,
       verticalPosition,
       // Collect any other property values passed in.
@@ -83,6 +85,18 @@ export const TearsheetShell = React.forwardRef(
     },
     ref
   ) => {
+    // node the modal tearsheet is hosted in
+    const [portalTarget, setPortalTarget] = useState(null);
+    useEffect(() => {
+      if (portalTargetIn) {
+        setPortalTarget(portalTargetIn);
+      } else {
+        if (pkg.isFeatureEnabled('default-portal-target-body')) {
+          setPortalTarget(document.body);
+        }
+      }
+    }, [portalTargetIn]);
+
     const localRef = useRef();
     const modalRef = ref || localRef;
     const { width, ref: resizer } = useResizeDetector({ handleHeight: false });
@@ -192,7 +206,7 @@ export const TearsheetShell = React.forwardRef(
       // Include an ActionSet if and only if one or more actions is given.
       const includeActions = actions && actions?.length > 0;
 
-      return (
+      return (portalTarget ? createPortal : (children) => children)(
         <ComposedModal
           {
             // Pass through any other property values.
@@ -302,7 +316,8 @@ export const TearsheetShell = React.forwardRef(
             </Wrap>
           </Wrap>
           <div className={`${bc}__resize-detector`} ref={resizer} />
-        </ComposedModal>
+        </ComposedModal>,
+        portalTarget
       );
     } else {
       pconsole.warn('Tearsheet not rendered: maximum stacking depth exceeded.');
@@ -454,6 +469,11 @@ TearsheetShell.propTypes = {
    * Specifies whether the tearsheet is currently open.
    */
   open: PropTypes.bool,
+
+  /**
+   * portal target for the all tags modal
+   */
+  portalTarget: PropTypes.node,
 
   /**
    * Specifies the width of the tearsheet, 'narrow' or 'wide'.

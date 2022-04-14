@@ -323,7 +323,8 @@ export const DataSpreadsheetBody = forwardRef(
 
     const handleRowHeaderClick = useCallback(
       (index) => {
-        return () => {
+        return (event) => {
+          const isHoldingCommandKey = event.metaKey || event.ctrlKey;
           handleHeaderCellSelection({
             type: 'row',
             activeCellCoordinates,
@@ -335,6 +336,7 @@ export const DataSpreadsheetBody = forwardRef(
             spreadsheetRef: ref,
             index,
             setSelectionAreaData,
+            isHoldingCommandKey,
           });
         };
       },
@@ -384,50 +386,62 @@ export const DataSpreadsheetBody = forwardRef(
               {...row.getRowProps({ style })}
               className={cx(`${blockClass}__tr`)}
               data-row-index={index}
+              aria-rowindex={index + 1}
             >
               {/* ROW HEADER BUTTON */}
-              <button
-                tabIndex={-1}
-                data-row-index={index}
-                data-column-index="header"
-                type="button"
-                onClick={handleRowHeaderClick(index)}
-                className={cx(
-                  `${blockClass}__td`,
-                  `${blockClass}__td-th`,
-                  `${blockClass}--interactive-cell-element`,
-                  {
-                    [`${blockClass}__td-th--active-header`]:
-                      activeCellCoordinates?.row === index ||
-                      checkActiveHeaderCell(index, selectionAreas, 'row'),
-                  }
-                )}
-                style={{
-                  width: defaultColumn?.rowHeaderWidth,
-                }}
-              >
-                {index + 1}
-              </button>
-              {/* CELL BUTTONS */}
-              {row.cells.map((cell, index) => (
+              <div role="rowheader">
                 <button
                   tabIndex={-1}
-                  data-row-index={cell.row.index}
-                  data-column-index={index}
-                  {...cell.getCellProps()}
+                  data-row-index={index}
+                  data-column-index="header"
+                  type="button"
+                  onClick={handleRowHeaderClick(index)}
                   className={cx(
                     `${blockClass}__td`,
-                    `${blockClass}__body--td`,
-                    `${blockClass}--interactive-cell-element`
+                    `${blockClass}__td-th`,
+                    `${blockClass}--interactive-cell-element`,
+                    {
+                      [`${blockClass}__td-th--active-header`]:
+                        activeCellCoordinates?.row === index ||
+                        checkActiveHeaderCell(index, selectionAreas, 'row'),
+                    }
                   )}
-                  key={`cell_${index}`}
-                  onMouseDown={handleBodyCellClick(cell, index)}
-                  onMouseOver={handleBodyCellHover(cell, index)}
-                  onFocus={() => {}}
-                  type="button"
+                  style={{
+                    width: defaultColumn?.rowHeaderWidth - 4,
+                  }}
                 >
-                  {cell.render('Cell')}
+                  {index + 1}
                 </button>
+              </div>
+              {/* CELL BUTTONS */}
+              {row.cells.map((cell, index) => (
+                <div
+                  key={`cell_${index}`}
+                  aria-colindex={index + 1}
+                  {...cell.getCellProps()}
+                  role="gridcell"
+                  style={{
+                    ...cell.getCellProps().style,
+                    display: 'grid',
+                  }}
+                >
+                  <button
+                    tabIndex={-1}
+                    data-row-index={cell.row.index}
+                    data-column-index={index}
+                    className={cx(
+                      `${blockClass}__td`,
+                      `${blockClass}__body--td`,
+                      `${blockClass}--interactive-cell-element`
+                    )}
+                    onMouseDown={handleBodyCellClick(cell, index)}
+                    onMouseOver={handleBodyCellHover(cell, index)}
+                    onFocus={() => {}}
+                    type="button"
+                  >
+                    {cell.render('Cell')}
+                  </button>
+                </div>
               ))}
             </div>
           );

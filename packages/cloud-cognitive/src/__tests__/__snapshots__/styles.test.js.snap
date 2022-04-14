@@ -1929,10 +1929,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-right: var(--cds-spacing-05, 1rem);
 }
 
-.c4p--export-modal .bx--modal-close {
-  display: none;
-}
-
 .c4p--export-modal__body {
   padding-right: calc(20% - var(--cds-spacing-05, 1rem));
   margin-bottom: var(--cds-spacing-05, 1rem);

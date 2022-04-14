@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
@@ -57,6 +57,11 @@ export default {
     title: { control: { type: 'text' } },
     onClose: { control: { disable: true } },
     open: { control: { disable: true } },
+    portalTargetCustomDomNode: {
+      control: { type: 'boolean' },
+      description:
+        'Set portalTarget prop to specify dom node, defaults to document.body.',
+    },
   },
 };
 
@@ -85,8 +90,9 @@ const title = 'Title of the tearsheet';
 
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, ...args }) => {
+const Template = ({ actions, portalTargetCustomDomNode, ...args }) => {
   const [open, setOpen] = useState(false);
+  const ref = useRef();
 
   const wiredActions = Array.prototype.map.call(actions, (action) => {
     if (action.label === 'Cancel') {
@@ -106,23 +112,27 @@ const Template = ({ actions, ...args }) => {
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
-      <TearsheetNarrow
-        {...args}
-        actions={wiredActions}
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        {mainContent}
-      </TearsheetNarrow>
+      <div ref={ref}>
+        <TearsheetNarrow
+          {...args}
+          actions={wiredActions}
+          open={open}
+          onClose={() => setOpen(false)}
+          portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
+        >
+          {mainContent}
+        </TearsheetNarrow>
+      </div>
     </>
   );
 };
 
 // eslint-disable-next-line react/prop-types
-const StackedTemplate = ({ actions, ...args }) => {
+const StackedTemplate = ({ actions, portalTargetCustomDomNode, ...args }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
+  const ref = useRef();
 
   const wiredActions1 = Array.prototype.map.call(actions, (action) => {
     if (action.label === 'Cancel') {
@@ -182,39 +192,44 @@ const StackedTemplate = ({ actions, ...args }) => {
         <Button onClick={() => setOpen2(!open2)}>Toggle #2</Button>
         <Button onClick={() => setOpen3(!open3)}>Toggle #3</Button>
       </div>
-      <TearsheetNarrow
-        {...args}
-        actions={wiredActions1}
-        title="Tearsheet #1"
-        open={open1}
-        onClose={() => setOpen1(false)}
-      >
-        <div className="tearsheet-stories__narrow-content-block">
-          Main content 1
-        </div>
-      </TearsheetNarrow>
-      <TearsheetNarrow
-        {...args}
-        actions={wiredActions2}
-        title="Tearsheet #2"
-        open={open2}
-        onClose={() => setOpen2(false)}
-      >
-        <div className="tearsheet-stories__narrow-content-block">
-          Main content 2
-        </div>
-      </TearsheetNarrow>
-      <TearsheetNarrow
-        {...args}
-        actions={wiredActions3}
-        title="Tearsheet #3"
-        open={open3}
-        onClose={() => setOpen3(false)}
-      >
-        <div className="tearsheet-stories__narrow-content-block">
-          Main content 3
-        </div>
-      </TearsheetNarrow>
+      <div ref={ref}>
+        <TearsheetNarrow
+          {...args}
+          actions={wiredActions1}
+          title="Tearsheet #1"
+          open={open1}
+          onClose={() => setOpen1(false)}
+          portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
+        >
+          <div className="tearsheet-stories__narrow-content-block">
+            Main content 1
+          </div>
+        </TearsheetNarrow>
+        <TearsheetNarrow
+          {...args}
+          actions={wiredActions2}
+          title="Tearsheet #2"
+          open={open2}
+          onClose={() => setOpen2(false)}
+          portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
+        >
+          <div className="tearsheet-stories__narrow-content-block">
+            Main content 2
+          </div>
+        </TearsheetNarrow>
+        <TearsheetNarrow
+          {...args}
+          actions={wiredActions3}
+          title="Tearsheet #3"
+          open={open3}
+          onClose={() => setOpen3(false)}
+          portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
+        >
+          <div className="tearsheet-stories__narrow-content-block">
+            Main content 3
+          </div>
+        </TearsheetNarrow>
+      </div>
     </>
   );
 };

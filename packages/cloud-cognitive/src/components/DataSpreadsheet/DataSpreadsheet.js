@@ -30,15 +30,23 @@ import { getScrollbarWidth } from '../../global/js/utils/getScrollbarWidth';
 import { useActiveElement, usePreviousValue } from '../../global/js/hooks';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { useResetSpreadsheetFocus } from './hooks/useResetSpreadsheetFocus';
-import { useSpreadsheetOutsideClick } from './hooks/useSpreadsheetOutsideClick';
-import { useMoveActiveCell } from './hooks/useMoveActiveCell';
+import {
+  useResetSpreadsheetFocus,
+  useSpreadsheetOutsideClick,
+  useMoveActiveCell,
+  useMultipleKeyTracking,
+} from './hooks';
 
 import { createActiveCellFn } from './utils/createActiveCellFn';
 import { getCellSize } from './utils/getCellSize';
-import { handleMultipleKeys } from './utils/handleMultipleKeys';
+import {
+  handleMultipleKeys,
+  includesResourceKey,
+  includesShift,
+} from './utils/handleMultipleKeys';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 import { removeCellSelections } from './utils/removeCellSelections';
+import { selectAllCells } from './utils/selectAllCells';
 // cspell:words rowcount colcount
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -78,6 +86,7 @@ export let DataSpreadsheet = React.forwardRef(
     },
     ref
   ) => {
+    const multiKeyTrackingRef = useRef();
     const localRef = useRef();
     const spreadsheetRef = ref || localRef;
     const focusedElement = useActiveElement();
@@ -96,7 +105,6 @@ export let DataSpreadsheet = React.forwardRef(
     const cellSizeValue = getCellSize(cellSize);
     const cellEditorRef = useRef();
     const [activeCellContent, setActiveCellContent] = useState();
-    const activeKeys = useRef([]);
     const activeCellRef = useRef();
     const cellEditorRulerRef = useRef();
     const defaultColumn = useMemo(
@@ -107,7 +115,11 @@ export let DataSpreadsheet = React.forwardRef(
       }),
       [cellSizeValue]
     );
-
+    const { keysPressedList, usingMac } = useMultipleKeyTracking({
+      ref: multiKeyTrackingRef,
+      containerHasFocus,
+      isEditing,
+    });
     const scrollBarSize = useMemo(() => getScrollbarWidth(), []);
 
     const {
@@ -248,7 +260,6 @@ export let DataSpreadsheet = React.forwardRef(
     );
 
     useResetSpreadsheetFocus({
-      activeKeys,
       focusedElement,
       removeActiveCell,
       setContainerHasFocus,
@@ -261,7 +272,6 @@ export let DataSpreadsheet = React.forwardRef(
       removeActiveCell,
       removeCellSelections,
       setContainerHasFocus,
-      activeKeys,
       removeCellEditor,
     });
 
@@ -306,9 +316,31 @@ export let DataSpreadsheet = React.forwardRef(
       []
     );
 
+    const handleHomeEndKey = useCallback(
+      ({ type }) => {
+        const coordinatesClone = { ...activeCellCoordinates };
+        updateActiveCellCoordinates({
+          coords: coordinatesClone,
+          updatedValue: {
+            column: type === 'home' ? 0 : columns.length - 1,
+          },
+        });
+        removeCellSelections({ spreadsheetRef });
+      },
+      [
+        activeCellCoordinates,
+        updateActiveCellCoordinates,
+        spreadsheetRef,
+        columns.length,
+      ]
+    );
+
     const handleKeyPress = useCallback(
       (event) => {
         const { key } = event;
+        if (isEditing) {
+          return;
+        }
         // Command keys need to be returned as there is default browser behavior with these keys
         if (key === 'Meta' || key === 'Control') {
           return;
@@ -334,42 +366,57 @@ export let DataSpreadsheet = React.forwardRef(
         if (
           ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'].indexOf(key) > -1
         ) {
-          if (isEditing) {
-            return;
-          }
           if (
             selectionAreas?.length &&
-            key !== 'Shift' &&
-            !activeKeys.current.includes('Shift')
+            keysPressedList.length < 2 &&
+            !includesShift(keysPressedList)
           ) {
             setSelectionAreas([]);
             setSelectionAreaData([]);
             removeCellSelections({ spreadsheetRef });
           }
         }
-        // Update list of activeKeys
-        if (!activeKeys.current?.includes(key)) {
-          const activeClone = [...activeKeys.current];
-          activeKeys.current = [...activeClone, key];
-        }
-        if (activeKeys.current?.length > 1) {
+        if (!isEditing && keysPressedList?.length > 1) {
           handleMultipleKeys({
-            activeKeys,
+            activeCellCoordinates,
+            event,
+            keysPressedList,
             selectionAreas,
             currentMatcher,
             rows,
             setSelectionAreas,
             columns,
+            updateActiveCellCoordinates,
+            spreadsheetRef,
+            removeCellSelections,
+            blockClass,
+            setCurrentMatcher,
+            usingMac,
           });
         }
         // Allow arrow key navigation if there are less than two activeKeys OR
         // if one of the activeCellCoordinates is in a header position
         if (
-          !activeKeys.current.includes('Shift') ||
+          (keysPressedList.length < 2 && !includesShift(keysPressedList)) ||
           activeCellCoordinates.row === 'header' ||
           activeCellCoordinates.column === 'header'
         ) {
           switch (key) {
+            // HOME
+            case 'Home': {
+              if (includesResourceKey(keysPressedList, usingMac)) {
+                return;
+              }
+              handleHomeEndKey({ type: 'home' });
+              break;
+            }
+            case 'End': {
+              if (includesResourceKey(keysPressedList, usingMac)) {
+                return;
+              }
+              handleHomeEndKey({ type: 'end' });
+              break;
+            }
             // Tab
             case 'Tab': {
               setSelectionAreas([]);
@@ -487,6 +534,9 @@ export let DataSpreadsheet = React.forwardRef(
         isEditing,
         removeCellEditor,
         selectionAreas,
+        handleHomeEndKey,
+        keysPressedList,
+        usingMac,
       ]
     );
 
@@ -529,6 +579,12 @@ export let DataSpreadsheet = React.forwardRef(
           activeCellCoordinates?.row === 'header'
             ? activeCellCoordinates?.column
             : activeCellCoordinates?.row;
+        if (
+          activeCellCoordinates?.row === 'header' &&
+          activeCellCoordinates?.column === 'header'
+        ) {
+          return;
+        }
         handleRowColumnHeaderClick({ isKeyboard: false, index: indexValue });
       }
       return;
@@ -567,17 +623,37 @@ export let DataSpreadsheet = React.forwardRef(
         index,
       };
       // Select an entire column
-      if (activeCellCoordinates?.row === 'header') {
+      if (
+        activeCellCoordinates?.row === 'header' &&
+        activeCellCoordinates?.column !== 'header'
+      ) {
         handleHeaderCellSelection({
           type: 'column',
           ...handleHeaderCellProps,
         });
       }
       // Select an entire row
-      if (activeCellCoordinates?.column === 'header') {
+      if (
+        activeCellCoordinates?.column === 'header' &&
+        activeCellCoordinates?.row !== 'header'
+      ) {
         handleHeaderCellSelection({
           type: 'row',
           ...handleHeaderCellProps,
+        });
+      }
+      if (
+        activeCellCoordinates?.column === 'header' &&
+        activeCellCoordinates?.row === 'header'
+      ) {
+        selectAllCells({
+          ref: spreadsheetRef,
+          setCurrentMatcher,
+          setSelectionAreas,
+          rows,
+          columns,
+          activeCellCoordinates,
+          updateActiveCellCoordinates,
         });
       }
     };
@@ -714,18 +790,6 @@ export let DataSpreadsheet = React.forwardRef(
       defaultColumn,
     ]);
 
-    const handleKeyUp = (event) => {
-      const { key } = event;
-      // Remove key from active keys array on key up
-      if (activeKeys.current?.includes(key)) {
-        const activeKeysClone = [...activeKeys.current];
-        const filteredKeysClone = activeKeysClone.filter(
-          (item) => item !== key
-        );
-        activeKeys.current = filteredKeysClone;
-      }
-    };
-
     return (
       <div
         {...rest}
@@ -745,96 +809,98 @@ export let DataSpreadsheet = React.forwardRef(
         aria-rowcount={rows?.length || 0}
         aria-colcount={columns?.length || 0}
         onKeyDown={handleKeyPress}
-        onKeyUp={handleKeyUp}
         onFocus={() => setContainerHasFocus(true)}
       >
-        {/* HEADER */}
-        <DataSpreadsheetHeader
-          ref={spreadsheetRef}
-          activeCellCoordinates={activeCellCoordinates}
-          cellSize={cellSize}
-          columns={columns}
-          defaultColumn={defaultColumn}
-          headerGroups={headerGroups}
-          rows={rows}
-          scrollBarSize={scrollBarSize}
-          selectionAreas={selectionAreas}
-          setActiveCellCoordinates={setActiveCellCoordinates}
-          setSelectionAreas={setSelectionAreas}
-          setCurrentMatcher={setCurrentMatcher}
-          setSelectionAreaData={setSelectionAreaData}
-        />
+        <div ref={multiKeyTrackingRef}>
+          {/* HEADER */}
+          <DataSpreadsheetHeader
+            ref={spreadsheetRef}
+            activeCellCoordinates={activeCellCoordinates}
+            cellSize={cellSize}
+            columns={columns}
+            defaultColumn={defaultColumn}
+            headerGroups={headerGroups}
+            rows={rows}
+            scrollBarSize={scrollBarSize}
+            selectionAreas={selectionAreas}
+            setActiveCellCoordinates={setActiveCellCoordinates}
+            setSelectionAreas={setSelectionAreas}
+            setCurrentMatcher={setCurrentMatcher}
+            setSelectionAreaData={setSelectionAreaData}
+            updateActiveCellCoordinates={updateActiveCellCoordinates}
+          />
 
-        {/* BODY */}
-        <DataSpreadsheetBody
-          activeCellCoordinates={activeCellCoordinates}
-          ref={spreadsheetRef}
-          clickAndHoldActive={clickAndHoldActive}
-          setClickAndHoldActive={setClickAndHoldActive}
-          currentMatcher={currentMatcher}
-          setCurrentMatcher={setCurrentMatcher}
-          setContainerHasFocus={setContainerHasFocus}
-          selectionAreas={selectionAreas}
-          setSelectionAreas={setSelectionAreas}
-          cellSize={cellSize}
-          headerGroups={headerGroups}
-          defaultColumn={defaultColumn}
-          getTableBodyProps={getTableBodyProps}
-          onDataUpdate={onDataUpdate}
-          onActiveCellChange={onActiveCellChange}
-          onSelectionAreaChange={onSelectionAreaChange}
-          prepareRow={prepareRow}
-          rows={rows}
-          selectionAreaData={selectionAreaData}
-          setSelectionAreaData={setSelectionAreaData}
-          setActiveCellCoordinates={setActiveCellCoordinates}
-          scrollBarSize={scrollBarSize}
-          totalColumnsWidth={totalColumnsWidth}
-          id={id}
-          columns={columns}
-          defaultEmptyRowCount={defaultEmptyRowCount}
-        />
-        <button
-          onClick={handleActiveCellClick}
-          onKeyDown={handleActiveCellKeyDown}
-          onDoubleClick={handleActiveCellDoubleClick}
-          ref={activeCellRef}
-          className={cx(
-            `${blockClass}--interactive-cell-element`,
-            `${blockClass}__active-cell--highlight`
-          )}
-          type="button"
-        >
-          {activeCellContent}
-        </button>
-        <TextArea
-          value={cellEditorValue}
-          onKeyDown={handleEditSubmit}
-          onChange={(event) => {
-            setCellEditorValue(event.target.value);
-            cellEditorRulerRef.current.textContent = event.target.value;
-          }}
-          ref={cellEditorRef}
-          labelText=""
-          aria-labelledby={
-            activeCellCoordinates
-              ? `[data-row-index="${activeCellCoordinates?.row}"][data-column-index="${activeCellCoordinates?.column}"]`
-              : null
-          }
-          className={cx(
-            `${blockClass}__cell-editor`,
-            `${blockClass}--interactive-cell-element`,
-            `${blockClass}__cell-editor--${cellSize}`,
-            {
-              [`${blockClass}__cell-editor--active`]: isEditing,
+          {/* BODY */}
+          <DataSpreadsheetBody
+            activeCellCoordinates={activeCellCoordinates}
+            ref={spreadsheetRef}
+            clickAndHoldActive={clickAndHoldActive}
+            setClickAndHoldActive={setClickAndHoldActive}
+            currentMatcher={currentMatcher}
+            setCurrentMatcher={setCurrentMatcher}
+            setContainerHasFocus={setContainerHasFocus}
+            selectionAreas={selectionAreas}
+            setSelectionAreas={setSelectionAreas}
+            cellSize={cellSize}
+            headerGroups={headerGroups}
+            defaultColumn={defaultColumn}
+            getTableBodyProps={getTableBodyProps}
+            onDataUpdate={onDataUpdate}
+            onActiveCellChange={onActiveCellChange}
+            onSelectionAreaChange={onSelectionAreaChange}
+            prepareRow={prepareRow}
+            rows={rows}
+            selectionAreaData={selectionAreaData}
+            setSelectionAreaData={setSelectionAreaData}
+            setActiveCellCoordinates={setActiveCellCoordinates}
+            scrollBarSize={scrollBarSize}
+            totalColumnsWidth={totalColumnsWidth}
+            id={id}
+            columns={columns}
+            defaultEmptyRowCount={defaultEmptyRowCount}
+          />
+          <button
+            onClick={handleActiveCellClick}
+            onKeyDown={handleActiveCellKeyDown}
+            onDoubleClick={handleActiveCellDoubleClick}
+            ref={activeCellRef}
+            className={cx(
+              `${blockClass}--interactive-cell-element`,
+              `${blockClass}__active-cell--highlight`
+            )}
+            type="button"
+          >
+            {activeCellContent}
+          </button>
+          <TextArea
+            value={cellEditorValue}
+            onKeyDown={handleEditSubmit}
+            onChange={(event) => {
+              setCellEditorValue(event.target.value);
+              cellEditorRulerRef.current.textContent = event.target.value;
+            }}
+            ref={cellEditorRef}
+            labelText=""
+            aria-labelledby={
+              activeCellCoordinates
+                ? `[data-row-index="${activeCellCoordinates?.row}"][data-column-index="${activeCellCoordinates?.column}"]`
+                : null
             }
-          )}
-        />
-        <pre
-          aria-hidden
-          ref={cellEditorRulerRef}
-          className={`${blockClass}__cell-editor-ruler`}
-        />
+            className={cx(
+              `${blockClass}__cell-editor`,
+              `${blockClass}--interactive-cell-element`,
+              `${blockClass}__cell-editor--${cellSize}`,
+              {
+                [`${blockClass}__cell-editor--active`]: isEditing,
+              }
+            )}
+          />
+          <pre
+            aria-hidden
+            ref={cellEditorRulerRef}
+            className={`${blockClass}__cell-editor-ruler`}
+          />
+        </div>
       </div>
     );
   }

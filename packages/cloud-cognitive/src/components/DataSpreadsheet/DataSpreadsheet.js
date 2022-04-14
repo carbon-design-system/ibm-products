@@ -592,6 +592,24 @@ export let DataSpreadsheet = React.forwardRef(
       return;
     };
 
+    // Mouse down on active cell
+    const handleActiveCellMouseDown = () => {
+      if (
+        activeCellCoordinates?.row !== 'header' ||
+        activeCellCoordinates?.column !== 'header'
+      ) {
+        const tempMatcher = uuidv4();
+        setClickAndHoldActive(true);
+        removeCellSelections({ spreadsheetRef });
+        setSelectionAreas([
+          { point1: activeCellCoordinates, matcher: tempMatcher },
+        ]);
+        setCurrentMatcher(tempMatcher);
+        setSelectionAreaData([]);
+      }
+      return;
+    };
+
     // Go into edit mode if 'Enter' key is pressed on activeCellRef
     const handleActiveCellKeyDown = (event) => {
       const { key } = event;
@@ -797,6 +815,7 @@ export let DataSpreadsheet = React.forwardRef(
             defaultEmptyRowCount={defaultEmptyRowCount}
           />
           <button
+            onMouseDown={handleActiveCellMouseDown}
             onClick={handleActiveCellClick}
             onKeyDown={handleActiveCellKeyDown}
             onDoubleClick={handleActiveCellDoubleClick}
@@ -833,7 +852,7 @@ export let DataSpreadsheet = React.forwardRef(
             labelText=""
             aria-labelledby={
               activeCellCoordinates
-                ? `[data-row-index="${activeCellCoordinates?.row}"][data-column-index="${activeCellCoordinates?.column}"]`
+                ? `#${blockClass}__cell--${activeCellCoordinates?.row}--${activeCellCoordinates?.column}`
                 : null
             }
             className={cx(

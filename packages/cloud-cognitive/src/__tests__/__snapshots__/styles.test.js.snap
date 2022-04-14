@@ -45,7 +45,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--about-modal .bx--modal-content--overflow-indicator {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--cds-ui-01, #f4f4f4));
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--cds-ui-01, #f4f4f4));
 }
 
 .c4p--about-modal .c4p--about-modal__links-container {

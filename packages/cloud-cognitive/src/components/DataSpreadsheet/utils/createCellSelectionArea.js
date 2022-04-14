@@ -14,11 +14,27 @@ export const createCellSelectionArea = ({
   defaultColumn,
   selectionAreas,
   setSelectionAreas,
+  spreadsheetRef,
 }) => {
   const greatestRow = Math.max(area.point1.row, area.point2.row);
   const greatestColumn = Math.max(area.point1.column, area.point2.column);
   const lowestRowIndex = Math.min(area.point1.row, area.point2.row);
   const lowestColumnIndex = Math.min(area.point1.column, area.point2.column);
+  const activeCellElement = spreadsheetRef.current.querySelector(
+    `.${blockClass}__active-cell--highlight`
+  );
+  if (
+    greatestRow - lowestRowIndex > 0 ||
+    greatestColumn - lowestColumnIndex > 0
+  ) {
+    activeCellElement.classList.add(
+      `${blockClass}__active-cell--with-selection`
+    );
+  } else {
+    activeCellElement.classList.remove(
+      `${blockClass}__active-cell--with-selection`
+    );
+  }
   const point1Element =
     document.querySelector(
       `[data-row-index="${area.point1.row}"][data-column-index="${area.point1.column}"]`

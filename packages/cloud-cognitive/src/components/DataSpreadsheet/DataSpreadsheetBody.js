@@ -129,6 +129,7 @@ export const DataSpreadsheetBody = forwardRef(
               defaultColumn,
               selectionAreas,
               setSelectionAreas,
+              spreadsheetRef: ref,
             });
           }
           return;
@@ -140,6 +141,7 @@ export const DataSpreadsheetBody = forwardRef(
       defaultColumn,
       onSelectionAreaChange,
       setSelectionAreaData,
+      ref,
     ]);
 
     const populateSelectionAreaCellData = ({

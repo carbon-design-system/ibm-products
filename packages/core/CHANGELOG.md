@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.35.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.34.7...@carbon/ibm-cloud-cognitive-core@0.35.0) (2022-04-12)
+
+
+### Features
+
+* Datagrid component ([#1877](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1877)) ([f9dd8ce](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f9dd8ce0ab87cea39e91603fdb542091fa757cbe))
+
+
+
+
+
 ## [0.34.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.34.6...@carbon/ibm-cloud-cognitive-core@0.34.7) (2022-04-05)
 
 

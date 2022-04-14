@@ -69,7 +69,10 @@
     "apikey",
     "checkmark",
     "buildhome",
+    "columnheader",
+    "colindex",
     "data-testid",
+    "gridcell",
     "homescreen",
     "loglevel",
     "noreply",
@@ -80,6 +83,8 @@
     "rerender",
     "resizer",
     "responsivity",
+    "rowheader",
+    "rowindex",
     "semibold",
     "serializers",
     "stackable",
@@ -99,6 +104,8 @@
     "datagrid",
     "namor",
     "Prefs",
-    "listbox"
+    "listbox",
+    "overscroll",
+    "rowgroup"
   ]
 }

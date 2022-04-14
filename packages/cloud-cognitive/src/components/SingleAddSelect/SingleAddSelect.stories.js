@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import {
   getStoryTitle,
@@ -13,6 +13,7 @@ import {
 } from '../../global/js/utils/story-helper';
 import { SingleAddSelect } from '.';
 import mdx from './SingleAddSelect.mdx';
+import { Button } from 'carbon-components-react';
 // import { action } from '@storybook/addon-actions';
 
 export default {
@@ -27,9 +28,10 @@ export default {
 };
 
 const defaultProps = {
-  open: true,
-  title: 'Select category',
+  className: 'placeholder-class',
   description: 'select a category lorem ipsum',
+  globalSearchLabel: 'test input title',
+  globalSearchPlaceholder: 'Find categories',
   items: {
     entries: [
       {
@@ -49,37 +51,27 @@ const defaultProps = {
       },
     ],
   },
-  inputPlaceholder: 'Find categories',
   itemsLabel: 'Categories',
   noResultsTitle: 'No results',
   noResultsDescription: 'Try again',
   onCloseButtonText: 'Cancel',
-  onSubmitButtonText: 'Select',
-  textInputLabel: 'test input title',
   onSubmit: (selection) => console.log(selection),
+  onSubmitButtonText: 'Select',
   searchResultsLabel: 'Search results',
+  title: 'Select category',
 };
 
 const Template = (args) => {
-  return <SingleAddSelect {...args} />;
-};
-
-const CustomFilterTemplate = () => {
-  const props = {
-    ...defaultProps,
-    onSearchFilter: (item, searchTerm) =>
-      Object.keys(item).some((key) => item[key].includes(searchTerm)),
-  };
-  return <SingleAddSelect {...props} />;
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <SingleAddSelect {...args} open={open} onClose={() => setOpen(false)} />
+      <Button onClick={() => setOpen(true)}>Launch AddSelect</Button>
+    </>
+  );
 };
 
 export const Default = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-  },
-});
-
-export const WithCustomFilter = prepareStory(CustomFilterTemplate, {
   args: {
     ...defaultProps,
   },

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
@@ -100,6 +100,11 @@ export default {
     onClose: { control: { disable: true } },
     navigation: { control: { disable: true } },
     open: { control: { disable: true } },
+    portalTargetCustomDomNode: {
+      control: { type: 'boolean' },
+      description:
+        'Set portalTarget prop to specify dom node, defaults to document.body.',
+    },
   },
 };
 
@@ -159,7 +164,7 @@ const title = 'Title of the tearsheet';
 
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, ...args }) => {
+const Template = ({ actions, portalTargetCustomDomNode, ...args }) => {
   const [open, setOpen] = useState(false);
 
   const wiredActions =
@@ -178,27 +183,33 @@ const Template = ({ actions, ...args }) => {
       return action;
     });
 
+  const ref = useRef();
+
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
-      <Tearsheet
-        {...args}
-        actions={wiredActions}
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        {mainContent}
-      </Tearsheet>
+      <div ref={ref}>
+        <Tearsheet
+          {...args}
+          actions={wiredActions}
+          open={open}
+          onClose={() => setOpen(false)}
+          portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
+        >
+          {mainContent}
+        </Tearsheet>
+      </div>
     </>
   );
 };
 
 // eslint-disable-next-line react/prop-types
-const StackedTemplate = ({ actions, ...args }) => {
+const StackedTemplate = ({ actions, portalTargetCustomDomNode, ...args }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
+  const ref = useRef();
 
   const wiredActions1 = Array.prototype.map.call(actions, (action) => {
     if (action.label === 'Cancel') {
@@ -258,80 +269,85 @@ const StackedTemplate = ({ actions, ...args }) => {
         <Button onClick={() => setOpen2(!open2)}>Toggle tearsheet 2</Button>
         <Button onClick={() => setOpen3(!open3)}>Toggle tearsheet 3</Button>
       </ButtonSet>
-      <Tearsheet
-        {...args}
-        actions={wiredActions1}
-        headerActions={
-          <ButtonSet>
-            <Button
-              kind="primary"
-              size="sm"
-              style={{ width: 'initial' }}
-              onClick={() => setOpen2(true)}
-              disabled={open2}
-            >
-              Open tearsheet 2
-            </Button>
-          </ButtonSet>
-        }
-        title="Tearsheet 1"
-        open={open1}
-        onClose={() => setOpen1(false)}
-        selectorPrimaryFocus="#stacked-input-1"
-      >
-        <div className="tearsheet-stories__dummy-content-block">
-          Main content 1
-          <TextInput
-            id="stacked-input-1"
-            labelText="Enter an important value here"
-          />
-        </div>
-      </Tearsheet>
-      <Tearsheet
-        {...args}
-        actions={wiredActions2}
-        headerActions={
-          <ButtonSet>
-            <Button
-              kind="primary"
-              size="sm"
-              style={{ width: 'initial' }}
-              onClick={() => setOpen3(true)}
-              disabled={open3}
-            >
-              Open tearsheet 3
-            </Button>
-          </ButtonSet>
-        }
-        title="Tearsheet 2"
-        open={open2}
-        onClose={() => setOpen2(false)}
-        selectorPrimaryFocus="#stacked-input-2"
-      >
-        <div className="tearsheet-stories__dummy-content-block">
-          Main content 2
-          <TextInput
-            id="stacked-input-2"
-            labelText="Enter an important value here"
-          />
-        </div>
-      </Tearsheet>
-      <Tearsheet
-        {...args}
-        actions={wiredActions3}
-        title="Tearsheet 3"
-        open={open3}
-        onClose={() => setOpen3(false)}
-        selectorPrimaryFocus="#stacked-input-3"
-      >
-        <div className="tearsheet-stories__dummy-content-block">
-          Main content 3
-          <TextInput
-            id="stacked-input-3"
-            labelText="Enter an important value here"
-          />
-        </div>
-      </Tearsheet>
+      <div ref={ref}>
+        <Tearsheet
+          {...args}
+          actions={wiredActions1}
+          headerActions={
+            <ButtonSet>
+              <Button
+                kind="primary"
+                size="sm"
+                style={{ width: 'initial' }}
+                onClick={() => setOpen2(true)}
+                disabled={open2}
+              >
+                Open tearsheet 2
+              </Button>
+            </ButtonSet>
+          }
+          title="Tearsheet 1"
+          open={open1}
+          onClose={() => setOpen1(false)}
+          selectorPrimaryFocus="#stacked-input-1"
+          portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
+        >
+          <div className="tearsheet-stories__dummy-content-block">
+            Main content 1
+            <TextInput
+              id="stacked-input-1"
+              labelText="Enter an important value here"
+            />
+          </div>
+        </Tearsheet>
+        <Tearsheet
+          {...args}
+          actions={wiredActions2}
+          headerActions={
+            <ButtonSet>
+              <Button
+                kind="primary"
+                size="sm"
+                style={{ width: 'initial' }}
+                onClick={() => setOpen3(true)}
+                disabled={open3}
+              >
+                Open tearsheet 3
+              </Button>
+            </ButtonSet>
+          }
+          title="Tearsheet 2"
+          open={open2}
+          onClose={() => setOpen2(false)}
+          selectorPrimaryFocus="#stacked-input-2"
+          portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
+        >
+          <div className="tearsheet-stories__dummy-content-block">
+            Main content 2
+            <TextInput
+              id="stacked-input-2"
+              labelText="Enter an important value here"
+            />
+          </div>
+        </Tearsheet>
+        <Tearsheet
+          {...args}
+          actions={wiredActions3}
+          title="Tearsheet 3"
+          open={open3}
+          onClose={() => setOpen3(false)}
+          selectorPrimaryFocus="#stacked-input-3"
+          portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
+        >
+          <div className="tearsheet-stories__dummy-content-block">
+            Main content 3
+            <TextInput
+              id="stacked-input-3"
+              labelText="Enter an important value here"
+            />
+          </div>
+        </Tearsheet>
+      </div>
     </>
   );
 };

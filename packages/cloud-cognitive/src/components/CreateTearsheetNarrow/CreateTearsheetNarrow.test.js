@@ -44,6 +44,11 @@ const renderComponent = ({ ...rest }) =>
     </CreateTearsheetNarrow>
   );
 
+const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
+  'default-portal-target-body',
+  true
+);
+
 describe(componentName, () => {
   const { ResizeObserver } = window;
 
@@ -53,11 +58,13 @@ describe(componentName, () => {
       unobserve: jest.fn(),
       disconnect: jest.fn(),
     }));
+    pkg.feature['default-portal-target-body'] = false;
   });
 
   afterAll(() => {
     jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
+    pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
   it('renders a component CreateTearsheetNarrow', () => {

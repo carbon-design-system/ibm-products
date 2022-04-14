@@ -142,7 +142,7 @@ export default {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
     },
-    allTagsModalTarget_CustomDomNode: {
+    allTagsModalTargetCustomDomNode: {
       control: { type: 'boolean' },
       description: 'Optional DOM node: Modal target defaults to document.body',
     },
@@ -161,7 +161,7 @@ export default {
 };
 
 const Template = (argsIn) => {
-  const { containerWidth, allTagsModalTarget_ContainerNode, ...args } = {
+  const { containerWidth, allTagsModalTargetCustomDomNode, ...args } = {
     ...argsIn,
   };
   const ref = useRef();
@@ -170,7 +170,7 @@ const Template = (argsIn) => {
       <TagSet
         {...args}
         allTagsModalTarget={
-          allTagsModalTarget_ContainerNode ? ref.current : undefined
+          allTagsModalTargetCustomDomNode ? ref.current : undefined
         }
       />
     </div>

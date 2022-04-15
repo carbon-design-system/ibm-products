@@ -49,6 +49,7 @@ import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 import { removeCellSelections } from './utils/removeCellSelections';
 import { selectAllCells } from './utils/selectAllCells';
 import { handleEditSubmit } from './utils/handleEditSubmit';
+import { handleActiveCellInSelection } from './utils/handleActiveCellInSelection';
 // cspell:words rowcount colcount
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -100,6 +101,8 @@ export let DataSpreadsheet = React.forwardRef(
     const [currentMatcher, setCurrentMatcher] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [cellEditorValue, setCellEditorValue] = useState('');
+    const [activeCellInsideSelectionArea, setActiveCellInsideSelectionArea] =
+      useState(false);
     const previousState = usePreviousValue({
       activeCellCoordinates,
       isEditing,
@@ -287,6 +290,7 @@ export let DataSpreadsheet = React.forwardRef(
     const handleInitialArrowPress = useCallback(() => {
       // If activeCellCoordinates is null then we need to set an initial value
       // which will place the activeCell on the select all cell/button
+      setActiveCellInsideSelectionArea(false);
       if (!activeCellCoordinates) {
         setActiveCellCoordinates({
           column: 'header',
@@ -297,7 +301,7 @@ export let DataSpreadsheet = React.forwardRef(
     }, [activeCellCoordinates]);
 
     const updateActiveCellCoordinates = useCallback(
-      ({ coords, updatedValue }) => {
+      ({ coords, updatedValue, optOutOfSelectionAreaUpdate = false }) => {
         const newActiveCell = {
           ...coords,
           ...updatedValue,
@@ -305,10 +309,12 @@ export let DataSpreadsheet = React.forwardRef(
         setActiveCellCoordinates(newActiveCell);
         // Only run if the active cell is _not_ a header cell. This will add a point1 object
         // to selectionAreas every time the active cell changes, allowing us to create cell
-        // selections using keyboard
+        // selections using keyboard. Opting out of the selection area updates here means
+        // that the active cell is being moved within a selection area
         if (
           newActiveCell.row !== 'header' &&
-          newActiveCell.column !== 'header'
+          newActiveCell.column !== 'header' &&
+          !optOutOfSelectionAreaUpdate
         ) {
           const tempMatcher = uuidv4();
           setSelectionAreas([{ point1: newActiveCell, matcher: tempMatcher }]);
@@ -404,6 +410,17 @@ export let DataSpreadsheet = React.forwardRef(
           activeCellCoordinates.column === 'header'
         ) {
           switch (key) {
+            // Enter
+            case 'Enter': {
+              handleActiveCellInSelection({
+                activeCellInsideSelectionArea,
+                activeCellCoordinates,
+                activeCellRef,
+                selectionAreas,
+                updateActiveCellCoordinates,
+              });
+              break;
+            }
             // HOME
             case 'Home': {
               if (includesResourceKey(keysPressedList, usingMac)) {
@@ -525,6 +542,7 @@ export let DataSpreadsheet = React.forwardRef(
         }
       },
       [
+        activeCellInsideSelectionArea,
         updateActiveCellCoordinates,
         handleInitialArrowPress,
         activeCellCoordinates,
@@ -606,6 +624,7 @@ export let DataSpreadsheet = React.forwardRef(
         ]);
         setCurrentMatcher(tempMatcher);
         setSelectionAreaData([]);
+        setActiveCellInsideSelectionArea(false);
       }
       return;
     };
@@ -613,7 +632,7 @@ export let DataSpreadsheet = React.forwardRef(
     // Go into edit mode if 'Enter' key is pressed on activeCellRef
     const handleActiveCellKeyDown = (event) => {
       const { key } = event;
-      if (key === 'Enter') {
+      if (key === 'Enter' && !activeCellInsideSelectionArea) {
         if (
           activeCellCoordinates?.column !== 'header' &&
           activeCellCoordinates?.row !== 'header'
@@ -729,9 +748,7 @@ export let DataSpreadsheet = React.forwardRef(
               selectionAreaClone[indexOfItemToUpdate].point2 =
                 selectionAreaClone[indexOfItemToUpdate].point1;
               selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
-              activeCellRef.current.classList.remove(
-                `${blockClass}__active-cell--with-selection`
-              );
+              setActiveCellInsideSelectionArea(false);
               removeCellSelections({
                 matcher: currentMatcher,
                 spreadsheetRef,
@@ -813,6 +830,7 @@ export let DataSpreadsheet = React.forwardRef(
             id={id}
             columns={columns}
             defaultEmptyRowCount={defaultEmptyRowCount}
+            setActiveCellInsideSelectionArea={setActiveCellInsideSelectionArea}
           />
           <button
             onMouseDown={handleActiveCellMouseDown}
@@ -823,7 +841,11 @@ export let DataSpreadsheet = React.forwardRef(
             ref={activeCellRef}
             className={cx(
               `${blockClass}--interactive-cell-element`,
-              `${blockClass}__active-cell--highlight`
+              `${blockClass}__active-cell--highlight`,
+              {
+                [`${blockClass}__active-cell--with-selection`]:
+                  activeCellInsideSelectionArea,
+              }
             )}
             type="button"
           >

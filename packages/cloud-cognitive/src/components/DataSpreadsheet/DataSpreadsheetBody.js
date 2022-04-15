@@ -49,6 +49,7 @@ export const DataSpreadsheetBody = forwardRef(
       currentMatcher,
       setCurrentMatcher,
       onSelectionAreaChange,
+      setActiveCellInsideSelectionArea,
     },
     ref
   ) => {
@@ -124,12 +125,13 @@ export const DataSpreadsheetBody = forwardRef(
           }
           if (!area.areaCreated && area.point1 && area.point2 && area.matcher) {
             createCellSelectionArea({
+              ref,
               area,
               blockClass,
               defaultColumn,
               selectionAreas,
               setSelectionAreas,
-              spreadsheetRef: ref,
+              setActiveCellInsideSelectionArea,
             });
           }
           return;
@@ -142,6 +144,8 @@ export const DataSpreadsheetBody = forwardRef(
       onSelectionAreaChange,
       setSelectionAreaData,
       ref,
+      activeCellCoordinates,
+      setActiveCellInsideSelectionArea,
     ]);
 
     const populateSelectionAreaCellData = ({
@@ -232,6 +236,11 @@ export const DataSpreadsheetBody = forwardRef(
           // prevent multiple selections unless cmd key is held
           // meaning that selectionAreas should only have one item by default
           if (isHoldingCommandKey) {
+            const activeCellElement = ref.current.querySelector(
+              `.${blockClass}__active-cell--highlight`
+            );
+            activeCellElement.setAttribute('data-selection-id', tempMatcher);
+            setActiveCellInsideSelectionArea(true);
             setActiveCellCoordinates(activeCoordinates);
             setCurrentMatcher(tempMatcher);
             setSelectionAreas((prev) => [
@@ -262,6 +271,7 @@ export const DataSpreadsheetBody = forwardRef(
               setSelectionAreas(selectionAreaClone);
             }
           } else {
+            setActiveCellInsideSelectionArea(false);
             setActiveCellCoordinates(activeCoordinates);
             // remove all previous cell selections
             removeCellSelections({ spreadsheetRef: ref });
@@ -284,6 +294,7 @@ export const DataSpreadsheetBody = forwardRef(
         setCurrentMatcher,
         ref,
         setSelectionAreaData,
+        setActiveCellInsideSelectionArea,
       ]
     );
 
@@ -584,6 +595,11 @@ DataSpreadsheetBody.propTypes = {
    * Setter fn for activeCellCoordinates state value
    */
   setActiveCellCoordinates: PropTypes.func,
+
+  /**
+   * Setter fn for active cell inside of selection area
+   */
+  setActiveCellInsideSelectionArea: PropTypes.func,
 
   /**
    * Setter fn for clickAndHold state value

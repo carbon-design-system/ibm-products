@@ -9,31 +9,27 @@ import { px } from '@carbon/layout';
 import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
 
 export const createCellSelectionArea = ({
+  ref,
   area,
   blockClass,
   defaultColumn,
   selectionAreas,
   setSelectionAreas,
-  spreadsheetRef,
+  setActiveCellInsideSelectionArea,
 }) => {
   const greatestRow = Math.max(area.point1.row, area.point2.row);
   const greatestColumn = Math.max(area.point1.column, area.point2.column);
   const lowestRowIndex = Math.min(area.point1.row, area.point2.row);
   const lowestColumnIndex = Math.min(area.point1.column, area.point2.column);
-  const activeCellElement = spreadsheetRef.current.querySelector(
-    `.${blockClass}__active-cell--highlight`
-  );
   if (
     greatestRow - lowestRowIndex > 0 ||
     greatestColumn - lowestColumnIndex > 0
   ) {
-    activeCellElement.classList.add(
-      `${blockClass}__active-cell--with-selection`
+    setActiveCellInsideSelectionArea(true);
+    const activeCellElement = ref.current.querySelector(
+      `.${blockClass}__active-cell--highlight`
     );
-  } else {
-    activeCellElement.classList.remove(
-      `${blockClass}__active-cell--with-selection`
-    );
+    activeCellElement.setAttribute('data-selection-id', area.matcher);
   }
   const point1Element =
     document.querySelector(

@@ -49,7 +49,8 @@ import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 import { removeCellSelections } from './utils/removeCellSelections';
 import { selectAllCells } from './utils/selectAllCells';
 import { handleEditSubmit } from './utils/handleEditSubmit';
-import { handleActiveCellInSelection } from './utils/handleActiveCellInSelection';
+import { handleActiveCellInSelectionEnter } from './utils/handleActiveCellInSelectionEnter';
+import { handleActiveCellInSelectionTab } from './utils/handleActiveCellInSelectionTab';
 // cspell:words rowcount colcount
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -301,7 +302,11 @@ export let DataSpreadsheet = React.forwardRef(
     }, [activeCellCoordinates]);
 
     const updateActiveCellCoordinates = useCallback(
-      ({ coords, updatedValue, optOutOfSelectionAreaUpdate = false }) => {
+      ({
+        coords = { ...activeCellCoordinates },
+        updatedValue,
+        optOutOfSelectionAreaUpdate = false,
+      }) => {
         const newActiveCell = {
           ...coords,
           ...updatedValue,
@@ -321,7 +326,7 @@ export let DataSpreadsheet = React.forwardRef(
           setCurrentMatcher(tempMatcher);
         }
       },
-      []
+      [activeCellCoordinates]
     );
 
     const handleHomeEndKey = useCallback(
@@ -412,7 +417,7 @@ export let DataSpreadsheet = React.forwardRef(
           switch (key) {
             // Enter
             case 'Enter': {
-              handleActiveCellInSelection({
+              handleActiveCellInSelectionEnter({
                 activeCellInsideSelectionArea,
                 activeCellCoordinates,
                 activeCellRef,
@@ -438,6 +443,16 @@ export let DataSpreadsheet = React.forwardRef(
             }
             // Tab
             case 'Tab': {
+              if (activeCellInsideSelectionArea) {
+                event.preventDefault();
+                return handleActiveCellInSelectionTab({
+                  activeCellInsideSelectionArea,
+                  activeCellCoordinates,
+                  activeCellRef,
+                  selectionAreas,
+                  updateActiveCellCoordinates,
+                });
+              }
               setSelectionAreas([]);
               removeActiveCell();
               removeCellEditor();

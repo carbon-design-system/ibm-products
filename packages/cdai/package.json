@@ -49,7 +49,7 @@
     "focus-trap-react": "^8.9.2",
     "pluralize": "^8.0.0",
     "react-highlighter": "^0.4.3",
-    "react-select": "^5.2.2",
+    "react-select": "^5.3.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
@@ -64,9 +64,9 @@
     "jest": "^27.5.1",
     "jest-config-ibm-cloud-cognitive": "^0.23.14",
     "node-sass": "^7.0.1",
-    "npm-check-updates": "^12.5.8",
+    "npm-check-updates": "^12.5.9",
     "rimraf": "^3.0.2",
-    "sinon": "^13.0.1"
+    "sinon": "^13.0.2"
   },
   "babel": {
     "presets": [

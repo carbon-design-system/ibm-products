@@ -31,11 +31,11 @@
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.1",
     "inquirer": "^8.2.2",
-    "npm-check-updates": "^12.5.8",
+    "npm-check-updates": "^12.5.9",
     "prettier": "^2.6.2",
     "prettier-config-carbon": "^0.6.0",
     "remark": "^14.0.2",
-    "semver": "^7.3.6",
-    "yargs": "^17.4.0"
+    "semver": "^7.3.7",
+    "yargs": "^17.4.1"
   }
 }

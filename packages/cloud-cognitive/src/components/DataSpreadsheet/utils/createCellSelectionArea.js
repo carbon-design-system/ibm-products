@@ -7,6 +7,7 @@
 
 import { px } from '@carbon/layout';
 import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
+import { getSelectionAreaPoints } from './getSelectionAreaPoints';
 
 export const createCellSelectionArea = ({
   ref,
@@ -17,13 +18,15 @@ export const createCellSelectionArea = ({
   setSelectionAreas,
   setActiveCellInsideSelectionArea,
 }) => {
-  const greatestRow = Math.max(area.point1.row, area.point2.row);
-  const greatestColumn = Math.max(area.point1.column, area.point2.column);
-  const lowestRowIndex = Math.min(area.point1.row, area.point2.row);
-  const lowestColumnIndex = Math.min(area.point1.column, area.point2.column);
+  const {
+    lowestColumnIndex,
+    lowestRowIndex,
+    greatestColumnIndex,
+    greatestRowIndex,
+  } = getSelectionAreaPoints(area);
   if (
-    greatestRow - lowestRowIndex > 0 ||
-    greatestColumn - lowestColumnIndex > 0
+    greatestRowIndex - lowestRowIndex > 0 ||
+    greatestColumnIndex - lowestColumnIndex > 0
   ) {
     setActiveCellInsideSelectionArea(true);
     const activeCellElement = ref.current.querySelector(
@@ -38,9 +41,9 @@ export const createCellSelectionArea = ({
   const selectionAreaCellWidth = point1Element.offsetWidth;
   const selectionAreaCellHeight = point1Element.offsetHeight;
   const selectionAreaTotalWidth =
-    selectionAreaCellWidth * (greatestColumn - lowestColumnIndex + 1);
+    selectionAreaCellWidth * (greatestColumnIndex - lowestColumnIndex + 1);
   const selectionAreaTotalHeight =
-    selectionAreaCellHeight * (greatestRow - lowestRowIndex + 1);
+    selectionAreaCellHeight * (greatestRowIndex - lowestRowIndex + 1);
   const bodyContainer = document.querySelector(
     `.${blockClass}__list--container`
   ).firstElementChild;

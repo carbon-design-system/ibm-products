@@ -49,6 +49,7 @@ export const DataSpreadsheetBody = forwardRef(
       currentMatcher,
       setCurrentMatcher,
       onSelectionAreaChange,
+      setActiveCellInsideSelectionArea,
     },
     ref
   ) => {
@@ -124,11 +125,13 @@ export const DataSpreadsheetBody = forwardRef(
           }
           if (!area.areaCreated && area.point1 && area.point2 && area.matcher) {
             createCellSelectionArea({
+              ref,
               area,
               blockClass,
               defaultColumn,
               selectionAreas,
               setSelectionAreas,
+              setActiveCellInsideSelectionArea,
             });
           }
           return;
@@ -140,6 +143,9 @@ export const DataSpreadsheetBody = forwardRef(
       defaultColumn,
       onSelectionAreaChange,
       setSelectionAreaData,
+      ref,
+      activeCellCoordinates,
+      setActiveCellInsideSelectionArea,
     ]);
 
     const populateSelectionAreaCellData = ({
@@ -230,6 +236,11 @@ export const DataSpreadsheetBody = forwardRef(
           // prevent multiple selections unless cmd key is held
           // meaning that selectionAreas should only have one item by default
           if (isHoldingCommandKey) {
+            const activeCellElement = ref.current.querySelector(
+              `.${blockClass}__active-cell--highlight`
+            );
+            activeCellElement.setAttribute('data-selection-id', tempMatcher);
+            setActiveCellInsideSelectionArea(true);
             setActiveCellCoordinates(activeCoordinates);
             setCurrentMatcher(tempMatcher);
             setSelectionAreas((prev) => [
@@ -260,6 +271,7 @@ export const DataSpreadsheetBody = forwardRef(
               setSelectionAreas(selectionAreaClone);
             }
           } else {
+            setActiveCellInsideSelectionArea(false);
             setActiveCellCoordinates(activeCoordinates);
             // remove all previous cell selections
             removeCellSelections({ spreadsheetRef: ref });
@@ -282,6 +294,7 @@ export const DataSpreadsheetBody = forwardRef(
         setCurrentMatcher,
         ref,
         setSelectionAreaData,
+        setActiveCellInsideSelectionArea,
       ]
     );
 
@@ -391,6 +404,7 @@ export const DataSpreadsheetBody = forwardRef(
               {/* ROW HEADER BUTTON */}
               <div role="rowheader">
                 <button
+                  id={`${blockClass}__cell--${index}--header`}
                   tabIndex={-1}
                   data-row-index={index}
                   data-column-index="header"
@@ -426,6 +440,7 @@ export const DataSpreadsheetBody = forwardRef(
                   }}
                 >
                   <button
+                    id={`${blockClass}__cell--${cell.row.index}--${index}`}
                     tabIndex={-1}
                     data-row-index={cell.row.index}
                     data-column-index={index}
@@ -580,6 +595,11 @@ DataSpreadsheetBody.propTypes = {
    * Setter fn for activeCellCoordinates state value
    */
   setActiveCellCoordinates: PropTypes.func,
+
+  /**
+   * Setter fn for active cell inside of selection area
+   */
+  setActiveCellInsideSelectionArea: PropTypes.func,
 
   /**
    * Setter fn for clickAndHold state value

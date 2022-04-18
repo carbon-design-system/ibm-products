@@ -105,6 +105,7 @@ export const DataSpreadsheetHeader = forwardRef(
               }}
             >
               <button
+                id={`${blockClass}__cell--header--header`}
                 data-row-index="header"
                 data-column-index="header"
                 type="button"
@@ -133,6 +134,7 @@ export const DataSpreadsheetHeader = forwardRef(
                 {...column.getHeaderProps()}
               >
                 <button
+                  id={`${blockClass}__cell--header--${index}`}
                   data-row-index="header"
                   data-column-index={index}
                   tabIndex={-1}

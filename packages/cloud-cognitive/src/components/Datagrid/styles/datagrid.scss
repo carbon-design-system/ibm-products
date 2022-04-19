@@ -316,3 +316,11 @@
   width: 100%;
   flex-direction: column;
 }
+
+.#{$block-class}__carbon-row-expanded {
+  // Border applied to nested rows only on open chevron hover
+  &.#{$block-class}__carbon-row-expanded-hover-active
+    ~ .#{$block-class}__carbon-nested-row {
+    border-left: 1px solid $interactive-01;
+  }
+}

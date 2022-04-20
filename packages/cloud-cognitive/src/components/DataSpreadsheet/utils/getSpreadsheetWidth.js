@@ -20,7 +20,7 @@ export const getSpreadsheetWidth = ({
     if (type === 'header') {
       return px(
         parseInt(headerGroup.getHeaderGroupProps().style.width) +
-          scrollBarSizeValue
+          additionalWidth
       );
     }
     if (type !== 'header') {

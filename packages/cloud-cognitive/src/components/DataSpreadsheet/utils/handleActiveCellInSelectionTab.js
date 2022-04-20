@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const handleActiveCellInSelection = ({
+import { getSelectionAreaPoints } from './getSelectionAreaPoints';
+
+export const handleActiveCellInSelectionTab = ({
   activeCellInsideSelectionArea,
   activeCellCoordinates,
   activeCellRef,
@@ -22,48 +24,35 @@ export const handleActiveCellInSelection = ({
   );
   const selectionAreaToNavigate =
     selectionAreas[activeCellIndexInSelectionAreas];
-  const greatestRowIndex = Math.max(
-    selectionAreaToNavigate.point1.row,
-    selectionAreaToNavigate.point2.row
-  );
-  const greatestColumnIndex = Math.max(
-    selectionAreaToNavigate.point1.column,
-    selectionAreaToNavigate.point2.column
-  );
-  const lowestRowIndex = Math.min(
-    selectionAreaToNavigate.point1.row,
-    selectionAreaToNavigate.point2.row
-  );
-  const lowestColumnIndex = Math.min(
-    selectionAreaToNavigate.point1.column,
-    selectionAreaToNavigate.point2.column
-  );
-  // Move active cell down one row if possible
-  const coordinatesClone = { ...activeCellCoordinates };
-  if (activeCellCoordinates?.row < greatestRowIndex) {
+  const {
+    lowestColumnIndex,
+    lowestRowIndex,
+    greatestColumnIndex,
+    greatestRowIndex,
+  } = getSelectionAreaPoints(selectionAreaToNavigate);
+  // Move active cell to next column in selection area
+  if (activeCellCoordinates?.column < greatestColumnIndex) {
     updateActiveCellCoordinates({
-      coords: coordinatesClone,
-      updatedValue: { row: coordinatesClone?.row + 1 },
+      updatedValue: { column: activeCellCoordinates?.column + 1 },
       optOutOfSelectionAreaUpdate: true,
     });
   }
-  // Move active cell to next column of selection area if it exists
+  // Move active cell to next row of selection area if it exists
   // If not, find the next selection area and update active cell to
   // be the first cell in that selection
-  if (activeCellCoordinates?.row === greatestRowIndex) {
-    if (activeCellCoordinates?.column < greatestColumnIndex) {
+  if (activeCellCoordinates?.column === greatestColumnIndex) {
+    if (activeCellCoordinates?.row < greatestRowIndex) {
       updateActiveCellCoordinates({
-        coords: coordinatesClone,
         updatedValue: {
-          column: coordinatesClone?.column + 1,
-          row: lowestRowIndex,
+          column: lowestColumnIndex,
+          row: activeCellCoordinates?.row + 1,
         },
         optOutOfSelectionAreaUpdate: true,
       });
     }
-    // Move to next selection area if there is one, or back to
+    // Move to next selection area if there is on, or back to
     // the beginning of the current selection
-    if (activeCellCoordinates?.column === greatestColumnIndex) {
+    if (activeCellCoordinates?.row === greatestRowIndex) {
       if (selectionAreas.length > 1) {
         if (selectionAreas[activeCellIndexInSelectionAreas + 1]) {
           // Update activeCellRef data-selection-id attribute to the matcher of the next selection area
@@ -73,19 +62,12 @@ export const handleActiveCellInSelection = ({
           );
           const nextSelectionArea =
             selectionAreas[activeCellIndexInSelectionAreas + 1];
-          const nextSelectionLowestRowIndex = Math.min(
-            nextSelectionArea.point1.row,
-            nextSelectionArea.point2.row
-          );
-          const nextSelectionLowestColumnIndex = Math.min(
-            nextSelectionArea.point1.column,
-            nextSelectionArea.point2.column
-          );
+          const { lowestColumnIndex, lowestRowIndex } =
+            getSelectionAreaPoints(nextSelectionArea);
           updateActiveCellCoordinates({
-            coords: coordinatesClone,
             updatedValue: {
-              column: nextSelectionLowestColumnIndex,
-              row: nextSelectionLowestRowIndex,
+              column: lowestColumnIndex,
+              row: lowestRowIndex,
             },
             optOutOfSelectionAreaUpdate: true,
           });
@@ -98,19 +80,12 @@ export const handleActiveCellInSelection = ({
             selectionAreas[0].matcher
           );
           const firstSelectionArea = selectionAreas[0];
-          const firstSelectionLowestRowIndex = Math.min(
-            firstSelectionArea.point1.row,
-            firstSelectionArea.point2.row
-          );
-          const firstSelectionLowestColumnIndex = Math.min(
-            firstSelectionArea.point1.column,
-            firstSelectionArea.point2.column
-          );
+          const { lowestColumnIndex, lowestRowIndex } =
+            getSelectionAreaPoints(firstSelectionArea);
           updateActiveCellCoordinates({
-            coords: coordinatesClone,
             updatedValue: {
-              column: firstSelectionLowestColumnIndex,
-              row: firstSelectionLowestRowIndex,
+              column: lowestColumnIndex,
+              row: lowestRowIndex,
             },
             optOutOfSelectionAreaUpdate: true,
           });
@@ -119,7 +94,6 @@ export const handleActiveCellInSelection = ({
       // Only one selection area, go back to first cell in the selection
       if (selectionAreas.length === 1) {
         return updateActiveCellCoordinates({
-          coords: coordinatesClone,
           updatedValue: {
             column: lowestColumnIndex,
             row: lowestRowIndex,

@@ -26,6 +26,22 @@ const DatagridRow = (datagridState) => {
       })}
       {...row.getRowProps()}
       key={row.id}
+      onMouseEnter={(event) => {
+        const hoverRow = event.target.closest(
+          `.${blockClass}__carbon-row-expanded`
+        );
+        hoverRow?.classList.add(
+          `${blockClass}__carbon-row-expanded-hover-active`
+        );
+      }}
+      onMouseLeave={(event) => {
+        const hoverRow = event.target.closest(
+          `.${blockClass}__carbon-row-expanded`
+        );
+        hoverRow?.classList.remove(
+          `${blockClass}__carbon-row-expanded-hover-active`
+        );
+      }}
     >
       {row.cells.map((cell) => {
         const cellProps = cell.getCellProps();

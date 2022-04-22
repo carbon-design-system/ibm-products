@@ -9,6 +9,7 @@
 import React from 'react';
 import { DataTable, SkeletonText } from 'carbon-components-react';
 import { selectionColumnId } from '../common-column-ids';
+import cx from 'classnames';
 import { pkg } from '../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -20,9 +21,27 @@ const DatagridRow = (datagridState) => {
   const { row } = datagridState;
   return (
     <TableRow
-      className={`${blockClass}__carbon-row`}
+      className={cx(`${blockClass}__carbon-row`, {
+        [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
+      })}
       {...row.getRowProps()}
       key={row.id}
+      onMouseEnter={(event) => {
+        const hoverRow = event.target.closest(
+          `.${blockClass}__carbon-row-expanded`
+        );
+        hoverRow?.classList.add(
+          `${blockClass}__carbon-row-expanded-hover-active`
+        );
+      }}
+      onMouseLeave={(event) => {
+        const hoverRow = event.target.closest(
+          `.${blockClass}__carbon-row-expanded`
+        );
+        hoverRow?.classList.remove(
+          `${blockClass}__carbon-row-expanded-hover-active`
+        );
+      }}
     >
       {row.cells.map((cell) => {
         const cellProps = cell.getCellProps();

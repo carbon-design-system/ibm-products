@@ -81,7 +81,13 @@
       }
     }
     .#{$block-class}__th--select-all {
-      min-width: calc(#{$spacing-10} - #{$spacing-02});
+      width: $spacing-10;
+    }
+    .#{$block-class}__td-th--cell-container,
+    .#{$block-class}__select-all-cell-container {
+      position: sticky;
+      z-index: 4;
+      left: 0;
     }
     .#{$block-class}__td-th.#{$block-class}__td {
       @include carbon--font-weight('semibold');

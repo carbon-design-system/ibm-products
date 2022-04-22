@@ -72,7 +72,9 @@ module.exports = {
     'templates',
     '/umd/',
   ],
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
+  transformIgnorePatterns: [
+    '[/\\\\]node_modules[/\\\\](?!(react-dnd|dnd-core|react-dnd-html5-backend|@react-dnd)/).+\\.(js|jsx)$',
+  ],
   watchPathIgnorePatterns: [
     '/cjs/',
     '/dist/',

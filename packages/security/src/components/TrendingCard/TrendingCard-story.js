@@ -9,7 +9,7 @@ import { components, getDocsParameters } from '../../../.storybook';
 import { TrendingCard } from '../..';
 
 export default {
-  title: components(TrendingCard.name),
+  title: components(`${TrendingCard.name}#legacy`),
   component: TrendingCard,
   args: {
     title: 'Title',

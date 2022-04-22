@@ -9,7 +9,7 @@ import React, { Fragment } from 'react';
 
 import { getComponentNamespace } from '../../globals/namespace';
 
-const namespace = getComponentNamespace('trending-card');
+const namespace = getComponentNamespace('trending-card#legacy');
 
 /**
  * Trending cards provide summary information of trending items with the ability to navigate to the details.

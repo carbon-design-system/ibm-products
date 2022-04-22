@@ -62,7 +62,7 @@ const { statusIndicator: statusIndicatorProps, statusSteps: statusStepsProps } =
 
 const { basic, retry: retryProps } = statusIndicatorProps;
 
-storiesOf(patterns('StatusIndicator'), module)
+storiesOf(patterns('StatusIndicator#legacy'), module)
   .add('Default', () => (
     <StatusIndicator {...basic()}>
       {statusStepsProps().map(({ key, ...props }) => (

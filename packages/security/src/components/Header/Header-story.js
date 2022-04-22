@@ -27,7 +27,7 @@ const headerProps = {
   links,
 };
 
-disableCenteredStories(storiesOf(patterns('Header'), module))
+disableCenteredStories(storiesOf(patterns('Header#legacy'), module))
   .add('default', () => <Header {...headerProps} />, {
     info: {
       text: `

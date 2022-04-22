@@ -19,7 +19,7 @@ const profileImageProps = () => ({
   large: boolean('Large (large)', large),
 });
 
-storiesOf(components('ProfileImage'), module).add('default', () => (
+storiesOf(components('ProfileImage#legacy'), module).add('default', () => (
   <ProfileImage
     {...profileImageProps()}
     profile={object('Profile (profile)', profile)}

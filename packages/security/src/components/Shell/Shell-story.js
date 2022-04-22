@@ -30,7 +30,7 @@ const shellProps = {
   toolbar,
 };
 
-disableCenteredStories(storiesOf(patterns('Shell'), module))
+disableCenteredStories(storiesOf(patterns('Shell#legacy'), module))
   .add('default', () => <Shell {...shellProps} />, {
     info: {
       text: `

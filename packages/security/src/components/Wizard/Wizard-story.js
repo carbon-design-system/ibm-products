@@ -237,7 +237,7 @@ const markdown = (useDefault = true) =>
   ~~~
   `;
 
-storiesOf(patterns('Wizard'), module)
+storiesOf(patterns('Wizard#legacy'), module)
   .add(
     'default',
     () => {

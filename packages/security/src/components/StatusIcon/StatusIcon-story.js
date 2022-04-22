@@ -22,7 +22,7 @@ const storyProps = () => ({
 
 const status = STATUS[0];
 
-storiesOf(components('StatusIcon'), module)
+storiesOf(components('StatusIcon#legacy'), module)
   .add('Default', () => <StatusIcon {...storyProps()} />)
   .add('Status', () => (
     <StatusIcon

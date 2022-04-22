@@ -32,7 +32,7 @@ import { lorem } from '../_mocks_';
 import props from './SummaryCardContainer/_mocks_';
 import summaryCardSelectProps from './SummaryCardSelect/_mocks_';
 
-storiesOf(patterns('SummaryCard'), module)
+storiesOf(patterns('SummaryCard#legacy'), module)
   .addDecorator((story) => (
     <div className={`${carbonPrefix}--grid ${carbonPrefix}--grid--full-width`}>
       <div className={`${carbonPrefix}--row`}>{story()}</div>

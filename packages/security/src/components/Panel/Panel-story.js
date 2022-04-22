@@ -42,7 +42,7 @@ const panelContent =
 
 const footerLabel = 'Custom footer';
 
-storiesOf(patterns('Panel'), module).add(
+storiesOf(patterns('Panel#legacy'), module).add(
   'Default',
   () => (
     <Fragment>

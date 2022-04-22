@@ -13,7 +13,7 @@ import { Nav, NavItem, NavList } from '../..';
 import { commerce } from 'faker';
 const { name } = Nav;
 
-storiesOf(components(name), module)
+storiesOf(components('Nav#legacy'), module)
   .add(
     'Default',
     () => (

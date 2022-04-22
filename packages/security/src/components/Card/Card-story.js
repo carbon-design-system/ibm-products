@@ -42,7 +42,7 @@ const props = () => ({
 
 const searchLabelText = 'Search';
 
-storiesOf(components('Card'), module)
+storiesOf(components('Card#legacy'), module)
   .add('Default', () => <Card />)
   .add('Content', () => (
     <Card

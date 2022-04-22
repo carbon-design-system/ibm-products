@@ -63,7 +63,7 @@ const content = (
   </p>
 );
 
-disableCenteredStories(storiesOf(patterns('PanelV2'), module))
+disableCenteredStories(storiesOf(patterns('PanelV2#legacy'), module))
   .addParameters({
     info: {
       // Reposition info button so that panel footer isn't covered:

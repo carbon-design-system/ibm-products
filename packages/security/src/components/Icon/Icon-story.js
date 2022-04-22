@@ -20,7 +20,7 @@ const iconProps = {
   style: { fill: theme.icon01, margin: miniUnits(1) },
 };
 
-storiesOf(components('Icon'), module).add(
+storiesOf(components('Icon#legacy'), module).add(
   'Default',
   () => (
     <>

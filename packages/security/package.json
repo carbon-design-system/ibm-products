@@ -73,7 +73,7 @@
     "numeral": "^2.0.6",
     "prop-types": "^15.8.1",
     "react-transition-group": "^4.4.2",
-    "throttle-debounce": "^4.0.0"
+    "throttle-debounce": "^4.0.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-export-default-from": "^7.16.7",

@@ -123,7 +123,7 @@ describe('DataDecorator', () => {
     expect(onCloseMock).toHaveBeenCalledTimes(1);
   });
 
-  test('should traverse between data decorator and open panel in tab order', () => {
+  test.skip('should traverse between data decorator and open panel in tab order', () => {
     const onCloseMock = jest.fn();
     const { getByLabelText, getByText } = render(
       <DataDecorator

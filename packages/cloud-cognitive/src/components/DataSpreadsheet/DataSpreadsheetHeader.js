@@ -8,12 +8,12 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { px } from '@carbon/layout';
 import { pkg } from '../../settings';
 import { usePreviousValue } from '../../global/js/hooks';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 import { selectAllCells } from './utils/selectAllCells';
+import { getSpreadsheetWidth } from './utils/getSpreadsheetWidth';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -32,6 +32,7 @@ export const DataSpreadsheetHeader = forwardRef(
       setSelectionAreas,
       setSelectionAreaData,
       rows,
+      totalVisibleColumns,
       updateActiveCellCoordinates,
     },
     ref
@@ -89,18 +90,23 @@ export const DataSpreadsheetHeader = forwardRef(
             {...headerGroup.getHeaderGroupProps()}
             style={{
               ...headerGroup.getHeaderGroupProps().style,
-              width: px(
-                parseInt(headerGroup.getHeaderGroupProps().style.width) +
-                  scrollBarSizeValue
-              ),
+              width: getSpreadsheetWidth({
+                type: 'header',
+                headerGroup,
+                scrollBarSizeValue,
+                totalVisibleColumns,
+                defaultColumn,
+              }),
+              overflow: 'hidden',
             }}
             className={`${blockClass}__tr`}
           >
             {/* SELECT ALL BUTTON */}
             <div
               role="columnheader"
+              className={`${blockClass}__select-all-cell-container`}
               style={{
-                width: defaultColumn?.rowHeaderWidth - 4,
+                width: defaultColumn?.rowHeaderWidth,
                 height: defaultColumn?.rowHeight,
               }}
             >
@@ -141,6 +147,7 @@ export const DataSpreadsheetHeader = forwardRef(
                   onClick={handleColumnHeaderClick(index)}
                   style={{
                     height: defaultColumn?.rowHeight,
+                    width: defaultColumn?.width,
                   }}
                   className={cx(
                     `${blockClass}__th`,
@@ -231,6 +238,12 @@ DataSpreadsheetHeader.propTypes = {
    * Setter fn for selectionAreas value
    */
   setSelectionAreas: PropTypes.func,
+
+  /**
+   * The total number of columns to be initially visible, additional columns will be rendered and
+   * visible via horizontal scrollbar
+   */
+  totalVisibleColumns: PropTypes.number,
 
   /**
    * Function used to update the active cell coordinates

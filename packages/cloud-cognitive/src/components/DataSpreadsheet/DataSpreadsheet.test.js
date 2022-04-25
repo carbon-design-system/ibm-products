@@ -23,7 +23,7 @@ const componentName = DataSpreadsheet.displayName;
 // values to use
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
-const data = generateData(16);
+const data = generateData({ rows: 16 });
 const defaultProps = {
   columns: [
     {

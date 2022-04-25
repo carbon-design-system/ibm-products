@@ -84,6 +84,7 @@ export let DataSpreadsheet = React.forwardRef(
       id,
       onActiveCellChange = defaults.onActiveCellChange,
       onSelectionAreaChange = defaults.onSelectionAreaChange,
+      totalVisibleColumns,
 
       // Collect any other property values passed in.
       ...rest
@@ -814,6 +815,7 @@ export let DataSpreadsheet = React.forwardRef(
             setSelectionAreas={setSelectionAreas}
             setCurrentMatcher={setCurrentMatcher}
             setSelectionAreaData={setSelectionAreaData}
+            totalVisibleColumns={totalVisibleColumns}
             updateActiveCellCoordinates={updateActiveCellCoordinates}
           />
 
@@ -846,6 +848,7 @@ export let DataSpreadsheet = React.forwardRef(
             columns={columns}
             defaultEmptyRowCount={defaultEmptyRowCount}
             setActiveCellInsideSelectionArea={setActiveCellInsideSelectionArea}
+            totalVisibleColumns={totalVisibleColumns}
           />
           <button
             onMouseDown={handleActiveCellMouseDown}
@@ -973,6 +976,12 @@ DataSpreadsheet.propTypes = {
    * The event handler that is called when the selection area values change
    */
   onSelectionAreaChange: PropTypes.func,
+
+  /**
+   * The total number of columns to be initially visible, additional columns will be rendered and
+   * visible via horizontal scrollbar
+   */
+  totalVisibleColumns: PropTypes.number,
 
   /* TODO: add types and DocGen for all props. */
 };

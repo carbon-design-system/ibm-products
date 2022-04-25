@@ -53,23 +53,34 @@ const range = (len) => {
   return arr;
 };
 
-const newPet = () => {
-  return {
+const newPet = (extraColumns) => {
+  const extraDataProps = extraColumns && {
+    ownerName: petNames[Math.floor(Math.random() * petNames.length)],
+    weight: Math.floor(Math.random() * 40),
+  };
+  const defaultPet = {
     petType: pets[Math.floor(Math.random() * pets.length)],
     firstName: petNames[Math.floor(Math.random() * petNames.length)],
     age: Math.floor(Math.random() * 30),
     visits: Math.floor(Math.random() * 40),
     health: Math.floor(Math.random() * 100),
   };
+  if (extraColumns) {
+    return {
+      ...defaultPet,
+      ...extraDataProps,
+    };
+  }
+  return defaultPet;
 };
 
-export const generateData = (...lens) => {
+export const generateData = ({ rows, extraColumns }) => {
   const makeDataLevel = (depth = 0) => {
+    const lens = [rows];
     const len = lens[depth];
     return range(len).map(() => {
       return {
-        ...newPet(),
-        subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
+        ...newPet(extraColumns),
       };
     });
   };

@@ -230,13 +230,10 @@
     }
 
     &-applied {
+      display: flex;
+      align-items: center;
       padding: $spacing-03;
       background: $ui-01;
-    }
-
-    &-clear {
-      color: $link-primary;
-      cursor: pointer;
     }
   }
 

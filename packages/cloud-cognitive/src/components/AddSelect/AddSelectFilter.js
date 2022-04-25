@@ -155,15 +155,9 @@ export let AddSelectFilter = ({
               {`${filterType}: ${appliedFilters[filterType]}`}
             </Tag>
           ))}
-          <span
-            className={`${blockClass}-clear`}
-            onClick={clearFilters}
-            onKeyDown={clearFilters}
-            role="button"
-            tabIndex={0}
-          >
+          <Button kind="ghost" size="sm" onClick={clearFilters}>
             {clearFiltersText}
-          </span>
+          </Button>
         </div>
       )}
     </div>

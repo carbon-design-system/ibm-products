@@ -21,6 +21,8 @@ import { patterns } from '../../../.storybook';
 import { StatusStep, StatusIndicator } from '../..';
 import { STATUS } from './StatusStep/StatusStep';
 
+import { InlineNotification, NotificationActionButton } from '../../..';
+
 import props from './_mocks_';
 
 const { statusIndicator, statusSteps } = props;
@@ -63,6 +65,27 @@ const { statusIndicator: statusIndicatorProps, statusSteps: statusStepsProps } =
 const { basic, retry: retryProps } = statusIndicatorProps;
 
 storiesOf(patterns('StatusIndicator#legacy'), module)
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="#"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            More info
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="This component is now legacy."
+        title=""
+        hideCloseButton
+      />
+      <Story />
+    </>
+  ))
   .add('Default', () => (
     <StatusIndicator {...basic()}>
       {statusStepsProps().map(({ key, ...props }) => (

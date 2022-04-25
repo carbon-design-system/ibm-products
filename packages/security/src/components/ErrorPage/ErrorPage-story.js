@@ -11,6 +11,8 @@ import { disableCenteredStories, patterns } from '../../../.storybook';
 
 import { ErrorPage } from '../..';
 
+import { InlineNotification, NotificationActionButton } from '../../..';
+
 const statusCodes = {
   403: 403,
   404: 404,
@@ -31,7 +33,26 @@ const props = () => ({
   ],
 });
 
-disableCenteredStories(storiesOf(patterns('ErrorPage#legacy'), module)).add(
-  'default',
-  () => <ErrorPage {...props()} />
-);
+disableCenteredStories(storiesOf(patterns('ErrorPage#legacy'), module))
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-http-errors-httperror403--with-all-props-set"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            More info
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="This component is now legacy. Please click to see the go-forward component"
+        title=""
+        hideCloseButton
+      />
+      <Story />
+    </>
+  ))
+  .add('default', () => <ErrorPage {...props()} />);

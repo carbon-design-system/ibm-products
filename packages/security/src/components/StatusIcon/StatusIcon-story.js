@@ -13,6 +13,7 @@ import { components } from '../../../.storybook';
 
 import { StatusIcon } from '../..';
 import { SIZE, STATUS } from './StatusIcon';
+import { InlineNotification, NotificationActionButton } from '../../..';
 
 const storyProps = () => ({
   message: text('Label (message)', 'Label'),
@@ -23,6 +24,27 @@ const storyProps = () => ({
 const status = STATUS[0];
 
 storiesOf(components('StatusIcon#legacy'), module)
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://carbon-for-ibm-products.netlify.app/?path=/docs/ibm-products-components-cards-productivecard--default"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            More info
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="This component is now legacy. Please click to see the go-forward component"
+        title=""
+        hideCloseButton
+      />
+      <Story />
+    </>
+  ))
   .add('Default', () => <StatusIcon {...storyProps()} />)
   .add('Status', () => (
     <StatusIcon

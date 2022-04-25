@@ -22,12 +22,35 @@ import {
   profileWithAccountLongName,
 } from './_mocks_';
 
+import { InlineNotification, NotificationActionButton } from '../../..';
+
 const headerProps = {
   labels,
   links,
 };
 
 disableCenteredStories(storiesOf(patterns('Header#legacy'), module))
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://react.carbondesignsystem.com/?path=/story/components-ui-shell--header-base-w-actions"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            More info
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="This component is now legacy. Please click to see the go-forward component"
+        title=""
+        hideCloseButton
+      />
+      <Story />
+    </>
+  ))
   .add('default', () => <Header {...headerProps} />, {
     info: {
       text: `

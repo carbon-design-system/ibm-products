@@ -31,6 +31,8 @@ import {
 
 import { labels } from './_mocks_';
 
+import { InlineNotification, NotificationActionButton } from '../../..';
+
 const { interactive01, text04 } = theme;
 
 const closeButtonLabel = 'Close';
@@ -64,6 +66,27 @@ const content = (
 );
 
 disableCenteredStories(storiesOf(patterns('PanelV2#legacy'), module))
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-side-panel-sidepanel--slide-over"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            More info
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="This component is now legacy. Please click to see the go-forward component"
+        title=""
+        hideCloseButton
+      />
+      <Story />
+    </>
+  ))
   .addParameters({
     info: {
       // Reposition info button so that panel footer isn't covered:

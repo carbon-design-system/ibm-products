@@ -147,7 +147,7 @@ export const DataSpreadsheetHeader = forwardRef(
                   onClick={handleColumnHeaderClick(index)}
                   style={{
                     height: defaultColumn?.rowHeight,
-                    width: defaultColumn?.width,
+                    width: column?.width || defaultColumn?.width,
                   }}
                   className={cx(
                     `${blockClass}__th`,

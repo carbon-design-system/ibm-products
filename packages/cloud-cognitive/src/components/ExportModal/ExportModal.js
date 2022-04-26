@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState, useRef, forwardRef } from 'react';
+import React, { useState, useRef, forwardRef, useEffect } from 'react';
 import {
   Button,
   ComposedModal,
@@ -70,12 +70,15 @@ export let ExportModal = forwardRef(
     },
     ref
   ) => {
-    const [name, setName] = useState(filename);
+    const [name, setName] = useState('');
     const [dirtyInput, setDirtyInput] = useState(false);
     // by default (if it exists) use the first extension in the extension array
-    const [extension, setExtension] = useState(
-      preformattedExtensions?.[0]?.extension
-    );
+    const [extension, setExtension] = useState('');
+
+    useEffect(() => {
+      setName(filename);
+      setExtension(preformattedExtensions?.[0]?.extension);
+    }, [filename, preformattedExtensions]);
 
     const onNameChangeHandler = (evt) => {
       setName(evt.target.value);

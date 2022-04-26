@@ -592,6 +592,7 @@ export let DataSpreadsheet = React.forwardRef(
         : null;
       setCellEditorValue(activeCellValue);
       cellEditorRulerRef.current.textContent = activeCellValue;
+      cellEditorRef.current.style.width = activeCellRef?.current.style.width;
     };
 
     // Sets the initial placement of the cell editor cursor at the end of the text area

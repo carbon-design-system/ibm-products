@@ -131,6 +131,7 @@ export const DataSpreadsheetBody = forwardRef(
               ref,
               area,
               blockClass,
+              columns,
               defaultColumn,
               selectionAreas,
               setSelectionAreas,
@@ -149,6 +150,7 @@ export const DataSpreadsheetBody = forwardRef(
       ref,
       activeCellCoordinates,
       setActiveCellInsideSelectionArea,
+      columns,
     ]);
 
     const populateSelectionAreaCellData = ({

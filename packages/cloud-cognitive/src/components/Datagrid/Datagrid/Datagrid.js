@@ -21,7 +21,10 @@ const componentName = 'Datagrid';
 
 const { TableContainer, Table } = DataTable;
 
-let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
+export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
+  if (!datagridState) {
+    return;
+  }
   const {
     getTableProps = () => {},
     withVirtualScroll,
@@ -117,5 +120,3 @@ Datagrid.propTypes = {
    */
   datagridState: PropTypes.object.isRequired,
 };
-
-export default Datagrid;

@@ -379,11 +379,13 @@ export let SidePanel = React.forwardRef(
         const actionToolbarElement = document.querySelector(
           `.${blockClass}__action-toolbar`
         );
+        const labelText = document.querySelector(`.${blockClass}__label-text`);
         const sidePanelSubtitleElementHeight =
           sidePanelSubtitleElement?.offsetHeight || 0;
         const sidePanelActionBarElementHeight =
           actionToolbarElement?.offsetHeight || 0;
         const titleHeight = sidePanelTitleElement?.offsetHeight + 24;
+        const labelHeight = labelText?.offsetHeight || 0;
         sidePanelOuter?.style.setProperty(
           `--${blockClass}--title-text-height`,
           `${titleHeight}px`
@@ -395,6 +397,10 @@ export let SidePanel = React.forwardRef(
         sidePanelOuter?.style.setProperty(
           `--${blockClass}--action-bar-container-height`,
           `${sidePanelActionBarElementHeight}px`
+        );
+        sidePanelOuter?.style.setProperty(
+          `--${blockClass}--label-text-height`,
+          `${labelHeight}px`
         );
       }
     }, [
@@ -740,6 +746,8 @@ export let SidePanel = React.forwardRef(
               ref={sidePanelInnerRef}
               className={cx(`${blockClass}__inner-content`, {
                 [`${blockClass}__static-inner-content`]: !animateTitle,
+                [`${blockClass}__static-inner-content-no-actions`]:
+                  !animateTitle && !actions?.length,
                 [`${blockClass}__inner-content-with-actions`]:
                   actions && actions.length,
               })}

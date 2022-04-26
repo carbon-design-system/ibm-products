@@ -56,6 +56,7 @@ const columnData = [
     accessor: (row, index) => index,
     Cell: ({ cell: { value } }) => <NumericLayout value={value} />,
     placement: 'right',
+    width: 275,
   },
   {
     Header: 'Pet type',

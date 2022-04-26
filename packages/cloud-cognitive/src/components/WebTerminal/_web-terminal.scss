@@ -5,25 +5,25 @@ $web-terminal-width: 36.5rem;
 $block-class: #{$pkg-prefix}--web-terminal;
 
 @keyframes web-terminal-entrance {
-  0% {
+  from {
     opacity: 0;
     // stylelint-disable-next-line carbon/layout-token-use
     transform: translateX(#{$web-terminal-width});
   }
 
-  100% {
+  to {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
 @keyframes web-terminal-exit {
-  0% {
+  from {
     opacity: 1;
     transform: translateX(0);
   }
 
-  100% {
+  to {
     opacity: 0;
     // stylelint-disable-next-line carbon/layout-token-use
     transform: translateX(#{$web-terminal-width});

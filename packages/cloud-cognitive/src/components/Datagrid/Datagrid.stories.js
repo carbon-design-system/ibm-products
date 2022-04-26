@@ -202,15 +202,16 @@ const defaultHeader = [
 
 const { TableBatchAction, TableBatchActions } = DataTable;
 
-export const BasicUsage = () => {
+export const BasicUsage = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid({
     columns,
     data,
+    test: 'hello',
   });
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid {...rest} datagridState={{ ...datagridState }} />;
 };
 
 export const InitialLoad = () => {
@@ -237,7 +238,7 @@ export const InitialLoad = () => {
     isFetching,
   });
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 export const InfiniteScroll = () => {
@@ -270,7 +271,7 @@ export const InfiniteScroll = () => {
 
   return (
     <Wrapper>
-      <Datagrid {...datagridState} />;
+      <Datagrid datagridState={{ ...datagridState }} />;
     </Wrapper>
   );
 };
@@ -286,7 +287,7 @@ export const TenThousandEntries = () => {
     useInfiniteScroll
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
@@ -320,7 +321,7 @@ export const WithPagination = () => {
     DatagridPagination,
   });
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 export const NestedRows = () => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -333,7 +334,7 @@ export const NestedRows = () => {
     useNestedRows
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 export const ExpandedRow = () => {
   const expansionRenderer = ({ row }) => <div>Content for {row.id}</div>;
@@ -350,7 +351,7 @@ export const ExpandedRow = () => {
     useExpandedRow
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 export const NestedTable = () => {
@@ -370,7 +371,7 @@ export const NestedTable = () => {
 
   const expansionRenderer = () => (
     <div className="carbon-nested-table">
-      <Datagrid {...nestedDatagridState} />
+      <Datagrid datagridState={{ ...nestedDatagridState }} />
     </div>
   );
 
@@ -385,7 +386,7 @@ export const NestedTable = () => {
     useExpandedRow
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 export const ClickableRow = () => {
@@ -400,7 +401,7 @@ export const ClickableRow = () => {
     useOnRowClick
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 export const IsHoverOnRow = () => {
@@ -431,7 +432,7 @@ export const IsHoverOnRow = () => {
     useRowIsMouseOver
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 export const SelectableRow = () => {
@@ -445,7 +446,7 @@ export const SelectableRow = () => {
     useSelectRows
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 export const RadioSelect = () => {
@@ -467,7 +468,7 @@ export const RadioSelect = () => {
     useSelectRows
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 export const HideSelectAll = () => {
@@ -482,7 +483,7 @@ export const HideSelectAll = () => {
     useSelectRows
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 export const SortableColumns = () => {
@@ -496,7 +497,7 @@ export const SortableColumns = () => {
     useSortableColumns
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 export const RightAlignedColumns = () => {
@@ -525,7 +526,7 @@ export const RightAlignedColumns = () => {
     useColumnRightAlign
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 const DatagridActions = (datagridState) => {
@@ -618,7 +619,7 @@ export const DatagridActionsToolbar = () => {
     useSelectRows
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 export const SelectItemsInAllPages = () => {
@@ -649,7 +650,7 @@ export const SelectItemsInAllPages = () => {
 
   return (
     <>
-      <Datagrid {...datagridState} />
+      <Datagrid datagridState={{ ...datagridState }} />
       <h3>Doc in Notes...</h3>
       <p>{`Are all selected across all pages? - ${areAllSelected}`}</p>
     </>
@@ -682,7 +683,7 @@ export const CustomizingColumns = () => {
 
   return (
     <>
-      <Datagrid {...datagridState} />
+      <Datagrid datagridState={{ ...datagridState }} />
       <div>
         Hidden column ids:
         <pre>{JSON.stringify(datagridState.state.hiddenColumns, null, 2)}</pre>
@@ -742,7 +743,7 @@ export const RowSizeDropdown = () => {
 
   return (
     <Wrapper>
-      <Datagrid {...datagridState} />
+      <Datagrid datagridState={{ ...datagridState }} />
     </Wrapper>
   );
 };
@@ -766,7 +767,7 @@ export const LeftPanel = () => {
 
   return (
     <Wrapper>
-      <Datagrid {...datagridState} />
+      <Datagrid datagridState={{ ...datagridState }} />
     </Wrapper>
   );
 };
@@ -803,7 +804,7 @@ export const BatchActions = () => {
     useSelectRows
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 export const DisableSelectRow = () => {
@@ -822,7 +823,7 @@ export const DisableSelectRow = () => {
     useSelectRows
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 // export { StickyActionsColumn };
@@ -916,5 +917,5 @@ export const TopAlignment = () => {
     useSelectRows
   );
 
-  return <Datagrid {...datagridState} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };

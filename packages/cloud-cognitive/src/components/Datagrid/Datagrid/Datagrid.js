@@ -1,11 +1,12 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2020 - 2021
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2020, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 import { DataTable } from 'carbon-components-react';
 import cx from 'classnames';
 import DatagridHead from './DatagridHead';
@@ -20,7 +21,7 @@ const componentName = 'Datagrid';
 
 const { TableContainer, Table } = DataTable;
 
-let Datagrid = React.forwardRef((datagridState, ref) => {
+let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
   const {
     getTableProps = () => {},
     withVirtualScroll,
@@ -33,7 +34,6 @@ let Datagrid = React.forwardRef((datagridState, ref) => {
     verticalAlign = 'center',
     variableRowHeight,
     className,
-    ...rest
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
@@ -110,5 +110,12 @@ Datagrid = pkg.checkComponentEnabled(Datagrid, componentName);
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 Datagrid.displayName = componentName;
+
+Datagrid.propTypes = {
+  /**
+   * The data grid state, much of it being supplied by the useDatagrid hook
+   */
+  datagridState: PropTypes.object.isRequired,
+};
 
 export default Datagrid;

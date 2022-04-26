@@ -120,7 +120,7 @@ const newPerson = () => {
   };
 };
 
-const makeData = (...lens) => {
+export const makeData = (...lens) => {
   const makeDataLevel = (depth = 0) => {
     const len = lens[depth];
     return range(len).map(() => ({
@@ -202,7 +202,7 @@ const defaultHeader = [
 
 const { TableBatchAction, TableBatchActions } = DataTable;
 
-export const BasicUsage = ({ ...rest }) => {
+export const BasicUsage = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid({
@@ -210,7 +210,7 @@ export const BasicUsage = ({ ...rest }) => {
     data,
   });
 
-  return <Datagrid {...rest} datagridState={{ ...datagridState }} />;
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 export const InitialLoad = () => {

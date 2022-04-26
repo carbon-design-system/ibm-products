@@ -17,7 +17,7 @@ const dataTestId = uuidv4();
 const componentName = Datagrid.displayName;
 
 describe(componentName, () => {
-  it('renders a component ExampleComponent', () => {
+  it('renders a basic data grid component with devTools attribute', () => {
     render(<BasicUsage data-testid={dataTestId} />);
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       Datagrid.displayName

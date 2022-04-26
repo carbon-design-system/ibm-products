@@ -208,7 +208,6 @@ export const BasicUsage = ({ ...rest }) => {
   const datagridState = useDatagrid({
     columns,
     data,
-    test: 'hello',
   });
 
   return <Datagrid {...rest} datagridState={{ ...datagridState }} />;

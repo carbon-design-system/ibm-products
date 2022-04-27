@@ -12,6 +12,8 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
 import { makeData } from './Datagrid.stories';
 
+import { carbon } from '../../settings';
+import { expectWarn } from '../../global/js/utils/test-helper';
 import { Datagrid } from '.';
 const dataTestId = uuidv4();
 
@@ -93,7 +95,7 @@ const BasicUsage = ({ ...rest }) => {
     data,
   });
 
-  return <Datagrid {...rest} datagridState={{ ...datagridState }} />;
+  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
 describe(componentName, () => {
@@ -101,6 +103,34 @@ describe(componentName, () => {
     render(<BasicUsage data-testid={dataTestId} />);
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       Datagrid.displayName
+    );
+  });
+
+  it("renders a basic data grid validating use of Carbon's data table internally", () => {
+    render(<BasicUsage data-testid={dataTestId} />);
+    expect(screen.getByRole('table')).toHaveClass(
+      `${carbon.prefix}--data-table`
+    );
+  });
+
+  it('renders nothing and logs a warning to console if no datagridState is supplied', () => {
+    expectWarn(
+      'Datagrid was not passed datagridState which is required to render this component.',
+      () => {
+        const errorMock = jest
+          .spyOn(console, 'error')
+          .mockImplementation(() => {});
+        const { container } = render(
+          <BasicUsage data-testid={dataTestId} datagridState={null} />
+        );
+        expect(errorMock).toBeCalledWith(
+          expect.stringMatching(
+            /^Warning: Failed prop type: The prop `datagridState` is marked as required in `Datagrid`, but its value is `null`./
+          )
+        );
+        expect(container.children.length).toEqual(0);
+        jest.spyOn(console, 'error').mockRestore();
+      }
     );
   });
 });

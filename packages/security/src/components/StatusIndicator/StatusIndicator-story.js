@@ -21,7 +21,7 @@ import { patterns } from '../../../.storybook';
 import { StatusStep, StatusIndicator } from '../..';
 import { STATUS } from './StatusStep/StatusStep';
 
-import { InlineNotification, NotificationActionButton } from '../../';
+import { InlineNotification } from '../../';
 
 import props from './_mocks_';
 
@@ -69,15 +69,6 @@ storiesOf(patterns('StatusIndicator#legacy'), module)
     <>
       <InlineNotification
         className="page-layouts__banner"
-        actions={
-          <NotificationActionButton
-            href="#"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            More info
-          </NotificationActionButton>
-        }
         kind="info"
         subtitle="This component is now legacy."
         title=""

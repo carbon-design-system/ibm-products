@@ -51,7 +51,7 @@ storiesOf(components('Card#legacy'), module)
         className="page-layouts__banner"
         actions={
           <NotificationActionButton
-            href="https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-cards-productivecard--default&knob-Lines%20(`lines`)=1&knob-Score%20(`score`)=3&knob-Title%20(`title`)=10.0.0.0&knob-Truncate%20(`truncate`)=true&knob-Type%20(`type`)=IP&knob-Value%20(`value`)=10.0.0.0.563409u53250u&knob-Width%20(`width`)=100px&knob-type=IP&knob-value=127.0.0.1"
+            href="https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-cards-productivecard--default"
             rel="noopener noreferrer"
             target="_blank"
           >

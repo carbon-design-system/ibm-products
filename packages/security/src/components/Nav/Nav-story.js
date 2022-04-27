@@ -10,7 +10,7 @@ import React from 'react';
 import { components } from '../../../.storybook';
 import { Nav, NavItem, NavList } from '../..';
 
-import { InlineNotification } from '../../..';
+import { InlineNotification } from '../../';
 
 import { commerce } from 'faker';
 const { name } = Nav;

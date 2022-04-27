@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.15.0...@carbon/ibm-products@1.16.0) (2022-04-26)
+
+
+### Bug Fixes
+
+* adds global filter tags to add select ([#1938](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1938)) ([3a66201](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3a66201a23b7577d6abff7d575c5950ddfd9bc1a))
+
+
+### Features
+
+* **DataSpreadsheet:** support horizontal scrolling/add sticky headers ([#1934](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1934)) ([987cecc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/987cecc2d13a13958615fe229b2e290e7a69295d))
+
+
+
+
+
 # [1.15.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.14.0...@carbon/ibm-products@1.15.0) (2022-04-19)
 
 

@@ -228,6 +228,13 @@
       grid-gap: $spacing-05 2rem;
       grid-template-columns: repeat(2, 1fr);
     }
+
+    &-applied {
+      display: flex;
+      align-items: center;
+      padding: $spacing-03;
+      background: $ui-01;
+    }
   }
 
   .#{$block-class}__global-filter-button-set
@@ -248,7 +255,7 @@
   }
 
   // the influencer sidebar needs to be even with the buttons
-  .#{$block-class} .#{$tearsheet-class} .#{$tearsheet-class}__influencer {
+  .#{$block-class} .#{$tearsheet-class}__influencer {
     max-width: 29rem;
     flex: 0 0 50%;
   }
@@ -257,7 +264,7 @@
     color: $text-02;
   }
 
-  .#{$block-class} .#{$tearsheet-class} .#{$tearsheet-class}__content {
+  .#{$block-class} .#{$tearsheet-class}__content {
     display: flex;
     flex-direction: column;
   }

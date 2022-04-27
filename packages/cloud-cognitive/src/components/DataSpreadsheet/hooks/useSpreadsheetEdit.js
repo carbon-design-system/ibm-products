@@ -5,8 +5,10 @@
 //  * LICENSE file in the root directory of this source tree.
 //  */
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { px } from '@carbon/layout';
+import { pkg } from '../../../settings';
+import { usePreviousValue } from '../../../global/js/hooks';
 
 export const useSpreadsheetEdit = ({
   isEditing,
@@ -18,8 +20,20 @@ export const useSpreadsheetEdit = ({
   columns,
   defaultColumn,
   cellEditorValue,
+  blockClass = `${pkg.prefix}--data-spreadsheet`,
 }) => {
+  const [nextIndex, setNextIndex] = useState(null);
+  const previousState = usePreviousValue({
+    nextIndex,
+  });
   useEffect(() => {
+    if (!previousState?.nextIndex) {
+      setNextIndex(activeCellCoordinates?.column);
+    }
+  }, [previousState?.nextIndex, activeCellCoordinates]);
+  useEffect(() => {
+    const rulerWidth = cellEditorRulerRef.current.offsetWidth;
+    const cellEditorCurrentWidth = parseInt(cellEditorRef.current.style.width);
     if (isEditing) {
       const cellProps =
         rows[activeCellCoordinates?.row]?.cells[activeCellCoordinates?.column];
@@ -28,7 +42,6 @@ export const useSpreadsheetEdit = ({
       cellEditorRef.current.style.left = activeCellLeftPosition;
       cellEditorRef.current.style.top = activeCellTopPosition;
       cellEditorRef.current.style.display = 'block';
-      cellEditorRef.current.style.width = activeCellRef?.current.style.width;
       cellEditorRef.current.style.height = activeCellRef?.current.style.height;
       cellEditorRef.current.style.paddingTop = `${
         (parseInt(activeCellRef?.current.style.height) - 16) / 2 - 1
@@ -36,23 +49,42 @@ export const useSpreadsheetEdit = ({
       cellEditorRef.current.style.textAlign =
         cellProps?.column?.placement === 'right' ? 'right' : 'left';
       cellEditorRef.current?.focus();
-      const rulerWidth = cellEditorRulerRef.current.offsetWidth;
-      const cellWidth = activeCellRef.current.offsetWidth;
-      if (rulerWidth >= cellWidth) {
-        const widthMultiplier = Math.floor(rulerWidth / cellWidth) + 1;
-        const startingColumnPosition = activeCellCoordinates?.column;
+
+      if (rulerWidth < cellEditorCurrentWidth) {
+        const currentColumnWidth =
+          columns[nextIndex]?.width || defaultColumn?.width;
+        // If the contents of the cell editor is deleted past the point of the next column
+        if (rulerWidth < cellEditorCurrentWidth - currentColumnWidth) {
+          cellEditorRef.current.style.width = px(
+            parseInt(cellEditorRef.current.style.width) - currentColumnWidth
+          );
+          setNextIndex((prev) => {
+            if (prev === 0) {
+              return prev;
+            }
+            return prev - 1;
+          });
+        }
+        // Decrease cell editor width by increment of current column width
+      }
+      if (rulerWidth >= cellEditorCurrentWidth) {
+        setNextIndex((prev) => {
+          if (prev === columns.length - 1) {
+            return prev;
+          }
+          return prev + 1;
+        });
+        const onLastColumnIndex = nextIndex + 1 === columns.length;
+        const nextColumnWidth = onLastColumnIndex
+          ? 0
+          : columns[nextIndex + 1]?.width || defaultColumn?.width;
         const startingRowPosition = activeCellCoordinates?.row;
-        const totalColumns = columns.length;
         const totalRows = rows.length;
-        const totalMultiplierPossible = totalColumns - startingColumnPosition;
         const totalCellEditorMaxHeight =
           (totalRows - startingRowPosition) * defaultColumn.rowHeight;
         cellEditorRef.current.style.maxHeight = px(totalCellEditorMaxHeight);
         cellEditorRef.current.style.width = px(
-          cellWidth *
-            (widthMultiplier <= totalMultiplierPossible
-              ? widthMultiplier
-              : totalMultiplierPossible)
+          nextColumnWidth + cellEditorCurrentWidth
         );
         cellEditorRef.current.style.height = px(
           cellEditorRef.current.scrollHeight
@@ -75,6 +107,7 @@ export const useSpreadsheetEdit = ({
       cellEditorRef.current.style.display = 'none';
       cellEditorRef.current.blur();
       activeCellRef.current.focus();
+      setNextIndex(activeCellCoordinates?.column);
     }
   }, [
     isEditing,
@@ -83,9 +116,12 @@ export const useSpreadsheetEdit = ({
     cellEditorValue,
     columns.length,
     defaultColumn,
-    cellEditorValue,
     activeCellRef,
     cellEditorRef,
     cellEditorRulerRef,
+    columns,
+    blockClass,
+    previousState?.cellEditorValue,
+    nextIndex,
   ]);
 };

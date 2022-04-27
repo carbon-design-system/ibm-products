@@ -31,6 +31,7 @@ export default {
 
 const defaultProps = {
   className: 'placeholder-class',
+  clearFiltersText: 'Clear filters',
   columnInputPlaceholder: 'Find',
   description: 'Select business terms from the list',
   globalSearchLabel: 'test input label',
@@ -72,7 +73,7 @@ const defaultProps = {
 };
 
 const Template = (args) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <>
       <MultiAddSelect {...args} open={open} onClose={() => setOpen(false)} />

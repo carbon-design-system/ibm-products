@@ -171,6 +171,7 @@
 
       &[data-active-row-index='header'],
       &[data-active-column-index='header'] {
+        z-index: 4;
         background-color: transparent;
       }
 

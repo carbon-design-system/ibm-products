@@ -21,7 +21,7 @@ import { patterns } from '../../../.storybook';
 import { StatusStep, StatusIndicator } from '../..';
 import { STATUS } from './StatusStep/StatusStep';
 
-import { InlineNotification, NotificationActionButton } from '../../..';
+import { InlineNotification, NotificationActionButton } from '../../';
 
 import props from './_mocks_';
 

@@ -11,7 +11,7 @@ import { disableCenteredStories, patterns } from '../../../.storybook';
 
 import { ErrorPage } from '../..';
 
-import { InlineNotification, NotificationActionButton } from '../../..';
+import { InlineNotification, NotificationActionButton } from '../../';
 
 const statusCodes = {
   403: 403,

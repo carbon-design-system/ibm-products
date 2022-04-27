@@ -24,7 +24,7 @@ import {
   skipToContent,
 } from './_mocks_';
 
-import { InlineNotification, NotificationActionButton } from '../../..';
+import { InlineNotification, NotificationActionButton } from '../../';
 
 const shellProps = {
   header,

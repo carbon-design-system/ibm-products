@@ -32,7 +32,7 @@ import { lorem } from '../_mocks_';
 import props from './SummaryCardContainer/_mocks_';
 import summaryCardSelectProps from './SummaryCardSelect/_mocks_';
 
-import { InlineNotification, NotificationActionButton } from '../../..';
+import { InlineNotification, NotificationActionButton } from '../../';
 
 storiesOf(patterns('SummaryCard#legacy'), module)
   .addDecorator((Story) => (

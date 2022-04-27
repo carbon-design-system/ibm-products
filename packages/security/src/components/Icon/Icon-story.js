@@ -15,7 +15,7 @@ import theme from '../../globals/theme';
 import { Icon } from '../..';
 
 import { renderIcon } from './_mocks_';
-import { InlineNotification, NotificationActionButton } from '../../..';
+import { InlineNotification, NotificationActionButton } from '../../';
 
 const iconProps = {
   style: { fill: theme.icon01, margin: miniUnits(1) },

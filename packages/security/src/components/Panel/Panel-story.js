@@ -24,7 +24,7 @@ import {
   PanelController,
 } from '../..';
 
-import { InlineNotification, NotificationActionButton } from '../../..';
+import { InlineNotification, NotificationActionButton } from '../../';
 
 const closeButtonLabel = 'Close';
 

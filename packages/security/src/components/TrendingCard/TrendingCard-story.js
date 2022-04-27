@@ -7,7 +7,7 @@ import React from 'react';
 
 import { components, getDocsParameters } from '../../../.storybook';
 import { TrendingCard } from '../..';
-import { InlineNotification, NotificationActionButton } from '../../..';
+import { InlineNotification, NotificationActionButton } from '../../';
 
 export default {
   title: components(`${TrendingCard.name}#legacy`),

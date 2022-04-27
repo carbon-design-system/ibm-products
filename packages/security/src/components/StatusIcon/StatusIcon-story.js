@@ -13,7 +13,7 @@ import { components } from '../../../.storybook';
 
 import { StatusIcon } from '../..';
 import { SIZE, STATUS } from './StatusIcon';
-import { InlineNotification, NotificationActionButton } from '../../..';
+import { InlineNotification, NotificationActionButton } from '../../';
 
 const storyProps = () => ({
   message: text('Label (message)', 'Label'),

@@ -31,7 +31,7 @@ import {
 
 import { labels } from './_mocks_';
 
-import { InlineNotification, NotificationActionButton } from '../../..';
+import { InlineNotification, NotificationActionButton } from '../../';
 
 const { interactive01, text04 } = theme;
 

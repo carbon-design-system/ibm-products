@@ -26,7 +26,7 @@ import TextInput from '../TextInput';
 import WizardComponent from './Wizard';
 import WizardStep from './WizardStep';
 
-import { InlineNotification, NotificationActionButton } from '../../..';
+import { InlineNotification, NotificationActionButton } from '../../';
 
 const { prefix } = settings;
 

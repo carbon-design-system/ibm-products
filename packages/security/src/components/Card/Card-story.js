@@ -15,7 +15,7 @@ import { Card, CardSkeleton, SearchBar, StatusIcon } from '../..';
 
 import { image, label, link, tag, text as bodyText, title } from './_mocks_';
 
-import { InlineNotification, NotificationActionButton } from '../../..';
+import { InlineNotification, NotificationActionButton } from '../../';
 
 const footerDescription = 'Status';
 const headerPrefix = `header.`;

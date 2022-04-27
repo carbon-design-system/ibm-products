@@ -13,7 +13,7 @@ import { components } from '../../../.storybook';
 import { ProfileImage } from '../..';
 
 import { className, large, profile } from './_mocks_';
-import { InlineNotification, NotificationActionButton } from '../../..';
+import { InlineNotification, NotificationActionButton } from '../../';
 
 const profileImageProps = () => ({
   className,

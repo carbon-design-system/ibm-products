@@ -11,7 +11,7 @@ import { patterns } from '../../../.storybook';
 import Toolbar from './';
 import { labels, menu, settings, support } from './_mocks_';
 
-import { InlineNotification, NotificationActionButton } from '../../..';
+import { InlineNotification, NotificationActionButton } from '../../';
 
 storiesOf(patterns('Toolbar#legacy'), module)
   .addDecorator((Story) => (

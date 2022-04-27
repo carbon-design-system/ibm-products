@@ -70,3 +70,13 @@ $block-class: #{$pkg-prefix}--web-terminal;
 .#{$block-class}__body {
   height: 100%;
 }
+
+// Terminal wrapper styles
+.#{$block-class}-content-wrapper {
+  width: 100vw;
+  height: 100%;
+}
+
+.#{$block-class}-content-wrapper--open {
+  width: calc(100vw - #{$web-terminal-width});
+}

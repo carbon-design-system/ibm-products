@@ -5,7 +5,7 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
-export { default as Datagrid } from './Datagrid';
+export { Datagrid } from './Datagrid';
 export { default as useDatagrid } from './useDatagrid';
 export { default as useInfiniteScroll } from './useInfiniteScroll';
 export { default as useNestedRows } from './useNestedRows';

@@ -19,6 +19,7 @@ import { usePreviousValue } from '../../global/js/hooks';
 import { removeCellSelections } from './utils/removeCellSelections';
 import { createCellSelectionArea } from './utils/createCellSelectionArea';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
+import { checkSelectedHeaderCell } from './utils/checkSelectedHeaderCell';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 import { getSpreadsheetWidth } from './utils/getSpreadsheetWidth';
 
@@ -442,6 +443,8 @@ export const DataSpreadsheetBody = forwardRef(
                       [`${blockClass}__td-th--active-header`]:
                         activeCellCoordinates?.row === index ||
                         checkActiveHeaderCell(index, selectionAreas, 'row'),
+                      [`${blockClass}__td-th--selected-header`]:
+                        checkSelectedHeaderCell(index, selectionAreas, 'row'),
                     }
                   )}
                   style={{

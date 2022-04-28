@@ -11,6 +11,7 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 import { usePreviousValue } from '../../global/js/hooks';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
+import { checkSelectedHeaderCell } from './utils/checkSelectedHeaderCell';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 import { selectAllCells } from './utils/selectAllCells';
 import { getSpreadsheetWidth } from './utils/getSpreadsheetWidth';
@@ -156,6 +157,12 @@ export const DataSpreadsheetHeader = forwardRef(
                       [`${blockClass}__th--active-header`]:
                         activeCellCoordinates?.column === index ||
                         checkActiveHeaderCell(index, selectionAreas, 'column'),
+                      [`${blockClass}__th--selected-header`]:
+                        checkSelectedHeaderCell(
+                          index,
+                          selectionAreas,
+                          'column'
+                        ),
                     }
                   )}
                   type="button"

@@ -155,6 +155,9 @@ describe(componentName, () => {
     const selectionArea = ref?.current.querySelector(
       `.${blockClass}__selection-area--element`
     );
+    expect(firstColumnHeaderCell).toHaveClass(
+      `${blockClass}__th--selected-header`
+    );
     expect(selectionArea).toBeInTheDocument();
     expect(onSelectionAreaChangeFn).toHaveBeenCalledTimes(1);
   });

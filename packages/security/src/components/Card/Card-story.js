@@ -15,6 +15,8 @@ import { Card, CardSkeleton, SearchBar, StatusIcon } from '../..';
 
 import { image, label, link, tag, text as bodyText, title } from './_mocks_';
 
+import { InlineNotification, NotificationActionButton } from '../../';
+
 const footerDescription = 'Status';
 const headerPrefix = `header.`;
 
@@ -42,7 +44,28 @@ const props = () => ({
 
 const searchLabelText = 'Search';
 
-storiesOf(components('Card'), module)
+storiesOf(components('Card#legacy'), module)
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-cards-productivecard--default"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            More info
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="This component is now legacy. Please click to see the go-forward component"
+        title=""
+        hideCloseButton
+      />
+      <Story />
+    </>
+  ))
   .add('Default', () => <Card />)
   .add('Content', () => (
     <Card

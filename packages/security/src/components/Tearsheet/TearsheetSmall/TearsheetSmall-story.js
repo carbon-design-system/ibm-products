@@ -34,7 +34,7 @@ const { closeButton, primaryButton, secondaryButton } = buttons;
 
 const focusTrap = boolean('focusTrap', false);
 
-storiesOf(patterns('TearsheetSmall'), module)
+storiesOf(patterns('TearsheetSmall#legacy'), module)
   .add(
     'Default',
     () => (

@@ -7,28 +7,48 @@
 
 import { px } from '@carbon/layout';
 import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
+import { getSelectionAreaPoints } from './getSelectionAreaPoints';
 
 export const createCellSelectionArea = ({
+  ref,
   area,
   blockClass,
+  columns,
   defaultColumn,
   selectionAreas,
   setSelectionAreas,
+  setActiveCellInsideSelectionArea,
 }) => {
-  const greatestRow = Math.max(area.point1.row, area.point2.row);
-  const greatestColumn = Math.max(area.point1.column, area.point2.column);
-  const lowestRowIndex = Math.min(area.point1.row, area.point2.row);
-  const lowestColumnIndex = Math.min(area.point1.column, area.point2.column);
+  const {
+    lowestColumnIndex,
+    lowestRowIndex,
+    greatestColumnIndex,
+    greatestRowIndex,
+  } = getSelectionAreaPoints(area);
+  if (
+    greatestRowIndex - lowestRowIndex > 0 ||
+    greatestColumnIndex - lowestColumnIndex > 0
+  ) {
+    setActiveCellInsideSelectionArea(true);
+    const activeCellElement = ref.current.querySelector(
+      `.${blockClass}__active-cell--highlight`
+    );
+    activeCellElement.setAttribute('data-selection-id', area.matcher);
+  }
+  let selectionAreaVariableWidth = 0;
+  columns.forEach((item, index) => {
+    if (index >= lowestColumnIndex && index <= greatestColumnIndex) {
+      selectionAreaVariableWidth += item?.width || defaultColumn?.width;
+    }
+  });
   const point1Element =
     document.querySelector(
       `[data-row-index="${area.point1.row}"][data-column-index="${area.point1.column}"]`
-    ) || document.querySelector(`.${blockClass}__body--td`); // if we can't find the point1 element (this can happen in the case where a virtualized row is not present anymore in the DOM), we get the default height/width of the first body cell we find
-  const selectionAreaCellWidth = point1Element.offsetWidth;
+    ) || document.querySelector(`.${blockClass}__body--td`); // if we can't find the point1 element (this can happen in the case where a virtualized row is not present anymore in the DOM), we get the default height of the first body cell we find
+
   const selectionAreaCellHeight = point1Element.offsetHeight;
-  const selectionAreaTotalWidth =
-    selectionAreaCellWidth * (greatestColumn - lowestColumnIndex + 1);
   const selectionAreaTotalHeight =
-    selectionAreaCellHeight * (greatestRow - lowestRowIndex + 1);
+    selectionAreaCellHeight * (greatestRowIndex - lowestRowIndex + 1);
   const bodyContainer = document.querySelector(
     `.${blockClass}__list--container`
   ).firstElementChild;
@@ -47,7 +67,7 @@ export const createCellSelectionArea = ({
         bodyContainer.getBoundingClientRect().left
       : lowestColumnIndex === 0
       ? 0 + (defaultColumn.rowHeaderWidth - 4)
-      : selectionAreaCellWidth * lowestColumnIndex +
+      : defaultColumn.width * lowestColumnIndex +
         (defaultColumn.rowHeaderWidth - 4), // calculate left value here if virtualized row is not in DOM, accounting for row header cell width (including borders)
   };
   const selectionAreaElement =
@@ -55,7 +75,7 @@ export const createCellSelectionArea = ({
     document.createElement('div');
   selectionAreaElement.classList.add(`${blockClass}__selection-area--element`);
   selectionAreaElement.setAttribute('data-matcher-id', area.matcher);
-  selectionAreaElement.style.width = px(selectionAreaTotalWidth);
+  selectionAreaElement.style.width = px(selectionAreaVariableWidth);
   selectionAreaElement.style.height = px(selectionAreaTotalHeight);
   selectionAreaElement.style.left = px(relativePosition.left);
   selectionAreaElement.style.top = px(relativePosition.top);

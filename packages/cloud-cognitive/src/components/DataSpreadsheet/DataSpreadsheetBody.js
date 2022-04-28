@@ -20,6 +20,7 @@ import { removeCellSelections } from './utils/removeCellSelections';
 import { createCellSelectionArea } from './utils/createCellSelectionArea';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
+import { getSpreadsheetWidth } from './utils/getSpreadsheetWidth';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -49,9 +50,12 @@ export const DataSpreadsheetBody = forwardRef(
       currentMatcher,
       setCurrentMatcher,
       onSelectionAreaChange,
+      setActiveCellInsideSelectionArea,
+      totalVisibleColumns,
     },
     ref
   ) => {
+    const contentScrollRef = useRef();
     const previousState = usePreviousValue({
       selectionAreaData,
       clickAndHoldActive,
@@ -124,11 +128,14 @@ export const DataSpreadsheetBody = forwardRef(
           }
           if (!area.areaCreated && area.point1 && area.point2 && area.matcher) {
             createCellSelectionArea({
+              ref,
               area,
               blockClass,
+              columns,
               defaultColumn,
               selectionAreas,
               setSelectionAreas,
+              setActiveCellInsideSelectionArea,
             });
           }
           return;
@@ -140,6 +147,10 @@ export const DataSpreadsheetBody = forwardRef(
       defaultColumn,
       onSelectionAreaChange,
       setSelectionAreaData,
+      ref,
+      activeCellCoordinates,
+      setActiveCellInsideSelectionArea,
+      columns,
     ]);
 
     const populateSelectionAreaCellData = ({
@@ -230,6 +241,11 @@ export const DataSpreadsheetBody = forwardRef(
           // prevent multiple selections unless cmd key is held
           // meaning that selectionAreas should only have one item by default
           if (isHoldingCommandKey) {
+            const activeCellElement = ref.current.querySelector(
+              `.${blockClass}__active-cell--highlight`
+            );
+            activeCellElement.setAttribute('data-selection-id', tempMatcher);
+            setActiveCellInsideSelectionArea(true);
             setActiveCellCoordinates(activeCoordinates);
             setCurrentMatcher(tempMatcher);
             setSelectionAreas((prev) => [
@@ -260,6 +276,7 @@ export const DataSpreadsheetBody = forwardRef(
               setSelectionAreas(selectionAreaClone);
             }
           } else {
+            setActiveCellInsideSelectionArea(false);
             setActiveCellCoordinates(activeCoordinates);
             // remove all previous cell selections
             removeCellSelections({ spreadsheetRef: ref });
@@ -282,8 +299,25 @@ export const DataSpreadsheetBody = forwardRef(
         setCurrentMatcher,
         ref,
         setSelectionAreaData,
+        setActiveCellInsideSelectionArea,
       ]
     );
+
+    const handleBodyScroll = () => {
+      const headerRowElement = ref.current.querySelector(`
+        .${blockClass}__header--container .${blockClass}__tr`);
+      headerRowElement.scrollLeft = contentScrollRef.current.scrollLeft;
+    };
+
+    useEffect(() => {
+      contentScrollRef.current.addEventListener('scroll', (event) =>
+        handleBodyScroll(event)
+      );
+      const contentScrollElementRef = contentScrollRef.current;
+      return () => {
+        contentScrollElementRef.removeEventListener('scroll', handleBodyScroll);
+      };
+    });
 
     const handleBodyCellHover = useCallback(
       (cell, columnIndex) => {
@@ -389,7 +423,10 @@ export const DataSpreadsheetBody = forwardRef(
               aria-rowindex={index + 1}
             >
               {/* ROW HEADER BUTTON */}
-              <div role="rowheader">
+              <div
+                role="rowheader"
+                className={`${blockClass}__td-th--cell-container`}
+              >
                 <button
                   id={`${blockClass}__cell--${index}--header`}
                   tabIndex={-1}
@@ -408,7 +445,7 @@ export const DataSpreadsheetBody = forwardRef(
                     }
                   )}
                   style={{
-                    width: defaultColumn?.rowHeaderWidth - 4,
+                    width: defaultColumn?.rowHeaderWidth,
                   }}
                 >
                   {index + 1}
@@ -424,6 +461,7 @@ export const DataSpreadsheetBody = forwardRef(
                   style={{
                     ...cell.getCellProps().style,
                     display: 'grid',
+                    minWidth: defaultColumn?.width,
                   }}
                 >
                   <button
@@ -452,12 +490,12 @@ export const DataSpreadsheetBody = forwardRef(
       [
         prepareRow,
         rows,
-        defaultColumn.rowHeaderWidth,
         activeCellCoordinates?.row,
         selectionAreas,
         handleRowHeaderClick,
         handleBodyCellClick,
         handleBodyCellHover,
+        defaultColumn,
       ]
     );
 
@@ -476,7 +514,13 @@ export const DataSpreadsheetBody = forwardRef(
           height={400}
           itemCount={rows.length || defaultEmptyRowCount}
           itemSize={defaultColumn?.rowHeight}
-          width={totalColumnsWidth + scrollBarSize}
+          width={getSpreadsheetWidth({
+            scrollBarSizeValue: scrollBarSize,
+            totalVisibleColumns,
+            defaultColumn,
+            totalColumnsWidth,
+          })}
+          outerRef={contentScrollRef}
         >
           {rows?.length ? RenderRow : RenderEmptyRows}
         </FixedSizeList>
@@ -584,6 +628,11 @@ DataSpreadsheetBody.propTypes = {
   setActiveCellCoordinates: PropTypes.func,
 
   /**
+   * Setter fn for active cell inside of selection area
+   */
+  setActiveCellInsideSelectionArea: PropTypes.func,
+
+  /**
    * Setter fn for clickAndHold state value
    */
   setClickAndHoldActive: PropTypes.func,
@@ -612,4 +661,10 @@ DataSpreadsheetBody.propTypes = {
    * The total columns width
    */
   totalColumnsWidth: PropTypes.number,
+
+  /**
+   * The total number of columns to be initially visible, additional columns will be rendered and
+   * visible via horizontal scrollbar
+   */
+  totalVisibleColumns: PropTypes.number,
 };

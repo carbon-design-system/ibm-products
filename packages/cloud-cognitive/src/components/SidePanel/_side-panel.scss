@@ -278,7 +278,10 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       position: fixed;
       z-index: 2;
       // stylelint-disable-next-line carbon/layout-token-use
-      top: calc(var(--#{$block-class}--title-text-height) + #{$spacing-09});
+      top: calc(
+        var(--#{$block-class}--title-text-height) +
+          var(--#{$block-class}--label-text-height) + #{$spacing-09}
+      );
       background-color: $ui-01;
     }
 
@@ -298,7 +301,10 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation {
       position: fixed;
       top: $spacing-09;
-      height: var(--#{$block-class}--title-text-height);
+      height: calc(
+        var(--#{$block-class}--title-text-height) +
+          var(--#{$block-class}--label-text-height)
+      );
     }
 
     .#{$block-class}__inner-content {
@@ -308,7 +314,8 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       margin-top: calc(
         var(--#{$block-class}--title-text-height) +
           var(--#{$block-class}--subtitle-container-height) +
-          var(--#{$block-class}--action-bar-container-height)
+          var(--#{$block-class}--action-bar-container-height) +
+          var(--#{$block-class}--label-text-height)
       );
       overflow-x: hidden;
     }
@@ -329,6 +336,18 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
           ) + (calc(-1 * (#{$spacing-09} + #{$spacing-10})))
       );
       padding-top: $spacing-05;
+    }
+
+    .#{$block-class}__inner-content.#{$block-class}__static-inner-content-no-actions {
+      height: calc(
+        100vh -
+          calc(
+            var(--#{$block-class}--title-text-height) +
+              var(--#{$block-class}--subtitle-container-height) +
+              var(--#{$block-class}--action-bar-container-height) +
+              var(--#{$block-class}--label-text-height)
+          )
+      );
     }
 
     .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {

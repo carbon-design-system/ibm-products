@@ -9,3 +9,4 @@ export { useMoveActiveCell } from './useMoveActiveCell';
 export { useMultipleKeyTracking } from './useMultipleKeyTracking';
 export { useResetSpreadsheetFocus } from './useResetSpreadsheetFocus';
 export { useSpreadsheetOutsideClick } from './useSpreadsheetOutsideClick';
+export { useSpreadsheetEdit } from './useSpreadsheetEdit';

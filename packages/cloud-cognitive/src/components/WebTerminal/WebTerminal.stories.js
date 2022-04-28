@@ -17,6 +17,7 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { WebTerminal } from '.';
+import { WebTerminalContentWrapper } from './WebTerminalContentWrapper';
 import mdx from './WebTerminal.mdx';
 import { documentationLinks } from './preview-components/documentationLinks';
 
@@ -44,6 +45,10 @@ const Template = (args) => {
   return (
     <div>
       <Navigation openTerminal={openTerminal} />
+
+      <WebTerminalContentWrapper isTerminalOpen={isTerminalOpen}>
+        This is where you would put content
+      </WebTerminalContentWrapper>
 
       <WebTerminal
         open={isTerminalOpen}

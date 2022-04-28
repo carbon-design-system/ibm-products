@@ -20,6 +20,7 @@ import {
   OverflowMenu,
   OverflowMenuItem,
 } from 'carbon-components-react';
+import { moderate02 } from '@carbon/motion';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'WebTerminal';
@@ -52,6 +53,14 @@ export let WebTerminal = React.forwardRef(
     ref
   ) => {
     const [shouldRender, setRender] = useState(open);
+    const { matches: prefersReducedMotion } =
+      window && window.matchMedia
+        ? window.matchMedia('(prefers-reduced-motion: reduce)')
+        : { matches: true };
+
+    const webTerminalAnimationName = `${
+      open ? 'web-terminal-entrance' : 'web-terminal-exit'
+    } ${moderate02}`;
 
     const showDocumentationLinks = useMemo(
       () => documentationLinks.length > 0,
@@ -64,10 +73,24 @@ export let WebTerminal = React.forwardRef(
       }
     }, [open]);
 
+    /** 
+      When the web terminal slide in animation is complete, sets render to false.
+    */
     const onAnimationEnd = () => {
       if (!open) {
         setRender(false);
       }
+    };
+
+    const handleCloseTerminal = () => {
+      /** 
+        If the user prefers reduced motion, we have to manually set render to false
+        because onAnimationEnd will never be called.
+      */
+      if (prefersReducedMotion) {
+        setRender(false);
+      }
+      closeTerminal();
     };
 
     return shouldRender ? (
@@ -86,9 +109,7 @@ export let WebTerminal = React.forwardRef(
           },
         ])}
         style={{
-          animation: `${
-            open ? 'web-terminal-entrance 250ms' : 'web-terminal-exit 250ms'
-          }`,
+          animation: !prefersReducedMotion && webTerminalAnimationName,
         }}
         onAnimationEnd={onAnimationEnd}
       >
@@ -122,7 +143,8 @@ export let WebTerminal = React.forwardRef(
             renderIcon={Close}
             kind="ghost"
             iconDescription={closeIconDescription}
-            onClick={closeTerminal}
+            onClick={handleCloseTerminal}
+            onAnimationEnd={(event) => event.stopPropagation()}
           />
         </header>
         <div className={`${blockClass}__body`}>{children}</div>

@@ -32,7 +32,30 @@ import { lorem } from '../_mocks_';
 import props from './SummaryCardContainer/_mocks_';
 import summaryCardSelectProps from './SummaryCardSelect/_mocks_';
 
-storiesOf(patterns('SummaryCard'), module)
+import { InlineNotification, NotificationActionButton } from '../../';
+
+storiesOf(patterns('SummaryCard#legacy'), module)
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-cards-productivecard--default"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            More info
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="This component is now legacy. Please click to see the go-forward component"
+        title=""
+        hideCloseButton
+      />
+      <Story />
+    </>
+  ))
   .addDecorator((story) => (
     <div className={`${carbonPrefix}--grid ${carbonPrefix}--grid--full-width`}>
       <div className={`${carbonPrefix}--row`}>{story()}</div>

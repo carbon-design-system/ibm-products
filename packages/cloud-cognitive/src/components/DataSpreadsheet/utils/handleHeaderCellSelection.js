@@ -58,10 +58,10 @@ export const handleHeaderCellSelection = ({
     const selectionsClone = deepCloneObject(prev);
     if (isHoldingCommandKey) {
       const selectionsFromHeaderCell = selectionsClone.filter(
-        (item) => item.header.type
+        (item) => item.header?.type
       );
       const previouslyCreatedHeaderSelection = selectionsFromHeaderCell.filter(
-        (item) => item.header.type === type
+        (item) => item.header?.type === type
       );
       const isHeaderPartOfPreviousSelection = checkActiveHeaderCell(
         index,

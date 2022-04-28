@@ -215,6 +215,15 @@
     .#{$block-class}__td-th--active-header.#{$block-class}__td {
       background-color: $hover-selected-ui;
     }
+    .#{$block-class}__th--selected-header,
+    .#{$block-class}__td-th--selected-header.#{$block-class}__td {
+      background-color: $inverse-02;
+      color: $text-04;
+
+      &:hover {
+        background-color: $inverse-02;
+      }
+    }
     .#{$block-class}__list--container {
       overscroll-behavior: none;
     }

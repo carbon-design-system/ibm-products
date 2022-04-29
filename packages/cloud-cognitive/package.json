@@ -59,7 +59,7 @@
     "cross-env": "^7.0.3",
     "fs-extra": "^10.1.0",
     "glob": "^8.0.1",
-    "jest": "^28.0.2",
+    "jest": "^27.5.1",
     "jest-config-ibm-cloud-cognitive": "^0.23.16",
     "namor": "^1.1.2",
     "npm-check-updates": "^12.5.10",

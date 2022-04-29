@@ -15,6 +15,7 @@ import DatagridToolbar from './DatagridToolbar';
 
 import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
+import pconsole from '../../../global/js/utils/pconsole';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentName = 'Datagrid';
@@ -23,7 +24,10 @@ const { TableContainer, Table } = DataTable;
 
 export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
   if (!datagridState) {
-    return;
+    pconsole.warn(
+      'Datagrid was not passed datagridState which is required to render this component.'
+    );
+    return null;
   }
   const {
     getTableProps = () => {},

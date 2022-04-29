@@ -24,13 +24,36 @@ import {
   skipToContent,
 } from './_mocks_';
 
+import { InlineNotification, NotificationActionButton } from '../../';
+
 const shellProps = {
   header,
   profile,
   toolbar,
 };
 
-disableCenteredStories(storiesOf(patterns('Shell'), module))
+disableCenteredStories(storiesOf(patterns('Shell#legacy'), module))
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://react.carbondesignsystem.com/?path=/story/components-ui-shell--header-base-w-actions"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            More info
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="This component is now legacy. Please click to see the go-forward component"
+        title=""
+        hideCloseButton
+      />
+      <Story />
+    </>
+  ))
   .add('default', () => <Shell {...shellProps} />, {
     info: {
       text: `

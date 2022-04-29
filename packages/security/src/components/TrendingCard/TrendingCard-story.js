@@ -8,6 +8,7 @@ import React from 'react';
 import { components, getDocsParameters } from '../../../.storybook';
 import { TrendingCard } from '../..';
 import { InlineNotification, NotificationActionButton } from '../../';
+import { Grid } from 'carbon-components-react';
 
 export default {
   title: components(`${TrendingCard.name}#legacy`),
@@ -35,11 +36,11 @@ export default {
             </NotificationActionButton>
           }
           kind="info"
-          subtitle="This component is now legacy. Please click to see the go-forward component"
+          subtitle="Pattern no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
           title=""
           hideCloseButton
         />
-        {story()}
+        <Grid>{story()}</Grid>
       </>
     ),
   ],

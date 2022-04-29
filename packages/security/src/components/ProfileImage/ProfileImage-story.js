@@ -14,6 +14,7 @@ import { ProfileImage } from '../..';
 
 import { className, large, profile } from './_mocks_';
 import { InlineNotification, NotificationActionButton } from '../../';
+import { Grid } from 'carbon-components-react';
 
 const profileImageProps = () => ({
   className,
@@ -35,11 +36,13 @@ storiesOf(components('ProfileImage#legacy'), module)
           </NotificationActionButton>
         }
         kind="info"
-        subtitle="This component is now legacy. Please click to see the go-forward component"
+        subtitle="Pattern no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
         title=""
         hideCloseButton
       />
-      <Story />
+      <Grid>
+        <Story />
+      </Grid>
     </>
   ))
   .add('default', () => (

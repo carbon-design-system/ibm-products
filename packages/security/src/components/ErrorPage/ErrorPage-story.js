@@ -12,6 +12,7 @@ import { disableCenteredStories, patterns } from '../../../.storybook';
 import { ErrorPage } from '../..';
 
 import { InlineNotification, NotificationActionButton } from '../../';
+import { Grid } from 'carbon-components-react';
 
 const statusCodes = {
   403: 403,
@@ -48,11 +49,13 @@ disableCenteredStories(storiesOf(patterns('ErrorPage#legacy'), module))
           </NotificationActionButton>
         }
         kind="info"
-        subtitle="This component is now legacy. Please click to see the go-forward component"
+        subtitle="Pattern no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
         title=""
         hideCloseButton
       />
-      <Story />
+      <Grid>
+        <Story />
+      </Grid>
     </>
   ))
   .add('default', () => <ErrorPage {...props()} />);

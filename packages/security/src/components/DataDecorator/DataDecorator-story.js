@@ -13,8 +13,11 @@ import React from 'react';
 import { patterns } from '../../../.storybook';
 
 import { Button, DataDecorator, Decorator } from '../..';
+import { Grid } from 'carbon-components-react';
 
 import { props, midLine } from './_mocks_';
+
+import { InlineNotification } from '../../';
 
 const { type, value, score, href } = props;
 const { scoreThresholds } = Decorator.defaultProps;
@@ -57,6 +60,20 @@ const midLineStoryProps = () => ({
   },
 });
 
-storiesOf(patterns('DataDecorator'), module)
+storiesOf(patterns('DataDecorator#legacy'), module)
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        kind="info"
+        subtitle="This component is now legacy."
+        title=""
+        hideCloseButton
+      />
+      <Grid>
+        <Story />
+      </Grid>
+    </>
+  ))
   .add('Default', () => <DataDecorator {...storyProps()} />)
   .add('Mid-line truncation', () => <DataDecorator {...midLineStoryProps()} />);

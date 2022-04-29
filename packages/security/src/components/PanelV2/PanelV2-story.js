@@ -32,6 +32,7 @@ import {
 import { labels } from './_mocks_';
 
 import { InlineNotification, NotificationActionButton } from '../../';
+import { Grid } from 'carbon-components-react';
 
 const { interactive01, text04 } = theme;
 
@@ -80,11 +81,13 @@ disableCenteredStories(storiesOf(patterns('PanelV2#legacy'), module))
           </NotificationActionButton>
         }
         kind="info"
-        subtitle="This component is now legacy. Please click to see the go-forward component"
+        subtitle="Pattern no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
         title=""
         hideCloseButton
       />
-      <Story />
+      <Grid>
+        <Story />
+      </Grid>
     </>
   ))
   .addParameters({

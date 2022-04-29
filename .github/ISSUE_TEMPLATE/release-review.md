@@ -1,3 +1,8 @@
+---
+name: Release review 🐦
+about: Review process before release of a new component or pattern from Canary
+---
+
 ## Review for release
 
 ### Readiness

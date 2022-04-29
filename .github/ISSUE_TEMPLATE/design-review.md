@@ -1,3 +1,8 @@
+---
+name: Design review 🎨
+about: Designer-led review process before release of a new component or pattern
+---
+
 ## Design review
 
 Component epic #

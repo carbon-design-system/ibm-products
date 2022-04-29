@@ -103,6 +103,7 @@ export let DataSpreadsheet = React.forwardRef(
     const [currentMatcher, setCurrentMatcher] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [cellEditorValue, setCellEditorValue] = useState('');
+    const [headerCellHoldActive, setHeaderCellHoldActive] = useState(false);
     const [activeCellInsideSelectionArea, setActiveCellInsideSelectionArea] =
       useState(false);
     const previousState = usePreviousValue({
@@ -818,6 +819,8 @@ export let DataSpreadsheet = React.forwardRef(
             setSelectionAreaData={setSelectionAreaData}
             totalVisibleColumns={totalVisibleColumns}
             updateActiveCellCoordinates={updateActiveCellCoordinates}
+            setHeaderCellHoldActive={setHeaderCellHoldActive}
+            headerCellHoldActive={headerCellHoldActive}
           />
 
           {/* BODY */}
@@ -850,6 +853,7 @@ export let DataSpreadsheet = React.forwardRef(
             defaultEmptyRowCount={defaultEmptyRowCount}
             setActiveCellInsideSelectionArea={setActiveCellInsideSelectionArea}
             totalVisibleColumns={totalVisibleColumns}
+            setHeaderCellHoldActive={setHeaderCellHoldActive}
           />
           <button
             onMouseDown={handleActiveCellMouseDown}

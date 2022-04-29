@@ -10,3 +10,5 @@ export { useMultipleKeyTracking } from './useMultipleKeyTracking';
 export { useResetSpreadsheetFocus } from './useResetSpreadsheetFocus';
 export { useSpreadsheetOutsideClick } from './useSpreadsheetOutsideClick';
 export { useSpreadsheetEdit } from './useSpreadsheetEdit';
+export { useSpreadsheetMouseUp } from './useSpreadsheetMouseUp';
+export { useSpreadsheetMouseMove } from './useSpreadsheetMouseMove';

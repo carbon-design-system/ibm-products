@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useCallback, useEffect, forwardRef } from 'react';
+import React, {
+  useRef,
+  useCallback,
+  useEffect,
+  forwardRef,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { FixedSizeList } from 'react-window';
 import cx from 'classnames';
@@ -22,6 +28,8 @@ import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
 import { checkSelectedHeaderCell } from './utils/checkSelectedHeaderCell';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 import { getSpreadsheetWidth } from './utils/getSpreadsheetWidth';
+
+import { useSpreadsheetMouseUp } from './hooks';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -53,9 +61,11 @@ export const DataSpreadsheetBody = forwardRef(
       onSelectionAreaChange,
       setActiveCellInsideSelectionArea,
       totalVisibleColumns,
+      setHeaderCellHoldActive,
     },
     ref
   ) => {
+    const [validStartingPoint, setValidStartingPoint] = useState(false);
     const contentScrollRef = useRef();
     const previousState = usePreviousValue({
       selectionAreaData,
@@ -173,43 +183,15 @@ export const DataSpreadsheetBody = forwardRef(
       return cellContainer;
     };
 
-    // Mouse up
-    useEffect(() => {
-      const handleMouseUp = (event) => {
-        setClickAndHoldActive(false);
-        const cellButton = event.target.closest(`.${blockClass}__body--td`);
-        if (cellButton) {
-          const endCellCoordinates = {
-            row: Number(cellButton.getAttribute('data-row-index')),
-            column: Number(cellButton.getAttribute('data-column-index')),
-          };
-          setSelectionAreas((prev) => {
-            const selectionAreaClone = deepCloneObject(prev);
-            const indexOfItemToUpdate = selectionAreaClone.findIndex(
-              (item) => item.matcher === currentMatcher
-            );
-            // No items in the array have an object that matches the value of currentMatcher
-            if (indexOfItemToUpdate === -1) {
-              return prev;
-            }
-            selectionAreaClone[indexOfItemToUpdate].point2 = endCellCoordinates;
-            selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
-            return selectionAreaClone;
-          });
-        }
-      };
-      document.addEventListener('mouseup', handleMouseUp);
-      return () => {
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-    }, [
-      selectionAreas,
+    useSpreadsheetMouseUp({
       currentMatcher,
-      setSelectionAreas,
       setClickAndHoldActive,
-      setCurrentMatcher,
+      setSelectionAreas,
+      setValidStartingPoint,
+      validStartingPoint,
       ref,
-    ]);
+      setHeaderCellHoldActive,
+    });
 
     // Make sure that if the cellSize prop changes, the active
     // cell also gets updated with the new size
@@ -229,6 +211,13 @@ export const DataSpreadsheetBody = forwardRef(
       (cell, columnIndex) => {
         return (event) => {
           event.preventDefault();
+          const closestBodyCell = event.target.closest(
+            `.${blockClass}__body--td`
+          );
+          const isValidSelectionAreaStart = closestBodyCell.classList.contains(
+            `${blockClass}__body--td`
+          );
+          setValidStartingPoint(isValidSelectionAreaStart);
           const isHoldingCommandKey = event.metaKey || event.ctrlKey;
           const isHoldingShiftKey = event.shiftKey;
           setContainerHasFocus(true);
@@ -649,6 +638,11 @@ DataSpreadsheetBody.propTypes = {
    * Setter fn for currentMatcher state value
    */
   setCurrentMatcher: PropTypes.func,
+
+  /**
+   * Setter fn for header cell hold active value
+   */
+  setHeaderCellHoldActive: PropTypes.func,
 
   /**
    * Setter fn for selectionAreaData state value

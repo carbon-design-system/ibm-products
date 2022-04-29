@@ -15,6 +15,7 @@ import { checkSelectedHeaderCell } from './utils/checkSelectedHeaderCell';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
 import { selectAllCells } from './utils/selectAllCells';
 import { getSpreadsheetWidth } from './utils/getSpreadsheetWidth';
+import { useSpreadsheetMouseMove } from './hooks';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -35,6 +36,8 @@ export const DataSpreadsheetHeader = forwardRef(
       rows,
       totalVisibleColumns,
       updateActiveCellCoordinates,
+      setHeaderCellHoldActive,
+      headerCellHoldActive,
     },
     ref
   ) => {
@@ -82,6 +85,35 @@ export const DataSpreadsheetHeader = forwardRef(
         updateActiveCellCoordinates,
       });
     };
+
+    const handleHeaderMouseDown = (index) => {
+      return (event) => {
+        const clickXPosition = event.clientX;
+        const headerButtonCoords = event.target.getBoundingClientRect();
+        const offsetXValue = clickXPosition - headerButtonCoords.left;
+        const bodyContainer = document.querySelector(
+          `.${blockClass}__list--container`
+        ).firstElementChild;
+        const selectionAreaToClone = selectionAreas.filter(
+          (item) => item?.header?.index === index
+        );
+        const selectionAreaElement = ref.current.querySelector(
+          `[data-matcher-id="${selectionAreaToClone[0]?.matcher}"]`
+        );
+        const selectionAreaClonedElement = selectionAreaElement.cloneNode();
+        selectionAreaClonedElement.classList.add(
+          `${blockClass}__selection-area--element-cloned`
+        );
+        selectionAreaClonedElement.setAttribute(
+          'data-clone-offset-x',
+          offsetXValue
+        );
+        bodyContainer.appendChild(selectionAreaClonedElement);
+        setHeaderCellHoldActive(true);
+      };
+    };
+
+    useSpreadsheetMouseMove({ ref, headerCellHoldActive });
 
     return (
       <div className={cx(`${blockClass}__header--container`)} role="rowgroup">
@@ -133,44 +165,55 @@ export const DataSpreadsheetHeader = forwardRef(
               </button>
             </div>
             {/* COLUMN HEADER BUTTONS */}
-            {headerGroup.headers.map((column, index) => (
-              <div
-                key={`column_${index}`}
-                role="columnheader"
-                className={`${blockClass}__columnheader`}
-                {...column.getHeaderProps()}
-              >
-                <button
-                  id={`${blockClass}__cell--header--${index}`}
-                  data-row-index="header"
-                  data-column-index={index}
-                  tabIndex={-1}
-                  onClick={handleColumnHeaderClick(index)}
-                  style={{
-                    height: defaultColumn?.rowHeight,
-                    width: column?.width || defaultColumn?.width,
-                  }}
-                  className={cx(
-                    `${blockClass}__th`,
-                    `${blockClass}--interactive-cell-element`,
-                    {
-                      [`${blockClass}__th--active-header`]:
-                        activeCellCoordinates?.column === index ||
-                        checkActiveHeaderCell(index, selectionAreas, 'column'),
-                      [`${blockClass}__th--selected-header`]:
-                        checkSelectedHeaderCell(
-                          index,
-                          selectionAreas,
-                          'column'
-                        ),
-                    }
-                  )}
-                  type="button"
+            {headerGroup.headers.map((column, index) => {
+              const selectedHeader = checkSelectedHeaderCell(
+                index,
+                selectionAreas,
+                'column'
+              );
+              return (
+                <div
+                  key={`column_${index}`}
+                  role="columnheader"
+                  className={`${blockClass}__columnheader`}
+                  {...column.getHeaderProps()}
                 >
-                  {column.render('Header')}
-                </button>
-              </div>
-            ))}
+                  <button
+                    id={`${blockClass}__cell--header--${index}`}
+                    data-row-index="header"
+                    data-column-index={index}
+                    tabIndex={-1}
+                    onMouseDown={
+                      selectedHeader ? handleHeaderMouseDown(index) : null
+                    }
+                    onClick={
+                      !selectedHeader ? handleColumnHeaderClick(index) : null
+                    }
+                    style={{
+                      height: defaultColumn?.rowHeight,
+                      width: column?.width || defaultColumn?.width,
+                    }}
+                    className={cx(
+                      `${blockClass}__th`,
+                      `${blockClass}--interactive-cell-element`,
+                      {
+                        [`${blockClass}__th--active-header`]:
+                          activeCellCoordinates?.column === index ||
+                          checkActiveHeaderCell(
+                            index,
+                            selectionAreas,
+                            'column'
+                          ),
+                        [`${blockClass}__th--selected-header`]: selectedHeader,
+                      }
+                    )}
+                    type="button"
+                  >
+                    {column.render('Header')}
+                  </button>
+                </div>
+              );
+            })}
           </div>
         ))}
       </div>
@@ -207,6 +250,11 @@ DataSpreadsheetHeader.propTypes = {
   }),
 
   /**
+   * Whether or not a click/hold is active on a header cell
+   */
+  headerCellHoldActive: PropTypes.bool,
+
+  /**
    * Headers provided from useTable hook
    */
   headerGroups: PropTypes.arrayOf(PropTypes.object),
@@ -235,6 +283,11 @@ DataSpreadsheetHeader.propTypes = {
    * Setter fn for currentMatcher value
    */
   setCurrentMatcher: PropTypes.func,
+
+  /**
+   * Setter fn for header cell hold active value
+   */
+  setHeaderCellHoldActive: PropTypes.func,
 
   /**
    * Setter fn for selectionAreaData state value

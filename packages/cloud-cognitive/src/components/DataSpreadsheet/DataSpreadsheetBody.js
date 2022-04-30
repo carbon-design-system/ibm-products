@@ -62,6 +62,8 @@ export const DataSpreadsheetBody = forwardRef(
       setActiveCellInsideSelectionArea,
       totalVisibleColumns,
       setHeaderCellHoldActive,
+      setColumnOrder,
+      visibleColumns,
     },
     ref
   ) => {
@@ -191,6 +193,12 @@ export const DataSpreadsheetBody = forwardRef(
       validStartingPoint,
       ref,
       setHeaderCellHoldActive,
+      setColumnOrder,
+      columns,
+      visibleColumns,
+      setActiveCellCoordinates,
+      rows,
+      activeCellCoordinates,
     });
 
     // Make sure that if the cellSize prop changes, the active
@@ -630,6 +638,11 @@ DataSpreadsheetBody.propTypes = {
   setClickAndHoldActive: PropTypes.func,
 
   /**
+   * Setter fn for column ordering, provided from react-table
+   */
+  setColumnOrder: PropTypes.func,
+
+  /**
    * Setter fn for containerHasFocus state value
    */
   setContainerHasFocus: PropTypes.func,
@@ -664,4 +677,9 @@ DataSpreadsheetBody.propTypes = {
    * visible via horizontal scrollbar
    */
   totalVisibleColumns: PropTypes.number,
+
+  /**
+   * Prop from react-table used to reorder columns
+   */
+  visibleColumns: PropTypes.array,
 };

@@ -108,6 +108,10 @@ export const DataSpreadsheetHeader = forwardRef(
           'data-clone-offset-x',
           offsetXValue
         );
+        selectionAreaClonedElement.setAttribute(
+          'data-column-index-original',
+          index
+        );
         bodyContainer.appendChild(selectionAreaClonedElement);
         setHeaderCellHoldActive(true);
       };

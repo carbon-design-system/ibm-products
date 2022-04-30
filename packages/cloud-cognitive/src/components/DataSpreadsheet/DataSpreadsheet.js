@@ -13,7 +13,7 @@ import React, {
   useCallback,
   useEffect,
 } from 'react';
-import { useBlockLayout, useTable } from 'react-table';
+import { useBlockLayout, useTable, useColumnOrder } from 'react-table';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -137,13 +137,16 @@ export let DataSpreadsheet = React.forwardRef(
       rows,
       totalColumnsWidth,
       prepareRow,
+      setColumnOrder,
+      visibleColumns,
     } = useTable(
       {
         columns,
         data,
         defaultColumn,
       },
-      useBlockLayout
+      useBlockLayout,
+      useColumnOrder
     );
 
     // Update the spreadsheet data after editing a cell
@@ -854,6 +857,8 @@ export let DataSpreadsheet = React.forwardRef(
             setActiveCellInsideSelectionArea={setActiveCellInsideSelectionArea}
             totalVisibleColumns={totalVisibleColumns}
             setHeaderCellHoldActive={setHeaderCellHoldActive}
+            setColumnOrder={setColumnOrder}
+            visibleColumns={visibleColumns}
           />
           <button
             onMouseDown={handleActiveCellMouseDown}

@@ -5,9 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { useEffect } from 'react';
+import { px } from '@carbon/layout';
+
 import { pkg } from '../../../settings';
 import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
-import { useEffect } from 'react';
 
 export const useSpreadsheetMouseUp = ({
   currentMatcher,
@@ -18,6 +20,12 @@ export const useSpreadsheetMouseUp = ({
   blockClass = `${pkg.prefix}--data-spreadsheet`,
   ref,
   setHeaderCellHoldActive,
+  setColumnOrder,
+  columns,
+  visibleColumns,
+  setActiveCellCoordinates,
+  activeCellCoordinates,
+  rows,
 }) => {
   useEffect(() => {
     const handleMouseUp = (event) => {
@@ -27,9 +35,73 @@ export const useSpreadsheetMouseUp = ({
         const selectionAreaCloneElement = ref.current.querySelector(
           `.${blockClass}__selection-area--element-cloned`
         );
-        selectionAreaCloneElement?.remove();
-        const newColumnIndex = event.target?.getAttribute('data-column-index');
-        console.log('mouse up from header cell', newColumnIndex);
+        if (!selectionAreaCloneElement) {
+          return;
+        }
+        // Mouse up while a cloned selection area exists/a column is being reordered
+        if (selectionAreaCloneElement) {
+          const newColumnIndex =
+            event.target?.getAttribute('data-column-index');
+          const originalColumnIndex = selectionAreaCloneElement?.getAttribute(
+            'data-column-index-original'
+          );
+          const columnToMoveToElement = ref.current.querySelector(
+            `[data-row-index="header"][data-column-index="${newColumnIndex}"]`
+          );
+          // Mouse up element was not part of the spreadsheet component
+          if (!columnToMoveToElement) {
+            return;
+          }
+          const newColumnCoords = columnToMoveToElement.getBoundingClientRect();
+          const newColumnLeftPosition = newColumnCoords.left;
+          const spreadsheetCoords = ref.current.getBoundingClientRect();
+          const offsetXValue = newColumnLeftPosition - spreadsheetCoords.left;
+          const selectionAreaToMove = ref.current.querySelector(
+            `[data-matcher-id="${currentMatcher}"]`
+          );
+          const activeCellElement = ref.current.querySelector(
+            `.${blockClass}__active-cell--highlight`
+          );
+          selectionAreaToMove.style.left = px(offsetXValue);
+          activeCellElement.style.left = px(offsetXValue);
+          setSelectionAreas((prev) => {
+            const selectionAreaClone = deepCloneObject(prev);
+            if (originalColumnIndex === newColumnIndex) {
+              return prev;
+            }
+            const indexOfItemToUpdate = selectionAreaClone.findIndex(
+              (item) => item.matcher === currentMatcher
+            );
+            if (indexOfItemToUpdate === -1) {
+              return prev;
+            }
+            selectionAreaClone[indexOfItemToUpdate].header.index =
+              Number(newColumnIndex);
+            selectionAreaClone[indexOfItemToUpdate].point1.column =
+              Number(newColumnIndex);
+            selectionAreaClone[indexOfItemToUpdate].point2.column =
+              Number(newColumnIndex);
+            return selectionAreaClone;
+          });
+          const columnIdArray = visibleColumns.map((column) => column.id);
+          const columnIdArrayClone = [...columnIdArray];
+          // Remove one element at the original index
+          columnIdArrayClone.splice(originalColumnIndex, 1);
+          // Add one element at the new index
+          columnIdArrayClone.splice(
+            newColumnIndex,
+            0,
+            columnIdArray[originalColumnIndex]
+          );
+          setColumnOrder(columnIdArrayClone); // Function provided by useTable hook to reorder columns
+          const newCellCoords = {
+            ...activeCellCoordinates,
+            column: Number(newColumnIndex),
+          };
+          setActiveCellCoordinates(newCellCoords);
+
+          selectionAreaCloneElement?.remove();
+        }
       }
       // Mouse up was on a spreadsheet body cell which is a valid
       // start/end point for creating a selection area
@@ -71,5 +143,11 @@ export const useSpreadsheetMouseUp = ({
     validStartingPoint,
     ref,
     setHeaderCellHoldActive,
+    setColumnOrder,
+    columns,
+    visibleColumns,
+    setActiveCellCoordinates,
+    activeCellCoordinates,
+    rows,
   ]);
 };

@@ -233,6 +233,12 @@
         background-color: $inverse-02;
       }
     }
+    .#{$block-class}__th--selected-header.#{$block-class}__th {
+      cursor: grab;
+    }
+    .#{$block-class}__th--selected-header-reorder-active {
+      cursor: grabbing;
+    }
     .#{$block-class}__list--container {
       overscroll-behavior: none;
     }

@@ -42,6 +42,8 @@ export const DataSpreadsheetHeader = forwardRef(
     ref
   ) => {
     const [scrollBarSizeValue, setScrollBarSizeValue] = useState(0);
+    const [selectedHeaderReorderActive, setSelectedHeaderReorderActive] =
+      useState(false);
     const previousState = usePreviousValue({ cellSize });
     useEffect(() => {
       if (previousState?.cellSize !== cellSize) {
@@ -88,6 +90,7 @@ export const DataSpreadsheetHeader = forwardRef(
 
     const handleHeaderMouseDown = (index) => {
       return (event) => {
+        setSelectedHeaderReorderActive(true);
         const clickXPosition = event.clientX;
         const headerButtonCoords = event.target.getBoundingClientRect();
         const offsetXValue = clickXPosition - headerButtonCoords.left;
@@ -190,6 +193,7 @@ export const DataSpreadsheetHeader = forwardRef(
                     onMouseDown={
                       selectedHeader ? handleHeaderMouseDown(index) : null
                     }
+                    onMouseUp={() => setSelectedHeaderReorderActive(false)}
                     onClick={
                       !selectedHeader ? handleColumnHeaderClick(index) : null
                     }
@@ -209,6 +213,8 @@ export const DataSpreadsheetHeader = forwardRef(
                             'column'
                           ),
                         [`${blockClass}__th--selected-header`]: selectedHeader,
+                        [`${blockClass}__th--selected-header-reorder-active`]:
+                          selectedHeaderReorderActive,
                       }
                     )}
                     type="button"

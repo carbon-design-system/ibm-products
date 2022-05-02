@@ -194,11 +194,11 @@ export const DataSpreadsheetBody = forwardRef(
       ref,
       setHeaderCellHoldActive,
       setColumnOrder,
-      columns,
       visibleColumns,
       setActiveCellCoordinates,
       rows,
       activeCellCoordinates,
+      defaultColumn,
     });
 
     // Make sure that if the cellSize prop changes, the active

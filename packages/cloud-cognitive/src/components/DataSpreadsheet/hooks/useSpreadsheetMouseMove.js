@@ -8,11 +8,15 @@
 import { useEffect } from 'react';
 import { px } from '@carbon/layout';
 import { pkg } from '../../../settings';
+import { getScrollbarWidth } from '../../../global/js/utils/getScrollbarWidth';
 
+// Used specifically for reordering columns, will move the position of the
+// cloned selection area to follow the position of the cursor
 export const useSpreadsheetMouseMove = ({
   ref,
   blockClass = `${pkg.prefix}--data-spreadsheet`,
   headerCellHoldActive,
+  defaultColumn,
 }) => {
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -22,6 +26,7 @@ export const useSpreadsheetMouseMove = ({
       if (clonedSelectionElement) {
         ref.current.addEventListener('mousemove', handleMouseMove);
       }
+      const scrollbarWidth = getScrollbarWidth();
       const spreadsheetWrapperElement = ref.current;
       const spreadsheetCoords =
         spreadsheetWrapperElement.getBoundingClientRect();
@@ -30,9 +35,18 @@ export const useSpreadsheetMouseMove = ({
       const offsetXValue = clonedSelectionElement?.getAttribute(
         'data-clone-offset-x'
       );
+      const totalSpreadsheetWidth = ref.current.offsetWidth;
+      const clonedSelectionWidth = clonedSelectionElement.offsetWidth;
+      const clonePlacement = Math.max(
+        xPositionRelativeToSpreadsheet - offsetXValue,
+        defaultColumn?.rowHeaderWidth
+      );
       // Moves the position of the cloned selection area to follow mouse
       clonedSelectionElement.style.left = px(
-        xPositionRelativeToSpreadsheet - offsetXValue
+        totalSpreadsheetWidth - clonedSelectionWidth - scrollbarWidth >=
+          clonePlacement
+          ? clonePlacement
+          : totalSpreadsheetWidth - clonedSelectionWidth - scrollbarWidth
       );
     };
     if (headerCellHoldActive) {

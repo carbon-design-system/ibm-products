@@ -117,7 +117,7 @@ export const DataSpreadsheetHeader = forwardRef(
       };
     };
 
-    useSpreadsheetMouseMove({ ref, headerCellHoldActive });
+    useSpreadsheetMouseMove({ ref, headerCellHoldActive, defaultColumn });
 
     return (
       <div className={cx(`${blockClass}__header--container`)} role="rowgroup">

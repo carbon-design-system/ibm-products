@@ -8,6 +8,7 @@
 import React, { forwardRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { px } from '@carbon/layout';
 import { pkg } from '../../settings';
 import { usePreviousValue } from '../../global/js/hooks';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
@@ -104,6 +105,9 @@ export const DataSpreadsheetHeader = forwardRef(
           `[data-matcher-id="${selectionAreaToClone[0]?.matcher}"]`
         );
         const selectionAreaClonedElement = selectionAreaElement.cloneNode();
+        const reorderIndicatorLine = selectionAreaElement.cloneNode();
+        reorderIndicatorLine.className = `${blockClass}__reorder-indicator-line`;
+        reorderIndicatorLine.style.width = px(2);
         selectionAreaClonedElement.classList.add(
           `${blockClass}__selection-area--element-cloned`
         );
@@ -116,6 +120,7 @@ export const DataSpreadsheetHeader = forwardRef(
           index
         );
         bodyContainer.appendChild(selectionAreaClonedElement);
+        bodyContainer.appendChild(reorderIndicatorLine);
         setHeaderCellHoldActive(true);
       };
     };
@@ -193,7 +198,11 @@ export const DataSpreadsheetHeader = forwardRef(
                     onMouseDown={
                       selectedHeader ? handleHeaderMouseDown(index) : null
                     }
-                    onMouseUp={() => setSelectedHeaderReorderActive(false)}
+                    onMouseUp={
+                      selectedHeader
+                        ? () => setSelectedHeaderReorderActive(false)
+                        : null
+                    }
                     onClick={
                       !selectedHeader ? handleColumnHeaderClick(index) : null
                     }

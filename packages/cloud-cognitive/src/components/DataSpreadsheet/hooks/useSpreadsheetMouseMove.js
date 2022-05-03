@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { px } from '@carbon/layout';
 import { pkg } from '../../../settings';
 import { getScrollbarWidth } from '../../../global/js/utils/getScrollbarWidth';
+import { moveColumnIndicatorLine } from '../utils/moveColumnIndicatorLine';
 
 // Used specifically for reordering columns, will move the position of the
 // cloned selection area to follow the position of the cursor
@@ -26,10 +27,15 @@ export const useSpreadsheetMouseMove = ({
       if (clonedSelectionElement) {
         ref.current.addEventListener('mousemove', handleMouseMove);
       }
+      const spreadsheetCoords = ref.current.getBoundingClientRect();
+      moveColumnIndicatorLine({
+        clonedSelectionElement,
+        ref,
+        spreadsheetCoords,
+      });
       const scrollbarWidth = getScrollbarWidth();
       const spreadsheetWrapperElement = ref.current;
-      const spreadsheetCoords =
-        spreadsheetWrapperElement.getBoundingClientRect();
+      spreadsheetWrapperElement.getBoundingClientRect();
       const xPositionRelativeToSpreadsheet =
         event.clientX - spreadsheetCoords.left;
       const offsetXValue = clonedSelectionElement?.getAttribute(

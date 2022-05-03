@@ -210,6 +210,14 @@
         content: '';
         opacity: 0.2;
       }
+      &.#{$block-class}__selection-area--element-cloned {
+        z-index: 4;
+
+        &::before {
+          background-color: $ui-05;
+          opacity: 0.25;
+        }
+      }
     }
     .#{$block-class}__th--active-header,
     .#{$block-class}__td-th--active-header.#{$block-class}__td {
@@ -220,9 +228,16 @@
       background-color: $inverse-02;
       color: $text-04;
 
+      &:focus,
       &:hover {
         background-color: $inverse-02;
       }
+    }
+    .#{$block-class}__th--selected-header.#{$block-class}__th {
+      cursor: grab;
+    }
+    .#{$block-class}__th--selected-header-reorder-active {
+      cursor: grabbing;
     }
     .#{$block-class}__list--container {
       overscroll-behavior: none;

@@ -13,7 +13,7 @@ import React, {
   useCallback,
   useEffect,
 } from 'react';
-import { useBlockLayout, useTable } from 'react-table';
+import { useBlockLayout, useTable, useColumnOrder } from 'react-table';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -103,6 +103,7 @@ export let DataSpreadsheet = React.forwardRef(
     const [currentMatcher, setCurrentMatcher] = useState('');
     const [isEditing, setIsEditing] = useState(false);
     const [cellEditorValue, setCellEditorValue] = useState('');
+    const [headerCellHoldActive, setHeaderCellHoldActive] = useState(false);
     const [activeCellInsideSelectionArea, setActiveCellInsideSelectionArea] =
       useState(false);
     const previousState = usePreviousValue({
@@ -136,13 +137,16 @@ export let DataSpreadsheet = React.forwardRef(
       rows,
       totalColumnsWidth,
       prepareRow,
+      setColumnOrder,
+      visibleColumns,
     } = useTable(
       {
         columns,
         data,
         defaultColumn,
       },
-      useBlockLayout
+      useBlockLayout,
+      useColumnOrder
     );
 
     // Update the spreadsheet data after editing a cell
@@ -818,6 +822,8 @@ export let DataSpreadsheet = React.forwardRef(
             setSelectionAreaData={setSelectionAreaData}
             totalVisibleColumns={totalVisibleColumns}
             updateActiveCellCoordinates={updateActiveCellCoordinates}
+            setHeaderCellHoldActive={setHeaderCellHoldActive}
+            headerCellHoldActive={headerCellHoldActive}
           />
 
           {/* BODY */}
@@ -850,6 +856,9 @@ export let DataSpreadsheet = React.forwardRef(
             defaultEmptyRowCount={defaultEmptyRowCount}
             setActiveCellInsideSelectionArea={setActiveCellInsideSelectionArea}
             totalVisibleColumns={totalVisibleColumns}
+            setHeaderCellHoldActive={setHeaderCellHoldActive}
+            setColumnOrder={setColumnOrder}
+            visibleColumns={visibleColumns}
           />
           <button
             onMouseDown={handleActiveCellMouseDown}

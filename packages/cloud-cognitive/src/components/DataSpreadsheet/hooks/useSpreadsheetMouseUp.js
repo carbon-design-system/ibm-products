@@ -117,7 +117,11 @@ export const useSpreadsheetMouseUp = ({
             column: Number(newColumnIndex),
           };
           setActiveCellCoordinates(newCellCoords);
-          // Remove the cloned column
+          // Remove the cloned column and indicator elements
+          const indicatorLineElement = ref.current.querySelector(
+            `.${blockClass}__reorder-indicator-line`
+          );
+          indicatorLineElement?.remove();
           selectionAreaCloneElement?.remove();
         }
       }

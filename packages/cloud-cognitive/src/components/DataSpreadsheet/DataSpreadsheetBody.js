@@ -144,11 +144,11 @@ export const DataSpreadsheetBody = forwardRef(
               ref,
               area,
               blockClass,
-              columns,
               defaultColumn,
               selectionAreas,
               setSelectionAreas,
               setActiveCellInsideSelectionArea,
+              visibleColumns,
             });
           }
           return;
@@ -163,7 +163,7 @@ export const DataSpreadsheetBody = forwardRef(
       ref,
       activeCellCoordinates,
       setActiveCellInsideSelectionArea,
-      columns,
+      visibleColumns,
     ]);
 
     const populateSelectionAreaCellData = ({

@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.16.0...@carbon/ibm-products@1.17.0) (2022-05-03)
+
+
+### Bug Fixes
+
+* **Datagrid:** revert react-dnd versions ([#1950](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1950)) ([a1417b0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a1417b0e97516826a44ae6352ada8a84200d8eb0))
+* filename and extension default state ([#1947](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1947)) ([87eaf33](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/87eaf33e72371f301a5c7c4a5f2f61a2b448bdf5))
+* **SidePanel:** fix static panel height without actions ([#1943](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1943)) ([1092125](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/10921258ecd9dc460492e785a69b82a49a34ba50))
+
+
+### Features
+
+* **DataSpreadsheet:** add selected row/column header state ([#1954](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1954)) ([b9184cb](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b9184cbefeb02cec3c1a7577ea3168a7919ae343))
+* **DataSpreadsheet:** support variable column width ([#1945](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1945)) ([0ab2ae7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0ab2ae779032c073deedfbcd6ba42fda6ea73176))
+* **WebTerminal:** 1914 reduce motion web terminal ([#1951](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1951)) ([d26face](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d26facef16657a9bc43b7b09ac50cf3f173999f5))
+
+
+
+
+
 # [1.16.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.15.0...@carbon/ibm-products@1.16.0) (2022-04-26)
 
 

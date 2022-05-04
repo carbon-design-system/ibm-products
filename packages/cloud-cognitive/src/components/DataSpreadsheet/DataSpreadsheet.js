@@ -582,6 +582,7 @@ export let DataSpreadsheet = React.forwardRef(
 
     const startEditMode = () => {
       setIsEditing(true);
+      setClickAndHoldActive(false);
       const activeCellFullData =
         typeof activeCellCoordinates?.column === 'number' &&
         typeof activeCellCoordinates?.row === 'number'
@@ -590,9 +591,7 @@ export let DataSpreadsheet = React.forwardRef(
             ]
           : null;
       const activeCellValue = activeCellFullData
-        ? Object.values(activeCellFullData.row.values)[
-            activeCellCoordinates?.column
-          ]
+        ? activeCellFullData.row.cells[activeCellCoordinates?.column].value
         : null;
       setCellEditorValue(activeCellValue);
       cellEditorRulerRef.current.textContent = activeCellValue;

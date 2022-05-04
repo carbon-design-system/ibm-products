@@ -4,7 +4,11 @@
 
 ## Getting started
 
-> **Note:** This package on NPM was previously sourced from a repository that is no longer maintained. To ensure you are using the code that is being maintained, please check your version of `@carbon/ibm-security` in your package.json and lock file. If the version is 2.x, you are using code from this repo.
+> **Note:** This package on NPM was previously sourced from a repository that is
+> no longer maintained. To ensure you are using the code that is being
+> maintained, please check your version of `@carbon/ibm-security` in your
+> package.json and lock file. If the version is 2.x, you are using code from
+> this repo.
 
 To install `@carbon/ibm-security` in your project, you will need to run the
 following command using [npm](https://www.npmjs.com):

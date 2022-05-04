@@ -729,7 +729,7 @@ export let DataSpreadsheet = React.forwardRef(
       activeCellRef,
       cellEditorRef,
       cellEditorRulerRef,
-      columns,
+      visibleColumns,
       defaultColumn,
       cellEditorValue,
     });

@@ -36,6 +36,9 @@ const shellProps = {
 disableCenteredStories(storiesOf(patterns('Shell#legacy'), module))
   .addDecorator((Story) => (
     <>
+      <Grid>
+        <Story />
+      </Grid>
       <InlineNotification
         className="page-layouts__banner"
         actions={
@@ -52,9 +55,6 @@ disableCenteredStories(storiesOf(patterns('Shell#legacy'), module))
         title=""
         hideCloseButton
       />
-      <Grid>
-        <Story />
-      </Grid>
     </>
   ))
   .add('default', () => <Shell {...shellProps} />, {

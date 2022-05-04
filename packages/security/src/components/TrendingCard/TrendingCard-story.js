@@ -36,7 +36,7 @@ export default {
             </NotificationActionButton>
           }
           kind="info"
-          subtitle="Pattern no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
+          subtitle="Component no longer supported. The components will remain available, but plan to migrate to the component replacement."
           title=""
           hideCloseButton
         />

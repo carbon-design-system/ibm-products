@@ -33,6 +33,9 @@ const headerProps = {
 disableCenteredStories(storiesOf(patterns('Header#legacy'), module))
   .addDecorator((Story) => (
     <>
+      <Grid>
+        <Story />
+      </Grid>
       <InlineNotification
         className="page-layouts__banner"
         actions={
@@ -48,10 +51,8 @@ disableCenteredStories(storiesOf(patterns('Header#legacy'), module))
         subtitle="Pattern no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
         title=""
         hideCloseButton
+        style={{ display: 'block' }}
       />
-      <Grid>
-        <Story />
-      </Grid>
     </>
   ))
   .add('default', () => <Header {...headerProps} />, {

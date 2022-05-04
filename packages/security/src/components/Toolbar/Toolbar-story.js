@@ -29,7 +29,7 @@ storiesOf(patterns('Toolbar#legacy'), module)
           </NotificationActionButton>
         }
         kind="info"
-        subtitle="Pattern no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
+        subtitle="Component no longer supported. The component will remain available, but plan to migrate to the component replacement."
         title=""
         hideCloseButton
       />

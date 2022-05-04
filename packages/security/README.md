@@ -1,6 +1,6 @@
 # @carbon/ibm-security
 
-> Carbon for Cloud & Cognitive IBM Security UI components
+> Carbon for IBM Products - Security UI components
 
 ## Getting started
 

@@ -44,7 +44,7 @@ disableCenteredStories(storiesOf(patterns('Header#legacy'), module))
             rel="noopener noreferrer"
             target="_blank"
           >
-            More info
+            View replacement
           </NotificationActionButton>
         }
         kind="info"

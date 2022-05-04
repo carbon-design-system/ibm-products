@@ -33,7 +33,7 @@ storiesOf(components('Icon#legacy'), module)
             rel="noopener noreferrer"
             target="_blank"
           >
-            More info
+            View replacement
           </NotificationActionButton>
         }
         kind="info"

@@ -43,8 +43,9 @@ a
 
 1. To install the project’s dependencies, from the root directory of your fork,
    run `yarn --offline`
-2. To scaffold a new component or pattern, run `yarn generate ComponentName`,
-   where `ComponentName` is the name of the component or pattern
+2. To scaffold a [new component or pattern](#8-new-component-or-pattern), run
+   `yarn generate ComponentName`, where `ComponentName` is the name of the
+   component or pattern
 3. To get your development server running and to start coding, run
    `yarn storybook`
 
@@ -151,6 +152,11 @@ additional work to do.
 
 If you create a new component or pattern, it should first be contributed as
 [`canary`](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/docs/guides/CANARY_STRUCTURE.md).
+
+Due to the nature of the monorepo, when you add a new component or pattern, be
+sure to add it in `packages/core/story-structure`. This step will surface the
+component or pattern in the Storybook navigation.
+
 To move a component from `canary` to the released state, there are two
 additional tasks that must be completed.
 

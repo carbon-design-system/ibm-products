@@ -1,8 +1,8 @@
 # @carbon/ibm-products
 
-> Carbon for IBM Products is an open-source implementation of the closed source
+> Carbon for IBM Products is an open source implementation of the closed source
 > [Carbon for Cloud & Cognitive pattern asset library (PAL)](https://pages.github.ibm.com/cdai-design/pal/).
-> These PAL designs build on the foundation of IBM's open source Carbon Design
+> These PAL designs build on the foundation of IBM’s open source Carbon Design
 > System and React implementation to offer components and patterns beyond the
 > typical component library. Carbon for IBM Products was previously known as
 > Carbon for IBM Cloud and Cognitive (@carbon/ibm-cloud-cognitive), and this
@@ -19,10 +19,10 @@
 
 ## 🚀 Getting started
 
-If you're just getting started and looking to browse our React components, take
-a look at [our Storybook](https://ibm-cloud-cognitive.netlify.app).
+If you’re just getting started and looking to browse our React components, take
+a look at [our Storybook](https://carbon-for-ibm-products.netlify.app).
 
-## 📦 Installing Carbon for IBM Products
+### 📦 Installing Carbon for IBM Products
 
 To use Carbon for IBM Products components, all you need to do is install the
 `@carbon/ibm-products` package.
@@ -41,29 +41,32 @@ Then you can import the component styles in your `index.js`.
 import '@carbon/ibm-products/css/index.min.css';
 ```
 
-### Carbon Components (Peer dependencies)
+### Peer dependencies
 
-@carbon/ibm-products is built on top of Carbon components and has a number of
-dependencies which need to be installed. Follow the package instructions for:
+`@carbon/ibm-products` is built on top of Carbon components and has a number of
+dependencies which need to be installed.
 
--. Install carbon-components-react as per that packages instructions
-<https://www.npmjs.com/package/carbon-components-react> -. Install
-@carbon/icons-react as per package instructions
-<https://www.npmjs.com/package/@carbon/icons-react> -. Install @carbon/elements
-as per package instructions <https://www.npmjs.com/package/@carbon/elements>
+- Install
+  [`carbon-components-react`](https://www.npmjs.com/package/carbon-components-react)
+  as per package instructions
+- Install
+  [`@carbon/icons-react`](https://www.npmjs.com/package/@carbon/icons-react) as
+  per package instructions
+- Install [`@carbon/elements`](https://www.npmjs.com/package/@carbon/elements)
+  as per package instructions
 
-NOTE: Carbon elements rolls up a number of Carbon packages that could be
+**Note:** `@carbon/elements` rolls up a number of Carbon packages that could be
 installed independently. As this list of dependencies could change, we leave you
-to view package.json in ibm-cloud-cognitive if you wish to install individual
+to view `package.json` in ibm-cloud-cognitive if you wish to install individual
 packages.
 
 ## Examples
 
-### Codesandbox
+### CodeSandbox
 
 Examples for each released component, and some that are still not quite ready,
 can be found here on
-[Code Sandbox](https://codesandbox.io/examples/package/@carbon/ibm-cloud-cognitive).
+[CodeSandbox](https://codesandbox.io/examples/package/@carbon/ibm-cloud-cognitive).
 
 ### Packages
 
@@ -82,7 +85,7 @@ const App = () => {
 };
 ```
 
-## Enabling canary components
+### Enabling Canary components
 
 Components that have not yet completed the release review process are considered
 to be canary and require the consumer to enable via a feature flag in a
@@ -108,25 +111,25 @@ pkg.flags.noneJustYet = true;
 pkg.setAllFeatures(true);
 ```
 
-**Note:** the above settings must happen before a component first renders.
+**Note:** The above settings must happen before a component first renders.
 
-## Building and running Locally
+### Building and running locally
 
-To get started run the following commands and storybook will be built and then
+To get started, run the following commands and Storybook will be built and then
 served on port `3000` on your local machine.
 
-```
+```shell
 yarn install
 yarn storybook
 ```
 
 To build all the packages, run the following command.
 
-```
+```shell
 yarn build
 ```
 
-## Browser Support
+## Browser support
 
 This library supports the latest versions of:
 
@@ -137,17 +140,17 @@ This library supports the latest versions of:
 
 ## 🙌 Contributing
 
-This project was made possible by several community members who have invested
+This project is made possible by several community members who have invested
 their precious time to give back to the Carbon community. It will continue to be
 possible by having those that benefit from the package contribute back to it.
 
 So, do not be shy. We both depend on and appreciate contributors, new and old,
 who help us fix bugs, build new features, improve our documentation, etc.
 
-If you're interested, definitely check out our
+If you’re interested, definitely check out our
 [Contributing Guide](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)
 and
-[Carbon's Developer Handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md)!
+[Carbon’s Developer Handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md)!
 👀
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->

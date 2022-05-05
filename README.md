@@ -1,8 +1,8 @@
 # Carbon for IBM Products
 
-> Carbon for IBM Products is an open-source implementation of the closed source
+> Carbon for IBM Products is an open source implementation of the closed source
 > [Carbon for Cloud & Cognitive pattern asset library (PAL)](https://pages.github.ibm.com/cdai-design/pal/).
-> These PAL designs build on the foundation of IBM's open source Carbon Design
+> These PAL designs build on the foundation of IBM’s open source Carbon Design
 > System and React implementation to offer components and patterns beyond the
 > typical component library. Carbon for IBM Products was previously known as
 > Carbon for IBM Cloud and Cognitive, and this name can still be encountered in
@@ -15,10 +15,10 @@
 [![GitHub Lerna version](https://img.shields.io/github/lerna-json/v/carbon-design-system/ibm-cloud-cognitive)](https://lerna.js.org)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)
 
-## Getting started
+## 🚀 Getting started
 
-If you're just getting started and looking to browse our React components, take
-a look at [our Storybook](https://ibm-cloud-cognitive.netlify.app).
+If you’re just getting started and looking to browse our React components, take
+a look at [our Storybook](https://carbon-for-ibm-products.netlify.app).
 
 All of our source code and documentation, including this readme, can be found on
 [our GitHub repo](https://github.com/carbon-design-system/ibm-cloud-cognitive),
@@ -27,8 +27,8 @@ which is also the place to
 if you have a problem or find a defect or would like to request a new feature or
 change something.
 
-If you have access to the IBM Slack workspaces, you can join the discussion on
-[our slack channel](https://ibm-casdesign.slack.com/archives/C013ZTX0N6B) where
+If you have access to the IBM Slack workspaces, join
+[our Slack channel](https://ibm-casdesign.slack.com/archives/C013ZTX0N6B) where
 you can ask questions, report problems, and get help from the team and from
 other users.
 
@@ -43,26 +43,33 @@ npm:
 
 Also the following additional utility packages are published on npm:
 
-| Package name                                                               | Description                                       |
-| -------------------------------------------------------------------------- | ------------------------------------------------- |
-| [`@carbon/storybook-addon-theme`](./packages/storybook-addon-carbon-theme) | A storybook addon enabling Carbon theme switching |
+| Package name                                                             | Description                                       |
+| ------------------------------------------------------------------------ | ------------------------------------------------- |
+| [`@carbon/storybook-addon-theme`](./config/storybook-addon-carbon-theme) | A storybook addon enabling Carbon theme switching |
 
 The remaining packages are part of our project infrastructure and are not
 published on npm.
 
 ## 🙌 Contributing
 
-This project was made possible by several community members who have invested
+This project is made possible by several community members who have invested
 their precious time to give back to the Carbon community. It will continue to be
 possible by having those that benefit from the package contribute back to it.
 
 So, do not be shy. We both depend on and appreciate contributors, new and old,
 who help us fix bugs, build new features, improve our documentation, etc.
 
-If you're interested, definitely check out our
+This repository is a monorepo and contains multiple packages so be sure to check
+the relevant package for any package-specific guidance.
+
+- [@carbon/ibm-products](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)
+- [@carbon/ibm-cloud-cognitive-cdai](./packages/cdai)
+- [@carbon/ibm-security](./packages/security)
+
+Read also our
 [Contributing Guide](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)
 and
-[Carbon's Developer Handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md)!
+[Carbon’s Developer Handbook](https://github.com/carbon-design-system/carbon/blob/master/docs/developer-handbook.md)!
 👀
 
 ## Contributors ✨

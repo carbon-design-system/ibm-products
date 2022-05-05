@@ -17,7 +17,7 @@ export const useSpreadsheetEdit = ({
   activeCellRef,
   cellEditorRef,
   cellEditorRulerRef,
-  columns,
+  visibleColumns,
   defaultColumn,
   cellEditorValue,
   blockClass = `${pkg.prefix}--data-spreadsheet`,
@@ -52,7 +52,7 @@ export const useSpreadsheetEdit = ({
 
       if (rulerWidth < cellEditorCurrentWidth) {
         const currentColumnWidth =
-          columns[nextIndex]?.width || defaultColumn?.width;
+          visibleColumns[nextIndex]?.width || defaultColumn?.width;
         // If the contents of the cell editor is deleted past the point of the next column
         if (rulerWidth < cellEditorCurrentWidth - currentColumnWidth) {
           cellEditorRef.current.style.width = px(
@@ -69,15 +69,15 @@ export const useSpreadsheetEdit = ({
       }
       if (rulerWidth >= cellEditorCurrentWidth) {
         setNextIndex((prev) => {
-          if (prev === columns.length - 1) {
+          if (prev === visibleColumns.length - 1) {
             return prev;
           }
           return prev + 1;
         });
-        const onLastColumnIndex = nextIndex + 1 === columns.length;
+        const onLastColumnIndex = nextIndex + 1 === visibleColumns.length;
         const nextColumnWidth = onLastColumnIndex
           ? 0
-          : columns[nextIndex + 1]?.width || defaultColumn?.width;
+          : visibleColumns[nextIndex + 1]?.width || defaultColumn?.width;
         const startingRowPosition = activeCellCoordinates?.row;
         const totalRows = rows.length;
         const totalCellEditorMaxHeight =
@@ -114,12 +114,11 @@ export const useSpreadsheetEdit = ({
     activeCellCoordinates,
     rows,
     cellEditorValue,
-    columns.length,
     defaultColumn,
     activeCellRef,
     cellEditorRef,
     cellEditorRulerRef,
-    columns,
+    visibleColumns,
     blockClass,
     previousState?.cellEditorValue,
     nextIndex,

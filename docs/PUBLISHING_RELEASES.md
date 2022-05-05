@@ -1,3 +1,5 @@
+<!-- cspell:ignore ibmproducts -->
+
 # Publishing releases
 
 The heavy lifting of generating and publishing releases for the packages in this
@@ -45,13 +47,24 @@ the following should be done:
   because the checks that are done before each PR can be merged try to ensure
   this, but anomalous situations can still sometimes arise and cause the
   workflow to fail despite our best efforts.
-- Post a message to the `ccs-pal-dev` Slack channel to announce the new version
-  of @carbon/ibm-products. To do this, post the message ":npm: new version:" and
-  then paste the initial part of the release summary from the releases page on
-  GitHub () that shows the package name, version number, and any features and
-  bug fixes but stopping before the assets (there is no need to post those into
-  the Slack message). An example is as follows: ":npm: new version:
-  @carbon/ibm-products@0.97.0 Latest 0.97.0 (2021-11-01) Features create
-  tearsheet step, with custom components (#1342) (ef1e972) SidePanel: add rest
-  props to actionToolbarButtons prop (#1362) (93eac3b) Bug fixes Tearsheet:
-  avoid focus traps with stacked tearsheets (#1360) (17f48df)"
+- Post a message to the `#ibmproducts-pal-dev` Slack channel to announce the new
+  version of @carbon/ibm-products.
+
+  To do this, share the initial part of the release summary from the
+  [releases page on GitHub](https://github.com/carbon-design-system/ibm-cloud-cognitive/releases)
+  that shows the package name, version number, and any features and bug fixes
+  but stopping before the assets (there is no need to post those into the Slack
+  message).
+
+  An example is as follows:
+
+  ```text
+  :npm: new version: @carbon/ibm-products@0.97.0 (2021-11-01)
+
+  Features
+  create tearsheet step, with custom components (#1342) (ef1e972)
+  SidePanel: add rest props to actionToolbarButtons prop (#1362) (93eac3b)
+
+  Bug fixes
+  Tearsheet: avoid focus traps with stacked tearsheets (#1360) (17f48df)
+  ```

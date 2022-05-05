@@ -58,6 +58,7 @@ const defaults = {
     ToolbarButton: false,
     ToolbarGroup: false,
     WebTerminal: false,
+    WebTerminalContentWrapper: false,
     EditSidePanel: false,
     CancelableTextEdit: false,
     InlineEdit: false,

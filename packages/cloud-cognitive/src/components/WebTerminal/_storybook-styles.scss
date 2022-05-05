@@ -2,6 +2,11 @@
 
 @import '../../global/styles/project-settings';
 
+.sb-show-main.sb-main-centered #root {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 .example-terminal {
   padding: $spacing-05;
   color: $gray-10;

@@ -26,6 +26,8 @@ import TextInput from '../TextInput';
 import WizardComponent from './Wizard';
 import WizardStep from './WizardStep';
 
+import { InlineNotification, NotificationActionButton } from '../../';
+
 const { prefix } = settings;
 
 const focusTrap = boolean('focusTrap', false);
@@ -237,7 +239,28 @@ const markdown = (useDefault = true) =>
   ~~~
   `;
 
-storiesOf(patterns('Wizard'), module)
+storiesOf(patterns('Wizard#legacy'), module)
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-tearsheet-tearsheet--tearsheet"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            More info
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="This component is now legacy. Please click to see the go-forward component"
+        title=""
+        hideCloseButton
+      />
+      <Story />
+    </>
+  ))
   .add(
     'default',
     () => {

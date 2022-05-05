@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.16.0...@carbon/ibm-products@1.17.0) (2022-05-03)
+
+
+### Bug Fixes
+
+* **Datagrid:** revert react-dnd versions ([#1950](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1950)) ([a1417b0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a1417b0e97516826a44ae6352ada8a84200d8eb0))
+* filename and extension default state ([#1947](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1947)) ([87eaf33](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/87eaf33e72371f301a5c7c4a5f2f61a2b448bdf5))
+* **SidePanel:** fix static panel height without actions ([#1943](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1943)) ([1092125](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/10921258ecd9dc460492e785a69b82a49a34ba50))
+
+
+### Features
+
+* **DataSpreadsheet:** add selected row/column header state ([#1954](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1954)) ([b9184cb](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b9184cbefeb02cec3c1a7577ea3168a7919ae343))
+* **DataSpreadsheet:** support variable column width ([#1945](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1945)) ([0ab2ae7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0ab2ae779032c073deedfbcd6ba42fda6ea73176))
+* **WebTerminal:** 1914 reduce motion web terminal ([#1951](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1951)) ([d26face](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d26facef16657a9bc43b7b09ac50cf3f173999f5))
+
+
+
+
+
+# [1.16.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.15.0...@carbon/ibm-products@1.16.0) (2022-04-26)
+
+
+### Bug Fixes
+
+* adds global filter tags to add select ([#1938](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1938)) ([3a66201](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3a66201a23b7577d6abff7d575c5950ddfd9bc1a))
+
+
+### Features
+
+* **DataSpreadsheet:** support horizontal scrolling/add sticky headers ([#1934](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1934)) ([987cecc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/987cecc2d13a13958615fe229b2e290e7a69295d))
+
+
+
+
+
+# [1.15.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.14.0...@carbon/ibm-products@1.15.0) (2022-04-19)
+
+
+### Bug Fixes
+
+* **AboutModal:** scrolling content fade visible ([#1919](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1919)) ([5b2fa8b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5b2fa8bf61b65300ce3cd05327ee8f865bcabf7f))
+* add outline tag type and test ([#1888](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1888)) ([4d8d3e3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4d8d3e3c686a4ab3be743eda4b7a370d076ee711))
+* **Datagrid:** revert namor package version ([#1909](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1909)) ([abc6584](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/abc65849db6d8f785cc5cd286ff4065be3c29ae4))
+* **DataSpreadsheet:** updates to keys pressed custom hook ([#1900](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1900)) ([2b79850](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2b79850ee7157bab15e19be9e79f68a4d2c1a9dc))
+* show export modal close icon ([#1903](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1903)) ([aeaf40f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/aeaf40fe29cae18a0c66b270d4c799046097f1b5))
+
+
+### Features
+
+* add portal target prop to tearsheet shell ([#1905](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1905)) ([05808e4](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/05808e4776ad713c0865cfaf29741924ecd23d5a))
+* **DataSpreadsheet:** [#1884](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1884) spreadsheet more shortcuts ([#1898](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1898)) ([b349ce2](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b349ce2597db9236f979b82d77fdaa6e022f1799))
+* **DataSpreadsheet:** add select all button functionality ([#1910](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1910)) ([e580376](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e58037612988de851a58e13b9536ff5b31b41082))
+* **DataSpreadsheet:** add support for multi row/column selections ([#1915](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1915)) ([f41513c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f41513c5c61d825137198100d7abeb4c90e938a9))
+* **DataSpreadsheet:** move active cell within selection area with tab ([#1927](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1927)) ([4ef8a7c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4ef8a7cd95209042d9c5f0344264c636ba06fc49))
+* **DataSpreadsheet:** move active cell within selection areas ([#1921](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1921)) ([50e3006](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/50e3006bc21bb46b53279af967231fb2baedff1a))
+* **DataSpreadsheet:** support windows keyboards with shortcuts ([#1917](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1917)) ([7866c1b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7866c1b6a65f664d44a1225e23411c772f25ec31))
+
+
+
+
+
 # [1.14.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.13.0...@carbon/ibm-products@1.14.0) (2022-04-12)
 
 

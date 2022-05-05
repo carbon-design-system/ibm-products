@@ -26,6 +26,7 @@ export let AddSelect = forwardRef(
       // The component props, in alphabetical order (for consistency).
 
       className,
+      clearFiltersText,
       columnInputPlaceholder,
       description,
       globalFilters,
@@ -198,7 +199,13 @@ export let AddSelect = forwardRef(
       onSubmit(multi ? multiSelection : singleSelection);
     };
 
+    const classNames = cx(className, blockClass, {
+      [`${blockClass}__single`]: !multi,
+      [`${blockClass}__multi`]: multi,
+    });
+
     const commonTearsheetProps = {
+      className: classNames,
       open,
       title,
       description,
@@ -228,11 +235,6 @@ export let AddSelect = forwardRef(
       removeIconDescription,
       setMultiSelection,
     };
-
-    const classNames = cx(className, blockClass, {
-      [`${blockClass}__single`]: !multi,
-      [`${blockClass}__multi`]: multi,
-    });
 
     const setShowBreadsCrumbs = () => {
       if (searchTerm) {
@@ -274,6 +276,9 @@ export let AddSelect = forwardRef(
             secondaryButtonText={globalFiltersSecondaryButtonText}
             placeholder={globalFiltersPlaceholderText}
             iconDescription={globalFiltersIconDescription}
+            appliedFilters={appliedGlobalFilters}
+            hasFiltersApplied={globalFiltersApplied}
+            clearFiltersText={clearFiltersText}
           />
           <div className={`${blockClass}__tag-container`}>
             {showBreadsCrumbs ? (
@@ -328,7 +333,7 @@ export let AddSelect = forwardRef(
     );
 
     return (
-      <div ref={ref} className={classNames} {...rest}>
+      <div ref={ref} {...rest}>
         {multi ? (
           <Tearsheet
             {...commonTearsheetProps}
@@ -347,6 +352,7 @@ export let AddSelect = forwardRef(
 
 AddSelect.propTypes = {
   className: PropTypes.string,
+  clearFiltersText: PropTypes.string,
   columnInputPlaceholder: PropTypes.string,
   description: PropTypes.string,
   globalFilters: PropTypes.arrayOf(

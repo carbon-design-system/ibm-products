@@ -50,10 +50,10 @@ const RowSizeDropdown = ({ buttonLabel = 'Row height', ...props }) => {
 
 RowSizeDropdown.propTypes = {
   buttonLabel: PropTypes.string,
-  datagridName: PropTypes.string.isRequired,
-  light: PropTypes.bool.isRequired,
+  datagridName: PropTypes.string,
+  light: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
-  selectedOption: PropTypes.string.isRequired,
+  selectedOption: PropTypes.string,
 };
 
 export default RowSizeDropdown;

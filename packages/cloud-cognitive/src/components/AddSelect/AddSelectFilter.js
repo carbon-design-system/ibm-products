@@ -84,7 +84,7 @@ export let AddSelectFilter = ({
   const showFilter = multi && filterOpts?.length > 0;
 
   return (
-    <div>
+    <>
       <div className={`${blockClass}-search`}>
         <TextInput
           id="temp-id"
@@ -105,7 +105,7 @@ export let AddSelectFilter = ({
           />
         )}
         {open && (
-          <div className={`${blockClass}`}>
+          <div className={blockClass}>
             <div className={`${blockClass}-content`}>
               <p>Filters</p>
               <div className={`${blockClass}-opts`}>
@@ -160,7 +160,7 @@ export let AddSelectFilter = ({
           </Button>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

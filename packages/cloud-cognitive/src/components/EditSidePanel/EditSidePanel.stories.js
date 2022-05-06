@@ -15,13 +15,13 @@ import {
   TextInput,
   NumberInput,
   Dropdown,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import {
   Header,
   HeaderContainer,
   HeaderName,
-} from 'carbon-components-react/lib/components/UIShell';
-import { Copy20, TrashCan20, Settings20 } from '@carbon/icons-react';
+} from '@carbon/react/lib/components/UIShell';
+import { Copy, TrashCan, Settings } from '@carbon/icons-react';
 
 import {
   getStoryTitle,
@@ -183,17 +183,17 @@ export const editSidePanel = prepareStory(Template, {
     actionToolbarButtons: [
       {
         label: 'Copy platform id',
-        icon: Copy20,
+        icon: props => <Copy size={20} {...props}/>,
         onClick: action('Toolbar button clicked: Copy'),
       },
       {
         label: 'Settings',
-        icon: Settings20,
+        icon: props => <Settings size={20} {...props}/>,
         onClick: action('Toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
-        icon: TrashCan20,
+        icon: props => <TrashCan size={20} {...props}/>,
         onClick: action('Toolbar button clicked: Delete'),
       },
     ],

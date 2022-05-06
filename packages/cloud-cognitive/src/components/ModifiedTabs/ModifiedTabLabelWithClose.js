@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Close16, CloseFilled16 } from '@carbon/icons-react';
+import { Close, CloseFilled } from '@carbon/icons-react';
 
 export const ModifiedTabLabelWithClose = ({
   unsavedContent,
@@ -31,7 +31,7 @@ export const ModifiedTabLabelWithClose = ({
         className="modified-tabs__tab-close"
         type="button"
       >
-        {unsavedContent ? <CloseFilled16 /> : <Close16 />}
+        {unsavedContent ? <CloseFilled size={16} /> : <Close size={16} />}
       </button>
       {/* ) : (
         ''

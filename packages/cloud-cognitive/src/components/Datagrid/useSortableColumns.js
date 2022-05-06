@@ -6,8 +6,8 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import React from 'react';
-import { Button } from 'carbon-components-react';
-import { ArrowUp16, ArrowDown16, Arrows16 } from '@carbon/icons-react';
+import { Button } from '@carbon/react';
+import { ArrowUp, ArrowDown, Arrows } from '@carbon/icons-react';
 
 const ordering = {
   ASC: 'ASC',
@@ -27,18 +27,18 @@ const useSortableColumns = (hooks) => {
       instance.toggleSortBy(key, newSortDesc, false);
     };
     const sortableColumns = visibleColumns.map((column) => {
-      const icon = (col) => {
+      const icon = (col, props) => {
         if (col.isSorted) {
           switch (col.isSortedDesc) {
             case false:
-              return ArrowUp16;
+              return <ArrowUp size={16} {...props}/>;
             case true:
-              return ArrowDown16;
+              return <ArrowDown size={16} {...props}/>;
             default:
-              return Arrows16;
+              return <Arrows size={16} {...props}/>;
           }
         }
-        return Arrows16;
+        return Arrows;
       };
       const Header = (headerProp) =>
         column.disableSortBy === true ? (
@@ -47,7 +47,7 @@ const useSortableColumns = (hooks) => {
           <Button
             onClick={() => onSortClick(headerProp.column)}
             kind="ghost"
-            renderIcon={icon(headerProp.column)}
+            renderIcon={props => icon(headerProp.column, props)}
           >
             {column.Header}
           </Button>

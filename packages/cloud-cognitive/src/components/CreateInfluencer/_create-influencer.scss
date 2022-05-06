@@ -7,7 +7,7 @@
 
 @import '../../global/styles/project-settings';
 
-@import 'carbon-components/scss/components/progress-indicator/progress-indicator';
+@use '@carbon/react/scss/components/progress-indicator';
 
 @mixin create-influencer {
   $block-class: #{$pkg-prefix}--create-influencer;

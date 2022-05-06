@@ -7,8 +7,8 @@
 
 @import '../../global/styles/project-settings';
 
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/inline-loading/inline-loading';
+@import '@carbon/react/scss/components/button';
+@import '@carbon/react/scss/components/inline-loading';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.

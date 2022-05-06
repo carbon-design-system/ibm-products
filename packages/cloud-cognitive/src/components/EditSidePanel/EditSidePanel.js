@@ -16,7 +16,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
 // Carbon and package components we use.
-import { Form } from 'carbon-components-react';
+import { Form } from '@carbon/react';
 import { SidePanel } from '../SidePanel';
 import { ActionSet } from '../ActionSet';
 import '../../global/js/utils/props-helper';

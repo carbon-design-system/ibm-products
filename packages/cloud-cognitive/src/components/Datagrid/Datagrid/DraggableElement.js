@@ -8,7 +8,7 @@
  */
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Draggable16 } from '@carbon/icons-react';
+import { Draggable } from '@carbon/icons-react';
 import { useDrag, useDrop } from 'react-dnd';
 import cx from 'classnames';
 
@@ -89,7 +89,7 @@ const DraggableElement = ({
           'wkc-draggable-handleStyle'
         )}
       >
-        <Draggable16 />
+        <Draggable size={16} />
       </div>
       {children}
     </>

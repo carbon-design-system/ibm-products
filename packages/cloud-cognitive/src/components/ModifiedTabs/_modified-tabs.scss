@@ -3,7 +3,7 @@
 
 // ModifiedTabs uses the following Carbon components:
 // Tabs, Tab
-@import 'carbon-components/scss/components/tabs/tabs';
+@import '@carbon/react/scss/components/tabs';
 
 .modified-tabs .modified-tabs__tab-label {
   display: flex;

@@ -11,7 +11,7 @@ import {
   IconSkeleton,
   OverflowMenu,
   OverflowMenuItem,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;

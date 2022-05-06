@@ -14,8 +14,8 @@ import {
   StructuredListBody,
   StructuredListCell,
   Dropdown,
-} from 'carbon-components-react';
-import { ChevronRight16 } from '@carbon/icons-react';
+} from '@carbon/react';
+import { ChevronRight } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { UserProfileImage } from '../UserProfileImage';
@@ -164,7 +164,7 @@ export let AddSelectList = ({
                     />
                   )}
                   {item.children && (
-                    <ChevronRight16 onClick={() => onNavigateItem(item)} />
+                    <ChevronRight size={16} onClick={() => onNavigateItem(item)} />
                   )}
                 </div>
               </StructuredListCell>

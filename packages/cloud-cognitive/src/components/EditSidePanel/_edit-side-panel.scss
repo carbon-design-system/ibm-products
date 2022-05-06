@@ -10,7 +10,7 @@
 @import '../../global/styles/mixins';
 
 // EditSidePanel uses the following Carbon components:
-@import 'carbon-components/scss/components/form/form';
+@import '@carbon/react/scss/components/form';
 
 // EditSidePanel uses the following IBM Products components:
 @import '../SidePanel/side-panel';

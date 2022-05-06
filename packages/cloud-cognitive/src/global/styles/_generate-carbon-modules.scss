@@ -6,8 +6,8 @@
 //
 
 // Generate the list of Carbon style modules used.
-@import '@carbon/import-once/scss/import-once';
-@import 'carbon-components/scss/globals/scss/styles';
+// @import '@carbon/import-once/scss/import-once';
+@use '@carbon/react';
 
 .___imported-modules-output {
   content: $imported-modules;

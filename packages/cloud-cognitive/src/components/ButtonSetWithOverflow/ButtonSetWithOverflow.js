@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
-import { ButtonSet, Button } from 'carbon-components-react';
+import { ButtonSet, Button } from '@carbon/react';
 import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
 
 import { pkg, carbon } from '../../settings';

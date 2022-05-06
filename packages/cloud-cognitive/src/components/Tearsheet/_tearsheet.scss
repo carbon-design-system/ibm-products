@@ -9,13 +9,13 @@
 @import '../../global/styles/project-settings';
 @import '../../global/styles/mixins';
 
-// Tearsheets use the following Carbon components:
-// Button, ComposedModal, ModalHeader, ModalBody,
-@import 'carbon-components/scss/components/modal/modal';
-
 // Tearsheets use the following IBM Products components:
 // ActionSet
 @import '../ActionSet/action-set';
+
+// Tearsheets use the following Carbon components:
+// Button, ComposedModal, ModalHeader, ModalBody,
+@use '@carbon/react/scss/components/modal';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Add20 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 import {
   getStoryTitle,
@@ -95,7 +95,7 @@ export const withActionIconButton = prepareStory(Template, {
     action: {
       text: 'Create new',
       onClick: action('Clicked empty state action button'),
-      renderIcon: Add20,
+      renderIcon: props => <Add size={20} {...props} />,
       iconDescription: 'Add icon',
     },
   },
@@ -117,7 +117,7 @@ export const withActionAndLink = prepareStory(Template, {
     action: {
       text: 'Create new',
       onClick: action('Clicked empty state action button'),
-      renderIcon: Add20,
+      renderIcon: props => <Add size={20} {...props}/>,
       iconDescription: 'Add icon',
     },
     link: {

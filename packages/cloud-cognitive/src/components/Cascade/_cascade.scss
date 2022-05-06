@@ -7,7 +7,7 @@
 
 // Standard imports.
 @import '../../global/styles/project-settings';
-@import 'carbon-components/scss/globals/grid/grid';
+@use '@carbon/react/scss/grid';
 
 @mixin cascade {
   $block-class: #{$pkg-prefix}--cascade;

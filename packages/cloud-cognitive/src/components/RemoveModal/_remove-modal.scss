@@ -10,9 +10,9 @@
 
 // RemoveModal uses the following Carbon components:
 // Button, ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/modal/modal';
-@import 'carbon-components/scss/components/text-input/text-input';
+@use '@carbon/react/scss/components/button';
+@use '@carbon/react/scss/components/modal';
+@use '@carbon/react/scss/components/text-input';
 
 @mixin remove-modal {
   $block-class: #{$pkg-prefix}--remove-modal;

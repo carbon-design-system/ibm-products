@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { SkeletonText } from 'carbon-components-react';
+import { SkeletonText } from '@carbon/react';
 import { InlineEdit } from '../';
 
 /**

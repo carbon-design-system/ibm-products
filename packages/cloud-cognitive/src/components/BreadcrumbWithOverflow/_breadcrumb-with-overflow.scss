@@ -11,8 +11,8 @@
 
 // BreadcrumbWithOverflow uses the following Carbon components:
 // Breadcrumb, BreadcrumbItem, OverflowMenu, OverflowMenuItem
-@import 'carbon-components/scss/components/breadcrumb/breadcrumb';
-@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+@use '@carbon/react/scss/components/breadcrumb';
+@use '@carbon/react/scss/components/overflow-menu';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.

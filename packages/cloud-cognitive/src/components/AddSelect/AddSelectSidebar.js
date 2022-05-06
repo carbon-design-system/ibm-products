@@ -6,8 +6,8 @@
 //
 
 import React from 'react';
-import { Tag, Accordion, AccordionItem, Button } from 'carbon-components-react';
-import { SubtractAlt32 } from '@carbon/icons-react';
+import { Tag, Accordion, AccordionItem, Button } from '@carbon/react';
+import { SubtractAlt } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
@@ -45,7 +45,7 @@ export let AddSelectSidebar = ({
         <p className={`${blockClass}-selected-item-subtitle`}>{subtitle}</p>
       </div>
       <Button
-        renderIcon={SubtractAlt32}
+        renderIcon={props => <SubtractAlt size={32} {...props}/>}
         iconDescription={removeIconDescription}
         hasIconOnly
         onClick={() => handleItemRemove(id)}

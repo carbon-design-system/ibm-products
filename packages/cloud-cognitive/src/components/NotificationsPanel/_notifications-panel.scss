@@ -8,15 +8,15 @@
 // Standard imports.
 @import '../../global/styles/project-settings';
 
-// NotificationsPanel uses the following Carbon components:
-// Button, Link, Toggle
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/link/link';
-@import 'carbon-components/scss/components/toggle/toggle';
-
 // NotificationsPanel uses the following IBM Products components:
 // NotificationsEmptyState
 @import '../EmptyStates/empty-state';
+
+// NotificationsPanel uses the following Carbon components:
+// Button, Link, Toggle
+@use '@carbon/react/scss/components/button';
+@use '@carbon/react/scss/components/link';
+@use '@carbon/react/scss/components/toggle';
 
 @mixin notifications-panel {
   $block-class: #{$pkg-prefix}--notifications-panel;

@@ -8,19 +8,19 @@
 // Standard imports.
 @import '../../global/styles/project-settings';
 
-// Other Carbon settings.
-@import 'carbon-components/scss/globals/grid/grid';
-
-// CreateTearsheet uses the following Carbon components:
-// ProgressIndicator, ProgressStep, Toggle, SideNav, SideNavItems, SideNavLink
-@import 'carbon-components/scss/components/progress-indicator/progress-indicator';
-@import 'carbon-components/scss/components/toggle/toggle';
-@import 'carbon-components/scss/components/ui-shell/side-nav';
-
 // CreateTearsheet uses the following IBM Products components:
 // TearsheetShell
 @import '../Tearsheet/tearsheet';
 @import '../CreateInfluencer/index';
+
+// Other Carbon settings.
+@use '@carbon/react/scss/grid';
+
+// CreateTearsheet uses the following Carbon components:
+// ProgressIndicator, ProgressStep, Toggle, SideNav, SideNavItems, SideNavLink
+@use '@carbon/react/scss/components/progress-indicator';
+@use '@carbon/react/scss/components/toggle';
+@use '@carbon/react/scss/components/ui-shell/side-nav';
 
 @mixin create-tearsheet {
   @keyframes step-content-entrance {

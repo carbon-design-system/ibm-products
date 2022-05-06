@@ -7,7 +7,7 @@
 
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Tab } from 'carbon-components-react';
+import { Tabs, Tab } from '@carbon/react';
 import { ModifiedTabLabelWithClose } from './ModifiedTabLabelWithClose';
 import { ModifiedTabLabelNew } from './ModifiedTabLabelNew';
 

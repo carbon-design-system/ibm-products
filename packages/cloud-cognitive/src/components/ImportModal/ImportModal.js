@@ -15,7 +15,7 @@ import {
   FileUploaderItem,
   TextInput,
   Button,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 

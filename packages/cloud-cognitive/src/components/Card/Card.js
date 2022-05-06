@@ -11,7 +11,7 @@ import {
   Button,
   OverflowMenu,
   OverflowMenuItem,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import PropTypes from 'prop-types';
 import { CardHeader } from './CardHeader';
 import { CardFooter } from './CardFooter';

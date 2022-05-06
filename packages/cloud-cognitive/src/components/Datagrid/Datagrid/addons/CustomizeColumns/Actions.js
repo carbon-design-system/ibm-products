@@ -9,7 +9,7 @@
 
 import { Reset16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
-import { Button, Search } from 'carbon-components-react';
+import { Button, Search } from '@carbon/react';
 import * as React from 'react';
 import keyBy from 'lodash/keyBy';
 import { pkg } from '../../../../../settings';

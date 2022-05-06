@@ -5,15 +5,15 @@
 // LICENSE file in the root directory of this source tree.
 //
 @import './index';
-@import 'carbon-components/scss/components/number-input/number-input';
-@import 'carbon-components/scss/components/text-area/text-area';
-@import 'carbon-components/scss/components/text-input/text-input';
-@import 'carbon-components/scss/components/dropdown/dropdown';
-@import 'carbon-components/scss/components/date-picker/date-picker';
-@import 'carbon-components/scss/components/radio-button/radio-button';
-@import 'carbon-components/scss/components/progress-indicator/progress-indicator';
-@import 'carbon-components/scss/components/tooltip/tooltip';
-@import 'carbon-components/scss/components/modal/modal';
+@use '@carbon/react/scss/components/number-input';
+@use '@carbon/react/scss/components/text-area';
+@use '@carbon/react/scss/components/text-input';
+@use '@carbon/react/scss/components/dropdown';
+@use '@carbon/react/scss/components/date-picker';
+@use '@carbon/react/scss/components/radio-button';
+@use '@carbon/react/scss/components/progress-indicator';
+@use '@carbon/react/scss/components/tooltip';
+@use '@carbon/react/scss/components/modal';
 
 .#{$carbon-prefix}--number {
   min-width: 100%;

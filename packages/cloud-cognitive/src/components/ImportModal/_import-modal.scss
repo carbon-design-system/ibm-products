@@ -11,10 +11,10 @@
 // ImportModal uses the following Carbon components:
 // ComposedModal, ModalHeader, ModalFooter, ModalBody,
 // FileUploaderDropContainer, FileUploaderItem, TextInput, Button
-@import 'carbon-components/scss/components/modal/modal';
-@import 'carbon-components/scss/components/file-uploader/file-uploader';
-@import 'carbon-components/scss/components/text-input/text-input';
-@import 'carbon-components/scss/components/button/button';
+@use '@carbon/react/scss/components/modal';
+@use '@carbon/react/scss/components/file-uploader';
+@use '@carbon/react/scss/components/text-input';
+@use '@carbon/react/scss/components/button';
 
 @mixin import-modal {
   $block-class: #{$pkg-prefix}--import-modal;

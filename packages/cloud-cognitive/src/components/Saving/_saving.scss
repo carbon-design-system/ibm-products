@@ -10,8 +10,8 @@
 
 // Saving uses the following Carbon components:
 // Button, InlineLoading
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/inline-loading/inline-loading';
+@use '@carbon/react/scss/components/button';
+@use '@carbon/react/scss/components/inline-loading';
 
 @mixin saving {
   $block-class: #{$pkg-prefix}--saving;

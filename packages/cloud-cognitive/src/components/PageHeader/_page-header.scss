@@ -9,22 +9,22 @@
 @import '../../global/styles/project-settings';
 @import '../../global/styles/mixins';
 
-// Other Carbon settings.
-@import 'carbon-components/scss/globals/grid/grid';
-
-// PageHeader uses the following Carbon components:
-// BreadcrumbItem, Grid, Column, Row, Button, SkeletonText, Tag
-@import 'carbon-components/scss/components/breadcrumb/breadcrumb';
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/skeleton/skeleton-text';
-@import 'carbon-components/scss/components/tag/tag';
-
 // PageHeader uses the following IBM Products components:
 // ActionBar, BreadcrumbWithOverflow, TagSet, ButtonSetWithOverflow
 @import '../ActionBar/action-bar';
 @import '../BreadcrumbWithOverflow/breadcrumb-with-overflow';
 @import '../TagSet/tag-set';
 @import '../ButtonSetWithOverflow/button-set-with-overflow';
+
+// Other Carbon settings.
+@use '@carbon/react/scss/grid';
+
+// PageHeader uses the following Carbon components:
+// BreadcrumbItem, Grid, Column, Row, Button, SkeletonText, Tag
+@use '@carbon/react/scss/components/breadcrumb';
+@use '@carbon/react/scss/components/button';
+@use '@carbon/react/scss/components/skeleton';
+@use '@carbon/react/scss/components/tag';
 
 $block-class: #{$pkg-prefix}--page-header;
 $breadcrumb-block-class: #{$pkg-prefix}--breadcrumb-with-overflow;

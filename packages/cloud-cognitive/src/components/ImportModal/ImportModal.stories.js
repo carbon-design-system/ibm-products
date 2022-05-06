@@ -6,7 +6,7 @@
 //
 
 import React, { useState } from 'react';
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 import { action } from '@storybook/addon-actions';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import {

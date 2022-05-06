@@ -14,7 +14,7 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Button, ButtonSet } from 'carbon-components-react';
+import { Button, ButtonSet } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--example-component`;

@@ -9,13 +9,13 @@
 @import '../../global/styles/project-settings';
 @import '../SidePanel/side-panel-variables';
 
-// CreateSidePanel uses the following Carbon components:
-// Form
-@import 'carbon-components/scss/components/form/form';
-
 // CreateSidePanel uses the following IBM Products components:
 // SidePanel
 @import '../SidePanel/side-panel';
+
+// CreateSidePanel uses the following Carbon components:
+// Form
+@use '@carbon/react/scss/components/form';
 
 @mixin create-side-panel {
   $block-class: #{$pkg-prefix}--create-side-panel;

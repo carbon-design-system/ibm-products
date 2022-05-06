@@ -14,7 +14,7 @@ import {
   ModalFooter,
   ModalBody,
   TextInput,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import PropTypes from 'prop-types';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';

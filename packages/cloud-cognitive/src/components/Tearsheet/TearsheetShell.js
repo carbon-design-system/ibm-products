@@ -22,7 +22,7 @@ import {
   ComposedModal,
   ModalHeader,
   ModalBody,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 

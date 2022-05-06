@@ -7,15 +7,15 @@
 
 import React, { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 import {
   Header,
   HeaderContainer,
   HeaderName,
   HeaderGlobalBar,
   HeaderGlobalAction,
-} from 'carbon-components-react/lib/components/UIShell';
-import { User20, Notification20 } from '@carbon/icons-react';
+} from '@carbon/react/lib/components/UIShell';
+import { User, Notification } from '@carbon/icons-react';
 import { white } from '@carbon/colors';
 import styles from './_storybook-styles.scss';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -61,7 +61,7 @@ const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
             {hasUnreadNotifications ? (
               <UnreadNotificationBell />
             ) : (
-              <Notification20
+              <Notification size={20}
                 style={{
                   /* stylelint-disable-next-line */
                   fill: white,
@@ -70,7 +70,7 @@ const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
             )}
           </HeaderGlobalAction>
           <HeaderGlobalAction aria-label="App switcher">
-            <User20
+            <User size={20}
               style={{
                 /* stylelint-disable-next-line */
                 fill: white,

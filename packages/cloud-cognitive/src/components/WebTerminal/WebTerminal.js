@@ -14,12 +14,12 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Close16 as Close, Help16 as Help } from '@carbon/icons-react';
+import { Close, Help } from '@carbon/icons-react';
 import {
   Button,
   OverflowMenu,
   OverflowMenuItem,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { moderate02 } from '@carbon/motion';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -117,7 +117,7 @@ export let WebTerminal = React.forwardRef(
           <div className={`${blockClass}__actions`}>
             {showDocumentationLinks && (
               <OverflowMenu
-                renderIcon={Help}
+                renderIcon={props => <Help size={16} {...props}/>}
                 iconDescription={documentationLinksIconDescription}
                 menuOptionsClass={`${blockClass}__documentation-overflow`}
                 size="lg"
@@ -140,7 +140,7 @@ export let WebTerminal = React.forwardRef(
           </div>
           <Button
             hasIconOnly
-            renderIcon={Close}
+            renderIcon={props => <Close size={16} {...props}/>}
             kind="ghost"
             iconDescription={closeIconDescription}
             onClick={handleCloseTerminal}

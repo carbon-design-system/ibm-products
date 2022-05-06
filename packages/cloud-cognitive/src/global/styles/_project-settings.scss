@@ -1,26 +1,16 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-// set required feature flags for carbon
-$feature-flags: (
-  ui-shell: true,
-  grid-columns-16: true,
-  enable-css-custom-properties: true,
-);
-
-// import the carbon import-once mechanism
-@import '@carbon/import-once/scss/import-once';
-
 // import carbon settings for referring to colors, spacing, theme, motion, etc
-@import 'carbon-components/scss/globals/scss/vars';
-@import '@carbon/type/scss/styles';
-
 // set up an alias variable to distinguish carbon prefix from package prefix
-$carbon-prefix: $prefix;
+@use '@carbon/styles' as * with (
+  $prefix: 'cds',
+  $carbon-prefix: 'cds'
+);
 
 // define variables and settings for the package
 $pkg-prefix: 'c4p' !default;

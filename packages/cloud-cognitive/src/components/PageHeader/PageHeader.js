@@ -11,7 +11,7 @@ import { layout05, baseFontSize } from '@carbon/layout';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
 
-import { Grid, Column, Row, Button, Tag } from 'carbon-components-react';
+import { Grid, Column, Row, Button, Tag } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 
 import { useWindowResize, useNearestScroll } from '../../global/js/hooks';
@@ -28,7 +28,7 @@ import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
 import { TagSet, string_required_if_more_than_10_tags } from '../TagSet/TagSet';
 import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
-import { ChevronUp16 } from '@carbon/icons-react';
+import { ChevronUp } from '@carbon/icons-react';
 
 const componentName = 'PageHeader';
 
@@ -717,7 +717,7 @@ export let PageHeader = React.forwardRef(
               }
               kind="ghost"
               onClick={handleCollapseToggle}
-              renderIcon={ChevronUp16}
+              renderIcon={props => <ChevronUp size={16} {...props}/>}
               size="field"
               tooltipPosition="bottom"
               tooltipAlignment="end"

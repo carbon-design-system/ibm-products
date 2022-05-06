@@ -24,7 +24,7 @@ import {
   ModalBody,
   Button,
   Form,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { CreateInfluencer } from '../CreateInfluencer';
 import { ActionSet } from '../ActionSet';
 import {

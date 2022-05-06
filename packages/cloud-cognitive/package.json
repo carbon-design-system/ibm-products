@@ -36,7 +36,7 @@
     "build": "run-s clean build-first build-all",
     "build-all": "run-p build:*",
     "build-first": "copyfiles 'src/**/*.scss' scss -u 1",
-    "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules scss:css",
+    "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules src:css",
     "build:css-min": "sass --style=compressed --load-path node_modules --load-path ../../node_modules scss/index.scss:css/index.min.css scss/index-full-carbon.scss:css/index-full-carbon.min.css scss/index-without-carbon.scss:css/index-without-carbon.min.css scss/index-without-carbon-released-only.scss:css/index-without-carbon-released-only.min.css",
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js:modules -d lib",
@@ -70,6 +70,9 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",
+    "@carbon/layout": "^11.1.0",
+    "@carbon/motion": "^11.0.0",
+    "@carbon/react": "^1.2.0",
     "@carbon/telemetry": "^0.1.0",
     "immutability-helper": "^3.1.1",
     "react-dnd": "^15.1.2",
@@ -79,16 +82,6 @@
     "react-window": "^1.8.7"
   },
   "peerDependencies": {
-    "@carbon/colors": "^10.37.1",
-    "@carbon/icons-react": "^10.49.0",
-    "@carbon/import-once": "^10.7.0",
-    "@carbon/layout": "^10.37.1",
-    "@carbon/motion": "^10.29.0",
-    "@carbon/themes": "^10.54.0",
-    "@carbon/type": "^10.44.0",
-    "carbon-components": "^10.56.0",
-    "carbon-components-react": "^7.56.0",
-    "carbon-icons": "^7.0.7",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"
   }

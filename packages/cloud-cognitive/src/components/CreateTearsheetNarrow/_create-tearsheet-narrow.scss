@@ -8,13 +8,13 @@
 // Standard imports.
 @import '../../global/styles/project-settings';
 
-// CreateTearsheetNarrow uses the following Carbon components:
-// Form
-@import 'carbon-components/scss/components/form/form';
-
 // CreateTearsheetNarrow uses the following IBM Products components:
 // TearsheetNarrow
 @import '../Tearsheet/tearsheet';
+
+// CreateTearsheetNarrow uses the following Carbon components:
+// Form
+@use '@carbon/react/scss/components/form';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.

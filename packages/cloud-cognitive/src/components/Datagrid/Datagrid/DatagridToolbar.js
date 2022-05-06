@@ -6,7 +6,7 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import React from 'react';
-import { DataTable } from 'carbon-components-react';
+import { DataTable } from '@carbon/react';
 import { pkg } from '../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;

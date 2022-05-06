@@ -10,16 +10,16 @@
 @import '../../global/styles/mixins';
 @import './side-panel-variables';
 
-// Other Carbon settings.
-@import 'carbon-components/scss/globals/grid/grid';
-
-// SidePanel uses the following Carbon components:
-// Button
-@import 'carbon-components/scss/components/button/button';
-
 // SidePanel uses the following IBM Products components:
 // ActionSet
 @import '../ActionSet/action-set';
+
+// Other Carbon settings.
+@use '@carbon/react/scss/grid';
+
+// SidePanel uses the following Carbon components:
+// Button
+@use '@carbon/react/scss/components/button';
 
 $block-class: #{$pkg-prefix}--side-panel;
 $action-set-block-class: #{$pkg-prefix}--action-set;

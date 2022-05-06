@@ -11,10 +11,10 @@ import React, { useState, useEffect, useRef } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Link, TooltipIcon } from 'carbon-components-react';
+import { Link, TooltipIcon } from '@carbon/react';
 import { pkg, carbon } from '../../settings';
 import { useResizeDetector } from 'react-resize-detector';
-import { ArrowLeft16 } from '@carbon/icons-react';
+import { ArrowLeft } from '@carbon/icons-react';
 
 // Carbon and package components we use.
 import {
@@ -22,8 +22,8 @@ import {
   BreadcrumbItem,
   OverflowMenu,
   OverflowMenuItem,
-} from 'carbon-components-react';
-import { OverflowMenuHorizontal32 } from '@carbon/icons-react';
+} from '@carbon/react';
+import { OverflowMenuHorizontal } from '@carbon/icons-react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import '../../global/js/utils/props-helper';
 
@@ -58,7 +58,7 @@ export let BreadcrumbWithOverflow = ({
         <OverflowMenu
           ariaLabel={overflowAriaLabel}
           iconDescription={overflowAriaLabel} // also needs setting to avoid a11y "Accessible name does not match or contain the visible label text"
-          renderIcon={OverflowMenuHorizontal32}
+          renderIcon={props => <OverflowMenuHorizontal size={32} {...props}/>}
           className={`${blockClass}__overflow-menu`}
           menuOptionsClass={`${blockClass}__overflow-menu-options`}
         >
@@ -91,7 +91,7 @@ export let BreadcrumbWithOverflow = ({
           <BreadcrumbItem key={`${blockClass}-hidden-overflow-${internalId}`}>
             <OverflowMenu
               ariaLabel={overflowAriaLabel}
-              renderIcon={OverflowMenuHorizontal32}
+              renderIcon={props => <OverflowMenuHorizontal size={32} {...props} />}
             />
           </BreadcrumbItem>
           {breadcrumbs.map(({ label, key, title, id, ...rest }) => (
@@ -309,7 +309,7 @@ export let BreadcrumbWithOverflow = ({
                   <TooltipIcon
                     tooltipText={backItem.title || backItem.label}
                     direction="right"
-                    renderIcon={ArrowLeft16}
+                    renderIcon={props => <ArrowLeft size={16} {...props}/>}
                   />
                 )}
               />

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import cx from 'classnames';
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
 const componentName = 'CardFooter';

@@ -8,8 +8,8 @@
 import React from 'react';
 import cx from 'classnames';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
-import { AspectRatio } from 'carbon-components-react';
+import { ArrowRight, Cloud } from '@carbon/icons-react';
+import { AspectRatio } from '@carbon/react';
 import {
   getStoryTitle,
   prepareStory,
@@ -128,7 +128,7 @@ export const WithActionIcon = prepareStory(Template, {
     actionIcons: [
       {
         id: '1',
-        icon: ArrowRight24,
+        icon: props => <ArrowRight size={24} {...props}/>,
         onClick: action('on click'),
         onKeyDown: action('on keydown'),
         iconDescription: 'Next',
@@ -145,7 +145,7 @@ export const WithActionIconHref = prepareStory(Template, {
     actionIcons: [
       {
         id: '1',
-        icon: ArrowRight24,
+        icon: props => <ArrowRight size={24} {...props}/>,
         href: '#',
         iconDescription: 'Next',
       },
@@ -158,7 +158,7 @@ export const WithActionIconHref = prepareStory(Template, {
 export const WithPictogram = prepareStory(Template, {
   args: {
     ...defaultProps,
-    pictogram: Cloud32,
+    pictogram: props => <Cloud size={32} {...props}/>,
     mediaRatio: null,
   },
 });

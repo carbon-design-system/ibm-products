@@ -11,8 +11,8 @@
 
 // ActionBar uses the following Carbon components:
 // Button, OverflowMenu, OverflowMenuItem
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+@use '@carbon/react/scss/components/button';
+@use '@carbon/react/scss/components/overflow-menu';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.

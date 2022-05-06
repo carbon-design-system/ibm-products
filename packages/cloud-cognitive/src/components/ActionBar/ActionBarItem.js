@@ -14,7 +14,7 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'ActionBarItem';

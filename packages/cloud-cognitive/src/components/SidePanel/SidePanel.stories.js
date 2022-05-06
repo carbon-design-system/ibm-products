@@ -22,13 +22,13 @@ import {
   TableHead,
   TableRow,
   TableCell,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import {
   Header,
   HeaderContainer,
   HeaderName,
-} from 'carbon-components-react/lib/components/UIShell';
-import { Copy20, TrashCan20, Settings20 } from '@carbon/icons-react';
+} from '@carbon/react/lib/components/UIShell';
+import { Copy, TrashCan, Settings } from '@carbon/icons-react';
 import styles from './_storybook-styles.scss';
 import {
   getStoryTitle,
@@ -484,18 +484,18 @@ export const WithActionToolbar = prepareStory(SlideOverTemplate, {
       {
         leading: true,
         label: 'Copy',
-        icon: Copy20,
+        icon: props => <Copy size={20} {...props}/>,
         onClick: action('Toolbar button clicked: Copy'),
         kind: 'primary',
       },
       {
         label: 'Settings',
-        icon: Settings20,
+        icon: props => <Settings size={20} {...props}/>,
         onClick: action('Toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
-        icon: TrashCan20,
+        icon: props => <TrashCan size={20} {...props}/>,
         onClick: action('Toolbar button clicked: Delete'),
       },
     ],
@@ -541,17 +541,17 @@ export const WithStaticTitleAndActionToolbar = prepareStory(SlideOverTemplate, {
     actionToolbarButtons: [
       {
         label: 'Copy',
-        icon: Copy20,
+        icon: props => <Copy size={20} {...props}/>,
         onClick: action('Action toolbar button clicked: Copy'),
       },
       {
         label: 'Settings',
-        icon: Settings20,
+        icon: props => <Settings size={20} {...props}/>,
         onClick: action('Action toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
-        icon: TrashCan20,
+        icon: props => <TrashCan size={20} {...props}/>,
         onClick: action('Action toolbar button clicked: Delete'),
       },
     ],

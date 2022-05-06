@@ -18,7 +18,7 @@ import { allPropTypes, prepareProps } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 import { ActionSet } from '../ActionSet';
 
 import {

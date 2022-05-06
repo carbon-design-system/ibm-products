@@ -15,12 +15,12 @@ import { useColumnOrder } from 'react-table';
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
 import {
-  Activity16,
-  Restart16,
-  Download16,
-  Filter16,
+  Activity,
+  Restart,
+  Download,
+  Filter,
 } from '@carbon/icons-react';
-import { DataTable, Button, Pagination } from 'carbon-components-react';
+import { DataTable, Button, Pagination } from '@carbon/react';
 import {
   Datagrid,
   useDatagrid,
@@ -561,7 +561,7 @@ const DatagridActions = (datagridState) => {
           kind="ghost"
           hasIconOnly
           tooltipPosition="bottom"
-          renderIcon={Filter16}
+          renderIcon={props => <Filter size={16}  {...props}/>}
           iconDescription={'Left panel'}
           onClick={leftPanelClick}
         />
@@ -579,7 +579,7 @@ const DatagridActions = (datagridState) => {
               kind="ghost"
               hasIconOnly
               tooltipPosition="bottom"
-              renderIcon={Restart16}
+              renderIcon={props => <Restart size={16} {...props}/>}
               iconDescription={'Refresh'}
               onClick={refreshColumns}
             />
@@ -589,7 +589,7 @@ const DatagridActions = (datagridState) => {
               kind="ghost"
               hasIconOnly
               tooltipPosition="bottom"
-              renderIcon={Download16}
+              renderIcon={props => <Download size={16} {...props}/>}
               iconDescription={'Download CSV'}
               onClick={downloadCsv}
             />
@@ -783,7 +783,7 @@ const DatagridBatchActions = (datagridState) => {
       totalSelected={totalSelected}
       onCancel={() => toggleAllRowsSelected(false)}
     >
-      <TableBatchAction renderIcon={Activity16} onClick={onBatchAction}>
+      <TableBatchAction renderIcon={props => <Activity size={16} {...props}/>} onClick={onBatchAction}>
         {actionName}
       </TableBatchAction>
     </TableBatchActions>

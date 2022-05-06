@@ -8,7 +8,7 @@
 // Standard imports.
 @import '../../global/styles/project-settings';
 
-@import 'carbon-components/scss/components/structured-list/structured-list';
+@import '@carbon/react/scss/components/structured-list';
 
 @mixin add-select {
   $block-class: #{$pkg-prefix}--add-select;

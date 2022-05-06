@@ -10,8 +10,8 @@
 
 // AboutModal uses the following Carbon components:
 // ComposedModal, ModalHeader, ModalFooter, ModalBody, Tabs, Tab
-@import 'carbon-components/scss/components/modal/modal';
-@import 'carbon-components/scss/components/tabs/tabs';
+@use '@carbon/react/scss/components/modal';
+@use '@carbon/react/scss/components/tabs';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.

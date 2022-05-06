@@ -9,8 +9,8 @@
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Settings16 } from '@carbon/icons-react';
-import { Button } from 'carbon-components-react';
+import { Settings } from '@carbon/icons-react';
+import { Button } from '@carbon/react';
 import cx from 'classnames';
 import RowSizeRadioGroup from './RowSizeRadioGroup';
 import { pkg } from '../../../../../settings';
@@ -28,7 +28,7 @@ const RowSizeDropdown = ({ buttonLabel = 'Row height', ...props }) => {
         ref={buttonRef}
         kind="ghost"
         tooltipPosition="left"
-        renderIcon={Settings16}
+        renderIcon={props => <Settings size={16} {...props}/>}
         onClick={() => setIsOpen(!isOpen)}
         iconDescription={buttonLabel}
         className={cx({

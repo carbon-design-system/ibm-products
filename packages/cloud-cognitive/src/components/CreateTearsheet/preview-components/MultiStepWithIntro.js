@@ -19,7 +19,7 @@ import {
   TileGroup,
   Toggle,
   NumberInput,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 import { CreateTearsheet } from '../CreateTearsheet';

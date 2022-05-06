@@ -18,9 +18,9 @@ import {
   FormGroup,
   Loading,
   PasswordInput,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import cx from 'classnames';
-import { ErrorFilled16, CheckmarkFilled16 } from '@carbon/icons-react';
+import { ErrorFilled, CheckmarkFilled } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -187,7 +187,8 @@ export let ExportModal = forwardRef(
             )}
             {successful && (
               <>
-                <CheckmarkFilled16
+                <CheckmarkFilled
+                  size={16}
                   className={`${blockClass}__checkmark-icon`}
                 />
                 <p>{successMessage}</p>
@@ -195,7 +196,7 @@ export let ExportModal = forwardRef(
             )}
             {error && (
               <>
-                <ErrorFilled16 className={`${blockClass}__error-icon`} />
+                <ErrorFilled size={16} className={`${blockClass}__error-icon`} />
                 <p>{errorMessage}</p>
               </>
             )}

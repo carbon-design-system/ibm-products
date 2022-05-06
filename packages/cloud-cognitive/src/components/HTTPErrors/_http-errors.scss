@@ -10,7 +10,7 @@
 
 // HTTP errors use the following Carbon components:
 // Link
-@import 'carbon-components/scss/components/link/link';
+@use '@carbon/react/scss/components/link';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.

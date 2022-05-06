@@ -8,13 +8,13 @@
 @import '../../global/styles/project-settings';
 @import '../../global/styles/mixins';
 
-// ButtonSetWithOverflow uses the following Carbon components:
-// ButtonSet, Button
-@import 'carbon-components/scss/components/button/button';
-
 // ButtonSetWithOverflow uses the following IBM Products components:
 // ButtonMenu, ButtonMenuItem
 @import '../ButtonMenu/button-menu';
+
+// ButtonSetWithOverflow uses the following Carbon components:
+// ButtonSet, Button
+@use '@carbon/react/scss/components/button';
 
 $block-class: #{$pkg-prefix}--button-set-with-overflow;
 

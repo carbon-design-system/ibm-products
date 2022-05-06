@@ -8,7 +8,7 @@
 import React from 'react';
 import cx from 'classnames';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { TrashCan16, Edit16 } from '@carbon/icons-react';
+import { TrashCan, Edit } from '@carbon/icons-react';
 import {
   getStoryTitle,
   prepareStory,
@@ -55,14 +55,14 @@ const defaultProps = {
   actionIcons: [
     {
       id: '1',
-      icon: Edit16,
+      icon: props => <Edit size={16} {...props}/>,
       onClick: action('on click'),
       onKeyDown: action('on keydown'),
       iconDescription: 'Edit',
     },
     {
       id: '2',
-      icon: TrashCan16,
+      icon: props => <TrashCan size={16} {...props}/>,
       onClick: action('on click'),
       onKeyDown: action('on keydown'),
       iconDescription: 'Delete',

@@ -9,8 +9,8 @@
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Column16 } from '@carbon/icons-react';
-import { Button } from 'carbon-components-react';
+import { Column } from '@carbon/icons-react';
+import { Button } from '@carbon/react';
 import { pkg } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -25,7 +25,7 @@ const ButtonWrapper = ({
   return (
     <Button
       {...rest}
-      renderIcon={Column16}
+      renderIcon={props => <Column size={16} {...props}/>}
       iconDescription={iconTooltipLabel}
       tooltipPosition="left"
       kind="ghost"

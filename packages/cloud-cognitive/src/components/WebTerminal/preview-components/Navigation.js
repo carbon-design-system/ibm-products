@@ -4,11 +4,11 @@ import {
   HeaderName,
   HeaderGlobalAction,
   HeaderGlobalBar,
-} from 'carbon-components-react';
+} from '@carbon/react/lib/components/UIShell';
 import {
-  Terminal20 as Terminal,
-  Search20 as Search,
-  User20 as User,
+  Terminal,
+  Search,
+  User,
 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 
@@ -20,13 +20,13 @@ const Navigation = ({ openTerminal }) => {
       </HeaderName>
       <HeaderGlobalBar>
         <HeaderGlobalAction aria-label="Web terminal" onClick={openTerminal}>
-          <Terminal />
+          <Terminal size={20} />
         </HeaderGlobalAction>
         <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
-          <Search />
+          <Search size={20} />
         </HeaderGlobalAction>
         <HeaderGlobalAction aria-label="User" onClick={() => {}}>
-          <User />
+          <User size={20} />
         </HeaderGlobalAction>
       </HeaderGlobalBar>
     </Header>

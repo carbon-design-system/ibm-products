@@ -9,7 +9,7 @@ import { _4K16 } from '@carbon/icons-react';
 import React, { useEffect, useState, useRef } from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { Modal, RadioButton, RadioButtonGroup } from 'carbon-components-react';
+import { Modal, RadioButton, RadioButtonGroup } from '@carbon/react';
 import {
   getStoryTitle,
   prepareStory,

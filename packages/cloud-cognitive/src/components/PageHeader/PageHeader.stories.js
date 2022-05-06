@@ -29,15 +29,15 @@ import {
   TableBody,
   TableRow,
   TableCell,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import {
-  CheckmarkFilled16,
-  Lightning16,
-  Bee24,
-  Printer16,
-  Security24,
-  Settings16,
-  VolumeMute16,
+  CheckmarkFilled,
+  Lightning,
+  Bee,
+  Printer,
+  Security,
+  Settings,
+  VolumeMute,
 } from '@carbon/icons-react';
 import cx from 'classnames';
 
@@ -61,7 +61,7 @@ const storyClass = 'page-header-stories';
 
 const makeActionBarItem = (item) => ({
   key: `a-key-${item}`,
-  renderIcon: Lightning16,
+  renderIcon: props => <Lightning size={16} {...props}/>,
   iconDescription: `Action ${item}`,
 });
 const actionBarItems = {
@@ -70,9 +70,9 @@ const actionBarItems = {
   'Four items': [1, 2, 3, 4].map(makeActionBarItem),
   'Many items': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(makeActionBarItem),
   'In context items': [
-    { key: '1', renderIcon: Printer16, iconDescription: `Print` },
-    { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
-    { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
+    { key: '1', renderIcon: props => <Printer size={16} {...props}/>, iconDescription: `Print` },
+    { key: '2', renderIcon: props => <Settings size={16} {...props}/>, iconDescription: `Settings` },
+    { key: '3', renderIcon: props => <VolumeMute size={16} {...props}/>, iconDescription: `Mute` },
   ],
 };
 
@@ -114,7 +114,7 @@ const children = {
   'Nothing in the available area': null,
   'A status indicator': (
     <>
-      <CheckmarkFilled16 className={`${storyClass}__status-icon`} /> Running
+      <CheckmarkFilled size={16} className={`${storyClass}__status-icon`} /> Running
     </>
   ),
   // cspell: disable
@@ -322,17 +322,17 @@ const userDefinedStyle = { color: 'red', fontWeight: '600' };
 const title = {
   'No title': null,
   'Plain text title': 'Page title',
-  'Title with icon': { text: 'Page title', loading: false, icon: Bee24 },
+  'Title with icon': { text: 'Page title', loading: false, icon: Bee },
   'Long title with icon': {
     text: 'A very long page title which will almost certainly have to be truncated at some point',
     loading: false,
-    icon: Bee24,
+    icon: props => <Bee size={24} {...props}/>,
   },
   'Loading title': { text: 'Patience is a virtue', loading: true },
   'In context title': {
     text: 'Authentication activity',
     loading: false,
-    icon: Security24,
+    icon: props => <Security size={24} {...props}/>,
   },
   'User defined title': {
     content: (

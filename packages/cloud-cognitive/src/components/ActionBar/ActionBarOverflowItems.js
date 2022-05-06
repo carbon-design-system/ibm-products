@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 // Carbon and package components we use.
-import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
+import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -56,7 +56,7 @@ export const ActionBarOverflowItems = ({
                 >
                   {item.props.iconDescription}
                 </span>
-                <item.props.renderIcon />
+                {item.props.renderIcon}
               </div>
             }
           />

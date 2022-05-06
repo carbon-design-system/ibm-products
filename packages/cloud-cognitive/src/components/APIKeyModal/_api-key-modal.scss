@@ -11,11 +11,11 @@
 // APIKeyModal uses the following Carbon components:
 // ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput,
 // InlineLoading, Form, Button
-@import 'carbon-components/scss/components/modal/modal';
-@import 'carbon-components/scss/components/text-input/text-input';
-@import 'carbon-components/scss/components/inline-loading/inline-loading';
-@import 'carbon-components/scss/components/form/form';
-@import 'carbon-components/scss/components/button/button';
+@use '@carbon/react/scss/components/modal';
+@use '@carbon/react/scss/components/text-input';
+@use '@carbon/react/scss/components/inline-loading';
+@use '@carbon/react/scss/components/form';
+@use '@carbon/react/scss/components/button';
 
 @mixin apikey-modal {
   $block-class: #{$pkg-prefix}--apikey-modal;

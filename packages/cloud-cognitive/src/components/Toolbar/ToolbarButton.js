@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 import cx from 'classnames';
 import { bool, node, string } from 'prop-types';
 import React, { forwardRef, useContext } from 'react';

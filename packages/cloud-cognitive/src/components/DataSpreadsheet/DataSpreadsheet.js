@@ -18,7 +18,7 @@ import { useBlockLayout, useTable, useColumnOrder } from 'react-table';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { TextArea } from 'carbon-components-react';
+import { TextArea } from '@carbon/react';
 
 import { pkg } from '../../settings';
 import { DataSpreadsheetBody } from './DataSpreadsheetBody';

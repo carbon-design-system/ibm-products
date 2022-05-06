@@ -15,7 +15,7 @@ import { pkg } from '../../settings';
 import { allPropTypes } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
-import { Button, ButtonSet, InlineLoading } from 'carbon-components-react';
+import { Button, ButtonSet, InlineLoading } from '@carbon/react';
 
 const blockClass = `${pkg.prefix}--action-set`;
 const componentName = 'ActionSet';

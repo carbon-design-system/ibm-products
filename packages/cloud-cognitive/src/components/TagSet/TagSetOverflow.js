@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { Link, Tag, Tooltip } from 'carbon-components-react';
+import { Link, Tag, Tooltip } from '@carbon/react';
 
 import { pkg } from '../../settings';
 import { noop } from '../../global/js/utils/pconsole';

@@ -13,7 +13,7 @@ import cx from 'classnames';
 
 import { TagSetOverflow } from './TagSetOverflow';
 import { TagSetModal } from './TagSetModal';
-import { Tag } from 'carbon-components-react';
+import { Tag } from '@carbon/react';
 import { useResizeDetector } from 'react-resize-detector';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';

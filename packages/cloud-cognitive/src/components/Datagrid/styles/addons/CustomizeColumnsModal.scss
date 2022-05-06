@@ -6,7 +6,7 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@import '../variables';
+@use '../variables';
 
 .#{$block-class}__customize-columns-modal {
   .#{$carbon-prefix}--modal-content {

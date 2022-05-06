@@ -10,9 +10,9 @@
 
 // CreateModal uses the following Carbon components:
 // ComposedModal, ModalHeader, ModalFooter, ModalBody, Form, Button
-@import 'carbon-components/scss/components/modal/modal';
-@import 'carbon-components/scss/components/form/form';
-@import 'carbon-components/scss/components/button/button';
+@use '@carbon/react/scss/components/modal';
+@use '@carbon/react/scss/components/form';
+@use '@carbon/react/scss/components/button';
 
 @mixin create-modal {
   .#{$pkg-prefix}--create-modal {

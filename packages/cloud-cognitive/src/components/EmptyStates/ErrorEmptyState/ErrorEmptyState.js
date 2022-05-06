@@ -10,7 +10,7 @@ import React from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
-import { Button, Link } from 'carbon-components-react';
+import { Button, Link } from '@carbon/react';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../../global/js/utils/devtools';

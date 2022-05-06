@@ -17,13 +17,13 @@ import { pkg, carbon } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 import {
-  Close16,
-  Edit16,
-  EditOff16,
-  Checkmark16,
-  WarningFilled16,
+  Close,
+  Edit,
+  EditOff,
+  Checkmark,
+  WarningFilled,
 } from '@carbon/icons-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -79,7 +79,7 @@ export let InlineEdit = React.forwardRef(
     const [internalValue, setInternalValue] = useState(value);
     const showValidation = invalid; // || warn;
     const validationText = invalidText; // || warnText;
-    const validationIcon = showValidation ? <WarningFilled16 /> : null;
+    const validationIcon = showValidation ? <WarningFilled size={16} /> : null;
 
     // sanitize the tooltip values
     const alignIsObject = typeof buttonTooltipAlignment === 'object';
@@ -323,7 +323,7 @@ export let InlineEdit = React.forwardRef(
                   hasIconOnly
                   iconDescription={cancelDescription}
                   onClick={handleCancel}
-                  renderIcon={Close16}
+                  renderIcon={props => <Close size={16} {...props}/>}
                   {...tipPositions.cancel}
                 />
                 <Button
@@ -332,7 +332,7 @@ export let InlineEdit = React.forwardRef(
                   hasIconOnly
                   iconDescription={saveDescription}
                   onClick={handleSave}
-                  renderIcon={Checkmark16}
+                  renderIcon={props => <Checkmark size={16} {...props}/>}
                   disabled={value === internalValue}
                   {...tipPositions.save}
                 />
@@ -346,7 +346,7 @@ export let InlineEdit = React.forwardRef(
                 hasIconOnly
                 iconDescription={editDescription}
                 onClick={handleEdit}
-                renderIcon={disabled ? EditOff16 : Edit16}
+                renderIcon={disabled ? props => <EditOff size={16} {...props}/> : props => <Edit size={16} {...props}/>}
                 disabled={disabled}
                 tabIndex={-1}
                 {...tipPositions.edit}

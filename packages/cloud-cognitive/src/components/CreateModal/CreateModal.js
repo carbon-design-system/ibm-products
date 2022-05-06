@@ -16,7 +16,7 @@ import {
   ModalBody,
   Form,
   Button,
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 import PropTypes from 'prop-types';
 import cx from 'classnames';

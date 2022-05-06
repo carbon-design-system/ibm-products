@@ -13,7 +13,7 @@ import {
 } from '../../global/js/utils/story-helper';
 import { SingleAddSelect } from '.';
 import mdx from './SingleAddSelect.mdx';
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 // import { action } from '@storybook/addon-actions';
 
 export default {

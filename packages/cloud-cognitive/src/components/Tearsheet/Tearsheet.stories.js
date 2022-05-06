@@ -20,7 +20,7 @@ import {
   Tab,
   Tabs,
   TextInput,
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 import { Tearsheet, deprecatedProps } from './Tearsheet';
 import { TearsheetNarrow } from '.';

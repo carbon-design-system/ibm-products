@@ -11,12 +11,12 @@
 // ExportModal uses the following Carbon components:
 // Button, ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput,
 // RadioButton, RadioButtonGroup, FormGroup, Loading
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/modal/modal';
-@import 'carbon-components/scss/components/text-input/text-input';
-@import 'carbon-components/scss/components/radio-button/radio-button';
-@import 'carbon-components/scss/components/form/form';
-@import 'carbon-components/scss/components/loading/loading';
+@use '@carbon/react/scss/components/button';
+@use '@carbon/react/scss/components/modal';
+@use '@carbon/react/scss/components/text-input';
+@use '@carbon/react/scss/components/radio-button';
+@use '@carbon/react/scss/components/form';
+@use '@carbon/react/scss/components/loading';
 
 @mixin export-modal {
   $block-class: #{$pkg-prefix}--export-modal;

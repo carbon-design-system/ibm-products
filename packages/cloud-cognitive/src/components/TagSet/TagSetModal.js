@@ -15,7 +15,7 @@ import {
   ModalBody,
   Search,
   Tag,
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';

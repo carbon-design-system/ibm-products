@@ -10,8 +10,8 @@
 
 // Empty states use the following Carbon components:
 // Button, Link
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/link/link';
+@use '@carbon/react/scss/components/button';
+@use '@carbon/react/scss/components/link';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.

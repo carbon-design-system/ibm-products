@@ -11,11 +11,11 @@
 
 // TagSet uses the following Carbon components:
 // ComposedModal, ModalHeader, ModalBody, Search, Link, Tag, Tooltip
-@import 'carbon-components/scss/components/modal/modal';
-@import 'carbon-components/scss/components/search/search';
-@import 'carbon-components/scss/components/link/link';
-@import 'carbon-components/scss/components/tag/tag';
-@import 'carbon-components/scss/components/tooltip/tooltip';
+@use '@carbon/react/scss/components/modal';
+@use '@carbon/react/scss/components/search';
+@use '@carbon/react/scss/components/link';
+@use '@carbon/react/scss/components/tag';
+@use '@carbon/react/scss/components/tooltip';
 
 $block-class: #{$pkg-prefix}--tag-set;
 $block-class-overflow: #{$block-class}-overflow;

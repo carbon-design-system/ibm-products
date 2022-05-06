@@ -13,10 +13,10 @@ import {
 } from '../../global/js/utils/story-helper';
 import { MultiAddSelect } from '.';
 import mdx from './MultiAddSelect.mdx';
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 // import { action } from '@storybook/addon-actions';
 import image from '../UserProfileImage/headshot.png'; // cspell:disable-line
-import { Group24, Document16 } from '@carbon/icons-react';
+import { Group, Document } from '@carbon/icons-react';
 
 export default {
   title: getStoryTitle(MultiAddSelect.displayName),
@@ -126,7 +126,7 @@ export const WithHierarchy = prepareStory(Template, {
                 title: 'file1.pdf',
                 fileType: 'pdf',
                 size: '100',
-                icon: Document16,
+                icon: props => <Document size={16} {...props}/>,
                 tag: 'business',
               },
               {
@@ -135,7 +135,7 @@ export const WithHierarchy = prepareStory(Template, {
                 title: 'index.js',
                 fileType: 'js',
                 size: '200',
-                icon: Document16,
+                icon: props => <Document size={16} {...props}/>,
               },
               {
                 id: '1-3',
@@ -143,7 +143,7 @@ export const WithHierarchy = prepareStory(Template, {
                 title: 'sitemap.xml',
                 fileType: 'xml',
                 size: '10',
-                icon: Document16,
+                icon: props => <Document size={16} {...props}/>,
               },
             ],
           },
@@ -210,7 +210,7 @@ export const WithAvatars = prepareStory(Template, {
           title: 'item 2',
           subtitle: 'item 2 subtitle',
           avatar: {
-            icon: Group24,
+            icon: props => <Group size={24} {...props}/>,
             backgroundColor: 'dark-green',
           },
         },
@@ -220,7 +220,7 @@ export const WithAvatars = prepareStory(Template, {
           title: 'item 3',
           subtitle: 'item 3 subtitle',
           avatar: {
-            icon: Group24,
+            icon: props => <Group size={24} {...props}/>,
           },
         },
       ],

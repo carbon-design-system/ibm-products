@@ -25,7 +25,7 @@ import {
   ModalBody,
   Tabs,
   Tab,
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--about-modal`;

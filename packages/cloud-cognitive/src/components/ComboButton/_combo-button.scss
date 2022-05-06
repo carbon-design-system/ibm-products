@@ -7,8 +7,8 @@
 
 @import '../../global/styles/project-settings';
 
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+@use '@carbon/react/scss/components/button';
+@use '@carbon/react/scss/components/overflow-menu';
 
 @include exports($name: combo-button) {
   /// Sets the prefix for all IBM Security-specific classes.

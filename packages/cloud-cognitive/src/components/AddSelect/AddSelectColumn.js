@@ -13,12 +13,12 @@ import {
   OverflowMenu,
   OverflowMenuItem,
   Checkbox,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import {
-  Filter32,
-  ArrowsVertical32,
-  ArrowUp16,
-  ArrowDown16,
+  Filter,
+  ArrowsVertical,
+  ArrowUp,
+  ArrowDown,
 } from '@carbon/icons-react';
 import { pkg, carbon } from '../../settings';
 import { AddSelectList } from './AddSelectList';
@@ -57,7 +57,7 @@ export let AddSelectColumn = ({
             id: `${cur}-asc`,
             itemText: (
               <>
-                <ArrowUp16 />
+                <ArrowUp size={16} />
                 {cur}
               </>
             ),
@@ -68,7 +68,7 @@ export let AddSelectColumn = ({
             id: `${cur}-desc`,
             itemText: (
               <>
-                <ArrowDown16 />
+                <ArrowDown size={16} />
                 {cur}
               </>
             ),
@@ -155,7 +155,7 @@ export let AddSelectColumn = ({
         <div className={`${colClass}-sort-filter`}>
           {sortByOpts.length > 0 && (
             <OverflowMenu
-              renderIcon={ArrowsVertical32}
+              renderIcon={props => <ArrowsVertical size={32} {...props}/>}
               className={`${colClass}-overflow`}
               flipped
             >
@@ -170,7 +170,7 @@ export let AddSelectColumn = ({
           )}
           {filterByOpts.length > 0 && (
             <OverflowMenu
-              renderIcon={Filter32}
+              renderIcon={props => <Filter size={32} {...props}/>}
               className={`${colClass}-overflow`}
               flipped
             >

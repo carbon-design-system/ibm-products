@@ -10,7 +10,7 @@
 
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { RadioButtonGroup, RadioButton } from 'carbon-components-react';
+import { RadioButtonGroup, RadioButton } from '@carbon/react';
 import isArray from 'lodash/isArray';
 import { pkg } from '../../../../../settings';
 

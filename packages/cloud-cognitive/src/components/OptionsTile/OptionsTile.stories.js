@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { Dropdown, FormGroup } from 'carbon-components-react';
+import { Dropdown, FormGroup } from '@carbon/react';
 
 import {
   getStoryTitle,

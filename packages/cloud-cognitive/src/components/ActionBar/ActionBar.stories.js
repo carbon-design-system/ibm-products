@@ -8,7 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { Bee16, Lightning16 } from '@carbon/icons-react';
+import { Bee, Lightning } from '@carbon/icons-react';
 
 import {
   getStoryTitle,
@@ -23,7 +23,7 @@ import styles from './_storybook-styles.scss';
 const getActions = (num) =>
   Array.from({ length: num }, (_, num) => ({
     key: `a-key-${num}`,
-    renderIcon: num % 2 ? Lightning16 : Bee16,
+    renderIcon: num % 2 ? props => <Lightning size={16} {...props}/> : props => <Bee size={16} {...props} />,
     iconDescription: `Action ${num}`,
     onClick: action(`Action ${num}`),
   }));

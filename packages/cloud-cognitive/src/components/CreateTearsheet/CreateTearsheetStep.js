@@ -8,7 +8,7 @@
 import React, { forwardRef, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Column, FormGroup, Row } from 'carbon-components-react';
+import { Column, FormGroup, Row } from '@carbon/react';
 import { StepsContext, StepNumberContext } from './CreateTearsheet';
 import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';

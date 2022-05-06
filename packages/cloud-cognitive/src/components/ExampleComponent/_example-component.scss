@@ -6,11 +6,11 @@
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '../../global/styles/project-settings';
 
 // ExampleComponent uses the following Carbon components:
 // Button, ButtonSet
-@import 'carbon-components/scss/components/button/button';
+@use '@carbon/react/scss/components/button';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.

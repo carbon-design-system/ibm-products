@@ -15,7 +15,7 @@ import { pkg } from '../../settings';
 import { useResizeDetector } from 'react-resize-detector';
 
 // Carbon and package components we use.
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { ActionBarItem } from './ActionBarItem';

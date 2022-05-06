@@ -23,8 +23,8 @@ import { SIDE_PANEL_SIZES } from './constants';
 import { usePreviousValue } from '../../global/js/hooks';
 
 // Carbon and package components we use.
-import { Button } from 'carbon-components-react';
-import { Close20, ArrowLeft20 } from '@carbon/icons-react';
+import { Button } from '@carbon/react';
+import { Close, ArrowLeft } from '@carbon/icons-react';
 import { ActionSet } from '../ActionSet';
 
 const blockClass = `${pkg.prefix}--side-panel`;
@@ -590,7 +590,7 @@ export let SidePanel = React.forwardRef(
               kind="ghost"
               size="small"
               disabled={false}
-              renderIcon={ArrowLeft20}
+              renderIcon={props => <ArrowLeft size={20} {...props}/>}
               iconDescription={navigationBackIconDescription}
               className={`${blockClass}__navigation-back-button`}
               onClick={onNavigationBack}
@@ -605,7 +605,7 @@ export let SidePanel = React.forwardRef(
           aria-label={closeIconDescription}
           kind="ghost"
           size="small"
-          renderIcon={Close20}
+          renderIcon={props => <Close size={20} {...props}/>}
           iconDescription={closeIconDescription}
           className={`${blockClass}__close-button`}
           onClick={onRequestClose}

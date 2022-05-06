@@ -11,7 +11,7 @@
 
 // UserProfileImage uses the following Carbon components:
 // TooltipIcon
-@import 'carbon-components/scss/components/tooltip/tooltip';
+@use '@carbon/react/scss/components/tooltip';
 
 $block-class: #{$pkg-prefix}--user-profile-image;
 

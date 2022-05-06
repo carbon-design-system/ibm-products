@@ -10,8 +10,8 @@
 
 // Card uses the following Carbon components:
 // Button, OverflowMenu, OverflowMenuItem
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+@use '@carbon/react/scss/components/button';
+@use '@carbon/react/scss/components/overflow-menu';
 
 @mixin card {
   $block-class: #{$pkg-prefix}--card;

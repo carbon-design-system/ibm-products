@@ -13,7 +13,7 @@ import { arrayOf, shape, string } from 'prop-types';
 import { pkg /*, carbon */ } from '../../settings';
 
 // Carbon and package components we use.
-import { Link } from 'carbon-components-react';
+import { Link } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--http-errors`;

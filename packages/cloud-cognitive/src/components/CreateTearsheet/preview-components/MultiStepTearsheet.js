@@ -18,7 +18,7 @@ import {
   Toggle,
   NumberInput,
   Checkbox,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 import { CreateTearsheet } from '../CreateTearsheet';

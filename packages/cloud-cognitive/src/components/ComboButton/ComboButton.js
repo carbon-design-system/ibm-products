@@ -5,11 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ChevronDown16, ChevronUp16 } from '@carbon/icons-react';
-import { Button, OverflowMenuItem } from 'carbon-components-react';
+import { ChevronDown, ChevronUp } from '@carbon/icons-react';
 
-import { OverflowMenu } from 'carbon-components-react/lib/components/OverflowMenu/OverflowMenu';
-import setupGetInstanceId from 'carbon-components-react/lib/tools/setupGetInstanceId';
+import { Button, OverflowMenuItem, OverflowMenu } from '@carbon/react';
+import setupGetInstanceId from '@carbon/react/lib/tools/setupGetInstanceId';
 
 import classnames from 'classnames';
 import { node, shape, string } from 'prop-types';
@@ -63,7 +62,7 @@ const ComboButton = ({
           onClick={() => !isOpen && setIsOpen(true)}
           onClose={() => setIsOpen(false)}
           renderIcon={() =>
-            createElement(isOpen ? ChevronUp16 : ChevronDown16, {
+            createElement(isOpen ? props => <ChevronUp size={16} {...props}/> : props => <ChevronDown size={16} {...props}/>, {
               className: `${blockClass}__overflow-menu__icon`,
             })
           }

@@ -7,7 +7,7 @@
  */
 // @flow
 import React from 'react';
-import { DataTable, SkeletonText } from 'carbon-components-react';
+import { DataTable, SkeletonText } from '@carbon/react';
 import { selectionColumnId } from '../common-column-ids';
 import cx from 'classnames';
 import { pkg } from '../../../settings';

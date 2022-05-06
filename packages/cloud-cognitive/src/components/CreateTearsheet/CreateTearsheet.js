@@ -14,7 +14,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Grid, Form } from 'carbon-components-react';
+import { Grid, Form } from '@carbon/react';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
 import { CreateInfluencer } from '../CreateInfluencer';

@@ -12,9 +12,9 @@ import {
   Dropdown,
   TextInput,
   Tag,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import PropTypes from 'prop-types';
-import { Filter16 } from '@carbon/icons-react';
+import { Filter } from '@carbon/icons-react';
 import { pkg } from '../../settings';
 const componentName = 'AddSelectFilter';
 
@@ -95,7 +95,7 @@ export let AddSelectFilter = ({
         />
         {showFilter && (
           <Button
-            renderIcon={Filter16}
+            renderIcon={props => <Filter size={16} {...props} />}
             hasIconOnly
             kind="ghost"
             onClick={() => setOpen(!open)}

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2020
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,10 +12,12 @@
 const path = require('path');
 
 // This is a custom Jest transformer turning file imports into filenames.
-// http://facebook.github.io/jest/docs/tutorial-webpack.html
+// https://jestjs.io/docs/upgrading-to-jest28#transformer
 
 module.exports = {
-  process(src, filename) {
-    return `module.exports = ${JSON.stringify(path.basename(filename))};`;
+  process(sourceText, sourcePath) {
+    return {
+      code: `module.exports = ${JSON.stringify(path.basename(sourcePath))};`,
+    };
   },
 };

@@ -6526,10 +6526,10 @@ capture-exit@^2.0.0:
   dependencies:
     rsvp "^4.8.4"
 
-carbon-components-react@7.56.0:
-  version "7.56.0"
-  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-7.56.0.tgz#62e9de3e5ea505f7ba56f192a8ecd4e0d9963b98"
-  integrity sha512-yO4+KhfG0Ujs9Eka0IsdIbB6U8ohtMXI4AWTaaBYqMgT4UNdcOUHqo6THgZpCRJfjYMyNnIh6Fi6d8NgyV6s4g==
+carbon-components-react@7.57.1, carbon-components-react@^7.57.1:
+  version "7.57.1"
+  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-7.57.1.tgz#d59b079300ded3f721f0a42beed6721afccaa3d6"
+  integrity sha512-7B1MQWfiN7oNONvdCX3ROFDu1Smu2DvILyH3JQupPF7rmqtPEvJH/zH33xNU8t4oSwT4tkigDM42/War7Ewyxw==
   dependencies:
     "@babel/runtime" "^7.16.7"
     "@carbon/feature-flags" "^0.7.0"
@@ -6552,33 +6552,17 @@ carbon-components-react@7.56.0:
     wicg-inert "^3.1.1"
     window-or-global "^1.0.1"
 
-carbon-components-react@^7.56.0:
-  version "7.57.0"
-  resolved "https://registry.yarnpkg.com/carbon-components-react/-/carbon-components-react-7.57.0.tgz#18efa7c2574ae7adda42e28def5a7887d50f6316"
-  integrity sha512-j2o2Ieb5IICXX8rxnppyiNdurZMfP6rET+TA3+Ap1blLlSbFru1L27mMgV7GgKib8paWHQFRUzryiwik0arsaw==
+carbon-components@10.57.1, carbon-components@^10.57.1:
+  version "10.57.1"
+  resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.57.1.tgz#467df2d967c63bfce3615c8d98b1f70bed080912"
+  integrity sha512-SgQkadi8BEBQrnsP7HNyGYjr1AgLpa5y9+yMahdtnpt20vIFHAQc987gs4ZB7/kjR4fufC+unHJqVvOxjYV/ng==
   dependencies:
-    "@babel/runtime" "^7.16.7"
-    "@carbon/feature-flags" "^0.7.0"
-    "@carbon/icons-react" "^10.49.0"
-    "@carbon/layout" "^10.37.0"
     "@carbon/telemetry" "0.1.0"
-    classnames "2.3.1"
-    copy-to-clipboard "^3.3.1"
-    downshift "5.2.1"
-    flatpickr "4.6.9"
-    invariant "^2.2.3"
+    flatpickr "4.6.1"
     lodash.debounce "^4.0.8"
-    lodash.findlast "^4.5.0"
-    lodash.isequal "^4.5.0"
-    lodash.omit "^4.5.0"
-    lodash.throttle "^4.1.1"
-    prop-types "^15.7.2"
-    react-is "^17.0.2"
-    use-resize-observer "^6.0.0"
-    wicg-inert "^3.1.1"
-    window-or-global "^1.0.1"
+    warning "^3.0.0"
 
-carbon-components@10.56.0, carbon-components@^10.55.2, carbon-components@^10.56.0:
+carbon-components@^10.55.2:
   version "10.56.0"
   resolved "https://registry.yarnpkg.com/carbon-components/-/carbon-components-10.56.0.tgz#bb5890f00f81cebcddfa2dbae4794477deb539f4"
   integrity sha512-GPLqHiu2SWvMxcQOi/CcgA/XA3aX/5HiEPSQjLwzjKAJsnkpzq043Jf7QwgLOVbTBzGSjFbFkJnE2lc73I2WBw==

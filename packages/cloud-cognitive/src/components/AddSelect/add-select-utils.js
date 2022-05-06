@@ -77,3 +77,5 @@ export const sortItems = (attribute, direction) => {
     return valueA < valueB ? -1 : 1;
   };
 };
+
+export const getSortBy = (items) => items.find((item) => item.sortBy)?.sortBy;

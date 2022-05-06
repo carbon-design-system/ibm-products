@@ -264,6 +264,27 @@ export const InitialLoad = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
+export const WithHeader = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(11));
+  const gridTitle = 'Data table title';
+  const gridDescription = 'Additional information if needed';
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    gridTitle,
+    gridDescription,
+    initialState: {
+      pageSize: 10,
+      pageSizes: [5, 10, 25, 50],
+    },
+    DatagridActions,
+    DatagridPagination,
+  });
+
+  return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
 export const InfiniteScroll = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data, setData] = useState(makeData(0));

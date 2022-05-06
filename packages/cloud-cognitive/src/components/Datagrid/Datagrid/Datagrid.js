@@ -41,6 +41,8 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
     verticalAlign = 'center',
     variableRowHeight,
     className,
+    gridTitle,
+    gridDescription,
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
@@ -54,7 +56,10 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
             ? `${blockClass}__full-height`
             : ''
         )}
+        title={gridTitle}
+        description={gridDescription}
       >
+        <DatagridToolbar {...datagridState} />
         <Table
           {...getTableProps()}
           className={cx(
@@ -94,7 +99,6 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
       )}
       {...getDevtoolsProps(componentName)}
     >
-      <DatagridToolbar {...datagridState} />
       {leftPanel && (
         <div
           className={`${blockClass}__grid-container ${blockClass}__displayFlex`}

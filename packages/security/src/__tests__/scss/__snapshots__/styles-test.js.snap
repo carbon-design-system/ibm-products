@@ -6643,14 +6643,14 @@ body {
   box-shadow: none;
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--btn:focus {
     color: Highlight;
     outline: 1px solid Highlight;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--btn--ghost.bx--btn--icon-only .bx--btn__icon path:not([data-icon-path]):not([fill=none]),
 .bx--btn--ghost.bx--btn--icon-only .bx--btn__icon {
     fill: ButtonText;
@@ -7430,7 +7430,7 @@ body {
   background-color: inherit;
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--list-box__field,
 .bx--list-box__menu,
 .bx--multi-select .bx--tag--filter {
@@ -7438,7 +7438,7 @@ body {
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--list-box__field:focus,
 .bx--multi-select .bx--tag__close-icon:focus,
 .bx--list-box__menu-item--highlighted .bx--list-box__menu-item__option {
@@ -7447,7 +7447,7 @@ body {
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--list-box__menu-icon > svg,
 .bx--list-box__selection > svg,
 .bx--list-box__selection--multi > svg {
@@ -7926,19 +7926,19 @@ button.bx--dropdown-text:focus {
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--dropdown .bx--list-box__field {
     outline: 1px solid transparent;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--list-box__menu-item__option {
     outline: none;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--list-box__menu-item__selected-icon {
     fill: ButtonText;
   }
@@ -8329,7 +8329,7 @@ a.bx--overflow-menu-options__btn::before {
 }
 
 /* stylelint-disable */
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--overflow-menu:focus,
 .bx--overflow-menu-options__btn:focus {
     color: Highlight;
@@ -8337,7 +8337,7 @@ a.bx--overflow-menu-options__btn::before {
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--overflow-menu svg {
     fill: ButtonText;
   }
@@ -10311,7 +10311,7 @@ fieldset[disabled] .bx--form__helper-text {
   fill: var(--cds-icon-02, #c6c6c6);
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--search-close svg,
 .bx--search-magnifier-icon {
     fill: ButtonText;
@@ -11630,7 +11630,7 @@ tr.bx--data-table--selected:last-of-type td {
   margin: -0.1875rem 0;
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--data-table-content {
     outline: 1px solid transparent;
   }
@@ -11928,14 +11928,14 @@ tr.bx--parent-row.bx--data-table--selected.bx--expandable-row--hover + tr[data-c
   background: var(--cds-layer-selected, #393939);
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--table-expand__button:focus .bx--table-expand__svg {
     color: Highlight;
     outline: 1px solid Highlight;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--table-expand__svg {
     fill: ButtonText;
   }
@@ -12125,7 +12125,7 @@ th .bx--table-sort__flex {
   margin-top: 0.8125rem;
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--table-sort__icon,
 .bx--table-sort__icon-unsorted {
     fill: ButtonText;
@@ -12692,7 +12692,7 @@ li.bx--accordion__item--disabled:last-of-type {
   margin-bottom: 0;
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--accordion__arrow,
 .bx--accordion__item--active .bx--accordion__arrow {
     fill: ButtonText;
@@ -13799,20 +13799,20 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 /* stylelint-disable */
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--tag {
     outline: 1px solid transparent;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--tag__close-icon svg,
 .bx--tag__custom-icon svg {
     fill: ButtonText;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--tag__close-icon:focus {
     color: Highlight;
     outline: 1px solid Highlight;
@@ -16251,13 +16251,13 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 /* stylelint-disable */
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--inline-notification {
     outline: 1px solid transparent;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--inline-notification__close-button:focus,
 .bx--btn.bx--btn--ghost.bx--inline-notification__action-button:focus {
     color: Highlight;
@@ -16265,7 +16265,7 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--inline-notification__icon {
     fill: ButtonText;
   }
@@ -16524,20 +16524,20 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 /* stylelint-disable */
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--toast-notification {
     outline: 1px solid transparent;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--toast-notification__close-button:focus {
     color: Highlight;
     outline: 1px solid Highlight;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--toast-notification__icon {
     fill: ButtonText;
   }
@@ -19408,7 +19408,7 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 /* stylelint-disable */
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--tooltip__trigger svg,
 .bx--tooltip__trigger:hover svg,
 .bx--tooltip__trigger:focus svg {
@@ -19416,20 +19416,20 @@ li.bx--accordion__item--disabled:last-of-type {
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--tooltip__trigger:focus svg {
     color: Highlight;
     outline: 1px solid Highlight;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--tooltip {
     outline: 1px solid transparent;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--assistive-text {
     outline: 1px solid transparent;
   }
@@ -20301,7 +20301,7 @@ optgroup.bx--select-optgroup:disabled,
   display: none;
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--select__arrow {
     fill: ButtonText;
   }
@@ -21039,7 +21039,7 @@ optgroup.bx--select-optgroup:disabled,
   background: transparent;
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--text-input--password__visibility,
 .bx--btn.bx--btn--icon-only.bx--text-input--password__visibility__toggle.bx--tooltip__trigger svg,
 .bx--btn.bx--btn--icon-only.bx--text-input--password__visibility__toggle.bx--tooltip__trigger:hover svg {
@@ -23093,7 +23093,7 @@ optgroup.bx--select-optgroup:disabled,
   display: none;
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--structured-list-input:checked + .bx--structured-list-td .bx--structured-list-svg {
     fill: ButtonText;
   }
@@ -25469,20 +25469,20 @@ optgroup.bx--select-optgroup:disabled,
 }
 
 /* stylelint-disable */
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--snippet__icon {
     fill: ButtonText;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--snippet--inline:focus {
     color: Highlight;
     outline: 1px solid Highlight;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--snippet--single,
 .bx--snippet--multi {
     outline: 1px solid transparent;
@@ -25912,7 +25912,7 @@ optgroup.bx--select-optgroup:disabled,
   fill: var(--cds-icon-inverse, #161616);
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--content-switcher-btn:focus {
     color: Highlight;
     outline: 1px solid Highlight;
@@ -26459,14 +26459,14 @@ optgroup.bx--select-optgroup:disabled,
   cursor: pointer;
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .flatpickr-prev-month,
 .flatpickr-next-month {
     fill: ButtonText;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .flatpickr-day.selected {
     color: Highlight;
     outline: 1px solid Highlight;
@@ -26474,14 +26474,14 @@ optgroup.bx--select-optgroup:disabled,
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .flatpickr-day.today,
 .flatpickr-day.inRange {
     color: Highlight;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .flatpickr-calendar {
     outline: 1px solid transparent;
   }
@@ -26720,7 +26720,7 @@ optgroup.bx--select-optgroup:disabled,
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--date-picker__icon {
     fill: ButtonText;
   }
@@ -27098,13 +27098,13 @@ optgroup.bx--select-optgroup:disabled,
 }
 
 /* stylelint-disable */
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--file__selected-file {
     outline: 1px solid transparent;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--file__state-container .bx--file-close svg path {
     fill: ButtonText;
   }
@@ -27553,13 +27553,13 @@ optgroup.bx--select-optgroup:disabled,
 }
 
 /* stylelint-disable */
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--modal-close__icon {
     fill: ButtonText;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--modal-close:focus {
     color: Highlight;
     outline: 1px solid Highlight;
@@ -28009,7 +28009,7 @@ optgroup.bx--select-optgroup:disabled,
 }
 
 /* stylelint-disable */
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--number__control-btn:hover,
 .bx--number__control-btn:focus {
     color: Highlight;
@@ -28017,13 +28017,13 @@ optgroup.bx--select-optgroup:disabled,
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--number__control-btn {
     outline: 1px solid transparent;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--number__control-btn svg {
     fill: ButtonText;
   }
@@ -28272,7 +28272,7 @@ span.bx--pagination__text {
   margin-bottom: 0;
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--pagination__button,
 .bx--btn--ghost.bx--pagination__button {
     outline: 1px solid transparent;
@@ -28563,14 +28563,9 @@ span.bx--pagination__text {
   content: \\"\\";
   transform: scale(0.5);
 }
-@media screen and (-ms-high-contrast: active) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance::before {
-    background-color: WindowText;
-  }
-}
-@media screen and (prefers-contrast) {
-  .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance::before {
-    border: 2px solid WindowText;
+    fill: ButtonText;
   }
 }
 
@@ -28863,20 +28858,20 @@ span.bx--pagination__text {
 }
 
 /* stylelint-disable */
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--slider__thumb {
     outline: 1px solid transparent;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--slider__thumb:focus {
     color: Highlight;
     outline: 1px solid Highlight;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--slider__track {
     outline: 1px solid transparent;
   }
@@ -29744,14 +29739,14 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
   white-space: nowrap;
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--tabs--scrollable__nav-item .bx--tabs__nav-item--selected .bx--tabs--scrollable__nav-item--selected {
     color: Highlight;
     outline: 1px solid Highlight;
   }
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--tabs--scrollable .bx--tabs--scrollable__nav-item--disabled .bx--tabs--scrollable__nav-link {
     color: GrayText;
     fill: GrayText;
@@ -31937,7 +31932,7 @@ a.bx--side-nav__link--current::before {
   fill: #525252;
 }
 
-@media screen and (-ms-high-contrast: active), (forced-colors: active), (prefers-contrast) {
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--side-nav__icon > svg,
 .bx--side-nav a.bx--header__menu-item:hover .bx--header__menu-arrow,
 .bx--side-nav a.bx--header__menu-item:focus .bx--header__menu-arrow,

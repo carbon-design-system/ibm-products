@@ -109,6 +109,7 @@ export const WithHierarchy = prepareStory(Template, {
     globalFiltersPlaceholderText: 'Choose an option',
     globalFiltersPrimaryButtonText: 'Apply',
     globalFiltersSecondaryButtonText: 'Reset',
+    globalSortBy: ['title'],
     items: {
       sortBy: ['title'],
       entries: [

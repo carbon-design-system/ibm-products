@@ -17,9 +17,9 @@ import { Filter32 } from '@carbon/icons-react';
 import { pkg, carbon } from '../../settings';
 import { AddSelectList } from './AddSelectList';
 import { AddSelectSort } from './AddSelectSort';
-import { sortItems } from './add-select-utils';
-import uuidv4 from '../../global/js/utils/uuidv4';
+import { sortItems, getSortBy } from './add-select-utils';
 import { useItemSort } from './hooks/useItemSort';
+import uuidv4 from '../../global/js/utils/uuidv4';
 const componentName = 'AddSelect';
 
 export let AddSelectColumn = ({
@@ -85,6 +85,7 @@ export let AddSelectColumn = ({
   };
 
   const sortFn = sortItems(sortAttribute, sortDirection);
+  const sortBy = getSortBy(filteredItems);
 
   const colItems = filteredItems
     .filter(filterBySearch) // first check if the item meets the search
@@ -110,6 +111,7 @@ export let AddSelectColumn = ({
             setSortDirection={setSortDirection}
             sortAttribute={sortAttribute}
             sortDirection={sortDirection}
+            sortBy={sortBy}
           />
           {filterByOpts.length > 0 && (
             <OverflowMenu

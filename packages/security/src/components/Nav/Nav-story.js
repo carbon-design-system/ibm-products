@@ -10,24 +10,10 @@ import React from 'react';
 import { components } from '../../../.storybook';
 import { Nav, NavItem, NavList } from '../..';
 
-import { InlineNotification } from '../../';
-
 import { commerce } from 'faker';
 const { name } = Nav;
 
-storiesOf(components('Nav#legacy'), module)
-  .addDecorator((Story) => (
-    <>
-      <InlineNotification
-        className="page-layouts__banner"
-        kind="info"
-        subtitle="This component is now legacy."
-        title=""
-        hideCloseButton
-      />
-      <Story />
-    </>
-  ))
+storiesOf(components('Nav'), module)
   .add(
     'Default',
     () => (

@@ -12,11 +12,9 @@ import { ArrowsVertical32, ArrowUp16, ArrowDown16 } from '@carbon/icons-react';
 import { pkg } from '../../settings';
 const componentName = 'AddSelect';
 
-export let AddSelectSort = ({ items, setSortAttribute, setSortDirection }) => {
-  const blockClass = `${pkg.prefix}--add-select`;
+export let AddSelectSort = ({ setSortAttribute, setSortDirection, sortBy }) => {
+  const blockClass = `${pkg.prefix}--add-select-sort`;
 
-  // sorting
-  const sortBy = items.find((item) => item.sortBy)?.sortBy;
   const sortByOpts = sortBy
     ? sortBy.reduce((acc, cur) => {
         const opts = [
@@ -55,33 +53,25 @@ export let AddSelectSort = ({ items, setSortAttribute, setSortDirection }) => {
 
   return (
     <div className={blockClass}>
-      <div className={`${blockClass}-search-bar`}>
-        <div className={`${blockClass}-sort-filter`}>
-          {sortByOpts.length > 0 && (
-            <OverflowMenu
-              renderIcon={ArrowsVertical32}
-              className={`${blockClass}-overflow`}
-              flipped
-            >
-              {sortByOpts.map((opt) => (
-                <OverflowMenuItem
-                  key={opt.id}
-                  itemText={opt.itemText}
-                  onClick={() => sortHandler(opt)}
-                />
-              ))}
-            </OverflowMenu>
-          )}
-        </div>
-      </div>
+      {sortByOpts.length > 0 && (
+        <OverflowMenu renderIcon={ArrowsVertical32} flipped>
+          {sortByOpts.map((opt) => (
+            <OverflowMenuItem
+              key={opt.id}
+              itemText={opt.itemText}
+              onClick={() => sortHandler(opt)}
+            />
+          ))}
+        </OverflowMenu>
+      )}
     </div>
   );
 };
 
 AddSelectSort.propTypes = {
-  items: PropTypes.array,
   setSortAttribute: PropTypes.func,
   setSortDirection: PropTypes.func,
+  sortBy: PropTypes.array,
 };
 
 AddSelectSort.displayName = componentName;

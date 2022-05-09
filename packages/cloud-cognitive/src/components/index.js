@@ -51,3 +51,6 @@ export { OptionsTile } from './OptionsTile';
 export { InlineEdit } from './InlineEdit';
 export { DataSpreadsheet } from './DataSpreadsheet';
 export { Datagrid } from './Datagrid';
+export { EditTearsheet } from './EditTearsheet';
+export { EditTearsheetNarrow } from './EditTearsheetNarrow';
+export { EditFullPage } from './EditFullPage';

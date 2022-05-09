@@ -1,0 +1,49 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow/CreateTearsheetNarrow';
+import { EditTearsheetNarrow } from './EditTearsheetNarrow';
+import narrowTearsheet from '../CreateTearsheetNarrow/storybook_assets/NarrowTearsheetAnatomy.jpg';
+
+# EditTearsheetNarrow
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+### When to use
+
+- Use a narrow tearsheet as an alternative to a modal when there is scrolling.
+- Use when the form fields can be broken down into sections using section
+  headers.
+
+### When not to use
+
+- Don’t use if the flow has high complexity and the user would benefit from
+  having a visible progress indicator.
+
+<img src={narrowTearsheet} alt="Example of EditTearsheetNarrow component" />
+
+## Example usage
+
+<!-- TODO: One example per designed use case. -->
+
+<Canvas>
+  <Story
+    id={getStoryId(EditTearsheetNarrow.displayName, 'edit-tearsheet-narrow')}
+  />
+</Canvas>
+
+## Code sample
+
+<CodesandboxLink exampleDirectory="CreateTearsheetNarrow" />
+
+## Component API
+
+<ArgsTable />

@@ -18,6 +18,9 @@ import { className, iconClassName, label, sizes } from './_mocks_';
 import { IconButton } from '../..';
 import { TooltipDirection } from './IconButton';
 
+import { InlineNotification, NotificationActionButton } from '../../';
+import { Grid } from 'carbon-components-react';
+
 const iconButtonProps = () => ({
   className,
   disabled: boolean('disabled', false),
@@ -36,14 +39,34 @@ const iconButtonProps = () => ({
   ),
 });
 
-storiesOf(components('IconButton'), module).add(
-  'Default',
-  () => <IconButton {...iconButtonProps()} />,
-  {
+storiesOf(components('IconButton#legacy'), module)
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://react.carbondesignsystem.com/?path=/story/components-button--icon-button"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            View replacement
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="Component no longer supported. The component will remain available, but plan to migrate to the component replacement."
+        title=""
+        hideCloseButton
+      />
+      <Grid>
+        <Story />
+      </Grid>
+    </>
+  ))
+  .add('Default', () => <IconButton {...iconButtonProps()} />, {
     info: {
       text: `
           Basic implementation of an Icon Button component.
         `,
     },
-  }
-);
+  });

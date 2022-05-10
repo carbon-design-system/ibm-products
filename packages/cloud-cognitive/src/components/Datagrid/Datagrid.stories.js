@@ -213,6 +213,30 @@ export const BasicUsage = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
+export const EmptyState = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(0));
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription =
+    'Description text explaining why this card is empty.';
+  const emptyStateSize = 'lg';
+  const illustrationTheme = 'light';
+
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    emptyStateTitle,
+    emptyStateDescription,
+    emptyStateSize,
+    illustrationTheme,
+    DatagridActions,
+    DatagridBatchActions,
+    DatagridPagination,
+  });
+
+  return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
 export const InitialLoad = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data, setData] = useState(makeData(0));

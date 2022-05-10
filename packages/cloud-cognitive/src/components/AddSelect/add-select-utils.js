@@ -65,3 +65,17 @@ export const getGlobalFilterValues = (globalFilters, items) => {
   }, []);
   return filterOpts;
 };
+
+export const sortItems = (attribute, direction) => {
+  return (a, b) => {
+    const valueA = a[attribute]?.split(' ').join('');
+    const valueB = b[attribute]?.split(' ').join('');
+    if (direction === 'desc') {
+      return valueA > valueB ? -1 : 1;
+    }
+
+    return valueA < valueB ? -1 : 1;
+  };
+};
+
+export const getSortBy = (items) => items.find((item) => item.sortBy)?.sortBy;

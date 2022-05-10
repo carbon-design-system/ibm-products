@@ -13,11 +13,11 @@ export const createCellSelectionArea = ({
   ref,
   area,
   blockClass,
-  columns,
   defaultColumn,
   selectionAreas,
   setSelectionAreas,
   setActiveCellInsideSelectionArea,
+  visibleColumns,
 }) => {
   const {
     lowestColumnIndex,
@@ -36,7 +36,7 @@ export const createCellSelectionArea = ({
     activeCellElement.setAttribute('data-selection-id', area.matcher);
   }
   let selectionAreaVariableWidth = 0;
-  columns.forEach((item, index) => {
+  visibleColumns.forEach((item, index) => {
     if (index >= lowestColumnIndex && index <= greatestColumnIndex) {
       selectionAreaVariableWidth += item?.width || defaultColumn?.width;
     }

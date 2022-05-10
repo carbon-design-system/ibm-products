@@ -7,6 +7,21 @@ are followed, and keep an eye on the
 
 Each PR should be reviewed based on these criteria where applicable.
 
+## Standards and conventions
+
+- PR titles are used to determine the semver release type go into our changelog
+  — be sure to include name your PRs appropriately
+
+  - **feat**: for new features or changes, when applicable, include the
+    component or area, e.g. **feat(Tearsheet)**
+  - **fix**: for bug fixes
+  - **chore**, **docs**, **test**, **etc**: for changes that don’t impact the
+    end-user experience directly
+
+- **No breaking changes.** If we need to remove or change props, we should
+  deprecate them using the props helpers in
+  `../../global/js/utils/props-helper.js`.
+
 ## New production dependencies
 
 If a PR introduces new dependencies in `package.json`, paste the following

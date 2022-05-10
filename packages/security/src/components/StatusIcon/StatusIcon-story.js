@@ -13,7 +13,6 @@ import { components } from '../../../.storybook';
 
 import { StatusIcon } from '../..';
 import { SIZE, STATUS } from './StatusIcon';
-import { InlineNotification } from '../../';
 
 const storyProps = () => ({
   message: text('Label (message)', 'Label'),
@@ -23,19 +22,7 @@ const storyProps = () => ({
 
 const status = STATUS[0];
 
-storiesOf(components('StatusIcon#legacy'), module)
-  .addDecorator((Story) => (
-    <>
-      <InlineNotification
-        className="page-layouts__banner"
-        kind="info"
-        subtitle="This component is now legacy."
-        title=""
-        hideCloseButton
-      />
-      <Story />
-    </>
-  ))
+storiesOf(components('StatusIcon'), module)
   .add('Default', () => <StatusIcon {...storyProps()} />)
   .add('Status', () => (
     <StatusIcon

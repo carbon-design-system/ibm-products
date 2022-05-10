@@ -16,6 +16,7 @@ import { Icon } from '../..';
 
 import { renderIcon } from './_mocks_';
 import { InlineNotification, NotificationActionButton } from '../../';
+import { Grid } from 'carbon-components-react';
 
 const iconProps = {
   style: { fill: theme.icon01, margin: miniUnits(1) },
@@ -32,15 +33,17 @@ storiesOf(components('Icon#legacy'), module)
             rel="noopener noreferrer"
             target="_blank"
           >
-            More info
+            View replacement
           </NotificationActionButton>
         }
         kind="info"
-        subtitle="This component is now legacy. Please click to see the go-forward component"
+        subtitle="Component no longer supported. The component will remain available, but plan to migrate to the component replacement."
         title=""
         hideCloseButton
       />
-      <Story />
+      <Grid>
+        <Story />
+      </Grid>
     </>
   ))
   .add(

@@ -26,6 +26,7 @@
 .#{$block-class}__grid-container table {
   /* Removes additional scroll introduced by Carbon table */
   overflow: hidden;
+
   &.#{$block-class}__vertical-align-center {
     .#{$block-class}__head {
       .#{$carbon-prefix}--table-header-label {
@@ -46,12 +47,14 @@
     th.#{$carbon-prefix}--table-column-checkbox {
       /* stylelint-disable-next-line carbon/layout-token-use */
       padding-top: 0.6875rem;
+
       &.#{$block-class}__checkbox-cell {
         display: flex;
         align-items: center;
         padding-top: 0;
       }
     }
+
     .#{$block-class}__checkbox-cell {
       th.#{$carbon-prefix}--table-column-checkbox {
         display: flex;
@@ -60,6 +63,7 @@
         padding-top: 0;
       }
     }
+
     &.#{$block-class}__variable-row-height {
       &.#{$carbon-prefix}--data-table--compact,
       &.#{$carbon-prefix}--data-table--xs {
@@ -68,6 +72,7 @@
           padding-bottom: $spacing-01;
         }
       }
+
       &.#{$carbon-prefix}--data-table--short,
       &.#{$carbon-prefix}--data-table--sm,
       &.#{$carbon-prefix}--data-table--md {
@@ -78,6 +83,7 @@
           padding-bottom: rem(6px);
         }
       }
+
       &.#{$carbon-prefix}--data-table--tall,
       &.#{$carbon-prefix}--data-table--lg,
       &.#{$carbon-prefix}--data-table--xl {
@@ -88,6 +94,7 @@
       }
     }
   }
+
   &.#{$block-class}__vertical-align-top {
     &.#{$carbon-prefix}--data-table--tall,
     &.#{$carbon-prefix}--data-table--lg,
@@ -95,14 +102,17 @@
       .#{$block-class}__cell {
         padding-top: $spacing-05;
       }
+
       .#{$carbon-prefix}--table-header-label {
         padding-top: $spacing-05;
       }
+
       .#{$carbon-prefix}--table-column-checkbox {
         /* stylelint-disable-next-line carbon/layout-token-use */
         padding-top: rem(13px);
       }
     }
+
     &.#{$block-class}__variable-row-height {
       &.#{$carbon-prefix}--data-table--tall,
       &.#{$carbon-prefix}--data-table--lg,
@@ -110,12 +120,14 @@
         .#{$block-class}__cell {
           padding-bottom: $spacing-05;
         }
+
         .#{$carbon-prefix}--table-header-label {
           padding-bottom: $spacing-05;
         }
       }
     }
   }
+
   &.#{$block-class}__variable-row-height {
     tr.#{$block-class}__carbon-row {
       height: auto;
@@ -150,15 +162,11 @@
   .#{$block-class}__head {
     display: flex;
   }
+
   .#{$block-class}__head .header {
     /* Each cell should grow equally */
     width: 1%;
     align-items: center;
-  }
-
-  .#{$block-class}__empty-state-body {
-    display: flex;
-    width: 100%;
   }
 
   .#{$block-class}__virtual-scrollbar {
@@ -195,9 +203,11 @@
     height: 100%;
     flex-direction: column;
   }
+
   .#{$block-class}__carbon-row {
     /* stylelint-disable-next-line declaration-no-important */
     flex: none !important;
+
     .#{$block-class}__carbon-row:hover a {
       /* stylelint-disable-next-line declaration-no-important */
       color: $hover-primary-text !important;
@@ -217,6 +227,31 @@
     /* stylelint-disable-next-line declaration-no-important */
     padding-right: $spacing-06 !important;
   }
+}
+
+.#{$block-class}__empty-state .#{$block-class}__table-simple {
+  display: table;
+  height: 100%;
+
+  .#{$pkg-prefix}--empty-state {
+    max-width: 280px;
+  }
+}
+
+.#{$block-class}__empty-state .#{$block-class}__table-simple tr:hover {
+  background: transparent;
+}
+
+.#{$block-class}__empty-state .#{$block-class}__table-simple tr:hover td {
+  background: transparent;
+}
+
+.#{$block-class}__empty-state .#{$block-class}__table-simple td {
+  padding: $spacing-11;
+}
+
+.#{$block-class}__empty-state .#{$block-class}__grid-container {
+  flex: 1 1 auto;
 }
 
 .#{$block-class}__resizer {
@@ -239,12 +274,14 @@
 .#{$block-class}__sortableColumn:hover {
   background-color: $hover-selected-ui;
 }
+
 .#{$block-class}__resizableColumn {
   &.#{$block-class}__isResizing {
     .#{$block-class}__resizer {
       border-right: $spacing-01 solid $hover-secondary;
     }
   }
+
   &.#{$block-class}__isSorted {
     background-color: $hover-selected-ui;
   }
@@ -252,6 +289,7 @@
 
 .#{$block-class}__resizableColumn:hover {
   background-color: $hover-selected-ui;
+
   .#{$block-class}__resizer {
     border-right: $spacing-01 solid $ui-04;
     background-color: $hover-selected-ui;

@@ -52,11 +52,11 @@
       color: $text-02;
     }
 
-    &-cell:hover .#{$block-class}__selections-dropdown {
+    &-cell:hover .#{$block-class}__selections-hidden-hover {
       visibility: visible;
     }
 
-    &-dropdown {
+    &-hidden-hover {
       visibility: hidden;
     }
 
@@ -64,7 +64,7 @@
       background: #e5e5e5;
     }
 
-    &-row-selected .#{$block-class}__selections-dropdown {
+    &-row-selected .#{$block-class}__selections-hidden-hover {
       visibility: visible;
     }
 
@@ -102,7 +102,7 @@
 
   .#{$block-class}__sub-header {
     display: flex;
-    align-items: end;
+    align-items: flex-end;
     justify-content: space-between;
   }
 
@@ -252,6 +252,38 @@
   button.#{$block-class}__global-filter-toggle {
     border-bottom-color: $ui-04;
     background: $field-01;
+  }
+
+  // meta panel
+  .#{$block-class}__meta-panel {
+    padding: $spacing-05;
+
+    &-close {
+      cursor: pointer;
+    }
+
+    &-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: $spacing-05;
+    }
+
+    &-entry {
+      margin-bottom: $spacing-05;
+    }
+  }
+
+  .#{$block-class}__meta-panel p.#{$block-class}__meta-panel-title {
+    @include carbon--type-style('productive-heading-03');
+  }
+
+  .#{$block-class}__meta-panel p.#{$block-class}__meta-panel-entry-title {
+    @include carbon--type-style('productive-heading-01');
+  }
+
+  .#{$block-class}__meta-panel p.#{$block-class}__meta-panel-entry-body {
+    @include carbon--type-style('body-short-01');
   }
 
   // overrides

@@ -43,6 +43,7 @@ export let AddSelect = forwardRef(
       influencerTitle,
       items,
       itemsLabel,
+      metaPanelTitle,
       multi,
       noResultsDescription,
       noResultsTitle,
@@ -75,6 +76,7 @@ export let AddSelect = forwardRef(
     const [flatItems, setFlatItems] = useState([]);
     const [globalFilterOpts, setGlobalFilterOpts] = useState([]);
     const [appliedGlobalFilters, setAppliedGlobalFilters] = useState({});
+    const [displayMetalPanel, setDisplayMetaPanel] = useState({});
     const { sortDirection, setSortDirection, sortAttribute, setSortAttribute } =
       useItemSort();
 
@@ -193,6 +195,7 @@ export let AddSelect = forwardRef(
       setPath,
       setSingleSelection,
       singleSelection,
+      setDisplayMetaPanel,
     };
 
     // handlers
@@ -238,11 +241,14 @@ export let AddSelect = forwardRef(
     const sidebarProps = {
       influencerTitle,
       items: flatItems,
+      metaPanelTitle,
       multiSelection,
       noSelectionDescription,
       noSelectionTitle,
       removeIconDescription,
       setMultiSelection,
+      displayMetalPanel,
+      setDisplayMetaPanel,
     };
 
     const setShowBreadsCrumbs = () => {
@@ -409,6 +415,16 @@ AddSelect.propTypes = {
         children: PropTypes.object,
         icon: PropTypes.object,
         id: PropTypes.string.isRequired,
+        meta: PropTypes.oneOfType([
+          PropTypes.arrayOf(
+            PropTypes.shape({
+              id: PropTypes.string,
+              title: PropTypes.string,
+              value: PropTypes.string,
+            })
+          ),
+          PropTypes.node,
+        ]),
         subtitle: PropTypes.string,
         title: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
@@ -416,6 +432,7 @@ AddSelect.propTypes = {
     ),
   }),
   itemsLabel: PropTypes.string,
+  metaPanelTitle: PropTypes.string,
   multi: PropTypes.bool,
   noResultsDescription: PropTypes.string,
   noResultsTitle: PropTypes.string,

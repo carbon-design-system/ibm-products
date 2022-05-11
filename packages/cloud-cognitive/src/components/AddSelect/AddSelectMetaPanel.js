@@ -1,0 +1,46 @@
+import React, { isValidElement } from 'react';
+import PropTypes from 'prop-types';
+import { Close16 } from '@carbon/icons-react';
+import { pkg } from '../../settings';
+const componentName = 'AddSelectMetaPanel';
+
+export let AddSelectMetaPanel = ({ meta, setDisplayMetaPanel, title }) => {
+  const blockClass = `${pkg.prefix}--add-select__meta-panel`;
+  const onCloseHandler = () => {
+    setDisplayMetaPanel({});
+  };
+
+  return (
+    <div className={blockClass}>
+      <div className={`${blockClass}-header`}>
+        <p className={`${blockClass}-title`}>{title}</p>
+        <Close16 className={`${blockClass}-close`} onClick={onCloseHandler} />
+      </div>
+      {isValidElement(meta)
+        ? meta
+        : meta.map((entry) => (
+            <div key={entry.id} className={`${blockClass}-entry`}>
+              <p className={`${blockClass}-entry-title`}>{entry.title}</p>
+              <p className={`${blockClass}-entry-body`}>{entry.value}</p>
+            </div>
+          ))}
+    </div>
+  );
+};
+
+AddSelectMetaPanel.propTypes = {
+  meta: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        title: PropTypes.string,
+        value: PropTypes.string,
+      })
+    ),
+    PropTypes.node,
+  ]),
+  setDisplayMetaPanel: PropTypes.func,
+  title: PropTypes.string,
+};
+
+AddSelectMetaPanel.displayName = componentName;

@@ -15,7 +15,7 @@ import {
   StructuredListCell,
   Dropdown,
 } from 'carbon-components-react';
-import { ChevronRight16 } from '@carbon/icons-react';
+import { ChevronRight16, View16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { UserProfileImage } from '../UserProfileImage';
@@ -28,6 +28,7 @@ export let AddSelectList = ({
   multi,
   multiSelection,
   path,
+  setDisplayMetaPanel,
   setMultiSelection,
   setPath,
   setSingleSelection,
@@ -148,7 +149,7 @@ export let AddSelectList = ({
                           light
                           label={modifiers?.label}
                           disabled={!isSelected(item.id)}
-                          className={`${blockClass}-dropdown`}
+                          className={`${blockClass}-dropdown ${blockClass}-hidden-hover`}
                         />
                       )}
                     </>
@@ -166,6 +167,11 @@ export let AddSelectList = ({
                   {item.children && (
                     <ChevronRight16 onClick={() => onNavigateItem(item)} />
                   )}
+                  {item.meta && (
+                    <div className={`${blockClass}-hidden-hover`}>
+                      <View16 onClick={() => setDisplayMetaPanel(item)} />
+                    </div>
+                  )}
                 </div>
               </StructuredListCell>
             </StructuredListRow>
@@ -182,6 +188,7 @@ AddSelectList.propTypes = {
   multi: PropTypes.bool,
   multiSelection: PropTypes.array,
   path: PropTypes.array,
+  setDisplayMetaPanel: PropTypes.func,
   setMultiSelection: PropTypes.func,
   setPath: PropTypes.func,
   setSingleSelection: PropTypes.func,

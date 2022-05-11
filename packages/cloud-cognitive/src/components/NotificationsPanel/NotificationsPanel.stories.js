@@ -61,7 +61,8 @@ const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
             {hasUnreadNotifications ? (
               <UnreadNotificationBell />
             ) : (
-              <Notification size={20}
+              <Notification
+                size={20}
                 style={{
                   /* stylelint-disable-next-line */
                   fill: white,
@@ -70,7 +71,8 @@ const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
             )}
           </HeaderGlobalAction>
           <HeaderGlobalAction aria-label="App switcher">
-            <User size={20}
+            <User
+              size={20}
               style={{
                 /* stylelint-disable-next-line */
                 fill: white,

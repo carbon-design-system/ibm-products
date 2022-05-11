@@ -61,7 +61,7 @@ const storyClass = 'page-header-stories';
 
 const makeActionBarItem = (item) => ({
   key: `a-key-${item}`,
-  renderIcon: props => <Lightning size={16} {...props}/>,
+  renderIcon: (props) => <Lightning size={16} {...props} />,
   iconDescription: `Action ${item}`,
 });
 const actionBarItems = {
@@ -70,9 +70,21 @@ const actionBarItems = {
   'Four items': [1, 2, 3, 4].map(makeActionBarItem),
   'Many items': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(makeActionBarItem),
   'In context items': [
-    { key: '1', renderIcon: props => <Printer size={16} {...props}/>, iconDescription: `Print` },
-    { key: '2', renderIcon: props => <Settings size={16} {...props}/>, iconDescription: `Settings` },
-    { key: '3', renderIcon: props => <VolumeMute size={16} {...props}/>, iconDescription: `Mute` },
+    {
+      key: '1',
+      renderIcon: (props) => <Printer size={16} {...props} />,
+      iconDescription: `Print`,
+    },
+    {
+      key: '2',
+      renderIcon: (props) => <Settings size={16} {...props} />,
+      iconDescription: `Settings`,
+    },
+    {
+      key: '3',
+      renderIcon: (props) => <VolumeMute size={16} {...props} />,
+      iconDescription: `Mute`,
+    },
   ],
 };
 
@@ -114,7 +126,8 @@ const children = {
   'Nothing in the available area': null,
   'A status indicator': (
     <>
-      <CheckmarkFilled size={16} className={`${storyClass}__status-icon`} /> Running
+      <CheckmarkFilled size={16} className={`${storyClass}__status-icon`} />{' '}
+      Running
     </>
   ),
   // cspell: disable
@@ -326,13 +339,13 @@ const title = {
   'Long title with icon': {
     text: 'A very long page title which will almost certainly have to be truncated at some point',
     loading: false,
-    icon: props => <Bee size={24} {...props}/>,
+    icon: (props) => <Bee size={24} {...props} />,
   },
   'Loading title': { text: 'Patience is a virtue', loading: true },
   'In context title': {
     text: 'Authentication activity',
     loading: false,
-    icon: props => <Security size={24} {...props}/>,
+    icon: (props) => <Security size={24} {...props} />,
   },
   'User defined title': {
     content: (

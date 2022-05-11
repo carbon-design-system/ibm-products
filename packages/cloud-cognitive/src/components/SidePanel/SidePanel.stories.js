@@ -484,18 +484,18 @@ export const WithActionToolbar = prepareStory(SlideOverTemplate, {
       {
         leading: true,
         label: 'Copy',
-        icon: props => <Copy size={20} {...props}/>,
+        icon: (props) => <Copy size={20} {...props} />,
         onClick: action('Toolbar button clicked: Copy'),
         kind: 'primary',
       },
       {
         label: 'Settings',
-        icon: props => <Settings size={20} {...props}/>,
+        icon: (props) => <Settings size={20} {...props} />,
         onClick: action('Toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
-        icon: props => <TrashCan size={20} {...props}/>,
+        icon: (props) => <TrashCan size={20} {...props} />,
         onClick: action('Toolbar button clicked: Delete'),
       },
     ],
@@ -541,17 +541,17 @@ export const WithStaticTitleAndActionToolbar = prepareStory(SlideOverTemplate, {
     actionToolbarButtons: [
       {
         label: 'Copy',
-        icon: props => <Copy size={20} {...props}/>,
+        icon: (props) => <Copy size={20} {...props} />,
         onClick: action('Action toolbar button clicked: Copy'),
       },
       {
         label: 'Settings',
-        icon: props => <Settings size={20} {...props}/>,
+        icon: (props) => <Settings size={20} {...props} />,
         onClick: action('Action toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
-        icon: props => <TrashCan size={20} {...props}/>,
+        icon: (props) => <TrashCan size={20} {...props} />,
         onClick: action('Action toolbar button clicked: Delete'),
       },
     ],

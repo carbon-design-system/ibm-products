@@ -6,7 +6,11 @@
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/type';
+@use '../../global/styles/project-settings' as *;
 
 // CreateModal uses the following Carbon components:
 // ComposedModal, ModalHeader, ModalFooter, ModalBody, Form, Button
@@ -14,71 +18,66 @@
 @use '@carbon/react/scss/components/form';
 @use '@carbon/react/scss/components/button';
 
-@mixin create-modal {
-  .#{$pkg-prefix}--create-modal {
-    background-color: $ui-background;
+.#{$pkg-prefix}--create-modal {
+  background-color: $background;
+}
+
+.#{$pkg-prefix}--create-modal .#{$carbon-prefix}--modal-close {
+  display: none;
+}
+
+.#{$pkg-prefix}--create-modal .#{$carbon-prefix}--modal-container {
+  @include breakpoint(md) {
+    max-height: 95%;
   }
-
-  .#{$pkg-prefix}--create-modal .#{$carbon-prefix}--modal-close {
-    display: none;
-  }
-
-  .#{$pkg-prefix}--create-modal .#{$carbon-prefix}--modal-container {
-    @include carbon--breakpoint(md) {
-      max-height: 95%;
-    }
-    @include carbon--breakpoint(lg) {
-      max-height: 95%;
-    }
-  }
-
-  .#{$pkg-prefix}--create-modal .#{$carbon-prefix}--modal-header {
-    padding-right: 20%;
-    padding-bottom: $spacing-03;
-    border-bottom: 1px solid $ui-03;
-    margin-bottom: 0;
-  }
-
-  .#{$pkg-prefix}--create-modal
-    .#{$carbon-prefix}--modal-footer
-    .#{$carbon-prefix}--btn {
-    max-width: none;
-  }
-
-  .#{$pkg-prefix}--create-modal__title {
-    @include carbon--type-style('productive-heading-03');
-
-    margin-bottom: $spacing-02;
-  }
-
-  .#{$pkg-prefix}--create-modal__subtitle {
-    @include carbon--type-style('body-short-01');
-
-    margin-bottom: $spacing-03;
-    color: $text-02;
-  }
-
-  .#{$pkg-prefix}--create-modal__description {
-    @include carbon--type-style('body-long-01');
-
-    padding-right: calc(20% - #{$spacing-05});
-    margin: $spacing-03 0 $spacing-05 0;
-  }
-
-  .#{$pkg-prefix}--create-modal__form .#{$carbon-prefix}--fieldset {
-    min-width: 100%;
-    margin-bottom: 0;
-  }
-
-  .#{$pkg-prefix}--create-modal__form > * {
-    margin-bottom: $spacing-05;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
+  @include breakpoint(lg) {
+    max-height: 95%;
   }
 }
 
-@include exports('create-modal') {
-  @include create-modal;
+.#{$pkg-prefix}--create-modal .#{$carbon-prefix}--modal-header {
+  padding-right: 20%;
+  padding-bottom: $spacing-03;
+  border-bottom: 1px solid $layer-accent-01;
+  margin-bottom: 0;
+}
+
+.#{$pkg-prefix}--create-modal
+  .#{$carbon-prefix}--modal-footer
+  .#{$carbon-prefix}--btn {
+  max-width: none;
+}
+
+.#{$pkg-prefix}--create-modal__title {
+  @include type.type-style('productive-heading-03');
+
+  margin-bottom: $spacing-02;
+}
+
+.#{$pkg-prefix}--create-modal__subtitle {
+  @include type.type-style('body-short-01');
+
+  margin-bottom: $spacing-03;
+  color: $text-secondary;
+}
+
+.#{$pkg-prefix}--create-modal__description {
+  @include type.type-style('body-long-01');
+
+  padding-right: calc(20% - #{$spacing-05});
+  margin: $spacing-03 0 $spacing-05 0;
+}
+
+.#{$pkg-prefix}--create-modal__form .#{$carbon-prefix}--fieldset {
+  min-width: 100%;
+  margin-bottom: 0;
+}
+
+.#{$pkg-prefix}--create-modal__form > * {
+  margin-bottom: $spacing-05;
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  &:last-child {
+    margin-bottom: 0;
+  }
 }

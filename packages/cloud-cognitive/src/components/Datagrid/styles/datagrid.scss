@@ -6,7 +6,11 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@import './variables';
+@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/react/scss/components/button/tokens' as *;
+@use '../../../global/styles/project-settings' as *;
+@use './variables' as *;
 
 .#{$block-class}__table-toolbar > section {
   z-index: 2;
@@ -20,7 +24,7 @@
 }
 
 .#{$block-class}__grid-container::-webkit-scrollbar-thumb {
-  background-color: $text-03;
+  background-color: $text-placeholder;
 }
 
 .#{$block-class}__grid-container table {
@@ -32,7 +36,7 @@
         display: flex;
         height: 100%;
         align-items: center;
-        color: $text-01;
+        color: $text-primary;
       }
     }
 
@@ -167,12 +171,12 @@
   }
 
   .#{$block-class}__virtual-scrollbar::-webkit-scrollbar-thumb {
-    background-color: $text-03;
+    background-color: $text-placeholder;
   }
 
   .#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
     width: 6px;
-    background-color: $ui-background;
+    background-color: $background;
   }
 
   .#{$block-class}__cell {
@@ -200,7 +204,7 @@
     flex: none !important;
     .#{$block-class}__carbon-row:hover a {
       /* stylelint-disable-next-line declaration-no-important */
-      color: $hover-primary-text !important;
+      color: $link-primary-hover !important;
     }
   }
 
@@ -237,24 +241,24 @@
 }
 
 .#{$block-class}__sortableColumn:hover {
-  background-color: $hover-selected-ui;
+  background-color: $background-selected-hover;
 }
 .#{$block-class}__resizableColumn {
   &.#{$block-class}__isResizing {
     .#{$block-class}__resizer {
-      border-right: $spacing-01 solid $hover-secondary;
+      border-right: $spacing-01 solid $button-secondary-hover;
     }
   }
   &.#{$block-class}__isSorted {
-    background-color: $hover-selected-ui;
+    background-color: $background-selected-hover;
   }
 }
 
 .#{$block-class}__resizableColumn:hover {
-  background-color: $hover-selected-ui;
+  background-color: $background-selected-hover;
   .#{$block-class}__resizer {
-    border-right: $spacing-01 solid $ui-04;
-    background-color: $hover-selected-ui;
+    border-right: $spacing-01 solid $border-strong-01;
+    background-color: $background-selected-hover;
   }
 }
 
@@ -271,12 +275,12 @@
 }
 
 .#{$block-class}__simple-body::-webkit-scrollbar-thumb {
-  background-color: $text-03;
+  background-color: $text-placeholder;
 }
 
 .#{$block-class}__simple-body::-webkit-scrollbar {
   width: 6px;
-  background-color: $ui-background;
+  background-color: $background;
 }
 
 .#{$block-class}__sticky.#{$block-class}__table-simple {
@@ -306,7 +310,7 @@
   display: flex;
   width: 388px; // as per UX specs.
   height: 100%;
-  background-color: $ui-01;
+  background-color: $layer-01;
 }
 
 .#{$block-class}__datagridWithPanel {
@@ -321,6 +325,6 @@
   // Border applied to nested rows only on open chevron hover
   &.#{$block-class}__carbon-row-expanded-hover-active
     ~ .#{$block-class}__carbon-nested-row {
-    border-left: 1px solid $interactive-01;
+    border-left: 1px solid $button-primary;
   }
 }

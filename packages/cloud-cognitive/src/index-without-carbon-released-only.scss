@@ -5,9 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import './global/styles/imported-carbon-modules';
+@use './global/styles/imported-carbon-modules' as *;
 $imported-modules: $imported-carbon-modules;
 
-@import './global/styles/project-settings';
+@forward './global/styles/project-settings';
 
-@import './components/index-released-only';
+@forward './components/index-released-only';

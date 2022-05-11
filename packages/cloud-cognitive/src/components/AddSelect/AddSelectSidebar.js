@@ -45,7 +45,7 @@ export let AddSelectSidebar = ({
         <p className={`${blockClass}-selected-item-subtitle`}>{subtitle}</p>
       </div>
       <Button
-        renderIcon={props => <SubtractAlt size={32} {...props}/>}
+        renderIcon={(props) => <SubtractAlt size={32} {...props} />}
         iconDescription={removeIconDescription}
         hasIconOnly
         onClick={() => handleItemRemove(id)}

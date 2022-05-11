@@ -1,5 +1,16 @@
+//
+// Copyright IBM Corp. 2020, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/react/scss/themes' as *;
+@use '@carbon/react/scss/theme' as *;
+@use '../../global/styles/project-settings' as *;
 
 $web-terminal-width: 36.5rem;
 $block-class: #{$pkg-prefix}--web-terminal;
@@ -37,7 +48,7 @@ $block-class: #{$pkg-prefix}--web-terminal;
 */
 
 .#{$block-class} {
-  @include carbon--theme($carbon--theme--g90, true);
+  @include theme($g90);
 
   position: fixed;
   top: $spacing-09;
@@ -45,7 +56,7 @@ $block-class: #{$pkg-prefix}--web-terminal;
   width: $web-terminal-width;
   height: calc(100vh - #{$spacing-09});
   border-left: 1px solid $gray-90;
-  color: $text-01;
+  color: $text-primary;
   /* stylelint-disable-next-line  */
   background-color: $gray-100;
 }
@@ -55,7 +66,7 @@ $block-class: #{$pkg-prefix}--web-terminal;
   height: 3rem;
   align-items: center;
   justify-content: space-between;
-  background-color: $ui-background;
+  background-color: $background;
 }
 
 .#{$block-class}__actions {
@@ -63,7 +74,7 @@ $block-class: #{$pkg-prefix}--web-terminal;
 }
 
 .#{$block-class}__documentation-overflow {
-  @include carbon--theme($carbon--theme--g100, true);
+  @include theme($g100);
 }
 
 // Terminal body styles

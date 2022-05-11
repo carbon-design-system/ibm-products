@@ -5,48 +5,42 @@
 // LICENSE file in the root directory of this source tree.
 //
 // Standard imports.
-@import '../../global/styles/project-settings';
-@import '../../global/styles/mixins';
+@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/mixins' as *;
 
 // ButtonSetWithOverflow uses the following IBM Products components:
 // ButtonMenu, ButtonMenuItem
-@import '../ButtonMenu/button-menu';
+@use '../ButtonMenu/button-menu';
 
 // ButtonSetWithOverflow uses the following Carbon components:
 // ButtonSet, Button
 @use '@carbon/react/scss/components/button';
 
-$block-class: #{$pkg-prefix}--button-set-with-overflow;
+$_block-class: #{$pkg-prefix}--button-set-with-overflow;
 
-@mixin button-set-with-overflow {
-  @include block-wrap($block-class) {
-    &.#{$block-class} {
-      display: flex;
-      width: 100%;
-    }
-
-    .#{$block-class}__space {
-      position: relative;
-      display: block;
-      width: 100%;
-      white-space: nowrap;
-    }
-
-    .#{$block-class}__button-container {
-      display: inline-flex; // needed to register a width
-    }
-
-    .#{$block-class}__button-container--hidden {
-      // This button-set container is used to measure the width of all displayable button-sets
-      @include measuring-container;
-    }
-
-    &.#{$block-class}--right {
-      justify-content: flex-end;
-    }
+@include block-wrap($_block-class) {
+  &.#{$_block-class} {
+    display: flex;
+    width: 100%;
   }
-}
 
-@include exports('button-set-with-overflow') {
-  @include button-set-with-overflow;
+  .#{$_block-class}__space {
+    position: relative;
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+  }
+
+  .#{$_block-class}__button-container {
+    display: inline-flex; // needed to register a width
+  }
+
+  .#{$_block-class}__button-container--hidden {
+    // This button-set container is used to measure the width of all displayable button-sets
+    @include measuring-container;
+  }
+
+  &.#{$_block-class}--right {
+    justify-content: flex-end;
+  }
 }

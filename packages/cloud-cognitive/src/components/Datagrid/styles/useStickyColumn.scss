@@ -6,33 +6,34 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@import './variables';
+@use '@carbon/styles' as *;
+@use './variables';
 
-.#{$block-class}__right-sticky-column-cell {
+.#{variables.$block-class}__right-sticky-column-cell {
   /* stylelint-disable-next-line declaration-no-important */
   position: sticky !important;
   right: 0;
-  box-shadow: -2px 1px 3px $overlay-01;
+  box-shadow: -2px 1px 3px $overlay;
 }
 
-.#{$block-class}__right-sticky-column-header {
+.#{variables.$block-class}__right-sticky-column-header {
   /* stylelint-disable-next-line declaration-no-important */
   position: sticky !important;
   right: 0;
-  box-shadow: -2px 1px 3px $overlay-01;
+  box-shadow: -2px 1px 3px $overlay;
 }
 
-.#{$block-class}__sticky-noShadow {
+.#{variables.$block-class}__sticky-noShadow {
   box-shadow: none;
 }
 
-.#{$block-class}__sticky-column-noShadow {
-  .#{$block-class}__right-sticky-column-cell {
+.#{variables.$block-class}__sticky-column-noShadow {
+  .#{variables.$block-class}__right-sticky-column-cell {
     box-shadow: none;
   }
 }
 
-.#{$block-class}__right-sticky-column-offset-scroll {
+.#{variables.$block-class}__right-sticky-column-offset-scroll {
   /* stylelint-disable-next-line */
   right: 6px !important; // offset the vertical scroll bar in the table body
 }

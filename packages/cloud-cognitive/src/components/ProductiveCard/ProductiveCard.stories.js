@@ -55,14 +55,14 @@ const defaultProps = {
   actionIcons: [
     {
       id: '1',
-      icon: props => <Edit size={16} {...props}/>,
+      icon: (props) => <Edit size={16} {...props} />,
       onClick: action('on click'),
       onKeyDown: action('on keydown'),
       iconDescription: 'Edit',
     },
     {
       id: '2',
-      icon: props => <TrashCan size={16} {...props}/>,
+      icon: (props) => <TrashCan size={16} {...props} />,
       onClick: action('on click'),
       onKeyDown: action('on keydown'),
       iconDescription: 'Delete',

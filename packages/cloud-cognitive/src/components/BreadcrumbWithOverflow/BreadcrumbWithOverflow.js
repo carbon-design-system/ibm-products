@@ -58,7 +58,9 @@ export let BreadcrumbWithOverflow = ({
         <OverflowMenu
           ariaLabel={overflowAriaLabel}
           iconDescription={overflowAriaLabel} // also needs setting to avoid a11y "Accessible name does not match or contain the visible label text"
-          renderIcon={props => <OverflowMenuHorizontal size={32} {...props}/>}
+          renderIcon={(props) => (
+            <OverflowMenuHorizontal size={32} {...props} />
+          )}
           className={`${blockClass}__overflow-menu`}
           menuOptionsClass={`${blockClass}__overflow-menu-options`}
         >
@@ -91,7 +93,9 @@ export let BreadcrumbWithOverflow = ({
           <BreadcrumbItem key={`${blockClass}-hidden-overflow-${internalId}`}>
             <OverflowMenu
               ariaLabel={overflowAriaLabel}
-              renderIcon={props => <OverflowMenuHorizontal size={32} {...props} />}
+              renderIcon={(props) => (
+                <OverflowMenuHorizontal size={32} {...props} />
+              )}
             />
           </BreadcrumbItem>
           {breadcrumbs.map(({ label, key, title, id, ...rest }) => (
@@ -309,7 +313,7 @@ export let BreadcrumbWithOverflow = ({
                   <TooltipIcon
                     tooltipText={backItem.title || backItem.label}
                     direction="right"
-                    renderIcon={props => <ArrowLeft size={16} {...props}/>}
+                    renderIcon={(props) => <ArrowLeft size={16} {...props} />}
                   />
                 )}
               />

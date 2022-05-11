@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,5 +7,5 @@
 
 // a build of carbon css with our required feature flags set
 
-@use '@carbon/react';
-@import '../../cloud-cognitive/src/global/styles/project-settings';
+@forward '@carbon/react';
+@forward '../../cloud-cognitive/src/global/styles/project-settings';

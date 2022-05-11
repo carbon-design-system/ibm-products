@@ -1,14 +1,18 @@
 /*
 * Licensed Materials - Property of IBM
 * 5724-Q36
-* (c) Copyright IBM Corp. 2021
+* (c) Copyright IBM Corp. 2021, 2022
 * US Government Users Restricted Rights - Use, duplication or disclosure
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
+@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '../../../../global/styles/project-settings' as *;
 @use '../variables';
 
-.#{$block-class}__customize-columns-modal {
+.#{variables.$block-class}__customize-columns-modal {
   .#{$carbon-prefix}--modal-content {
     position: inherit;
     display: flex;
@@ -18,31 +22,31 @@
   }
 }
 
-.#{$block-class}__customize-columns-checkbox {
+.#{variables.$block-class}__customize-columns-checkbox {
   display: flex;
   justify-content: center;
   /* stylelint-disable-next-line declaration-no-important */
   margin-bottom: 0 !important; // reset the bottom provided by carbon
 }
 
-.#{$block-class}__customize-columns-modal--actions {
+.#{variables.$block-class}__customize-columns-modal--actions {
   display: flex;
   flex-flow: row;
   margin-bottom: $spacing-06;
 }
 
-.#{$block-class}__customize-columns-modal--actions > button {
+.#{variables.$block-class}__customize-columns-modal--actions > button {
   margin-left: $spacing-05;
 }
 
-.#{$block-class}__customize-columns-instructions {
+.#{variables.$block-class}__customize-columns-instructions {
   margin-bottom: $spacing-06;
-  @include carbon--type-style('body-long-01');
+  @include type.type-style('body-long-01');
 
-  color: $text-01;
+  color: $text-primary;
 }
 
-.#{$block-class}__customize-columns-column-list {
+.#{variables.$block-class}__customize-columns-column-list {
   position: relative; // needed for the react-dnd, otherwise the drag preview will not work correctly
   overflow: auto;
 }

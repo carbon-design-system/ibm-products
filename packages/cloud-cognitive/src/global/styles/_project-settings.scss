@@ -7,10 +7,12 @@
 
 // import carbon settings for referring to colors, spacing, theme, motion, etc
 // set up an alias variable to distinguish carbon prefix from package prefix
-@use '@carbon/styles' as * with (
-  $prefix: 'cds',
-  $carbon-prefix: 'cds'
-);
+// @forward '@carbon/styles' with (
+//   $prefix: 'cds',
+//   $carbon-prefix: 'cds',
+//   $pkg-prefix: 'c4p'
+// );
 
 // define variables and settings for the package
 $pkg-prefix: 'c4p' !default;
+$carbon-prefix: 'cds' !default;

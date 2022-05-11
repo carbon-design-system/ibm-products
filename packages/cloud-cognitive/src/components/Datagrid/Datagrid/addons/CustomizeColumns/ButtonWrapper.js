@@ -25,7 +25,7 @@ const ButtonWrapper = ({
   return (
     <Button
       {...rest}
-      renderIcon={props => <Column size={16} {...props}/>}
+      renderIcon={(props) => <Column size={16} {...props} />}
       iconDescription={iconTooltipLabel}
       tooltipPosition="left"
       kind="ghost"

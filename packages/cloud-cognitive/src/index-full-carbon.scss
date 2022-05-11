@@ -5,7 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import './global/styles/project-settings';
-
-@import './components/index';
-@use '@carbon/react';
+@forward './global/styles/project-settings';
+@forward './components/index';
+@forward '@carbon/react';

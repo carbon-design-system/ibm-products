@@ -6,89 +6,83 @@
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
-@import '../../global/styles/mixins';
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/mixins' as *;
 
 // BreadcrumbWithOverflow uses the following Carbon components:
 // Breadcrumb, BreadcrumbItem, OverflowMenu, OverflowMenuItem
 @use '@carbon/react/scss/components/breadcrumb';
 @use '@carbon/react/scss/components/overflow-menu';
 
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
-@mixin breadcrumb-with-overflow {
-  $block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
+$_block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
 
-  @include block-wrap($block-class) {
-    &.#{$block-class} {
-      display: block;
-    }
+@include block-wrap($block-class: $_block-class) {
+  &.#{$_block-class} {
+    display: block;
+  }
 
-    .#{$block-class}__space {
-      position: relative;
-      display: block;
-      width: 100%;
-      white-space: nowrap;
-    }
+  .#{$_block-class}__space {
+    position: relative;
+    display: block;
+    width: 100%;
+    white-space: nowrap;
+  }
 
-    .#{$block-class}__breadcrumb-container.#{$block-class}__breadcrumb-container-with-items {
-      display: inline-flex; // needed to register a width
-      width: 100%;
-    }
+  .#{$_block-class}__breadcrumb-container.#{$_block-class}__breadcrumb-container-with-items {
+    display: inline-flex; // needed to register a width
+    width: 100%;
+  }
 
-    .#{$block-class}__breadcrumb-container .#{$carbon-prefix}--breadcrumb {
-      width: 100%;
-      flex-wrap: nowrap;
-      align-items: flex-start;
-    }
+  .#{$_block-class}__breadcrumb-container .#{$carbon-prefix}--breadcrumb {
+    width: 100%;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+  }
 
-    .#{$block-class}__breadcrumb-container--hidden {
-      // This breadcrumb container is used to measure the width of all displayable breadcrumbs
-      @include measuring-container;
-    }
+  .#{$_block-class}__breadcrumb-container--hidden {
+    // This breadcrumb container is used to measure the width of all displayable breadcrumbs
+    @include measuring-container;
+  }
 
-    .#{$block-class}__breadcrumb-back {
+  .#{$_block-class}__breadcrumb-back {
+    display: none;
+  }
+
+  @include breakpoint-down(md) {
+    .#{$carbon-prefix}--breadcrumb-item {
       display: none;
     }
 
-    @include carbon--breakpoint-down(md) {
-      .#{$carbon-prefix}--breadcrumb-item {
-        display: none;
-      }
-
-      .#{$block-class}__breadcrumb-back,
-      .#{$carbon-prefix}--breadcrumb-item:last-child {
-        display: inline-flex;
-        vertical-align: middle;
-      }
-
-      .#{$block-class}__displayed-breadcrumb:last-child {
-        max-width: calc(100% - $spacing-07); // allow room for breadcrumb back
-      }
-    }
-
+    .#{$_block-class}__breadcrumb-back,
     .#{$carbon-prefix}--breadcrumb-item:last-child {
-      display: inline-flex; // flex instead of block due to spacing
+      display: inline-flex;
+      vertical-align: middle;
     }
 
-    .#{$block-class}__displayed-breadcrumb:last-child {
-      display: inline-flex; // flex instead of block due to spacing
-      overflow: hidden;
-    }
-
-    .#{$block-class}__displayed-breadcrumb:last-child .#{$carbon-prefix}--link {
-      display: inline-block;
-      overflow: hidden;
-      width: 100%;
-      text-overflow: ellipsis;
+    .#{$_block-class}__displayed-breadcrumb:last-child {
+      max-width: calc(100% - $spacing-07); // allow room for breadcrumb back
     }
   }
 
-  .#{$block-class}__overflow-menu-options.#{$block-class}__overflow-menu-options {
-    z-index: z('header');
+  .#{$carbon-prefix}--breadcrumb-item:last-child {
+    display: inline-flex; // flex instead of block due to spacing
+  }
+
+  .#{$_block-class}__displayed-breadcrumb:last-child {
+    display: inline-flex; // flex instead of block due to spacing
+    overflow: hidden;
+  }
+
+  .#{$_block-class}__displayed-breadcrumb:last-child .#{$carbon-prefix}--link {
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;
   }
 }
 
-@include exports('breadcrumb-with-overflow') {
-  @include breadcrumb-with-overflow;
+.#{$_block-class}__overflow-menu-options.#{$_block-class}__overflow-menu-options {
+  z-index: z('header');
 }

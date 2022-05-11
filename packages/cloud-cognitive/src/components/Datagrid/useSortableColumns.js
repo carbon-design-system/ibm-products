@@ -31,11 +31,11 @@ const useSortableColumns = (hooks) => {
         if (col.isSorted) {
           switch (col.isSortedDesc) {
             case false:
-              return <ArrowUp size={16} {...props}/>;
+              return <ArrowUp size={16} {...props} />;
             case true:
-              return <ArrowDown size={16} {...props}/>;
+              return <ArrowDown size={16} {...props} />;
             default:
-              return <Arrows size={16} {...props}/>;
+              return <Arrows size={16} {...props} />;
           }
         }
         return Arrows;
@@ -47,7 +47,7 @@ const useSortableColumns = (hooks) => {
           <Button
             onClick={() => onSortClick(headerProp.column)}
             kind="ghost"
-            renderIcon={props => icon(headerProp.column, props)}
+            renderIcon={(props) => icon(headerProp.column, props)}
           >
             {column.Header}
           </Button>

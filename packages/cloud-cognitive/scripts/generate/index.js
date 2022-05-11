@@ -78,7 +78,6 @@ if (name) {
   const componentSCSSIndexData = readFileSync(componentSCSSIndexPath, 'utf-8');
   outputFileSync(
     componentSCSSIndexPath,
-    componentSCSSIndexData +
-      `@import './${substitutions.DISPLAY_NAME}/index';\n`
+    componentSCSSIndexData + `@use './${substitutions.DISPLAY_NAME}/index';\n`
   );
 }

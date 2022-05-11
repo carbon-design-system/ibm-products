@@ -25,12 +25,12 @@ import styles from './_storybook-styles.scss';
 
 const actions = [
   {
-    renderIcon: props => <Code size={16} {...props}/>,
+    renderIcon: (props) => <Code size={16} {...props} />,
     onClick: action('clicked on action'),
     iconDescription: 'Create new deployment',
   },
   {
-    renderIcon: props => <Copy size={16} {...props}/>,
+    renderIcon: (props) => <Copy size={16} {...props} />,
     onClick: action('clicked on action'),
     iconDescription: 'Copy logs',
   },

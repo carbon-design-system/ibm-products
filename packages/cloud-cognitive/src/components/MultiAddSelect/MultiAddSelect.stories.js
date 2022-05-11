@@ -126,7 +126,7 @@ export const WithHierarchy = prepareStory(Template, {
                 title: 'file1.pdf',
                 fileType: 'pdf',
                 size: '100',
-                icon: props => <Document size={16} {...props}/>,
+                icon: (props) => <Document size={16} {...props} />,
                 tag: 'business',
               },
               {
@@ -135,7 +135,7 @@ export const WithHierarchy = prepareStory(Template, {
                 title: 'index.js',
                 fileType: 'js',
                 size: '200',
-                icon: props => <Document size={16} {...props}/>,
+                icon: (props) => <Document size={16} {...props} />,
               },
               {
                 id: '1-3',
@@ -143,7 +143,7 @@ export const WithHierarchy = prepareStory(Template, {
                 title: 'sitemap.xml',
                 fileType: 'xml',
                 size: '10',
-                icon: props => <Document size={16} {...props}/>,
+                icon: (props) => <Document size={16} {...props} />,
               },
             ],
           },
@@ -210,7 +210,7 @@ export const WithAvatars = prepareStory(Template, {
           title: 'item 2',
           subtitle: 'item 2 subtitle',
           avatar: {
-            icon: props => <Group size={24} {...props}/>,
+            icon: (props) => <Group size={24} {...props} />,
             backgroundColor: 'dark-green',
           },
         },
@@ -220,7 +220,7 @@ export const WithAvatars = prepareStory(Template, {
           title: 'item 3',
           subtitle: 'item 3 subtitle',
           avatar: {
-            icon: props => <Group size={24} {...props}/>,
+            icon: (props) => <Group size={24} {...props} />,
           },
         },
       ],

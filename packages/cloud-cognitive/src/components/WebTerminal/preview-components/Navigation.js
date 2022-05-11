@@ -5,11 +5,7 @@ import {
   HeaderGlobalAction,
   HeaderGlobalBar,
 } from '@carbon/react/lib/components/UIShell';
-import {
-  Terminal,
-  Search,
-  User,
-} from '@carbon/icons-react';
+import { Terminal, Search, User } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 
 const Navigation = ({ openTerminal }) => {

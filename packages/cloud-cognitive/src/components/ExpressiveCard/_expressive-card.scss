@@ -1,25 +1,20 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '@carbon/styles/scss/type';
+@use '../../global/styles/project-settings' as *;
 
 // ExpressiveCard uses the following IBM Products components:
 // Card
-@import '../Card/card';
+@use '../Card/card';
 
-@mixin card-expressive {
-  $block-class: #{$pkg-prefix}--card;
+$block-class: #{$pkg-prefix}--card;
 
-  .#{$block-class}__title {
-    @include carbon--type-style('productive-heading-03');
-  }
-}
-
-@include exports('card-expressive') {
-  @include card-expressive;
+.#{$block-class}__title {
+  @include type.type-style('productive-heading-03');
 }

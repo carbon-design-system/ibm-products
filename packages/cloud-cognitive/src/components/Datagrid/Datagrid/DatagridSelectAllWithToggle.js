@@ -64,7 +64,10 @@ const SelectAllWithToggle = ({
           id={`${tableId}-select-all-checkbox-id`}
         />
       </span>
-      <OverflowMenu renderIcon={props => <CaretDown size={16} {...props}/>} size="sm">
+      <OverflowMenu
+        renderIcon={(props) => <CaretDown size={16} {...props} />}
+        size="sm"
+      >
         <OverflowMenuItem
           itemText={allPageRowsLabel}
           requireTitle

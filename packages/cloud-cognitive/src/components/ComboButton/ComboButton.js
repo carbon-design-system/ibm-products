@@ -62,9 +62,14 @@ const ComboButton = ({
           onClick={() => !isOpen && setIsOpen(true)}
           onClose={() => setIsOpen(false)}
           renderIcon={() =>
-            createElement(isOpen ? props => <ChevronUp size={16} {...props}/> : props => <ChevronDown size={16} {...props}/>, {
-              className: `${blockClass}__overflow-menu__icon`,
-            })
+            createElement(
+              isOpen
+                ? (props) => <ChevronUp size={16} {...props} />
+                : (props) => <ChevronDown size={16} {...props} />,
+              {
+                className: `${blockClass}__overflow-menu__icon`,
+              }
+            )
           }
           flipped
         >

@@ -155,7 +155,7 @@ export let AddSelectColumn = ({
         <div className={`${colClass}-sort-filter`}>
           {sortByOpts.length > 0 && (
             <OverflowMenu
-              renderIcon={props => <ArrowsVertical size={32} {...props}/>}
+              renderIcon={(props) => <ArrowsVertical size={32} {...props} />}
               className={`${colClass}-overflow`}
               flipped
             >
@@ -170,7 +170,7 @@ export let AddSelectColumn = ({
           )}
           {filterByOpts.length > 0 && (
             <OverflowMenu
-              renderIcon={props => <Filter size={32} {...props}/>}
+              renderIcon={(props) => <Filter size={32} {...props} />}
               className={`${colClass}-overflow`}
               flipped
             >

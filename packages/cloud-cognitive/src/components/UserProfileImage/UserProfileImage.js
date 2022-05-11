@@ -17,10 +17,7 @@ import '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import {
-  User,
-  Group,
-} from '@carbon/icons-react';
+import { User, Group } from '@carbon/icons-react';
 
 import { TooltipIcon } from '@carbon/react';
 
@@ -53,14 +50,14 @@ export let UserProfileImage = React.forwardRef(
   ) => {
     const icons = {
       user: {
-        md: props => <User size={20} {...props}/>,
-        lg: props => <User size={24} {...props}/>,
-        xlg: props => <User size={32} {...props}/>,
+        md: (props) => <User size={20} {...props} />,
+        lg: (props) => <User size={24} {...props} />,
+        xlg: (props) => <User size={32} {...props} />,
       },
       group: {
-        md: props => <Group size={20} {...props}/>,
-        lg: props => <Group size={24} {...props}/>,
-        xlg: props => <Group size={32} {...props}/>,
+        md: (props) => <Group size={20} {...props} />,
+        lg: (props) => <Group size={24} {...props} />,
+        xlg: (props) => <Group size={32} {...props} />,
       },
     };
 

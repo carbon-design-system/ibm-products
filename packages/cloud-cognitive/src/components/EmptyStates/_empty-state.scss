@@ -6,57 +6,52 @@
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '../../global/styles/project-settings' as *;
 
 // Empty states use the following Carbon components:
 // Button, Link
 @use '@carbon/react/scss/components/button';
 @use '@carbon/react/scss/components/link';
 
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
-@mixin empty-state {
-  $block-class: #{$pkg-prefix}--empty-state;
+$empty-block-class: #{$pkg-prefix}--empty-state;
 
-  .#{$block-class} {
-    color: $text-01;
+.#{$empty-block-class} {
+  color: $text-primary;
 
-    .#{$block-class}__header,
-    .#{$block-class}__subtitle {
-      padding-bottom: $spacing-02;
-      margin: 0;
-    }
-    .#{$block-class}__header--small {
-      @include carbon--type-style('productive-heading-03');
-    }
-    .#{$block-class}__subtitle--small {
-      @include carbon--type-style('body-short-01');
-    }
+  .#{$empty-block-class}__header,
+  .#{$empty-block-class}__subtitle {
+    padding-bottom: $spacing-02;
+    margin: 0;
   }
-
-  .#{$block-class}__illustration {
-    &.#{$block-class}__illustration--lg {
-      min-width: $spacing-11;
-      max-width: $spacing-11;
-    }
-    &.#{$block-class}__illustration--sm {
-      min-width: $spacing-10;
-      max-width: $spacing-10;
-    }
+  .#{$empty-block-class}__header--small {
+    @include type.type-style('productive-heading-03');
   }
-
-  .#{$block-class}__action-button,
-  .#{$block-class}__link {
-    margin-top: $spacing-06;
-  }
-  .#{$block-class} .#{$block-class}__action-button {
-    display: block;
-  }
-  .#{$block-class} .#{$block-class}__link {
-    display: block;
+  .#{$empty-block-class}__subtitle--small {
+    @include type.type-style('body-short-01');
   }
 }
 
-@include exports('empty-state') {
-  @include empty-state;
+.#{$empty-block-class}__illustration {
+  &.#{$empty-block-class}__illustration--lg {
+    min-width: $spacing-11;
+    max-width: $spacing-11;
+  }
+  &.#{$empty-block-class}__illustration--sm {
+    min-width: $spacing-10;
+    max-width: $spacing-10;
+  }
+}
+
+.#{$empty-block-class}__action-button,
+.#{$empty-block-class}__link {
+  margin-top: $spacing-06;
+}
+.#{$empty-block-class} .#{$empty-block-class}__action-button {
+  display: block;
+}
+.#{$empty-block-class} .#{$empty-block-class}__link {
+  display: block;
 }

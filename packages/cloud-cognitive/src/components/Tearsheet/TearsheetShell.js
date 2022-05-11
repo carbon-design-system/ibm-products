@@ -17,12 +17,7 @@ import { pkg, carbon } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
 
 // Carbon and package components we use.
-import {
-  Button,
-  ComposedModal,
-  ModalHeader,
-  ModalBody,
-} from '@carbon/react';
+import { Button, ComposedModal, ModalHeader, ModalBody } from '@carbon/react';
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 

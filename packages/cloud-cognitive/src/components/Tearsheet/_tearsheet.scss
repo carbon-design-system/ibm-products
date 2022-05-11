@@ -6,315 +6,311 @@
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
-@import '../../global/styles/mixins';
+@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/type';
+@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/mixins' as *;
 
 // Tearsheets use the following IBM Products components:
 // ActionSet
-@import '../ActionSet/action-set';
+@use '../ActionSet/action-set';
 
 // Tearsheets use the following Carbon components:
 // Button, ComposedModal, ModalHeader, ModalBody,
 @use '@carbon/react/scss/components/modal';
 
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
-@mixin tearsheet {
-  $block-class: #{$pkg-prefix}--tearsheet;
+$block-class: #{$pkg-prefix}--tearsheet;
 
-  // stylelint-disable-next-line carbon/theme-token-use
-  $overlay-color: $carbon--gray-100;
+// stylelint-disable-next-line carbon/theme-token-use
+$overlay-color: $gray-100;
 
-  $motion-duration: $duration--moderate-02;
+$motion-duration: $duration-moderate-02;
 
-  @include block-wrap($block-class) {
-    &.#{$block-class} {
-      z-index: z('modal') + 1;
-      align-items: flex-end;
-      color: $text-01;
-      // stylelint-disable-next-line carbon/motion-token-use
-      transition: visibility 0s linear $motion-duration,
-        background-color $motion-duration motion(exit, expressive),
-        opacity $motion-duration motion(exit, expressive);
-      --#{$block-class}--stacking-scale-factor-single: 0.95;
-      --#{$block-class}--stacking-scale-factor-double: 0.9;
-    }
+@include block-wrap($block-class) {
+  &.#{$block-class} {
+    z-index: z('modal') + 1;
+    align-items: flex-end;
+    color: $text-primary;
+    // stylelint-disable-next-line carbon/motion-token-use
+    transition: visibility 0s linear $motion-duration,
+      background-color $motion-duration motion(exit, expressive),
+      opacity $motion-duration motion(exit, expressive);
+    --#{$block-class}--stacking-scale-factor-single: 0.95;
+    --#{$block-class}--stacking-scale-factor-double: 0.9;
+  }
 
-    &.is-visible {
-      z-index: z('modal');
-      align-items: flex-end;
-      // stylelint-disable-next-line carbon/motion-token-use
-      transition: visibility 0s linear,
-        background-color $motion-duration motion(entrance, expressive),
-        opacity $motion-duration motion(entrance, expressive);
-      @media (prefers-reduced-motion: reduce) {
-        transition: none;
-      }
-    }
-
-    &.#{$block-class}--stacked-1-of-2 {
-      z-index: z('modal') - 1;
-      // stylelint-disable-next-line carbon/theme-token-use
-      background-color: rgba($overlay-color, 0.33);
-    }
-
-    &.#{$block-class}--stacked-1-of-3 {
-      z-index: z('modal') - 2;
-      // stylelint-disable-next-line carbon/theme-token-use
-      background-color: rgba($overlay-color, 0.11);
-    }
-
-    &.#{$block-class}--stacked-2-of-3 {
-      z-index: z('modal') - 1;
-      // stylelint-disable-next-line carbon/theme-token-use
-      background-color: rgba($overlay-color, 0.25);
-    }
-
-    &.#{$block-class}--stacked-2-of-2,
-    &.#{$block-class}--stacked-3-of-3 {
-      // stylelint-disable-next-line carbon/theme-token-use
-      background-color: rgba($overlay-color, 0.25);
-    }
-
-    .#{$block-class}__container {
-      top: auto;
-      height: 100%;
-      max-height: calc(100% - #{$spacing-09});
-      // we want the enter/leave animation to run up most of the height of the
-      // viewport, capped at 500px to set an upper limit on the movement speed
-      // For the reason for calc() see https://github.com/sass/sass/issues/2849
-      // and https://github.com/sass/node-sass/issues/2815.
-      // stylelint-disable-next-line carbon/layout-token-use
-      transform: translate3d(0, calc(min(95vh, 500px)), 0);
-    }
-
-    // extra specificity to ensure this transition overrides the carbon default
-    &.#{$block-class}.#{$block-class} .#{$block-class}__container {
-      transition: transform $motion-duration motion(entrance, expressive),
-        max-height $motion-duration motion(entrance, expressive);
-    }
-
-    &.#{$block-class}--stacked-1-of-2 .#{$block-class}__container,
-    &.#{$block-class}--stacked-2-of-3 .#{$block-class}__container {
-      max-height: calc(100% - #{$spacing-09} + #{$spacing-05});
-    }
-
-    &.#{$block-class}--stacked-1-of-3 .#{$block-class}__container {
-      max-height: calc(100% - #{$spacing-09} + (2 * #{$spacing-05}));
-    }
-
-    .#{$block-class}__container--lower {
-      max-height: calc(100% - (#{$spacing-09} + #{$spacing-08}));
-    }
-
-    &.#{$block-class}--stacked-1-of-2 .#{$block-class}__container--lower,
-    &.#{$block-class}--stacked-2-of-3 .#{$block-class}__container--lower {
-      max-height: calc(
-        100% - (#{$spacing-09} + #{$spacing-08}) + #{$spacing-05}
-      );
-    }
-
-    &.#{$block-class}--stacked-1-of-3 .#{$block-class}__container--lower {
-      max-height: calc(
-        100% - (#{$spacing-09} + #{$spacing-08}) + (2 * #{$spacing-05})
-      );
-    }
-
-    &.#{$block-class}--wide .#{$block-class}__container {
-      width: 100%;
-    }
-
-    @include carbon--breakpoint(md) {
-      &.#{$block-class}--wide .#{$block-class}__container {
-        width: calc(100% - (2 * #{$spacing-10}));
-      }
-    }
-
-    &.#{$block-class}--stacked-1-of-2.is-visible .#{$block-class}__container,
-    &.#{$block-class}--stacked-2-of-3.is-visible .#{$block-class}__container {
-      transform: scale(var(--#{$block-class}--stacking-scale-factor-single));
-    }
-
-    &.#{$block-class}--stacked-1-of-3.is-visible .#{$block-class}__container {
-      transform: scale(var(--#{$block-class}--stacking-scale-factor-double));
-    }
-
-    &.#{$block-class}--wide .#{$block-class}__header {
-      padding: $spacing-06 $spacing-07;
-      border-bottom: 1px solid $ui-03;
-      margin: 0;
-    }
-
-    &.#{$block-class}--wide .#{$block-class}__header--with-nav {
-      padding-bottom: 0;
-    }
-
-    &.#{$block-class}--narrow .#{$block-class}__header {
-      padding: $spacing-05;
-      margin: 0;
-    }
-
-    &.#{$block-class}--wide .#{$block-class}__header--with-close-icon {
-      padding-right: $spacing-10;
-    }
-
-    .#{$block-class}__header-content {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .#{$block-class}__header-fields {
-      flex: 1 1 100%;
-    }
-
-    .#{$block-class}__header-actions {
-      flex: 0 0 auto;
-      padding-left: $spacing-06;
-    }
-
-    // buttons inside button sets in the header action area have 8px gap
-    .#{$block-class}__header-actions
-      .#{$carbon-prefix}--btn-set
-      .#{$carbon-prefix}--btn:not(:first-of-type) {
-      margin-left: $spacing-03;
-    }
-
-    .#{$block-class}__header--no-close-icon {
-      display: none;
-    }
-
-    &.#{$block-class}--wide
-      .#{$carbon-prefix}--modal-header__heading.#{$block-class}__heading {
-      @include carbon--type-style('productive-heading-04');
-    }
-
-    .#{$block-class}__header-description {
-      display: -webkit-box;
-      overflow: hidden;
-      max-width: 100%;
-      margin-top: $spacing-05;
-      @include carbon--type-style('body-short-01');
-
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-
-      @include carbon--breakpoint-up('md') {
-        max-width: 60%;
-      }
-    }
-
-    &.#{$block-class}--wide .#{$block-class}__header-description {
-      margin-top: $spacing-03;
-    }
-
-    .#{$block-class}__header-navigation {
-      margin: $spacing-04 0 0;
-    }
-
-    &.#{$block-class} .#{$block-class}__body {
-      display: flex;
-      flex-direction: row;
-      padding: 0;
-      margin: 0;
-    }
-
-    .#{$block-class}__resize-detector {
-      width: 100%;
-      height: 0;
-    }
-
-    .#{$block-class}__influencer {
-      flex: 0 0 257px; // influencer width 256px plus 1px border
-      border-right: 1px solid $ui-03;
-      overflow-y: auto;
-
-      // the normal 80% content width inside modals should not apply to influencer content
-      // apply the class again for higher specificity
-      &.#{$block-class}__influencer p {
-        padding-right: 0;
-      }
-    }
-
-    .#{$block-class}__influencer--wide {
-      flex-basis: 321px; // influencer width 320px plus 1px border
-    }
-
-    .#{$block-class}__right {
-      display: grid;
-      flex-grow: 1;
-      grid-template-columns: 100%;
-      grid-template-rows: 1fr auto;
-    }
-
-    .#{$block-class}__main {
-      display: flex;
-      flex-direction: row;
-      grid-column: 1 / -1;
-      grid-row: 1 / -1;
-    }
-
-    .#{$block-class}__main .#{$block-class}__influencer {
-      border-right: none;
-      border-left: 1px solid $ui-03;
-    }
-
-    .#{$block-class}__content {
-      overflow: auto;
-      flex-grow: 1;
-    }
-
-    &.#{$block-class}--wide .#{$block-class}__content {
-      background: $ui-background;
-
-      // revert the background color overridden by #{$carbon-prefix}--modal styles
-      .#{$prefix}--pagination,
-      .#{$prefix}--pagination__control-buttons,
-      .#{$prefix}--text-input,
-      .#{$prefix}--text-area,
-      .#{$prefix}--search-input,
-      .#{$prefix}--select-input,
-      .#{$prefix}--dropdown,
-      .#{$prefix}--dropdown-list,
-      .#{$prefix}--number input[type='number'],
-      .#{$prefix}--date-picker__input {
-        background-color: $field-01;
-      }
-
-      .#{$prefix}--select--inline .#{$prefix}--select-input {
-        background-color: transparent;
-      }
-
-      // and restore the 'light' prop in case light fields are wanted
-      .#{$prefix}--text-input--light,
-      .#{$prefix}--text-area--light,
-      .#{$prefix}--search--light .#{$prefix}--search-input,
-      .#{$prefix}--select--light .#{$prefix}--select-input,
-      .#{$prefix}--dropdown--light,
-      .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list,
-      .#{$prefix}--number--light input[type='number'],
-      .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
-        background-color: $field-02;
-      }
-    }
-
-    .#{$block-class}__button-container {
-      grid-column: 1 / -1;
-      grid-row: -1 / -1;
-      overflow-x: auto;
-    }
-
-    .#{$block-class}__buttons {
-      display: inline-flex;
-      min-width: 100%;
-      border-top: 1px solid $ui-03;
-    }
-
-    &.#{$block-class}--wide .#{$block-class}__buttons {
-      background: $ui-background;
+  &.is-visible {
+    z-index: z('modal');
+    align-items: flex-end;
+    // stylelint-disable-next-line carbon/motion-token-use
+    transition: visibility 0s linear,
+      background-color $motion-duration motion(entrance, expressive),
+      opacity $motion-duration motion(entrance, expressive);
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
     }
   }
-}
 
-@include exports('tearsheet') {
-  @include tearsheet;
+  &.#{$block-class}--stacked-1-of-2 {
+    z-index: z('modal') - 1;
+    // stylelint-disable-next-line carbon/theme-token-use
+    background-color: rgba($overlay-color, 0.33);
+  }
+
+  &.#{$block-class}--stacked-1-of-3 {
+    z-index: z('modal') - 2;
+    // stylelint-disable-next-line carbon/theme-token-use
+    background-color: rgba($overlay-color, 0.11);
+  }
+
+  &.#{$block-class}--stacked-2-of-3 {
+    z-index: z('modal') - 1;
+    // stylelint-disable-next-line carbon/theme-token-use
+    background-color: rgba($overlay-color, 0.25);
+  }
+
+  &.#{$block-class}--stacked-2-of-2,
+  &.#{$block-class}--stacked-3-of-3 {
+    // stylelint-disable-next-line carbon/theme-token-use
+    background-color: rgba($overlay-color, 0.25);
+  }
+
+  .#{$block-class}__container {
+    top: auto;
+    height: 100%;
+    max-height: calc(100% - #{$spacing-09});
+    // we want the enter/leave animation to run up most of the height of the
+    // viewport, capped at 500px to set an upper limit on the movement speed
+    // For the reason for calc() see https://github.com/sass/sass/issues/2849
+    // and https://github.com/sass/node-sass/issues/2815.
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translate3d(0, calc(min(95vh, 500px)), 0);
+  }
+
+  // extra specificity to ensure this transition overrides the carbon default
+  &.#{$block-class}.#{$block-class} .#{$block-class}__container {
+    transition: transform $motion-duration motion(entrance, expressive),
+      max-height $motion-duration motion(entrance, expressive);
+  }
+
+  &.#{$block-class}--stacked-1-of-2 .#{$block-class}__container,
+  &.#{$block-class}--stacked-2-of-3 .#{$block-class}__container {
+    max-height: calc(100% - #{$spacing-09} + #{$spacing-05});
+  }
+
+  &.#{$block-class}--stacked-1-of-3 .#{$block-class}__container {
+    max-height: calc(100% - #{$spacing-09} + (2 * #{$spacing-05}));
+  }
+
+  .#{$block-class}__container--lower {
+    max-height: calc(100% - (#{$spacing-09} + #{$spacing-08}));
+  }
+
+  &.#{$block-class}--stacked-1-of-2 .#{$block-class}__container--lower,
+  &.#{$block-class}--stacked-2-of-3 .#{$block-class}__container--lower {
+    max-height: calc(100% - (#{$spacing-09} + #{$spacing-08}) + #{$spacing-05});
+  }
+
+  &.#{$block-class}--stacked-1-of-3 .#{$block-class}__container--lower {
+    max-height: calc(
+      100% - (#{$spacing-09} + #{$spacing-08}) + (2 * #{$spacing-05})
+    );
+  }
+
+  &.#{$block-class}--wide .#{$block-class}__container {
+    width: 100%;
+  }
+
+  @include breakpoint(md) {
+    &.#{$block-class}--wide .#{$block-class}__container {
+      width: calc(100% - (2 * #{$spacing-10}));
+    }
+  }
+
+  &.#{$block-class}--stacked-1-of-2.is-visible .#{$block-class}__container,
+  &.#{$block-class}--stacked-2-of-3.is-visible .#{$block-class}__container {
+    transform: scale(var(--#{$block-class}--stacking-scale-factor-single));
+  }
+
+  &.#{$block-class}--stacked-1-of-3.is-visible .#{$block-class}__container {
+    transform: scale(var(--#{$block-class}--stacking-scale-factor-double));
+  }
+
+  &.#{$block-class}--wide .#{$block-class}__header {
+    padding: $spacing-06 $spacing-07;
+    border-bottom: 1px solid $border-subtle-01;
+    margin: 0;
+  }
+
+  &.#{$block-class}--wide .#{$block-class}__header--with-nav {
+    padding-bottom: 0;
+  }
+
+  &.#{$block-class}--narrow .#{$block-class}__header {
+    padding: $spacing-05;
+    margin: 0;
+  }
+
+  &.#{$block-class}--wide .#{$block-class}__header--with-close-icon {
+    padding-right: $spacing-10;
+  }
+
+  .#{$block-class}__header-content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .#{$block-class}__header-fields {
+    flex: 1 1 100%;
+  }
+
+  .#{$block-class}__header-actions {
+    flex: 0 0 auto;
+    padding-left: $spacing-06;
+  }
+
+  // buttons inside button sets in the header action area have 8px gap
+  .#{$block-class}__header-actions
+    .#{$carbon-prefix}--btn-set
+    .#{$carbon-prefix}--btn:not(:first-of-type) {
+    margin-left: $spacing-03;
+  }
+
+  .#{$block-class}__header--no-close-icon {
+    display: none;
+  }
+
+  &.#{$block-class}--wide
+    .#{$carbon-prefix}--modal-header__heading.#{$block-class}__heading {
+    @include type.type-style('productive-heading-04');
+  }
+
+  .#{$block-class}__header-description {
+    display: -webkit-box;
+    overflow: hidden;
+    max-width: 100%;
+    margin-top: $spacing-05;
+    @include type.type-style('body-short-01');
+
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    @include breakpoint-up('md') {
+      max-width: 60%;
+    }
+  }
+
+  &.#{$block-class}--wide .#{$block-class}__header-description {
+    margin-top: $spacing-03;
+  }
+
+  .#{$block-class}__header-navigation {
+    margin: $spacing-04 0 0;
+  }
+
+  &.#{$block-class} .#{$block-class}__body {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+  }
+
+  .#{$block-class}__resize-detector {
+    width: 100%;
+    height: 0;
+  }
+
+  .#{$block-class}__influencer {
+    flex: 0 0 257px; // influencer width 256px plus 1px border
+    border-right: 1px solid $border-subtle-01;
+    overflow-y: auto;
+
+    // the normal 80% content width inside modals should not apply to influencer content
+    // apply the class again for higher specificity
+    &.#{$block-class}__influencer p {
+      padding-right: 0;
+    }
+  }
+
+  .#{$block-class}__influencer--wide {
+    flex-basis: 321px; // influencer width 320px plus 1px border
+  }
+
+  .#{$block-class}__right {
+    display: grid;
+    flex-grow: 1;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr auto;
+  }
+
+  .#{$block-class}__main {
+    display: flex;
+    flex-direction: row;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+  }
+
+  .#{$block-class}__main .#{$block-class}__influencer {
+    border-right: none;
+    border-left: 1px solid $border-subtle-01;
+  }
+
+  .#{$block-class}__content {
+    overflow: auto;
+    flex-grow: 1;
+  }
+
+  &.#{$block-class}--wide .#{$block-class}__content {
+    background: $background;
+
+    // revert the background color overridden by #{$carbon-prefix}--modal styles
+    .#{$prefix}--pagination,
+    .#{$prefix}--pagination__control-buttons,
+    .#{$prefix}--text-input,
+    .#{$prefix}--text-area,
+    .#{$prefix}--search-input,
+    .#{$prefix}--select-input,
+    .#{$prefix}--dropdown,
+    .#{$prefix}--dropdown-list,
+    .#{$prefix}--number input[type='number'],
+    .#{$prefix}--date-picker__input {
+      background-color: $field-01;
+    }
+
+    .#{$prefix}--select--inline .#{$prefix}--select-input {
+      background-color: transparent;
+    }
+
+    // and restore the 'light' prop in case light fields are wanted
+    .#{$prefix}--text-input--light,
+    .#{$prefix}--text-area--light,
+    .#{$prefix}--search--light .#{$prefix}--search-input,
+    .#{$prefix}--select--light .#{$prefix}--select-input,
+    .#{$prefix}--dropdown--light,
+    .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list,
+    .#{$prefix}--number--light input[type='number'],
+    .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
+      background-color: $field-02;
+    }
+  }
+
+  .#{$block-class}__button-container {
+    grid-column: 1 / -1;
+    grid-row: -1 / -1;
+    overflow-x: auto;
+  }
+
+  .#{$block-class}__buttons {
+    display: inline-flex;
+    min-width: 100%;
+    border-top: 1px solid $border-subtle-01;
+  }
+
+  &.#{$block-class}--wide .#{$block-class}__buttons {
+    background: $background;
+  }
 }

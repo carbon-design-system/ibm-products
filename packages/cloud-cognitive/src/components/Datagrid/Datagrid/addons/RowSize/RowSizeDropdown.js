@@ -28,7 +28,7 @@ const RowSizeDropdown = ({ buttonLabel = 'Row height', ...props }) => {
         ref={buttonRef}
         kind="ghost"
         tooltipPosition="left"
-        renderIcon={props => <Settings size={16} {...props}/>}
+        renderIcon={(props) => <Settings size={16} {...props} />}
         onClick={() => setIsOpen(!isOpen)}
         iconDescription={buttonLabel}
         className={cx({

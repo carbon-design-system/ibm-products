@@ -6,7 +6,9 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@import './variables';
+@use '@carbon/styles' as *;
+@use '../../../global/styles/project-settings' as *;
+@use './variables' as *;
 
 .#{$block-class}__sortableColumn {
   .#{$carbon-prefix}--table-header-label .header-title {
@@ -24,7 +26,7 @@
     /* stylelint-disable-next-line declaration-no-important */
     background: none !important;
     /* stylelint-disable-next-line declaration-no-important */
-    color: $text-01 !important;
+    color: $text-primary !important;
     /* stylelint-disable-next-line declaration-no-important */
     outline: none !important;
   }
@@ -38,11 +40,11 @@
     background: none !important;
     box-shadow: none;
     /* stylelint-disable-next-line declaration-no-important */
-    color: $text-01 !important;
+    color: $text-primary !important;
     font: inherit;
   }
   .#{$carbon-prefix}--table-header-label button svg {
-    fill: $text-01;
+    fill: $text-primary;
     visibility: hidden;
   }
 }

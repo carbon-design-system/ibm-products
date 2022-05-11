@@ -1,12 +1,17 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '@carbon/styles' as *;
+@use '@carbon/react/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/theme' as *;
+@use '../../global/styles/project-settings' as *;
 
 // APIKeyModal uses the following Carbon components:
 // ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput,
@@ -17,47 +22,41 @@
 @use '@carbon/react/scss/components/form';
 @use '@carbon/react/scss/components/button';
 
-@mixin apikey-modal {
-  $block-class: #{$pkg-prefix}--apikey-modal;
+$block-class: #{$pkg-prefix}--apikey-modal;
 
-  .#{$block-class} .#{$carbon-prefix}--modal-close {
-    display: none;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--inline-loading {
-    min-height: 3rem; // increasing the height from 2 to 3 resolves an issue where the scroll bar bounces
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--modal-content {
-    padding-right: $spacing-05;
-  }
-
-  .#{$block-class}__body {
-    padding-right: calc(20% - #{$spacing-05});
-    margin-bottom: $spacing-05;
-  }
-
-  .#{$block-class}__messaging {
-    display: flex;
-    padding-right: calc(20% - #{$spacing-05});
-    margin-top: $spacing-03;
-  }
-
-  .#{$block-class}__messaging-text {
-    flex: 1;
-    margin-left: $spacing-03;
-    @include carbon--type-style('label-01');
-  }
-
-  .#{$block-class}__messaging-text > * {
-    font: inherit;
-  }
-
-  .#{$block-class}__error-icon svg {
-    fill: $danger-01;
-  }
+.#{$block-class} .#{$carbon-prefix}--modal-close {
+  display: none;
 }
 
-@include exports('apikey-modal') {
-  @include apikey-modal;
+.#{$block-class} .#{$carbon-prefix}--inline-loading {
+  min-height: 3rem; // increasing the height from 2 to 3 resolves an issue where the scroll bar bounces
+}
+
+.#{$block-class} .#{$carbon-prefix}--modal-content {
+  padding-right: $spacing-05;
+}
+
+.#{$block-class}__body {
+  padding-right: calc(20% - #{$spacing-05});
+  margin-bottom: $spacing-05;
+}
+
+.#{$block-class}__messaging {
+  display: flex;
+  padding-right: calc(20% - #{$spacing-05});
+  margin-top: $spacing-03;
+}
+
+.#{$block-class}__messaging-text {
+  flex: 1;
+  margin-left: $spacing-03;
+  @include type.type-style('label-01');
+}
+
+.#{$block-class}__messaging-text > * {
+  font: inherit;
+}
+
+.#{$block-class}__error-icon svg {
+  fill: $button-danger-primary;
 }

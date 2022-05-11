@@ -17,7 +17,10 @@ const blockClass = `${pkg.prefix}--action-bar`;
 const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
   key: `key is this num ${num}`,
   id: `id-${num}`,
-  renderIcon: num % 2 ? props => <Lightning size={16} {...props}/> : props => <Bee size={16} {...props} />,
+  renderIcon:
+    num % 2
+      ? (props) => <Lightning size={16} {...props} />
+      : (props) => <Bee size={16} {...props} />,
   iconDescription: `Action ${num.toString().padStart(2, '0')}`,
   onClick: () => {},
 }));

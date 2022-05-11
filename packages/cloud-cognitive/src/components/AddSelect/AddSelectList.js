@@ -164,7 +164,10 @@ export let AddSelectList = ({
                     />
                   )}
                   {item.children && (
-                    <ChevronRight size={16} onClick={() => onNavigateItem(item)} />
+                    <ChevronRight
+                      size={16}
+                      onClick={() => onNavigateItem(item)}
+                    />
                   )}
                 </div>
               </StructuredListCell>

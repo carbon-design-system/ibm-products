@@ -16,7 +16,11 @@ const useRowExpander = (hooks) => {
       Cell: ({ row }) =>
         row.canExpand && (
           <span {...row.getToggleRowExpandedProps()}>
-            {row.isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            {row.isExpanded ? (
+              <ChevronUp size={16} />
+            ) : (
+              <ChevronDown size={16} />
+            )}
           </span>
         ),
       width: 48,

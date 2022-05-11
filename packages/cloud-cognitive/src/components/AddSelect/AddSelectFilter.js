@@ -6,13 +6,7 @@
 //
 
 import React, { useState } from 'react';
-import {
-  Button,
-  ButtonSet,
-  Dropdown,
-  TextInput,
-  Tag,
-} from '@carbon/react';
+import { Button, ButtonSet, Dropdown, TextInput, Tag } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { Filter } from '@carbon/icons-react';
 import { pkg } from '../../settings';
@@ -95,7 +89,7 @@ export let AddSelectFilter = ({
         />
         {showFilter && (
           <Button
-            renderIcon={props => <Filter size={16} {...props} />}
+            renderIcon={(props) => <Filter size={16} {...props} />}
             hasIconOnly
             kind="ghost"
             onClick={() => setOpen(!open)}

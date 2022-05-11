@@ -222,7 +222,7 @@ export let NotificationsPanel = React.forwardRef(
             <Button
               kind="ghost"
               size="small"
-              renderIcon={props => <ChevronDown size={16} {...props}/>}
+              renderIcon={(props) => <ChevronDown size={16} {...props} />}
               iconDescription={
                 notification.showAll ? readLessLabel : readMoreLabel
               }
@@ -281,7 +281,8 @@ export let NotificationsPanel = React.forwardRef(
           }}
         >
           {notification.type === 'error' && (
-            <ErrorFilled size={16}
+            <ErrorFilled
+              size={16}
               className={cx([
                 `${blockClass}__notification-status-icon`,
                 `${blockClass}__notification-status-icon-error`,
@@ -289,7 +290,8 @@ export let NotificationsPanel = React.forwardRef(
             />
           )}
           {notification.type === 'success' && (
-            <CheckmarkFilled size={16}
+            <CheckmarkFilled
+              size={16}
               className={cx([
                 `${blockClass}__notification-status-icon`,
                 `${blockClass}__notification-status-icon-success`,
@@ -297,7 +299,8 @@ export let NotificationsPanel = React.forwardRef(
             />
           )}
           {notification.type === 'warning' && (
-            <WarningAltFilled size={16}
+            <WarningAltFilled
+              size={16}
               className={cx([
                 `${blockClass}__notification-status-icon`,
                 `${blockClass}__notification-status-icon-warning`,
@@ -305,7 +308,8 @@ export let NotificationsPanel = React.forwardRef(
             />
           )}
           {notification.type === 'informational' && (
-            <InformationSquareFilled size={16}
+            <InformationSquareFilled
+              size={16}
               className={cx([
                 `${blockClass}__notification-status-icon`,
                 `${blockClass}__notification-status-icon-informational`,
@@ -350,7 +354,7 @@ export let NotificationsPanel = React.forwardRef(
           <Button
             kind="ghost"
             size="small"
-            renderIcon={props => <Close size={16} {...props}/>}
+            renderIcon={(props) => <Close size={16} {...props} />}
             iconDescription={dismissSingleNotificationIconDescription}
             tooltipPosition="left"
             className={`${blockClass}__dismiss-single-button`}
@@ -469,7 +473,7 @@ export let NotificationsPanel = React.forwardRef(
               kind="ghost"
               size="small"
               className={`${blockClass}__settings-button`}
-              renderIcon={props => <Settings size={16} {...props}/>}
+              renderIcon={(props) => <Settings size={16} {...props} />}
               iconDescription={settingsIconDescription}
               onClick={() => onSettingsClick()}
             />

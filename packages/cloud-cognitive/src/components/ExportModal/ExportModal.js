@@ -196,7 +196,10 @@ export let ExportModal = forwardRef(
             )}
             {error && (
               <>
-                <ErrorFilled size={16} className={`${blockClass}__error-icon`} />
+                <ErrorFilled
+                  size={16}
+                  className={`${blockClass}__error-icon`}
+                />
                 <p>{errorMessage}</p>
               </>
             )}

@@ -717,7 +717,7 @@ export let PageHeader = React.forwardRef(
               }
               kind="ghost"
               onClick={handleCollapseToggle}
-              renderIcon={props => <ChevronUp size={16} {...props}/>}
+              renderIcon={(props) => <ChevronUp size={16} {...props} />}
               size="field"
               tooltipPosition="bottom"
               tooltipAlignment="end"

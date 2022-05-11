@@ -67,7 +67,7 @@ export const withActionIconButton = prepareStory(Template, {
     action: {
       text: 'Create new',
       onClick: action('Clicked empty state action button'),
-      renderIcon: props => <Add size={20} {...props}/>,
+      renderIcon: (props) => <Add size={20} {...props} />,
       iconDescription: 'Add icon',
     },
   },
@@ -89,7 +89,7 @@ export const withActionAndLink = prepareStory(Template, {
     action: {
       text: 'Create new',
       onClick: action('Clicked empty state action button'),
-      renderIcon: props => <Add size={20} {...props}/>,
+      renderIcon: (props) => <Add size={20} {...props} />,
       iconDescription: 'Add icon',
     },
     link: {

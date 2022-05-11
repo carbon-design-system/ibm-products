@@ -19,11 +19,7 @@ import {
   Form,
   Button,
 } from '@carbon/react';
-import {
-  InformationFilled,
-  Copy,
-  ErrorFilled,
-} from '@carbon/icons-react';
+import { InformationFilled, Copy, ErrorFilled } from '@carbon/icons-react';
 import { APIKeyDownloader } from './APIKeyDownloader';
 import { pkg } from '../../settings';
 
@@ -102,7 +98,7 @@ export let APIKeyModal = forwardRef(
     const hasNextStep = hasSteps && currentStep < customSteps.length - 1;
     const hasPreviousStep = hasSteps && currentStep !== 0;
     const copyButtonProps = {
-      renderIcon: props => <Copy size={16} {...props}/>,
+      renderIcon: (props) => <Copy size={16} {...props} />,
       iconDescription: copyIconDescription,
       ref: copyRef,
     };

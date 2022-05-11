@@ -1,42 +1,39 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '@carbon/styles/scss/type';
+@use '@carbon/react/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '../../global/styles/project-settings' as *;
 
 // Saving uses the following Carbon components:
 // Button, InlineLoading
 @use '@carbon/react/scss/components/button';
 @use '@carbon/react/scss/components/inline-loading';
 
-@mixin saving {
-  $block-class: #{$pkg-prefix}--saving;
+$block-class: #{$pkg-prefix}--saving;
 
-  .#{$block-class}__message {
-    display: flex;
-  }
-
-  .#{$block-class}__error-icon {
-    margin-right: $spacing-05;
-  }
-
-  .#{$block-class}__error-icon svg {
-    fill: $danger-01;
-  }
-
-  .#{$block-class}__text {
-    @include carbon--type-style('body-short-01');
-  }
-
-  .#{$block-class}__buttons {
-    display: flex;
-  }
+.#{$block-class}__message {
+  display: flex;
 }
 
-@include exports('saving') {
-  @include saving;
+.#{$block-class}__error-icon {
+  margin-right: $spacing-05;
+}
+
+.#{$block-class}__error-icon svg {
+  fill: $button-danger-primary;
+}
+
+.#{$block-class}__text {
+  @include type.type-style('body-short-01');
+}
+
+.#{$block-class}__buttons {
+  display: flex;
 }

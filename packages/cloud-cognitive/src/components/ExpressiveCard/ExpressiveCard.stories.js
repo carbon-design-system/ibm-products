@@ -128,7 +128,7 @@ export const WithActionIcon = prepareStory(Template, {
     actionIcons: [
       {
         id: '1',
-        icon: props => <ArrowRight size={24} {...props}/>,
+        icon: (props) => <ArrowRight size={24} {...props} />,
         onClick: action('on click'),
         onKeyDown: action('on keydown'),
         iconDescription: 'Next',
@@ -145,7 +145,7 @@ export const WithActionIconHref = prepareStory(Template, {
     actionIcons: [
       {
         id: '1',
-        icon: props => <ArrowRight size={24} {...props}/>,
+        icon: (props) => <ArrowRight size={24} {...props} />,
         href: '#',
         iconDescription: 'Next',
       },
@@ -158,7 +158,7 @@ export const WithActionIconHref = prepareStory(Template, {
 export const WithPictogram = prepareStory(Template, {
   args: {
     ...defaultProps,
-    pictogram: props => <Cloud size={32} {...props}/>,
+    pictogram: (props) => <Cloud size={32} {...props} />,
     mediaRatio: null,
   },
 });

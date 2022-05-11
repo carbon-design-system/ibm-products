@@ -7,11 +7,7 @@
 
 import React, { forwardRef } from 'react';
 import cx from 'classnames';
-import {
-  Button,
-  OverflowMenu,
-  OverflowMenuItem,
-} from '@carbon/react';
+import { Button, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { CardHeader } from './CardHeader';
 import { CardFooter } from './CardFooter';

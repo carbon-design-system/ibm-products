@@ -6,7 +6,9 @@
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '@carbon/react/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '../../global/styles/project-settings' as *;
 
 // ExportModal uses the following Carbon components:
 // Button, ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput,
@@ -18,40 +20,34 @@
 @use '@carbon/react/scss/components/form';
 @use '@carbon/react/scss/components/loading';
 
-@mixin export-modal {
-  $block-class: #{$pkg-prefix}--export-modal;
+$block-class: #{$pkg-prefix}--export-modal;
 
-  .#{$block-class} .#{$carbon-prefix}--modal-footer .#{$carbon-prefix}--btn {
-    max-width: none;
-  }
-
-  .#{$block-class}.#{$carbon-prefix}--modal .#{$carbon-prefix}--modal-content {
-    padding-right: $spacing-05;
-  }
-
-  .#{$block-class}__body {
-    padding-right: calc(20% - #{$spacing-05});
-    margin-bottom: $spacing-05;
-  }
-
-  .#{$block-class}__messaging {
-    display: flex;
-    align-items: center;
-  }
-
-  .#{$block-class}__messaging p {
-    margin-left: $spacing-03;
-  }
-
-  .#{$block-class}__checkmark-icon {
-    fill: $interactive-01;
-  }
-
-  .#{$block-class}__error-icon {
-    fill: $danger;
-  }
+.#{$block-class} .#{$carbon-prefix}--modal-footer .#{$carbon-prefix}--btn {
+  max-width: none;
 }
 
-@include exports('export-modal') {
-  @include export-modal;
+.#{$block-class}.#{$carbon-prefix}--modal .#{$carbon-prefix}--modal-content {
+  padding-right: $spacing-05;
+}
+
+.#{$block-class}__body {
+  padding-right: calc(20% - #{$spacing-05});
+  margin-bottom: $spacing-05;
+}
+
+.#{$block-class}__messaging {
+  display: flex;
+  align-items: center;
+}
+
+.#{$block-class}__messaging p {
+  margin-left: $spacing-03;
+}
+
+.#{$block-class}__checkmark-icon {
+  fill: $button-primary;
+}
+
+.#{$block-class}__error-icon {
+  fill: $button-danger-primary;
 }

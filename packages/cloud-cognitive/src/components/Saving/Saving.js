@@ -46,22 +46,22 @@ export let Saving = forwardRef(
       default: {
         text: defaultText,
         iconDescription: defaultIconDescription,
-        icon: props => <CheckmarkOutline size={16} {...props}/>,
+        icon: (props) => <CheckmarkOutline size={16} {...props} />,
       },
       ['in-progress']: {
         text: inProgressText,
         iconDescription: inProgressIconDescription,
-        icon: props => <InlineLoading size={16} {...props}/>,
+        icon: (props) => <InlineLoading size={16} {...props} />,
       },
       success: {
         text: successText,
         iconDescription: successIconDescription,
-        icon: props => <Save size={16} {...props}/>,
+        icon: (props) => <Save size={16} {...props} />,
       },
       fail: {
         text: failText,
         iconDescription: failIconDescription,
-        icon: props => <ErrorOutline size={16} {...props}/>,
+        icon: (props) => <ErrorOutline size={16} {...props} />,
       },
     };
     const blockClass = `${pkg.prefix}--saving`;

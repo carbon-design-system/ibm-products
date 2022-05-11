@@ -15,6 +15,7 @@
 @import '../css/carbon';
 @import '../../security/src/index';
 @import 'docs';
+@use '@carbon/styles' as styles;
 
 // Setting attribute storybook-carbon-theme="XXX" on the html element
 // will set the carbon theme used for the storybook pane.
@@ -23,35 +24,23 @@
 @if map-get($feature-flags, 'enable-css-custom-properties') {
   :root,
   .sb--use-carbon-theme-white {
-    @include carbon--theme(
-      $theme: $carbon--theme--white,
-      $emit-custom-properties: true
-    );
+    @include styles.theme(styles.$white);
   }
 
   :root[storybook-carbon-theme='g10'],
   .sb--use-carbon-theme-g10 {
-    @include carbon--theme(
-      $theme: $carbon--theme--g10,
-      $emit-custom-properties: true
-    );
+    @include styles.theme(styles.$g10);
   }
 
   :root[storybook-carbon-theme='g90'],
   .sb--use-carbon-theme-g90 {
-    @include carbon--theme(
-      $theme: $carbon--theme--g90,
-      $emit-custom-properties: true
-    );
+    @include styles.theme(styles.$g90);
   }
 
   [storybook-carbon-theme='debug'],
   :root[storybook-carbon-theme='g100'],
   .sb--use-carbon-theme-g100 {
-    @include carbon--theme(
-      $theme: $carbon--theme--g100,
-      $emit-custom-properties: true
-    );
+    @include styles.theme(styles.$g100);
   }
 }
 

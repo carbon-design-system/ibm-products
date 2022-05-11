@@ -6,10 +6,11 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@import './variables';
+@use '@carbon/styles/scss/spacing' as *;
+@use './variables';
 
-th.#{$block-class}__select-all-toggle-on,
-td.#{$block-class}__select-all-toggle-on {
+th.#{variables.$block-class}__select-all-toggle-on,
+td.#{variables.$block-class}__select-all-toggle-on {
   /* stylelint-disable-next-line declaration-no-important */
   width: 4.5rem !important;
   /* stylelint-disable-next-line declaration-no-important */
@@ -17,12 +18,12 @@ td.#{$block-class}__select-all-toggle-on {
   box-sizing: border-box;
   flex: 0 0 auto;
 }
-th.#{$block-class}__select-all-toggle-on {
+th.#{variables.$block-class}__select-all-toggle-on {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-th.#{$block-class}__select-all-toggle-on.button {
+th.#{variables.$block-class}__select-all-toggle-on.button {
   margin-left: $spacing-01;
 }

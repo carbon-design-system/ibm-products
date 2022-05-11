@@ -1,9 +1,20 @@
+//
+// Copyright IBM Corp. 2020, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '@carbon/styles' as *;
+@use '@carbon/react/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '../../global/styles/project-settings' as *;
 
 // ModifiedTabs uses the following Carbon components:
 // Tabs, Tab
-@import '@carbon/react/scss/components/tabs';
+@use '@carbon/react/scss/components/tabs';
 
 .modified-tabs .modified-tabs__tab-label {
   display: flex;
@@ -35,7 +46,7 @@
   background-color: transparent;
   border-radius: 0;
   cursor: pointer;
-  transition: background-color $duration--fast-02 motion(standard, productive);
+  transition: background-color $duration-fast-02 motion(standard, productive);
   // stylelint-disable-next-line max-nesting-depth
   @media (prefers-reduced-motion: reduce) {
     transition: none;
@@ -51,12 +62,12 @@
 }
 
 .modified-tabs__tab-close:focus {
-  border-color: $interactive-01;
+  border-color: $button-primary;
   outline: none;
 }
 
 .modified-tabs__tab-close:hover {
-  background-color: $hover-ui;
+  background-color: $background-hover;
 }
 
 .modified-tabs__tab-new-img {

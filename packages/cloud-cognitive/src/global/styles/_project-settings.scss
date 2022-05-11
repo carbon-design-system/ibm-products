@@ -5,14 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// import carbon settings for referring to colors, spacing, theme, motion, etc
-// set up an alias variable to distinguish carbon prefix from package prefix
-// @forward '@carbon/styles' with (
-//   $prefix: 'cds',
-//   $carbon-prefix: 'cds',
-//   $pkg-prefix: 'c4p'
-// );
-
 // define variables and settings for the package
 $pkg-prefix: 'c4p' !default;
 $carbon-prefix: 'cds' !default;

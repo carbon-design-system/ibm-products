@@ -21,27 +21,25 @@
 // will set the carbon theme used for the storybook pane.
 // Adding class sb--use-carbon-theme-XXX on any element
 // will set the carbon theme used within that element.
-@if map-get($feature-flags, 'enable-css-custom-properties') {
-  :root,
-  .sb--use-carbon-theme-white {
-    @include styles.theme(styles.$white);
-  }
+:root,
+.sb--use-carbon-theme-white {
+  @include styles.theme(styles.$white);
+}
 
-  :root[storybook-carbon-theme='g10'],
-  .sb--use-carbon-theme-g10 {
-    @include styles.theme(styles.$g10);
-  }
+:root[storybook-carbon-theme='g10'],
+.sb--use-carbon-theme-g10 {
+  @include styles.theme(styles.$g10);
+}
 
-  :root[storybook-carbon-theme='g90'],
-  .sb--use-carbon-theme-g90 {
-    @include styles.theme(styles.$g90);
-  }
+:root[storybook-carbon-theme='g90'],
+.sb--use-carbon-theme-g90 {
+  @include styles.theme(styles.$g90);
+}
 
-  [storybook-carbon-theme='debug'],
-  :root[storybook-carbon-theme='g100'],
-  .sb--use-carbon-theme-g100 {
-    @include styles.theme(styles.$g100);
-  }
+[storybook-carbon-theme='debug'],
+:root[storybook-carbon-theme='g100'],
+.sb--use-carbon-theme-g100 {
+  @include styles.theme(styles.$g100);
 }
 
 [storybook-carbon-theme='debug'] body {

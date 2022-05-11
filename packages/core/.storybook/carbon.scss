@@ -7,5 +7,5 @@
 
 // a build of carbon css with our required feature flags set
 
-@forward '@carbon/react';
-@forward '../../cloud-cognitive/src/global/styles/project-settings';
+@use '@carbon/react';
+@use '../../cloud-cognitive/src/global/styles/project-settings';

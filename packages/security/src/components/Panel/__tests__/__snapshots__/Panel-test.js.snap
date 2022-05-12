@@ -27,18 +27,9 @@ exports[`Panel Rendering renders correctly 1`] = `
 exports[`Panel Rendering renders the HTML of the node's subtree 1`] = `
 <React.Fragment>
   <Button
-    dangerDescription="danger"
-    disabled={false}
-    isExpressive={false}
-    kind="primary"
     largeText={null}
     loading={false}
     onClick={[Function]}
-    size="default"
-    tabIndex={0}
-    tooltipAlignment="center"
-    tooltipPosition="top"
-    type="button"
   >
     toggle panel
   </Button>

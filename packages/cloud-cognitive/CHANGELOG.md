@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.17.0...@carbon/ibm-products@1.18.0) (2022-05-10)
+
+
+### Bug Fixes
+
+* **DataSpreadsheet:** address cell editing after reorder ([#1962](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1962)) ([07530c6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/07530c6be2d57cc686e8081cebf06a225b016468))
+* **DataSpreadsheet:** spreadsheet column reordering indicator line and fix selection width issue ([#1960](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1960)) ([4c2efde](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4c2efde39848742900a786bf62a63a0b4bdcb0f2))
+* global filter functionality for add select ([#1970](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1970)) ([7f3f7ea](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7f3f7eab5cf27a42ec808fd9eea08df894dbb071))
+* update to Carbon v10 compatible versions to latest ([#1971](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1971)) ([95374b8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/95374b89a15b1a76d18fb29c40e161a54720c447)), closes [#1970](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1970) [#1972](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1972)
+
+
+### Features
+
+* **DataSpreadsheet:** add spreadsheet column reordering ([#1959](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1959)) ([b4d876b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b4d876bf9d804a48ecb965f94ff7c942e16490e1))
+
+
+
+
+
 # [1.17.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.16.0...@carbon/ibm-products@1.17.0) (2022-05-03)
 
 

@@ -1,7 +1,7 @@
 {
   "name": "jest-config-ibm-cloud-cognitive",
   "private": true,
-  "version": "0.23.17",
+  "version": "0.23.18",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -33,7 +33,7 @@
     "accessibility-checker": "^3.1.28",
     "axe-core": "^4.4.1",
     "babel-jest": "^28.0.3",
-    "babel-preset-ibm-cloud-cognitive": "^0.14.14",
+    "babel-preset-ibm-cloud-cognitive": "^0.14.15",
     "chalk": "^4.1.2",
     "jest-circus": "^28.0.3"
   }

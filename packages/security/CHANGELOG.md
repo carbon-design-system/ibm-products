@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.11.9...@carbon/ibm-security@2.11.10) (2022-05-10)
+
+
+### Bug Fixes
+
+* Feature/roll back legacy tags ([#1963](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1963)) ([33a53db](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/33a53dbafdbd80169eeefdc9f00dd700f8ccfd89))
+* update to Carbon v10 compatible versions to latest ([#1971](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1971)) ([95374b8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/95374b89a15b1a76d18fb29c40e161a54720c447)), closes [#1970](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1970) [#1972](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1972)
+
+
+
+
+
 ## [2.11.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.11.8...@carbon/ibm-security@2.11.9) (2022-05-03)
 
 **Note:** Version bump only for package @carbon/ibm-security

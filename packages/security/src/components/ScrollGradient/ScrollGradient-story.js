@@ -12,6 +12,9 @@ import { components } from '../../../.storybook';
 import { ScrollGradient, theme } from '../..';
 import { className, children } from './_mocks_';
 
+import { InlineNotification } from '../../';
+import { Grid } from 'carbon-components-react';
+
 const gradientColor = theme.uiBackground;
 
 const style = {
@@ -19,7 +22,21 @@ const style = {
   height: '300px',
 };
 
-storiesOf(components('ScrollGradient'), module)
+storiesOf(components('ScrollGradient#legacy'), module)
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        kind="info"
+        subtitle="This component is now legacy."
+        title=""
+        hideCloseButton
+      />
+      <Grid>
+        <Story />
+      </Grid>
+    </>
+  ))
   .add(
     'vertical scrolling',
     () => (

@@ -15,6 +15,7 @@ import { AddSelectMetaPanel } from './AddSelectMetaPanel';
 const componentName = 'AddSelectSidebar';
 
 export let AddSelectSidebar = ({
+  closeIconDescription,
   displayMetalPanel,
   influencerTitle,
   items,
@@ -63,6 +64,7 @@ export let AddSelectSidebar = ({
   if (Object.keys(displayMetalPanel).length !== 0) {
     return (
       <AddSelectMetaPanel
+        closeIconDescription={closeIconDescription}
         meta={displayMetalPanel.meta}
         setDisplayMetaPanel={setDisplayMetaPanel}
         title={metaPanelTitle}
@@ -105,6 +107,7 @@ export let AddSelectSidebar = ({
 };
 
 AddSelectSidebar.propTypes = {
+  closeIconDescription: PropTypes.string,
   displayMetalPanel: PropTypes.object,
   influencerTitle: PropTypes.string,
   items: PropTypes.array,

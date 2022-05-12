@@ -1,10 +1,16 @@
 import React, { isValidElement } from 'react';
 import PropTypes from 'prop-types';
 import { Close16 } from '@carbon/icons-react';
+import { Button } from 'carbon-components-react';
 import { pkg } from '../../settings';
 const componentName = 'AddSelectMetaPanel';
 
-export let AddSelectMetaPanel = ({ meta, setDisplayMetaPanel, title }) => {
+export let AddSelectMetaPanel = ({
+  closeIconDescription,
+  meta,
+  setDisplayMetaPanel,
+  title,
+}) => {
   const blockClass = `${pkg.prefix}--add-select__meta-panel`;
   const onCloseHandler = () => {
     setDisplayMetaPanel({});
@@ -14,7 +20,16 @@ export let AddSelectMetaPanel = ({ meta, setDisplayMetaPanel, title }) => {
     <div className={blockClass}>
       <div className={`${blockClass}-header`}>
         <p className={`${blockClass}-title`}>{title}</p>
-        <Close16 className={`${blockClass}-close`} onClick={onCloseHandler} />
+        <Button
+          renderIcon={Close16}
+          iconDescription={closeIconDescription}
+          tooltipPosition="left"
+          tooltipAlignment="center"
+          hasIconOnly
+          onClick={onCloseHandler}
+          kind="ghost"
+          size="sm"
+        />
       </div>
       {isValidElement(meta)
         ? meta
@@ -29,6 +44,7 @@ export let AddSelectMetaPanel = ({ meta, setDisplayMetaPanel, title }) => {
 };
 
 AddSelectMetaPanel.propTypes = {
+  closeIconDescription: PropTypes.string,
   meta: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({

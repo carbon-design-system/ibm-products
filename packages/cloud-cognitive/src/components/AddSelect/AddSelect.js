@@ -30,6 +30,7 @@ export let AddSelect = forwardRef(
 
       className,
       clearFiltersText,
+      closeIconDescription,
       columnInputPlaceholder,
       description,
       globalFilters,
@@ -43,6 +44,7 @@ export let AddSelect = forwardRef(
       influencerTitle,
       items,
       itemsLabel,
+      metaIconDescription,
       metaPanelTitle,
       multi,
       noResultsDescription,
@@ -188,6 +190,7 @@ export let AddSelect = forwardRef(
     const itemsToDisplay = getDisplayItems();
 
     const commonListProps = {
+      metaIconDescription,
       multi,
       multiSelection,
       path,
@@ -239,6 +242,7 @@ export let AddSelect = forwardRef(
     };
 
     const sidebarProps = {
+      closeIconDescription,
       influencerTitle,
       items: flatItems,
       metaPanelTitle,
@@ -382,6 +386,7 @@ export let AddSelect = forwardRef(
 AddSelect.propTypes = {
   className: PropTypes.string,
   clearFiltersText: PropTypes.string,
+  closeIconDescription: PropTypes.string,
   columnInputPlaceholder: PropTypes.string,
   description: PropTypes.string,
   globalFilters: PropTypes.arrayOf(
@@ -432,6 +437,7 @@ AddSelect.propTypes = {
     ),
   }),
   itemsLabel: PropTypes.string,
+  metaIconDescription: PropTypes.string,
   metaPanelTitle: PropTypes.string,
   multi: PropTypes.bool,
   noResultsDescription: PropTypes.string,

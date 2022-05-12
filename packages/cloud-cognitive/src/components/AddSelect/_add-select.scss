@@ -258,10 +258,6 @@
   .#{$block-class}__meta-panel {
     padding: $spacing-05;
 
-    &-close {
-      cursor: pointer;
-    }
-
     &-header {
       display: flex;
       align-items: center;

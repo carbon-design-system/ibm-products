@@ -34,6 +34,7 @@ export default {
 const defaultProps = {
   className: 'placeholder-class',
   clearFiltersText: 'Clear filters',
+  closeIconDescription: 'Close',
   columnInputPlaceholder: 'Find',
   description: 'Select business terms from the list',
   globalSearchLabel: 'test input label',
@@ -81,6 +82,7 @@ const defaultProps = {
     ],
   },
   itemsLabel: 'Business terms',
+  metaIconDescription: 'View meta information',
   metaPanelTitle: 'Personal information',
   noResultsTitle: 'No results',
   noSelectionDescription:

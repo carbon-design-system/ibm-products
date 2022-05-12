@@ -7,6 +7,7 @@
 
 import React from 'react';
 import {
+  Button,
   Checkbox,
   RadioButton,
   StructuredListRow,
@@ -24,6 +25,7 @@ const componentName = 'AddSelectList';
 
 export let AddSelectList = ({
   filteredItems,
+  metaIconDescription,
   modifiers,
   multi,
   multiSelection,
@@ -169,7 +171,16 @@ export let AddSelectList = ({
                   )}
                   {item.meta && (
                     <div className={`${blockClass}-hidden-hover`}>
-                      <View16 onClick={() => setDisplayMetaPanel(item)} />
+                      <Button
+                        renderIcon={View16}
+                        iconDescription={metaIconDescription}
+                        tooltipPosition="left"
+                        tooltipAlignment="center"
+                        hasIconOnly
+                        onClick={() => setDisplayMetaPanel(item)}
+                        kind="ghost"
+                        size="sm"
+                      />
                     </div>
                   )}
                 </div>
@@ -184,6 +195,7 @@ export let AddSelectList = ({
 
 AddSelectList.propTypes = {
   filteredItems: PropTypes.array,
+  metaIconDescription: PropTypes.string,
   modifiers: PropTypes.object,
   multi: PropTypes.bool,
   multiSelection: PropTypes.array,

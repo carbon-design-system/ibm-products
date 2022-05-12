@@ -32,7 +32,33 @@ import { lorem } from '../_mocks_';
 import props from './SummaryCardContainer/_mocks_';
 import summaryCardSelectProps from './SummaryCardSelect/_mocks_';
 
-storiesOf(patterns('SummaryCard'), module)
+import { InlineNotification, NotificationActionButton } from '../../';
+import { Grid } from 'carbon-components-react';
+
+storiesOf(patterns('SummaryCard#legacy'), module)
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-cards-productivecard--default"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            View replacement
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="Pattern no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
+        title=""
+        hideCloseButton
+      />
+      <Grid>
+        <Story />
+      </Grid>
+    </>
+  ))
   .addDecorator((story) => (
     <div className={`${carbonPrefix}--grid ${carbonPrefix}--grid--full-width`}>
       <div className={`${carbonPrefix}--row`}>{story()}</div>

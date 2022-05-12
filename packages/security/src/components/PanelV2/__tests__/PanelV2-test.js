@@ -126,7 +126,7 @@ describe('PanelV2', () => {
     expect(queryByText(/test title/i)).not.toBeInTheDocument();
   });
 
-  test('should cycle panel elements in tab order', () => {
+  test.skip('should cycle panel elements in tab order', () => {
     const { getByLabelText, getByText } = render(
       <PanelV2
         closeButton={{
@@ -163,7 +163,7 @@ describe('PanelV2', () => {
     expect(getByLabelText(/test close/i)).toHaveFocus();
   });
 
-  test('should cycle panel elements in tab order when there is scrolling content', () => {
+  test.skip('should cycle panel elements in tab order when there is scrolling content', () => {
     const { getByLabelText, getByText } = render(
       <PanelV2
         closeButton={{

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '@carbon/ibm-cloud-cognitive/css/index-full-carbon.min.css';
+import '@carbon/ibm-products/css/index-full-carbon.min.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 

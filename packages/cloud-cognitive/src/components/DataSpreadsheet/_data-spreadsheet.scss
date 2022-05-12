@@ -22,8 +22,12 @@
 @mixin data-spreadsheet {
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--data-spreadsheet;
+  $body-cell-background: $field-01;
+  $header-cell-background: $ui-03;
 
   .#{$block-class} {
+    --#{$block-class}--total-width: 0;
+
     display: inline-block;
     border-spacing: 0;
 
@@ -36,7 +40,7 @@
     }
 
     .#{$block-class}__tr {
-      :last-child {
+      :last-child .#{$block-class}__body--td {
         .#{$block-class}__td {
           border-bottom: 0;
         }
@@ -47,21 +51,43 @@
     .#{$block-class}__td {
       @include carbon--type-style('body-short-01');
 
+      width: 100%;
+      height: 100%;
       padding: 0 $spacing-03;
       border: 0;
       margin: 0;
       color: $text-01;
     }
-    .#{$block-class}__th:last-child,
-    .#{$block-class}__td:last-child {
+
+    .#{$block-class}__body--td {
+      color: $text-02;
+    }
+
+    [role="'columnheader'"]:last-child,
+    [role="'gridcell'"]:last-child {
       border-right: 1px solid $text-03;
     }
     .#{$block-class}__th,
     .#{$block-class}__td-th.#{$block-class}__td {
       @include set-header-borders();
 
-      background-color: $ui-01;
+      height: 100%;
+      background-color: $header-cell-background;
       cursor: pointer;
+
+      &:hover,
+      &:focus {
+        background-color: $hover-selected-ui;
+      }
+    }
+    .#{$block-class}__th--select-all {
+      width: $spacing-10;
+    }
+    .#{$block-class}__td-th--cell-container,
+    .#{$block-class}__select-all-cell-container {
+      position: sticky;
+      z-index: 4;
+      left: 0;
     }
     .#{$block-class}__td-th.#{$block-class}__td {
       @include carbon--font-weight('semibold');
@@ -74,8 +100,9 @@
     .#{$block-class}__td {
       @include set-body-borders();
 
+      overflow: hidden;
       margin: 0;
-      background-color: $ui-background;
+      background-color: $body-cell-background;
       cursor: cell;
       text-align: left;
     }
@@ -91,13 +118,35 @@
       position: absolute;
       z-index: 4;
       display: none;
+      overflow: hidden;
       /* stylelint-disable-next-line carbon/layout-token-use */
       padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
-      background-color: $ui-background;
+      margin: 0;
+      background-color: $body-cell-background;
+      color: $text-01;
       resize: none;
       &.#{$carbon-prefix}--text-area {
         min-width: initial;
         min-height: initial;
+      }
+      &.#{$block-class}__cell-editor--active {
+        outline: $spacing-01 solid $interactive-01;
+        outline-offset: -2px;
+      }
+    }
+    .#{$block-class}__cell-editor-ruler {
+      @include carbon--type-style('body-short-01');
+
+      position: absolute;
+      overflow: hidden;
+      width: fit-content;
+      max-width: var(--#{$block-class}--total-width);
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
+      visibility: hidden;
+
+      &:focus {
+        outline: $spacing-01 solid $interactive-01;
       }
     }
     .#{$block-class}__active-cell--highlight {
@@ -107,18 +156,22 @@
       position: absolute;
       z-index: 3;
       display: none;
+      overflow: hidden;
       // Could be fixed by using border-right but the fact that
       // this element is positioned absolute prevents that from working
       /* stylelint-disable-next-line carbon/layout-token-use */
       padding-right: calc(#{$spacing-03} - 1px);
       padding-bottom: $spacing-01;
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      padding-left: calc(#{$spacing-03} - #{$spacing-01});
       border: $spacing-01 solid $interactive-01;
-      background-color: $ui-background;
+      background-color: $body-cell-background;
       color: $text-01;
       text-align: left;
 
       &[data-active-row-index='header'],
       &[data-active-column-index='header'] {
+        z-index: 4;
         background-color: transparent;
       }
 
@@ -142,12 +195,45 @@
         height: 100%;
         background-color: $interactive-01;
         content: '';
-        opacity: 0.25;
+        opacity: 0.2;
       }
+      &.#{$block-class}__selection-area--element-cloned {
+        z-index: 4;
+
+        &::before {
+          background-color: $ui-05;
+          opacity: 0.25;
+        }
+      }
+    }
+    .#{$block-class}__reorder-indicator-line {
+      position: absolute;
+      z-index: 4;
+      width: $spacing-01;
+      background-color: $interactive-01;
     }
     .#{$block-class}__th--active-header,
     .#{$block-class}__td-th--active-header.#{$block-class}__td {
-      background-color: $ui-03;
+      background-color: $hover-selected-ui;
+    }
+    .#{$block-class}__th--selected-header,
+    .#{$block-class}__td-th--selected-header.#{$block-class}__td {
+      background-color: $inverse-02;
+      color: $text-04;
+
+      &:focus,
+      &:hover {
+        background-color: $inverse-02;
+      }
+    }
+    .#{$block-class}__th--selected-header.#{$block-class}__th {
+      cursor: grab;
+    }
+    .#{$block-class}__th--selected-header-reorder-active.#{$block-class}__th {
+      cursor: grabbing;
+    }
+    .#{$block-class}__list--container {
+      overscroll-behavior: none;
     }
   }
 }

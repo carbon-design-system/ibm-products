@@ -56,6 +56,7 @@ const columnData = [
     accessor: (row, index) => index,
     Cell: ({ cell: { value } }) => <NumericLayout value={value} />,
     placement: 'right',
+    width: 275,
   },
   {
     Header: 'Pet type',
@@ -86,7 +87,7 @@ const columnData = [
 ];
 
 const Template = ({ ...args }) => {
-  const [data, setData] = useState(() => generateData(16));
+  const [data, setData] = useState(() => generateData({ rows: 16 }));
   const columns = useMemo(() => columnData, []);
 
   return (
@@ -101,8 +102,57 @@ const Template = ({ ...args }) => {
 };
 
 const LargeTemplate = ({ ...args }) => {
-  const [data, setData] = useState(() => generateData(1000));
+  const [data, setData] = useState(() => generateData({ rows: 1000 }));
   const columns = useMemo(() => columnData, []);
+
+  return (
+    <DataSpreadsheet
+      columns={columns}
+      data={data}
+      onDataUpdate={setData}
+      id="spreadsheet--id"
+      {...args}
+    />
+  );
+};
+
+const EmptyWithCellsTemplate = ({ ...args }) => {
+  const [data, setData] = useState([]);
+  const columnDataClone = useMemo(
+    () => [...columnData.filter((item) => item.Header !== 'Row Index')],
+    []
+  );
+  const columns = useMemo(() => columnDataClone, [columnDataClone]);
+  return (
+    <DataSpreadsheet
+      columns={columns}
+      data={data}
+      onDataUpdate={setData}
+      id="spreadsheet--id"
+      {...args}
+    />
+  );
+};
+
+const WithManyColumns = ({ ...args }) => {
+  const [data, setData] = useState(() =>
+    generateData({ rows: 24, extraColumns: true })
+  );
+  const columnDataClone = useMemo(
+    () => [
+      ...columnData,
+      {
+        Header: 'Owner name',
+        accessor: 'ownerName',
+      },
+      {
+        Header: 'Weight',
+        accessor: 'weight',
+      },
+    ],
+    []
+  );
+  const columns = useMemo(() => columnDataClone, [columnDataClone]);
 
   return (
     <DataSpreadsheet
@@ -124,5 +174,19 @@ export const largeDatasetSpreadsheet = prepareStory(LargeTemplate, {
   storyName: 'Large dataset',
   args: {
     cellSize: 'large',
+  },
+});
+
+export const emptyWithCells = prepareStory(EmptyWithCellsTemplate, {
+  storyName: 'Empty with cells',
+  args: {
+    defaultEmptyRowCount: 24,
+  },
+});
+
+export const withManyColumns = prepareStory(WithManyColumns, {
+  storyName: 'With many columns',
+  args: {
+    totalVisibleColumns: 5,
   },
 });

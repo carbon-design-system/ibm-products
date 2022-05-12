@@ -1,34 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Grid, Row, Column } from 'carbon-components-react';
-import { ThemeProvider } from './Theme/ThemeContext';
-import { ThemeDropdown } from './Theme/ThemeDropdown';
 
-import './index.scss';
+// This example uses this CSS build to minimize CodeSandBox transpile times
+import '@carbon/ibm-products/css/index-full-carbon.css';
+import './_index.scss';
 
-// config.js enables components that have not yet been reviewed/released
-// but which we want to use in their 'canary' form. Note that that has to
-// be done in an import so that it happens before all component imports.
-
-import './config'; // must come before @carbon/ibm-cloud-cognitive... imports
-import { TestComponent } from './components/TestComponent';
-
-const App = () => (
-  <div className="app">
-    <Grid>
-      <Row>
-        <Column lg={8}>
-          <TestComponent />
-        </Column>
-      </Row>
-    </Grid>
-    <ThemeDropdown />
-  </div>
-);
+import { Example } from './Example/Example';
+import { ThemeProvider } from './ThemeSelector/ThemeContext';
+import { ThemeDropdown } from './ThemeSelector/ThemeDropdown';
 
 render(
   <ThemeProvider>
-    <App />
+    <div className="app">
+      <Example />
+      <ThemeDropdown />
+    </div>
   </ThemeProvider>,
   document.getElementById('root')
 );

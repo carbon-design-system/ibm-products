@@ -44,6 +44,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   bottom: calc(var(--cds-spacing-09, 3rem) + var(--cds-spacing-08, 2.5rem));
 }
 
+.c4p--about-modal .bx--modal-content--overflow-indicator {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--cds-ui-01, #f4f4f4));
+}
+
 .c4p--about-modal .c4p--about-modal__links-container {
   margin-top: var(--cds-spacing-05, 1rem);
 }
@@ -1080,7 +1084,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--side-panel__container .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation {
   position: fixed;
   z-index: 2;
-  top: calc(var(--c4p--side-panel--title-text-height) + var(--cds-spacing-09, 3rem));
+  top: calc(
+        var(--c4p--side-panel--title-text-height) +
+          var(--c4p--side-panel--label-text-height) + var(--cds-spacing-09, 3rem)
+      );
   background-color: var(--cds-ui-01, #f4f4f4);
 }
 .c4p--side-panel__container .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation.c4p--side-panel__subtitle-text-is-animating {
@@ -1096,12 +1103,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation {
   position: fixed;
   top: var(--cds-spacing-09, 3rem);
-  height: var(--c4p--side-panel--title-text-height);
+  height: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--label-text-height));
 }
 .c4p--side-panel__container .c4p--side-panel__inner-content {
   overflow: auto;
   height: calc(100vh - 3rem);
-  margin-top: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height) + var(--c4p--side-panel--action-bar-container-height));
+  margin-top: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height) + var(--c4p--side-panel--action-bar-container-height) + var(--c4p--side-panel--label-text-height));
   overflow-x: hidden;
 }
 .c4p--side-panel__container .c4p--side-panel__inner-content-with-actions {
@@ -1110,6 +1117,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--side-panel__container .c4p--side-panel__inner-content.c4p--side-panel__static-inner-content {
   height: calc(100vh - (var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height) + var(--c4p--side-panel--action-bar-container-height)) + -1 * (var(--cds-spacing-09, 3rem) + var(--cds-spacing-10, 4rem)));
   padding-top: var(--cds-spacing-05, 1rem);
+}
+.c4p--side-panel__container .c4p--side-panel__inner-content.c4p--side-panel__static-inner-content-no-actions {
+  height: calc(100vh - (var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height) + var(--c4p--side-panel--action-bar-container-height) + var(--c4p--side-panel--label-text-height)));
 }
 .c4p--side-panel__container .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation {
   position: fixed;
@@ -1632,6 +1642,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--date-picker__input {
   background-color: var(--cds-field-01, #f4f4f4);
 }
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--select--inline .bx--select-input {
+  background-color: transparent;
+}
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--text-input--light,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--text-area--light,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .bx--search--light .bx--search-input,
@@ -1920,10 +1933,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--export-modal.bx--modal .bx--modal-content {
   padding-right: var(--cds-spacing-05, 1rem);
-}
-
-.c4p--export-modal .bx--modal-close {
-  display: none;
 }
 
 .c4p--export-modal__body {
@@ -3416,6 +3425,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--page-header .c4p--page-header__title-row {
   margin-top: 0;
   margin-bottom: 0;
+  transform: translateY(var(--cds-spacing-01, 0.125rem));
 }
 @media (min-width: 42rem) {
   .c4p--page-header .c4p--page-header__title-row {
@@ -3425,6 +3435,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--page-header .c4p--page-header__title-row.c4p--page-header__title-row--under-action-bar {
   margin-top: var(--cds-spacing-05, 1rem);
+  transform: translateY(0);
 }
 .c4p--page-header .c4p--page-header__title-row + .c4p--page-header__last-row-buffer--active {
   height: var(--cds-spacing-07, 2rem);

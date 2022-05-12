@@ -33,8 +33,11 @@ import HeaderPopoverHeader from './HeaderPopoverHeader';
 import HeaderPopoverLinkSecondary from './HeaderPopoverLinkSecondary';
 
 import { defaultProps, namespace, propTypes } from './constants';
+import { carbonPrefix } from '../../globals/namespace';
 
 const headerButtonNamespace = `${namespace}__button`;
+const assistiveTextClass = `${carbonPrefix}--assistive-text`;
+const profileButtonAssistiveTextId = `${namespace}__profile__button--assistive-text`;
 
 const getPopoverLabelId = (string) => `${namespace}__popover__label--${string}`;
 
@@ -461,11 +464,17 @@ export default class Header extends Component {
           <button
             aria-expanded={isActive.profile}
             aria-haspopup={isUserActive}
-            aria-label={labels.profile.button}
+            aria-describedby={profileButtonAssistiveTextId}
             className={profileButtonClasses}
             onClick={() => this.toggle('profile')}
             type="button"
           >
+            <span
+              id={profileButtonAssistiveTextId}
+              className={assistiveTextClass}
+            >
+              {labels.profile.button}
+            </span>
             <ProfileImage profile={profile} />
           </button>
           {this.renderProfile()}

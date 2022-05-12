@@ -1,0 +1,20 @@
+@import '../carbon';
+
+.main--content {
+  width: 100%;
+  margin-top: $spacing-09;
+}
+
+.main--content .example-terminal {
+  @include carbon--type-style('code-02');
+
+  padding: $spacing-05;
+  // stylelint-disable-next-line carbon/theme-token-use
+  color: $gray-10;
+}
+
+.main--content .example-terminal p {
+  @include carbon--type-style('body-short-01');
+
+  padding-bottom: $spacing-07;
+}

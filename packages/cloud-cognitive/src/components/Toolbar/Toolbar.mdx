@@ -1,4 +1,4 @@
-import { ArgsTable, Preview, Story } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
 
 import { getStoryId } from '../../global/js/utils/story-helper';
 import { pkg } from '../../settings';
@@ -18,17 +18,17 @@ import { componentName, Toolbar } from './Toolbar';
 A toolbar is a collection of action items that organizes a program’s interaction
 patterns into a series of closely related commands.
 
-<Preview>
+<Canvas>
   <Story id={getStoryId(componentName, 'toolbar')} />
-</Preview>
+</Canvas>
 
 ## Vertical
 
 A toolbar orientation for floating the toolbar on the canvas.
 
-<Preview>
+<Canvas>
   <Story id={getStoryId(componentName, 'vertical')} />
-</Preview>
+</Canvas>
 
 ## Component API
 

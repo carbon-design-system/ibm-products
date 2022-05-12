@@ -11,15 +11,16 @@
   "license": "Apache-2.0",
   "main": "src/index.js",
   "dependencies": {
-    "@carbon/elements": "^10.52.0",
-    "@carbon/ibm-products": "^1.7.0",
-    "carbon-components": "^10.53.0",
-    "carbon-components-react": "^7.53.0",
+    "@carbon/elements": "^10",
+    "@carbon/ibm-products": "latest",
+    "@carbon/icons-react": "^10",
+    "carbon-components": "^10",
+    "carbon-components-react": "^7",
     "carbon-icons": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-scripts": "latest",
-    "sass": "^1.49.8"
+    "sass": "latest"
   },
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
   "resolutions": {

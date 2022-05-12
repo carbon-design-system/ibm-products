@@ -356,6 +356,9 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     .#{$block-class}__title-row {
       margin-top: 0;
       margin-bottom: 0;
+      transform: translateY(
+        $spacing-01
+      ); // position adjusted for editable title focus outline
 
       @include carbon--breakpoint-up('md') {
         flex-wrap: nowrap; /* assume enough space */
@@ -363,6 +366,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
       &.#{$block-class}__title-row--under-action-bar {
         margin-top: $spacing-05;
+        transform: translateY(0); // Not needed under action bar
       }
 
       + .#{$block-class}__last-row-buffer--active {

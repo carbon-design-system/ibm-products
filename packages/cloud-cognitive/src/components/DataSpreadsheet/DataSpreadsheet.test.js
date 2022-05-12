@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import React, { forwardRef, useState } from 'react';
+import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
@@ -15,13 +15,15 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { DataSpreadsheet } from '.';
 import { generateData } from './utils/generateData';
 
+// cspell:words rowcount
+
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 const componentName = DataSpreadsheet.displayName;
 
 // values to use
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
-const data = generateData(16);
+const data = generateData({ rows: 16 });
 const defaultProps = {
   columns: [
     {
@@ -133,7 +135,52 @@ describe(componentName, () => {
     expect(selectionArea).toBeInTheDocument();
   });
 
-  it('should select an entire column, adding a selection area', () => {
+  it('should select an entire column, adding a selection area, and reorder columns', () => {
+    const ref = React.createRef();
+    const { click } = userEvent;
+    const { mouseMove, mouseDown, mouseUp } = fireEvent;
+    const activeCellChangeFn = jest.fn();
+    const onSelectionAreaChangeFn = jest.fn();
+    render(
+      <DataSpreadsheet
+        {...defaultProps}
+        ref={ref}
+        onActiveCellChange={activeCellChangeFn}
+        onSelectionAreaChange={onSelectionAreaChangeFn}
+      />
+    );
+    const allColumnHeaderCells = ref?.current.querySelectorAll(
+      `.${blockClass}__th`
+    );
+    const firstColumnHeaderCell = Array.from(allColumnHeaderCells)[1]; // the second item is the first column header cell
+    const secondColumnHeaderCell = Array.from(allColumnHeaderCells)[2];
+    click(firstColumnHeaderCell);
+    expect(activeCellChangeFn).toHaveBeenCalledTimes(1);
+    const selectionArea = ref?.current.querySelector(
+      `.${blockClass}__selection-area--element`
+    );
+    expect(firstColumnHeaderCell).toHaveClass(
+      `${blockClass}__th--selected-header`
+    );
+    expect(selectionArea).toBeInTheDocument();
+    expect(onSelectionAreaChangeFn).toHaveBeenCalledTimes(1);
+
+    // Start column reordering
+    const firstColumnHeaderText = firstColumnHeaderCell.textContent;
+    mouseDown(firstColumnHeaderCell);
+    mouseMove(secondColumnHeaderCell);
+    mouseUp(secondColumnHeaderCell);
+    const reorderedHeaderCells = ref?.current.querySelectorAll(
+      `.${blockClass}__th`
+    );
+    const firstColumnHeaderTextAfterReorder =
+      Array.from(reorderedHeaderCells)[1].textContent;
+    expect(firstColumnHeaderText).not.toEqual(
+      firstColumnHeaderTextAfterReorder
+    );
+  });
+
+  it('should select all cells when clicking on select all cell button', () => {
     const ref = React.createRef();
     const { click } = userEvent;
     const activeCellChangeFn = jest.fn();
@@ -146,14 +193,46 @@ describe(componentName, () => {
         onSelectionAreaChange={onSelectionAreaChangeFn}
       />
     );
-    const allCells = ref?.current.querySelectorAll(`.${blockClass}__th`);
-    const firstColumnHeaderCell = Array.from(allCells)[1]; // the second item is the first column header cell
-    click(firstColumnHeaderCell);
+    const selectAllButton = ref?.current.querySelector(
+      `.${blockClass}__th--select-all`
+    );
+    click(selectAllButton);
     expect(activeCellChangeFn).toHaveBeenCalledTimes(1);
     const selectionArea = ref?.current.querySelector(
       `.${blockClass}__selection-area--element`
     );
+    const activeCell = ref?.current.querySelector(
+      `.${blockClass}__active-cell--highlight[data-active-row-index="0"][data-active-column-index="0"]`
+    );
     expect(selectionArea).toBeInTheDocument();
+    expect(activeCell).toBeInTheDocument();
     expect(onSelectionAreaChangeFn).toHaveBeenCalledTimes(1);
+  });
+
+  const EmptySpreadsheet = forwardRef(({ ...rest }, ref) => {
+    const [data, setData] = useState([]);
+    const columnsClone = [
+      ...defaultProps.columns.filter((item) => item.Header !== 'Row 1'),
+    ];
+    return (
+      <DataSpreadsheet
+        {...defaultProps}
+        {...rest}
+        ref={ref}
+        data={data}
+        columns={columnsClone}
+        onDataUpdate={setData}
+      />
+    );
+  });
+
+  it('should render an empty spreadsheet with 32 rows', async () => {
+    const ref = React.createRef();
+    const defaultEmptyRowCount = 32;
+    render(
+      <EmptySpreadsheet ref={ref} defaultEmptyRowCount={defaultEmptyRowCount} />
+    );
+    const ariaRowCountValue = ref?.current.getAttribute('aria-rowcount');
+    expect(Number(ariaRowCountValue)).toEqual(defaultEmptyRowCount);
   });
 });

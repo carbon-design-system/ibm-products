@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 
 import styles from './_storybook-styles.scss';
 import {
@@ -21,7 +21,14 @@ export default {
   title: getStoryTitle(TearsheetShell.displayName),
   component: TearsheetShell,
   parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
-  argTypes: getDeprecatedArgTypes(deprecatedProps),
+  argTypes: {
+    ...getDeprecatedArgTypes(deprecatedProps),
+    portalTargetCustomDomNode: {
+      control: { type: 'boolean' },
+      description:
+        'Set portalTarget prop to specify dom node, defaults to document.body.',
+    },
+  },
 };
 
 const closeIconDescription = 'Close the tearsheet';
@@ -43,11 +50,19 @@ const dummyContent = (
 );
 
 // Template.
-const Template = (args) => {
+const Template = ({ portalTargetCustomDomNode, ...args }) => {
+  const ref = useRef();
+
   return (
-    <TearsheetShell className={className} {...args}>
-      {dummyContent}
-    </TearsheetShell>
+    <div ref={ref}>
+      <TearsheetShell
+        className={className}
+        {...args}
+        portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
+      >
+        {dummyContent}
+      </TearsheetShell>
+    </div>
   );
 };
 

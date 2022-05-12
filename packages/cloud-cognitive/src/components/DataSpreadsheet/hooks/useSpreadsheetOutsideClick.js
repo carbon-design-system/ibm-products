@@ -7,6 +7,7 @@
 
 import { useEffect } from 'react';
 import { pkg } from '../../../settings';
+import { removeCellSelections } from '../utils/removeCellSelections';
 
 // Click outside useEffect for spreadsheet
 export const useSpreadsheetOutsideClick = ({
@@ -15,9 +16,7 @@ export const useSpreadsheetOutsideClick = ({
   setActiveCellCoordinates,
   setSelectionAreas,
   removeActiveCell,
-  removeCellSelections,
   setContainerHasFocus,
-  activeKeys,
   removeCellEditor,
 }) => {
   useEffect(() => {
@@ -37,10 +36,9 @@ export const useSpreadsheetOutsideClick = ({
       setActiveCellCoordinates(null);
       setSelectionAreas([]);
       removeActiveCell();
-      removeCellSelections();
+      removeCellSelections({ spreadsheetRef });
       setContainerHasFocus(false);
       removeCellEditor();
-      activeKeys.current = [];
     };
     document.addEventListener('click', handleOutsideClick);
     return () => {
@@ -49,8 +47,6 @@ export const useSpreadsheetOutsideClick = ({
   }, [
     spreadsheetRef,
     removeActiveCell,
-    removeCellSelections,
-    activeKeys,
     blockClass,
     setActiveCellCoordinates,
     setContainerHasFocus,

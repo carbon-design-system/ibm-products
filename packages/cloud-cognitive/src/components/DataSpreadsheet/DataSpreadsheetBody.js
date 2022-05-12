@@ -5,10 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useCallback, useEffect, forwardRef } from 'react';
+import React, {
+  useRef,
+  useCallback,
+  useEffect,
+  forwardRef,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { FixedSizeList } from 'react-window';
 import cx from 'classnames';
+import { px } from '@carbon/layout';
 
 import { pkg } from '../../settings';
 import { deepCloneObject } from '../../global/js/utils/deepCloneObject';
@@ -18,7 +25,11 @@ import { usePreviousValue } from '../../global/js/hooks';
 import { removeCellSelections } from './utils/removeCellSelections';
 import { createCellSelectionArea } from './utils/createCellSelectionArea';
 import { checkActiveHeaderCell } from './utils/checkActiveHeaderCell';
+import { checkSelectedHeaderCell } from './utils/checkSelectedHeaderCell';
 import { handleHeaderCellSelection } from './utils/handleHeaderCellSelection';
+import { getSpreadsheetWidth } from './utils/getSpreadsheetWidth';
+
+import { useSpreadsheetMouseUp } from './hooks';
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 
@@ -28,8 +39,11 @@ export const DataSpreadsheetBody = forwardRef(
       columns,
       activeCellCoordinates,
       defaultColumn,
+      defaultEmptyRowCount,
       getTableBodyProps,
+      headerGroups,
       id,
+      onDataUpdate,
       prepareRow,
       rows,
       selectionAreaData,
@@ -45,13 +59,28 @@ export const DataSpreadsheetBody = forwardRef(
       currentMatcher,
       setCurrentMatcher,
       onSelectionAreaChange,
+      setActiveCellInsideSelectionArea,
+      totalVisibleColumns,
+      setHeaderCellHoldActive,
+      setColumnOrder,
+      visibleColumns,
     },
     ref
   ) => {
+    const [validStartingPoint, setValidStartingPoint] = useState(false);
+    const contentScrollRef = useRef();
     const previousState = usePreviousValue({
       selectionAreaData,
       clickAndHoldActive,
     });
+
+    // Set custom css property containing the spreadsheet total width
+    useEffect(() => {
+      ref?.current.style.setProperty(
+        `--${blockClass}--total-width`,
+        px(totalColumnsWidth + scrollBarSize)
+      );
+    }, [ref, scrollBarSize, totalColumnsWidth]);
 
     // Call the `onSelectionAreaChange` handler to send selection area data
     // back to the consumer
@@ -112,11 +141,14 @@ export const DataSpreadsheetBody = forwardRef(
           }
           if (!area.areaCreated && area.point1 && area.point2 && area.matcher) {
             createCellSelectionArea({
+              ref,
               area,
               blockClass,
               defaultColumn,
               selectionAreas,
               setSelectionAreas,
+              setActiveCellInsideSelectionArea,
+              visibleColumns,
             });
           }
           return;
@@ -128,6 +160,10 @@ export const DataSpreadsheetBody = forwardRef(
       defaultColumn,
       onSelectionAreaChange,
       setSelectionAreaData,
+      ref,
+      activeCellCoordinates,
+      setActiveCellInsideSelectionArea,
+      visibleColumns,
     ]);
 
     const populateSelectionAreaCellData = ({
@@ -149,43 +185,21 @@ export const DataSpreadsheetBody = forwardRef(
       return cellContainer;
     };
 
-    // Mouse up
-    useEffect(() => {
-      const handleMouseUp = (event) => {
-        setClickAndHoldActive(false);
-        const cellButton = event.target.closest(`.${blockClass}__body--td`);
-        if (cellButton) {
-          const endCellCoordinates = {
-            row: Number(cellButton.getAttribute('data-row-index')),
-            column: Number(cellButton.getAttribute('data-column-index')),
-          };
-          setSelectionAreas((prev) => {
-            const selectionAreaClone = deepCloneObject(prev);
-            const indexOfItemToUpdate = selectionAreaClone.findIndex(
-              (item) => item.matcher === currentMatcher
-            );
-            // No items in the array have an object that matches the value of currentMatcher
-            if (indexOfItemToUpdate === -1) {
-              return prev;
-            }
-            selectionAreaClone[indexOfItemToUpdate].point2 = endCellCoordinates;
-            selectionAreaClone[indexOfItemToUpdate].areaCreated = false;
-            return selectionAreaClone;
-          });
-        }
-      };
-      document.addEventListener('mouseup', handleMouseUp);
-      return () => {
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-    }, [
-      selectionAreas,
+    useSpreadsheetMouseUp({
       currentMatcher,
-      setSelectionAreas,
       setClickAndHoldActive,
-      setCurrentMatcher,
+      setSelectionAreas,
+      setValidStartingPoint,
+      validStartingPoint,
       ref,
-    ]);
+      setHeaderCellHoldActive,
+      setColumnOrder,
+      visibleColumns,
+      setActiveCellCoordinates,
+      rows,
+      activeCellCoordinates,
+      defaultColumn,
+    });
 
     // Make sure that if the cellSize prop changes, the active
     // cell also gets updated with the new size
@@ -205,6 +219,13 @@ export const DataSpreadsheetBody = forwardRef(
       (cell, columnIndex) => {
         return (event) => {
           event.preventDefault();
+          const closestBodyCell = event.target.closest(
+            `.${blockClass}__body--td`
+          );
+          const isValidSelectionAreaStart = closestBodyCell.classList.contains(
+            `${blockClass}__body--td`
+          );
+          setValidStartingPoint(isValidSelectionAreaStart);
           const isHoldingCommandKey = event.metaKey || event.ctrlKey;
           const isHoldingShiftKey = event.shiftKey;
           setContainerHasFocus(true);
@@ -218,6 +239,11 @@ export const DataSpreadsheetBody = forwardRef(
           // prevent multiple selections unless cmd key is held
           // meaning that selectionAreas should only have one item by default
           if (isHoldingCommandKey) {
+            const activeCellElement = ref.current.querySelector(
+              `.${blockClass}__active-cell--highlight`
+            );
+            activeCellElement.setAttribute('data-selection-id', tempMatcher);
+            setActiveCellInsideSelectionArea(true);
             setActiveCellCoordinates(activeCoordinates);
             setCurrentMatcher(tempMatcher);
             setSelectionAreas((prev) => [
@@ -248,6 +274,7 @@ export const DataSpreadsheetBody = forwardRef(
               setSelectionAreas(selectionAreaClone);
             }
           } else {
+            setActiveCellInsideSelectionArea(false);
             setActiveCellCoordinates(activeCoordinates);
             // remove all previous cell selections
             removeCellSelections({ spreadsheetRef: ref });
@@ -270,8 +297,25 @@ export const DataSpreadsheetBody = forwardRef(
         setCurrentMatcher,
         ref,
         setSelectionAreaData,
+        setActiveCellInsideSelectionArea,
       ]
     );
+
+    const handleBodyScroll = () => {
+      const headerRowElement = ref.current.querySelector(`
+        .${blockClass}__header--container .${blockClass}__tr`);
+      headerRowElement.scrollLeft = contentScrollRef.current.scrollLeft;
+    };
+
+    useEffect(() => {
+      contentScrollRef.current.addEventListener('scroll', (event) =>
+        handleBodyScroll(event)
+      );
+      const contentScrollElementRef = contentScrollRef.current;
+      return () => {
+        contentScrollElementRef.removeEventListener('scroll', handleBodyScroll);
+      };
+    });
 
     const handleBodyCellHover = useCallback(
       (cell, columnIndex) => {
@@ -311,7 +355,8 @@ export const DataSpreadsheetBody = forwardRef(
 
     const handleRowHeaderClick = useCallback(
       (index) => {
-        return () => {
+        return (event) => {
+          const isHoldingCommandKey = event.metaKey || event.ctrlKey;
           handleHeaderCellSelection({
             type: 'row',
             activeCellCoordinates,
@@ -323,6 +368,7 @@ export const DataSpreadsheetBody = forwardRef(
             spreadsheetRef: ref,
             index,
             setSelectionAreaData,
+            isHoldingCommandKey,
           });
         };
       },
@@ -338,73 +384,118 @@ export const DataSpreadsheetBody = forwardRef(
       ]
     );
 
+    // Builds the empty rows and calls `onDataUpdate` to set the new empty rows
+    // using defaultEmptyRowCount to determine how many empty rows are created.
+    useEffect(() => {
+      if (!rows?.length) {
+        const buildEmptyRows = () => {
+          const emptyRowData = [];
+          [...Array(defaultEmptyRowCount)].map(() => {
+            const emptyCell = {};
+            headerGroups[0]?.headers.map((header) => {
+              emptyCell[header.id] = null;
+            });
+            emptyRowData.push(emptyCell);
+          });
+          onDataUpdate(emptyRowData);
+        };
+        buildEmptyRows();
+      }
+    }, [rows, headerGroups, defaultEmptyRowCount, onDataUpdate]);
+
+    const RenderEmptyRows = () => {
+      return <div />;
+    };
+
     // Renders each row/cell in the spreadsheet body
     const RenderRow = useCallback(
       ({ index, style }) => {
         const row = rows[index];
-        prepareRow(row);
-        return (
-          <div
-            {...row.getRowProps({ style })}
-            className={cx(`${blockClass}__tr`)}
-            data-row-index={index}
-          >
-            {/* ROW HEADER BUTTON */}
-            <button
-              tabIndex={-1}
+        if (rows && rows.length) {
+          prepareRow(row);
+          return (
+            <div
+              {...row.getRowProps({ style })}
+              className={cx(`${blockClass}__tr`)}
               data-row-index={index}
-              data-column-index="header"
-              type="button"
-              onClick={handleRowHeaderClick(index)}
-              className={cx(
-                `${blockClass}__td`,
-                `${blockClass}__td-th`,
-                `${blockClass}--interactive-cell-element`,
-                {
-                  [`${blockClass}__td-th--active-header`]:
-                    activeCellCoordinates?.row === index ||
-                    checkActiveHeaderCell(index, selectionAreas, 'row'),
-                }
-              )}
-              style={{
-                width: defaultColumn?.rowHeaderWidth,
-              }}
+              aria-rowindex={index + 1}
             >
-              {index + 1}
-            </button>
-            {/* CELL BUTTONS */}
-            {row.cells.map((cell, index) => (
-              <button
-                tabIndex={-1}
-                data-row-index={cell.row.index}
-                data-column-index={index}
-                {...cell.getCellProps()}
-                className={cx(
-                  `${blockClass}__td`,
-                  `${blockClass}__body--td`,
-                  `${blockClass}--interactive-cell-element`
-                )}
-                key={`cell_${index}`}
-                onMouseDown={handleBodyCellClick(cell, index)}
-                onMouseOver={handleBodyCellHover(cell, index)}
-                onFocus={() => {}}
-                type="button"
+              {/* ROW HEADER BUTTON */}
+              <div
+                role="rowheader"
+                className={`${blockClass}__td-th--cell-container`}
               >
-                {cell.render('Cell')}
-              </button>
-            ))}
-          </div>
-        );
+                <button
+                  id={`${blockClass}__cell--${index}--header`}
+                  tabIndex={-1}
+                  data-row-index={index}
+                  data-column-index="header"
+                  type="button"
+                  onClick={handleRowHeaderClick(index)}
+                  className={cx(
+                    `${blockClass}__td`,
+                    `${blockClass}__td-th`,
+                    `${blockClass}--interactive-cell-element`,
+                    {
+                      [`${blockClass}__td-th--active-header`]:
+                        activeCellCoordinates?.row === index ||
+                        checkActiveHeaderCell(index, selectionAreas, 'row'),
+                      [`${blockClass}__td-th--selected-header`]:
+                        checkSelectedHeaderCell(index, selectionAreas, 'row'),
+                    }
+                  )}
+                  style={{
+                    width: defaultColumn?.rowHeaderWidth,
+                  }}
+                >
+                  {index + 1}
+                </button>
+              </div>
+              {/* CELL BUTTONS */}
+              {row.cells.map((cell, index) => (
+                <div
+                  key={`cell_${index}`}
+                  aria-colindex={index + 1}
+                  {...cell.getCellProps()}
+                  role="gridcell"
+                  style={{
+                    ...cell.getCellProps().style,
+                    display: 'grid',
+                    minWidth: defaultColumn?.width,
+                  }}
+                >
+                  <button
+                    id={`${blockClass}__cell--${cell.row.index}--${index}`}
+                    tabIndex={-1}
+                    data-row-index={cell.row.index}
+                    data-column-index={index}
+                    className={cx(
+                      `${blockClass}__td`,
+                      `${blockClass}__body--td`,
+                      `${blockClass}--interactive-cell-element`
+                    )}
+                    onMouseDown={handleBodyCellClick(cell, index)}
+                    onMouseOver={handleBodyCellHover(cell, index)}
+                    onFocus={() => {}}
+                    type="button"
+                  >
+                    {cell.render('Cell')}
+                  </button>
+                </div>
+              ))}
+            </div>
+          );
+        }
       },
       [
         prepareRow,
         rows,
-        defaultColumn.rowHeaderWidth,
         activeCellCoordinates?.row,
         selectionAreas,
         handleRowHeaderClick,
         handleBodyCellClick,
         handleBodyCellHover,
+        defaultColumn,
       ]
     );
 
@@ -421,11 +512,17 @@ export const DataSpreadsheetBody = forwardRef(
             `${blockClass}__list--container--${id}`
           )}
           height={400}
-          itemCount={rows.length}
+          itemCount={rows.length || defaultEmptyRowCount}
           itemSize={defaultColumn?.rowHeight}
-          width={totalColumnsWidth + scrollBarSize}
+          width={getSpreadsheetWidth({
+            scrollBarSizeValue: scrollBarSize,
+            totalVisibleColumns,
+            defaultColumn,
+            totalColumnsWidth,
+          })}
+          outerRef={contentScrollRef}
         >
-          {RenderRow}
+          {rows?.length ? RenderRow : RenderEmptyRows}
         </FixedSizeList>
       </div>
     );
@@ -466,9 +563,19 @@ DataSpreadsheetBody.propTypes = {
   }),
 
   /**
+   * Sets the number of empty rows to be created when there is no data provided
+   */
+  defaultEmptyRowCount: PropTypes.number,
+
+  /**
    * Function to set table body prop values
    */
   getTableBodyProps: PropTypes.func,
+
+  /**
+   * Headers provided from useTable hook
+   */
+  headerGroups: PropTypes.arrayOf(PropTypes.object),
 
   /**
    * The spreadsheet id
@@ -479,6 +586,11 @@ DataSpreadsheetBody.propTypes = {
    * The event handler that is called when the active cell changes
    */
   onActiveCellChange: PropTypes.func,
+
+  /**
+   * The event handler that is called to set the rows for the empty spreadsheet
+   */
+  onDataUpdate: PropTypes.func,
 
   /**
    * The event handler that is called when the selection areas change
@@ -516,9 +628,19 @@ DataSpreadsheetBody.propTypes = {
   setActiveCellCoordinates: PropTypes.func,
 
   /**
+   * Setter fn for active cell inside of selection area
+   */
+  setActiveCellInsideSelectionArea: PropTypes.func,
+
+  /**
    * Setter fn for clickAndHold state value
    */
   setClickAndHoldActive: PropTypes.func,
+
+  /**
+   * Setter fn for column ordering, provided from react-table
+   */
+  setColumnOrder: PropTypes.func,
 
   /**
    * Setter fn for containerHasFocus state value
@@ -529,6 +651,11 @@ DataSpreadsheetBody.propTypes = {
    * Setter fn for currentMatcher state value
    */
   setCurrentMatcher: PropTypes.func,
+
+  /**
+   * Setter fn for header cell hold active value
+   */
+  setHeaderCellHoldActive: PropTypes.func,
 
   /**
    * Setter fn for selectionAreaData state value
@@ -544,4 +671,15 @@ DataSpreadsheetBody.propTypes = {
    * The total columns width
    */
   totalColumnsWidth: PropTypes.number,
+
+  /**
+   * The total number of columns to be initially visible, additional columns will be rendered and
+   * visible via horizontal scrollbar
+   */
+  totalVisibleColumns: PropTypes.number,
+
+  /**
+   * Prop from react-table used to reorder columns
+   */
+  visibleColumns: PropTypes.array,
 };

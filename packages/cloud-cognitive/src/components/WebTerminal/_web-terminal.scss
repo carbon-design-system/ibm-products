@@ -5,25 +5,25 @@ $web-terminal-width: 36.5rem;
 $block-class: #{$pkg-prefix}--web-terminal;
 
 @keyframes web-terminal-entrance {
-  0% {
+  from {
     opacity: 0;
     // stylelint-disable-next-line carbon/layout-token-use
     transform: translateX(#{$web-terminal-width});
   }
 
-  100% {
+  to {
     opacity: 1;
     transform: translateX(0);
   }
 }
 
 @keyframes web-terminal-exit {
-  0% {
+  from {
     opacity: 1;
     transform: translateX(0);
   }
 
-  100% {
+  to {
     opacity: 0;
     // stylelint-disable-next-line carbon/layout-token-use
     transform: translateX(#{$web-terminal-width});
@@ -69,4 +69,14 @@ $block-class: #{$pkg-prefix}--web-terminal;
 // Terminal body styles
 .#{$block-class}__body {
   height: 100%;
+}
+
+// Terminal wrapper styles
+.#{$block-class}-content-wrapper {
+  width: 100vw;
+  height: 100%;
+}
+
+.#{$block-class}-content-wrapper--open {
+  width: calc(100vw - #{$web-terminal-width});
 }

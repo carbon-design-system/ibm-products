@@ -26,6 +26,9 @@ import TextInput from '../TextInput';
 import WizardComponent from './Wizard';
 import WizardStep from './WizardStep';
 
+import { InlineNotification, NotificationActionButton } from '../../';
+import { Grid } from 'carbon-components-react';
+
 const { prefix } = settings;
 
 const focusTrap = boolean('focusTrap', false);
@@ -237,7 +240,30 @@ const markdown = (useDefault = true) =>
   ~~~
   `;
 
-storiesOf(patterns('Wizard'), module)
+storiesOf(patterns('Wizard#legacy'), module)
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-tearsheet-tearsheet--tearsheet"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            View replacement
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="Pattern no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
+        title=""
+        hideCloseButton
+      />
+      <Grid>
+        <Story />
+      </Grid>
+    </>
+  ))
   .add(
     'default',
     () => {

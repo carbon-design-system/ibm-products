@@ -1,0 +1,21 @@
+@import '../carbon';
+
+$preview-block-class: exp--tearsheet-create-multi-step;
+
+.#{$preview-block-class}__description {
+  @include carbon--type-style('body-short-01');
+
+  padding-bottom: $spacing-04;
+}
+
+p.#{$preview-block-class}__description:last-of-type {
+  padding-bottom: $spacing-07;
+}
+
+.#{$preview-block-class}__heading {
+  @include carbon--font-weight('semibold');
+}
+
+.#{$preview-block-class} .bx--form-item {
+  margin-bottom: $spacing-05;
+}

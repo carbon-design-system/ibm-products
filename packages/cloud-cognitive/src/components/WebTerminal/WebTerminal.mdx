@@ -49,6 +49,23 @@ children.
 
 <hr />
 
+#### Optional wrapper component
+
+Optionally you can import `WebTerminalContentWrapper` to have content adjust
+their width based off the `WebTerminal` width when it is opened.
+
+```jsx
+<WebTerminalContentWrapper isTerminalOpen={isTerminalOpen}>
+  content
+</WebTerminalContentWrapper>
+
+<WebTerminal open={isTerminalOpen} closeTerminal={closeTerminal}>
+  ...
+</WebTerminal>
+```
+
+<hr />
+
 ### Default
 
 The default web terminal is one which opens and the terminal loads. Then if the

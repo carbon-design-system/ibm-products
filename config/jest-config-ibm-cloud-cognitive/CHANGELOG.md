@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.23.18](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config-ibm-cloud-cognitive@0.23.17...jest-config-ibm-cloud-cognitive@0.23.18) (2022-05-10)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+## [0.23.17](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config-ibm-cloud-cognitive@0.23.16...jest-config-ibm-cloud-cognitive@0.23.17) (2022-05-03)
+
+
+### Bug Fixes
+
+* **Datagrid:** revert react-dnd versions ([#1950](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1950)) ([a1417b0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a1417b0e97516826a44ae6352ada8a84200d8eb0))
+
+
+
+
+
+## [0.23.16](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config-ibm-cloud-cognitive@0.23.15...jest-config-ibm-cloud-cognitive@0.23.16) (2022-04-26)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+## [0.23.15](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config-ibm-cloud-cognitive@0.23.14...jest-config-ibm-cloud-cognitive@0.23.15) (2022-04-19)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
+## [0.23.14](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config-ibm-cloud-cognitive@0.23.13...jest-config-ibm-cloud-cognitive@0.23.14) (2022-04-05)
+
+**Note:** Version bump only for package jest-config-ibm-cloud-cognitive
+
+
+
+
+
 ## [0.23.13](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config-ibm-cloud-cognitive@0.23.12...jest-config-ibm-cloud-cognitive@0.23.13) (2022-03-29)
 
 **Note:** Version bump only for package jest-config-ibm-cloud-cognitive

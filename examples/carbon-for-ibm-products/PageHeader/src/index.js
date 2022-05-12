@@ -1,28 +1,21 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { ThemeProvider } from './Theme/ThemeContext';
-import { ThemeDropdown } from './Theme/ThemeDropdown';
-import './config';
 
-import { CommonHeader } from './components/CommonHeader/CommonHeader.js';
-import { Content } from 'carbon-components-react';
+// This example uses this CSS build to minimize CodeSandBox transpile times
+import '@carbon/ibm-products/css/index-full-carbon.css';
+import './_index.scss';
 
-import './index.scss';
-import { SamplePage } from './components/SamplePage/index.js';
+import { Example } from './Example/Example';
 
-const App = () => (
-  <div className="app">
-    <CommonHeader className="header-area" />
-    <Content className="content-area">
-      <SamplePage />
-    </Content>
-    <ThemeDropdown />
-  </div>
-);
+import { ThemeProvider } from './ThemeSelector/ThemeContext';
+import { ThemeDropdown } from './ThemeSelector/ThemeDropdown';
 
 render(
   <ThemeProvider>
-    <App />
+    <div className="app">
+      <Example />
+      <ThemeDropdown />
+    </div>
   </ThemeProvider>,
   document.getElementById('root')
 );

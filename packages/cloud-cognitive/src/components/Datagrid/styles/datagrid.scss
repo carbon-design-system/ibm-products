@@ -1,0 +1,364 @@
+/*
+* Licensed Materials - Property of IBM
+* 5724-Q36
+* (c) Copyright IBM Corp. 2020 - 2021
+* US Government Users Restricted Rights - Use, duplication or disclosure
+* restricted by GSA ADP Schedule Contract with IBM Corp.
+*/
+
+@import './variables';
+
+.#{$block-class}__table-toolbar > section {
+  z-index: 2;
+  overflow: visible; // RowSizeDropdown depend on this
+}
+
+.#{$block-class}__full-height,
+.#{$block-class}__full-height table,
+.#{$block-class}__full-height tbody {
+  height: 100%;
+}
+
+.#{$block-class}__grid-container::-webkit-scrollbar-thumb {
+  background-color: $text-03;
+}
+
+.#{$block-class}__grid-container table {
+  /* Removes additional scroll introduced by Carbon table */
+  overflow: hidden;
+
+  &.#{$block-class}__vertical-align-center {
+    .#{$block-class}__head {
+      .#{$carbon-prefix}--table-header-label {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        color: $text-01;
+      }
+    }
+
+    .#{$block-class}__cell {
+      align-items: center;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    td.#{$carbon-prefix}--table-column-checkbox,
+    th.#{$carbon-prefix}--table-column-checkbox {
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      padding-top: 0.6875rem;
+
+      &.#{$block-class}__checkbox-cell {
+        display: flex;
+        align-items: center;
+        padding-top: 0;
+      }
+    }
+
+    .#{$block-class}__checkbox-cell {
+      th.#{$carbon-prefix}--table-column-checkbox {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        padding-top: 0;
+      }
+    }
+
+    &.#{$block-class}__variable-row-height {
+      &.#{$carbon-prefix}--data-table--compact,
+      &.#{$carbon-prefix}--data-table--xs {
+        .#{$block-class}__cell {
+          padding-top: $spacing-01;
+          padding-bottom: $spacing-01;
+        }
+      }
+
+      &.#{$carbon-prefix}--data-table--short,
+      &.#{$carbon-prefix}--data-table--sm,
+      &.#{$carbon-prefix}--data-table--md {
+        .#{$block-class}__cell {
+          /* stylelint-disable-next-line carbon/layout-token-use */
+          padding-top: rem(7px);
+          /* stylelint-disable-next-line carbon/layout-token-use */
+          padding-bottom: rem(6px);
+        }
+      }
+
+      &.#{$carbon-prefix}--data-table--tall,
+      &.#{$carbon-prefix}--data-table--lg,
+      &.#{$carbon-prefix}--data-table--xl {
+        .#{$block-class}__cell {
+          padding-top: $spacing-05;
+          padding-bottom: $spacing-05;
+        }
+      }
+    }
+  }
+
+  &.#{$block-class}__vertical-align-top {
+    &.#{$carbon-prefix}--data-table--tall,
+    &.#{$carbon-prefix}--data-table--lg,
+    &.#{$carbon-prefix}--data-table--xl {
+      .#{$block-class}__cell {
+        padding-top: $spacing-05;
+      }
+
+      .#{$carbon-prefix}--table-header-label {
+        padding-top: $spacing-05;
+      }
+
+      .#{$carbon-prefix}--table-column-checkbox {
+        /* stylelint-disable-next-line carbon/layout-token-use */
+        padding-top: rem(13px);
+      }
+    }
+
+    &.#{$block-class}__variable-row-height {
+      &.#{$carbon-prefix}--data-table--tall,
+      &.#{$carbon-prefix}--data-table--lg,
+      &.#{$carbon-prefix}--data-table--xl {
+        .#{$block-class}__cell {
+          padding-bottom: $spacing-05;
+        }
+
+        .#{$carbon-prefix}--table-header-label {
+          padding-bottom: $spacing-05;
+        }
+      }
+    }
+  }
+
+  &.#{$block-class}__variable-row-height {
+    tr.#{$block-class}__carbon-row {
+      height: auto;
+    }
+  }
+}
+
+.#{$block-class}__grid-container {
+  display: block;
+  overflow: auto;
+  width: 100%;
+  padding-top: 0;
+
+  .#{$carbon-prefix}--data-table-content {
+    width: 100%;
+    height: 100%;
+    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+    overflow-x: unset;
+  }
+
+  .#{$block-class}__table-simple {
+    display: flex;
+    overflow: hidden;
+    max-height: 100%;
+    flex-direction: column;
+  }
+
+  .#{$block-class}__with-pagination tr:last-of-type > td {
+    border-bottom: none;
+  }
+
+  .#{$block-class}__head {
+    display: flex;
+  }
+
+  .#{$block-class}__head .header {
+    /* Each cell should grow equally */
+    width: 1%;
+    align-items: center;
+  }
+
+  .#{$block-class}__virtual-scrollbar {
+    //makes thin scrollbar in chrome and firefox
+    scrollbar-width: thin;
+  }
+
+  .#{$block-class}__virtual-scrollbar::-webkit-scrollbar-thumb {
+    background-color: $text-03;
+  }
+
+  .#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    background-color: $ui-background;
+  }
+
+  .#{$block-class}__cell {
+    display: flex;
+    /* Each cell should grow equally */
+    width: 1%;
+  }
+
+  .#{$block-class}__defaultStringRenderer {
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$block-class}__expanded-row {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+  }
+
+  .#{$block-class}__carbon-row {
+    /* stylelint-disable-next-line declaration-no-important */
+    flex: none !important;
+
+    .#{$block-class}__carbon-row:hover a {
+      /* stylelint-disable-next-line declaration-no-important */
+      color: $hover-primary-text !important;
+    }
+  }
+
+  .#{$carbon-prefix}--select-input {
+    -webkit-appearance: none; // could be fixed by post-css plugin
+  }
+
+  th.#{$carbon-prefix}--table-column-checkbox {
+    display: block;
+  }
+
+  td.#{$carbon-prefix}--table-column-checkbox,
+  th.#{$carbon-prefix}--table-column-checkbox {
+    /* stylelint-disable-next-line declaration-no-important */
+    padding-right: $spacing-06 !important;
+  }
+}
+
+.#{$block-class}__empty-state .#{$block-class}__table-simple {
+  display: table;
+  height: 100%;
+
+  .#{$pkg-prefix}--empty-state {
+    max-width: 280px;
+  }
+}
+
+.#{$block-class}__empty-state .#{$block-class}__table-simple tr:hover {
+  background: transparent;
+}
+
+.#{$block-class}__empty-state .#{$block-class}__table-simple tr:hover td {
+  background: transparent;
+}
+
+.#{$block-class}__empty-state .#{$block-class}__table-simple td {
+  padding: $spacing-11;
+}
+
+.#{$block-class}__empty-state .#{$block-class}__grid-container {
+  flex: 1 1 auto;
+}
+
+.#{$block-class}__resizer {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  width: $spacing-02;
+  height: 100%;
+  background: transparent;
+  touch-action: none;
+  transform: translateX(50%);
+}
+
+.#{$block-class}__resizer:hover {
+  background: transparent;
+}
+
+.#{$block-class}__sortableColumn:hover {
+  background-color: $hover-selected-ui;
+}
+
+.#{$block-class}__resizableColumn {
+  &.#{$block-class}__isResizing {
+    .#{$block-class}__resizer {
+      border-right: $spacing-01 solid $hover-secondary;
+    }
+  }
+
+  &.#{$block-class}__isSorted {
+    background-color: $hover-selected-ui;
+  }
+}
+
+.#{$block-class}__resizableColumn:hover {
+  background-color: $hover-selected-ui;
+
+  .#{$block-class}__resizer {
+    border-right: $spacing-01 solid $ui-04;
+    background-color: $hover-selected-ui;
+  }
+}
+
+.#{$block-class}__head-hidden-select-all {
+  padding-right: $spacing-08;
+}
+
+.#{$block-class}__simple-body {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  //makes thin scrollbar in chrome and firefox
+  scrollbar-width: thin;
+}
+
+.#{$block-class}__simple-body::-webkit-scrollbar-thumb {
+  background-color: $text-03;
+}
+
+.#{$block-class}__simple-body::-webkit-scrollbar {
+  width: 6px;
+  background-color: $ui-background;
+}
+
+.#{$block-class}__sticky.#{$block-class}__table-simple {
+  /* stylelint-disable-next-line declaration-no-important */
+  min-width: 0 !important;
+}
+
+.#{$block-class}__sticky.#{$block-class}__simple-body {
+  overflow: auto;
+}
+
+.#{$block-class}__sticky.#{$block-class}__table-simple thead > div {
+  overflow: hidden;
+  /* stylelint-disable-next-line declaration-no-important */
+  width: 100% !important;
+}
+
+.#{block-class}__displayFlex {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+}
+
+.#{$block-class}__datagridLeftPanel {
+  display: flex;
+  width: 388px; // as per UX specs.
+  height: 100%;
+  background-color: $ui-01;
+}
+
+.#{$block-class}__datagridWithPanel {
+  position: relative;
+  display: flex;
+  overflow: auto;
+  width: 100%;
+  flex-direction: column;
+}
+
+.#{$block-class}__carbon-row-expanded {
+  // Border applied to nested rows only on open chevron hover
+  &.#{$block-class}__carbon-row-expanded-hover-active
+    ~ .#{$block-class}__carbon-nested-row {
+    border-left: 1px solid $interactive-01;
+  }
+}

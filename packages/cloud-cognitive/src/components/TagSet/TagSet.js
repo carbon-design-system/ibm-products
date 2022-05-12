@@ -28,7 +28,7 @@ const allTagsModalSearchThreshold = 10;
 // Default values for props
 const defaults = {
   align: 'start',
-  allTagsModalTarget: document.body,
+  // allTagsModalTarget: document.body,
   overflowAlign: 'center',
   overflowDirection: 'bottom',
 };
@@ -39,7 +39,7 @@ export let TagSet = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
 
       align = defaults.align,
-      allTagsModalTarget = defaults.allTagsModalTarget,
+      allTagsModalTarget: allTagsModalTargetIn, // = defaults.allTagsModalTarget,
       className,
       maxVisible,
       overflowAlign = defaults.overflowAlign,
@@ -66,10 +66,21 @@ export let TagSet = React.forwardRef(
     const displayedArea = useRef(null);
     const [sizingTags, setSizingTags] = useState([]);
     const overflowTag = useRef(null);
+    const [allTagsModalTarget, setAllTagsModalTarget] = useState(null);
 
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);
     };
+
+    useEffect(() => {
+      if (allTagsModalTargetIn) {
+        setAllTagsModalTarget(allTagsModalTargetIn);
+      } else {
+        if (pkg.isFeatureEnabled('default-portal-target-body')) {
+          setAllTagsModalTarget(document.body);
+        }
+      }
+    }, [allTagsModalTargetIn]);
 
     useEffect(() => {
       const newSizingTags = [];
@@ -241,19 +252,17 @@ export let TagSet = React.forwardRef(
           </div>
         </div>
 
-        {allTagsModalTarget && tags && displayCount < tags.length
-          ? createPortal(
-              <TagSetModal
-                allTags={tags}
-                open={showAllModalOpen}
-                title={allTagsModalTitle}
-                onClose={handleModalClose}
-                searchLabel={allTagsModalSearchLabel}
-                searchPlaceholder={allTagsModalSearchPlaceholderText}
-              />,
-              allTagsModalTarget
-            )
-          : null}
+        {(allTagsModalTarget ? createPortal : (children) => children)(
+          <TagSetModal
+            allTags={tags}
+            open={showAllModalOpen}
+            title={allTagsModalTitle}
+            onClose={handleModalClose}
+            searchLabel={allTagsModalSearchLabel}
+            searchPlaceholder={allTagsModalSearchPlaceholderText}
+          />,
+          allTagsModalTarget
+        )}
       </div>
     );
   }
@@ -284,6 +293,7 @@ const TYPES = {
   'cool-gray': 'Cool-Gray',
   'warm-gray': 'Warm-Gray',
   'high-contrast': 'High-Contrast',
+  outline: 'Outline',
 };
 const tagTypes = Object.keys(TYPES);
 

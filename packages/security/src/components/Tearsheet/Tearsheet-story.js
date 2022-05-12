@@ -180,7 +180,7 @@ const buttons = () => ({
   },
 });
 
-storiesOf(patterns('Tearsheet'), module)
+storiesOf(patterns('Tearsheet#legacy'), module)
   .add(
     'Basic',
     () => (

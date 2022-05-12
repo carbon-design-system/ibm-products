@@ -68,7 +68,11 @@
   "words": [
     "apikey",
     "checkmark",
+    "buildhome",
+    "columnheader",
+    "colindex",
     "data-testid",
+    "gridcell",
     "homescreen",
     "loglevel",
     "noreply",
@@ -79,6 +83,8 @@
     "rerender",
     "resizer",
     "responsivity",
+    "rowheader",
+    "rowindex",
     "semibold",
     "serializers",
     "stackable",
@@ -94,5 +100,12 @@
     "treeview",
     "uuidv",
     "webfonts",
+    "Datagrid",
+    "datagrid",
+    "namor",
+    "Prefs",
+    "listbox",
+    "overscroll",
+    "rowgroup"
   ]
 }

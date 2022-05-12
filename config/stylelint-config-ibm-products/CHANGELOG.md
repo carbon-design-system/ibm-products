@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.12](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/stylelint-config-ibm-products@0.0.11...stylelint-config-ibm-products@0.0.12) (2022-05-10)
+
+**Note:** Version bump only for package stylelint-config-ibm-products
+
+
+
+
+
+## [0.0.11](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/stylelint-config-ibm-products@0.0.10...stylelint-config-ibm-products@0.0.11) (2022-05-03)
+
+**Note:** Version bump only for package stylelint-config-ibm-products
+
+
+
+
+
+## [0.0.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/stylelint-config-ibm-products@0.0.9...stylelint-config-ibm-products@0.0.10) (2022-04-26)
+
+**Note:** Version bump only for package stylelint-config-ibm-products
+
+
+
+
+
+## [0.0.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/stylelint-config-ibm-products@0.0.8...stylelint-config-ibm-products@0.0.9) (2022-04-05)
+
+**Note:** Version bump only for package stylelint-config-ibm-products
+
+
+
+
+
 ## [0.0.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/stylelint-config-ibm-products@0.0.7...stylelint-config-ibm-products@0.0.8) (2022-03-29)
 
 **Note:** Version bump only for package stylelint-config-ibm-products

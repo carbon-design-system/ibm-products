@@ -1,29 +1,30 @@
-# Canary Explained
+# Canary explained
 
 In case you were thinking what, why or how with regards to the Canary lines in
 the components...
 
-They were added to enable component feature flags, that is the enabling of
+They were added to enable component feature flags, that is, the enabling of
 components through user settings.
 
 This allowed the removal of the term/package `experimental` and permitted the
 publication of all components in a single package. Those that have not yet
-completed the release review process are considered to be `canary` and require
-the consumer to enable via a feature flag.
+completed the [release review](../reviews/RELEASE_REVIEW_GUIDELINES.md) process
+are considered to be `canary` and require the consumer to enable via a feature
+flag.
 
 See example component enabled via feature flags on
-[codesandbox](https://codesandbox.io/s/example-component-canary-olif5).
+[CodeSandbox](https://codesandbox.io/s/example-component-canary-olif5).
 
 ## When to use
 
 Only components that are to be used directly by our package consumers, those in
-`src/components/index.js`, need to have the Canary structure
+`src/components/index.js`, need to have the Canary structure.
 
 ## By the way
 
-As part of these changes the following also happened.
+As part of these changes, the following also happened.
 
-- `pkgPrefix` is gone instead now import `pkg` and use `pkg.prefix`.
+- `pkgPrefix` is gone — instead now import `pkg` and use `pkg.prefix`.
 - `getStoryId` was added to `../../global/js/utils/story-helper.js` to make
   building the story slug simpler in `.mdx` files.
 - `getStoryTitle` was added to `../../global/js/utils/story-helper.js` to make
@@ -77,18 +78,20 @@ canary or not. There is nothing further a component needs to do unless a
 different status is required for testing (which only currently happens for some
 full-package export tests).
 
-### The index file (src/components/index.js)
+### Exporting components
 
-A component is included in the public API by adding it here.
+A component is included in the public API by adding it to the index file
+(`src/components/index.js`).
 
 ```js
 export { ExampleComponent } from './ExampleComponent';
 ```
 
-### The feature flags file (src/global/js/package-settings.js)
+### Feature flags
 
-An entry is required for each published component in `defaults.component`. A
-published component will have the value true, a canary component false.
+An entry is required for each published component in `defaults.component` in the
+feature flags file (`src/global/js/package-settings.js`). A published component
+will have the value `true`, a canary component `false`.
 
 ```js
 const defaults = {

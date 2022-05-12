@@ -58,16 +58,19 @@ const defaults = {
     ToolbarButton: false,
     ToolbarGroup: false,
     WebTerminal: false,
+    WebTerminalContentWrapper: false,
     EditSidePanel: false,
     CancelableTextEdit: false,
     InlineEdit: false,
     DataSpreadsheet: false,
+    Datagrid: false,
     /* new component flags here - comment used by generate CLI */
   },
 
   // feature level flags
   feature: {
     'a-new-feature': false,
+    'default-portal-target-body': true,
   },
 };
 

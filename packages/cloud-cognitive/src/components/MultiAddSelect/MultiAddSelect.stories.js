@@ -84,6 +84,7 @@ const defaultProps = {
   itemsLabel: 'Business terms',
   metaIconDescription: 'View meta information',
   metaPanelTitle: 'Personal information',
+  navIconDescription: 'View children',
   noResultsTitle: 'No results',
   noSelectionDescription:
     'Select a term to include the full set of the governance artifacts it contains in the governance scope.',

@@ -169,7 +169,11 @@
     overflow-x: auto;
   }
 
-  .#{$block-class}__columns .#{$block-class}__selections-cell {
+  // table override
+  .#{$block-class}
+    .#{$block-class}__columns
+    .#{$carbon-prefix}--structured-list-td {
+    height: 0;
     // stylelint-disable-next-line
     padding: 0 !important;
   }
@@ -315,7 +319,9 @@
   }
 
   .#{$block-class} .#{$carbon-prefix}--structured-list-td {
-    padding-bottom: $spacing-05;
+    height: 4rem;
+    padding: $spacing-05;
+    vertical-align: middle;
   }
 
   .#{$block-class} .#{$carbon-prefix}--radio-button__appearance {

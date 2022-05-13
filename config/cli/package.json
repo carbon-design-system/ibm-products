@@ -36,6 +36,6 @@
     "prettier-config-carbon": "^0.6.0",
     "remark": "^14.0.2",
     "semver": "^7.3.7",
-    "yargs": "^17.4.1"
+    "yargs": "^17.5.0"
   }
 }

@@ -29,6 +29,7 @@ export let AddSelectList = ({
   modifiers,
   multi,
   multiSelection,
+  navIconDescription,
   path,
   setDisplayMetaPanel,
   setMultiSelection,
@@ -167,7 +168,16 @@ export let AddSelectList = ({
                     />
                   )}
                   {item.children && (
-                    <ChevronRight16 onClick={() => onNavigateItem(item)} />
+                    <Button
+                      renderIcon={ChevronRight16}
+                      iconDescription={navIconDescription}
+                      tooltipPosition="left"
+                      tooltipAlignment="center"
+                      hasIconOnly
+                      onClick={() => onNavigateItem(item)}
+                      kind="ghost"
+                      size="sm"
+                    />
                   )}
                   {item.meta && (
                     <div className={`${blockClass}-hidden-hover`}>
@@ -199,6 +209,7 @@ AddSelectList.propTypes = {
   modifiers: PropTypes.object,
   multi: PropTypes.bool,
   multiSelection: PropTypes.array,
+  navIconDescription: PropTypes.string,
   path: PropTypes.array,
   setDisplayMetaPanel: PropTypes.func,
   setMultiSelection: PropTypes.func,

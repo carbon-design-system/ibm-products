@@ -52,6 +52,7 @@ const defaultProps = {
     ],
   },
   itemsLabel: 'Categories',
+  navIconDescription: 'View children',
   noResultsTitle: 'No results',
   noResultsDescription: 'Try again',
   onCloseButtonText: 'Cancel',

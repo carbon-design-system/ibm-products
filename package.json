@@ -9,7 +9,14 @@
       "config/*",
       "packages/*"
     ],
-    "nohoist": []
+    "nohoist": [
+      "**/cdai",
+      "cdai/**",
+      "**/security",
+      "security/**",
+      "**/@carbon/grid",
+      "**/@carbon/import-once"
+    ]
   },
   "scripts": {
     "audit": "node scripts/audit.js dependencies moderate",

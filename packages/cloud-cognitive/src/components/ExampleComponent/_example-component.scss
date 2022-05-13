@@ -12,28 +12,20 @@
 // Button, ButtonSet
 @use '@carbon/react/scss/components/button';
 
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
-@mixin example-component {
-  // The block part of our conventional BEM class names (blockClass__E--M).
-  $block-class: #{$pkg-prefix}--example-component;
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{$pkg-prefix}--example-component;
 
-  .#{$block-class} {
-    display: flex;
-    justify-content: flex-end;
-    --#{$block-class}--border-color: transparent;
-  }
-
-  .#{$block-class}.#{$block-class}--boxed-set {
-    border: 10px solid var(--#{$block-class}--border-color);
-  }
-
-  .#{$block-class}.#{$block-class}--shadow-set {
-    margin: $spacing-04;
-    box-shadow: 0 0 10px var(--#{$block-class}--border-color);
-  }
+.#{$block-class} {
+  display: flex;
+  justify-content: flex-end;
+  --#{$block-class}--border-color: transparent;
 }
 
-@include exports('example-component') {
-  @include example-component;
+.#{$block-class}.#{$block-class}--boxed-set {
+  border: 10px solid var(--#{$block-class}--border-color);
+}
+
+.#{$block-class}.#{$block-class}--shadow-set {
+  margin: $spacing-04;
+  box-shadow: 0 0 10px var(--#{$block-class}--border-color);
 }

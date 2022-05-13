@@ -13,8 +13,6 @@
 @use '@carbon/type/scss/font-family' as *;
 @use '../../global/styles/mixins' as *;
 
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
 @mixin set-header-borders {
   border-right: 1px solid $text-placeholder;
   border-bottom: 1px solid $text-placeholder;

@@ -44,7 +44,7 @@
     "test:cdai": "lerna run --stream --scope @carbon/ibm-cloud-cognitive-cdai test --",
     "test:c4p": "lerna run --stream --scope @carbon/ibm-products test --",
     "test:security": "lerna run --stream --scope @carbon/ibm-security test --",
-    "spellcheck": "yarn -s spellcheck:files '**/*' '.github/**/*'",
+    "spellcheck": "yarn spellcheck:files '**/*' '.github/**/*'",
     "spellcheck:files": "cspell lint --relative --no-progress --show-context --no-must-find-files --gitignore",
     "storybook": "run-s -s storybook:build:dependencies storybook:start",
     "storybook:build": "run-s -s storybook:build:*",
@@ -95,10 +95,6 @@
   },
   "//resolutions:http-signature": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
-  "resolutions": {
-    "**/request/http-signature": "~1.3.0",
-    "**/request/minimist": "^1.2.6"
-  },
   "eslintConfig": {
     "parser": "@babel/eslint-parser",
     "extends": [
@@ -149,12 +145,13 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,md,mdx,scss}": "yarn -s lint:prettier:files",
-    "**/*.js": "yarn -s lint:es:files",
-    "**/*.scss": "yarn -s lint:style:files",
-    "**/*": "yarn -s spellcheck:files"
+    "**/*.{js,md,mdx,scss}": "yarn lint:prettier:files",
+    "**/*.js": "yarn lint:es:files",
+    "**/*.scss": "yarn lint:style:files",
+    "**/*": "yarn spellcheck:files"
   },
   "dependencies": {
     "stylelint-plugin-carbon-tokens": "0.12.0"
-  }
+  },
+  "packageManager": "yarn@3.2.1"
 }

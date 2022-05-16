@@ -29,12 +29,13 @@ export const getSpreadsheetWidth = ({
     }
   }
   if (totalVisibleColumns) {
-    let totalVisibleColumnWidth = 0;
-    visibleColumns.forEach((col, index) => {
-      if (index <= totalVisibleColumns - 1) {
-        totalVisibleColumnWidth += col.width || defaultColumn?.width;
-      }
-    });
+    const totalVisibleColumnWidth = visibleColumns
+      .map(
+        (item, index) =>
+          index <= totalVisibleColumns - 1 &&
+          (item?.width || defaultColumn?.width)
+      )
+      .reduce((prev, curr) => prev + curr, 0);
     return totalVisibleColumnWidth + additionalWidth;
   }
 };

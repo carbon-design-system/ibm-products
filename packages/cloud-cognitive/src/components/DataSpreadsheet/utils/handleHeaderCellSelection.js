@@ -51,7 +51,7 @@ export const handleHeaderCellSelection = ({
     matcher: tempMatcher,
     header: {
       type,
-      index,
+      index: type === 'column' ? columnValue : rowValue,
     },
   };
   setSelectionAreas((prev) => {

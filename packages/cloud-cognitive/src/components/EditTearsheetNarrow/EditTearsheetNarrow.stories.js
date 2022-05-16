@@ -41,13 +41,13 @@ export default {
 const createTearsheetNarrowBlockClass = `${pkg.prefix}--create-tearsheet-narrow--story`;
 
 const defaultStoryProps = {
-  title: 'Create partition',
+  title: 'Edit partition',
   className: 'test-class-name',
   description: 'Select the number of partitions you want to create',
   formTitle: 'Core configuration',
   formDescription:
     'We recommend you fill out and evaluate these details at a minimum before deploying your topic.',
-  primaryButtonText: 'Create',
+  primaryButtonText: 'Save',
   secondaryButtonText: 'Cancel',
   label: 'Test label',
   selectorPrimaryFocus: '#tearsheet-narrow-story-text-input--1',

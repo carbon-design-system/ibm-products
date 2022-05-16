@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2021, 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,26 +9,23 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-
-import { EditTearsheet } from '.';
-import { CreateTearsheet } from '../CreateTearsheet/CreateTearsheet';
-import { CreateTearsheetStep } from '../CreateTearsheet/CreateTearsheetStep';
+import styles from './_storybook-styles.scss';
+import { EditTearsheet } from './EditTearsheet';
+import { EditTearsheetStep } from './EditTearsheetStep';
 import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
-import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
 import mdx from './EditTearsheet.mdx';
-
-import styles from '../CreateTearsheet/_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(EditTearsheet.displayName),
-  component: CreateTearsheet,
+  component: EditTearsheet,
   subcomponents: {
-    CreateTearsheetStep,
+    EditTearsheetStep,
   },
   argTypes: {
     description: { control: { type: 'text' } },
     label: { control: { type: 'text' } },
     title: { control: { type: 'text' } },
+    influencer: { control: { disable: true } },
     onClose: { control: { disable: true } },
     navigation: { control: { disable: true } },
     open: { control: { disable: true } },
@@ -36,13 +33,13 @@ export default {
   parameters: { styles, docs: { page: mdx } },
 };
 
-const createTearsheetProps = {
-  title: 'Create topic',
-  description: 'Enter details of the topic you want to edit',
-  submitButtonText: 'Update',
+const editTearsheetProps = {
+  title: 'Edit topic',
+  description: 'Specify details for the topic you want to update',
+  submitButtonText: 'Save',
   cancelButtonText: 'Cancel',
   backButtonText: 'Back',
-  nextButtonText: 'Next',
+  nextButtonText: 'Save',
   className: 'test-class-name',
   label: '',
   influencerWidth: 'narrow',
@@ -51,13 +48,6 @@ const createTearsheetProps = {
 export const multiStepTearsheet = prepareStory(MultiStepTearsheet, {
   storyName: 'Edit tearsheet',
   args: {
-    ...createTearsheetProps,
-  },
-});
-
-export const withIntroStep = prepareStory(MultiStepWithIntro, {
-  storyName: 'Edit tearsheet with intro step',
-  args: {
-    ...createTearsheetProps,
+    ...editTearsheetProps,
   },
 });

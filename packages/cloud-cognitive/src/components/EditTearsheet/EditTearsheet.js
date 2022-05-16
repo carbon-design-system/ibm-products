@@ -1,81 +1,245 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React from 'react';
-
-// Other standard imports.
+import React, {
+  forwardRef,
+  useState,
+  useRef,
+  createContext,
+  useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-
+import {
+  Grid,
+  Form,
+  SideNav,
+  SideNavItems,
+  SideNavMenuItem,
+} from 'carbon-components-react';
+import wrapFocus from '../../global/js/utils/wrapFocus';
+import { TearsheetShell } from '../Tearsheet/TearsheetShell';
+import { pkg } from '../../settings';
+import {
+  usePreviousValue,
+  useValidCreateStepCount,
+  useResetCreateComponent,
+  useCreateComponentFocus,
+  useCreateComponentStepChange,
+} from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
+import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
 
-// Carbon and package components we use.
-/* TODO: @import(s) of carbon components and other package components. */
-
-// The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--edit-tearsheet`;
 const componentName = 'EditTearsheet';
+const blockClass = `${pkg.prefix}--tearsheet-edit`;
 
-// NOTE: the component SCSS is not imported here: it is rolled up separately.
+// This is a general context for the steps container
+// containing information about the state of the container
+// and providing some callback methods for steps to use
+export const StepsContext = createContext(null);
 
-// Default values can be included here and then assigned to the prop params,
-// e.g. prop = defaults.prop,
-// This gathers default values together neatly and ensures non-primitive
-// values are initialized early to avoid react making unnecessary re-renders.
-// Note that default values are not required for props that are 'required',
-// nor for props where the component can apply undefined values reasonably.
-// Default values should be provided when the component needs to make a choice
-// or assumption when a prop is not supplied.
+// This is a context supplied separately to each step in the container
+// to let it know what number it is in the sequence of steps
+export const StepNumberContext = createContext(-1);
 
 // Default values for props
-// const defaults = {
-//   /* TODO: add defaults for relevant props if needed */
-// };
+const defaults = {
+  verticalPosition: 'normal',
+  influencerWidth: 'narrow',
+};
 
-/**
- * TODO: A description of the component.
- */
-export let EditTearsheet = React.forwardRef(
+export let EditTearsheet = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
 
-      children /* TODO: remove if not needed. */,
+      backButtonText,
+      cancelButtonText,
+      children,
       className,
-      /* TODO: add other props for EditTearsheet, with default values if needed */
+      description,
+      influencerWidth = defaults.influencerWidth,
+      initialStep,
+      label,
+      nextButtonText,
+      onClose,
+      onRequestSubmit,
+      open,
+      submitButtonText,
+      title,
+      verticalPosition = defaults.verticalPosition,
 
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
-    return (
-      <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
-          {
-            // switched classes dependant on props or state
-            // example: [`${blockClass}__here-if-small`]: size === 'sm',
-          }
-        )}
-        ref={ref}
-        role="main"
-        {...getDevtoolsProps(componentName)}
-      >
-        {children}
+    const [editTearsheetActions, setEditTearsheetActions] = useState([]);
+    const [shouldViewAll, setShouldViewAll] = useState(false);
+    const [currentStep, setCurrentStep] = useState(0);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
+    const [onNext, setOnNext] = useState();
+    const [onMount, setOnMount] = useState();
+    const [stepData, setStepData] = useState([]);
+    const [firstIncludedStep, setFirstIncludedStep] = useState(1);
+    const [lastIncludedStep, setLastIncludedStep] = useState(null);
+
+    const previousState = usePreviousValue({ currentStep, open });
+    const contentRef = useRef();
+
+    useEffect(() => {
+      const firstItem =
+        stepData.findIndex((item) => item?.shouldIncludeStep) + 1;
+      const lastItem = lastIndexInArray(stepData, 'shouldIncludeStep', true);
+      if (firstItem !== firstIncludedStep) {
+        setFirstIncludedStep(firstItem);
+      }
+      if (lastItem !== lastIncludedStep) {
+        setLastIncludedStep(lastItem);
+      }
+    }, [stepData, firstIncludedStep, lastIncludedStep]);
+
+    useCreateComponentFocus({
+      previousState,
+      currentStep,
+      blockClass,
+      onMount,
+    });
+    useValidCreateStepCount(stepData.length, componentName);
+    useResetCreateComponent({
+      firstIncludedStep,
+      previousState,
+      open,
+      setCurrentStep,
+      initialStep,
+      totalSteps: stepData?.length,
+      componentName,
+    });
+    useCreateComponentStepChange({
+      firstIncludedStep,
+      lastIncludedStep,
+      stepData,
+      onNext,
+      isSubmitDisabled: isDisabled,
+      setCurrentStep,
+      setIsSubmitting,
+      setShouldViewAll,
+      onClose,
+      onRequestSubmit,
+      componentName,
+      currentStep,
+      shouldViewAll,
+      backButtonText,
+      cancelButtonText,
+      submitButtonText,
+      nextButtonText,
+      isSubmitting,
+      componentBlockClass: blockClass,
+      setCreateComponentActions: setEditTearsheetActions,
+    });
+
+    // adds focus trap functionality
+    /* istanbul ignore next */
+    const handleBlur = ({
+      target: oldActiveNode,
+      relatedTarget: currentActiveNode,
+    }) => {
+      const visibleStepInnerContent = document.querySelector(
+        `.${pkg.prefix}--tearsheet__body`
+      );
+      if (open && visibleStepInnerContent) {
+        wrapFocus({
+          bodyNode: visibleStepInnerContent,
+          currentActiveNode,
+          oldActiveNode,
+        });
+      }
+    };
+
+    const sideNavItems = [
+      { label: 'Topic Name' },
+      { label: 'Location' },
+      { label: 'Partitions' },
+      { label: 'Message retention' },
+    ];
+
+    const influencer = (
+      <div className="tearsheet-stories__dummy-influencer-block">
+        <SideNav
+          aria-label="Side navigation"
+          className={`${blockClass}__side-nav`}
+          expanded={true}
+          isFixedNav={false}
+        >
+          <SideNavItems>
+            {sideNavItems.map((item, index) => {
+              return (
+                <SideNavMenuItem
+                  key={index}
+                  href="javascript:void(0)"
+                  onClick={() => setCurrentStep(index)}
+                  isActive={currentStep === index}
+                >
+                  {item.label}
+                </SideNavMenuItem>
+              );
+            })}
+          </SideNavItems>
+        </SideNav>
       </div>
+    );
+
+    return (
+      <TearsheetShell
+        {...rest}
+        {...getDevtoolsProps(componentName)}
+        actions={editTearsheetActions}
+        className={cx(blockClass, className)}
+        description={description}
+        hasCloseIcon={false}
+        influencer={influencer}
+        influencerPosition="left"
+        influencerWidth={influencerWidth}
+        label={label}
+        onClose={onClose}
+        open={open}
+        size="wide"
+        title={title}
+        verticalPosition={verticalPosition}
+        ref={ref}
+      >
+        <div
+          className={`${blockClass}__content`}
+          onBlur={handleBlur}
+          ref={contentRef}
+        >
+          <Grid>
+            <Form>
+              <StepsContext.Provider
+                value={{
+                  currentStep,
+                  setIsDisabled,
+                  setOnNext: (fn) => setOnNext(() => fn),
+                  setOnMount: (fn) => setOnMount(() => fn),
+                  setStepData,
+                  stepData,
+                }}
+              >
+                {React.Children.map(children, (child, index) => (
+                  <StepNumberContext.Provider value={index}>
+                    {child}
+                  </StepNumberContext.Provider>
+                ))}
+              </StepsContext.Provider>
+            </Form>
+          </Grid>
+        </div>
+      </TearsheetShell>
     );
   }
 );
@@ -87,19 +251,99 @@ EditTearsheet = pkg.checkComponentEnabled(EditTearsheet, componentName);
 // is used in preference to relying on function.name.
 EditTearsheet.displayName = componentName;
 
-// The types and DocGen commentary for the component props,
-// in alphabetical order (for consistency).
-// See https://www.npmjs.com/package/prop-types#usage.
+// Note that the descriptions here should be kept in sync with those for the
+// corresponding props for TearsheetNarrow and TearsheetShell components.
 EditTearsheet.propTypes = {
   /**
-   * Provide the contents of the EditTearsheet.
+   * The back button text
    */
-  children: PropTypes.node.isRequired,
+  backButtonText: PropTypes.string.isRequired,
 
   /**
-   * Provide an optional class to be applied to the containing node.
+   * The cancel button text
+   */
+  cancelButtonText: PropTypes.string.isRequired,
+
+  /**
+   * The main content of the tearsheet
+   */
+  children: PropTypes.node,
+
+  /**
+   * An optional class or classes to be added to the outermost element.
    */
   className: PropTypes.string,
 
-  /* TODO: add types and DocGen for all props. */
+  /**
+   * A description of the flow, displayed in the header area of the tearsheet.
+   */
+  description: PropTypes.node,
+
+  /**
+   * The content for the influencer section of the tearsheet, displayed
+   * alongside the main content. This is typically a menu, or filter, or
+   * progress indicator, or similar.
+   */
+  influencer: PropTypes.element,
+
+  /**
+   * Used to set the size of the influencer
+   */
+  influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
+
+  /**
+   * This can be used to open the component to a step other than the first step.
+   * For example, a create flow was previously in progress, data was saved, and
+   * is now being completed.
+   */
+  initialStep: PropTypes.number,
+
+  /**
+   * A label for the tearsheet, displayed in the header area of the tearsheet
+   * to maintain context for the tearsheet (e.g. as the title changes from page
+   * to page of a multi-page task).
+   */
+  label: PropTypes.node,
+
+  /**
+   * The next button text
+   */
+  nextButtonText: PropTypes.string.isRequired,
+
+  /**
+   * An optional handler that is called when the user closes the tearsheet (by
+   * clicking the close button, if enabled, or clicking outside, if enabled).
+   * Returning `false` here prevents the modal from closing.
+   */
+  onClose: PropTypes.func,
+
+  /**
+   * Specify a handler for submitting the multi step tearsheet (final step).
+   * This function can _optionally_ return a promise that is either resolved or rejected and the EditTearsheet will handle the submitting state of the create button.
+   */
+  onRequestSubmit: PropTypes.func.isRequired,
+
+  /**
+   * Specifies whether the tearsheet is currently open.
+   */
+  open: PropTypes.bool,
+
+  /**
+   * The submit button text
+   */
+  submitButtonText: PropTypes.string.isRequired,
+
+  /**
+   * The main title of the tearsheet, displayed in the header area.
+   */
+  title: PropTypes.node,
+
+  /**
+   * The position of the top of tearsheet in the viewport. The 'normal'
+   * position (the default) is a short distance down from the top of the
+   * viewport, leaving room at the top for a global header bar to show through
+   * from below. The 'lower' position provides a little extra room at the top
+   * to allow an action bar navigation or breadcrumbs to also show through.
+   */
+  verticalPosition: PropTypes.oneOf(['normal', 'lower']),
 };

@@ -3,10 +3,8 @@ import {
   getStoryId,
   CodesandboxLink,
 } from '../../global/js/utils/story-helper';
-import { CreateTearsheet } from '../CreateTearsheet';
 import { EditTearsheet } from '.';
-import createTearsheetGif from '../CreateTearsheet/storybook_assets/create_tearsheet.gif';
-import createTearsheetAnatomy from '../CreateTearsheet/storybook_assets/create_tearsheet_anatomy.jpg';
+import editTearsheetAnatomy from './storybook_assets/edit-tearsheet-2.png';
 
 # EditTearsheet
 
@@ -20,44 +18,39 @@ import createTearsheetAnatomy from '../CreateTearsheet/storybook_assets/create_t
 
 When to use
 
-- Use a wide tearsheet with creations that have two or more distinct steps.
-- Omit the progress indicator to use with single step creations that require
-  more space, such as those with interactive selections, diagrams, or tables.
+- The create flow happened in a tear sheet.
+- A subset of the related item will be edited.
+- You want to keep the user in context instead of taking the user to a new page.
+- The amount of content is too much for a modal or narrow tear sheet.
+- The content is too complex for a modal or narrow tear sheet.
+- If the space to edit in the original location is too restricted (i.e. in a
+  narrow side panel), a tear sheet can provide more area to work.
 
 When not to use
 
-- Don’t use the wide tearsheet for low complexity create flows with only one
-  step.
+- Do not use when the edit actions are few/simple - consider using a modal
+  instead.
 
-Anatomy of CreateTearsheet
+Anatomy of EditTearsheet
 
-<img src={createTearsheetAnatomy} />
+<img src={editTearsheetAnatomy} />
 
-1. **Tearsheet & overlay**: Wide tearsheet component with screen overlay that
-   obscures the on-page content.
+1. **Header**: The header can include title, description, labels, and tabs. Must
+   include “Edit” in the title.
 
-2. **Create title**: Title line for the create flow with an optional
-   description.
+2. **Main content area**: This area includes the editable content.
 
-3. **Progress indicator**: Vertical progress indicator lets the user know what
-   step they are on.
+3. **Navigation buttons**: In most cases, the navigation buttons are limited to
+   primary and secondary buttons (“Save” and “Cancel”). If the edit flow
+   requires steps (not common), the Next/previous buttons serve as the primary
+   and secondary buttons until the last step, where the primary button is “Save”
+   (Cancel is the ghost button in this case).
 
-4. **Toggle (Optional)**: Optional toggle allows the user to view all available
-   options in one scrolling page with anchor links, this capability is coming
-   soon.
+4. **Influencer (optional)**: A left side panel that can be used, for example,
+   as a menu, progress indicator, or filter. Alternatively, a right side panel
+   can be used for a Summary (of changes).
 
-5. **Body**: Contains the information and/or controls needed to populate the
-   task. It can include message text and components. This will render the
-   children elements inside of a `CreateTearsheetStep`.
-
-6. **Buttons**: The primary, secondary, and ghost buttons are “Next”, “Back” and
-   “Cancel”, respectively. The “Back” button will be disabled on the first step.
-   The “Next” button will change to “Create” on the last step of creation.
-   “Cancel” closes the tearsheet and cancels the create action.
-
-Tearsheet create flow example:
-
-<img src={createTearsheetGif} />
+5. **Background overlay**: An overlay which appears same as in modals
 
 ## Example usage
 
@@ -66,12 +59,12 @@ Tearsheet create flow example:
 </Canvas>
 
 This is used when you have one section per step. This can be created by passing
-in the overall `<CreateTearsheet />` component and the `<CreateTearsheetStep />`
+in the overall `<EditTearsheet />` component and the `<EditTearsheetStep />`
 component with form items as children:
 
 ```jsx
-    <CreateTearsheet {...props}>
-      <CreateTearsheetStep
+    <EditTearsheet {...props}>
+      <EditTearsheetStep
           title="Required title"
           subtitle="Optional subtitle"
           description="Optional description"
@@ -84,22 +77,22 @@ component with form items as children:
           labelText="Topic name"
           placeholder="Enter topic name"
         />
-      </CreateTearsheetStep>
-    </CreateTearsheet>
+      </EditTearsheetStep>
+    </EditTearsheet>
 ```
 
 ## Using custom components
 
-It is possible to use custom components that return `CreateTearsheetStep`s in
+It is possible to use custom components that return `EditTearsheetStep`s in
 order to help reduce the amount of logic in the component that contains the main
-`CreateTearsheet`. _It is required that each child of the `CreateTearsheet`
-either be a custom step or a `CreateTearsheetStep`_. An example of this could
-look like the following:
+`EditTearsheet`. _It is required that each child of the `EditTearsheet` either
+be a custom step or a `EditTearsheetStep`_. An example of this could look like
+the following:
 
 ```jsx
 const CreateStepCustom = ({ subtitle, ...rest }) => {
   return (
-    <CreateTearsheetStep
+    <EditTearsheetStep
       {...rest}
       subtitle={subtitle}
       title="Step 1"
@@ -108,15 +101,15 @@ const CreateStepCustom = ({ subtitle, ...rest }) => {
       disableSubmit={false}
     >
       step content here
-    </CreateTearsheetStep>
+    </EditTearsheetStep>
   );
 };
 
 const CreateComponent = () => {
   return (
-    <CreateTearsheet {...createTearsheetProps}>
+    <EditTearsheet {...EditTearsheetProps}>
       <CreateStepCustom subtitle="Custom step subtitle" />
-      <CreateTearsheetStep
+      <EditTearsheetStep
         title="Topic name"
         fieldsetLegendText="Topic information"
         disableSubmit={!value}
@@ -125,8 +118,8 @@ const CreateComponent = () => {
         connection information, so make it something easy to recognize."
       >
         Content for second step
-      </CreateTearsheetStep>
-    </CreateTearsheet>
+      </EditTearsheetStep>
+    </EditTearsheet>
   );
 };
 ```
@@ -140,12 +133,12 @@ controlled via the `includeStep` prop. See abbreviated example below:
 ```jsx
 import { useState } from 'react';
 
-const CreateFlow = () => {
+const EditFlow = () => {
   const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] =
     useState(false);
   return (
-    <CreateTearsheet {...createTearsheetProps}>
-      <CreateTearsheetStep {...step1Props}>
+    <EditTearsheet {...EditTearsheetProps}>
+      <EditTearsheetStep {...step1Props}>
         Step 1 content
         <Checkbox
           labelText={`Include additional step`}
@@ -153,17 +146,15 @@ const CreateFlow = () => {
           onChange={(value) => setShouldIncludeAdditionalStep(value)}
           checked={shouldIncludeAdditionalStep}
         />
-      </CreateTearsheetStep>
-      <CreateTearsheetStep
+      </EditTearsheetStep>
+      <EditTearsheetStep
         {...step2Props}
         includeStep={shouldIncludeAdditionalStep}
       >
         Dynamic step content
-      </CreateTearsheetStep>
-      <CreateTearsheetStep {...step3Props}>
-        Final step content
-      </CreateTearsheetStep>
-    </CreateTearsheet>
+      </EditTearsheetStep>
+      <EditTearsheetStep {...step3Props}>Final step content</EditTearsheetStep>
+    </EditTearsheet>
   );
 };
 ```
@@ -183,7 +174,7 @@ sections, you can utilize the below included class names.
 
 ## Code sample
 
-<CodesandboxLink exampleDirectory="CreateTearsheet" />
+<CodesandboxLink exampleDirectory="EditTearsheet" />
 
 ## Component API
 

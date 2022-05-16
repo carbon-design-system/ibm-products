@@ -4,6 +4,7 @@ import {
   CodesandboxLink,
 } from '../../global/js/utils/story-helper';
 import { CreateFullPage } from '.';
+import editFullPageAnatomy from './storybook_assets/edit-full-page-1.png';
 
 # EditFullPage
 
@@ -18,10 +19,14 @@ import { CreateFullPage } from '.';
 
 When to use
 
-- In Carbon for IBM Products, the Full page create flow is the process the user
-  must complete in order to use a product or service.
-- In **IBM Cloud public**, it is the alternative to the Provisioning flow for a
-  non-billable service.
+- The user will want to submit multiple changes at once.
+- A full page needs the ability to toggle into an edit mode.
+- The main value of the object is its settings and it needs a “home” (i.e. its
+  own page), but having an extra view of all the settings in a static/uneditable
+  view is overkill. In this case, the page always shows the settings in editable
+  mode, and the save changes/cancel changes buttons are shown in a disabled
+  state until a change is detected.
+- Editing is done using a draft flow.
 
 When not to use
 
@@ -31,14 +36,20 @@ When not to use
   from the Catalog, or when creating a non-billable resource that could happen
   in a side panel/in context.
 
-## Grid
+Anatomy of EditFullPage
 
-The `CreateFullPage` component utilizes Carbons' grid system in the inner
-content of the main section inside of the component. You can read more guidance
-on the Carbon's grid system
-[here](https://www.carbondesignsystem.com/guidelines/2x-grid/overview). You can
-include `<Row>` and `<Column>` components inside of each `CreateFullPageStep`
-component to get the desired affect.
+<img src={editFullPageAnatomy} />
+
+1. **Editable content**: Everything in the page is editable and shown in the
+   editable state.
+
+2. **Save/cancel buttons**: Cancel changes and save changes buttons are always
+   shown as disabled until a change is detected on the page. Note that “changes”
+   is added to the button names in this case because the title of the page does
+   not have “Edit” in it. In a toggle use case where the content on the page was
+   static until the user turned on an edit mode, the title of the page would
+   change to “Edit [object]” and the buttons would be labeled “Cancel” and
+   “Save”.
 
 ## Example usage
 
@@ -48,7 +59,7 @@ the Create Full Page component, you'll need to have a minimum of two steps. If
 you are looking for a one step creation flow, consider Create Tearsheet, Create
 Side Panel, or Create Modal.
 
-#### Create Full Page
+#### Edit Full Page
 
 This is used when you have one section per step. This can be created by passing
 in the overall `<CreateFullPage />` component and the `<CreateFullPageStep />`
@@ -76,7 +87,7 @@ component with form items as children:
     </CreateFullPage>
 ```
 
-#### Create Full Page with Sections
+#### Edit Full Page with Sections
 
 This is used when you have several sections per step. This can be created by
 passing in the overall `<CreateFullPage />` component and the

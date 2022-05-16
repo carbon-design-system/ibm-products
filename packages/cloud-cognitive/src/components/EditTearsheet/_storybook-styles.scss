@@ -8,3 +8,48 @@
 @import '../../global/styles/project-settings';
 
 // TODO: add any additional styles used by EditTearsheet.stories.js
+
+$preview-block-class: #{$pkg-prefix}--tearsheet-edit-multi-step;
+
+.#{$preview-block-class}__description {
+  @include carbon--type-style('body-short-01');
+
+  padding-bottom: $spacing-04;
+}
+
+p.#{$preview-block-class}__description:last-of-type {
+  padding-bottom: $spacing-07;
+}
+
+.#{$preview-block-class}__heading {
+  @include carbon--font-weight('semibold');
+}
+
+.#{$preview-block-class}
+  .#{$pkg-prefix}--tearsheet__content
+  .#{$carbon-prefix}--form-item {
+  margin-bottom: $spacing-05;
+}
+
+.#{$prefix}--tile-group div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.#{$pkg-prefix}--tearsheet-edit-multi-step--custom-tile {
+  width: 280px;
+  height: 240px;
+  margin-right: $spacing-05;
+}
+
+.#{$pkg-prefix}--tearsheet-edit-multi-step--custom-tile
+  .#{$pkg-prefix}--empty-state__illustration.#{$pkg-prefix}--empty-state__illustration--lg {
+  min-width: 120px;
+  height: 120px;
+}
+
+.#{$pkg-prefix}--tearsheet-edit-multi-step--custom-tile-label {
+  position: absolute;
+  bottom: $spacing-05;
+  left: $spacing-05;
+}

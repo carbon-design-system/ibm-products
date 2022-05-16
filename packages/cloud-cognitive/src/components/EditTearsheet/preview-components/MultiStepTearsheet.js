@@ -17,32 +17,13 @@ import {
   TextInput,
   Toggle,
   NumberInput,
-  Checkbox,
 } from 'carbon-components-react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
-import { CreateTearsheet } from '../../CreateTearsheet';
-import { CreateTearsheetStep } from '../../CreateTearsheet/CreateTearsheetStep';
+import { EditTearsheet } from '../EditTearsheet';
+import { EditTearsheetStep } from '../EditTearsheetStep';
 
-const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
-
-const CustomStep = ({ value1, setValue1, ...rest }) => {
-  return (
-    <CreateTearsheetStep {...rest} disableSubmit={!value1}>
-      <Row>
-        <Column xlg={8} lg={8} md={8} sm={8}>
-          <TextInput
-            value={value1}
-            onChange={(event) => setValue1(event.target.value)}
-            id="custom-step-input"
-            labelText="Location"
-            placeholder="Enter location"
-          />
-        </Column>
-      </Row>
-    </CreateTearsheetStep>
-  );
-};
+const blockClass = `${pkg.prefix}--tearsheet-edit-multi-step`;
 
 export const MultiStepTearsheet = ({
   backButtonText,
@@ -59,34 +40,29 @@ export const MultiStepTearsheet = ({
   const [open, setOpen] = useState(false);
   const [shouldReject, setShouldReject] = useState(false);
   const [hasSubmitError, setHasSubmitError] = useState(false);
-  const [value1, setValue1] = useState('');
-  const [stepOneTextInputValue, setStepOneTextInputValue] = useState(
-    'Enter topic name here'
-  );
+  const [stepOneTextInputValue, setStepOneTextInputValue] =
+    useState('Topic name here');
   const [topicDescriptionValue, setTopicDescriptionValue] = useState(
-    'Enter description here'
+    'Topic description here'
   );
-  const [topicVersionValue, setTopicVersionValue] = useState(
-    'Enter topic version here'
-  );
+  const [topicVersionValue, setTopicVersionValue] =
+    useState('Topic value here');
+  const [topicLocationValue, setTopicLocationValue] = useState('Location here');
   const [stepTwoTextInputValue, setStepTwoTextInputValue] = useState(1);
   const [stepThreeTextInputValue, setStepThreeTextInputValue] =
     useState('one-day');
   const [isInvalid, setIsInvalid] = useState(false);
-  const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] =
-    useState(false);
 
   const clearCreateData = () => {
     setStepOneTextInputValue(stepOneTextInputValue);
     setTopicDescriptionValue(topicDescriptionValue);
     setTopicVersionValue(topicVersionValue);
+    setTopicLocationValue(topicLocationValue);
     setStepTwoTextInputValue(1);
     setStepThreeTextInputValue('one-day');
     setHasSubmitError(false);
     setIsInvalid(false);
     setOpen(false);
-    setValue1('');
-    setShouldIncludeAdditionalStep(false);
   };
 
   return (
@@ -95,7 +71,7 @@ export const MultiStepTearsheet = ({
       <Button onClick={() => setOpen(!open)}>
         {open ? 'Close EditTearsheet' : 'Open EditTearsheet'}
       </Button>
-      <CreateTearsheet
+      <EditTearsheet
         influencerWidth={influencerWidth}
         label={label}
         className={cx(blockClass, className)}
@@ -116,14 +92,14 @@ export const MultiStepTearsheet = ({
           })
         }
       >
-        <CreateTearsheetStep
+        <EditTearsheetStep
           onNext={() => {
             return new Promise((resolve, reject) => {
               setTimeout(() => {
                 // Example usage of how to prevent the next step if some kind
                 // of error occurred during the `onNext` handler.
                 if (shouldReject) {
-                  setHasSubmitError(true);
+                  setHasSubmitError(false);
                   reject();
                 }
                 setIsInvalid(false);
@@ -190,41 +166,63 @@ export const MultiStepTearsheet = ({
                 labelText="Simulate error"
                 onToggle={(event) => setShouldReject(event)}
               />
-              <Checkbox
-                labelText={`Include additional step`}
-                id="include-additional-step-checkbox"
-                onChange={(value) => setShouldIncludeAdditionalStep(value)}
-                checked={shouldIncludeAdditionalStep}
-              />
             </Column>
           </Row>
-        </CreateTearsheetStep>
-        <CreateTearsheetStep
-          title="Dynamic step"
-          subtitle="Dynamic step subtitle"
-          description="This is an example showing how to include a dynamic step into the CreateTearsheet"
-          hasFieldset={false}
-          includeStep={shouldIncludeAdditionalStep}
-        >
-          dynamic step content
-        </CreateTearsheetStep>
-        <CustomStep
+        </EditTearsheetStep>
+        <EditTearsheetStep
           title="Location"
           subtitle="Custom step subtitle"
           description="Custom step description (see storybook implementation for new custom step capability)"
-          value1={value1}
-          setValue1={setValue1}
-          hasFieldset={false}
-        />
-        <CreateTearsheetStep
+          onNext={() => {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                // Example usage of how to prevent the next step if some kind
+                // of error occurred during the `onNext` handler.
+                if (shouldReject) {
+                  setHasSubmitError(false);
+                  reject();
+                }
+                setIsInvalid(false);
+                resolve();
+              }, simulatedDelay);
+            });
+          }}
+        >
+          <Row>
+            <Column xlg={8} lg={8} md={8} sm={8}>
+              <TextInput
+                value={topicLocationValue}
+                onChange={(event) => setTopicLocationValue(event.target.value)}
+                id="custom-step-input"
+                labelText="Location"
+                placeholder="Enter location"
+              />
+            </Column>
+          </Row>
+        </EditTearsheetStep>
+        <EditTearsheetStep
           title="Partitions"
-          disableSubmit={!stepTwoTextInputValue}
+          disableSubmit={false}
           subtitle="One or more partitions make up a topic. A partition is an ordered
           list of messages."
           description="Partitions are distributed across the brokers in order to increase
           the scalability of your topic. You can also use them to distribute
           messages across the members of a consumer group."
           fieldsetLegendText="Partition information"
+          onNext={() => {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                // Example usage of how to prevent the next step if some kind
+                // of error occurred during the `onNext` handler.
+                if (shouldReject) {
+                  setHasSubmitError(false);
+                  reject();
+                }
+                setIsInvalid(false);
+                resolve();
+              }, simulatedDelay);
+            });
+          }}
         >
           <Row>
             <Column xlg={3} lg={3}>
@@ -242,15 +240,28 @@ export const MultiStepTearsheet = ({
               />
             </Column>
           </Row>
-        </CreateTearsheetStep>
-        <CreateTearsheetStep
+        </EditTearsheetStep>
+        <EditTearsheetStep
           title="Message retention"
-          disableSubmit={!stepThreeTextInputValue}
-          onNext={() => Promise.resolve()}
+          disableSubmit={false}
           subtitle="This is how long messages are retained before they are deleted."
           description="If your messages are not read by a consumer within this time, they
           will be missed."
           fieldsetLegendText="Message retention scheduling"
+          onNext={() => {
+            return new Promise((resolve, reject) => {
+              setTimeout(() => {
+                // Example usage of how to prevent the next step if some kind
+                // of error occurred during the `onNext` handler.
+                if (shouldReject) {
+                  setHasSubmitError(true);
+                  reject();
+                }
+                setIsInvalid(false);
+                resolve();
+              }, simulatedDelay);
+            });
+          }}
         >
           <Row>
             <Column xlg={8} lg={8} md={8} sm={8}>
@@ -275,8 +286,8 @@ export const MultiStepTearsheet = ({
               </RadioButtonGroup>
             </Column>
           </Row>
-        </CreateTearsheetStep>
-      </CreateTearsheet>
+        </EditTearsheetStep>
+      </EditTearsheet>
     </div>
   );
 };

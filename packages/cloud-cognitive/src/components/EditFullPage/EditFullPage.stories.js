@@ -55,8 +55,8 @@ export default {
 const defaultFullPageProps = {
   nextButtonText: 'Next',
   backButtonText: 'Back',
-  cancelButtonText: 'Cancel',
-  submitButtonText: 'Update',
+  cancelButtonText: 'Cancel changes',
+  submitButtonText: 'Save changes',
   modalTitle: 'Are you sure you want to cancel?',
   modalDescription:
     "If you cancel, the information you have entered won't be saved.",
@@ -439,13 +439,13 @@ const TemplateWithSections = ({ ...args }) => {
   );
 };
 
-export const createFullPage = prepareStory(Template, {
+export const editFullPage = prepareStory(Template, {
   args: {
     ...defaultFullPageProps,
   },
 });
 
-export const createFullPageWithSections = prepareStory(TemplateWithSections, {
+export const editFullPageWithSections = prepareStory(TemplateWithSections, {
   args: {
     ...defaultFullPageProps,
   },

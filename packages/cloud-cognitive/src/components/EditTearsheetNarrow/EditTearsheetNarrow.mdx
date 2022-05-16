@@ -5,7 +5,7 @@ import {
 } from '../../global/js/utils/story-helper';
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow/CreateTearsheetNarrow';
 import { EditTearsheetNarrow } from './EditTearsheetNarrow';
-import narrowTearsheet from '../CreateTearsheetNarrow/storybook_assets/NarrowTearsheetAnatomy.jpg';
+import editNarrowTearsheet from './storybook_assets/edit-tearsheet-1.png';
 
 # EditTearsheetNarrow
 
@@ -19,16 +19,33 @@ import narrowTearsheet from '../CreateTearsheetNarrow/storybook_assets/NarrowTea
 
 ### When to use
 
-- Use a narrow tearsheet as an alternative to a modal when there is scrolling.
-- Use when the form fields can be broken down into sections using section
-  headers.
+- The original create flow was in a narrow tear sheet.
+- There are enough edits to require scrolling.
+- The content is more complex than what is allowed in a modal.
 
 ### When not to use
 
-- Don’t use if the flow has high complexity and the user would benefit from
-  having a visible progress indicator.
+- The task is too small to warrant the tear sheet (i.e., only one field needs to
+  be edited) - use inline edit or a modal instead.
+- The user needs to interact with, compare, or have full view of the rest of the
+  screen’s content.
+- Input is required before a user can proceed - use a modal instead.
+- If there is a large amount of editable content or complex/multi -step
+  interactions needed - use a large tear sheet or side panel instead.
 
-<img src={narrowTearsheet} alt="Example of EditTearsheetNarrow component" />
+Anatomy of EditTearsheet
+
+<img src={editNarrowTearsheet} alt="Example of EditTearsheetNarrow component" />
+
+1. **Header**: The header can include title, description, labels, and tabs.
+   Always include “Edit” in the title.
+
+2. **Main content area**: This area includes the editable content.
+
+3. **Save/cancel buttons**: The primary and secondary buttons are “Save” and
+   “Cancel”.
+
+4. **Background overlay**: An overlay which appears same as in modals
 
 ## Example usage
 

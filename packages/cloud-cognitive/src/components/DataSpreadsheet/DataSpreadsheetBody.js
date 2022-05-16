@@ -461,7 +461,7 @@ export const DataSpreadsheetBody = forwardRef(
                   style={{
                     ...cell.getCellProps().style,
                     display: 'grid',
-                    minWidth: defaultColumn?.width,
+                    minWidth: cell?.column?.width || defaultColumn?.width,
                   }}
                 >
                   <button
@@ -519,6 +519,7 @@ export const DataSpreadsheetBody = forwardRef(
             totalVisibleColumns,
             defaultColumn,
             totalColumnsWidth,
+            visibleColumns,
           })}
           outerRef={contentScrollRef}
         >

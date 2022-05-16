@@ -823,6 +823,7 @@ export let DataSpreadsheet = React.forwardRef(
             updateActiveCellCoordinates={updateActiveCellCoordinates}
             setHeaderCellHoldActive={setHeaderCellHoldActive}
             headerCellHoldActive={headerCellHoldActive}
+            visibleColumns={visibleColumns}
           />
 
           {/* BODY */}

@@ -39,6 +39,7 @@ export const DataSpreadsheetHeader = forwardRef(
       updateActiveCellCoordinates,
       setHeaderCellHoldActive,
       headerCellHoldActive,
+      visibleColumns,
     },
     ref
   ) => {
@@ -141,6 +142,7 @@ export const DataSpreadsheetHeader = forwardRef(
                 scrollBarSizeValue,
                 totalVisibleColumns,
                 defaultColumn,
+                visibleColumns,
               }),
               overflow: 'hidden',
             }}
@@ -328,4 +330,9 @@ DataSpreadsheetHeader.propTypes = {
    * Function used to update the active cell coordinates
    */
   updateActiveCellCoordinates: PropTypes.func,
+
+  /**
+   * Array of visible columns provided by react-table useTable hook
+   */
+  visibleColumns: PropTypes.array,
 };

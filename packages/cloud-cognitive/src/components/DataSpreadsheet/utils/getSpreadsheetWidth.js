@@ -14,6 +14,7 @@ export const getSpreadsheetWidth = ({
   totalVisibleColumns,
   defaultColumn,
   totalColumnsWidth,
+  visibleColumns,
 }) => {
   const additionalWidth = scrollBarSizeValue + defaultColumn.rowHeaderWidth;
   if (!totalVisibleColumns) {
@@ -28,6 +29,12 @@ export const getSpreadsheetWidth = ({
     }
   }
   if (totalVisibleColumns) {
-    return totalVisibleColumns * defaultColumn?.width + additionalWidth;
+    let totalVisibleColumnWidth = 0;
+    visibleColumns.forEach((col, index) => {
+      if (index <= totalVisibleColumns - 1) {
+        totalVisibleColumnWidth += col.width || defaultColumn?.width;
+      }
+    });
+    return totalVisibleColumnWidth + additionalWidth;
   }
 };

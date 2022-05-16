@@ -58,7 +58,7 @@
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
     "fs-extra": "^10.1.0",
-    "glob": "^8.0.2",
+    "glob": "^8.0.3",
     "jest": "^28.1.0",
     "jest-config-ibm-cloud-cognitive": "^0.23.18",
     "jest-environment-jsdom": "^28.1.0",

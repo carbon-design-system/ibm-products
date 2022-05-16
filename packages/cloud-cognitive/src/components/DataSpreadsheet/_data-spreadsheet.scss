@@ -219,7 +219,7 @@
     .#{$block-class}__th--selected-header,
     .#{$block-class}__td-th--selected-header.#{$block-class}__td {
       background-color: $inverse-02;
-      color: $text-04;
+      color: $inverse-01;
 
       &:focus,
       &:hover {

@@ -13,6 +13,7 @@ export const moveColumnIndicatorLine = ({
   clonedSelectionElement,
   ref,
   spreadsheetCoords,
+  leftScrollAmount,
 }) => {
   const closestCell = event.target.closest(
     `.${blockClass}--interactive-cell-element`
@@ -34,12 +35,13 @@ export const moveColumnIndicatorLine = ({
       closestCellCoords.left -
         spreadsheetCoords.left +
         closestCell.offsetWidth -
-        2
+        2 +
+        leftScrollAmount
     );
   }
   if (Number(newColumnIndex) < Number(originalColumnIndex)) {
     indicatorLineElement.style.left = px(
-      closestCellCoords.left - spreadsheetCoords.left
+      closestCellCoords.left - spreadsheetCoords.left + leftScrollAmount
     );
   }
   if (Number(newColumnIndex) === Number(originalColumnIndex)) {

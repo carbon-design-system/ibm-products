@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.18.0...@carbon/ibm-products@1.18.1) (2022-05-17)
+
+
+### Bug Fixes
+
+* add select meta panel ([#1983](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1983)) ([5d06c18](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5d06c180a1e9236e53c6b7d9c738b52f299153a1))
+* converts chevron in add select to button ([#1988](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1988)) ([69c9b72](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/69c9b722a3f20afe89a4ebec13da10fe845650e3))
+* data table empty state ([#1969](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1969)) ([512655d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/512655d8eb887436d61a8417b275994f14e34567))
+* **DataSpreadsheet:**  spreadsheet total visible columns fix ([#1991](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1991)) ([10e931a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/10e931a6fe933e17674fb76a79cc2c467120eb19))
+* **DataSpreadsheet:** selected row/column cell header fixes ([#1990](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1990)) ([9ccc157](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9ccc157b9062ba3b0165bfe08899e95e0dd1c87a))
+
+
+
+
+
 # [1.18.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.17.0...@carbon/ibm-products@1.18.0) (2022-05-10)
 
 

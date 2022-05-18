@@ -65,10 +65,14 @@ export const MultiStepTearsheet = ({
     setOpen(false);
   };
 
+  const handleModalClick = () => {
+    setOpen(!open);
+  };
+
   return (
     <div>
       <style>{`.${blockClass} { opacity: 0 }`};</style>
-      <Button onClick={() => setOpen(!open)}>
+      <Button onClick={handleModalClick}>
         {open ? 'Close EditTearsheet' : 'Open EditTearsheet'}
       </Button>
       <EditTearsheet
@@ -82,6 +86,7 @@ export const MultiStepTearsheet = ({
         description={description}
         title={title}
         open={open}
+        onHandleModalClick={handleModalClick}
         onClose={clearCreateData}
         onRequestSubmit={() =>
           new Promise((resolve) => {

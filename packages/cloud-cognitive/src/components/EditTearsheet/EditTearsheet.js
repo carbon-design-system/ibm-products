@@ -21,8 +21,6 @@ import {
   SideNavItems,
   SideNavMenuItem,
 } from 'carbon-components-react';
-import wrapFocus from '../../global/js/utils/wrapFocus';
-import { TearsheetShell } from '../Tearsheet/TearsheetShell';
 import { pkg } from '../../settings';
 import {
   usePreviousValue,
@@ -33,6 +31,7 @@ import {
 } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
+import { Tearsheet } from '../Tearsheet/Tearsheet';
 
 const componentName = 'EditTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-edit`;
@@ -72,6 +71,7 @@ export let EditTearsheet = forwardRef(
       submitButtonText,
       title,
       verticalPosition = defaults.verticalPosition,
+      onHandleModalClick,
 
       // Collect any other property values passed in.
       ...rest
@@ -114,7 +114,6 @@ export let EditTearsheet = forwardRef(
     useResetCreateComponent({
       firstIncludedStep,
       previousState,
-      open,
       setCurrentStep,
       initialStep,
       totalSteps: stepData?.length,
@@ -143,24 +142,6 @@ export let EditTearsheet = forwardRef(
       setCreateComponentActions: setEditTearsheetActions,
     });
 
-    // adds focus trap functionality
-    /* istanbul ignore next */
-    const handleBlur = ({
-      target: oldActiveNode,
-      relatedTarget: currentActiveNode,
-    }) => {
-      const visibleStepInnerContent = document.querySelector(
-        `.${pkg.prefix}--tearsheet__body`
-      );
-      if (open && visibleStepInnerContent) {
-        wrapFocus({
-          bodyNode: visibleStepInnerContent,
-          currentActiveNode,
-          oldActiveNode,
-        });
-      }
-    };
-
     const sideNavItems = [
       { label: 'Topic Name' },
       { label: 'Location' },
@@ -181,7 +162,7 @@ export let EditTearsheet = forwardRef(
               return (
                 <SideNavMenuItem
                   key={index}
-                  href="javascript:void(0)"
+                  href="!#"
                   onClick={() => setCurrentStep(index)}
                   isActive={currentStep === index}
                 >
@@ -195,10 +176,24 @@ export let EditTearsheet = forwardRef(
     );
 
     return (
-      <TearsheetShell
+      <Tearsheet
         {...rest}
         {...getDevtoolsProps(componentName)}
-        actions={editTearsheetActions}
+        actions={
+          (editTearsheetActions,
+          [
+            {
+              label: 'Save',
+              onClick: onHandleModalClick,
+              kind: 'primary',
+            },
+            {
+              label: 'Cancel',
+              onClick: onHandleModalClick,
+              kind: 'secondary',
+            },
+          ])
+        }
         className={cx(blockClass, className)}
         description={description}
         hasCloseIcon={false}
@@ -213,11 +208,7 @@ export let EditTearsheet = forwardRef(
         verticalPosition={verticalPosition}
         ref={ref}
       >
-        <div
-          className={`${blockClass}__content`}
-          onBlur={handleBlur}
-          ref={contentRef}
-        >
+        <div className={`${blockClass}__content`} ref={contentRef}>
           <Grid>
             <Form>
               <StepsContext.Provider
@@ -239,7 +230,7 @@ export let EditTearsheet = forwardRef(
             </Form>
           </Grid>
         </div>
-      </TearsheetShell>
+      </Tearsheet>
     );
   }
 );
@@ -316,6 +307,11 @@ EditTearsheet.propTypes = {
    * Returning `false` here prevents the modal from closing.
    */
   onClose: PropTypes.func,
+
+  /**
+   * Specifies whether the tearsheet is currently open.
+   */
+  onHandleModalClick: PropTypes.func,
 
   /**
    * Specify a handler for submitting the multi step tearsheet (final step).

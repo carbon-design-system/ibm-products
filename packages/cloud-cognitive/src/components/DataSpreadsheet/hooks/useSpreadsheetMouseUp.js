@@ -60,8 +60,12 @@ export const useSpreadsheetMouseUp = ({
           const spreadsheetPosition = ref.current.getBoundingClientRect();
           const newIndexPosition =
             columnToMoveToElement.getBoundingClientRect();
+          const listContainer = ref.current.querySelector(
+            `.${blockClass}__list--container`
+          );
+          const leftScrollAmount = listContainer.scrollLeft;
           const relativeNewPosition =
-            newIndexPosition.left - spreadsheetPosition.left;
+            newIndexPosition.left - spreadsheetPosition.left + leftScrollAmount;
           const cloneColumnWidth = selectionAreaCloneElement.offsetWidth;
           let columnsWidthUpToNewIndex = 0;
           const newIndexLessThanStarting = newColumnIndex < originalColumnIndex;

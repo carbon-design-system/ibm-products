@@ -12,6 +12,10 @@
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin set-header-borders {
+  border-right: 1px solid $active-ui;
+  border-bottom: 1px solid $active-ui;
+}
+@mixin set-active-header-borders {
   border-right: 1px solid $text-03;
   border-bottom: 1px solid $text-03;
 }
@@ -214,6 +218,8 @@
     }
     .#{$block-class}__th--active-header,
     .#{$block-class}__td-th--active-header.#{$block-class}__td {
+      @include set-active-header-borders();
+
       background-color: $hover-selected-ui;
     }
     .#{$block-class}__th--selected-header,

@@ -55,3 +55,4 @@ node_modules
 package-lock.json
 
 // cspell:enable
+.yarn/install-state.gz

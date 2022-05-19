@@ -29,8 +29,8 @@
   },
   "scripts": {
     "build": "run-s clean build-all",
-    "build-all": "run-p build:*",
-    "build:css": "run-s build:css:*",
+    "build-all": "run-p 'build:*'",
+    "build:css": "run-s 'build:css:*'",
     "build:css:compile": "sass -I ../../node_modules -I node_modules --no-source-map src/index.scss:css/index.css",
     "build:css:minify": "cleancss -b --batch-suffix '.min' -O2 css/*.css",
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",

@@ -34,7 +34,7 @@
   },
   "scripts": {
     "build": "run-s clean build-first build-all",
-    "build-all": "run-p build:*",
+    "build-all": "run-p 'build:*'",
     "build-first": "copyfiles 'src/**/*.scss' scss -u 1",
     "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules scss:css",
     "build:css-min": "sass --style=compressed --load-path node_modules --load-path ../../node_modules scss/index.scss:css/index.min.css scss/index-full-carbon.scss:css/index-full-carbon.min.css scss/index-without-carbon.scss:css/index-without-carbon.min.css scss/index-without-carbon-released-only.scss:css/index-without-carbon-released-only.min.css",

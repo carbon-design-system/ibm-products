@@ -50,7 +50,7 @@
     "storybook:build:dependencies": "yarn run-all --include-dependencies --scope \"@carbon/storybook-addon-theme\" build",
     "storybook:build:storybook": "cd packages/core && yarn build",
     "storybook:start": "cd packages/core && yarn start",
-    "sync": "yarn carbon-cli sync",
+    "sync": "carbon-cli sync",
     "test-report": "component-usage-report ./examples/*/**/src/*.js",
     "update-gallery-config": "node scripts/example-gallery-builder/index.js; yarn format:prettier:files examples/carbon-for-ibm-products/example-gallery/src/gallery-config/index.js --write",
     "//upgrade:dependencies:top": "# don't upgrade carbon (done globally), react/react-dom (not tested)",

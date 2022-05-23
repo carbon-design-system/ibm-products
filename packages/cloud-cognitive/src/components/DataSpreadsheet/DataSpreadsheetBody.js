@@ -200,6 +200,7 @@ export const DataSpreadsheetBody = forwardRef(
       rows,
       activeCellCoordinates,
       defaultColumn,
+      selectionAreas,
     });
 
     // Make sure that if the cellSize prop changes, the active
@@ -487,7 +488,12 @@ export const DataSpreadsheetBody = forwardRef(
                         activeCellCoordinates?.row === index ||
                         checkActiveHeaderCell(index, selectionAreas, 'row'),
                       [`${blockClass}__td-th--selected-header`]:
-                        checkSelectedHeaderCell(index, selectionAreas, 'row'),
+                        checkSelectedHeaderCell(
+                          index,
+                          selectionAreas,
+                          'row',
+                          columns
+                        ),
                     }
                   )}
                   style={{
@@ -542,6 +548,7 @@ export const DataSpreadsheetBody = forwardRef(
         handleBodyCellClick,
         handleBodyCellHover,
         defaultColumn,
+        columns,
       ]
     );
 

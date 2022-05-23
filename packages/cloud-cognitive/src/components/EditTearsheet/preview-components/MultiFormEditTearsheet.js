@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2022, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,26 +21,22 @@ import {
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 import { EditTearsheet } from '../EditTearsheet';
-import { EditTearsheetStep } from '../EditTearsheetStep';
+import { EditTearsheetForm } from '../EditTearsheetForm';
 
-const blockClass = `${pkg.prefix}--tearsheet-edit-multi-step`;
+const blockClass = `${pkg.prefix}--tearsheet-edit-multi-form`;
 
-export const MultiStepTearsheet = ({
-  backButtonText,
+export const MultiFormEditTearsheet = ({
   cancelButtonText,
   className,
   description,
   influencerWidth,
   label,
-  nextButtonText,
   submitButtonText,
   title,
 }) => {
-  const [simulatedDelay] = useState(750);
   const [open, setOpen] = useState(false);
-  const [shouldReject, setShouldReject] = useState(false);
   const [hasSubmitError, setHasSubmitError] = useState(false);
-  const [stepOneTextInputValue, setStepOneTextInputValue] =
+  const [formOneTextInputValue, setFormOneTextInputValue] =
     useState('Topic name here');
   const [topicDescriptionValue, setTopicDescriptionValue] = useState(
     'Topic description here'
@@ -48,18 +44,18 @@ export const MultiStepTearsheet = ({
   const [topicVersionValue, setTopicVersionValue] =
     useState('Topic value here');
   const [topicLocationValue, setTopicLocationValue] = useState('Location here');
-  const [stepTwoTextInputValue, setStepTwoTextInputValue] = useState(1);
-  const [stepThreeTextInputValue, setStepThreeTextInputValue] =
+  const [formTwoTextInputValue, setFormTwoTextInputValue] = useState(1);
+  const [formThreeTextInputValue, setFormThreeTextInputValue] =
     useState('one-day');
   const [isInvalid, setIsInvalid] = useState(false);
 
   const clearCreateData = () => {
-    setStepOneTextInputValue(stepOneTextInputValue);
+    setFormOneTextInputValue(formOneTextInputValue);
     setTopicDescriptionValue(topicDescriptionValue);
     setTopicVersionValue(topicVersionValue);
     setTopicLocationValue(topicLocationValue);
-    setStepTwoTextInputValue(1);
-    setStepThreeTextInputValue('one-day');
+    setFormTwoTextInputValue(1);
+    setFormThreeTextInputValue('one-day');
     setHasSubmitError(false);
     setIsInvalid(false);
     setOpen(false);
@@ -81,40 +77,15 @@ export const MultiStepTearsheet = ({
         className={cx(blockClass, className)}
         submitButtonText={submitButtonText}
         cancelButtonText={cancelButtonText}
-        backButtonText={backButtonText}
-        nextButtonText={nextButtonText}
         description={description}
         title={title}
         open={open}
         onHandleModalClick={handleModalClick}
         onClose={clearCreateData}
-        onRequestSubmit={() =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              clearCreateData();
-              resolve();
-            }, simulatedDelay);
-          })
-        }
       >
-        <EditTearsheetStep
-          onNext={() => {
-            return new Promise((resolve, reject) => {
-              setTimeout(() => {
-                // Example usage of how to prevent the next step if some kind
-                // of error occurred during the `onNext` handler.
-                if (shouldReject) {
-                  setHasSubmitError(false);
-                  reject();
-                }
-                setIsInvalid(false);
-                resolve();
-              }, simulatedDelay);
-            });
-          }}
+        <EditTearsheetForm
           title="Topic name"
           fieldsetLegendText="Topic information"
-          disableSubmit={!stepOneTextInputValue}
           subtitle="This is the unique name used to recognize your topic"
           description="It will also be used by your producers and consumers as part of the
           connection information, so make it something easy to recognize."
@@ -124,25 +95,25 @@ export const MultiStepTearsheet = ({
               <TextInput
                 labelText="Topic name"
                 placeholder="Enter topic name"
-                id="tearsheet-multi-step-story-text-input-multi-step-1"
-                value={stepOneTextInputValue}
+                id="tearsheet-multi-form-story-text-input-multi-form-1"
+                value={formOneTextInputValue}
                 onChange={(event) => {
                   if (event.target.value.length) {
                     setIsInvalid(false);
                   }
-                  setStepOneTextInputValue(event.target.value);
+                  setFormOneTextInputValue(event.target.value);
                 }}
                 invalid={isInvalid}
                 invalidText="This is a required field"
                 onBlur={() => {
-                  if (!stepOneTextInputValue.length) {
+                  if (!formOneTextInputValue.length) {
                     setIsInvalid(true);
                   }
                 }}
               />
               <TextInput
                 labelText="Topic description (optional)"
-                id="tearsheet-multi-step-story-text-input-multi-step-1-input-2"
+                id="tearsheet-multi-form-story-text-input-multi-form-1-input-2"
                 value={topicDescriptionValue}
                 placeholder="Enter topic description"
                 onChange={(event) =>
@@ -151,7 +122,7 @@ export const MultiStepTearsheet = ({
               />
               <TextInput
                 labelText="Topic version (optional)"
-                id="tearsheet-multi-step-story-text-input-multi-step-1-input-3"
+                id="tearsheet-multi-form-story-text-input-multi-form-1-input-3"
                 value={topicVersionValue}
                 placeholder="Enter topic version"
                 onChange={(event) => setTopicVersionValue(event.target.value)}
@@ -161,7 +132,7 @@ export const MultiStepTearsheet = ({
                   kind="error"
                   title="Error"
                   subtitle="Resolve errors to continue"
-                  onClose={() => setHasSubmitError(false)}
+                  onClose={() => setHasSubmitError(!hasSubmitError)}
                 />
               )}
               <Toggle
@@ -169,65 +140,38 @@ export const MultiStepTearsheet = ({
                 id="simulated-error-toggle"
                 size="sm"
                 labelText="Simulate error"
-                onToggle={(event) => setShouldReject(event)}
+                onToggle={() => setHasSubmitError(!hasSubmitError)}
+                toggled={hasSubmitError}
               />
             </Column>
           </Row>
-        </EditTearsheetStep>
-        <EditTearsheetStep
+        </EditTearsheetForm>
+        <EditTearsheetForm
           title="Location"
-          subtitle="Custom step subtitle"
-          description="Custom step description (see storybook implementation for new custom step capability)"
-          onNext={() => {
-            return new Promise((resolve, reject) => {
-              setTimeout(() => {
-                // Example usage of how to prevent the next step if some kind
-                // of error occurred during the `onNext` handler.
-                if (shouldReject) {
-                  setHasSubmitError(false);
-                  reject();
-                }
-                setIsInvalid(false);
-                resolve();
-              }, simulatedDelay);
-            });
-          }}
+          subtitle="Custom form subtitle"
+          fieldsetLegendText=""
+          description="Custom form description (see storybook implementation for new custom form capability)"
         >
           <Row>
             <Column xlg={8} lg={8} md={8} sm={8}>
               <TextInput
                 value={topicLocationValue}
                 onChange={(event) => setTopicLocationValue(event.target.value)}
-                id="custom-step-input"
+                id="custom-form-input"
                 labelText="Location"
                 placeholder="Enter location"
               />
             </Column>
           </Row>
-        </EditTearsheetStep>
-        <EditTearsheetStep
+        </EditTearsheetForm>
+        <EditTearsheetForm
           title="Partitions"
-          disableSubmit={false}
           subtitle="One or more partitions make up a topic. A partition is an ordered
           list of messages."
           description="Partitions are distributed across the brokers in order to increase
           the scalability of your topic. You can also use them to distribute
           messages across the members of a consumer group."
           fieldsetLegendText="Partition information"
-          onNext={() => {
-            return new Promise((resolve, reject) => {
-              setTimeout(() => {
-                // Example usage of how to prevent the next step if some kind
-                // of error occurred during the `onNext` handler.
-                if (shouldReject) {
-                  setHasSubmitError(false);
-                  reject();
-                }
-                setIsInvalid(false);
-                resolve();
-              }, simulatedDelay);
-            });
-          }}
         >
           <Row>
             <Column xlg={3} lg={3}>
@@ -235,46 +179,31 @@ export const MultiStepTearsheet = ({
                 id="carbon-number"
                 min={1}
                 max={100}
-                value={stepTwoTextInputValue}
+                value={formTwoTextInputValue}
                 label="Partitions"
                 helperText="1 partition is sufficient for getting started but, production systems often have more."
                 invalidText="Max partitions is 100, min is 1"
                 onChange={(event) =>
-                  setStepTwoTextInputValue(event.imaginaryTarget.value)
+                  setFormTwoTextInputValue(event.imaginaryTarget.value)
                 }
               />
             </Column>
           </Row>
-        </EditTearsheetStep>
-        <EditTearsheetStep
+        </EditTearsheetForm>
+        <EditTearsheetForm
           title="Message retention"
-          disableSubmit={false}
           subtitle="This is how long messages are retained before they are deleted."
           description="If your messages are not read by a consumer within this time, they
           will be missed."
           fieldsetLegendText="Message retention scheduling"
-          onNext={() => {
-            return new Promise((resolve, reject) => {
-              setTimeout(() => {
-                // Example usage of how to prevent the next step if some kind
-                // of error occurred during the `onNext` handler.
-                if (shouldReject) {
-                  setHasSubmitError(true);
-                  reject();
-                }
-                setIsInvalid(false);
-                resolve();
-              }, simulatedDelay);
-            });
-          }}
         >
           <Row>
             <Column xlg={8} lg={8} md={8} sm={8}>
               <RadioButtonGroup
                 legendText="Message retention"
                 name="radio-button-group"
-                defaultSelected={stepThreeTextInputValue}
-                onChange={(value) => setStepThreeTextInputValue(value)}
+                defaultSelected={formThreeTextInputValue}
+                onChange={(value) => setFormThreeTextInputValue(value)}
                 orientation="vertical"
               >
                 <RadioButton labelText="A day" value="one-day" id="one-day" />
@@ -291,7 +220,7 @@ export const MultiStepTearsheet = ({
               </RadioButtonGroup>
             </Column>
           </Row>
-        </EditTearsheetStep>
+        </EditTearsheetForm>
       </EditTearsheet>
     </div>
   );

@@ -9,7 +9,7 @@
 
 // TODO: add any additional styles used by EditTearsheet.stories.js
 
-$preview-block-class: #{$pkg-prefix}--tearsheet-edit-multi-step;
+$preview-block-class: #{$pkg-prefix}--tearsheet-edit-multi-form;
 
 .#{$preview-block-class}__description {
   @include carbon--type-style('body-short-01');
@@ -36,19 +36,19 @@ p.#{$preview-block-class}__description:last-of-type {
   flex-wrap: wrap;
 }
 
-.#{$pkg-prefix}--tearsheet-edit-multi-step--custom-tile {
+.#{$pkg-prefix}--tearsheet-edit-multi-form--custom-tile {
   width: 280px;
   height: 240px;
   margin-right: $spacing-05;
 }
 
-.#{$pkg-prefix}--tearsheet-edit-multi-step--custom-tile
+.#{$pkg-prefix}--tearsheet-edit-multi-form--custom-tile
   .#{$pkg-prefix}--empty-state__illustration.#{$pkg-prefix}--empty-state__illustration--lg {
   min-width: 120px;
   height: 120px;
 }
 
-.#{$pkg-prefix}--tearsheet-edit-multi-step--custom-tile-label {
+.#{$pkg-prefix}--tearsheet-edit-multi-form--custom-tile-label {
   position: absolute;
   bottom: $spacing-05;
   left: $spacing-05;

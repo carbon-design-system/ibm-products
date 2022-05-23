@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2022, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -192,7 +192,7 @@ describe(EditTearsheet.displayName, () => {
     ).children;
     expect(
       editTearsheetSteps[1].classList.contains(
-        `.${editTearsheetBlockClass}__step__step--visible-section`
+        `.${editTearsheetBlockClass}__form__form--visible-section`
       )
     );
   });
@@ -212,7 +212,7 @@ describe(EditTearsheet.displayName, () => {
         ).children;
         expect(
           editTearsheetSteps[0].classList.contains(
-            `.${editTearsheetBlockClass}__step__step--visible-section`
+            `.${editTearsheetBlockClass}__form__form--visible-section`
           )
         );
         // The onMount prop will get called here because the first step is rendered
@@ -231,7 +231,7 @@ describe(EditTearsheet.displayName, () => {
     ).children;
     expect(
       editTearsheetSteps[1].classList.contains(
-        `.${editTearsheetBlockClass}__step__step--visible-section`
+        `.${editTearsheetBlockClass}__form__form--visible-section`
       )
     );
 
@@ -275,7 +275,7 @@ describe(EditTearsheet.displayName, () => {
     ).children;
     expect(
       tearsheetChildren[2].classList.contains(
-        `.${editTearsheetBlockClass}__step__step--visible-section`
+        `.${editTearsheetBlockClass}__form__form--visible-section`
       )
     );
     rerender(
@@ -406,7 +406,7 @@ describe(EditTearsheet.displayName, () => {
   it('should not render any EditTearsheet steps when there are no TearsheetStep components included', () => {
     const { container } = renderEmptyEditTearsheet(defaultProps);
     const editTearsheetSteps = container.querySelectorAll(
-      `.${editTearsheetBlockClass}__step`
+      `.${editTearsheetBlockClass}__form`
     );
     expect(Array(...editTearsheetSteps)).toStrictEqual([]);
   });
@@ -430,7 +430,7 @@ describe(EditTearsheet.displayName, () => {
     ).children;
     expect(
       tearsheetChildren[0].classList.contains(
-        `.${editTearsheetBlockClass}__step__step--visible-section`
+        `.${editTearsheetBlockClass}__form__form--visible-section`
       )
     );
   });

@@ -55,105 +55,63 @@ Anatomy of EditTearsheet
 ## Example usage
 
 <Canvas>
-  <Story id={getStoryId(EditTearsheet.displayName, 'multi-step-tearsheet')} />
+  <Story id={getStoryId(EditTearsheet.displayName, 'multi-form-tearsheet')} />
 </Canvas>
 
 This is used when you have one section per step. This can be created by passing
-in the overall `<EditTearsheet />` component and the `<EditTearsheetStep />`
+in the overall `<EditTearsheet />` component and the `<EditTearsheetForm />`
 component with form items as children:
 
 ```jsx
-    <EditTearsheet {...props}>
-      <EditTearsheetStep
-          title="Required title"
-          subtitle="Optional subtitle"
-          description="Optional description"
-          onNext={() => {'Optional function'}}
-          disableSubmit={}
-          >
-        <TextInput
-          id="test-1"
-          invalidText="A valid value is required"
-          labelText="Topic name"
-          placeholder="Enter topic name"
-        />
-      </EditTearsheetStep>
-    </EditTearsheet>
+<EditTearsheet {...props}>
+  <EditTearsheetForm
+    title="Required title"
+    subtitle="Optional subtitle"
+    description="Optional description"
+    onNext={() => {
+      'Optional function';
+    }}
+  >
+    <TextInput
+      id="test-1"
+      invalidText="A valid value is required"
+      labelText="Topic name"
+      placeholder="Enter topic name"
+    />
+  </EditTearsheetForm>
+</EditTearsheet>
 ```
 
 ## Using custom components
 
-It is possible to use custom components that return `EditTearsheetStep`s in
+It is possible to use custom components that return `EditTearsheetForm`s in
 order to help reduce the amount of logic in the component that contains the main
 `EditTearsheet`. _It is required that each child of the `EditTearsheet` either
-be a custom step or a `EditTearsheetStep`_. An example of this could look like
+be a custom step or a `EditTearsheetForm`_. An example of this could look like
 the following:
 
 ```jsx
-const CreateStepCustom = ({ subtitle, ...rest }) => {
+const CreateFormCustom = ({ subtitle, ...rest }) => {
   return (
-    <EditTearsheetStep
-      {...rest}
-      subtitle={subtitle}
-      title="Step 1"
-      onNext={() => console.log('optional validation check')}
-      onMount={() => console.log('optional onMount fn')}
-      disableSubmit={false}
-    >
-      step content here
-    </EditTearsheetStep>
+    <EditTearsheetForm {...rest} subtitle={subtitle} title="Form 1">
+      form content here
+    </EditTearsheetForm>
   );
 };
 
 const CreateComponent = () => {
   return (
     <EditTearsheet {...EditTearsheetProps}>
-      <CreateStepCustom subtitle="Custom step subtitle" />
-      <EditTearsheetStep
+      <CreateFormCustom subtitle="Custom form subtitle" />
+      <EditTearsheetForm
         title="Topic name"
         fieldsetLegendText="Topic information"
-        disableSubmit={!value}
         subtitle="This is the unique name used to recognize your topic"
         description="It will also be used by your producers and consumers as part of the
         connection information, so make it something easy to recognize."
       >
-        Content for second step
-      </EditTearsheetStep>
-    </EditTearsheet>
-  );
-};
-```
-
-## Using dynamic steps
-
-The use of dynamic steps can be utilized in a scenario when the user makes a
-certain selection on one step that effects which steps will follow it, this is
-controlled via the `includeStep` prop. See abbreviated example below:
-
-```jsx
-import { useState } from 'react';
-
-const EditFlow = () => {
-  const [shouldIncludeAdditionalStep, setShouldIncludeAdditionalStep] =
-    useState(false);
-  return (
-    <EditTearsheet {...EditTearsheetProps}>
-      <EditTearsheetStep {...step1Props}>
-        Step 1 content
-        <Checkbox
-          labelText={`Include additional step`}
-          id="include-additional-step-checkbox"
-          onChange={(value) => setShouldIncludeAdditionalStep(value)}
-          checked={shouldIncludeAdditionalStep}
-        />
-      </EditTearsheetStep>
-      <EditTearsheetStep
-        {...step2Props}
-        includeStep={shouldIncludeAdditionalStep}
-      >
-        Dynamic step content
-      </EditTearsheetStep>
-      <EditTearsheetStep {...step3Props}>Final step content</EditTearsheetStep>
+        Content for second form
+      </EditTearsheetForm>
     </EditTearsheet>
   );
 };
@@ -166,10 +124,10 @@ sections, you can utilize the below included class names.
 
 | Class name                                            | Element     | Features                                                   |
 | ----------------------------------------------------- | ----------- | ---------------------------------------------------------- |
-| `#{$pkg-prefix}--create-tearsheet__step--title`       | title       | `productive-heading-04` & `margin-bottom` of `$spacing-05` |
-| `#{$pkg-prefix}--create-tearsheet__step--subtitle`    | subtitle    | `productive-heading-01` & `margin-bottom` of `$spacing-03` |
-| `#{$pkg-prefix}--create-tearsheet__step--description` | description | `body-long-01` & `margin-bottom` of `$spacing-06`          |
-| `#{$pkg-prefix}--create-tearsheet__step--fieldset`    | fieldset    | `margin-bottom` of `$spacing-05` to all children elements  |
+| `#{$pkg-prefix}--create-tearsheet__form--title`       | title       | `productive-heading-04` & `margin-bottom` of `$spacing-05` |
+| `#{$pkg-prefix}--create-tearsheet__form--subtitle`    | subtitle    | `productive-heading-01` & `margin-bottom` of `$spacing-03` |
+| `#{$pkg-prefix}--create-tearsheet__form--description` | description | `body-long-01` & `margin-bottom` of `$spacing-06`          |
+| `#{$pkg-prefix}--create-tearsheet__form--fieldset`    | fieldset    | `margin-bottom` of `$spacing-05` to all children elements  |
 | `#{$pkg-prefix}--create-tearsheet__section--divider`  | divider     | Includes a `1px` divider line inside the `main` content    |
 
 ## Code sample

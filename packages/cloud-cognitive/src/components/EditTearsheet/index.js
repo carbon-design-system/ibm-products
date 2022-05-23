@@ -1,10 +1,9 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2022, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 export { EditTearsheet } from './EditTearsheet';
-export { EditTearsheetStep } from './EditTearsheetStep';
-export { EditTearsheetDivider } from './EditTearsheetDivider';
+export { EditTearsheetForm } from './EditTearsheetForm';

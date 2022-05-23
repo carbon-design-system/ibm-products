@@ -180,7 +180,11 @@ export const DataSpreadsheetBody = forwardRef(
           columnIndex <= columnEnd;
           columnIndex++
         ) {
-          cellContainer.push([rowIndex, columnIndex]);
+          cellContainer.push([
+            rowIndex,
+            columnIndex,
+            `${blockClass}__cell--${rowIndex}--${columnIndex}`,
+          ]);
         }
       }
       return cellContainer;

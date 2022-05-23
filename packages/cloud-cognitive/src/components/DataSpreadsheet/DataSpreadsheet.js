@@ -59,7 +59,7 @@ const componentName = 'DataSpreadsheet';
 
 // Default values for props
 const defaults = {
-  cellSize: 'standard',
+  cellSize: 'sm',
   columns: Object.freeze([]),
   data: Object.freeze([]),
   defaultEmptyRowCount: 16,
@@ -941,7 +941,7 @@ DataSpreadsheet.propTypes = {
   /**
    * Specifies the cell height
    */
-  cellSize: PropTypes.oneOf(['compact', 'standard', 'medium', 'large']),
+  cellSize: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Provide an optional class to be applied to the containing node.

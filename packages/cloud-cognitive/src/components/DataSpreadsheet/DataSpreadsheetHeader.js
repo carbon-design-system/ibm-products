@@ -275,7 +275,7 @@ DataSpreadsheetHeader.propTypes = {
   /**
    * Specifies the cell height
    */
-  cellSize: PropTypes.oneOf(['compact', 'standard', 'medium', 'large']),
+  cellSize: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * All of the spreadsheet columns

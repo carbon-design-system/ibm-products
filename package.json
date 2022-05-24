@@ -70,6 +70,7 @@
     "@testing-library/dom": "^8.11.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "cheerio": "^1.0.0-rc.11",
     "copyfiles": "^2.4.1",
     "cspell": "^5.20.0",
     "eslint": "^8.15.0",

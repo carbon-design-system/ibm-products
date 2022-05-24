@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.18.1...@carbon/ibm-products@1.18.2) (2022-05-24)
+
+
+### Bug Fixes
+
+* **DataSpreadsheet:** support reordering columns with horizontal scroll ([#1993](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1993)) ([e4a9b28](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e4a9b280df30ad5ca80777fd46a9acd058436bf1))
+* **DataSpreadsheet:** update active cell location after cellSize change ([#1992](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1992)) ([9c103c6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9c103c6d7a55748cfcd9c22ef99d8308dfc9393a))
+* **DataSpreadsheet:** update header cell border colors ([#1997](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1997)) ([97c99f7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/97c99f7a80669b103840b8f1595de28d76915804))
+* when export modal closes the input should be reset ([#1998](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1998)) ([7980610](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7980610d65fa42c509024325b40778bf8b0a3b82))
+
+
+
+
+
 ## [1.18.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.18.0...@carbon/ibm-products@1.18.1) (2022-05-17)
 
 

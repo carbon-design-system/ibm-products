@@ -6,6 +6,6 @@
  */
 
 const jestConfig = require('jest-config-ibm-cloud-cognitive');
-jestConfig.coverageReporters.push('text', 'text-summary');
+jestConfig?.coverageReporters?.push('text', 'text-summary');
 
 module.exports = jestConfig;

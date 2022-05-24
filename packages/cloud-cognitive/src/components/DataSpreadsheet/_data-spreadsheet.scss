@@ -215,6 +215,7 @@
       z-index: 4;
       width: $spacing-01;
       background-color: $interactive-01;
+      pointer-events: none;
     }
     .#{$block-class}__th--active-header,
     .#{$block-class}__td-th--active-header.#{$block-class}__td {

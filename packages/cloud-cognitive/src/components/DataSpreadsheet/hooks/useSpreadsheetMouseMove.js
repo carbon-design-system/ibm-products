@@ -8,7 +8,6 @@
 import { useEffect } from 'react';
 import { px } from '@carbon/layout';
 import { pkg } from '../../../settings';
-import { getScrollbarWidth } from '../../../global/js/utils/getScrollbarWidth';
 import { moveColumnIndicatorLine } from '../utils/moveColumnIndicatorLine';
 
 // Used specifically for reordering columns, will move the position of the
@@ -38,7 +37,6 @@ export const useSpreadsheetMouseMove = ({
         spreadsheetCoords,
         leftScrollAmount: scrollAmount,
       });
-      const scrollbarWidth = getScrollbarWidth();
       const spreadsheetWrapperElement = ref.current;
       spreadsheetWrapperElement.getBoundingClientRect();
       const xPositionRelativeToSpreadsheet =
@@ -56,14 +54,9 @@ export const useSpreadsheetMouseMove = ({
       // Moves the position of the cloned selection area to follow mouse, and
       // add the amount horizontally scrolled
       clonedSelectionElement.style.left = px(
-        totalSpreadsheetScrollingWidth -
-          clonedSelectionWidth -
-          scrollbarWidth >=
-          clonePlacement
+        totalSpreadsheetScrollingWidth - clonedSelectionWidth >= clonePlacement
           ? clonePlacement + scrollAmount
-          : totalSpreadsheetScrollingWidth -
-              clonedSelectionWidth -
-              scrollbarWidth
+          : totalSpreadsheetScrollingWidth - clonedSelectionWidth
       );
     };
     if (headerCellHoldActive) {

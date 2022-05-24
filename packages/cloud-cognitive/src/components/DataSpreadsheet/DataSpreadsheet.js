@@ -680,6 +680,7 @@ export let DataSpreadsheet = React.forwardRef(
         isKeyboard,
         setSelectionAreaData,
         index,
+        currentMatcher,
       };
       // Select an entire column
       if (
@@ -810,6 +811,7 @@ export let DataSpreadsheet = React.forwardRef(
             activeCellCoordinates={activeCellCoordinates}
             cellSize={cellSize}
             columns={columns}
+            currentMatcher={currentMatcher}
             defaultColumn={defaultColumn}
             headerGroups={headerGroups}
             rows={rows}

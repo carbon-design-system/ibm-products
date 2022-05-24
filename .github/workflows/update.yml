@@ -2,7 +2,7 @@ name: Update packages # Updates dependencies every Friday
 
 on:
   schedule:
-    - cron: '0 4 * * FRI'
+    - cron: '0 4 1,15 * *' # Updates will happen every 1st/15th of the month
 
 jobs:
   carbon:

@@ -30,6 +30,7 @@ export let AddSelect = forwardRef(
 
       className,
       clearFiltersText,
+      closeIconDescription,
       columnInputPlaceholder,
       description,
       globalFilters,
@@ -43,7 +44,10 @@ export let AddSelect = forwardRef(
       influencerTitle,
       items,
       itemsLabel,
+      metaIconDescription,
+      metaPanelTitle,
       multi,
+      navIconDescription,
       noResultsDescription,
       noResultsTitle,
       noSelectionDescription,
@@ -75,6 +79,7 @@ export let AddSelect = forwardRef(
     const [flatItems, setFlatItems] = useState([]);
     const [globalFilterOpts, setGlobalFilterOpts] = useState([]);
     const [appliedGlobalFilters, setAppliedGlobalFilters] = useState({});
+    const [displayMetalPanel, setDisplayMetaPanel] = useState({});
     const { sortDirection, setSortDirection, sortAttribute, setSortAttribute } =
       useItemSort();
 
@@ -186,13 +191,16 @@ export let AddSelect = forwardRef(
     const itemsToDisplay = getDisplayItems();
 
     const commonListProps = {
+      metaIconDescription,
       multi,
       multiSelection,
+      navIconDescription,
       path,
       setMultiSelection,
       setPath,
       setSingleSelection,
       singleSelection,
+      setDisplayMetaPanel,
     };
 
     // handlers
@@ -236,13 +244,17 @@ export let AddSelect = forwardRef(
     };
 
     const sidebarProps = {
+      closeIconDescription,
       influencerTitle,
       items: flatItems,
+      metaPanelTitle,
       multiSelection,
       noSelectionDescription,
       noSelectionTitle,
       removeIconDescription,
       setMultiSelection,
+      displayMetalPanel,
+      setDisplayMetaPanel,
     };
 
     const setShowBreadsCrumbs = () => {
@@ -376,6 +388,7 @@ export let AddSelect = forwardRef(
 AddSelect.propTypes = {
   className: PropTypes.string,
   clearFiltersText: PropTypes.string,
+  closeIconDescription: PropTypes.string,
   columnInputPlaceholder: PropTypes.string,
   description: PropTypes.string,
   globalFilters: PropTypes.arrayOf(
@@ -409,6 +422,16 @@ AddSelect.propTypes = {
         children: PropTypes.object,
         icon: PropTypes.object,
         id: PropTypes.string.isRequired,
+        meta: PropTypes.oneOfType([
+          PropTypes.arrayOf(
+            PropTypes.shape({
+              id: PropTypes.string,
+              title: PropTypes.string,
+              value: PropTypes.string,
+            })
+          ),
+          PropTypes.node,
+        ]),
         subtitle: PropTypes.string,
         title: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
@@ -416,7 +439,10 @@ AddSelect.propTypes = {
     ),
   }),
   itemsLabel: PropTypes.string,
+  metaIconDescription: PropTypes.string,
+  metaPanelTitle: PropTypes.string,
   multi: PropTypes.bool,
+  navIconDescription: PropTypes.string,
   noResultsDescription: PropTypes.string,
   noResultsTitle: PropTypes.string,
   noSelectionDescription: PropTypes.string,

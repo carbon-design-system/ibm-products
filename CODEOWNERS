@@ -1,3 +1,5 @@
 * @carbon-design-system/ibm-cloud-cognitive-development
 
-/packages/security/ @dbrugger
+# Carbon for IBM Products > Security package
+# cspell:disable-next-line
+/packages/security/ @amtoussam   @jlongshore

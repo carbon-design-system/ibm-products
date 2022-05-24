@@ -26,6 +26,7 @@ export const useSpreadsheetMouseUp = ({
   activeCellCoordinates,
   rows,
   defaultColumn,
+  selectionAreas,
 }) => {
   useEffect(() => {
     const handleMouseUp = (event) => {
@@ -43,10 +44,19 @@ export const useSpreadsheetMouseUp = ({
           const closestCell = event.target.closest(
             `.${blockClass}--interactive-cell-element`
           );
-          const newColumnIndex = closestCell?.getAttribute('data-column-index');
-          const originalColumnIndex = selectionAreaCloneElement?.getAttribute(
-            'data-column-index-original'
+          const newColumnIndex = parseInt?.(
+            closestCell?.getAttribute('data-column-index')
           );
+          const originalColumnIndex = parseInt?.(
+            selectionAreaCloneElement?.getAttribute(
+              'data-column-index-original'
+            )
+          );
+          const selectionAreaToClone = selectionAreas.filter(
+            (item) => item?.matcher === currentMatcher
+          );
+          const selectionAreaIndexArray =
+            selectionAreaToClone[0].header.selectedIndexList;
           const columnToMoveToElement = ref.current.querySelector(
             `[data-row-index="header"][data-column-index="${newColumnIndex}"]`
           );
@@ -58,30 +68,15 @@ export const useSpreadsheetMouseUp = ({
             `[data-matcher-id="${currentMatcher}"]`
           );
           const spreadsheetPosition = ref.current.getBoundingClientRect();
-          const newIndexPosition =
-            columnToMoveToElement.getBoundingClientRect();
-          const relativeNewPosition =
-            newIndexPosition.left - spreadsheetPosition.left;
-          const cloneColumnWidth = selectionAreaCloneElement.offsetWidth;
-          let columnsWidthUpToNewIndex = 0;
+          const listContainer = ref.current.querySelector(
+            `.${blockClass}__list--container`
+          );
+          const leftScrollAmount = listContainer.scrollLeft;
           const newIndexLessThanStarting = newColumnIndex < originalColumnIndex;
-          visibleColumns.forEach((item, index) => {
-            if (
-              newIndexLessThanStarting &&
-              index === visibleColumns.length - 1
-            ) {
-              return;
-            }
-            if (index <= newColumnIndex) {
-              columnsWidthUpToNewIndex += item?.width || defaultColumn?.width;
-            }
-          });
-          const updatedSelectionAreaPlacement = newIndexLessThanStarting
-            ? relativeNewPosition
-            : columnsWidthUpToNewIndex -
-              cloneColumnWidth +
-              defaultColumn?.rowHeaderWidth;
-          selectionAreaToMove.style.left = px(updatedSelectionAreaPlacement);
+          const newIndexGreater = newColumnIndex > originalColumnIndex;
+          const differenceBetweenOldNewIndex = newIndexGreater
+            ? newColumnIndex - originalColumnIndex
+            : originalColumnIndex - newColumnIndex;
           setSelectionAreas((prev) => {
             const selectionAreaClone = deepCloneObject(prev);
             if (originalColumnIndex === newColumnIndex) {
@@ -93,30 +88,83 @@ export const useSpreadsheetMouseUp = ({
             if (indexOfItemToUpdate === -1) {
               return prev;
             }
-            selectionAreaClone[indexOfItemToUpdate].header.index =
-              Number(newColumnIndex);
-            selectionAreaClone[indexOfItemToUpdate].point1.column =
-              Number(newColumnIndex);
-            selectionAreaClone[indexOfItemToUpdate].point2.column =
-              Number(newColumnIndex);
+            if (!selectionAreaIndexArray.includes(newColumnIndex)) {
+              // We need to not add just the newColumnIndex, but an array of indexes
+              // if there are multiple columns
+              const newIndexArray = newIndexGreater
+                ? selectionAreaIndexArray.map(
+                    (num) => num + differenceBetweenOldNewIndex
+                  )
+                : selectionAreaIndexArray.map(
+                    (num) => num - differenceBetweenOldNewIndex
+                  );
+              selectionAreaClone[indexOfItemToUpdate].header.selectedIndexList =
+                newIndexArray;
+              selectionAreaClone[indexOfItemToUpdate].point1.column = Math.min(
+                ...newIndexArray
+              );
+              selectionAreaClone[indexOfItemToUpdate].point2.column = Math.max(
+                ...newIndexArray
+              );
+            }
             return selectionAreaClone;
           });
-          const columnIdArray = visibleColumns.map((column) => column.id);
-          const columnIdArrayClone = [...columnIdArray];
-          // Remove one element at the original index
-          columnIdArrayClone.splice(originalColumnIndex, 1);
-          // Add one element at the new index
-          columnIdArrayClone.splice(
-            newColumnIndex,
-            0,
-            columnIdArray[originalColumnIndex]
-          );
-          setColumnOrder(columnIdArrayClone); // Function provided by useTable (react-table) hook to reorder columns
-          const newCellCoords = {
-            ...activeCellCoordinates,
-            column: Number(newColumnIndex),
-          };
-          setActiveCellCoordinates(newCellCoords);
+          // Only reorder columns if the new index is _not_ part of the
+          // selectionAreaIndexArray, meaning the new placement is outside
+          // of the current selection area. Similarly, the active cell position
+          // should only be changed under the same condition.
+          if (!selectionAreaIndexArray.includes(newColumnIndex)) {
+            const deleteCount = selectionAreaIndexArray.length;
+            const startIndex = Math.min(...selectionAreaIndexArray);
+            const columnIdArray = visibleColumns.map((column) => column.id);
+            const columnIdArrayClone = [...columnIdArray];
+            const getNewColumnOrder = () => {
+              const newColumnList = [];
+              selectionAreaIndexArray.map((index) => {
+                return newColumnList.push(columnIdArray[index]);
+              });
+              return newColumnList;
+            };
+            // Remove one element at the original index
+            columnIdArrayClone.splice(startIndex, deleteCount);
+            const originalPointIndex = selectionAreaIndexArray.findIndex(
+              (item) => item === originalColumnIndex
+            );
+            const updatedNewIndexWithNewOrder =
+              newColumnIndex - originalPointIndex;
+            // Add one element at the new index
+            columnIdArrayClone.splice(
+              updatedNewIndexWithNewOrder,
+              0,
+              ...getNewColumnOrder()
+            );
+            setColumnOrder(columnIdArrayClone); // Function provided by useTable (react-table) hook to reorder columns
+            const newCellCoords = {
+              ...activeCellCoordinates,
+              column: newIndexGreater
+                ? activeCellCoordinates.column + differenceBetweenOldNewIndex
+                : activeCellCoordinates.column - differenceBetweenOldNewIndex,
+            };
+            setActiveCellCoordinates(newCellCoords);
+            const firstSelectedHeader = Array.from(
+              ref.current.querySelectorAll(
+                `.${blockClass}__th--selected-header`
+              )
+            )[0];
+            const firstSelectedHeaderCoords =
+              firstSelectedHeader.getBoundingClientRect();
+            const newRelativePosition =
+              firstSelectedHeaderCoords.left -
+              spreadsheetPosition.left +
+              leftScrollAmount;
+            // console.log(firstSelectedHeaderCoords.left - spreadsheetPosition.left + leftScrollAmount);
+            const updatedSelectionAreaPlacement = newIndexLessThanStarting
+              ? newRelativePosition
+              : newColumnIndex === originalColumnIndex
+              ? selectionAreaToMove.style.left
+              : newRelativePosition;
+            selectionAreaToMove.style.left = px(updatedSelectionAreaPlacement);
+          }
           // Remove the cloned column and indicator elements
           const indicatorLineElement = ref.current.querySelector(
             `.${blockClass}__reorder-indicator-line`
@@ -171,5 +219,6 @@ export const useSpreadsheetMouseUp = ({
     activeCellCoordinates,
     rows,
     defaultColumn,
+    selectionAreas,
   ]);
 };

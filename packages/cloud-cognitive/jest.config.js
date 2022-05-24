@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-module.exports = require('jest-config-ibm-cloud-cognitive');
+const jestConfig = require('jest-config-ibm-cloud-cognitive');
+jestConfig.coverageReporters.push('text', 'text-summary');
+
+module.exports = jestConfig;

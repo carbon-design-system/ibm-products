@@ -29,7 +29,7 @@ jobs:
           cache: yarn
 
       - name: Install
-        run: yarn --offline
+        run: yarn
 
       - name: Continuous integration check (includes build)
         run: yarn ci-check

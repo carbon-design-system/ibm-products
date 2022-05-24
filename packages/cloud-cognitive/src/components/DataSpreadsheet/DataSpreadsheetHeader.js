@@ -26,6 +26,7 @@ export const DataSpreadsheetHeader = forwardRef(
       activeCellCoordinates,
       cellSize,
       columns,
+      currentMatcher,
       defaultColumn,
       headerGroups,
       scrollBarSize,
@@ -62,6 +63,7 @@ export const DataSpreadsheetHeader = forwardRef(
     const handleColumnHeaderClick = (index) => {
       return (event) => {
         const isHoldingCommandKey = event.metaKey || event.ctrlKey;
+        const isHoldingShiftKey = event.shiftKey;
         handleHeaderCellSelection({
           type: 'column',
           activeCellCoordinates,
@@ -74,6 +76,8 @@ export const DataSpreadsheetHeader = forwardRef(
           index,
           setSelectionAreaData,
           isHoldingCommandKey,
+          isHoldingShiftKey,
+          currentMatcher,
         });
       };
     };
@@ -92,19 +96,35 @@ export const DataSpreadsheetHeader = forwardRef(
 
     const handleHeaderMouseDown = (index) => {
       return (event) => {
+        if (event.shiftKey) {
+          // Remove columns, need to call handleHeaderCellSelection
+          return;
+        }
         setSelectedHeaderReorderActive(true);
-        const clickXPosition = event.clientX;
-        const headerButtonCoords = event.target.getBoundingClientRect();
-        const offsetXValue = clickXPosition - headerButtonCoords.left;
-        const bodyContainer = document.querySelector(
-          `.${blockClass}__list--container`
-        ).firstElementChild;
         const selectionAreaToClone = selectionAreas.filter(
-          (item) => item?.header?.index === index
+          (item) => item?.matcher === currentMatcher
         );
         const selectionAreaElement = ref.current.querySelector(
           `[data-matcher-id="${selectionAreaToClone[0]?.matcher}"]`
         );
+        const clickXPosition = event.clientX;
+        const headerButtonCoords = event.target.getBoundingClientRect();
+        const headerIndex = event.target.getAttribute('data-column-index');
+        const offsetXValue = clickXPosition - headerButtonCoords.left;
+        const lowestColumnIndexFromSelectionArea = Math.min(
+          selectionAreaToClone[0].point1.column,
+          selectionAreaToClone[0].point2.column
+        );
+        const selectionAreaCoords =
+          selectionAreaElement.getBoundingClientRect();
+        const updatedOffsetDifference =
+          lowestColumnIndexFromSelectionArea < parseInt(headerIndex)
+            ? offsetXValue +
+              (headerButtonCoords.left - selectionAreaCoords.left)
+            : offsetXValue;
+        const bodyContainer = document.querySelector(
+          `.${blockClass}__list--container`
+        ).firstElementChild;
         const selectionAreaClonedElement = selectionAreaElement.cloneNode();
         const reorderIndicatorLine = selectionAreaElement.cloneNode();
         reorderIndicatorLine.className = `${blockClass}__reorder-indicator-line`;
@@ -114,7 +134,7 @@ export const DataSpreadsheetHeader = forwardRef(
         );
         selectionAreaClonedElement.setAttribute(
           'data-clone-offset-x',
-          offsetXValue
+          updatedOffsetDifference
         );
         selectionAreaClonedElement.setAttribute(
           'data-column-index-original',
@@ -183,7 +203,8 @@ export const DataSpreadsheetHeader = forwardRef(
               const selectedHeader = checkSelectedHeaderCell(
                 index,
                 selectionAreas,
-                'column'
+                'column',
+                rows
               );
               return (
                 <div
@@ -260,6 +281,11 @@ DataSpreadsheetHeader.propTypes = {
    * All of the spreadsheet columns
    */
   columns: PropTypes.array,
+
+  /**
+   * uuid that corresponds to the current selection area
+   */
+  currentMatcher: PropTypes.string,
 
   /**
    * Default spreadsheet sizing values

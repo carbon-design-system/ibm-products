@@ -70,7 +70,7 @@
     "@testing-library/dom": "^8.11.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
-    "cheerio": "^1.0.0-rc.11",
+    "cheerio": "^1.0.0-rc.3",
     "copyfiles": "^2.4.1",
     "cspell": "^5.20.0",
     "eslint": "^8.15.0",
@@ -95,6 +95,9 @@
   },
   "//resolutions:http-signature": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
+  "resolutions": {
+    "cheerio": "1.0.0-rc.10"
+  },
   "eslintConfig": {
     "parser": "@babel/eslint-parser",
     "extends": [

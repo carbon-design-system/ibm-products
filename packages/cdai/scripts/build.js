@@ -31,7 +31,6 @@ const execAsync = (commands, env) =>
 
 async function build() {
   const ROOT_DIR = path.resolve(__dirname, '../');
-  const BABEL_PATH = path.resolve(__dirname, '../node_modules/.bin/babel');
   const ignoreGlobs = [
     '**/__tests__/*',
     '**/*-test.js',
@@ -46,10 +45,10 @@ async function build() {
   );
 
   const buildSteps = [
-    execAsync(`${BABEL_PATH} src -d es --ignore "${ignoreGlobs}"`, {
+    execAsync(`babel src -d es --ignore "${ignoreGlobs}"`, {
       BABEL_ENV: 'es',
     }),
-    execAsync(`${BABEL_PATH} src -d lib --ignore "${ignoreGlobs}"`, {
+    execAsync(`babel src -d lib --ignore "${ignoreGlobs}"`, {
       BABEL_ENV: 'cjs',
     }),
     copy(`${ROOT_DIR}/src/**/*.scss`, `${ROOT_DIR}/scss`),

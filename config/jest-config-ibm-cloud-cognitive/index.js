@@ -24,6 +24,8 @@ module.exports = {
         },
       },
     ],
+    'text',
+    'text-summary',
   ],
   // set the global coverage threshold, because that supplies the default for
   // the upper watermark, then nullify the global coverage threshold so it

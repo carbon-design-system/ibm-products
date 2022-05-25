@@ -221,6 +221,7 @@
     width: 100%;
     max-width: 40rem;
     background: $ui-01;
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
     transform: translate(0, 100%);
 
     &-search {
@@ -256,6 +257,11 @@
   button.#{$block-class}__global-filter-toggle {
     border-bottom-color: $ui-04;
     background: $field-01;
+
+    &--open {
+      border-bottom: $ui-01;
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    }
   }
 
   // meta panel

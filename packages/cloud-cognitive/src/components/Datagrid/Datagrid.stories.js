@@ -776,14 +776,22 @@ export const LeftPanel = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid({
+    leftPanel: {
+      isOpen: true, // this toggling will happen from datagridActions.
+      panelContent: (
+        <div style={{ display: 'inline' }}>
+          Panel content will go here along with any button interactions
+        </div>
+      ),
+    },
     columns,
     data,
-    leftPanel: {
+    /*leftPanel: {
       isOpen: true, // this toggling will happen from datagridActions.
       panelContent: (
         <div>Panel content will go here along with any button interactions</div>
       ),
-    },
+    },*/
     DatagridActions,
     DatagridBatchActions,
   });

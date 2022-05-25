@@ -42,7 +42,7 @@ a
 ### 3. Start the development server
 
 1. To install the project’s dependencies, from the root directory of your fork,
-   run `yarn --offline`
+   run `yarn`
 2. To scaffold a [new component or pattern](#8-new-component-or-pattern), run
    `yarn generate ComponentName`, where `ComponentName` is the name of the
    component or pattern

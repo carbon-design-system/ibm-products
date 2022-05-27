@@ -22,9 +22,7 @@
       "id": "NO_FILTERS",
       "name": "Category with no filters",
       "count": 0,
-      "subcategories": [
-        "NO_FILTERS"
-      ]
+      "subcategories": ["NO_FILTERS"]
     },
     "CATEGORY_2": {
       "id": "CATEGORY_2",
@@ -46,11 +44,7 @@
       "name": "Subcategory",
       "parent": "DEFAULT",
       "count": 30,
-      "filters": [
-        "DEFAULT",
-        "LONG_TEXT",
-        "SELECTED"
-      ]
+      "filters": ["DEFAULT", "LONG_TEXT", "SELECTED"]
     },
     "TRUNCATED": {
       "id": "TRUNCATED",
@@ -104,11 +98,7 @@
       "open": true,
       "parent": "DEFAULT",
       "count": 30,
-      "filters": [
-        "OPEN:FILTER_1",
-        "OPEN:FILTER_2",
-        "OPEN:FILTER_3"
-      ]
+      "filters": ["OPEN:FILTER_1", "OPEN:FILTER_2", "OPEN:FILTER_3"]
     },
     "CATEGORY_2:SUBCATEGORY_1": {
       "id": "CATEGORY_2:SUBCATEGORY_1",
@@ -129,9 +119,7 @@
       "name": "Subcategory 2",
       "parent": "CATEGORY_2",
       "count": 15,
-      "filters": [
-        "CATEGORY_2:SUBCATEGORY_2:FILTER_1"
-      ]
+      "filters": ["CATEGORY_2:SUBCATEGORY_2:FILTER_1"]
     },
     "CATEGORY_2:SUBCATEGORY_3": {
       "id": "CATEGORY_2:SUBCATEGORY_3",

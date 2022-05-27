@@ -1,7 +1,7 @@
 name: Cancel # Reduces overall build times by cancelling incomplete jobs
 on:
   workflow_run:
-    workflows: ["CI"]
+    workflows: ['CI']
     types:
       - requested
 
@@ -9,8 +9,8 @@ jobs:
   cancel:
     runs-on: ubuntu-latest
     steps:
-    - name: Cancel incomplete runs except the latest
-      uses: styfle/cancel-workflow-action@0.9.1 # cspell:disable-line
-      with:
-        all_but_latest: true
-        workflow_id: ${{ github.event.workflow.id }}
+      - name: Cancel incomplete runs except the latest
+        uses: styfle/cancel-workflow-action@0.9.1 # cspell:disable-line
+        with:
+          all_but_latest: true
+          workflow_id: ${{ github.event.workflow.id }}

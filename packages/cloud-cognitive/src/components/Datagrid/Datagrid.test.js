@@ -24,7 +24,6 @@ import {
   useDisableSelectRows,
   useExpandedRow,
   useNestedRows,
-  useSelectAllWithToggle,
   useSortableColumns,
 } from '.';
 
@@ -372,41 +371,6 @@ const RowSizeDropdown = ({ ...rest }) => {
   );
 };
 
-const SelectItemsInAllPages = ({ ...rest }) => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(100));
-  const [areAllSelected, setAreAllSelected] = useState(false);
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      initialState: {
-        pageSize: 10,
-        pageSizes: [5, 10, 25, 50],
-      },
-      selectAllToggle: {
-        labels: {
-          allRows: 'Select all',
-        },
-        onSelectAllRows: setAreAllSelected,
-      },
-      DatagridPagination,
-      DatagridActions,
-      DatagridBatchActions,
-    },
-    useSelectRows,
-    useSelectAllWithToggle
-  );
-
-  return (
-    <>
-      <Datagrid datagridState={{ ...datagridState }} {...rest} />
-      <h3>Doc in Notes...</h3>
-      <p>{`Are all selected across all pages? - ${areAllSelected}`}</p>
-    </>
-  );
-};
-
 const SelectableRow = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
@@ -549,15 +513,7 @@ describe(componentName, () => {
   //Ten Thousand Entries
   it('renders Ten Thousand table entries', () => {
     render(<TenThousandEntries data-testid={dataTestId}></TenThousandEntries>);
-    const totalHeight = parseInt(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[0].style.height,
-      10
-    );
-    console.log(`10K Rows Height: ${totalHeight}`);
+
     expect(
       parseInt(
         screen
@@ -603,8 +559,6 @@ describe(componentName, () => {
       new MouseEvent('click')
     );
 
-    console.log(`Clickable Row Class Value: ${clickableRow.classList}`);
-
     expect(clickableRow).toHaveClass('bx--data-table--selected');
   });
 
@@ -646,10 +600,6 @@ describe(componentName, () => {
 
     fireEvent.click(button);
 
-    console.log(
-      `Hide Select All: Selected Row's Class Value: ${row.className}`
-    );
-
     expect(row.classList[1]).toEqual('bx--data-table--selected');
   });
 
@@ -680,8 +630,6 @@ describe(componentName, () => {
       .getElementsByTagName('span')[0];
 
     fireEvent.click(firstRow);
-
-    console.log(row.classList);
 
     expect(row.classList[1]).toEqual('c4p--datagrid__carbon-row-expanded');
 
@@ -798,21 +746,6 @@ describe(componentName, () => {
     ).toEqual('bx--data-table--selected');
   });
 
-  it('Select Items In All Pages', () => {
-    render(
-      <SelectItemsInAllPages data-testid={dataTestId}></SelectItemsInAllPages>
-    );
-
-    console.log(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('thead')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[0]
-        .getElementsByTagName('span').childNodes
-    );
-  });
-
   it('Selectable Row', () => {
     render(<SelectableRow data-testid={dataTestId}></SelectableRow>);
 
@@ -872,7 +805,6 @@ describe(componentName, () => {
       .getByRole('table')
       .getElementsByTagName('thead')[0]
       .getElementsByTagName('tr')[0];
-    console.log(headerRow.getElementsByTagName('th').length);
 
     for (var i = 0; i < headerRow.getElementsByTagName('th').length - 1; i++) {
       fireEvent.click(

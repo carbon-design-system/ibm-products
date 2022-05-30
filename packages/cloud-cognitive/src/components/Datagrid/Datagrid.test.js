@@ -306,7 +306,7 @@ const RadioSelect = ({ ...rest }) => {
       data,
       hideSelectAll: true,
       radio: true,
-      onRadioSelect: (row) => console.log(row),
+      // onRadioSelect: (row) => console.log(row),
       initialState: {
         selectedRowIds: {
           3: true,

@@ -112,6 +112,23 @@ const BasicUsage = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
+/*
+const BatchActions = ({...rest}) => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(10));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      DatagridActions,
+      DatagridBatchActions,
+    },
+    useSelectRows
+  );
+
+  return <Datagrid datagridState={{ ...datagridState }}{...rest}/>;
+};*/
+
 const EmptyUsage = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(0));
@@ -480,6 +497,16 @@ describe(componentName, () => {
       `${carbon.prefix}--data-table`
     );
   });
+
+  /*
+  it("renders a Batch Actions Table", () => {
+    render(<BatchActions data-testid={dataTestId}></BatchActions>);
+
+    fireEvent.click(screen.getByRole('table').getElementsByTagName('thead')[0].getElementsByTagName('tr')[0].getElementsByTagName('div')[0].getElementsByTagName('th')[0].getElementsByTagName('div')[0].getElementsByTagName('input')[0]);
+    console.log(`Child Element Count: ${document.getElementsByName('button').length}`);
+    // expect(document.querySelector('#datagrid-table-id10').childElementCount).toBe(2);
+
+  });*/
 
   it('renders nothing and logs a warning to console if no datagridState is supplied', () => {
     expectWarn(

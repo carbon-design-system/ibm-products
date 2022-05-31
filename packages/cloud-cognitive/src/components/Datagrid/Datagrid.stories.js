@@ -801,12 +801,17 @@ const DatagridBatchActions = (datagridState) => {
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
   const onBatchAction = () => alert('Batch action');
   const actionName = 'Action';
+  const selectAllButton = 'Select All';
+  const selectAllButtonAction = () => alert(`Select All ${datagridState}`);
   return (
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
       totalSelected={totalSelected}
       onCancel={() => toggleAllRowsSelected(false)}
     >
+      <TableBatchAction renderIcon={Activity16} onClick={selectAllButtonAction}>
+        {selectAllButton}
+      </TableBatchAction>
       <TableBatchAction renderIcon={Activity16} onClick={onBatchAction}>
         {actionName}
       </TableBatchAction>

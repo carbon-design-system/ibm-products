@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
@@ -25,9 +25,13 @@ import {
   useExpandedRow,
   useNestedRows,
   useSortableColumns,
+  useOnRowClick,
+  useRowIsMouseOver,
 } from '.';
 
 import namor from 'namor';
+
+import userEvent from '@testing-library/user-event';
 
 const dataTestId = uuidv4();
 
@@ -465,6 +469,133 @@ const TopAlignment = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
+const ClickableRow = ({ ...rest }) => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(10));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      onRowClick: (row) => alert(`Clicked ${row.id}`),
+    },
+    useOnRowClick
+  );
+
+  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+};
+
+const IsHoverOnRow = ({ ...rest }) => {
+  const Cell = ({ row }) => {
+    if (row.isMouseOver) {
+      return 'yes hovering!';
+    }
+    return '';
+  };
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader.slice(0, 3),
+      {
+        Header: 'Is hover on row?',
+        id: 'isHoveringColumn',
+        disableSortBy: true,
+        Cell,
+      },
+    ],
+    []
+  );
+  const [data] = useState(makeData(10));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+    },
+    useRowIsMouseOver
+  );
+
+  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+};
+
+const InfiniteScroll = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data, setData] = useState(makeData(0));
+
+  const [isFetching, setIsFetching] = useState(false);
+  const fetchData = () =>
+    new Promise((resolve) => {
+      setIsFetching(true);
+      setTimeout(() => {
+        setData(data.concat(makeData(30, 5, 2)));
+        setIsFetching(false);
+        resolve();
+      }, 1000);
+    });
+
+  useEffect(() => {
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      isFetching,
+      fetchMoreData: fetchData,
+    },
+    useInfiniteScroll
+  );
+
+  return (
+    <Wrapper>
+      <Datagrid datagridState={{ ...datagridState }} />;
+    </Wrapper>
+  );
+};
+
+/*const InitialLoad = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data, setData] = useState(makeData(0));
+
+  const [isFetching, setIsFetching] = useState(false);
+  const fetchData = () =>
+    new Promise((resolve) => {
+      setIsFetching(true);
+      setTimeout(() => {
+        setData(data.concat(makeData(30, 5, 2)));
+        resolve();
+      }, 1000);
+    }).then(() => setIsFetching(false));
+
+  useEffect(() => {
+    fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    isFetching,
+  });
+
+  return <Datagrid datagridState={{ ...datagridState }} />;
+};*/
+
+const WithPagination = ({ ...rest }) => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(100));
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    initialState: {
+      pageSize: 25,
+      pageSizes: [5, 10, 25, 50],
+    },
+    DatagridPagination,
+  });
+
+  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+};
+
 beforeAll(() => {
   jest.spyOn(global.console, 'warn').mockImplementation((message) => {
     if (!message.includes('componentWillReceiveProps')) {
@@ -537,6 +668,24 @@ describe(componentName, () => {
     ).toEqual('c4p--datagrid__empty-state-body');
   });
 
+  /*
+  it('Initial Load', () => {
+
+    render(<InitialLoad data-testid={dataTestId}></InitialLoad>);
+  });*/
+
+  //TODO: Ask Mark, what should we check / expect this to be?
+  it('Infinite Scroll', () => {
+    render(<InfiniteScroll data-testid={dataTestId}></InfiniteScroll>);
+
+    expect(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('div')[0].classList[0]
+    ).toBe('c4p--datagrid__virtual-scrollbar');
+  });
+
   //Ten Thousand Entries
   it('renders Ten Thousand table entries', () => {
     render(<TenThousandEntries data-testid={dataTestId}></TenThousandEntries>);
@@ -551,6 +700,55 @@ describe(componentName, () => {
         10
       )
     ).toEqual(480000);
+  });
+
+  //TODO: Complete This
+
+  it('With Pagination', () => {
+    render(<WithPagination data-testid={dataTestId}></WithPagination>);
+    document.addEventListener('load', () => {
+      console.log(
+        `Num Children ${
+          document.querySelectorAll('.bx--pagination__left')[0]
+            .childElementCount
+        }`
+      ); //TODO: Remove this console.log statement
+    });
+    // expect(document.querySelectorAll('select#bx-pagination-select-6').childElementCount).toBe(1);
+  });
+
+  it('Clickable Row', () => {
+    const alertMock = jest.spyOn(window, 'alert');
+    render(<ClickableRow data-testid={dataTestId}></ClickableRow>);
+
+    fireEvent.click(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr')[0]
+    );
+
+    setTimeout(() => {
+      expect(alertMock).toHaveBeenCalledTimes(2);
+    }, 1000);
+  });
+
+  //TODO: Figure this out
+
+  it('Is Hove On Row', () => {
+    render(<IsHoverOnRow data-testid={dataTestId}></IsHoverOnRow>);
+
+    const hoverRow = screen
+      .getByRole('table')
+      .getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr')[0];
+
+    userEvent.hover(hoverRow.getElementsByTagName('td')[1]);
+    console.log('Hovering over the first row');
+    console.log(hoverRow).getElementsByTagName('td')[3].textContent;
+
+    // console.log(hoverRow.childNodes[3]);
+    // expect(screen.getByRole('table').getElementsByTagName('tbody')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[3].innerHTML).toBe('yes!');
   });
 
   //Disables Selected Rows
@@ -698,6 +896,22 @@ describe(componentName, () => {
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('div')[0].childNodes[1].classList[0]
     ).toEqual('carbon-nested-table');
+  });
+
+  it('Nested Table', async () => {
+    const alertMock = jest.spyOn(window, 'alert');
+
+    render(<NestedTable data-testid={dataTestId}></NestedTable>);
+    fireEvent.click(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr')[0]
+    );
+
+    setTimeout(() => {
+      expect(alertMock).toHaveBeenCalledTimes(1);
+    }, 1000);
   });
 
   it('Radio Select', () => {

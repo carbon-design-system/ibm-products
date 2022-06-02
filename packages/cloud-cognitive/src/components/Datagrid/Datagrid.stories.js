@@ -20,7 +20,12 @@ import {
   Download16,
   Filter16,
 } from '@carbon/icons-react';
-import { DataTable, Button, Pagination } from 'carbon-components-react';
+import {
+  DataTable,
+  Button,
+  Pagination,
+  OverflowMenu,
+} from 'carbon-components-react';
 import {
   Datagrid,
   useDatagrid,
@@ -45,6 +50,8 @@ import {
 import mdx from './Datagrid.mdx';
 
 import styles from './_storybook-styles.scss';
+
+import OverflowMenuItem from 'carbon-components-react/lib/components/OverflowMenuItem';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -552,6 +559,60 @@ export const RightAlignedColumns = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
+//TODO: Potentially remove this
+export const RowSizeDropdownMenuItem = () => {
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader.slice(0, 3),
+      {
+        Header: 'Different cell content',
+        id: 'rowSizeDemo-cell',
+        disableSortBy: true,
+        Cell: ({ rowSize }) => rowSize,
+      },
+    ],
+    []
+  );
+  const [data] = useState(makeData(10));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      rowSize: 'xs',
+      rowSizes: [
+        {
+          value: 'xl',
+          labelText: 'More than super',
+        },
+        {
+          value: 'lg',
+          labelText: 'Super tall row',
+        },
+        {
+          value: 'md',
+        },
+        {
+          value: 'xs',
+          labelText: 'Teeny tiny row',
+        },
+      ],
+      onRowSizeChange: (value) => {
+        console.log('row size changed to: ', value);
+      },
+      DatagridActions,
+      DatagridBatchActions,
+    },
+    useSelectRows
+  );
+
+  return (
+    <Wrapper>
+      <Datagrid datagridState={{ ...datagridState }} />
+    </Wrapper>
+  );
+};
+RowSizeDropdownMenuItem.story = RowSizeDropdownMenuItem;
+
 const DatagridActions = (datagridState) => {
   const {
     selectedFlatRows,
@@ -578,18 +639,74 @@ const DatagridActions = (datagridState) => {
       bottom: '-37px',
     },
   };
-  return (
-    isNothingSelected && (
-      <React.Fragment>
-        <Button
-          kind="ghost"
-          hasIconOnly
-          tooltipPosition="bottom"
-          renderIcon={Filter16}
-          iconDescription={'Left panel'}
-          onClick={leftPanelClick}
-        />
-        <TableToolbarContent>
+
+  let numItemsToolbar = 5;
+
+  if (numItemsToolbar < 4) {
+    return (
+      isNothingSelected && (
+        <React.Fragment>
+          <Button
+            kind="ghost"
+            hasIconOnly
+            tooltipPosition="bottom"
+            renderIcon={Filter16}
+            iconDescription={'Left panel'}
+            onClick={leftPanelClick}
+          />
+          <TableToolbarContent>
+            <TableToolbarSearch
+              size="xl"
+              id="columnSearch"
+              persistent
+              placeHolderText={searchForAColumn}
+              onChange={(e) => setGlobalFilter(e.target.value)}
+            />
+            <RowSizeDropdown {...rowSizeDropdownProps} />
+            <div style={style}>
+              <Button
+                kind="ghost"
+                hasIconOnly
+                tooltipPosition="bottom"
+                renderIcon={Restart16}
+                iconDescription={'Refresh'}
+                onClick={refreshColumns}
+              />
+            </div>
+            <div style={style}>
+              <Button
+                kind="ghost"
+                hasIconOnly
+                tooltipPosition="bottom"
+                renderIcon={Download16}
+                iconDescription={'Download CSV'}
+                onClick={downloadCsv}
+              />
+            </div>
+            {CustomizeColumnsButton && (
+              <div style={style}>
+                <CustomizeColumnsButton />
+              </div>
+            )}
+          </TableToolbarContent>
+        </React.Fragment>
+      )
+    );
+  } else {
+    return (
+      isNothingSelected && (
+        <React.Fragment>
+          <OverflowMenu ariaLabel="batchStoriesOverflowMenu">
+            <OverflowMenuItem itemText="LeftPanel" onClick={leftPanelClick} />
+            <RowSizeDropdown {...rowSizeDropdownProps}></RowSizeDropdown>
+            <OverflowMenuItem
+              itemText="Download CSV"
+              onClick={downloadCsv}
+              Icon={Download16}
+            />
+            <OverflowMenuItem itemText="Refresh" onClick={refreshColumns} />
+          </OverflowMenu>
+
           <TableToolbarSearch
             size="xl"
             id="columnSearch"
@@ -597,36 +714,12 @@ const DatagridActions = (datagridState) => {
             placeHolderText={searchForAColumn}
             onChange={(e) => setGlobalFilter(e.target.value)}
           />
-          <RowSizeDropdown {...rowSizeDropdownProps} />
-          <div style={style}>
-            <Button
-              kind="ghost"
-              hasIconOnly
-              tooltipPosition="bottom"
-              renderIcon={Restart16}
-              iconDescription={'Refresh'}
-              onClick={refreshColumns}
-            />
-          </div>
-          <div style={style}>
-            <Button
-              kind="ghost"
-              hasIconOnly
-              tooltipPosition="bottom"
-              renderIcon={Download16}
-              iconDescription={'Download CSV'}
-              onClick={downloadCsv}
-            />
-          </div>
-          {CustomizeColumnsButton && (
-            <div style={style}>
-              <CustomizeColumnsButton />
-            </div>
-          )}
-        </TableToolbarContent>
-      </React.Fragment>
-    )
-  );
+
+          <RowSizeDropdown {...rowSizeDropdownProps}></RowSizeDropdown>
+        </React.Fragment>
+      )
+    );
+  }
 };
 
 export const DatagridActionsToolbar = () => {

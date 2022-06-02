@@ -9,13 +9,13 @@
 // Carbon styles at the end -- this is to obtain a "worst case" for our own CSS,
 // to ensure we are resilient against different CSS loading orders and our
 // styles have the specificity necessary to override Carbon styles when needed.
-// @use '../../cloud-cognitive/src/index-without-carbon' as *;
+@use '../../cloud-cognitive/src/index-without-carbon' as *;
 
-// // Load all Carbon styles now
-// @use '../css/carbon';
-// // @import '../../security/src/index';
-// // @import 'docs';
-// @use '@carbon/styles' as styles;
+// Load all Carbon styles now
+@use '../css/carbon';
+// @import '../../security/src/index';
+// @import 'docs';
+@use '@carbon/styles' as styles;
 
 // Setting attribute storybook-carbon-theme="XXX" on the html element
 // will set the carbon theme used for the storybook pane.

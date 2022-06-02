@@ -61,15 +61,29 @@ module.exports = {
                 },
               },
               'css-loader',
+              // {
+              //   loader: 'fast-sass-loader',
+              //   options: {
+              //     sassOptions: {
+              //       includePaths: [
+              //         resolve(__dirname, '..', '..', '..', 'node_modules'),
+              //         resolve(__dirname, '..', 'node_modules'),
+              //       ],
+              //     },
+              //   },
+              // },
               {
-                loader: 'fast-sass-loader',
+                loader: 'sass-loader',
                 options: {
+                  implementation: require('sass'),
                   sassOptions: {
                     includePaths: [
-                      resolve(__dirname, '..', '..', '..', 'node_modules'),
                       resolve(__dirname, '..', 'node_modules'),
+                      resolve(__dirname, '..', '..', '..', 'node_modules'),
                     ],
                   },
+                  warnRuleAsWarning: true,
+                  sourceMap: true,
                 },
               },
             ],

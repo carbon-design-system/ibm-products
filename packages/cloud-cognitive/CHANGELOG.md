@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.19.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.18.2...@carbon/ibm-products@1.19.0) (2022-05-31)
+
+
+### Bug Fixes
+
+* add select global filter styles ([#2005](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2005)) ([34951a7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/34951a75d7d09cdfe6e61e0ccb41de04fec30d57))
+* add select sidebar bug ([#2007](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2007)) ([9f587c8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9f587c8824a0222634266e8532e64a6b42436713))
+
+
+### Features
+
+* **DataSpreadsheet:** add multiple column reordering ([#2002](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2002)) ([3f3588f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3f3588f5521d23e8bd74fb5fdd56101ea2952e34))
+
+
+
+
+
 ## [1.18.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.18.1...@carbon/ibm-products@1.18.2) (2022-05-24)
 
 

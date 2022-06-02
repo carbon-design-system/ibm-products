@@ -38,7 +38,7 @@ export let AddSelectSidebar = ({
     const selectedItem = items.find((item) => item.id === cur);
     // certain properties should not be displayed in the sidebar
     // eslint-disable-next-line no-unused-vars
-    const { icon, avatar, ...newItem } = selectedItem;
+    const { meta, icon, avatar, ...newItem } = selectedItem;
     acc.push(newItem);
     return acc;
   }, []);

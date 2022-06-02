@@ -6,14 +6,14 @@
 //
 
 @use '../../global/styles/project-settings' as c4p-settings;
-@use '@carbon/styles/scss/type' as *;
-@use '@carbon/type/scss/font-family' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family';
 @use '@carbon/styles/scss/spacing' as *;
 
 $preview-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create-multi-step;
 
 .#{$preview-block-class}__description {
-  @include type-style('body-short-01');
+  @include type.type-style('body-short-01');
 
   padding-bottom: $spacing-04;
 }
@@ -23,7 +23,7 @@ p.#{$preview-block-class}__description:last-of-type {
 }
 
 .#{$preview-block-class}__heading {
-  @include font-weight('semibold');
+  @include font-family.font-weight('semibold');
 }
 
 .#{$preview-block-class}

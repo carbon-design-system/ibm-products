@@ -5,16 +5,16 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/spacing' as *;
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 @use '@carbon/react/scss/components/button';
 @use '@carbon/react/scss/components/inline-loading';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$action-set-block-class: #{$pkg-prefix}--action-set;
+$action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
 .#{$action-set-block-class} {
   align-items: stretch;
@@ -32,8 +32,8 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   margin: 0;
 }
 
-.#{$action-set-block-class}.#{$carbon-prefix}--btn-set
-  .#{$action-set-block-class}__action-button.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--expressive {
+.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set
+  .#{$action-set-block-class}__action-button.#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--expressive {
   max-width: none;
 }
 
@@ -84,26 +84,26 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
 // or any non-ghosts in extra large or max,
 // or row-quadruple (non-ghost),
 // buttons are 25% width with a max of 232px
-.#{$action-set-block-class}.#{$carbon-prefix}--btn-set.#{$action-set-block-class}--row-triple.#{$action-set-block-class}--lg
+.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--row-triple.#{$action-set-block-class}--lg
   .#{$action-set-block-class}__action-button:not(.#{$action-set-block-class}__action-button--ghost),
-.#{$action-set-block-class}.#{$carbon-prefix}--btn-set.#{$action-set-block-class}--xlg
+.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--xlg
   .#{$action-set-block-class}__action-button:not(.#{$action-set-block-class}__action-button--ghost),
-.#{$action-set-block-class}.#{$carbon-prefix}--btn-set.#{$action-set-block-class}--max
+.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--max
   .#{$action-set-block-class}__action-button:not(.#{$action-set-block-class}__action-button--ghost),
-.#{$action-set-block-class}.#{$carbon-prefix}--btn-set.#{$action-set-block-class}--row-quadruple
+.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--row-quadruple
   .#{$action-set-block-class}__action-button:not(.#{$action-set-block-class}__action-button--ghost) {
   max-width: rem(232px);
   flex: 0 1 25%;
 }
 
-.#{$action-set-block-class}.#{$carbon-prefix}--btn-set.#{$action-set-block-class}--row-quadruple
+.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--row-quadruple
   .#{$action-set-block-class}__action-button--ghost {
   flex: 1 1 25%;
 }
 
 .#{$action-set-block-class}
   .#{$action-set-block-class}__action-button
-  .#{$carbon-prefix}--inline-loading {
+  .#{c4p-settings.$carbon-prefix}--inline-loading {
   position: absolute;
   top: 0;
   right: 0;

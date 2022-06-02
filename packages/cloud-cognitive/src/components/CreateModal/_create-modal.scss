@@ -10,7 +10,7 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/type';
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // CreateModal uses the following Carbon components:
 // ComposedModal, ModalHeader, ModalFooter, ModalBody, Form, Button
@@ -18,15 +18,17 @@
 @use '@carbon/react/scss/components/form';
 @use '@carbon/react/scss/components/button';
 
-.#{$pkg-prefix}--create-modal {
+.#{c4p-settings.$pkg-prefix}--create-modal {
   background-color: $background;
 }
 
-.#{$pkg-prefix}--create-modal .#{$carbon-prefix}--modal-close {
+.#{c4p-settings.$pkg-prefix}--create-modal
+  .#{c4p-settings.$carbon-prefix}--modal-close {
   display: none;
 }
 
-.#{$pkg-prefix}--create-modal .#{$carbon-prefix}--modal-container {
+.#{c4p-settings.$pkg-prefix}--create-modal
+  .#{c4p-settings.$carbon-prefix}--modal-container {
   @include breakpoint(md) {
     max-height: 95%;
   }
@@ -35,45 +37,47 @@
   }
 }
 
-.#{$pkg-prefix}--create-modal .#{$carbon-prefix}--modal-header {
+.#{c4p-settings.$pkg-prefix}--create-modal
+  .#{c4p-settings.$carbon-prefix}--modal-header {
   padding-right: 20%;
   padding-bottom: $spacing-03;
   border-bottom: 1px solid $layer-accent-01;
   margin-bottom: 0;
 }
 
-.#{$pkg-prefix}--create-modal
+.#{c4p-settings.$pkg-prefix}--create-modal
   .#{$carbon-prefix}--modal-footer
   .#{$carbon-prefix}--btn {
   max-width: none;
 }
 
-.#{$pkg-prefix}--create-modal__title {
+.#{c4p-settings.$pkg-prefix}--create-modal__title {
   @include type.type-style('productive-heading-03');
 
   margin-bottom: $spacing-02;
 }
 
-.#{$pkg-prefix}--create-modal__subtitle {
+.#{c4p-settings.$pkg-prefix}--create-modal__subtitle {
   @include type.type-style('body-short-01');
 
   margin-bottom: $spacing-03;
   color: $text-secondary;
 }
 
-.#{$pkg-prefix}--create-modal__description {
+.#{c4p-settings.$pkg-prefix}--create-modal__description {
   @include type.type-style('body-long-01');
 
   padding-right: calc(20% - #{$spacing-05});
   margin: $spacing-03 0 $spacing-05 0;
 }
 
-.#{$pkg-prefix}--create-modal__form .#{$carbon-prefix}--fieldset {
+.#{c4p-settings.$pkg-prefix}--create-modal__form
+  .#{c4p-settings.$carbon-prefix}--fieldset {
   min-width: 100%;
   margin-bottom: 0;
 }
 
-.#{$pkg-prefix}--create-modal__form > * {
+.#{c4p-settings.$pkg-prefix}--create-modal__form > * {
   margin-bottom: $spacing-05;
 
   /* stylelint-disable-next-line max-nesting-depth */

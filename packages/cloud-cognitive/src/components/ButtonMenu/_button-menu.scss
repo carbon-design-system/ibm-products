@@ -7,13 +7,13 @@
 
 // Standard imports.
 @use '@carbon/styles/scss/spacing' as *;
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // TODO: @import(s) of Carbon settings and component styles and other
 // related component styles used by ButtonMenu
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{$pkg-prefix}--button-menu;
+$block-class: #{c4p-settings.$pkg-prefix}--button-menu;
 
 .#{$block-class} {
   min-width: 160px;
@@ -24,6 +24,6 @@ $block-class: #{$pkg-prefix}--button-menu;
   }
 }
 
-.#{$block-class}__options.#{$carbon-prefix}--overflow-menu-options::after {
+.#{$block-class}__options.#{c4p-settings.$carbon-prefix}--overflow-menu-options::after {
   content: initial;
 }

@@ -7,11 +7,11 @@
 
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/motion' as *;
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/react/scss/components/progress-indicator';
 
-$influencer-block-class: #{$pkg-prefix}--create-influencer;
-$create-tearsheet-block-class: #{$pkg-prefix}--tearsheet-create;
+$influencer-block-class: #{c4p-settings.$pkg-prefix}--create-influencer;
+$create-tearsheet-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create;
 $influencerAnimationStart: calc(-1 * #{$spacing-05});
 @keyframes influencer-menu-entrance {
   0% {

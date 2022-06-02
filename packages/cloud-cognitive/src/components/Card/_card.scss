@@ -6,17 +6,17 @@
 //
 
 // Standard imports.
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type' as *;
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // Card uses the following Carbon components:
 // Button, OverflowMenu, OverflowMenuItem
 @use '@carbon/react/scss/components/button';
 @use '@carbon/react/scss/components/overflow-menu';
 
-$block-class: #{$pkg-prefix}--card;
+$block-class: #{c4p-settings.$pkg-prefix}--card;
 
 .#{$block-class} {
   background: $layer-01;

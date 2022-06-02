@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family' as *;
@@ -16,12 +16,12 @@
 @use '@carbon/react/scss/components/tabs';
 
 // Standard imports.
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{$pkg-prefix}--about-modal;
+$block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
-.#{$block-class} .#{$carbon-prefix}--modal-container {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-container {
   grid-template-rows: auto auto 1fr auto;
 }
 
@@ -58,12 +58,13 @@ $block-class: #{$pkg-prefix}--about-modal;
 }
 
 .#{$block-class}.#{$block-class}--with-tabs
-  .#{$carbon-prefix}--modal-content--overflow-indicator {
+  .#{c4p-settings.$carbon-prefix}--modal-content--overflow-indicator {
   // stylelint-disable-next-line carbon/layout-token-use
-  bottom: calc(#{$spacing-09} + #{$spacing-08});
+  /* stylelint-disable-next-line prettier/prettier */
+  bottom: calc(#{$spacing-09} +#{$spacing-08});
 }
 
-.#{$block-class} .#{$carbon-prefix}--modal-content--overflow-indicator {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-content--overflow-indicator {
   background-image: linear-gradient(to bottom, #00000000, $layer-01);
 }
 

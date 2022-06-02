@@ -6,12 +6,11 @@
 //
 
 // Standard imports.
-@use '@carbon/styles' as *;
-@use '@carbon/react/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/theme' as *;
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // APIKeyModal uses the following Carbon components:
 // ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput,
@@ -22,17 +21,17 @@
 @use '@carbon/react/scss/components/form';
 @use '@carbon/react/scss/components/button';
 
-$block-class: #{$pkg-prefix}--apikey-modal;
+$block-class: #{c4p-settings.$pkg-prefix}--apikey-modal;
 
-.#{$block-class} .#{$carbon-prefix}--modal-close {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-close {
   display: none;
 }
 
-.#{$block-class} .#{$carbon-prefix}--inline-loading {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--inline-loading {
   min-height: 3rem; // increasing the height from 2 to 3 resolves an issue where the scroll bar bounces
 }
 
-.#{$block-class} .#{$carbon-prefix}--modal-content {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-content {
   padding-right: $spacing-05;
 }
 

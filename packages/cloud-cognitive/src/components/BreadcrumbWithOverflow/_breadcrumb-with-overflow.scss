@@ -8,7 +8,7 @@
 // Standard imports.
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
 // BreadcrumbWithOverflow uses the following Carbon components:
@@ -17,7 +17,7 @@
 @use '@carbon/react/scss/components/overflow-menu';
 @use '@carbon/react/scss/components/button';
 
-$_block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
+$_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
 
 @include block-wrap($block-class: $_block-class) {
   &.#{$_block-class} {
@@ -36,7 +36,8 @@ $_block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
     width: 100%;
   }
 
-  .#{$_block-class}__breadcrumb-container .#{$carbon-prefix}--breadcrumb {
+  .#{$_block-class}__breadcrumb-container
+    .#{c4p-settings.$carbon-prefix}--breadcrumb {
     width: 100%;
     flex-wrap: nowrap;
     align-items: flex-start;
@@ -52,12 +53,12 @@ $_block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
   }
 
   @include breakpoint-down(md) {
-    .#{$carbon-prefix}--breadcrumb-item {
+    .#{c4p-settings.$carbon-prefix}--breadcrumb-item {
       display: none;
     }
 
     .#{$_block-class}__breadcrumb-back,
-    .#{$carbon-prefix}--breadcrumb-item:last-child {
+    .#{c4p-settings.$carbon-prefix}--breadcrumb-item:last-child {
       display: inline-flex;
       vertical-align: middle;
     }
@@ -67,7 +68,7 @@ $_block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
     }
   }
 
-  .#{$carbon-prefix}--breadcrumb-item:last-child {
+  .#{c4p-settings.$carbon-prefix}--breadcrumb-item:last-child {
     display: inline-flex; // flex instead of block due to spacing
   }
 
@@ -76,7 +77,8 @@ $_block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
     overflow: hidden;
   }
 
-  .#{$_block-class}__displayed-breadcrumb:last-child .#{$carbon-prefix}--link {
+  .#{$_block-class}__displayed-breadcrumb:last-child
+    .#{c4p-settings.$carbon-prefix}--link {
     display: inline-block;
     overflow: hidden;
     width: 100%;

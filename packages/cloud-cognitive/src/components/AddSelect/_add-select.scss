@@ -6,12 +6,12 @@
 //
 
 // Standard imports.
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family' as *;
 
-@use 'carbon-components/scss/components/structured-list/structured-list';
+@use '@carbon/styles/scss/components/structured-list';
 
 // Standard imports.
 @use '../../global/styles/project-settings' as *;

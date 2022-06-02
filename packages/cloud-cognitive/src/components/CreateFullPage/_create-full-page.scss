@@ -6,10 +6,10 @@
 //
 
 // Standard imports.
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // Other Carbon settings.
 @use '@carbon/react/scss/grid';
@@ -29,14 +29,14 @@
 @use '../ActionSet/action-set' as *;
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{$pkg-prefix}--create-full-page;
-$step-block-class: #{$pkg-prefix}--create-full-page__step;
+$block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
+$step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
 
 .#{$block-class} .#{$block-class} {
   color: $text-primary;
 }
 
-.#{$block-class} .#{$block-class}__content .#{$carbon-prefix}--grid {
+.#{$block-class} .#{$block-class}__content .#{c4p-settings.$carbon-prefix}--grid {
   padding-top: $spacing-06;
   margin-right: 0;
   margin-left: 0;
@@ -64,7 +64,7 @@ $step-block-class: #{$pkg-prefix}--create-full-page__step;
   margin-bottom: $spacing-06;
 }
 
-.#{$block-class} .#{$carbon-prefix}--fieldset {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--fieldset {
   margin-bottom: 0;
 }
 
@@ -72,7 +72,7 @@ $step-block-class: #{$pkg-prefix}--create-full-page__step;
   margin-bottom: $spacing-05;
 }
 
-.#{$block-class} .#{$carbon-prefix}--modal-close {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-close {
   display: none;
 }
 
@@ -115,7 +115,7 @@ $step-block-class: #{$pkg-prefix}--create-full-page__step;
   padding-bottom: $spacing-07;
 }
 
-.#{$block-class} .#{$carbon-prefix}--side-nav--ux {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--side-nav--ux {
   top: 0;
   height: min-content;
   padding-top: 0;

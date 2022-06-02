@@ -8,9 +8,10 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/button/tokens' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
+
 @use '@carbon/styles/scss/components/button';
 @use '@carbon/styles/scss/components/overflow-menu';
-@use '../../global/styles/project-settings' as *;
 
 $security--prefix: security;
 
@@ -33,12 +34,12 @@ $security--prefix: security;
   background-color: $button-primary;
 }
 
-.#{$security--prefix}--combo-button__overflow-menu.#{$carbon-prefix}--overflow-menu:hover,
-.#{$security--prefix}--combo-button__overflow-menu.#{$carbon-prefix}--overflow-menu--open {
+.#{$security--prefix}--combo-button__overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu:hover,
+.#{$security--prefix}--combo-button__overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu--open {
   background-color: $button-primary-hover;
 }
 
-.#{$security--prefix}--combo-button__overflow-menu.#{$carbon-prefix}--overflow-menu:active {
+.#{$security--prefix}--combo-button__overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu:active {
   background-color: $button-primary-active;
 }
 

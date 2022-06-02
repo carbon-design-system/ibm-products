@@ -8,9 +8,9 @@
 // Standard imports.
 @use '@carbon/react/scss/grid' as *;
 @use '@carbon/react/scss/motion' as *;
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
-$block-class: #{$pkg-prefix}--cascade;
+$block-class: #{c4p-settings.$pkg-prefix}--cascade;
 $animationProps: $duration-moderate-02 motion(standard, productive) 0s 1;
 $fadeStart: translateY(3rem);
 $fadeEnd: translateY(0);

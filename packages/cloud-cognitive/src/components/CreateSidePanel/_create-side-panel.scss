@@ -6,10 +6,10 @@
 //
 
 // Standard imports.
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 @use '../SidePanel/side-panel-variables' as side-panel-vars;
 
 // CreateSidePanel uses the following IBM Products components:
@@ -20,8 +20,8 @@
 // Form
 @use '@carbon/react/scss/components/form';
 
-$create-side-panel-block-class: #{$pkg-prefix}--create-side-panel;
-$side-panel-block-class: #{$pkg-prefix}--side-panel;
+$create-side-panel-block-class: #{c4p-settings.$pkg-prefix}--create-side-panel;
+$side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 
 .#{$create-side-panel-block-class}.#{$side-panel-block-class}__container
   .#{$create-side-panel-block-class}__content-text {
@@ -47,11 +47,11 @@ $side-panel-block-class: #{$pkg-prefix}--side-panel;
   }
 }
 
-.#{$carbon-prefix}--form.#{$create-side-panel-block-class}__form {
+.#{c4p-settings.$carbon-prefix}--form.#{$create-side-panel-block-class}__form {
   padding-top: $spacing-05;
 }
 
-.#{$create-side-panel-block-class}__form.#{$carbon-prefix}--fieldset {
+.#{$create-side-panel-block-class}__form.#{c4p-settings.$carbon-prefix}--fieldset {
   padding-top: $spacing-03;
 }
 
@@ -70,7 +70,7 @@ $side-panel-block-class: #{$pkg-prefix}--side-panel;
 }
 
 .#{$create-side-panel-block-class}.#{$side-panel-block-class}
-  .#{$carbon-prefix}--btn.#{$side-panel-block-class}__close-button {
+  .#{c4p-settings.$carbon-prefix}--btn.#{$side-panel-block-class}__close-button {
   display: none;
 }
 

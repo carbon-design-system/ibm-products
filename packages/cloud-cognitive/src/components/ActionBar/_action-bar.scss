@@ -7,7 +7,7 @@
 
 // Standard imports.
 @use '@carbon/styles/scss/spacing' as *;
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
 // ActionBar uses the following Carbon components:
@@ -15,7 +15,7 @@
 @use '@carbon/react/scss/components/button';
 @use '@carbon/react/scss/components/overflow-menu';
 
-$_block-class: #{$pkg-prefix}--action-bar;
+$_block-class: #{c4p-settings.$pkg-prefix}--action-bar;
 $block-class-overflow-items: #{$_block-class}-overflow-items;
 
 @include block-wrap($block-class: $_block-class) {

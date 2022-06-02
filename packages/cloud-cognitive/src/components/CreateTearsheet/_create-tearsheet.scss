@@ -6,7 +6,7 @@
 //
 
 // Other Carbon settings.
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/react/scss/components/button/tokens' as *;
 @use '@carbon/react/scss/grid' as *;
 @use '@carbon/styles/scss/motion' as *;
@@ -14,7 +14,7 @@
 @use '@carbon/styles/scss/type';
 
 // Standard imports.
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // CreateTearsheet uses the following IBM Products components:
 // TearsheetShell
@@ -40,11 +40,11 @@
   }
 }
 
-$create-tearsheet-block-class: #{$pkg-prefix}--tearsheet-create;
-$step-block-class: #{$pkg-prefix}--tearsheet-create__step;
-$section-block-class: #{$pkg-prefix}--tearsheet-create__section;
-$tearsheet-divider-class: #{$pkg-prefix}--tearsheet-create__section--divider;
-$tearsheet-fieldset-class: #{$pkg-prefix}--tearsheet-create__step--fieldset;
+$create-tearsheet-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create;
+$step-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step;
+$section-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__section;
+$tearsheet-divider-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__section--divider;
+$tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--fieldset;
 
 .#{$create-tearsheet-block-class} {
   --#{$create-tearsheet-block-class}--total-width: 0;
@@ -76,7 +76,7 @@ $tearsheet-fieldset-class: #{$pkg-prefix}--tearsheet-create__step--fieldset;
 
 .#{$create-tearsheet-block-class}
   .#{$create-tearsheet-block-class}__content
-  .#{$carbon-prefix}--grid {
+  .#{c4p-settings.$carbon-prefix}--grid {
   padding: 0;
   margin: 0;
 }
@@ -87,12 +87,13 @@ $tearsheet-fieldset-class: #{$pkg-prefix}--tearsheet-create__step--fieldset;
 }
 
 .#{$create-tearsheet-block-class}
-  .#{$carbon-prefix}--btn-set
-  .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--disabled {
+  .#{c4p-settings.$carbon-prefix}--btn-set
+  .#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--disabled {
   box-shadow: -0.0625rem 0 0 0 $button-separator;
 }
 
-.#{$create-tearsheet-block-class} .#{$carbon-prefix}--side-nav--ux {
+.#{$create-tearsheet-block-class}
+  .#{c4p-settings.$carbon-prefix}--side-nav--ux {
   position: initial;
   background-color: transparent;
 }
@@ -133,7 +134,7 @@ $tearsheet-fieldset-class: #{$pkg-prefix}--tearsheet-create__step--fieldset;
   margin-bottom: $spacing-06;
 }
 
-.#{$create-tearsheet-block-class} .#{$carbon-prefix}--fieldset {
+.#{$create-tearsheet-block-class} .#{c4p-settings.$carbon-prefix}--fieldset {
   margin-bottom: 0;
 }
 

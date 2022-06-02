@@ -15,12 +15,10 @@ import {
   TextInput,
   NumberInput,
   Dropdown,
-} from '@carbon/react';
-import {
   Header,
   HeaderContainer,
   HeaderName,
-} from '@carbon/react/lib/components/UIShell';
+} from '@carbon/react';
 import { Copy, TrashCan, Settings } from '@carbon/icons-react';
 
 import {

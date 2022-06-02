@@ -25,7 +25,7 @@ import {
   //Tab,
   TextInput,
   //Toggle,
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 const MultiStepTearsheetWide = (props) => {
   const [createValues, setCreateValues] = useState({});

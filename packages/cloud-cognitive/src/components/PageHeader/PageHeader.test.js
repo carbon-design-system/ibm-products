@@ -11,7 +11,7 @@ import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
 
-import { Tab, Tabs } from 'carbon-components-react';
+import { Tab, Tabs } from '@carbon/react';
 import { Lightning16, Bee32 } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
@@ -23,7 +23,7 @@ import {
   required,
 } from '../../global/js/utils/test-helper';
 
-import { types as tagTypes } from 'carbon-components-react/lib/components/Tag/Tag.js';
+import { TYPES as tagTypes } from '../TagSet/constants';
 
 const { prefix } = pkg;
 

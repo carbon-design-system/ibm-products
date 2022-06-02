@@ -20,7 +20,7 @@ import {
   Row,
   TextInput,
   FormGroup,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { pkg, carbon } from '../../../../../cloud-cognitive/src/settings';
 
 import costaPic from '../../_story-assets/costa.jpeg';

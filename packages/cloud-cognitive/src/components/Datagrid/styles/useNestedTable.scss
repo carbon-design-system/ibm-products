@@ -6,14 +6,14 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '../../../global/styles/project-settings' as *;
+@use '../../../global/styles/project-settings' as c4p-settings;
 @use './variables';
 
 // used for tables within a expandable row
 .#{variables.$block-class}__expanded-row
-  .#{$carbon-prefix}--data-table-container {
+  .#{c4p-settings.$carbon-prefix}--data-table-container {
   width: calc(100% - #{$spacing-07});
   border-left: 2px solid $background-brand;
   margin-left: $spacing-07;
@@ -25,7 +25,7 @@
 }
 
 .#{variables.$block-class}__expanded-row
-  .#{$carbon-prefix}--data-table-container
+  .#{c4p-settings.$carbon-prefix}--data-table-container
   th {
   padding-top: 0;
   padding-bottom: 0;

@@ -7,7 +7,7 @@
  */
 import React from 'react';
 import { Button } from '@carbon/react';
-import { ArrowUp, ArrowDown, Arrows } from '@carbon/icons-react';
+import { ArrowUp, ArrowDown, ArrowsVertical } from '@carbon/icons-react';
 
 const ordering = {
   ASC: 'ASC',
@@ -35,10 +35,10 @@ const useSortableColumns = (hooks) => {
             case true:
               return <ArrowDown size={16} {...props} />;
             default:
-              return <Arrows size={16} {...props} />;
+              return <ArrowsVertical size={16} {...props} />;
           }
         }
-        return Arrows;
+        return <ArrowsVertical size={16} {...props} />;
       };
       const Header = (headerProp) =>
         column.disableSortBy === true ? (

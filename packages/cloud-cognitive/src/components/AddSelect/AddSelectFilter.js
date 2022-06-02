@@ -7,6 +7,7 @@
 
 import React, { useState } from 'react';
 import { Button, ButtonSet, Dropdown, TextInput, Tag } from '@carbon/react';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { Filter } from '@carbon/icons-react';
 import { pkg } from '../../settings';
@@ -52,6 +53,7 @@ export let AddSelectFilter = ({
    * clearFilters resets both
    */
   const applyFilters = () => {
+    setOpen(false);
     handleFilter(filters);
   };
 
@@ -76,9 +78,13 @@ export let AddSelectFilter = ({
   };
 
   const showFilter = multi && filterOpts?.length > 0;
+  const filterBtnClassnames = cx(`${blockClass}-toggle`, {
+    [`${blockClass}-toggle--open`]: open,
+  });
+  const dirtyInput = Object.keys(filters).length > 0;
 
   return (
-    <div>
+    <>
       <div className={`${blockClass}-search`}>
         <TextInput
           id="temp-id"
@@ -94,12 +100,12 @@ export let AddSelectFilter = ({
             kind="ghost"
             onClick={() => setOpen(!open)}
             iconDescription={iconDescription}
-            className={`${blockClass}-toggle`}
+            className={filterBtnClassnames}
             size="md"
           />
         )}
         {open && (
-          <div className={`${blockClass}`}>
+          <div className={blockClass}>
             <div className={`${blockClass}-content`}>
               <p>Filters</p>
               <div className={`${blockClass}-opts`}>
@@ -122,6 +128,7 @@ export let AddSelectFilter = ({
                 kind="secondary"
                 onClick={resetFilters}
                 className={`${blockClass}-button`}
+                disabled={!dirtyInput}
               >
                 {secondaryButtonText}
               </Button>
@@ -129,6 +136,7 @@ export let AddSelectFilter = ({
                 kind="primary"
                 onClick={applyFilters}
                 className={`${blockClass}-button`}
+                disabled={!dirtyInput && !hasFiltersApplied}
               >
                 {primaryButtonText}
               </Button>
@@ -154,7 +162,7 @@ export let AddSelectFilter = ({
           </Button>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

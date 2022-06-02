@@ -5,10 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/project-settings';
-@import '../../global/styles/display-box';
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/display-box' as *;
 
-$block-class: #{$pkg-prefix}--action-set;
+$block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
 .#{$block-class}__story-container {
   width: 96vw;

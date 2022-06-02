@@ -8,7 +8,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { TextInput } from 'carbon-components-react';
+import { TextInput } from '@carbon/react';
 
 import { pkg, carbon } from '../../settings';
 

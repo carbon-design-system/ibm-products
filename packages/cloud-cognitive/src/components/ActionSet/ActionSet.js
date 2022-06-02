@@ -191,6 +191,7 @@ ActionSet.validateActions =
     const problems = [];
 
     if (actions > 0) {
+      // eslint-disable-next-line react/prop-types
       const size = sizeFn ? sizeFn(props) : props.size || defaults.size;
       const stacking = willStack(size, actions);
 

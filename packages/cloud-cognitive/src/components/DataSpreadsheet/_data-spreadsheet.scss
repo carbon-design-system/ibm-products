@@ -6,14 +6,18 @@
 //
 
 // Standard imports.
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family' as *;
 @use '../../global/styles/mixins' as *;
 
 @mixin set-header-borders {
+  border-right: 1px solid $border-subtle-selected-01;
+  border-bottom: 1px solid $border-subtle-selected-01;
+}
+@mixin set-active-header-borders {
   border-right: 1px solid $text-placeholder;
   border-bottom: 1px solid $text-placeholder;
 }
@@ -23,7 +27,7 @@
 }
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{$pkg-prefix}--data-spreadsheet;
+$block-class: #{c4p-settings.$pkg-prefix}--data-spreadsheet;
 $body-cell-background: $field-01;
 $header-cell-background: $layer-accent-01;
 
@@ -129,7 +133,7 @@ $header-cell-background: $layer-accent-01;
     background-color: $body-cell-background;
     color: $text-primary;
     resize: none;
-    &.#{$carbon-prefix}--text-area {
+    &.#{c4p-settings.$carbon-prefix}--text-area {
       min-width: initial;
       min-height: initial;
     }
@@ -213,6 +217,38 @@ $header-cell-background: $layer-accent-01;
         background-color: $border-inverse;
         opacity: 0.25;
       }
+    }
+    .#{$block-class}__reorder-indicator-line {
+      position: absolute;
+      z-index: 4;
+      width: $spacing-01;
+      background-color: $background-brand;
+      pointer-events: none;
+    }
+    .#{$block-class}__th--active-header,
+    .#{$block-class}__td-th--active-header.#{$block-class}__td {
+      @include set-active-header-borders();
+
+      background-color: $background-selected-hover;
+    }
+    .#{$block-class}__th--selected-header,
+    .#{$block-class}__td-th--selected-header.#{$block-class}__td {
+      background-color: $background-inverse;
+      color: $text-inverse;
+
+      &:focus,
+      &:hover {
+        background-color: $background-inverse;
+      }
+    }
+    .#{$block-class}__th--selected-header.#{$block-class}__th {
+      cursor: grab;
+    }
+    .#{$block-class}__th--selected-header-reorder-active.#{$block-class}__th {
+      cursor: grabbing;
+    }
+    .#{$block-class}__list--container {
+      overscroll-behavior: none;
     }
   }
   .#{$block-class}__reorder-indicator-line {

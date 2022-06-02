@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "0.35.3",
+  "version": "0.35.5",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -19,9 +19,9 @@
   ],
   "scripts": {
     "build": "run-s build:carbon build:storybook",
-    "build:carbon": "sass --style=expanded --load-path node_modules --load-path ../../node_modules .storybook/carbon.scss:css/carbon.css",
-    "build:storybook": "export \"NODE_OPTIONS=--max_old_space_size=2048\" && build-storybook -s ./public",
-    "clean": "rimraf storybook-static css",
+    "build:carbon": "yarn dlx sass --style=expanded --load-path ../cloud-cognitive/node_modules --load-path ../../node_modules --load-path node_modules .storybook/carbon.scss:css/carbon.css",
+    "build:storybook": "yarn dlx cross-env \"NODE_OPTIONS=--max_old_space_size=8192\" && build-storybook -s ./public",
+    "clean": "yarn dlx rimraf storybook-static css",
     "start": "run-s build:carbon start:storybook",
     "start:storybook": "start-storybook -s ./public -p 3000",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (issue #1595)",
@@ -31,7 +31,7 @@
     "@babel/core": "^7.17.9",
     "@carbon/grid": "^11.1.0",
     "@carbon/react": "^1.2.0",
-    "@carbon/storybook-addon-theme": "^0.22.17",
+    "@carbon/storybook-addon-theme": "^0.22.19",
     "@storybook/addon-actions": "^6.4.22",
     "@storybook/addon-controls": "^6.4.22",
     "@storybook/addon-docs": "^6.4.22",
@@ -53,7 +53,7 @@
     "babel-preset-ibm-cloud-cognitive": "^0.14.14",
     "css-loader": "^6.7.1",
     "fast-sass-loader": "^2.0.1",
-    "npm-check-updates": "^12.5.10",
+    "npm-check-updates": "^12.5.11",
     "npm-run-all": "^4.1.5",
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
@@ -61,9 +61,10 @@
     "regenerator-runtime": "^0.13.9",
     "rimraf": "^3.0.2",
     "sass": "^1.51.0",
+    "sass-loader": "^13.0.0",
     "style-loader": "^3.3.1",
     "typescript": "^4.6.4",
-    "webpack": "^5.72.0",
+    "webpack": "^5.72.1",
     "webpack-merge": "^5.8.0"
   }
 }

@@ -16,13 +16,13 @@ import {
 
 import { NoDataEmptyState } from '.';
 
-import styles from '../_index.scss';
+// import styles from '../_index.scss';
 
 export default {
   title: getStoryTitle(NoDataEmptyState.displayName),
   component: NoDataEmptyState,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },

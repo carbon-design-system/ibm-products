@@ -9,13 +9,13 @@
 @use '@carbon/styles' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/type/scss/font-family' as *;
+@use '@carbon/type/scss/font-family';
 @use '../../global/styles/project-settings' as *;
 @use './color-map' as *;
 
 // UserProfileImage uses the following Carbon components:
-// TooltipIcon
-@use '@carbon/react/scss/components/tooltip';
+// IconButton
+@use '@carbon/react/scss/components/button';
 
 $block-class: #{$pkg-prefix}--user-profile-image;
 
@@ -130,17 +130,17 @@ $theme-keys: map-keys($themes);
 .#{$block-class}--md {
   @include size('md');
   @include type.type-style('label-01');
-  @include font-weight('semibold');
+  @include font-family.font-weight('semibold');
 }
 
 .#{$block-class}--sm {
   @include size('sm');
   @include type.type-style('label-01');
-  @include font-weight('semibold');
+  @include font-family.font-weight('semibold');
 }
 
 .#{$block-class}--xs {
   @include size('xs');
   @include type.type-style('label-01');
-  @include font-weight('semibold');
+  @include font-family.font-weight('semibold');
 }

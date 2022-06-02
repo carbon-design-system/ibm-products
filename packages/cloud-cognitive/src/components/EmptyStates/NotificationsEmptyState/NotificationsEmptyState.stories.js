@@ -15,13 +15,13 @@ import {
 } from '../../../global/js/utils/story-helper';
 import { NotificationsEmptyState } from '.';
 
-import styles from '../_index.scss';
+// import styles from '../_index.scss';
 
 export default {
   title: getStoryTitle(NotificationsEmptyState.displayName),
   component: NotificationsEmptyState,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },

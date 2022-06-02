@@ -5,29 +5,31 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/project-settings';
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
-$block-class: #{$pkg-prefix}--apikey-modal;
+$block-class: #{c4p-settings.$pkg-prefix}--apikey-modal;
 
-.#{$block-class} .#{$carbon-prefix}--radio-button-wrapper {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--radio-button-wrapper {
   margin-bottom: $spacing-02;
 }
 
-.#{$block-class}__permissions.#{$carbon-prefix}--fieldset {
+.#{$block-class}__permissions.#{c4p-settings.$carbon-prefix}--fieldset {
   margin-top: $spacing-05;
   margin-bottom: 0;
 }
 
-.#{$block-class}__resource-toggle.#{$carbon-prefix}--fieldset {
+.#{$block-class}__resource-toggle.#{c4p-settings.$carbon-prefix}--fieldset {
   margin-top: 0;
   margin-bottom: $spacing-05;
 }
 
-.#{$block-class}__resource-name.#{$carbon-prefix}--fieldset {
+.#{$block-class}__resource-name.#{c4p-settings.$carbon-prefix}--fieldset {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.#{$block-class}__button-loading.#{$carbon-prefix}--btn--primary {
-  background: $link-02;
+.#{$block-class}__button-loading.#{c4p-settings.$carbon-prefix}--btn--primary {
+  background: $link-secondary;
 }

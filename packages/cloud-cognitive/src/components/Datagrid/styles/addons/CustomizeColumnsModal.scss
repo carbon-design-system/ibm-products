@@ -6,14 +6,14 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '../../../../global/styles/project-settings' as *;
+@use '../../../../global/styles/project-settings' as c4p-settings;
 @use '../variables';
 
 .#{variables.$block-class}__customize-columns-modal {
-  .#{$carbon-prefix}--modal-content {
+  .#{c4p-settings.$carbon-prefix}--modal-content {
     position: inherit;
     display: flex;
     flex-flow: column;

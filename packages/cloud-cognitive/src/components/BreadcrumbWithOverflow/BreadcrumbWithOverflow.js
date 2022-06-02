@@ -11,7 +11,7 @@ import React, { useState, useEffect, useRef } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Link, TooltipIcon } from '@carbon/react';
+import { Link, IconButton } from '@carbon/react';
 import { pkg, carbon } from '../../settings';
 import { useResizeDetector } from 'react-resize-detector';
 import { ArrowLeft } from '@carbon/icons-react';
@@ -310,11 +310,12 @@ export let BreadcrumbWithOverflow = ({
               <Link
                 href={backItem.href}
                 renderIcon={() => (
-                  <TooltipIcon
-                    tooltipText={backItem.title || backItem.label}
-                    direction="right"
-                    renderIcon={(props) => <ArrowLeft size={16} {...props} />}
-                  />
+                  <IconButton
+                    label={backItem.title || backItem.label}
+                    align="right"
+                  >
+                    <ArrowLeft size={16} />
+                  </IconButton>
                 )}
               />
             </BreadcrumbItem>

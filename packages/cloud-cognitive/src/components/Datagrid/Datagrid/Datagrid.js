@@ -89,7 +89,8 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
         blockClass,
         withVirtualScroll
           ? `${blockClass}__datagridWrap`
-          : `${blockClass}__datagridWrap-simple`
+          : `${blockClass}__datagridWrap-simple`,
+        !isFetching && rows.length === 0 ? `${blockClass}__empty-state` : ''
       )}
       {...getDevtoolsProps(componentName)}
     >

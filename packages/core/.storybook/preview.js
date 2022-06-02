@@ -12,7 +12,7 @@ import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs';
 import LinkTo from '@storybook/addon-links/react';
 import { themes } from '@storybook/theming';
 
-import { Column, Row } from 'carbon-components-react';
+import { Column, Row } from '@carbon/react';
 import React, { useEffect } from 'react';
 
 import { pkg } from '../../cloud-cognitive/src/settings';

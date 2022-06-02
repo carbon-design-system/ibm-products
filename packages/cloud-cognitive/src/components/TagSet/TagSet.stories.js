@@ -7,7 +7,7 @@
 
 import React, { useRef } from 'react';
 
-import { types as tagTypes } from '@carbon/react/es/components/Tag/Tag';
+import { TYPES as tagTypes } from '../TagSet/constants';
 import { pkg } from '../../settings';
 import {
   getStoryTitle,

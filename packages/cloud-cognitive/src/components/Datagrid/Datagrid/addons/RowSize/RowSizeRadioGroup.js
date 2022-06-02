@@ -135,7 +135,7 @@ RowSizeRadioGroup.defaultProps = {
 
 RowSizeRadioGroup.propTypes = {
   buttonRef: PropTypes.any.isRequired,
-  datagridName: PropTypes.string.isRequired,
+  datagridName: PropTypes.string,
   hideRadioGroup: PropTypes.func.isRequired,
   legendText: PropTypes.string,
   onChange: PropTypes.func.isRequired,

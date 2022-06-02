@@ -7,21 +7,13 @@
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import {
-  TextInput,
-  Tag,
-  OverflowMenu,
-  OverflowMenuItem,
-  Checkbox,
-} from '@carbon/react';
-import {
-  Filter,
-  ArrowsVertical,
-  ArrowUp,
-  ArrowDown,
-} from '@carbon/icons-react';
+import { TextInput, Tag, OverflowMenu, Checkbox } from '@carbon/react';
+import { Filter } from '@carbon/icons-react';
 import { pkg, carbon } from '../../settings';
 import { AddSelectList } from './AddSelectList';
+import { AddSelectSort } from './AddSelectSort';
+import { sortItems, getSortBy } from './add-select-utils';
+import { useItemSort } from './hooks/useItemSort';
 import uuidv4 from '../../global/js/utils/uuidv4';
 const componentName = 'AddSelect';
 
@@ -35,8 +27,8 @@ export let AddSelectColumn = ({
 }) => {
   const [allSelected, setAllSelected] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [sortDirection, setSortDirection] = useState('');
-  const [sortAttribute, setSortAttribute] = useState('');
+  const { sortDirection, setSortDirection, sortAttribute, setSortAttribute } =
+    useItemSort();
   const [filters, setFilters] = useState([]);
   const blockClass = `${pkg.prefix}--add-select`;
   const colClass = `${blockClass}__column`;
@@ -48,49 +40,11 @@ export let AddSelectColumn = ({
     setAllSelected(isAllSelected);
   }, [filteredItems, multiSelection]);
 
-  // sorting
-  const colSortBy = filteredItems.find((item) => item.sortBy)?.sortBy;
-  const sortByOpts = colSortBy
-    ? colSortBy.reduce((acc, cur) => {
-        const opts = [
-          {
-            id: `${cur}-asc`,
-            itemText: (
-              <>
-                <ArrowUp size={16} />
-                {cur}
-              </>
-            ),
-            direction: 'asc',
-            attribute: cur,
-          },
-          {
-            id: `${cur}-desc`,
-            itemText: (
-              <>
-                <ArrowDown size={16} />
-                {cur}
-              </>
-            ),
-            direction: 'desc',
-            attribute: cur,
-          },
-        ];
-        return [...acc, ...opts];
-      }, [])
-    : [];
-
   // filtering
   const colFilterBy = filteredItems.find((item) => item.filterBy)?.filterBy;
   const filterByOpts = colFilterBy
     ? filteredItems.map((item) => item[colFilterBy])
     : [];
-
-  // handlers
-  const sortHandler = ({ direction, attribute }) => {
-    setSortAttribute(attribute);
-    setSortDirection(direction);
-  };
 
   const selectAllHandler = (checked) => {
     const itemIds = filteredItems.map((item) => item.id);
@@ -125,20 +79,13 @@ export let AddSelectColumn = ({
     return filters.some((filter) => filter === filterByValue);
   };
 
-  const sortItems = (a, b) => {
-    const valueA = a[sortAttribute]?.split(' ').join('');
-    const valueB = b[sortAttribute]?.split(' ').join('');
-    if (sortDirection === 'desc') {
-      return valueA > valueB ? -1 : 1;
-    }
-
-    return valueA < valueB ? -1 : 1;
-  };
+  const sortFn = sortItems(sortAttribute, sortDirection);
+  const sortBy = getSortBy(filteredItems);
 
   const colItems = filteredItems
     .filter(filterBySearch) // first check if the item meets the search
     .filter(filterByAttribute) // then check if the item is included in the filter
-    .sort(sortItems); // then sort the items by whatever criteria
+    .sort(sortFn); // then sort the items by whatever criteria
 
   return (
     <div className={colClass}>
@@ -153,21 +100,14 @@ export let AddSelectColumn = ({
           labelText={columnInputPlaceholder}
         />
         <div className={`${colClass}-sort-filter`}>
-          {sortByOpts.length > 0 && (
-            <OverflowMenu
-              renderIcon={(props) => <ArrowsVertical size={32} {...props} />}
-              className={`${colClass}-overflow`}
-              flipped
-            >
-              {sortByOpts.map((opt) => (
-                <OverflowMenuItem
-                  key={opt.id}
-                  itemText={opt.itemText}
-                  onClick={() => sortHandler(opt)}
-                />
-              ))}
-            </OverflowMenu>
-          )}
+          <AddSelectSort
+            items={filteredItems}
+            setSortAttribute={setSortAttribute}
+            setSortDirection={setSortDirection}
+            sortAttribute={sortAttribute}
+            sortDirection={sortDirection}
+            sortBy={sortBy}
+          />
           {filterByOpts.length > 0 && (
             <OverflowMenu
               renderIcon={(props) => <Filter size={32} {...props} />}

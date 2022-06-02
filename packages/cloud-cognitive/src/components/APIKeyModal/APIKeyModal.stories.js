@@ -15,7 +15,7 @@ import {
   Toggle,
   InlineLoading,
   Form,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../settings';
 import {

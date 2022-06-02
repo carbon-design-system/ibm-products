@@ -15,7 +15,7 @@ import { pkg, carbon } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Link } from 'carbon-components-react';
+import { Link } from '@carbon/react';
 import { AboutModal } from '.';
 
 import ExampleLogo from './_story-assets/example-logo.svg';

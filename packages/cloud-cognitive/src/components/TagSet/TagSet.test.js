@@ -12,7 +12,7 @@ import { pkg, carbon } from '../../settings';
 import { TagSet } from '.';
 import { TagSetModal } from './TagSetModal';
 
-import { types as tagTypes } from 'carbon-components-react/lib/components/Tag/Tag.js';
+import { TYPES as tagTypes } from './constants';
 
 import {
   expectMultipleError,

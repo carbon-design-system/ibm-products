@@ -12,9 +12,10 @@
 @use '../../global/styles/mixins' as *;
 
 // BreadcrumbWithOverflow uses the following Carbon components:
-// Breadcrumb, BreadcrumbItem, OverflowMenu, OverflowMenuItem
+// Breadcrumb, BreadcrumbItem, OverflowMenu, OverflowMenuItem, IconButton
 @use '@carbon/react/scss/components/breadcrumb';
 @use '@carbon/react/scss/components/overflow-menu';
+@use '@carbon/react/scss/components/button';
 
 $_block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
 

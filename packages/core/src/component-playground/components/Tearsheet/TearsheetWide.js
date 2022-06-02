@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Tearsheet } from '../../../../../cloud-cognitive/src';
-import { Form, FormGroup, TextInput } from 'carbon-components-react';
+import { Form, FormGroup, TextInput } from '@carbon/react';
 
 const TearsheetWide = (props) => {
   return (

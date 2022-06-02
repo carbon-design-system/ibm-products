@@ -6,7 +6,7 @@
 //
 
 // Standard imports.
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
 @use './styles/datagrid';
@@ -30,12 +30,12 @@
 // TODO: @import(s) of IBM Products component styles used by Datagrid
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{$pkg-prefix}--datagrid;
+$block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 
 .#{$block-class}__datagridWrap {
   display: block;
   width: 100%;
-  :global(.#{$carbon-prefix}--checkbox) {
+  :global(.#{c4p-settings.$carbon-prefix}--checkbox) {
     display: none;
   }
 }
@@ -49,7 +49,7 @@ $block-class: #{$pkg-prefix}--datagrid;
 
   /* stylelint-disable-next-line */
   :global {
-    .#{$carbon-prefix}--pagination {
+    .#{c4p-settings.$carbon-prefix}--pagination {
       // newer version of carbon pagination has scroll which doesn't make any sense, removing it
       /* stylelint-disable-next-line declaration-property-value-disallowed-list */
       overflow-x: unset;

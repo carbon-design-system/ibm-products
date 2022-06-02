@@ -12,7 +12,10 @@ import React, { useState, useEffect } from 'react';
 import namor from 'namor';
 import { useColumnOrder } from 'react-table';
 
-import { getStoryTitle } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import { Activity, Restart, Download, Filter } from '@carbon/icons-react';
 import { DataTable, Button, Pagination } from '@carbon/react';
@@ -32,11 +35,11 @@ import {
   useSelectAllWithToggle,
 } from '.';
 import {
-  /*StickyActionsColumn,*/ CustomizeColumnStory,
+  /*StickyActionsColumn,*/ CustomizeColumnStoryNotes,
   RowSizeDropdownStory,
-  SelectAllWitHToggle,
+  // SelectAllWithToggle,
   LeftPanelStory,
-} from './Datagrid.stories';
+} from './Datagrid.stories-helpers';
 import mdx from './Datagrid.mdx';
 
 import styles from './_storybook-styles.scss';
@@ -203,6 +206,30 @@ export const BasicUsage = () => {
   const datagridState = useDatagrid({
     columns,
     data,
+  });
+
+  return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
+export const EmptyState = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(0));
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription =
+    'Description text explaining why this card is empty.';
+  const emptyStateSize = 'lg';
+  const illustrationTheme = 'light';
+
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    emptyStateTitle,
+    emptyStateDescription,
+    emptyStateSize,
+    illustrationTheme,
+    DatagridActions,
+    DatagridBatchActions,
+    DatagridPagination,
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -650,9 +677,9 @@ export const SelectItemsInAllPages = () => {
     </>
   );
 };
-SelectItemsInAllPages.story = SelectAllWitHToggle;
+// SelectItemsInAllPages.story = SelectAllWithToggle;
 
-export const CustomizingColumns = () => {
+const CustomizingColumns = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
@@ -688,7 +715,11 @@ export const CustomizingColumns = () => {
     </>
   );
 };
-CustomizingColumns.story = CustomizeColumnStory;
+
+export const CustomizeColumnStory = prepareStory(CustomizingColumns, {
+  storyName: 'Customize column order',
+  story: CustomizeColumnStoryNotes,
+});
 
 export const RowSizeDropdown = () => {
   const columns = React.useMemo(

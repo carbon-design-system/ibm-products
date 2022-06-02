@@ -1,21 +1,22 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@import './index';
 // shared card styles can be found in the Card folder
-@import '../Card/storybook-styles';
+@use '../Card/storybook-styles';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
 .graph {
   width: 200px;
   height: 100px;
-  border: 10px solid $ui-03;
-  border-right-color: $support-02;
+  border: 10px solid $border-subtle-01;
+  border-right-color: $support-success;
   border-bottom: 0;
-  border-left-color: $support-01;
+  border-left-color: $support-error;
   margin: 0 auto $spacing-06 auto;
   border-top-left-radius: 110px;
   border-top-right-radius: 110px;

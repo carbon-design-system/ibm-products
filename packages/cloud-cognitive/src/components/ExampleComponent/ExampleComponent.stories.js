@@ -15,7 +15,7 @@ import {
 import { ExampleComponent } from '.';
 import mdx from './ExampleComponent.mdx';
 
-import styles from './_storybook-styles.scss';
+// import styles from './_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(ExampleComponent.displayName),
@@ -24,7 +24,7 @@ export default {
     borderColor: { control: 'color' },
   },
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },

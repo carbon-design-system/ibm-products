@@ -7,6 +7,7 @@
 
 import React from 'react';
 import {
+  Button,
   Checkbox,
   RadioButton,
   StructuredListRow,
@@ -15,7 +16,7 @@ import {
   StructuredListCell,
   Dropdown,
 } from '@carbon/react';
-import { ChevronRight } from '@carbon/icons-react';
+import { ChevronRight, View } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { UserProfileImage } from '../UserProfileImage';
@@ -24,10 +25,13 @@ const componentName = 'AddSelectList';
 
 export let AddSelectList = ({
   filteredItems,
+  metaIconDescription,
   modifiers,
   multi,
   multiSelection,
+  navIconDescription,
   path,
+  setDisplayMetaPanel,
   setMultiSelection,
   setPath,
   setSingleSelection,
@@ -148,7 +152,7 @@ export let AddSelectList = ({
                           light
                           label={modifiers?.label}
                           disabled={!isSelected(item.id)}
-                          className={`${blockClass}-dropdown`}
+                          className={`${blockClass}-dropdown ${blockClass}-hidden-hover`}
                         />
                       )}
                     </>
@@ -164,10 +168,32 @@ export let AddSelectList = ({
                     />
                   )}
                   {item.children && (
-                    <ChevronRight
-                      size={16}
+                    <Button
+                      renderIcon={(props) => (
+                        <ChevronRight size={16} {...props} />
+                      )}
+                      iconDescription={navIconDescription}
+                      tooltipPosition="left"
+                      tooltipAlignment="center"
+                      hasIconOnly
                       onClick={() => onNavigateItem(item)}
+                      kind="ghost"
+                      size="sm"
                     />
+                  )}
+                  {item.meta && (
+                    <div className={`${blockClass}-hidden-hover`}>
+                      <Button
+                        renderIcon={(props) => <View size={16} {...props} />}
+                        iconDescription={metaIconDescription}
+                        tooltipPosition="left"
+                        tooltipAlignment="center"
+                        hasIconOnly
+                        onClick={() => setDisplayMetaPanel(item)}
+                        kind="ghost"
+                        size="sm"
+                      />
+                    </div>
                   )}
                 </div>
               </StructuredListCell>
@@ -181,10 +207,13 @@ export let AddSelectList = ({
 
 AddSelectList.propTypes = {
   filteredItems: PropTypes.array,
+  metaIconDescription: PropTypes.string,
   modifiers: PropTypes.object,
   multi: PropTypes.bool,
   multiSelection: PropTypes.array,
+  navIconDescription: PropTypes.string,
   path: PropTypes.array,
+  setDisplayMetaPanel: PropTypes.func,
   setMultiSelection: PropTypes.func,
   setPath: PropTypes.func,
   setSingleSelection: PropTypes.func,

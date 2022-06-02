@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CloudApp16 } from '@carbon/icons-react';
+import { CloudApp } from '@carbon/icons-react';
 import React from 'react';
 
 import {
@@ -15,7 +15,7 @@ import {
 
 import { ComboButton, ComboButtonItem } from '..';
 
-import styles from './_combo-button.scss';
+// import styles from './_combo-button.scss';
 
 export default {
   title: getStoryTitle(ComboButton.displayName),
@@ -23,13 +23,17 @@ export default {
   subcomponents: {
     ComboButtonItem,
   },
-  parameters: { styles },
+  parameters: {
+    // styles
+  },
 };
 
 export const Default = prepareStory(() => (
   <ComboButton>
     <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
-    <ComboButtonItem renderIcon={CloudApp16}>ComboButtonItem 2</ComboButtonItem>
+    <ComboButtonItem renderIcon={(props) => <CloudApp size={16} {...props} />}>
+      ComboButtonItem 2
+    </ComboButtonItem>
     <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
   </ComboButton>
 ));

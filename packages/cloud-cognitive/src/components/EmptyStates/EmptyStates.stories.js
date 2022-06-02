@@ -25,7 +25,7 @@ import {
   UnauthorizedEmptyState,
 } from '.';
 
-import styles from './_storybook-styles.scss';
+// import styles from './_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(EmptyState.displayName),
@@ -39,7 +39,7 @@ export default {
     UnauthorizedEmptyState,
   },
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },

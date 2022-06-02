@@ -17,7 +17,7 @@ import {
   DatePickerInput,
   RadioButton,
   RadioButtonGroup,
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 import { pkg, carbon } from '../../settings';
 import {

@@ -5,23 +5,25 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/project-settings';
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing';
 
-$block-class: #{$pkg-prefix}--create-side-panel;
+$block-class: #{c4p-settings.$pkg-prefix}--create-side-panel;
 $story-prefix: create-side-panel-stories__;
 
 .#{$story-prefix}example-container {
   display: grid;
   align-items: flex-end;
-  grid-gap: $spacing-04;
+  grid-gap: spacing.$spacing-04;
   grid-template-columns: 1fr 1fr;
 }
 
-.#{$story-prefix}example-form-group .#{$carbon-prefix}--label {
+.#{$story-prefix}example-form-group .#{c4p-settings.$carbon-prefix}--label {
   margin-bottom: 0;
 }
 
-.#{$block-class} .#{$carbon-prefix}--number__control-btn::before,
-.#{$block-class} .#{$carbon-prefix}--number__control-btn::after {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--number__control-btn::before,
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--number__control-btn::after {
   background-color: $field-02;
 }

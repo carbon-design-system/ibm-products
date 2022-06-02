@@ -1,4 +1,3 @@
-/* stylelint-disable max-nesting-depth */
 //
 // Copyright IBM Corp. 2021
 //
@@ -10,8 +9,12 @@
 @use '@carbon/styles' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family' as *;
+
+@use 'carbon-components/scss/components/structured-list/structured-list';
+
+// Standard imports.
 @use '../../global/styles/project-settings' as *;
-@use '@carbon/react/scss/components/structured-list';
 
 $block-class: #{$pkg-prefix}--add-select;
 $tearsheet-class: #{$pkg-prefix}--tearsheet;
@@ -54,19 +57,19 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
     color: $text-secondary;
   }
 
-  &-cell:hover .#{$block-class}__selections-dropdown {
+  &-cell:hover .#{$block-class}__selections-hidden-hover {
     visibility: visible;
   }
 
-  &-dropdown {
+  &-hidden-hover {
     visibility: hidden;
   }
 
   &-row-selected {
-    background: $layer-hover-01;
+    background: #e5e5e5;
   }
 
-  &-row-selected .#{$block-class}__selections-dropdown {
+  &-row-selected .#{$block-class}__selections-hidden-hover {
     visibility: visible;
   }
 
@@ -100,6 +103,12 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   &-cell-icon {
     margin-right: $spacing-03;
   }
+}
+
+.#{$block-class}__sub-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
 // sidebar
@@ -165,7 +174,11 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   overflow-x: auto;
 }
 
-.#{$block-class}__columns .#{$block-class}__selections-cell {
+// table override
+.#{$block-class}
+  .#{$block-class}__columns
+  .#{$carbon-prefix}--structured-list-td {
+  height: 0;
   // stylelint-disable-next-line
   padding: 0 !important;
 }
@@ -175,8 +188,8 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   max-width: 15rem;
   flex: 1 0 15rem;
   padding: $spacing-05;
-  border-top: 1px solid $layer-accent-01;
-  border-right: 1px solid $layer-accent-01;
+  border-top: 1px solid $border-subtle-01;
+  border-right: 1px solid $border-subtle-01;
 
   &-search-bar {
     display: flex;
@@ -213,6 +226,7 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   width: 100%;
   max-width: 40rem;
   background: $layer-01;
+  box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
   transform: translate(0, 100%);
 
   &-search {
@@ -246,8 +260,41 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
 }
 
 button.#{$block-class}__global-filter-toggle {
-  border-bottom-color: $toggle-off;
+  border-bottom-color: $border-strong-01;
   background: $field-01;
+
+  &--open {
+    border-bottom: $border-strong-01;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  }
+}
+
+// meta panel
+.#{$block-class}__meta-panel {
+  padding: $spacing-05;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-05;
+  }
+
+  &-entry {
+    margin-bottom: $spacing-05;
+  }
+}
+
+.#{$block-class}__meta-panel p.#{$block-class}__meta-panel-title {
+  @include type.type-style('productive-heading-03');
+}
+
+.#{$block-class}__meta-panel p.#{$block-class}__meta-panel-entry-title {
+  @include type.type-style('productive-heading-01');
+}
+
+.#{$block-class}__meta-panel p.#{$block-class}__meta-panel-entry-body {
+  @include type.type-style('body-short-01');
 }
 
 // overrides
@@ -283,7 +330,9 @@ button.#{$block-class}__global-filter-toggle {
 }
 
 .#{$block-class} .#{$carbon-prefix}--structured-list-td {
-  padding-bottom: $spacing-05;
+  height: 4rem;
+  padding: $spacing-05;
+  vertical-align: middle;
 }
 
 .#{$block-class} .#{$carbon-prefix}--radio-button__appearance {

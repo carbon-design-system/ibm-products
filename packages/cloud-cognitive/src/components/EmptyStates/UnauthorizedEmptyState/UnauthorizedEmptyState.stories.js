@@ -15,13 +15,13 @@ import {
 } from '../../../global/js/utils/story-helper';
 import { UnauthorizedEmptyState } from '.';
 
-import styles from '../_index.scss';
+// import styles from '../_index.scss';
 
 export default {
   title: getStoryTitle(UnauthorizedEmptyState.displayName),
   component: UnauthorizedEmptyState,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },

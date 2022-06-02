@@ -11,15 +11,20 @@ import { SubtractAlt } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
+import { AddSelectMetaPanel } from './AddSelectMetaPanel';
 const componentName = 'AddSelectSidebar';
 
 export let AddSelectSidebar = ({
+  closeIconDescription,
+  displayMetalPanel,
   influencerTitle,
   items,
+  metaPanelTitle,
   multiSelection,
   noSelectionDescription,
   noSelectionTitle,
   removeIconDescription,
+  setDisplayMetaPanel,
   setMultiSelection,
 }) => {
   const blockClass = `${pkg.prefix}--add-select__sidebar`;
@@ -56,6 +61,17 @@ export let AddSelectSidebar = ({
     </div>
   );
 
+  if (Object.keys(displayMetalPanel).length !== 0) {
+    return (
+      <AddSelectMetaPanel
+        closeIconDescription={closeIconDescription}
+        meta={displayMetalPanel.meta}
+        setDisplayMetaPanel={setDisplayMetaPanel}
+        title={metaPanelTitle}
+      />
+    );
+  }
+
   return (
     <div className={blockClass}>
       <div className={`${blockClass}-header`}>
@@ -91,12 +107,16 @@ export let AddSelectSidebar = ({
 };
 
 AddSelectSidebar.propTypes = {
+  closeIconDescription: PropTypes.string,
+  displayMetalPanel: PropTypes.object,
   influencerTitle: PropTypes.string,
   items: PropTypes.array,
+  metaPanelTitle: PropTypes.string,
   multiSelection: PropTypes.array,
   noSelectionDescription: PropTypes.string,
   noSelectionTitle: PropTypes.string,
   removeIconDescription: PropTypes.string,
+  setDisplayMetaPanel: PropTypes.func,
   setMultiSelection: PropTypes.func,
 };
 

@@ -7,17 +7,17 @@
 
 import React, { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { Button } from '@carbon/react';
 import {
+  Button,
   Header,
   HeaderContainer,
   HeaderName,
   HeaderGlobalBar,
   HeaderGlobalAction,
-} from '@carbon/react/lib/components/UIShell';
+} from '@carbon/react';
 import { User, Notification } from '@carbon/icons-react';
 import { white } from '@carbon/colors';
-import styles from './_storybook-styles.scss';
+// import styles from './_storybook-styles.scss';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { UnreadNotificationBell } from './preview-components/UnreadNotificationBell';
 
@@ -35,7 +35,7 @@ export default {
   title: getStoryTitle(NotificationsPanel.displayName),
   component: NotificationsPanel,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },

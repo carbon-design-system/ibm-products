@@ -15,13 +15,13 @@ import {
 } from '../../../global/js/utils/story-helper';
 import { NotFoundEmptyState } from '.';
 
-import styles from '../_index.scss';
+// import styles from '../_index.scss';
 
 export default {
   title: getStoryTitle(NotFoundEmptyState.displayName),
   component: NotFoundEmptyState,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },

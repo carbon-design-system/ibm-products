@@ -5,20 +5,26 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../../global/styles/project-settings' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // TODO: add any additional styles used by Datagrid.stories.js
 // helper class for the nested table
 
-$block-class: #{$pkg-prefix}--datagrid;
+$block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 
 .sb-show-main.sb-main-centered #root {
   width: 100%;
+  height: 100vh;
   padding: 0;
 }
 
+.preview-position-fix {
+  height: 100%;
+}
+
 .carbon-nested-table {
-  border-bottom: 1px solid $ui-03;
+  border-bottom: 1px solid $border-subtle-01;
 
   .#{$block-class}__virtual-scrollbar > div > div:last-child td {
     border-bottom: none;

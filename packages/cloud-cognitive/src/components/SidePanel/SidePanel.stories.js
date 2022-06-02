@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './_storybook-styles.scss';
 import React, { useRef, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
@@ -22,14 +23,11 @@ import {
   TableHead,
   TableRow,
   TableCell,
-} from '@carbon/react';
-import {
   Header,
   HeaderContainer,
   HeaderName,
-} from '@carbon/react/lib/components/UIShell';
+} from '@carbon/react';
 import { Copy, TrashCan, Settings } from '@carbon/icons-react';
-import styles from './_storybook-styles.scss';
 import {
   getStoryTitle,
   prepareStory,
@@ -41,7 +39,7 @@ export default {
   title: getStoryTitle(SidePanel.displayName),
   component: SidePanel,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },

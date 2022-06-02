@@ -31,11 +31,7 @@ import {
   ZoomOut,
 } from '@carbon/icons-react';
 
-import {
-  Dropdown,
-  OverflowMenu,
-  OverflowMenuItem,
-} from 'carbon-components-react';
+import { Dropdown, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 import React, { useState } from 'react';
 

@@ -7,7 +7,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+// import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import {
   getStoryTitle,
   prepareStory,
@@ -19,7 +19,7 @@ export default {
   title: getStoryTitle(RemoveModal.displayName),
   component: RemoveModal,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },

@@ -1,25 +1,29 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-@import '../../global/styles/project-settings';
 
-@use '@carbon/react/scss/components/ui-shell';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/ui-shell' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 $story-class: 'create-full-page-stories';
-$block-class: #{$pkg-prefix}--create-full-page;
+$block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
 // cspell:disable-next-line
 .sbdocs .#{$story-class}__viewport {
   height: 100vh;
-  background-color: $ui-background;
-  box-shadow: 0 0 4px 1px $ui-03;
-  color: $text-01;
+  background-color: $background;
+  box-shadow: 0 0 4px 1px $border-subtle-01;
+  color: $text-primary;
   overflow-y: auto;
 }
 
-.#{$story-class}__step-fieldset--no-label .#{$carbon-prefix}--fieldset legend {
+.#{$story-class}__step-fieldset--no-label
+  .#{c4p-settings.$carbon-prefix}--fieldset
+  legend {
   position: absolute;
   overflow: hidden;
   width: 1px;
@@ -36,7 +40,7 @@ $block-class: #{$pkg-prefix}--create-full-page;
   left: $spacing-11;
 }
 
-.#{$block-class}__step-fieldset.#{$story-class}__step-fieldset--label.#{$carbon-prefix}--label {
+.#{$block-class}__step-fieldset.#{$story-class}__step-fieldset--label.#{c4p-settings.$carbon-prefix}--label {
   position: absolute;
   overflow: hidden;
   width: 1px;
@@ -46,6 +50,6 @@ $block-class: #{$pkg-prefix}--create-full-page;
   white-space: nowrap;
 }
 
-.#{$carbon-prefix}--form-item {
+.#{c4p-settings.$carbon-prefix}--form-item {
   margin-bottom: $spacing-05;
 }

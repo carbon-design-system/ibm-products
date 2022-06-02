@@ -33,7 +33,7 @@ import {
   FormGroup,
   Row,
   Column,
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 export default {
   title: getStoryTitle(CreateFullPage.displayName),

@@ -6,11 +6,12 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@use '@carbon/styles' as *;
-@use '../../../global/styles/project-settings' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '../../../global/styles/project-settings' as c4p-settings;
 @use './variables' as *;
 
-.#{$carbon-prefix}--data-table tr.#{$block-class}__carbon-nested-row {
+.#{c4p-settings.$carbon-prefix}--data-table
+  tr.#{$block-class}__carbon-nested-row {
   border-left: 1px solid transparent;
 
   .#{$block-class}__cell {

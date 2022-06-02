@@ -7,7 +7,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { layout05, baseFontSize } from '@carbon/layout';
+import { spacing10, baseFontSize } from '@carbon/layout';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
 
@@ -381,7 +381,8 @@ export let PageHeader = React.forwardRef(
         metrics.headerHeight > 0 &&
         (breadcrumbs || actionBarItems || tags || navigation)
       ) {
-        const startAddingAt = parseFloat(layout05, 10) * parseInt(baseFontSize);
+        const startAddingAt =
+          parseFloat(spacing10, 10) * parseInt(baseFontSize);
         const scrollRemaining = metrics.headerHeight - scrollYValue;
 
         /* don't know how to test resize */

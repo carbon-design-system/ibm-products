@@ -4,7 +4,7 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-@import './index';
+
 @use '@carbon/react/scss/components/number-input';
 @use '@carbon/react/scss/components/text-area';
 @use '@carbon/react/scss/components/text-input';
@@ -14,38 +14,41 @@
 @use '@carbon/react/scss/components/progress-indicator';
 @use '@carbon/react/scss/components/tooltip';
 @use '@carbon/react/scss/components/modal';
+@use '@carbon/styles/scss/spacing';
+@use '../../global/styles/project-settings' as c4p-settings;
 
-.#{$carbon-prefix}--number {
+.#{c4p-settings.$carbon-prefix}--number {
   min-width: 100%;
 }
 
-.#{$carbon-prefix}--number__control-btn::before {
+.#{c4p-settings.$carbon-prefix}--number__control-btn::before {
   background-color: transparent;
 }
 
-.#{$carbon-prefix}--number__control-btn::after {
+.#{c4p-settings.$carbon-prefix}--number__control-btn::after {
   background-color: transparent;
 }
 
-.#{$carbon-prefix}--date-picker {
+.#{c4p-settings.$carbon-prefix}--date-picker {
   min-width: 100%;
 }
 
-.#{$carbon-prefix}--date-picker-container {
+.#{c4p-settings.$carbon-prefix}--date-picker-container {
   min-width: 100%;
 }
 
-.#{$carbon-prefix}--date-picker.#{$carbon-prefix}--date-picker--single
-  .#{$carbon-prefix}--date-picker__input {
+.#{c4p-settings.$carbon-prefix}--date-picker.#{c4p-settings.$carbon-prefix}--date-picker--single
+  .#{c4p-settings.$carbon-prefix}--date-picker__input {
   min-width: 100%;
 }
 
-.#{$carbon-prefix}--list-box__menu-icon {
-  top: $spacing-03;
+.#{c4p-settings.$carbon-prefix}--list-box__menu-icon {
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  top: spacing.$spacing-03;
 }
 
 .example-wrapper {
   display: grid;
-  grid-gap: $spacing-05;
+  grid-gap: spacing.$spacing-05;
   grid-template-columns: 1fr 1fr;
 }

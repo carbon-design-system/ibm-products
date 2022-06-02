@@ -6,7 +6,7 @@
 //
 
 import React, { useState } from 'react';
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+// import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import {
   getStoryTitle,
   prepareStory,
@@ -20,7 +20,7 @@ export default {
   title: getStoryTitle(SingleAddSelect.displayName),
   component: SingleAddSelect,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },
@@ -52,6 +52,7 @@ const defaultProps = {
     ],
   },
   itemsLabel: 'Categories',
+  navIconDescription: 'View children',
   noResultsTitle: 'No results',
   noResultsDescription: 'Try again',
   onCloseButtonText: 'Cancel',

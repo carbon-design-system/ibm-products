@@ -12,6 +12,7 @@ import React from 'react';
 import { components } from '../../../.storybook';
 
 import { Card, CardSkeleton, SearchBar, StatusIcon } from '../..';
+import { Grid } from 'carbon-components-react';
 
 import { image, label, link, tag, text as bodyText, title } from './_mocks_';
 
@@ -55,15 +56,17 @@ storiesOf(components('Card#legacy'), module)
             rel="noopener noreferrer"
             target="_blank"
           >
-            More info
+            View replacement
           </NotificationActionButton>
         }
         kind="info"
-        subtitle="This component is now legacy. Please click to see the go-forward component"
+        subtitle="Component no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
         title=""
         hideCloseButton
       />
-      <Story />
+      <Grid>
+        <Story />
+      </Grid>
     </>
   ))
   .add('Default', () => <Card />)

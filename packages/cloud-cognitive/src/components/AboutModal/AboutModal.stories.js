@@ -17,7 +17,7 @@ import {
 
 import { AboutModal } from '.';
 
-import { Button, Link } from 'carbon-components-react';
+import { Button, Link } from '@carbon/react';
 
 import mdx from './AboutModal.mdx';
 

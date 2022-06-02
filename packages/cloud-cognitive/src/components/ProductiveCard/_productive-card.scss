@@ -5,17 +5,15 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// Standard imports.
-@use '@carbon/styles' as *;
-@use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/type';
-@use '../../global/styles/project-settings' as *;
-
 // ProductiveCard uses the following IBM Products components:
 // Card
-@use '../Card/card';
+@use '../Card/card' as *;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
-$block-class: #{$pkg-prefix}--card;
+$block-class: #{c4p-settings.$pkg-prefix}--card;
 
 .#{$block-class}__productive {
   .#{$block-class}__header {
@@ -37,7 +35,7 @@ $block-class: #{$pkg-prefix}--card;
   .#{$block-class}__footer {
     align-items: center;
     justify-content: space-between;
-    border-top: 1px solid $border-subtle-01;
+    border-top: 1px solid theme.$border-subtle-01;
   }
 
   .#{$block-class}__footer-no-button {

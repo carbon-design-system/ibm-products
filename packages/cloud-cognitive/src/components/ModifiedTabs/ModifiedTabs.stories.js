@@ -15,7 +15,7 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { ModifiedTabs } from '.';
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+// import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 const commonStoryCode = {
   actionCloseTab: action('onCloseTab'),
@@ -37,7 +37,7 @@ const commonStoryCode = {
 export default {
   title: getStoryTitle(ModifiedTabs.displayName),
   component: ModifiedTabs,
-  parameters: { styles },
+  parameters: {},
 };
 
 const Template = (args) => {

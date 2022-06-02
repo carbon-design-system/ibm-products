@@ -4,7 +4,7 @@ import {
   HeaderName,
   HeaderGlobalAction,
   HeaderGlobalBar,
-} from '@carbon/react/lib/components/UIShell';
+} from '@carbon/react';
 import { Terminal, Search, User } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 

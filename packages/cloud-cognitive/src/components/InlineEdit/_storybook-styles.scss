@@ -5,8 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/project-settings';
-@import '../../global/styles/display-box';
+@use '../../global/styles/display-box';
+@use '../../global/styles/project-settings' as c4p-settings;
 
 .inline-edit-stories__viewport {
   // width: 300px; // larger than standard size needed by text input at standard font size (html input attribute size)
@@ -14,7 +14,7 @@
   margin: 100px;
 }
 
-$block-class: #{$pkg-prefix}--inline-edit;
+$block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
 
 .component-full-width {
   .#{$block-class} {

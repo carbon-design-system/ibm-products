@@ -13,7 +13,7 @@ import { pkg, carbon } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Add16 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
 
@@ -23,7 +23,7 @@ const componentName = ButtonMenu.displayName;
 // values to use
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
-const icon = Add16;
+const icon = (props) => <Add size={16} {...props} />;
 const iconDescription = `Icon ${uuidv4()}`;
 const itemText = `Option ${uuidv4()}`;
 const label = `Button ${uuidv4()}`;

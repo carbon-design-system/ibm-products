@@ -6,7 +6,7 @@
 //
 
 import React, { useState } from 'react';
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+// import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import {
   getStoryTitle,
   prepareStory,
@@ -18,11 +18,14 @@ import { Button } from '@carbon/react';
 import image from '../UserProfileImage/headshot.png'; // cspell:disable-line
 import { Group, Document } from '@carbon/icons-react';
 
+import { pkg } from '../../settings';
+const blockClass = `${pkg.prefix}--add-select__meta-panel`;
+
 export default {
   title: getStoryTitle(MultiAddSelect.displayName),
   component: MultiAddSelect,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },
@@ -32,6 +35,7 @@ export default {
 const defaultProps = {
   className: 'placeholder-class',
   clearFiltersText: 'Clear filters',
+  closeIconDescription: 'Close',
   columnInputPlaceholder: 'Find',
   description: 'Select business terms from the list',
   globalSearchLabel: 'test input label',
@@ -44,11 +48,31 @@ const defaultProps = {
         value: '1',
         title: 'item 1',
         subtitle: 'item 1 subtitle',
+        meta: (
+          <div className={`${blockClass}-entry`}>
+            <p className={`${blockClass}-entry-title`}>html support</p>
+            <p className={`${blockClass}-entry-body`}>
+              also supports nodes in the meta attribute
+            </p>
+          </div>
+        ),
       },
       {
         id: '2',
         value: '2',
         title: 'item 2',
+        meta: [
+          {
+            id: 'description',
+            title: 'description',
+            value: 'description text',
+          },
+          {
+            id: 'secondary_category',
+            title: 'secondary category',
+            value: 'knowledge accelerator',
+          },
+        ],
       },
       {
         id: '3',
@@ -59,6 +83,9 @@ const defaultProps = {
     ],
   },
   itemsLabel: 'Business terms',
+  metaIconDescription: 'View meta information',
+  metaPanelTitle: 'Personal information',
+  navIconDescription: 'View children',
   noResultsTitle: 'No results',
   noSelectionDescription:
     'Select a term to include the full set of the governance artifacts it contains in the governance scope.',
@@ -109,6 +136,7 @@ export const WithHierarchy = prepareStory(Template, {
     globalFiltersPlaceholderText: 'Choose an option',
     globalFiltersPrimaryButtonText: 'Apply',
     globalFiltersSecondaryButtonText: 'Reset',
+    globalSortBy: ['title'],
     items: {
       sortBy: ['title'],
       entries: [

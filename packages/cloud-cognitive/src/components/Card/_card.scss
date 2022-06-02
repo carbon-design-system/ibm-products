@@ -8,7 +8,7 @@
 // Standard imports.
 @use '@carbon/styles' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/type' as *;
 @use '../../global/styles/project-settings' as *;
 
 // Card uses the following Carbon components:
@@ -73,19 +73,19 @@ $block-class: #{$pkg-prefix}--card;
 }
 
 .#{$block-class}__label {
-  @include type.type-style('label-01');
+  @include type-style('label-01');
 
   margin-bottom: $spacing-01;
 }
 
 .#{$block-class}__description {
-  @include type.type-style('label-01');
+  @include type-style('label-01');
 
   margin-top: $spacing-01;
 }
 
 .#{$block-class}__body {
-  @include type.type-style('body-short-01');
+  @include type-style('body-short-01');
 
   padding: $spacing-05;
   padding-top: 0;

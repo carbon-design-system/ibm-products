@@ -16,13 +16,13 @@ import {
 
 import { NoTagsEmptyState } from '.';
 
-import styles from '../_index.scss';
+// import styles from '../_index.scss';
 
 export default {
   title: getStoryTitle(NoTagsEmptyState.displayName),
   component: NoTagsEmptyState,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },

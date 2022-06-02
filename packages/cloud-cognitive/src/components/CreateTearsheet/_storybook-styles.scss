@@ -5,12 +5,15 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/project-settings';
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/type/scss/font-family' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
-$preview-block-class: #{$pkg-prefix}--tearsheet-create-multi-step;
+$preview-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create-multi-step;
 
 .#{$preview-block-class}__description {
-  @include carbon--type-style('body-short-01');
+  @include type-style('body-short-01');
 
   padding-bottom: $spacing-04;
 }
@@ -20,33 +23,33 @@ p.#{$preview-block-class}__description:last-of-type {
 }
 
 .#{$preview-block-class}__heading {
-  @include carbon--font-weight('semibold');
+  @include font-weight('semibold');
 }
 
 .#{$preview-block-class}
-  .#{$pkg-prefix}--tearsheet__content
-  .#{$carbon-prefix}--form-item {
+  .#{c4p-settings.$pkg-prefix}--tearsheet__content
+  .#{c4p-settings.$carbon-prefix}--form-item {
   margin-bottom: $spacing-05;
 }
 
-.#{$prefix}--tile-group div {
+.#{c4p-settings.$carbon-prefix}--tile-group div {
   display: flex;
   flex-wrap: wrap;
 }
 
-.#{$pkg-prefix}--tearsheet-create-multi-step--custom-tile {
+.#{c4p-settings.$pkg-prefix}--tearsheet-create-multi-step--custom-tile {
   width: 280px;
   height: 240px;
   margin-right: $spacing-05;
 }
 
-.#{$pkg-prefix}--tearsheet-create-multi-step--custom-tile
-  .#{$pkg-prefix}--empty-state__illustration.#{$pkg-prefix}--empty-state__illustration--lg {
+.#{c4p-settings.$pkg-prefix}--tearsheet-create-multi-step--custom-tile
+  .#{c4p-settings.$pkg-prefix}--empty-state__illustration.#{c4p-settings.$pkg-prefix}--empty-state__illustration--lg {
   min-width: 120px;
   height: 120px;
 }
 
-.#{$pkg-prefix}--tearsheet-create-multi-step--custom-tile-label {
+.#{c4p-settings.$pkg-prefix}--tearsheet-create-multi-step--custom-tile-label {
   position: absolute;
   bottom: $spacing-05;
   left: $spacing-05;

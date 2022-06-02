@@ -17,7 +17,7 @@ import {
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { carbon, pkg } from '../../settings';
 
-import { Button, ButtonSet, Tab, Tabs } from 'carbon-components-react';
+import { Button, ButtonSet, Tab, Tabs } from '@carbon/react';
 import { Tearsheet, TearsheetNarrow } from '.';
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
 

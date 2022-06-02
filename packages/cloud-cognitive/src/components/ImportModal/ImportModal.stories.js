@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 import { action } from '@storybook/addon-actions';
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+// import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import {
   getStoryTitle,
   prepareStory,
@@ -20,7 +20,7 @@ export default {
   title: getStoryTitle(ImportModal.displayName),
   component: ImportModal,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },

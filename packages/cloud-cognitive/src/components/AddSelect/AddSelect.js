@@ -18,6 +18,9 @@ import { AddSelectList } from './AddSelectList';
 import { AddSelectColumn } from './AddSelectColumn';
 import { normalize, flatten, getGlobalFilterValues } from './add-select-utils';
 import { AddSelectFilter } from './AddSelectFilter';
+import { AddSelectSort } from './AddSelectSort';
+import { sortItems } from './add-select-utils';
+import { useItemSort } from './hooks/useItemSort';
 const componentName = 'AddSelect';
 
 export let AddSelect = forwardRef(
@@ -27,6 +30,7 @@ export let AddSelect = forwardRef(
 
       className,
       clearFiltersText,
+      closeIconDescription,
       columnInputPlaceholder,
       description,
       globalFilters,
@@ -36,10 +40,14 @@ export let AddSelect = forwardRef(
       globalFiltersSecondaryButtonText,
       globalSearchLabel,
       globalSearchPlaceholder,
+      globalSortBy,
       influencerTitle,
       items,
       itemsLabel,
+      metaIconDescription,
+      metaPanelTitle,
       multi,
+      navIconDescription,
       noResultsDescription,
       noResultsTitle,
       noSelectionDescription,
@@ -71,6 +79,9 @@ export let AddSelect = forwardRef(
     const [flatItems, setFlatItems] = useState([]);
     const [globalFilterOpts, setGlobalFilterOpts] = useState([]);
     const [appliedGlobalFilters, setAppliedGlobalFilters] = useState({});
+    const [displayMetalPanel, setDisplayMetaPanel] = useState({});
+    const { sortDirection, setSortDirection, sortAttribute, setSortAttribute } =
+      useItemSort();
 
     useEffect(() => {
       const { entries } = items;
@@ -154,6 +165,8 @@ export let AddSelect = forwardRef(
       return results;
     };
 
+    const sortFn = sortItems(sortAttribute, sortDirection);
+
     const getDisplayItems = () => {
       if (useNormalizedItems) {
         // when global search or filter is in use the results are not in column format
@@ -165,7 +178,8 @@ export let AddSelect = forwardRef(
               filters.every(
                 (filter) => item[filter] === appliedGlobalFilters[filter]
               )
-            );
+            )
+            .sort(sortFn);
           return results;
         }
         return getPages();
@@ -177,13 +191,16 @@ export let AddSelect = forwardRef(
     const itemsToDisplay = getDisplayItems();
 
     const commonListProps = {
+      metaIconDescription,
       multi,
       multiSelection,
+      navIconDescription,
       path,
       setMultiSelection,
       setPath,
       setSingleSelection,
       singleSelection,
+      setDisplayMetaPanel,
     };
 
     // handlers
@@ -227,13 +244,17 @@ export let AddSelect = forwardRef(
     };
 
     const sidebarProps = {
+      closeIconDescription,
       influencerTitle,
       items: flatItems,
+      metaPanelTitle,
       multiSelection,
       noSelectionDescription,
       noSelectionTitle,
       removeIconDescription,
       setMultiSelection,
+      displayMetalPanel,
+      setDisplayMetaPanel,
     };
 
     const setShowBreadsCrumbs = () => {
@@ -256,9 +277,11 @@ export let AddSelect = forwardRef(
       return true;
     };
 
-    const showBreadsCrumbs = setShowBreadsCrumbs();
-    const showTags = setShowTags();
+    const hasResults = itemsToDisplay.length > 0;
     const globalFiltersApplied = Object.keys(appliedGlobalFilters).length > 0;
+    const showBreadsCrumbs = setShowBreadsCrumbs();
+    const showSort = (searchTerm || globalFiltersApplied) && hasResults;
+    const showTags = setShowTags();
 
     // main content
     const body = (
@@ -280,22 +303,34 @@ export let AddSelect = forwardRef(
             hasFiltersApplied={globalFiltersApplied}
             clearFiltersText={clearFiltersText}
           />
-          <div className={`${blockClass}__tag-container`}>
-            {showBreadsCrumbs ? (
-              <AddSelectBreadcrumbs
-                itemsLabel={itemsLabel}
-                path={path}
-                setPath={setPath}
+          <div className={`${blockClass}__sub-header`}>
+            <div className={`${blockClass}__tag-container`}>
+              {showBreadsCrumbs ? (
+                <AddSelectBreadcrumbs
+                  itemsLabel={itemsLabel}
+                  path={path}
+                  setPath={setPath}
+                />
+              ) : (
+                <p className={`${blockClass}__tag-container-label`}>
+                  {searchTerm ? searchResultsLabel : itemsLabel}
+                </p>
+              )}
+              {showTags && (
+                <Tag type="gray" size="sm">
+                  {itemsToDisplay.length}
+                </Tag>
+              )}
+            </div>
+            {showSort && (
+              <AddSelectSort
+                items={itemsToDisplay}
+                setSortAttribute={setSortAttribute}
+                setSortDirection={setSortDirection}
+                sortAttribute={sortAttribute}
+                sortDirection={sortDirection}
+                sortBy={globalSortBy}
               />
-            ) : (
-              <p className={`${blockClass}__tag-container-label`}>
-                {searchTerm ? searchResultsLabel : itemsLabel}
-              </p>
-            )}
-            {showTags && (
-              <Tag type="gray" size="sm">
-                {itemsToDisplay.length}
-              </Tag>
             )}
           </div>
         </div>
@@ -313,7 +348,7 @@ export let AddSelect = forwardRef(
           </div>
         ) : (
           <div>
-            {itemsToDisplay.length > 0 ? (
+            {hasResults ? (
               <AddSelectList
                 {...commonListProps}
                 filteredItems={itemsToDisplay}
@@ -353,6 +388,7 @@ export let AddSelect = forwardRef(
 AddSelect.propTypes = {
   className: PropTypes.string,
   clearFiltersText: PropTypes.string,
+  closeIconDescription: PropTypes.string,
   columnInputPlaceholder: PropTypes.string,
   description: PropTypes.string,
   globalFilters: PropTypes.arrayOf(
@@ -367,6 +403,7 @@ AddSelect.propTypes = {
   globalFiltersSecondaryButtonText: PropTypes.string,
   globalSearchLabel: PropTypes.string,
   globalSearchPlaceholder: PropTypes.string,
+  globalSortBy: PropTypes.array,
   influencerTitle: PropTypes.string,
   items: PropTypes.shape({
     modifiers: PropTypes.shape({
@@ -385,6 +422,16 @@ AddSelect.propTypes = {
         children: PropTypes.object,
         icon: PropTypes.object,
         id: PropTypes.string.isRequired,
+        meta: PropTypes.oneOfType([
+          PropTypes.arrayOf(
+            PropTypes.shape({
+              id: PropTypes.string,
+              title: PropTypes.string,
+              value: PropTypes.string,
+            })
+          ),
+          PropTypes.node,
+        ]),
         subtitle: PropTypes.string,
         title: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
@@ -392,7 +439,10 @@ AddSelect.propTypes = {
     ),
   }),
   itemsLabel: PropTypes.string,
+  metaIconDescription: PropTypes.string,
+  metaPanelTitle: PropTypes.string,
   multi: PropTypes.bool,
+  navIconDescription: PropTypes.string,
   noResultsDescription: PropTypes.string,
   noResultsTitle: PropTypes.string,
   noSelectionDescription: PropTypes.string,

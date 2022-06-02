@@ -9,7 +9,7 @@ import React from 'react';
 
 import { StatusIcon } from '.';
 import mdx from './StatusIcon.mdx';
-import styles from './_storybook-styles.scss'; // import storybook which includes component and additional storybook styles
+// import styles from './_storybook-styles.scss'; // import storybook which includes component and additional storybook styles
 import {
   getStoryTitle,
   prepareStory,
@@ -51,7 +51,7 @@ export default {
     },
   },
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },

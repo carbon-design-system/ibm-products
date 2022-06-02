@@ -14,12 +14,10 @@ import {
   NumberInput,
   Dropdown,
   FormGroup,
-} from 'carbon-components-react';
-import {
   Header,
   HeaderContainer,
   HeaderName,
-} from 'carbon-components-react/lib/components/UIShell';
+} from '@carbon/react';
 
 import { pkg, carbon } from '../../settings';
 import {

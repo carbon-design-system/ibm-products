@@ -6,10 +6,10 @@
 //
 
 // Standard imports.
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // ImportModal uses the following Carbon components:
 // ComposedModal, ModalHeader, ModalFooter, ModalBody,
@@ -19,26 +19,31 @@
 @use '@carbon/react/scss/components/text-input';
 @use '@carbon/react/scss/components/button';
 
-$block-class: #{$pkg-prefix}--import-modal;
+$block-class: #{c4p-settings.$pkg-prefix}--import-modal;
 
-.#{$block-class} .#{$carbon-prefix}--modal-close {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-close {
+  /* stylelint-disable-next-line prettier/prettier */
   display: none;
 }
 
-.#{$block-class} .#{$carbon-prefix}--modal-footer .#{$carbon-prefix}--btn {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-footer .#{c4p-settings.$carbon-prefix}--btn {
   max-width: none;
 }
 
-.#{$block-class}.#{$carbon-prefix}--modal .#{$carbon-prefix}--modal-content {
+.#{$block-class}.#{c4p-settings.$carbon-prefix}--modal
+  .#{c4p-settings.$carbon-prefix}--modal-content {
   padding-right: $spacing-05;
 }
 
-.#{$carbon-prefix}--file .#{$carbon-prefix}--file-container,
-.#{$carbon-prefix}--file ~ .#{$carbon-prefix}--file-container {
+.#{c4p-settings.$carbon-prefix}--file
+  .#{c4p-settings.$carbon-prefix}--file-container,
+.#{c4p-settings.$carbon-prefix}--file
+  ~ .#{c4p-settings.$carbon-prefix}--file-container {
   margin-top: 0;
 }
 
-.#{$carbon-prefix}--modal-container--sm .#{$carbon-prefix}--modal-header {
+.#{c4p-settings.$carbon-prefix}--modal-container--sm
+  .#{c4p-settings.$carbon-prefix}--modal-header {
   padding-right: calc(20% - #{$spacing-05});
 }
 
@@ -46,7 +51,7 @@ $block-class: #{$pkg-prefix}--import-modal;
   display: flex;
 }
 
-.#{$block-class}__import-button.#{$carbon-prefix}--btn {
+.#{$block-class}__import-button.#{c4p-settings.$carbon-prefix}--btn {
   margin-left: $spacing-03;
 }
 
@@ -71,15 +76,15 @@ $block-class: #{$pkg-prefix}--import-modal;
   margin-bottom: $spacing-06;
 }
 
-.#{$block-class} .#{$carbon-prefix}--file__selected-file {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--file__selected-file {
   max-width: none;
   background: $layer-02;
 }
 
-.#{$block-class} .#{$carbon-prefix}--file {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--file {
   margin-bottom: $spacing-05;
 }
 
-.#{$block-class} .#{$carbon-prefix}--text-input:disabled {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--text-input:disabled {
   background: $layer-02;
 }

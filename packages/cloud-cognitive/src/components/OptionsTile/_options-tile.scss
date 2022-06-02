@@ -6,12 +6,12 @@
 //
 
 // Standard imports.
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/react/scss/colors' as *;
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
 // Other Carbon settings.
@@ -22,7 +22,7 @@
 @use '@carbon/react/scss/components/toggle';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{$pkg-prefix}--options-tile;
+$block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 
 .#{$block-class} {
   border-bottom: 1px solid $border-subtle-01;
@@ -39,8 +39,8 @@ $block-class: #{$pkg-prefix}--options-tile;
 }
 
 .#{$block-class}__toggle
-  .#{$carbon-prefix}--toggle-input__label
-  .#{$carbon-prefix}--toggle__switch {
+  .#{c4p-settings.$carbon-prefix}--toggle-input__label
+  .#{c4p-settings.$carbon-prefix}--toggle__switch {
   margin: 0;
 }
 
@@ -142,8 +142,8 @@ $block-class: #{$pkg-prefix}--options-tile;
 }
 
 .#{$block-class}__content
-  > .#{$carbon-prefix}--fieldset
-  > .#{$carbon-prefix}--label:empty {
+  > .#{c4p-settings.$carbon-prefix}--fieldset
+  > .#{c4p-settings.$carbon-prefix}--label:empty {
   display: none;
 }
 

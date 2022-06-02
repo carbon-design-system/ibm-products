@@ -9,7 +9,7 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // CreateTearsheetNarrow uses the following IBM Products components:
 // TearsheetNarrow
@@ -20,24 +20,24 @@
 @use '@carbon/react/scss/components/form';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{$pkg-prefix}--create-tearsheet-narrow;
+$block-class: #{c4p-settings.$pkg-prefix}--create-tearsheet-narrow;
 
-.#{$block-class} .#{$carbon-prefix}--modal-header__heading,
-.#{$block-class} .#{$carbon-prefix}--modal-header__label,
-.#{$block-class} .#{$pkg-prefix}--tearsheet__header-description {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-header__heading,
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-header__label,
+.#{$block-class} .#{c4p-settings.$pkg-prefix}--tearsheet__header-description {
   max-width: 100%;
   padding-right: calc(20% - #{$spacing-05});
 }
 
-.#{$block-class} .#{$pkg-prefix}--tearsheet__header-description {
+.#{$block-class} .#{c4p-settings.$pkg-prefix}--tearsheet__header-description {
   margin-top: $spacing-02;
 }
 
-.#{$block-class} .#{$pkg-prefix}--tearsheet__header {
+.#{$block-class} .#{c4p-settings.$pkg-prefix}--tearsheet__header {
   border-bottom: 1px solid $border-subtle-02;
 }
 
-.#{$block-class} .#{$pkg-prefix}--tearsheet__content {
+.#{$block-class} .#{c4p-settings.$pkg-prefix}--tearsheet__content {
   padding: $spacing-05;
 }
 

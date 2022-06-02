@@ -10,7 +10,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/type';
-@use '@carbon/type/scss/font-family' as *;
+@use '@carbon/type/scss/font-family';
 @use '../../global/styles/mixins' as *;
 
 @mixin set-header-borders {
@@ -98,7 +98,7 @@ $header-cell-background: $layer-accent-01;
     left: 0;
   }
   .#{$block-class}__td-th.#{$block-class}__td {
-    @include font-weight('semibold');
+    @include font-family.font-weight('semibold');
 
     display: flex;
     align-items: center;
@@ -236,6 +236,7 @@ $header-cell-background: $layer-accent-01;
       background-color: $background-inverse;
       color: $text-inverse;
 
+      /* stylelint-disable-next-line max-nesting-depth */
       &:focus,
       &:hover {
         background-color: $background-inverse;

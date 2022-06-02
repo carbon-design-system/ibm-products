@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '../../global/styles/project-settings' as *;
@@ -50,7 +50,7 @@ $toolbar-dimensions: $spacing-08;
 }
 
 .#{$block-class}--vertical > .#{$block-class}__group:last-of-type,
-.#{$block-class} .#{$prefix}--dropdown {
+.#{$block-class} .#{$carbon-prefix}--dropdown {
   border-bottom-width: 0;
 }
 

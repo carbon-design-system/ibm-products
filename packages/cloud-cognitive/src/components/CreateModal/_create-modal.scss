@@ -46,8 +46,8 @@
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal
-  .#{$carbon-prefix}--modal-footer
-  .#{$carbon-prefix}--btn {
+  .#{c4p-settings.$carbon-prefix}--modal-footer
+  .#{c4p-settings.$carbon-prefix}--btn {
   max-width: none;
 }
 

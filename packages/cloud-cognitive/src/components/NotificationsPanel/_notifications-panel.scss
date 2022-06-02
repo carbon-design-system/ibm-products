@@ -6,12 +6,13 @@
 //
 
 // Standard imports.
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family' as *;
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // NotificationsPanel uses the following IBM Products components:
 // NotificationsEmptyState
@@ -23,7 +24,7 @@
 @use '@carbon/react/scss/components/link';
 @use '@carbon/react/scss/components/toggle';
 
-$block-class: #{$pkg-prefix}--notifications-panel;
+$block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -79,7 +80,8 @@ $block-class: #{$pkg-prefix}--notifications-panel;
       align-items: center;
       justify-content: space-between;
     }
-    .#{$block-class}__do-not-disturb-toggle .#{$carbon-prefix}--toggle__switch {
+    .#{$block-class}__do-not-disturb-toggle
+      .#{c4p-settings.$carbon-prefix}--toggle__switch {
       margin-top: $spacing-02;
     }
     .#{$block-class}__dismiss-button {
@@ -187,7 +189,7 @@ $block-class: #{$pkg-prefix}--notifications-panel;
         min-width: 5.5rem;
         padding: 0;
 
-        .#{$carbon-prefix}--btn__icon {
+        .#{c4p-settings.$carbon-prefix}--btn__icon {
           transition: transform $duration-moderate-02 ease;
           /* stylelint-disable-next-line max-nesting-depth */
           @media (prefers-reduced-motion: reduce) {
@@ -195,12 +197,12 @@ $block-class: #{$pkg-prefix}--notifications-panel;
           }
         }
         &.#{$block-class}__notification-read-more-button {
-          .#{$carbon-prefix}--btn__icon {
+          .#{c4p-settings.$carbon-prefix}--btn__icon {
             transform: rotate(0deg);
           }
         }
         &.#{$block-class}__notification-read-less-button {
-          .#{$carbon-prefix}--btn__icon {
+          .#{c4p-settings.$carbon-prefix}--btn__icon {
             transform: rotate(180deg);
           }
         }
@@ -250,7 +252,7 @@ $block-class: #{$pkg-prefix}--notifications-panel;
     align-items: center;
     justify-content: center;
     margin-top: $spacing-13;
-    .#{$pkg-prefix}-subtext {
+    .#{c4p-settings.$pkg-prefix}-subtext {
       @include type.type-style('body-short-01');
     }
   }
@@ -285,7 +287,8 @@ $block-class: #{$pkg-prefix}--notifications-panel;
       padding: 0;
       color: $text-primary;
     }
-    .#{$block-class}__settings-button .#{$carbon-prefix}--btn__icon {
+    .#{$block-class}__settings-button
+      .#{c4p-settings.$carbon-prefix}--btn__icon {
       margin: 0;
     }
   }

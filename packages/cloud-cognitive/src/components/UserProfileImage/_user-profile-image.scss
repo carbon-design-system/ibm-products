@@ -6,7 +6,7 @@
 //
 
 // Standard imports.
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family';
@@ -89,7 +89,7 @@ $theme-keys: map-keys($themes);
   text-transform: uppercase;
 }
 
-.#{$prefix}--tooltip__trigger .#{$block-class} svg {
+.#{$carbon-prefix}--tooltip__trigger .#{$block-class} svg {
   fill: $layer-01;
 }
 

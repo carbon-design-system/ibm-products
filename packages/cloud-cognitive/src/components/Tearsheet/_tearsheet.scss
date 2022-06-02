@@ -268,32 +268,33 @@ $motion-duration: $duration-moderate-02;
     background: $background;
 
     // revert the background color overridden by #{$carbon-prefix}--modal styles
-    .#{$prefix}--pagination,
-    .#{$prefix}--pagination__control-buttons,
-    .#{$prefix}--text-input,
-    .#{$prefix}--text-area,
-    .#{$prefix}--search-input,
-    .#{$prefix}--select-input,
-    .#{$prefix}--dropdown,
-    .#{$prefix}--dropdown-list,
-    .#{$prefix}--number input[type='number'],
-    .#{$prefix}--date-picker__input {
+    .#{$carbon-prefix}--pagination,
+    .#{$carbon-prefix}--pagination__control-buttons,
+    .#{$carbon-prefix}--text-input,
+    .#{$carbon-prefix}--text-area,
+    .#{$carbon-prefix}--search-input,
+    .#{$carbon-prefix}--select-input,
+    .#{$carbon-prefix}--dropdown,
+    .#{$carbon-prefix}--dropdown-list,
+    .#{$carbon-prefix}--number input[type='number'],
+    .#{$carbon-prefix}--date-picker__input {
       background-color: $field-01;
     }
 
-    .#{$prefix}--select--inline .#{$prefix}--select-input {
+    .#{$carbon-prefix}--select--inline .#{$carbon-prefix}--select-input {
       background-color: transparent;
     }
 
     // and restore the 'light' prop in case light fields are wanted
-    .#{$prefix}--text-input--light,
-    .#{$prefix}--text-area--light,
-    .#{$prefix}--search--light .#{$prefix}--search-input,
-    .#{$prefix}--select--light .#{$prefix}--select-input,
-    .#{$prefix}--dropdown--light,
-    .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list,
-    .#{$prefix}--number--light input[type='number'],
-    .#{$prefix}--date-picker--light .#{$prefix}--date-picker__input {
+    .#{$carbon-prefix}--text-input--light,
+    .#{$carbon-prefix}--text-area--light,
+    .#{$carbon-prefix}--search--light .#{$carbon-prefix}--search-input,
+    .#{$carbon-prefix}--select--light .#{$carbon-prefix}--select-input,
+    .#{$carbon-prefix}--dropdown--light,
+    .#{$carbon-prefix}--dropdown--light .#{$carbon-prefix}--dropdown-list,
+    /* stylelint-disable-next-line prettier/prettier */
+    .#{$carbon-prefix}--number--light input[type='number'],
+    .#{$carbon-prefix}--date-picker--light .#{$carbon-prefix}--date-picker__input {
       background-color: $field-02;
     }
   }

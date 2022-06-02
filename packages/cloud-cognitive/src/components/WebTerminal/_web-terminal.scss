@@ -6,10 +6,10 @@
 //
 
 // Standard imports.
-@use '@carbon/react/scss/colors' as *;
+@use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '@carbon/react/scss/themes' as *;
-@use '@carbon/react/scss/theme' as *;
+@use '@carbon/styles/scss/themes' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '../../global/styles/project-settings' as *;
 
 $web-terminal-width: 36.5rem;

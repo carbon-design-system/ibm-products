@@ -22,10 +22,8 @@
 @use '../CreateInfluencer';
 
 // CreateTearsheet uses the following Carbon components:
-// ProgressIndicator, ProgressStep, Toggle, SideNav, SideNavItems, SideNavLink
+// ProgressIndicator, ProgressStep
 @use '@carbon/react/scss/components/progress-indicator';
-@use '@carbon/react/scss/components/toggle';
-@use '@carbon/react/scss/components/ui-shell/side-nav';
 
 @keyframes step-content-entrance {
   0% {

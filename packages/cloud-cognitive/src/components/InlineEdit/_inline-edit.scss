@@ -6,9 +6,10 @@
 //
 
 // Standard imports.
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '../../global/styles/project-settings' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
 // Other Carbon settings.
@@ -45,7 +46,7 @@
 }
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{$pkg-prefix}--inline-edit;
+$block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
 
 @include block-wrap($block-class) {
   --#{$block-class}--size: #{$spacing-08};

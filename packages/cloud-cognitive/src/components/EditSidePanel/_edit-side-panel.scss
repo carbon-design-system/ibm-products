@@ -8,7 +8,7 @@
 // Standard imports.
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
 // EditSidePanel uses the following Carbon components:
@@ -18,15 +18,15 @@
 @use '../SidePanel/side-panel';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{$pkg-prefix}--edit-side-panel;
-$side-panel-block-class: #{$pkg-prefix}--side-panel;
+$block-class: #{c4p-settings.$pkg-prefix}--edit-side-panel;
+$side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 
 .#{$block-class} {
-  .#{$carbon-prefix}--form.#{$block-class}__form {
+  .#{c4p-settings.$carbon-prefix}--form.#{$block-class}__form {
     padding-top: $spacing-05;
   }
 
-  .#{$block-class}__form.#{$carbon-prefix}--fieldset {
+  .#{$block-class}__form.#{c4p-settings.$carbon-prefix}--fieldset {
     padding-top: $spacing-03;
   }
 
@@ -45,7 +45,7 @@ $side-panel-block-class: #{$pkg-prefix}--side-panel;
   }
 
   &.#{$side-panel-block-class}
-    .#{$carbon-prefix}--btn.#{$side-panel-block-class}__close-button {
+    .#{c4p-settings.$carbon-prefix}--btn.#{$side-panel-block-class}__close-button {
     display: none;
   }
 

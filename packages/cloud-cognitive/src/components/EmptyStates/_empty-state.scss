@@ -6,17 +6,17 @@
 //
 
 // Standard imports.
-@use '@carbon/styles' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // Empty states use the following Carbon components:
 // Button, Link
 @use '@carbon/react/scss/components/button';
 @use '@carbon/react/scss/components/link';
 
-$empty-block-class: #{$pkg-prefix}--empty-state;
+$empty-block-class: #{c4p-settings.$pkg-prefix}--empty-state;
 
 .#{$empty-block-class} {
   color: $text-primary;

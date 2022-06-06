@@ -26,12 +26,9 @@ import {
   useNestedRows,
   useSortableColumns,
   useOnRowClick,
-  useRowIsMouseOver,
 } from '.';
 
 import namor from 'namor';
-
-import userEvent from '@testing-library/user-event';
 
 const dataTestId = uuidv4();
 
@@ -246,6 +243,58 @@ const Wrapper = ({ children }) => (
   </div>
 );
 
+const RowSizeDropdown = ({ ...rest }) => {
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader.slice(0, 3),
+      {
+        Header: 'Different cell content',
+        id: 'rowSizeDemo-cell',
+        disableSortBy: true,
+        Cell: ({ rowSize }) => rowSize,
+      },
+    ],
+    []
+  );
+  const [data] = useState(makeData(10));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      rowSize: 'xs',
+      rowSizes: [
+        {
+          value: 'xl',
+          labelText: 'More than super',
+        },
+        {
+          value: 'lg',
+          labelText: 'Super tall row',
+        },
+        {
+          value: 'md',
+        },
+        {
+          value: 'xs',
+          labelText: 'Teeny tiny row',
+        },
+      ],
+      onRowSizeChange: (value) => {
+        console.log('row size changed to: ', value);
+      },
+      DatagridActions,
+      DatagridBatchActions,
+    },
+    useSelectRows
+  );
+
+  return (
+    <Wrapper>
+      <Datagrid datagridState={{ ...datagridState }} {...rest} />
+    </Wrapper>
+  );
+};
+
 const LeftPanel = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
@@ -340,58 +389,6 @@ const RadioSelect = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
-const RowSizeDropdown = ({ ...rest }) => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader.slice(0, 3),
-      {
-        Header: 'Different cell content',
-        id: 'rowSizeDemo-cell',
-        disableSortBy: true,
-        Cell: ({ rowSize }) => rowSize,
-      },
-    ],
-    []
-  );
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      rowSize: 'xs',
-      rowSizes: [
-        {
-          value: 'xl',
-          labelText: 'More than super',
-        },
-        {
-          value: 'lg',
-          labelText: 'Super tall row',
-        },
-        {
-          value: 'md',
-        },
-        {
-          value: 'xs',
-          labelText: 'Teeny tiny row',
-        },
-      ],
-      onRowSizeChange: (value) => {
-        console.log('row size changed to: ', value);
-      },
-      DatagridActions,
-      DatagridBatchActions,
-    },
-    useSelectRows
-  );
-
-  return (
-    <Wrapper>
-      <Datagrid datagridState={{ ...datagridState }} {...rest} />
-    </Wrapper>
-  );
-};
-
 const SelectableRow = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
@@ -479,37 +476,6 @@ const ClickableRow = ({ ...rest }) => {
       onRowClick: (row) => alert(`Clicked ${row.id}`),
     },
     useOnRowClick
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
-};
-
-const IsHoverOnRow = ({ ...rest }) => {
-  const Cell = ({ row }) => {
-    if (row.isMouseOver) {
-      return 'yes hovering!';
-    }
-    return '';
-  };
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader.slice(0, 3),
-      {
-        Header: 'Is hover on row?',
-        id: 'isHoveringColumn',
-        disableSortBy: true,
-        Cell,
-      },
-    ],
-    []
-  );
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useRowIsMouseOver
   );
 
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
@@ -707,12 +673,12 @@ describe(componentName, () => {
   it('With Pagination', () => {
     render(<WithPagination data-testid={dataTestId}></WithPagination>);
     document.addEventListener('load', () => {
-      console.log(
+      /*console.log(
         `Num Children ${
           document.querySelectorAll('.bx--pagination__left')[0]
             .childElementCount
-        }`
-      ); //TODO: Remove this console.log statement
+        }
+      ); //TODO: Remove this console.log statement*/
     });
     // expect(document.querySelectorAll('select#bx-pagination-select-6').childElementCount).toBe(1);
   });
@@ -735,7 +701,7 @@ describe(componentName, () => {
 
   //TODO: Figure this out
 
-  it('Is Hove On Row', () => {
+  /* it('Is Hove On Row', () => {
     render(<IsHoverOnRow data-testid={dataTestId}></IsHoverOnRow>);
 
     const hoverRow = screen
@@ -749,7 +715,7 @@ describe(componentName, () => {
 
     // console.log(hoverRow.childNodes[3]);
     // expect(screen.getByRole('table').getElementsByTagName('tbody')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[3].innerHTML).toBe('yes!');
-  });
+  }); */
 
   //Disables Selected Rows
   it('Renders Disable Select Row', () => {

@@ -7,18 +7,9 @@
 
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
-@use '../../global/styles/mixins' as *;
+@use '../../global/styles/mixins';
 
-@use './styles/datagrid';
-@use './styles/useNestedRows';
-//@use './styles/useNestedTable';
-@use './styles/useSortableColumns';
-@use './styles/useColumnRightAlign';
-@use './styles/useStickyColumn';
-@use './styles/useActionsColumn';
-@use './styles/addons/CustomizeColumnsModal';
-@use './styles/addons/RowSizeDropdown';
-@use './styles/useSelectAllToggle';
+@use './styles/index';
 
 // Other Carbon settings.
 // TODO: @import '@carbon/react/scss/grid'; if needed

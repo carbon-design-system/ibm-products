@@ -47,10 +47,12 @@ jobs:
           git add .
           git commit -m "chore: rename package for simultaneous publish"
 
+      # Run yarn again after renaming package, required after move to yarn berry
+      - name: Install
+        run: yarn
+
       - name: Publish with old name
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          yarn
-          yarn lerna publish from-package --yes
+        run: yarn lerna publish from-package --yes

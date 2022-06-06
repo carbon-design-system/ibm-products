@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.19.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.19.0...@carbon/ibm-products@1.19.1) (2022-06-06)
+
+
+### Bug Fixes
+
+* Added styles to datagrid drag and drop pattern ([#2009](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2009)) ([0dc0bf8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0dc0bf84a794960bbf1bf08e1ebb6ba23de6e027))
+* **ComboButton:** change import of overflow menu and fix styles ([#2010](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2010)) ([564de7d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/564de7d01dadb1c504e9a4add866a6698c152ccc))
+
+
+
+
+
 # [1.19.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.18.2...@carbon/ibm-products@1.19.0) (2022-05-31)
 
 

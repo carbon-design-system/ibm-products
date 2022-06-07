@@ -5,7 +5,9 @@
 * US Government Users Restricted Rights - Use, duplication or disclosure
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
-@import './variables';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use './variables' as *;
 
 .#{$block-class}__draggable-handleStyle {
   display: flex;
@@ -19,7 +21,7 @@
 }
 
 svg.#{$block-class}__draggable-handleStyle.disable {
-  fill: $disabled-02;
+  fill: $icon-disabled;
 }
 
 .#{$block-class}__draggable-handleHolder {
@@ -27,7 +29,7 @@ svg.#{$block-class}__draggable-handleStyle.disable {
   height: $spacing-07;
   padding-left: $spacing-02;
   margin-bottom: $spacing-03;
-  background: $ui-02;
+  background: $layer-02;
   &.#{$block-class}__draggable-handleHolder-isOver {
     border: 2px dashed $focus;
     background-color: $highlight;
@@ -41,7 +43,7 @@ svg.#{$block-class}__draggable-handleStyle.disable {
 
 .#{$block-class}__draggable-handleHolder--grabbed {
   background-color: $highlight;
-  color: $text-01;
+  color: $text-primary;
 }
 
 .#{$block-class}__shared-ui--assistive-text {

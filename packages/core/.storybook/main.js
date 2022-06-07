@@ -33,7 +33,7 @@ module.exports = {
   framework: '@storybook/react',
 
   reactOptions: {
-    // fastRefresh: true, // THIS SEEMS TO BE FIXED -- this option would be nice, but seems to cause errors, see https://github.com/storybookjs/storybook/issues/13745
+    fastRefresh: true, // THIS SEEMS TO BE FIXED -- this option would be nice, but seems to cause errors, see https://github.com/storybookjs/storybook/issues/13745
     strictMode: true,
   },
   stories: ['../../cloud-cognitive/+(docs|src)/**/*+(-story|.stories).*'], // v11 will only show stories for C4P components (or at least until CDAI/Security move from v10 to v11)
@@ -61,17 +61,6 @@ module.exports = {
                 },
               },
               'css-loader',
-              // {
-              //   loader: 'fast-sass-loader',
-              //   options: {
-              //     sassOptions: {
-              //       includePaths: [
-              //         resolve(__dirname, '..', '..', '..', 'node_modules'),
-              //         resolve(__dirname, '..', 'node_modules'),
-              //       ],
-              //     },
-              //   },
-              // },
               {
                 loader: 'sass-loader',
                 options: {

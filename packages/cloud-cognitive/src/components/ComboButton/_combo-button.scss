@@ -32,7 +32,7 @@ $security--prefix: security;
   width: $spacing-09;
   height: auto;
   border-left: $spacing-01 solid $border-subtle-01;
-  background-color: $interactive-01;
+  background-color: $background-brand;
 }
 
 .#{$security--prefix}--combo-button__overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu:hover,

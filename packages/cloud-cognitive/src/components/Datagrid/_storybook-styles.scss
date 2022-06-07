@@ -31,6 +31,6 @@ $block-class: #{$pkg-prefix}--datagrid;
 }
 
 .c4p--datagrid__row-size-dropdown {
-  left: 0.1px;
+  left: $spacing-01;
   width: 112px;
 }

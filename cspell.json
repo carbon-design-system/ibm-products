@@ -106,6 +106,7 @@
     "Prefs",
     "listbox",
     "overscroll",
+    "draggable",
     "rowgroup"
   ]
 }

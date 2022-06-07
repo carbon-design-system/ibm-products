@@ -640,73 +640,20 @@ const DatagridActions = (datagridState) => {
     },
   };
 
-  let numItemsToolbar = 5;
+  // let numItemsToolbar = 5;
 
-  if (numItemsToolbar < 4) {
-    return (
-      isNothingSelected && (
-        <React.Fragment>
-          <Button
-            kind="ghost"
-            hasIconOnly
-            tooltipPosition="bottom"
-            renderIcon={Filter16}
-            iconDescription={'Left panel'}
-            onClick={leftPanelClick}
-          />
-          <TableToolbarContent>
-            <TableToolbarSearch
-              size="xl"
-              id="columnSearch"
-              persistent
-              placeHolderText={searchForAColumn}
-              onChange={(e) => setGlobalFilter(e.target.value)}
-            />
-            <RowSizeDropdown {...rowSizeDropdownProps} />
-            <div style={style}>
-              <Button
-                kind="ghost"
-                hasIconOnly
-                tooltipPosition="bottom"
-                renderIcon={Restart16}
-                iconDescription={'Refresh'}
-                onClick={refreshColumns}
-              />
-            </div>
-            <div style={style}>
-              <Button
-                kind="ghost"
-                hasIconOnly
-                tooltipPosition="bottom"
-                renderIcon={Download16}
-                iconDescription={'Download CSV'}
-                onClick={downloadCsv}
-              />
-            </div>
-            {CustomizeColumnsButton && (
-              <div style={style}>
-                <CustomizeColumnsButton />
-              </div>
-            )}
-          </TableToolbarContent>
-        </React.Fragment>
-      )
-    );
-  } else {
-    return (
-      isNothingSelected && (
-        <React.Fragment>
-          <OverflowMenu ariaLabel="batchStoriesOverflowMenu">
-            <OverflowMenuItem itemText="LeftPanel" onClick={leftPanelClick} />
-            <RowSizeDropdown {...rowSizeDropdownProps}></RowSizeDropdown>
-            <OverflowMenuItem
-              itemText="Download CSV"
-              onClick={downloadCsv}
-              Icon={Download16}
-            />
-            <OverflowMenuItem itemText="Refresh" onClick={refreshColumns} />
-          </OverflowMenu>
-
+  return (
+    isNothingSelected && (
+      <React.Fragment>
+        <Button
+          kind="ghost"
+          hasIconOnly
+          tooltipPosition="bottom"
+          renderIcon={Filter16}
+          iconDescription={'Left panel'}
+          onClick={leftPanelClick}
+        />
+        <TableToolbarContent>
           <TableToolbarSearch
             size="xl"
             id="columnSearch"
@@ -714,13 +661,155 @@ const DatagridActions = (datagridState) => {
             placeHolderText={searchForAColumn}
             onChange={(e) => setGlobalFilter(e.target.value)}
           />
-
-          <RowSizeDropdown {...rowSizeDropdownProps}></RowSizeDropdown>
-        </React.Fragment>
-      )
-    );
-  }
+          <RowSizeDropdown {...rowSizeDropdownProps} />
+          <div style={style}>
+            <Button
+              kind="ghost"
+              hasIconOnly
+              tooltipPosition="bottom"
+              renderIcon={Restart16}
+              iconDescription={'Refresh'}
+              onClick={refreshColumns}
+            />
+          </div>
+          <div style={style}>
+            <Button
+              kind="ghost"
+              hasIconOnly
+              tooltipPosition="bottom"
+              renderIcon={Download16}
+              iconDescription={'Download CSV'}
+              onClick={downloadCsv}
+            />
+          </div>
+          {CustomizeColumnsButton && (
+            <div style={style}>
+              <CustomizeColumnsButton />
+            </div>
+          )}
+        </TableToolbarContent>
+      </React.Fragment>
+    )
+  );
 };
+
+
+
+
+
+
+
+
+
+const RowSizeDropdownBatchActions = () => {
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader.slice(0, 3),
+      {
+        Header: 'Different cell content',
+        id: 'rowSizeDemo-cell',
+        disableSortBy: true,
+        Cell: ({ rowSize }) => rowSize,
+      },
+    ],
+    []
+  );
+  const [data] = useState(makeData(10));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      rowSize: 'xs',
+      rowSizes: [
+        {
+          value: 'xl',
+          labelText: 'More than super',
+        },
+        {
+          value: 'lg',
+          labelText: 'Super tall row',
+        },
+        {
+          value: 'md',
+        },
+        {
+          value: 'xs',
+          labelText: 'Teeny tiny row',
+        },
+      ],
+      onRowSizeChange: (value) => {
+        console.log('row size changed to: ', value);
+      },
+      DatagridActionsBatchActions,
+      DatagridBatchActions,
+    },
+    useSelectRows
+  );
+
+  return (
+    <Wrapper>
+      <Datagrid datagridState={{ ...datagridState }} />
+    </Wrapper>
+  );
+};
+
+
+const DatagridActionsBatchActions = (datagridState) => {
+  const {
+    selectedFlatRows,
+    setGlobalFilter,
+    CustomizeColumnsButton,
+    RowSizeDropdown,
+    rowSizeDropdownProps,
+  } = datagridState;
+  const downloadCsv = () => {
+    alert('Downloading...');
+  };
+  const { TableToolbarContent, TableToolbarSearch } = DataTable;
+
+  const refreshColumns = () => {
+    alert('refreshing...');
+  };
+  const leftPanelClick = () => {
+    alert('open/close left panel...');
+  };
+  const searchForAColumn = 'Search';
+  const isNothingSelected = selectedFlatRows.length === 0;
+  /*const style = {
+    'button:nth-child(1) > span:nth-child(1)': {
+      bottom: '-37px',
+    },*/
+
+
+  return (
+    isNothingSelected && (
+      <React.Fragment>
+
+        <OverflowMenu>
+          <OverflowMenuItem itemText="Left Panel" onClick={leftPanelClick}>
+          </OverflowMenuItem>
+          <OverflowMenuItem itemText="Download CSV" onClick={downloadCsv}>
+          </OverflowMenuItem>
+          <OverflowMenuItem itemText="Refresh Columns" onClick={refreshColumns}>
+          </OverflowMenuItem>
+          <RowSizeDropdown {...rowSizeDropdownProps}></RowSizeDropdown> 
+        </OverflowMenu>
+        <TableToolbarContent>
+          <TableToolbarSearch
+            size="xl"
+            id="columnSearch"
+            persistent
+            placeHolderText={searchForAColumn}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+          />
+        </TableToolbarContent>
+      </React.Fragment>
+    )
+  );
+};
+
+
+
 
 export const DatagridActionsToolbar = () => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -895,7 +984,7 @@ const DatagridBatchActions = (datagridState) => {
   const onBatchAction = () => alert('Batch action');
   const actionName = 'Action';
   const selectAllButton = 'Select All';
-  const selectAllButtonAction = () => alert(`Select All ${datagridState}`);
+  const selectAllButtonAction = () => alert(`Select All}`);
   return (
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
@@ -919,7 +1008,7 @@ export const BatchActions = () => {
     {
       columns,
       data,
-      DatagridActions,
+      DatagridActions: DatagridActionsBatchActions,
       DatagridBatchActions,
     },
     useSelectRows

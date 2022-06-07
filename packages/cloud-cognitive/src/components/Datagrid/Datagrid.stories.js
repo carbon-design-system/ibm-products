@@ -693,72 +693,10 @@ const DatagridActions = (datagridState) => {
   );
 };
 
-
-
-
-
-
-
-
-
-const RowSizeDropdownBatchActions = () => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader.slice(0, 3),
-      {
-        Header: 'Different cell content',
-        id: 'rowSizeDemo-cell',
-        disableSortBy: true,
-        Cell: ({ rowSize }) => rowSize,
-      },
-    ],
-    []
-  );
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      rowSize: 'xs',
-      rowSizes: [
-        {
-          value: 'xl',
-          labelText: 'More than super',
-        },
-        {
-          value: 'lg',
-          labelText: 'Super tall row',
-        },
-        {
-          value: 'md',
-        },
-        {
-          value: 'xs',
-          labelText: 'Teeny tiny row',
-        },
-      ],
-      onRowSizeChange: (value) => {
-        console.log('row size changed to: ', value);
-      },
-      DatagridActionsBatchActions,
-      DatagridBatchActions,
-    },
-    useSelectRows
-  );
-
-  return (
-    <Wrapper>
-      <Datagrid datagridState={{ ...datagridState }} />
-    </Wrapper>
-  );
-};
-
-
 const DatagridActionsBatchActions = (datagridState) => {
   const {
     selectedFlatRows,
     setGlobalFilter,
-    CustomizeColumnsButton,
     RowSizeDropdown,
     rowSizeDropdownProps,
   } = datagridState;
@@ -780,19 +718,23 @@ const DatagridActionsBatchActions = (datagridState) => {
       bottom: '-37px',
     },*/
 
-
   return (
     isNothingSelected && (
       <React.Fragment>
-
         <OverflowMenu>
-          <OverflowMenuItem itemText="Left Panel" onClick={leftPanelClick}>
-          </OverflowMenuItem>
-          <OverflowMenuItem itemText="Download CSV" onClick={downloadCsv}>
-          </OverflowMenuItem>
-          <OverflowMenuItem itemText="Refresh Columns" onClick={refreshColumns}>
-          </OverflowMenuItem>
-          <RowSizeDropdown {...rowSizeDropdownProps}></RowSizeDropdown> 
+          <OverflowMenuItem
+            itemText="Left Panel"
+            onClick={leftPanelClick}
+          ></OverflowMenuItem>
+          <OverflowMenuItem
+            itemText="Download CSV"
+            onClick={downloadCsv}
+          ></OverflowMenuItem>
+          <OverflowMenuItem
+            itemText="Refresh Columns"
+            onClick={refreshColumns}
+          ></OverflowMenuItem>
+          <RowSizeDropdown {...rowSizeDropdownProps}></RowSizeDropdown>
         </OverflowMenu>
         <TableToolbarContent>
           <TableToolbarSearch
@@ -807,9 +749,6 @@ const DatagridActionsBatchActions = (datagridState) => {
     )
   );
 };
-
-
-
 
 export const DatagridActionsToolbar = () => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -983,8 +922,31 @@ const DatagridBatchActions = (datagridState) => {
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
   const onBatchAction = () => alert('Batch action');
   const actionName = 'Action';
+  // const selectAllButton = 'Select All';
+  // const selectAllButtonAction = () => alert(`Select All}`);
+  return (
+    <TableBatchActions
+      shouldShowBatchActions={totalSelected > 0}
+      totalSelected={totalSelected}
+      onCancel={() => toggleAllRowsSelected(false)}
+    >
+      {/*<TableBatchAction renderIcon={Activity16} onClick={selectAllButtonAction}>
+        {selectAllButton}
+      </TableBatchAction>*/}
+      <TableBatchAction renderIcon={Activity16} onClick={onBatchAction}>
+        {actionName}
+      </TableBatchAction>
+    </TableBatchActions>
+  );
+};
+
+const BatchActionsDatagridBatchActions = (datagridState) => {
+  const { selectedFlatRows, toggleAllRowsSelected } = datagridState;
+  const totalSelected = selectedFlatRows && selectedFlatRows.length;
+  const onBatchAction = () => alert('Batch action');
+  const actionName = 'Action';
   const selectAllButton = 'Select All';
-  const selectAllButtonAction = () => alert(`Select All}`);
+  const selectAllButtonAction = () => alert(`Select All`);
   return (
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
@@ -1009,7 +971,7 @@ export const BatchActions = () => {
       columns,
       data,
       DatagridActions: DatagridActionsBatchActions,
-      DatagridBatchActions,
+      DatagridBatchActions: BatchActionsDatagridBatchActions,
     },
     useSelectRows
   );

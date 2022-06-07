@@ -29,3 +29,8 @@ $block-class: #{$pkg-prefix}--datagrid;
     border-bottom: none;
   }
 }
+
+.c4p--datagrid__row-size-dropdown {
+  left: 0.1px;
+  width: 112px;
+}

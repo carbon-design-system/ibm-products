@@ -966,17 +966,32 @@ const BatchActionsDatagridBatchActions = (datagridState) => {
 export const BatchActions = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+  const [areAllSelected, setAreAllSelected] = useState(false);
   const datagridState = useDatagrid(
     {
       columns,
       data,
+      selectAllToggle: {
+        labels: {
+          allRows: 'Select all',
+        },
+        onSelectAllRows: setAreAllSelected,
+      },
+      DatagridPagination,
       DatagridActions: DatagridActionsBatchActions,
       DatagridBatchActions: BatchActionsDatagridBatchActions,
     },
-    useSelectRows
+    useSelectRows,
+    useSelectAllWithToggle
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} />;
+  return (
+    <>
+      <Datagrid datagridState={{ ...datagridState }} />
+      <h3>Doc in Notes...</h3>
+      <p>{`Are all entries selected across all pages? - ${areAllSelected}`}</p>
+    </>
+  );
 };
 
 export const DisableSelectRow = () => {

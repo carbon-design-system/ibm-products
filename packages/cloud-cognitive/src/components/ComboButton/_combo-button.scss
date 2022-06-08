@@ -25,7 +25,8 @@
     @include text-overflow;
   }
 
-  .#{$security--prefix}--combo-button__overflow-menu {
+  .#{$security--prefix}--combo-button
+    .#{$security--prefix}--combo-button__overflow-menu {
     width: carbon--mini-units($count: 6);
     height: auto;
     border-left: carbon--rem($px: 1px) solid $ui-03;

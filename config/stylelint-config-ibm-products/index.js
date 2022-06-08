@@ -69,5 +69,6 @@ module.exports = {
         acceptCarbonFontWeightFunction: true,
       },
     ],
+    'no-duplicate-selectors': null,
   },
 };

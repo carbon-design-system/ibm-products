@@ -6,9 +6,12 @@
  */
 
 import { ChevronDown16, ChevronUp16 } from '@carbon/icons-react';
-import { Button, OverflowMenuItem } from 'carbon-components-react';
+import {
+  Button,
+  OverflowMenuItem,
+  OverflowMenu,
+} from 'carbon-components-react';
 
-import { OverflowMenu } from 'carbon-components-react/lib/components/OverflowMenu/OverflowMenu';
 import setupGetInstanceId from 'carbon-components-react/lib/tools/setupGetInstanceId';
 
 import classnames from 'classnames';

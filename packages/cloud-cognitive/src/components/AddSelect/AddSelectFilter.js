@@ -13,6 +13,7 @@ import {
   TextInput,
   Tag,
 } from 'carbon-components-react';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { Filter16 } from '@carbon/icons-react';
 import { pkg } from '../../settings';
@@ -58,6 +59,7 @@ export let AddSelectFilter = ({
    * clearFilters resets both
    */
   const applyFilters = () => {
+    setOpen(false);
     handleFilter(filters);
   };
 
@@ -82,6 +84,10 @@ export let AddSelectFilter = ({
   };
 
   const showFilter = multi && filterOpts?.length > 0;
+  const filterBtnClassnames = cx(`${blockClass}-toggle`, {
+    [`${blockClass}-toggle--open`]: open,
+  });
+  const dirtyInput = Object.keys(filters).length > 0;
 
   return (
     <>
@@ -100,7 +106,7 @@ export let AddSelectFilter = ({
             kind="ghost"
             onClick={() => setOpen(!open)}
             iconDescription={iconDescription}
-            className={`${blockClass}-toggle`}
+            className={filterBtnClassnames}
             size="md"
           />
         )}
@@ -128,6 +134,7 @@ export let AddSelectFilter = ({
                 kind="secondary"
                 onClick={resetFilters}
                 className={`${blockClass}-button`}
+                disabled={!dirtyInput}
               >
                 {secondaryButtonText}
               </Button>
@@ -135,6 +142,7 @@ export let AddSelectFilter = ({
                 kind="primary"
                 onClick={applyFilters}
                 className={`${blockClass}-button`}
+                disabled={!dirtyInput && !hasFiltersApplied}
               >
                 {primaryButtonText}
               </Button>

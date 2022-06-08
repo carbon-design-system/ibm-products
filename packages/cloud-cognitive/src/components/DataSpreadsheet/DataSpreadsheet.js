@@ -59,7 +59,7 @@ const componentName = 'DataSpreadsheet';
 
 // Default values for props
 const defaults = {
-  cellSize: 'standard',
+  cellSize: 'sm',
   columns: Object.freeze([]),
   data: Object.freeze([]),
   defaultEmptyRowCount: 16,
@@ -680,6 +680,7 @@ export let DataSpreadsheet = React.forwardRef(
         isKeyboard,
         setSelectionAreaData,
         index,
+        currentMatcher,
       };
       // Select an entire column
       if (
@@ -810,6 +811,7 @@ export let DataSpreadsheet = React.forwardRef(
             activeCellCoordinates={activeCellCoordinates}
             cellSize={cellSize}
             columns={columns}
+            currentMatcher={currentMatcher}
             defaultColumn={defaultColumn}
             headerGroups={headerGroups}
             rows={rows}
@@ -823,6 +825,7 @@ export let DataSpreadsheet = React.forwardRef(
             updateActiveCellCoordinates={updateActiveCellCoordinates}
             setHeaderCellHoldActive={setHeaderCellHoldActive}
             headerCellHoldActive={headerCellHoldActive}
+            visibleColumns={visibleColumns}
           />
 
           {/* BODY */}
@@ -938,7 +941,7 @@ DataSpreadsheet.propTypes = {
   /**
    * Specifies the cell height
    */
-  cellSize: PropTypes.oneOf(['compact', 'standard', 'medium', 'large']),
+  cellSize: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
    * Provide an optional class to be applied to the containing node.

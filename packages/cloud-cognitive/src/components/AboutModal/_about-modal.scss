@@ -90,7 +90,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
 .#{$block-class} .#{$block-class}__footer {
   position: relative;
-  height: rem(72px);
+  height: $spacing-03 + $spacing-10;
   flex-direction: column;
   justify-content: center;
   background-color: $background-inverse;
@@ -99,7 +99,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
 .#{$block-class} .#{$block-class}__tab-container {
   position: absolute;
-  bottom: 100%;
+  bottom: 0;
 }
 
 .#{$block-class} .#{$block-class}__version-label,
@@ -114,4 +114,20 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
 .#{$block-class} .#{$block-class}__version-label {
   @include font-weight('semibold');
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--tabs
+  .#{c4p-settings.$carbon-prefix}--tabs__nav-link,
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--tab-content {
+  @include type.type-style('body-short-01');
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--tab-content {
+  height: $spacing-03 + $spacing-10;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--tab-content:not([hidden]) {
+  display: flex;
+  align-items: center;
 }

@@ -24,8 +24,12 @@ import {
   ModalFooter,
   ModalBody,
   Tabs,
+  TabList,
+  TabPanels,
+  TabPanel,
   Tab,
 } from '@carbon/react';
+import { isRequiredIf } from '../../global/js/utils/props-helper';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--about-modal`;
@@ -53,6 +57,7 @@ export let AboutModal = React.forwardRef(
       logo,
       onClose,
       open,
+      tabListAriaLabel,
       title,
       // Collect any other property values passed in.
       ...rest
@@ -103,6 +108,7 @@ export let AboutModal = React.forwardRef(
         <div className={`${blockClass}__logo`}>{logo}</div>
         <ModalHeader
           className={`${blockClass}__header`}
+          closeModal={onClose}
           iconDescription={closeIconDescription}
           label={title}
           labelClassName={`${blockClass}__title`}
@@ -147,17 +153,20 @@ export let AboutModal = React.forwardRef(
                 </p>
               </>
             ) : (
-              <Tabs className={`${blockClass}__tab-container`}>
-                {additionalInfo.map((tab, i) => (
-                  <Tab
-                    id={'about-modal-tab-' + tab.label}
-                    label={tab.label}
-                    key={i}
-                  >
-                    {tab.content}
-                  </Tab>
-                ))}
-              </Tabs>
+              <div className={`${blockClass}__tab-container`}>
+                <Tabs>
+                  <TabList aria-label={tabListAriaLabel}>
+                    {additionalInfo.map((tab, index) => (
+                      <Tab key={index}>{tab.label}</Tab>
+                    ))}
+                  </TabList>
+                  <TabPanels>
+                    {additionalInfo.map((tab, index) => (
+                      <TabPanel key={index}>{tab.content}</TabPanel>
+                    ))}
+                  </TabPanels>
+                </Tabs>
+              </div>
             ))}
         </ModalFooter>
       </ComposedModal>
@@ -168,6 +177,9 @@ export let AboutModal = React.forwardRef(
 // Return a placeholder if not released and not enabled by feature flag
 AboutModal = pkg.checkComponentEnabled(AboutModal, componentName);
 AboutModal.displayName = componentName;
+
+const tabListAriaLabelRequiredProps = (type) =>
+  isRequiredIf(type, ({ additionalInfo }) => additionalInfo?.length);
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
@@ -236,6 +248,11 @@ AboutModal.propTypes = {
    * Specifies whether the AboutModal is open or not.
    */
   open: PropTypes.bool,
+
+  /**
+   * Specifies the tab list aria label
+   */
+  tabListAriaLabel: tabListAriaLabelRequiredProps(PropTypes.string),
 
   /**
    * The title of the AboutModal is usually the product or service name.

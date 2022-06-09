@@ -140,6 +140,7 @@ const Template = (storyName, storyInitiallyOpen, props) => {
         onClose={() => setOpen(false)}
         logo={logo}
         open={open}
+        tabListAriaLabel="Product info"
       />
     </>
   );

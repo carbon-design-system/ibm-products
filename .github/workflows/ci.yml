@@ -48,7 +48,7 @@ jobs:
       - name: Install
         run: yarn
       - name: CI lint checks
-        run: yarn run ci-check:lint
+        run: yarn ci-check:lint
 
   test-cdai:
     runs-on: ubuntu-latest

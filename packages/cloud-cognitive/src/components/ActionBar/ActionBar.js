@@ -74,7 +74,7 @@ export let ActionBar = React.forwardRef(
               overflowAriaLabel="hidden sizing overflow items"
               overflowItems={[]}
               key="hidden-overflow-menu"
-            ></ActionBarOverflowItems>
+            />
             {actions.map(({ key, id, ...rest }) => (
               <ActionBarItem
                 {...rest}

@@ -34,7 +34,7 @@ export let ActionBarItem = React.forwardRef(({ className, ...rest }, ref) => {
         className: cx(blockClass, className),
         hasIconOnly: true,
         kind: 'ghost',
-        size: 'field',
+        size: 'md',
         tooltipPosition: 'bottom',
         tooltipAlignment: 'end',
         type: 'button',

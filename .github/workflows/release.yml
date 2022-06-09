@@ -42,8 +42,14 @@ jobs:
         run: yarn lerna publish --create-release github --yes
 
       - name: Rename to ibm-cloud-cognitive for legacy publish
+        run: yarn json -I -f packages/cloud-cognitive/package.json -e 'this.name="@carbon/ibm-cloud-cognitive"'
+
+      # Run yarn again after renaming package, required after move to yarn berry
+      - name: Install after rename
+        run: yarn
+      
+      - name: Commit for legacy package
         run: |
-          yarn json -I -f packages/cloud-cognitive/package.json -e 'this.name="@carbon/ibm-cloud-cognitive"'
           git add .
           git commit -m "chore: rename package for simultaneous publish"
 
@@ -51,6 +57,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          yarn
-          yarn lerna publish from-package --yes
+        run: yarn lerna publish from-package --yes

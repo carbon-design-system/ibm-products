@@ -20,12 +20,7 @@ import {
   Download16,
   Filter16,
 } from '@carbon/icons-react';
-import {
-  DataTable,
-  Button,
-  Pagination,
-  OverflowMenu,
-} from 'carbon-components-react';
+import { DataTable, Button, Pagination } from 'carbon-components-react';
 import {
   Datagrid,
   useDatagrid,
@@ -50,8 +45,6 @@ import {
 import mdx from './Datagrid.mdx';
 
 import styles from './_storybook-styles.scss';
-
-import OverflowMenuItem from 'carbon-components-react/lib/components/OverflowMenuItem';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -693,7 +686,7 @@ const DatagridActions = (datagridState) => {
   );
 };
 
-const DatagridActionsBatchActions = (datagridState) => {
+/*const DatagridActionsBatchActions = (datagridState) => {
   const {
     selectedFlatRows,
     setGlobalFilter,
@@ -718,7 +711,7 @@ const DatagridActionsBatchActions = (datagridState) => {
       bottom: '-37px',
     },*/
 
-  return (
+/*return (
     isNothingSelected && (
       <React.Fragment>
         <OverflowMenu>
@@ -748,7 +741,7 @@ const DatagridActionsBatchActions = (datagridState) => {
       </React.Fragment>
     )
   );
-};
+};*/
 
 export const DatagridActionsToolbar = () => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -922,35 +915,42 @@ const DatagridBatchActions = (datagridState) => {
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
   const onBatchAction = () => alert('Batch action');
   const actionName = 'Action';
+  const selectAll = 'Select All';
   // const selectAllButton = 'Select All';
   // const selectAllButtonAction = () => alert(`Select All}`);
+
+  const selectAllButtonAction = () => {
+    toggleAllRowsSelected(true);
+    alert('Select All');
+  };
+
   return (
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
       totalSelected={totalSelected}
       onCancel={() => toggleAllRowsSelected(false)}
     >
-      {/*<TableBatchAction renderIcon={Activity16} onClick={selectAllButtonAction}>
-        {selectAllButton}
-      </TableBatchAction>*/}
+      {
+        <TableBatchAction
+          renderIcon={Activity16}
+          onClick={selectAllButtonAction}
+        >
+          {selectAll}
+        </TableBatchAction>
+      }
       <TableBatchAction renderIcon={Activity16} onClick={onBatchAction}>
         {actionName}
       </TableBatchAction>
     </TableBatchActions>
   );
 };
-
+/*
 const BatchActionsDatagridBatchActions = (datagridState) => {
   const { selectedFlatRows, toggleAllRowsSelected } = datagridState;
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
   const onBatchAction = () => alert('Batch action');
   const actionName = 'Action';
   const selectAllButton = 'Select All';
-
-  const selectAllButtonAction = () => {
-    toggleAllRowsSelected(true);
-    alert('Select All');
-  };
 
   return (
     <TableBatchActions
@@ -966,7 +966,7 @@ const BatchActionsDatagridBatchActions = (datagridState) => {
       </TableBatchAction>
     </TableBatchActions>
   );
-};
+};*/
 
 export const BatchActions = () => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -975,8 +975,10 @@ export const BatchActions = () => {
     {
       columns,
       data,
-      DatagridActions: DatagridActionsBatchActions,
-      DatagridBatchActions: BatchActionsDatagridBatchActions,
+      // DatagridActions,
+      // DatagridBatchActions
+      // DatagridActions: DatagridBatchActions,
+      // DatagridBatchActions: DatagridActionsBatchActions,
     },
     useSelectRows,
     useSelectAllWithToggle

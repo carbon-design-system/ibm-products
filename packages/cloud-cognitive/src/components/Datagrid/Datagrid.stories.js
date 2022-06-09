@@ -922,8 +922,15 @@ const DatagridBatchActions = (datagridState) => {
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
   const onBatchAction = () => alert('Batch action');
   const actionName = 'Action';
+  const selectAll = 'Select All';
   // const selectAllButton = 'Select All';
   // const selectAllButtonAction = () => alert(`Select All}`);
+
+  const selectAllButtonAction = () => {
+    toggleAllRowsSelected(true);
+    alert('Select All');
+  };
+
   return (
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
@@ -933,24 +940,22 @@ const DatagridBatchActions = (datagridState) => {
       {/*<TableBatchAction renderIcon={Activity16} onClick={selectAllButtonAction}>
         {selectAllButton}
       </TableBatchAction>*/}
+      <TableBatchAction renderIcon={Activity16} onClick={selectAllButtonAction}>
+        {selectAll}
+      </TableBatchAction>
       <TableBatchAction renderIcon={Activity16} onClick={onBatchAction}>
         {actionName}
       </TableBatchAction>
     </TableBatchActions>
   );
 };
-
+/*
 const BatchActionsDatagridBatchActions = (datagridState) => {
   const { selectedFlatRows, toggleAllRowsSelected } = datagridState;
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
   const onBatchAction = () => alert('Batch action');
   const actionName = 'Action';
   const selectAllButton = 'Select All';
-
-  const selectAllButtonAction = () => {
-    toggleAllRowsSelected(true);
-    alert('Select All');
-  };
 
   return (
     <TableBatchActions
@@ -966,7 +971,7 @@ const BatchActionsDatagridBatchActions = (datagridState) => {
       </TableBatchAction>
     </TableBatchActions>
   );
-};
+};*/
 
 export const BatchActions = () => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -975,8 +980,8 @@ export const BatchActions = () => {
     {
       columns,
       data,
-      DatagridActions: DatagridActionsBatchActions,
-      DatagridBatchActions: BatchActionsDatagridBatchActions,
+      DatagridActions: DatagridBatchActions,
+      DatagridBatchActions: DatagridActionsBatchActions,
     },
     useSelectRows,
     useSelectAllWithToggle

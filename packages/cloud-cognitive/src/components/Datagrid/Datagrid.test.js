@@ -26,7 +26,10 @@ import {
   useNestedRows,
   useSortableColumns,
   useOnRowClick,
+  useCustomizeColumns,
 } from '.';
+
+import { useColumnOrder } from 'react-table';
 
 import namor from 'namor';
 
@@ -315,6 +318,43 @@ const LeftPanel = ({ ...rest }) => {
     <Wrapper>
       <Datagrid datagridState={{ ...datagridState }} {...rest} />
     </Wrapper>
+  );
+};
+
+const CustomizingColumns = ({ ...rest }) => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(10));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      initialState: {
+        hiddenColumns: ['age'],
+        columnOrder: [],
+      },
+      customizeColumnsProps: {
+        onSaveColumnPrefs: (newColDefs) => {
+          console.log(newColDefs);
+        },
+      },
+      DatagridActions,
+      DatagridBatchActions,
+    },
+    useCustomizeColumns,
+    useColumnOrder
+  );
+
+  return (
+    <>
+      <Datagrid datagridState={{ ...datagridState }} {...rest} />
+      <div>
+        Hidden column ids:
+        <pre>{JSON.stringify(datagridState.state.hiddenColumns, null, 2)}</pre>
+      </div>
+      <p>
+        More details in the <strong>Notes</strong> section
+      </p>
+    </>
   );
 };
 
@@ -1025,6 +1065,10 @@ describe(componentName, () => {
         'c4p--datagrid__isSorted'
       );
     }
+  });
+
+  it('Customizing Columns', () => {
+    render(<CustomizingColumns data-testid={dataTestId}></CustomizingColumns>);
   });
 
   it('Top Alignment', () => {

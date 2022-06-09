@@ -8,7 +8,6 @@
 import { useEffect } from 'react';
 import { px } from '@carbon/layout';
 import { pkg } from '../../../settings';
-import { getScrollbarWidth } from '../../../global/js/utils/getScrollbarWidth';
 import { moveColumnIndicatorLine } from '../utils/moveColumnIndicatorLine';
 
 // Used specifically for reordering columns, will move the position of the
@@ -28,12 +27,16 @@ export const useSpreadsheetMouseMove = ({
         ref.current.addEventListener('mousemove', handleMouseMove);
       }
       const spreadsheetCoords = ref.current.getBoundingClientRect();
+      const listContainer = ref.current.querySelector(
+        `.${blockClass}__list--container`
+      );
+      const scrollAmount = listContainer.scrollLeft;
       moveColumnIndicatorLine({
         clonedSelectionElement,
         ref,
         spreadsheetCoords,
+        leftScrollAmount: scrollAmount,
       });
-      const scrollbarWidth = getScrollbarWidth();
       const spreadsheetWrapperElement = ref.current;
       spreadsheetWrapperElement.getBoundingClientRect();
       const xPositionRelativeToSpreadsheet =
@@ -41,18 +44,19 @@ export const useSpreadsheetMouseMove = ({
       const offsetXValue = clonedSelectionElement?.getAttribute(
         'data-clone-offset-x'
       );
-      const totalSpreadsheetWidth = ref.current.offsetWidth;
+
+      const totalSpreadsheetScrollingWidth = listContainer.scrollWidth;
       const clonedSelectionWidth = clonedSelectionElement.offsetWidth;
       const clonePlacement = Math.max(
         xPositionRelativeToSpreadsheet - offsetXValue,
         defaultColumn?.rowHeaderWidth
       );
-      // Moves the position of the cloned selection area to follow mouse
+      // Moves the position of the cloned selection area to follow mouse, and
+      // add the amount horizontally scrolled
       clonedSelectionElement.style.left = px(
-        totalSpreadsheetWidth - clonedSelectionWidth - scrollbarWidth >=
-          clonePlacement
-          ? clonePlacement
-          : totalSpreadsheetWidth - clonedSelectionWidth - scrollbarWidth
+        totalSpreadsheetScrollingWidth - clonedSelectionWidth >= clonePlacement
+          ? clonePlacement + scrollAmount
+          : totalSpreadsheetScrollingWidth - clonedSelectionWidth
       );
     };
     if (headerCellHoldActive) {

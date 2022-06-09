@@ -33,6 +33,7 @@ import props from './SummaryCardContainer/_mocks_';
 import summaryCardSelectProps from './SummaryCardSelect/_mocks_';
 
 import { InlineNotification, NotificationActionButton } from '../../';
+import { Grid } from 'carbon-components-react';
 
 storiesOf(patterns('SummaryCard#legacy'), module)
   .addDecorator((Story) => (
@@ -45,15 +46,17 @@ storiesOf(patterns('SummaryCard#legacy'), module)
             rel="noopener noreferrer"
             target="_blank"
           >
-            More info
+            View replacement
           </NotificationActionButton>
         }
         kind="info"
-        subtitle="This component is now legacy. Please click to see the go-forward component"
+        subtitle="Pattern no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
         title=""
         hideCloseButton
       />
-      <Story />
+      <Grid>
+        <Story />
+      </Grid>
     </>
   ))
   .addDecorator((story) => (

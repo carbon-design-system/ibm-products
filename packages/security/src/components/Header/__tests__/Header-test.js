@@ -47,8 +47,6 @@ describe('Header', () => {
   const hasNotificationsClass = () =>
     getNotificationsButton().hasClass(`${namespace}__button--notifications`);
 
-  const { button } = labels.profile;
-
   describe('Render Props tests', () => {
     it('should render login and signup buttons via a render prop', () => {
       const linksProp = {
@@ -112,7 +110,9 @@ describe('Header', () => {
 
   describe('Rendering', () => {
     const doesPopoverExist = () => doesElementExist(`.${namespace}__popover`);
-    const getProfileButton = () => getIconButton(button);
+    const profileButtonAssistiveTextId = `${namespace}__profile__button--assistive-text`;
+    const getProfileButton = () =>
+      header.find(`button[aria-describedby="${profileButtonAssistiveTextId}"]`);
 
     it('renders correctly', () => {
       expect(header).toMatchSnapshot();

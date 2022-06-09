@@ -72,6 +72,7 @@ export const DataSpreadsheetBody = forwardRef(
     const previousState = usePreviousValue({
       selectionAreaData,
       clickAndHoldActive,
+      rowHeight: defaultColumn.rowHeight,
     });
 
     // Set custom css property containing the spreadsheet total width
@@ -179,7 +180,11 @@ export const DataSpreadsheetBody = forwardRef(
           columnIndex <= columnEnd;
           columnIndex++
         ) {
-          cellContainer.push([rowIndex, columnIndex]);
+          cellContainer.push([
+            rowIndex,
+            columnIndex,
+            `${blockClass}__cell--${rowIndex}--${columnIndex}`,
+          ]);
         }
       }
       return cellContainer;
@@ -199,19 +204,65 @@ export const DataSpreadsheetBody = forwardRef(
       rows,
       activeCellCoordinates,
       defaultColumn,
+      selectionAreas,
     });
 
     // Make sure that if the cellSize prop changes, the active
-    // cell also gets updated with the new size
+    // cell also gets updated with the new size and new top placement
+    // value. All of the cell selections will be updated as well
     useEffect(() => {
       const listContainer = spreadsheetBodyRef?.current;
       const activeCellButton = listContainer.querySelector(
         `.${blockClass}__active-cell--highlight`
       );
-      if (activeCellButton) {
+      if (
+        activeCellButton &&
+        defaultColumn.rowHeight !== previousState.rowHeight
+      ) {
         activeCellButton.style.height = `${defaultColumn?.rowHeight}px`;
+        if (activeCellCoordinates) {
+          const activeTargetElement = ref.current.querySelector(
+            `[data-row-index="${activeCellCoordinates.row}"][data-column-index="${activeCellCoordinates.column}"]`
+          );
+          const listContainer = ref.current.querySelector(
+            `.${blockClass}__list--container`
+          );
+          const newActiveCellTopPosition =
+            activeTargetElement.getBoundingClientRect().top -
+            listContainer.getBoundingClientRect().top;
+          activeCellButton.style.top = px(newActiveCellTopPosition);
+          removeCellSelections({ spreadsheetRef: ref });
+          selectionAreas.map((area) => {
+            if (
+              !area.areaCreated &&
+              area.point1 &&
+              area.point2 &&
+              area.matcher
+            ) {
+              return createCellSelectionArea({
+                ref,
+                area,
+                blockClass,
+                defaultColumn,
+                selectionAreas,
+                setSelectionAreas,
+                setActiveCellInsideSelectionArea,
+                visibleColumns,
+              });
+            }
+          });
+        }
       }
-    }, [defaultColumn?.rowHeight]);
+    }, [
+      defaultColumn,
+      ref,
+      activeCellCoordinates,
+      previousState?.rowHeight,
+      selectionAreas,
+      setActiveCellInsideSelectionArea,
+      setSelectionAreas,
+      visibleColumns,
+    ]);
 
     // onClick fn for each cell in the data spreadsheet body,
     // adds the active cell highlight
@@ -441,7 +492,12 @@ export const DataSpreadsheetBody = forwardRef(
                         activeCellCoordinates?.row === index ||
                         checkActiveHeaderCell(index, selectionAreas, 'row'),
                       [`${blockClass}__td-th--selected-header`]:
-                        checkSelectedHeaderCell(index, selectionAreas, 'row'),
+                        checkSelectedHeaderCell(
+                          index,
+                          selectionAreas,
+                          'row',
+                          columns
+                        ),
                     }
                   )}
                   style={{
@@ -461,7 +517,7 @@ export const DataSpreadsheetBody = forwardRef(
                   style={{
                     ...cell.getCellProps().style,
                     display: 'grid',
-                    minWidth: defaultColumn?.width,
+                    minWidth: cell?.column?.width || defaultColumn?.width,
                   }}
                 >
                   <button
@@ -496,6 +552,7 @@ export const DataSpreadsheetBody = forwardRef(
         handleBodyCellClick,
         handleBodyCellHover,
         defaultColumn,
+        columns,
       ]
     );
 
@@ -519,6 +576,7 @@ export const DataSpreadsheetBody = forwardRef(
             totalVisibleColumns,
             defaultColumn,
             totalColumnsWidth,
+            visibleColumns,
           })}
           outerRef={contentScrollRef}
         >

@@ -188,12 +188,11 @@ const MultiStepTemplate = (args) => {
     submitHandler();
   };
 
-  const allResourcesHandler = (e) => {
-    const { checked } = e.target;
-    if (checked && resource) {
+  const allResourcesHandler = () => {
+    if (allResources && resource) {
       setResource('');
     }
-    setAllResources(checked);
+    setAllResources((prev) => !prev);
   };
 
   const steps = [
@@ -244,10 +243,8 @@ const MultiStepTemplate = (args) => {
               className={`${blockClass}__resource-toggle`}
             >
               <Toggle
-                onChange={allResourcesHandler}
+                onClick={allResourcesHandler}
                 labelText="All resources"
-                labelA="Off"
-                labelB="On"
                 toggled={allResources}
                 disabled={loading}
                 id="toggle1"

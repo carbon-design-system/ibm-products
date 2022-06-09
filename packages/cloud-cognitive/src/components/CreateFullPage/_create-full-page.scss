@@ -36,7 +36,9 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   color: $text-primary;
 }
 
-.#{$block-class} .#{$block-class}__content .#{c4p-settings.$carbon-prefix}--grid {
+.#{$block-class}
+  .#{$block-class}__content
+  .#{c4p-settings.$carbon-prefix}--grid {
   padding-top: $spacing-06;
   margin-right: 0;
   margin-left: 0;

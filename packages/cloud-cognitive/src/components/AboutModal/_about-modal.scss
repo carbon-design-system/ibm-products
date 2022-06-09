@@ -59,12 +59,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
 .#{$block-class}.#{$block-class}--with-tabs
   .#{c4p-settings.$carbon-prefix}--modal-content--overflow-indicator {
-  // stylelint-disable-next-line carbon/layout-token-use
-  /* stylelint-disable-next-line prettier/prettier */
   bottom: calc(#{$spacing-09} +#{$spacing-08});
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-content--overflow-indicator {
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--modal-content--overflow-indicator {
   background-image: linear-gradient(to bottom, #00000000, $layer-01);
 }
 

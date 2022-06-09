@@ -22,11 +22,12 @@
 $block-class: #{c4p-settings.$pkg-prefix}--import-modal;
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-close {
-  /* stylelint-disable-next-line prettier/prettier */
   display: none;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-footer .#{c4p-settings.$carbon-prefix}--btn {
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--modal-footer
+  .#{c4p-settings.$carbon-prefix}--btn {
   max-width: none;
 }
 

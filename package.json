@@ -95,12 +95,8 @@
   },
   "//resolutions:http-signature": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
-  "//resolutions": {
-    "cheerio": "1.0.0-rc.10",
-    "@carbon/grid": "^11.2.0",
-    "@carbon/layout": "^11.2.0",
-    "@carbon/themes": "^11.2.0",
-    "@carbon/type": "^11.2.0"
+  "resolutions": {
+    "cheerio": "1.0.0-rc.10"
   },
   "eslintConfig": {
     "parser": "@babel/eslint-parser",

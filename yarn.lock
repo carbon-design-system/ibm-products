@@ -1716,7 +1716,7 @@ __metadata:
     cpx: ^1.5.0
     focus-trap-react: ^8.11.1
     jest: ^28.1.0
-    jest-config-ibm-cloud-cognitive: ^0.23.19
+    jest-config-ibm-cloud-cognitive: ^0.24.0
     jest-environment-jsdom: ^28.1.0
     node-sass: ^7.0.1
     npm-check-updates: ^12.5.11
@@ -1829,7 +1829,7 @@ __metadata:
     glob: ^8.0.3
     immutability-helper: ^3.1.1
     jest: ^28.1.0
-    jest-config-ibm-cloud-cognitive: ^0.23.19
+    jest-config-ibm-cloud-cognitive: ^0.24.0
     jest-environment-jsdom: ^28.1.0
     namor: ^1.1.2
     npm-check-updates: ^12.5.11
@@ -1891,7 +1891,7 @@ __metadata:
     focus-trap-react: ^8.11.1
     invariant: ^2.2.4
     jest: ^28.1.0
-    jest-config-ibm-cloud-cognitive: ^0.23.19
+    jest-config-ibm-cloud-cognitive: ^0.24.0
     jest-environment-jsdom: ^28.1.0
     npm-check-updates: ^12.5.11
     npm-run-all: ^4.1.5
@@ -16054,7 +16054,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-config-ibm-cloud-cognitive@^0.23.19, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
+"jest-config-ibm-cloud-cognitive@^0.24.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive"
   dependencies:

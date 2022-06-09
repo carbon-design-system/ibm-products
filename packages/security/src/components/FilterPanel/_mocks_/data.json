@@ -47,8 +47,8 @@
       "parent": "DEFAULT",
       "count": 30,
       "filters": [
-        "DEFAULT", 
-        "LONG_TEXT", 
+        "DEFAULT",
+        "LONG_TEXT",
         "SELECTED"
       ]
     },
@@ -105,8 +105,8 @@
       "parent": "DEFAULT",
       "count": 30,
       "filters": [
-        "OPEN:FILTER_1", 
-        "OPEN:FILTER_2", 
+        "OPEN:FILTER_1",
+        "OPEN:FILTER_2",
         "OPEN:FILTER_3"
       ]
     },

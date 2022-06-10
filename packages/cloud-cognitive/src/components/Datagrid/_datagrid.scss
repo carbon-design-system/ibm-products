@@ -50,6 +50,11 @@
       }
     }
   }
+
+  .c4p--datagrid__row-size-dropdown {
+    left: $spacing-01;
+    width: 112px;
+  }
 }
 
 @include exports('datagrid') {

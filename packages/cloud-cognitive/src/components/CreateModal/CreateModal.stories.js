@@ -166,6 +166,7 @@ export const Default = prepareStory(Template, {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
         <RadioButtonGroup
           legendText="Radio button legend text goes here"

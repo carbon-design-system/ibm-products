@@ -223,6 +223,7 @@ export const MultiStepTearsheet = ({
           <Row>
             <Column xlg={3} lg={3}>
               <NumberInput
+                iconDescription="Choose a number"
                 id="carbon-number"
                 min={1}
                 max={100}

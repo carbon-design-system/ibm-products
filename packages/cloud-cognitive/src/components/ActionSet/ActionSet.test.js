@@ -63,7 +63,7 @@ describe(componentName, () => {
 
   it('renders ghost button first and primary button last', () => {
     render(
-      <ActionSet size="max" actions={[actionS, actionP, actionG, actionS2]} />
+      <ActionSet size="2xl" actions={[actionS, actionP, actionG, actionS2]} />
     );
     const buttons = screen.getAllByRole('button');
     expect(buttons[0].textContent).toEqual(labelG);
@@ -74,7 +74,7 @@ describe(componentName, () => {
 
   it('renders danger--ghost button first and danger button last', () => {
     render(
-      <ActionSet size="max" actions={[actionS, actionD, actionDG, actionS2]} />
+      <ActionSet size="2xl" actions={[actionS, actionD, actionDG, actionS2]} />
     );
     const buttons = screen.getAllByRole('button');
     expect(buttons[0].textContent).toEqual(dangerDescription + labelDG);
@@ -84,14 +84,14 @@ describe(componentName, () => {
   });
 
   it('renders primary button first when stacking', () => {
-    render(<ActionSet size="xs" actions={[actionS, actionP]} />);
+    render(<ActionSet size="sm" actions={[actionS, actionP]} />);
     const buttons = screen.getAllByRole('button');
     expect(buttons[0].textContent).toEqual(labelP);
     expect(buttons[1].textContent).toEqual(labelS);
   });
 
   it('renders primary button first when stacking whichever way round they are supplied', () => {
-    render(<ActionSet size="xs" actions={[actionP, actionS]} />);
+    render(<ActionSet size="sm" actions={[actionP, actionS]} />);
     const buttons = screen.getAllByRole('button');
     expect(buttons[0].textContent).toEqual(labelP);
     expect(buttons[1].textContent).toEqual(labelS);
@@ -202,13 +202,6 @@ const props = {
 };
 
 describe(`${componentName}.validateActions`, () => {
-  it('rejects more than three actions for an extra small size', () => {
-    expect(v('xs', props[1], prop, componentName)).toBeNull();
-    expect(v('xs', props[2], prop, componentName)).toBeNull();
-    expect(v('xs', props[3], prop, componentName)).toBeNull();
-    expect(v('xs', props[4], prop, componentName)).toBeInstanceOf(Error);
-  });
-
   it('rejects more than three actions for a small size', () => {
     expect(v('sm', props[1], prop, componentName)).toBeNull();
     expect(v('sm', props[2], prop, componentName)).toBeNull();
@@ -231,12 +224,12 @@ describe(`${componentName}.validateActions`, () => {
     expect(v('lg', props[5], prop, componentName)).toBeInstanceOf(Error);
   });
 
-  it('rejects more than four actions for a max size', () => {
-    expect(v('max', props[1], prop, componentName)).toBeNull();
-    expect(v('max', props[2], prop, componentName)).toBeNull();
-    expect(v('max', props[3], prop, componentName)).toBeNull();
-    expect(v('max', props[4], prop, componentName)).toBeNull();
-    expect(v('max', props[5], prop, componentName)).toBeInstanceOf(Error);
+  it('rejects more than four actions for a 2xl size', () => {
+    expect(v('2xl', props[1], prop, componentName)).toBeNull();
+    expect(v('2xl', props[2], prop, componentName)).toBeNull();
+    expect(v('2xl', props[3], prop, componentName)).toBeNull();
+    expect(v('2xl', props[4], prop, componentName)).toBeNull();
+    expect(v('2xl', props[5], prop, componentName)).toBeInstanceOf(Error);
   });
 
   it('rejects more than one primary kind', () => {
@@ -252,11 +245,10 @@ describe(`${componentName}.validateActions`, () => {
   });
 
   it('rejects ghost kind with other kinds for extra small, small, medium size', () => {
-    expect(v('xs', props.psg, prop, componentName)).toBeInstanceOf(Error);
     expect(v('sm', props.psg, prop, componentName)).toBeInstanceOf(Error);
     expect(v('md', props.psg, prop, componentName)).toBeInstanceOf(Error);
     expect(v('lg', props.psg, prop, componentName)).toBeNull();
-    expect(v('max', props.psg, prop, componentName)).toBeNull();
+    expect(v('2xl', props.psg, prop, componentName)).toBeNull();
   });
 
   it('rejects any kind other than primary, danger, secondary, danger--ghost, ghost', () => {

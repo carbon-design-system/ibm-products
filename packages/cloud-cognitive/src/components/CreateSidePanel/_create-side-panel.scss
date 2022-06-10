@@ -90,8 +90,8 @@ $side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
   .#{$create-side-panel-block-class}__actions-container {
   position: absolute;
   z-index: 4;
+  right: 0;
   bottom: 0;
-  left: 0;
   width: 100%;
   margin-bottom: 0;
 }

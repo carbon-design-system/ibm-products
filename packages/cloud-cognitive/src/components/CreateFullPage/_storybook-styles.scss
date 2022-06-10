@@ -7,6 +7,7 @@
 
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/components/ui-shell' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
@@ -52,4 +53,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
 
 .#{c4p-settings.$carbon-prefix}--form-item {
   margin-bottom: $spacing-05;
+}
+
+.#{$story-class}__error--text {
+  @include type.type-style('label-01');
+
+  padding-bottom: $spacing-05;
+}
+
+.#{$block-class}
+  .#{$block-class}__step-description.#{$story-class}__step-description {
+  padding-left: 0;
 }

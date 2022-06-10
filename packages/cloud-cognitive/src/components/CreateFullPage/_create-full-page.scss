@@ -56,6 +56,7 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   @include type.type-style('productive-heading-01');
 
   max-width: 50%;
+  padding-left: $spacing-08;
   margin-bottom: $spacing-03;
 }
 
@@ -63,6 +64,7 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   @include type.type-style('body-long-01');
 
   max-width: 50%;
+  padding-left: $spacing-08;
   margin-bottom: $spacing-06;
 }
 
@@ -107,6 +109,7 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
 .#{$block-class} .#{$block-class}__content {
   overflow: auto;
   flex-grow: 1;
+  padding-top: $spacing-06;
   background-color: $background;
   color: $text-primary;
   overflow-x: hidden;
@@ -151,6 +154,7 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   @include type.type-style('productive-heading-04');
 
   max-width: 50%;
+  padding-left: $spacing-08;
   margin-bottom: $spacing-05;
 }
 
@@ -163,7 +167,8 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   grid-template-rows: 1fr auto;
 }
 
-.#{$block-class} .#{$block-class}__progress-indicator {
+.#{$block-class}
+  .#{$block-class}__progress-indicator.#{c4p-settings.$carbon-prefix}--progress {
   padding: $spacing-06;
 }
 

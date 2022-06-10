@@ -8,7 +8,6 @@ import React, { useState } from 'react';
 import {
   Button,
   Grid,
-  Row,
   Column,
   TextInput,
   NumberInput,
@@ -76,18 +75,17 @@ const DefaultTemplate = ({ ...args }) => {
     <>
       {renderUIShellHeader()}
       <Grid id="ibm-products-page-content">
-        <Row>
-          <Column>
-            <Button onClick={() => setOpen(!open)}>
-              {open ? 'Close side panel' : 'Open side panel'}
-            </Button>
-          </Column>
-        </Row>
+        <Column lg={{ span: 2, start: 8 }}>
+          <Button onClick={() => setOpen(!open)}>
+            {open ? 'Close side panel' : 'Open side panel'}
+          </Button>
+        </Column>
       </Grid>
       <CreateSidePanel
         {...args}
         open={open}
         onRequestClose={() => setOpen(false)}
+        onRequestSubmit={() => setOpen(false)}
         selectorPrimaryFocus={`.${carbon.prefix}--text-input`}
       >
         <TextInput
@@ -103,6 +101,7 @@ const DefaultTemplate = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
         <NumberInput
           id="2"
@@ -111,6 +110,7 @@ const DefaultTemplate = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
         <NumberInput
           id="3"
@@ -119,6 +119,7 @@ const DefaultTemplate = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
         <div
           style={{
@@ -135,6 +136,7 @@ const DefaultTemplate = ({ ...args }) => {
             min={0}
             max={50}
             value={30}
+            iconDescription="Choose a number"
           />
           <Dropdown
             id="create-side-panel-dropdown-options-a"
@@ -152,6 +154,7 @@ const DefaultTemplate = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
       </CreateSidePanel>
     </>
@@ -166,18 +169,17 @@ const TemplateWithFormValidation = ({ ...args }) => {
     <>
       {renderUIShellHeader()}
       <Grid id="ibm-products-page-content">
-        <Row>
-          <Column>
-            <Button onClick={() => setOpen(!open)}>
-              {open ? 'Close side panel' : 'Open side panel'}
-            </Button>
-          </Column>
-        </Row>
+        <Column lg={{ span: 2, start: 8 }}>
+          <Button onClick={() => setOpen(!open)}>
+            {open ? 'Close side panel' : 'Open side panel'}
+          </Button>
+        </Column>
       </Grid>
       <CreateSidePanel
         {...args}
         open={open}
         onRequestClose={() => setOpen(false)}
+        onRequestSubmit={() => setOpen(false)}
         disableSubmit={!textInput.length}
       >
         <TextInput
@@ -202,6 +204,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
         <NumberInput
           id="2"
@@ -210,6 +213,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
         <NumberInput
           id="3"
@@ -218,6 +222,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
         <div className={`${prefix}example-container`}>
           <NumberInput
@@ -227,6 +232,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
             min={0}
             max={50}
             value={30}
+            iconDescription="Choose a number"
           />
           <Dropdown
             id="create-side-panel-dropdown-options-b"
@@ -244,6 +250,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
       </CreateSidePanel>
     </>
@@ -258,18 +265,17 @@ const TemplateWithMultipleForms = ({ ...args }) => {
     <>
       {renderUIShellHeader()}
       <Grid id="ibm-products-page-content">
-        <Row>
-          <Column>
-            <Button onClick={() => setOpen(!open)}>
-              {open ? 'Close side panel' : 'Open side panel'}
-            </Button>
-          </Column>
-        </Row>
+        <Column lg={{ span: 2, start: 8 }}>
+          <Button onClick={() => setOpen(!open)}>
+            {open ? 'Close side panel' : 'Open side panel'}
+          </Button>
+        </Column>
       </Grid>
       <CreateSidePanel
         {...args}
         open={open}
         onRequestClose={() => setOpen(false)}
+        onRequestSubmit={() => setOpen(false)}
         disableSubmit={!textInput.length}
       >
         <FormGroup
@@ -318,6 +324,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
             min={0}
             max={50}
             value={1}
+            iconDescription="Choose a number"
           />
           <NumberInput
             id="2"
@@ -326,6 +333,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
             min={0}
             max={50}
             value={1}
+            iconDescription="Choose a number"
           />
           <NumberInput
             id="3"
@@ -334,6 +342,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
             min={0}
             max={50}
             value={1}
+            iconDescription="Choose a number"
           />
           <div className={`${prefix}example-container`}>
             <NumberInput
@@ -343,6 +352,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
               min={0}
               max={50}
               value={30}
+              iconDescription="Choose a number"
             />
             <Dropdown
               id="create-side-panel-dropdown-options-c"
@@ -360,6 +370,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
             min={0}
             max={50}
             value={1}
+            iconDescription="Choose a number"
           />
         </FormGroup>
       </CreateSidePanel>

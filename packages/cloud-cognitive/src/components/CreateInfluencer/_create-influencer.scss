@@ -50,7 +50,7 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
   overflow-y: auto;
 }
 
-.#{$influencer-block-class}__progress-indicator {
+.#{$influencer-block-class}__progress-indicator.#{c4p-settings.$carbon-prefix}--progress {
   padding: $spacing-06;
 }
 

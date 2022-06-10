@@ -110,6 +110,7 @@ const Template = (args) => {
           onChange={(event) => setTopicValue(event.target.value)}
         />
         <NumberInput
+          iconDescription="Choose a number"
           id="1"
           className={`${prefix}form-item`}
           label="Partitions"
@@ -118,6 +119,7 @@ const Template = (args) => {
           value={1}
         />
         <NumberInput
+          iconDescription="Choose a number"
           id="2"
           className={`${prefix}form-item`}
           label="Replicas"
@@ -126,6 +128,7 @@ const Template = (args) => {
           value={1}
         />
         <NumberInput
+          iconDescription="Choose a number"
           id="3"
           className={`${prefix}form-item`}
           label="Minimum in-sync replicas"
@@ -142,6 +145,7 @@ const Template = (args) => {
           }}
         >
           <NumberInput
+            iconDescription="Choose a number"
             id="4"
             className={`${prefix}form-item`}
             label="Retention time"
@@ -159,6 +163,7 @@ const Template = (args) => {
           />
         </div>
         <NumberInput
+          iconDescription="Choose a number"
           id="3"
           className={`${prefix}form-item`}
           label="Minimum in-sync replicas"

@@ -162,6 +162,7 @@ const SidePanel = (props) => {
         <Row>
           <Column xlg={12} lg={12} md={12}>
             <NumberInput
+              iconDescription="Choose a number"
               id="carbon-number"
               min={1}
               max={100}

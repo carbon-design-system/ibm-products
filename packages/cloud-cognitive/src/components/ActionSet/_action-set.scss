@@ -81,14 +81,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 }
 
 // For row-triple in large (non-ghost),
-// or any non-ghosts in extra large or max,
+// or any non-ghosts in extra large or 2xl,
 // or row-quadruple (non-ghost),
-// buttons are 25% width with a max of 232px
+// buttons are 25% width with a 2xl of 232px
 .#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--row-triple.#{$action-set-block-class}--lg
   .#{$action-set-block-class}__action-button:not(.#{$action-set-block-class}__action-button--ghost),
 .#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--xlg
   .#{$action-set-block-class}__action-button:not(.#{$action-set-block-class}__action-button--ghost),
-.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--max
+.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--2xl
   .#{$action-set-block-class}__action-button:not(.#{$action-set-block-class}__action-button--ghost),
 .#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--row-quadruple
   .#{$action-set-block-class}__action-button:not(.#{$action-set-block-class}__action-button--ghost) {

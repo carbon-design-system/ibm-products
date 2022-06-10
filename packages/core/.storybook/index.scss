@@ -16,11 +16,16 @@
 // @import '../../security/src/index';
 // @import 'docs';
 @use '@carbon/styles' as styles;
+@use '@carbon/styles/scss/theme' as *;
 
 // Setting attribute storybook-carbon-theme="XXX" on the html element
 // will set the carbon theme used for the storybook pane.
 // Adding class sb--use-carbon-theme-XXX on any element
 // will set the carbon theme used within that element.
+body {
+  background-color: $background;
+}
+
 :root,
 .sb--use-carbon-theme-white {
   @include styles.theme(styles.$white);

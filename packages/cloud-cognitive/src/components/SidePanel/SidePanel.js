@@ -588,7 +588,7 @@ export let SidePanel = React.forwardRef(
             <Button
               aria-label={navigationBackIconDescription}
               kind="ghost"
-              size="small"
+              size="sm"
               disabled={false}
               renderIcon={(props) => <ArrowLeft size={20} {...props} />}
               iconDescription={navigationBackIconDescription}
@@ -604,7 +604,7 @@ export let SidePanel = React.forwardRef(
         <Button
           aria-label={closeIconDescription}
           kind="ghost"
-          size="small"
+          size="sm"
           renderIcon={(props) => <Close size={20} {...props} />}
           iconDescription={closeIconDescription}
           className={`${blockClass}__close-button`}
@@ -647,7 +647,7 @@ export let SidePanel = React.forwardRef(
                   {...rest}
                   key={label}
                   kind={kind || 'ghost'}
-                  size="small"
+                  size="sm"
                   renderIcon={icon}
                   iconDescription={label}
                   tooltipPosition="bottom"

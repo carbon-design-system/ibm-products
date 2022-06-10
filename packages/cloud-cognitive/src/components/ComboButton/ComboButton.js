@@ -12,14 +12,11 @@ import {
   OverflowMenu,
 } from 'carbon-components-react';
 
-import setupGetInstanceId from 'carbon-components-react/lib/tools/setupGetInstanceId';
-
 import classnames from 'classnames';
 import { node, shape, string } from 'prop-types';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 import React, { Children, createElement, useRef, useState } from 'react';
-
-const getInstanceId = setupGetInstanceId();
 
 const blockClass = 'security--combo-button';
 
@@ -36,7 +33,7 @@ const ComboButton = ({
   // Collect any other property values passed in.
   ...rest
 }) => {
-  const { current: instanceId } = useRef(getInstanceId());
+  const { current: instanceId } = useRef(uuidv4());
   const [isOpen, setIsOpen] = useState(false);
 
   const [primaryAction, ...restActions] = Children.toArray(children)

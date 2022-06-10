@@ -65,7 +65,7 @@ const DatagridActions = (datagridState) => {
             size="xl"
             id="columnSearch"
             persistent
-            placeHolderText={searchForAColumn}
+            placeholder={searchForAColumn}
             onChange={(e) => setGlobalFilter(e.target.value)}
           />
         </TableToolbarContent>

@@ -24,6 +24,7 @@ import { pkg } from '../../settings';
 const componentName = 'AddSelectList';
 
 export let AddSelectList = ({
+  appliedModifiers,
   filteredItems,
   metaIconDescription,
   modifiers,
@@ -31,6 +32,7 @@ export let AddSelectList = ({
   multiSelection,
   navIconDescription,
   path,
+  setAppliedModifiers,
   setDisplayMetaPanel,
   setMultiSelection,
   setPath,
@@ -38,6 +40,7 @@ export let AddSelectList = ({
   singleSelection,
 }) => {
   const blockClass = `${pkg.prefix}--add-select__selections`;
+  const hasModifiers = modifiers?.options?.length > 0;
 
   const handleSingleSelection = (value) => {
     setSingleSelection(value);
@@ -96,6 +99,16 @@ export let AddSelectList = ({
 
   const getItemIcon = ({ icon: Icon }) => <Icon />;
 
+  const modifierHandler = (id, selectedItem) => {
+    const modifiersClone = [...appliedModifiers];
+    const modifierIdx = modifiersClone.findIndex((item) => item.id === id);
+    modifiersClone[modifierIdx] = {
+      id,
+      [modifiers.id]: selectedItem,
+    };
+    setAppliedModifiers(modifiersClone);
+  };
+
   return (
     <div className={`${blockClass}-wrapper`}>
       <StructuredListWrapper selection className={`${blockClass}`}>
@@ -144,15 +157,19 @@ export let AddSelectList = ({
                           </div>
                         </div>
                       </div>
-                      {modifiers?.options?.length && (
+                      {hasModifiers && (
                         <Dropdown
                           id={`${item.id}-modifier`}
                           type="inline"
-                          items={modifiers?.options}
+                          items={modifiers.options}
                           light
-                          label={modifiers?.label}
+                          label={modifiers.label}
                           disabled={!isSelected(item.id)}
                           className={`${blockClass}-dropdown ${blockClass}-hidden-hover`}
+                          initialSelectedItem={item[modifiers.id]}
+                          onChange={({ selectedItem }) =>
+                            modifierHandler(item.id, selectedItem)
+                          }
                         />
                       )}
                     </>
@@ -163,8 +180,8 @@ export let AddSelectList = ({
                       id={item.id}
                       value={item.value}
                       labelText={item.title}
-                      onChange={handleSingleSelection}
-                      selected={item.value === singleSelection}
+                      onChange={() => handleSingleSelection(item.id)}
+                      selected={item.id === singleSelection}
                     />
                   )}
                   {item.children && (
@@ -204,6 +221,7 @@ export let AddSelectList = ({
 };
 
 AddSelectList.propTypes = {
+  appliedModifiers: PropTypes.array,
   filteredItems: PropTypes.array,
   metaIconDescription: PropTypes.string,
   modifiers: PropTypes.object,
@@ -211,6 +229,7 @@ AddSelectList.propTypes = {
   multiSelection: PropTypes.array,
   navIconDescription: PropTypes.string,
   path: PropTypes.array,
+  setAppliedModifiers: PropTypes.func,
   setDisplayMetaPanel: PropTypes.func,
   setMultiSelection: PropTypes.func,
   setPath: PropTypes.func,

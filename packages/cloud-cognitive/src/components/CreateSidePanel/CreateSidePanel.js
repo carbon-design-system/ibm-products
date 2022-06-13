@@ -18,11 +18,9 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 // Carbon and package components we use.
 import { Form } from '@carbon/react';
 import { SidePanel } from '../SidePanel';
-import { ActionSet } from '../ActionSet';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--create-side-panel`;
-const sidePanelBlockClass = `${pkg.prefix}--side-panel`;
 const componentName = 'CreateSidePanel';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -70,11 +68,6 @@ export let CreateSidePanel = React.forwardRef(
       },
     ];
 
-    const actionContainerClassNames = cx([
-      `${blockClass}__actions-container`,
-      `${sidePanelBlockClass}__actions-container`,
-    ]);
-
     return (
       selectorPageContent && (
         <SidePanel
@@ -94,6 +87,7 @@ export let CreateSidePanel = React.forwardRef(
           animateTitle={false}
           className={cx(blockClass, className)}
           size="md"
+          actions={actions}
         >
           <h3
             className={`${blockClass}__form-title-text ${blockClass}__content-text`}
@@ -105,14 +99,7 @@ export let CreateSidePanel = React.forwardRef(
           >
             {formDescription}
           </p>
-          <Form className={`${blockClass}__form`}>
-            {children}
-            <ActionSet
-              actions={actions}
-              className={actionContainerClassNames}
-              size="md"
-            />
-          </Form>
+          <Form className={`${blockClass}__form`}>{children}</Form>
         </SidePanel>
       )
     );

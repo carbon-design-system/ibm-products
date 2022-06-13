@@ -12,6 +12,7 @@
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities';
 @use '../../global/styles/project-settings' as *;
 @use '../../global/styles/mixins' as *;
 
@@ -32,7 +33,9 @@ $motion-duration: $duration-moderate-02;
 
 @include block-wrap($block-class) {
   &.#{$block-class} {
-    z-index: z('modal') + 1;
+    // Need to disable stylelint until dart sass namespace support is added
+    /* stylelint-disable-next-line function-no-unknown */
+    z-index: utilities.z('modal') + 1;
     align-items: flex-end;
     color: $text-primary;
     // stylelint-disable-next-line carbon/motion-token-use
@@ -44,7 +47,9 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.is-visible {
-    z-index: z('modal');
+    // Need to disable stylelint until dart sass namespace support is added
+    /* stylelint-disable-next-line function-no-unknown */
+    z-index: utilities.z('modal');
     align-items: flex-end;
     // stylelint-disable-next-line carbon/motion-token-use
     transition: visibility 0s linear,
@@ -56,19 +61,25 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--stacked-1-of-2 {
-    z-index: z('modal') - 1;
+    // Need to disable stylelint until dart sass namespace support is added
+    /* stylelint-disable-next-line function-no-unknown */
+    z-index: utilities.z('modal') - 1;
     // stylelint-disable-next-line carbon/theme-token-use
     background-color: rgba($overlay-color, 0.33);
   }
 
   &.#{$block-class}--stacked-1-of-3 {
-    z-index: z('modal') - 2;
+    // Need to disable stylelint until dart sass namespace support is added
+    /* stylelint-disable-next-line function-no-unknown */
+    z-index: utilities.z('modal') - 2;
     // stylelint-disable-next-line carbon/theme-token-use
     background-color: rgba($overlay-color, 0.11);
   }
 
   &.#{$block-class}--stacked-2-of-3 {
-    z-index: z('modal') - 1;
+    // Need to disable stylelint until dart sass namespace support is added
+    /* stylelint-disable-next-line function-no-unknown */
+    z-index: utilities.z('modal') - 1;
     // stylelint-disable-next-line carbon/theme-token-use
     background-color: rgba($overlay-color, 0.25);
   }

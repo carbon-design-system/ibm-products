@@ -12,6 +12,7 @@
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/utilities';
 
 // Standard imports.
 @use '../../global/styles/project-settings' as *;
@@ -135,11 +136,13 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   --#{$block-class}--label-text-height: 0;
 
   position: fixed;
-  z-index: z('modal');
+  // Need to disable stylelint until dart sass namespace support is added
+  /* stylelint-disable-next-line function-no-unknown */
+  z-index: utilities.z('modal');
   top: $spacing-09;
   height: calc(100% - 3rem);
   box-sizing: border-box;
-  background-color: $layer-accent-01;
+  background-color: $layer-01;
   color: $text-primary;
   transition: transform $duration-moderate-02;
   transition-timing-function: motion(standard);
@@ -192,7 +195,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
         var(--#{$block-class}--label-text-height)
     );
     padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
-    background-color: $layer-accent-01;
+    background-color: $layer-01;
 
     /* stylelint-disable-next-line max-nesting-depth */
     &::before {
@@ -246,7 +249,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
 
     position: inherit;
     z-index: 4;
-    background-color: $layer-accent-01;
+    background-color: $layer-01;
     opacity: var(--#{$block-class}--subtitle-opacity);
     // stylelint-disable-next-line carbon/layout-token-use
     transform: translateY(var(--#{$block-class}--title-y-position));
@@ -289,7 +292,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       var(--#{$block-class}--title-text-height) +
         var(--#{$block-class}--label-text-height) + #{$spacing-09}
     );
-    background-color: $layer-accent-01;
+    background-color: $layer-01;
   }
 
   .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-is-animating {
@@ -365,7 +368,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
         var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
     );
     width: 100%;
-    border-bottom: 1px solid $border-subtle-02;
+    border-bottom: 1px solid $layer-active-01;
   }
 
   .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation
@@ -378,7 +381,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   }
 
   .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar {
-    border-bottom: 1px solid $border-subtle-02;
+    border-bottom: 1px solid $layer-active-01;
     margin-bottom: $spacing-05;
   }
   .#{$block-class}__action-toolbar {
@@ -390,7 +393,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     justify-content: flex-start;
     padding: 0 $spacing-05;
     margin-bottom: $spacing-03;
-    background-color: $layer-accent-01;
+    background-color: $layer-01;
     transition: transform $duration-moderate-01;
     transition-timing-function: motion(standard);
     .#{$block-class}__action-toolbar-button {
@@ -428,7 +431,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $layer-accent-01;
+    background-color: $layer-01;
   }
   .#{$carbon-prefix}--btn.#{$block-class}__close-button
     .#{$carbon-prefix}--btn__icon {
@@ -446,7 +449,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     position: fixed;
     bottom: 0;
     border-top: 1px solid $border-subtle-02;
-    background-color: $layer-accent-01;
+    background-color: $layer-01;
     &.#{$action-set-block-class}--max {
       .#{$action-set-block-class}__action-button {
         width: 100%;
@@ -520,7 +523,9 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
 
 .#{$block-class}__overlay {
   position: fixed;
-  z-index: z('overlay');
+  // Need to disable stylelint until dart sass namespace support is added
+  /* stylelint-disable-next-line function-no-unknown */
+  z-index: utilities.z('overlay');
   top: 0;
   right: 0;
   bottom: 0;

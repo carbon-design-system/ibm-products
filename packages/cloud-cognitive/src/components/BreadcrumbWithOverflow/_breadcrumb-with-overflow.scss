@@ -8,6 +8,7 @@
 // Standard imports.
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities';
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
@@ -87,5 +88,7 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
 }
 
 .#{$_block-class}__overflow-menu-options.#{$_block-class}__overflow-menu-options {
-  z-index: z('header');
+  // Need to disable stylelint until dart sass namespace support is added
+  /* stylelint-disable-next-line function-no-unknown */
+  z-index: utilities.z('header');
 }

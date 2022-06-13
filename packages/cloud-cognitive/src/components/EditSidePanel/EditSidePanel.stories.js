@@ -10,7 +10,6 @@ import { action } from '@storybook/addon-actions';
 import {
   Button,
   Grid,
-  Row,
   Column,
   TextInput,
   NumberInput,
@@ -86,13 +85,11 @@ const Template = (args) => {
     <>
       {renderUIShellHeader()}
       <Grid id="ibm-products-page-content">
-        <Row>
-          <Column>
-            <Button onClick={() => setOpen(!open)}>
-              {open ? 'Close side panel' : 'Open side panel'}
-            </Button>
-          </Column>
-        </Row>
+        <Column lg={{ span: 2, start: 8 }}>
+          <Button onClick={() => setOpen(!open)}>
+            {open ? 'Close side panel' : 'Open side panel'}
+          </Button>
+        </Column>
       </Grid>
       <EditSidePanel
         {...args}
@@ -186,17 +183,17 @@ export const editSidePanel = prepareStory(Template, {
     actionToolbarButtons: [
       {
         label: 'Copy platform id',
-        icon: (props) => <Copy size={20} {...props} />,
+        icon: (props) => <Copy size={16} {...props} />,
         onClick: action('Toolbar button clicked: Copy'),
       },
       {
         label: 'Settings',
-        icon: (props) => <Settings size={20} {...props} />,
+        icon: (props) => <Settings size={16} {...props} />,
         onClick: action('Toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
-        icon: (props) => <TrashCan size={20} {...props} />,
+        icon: (props) => <TrashCan size={16} {...props} />,
         onClick: action('Toolbar button clicked: Delete'),
       },
     ],

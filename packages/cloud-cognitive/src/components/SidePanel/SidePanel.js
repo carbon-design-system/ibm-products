@@ -801,7 +801,7 @@ SidePanel.propTypes = {
     PropTypes.shape({
       label: PropTypes.string,
       leading: PropTypes.bool,
-      icon: PropTypes.object,
+      icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
       onClick: PropTypes.func,
       kind: PropTypes.oneOf(['ghost', 'tertiary', 'secondary', 'primary']),
     })

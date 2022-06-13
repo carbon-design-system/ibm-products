@@ -12,6 +12,7 @@
 @use '@carbon/styles/scss/motion' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities';
 
 // Standard imports.
 @use '../../global/styles/project-settings' as *;
@@ -35,7 +36,8 @@ $block-class: #{$pkg-prefix}--page-header;
 $breadcrumb-block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
 
 $raised-z-index: 99;
-$z-index-header-minus: z('header') - 1;
+/* stylelint-disable-next-line function-no-unknown */
+$z-index-header-minus: utilities.z('header') - 1;
 
 $left-section-std-width: 60%;
 $right-section-std-width: 100% - $left-section-std-width;

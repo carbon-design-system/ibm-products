@@ -111,7 +111,7 @@ Tearsheet.propTypes = {
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
   actions: allPropTypes([
-    ActionSet.validateActions(() => 'max'),
+    ActionSet.validateActions(() => '2xl'),
     PropTypes.arrayOf(
       PropTypes.shape({
         ...Button.propTypes,

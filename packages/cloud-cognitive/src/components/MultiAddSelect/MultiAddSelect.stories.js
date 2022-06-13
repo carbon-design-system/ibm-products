@@ -191,6 +191,7 @@ export const WithModifiers = prepareStory(Template, {
     ...defaultProps,
     items: {
       modifiers: {
+        id: 'role',
         label: 'Role',
         options: ['editor', 'viewer', 'admin'],
       },
@@ -200,17 +201,20 @@ export const WithModifiers = prepareStory(Template, {
           value: '1',
           title: 'item 1',
           subtitle: 'item 1 subtitle',
+          role: 'editor',
         },
         {
           id: '2',
           value: '2',
           title: 'item 2',
+          role: 'editor',
         },
         {
           id: '3',
           value: '3',
           title: 'item 3',
           subtitle: 'item 3 subtitle',
+          role: 'admin',
         },
       ],
     },

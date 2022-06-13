@@ -92,7 +92,7 @@ export const Default = prepareStory(Template, {
 export const WithCaption = prepareStory(Template, {
   args: {
     ...defaultProps,
-    caption: 'caption',
+    description: 'caption',
   },
 });
 

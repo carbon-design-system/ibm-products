@@ -91,7 +91,7 @@ export let SidePanel = React.forwardRef(
     const previousState = usePreviousValue({ size, open });
 
     const reducedMotion =
-      window && window.matchMedia
+      typeof window !== 'undefined' && window?.matchMedia
         ? window.matchMedia('(prefers-reduced-motion: reduce)')
         : { matches: true };
 

@@ -27,6 +27,8 @@ import {
   useSortableColumns,
   useOnRowClick,
   useCustomizeColumns,
+  useSelectAllWithToggle,
+  useRowIsMouseOver,
 } from '.';
 
 import { useColumnOrder } from 'react-table';
@@ -171,6 +173,37 @@ const TenThousandEntries = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
+const IsHoverOnRow = () => {
+  const Cell = ({ row }) => {
+    if (row.isMouseOver) {
+      return 'yes hovering!';
+    }
+    return '';
+  };
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader.slice(0, 3),
+      {
+        Header: 'Is hover on row?',
+        id: 'isHoveringColumn',
+        disableSortBy: true,
+        Cell,
+      },
+    ],
+    []
+  );
+  const [data] = useState(makeData(10));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+    },
+    useRowIsMouseOver
+  );
+
+  return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
 const DisableSelectRow = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
@@ -206,6 +239,41 @@ const ExpandedRow = ({ ...rest }) => {
   );
 
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+};
+
+const SelectItemsInAllPages = ({ ...rest }) => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(100));
+  const [areAllSelected, setAreAllSelected] = useState(false);
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      initialState: {
+        pageSize: 10,
+        pageSizes: [5, 10, 25, 50],
+      },
+      selectAllToggle: {
+        labels: {
+          allRows: 'Select all',
+        },
+        onSelectAllRows: setAreAllSelected,
+      },
+      DatagridPagination,
+      DatagridActions,
+      DatagridBatchActions,
+    },
+    useSelectRows,
+    useSelectAllWithToggle
+  );
+
+  return (
+    <>
+      <Datagrid datagridState={{ ...datagridState }} {...rest} />
+      <h3>Doc in Notes...</h3>
+      <p>{`Are all selected across all pages? - ${areAllSelected}`}</p>
+    </>
+  );
 };
 
 const HideSelectAll = ({ ...rest }) => {
@@ -690,6 +758,12 @@ describe(componentName, () => {
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('div')[0].classList[0]
     ).toBe('c4p--datagrid__virtual-scrollbar');
+
+    /*const scrollContainer = screen.queryAllByRole('rowgroup')[0];
+    
+    scrollContainer.addEventListener('scroll');
+
+    fireEvent.scroll(scrollContainer, {target: {y: 100}});*/
   });
 
   //Ten Thousand Entries
@@ -709,9 +783,13 @@ describe(componentName, () => {
   });
 
   //TODO: Complete This
-
   it('With Pagination', () => {
     render(<WithPagination data-testid={dataTestId}></WithPagination>);
+    document.getElementsByClassName('bx--pagination');
+    // console.log(screen.getAllByText('Items per page:'));
+    console.log(
+      document.getElementsByTagName('body')[0].getElementsByTagName('div')[4]
+    );
     document.addEventListener('load', () => {
       /*console.log(
         `Num Children ${
@@ -741,9 +819,10 @@ describe(componentName, () => {
 
   //TODO: Figure this out
 
-  /* it('Is Hove On Row', () => {
+  it('Is Hove On Row', () => {
     render(<IsHoverOnRow data-testid={dataTestId}></IsHoverOnRow>);
 
+    /*
     const hoverRow = screen
       .getByRole('table')
       .getElementsByTagName('tbody')[0]
@@ -751,11 +830,11 @@ describe(componentName, () => {
 
     userEvent.hover(hoverRow.getElementsByTagName('td')[1]);
     console.log('Hovering over the first row');
-    console.log(hoverRow).getElementsByTagName('td')[3].textContent;
+    console.log(hoverRow).getElementsByTagName('td')[3].textContent;*/
 
     // console.log(hoverRow.childNodes[3]);
     // expect(screen.getByRole('table').getElementsByTagName('tbody')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[3].innerHTML).toBe('yes!');
-  }); */
+  });
 
   //Disables Selected Rows
   it('Renders Disable Select Row', () => {
@@ -939,6 +1018,14 @@ describe(componentName, () => {
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('tr')[0].classList[1]
     ).toEqual('bx--data-table--selected');
+  });
+
+  it('Select Items In All Pages', () => {
+    render(
+      <SelectItemsInAllPages data-testid={dataTestId}></SelectItemsInAllPages>
+    );
+    // SelectAllWithToggle({tableId: dataTestId, isFetching: true, isAllRowsSelected: true, allRowsLabel: 'Select all'});
+    //fireEvent.click(screen.getByRole('table').getElementsByTagName('thead')[0].getElementsByTagName('tr')[0].getElementsByTagName('th')[0].getElementsByTagName('button')[0]);
   });
 
   it('Right Aligned Columns', () => {

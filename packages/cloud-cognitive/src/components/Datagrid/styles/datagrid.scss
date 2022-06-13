@@ -139,12 +139,12 @@
   }
 }
 .#{$block-class}__grid-container::-webkit-scrollbar-thumb {
-  background-color: $text-03;
+  background-color: $text-placeholder;
 }
 
 .#{$block-class}__grid-container::-webkit-scrollbar {
   width: 6px;
-  background-color: $ui-background;
+  background-color: $background;
 }
 .#{$block-class}__grid-container {
   display: block;
@@ -335,11 +335,11 @@
 
 .#{$block-class}__table-simple::-webkit-scrollbar {
   width: 6px;
-  background-color: $ui-background;
+  background-color: $background;
 }
 
 .#{$block-class}__table-simple::-webkit-scrollbar-thumb {
-  background-color: $text-03;
+  background-color: $text-placeholder;
 }
 .#{$block-class}__sticky.#{$block-class}__simple-body {
   overflow: auto;

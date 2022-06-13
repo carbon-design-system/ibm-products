@@ -304,7 +304,7 @@ export const TearsheetShell = React.forwardRef(
                     actions={actions}
                     buttonSize={size === 'wide' ? 'xl' : null}
                     className={`${bc}__buttons`}
-                    size={size === 'wide' ? 'max' : 'lg'}
+                    size={size === 'wide' ? '2xl' : 'lg'}
                   />
                 </Wrap>
               )}

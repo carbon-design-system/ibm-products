@@ -221,7 +221,7 @@ EditSidePanel.propTypes = {
   /**
    * Sets the size of the side panel
    */
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'max']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', '2xl']),
 
   /**
    * Specifies which DOM element in the form should be focused.

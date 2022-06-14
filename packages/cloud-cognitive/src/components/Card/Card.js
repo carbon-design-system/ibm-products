@@ -50,6 +50,7 @@ export let Card = forwardRef(
       onKeyDown,
       onPrimaryButtonClick,
       overflowActions = defaults.overflowActions,
+      overflowAriaLabel,
       onSecondaryButtonClick,
       pictogram: Pictogram,
       primaryButtonHref,
@@ -88,7 +89,12 @@ export let Card = forwardRef(
         const pos = actionsPlacement === 'top' ? 'bottom' : 'top';
         const size = actionsPlacement === 'top' ? 'sm' : 'xl';
         return (
-          <OverflowMenu size={size} direction={pos} flipped>
+          <OverflowMenu
+            size={size}
+            direction={pos}
+            flipped
+            ariaLabel={overflowAriaLabel}
+          >
             {overflowActions.map(({ id, ...rest }) => (
               <OverflowMenuItem key={id} {...rest} />
             ))}
@@ -269,6 +275,7 @@ Card.propTypes = {
       onKeyDown: PropTypes.func,
     })
   ),
+  overflowAriaLabel: PropTypes.string,
   pictogram: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   primaryButtonHref: PropTypes.string,
   primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

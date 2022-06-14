@@ -5,15 +5,27 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
-import { useState } from 'react';
+import React, { useState } from 'react';
 import DatagridExpandedRow from './Datagrid/DatagridExpandedRow';
 import useRowExpander from './useRowExpander';
+
+const style = {
+  paddingTop: '16px',
+  paddingRight: '16px',
+  paddingBottom: '24px',
+  paddingLeft: '48px',
+};
+
+const expansionRenderer = ({ row }) => (
+  <div className={`expanded_row_content`} style={style}>
+    Content for {row.id}
+  </div>
+);
 
 const useExpandedRow = (hooks) => {
   useRowExpander(hooks);
   const useInstance = (instance) => {
-    const { rows, expandedContentHeight, ExpandedRowContentComponent } =
-      instance;
+    const { rows, expandedContentHeight } = instance;
     const [expandedRowsHeight, setExpandedRowsHeight] = useState({});
     const setExpandedRowHeight = (rowIndex, height) =>
       setExpandedRowsHeight({ ...expandedRowsHeight, [rowIndex]: height });
@@ -22,10 +34,7 @@ const useExpandedRow = (hooks) => {
       canExpand: row.original && !row.original.notExpandable,
       expandedContentHeight:
         expandedRowsHeight[row.index] || expandedContentHeight,
-      RowRenderer: DatagridExpandedRow(
-        row.RowRenderer,
-        ExpandedRowContentComponent
-      ),
+      RowRenderer: DatagridExpandedRow(row.RowRenderer, expansionRenderer),
     }));
     Object.assign(instance, { rows: rowsWithExpand, setExpandedRowHeight });
   };

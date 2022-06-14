@@ -13,7 +13,7 @@ import {
 import { Cascade } from '.';
 import mdx from './Cascade.mdx';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { carbon } from '../../settings';
+import { Column } from '@carbon/react';
 
 export default {
   title: getStoryTitle(Cascade.displayName),
@@ -46,9 +46,9 @@ const GridTemplate = (args) => {
     const boxes = [];
     for (let i = 0; i < 4; i++) {
       boxes.push(
-        <div className={`${carbon.prefix}--col-lg-4`}>
+        <Column lg={4}>
           <div className="grid-box" />
-        </div>
+        </Column>
       );
     }
     return boxes;
@@ -56,8 +56,8 @@ const GridTemplate = (args) => {
 
   return (
     <Cascade {...args}>
-      <div className={`${carbon.prefix}--row`}>{getBoxes()}</div>
-      <div className={`${carbon.prefix}--row`}>{getBoxes()}</div>
+      {getBoxes()}
+      {getBoxes()}
     </Cascade>
   );
 };

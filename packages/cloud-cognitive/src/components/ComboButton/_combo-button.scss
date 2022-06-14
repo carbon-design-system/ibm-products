@@ -35,9 +35,21 @@ $security--prefix: security;
   background-color: $background-brand;
 }
 
-.#{$security--prefix}--combo-button__overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu:hover,
-.#{$security--prefix}--combo-button__overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu--open {
+.#{$security--prefix}--combo-button
+  .#{$security--prefix}--combo-button__overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu:hover,
+.#{$security--prefix}--combo-button
+  .#{$security--prefix}--combo-button__overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu--open,
+.#{$security--prefix}--combo-button
+  .#{c4p-settings.$carbon-prefix}--overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu--open:hover,
+.#{$security--prefix}--combo-button
+  .#{c4p-settings.$carbon-prefix}--overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu--open {
   background-color: $button-primary-hover;
+}
+
+.#{$security--prefix}--combo-button
+  .cds--overflow-menu--flip.cds--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+  width: 0;
+  height: 0;
 }
 
 .#{$security--prefix}--combo-button__overflow-menu.#{c4p-settings.$carbon-prefix}--overflow-menu:active {
@@ -49,7 +61,8 @@ $security--prefix: security;
   pointer-events: none;
 }
 
-.#{$security--prefix}--combo-button__overflow-menu__list {
+.#{$security--prefix}--combo-button__overflow-menu__list.#{c4p-settings.$carbon-prefix}--overflow-menu-options {
+  left: 0;
   width: 100%;
 }
 
@@ -57,8 +70,8 @@ $security--prefix: security;
   display: none;
 }
 
-.#{$security--prefix}--combo-button__overflow-menu__item {
-  max-width: none;
+.#{$security--prefix}--combo-button__overflow-menu__item.#{c4p-settings.$carbon-prefix}--overflow-menu-options__btn {
+  max-width: 100%;
 }
 
 .#{$security--prefix}--combo-button__overflow-menu__item__icon {

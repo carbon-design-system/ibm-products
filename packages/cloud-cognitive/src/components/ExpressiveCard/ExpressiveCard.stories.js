@@ -6,10 +6,9 @@
 //
 
 import React from 'react';
-import cx from 'classnames';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { ArrowRight, Cloud } from '@carbon/icons-react';
-import { AspectRatio } from '@carbon/react';
+import { AspectRatio, Column, Grid } from '@carbon/react';
 import {
   getStoryTitle,
   prepareStory,
@@ -17,7 +16,7 @@ import {
 import { ExpressiveCard } from '.';
 import mdx from './ExpressiveCard.mdx';
 import { action } from '@storybook/addon-actions';
-import { carbon } from '../../settings';
+import { usePrefix } from '../../global/js/hooks/usePrefix';
 
 export default {
   title: getStoryTitle(ExpressiveCard.displayName),
@@ -43,9 +42,12 @@ export default {
     },
   },
   decorators: [
-    (Story) => (
-      <div className={`${carbon.prefix}--grid card-story`}>{Story()}</div>
-    ),
+    (Story) => {
+      const carbonPrefix = usePrefix();
+      return (
+        <div className={`${carbonPrefix}--grid card-story`}>{Story()}</div>
+      );
+    },
   ],
 };
 
@@ -53,7 +55,6 @@ const defaultProps = {
   label: 'Label',
   title: 'Title',
   columnSize: 4,
-  mediaRatio: '1x1',
   children: (
     <p>
       expressive card body content block. description inviting the user to take
@@ -63,32 +64,30 @@ const defaultProps = {
   primaryButtonText: 'Primary',
 };
 
-const getColClasses = (col) => cx(`${carbon.prefix}--col-lg-${col}`);
-
 const Template = (opts) => {
   const { children, columnSize, ...args } = opts;
   return (
-    <div className={`${carbon.prefix}--row`}>
-      <div className={getColClasses(columnSize)}>
+    <Grid>
+      <Column lg={columnSize}>
         <ExpressiveCard {...args}>{children}</ExpressiveCard>
-      </div>
-    </div>
+      </Column>
+    </Grid>
   );
 };
 
 const MediaTemplate = (opts) => {
-  const { children, columnSize, mediaRatio, ...args } = opts;
+  const { children, columnSize, mediaRatio = '1x1', ...args } = opts;
   return (
-    <div className={`${carbon.prefix}--row`}>
-      <div className={getColClasses(columnSize)}>
+    <Grid>
+      <Column lg={columnSize}>
         <ExpressiveCard
           media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
           {...args}
         >
           {children}
         </ExpressiveCard>
-      </div>
-    </div>
+      </Column>
+    </Grid>
   );
 };
 
@@ -130,7 +129,6 @@ export const WithActionIcon = prepareStory(Template, {
         id: '1',
         icon: (props) => <ArrowRight size={24} {...props} />,
         onClick: action('on click'),
-        onKeyDown: action('on keydown'),
         iconDescription: 'Next',
       },
     ],
@@ -168,7 +166,7 @@ export const WithSecondaryAction = prepareStory(Template, {
     ...defaultProps,
     secondaryButtonText: 'Secondary',
     secondaryButtonKind: 'ghost',
-    columnSize: '8',
+    columnSize: 8,
     mediaRatio: null,
   },
 });

@@ -47,7 +47,7 @@ export let CardFooter = ({
         <Button
           kind={secondaryButtonKind}
           onClick={onSecondaryButtonClick}
-          size="field"
+          size="md"
           renderIcon={secondaryButtonIcon}
           href={secondaryButtonHref}
         >
@@ -58,7 +58,7 @@ export let CardFooter = ({
         <Button
           kind={productive ? 'ghost' : primaryButtonKind}
           onClick={onPrimaryButtonClick}
-          size="field"
+          size="md"
           renderIcon={primaryButtonIcon}
           href={primaryButtonHref}
         >

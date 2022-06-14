@@ -7,7 +7,12 @@
 
 import React, { forwardRef } from 'react';
 import cx from 'classnames';
-import { Button, OverflowMenu, OverflowMenuItem } from '@carbon/react';
+import {
+  Button,
+  IconButton,
+  OverflowMenu,
+  OverflowMenuItem,
+} from '@carbon/react';
 import PropTypes from 'prop-types';
 import { CardHeader } from './CardHeader';
 import { CardFooter } from './CardFooter';
@@ -92,15 +97,7 @@ export let Card = forwardRef(
       }
 
       const icons = actionIcons.map(
-        ({
-          id,
-          icon: Icon,
-          onClick,
-          iconDescription,
-          onKeyDown,
-          href,
-          ...rest
-        }) => {
+        ({ id, icon: Icon, onClick, iconDescription, href, ...rest }) => {
           if (productive) {
             return (
               <Button
@@ -109,7 +106,7 @@ export let Card = forwardRef(
                 renderIcon={Icon}
                 hasIconOnly
                 onClick={onClick}
-                size={actionsPlacement === 'top' ? 'sm' : 'field'}
+                size={actionsPlacement === 'top' ? 'sm' : 'md'}
                 iconDescription={iconDescription}
                 kind="ghost"
                 href={href}
@@ -129,16 +126,16 @@ export let Card = forwardRef(
             );
           }
           return (
-            <div
+            <IconButton
               key={id}
+              label={iconDescription}
               className={`${blockClass}__icon`}
               onClick={onClick}
-              onKeyDown={onKeyDown}
-              role="button"
-              tabIndex="0"
+              kind="ghost"
+              size="sm"
             >
               <Icon aria-label={iconDescription} />
-            </div>
+            </IconButton>
           );
         }
       );

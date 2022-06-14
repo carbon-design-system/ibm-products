@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.20.0...@carbon/ibm-products@1.20.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* **Datagrid:** export datagrid hooks ([#2036](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2036)) ([44be0e1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/44be0e1e31cf5061296238026901280bdd49bc75))
+
+
+
+
+
 # [1.20.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.19.1...@carbon/ibm-products@1.20.0) (2022-06-13)
 
 

@@ -10,11 +10,11 @@ import React, { useState } from 'react';
 import {
   Button,
   Column,
+  Grid,
   InlineNotification,
   RadioButtonGroup,
   RadioButton,
   RadioTile,
-  Row,
   TextInput,
   TileGroup,
   Toggle,
@@ -179,7 +179,7 @@ export const MultiStepWithIntro = ({
           description="It will also be used by your producers and consumers as part of the
            connection information, so make it something easy to recognize."
         >
-          <Row>
+          <Grid narrow>
             <Column xlg={8} lg={8} md={8} sm={8}>
               <TextInput
                 labelText="Topic name"
@@ -232,7 +232,7 @@ export const MultiStepWithIntro = ({
                 onToggle={(event) => setShouldReject(event)}
               />
             </Column>
-          </Row>
+          </Grid>
         </CreateTearsheetStep>
         <CreateTearsheetStep
           title="Partitions"
@@ -244,7 +244,7 @@ export const MultiStepWithIntro = ({
            messages across the members of a consumer group."
           fieldsetLegendText="Partition information"
         >
-          <Row>
+          <Grid narrow>
             <Column xlg={3} lg={3}>
               <NumberInput
                 iconDescription="Choose a number"
@@ -260,7 +260,7 @@ export const MultiStepWithIntro = ({
                 }
               />
             </Column>
-          </Row>
+          </Grid>
         </CreateTearsheetStep>
         <CreateTearsheetStep
           title="Message retention"
@@ -271,7 +271,7 @@ export const MultiStepWithIntro = ({
            will be missed."
           fieldsetLegendText="Message retention scheduling"
         >
-          <Row>
+          <Grid narrow>
             <Column xlg={8} lg={8} md={8} sm={8}>
               <RadioButtonGroup
                 legendText="Message retention"
@@ -293,7 +293,7 @@ export const MultiStepWithIntro = ({
                 />
               </RadioButtonGroup>
             </Column>
-          </Row>
+          </Grid>
         </CreateTearsheetStep>
       </CreateTearsheet>
     </div>

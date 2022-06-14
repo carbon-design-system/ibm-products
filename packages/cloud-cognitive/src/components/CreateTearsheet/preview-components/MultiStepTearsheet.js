@@ -10,10 +10,10 @@ import React, { useState } from 'react';
 import {
   Button,
   Column,
+  Grid,
   InlineNotification,
   RadioButtonGroup,
   RadioButton,
-  Row,
   TextInput,
   Toggle,
   NumberInput,
@@ -29,7 +29,7 @@ const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 const CustomStep = ({ value1, setValue1, ...rest }) => {
   return (
     <CreateTearsheetStep {...rest} disableSubmit={!value1}>
-      <Row>
+      <Grid narrow>
         <Column xlg={8} lg={8} md={8} sm={8}>
           <TextInput
             value={value1}
@@ -39,7 +39,7 @@ const CustomStep = ({ value1, setValue1, ...rest }) => {
             placeholder="Enter location"
           />
         </Column>
-      </Row>
+      </Grid>
     </CreateTearsheetStep>
   );
 };
@@ -132,7 +132,7 @@ export const MultiStepTearsheet = ({
           description="It will also be used by your producers and consumers as part of the
           connection information, so make it something easy to recognize."
         >
-          <Row>
+          <Grid narrow>
             <Column xlg={8} lg={8} md={8} sm={8}>
               <TextInput
                 labelText="Topic name"
@@ -191,7 +191,7 @@ export const MultiStepTearsheet = ({
                 checked={shouldIncludeAdditionalStep}
               />
             </Column>
-          </Row>
+          </Grid>
         </CreateTearsheetStep>
         <CreateTearsheetStep
           title="Dynamic step"
@@ -220,7 +220,7 @@ export const MultiStepTearsheet = ({
           messages across the members of a consumer group."
           fieldsetLegendText="Partition information"
         >
-          <Row>
+          <Grid narrow>
             <Column xlg={3} lg={3}>
               <NumberInput
                 iconDescription="Choose a number"
@@ -236,7 +236,7 @@ export const MultiStepTearsheet = ({
                 }
               />
             </Column>
-          </Row>
+          </Grid>
         </CreateTearsheetStep>
         <CreateTearsheetStep
           title="Message retention"
@@ -247,7 +247,7 @@ export const MultiStepTearsheet = ({
           will be missed."
           fieldsetLegendText="Message retention scheduling"
         >
-          <Row>
+          <Grid narrow>
             <Column xlg={8} lg={8} md={8} sm={8}>
               <RadioButtonGroup
                 legendText="Message retention"
@@ -269,7 +269,7 @@ export const MultiStepTearsheet = ({
                 />
               </RadioButtonGroup>
             </Column>
-          </Row>
+          </Grid>
         </CreateTearsheetStep>
       </CreateTearsheet>
     </div>

@@ -15,3 +15,4 @@ export { usePreviousValue } from './usePreviousValue';
 export { useResetCreateComponent } from './useResetCreateComponent';
 export { useRetrieveStepData } from './useRetrieveStepData';
 export { useValidCreateStepCount } from './useValidCreateStepCount';
+export { usePrefix } from './usePrefix';

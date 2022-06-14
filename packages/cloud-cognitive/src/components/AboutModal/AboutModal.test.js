@@ -11,11 +11,12 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { Link } from '@carbon/react';
+import { usePrefix } from '../../global/js/hooks';
 import { AboutModal } from '.';
 
 import ExampleLogo from './_story-assets/example-logo.svg';
@@ -86,7 +87,10 @@ const versionNumber = `1.3.${uuidv4()}`;
 // render an AboutModal with content, logo, title, and any other required props
 const renderComponent = ({ ...rest }) =>
   render(
-    <AboutModal {...{ closeIconDescription, content, logo, title, ...rest }} />
+    <AboutModal
+      {...{ closeIconDescription, content, logo, title, ...rest }}
+      tabListAriaLabel="Product info"
+    />
   );
 
 describe(componentName, () => {
@@ -141,9 +145,10 @@ describe(componentName, () => {
   });
 
   it('renders a clickable carbon tab for additional info', () => {
+    const carbonPrefix = usePrefix();
     renderComponent({ additionalInfo });
     const tabToSelect = screen.getByRole('tab', { name: tabLabel2 });
-    const tabSelected = `${carbon.prefix}--tabs__nav-item--selected`;
+    const tabSelected = `${carbonPrefix}--tabs__nav-item--selected`;
     expect(tabToSelect.parentElement).not.toHaveClass(tabSelected);
     userEvent.click(tabToSelect);
     expect(tabToSelect.parentElement).toHaveClass(tabSelected);

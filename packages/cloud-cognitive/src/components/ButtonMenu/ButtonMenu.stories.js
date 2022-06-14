@@ -40,6 +40,7 @@ const Template = (args) => {
   return (
     <ButtonMenu
       label="Primary button"
+      menuAriaLabel="Primary button"
       renderIcon={(props) => <Add size={16} {...props} />}
       {...args}
     >

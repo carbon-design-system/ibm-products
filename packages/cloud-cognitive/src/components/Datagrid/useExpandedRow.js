@@ -5,15 +5,16 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
+import { layout01, layout02, layout05 } from '@carbon/themes';
 import React, { useState } from 'react';
 import DatagridExpandedRow from './Datagrid/DatagridExpandedRow';
 import useRowExpander from './useRowExpander';
 
 const style = {
-  paddingTop: '16px',
-  paddingRight: '16px',
-  paddingBottom: '24px',
-  paddingLeft: '48px',
+  paddingTop: `${layout01}`,
+  paddingRight: `${layout01}`,
+  paddingBottom: `${layout02}`,
+  paddingLeft: `${layout05}`,
 };
 
 const expansionRenderer = ({ row }) => (

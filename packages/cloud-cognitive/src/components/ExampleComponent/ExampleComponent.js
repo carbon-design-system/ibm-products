@@ -26,7 +26,7 @@ const componentName = 'ExampleComponent';
 const defaults = {
   primaryKind: 'primary',
   secondaryKind: 'secondary',
-  size: 'default',
+  size: 'lg',
 };
 
 /**
@@ -176,9 +176,9 @@ ExampleComponent.propTypes = {
   secondaryKind: PropTypes.oneOf(['secondary', 'tertiary']),
 
   /**
-   * The size for the buttons ('default', 'small' or 'field').
+   * The size for the buttons
    */
-  size: PropTypes.oneOf(['default', 'small', 'field']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl']),
 
   /**
    * Optional style settings for the containing node.

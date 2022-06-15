@@ -787,9 +787,6 @@ describe(componentName, () => {
     render(<WithPagination data-testid={dataTestId}></WithPagination>);
     document.getElementsByClassName('bx--pagination');
     // console.log(screen.getAllByText('Items per page:'));
-    console.log(
-      document.getElementsByTagName('body')[0].getElementsByTagName('div')[4]
-    );
     document.addEventListener('load', () => {
       /*console.log(
         `Num Children ${

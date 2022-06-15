@@ -8,9 +8,10 @@
 // Standard imports.
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family';
+@use '@carbon/styles/scss/utilities';
+@use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
 @mixin set-header-borders {
@@ -63,6 +64,7 @@ $header-cell-background: $layer-accent-01;
     border: 0;
     margin: 0;
     color: $text-primary;
+    font-family: inherit;
   }
 
   .#{$block-class}__body--td {
@@ -122,20 +124,26 @@ $header-cell-background: $layer-accent-01;
   }
   .#{$block-class}__cell-editor {
     @include type.type-style('body-short-01');
+    @include utilities.focus-outline('reset');
 
     position: absolute;
     z-index: 4;
     display: none;
     overflow: hidden;
+    min-width: initial;
+    min-height: initial;
     /* stylelint-disable-next-line carbon/layout-token-use */
     padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
     margin: 0;
     background-color: $body-cell-background;
     color: $text-primary;
+    font-family: inherit;
     resize: none;
-    &.#{c4p-settings.$carbon-prefix}--text-area {
-      min-width: initial;
-      min-height: initial;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:focus,
+    &:active {
+      @include utilities.focus-outline('outline');
     }
     &.#{$block-class}__cell-editor--active {
       outline: $spacing-01 solid $background-brand;
@@ -176,6 +184,7 @@ $header-cell-background: $layer-accent-01;
     border: $spacing-01 solid $background-brand;
     background-color: $body-cell-background;
     color: $text-primary;
+    font-family: inherit;
     text-align: left;
 
     /* stylelint-disable-next-line max-nesting-depth */

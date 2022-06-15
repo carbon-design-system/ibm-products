@@ -46,7 +46,7 @@ $empty-block-class: #{c4p-settings.$pkg-prefix}--empty-state;
 }
 
 .#{$empty-block-class}__action-button,
-.#{$empty-block-class}__link {
+.#{$empty-block-class}__link.#{c4p-settings.$carbon-prefix}--link {
   margin-top: $spacing-06;
 }
 .#{$empty-block-class} .#{$empty-block-class}__action-button {

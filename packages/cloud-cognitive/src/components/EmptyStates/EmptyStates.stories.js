@@ -47,22 +47,16 @@ export default {
 };
 
 const emptyStateCommonProps = {
-  title: 'Empty state title',
-  subtitle: 'Description text explaining why this section is empty.',
+  title: 'Start by adding data assets',
+  subtitle: (
+    <p>
+      Click <span>Upload assets</span> to upload your data
+    </p>
+  ),
 };
 
 const Template = (args) => {
-  return (
-    <EmptyState
-      heading="Start by adding data assets"
-      subtext={
-        <p>
-          Click <span>Upload assets</span> to upload your data
-        </p>
-      }
-      {...args}
-    />
-  );
+  return <EmptyState {...args} />;
 };
 
 export const Default = prepareStory(Template, {

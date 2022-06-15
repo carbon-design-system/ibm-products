@@ -46,7 +46,7 @@ jobs:
 
       # Run yarn again after renaming package, required after move to yarn berry
       - name: Install after rename
-        run: yarn
+        run: yarn --immutable --immutable-cache
       
       - name: Commit for legacy package
         run: |

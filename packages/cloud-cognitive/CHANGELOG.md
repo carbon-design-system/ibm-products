@@ -3,6 +3,77 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.20.1...@carbon/ibm-products@1.20.2) (2022-06-15)
+
+
+### Bug Fixes
+
+* **Datagrid:** use checkbox in place of inline checkbox ([#2037](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2037)) ([1859ccf](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1859ccf5f1f7181ed83aad0125268042fb5a7ca1))
+
+
+
+
+
+## [1.20.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.20.0...@carbon/ibm-products@1.20.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* **Datagrid:** export datagrid hooks ([#2036](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2036)) ([44be0e1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/44be0e1e31cf5061296238026901280bdd49bc75))
+
+
+
+
+
+# [1.20.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.19.1...@carbon/ibm-products@1.20.0) (2022-06-13)
+
+
+### Bug Fixes
+
+* **ComboButton:** remove getInstanceId and use our internal uuid util ([#2028](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2028)) ([c482bbd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c482bbd1378ad4b774a118e677e05ccad88c4675))
+* **CreateSidePanel:** use actions prop instead of ActionSet directly ([#2033](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2033)) ([8dbeabd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8dbeabdc3a2829e9a60207c9a36da58d9817add0))
+* header row horizontal scroll and scrollbar style ([#2032](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2032)) ([f6ea8d8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f6ea8d88ca11cc959d1c36c5d309f23414cc03e3))
+* hooked up add select modifier functionality ([#2019](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2019)) ([2cbda09](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2cbda091755b6c1dde20e892c5b8568c0ab18e11))
+* **SidePanel:** check if window exists for reduced motion logic ([#2029](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2029)) ([6bc2b29](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6bc2b29a3dc35ee7952cf8683e5f8a9e46e59e2c))
+
+
+### Features
+
+* inline edit release ([#2025](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2025)) ([028a58f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/028a58fc10fab8cd2f7e8846d0ef7611e15862ca))
+
+
+
+
+
+## [1.19.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.19.0...@carbon/ibm-products@1.19.1) (2022-06-06)
+
+
+### Bug Fixes
+
+* Added styles to datagrid drag and drop pattern ([#2009](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2009)) ([0dc0bf8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0dc0bf84a794960bbf1bf08e1ebb6ba23de6e027))
+* **ComboButton:** change import of overflow menu and fix styles ([#2010](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2010)) ([564de7d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/564de7d01dadb1c504e9a4add866a6698c152ccc))
+
+
+
+
+
+# [1.19.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.18.2...@carbon/ibm-products@1.19.0) (2022-05-31)
+
+
+### Bug Fixes
+
+* add select global filter styles ([#2005](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2005)) ([34951a7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/34951a75d7d09cdfe6e61e0ccb41de04fec30d57))
+* add select sidebar bug ([#2007](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2007)) ([9f587c8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9f587c8824a0222634266e8532e64a6b42436713))
+
+
+### Features
+
+* **DataSpreadsheet:** add multiple column reordering ([#2002](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2002)) ([3f3588f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3f3588f5521d23e8bd74fb5fdd56101ea2952e34))
+
+
+
+
+
 ## [1.18.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.18.1...@carbon/ibm-products@1.18.2) (2022-05-24)
 
 

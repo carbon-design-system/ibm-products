@@ -2240,6 +2240,247 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background: var(--cds-ui-02, #ffffff);
 }
 
+.c4p--inline-edit {
+  --c4p--inline-edit--size: var(--cds-spacing-08, 2.5rem);
+  --c4p--inline-edit--icon-size: var(--cds-spacing-05, 1rem);
+  --c4p--inline-edit--background-color: var(--cds-ui-01, #f4f4f4);
+  --c4p--inline-edit--toolbar-width: calc(2 * var(--c4p--inline-edit--size));
+  position: relative;
+  display: inline-block;
+  min-width: calc(4 * var(--c4p--inline-edit--size));
+  max-width: 100%;
+  height: var(--c4p--inline-edit--size);
+  background-color: var(--c4p--inline-edit--background-color);
+  cursor: text;
+  transition: background-color 70ms cubic-bezier(0, 0, 0.38, 0.9), box-shadow 70ms cubic-bezier(0, 0, 0.38, 0.9), border-color 70ms cubic-bezier(0, 0, 0.38, 0.9);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.c4p--inline-edit.c4p--inline-edit--light {
+  --c4p--inline-edit--background-color: transparent;
+}
+.c4p--inline-edit:hover {
+  --c4p--inline-edit--background-color: var(--cds-hover-field, #e5e5e5);
+}
+.c4p--inline-edit.c4p--inline-edit--sm {
+  --c4p--inline-edit--size: var(--cds-spacing-07, 2rem);
+  --c4p--inline-edit--icon-size: var(--cds-spacing-05, 1rem);
+}
+.c4p--inline-edit.c4p--inline-edit--lg {
+  --c4p--inline-edit--size: var(--cds-spacing-09, 3rem);
+  --c4p--inline-edit--icon-size: var(--cds-spacing-05, 1rem);
+}
+.c4p--inline-edit.c4p--inline-edit--invalid {
+  outline: var(--cds-spacing-01, 0.125rem) solid var(--cds-support-01, #da1e28);
+  outline-offset: calc(-1 * var(--cds-spacing-01, 0.125rem));
+}
+@media screen and (prefers-contrast) {
+  .c4p--inline-edit.c4p--inline-edit--invalid {
+    outline-style: dotted;
+  }
+}
+.c4p--inline-edit.c4p--inline-edit--editing {
+  outline: var(--cds-spacing-01, 0.125rem) solid var(--cds-focus, #0f62fe);
+  outline-offset: calc(-1 * var(--cds-spacing-01, 0.125rem));
+  background-color: var(--cds-ui-01, #f4f4f4);
+}
+@media screen and (prefers-contrast) {
+  .c4p--inline-edit.c4p--inline-edit--editing {
+    outline-style: dotted;
+  }
+}
+.c4p--inline-edit .c4p--inline-edit__input {
+  display: inline-block;
+  overflow: hidden;
+  width: calc(100% - var(--c4p--inline-edit--toolbar-width) - var(--cds-spacing-05, 1rem));
+  max-width: calc(100% - var(--c4p--inline-edit--toolbar-width) - var(--cds-spacing-05, 1rem));
+  min-height: var(--c4p--inline-edit--size);
+  margin-right: var(--c4p--inline-edit--toolbar-width);
+  margin-left: var(--cds-spacing-05, 1rem);
+  line-height: var(--c4p--inline-edit--size);
+}
+.c4p--inline-edit .c4p--inline-edit__input:focus {
+  outline: none;
+}
+.c4p--inline-edit.c4p--inline-edit--invalid .c4p--inline-edit__input {
+  --c4p--inline-edit--toolbar-width: calc(3 * var(--c4p--inline-edit--size));
+}
+.c4p--inline-edit .c4p--inline-edit__input::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  overflow: hidden;
+  width: 0;
+  margin-left: var(--cds-spacing-05, 1rem);
+  color: var(--cds-text-05, #6f6f6f);
+  content: attr(data-placeholder);
+  opacity: 0;
+  visibility: hidden;
+}
+.c4p--inline-edit .c4p--inline-edit__ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  width: 0;
+  height: var(--c4p--inline-edit--size);
+  line-height: var(--c4p--inline-edit--size);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+.c4p--inline-edit.c4p--inline-edit--overflows:not(.c4p--inline-edit--editing) .c4p--inline-edit__ellipsis {
+  width: initial;
+  opacity: 1;
+}
+.c4p--inline-edit .c4p--inline-edit__disabled-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.c4p--inline-edit.c4p--inline-edit--disabled .c4p--inline-edit__disabled-cover {
+  cursor: not-allowed;
+  pointer-events: all;
+}
+.c4p--inline-edit .c4p--inline-edit__input--empty::after {
+  width: initial;
+  opacity: 1;
+  transition: opacity 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  visibility: visible;
+}
+.c4p--inline-edit .c4p--inline-edit__after-input-elements {
+  --c4p--inline-edit--toolbar-width: calc(2 * var(--c4p--inline-edit--size));
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  width: var(--c4p--inline-edit--toolbar-width);
+  height: 100%;
+  justify-content: space-between;
+  cursor: text;
+}
+.c4p--inline-edit.c4p--inline-edit--invalid .c4p--inline-edit__after-input-elements {
+  --c4p--inline-edit--toolbar-width: calc(3 * var(--c4p--inline-edit--size));
+}
+.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  border: 2px solid var(--cds-focus, #0f62fe);
+  border-left: 0;
+  content: \\"\\";
+  pointer-events: none;
+}
+.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel {
+  display: inline-flex;
+  width: var(--c4p--inline-edit--size);
+  height: 100%;
+  min-height: initial;
+  max-height: var(--c4p--inline-edit--size);
+  padding: calc(
+    0.5 * (var(--c4p--inline-edit--size) - var(--c4p--inline-edit--icon-size)) - var(--cds-spacing-01, 0.125rem)
+  );
+  border: 2px solid transparent;
+}
+.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:hover {
+  outline: initial;
+}
+.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:focus:active, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:focus, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:focus:active, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:focus {
+  border-color: var(--cds-focus, #0f62fe);
+  box-shadow: initial;
+  outline: initial;
+}
+.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:focus:active:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:focus:active:hover {
+  box-shadow: inset 0 0 0 1px var(--cds-field-01, #f4f4f4);
+}
+.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save::before, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel::before {
+  background-color: transparent;
+}
+.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save[disabled], .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel[disabled] {
+  border-color: transparent;
+}
+.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save {
+  margin-right: 0;
+  transition: all 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  transition-property: margin, padding;
+}
+.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save svg {
+  transition: width 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
+}
+@media (prefers-reduced-motion: reduce) {
+  .c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save svg {
+    transition: none;
+  }
+}
+.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation:not(.c4p--inline-edit__toolbar--saveable) .c4p--inline-edit__save {
+  padding-right: 0;
+  padding-left: 0;
+  border-right: 0;
+  border-left: 0;
+  margin-right: calc(-1 * var(--c4p--inline-edit--size));
+}
+.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation:not(.c4p--inline-edit__toolbar--saveable) .c4p--inline-edit__save svg {
+  overflow: hidden;
+  width: 0;
+}
+.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit {
+  display: inline-flex;
+  width: var(--c4p--inline-edit--size);
+  height: 100%;
+  min-height: initial;
+  max-height: var(--c4p--inline-edit--size);
+  padding: calc(
+    0.5 * (var(--c4p--inline-edit--size) - var(--c4p--inline-edit--icon-size)) - var(--cds-spacing-01, 0.125rem)
+  );
+  border: 2px solid transparent;
+}
+.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:active, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:focus {
+  border-color: transparent;
+  background-color: transparent;
+  box-shadow: initial;
+  outline: initial;
+}
+@media (hover: hover) {
+  .c4p--inline-edit .c4p--inline-edit__edit {
+    opacity: 0;
+    transition: opacity 70ms cubic-bezier(0, 0, 0.38, 0.9);
+  }
+  .c4p--inline-edit:hover .c4p--inline-edit__edit {
+    opacity: 1;
+  }
+}
+.c4p--inline-edit .c4p--inline-edit__edit--always-visible {
+  opacity: 1;
+}
+.c4p--inline-edit .c4p--inline-edit__validation-icon {
+  display: inline-flex;
+  width: var(--c4p--inline-edit--size);
+  height: 100%;
+  min-height: initial;
+  max-height: var(--c4p--inline-edit--size);
+  padding: calc(
+    0.5 * (var(--c4p--inline-edit--size) - var(--c4p--inline-edit--icon-size)) - var(--cds-spacing-01, 0.125rem)
+  );
+  border: 2px solid transparent;
+}
+.c4p--inline-edit.c4p--inline-edit--invalid .c4p--inline-edit__validation-icon {
+  color: var(--cds-support-error, #da1e28);
+}
+.c4p--inline-edit .c4p--inline-edit__validation-text {
+  display: block;
+  overflow: visible;
+  margin-left: var(--cds-spacing-05, 1rem);
+}
+.c4p--inline-edit.c4p--inline-edit--invalid .c4p--inline-edit__validation-text {
+  color: var(--cds-support-error, #da1e28);
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;

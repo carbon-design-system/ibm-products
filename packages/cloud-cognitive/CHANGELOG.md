@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.20.1...@carbon/ibm-products@1.20.2) (2022-06-15)
+
+
+### Bug Fixes
+
+* **Datagrid:** use checkbox in place of inline checkbox ([#2037](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2037)) ([1859ccf](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1859ccf5f1f7181ed83aad0125268042fb5a7ca1))
+
+
+
+
+
 ## [1.20.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.20.0...@carbon/ibm-products@1.20.1) (2022-06-14)
 
 

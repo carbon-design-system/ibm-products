@@ -49,9 +49,9 @@ export default {
 const emptyStateCommonProps = {
   title: 'Start by adding data assets',
   subtitle: (
-    <p>
+    <>
       Click <span>Upload assets</span> to upload your data
-    </p>
+    </>
   ),
 };
 

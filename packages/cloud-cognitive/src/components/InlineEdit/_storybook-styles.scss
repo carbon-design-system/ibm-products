@@ -5,6 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/type/scss/scale';
 @use '../../global/styles/display-box';
 @use '../../global/styles/project-settings' as c4p-settings;
 
@@ -19,5 +20,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
 .component-full-width {
   .#{$block-class} {
     width: 100%;
+  }
+  .#{$block-class} .#{$block-class}__input {
+    @include scale.font-size(2);
   }
 }

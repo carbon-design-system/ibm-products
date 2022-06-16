@@ -20,7 +20,7 @@ import { timeAgo } from './utils';
 import { NotificationsEmptyState } from '../EmptyStates/NotificationsEmptyState';
 
 // Carbon and package components we use.
-import { Button, Link, Toggle } from '@carbon/react';
+import { Button, Link, Toggle, IconButton } from '@carbon/react';
 import {
   ErrorFilled,
   WarningAltFilled,
@@ -221,7 +221,7 @@ export let NotificationsPanel = React.forwardRef(
           {description.length > trimLength && (
             <Button
               kind="ghost"
-              size="small"
+              size="sm"
               renderIcon={(props) => <ChevronDown size={16} {...props} />}
               iconDescription={
                 notification.showAll ? readLessLabel : readMoreLabel
@@ -351,15 +351,16 @@ export let NotificationsPanel = React.forwardRef(
                 </Link>
               )}
           </div>
-          <Button
+          <IconButton
+            align="left"
             kind="ghost"
-            size="small"
-            renderIcon={(props) => <Close size={16} {...props} />}
-            iconDescription={dismissSingleNotificationIconDescription}
-            tooltipPosition="left"
+            size="sm"
+            label={dismissSingleNotificationIconDescription}
             className={`${blockClass}__dismiss-single-button`}
             onClick={(event) => dismissSingleNotification(event, notification)}
-          />
+          >
+            <Close size={16} />
+          </IconButton>
         </div>
       );
     };
@@ -399,7 +400,7 @@ export let NotificationsPanel = React.forwardRef(
           <div className={`${blockClass}__header-flex`}>
             <h1 className={`${blockClass}__header`}>{title}</h1>
             <Button
-              size="small"
+              size="sm"
               kind="ghost"
               className={`${blockClass}__dismiss-button`}
               onClick={() => onDismissAllNotifications()}

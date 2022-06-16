@@ -208,11 +208,17 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
         }
       }
     }
+    .#{c4p-settings.$carbon-prefix}--popover-container {
+      position: initial;
+    }
     .#{$block-class}__dismiss-single-button {
       position: absolute;
       top: 0;
       right: 0;
+      display: flex;
       min-width: 2rem;
+      align-items: center;
+      justify-content: center;
       padding: 0;
       color: $text-primary;
       opacity: 0;

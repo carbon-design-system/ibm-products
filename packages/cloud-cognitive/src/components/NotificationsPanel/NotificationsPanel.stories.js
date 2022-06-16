@@ -17,9 +17,10 @@ import {
 } from '@carbon/react';
 import { User, Notification } from '@carbon/icons-react';
 import { white } from '@carbon/colors';
-// import styles from './_storybook-styles.scss';
+import styles from './_storybook-styles.scss';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { UnreadNotificationBell } from './preview-components/UnreadNotificationBell';
+import { pkg } from '../../settings';
 
 import { NotificationsPanel } from '.';
 
@@ -31,11 +32,13 @@ import {
 import mdx from './NotificationsPanel.mdx';
 import data from './NotificationsPanel_data';
 
+const storyBlockClass = `${pkg.prefix}--notifications-panel__story`;
+
 export default {
   title: getStoryTitle(NotificationsPanel.displayName),
   component: NotificationsPanel,
   parameters: {
-    // styles,
+    styles,
     docs: {
       page: mdx,
     },
@@ -45,7 +48,10 @@ export default {
 const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
   <HeaderContainer
     render={() => (
-      <Header aria-label="IBM Cloud Pak">
+      <Header
+        aria-label="IBM Cloud Pak"
+        className={`${storyBlockClass}--header`}
+      >
         <HeaderName href="/" prefix="IBM">
           Cloud Pak
         </HeaderName>

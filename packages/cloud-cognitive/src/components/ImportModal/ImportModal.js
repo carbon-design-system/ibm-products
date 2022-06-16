@@ -227,7 +227,7 @@ export let ImportModal = forwardRef(
                 onDelete={() => onRemoveFile(file.uuid)}
                 name={file.name}
                 status={file.status}
-                size="default"
+                size="lg"
                 uuid={file.uuid}
                 iconDescription={file.iconDescription}
                 invalid={file.invalid}

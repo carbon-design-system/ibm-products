@@ -259,6 +259,7 @@ export let OptionsTile = React.forwardRef(
               onToggle={onToggle}
               size="sm"
               disabled={isLocked}
+              labelText={title}
             />
           </div>
         )}

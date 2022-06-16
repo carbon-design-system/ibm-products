@@ -44,6 +44,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
   margin: 0;
 }
 
+.#{$block-class}__toggle .#{c4p-settings.$carbon-prefix}--toggle__label-text {
+  @include visually-hidden;
+}
+
 .#{$block-class}__header,
 .#{$block-class}__static-content {
   display: grid;

@@ -86,7 +86,7 @@ const Template = (args) => {
 
   return (
     <OptionsTile onToggle={action('onToggle')} {...args}>
-      <FormGroup aria-labelledby={titleId} legendText="" hasMargin={false}>
+      <FormGroup aria-labelledby={titleId} legendText="">
         <p>
           User interface defines the language the application is displayed in.
           Locale sets the regional display formats for information like time,

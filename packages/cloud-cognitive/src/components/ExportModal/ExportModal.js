@@ -138,7 +138,11 @@ export let ExportModal = forwardRef(
         preventCloseOnClickOutside
         {...{ open, ref, onClose, ...getDevtoolsProps(componentName) }}
       >
-        <ModalHeader className={`${blockClass}__header`} title={title} />
+        <ModalHeader
+          className={`${blockClass}__header`}
+          closeModal={onClose}
+          title={title}
+        />
         <ModalBody className={`${blockClass}__body-container`}>
           {!submitted && (
             <>

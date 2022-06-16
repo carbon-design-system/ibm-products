@@ -8,7 +8,7 @@
 // Standard imports.
 @use '@carbon/react/scss/components/button/tokens' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // ExportModal uses the following Carbon components:
 // Button, ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput,
@@ -20,13 +20,16 @@
 @use '@carbon/react/scss/components/form';
 @use '@carbon/react/scss/components/loading';
 
-$block-class: #{$pkg-prefix}--export-modal;
+$block-class: #{c4p-settings.$pkg-prefix}--export-modal;
 
-.#{$block-class} .#{$carbon-prefix}--modal-footer .#{$carbon-prefix}--btn {
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--modal-footer
+  .#{c4p-settings.$carbon-prefix}--btn {
   max-width: none;
 }
 
-.#{$block-class}.#{$carbon-prefix}--modal .#{$carbon-prefix}--modal-content {
+.#{$block-class}.#{c4p-settings.$carbon-prefix}--modal
+  .#{c4p-settings.$carbon-prefix}--modal-content {
   padding-right: $spacing-05;
 }
 
@@ -50,4 +53,8 @@ $block-class: #{$pkg-prefix}--export-modal;
 
 .#{$block-class}__error-icon {
   fill: $button-danger-primary;
+}
+
+.#{c4p-settings.$carbon-prefix}--modal-content.#{$block-class}__body-container {
+  padding-bottom: $spacing-06;
 }

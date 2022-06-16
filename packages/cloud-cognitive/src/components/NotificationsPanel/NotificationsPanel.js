@@ -417,6 +417,7 @@ export let NotificationsPanel = React.forwardRef(
             onToggle={(event) => onDoNotDisturbChange(event)}
             defaultToggled={doNotDisturbDefaultToggled}
             aria-label={doNotDisturbLabel}
+            labelText={doNotDisturbLabel}
           />
         </div>
         <div className={mainSectionClassName}>
@@ -472,7 +473,7 @@ export let NotificationsPanel = React.forwardRef(
             </Button>
             <Button
               kind="ghost"
-              size="small"
+              size="sm"
               className={`${blockClass}__settings-button`}
               renderIcon={(props) => <Settings size={16} {...props} />}
               iconDescription={settingsIconDescription}

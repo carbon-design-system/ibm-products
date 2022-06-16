@@ -13,6 +13,7 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/utilities';
 
 // NotificationsPanel uses the following IBM Products components:
 // NotificationsEmptyState
@@ -81,8 +82,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
       justify-content: space-between;
     }
     .#{$block-class}__do-not-disturb-toggle
-      .#{c4p-settings.$carbon-prefix}--toggle__switch {
-      margin-top: $spacing-02;
+      .#{c4p-settings.$carbon-prefix}--toggle__label-text {
+      @include utilities.visually-hidden;
     }
     .#{$block-class}__dismiss-button {
       color: $text-primary;

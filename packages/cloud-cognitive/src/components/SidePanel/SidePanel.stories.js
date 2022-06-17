@@ -5,13 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import './_storybook-styles.scss';
+import styles from './_storybook-styles.scss';
 import React, { useRef, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   Button,
   Grid,
-  Row,
   Column,
   TextArea,
   TextInput,
@@ -39,7 +38,7 @@ export default {
   title: getStoryTitle(SidePanel.displayName),
   component: SidePanel,
   parameters: {
-    // styles,
+    styles,
     docs: {
       page: mdx,
     },
@@ -437,13 +436,11 @@ const SlideInTemplate = ({ actions, ...args }) => {
     <>
       {renderUIShellHeader()}
       <Grid id="ibm-products-page-content">
-        <Row>
-          <Column>
-            <Button onClick={() => setOpen(!open)}>
-              {open ? 'Close side panel' : 'Open side panel'}
-            </Button>
-          </Column>
-        </Row>
+        <Column lg={16} md={8} sm={4}>
+          <Button onClick={() => setOpen(!open)}>
+            {open ? 'Close side panel' : 'Open side panel'}
+          </Button>
+        </Column>
       </Grid>
       <SidePanel
         {...args}
@@ -482,18 +479,18 @@ export const WithActionToolbar = prepareStory(SlideOverTemplate, {
       {
         leading: true,
         label: 'Copy',
-        icon: (props) => <Copy size={20} {...props} />,
+        icon: (props) => <Copy size={16} {...props} />,
         onClick: action('Toolbar button clicked: Copy'),
         kind: 'primary',
       },
       {
         label: 'Settings',
-        icon: (props) => <Settings size={20} {...props} />,
+        icon: (props) => <Settings size={16} {...props} />,
         onClick: action('Toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
-        icon: (props) => <TrashCan size={20} {...props} />,
+        icon: (props) => <TrashCan size={16} {...props} />,
         onClick: action('Toolbar button clicked: Delete'),
       },
     ],
@@ -539,17 +536,17 @@ export const WithStaticTitleAndActionToolbar = prepareStory(SlideOverTemplate, {
     actionToolbarButtons: [
       {
         label: 'Copy',
-        icon: (props) => <Copy size={20} {...props} />,
+        icon: (props) => <Copy size={16} {...props} />,
         onClick: action('Action toolbar button clicked: Copy'),
       },
       {
         label: 'Settings',
-        icon: (props) => <Settings size={20} {...props} />,
+        icon: (props) => <Settings size={16} {...props} />,
         onClick: action('Action toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
-        icon: (props) => <TrashCan size={20} {...props} />,
+        icon: (props) => <TrashCan size={16} {...props} />,
         onClick: action('Action toolbar button clicked: Delete'),
       },
     ],

@@ -17,7 +17,7 @@ jobs:
       - name: Update Carbon packages
         run: |
           yarn upgrade:carbon
-          yarn
+          YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn
 
       - name: Create PR
         id: create-pr
@@ -78,7 +78,7 @@ jobs:
         run: |
           yarn upgrade:automatic
           rm yarn.lock
-          yarn
+          YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn
 
       - name: Create PR
         id: create-pr

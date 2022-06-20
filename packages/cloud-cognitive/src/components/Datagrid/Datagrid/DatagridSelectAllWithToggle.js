@@ -8,7 +8,6 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-// import InlineCheckbox from '@carbon/react/lib/components/InlineCheckbox';
 import { Checkbox, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { CaretDown } from '@carbon/icons-react';
 import { pkg } from '../../../settings';

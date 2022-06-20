@@ -46,7 +46,9 @@ jobs:
 
       # Run yarn again after renaming package, required after move to yarn berry
       - name: Install after rename
-        run: YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn
+        run: yarn
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
       
       - name: Commit for legacy package
         run: |

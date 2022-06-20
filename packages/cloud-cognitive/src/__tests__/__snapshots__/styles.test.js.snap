@@ -1584,6 +1584,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header-description {
   margin-top: var(--cds-spacing-03, 0.5rem);
 }
+.c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header-description {
+  margin-top: var(--cds-spacing-03, 0.5rem);
+}
 .c4p--tearsheet .c4p--tearsheet__header-navigation {
   margin: var(--cds-spacing-04, 0.75rem) 0 0;
 }

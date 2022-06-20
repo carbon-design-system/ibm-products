@@ -208,6 +208,10 @@
       margin-top: $spacing-03;
     }
 
+    &.#{$block-class}--narrow .#{$block-class}__header-description {
+      margin-top: $spacing-03;
+    }
+
     .#{$block-class}__header-navigation {
       margin: $spacing-04 0 0;
     }

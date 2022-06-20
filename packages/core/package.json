@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "0.35.3",
+  "version": "0.35.6",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -20,7 +20,7 @@
   "scripts": {
     "build": "run-s build:carbon build:storybook",
     "build:carbon": "sass --style=expanded --load-path node_modules --load-path ../../node_modules .storybook/carbon.scss:css/carbon.css",
-    "build:storybook": "export \"NODE_OPTIONS=--max_old_space_size=2048\" && build-storybook -s ./public",
+    "build:storybook": "yarn dlx cross-env \"NODE_OPTIONS=--max_old_space_size=2048\" && build-storybook -s ./public",
     "clean": "rimraf storybook-static css",
     "start": "run-s build:carbon start:storybook",
     "start:storybook": "start-storybook -s ./public -p 3000",
@@ -35,7 +35,7 @@
     "@carbon/import-once": "10.7.0",
     "@carbon/layout": "10.37.1",
     "@carbon/motion": "10.29.0",
-    "@carbon/storybook-addon-theme": "^0.22.17",
+    "@carbon/storybook-addon-theme": "^0.22.19",
     "@carbon/themes": "10.54.0",
     "@carbon/type": "10.44.0",
     "@storybook/addon-actions": "^6.4.22",
@@ -56,7 +56,7 @@
     "@storybook/react": "^6.4.22",
     "@storybook/theming": "^6.4.22",
     "babel-loader": "^8.2.5",
-    "babel-preset-ibm-cloud-cognitive": "^0.14.14",
+    "babel-preset-ibm-cloud-cognitive": "^0.14.15",
     "carbon-components": "^10.57.1",
     "carbon-components-react": "^7.57.1",
     "carbon-icons": "^7.0.7",
@@ -72,7 +72,7 @@
     "sass": "^1.51.0",
     "style-loader": "^3.3.1",
     "typescript": "^4.6.4",
-    "webpack": "^5.72.0",
+    "webpack": "^5.72.1",
     "webpack-merge": "^5.8.0"
   }
 }

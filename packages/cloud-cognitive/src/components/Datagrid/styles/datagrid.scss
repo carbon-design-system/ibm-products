@@ -351,7 +351,7 @@
   width: 100% !important;
 }
 
-.#{block-class}__displayFlex {
+.#{$block-class}__displayFlex {
   position: relative;
   display: flex;
   width: 100%;
@@ -380,4 +380,12 @@
     ~ .#{$block-class}__carbon-nested-row {
     border-left: 1px solid $button-primary;
   }
+}
+
+.#{$block-class}__row-size-button.#{c4p-settings.$carbon-prefix}--btn {
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
 }

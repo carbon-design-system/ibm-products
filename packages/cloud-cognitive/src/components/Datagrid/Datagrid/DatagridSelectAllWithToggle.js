@@ -61,11 +61,14 @@ const SelectAllWithToggle = ({
           }}
           disabled={disabled}
           id={`${tableId}-select-all-checkbox-id`}
+          labelText={allRowsLabel}
+          hideLabel
         />
       </span>
       <OverflowMenu
         renderIcon={(props) => <CaretDown size={16} {...props} />}
         size="sm"
+        ariaLabel={allRowsLabel}
       >
         <OverflowMenuItem
           itemText={allPageRowsLabel}

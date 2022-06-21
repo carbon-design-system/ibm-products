@@ -134,7 +134,14 @@
     }
   }
 }
+.#{$block-class}__grid-container::-webkit-scrollbar-thumb {
+  background-color: $text-03;
+}
 
+.#{$block-class}__grid-container::-webkit-scrollbar {
+  width: 6px;
+  background-color: $ui-background;
+}
 .#{$block-class}__grid-container {
   display: block;
   width: 100%;
@@ -310,6 +317,7 @@
 
 .#{$block-class}__simple-body {
   position: relative;
+  display: table;
   overflow-x: hidden;
   overflow-y: auto;
   //makes thin scrollbar in chrome and firefox
@@ -330,6 +338,14 @@
   min-width: 0 !important;
 }
 
+.#{$block-class}__table-simple::-webkit-scrollbar {
+  width: 6px;
+  background-color: $ui-background;
+}
+
+.#{$block-class}__table-simple::-webkit-scrollbar-thumb {
+  background-color: $text-03;
+}
 .#{$block-class}__sticky.#{$block-class}__simple-body {
   overflow: auto;
 }

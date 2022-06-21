@@ -33,3 +33,7 @@ $block-class: #{$pkg-prefix}--datagrid;
     border-bottom: none;
   }
 }
+
+.#{$block-class}__hidden--columns.#{$block-class}__datagridWrap-simple {
+  height: calc(100% - 80px);
+}

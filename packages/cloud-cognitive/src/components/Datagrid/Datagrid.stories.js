@@ -708,6 +708,7 @@ export const CustomizingColumns = () => {
   const datagridState = useDatagrid(
     {
       columns,
+      className: `c4p--datagrid__hidden--columns`,
       data,
       initialState: {
         hiddenColumns: ['age'],

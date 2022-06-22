@@ -203,6 +203,9 @@ export const InitialLoad = () => {
     columns,
     data,
     isFetching,
+    emptyStateTitle,
+    emptyStateDescription,
+    emptyStateSize,
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -232,13 +235,16 @@ export const InfiniteScroll = () => {
       data,
       isFetching,
       fetchMoreData: fetchData,
+      emptyStateTitle,
+      emptyStateDescription,
+      emptyStateSize,
     },
     useInfiniteScroll
   );
 
   return (
     <Wrapper>
-      <Datagrid datagridState={{ ...datagridState }} />;
+      <Datagrid datagridState={{ ...datagridState }} />
     </Wrapper>
   );
 };

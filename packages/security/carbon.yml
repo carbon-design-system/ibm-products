@@ -1,0 +1,166 @@
+# yaml-language-server: $schema=https://unpkg.com/@carbon-platform/schemas@v1/carbon-resources.schema.json
+library:
+  id: ibm-security
+  name: IBM Security
+  description: Legacy and non-curated design implementations used in security
+  externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal
+assets:
+  decorator:
+      name: Decorator
+      status: stable
+      type: component
+      platform: web
+      framework: react
+      thumbnailPath: './thumbnails/decorator.svg'
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://carbon-for-ibm-products.netlify.app/?path=/story/security-components-decorator
+      tags:
+        - content-element
+  delimited-list:
+      name: Delimited list
+      status: stable
+      type: component
+      platform: web
+      framework: react
+      thumbnailPath: './thumbnails/delimited-list.svg'
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://carbon-for-ibm-products.netlify.app/?path=/story/security-components-delimitedlist
+      tags:
+        - content-element
+  external-link:
+      name: External link
+      status: stable
+      type: component
+      platform: web
+      framework: react
+      thumbnailPath: './thumbnails/external-link.svg'
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://carbon-for-ibm-products.netlify.app/?path=/story/security-components-externallink
+      tags:
+        - content-element
+        - contextual-nav
+  ica:
+      name: Ica
+      status: stable
+      type: component
+      platform: web
+      framework: react
+      thumbnailPath: './thumbnails/ica.svg'
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://carbon-for-ibm-products.netlify.app/?path=/story/security-components-ica
+      tags:
+        - content-element
+  nav:
+      name: Nav
+      status: stable
+      type: component
+      platform: web
+      framework: react
+      thumbnailPath: './thumbnails/nav.svg'
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://carbon-for-ibm-products.netlify.app/?path=/story/security-components-nav
+      tags:
+        - structural-navigation
+  stacked-notification:
+      name: Stacked notification
+      status: stable
+      type: component
+      platform: web
+      framework: react
+      thumbnailPath: './thumbnails/stacked-notification.svg'
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://carbon-for-ibm-products.netlify.app/?path=/docs/security-components-stackednotification
+      tags:
+        - system-feedback
+  status-icon:
+      name: Status icon
+      status: stable
+      type: component
+      platform: web
+      framework: react
+      thumbnailPath: './thumbnails/status-icon.svg'
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://carbon-for-ibm-products.netlify.app/?path=/docs/security-components-statusicon
+      tags:
+        - system-feedback
+  string-formatter:
+      name: String formatter
+      status: stable
+      type: component
+      platform: web
+      framework: react
+      thumbnailPath: './thumbnails/string-formatter.svg'
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://carbon-for-ibm-products.netlify.app/?path=/docs/security-components-stringformatter
+      tags:
+        - content-element
+  time-indicator:
+      name: Time indicator
+      status: stable
+      type: component
+      platform: web
+      framework: react
+      thumbnailPath: './thumbnails/time-indicator.svg'
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://carbon-for-ibm-products.netlify.app/?path=/docs/security-components-timeindicator
+      tags:
+        - system-feedback
+  truncated-list:
+      name: Truncated list
+      status: stable
+      type: component
+      platform: web
+      framework: react
+      thumbnailPath: './thumbnails/truncated-list.svg'
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://carbon-for-ibm-products.netlify.app/?path=/docs/security-components-truncatedlist
+      tags:
+        - data-display
+        - content-element
+  type-layout:
+      name: Type layout
+      status: stable
+      type: component
+      platform: web
+      framework: react
+      #TODO: remove temporary svg
+      thumbnailPath: './thumbnails/input.svg'
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://carbon-for-ibm-products.netlify.app/?path=/docs/security-components-typelayout
+      tags:
+        - data-display
+        - content-element
+    

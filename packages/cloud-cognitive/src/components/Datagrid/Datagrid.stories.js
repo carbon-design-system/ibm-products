@@ -35,9 +35,10 @@ import {
   useDisableSelectRows,
   useCustomizeColumns,
   useSelectAllWithToggle,
+  useColumnCenterAlign,
 } from '.';
 
-import useColumnCenterAlign from './useColumnCenterAlign';
+// import useColumnCenterAlign from './useColumnCenterAlign';
 
 import {
   /*StickyActionsColumn,*/ CustomizeColumnStory,

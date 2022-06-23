@@ -25,6 +25,5 @@
 }
 
 .#{$block-class}__right-align-cell-renderer.sortDisabled {
-  /* stylelint-disable-next-line carbon/layout-token-use */
-  padding-right: 12px;
+  padding-right: 0;
 }

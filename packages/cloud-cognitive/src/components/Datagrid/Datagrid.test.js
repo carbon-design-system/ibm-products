@@ -685,10 +685,6 @@ describe(componentName, () => {
     jest.spyOn(global.console, 'warn').mockImplementation(() => {});
   });
 
-  /*afterEach(() => {
-     global.console.error.mockRestore();
-   });*/
-
   it('renders a basic data grid component with devTools attribute', () => {
     render(<BasicUsage data-testid={dataTestId} />);
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -703,6 +699,7 @@ describe(componentName, () => {
     );
   });
 
+  //TODO: Create the Batch Actions Test
   /*
   it("renders a Batch Actions Table", () => {
     render(<BatchActions data-testid={dataTestId}></BatchActions>);
@@ -740,6 +737,22 @@ describe(componentName, () => {
     expect(
       screen.getByRole('table').getElementsByTagName('tbody')[0].className
     ).toEqual('c4p--datagrid__empty-state-body');
+
+    expect(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('td').length
+    ).toEqual(1);
+
+    expect(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('td')[0].textContent
+    ).toBeNull;
   });
 
   /*
@@ -766,6 +779,7 @@ describe(componentName, () => {
     fireEvent.scroll(scrollContainer, {target: {y: 100}});*/
   });
 
+  //TODO: Check 10,000 rows
   //Ten Thousand Entries
   it('renders Ten Thousand table entries', () => {
     render(<TenThousandEntries data-testid={dataTestId}></TenThousandEntries>);
@@ -780,6 +794,18 @@ describe(componentName, () => {
         10
       )
     ).toEqual(480000);
+
+    /*
+    console.log(
+      `Num Children: ${
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('div')[0]
+          .getElementsByTagName('div')[0].childElementCount
+      }`
+    );
+    */
   });
 
   //TODO: Complete This
@@ -1199,5 +1225,3 @@ describe(componentName, () => {
     }
   });
 });
-
-//afterAll(() => consoleSpy.mockRestore());

@@ -10,11 +10,12 @@ import { render, screen } from '@testing-library/react';
 import { expectError, required } from '../../global/js/utils/test-helper';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 
 import { UserProfileImage } from '.';
 import { Group24 } from '@carbon/icons-react';
 
+const carbonPrefix = 'cds';
 const blockClass = `${pkg.prefix}--user-profile-image`;
 const componentName = UserProfileImage.displayName;
 
@@ -103,7 +104,7 @@ describe(componentName, () => {
   it('should render the IconButton component if the tooltipText prop is passed', () => {
     const { container } = renderComponent({ tooltipText: 'Display name' });
     const tooltipElement = container.querySelector(
-      `.${carbon.prefix}--icon-tooltip`
+      `.${carbonPrefix}--icon-tooltip`
     );
     expect(tooltipElement).toBeTruthy();
   });

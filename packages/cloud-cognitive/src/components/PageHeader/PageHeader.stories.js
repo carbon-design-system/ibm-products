@@ -8,8 +8,6 @@
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { carbon } from '../../settings';
-
 import {
   Button,
   Column,
@@ -29,6 +27,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  usePrefix,
 } from '@carbon/react';
 import {
   CheckmarkFilled,
@@ -256,12 +255,7 @@ const pageActions = {
   ],
   'User defined page actions': {
     content: (
-      <Button
-        type="button"
-        className={`${carbon.prefix}--button`}
-        size="field"
-        style={{ maxWidth: '100%' }}
-      >
+      <Button type="button" size="lg" style={{ maxWidth: '100%' }}>
         <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
           Custom component
         </span>
@@ -274,8 +268,7 @@ const pageActions = {
     content: (
       <Button
         type="button"
-        className={`${carbon.prefix}--button`}
-        size="field"
+        size="lg"
         style={{ maxWidth: '100%' }}
         title="Custom component with long content"
       >
@@ -553,6 +546,7 @@ const actionTitleSave = action('title onSave');
 // Template.
 // eslint-disable-next-line react/prop-types
 const Template = ({ children, title, ...props }) => {
+  const carbonPrefix = usePrefix();
   // eslint-disable-next-line react/prop-types
   const [titleText, setTitleText] = useState(title?.text ?? title);
   const handleTitleSave = title?.onSave
@@ -592,7 +586,7 @@ const Template = ({ children, title, ...props }) => {
   // console.log(theTitle);
   return (
     <>
-      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+      <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
       <PageHeader
         {...props}
         title={
@@ -765,11 +759,12 @@ export const fullyLoadedAndSome = prepareStory(Template, {
 // Template for demo.
 // eslint-disable-next-line react/prop-types
 const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
+  const carbonPrefix = usePrefix();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
 
   return (
     <>
-      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+      <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
       <div
         className={cx(`${storyClass}__app`, {
           [`${storyClass}__app--whole-page-scroll`]:

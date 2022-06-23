@@ -14,13 +14,14 @@ import {
   expectWarnAsync,
   expectMultipleWarn,
 } from '../../global/js/utils/test-helper';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 const { prefix } = pkg;
 
+const carbonPrefix = 'cds';
 const createTearsheetBlockClass = `${prefix}--tearsheet-create`;
 const componentName = CreateTearsheet.displayName;
 
@@ -197,7 +198,7 @@ describe(CreateTearsheet.displayName, () => {
       initialStep: 2,
     });
     const createTearsheetSteps = container.querySelector(
-      `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
+      `.${createTearsheetBlockClass}__content .${carbonPrefix}--form`
     ).children;
     expect(
       createTearsheetSteps[1].classList.contains(
@@ -217,7 +218,7 @@ describe(CreateTearsheet.displayName, () => {
           initialStep: 0,
         });
         const createTearsheetSteps = container.querySelector(
-          `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
+          `.${createTearsheetBlockClass}__content .${carbonPrefix}--form`
         ).children;
         expect(
           createTearsheetSteps[0].classList.contains(
@@ -236,7 +237,7 @@ describe(CreateTearsheet.displayName, () => {
     const cancelButtonElement = screen.getByText(cancelButtonText);
     click(nextButtonElement);
     const createTearsheetSteps = container.querySelector(
-      `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
+      `.${createTearsheetBlockClass}__content .${carbonPrefix}--form`
     ).children;
     expect(
       createTearsheetSteps[1].classList.contains(
@@ -280,7 +281,7 @@ describe(CreateTearsheet.displayName, () => {
     });
     click(nextButtonElement);
     const tearsheetChildren = container.querySelector(
-      `.${createTearsheetBlockClass}__content  .${carbon.prefix}--form`
+      `.${createTearsheetBlockClass}__content  .${carbonPrefix}--form`
     ).children;
     expect(
       tearsheetChildren[2].classList.contains(

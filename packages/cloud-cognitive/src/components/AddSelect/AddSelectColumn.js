@@ -7,9 +7,15 @@
 
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { TextInput, Tag, OverflowMenu, Checkbox } from '@carbon/react';
+import {
+  TextInput,
+  Tag,
+  OverflowMenu,
+  Checkbox,
+  usePrefix,
+} from '@carbon/react';
 import { Filter } from '@carbon/icons-react';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 import { AddSelectList } from './AddSelectList';
 import { AddSelectSort } from './AddSelectSort';
 import { sortItems, getSortBy } from './add-select-utils';
@@ -25,6 +31,7 @@ export let AddSelectColumn = ({
   setMultiSelection,
   ...props
 }) => {
+  const carbonPrefix = usePrefix();
   const [allSelected, setAllSelected] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const { sortDirection, setSortDirection, sortAttribute, setSortAttribute } =
@@ -117,10 +124,10 @@ export let AddSelectColumn = ({
               {filterByOpts.map((opt) => (
                 <div
                   key={opt}
-                  className={`${carbon.prefix}--overflow-menu-options__option`}
+                  className={`${carbonPrefix}--overflow-menu-options__option`}
                 >
                   <div
-                    className={`${carbon.prefix}--overflow-menu-options__btn`}
+                    className={`${carbonPrefix}--overflow-menu-options__btn`}
                   >
                     <Checkbox
                       id={opt}

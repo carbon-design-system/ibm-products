@@ -12,6 +12,7 @@ import { ButtonSetWithOverflow } from '.';
 import { Bee16 } from '@carbon/icons-react';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
+const carbonPrefix = 'cds';
 const buttons = (handleClick) =>
   [1, 2, 3].map((num) => ({
     renderIcon: !(num % 3) ? Bee16 : null,
@@ -24,7 +25,7 @@ const buttons = (handleClick) =>
     },
   }));
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--button-set-with-overflow`;
 
 const buttonWidth = 200;
@@ -39,7 +40,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
         get: function () {
           let width = 0;
 
-          if (this.classList.contains(`${carbon.prefix}--btn`)) {
+          if (this.classList.contains(`${carbonPrefix}--btn`)) {
             width = buttonWidth;
           } else {
             width = window.innerWidth;
@@ -75,13 +76,13 @@ describe(ButtonSetWithOverflow.displayName, () => {
     );
 
     const action1 = screen.getByText(/Action 1/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbonPrefix}--btn`,
     });
     screen.getByText(/Action 2/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbonPrefix}--btn`,
     });
     screen.getByText(/Action 3/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbonPrefix}--btn`,
     });
 
     userEvent.click(action1);
@@ -102,17 +103,17 @@ describe(ButtonSetWithOverflow.displayName, () => {
     );
 
     const action1 = screen.queryByText(/Action 1/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbonPrefix}--btn`,
     });
     expect(action1).toBeNull();
 
     const comboButton = screen.getByText(/button menu label/, {
-      selector: `.${blockClass}__button-container--hidden+ .${carbon.prefix}--overflow-menu .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container--hidden+ .${carbonPrefix}--overflow-menu .${carbonPrefix}--btn`,
     });
     userEvent.click(comboButton);
 
     const action1a = screen.getByText(/Action 1/, {
-      selector: `.${carbon.prefix}--overflow-menu-options__option-content`,
+      selector: `.${carbonPrefix}--overflow-menu-options__option-content`,
     });
 
     userEvent.click(action1a);

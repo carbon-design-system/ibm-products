@@ -10,8 +10,8 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { RemoveModal } from '.';
-import { carbon } from '../../settings';
 
+const carbonPrefix = 'cds';
 const componentName = RemoveModal.displayName;
 const resourceName = 'bx1001';
 const defaultProps = {
@@ -56,9 +56,9 @@ describe(componentName, () => {
       <RemoveModal {...defaultProps} textConfirmation />
     );
     screen.getByText(defaultProps.inputLabelText);
-    container.querySelector(`.${carbon.prefix}--text-input`);
+    container.querySelector(`.${carbonPrefix}--text-input`);
     expect(
-      container.querySelector(`.${carbon.prefix}--text-input`)
+      container.querySelector(`.${carbonPrefix}--text-input`)
     ).toHaveAttribute('placeholder', defaultProps.inputPlaceholderText);
   });
 
@@ -97,13 +97,13 @@ describe(componentName, () => {
     click(screen.getByText(props.primaryButtonText));
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(container.querySelector(`.${carbonPrefix}--text-input`), {
       target: { value: 'bx1002' },
     });
     click(screen.getByText(props.primaryButtonText));
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(container.querySelector(`.${carbonPrefix}--text-input`), {
       target: { value: 'bx1001' },
     });
     click(screen.getByText(props.primaryButtonText));

@@ -1783,7 +1783,7 @@ __metadata:
     "@carbon/grid": ^11.3.0
     "@carbon/layout": ^11.3.0
     "@carbon/motion": ^11.2.0
-    "@carbon/react": ^1.5.0
+    "@carbon/react": ^1.6.0-rc.0
     "@carbon/storybook-addon-theme": ^0.22.19
     "@carbon/themes": ^11.4.0
     "@carbon/type": ^11.4.0
@@ -1835,7 +1835,7 @@ __metadata:
     "@carbon/grid": ^11.3.0
     "@carbon/layout": ^11.3.0
     "@carbon/motion": ^11.2.0
-    "@carbon/react": ^1.5.0
+    "@carbon/react": ^1.6.0-rc.0
     "@carbon/telemetry": ^0.1.0
     "@carbon/themes": ^11.4.0
     "@carbon/type": ^11.4.0
@@ -1993,15 +1993,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "@carbon/react@npm:1.5.0"
+"@carbon/react@npm:^1.6.0-rc.0":
+  version: 1.6.0-rc.0
+  resolution: "@carbon/react@npm:1.6.0-rc.0"
   dependencies:
     "@babel/runtime": ^7.18.3
     "@carbon/feature-flags": ^0.8.0
     "@carbon/icons-react": ^11.5.0
     "@carbon/layout": ^11.3.0
-    "@carbon/styles": ^1.5.0
+    "@carbon/styles": ^1.6.0-rc.0
     "@carbon/telemetry": 0.1.0
     classnames: 2.3.1
     copy-to-clipboard: ^3.3.1
@@ -2022,7 +2022,7 @@ __metadata:
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
     sass: ^1.33.0
-  checksum: 57121b780b3bb173797411a6d1fb95c3e2537c0ef64eccb654f8c418ddb2099e74fd645fb807ec665808165f3e317d67d1d13130c27792bcb53ca7e4f71483a8
+  checksum: d1875749fdf8ca06ad6d011c14dc6357d4ab4976e0e7a7d63fe9b292c97c9fddaf65dd518cdd32e6869ff9ab295314fa8cacc1e0f6495464c606a03286a36968
   languageName: node
   linkType: hard
 
@@ -2051,9 +2051,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "@carbon/styles@npm:1.5.0"
+"@carbon/styles@npm:^1.6.0-rc.0":
+  version: 1.6.0-rc.0
+  resolution: "@carbon/styles@npm:1.6.0-rc.0"
   dependencies:
     "@carbon/colors": ^11.3.0
     "@carbon/feature-flags": ^0.8.0
@@ -2065,7 +2065,7 @@ __metadata:
     "@ibm/plex": 6.0.0-next.6
   peerDependencies:
     sass: ^1.33.0
-  checksum: f3bc831a0f8a8c0a47a3b333d5d97a3044f495376d5cc9e361c022dd2e90e3f0a2ba524ccf5eadc0880317b001ceabd4b2731803ab216aac6ae857764177a738
+  checksum: 90b791b8c6ac6cf82cbaff26f18eea6c9a8ca866e79e89d3750ff012ca25a53abb6663cae66ed8f3ad0c5ca44b7061db2eaa7aa32c0e1cd4c7790a7849d73f61
   languageName: node
   linkType: hard
 

@@ -10,10 +10,10 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
-import { ButtonSet, Button } from '@carbon/react';
+import { ButtonSet, Button, usePrefix } from '@carbon/react';
 import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
 const blockClass = `${pkg.prefix}--button-set-with-overflow`;
 const componentName = 'ButtonSetWithOverflow';
@@ -28,6 +28,7 @@ export const ButtonSetWithOverflow = ({
   menuOptionsClass,
   rightAlign,
 }) => {
+  const carbonPrefix = usePrefix();
   const [showAsOverflow, setShowAsOverflow] = useState(false);
   const spaceAvailableRef = useRef(null);
   const sizingContainerRefSet = useRef(null);
@@ -48,7 +49,7 @@ export const ButtonSetWithOverflow = ({
 
     // get all of the hidden sizing buttons
     const sizingSet = sizingContainerRefSet.current?.querySelectorAll(
-      `.${carbon.prefix}--btn`
+      `.${carbonPrefix}--btn`
     );
 
     // calculate total width of button set

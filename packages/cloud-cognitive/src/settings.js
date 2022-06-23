@@ -1,17 +1,10 @@
 import { Canary } from './components/_Canary';
 
 import pkgSettings from './global/js/package-settings';
-import { settings as carbonSettings } from 'carbon-components';
 import React from 'react';
 import { themes } from '@carbon/themes';
 
 export const carbon = {
-  get prefix() {
-    return carbonSettings.prefix;
-  },
-  set prefix(val) {
-    carbonSettings.prefix = val;
-  },
   get themes() {
     return themes;
   },

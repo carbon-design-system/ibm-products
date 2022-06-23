@@ -15,6 +15,7 @@ import {
   FileUploaderItem,
   TextInput,
   Button,
+  usePrefix,
 } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -22,7 +23,7 @@ import PropTypes from 'prop-types';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 const componentName = 'ImportModal';
 
 // Default values for props
@@ -67,6 +68,7 @@ export let ImportModal = forwardRef(
     },
     ref
   ) => {
+    const carbonPrefix = usePrefix();
     const [files, setFiles] = useState([]);
     const [importUrl, setImportUrl] = useState('');
 
@@ -216,7 +218,7 @@ export let ImportModal = forwardRef(
             </Button>
           </div>
           <div
-            className={`${carbon.prefix}--file-container ${blockClass}__file-container`}
+            className={`${carbonPrefix}--file-container ${blockClass}__file-container`}
           >
             {hasFiles && (
               <p className={`${blockClass}__helper-text`}>{fileStatusString}</p>

@@ -17,6 +17,7 @@ import {
   Header,
   HeaderContainer,
   HeaderName,
+  usePrefix,
 } from '@carbon/react';
 import { Copy, TrashCan, Settings } from '@carbon/icons-react';
 
@@ -24,7 +25,6 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-import { carbon } from '../../settings';
 
 import { EditSidePanel } from '.';
 import mdx from './EditSidePanel.mdx';
@@ -58,7 +58,6 @@ const defaultStoryProps = {
     'We recommend you fill out and evaluate these details at a minimum before deploying your topic.',
   primaryButtonText: 'Save',
   secondaryButtonText: 'Cancel',
-  selectorPrimaryFocus: `.${carbon.prefix}--text-input`,
 };
 
 const renderUIShellHeader = () => (
@@ -78,6 +77,7 @@ const renderUIShellHeader = () => (
  */
 const Template = (args) => {
   const prefix = 'edit-side-panel-stories__';
+  const carbonPrefix = usePrefix();
   const items = ['Day(s)', 'Month(s)', 'Year(s)'];
   const [open, setOpen] = useState(false);
   const [topicValue, setTopicValue] = useState('Cluster management');
@@ -97,6 +97,7 @@ const Template = (args) => {
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={() => setOpen(false)}
         disableSubmit={!topicValue.length}
+        selectorPrimaryFocus={`.${carbonPrefix}--text-input`}
       >
         <TextInput
           id="create-side-panel-topic-name-a"

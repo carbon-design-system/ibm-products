@@ -10,8 +10,9 @@ import { BreadcrumbWithOverflow } from '.';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 
+const carbonPrefix = 'cds';
 const dataTestId = uuidv4();
 const blockClass = `${pkg.prefix}--breadcrumb-with-overflow`;
 
@@ -34,8 +35,8 @@ const sizes = {
   breadcrumbMargin: 10,
 };
 
-const isBreadCrumbItem = function () {
-  return this.classList?.contains(`${carbon.prefix}--breadcrumb-item`) || false;
+const isBreadCrumbItem = function (prefix) {
+  return this.classList?.contains(`${prefix}--breadcrumb-item`) || false;
 };
 
 // eslint-disable-next-line react/prop-types
@@ -114,7 +115,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     );
 
     const visibleBreadcrumbs = screen.getAllByText(/Breadcrumb [0-9]/, {
-      selector: `.${blockClass}__displayed-breadcrumb .${carbon.prefix}--link`,
+      selector: `.${blockClass}__displayed-breadcrumb .${carbonPrefix}--link`,
     });
     expect(visibleBreadcrumbs.length).toEqual(5); // all should be visible
 
@@ -138,7 +139,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     );
 
     const visibleBreadcrumbs = screen.getAllByText(/Breadcrumb [0-9]/, {
-      selector: `.${blockClass}__displayed-breadcrumb .${carbon.prefix}--link`,
+      selector: `.${blockClass}__displayed-breadcrumb .${carbonPrefix}--link`,
     });
 
     // not enough room
@@ -182,7 +183,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     );
 
     const visibleBreadcrumbs = screen.getAllByText(/Breadcrumb [0-9]/, {
-      selector: `.${blockClass}__displayed-breadcrumb .${carbon.prefix}--link`,
+      selector: `.${blockClass}__displayed-breadcrumb .${carbonPrefix}--link`,
     });
     // not enough room
     expect(visibleBreadcrumbs.length).toEqual(1);
@@ -208,7 +209,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     );
 
     const visibleBreadcrumbs = screen.getAllByText(/Breadcrumb [0-9]/, {
-      selector: `.${blockClass}__displayed-breadcrumb .${carbon.prefix}--link`,
+      selector: `.${blockClass}__displayed-breadcrumb .${carbonPrefix}--link`,
     });
     // not enough room
     expect(visibleBreadcrumbs.length).toEqual(3);
@@ -234,7 +235,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     );
 
     const visibleBreadcrumbs = screen.getAllByText(/Breadcrumb [0-9]/, {
-      selector: `.${blockClass}__displayed-breadcrumb .${carbon.prefix}--link`,
+      selector: `.${blockClass}__displayed-breadcrumb .${carbonPrefix}--link`,
     });
     // not enough room
     expect(visibleBreadcrumbs.length).toEqual(1);

@@ -8,9 +8,9 @@
 import { render, fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import { AddSelect } from './AddSelect';
-import { carbon } from '../../settings';
 import { pkg } from '../../settings';
 
+const carbonPrefix = 'cds';
 const blockClass = `${pkg.prefix}--add-select`;
 const componentName = AddSelect.name;
 const defaultProps = {
@@ -71,7 +71,7 @@ describe(componentName, () => {
   it('filters the items', () => {
     const { change } = fireEvent;
     const { container } = render(<AddSelect {...defaultProps} />);
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(container.querySelector(`.${carbonPrefix}--text-input`), {
       target: { value: 'item a' },
     });
     expect(screen.queryByText('item a')).toBeVisible();

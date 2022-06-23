@@ -13,17 +13,22 @@ import { useResizeDetector } from 'react-resize-detector';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
 
 // Carbon and package components we use.
-import { Button, ComposedModal, ModalHeader, ModalBody } from '@carbon/react';
+import {
+  Button,
+  ComposedModal,
+  ModalHeader,
+  ModalBody,
+  usePrefix,
+} from '@carbon/react';
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
-const bcModalHeader = `${carbon.prefix}--modal-header`;
 const componentName = 'TearsheetShell';
 
 const maxDepth = 3;
@@ -80,6 +85,8 @@ export const TearsheetShell = React.forwardRef(
     },
     ref
   ) => {
+    const carbonPrefix = usePrefix();
+    const bcModalHeader = `${carbonPrefix}--modal-header`;
     // node the modal tearsheet is hosted in
     const [portalTarget, setPortalTarget] = useState(null);
     useEffect(() => {
@@ -227,8 +234,8 @@ export const TearsheetShell = React.forwardRef(
           preventCloseOnClickOutside={!isPassive}
           ref={modalRef}
           selectorsFloatingMenus={[
-            `.${carbon.prefix}--overflow-menu-options`,
-            `.${carbon.prefix}--tooltip`,
+            `.${carbonPrefix}--overflow-menu-options`,
+            `.${carbonPrefix}--tooltip`,
             '.flatpickr-calendar',
             `.${bc}__container`,
           ]}

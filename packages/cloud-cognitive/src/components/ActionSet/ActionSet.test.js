@@ -11,12 +11,13 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expectMultipleError } from '../../global/js/utils/test-helper';
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { ActionSet } from '.';
 
+const carbonPrefix = 'cds';
 const blockClass = `${pkg.prefix}--action-set`;
 const componentName = ActionSet.displayName;
 
@@ -39,10 +40,6 @@ const actionDG = { label: labelDG, kind: 'danger--ghost', dangerDescription };
 const getByRoleAndLabel = (role, label) =>
   screen.getByRole(role, { name: label });
 
-const primaryButton = `${carbon.prefix}--btn--primary`;
-const secondaryButton = `${carbon.prefix}--btn--secondary`;
-const ghostButton = `${carbon.prefix}--btn--ghost`;
-
 describe(componentName, () => {
   it('renders a component ActionSet', () => {
     render(<ActionSet actions={[]} />);
@@ -55,6 +52,9 @@ describe(componentName, () => {
   });
 
   it('renders three action buttons', () => {
+    const primaryButton = `${carbonPrefix}--btn--primary`;
+    const secondaryButton = `${carbonPrefix}--btn--secondary`;
+    const ghostButton = `${carbonPrefix}--btn--ghost`;
     render(<ActionSet size="lg" actions={[actionS, actionP, actionG]} />);
     expect(getByRoleAndLabel('button', labelS)).toHaveClass(secondaryButton);
     expect(getByRoleAndLabel('button', labelP)).toHaveClass(primaryButton);

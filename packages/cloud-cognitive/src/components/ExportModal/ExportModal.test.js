@@ -10,10 +10,10 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { ExportModal } from '.';
-import { carbon } from '../../settings';
 
 const componentName = ExportModal.displayName;
 
+const carbonPrefix = 'cds';
 const defaultProps = {
   body: 'body content',
   className: 'test-class',
@@ -69,7 +69,7 @@ describe(componentName, () => {
     };
 
     const { container } = render(<ExportModal {...props} />);
-    const textInput = container.querySelector(`.${carbon.prefix}--text-input`);
+    const textInput = container.querySelector(`.${carbonPrefix}--text-input`);
 
     change(textInput, { target: { value: `${props.filename}.pdf` } });
     blur(textInput);
@@ -89,9 +89,7 @@ describe(componentName, () => {
     };
 
     const { container } = render(<ExportModal {...props} />);
-    const submitBtn = container.querySelector(
-      `.${carbon.prefix}--btn--primary`
-    );
+    const submitBtn = container.querySelector(`.${carbonPrefix}--btn--primary`);
 
     click(submitBtn);
     expect(onRequestSubmit).not.toBeCalled();
@@ -110,7 +108,7 @@ describe(componentName, () => {
     };
 
     const { container } = render(<ExportModal {...props} />);
-    const textInput = container.querySelector(`.${carbon.prefix}--text-input`);
+    const textInput = container.querySelector(`.${carbonPrefix}--text-input`);
 
     change(textInput, { target: { value: `${props.filename}` } });
     blur(textInput);
@@ -164,7 +162,7 @@ describe(componentName, () => {
       <ExportModal {...defaultProps} inputType="password" />
     );
     expect(
-      container.querySelector(`.${carbon.prefix}--text-input`)
+      container.querySelector(`.${carbonPrefix}--text-input`)
     ).toHaveAttribute('type', 'password');
   });
 

@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -24,6 +24,7 @@ import {
   EditOff,
   Checkmark,
   WarningFilled,
+  usePrefix,
 } from '@carbon/icons-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -72,6 +73,7 @@ export let InlineEdit = React.forwardRef(
     },
     refIn
   ) => {
+    const carbonPrefix = usePrefix();
     const refInput = useRef(null);
     const localRef = useRef(null);
     const ref = refIn || localRef;
@@ -256,7 +258,7 @@ export let InlineEdit = React.forwardRef(
           blockClass, // Apply the block class to the main HTML element
           className, // Apply any supplied class names to the main HTML element.
           `${blockClass}--${size}`,
-          // `${carbon.prefix}--btn ${carbon.prefix}--btn--ghost`, // make like a ghost button
+          // `${carbonPrefix}--btn ${carbonPrefix}--btn--ghost`, // make like a ghost button
           {
             // switched classes dependant on props or state
             [`${blockClass}--disabled`]: disabled,
@@ -361,7 +363,7 @@ export let InlineEdit = React.forwardRef(
         <div className={cx(`${blockClass}__disabled-cover`)} />
         {showValidation && validationText && validationText.length > 0 && (
           <div
-            className={`${blockClass}__validation-text ${carbon.prefix}--form-requirement`}
+            className={`${blockClass}__validation-text ${carbonPrefix}--form-requirement`}
           >
             {validationText}
           </div>

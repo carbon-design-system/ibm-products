@@ -9,7 +9,6 @@ import { fireEvent, render, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { carbon } from '../../settings';
 import { ImportModal } from '.';
 
 global.fetch = jest.fn(() =>
@@ -20,6 +19,7 @@ global.fetch = jest.fn(() =>
   })
 );
 
+const carbonPrefix = 'cds';
 const componentName = ImportModal.displayName;
 const defaultProps = {
   accept: ['image/jpeg', 'image/png'],
@@ -103,18 +103,18 @@ describe(componentName, () => {
 
     expect(
       getByText(props.inputButtonText).classList.contains(
-        `${carbon.prefix}--btn--disabled`
+        `${carbonPrefix}--btn--disabled`
       )
     ).toBe(true);
     click(getByText(props.primaryButtonText));
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(container.querySelector(`.${carbonPrefix}--text-input`), {
       target: { value: 'test.jpeg' },
     });
     expect(
       getByText(props.inputButtonText).classList.contains(
-        `${carbon.prefix}--btn--disabled`
+        `${carbonPrefix}--btn--disabled`
       )
     ).not.toBe(true);
     click(getByText(props.inputButtonText));
@@ -132,7 +132,7 @@ describe(componentName, () => {
     const { click } = userEvent;
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(container.querySelector(`.${carbonPrefix}--text-input`), {
       target: { value: 'test.jpeg' },
     });
     click(getByText(defaultProps.inputButtonText));
@@ -155,7 +155,7 @@ describe(componentName, () => {
     };
     const { getByText, container } = render(<ImportModal {...props} />);
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(container.querySelector(`.${carbonPrefix}--text-input`), {
       target: { value: 'test.jpeg' },
     });
     click(getByText(defaultProps.inputButtonText));
@@ -177,7 +177,7 @@ describe(componentName, () => {
     const { click } = userEvent;
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(container.querySelector(`.${carbonPrefix}--text-input`), {
       target: { value: 'test.jpeg' },
     });
     click(getByText(defaultProps.inputButtonText));
@@ -201,7 +201,7 @@ describe(componentName, () => {
     const { click } = userEvent;
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(container.querySelector(`.${carbonPrefix}--text-input`), {
       target: { value: 'test.pdf' },
     });
     click(getByText(defaultProps.inputButtonText));
@@ -230,7 +230,7 @@ describe(componentName, () => {
     };
     const { getByText, container } = render(<ImportModal {...props} />);
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(container.querySelector(`.${carbonPrefix}--text-input`), {
       target: { value: 'test.pdf' },
     });
     click(getByText(defaultProps.inputButtonText));
@@ -248,16 +248,16 @@ describe(componentName, () => {
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
     const files = [new File(['foo'], 'foo.jpeg', { type: 'image/jpeg' })];
 
-    change(container.querySelector(`.${carbon.prefix}--file-input`), {
+    change(container.querySelector(`.${carbonPrefix}--file-input`), {
       target: { files },
     });
     expect(getByText('foo.jpeg')).toBeVisible();
     expect(
       screen.getByText(`1 / 1 ${defaultProps.fileUploadLabel}`)
     ).toBeVisible();
-    click(container.querySelector(`.${carbon.prefix}--file-close`));
+    click(container.querySelector(`.${carbonPrefix}--file-close`));
     expect(
-      container.querySelector(`.${carbon.prefix}--file-filename`)
+      container.querySelector(`.${carbonPrefix}--file-filename`)
     ).toBeNull();
   });
 
@@ -270,7 +270,7 @@ describe(componentName, () => {
     };
     const { getByText, container } = render(<ImportModal {...props} />);
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(container.querySelector(`.${carbonPrefix}--text-input`), {
       target: { value: 'test.pdf' },
     });
     click(getByText(defaultProps.inputButtonText));
@@ -293,7 +293,7 @@ describe(componentName, () => {
     };
     const { getByText, container } = render(<ImportModal {...props} />);
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(container.querySelector(`.${carbonPrefix}--text-input`), {
       target: { value: 'test.pdf' },
     });
     click(getByText(defaultProps.inputButtonText));

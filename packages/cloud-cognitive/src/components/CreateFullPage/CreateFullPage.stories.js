@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { useState } from 'react';
-import { carbon } from '../../settings';
 import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
+import { usePrefix } from '@carbon/react';
 import { CreateFullPage } from '.';
 import { CreateFullPageStep } from './CreateFullPageStep';
 import { pkg } from '../../settings';
@@ -65,6 +65,7 @@ const defaultFullPageProps = {
 };
 
 const Template = ({ ...args }) => {
+  const carbonPrefix = usePrefix();
   const [textInput, setTextInput] = useState('');
   const [hasSubmitError, setHasSubmitError] = useState(false);
   const [shouldReject, setShouldReject] = useState(false);
@@ -75,7 +76,7 @@ const Template = ({ ...args }) => {
 
   return (
     <>
-      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+      <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
       <CreateFullPage {...args}>
         <CreateFullPageStep
           className={`${storyClass}__step-fieldset--no-label`}
@@ -254,6 +255,7 @@ const Template = ({ ...args }) => {
 };
 
 const TemplateWithSections = ({ ...args }) => {
+  const carbonPrefix = usePrefix();
   const [textInput, setTextInput] = useState('');
   const [hasSubmitError, setHasSubmitError] = useState(false);
   const [shouldReject, setShouldReject] = useState(false);
@@ -262,7 +264,7 @@ const TemplateWithSections = ({ ...args }) => {
 
   return (
     <>
-      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+      <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
       <CreateFullPage className={`${blockClass}`} {...args}>
         <CreateFullPageStep
           title="Partition"

@@ -14,8 +14,7 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Button, OverflowMenu } from '@carbon/react';
-import { usePrefix } from '../../global/js/hooks';
+import { Button, OverflowMenu, usePrefix } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--button-menu`;

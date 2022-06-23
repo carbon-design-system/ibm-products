@@ -8,7 +8,7 @@
 import React from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { TrashCan, Edit } from '@carbon/icons-react';
-import { Grid, Column } from '@carbon/react';
+import { Grid, Column, usePrefix } from '@carbon/react';
 import {
   getStoryTitle,
   prepareStory,
@@ -16,7 +16,6 @@ import {
 import { ProductiveCard } from '.';
 import mdx from './ProductiveCard.mdx';
 import { action } from '@storybook/addon-actions';
-import { usePrefix } from '../../global/js/hooks/usePrefix';
 
 export default {
   title: getStoryTitle(ProductiveCard.displayName),

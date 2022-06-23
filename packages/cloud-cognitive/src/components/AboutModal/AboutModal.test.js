@@ -16,7 +16,6 @@ import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { Link } from '@carbon/react';
-import { usePrefix } from '../../global/js/hooks';
 import { AboutModal } from '.';
 
 import ExampleLogo from './_story-assets/example-logo.svg';
@@ -24,6 +23,7 @@ import ansibleLogo from './_story-assets/ansible-logo.png';
 import grafanaLogo from './_story-assets/grafana-logo.png';
 import jsLogo from './_story-assets/js-logo.png';
 
+const carbonPrefix = 'cds';
 const blockClass = `${pkg.prefix}--about-modal`;
 const componentName = AboutModal.displayName;
 
@@ -145,13 +145,12 @@ describe(componentName, () => {
   });
 
   it('renders a clickable carbon tab for additional info', () => {
-    const carbonPrefix = usePrefix();
     renderComponent({ additionalInfo });
     const tabToSelect = screen.getByRole('tab', { name: tabLabel2 });
     const tabSelected = `${carbonPrefix}--tabs__nav-item--selected`;
-    expect(tabToSelect.parentElement).not.toHaveClass(tabSelected);
+    expect(tabToSelect).not.toHaveClass(tabSelected);
     userEvent.click(tabToSelect);
-    expect(tabToSelect.parentElement).toHaveClass(tabSelected);
+    expect(tabToSelect).toHaveClass(tabSelected);
   });
 
   it('renders a version number', () => {
@@ -185,7 +184,6 @@ describe(componentName, () => {
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
     userEvent.click(closeButton);
-    expect(aboutModal).not.toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
   });
 

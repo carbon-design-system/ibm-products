@@ -8,7 +8,7 @@
 import React from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { ArrowRight, Cloud } from '@carbon/icons-react';
-import { AspectRatio, Column, Grid } from '@carbon/react';
+import { AspectRatio, Column, Grid, usePrefix } from '@carbon/react';
 import {
   getStoryTitle,
   prepareStory,
@@ -16,7 +16,6 @@ import {
 import { ExpressiveCard } from '.';
 import mdx from './ExpressiveCard.mdx';
 import { action } from '@storybook/addon-actions';
-import { usePrefix } from '../../global/js/hooks/usePrefix';
 
 export default {
   title: getStoryTitle(ExpressiveCard.displayName),

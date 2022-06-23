@@ -9,7 +9,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -17,6 +17,7 @@ import { Add } from '@carbon/icons-react';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
 
+const carbonPrefix = 'cds';
 const blockClass = `${pkg.prefix}--button-menu`;
 const componentName = ButtonMenu.displayName;
 
@@ -72,7 +73,7 @@ describe(componentName, () => {
     const svg = screen
       .getByRole('button', { name: ariaLabel })
       .querySelector('svg');
-    expect(svg).toHaveClass(`${carbon.prefix}--btn__icon`);
+    expect(svg).toHaveClass(`${carbonPrefix}--btn__icon`);
   });
 
   it('renders label prop', () => {
@@ -82,7 +83,7 @@ describe(componentName, () => {
 
   it('renders size prop', () => {
     renderMenu({ size: 'lg' });
-    expect(screen.getByText(label)).toHaveClass(`${carbon.prefix}--btn--lg`);
+    expect(screen.getByText(label)).toHaveClass(`${carbonPrefix}--btn--lg`);
   });
 
   it('adds additional props to the containing node', () => {

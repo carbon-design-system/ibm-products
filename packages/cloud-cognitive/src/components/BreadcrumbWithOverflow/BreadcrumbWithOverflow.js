@@ -11,8 +11,8 @@ import React, { useState, useEffect, useRef } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Link, IconButton } from '@carbon/react';
-import { pkg, carbon } from '../../settings';
+import { Link, IconButton, usePrefix } from '@carbon/react';
+import { pkg } from '../../settings';
 import { useResizeDetector } from 'react-resize-detector';
 import { ArrowLeft } from '@carbon/icons-react';
 
@@ -44,6 +44,7 @@ export let BreadcrumbWithOverflow = ({
   overflowAriaLabel,
   ...other
 }) => {
+  const carbonPrefix = usePrefix();
   const [displayCount, setDisplayCount] = useState(3);
   const [displayedBreadcrumbItems, setDisplayedBreadcrumbItems] = useState([]);
   const breadcrumbItemWithOverflow = useRef(null);
@@ -193,7 +194,7 @@ export let BreadcrumbWithOverflow = ({
       if (sizingContainerRef.current) {
         const sizingBreadcrumbItems =
           sizingContainerRef.current.querySelectorAll(
-            `.${carbon.prefix}--breadcrumb-item`
+            `.${carbonPrefix}--breadcrumb-item`
           );
 
         const breadcrumbWidthsIncludingMargin = [];

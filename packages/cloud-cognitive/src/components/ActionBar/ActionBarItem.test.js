@@ -8,10 +8,11 @@ import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { ActionBarItem } from '.';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 
 const { click } = fireEvent;
 
+const carbonPrefix = 'cds';
 const blockClass = `${pkg.prefix}--action-bar-item`;
 const componentName = ActionBarItem.displayName;
 
@@ -34,7 +35,7 @@ describe(ActionBarItem.displayName, () => {
     render(<ActionBarItem onClick={myOnClick}>{content}</ActionBarItem>);
 
     const btn = screen.getByText(content);
-    expect(btn).toHaveClass(`${carbon.prefix}--btn`);
+    expect(btn).toHaveClass(`${carbonPrefix}--btn`);
 
     click(btn);
     expect(myOnClick).toBeCalled();
@@ -55,8 +56,8 @@ describe(ActionBarItem.displayName, () => {
     );
 
     const btn = screen.getByText(content);
-    expect(btn).not.toHaveClass(`${carbon.prefix}--btn--lg`);
-    expect(btn).toHaveClass(`${carbon.prefix}--btn--md`);
+    expect(btn).not.toHaveClass(`${carbonPrefix}--btn--lg`);
+    expect(btn).toHaveClass(`${carbonPrefix}--btn--md`);
     expect(btn).toHaveAttribute('type', 'button');
   });
 

@@ -12,11 +12,11 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
 import { makeData } from './Datagrid.stories';
 
-import { carbon } from '../../settings';
 import { expectWarn } from '../../global/js/utils/test-helper';
 import { Datagrid } from '.';
 const dataTestId = uuidv4();
 
+const carbonPrefix = 'cds';
 const componentName = Datagrid.displayName;
 
 const defaultHeader = [
@@ -109,7 +109,7 @@ describe(componentName, () => {
   it("renders a basic data grid validating use of Carbon's data table internally", () => {
     render(<BasicUsage data-testid={dataTestId} />);
     expect(screen.getByRole('table')).toHaveClass(
-      `${carbon.prefix}--data-table`
+      `${carbonPrefix}--data-table`
     );
   });
 

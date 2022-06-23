@@ -7,13 +7,14 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { carbon } from '../../../../../cloud-cognitive/src/settings';
 
 import { ProductiveCard as CCProductiveCard } from '../../../../../cloud-cognitive/src';
 import { TrashCan16, Edit16 } from '@carbon/icons-react';
 import { StatusIcon } from '../../../../../cloud-cognitive/src';
+import { usePrefix } from '@carbon/react';
 
 const ProductiveCard = (props) => {
+  const carbonPrefix = usePrefix();
   const kinds = [
     { type: 'fatal', label: 'Fatal' },
     { type: 'critical', label: 'Critical' },
@@ -87,21 +88,19 @@ const ProductiveCard = (props) => {
       //primaryButtonText={ props.data[props.index].primaryButtonText ? props.data[props.index].primaryButtonText : "Button action" }
       title={props.data.topic.name}
     >
-      <div className={`${carbon.prefix}--row`}>
-        <div className={`${carbon.prefix}--col-lg-6`}>Partitions</div>
-        <div className={`${carbon.prefix}--col-lg-6`}>
+      <div className={`${carbonPrefix}--row`}>
+        <div className={`${carbonPrefix}--col-lg-6`}>Partitions</div>
+        <div className={`${carbonPrefix}--col-lg-6`}>
           {props.data.partitions}
         </div>
       </div>
-      <div className={`${carbon.prefix}--row`}>
-        <div className={`${carbon.prefix}--col-lg-6`}>Replicas</div>
-        <div className={`${carbon.prefix}--col-lg-6`}>
-          {props.data.replicas}
-        </div>
+      <div className={`${carbonPrefix}--row`}>
+        <div className={`${carbonPrefix}--col-lg-6`}>Replicas</div>
+        <div className={`${carbonPrefix}--col-lg-6`}>{props.data.replicas}</div>
       </div>
-      <div className={`${carbon.prefix}--row`}>
-        <div className={`${carbon.prefix}--col-lg-6`}>Message Retention</div>
-        <div className={`${carbon.prefix}--col-lg-6`}>
+      <div className={`${carbonPrefix}--row`}>
+        <div className={`${carbonPrefix}--col-lg-6`}>Message Retention</div>
+        <div className={`${carbonPrefix}--col-lg-6`}>
           {props.data.retention}
         </div>
       </div>

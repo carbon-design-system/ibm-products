@@ -16,9 +16,10 @@ import {
   Header,
   HeaderContainer,
   HeaderName,
+  usePrefix,
 } from '@carbon/react';
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 import {
   getStoryTitle,
   prepareStory,
@@ -52,7 +53,6 @@ const defaultStoryProps = {
     'We recommend you fill out and evaluate these details at a minimum before deploying your topic.',
   primaryButtonText: 'Create',
   secondaryButtonText: 'Cancel',
-  selectorPrimaryFocus: `.${carbon.prefix}--text-input`,
 };
 
 const items = ['Day(s)', 'Month(s)', 'Year(s)'];
@@ -70,6 +70,7 @@ const renderUIShellHeader = () => (
 );
 
 const DefaultTemplate = ({ ...args }) => {
+  const carbonPrefix = usePrefix();
   const [open, setOpen] = useState(false);
   return (
     <>
@@ -86,7 +87,7 @@ const DefaultTemplate = ({ ...args }) => {
         open={open}
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={() => setOpen(false)}
-        selectorPrimaryFocus={`.${carbon.prefix}--text-input`}
+        selectorPrimaryFocus={`.${carbonPrefix}--text-input`}
       >
         <TextInput
           id="create-side-panel-topic-name-a"
@@ -162,6 +163,7 @@ const DefaultTemplate = ({ ...args }) => {
 };
 
 const TemplateWithFormValidation = ({ ...args }) => {
+  const carbonPrefix = usePrefix();
   const [open, setOpen] = useState(false);
   const [textInput, setTextInput] = useState('');
   const [invalid, setInvalid] = useState(false);
@@ -181,6 +183,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={() => setOpen(false)}
         disableSubmit={!textInput.length}
+        selectorPrimaryFocus={`.${carbonPrefix}--text-input`}
       >
         <TextInput
           id="create-side-panel-topic-name-b"
@@ -258,6 +261,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
 };
 
 const TemplateWithMultipleForms = ({ ...args }) => {
+  const carbonPrefix = usePrefix();
   const [open, setOpen] = useState(false);
   const [textInput, setTextInput] = useState('');
   const [invalid, setInvalid] = useState(false);
@@ -277,6 +281,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={() => setOpen(false)}
         disableSubmit={!textInput.length}
+        selectorPrimaryFocus={`.${carbonPrefix}--text-input`}
       >
         <FormGroup
           className={`${blockClass}__form ${prefix}example-form-group`}

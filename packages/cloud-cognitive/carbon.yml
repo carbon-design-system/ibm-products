@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://unpkg.com/@carbon-platform/schemas@v1/carbon-resources.schema.json
-# library:
-#   id: carbon-components-react
-#   name: Carbon Components Angular
-#   description: Angular implementation of Carbon Components.
-#   externalDocsUrl: https://angular.carbondesignsystem.com
+library:
+  id: ibm-cloud-cognitive
+  name: IBM Cloud Cognitive
+  description: A Carbon-powered React component library for IBM Products
+  externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/
 assets:
   api-key-modal:
     name: API key modal

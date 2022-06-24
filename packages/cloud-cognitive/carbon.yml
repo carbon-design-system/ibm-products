@@ -1,0 +1,613 @@
+# yaml-language-server: $schema=https://unpkg.com/@carbon-platform/schemas@v1/carbon-resources.schema.json
+# library:
+#   id: carbon-components-react
+#   name: Carbon Components Angular
+#   description: Angular implementation of Carbon Components.
+#   externalDocsUrl: https://angular.carbondesignsystem.com
+assets:
+  api-key-modal:
+    name: API key modal
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/api-key-modal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-generating-an-api-key-apikeymodal
+    tags:
+      - system-feedback
+  about-modal:
+    name: About modal
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/about-modal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-about-modal-aboutmodal--about-modal
+    tags:
+      - system-feedback
+  action-bar:
+    name: Action bar
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/action-bar.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-actionbar
+    tags:
+      - input-control
+  action-set:
+    name: Action set
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/action-set.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-actionset--action-set
+    tags:
+      - data-display
+  breadcrumb-with-overflow:
+    name: Breadcrumb with overflow
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/breadcrumb-with-overflow.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-breadcrumbwithoverflow
+    tags:
+      - input-control
+      - structural-navigation
+      - contextual-navigation
+  button-menu:
+    name: Button menu
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/button-menu.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-buttonmenu--button-menu
+    tags:
+      - input-control
+  button-set-with-overflow:
+    name: Button set with overflow
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/button-set-with-overflow.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-buttonsetwithoverflow
+    tags:
+      - input-control
+  cascasde:
+    name: Cascade
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/cascade.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-cascade-cascade--without-grid
+    tags:
+      - content-block
+  combo-button:
+    name: Combo button
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/combo-button.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-combobutton
+    tags:
+      - content-block
+  create-full-page:
+    name: Create full page
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/create-full-page.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-create-flows-createfullpage--create-full-page
+    tags:
+      -  content-block
+  create-modal:
+    name: Create modal
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/create-modal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-create-flows-createmodal
+    tags:
+      - input-control
+  create-tearsheet:
+    name: Create tearsheet
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/create-tearsheet.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-create-flows-createtearsheet--multi-step-tearsheet
+    tags:
+      - form
+      - input-control
+  create-tearsheet-narrow:
+    name: Create tearsheet narrow
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/create-tearsheet-narrow.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-create-flows-createtearsheetnarrow--create-tearsheet-narrow
+    tags:
+      - form
+      - input-control
+  data-spreadsheet:
+    name: Data spreadsheet
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/data-spreadsheet.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-dataspreadsheet-dataspreadsheet-canary--data-spreadsheet
+    tags:
+      - input-control
+  data-grid:
+    name: Data grid
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/data-grid.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-datagrid-datagrid-canary--basic-usage
+    tags:
+      - input-control
+      - content-block
+  edit-side-panel:
+    name: Edit side panel
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/edit-side-panel.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-edit-and-update-editsidepanel-canary--edit-side-panel
+    tags:
+      - input-control
+      - form
+  empty-state:
+    name: Empty state
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/empty-state.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-empty-state-emptystate
+    tags:
+      - content-element
+  example-component:
+    name: Example component
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/example-component.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-examplecomponent--example-component
+    tags:
+      - input-control
+  export-modal:
+    name: Export modal
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/export-modal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-export-exportmodal--with-success-message
+    tags:
+      - system-feedback
+  expressive-card:
+    name: Export modal
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/export-modal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-export-exportmodal--with-success-message
+    tags:
+      - content-block
+      - content-element
+      - contextual-navigation
+  http-error:
+    name: HTTP errror
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/http-error.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-http-errors-httperror403--with-all-props-set
+    tags:
+      - system-feedback
+      - content-block
+  import-modal:
+    name: Import modal
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/import-modal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-import-and-upload-importmodal--standard
+    tags:
+      - system-feedback
+      - input-control
+      - content-block
+  inline-edit:
+    name: Inline edit
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/inline-edit.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-import-and-upload-importmodal--standard
+    tags:
+      - system-feedback
+      - input-control
+  modified-tabs:
+    name: Modified tabs
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/modified-tab.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-modified-tabs-modifiedtabs-canary
+    tags:
+      - structural-navigation
+  multi-add-select:
+    name: Multi add select
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/multi-add-select.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-multiaddselect-canary
+    tags:
+      - input-control
+  notifications-panel:
+    name: Notifcations panel
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/notifcations-panel.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-notifications-notificationspanel
+    tags:
+      - system-feedback
+  options-title:
+    name: Options title
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/options-title.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-options-tile-optionstile--options-tile
+    tags:
+      - system-feedback
+      - input-control
+  page-header:
+    name: Page header
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/page-header.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-page-header-pageheader--with-title
+    tags:
+      - structural-navigation
+      - shell
+  productive-card:
+    name: Productive card
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/productive-card.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-cards-productivecard
+    tags:
+      - content-element
+      - contextual-navigation
+  remove-modal:
+    name: Remove modal
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/remove-modal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-remove-removemodal--standard
+    tags:
+      - system-feedback
+  saving:
+    name: Saving
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/saving.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-saving-saving--auto
+    tags:
+      - input-control
+  side-panel:
+    name: Side panel
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/side-panel.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-side-panel-sidepanel--slide-over
+    tags:
+      - input-control
+      - form
+  single-add-select:
+    name: Single add select
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/single-add-select.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-singleaddselect-canary--default
+    tags:
+      - input-control
+      - form
+  status-icon:
+    name: Status icon
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/status-icon.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-status-icons-statusicon
+    tags:
+      - media
+      - content-element
+  tag-set:
+    name: Tag set
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/tag-set.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-tag-set-tagset--five-tags
+    tags:
+      - contextual-navigation
+      - data-display
+      - input-control
+  tearsheet:
+    name: Tearsheet
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/tearsheet.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-tearsheet-tearsheet--tearsheet
+    tags:
+      - input-control
+      - form
+  toolbar:
+    name: Toolbar
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/toolbar.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-toolbars-toolbar-canary--toolbar
+    tags:
+      - input-control
+  user-profile-image:
+    name: User profile image
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/user-profile-image.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-user-profile-images-userprofileimage
+    tags:
+      - media
+  web-terminal:
+    name: Web terminal
+    status: stable
+    type: pattern
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/web-terminal.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-web-terminal-webterminal-canary
+    tags:
+      - content-block
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

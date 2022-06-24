@@ -17,7 +17,7 @@ import {
 } from 'carbon-components-react';
 import { pkg } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { Tearsheet } from '../Tearsheet/Tearsheet';
+import { TearsheetShell } from '../Tearsheet/TearsheetShell';
 
 const componentName = 'EditTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-edit`;
@@ -99,7 +99,7 @@ export let EditTearsheet = forwardRef(
     );
 
     return (
-      <Tearsheet
+      <TearsheetShell
         {...rest}
         {...getDevtoolsProps(componentName)}
         actions={[
@@ -128,7 +128,7 @@ export let EditTearsheet = forwardRef(
         verticalPosition={verticalPosition}
         ref={ref}
       >
-        <div className={`${blockClass}__content`} ref={contentRef}>
+        <div className={`${blockClass}__content`} ref={contentRef} role="main">
           <Grid>
             <Form>
               <FormContext.Provider
@@ -145,7 +145,7 @@ export let EditTearsheet = forwardRef(
             </Form>
           </Grid>
         </div>
-      </Tearsheet>
+      </TearsheetShell>
     );
   }
 );
@@ -163,7 +163,7 @@ EditTearsheet.propTypes = {
   /**
    * The cancel button text
    */
-  cancelButtonText: PropTypes.string.isRequired,
+  cancelButtonText: PropTypes.string,
 
   /**
    * The main content of the tearsheet
@@ -219,7 +219,7 @@ EditTearsheet.propTypes = {
   /**
    * The submit button text
    */
-  submitButtonText: PropTypes.string.isRequired,
+  submitButtonText: PropTypes.string,
 
   /**
    * The main title of the tearsheet, displayed in the header area.

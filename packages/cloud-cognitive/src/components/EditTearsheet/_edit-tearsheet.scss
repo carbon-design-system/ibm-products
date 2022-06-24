@@ -94,6 +94,10 @@
     cursor: pointer;
   }
 
+  .#{$block-class} .#{$carbon-prefix}--side-nav__overlay-active {
+    display: none;
+  }
+
   .#{$block-class} .#{$block-class}__form--title,
   .#{$block-class} .#{$block-class}__section--title {
     margin-bottom: $spacing-05;

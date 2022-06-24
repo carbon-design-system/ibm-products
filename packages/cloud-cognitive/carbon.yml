@@ -105,7 +105,7 @@ assets:
         url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-buttonsetwithoverflow
     tags:
       - input-control
-  cascasde:
+  cascade:
     name: Cascade
     status: stable
     type: pattern
@@ -294,7 +294,7 @@ assets:
       - content-element
       - contextual-navigation
   http-error:
-    name: HTTP errror
+    name: HTTP error
     status: stable
     type: pattern
     platform: web
@@ -368,12 +368,12 @@ assets:
     tags:
       - input-control
   notifications-panel:
-    name: Notifcations panel
+    name: Notifications panel
     status: stable
     type: pattern
     platform: web
     framework: react
-    thumbnailPath: './thumbnails/notifcations-panel.svg'
+    thumbnailPath: './thumbnails/notifications-panel.svg'
     demoLinks:
       - type: storybook
         name: Storybook

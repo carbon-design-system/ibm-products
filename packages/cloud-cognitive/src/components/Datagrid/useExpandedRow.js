@@ -5,20 +5,15 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
-import { layout01, layout02, layout05 } from '@carbon/themes';
 import React, { useState } from 'react';
 import DatagridExpandedRow from './Datagrid/DatagridExpandedRow';
 import useRowExpander from './useRowExpander';
+import { pkg } from '../../settings';
 
-const style = {
-  paddingTop: `${layout01}`,
-  paddingRight: `${layout01}`,
-  paddingBottom: `${layout02}`,
-  paddingLeft: `${layout05}`,
-};
+const blockClass = `${pkg.prefix}--datagrid`;
 
 const expansionRenderer = ({ row }) => (
-  <div className={`expanded_row_content`} style={style}>
+  <div className={`${blockClass}__expanded_row_content`}>
     Content for {row.id}
   </div>
 );

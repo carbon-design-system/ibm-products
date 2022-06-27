@@ -1,11 +1,12 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2020 - 2021
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2020, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
+
 import React from 'react';
+import PropTypes from 'prop-types';
 import { DataTable } from 'carbon-components-react';
 import cx from 'classnames';
 import DatagridHead from './DatagridHead';
@@ -14,13 +15,20 @@ import DatagridToolbar from './DatagridToolbar';
 
 import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
+import pconsole from '../../../global/js/utils/pconsole';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentName = 'Datagrid';
 
 const { TableContainer, Table } = DataTable;
 
-let Datagrid = React.forwardRef((datagridState, ref) => {
+export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
+  if (!datagridState) {
+    pconsole.warn(
+      'Datagrid was not passed datagridState which is required to render this component.'
+    );
+    return null;
+  }
   const {
     getTableProps = () => {},
     withVirtualScroll,
@@ -33,7 +41,6 @@ let Datagrid = React.forwardRef((datagridState, ref) => {
     verticalAlign = 'center',
     variableRowHeight,
     className,
-    ...rest
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
@@ -82,7 +89,8 @@ let Datagrid = React.forwardRef((datagridState, ref) => {
         blockClass,
         withVirtualScroll
           ? `${blockClass}__datagridWrap`
-          : `${blockClass}__datagridWrap-simple`
+          : `${blockClass}__datagridWrap-simple`,
+        !isFetching && rows.length === 0 ? `${blockClass}__empty-state` : ''
       )}
       {...getDevtoolsProps(componentName)}
     >
@@ -111,4 +119,9 @@ Datagrid = pkg.checkComponentEnabled(Datagrid, componentName);
 // is used in preference to relying on function.name.
 Datagrid.displayName = componentName;
 
-export default Datagrid;
+Datagrid.propTypes = {
+  /**
+   * The data grid state, much of it being supplied by the useDatagrid hook
+   */
+  datagridState: PropTypes.object.isRequired,
+};

@@ -19,7 +19,7 @@ const useRowExpander = (hooks) => {
             {row.isExpanded ? <ChevronUp16 /> : <ChevronDown16 />}
           </span>
         ),
-      width: 32,
+      width: 48,
       disableResizing: true,
       disableSortBy: true,
       Header: '',

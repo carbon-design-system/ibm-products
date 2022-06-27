@@ -6,7 +6,7 @@
  */
 
 import React, { forwardRef, useState } from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
@@ -23,7 +23,7 @@ const componentName = DataSpreadsheet.displayName;
 // values to use
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
-const data = generateData(16);
+const data = generateData({ rows: 16 });
 const defaultProps = {
   columns: [
     {
@@ -135,9 +135,10 @@ describe(componentName, () => {
     expect(selectionArea).toBeInTheDocument();
   });
 
-  it('should select an entire column, adding a selection area', () => {
+  it('should select an entire column, adding a selection area, and reorder columns', () => {
     const ref = React.createRef();
     const { click } = userEvent;
+    const { mouseMove, mouseDown, mouseUp } = fireEvent;
     const activeCellChangeFn = jest.fn();
     const onSelectionAreaChangeFn = jest.fn();
     render(
@@ -148,15 +149,35 @@ describe(componentName, () => {
         onSelectionAreaChange={onSelectionAreaChangeFn}
       />
     );
-    const allCells = ref?.current.querySelectorAll(`.${blockClass}__th`);
-    const firstColumnHeaderCell = Array.from(allCells)[1]; // the second item is the first column header cell
+    const allColumnHeaderCells = ref?.current.querySelectorAll(
+      `.${blockClass}__th`
+    );
+    const firstColumnHeaderCell = Array.from(allColumnHeaderCells)[1]; // the second item is the first column header cell
+    const secondColumnHeaderCell = Array.from(allColumnHeaderCells)[2];
     click(firstColumnHeaderCell);
     expect(activeCellChangeFn).toHaveBeenCalledTimes(1);
     const selectionArea = ref?.current.querySelector(
       `.${blockClass}__selection-area--element`
     );
+    expect(firstColumnHeaderCell).toHaveClass(
+      `${blockClass}__th--selected-header`
+    );
     expect(selectionArea).toBeInTheDocument();
     expect(onSelectionAreaChangeFn).toHaveBeenCalledTimes(1);
+
+    // Start column reordering
+    const firstColumnHeaderText = firstColumnHeaderCell.textContent;
+    mouseDown(firstColumnHeaderCell);
+    mouseMove(secondColumnHeaderCell);
+    mouseUp(secondColumnHeaderCell);
+    const reorderedHeaderCells = ref?.current.querySelectorAll(
+      `.${blockClass}__th`
+    );
+    const firstColumnHeaderTextAfterReorder =
+      Array.from(reorderedHeaderCells)[1].textContent;
+    expect(firstColumnHeaderText).not.toEqual(
+      firstColumnHeaderTextAfterReorder
+    );
   });
 
   it('should select all cells when clicking on select all cell button', () => {

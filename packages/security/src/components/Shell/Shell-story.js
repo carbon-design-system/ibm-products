@@ -24,13 +24,39 @@ import {
   skipToContent,
 } from './_mocks_';
 
+import { InlineNotification, NotificationActionButton } from '../../';
+import { Grid } from 'carbon-components-react';
+
 const shellProps = {
   header,
   profile,
   toolbar,
 };
 
-disableCenteredStories(storiesOf(patterns('Shell'), module))
+disableCenteredStories(storiesOf(patterns('Shell#legacy'), module))
+  .addDecorator((Story) => (
+    <>
+      <Grid>
+        <Story />
+      </Grid>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://react.carbondesignsystem.com/?path=/story/components-ui-shell--header-base-w-actions"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            View replacement
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="Pattern no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
+        title=""
+        hideCloseButton
+      />
+    </>
+  ))
   .add('default', () => <Shell {...shellProps} />, {
     info: {
       text: `

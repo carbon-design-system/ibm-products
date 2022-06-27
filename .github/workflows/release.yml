@@ -3,7 +3,7 @@ name: Release # Builds and releases updated packages every Tuesday
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 4 * * TUE'
+    - cron: '0 4 * * TUE' # Release every Tuesday at 4am EST
 
 jobs:
   Release:
@@ -29,7 +29,7 @@ jobs:
           cache: yarn
 
       - name: Install
-        run: yarn --offline
+        run: yarn
 
       - name: Continuous integration check (includes build)
         run: yarn ci-check
@@ -42,8 +42,16 @@ jobs:
         run: yarn lerna publish --create-release github --yes
 
       - name: Rename to ibm-cloud-cognitive for legacy publish
+        run: yarn json -I -f packages/cloud-cognitive/package.json -e 'this.name="@carbon/ibm-cloud-cognitive"'
+
+      # Run yarn again after renaming package, required after move to yarn berry
+      - name: Install after rename
+        run: yarn
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
+      
+      - name: Commit for legacy package
         run: |
-          yarn json -I -f packages/cloud-cognitive/package.json -e 'this.name="@carbon/ibm-cloud-cognitive"'
           git add .
           git commit -m "chore: rename package for simultaneous publish"
 

@@ -98,7 +98,6 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
       {leftPanel && (
         <div
           className={`${blockClass}__grid-container ${blockClass}__displayFlex`}
-          style={{ display: 'inherit' }}
         >
           {leftPanel && leftPanel.isOpen && (
             <div className={`${blockClass}__datagridLeftPanel`}>

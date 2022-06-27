@@ -9,8 +9,8 @@
 import React, { useState, useEffect } from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
-import namor from 'namor';
 import { useColumnOrder } from 'react-table';
+import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
@@ -35,6 +35,8 @@ import {
   useDisableSelectRows,
   useCustomizeColumns,
   useSelectAllWithToggle,
+  useStickyColumn,
+  useActionsColumn,
 } from '.';
 import {
   /*StickyActionsColumn,*/ CustomizeColumnStory,
@@ -74,63 +76,6 @@ const Wrapper = ({ children }) => (
     {children}
   </div>
 );
-
-const range = (len) => {
-  const arr = [];
-  for (let i = 0; i < len; i++) {
-    arr.push(i);
-  }
-  return arr;
-};
-
-const newPerson = () => {
-  const statusChance = Math.random();
-  return {
-    firstName: namor.generate({ words: 1, numbers: 0 }),
-    lastName: namor.generate({ words: 1, numbers: 0 }),
-    age: Math.floor(Math.random() * 30),
-    visits: Math.floor(Math.random() * 100),
-    progress: Math.floor(Math.random() * 100),
-    someone1: namor.generate({ words: 1, numbers: 0 }),
-    someone2: namor.generate({ words: 1, numbers: 0 }),
-    someone3: namor.generate({ words: 1, numbers: 0 }),
-    someone4: namor.generate({ words: 1, numbers: 0 }),
-    someone5: namor.generate({ words: 1, numbers: 0 }),
-    someone6: namor.generate({ words: 1, numbers: 0 }),
-    someone7: namor.generate({ words: 1, numbers: 0 }),
-    someone8: namor.generate({ words: 1, numbers: 0 }),
-    someone9: namor.generate({ words: 1, numbers: 0 }),
-    someone10: namor.generate({ words: 1, numbers: 0 }),
-    someone11: namor.generate({ words: 1, numbers: 0 }),
-    someone12: namor.generate({ words: 1, numbers: 0 }),
-    someone13: namor.generate({ words: 1, numbers: 0 }),
-    someone14: namor.generate({ words: 1, numbers: 0 }),
-    someone15: namor.generate({ words: 1, numbers: 0 }),
-    someone16: namor.generate({ words: 1, numbers: 0 }),
-    someone17: namor.generate({ words: 1, numbers: 0 }),
-    someone18: namor.generate({ words: 1, numbers: 0 }),
-    someone19: namor.generate({ words: 1, numbers: 0 }),
-    someone20: namor.generate({ words: 1, numbers: 0 }),
-    status:
-      statusChance > 0.66
-        ? 'relationship'
-        : statusChance > 0.33
-        ? 'complicated'
-        : 'single',
-  };
-};
-
-export const makeData = (...lens) => {
-  const makeDataLevel = (depth = 0) => {
-    const len = lens[depth];
-    return range(len).map(() => ({
-      ...newPerson(),
-      subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
-    }));
-  };
-
-  return makeDataLevel();
-};
 
 const defaultHeader = [
   {
@@ -891,19 +836,6 @@ NestedRows.story = {
   },
 };
 
-const newPersonWithTwoLines = () => {
-  return {
-    firstName: (
-      <>
-        <div>{namor.generate({ words: 1, numbers: 0 })}</div>
-        <div>{namor.generate({ words: 1, numbers: 0 })}</div>
-      </>
-    ),
-    lastName: namor.generate({ words: 1, numbers: 0 }),
-    age: Math.floor(Math.random() * 30),
-  };
-};
-
 const makeDataWithTwoLines = (length) =>
   range(length).map(() => newPersonWithTwoLines());
 
@@ -938,4 +870,71 @@ export const TopAlignment = () => {
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
+export const StickyActionsColumn = () => {
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader,
+      {
+        Header: '',
+        accessor: 'actions',
+        sticky: 'right',
+        width: 60,
+        isAction: true,
+      },
+    ],
+    []
+  );
+  const [data] = useState(makeData(10));
+  const [msg, setMsg] = useState('click action menu');
+  const onActionClick = (actionId, row) => {
+    const { original } = row;
+    setMsg(
+      `Clicked [${actionId}] on row: <${original.firstName} ${original.lastName}>`
+    );
+  };
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      rowActions: [
+        {
+          id: 'edit',
+          itemText: 'Edit',
+          onClick: onActionClick,
+        },
+        {
+          id: 'vote',
+          itemText: 'Vote',
+          onClick: onActionClick,
+          shouldHideMenuItem: (row) => row.original.age <= 18,
+        },
+        {
+          id: 'retire',
+          itemText: 'Retire',
+          onClick: onActionClick,
+          disabled: false,
+          shouldDisableMenuItem: (row) => row.original.age <= 60,
+        },
+        {
+          id: 'delete',
+          itemText: 'Delete',
+          hasDivider: true,
+          isDelete: true,
+          onClick: onActionClick,
+        },
+      ],
+    },
+    useStickyColumn,
+    useActionsColumn
+  );
+  return (
+    <Wrapper>
+      <h3>{msg}</h3>
+      <Datagrid datagridState={{ ...datagridState }} />
+      <p>More details documentation check the Notes section below</p>
+    </Wrapper>
+  );
 };

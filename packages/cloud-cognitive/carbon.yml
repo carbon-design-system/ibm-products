@@ -382,7 +382,7 @@ assets:
     tags:
       - system-feedback
   options-title:
-    name: Options title
+    name: Options tile
     status: stable
     type: pattern
     platform: web

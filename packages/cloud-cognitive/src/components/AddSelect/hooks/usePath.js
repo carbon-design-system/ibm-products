@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-const usePath = (itemsLabel) => {
+const usePath = (itemsLabel = '') => {
   const [path, setPath] = useState([
     {
       id: 'base_of_path',
-      title: itemsLabel || '',
+      title: itemsLabel,
     },
   ]);
 

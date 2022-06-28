@@ -14,7 +14,7 @@ const componentName = 'AddSelect';
 
 export let AddSelect = forwardRef(({ items, ...props }, ref) => {
   const blockClass = `${pkg.prefix}--add-select`;
-  const useNormalizedItems = !!items.entries.find((item) => item.children);
+  const useNormalizedItems = !!items?.entries.find((item) => item.children);
   const normalizedItems = useNormalizedItems ? normalize(items) : null;
   const globalFilterOpts =
     props.multi && props.globalFilters?.length
@@ -22,7 +22,7 @@ export let AddSelect = forwardRef(({ items, ...props }, ref) => {
       : null;
   const defaultModifiers =
     props.multi && items.modifiers
-      ? items.entries.map((item) => {
+      ? items?.entries.map((item) => {
           const modifierAttribute = items.modifiers.id;
           return {
             id: item.id,

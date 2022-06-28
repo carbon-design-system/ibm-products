@@ -132,7 +132,7 @@ AddSelectSidebar.propTypes = {
   closeIconDescription: PropTypes.string,
   displayMetalPanel: PropTypes.object,
   influencerTitle: PropTypes.string,
-  items: PropTypes.object,
+  items: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   metaPanelTitle: PropTypes.string,
   modifiers: PropTypes.object,
   multiSelection: PropTypes.array,

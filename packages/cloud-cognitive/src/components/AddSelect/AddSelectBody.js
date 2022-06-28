@@ -107,13 +107,10 @@ export let AddSelectBody = ({
   };
 
   const setShowBreadsCrumbs = () => {
-    if (searchTerm || globalFiltersApplied) {
+    if (searchTerm || globalFiltersApplied || !path || path.length === 0) {
       return false;
     }
-    if (path.length) {
-      return true;
-    }
-    return false;
+    return true;
   };
 
   const setShowTags = () => {

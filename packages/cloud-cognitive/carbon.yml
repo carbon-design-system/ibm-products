@@ -387,7 +387,7 @@ assets:
     type: pattern
     platform: web
     framework: react
-    thumbnailPath: './thumbnails/options-title.svg'
+    thumbnailPath: './thumbnails/options-tile.svg'
     demoLinks:
       - type: storybook
         name: Storybook

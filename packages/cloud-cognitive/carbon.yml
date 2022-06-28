@@ -35,77 +35,6 @@ assets:
     tags:
       - system-feedback
       - content-block
-  action-bar:
-    name: Action bar
-    status: stable
-    type: component
-    platform: web
-    framework: react
-    thumbnailPath: './thumbnails/action-bar.svg'
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-actionbar
-    tags:
-      - input-control
-  action-set:
-    name: Action set
-    status: stable
-    type: component
-    platform: web
-    framework: react
-    thumbnailPath: './thumbnails/action-set.svg'
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-actionset
-    tags:
-      - data-display
-  breadcrumb-with-overflow:
-    name: Breadcrumb with overflow
-    status: stable
-    type: component
-    platform: web
-    framework: react
-    thumbnailPath: './thumbnails/breadcrumb-with-overflow.svg'
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-breadcrumbwithoverflow
-    tags:
-      - structural-navigation
-      - contextual-navigation
-  button-menu:
-    name: Button menu
-    status: stable
-    type: component
-    platform: web
-    framework: react
-    thumbnailPath: './thumbnails/button-menu.svg'
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-buttonmenu
-    tags:
-      - input-control
-  button-set-with-overflow:
-    name: Button set with overflow
-    status: stable
-    type: component
-    platform: web
-    framework: react
-    thumbnailPath: './thumbnails/button-set-with-overflow.svg'
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-buttonsetwithoverflow
-    tags:
-      - input-control
   cascade:
     name: Cascade
     status: stable
@@ -120,20 +49,6 @@ assets:
         url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-cascade-cascade
     tags:
       - content-block
-  combo-button:
-    name: Combo button
-    status: stable
-    type: component
-    platform: web
-    framework: react
-    thumbnailPath: './thumbnails/combo-button.svg'
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-combobutton
-    tags:
-      - input-control
   create-full-page:
     name: Create full page
     status: stable
@@ -255,20 +170,6 @@ assets:
         url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-empty-state-emptystate
     tags:
       - content-element
-  example-component:
-    name: Example component
-    status: stable
-    type: component
-    platform: web
-    framework: react
-    thumbnailPath: './thumbnails/example-component.svg'
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-examplecomponent
-    tags:
-      - input-control
   export-modal:
     name: Export modal
     status: stable

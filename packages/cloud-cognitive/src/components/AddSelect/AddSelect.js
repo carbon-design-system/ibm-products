@@ -30,6 +30,7 @@ export let AddSelect = forwardRef(
 
       className,
       clearFiltersText,
+      closeIconDescription,
       columnInputPlaceholder,
       description,
       globalFilters,
@@ -43,7 +44,10 @@ export let AddSelect = forwardRef(
       influencerTitle,
       items,
       itemsLabel,
+      metaIconDescription,
+      metaPanelTitle,
       multi,
+      navIconDescription,
       noResultsDescription,
       noResultsTitle,
       noSelectionDescription,
@@ -75,8 +79,10 @@ export let AddSelect = forwardRef(
     const [flatItems, setFlatItems] = useState([]);
     const [globalFilterOpts, setGlobalFilterOpts] = useState([]);
     const [appliedGlobalFilters, setAppliedGlobalFilters] = useState({});
+    const [displayMetalPanel, setDisplayMetaPanel] = useState({});
     const { sortDirection, setSortDirection, sortAttribute, setSortAttribute } =
       useItemSort();
+    const [appliedModifiers, setAppliedModifiers] = useState([]);
 
     useEffect(() => {
       const { entries } = items;
@@ -89,6 +95,16 @@ export let AddSelect = forwardRef(
             flattenedItems
           );
           setGlobalFilterOpts(globalFilterValues);
+        }
+        if (items.modifiers) {
+          const modifiersToApply = flattenedItems.map((item) => {
+            const modifierAttribute = items.modifiers.id;
+            return {
+              id: item.id,
+              [modifierAttribute]: item[modifierAttribute],
+            };
+          });
+          setAppliedModifiers(modifiersToApply);
         }
         // multi select with nested data needs to be normalized
         if (entries.find((entry) => entry.children)) {
@@ -186,13 +202,16 @@ export let AddSelect = forwardRef(
     const itemsToDisplay = getDisplayItems();
 
     const commonListProps = {
+      metaIconDescription,
       multi,
       multiSelection,
+      navIconDescription,
       path,
       setMultiSelection,
       setPath,
       setSingleSelection,
       singleSelection,
+      setDisplayMetaPanel,
     };
 
     // handlers
@@ -205,7 +224,16 @@ export let AddSelect = forwardRef(
     };
 
     const submitHandler = () => {
-      onSubmit(multi ? multiSelection : singleSelection);
+      if (multi && appliedModifiers.length > 0) {
+        const selections = multiSelection.map((item) => {
+          return appliedModifiers.find((mod) => mod.id === item);
+        });
+        onSubmit(selections);
+      } else if (multi && appliedModifiers.length === 0) {
+        onSubmit(multiSelection);
+      } else {
+        onSubmit(singleSelection);
+      }
     };
 
     const classNames = cx(className, blockClass, {
@@ -236,13 +264,19 @@ export let AddSelect = forwardRef(
     };
 
     const sidebarProps = {
+      closeIconDescription,
       influencerTitle,
       items: flatItems,
+      metaPanelTitle,
       multiSelection,
       noSelectionDescription,
       noSelectionTitle,
       removeIconDescription,
       setMultiSelection,
+      displayMetalPanel,
+      setDisplayMetaPanel,
+      modifiers: items.modifiers,
+      appliedModifiers,
     };
 
     const setShowBreadsCrumbs = () => {
@@ -340,7 +374,9 @@ export let AddSelect = forwardRef(
               <AddSelectList
                 {...commonListProps}
                 filteredItems={itemsToDisplay}
-                modifiers={items?.modifiers}
+                modifiers={items.modifiers}
+                appliedModifiers={appliedModifiers}
+                setAppliedModifiers={setAppliedModifiers}
               />
             ) : (
               <div className={`${blockClass}__body`}>
@@ -376,6 +412,7 @@ export let AddSelect = forwardRef(
 AddSelect.propTypes = {
   className: PropTypes.string,
   clearFiltersText: PropTypes.string,
+  closeIconDescription: PropTypes.string,
   columnInputPlaceholder: PropTypes.string,
   description: PropTypes.string,
   globalFilters: PropTypes.arrayOf(
@@ -394,6 +431,7 @@ AddSelect.propTypes = {
   influencerTitle: PropTypes.string,
   items: PropTypes.shape({
     modifiers: PropTypes.shape({
+      id: PropTypes.string,
       label: PropTypes.string,
       options: PropTypes.array,
     }),
@@ -409,6 +447,16 @@ AddSelect.propTypes = {
         children: PropTypes.object,
         icon: PropTypes.object,
         id: PropTypes.string.isRequired,
+        meta: PropTypes.oneOfType([
+          PropTypes.arrayOf(
+            PropTypes.shape({
+              id: PropTypes.string,
+              title: PropTypes.string,
+              value: PropTypes.string,
+            })
+          ),
+          PropTypes.node,
+        ]),
         subtitle: PropTypes.string,
         title: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
@@ -416,7 +464,10 @@ AddSelect.propTypes = {
     ),
   }),
   itemsLabel: PropTypes.string,
+  metaIconDescription: PropTypes.string,
+  metaPanelTitle: PropTypes.string,
   multi: PropTypes.bool,
+  navIconDescription: PropTypes.string,
   noResultsDescription: PropTypes.string,
   noResultsTitle: PropTypes.string,
   noSelectionDescription: PropTypes.string,

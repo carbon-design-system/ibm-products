@@ -23,7 +23,7 @@ steps are needed:
 - the component SCSS should be included in
   /src/components/\_index-released-only.scss.
 - run the tests, recreating snapshots (using `-u`), and check in the updated
-  public CSS snapshot. NB it is sufficient to run `yarn jest styles -u` to
+  public CSS snapshot. NB it is sufficient to run `yarn test:c4p:snapshot` to
   complete the snapshot updates.
 
 `## Review for release`

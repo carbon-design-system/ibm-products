@@ -11,6 +11,9 @@ import { disableCenteredStories, patterns } from '../../../.storybook';
 
 import { ErrorPage } from '../..';
 
+import { InlineNotification, NotificationActionButton } from '../../';
+import { Grid } from 'carbon-components-react';
+
 const statusCodes = {
   403: 403,
   404: 404,
@@ -31,7 +34,28 @@ const props = () => ({
   ],
 });
 
-disableCenteredStories(storiesOf(patterns('ErrorPage'), module)).add(
-  'default',
-  () => <ErrorPage {...props()} />
-);
+disableCenteredStories(storiesOf(patterns('ErrorPage#legacy'), module))
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-http-errors-httperror403--with-all-props-set"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            View replacement
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="Pattern no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
+        title=""
+        hideCloseButton
+      />
+      <Grid>
+        <Story />
+      </Grid>
+    </>
+  ))
+  .add('default', () => <ErrorPage {...props()} />);

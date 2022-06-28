@@ -52,6 +52,7 @@ const defaultProps = {
     ],
   },
   itemsLabel: 'Categories',
+  navIconDescription: 'View children',
   noResultsTitle: 'No results',
   noResultsDescription: 'Try again',
   onCloseButtonText: 'Cancel',
@@ -62,7 +63,7 @@ const defaultProps = {
 };
 
 const Template = (args) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <>
       <SingleAddSelect {...args} open={open} onClose={() => setOpen(false)} />

@@ -31,6 +31,9 @@ import {
 
 import { labels } from './_mocks_';
 
+import { InlineNotification, NotificationActionButton } from '../../';
+import { Grid } from 'carbon-components-react';
+
 const { interactive01, text04 } = theme;
 
 const closeButtonLabel = 'Close';
@@ -63,7 +66,30 @@ const content = (
   </p>
 );
 
-disableCenteredStories(storiesOf(patterns('PanelV2'), module))
+disableCenteredStories(storiesOf(patterns('PanelV2#legacy'), module))
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-side-panel-sidepanel--slide-over"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            View replacement
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="Pattern no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
+        title=""
+        hideCloseButton
+      />
+      <Grid>
+        <Story />
+      </Grid>
+    </>
+  ))
   .addParameters({
     info: {
       // Reposition info button so that panel footer isn't covered:

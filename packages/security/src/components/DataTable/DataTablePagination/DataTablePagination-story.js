@@ -39,7 +39,9 @@ import {
   pageSize,
   page,
 } from '../_mocks_';
+import { Grid } from 'carbon-components-react';
 
+import { InlineNotification, NotificationActionButton } from '../../..';
 const label = 'Add new row';
 
 const render = ({
@@ -121,7 +123,30 @@ const dataTablePaginationProps = {
   totalItems: rows.length,
 };
 
-storiesOf(components('DataTablePagination'), module)
+storiesOf(components('DataTablePagination#legacy'), module)
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://react.carbondesignsystem.com/?path=/story/components-pagination--multiple-pagination-components"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            View replacement
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="Component no longer supported. The component will remain available, but plan to migrate to the component replacement."
+        title=""
+        hideCloseButton
+      />
+      <Grid>
+        <Story />
+      </Grid>
+    </>
+  ))
   .add('pagination data table', () => {
     DataTablePagination.__docgenInfo = {
       ...DataTablePagination.__docgenInfo,

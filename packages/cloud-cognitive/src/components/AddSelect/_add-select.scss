@@ -52,11 +52,11 @@
       color: $text-02;
     }
 
-    &-cell:hover .#{$block-class}__selections-dropdown {
+    &-cell:hover .#{$block-class}__selections-hidden-hover {
       visibility: visible;
     }
 
-    &-dropdown {
+    &-hidden-hover {
       visibility: hidden;
     }
 
@@ -64,7 +64,7 @@
       background: #e5e5e5;
     }
 
-    &-row-selected .#{$block-class}__selections-dropdown {
+    &-row-selected .#{$block-class}__selections-hidden-hover {
       visibility: visible;
     }
 
@@ -98,6 +98,12 @@
     &-cell-icon {
       margin-right: $spacing-03;
     }
+  }
+
+  .#{$block-class}__sub-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
   }
 
   // sidebar
@@ -163,7 +169,11 @@
     overflow-x: auto;
   }
 
-  .#{$block-class}__columns .#{$block-class}__selections-cell {
+  // table override
+  .#{$block-class}
+    .#{$block-class}__columns
+    .#{$carbon-prefix}--structured-list-td {
+    height: 0;
     // stylelint-disable-next-line
     padding: 0 !important;
   }
@@ -211,6 +221,7 @@
     width: 100%;
     max-width: 40rem;
     background: $ui-01;
+    box-shadow: 0 6px 6px 0 rgba(0, 0, 0, 0.2);
     transform: translate(0, 100%);
 
     &-search {
@@ -228,6 +239,13 @@
       grid-gap: $spacing-05 2rem;
       grid-template-columns: repeat(2, 1fr);
     }
+
+    &-applied {
+      display: flex;
+      align-items: center;
+      padding: $spacing-03;
+      background: $ui-01;
+    }
   }
 
   .#{$block-class}__global-filter-button-set
@@ -239,6 +257,39 @@
   button.#{$block-class}__global-filter-toggle {
     border-bottom-color: $ui-04;
     background: $field-01;
+
+    &--open {
+      border-bottom: $ui-01;
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  // meta panel
+  .#{$block-class}__meta-panel {
+    padding: $spacing-05;
+
+    &-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: $spacing-05;
+    }
+
+    &-entry {
+      margin-bottom: $spacing-05;
+    }
+  }
+
+  .#{$block-class}__meta-panel p.#{$block-class}__meta-panel-title {
+    @include carbon--type-style('productive-heading-03');
+  }
+
+  .#{$block-class}__meta-panel p.#{$block-class}__meta-panel-entry-title {
+    @include carbon--type-style('productive-heading-01');
+  }
+
+  .#{$block-class}__meta-panel p.#{$block-class}__meta-panel-entry-body {
+    @include carbon--type-style('body-short-01');
   }
 
   // overrides
@@ -248,7 +299,7 @@
   }
 
   // the influencer sidebar needs to be even with the buttons
-  .#{$block-class} .#{$tearsheet-class} .#{$tearsheet-class}__influencer {
+  .#{$block-class} .#{$tearsheet-class}__influencer {
     max-width: 29rem;
     flex: 0 0 50%;
   }
@@ -257,7 +308,7 @@
     color: $text-02;
   }
 
-  .#{$block-class} .#{$tearsheet-class} .#{$tearsheet-class}__content {
+  .#{$block-class} .#{$tearsheet-class}__content {
     display: flex;
     flex-direction: column;
   }
@@ -274,7 +325,9 @@
   }
 
   .#{$block-class} .#{$carbon-prefix}--structured-list-td {
-    padding-bottom: $spacing-05;
+    height: 4rem;
+    padding: $spacing-05;
+    vertical-align: middle;
   }
 
   .#{$block-class} .#{$carbon-prefix}--radio-button__appearance {

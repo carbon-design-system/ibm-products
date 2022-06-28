@@ -22,12 +22,39 @@ import {
   profileWithAccountLongName,
 } from './_mocks_';
 
+import { InlineNotification, NotificationActionButton } from '../../';
+import { Grid } from 'carbon-components-react';
+
 const headerProps = {
   labels,
   links,
 };
 
-disableCenteredStories(storiesOf(patterns('Header'), module))
+disableCenteredStories(storiesOf(patterns('Header#legacy'), module))
+  .addDecorator((Story) => (
+    <>
+      <Grid>
+        <Story />
+      </Grid>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://react.carbondesignsystem.com/?path=/story/components-ui-shell--header-base-w-actions"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            View replacement
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="Pattern no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
+        title=""
+        hideCloseButton
+        style={{ display: 'block' }}
+      />
+    </>
+  ))
   .add('default', () => <Header {...headerProps} />, {
     info: {
       text: `

@@ -7,10 +7,10 @@
 
 import {
   baseFontSize,
-  sizeXSmall as compact,
-  sizeSmall as standard,
-  sizeMedium as medium,
-  sizeLarge as large,
+  sizeXSmall as xs,
+  sizeSmall as sm,
+  sizeMedium as md,
+  sizeLarge as lg,
 } from '@carbon/layout';
 
 const getSizeInPixels = (carbonSize) =>
@@ -18,15 +18,15 @@ const getSizeInPixels = (carbonSize) =>
 
 export const getCellSize = (cellSize) => {
   switch (cellSize) {
-    case 'compact':
-      return getSizeInPixels(compact);
-    case 'standard':
-      return getSizeInPixels(standard);
-    case 'medium':
-      return getSizeInPixels(medium);
-    case 'large':
-      return getSizeInPixels(large);
+    case 'xs':
+      return getSizeInPixels(xs);
+    case 'sm':
+      return getSizeInPixels(sm);
+    case 'md':
+      return getSizeInPixels(md);
+    case 'lg':
+      return getSizeInPixels(lg);
     default:
-      return getSizeInPixels(standard);
+      return getSizeInPixels(sm);
   }
 };

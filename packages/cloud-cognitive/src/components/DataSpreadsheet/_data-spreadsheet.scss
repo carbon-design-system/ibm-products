@@ -12,6 +12,10 @@
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin set-header-borders {
+  border-right: 1px solid $active-ui;
+  border-bottom: 1px solid $active-ui;
+}
+@mixin set-active-header-borders {
   border-right: 1px solid $text-03;
   border-bottom: 1px solid $text-03;
 }
@@ -81,7 +85,13 @@
       }
     }
     .#{$block-class}__th--select-all {
-      min-width: calc(#{$spacing-10} - #{$spacing-02});
+      width: $spacing-10;
+    }
+    .#{$block-class}__td-th--cell-container,
+    .#{$block-class}__select-all-cell-container {
+      position: sticky;
+      z-index: 4;
+      left: 0;
     }
     .#{$block-class}__td-th.#{$block-class}__td {
       @include carbon--font-weight('semibold');
@@ -165,6 +175,7 @@
 
       &[data-active-row-index='header'],
       &[data-active-column-index='header'] {
+        z-index: 4;
         background-color: transparent;
       }
 
@@ -190,10 +201,43 @@
         content: '';
         opacity: 0.2;
       }
+      &.#{$block-class}__selection-area--element-cloned {
+        z-index: 4;
+
+        &::before {
+          background-color: $ui-05;
+          opacity: 0.25;
+        }
+      }
+    }
+    .#{$block-class}__reorder-indicator-line {
+      position: absolute;
+      z-index: 4;
+      width: $spacing-01;
+      background-color: $interactive-01;
+      pointer-events: none;
     }
     .#{$block-class}__th--active-header,
     .#{$block-class}__td-th--active-header.#{$block-class}__td {
+      @include set-active-header-borders();
+
       background-color: $hover-selected-ui;
+    }
+    .#{$block-class}__th--selected-header,
+    .#{$block-class}__td-th--selected-header.#{$block-class}__td {
+      background-color: $inverse-02;
+      color: $inverse-01;
+
+      &:focus,
+      &:hover {
+        background-color: $inverse-02;
+      }
+    }
+    .#{$block-class}__th--selected-header.#{$block-class}__th {
+      cursor: grab;
+    }
+    .#{$block-class}__th--selected-header-reorder-active.#{$block-class}__th {
+      cursor: grabbing;
     }
     .#{$block-class}__list--container {
       overscroll-behavior: none;

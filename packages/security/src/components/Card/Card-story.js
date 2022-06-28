@@ -12,8 +12,11 @@ import React from 'react';
 import { components } from '../../../.storybook';
 
 import { Card, CardSkeleton, SearchBar, StatusIcon } from '../..';
+import { Grid } from 'carbon-components-react';
 
 import { image, label, link, tag, text as bodyText, title } from './_mocks_';
+
+import { InlineNotification, NotificationActionButton } from '../../';
 
 const footerDescription = 'Status';
 const headerPrefix = `header.`;
@@ -42,7 +45,30 @@ const props = () => ({
 
 const searchLabelText = 'Search';
 
-storiesOf(components('Card'), module)
+storiesOf(components('Card#legacy'), module)
+  .addDecorator((Story) => (
+    <>
+      <InlineNotification
+        className="page-layouts__banner"
+        actions={
+          <NotificationActionButton
+            href="https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-cards-productivecard--default"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            View replacement
+          </NotificationActionButton>
+        }
+        kind="info"
+        subtitle="Component no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement."
+        title=""
+        hideCloseButton
+      />
+      <Grid>
+        <Story />
+      </Grid>
+    </>
+  ))
   .add('Default', () => <Card />)
   .add('Content', () => (
     <Card

@@ -17,6 +17,8 @@ import { Button } from 'carbon-components-react';
 // import { action } from '@storybook/addon-actions';
 import image from '../UserProfileImage/headshot.png'; // cspell:disable-line
 import { Group24, Document16 } from '@carbon/icons-react';
+import { pkg } from '../../settings';
+const blockClass = `${pkg.prefix}--add-select__meta-panel`;
 
 export default {
   title: getStoryTitle(MultiAddSelect.displayName),
@@ -31,6 +33,8 @@ export default {
 
 const defaultProps = {
   className: 'placeholder-class',
+  clearFiltersText: 'Clear filters',
+  closeIconDescription: 'Close',
   columnInputPlaceholder: 'Find',
   description: 'Select business terms from the list',
   globalSearchLabel: 'test input label',
@@ -43,11 +47,31 @@ const defaultProps = {
         value: '1',
         title: 'item 1',
         subtitle: 'item 1 subtitle',
+        meta: (
+          <div className={`${blockClass}-entry`}>
+            <p className={`${blockClass}-entry-title`}>html support</p>
+            <p className={`${blockClass}-entry-body`}>
+              also supports nodes in the meta attribute
+            </p>
+          </div>
+        ),
       },
       {
         id: '2',
         value: '2',
         title: 'item 2',
+        meta: [
+          {
+            id: 'description',
+            title: 'description',
+            value: 'description text',
+          },
+          {
+            id: 'secondary_category',
+            title: 'secondary category',
+            value: 'knowledge accelerator',
+          },
+        ],
       },
       {
         id: '3',
@@ -58,6 +82,9 @@ const defaultProps = {
     ],
   },
   itemsLabel: 'Business terms',
+  metaIconDescription: 'View meta information',
+  metaPanelTitle: 'Personal information',
+  navIconDescription: 'View children',
   noResultsTitle: 'No results',
   noSelectionDescription:
     'Select a term to include the full set of the governance artifacts it contains in the governance scope.',
@@ -72,7 +99,7 @@ const defaultProps = {
 };
 
 const Template = (args) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   return (
     <>
       <MultiAddSelect {...args} open={open} onClose={() => setOpen(false)} />
@@ -108,6 +135,7 @@ export const WithHierarchy = prepareStory(Template, {
     globalFiltersPlaceholderText: 'Choose an option',
     globalFiltersPrimaryButtonText: 'Apply',
     globalFiltersSecondaryButtonText: 'Reset',
+    globalSortBy: ['title'],
     items: {
       sortBy: ['title'],
       entries: [
@@ -162,6 +190,7 @@ export const WithModifiers = prepareStory(Template, {
     ...defaultProps,
     items: {
       modifiers: {
+        id: 'role',
         label: 'Role',
         options: ['editor', 'viewer', 'admin'],
       },
@@ -171,17 +200,20 @@ export const WithModifiers = prepareStory(Template, {
           value: '1',
           title: 'item 1',
           subtitle: 'item 1 subtitle',
+          role: 'editor',
         },
         {
           id: '2',
           value: '2',
           title: 'item 2',
+          role: 'editor',
         },
         {
           id: '3',
           value: '3',
           title: 'item 3',
           subtitle: 'item 3 subtitle',
+          role: 'admin',
         },
       ],
     },

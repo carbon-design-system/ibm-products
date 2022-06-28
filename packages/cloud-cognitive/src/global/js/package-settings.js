@@ -32,6 +32,7 @@ const defaults = {
     HTTPError404: true,
     HTTPErrorOther: true,
     ImportModal: true,
+    InlineEdit: true,
     NotificationsPanel: true,
     NoDataEmptyState: true,
     NoTagsEmptyState: true,
@@ -58,9 +59,9 @@ const defaults = {
     ToolbarButton: false,
     ToolbarGroup: false,
     WebTerminal: false,
+    WebTerminalContentWrapper: false,
     EditSidePanel: false,
     CancelableTextEdit: false,
-    InlineEdit: false,
     DataSpreadsheet: false,
     Datagrid: false,
     /* new component flags here - comment used by generate CLI */

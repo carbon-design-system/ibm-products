@@ -1423,6 +1423,36 @@ Map {
               ],
               "type": "oneOfType",
             },
+            "tabbableOptions": Object {
+              "args": Array [
+                Object {
+                  "displayCheck": Object {
+                    "args": Array [
+                      Array [
+                        "full",
+                        "non-zero-area",
+                        "none",
+                      ],
+                    ],
+                    "type": "oneOf",
+                  },
+                  "getShadowRoot": Object {
+                    "args": Array [
+                      Array [
+                        Object {
+                          "type": "bool",
+                        },
+                        Object {
+                          "type": "func",
+                        },
+                      ],
+                    ],
+                    "type": "oneOfType",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
           },
         ],
         "type": "shape",
@@ -7212,6 +7242,36 @@ Map {
               ],
               "type": "oneOfType",
             },
+            "tabbableOptions": Object {
+              "args": Array [
+                Object {
+                  "displayCheck": Object {
+                    "args": Array [
+                      Array [
+                        "full",
+                        "non-zero-area",
+                        "none",
+                      ],
+                    ],
+                    "type": "oneOf",
+                  },
+                  "getShadowRoot": Object {
+                    "args": Array [
+                      Array [
+                        Object {
+                          "type": "bool",
+                        },
+                        Object {
+                          "type": "func",
+                        },
+                      ],
+                    ],
+                    "type": "oneOfType",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
           },
         ],
         "type": "shape",
@@ -7503,6 +7563,36 @@ Map {
                 ],
               ],
               "type": "oneOfType",
+            },
+            "tabbableOptions": Object {
+              "args": Array [
+                Object {
+                  "displayCheck": Object {
+                    "args": Array [
+                      Array [
+                        "full",
+                        "non-zero-area",
+                        "none",
+                      ],
+                    ],
+                    "type": "oneOf",
+                  },
+                  "getShadowRoot": Object {
+                    "args": Array [
+                      Array [
+                        Object {
+                          "type": "bool",
+                        },
+                        Object {
+                          "type": "func",
+                        },
+                      ],
+                    ],
+                    "type": "oneOfType",
+                  },
+                },
+              ],
+              "type": "shape",
             },
           },
         ],
@@ -16187,6 +16277,16 @@ Map {
           Array [
             "small",
             "big",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "status": Object {
+        "args": Array [
+          Array [
+            "active",
+            "finished",
+            "error",
           ],
         ],
         "type": "oneOf",

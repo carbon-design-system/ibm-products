@@ -11,10 +11,12 @@ import PropTypes from 'prop-types';
 import { Draggable16 } from '@carbon/icons-react';
 import { useDrag, useDrop } from 'react-dnd';
 import cx from 'classnames';
+import { pkg } from '../../../settings';
 
 const { useEffect, useRef, useState } = React;
+const blockClass = `${pkg.prefix}--datagrid`;
 
-const DRAG_TYPE = 'wkc-shared-ui-draggable-element';
+const DRAG_TYPE = `${blockClass}__shared-ui-draggable-element`;
 
 const DraggableElement = ({
   id,
@@ -86,7 +88,7 @@ const DraggableElement = ({
           {
             disabled,
           },
-          'wkc-draggable-handleStyle'
+          `${blockClass}__draggable-handleStyle`
         )}
       >
         <Draggable16 />
@@ -98,12 +100,12 @@ const DraggableElement = ({
     <li
       className={cx(
         {
-          'wkc-draggable-handleHolder-isOver': isOver && !disabled,
+          [`${blockClass}__draggable-handleHolder-isOver`]: isOver && !disabled,
         },
         {
-          'wkc-draggable-handleHolder--grabbed': isGrabbed,
+          [`${blockClass}__wkc-draggable-handleHolder--grabbed`]: isGrabbed,
         },
-        'wkc-draggable-handleHolder'
+        `${blockClass}__draggable-handleHolder`
       )}
       ref={ref}
       aria-selected={isFocused}
@@ -136,9 +138,14 @@ const DraggableElement = ({
         setIsFocusedOnItem(e.currentTarget === e.target);
       }}
     >
-      <span className="wkc-shared-ui--assistive-text">{ariaLabel}</span>
+      <span className={`${blockClass}__shared-ui--assistive-text`}>
+        {ariaLabel}
+      </span>
       {isDragging && !isOver ? (
-        <div ref={preview} className="wkc-draggable-handleHolder-droppable">
+        <div
+          ref={preview}
+          className="${blockClass}__draggable-handleHolder-droppable"
+        >
           {content}
         </div>
       ) : (
@@ -147,9 +154,9 @@ const DraggableElement = ({
           aria-hidden={isFocused && isFocusedOnItem} // if focus on li, hide the children from aria
           className={cx(
             {
-              'wkc-draggable-handleStyle': !disabled,
+              [`${blockClass}__draggable-handleStyle`]: !disabled,
             },
-            'wkc-draggable-handleHolder-droppable'
+            [`${blockClass}__draggable-handleHolder-droppable`]
           )}
         >
           {(!isOver || disabled) && content}

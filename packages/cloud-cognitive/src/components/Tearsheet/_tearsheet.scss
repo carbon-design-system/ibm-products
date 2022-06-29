@@ -151,6 +151,7 @@
 
     &.#{$block-class}--narrow .#{$block-class}__header {
       padding: $spacing-05;
+      border-bottom: 1px solid $ui-03;
       margin: 0;
     }
 
@@ -204,6 +205,10 @@
     }
 
     &.#{$block-class}--wide .#{$block-class}__header-description {
+      margin-top: $spacing-03;
+    }
+
+    &.#{$block-class}--narrow .#{$block-class}__header-description {
       margin-top: $spacing-03;
     }
 

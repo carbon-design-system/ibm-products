@@ -1,6 +1,7 @@
 name: Update packages # Updates dependencies every Friday
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 4 1,15 * *' # Updates will happen every 1st/15th of the month
 
@@ -17,7 +18,9 @@ jobs:
       - name: Update Carbon packages
         run: |
           yarn upgrade:carbon
-          YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn
+          yarn
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
 
       - name: Create PR
         id: create-pr
@@ -78,7 +81,9 @@ jobs:
         run: |
           yarn upgrade:automatic
           rm yarn.lock
-          YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn
+          yarn
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
 
       - name: Create PR
         id: create-pr

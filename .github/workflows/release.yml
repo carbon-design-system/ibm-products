@@ -3,7 +3,7 @@ name: Release # Builds and releases updated packages every Tuesday
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 4 * * TUE'
+    - cron: '0 4 * * TUE' # Release every Tuesday at 4am EST
 
 jobs:
   Release:
@@ -46,7 +46,9 @@ jobs:
 
       # Run yarn again after renaming package, required after move to yarn berry
       - name: Install after rename
-        run: YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn
+        run: yarn
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
       
       - name: Commit for legacy package
         run: |

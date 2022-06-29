@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.20.3...@carbon/ibm-products@1.21.0) (2022-06-28)
+
+
+### Features
+
+* **WebTerminal:** Changes width to 640px ([#2066](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2066)) ([b741316](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b741316b74dd8be0af2f4cfc61ad28c0a672e46b))
+
+
+
+
+
+## [1.20.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.20.2...@carbon/ibm-products@1.20.3) (2022-06-21)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
 ## [1.20.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.20.1...@carbon/ibm-products@1.20.2) (2022-06-15)
 
 

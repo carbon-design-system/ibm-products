@@ -12,7 +12,7 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '../../global/styles/project-settings' as *;
 
-$web-terminal-width: 36.5rem;
+$web-terminal-width: 40rem; // 640px
 $block-class: #{$pkg-prefix}--web-terminal;
 
 @keyframes web-terminal-entrance {

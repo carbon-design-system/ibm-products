@@ -9,8 +9,8 @@
 import React, { useState, useEffect } from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
-import { makeData, range, newPersonWithTwoLines } from './utils/makeData';
 import { useColumnOrder } from 'react-table';
+import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
 
 import {
   getStoryTitle,

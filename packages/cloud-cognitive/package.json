@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "1.20.2",
+  "version": "1.21.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",

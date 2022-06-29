@@ -9,12 +9,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { ProductiveCard as CCProductiveCard } from '../../../../../cloud-cognitive/src';
-import { TrashCan16, Edit16 } from '@carbon/icons-react';
+import { TrashCan, Edit } from '@carbon/icons-react';
 import { StatusIcon } from '../../../../../cloud-cognitive/src';
-import { usePrefix } from '@carbon/react';
+import { Column, Grid } from '@carbon/react';
 
 const ProductiveCard = (props) => {
-  const carbonPrefix = usePrefix();
   const kinds = [
     { type: 'fatal', label: 'Fatal' },
     { type: 'critical', label: 'Critical' },
@@ -48,35 +47,19 @@ const ProductiveCard = (props) => {
     },
     {
       id: '2',
-      icon: TrashCan16,
-      //onClick: action,
-      //onKeyDown: action,
+      icon: (props) => <TrashCan size={16} {...props} />,
       iconDescription: 'Delete',
     },
     {
       id: '3',
-      icon: Edit16,
+      icon: (props) => <Edit size={16} {...props} />,
       onClick: () => {
         props.actions.setSidePanelOpen(true);
         props.actions.setCardToEdit(props.index);
       },
-      //onKeyDown: action,
       iconDescription: 'Edit',
     },
   ];
-  // const actions = {
-  //     "openSidePanel" : () => props.actions.setSidePanelOpen(true),
-  //     "openNarrowTearsheet": () => props.actions.setNarrowTearsheetOpen(true),
-  //     "openWideTearsheet": () => props.actions.setWideTearsheetOpen(true),
-  //     "openTester" : () => {
-  //         props.actions.setSidePanelOpen(true);
-  //         console.log('tester', props.data[props.index].config);
-  //         props.actions.setComponentConfig({ ...props.config, "sidePanel" : {
-  //             title: props.data[props.index].title,
-  //             subtitle: props.data[props.index].subtitle
-  //         }})
-  //     }
-  // }
 
   return (
     <CCProductiveCard
@@ -88,22 +71,18 @@ const ProductiveCard = (props) => {
       //primaryButtonText={ props.data[props.index].primaryButtonText ? props.data[props.index].primaryButtonText : "Button action" }
       title={props.data.topic.name}
     >
-      <div className={`${carbonPrefix}--row`}>
-        <div className={`${carbonPrefix}--col-lg-6`}>Partitions</div>
-        <div className={`${carbonPrefix}--col-lg-6`}>
-          {props.data.partitions}
-        </div>
-      </div>
-      <div className={`${carbonPrefix}--row`}>
-        <div className={`${carbonPrefix}--col-lg-6`}>Replicas</div>
-        <div className={`${carbonPrefix}--col-lg-6`}>{props.data.replicas}</div>
-      </div>
-      <div className={`${carbonPrefix}--row`}>
-        <div className={`${carbonPrefix}--col-lg-6`}>Message Retention</div>
-        <div className={`${carbonPrefix}--col-lg-6`}>
-          {props.data.retention}
-        </div>
-      </div>
+      <Grid>
+        <Column lg={2}>Partitions</Column>
+        <Column lg={2}>{props.data.partitions}</Column>
+      </Grid>
+      <Grid>
+        <Column lg={2}>Replicas</Column>
+        <Column lg={2}>{props.data.replicas}</Column>
+      </Grid>
+      <Grid>
+        <Column lg={2}>Message Retention</Column>
+        <Column lg={2}>{props.data.retention}</Column>
+      </Grid>
     </CCProductiveCard>
   );
 };

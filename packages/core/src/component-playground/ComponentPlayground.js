@@ -17,11 +17,9 @@ import {
   TearsheetNarrow,
   TearsheetWide,
 } from './components';
-import { usePrefix } from '@carbon/react';
-//import { CardData } from './data';
+import { Column } from '@carbon/react';
 
 const App = () => {
-  const carbonPrefix = usePrefix();
   const [cards, setCards] = useState([]);
   const [sidePanelOpen, setSidePanelOpen] = useState(false);
   const [cardToEdit, setCardToEdit] = useState();
@@ -56,10 +54,6 @@ const App = () => {
     setCardToEdit,
   };
   const initialCardsToDisplay = 21;
-
-  // useEffect(() => {
-  //   console.log('updated', cardToEdit)
-  // }, [cardToEdit]);
 
   useEffect(() => {
     let tmpCards = [];
@@ -118,32 +112,28 @@ const App = () => {
         setIsOpen={setWideTearsheetOpen}
       />
 
-      <div className={`${carbonPrefix}--grid card-story`}>
-        <Cascade>
-          {cards.map((card, index) => {
-            // console.log('card info', card);
-            return (
-              <div
-                key={card.topic.name}
-                className={`${carbonPrefix}--col-lg-4`}
-                style={{
-                  // stylelint-disable-next-line carbon/layout-token-use
-                  marginTop: '36px',
-                }}
-              >
-                {/* <Card data={CardData} actions={actions} config={componentConfig} index={index + 1} /> */}
-                <ProductiveCard
-                  data={cards[index]}
-                  index={index}
-                  cards={cards}
-                  actions={actions}
-                  config={componentConfig}
-                />
-              </div>
-            );
-          })}
-        </Cascade>
-      </div>
+      <Cascade grid>
+        {cards.map((card, index) => {
+          return (
+            <Column
+              key={card.topic.name}
+              lg={4}
+              style={{
+                // stylelint-disable-next-line carbon/layout-token-use
+                marginTop: '36px',
+              }}
+            >
+              <ProductiveCard
+                data={cards[index]}
+                index={index}
+                cards={cards}
+                actions={actions}
+                config={componentConfig}
+              />
+            </Column>
+          );
+        })}
+      </Cascade>
     </div>
   );
 };

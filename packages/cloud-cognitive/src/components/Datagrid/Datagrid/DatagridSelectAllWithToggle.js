@@ -8,8 +8,11 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import InlineCheckbox from 'carbon-components-react/lib/components/InlineCheckbox';
-import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
+import {
+  OverflowMenu,
+  OverflowMenuItem,
+  Checkbox,
+} from 'carbon-components-react';
 import { CaretDown16 } from '@carbon/icons-react';
 import { pkg } from '../../../settings';
 // cspell:words columnheader
@@ -54,7 +57,7 @@ const SelectAllWithToggle = ({
       className={`${blockClass}__select-all-toggle-on`}
     >
       <span>
-        <InlineCheckbox
+        <Checkbox
           {...selectProps}
           name={`${tableId}-select-all-checkbox-name`}
           onClick={(e) => {

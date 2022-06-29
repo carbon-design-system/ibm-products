@@ -47,6 +47,7 @@ export let AddSelect = forwardRef(
       metaIconDescription,
       metaPanelTitle,
       multi,
+      navIconDescription,
       noResultsDescription,
       noResultsTitle,
       noSelectionDescription,
@@ -81,6 +82,7 @@ export let AddSelect = forwardRef(
     const [displayMetalPanel, setDisplayMetaPanel] = useState({});
     const { sortDirection, setSortDirection, sortAttribute, setSortAttribute } =
       useItemSort();
+    const [appliedModifiers, setAppliedModifiers] = useState([]);
 
     useEffect(() => {
       const { entries } = items;
@@ -93,6 +95,16 @@ export let AddSelect = forwardRef(
             flattenedItems
           );
           setGlobalFilterOpts(globalFilterValues);
+        }
+        if (items.modifiers) {
+          const modifiersToApply = flattenedItems.map((item) => {
+            const modifierAttribute = items.modifiers.id;
+            return {
+              id: item.id,
+              [modifierAttribute]: item[modifierAttribute],
+            };
+          });
+          setAppliedModifiers(modifiersToApply);
         }
         // multi select with nested data needs to be normalized
         if (entries.find((entry) => entry.children)) {
@@ -193,6 +205,7 @@ export let AddSelect = forwardRef(
       metaIconDescription,
       multi,
       multiSelection,
+      navIconDescription,
       path,
       setMultiSelection,
       setPath,
@@ -211,7 +224,16 @@ export let AddSelect = forwardRef(
     };
 
     const submitHandler = () => {
-      onSubmit(multi ? multiSelection : singleSelection);
+      if (multi && appliedModifiers.length > 0) {
+        const selections = multiSelection.map((item) => {
+          return appliedModifiers.find((mod) => mod.id === item);
+        });
+        onSubmit(selections);
+      } else if (multi && appliedModifiers.length === 0) {
+        onSubmit(multiSelection);
+      } else {
+        onSubmit(singleSelection);
+      }
     };
 
     const classNames = cx(className, blockClass, {
@@ -253,6 +275,8 @@ export let AddSelect = forwardRef(
       setMultiSelection,
       displayMetalPanel,
       setDisplayMetaPanel,
+      modifiers: items.modifiers,
+      appliedModifiers,
     };
 
     const setShowBreadsCrumbs = () => {
@@ -350,7 +374,9 @@ export let AddSelect = forwardRef(
               <AddSelectList
                 {...commonListProps}
                 filteredItems={itemsToDisplay}
-                modifiers={items?.modifiers}
+                modifiers={items.modifiers}
+                appliedModifiers={appliedModifiers}
+                setAppliedModifiers={setAppliedModifiers}
               />
             ) : (
               <div className={`${blockClass}__body`}>
@@ -405,6 +431,7 @@ AddSelect.propTypes = {
   influencerTitle: PropTypes.string,
   items: PropTypes.shape({
     modifiers: PropTypes.shape({
+      id: PropTypes.string,
       label: PropTypes.string,
       options: PropTypes.array,
     }),
@@ -440,6 +467,7 @@ AddSelect.propTypes = {
   metaIconDescription: PropTypes.string,
   metaPanelTitle: PropTypes.string,
   multi: PropTypes.bool,
+  navIconDescription: PropTypes.string,
   noResultsDescription: PropTypes.string,
   noResultsTitle: PropTypes.string,
   noSelectionDescription: PropTypes.string,

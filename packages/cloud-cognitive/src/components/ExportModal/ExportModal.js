@@ -78,7 +78,7 @@ export let ExportModal = forwardRef(
     useEffect(() => {
       setName(filename);
       setExtension(preformattedExtensions?.[0]?.extension);
-    }, [filename, preformattedExtensions]);
+    }, [filename, preformattedExtensions, open]);
 
     const onNameChangeHandler = (evt) => {
       setName(evt.target.value);

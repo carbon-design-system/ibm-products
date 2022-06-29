@@ -112,7 +112,7 @@ assets:
       - input-control
   data-spreadsheet:
     name: Data spreadsheet
-    status: stable
+    status: experimental
     type: pattern
     platform: web
     framework: react
@@ -127,7 +127,7 @@ assets:
       - data-display
   data-grid:
     name: Data grid
-    status: stable
+    status: experimental
     type: pattern
     platform: web
     framework: react
@@ -143,7 +143,7 @@ assets:
       - data-display
   edit-side-panel:
     name: Edit side panel
-    status: stable
+    status: experimental
     type: pattern
     platform: web
     framework: react
@@ -249,7 +249,7 @@ assets:
       - input-control
   modified-tabs:
     name: Modified tabs
-    status: stable
+    status: experimental
     type: component
     platform: web
     framework: react
@@ -263,7 +263,7 @@ assets:
       - input-control
   multi-add-select:
     name: Multi add select
-    status: stable
+    status: experimental
     type: pattern
     platform: web
     framework: react
@@ -382,7 +382,7 @@ assets:
       - form
   single-add-select:
     name: Single add select
-    status: stable
+    status: experimental
     type: pattern
     platform: web
     framework: react
@@ -440,7 +440,7 @@ assets:
       - form
   toolbar:
     name: Toolbar
-    status: stable
+    status: experimental
     type: component
     platform: web
     framework: react
@@ -468,7 +468,7 @@ assets:
       - media
   web-terminal:
     name: Web terminal
-    status: stable
+    status: experimental
     type: pattern
     platform: web
     framework: react

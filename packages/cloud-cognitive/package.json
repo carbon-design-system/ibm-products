@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "1.18.2",
+  "version": "1.21.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -60,7 +60,7 @@
     "fs-extra": "^10.1.0",
     "glob": "^8.0.3",
     "jest": "^28.1.0",
-    "jest-config-ibm-cloud-cognitive": "^0.23.19",
+    "jest-config-ibm-cloud-cognitive": "^0.24.0",
     "jest-environment-jsdom": "^28.1.0",
     "namor": "^1.1.2",
     "npm-check-updates": "^12.5.11",

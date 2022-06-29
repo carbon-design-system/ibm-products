@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config-ibm-cloud-cognitive@0.23.19...jest-config-ibm-cloud-cognitive@0.24.0) (2022-05-31)
+
+
+### Features
+
+* **cloud-cognitive:** log jest coverage to terminal ([#2003](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2003)) ([4cc79fb](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4cc79fb06faa1869c8471272806ddb5e44ec76ea))
+
+
+
+
+
 ## [0.23.19](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/jest-config-ibm-cloud-cognitive@0.23.18...jest-config-ibm-cloud-cognitive@0.23.19) (2022-05-17)
 
 **Note:** Version bump only for package jest-config-ibm-cloud-cognitive

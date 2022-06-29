@@ -38,10 +38,8 @@ import {
   useColumnCenterAlign,
 } from '.';
 
-// import useColumnCenterAlign from './useColumnCenterAlign';
-
 import {
-  /*StickyActionsColumn,*/ CustomizeColumnStory,
+  CustomizeColumnStory,
   RowSizeDropdownStory,
   SelectAllWitHToggle,
   LeftPanelStory,

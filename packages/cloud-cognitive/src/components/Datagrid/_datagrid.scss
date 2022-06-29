@@ -9,18 +9,6 @@
 @import '../../global/styles/project-settings';
 @import '../../global/styles/mixins';
 
-@import './styles/datagrid';
-@import './styles/useNestedRows';
-//@import './styles/useNestedTable';
-@import './styles/useSortableColumns';
-@import './styles/useColumnRightAlign';
-@import './styles/useColumnCenterAlign';
-@import './styles/useStickyColumn';
-@import './styles/useActionsColumn';
-@import './styles/addons/CustomizeColumnsModal';
-@import './styles/addons/RowSizeDropdown';
-@import './styles/useSelectAllToggle';
-
 // Other Carbon settings.
 // TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
 

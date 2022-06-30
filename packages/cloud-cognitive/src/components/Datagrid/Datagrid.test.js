@@ -10,7 +10,7 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
-import { makeData } from './Datagrid.stories';
+import { makeData } from './utils/makeData';
 
 import { expectWarn } from '../../global/js/utils/test-helper';
 import { Datagrid } from '.';

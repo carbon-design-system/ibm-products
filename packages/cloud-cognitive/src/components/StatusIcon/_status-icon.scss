@@ -113,6 +113,8 @@ $block-class: #{$pkg-prefix}--status-icon;
 @each $theme in $themes {
   @each $icon in $icons {
     @each $theme-key in $themes {
+      .#{$carbon-prefix}--btn--ghost:not([disabled])
+        .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon},
       .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger
         .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon},
       .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon} {

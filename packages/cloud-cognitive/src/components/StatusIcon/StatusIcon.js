@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,67 +29,67 @@ const icons = {
     sm: (props) => <Misuse size={16} {...props} />,
     md: (props) => <Misuse size={20} {...props} />,
     lg: (props) => <Misuse size={24} {...props} />,
-    xlg: (props) => <Misuse size={32} {...props} />,
+    xl: (props) => <Misuse size={32} {...props} />,
   },
   critical: {
     sm: (props) => <ErrorFilled size={16} {...props} />,
     md: (props) => <ErrorFilled size={20} {...props} />,
     lg: (props) => <ErrorFilled size={24} {...props} />,
-    xlg: (props) => <ErrorFilled size={32} {...props} />,
+    xl: (props) => <ErrorFilled size={32} {...props} />,
   },
   'major-warning': {
     sm: (props) => <WarningAltInvertedFilled size={16} {...props} />,
     md: (props) => <WarningAltInvertedFilled size={20} {...props} />,
     lg: (props) => <WarningAltInvertedFilled size={24} {...props} />,
-    xlg: (props) => <WarningAltInvertedFilled size={32} {...props} />,
+    xl: (props) => <WarningAltInvertedFilled size={32} {...props} />,
   },
   'minor-warning': {
     sm: (props) => <WarningAltFilled size={16} {...props} />,
     md: (props) => <WarningAltFilled size={20} {...props} />,
     lg: (props) => <WarningAltFilled size={24} {...props} />,
-    xlg: (props) => <WarningAltFilled size={32} {...props} />,
+    xl: (props) => <WarningAltFilled size={32} {...props} />,
   },
   undefined: {
     sm: (props) => <UndefinedFilled size={16} {...props} />,
     md: (props) => <UndefinedFilled size={20} {...props} />,
     lg: (props) => <UndefinedFilled size={24} {...props} />,
-    xlg: (props) => <UndefinedFilled size={32} {...props} />,
+    xl: (props) => <UndefinedFilled size={32} {...props} />,
   },
   unknown: {
     sm: (props) => <UnknownFilled size={16} {...props} />,
     md: (props) => <UnknownFilled size={20} {...props} />,
     lg: (props) => <UnknownFilled size={24} {...props} />,
-    xlg: (props) => <UnknownFilled size={32} {...props} />,
+    xl: (props) => <UnknownFilled size={32} {...props} />,
   },
   normal: {
     sm: (props) => <CheckmarkFilled size={16} {...props} />,
     md: (props) => <CheckmarkFilled size={20} {...props} />,
     lg: (props) => <CheckmarkFilled size={24} {...props} />,
-    xlg: (props) => <CheckmarkFilled size={32} {...props} />,
+    xl: (props) => <CheckmarkFilled size={32} {...props} />,
   },
   info: {
     sm: (props) => <InformationSquareFilled size={16} {...props} />,
     md: (props) => <InformationSquareFilled size={20} {...props} />,
     lg: (props) => <InformationSquareFilled size={24} {...props} />,
-    xlg: (props) => <InformationSquareFilled size={32} {...props} />,
+    xl: (props) => <InformationSquareFilled size={32} {...props} />,
   },
   'in-progress': {
     sm: (props) => <Renew size={16} {...props} />,
     md: (props) => <Renew size={20} {...props} />,
     lg: (props) => <Renew size={24} {...props} />,
-    xlg: (props) => <Renew size={32} {...props} />,
+    xl: (props) => <Renew size={32} {...props} />,
   },
   running: {
     sm: (props) => <Renew size={16} {...props} />,
     md: (props) => <Renew size={20} {...props} />,
     lg: (props) => <Renew size={24} {...props} />,
-    xlg: (props) => <Renew size={32} {...props} />,
+    xl: (props) => <Renew size={32} {...props} />,
   },
   pending: {
     sm: (props) => <Time size={16} {...props} />,
     md: (props) => <Time size={20} {...props} />,
     lg: (props) => <Time size={24} {...props} />,
-    xlg: (props) => <Time size={32} {...props} />,
+    xl: (props) => <Time size={32} {...props} />,
   },
 };
 
@@ -152,7 +152,7 @@ StatusIcon.propTypes = {
   /**
    * A required prop that displays the size of the icon associate with the status
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xlg']).isRequired,
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']).isRequired,
 
   /**
    * A required prop that displays the theme of the icon associated with the status

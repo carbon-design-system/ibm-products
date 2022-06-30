@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "1.17.0",
+  "version": "1.21.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -34,7 +34,7 @@
   },
   "scripts": {
     "build": "run-s clean build-first build-all",
-    "build-all": "run-p build:*",
+    "build-all": "run-p 'build:*'",
     "build-first": "copyfiles 'src/**/*.scss' scss -u 1",
     "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules scss:css",
     "build:css-min": "sass --style=compressed --load-path node_modules --load-path ../../node_modules scss/index.scss:css/index.min.css scss/index-full-carbon.scss:css/index-full-carbon.min.css scss/index-without-carbon.scss:css/index-without-carbon.min.css scss/index-without-carbon-released-only.scss:css/index-without-carbon-released-only.min.css",
@@ -52,22 +52,22 @@
   "devDependencies": {
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.17.10",
-    "babel-preset-ibm-cloud-cognitive": "^0.14.14",
+    "babel-preset-ibm-cloud-cognitive": "^0.14.15",
     "chalk": "^4.1.2",
     "change-case": "^4.1.2",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
     "fs-extra": "^10.1.0",
-    "glob": "^8.0.1",
-    "jest": "^28.0.3",
-    "jest-config-ibm-cloud-cognitive": "^0.23.17",
+    "glob": "^8.0.3",
+    "jest": "^28.1.0",
+    "jest-config-ibm-cloud-cognitive": "^0.24.0",
     "jest-environment-jsdom": "^28.1.0",
     "namor": "^1.1.2",
     "npm-check-updates": "^12.5.11",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
     "sass": "^1.51.0",
-    "yargs": "^17.4.1"
+    "yargs": "^17.5.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.17.9",

@@ -18,12 +18,10 @@ import { pkg /*, carbon */ } from '../../settings';
 // Carbon and package components we use.
 import { Form } from 'carbon-components-react';
 import { SidePanel } from '../SidePanel';
-import { ActionSet } from '../ActionSet';
 import '../../global/js/utils/props-helper';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--edit-side-panel`;
-const sidePanelBlockClass = `${pkg.prefix}--side-panel`;
 const componentName = 'EditSidePanel';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -83,11 +81,6 @@ export let EditSidePanel = React.forwardRef(
       },
     ];
 
-    const actionContainerClassNames = cx([
-      `${blockClass}__actions-container`,
-      `${sidePanelBlockClass}__actions-container`,
-    ]);
-
     return (
       <SidePanel
         {...rest}
@@ -107,6 +100,7 @@ export let EditSidePanel = React.forwardRef(
         className={cx(blockClass, className)}
         size={size}
         preventCloseOnClickOutside
+        actions={actions}
       >
         {formTitle && (
           <h3
@@ -122,14 +116,7 @@ export let EditSidePanel = React.forwardRef(
             {formDescription}
           </p>
         )}
-        <Form className={`${blockClass}__form`}>
-          {children}
-          <ActionSet
-            actions={actions}
-            className={actionContainerClassNames}
-            size={size}
-          />
-        </Form>
+        <Form className={`${blockClass}__form`}>{children}</Form>
       </SidePanel>
     );
   }

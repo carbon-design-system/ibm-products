@@ -46,6 +46,10 @@ import mdx from './Datagrid.mdx';
 
 import styles from './_storybook-styles.scss';
 
+// import pkg from '../../settings';
+
+// const blockClass = `${pkg.prefix}--datagrid`;
+
 export default {
   title: getStoryTitle(Datagrid.displayName),
   component: Datagrid,
@@ -772,6 +776,10 @@ export const RowSizeDropdown = () => {
 };
 RowSizeDropdown.story = RowSizeDropdownStory;
 
+import { pkg } from '../../settings';
+
+const blockClass = `${pkg.prefix}--datagrid`;
+
 export const LeftPanel = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
@@ -779,19 +787,13 @@ export const LeftPanel = () => {
     leftPanel: {
       isOpen: true, // this toggling will happen from datagridActions.
       panelContent: (
-        <div style={{ display: 'inline' }}>
+        <div className={`${blockClass}__panel-content`}>
           Panel content will go here along with any button interactions
         </div>
       ),
     },
     columns,
     data,
-    /*leftPanel: {
-      isOpen: true, // this toggling will happen from datagridActions.
-      panelContent: (
-        <div>Panel content will go here along with any button interactions</div>
-      ),
-    },*/
     DatagridActions,
     DatagridBatchActions,
   });

@@ -46,10 +46,6 @@ import mdx from './Datagrid.mdx';
 
 import styles from './_storybook-styles.scss';
 
-// import pkg from '../../settings';
-
-// const blockClass = `${pkg.prefix}--datagrid`;
-
 export default {
   title: getStoryTitle(Datagrid.displayName),
   component: Datagrid,

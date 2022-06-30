@@ -8,7 +8,8 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Code16 as Code, Copy16 as Copy } from '@carbon/icons-react';
+import { Code, Copy } from '@carbon/icons-react';
+import { expectWarn } from '../../global/js/utils/test-helper';
 
 import { pkg } from '../../settings';
 
@@ -77,21 +78,26 @@ describe(name, () => {
     click(screen.getByLabelText('Close terminal'));
     expect(onCloseHandler).toBeCalled();
   });
-  test('should render documentation link text', () => {
-    render(
-      <WebTerminal
-        closeTerminal={jest.fn()}
-        open
-        documentationLinks={documentationLinks}
-        closeIconDescription="Close terminal"
-      >
-        Body content
-      </WebTerminal>
-    );
-    const { click } = userEvent;
-    click(screen.getByText(/Show documentation links/i));
-    expect(screen.getByText(/Kubernetes docs/i));
-  });
+
+  test('should render documentation link text', () =>
+    expectWarn(
+      'Warning: The `light` prop for `OverflowMenu` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.',
+      () => {
+        render(
+          <WebTerminal
+            closeTerminal={jest.fn()}
+            open
+            documentationLinks={documentationLinks}
+            closeIconDescription="Close terminal"
+          >
+            Body content
+          </WebTerminal>
+        );
+        const { click } = userEvent;
+        click(screen.getByRole('button', { name: /description dropdown/i }));
+        expect(screen.getByText(/Kubernetes docs/i));
+      }
+    ));
 
   it('adds additional properties to the containing node', () => {
     const { container } = render(
@@ -160,12 +166,12 @@ describe(name, () => {
         closeTerminal={jest.fn()}
         actions={[
           {
-            renderIcon: Code,
+            renderIcon: (props) => <Code size={16} {...props} />,
             onClick: deploymentButtonFn,
             iconDescription: 'Create new deployment',
           },
           {
-            renderIcon: Copy,
+            renderIcon: (props) => <Copy size={16} {...props} />,
             onClick: copyLogsButtonFn,
             iconDescription: 'Copy logs',
           },
@@ -174,9 +180,11 @@ describe(name, () => {
         Body content
       </WebTerminal>
     );
-    click(screen.getByText(/Create new deployment/i));
+
+    click(screen.getByRole('button', { name: /Create new deployment/i }));
     expect(deploymentButtonFn).toHaveBeenCalledTimes(1);
-    click(screen.getByText(/Copy logs/i));
+
+    click(screen.getByRole('button', { name: /Copy logs/i }));
     expect(copyLogsButtonFn).toHaveBeenCalledTimes(1);
   });
 });

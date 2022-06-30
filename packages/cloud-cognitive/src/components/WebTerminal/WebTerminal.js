@@ -113,6 +113,7 @@ export let WebTerminal = React.forwardRef(
           <div className={`${blockClass}__actions`}>
             {showDocumentationLinks && (
               <OverflowMenu
+                ariaLabel="description dropdown"
                 renderIcon={(props) => <Help size={16} {...props} />}
                 iconDescription={documentationLinksIconDescription}
                 menuOptionsClass={`${blockClass}__documentation-overflow`}
@@ -131,6 +132,7 @@ export let WebTerminal = React.forwardRef(
                 onClick={onClick}
                 iconDescription={iconDescription}
                 kind="ghost"
+                aria-label={iconDescription}
               />
             ))}
           </div>
@@ -165,7 +167,7 @@ WebTerminal.propTypes = {
    */
   actions: PropTypes.arrayOf(
     PropTypes.shape({
-      renderIcon: PropTypes.object.isRequired,
+      renderIcon: PropTypes.func.isRequired,
       onClick: PropTypes.func.isRequired,
       iconDescription: PropTypes.string.isRequired,
     })

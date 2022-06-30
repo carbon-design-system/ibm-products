@@ -18,7 +18,7 @@ import { prepareProps } from '../../global/js/utils/props-helper';
 const blockClass = `${pkg.prefix}--button-set-with-overflow`;
 const componentName = 'ButtonSetWithOverflow';
 
-const buttonSize = 'field';
+const buttonSize = 'md';
 
 export const ButtonSetWithOverflow = ({
   buttons,
@@ -111,7 +111,12 @@ export const ButtonSetWithOverflow = ({
   });
   const AButtonMenu = React.forwardRef(({ buttons, ...rest }, ref) => {
     return (
-      <ButtonMenu {...rest} ref={ref} label={buttonSetOverflowLabel}>
+      <ButtonMenu
+        {...rest}
+        ref={ref}
+        label={buttonSetOverflowLabel}
+        menuAriaLabel={buttonSetOverflowLabel}
+      >
         {buttons
           .map(({ label, key, kind, ...other }) => (
             <ButtonMenuItem

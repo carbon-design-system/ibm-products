@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,7 +18,6 @@ import {
   SideNav,
   SideNavItems,
   SideNavLink,
-  Row,
   Tab,
   Tabs,
   Table,
@@ -28,6 +27,7 @@ import {
   TableRow,
   TableCell,
   usePrefix,
+  TabList,
 } from '@carbon/react';
 import {
   CheckmarkFilled,
@@ -167,30 +167,36 @@ const navigation = {
   'No navigation': null,
   'Four tabs': (
     <Tabs>
-      <Tab label="Tab 1" />
-      <Tab label="Tab 2" />
-      <Tab label="Tab 3" />
-      <Tab label="Tab 4" />
+      <TabList aria-label="Tab list">
+        <Tab>Tab 1</Tab>
+        <Tab>Tab 2</Tab>
+        <Tab>Tab 3</Tab>
+        <Tab>Tab 4</Tab>
+      </TabList>
     </Tabs>
   ),
   'Many tabs': (
     <Tabs>
-      <Tab label="Tab 1" />
-      <Tab label="Tab 2" />
-      <Tab label="Tab 3" />
-      <Tab label="Tab 4" />
-      <Tab label="Tab 5" />
-      <Tab label="Tab 6" />
-      <Tab label="Tab 7" />
-      <Tab label="Tab 8" />
+      <TabList aria-label="Tab list">
+        <Tab>Tab 1</Tab>
+        <Tab>Tab 2</Tab>
+        <Tab>Tab 3</Tab>
+        <Tab>Tab 4</Tab>
+        <Tab>Tab 5</Tab>
+        <Tab>Tab 6</Tab>
+        <Tab>Tab 7</Tab>
+        <Tab>Tab 8</Tab>
+      </TabList>
     </Tabs>
   ),
   'In context tabs': (
     <Tabs>
-      <Tab label="Summary" />
-      <Tab label="Region 1" />
-      <Tab label="Region 2" />
-      <Tab label="Region 3" />
+      <TabList aria-label="Tab list">
+        <Tab>Summary</Tab>
+        <Tab>Region 1</Tab>
+        <Tab>Region 2</Tab>
+        <Tab>Region 3</Tab>
+      </TabList>
     </Tabs>
   ),
 };
@@ -328,7 +334,11 @@ const userDefinedStyle = { color: 'red', fontWeight: '600' };
 const title = {
   'No title': null,
   'Plain text title': 'Page title',
-  'Title with icon': { text: 'Page title', loading: false, icon: Bee },
+  'Title with icon': {
+    text: 'Page title',
+    loading: false,
+    icon: (props) => <Bee size={24} {...props} />,
+  },
   'Long title with icon': {
     text: 'A very long page title which will almost certainly have to be truncated at some point',
     loading: false,
@@ -478,65 +488,61 @@ const demoSubtitle = 'This report details the monthly authentication failures';
 
 const dummyPageContent = (
   <Grid className={`${storyClass}__dummy-content`} narrow={true}>
-    <Row>
-      <Column
-        sm={1}
-        md={2}
-        lg={4}
-        className={`${storyClass}__dummy-content-block`}
-      >
-        <div className={`${storyClass}__dummy-content-text`}>Column #1</div>
-      </Column>
-      <Column
-        sm={1}
-        md={2}
-        lg={4}
-        className={`${storyClass}__dummy-content-block`}
-      >
-        <div className={`${storyClass}__dummy-content-text`}>Column #2</div>
-      </Column>
-      <Column
-        sm={2}
-        md={4}
-        lg={8}
-        className={`${storyClass}__dummy-content-block`}
-      >
-        <div className={`${storyClass}__dummy-content-text`}>Column #3</div>
-      </Column>
-    </Row>
+    <Column
+      sm={1}
+      md={2}
+      lg={4}
+      className={`${storyClass}__dummy-content-block`}
+    >
+      <div className={`${storyClass}__dummy-content-text`}>Column #1</div>
+    </Column>
+    <Column
+      sm={1}
+      md={2}
+      lg={4}
+      className={`${storyClass}__dummy-content-block`}
+    >
+      <div className={`${storyClass}__dummy-content-text`}>Column #2</div>
+    </Column>
+    <Column
+      sm={2}
+      md={4}
+      lg={8}
+      className={`${storyClass}__dummy-content-block`}
+    >
+      <div className={`${storyClass}__dummy-content-text`}>Column #3</div>
+    </Column>
   </Grid>
 );
 
 const demoDummyPageContent = (
   <section className={`${storyClass}__dummy-content`}>
     <Grid narrow={true}>
-      <Row>
-        <Column
-          sm={4}
-          md={8}
-          lg={16}
-          className={`${storyClass}__dummy-content-block`}
-        >
-          <Table>
-            <TableHead>
-              <TableRow>
-                {demoTableHeaders.map((header) => (
-                  <TableHeader key={header}>{header}</TableHeader>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {demoTableData.map((row) => (
-                <TableRow key={row.Index}>
-                  {Object.keys(row).map((key) => {
-                    return <TableCell key={key}>{row[key]}</TableCell>;
-                  })}
-                </TableRow>
+      <Column
+        sm={4}
+        md={8}
+        lg={16}
+        className={`${storyClass}__dummy-content-block`}
+      >
+        <Table>
+          <TableHead>
+            <TableRow>
+              {demoTableHeaders.map((header) => (
+                <TableHeader key={header}>{header}</TableHeader>
               ))}
-            </TableBody>
-          </Table>{' '}
-        </Column>
-      </Row>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {demoTableData.map((row) => (
+              <TableRow key={row.Index}>
+                {Object.keys(row).map((key) => {
+                  return <TableCell key={key}>{row[key]}</TableCell>;
+                })}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>{' '}
+      </Column>
     </Grid>
   </section>
 );

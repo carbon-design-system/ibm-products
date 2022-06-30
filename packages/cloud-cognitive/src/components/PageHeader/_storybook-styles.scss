@@ -7,6 +7,7 @@
 
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/react/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
 
 @use '@carbon/react/scss/components/ui-shell';
 @use '@carbon/react/scss/components/data-table';
@@ -46,6 +47,8 @@ $story-class: 'page-header-stories';
 }
 
 .#{$story-class}__dummy-content-text {
+  @include type.type-style('body-compact-01');
+
   padding: $spacing-05;
 }
 

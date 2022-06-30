@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,8 +11,8 @@ import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
 
-import { Tab, Tabs } from '@carbon/react';
-import { Lightning16, Bee32 } from '@carbon/icons-react';
+import { Tab, Tabs, TabList } from '@carbon/react';
+import { Lightning, Bee } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
 import {
@@ -35,7 +35,7 @@ const actionBarOverflowAriaLabel = 'Show additional action bar items';
 
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
   key: `a-key-${item}`,
-  renderIcon: Lightning16,
+  renderIcon: (props) => <Lightning size={16} {...props} />,
   iconDescription: `Action ${item}`,
   onClick: () => {},
 }));
@@ -83,10 +83,12 @@ const pageActionsCustom = {
 const subtitle = 'Optional subtitle if necessary';
 const navigation = (
   <Tabs data-testid="tabs">
-    <Tab label="Tab 1" />
-    <Tab label="Tab 2" />
-    <Tab label="Tab 3" />
-    <Tab label="Tab 4" />
+    <TabList aria-label="Tab list">
+      <Tab>Tab 1</Tab>
+      <Tab>Tab 2</Tab>
+      <Tab>Tab 3</Tab>
+      <Tab>Tab 4</Tab>
+    </TabList>
   </Tabs>
 );
 
@@ -108,7 +110,11 @@ const titleUserDefined = {
   breadcrumbContent: <span>{titleUserDefinedStrings.breadcrumbContent}</span>,
   asText: titleUserDefinedStrings.asText,
 };
-const titleObj = { text: 'Page title', loading: false, icon: Bee32 };
+const titleObj = {
+  text: 'Page title',
+  loading: false,
+  icon: (props) => <Bee size={32} {...props} />,
+};
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { prepareProps } from '../../global/js/utils/props-helper';

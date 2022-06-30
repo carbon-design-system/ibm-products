@@ -11,7 +11,7 @@ import { spacing10, baseFontSize } from '@carbon/layout';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
 
-import { Grid, Column, Row, Button, Tag } from '@carbon/react';
+import { FlexGrid, Column, Row, Button, Tag } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 
 import { useWindowResize, useNearestScroll } from '../../global/js/hooks';
@@ -486,7 +486,7 @@ export let PageHeader = React.forwardRef(
           ref={headerRef}
           {...getDevtoolsProps(componentName)}
         >
-          <Grid
+          <FlexGrid
             fullWidth={fullWidthGrid === true || fullWidthGrid === 'xl'}
             narrow={narrowGrid}
             className={cx({
@@ -702,7 +702,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null
             }
-          </Grid>
+          </FlexGrid>
           {hasCollapseButton ? (
             <Button
               className={cx(`${blockClass}__collapse-expand-toggle`, {
@@ -719,7 +719,7 @@ export let PageHeader = React.forwardRef(
               kind="ghost"
               onClick={handleCollapseToggle}
               renderIcon={(props) => <ChevronUp size={16} {...props} />}
-              size="field"
+              size="md"
               tooltipPosition="bottom"
               tooltipAlignment="end"
               type="button"

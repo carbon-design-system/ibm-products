@@ -2,6 +2,15 @@
 
 @use '@carbon/styles/scss/colors';
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '../../global/styles/project-settings' as c4p-settings;
+
+$storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
+
+.cds--header {
+  @include theme(themes.$g100);
+}
 
 .sb-show-main.sb-main-centered #root {
   padding: 0 !important;

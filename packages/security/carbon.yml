@@ -48,7 +48,7 @@ assets:
           url: https://carbon-for-ibm-products.netlify.app/?path=/story/security-components-externallink
       tags:
         - content-element
-        - contextual-nav
+        - contextual-navigation
   ica:
       name: ICA
       status: stable

@@ -236,7 +236,7 @@ assets:
         - input-control
         - form
   status-indicator:
-      name: Status indictor
+      name: Status indicator
       status: stable
       type: pattern
       platform: web

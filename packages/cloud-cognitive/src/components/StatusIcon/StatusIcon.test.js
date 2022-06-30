@@ -23,7 +23,7 @@ const iconSizes = [
   { input: 'sm', output: '16' },
   { input: 'md', output: '20' },
   { input: 'lg', output: '24' },
-  { input: 'xlg', output: '32' },
+  { input: 'xl', output: '32' },
 ];
 
 const iconTypes = [

@@ -275,7 +275,7 @@ assets:
         - type: storybook
           name: Storybook
           action: link
-          url: https://carbon-for-ibm-products.netlify.app/?path=/docs/security-patterns-tagwallfilter--tagwall-with-filter-list-for-multiselect
+          url: https://carbon-for-ibm-products.netlify.app/?path=/docs/security-patterns-tagwallfilter
       tags:
         - input-control
         - data-display

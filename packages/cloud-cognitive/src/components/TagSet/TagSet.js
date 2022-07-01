@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -29,8 +29,7 @@ const allTagsModalSearchThreshold = 10;
 const defaults = {
   align: 'start',
   // allTagsModalTarget: document.body,
-  overflowAlign: 'center',
-  overflowDirection: 'bottom',
+  overflowAlign: 'bottom',
 };
 
 export let TagSet = React.forwardRef(
@@ -44,7 +43,6 @@ export let TagSet = React.forwardRef(
       maxVisible,
       overflowAlign = defaults.overflowAlign,
       overflowClassName,
-      overflowDirection = defaults.overflowDirection,
       allTagsModalTitle,
       allTagsModalSearchLabel,
       allTagsModalSearchPlaceholderText,
@@ -140,7 +138,6 @@ export let TagSet = React.forwardRef(
           onShowAllClick={handleShowAllClick}
           overflowTags={newOverflowTags}
           overflowAlign={overflowAlign}
-          overflowDirection={overflowDirection}
           showAllTagsLabel={showAllTagsLabel}
           key="displayed-tag-overflow"
           ref={overflowTag}
@@ -152,7 +149,6 @@ export let TagSet = React.forwardRef(
       displayCount,
       overflowAlign,
       overflowClassName,
-      overflowDirection,
       showAllTagsLabel,
       tags,
     ]);
@@ -329,17 +325,26 @@ TagSet.propTypes = {
    */
   maxVisible: PropTypes.number,
   /**
-   * overflowAlign from the standard tooltip. Default center.
+   * overflowAlign from the standard tooltip. Default bottom.
    */
-  overflowAlign: PropTypes.oneOf(['start', 'center', 'end']),
+  overflowAlign: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'left-bottom',
+    'left-top',
+    'right',
+    'right-bottom',
+    'right-top',
+  ]),
   /**
    * overflowClassName for the tooltip popup
    */
   overflowClassName: PropTypes.string,
-  /**
-   * overflowDirection from the standard tooltip
-   */
-  overflowDirection: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
   /**
    * label for the overflow show all tags link.
    *

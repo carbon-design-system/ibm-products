@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,10 +10,10 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 
-import { Link, Tag, Tooltip } from '@carbon/react';
+import { Link, Tag, Popover, PopoverContent } from '@carbon/react';
+import { useClickOutside } from '../../global/js/hooks';
 
 import { pkg } from '../../settings';
-import { noop } from '../../global/js/utils/pconsole';
 
 const componentName = 'TagSetOverflow';
 const blockClass = `${pkg.prefix}--tag-set-overflow`;
@@ -21,8 +21,7 @@ const blockClass = `${pkg.prefix}--tag-set-overflow`;
 // Default values for props
 const defaults = {
   allTagsModalSearchThreshold: 10,
-  overflowAlign: 'center',
-  overflowDirection: 'bottom',
+  overflowAlign: 'bottom',
 };
 
 export const TagSetOverflow = React.forwardRef(
@@ -34,7 +33,6 @@ export const TagSetOverflow = React.forwardRef(
       className,
       onShowAllClick,
       overflowAlign = defaults.overflowAlign,
-      overflowDirection = defaults.overflowDirection,
       overflowTags,
       showAllTagsLabel,
 
@@ -43,18 +41,28 @@ export const TagSetOverflow = React.forwardRef(
     },
     ref
   ) => {
-    const [tipOpen, setTipOpen] = useState(false);
+    const [popoverOpen, setPopoverOpen] = useState(false);
+    const localRef = useRef();
     const overflowTagContent = useRef(null);
 
-    const handleChange = (ev, { open }) => {
-      setTipOpen(open);
-    };
+    useClickOutside(ref || localRef, () => {
+      if (popoverOpen) {
+        setPopoverOpen(false);
+      }
+    });
 
     const handleShowAllTagsClick = (ev) => {
       ev.stopPropagation();
       ev.preventDefault();
-      setTipOpen(false);
+      setPopoverOpen(false);
       onShowAllClick();
+    };
+
+    const handleEscKeyPress = (event) => {
+      const { key } = event;
+      if (key === 'Escape') {
+        setPopoverOpen(false);
+      }
     };
 
     return (
@@ -67,43 +75,50 @@ export const TagSetOverflow = React.forwardRef(
         className={cx(`${blockClass}`, {
           [`${blockClass}--hidden`]: overflowTags.length === 0,
         })}
-        ref={ref}
+        ref={ref || localRef}
       >
-        <Tooltip
+        <Popover
           align={overflowAlign}
-          className={cx(className, `${blockClass}__tooltip`)}
-          direction={overflowDirection}
-          onChange={handleChange}
-          open={tipOpen}
-          triggerText={<Tag onClick={noop}>+{overflowTags.length}</Tag>}
-          showIcon={false}
+          className={cx(className, `${blockClass}__tagset-popover`)}
+          dropShadow
+          highContrast
+          onKeyDown={handleEscKeyPress}
+          open={popoverOpen}
         >
-          <div ref={overflowTagContent} className={`${blockClass}__content`}>
-            <ul className={`${blockClass}__tag-list`}>
-              {overflowTags
-                .filter((_, index) =>
-                  overflowTags.length > allTagsModalSearchThreshold
-                    ? index < allTagsModalSearchThreshold
-                    : index <= allTagsModalSearchThreshold
-                )
-                .map((tag, index) => (
-                  <li className={`${blockClass}__tag-item`} key={index}>
-                    {React.cloneElement(tag, { filter: false })}
-                  </li>
-                ))}
-            </ul>
-            {overflowTags.length > allTagsModalSearchThreshold && (
-              <Link
-                className={`${blockClass}__show-all-tags-link`}
-                href=""
-                onClick={handleShowAllTagsClick}
-                role="button"
-              >
-                {showAllTagsLabel}
-              </Link>
-            )}
-          </div>
-        </Tooltip>
+          <Tag
+            onClick={() => setPopoverOpen(!popoverOpen)}
+            className={cx(`${blockClass}__popover-trigger`)}
+          >
+            +{overflowTags.length}
+          </Tag>
+          <PopoverContent>
+            <div ref={overflowTagContent} className={`${blockClass}__content`}>
+              <ul className={`${blockClass}__tag-list`}>
+                {overflowTags
+                  .filter((_, index) =>
+                    overflowTags.length > allTagsModalSearchThreshold
+                      ? index < allTagsModalSearchThreshold
+                      : index <= allTagsModalSearchThreshold
+                  )
+                  .map((tag, index) => (
+                    <li className={`${blockClass}__tag-item`} key={index}>
+                      {React.cloneElement(tag, { filter: false })}
+                    </li>
+                  ))}
+              </ul>
+              {overflowTags.length > allTagsModalSearchThreshold && (
+                <Link
+                  className={`${blockClass}__show-all-tags-link`}
+                  href=""
+                  onClick={handleShowAllTagsClick}
+                  role="button"
+                >
+                  {showAllTagsLabel}
+                </Link>
+              )}
+            </div>
+          </PopoverContent>
+        </Popover>
       </span>
     );
   }
@@ -127,11 +142,20 @@ TagSetOverflow.propTypes = {
   /**
    * overflowAlign from the standard tooltip
    */
-  overflowAlign: PropTypes.oneOf(['start', 'center', 'end']),
-  /**
-   * overflowDirection from the standard tooltip
-   */
-  overflowDirection: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  overflowAlign: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'left-bottom',
+    'left-top',
+    'right',
+    'right-bottom',
+    'right-top',
+  ]),
   /**
    * tags shown in overflow
    */

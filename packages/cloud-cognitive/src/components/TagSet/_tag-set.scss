@@ -19,7 +19,7 @@
 @use '@carbon/react/scss/components/search';
 @use '@carbon/react/scss/components/link';
 @use '@carbon/react/scss/components/tag';
-@use '@carbon/react/scss/components/tooltip';
+@use '@carbon/react/scss/components/popover';
 
 $_block-class: #{$pkg-prefix}--tag-set;
 $block-class-overflow: #{$_block-class}-overflow;
@@ -59,6 +59,13 @@ $block-class-modal: #{$_block-class}-modal;
   .#{$block-class-overflow} {
     display: inline-block;
     vertical-align: bottom;
+    .#{$carbon-prefix}--tag.#{$carbon-prefix}--tag--interactive {
+      border: 0;
+    }
+
+    .#{$carbon-prefix}--popover .#{$carbon-prefix}--popover-content {
+      padding: $spacing-05;
+    }
   }
 
   .#{$block-class-overflow}--hidden {
@@ -113,16 +120,31 @@ $block-class-modal: #{$_block-class}-modal;
   }
 }
 
-@include block-wrap('#{$block-class-overflow}__tooltip') {
-  &.#{$block-class-overflow}__tooltip {
+@include block-wrap('#{$block-class-overflow}__tagset-popover') {
+  &.#{$block-class-overflow}__tagset-popover {
     // removes the min width in Carbon
     min-width: initial;
     text-align: left;
   }
 
-  .#{$block-class-overflow}__show-all-tags-link {
+  .#{$block-class-overflow}__popover-trigger {
+    font-family: inherit;
+  }
+
+  .#{$block-class-overflow}__show-all-tags-link.#{$carbon-prefix}--link:visited {
     display: inline-block;
     margin: $spacing-03 0 $spacing-02; // to match the tags
+    color: $link-inverse;
+  }
+
+  .#{$carbon-prefix}--link:active,
+  .#{$carbon-prefix}--link:active:visited,
+  .#{$carbon-prefix}--link:active:visited:hover {
+    color: $text-inverse;
+  }
+
+  .#{$block-class-overflow}__tag-list {
+    margin-bottom: $spacing-03;
   }
 
   .#{$block-class-overflow}__tag-item,

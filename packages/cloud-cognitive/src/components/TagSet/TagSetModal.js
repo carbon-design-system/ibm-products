@@ -85,7 +85,11 @@ export const TagSetModal = ({
       size="sm"
       {...{ open, onClose }}
     >
-      <ModalHeader title={title} className={`${blockClass}__header`}>
+      <ModalHeader
+        className={`${blockClass}__header`}
+        closeModal={onClose}
+        title={title}
+      >
         <Search
           data-modal-primary-focus
           className={`${blockClass}__search`}

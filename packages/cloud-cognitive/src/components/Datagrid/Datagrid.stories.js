@@ -35,11 +35,13 @@ import {
   useDisableSelectRows,
   useCustomizeColumns,
   useSelectAllWithToggle,
+  useColumnCenterAlign,
   useStickyColumn,
   useActionsColumn,
 } from '.';
+
 import {
-  /*StickyActionsColumn,*/ CustomizeColumnStory,
+  CustomizeColumnStory,
   RowSizeDropdownStory,
   SelectAllWitHToggle,
   LeftPanelStory,
@@ -492,6 +494,37 @@ export const RightAlignedColumns = () => {
       data,
     },
     useColumnRightAlign
+  );
+
+  return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
+export const CenterAlignedColumns = () => {
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader.slice(0, 3),
+      {
+        Header: 'Age',
+        accessor: 'age',
+        centerAlignedColumn: true,
+      },
+
+      {
+        Header: 'Visit',
+        accessor: 'visits',
+        centerAlignedColumn: true,
+      },
+    ],
+    []
+  );
+
+  const [data] = useState(makeData(10));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+    },
+    useColumnCenterAlign
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;

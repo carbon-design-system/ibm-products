@@ -324,7 +324,7 @@ assets:
     type: component
     platform: web
     framework: react
-    thumbnailPath: './thumbnails/modified-tab.svg'
+    thumbnailPath: './thumbnails/modified-tabs.svg'
     demoLinks:
       - type: storybook
         name: Storybook

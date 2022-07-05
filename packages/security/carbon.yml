@@ -155,7 +155,7 @@ assets:
       type: component
       platform: web
       framework: react
-      thumbnailPath: './thumbnails/input.svg'
+      thumbnailPath: './thumbnails/type-layout.svg'
       demoLinks:
         - type: storybook
           name: Storybook

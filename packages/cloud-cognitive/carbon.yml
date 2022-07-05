@@ -35,6 +35,63 @@ assets:
     tags:
       - system-feedback
       - content-block
+  action-bar:
+    name: Action bar
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/action-bar.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-actionbar
+    tags:
+      - input-control
+  breadcrumb-with-overflow:
+    name: Breadcrumb with overflow
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/breadcrumb-with-overflow.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-breadcrumbwithoverflow
+    tags:
+      - structural-navigation
+      - contextual-navigation
+  button-menu:
+    name: Button menu
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/button-menu.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-buttonmenu
+    tags:
+      - input-control
+  button-set-with-overflow:
+    name: Button set with overflow
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/button-set-with-overflow.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-buttonsetwithoverflow
+    tags:
+      - input-control
   cascade:
     name: Cascade
     status: stable
@@ -49,6 +106,20 @@ assets:
         url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-cascade-cascade
     tags:
       - content-block
+  combo-button:
+    name: Combo button
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/combo-button.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-combobutton
+    tags:
+      - input-control
   create-full-page:
     name: Create full page
     status: stable
@@ -113,7 +184,7 @@ assets:
   data-spreadsheet:
     name: Data spreadsheet
     status: experimental
-    type: pattern
+    type: component
     platform: web
     framework: react
     thumbnailPath: './thumbnails/data-spreadsheet.svg'
@@ -128,7 +199,7 @@ assets:
   data-grid:
     name: Data grid
     status: experimental
-    type: pattern
+    type: component
     platform: web
     framework: react
     thumbnailPath: './thumbnails/data-grid.svg'
@@ -275,6 +346,7 @@ assets:
         url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-multiaddselect-canary
     tags:
       - form
+      - content-block
   notifications-panel:
     name: Notifications panel
     status: stable
@@ -289,10 +361,11 @@ assets:
         url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-notifications-notificationspanel
     tags:
       - input-control
+      - system-feedback
   options-tile:
     name: Options tile
     status: stable
-    type: pattern
+    type: component
     platform: web
     framework: react
     thumbnailPath: './thumbnails/options-tile.svg'
@@ -304,6 +377,7 @@ assets:
     tags:
       - input-control
       - form
+      - options-tile
   page-header:
     name: Page header
     status: stable
@@ -368,7 +442,7 @@ assets:
   side-panel:
     name: Side panel
     status: stable
-    type: pattern
+    type: component
     platform: web
     framework: react
     thumbnailPath: './thumbnails/side-panel.svg'
@@ -380,6 +454,8 @@ assets:
     tags:
       - input-control
       - form
+      - content-block
+      - data-display
   single-add-select:
     name: Single add select
     status: experimental
@@ -409,10 +485,11 @@ assets:
     tags:
       - media
       - content-element
+      - system-feedback
   tag-set:
     name: Tag set
     status: stable
-    type: pattern
+    type: component
     platform: web
     framework: react
     thumbnailPath: './thumbnails/tag-set.svg'
@@ -426,7 +503,7 @@ assets:
   tearsheet:
     name: Tearsheet
     status: stable
-    type: pattern
+    type: component
     platform: web
     framework: react
     thumbnailPath: './thumbnails/tearsheet.svg'
@@ -441,7 +518,7 @@ assets:
   toolbar:
     name: Toolbar
     status: experimental
-    type: component
+    type: pattern
     platform: web
     framework: react
     thumbnailPath: './thumbnails/toolbar.svg'

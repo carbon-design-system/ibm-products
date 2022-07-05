@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.22.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.21.0...@carbon/ibm-products@1.22.0) (2022-07-05)
+
+
+### Features
+
+* added center aligned columns component and centered new columns ([#2056](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2056)) ([9178df2](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9178df24c2f54370ab4064ab659c77a9ac459377))
+
+
+
+
+
 # [1.21.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.20.3...@carbon/ibm-products@1.21.0) (2022-06-28)
 
 

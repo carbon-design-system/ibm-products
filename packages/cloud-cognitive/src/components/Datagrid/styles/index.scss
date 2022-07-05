@@ -7,11 +7,13 @@
 */
 @import './datagrid';
 @import './useNestedRows';
-//@import './useNestedTable';
+@import './useNestedTable';
 @import './useSortableColumns';
 @import './useColumnRightAlign';
+@import './useColumnCenterAlign';
 @import './useStickyColumn';
 @import './useActionsColumn';
 @import './addons/CustomizeColumnsModal';
 @import './addons/RowSizeDropdown';
 @import './useSelectAllToggle';
+@import './draggableElement';

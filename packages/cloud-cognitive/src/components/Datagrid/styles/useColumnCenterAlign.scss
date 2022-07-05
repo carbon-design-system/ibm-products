@@ -1,0 +1,19 @@
+/*
+* Licensed Materials - Property of IBM
+* 5724-Q36
+* (c) Copyright IBM Corp. 2020
+* US Government Users Restricted Rights - Use, duplication or disclosure
+* restricted by GSA ADP Schedule Contract with IBM Corp.
+*/
+
+@import './variables';
+
+.#{$block-class}__center-align-header {
+  width: 100%;
+  text-align: center;
+}
+
+.#{$block-class}__center-align-cell-renderer.sortDisabled {
+  margin-right: auto;
+  margin-left: auto;
+}

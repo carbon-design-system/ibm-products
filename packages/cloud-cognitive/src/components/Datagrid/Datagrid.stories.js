@@ -426,7 +426,7 @@ export const RadioSelect = () => {
       data,
       hideSelectAll: true,
       radio: true,
-      onRadioSelect: (row) => console.log(row),
+      onRadioSelect: (row) => console.log(`Row clicked: ${row.id}`),
       initialState: {
         selectedRowIds: {
           3: true,

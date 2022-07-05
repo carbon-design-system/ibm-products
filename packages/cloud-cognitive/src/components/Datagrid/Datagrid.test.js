@@ -9,7 +9,8 @@ import React, { useState, useEffect } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
-import { makeData, RightAlignedColumns } from './Datagrid.stories';
+import { RightAlignedColumns } from './Datagrid.stories';
+import { makeData } from './utils/makeData';
 
 import { carbon } from '../../settings';
 import { expectWarn } from '../../global/js/utils/test-helper';
@@ -34,6 +35,8 @@ import {
 import { useColumnOrder } from 'react-table';
 
 import namor from 'namor';
+
+import userEvent from '@testing-library/user-event';
 
 const dataTestId = uuidv4();
 
@@ -484,7 +487,7 @@ const RadioSelect = ({ ...rest }) => {
       data,
       hideSelectAll: true,
       radio: true,
-      // onRadioSelect: (row) => console.log(row),
+      onRadioSelect: (row) => console.log(`Row clicked: ${row.id}`),
       initialState: {
         selectedRowIds: {
           3: true,
@@ -812,16 +815,7 @@ describe(componentName, () => {
   it('With Pagination', () => {
     render(<WithPagination data-testid={dataTestId}></WithPagination>);
     document.getElementsByClassName('bx--pagination');
-    // console.log(screen.getAllByText('Items per page:'));
-    document.addEventListener('load', () => {
-      /*console.log(
-        `Num Children ${
-          document.querySelectorAll('.bx--pagination__left')[0]
-            .childElementCount
-        }
-      ); //TODO: Remove this console.log statement*/
-    });
-    // expect(document.querySelectorAll('select#bx-pagination-select-6').childElementCount).toBe(1);
+    document.addEventListener('load', () => {});
   });
 
   it('Clickable Row', () => {
@@ -845,17 +839,13 @@ describe(componentName, () => {
   it('Is Hove On Row', () => {
     render(<IsHoverOnRow data-testid={dataTestId}></IsHoverOnRow>);
 
-    /*
     const hoverRow = screen
       .getByRole('table')
       .getElementsByTagName('tbody')[0]
       .getElementsByTagName('tr')[0];
-
     userEvent.hover(hoverRow.getElementsByTagName('td')[1]);
-    console.log('Hovering over the first row');
-    console.log(hoverRow).getElementsByTagName('td')[3].textContent;*/
 
-    // console.log(hoverRow.childNodes[3]);
+    // TODO: work in progress
     // expect(screen.getByRole('table').getElementsByTagName('tbody')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[3].innerHTML).toBe('yes!');
   });
 

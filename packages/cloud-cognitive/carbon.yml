@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://unpkg.com/@carbon-platform/schemas@v1/carbon-resources.schema.json
 library:
   id: ibm-products
-  name: IBM Cloud Cognitive
+  name: IBM Products
   description: A Carbon-powered React component library for IBM Products
   externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/
 assets:

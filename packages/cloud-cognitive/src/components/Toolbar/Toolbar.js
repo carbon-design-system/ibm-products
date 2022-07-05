@@ -16,6 +16,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 import { getFocusableElements as _getFocusableElements } from '../../global/js/utils/getFocusableElements';
 import { pkg } from '../../settings';
@@ -95,6 +96,7 @@ let Toolbar = forwardRef(({ children, className, vertical, ...rest }, r) => {
       onFocus={onFocus}
       onKeyDown={onKeyDown}
       {...(vertical && { 'aria-orientation': 'vertical' })}
+      {...getDevtoolsProps(componentName)}
       role="toolbar"
     >
       <ToolbarContext.Provider value={{ vertical }}>

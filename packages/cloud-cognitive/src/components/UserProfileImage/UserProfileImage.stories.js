@@ -18,7 +18,7 @@ import image from './headshot.jpg'; // cspell:disable-line
 const defaultArgs = {
   backgroundColor: 'light-cyan',
   theme: 'light',
-  size: 'xlg',
+  size: 'xl',
 };
 
 export default {
@@ -47,7 +47,7 @@ export default {
       control: {
         type: 'radio',
       },
-      options: ['xlg', 'lg', 'md'],
+      options: ['xl', 'lg', 'md'],
     },
   },
   parameters: {

@@ -52,12 +52,12 @@ export let UserProfileImage = React.forwardRef(
       user: {
         md: (props) => <User size={20} {...props} />,
         lg: (props) => <User size={24} {...props} />,
-        xlg: (props) => <User size={32} {...props} />,
+        xl: (props) => <User size={32} {...props} />,
       },
       group: {
         md: (props) => <Group size={20} {...props} />,
         lg: (props) => <Group size={24} {...props} />,
-        xlg: (props) => <Group size={32} {...props} />,
+        xl: (props) => <Group size={32} {...props} />,
       },
     };
 
@@ -138,7 +138,11 @@ export let UserProfileImage = React.forwardRef(
     return (
       FillItem &&
       (tooltipText ? (
-        <IconButton label={tooltipText} className={`${blockClass}__tooltip`}>
+        <IconButton
+          label={tooltipText}
+          className={`${blockClass}__tooltip`}
+          kind="ghost"
+        >
           {renderUserProfileImage()}
         </IconButton>
       ) : (
@@ -206,7 +210,7 @@ UserProfileImage.propTypes = {
   /**
    * Set the size of the avatar circle
    */
-  size: PropTypes.oneOf(['xlg', 'lg', 'md']).isRequired,
+  size: PropTypes.oneOf(['xl', 'lg', 'md']).isRequired,
 
   /**
    * Set theme in which the component will be rendered

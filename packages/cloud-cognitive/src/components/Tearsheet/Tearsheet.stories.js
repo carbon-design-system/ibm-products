@@ -19,6 +19,7 @@ import {
   FormGroup,
   Tab,
   Tabs,
+  TabList,
   TextInput,
 } from '@carbon/react';
 
@@ -151,11 +152,13 @@ const mainContent = (
 
 const tabs = (
   <div className="tearsheet-stories__tabs">
-    <Tabs onSelectionChange={action('Tab selection changed')}>
-      <Tab label="Tab 1" />
-      <Tab label="Tab 2" />
-      <Tab label="Tab 3" />
-      <Tab label="Tab 4" />
+    <Tabs onChange={action('Tab selection changed')}>
+      <TabList aria-label="Tab list">
+        <Tab>Tab 1</Tab>
+        <Tab>Tab 2</Tab>
+        <Tab>Tab 3</Tab>
+        <Tab>Tab 4</Tab>
+      </TabList>
     </Tabs>
   </div>
 );

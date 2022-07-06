@@ -134,14 +134,7 @@
     }
   }
 }
-.#{$block-class}__grid-container::-webkit-scrollbar-thumb {
-  background-color: $text-03;
-}
 
-.#{$block-class}__grid-container::-webkit-scrollbar {
-  width: 6px;
-  background-color: $ui-background;
-}
 .#{$block-class}__grid-container {
   display: block;
   overflow: auto;
@@ -157,7 +150,7 @@
 
   .#{$block-class}__table-simple {
     display: flex;
-    overflow: auto;
+    overflow: hidden;
     max-height: 100%;
     flex-direction: column;
   }
@@ -309,7 +302,6 @@
 
 .#{$block-class}__simple-body {
   position: relative;
-  display: table;
   overflow-x: hidden;
   overflow-y: auto;
   //makes thin scrollbar in chrome and firefox
@@ -330,14 +322,6 @@
   min-width: 0 !important;
 }
 
-.#{$block-class}__table-simple::-webkit-scrollbar {
-  width: 6px;
-  background-color: $ui-background;
-}
-
-.#{$block-class}__table-simple::-webkit-scrollbar-thumb {
-  background-color: $text-03;
-}
 .#{$block-class}__sticky.#{$block-class}__simple-body {
   overflow: auto;
 }
@@ -361,10 +345,6 @@
   width: 388px; // as per UX specs.
   height: 100%;
   background-color: $ui-01;
-}
-
-.#{$block-class}__leftPanel-position {
-  display: inherit;
 }
 
 .#{$block-class}__datagridWithPanel {

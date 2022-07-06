@@ -49,6 +49,20 @@ assets:
         url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-actionbar
     tags:
       - input-control
+  action-set:
+    name: Action set
+    status: stable
+    type: component
+    platform: web
+    framework: react
+    thumbnailPath: './thumbnails/action-set.svg'
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-actionset
+    tags:
+      - data-display
   breadcrumb-with-overflow:
     name: Breadcrumb with overflow
     status: stable

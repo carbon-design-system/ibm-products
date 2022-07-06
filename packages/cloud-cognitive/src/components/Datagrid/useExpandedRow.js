@@ -13,7 +13,7 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const expansionRenderer = ({ row }) => (
-  <div className={`${blockClass}__expanded_row_content`}>
+  <div className={`${blockClass}__expanded-row-content`}>
     Content for {row.id}
   </div>
 );

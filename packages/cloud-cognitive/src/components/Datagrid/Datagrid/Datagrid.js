@@ -43,6 +43,7 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
     className,
     gridTitle,
     gridDescription,
+    DatagridDenseActions,
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
@@ -55,7 +56,8 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
           withVirtualScroll || fullHeightDatagrid
             ? `${blockClass}__full-height`
             : '',
-          DatagridPagination ? `${blockClass}__with-pagination` : ''
+          DatagridPagination ? `${blockClass}__with-pagination` : '',
+          DatagridDenseActions ? `${blockClass}__dense-header` : ''
         )}
         title={gridTitle}
         description={gridDescription}

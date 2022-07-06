@@ -14,12 +14,14 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const { TableToolbar } = DataTable;
 
 const DatagridToolbar = (datagridState) => {
-  const { DatagridActions, DatagridBatchActions } = datagridState;
+  const { DatagridActions, DatagridBatchActions, DatagridDenseActions } =
+    datagridState;
 
-  return DatagridActions || DatagridBatchActions ? (
+  return DatagridActions || DatagridBatchActions || DatagridDenseActions ? (
     <div className={`${blockClass}__table-toolbar`}>
       <TableToolbar>
         {DatagridActions && DatagridActions(datagridState)}
+        {DatagridDenseActions && DatagridDenseActions(datagridState)}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
     </div>

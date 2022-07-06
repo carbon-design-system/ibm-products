@@ -19,6 +19,7 @@ import {
   Restart16,
   Download16,
   Filter16,
+  Add16,
 } from '@carbon/icons-react';
 import { DataTable, Button, Pagination } from 'carbon-components-react';
 import {
@@ -43,6 +44,7 @@ import {
   LeftPanelStory,
 } from './Datagrid.stories';
 import mdx from './Datagrid.mdx';
+import { pkg } from '../../settings';
 
 import styles from './_storybook-styles.scss';
 
@@ -60,6 +62,8 @@ export default {
     },
   },
 };
+
+const blockClass = `${pkg.prefix}--datagrid`;
 
 const Wrapper = ({ children }) => (
   <div
@@ -279,6 +283,27 @@ export const WithHeader = () => {
       pageSizes: [5, 10, 25, 50],
     },
     DatagridActions,
+    DatagridPagination,
+  });
+
+  return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
+export const WithDenseHeader = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(11));
+  const gridTitle = 'Data table title';
+  const gridDescription = 'Additional information if needed';
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    gridTitle,
+    gridDescription,
+    initialState: {
+      pageSize: 10,
+      pageSizes: [5, 10, 25, 50],
+    },
+    DatagridDenseActions,
     DatagridPagination,
   });
 
@@ -646,6 +671,67 @@ const DatagridActions = (datagridState) => {
           )}
         </TableToolbarContent>
       </React.Fragment>
+    )
+  );
+};
+
+const DatagridDenseActions = (datagridState) => {
+  const {
+    selectedFlatRows,
+    CustomizeColumnsButton,
+    RowSizeDropdown,
+    rowSizeDropdownProps,
+  } = datagridState;
+  const downloadCsv = () => {
+    alert('Downloading...');
+  };
+  const { TableToolbarContent } = DataTable;
+
+  const leftPanelClick = () => {
+    alert('open/close left panel...');
+  };
+  const isNothingSelected = selectedFlatRows.length === 0;
+  const style = {
+    'button:nth-child(1) > span:nth-child(1)': {
+      bottom: '-37px',
+    },
+  };
+  return (
+    isNothingSelected && (
+      <TableToolbarContent size="sm">
+        <div style={style}>
+          <Button
+            kind="ghost"
+            hasIconOnly
+            tooltipPosition="bottom"
+            renderIcon={Download16}
+            iconDescription={'Download CSV'}
+            onClick={downloadCsv}
+          />
+        </div>
+        <div style={style}>
+          <Button
+            kind="ghost"
+            hasIconOnly
+            tooltipPosition="bottom"
+            renderIcon={Filter16}
+            iconDescription={'Left panel'}
+            onClick={leftPanelClick}
+          />
+        </div>
+        <RowSizeDropdown {...rowSizeDropdownProps} />
+        <div style={style} className={`${blockClass}__toolbar-divider`}>
+          <Button kind="ghost" renderIcon={Add16} iconDescription={'Action'}>
+            Ghost button
+          </Button>
+        </div>
+
+        {CustomizeColumnsButton && (
+          <div style={style}>
+            <CustomizeColumnsButton />
+          </div>
+        )}
+      </TableToolbarContent>
     )
   );
 };

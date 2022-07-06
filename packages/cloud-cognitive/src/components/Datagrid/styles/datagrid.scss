@@ -393,17 +393,23 @@
 }
 
 .#{$block-class}__table-toolbar + .#{$block-class}__table-container {
-  height: calc(100% - 48px);
+  height: calc(
+    100% - $spacing-09
+  ); //if only toolbar: table-container height= 100% height - toolbar height
 }
 
 .#{$carbon-prefix}--data-table-header
   + .#{$block-class}__table-toolbar
   + .#{$block-class}__table-container {
-  height: calc(100% - 134px);
+  height: calc(
+    100% - 8.375rem
+  ); //if header and toolbar: table-container height= 100% height -  (header height + toolbar height)
 }
 
 .#{$carbon-prefix}--data-table-header + .#{$block-class}__table-container {
-  height: calc(100% - 86px);
+  height: calc(
+    100% - 5.375rem
+  ); //if only header: table-container height= 100% height - header height
 }
 
 .#{$block-class}__carbon-row-expanded {
@@ -411,5 +417,50 @@
   &.#{$block-class}__carbon-row-expanded-hover-active
     ~ .#{$block-class}__carbon-nested-row {
     border-left: 1px solid $interactive-01;
+  }
+}
+
+.#{$block-class}__dense-header {
+  display: flex;
+  flex-wrap: wrap;
+
+  .#{$carbon-prefix}--data-table-header {
+    flex: 1 1 auto;
+    padding-bottom: $spacing-05;
+  }
+
+  .#{$block-class}__table-container {
+    flex: 0 0 auto;
+  }
+
+  .#{$carbon-prefix}__table-container {
+    flex: 1 1 100%;
+  }
+
+  .#{$carbon-prefix}--data-table-header
+    + .#{$block-class}__table-toolbar
+    + .#{$block-class}__table-container {
+    height: calc(
+      100% - $spacing-11
+    ); //if dense header: table-container height= 100% height - header height(
+  }
+
+  .#{$carbon-prefix}--table-toolbar {
+    padding-top: $spacing-07;
+  }
+
+  .#{$block-class}__toolbar-divider {
+    position: relative;
+  }
+
+  .#{$block-class}__toolbar-divider::before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 1px;
+    height: $spacing-05;
+    border-left: 1px solid $ui-03;
+    content: '';
+    transform: translateY(-50%);
   }
 }

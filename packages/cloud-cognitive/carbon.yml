@@ -377,7 +377,7 @@ assets:
     tags:
       - input-control
       - form
-      - options-tile
+      - content-block
   page-header:
     name: Page header
     status: stable

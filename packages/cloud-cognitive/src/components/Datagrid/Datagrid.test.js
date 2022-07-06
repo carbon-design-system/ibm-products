@@ -487,7 +487,7 @@ const RadioSelect = ({ ...rest }) => {
       data,
       hideSelectAll: true,
       radio: true,
-      onRadioSelect: (row) => console.log(`Row clicked: ${row.id}`),
+      // onRadioSelect: (row) => console.log(`Row clicked: ${row.id}`),
       initialState: {
         selectedRowIds: {
           3: true,
@@ -797,6 +797,25 @@ describe(componentName, () => {
         10
       )
     ).toEqual(480000);
+
+    expect(
+      parseInt(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('div')[0]
+          .getElementsByTagName('div')[0].style.height,
+        10
+      ) /
+        parseInt(
+          screen
+            .getByRole('table')
+            .getElementsByTagName('tbody')[0]
+            .getElementsByTagName('div')[0]
+            .getElementsByTagName('div')[0]
+            .getElementsByTagName('div')[0].style.height
+        )
+    ).toEqual(10000);
 
     /*
     console.log(

@@ -745,8 +745,7 @@ describe(componentName, () => {
       screen
         .getByRole('table')
         .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td').length
+        .getElementsByTagName('tr').length
     ).toEqual(1);
 
     expect(

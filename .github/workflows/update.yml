@@ -18,6 +18,8 @@ jobs:
         run: |
           yarn upgrade:carbon
           yarn
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
 
       - name: Create PR
         id: create-pr
@@ -79,6 +81,8 @@ jobs:
           yarn upgrade:automatic
           rm yarn.lock
           yarn
+        env:
+          YARN_ENABLE_IMMUTABLE_INSTALLS: false
 
       - name: Create PR
         id: create-pr

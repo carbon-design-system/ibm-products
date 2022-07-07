@@ -27317,6 +27317,9 @@ optgroup.bx--select-optgroup:disabled,
     width: 48%;
   }
 }
+.bx--modal-container .bx--modal-container-body {
+  display: contents;
+}
 
 .bx--modal-content {
   font-size: var(--cds-body-long-01-font-size, 0.875rem);

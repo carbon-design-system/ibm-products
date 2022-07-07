@@ -110,7 +110,7 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
     >
       {leftPanel && (
         <div
-          className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex`}
+          className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
         >
           {dataGrid}
         </div>

@@ -3284,6 +3284,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: inline-flex;
   white-space: nowrap;
 }
+.c4p--tag-set .c4p--tag-set__tag-container--multiline {
+  flex-wrap: wrap;
+}
 .c4p--tag-set .c4p--tag-set__tag-container--hidden {
   position: absolute;
   top: -100vh;

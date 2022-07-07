@@ -629,7 +629,7 @@ const InfiniteScroll = () => {
   );
 };
 
-/*const InitialLoad = () => {
+const InitialLoad = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data, setData] = useState(makeData(0));
 
@@ -645,7 +645,7 @@ const InfiniteScroll = () => {
 
   useEffect(() => {
     fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const datagridState = useDatagrid({
@@ -655,7 +655,7 @@ const InfiniteScroll = () => {
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;
-};*/
+};
 
 const WithPagination = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -757,11 +757,9 @@ describe(componentName, () => {
     ).toBeNull;
   });
 
-  /*
   it('Initial Load', () => {
-
     render(<InitialLoad data-testid={dataTestId}></InitialLoad>);
-  });*/
+  });
 
   //TODO: Ask Mark, what should we check / expect this to be?
   it('Infinite Scroll', () => {

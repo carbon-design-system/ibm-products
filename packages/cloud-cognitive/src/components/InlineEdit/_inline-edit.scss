@@ -23,6 +23,7 @@
 
 // cut down version borrowed from 'carbon-components/scss/globals/scss/vendor/@carbon/styles/scss/utilities/focus-outline';
 @mixin input-outline($color: $focus) {
+  /* stylelint-disable-next-line carbon/theme-token-use */
   outline: $spacing-01 solid $color;
   outline-offset: calc(-1 * $spacing-01);
 
@@ -51,7 +52,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
 @include block-wrap($block-class) {
   --#{$block-class}--size: #{$spacing-08};
   --#{$block-class}--icon-size: #{$spacing-05};
-  /* stylelint-disable-next-line carbon/theme-token-use */
   --#{$block-class}--background-color: #{$layer-01};
   --#{$block-class}--toolbar-width: calc(2 * var(--#{$block-class}--size));
 
@@ -109,6 +109,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
     width: calc(100% - var(--#{$block-class}--toolbar-width) - $spacing-05);
     max-width: calc(100% - var(--#{$block-class}--toolbar-width) - $spacing-05);
     min-height: var(--#{$block-class}--size);
+    // stylelint-disable-next-line carbon/layout-token-use
     margin-right: var(--#{$block-class}--toolbar-width);
     // room for toolbar
     margin-left: $spacing-05;
@@ -277,7 +278,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
     padding-left: 0;
     border-right: 0;
     border-left: 0;
-    // stylelint-disable-next-line carbon/layout-token-use
     margin-right: calc(-1 * var(--#{$block-class}--size));
 
     svg {

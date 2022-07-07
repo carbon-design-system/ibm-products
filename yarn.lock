@@ -2078,7 +2078,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes@npm:10.54.0, @carbon/themes@npm:^10.53.2, @carbon/themes@npm:^10.54.0":
+"@carbon/themes@npm:10.54.0, @carbon/themes@npm:^10.54.0":
   version: 10.54.0
   resolution: "@carbon/themes@npm:10.54.0"
   dependencies:
@@ -9339,7 +9339,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components@npm:^10.55.2, carbon-components@npm:^10.57.1":
+"carbon-components@npm:^10.57.1":
   version: 10.57.2
   resolution: "carbon-components@npm:10.57.2"
   dependencies:
@@ -15042,7 +15042,7 @@ __metadata:
     rimraf: ^3.0.2
     stylelint: ^14.8.2
     stylelint-config-ibm-products: "*"
-    stylelint-plugin-carbon-tokens: 0.12.0
+    stylelint-plugin-carbon-tokens: 2.0.0-beta.6
     webpack: ^5.72.1
   languageName: unknown
   linkType: soft
@@ -19417,7 +19417,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-check-updates@npm:^12.5.11, npm-check-updates@npm:^12.5.4":
+"npm-check-updates@npm:^12.5.11":
   version: 12.5.12
   resolution: "npm-check-updates@npm:12.5.12"
   dependencies:
@@ -21029,7 +21029,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-scss@npm:^4.0.2":
+"postcss-scss@npm:^4.0.2, postcss-scss@npm:^4.0.4":
   version: 4.0.4
   resolution: "postcss-scss@npm:4.0.4"
   peerDependencies:
@@ -24571,7 +24571,7 @@ __metadata:
     stylelint-config-standard: ^25.0.0
     stylelint-config-standard-scss: ^3.0.0
     stylelint-no-unsupported-browser-features: ^5.0.3
-    stylelint-plugin-carbon-tokens: ^0.12.0
+    stylelint-plugin-carbon-tokens: 2.0.0-beta.6
   peerDependencies:
     stylelint: ^14.8.2
   languageName: unknown
@@ -24703,18 +24703,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-plugin-carbon-tokens@npm:0.12.0, stylelint-plugin-carbon-tokens@npm:^0.12.0":
-  version: 0.12.0
-  resolution: "stylelint-plugin-carbon-tokens@npm:0.12.0"
+"stylelint-plugin-carbon-tokens@npm:2.0.0-beta.6":
+  version: 2.0.0-beta.6
+  resolution: "stylelint-plugin-carbon-tokens@npm:2.0.0-beta.6"
   dependencies:
-    "@carbon/colors": ^10.37.1
-    "@carbon/layout": ^10.37.1
-    "@carbon/motion": ^10.29.0
-    "@carbon/themes": ^10.53.2
-    carbon-components: ^10.55.2
     lodash: ^4.17.21
-    npm-check-updates: ^12.5.4
-  checksum: 96b05956646a079c5e3e0f18bad33b74f876aa0258a9c1ad0c32bdb0ce7710e6846ab24c38c7bb2ebf61348d50e16db0bca9129898d48848de82cb6ac4c38131
+    postcss-scss: ^4.0.4
+    postcss-value-parser: ^4.2.0
+  peerDependencies:
+    "@carbon/colors": ">=10 <= 11"
+    "@carbon/layout": ">=10 <= 11"
+    "@carbon/motion": ">=10 <= 11"
+    "@carbon/themes": ">=10 <= 11"
+    "@carbon/type": ">=10 <= 11"
+  checksum: fbadf56de5064ac88e17a324c346b192561df2d8178d10349dd7ffeba37226210952cc74917e7f434bb913a3b69668470e55620a03849374c86f0b1719289c6b
   languageName: node
   linkType: hard
 

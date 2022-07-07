@@ -251,7 +251,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     z-index: 4;
     background-color: $layer-01;
     opacity: var(--#{$block-class}--subtitle-opacity);
-    // stylelint-disable-next-line carbon/layout-token-use
     transform: translateY(var(--#{$block-class}--title-y-position));
   }
   .#{$block-class}__label-text {
@@ -261,7 +260,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding-right: $spacing-05;
     opacity: var(--#{$block-class}--subtitle-opacity);
     text-overflow: ellipsis;
-    // stylelint-disable-next-line carbon/layout-token-use
     transform: translateY(var(--#{$block-class}--title-y-position));
     white-space: nowrap;
   }
@@ -387,6 +385,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   .#{$block-class}__action-toolbar {
     position: sticky;
     z-index: 4;
+    // stylelint-disable-next-line carbon/layout-token-use
     top: var(--#{$block-class}--title-height);
     display: flex;
     align-items: center;

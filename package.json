@@ -35,7 +35,7 @@
     "lint:es:files": "eslint",
     "lint:prettier": "yarn format:prettier --check --loglevel warn",
     "lint:prettier:files": "yarn format:prettier:files --check --loglevel warn",
-    "lint:style": "yarn lint:style:files 'packages/*/src/**/*.scss'",
+    "lint:style": "yarn lint:style:files 'packages/*/src/**/*.scss' '!packages/security/src/**/*.scss' '!packages/cdai/src/**/*.scss'",
     "lint:style:files": "stylelint --report-needless-disables --report-invalid-scope-disables",
     "prepare": "husky install",
     "run-all": "lerna run --stream --prefix --loglevel success",
@@ -155,7 +155,7 @@
     "**/*": "yarn spellcheck:files"
   },
   "dependencies": {
-    "stylelint-plugin-carbon-tokens": "0.12.0"
+    "stylelint-plugin-carbon-tokens": "2.0.0-beta.6"
   },
   "packageManager": "yarn@3.2.1"
 }

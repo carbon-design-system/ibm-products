@@ -858,10 +858,6 @@ export const RowSizeDropdown = () => {
 };
 RowSizeDropdown.story = RowSizeDropdownStory;
 
-import { pkg } from '../../settings';
-
-const blockClass = `${pkg.prefix}--datagrid`;
-
 export const LeftPanel = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));

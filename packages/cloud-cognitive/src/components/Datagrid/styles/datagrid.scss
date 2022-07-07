@@ -436,6 +436,10 @@
   }
 }
 
+.#{$block-class} .#{$carbon-prefix}--data-table-header {
+  background: transparent;
+}
+
 .#{$block-class}__dense-header {
   display: flex;
   flex-wrap: wrap;
@@ -445,8 +449,11 @@
     padding-bottom: $spacing-05;
   }
 
-  .#{$block-class}__table-container {
+  .#{$block-class}__table-toolbar {
     flex: 0 0 auto;
+  }
+  .#{$carbon-prefix}--table-toolbar {
+    background: transparent;
   }
 
   .#{$carbon-prefix}__table-container {

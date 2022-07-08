@@ -1,32 +1,6 @@
 <svg width="320" height="180" viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect x="60" y="41" width="200" height="109" fill="white"/>
-<rect x="60" y="29" width="200" height="13" fill="#171717"/>
-<rect opacity="0.844385" x="94" y="34.5" width="22" height="3" fill="#C6C6C6"/>
-<rect opacity="0.844385" x="67" y="34.5" width="22" height="3" fill="#C6C6C6"/>
-<rect opacity="0.844385" x="121" y="34.5" width="22" height="3" fill="#C6C6C6"/>
-<rect opacity="0.844385" x="239" y="33" width="5" height="5" fill="#C6C6C6"/>
-<rect opacity="0.844385" x="249" y="33" width="5" height="5" fill="#C6C6C6"/>
-<g style="mix-blend-mode:multiply">
-<rect x="60.5" y="41.5" width="199" height="109" fill="#F4F4F4"/>
-<rect x="60.5" y="41.5" width="199" height="109" stroke="#C6C6C6"/>
-</g>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M61 42H259V63.4286V77H61V42Z" fill="white"/>
-<rect opacity="0.891745" x="65" y="46" width="16" height="2" fill="#78A9FF"/>
-<rect opacity="0.891745" x="65" y="71" width="25" height="2" fill="#A8A8A8"/>
-<rect opacity="0.891745" x="65" y="113" width="57" height="2" fill="#A8A8A8"/>
-<rect opacity="0.891745" x="65" y="121" width="57" height="2" fill="#A8A8A8"/>
-<rect opacity="0.891745" x="65" y="117" width="49" height="2" fill="#A8A8A8"/>
-<rect opacity="0.891745" x="65" y="125" width="49" height="2" fill="#A8A8A8"/>
-<rect opacity="0.891745" x="108" y="71" width="25" height="2" fill="#BEBEBE"/>
-<rect opacity="0.891745" x="86" y="46" width="16" height="2" fill="#78A9FF"/>
-<rect x="65" y="52" width="54" height="3" fill="#A8A8A8"/>
-<rect x="65" y="89" width="34" height="3" fill="#A8A8A8"/>
-<rect x="60" y="77" width="44" height="2" fill="#0F62FE"/>
-<rect x="106" y="77" width="44" height="2" fill="#BEBEBE"/>
-<rect x="61" y="66" width="198" height="0.5" fill="#C6C6C6"/>
-<rect x="190" y="47" width="31" height="7" fill="#0F62FE"/>
-<rect x="224" y="47" width="31" height="7" fill="#393939"/>
-<rect x="65" y="97" width="74" height="8" fill="white" stroke="#0F62FE"/>
-<rect x="65" y="135" width="74" height="8" fill="white"/>
-<rect x="65" y="143" width="74" height="1" fill="#C6C6C6"/>
+<rect x="56" y="74" width="208" height="31.5077" fill="#F3F3F3"/>
+<path d="M56 105H264" stroke="#979797"/>
+<rect x="71.8477" y="86.8" width="95.0857" height="6.89231" fill="#A8A8A8"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M247.913 85.8931C248.279 86.2593 248.279 86.8526 247.913 87.2188L240.882 94.2501H237.875V91.2435L244.906 84.2122C245.273 83.8469 245.866 83.8469 246.232 84.2122L247.913 85.8931ZM249.594 95.6563H237.406V96.5938H249.594V95.6563ZM245.569 84.8746L247.25 86.556L245.844 87.9622L244.162 86.2809L245.569 84.8746ZM238.812 91.6317V93.3126H240.493L245.181 88.6251L243.5 86.9438L238.812 91.6317Z" fill="black"/>
 </svg>

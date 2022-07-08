@@ -7,17 +7,44 @@
 <rect opacity="0.844385" x="239" y="33" width="5" height="5" fill="#C6C6C6"/>
 <rect opacity="0.844385" x="249" y="33" width="5" height="5" fill="#C6C6C6"/>
 <g style="mix-blend-mode:multiply">
-<rect x="60.5" y="29.5" width="199" height="121" fill="#F4F4F4"/>
-<rect x="60.5" y="29.5" width="199" height="121" stroke="#C6C6C6"/>
+<rect x="60" y="41" width="200" height="110" fill="#8D8D8D"/>
 </g>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M61 42H259V54.2449V62H61V42Z" fill="white"/>
-<rect x="61" y="42" width="48" height="108" fill="white"/>
-<rect x="61" y="62" width="198" height="0.5" fill="#C6C6C6"/>
-<rect x="61" y="73" width="48" height="8" fill="#E0E0E0"/>
-<rect x="61" y="73" width="2" height="8" fill="#0F62FE"/>
-<rect x="67" y="68" width="22" height="2" fill="#A8A8A8"/>
-<rect x="67" y="76" width="22" height="2" fill="#8D8D8D"/>
-<rect x="67" y="84" width="22" height="2" fill="#A8A8A8"/>
-<rect x="67" y="92" width="22" height="2" fill="#A8A8A8"/>
-<rect x="67" y="100" width="22" height="2" fill="#A8A8A8"/>
+<g filter="url(#filter0_d_36_3803)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M196 42H259V108.122V150H196V42Z" fill="white"/>
+</g>
+<rect x="199" y="84" width="57" height="7" fill="#F4F4F4"/>
+<rect x="199" y="97" width="57" height="7" fill="#F4F4F4"/>
+<rect x="199" y="110" width="57" height="7" fill="#F4F4F4"/>
+<rect x="199" y="123" width="26" height="7" fill="#F4F4F4"/>
+<rect x="229" y="123" width="27" height="7" fill="#F4F4F4"/>
+<rect x="199" y="91" width="57" height="1" fill="#C6C6C6"/>
+<rect x="199" y="103" width="57" height="1" fill="#C6C6C6"/>
+<rect x="199" y="117" width="57" height="1" fill="#C6C6C6"/>
+<rect x="199" y="130" width="26" height="1" fill="#C6C6C6"/>
+<rect x="229" y="130" width="27" height="1" fill="#C6C6C6"/>
+<rect x="199" y="56" width="45" height="2" fill="#A8A8A8"/>
+<rect x="199" y="78" width="45" height="2" fill="#A8A8A8"/>
+<rect x="199" y="74" width="22" height="2" fill="#8D8D8D"/>
+<rect x="199" y="50" width="30" height="3" fill="#8D8D8D"/>
+<rect x="196" y="139" width="63" height="11" fill="#0F6DFF"/>
+<rect x="196" y="66" width="64" height="0.5" fill="#C6C6C6"/>
+<path d="M254.265 48L255.5 46.7651L255.235 46.5L254 47.7349L252.765 46.5L252.5 46.7651L253.735 48L252.5 49.2349L252.765 49.5L254 48.2651L255.235 49.5L255.5 49.2349L254.265 48V48Z" fill="black"/>
+<mask id="mask0_36_3803" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="252" y="46" width="4" height="4">
+<path d="M254.265 48L255.5 46.7651L255.235 46.5L254 47.7349L252.765 46.5L252.5 46.7651L253.735 48L252.5 49.2349L252.765 49.5L254 48.2651L255.235 49.5L255.5 49.2349L254.265 48V48Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_36_3803)">
+<rect width="12" height="12" transform="translate(251 45)" fill="#171717"/>
+</g>
+<defs>
+<filter id="filter0_d_36_3803" x="191" y="38" width="71" height="116" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="-1"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_36_3803"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_36_3803" result="shape"/>
+</filter>
+</defs>
 </svg>

@@ -316,7 +316,6 @@ assets:
     tags:
       - system-feedback
       - input-control
-      - content-block
       - form
   inline-edit:
     name: Inline edit

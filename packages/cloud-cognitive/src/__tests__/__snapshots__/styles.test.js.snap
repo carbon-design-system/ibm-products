@@ -1143,6 +1143,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--side-panel__container .c4p--side-panel__action-toolbar {
   position: sticky;
   z-index: 4;
+  /* stylelint-disable-next-line carbon/layout-token-use */
   top: var(--c4p--side-panel--title-height);
   display: flex;
   align-items: center;
@@ -1777,7 +1778,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--tearsheet-create .c4p--tearsheet-create__step__step--visible-step {
-  animation: 400ms step-content-entrance;
+  animation: step-content-entrance 400ms;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
   opacity: 0;
@@ -2275,6 +2276,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --c4p--inline-edit--icon-size: var(--cds-spacing-05, 1rem);
 }
 .c4p--inline-edit.c4p--inline-edit--invalid {
+  /* stylelint-disable-next-line carbon/theme-token-use */
   outline: var(--cds-spacing-01, 0.125rem) solid var(--cds-support-01, #da1e28);
   outline-offset: calc(-1 * var(--cds-spacing-01, 0.125rem));
 }
@@ -2284,6 +2286,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--inline-edit.c4p--inline-edit--editing {
+  /* stylelint-disable-next-line carbon/theme-token-use */
   outline: var(--cds-spacing-01, 0.125rem) solid var(--cds-focus, #0f62fe);
   outline-offset: calc(-1 * var(--cds-spacing-01, 0.125rem));
   background-color: var(--cds-ui-01, #f4f4f4);
@@ -2299,6 +2302,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   width: calc(100% - var(--c4p--inline-edit--toolbar-width) - var(--cds-spacing-05, 1rem));
   max-width: calc(100% - var(--c4p--inline-edit--toolbar-width) - var(--cds-spacing-05, 1rem));
   min-height: var(--c4p--inline-edit--size);
+  /* stylelint-disable-next-line carbon/layout-token-use */
   margin-right: var(--c4p--inline-edit--toolbar-width);
   margin-left: var(--cds-spacing-05, 1rem);
   line-height: var(--c4p--inline-edit--size);
@@ -3421,19 +3425,25 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 @keyframes background-appear {
   from {
+    /* stylelint-disable-next-line carbon/theme-token-use */
     background-color: var(--from-color);
   }
   to {
+    /* stylelint-disable-next-line carbon/theme-token-use */
     background-color: var(--to-color);
   }
 }
 @keyframes background-and-shadow-appear {
   from {
+    /* stylelint-disable-next-line carbon/theme-token-use */
     background-color: var(--from-color);
+    /* stylelint-disable-next-line carbon/theme-token-use */
     box-shadow: 0 1px 0 var(--from-color);
   }
   to {
+    /* stylelint-disable-next-line carbon/theme-token-use */
     background-color: var(--to-color);
+    /* stylelint-disable-next-line carbon/theme-token-use */
     box-shadow: 0 1px 0 var(--to-color-shadow);
   }
 }
@@ -3443,6 +3453,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   /* z-index used to raise above any position relative content as per Carbon header */
   /* dropped  1 below Carbon header so as not to overlay the side panel */
   z-index: 7999;
+  /* stylelint-disable-next-line carbon/layout-token-use */
   top: var(--c4p--page-header--header-top);
   display: inline-block; /* cause top/bottom margin to reserve space */
   width: 100%;
@@ -3470,6 +3481,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: block;
   width: 100%;
   height: 100%;
+  /* stylelint-disable-next-line carbon/motion-token-use */
   animation: background-and-shadow-appear 1000ms linear paused forwards;
   animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
   content: \\"\\";
@@ -3609,6 +3621,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: block;
   width: 100%;
   height: 100%;
+  /* stylelint-disable-next-line carbon/motion-token-use */
   animation: background-appear 1000ms linear paused forwards;
   animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
   content: \\"\\";
@@ -3649,7 +3662,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--page-header .c4p--page-header__breadcrumb-title:not(.c4p--page-header__breadcrumb-title--pre-collapsed) {
   opacity: var(--c4p--page-header--breadcrumb-title-opacity);
-  transform: translateY(var(--c4p--page-header--breadcrumb-title-top)); /* token linter does not support this form */
+  transform: translateY(var(--c4p--page-header--breadcrumb-title-top));
   visibility: var(--c4p--page-header--breadcrumb-title-visibility);
 }
 .c4p--page-header .c4p--page-header__breadcrumb-container--hidden .c4p--page-header__breadcrumb-title.c4p--page-header__breadcrumb-title {
@@ -3787,6 +3800,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: block;
   width: 100%;
   height: 100%;
+  /* stylelint-disable-next-line carbon/motion-token-use */
   animation: background-appear 1000ms linear paused forwards;
   animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
   content: \\"\\";

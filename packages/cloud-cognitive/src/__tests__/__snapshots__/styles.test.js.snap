@@ -3284,6 +3284,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: inline-flex;
   white-space: nowrap;
 }
+.c4p--tag-set .c4p--tag-set__tag-container--multiline {
+  flex-wrap: wrap;
+}
 .c4p--tag-set .c4p--tag-set__tag-container--hidden {
   position: absolute;
   top: -100vh;
@@ -3441,8 +3444,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   /* dropped  1 below Carbon header so as not to overlay the side panel */
   z-index: 7999;
   top: var(--c4p--page-header--header-top);
-  display: inline-block;
-  /* cause top/bottom margin to reserve space */
+  display: inline-block; /* cause top/bottom margin to reserve space */
   width: 100%;
   background-color: var(--cds-ui-background, #ffffff);
   color: var(--cds-text-01, #161616);
@@ -3550,8 +3552,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (min-width: 66rem) {
   .c4p--page-header .c4p--page-header__action-bar-column-content {
-    flex-wrap: nowrap;
-    /* assume enough space */
+    flex-wrap: nowrap; /* assume enough space */
   }
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row .c4p--page-header__page-actions {
@@ -3570,15 +3571,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   visibility: visible;
 }
 .c4p--page-header .c4p--page-header__breadcrumb-column {
-  overflow: hidden;
-  /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
+  overflow: hidden; /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
   max-width: 100%;
   flex: 0 0 100%;
 }
 @media (min-width: 42rem) {
   .c4p--page-header .c4p--page-header__breadcrumb-column {
-    overflow: hidden;
-    /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
+    overflow: hidden; /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
   }
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row--has-action-bar.c4p--page-header__breadcrumb-row .c4p--page-header__breadcrumb-column {
@@ -3650,8 +3649,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--page-header .c4p--page-header__breadcrumb-title:not(.c4p--page-header__breadcrumb-title--pre-collapsed) {
   opacity: var(--c4p--page-header--breadcrumb-title-opacity);
-  transform: translateY(var(--c4p--page-header--breadcrumb-title-top));
-  /* token linter does not support this form */
+  transform: translateY(var(--c4p--page-header--breadcrumb-title-top)); /* token linter does not support this form */
   visibility: var(--c4p--page-header--breadcrumb-title-visibility);
 }
 .c4p--page-header .c4p--page-header__breadcrumb-container--hidden .c4p--page-header__breadcrumb-title.c4p--page-header__breadcrumb-title {
@@ -3662,8 +3660,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: var(--c4p--page-header--max-action-bar-width-px);
   flex: 1 1 var(--c4p--page-header--max-action-bar-width-px);
   padding-top: var(--cds-spacing-04, 0.75rem);
-  margin-top: calc(-1 * var(--cds-spacing-04, 0.75rem));
-  /* align with breadcrumb */
+  margin-top: calc(-1 * var(--cds-spacing-04, 0.75rem)); /* align with breadcrumb */
   vertical-align: top;
   white-space: nowrap;
 }
@@ -3674,8 +3671,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (min-width: 42rem) {
   .c4p--page-header .c4p--page-header__title-row {
-    flex-wrap: nowrap;
-    /* assume enough space */
+    flex-wrap: nowrap; /* assume enough space */
   }
 }
 .c4p--page-header .c4p--page-header__title-row.c4p--page-header__title-row--under-action-bar {
@@ -3857,8 +3853,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-bottom: var(--cds-spacing-05, 1rem);
 }
 .c4p--page-header .c4p--page-header__navigation-row .bx--tab-content {
-  display: none;
-  /* need to figure out how to handle the tab content */
+  display: none; /* need to figure out how to handle the tab content */
 }
 .c4p--page-header .c4p--page-header__navigation-tabs {
   margin-left: calc(-1 * var(--cds-spacing-05, 1rem));

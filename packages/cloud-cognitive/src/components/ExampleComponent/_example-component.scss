@@ -18,7 +18,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--example-component;
 .#{$block-class} {
   display: flex;
   justify-content: flex-end;
-  --#{$block-class}--border-color: initial;
+  --#{$block-class}--border-color: transparent;
 }
 
 .#{$block-class}.#{$block-class}--boxed-set {

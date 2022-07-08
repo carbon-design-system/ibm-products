@@ -29,6 +29,7 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   padding: $spacing-05;
 }
 
+/* stylelint-disable max-nesting-depth */
 .#{$block-class}__selections {
   &.#{$carbon-prefix}--structured-list {
     border-top: 1px solid $layer-accent-01;

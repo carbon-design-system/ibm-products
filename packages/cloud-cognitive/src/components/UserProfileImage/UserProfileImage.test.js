@@ -13,7 +13,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
 
 import { UserProfileImage } from '.';
-import { Group24 } from '@carbon/icons-react';
+import { Group } from '@carbon/icons-react';
 
 const carbonPrefix = 'cds';
 const blockClass = `${pkg.prefix}--user-profile-image`;
@@ -21,7 +21,7 @@ const componentName = UserProfileImage.displayName;
 
 const dataTestId = uuidv4();
 const kind = 'user';
-const size = 'xlg';
+const size = 'xl';
 const theme = 'light';
 
 const renderComponent = ({ ...rest }) =>
@@ -54,7 +54,7 @@ describe(componentName, () => {
   test('should return appropriately size circle based on size prop', () => {
     const { container } = renderComponent();
     const element = container.querySelector(`.${blockClass}`);
-    const hasSizeClass = element.className.includes('xlg');
+    const hasSizeClass = element.className.includes('xl');
     expect(hasSizeClass).toBeTruthy();
   });
 
@@ -116,7 +116,7 @@ describe(componentName, () => {
 
   it('should display a custom icon if one is provided', () => {
     const { container } = renderComponent({
-      icon: Group24,
+      icon: (props) => <Group size={24} {...props} />,
       kind: null,
     });
     const renderedSVG = container.querySelector('svg');

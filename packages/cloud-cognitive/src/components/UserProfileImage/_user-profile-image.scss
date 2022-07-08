@@ -20,7 +20,7 @@
 $block-class: #{$pkg-prefix}--user-profile-image;
 
 $sizes: (
-  xlg: $spacing-10,
+  xl: $spacing-10,
   lg: $spacing-07,
   md: $spacing-06,
   sm: calc(#{$spacing-05} + #{$spacing-02}),
@@ -69,7 +69,8 @@ $theme-keys: map-keys($themes);
   }
 }
 
-.#{$carbon-prefix}--tooltip__trigger.#{$block-class}__tooltip {
+.#{$carbon-prefix}--tooltip__trigger.#{$block-class}__tooltip,
+.#{$block-class}__tooltip.#{$carbon-prefix}--btn--ghost:not([disabled]) svg {
   /* stylelint-disable-next-line max-nesting-depth */
   &:hover,
   &:focus {
@@ -89,7 +90,14 @@ $theme-keys: map-keys($themes);
   text-transform: uppercase;
 }
 
-.#{$carbon-prefix}--tooltip__trigger .#{$block-class} svg {
+.#{$block-class}__tooltip.#{$carbon-prefix}--btn--md.#{$carbon-prefix}--btn--icon-only {
+  min-height: auto;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.#{$carbon-prefix}--tooltip__trigger .#{$block-class} svg,
+.#{$block-class}__tooltip.#{$carbon-prefix}--btn--ghost:not([disabled]) svg {
   fill: $layer-01;
 }
 
@@ -98,8 +106,8 @@ $theme-keys: map-keys($themes);
   border-radius: 100%;
 }
 
-.#{$block-class}__photo--xlg {
-  @include size('xlg');
+.#{$block-class}__photo--xl {
+  @include size('xl');
 }
 
 .#{$block-class}__photo--lg {
@@ -117,8 +125,8 @@ $theme-keys: map-keys($themes);
   @include size('xs');
 }
 
-.#{$block-class}--xlg {
-  @include size('xlg');
+.#{$block-class}--xl {
+  @include size('xl');
   @include type.type-style('productive-heading-04');
 }
 

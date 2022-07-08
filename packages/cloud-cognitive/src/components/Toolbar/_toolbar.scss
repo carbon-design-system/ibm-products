@@ -59,7 +59,7 @@ $toolbar-dimensions: $spacing-08;
 }
 
 .#{$block-class}__button__caret {
-  $caret-dimensions: rem(6px);
+  $caret-dimensions: calc(#{$spacing-01} + #{$spacing-02});
 
   $position: $spacing-01;
 

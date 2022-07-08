@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -163,10 +163,6 @@ $motion-duration: $duration-moderate-02;
     margin: 0;
   }
 
-  &.#{$block-class}--wide .#{$block-class}__header--with-close-icon {
-    padding-right: $spacing-10;
-  }
-
   .#{$block-class}__header-content {
     display: flex;
     justify-content: space-between;
@@ -218,6 +214,16 @@ $motion-duration: $duration-moderate-02;
 
   .#{$block-class}__header-navigation {
     margin: $spacing-04 0 0;
+  }
+
+  &.#{$block-class}--wide
+    .#{$block-class}__header.#{$block-class}__header--with-nav {
+    padding: $spacing-06 $spacing-07 0;
+  }
+
+  &.#{$block-class}--wide
+    .#{$block-class}__header.#{$block-class}__header--with-close-icon {
+    padding-right: $spacing-10;
   }
 
   .#{$block-class}__header-navigation {

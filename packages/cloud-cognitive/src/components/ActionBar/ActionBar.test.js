@@ -23,6 +23,7 @@ const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
       ? (props) => <Lightning size={16} {...props} />
       : (props) => <Bee size={16} {...props} />,
   iconDescription: `Action ${num.toString().padStart(2, '0')}`,
+  label: `Action ${num.toString().padStart(2, '0')}`,
   onClick: () => {},
 }));
 
@@ -135,7 +136,7 @@ describe(ActionBar.displayName, () => {
 
     expect(
       screen.queryByText(/Action 10/, {
-        selector: `.${blockClass}__displayed-items .${carbonPrefix}--assistive-text`,
+        selector: `.${blockClass}__displayed-items .${carbonPrefix}--popover-content.${carbonPrefix}--tooltip-content`,
       })
     ).toBeNull();
 
@@ -186,15 +187,15 @@ describe(ActionBar.displayName, () => {
     );
 
     screen.getByText(/Action 01/, {
-      selector: `.${blockClass}__displayed-items .${carbonPrefix}--assistive-text`,
+      selector: `.${blockClass}__displayed-items .${carbonPrefix}--popover-content.${carbonPrefix}--tooltip-content`,
     });
     screen.getByText(/Action 02/, {
-      selector: `.${blockClass}__displayed-items .${carbonPrefix}--assistive-text`,
+      selector: `.${blockClass}__displayed-items .${carbonPrefix}--popover-content.${carbonPrefix}--tooltip-content`,
     });
 
     expect(
       screen.queryByText(/Action 03/, {
-        selector: `.${blockClass}__displayed-items .${carbonPrefix}--assistive-text`,
+        selector: `.${blockClass}__displayed-items .${carbonPrefix}--popover-content.${carbonPrefix}--tooltip-content`,
       })
     ).toBeNull();
   });

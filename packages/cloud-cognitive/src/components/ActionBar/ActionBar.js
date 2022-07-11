@@ -234,8 +234,8 @@ ActionBar.displayName = componentName;
 ActionBar.propTypes = {
   /**
    * Specifies the action bar items. Each item is specified as an object
-   * with required fields: key for array rendering, renderIcon and
-   * iconDescription to provide the icon to display,
+   * with required fields: key for array rendering, renderIcon, iconDescription and
+   * label to provide the icon to display,
    * and optional 'onClick' to receive notifications when the button is clicked.
    * Additional fields in the object will be passed to the
    * Button component, and these can include 'disabled', 'ref', 'className',
@@ -260,6 +260,7 @@ ActionBar.propTypes = {
       key: PropTypes.string.isRequired,
       // Redefine as form different  to Button and a key prop used by ActionBarItems
       iconDescription: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
       renderIcon: Button.propTypes.renderIcon.isRequired,
       // We duplicate onClick here to improve DocGen in Storybook
       onClick: PropTypes.func,

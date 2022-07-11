@@ -28,7 +28,6 @@ export const ActionBarOverflowItems = ({
   overflowAriaLabel,
 }) => {
   const internalId = useRef(uuidv4());
-
   return (
     <OverflowMenu
       ariaLabel={overflowAriaLabel}
@@ -42,6 +41,7 @@ export const ActionBarOverflowItems = ({
         // This uses a copy of a menu item option
         // NOTE: Cannot use a real Tooltip icon below as it uses a <button /> the
         // div equivalent below is based on Carbon 10.25.0
+        const ItemIcon = item.props.renderIcon;
         return (
           <OverflowMenuItem
             className={`${blockClass}__item`}
@@ -54,9 +54,13 @@ export const ActionBarOverflowItems = ({
                   className={`${blockClass}__item-label`}
                   id={`${internalId.current}-${index}--item-label`}
                 >
-                  {item.props.iconDescription}
+                  {item.props.label}
                 </span>
-                {item.props.renderIcon}
+                {typeof item.props.renderIcon === 'function' ? (
+                  <ItemIcon />
+                ) : (
+                  item.props.renderIcon
+                )}
               </div>
             }
           />

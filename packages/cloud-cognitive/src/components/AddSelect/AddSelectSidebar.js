@@ -12,6 +12,8 @@ import PropTypes from 'prop-types';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
 import { AddSelectMetaPanel } from './AddSelectMetaPanel';
+
+const blockClass = `${pkg.prefix}--add-select__sidebar`;
 const componentName = 'AddSelectSidebar';
 
 export let AddSelectSidebar = ({
@@ -29,7 +31,6 @@ export let AddSelectSidebar = ({
   setDisplayMetaPanel,
   setMultiSelection,
 }) => {
-  const blockClass = `${pkg.prefix}--add-select__sidebar`;
   const hasModifiers = modifiers?.options?.length > 0;
   const hasSelections = multiSelection.length > 0;
 

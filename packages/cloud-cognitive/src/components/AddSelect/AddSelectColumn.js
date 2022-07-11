@@ -22,6 +22,10 @@ import { useItemSort } from './hooks/useItemSort';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import useParentSelect from './hooks/useParentSelect';
 
+const blockClass = `${pkg.prefix}--add-select`;
+const colClass = `${blockClass}__column`;
+const componentName = 'AddSelectColumn';
+
 export let AddSelectColumn = ({
   columnInputPlaceholder,
   header,
@@ -38,8 +42,6 @@ export let AddSelectColumn = ({
   const { sortDirection, setSortDirection, sortAttribute, setSortAttribute } =
     useItemSort();
   const [filters, setFilters] = useState([]);
-  const blockClass = `${pkg.prefix}--add-select`;
-  const colClass = `${blockClass}__column`;
   const { entries, filterBy, sortBy } = items;
   const getSelectedItem = () => {
     const parentInPath = path.find((entry) => entry.parentId === parentId);
@@ -215,3 +217,5 @@ AddSelectColumn.propTypes = {
   setMultiSelection: PropTypes.func,
   setPath: PropTypes.func,
 };
+
+AddSelectColumn.displayName = componentName;

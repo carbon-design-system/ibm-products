@@ -8,6 +8,7 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem } from 'carbon-components-react';
 import PropTypes from 'prop-types';
+
 const componentName = 'AddSelectBreadcrumbs';
 
 export let AddSelectBreadcrumbs = ({ path, onClick }) => {
@@ -34,7 +35,6 @@ export let AddSelectBreadcrumbs = ({ path, onClick }) => {
 };
 
 AddSelectBreadcrumbs.propTypes = {
-  itemsLabel: PropTypes.string,
   onClick: PropTypes.func,
   path: PropTypes.array,
 };

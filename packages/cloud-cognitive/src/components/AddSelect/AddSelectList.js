@@ -19,8 +19,10 @@ import {
 import { ChevronRight16, View16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { UserProfileImage } from '../UserProfileImage';
 import { pkg } from '../../settings';
+import { UserProfileImage } from '../UserProfileImage';
+
+const blockClass = `${pkg.prefix}--add-select__selections`;
 const componentName = 'AddSelectList';
 
 export let AddSelectList = ({
@@ -39,7 +41,6 @@ export let AddSelectList = ({
   setSingleSelection,
   singleSelection,
 }) => {
-  const blockClass = `${pkg.prefix}--add-select__selections`;
   const hasModifiers = modifiers?.options?.length > 0;
 
   const handleSingleSelection = (value) => {
@@ -161,6 +162,7 @@ export let AddSelectList = ({
                   )}
                   {item.children && (
                     <Button
+                      className={`${blockClass}-view-children`}
                       renderIcon={ChevronRight16}
                       iconDescription={navIconDescription}
                       tooltipPosition="left"
@@ -174,6 +176,7 @@ export let AddSelectList = ({
                   {item.meta && (
                     <div className={`${blockClass}-hidden-hover`}>
                       <Button
+                        className={`${blockClass}-view-meta`}
                         renderIcon={View16}
                         iconDescription={metaIconDescription}
                         tooltipPosition="left"

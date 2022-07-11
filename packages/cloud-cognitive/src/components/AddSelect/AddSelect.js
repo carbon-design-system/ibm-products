@@ -7,14 +7,15 @@
 
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { pkg } from '../../settings';
 import { AddSelectBody } from './AddSelectBody';
+import { pkg } from '../../settings';
 import { normalize, getGlobalFilterValues } from './add-select-utils';
+
+const blockClass = `${pkg.prefix}--add-select`;
 const componentName = 'AddSelect';
 
 export let AddSelect = forwardRef(({ items, ...props }, ref) => {
-  const blockClass = `${pkg.prefix}--add-select`;
-  const useNormalizedItems = !!items?.entries.find((item) => item.children);
+  const useNormalizedItems = !!items.entries.find((item) => item.children);
   const normalizedItems = useNormalizedItems ? normalize(items) : null;
   const globalFilterOpts =
     props.multi && props.globalFilters?.length
@@ -22,7 +23,7 @@ export let AddSelect = forwardRef(({ items, ...props }, ref) => {
       : null;
   const defaultModifiers =
     props.multi && items.modifiers
-      ? items?.entries.map((item) => {
+      ? items.entries.map((item) => {
           const modifierAttribute = items.modifiers.id;
           return {
             id: item.id,
@@ -47,9 +48,9 @@ export let AddSelect = forwardRef(({ items, ...props }, ref) => {
 AddSelect.propTypes = {
   className: PropTypes.string,
   clearFiltersText: PropTypes.string,
-  closeIconDescription: PropTypes.string,
+  closeIconDescription: PropTypes.string.isRequired,
   columnInputPlaceholder: PropTypes.string,
-  description: PropTypes.string,
+  description: PropTypes.string.isRequired,
   globalFilters: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -96,35 +97,47 @@ AddSelect.propTypes = {
         title: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
       })
-    ),
-  }),
-  itemsLabel: PropTypes.string,
+    ).isRequired,
+  }).isRequired,
+  itemsLabel: PropTypes.string.isRequired,
   metaIconDescription: PropTypes.string,
   metaPanelTitle: PropTypes.string,
-  multi: PropTypes.bool,
+  multi: PropTypes.bool.isRequired,
   navIconDescription: PropTypes.string,
-  noResultsDescription: PropTypes.string,
-  noResultsTitle: PropTypes.string,
+  noResultsDescription: PropTypes.string.isRequired,
+  noResultsTitle: PropTypes.string.isRequired,
   noSelectionDescription: PropTypes.string,
   noSelectionTitle: PropTypes.string,
-  onClose: PropTypes.func,
-  onCloseButtonText: PropTypes.string,
-  onSubmit: PropTypes.func,
-  onSubmitButtonText: PropTypes.string,
-  open: PropTypes.bool,
+  onClose: PropTypes.func.isRequired,
+  onCloseButtonText: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onSubmitButtonText: PropTypes.string.isRequired,
+  open: PropTypes.bool.isRequired,
   /**
    * portal target for the all tags modal
    */
   portalTarget: PropTypes.node,
   removeIconDescription: PropTypes.string,
   searchResultsLabel: PropTypes.string,
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
 };
 
 AddSelect.defaultProps = {
+  closeIconDescription: '',
+  description: '',
+  itemsLabel: '',
   items: {
     entries: [],
   },
+  multi: false,
+  noResultsDescription: '',
+  noResultsTitle: '',
+  onClose: () => {},
+  onCloseButtonText: '',
+  onSubmit: () => {},
+  onSubmitButtonText: '',
+  open: false,
+  title: '',
 };
 
 AddSelect.displayName = componentName;

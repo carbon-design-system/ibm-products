@@ -11,7 +11,6 @@ import cx from 'classnames';
 import { Tag } from 'carbon-components-react';
 import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
-import { pkg } from '../../settings';
 import { AddSelectSidebar } from './AddSelectSidebar';
 import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs';
 import { AddSelectList } from './AddSelectList';
@@ -22,6 +21,10 @@ import { sortItems, getFilteredItems } from './add-select-utils';
 import { useItemSort } from './hooks/useItemSort';
 import useParentSelect from './hooks/useParentSelect';
 import usePath from './hooks/usePath';
+import { pkg } from '../../settings';
+
+const blockClass = `${pkg.prefix}--add-select`;
+const componentName = 'AddSelectBody';
 
 export let AddSelectBody = ({
   className,
@@ -62,8 +65,6 @@ export let AddSelectBody = ({
   useNormalizedItems,
   ...rest
 }) => {
-  const blockClass = `${pkg.prefix}--add-select`;
-
   // hooks
   const [singleSelection, setSingleSelection] = useState('');
   const [multiSelection, setMultiSelection] = useState([]);
@@ -371,3 +372,5 @@ AddSelectBody.propTypes = {
   title: PropTypes.string,
   useNormalizedItems: PropTypes.bool,
 };
+
+AddSelectBreadcrumbs.displayName = componentName;

@@ -1652,7 +1652,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/colors@npm:10.37.1, @carbon/colors@npm:^10, @carbon/colors@npm:^10.37.0, @carbon/colors@npm:^10.37.1":
+"@carbon/colors@npm:10.37.1, @carbon/colors@npm:^10.37.0":
   version: 10.37.1
   resolution: "@carbon/colors@npm:10.37.1"
   checksum: 7cdc38370d1a51d968f28de951a180211b33db14f6dee5cd55c1d965ebe74c19c55924898df7c344f72dfa2c46a764ad16696038911e77b43d9b701d34c56514
@@ -1944,14 +1944,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/layout@npm:10.37.1, @carbon/layout@npm:^10, @carbon/layout@npm:^10.37.0, @carbon/layout@npm:^10.37.1":
+"@carbon/layout@npm:10.37.1, @carbon/layout@npm:^10.37.0, @carbon/layout@npm:^10.37.1":
   version: 10.37.1
   resolution: "@carbon/layout@npm:10.37.1"
   checksum: baabf7e70e4779f0e5000e700bcafe96f272debaac490a4345e39fedf8d0970636f7099e2607aeb9ca6170a56bbacdff69d8181c2a46ed8adac38fadc08332b6
   languageName: node
   linkType: hard
 
-"@carbon/motion@npm:10.29.0, @carbon/motion@npm:^10, @carbon/motion@npm:^10.29.0":
+"@carbon/motion@npm:10.29.0, @carbon/motion@npm:^10.29.0":
   version: 10.29.0
   resolution: "@carbon/motion@npm:10.29.0"
   checksum: 15894d6bc7c3cbe575ad8b0ac422846777558be1577b1c63da4ce401f5abd821cc278a302f83b5643262f3ca6348c9ba10d9fc48b735e6dcbb6e407c2424b6df
@@ -1992,7 +1992,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes@npm:10.54.0, @carbon/themes@npm:^10, @carbon/themes@npm:^10.53.2, @carbon/themes@npm:^10.54.0":
+"@carbon/themes@npm:10.54.0, @carbon/themes@npm:^10.54.0":
   version: 10.54.0
   resolution: "@carbon/themes@npm:10.54.0"
   dependencies:
@@ -9096,7 +9096,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components@npm:10.57.2, carbon-components@npm:^10, carbon-components@npm:^10.55.2, carbon-components@npm:^10.57.2":
+"carbon-components@npm:10.57.2, carbon-components@npm:^10.57.2":
   version: 10.57.2
   resolution: "carbon-components@npm:10.57.2"
   dependencies:
@@ -9877,7 +9877,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^9.1.0, commander@npm:^9.3.0":
+"commander@npm:^9.3.0":
   version: 9.3.0
   resolution: "commander@npm:9.3.0"
   checksum: d421ce66fee25792a1470c69aa8d1b86434bf873a96483aa92c8267f81a6f20c6f7c426f5e82f88ac50a8ec4855d3f2787aebcdef8aa559e1080a2337a95a217
@@ -14866,7 +14866,7 @@ __metadata:
     rimraf: ^3.0.2
     stylelint: ^14.9.1
     stylelint-config-ibm-products: "*"
-    stylelint-plugin-carbon-tokens: 0.12.0
+    stylelint-plugin-carbon-tokens: 2.0.0-beta.7
     webpack: ^5.73.0
   languageName: unknown
   linkType: soft
@@ -19182,46 +19182,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"npm-check-updates@npm:^12.5.4":
-  version: 12.5.12
-  resolution: "npm-check-updates@npm:12.5.12"
-  dependencies:
-    chalk: ^4.1.2
-    cint: ^8.2.1
-    cli-table: ^0.3.11
-    commander: ^9.1.0
-    fast-memoize: ^2.5.2
-    find-up: 5.0.0
-    fp-and-or: ^0.1.3
-    get-stdin: ^8.0.0
-    globby: ^11.0.4
-    hosted-git-info: ^5.0.0
-    json-parse-helpfulerror: ^1.0.3
-    jsonlines: ^0.1.1
-    libnpmconfig: ^1.2.1
-    lodash: ^4.17.21
-    minimatch: ^5.0.1
-    p-map: ^4.0.0
-    pacote: ^13.0.5
-    parse-github-url: ^1.0.2
-    progress: ^2.0.3
-    prompts: ^2.4.2
-    rc-config-loader: ^4.1.0
-    remote-git-tags: ^3.0.0
-    rimraf: ^3.0.2
-    semver: ^7.3.5
-    semver-utils: ^1.1.4
-    source-map-support: ^0.5.21
-    spawn-please: ^1.0.0
-    update-notifier: ^5.1.0
-    yaml: ^1.10.2
-  bin:
-    ncu: build/src/bin/cli.js
-    npm-check-updates: build/src/bin/cli.js
-  checksum: ddfc300de5e02a788c467729a76c99aa1c8d138bf9a44b0c48913f999e8995214722982052f6d75b672c0f54f706b1575998b513783825e61a52e669c90ca4dd
-  languageName: node
-  linkType: hard
-
 "npm-check-updates@npm:^15.0.1":
   version: 15.2.1
   resolution: "npm-check-updates@npm:15.2.1"
@@ -20828,7 +20788,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-scss@npm:^4.0.2":
+"postcss-scss@npm:^4.0.2, postcss-scss@npm:^4.0.4":
   version: 4.0.4
   resolution: "postcss-scss@npm:4.0.4"
   peerDependencies:
@@ -21137,7 +21097,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prompts@npm:^2.0.1, prompts@npm:^2.4.0, prompts@npm:^2.4.2":
+"prompts@npm:^2.0.1, prompts@npm:^2.4.0":
   version: 2.4.2
   resolution: "prompts@npm:2.4.2"
   dependencies:
@@ -24267,7 +24227,7 @@ __metadata:
     stylelint-config-standard: ^26.0.0
     stylelint-config-standard-scss: ^4.0.0
     stylelint-no-unsupported-browser-features: ^5.0.3
-    stylelint-plugin-carbon-tokens: ^1.0.0
+    stylelint-plugin-carbon-tokens: 2.0.0-beta.7
   peerDependencies:
     stylelint: ^14.9.1
   languageName: unknown
@@ -24444,33 +24404,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-plugin-carbon-tokens@npm:0.12.0":
-  version: 0.12.0
-  resolution: "stylelint-plugin-carbon-tokens@npm:0.12.0"
+"stylelint-plugin-carbon-tokens@npm:2.0.0-beta.7":
+  version: 2.0.0-beta.7
+  resolution: "stylelint-plugin-carbon-tokens@npm:2.0.0-beta.7"
   dependencies:
-    "@carbon/colors": ^10.37.1
-    "@carbon/layout": ^10.37.1
-    "@carbon/motion": ^10.29.0
-    "@carbon/themes": ^10.53.2
-    carbon-components: ^10.55.2
     lodash: ^4.17.21
-    npm-check-updates: ^12.5.4
-  checksum: 96b05956646a079c5e3e0f18bad33b74f876aa0258a9c1ad0c32bdb0ce7710e6846ab24c38c7bb2ebf61348d50e16db0bca9129898d48848de82cb6ac4c38131
-  languageName: node
-  linkType: hard
-
-"stylelint-plugin-carbon-tokens@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "stylelint-plugin-carbon-tokens@npm:1.0.0"
-  dependencies:
-    "@carbon/colors": ^10
-    "@carbon/layout": ^10
-    "@carbon/motion": ^10
-    "@carbon/themes": ^10
-    carbon-components: ^10
-    lodash: ^4.17.21
-    npm-check-updates: ^12.5.4
-  checksum: 244b0836451ff73e931deae87f400019f950bf270b928e97a3de760edfe33c8e266fc25c6a1315cb992cb5c234a9ed5fe71e95f436924992f23a2b1970fad377
+    postcss-scss: ^4.0.4
+    postcss-value-parser: ^4.2.0
+  peerDependencies:
+    "@carbon/colors": ">=10 <= 11"
+    "@carbon/layout": ">=10 <= 11"
+    "@carbon/motion": ">=10 <= 11"
+    "@carbon/themes": ">=10 <= 11"
+    "@carbon/type": ">=10 <= 11"
+  checksum: 1b1229e0210771b8bbe4ae25cbc9d0baaa42fbbbe73530571860f92f0488b7471d27369d600c873b6940275c56c4c9809d8856160e6e0b48fea94d91c026959f
   languageName: node
   linkType: hard
 
@@ -26882,7 +26829,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^1.10.0, yaml@npm:^1.10.2, yaml@npm:^1.7.2":
+"yaml@npm:^1.10.0, yaml@npm:^1.7.2":
   version: 1.10.2
   resolution: "yaml@npm:1.10.2"
   checksum: ce4ada136e8a78a0b08dc10b4b900936912d15de59905b2bf415b4d33c63df1d555d23acb2a41b23cf9fb5da41c256441afca3d6509de7247daa062fd2c5ea5f

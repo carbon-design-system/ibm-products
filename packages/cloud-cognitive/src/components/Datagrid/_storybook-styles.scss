@@ -30,3 +30,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
     border-bottom: none;
   }
 }
+
+.#{$block-class}__panelContent {
+  display: inline;
+}

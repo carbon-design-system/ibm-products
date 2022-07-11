@@ -147,11 +147,6 @@ export const MultiStepTearsheet = ({
                 }}
                 invalid={isInvalid}
                 invalidText="This is a required field"
-                onBlur={() => {
-                  if (!stepOneTextInputValue.length) {
-                    setIsInvalid(true);
-                  }
-                }}
               />
               <TextInput
                 labelText="Topic description (optional)"

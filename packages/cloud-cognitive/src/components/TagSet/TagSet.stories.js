@@ -193,6 +193,15 @@ export const ManyTags = prepareStory(Template, {
   },
 });
 
+export const MultilineTags = prepareStory(Template, {
+  args: {
+    tags: manyTags,
+    containerWidth: 500,
+    multiline: true,
+    ...overflowAndModalStrings,
+  },
+});
+
 export const HundredsOfTags = prepareStory(Template, {
   args: {
     tags: hundredsOfTags,

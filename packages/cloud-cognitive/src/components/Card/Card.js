@@ -113,7 +113,7 @@ export let Card = forwardRef(
                 renderIcon={Icon}
                 hasIconOnly
                 onClick={onClick}
-                size={actionsPlacement === 'top' ? 'sm' : 'field'}
+                size="sm"
                 iconDescription={iconDescription}
                 kind="ghost"
                 href={href}

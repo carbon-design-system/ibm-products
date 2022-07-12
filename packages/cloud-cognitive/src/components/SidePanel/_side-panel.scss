@@ -472,6 +472,10 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       height: $spacing-09;
     }
   }
+  &.#{$block-class}__container.#{$block-class}__container--xs
+    .#{$block-class}__actions-container.#{$action-set-block-class}--sm {
+    @include setPanelSize(map-get($side-panel-sizes, xs));
+  }
 }
 
 // form fields should receive correct background color

@@ -85,7 +85,7 @@ export let Card = forwardRef(
     const getActions = () => {
       if (overflowActions.length > 0) {
         const pos = actionsPlacement === 'top' ? 'bottom' : 'top';
-        const size = actionsPlacement === 'top' ? 'sm' : 'xl';
+        const size = actionsPlacement === 'top' ? 'sm' : 'md';
         return (
           <OverflowMenu size={size} direction={pos} flipped>
             {overflowActions.map(({ id, ...rest }) => (
@@ -113,7 +113,7 @@ export let Card = forwardRef(
                 renderIcon={Icon}
                 hasIconOnly
                 onClick={onClick}
-                size="sm"
+                size={actionsPlacement === 'top' ? 'sm' : 'field'}
                 iconDescription={iconDescription}
                 kind="ghost"
                 href={href}

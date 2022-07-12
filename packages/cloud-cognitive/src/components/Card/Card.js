@@ -87,7 +87,7 @@ export let Card = forwardRef(
     const getActions = () => {
       if (overflowActions.length > 0) {
         const pos = actionsPlacement === 'top' ? 'bottom' : 'top';
-        const size = actionsPlacement === 'top' ? 'sm' : 'xl';
+        const size = actionsPlacement === 'top' ? 'sm' : 'lg';
         return (
           <OverflowMenu
             size={size}

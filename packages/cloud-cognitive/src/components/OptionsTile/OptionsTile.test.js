@@ -83,8 +83,7 @@ describe(componentName, () => {
   it('renders a toggle if props.enabled is set', () => {
     render(<OptionsTile {...props} enabled />);
 
-    // TODO: update to role "switch" for Carbon v11
-    expect(screen.getByRole('checkbox'));
+    expect(screen.getByRole('switch'));
   });
 
   it('renders as static variant if no children are provided', () => {
@@ -179,8 +178,7 @@ describe(componentName, () => {
     render(<OptionsTile {...props} titleId={titleId} enabled />);
 
     expect(screen.getByRole('heading').id).toBe(titleId);
-    // TODO: update to role "switch" for Carbon v11
-    expect(screen.getByRole('checkbox')).toHaveAccessibleName(props.title);
+    expect(screen.getByRole('switch')).toHaveAccessibleName(props.title);
   });
 
   it('expands and collapses on click', () => {
@@ -198,8 +196,7 @@ describe(componentName, () => {
     render(<OptionsTile {...props} enabled onToggle={onToggle} />);
 
     expect(onToggle).not.toBeCalled();
-    // TODO: update to role "switch" for Carbon v11
-    fireEvent.click(screen.getByRole('checkbox'));
+    fireEvent.click(screen.getByRole('switch'));
     expect(onToggle).toBeCalled();
   });
 });

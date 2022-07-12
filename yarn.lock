@@ -1717,7 +1717,7 @@ __metadata:
     cpx: ^1.5.0
     focus-trap-react: ^9.0.2
     jest: ^28.1.2
-    jest-config-ibm-cloud-cognitive: ^0.24.0
+    jest-config-ibm-cloud-cognitive: ^0.24.1
     jest-environment-jsdom: ^28.1.2
     node-sass: ^7.0.1
     npm-check-updates: ^15.0.1
@@ -1771,7 +1771,7 @@ __metadata:
     "@carbon/import-once": 10.7.0
     "@carbon/layout": 10.37.1
     "@carbon/motion": 10.29.0
-    "@carbon/storybook-addon-theme": ^0.22.19
+    "@carbon/storybook-addon-theme": ^0.22.20
     "@carbon/themes": 10.54.0
     "@carbon/type": 10.44.0
     "@storybook/addon-actions": ^6.5.9
@@ -1792,7 +1792,7 @@ __metadata:
     "@storybook/react": ^6.5.9
     "@storybook/theming": ^6.5.9
     babel-loader: ^8.2.5
-    babel-preset-ibm-cloud-cognitive: ^0.14.15
+    babel-preset-ibm-cloud-cognitive: ^0.14.16
     carbon-components: ^10.57.2
     carbon-components-react: ^7.57.2
     carbon-icons: ^7.0.7
@@ -1821,7 +1821,7 @@ __metadata:
     "@babel/core": ^7.18.6
     "@babel/runtime": ^7.18.6
     "@carbon/telemetry": ^0.1.0
-    babel-preset-ibm-cloud-cognitive: ^0.14.15
+    babel-preset-ibm-cloud-cognitive: ^0.14.16
     chalk: ^4.1.2
     change-case: ^4.1.2
     copyfiles: ^2.4.1
@@ -1830,7 +1830,7 @@ __metadata:
     glob: ^8.0.3
     immutability-helper: ^3.1.1
     jest: ^28.1.2
-    jest-config-ibm-cloud-cognitive: ^0.24.0
+    jest-config-ibm-cloud-cognitive: ^0.24.1
     jest-environment-jsdom: ^28.1.2
     namor: ^1.1.2
     npm-check-updates: ^15.0.1
@@ -1875,7 +1875,7 @@ __metadata:
     "@carbon/themes": 10.54.0
     "@carbon/type": 10.44.0
     babel-plugin-macros: ^3.1.0
-    babel-preset-ibm-cloud-cognitive: ^0.14.15
+    babel-preset-ibm-cloud-cognitive: ^0.14.16
     carbon-components: 10.57.2
     carbon-components-react: 7.57.2
     carbon-icons: 7.0.7
@@ -1892,7 +1892,7 @@ __metadata:
     focus-trap-react: ^9.0.2
     invariant: ^2.2.4
     jest: ^28.1.2
-    jest-config-ibm-cloud-cognitive: ^0.24.0
+    jest-config-ibm-cloud-cognitive: ^0.24.1
     jest-environment-jsdom: ^28.1.2
     npm-check-updates: ^15.0.1
     npm-run-all: ^4.1.5
@@ -1958,7 +1958,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/storybook-addon-theme@^0.22.19, @carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
+"@carbon/storybook-addon-theme@^0.22.20, @carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
   version: 0.0.0-use.local
   resolution: "@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme"
   dependencies:
@@ -8224,7 +8224,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-ibm-cloud-cognitive@^0.14.15, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
+"babel-preset-ibm-cloud-cognitive@^0.14.16, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive"
   dependencies:
@@ -16153,7 +16153,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-config-ibm-cloud-cognitive@^0.24.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
+"jest-config-ibm-cloud-cognitive@^0.24.1, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive"
   dependencies:
@@ -16162,7 +16162,7 @@ __metadata:
     accessibility-checker: ^3.1.32
     axe-core: ^4.4.2
     babel-jest: ^28.1.2
-    babel-preset-ibm-cloud-cognitive: ^0.14.15
+    babel-preset-ibm-cloud-cognitive: ^0.14.16
     chalk: ^4.1.2
     jest-circus: ^28.1.2
     npm-check-updates: ^15.0.1

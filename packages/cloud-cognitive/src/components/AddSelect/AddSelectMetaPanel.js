@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Close16 } from '@carbon/icons-react';
 import { Button } from 'carbon-components-react';
 import { pkg } from '../../settings';
+
+const blockClass = `${pkg.prefix}--add-select__meta-panel`;
 const componentName = 'AddSelectMetaPanel';
 
 export let AddSelectMetaPanel = ({
@@ -11,7 +13,6 @@ export let AddSelectMetaPanel = ({
   setDisplayMetaPanel,
   title,
 }) => {
-  const blockClass = `${pkg.prefix}--add-select__meta-panel`;
   const onCloseHandler = () => {
     setDisplayMetaPanel({});
   };

@@ -155,6 +155,18 @@ export const WithHierarchy = prepareStory(Template, {
                 size: '100',
                 icon: Document16,
                 tag: 'business',
+                children: {
+                  entries: [
+                    {
+                      id: '9000',
+                      value: '9000.html',
+                      title: '9000.html',
+                      fileType: 'html',
+                      size: '9000',
+                      icon: Document16,
+                    },
+                  ],
+                },
               },
               {
                 id: '1-2',
@@ -179,6 +191,18 @@ export const WithHierarchy = prepareStory(Template, {
           id: '2',
           value: 'folder 2',
           title: 'folder 2',
+          children: {
+            entries: [
+              {
+                id: '7000',
+                value: '7000.html',
+                title: '7000.html',
+                fileType: 'html',
+                size: '7000',
+                icon: Document16,
+              },
+            ],
+          },
         },
       ],
     },

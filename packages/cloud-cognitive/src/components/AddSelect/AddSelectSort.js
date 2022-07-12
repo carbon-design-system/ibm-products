@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
 import { ArrowsVertical32, ArrowUp16, ArrowDown16 } from '@carbon/icons-react';
 import { pkg } from '../../settings';
-const componentName = 'AddSelect';
+
+const blockClass = `${pkg.prefix}--add-select-sort`;
+const componentName = 'AddSelectSort';
 
 export let AddSelectSort = ({ setSortAttribute, setSortDirection, sortBy }) => {
-  const blockClass = `${pkg.prefix}--add-select-sort`;
-
   const sortByOpts = sortBy
     ? sortBy.reduce((acc, cur) => {
         const opts = [

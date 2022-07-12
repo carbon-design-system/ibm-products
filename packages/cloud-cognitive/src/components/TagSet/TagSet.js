@@ -42,6 +42,7 @@ export let TagSet = React.forwardRef(
       allTagsModalTarget: allTagsModalTargetIn, // = defaults.allTagsModalTarget,
       className,
       maxVisible,
+      multiline,
       overflowAlign = defaults.overflowAlign,
       overflowClassName,
       overflowDirection = defaults.overflowDirection,
@@ -158,6 +159,10 @@ export let TagSet = React.forwardRef(
     ]);
 
     const checkFullyVisibleTags = useCallback(() => {
+      if (multiline) {
+        return setDisplayCount(maxVisible);
+      }
+
       // how many will fit?
       let willFit = 0;
 
@@ -192,11 +197,11 @@ export let TagSet = React.forwardRef(
       } else {
         setDisplayCount(maxVisible ? Math.min(willFit, maxVisible) : willFit);
       }
-    }, [maxVisible, sizingTags, tagSetRef]);
+    }, [maxVisible, multiline, sizingTags, tagSetRef]);
 
     useEffect(() => {
       checkFullyVisibleTags();
-    }, [checkFullyVisibleTags, maxVisible, sizingTags]);
+    }, [checkFullyVisibleTags, maxVisible, multiline, sizingTags]);
 
     /* don't know how to test resize */
     /* istanbul ignore next */
@@ -247,7 +252,13 @@ export let TagSet = React.forwardRef(
             {hiddenSizingTags}
           </div>
 
-          <div className={`${blockClass}__tag-container`} ref={displayedArea}>
+          <div
+            className={cx([
+              `${blockClass}__tag-container`,
+              multiline && `${blockClass}__tag-container--multiline`,
+            ])}
+            ref={displayedArea}
+          >
             {displayedTags}
           </div>
         </div>
@@ -328,6 +339,10 @@ TagSet.propTypes = {
    * maximum visible tags
    */
   maxVisible: PropTypes.number,
+  /**
+   * display tags in multiple lines
+   */
+  multiline: PropTypes.bool,
   /**
    * overflowAlign from the standard tooltip. Default center.
    */

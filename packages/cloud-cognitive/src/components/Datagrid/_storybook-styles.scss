@@ -29,3 +29,7 @@ $block-class: #{$pkg-prefix}--datagrid;
     border-bottom: none;
   }
 }
+
+.#{$block-class}__panelContent {
+  display: inline;
+}

@@ -307,15 +307,12 @@ export const NestedRows = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 export const ExpandedRow = () => {
-  const expansionRenderer = ({ row }) => <div>Content for {row.id}</div>;
-
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
     {
       columns,
       data,
-      ExpandedRowContentComponent: expansionRenderer,
       expandedContentHeight: 95,
     },
     useExpandedRow
@@ -750,18 +747,24 @@ export const RowSizeDropdown = () => {
 };
 RowSizeDropdown.story = RowSizeDropdownStory;
 
+import { pkg } from '../../settings';
+
+const blockClass = `${pkg.prefix}--datagrid`;
+
 export const LeftPanel = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid({
-    columns,
-    data,
     leftPanel: {
       isOpen: true, // this toggling will happen from datagridActions.
       panelContent: (
-        <div>Panel content will go here along with any button interactions</div>
+        <div className={`${blockClass}__panel-content`}>
+          Panel content will go here along with any button interactions
+        </div>
       ),
     },
+    columns,
+    data,
     DatagridActions,
     DatagridBatchActions,
   });

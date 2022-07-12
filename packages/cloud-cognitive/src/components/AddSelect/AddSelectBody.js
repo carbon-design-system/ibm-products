@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Tag } from 'carbon-components-react';
+import { Tag } from '@carbon/react';
 import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { AddSelectSidebar } from './AddSelectSidebar';

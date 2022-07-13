@@ -7,10 +7,9 @@
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { settings } from 'carbon-components';
 import React, { createRef } from 'react';
 
-import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
+import { Toolbar, ToolbarGroup, ToolbarButton } from './index';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { blockClass, componentName } from './Toolbar';
@@ -18,6 +17,7 @@ import { blockClass as toolbarButtonClass } from './ToolbarButton';
 
 const { getByTestId, getByText } = screen;
 const { keyboard, tab } = userEvent;
+const carbonPrefix = 'cds';
 
 function _instance(prop) {
   return `${uuidv4()}--${prop}`;
@@ -169,15 +169,15 @@ describe(componentName, () => {
     componentName
   );
 
-  it('renders the vertical variant', () => {
-    const { rerender } = render(
+  it('renders the vertical variant', async () => {
+    const { rerender } = await render(
       <Toolbar {...props} data-testid={dataTestId} />
     );
 
     const className = `${blockClass}--vertical`;
     expect(getByTestId(dataTestId)).not.toHaveClass(className);
 
-    rerender(<Toolbar {...props} data-testid={dataTestId} vertical />);
+    await rerender(<Toolbar {...props} data-testid={dataTestId} vertical />);
     expect(getByTestId(dataTestId)).toHaveClass(className);
   });
 
@@ -193,7 +193,8 @@ describe(componentName, () => {
   });
 });
 
-describe(ToolbarButton.displayName, () => {
+const toolbarButtonComponentName = ToolbarButton.displayName;
+describe(toolbarButtonComponentName, () => {
   test(ToolbarButton);
 
   toBeAccessible(
@@ -202,28 +203,36 @@ describe(ToolbarButton.displayName, () => {
     ToolbarButton.displayName
   );
 
-  it('renders the caret variant', () => {
-    const { rerender } = render(<ToolbarButton data-testid={dataTestId} />);
+  it('renders the caret variant', async () => {
+    const { rerender } = await render(
+      <ToolbarButton data-testid={dataTestId} />
+    );
 
     const className = `${toolbarButtonClass}--caret`;
     expect(getByTestId(dataTestId)).not.toHaveClass(className);
 
-    rerender(<ToolbarButton data-testid={dataTestId} caret />);
+    await rerender(<ToolbarButton data-testid={dataTestId} caret />);
     expect(getByTestId(dataTestId)).toHaveClass(className);
   });
 
-  it("renders the 'right' tooltip position for the vertical variant by default", () => {
-    const { rerender } = render(<ToolbarButton data-testid={dataTestId} />);
+  it("renders the 'right' tooltip position for the vertical variant by default", async () => {
+    const { rerender } = await render(
+      <ToolbarButton data-testid={dataTestId} />
+    );
 
-    const className = `${settings.prefix}--btn--icon-only--right`;
-    expect(getByTestId(dataTestId)).not.toHaveClass(className);
+    const className = `${carbonPrefix}--popover--right`;
+    expect(getByTestId(dataTestId).parentElement).not.toHaveClass(className, {
+      exact: false,
+    });
 
-    rerender(
+    await rerender(
       <Toolbar vertical>
         <ToolbarButton data-testid={dataTestId} />
       </Toolbar>
     );
-    expect(getByTestId(dataTestId)).toHaveClass(className);
+    expect(getByTestId(dataTestId).parentElement).toHaveClass(className, {
+      exact: false,
+    });
   });
 });
 

@@ -8,34 +8,23 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem } from '@carbon/react';
 import PropTypes from 'prop-types';
+
 const componentName = 'AddSelectBreadcrumbs';
 
-export let AddSelectBreadcrumbs = ({ itemsLabel, path, setPath }) => {
-  const clickHandler = (id) => {
-    const pathIdx = path.findIndex((entry) => entry.id === id);
-    const finalPath = [...path].splice(0, pathIdx + 1);
-    setPath(finalPath);
-  };
-
-  const resetPath = () => {
-    setPath([]);
+export let AddSelectBreadcrumbs = ({ path, onClick }) => {
+  const clickHandler = (idx) => {
+    onClick(idx);
   };
 
   return (
     <Breadcrumb noTrailingSlash>
-      <BreadcrumbItem onClick={resetPath}>{itemsLabel}</BreadcrumbItem>
-      {path.map((entry, idx, arr) => {
-        const isCurrentPage = idx === arr.length - 1;
-        const crumbHandler = () => {
-          if (!isCurrentPage) {
-            clickHandler(entry.id);
-          }
-        };
+      {path.map((entry, idx) => {
+        const isCurrentPage = idx === path.length - 1;
         return (
           <BreadcrumbItem
             key={entry.id}
             isCurrentPage={isCurrentPage}
-            onClick={crumbHandler}
+            onClick={() => clickHandler(idx)}
           >
             {entry.title}
           </BreadcrumbItem>
@@ -46,9 +35,8 @@ export let AddSelectBreadcrumbs = ({ itemsLabel, path, setPath }) => {
 };
 
 AddSelectBreadcrumbs.propTypes = {
-  itemsLabel: PropTypes.string,
+  onClick: PropTypes.func,
   path: PropTypes.array,
-  setPath: PropTypes.func,
 };
 
 AddSelectBreadcrumbs.displayName = componentName;

@@ -6,6 +6,7 @@
  */
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ActionBarItem } from '.';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
@@ -19,11 +20,17 @@ const componentName = ActionBarItem.displayName;
 const className = `class-${uuidv4()}`;
 const content = `This is example content: ${uuidv4()}`;
 const dataTestId = uuidv4();
+const testLabel = 'Test label';
 
 describe(ActionBarItem.displayName, () => {
-  it('has no accessibility violations', async () => {
-    const { container } = render(<ActionBarItem>{content}</ActionBarItem>);
-
+  it.skip('has no accessibility violations', async () => {
+    const { container } = render(
+      <main>
+        <ActionBarItem label={testLabel}>{content}</ActionBarItem>
+      </main>
+    );
+    userEvent.tab();
+    expect(screen.getByText(content)).toHaveFocus();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
@@ -32,7 +39,11 @@ describe(ActionBarItem.displayName, () => {
     const myOnClick = jest.fn();
 
     // not enough room so should see an overflow.
-    render(<ActionBarItem onClick={myOnClick}>{content}</ActionBarItem>);
+    render(
+      <ActionBarItem label={testLabel} onClick={myOnClick}>
+        {content}
+      </ActionBarItem>
+    );
 
     const btn = screen.getByText(content);
     expect(btn).toHaveClass(`${carbonPrefix}--btn`);
@@ -42,7 +53,11 @@ describe(ActionBarItem.displayName, () => {
   });
 
   it('adds user classes', () => {
-    render(<ActionBarItem className={className}>{content}</ActionBarItem>);
+    render(
+      <ActionBarItem label={testLabel} className={className}>
+        {content}
+      </ActionBarItem>
+    );
     const btn = screen.getByText(content);
     expect(btn).toHaveClass(blockClass);
     expect(btn).toHaveClass(className);
@@ -50,7 +65,7 @@ describe(ActionBarItem.displayName, () => {
 
   it('ignores user size and type settings', () => {
     render(
-      <ActionBarItem size="lg" type="submit">
+      <ActionBarItem label={testLabel} size="lg" type="submit">
         {content}
       </ActionBarItem>
     );
@@ -63,7 +78,9 @@ describe(ActionBarItem.displayName, () => {
 
   it('adds additional properties to the containing node', () => {
     const { container } = render(
-      <ActionBarItem data-testid={dataTestId}>{content}</ActionBarItem>
+      <ActionBarItem label={testLabel} data-testid={dataTestId}>
+        {content}
+      </ActionBarItem>
     );
 
     expect(
@@ -73,7 +90,11 @@ describe(ActionBarItem.displayName, () => {
 
   it('forwards a ref to the block element', () => {
     const ref = React.createRef();
-    render(<ActionBarItem ref={ref}>{content}</ActionBarItem>);
+    render(
+      <ActionBarItem label={testLabel} ref={ref}>
+        {content}
+      </ActionBarItem>
+    );
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
   });
 });

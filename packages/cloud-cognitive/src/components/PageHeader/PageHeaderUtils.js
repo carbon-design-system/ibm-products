@@ -131,6 +131,15 @@ export const utilCheckUpdateVerticalSpace = (
       update.headerTopValue += update.breadcrumbRowHeight;
     }
 
+    if (enableBreadcrumbScroll) {
+      // adjust header top value when scroll enabled for breadcrumb
+      update.headerTopValue -= navigation
+        ? hasActionBar
+          ? 0
+          : 10
+        : update.headerHeight;
+    }
+
     // if (window) {
     let val;
     /* don't know how to test resize */

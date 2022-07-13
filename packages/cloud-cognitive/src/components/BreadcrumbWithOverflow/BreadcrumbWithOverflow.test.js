@@ -35,8 +35,8 @@ const sizes = {
   breadcrumbMargin: 10,
 };
 
-const isBreadCrumbItem = function (prefix) {
-  return this.classList?.contains(`${prefix}--breadcrumb-item`) || false;
+const isBreadCrumbItem = function () {
+  return this.classList?.contains(`${carbonPrefix}--breadcrumb-item`) || false;
 };
 
 // eslint-disable-next-line react/prop-types
@@ -113,7 +113,6 @@ describe(BreadcrumbWithOverflow.displayName, () => {
         breadcrumbs={breadcrumbItems}
       />
     );
-
     const visibleBreadcrumbs = screen.getAllByText(/Breadcrumb [0-9]/, {
       selector: `.${blockClass}__displayed-breadcrumb .${carbonPrefix}--link`,
     });

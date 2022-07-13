@@ -251,7 +251,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     z-index: 4;
     background-color: $layer-01;
     opacity: var(--#{$block-class}--subtitle-opacity);
-    // stylelint-disable-next-line carbon/layout-token-use
     transform: translateY(var(--#{$block-class}--title-y-position));
   }
   .#{$block-class}__label-text {
@@ -261,7 +260,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding-right: $spacing-05;
     opacity: var(--#{$block-class}--subtitle-opacity);
     text-overflow: ellipsis;
-    // stylelint-disable-next-line carbon/layout-token-use
     transform: translateY(var(--#{$block-class}--title-y-position));
     white-space: nowrap;
   }
@@ -387,6 +385,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   .#{$block-class}__action-toolbar {
     position: sticky;
     z-index: 4;
+    /* stylelint-disable-next-line carbon/layout-token-use */
     top: var(--#{$block-class}--title-height);
     display: flex;
     align-items: center;
@@ -442,7 +441,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding-top: 0;
   }
   &.#{$block-class}__container-is-animating
-    .#{$block-class}__actions-container.#{$action-set-block-class}--max {
+    .#{$block-class}__actions-container.#{$action-set-block-class}--2xl {
     @include setPanelSize(100%);
   }
   .#{$block-class}__actions-container {
@@ -450,7 +449,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     bottom: 0;
     border-top: 1px solid $border-subtle-02;
     background-color: $layer-01;
-    &.#{$action-set-block-class}--max {
+    &.#{$action-set-block-class}--2xl {
       .#{$action-set-block-class}__action-button {
         width: 100%;
         max-width: 100%;
@@ -472,6 +471,10 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
       .#{$action-set-block-class}__action-button {
       height: $spacing-09;
     }
+  }
+  &.#{$block-class}__container.#{$block-class}__container--xs
+    .#{$block-class}__actions-container.#{$action-set-block-class}--sm {
+    @include setPanelSize(map-get($side-panel-sizes, xs));
   }
 }
 

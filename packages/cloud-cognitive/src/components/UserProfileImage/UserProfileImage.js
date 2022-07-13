@@ -185,7 +185,7 @@ UserProfileImage.propTypes = {
   /**
    * Provide a custom icon to use if you need to use an icon other than the included ones
    */
-  icon: PropTypes.object,
+  icon: PropTypes.func,
 
   /**
    * When passing the image prop, supply a full path to the image to be displayed.

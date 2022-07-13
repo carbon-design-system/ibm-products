@@ -49,7 +49,7 @@ export const Default = () => (
           <TypeLayoutCell>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
             accumsan, dui ut pulvinar mattis, diam est imperdiet ex, a varius
-            lacus ex at libero. Aenean euismod viverra odio, id volutpat turpis
+            lacus ex at libero. Aenean euismode viverra odio, id volutpat turpis
             commodo.
           </TypeLayoutCell>
         </TypeLayoutRow>

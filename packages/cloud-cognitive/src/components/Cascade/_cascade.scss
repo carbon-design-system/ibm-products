@@ -31,8 +31,8 @@ $fadeEnd: translateY(0);
 .#{$block-class}__col {
   /* stylelint-disable-next-line max-nesting-depth */
   @media (prefers-reduced-motion: no-preference) {
-    // stylelint-disable-next-line carbon/motion-token-use
-    animation: $animationProps fade; // stylelint note animation duration declared in $animationProps
+    /* stylelint-disable-next-line carbon/motion-token-use -- Carbon animation duration defined above in $animationProps */
+    animation: $animationProps fade;
     animation-fill-mode: forwards;
     opacity: 0;
   }

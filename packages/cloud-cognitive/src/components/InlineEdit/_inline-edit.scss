@@ -109,7 +109,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
     width: calc(100% - var(--#{$block-class}--toolbar-width) - $spacing-05);
     max-width: calc(100% - var(--#{$block-class}--toolbar-width) - $spacing-05);
     min-height: var(--#{$block-class}--size);
-    // stylelint-disable-next-line carbon/layout-token-use
+    /* stylelint-disable-next-line carbon/layout-token-use */
     margin-right: var(--#{$block-class}--toolbar-width);
     // room for toolbar
     margin-left: $spacing-05;

@@ -385,7 +385,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   .#{$block-class}__action-toolbar {
     position: sticky;
     z-index: 4;
-    // stylelint-disable-next-line carbon/layout-token-use
+    /* stylelint-disable-next-line carbon/layout-token-use */
     top: var(--#{$block-class}--title-height);
     display: flex;
     align-items: center;

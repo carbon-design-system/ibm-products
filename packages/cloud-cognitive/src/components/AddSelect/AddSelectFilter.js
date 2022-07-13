@@ -17,6 +17,8 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { Filter16 } from '@carbon/icons-react';
 import { pkg } from '../../settings';
+
+const blockClass = `${pkg.prefix}--add-select__global-filter`;
 const componentName = 'AddSelectFilter';
 
 export let AddSelectFilter = ({
@@ -37,8 +39,6 @@ export let AddSelectFilter = ({
 }) => {
   const [filters, setFilters] = useState({});
   const [open, setOpen] = useState(false);
-
-  const blockClass = `${pkg.prefix}--add-select__global-filter`;
 
   const searchHandler = (e) => {
     handleSearch(e.target.value);

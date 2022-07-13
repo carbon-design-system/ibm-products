@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.23.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.22.0...@carbon/ibm-products@1.23.0) (2022-07-12)
+
+
+### Bug Fixes
+
+* add select refactor ([#2068](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2068)) ([b7aa521](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b7aa5217902ae4ca29c998692f8d7b2823c90f69))
+
+
+### Features
+
+* add multiline attribute to tagset ([#2079](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2079)) ([6c3286a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6c3286ae43f8e4996badf20dc4582b8133a36d0f))
+* align expandable rows ([#2039](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2039)) ([853176f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/853176f951d13ab867bee63cb2b2a562fd7ce7a7))
+* index cloud cognitive ([#2063](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2063)) ([a743a20](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a743a206a016685f3a8a2644bbdce054ad84ead1))
+* merged left panel content and datagrid on same horizontal level ([#2064](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2064)) ([356b101](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/356b10107055a8f72ee68f07851357405306b99e))
+
+
+
+
+
 # [1.22.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.21.0...@carbon/ibm-products@1.22.0) (2022-07-05)
 
 

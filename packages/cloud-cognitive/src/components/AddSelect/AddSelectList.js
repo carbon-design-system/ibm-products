@@ -19,8 +19,10 @@ import {
 import { ChevronRight16, View16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { UserProfileImage } from '../UserProfileImage';
 import { pkg } from '../../settings';
+import { UserProfileImage } from '../UserProfileImage';
+
+const blockClass = `${pkg.prefix}--add-select__selections`;
 const componentName = 'AddSelectList';
 
 export let AddSelectList = ({
@@ -31,15 +33,14 @@ export let AddSelectList = ({
   multi,
   multiSelection,
   navIconDescription,
-  path,
+  parentId,
   setAppliedModifiers,
   setDisplayMetaPanel,
   setMultiSelection,
-  setPath,
+  setParentSelected,
   setSingleSelection,
   singleSelection,
 }) => {
-  const blockClass = `${pkg.prefix}--add-select__selections`;
   const hasModifiers = modifiers?.options?.length > 0;
 
   const handleSingleSelection = (value) => {
@@ -56,33 +57,8 @@ export let AddSelectList = ({
     }
   };
 
-  const onNavigateItem = ({ id, title, parent }) => {
-    // if multi select
-    if (multi) {
-      // if top level reset the path
-      if (!parent) {
-        setPath([{ id, title }]);
-      } else {
-        const pathIds = path.map((p) => p.id);
-        // if item is already selected somewhere go back to that item
-        if (pathIds.includes(id)) {
-          const pathIdx = pathIds.findIndex((pathId) => pathId === id);
-          const newPath = [...path].splice(0, pathIdx + 1);
-          setPath([...newPath]);
-        } else {
-          // if the item is on the same level as another selected item start from the parent level
-          if (path.find((p) => p.parent === parent)) {
-            const parentIdx = path.findIndex((p) => p.id === parent);
-            const newPath = [...path].splice(0, parentIdx + 1);
-            setPath([...newPath, { id, title, parent }]);
-          } else {
-            setPath([...path, { id, title, parent }]);
-          }
-        }
-      }
-    } else {
-      setPath([...path, { id, title }]);
-    }
+  const onNavigateItem = ({ id, title }) => {
+    setParentSelected(id, title, parentId);
   };
 
   const isSelected = (id) => multiSelection.includes(id);
@@ -186,6 +162,7 @@ export let AddSelectList = ({
                   )}
                   {item.children && (
                     <Button
+                      className={`${blockClass}-view-children`}
                       renderIcon={ChevronRight16}
                       iconDescription={navIconDescription}
                       tooltipPosition="left"
@@ -199,6 +176,7 @@ export let AddSelectList = ({
                   {item.meta && (
                     <div className={`${blockClass}-hidden-hover`}>
                       <Button
+                        className={`${blockClass}-view-meta`}
                         renderIcon={View16}
                         iconDescription={metaIconDescription}
                         tooltipPosition="left"
@@ -228,11 +206,11 @@ AddSelectList.propTypes = {
   multi: PropTypes.bool,
   multiSelection: PropTypes.array,
   navIconDescription: PropTypes.string,
-  path: PropTypes.array,
+  parentId: PropTypes.string,
   setAppliedModifiers: PropTypes.func,
   setDisplayMetaPanel: PropTypes.func,
   setMultiSelection: PropTypes.func,
-  setPath: PropTypes.func,
+  setParentSelected: PropTypes.func,
   setSingleSelection: PropTypes.func,
   singleSelection: PropTypes.string,
 };

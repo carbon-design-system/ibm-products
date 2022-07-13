@@ -28,6 +28,7 @@ export default {
     ...getDocsParameters(),
   },
 };
+
 // Overrides carbon's structuredListCell padding-left
 // See: https://www.carbondesignsystem.com/components/structured-list/usage/
 
@@ -191,4 +192,4 @@ export const DenseAndStacked = () => (
 
 DenseAndStacked.parameters = {
   viewMode: 'canvas',
-}
+};

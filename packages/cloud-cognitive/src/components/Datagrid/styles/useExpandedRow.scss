@@ -1,0 +1,13 @@
+//
+// Copyright IBM Corp. 2021, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/spacing' as *;
+@use './variables';
+
+.#{$block-class}__expanded-row-content {
+  padding: $spacing-05 $spacing-05 $spacing-06 $spacing-10;
+}

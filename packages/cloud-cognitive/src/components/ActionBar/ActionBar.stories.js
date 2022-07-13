@@ -28,6 +28,7 @@ const getActions = (num) =>
         ? (props) => <Lightning size={16} {...props} />
         : (props) => <Bee size={16} {...props} />,
     iconDescription: `Action ${num}`,
+    label: `Action ${num}`,
     onClick: action(`Action ${num}`),
   }));
 

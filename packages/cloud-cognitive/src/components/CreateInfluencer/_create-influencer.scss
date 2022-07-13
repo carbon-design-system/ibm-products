@@ -59,6 +59,7 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
   grid-column: 1 / -1;
   grid-row: -1 / -1;
 }
+
 .#{$influencer-block-class}__side-nav-opening,
 .#{$influencer-block-class}__progress-indicator-opening {
   animation: influencer-menu-entrance $duration-moderate-02 1;

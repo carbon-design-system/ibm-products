@@ -1377,10 +1377,10 @@ Map {
                     "type": "string",
                   },
                   Object {
-                    "type": "func",
+                    "type": "bool",
                   },
                   Object {
-                    "type": "bool",
+                    "type": "func",
                   },
                 ],
               ],
@@ -1415,6 +1415,9 @@ Map {
                   },
                   Object {
                     "type": "string",
+                  },
+                  Object {
+                    "type": "bool",
                   },
                   Object {
                     "type": "func",
@@ -7196,10 +7199,10 @@ Map {
                     "type": "string",
                   },
                   Object {
-                    "type": "func",
+                    "type": "bool",
                   },
                   Object {
-                    "type": "bool",
+                    "type": "func",
                   },
                 ],
               ],
@@ -7234,6 +7237,9 @@ Map {
                   },
                   Object {
                     "type": "string",
+                  },
+                  Object {
+                    "type": "bool",
                   },
                   Object {
                     "type": "func",
@@ -7518,10 +7524,10 @@ Map {
                     "type": "string",
                   },
                   Object {
-                    "type": "func",
+                    "type": "bool",
                   },
                   Object {
-                    "type": "bool",
+                    "type": "func",
                   },
                 ],
               ],
@@ -7556,6 +7562,9 @@ Map {
                   },
                   Object {
                     "type": "string",
+                  },
+                  Object {
+                    "type": "bool",
                   },
                   Object {
                     "type": "func",

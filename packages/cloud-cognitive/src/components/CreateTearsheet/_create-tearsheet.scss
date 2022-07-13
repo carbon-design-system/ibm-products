@@ -44,6 +44,13 @@ $section-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__section;
 $tearsheet-divider-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__section--divider;
 $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--fieldset;
 
+.#{$create-tearsheet-block-class} .#{$step-block-class}__step--visible-step {
+  animation: step-content-entrance $duration-slow-01;
+  animation-fill-mode: forwards;
+  animation-timing-function: $standard-easing;
+  opacity: 0;
+}
+
 .#{$create-tearsheet-block-class} {
   --#{$create-tearsheet-block-class}--total-width: 0;
 }

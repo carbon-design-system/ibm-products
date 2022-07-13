@@ -97,7 +97,7 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
       <DatagridToolbar {...datagridState} />
       {leftPanel && (
         <div
-          className={`${blockClass}__grid-container ${blockClass}__displayFlex`}
+          className={`${blockClass}__grid-container ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
         >
           {leftPanel && leftPanel.isOpen && (
             <div className={`${blockClass}__datagridLeftPanel`}>

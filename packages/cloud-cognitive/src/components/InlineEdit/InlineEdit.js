@@ -17,14 +17,13 @@ import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
-import { Button } from '@carbon/react';
+import { Button, usePrefix } from '@carbon/react';
 import {
   Close,
   Edit,
   EditOff,
   Checkmark,
   WarningFilled,
-  usePrefix,
 } from '@carbon/icons-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).

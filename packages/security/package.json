@@ -72,6 +72,8 @@
     "invariant": "^2.2.4",
     "numeral": "^2.0.6",
     "prop-types": "^15.8.1",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-transition-group": "^4.4.2",
     "throttle-debounce": "^5.0.0"
   },

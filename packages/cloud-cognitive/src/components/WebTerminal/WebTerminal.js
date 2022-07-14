@@ -21,6 +21,7 @@ import {
   OverflowMenuItem,
 } from 'carbon-components-react';
 import { moderate02 } from '@carbon/motion';
+import { useWebTerminal } from './hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'WebTerminal';
@@ -41,17 +42,16 @@ export let WebTerminal = React.forwardRef(
       actions = defaults.actions,
       children,
       className,
-      closeIconDescription,
-      closeTerminal,
       documentationLinks = defaults.documentationLinks,
       documentationLinksIconDescription = defaults.documentationLinksIconDescription,
-      open,
 
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
+    const { open, closeWebTerminal } = useWebTerminal();
+
     const [shouldRender, setRender] = useState(open);
     const { matches: prefersReducedMotion } =
       window && window.matchMedia
@@ -90,7 +90,7 @@ export let WebTerminal = React.forwardRef(
       if (prefersReducedMotion) {
         setRender(false);
       }
-      closeTerminal();
+      closeWebTerminal();
     };
 
     return shouldRender ? (
@@ -142,7 +142,7 @@ export let WebTerminal = React.forwardRef(
             hasIconOnly
             renderIcon={Close}
             kind="ghost"
-            iconDescription={closeIconDescription}
+            iconDescription="Close web terminal"
             onClick={handleCloseTerminal}
             onAnimationEnd={(event) => event.stopPropagation()}
           />
@@ -189,16 +189,6 @@ WebTerminal.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Icon description for the close button
-   */
-  closeIconDescription: PropTypes.string.isRequired,
-
-  /**
-   * Function that should set the open prop to false
-   */
-  closeTerminal: PropTypes.func.isRequired,
-
-  /**
    * Array of objects for each documentation link. Each documentation link uses the prop types of OverflowMenuItems. See more: https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu--default
    */
   documentationLinks: PropTypes.arrayOf(
@@ -211,9 +201,4 @@ WebTerminal.propTypes = {
    * Icon description for the documentation link overflow menu
    */
   documentationLinksIconDescription: PropTypes.string,
-
-  /**
-   * Boolean that determines if the web terminal is opened or closed
-   */
-  open: PropTypes.bool.isRequired,
 };

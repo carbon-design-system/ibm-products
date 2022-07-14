@@ -10,16 +10,18 @@ import {
   Search20 as Search,
   User20 as User,
 } from '@carbon/icons-react';
-import PropTypes from 'prop-types';
+import { useWebTerminal } from '../hooks';
 
-const Navigation = ({ openTerminal }) => {
+const Navigation = () => {
+  const { openWebTerminal } = useWebTerminal();
+
   return (
     <Header aria-label="IBM Platform Name">
       <HeaderName href="#" prefix="IBM">
         [Platform]
       </HeaderName>
       <HeaderGlobalBar>
-        <HeaderGlobalAction aria-label="Web terminal" onClick={openTerminal}>
+        <HeaderGlobalAction aria-label="Web terminal" onClick={openWebTerminal}>
           <Terminal />
         </HeaderGlobalAction>
         <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
@@ -31,13 +33,6 @@ const Navigation = ({ openTerminal }) => {
       </HeaderGlobalBar>
     </Header>
   );
-};
-
-Navigation.propTypes = {
-  /**
-   * Opens the terminal
-   */
-  openTerminal: PropTypes.func.isRequired,
 };
 
 export default Navigation;

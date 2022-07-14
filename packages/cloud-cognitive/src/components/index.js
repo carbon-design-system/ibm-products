@@ -45,7 +45,12 @@ export { TagSet } from './TagSet';
 export { Tearsheet, TearsheetNarrow } from './Tearsheet';
 export { Toolbar, ToolbarButton, ToolbarGroup } from './Toolbar';
 export { UserProfileImage } from './UserProfileImage';
-export { WebTerminal, WebTerminalContentWrapper } from './WebTerminal';
+export {
+  WebTerminal,
+  WebTerminalContentWrapper,
+  useWebTerminal,
+  WebTerminalProvider,
+} from './WebTerminal';
 export { EditSidePanel } from './EditSidePanel';
 export { OptionsTile } from './OptionsTile';
 export { InlineEdit } from './InlineEdit';

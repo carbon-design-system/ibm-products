@@ -139,6 +139,7 @@ const Template = (storyName, storyInitiallyOpen, props) => {
         {...props}
         onClose={() => setOpen(false)}
         logo={logo}
+        modalAriaLabel="About this product"
         open={open}
         tabListAriaLabel="Product info"
       />

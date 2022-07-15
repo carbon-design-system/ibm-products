@@ -49,8 +49,9 @@
   }
 
   .#{$block-class} .#{$form-block-class}__form--visible-form {
-    animation: $duration--slow-01 form-content-entrance;
+    animation-duration: $duration--slow-01;
     animation-fill-mode: forwards;
+    animation-name: form-content-entrance;
     animation-timing-function: $carbon--standard-easing;
     opacity: 0;
   }

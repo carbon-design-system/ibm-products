@@ -49,6 +49,7 @@ import {
 import mdx from './Datagrid.mdx';
 
 import styles from './_storybook-styles.scss';
+import { SidePanel } from '../SidePanel';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -362,16 +363,97 @@ export const NestedTable = () => {
 export const ClickableRow = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+  const [openSidePanel, setOpenSidePanel] = useState(false);
+  const [rowData, setRowData] = useState({});
   const datagridState = useDatagrid(
     {
       columns,
       data,
-      onRowClick: (row) => alert(`Clicked ${row.id}`),
+      onRowClick: (row) => {
+        setOpenSidePanel(true);
+        setRowData(row);
+      },
+      openSidePanel,
+      rowData,
+      sidePanelSize: 'sm',
+      sidePanelTitle: 'Side panel title',
+      setOpenSidePanel,
+      DataTableSidePanel,
     },
     useOnRowClick
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
+const DataTableSidePanel = (datagridState) => {
+  const {
+    openSidePanel,
+    setOpenSidePanel,
+    rowData,
+    sidePanelSize,
+    sidePanelTitle,
+  } = datagridState;
+
+  const { values } = rowData;
+
+  const SidePanelSectionContent = ({ rowData, columns, sectionTitle }) => {
+    const finalData = columns.map((item) => Object.entries(rowData)[item]);
+    return (
+      <div className={`${blockClass}__side-panel-sections`}>
+        <h5 className={`${blockClass}__side-panel-section-header`}>
+          {sectionTitle}
+        </h5>
+        {finalData.map(([label, value], index) => {
+          return (
+            <div
+              key={index}
+              className={`${blockClass}__side-panel-section-inner`}
+            >
+              <div className={`${blockClass}__side-panel-label-text`}>
+                {label} :
+              </div>
+              <div className={`${blockClass}__side-panel-value`}>{value}</div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  const showRowData = (rowValues) => {
+    return (
+      <div className={`${blockClass}__side-panel-content`}>
+        <SidePanelSectionContent
+          sectionTitle="Section title"
+          rowData={rowValues}
+          columns={[0]}
+        />
+        <SidePanelSectionContent
+          sectionTitle="Personal details"
+          rowData={rowValues}
+          columns={[1, 2, 3, 4]}
+        />
+        <SidePanelSectionContent
+          sectionTitle="Section title"
+          rowData={rowValues}
+          columns={[5, 6, 7, 8, 9, 10, 11, 12]}
+        />
+      </div>
+    );
+  };
+
+  return (
+    <SidePanel
+      open={openSidePanel}
+      onRequestClose={() => setOpenSidePanel(false)}
+      size={sidePanelSize}
+      title={sidePanelTitle}
+      slideIn={true}
+    >
+      {values && showRowData(values)}
+    </SidePanel>
+  );
 };
 
 export const IsHoverOnRow = () => {

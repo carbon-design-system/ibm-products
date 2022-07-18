@@ -23,6 +23,7 @@ const DatagridRow = (datagridState) => {
     <TableRow
       className={cx(`${blockClass}__carbon-row`, {
         [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
+        [`bx--data-table--selected`]: row.isSelected,
       })}
       {...row.getRowProps()}
       key={row.id}

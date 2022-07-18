@@ -151,13 +151,10 @@
   .#{$carbon-prefix}--data-table-content {
     width: 100%;
     height: 100%;
-    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
-    overflow-x: unset;
+    overflow-x: auto;
   }
 
   .#{$block-class}__table-simple {
-    display: flex;
-    overflow: auto;
     max-height: 100%;
     flex-direction: column;
   }
@@ -380,5 +377,86 @@
   &.#{$block-class}__carbon-row-expanded-hover-active
     ~ .#{$block-class}__carbon-nested-row {
     border-left: 1px solid $interactive-01;
+  }
+}
+
+.#{$block-class}__side-panel-open {
+  transition: width $duration--moderate-02;
+  transition-timing-function: carbon--motion(standard);
+
+  &.#{$block-class}__side-panel-xs {
+    width: calc(100% - 17rem);
+  }
+
+  &.#{$block-class}__side-panel-sm {
+    width: calc(100% - 21rem);
+  }
+
+  &.#{$block-class}__side-panel-md {
+    width: calc(100% - 31rem);
+  }
+
+  &.#{$block-class}__side-panel-lg {
+    width: calc(100% - 41rem);
+  }
+
+  &.#{$block-class}__side-panel-max {
+    width: calc(75% - 1rem);
+  }
+
+  .#{$pkg-prefix}--side-panel {
+    position: absolute;
+    top: 0;
+    height: 100%;
+  }
+
+  .#{$block-class}__side-panel-sections {
+    padding-bottom: $spacing-06;
+  }
+
+  .#{$block-class}__side-panel-section-inner {
+    display: flex;
+    padding: $spacing-01 0;
+  }
+
+  .#{$block-class}__side-panel-label-text {
+    @include carbon--type-style('label-02');
+
+    color: $text-02;
+  }
+
+  .#{$block-class}__side-panel-value {
+    @include carbon--type-style('body-short-01');
+
+    padding-left: $spacing-03;
+  }
+
+  .#{$block-class}__side-panel-section-header {
+    @include carbon--type-style('productive-heading-01');
+
+    padding-bottom: $spacing-02;
+  }
+
+  .#{$pkg-prefix}--side-panel.#{$pkg-prefix}--side-panel__container.#{$pkg-prefix}--side-panel__container-right-placement {
+    border: 0 none;
+    box-shadow: none;
+  }
+
+  .#{$pkg-prefix}--side-panel__container
+    .#{$pkg-prefix}--side-panel__inner-content {
+    height: 100%;
+  }
+
+  .#{$carbon-prefix}--data-table--selected {
+    position: relative;
+  }
+
+  .#{$carbon-prefix}--data-table--selected::before {
+    position: absolute;
+    left: 0;
+    width: $spacing-02;
+    height: 100%;
+    background-color: $interactive-01;
+    content: '';
   }
 }

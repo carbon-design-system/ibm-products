@@ -8,6 +8,6 @@
 // @forward './global/styles/imported-carbon-modules';
 // $imported-modules: $imported-carbon-modules;
 
-@forward './global/styles/project-settings';
+@use './global/styles/project-settings';
 
-@forward './components/index-released-only';
+@use './components/index-released-only';

@@ -39,41 +39,40 @@ describe(ActionBarItem.displayName, () => {
     const myOnClick = jest.fn();
 
     // not enough room so should see an overflow.
-    render(
+    const { container } = render(
       <ActionBarItem label={testLabel} onClick={myOnClick}>
         {content}
       </ActionBarItem>
     );
 
-    const btn = screen.getByText(content);
-    expect(btn).toHaveClass(`${carbonPrefix}--btn`);
+    const actionBarItemElement = container.querySelector(`.${blockClass}`);
+    expect(actionBarItemElement).toHaveClass(`${carbonPrefix}--btn`);
 
-    click(btn);
+    click(actionBarItemElement);
     expect(myOnClick).toBeCalled();
   });
 
   it('adds user classes', () => {
-    render(
+    const { container } = render(
       <ActionBarItem label={testLabel} className={className}>
         {content}
       </ActionBarItem>
     );
-    const btn = screen.getByText(content);
-    expect(btn).toHaveClass(blockClass);
-    expect(btn).toHaveClass(className);
+    const actionBarItemElement = container.querySelector(`.${blockClass}`);
+    expect(actionBarItemElement).toHaveClass(blockClass);
+    expect(actionBarItemElement).toHaveClass(className);
   });
 
   it('ignores user size and type settings', () => {
-    render(
+    const { container } = render(
       <ActionBarItem label={testLabel} size="lg" type="submit">
         {content}
       </ActionBarItem>
     );
-
-    const btn = screen.getByText(content);
-    expect(btn).not.toHaveClass(`${carbonPrefix}--btn--lg`);
-    expect(btn).toHaveClass(`${carbonPrefix}--btn--md`);
-    expect(btn).toHaveAttribute('type', 'button');
+    const actionBarItemElement = container.querySelector(`.${blockClass}`);
+    expect(actionBarItemElement).not.toHaveClass(`${carbonPrefix}--btn--lg`);
+    expect(actionBarItemElement).toHaveClass(`${carbonPrefix}--btn--md`);
+    expect(actionBarItemElement).toHaveAttribute('type', 'button');
   });
 
   it('adds additional properties to the containing node', () => {

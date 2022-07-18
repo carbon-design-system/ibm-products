@@ -8,7 +8,7 @@
 'use strict';
 
 const {
-  jsxBracketSameLine,
+  bracketSameLine,
   ...prettierConfig
 } = require('prettier-config-carbon');
 

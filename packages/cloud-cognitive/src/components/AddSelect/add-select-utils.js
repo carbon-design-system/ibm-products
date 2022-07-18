@@ -1,41 +1,25 @@
 /**
- * used to normalize nested data into a single object
- * @param {Array} items - list of entries
- * @returns an object of normalized item data
+ * to be able to more easily and efficiently the child entries the data needs to be
+ * normalized. this function recursively goes through the data array to build a single
+ * object who's keys are the id's of every single entry
+ * @param {object} data
+ * @returns an object of normalized data
  */
-export const normalize = (items) => {
-  const { entries, parentId, sortBy, filterBy } = items;
-  return entries.reduce((acc, cur) => {
-    const { children, ...entry } = cur;
-    acc[cur.id] = { ...entry };
-    if (parentId) {
-      acc[cur.id].parent = parentId;
-    }
-    if (sortBy?.length) {
-      acc[cur.id].sortBy = sortBy;
-    }
-    if (filterBy) {
-      acc[cur.id].filterBy = filterBy;
-    }
-    if (children) {
-      acc[cur.id].children = children.entries.map((child) => child.id);
-      const child = normalize({ ...children, parentId: cur.id });
-      return { ...acc, ...child };
-    }
-    return acc;
-  }, {});
-};
-
-/**
- * used to create a single searchable array of nested items
- * @param {Array} entries - list of entries
- * @returns an array of items
- */
-export const flatten = (entries) =>
-  entries.reduce((prev, cur) => {
+export const normalize = (data) => {
+  const items = data.entries.reduce((prev, cur) => {
     const { children, ...item } = cur;
-    return prev.concat(item).concat(children ? flatten(children.entries) : []);
-  }, []);
+    prev[item.id] = item;
+    if (children) {
+      const childItems = normalize(children);
+      return {
+        ...prev,
+        ...childItems,
+      };
+    }
+    return prev;
+  }, {});
+  return items;
+};
 
 /**
  * takes in a global filters array and a flat list of items
@@ -48,22 +32,24 @@ export const flatten = (entries) =>
  * @returns an array of filter values
  */
 export const getGlobalFilterValues = (globalFilters, items) => {
-  const filterOpts = globalFilters.reduce((prevFilter, curFilter) => {
+  const itemIds = Object.keys(items);
+  const results = globalFilters.reduce((prevFilter, curFilter) => {
     const filterId = curFilter.id;
-    const opts = items.reduce((prevItem, curItem) => {
+    const filterOpts = itemIds.reduce((prevId, curId) => {
+      const curItem = items[curId];
       const value = curItem[filterId];
-      if (value && !prevItem.includes(value)) {
-        prevItem.push(value);
+      if (value && !prevId.includes(value)) {
+        prevId.push(value);
       }
-      return prevItem;
+      return prevId;
     }, []);
     prevFilter.push({
-      opts,
+      opts: filterOpts,
       ...curFilter,
     });
     return prevFilter;
   }, []);
-  return filterOpts;
+  return results;
 };
 
 export const sortItems = (attribute, direction) => {
@@ -78,4 +64,68 @@ export const sortItems = (attribute, direction) => {
   };
 };
 
-export const getSortBy = (items) => items.find((item) => item.sortBy)?.sortBy;
+export const getFilteredItems = (
+  useNormalizedItems,
+  normalizedItems,
+  searchTerm,
+  globalFiltersApplied,
+  globalFilterKeys,
+  appliedGlobalFilters,
+  sortFn,
+  multi,
+  items,
+  path
+) => {
+  /**
+   * useNormalizedItems just specifies if the data is hierarchical. the data structure
+   * is an object and not an array.
+   */
+  if (useNormalizedItems) {
+    const itemIds = Object.keys(normalizedItems);
+    if (searchTerm || globalFiltersApplied) {
+      const results = itemIds
+        .reduce((prev, cur) => {
+          if (normalizedItems[cur].title.toLowerCase().includes(searchTerm)) {
+            prev.push(normalizedItems[cur]);
+          }
+          return prev;
+        }, [])
+        .filter((item) => {
+          return globalFilterKeys.every(
+            (filter) => item[filter] === appliedGlobalFilters[filter]
+          );
+        })
+        .sort(sortFn);
+      return results;
+    }
+    /**
+     * multi select with hierarchy requires special consideration because columns
+     * are built recursively, so the items are just returned
+     */
+    if (multi) {
+      return items;
+    }
+    /**
+     * because single add select with hierarchy isn't recursively built the data
+     * structure has to be built around the path to maintain the folder structure
+     */
+    if (path.length > 1) {
+      return path.reduce((prev, cur, curIdx) => {
+        // because the root of the path never changes we can skip it
+        if (curIdx === 0) {
+          return prev;
+        }
+        const item = prev.find((item) => item.id === cur.id)?.children?.entries;
+        return item;
+      }, items.entries);
+    }
+    return items.entries;
+  } else {
+    if (searchTerm) {
+      return items.entries.filter((item) =>
+        item.title.toLowerCase().includes(searchTerm)
+      );
+    }
+    return items.entries;
+  }
+};

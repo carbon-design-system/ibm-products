@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Close16 } from '@carbon/icons-react';
 import { Button } from 'carbon-components-react';
 import { pkg } from '../../settings';
+
+const blockClass = `${pkg.prefix}--add-select__meta-panel`;
 const componentName = 'AddSelectMetaPanel';
 
 export let AddSelectMetaPanel = ({
@@ -11,7 +13,6 @@ export let AddSelectMetaPanel = ({
   setDisplayMetaPanel,
   title,
 }) => {
-  const blockClass = `${pkg.prefix}--add-select__meta-panel`;
   const onCloseHandler = () => {
     setDisplayMetaPanel({});
   };
@@ -21,6 +22,7 @@ export let AddSelectMetaPanel = ({
       <div className={`${blockClass}-header`}>
         <p className={`${blockClass}-title`}>{title}</p>
         <Button
+          className={`${blockClass}-close`}
           renderIcon={Close16}
           iconDescription={closeIconDescription}
           tooltipPosition="left"
@@ -34,9 +36,9 @@ export let AddSelectMetaPanel = ({
       {isValidElement(meta)
         ? meta
         : meta.map((entry) => (
-            <div key={entry.id} className={`${blockClass}-entry`}>
-              <p className={`${blockClass}-entry-title`}>{entry.title}</p>
-              <p className={`${blockClass}-entry-body`}>{entry.value}</p>
+            <div key={entry?.id} className={`${blockClass}-entry`}>
+              <p className={`${blockClass}-entry-title`}>{entry?.title}</p>
+              <p className={`${blockClass}-entry-body`}>{entry?.value}</p>
             </div>
           ))}
     </div>
@@ -44,7 +46,7 @@ export let AddSelectMetaPanel = ({
 };
 
 AddSelectMetaPanel.propTypes = {
-  closeIconDescription: PropTypes.string,
+  closeIconDescription: PropTypes.string.isRequired,
   meta: PropTypes.oneOfType([
     PropTypes.arrayOf(
       PropTypes.shape({
@@ -54,9 +56,9 @@ AddSelectMetaPanel.propTypes = {
       })
     ),
     PropTypes.node,
-  ]),
-  setDisplayMetaPanel: PropTypes.func,
-  title: PropTypes.string,
+  ]).isRequired,
+  setDisplayMetaPanel: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 AddSelectMetaPanel.displayName = componentName;

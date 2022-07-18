@@ -56,10 +56,12 @@ export let AddSelectSort = ({ setSortAttribute, setSortDirection, sortBy }) => {
       {sortByOpts.length > 0 && (
         <OverflowMenu
           renderIcon={(props) => <ArrowsVertical size={32} {...props} />}
+          className={`${blockClass}_overflow`}
           flipped
         >
           {sortByOpts.map((opt) => (
             <OverflowMenuItem
+              className={`${blockClass}_overflow-item`}
               key={opt.id}
               itemText={opt.itemText}
               onClick={() => sortHandler(opt)}

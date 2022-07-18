@@ -1,0 +1,54 @@
+<svg width="320" height="180" viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="60" y="41" width="200" height="109" fill="white"/>
+<rect x="60" y="29" width="200" height="13" fill="#171717"/>
+<rect opacity="0.844385" x="94" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="67" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="121" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="239" y="33" width="5" height="5" fill="#C6C6C6"/>
+<rect opacity="0.844385" x="249" y="33" width="5" height="5" fill="#C6C6C6"/>
+<g style="mix-blend-mode:multiply">
+<rect x="60" y="29" width="200" height="122" fill="#8D8D8D"/>
+</g>
+<rect x="125" y="51" width="69" height="90" fill="white"/>
+<path d="M188.265 57L189.5 55.7651L189.235 55.5L188 56.7349L186.765 55.5L186.5 55.7651L187.735 57L186.5 58.2349L186.765 58.5L188 57.2651L189.235 58.5L189.5 58.2349L188.265 57V57Z" fill="black"/>
+<mask id="mask0_77_10587" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="186" y="55" width="4" height="4">
+<path d="M188.265 57L189.5 55.7651L189.235 55.5L188 56.7349L186.765 55.5L186.5 55.7651L187.735 57L186.5 58.2349L186.765 58.5L188 57.2651L189.235 58.5L189.5 58.2349L188.265 57V57Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_77_10587)">
+<rect width="12" height="12" transform="translate(185 54)" fill="#171717"/>
+</g>
+<rect x="130" y="62" width="45" height="2" fill="#A8A8A8"/>
+<rect x="130" y="93" width="33" height="2" fill="#A8A8A8"/>
+<rect x="130" y="102" width="33" height="2" fill="#A8A8A8"/>
+<rect x="130" y="111" width="33" height="2" fill="#A8A8A8"/>
+<rect x="130" y="120" width="33" height="2" fill="#A8A8A8"/>
+<rect x="130" y="129" width="33" height="2" fill="#A8A8A8"/>
+<rect x="130" y="138" width="33" height="2" fill="#A8A8A8"/>
+<rect x="130" y="56" width="30" height="3" fill="#8D8D8D"/>
+<rect x="125" y="140" width="69" height="11" fill="#0F62FE"/>
+<rect x="125" y="140" width="35" height="11" fill="#393939"/>
+<rect x="159" y="140" width="1" height="11" fill="#F4F4F4"/>
+<rect x="125" y="81" width="69" height="8" fill="#F4F4F4"/>
+<rect x="130" y="70" width="33" height="6" rx="3" fill="#C1C7CD"/>
+<rect x="134" y="72" width="16" height="2" fill="#6F6F6F"/>
+<path d="M159.177 73L160 72.1768L159.823 72L159 72.8233L158.177 72L158 72.1768L158.823 73L158 73.8233L158.177 74L159 73.1768L159.823 74L160 73.8233L159.177 73V73Z" fill="black"/>
+<mask id="mask1_77_10587" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="158" y="72" width="2" height="2">
+<path d="M159.177 73L160 72.1768L159.823 72L159 72.8233L158.177 72L158 72.1768L158.823 73L158 73.8233L158.177 74L159 73.1768L159.823 74L160 73.8233L159.177 73V73Z" fill="white"/>
+</mask>
+<g mask="url(#mask1_77_10587)">
+<rect width="8" height="8" transform="translate(157 71)" fill="#171717"/>
+</g>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M188.507 86.2812L189.687 87.4672L189.466 87.6875L188.28 86.5078C187.574 87.0936 186.531 87.0205 185.913 86.3418C185.295 85.663 185.319 84.6183 185.968 83.9691C186.617 83.3199 187.662 83.2956 188.341 83.9137C189.02 84.5319 189.093 85.5744 188.507 86.2812ZM187.187 83.7812C186.41 83.7812 185.78 84.4108 185.78 85.1875C185.78 85.9641 186.41 86.5937 187.187 86.5937C187.963 86.5937 188.593 85.9641 188.593 85.1875C188.593 84.4108 187.963 83.7812 187.187 83.7812Z" fill="black"/>
+<mask id="mask2_77_10587" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="185" y="83" width="5" height="5">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M188.507 86.2812L189.687 87.4672L189.466 87.6875L188.28 86.5078C187.574 87.0936 186.531 87.0205 185.913 86.3418C185.295 85.663 185.319 84.6183 185.968 83.9691C186.617 83.3199 187.662 83.2956 188.341 83.9137C189.02 84.5319 189.093 85.5744 188.507 86.2812ZM187.187 83.7812C186.41 83.7812 185.78 84.4108 185.78 85.1875C185.78 85.9641 186.41 86.5937 187.187 86.5937C187.963 86.5937 188.593 85.9641 188.593 85.1875C188.593 84.4108 187.963 83.7812 187.187 83.7812Z" fill="white"/>
+</mask>
+<g mask="url(#mask2_77_10587)">
+<rect width="10" height="10" transform="translate(185 83)" fill="#171717"/>
+</g>
+<rect x="125" y="89" width="69" height="1" fill="#C6C6C6"/>
+<rect x="125" y="98" width="69" height="1" fill="#DDE1E6"/>
+<rect x="125" y="107" width="69" height="1" fill="#DDE1E6"/>
+<rect x="125" y="116" width="69" height="1" fill="#DDE1E6"/>
+<rect x="125" y="125" width="69" height="1" fill="#DDE1E6"/>
+<rect x="125" y="134" width="69" height="1" fill="#DDE1E6"/>
+</svg>

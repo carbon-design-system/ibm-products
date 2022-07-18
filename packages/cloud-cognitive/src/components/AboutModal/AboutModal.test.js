@@ -87,10 +87,13 @@ const versionNumber = `1.3.${uuidv4()}`;
 // render an AboutModal with content, logo, title, and any other required props
 const renderComponent = ({ ...rest }) =>
   render(
-    <AboutModal
-      {...{ closeIconDescription, content, logo, title, ...rest }}
-      tabListAriaLabel="Product info"
-    />
+    <main>
+      <AboutModal
+        {...{ closeIconDescription, content, logo, title, ...rest }}
+        modalAriaLabel="About this product"
+        tabListAriaLabel="Product info"
+      />
+    </main>
   );
 
 describe(componentName, () => {

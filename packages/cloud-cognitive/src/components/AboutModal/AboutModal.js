@@ -55,6 +55,7 @@ export let AboutModal = React.forwardRef(
       legalText,
       links,
       logo,
+      modalAriaLabel,
       onClose,
       open,
       tabListAriaLabel,
@@ -103,6 +104,7 @@ export let AboutModal = React.forwardRef(
               additionalInfo && additionalInfo.length > 1,
           }
         )}
+        aria-label={modalAriaLabel}
         {...{ onClose, open, ref, ...getDevtoolsProps(componentName) }}
       >
         <div className={`${blockClass}__logo`}>{logo}</div>
@@ -237,6 +239,11 @@ AboutModal.propTypes = {
    * A visual symbol used to represent the product.
    */
   logo: PropTypes.node.isRequired,
+
+  /**
+   * Specifies aria label for AboutModal
+   */
+  modalAriaLabel: PropTypes.string,
 
   /**
    * Specifies an optional handler which is called when the AboutModal

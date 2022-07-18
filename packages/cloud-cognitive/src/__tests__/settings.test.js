@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -35,8 +35,8 @@ describe(name, () => {
   });
 
   it('Supplies carbon theme token values', () => {
-    expect(carbon.themes.g10.text01).not.toBe(null);
-    expect(carbon.themes.g10.text01).toMatch(/#[0-9a-fA-F]+/);
+    expect(carbon.themes.g10.textPrimary).not.toBe(null);
+    expect(carbon.themes.g10.textPrimary).toMatch(/#[0-9a-fA-F]+/);
   });
 
   it('Supplies carbon layout token values', () => {

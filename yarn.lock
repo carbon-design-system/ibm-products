@@ -1732,7 +1732,7 @@ __metadata:
     "@carbon/grid": ^10.43.1
     "@carbon/icons-react": ^10.49.0
     carbon-components: ^10.57.2
-    carbon-components-react: ^7.57.2
+    carbon-components-react: ^7.57.3
     prop-types: ^15.8.1
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
@@ -1794,7 +1794,7 @@ __metadata:
     babel-loader: ^8.2.5
     babel-preset-ibm-cloud-cognitive: ^0.14.16
     carbon-components: ^10.57.2
-    carbon-components-react: ^7.57.2
+    carbon-components-react: ^7.57.3
     carbon-icons: ^7.0.7
     css-loader: ^6.7.1
     fast-sass-loader: ^2.0.1
@@ -1852,7 +1852,7 @@ __metadata:
     "@carbon/themes": ^10.54.0
     "@carbon/type": ^10.44.0
     carbon-components: ^10.57.2
-    carbon-components-react: ^7.57.2
+    carbon-components-react: ^7.57.3
     carbon-icons: ^7.0.7
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
@@ -1877,7 +1877,7 @@ __metadata:
     babel-plugin-macros: ^3.1.0
     babel-preset-ibm-cloud-cognitive: ^0.14.16
     carbon-components: 10.57.2
-    carbon-components-react: 7.57.2
+    carbon-components-react: 7.57.3
     carbon-icons: 7.0.7
     classnames: ^2.3.1
     clean-css-cli: ^5.6.0
@@ -9086,9 +9086,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components-react@npm:7.57.2, carbon-components-react@npm:^7.57.2":
-  version: 7.57.2
-  resolution: "carbon-components-react@npm:7.57.2"
+"carbon-components-react@npm:7.57.3, carbon-components-react@npm:^7.57.3":
+  version: 7.57.3
+  resolution: "carbon-components-react@npm:7.57.3"
   dependencies:
     "@babel/runtime": ^7.16.7
     "@carbon/feature-flags": ^0.7.0
@@ -9115,7 +9115,7 @@ __metadata:
     carbon-icons: ^7.0.7
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
-  checksum: 3130e305a7839180c668fe7ab8950d76283451f987420051ed51f066a534ffe7206269a2ee67e5442f23ff0bf7abddd5dc29a48268bf9420fef95c8476508555
+  checksum: 19f272386c8a3b79ef7ef28b7f935d8b151e6bd6befd886453d968ea2be8c9c65d84ed66a928c3f016da7c4c72622037b43e65184ed6964c4cd2f6c74d52c03b
   languageName: node
   linkType: hard
 
@@ -14900,7 +14900,7 @@ __metadata:
     rimraf: ^3.0.2
     stylelint: ^14.9.1
     stylelint-config-ibm-products: "*"
-    stylelint-plugin-carbon-tokens: 2.0.0-beta.7
+    stylelint-plugin-carbon-tokens: 2.0.0-beta.10
     webpack: ^5.73.0
   languageName: unknown
   linkType: soft
@@ -24295,7 +24295,7 @@ __metadata:
     stylelint-config-standard: ^26.0.0
     stylelint-config-standard-scss: ^4.0.0
     stylelint-no-unsupported-browser-features: ^5.0.3
-    stylelint-plugin-carbon-tokens: 2.0.0-beta.7
+    stylelint-plugin-carbon-tokens: 2.0.0-beta.10
   peerDependencies:
     stylelint: ^14.9.1
   languageName: unknown
@@ -24472,9 +24472,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-plugin-carbon-tokens@npm:2.0.0-beta.7":
-  version: 2.0.0-beta.7
-  resolution: "stylelint-plugin-carbon-tokens@npm:2.0.0-beta.7"
+"stylelint-plugin-carbon-tokens@npm:2.0.0-beta.10":
+  version: 2.0.0-beta.10
+  resolution: "stylelint-plugin-carbon-tokens@npm:2.0.0-beta.10"
   dependencies:
     lodash: ^4.17.21
     postcss-scss: ^4.0.4
@@ -24485,7 +24485,7 @@ __metadata:
     "@carbon/motion": ">=10 <= 11"
     "@carbon/themes": ">=10 <= 11"
     "@carbon/type": ">=10 <= 11"
-  checksum: 1b1229e0210771b8bbe4ae25cbc9d0baaa42fbbbe73530571860f92f0488b7471d27369d600c873b6940275c56c4c9809d8856160e6e0b48fea94d91c026959f
+  checksum: 4f70b787e28ff2194343397ec1a7a702e47f7aedfbdc6f304d727ffcf887e1e4afba8bdd2fe3a9ac6cb665ab9844dd50d8f5d4422a5e74d6c50a469d94a168be
   languageName: node
   linkType: hard
 

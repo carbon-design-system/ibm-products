@@ -24,7 +24,10 @@ module.exports = {
       },
     ],
     'carbon/motion-token-use': [true, { severity: 'warning' }],
-    'carbon/theme-token-use': [true, { severity: 'warning' }],
+    'carbon/theme-token-use': [
+      true,
+      { severity: 'warning', acceptUndefinedVariables: true },
+    ],
     'carbon/type-token-use': [
       true,
       {

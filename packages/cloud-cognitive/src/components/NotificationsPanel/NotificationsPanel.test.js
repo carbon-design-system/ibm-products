@@ -70,7 +70,7 @@ describe('Notifications', () => {
       data: [],
     });
 
-    userEvent.click(screen.getByRole('checkbox', /Do not disturb/i));
+    userEvent.click(screen.getByRole('switch', /Do not disturb/i));
     expect(onToggle).toBeCalled();
   });
 

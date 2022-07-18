@@ -51,6 +51,10 @@ $block-class-modal: #{$_block-class}-modal;
     white-space: nowrap;
   }
 
+  .#{$_block-class}__tag-container--multiline {
+    flex-wrap: wrap;
+  }
+
   .#{$_block-class}__tag-container--hidden {
     // This tag container is used to measure the width of all displayable tags
     @include measuring-container;

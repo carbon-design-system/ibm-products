@@ -21,7 +21,7 @@ const { prefix } = pkg;
 
 const blockClass = `${prefix}--side-panel`;
 const actionSetBlockClass = `${prefix}--action-set`;
-const sizes = ['xs', 'sm', 'md', 'lg', 'max'];
+const sizes = ['xs', 'sm', 'md', 'lg', '2xl'];
 
 const dataTestId = uuidv4();
 

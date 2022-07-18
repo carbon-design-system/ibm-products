@@ -14,15 +14,16 @@ import { pkg } from '../../settings';
 
 import { blockClass as toolbarClass, ToolbarContext } from './Toolbar';
 
-const blockClass = `${toolbarClass}__button`;
+export const blockClass = `${toolbarClass}__button`;
 
 /** Toolbar buttons are common functions performed as part of a products interface or an open window.  */
-let ToolbarButton = forwardRef(
+export let ToolbarButton = forwardRef(
   (
-    { caret, children, className, renderIcon, iconDescription, ...rest },
+    { caret, children, className, renderIcon, iconDescription = '', ...rest },
     ref
   ) => {
     const Icon = renderIcon;
+
     return (
       <IconButton
         align={useContext(ToolbarContext)?.vertical && 'right'}
@@ -34,7 +35,7 @@ let ToolbarButton = forwardRef(
         size="md"
       >
         <>
-          <Icon />
+          {Icon ? <Icon /> : null}
           {children}
 
           {caret && <span className={`${blockClass}__caret`} />}
@@ -58,12 +59,10 @@ ToolbarButton.propTypes = {
   className: string,
 
   /** Specifies the label for the icon button */
-  iconDescription: string,
+  iconDescription: string.isRequired,
 
   /** Specifies the icon to be used by the ToolbarButton component */
-  renderIcon: func,
+  renderIcon: func.isRequired,
 };
 
 ToolbarButton = pkg.checkComponentEnabled(ToolbarButton, componentName);
-
-export { blockClass, ToolbarButton };

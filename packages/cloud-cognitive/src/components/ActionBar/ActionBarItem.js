@@ -14,7 +14,7 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Button } from '@carbon/react';
+import { IconButton } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'ActionBarItem';
@@ -25,38 +25,32 @@ const blockClass = `${pkg.prefix}--action-bar-item`;
 /**
  * The ActionBarItem is used in the page header to populate the action bar
  */
-export let ActionBarItem = React.forwardRef(({ className, ...rest }, ref) => {
-  return (
-    <Button
-      {...{
-        ...rest,
-        ref,
-        className: cx(blockClass, className),
-        hasIconOnly: true,
-        kind: 'ghost',
-        size: 'md',
-        tooltipPosition: 'bottom',
-        tooltipAlignment: 'end',
-        type: 'button',
-      }}
-    />
-  );
-});
+export let ActionBarItem = React.forwardRef(
+  ({ label, className, ...rest }, ref) => {
+    return (
+      <IconButton
+        {...{
+          ...rest,
+          ref,
+          className: cx(blockClass, className),
+          kind: 'ghost',
+          size: 'md',
+          align: 'bottom-right',
+          type: 'button',
+          label,
+        }}
+      />
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 ActionBarItem = pkg.checkComponentEnabled(ActionBarItem, componentName);
 
 // Props the user cannot change
-const reservedProps = [
-  'hasIconOnly',
-  'kind',
-  'size',
-  'tooltipPosition',
-  'tooltipAlignment',
-  'type',
-];
+const reservedProps = ['kind', 'size', 'align', 'type'];
 // Base props on Carbon Button
-const propTypes = { ...Button.propTypes };
+const propTypes = { ...IconButton.propTypes };
 
 // Remove reserved props
 reservedProps.forEach((prop) => {
@@ -87,7 +81,7 @@ ActionBarItem.propTypes = {
    *
    * (inherited from Carbon Button)
    */
-  iconDescription: PropTypes.string,
+  label: PropTypes.string,
   /**
    * Optional click handler
    *

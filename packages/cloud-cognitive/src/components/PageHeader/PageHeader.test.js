@@ -37,6 +37,7 @@ const actionBarItems = [1, 2, 3, 4].map((item) => ({
   key: `a-key-${item}`,
   renderIcon: (props) => <Lightning size={16} {...props} />,
   iconDescription: `Action ${item}`,
+  label: `Action ${item}`,
   onClick: () => {},
 }));
 
@@ -299,7 +300,7 @@ describe('PageHeader', () => {
         selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbonPrefix}--link`,
       })
     ).toHaveLength(3);
-    expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
+    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(1);
     expect(screen.getAllByText(/Tab [1-4]/)).toHaveLength(4);
     expect(
       document.querySelectorAll(`.${blockClass}__page-actions`)
@@ -309,7 +310,6 @@ describe('PageHeader', () => {
       1
     );
     expect(screen.getByText(subtitle).textContent).toEqual(subtitle);
-    expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
     expect(
       screen.getAllByText('A tag', {
         // selector need to ignore sizing items
@@ -434,7 +434,7 @@ describe('PageHeader', () => {
     const { navigation } = testProps;
     render(<PageHeader {...{ navigation, withoutBackground: true }} />);
 
-    expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
+    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(1);
   });
 
   test('Navigation row renders when Tags but no Navigation', () => {
@@ -607,6 +607,7 @@ describe('PageHeader', () => {
       [
         required('actionBarOverflowAriaLabel', 'PageHeader'),
         required('overflowAriaLabel', 'ActionBar'),
+        required('ariaLabel', 'OverflowMenu'),
       ],
       () => {
         const { title } = testProps;
@@ -718,11 +719,11 @@ describe('PageHeader', () => {
 
   test('Has the same tag types as Carbon Tag', () => {
     // Same number of tags
-    expect(PageHeader.tagTypes.length).toEqual(tagTypes.length);
+    expect(PageHeader.tagTypes.length).toEqual(Object.keys(tagTypes).length);
 
     // Same value for each tag
     for (let i = 0; i < tagTypes.length; i++) {
-      expect(PageHeader.tagTypes).toContain(tagTypes[i]);
+      expect(PageHeader.tagTypes).toContain(Object.values(tagTypes)[i]);
     }
   });
 });

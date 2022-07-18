@@ -62,6 +62,7 @@ const makeActionBarItem = (item) => ({
   key: `a-key-${item}`,
   renderIcon: (props) => <Lightning size={16} {...props} />,
   iconDescription: `Action ${item}`,
+  label: `Action ${item}`,
 });
 const actionBarItems = {
   'No action bar': null,
@@ -73,16 +74,19 @@ const actionBarItems = {
       key: '1',
       renderIcon: (props) => <Printer size={16} {...props} />,
       iconDescription: `Print`,
+      label: `Print`,
     },
     {
       key: '2',
       renderIcon: (props) => <Settings size={16} {...props} />,
       iconDescription: `Settings`,
+      label: `Settings`,
     },
     {
       key: '3',
       renderIcon: (props) => <VolumeMute size={16} {...props} />,
       iconDescription: `Mute`,
+      label: `Mute`,
     },
   ],
 };

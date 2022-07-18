@@ -650,7 +650,7 @@ export let PageHeader = React.forwardRef(
                       })}
                     >
                       <TagSet
-                        overflowAlign="start"
+                        overflowAlign="bottom-right"
                         {...{
                           allTagsModalSearchLabel,
                           allTagsModalSearchPlaceholderText,
@@ -687,7 +687,7 @@ export let PageHeader = React.forwardRef(
                       })}
                     >
                       <TagSet
-                        overflowAlign="end"
+                        overflowAlign="bottom-right"
                         {...{
                           allTagsModalSearchLabel,
                           allTagsModalSearchPlaceholderText,

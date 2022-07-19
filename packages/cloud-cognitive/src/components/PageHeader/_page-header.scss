@@ -99,7 +99,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     $animation: background-and-shadow-appear;
   }
 
-  /* stylelint-disable-next-line carbon/motion-token-use */
+  /* stylelint-disable-next-line carbon/motion-token-use -- non-standard duration used */
   animation: $animation $duration linear paused forwards;
   // Added separately for clarity
   animation-delay: calc(
@@ -342,10 +342,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     &:not(.#{$block-class}__breadcrumb-title--pre-collapsed) {
       opacity: var(--#{$block-class}--breadcrumb-title-opacity);
 
-      transform: translateY(
-        var(--#{$block-class}--breadcrumb-title-top)
-      ); /* token linter does not support this form */
-
+      transform: translateY(var(--#{$block-class}--breadcrumb-title-top));
       visibility: var(--#{$block-class}--breadcrumb-title-visibility);
     }
   }

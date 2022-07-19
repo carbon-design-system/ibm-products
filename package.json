@@ -35,7 +35,7 @@
     "lint:es:files": "eslint",
     "lint:prettier": "yarn format:prettier --check --loglevel warn",
     "lint:prettier:files": "yarn format:prettier:files --check --loglevel warn",
-    "lint:style": "yarn lint:style:files 'packages/*/src/**/*.scss'",
+    "lint:style": "yarn lint:style:files 'packages/*/src/**/*.scss' '!packages/security/src/**/*.scss' '!packages/cdai/src/**/*.scss'",
     "lint:style:files": "stylelint --report-needless-disables --report-invalid-scope-disables",
     "prepare": "husky install",
     "run-all": "lerna run --stream --prefix --loglevel success",

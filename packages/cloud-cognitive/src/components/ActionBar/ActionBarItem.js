@@ -26,7 +26,9 @@ const blockClass = `${pkg.prefix}--action-bar-item`;
  * The ActionBarItem is used in the page header to populate the action bar
  */
 export let ActionBarItem = React.forwardRef(
-  ({ label, className, ...rest }, ref) => {
+  ({ label, className, renderIcon, ...rest }, ref) => {
+    const Icon = renderIcon;
+
     return (
       <IconButton
         {...{
@@ -39,7 +41,9 @@ export let ActionBarItem = React.forwardRef(
           type: 'button',
           label,
         }}
-      />
+      >
+        {Icon ? <Icon /> : null}
+      </IconButton>
     );
   }
 );

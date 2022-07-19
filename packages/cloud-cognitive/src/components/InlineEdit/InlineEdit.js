@@ -17,7 +17,7 @@ import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
-import { Button, usePrefix } from '@carbon/react';
+import { Button, IconButton, usePrefix } from '@carbon/react';
 import {
   Close,
   Edit,
@@ -339,23 +339,18 @@ export let InlineEdit = React.forwardRef(
                 />
               </>
             ) : (
-              <Button
+              <IconButton
                 className={cx(`${blockClass}__edit`, {
                   [`${blockClass}__edit--always-visible`]: editAlwaysVisible,
                 })}
                 kind="ghost"
-                hasIconOnly
-                iconDescription={editDescription}
+                label={editDescription}
                 onClick={handleEdit}
-                renderIcon={
-                  disabled
-                    ? (props) => <EditOff size={16} {...props} />
-                    : (props) => <Edit size={16} {...props} />
-                }
                 disabled={disabled}
-                tabIndex={-1}
                 {...tipPositions.edit}
-              />
+              >
+                {disabled ? <EditOff size={16} /> : <Edit size={16} />}
+              </IconButton>
             )}
           </div>
         </div>

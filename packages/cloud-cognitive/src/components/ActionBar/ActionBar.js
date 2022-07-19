@@ -107,7 +107,7 @@ export let ActionBar = React.forwardRef(
             overflowAriaLabel={overflowAriaLabel}
             overflowItems={newOverflowItems}
             key={`overflow-menu-${internalId.current}`}
-          ></ActionBarOverflowItems>
+          />
         );
       }
 

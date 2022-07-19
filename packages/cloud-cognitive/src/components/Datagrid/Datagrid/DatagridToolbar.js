@@ -21,7 +21,6 @@ const DatagridToolbar = (datagridState) => {
     <div className={`${blockClass}__table-toolbar`}>
       <TableToolbar>
         {DatagridActions && DatagridActions(datagridState)}
-        {DatagridDenseActions && DatagridDenseActions(datagridState)}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
     </div>

@@ -250,7 +250,8 @@ export const WithDenseHeader = () => {
       pageSize: 10,
       pageSizes: [5, 10, 25, 50],
     },
-    DatagridDenseActions,
+    useDenseHeader: true,
+    DatagridActions,
     DatagridPagination,
   });
 
@@ -580,6 +581,7 @@ const DatagridActions = (datagridState) => {
     CustomizeColumnsButton,
     RowSizeDropdown,
     rowSizeDropdownProps,
+    useDenseHeader,
   } = datagridState;
   const downloadCsv = () => {
     alert('Downloading...');
@@ -600,8 +602,44 @@ const DatagridActions = (datagridState) => {
     },
   };
   return (
-    isNothingSelected && (
-      <React.Fragment>
+    isNothingSelected &&
+    (useDenseHeader && useDenseHeader ? (
+      <TableToolbarContent size="sm">
+        <div style={style}>
+          <Button
+            kind="ghost"
+            hasIconOnly
+            tooltipPosition="bottom"
+            renderIcon={Download16}
+            iconDescription={'Download CSV'}
+            onClick={downloadCsv}
+          />
+        </div>
+        <div style={style}>
+          <Button
+            kind="ghost"
+            hasIconOnly
+            tooltipPosition="bottom"
+            renderIcon={Filter16}
+            iconDescription={'Left panel'}
+            onClick={leftPanelClick}
+          />
+        </div>
+        <RowSizeDropdown {...rowSizeDropdownProps} />
+        <div style={style} className={`${blockClass}__toolbar-divider`}>
+          <Button kind="ghost" renderIcon={Add16} iconDescription={'Action'}>
+            Ghost button
+          </Button>
+        </div>
+
+        {CustomizeColumnsButton && (
+          <div style={style}>
+            <CustomizeColumnsButton />
+          </div>
+        )}
+      </TableToolbarContent>
+    ) : (
+      <>
         <Button
           kind="ghost"
           hasIconOnly
@@ -645,69 +683,8 @@ const DatagridActions = (datagridState) => {
             </div>
           )}
         </TableToolbarContent>
-      </React.Fragment>
-    )
-  );
-};
-
-const DatagridDenseActions = (datagridState) => {
-  const {
-    selectedFlatRows,
-    CustomizeColumnsButton,
-    RowSizeDropdown,
-    rowSizeDropdownProps,
-  } = datagridState;
-  const downloadCsv = () => {
-    alert('Downloading...');
-  };
-  const { TableToolbarContent } = DataTable;
-
-  const leftPanelClick = () => {
-    alert('open/close left panel...');
-  };
-  const isNothingSelected = selectedFlatRows.length === 0;
-  const style = {
-    'button:nth-child(1) > span:nth-child(1)': {
-      bottom: '-37px',
-    },
-  };
-  return (
-    isNothingSelected && (
-      <TableToolbarContent size="sm">
-        <div style={style}>
-          <Button
-            kind="ghost"
-            hasIconOnly
-            tooltipPosition="bottom"
-            renderIcon={Download16}
-            iconDescription={'Download CSV'}
-            onClick={downloadCsv}
-          />
-        </div>
-        <div style={style}>
-          <Button
-            kind="ghost"
-            hasIconOnly
-            tooltipPosition="bottom"
-            renderIcon={Filter16}
-            iconDescription={'Left panel'}
-            onClick={leftPanelClick}
-          />
-        </div>
-        <RowSizeDropdown {...rowSizeDropdownProps} />
-        <div style={style} className={`${blockClass}__toolbar-divider`}>
-          <Button kind="ghost" renderIcon={Add16} iconDescription={'Action'}>
-            Ghost button
-          </Button>
-        </div>
-
-        {CustomizeColumnsButton && (
-          <div style={style}>
-            <CustomizeColumnsButton />
-          </div>
-        )}
-      </TableToolbarContent>
-    )
+      </>
+    ))
   );
 };
 

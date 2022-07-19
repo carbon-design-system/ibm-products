@@ -64,6 +64,7 @@ export const scssCompile = (file, compressed = false) =>
     ],
     {
       stdio: ['ignore', 'pipe', 'pipe'],
+      maxBuffer: 1024 * 1024 * 1.5,
     }
   ).toString();
 

@@ -23,7 +23,14 @@ module.exports = {
         acceptCarbonMiniUnitsFunction: true,
       },
     ],
-    'carbon/motion-token-use': [true, { severity: 'warning' }],
+    'carbon/motion-duration-use': [
+      true,
+      { severity: 'warning', acceptUndefinedVariables: true },
+    ],
+    'carbon/motion-easing-use': [
+      true,
+      { severity: 'warning', acceptUndefinedVariables: true },
+    ],
     'carbon/theme-token-use': [
       true,
       { severity: 'warning', acceptUndefinedVariables: true },

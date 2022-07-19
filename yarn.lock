@@ -14900,7 +14900,7 @@ __metadata:
     rimraf: ^3.0.2
     stylelint: ^14.9.1
     stylelint-config-ibm-products: "*"
-    stylelint-plugin-carbon-tokens: 2.0.0-beta.10
+    stylelint-plugin-carbon-tokens: 2.0.0-beta.13
     webpack: ^5.73.0
   languageName: unknown
   linkType: soft
@@ -24287,7 +24287,7 @@ __metadata:
     stylelint-config-standard: ^26.0.0
     stylelint-config-standard-scss: ^4.0.0
     stylelint-no-unsupported-browser-features: ^5.0.3
-    stylelint-plugin-carbon-tokens: 2.0.0-beta.10
+    stylelint-plugin-carbon-tokens: 2.0.0-beta.13
   peerDependencies:
     stylelint: ^14.9.1
   languageName: unknown
@@ -24464,9 +24464,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-plugin-carbon-tokens@npm:2.0.0-beta.10":
-  version: 2.0.0-beta.10
-  resolution: "stylelint-plugin-carbon-tokens@npm:2.0.0-beta.10"
+"stylelint-plugin-carbon-tokens@npm:2.0.0-beta.13":
+  version: 2.0.0-beta.13
+  resolution: "stylelint-plugin-carbon-tokens@npm:2.0.0-beta.13"
   dependencies:
     lodash: ^4.17.21
     postcss-scss: ^4.0.4
@@ -24477,7 +24477,7 @@ __metadata:
     "@carbon/motion": ">=10 <= 11"
     "@carbon/themes": ">=10 <= 11"
     "@carbon/type": ">=10 <= 11"
-  checksum: 4f70b787e28ff2194343397ec1a7a702e47f7aedfbdc6f304d727ffcf887e1e4afba8bdd2fe3a9ac6cb665ab9844dd50d8f5d4422a5e74d6c50a469d94a168be
+  checksum: 7f9041c89cbbe07ebc266167788d839725ec3f901fad1175176240e43aa16328c34c86304326b2e10181c3add5d33f108bf6eed35c257a9be1e6d3ec8908985d
   languageName: node
   linkType: hard
 

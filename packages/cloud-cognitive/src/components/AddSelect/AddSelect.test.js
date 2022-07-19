@@ -5,69 +5,36 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { AddSelect } from './AddSelect';
 import { pkg } from '../../settings';
 
-const blockClass = `${pkg.prefix}--add-select`;
 const componentName = AddSelect.name;
-const singleProps = {
-  className: 'placeholder-class',
-  description: 'select a category lorem ipsum',
-  globalSearchLabel: 'test input title',
-  globalSearchPlaceholder: 'Find categories',
-  items: {
-    entries: [
-      {
-        id: '1',
-        title: 'Kansas',
-        value: 'kansas',
-      },
-      {
-        id: '2',
-        title: 'Texas',
-        value: 'texas',
-      },
-      {
-        id: '3',
-        title: 'Florida',
-        value: 'florida',
-      },
-    ],
-  },
-  itemsLabel: 'Categories',
-  navIconDescription: 'View children',
-  noResultsTitle: 'No results',
-  noResultsDescription: 'Try again',
-  onCloseButtonText: 'Cancel',
-  onSubmit: (selection) => console.log(selection),
-  onSubmitButtonText: 'submit selections',
-  searchResultsLabel: 'Search results',
-  title: 'Select category',
-};
 
-const singleHierarchyProps = {
-  ...singleProps,
+const defaultProps = {
+  closeIconDescription: 'test icon description',
+  description: 'test description',
+  globalSearchLabel: 'test filter label',
   items: {
     entries: [
-      ...singleProps.items.entries,
       {
-        id: '4',
-        title: 'California',
-        value: 'california',
-        children: {
-          entries: [
-            {
-              id: '5',
-              title: 'Los Angeles',
-              value: 'la',
-            },
-          ],
-        },
+        id: 'test-entry-1',
+        title: 'test entry 1 title',
+        value: 'test-entry-1',
       },
     ],
   },
+  itemsLabel: 'test items label',
+  multi: false,
+  noResultsDescription: 'no results body',
+  noResultsTitle: 'no results title',
+  onClose: () => {},
+  onCloseButtonText: 'close button text',
+  onSubmit: () => {},
+  onSubmitButtonText: 'submit button text',
+  open: true,
+  title: 'test title',
 };
 
 const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
@@ -93,63 +60,105 @@ describe(componentName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it('renders SingleAddSelect', () => {
-    const { container } = render(<AddSelect {...singleHierarchyProps} />);
-    expect(container.querySelector(`.${blockClass}__single`)).toBeVisible();
+  it('renders single without hierarchy', () => {
+    render(<AddSelect {...defaultProps} />);
+    expect(screen.getByText('test entry 1 title')).toBeVisible();
   });
 
-  it('returns the selected values on submit', () => {
-    const onSubmit = jest.fn();
+  it('renders single with hierarchy', () => {
     const newProps = {
-      ...singleProps,
-      onSubmit,
+      ...defaultProps,
+      items: {
+        entries: [
+          {
+            id: 'test-entry-1',
+            title: 'test entry 1 title',
+            value: 'test-entry-1',
+            children: {
+              entries: [
+                {
+                  id: 'test-entry-1-1',
+                  title: 'test entry 1-1 title',
+                  value: 'test-entry-1-1',
+                },
+              ],
+            },
+          },
+        ],
+      },
+      navIconDescription: 'view children',
     };
     render(<AddSelect {...newProps} />);
-    const submitBtn = screen.getByText('submit selections');
-    const radio = screen.getByLabelText('Kansas');
-    fireEvent.click(radio);
-    fireEvent.click(submitBtn);
-    expect(onSubmit).toBeCalledWith('1');
+    expect(screen.getByText('test entry 1 title')).toBeVisible();
+    expect(screen.getByText('view children')).toBeInTheDocument();
   });
 
-  it('filters the items', () => {
-    render(<AddSelect {...singleHierarchyProps} />);
-    const input = screen.getByPlaceholderText('Find categories');
-    expect(screen.queryByText('Florida'));
-    expect(screen.queryByText('Kansas'));
-    fireEvent.change(input, { target: { value: 'florida' } });
-    expect(screen.queryByText('Florida'));
-    expect(screen.queryByText('Kansas')).toBeNull();
-  });
-
-  it('displays child items', () => {
-    render(<AddSelect {...singleHierarchyProps} />);
-    const childrenButton = document.querySelector(
-      `.${pkg.prefix}--add-select__selections-view-children`
-    );
-    expect(screen.queryByText('Los Angeles')).toBeNull();
-    fireEvent.click(childrenButton);
-    expect(screen.queryByText('Los Angeles'));
-  });
-
-  it('displays breadcrumbs', () => {
-    render(<AddSelect {...singleHierarchyProps} />);
-    const childrenButton = document.querySelector(
-      `.${pkg.prefix}--add-select__selections-view-children`
-    );
-    expect(document.querySelectorAll('.bx--breadcrumb-item').length).toEqual(1);
+  it('renders with global filters', () => {
+    const newProps = {
+      ...defaultProps,
+      noSelectionTitle: 'no selection title',
+      multi: true,
+      columnInputPlaceholder: 'find',
+      navIconDescription: 'view children',
+      globalFilters: [
+        {
+          id: 'fileType',
+          label: 'File type',
+        },
+      ],
+      globalFiltersIconDescription: 'filter icon description',
+      globalFiltersPlaceholderText: 'Choose an option',
+      globalFiltersPrimaryButtonText: 'Apply',
+      globalFiltersSecondaryButtonText: 'Reset',
+      items: {
+        entries: [
+          {
+            id: 'test-entry-1',
+            title: 'test entry 1 title',
+            value: 'test-entry-1',
+            fileType: 'test',
+            children: {
+              entries: [
+                {
+                  id: 'test-entry-1-1',
+                  title: 'test entry 1-1 title',
+                  value: 'test-entry-1-1',
+                  fileType: 'test',
+                },
+              ],
+            },
+          },
+        ],
+      },
+    };
+    render(<AddSelect {...newProps} />);
     expect(
-      document.querySelectorAll('.bx--breadcrumb-item')[0].textContent
-    ).toBe('Categories');
-    fireEvent.click(childrenButton);
-    expect(document.querySelectorAll('.bx--breadcrumb-item').length).toEqual(2);
-    expect(
-      document.querySelectorAll('.bx--breadcrumb-item')[1].textContent
-    ).toBe('California');
+      screen.getByLabelText('filter icon description')
+    ).toBeInTheDocument();
   });
 
-  // it('renders MultiAddSelect', () => {
-  //   const { container } = render(<AddSelect {...defaultProps} multi />);
-  //   expect(container.querySelector(`.${blockClass}__multi`)).toBeVisible();
-  // });
+  it('renders with modifiers', () => {
+    const newProps = {
+      ...defaultProps,
+      noSelectionTitle: 'no selection title',
+      multi: true,
+      items: {
+        modifiers: {
+          id: 'role',
+          label: 'Role',
+          options: ['editor'],
+        },
+        entries: [
+          {
+            id: 'test-entry-1',
+            title: 'test entry 1 title',
+            value: 'test-entry-1',
+            role: 'editor',
+          },
+        ],
+      },
+    };
+    render(<AddSelect {...newProps} />);
+    expect(screen.getByTitle('editor')).toBeInTheDocument();
+  });
 });

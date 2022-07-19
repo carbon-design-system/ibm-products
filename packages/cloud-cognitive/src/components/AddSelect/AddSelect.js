@@ -14,12 +14,12 @@ import { normalize, getGlobalFilterValues } from './add-select-utils';
 const blockClass = `${pkg.prefix}--add-select`;
 const componentName = 'AddSelect';
 
-export let AddSelect = forwardRef(({ items, ...props }, ref) => {
+export let AddSelect = forwardRef(({ items, globalFilters, ...props }, ref) => {
   const useNormalizedItems = !!items.entries.find((item) => item.children);
   const normalizedItems = useNormalizedItems ? normalize(items) : null;
   const globalFilterOpts =
-    props.multi && props.globalFilters?.length
-      ? getGlobalFilterValues(props.globalFilters, normalizedItems)
+    props.multi && globalFilters?.length
+      ? getGlobalFilterValues(globalFilters, normalizedItems)
       : null;
   const defaultModifiers =
     props.multi && items.modifiers
@@ -61,7 +61,7 @@ AddSelect.propTypes = {
   globalFiltersPlaceholderText: PropTypes.string,
   globalFiltersPrimaryButtonText: PropTypes.string,
   globalFiltersSecondaryButtonText: PropTypes.string,
-  globalSearchLabel: PropTypes.string,
+  globalSearchLabel: PropTypes.string.isRequired,
   globalSearchPlaceholder: PropTypes.string,
   globalSortBy: PropTypes.array,
   influencerTitle: PropTypes.string,

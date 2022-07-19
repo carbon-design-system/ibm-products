@@ -8226,7 +8226,7 @@ a.bx--overflow-menu-options__btn::before {
   background-color: inherit;
   color: var(--cds-icon-01, #f4f4f4);
   fill: currentColor;
-  transition: 240ms cubic-bezier(0.2, 0, 0.38, 0.9) background-color;
+  transition: background-color 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .security--button--icon *,
 .security--button--icon *::before,
@@ -23135,7 +23135,7 @@ optgroup.bx--select-optgroup:disabled,
   background-color: inherit;
   color: var(--cds-icon-01, #f4f4f4);
   fill: currentColor;
-  transition: 240ms cubic-bezier(0.2, 0, 0.38, 0.9) background-color;
+  transition: background-color 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
   margin-left: auto;
   color: var(--cds-inverse-01, #161616);
   transition-duration: 110ms;
@@ -23502,7 +23502,7 @@ optgroup.bx--select-optgroup:disabled,
   background-color: inherit;
   color: var(--cds-icon-01, #f4f4f4);
   fill: currentColor;
-  transition: 240ms cubic-bezier(0.2, 0, 0.38, 0.9) background-color;
+  transition: background-color 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
   margin-left: auto;
   color: var(--cds-inverse-01, #161616);
   transition-duration: 110ms;

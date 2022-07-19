@@ -62,7 +62,7 @@
       align-items: center;
       padding: $spacing-03;
       border-left: 1px solid $text-02;
-      animation: $duration--moderate-02 $duration--moderate-01 reveal;
+      animation: reveal $duration--moderate-02 $duration--moderate-01;
       animation-fill-mode: both;
     }
 

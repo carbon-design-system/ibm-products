@@ -1,0 +1,23 @@
+<svg width="320" height="180" viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="87" y="66" width="158" height="57" fill="#E0E0E0"/>
+<rect x="81" y="61" width="158" height="57" fill="#A8A8A8"/>
+<rect x="76" y="56" width="158" height="57" fill="#393939"/>
+<rect x="76" y="56" width="158" height="57" fill="#393939"/>
+<path d="M217.381 70L214.5 67.1186L215.119 66.5L218 69.3814L220.881 66.5L221.5 67.1186L218.619 70L221.5 72.8814L220.881 73.5L218 70.6186L215.119 73.5L214.5 72.8814L217.381 70Z" fill="black"/>
+<mask id="mask0_52_6390" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="214" y="66" width="8" height="8">
+<path d="M217.381 70L214.5 67.1186L215.119 66.5L218 69.3814L220.881 66.5L221.5 67.1186L218.619 70L221.5 72.8814L220.881 73.5L218 70.6186L215.119 73.5L214.5 72.8814L217.381 70Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_52_6390)">
+<rect width="35" height="35" transform="matrix(-1 0 0 1 225 63)" fill="white"/>
+</g>
+<circle r="6.125" transform="matrix(-1 0 0 1 96 75)" fill="#78A9FF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M96.0009 72.375C95.6385 72.375 95.3447 72.0812 95.3447 71.7188C95.3447 71.3563 95.6385 71.0625 96.0009 71.0625C96.3634 71.0625 96.6572 71.3563 96.6572 71.7188C96.6572 72.0812 96.3634 72.375 96.0009 72.375ZM97.7422 78.5569H94.2422V77.5725H95.4978V74.6194V74.125V73.635H97.3047V74.6194H96.4822V77.5725H97.7422V78.5569Z" fill="#161616"/>
+<mask id="mask1_52_6390" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="94" y="71" width="4" height="8">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M96.0009 72.375C95.6385 72.375 95.3447 72.0812 95.3447 71.7188C95.3447 71.3563 95.6385 71.0625 96.0009 71.0625C96.3634 71.0625 96.6572 71.3563 96.6572 71.7188C96.6572 72.0812 96.3634 72.375 96.0009 72.375ZM97.7422 78.5569H94.2422V77.5725H95.4978V74.6194V74.125V73.635H97.3047V74.6194H96.4822V77.5725H97.7422V78.5569Z" fill="white"/>
+</mask>
+<g mask="url(#mask1_52_6390)">
+</g>
+<rect x="111" y="72" width="55" height="5" fill="#F4F4F4"/>
+<rect x="111" y="92" width="77" height="5" fill="#BEBEBE"/>
+<rect x="111" y="82" width="87" height="5" fill="#BEBEBE"/>
+</svg>

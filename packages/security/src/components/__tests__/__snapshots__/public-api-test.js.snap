@@ -3151,6 +3151,21 @@ Map {
         "isRequired": true,
         "type": "node",
       },
+      "dense": Object {
+        "type": "bool",
+      },
+      "mode": Object {
+        "args": Array [
+          Array [
+            "stacked",
+            "toggle",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "short": Object {
+        "type": "bool",
+      },
     },
   },
   "DescriptionModule" => Object {
@@ -5938,6 +5953,9 @@ Map {
           "type": "string",
         },
         "onChange": Object {
+          "type": "func",
+        },
+        "onInputValueChange": Object {
           "type": "func",
         },
         "onMenuChange": Object {
@@ -14814,6 +14832,9 @@ Map {
         "type": "string",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onInputValueChange": Object {
         "type": "func",
       },
       "onMenuChange": Object {

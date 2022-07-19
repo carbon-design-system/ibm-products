@@ -2388,12 +2388,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel {
   display: inline-flex;
   width: var(--c4p--inline-edit--size);
+  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);
-  padding: calc(
-    0.5 * (var(--c4p--inline-edit--size) - var(--c4p--inline-edit--icon-size)) - var(--cds-spacing-01, 0.125rem)
-  );
+  align-items: center;
+  justify-content: center;
   border: 2px solid transparent;
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:hover {
@@ -2414,38 +2414,27 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   border-color: transparent;
 }
 .c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save {
-  margin-right: 0;
+  overflow: visible;
+  width: var(--c4p--inline-edit--edit-size);
   transition: all 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
   transition-property: margin, padding;
 }
-.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save svg {
-  transition: width 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
-}
-@media (prefers-reduced-motion: reduce) {
-  .c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save svg {
-    transition: none;
-  }
-}
 .c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation:not(.c4p--inline-edit__toolbar--saveable) .c4p--inline-edit__save {
-  padding-right: 0;
-  padding-left: 0;
-  border-right: 0;
-  border-left: 0;
-  margin-right: calc(-1 * var(--c4p--inline-edit--size));
-}
-.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation:not(.c4p--inline-edit__toolbar--saveable) .c4p--inline-edit__save svg {
   overflow: hidden;
   width: 0;
+  padding: 0;
+  border-right: 0;
+  border-left: 0;
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit {
   display: inline-flex;
   width: var(--c4p--inline-edit--size);
+  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);
-  padding: calc(
-    0.5 * (var(--c4p--inline-edit--size) - var(--c4p--inline-edit--icon-size)) - var(--cds-spacing-01, 0.125rem)
-  );
+  align-items: center;
+  justify-content: center;
   border: 2px solid transparent;
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:active, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:focus {
@@ -2469,12 +2458,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit .c4p--inline-edit__validation-icon {
   display: inline-flex;
   width: var(--c4p--inline-edit--size);
+  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);
-  padding: calc(
-    0.5 * (var(--c4p--inline-edit--size) - var(--c4p--inline-edit--icon-size)) - var(--cds-spacing-01, 0.125rem)
-  );
+  align-items: center;
+  justify-content: center;
   border: 2px solid transparent;
 }
 .c4p--inline-edit.c4p--inline-edit--invalid .c4p--inline-edit__validation-icon {

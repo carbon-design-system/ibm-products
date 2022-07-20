@@ -14,7 +14,7 @@
   /// Sets the prefix for all IBM Security-specific classes.
   /// @access private
   /// @type String
-  $security--prefix: security;
+  $security--prefix: cfp;
 
   .#{$security--prefix}--combo-button {
     position: relative;

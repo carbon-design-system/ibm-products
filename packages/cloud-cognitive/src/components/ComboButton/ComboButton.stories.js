@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CloudApp16 } from '@carbon/icons-react';
 import React from 'react';
 
 import {
@@ -29,7 +28,7 @@ export default {
 export const Default = prepareStory(() => (
   <ComboButton>
     <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
-    <ComboButtonItem renderIcon={CloudApp16}>ComboButtonItem 2</ComboButtonItem>
+    <ComboButtonItem>ComboButtonItem 2</ComboButtonItem>
     <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
   </ComboButton>
 ));

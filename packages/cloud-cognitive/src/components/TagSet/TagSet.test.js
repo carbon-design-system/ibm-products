@@ -82,7 +82,7 @@ describe(TagSet.displayName, () => {
 
   it('Has the same tag types as Carbon Tag', () => {
     // Same number of tags
-    expect(TagSet.types.length).toEqual(tagTypes.length);
+    expect(TagSet.types.length).toEqual(Object.keys(tagTypes).length);
 
     // Same value for each tag
     for (let i = 0; i < tagTypes.length; i++) {

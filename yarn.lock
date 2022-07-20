@@ -15129,7 +15129,7 @@ __metadata:
     rimraf: ^3.0.2
     stylelint: ^14.9.1
     stylelint-config-ibm-products: "*"
-    stylelint-plugin-carbon-tokens: 2.0.0-beta.13
+    stylelint-plugin-carbon-tokens: 2.0.0-beta.10
     webpack: ^5.73.0
   languageName: unknown
   linkType: soft
@@ -24754,6 +24754,23 @@ __metadata:
   peerDependencies:
     stylelint: ^14.0.0
   checksum: fa3ace3cc65486b9f94165603bd04983636fda5ac959cd29bf87847a95b32f366b16faf612bd49e3b9f96073f8fe28a22a5c5727cc08c8f9d7327c89084b3f30
+  languageName: node
+  linkType: hard
+
+"stylelint-plugin-carbon-tokens@npm:2.0.0-beta.10":
+  version: 2.0.0-beta.10
+  resolution: "stylelint-plugin-carbon-tokens@npm:2.0.0-beta.10"
+  dependencies:
+    lodash: ^4.17.21
+    postcss-scss: ^4.0.4
+    postcss-value-parser: ^4.2.0
+  peerDependencies:
+    "@carbon/colors": ">=10 <= 11"
+    "@carbon/layout": ">=10 <= 11"
+    "@carbon/motion": ">=10 <= 11"
+    "@carbon/themes": ">=10 <= 11"
+    "@carbon/type": ">=10 <= 11"
+  checksum: 4f70b787e28ff2194343397ec1a7a702e47f7aedfbdc6f304d727ffcf887e1e4afba8bdd2fe3a9ac6cb665ab9844dd50d8f5d4422a5e74d6c50a469d94a168be
   languageName: node
   linkType: hard
 

@@ -191,6 +191,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
         padding: 0;
 
         .#{c4p-settings.$carbon-prefix}--btn__icon {
+          // stylelint-disable-next-line carbon/motion-easing-use
           transition: transform $duration-moderate-02 ease;
           /* stylelint-disable-next-line max-nesting-depth */
           @media (prefers-reduced-motion: reduce) {

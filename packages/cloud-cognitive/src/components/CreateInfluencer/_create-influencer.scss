@@ -74,13 +74,6 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
   @include motion(exit, productive);
 }
 
-.#{$influencer-block-class}__side-nav-closing,
-.#{$influencer-block-class}__progress-indicator-closing {
-  animation: influencer-menu-exit $duration-moderate-02 1;
-  animation-fill-mode: forwards;
-  @include motion(exit, productive);
-}
-
 @media (prefers-reduced-motion) {
   .#{$influencer-block-class}__side-nav-opening,
   .#{$influencer-block-class}__progress-indicator-opening,

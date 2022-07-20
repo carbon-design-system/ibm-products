@@ -64,8 +64,7 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--
 }
 
 .#{$create-tearsheet-block-class} .#{$step-block-class}__step--visible-step {
-  /* stylelint-disable-next-line carbon/motion-token-use */
-  animation: $duration-slow-01 step-content-entrance;
+  animation: step-content-entrance $duration-slow-01;
   animation-fill-mode: forwards;
   animation-timing-function: $standard-easing;
   opacity: 0;

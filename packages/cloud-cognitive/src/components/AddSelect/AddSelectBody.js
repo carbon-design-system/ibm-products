@@ -313,7 +313,7 @@ AddSelectBody.propTypes = {
   globalFiltersPlaceholderText: PropTypes.string,
   globalFiltersPrimaryButtonText: PropTypes.string,
   globalFiltersSecondaryButtonText: PropTypes.string,
-  globalSearchLabel: PropTypes.string,
+  globalSearchLabel: PropTypes.string.isRequired,
   globalSearchPlaceholder: PropTypes.string,
   globalSortBy: PropTypes.array,
   influencerTitle: PropTypes.string,

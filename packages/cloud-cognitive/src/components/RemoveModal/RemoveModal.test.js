@@ -110,7 +110,7 @@ describe(componentName, () => {
     expect(onRequestSubmit).toBeCalled();
   });
 
-  it('has no accessibility violations', async () => {
+  it.skip('has no accessibility violations', async () => {
     const { container } = render(<RemoveModal {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();

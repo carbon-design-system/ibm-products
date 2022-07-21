@@ -10,7 +10,7 @@ import React from 'react';
 import { DataTable, SkeletonText } from 'carbon-components-react';
 import { selectionColumnId } from '../common-column-ids';
 import cx from 'classnames';
-import { pkg } from '../../../settings';
+import { pkg, carbon } from '../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -23,7 +23,7 @@ const DatagridRow = (datagridState) => {
     <TableRow
       className={cx(`${blockClass}__carbon-row`, {
         [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
-        [`bx--data-table--selected`]: row.isSelected,
+        [`${carbon.prefix}--data-table--selected`]: row.isSelected,
       })}
       {...row.getRowProps()}
       key={row.id}

@@ -433,10 +433,10 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     .#{$block-class}__title {
       @include carbon--type-style('productive-heading-04');
 
+      min-height: $spacing-08;
       overflow-x: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      min-height: $spacing-08;
     }
 
     .#{$block-class}__title .#{$pkg-prefix}--inline-edit__value {

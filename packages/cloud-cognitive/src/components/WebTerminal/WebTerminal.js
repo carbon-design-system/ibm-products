@@ -44,6 +44,7 @@ export let WebTerminal = React.forwardRef(
       actions = defaults.actions,
       children,
       className,
+      closeIconDescription,
       documentationLinks = defaults.documentationLinks,
       documentationLinksIconDescription = defaults.documentationLinksIconDescription,
 
@@ -146,7 +147,7 @@ export let WebTerminal = React.forwardRef(
             hasIconOnly
             renderIcon={Close}
             kind="ghost"
-            iconDescription="Close web terminal"
+            iconDescription={closeIconDescription}
             onClick={handleCloseTerminal}
             onAnimationEnd={(event) => event.stopPropagation()}
           />
@@ -191,6 +192,11 @@ WebTerminal.propTypes = {
    * Custom classname for additional styling of the web terminal
    */
   className: PropTypes.string,
+
+  /**
+   * Icon description for the close button
+   */
+  closeIconDescription: PropTypes.string.isRequired,
 
   /**
    * Array of objects for each documentation link. Each documentation link uses the prop types of OverflowMenuItems. See more: https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu--default

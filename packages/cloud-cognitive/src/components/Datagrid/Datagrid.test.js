@@ -17,9 +17,6 @@ import { expectWarn } from '../../global/js/utils/test-helper';
 import { Datagrid } from '.';
 
 import {
-  DatagridActions,
-  DatagridBatchActions,
-  DatagridPagination,
   useInfiniteScroll,
   useSelectRows,
   useDisableSelectRows,
@@ -30,9 +27,26 @@ import {
   useCustomizeColumns,
   useSelectAllWithToggle,
   useRowIsMouseOver,
+  useStickyColumn,
+  useActionsColumn,
 } from '.';
 
 import { useColumnOrder } from 'react-table';
+import {
+  DataTable,
+  Button,
+  Pagination,
+  TableBatchActions,
+  TableBatchAction,
+} from 'carbon-components-react';
+import {
+  Download16,
+  Restart16,
+  Filter16,
+  Activity16,
+} from '@carbon/icons-react';
+
+// import { DatagridActions, DatagridBatchActions, DatagridPagination, } from './Datagrid.stories';
 
 import namor from 'namor';
 
@@ -110,6 +124,24 @@ const defaultHeader = [
   },
 ];
 
+const DatagridBatchActions = (datagridState) => {
+  const { selectedFlatRows, toggleAllRowsSelected } = datagridState;
+  const totalSelected = selectedFlatRows && selectedFlatRows.length;
+  const onBatchAction = () => alert('Batch action');
+  const actionName = 'Action';
+  return (
+    <TableBatchActions
+      shouldShowBatchActions={totalSelected > 0}
+      totalSelected={totalSelected}
+      onCancel={() => toggleAllRowsSelected(false)}
+    >
+      <TableBatchAction renderIcon={Activity16} onClick={onBatchAction}>
+        {actionName}
+      </TableBatchAction>
+    </TableBatchActions>
+  );
+};
+
 const BasicUsage = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
@@ -121,22 +153,108 @@ const BasicUsage = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
-/*
-const BatchActions = ({...rest}) => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      DatagridActions,
-      DatagridBatchActions,
-    },
-    useSelectRows
-  );
+const DatagridActions = (datagridState) => {
+  const {
+    selectedFlatRows,
+    setGlobalFilter,
+    CustomizeColumnsButton,
+    RowSizeDropdown,
+    rowSizeDropdownProps,
+  } = datagridState;
+  const downloadCsv = () => {
+    console.log('Downloading');
+    alert('Downloading...');
+  };
+  const { TableToolbarContent, TableToolbarSearch } = DataTable;
 
-  return <Datagrid datagridState={{ ...datagridState }}{...rest}/>;
-};*/
+  const refreshColumns = () => {
+    console.log('refreshing');
+    alert('refreshing...');
+  };
+  const leftPanelClick = () => {
+    console.log('open/close left panel');
+    alert('open/close left panel...');
+  };
+  const searchForAColumn = 'Search';
+  const isNothingSelected = selectedFlatRows.length === 0;
+  const style = {
+    'button:nth-child(1) > span:nth-child(1)': {
+      bottom: '-37px',
+    },
+  };
+  return (
+    isNothingSelected && (
+      <React.Fragment>
+        <Button
+          kind="ghost"
+          hasIconOnly
+          tooltipPosition="bottom"
+          renderIcon={Filter16}
+          iconDescription={'Left panel'}
+          onClick={leftPanelClick}
+        />
+        <TableToolbarContent>
+          <TableToolbarSearch
+            size="xl"
+            id="columnSearch"
+            persistent
+            placeHolderText={searchForAColumn}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+          />
+          <RowSizeDropdown {...rowSizeDropdownProps} />
+          <div style={style}>
+            <Button
+              kind="ghost"
+              hasIconOnly
+              tooltipPosition="bottom"
+              renderIcon={Restart16}
+              iconDescription={'Refresh'}
+              onClick={refreshColumns}
+            />
+          </div>
+          <div style={style}>
+            <Button
+              kind="ghost"
+              hasIconOnly
+              tooltipPosition="bottom"
+              renderIcon={Download16}
+              iconDescription={'Download CSV'}
+              onClick={downloadCsv}
+            />
+          </div>
+          {CustomizeColumnsButton && (
+            <div style={style}>
+              <CustomizeColumnsButton />
+            </div>
+          )}
+        </TableToolbarContent>
+      </React.Fragment>
+    )
+  );
+};
+
+// eslint-disable-next-line react/prop-types
+const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
+  const updatePagination = ({ page, pageSize }) => {
+    console.log(state);
+    setPageSize(pageSize);
+    gotoPage(page - 1); // Carbon is non-zero-based
+  };
+
+  return (
+    <Pagination
+      // eslint-disable-next-line react/prop-types
+      page={state.pageIndex + 1} // react-table is zero-based
+      // eslint-disable-next-line react/prop-types
+      pageSize={state.pageSize}
+      // eslint-disable-next-line react/prop-types
+      pageSizes={state.pageSizes || [10, 20, 30, 40, 50]}
+      // eslint-disable-next-line react/prop-types
+      totalItems={rows.length}
+      onChange={updatePagination}
+    />
+  );
+};
 
 const EmptyUsage = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -673,6 +791,89 @@ const WithPagination = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
+const BatchActions = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(10));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      DatagridActions,
+      DatagridBatchActions,
+    },
+    useSelectRows
+  );
+
+  return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
+const StickyActionsColumn = ({ ...rest }) => {
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader,
+      {
+        Header: '',
+        accessor: 'actions',
+        sticky: 'right',
+        width: 60,
+        isAction: true,
+      },
+    ],
+    []
+  );
+  const [data] = useState(makeData(10));
+  const [msg, setMsg] = useState('click action menu');
+  const onActionClick = (actionId, row) => {
+    const { original } = row;
+    setMsg(
+      `Clicked [${actionId}] on row: <${original.firstName} ${original.lastName}>`
+    );
+  };
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      rowActions: [
+        {
+          id: 'edit',
+          itemText: 'Edit',
+          onClick: onActionClick,
+        },
+        {
+          id: 'vote',
+          itemText: 'Vote',
+          onClick: onActionClick,
+          shouldHideMenuItem: (row) => row.original.age <= 18,
+        },
+        {
+          id: 'retire',
+          itemText: 'Retire',
+          onClick: onActionClick,
+          disabled: false,
+          shouldDisableMenuItem: (row) => row.original.age <= 60,
+        },
+        {
+          id: 'delete',
+          itemText: 'Delete',
+          hasDivider: true,
+          isDelete: true,
+          onClick: onActionClick,
+        },
+      ],
+    },
+    useStickyColumn,
+    useActionsColumn
+  );
+  return (
+    <Wrapper>
+      <h3>{msg}</h3>
+      <Datagrid datagridState={{ ...datagridState }} {...rest} />
+      <p>More details documentation check the Notes section below</p>
+    </Wrapper>
+  );
+};
+
 beforeAll(() => {
   jest.spyOn(global.console, 'warn').mockImplementation((message) => {
     if (!message.includes('componentWillReceiveProps')) {
@@ -686,32 +887,213 @@ describe(componentName, () => {
     jest.spyOn(global.console, 'error').mockImplementation(() => {});
     //This will suppress the warning about Arrows16 Component (will be removed in the next major version of @carbon/icons-react).
     jest.spyOn(global.console, 'warn').mockImplementation(() => {});
+    jest.useFakeTimers();
+    jest.spyOn(global, 'setTimeout');
   });
 
   it('renders a basic data grid component with devTools attribute', () => {
     render(<BasicUsage data-testid={dataTestId} />);
+
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       Datagrid.displayName
     );
-  });
 
-  it("renders a basic data grid validating use of Carbon's data table internally", () => {
-    render(<BasicUsage data-testid={dataTestId} />);
     expect(screen.getByRole('table')).toHaveClass(
       `${carbon.prefix}--data-table`
     );
+
+    expect(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('thead')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('th').length
+    ).toEqual(16);
+    expect(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr').length
+    ).toEqual(10);
   });
 
-  //TODO: Create the Batch Actions Test
-  /*
-  it("renders a Batch Actions Table", () => {
+  it('renders a Batch Actions Table', () => {
     render(<BatchActions data-testid={dataTestId}></BatchActions>);
 
-    fireEvent.click(screen.getByRole('table').getElementsByTagName('thead')[0].getElementsByTagName('tr')[0].getElementsByTagName('div')[0].getElementsByTagName('th')[0].getElementsByTagName('div')[0].getElementsByTagName('input')[0]);
-    console.log(`Child Element Count: ${document.getElementsByName('button').length}`);
-    // expect(document.querySelector('#datagrid-table-id10').childElementCount).toBe(2);
+    var alertMock = jest.spyOn(window, 'alert');
 
-  });*/
+    fireEvent.click(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('thead')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('th')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('input')[0]
+    );
+    const tableBodyRows = screen
+      .getByRole('table')
+      .getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr');
+    const numRows = tableBodyRows.length;
+
+    for (var i = 0; i < numRows; i++) {
+      expect(tableBodyRows[i].classList[1]).toEqual('bx--data-table--selected');
+    }
+
+    fireEvent.click(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('thead')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('th')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('input')[0]
+    );
+
+    expect(
+      document.getElementsByClassName('bx--search-input')[0]
+    ).toBeDefined();
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[0]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Left panel');
+
+    expect(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+      )[0]
+    ).toBeDefined();
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+      )[0]
+    );
+
+    const rowSizeDropDown = [
+      'Extra large',
+      'Large (default)',
+      'Medium',
+      'Small',
+      'Extra small',
+    ];
+    const rowSize = document
+      .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
+      .getElementsByTagName('div')[0]
+      .getElementsByTagName('fieldset')[0]
+      .getElementsByTagName('div').length;
+
+    for (var k = 0; k < rowSize; k++) {
+      expect(
+        document
+          .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
+          .getElementsByTagName('div')[0]
+          .getElementsByTagName('fieldset')[0]
+          .getElementsByTagName('div')
+          .item(k)
+          .getElementsByTagName('label')[0]
+          .getElementsByTagName('span')[1].textContent
+      ).toEqual(rowSizeDropDown[k]);
+    }
+
+    fireEvent.click(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('button')[0]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(1);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[1]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Refresh');
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(2);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[2]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Download CSV');
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[2]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(3);
+
+    fireEvent.click(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('thead')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('th')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('input')[0]
+    );
+
+    expect(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('p')[0]
+        .getElementsByTagName('span')[0].textContent
+    ).toEqual('10 items selected');
+
+    expect(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[0].textContent
+    ).toEqual('Action');
+    fireEvent.click(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[0]
+    );
+
+    expect(alertMock).toHaveBeenCalledTimes(4);
+
+    expect(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[1].textContent
+    ).toEqual('Cancel');
+    fireEvent.click(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[1]
+    );
+  });
 
   it('renders nothing and logs a warning to console if no datagridState is supplied', () => {
     expectWarn(
@@ -755,13 +1137,49 @@ describe(componentName, () => {
         .getElementsByTagName('tr')[0]
         .getElementsByTagName('td')[0].textContent
     ).toBeNull;
+
+    expect(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('td')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('svg')[0]
+    ).toBeDefined();
+
+    expect(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('td')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('h3')[0].textContent
+    ).toEqual('Empty State Title');
+
+    expect(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('td')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('p')[0].textContent
+    ).toEqual('Description test explaining why this card is empty.');
   });
 
   it('Initial Load', () => {
     render(<InitialLoad data-testid={dataTestId}></InitialLoad>);
+    expect(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('thead')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('th').length
+    ).toEqual(16);
   });
 
-  //TODO: Ask Mark, what should we check / expect this to be?
   it('Infinite Scroll', () => {
     render(<InfiniteScroll data-testid={dataTestId}></InfiniteScroll>);
 
@@ -771,15 +1189,8 @@ describe(componentName, () => {
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('div')[0].classList[0]
     ).toBe('c4p--datagrid__virtual-scrollbar');
-
-    /*const scrollContainer = screen.queryAllByRole('rowgroup')[0];
-    
-    scrollContainer.addEventListener('scroll');
-
-    fireEvent.scroll(scrollContainer, {target: {y: 100}});*/
   });
 
-  //TODO: Check 10,000 rows
   //Ten Thousand Entries
   it('renders Ten Thousand table entries', () => {
     render(<TenThousandEntries data-testid={dataTestId}></TenThousandEntries>);
@@ -813,25 +1224,30 @@ describe(componentName, () => {
             .getElementsByTagName('div')[0].style.height
         )
     ).toEqual(10000);
-
-    /*
-    console.log(
-      `Num Children: ${
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('div')[0]
-          .getElementsByTagName('div')[0].childElementCount
-      }`
-    );
-    */
   });
 
-  //TODO: Complete This
   it('With Pagination', () => {
     render(<WithPagination data-testid={dataTestId}></WithPagination>);
-    document.getElementsByClassName('bx--pagination');
-    document.addEventListener('load', () => {});
+
+    expect(document.getElementById('bx-pagination-select-4')).toBeDefined();
+    expect(document.getElementById('bx-pagination-select-6')).toBeDefined();
+
+    /*fireEvent.click(document.getElementById('bx-pagination-select-6').getElementsByTagName('option')[0]);
+    expect(document.getElementsByClassName('bx--pagination__text bx--pagination__items-count')[0]).toBe('1–5 of 100 items');
+    expect(document.getElementsByClassName('bx--pagination__text')[0].textContent).toBe('of 20 pages');
+
+    fireEvent.click(document.getElementById('bx-pagination-select-6').getElementsByTagName('option')[1]);
+    expect(document.getElementsByClassName('bx--pagination__text bx--pagination__items-count')[0]).toBe('1–10 of 100 items');
+    expect(document.getElementsByClassName('bx--pagination__text')[0].textContent).toBe('of 10 pages');
+
+
+    fireEvent.click(document.getElementById('bx-pagination-select-6').getElementsByTagName('option')[2]);
+    expect(document.getElementsByClassName('bx--pagination__text bx--pagination__items-count')[0]).toBe('1–25 of 100 items');
+    expect(document.getElementsByClassName('bx--pagination__text')[0].textContent).toBe('of 4 pages');
+
+    fireEvent.click(document.getElementById('bx-pagination-select-6').getElementsByTagName('option')[3]);
+    expect(document.getElementsByClassName('bx--pagination__text bx--pagination__items-count')[0]).toBe('1–50 of 100 items');
+    expect(document.getElementsByClassName('bx--pagination__text')[0].textContent).toBe('of 2 pages');*/
   });
 
   it('Clickable Row', () => {
@@ -850,24 +1266,142 @@ describe(componentName, () => {
     }, 1000);
   });
 
-  //TODO: Figure this out
+  function completeHoverOperation(rowNumber) {
+    userEvent.hover(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr')
+        .item(rowNumber)
+        .getElementsByTagName('td')[3]
+    );
 
-  it('Is Hove On Row', () => {
+    setTimeout(() => {
+      expect(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('tr')
+          .item(rowNumber)
+          .getElementsByTagName('td')[3].textContent
+      ).toBe('yes hovering!');
+    }, 300);
+
+    userEvent.unhover(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr')[rowNumber]
+    );
+    setTimeout(() => {
+      expect(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('tr')
+          .item(rowNumber)
+          .getElementsByTagName('td')[3].textContent
+      ).toBe('');
+    }, 300);
+  }
+
+  it('Is Hover On Row', () => {
     render(<IsHoverOnRow data-testid={dataTestId}></IsHoverOnRow>);
+    completeHoverOperation(1);
 
-    const hoverRow = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr')[0];
-    userEvent.hover(hoverRow.getElementsByTagName('td')[1]);
-
-    // TODO: work in progress
-    // expect(screen.getByRole('table').getElementsByTagName('tbody')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[3].innerHTML).toBe('yes!');
+    completeHoverOperation(5);
   });
 
   //Disables Selected Rows
   it('Renders Disable Select Row', () => {
     render(<DisableSelectRow data-testid={dataTestId}></DisableSelectRow>);
+
+    var alertMock = jest.spyOn(window, 'alert');
+
+    expect(
+      document.getElementsByClassName('bx--search-input')[0]
+    ).toBeDefined();
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[0]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Left panel');
+
+    expect(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+      )[0]
+    ).toBeDefined();
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+      )[0]
+    );
+
+    const rowSizeDropDown = [
+      'Extra large',
+      'Large (default)',
+      'Medium',
+      'Small',
+      'Extra small',
+    ];
+    const rowSize = document
+      .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
+      .getElementsByTagName('div')[0]
+      .getElementsByTagName('fieldset')[0]
+      .getElementsByTagName('div').length;
+
+    for (var k = 0; k < rowSize; k++) {
+      expect(
+        document
+          .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
+          .getElementsByTagName('div')[0]
+          .getElementsByTagName('fieldset')[0]
+          .getElementsByTagName('div')
+          .item(k)
+          .getElementsByTagName('label')[0]
+          .getElementsByTagName('span')[1].textContent
+      ).toEqual(rowSizeDropDown[k]);
+    }
+
+    fireEvent.click(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('button')[0]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(1);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[1]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Refresh');
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(2);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[2]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Download CSV');
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[2]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(3);
 
     const unClickableRow = screen
       .getByRole('table')
@@ -899,40 +1433,113 @@ describe(componentName, () => {
     );
 
     expect(clickableRow).toHaveClass('bx--data-table--selected');
+
+    expect(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('p')[0]
+        .getElementsByTagName('span')[0].textContent
+    ).toEqual('1 item selected');
+
+    expect(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[0].textContent
+    ).toEqual('Action');
+    fireEvent.click(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[0]
+    );
+
+    expect(alertMock).toHaveBeenCalledTimes(4);
+
+    expect(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[1].textContent
+    ).toEqual('Cancel');
+    fireEvent.click(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[1]
+    );
+
+    fireEvent.click(clickableRow);
   });
 
-  it('Expanded Row', () => {
-    render(<ExpandedRow data-testid={dataTestId}></ExpandedRow>);
-
-    const row = screen
+  function clickRow(rowNumber) {
+    var row = screen
       .getByRole('table')
       .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr')[0];
+      .getElementsByTagName('tr')[rowNumber];
+
     fireEvent.click(
       row.getElementsByTagName('td')[0].getElementsByTagName('span')[0]
+    );
+
+    setTimeout(1000);
+
+    expect(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByClassName('c4p--datagrid__expanded-row')
+    ).toBeDefined();
+    expect(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByClassName('c4p--datagrid__expanded-row')[0].lastChild
+        .textContent
+    ).toEqual(`Content for ${rowNumber}`);
+
+    fireEvent.click(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByClassName('c4p--datagrid__expanded-row')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('td')[0]
+        .getElementsByTagName('span')[0]
     );
 
     expect(
       screen
         .getByRole('table')
         .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('div')[0].classList['0']
-    ).toEqual('c4p--datagrid__expanded-row');
+        .getElementsByClassName('c4p--datagrid__expanded-row').length
+    ).toBe(0);
+  }
+
+  it('Expanded Row', () => {
+    render(<ExpandedRow data-testid={dataTestId}></ExpandedRow>);
+    clickRow(1);
+    clickRow(4);
+    clickRow(8);
   });
 
-  it('Hide Select All', () => {
-    render(<HideSelectAll data-testid={dataTestId}></HideSelectAll>);
-
-    // screen.getByRole('table').getElementsByTagName('tbody')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[0].getElementsByTagName('div')[0].getElementsByTagName('input')[0];
-    // fireEvent.click(button);
-
-    // const randomRow = Math.min(Math.random() * 10);
-
-    const row = screen
+  function hideSelectAll(rowNumber) {
+    var row = screen
       .getByRole('table')
       .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr')[0];
-    const button = row
+      .getElementsByTagName('tr')[rowNumber];
+    var button = row
       .getElementsByTagName('td')[0]
       .getElementsByTagName('div')[0]
       .getElementsByTagName('input')[0];
@@ -940,21 +1547,122 @@ describe(componentName, () => {
     fireEvent.click(button);
 
     expect(row.classList[1]).toEqual('bx--data-table--selected');
+
+    fireEvent.click(button);
+    expect(row.classList['0']).toEqual('c4p--datagrid__carbon-row');
+  }
+
+  it('Hide Select All', () => {
+    render(<HideSelectAll data-testid={dataTestId}></HideSelectAll>);
+
+    hideSelectAll(2);
+
+    hideSelectAll(5);
+
+    hideSelectAll(8);
   });
 
   it('Left Panel', () => {
     render(<LeftPanel data-testid={dataTestId}></LeftPanel>);
+
+    const alertMock = jest.spyOn(window, 'alert');
 
     expect(
       screen.getByText(
         'Panel content will go here along with any button interactions'
       )
     ).toBeVisible();
+
     expect(
       screen.getByText(
         'Panel content will go here along with any button interactions'
       ).parentElement.classList[0]
     ).toEqual('c4p--datagrid__datagridLeftPanel');
+
+    expect(
+      document.getElementsByClassName('bx--search-input')[0]
+    ).toBeDefined();
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[0]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Left panel');
+
+    expect(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+      )[0]
+    ).toBeDefined();
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+      )[0]
+    );
+
+    const rowSizeDropDown = [
+      'Extra large',
+      'Large (default)',
+      'Medium',
+      'Small',
+      'Extra small',
+    ];
+    const rowSize = document
+      .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
+      .getElementsByTagName('div')[0]
+      .getElementsByTagName('fieldset')[0]
+      .getElementsByTagName('div').length;
+
+    for (var k = 0; k < rowSize; k++) {
+      expect(
+        document
+          .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
+          .getElementsByTagName('div')[0]
+          .getElementsByTagName('fieldset')[0]
+          .getElementsByTagName('div')
+          .item(k)
+          .getElementsByTagName('label')[0]
+          .getElementsByTagName('span')[1].textContent
+      ).toEqual(rowSizeDropDown[k]);
+    }
+
+    fireEvent.click(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('button')[0]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(1);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[1]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Refresh');
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(2);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[2]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Download CSV');
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[2]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(3);
   });
 
   it('Nested Rows', () => {
@@ -986,11 +1694,8 @@ describe(componentName, () => {
     expect(nestedRow.classList[0]).toEqual('c4p--datagrid__carbon-nested-row');
   });
 
-
-
-  it('Nested Table', async () => {
+  it('Nested Table', () => {
     render(<NestedTable data-testid={dataTestId}></NestedTable>);
-    
     fireEvent.click(
       screen
         .getAllByRole('table')[0]
@@ -999,7 +1704,6 @@ describe(componentName, () => {
         .getElementsByTagName('td')[0]
         .getElementsByTagName('span')[0]
     );
-    
     expect(
       screen
         .getAllByRole('table')[0]
@@ -1021,52 +1725,356 @@ describe(componentName, () => {
     }, 1000);
   });
 
+  function radioSelectButton(previousRowNumber, currentRowNumber) {
+    if (
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr')[previousRowNumber].classList[1] ===
+      'bx--data-table--selected'
+    ) {
+      fireEvent.click(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('tr')
+          .item(currentRowNumber)
+          .getElementsByTagName('td')[0]
+          .getElementsByTagName('div')[0]
+          .getElementsByTagName('input')[0]
+      );
+
+      expect(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('tr')[currentRowNumber].classList[1]
+      ).toEqual('bx--data-table--selected');
+
+      expect(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('tr')[previousRowNumber].classList[1]
+      ).toBeUndefined();
+    } else {
+      fireEvent.click(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('tr')
+          .item(currentRowNumber)
+          .getElementsByTagName('td')[0]
+          .getElementsByTagName('div')[0]
+          .getElementsByTagName('input')[0]
+      );
+
+      expect(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('tr')[currentRowNumber].classList[1]
+      ).toEqual('bx--data-table--selected');
+    }
+  }
+
   it('Radio Select', () => {
     render(<RadioSelect data-testid={dataTestId}></RadioSelect>);
+    radioSelectButton(1, 1);
+
+    radioSelectButton(1, 4);
+
+    radioSelectButton(4, 7);
+
+    radioSelectButton(2, 6);
+  });
+
+  it('Select Items In All Pages', () => {
+    const alertMock = jest.spyOn(window, 'alert');
+
+    render(
+      <SelectItemsInAllPages data-testid={dataTestId}></SelectItemsInAllPages>
+    );
+    fireEvent.click(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('thead')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('th')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('input')[0]
+    );
+
+    var numRows = screen
+      .getByRole('table')
+      .getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr').length;
+
+    for (var i = 0; i < numRows; i++) {
+      expect(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('tr')[i].classList[1]
+      ).toEqual('bx--data-table--selected');
+    }
 
     fireEvent.click(
       screen
         .getByRole('table')
-        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
+        .getElementsByTagName('th')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('input')[0]
+    );
+    for (var j = 0; j < numRows; j++) {
+      expect(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('tr')[j].classList[0]
+      ).toEqual('c4p--datagrid__carbon-row');
+    }
+
+    expect(
+      document.getElementsByClassName('c4p--datagrid__table-toolbar').length
+    ).toBe(1);
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[0]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Left panel');
+
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[0]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(1);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+        )[0]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Row height');
+
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+      )[0]
+    );
+    expect(
+      document.getElementsByClassName(
+        'c4p--datagrid__row-size-button--open bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+      )[0]
+    ).toBeDefined();
+    expect(
+      document.getElementsByClassName('c4p--datagrid__row-size-dropdown')
+    ).toBeDefined();
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right'
+        )[0]
+        .getElementsByTagName('legend')[0].textContent
+    ).toEqual('Row height');
+
+    var rowDropDown = [
+      'Extra large',
+      'Large (default)',
+      'Medium',
+      'Small',
+      'Extra Small',
+    ];
+
+    var rowSize = document
+      .getElementsByClassName(
+        'bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right'
+      )[0]
+      .getElementsByTagName('div').length;
+
+    for (let j = 0; i < rowSize; i++) {
+      expect(
+        document
+          .getElementsByClassName(
+            'bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right'
+          )[0]
+          .getElementsByTagName('div')
+          .item(j)
+          .getElementsByTagName('label')[0]
+          .getElementsByTagName('span')[0].textContent
+      ).toEqual(rowDropDown[j]);
+    }
+
+    fireEvent.click(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('thead')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
     );
 
     expect(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('p')[0]
+        .getElementsByTagName('span')[0].textContent
+    ).toEqual('10 items selected');
+    fireEvent.click(
       screen
         .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0].classList[1]
-    ).toEqual('bx--data-table--selected');
-  });
-
-  it('Select Items In All Pages', () => {
-    render(
-      <SelectItemsInAllPages data-testid={dataTestId}></SelectItemsInAllPages>
+        .getElementsByTagName('thead')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('th')[0]
+        .getElementsByTagName('button')[0]
     );
-    // SelectAllWithToggle({tableId: dataTestId, isFetching: true, isAllRowsSelected: true, allRowsLabel: 'Select all'});
-    //fireEvent.click(screen.getByRole('table').getElementsByTagName('thead')[0].getElementsByTagName('tr')[0].getElementsByTagName('th')[0].getElementsByTagName('button')[0]);
+
+    expect(
+      document
+        .getElementsByClassName('bx--overflow-menu-options__btn')[0]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Select all on page');
+    fireEvent.click(
+      document.getElementsByClassName('bx--overflow-menu-options__btn')[0]
+    );
+
+    expect(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[0].textContent
+    ).toEqual('Action');
+    fireEvent.click(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[0]
+    );
+
+    expect(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[1].textContent
+    ).toEqual('Cancel');
+    fireEvent.click(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[1]
+    );
+
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+      )[0]
+    );
+
+    expect(alertMock).toHaveBeenCalledTimes(2);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[0]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Left panel');
+
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
+    );
+
+    expect(alertMock).toHaveBeenCalledTimes(3);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[1]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Refresh');
+
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
+    );
+
+    expect(alertMock).toHaveBeenCalledTimes(4);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[2]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Download CSV');
+
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[2]
+    );
   });
 
   it('Right Aligned Columns', () => {
     render(
       <RightAlignedColumns data-testid={dataTestId}></RightAlignedColumns>
     );
+    const numRows = screen
+      .getByRole('table')
+      .getElementsByTagName('tbody')[0]
+      .getElementsByTagName('tr').length;
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[4]
-        .getElementsByTagName('div')[0].classList[0]
-    ).toEqual('c4p--datagrid__right-align-cell-renderer');
+    for (var i = 0; i < numRows; i++) {
+      expect(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('tr')
+          .item(i)
+          .getElementsByTagName('td')[3]
+          .getElementsByTagName('div')[0].classList[0]
+      ).toEqual('c4p--datagrid__right-align-cell-renderer');
+    }
+
+    for (var j = 0; j < numRows; j++) {
+      expect(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('tr')
+          .item(j)
+          .getElementsByTagName('td')[4]
+          .getElementsByTagName('div')[0].classList[0]
+      ).toEqual('c4p--datagrid__right-align-cell-renderer');
+    }
   });
 
   it('Row Size Dropdown', () => {
     render(<RowSizeDropdown data-testid={dataTestId}></RowSizeDropdown>);
+
+    var alertMock = jest.spyOn(window, 'alert');
 
     fireEvent.click(
       screen
@@ -1095,11 +2103,111 @@ describe(componentName, () => {
     }
 
     expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0].classList[1]
-    ).toEqual('bx--data-table--selected');
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('p')[0]
+        .getElementsByTagName('span')[0].textContent
+    ).toEqual('10 items selected');
+
+    expect(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[0].textContent
+    ).toEqual('Action');
+    fireEvent.click(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[0]
+    );
+
+    expect(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[1].textContent
+    ).toEqual('Cancel');
+    fireEvent.click(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('div')[0]
+        .getElementsByTagName('div')[1]
+        .getElementsByTagName('button')[1]
+    );
+
+    /*var rowDropDown = ['More than super', 'Super tall row', 'Medium', 'Teeny tiny row'];
+    
+    const rows = document.getElementsByClassName('bx--toolbar-content')[0].getElementsByClassName('c4p--datagrid__row-size-dropdown')[0];
+
+    for(let k = 0; k < rows; k++){
+      expect(document.getElementsByClassName('bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right')[0].getElementsByTagName('div')[k].getElementsByTagName('label')[0].getElementsByTagName('span')[0].textContent).toEqual(rowDropDown[k]);
+    }*/
+    expect(alertMock).toHaveBeenCalledTimes(1);
+
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+      )[0]
+    );
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[0]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Left panel');
+
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
+    );
+
+    expect(alertMock).toHaveBeenCalledTimes(2);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[1]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Refresh');
+
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
+    );
+
+    expect(alertMock).toHaveBeenCalledTimes(3);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[2]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Download CSV');
+
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[2]
+    );
+
+    expect(alertMock).toHaveBeenCalledTimes(4);
   });
 
   it('Selectable Row', () => {
@@ -1178,10 +2286,64 @@ describe(componentName, () => {
 
   it('Customizing Columns', () => {
     render(<CustomizingColumns data-testid={dataTestId}></CustomizingColumns>);
+
+    var alertMock = jest.spyOn(window, 'alert');
+
+    fireEvent.click(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('button')[0]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(1);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[1]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Refresh');
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(2);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[2]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Download CSV');
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[2]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(3);
+
+    expect(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+      )[0]
+    ).toBeDefined();
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+      )[0]
+    );
+    expect(
+      document.getElementById('bx--modal-header__heading--modal-2')
+    ).toBeDefined();
   });
 
   it('Top Alignment', () => {
     render(<TopAlignment data-testid={dataTestId}></TopAlignment>);
+
+    var alertMock = jest.spyOn(window, 'alert');
 
     expect(screen.getByRole('table').classList[2]).toEqual(
       'c4p--datagrid__vertical-align-top'
@@ -1222,5 +2384,172 @@ describe(componentName, () => {
         'bx--data-table--selected'
       );
     }
+
+    fireEvent.click(allRowsCheckBox);
+
+    expect(
+      document.getElementsByClassName('bx--search-input')[0]
+    ).toBeDefined();
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[0]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Left panel');
+
+    expect(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+      )[0]
+    ).toBeDefined();
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+      )[0]
+    );
+
+    const rowSizeDropDown = [
+      'Extra large',
+      'Large (default)',
+      'Medium',
+      'Extra small',
+    ];
+    const rowSize = document
+      .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
+      .getElementsByTagName('div')[0]
+      .getElementsByTagName('fieldset')[0]
+      .getElementsByTagName('div').length;
+
+    for (var k = 0; k < rowSize; k++) {
+      expect(
+        document
+          .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
+          .getElementsByTagName('div')[0]
+          .getElementsByTagName('fieldset')[0]
+          .getElementsByTagName('div')
+          .item(k)
+          .getElementsByTagName('label')[0]
+          .getElementsByTagName('span')[1].textContent
+      ).toEqual(rowSizeDropDown[k]);
+    }
+
+    fireEvent.click(
+      document
+        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
+        .getElementsByTagName('section')[0]
+        .getElementsByTagName('button')[0]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(1);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[1]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Refresh');
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(2);
+
+    expect(
+      document
+        .getElementsByClassName(
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[2]
+        .getElementsByTagName('div')[0].textContent
+    ).toEqual('Download CSV');
+    fireEvent.click(
+      document.getElementsByClassName(
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[2]
+    );
+    expect(alertMock).toHaveBeenCalledTimes(3);
+  });
+
+  it('Sticky Actions Column', () => {
+    render(
+      <StickyActionsColumn data-testid={dataTestId}></StickyActionsColumn>
+    );
+
+    expect(
+      screen.findByText(
+        'More details documentation check the Notes section below'
+      )
+    ).toBeDefined();
+    for (
+      var i = 0;
+      i <
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr').length;
+      i++
+    ) {
+      expect(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('tr')
+          .item(i)
+          .getElementsByTagName('td')[16].classList[0]
+      ).toEqual('c4p--datagrid__right-sticky-column-cell');
+    }
+
+    fireEvent.click(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('td')[16]
+        .getElementsByClassName('c4p--datagrid__actions-column-content')[0]
+        .getElementsByTagName('button')[0]
+    );
+
+    expect(
+      document
+        .getElementsByTagName('ul')[0]
+        .getElementsByTagName('li')[0]
+        .getElementsByTagName('button')[0].textContent
+    ).toEqual('Edit');
+    fireEvent.click(
+      document
+        .getElementsByTagName('ul')[0]
+        .getElementsByTagName('li')[0]
+        .getElementsByTagName('button')[0]
+    );
+    expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
+      'Clicked [edit] on row:'
+    );
+    fireEvent.click(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('td')[16]
+        .getElementsByClassName('c4p--datagrid__actions-column-content')[0]
+        .getElementsByTagName('button')[0]
+    );
+
+    expect(
+      document
+        .getElementsByTagName('ul')[0]
+        .getElementsByTagName('li')[2]
+        .getElementsByTagName('button')[0].textContent
+    ).toEqual('Delete');
+    fireEvent.click(
+      document
+        .getElementsByTagName('ul')[0]
+        .getElementsByTagName('li')[2]
+        .getElementsByTagName('button')[0]
+    );
+    expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
+      'Clicked [delete] on row:'
+    );
   });
 });

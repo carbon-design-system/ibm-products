@@ -34,11 +34,6 @@ $block-class: #{$pkg-prefix}--datagrid;
   }
 }
 
-.#{$block-class}__hidden--columns.#{$block-class}__datagridWrap-simple {
-  height: calc(
-    100% - $spacing-11
-  ); //only for storybook purpose to show 'Customizing Columns' hidden column id info.
-}
 .#{$block-class}__panelContent {
   display: inline;
 }

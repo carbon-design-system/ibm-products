@@ -288,7 +288,7 @@ export const InfiniteScroll = () => {
 
   return (
     <Wrapper>
-      <Datagrid datagridState={{ ...datagridState }} />;
+      <Datagrid datagridState={{ ...datagridState }} />
     </Wrapper>
   );
 };
@@ -327,7 +327,7 @@ const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
 
 export const WithPagination = () => {
   const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(100));
+  const [data] = useState(makeData(5));
   const datagridState = useDatagrid({
     columns,
     data,

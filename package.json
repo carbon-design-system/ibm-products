@@ -13,7 +13,7 @@
   "scripts": {
     "audit": "node scripts/audit.js dependencies moderate",
     "build": "run-s -s 'build:*' storybook:build:storybook",
-    "build:packages": "yarn run-all --include-dependencies --ignore \"@carbon/ibm-cloud-cognitive-core\" build",
+    "build:packages": "yarn run-all --include-dependencies --ignore \"@carbon/ibm-cloud-cognitive-core\",\"@carbon/ibm-cloud-cognitive-cdai\",\"@carbon/ibm-security\" build",
     "ci-check": "run-s -s 'ci-check:*' storybook:build",
     "ci-check:build": "run-s -s 'build:*' 'run-all --no-sort ci-check'",
     "ci-check:lint": "run-p -s audit lint",

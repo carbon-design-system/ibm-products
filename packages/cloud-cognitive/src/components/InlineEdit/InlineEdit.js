@@ -16,7 +16,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-/* TODO: @import(s) of carbon components and other package components. */
+/* TODO: @use(s) of carbon components and other package components. */
 import { Button, IconButton, usePrefix } from '@carbon/react';
 import {
   Close,

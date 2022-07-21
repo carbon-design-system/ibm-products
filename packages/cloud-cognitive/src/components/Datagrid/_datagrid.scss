@@ -12,13 +12,13 @@
 @use './styles/index';
 
 // Other Carbon settings.
-// TODO: @import '@carbon/react/scss/grid'; if needed
+// TODO: @use '@carbon/react/scss/grid'; if needed
 
 // Datagrid uses the following Carbon components:
-// TODO: @import(s) of Carbon component styles used by Datagrid
+// TODO: @use(s) of Carbon component styles used by Datagrid
 
 // Datagrid uses the following Carbon for IBM Products components:
-// TODO: @import(s) of IBM Products component styles used by Datagrid
+// TODO: @use(s) of IBM Products component styles used by Datagrid
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--datagrid;

@@ -14,52 +14,60 @@
   /// Sets the prefix for all IBM Security-specific classes.
   /// @access private
   /// @type String
-  $security--prefix: security;
+  //$security--prefix: cfp;
+  $blockClass: #{$pkg-prefix}--combo-button;
 
-  .#{$security--prefix}--combo-button {
+  .#{$blockClass} {
     position: relative;
     display: inline-flex;
   }
 
-  .#{$security--prefix}--combo-button__action {
+  .#{$blockClass}__action {
     @include text-overflow;
   }
 
-  .#{$security--prefix}--combo-button
-    .#{$security--prefix}--combo-button__overflow-menu {
+  .#{$blockClass}
+    .#{$blockClass}__overflow-menu {
     width: carbon--mini-units($count: 6);
     height: auto;
     border-left: carbon--rem($px: 1px) solid $ui-03;
     background-color: $interactive-01;
   }
 
-  .#{$security--prefix}--combo-button__overflow-menu.#{$prefix}--overflow-menu:hover,
-  .#{$security--prefix}--combo-button__overflow-menu.#{$prefix}--overflow-menu--open {
+  .#{$blockClass}
+    .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+    visibility: hidden;
+  }
+
+  .#{$blockClass}__overflow-menu.#{$prefix}--overflow-menu:hover,
+  .#{$blockClass}__overflow-menu.#{$prefix}--overflow-menu--open,
+  .#{$blockClass}__overflow-menu.#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open,
+  .#{$blockClass}__overflow-menu.#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open:hover {
     background-color: $hover-primary;
   }
 
-  .#{$security--prefix}--combo-button__overflow-menu.#{$prefix}--overflow-menu:active {
+  .#{$blockClass}__overflow-menu.#{$prefix}--overflow-menu:active {
     background-color: $active-primary;
   }
 
-  .#{$security--prefix}--combo-button__overflow-menu__icon {
+  .#{$blockClass}__overflow-menu__icon {
     fill: $icon-03;
     pointer-events: none;
   }
 
-  .#{$security--prefix}--combo-button__overflow-menu__list {
+  .#{$blockClass}__overflow-menu__list.#{$prefix}--overflow-menu-options {
     width: 100%;
   }
 
-  .#{$security--prefix}--combo-button__overflow-menu__list:after {
+  .#{$blockClass}__overflow-menu__list:after {
     display: none;
   }
 
-  .#{$security--prefix}--combo-button__overflow-menu__item {
+  .#{$blockClass}__overflow-menu__item {
     max-width: none;
   }
 
-  .#{$security--prefix}--combo-button__overflow-menu__item__icon {
+  .#{$blockClass}__overflow-menu__item__icon {
     margin-left: auto;
   }
 }

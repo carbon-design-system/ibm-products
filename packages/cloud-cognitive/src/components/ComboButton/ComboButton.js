@@ -14,11 +14,13 @@ import {
 
 import classnames from 'classnames';
 import { node, shape, string } from 'prop-types';
+import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import React, { Children, createElement, useRef, useState } from 'react';
 
-const blockClass = 'security--combo-button';
+//const blockClass = 'cfp--combo-button';
+const blockClass = `${pkg.prefix}--combo-button`;
 
 /**
  * The combo button consolidates similar actions, while exposing the most commonly used one.

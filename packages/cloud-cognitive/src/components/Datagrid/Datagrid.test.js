@@ -986,41 +986,34 @@ describe(componentName, () => {
     expect(nestedRow.classList[0]).toEqual('c4p--datagrid__carbon-nested-row');
   });
 
-  it('Nested Table', () => {
-    render(<NestedTable data-testid={dataTestId}></NestedTable>);
 
+
+  it('Nested Table', async () => {
+    render(<NestedTable data-testid={dataTestId}></NestedTable>);
+    
     fireEvent.click(
       screen
-        .getByRole('table')
+        .getAllByRole('table')[0]
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('tr')[0]
         .getElementsByTagName('td')[0]
         .getElementsByTagName('span')[0]
     );
-    expect(
-      screen
-        .getAllByRole('table')[0]
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('div')[0].classList[0]
-    ).toEqual('c4p--datagrid__expanded-row');
-
+    
     expect(
       screen
         .getAllByRole('table')[0]
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('div')[0].childNodes[1].classList[0]
     ).toEqual('carbon-nested-table');
-  });
 
-  it('Nested Table', async () => {
     const alertMock = jest.spyOn(window, 'alert');
 
-    render(<NestedTable data-testid={dataTestId}></NestedTable>);
     fireEvent.click(
       screen
-        .getByRole('table')
+        .getAllByRole('table')[0]
         .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('tr')[4]
     );
 
     setTimeout(() => {

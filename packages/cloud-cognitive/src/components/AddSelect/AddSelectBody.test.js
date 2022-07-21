@@ -135,7 +135,36 @@ const propsWithModifiers = {
       role: 'admin',
     },
   ],
-  items: defaultItems,
+  items: {
+    entries: [...defaultItems.entries],
+    modifiers: {
+      id: 'role',
+      label: 'Role',
+      options: ['editor', 'admin'],
+    },
+  },
+};
+
+const itemsWithMeta = {
+  entries: [
+    {
+      id: '1',
+      value: 'kansas',
+      title: 'Kansas',
+      meta: [
+        {
+          id: 'description',
+          title: 'description',
+          value: 'description text',
+        },
+        {
+          id: 'secondary_category',
+          title: 'secondary category',
+          value: 'knowledge accelerator',
+        },
+      ],
+    },
+  ],
 };
 
 describe(componentName, () => {
@@ -262,7 +291,7 @@ describe(componentName, () => {
     ]);
   });
 
-  it('displays multi select with hierarchy', () => {
+  it('handles multi select with hierarchy', () => {
     const newProps = {
       ...multiProps,
       items: hierarchyItems,
@@ -273,6 +302,27 @@ describe(componentName, () => {
     expect(
       document.querySelector(`.${blockClass}__columns`)
     ).toBeInTheDocument();
+    const opt1 = screen.getByLabelText('Kansas');
+    const opt2 = screen.getByLabelText('Texas');
+    fireEvent.click(opt1);
+    fireEvent.click(opt2);
+    expect(
+      document.querySelectorAll(
+        `.${pkg.prefix}--add-select__sidebar-selected-item-title`
+      ).length
+    ).toBe(2);
+  });
+
+  it('handles items with meta data', () => {
+    const newProps = {
+      ...multiProps,
+      items: itemsWithMeta,
+    };
+    render(<AddSelectBody {...newProps} />);
+    const metaBtn = screen.getByText(newProps.metaIconDescription);
+    expect(metaBtn);
+    fireEvent.click(metaBtn);
+    expect(screen.getByText(newProps.metaPanelTitle));
   });
 
   it('filters with global filters', () => {

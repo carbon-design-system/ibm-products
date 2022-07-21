@@ -71,6 +71,7 @@ export let RemoveModal = forwardRef(
         {...rest}
         className={cx(blockClass, className)}
         size="sm"
+        aria-label={title}
         {...{
           open,
           ref,

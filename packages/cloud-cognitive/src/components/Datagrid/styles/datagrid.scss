@@ -145,7 +145,6 @@
 .#{$block-class}__grid-container {
   display: block;
   width: 100%;
-  height: 100%;
   padding-top: 0;
 
   .#{$block-class}__table-simple {
@@ -252,23 +251,6 @@
   border-bottom: none;
 }
 
-.#{$block-class}__datagridWithPanel
-  .#{$block-class}__with-pagination
-  + .#{$carbon-prefix}--pagination {
-  /* stylelint-disable-next-line carbon/layout-token-use */
-  padding-left: 388px;
-}
-
-.#{$block-class}__datagridWithPanel
-  .#{$block-class}__with-pagination
-  .#{$block-class}__datagridLeftPanel {
-  height: calc(100% + 40px);
-}
-
-.#{$block-class}__grid-container.#{$block-class}__with-pagination {
-  height: calc(100% - 40px);
-}
-
 .#{$block-class}__resizer {
   position: absolute;
   z-index: 1;
@@ -367,7 +349,6 @@
 .#{$block-class}__datagridLeftPanel {
   display: flex;
   width: 388px; // as per UX specs.
-  height: 100%;
   background-color: $ui-01;
 }
 
@@ -412,26 +393,6 @@
   max-height: 100%;
 }
 
-.#{$block-class}__table-toolbar + .#{$block-class}__table-container {
-  height: calc(
-    100% - $spacing-09
-  ); //if only toolbar: table-container height= 100% height - toolbar height
-}
-
-.#{$carbon-prefix}--data-table-header
-  + .#{$block-class}__table-toolbar
-  + .#{$block-class}__table-container {
-  height: calc(
-    100% - 8.375rem
-  ); //if header and toolbar: table-container height= 100% height -  (header height + toolbar height)
-}
-
-.#{$carbon-prefix}--data-table-header + .#{$block-class}__table-container {
-  height: calc(
-    100% - 5.375rem
-  ); //if only header: table-container height= 100% height - header height
-}
-
 .#{$block-class}__carbon-row-expanded {
   // Border applied to nested rows only on open chevron hover
   &.#{$block-class}__carbon-row-expanded-hover-active
@@ -462,14 +423,6 @@
 
   .#{$carbon-prefix}__table-container {
     flex: 1 1 100%;
-  }
-
-  .#{$carbon-prefix}--data-table-header
-    + .#{$block-class}__table-toolbar
-    + .#{$block-class}__table-container {
-    height: calc(
-      100% - $spacing-11
-    ); //if dense header: table-container height= 100% height - header height(
   }
 
   .#{$carbon-prefix}--table-toolbar {

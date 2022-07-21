@@ -436,6 +436,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
       overflow-x: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      min-height: $spacing-08;
     }
 
     .#{$block-class}__title .#{$pkg-prefix}--inline-edit__value {

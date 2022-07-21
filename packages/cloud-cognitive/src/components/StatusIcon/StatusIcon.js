@@ -4,7 +4,7 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -24,80 +24,160 @@ import {
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
-const icons = {
-  fatal: {
-    sm: (props) => <Misuse size={16} {...props} />,
-    md: (props) => <Misuse size={20} {...props} />,
-    lg: (props) => <Misuse size={24} {...props} />,
-    xl: (props) => <Misuse size={32} {...props} />,
-  },
-  critical: {
-    sm: (props) => <ErrorFilled size={16} {...props} />,
-    md: (props) => <ErrorFilled size={20} {...props} />,
-    lg: (props) => <ErrorFilled size={24} {...props} />,
-    xl: (props) => <ErrorFilled size={32} {...props} />,
-  },
-  'major-warning': {
-    sm: (props) => <WarningAltInvertedFilled size={16} {...props} />,
-    md: (props) => <WarningAltInvertedFilled size={20} {...props} />,
-    lg: (props) => <WarningAltInvertedFilled size={24} {...props} />,
-    xl: (props) => <WarningAltInvertedFilled size={32} {...props} />,
-  },
-  'minor-warning': {
-    sm: (props) => <WarningAltFilled size={16} {...props} />,
-    md: (props) => <WarningAltFilled size={20} {...props} />,
-    lg: (props) => <WarningAltFilled size={24} {...props} />,
-    xl: (props) => <WarningAltFilled size={32} {...props} />,
-  },
-  undefined: {
-    sm: (props) => <UndefinedFilled size={16} {...props} />,
-    md: (props) => <UndefinedFilled size={20} {...props} />,
-    lg: (props) => <UndefinedFilled size={24} {...props} />,
-    xl: (props) => <UndefinedFilled size={32} {...props} />,
-  },
-  unknown: {
-    sm: (props) => <UnknownFilled size={16} {...props} />,
-    md: (props) => <UnknownFilled size={20} {...props} />,
-    lg: (props) => <UnknownFilled size={24} {...props} />,
-    xl: (props) => <UnknownFilled size={32} {...props} />,
-  },
-  normal: {
-    sm: (props) => <CheckmarkFilled size={16} {...props} />,
-    md: (props) => <CheckmarkFilled size={20} {...props} />,
-    lg: (props) => <CheckmarkFilled size={24} {...props} />,
-    xl: (props) => <CheckmarkFilled size={32} {...props} />,
-  },
-  info: {
-    sm: (props) => <InformationSquareFilled size={16} {...props} />,
-    md: (props) => <InformationSquareFilled size={20} {...props} />,
-    lg: (props) => <InformationSquareFilled size={24} {...props} />,
-    xl: (props) => <InformationSquareFilled size={32} {...props} />,
-  },
-  'in-progress': {
-    sm: (props) => <Renew size={16} {...props} />,
-    md: (props) => <Renew size={20} {...props} />,
-    lg: (props) => <Renew size={24} {...props} />,
-    xl: (props) => <Renew size={32} {...props} />,
-  },
-  running: {
-    sm: (props) => <Renew size={16} {...props} />,
-    md: (props) => <Renew size={20} {...props} />,
-    lg: (props) => <Renew size={24} {...props} />,
-    xl: (props) => <Renew size={32} {...props} />,
-  },
-  pending: {
-    sm: (props) => <Time size={16} {...props} />,
-    md: (props) => <Time size={20} {...props} />,
-    lg: (props) => <Time size={24} {...props} />,
-    xl: (props) => <Time size={32} {...props} />,
-  },
-};
-
 const blockClass = `${pkg.prefix}--status-icon`;
 const componentName = 'StatusIcon';
 
-export let StatusIcon = React.forwardRef(
+export let StatusIcon = forwardRef(
   ({ kind, theme, size, className, iconDescription, ...rest }, ref) => {
+    const icons = {
+      fatal: {
+        sm: forwardRef((props, ref) => (
+          <Misuse size={16} ref={ref} {...props} />
+        )),
+        md: forwardRef((props, ref) => (
+          <Misuse size={20} ref={ref} {...props} />
+        )),
+        lg: forwardRef((props, ref) => (
+          <Misuse size={24} ref={ref} {...props} />
+        )),
+        xl: forwardRef((props, ref) => (
+          <Misuse size={32} ref={ref} {...props} />
+        )),
+      },
+      critical: {
+        sm: forwardRef((props, ref) => (
+          <ErrorFilled size={16} ref={ref} {...props} />
+        )),
+        md: forwardRef((props, ref) => (
+          <ErrorFilled size={20} ref={ref} {...props} />
+        )),
+        lg: forwardRef((props, ref) => (
+          <ErrorFilled size={24} ref={ref} {...props} />
+        )),
+        xl: forwardRef((props, ref) => (
+          <ErrorFilled size={32} ref={ref} {...props} />
+        )),
+      },
+      'major-warning': {
+        sm: forwardRef((props, ref) => (
+          <WarningAltInvertedFilled size={16} ref={ref} {...props} />
+        )),
+        md: forwardRef((props, ref) => (
+          <WarningAltInvertedFilled size={20} ref={ref} {...props} />
+        )),
+        lg: forwardRef((props, ref) => (
+          <WarningAltInvertedFilled size={24} ref={ref} {...props} />
+        )),
+        xl: forwardRef((props, ref) => (
+          <WarningAltInvertedFilled size={32} ref={ref} {...props} />
+        )),
+      },
+      'minor-warning': {
+        sm: forwardRef((props, ref) => (
+          <WarningAltFilled size={16} ref={ref} {...props} />
+        )),
+        md: forwardRef((props, ref) => (
+          <WarningAltFilled size={20} ref={ref} {...props} />
+        )),
+        lg: forwardRef((props, ref) => (
+          <WarningAltFilled size={24} ref={ref} {...props} />
+        )),
+        xl: forwardRef((props, ref) => (
+          <WarningAltFilled size={32} ref={ref} {...props} />
+        )),
+      },
+      undefined: {
+        sm: forwardRef((props, ref) => (
+          <UndefinedFilled size={16} ref={ref} {...props} />
+        )),
+        md: forwardRef((props, ref) => (
+          <UndefinedFilled size={20} ref={ref} {...props} />
+        )),
+        lg: forwardRef((props, ref) => (
+          <UndefinedFilled size={24} ref={ref} {...props} />
+        )),
+        xl: forwardRef((props, ref) => (
+          <UndefinedFilled size={32} ref={ref} {...props} />
+        )),
+      },
+      unknown: {
+        sm: forwardRef((props, ref) => (
+          <UnknownFilled size={16} ref={ref} {...props} />
+        )),
+        md: forwardRef((props, ref) => (
+          <UnknownFilled size={20} ref={ref} {...props} />
+        )),
+        lg: forwardRef((props, ref) => (
+          <UnknownFilled size={24} ref={ref} {...props} />
+        )),
+        xl: forwardRef((props, ref) => (
+          <UnknownFilled size={32} ref={ref} {...props} />
+        )),
+      },
+      normal: {
+        sm: forwardRef((props, ref) => (
+          <CheckmarkFilled size={16} ref={ref} {...props} />
+        )),
+        md: forwardRef((props, ref) => (
+          <CheckmarkFilled size={20} ref={ref} {...props} />
+        )),
+        lg: forwardRef((props, ref) => (
+          <CheckmarkFilled size={24} ref={ref} {...props} />
+        )),
+        xl: forwardRef((props, ref) => (
+          <CheckmarkFilled size={32} ref={ref} {...props} />
+        )),
+      },
+      info: {
+        sm: forwardRef((props, ref) => (
+          <InformationSquareFilled size={16} ref={ref} {...props} />
+        )),
+        md: forwardRef((props, ref) => (
+          <InformationSquareFilled size={20} ref={ref} {...props} />
+        )),
+        lg: forwardRef((props, ref) => (
+          <InformationSquareFilled size={24} ref={ref} {...props} />
+        )),
+        xl: forwardRef((props, ref) => (
+          <InformationSquareFilled size={32} ref={ref} {...props} />
+        )),
+      },
+      'in-progress': {
+        sm: forwardRef((props, ref) => (
+          <Renew size={16} ref={ref} {...props} />
+        )),
+        md: forwardRef((props, ref) => (
+          <Renew size={20} ref={ref} {...props} />
+        )),
+        lg: forwardRef((props, ref) => (
+          <Renew size={24} ref={ref} {...props} />
+        )),
+        xl: forwardRef((props, ref) => (
+          <Renew size={32} ref={ref} {...props} />
+        )),
+      },
+      running: {
+        sm: forwardRef((props, ref) => (
+          <Renew size={16} ref={ref} {...props} />
+        )),
+        md: forwardRef((props, ref) => (
+          <Renew size={20} ref={ref} {...props} />
+        )),
+        lg: forwardRef((props, ref) => (
+          <Renew size={24} ref={ref} {...props} />
+        )),
+        xl: forwardRef((props, ref) => (
+          <Renew size={32} ref={ref} {...props} />
+        )),
+      },
+      pending: {
+        sm: forwardRef((props, ref) => <Time size={16} ref={ref} {...props} />),
+        md: forwardRef((props, ref) => <Time size={20} ref={ref} {...props} />),
+        lg: forwardRef((props, ref) => <Time size={24} ref={ref} {...props} />),
+        xl: forwardRef((props, ref) => <Time size={32} ref={ref} {...props} />),
+      },
+    };
+
     const IconComponent = icons[kind]?.[size];
 
     const classNames = cx(className, blockClass, `${blockClass}--${theme}`, {

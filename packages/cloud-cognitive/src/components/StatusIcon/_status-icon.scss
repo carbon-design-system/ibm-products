@@ -119,7 +119,7 @@ $block-class: #{$pkg-prefix}--status-icon;
           @media (prefers-reduced-motion: reduce) {
             animation: none;
           }
-          // stylelint-disable-next-line carbon/motion-token-use
+          // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
           animation: rotating 8000ms infinite linear;
           // stylelint-disable-next-line carbon/theme-token-use
           fill: --clr($icon, $theme);

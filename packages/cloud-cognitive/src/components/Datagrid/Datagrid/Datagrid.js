@@ -41,9 +41,6 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
     verticalAlign = 'center',
     variableRowHeight,
     className,
-    DataTableSidePanel,
-    openSidePanel,
-    sidePanelSize,
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
@@ -93,15 +90,10 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
         withVirtualScroll
           ? `${blockClass}__datagridWrap`
           : `${blockClass}__datagridWrap-simple`,
-        !isFetching && rows.length === 0 ? `${blockClass}__empty-state` : '',
-        DataTableSidePanel && openSidePanel
-          ? `${blockClass}__side-panel-open`
-          : '',
-        sidePanelSize ? `${blockClass}__side-panel-${sidePanelSize}` : ''
+        !isFetching && rows.length === 0 ? `${blockClass}__empty-state` : ''
       )}
       {...getDevtoolsProps(componentName)}
     >
-      {DataTableSidePanel && DataTableSidePanel(datagridState)}
       <DatagridToolbar {...datagridState} />
       {leftPanel && (
         <div

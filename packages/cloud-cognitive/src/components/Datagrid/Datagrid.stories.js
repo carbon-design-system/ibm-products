@@ -47,6 +47,7 @@ import {
   LeftPanelStory,
 } from './Datagrid.stories';
 import mdx from './Datagrid.mdx';
+import cx from 'classnames';
 
 import styles from './_storybook-styles.scss';
 import { SidePanel } from '../SidePanel';
@@ -373,29 +374,34 @@ export const ClickableRow = () => {
         setOpenSidePanel(true);
         setRowData(row);
       },
-      openSidePanel,
-      rowData,
-      sidePanelSize: 'sm',
-      sidePanelTitle: 'Side panel title',
-      setOpenSidePanel,
-      DataTableSidePanel,
     },
     useOnRowClick
   );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
+  return (
+    <div
+      className={cx(
+        openSidePanel
+          ? `page-content-wrapper side-panel-open`
+          : 'page-content-wrapper'
+      )}
+    >
+      <Datagrid datagridState={{ ...datagridState }} />
+      <SidePanel
+        selectorPageContent={true && '.page-content-wrapper'} // Only if SlideIn
+        open={openSidePanel}
+        onRequestClose={() => setOpenSidePanel(false)}
+        size={'sm'}
+        title={'Title'}
+        slideIn
+      >
+        <DataTableSidePanelContent rowData={rowData && rowData.original} />
+      </SidePanel>
+    </div>
+  );
 };
 
-const DataTableSidePanel = (datagridState) => {
-  const {
-    openSidePanel,
-    setOpenSidePanel,
-    rowData,
-    sidePanelSize,
-    sidePanelTitle,
-  } = datagridState;
-
-  const { values } = rowData;
+const DataTableSidePanelContent = (selectedRowValues) => {
+  const { rowData } = selectedRowValues;
 
   const SidePanelSectionContent = ({ rowData, columns, sectionTitle }) => {
     const finalData = columns.map((item) => Object.entries(rowData)[item]);
@@ -421,38 +427,24 @@ const DataTableSidePanel = (datagridState) => {
     );
   };
 
-  const showRowData = (rowValues) => {
-    return (
-      <div className={`${blockClass}__side-panel-content`}>
-        <SidePanelSectionContent
-          sectionTitle="Section title"
-          rowData={rowValues}
-          columns={[0]}
-        />
-        <SidePanelSectionContent
-          sectionTitle="Personal details"
-          rowData={rowValues}
-          columns={[1, 2, 3, 4]}
-        />
-        <SidePanelSectionContent
-          sectionTitle="Section title"
-          rowData={rowValues}
-          columns={[5, 6, 7, 8, 9, 10, 11, 12]}
-        />
-      </div>
-    );
-  };
-
   return (
-    <SidePanel
-      open={openSidePanel}
-      onRequestClose={() => setOpenSidePanel(false)}
-      size={sidePanelSize}
-      title={sidePanelTitle}
-      slideIn={true}
-    >
-      {values && showRowData(values)}
-    </SidePanel>
+    <div className={`${blockClass}__side-panel-content`}>
+      <SidePanelSectionContent
+        sectionTitle="Section title"
+        rowData={rowData && rowData}
+        columns={[0]}
+      />
+      <SidePanelSectionContent
+        sectionTitle="Personal details"
+        rowData={rowData && rowData}
+        columns={[1, 2, 3, 4]}
+      />
+      <SidePanelSectionContent
+        sectionTitle="Section title"
+        rowData={rowData && rowData}
+        columns={[5, 6, 7, 8, 9, 10, 11, 12]}
+      />
+    </div>
   );
 };
 

@@ -112,6 +112,7 @@
   }
 
   .#{$block-class}__summary--warn svg path[fill='none'] {
+    /* stylelint-disable-next-line carbon/theme-token-use */
     fill: $carbon__black-100;
   }
 

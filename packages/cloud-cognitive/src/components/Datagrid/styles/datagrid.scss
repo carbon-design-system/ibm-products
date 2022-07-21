@@ -363,6 +363,10 @@
   background-color: $ui-01;
 }
 
+.#{$block-class}__leftPanel-position {
+  display: inherit;
+}
+
 .#{$block-class}__datagridWithPanel {
   position: relative;
   display: flex;

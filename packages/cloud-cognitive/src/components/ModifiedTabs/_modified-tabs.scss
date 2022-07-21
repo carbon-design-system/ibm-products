@@ -12,10 +12,6 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
-// ModifiedTabs uses the following Carbon components:
-// Tabs, Tab
-@use '@carbon/react/scss/components/tabs';
-
 .modified-tabs .modified-tabs__tab-label {
   display: flex;
   width: 100%;

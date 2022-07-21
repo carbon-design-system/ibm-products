@@ -13,10 +13,6 @@
 @use '../../global/styles/project-settings' as *;
 @use './color-map' as *;
 
-// UserProfileImage uses the following Carbon components:
-// IconButton
-@use '@carbon/react/scss/components/button';
-
 $block-class: #{$pkg-prefix}--user-profile-image;
 
 $sizes: (

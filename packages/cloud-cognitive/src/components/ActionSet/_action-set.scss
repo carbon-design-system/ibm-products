@@ -10,9 +10,6 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
-@use '@carbon/react/scss/components/button';
-@use '@carbon/react/scss/components/inline-loading';
-
 // The block part of our conventional BEM class names (blockClass__E--M).
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 

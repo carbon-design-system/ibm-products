@@ -9,12 +9,6 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
-// RemoveModal uses the following Carbon components:
-// Button, ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput
-@use '@carbon/react/scss/components/button';
-@use '@carbon/react/scss/components/modal';
-@use '@carbon/react/scss/components/text-input';
-
 $block-class: #{c4p-settings.$pkg-prefix}--remove-modal;
 
 .#{$block-class}

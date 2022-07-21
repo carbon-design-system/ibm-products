@@ -12,12 +12,6 @@
 @use '@carbon/styles/scss/type';
 @use '../../global/styles/project-settings' as c4p-settings;
 
-// CreateModal uses the following Carbon components:
-// ComposedModal, ModalHeader, ModalFooter, ModalBody, Form, Button
-@use '@carbon/react/scss/components/modal';
-@use '@carbon/react/scss/components/form';
-@use '@carbon/react/scss/components/button';
-
 .#{c4p-settings.$pkg-prefix}--create-modal {
   background-color: $background;
 }

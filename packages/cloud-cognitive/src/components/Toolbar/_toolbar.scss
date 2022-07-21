@@ -10,8 +10,6 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '../../global/styles/project-settings' as *;
 
-@use '@carbon/react/scss/components/button';
-
 $block-class: #{$pkg-prefix}--toolbar;
 
 $border: 1px solid $border-subtle-01;

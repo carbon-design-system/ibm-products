@@ -11,11 +11,6 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
-// Saving uses the following Carbon components:
-// Button, InlineLoading
-@use '@carbon/react/scss/components/button';
-@use '@carbon/react/scss/components/inline-loading';
-
 $block-class: #{c4p-settings.$pkg-prefix}--saving;
 
 .#{$block-class}__message {

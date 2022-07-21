@@ -15,10 +15,6 @@
 // TearsheetNarrow
 @use '../Tearsheet/tearsheet';
 
-// CreateTearsheetNarrow uses the following Carbon components:
-// Form
-@use '@carbon/react/scss/components/form';
-
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--create-tearsheet-narrow;
 

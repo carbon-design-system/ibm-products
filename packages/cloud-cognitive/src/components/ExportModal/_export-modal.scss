@@ -10,16 +10,6 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
-// ExportModal uses the following Carbon components:
-// Button, ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput,
-// RadioButton, RadioButtonGroup, FormGroup, Loading
-@use '@carbon/react/scss/components/button';
-@use '@carbon/react/scss/components/modal';
-@use '@carbon/react/scss/components/text-input';
-@use '@carbon/react/scss/components/radio-button';
-@use '@carbon/react/scss/components/form';
-@use '@carbon/react/scss/components/loading';
-
 $block-class: #{c4p-settings.$pkg-prefix}--export-modal;
 
 .#{$block-class}

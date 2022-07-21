@@ -23,10 +23,6 @@
 // ActionSet
 @use '../ActionSet/action-set';
 
-// SidePanel uses the following Carbon components:
-// Button
-@use '@carbon/react/scss/components/button';
-
 $block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 

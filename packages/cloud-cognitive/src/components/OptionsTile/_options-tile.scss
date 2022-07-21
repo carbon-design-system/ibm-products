@@ -16,10 +16,6 @@
 
 // Other Carbon settings.
 @use '@carbon/styles/scss/utilities' as *;
-// scss/utilities/_focus-outline.scss
-// PageHeader uses the following Carbon components:
-// Toggle
-@use '@carbon/react/scss/components/toggle';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--options-tile;

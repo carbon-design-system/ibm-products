@@ -1143,6 +1143,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--side-panel__container .c4p--side-panel__action-toolbar {
   position: sticky;
   z-index: 4;
+  /* stylelint-disable-next-line carbon/layout-token-use */
   top: var(--c4p--side-panel--title-height);
   display: flex;
   align-items: center;
@@ -1777,7 +1778,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--tearsheet-create .c4p--tearsheet-create__step__step--visible-step {
-  animation: 400ms step-content-entrance;
+  animation: step-content-entrance 400ms;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
   opacity: 0;
@@ -2275,6 +2276,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --c4p--inline-edit--icon-size: var(--cds-spacing-05, 1rem);
 }
 .c4p--inline-edit.c4p--inline-edit--invalid {
+  /* stylelint-disable-next-line carbon/theme-token-use */
   outline: var(--cds-spacing-01, 0.125rem) solid var(--cds-support-01, #da1e28);
   outline-offset: calc(-1 * var(--cds-spacing-01, 0.125rem));
 }
@@ -2284,6 +2286,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--inline-edit.c4p--inline-edit--editing {
+  /* stylelint-disable-next-line carbon/theme-token-use */
   outline: var(--cds-spacing-01, 0.125rem) solid var(--cds-focus, #0f62fe);
   outline-offset: calc(-1 * var(--cds-spacing-01, 0.125rem));
   background-color: var(--cds-ui-01, #f4f4f4);
@@ -2299,6 +2302,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   width: calc(100% - var(--c4p--inline-edit--toolbar-width) - var(--cds-spacing-05, 1rem));
   max-width: calc(100% - var(--c4p--inline-edit--toolbar-width) - var(--cds-spacing-05, 1rem));
   min-height: var(--c4p--inline-edit--size);
+  /* stylelint-disable-next-line carbon/layout-token-use */
   margin-right: var(--c4p--inline-edit--toolbar-width);
   margin-left: var(--cds-spacing-05, 1rem);
   line-height: var(--c4p--inline-edit--size);
@@ -2384,12 +2388,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel {
   display: inline-flex;
   width: var(--c4p--inline-edit--size);
+  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);
-  padding: calc(
-    0.5 * (var(--c4p--inline-edit--size) - var(--c4p--inline-edit--icon-size)) - var(--cds-spacing-01, 0.125rem)
-  );
+  align-items: center;
+  justify-content: center;
   border: 2px solid transparent;
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:hover {
@@ -2410,38 +2414,27 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   border-color: transparent;
 }
 .c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save {
-  margin-right: 0;
+  overflow: visible;
+  width: var(--c4p--inline-edit--edit-size);
   transition: all 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
   transition-property: margin, padding;
 }
-.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save svg {
-  transition: width 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
-}
-@media (prefers-reduced-motion: reduce) {
-  .c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save svg {
-    transition: none;
-  }
-}
 .c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation:not(.c4p--inline-edit__toolbar--saveable) .c4p--inline-edit__save {
-  padding-right: 0;
-  padding-left: 0;
-  border-right: 0;
-  border-left: 0;
-  margin-right: calc(-1 * var(--c4p--inline-edit--size));
-}
-.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation:not(.c4p--inline-edit__toolbar--saveable) .c4p--inline-edit__save svg {
   overflow: hidden;
   width: 0;
+  padding: 0;
+  border-right: 0;
+  border-left: 0;
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit {
   display: inline-flex;
   width: var(--c4p--inline-edit--size);
+  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);
-  padding: calc(
-    0.5 * (var(--c4p--inline-edit--size) - var(--c4p--inline-edit--icon-size)) - var(--cds-spacing-01, 0.125rem)
-  );
+  align-items: center;
+  justify-content: center;
   border: 2px solid transparent;
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:active, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:focus {
@@ -2465,12 +2458,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit .c4p--inline-edit__validation-icon {
   display: inline-flex;
   width: var(--c4p--inline-edit--size);
+  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);
-  padding: calc(
-    0.5 * (var(--c4p--inline-edit--size) - var(--c4p--inline-edit--icon-size)) - var(--cds-spacing-01, 0.125rem)
-  );
+  align-items: center;
+  justify-content: center;
   border: 2px solid transparent;
 }
 .c4p--inline-edit.c4p--inline-edit--invalid .c4p--inline-edit__validation-icon {
@@ -3284,6 +3277,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: inline-flex;
   white-space: nowrap;
 }
+.c4p--tag-set .c4p--tag-set__tag-container--multiline {
+  flex-wrap: wrap;
+}
 .c4p--tag-set .c4p--tag-set__tag-container--hidden {
   position: absolute;
   top: -100vh;
@@ -3418,19 +3414,25 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 @keyframes background-appear {
   from {
+    /* stylelint-disable-next-line carbon/theme-token-use */
     background-color: var(--from-color);
   }
   to {
+    /* stylelint-disable-next-line carbon/theme-token-use */
     background-color: var(--to-color);
   }
 }
 @keyframes background-and-shadow-appear {
   from {
+    /* stylelint-disable-next-line carbon/theme-token-use */
     background-color: var(--from-color);
+    /* stylelint-disable-next-line carbon/theme-token-use */
     box-shadow: 0 1px 0 var(--from-color);
   }
   to {
+    /* stylelint-disable-next-line carbon/theme-token-use */
     background-color: var(--to-color);
+    /* stylelint-disable-next-line carbon/theme-token-use */
     box-shadow: 0 1px 0 var(--to-color-shadow);
   }
 }
@@ -3440,9 +3442,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   /* z-index used to raise above any position relative content as per Carbon header */
   /* dropped  1 below Carbon header so as not to overlay the side panel */
   z-index: 7999;
+  /* stylelint-disable-next-line carbon/layout-token-use */
   top: var(--c4p--page-header--header-top);
-  display: inline-block;
-  /* cause top/bottom margin to reserve space */
+  display: inline-block; /* cause top/bottom margin to reserve space */
   width: 100%;
   background-color: var(--cds-ui-background, #ffffff);
   color: var(--cds-text-01, #161616);
@@ -3550,8 +3552,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (min-width: 66rem) {
   .c4p--page-header .c4p--page-header__action-bar-column-content {
-    flex-wrap: nowrap;
-    /* assume enough space */
+    flex-wrap: nowrap; /* assume enough space */
   }
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row .c4p--page-header__page-actions {
@@ -3570,15 +3571,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   visibility: visible;
 }
 .c4p--page-header .c4p--page-header__breadcrumb-column {
-  overflow: hidden;
-  /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
+  overflow: hidden; /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
   max-width: 100%;
   flex: 0 0 100%;
 }
 @media (min-width: 42rem) {
   .c4p--page-header .c4p--page-header__breadcrumb-column {
-    overflow: hidden;
-    /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
+    overflow: hidden; /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
   }
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row--has-action-bar.c4p--page-header__breadcrumb-row .c4p--page-header__breadcrumb-column {
@@ -3651,7 +3650,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--page-header .c4p--page-header__breadcrumb-title:not(.c4p--page-header__breadcrumb-title--pre-collapsed) {
   opacity: var(--c4p--page-header--breadcrumb-title-opacity);
   transform: translateY(var(--c4p--page-header--breadcrumb-title-top));
-  /* token linter does not support this form */
   visibility: var(--c4p--page-header--breadcrumb-title-visibility);
 }
 .c4p--page-header .c4p--page-header__breadcrumb-container--hidden .c4p--page-header__breadcrumb-title.c4p--page-header__breadcrumb-title {
@@ -3662,8 +3660,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: var(--c4p--page-header--max-action-bar-width-px);
   flex: 1 1 var(--c4p--page-header--max-action-bar-width-px);
   padding-top: var(--cds-spacing-04, 0.75rem);
-  margin-top: calc(-1 * var(--cds-spacing-04, 0.75rem));
-  /* align with breadcrumb */
+  margin-top: calc(-1 * var(--cds-spacing-04, 0.75rem)); /* align with breadcrumb */
   vertical-align: top;
   white-space: nowrap;
 }
@@ -3674,8 +3671,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (min-width: 42rem) {
   .c4p--page-header .c4p--page-header__title-row {
-    flex-wrap: nowrap;
-    /* assume enough space */
+    flex-wrap: nowrap; /* assume enough space */
   }
 }
 .c4p--page-header .c4p--page-header__title-row.c4p--page-header__title-row--under-action-bar {
@@ -3857,8 +3853,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-bottom: var(--cds-spacing-05, 1rem);
 }
 .c4p--page-header .c4p--page-header__navigation-row .bx--tab-content {
-  display: none;
-  /* need to figure out how to handle the tab content */
+  display: none; /* need to figure out how to handle the tab content */
 }
 .c4p--page-header .c4p--page-header__navigation-tabs {
   margin-left: calc(-1 * var(--cds-spacing-05, 1rem));

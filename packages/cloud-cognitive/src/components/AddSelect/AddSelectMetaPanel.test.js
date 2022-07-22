@@ -1,0 +1,91 @@
+/**
+ * Copyright IBM Corp. 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { render, fireEvent, screen } from '@testing-library/react';
+import React from 'react';
+import { AddSelectMetaPanel } from './AddSelectMetaPanel';
+import { pkg } from '../../settings';
+
+const blockClass = `${pkg.prefix}--add-select__meta-panel`;
+const componentName = AddSelectMetaPanel.name;
+const defaultProps = {
+  closeIconDescription: 'test close icon',
+  setDisplayMetaPanel: () => {},
+  title: 'test title',
+  meta: [],
+};
+
+describe(componentName, () => {
+  const { ResizeObserver } = window;
+
+  beforeEach(() => {
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
+  });
+
+  it('renders', () => {
+    render(<AddSelectMetaPanel {...defaultProps} />);
+  });
+
+  it('renders without html', () => {
+    const entry = {
+      id: 'test-id',
+      title: 'test title',
+      value: 'test value',
+    };
+    const newProps = {
+      ...defaultProps,
+      meta: [entry],
+    };
+    render(<AddSelectMetaPanel {...newProps} />);
+    expect(
+      document.querySelector(`.${blockClass}-entry-title`).textContent
+    ).toBe('test title');
+    expect(
+      document.querySelector(`.${blockClass}-entry-body`).textContent
+    ).toBe('test value');
+  });
+
+  it('renders with html', () => {
+    const meta = (
+      <div className={`${blockClass}-entry`}>
+        <p className={`${blockClass}-entry-title`}>html title</p>
+        <p className={`${blockClass}-entry-body`}>html value</p>
+      </div>
+    );
+    const newProps = {
+      ...defaultProps,
+      meta,
+    };
+    render(<AddSelectMetaPanel {...newProps} />);
+    expect(
+      document.querySelector(`.${blockClass}-entry-title`).textContent
+    ).toBe('html title');
+    expect(
+      document.querySelector(`.${blockClass}-entry-body`).textContent
+    ).toBe('html value');
+  });
+
+  it('triggers the onCloseHandler', () => {
+    const setDisplayMetaPanel = jest.fn();
+    const newProps = {
+      ...defaultProps,
+      setDisplayMetaPanel,
+    };
+    render(<AddSelectMetaPanel {...newProps} />);
+    fireEvent.click(screen.getByText('test close icon'));
+    expect(setDisplayMetaPanel).toHaveBeenCalled();
+  });
+});

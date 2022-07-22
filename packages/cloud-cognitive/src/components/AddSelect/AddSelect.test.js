@@ -5,40 +5,36 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { AddSelect } from './AddSelect';
-import { carbon } from '../../settings';
 import { pkg } from '../../settings';
 
-const blockClass = `${pkg.prefix}--add-select`;
 const componentName = AddSelect.name;
+
 const defaultProps = {
-  globalSearchLabel: 'test input label',
+  closeIconDescription: 'test icon description',
+  description: 'test description',
+  globalSearchLabel: 'test filter label',
   items: {
     entries: [
       {
-        id: '1',
-        title: 'item a',
-        value: 'item a',
-      },
-      {
-        id: '2',
-        title: 'item b',
-        value: 'item b',
-      },
-      {
-        id: '3',
-        title: 'item c',
-        value: 'item c',
+        id: 'test-entry-1',
+        title: 'test entry 1 title',
+        value: 'test-entry-1',
       },
     ],
   },
-  noSelectionTitle: 'No selection title',
-  noSelectionDescription: 'No selection description',
-  noResultsTitle: 'No results title',
-  noResultsDescription: 'Try again description',
-  searchResultsLabel: 'Search results',
+  itemsLabel: 'test items label',
+  multi: false,
+  noResultsDescription: 'no results body',
+  noResultsTitle: 'no results title',
+  onClose: () => {},
+  onCloseButtonText: 'close button text',
+  onSubmit: () => {},
+  onSubmitButtonText: 'submit button text',
+  open: true,
+  title: 'test title',
 };
 
 const initialDefaultPortalTargetBody = pkg.isFeatureEnabled(
@@ -64,28 +60,105 @@ describe(componentName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it('renders', () => {
+  it('renders single without hierarchy', () => {
     render(<AddSelect {...defaultProps} />);
+    expect(screen.getByText('test entry 1 title')).toBeVisible();
   });
 
-  it('filters the items', () => {
-    const { change } = fireEvent;
-    const { container } = render(<AddSelect {...defaultProps} />);
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
-      target: { value: 'item a' },
-    });
-    expect(screen.queryByText('item a')).toBeVisible();
-    expect(screen.queryByText('item b')).toBeNull();
-    expect(screen.queryByText('item c')).toBeNull();
+  it('renders single with hierarchy', () => {
+    const newProps = {
+      ...defaultProps,
+      items: {
+        entries: [
+          {
+            id: 'test-entry-1',
+            title: 'test entry 1 title',
+            value: 'test-entry-1',
+            children: {
+              entries: [
+                {
+                  id: 'test-entry-1-1',
+                  title: 'test entry 1-1 title',
+                  value: 'test-entry-1-1',
+                },
+              ],
+            },
+          },
+        ],
+      },
+      navIconDescription: 'view children',
+    };
+    render(<AddSelect {...newProps} />);
+    expect(screen.getByText('test entry 1 title')).toBeVisible();
+    expect(screen.getByText('view children')).toBeInTheDocument();
   });
 
-  it('renders SingleAddSelect', () => {
-    const { container } = render(<AddSelect {...defaultProps} />);
-    expect(container.querySelector(`.${blockClass}__single`)).toBeVisible();
+  it('renders with global filters', () => {
+    const newProps = {
+      ...defaultProps,
+      noSelectionTitle: 'no selection title',
+      multi: true,
+      columnInputPlaceholder: 'find',
+      navIconDescription: 'view children',
+      globalFilters: [
+        {
+          id: 'fileType',
+          label: 'File type',
+        },
+      ],
+      globalFiltersIconDescription: 'filter icon description',
+      globalFiltersPlaceholderText: 'Choose an option',
+      globalFiltersPrimaryButtonText: 'Apply',
+      globalFiltersSecondaryButtonText: 'Reset',
+      items: {
+        entries: [
+          {
+            id: 'test-entry-1',
+            title: 'test entry 1 title',
+            value: 'test-entry-1',
+            fileType: 'test',
+            children: {
+              entries: [
+                {
+                  id: 'test-entry-1-1',
+                  title: 'test entry 1-1 title',
+                  value: 'test-entry-1-1',
+                  fileType: 'test',
+                },
+              ],
+            },
+          },
+        ],
+      },
+    };
+    render(<AddSelect {...newProps} />);
+    expect(
+      screen.getByLabelText('filter icon description')
+    ).toBeInTheDocument();
   });
 
-  it('renders MultiAddSelect', () => {
-    const { container } = render(<AddSelect {...defaultProps} multi />);
-    expect(container.querySelector(`.${blockClass}__multi`)).toBeVisible();
+  it('renders with modifiers', () => {
+    const newProps = {
+      ...defaultProps,
+      noSelectionTitle: 'no selection title',
+      multi: true,
+      items: {
+        modifiers: {
+          id: 'role',
+          label: 'Role',
+          options: ['editor'],
+        },
+        entries: [
+          {
+            id: 'test-entry-1',
+            title: 'test entry 1 title',
+            value: 'test-entry-1',
+            role: 'editor',
+          },
+        ],
+      },
+    };
+    render(<AddSelect {...newProps} />);
+    expect(screen.getByTitle('editor')).toBeInTheDocument();
   });
 });

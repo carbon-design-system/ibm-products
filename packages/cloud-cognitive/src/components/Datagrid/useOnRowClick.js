@@ -7,15 +7,22 @@
  */
 
 const useOnRowClick = (hooks) => {
-  const useInstance = (instance) => {
-    const { onRowClick } = instance;
+  const useInstance = (rowInstance) => {
+    const { onRowClick } = rowInstance;
     const getRowProps = (props, datagridState) => {
-      const { isFetching, row } = datagridState;
+      const { isFetching, row, instance } = datagridState;
+      const { id, toggleRowSelected } = row;
       const onClick = () => {
         if (!isFetching && onRowClick) {
           onRowClick(row);
+          instance.selectedFlatRows &&
+            instance.selectedFlatRows.map((toggleRow) =>
+              toggleRow.toggleRowSelected(false)
+            );
+          toggleRowSelected(id, true);
         }
       };
+
       return [
         props,
         { onClick },

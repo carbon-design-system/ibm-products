@@ -34,6 +34,7 @@ const defaults = {
   actions: Object.freeze([]),
   documentationLinks: Object.freeze([]),
   documentationLinksIconDescription: 'Show documentation links',
+  isInitiallyOpen: false,
 };
 
 export let WebTerminal = React.forwardRef(
@@ -47,13 +48,14 @@ export let WebTerminal = React.forwardRef(
       closeIconDescription,
       documentationLinks = defaults.documentationLinks,
       documentationLinksIconDescription = defaults.documentationLinksIconDescription,
+      isInitiallyOpen = defaults.isInitiallyOpen,
 
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
-    const { open, closeWebTerminal } = useWebTerminal();
+    const { open, closeWebTerminal, openWebTerminal } = useWebTerminal();
 
     const [shouldRender, setRender] = useState(open);
     const { matches: prefersReducedMotion } =
@@ -75,6 +77,15 @@ export let WebTerminal = React.forwardRef(
         setRender(true);
       }
     }, [open]);
+
+    /**
+      On render, check if user want's the web terminal to be open by default
+    */
+    useEffect(() => {
+      if (isInitiallyOpen) {
+        openWebTerminal();
+      }
+    }, []); // eslint-disable-line
 
     /** 
       When the web terminal slide in animation is complete, sets render to false.
@@ -208,7 +219,12 @@ WebTerminal.propTypes = {
   ),
 
   /**
-   * Icon description for the documentation link overflow menu
+   * Description for the documentation link overflow menu tooltip
    */
   documentationLinksIconDescription: PropTypes.string,
+
+  /**
+   * Optionally pass if the web terminal should be open by default
+   */
+  isInitiallyOpen: PropTypes.bool,
 };

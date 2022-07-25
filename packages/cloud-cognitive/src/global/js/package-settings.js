@@ -64,6 +64,7 @@ const defaults = {
     CancelableTextEdit: false,
     DataSpreadsheet: false,
     Datagrid: false,
+    ComboButton: false,
     /* new component flags here - comment used by generate CLI */
   },
 

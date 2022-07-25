@@ -42,6 +42,7 @@ const s = [
           { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
           { n: 'DataSpreadsheet', s: ['c/DataSpreadsheet'] },
           { n: 'Datagrid', s: ['c/Datagrid'] },
+          { n: 'ComboButton', s: ['c/ComboButton']}
         ],
       },
       {
@@ -101,7 +102,6 @@ const s = [
           'c/ButtonMenu',
           'c/ButtonSetWithOverflow',
           'c/CancelableTextEdit',
-          'c/ComboButton',
           'c/ExampleComponent',
           'c/TearsheetShell',
         ],

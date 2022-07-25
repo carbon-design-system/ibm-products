@@ -80,6 +80,20 @@ const hierarchyItems = {
         ],
       },
     },
+    {
+      id: '6',
+      title: 'Georgia',
+      value: 'georgia',
+      children: {
+        entries: [
+          {
+            id: '7',
+            title: 'Atlanta',
+            value: 'atl',
+          },
+        ],
+      },
+    },
   ],
 };
 
@@ -261,20 +275,38 @@ describe(componentName, () => {
     expect(screen.queryByText('Los Angeles'));
   });
 
-  it('displays breadcrumbs', () => {
-    render(<AddSelectBody {...singleHierarchyProps} />);
-    const childrenButton = document.querySelector(
+  it('handles breadcrumbs', () => {
+    const normalizedItems = normalize(hierarchyItems);
+    const newProps = {
+      ...multiProps,
+      items: hierarchyItems,
+      useNormalizedItems: true,
+      normalizedItems,
+    };
+    render(<AddSelectBody {...newProps} />);
+    const childrenBtn = document.querySelectorAll(
       `.${blockClass}__selections-view-children`
     );
     expect(document.querySelectorAll('.bx--breadcrumb-item').length).toEqual(1);
     expect(
       document.querySelectorAll('.bx--breadcrumb-item')[0].textContent
-    ).toBe('Categories');
-    fireEvent.click(childrenButton);
+    ).toBe('Business terms');
+    fireEvent.click(childrenBtn[0]);
     expect(document.querySelectorAll('.bx--breadcrumb-item').length).toEqual(2);
     expect(
       document.querySelectorAll('.bx--breadcrumb-item')[1].textContent
     ).toBe('California');
+    fireEvent.click(document.querySelectorAll('.bx--breadcrumb-item')[0]);
+    expect(document.querySelectorAll('.bx--breadcrumb-item').length).toEqual(1);
+    fireEvent.click(childrenBtn[0]);
+    fireEvent.click(childrenBtn[1]);
+    expect(
+      document.querySelectorAll('.bx--breadcrumb-item')[1].textContent
+    ).toBe('Georgia');
+    fireEvent.click(childrenBtn[1]);
+    expect(
+      document.querySelectorAll('.bx--breadcrumb-item')[1].textContent
+    ).toBe('Georgia');
   });
 
   it('handles multi select submit', () => {
@@ -412,7 +444,7 @@ describe(componentName, () => {
     expect(
       document.querySelectorAll('.c4p--add-select__sidebar-accordion-title')
         .length
-    ).toBe(4);
+    ).toBe(5);
     fireEvent.click(selectAll);
     expect(
       document.querySelectorAll('.c4p--add-select__sidebar-accordion-title')

@@ -72,3 +72,6 @@ export {
   useCustomizeColumns,
   useSelectAllWithToggle,
 } from './Datagrid';
+export { EditTearsheet } from './EditTearsheet';
+export { EditTearsheetNarrow } from './EditTearsheetNarrow';
+export { EditFullPage } from './EditFullPage';

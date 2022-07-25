@@ -26,7 +26,7 @@ const commonStoryCode = {
       {
         id: `tab-${tabId}`,
         label: `Tab ${tabId}`,
-        content: (
+        content: () => (
           <div style={{ color: '#00ff00' }}>Content for tab {tabId}</div>
         ),
       },
@@ -44,6 +44,7 @@ const Template = (args) => {
   // tabs handling code
   const [tabs, setTabs] = useState([]);
   const nextTabId = useRef(1);
+  const testRef = useRef();
 
   const { actionCloseTab, actionNewTab, addTab } = commonStoryCode;
 
@@ -80,6 +81,7 @@ const Template = (args) => {
         tabs={tabs}
         onCloseTab={handleCloseTab}
         onNewTab={handleNewTab}
+        ref={testRef}
       />
     </div>
   );

@@ -16,7 +16,10 @@
 // Tabs, Tab
 @use '@carbon/react/scss/components/tabs';
 
-.modified-tabs .modified-tabs__tab-label {
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--modified-tabs;
+
+.#{$block-class} .#{$block-class}__tab-label {
   display: flex;
   width: 100%;
   // height: 100%;
@@ -24,16 +27,16 @@
   justify-content: space-between;
 }
 
-.modified-tabs__tab-new,
-.modified-tabs__tab {
+.#{$block-class}__tab-new,
+.#{$block-class}__tab {
   position: relative;
   display: inline-block;
   width: 100%;
   height: 100%;
 }
 
-.modified-tabs__tab-new-img,
-.modified-tabs__tab-close {
+.#{$block-class}__tab-new-img,
+.#{$block-class}__tab-close {
   // similar to modal dialog close
   position: absolute;
   top: -$spacing-04;
@@ -53,7 +56,7 @@
   }
 }
 
-.modified-tabs__tab-new-icon {
+.#{$block-class}__tab-new-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,18 +64,30 @@
   margin-top: $spacing-01;
 }
 
-.modified-tabs__tab-close:focus {
+.#{$block-class}__tab-close:focus {
   border-color: $button-primary;
   outline: none;
 }
 
-.modified-tabs__tab-close:hover {
+.#{$block-class}__tab-close:hover {
   background-color: $background-hover;
 }
 
-.modified-tabs__tab-new-img {
+.#{$block-class}__tab-new-img {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--tabs__nav-item.#{c4p-settings.$carbon-prefix}--tabs__nav-link {
+  width: 10rem;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--tab--overflow-nav-button--previous,
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--tab--overflow-nav-button--next {
+  z-index: 2;
 }

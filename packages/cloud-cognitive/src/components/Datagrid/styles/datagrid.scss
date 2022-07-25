@@ -147,6 +147,12 @@
   width: 100%;
   padding-top: 0;
 
+  .#{$carbon-prefix}--data-table-content {
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+  }
+
   .#{$block-class}__table-simple {
     overflow: hidden;
     max-height: 100%;
@@ -443,4 +449,17 @@
     content: '';
     transform: translateY(-50%);
   }
+}
+
+.#{$carbon-prefix}--data-table--selected {
+  position: relative;
+}
+
+.#{$carbon-prefix}--data-table--selected::before {
+  position: absolute;
+  left: 0;
+  width: $spacing-02;
+  height: 100%;
+  background-color: $interactive-01;
+  content: '';
 }

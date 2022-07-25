@@ -71,7 +71,7 @@
       $shell__banner__background__sizing__height;
     transition-duration: $moderate-02;
     transition-property: background-size;
-    transition-timing-function: carbon--motion($name: standard);
+    transition-timing-function: carbon--motion(standard);
 
     &,
     &:hover,

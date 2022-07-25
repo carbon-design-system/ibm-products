@@ -185,6 +185,7 @@
           padding: 0;
 
           .#{$carbon-prefix}--btn__icon {
+            // stylelint-disable-next-line carbon/motion-easing-use
             transition: transform $duration--moderate-02 ease;
             @media (prefers-reduced-motion: reduce) {
               transition: none;

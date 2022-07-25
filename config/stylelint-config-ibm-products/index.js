@@ -59,7 +59,8 @@ module.exports = {
     'scss/no-global-function-names': null,
 
     'carbon/layout-token-use': [true, { severity: 'error' }],
-    'carbon/motion-token-use': [true, { severity: 'error' }],
+    'carbon/motion-duration-use': [true, { severity: 'error' }],
+    'carbon/motion-easing-use': [true, { severity: 'error' }],
     'carbon/theme-token-use': [true, { severity: 'error' }],
     'carbon/type-token-use': [
       true,

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.23.0...@carbon/ibm-products@1.23.1) (2022-07-19)
+
+
+### Bug Fixes
+
+* update to Carbon v10 compatible versions to latest ([#2101](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2101)) ([feebce3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/feebce38ac474917e29d201d9198e3baf9452a97))
+* **web-terminal:** spans 100% when less than 640px ([#2087](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2087)) ([c012d30](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c012d306c0df936ef4916e5b31e7dd8517ebb3ca))
+* **WebTerminal:** small fixes for release review ([#2106](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2106)) ([6eb3346](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6eb3346efaae41a1c38972620c4f9222419cce36))
+
+
+
+
+
 # [1.23.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.22.0...@carbon/ibm-products@1.23.0) (2022-07-12)
 
 

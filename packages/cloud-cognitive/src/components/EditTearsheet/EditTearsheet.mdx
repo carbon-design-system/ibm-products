@@ -1,0 +1,138 @@
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { EditTearsheet } from '.';
+import editTearsheetAnatomy from './storybook_assets/edit-tearsheet-2.png';
+
+# EditTearsheet
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+When to use
+
+- The create flow happened in a tear sheet.
+- A subset of the related item will be edited.
+- You want to keep the user in context instead of taking the user to a new page.
+- The amount of content is too much for a modal or narrow tear sheet.
+- The content is too complex for a modal or narrow tear sheet.
+- If the space to edit in the original location is too restricted (i.e. in a
+  narrow side panel), a tear sheet can provide more area to work.
+
+When not to use
+
+- Do not use when the edit actions are few/simple - consider using a modal
+  instead.
+
+Anatomy of EditTearsheet
+
+<img src={editTearsheetAnatomy} />
+
+1. **Header**: The header can include title, description, labels, and tabs. Must
+   include “Edit” in the title.
+
+2. **Main content area**: This area includes the editable content.
+
+3. **Navigation buttons**: In most cases, the navigation buttons are limited to
+   primary and secondary buttons (“Save” and “Cancel”). If the edit flow
+   requires steps (not common), the Next/previous buttons serve as the primary
+   and secondary buttons until the last step, where the primary button is “Save”
+   (Cancel is the ghost button in this case).
+
+4. **Influencer (optional)**: A left side panel that can be used, for example,
+   as a menu, progress indicator, or filter. Alternatively, a right side panel
+   can be used for a Summary (of changes).
+
+5. **Background overlay**: An overlay which appears same as in modals
+
+## Example usage
+
+<Canvas>
+  <Story id={getStoryId(EditTearsheet.displayName, 'multi-form-tearsheet')} />
+</Canvas>
+
+This is used when you have one section per step. This can be created by passing
+in the overall `<EditTearsheet />` component and the `<EditTearsheetForm />`
+component with form items as children:
+
+```jsx
+<EditTearsheet {...props}>
+  <EditTearsheetForm
+    title="Required title"
+    subtitle="Optional subtitle"
+    description="Optional description"
+    onNext={() => {
+      'Optional function';
+    }}
+  >
+    <TextInput
+      id="test-1"
+      invalidText="A valid value is required"
+      labelText="Topic name"
+      placeholder="Enter topic name"
+    />
+  </EditTearsheetForm>
+</EditTearsheet>
+```
+
+## Using custom components
+
+It is possible to use custom components that return `EditTearsheetForm`s in
+order to help reduce the amount of logic in the component that contains the main
+`EditTearsheet`. _It is required that each child of the `EditTearsheet` either
+be a custom step or a `EditTearsheetForm`_. An example of this could look like
+the following:
+
+```jsx
+const CreateFormCustom = ({ subtitle, ...rest }) => {
+  return (
+    <EditTearsheetForm {...rest} subtitle={subtitle} title="Form 1">
+      form content here
+    </EditTearsheetForm>
+  );
+};
+
+const CreateComponent = () => {
+  return (
+    <EditTearsheet {...EditTearsheetProps}>
+      <CreateFormCustom subtitle="Custom form subtitle" />
+      <EditTearsheetForm
+        title="Topic name"
+        fieldsetLegendText="Topic information"
+        subtitle="This is the unique name used to recognize your topic"
+        description="It will also be used by your producers and consumers as part of the
+        connection information, so make it something easy to recognize."
+      >
+        Content for second form
+      </EditTearsheetForm>
+    </EditTearsheet>
+  );
+};
+```
+
+## Class names
+
+Additionally, to get the preferred styling when including your own children as
+sections, you can utilize the below included class names.
+
+| Class name                                            | Element     | Features                                                   |
+| ----------------------------------------------------- | ----------- | ---------------------------------------------------------- |
+| `#{$pkg-prefix}--create-tearsheet__form--title`       | title       | `productive-heading-04` & `margin-bottom` of `$spacing-05` |
+| `#{$pkg-prefix}--create-tearsheet__form--subtitle`    | subtitle    | `productive-heading-01` & `margin-bottom` of `$spacing-03` |
+| `#{$pkg-prefix}--create-tearsheet__form--description` | description | `body-long-01` & `margin-bottom` of `$spacing-06`          |
+| `#{$pkg-prefix}--create-tearsheet__form--fieldset`    | fieldset    | `margin-bottom` of `$spacing-05` to all children elements  |
+
+## Code sample
+
+<CodesandboxLink exampleDirectory="EditTearsheet" />
+
+## Component API
+
+<ArgsTable />

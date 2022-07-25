@@ -30,7 +30,7 @@ export let AddSelect = forwardRef(({ items, globalFilters, ...props }, ref) => {
             [modifierAttribute]: item[modifierAttribute],
           };
         })
-      : null;
+      : [];
   return (
     <AddSelectBody
       {...props}
@@ -117,7 +117,6 @@ AddSelect.propTypes = {
    * portal target for the all tags modal
    */
   portalTarget: PropTypes.node,
-  removeIconDescription: PropTypes.string,
   searchResultsLabel: PropTypes.string,
   title: PropTypes.string.isRequired,
 };

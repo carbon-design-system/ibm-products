@@ -19,7 +19,6 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import React, { Children, createElement, useRef, useState } from 'react';
 
-//const blockClass = 'cfp--combo-button';
 const blockClass = `${pkg.prefix}--combo-button`;
 
 /**

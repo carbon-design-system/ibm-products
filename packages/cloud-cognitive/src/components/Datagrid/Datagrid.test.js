@@ -162,17 +162,14 @@ const DatagridActions = (datagridState) => {
     rowSizeDropdownProps,
   } = datagridState;
   const downloadCsv = () => {
-    console.log('Downloading');
     alert('Downloading...');
   };
   const { TableToolbarContent, TableToolbarSearch } = DataTable;
 
   const refreshColumns = () => {
-    console.log('refreshing');
     alert('refreshing...');
   };
   const leftPanelClick = () => {
-    console.log('open/close left panel');
     alert('open/close left panel...');
   };
   const searchForAColumn = 'Search';
@@ -236,7 +233,6 @@ const DatagridActions = (datagridState) => {
 // eslint-disable-next-line react/prop-types
 const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
   const updatePagination = ({ page, pageSize }) => {
-    console.log(state);
     setPageSize(pageSize);
     gotoPage(page - 1); // Carbon is non-zero-based
   };
@@ -471,9 +467,8 @@ const RowSizeDropdown = ({ ...rest }) => {
           labelText: 'Teeny tiny row',
         },
       ],
-      onRowSizeChange: (value) => {
-        console.log('row size changed to: ', value);
-      },
+      /*onRowSizeChange: (value) => {
+      },*/
       DatagridActions,
       DatagridBatchActions,
     },
@@ -521,11 +516,10 @@ const CustomizingColumns = ({ ...rest }) => {
         hiddenColumns: ['age'],
         columnOrder: [],
       },
-      customizeColumnsProps: {
+      /*customizeColumnsProps: {
         onSaveColumnPrefs: (newColDefs) => {
-          console.log(newColDefs);
         },
-      },
+      },*/
       DatagridActions,
       DatagridBatchActions,
     },
@@ -605,7 +599,6 @@ const RadioSelect = ({ ...rest }) => {
       data,
       hideSelectAll: true,
       radio: true,
-      // onRadioSelect: (row) => console.log(`Row clicked: ${row.id}`),
       initialState: {
         selectedRowIds: {
           3: true,

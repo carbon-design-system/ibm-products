@@ -961,8 +961,9 @@ export const BatchActions = () => {
     {
       columns,
       data,
-      // DatagridActions,
-      // DatagridBatchActions
+      batchActions: true,
+      DatagridActions,
+      DatagridBatchActions,
       // DatagridActions: DatagridBatchActions,
       // DatagridBatchActions: DatagridActionsBatchActions,
     },

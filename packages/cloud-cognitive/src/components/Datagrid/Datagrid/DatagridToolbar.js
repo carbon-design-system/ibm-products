@@ -19,7 +19,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const { TableToolbar } = DataTable;
 
-const DatagridActions = (datagridState) => {
+const DatagridActionsBatchActions = (datagridState) => {
   const {
     selectedFlatRows,
     setGlobalFilter,
@@ -39,8 +39,6 @@ const DatagridActions = (datagridState) => {
   };
   const searchForAColumn = 'Search';
   const isNothingSelected = selectedFlatRows.length === 0;
-
-  // let numItemsToolbar = 5;
 
   return (
     isNothingSelected && (
@@ -74,14 +72,12 @@ const DatagridActions = (datagridState) => {
   );
 };
 
-const DatagridBatchActions = (datagridState) => {
+const DatagridBatchActionsToolbar = (datagridState) => {
   const { selectedFlatRows, toggleAllRowsSelected } = datagridState;
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
   const onBatchAction = () => alert('Batch action');
   const actionName = 'Action';
   const selectAll = 'Select All';
-  // const selectAllButton = 'Select All';
-  // const selectAllButtonAction = () => alert(`Select All}`);
 
   const selectAllButtonAction = () => {
     toggleAllRowsSelected(true);
@@ -110,16 +106,25 @@ const DatagridBatchActions = (datagridState) => {
 };
 
 const DatagridToolbar = (datagridState) => {
-  // const { DatagridActions, DatagridBatchActions } = datagridState;
+  const { DatagridActions, DatagridBatchActions, batchActions } = datagridState;
 
-  return DatagridActions ? (
+  return batchActions && DatagridActions ? (
+    <div className={`${blockClass}__table-toolbar`}>
+      <TableToolbar>
+        {DatagridActionsBatchActions &&
+          DatagridActionsBatchActions(datagridState)}
+        {DatagridBatchActionsToolbar &&
+          DatagridBatchActionsToolbar(datagridState)}
+      </TableToolbar>
+    </div>
+  ) : (
     <div className={`${blockClass}__table-toolbar`}>
       <TableToolbar>
         {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
     </div>
-  ) : null;
+  );
 };
 
 export default DatagridToolbar;

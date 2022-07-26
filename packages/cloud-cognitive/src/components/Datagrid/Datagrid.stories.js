@@ -630,8 +630,6 @@ const DatagridActions = (datagridState) => {
     },
   };
 
-  // let numItemsToolbar = 5;
-
   return (
     isNothingSelected && (
       <React.Fragment>

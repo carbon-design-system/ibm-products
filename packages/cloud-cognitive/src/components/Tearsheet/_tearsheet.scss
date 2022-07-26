@@ -34,7 +34,7 @@ $motion-duration: $duration-moderate-02;
     z-index: utilities.z('modal') + 1;
     align-items: flex-end;
     color: $text-primary;
-    // stylelint-disable-next-line carbon/motion-token-use
+    /* stylelint-disable-next-line */
     transition: visibility 0s linear $motion-duration,
       background-color $motion-duration motion(exit, expressive),
       opacity $motion-duration motion(exit, expressive);
@@ -47,7 +47,7 @@ $motion-duration: $duration-moderate-02;
     /* stylelint-disable-next-line function-no-unknown */
     z-index: utilities.z('modal');
     align-items: flex-end;
-    // stylelint-disable-next-line carbon/motion-token-use
+    /* stylelint-disable-next-line */
     transition: visibility 0s linear,
       background-color $motion-duration motion(entrance, expressive),
       opacity $motion-duration motion(entrance, expressive);

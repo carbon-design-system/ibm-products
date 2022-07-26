@@ -53,6 +53,7 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--
 
 .#{$step-block-class} .#{c4p-settings.$carbon-prefix}--css-grid {
   padding-left: 0;
+  margin-left: 0;
 }
 
 .#{$create-tearsheet-block-class} .#{$step-block-class}__step--hidden-step {

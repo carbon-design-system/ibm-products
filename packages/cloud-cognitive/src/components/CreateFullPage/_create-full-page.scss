@@ -106,6 +106,9 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
 .#{$block-class} .#{$block-class}__step {
   position: relative;
   padding-bottom: $spacing-07;
+  .#{c4p-settings.$carbon-prefix}--css-grid {
+    margin-left: 0;
+  }
 }
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--side-nav--ux {

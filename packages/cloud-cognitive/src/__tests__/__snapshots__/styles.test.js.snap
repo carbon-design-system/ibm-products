@@ -248,6 +248,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-grid-gutter-end: calc(var(--cds-grid-gutter) / 2);
   --cds-grid-column-hang: calc(var(--cds-grid-gutter) / 2);
   display: grid;
+  width: 100%;
   max-width: 99rem;
   padding-right: var(--cds-grid-margin);
   padding-left: var(--cds-grid-margin);
@@ -455,17 +456,17 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .cds--sm\\\\:col-span-75 {
   --cds-grid-columns: 3;
-  grid-column: span 3/span 3;
+  grid-column: span 3 / span 3;
 }
 
 .cds--sm\\\\:col-span-50 {
   --cds-grid-columns: 2;
-  grid-column: span 2/span 2;
+  grid-column: span 2 / span 2;
 }
 
 .cds--sm\\\\:col-span-25 {
   --cds-grid-columns: 1;
-  grid-column: span 1/span 1;
+  grid-column: span 1 / span 1;
 }
 
 @media (min-width: 42rem) {
@@ -538,15 +539,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
   .cds--md\\\\:col-span-75 {
     --cds-grid-columns: 6;
-    grid-column: span 6/span 6;
+    grid-column: span 6 / span 6;
   }
   .cds--md\\\\:col-span-50 {
     --cds-grid-columns: 4;
-    grid-column: span 4/span 4;
+    grid-column: span 4 / span 4;
   }
   .cds--md\\\\:col-span-25 {
     --cds-grid-columns: 2;
-    grid-column: span 2/span 2;
+    grid-column: span 2 / span 2;
   }
 }
 @media (min-width: 66rem) {
@@ -675,15 +676,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
   .cds--lg\\\\:col-span-75 {
     --cds-grid-columns: 12;
-    grid-column: span 12/span 12;
+    grid-column: span 12 / span 12;
   }
   .cds--lg\\\\:col-span-50 {
     --cds-grid-columns: 8;
-    grid-column: span 8/span 8;
+    grid-column: span 8 / span 8;
   }
   .cds--lg\\\\:col-span-25 {
     --cds-grid-columns: 4;
-    grid-column: span 4/span 4;
+    grid-column: span 4 / span 4;
   }
 }
 @media (min-width: 82rem) {
@@ -812,15 +813,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
   .cds--xlg\\\\:col-span-75 {
     --cds-grid-columns: 12;
-    grid-column: span 12/span 12;
+    grid-column: span 12 / span 12;
   }
   .cds--xlg\\\\:col-span-50 {
     --cds-grid-columns: 8;
-    grid-column: span 8/span 8;
+    grid-column: span 8 / span 8;
   }
   .cds--xlg\\\\:col-span-25 {
     --cds-grid-columns: 4;
-    grid-column: span 4/span 4;
+    grid-column: span 4 / span 4;
   }
 }
 @media (min-width: 99rem) {
@@ -949,15 +950,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
   .cds--max\\\\:col-span-75 {
     --cds-grid-columns: 12;
-    grid-column: span 12/span 12;
+    grid-column: span 12 / span 12;
   }
   .cds--max\\\\:col-span-50 {
     --cds-grid-columns: 8;
-    grid-column: span 8/span 8;
+    grid-column: span 8 / span 8;
   }
   .cds--max\\\\:col-span-25 {
     --cds-grid-columns: 4;
-    grid-column: span 4/span 4;
+    grid-column: span 4 / span 4;
   }
 }
 .cds--col-span-auto {
@@ -970,52 +971,52 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .cds--col-span-75 {
   --cds-grid-columns: 3;
-  grid-column: span 3/span 3;
+  grid-column: span 3 / span 3;
 }
 @media (min-width: 42rem) {
   .cds--col-span-75 {
     --cds-grid-columns: 6;
-    grid-column: span 6/span 6;
+    grid-column: span 6 / span 6;
   }
 }
 @media (min-width: 66rem) {
   .cds--col-span-75 {
     --cds-grid-columns: 12;
-    grid-column: span 12/span 12;
+    grid-column: span 12 / span 12;
   }
 }
 
 .cds--col-span-50 {
   --cds-grid-columns: 2;
-  grid-column: span 2/span 2;
+  grid-column: span 2 / span 2;
 }
 @media (min-width: 42rem) {
   .cds--col-span-50 {
     --cds-grid-columns: 4;
-    grid-column: span 4/span 4;
+    grid-column: span 4 / span 4;
   }
 }
 @media (min-width: 66rem) {
   .cds--col-span-50 {
     --cds-grid-columns: 8;
-    grid-column: span 8/span 8;
+    grid-column: span 8 / span 8;
   }
 }
 
 .cds--col-span-25 {
   --cds-grid-columns: 1;
-  grid-column: span 1/span 1;
+  grid-column: span 1 / span 1;
 }
 @media (min-width: 42rem) {
   .cds--col-span-25 {
     --cds-grid-columns: 2;
-    grid-column: span 2/span 2;
+    grid-column: span 2 / span 2;
   }
 }
 @media (min-width: 66rem) {
   .cds--col-span-25 {
     --cds-grid-columns: 4;
-    grid-column: span 4/span 4;
+    grid-column: span 4 / span 4;
   }
 }
 
@@ -1724,7 +1725,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 @media (prefers-reduced-motion: no-preference) {
   .c4p--cascade__element,
 .c4p--cascade__col {
-    /* stylelint-disable-next-line carbon/motion-token-use -- Carbon animation duration defined above in $animationProps */
+    /* stylelint-disable-next-line carbon/motion-duration-use -- Carbon animation duration defined above in $animationProps */
     animation: 240ms cubic-bezier(0.2, 0, 0.38, 0.9) 0s 1 fade;
     animation-fill-mode: forwards;
     opacity: 0;
@@ -1994,6 +1995,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--create-full-page .c4p--create-full-page__step {
   position: relative;
   padding-bottom: 2rem;
+}
+.c4p--create-full-page .c4p--create-full-page__step .cds--css-grid {
+  margin-left: 0;
 }
 
 .c4p--create-full-page .cds--side-nav--ux {
@@ -2860,6 +2864,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   z-index: 9001;
   align-items: flex-end;
   color: var(--cds-text-primary, #161616);
+  /* stylelint-disable-next-line */
   transition: visibility 0s linear 240ms, background-color 240ms cubic-bezier(0.4, 0.14, 1, 1), opacity 240ms cubic-bezier(0.4, 0.14, 1, 1);
   --c4p--tearsheet--stacking-scale-factor-single: 0.95;
   --c4p--tearsheet--stacking-scale-factor-double: 0.9;
@@ -2868,6 +2873,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   /* stylelint-disable-next-line function-no-unknown */
   z-index: 9000;
   align-items: flex-end;
+  /* stylelint-disable-next-line */
   transition: visibility 0s linear, background-color 240ms cubic-bezier(0, 0, 0.3, 1), opacity 240ms cubic-bezier(0, 0, 0.3, 1);
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3148,6 +3154,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--tearsheet-create__step .cds--css-grid {
   padding-left: 0;
+  margin-left: 0;
 }
 
 .c4p--tearsheet-create .c4p--tearsheet-create__step__step--hidden-step {
@@ -3632,12 +3639,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel {
   display: inline-flex;
   width: var(--c4p--inline-edit--size);
+  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);
-  padding: calc(
-    0.5 * (var(--c4p--inline-edit--size) - var(--c4p--inline-edit--icon-size)) - 0.125rem
-  );
+  align-items: center;
+  justify-content: center;
   border: 2px solid transparent;
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:hover {
@@ -3656,6 +3663,19 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save[disabled], .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel[disabled] {
   border-color: transparent;
+}
+.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save {
+  overflow: visible;
+  width: var(--c4p--inline-edit--edit-size);
+  transition: all 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
+  transition-property: margin, padding;
+}
+.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation:not(.c4p--inline-edit__toolbar--saveable) .c4p--inline-edit__save {
+  overflow: hidden;
+  width: 0;
+  padding: 0;
+  border-right: 0;
+  border-left: 0;
 }
 .c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save {
   margin-right: 0;
@@ -3684,12 +3704,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit {
   display: inline-flex;
   width: var(--c4p--inline-edit--size);
+  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);
-  padding: calc(
-    0.5 * (var(--c4p--inline-edit--size) - var(--c4p--inline-edit--icon-size)) - 0.125rem
-  );
+  align-items: center;
+  justify-content: center;
   border: 2px solid transparent;
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:active, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:focus {
@@ -3713,12 +3733,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit .c4p--inline-edit__validation-icon {
   display: inline-flex;
   width: var(--c4p--inline-edit--size);
+  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);
-  padding: calc(
-    0.5 * (var(--c4p--inline-edit--size) - var(--c4p--inline-edit--icon-size)) - 0.125rem
-  );
+  align-items: center;
+  justify-content: center;
   border: 2px solid transparent;
 }
 .c4p--inline-edit.c4p--inline-edit--invalid .c4p--inline-edit__validation-icon {
@@ -4323,6 +4343,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-more-button .cds--btn__icon,
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button .cds--btn__icon {
+  /* stylelint-disable-next-line carbon/motion-easing-use */
   transition: transform 240ms ease;
   /* stylelint-disable-next-line max-nesting-depth */
 }
@@ -6417,7 +6438,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: block;
   width: 100%;
   height: 100%;
-  /* stylelint-disable-next-line carbon/motion-token-use -- non-standard duration used */
+  /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
   animation: background-and-shadow-appear 1000ms linear paused forwards;
   animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
   content: \\"\\";
@@ -6557,7 +6578,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: block;
   width: 100%;
   height: 100%;
-  /* stylelint-disable-next-line carbon/motion-token-use -- non-standard duration used */
+  /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
   animation: background-appear 1000ms linear paused forwards;
   animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
   content: \\"\\";
@@ -6669,6 +6690,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
   line-height: var(--cds-productive-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
+  min-height: 2.5rem;
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -6736,7 +6758,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: block;
   width: 100%;
   height: 100%;
-  /* stylelint-disable-next-line carbon/motion-token-use -- non-standard duration used */
+  /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
   animation: background-appear 1000ms linear paused forwards;
   animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
   content: \\"\\";

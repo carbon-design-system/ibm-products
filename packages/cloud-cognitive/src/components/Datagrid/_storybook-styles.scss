@@ -6,6 +6,9 @@
 //
 
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+
 @use '../../global/styles/project-settings' as c4p-settings;
 
 // TODO: add any additional styles used by Datagrid.stories.js
@@ -33,4 +36,53 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 
 .#{$block-class}__panelContent {
   display: inline;
+}
+
+/* only for storybook purpose. */
+.#{c4p-settings.$pkg-prefix}--side-panel.#{c4p-settings.$pkg-prefix}--side-panel__container {
+  top: 0;
+  height: 100%;
+}
+
+.page-content-wrapper.side-panel-open {
+  .#{$block-class} {
+    padding-right: $spacing-05;
+  }
+}
+
+.#{$block-class}__side-panel-sections {
+  padding-bottom: $spacing-06;
+}
+
+.#{$block-class}__side-panel-section-inner {
+  display: flex;
+  padding: $spacing-01 0;
+}
+
+.#{$block-class}__side-panel-label-text {
+  @include type.type-style('body-compact-01');
+
+  color: $text-secondary;
+}
+
+.#{$block-class}__side-panel-value {
+  @include type.type-style('body-short-01');
+
+  padding-left: $spacing-03;
+}
+
+.#{$block-class}__side-panel-section-header {
+  @include type.type-style('productive-heading-01');
+
+  padding-bottom: $spacing-02;
+}
+
+.#{c4p-settings.$pkg-prefix}--side-panel.#{c4p-settings.$pkg-prefix}--side-panel__container.#{c4p-settings.$pkg-prefix}--side-panel__container-right-placement {
+  border: 0 none;
+  box-shadow: none;
+}
+
+.#{c4p-settings.$pkg-prefix}--side-panel__container
+  .#{c4p-settings.$pkg-prefix}--side-panel__inner-content {
+  height: 100%;
 }

@@ -8,7 +8,7 @@
 import { render, fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import { AddSelectBody } from './AddSelectBody';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import { getGlobalFilterValues, normalize } from './add-select-utils';
 import { Document16 } from '@carbon/icons-react';
 import image from '../UserProfileImage/headshot.png'; // cspell:disable-line
@@ -287,26 +287,27 @@ describe(componentName, () => {
     const childrenBtn = document.querySelectorAll(
       `.${blockClass}__selections-view-children`
     );
-    expect(document.querySelectorAll('.bx--breadcrumb-item').length).toEqual(1);
-    expect(
-      document.querySelectorAll('.bx--breadcrumb-item')[0].textContent
-    ).toBe('Business terms');
+    const breadcrumbClass = `.${carbon.prefix}--breadcrumb-item`;
+    expect(document.querySelectorAll(breadcrumbClass).length).toEqual(1);
+    expect(document.querySelectorAll(breadcrumbClass)[0].textContent).toBe(
+      'Business terms'
+    );
     fireEvent.click(childrenBtn[0]);
-    expect(document.querySelectorAll('.bx--breadcrumb-item').length).toEqual(2);
-    expect(
-      document.querySelectorAll('.bx--breadcrumb-item')[1].textContent
-    ).toBe('California');
-    fireEvent.click(document.querySelectorAll('.bx--breadcrumb-item')[0]);
-    expect(document.querySelectorAll('.bx--breadcrumb-item').length).toEqual(1);
+    expect(document.querySelectorAll(breadcrumbClass).length).toEqual(2);
+    expect(document.querySelectorAll(breadcrumbClass)[1].textContent).toBe(
+      'California'
+    );
+    fireEvent.click(document.querySelectorAll(breadcrumbClass)[0]);
+    expect(document.querySelectorAll(breadcrumbClass).length).toEqual(1);
     fireEvent.click(childrenBtn[0]);
     fireEvent.click(childrenBtn[1]);
-    expect(
-      document.querySelectorAll('.bx--breadcrumb-item')[1].textContent
-    ).toBe('Georgia');
+    expect(document.querySelectorAll(breadcrumbClass)[1].textContent).toBe(
+      'Georgia'
+    );
     fireEvent.click(childrenBtn[1]);
-    expect(
-      document.querySelectorAll('.bx--breadcrumb-item')[1].textContent
-    ).toBe('Georgia');
+    expect(document.querySelectorAll(breadcrumbClass)[1].textContent).toBe(
+      'Georgia'
+    );
   });
 
   it('handles multi select submit', () => {
@@ -341,7 +342,7 @@ describe(componentName, () => {
     const dropdown = document.querySelector('#add-select-modifier-1 button');
     fireEvent.click(dropdown);
     const modifierOpts = document.querySelectorAll(
-      '#add-select-modifier-1 .bx--list-box__menu-item'
+      `#add-select-modifier-1 .${carbon.prefix}--list-box__menu-item`
     );
     fireEvent.click(modifierOpts[1]);
     fireEvent.click(opt2);
@@ -419,7 +420,7 @@ describe(componentName, () => {
     fireEvent.click(screen.getByText('default'));
     fireEvent.click(screen.getByText('Apply'));
     expect(screen.getByText('tag: default'));
-    const closeIcon = document.querySelector('.bx--tag button');
+    const closeIcon = document.querySelector(`.${carbon.prefix}--tag button`);
     fireEvent.click(closeIcon);
     expect(screen.queryByText('tag: default')).toBeNull();
   });

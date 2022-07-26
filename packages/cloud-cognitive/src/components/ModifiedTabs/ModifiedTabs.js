@@ -33,6 +33,7 @@ export let ModifiedTabs = forwardRef(
       newTabContent = defaults.newTabContent,
       onNewTab = defaults.onNewTab,
       onCloseTab = defaults.onCloseTab,
+      tabListAriaLabel,
     },
     ref
   ) => {
@@ -62,7 +63,7 @@ export let ModifiedTabs = forwardRef(
     return (
       <div className={cx(blockClass, className)} ref={localRef}>
         <Tabs className="modified-tabs">
-          <TabList aria-label="Modified tab list temp aria label">
+          <TabList aria-label={tabListAriaLabel}>
             {tabs.map((tab) => (
               <Tab key={tab.id}>
                 <ModifiedTabLabelWithClose
@@ -85,11 +86,15 @@ export let ModifiedTabs = forwardRef(
           <TabPanels>
             {tabs.map((tab) => (
               <TabPanel key={tab.id} id={tab.id}>
-                <div className="some-content">{tab.content?.()}</div>
+                <div className={`${blockClass}__tab-content`}>
+                  {tab.content?.()}
+                </div>
               </TabPanel>
             ))}
             <TabPanel>
-              <div className="some-content">{newTabContent}</div>
+              <div className={`${blockClass}__tab-content`}>
+                {newTabContent}
+              </div>
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -122,6 +127,10 @@ ModifiedTabs.propTypes = {
    * New tab content
    */
   onNewTab: PropTypes.func,
+  /**
+   * Tab list aria label, passed to Carbon TabList
+   */
+  tabListAriaLabel: PropTypes.string.isRequired,
   /**
    * Tabs array containing tab object { id, label, content }
    */

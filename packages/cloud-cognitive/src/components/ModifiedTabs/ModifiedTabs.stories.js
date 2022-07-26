@@ -92,6 +92,7 @@ export const Default = prepareStory(Template, {
   args: {
     newTabLabel: 'Add new tab',
     newTabContent: <div>Your new tab is being prepared...</div>,
+    tabListAriaLabel: 'Modified tab list example',
   },
 });
 
@@ -189,6 +190,7 @@ export const WithExternalSavePrompt = prepareStory(
       props: {
         newTabLabel: 'Add new tab',
         newTabContent: <div>Your new tab is being prepared...</div>,
+        tabListAriaLabel: 'Modified tab list example',
       },
     },
   }

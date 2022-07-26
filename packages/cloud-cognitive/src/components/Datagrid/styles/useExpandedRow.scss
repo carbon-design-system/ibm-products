@@ -8,6 +8,6 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use './variables';
 
-.#{$block-class}__expanded-row-content {
+.#{variables.$block-class}__expanded-row-content {
   padding: $spacing-05 $spacing-05 $spacing-06 $spacing-10;
 }

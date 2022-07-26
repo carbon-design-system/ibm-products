@@ -174,7 +174,7 @@ AddSelectFilter.propTypes = {
   handleSearch: PropTypes.func,
   hasFiltersApplied: PropTypes.bool,
   iconDescription: PropTypes.string,
-  inputLabel: PropTypes.string,
+  inputLabel: PropTypes.string.isRequired,
   inputPlaceholder: PropTypes.string,
   multi: PropTypes.bool,
   placeholder: PropTypes.string,

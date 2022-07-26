@@ -129,7 +129,7 @@ export const TearsheetShell = React.forwardRef(
       if (
         position === depth &&
         modalRef.current &&
-        !modalRef.current.innerModal.current.contains(document.activeElement)
+        !modalRef.current.contains(document.activeElement)
       ) {
         handleStackChange.claimFocus();
       }
@@ -138,10 +138,8 @@ export const TearsheetShell = React.forwardRef(
     // Callback to give the tearsheet the opportunity to claim focus
     handleStackChange.claimFocus = function () {
       const element = selectorPrimaryFocus
-        ? modalRef.current.innerModal.current.querySelector(
-            selectorPrimaryFocus
-          )
-        : modalRef.current.startSentinel.current;
+        ? modalRef.current.querySelector(selectorPrimaryFocus)
+        : modalRef.current;
       setTimeout(() => element.focus(), 1);
     };
 

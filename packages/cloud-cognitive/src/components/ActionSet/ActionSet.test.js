@@ -126,9 +126,9 @@ describe(componentName, () => {
 
   it('renders a loading button', () => {
     render(<ActionSet actions={[{ ...actionS, loading: true }]} />);
-    const loader = 'Active loading indicator';
+    const loader = 'loading';
     expect(screen.getByRole('button').textContent).toEqual(
-      `${labelS}${loader}${loader}`
+      `${labelS}${loader}`
     );
   });
 

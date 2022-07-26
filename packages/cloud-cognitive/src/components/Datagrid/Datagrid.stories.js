@@ -572,7 +572,6 @@ export const RightAlignedColumns = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-
 export const CenterAlignedColumns = () => {
   const columns = React.useMemo(
     () => [

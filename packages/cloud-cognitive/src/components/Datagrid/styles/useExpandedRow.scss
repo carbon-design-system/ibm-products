@@ -5,9 +5,3 @@
 * US Government Users Restricted Rights - Use, duplication or disclosure
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
-
-@import './variables';
-
-.#{$block-class}__expanded-row-content {
-  padding: $spacing-05 $spacing-05 $spacing-06 $spacing-10;
-}

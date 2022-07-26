@@ -591,14 +591,14 @@ export const CenterAlignedColumns = () => {
     ],
     []
 
-const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useColumnCenterAlign
-  );
+  const [data] = useState(makeData(10));
+    const datagridState = useDatagrid(
+      {
+        columns,
+        data,
+      },
+      useColumnCenterAlign
+    );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
 };

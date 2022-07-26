@@ -25,18 +25,21 @@ const DatagridActionsBatchActions = (datagridState) => {
     setGlobalFilter,
     RowSizeDropdown,
     rowSizeDropdownProps,
+    downloadCsv,
+    refreshColumns,
+    leftPanelClick,
   } = datagridState;
-  const downloadCsv = () => {
+  /*const downloadCsv = () => {
     alert('Downloading...');
-  };
+  };*/
   const { TableToolbarContent, TableToolbarSearch } = DataTable;
 
-  const refreshColumns = () => {
+  /*const refreshColumns = () => {
     alert('refreshing...');
   };
   const leftPanelClick = () => {
     alert('open/close left panel...');
-  };
+  };*/
   const searchForAColumn = 'Search';
   const isNothingSelected = selectedFlatRows.length === 0;
 

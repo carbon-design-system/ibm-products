@@ -683,63 +683,6 @@ const DatagridActions = (datagridState) => {
   );
 };
 
-/*const DatagridActionsBatchActions = (datagridState) => {
-  const {
-    selectedFlatRows,
-    setGlobalFilter,
-    RowSizeDropdown,
-    rowSizeDropdownProps,
-  } = datagridState;
-  const downloadCsv = () => {
-    alert('Downloading...');
-  };
-  const { TableToolbarContent, TableToolbarSearch } = DataTable;
-
-  const refreshColumns = () => {
-    alert('refreshing...');
-  };
-  const leftPanelClick = () => {
-    alert('open/close left panel...');
-  };
-  const searchForAColumn = 'Search';
-  const isNothingSelected = selectedFlatRows.length === 0;
-  /*const style = {
-    'button:nth-child(1) > span:nth-child(1)': {
-      bottom: '-37px',
-    },*/
-
-/*return (
-    isNothingSelected && (
-      <React.Fragment>
-        <OverflowMenu>
-          <OverflowMenuItem
-            itemText="Left Panel"
-            onClick={leftPanelClick}
-          ></OverflowMenuItem>
-          <OverflowMenuItem
-            itemText="Download CSV"
-            onClick={downloadCsv}
-          ></OverflowMenuItem>
-          <OverflowMenuItem
-            itemText="Refresh Columns"
-            onClick={refreshColumns}
-          ></OverflowMenuItem>
-          <RowSizeDropdown {...rowSizeDropdownProps}></RowSizeDropdown>
-        </OverflowMenu>
-        <TableToolbarContent>
-          <TableToolbarSearch
-            size="xl"
-            id="columnSearch"
-            persistent
-            placeHolderText={searchForAColumn}
-            onChange={(e) => setGlobalFilter(e.target.value)}
-          />
-        </TableToolbarContent>
-      </React.Fragment>
-    )
-  );
-};*/
-
 export const DatagridActionsToolbar = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));

@@ -46,7 +46,7 @@ export const EmptyStateContent = ({ action, link, size, subtitle, title }) => {
           kind={action.kind || 'tertiary'}
           onClick={action.onClick}
           renderIcon={action.renderIcon || null}
-          size='sm'
+          size={'sm'}
         >
           {action.text}
         </Button>

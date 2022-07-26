@@ -6,8 +6,7 @@
 //
 
 import React from 'react';
-import { Tag, Accordion, AccordionItem, Button } from '@carbon/react';
-import { SubtractAlt } from '@carbon/icons-react';
+import { Tag, Accordion, AccordionItem } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
@@ -27,17 +26,10 @@ export let AddSelectSidebar = ({
   multiSelection,
   noSelectionDescription,
   noSelectionTitle,
-  removeIconDescription,
   setDisplayMetaPanel,
-  setMultiSelection,
 }) => {
   const hasModifiers = modifiers?.options?.length > 0;
   const hasSelections = multiSelection.length > 0;
-
-  const handleItemRemove = (id) => {
-    const newSelections = multiSelection.filter((v) => v !== id);
-    setMultiSelection(newSelections);
-  };
 
   const getNewItem = (item) => {
     // certain properties should not be displayed in the sidebar
@@ -71,15 +63,6 @@ export let AddSelectSidebar = ({
           }
         </div>
       )}
-      <Button
-        renderIcon={(props) => <SubtractAlt size={32} {...props} />}
-        iconDescription={removeIconDescription}
-        hasIconOnly
-        onClick={() => handleItemRemove(item.id)}
-        kind="ghost"
-        className={`${blockClass}-item-remove-button`}
-        size="sm"
-      />
     </div>
   );
 
@@ -139,9 +122,7 @@ AddSelectSidebar.propTypes = {
   multiSelection: PropTypes.array,
   noSelectionDescription: PropTypes.string,
   noSelectionTitle: PropTypes.string,
-  removeIconDescription: PropTypes.string,
   setDisplayMetaPanel: PropTypes.func,
-  setMultiSelection: PropTypes.func,
 };
 
 AddSelectSidebar.displayName = componentName;

@@ -39,7 +39,11 @@ module.exports = {
       true,
       { severity: 'error', acceptUndefinedVariables: true },
     ],
-    'carbon/motion-token-use': [
+    'carbon/motion-duration-use': [
+      true,
+      { severity: 'error', acceptUndefinedVariables: true },
+    ],
+    'carbon/motion-easing-use': [
       true,
       { severity: 'error', acceptUndefinedVariables: true },
     ],

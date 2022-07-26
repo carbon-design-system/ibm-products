@@ -74,8 +74,8 @@ $button--icon__transition__timing-function: $timing-function;
   background-color: inherit;
   color: $icon-01;
   fill: currentColor;
-  transition: $transition-duration $button--icon__transition__timing-function
-    background-color;
+  transition: background-color $transition-duration
+    $button--icon__transition__timing-function;
 
   &:hover,
   &:focus {

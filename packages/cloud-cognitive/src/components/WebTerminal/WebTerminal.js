@@ -18,6 +18,8 @@ import { Close, Help } from '@carbon/icons-react';
 import { Button, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { moderate02 } from '@carbon/motion';
 
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
+
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'WebTerminal';
 const blockClass = `${pkg.prefix}--web-terminal`;
@@ -91,14 +93,15 @@ export let WebTerminal = React.forwardRef(
 
     return shouldRender ? (
       <div
-        {
+        {...{
           // Pass through any other property values as HTML attributes.
-          ...rest
-        }
+          ...rest,
+          ...getDevtoolsProps(componentName),
+        }}
         ref={ref}
         className={cx([
-          className,
           blockClass,
+          className,
           {
             [`${blockClass}--open`]: open,
             [`${blockClass}--closed`]: !open,
@@ -113,9 +116,9 @@ export let WebTerminal = React.forwardRef(
           <div className={`${blockClass}__actions`}>
             {showDocumentationLinks && (
               <OverflowMenu
-                ariaLabel="description dropdown"
                 renderIcon={(props) => <Help size={16} {...props} />}
                 iconDescription={documentationLinksIconDescription}
+                ariaLabel={documentationLinksIconDescription}
                 menuOptionsClass={`${blockClass}__documentation-overflow`}
                 size="lg"
               >

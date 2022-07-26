@@ -155,13 +155,10 @@
   .#{c4p-settings.$carbon-prefix}--data-table-content {
     width: 100%;
     height: 100%;
-    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
-    overflow-x: unset;
+    overflow-x: auto;
   }
 
   .#{$block-class}__table-simple {
-    display: flex;
-    overflow: auto;
     max-height: 100%;
     flex-direction: column;
   }
@@ -392,4 +389,17 @@
   height: 3rem;
   align-items: center;
   justify-content: center;
+}
+
+.#{c4p-settings.$carbon-prefix}--data-table--selected {
+  position: relative;
+}
+
+.#{c4p-settings.$carbon-prefix}--data-table--selected::before {
+  position: absolute;
+  left: 0;
+  width: $spacing-02;
+  height: 100%;
+  background-color: $background-brand;
+  content: '';
 }

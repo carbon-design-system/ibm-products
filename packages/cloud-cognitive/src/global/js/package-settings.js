@@ -64,6 +64,9 @@ const defaults = {
     CancelableTextEdit: false,
     DataSpreadsheet: false,
     Datagrid: false,
+    EditTearsheet: false,
+    EditTearsheetNarrow: false,
+    EditFullPage: false,
     /* new component flags here - comment used by generate CLI */
   },
 

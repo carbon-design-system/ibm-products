@@ -3731,6 +3731,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
   line-height: var(--cds-productive-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
+  min-height: var(--cds-spacing-08, 2.5rem);
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

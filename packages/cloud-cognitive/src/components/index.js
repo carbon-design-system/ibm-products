@@ -50,4 +50,23 @@ export { EditSidePanel } from './EditSidePanel';
 export { OptionsTile } from './OptionsTile';
 export { InlineEdit } from './InlineEdit';
 export { DataSpreadsheet } from './DataSpreadsheet';
-export { Datagrid } from './Datagrid';
+export {
+  Datagrid,
+  useDatagrid,
+  useInfiniteScroll,
+  useNestedRows,
+  useSelectRows,
+  useExpandedRow,
+  useOnRowClick,
+  useSortableColumns,
+  useRowIsMouseOver,
+  useColumnRightAlign,
+  useDisableSelectRows,
+  useStickyColumn,
+  useActionsColumn,
+  useCustomizeColumns,
+  useSelectAllWithToggle,
+} from './Datagrid';
+export { EditTearsheet } from './EditTearsheet';
+export { EditTearsheetNarrow } from './EditTearsheetNarrow';
+export { EditFullPage } from './EditFullPage';

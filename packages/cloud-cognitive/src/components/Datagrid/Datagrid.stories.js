@@ -9,8 +9,8 @@
 import React, { useState, useEffect } from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
-import namor from 'namor';
 import { useColumnOrder } from 'react-table';
+import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
@@ -35,16 +35,22 @@ import {
   useDisableSelectRows,
   useCustomizeColumns,
   useSelectAllWithToggle,
+  useColumnCenterAlign,
+  useStickyColumn,
+  useActionsColumn,
 } from '.';
+
 import {
-  /*StickyActionsColumn,*/ CustomizeColumnStory,
+  CustomizeColumnStory,
   RowSizeDropdownStory,
   SelectAllWitHToggle,
   LeftPanelStory,
 } from './Datagrid.stories';
 import mdx from './Datagrid.mdx';
+import cx from 'classnames';
 
 import styles from './_storybook-styles.scss';
+import { SidePanel } from '../SidePanel';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -74,63 +80,6 @@ const Wrapper = ({ children }) => (
     {children}
   </div>
 );
-
-const range = (len) => {
-  const arr = [];
-  for (let i = 0; i < len; i++) {
-    arr.push(i);
-  }
-  return arr;
-};
-
-const newPerson = () => {
-  const statusChance = Math.random();
-  return {
-    firstName: namor.generate({ words: 1, numbers: 0 }),
-    lastName: namor.generate({ words: 1, numbers: 0 }),
-    age: Math.floor(Math.random() * 30),
-    visits: Math.floor(Math.random() * 100),
-    progress: Math.floor(Math.random() * 100),
-    someone1: namor.generate({ words: 1, numbers: 0 }),
-    someone2: namor.generate({ words: 1, numbers: 0 }),
-    someone3: namor.generate({ words: 1, numbers: 0 }),
-    someone4: namor.generate({ words: 1, numbers: 0 }),
-    someone5: namor.generate({ words: 1, numbers: 0 }),
-    someone6: namor.generate({ words: 1, numbers: 0 }),
-    someone7: namor.generate({ words: 1, numbers: 0 }),
-    someone8: namor.generate({ words: 1, numbers: 0 }),
-    someone9: namor.generate({ words: 1, numbers: 0 }),
-    someone10: namor.generate({ words: 1, numbers: 0 }),
-    someone11: namor.generate({ words: 1, numbers: 0 }),
-    someone12: namor.generate({ words: 1, numbers: 0 }),
-    someone13: namor.generate({ words: 1, numbers: 0 }),
-    someone14: namor.generate({ words: 1, numbers: 0 }),
-    someone15: namor.generate({ words: 1, numbers: 0 }),
-    someone16: namor.generate({ words: 1, numbers: 0 }),
-    someone17: namor.generate({ words: 1, numbers: 0 }),
-    someone18: namor.generate({ words: 1, numbers: 0 }),
-    someone19: namor.generate({ words: 1, numbers: 0 }),
-    someone20: namor.generate({ words: 1, numbers: 0 }),
-    status:
-      statusChance > 0.66
-        ? 'relationship'
-        : statusChance > 0.33
-        ? 'complicated'
-        : 'single',
-  };
-};
-
-export const makeData = (...lens) => {
-  const makeDataLevel = (depth = 0) => {
-    const len = lens[depth];
-    return range(len).map(() => ({
-      ...newPerson(),
-      subRows: lens[depth + 1] ? makeDataLevel(depth + 1) : undefined,
-    }));
-  };
-
-  return makeDataLevel();
-};
 
 const defaultHeader = [
   {
@@ -361,7 +310,6 @@ export const NestedRows = () => {
 };
 export const ExpandedRow = () => {
   const expansionRenderer = ({ row }) => <div>Content for {row.id}</div>;
-
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
@@ -415,16 +363,88 @@ export const NestedTable = () => {
 export const ClickableRow = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+  const [openSidePanel, setOpenSidePanel] = useState(false);
+  const [rowData, setRowData] = useState({});
   const datagridState = useDatagrid(
     {
       columns,
       data,
-      onRowClick: (row) => alert(`Clicked ${row.id}`),
+      onRowClick: (row) => {
+        setOpenSidePanel(true);
+        setRowData(row);
+      },
     },
     useOnRowClick
   );
+  return (
+    <div
+      className={cx(
+        openSidePanel
+          ? `page-content-wrapper side-panel-open`
+          : 'page-content-wrapper'
+      )}
+    >
+      <Datagrid datagridState={{ ...datagridState }} />
+      <SidePanel
+        selectorPageContent={true && '.page-content-wrapper'} // Only if SlideIn
+        open={openSidePanel}
+        onRequestClose={() => setOpenSidePanel(false)}
+        size={'sm'}
+        title={'Title'}
+        slideIn
+      >
+        <DataTableSidePanelContent rowData={rowData && rowData.original} />
+      </SidePanel>
+    </div>
+  );
+};
 
-  return <Datagrid datagridState={{ ...datagridState }} />;
+const DataTableSidePanelContent = (selectedRowValues) => {
+  const { rowData } = selectedRowValues;
+
+  const SidePanelSectionContent = ({ rowData, columns, sectionTitle }) => {
+    const finalData = columns.map((item) => Object.entries(rowData)[item]);
+    return (
+      <div className={`${blockClass}__side-panel-sections`}>
+        <h5 className={`${blockClass}__side-panel-section-header`}>
+          {sectionTitle}
+        </h5>
+        {finalData.map(([label, value], index) => {
+          return (
+            <div
+              key={index}
+              className={`${blockClass}__side-panel-section-inner`}
+            >
+              <div className={`${blockClass}__side-panel-label-text`}>
+                {label} :
+              </div>
+              <div className={`${blockClass}__side-panel-value`}>{value}</div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  return (
+    <div className={`${blockClass}__side-panel-content`}>
+      <SidePanelSectionContent
+        sectionTitle="Section title"
+        rowData={rowData && rowData}
+        columns={[0]}
+      />
+      <SidePanelSectionContent
+        sectionTitle="Personal details"
+        rowData={rowData && rowData}
+        columns={[1, 2, 3, 4]}
+      />
+      <SidePanelSectionContent
+        sectionTitle="Section title"
+        rowData={rowData && rowData}
+        columns={[5, 6, 7, 8, 9, 10, 11, 12]}
+      />
+    </div>
+  );
 };
 
 export const IsHoverOnRow = () => {
@@ -481,7 +501,7 @@ export const RadioSelect = () => {
       data,
       hideSelectAll: true,
       radio: true,
-      onRadioSelect: (row) => console.log(row),
+      onRadioSelect: (row) => console.log(`Row clicked: ${row.id}`),
       initialState: {
         selectedRowIds: {
           3: true,
@@ -552,59 +572,36 @@ export const RightAlignedColumns = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-//TODO: Potentially remove this
-export const RowSizeDropdownMenuItem = () => {
+
+export const CenterAlignedColumns = () => {
   const columns = React.useMemo(
     () => [
       ...defaultHeader.slice(0, 3),
       {
-        Header: 'Different cell content',
-        id: 'rowSizeDemo-cell',
-        disableSortBy: true,
-        Cell: ({ rowSize }) => rowSize,
+        Header: 'Age',
+        accessor: 'age',
+        centerAlignedColumn: true,
+      },
+
+      {
+        Header: 'Visit',
+        accessor: 'visits',
+        centerAlignedColumn: true,
       },
     ],
     []
-  );
-  const [data] = useState(makeData(10));
+
+const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
     {
       columns,
       data,
-      rowSize: 'xs',
-      rowSizes: [
-        {
-          value: 'xl',
-          labelText: 'More than super',
-        },
-        {
-          value: 'lg',
-          labelText: 'Super tall row',
-        },
-        {
-          value: 'md',
-        },
-        {
-          value: 'xs',
-          labelText: 'Teeny tiny row',
-        },
-      ],
-      onRowSizeChange: (value) => {
-        console.log('row size changed to: ', value);
-      },
-      DatagridActions,
-      DatagridBatchActions,
     },
-    useSelectRows
+    useColumnCenterAlign
   );
 
-  return (
-    <Wrapper>
-      <Datagrid datagridState={{ ...datagridState }} />
-    </Wrapper>
-  );
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
-RowSizeDropdownMenuItem.story = RowSizeDropdownMenuItem;
 
 const DatagridActions = (datagridState) => {
   const {
@@ -886,18 +883,24 @@ export const RowSizeDropdown = () => {
 };
 RowSizeDropdown.story = RowSizeDropdownStory;
 
+import { pkg } from '../../settings';
+
+const blockClass = `${pkg.prefix}--datagrid`;
+
 export const LeftPanel = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid({
-    columns,
-    data,
     leftPanel: {
       isOpen: true, // this toggling will happen from datagridActions.
       panelContent: (
-        <div>Panel content will go here along with any button interactions</div>
+        <div className={`${blockClass}__panel-content`}>
+          Panel content will go here along with any button interactions
+        </div>
       ),
     },
+    columns,
+    data,
     DatagridActions,
     DatagridBatchActions,
   });
@@ -1038,19 +1041,6 @@ NestedRows.story = {
   },
 };
 
-const newPersonWithTwoLines = () => {
-  return {
-    firstName: (
-      <>
-        <div>{namor.generate({ words: 1, numbers: 0 })}</div>
-        <div>{namor.generate({ words: 1, numbers: 0 })}</div>
-      </>
-    ),
-    lastName: namor.generate({ words: 1, numbers: 0 }),
-    age: Math.floor(Math.random() * 30),
-  };
-};
-
 const makeDataWithTwoLines = (length) =>
   range(length).map(() => newPersonWithTwoLines());
 
@@ -1085,4 +1075,71 @@ export const TopAlignment = () => {
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
+export const StickyActionsColumn = () => {
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader,
+      {
+        Header: '',
+        accessor: 'actions',
+        sticky: 'right',
+        width: 60,
+        isAction: true,
+      },
+    ],
+    []
+  );
+  const [data] = useState(makeData(10));
+  const [msg, setMsg] = useState('click action menu');
+  const onActionClick = (actionId, row) => {
+    const { original } = row;
+    setMsg(
+      `Clicked [${actionId}] on row: <${original.firstName} ${original.lastName}>`
+    );
+  };
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      rowActions: [
+        {
+          id: 'edit',
+          itemText: 'Edit',
+          onClick: onActionClick,
+        },
+        {
+          id: 'vote',
+          itemText: 'Vote',
+          onClick: onActionClick,
+          shouldHideMenuItem: (row) => row.original.age <= 18,
+        },
+        {
+          id: 'retire',
+          itemText: 'Retire',
+          onClick: onActionClick,
+          disabled: false,
+          shouldDisableMenuItem: (row) => row.original.age <= 60,
+        },
+        {
+          id: 'delete',
+          itemText: 'Delete',
+          hasDivider: true,
+          isDelete: true,
+          onClick: onActionClick,
+        },
+      ],
+    },
+    useStickyColumn,
+    useActionsColumn
+  );
+  return (
+    <Wrapper>
+      <h3>{msg}</h3>
+      <Datagrid datagridState={{ ...datagridState }} />
+      <p>More details documentation check the Notes section below</p>
+    </Wrapper>
+  );
 };

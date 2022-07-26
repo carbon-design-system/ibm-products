@@ -20,3 +20,4 @@ export { default as useStickyColumn } from './useStickyColumn';
 export { default as useActionsColumn } from './useActionsColumn';
 export { default as useCustomizeColumns } from './useCustomizeColumns';
 export { default as useSelectAllWithToggle } from './useSelectAllToggle';
+export { default as useColumnCenterAlign } from './useColumnCenterAlign';

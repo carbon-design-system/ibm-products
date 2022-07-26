@@ -61,7 +61,7 @@
   }
   .#{$block-class}__side-nav-opening,
   .#{$block-class}__progress-indicator-opening {
-    // stylelint-disable-next-line carbon/motion-token-use
+    // stylelint-disable-next-line carbon/motion-easing-use
     animation: influencer-menu-entrance $duration--moderate-02 1;
     animation-fill-mode: forwards;
     @include carbon--motion(entrance, productive);
@@ -69,7 +69,7 @@
 
   .#{$block-class}__side-nav-closing,
   .#{$block-class}__progress-indicator-closing {
-    // stylelint-disable-next-line carbon/motion-token-use
+    // stylelint-disable-next-line carbon/motion-easing-use
     animation: influencer-menu-exit $duration--moderate-02 1;
     animation-fill-mode: forwards;
     @include carbon--motion(exit, productive);

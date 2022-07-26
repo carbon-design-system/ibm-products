@@ -1377,10 +1377,10 @@ Map {
                     "type": "string",
                   },
                   Object {
-                    "type": "func",
+                    "type": "bool",
                   },
                   Object {
-                    "type": "bool",
+                    "type": "func",
                   },
                 ],
               ],
@@ -1415,6 +1415,9 @@ Map {
                   },
                   Object {
                     "type": "string",
+                  },
+                  Object {
+                    "type": "bool",
                   },
                   Object {
                     "type": "func",
@@ -3147,6 +3150,21 @@ Map {
       "children": Object {
         "isRequired": true,
         "type": "node",
+      },
+      "dense": Object {
+        "type": "bool",
+      },
+      "mode": Object {
+        "args": Array [
+          Array [
+            "stacked",
+            "toggle",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "short": Object {
+        "type": "bool",
       },
     },
   },
@@ -5937,6 +5955,9 @@ Map {
         "onChange": Object {
           "type": "func",
         },
+        "onInputValueChange": Object {
+          "type": "func",
+        },
         "onMenuChange": Object {
           "type": "func",
         },
@@ -7196,10 +7217,10 @@ Map {
                     "type": "string",
                   },
                   Object {
-                    "type": "func",
+                    "type": "bool",
                   },
                   Object {
-                    "type": "bool",
+                    "type": "func",
                   },
                 ],
               ],
@@ -7234,6 +7255,9 @@ Map {
                   },
                   Object {
                     "type": "string",
+                  },
+                  Object {
+                    "type": "bool",
                   },
                   Object {
                     "type": "func",
@@ -7518,10 +7542,10 @@ Map {
                     "type": "string",
                   },
                   Object {
-                    "type": "func",
+                    "type": "bool",
                   },
                   Object {
-                    "type": "bool",
+                    "type": "func",
                   },
                 ],
               ],
@@ -7556,6 +7580,9 @@ Map {
                   },
                   Object {
                     "type": "string",
+                  },
+                  Object {
+                    "type": "bool",
                   },
                   Object {
                     "type": "func",
@@ -14805,6 +14832,9 @@ Map {
         "type": "string",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onInputValueChange": Object {
         "type": "func",
       },
       "onMenuChange": Object {

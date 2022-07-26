@@ -1,7 +1,7 @@
 {
   "name": "@carbon/storybook-addon-theme",
   "description": "Carbon theme switcher for Storybook",
-  "version": "0.22.19",
+  "version": "0.22.21",
   "license": "Apache-2.0",
   "main": "dist/react.js",
   "repository": {
@@ -42,21 +42,21 @@
     "vue": "*"
   },
   "dependencies": {
-    "@storybook/addons": "6.4.22",
-    "@storybook/api": "6.4.22",
-    "@storybook/client-api": "6.4.22",
-    "@storybook/client-logger": "6.4.22",
-    "@storybook/components": "6.4.22",
-    "@storybook/core-events": "6.4.22",
-    "@storybook/theming": "6.4.22",
-    "core-js": "^3.22.5",
+    "@storybook/addons": "6.5.9",
+    "@storybook/api": "6.5.9",
+    "@storybook/client-api": "6.5.9",
+    "@storybook/client-logger": "6.5.9",
+    "@storybook/components": "6.5.9",
+    "@storybook/core-events": "6.5.9",
+    "@storybook/theming": "6.5.9",
+    "core-js": "^3.23.4",
     "global": "^4.4.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.10",
-    "@babel/core": "^7.17.10",
-    "@babel/preset-react": "^7.16.7",
-    "npm-check-updates": "^12.5.11",
+    "@babel/cli": "^7.18.6",
+    "@babel/core": "^7.18.6",
+    "@babel/preset-react": "^7.18.6",
+    "npm-check-updates": "^15.3.3",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2"
   }

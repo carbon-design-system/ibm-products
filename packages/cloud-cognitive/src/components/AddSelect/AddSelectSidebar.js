@@ -6,58 +6,63 @@
 //
 
 import React from 'react';
-import { Tag, Accordion, AccordionItem, Button } from 'carbon-components-react';
-import { SubtractAlt32 } from '@carbon/icons-react';
+import { Tag, Accordion, AccordionItem } from 'carbon-components-react';
 import PropTypes from 'prop-types';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';
 import { AddSelectMetaPanel } from './AddSelectMetaPanel';
+
+const blockClass = `${pkg.prefix}--add-select__sidebar`;
 const componentName = 'AddSelectSidebar';
 
 export let AddSelectSidebar = ({
+  appliedModifiers,
   closeIconDescription,
   displayMetalPanel,
   influencerTitle,
   items,
   metaPanelTitle,
+  modifiers,
   multiSelection,
   noSelectionDescription,
   noSelectionTitle,
-  removeIconDescription,
   setDisplayMetaPanel,
-  setMultiSelection,
 }) => {
-  const blockClass = `${pkg.prefix}--add-select__sidebar`;
+  const hasModifiers = modifiers?.options?.length > 0;
+  const hasSelections = multiSelection.length > 0;
 
-  const handleItemRemove = (id) => {
-    const newSelections = multiSelection.filter((v) => v !== id);
-    setMultiSelection(newSelections);
-  };
-
-  const sidebarItems = multiSelection.reduce((acc, cur) => {
-    const selectedItem = items.find((item) => item.id === cur);
+  const getNewItem = (item) => {
     // certain properties should not be displayed in the sidebar
     // eslint-disable-next-line no-unused-vars
-    const { meta, icon, avatar, ...newItem } = selectedItem;
-    acc.push(newItem);
-    return acc;
-  }, []);
+    const { meta, icon, avatar, ...newItem } = item;
+    return newItem;
+  };
 
-  const getTitle = ({ title, subtitle, id }) => (
+  const sidebarItems = multiSelection.map((selectionId) => {
+    if (Array.isArray(items)) {
+      const selectedItem = items.find((item) => item.id === selectionId);
+      return getNewItem(selectedItem);
+    }
+    return getNewItem(items[selectionId]);
+  });
+
+  const getTitle = (item) => (
     <div className={`${blockClass}-accordion-title`}>
       <div className={`${blockClass}-selected-item`}>
-        <p className={`${blockClass}-selected-item-title`}>{title}</p>
-        <p className={`${blockClass}-selected-item-subtitle`}>{subtitle}</p>
+        <p className={`${blockClass}-selected-item-title`}>{item.title}</p>
+        <p className={`${blockClass}-selected-item-subtitle`}>
+          {item.subtitle}
+        </p>
       </div>
-      <Button
-        renderIcon={SubtractAlt32}
-        iconDescription={removeIconDescription}
-        hasIconOnly
-        onClick={() => handleItemRemove(id)}
-        kind="ghost"
-        className={`${blockClass}-item-remove-button`}
-        size="sm"
-      />
+      {hasModifiers && (
+        <div>
+          {
+            appliedModifiers.find((modifier) => modifier.id === item.id)[
+              modifiers.id
+            ]
+          }
+        </div>
+      )}
     </div>
   );
 
@@ -80,7 +85,7 @@ export let AddSelectSidebar = ({
           {multiSelection.length}
         </Tag>
       </div>
-      {multiSelection.length > 0 ? (
+      {hasSelections ? (
         <Accordion align="start">
           {sidebarItems.map((item) => (
             <AccordionItem title={getTitle(item)} key={item.id}>
@@ -107,17 +112,17 @@ export let AddSelectSidebar = ({
 };
 
 AddSelectSidebar.propTypes = {
+  appliedModifiers: PropTypes.array,
   closeIconDescription: PropTypes.string,
   displayMetalPanel: PropTypes.object,
   influencerTitle: PropTypes.string,
-  items: PropTypes.array,
+  items: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   metaPanelTitle: PropTypes.string,
+  modifiers: PropTypes.object,
   multiSelection: PropTypes.array,
   noSelectionDescription: PropTypes.string,
   noSelectionTitle: PropTypes.string,
-  removeIconDescription: PropTypes.string,
   setDisplayMetaPanel: PropTypes.func,
-  setMultiSelection: PropTypes.func,
 };
 
 AddSelectSidebar.displayName = componentName;

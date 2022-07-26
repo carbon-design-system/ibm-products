@@ -1,7 +1,7 @@
 // Standard imports.
 @import '../../global/styles/project-settings';
 
-$web-terminal-width: 36.5rem;
+$web-terminal-width: 40rem; // 640px
 $block-class: #{$pkg-prefix}--web-terminal;
 
 @keyframes web-terminal-entrance {
@@ -42,7 +42,8 @@ $block-class: #{$pkg-prefix}--web-terminal;
   position: fixed;
   top: $spacing-09;
   right: 0;
-  width: $web-terminal-width;
+  width: 100%;
+  max-width: $web-terminal-width;
   height: calc(100vh - #{$spacing-09});
   border-left: 1px solid $gray-90;
   color: $text-01;

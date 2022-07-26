@@ -32,6 +32,7 @@ const defaults = {
     HTTPError404: true,
     HTTPErrorOther: true,
     ImportModal: true,
+    InlineEdit: true,
     NotificationsPanel: true,
     NoDataEmptyState: true,
     NoTagsEmptyState: true,
@@ -61,9 +62,11 @@ const defaults = {
     WebTerminalContentWrapper: false,
     EditSidePanel: false,
     CancelableTextEdit: false,
-    InlineEdit: false,
     DataSpreadsheet: false,
     Datagrid: false,
+    EditTearsheet: false,
+    EditTearsheetNarrow: false,
+    EditFullPage: false,
     /* new component flags here - comment used by generate CLI */
   },
 

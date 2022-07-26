@@ -29,3 +29,56 @@ $block-class: #{$pkg-prefix}--datagrid;
     border-bottom: none;
   }
 }
+
+.#{$block-class}__panelContent {
+  display: inline;
+}
+
+/* only for storybook purpose. */
+.#{$pkg-prefix}--side-panel.#{$pkg-prefix}--side-panel__container {
+  top: 0;
+  height: 100%;
+}
+
+.page-content-wrapper.side-panel-open {
+  .#{$block-class} {
+    padding-right: $spacing-05;
+  }
+}
+
+.#{$block-class}__side-panel-sections {
+  padding-bottom: $spacing-06;
+}
+
+.#{$block-class}__side-panel-section-inner {
+  display: flex;
+  padding: $spacing-01 0;
+}
+
+.#{$block-class}__side-panel-label-text {
+  @include carbon--type-style('label-02');
+
+  color: $text-02;
+}
+
+.#{$block-class}__side-panel-value {
+  @include carbon--type-style('body-short-01');
+
+  padding-left: $spacing-03;
+}
+
+.#{$block-class}__side-panel-section-header {
+  @include carbon--type-style('productive-heading-01');
+
+  padding-bottom: $spacing-02;
+}
+
+.#{$pkg-prefix}--side-panel.#{$pkg-prefix}--side-panel__container.#{$pkg-prefix}--side-panel__container-right-placement {
+  border: 0 none;
+  box-shadow: none;
+}
+
+.#{$pkg-prefix}--side-panel__container
+  .#{$pkg-prefix}--side-panel__inner-content {
+  height: 100%;
+}

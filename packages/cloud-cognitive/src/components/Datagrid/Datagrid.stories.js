@@ -47,8 +47,10 @@ import {
   LeftPanelStory,
 } from './Datagrid.stories';
 import mdx from './Datagrid.mdx';
+import cx from 'classnames';
 
 import styles from './_storybook-styles.scss';
+import { SidePanel } from '../SidePanel';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -307,12 +309,14 @@ export const NestedRows = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 export const ExpandedRow = () => {
+  const expansionRenderer = ({ row }) => <div>Content for {row.id}</div>;
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
     {
       columns,
       data,
+      ExpandedRowContentComponent: expansionRenderer,
       expandedContentHeight: 95,
     },
     useExpandedRow
@@ -359,16 +363,88 @@ export const NestedTable = () => {
 export const ClickableRow = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+  const [openSidePanel, setOpenSidePanel] = useState(false);
+  const [rowData, setRowData] = useState({});
   const datagridState = useDatagrid(
     {
       columns,
       data,
-      onRowClick: (row) => alert(`Clicked ${row.id}`),
+      onRowClick: (row) => {
+        setOpenSidePanel(true);
+        setRowData(row);
+      },
     },
     useOnRowClick
   );
+  return (
+    <div
+      className={cx(
+        openSidePanel
+          ? `page-content-wrapper side-panel-open`
+          : 'page-content-wrapper'
+      )}
+    >
+      <Datagrid datagridState={{ ...datagridState }} />
+      <SidePanel
+        selectorPageContent={true && '.page-content-wrapper'} // Only if SlideIn
+        open={openSidePanel}
+        onRequestClose={() => setOpenSidePanel(false)}
+        size={'sm'}
+        title={'Title'}
+        slideIn
+      >
+        <DataTableSidePanelContent rowData={rowData && rowData.original} />
+      </SidePanel>
+    </div>
+  );
+};
 
-  return <Datagrid datagridState={{ ...datagridState }} />;
+const DataTableSidePanelContent = (selectedRowValues) => {
+  const { rowData } = selectedRowValues;
+
+  const SidePanelSectionContent = ({ rowData, columns, sectionTitle }) => {
+    const finalData = columns.map((item) => Object.entries(rowData)[item]);
+    return (
+      <div className={`${blockClass}__side-panel-sections`}>
+        <h5 className={`${blockClass}__side-panel-section-header`}>
+          {sectionTitle}
+        </h5>
+        {finalData.map(([label, value], index) => {
+          return (
+            <div
+              key={index}
+              className={`${blockClass}__side-panel-section-inner`}
+            >
+              <div className={`${blockClass}__side-panel-label-text`}>
+                {label} :
+              </div>
+              <div className={`${blockClass}__side-panel-value`}>{value}</div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  return (
+    <div className={`${blockClass}__side-panel-content`}>
+      <SidePanelSectionContent
+        sectionTitle="Section title"
+        rowData={rowData && rowData}
+        columns={[0]}
+      />
+      <SidePanelSectionContent
+        sectionTitle="Personal details"
+        rowData={rowData && rowData}
+        columns={[1, 2, 3, 4]}
+      />
+      <SidePanelSectionContent
+        sectionTitle="Section title"
+        rowData={rowData && rowData}
+        columns={[5, 6, 7, 8, 9, 10, 11, 12]}
+      />
+    </div>
+  );
 };
 
 export const IsHoverOnRow = () => {
@@ -425,7 +501,7 @@ export const RadioSelect = () => {
       data,
       hideSelectAll: true,
       radio: true,
-      onRadioSelect: (row) => console.log(row),
+      onRadioSelect: (row) => console.log(`Row clicked: ${row.id}`),
       initialState: {
         selectedRowIds: {
           3: true,

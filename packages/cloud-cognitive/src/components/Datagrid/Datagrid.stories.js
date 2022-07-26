@@ -309,12 +309,14 @@ export const NestedRows = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 export const ExpandedRow = () => {
+  const expansionRenderer = ({ row }) => <div>Content for {row.id}</div>;
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
     {
       columns,
       data,
+      ExpandedRowContentComponent: expansionRenderer,
       expandedContentHeight: 95,
     },
     useExpandedRow
@@ -499,7 +501,7 @@ export const RadioSelect = () => {
       data,
       hideSelectAll: true,
       radio: true,
-      onRadioSelect: (row) => console.log(row),
+      onRadioSelect: (row) => console.log(`Row clicked: ${row.id}`),
       initialState: {
         selectedRowIds: {
           3: true,

@@ -74,7 +74,8 @@ export let AddSelectColumn = ({
   const selectAllHandler = (checked) => {
     const itemIds = entries.map((item) => item.id);
     if (checked) {
-      setMultiSelection([...multiSelection, ...itemIds]);
+      const newSelections = [...new Set([...multiSelection, ...itemIds])];
+      setMultiSelection(newSelections);
     } else {
       const newItems = multiSelection.filter((i) => !itemIds.includes(i));
       setMultiSelection(newItems);

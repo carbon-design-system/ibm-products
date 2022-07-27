@@ -10,9 +10,6 @@
 @use '@carbon/styles/scss/components/button/tokens' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
-@use '@carbon/styles/scss/components/button';
-@use '@carbon/styles/scss/components/overflow-menu';
-
 $security--prefix: security;
 
 .#{$security--prefix}--combo-button {

@@ -16,10 +16,6 @@
 // SidePanel
 @use '../SidePanel/side-panel';
 
-// CreateSidePanel uses the following Carbon components:
-// Form
-@use '@carbon/react/scss/components/form';
-
 $create-side-panel-block-class: #{c4p-settings.$pkg-prefix}--create-side-panel;
 $side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 

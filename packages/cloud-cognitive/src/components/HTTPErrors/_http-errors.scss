@@ -12,10 +12,6 @@
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 
-// HTTP errors use the following Carbon components:
-// Link
-@use '@carbon/react/scss/components/link';
-
 $block-class: #{c4p-settings.$pkg-prefix}--http-errors;
 
 .#{$block-class} .#{$block-class}__content {

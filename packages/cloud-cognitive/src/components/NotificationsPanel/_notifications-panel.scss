@@ -19,12 +19,6 @@
 // NotificationsEmptyState
 @use '../EmptyStates/empty-state';
 
-// NotificationsPanel uses the following Carbon components:
-// Button, Link, Toggle
-@use '@carbon/react/scss/components/button';
-@use '@carbon/react/scss/components/link';
-@use '@carbon/react/scss/components/toggle';
-
 $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
 @keyframes fade-in {
   0% {

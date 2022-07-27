@@ -11,18 +11,6 @@
 @use '@carbon/styles/scss/type';
 @use '../../global/styles/project-settings' as c4p-settings;
 
-// Other Carbon settings.
-@use '@carbon/react/scss/grid';
-
-// CreateFullPage uses the following Carbon components:
-// Grid, Row, Column, Form, ProgressIndicator, ProgressStep, Toggle,
-// ComposedModal, ModalHeader, ModalBody, ModalFooter, Button
-@use '@carbon/react/scss/components/form';
-@use '@carbon/react/scss/components/progress-indicator';
-@use '@carbon/react/scss/components/toggle';
-@use '@carbon/react/scss/components/modal';
-@use '@carbon/react/scss/components/button';
-
 // CreateFullPage uses the following IBM Products components:
 // ActionSet, CreateInfluencer
 @use '../CreateInfluencer/index' as *;

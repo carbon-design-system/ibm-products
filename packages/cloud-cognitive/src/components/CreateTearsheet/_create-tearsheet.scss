@@ -21,10 +21,6 @@
 @use '../Tearsheet/tearsheet';
 @use '../CreateInfluencer';
 
-// CreateTearsheet uses the following Carbon components:
-// ProgressIndicator, ProgressStep
-@use '@carbon/react/scss/components/progress-indicator';
-
 @keyframes step-content-entrance {
   0% {
     opacity: 0;

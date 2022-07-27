@@ -9,10 +9,6 @@
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 
-// ExampleComponent uses the following Carbon components:
-// Button, ButtonSet
-@use '@carbon/react/scss/components/button';
-
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--example-component;
 

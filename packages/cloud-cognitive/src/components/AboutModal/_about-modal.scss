@@ -10,11 +10,6 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family' as *;
 
-// AboutModal uses the following Carbon components:
-// ComposedModal, ModalHeader, ModalFooter, ModalBody, Tabs, Tab
-@use '@carbon/react/scss/components/modal';
-@use '@carbon/react/scss/components/tabs';
-
 // Standard imports.
 @use '../../global/styles/project-settings' as c4p-settings;
 

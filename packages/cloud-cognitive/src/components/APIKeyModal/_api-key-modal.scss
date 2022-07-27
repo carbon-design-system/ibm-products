@@ -12,15 +12,6 @@
 @use '@carbon/styles/scss/type';
 @use '../../global/styles/project-settings' as c4p-settings;
 
-// APIKeyModal uses the following Carbon components:
-// ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput,
-// InlineLoading, Form, Button
-@use '@carbon/react/scss/components/modal';
-@use '@carbon/react/scss/components/text-input';
-@use '@carbon/react/scss/components/inline-loading';
-@use '@carbon/react/scss/components/form';
-@use '@carbon/react/scss/components/button';
-
 $block-class: #{c4p-settings.$pkg-prefix}--apikey-modal;
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-close {

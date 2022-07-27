@@ -10,11 +10,6 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
-// ActionBar uses the following Carbon components:
-// Button, OverflowMenu, OverflowMenuItem
-@use '@carbon/react/scss/components/button';
-@use '@carbon/react/scss/components/overflow-menu';
-
 $_block-class: #{c4p-settings.$pkg-prefix}--action-bar;
 $block-class-overflow-items: #{$_block-class}-overflow-items;
 

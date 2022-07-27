@@ -12,10 +12,6 @@
 // ButtonMenu, ButtonMenuItem
 @use '../ButtonMenu/button-menu';
 
-// ButtonSetWithOverflow uses the following Carbon components:
-// ButtonSet, Button
-@use '@carbon/react/scss/components/button';
-
 $_block-class: #{c4p-settings.$pkg-prefix}--button-set-with-overflow;
 
 @include block-wrap($_block-class) {

@@ -11,14 +11,6 @@
 @use '@carbon/styles/scss/type';
 @use '../../global/styles/project-settings' as c4p-settings;
 
-// ImportModal uses the following Carbon components:
-// ComposedModal, ModalHeader, ModalFooter, ModalBody,
-// FileUploaderDropContainer, FileUploaderItem, TextInput, Button
-@use '@carbon/react/scss/components/modal';
-@use '@carbon/react/scss/components/file-uploader';
-@use '@carbon/react/scss/components/text-input';
-@use '@carbon/react/scss/components/button';
-
 $block-class: #{c4p-settings.$pkg-prefix}--import-modal;
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-close {

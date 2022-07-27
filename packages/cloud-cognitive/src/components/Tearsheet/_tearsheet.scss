@@ -20,10 +20,6 @@
 // ActionSet
 @use '../ActionSet/action-set';
 
-// Tearsheets use the following Carbon components:
-// Button, ComposedModal, ModalHeader, ModalBody,
-@use '@carbon/react/scss/components/modal';
-
 $block-class: #{$pkg-prefix}--tearsheet;
 
 // stylelint-disable-next-line carbon/theme-token-use

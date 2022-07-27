@@ -11,9 +11,6 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins' as *;
 
-// EditSidePanel uses the following Carbon components:
-@use '@carbon/react/scss/components/form';
-
 // EditSidePanel uses the following IBM Products components:
 @use '../SidePanel/side-panel';
 

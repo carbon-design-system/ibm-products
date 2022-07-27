@@ -25,13 +25,6 @@
 @use '../TagSet/tag-set';
 @use '../ButtonSetWithOverflow/button-set-with-overflow';
 
-// PageHeader uses the following Carbon components:
-// BreadcrumbItem, Grid, Column, Row, Button, SkeletonText, Tag
-@use '@carbon/react/scss/components/breadcrumb';
-@use '@carbon/react/scss/components/button';
-@use '@carbon/react/scss/components/skeleton-styles';
-@use '@carbon/react/scss/components/tag';
-
 $block-class: #{$pkg-prefix}--page-header;
 $breadcrumb-block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
 

@@ -5,5 +5,6 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+// Index with minimal Carbon styles, only the styles of Carbon components used by our components
 @forward './global/styles/project-settings';
-@forward './components';
+@forward './components/index-with-carbon';

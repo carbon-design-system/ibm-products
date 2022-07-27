@@ -9,13 +9,8 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type' as *;
-@use '../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/motion' as *;
-
-// Card uses the following Carbon components:
-// Button, OverflowMenu, OverflowMenuItem
-@use '@carbon/react/scss/components/button';
-@use '@carbon/react/scss/components/overflow-menu';
+@use '../../global/styles/project-settings' as c4p-settings;
 
 $block-class: #{c4p-settings.$pkg-prefix}--card;
 

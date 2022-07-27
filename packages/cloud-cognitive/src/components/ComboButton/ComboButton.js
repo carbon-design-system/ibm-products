@@ -13,23 +13,25 @@ import {
 } from 'carbon-components-react';
 
 import classnames from 'classnames';
-import { node, shape, string } from 'prop-types';
+import { node, shape, string, oneOf } from 'prop-types';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import React, { Children, createElement, useRef, useState } from 'react';
 
 const blockClass = `${pkg.prefix}--combo-button`;
+const componentName = 'ComboButton';
 
 /**
  * The combo button consolidates similar actions, while exposing the most commonly used one.
  */
-const ComboButton = ({
+export let ComboButton = React.forwardRef((
   // The component props, in alphabetical order (for consistency).
-
+{
   children,
   className,
   overflowMenu,
+  size,
 
   // Collect any other property values passed in.
   ...rest
@@ -54,7 +56,7 @@ const ComboButton = ({
       className={classnames(blockClass, className)}
       data-floating-menu-container
     >
-      <Button {...primaryAction} />
+      <Button {...primaryAction} size={size} />
 
       {restActions.length > 0 && (
         <OverflowMenu
@@ -68,6 +70,7 @@ const ComboButton = ({
               className: `${blockClass}__overflow-menu__icon`,
             })
           }
+          size={size}
           flipped
         >
           {restActions.map(
@@ -89,6 +92,7 @@ const ComboButton = ({
                     )}
                   </>
                 }
+                size={size}
               />
             )
           )}
@@ -96,8 +100,10 @@ const ComboButton = ({
       )}
     </div>
   );
-};
+});
 
+ComboButton = pkg.checkComponentEnabled(ComboButton, componentName)
+ComboButton.displayName = componentName;
 ComboButton.propTypes = {
   /** Provide the contents of the `ComboButton` */
   children: node.isRequired,
@@ -107,6 +113,11 @@ ComboButton.propTypes = {
 
   /** Provide the [props of the `OverflowMenu`](https://react.carbondesignsystem.com/?path=/docs/overflowmenu) */
   overflowMenu: shape(OverflowMenu.propTypes),
+
+  /**
+   * Set the size of the combo button
+   */
+   size: oneOf(['sm', 'md', 'lg']),
 };
 
-export { ComboButton };
+//export { ComboButton };

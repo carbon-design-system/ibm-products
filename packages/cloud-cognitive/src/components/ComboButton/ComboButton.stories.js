@@ -16,19 +16,47 @@ import { ComboButton, ComboButtonItem } from '..';
 
 import styles from './_combo-button.scss';
 
+const defaultArgs = {
+  size: 'md',
+}
+
 export default {
   title: getStoryTitle(ComboButton.displayName),
   component: ComboButton,
+  argTypes: {
+    size: {
+      control: {
+        type: 'radio',
+      },
+      options: ['sm', 'md', 'lg'],
+    }
+  },
   subcomponents: {
     ComboButtonItem,
   },
   parameters: { styles },
 };
 
-export const Default = prepareStory(() => (
-  <ComboButton>
-    <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
-    <ComboButtonItem>ComboButtonItem 2</ComboButtonItem>
-    <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
-  </ComboButton>
-));
+const Template = (args) => {
+  return <ComboButton {...args}>
+          <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
+          <ComboButtonItem>ComboButtonItem 2</ComboButtonItem>
+          <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
+          <ComboButtonItem hasDivider={args.hasDivider}>ComboButtonItem 4</ComboButtonItem>
+          <ComboButtonItem>ComboButtonItem 5</ComboButtonItem>
+        </ComboButton>
+};
+
+export const Default = prepareStory(Template, {
+  args: {
+    ...defaultArgs,
+    hasDivider: false
+  }
+});
+
+export const WithDivider = prepareStory(Template, {
+  args: {
+    ...defaultArgs,
+    hasDivider: true
+  }
+});

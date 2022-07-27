@@ -41,6 +41,9 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
     verticalAlign = 'center',
     variableRowHeight,
     className,
+    gridTitle,
+    gridDescription,
+    useDenseHeader,
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
@@ -52,22 +55,33 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
           `${blockClass}__grid-container`,
           withVirtualScroll || fullHeightDatagrid
             ? `${blockClass}__full-height`
-            : ''
+            : '',
+          DatagridPagination ? `${blockClass}__with-pagination` : '',
+          useDenseHeader ? `${blockClass}__dense-header` : ''
         )}
+        title={gridTitle}
+        description={gridDescription}
       >
-        <Table
-          {...getTableProps()}
-          className={cx(
-            DatagridPagination ? `${blockClass}__with-pagination` : '',
-            withVirtualScroll ? '' : `${blockClass}__table-simple`,
-            `${blockClass}__vertical-align-${verticalAlign}`,
-            { [`${blockClass}__variable-row-height`]: variableRowHeight },
-            getTableProps()?.className
+        <DatagridToolbar {...datagridState} />
+        <div className={`${blockClass}__table-container`}>
+          {leftPanel && leftPanel.isOpen && (
+            <div className={`${blockClass}__datagridLeftPanel`}>
+              {leftPanel.panelContent}
+            </div>
           )}
-        >
-          <DatagridHead {...datagridState} />
-          <DatagridBody {...datagridState} rows={rows} />
-        </Table>
+          <Table
+            {...getTableProps()}
+            className={cx(
+              withVirtualScroll ? '' : `${blockClass}__table-simple`,
+              `${blockClass}__vertical-align-${verticalAlign}`,
+              { [`${blockClass}__variable-row-height`]: variableRowHeight },
+              getTableProps()?.className
+            )}
+          >
+            <DatagridHead {...datagridState} />
+            <DatagridBody {...datagridState} rows={rows} />
+          </Table>
+        </div>
       </TableContainer>
       {rows?.length > 0 &&
         !isFetching &&
@@ -94,17 +108,11 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
       )}
       {...getDevtoolsProps(componentName)}
     >
-      <DatagridToolbar {...datagridState} />
       {leftPanel && (
         <div
-          className={`${blockClass}__grid-container ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
+          className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
         >
-          {leftPanel && leftPanel.isOpen && (
-            <div className={`${blockClass}__datagridLeftPanel`}>
-              {leftPanel.panelContent}
-            </div>
-          )}
-          <div className={`${blockClass}__datagridWithPanel`}>{dataGrid}</div>
+          {dataGrid}
         </div>
       )}
       {leftPanel === undefined && dataGrid}

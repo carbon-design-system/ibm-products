@@ -19,6 +19,7 @@ import {
   Restart16,
   Download16,
   Filter16,
+  Add16,
 } from '@carbon/icons-react';
 import { DataTable, Button, Pagination } from 'carbon-components-react';
 import {
@@ -47,6 +48,8 @@ import {
   LeftPanelStory,
 } from './Datagrid.stories';
 import mdx from './Datagrid.mdx';
+
+import { pkg } from '../../settings';
 import cx from 'classnames';
 
 import styles from './_storybook-styles.scss';
@@ -66,6 +69,8 @@ export default {
     },
   },
 };
+
+const blockClass = `${pkg.prefix}--datagrid`;
 
 const Wrapper = ({ children }) => (
   <div
@@ -213,6 +218,49 @@ export const InitialLoad = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
+export const WithHeader = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(11));
+  const gridTitle = 'Data table title';
+  const gridDescription = 'Additional information if needed';
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    gridTitle,
+    gridDescription,
+    initialState: {
+      pageSize: 10,
+      pageSizes: [5, 10, 25, 50],
+    },
+    DatagridActions,
+    DatagridPagination,
+  });
+
+  return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
+export const WithDenseHeader = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(11));
+  const gridTitle = 'Data table title';
+  const gridDescription = 'Additional information if needed';
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    gridTitle,
+    gridDescription,
+    initialState: {
+      pageSize: 10,
+      pageSizes: [5, 10, 25, 50],
+    },
+    useDenseHeader: true,
+    DatagridActions,
+    DatagridPagination,
+  });
+
+  return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
 export const InfiniteScroll = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data, setData] = useState(makeData(0));
@@ -243,7 +291,7 @@ export const InfiniteScroll = () => {
 
   return (
     <Wrapper>
-      <Datagrid datagridState={{ ...datagridState }} />;
+      <Datagrid datagridState={{ ...datagridState }} />
     </Wrapper>
   );
 };
@@ -610,6 +658,7 @@ const DatagridActions = (datagridState) => {
     CustomizeColumnsButton,
     RowSizeDropdown,
     rowSizeDropdownProps,
+    useDenseHeader,
   } = datagridState;
   const downloadCsv = () => {
     alert('Downloading...');
@@ -630,8 +679,44 @@ const DatagridActions = (datagridState) => {
     },
   };
   return (
-    isNothingSelected && (
-      <React.Fragment>
+    isNothingSelected &&
+    (useDenseHeader && useDenseHeader ? (
+      <TableToolbarContent size="sm">
+        <div style={style}>
+          <Button
+            kind="ghost"
+            hasIconOnly
+            tooltipPosition="bottom"
+            renderIcon={Download16}
+            iconDescription={'Download CSV'}
+            onClick={downloadCsv}
+          />
+        </div>
+        <div style={style}>
+          <Button
+            kind="ghost"
+            hasIconOnly
+            tooltipPosition="bottom"
+            renderIcon={Filter16}
+            iconDescription={'Left panel'}
+            onClick={leftPanelClick}
+          />
+        </div>
+        <RowSizeDropdown {...rowSizeDropdownProps} />
+        <div style={style} className={`${blockClass}__toolbar-divider`}>
+          <Button kind="ghost" renderIcon={Add16} iconDescription={'Action'}>
+            Ghost button
+          </Button>
+        </div>
+
+        {CustomizeColumnsButton && (
+          <div style={style}>
+            <CustomizeColumnsButton />
+          </div>
+        )}
+      </TableToolbarContent>
+    ) : (
+      <>
         <Button
           kind="ghost"
           hasIconOnly
@@ -675,8 +760,8 @@ const DatagridActions = (datagridState) => {
             </div>
           )}
         </TableToolbarContent>
-      </React.Fragment>
-    )
+      </>
+    ))
   );
 };
 
@@ -738,6 +823,7 @@ export const CustomizingColumns = () => {
   const datagridState = useDatagrid(
     {
       columns,
+      className: `c4p--datagrid__hidden--columns`,
       data,
       initialState: {
         hiddenColumns: ['age'],
@@ -822,10 +908,6 @@ export const RowSizeDropdown = () => {
   );
 };
 RowSizeDropdown.story = RowSizeDropdownStory;
-
-import { pkg } from '../../settings';
-
-const blockClass = `${pkg.prefix}--datagrid`;
 
 export const LeftPanel = () => {
   const columns = React.useMemo(() => defaultHeader, []);

@@ -144,26 +144,18 @@
 }
 .#{$block-class}__grid-container {
   display: block;
-  overflow: auto;
   width: 100%;
   padding-top: 0;
 
   .#{$carbon-prefix}--data-table-content {
     width: 100%;
     height: 100%;
-    /* stylelint-disable-next-line declaration-property-value-disallowed-list */
-    overflow-x: unset;
+    overflow-x: auto;
   }
 
   .#{$block-class}__table-simple {
-    display: flex;
-    overflow: auto;
+    overflow: hidden;
     max-height: 100%;
-    flex-direction: column;
-  }
-
-  .#{$block-class}__with-pagination tr:last-of-type > td {
-    border-bottom: none;
   }
 
   .#{$block-class}__head {
@@ -259,6 +251,10 @@
 
 .#{$block-class}__empty-state .#{$block-class}__grid-container {
   flex: 1 1 auto;
+}
+
+.#{$block-class}__with-pagination table tr:last-of-type > td {
+  border-bottom: none;
 }
 
 .#{$block-class}__resizer {
@@ -359,16 +355,48 @@
 .#{$block-class}__datagridLeftPanel {
   display: flex;
   width: 388px; // as per UX specs.
-  height: 100%;
   background-color: $ui-01;
+}
+
+.#{$block-class}__leftPanel-position {
+  display: inherit;
 }
 
 .#{$block-class}__datagridWithPanel {
   position: relative;
   display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+
+  .#{$block-class}__grid-container {
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+  }
+
+  .#{$block-class}__table-toolbar {
+    width: 100%;
+  }
+
+  .#{$block-class}__datagridLeftPanel {
+    flex: 0 0 auto;
+  }
+
+  .#{$carbon-prefix}--data-table-content {
+    flex: 1 1 0%;
+  }
+  .#{$block-class}__table-container {
+    overflow: hidden;
+  }
+}
+
+.#{$block-class}__table-container {
+  position: relative;
+  display: flex;
   overflow: auto;
   width: 100%;
-  flex-direction: column;
+  max-height: 100%;
 }
 
 .#{$block-class}__carbon-row-expanded {
@@ -377,4 +405,61 @@
     ~ .#{$block-class}__carbon-nested-row {
     border-left: 1px solid $interactive-01;
   }
+}
+
+.#{$block-class} .#{$carbon-prefix}--data-table-header {
+  background: transparent;
+}
+
+.#{$block-class}__dense-header {
+  display: flex;
+  flex-wrap: wrap;
+
+  .#{$carbon-prefix}--data-table-header {
+    flex: 1 1 auto;
+    padding-bottom: $spacing-05;
+  }
+
+  .#{$block-class}__table-toolbar {
+    flex: 0 0 auto;
+  }
+  .#{$carbon-prefix}--table-toolbar {
+    background: transparent;
+  }
+
+  .#{$carbon-prefix}__table-container {
+    flex: 1 1 100%;
+  }
+
+  .#{$carbon-prefix}--table-toolbar {
+    padding-top: $spacing-07;
+  }
+
+  .#{$block-class}__toolbar-divider {
+    position: relative;
+  }
+
+  .#{$block-class}__toolbar-divider::before {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 1px;
+    height: $spacing-05;
+    border-left: 1px solid $ui-03;
+    content: '';
+    transform: translateY(-50%);
+  }
+}
+
+.#{$carbon-prefix}--data-table--selected {
+  position: relative;
+}
+
+.#{$carbon-prefix}--data-table--selected::before {
+  position: absolute;
+  left: 0;
+  width: $spacing-02;
+  height: 100%;
+  background-color: $interactive-01;
+  content: '';
 }

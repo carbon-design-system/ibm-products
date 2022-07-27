@@ -7,11 +7,12 @@ commitlint
 docgen
 dsag
 flatpickr
-kubernetes
 kube
+kubernetes
 markdownlint
 plex
 storysource
 stylelint
 technote
+unhover
 wcag

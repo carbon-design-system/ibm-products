@@ -3,7 +3,7 @@ name: Release # Builds and releases updated packages every Tuesday
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 4 * * TUE' # Release every Tuesday at 4am EST
+    - cron: '30 4 * * TUE' # Release every Tuesday at 4:30am EST
 
 jobs:
   Release:

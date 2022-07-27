@@ -1,7 +1,7 @@
 {
   "name": "stylelint-config-ibm-products",
   "private": true,
-  "version": "0.0.13",
+  "version": "0.0.16",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -15,14 +15,14 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon$)/'"
   },
   "peerDependencies": {
-    "stylelint": "^14.8.2"
+    "stylelint": "^14.9.1"
   },
   "devDependencies": {
-    "stylelint-config-carbon": "^1.9.0",
+    "stylelint-config-carbon": "^1.10.0",
     "stylelint-config-idiomatic-order": "^8.1.0",
-    "stylelint-config-standard": "^25.0.0",
-    "stylelint-config-standard-scss": "^3.0.0",
+    "stylelint-config-standard": "^26.0.0",
+    "stylelint-config-standard-scss": "^4.0.0",
     "stylelint-no-unsupported-browser-features": "^5.0.3",
-    "stylelint-plugin-carbon-tokens": "^0.12.0"
+    "stylelint-plugin-carbon-tokens": "2.0.0-beta.13"
   }
 }

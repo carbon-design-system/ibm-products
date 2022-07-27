@@ -6,7 +6,7 @@
  */
 
 module.exports = {
-  extends: '../../.stylelintrc',
+  extends: ['stylelint-config-ibm-products'],
   ignoreFiles: ['**/css-gridish/**'],
   rules: {
     'declaration-property-value-disallowed-list': null,
@@ -33,6 +33,31 @@ module.exports = {
           'get-component-namespace',
           'deprecate',
         ],
+      },
+    ],
+    'carbon/layout-token-use': [
+      true,
+      { severity: 'error', acceptUndefinedVariables: true },
+    ],
+    'carbon/motion-duration-use': [
+      true,
+      { severity: 'error', acceptUndefinedVariables: true },
+    ],
+    'carbon/motion-easing-use': [
+      true,
+      { severity: 'error', acceptUndefinedVariables: true },
+    ],
+    'carbon/theme-token-use': [
+      true,
+      { severity: 'error', acceptUndefinedVariables: true },
+    ],
+    'carbon/type-token-use': [
+      true,
+      {
+        severity: 'error',
+        acceptCarbonTypeScaleFunction: true,
+        acceptCarbonFontWeightFunction: true,
+        acceptUndefinedVariables: true,
       },
     ],
   },

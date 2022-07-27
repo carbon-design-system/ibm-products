@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - carbon-v11
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

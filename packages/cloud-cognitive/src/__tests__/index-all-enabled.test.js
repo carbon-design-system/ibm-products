@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { WebTerminalProvider } from '../index';
 
 import { pkg } from '../settings';
 
@@ -57,7 +58,11 @@ describe(name, () => {
       const TestComponent = components[key];
 
       it(`Does not render a canary for "${key}" if package flags set to enable`, () => {
-        const { container } = render(<TestComponent />);
+        const { container } = render(
+          <WebTerminalProvider>
+            <TestComponent />
+          </WebTerminalProvider>
+        );
         expect(container.querySelector(`.${canaryClass}`)).toBeNull();
       });
     }

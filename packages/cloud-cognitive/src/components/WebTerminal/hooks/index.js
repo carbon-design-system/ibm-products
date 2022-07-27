@@ -1,10 +1,12 @@
 import React, { useState, useCallback, createContext } from 'react';
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { pkg } from '../../../settings';
 
 export const WebTerminalContext = createContext();
 
-export const WebTerminalProvider = ({ children }) => {
+const componentName = 'WebTerminalProvider';
+export let WebTerminalProvider = ({ children }) => {
   const [open, setOpen] = useState(false);
 
   const openWebTerminal = useCallback(() => setOpen(true), []);
@@ -19,6 +21,12 @@ export const WebTerminalProvider = ({ children }) => {
     </WebTerminalContext.Provider>
   );
 };
+
+// Return a placeholder if not released and not enabled by feature flag
+WebTerminalProvider = pkg.checkComponentEnabled(
+  WebTerminalProvider,
+  componentName
+);
 
 WebTerminalProvider.propTypes = {
   /**

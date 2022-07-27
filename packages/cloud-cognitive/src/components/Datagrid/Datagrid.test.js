@@ -837,14 +837,11 @@ const StickyActionsColumn = ({ ...rest }) => {
           id: 'vote',
           itemText: 'Vote',
           onClick: onActionClick,
-          shouldHideMenuItem: (row) => row.original.age <= 18,
         },
         {
           id: 'retire',
           itemText: 'Retire',
           onClick: onActionClick,
-          disabled: false,
-          shouldDisableMenuItem: (row) => row.original.age <= 60,
         },
         {
           id: 'delete',
@@ -2528,13 +2525,12 @@ describe(componentName, () => {
         .getElementsByClassName('c4p--datagrid__actions-column-content')[0]
         .getElementsByTagName('button')[0]
     );
-
     expect(
       document
         .getElementsByTagName('ul')[0]
         .getElementsByTagName('li')[2]
         .getElementsByTagName('button')[0].textContent
-    ).toEqual('Delete');
+    ).toEqual('Retire');
     fireEvent.click(
       document
         .getElementsByTagName('ul')[0]
@@ -2542,7 +2538,7 @@ describe(componentName, () => {
         .getElementsByTagName('button')[0]
     );
     expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
-      'Clicked [delete] on row:'
+      'Clicked [retire] on row:'
     );
   });
 });

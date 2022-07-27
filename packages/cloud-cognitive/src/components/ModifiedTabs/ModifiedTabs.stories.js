@@ -26,7 +26,7 @@ const commonStoryCode = {
       {
         id: `tab-${tabId}`,
         label: `Tab ${tabId}`,
-        content: (
+        content: () => (
           <div style={{ color: '#00ff00' }}>Content for tab {tabId}</div>
         ),
       },
@@ -44,6 +44,7 @@ const Template = (args) => {
   // tabs handling code
   const [tabs, setTabs] = useState([]);
   const nextTabId = useRef(1);
+  const testRef = useRef();
 
   const { actionCloseTab, actionNewTab, addTab } = commonStoryCode;
 
@@ -80,6 +81,7 @@ const Template = (args) => {
         tabs={tabs}
         onCloseTab={handleCloseTab}
         onNewTab={handleNewTab}
+        ref={testRef}
       />
     </div>
   );
@@ -90,6 +92,7 @@ export const Default = prepareStory(Template, {
   args: {
     newTabLabel: 'Add new tab',
     newTabContent: <div>Your new tab is being prepared...</div>,
+    tabListAriaLabel: 'Modified tab list example',
   },
 });
 
@@ -187,6 +190,7 @@ export const WithExternalSavePrompt = prepareStory(
       props: {
         newTabLabel: 'Add new tab',
         newTabContent: <div>Your new tab is being prepared...</div>,
+        tabListAriaLabel: 'Modified tab list example',
       },
     },
   }

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { Close, CloseFilled } from '@carbon/icons-react';
+import { pkg } from '../../settings';
 
+const blockClass = `${pkg.prefix}--modified-tabs`;
 export const ModifiedTabLabelWithClose = ({
   unsavedContent,
   label,
@@ -13,29 +14,18 @@ export const ModifiedTabLabelWithClose = ({
       onClose();
     }
   };
-  // const handleMousedown = (ev) => {
-  //   console.log('mouse down');
-  //   console.dir(ev);
-  //   ev.stopPropagation();
-  //   ev.cancelBubble = true;
-  //   ev.preventDefault();
-  // };
+
   return (
-    <span className="modified-tabs__tab">
-      <span className="modified-tabs__tab-label">{label}</span>
-      {/* {onClose ? ( */}
+    <span className={`${blockClass}__tab`}>
+      <span className={`${blockClass}__tab-label`}>{label}</span>
       <button
         title="Close button"
         onClick={handleClose}
-        // onMouseDown={handleMousedown}
-        className="modified-tabs__tab-close"
+        className={`${blockClass}__tab-close`}
         type="button"
       >
         {unsavedContent ? <CloseFilled size={16} /> : <Close size={16} />}
       </button>
-      {/* ) : (
-        ''
-      )} */}
     </span>
   );
 };

@@ -22,6 +22,7 @@ const defaults = {
   newTabContent: 'Your new tab will be here soon',
   onNewTab: undefined,
   onCloseTab: undefined,
+  tabs: [],
 };
 
 export let ModifiedTabs = forwardRef(

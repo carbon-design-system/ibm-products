@@ -19,65 +19,41 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const { TableToolbar } = DataTable;
 
-const DatagridActionsBatchActions = (datagridState) => {
-  const {
-    selectedFlatRows,
-    setGlobalFilter,
-    RowSizeDropdown,
-    rowSizeDropdownProps,
-    downloadCsv,
-    refreshColumns,
-    leftPanelClick,
-  } = datagridState;
-  /*const downloadCsv = () => {
-    alert('Downloading...');
-  };*/
-  const { TableToolbarContent, TableToolbarSearch } = DataTable;
+const DatagridBatchActionsToolbar = (datagridState) => {
+  const { selectedFlatRows, toggleAllRowsSelected, toolbarActions } =
+    datagridState;
+  const totalSelected = selectedFlatRows && selectedFlatRows.length;
 
-  /*const refreshColumns = () => {
-    alert('refreshing...');
-  };
-  const leftPanelClick = () => {
-    alert('open/close left panel...');
-  };*/
-  const searchForAColumn = 'Search';
-  const isNothingSelected = selectedFlatRows.length === 0;
+  const selectAllButtonText = toolbarActions['selectAllButton'].name;
+  const actionButtonText = toolbarActions['actionButton'].name;
 
-  return (
-    isNothingSelected && (
-      <React.Fragment>
+  if (Object.keys(toolbarActions).length + 1 >= 4) {
+    return (
+      <TableBatchActions
+        shouldShowBatchActions={totalSelected > 0}
+        totalSelected={totalSelected}
+        onCancel={() => toggleAllRowsSelected(false)}
+      >
         <OverflowMenu>
           <OverflowMenuItem
-            itemText="Left Panel"
-            onClick={leftPanelClick}
+            itemText={selectAllButtonText}
+            onClick={() => {
+              toggleAllRowsSelected(true);
+              alert('Select All');
+            }}
           ></OverflowMenuItem>
-          <OverflowMenuItem
-            itemText="Download CSV"
-            onClick={downloadCsv}
-          ></OverflowMenuItem>
-          <OverflowMenuItem
-            itemText="Refresh Columns"
-            onClick={refreshColumns}
-          ></OverflowMenuItem>
-          <RowSizeDropdown {...rowSizeDropdownProps}></RowSizeDropdown>
-        </OverflowMenu>
-        <TableToolbarContent>
-          <TableToolbarSearch
-            size="xl"
-            id="columnSearch"
-            persistent
-            placeholder={searchForAColumn}
-            onChange={(e) => setGlobalFilter(e.target.value)}
-          />
-        </TableToolbarContent>
-      </React.Fragment>
-    )
-  );
-};
 
-const DatagridBatchActionsToolbar = (datagridState) => {
-  const { selectedFlatRows, toggleAllRowsSelected } = datagridState;
-  const totalSelected = selectedFlatRows && selectedFlatRows.length;
+          <OverflowMenuItem
+            itemText={actionButtonText}
+            onClick={() => {
+              alert('Action');
+            }}
+          ></OverflowMenuItem>
+        </OverflowMenu>
+      </TableBatchActions>
+    );
+  }
+
   const onBatchAction = () => alert('Batch action');
   const actionName = 'Action';
   const selectAll = 'Select All';
@@ -114,8 +90,7 @@ const DatagridToolbar = (datagridState) => {
   return batchActions && DatagridActions ? (
     <div className={`${blockClass}__table-toolbar`}>
       <TableToolbar>
-        {DatagridActionsBatchActions &&
-          DatagridActionsBatchActions(datagridState)}
+        {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActionsToolbar &&
           DatagridBatchActionsToolbar(datagridState)}
       </TableToolbar>

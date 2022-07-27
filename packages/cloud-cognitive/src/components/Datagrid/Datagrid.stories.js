@@ -883,6 +883,16 @@ export const BatchActions = () => {
     alert('refreshing...');
   }
 
+  const toolbarActions = {
+    selectAllButton: {
+      name: 'Select All',
+    },
+
+    actionButton: {
+      name: 'Action',
+    },
+  };
+
   const datagridState = useDatagrid(
     {
       columns,
@@ -891,6 +901,7 @@ export const BatchActions = () => {
       downloadCsv,
       refreshColumns,
       leftPanelClick,
+      toolbarActions,
       DatagridActions,
       DatagridBatchActions,
     },

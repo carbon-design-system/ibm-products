@@ -266,7 +266,7 @@ const commonTests = (Ts, name, props, testActions) => {
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
     render(<Ts {...{ ...props, ref }} />);
-    expect(ref.current.outerModal.current).toHaveClass(blockClass);
+    expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', () => {

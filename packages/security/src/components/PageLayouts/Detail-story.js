@@ -5,7 +5,7 @@
 
 import { Filter16, Search16, View16 } from '@carbon/icons-react';
 
-import { Row, Column } from 'carbon-components-react';
+import { Row, Column, Grid } from 'carbon-components-react';
 import React from 'react';
 
 import { pageLayouts } from '../../../.storybook';
@@ -47,7 +47,7 @@ export default {
 };
 
 export const Default = () => (
-  <>
+  <Grid>
     <TitleBarModule title="Summary" />
 
     <Row>
@@ -229,5 +229,5 @@ export const Default = () => (
         />
       </Column>
     </Row>
-  </>
+  </Grid>
 );

@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.23.1...@carbon/ibm-products@1.24.0) (2022-07-27)
+
+
+### Bug Fixes
+
+* **Datagrid:** fix issue in StickActionColumn tests ([#2135](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2135)) ([ff37a8e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ff37a8eabb13ebd256058e0404bde3a70d84c46f))
+* inline edit overflow to right ([#2104](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2104)) ([9392372](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/939237279f94330752c69bb93a814eaef5dfd9a0))
+* **PageHeader:** solved unexpected scrollbar issue ([#2119](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2119)) ([15daeee](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/15daeee4ee744df5ddee2f0c8fe579383dfc4451))
+* select all duplicates in add select columns ([#2136](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2136)) ([fb16ab3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fb16ab33c6a6a6920ca8b27c84382046ea0e3764))
+
+
+### Features
+
+* **Datatable:** table header ([#1973](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1973)) ([f9166ad](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f9166adacbda3851e20f710cb196e2db01388107))
+* **edit and update:** edit and update tearsheet ([#1975](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1975)) ([cd09bab](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/cd09babac9f862339760acd64fc24340c06423ae))
+
+
+
+
+
 ## [1.23.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.23.0...@carbon/ibm-products@1.23.1) (2022-07-19)
 
 

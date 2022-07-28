@@ -740,7 +740,7 @@ export const SelectItemsInAllPages = () => {
 };
 // SelectItemsInAllPages.story = SelectAllWithToggle;
 
-const CustomizingColumns = () => {
+export const CustomizingColumns = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(

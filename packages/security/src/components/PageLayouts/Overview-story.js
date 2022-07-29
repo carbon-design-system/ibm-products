@@ -6,7 +6,7 @@
 import { Activity16, Copy16 } from '@carbon/icons-react';
 
 import classnames from 'classnames';
-import { Row, Column } from 'carbon-components-react';
+import { Row, Column, Grid } from 'carbon-components-react';
 import React from 'react';
 
 import { pageLayouts } from '../../../.storybook';
@@ -60,7 +60,7 @@ const ColumnWithBorder = withBorder(Column);
 const DescriptionListModuleWithBorder = withBorder(DescriptionListModule);
 
 export const Default = () => (
-  <>
+  <Grid>
     <ActionBarModule>
       <Tag type="gray">Closed</Tag>
       ID: 12&nbsp;&nbsp;|&nbsp;&nbsp;Result: Completed
@@ -304,5 +304,5 @@ export const Default = () => (
         </Row>
       </Column>
     </Row>
-  </>
+  </Grid>
 );

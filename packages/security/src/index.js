@@ -109,6 +109,8 @@ export {
   TitleBarModule,
 } from './components/LayoutModules';
 
+export GettingStartedLayout from './components/GettingStartedLayout';
+
 export Link from './components/Link';
 export ListBox from './components/ListBox';
 export ListItem from './components/ListItem';

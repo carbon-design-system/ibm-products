@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
@@ -38,12 +38,7 @@ import {
   TableBatchActions,
   TableBatchAction,
 } from '@carbon/react';
-import {
-  Download16,
-  Restart16,
-  Filter16,
-  Activity16,
-} from '@carbon/icons-react';
+import { Download, Restart, Filter, Activity } from '@carbon/icons-react';
 
 // import { DatagridActions, DatagridBatchActions, DatagridPagination, } from './Datagrid.stories';
 
@@ -135,7 +130,10 @@ const DatagridBatchActions = (datagridState) => {
       totalSelected={totalSelected}
       onCancel={() => toggleAllRowsSelected(false)}
     >
-      <TableBatchAction renderIcon={Activity16} onClick={onBatchAction}>
+      <TableBatchAction
+        renderIcon={(props) => <Activity size={16} {...props} />}
+        onClick={onBatchAction}
+      >
         {actionName}
       </TableBatchAction>
     </TableBatchActions>
@@ -186,7 +184,7 @@ const DatagridActions = (datagridState) => {
           kind="ghost"
           hasIconOnly
           tooltipPosition="bottom"
-          renderIcon={Filter16}
+          renderIcon={(props) => <Filter size={16} {...props} />}
           iconDescription={'Left panel'}
           onClick={leftPanelClick}
         />
@@ -204,7 +202,7 @@ const DatagridActions = (datagridState) => {
               kind="ghost"
               hasIconOnly
               tooltipPosition="bottom"
-              renderIcon={Restart16}
+              renderIcon={(props) => <Restart size={16} {...props} />}
               iconDescription={'Refresh'}
               onClick={refreshColumns}
             />
@@ -214,7 +212,7 @@ const DatagridActions = (datagridState) => {
               kind="ghost"
               hasIconOnly
               tooltipPosition="bottom"
-              renderIcon={Download16}
+              renderIcon={(props) => <Download size={16} {...props} />}
               iconDescription={'Download CSV'}
               onClick={downloadCsv}
             />
@@ -655,7 +653,7 @@ const newPersonWithTwoLines = () => {
 const makeDataWithTwoLines = (length) =>
   range(length).map(() => newPersonWithTwoLines());
 
-const TopAlignment = ({ ...rest }) => {
+const TopAlignment = forwardRef(({ ...rest }, ref) => {
   const columns = React.useMemo(() => defaultHeader.slice(0, 3), []);
   const [data] = useState(makeDataWithTwoLines(10));
   const datagridState = useDatagrid(
@@ -685,8 +683,8 @@ const TopAlignment = ({ ...rest }) => {
     useSelectRows
   );
 
-  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
-};
+  return <Datagrid ref={ref} datagridState={{ ...datagridState }} {...rest} />;
+});
 
 const ClickableRow = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -837,14 +835,11 @@ const StickyActionsColumn = ({ ...rest }) => {
           id: 'vote',
           itemText: 'Vote',
           onClick: onActionClick,
-          shouldHideMenuItem: (row) => row.original.age <= 18,
         },
         {
           id: 'retire',
           itemText: 'Retire',
           onClick: onActionClick,
-          disabled: false,
-          shouldDisableMenuItem: (row) => row.original.age <= 60,
         },
         {
           id: 'delete',
@@ -913,7 +908,7 @@ describe(componentName, () => {
   it('renders a Batch Actions Table', () => {
     render(<BatchActions data-testid={dataTestId}></BatchActions>);
 
-    var alertMock = jest.spyOn(window, 'alert');
+    const alertMock = jest.spyOn(window, 'alert');
 
     fireEvent.click(
       screen
@@ -932,7 +927,9 @@ describe(componentName, () => {
     const numRows = tableBodyRows.length;
 
     for (var i = 0; i < numRows; i++) {
-      expect(tableBodyRows[i].classList[1]).toEqual('bx--data-table--selected');
+      expect(tableBodyRows[i].classList[1]).toEqual(
+        `${carbonPrefix}--data-table--selected`
+      );
     }
 
     fireEvent.click(
@@ -947,27 +944,18 @@ describe(componentName, () => {
     );
 
     expect(
-      document.getElementsByClassName('bx--search-input')[0]
+      document.getElementsByClassName(`${carbonPrefix}--search-input`)[0]
     ).toBeDefined();
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[0]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Left panel');
+    // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
+    const leftPanelButton =
+      screen.getByText('Left panel').parentElement.previousSibling;
+    fireEvent.click(leftPanelButton);
+    expect(alertMock).toHaveBeenCalledTimes(1);
 
-    expect(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    ).toBeDefined();
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    );
+    const rowHeightButton = screen.getByText('Row height', { selector: 'span' })
+      .parentElement.previousSibling;
+    fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
       'Extra large',
@@ -995,40 +983,14 @@ describe(componentName, () => {
       ).toEqual(rowSizeDropDown[k]);
     }
 
-    fireEvent.click(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('button')[0]
-    );
-    expect(alertMock).toHaveBeenCalledTimes(1);
-
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[1]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Refresh');
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
-    );
+    const refreshButton =
+      screen.getByText('Refresh').parentElement.previousSibling;
+    fireEvent.click(refreshButton);
     expect(alertMock).toHaveBeenCalledTimes(2);
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Download CSV');
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
-    );
+    const downloadButton =
+      screen.getByText('Download CSV').parentElement.previousSibling;
+    fireEvent.click(downloadButton);
     expect(alertMock).toHaveBeenCalledTimes(3);
 
     fireEvent.click(
@@ -1222,25 +1184,12 @@ describe(componentName, () => {
   it('With Pagination', () => {
     render(<WithPagination data-testid={dataTestId}></WithPagination>);
 
-    expect(document.getElementById('bx-pagination-select-4')).toBeDefined();
-    expect(document.getElementById('bx-pagination-select-6')).toBeDefined();
-
-    /*fireEvent.click(document.getElementById('bx-pagination-select-6').getElementsByTagName('option')[0]);
-    expect(document.getElementsByClassName('bx--pagination__text bx--pagination__items-count')[0]).toBe('1–5 of 100 items');
-    expect(document.getElementsByClassName('bx--pagination__text')[0].textContent).toBe('of 20 pages');
-
-    fireEvent.click(document.getElementById('bx-pagination-select-6').getElementsByTagName('option')[1]);
-    expect(document.getElementsByClassName('bx--pagination__text bx--pagination__items-count')[0]).toBe('1–10 of 100 items');
-    expect(document.getElementsByClassName('bx--pagination__text')[0].textContent).toBe('of 10 pages');
-
-
-    fireEvent.click(document.getElementById('bx-pagination-select-6').getElementsByTagName('option')[2]);
-    expect(document.getElementsByClassName('bx--pagination__text bx--pagination__items-count')[0]).toBe('1–25 of 100 items');
-    expect(document.getElementsByClassName('bx--pagination__text')[0].textContent).toBe('of 4 pages');
-
-    fireEvent.click(document.getElementById('bx-pagination-select-6').getElementsByTagName('option')[3]);
-    expect(document.getElementsByClassName('bx--pagination__text bx--pagination__items-count')[0]).toBe('1–50 of 100 items');
-    expect(document.getElementsByClassName('bx--pagination__text')[0].textContent).toBe('of 2 pages');*/
+    expect(
+      document.getElementById(`${carbonPrefix}-pagination-select-4`)
+    ).toBeDefined();
+    expect(
+      document.getElementById(`${carbonPrefix}-pagination-select-6`)
+    ).toBeDefined();
   });
 
   it('Clickable Row', () => {
@@ -1309,30 +1258,21 @@ describe(componentName, () => {
   it('Renders Disable Select Row', () => {
     render(<DisableSelectRow data-testid={dataTestId}></DisableSelectRow>);
 
-    var alertMock = jest.spyOn(window, 'alert');
+    const alertMock = jest.spyOn(window, 'alert');
 
     expect(
-      document.getElementsByClassName('bx--search-input')[0]
+      document.getElementsByClassName(`${carbonPrefix}--search-input`)[0]
     ).toBeDefined();
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[0]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Left panel');
+    // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
+    const leftPanelButton =
+      screen.getByText('Left panel').parentElement.previousSibling;
+    fireEvent.click(leftPanelButton);
+    expect(alertMock).toHaveBeenCalledTimes(1);
 
-    expect(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    ).toBeDefined();
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    );
+    const rowHeightButton = screen.getByText('Row height', { selector: 'span' })
+      .parentElement.previousSibling;
+    fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
       'Extra large',
@@ -1360,40 +1300,16 @@ describe(componentName, () => {
       ).toEqual(rowSizeDropDown[k]);
     }
 
-    fireEvent.click(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('button')[0]
-    );
-    expect(alertMock).toHaveBeenCalledTimes(1);
-
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[1]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Refresh');
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
-    );
+    const refreshButtonElement = screen.getByText('Refresh', {
+      selector: 'span',
+    }).parentElement.previousSibling;
+    fireEvent.click(refreshButtonElement);
     expect(alertMock).toHaveBeenCalledTimes(2);
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Download CSV');
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
-    );
+    const downloadButtonElement = screen.getByText('Download CSV', {
+      selector: 'span',
+    }).parentElement.previousSibling;
+    fireEvent.click(downloadButtonElement);
     expect(alertMock).toHaveBeenCalledTimes(3);
 
     const unClickableRow = screen
@@ -1425,7 +1341,7 @@ describe(componentName, () => {
       new MouseEvent('click')
     );
 
-    expect(clickableRow).toHaveClass('bx--data-table--selected');
+    expect(clickableRow).toHaveClass(`${carbonPrefix}--data-table--selected`);
 
     expect(
       document
@@ -1539,7 +1455,7 @@ describe(componentName, () => {
 
     fireEvent.click(button);
 
-    expect(row.classList[1]).toEqual('bx--data-table--selected');
+    expect(row.classList[1]).toEqual(`${carbonPrefix}--data-table--selected`);
 
     fireEvent.click(button);
     expect(row.classList['0']).toEqual('c4p--datagrid__carbon-row');
@@ -1573,27 +1489,18 @@ describe(componentName, () => {
     ).toEqual('c4p--datagrid__datagridLeftPanel');
 
     expect(
-      document.getElementsByClassName('bx--search-input')[0]
+      document.getElementsByClassName(`${carbonPrefix}--search-input`)[0]
     ).toBeDefined();
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[0]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Left panel');
+    // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
+    const leftPanelButton =
+      screen.getByText('Left panel').parentElement.previousSibling;
+    fireEvent.click(leftPanelButton);
+    expect(alertMock).toHaveBeenCalledTimes(1);
 
-    expect(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    ).toBeDefined();
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    );
+    const rowHeightButton = screen.getByText('Row height', { selector: 'span' })
+      .parentElement.previousSibling;
+    fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
       'Extra large',
@@ -1602,13 +1509,13 @@ describe(componentName, () => {
       'Small',
       'Extra small',
     ];
-    const rowSize = document
+    const rowSizeOptionsCount = document
       .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
       .getElementsByTagName('div')[0]
       .getElementsByTagName('fieldset')[0]
       .getElementsByTagName('div').length;
 
-    for (var k = 0; k < rowSize; k++) {
+    for (var k = 0; k < rowSizeOptionsCount; k++) {
       expect(
         document
           .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
@@ -1627,35 +1534,18 @@ describe(componentName, () => {
         .getElementsByTagName('section')[0]
         .getElementsByTagName('button')[0]
     );
-    expect(alertMock).toHaveBeenCalledTimes(1);
-
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[1]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Refresh');
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
-    );
     expect(alertMock).toHaveBeenCalledTimes(2);
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Download CSV');
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
-    );
+    // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
+    const refreshButton =
+      screen.getByText('Refresh').parentElement.previousSibling;
+    fireEvent.click(refreshButton);
     expect(alertMock).toHaveBeenCalledTimes(3);
+
+    const downloadButton =
+      screen.getByText('Download CSV').parentElement.previousSibling;
+    fireEvent.click(downloadButton);
+    expect(alertMock).toHaveBeenCalledTimes(4);
   });
 
   it('Nested Rows', () => {
@@ -1724,7 +1614,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('tr')[previousRowNumber].classList[1] ===
-      'bx--data-table--selected'
+      `.${carbonPrefix}--data-table--selected`
     ) {
       fireEvent.click(
         screen
@@ -1742,7 +1632,7 @@ describe(componentName, () => {
           .getByRole('table')
           .getElementsByTagName('tbody')[0]
           .getElementsByTagName('tr')[currentRowNumber].classList[1]
-      ).toEqual('bx--data-table--selected');
+      ).toEqual(`${carbonPrefix}--data-table--selected`);
 
       expect(
         screen
@@ -1767,7 +1657,7 @@ describe(componentName, () => {
           .getByRole('table')
           .getElementsByTagName('tbody')[0]
           .getElementsByTagName('tr')[currentRowNumber].classList[1]
-      ).toEqual('bx--data-table--selected');
+      ).toEqual(`${carbonPrefix}--data-table--selected`);
     }
   }
 
@@ -1809,7 +1699,7 @@ describe(componentName, () => {
           .getByRole('table')
           .getElementsByTagName('tbody')[0]
           .getElementsByTagName('tr')[i].classList[1]
-      ).toEqual('bx--data-table--selected');
+      ).toEqual(`${carbonPrefix}--data-table--selected`);
     }
 
     fireEvent.click(
@@ -1833,51 +1723,33 @@ describe(componentName, () => {
     expect(
       document.getElementsByClassName('c4p--datagrid__table-toolbar').length
     ).toBe(1);
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[0]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Left panel');
 
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[0]
-    );
+    // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
+    const leftPanelButton =
+      screen.getByText('Left panel').parentElement.previousSibling;
+    fireEvent.click(leftPanelButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-        )[0]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Row height');
+    const rowHeightButton =
+      screen.getByText('Row height').parentElement.previousSibling;
+    fireEvent.click(rowHeightButton);
 
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    );
     expect(
-      document.getElementsByClassName(
-        'c4p--datagrid__row-size-button--open bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    ).toBeDefined();
+      screen.getByText('Row height', { selector: 'span' }).parentElement
+        .previousSibling
+    ).toHaveClass(`c4p--datagrid__row-size-button--open`);
     expect(
       document.getElementsByClassName('c4p--datagrid__row-size-dropdown')
     ).toBeDefined();
     expect(
       document
         .getElementsByClassName(
-          'bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right'
+          'cds--radio-button-group cds--radio-button-group--vertical cds--radio-button-group--label-right'
         )[0]
         .getElementsByTagName('legend')[0].textContent
     ).toEqual('Row height');
 
-    var rowDropDown = [
+    const rowDropDown = [
       'Extra large',
       'Large (default)',
       'Medium',
@@ -1887,7 +1759,7 @@ describe(componentName, () => {
 
     var rowSize = document
       .getElementsByClassName(
-        'bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right'
+        'cds--radio-button-group cds--radio-button-group--vertical cds--radio-button-group--label-right'
       )[0]
       .getElementsByTagName('div').length;
 
@@ -1895,7 +1767,7 @@ describe(componentName, () => {
       expect(
         document
           .getElementsByClassName(
-            'bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right'
+            'cds--radio-button-group cds--radio-button-group--vertical cds--radio-button-group--label-right'
           )[0]
           .getElementsByTagName('div')
           .item(j)
@@ -1932,14 +1804,10 @@ describe(componentName, () => {
         .getElementsByTagName('button')[0]
     );
 
-    expect(
-      document
-        .getElementsByClassName('bx--overflow-menu-options__btn')[0]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Select all on page');
-    fireEvent.click(
-      document.getElementsByClassName('bx--overflow-menu-options__btn')[0]
-    );
+    const selectAllOverflow = screen.getByLabelText('Select all', {
+      selector: 'button',
+    });
+    fireEvent.click(selectAllOverflow);
 
     expect(
       document
@@ -1975,59 +1843,15 @@ describe(componentName, () => {
         .getElementsByTagName('button')[1]
     );
 
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    );
-
-    expect(alertMock).toHaveBeenCalledTimes(2);
-
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[0]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Left panel');
-
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
-    );
-
+    const refreshButton =
+      screen.getByText('Refresh').parentElement.previousSibling;
+    fireEvent.click(refreshButton);
     expect(alertMock).toHaveBeenCalledTimes(3);
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[1]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Refresh');
-
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
-    );
-
+    const downloadButton =
+      screen.getByText('Download CSV').parentElement.previousSibling;
+    fireEvent.click(downloadButton);
     expect(alertMock).toHaveBeenCalledTimes(4);
-
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Download CSV');
-
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
-    );
   });
 
   it('Right Aligned Columns', () => {
@@ -2067,23 +1891,17 @@ describe(componentName, () => {
   it('Row Size Dropdown', () => {
     render(<RowSizeDropdown data-testid={dataTestId}></RowSizeDropdown>);
 
-    var alertMock = jest.spyOn(window, 'alert');
+    const alertMock = jest.spyOn(window, 'alert');
 
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('thead')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('th')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('label')[0]
+    // Click select all rows checkbox
+    const selectAllCheckbox = screen.getByLabelText(
+      'Select all rows in the table'
     );
+    fireEvent.click(selectAllCheckbox);
 
-    const rowSize = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr').length;
+    // Count number of rows
+    const rowSize = screen.getByTestId(dataTestId).querySelector(`tbody`)
+      .children.length;
 
     //This checks to see if all the rows in the table have been selected.
     for (var i = 0; i < rowSize; i++) {
@@ -2092,7 +1910,7 @@ describe(componentName, () => {
           .getByRole('table')
           .getElementsByTagName('tbody')[0]
           .getElementsByTagName('tr')[i].classList[1]
-      ).toEqual('bx--data-table--selected');
+      ).toEqual(`${carbonPrefix}--data-table--selected`);
     }
 
     expect(
@@ -2105,102 +1923,15 @@ describe(componentName, () => {
         .getElementsByTagName('span')[0].textContent
     ).toEqual('10 items selected');
 
-    expect(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[1]
-        .getElementsByTagName('button')[0].textContent
-    ).toEqual('Action');
-    fireEvent.click(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[1]
-        .getElementsByTagName('button')[0]
-    );
+    // Find and click Refresh button
+    const actionButton = screen.getByText('Action');
+    fireEvent.click(actionButton);
+    expect(alertMock).toHaveBeenCalled();
 
-    expect(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[1]
-        .getElementsByTagName('button')[1].textContent
-    ).toEqual('Cancel');
-    fireEvent.click(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('div')[1]
-        .getElementsByTagName('button')[1]
-    );
-
-    /*var rowDropDown = ['More than super', 'Super tall row', 'Medium', 'Teeny tiny row'];
-    
-    const rows = document.getElementsByClassName('bx--toolbar-content')[0].getElementsByClassName('c4p--datagrid__row-size-dropdown')[0];
-
-    for(let k = 0; k < rows; k++){
-      expect(document.getElementsByClassName('bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right')[0].getElementsByTagName('div')[k].getElementsByTagName('label')[0].getElementsByTagName('span')[0].textContent).toEqual(rowDropDown[k]);
-    }*/
-    expect(alertMock).toHaveBeenCalledTimes(1);
-
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    );
-
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[0]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Left panel');
-
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
-    );
-
-    expect(alertMock).toHaveBeenCalledTimes(2);
-
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[1]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Refresh');
-
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
-    );
-
-    expect(alertMock).toHaveBeenCalledTimes(3);
-
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Download CSV');
-
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
-    );
-
-    expect(alertMock).toHaveBeenCalledTimes(4);
+    // Find and click Download button
+    const downloadButton = screen.getByText('Cancel');
+    fireEvent.click(downloadButton);
+    expect(alertMock).toHaveBeenCalled();
   });
 
   it('Selectable Row', () => {
@@ -2223,7 +1954,9 @@ describe(componentName, () => {
       .getElementsByTagName('tr');
 
     for (var i = 0; i < rows.length; i++) {
-      expect(rows.item(i).classList[1]).toEqual('bx--data-table--selected');
+      expect(rows.item(i).classList[1]).toEqual(
+        `${carbonPrefix}--data-table--selected`
+      );
     }
 
     //Un-Selects all the rows in the table.
@@ -2251,7 +1984,7 @@ describe(componentName, () => {
     );
 
     expect(selectIndividualRow.classList[1]).toEqual(
-      'bx--data-table--selected'
+      `${carbonPrefix}--data-table--selected`
     );
   });
 
@@ -2280,64 +2013,30 @@ describe(componentName, () => {
   it('Customizing Columns', () => {
     render(<CustomizingColumns data-testid={dataTestId}></CustomizingColumns>);
 
-    var alertMock = jest.spyOn(window, 'alert');
+    const alertMock = jest.spyOn(window, 'alert');
 
-    fireEvent.click(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('button')[0]
-    );
+    const leftPanelButton = screen.getByLabelText('Left panel');
+    fireEvent.click(leftPanelButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[1]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Refresh');
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
-    );
+    const refreshButton = screen.getByLabelText('Refresh');
+    fireEvent.click(refreshButton);
     expect(alertMock).toHaveBeenCalledTimes(2);
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Download CSV');
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
-    );
+    const downloadButton = screen.getByLabelText('Download CSV');
+    fireEvent.click(downloadButton);
     expect(alertMock).toHaveBeenCalledTimes(3);
 
-    expect(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    ).toBeDefined();
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    );
-    expect(
-      document.getElementById('bx--modal-header__heading--modal-2')
-    ).toBeDefined();
+    const customizeColumnsButton = screen.getByLabelText('Customize columns');
+    fireEvent.click(customizeColumnsButton);
+    screen.getByText('Customize display');
   });
 
   it('Top Alignment', () => {
-    render(<TopAlignment data-testid={dataTestId}></TopAlignment>);
+    const ref = React.createRef();
+    render(<TopAlignment ref={ref} data-testid={dataTestId} />);
 
-    var alertMock = jest.spyOn(window, 'alert');
-
+    const alertMock = jest.spyOn(window, 'alert');
     expect(screen.getByRole('table').classList[2]).toEqual(
       'c4p--datagrid__vertical-align-top'
     );
@@ -2360,7 +2059,7 @@ describe(componentName, () => {
 
     for (var i = 0; i < topAlignmentRows.length; i++) {
       expect(topAlignmentRows[i].classList[1]).toEqual(
-        'bx--data-table--selected'
+        `${carbonPrefix}--data-table--selected`
       );
     }
 
@@ -2374,34 +2073,22 @@ describe(componentName, () => {
           .getElementsByTagName('input')[0]
       );
       expect(topAlignmentRows[j].classList[1]).toEqual(
-        'bx--data-table--selected'
+        `${carbonPrefix}--data-table--selected`
       );
     }
 
     fireEvent.click(allRowsCheckBox);
 
     expect(
-      document.getElementsByClassName('bx--search-input')[0]
+      document.getElementsByClassName(`${carbonPrefix}--search-input`)[0]
     ).toBeDefined();
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[0]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Left panel');
-
-    expect(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    ).toBeDefined();
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
+    expect(screen.getByText(/left panel/i)).toHaveClass(
+      `${carbonPrefix}--tooltip-content`
     );
+
+    const rowHeightButton = screen.getByLabelText('Row height');
+    fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
       'Extra large',
@@ -2409,11 +2096,9 @@ describe(componentName, () => {
       'Medium',
       'Extra small',
     ];
-    const rowSize = document
-      .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
-      .getElementsByTagName('div')[0]
-      .getElementsByTagName('fieldset')[0]
-      .getElementsByTagName('div').length;
+    const rowSize = ref.current.querySelector(
+      `.c4p--datagrid__row-size-dropdown`
+    );
 
     for (var k = 0; k < rowSize; k++) {
       expect(
@@ -2436,32 +2121,12 @@ describe(componentName, () => {
     );
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[1]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Refresh');
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
-    );
+    const refreshButton = screen.getByLabelText('Refresh');
+    fireEvent.click(refreshButton);
     expect(alertMock).toHaveBeenCalledTimes(2);
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Download CSV');
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
-    );
+    const downloadButton = screen.getByLabelText('Download CSV');
+    fireEvent.click(downloadButton);
     expect(alertMock).toHaveBeenCalledTimes(3);
   });
 
@@ -2528,13 +2193,12 @@ describe(componentName, () => {
         .getElementsByClassName('c4p--datagrid__actions-column-content')[0]
         .getElementsByTagName('button')[0]
     );
-
     expect(
       document
         .getElementsByTagName('ul')[0]
         .getElementsByTagName('li')[2]
         .getElementsByTagName('button')[0].textContent
-    ).toEqual('Delete');
+    ).toEqual('Retire');
     fireEvent.click(
       document
         .getElementsByTagName('ul')[0]
@@ -2542,7 +2206,7 @@ describe(componentName, () => {
         .getElementsByTagName('button')[0]
     );
     expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
-      'Clicked [delete] on row:'
+      'Clicked [retire] on row:'
     );
   });
 });

@@ -4112,6 +4112,14 @@ Map {
       },
     },
   },
+  "GettingStartedLayout" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+    },
+  },
   "Header" => Object {
     "defaultProps": Object {
       "className": null,

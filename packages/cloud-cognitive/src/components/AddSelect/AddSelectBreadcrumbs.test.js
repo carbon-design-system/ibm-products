@@ -8,6 +8,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs';
+import { carbon } from '../../settings';
 
 const componentName = AddSelectBreadcrumbs.name;
 const defaultProps = {
@@ -68,9 +69,12 @@ describe(componentName, () => {
     render(<AddSelectBreadcrumbs {...newProps} />);
     expect(screen.getByText('default'));
     expect(screen.getByText('level 2'));
-    expect(document.querySelectorAll('.bx--breadcrumb-item').length).toEqual(2);
     expect(
-      document.querySelectorAll('.bx--breadcrumb-item--current').length
+      document.querySelectorAll(`.${carbon.prefix}--breadcrumb-item`).length
+    ).toEqual(2);
+    expect(
+      document.querySelectorAll(`.${carbon.prefix}--breadcrumb-item--current`)
+        .length
     ).toEqual(1);
   });
 });

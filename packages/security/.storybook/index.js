@@ -17,6 +17,7 @@ const getCategory = (category, title) => `${sectionTitle}/${category}/${title}`;
 const components = (title) => getCategory('Components', title);
 const deprecated = (title) => getCategory('Deprecated', title);
 const layoutModules = (title) => getCategory('Layout modules', title);
+const microlayouts = (title) => getCategory('Microlayouts', title);
 const pageLayouts = (title) => getCategory('Layouts', title);
 const patterns = (title) => getCategory('Patterns', title);
 
@@ -58,6 +59,7 @@ export {
   getDocsParameters,
   info,
   layoutModules,
+  microlayouts,
   pageLayouts,
   parameters,
   patterns,

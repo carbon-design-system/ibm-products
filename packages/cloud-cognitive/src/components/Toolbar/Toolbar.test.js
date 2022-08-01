@@ -14,10 +14,10 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { blockClass, componentName } from './Toolbar';
 import { blockClass as toolbarButtonClass } from './ToolbarButton';
+import { carbon } from '../../settings';
 
 const { getByTestId, getByText } = screen;
 const { keyboard, tab } = userEvent;
-const carbonPrefix = 'cds';
 
 function _instance(prop) {
   return `${uuidv4()}--${prop}`;
@@ -220,7 +220,7 @@ describe(toolbarButtonComponentName, () => {
       <ToolbarButton data-testid={dataTestId} />
     );
 
-    const className = `${carbonPrefix}--popover--right`;
+    const className = `${carbon.prefix}--popover--right`;
     expect(getByTestId(dataTestId).parentElement).not.toHaveClass(className, {
       exact: false,
     });

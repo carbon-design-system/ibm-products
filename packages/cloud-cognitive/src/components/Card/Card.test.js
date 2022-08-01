@@ -10,9 +10,8 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import { Card } from '.';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
-const carbonPrefix = 'cds';
 const componentName = Card.displayName;
 const blockClass = `${pkg.prefix}--card`;
 
@@ -164,7 +163,7 @@ describe(componentName, () => {
     expect(
       container.querySelector(`.${blockClass}__footer .${blockClass}__actions`)
     ).toBeVisible();
-    click(container.querySelector(`.${carbonPrefix}--overflow-menu`));
+    click(container.querySelector(`.${carbon.prefix}--overflow-menu`));
     click(screen.getByText('Edit'));
     expect(onClick).toHaveBeenCalled();
     rerender(<Card {...props} actionsPlacement="top" />);

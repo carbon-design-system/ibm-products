@@ -10,8 +10,7 @@ import {
   DOCUMENT_POSITION_BROAD_FOLLOWING,
   selectorTabbable,
 } from './keyboardNavigation';
-
-const carbonPrefix = 'cds';
+import { carbon } from '../../../settings';
 
 /**
  * @param {Node} node A DOM node.
@@ -21,8 +20,8 @@ const carbonPrefix = 'cds';
 function elementOrParentIsFloatingMenu(
   node,
   selectorsFloatingMenus = [
-    `.${carbonPrefix}--overflow-menu-options`,
-    `.${carbonPrefix}--tooltip`,
+    `.${carbon.prefix}--overflow-menu-options`,
+    `.${carbon.prefix}--tooltip`,
     '.flatpickr-calendar',
   ]
 ) {

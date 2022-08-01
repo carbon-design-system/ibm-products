@@ -8,7 +8,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import { TagSet } from '.';
 import { TagSetModal } from './TagSetModal';
 
@@ -23,7 +23,6 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 const { prefix } = pkg;
 
-const carbonPrefix = 'cds';
 const blockClass = `${pkg.prefix}--tag-set`;
 const blockClassOverflow = `${prefix}--tag-set-overflow`;
 
@@ -98,11 +97,11 @@ describe(TagSet.displayName, () => {
     // first and last should be visible
     screen.getByText(tagLabel(0), {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__displayed-tag .${carbonPrefix}--tag span`,
+      selector: `.${blockClass}__displayed-tag .${carbon.prefix}--tag span`,
     });
     screen.getByText(tagLabel(tags10.length - 1), {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__displayed-tag .${carbonPrefix}--tag span`,
+      selector: `.${blockClass}__displayed-tag .${carbon.prefix}--tag span`,
     });
   });
 
@@ -113,7 +112,7 @@ describe(TagSet.displayName, () => {
 
     const visible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__displayed-tag .${carbonPrefix}--tag span`,
+      selector: `.${blockClass}__displayed-tag .${carbon.prefix}--tag span`,
     });
     expect(visible.length).toEqual(0);
 
@@ -136,12 +135,12 @@ describe(TagSet.displayName, () => {
     // first and last should be visible
     screen.getByText(tagLabel(0), {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__displayed-tag .${carbonPrefix}--tag span`,
+      selector: `.${blockClass}__displayed-tag .${carbon.prefix}--tag span`,
     });
 
     const visible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__displayed-tag .${carbonPrefix}--tag span`,
+      selector: `.${blockClass}__displayed-tag .${carbon.prefix}--tag span`,
     });
     expect(visible.length).toEqual(visibleTags);
 
@@ -199,17 +198,17 @@ describe(TagSet.displayName, () => {
     // first and last should be visible
     screen.getByText(tagLabel(0), {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__displayed-tag .${carbonPrefix}--tag span`,
+      selector: `.${blockClass}__displayed-tag .${carbon.prefix}--tag span`,
     });
     screen.getByText(tagLabel(4), {
       // selector need to ignore sizing items
-      selector: `.${blockClass}__displayed-tag .${carbonPrefix}--tag span`,
+      selector: `.${blockClass}__displayed-tag .${carbon.prefix}--tag span`,
     });
 
     expect(
       screen.getAllByText(/Tag [0-9]+/, {
         // selector need to ignore sizing items
-        selector: `.${blockClass}__displayed-tag .${carbonPrefix}--tag span`,
+        selector: `.${blockClass}__displayed-tag .${carbon.prefix}--tag span`,
       }).length
     ).toEqual(5);
   });

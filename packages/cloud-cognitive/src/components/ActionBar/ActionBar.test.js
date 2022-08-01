@@ -11,9 +11,8 @@ import { ActionBar } from '.';
 import { Lightning, Bee } from '@carbon/icons-react';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 const blockClass = `${pkg.prefix}--action-bar`;
-const carbonPrefix = 'cds';
 
 const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
   key: `key is this num ${num}`,
@@ -117,10 +116,10 @@ describe(ActionBar.displayName, () => {
     );
 
     screen.getByText(/Action 01/, {
-      selector: `.${blockClass}__displayed-items .${carbonPrefix}--popover-content.${carbonPrefix}--tooltip-content`,
+      selector: `.${blockClass}__displayed-items .${carbon.prefix}--popover-content.${carbon.prefix}--tooltip-content`,
     });
     screen.getByText(/Action 10/, {
-      selector: `.${blockClass}__displayed-items .${carbonPrefix}--popover-content.${carbonPrefix}--tooltip-content`,
+      selector: `.${blockClass}__displayed-items .${carbon.prefix}--popover-content.${carbon.prefix}--tooltip-content`,
     });
   });
 
@@ -136,7 +135,7 @@ describe(ActionBar.displayName, () => {
 
     expect(
       screen.queryByText(/Action 10/, {
-        selector: `.${blockClass}__displayed-items .${carbonPrefix}--popover-content.${carbonPrefix}--tooltip-content`,
+        selector: `.${blockClass}__displayed-items .${carbon.prefix}--popover-content.${carbon.prefix}--tooltip-content`,
       })
     ).toBeNull();
 
@@ -187,15 +186,15 @@ describe(ActionBar.displayName, () => {
     );
 
     screen.getByText(/Action 01/, {
-      selector: `.${blockClass}__displayed-items .${carbonPrefix}--popover-content.${carbonPrefix}--tooltip-content`,
+      selector: `.${blockClass}__displayed-items .${carbon.prefix}--popover-content.${carbon.prefix}--tooltip-content`,
     });
     screen.getByText(/Action 02/, {
-      selector: `.${blockClass}__displayed-items .${carbonPrefix}--popover-content.${carbonPrefix}--tooltip-content`,
+      selector: `.${blockClass}__displayed-items .${carbon.prefix}--popover-content.${carbon.prefix}--tooltip-content`,
     });
 
     expect(
       screen.queryByText(/Action 03/, {
-        selector: `.${blockClass}__displayed-items .${carbonPrefix}--popover-content.${carbonPrefix}--tooltip-content`,
+        selector: `.${blockClass}__displayed-items .${carbon.prefix}--popover-content.${carbon.prefix}--tooltip-content`,
       })
     ).toBeNull();
   });

@@ -11,7 +11,7 @@ import cx from 'classnames';
 import { DataTable } from '@carbon/react';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
 import { selectionColumnId } from './common-column-ids';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 const { TableSelectRow } = DataTable;
 
@@ -42,7 +42,7 @@ const useHighlightSelection = (hooks) => {
       className: cx(
         `${blockClass}__carbon-row`,
         row.getToggleRowSelectedProps().checked
-          ? 'bx--data-table--selected'
+          ? `${carbon.prefix}--data-table--selected`
           : ''
       ),
     },

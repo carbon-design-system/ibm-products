@@ -8,6 +8,7 @@ export const carbon = {
   get themes() {
     return themes;
   },
+  prefix: 'cds',
 };
 
 // Check that a component is enabled. This function returns a stub which checks

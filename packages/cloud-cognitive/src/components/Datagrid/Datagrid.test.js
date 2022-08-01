@@ -39,6 +39,7 @@ import {
   TableBatchAction,
 } from '@carbon/react';
 import { Download, Restart, Filter, Activity } from '@carbon/icons-react';
+import { carbon } from '../../settings';
 
 // import { DatagridActions, DatagridBatchActions, DatagridPagination, } from './Datagrid.stories';
 
@@ -48,7 +49,6 @@ import userEvent from '@testing-library/user-event';
 
 const dataTestId = uuidv4();
 
-const carbonPrefix = 'cds';
 const componentName = Datagrid.displayName;
 
 const defaultHeader = [
@@ -887,7 +887,7 @@ describe(componentName, () => {
     );
 
     expect(screen.getByRole('table')).toHaveClass(
-      `${carbonPrefix}--data-table`
+      `${carbon.prefix}--data-table`
     );
 
     expect(
@@ -928,7 +928,7 @@ describe(componentName, () => {
 
     for (var i = 0; i < numRows; i++) {
       expect(tableBodyRows[i].classList[1]).toEqual(
-        `${carbonPrefix}--data-table--selected`
+        `${carbon.prefix}--data-table--selected`
       );
     }
 
@@ -944,7 +944,7 @@ describe(componentName, () => {
     );
 
     expect(
-      document.getElementsByClassName(`${carbonPrefix}--search-input`)[0]
+      document.getElementsByClassName(`${carbon.prefix}--search-input`)[0]
     ).toBeDefined();
 
     // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
@@ -1185,10 +1185,10 @@ describe(componentName, () => {
     render(<WithPagination data-testid={dataTestId}></WithPagination>);
 
     expect(
-      document.getElementById(`${carbonPrefix}-pagination-select-4`)
+      document.getElementById(`${carbon.prefix}-pagination-select-4`)
     ).toBeDefined();
     expect(
-      document.getElementById(`${carbonPrefix}-pagination-select-6`)
+      document.getElementById(`${carbon.prefix}-pagination-select-6`)
     ).toBeDefined();
   });
 
@@ -1261,7 +1261,7 @@ describe(componentName, () => {
     const alertMock = jest.spyOn(window, 'alert');
 
     expect(
-      document.getElementsByClassName(`${carbonPrefix}--search-input`)[0]
+      document.getElementsByClassName(`${carbon.prefix}--search-input`)[0]
     ).toBeDefined();
 
     // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
@@ -1341,7 +1341,7 @@ describe(componentName, () => {
       new MouseEvent('click')
     );
 
-    expect(clickableRow).toHaveClass(`${carbonPrefix}--data-table--selected`);
+    expect(clickableRow).toHaveClass(`${carbon.prefix}--data-table--selected`);
 
     expect(
       document
@@ -1455,7 +1455,7 @@ describe(componentName, () => {
 
     fireEvent.click(button);
 
-    expect(row.classList[1]).toEqual(`${carbonPrefix}--data-table--selected`);
+    expect(row.classList[1]).toEqual(`${carbon.prefix}--data-table--selected`);
 
     fireEvent.click(button);
     expect(row.classList['0']).toEqual('c4p--datagrid__carbon-row');
@@ -1489,7 +1489,7 @@ describe(componentName, () => {
     ).toEqual('c4p--datagrid__datagridLeftPanel');
 
     expect(
-      document.getElementsByClassName(`${carbonPrefix}--search-input`)[0]
+      document.getElementsByClassName(`${carbon.prefix}--search-input`)[0]
     ).toBeDefined();
 
     // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
@@ -1614,7 +1614,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('tr')[previousRowNumber].classList[1] ===
-      `.${carbonPrefix}--data-table--selected`
+      `.${carbon.prefix}--data-table--selected`
     ) {
       fireEvent.click(
         screen
@@ -1632,7 +1632,7 @@ describe(componentName, () => {
           .getByRole('table')
           .getElementsByTagName('tbody')[0]
           .getElementsByTagName('tr')[currentRowNumber].classList[1]
-      ).toEqual(`${carbonPrefix}--data-table--selected`);
+      ).toEqual(`${carbon.prefix}--data-table--selected`);
 
       expect(
         screen
@@ -1657,7 +1657,7 @@ describe(componentName, () => {
           .getByRole('table')
           .getElementsByTagName('tbody')[0]
           .getElementsByTagName('tr')[currentRowNumber].classList[1]
-      ).toEqual(`${carbonPrefix}--data-table--selected`);
+      ).toEqual(`${carbon.prefix}--data-table--selected`);
     }
   }
 
@@ -1699,7 +1699,7 @@ describe(componentName, () => {
           .getByRole('table')
           .getElementsByTagName('tbody')[0]
           .getElementsByTagName('tr')[i].classList[1]
-      ).toEqual(`${carbonPrefix}--data-table--selected`);
+      ).toEqual(`${carbon.prefix}--data-table--selected`);
     }
 
     fireEvent.click(
@@ -1744,7 +1744,7 @@ describe(componentName, () => {
     expect(
       document
         .getElementsByClassName(
-          'cds--radio-button-group cds--radio-button-group--vertical cds--radio-button-group--label-right'
+          `${carbon.prefix}--radio-button-group ${carbon.prefix}--radio-button-group--vertical ${carbon.prefix}--radio-button-group--label-right`
         )[0]
         .getElementsByTagName('legend')[0].textContent
     ).toEqual('Row height');
@@ -1759,7 +1759,7 @@ describe(componentName, () => {
 
     var rowSize = document
       .getElementsByClassName(
-        'cds--radio-button-group cds--radio-button-group--vertical cds--radio-button-group--label-right'
+        `${carbon.prefix}--radio-button-group ${carbon.prefix}--radio-button-group--vertical ${carbon.prefix}--radio-button-group--label-right`
       )[0]
       .getElementsByTagName('div').length;
 
@@ -1767,7 +1767,7 @@ describe(componentName, () => {
       expect(
         document
           .getElementsByClassName(
-            'cds--radio-button-group cds--radio-button-group--vertical cds--radio-button-group--label-right'
+            `${carbon.prefix}--radio-button-group ${carbon.prefix}--radio-button-group--vertical ${carbon.prefix}--radio-button-group--label-right`
           )[0]
           .getElementsByTagName('div')
           .item(j)
@@ -1910,7 +1910,7 @@ describe(componentName, () => {
           .getByRole('table')
           .getElementsByTagName('tbody')[0]
           .getElementsByTagName('tr')[i].classList[1]
-      ).toEqual(`${carbonPrefix}--data-table--selected`);
+      ).toEqual(`${carbon.prefix}--data-table--selected`);
     }
 
     expect(
@@ -1955,7 +1955,7 @@ describe(componentName, () => {
 
     for (var i = 0; i < rows.length; i++) {
       expect(rows.item(i).classList[1]).toEqual(
-        `${carbonPrefix}--data-table--selected`
+        `${carbon.prefix}--data-table--selected`
       );
     }
 
@@ -1984,7 +1984,7 @@ describe(componentName, () => {
     );
 
     expect(selectIndividualRow.classList[1]).toEqual(
-      `${carbonPrefix}--data-table--selected`
+      `${carbon.prefix}--data-table--selected`
     );
   });
 
@@ -2059,7 +2059,7 @@ describe(componentName, () => {
 
     for (var i = 0; i < topAlignmentRows.length; i++) {
       expect(topAlignmentRows[i].classList[1]).toEqual(
-        `${carbonPrefix}--data-table--selected`
+        `${carbon.prefix}--data-table--selected`
       );
     }
 
@@ -2073,18 +2073,18 @@ describe(componentName, () => {
           .getElementsByTagName('input')[0]
       );
       expect(topAlignmentRows[j].classList[1]).toEqual(
-        `${carbonPrefix}--data-table--selected`
+        `${carbon.prefix}--data-table--selected`
       );
     }
 
     fireEvent.click(allRowsCheckBox);
 
     expect(
-      document.getElementsByClassName(`${carbonPrefix}--search-input`)[0]
+      document.getElementsByClassName(`${carbon.prefix}--search-input`)[0]
     ).toBeDefined();
 
     expect(screen.getByText(/left panel/i)).toHaveClass(
-      `${carbonPrefix}--tooltip-content`
+      `${carbon.prefix}--tooltip-content`
     );
 
     const rowHeightButton = screen.getByLabelText('Row height');

@@ -16,6 +16,10 @@
 
 $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 
+.sb-show-main.sb-main-centered {
+  height: 100vh;
+}
+
 .sb-show-main.sb-main-centered #root {
   width: 100%;
   height: 100vh;

@@ -1,0 +1,11 @@
+import gettingStarted from './images/gettingStarted.png';
+import { getDocsId } from '../../../../../../.storybook';
+
+<Column lg={8}>
+  <LinkTo
+    className="storybook__link--image"
+    kind={getDocsId('layouts-getting-started')}
+  >
+    <img alt="Getting Started page layout example" src={gettingStarted} />
+  </LinkTo>
+</Column>

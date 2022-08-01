@@ -55,15 +55,25 @@ describe(name, () => {
 
   for (const key in components) {
     if (key.charAt(0) === key.charAt(0).toUpperCase()) {
-      const TestComponent = components[key];
-
       it(`Does not render a canary for "${key}" if package flags set to enable`, () => {
-        const { container } = render(
-          <WebTerminalProvider>
-            <TestComponent />
-          </WebTerminalProvider>
-        );
-        expect(container.querySelector(`.${canaryClass}`)).toBeNull();
+        const TestComponent = components[key];
+        let elementContainer;
+
+        /** Wraps the test component with the web terminal provider if the test component
+            starts with 'WebTerminal' */
+        if (key.startsWith('WebTerminal')) {
+          const { container } = render(
+            <WebTerminalProvider>
+              <TestComponent />
+            </WebTerminalProvider>
+          );
+          elementContainer = container;
+        } else {
+          const { container } = render(<TestComponent />);
+          elementContainer = container;
+        }
+
+        expect(elementContainer.querySelector(`.${canaryClass}`)).toBeNull();
       });
     }
   }

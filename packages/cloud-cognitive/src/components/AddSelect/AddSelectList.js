@@ -135,7 +135,7 @@ export let AddSelectList = ({
                       </div>
                       {hasModifiers && (
                         <Dropdown
-                          id={`${item.id}-modifier`}
+                          id={`add-select-modifier-${item.id}`}
                           type="inline"
                           items={modifiers.options}
                           light

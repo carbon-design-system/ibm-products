@@ -76,7 +76,8 @@ export let AddSelectColumn = ({
   const selectAllHandler = (checked) => {
     const itemIds = entries.map((item) => item.id);
     if (checked) {
-      setMultiSelection([...multiSelection, ...itemIds]);
+      const newSelections = [...new Set([...multiSelection, ...itemIds])];
+      setMultiSelection(newSelections);
     } else {
       const newItems = multiSelection.filter((i) => !itemIds.includes(i));
       setMultiSelection(newItems);
@@ -170,6 +171,7 @@ export let AddSelectColumn = ({
         <div className={`${blockClass}__tag-container`}>
           <Checkbox
             id={`${uuidv4()}-select-all`}
+            className={`${colClass}__select-all`}
             checked={allSelected}
             onChange={selectAllHandler}
             labelText={

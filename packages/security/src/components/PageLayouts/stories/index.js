@@ -5,7 +5,6 @@
 
 import { layout04 } from '@carbon/layout';
 
-import { Grid } from 'carbon-components-react';
 import classnames from 'classnames';
 import React from 'react';
 
@@ -49,7 +48,7 @@ export default {
           hideCloseButton
         />
 
-        <Grid>{story()}</Grid>
+        {story()}
       </>
     ),
   ],

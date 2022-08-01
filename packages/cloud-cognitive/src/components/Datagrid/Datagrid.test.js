@@ -2193,7 +2193,6 @@ describe(componentName, () => {
         .getElementsByClassName('c4p--datagrid__actions-column-content')[0]
         .getElementsByTagName('button')[0]
     );
-
     expect(
       document
         .getElementsByTagName('ul')[0]

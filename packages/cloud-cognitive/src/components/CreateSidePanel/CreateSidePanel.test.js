@@ -10,18 +10,17 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 import userEvent from '@testing-library/user-event';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 import { CreateSidePanel } from '.';
 
 const componentName = CreateSidePanel.displayName;
 
-const carbonPrefix = 'cds';
 const title = 'Test Create Side panel';
 const subtitle = 'Test Create Side panel subtitle';
 const formDescription =
   'This is a test description. It has several lines. It should render a side panel.';
-const selectorPrimaryFocus = `.${carbonPrefix}--text-input`;
+const selectorPrimaryFocus = `.${carbon.prefix}--text-input`;
 const formTitle = 'This is a test form title';
 const blockClass = `${pkg.prefix}--create-side-panel`;
 

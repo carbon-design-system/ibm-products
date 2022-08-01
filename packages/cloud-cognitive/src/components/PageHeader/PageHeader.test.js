@@ -9,7 +9,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 import { Tab, Tabs, TabList } from '@carbon/react';
 import { Lightning, Bee } from '@carbon/icons-react';
@@ -27,7 +27,6 @@ import { TYPES as tagTypes } from '../TagSet/constants';
 
 const { prefix } = pkg;
 
-const carbonPrefix = 'cds';
 const blockClass = `${prefix}--page-header`;
 
 /* Test properties. */
@@ -125,7 +124,7 @@ jest.mock('../../global/js/utils/uuidv4');
 const initSizes = () => ({
   offsetWidth: {
     [`${blockClass}`]: window.innerWidth,
-    [`${carbonPrefix}--btn`]: 200,
+    [`${carbon.prefix}--btn`]: 200,
     [`${blockClass}__breadcrumb-row`]: window.innerWidth,
     [`${prefix}--breadcrumb-with-overflow`]: window.innerWidth * 0.6,
     [`${prefix}--tag-set`]: window.innerWidth * 0.25,
@@ -133,7 +132,7 @@ const initSizes = () => ({
     [`${prefix}--button-set-with-overflow__button-container`]:
       window.innerWidth * 0.4,
     [`${prefix}--button-set-with-overflow`]: window.innerWidth * 0.4,
-    [`${carbonPrefix}--breadcrumb-item`]: 200,
+    [`${carbon.prefix}--breadcrumb-item`]: 200,
     [`${prefix}--action-bar__displayed-items`]: window.innerWidth * 0.3,
     [`${blockClass}__breadcrumb-title`]: window.innerWidth * 0.2,
     [`${prefix}--button-menu`]: 200,
@@ -143,7 +142,7 @@ const initSizes = () => ({
     [`${blockClass}`]: 300,
     [`${blockClass}__available-row`]: 40,
     [`${blockClass}__breadcrumb-row`]: 40,
-    [`${carbonPrefix}--breadcrumb-item`]: 40,
+    [`${carbon.prefix}--breadcrumb-item`]: 40,
     [`${blockClass}__navigation-row`]: 48,
     [`${blockClass}__subtitle-row`]: 40,
     [`${blockClass}__title-row`]: 64,
@@ -297,10 +296,12 @@ describe('PageHeader', () => {
     expect(
       screen.getAllByText(/Breadcrumb [1-3]/, {
         // selector need to ignore sizing items
-        selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbonPrefix}--link`,
+        selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
       })
     ).toHaveLength(3);
-    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(1);
+    expect(document.querySelectorAll(`.${carbon.prefix}--tabs`)).toHaveLength(
+      1
+    );
     expect(screen.getAllByText(/Tab [1-4]/)).toHaveLength(4);
     expect(
       document.querySelectorAll(`.${blockClass}__page-actions`)
@@ -313,7 +314,7 @@ describe('PageHeader', () => {
     expect(
       screen.getAllByText('A tag', {
         // selector need to ignore sizing items
-        selector: `.${prefix}--tag-set__displayed-tag .${carbonPrefix}--tag span`,
+        selector: `.${prefix}--tag-set__displayed-tag .${carbon.prefix}--tag span`,
       }).length
     ).toBeGreaterThan(0);
     expect(document.querySelectorAll(`.${blockClass}__title`)).toHaveLength(1);
@@ -434,7 +435,9 @@ describe('PageHeader', () => {
     const { navigation } = testProps;
     render(<PageHeader {...{ navigation, withoutBackground: true }} />);
 
-    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(1);
+    expect(document.querySelectorAll(`.${carbon.prefix}--tabs`)).toHaveLength(
+      1
+    );
   });
 
   test('Navigation row renders when Tags but no Navigation', () => {
@@ -461,7 +464,7 @@ describe('PageHeader', () => {
     expect(
       screen.getAllByText('A tag', {
         // selector need to ignore sizing items
-        selector: `.${prefix}--tag-set__displayed-tag .${carbonPrefix}--tag span`,
+        selector: `.${prefix}--tag-set__displayed-tag .${carbon.prefix}--tag span`,
       }).length
     ).toBeGreaterThan(0);
   });
@@ -515,7 +518,7 @@ describe('PageHeader', () => {
     expect(
       screen.getAllByText(/Breadcrumb [1-3]/, {
         // selector need to ignore sizing items
-        selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbonPrefix}--link`,
+        selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
       })
     ).toHaveLength(3);
   });
@@ -562,7 +565,7 @@ describe('PageHeader', () => {
     screen.getByText(titleUserDefinedStrings.content);
     screen.getByText(titleUserDefinedStrings.breadcrumbContent, {
       // selector need to ignore sizing items
-      selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbonPrefix}--link`,
+      selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
     });
 
     const allTitle = screen.getAllByTitle(titleUserDefinedStrings.asText);
@@ -577,7 +580,7 @@ describe('PageHeader', () => {
 
     screen.getByText(titleUserDefinedStrings.content, {
       // selector need to ignore sizing items
-      selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbonPrefix}--link`,
+      selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
     });
 
     const allTitle = screen.getAllByTitle(titleUserDefinedStrings.asText);
@@ -635,7 +638,7 @@ describe('PageHeader', () => {
     );
 
     const skeletons = document.querySelectorAll(
-      `.${carbonPrefix}--skeleton__text`
+      `.${carbon.prefix}--skeleton__text`
     );
     expect(skeletons).toHaveLength(3);
   });
@@ -706,9 +709,9 @@ describe('PageHeader', () => {
       <PageHeader data-testid={dataTestId} narrowGrid fullWidthGrid />
     );
 
-    const grid = container.querySelector(`.${carbonPrefix}--grid`);
-    expect(grid).toHaveClass(`${carbonPrefix}--grid--narrow`);
-    expect(grid).toHaveClass(`${carbonPrefix}--grid--full-width`);
+    const grid = container.querySelector(`.${carbon.prefix}--grid`);
+    expect(grid).toHaveClass(`${carbon.prefix}--grid--narrow`);
+    expect(grid).toHaveClass(`${carbon.prefix}--grid--full-width`);
   });
 
   test('PageHeader with custom pageActions', () => {

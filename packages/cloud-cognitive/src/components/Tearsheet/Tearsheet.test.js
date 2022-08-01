@@ -15,13 +15,12 @@ import {
 } from '../../global/js/utils/test-helper';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 import { Button, ButtonSet, Tab, Tabs, TabList } from '@carbon/react';
 import { Tearsheet, TearsheetNarrow } from '.';
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
 
-const carbonPrefix = 'cds';
 const blockClass = `${pkg.prefix}--tearsheet`;
 const componentName = Tearsheet.displayName;
 const componentNameNarrow = TearsheetNarrow.displayName;
@@ -93,7 +92,7 @@ let closeIconDescriptionTestedAlready = false;
 const commonTests = (Ts, name, props, testActions) => {
   it(`renders a component ${name}`, () => {
     render(<Ts {...{ ...props, closeIconDescription }} />);
-    expect(document.querySelector(`.${carbonPrefix}--modal`)).toHaveClass(
+    expect(document.querySelector(`.${carbon.prefix}--modal`)).toHaveClass(
       blockClass
     );
   });
@@ -116,7 +115,7 @@ const commonTests = (Ts, name, props, testActions) => {
       expect(document.querySelector(`.${blockClass}__buttons`)).toBeNull();
     }
 
-    expect(document.querySelector(`.${carbonPrefix}--modal`)).not.toHaveClass(
+    expect(document.querySelector(`.${carbon.prefix}--modal`)).not.toHaveClass(
       'is-visible'
     );
   });
@@ -159,7 +158,7 @@ const commonTests = (Ts, name, props, testActions) => {
 
   it('applies className to the root node', () => {
     render(<Ts {...{ ...props, className, closeIconDescription }} />);
-    expect(document.querySelector(`.${carbonPrefix}--modal`)).toHaveClass(
+    expect(document.querySelector(`.${carbon.prefix}--modal`)).toHaveClass(
       className
     );
   });
@@ -208,7 +207,7 @@ const commonTests = (Ts, name, props, testActions) => {
           open
         />
       );
-      const tearsheet = document.querySelector(`.${carbonPrefix}--modal`);
+      const tearsheet = document.querySelector(`.${carbon.prefix}--modal`);
       const closeButton = screen.getByRole('button', {
         name: closeIconDescription,
       });
@@ -227,7 +226,7 @@ const commonTests = (Ts, name, props, testActions) => {
           open
         />
       );
-      const tearsheet = document.querySelector(`.${carbonPrefix}--modal`);
+      const tearsheet = document.querySelector(`.${carbon.prefix}--modal`);
       const closeButton = screen.getByRole('button', {
         name: closeIconDescription,
       });
@@ -241,7 +240,7 @@ const commonTests = (Ts, name, props, testActions) => {
 
   it('is visible when open is true', () => {
     render(<Ts {...props} open />);
-    expect(document.querySelector(`.${carbonPrefix}--modal`)).toHaveClass(
+    expect(document.querySelector(`.${carbon.prefix}--modal`)).toHaveClass(
       'is-visible'
     );
   });
@@ -284,7 +283,7 @@ const commonTests = (Ts, name, props, testActions) => {
         render(<Ts {...props} open />);
         render(<Ts {...props} open />);
         expect(
-          document.querySelectorAll(`.${carbonPrefix}--modal.is-visible`)
+          document.querySelectorAll(`.${carbon.prefix}--modal.is-visible`)
         ).toHaveLength(3);
       }
     ));
@@ -345,7 +344,9 @@ describe(componentName, () => {
     render(
       <Tearsheet open {...{ navigation }} closeIconDescription="Close icon" />
     );
-    expect(document.querySelectorAll(`.${carbonPrefix}--tabs`)).toHaveLength(1);
+    expect(document.querySelectorAll(`.${carbon.prefix}--tabs`)).toHaveLength(
+      1
+    );
     const tabList = screen.getByRole('tablist', { name: 'Tab list' });
     Array.from(tabList).forEach((tab, index) => {
       const tabContent =

@@ -52,6 +52,7 @@ jobs:
         run: yarn ci-check:lint
 
   test-cdai:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -92,6 +93,7 @@ jobs:
         run: yarn ci-check:test:c4p
 
   test-security:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

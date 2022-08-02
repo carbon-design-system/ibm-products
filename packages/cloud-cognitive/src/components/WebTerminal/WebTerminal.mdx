@@ -15,30 +15,56 @@ The `WebTerminal` is prompted by the user and is persistent until dismissed. The
 purpose of a web terminal is to provide users with the ability to type commands
 manually instead of using the GUI.
 
-#### Why do we need an open prop?
+### Getting started
 
-You have to pass an `open` prop which toggles from `true` to `false` or `false`
-to `true`. In this case we are using the global navigation terminal icon to
-trigger this `onClick`. It was designed this way so you can open the web
-terminal in any context like within a data table or button.
+To get started using the WebTerminal, you have to first wrap your application
+with the `<WebTerminalProvider>` component. This will allow all the WebTerminal
+components to be used with the `useWebTerminal()` custom hook.
 
-#### Why do we need a closeTerminal callback?
+```jsx
+import { WebTerminalProvider } from '@carbon/ibm-products';
 
-It is very important that you pass the `closeTerminal` function setting your
-provided `open` prop to false. We didn't add the logic to close the web terminal
-from the component because we want you, the developer, to be able to pass in any
-other operations you want to do like error checks or a confirmation modal before
-the user closes the modal.
+const App = () => {
+  return (
+    <WebTerminalProvider>
+      ...
+    <WebTerminalProvider>
+  )
+};
+```
+
+#### useWebTerminal()
+
+```js
+const { open, openWebTerminal, closeWebTerminal, toggleWebTerminal } =
+  useWebTerminal();
+```
+
+The `useWebTerminal()` hook returns an object with 4 properties:
+
+1. Read the `open` state (true or false)
+2. `openWebTerminal` sets the `open` state to true
+3. `closeWebTerminal` sets the `open` state to false
+4. `toggleWebTerminal` toggles between true and false
 
 Example:
 
 ```jsx
-const [isTerminalOpen, setIsTerminalOpen] = useState(false);
-const closeTerminal = () => setIsTerminalOpen(false)
+const MyComponent = () => {
+  const { open, openWebTerminal, closeWebTerminal, toggleWebTerminal } =
+    useWebTerminal();
 
-<WebTerminal open={isTerminalOpen} closeTerminal={closeTerminal}>
-  ...
-</WebTerminal>
+  return (
+    <div>
+      <button onClick={() => openWebTerminal()}>Open web terminal</button>
+      <button onClick={() => closeWebTerminal()}>Close web terminal</button>
+      <button onClick={() => toggleWebTerminal()}>Toggle web terminal</button>
+      <p>The web terminal is now {open}</p>
+
+      <WebTerminal>...</WebTerminal>
+    </div>
+  );
+};
 ```
 
 #### Passing in your own terminal.
@@ -55,11 +81,11 @@ Optionally you can import `WebTerminalContentWrapper` to have content adjust
 their width based off the `WebTerminal` width when it is opened.
 
 ```jsx
-<WebTerminalContentWrapper isTerminalOpen={isTerminalOpen}>
+<WebTerminalContentWrapper>
   content
 </WebTerminalContentWrapper>
 
-<WebTerminal open={isTerminalOpen} closeTerminal={closeTerminal}>
+<WebTerminal>
   ...
 </WebTerminal>
 ```

@@ -60,6 +60,7 @@ const defaults = {
     ToolbarGroup: false,
     WebTerminal: false,
     WebTerminalContentWrapper: false,
+    WebTerminalProvider: false,
     EditSidePanel: false,
     CancelableTextEdit: false,
     DataSpreadsheet: false,

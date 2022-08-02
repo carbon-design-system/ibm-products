@@ -11,7 +11,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -23,7 +23,6 @@ import ansibleLogo from './_story-assets/ansible-logo.png';
 import grafanaLogo from './_story-assets/grafana-logo.png';
 import jsLogo from './_story-assets/js-logo.png';
 
-const carbonPrefix = 'cds';
 const blockClass = `${pkg.prefix}--about-modal`;
 const componentName = AboutModal.displayName;
 
@@ -150,7 +149,7 @@ describe(componentName, () => {
   it('renders a clickable carbon tab for additional info', () => {
     renderComponent({ additionalInfo, open: true });
     const tabToSelect = screen.getByRole('tab', { name: tabLabel2 });
-    const tabSelected = `${carbonPrefix}--tabs__nav-item--selected`;
+    const tabSelected = `${carbon.prefix}--tabs__nav-item--selected`;
     expect(tabToSelect).not.toHaveClass(tabSelected);
     userEvent.click(tabToSelect);
     expect(tabToSelect).toHaveClass(tabSelected);
@@ -211,7 +210,7 @@ describe(componentName, () => {
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
     renderComponent({ ref });
-    expect(ref.current.outerModal.current).toHaveClass(blockClass);
+    expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', () => {

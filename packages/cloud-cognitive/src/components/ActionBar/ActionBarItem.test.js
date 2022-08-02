@@ -9,11 +9,10 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ActionBarItem } from '.';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 const { click } = fireEvent;
 
-const carbonPrefix = 'cds';
 const blockClass = `${pkg.prefix}--action-bar-item`;
 const componentName = ActionBarItem.displayName;
 
@@ -46,7 +45,7 @@ describe(ActionBarItem.displayName, () => {
     );
 
     const actionBarItemElement = container.querySelector(`.${blockClass}`);
-    expect(actionBarItemElement).toHaveClass(`${carbonPrefix}--btn`);
+    expect(actionBarItemElement).toHaveClass(`${carbon.prefix}--btn`);
 
     click(actionBarItemElement);
     expect(myOnClick).toBeCalled();
@@ -70,8 +69,8 @@ describe(ActionBarItem.displayName, () => {
       </ActionBarItem>
     );
     const actionBarItemElement = container.querySelector(`.${blockClass}`);
-    expect(actionBarItemElement).not.toHaveClass(`${carbonPrefix}--btn--lg`);
-    expect(actionBarItemElement).toHaveClass(`${carbonPrefix}--btn--md`);
+    expect(actionBarItemElement).not.toHaveClass(`${carbon.prefix}--btn--lg`);
+    expect(actionBarItemElement).toHaveClass(`${carbon.prefix}--btn--md`);
     expect(actionBarItemElement).toHaveAttribute('type', 'button');
   });
 

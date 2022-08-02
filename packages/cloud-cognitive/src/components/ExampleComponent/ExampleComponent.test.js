@@ -9,13 +9,12 @@ import React from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { ExampleComponent } from '.';
 
-const carbonPrefix = 'cds';
 const blockClass = `${pkg.prefix}--example-component`;
 const componentName = ExampleComponent.displayName;
 
@@ -95,10 +94,10 @@ describe(componentName, () => {
     renderComponent({ primaryKind: 'danger', secondaryKind: 'tertiary' });
     expect(
       screen.getByRole('button', { name: `danger ${primaryButtonLabel}` })
-    ).toHaveClass(`${carbonPrefix}--btn--danger`);
+    ).toHaveClass(`${carbon.prefix}--btn--danger`);
     expect(
       screen.getByRole('button', { name: secondaryButtonLabel })
-    ).toHaveClass(`${carbonPrefix}--btn--tertiary`);
+    ).toHaveClass(`${carbon.prefix}--btn--tertiary`);
   });
 
   it('renders the size property', () => {
@@ -106,7 +105,7 @@ describe(componentName, () => {
     screen
       .getAllByRole('button')
       .forEach((button) =>
-        expect(button).toHaveClass(`${carbonPrefix}--btn--sm`)
+        expect(button).toHaveClass(`${carbon.prefix}--btn--sm`)
       );
   });
 

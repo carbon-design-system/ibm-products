@@ -90,7 +90,7 @@ describe(componentName, () => {
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
     render(<RenderComponent ref={ref} />);
-    expect(ref.current.outerModal.current).toHaveClass(blockClass);
+    expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds additional properties to the containing node', () => {

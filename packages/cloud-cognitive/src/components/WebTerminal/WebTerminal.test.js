@@ -9,7 +9,6 @@ import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Code, Copy } from '@carbon/icons-react';
-import { expectWarn } from '../../global/js/utils/test-helper';
 
 import { pkg } from '../../settings';
 
@@ -79,25 +78,25 @@ describe(name, () => {
     expect(onCloseHandler).toBeCalled();
   });
 
-  test('should render documentation link text', () =>
-    expectWarn(
-      'Warning: The `light` prop for `OverflowMenu` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.',
-      () => {
-        render(
-          <WebTerminal
-            closeTerminal={jest.fn()}
-            open
-            documentationLinks={documentationLinks}
-            closeIconDescription="Close terminal"
-          >
-            Body content
-          </WebTerminal>
-        );
-        const { click } = userEvent;
-        click(screen.getByRole('button', { name: /description dropdown/i }));
-        expect(screen.getByText(/Kubernetes docs/i));
-      }
-    ));
+  test('should render documentation link text', () => {
+    const overflowLabel = 'Open overflow';
+    render(
+      <WebTerminal
+        closeTerminal={jest.fn()}
+        open
+        documentationLinks={documentationLinks}
+        closeIconDescription="Close terminal"
+        documentationLinksIconDescription={overflowLabel}
+      >
+        Body content
+      </WebTerminal>
+    );
+    const { click } = userEvent;
+    click(screen.getByRole('button', { name: overflowLabel }));
+    documentationLinks.forEach((link) => {
+      screen.getByText(link.itemText);
+    });
+  });
 
   it('adds additional properties to the containing node', () => {
     const { container } = render(

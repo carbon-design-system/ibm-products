@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import wrapFocus from '../wrapFocus';
-
-const carbonPrefix = 'cds';
+import { carbon } from '../../../../settings';
 
 describe('wrapFocus', () => {
   let node;
@@ -23,7 +22,7 @@ describe('wrapFocus', () => {
         id="start-sentinel"
         tabIndex="0"
         role="link"
-        class="${carbonPrefix}--visually-hidden">
+        class="${carbon.prefix}--visually-hidden">
       </span>
       <div id="inner-modal" tabindex="-1">
         <button id="button-0">Button 0</button>
@@ -34,10 +33,10 @@ describe('wrapFocus', () => {
         id="end-sentinel"
         tabIndex="0"
         role="link"
-        class="${carbonPrefix}--visually-hidden">
+        class="${carbon.prefix}--visually-hidden">
       </span>
       <button id="outer-following"></button>
-      <div class="${carbonPrefix}--tooltip" tabindex="0"></div>
+      <div class="${carbon.prefix}--tooltip" tabindex="0"></div>
     `;
     document.body.appendChild(node);
     spyInnerModal = jest.spyOn(node.querySelector('#inner-modal'), 'focus');
@@ -94,7 +93,7 @@ describe('wrapFocus', () => {
       bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
       endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector(`.${carbonPrefix}--tooltip`),
+      currentActiveNode: node.querySelector(`.${carbon.prefix}--tooltip`),
       oldActiveNode: node.querySelector('#button-2'),
     });
     expect(spyInnerModal).not.toHaveBeenCalled();

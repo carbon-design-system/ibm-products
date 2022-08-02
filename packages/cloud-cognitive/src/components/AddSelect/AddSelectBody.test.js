@@ -8,8 +8,10 @@
 import { render, fireEvent, screen } from '@testing-library/react';
 import React from 'react';
 import { AddSelectBody } from './AddSelectBody';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 import { getGlobalFilterValues, normalize } from './add-select-utils';
+import { Document16 } from '@carbon/icons-react';
+import image from '../UserProfileImage/headshot.png'; // cspell:disable-line
 
 const blockClass = `${pkg.prefix}--add-select`;
 const componentName = AddSelectBody.name;
@@ -20,6 +22,7 @@ const defaultItems = {
       title: 'Kansas',
       value: 'kansas',
       tag: 'default',
+      subtitle: 'test subtitle',
     },
     {
       id: '2',
@@ -73,6 +76,20 @@ const hierarchyItems = {
             id: '5',
             title: 'Los Angeles',
             value: 'la',
+          },
+        ],
+      },
+    },
+    {
+      id: '6',
+      title: 'Georgia',
+      value: 'georgia',
+      children: {
+        entries: [
+          {
+            id: '7',
+            title: 'Atlanta',
+            value: 'atl',
           },
         ],
       },
@@ -167,6 +184,31 @@ const itemsWithMeta = {
   ],
 };
 
+const itemWithIcon = {
+  entries: [
+    {
+      id: '1',
+      value: 'kansas',
+      title: 'Kansas',
+      icon: Document16,
+    },
+  ],
+};
+
+const itemWithAvatar = {
+  entries: [
+    {
+      id: '1',
+      value: 'kansas',
+      title: 'Kansas',
+      avatar: {
+        src: image,
+        alt: 'head shot',
+      },
+    },
+  ],
+};
+
 describe(componentName, () => {
   const { ResizeObserver } = window;
 
@@ -226,27 +268,46 @@ describe(componentName, () => {
   it('displays child items', () => {
     render(<AddSelectBody {...singleHierarchyProps} />);
     const childrenButton = document.querySelector(
-      `.${pkg.prefix}--add-select__selections-view-children`
+      `.${blockClass}__selections-view-children`
     );
     expect(screen.queryByText('Los Angeles')).toBeNull();
     fireEvent.click(childrenButton);
     expect(screen.queryByText('Los Angeles'));
   });
 
-  it('displays breadcrumbs', () => {
-    render(<AddSelectBody {...singleHierarchyProps} />);
-    const childrenButton = document.querySelector(
-      `.${pkg.prefix}--add-select__selections-view-children`
+  it('handles breadcrumbs', () => {
+    const normalizedItems = normalize(hierarchyItems);
+    const newProps = {
+      ...multiProps,
+      items: hierarchyItems,
+      useNormalizedItems: true,
+      normalizedItems,
+    };
+    render(<AddSelectBody {...newProps} />);
+    const childrenBtn = document.querySelectorAll(
+      `.${blockClass}__selections-view-children`
     );
-    expect(document.querySelectorAll('.bx--breadcrumb-item').length).toEqual(1);
-    expect(
-      document.querySelectorAll('.bx--breadcrumb-item')[0].textContent
-    ).toBe('Categories');
-    fireEvent.click(childrenButton);
-    expect(document.querySelectorAll('.bx--breadcrumb-item').length).toEqual(2);
-    expect(
-      document.querySelectorAll('.bx--breadcrumb-item')[1].textContent
-    ).toBe('California');
+    const breadcrumbClass = `.${carbon.prefix}--breadcrumb-item`;
+    expect(document.querySelectorAll(breadcrumbClass).length).toEqual(1);
+    expect(document.querySelectorAll(breadcrumbClass)[0].textContent).toBe(
+      'Business terms'
+    );
+    fireEvent.click(childrenBtn[0]);
+    expect(document.querySelectorAll(breadcrumbClass).length).toEqual(2);
+    expect(document.querySelectorAll(breadcrumbClass)[1].textContent).toBe(
+      'California'
+    );
+    fireEvent.click(document.querySelectorAll(breadcrumbClass)[0]);
+    expect(document.querySelectorAll(breadcrumbClass).length).toEqual(1);
+    fireEvent.click(childrenBtn[0]);
+    fireEvent.click(childrenBtn[1]);
+    expect(document.querySelectorAll(breadcrumbClass)[1].textContent).toBe(
+      'Georgia'
+    );
+    fireEvent.click(childrenBtn[1]);
+    expect(document.querySelectorAll(breadcrumbClass)[1].textContent).toBe(
+      'Georgia'
+    );
   });
 
   it('handles multi select submit', () => {
@@ -276,41 +337,28 @@ describe(componentName, () => {
     const submitBtn = screen.getByText('Add');
     const opt1 = screen.getByLabelText('Kansas');
     const opt2 = screen.getByLabelText('Texas');
+    const opt3 = screen.getByLabelText('Florida');
     fireEvent.click(opt1);
+    const dropdown = document.querySelector('#add-select-modifier-1 button');
+    fireEvent.click(dropdown);
+    const modifierOpts = document.querySelectorAll(
+      `#add-select-modifier-1 .${carbon.prefix}--list-box__menu-item`
+    );
+    fireEvent.click(modifierOpts[1]);
     fireEvent.click(opt2);
+    fireEvent.click(opt3);
+    fireEvent.click(opt3);
     fireEvent.click(submitBtn);
     expect(onSubmit).toBeCalledWith([
       {
         id: '1',
-        role: 'editor',
+        role: 'admin',
       },
       {
         id: '2',
         role: 'editor',
       },
     ]);
-  });
-
-  it('handles multi select with hierarchy', () => {
-    const newProps = {
-      ...multiProps,
-      items: hierarchyItems,
-      useNormalizedItems: true,
-      normalizedItems: normalize(hierarchyItems),
-    };
-    render(<AddSelectBody {...newProps} />);
-    expect(
-      document.querySelector(`.${blockClass}__columns`)
-    ).toBeInTheDocument();
-    const opt1 = screen.getByLabelText('Kansas');
-    const opt2 = screen.getByLabelText('Texas');
-    fireEvent.click(opt1);
-    fireEvent.click(opt2);
-    expect(
-      document.querySelectorAll(
-        `.${pkg.prefix}--add-select__sidebar-selected-item-title`
-      ).length
-    ).toBe(2);
   });
 
   it('handles items with meta data', () => {
@@ -323,6 +371,24 @@ describe(componentName, () => {
     expect(metaBtn);
     fireEvent.click(metaBtn);
     expect(screen.getByText(newProps.metaPanelTitle));
+  });
+
+  it('handles items with icons', () => {
+    const newProps = {
+      ...multiProps,
+      items: itemWithIcon,
+    };
+    render(<AddSelectBody {...newProps} />);
+    expect(document.querySelector(`${blockClass}__selections-cell-icon`));
+  });
+
+  it('handles items with avatar', () => {
+    const newProps = {
+      ...multiProps,
+      items: itemWithAvatar,
+    };
+    render(<AddSelectBody {...newProps} />);
+    expect(document.querySelector(`${blockClass}-cell-avatar`));
   });
 
   it('filters with global filters', () => {
@@ -339,14 +405,58 @@ describe(componentName, () => {
       globalFilterOpts: getGlobalFilterValues(globalFilters, normalizedItems),
     };
     render(<AddSelectBody {...newProps} />);
-    const filterToggle = screen.getByLabelText('Filter');
-    fireEvent.click(filterToggle);
-    const dropdown = screen.getByTitle('Choose an option');
-    fireEvent.click(dropdown);
-    const value = screen.getByText('default');
-    fireEvent.click(value);
-    const applyBtn = screen.getByText('Apply');
-    fireEvent.click(applyBtn);
-    expect(screen.queryByText('kansas'));
+    fireEvent.click(screen.getByLabelText('Filter'));
+    fireEvent.click(screen.getByTitle('Choose an option'));
+    fireEvent.click(screen.getByText('default'));
+    fireEvent.click(screen.getByText('Apply'));
+    expect(screen.getByText('tag: default'));
+    // test clear filters
+    const clearFiltersBtn = screen.getByText('Clear filters');
+    fireEvent.click(clearFiltersBtn);
+    expect(screen.queryByText('tag: default')).toBeNull();
+    // test clear tag
+    fireEvent.click(screen.getByLabelText('Filter'));
+    fireEvent.click(screen.getByTitle('Choose an option'));
+    fireEvent.click(screen.getByText('default'));
+    fireEvent.click(screen.getByText('Apply'));
+    expect(screen.getByText('tag: default'));
+    const closeIcon = document.querySelector(`.${carbon.prefix}--tag button`);
+    fireEvent.click(closeIcon);
+    expect(screen.queryByText('tag: default')).toBeNull();
+  });
+
+  it('filters columns', () => {
+    const normalizedItems = normalize(hierarchyItems);
+    const newProps = {
+      ...multiProps,
+      items: hierarchyItems,
+      useNormalizedItems: true,
+      normalizedItems,
+    };
+    render(<AddSelectBody {...newProps} />);
+    const input = screen.getByPlaceholderText('Find');
+    fireEvent.change(input, { target: { value: 'florida' } });
+    expect(screen.findByText('florida'));
+    fireEvent.change(input, { target: { value: '' } });
+    const selectAll = document.querySelector(
+      '.c4p--add-select__column__select-all'
+    );
+    fireEvent.click(selectAll);
+    expect(
+      document.querySelectorAll('.c4p--add-select__sidebar-accordion-title')
+        .length
+    ).toBe(5);
+    fireEvent.click(selectAll);
+    expect(
+      document.querySelectorAll('.c4p--add-select__sidebar-accordion-title')
+        .length
+    ).toBe(0);
+    fireEvent.click(
+      document.querySelector(`.c4p--add-select__selections-view-children`)
+    );
+    expect(screen.findByText('Los Angeles'));
+    const globalSearch = screen.getByPlaceholderText('Find business terms');
+    fireEvent.change(globalSearch, { target: { value: 'florida' } });
+    fireEvent.change(globalSearch, { target: { value: '' } });
   });
 });

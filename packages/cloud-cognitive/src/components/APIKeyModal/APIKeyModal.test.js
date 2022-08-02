@@ -8,6 +8,7 @@
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { carbon } from '../../settings';
 
 import { APIKeyModal } from '.';
 
@@ -17,7 +18,6 @@ Object.assign(navigator, {
   },
 });
 
-const carbonPrefix = 'cds';
 const componentName = APIKeyModal.displayName;
 const defaultProps = {
   apiKey: '',
@@ -89,11 +89,11 @@ describe(componentName, () => {
     const { getByText, container, getByLabelText } = render(
       <APIKeyModal {...props} />
     );
-    expect(container.querySelector(`.${carbonPrefix}--text-input`).value).toBe(
+    expect(container.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
       props.apiKey
     );
     getByText(props.apiKeyLabel);
-    click(container.querySelector(`.${carbonPrefix}--btn--primary`));
+    click(container.querySelector(`.${carbon.prefix}--btn--primary`));
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(props.apiKey);
     getByLabelText(defaultProps.copyIconDescription);
   });
@@ -112,7 +112,7 @@ describe(componentName, () => {
       <APIKeyModal {...props} />
     );
 
-    const nameInput = container.querySelector(`.${carbonPrefix}--text-input`);
+    const nameInput = container.querySelector(`.${carbon.prefix}--text-input`);
     const createButton = getByText(props.generateButtonText);
 
     change(nameInput, { target: { value: 'test-key' } });
@@ -120,11 +120,11 @@ describe(componentName, () => {
     expect(onRequestGenerate).toHaveBeenCalledWith('test-key');
 
     rerender(<APIKeyModal {...props} loading />);
-    getByText(props.loadingText);
+    getByText(props.loadingText, { selector: 'div' });
     rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
     await waitFor(() => getByText(props.downloadLinkText));
     getByText(props.downloadBodyText);
-    expect(container.querySelector(`.${carbonPrefix}--text-input`).value).toBe(
+    expect(container.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
       '444-444-444-444'
     );
     click(getByText(props.copyButtonText));
@@ -148,7 +148,7 @@ describe(componentName, () => {
       <APIKeyModal {...props} />
     );
 
-    const nameInput = container.querySelector(`.${carbonPrefix}--text-input`);
+    const nameInput = container.querySelector(`.${carbon.prefix}--text-input`);
     const createButton = getByText(props.generateButtonText);
 
     change(nameInput, { target: { value: 'test-key' } });
@@ -237,7 +237,7 @@ describe(componentName, () => {
     expect(onRequestGenerate).toHaveBeenCalled();
     rerender(<APIKeyModal {...props} />);
     rerender(<APIKeyModal {...props} apiKey="abc-123" />);
-    expect(container.querySelector(`.${carbonPrefix}--text-input`).value).toBe(
+    expect(container.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
       'abc-123'
     );
     getByText(props.generateSuccessBody);
@@ -262,7 +262,7 @@ describe(componentName, () => {
       <APIKeyModal {...props} />
     );
 
-    const nameInput = container.querySelector(`.${carbonPrefix}--text-input`);
+    const nameInput = container.querySelector(`.${carbon.prefix}--text-input`);
     const editButton = getByText(props.editButtonText);
     expect(nameInput.value).toBe(props.apiKeyName);
     getByText(props.editButtonText);
@@ -284,21 +284,23 @@ describe(componentName, () => {
       <APIKeyModal {...props} />
     );
     await waitFor(() => getByText(props.downloadLinkText));
-    expect(container.querySelector(`.${carbonPrefix}--text-input`).value).toBe(
+    expect(container.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
       props.apiKey
     );
     expect(
-      container.querySelector(`.${carbonPrefix}--text-input`)
+      container.querySelector(`.${carbon.prefix}--text-input`)
     ).toHaveAttribute('type', 'password');
-    mouseOver(container.querySelector(`.${carbonPrefix}--icon-visibility-on`));
+    mouseOver(container.querySelector(`.${carbon.prefix}--icon-visibility-on`));
     await waitFor(() => getByText(defaultProps.showAPIKeyLabel));
-    click(container.querySelector(`.${carbonPrefix}--icon-visibility-on`));
-    mouseOver(container.querySelector(`.${carbonPrefix}--icon-visibility-off`));
+    click(container.querySelector(`.${carbon.prefix}--icon-visibility-on`));
+    mouseOver(
+      container.querySelector(`.${carbon.prefix}--icon-visibility-off`)
+    );
     await waitFor(() => getByText(defaultProps.hideAPIKeyLabel));
     rerender(<APIKeyModal {...props} hasAPIKeyVisibilityToggle={false} />);
     await waitFor(() => getByText(props.downloadLinkText));
     expect(
-      container.querySelector(`.${carbonPrefix}--text-input`)
+      container.querySelector(`.${carbon.prefix}--text-input`)
     ).toHaveAttribute('type', 'text');
   });
 

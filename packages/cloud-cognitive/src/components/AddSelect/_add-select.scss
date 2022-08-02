@@ -100,14 +100,19 @@
     }
   }
 
-  .#{$block-class}__selections-row:hover {
+  .#{$block-class} .#{$block-class}__selections-row:hover {
     .#{$block-class}__selections-radio {
       color: $interactive-04;
     }
 
-    .#{$block-class}__selections-view-children svg path {
-      // stylelint-disable-next-line
-      fill: $interactive-04 !important;
+    .#{$block-class}__selections-view-children svg {
+      color: $interactive-04;
+    }
+
+    button.#{$block-class}__selections-view-children.#{$carbon-prefix}--btn--ghost.#{$carbon-prefix}--btn--icon-only
+      .#{$carbon-prefix}--btn__icon
+      path {
+      fill: currentColor;
     }
   }
 

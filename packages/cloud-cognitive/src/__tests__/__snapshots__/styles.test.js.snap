@@ -2864,7 +2864,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   z-index: 9001;
   align-items: flex-end;
   color: var(--cds-text-primary, #161616);
-  /* stylelint-disable-next-line */
   transition: visibility 0s linear 240ms, background-color 240ms cubic-bezier(0.4, 0.14, 1, 1), opacity 240ms cubic-bezier(0.4, 0.14, 1, 1);
   --c4p--tearsheet--stacking-scale-factor-single: 0.95;
   --c4p--tearsheet--stacking-scale-factor-double: 0.9;
@@ -2873,8 +2872,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   /* stylelint-disable-next-line function-no-unknown */
   z-index: 9000;
   align-items: flex-end;
-  /* stylelint-disable-next-line */
-  transition: visibility 0s linear, background-color 240ms cubic-bezier(0, 0, 0.3, 1), opacity 240ms cubic-bezier(0, 0, 0.3, 1);
+  transition: visibility 0 linear, background-color 240ms cubic-bezier(0, 0, 0.3, 1), opacity 240ms cubic-bezier(0, 0, 0.3, 1);
 }
 @media (prefers-reduced-motion: reduce) {
   .c4p--tearsheet.is-visible {
@@ -4343,7 +4341,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-more-button .cds--btn__icon,
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button .cds--btn__icon {
-  /* stylelint-disable-next-line carbon/motion-easing-use */
   transition: transform 240ms ease;
   /* stylelint-disable-next-line max-nesting-depth */
 }
@@ -6438,7 +6435,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: block;
   width: 100%;
   height: 100%;
-  /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
+  /* stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use -- non-standard duration used */
   animation: background-and-shadow-appear 1000ms linear paused forwards;
   animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
   content: \\"\\";
@@ -6578,7 +6575,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: block;
   width: 100%;
   height: 100%;
-  /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
+  /* stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use -- non-standard duration used */
   animation: background-appear 1000ms linear paused forwards;
   animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
   content: \\"\\";
@@ -6758,7 +6755,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: block;
   width: 100%;
   height: 100%;
-  /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
+  /* stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use -- non-standard duration used */
   animation: background-appear 1000ms linear paused forwards;
   animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
   content: \\"\\";

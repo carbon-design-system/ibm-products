@@ -12,6 +12,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
+import { useWebTerminal } from './hooks';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const componentName = 'WebTerminalContentWrapper';
@@ -22,20 +23,17 @@ export let WebTerminalContentWrapper = React.forwardRef(
     {
       // The component props, in alphabetical order (for consistency).
       children,
-      isTerminalOpen,
 
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
+    const { open } = useWebTerminal();
     return (
       <div
         ref={ref}
-        className={cx([
-          blockClass,
-          { [`${blockClass}--open`]: isTerminalOpen },
-        ])}
+        className={cx([blockClass, { [`${blockClass}--open`]: open }])}
         {...rest}
       >
         {children}
@@ -65,9 +63,4 @@ WebTerminalContentWrapper.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
-
-  /**
-   * A boolean to determine if the terminal is open.
-   */
-  isTerminalOpen: PropTypes.bool.isRequired,
 };

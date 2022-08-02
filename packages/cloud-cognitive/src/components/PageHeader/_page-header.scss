@@ -92,7 +92,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     $animation: background-and-shadow-appear;
   }
 
-  /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
+  /* stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use -- non-standard duration used */
   animation: $animation $duration linear paused forwards;
   // Added separately for clarity
   animation-delay: calc(

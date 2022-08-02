@@ -25,11 +25,11 @@ module.exports = {
     ],
     'carbon/motion-duration-use': [
       true,
-      { severity: 'warning', acceptUndefinedVariables: true },
+      { severity: 'error', acceptUndefinedVariables: true },
     ],
     'carbon/motion-easing-use': [
       true,
-      { severity: 'warning', acceptUndefinedVariables: true },
+      { severity: 'error', acceptUndefinedVariables: true },
     ],
     'carbon/theme-token-use': [
       true,

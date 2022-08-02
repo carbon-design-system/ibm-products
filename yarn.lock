@@ -25034,6 +25034,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"stylelint-plugin-carbon-tokens@npm:2.0.0-beta.13":
+  version: 2.0.0-beta.13
+  resolution: "stylelint-plugin-carbon-tokens@npm:2.0.0-beta.13"
+  dependencies:
+    lodash: ^4.17.21
+    postcss-scss: ^4.0.4
+    postcss-value-parser: ^4.2.0
+  peerDependencies:
+    "@carbon/colors": ">=10 <= 11"
+    "@carbon/layout": ">=10 <= 11"
+    "@carbon/motion": ">=10 <= 11"
+    "@carbon/themes": ">=10 <= 11"
+    "@carbon/type": ">=10 <= 11"
+  checksum: 7f9041c89cbbe07ebc266167788d839725ec3f901fad1175176240e43aa16328c34c86304326b2e10181c3add5d33f108bf6eed35c257a9be1e6d3ec8908985d
+  languageName: node
+  linkType: hard
+
 "stylelint-prettier@npm:^2.0.0":
   version: 2.0.0
   resolution: "stylelint-prettier@npm:2.0.0"

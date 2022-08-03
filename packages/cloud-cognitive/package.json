@@ -77,7 +77,7 @@
     "@carbon/grid": "^11.3.0",
     "@carbon/layout": "^11.3.0",
     "@carbon/motion": "^11.2.0",
-    "@carbon/react": "^1.6.0",
+    "@carbon/react": "^1.9.0-rc.0",
     "@carbon/telemetry": "^0.1.0",
     "@carbon/themes": "^11.4.0",
     "@carbon/type": "^11.4.0",

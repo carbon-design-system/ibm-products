@@ -15,14 +15,14 @@ jobs:
           ref: carbon-v11
           token: ${{secrets.GH_TOKEN_LERNA}}
 
-      - name: Fetch main branch
+      - name: Fetch main branch # https://github.com/peter-evans/create-pull-request/blob/main/docs/examples.md#keep-a-branch-up-to-date-with-another
         run: |
           git fetch origin main:main
           git reset --hard main
 
       - name: Create pull request
         id: create-pr
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v4 # https://github.com/peter-evans/create-pull-request
         with:
           token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
           commit-message: 'chore: merge main to C11'

@@ -64,9 +64,14 @@
 
   .#{$blockClass}__overflow-menu__item {
     max-width: none;
+    position: relative;
   }
 
   .#{$blockClass}__overflow-menu__item__icon {
     margin-left: auto;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--lg:not(.#{$prefix}--btn--icon-only) {
+    align-items: center;
   }
 }

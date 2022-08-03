@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
- import { CloudApp16 } from '@carbon/icons-react';
+import { CloudApp16 } from '@carbon/icons-react';
 import React from 'react';
 
 import {
@@ -43,7 +43,7 @@ const Template = (args) => {
           <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
           <ComboButtonItem renderIcon={args.icon && args.icon}>ComboButtonItem 2</ComboButtonItem>
           <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
-          <ComboButtonItem hasDivider={args.hasDivider}>ComboButtonItem 4</ComboButtonItem>
+          <ComboButtonItem hasdivider={args.hasDivider}>ComboButtonItem 4</ComboButtonItem>
           <ComboButtonItem>ComboButtonItem 5</ComboButtonItem>
         </ComboButton>
 };

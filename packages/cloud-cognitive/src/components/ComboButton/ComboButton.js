@@ -56,7 +56,7 @@ export let ComboButton = React.forwardRef((
       className={classnames(blockClass, className)}
       data-floating-menu-container
     >
-      <Button {...primaryAction} size={size} />
+      <Button {...primaryAction} size={size}/>
 
       {restActions.length > 0 && (
         <OverflowMenu

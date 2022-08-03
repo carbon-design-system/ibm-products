@@ -60,10 +60,14 @@ const defaults = {
     ToolbarGroup: false,
     WebTerminal: false,
     WebTerminalContentWrapper: false,
+    WebTerminalProvider: false,
     EditSidePanel: false,
     CancelableTextEdit: false,
     DataSpreadsheet: false,
     Datagrid: false,
+    EditTearsheet: false,
+    EditTearsheetNarrow: false,
+    EditFullPage: false,
     /* new component flags here - comment used by generate CLI */
   },
 

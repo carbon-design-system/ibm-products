@@ -2,7 +2,7 @@
   "name": "@carbon/ibm-cloud-cognitive-cli",
   "private": true,
   "description": "A CLI for building, maintaining, and releasing packages for Carbon",
-  "version": "0.18.22",
+  "version": "0.18.24",
   "license": "Apache-2.0",
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
@@ -30,8 +30,8 @@
     "execa": "^6.1.0",
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.1.0",
-    "inquirer": "^9.0.0",
-    "npm-check-updates": "^15.0.1",
+    "inquirer": "^9.0.2",
+    "npm-check-updates": "^16.0.5",
     "prettier": "^2.7.1",
     "prettier-config-carbon": "^0.7.0",
     "remark": "^14.0.2",

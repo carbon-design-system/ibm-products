@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.25.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.24.0...@carbon/ibm-products@1.25.0) (2022-08-02)
+
+
+### Bug Fixes
+
+* **EmptyState:** update text-styles, spacing and button-size ([#2133](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2133)) ([1c27e3a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1c27e3add89734cee222174484c27d4d1d6e86eb))
+* update to Carbon v10 compatible versions to latest ([#2144](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2144)) ([c67ce20](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c67ce20cf586218f28d2ad7bba4de6fd4d21efae))
+
+
+### Features
+
+* **ImportModal:** render icon for import by url button ([#2146](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2146)) ([c707b8b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c707b8b23265909917794b0f31b4f93097dfbc05))
+* **WebTerminal:** refactors code to useContext and custom hooks  ([#2097](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2097)) ([e71e21b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e71e21b66782fa99edccaf230ec8365c27f6192e))
+
+
+
+
+
+# [1.24.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.23.1...@carbon/ibm-products@1.24.0) (2022-07-27)
+
+
+### Bug Fixes
+
+* **Datagrid:** fix issue in StickActionColumn tests ([#2135](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2135)) ([ff37a8e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ff37a8eabb13ebd256058e0404bde3a70d84c46f))
+* inline edit overflow to right ([#2104](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2104)) ([9392372](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/939237279f94330752c69bb93a814eaef5dfd9a0))
+* **PageHeader:** solved unexpected scrollbar issue ([#2119](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2119)) ([15daeee](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/15daeee4ee744df5ddee2f0c8fe579383dfc4451))
+* select all duplicates in add select columns ([#2136](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2136)) ([fb16ab3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fb16ab33c6a6a6920ca8b27c84382046ea0e3764))
+
+
+### Features
+
+* **Datatable:** table header ([#1973](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1973)) ([f9166ad](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f9166adacbda3851e20f710cb196e2db01388107))
+* **edit and update:** edit and update tearsheet ([#1975](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1975)) ([cd09bab](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/cd09babac9f862339760acd64fc24340c06423ae))
+
+
+
+
+
+## [1.23.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.23.0...@carbon/ibm-products@1.23.1) (2022-07-19)
+
+
+### Bug Fixes
+
+* update to Carbon v10 compatible versions to latest ([#2101](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2101)) ([feebce3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/feebce38ac474917e29d201d9198e3baf9452a97))
+* **web-terminal:** spans 100% when less than 640px ([#2087](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2087)) ([c012d30](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c012d306c0df936ef4916e5b31e7dd8517ebb3ca))
+* **WebTerminal:** small fixes for release review ([#2106](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2106)) ([6eb3346](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6eb3346efaae41a1c38972620c4f9222419cce36))
+
+
+
+
+
 # [1.23.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.22.0...@carbon/ibm-products@1.23.0) (2022-07-12)
 
 

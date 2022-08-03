@@ -39,6 +39,7 @@ const defaultProps = {
   fileDropHeader: 'Add files using drag and drop',
   fileDropLabel: 'Drag and drop files here or click to upload',
   fileUploadLabel: 'files uploaded',
+  inputButtonIcon: false,
   inputButtonText: 'Add file',
   inputId: 'test-id',
   inputLabel: 'Add a file by specifying a URL',

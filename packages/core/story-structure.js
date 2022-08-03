@@ -61,7 +61,13 @@ const s = [
           },
           {
             n: 'Edit and update',
-            s: ['c/InlineEdit', 'c/EditSidePanel'],
+            s: [
+              'c/InlineEdit',
+              'c/EditSidePanel',
+              'c/EditTearsheet',
+              'c/EditTearsheetNarrow',
+              'c/EditFullPage',
+            ],
           },
           {
             n: 'Empty state',
@@ -120,6 +126,8 @@ const s = [
         s: ['a/Library'],
       },
       { n: 'Layouts', s: [] },
+      // cSpell:words Microlayouts
+      { n: 'Microlayouts', s: [] },
       {
         n: 'Patterns',
         s: [],

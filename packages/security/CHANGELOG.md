@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.13.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.12.1...@carbon/ibm-security@2.13.0) (2022-08-02)
+
+
+### Bug Fixes
+
+* update to Carbon v10 compatible versions to latest ([#2144](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2144)) ([c67ce20](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c67ce20cf586218f28d2ad7bba4de6fd4d21efae))
+
+
+### Features
+
+* Create Getting Started layout ([#1516](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1516)) ([455f762](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/455f76223d6b43b3ee55c344108dbcd79133b8b8))
+
+
+
+
+
+## [2.12.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.12.0...@carbon/ibm-security@2.12.1) (2022-07-27)
+
+**Note:** Version bump only for package @carbon/ibm-security
+
+
+
+
+
+# [2.12.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.11.13...@carbon/ibm-security@2.12.0) (2022-07-19)
+
+
+### Bug Fixes
+
+* update to Carbon v10 compatible versions to latest ([#2101](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2101)) ([feebce3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/feebce38ac474917e29d201d9198e3baf9452a97))
+
+
+### Features
+
+* add dense, short, and stacked options to DescriptionList Module ([#2095](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2095)) ([9b34ab3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9b34ab3c548da8458be0c8a03d032fc3bd8c6b64))
+* index carbon security components ([#2057](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2057)) ([16deb8c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/16deb8c6e6d05d913c94d6343574332676b1667d))
+
+
+
+
+
 ## [2.11.13](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.11.12...@carbon/ibm-security@2.11.13) (2022-07-12)
 
 **Note:** Version bump only for package @carbon/ibm-security

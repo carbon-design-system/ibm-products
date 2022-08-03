@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.37.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.36.0...@carbon/ibm-cloud-cognitive-core@0.37.0) (2022-08-02)
+
+
+### Bug Fixes
+
+* update to Carbon v10 compatible versions to latest ([#2144](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2144)) ([c67ce20](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c67ce20cf586218f28d2ad7bba4de6fd4d21efae))
+
+
+### Features
+
+* Create Getting Started layout ([#1516](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1516)) ([455f762](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/455f76223d6b43b3ee55c344108dbcd79133b8b8))
+
+
+
+
+
+# [0.36.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.35.8...@carbon/ibm-cloud-cognitive-core@0.36.0) (2022-07-27)
+
+
+### Features
+
+* **edit and update:** edit and update tearsheet ([#1975](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/1975)) ([cd09bab](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/cd09babac9f862339760acd64fc24340c06423ae))
+
+
+
+
+
+## [0.35.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.35.7...@carbon/ibm-cloud-cognitive-core@0.35.8) (2022-07-19)
+
+
+### Bug Fixes
+
+* update to Carbon v10 compatible versions to latest ([#2101](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2101)) ([feebce3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/feebce38ac474917e29d201d9198e3baf9452a97))
+
+
+
+
+
 ## [0.35.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.35.6...@carbon/ibm-cloud-cognitive-core@0.35.7) (2022-07-12)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

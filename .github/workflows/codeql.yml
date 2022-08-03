@@ -2,10 +2,14 @@ name: CodeQL # Run code security scans
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+      - carbon-v11
 
   push:
-    branches: [main]
+    branches:
+      - main
+      - carbon-v11
 
   schedule:
     - cron: '0 0 * * 0'

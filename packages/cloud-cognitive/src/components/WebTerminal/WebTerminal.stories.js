@@ -46,7 +46,7 @@ const Template = (args) => {
         This is where you would put content
       </WebTerminalContentWrapper>
 
-      <WebTerminal closeIconDescription="Close terminal" {...args}>
+      <WebTerminal {...args}>
         <div className="example-terminal">
           <p>Connection successful.</p>
           <p>
@@ -63,16 +63,26 @@ const Template = (args) => {
 };
 
 export const Default = prepareStory(Template, {
-  args: { documentationLinks, actions },
+  args: {
+    documentationLinks,
+    actions,
+    closeIconDescription: 'Close terminal',
+    documentationLinksIconDescription: 'Show documentation links',
+  },
 });
 
 export const WithDocumentationLinks = prepareStory(Template, {
-  args: { documentationLinks },
+  args: {
+    documentationLinks,
+    closeIconDescription: 'Close terminal',
+    documentationLinksIconDescription: 'Show documentation links',
+  },
 });
 
 export const WithActions = prepareStory(Template, {
   args: {
     actions,
+    closeIconDescription: 'Close terminal',
   },
 });
 

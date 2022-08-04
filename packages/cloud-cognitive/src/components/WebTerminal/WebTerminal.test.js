@@ -15,7 +15,12 @@ import { pkg } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { documentationLinks } from './preview-components/documentationLinks';
-import { WebTerminal, WebTerminalProvider, useWebTerminal } from './index';
+import {
+  WebTerminal,
+  WebTerminalProvider,
+  WebTerminalContentWrapper,
+  useWebTerminal,
+} from './index';
 
 const blockClass = `${pkg.prefix}--web-terminal`;
 const name = WebTerminal.displayName;
@@ -40,12 +45,20 @@ const MockWebTerminal = React.forwardRef(
 );
 
 describe(name, () => {
-  test('Renders the component `WebTerminal` if flag is enabled', () => {
+  it('Renders the component `WebTerminal` if flag is enabled', () => {
     const { container } = render(
       <MockWebTerminal>Body content</MockWebTerminal>
     );
 
     expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(
+      <MockWebTerminal isInitiallyOpen>Body content</MockWebTerminal>
+    );
+
+    await expect(container).toBeAccessible();
   });
 
   test('should attach a custom class to the web terminal', () => {
@@ -58,7 +71,7 @@ describe(name, () => {
     expect(container.querySelector(`.${testClassName}`)).not.toBeNull();
   });
 
-  test('should render child element content', () => {
+  it('should render child element content', () => {
     render(<MockWebTerminal>Body content</MockWebTerminal>);
     expect(screen.getByText(/Body content/i)).toBeInTheDocument();
   });
@@ -196,5 +209,84 @@ describe(name, () => {
     expect(deploymentButtonFn).toHaveBeenCalledTimes(1);
     click(screen.getByText(/Copy logs/i));
     expect(copyLogsButtonFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render the close icon description prop', () => {
+    render(
+      <MockWebTerminal
+        isInitiallyOpen
+        closeIconDescription="Close web terminal"
+      >
+        Body content
+      </MockWebTerminal>
+    );
+
+    expect(screen.getByText(/close web terminal/i)).toBeInTheDocument();
+  });
+
+  it('content wrapper should pass children', () => {
+    render(
+      <WebTerminalProvider>
+        <WebTerminalContentWrapper>body content</WebTerminalContentWrapper>
+      </WebTerminalProvider>
+    );
+
+    expect(screen.getByText(/body content/i)).toBeInTheDocument();
+  });
+
+  it('content wrapper should be full width when web terminal is closed', async () => {
+    const RenderComponent = (
+      { isInitiallyOpen = false, dataTestId = null } // eslint-disable-line
+    ) => (
+      <WebTerminalProvider>
+        <WebTerminalContentWrapper>content</WebTerminalContentWrapper>
+        <WebTerminal
+          isInitiallyOpen={isInitiallyOpen}
+          data-testid={dataTestId}
+          closeIconDescription="Close terminal"
+        >
+          Body content
+        </WebTerminal>
+      </WebTerminalProvider>
+    );
+
+    render(<RenderComponent />);
+
+    let windowWidth = document.body.getBoundingClientRect().width;
+    let contentWrapperWidth = screen
+      .getByText('content')
+      .getBoundingClientRect().width;
+
+    expect(contentWrapperWidth).toBe(windowWidth);
+  });
+
+  it('content wrapper should be reacting to the width of the web terminal when open ', async () => {
+    const RenderComponent = (
+      { isInitiallyOpen = false, dataTestId = null } // eslint-disable-line
+    ) => (
+      <WebTerminalProvider>
+        <WebTerminalContentWrapper>content</WebTerminalContentWrapper>
+        <WebTerminal
+          isInitiallyOpen={isInitiallyOpen}
+          data-testid={dataTestId}
+          closeIconDescription="Close terminal"
+        >
+          Body content
+        </WebTerminal>
+      </WebTerminalProvider>
+    );
+
+    const dataTestId = uuidv4();
+    render(<RenderComponent isInitiallyOpen dataTestId={dataTestId} />);
+
+    let windowWidth = document.body.getBoundingClientRect().width;
+    let contentWrapperWidth = screen
+      .getByText('content')
+      .getBoundingClientRect().width;
+    let webTerminalWidth = screen
+      .getByTestId(dataTestId)
+      .getBoundingClientRect().width;
+
+    expect(contentWrapperWidth).toBe(windowWidth - webTerminalWidth);
   });
 });

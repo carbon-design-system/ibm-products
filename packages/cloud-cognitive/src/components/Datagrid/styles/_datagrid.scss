@@ -477,21 +477,21 @@
 
 .#{$pkg-prefix}--datagrid__table-toolbar
   .#{$pkg-prefix}--datagrid__button-menu--icon-only.#{$pkg-prefix}--button-menu {
-  min-width: 2.5rem;
   display: flex;
+  min-width: 2.5rem;
   justify-content: center;
-  margin-right: 0.75rem;
+  margin-right: $spacing-04;
 }
 
 .#{$pkg-prefix}--datagrid__table-toolbar
   .#{$pkg-prefix}--datagrid__button-menu--icon-only.#{$pkg-prefix}--button-menu
   .#{$pkg-prefix}--button-menu__trigger {
-  padding: 0;
-  margin: 0;
+  display: flex;
   width: 100%;
   min-width: 3rem;
-  display: flex;
   justify-content: center;
+  padding: 0;
+  margin: 0;
   .#{$carbon-prefix}--btn__icon {
     margin: 0;
   }

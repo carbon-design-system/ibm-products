@@ -24,19 +24,23 @@ const { TableToolbar } = DataTable;
 const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   const [displayAllInMenu, setDisplayAllInMenu] = useState(false);
   const [initialListWidth, setInitialListWidth] = useState(null);
+  const [recievedInitialWidth, setRecievedInitialWidth] = useState(false);
   const { selectedFlatRows, toggleAllRowsSelected, toolbarActions } =
     datagridState;
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
 
+  // Get initial width of batch actions container,
+  // used to measure when all items are put inside
+  // the ButtonMenu
   useEffect(() => {
-    if (totalSelected > 0) {
+    if (totalSelected === 1 && !recievedInitialWidth) {
       const batchActionListWidth = ref.current.querySelector(
         `.${carbon.prefix}--action-list`
       ).offsetWidth;
       setInitialListWidth(batchActionListWidth);
+      setRecievedInitialWidth(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [totalSelected]);
+  }, [totalSelected, recievedInitialWidth, ref]);
 
   useEffect(() => {
     const summaryWidth = ref.current.querySelector(

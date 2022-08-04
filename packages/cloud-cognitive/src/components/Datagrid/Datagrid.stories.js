@@ -7,8 +7,6 @@
  */
 
 import React, { useState, useEffect } from 'react';
-// TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
 import { useColumnOrder } from 'react-table';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
 
@@ -58,10 +56,6 @@ import { SidePanel } from '../SidePanel';
 export default {
   title: getStoryTitle(Datagrid.displayName),
   component: Datagrid,
-  // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
   parameters: {
     styles,
     docs: {
@@ -678,6 +672,7 @@ const DatagridActions = (datagridState) => {
       bottom: '-37px',
     },
   };
+
   return (
     isNothingSelected &&
     (useDenseHeader && useDenseHeader ? (
@@ -811,7 +806,7 @@ export const SelectItemsInAllPages = () => {
     <>
       <Datagrid datagridState={{ ...datagridState }} />
       <h3>Doc in Notes...</h3>
-      <p>{`Are all selected across all pages? - ${areAllSelected}`}</p>
+      <p>{`Are all entries selected across all pages? - ${areAllSelected}`}</p>
     </>
   );
 };
@@ -940,6 +935,7 @@ const DatagridBatchActions = (datagridState) => {
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
   const onBatchAction = () => alert('Batch action');
   const actionName = 'Action';
+
   return (
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
@@ -956,14 +952,43 @@ const DatagridBatchActions = (datagridState) => {
 export const BatchActions = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+
+  function downloadCsv() {
+    alert('Downloading...');
+  }
+
+  function refreshColumns() {
+    alert('refreshing...');
+  }
+
+  function leftPanelClick() {
+    alert('refreshing...');
+  }
+
+  const toolbarActions = {
+    selectAllButton: {
+      name: 'Select All',
+    },
+
+    actionButton: {
+      name: 'Action',
+    },
+  };
+
   const datagridState = useDatagrid(
     {
       columns,
       data,
+      batchActions: true,
+      downloadCsv,
+      refreshColumns,
+      leftPanelClick,
+      toolbarActions,
       DatagridActions,
       DatagridBatchActions,
     },
-    useSelectRows
+    useSelectRows,
+    useSelectAllWithToggle
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -987,8 +1012,6 @@ export const DisableSelectRow = () => {
 
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
-
-// export { StickyActionsColumn };
 
 NestedRows.story = {
   parameters: {

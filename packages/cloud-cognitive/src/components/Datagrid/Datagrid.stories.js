@@ -985,7 +985,7 @@ export const BatchActions = () => {
       renderIcon: Add16,
       onClick: action('Clicked batch action button'),
       hasDivider: true,
-      kind: 'danger'
+      kind: 'danger',
     },
   ];
 

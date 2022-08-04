@@ -1,68 +1,78 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2020
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2022, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
-import { DataTable } from 'carbon-components-react';
-import { pkg } from '../../../settings';
 
-import { OverflowMenu } from 'carbon-components-react';
-import OverflowMenuItem from 'carbon-components-react/lib/components/OverflowMenuItem';
-import { TableBatchActions } from 'carbon-components-react';
-import { TableBatchAction } from 'carbon-components-react';
-import { Activity16 } from '@carbon/icons-react';
+import React, { useEffect, useState } from 'react';
+import { Add16, OverflowMenuVertical16 } from '@carbon/icons-react';
+import { DataTable, TableBatchActions, TableBatchAction } from 'carbon-components-react';
+import { useResizeDetector } from 'react-resize-detector';
+import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
+import { pkg, carbon } from '../../../settings';
+import cx from 'classnames';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const { TableToolbar } = DataTable;
 
-const DatagridBatchActionsToolbar = (datagridState) => {
+const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
+  const [displayAllInMenu, setDisplayAllInMenu] = useState(false);
+  const [initialListWidth, setInitialListWidth] = useState(null);
   const { selectedFlatRows, toggleAllRowsSelected, toolbarActions } =
     datagridState;
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
 
-  const selectAllButtonText = toolbarActions['selectAllButton'].name;
-  const actionButtonText = toolbarActions['actionButton'].name;
+  useEffect(() => {
+    if (totalSelected > 0) {
+      const batchActionListWidth = ref.current.querySelector(`.${carbon.prefix}--action-list`).offsetWidth;
+      setInitialListWidth(batchActionListWidth);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [totalSelected]);
 
-  if (Object.keys(toolbarActions).length + 1 >= 4) {
-    return (
-      <TableBatchActions
-        shouldShowBatchActions={totalSelected > 0}
-        totalSelected={totalSelected}
-        onCancel={() => toggleAllRowsSelected(false)}
-      >
-        <OverflowMenu>
-          <OverflowMenuItem
-            itemText={selectAllButtonText}
-            onClick={() => {
-              toggleAllRowsSelected(true);
-              alert('Select All');
-            }}
-          ></OverflowMenuItem>
+  useEffect(() => {
+    const summaryWidth = ref.current.querySelector(`.${carbon.prefix}--batch-summary`).offsetWidth;
+    if (width < (summaryWidth + initialListWidth + 32)) {
+      setDisplayAllInMenu(true);
+    } else {
+      setDisplayAllInMenu(false);
+    }
+  }, [width, ref, initialListWidth]);
 
-          <OverflowMenuItem
-            itemText={actionButtonText}
-            onClick={() => {
-              alert('Action');
-            }}
-          ></OverflowMenuItem>
-        </OverflowMenu>
-      </TableBatchActions>
-    );
+  // Render batch actions in ButtonMenu
+  const renderBatchActionOverflow = () => {
+    const actionsClone = [...toolbarActions];
+    return <ButtonMenu
+      label={width > 380 ? 'More' : null}
+      renderIcon={width > 380 ? Add16 : OverflowMenuVertical16}
+      className={cx(`${blockClass}__button-menu`, {
+        [`${blockClass}__button-menu--icon-only`]: width <= 380
+      })}
+    >
+      {actionsClone.map((batchAction, index) => {
+        if (index < 2) {
+          if (displayAllInMenu) {
+            return <ButtonMenuItem
+              key={`${batchAction.label}-${index}`}
+              itemText={batchAction.label}
+              onClick={batchAction.onClick}
+            />
+          }
+          return null;
+        }
+        return <ButtonMenuItem
+          key={`${batchAction.label}-${index}`}
+          itemText={batchAction.label}
+          onClick={batchAction.onClick}
+        />
+      })}
+    </ButtonMenu>
   }
 
-  const onBatchAction = () => alert('Batch action');
-  const actionName = 'Action';
-  const selectAll = 'Select All';
-
-  const selectAllButtonAction = () => {
-    toggleAllRowsSelected(true);
-    alert('Select All');
-  };
-
+  // Only display the first two batch actions, the rest are
+  // displayed inside of the ButtonMenu
   return (
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
@@ -70,29 +80,35 @@ const DatagridBatchActionsToolbar = (datagridState) => {
       onCancel={() => toggleAllRowsSelected(false)}
     >
       {
-        <TableBatchAction
-          renderIcon={Activity16}
-          onClick={selectAllButtonAction}
-        >
-          {selectAll}
-        </TableBatchAction>
-      }
-      <TableBatchAction renderIcon={Activity16} onClick={onBatchAction}>
-        {actionName}
-      </TableBatchAction>
+        !displayAllInMenu && toolbarActions?.map((batchAction, index) => {
+          if (index < 2) {
+            return <TableBatchAction
+              key={`${batchAction.label}-${index}`}
+              renderIcon={batchAction.renderIcon}
+              onClick={batchAction.onClick}
+              iconDescription={batchAction.label}
+            >
+              {batchAction.label}
+            </TableBatchAction>
+          }
+        }
+      )}
+      {renderBatchActionOverflow()}
     </TableBatchActions>
   );
 };
 
 const DatagridToolbar = (datagridState) => {
+  const { width, ref } = useResizeDetector();
   const { DatagridActions, DatagridBatchActions, batchActions } = datagridState;
 
+
   return batchActions && DatagridActions ? (
-    <div className={`${blockClass}__table-toolbar`}>
+    <div ref={ref} className={`${blockClass}__table-toolbar`}>
       <TableToolbar>
         {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActionsToolbar &&
-          DatagridBatchActionsToolbar(datagridState)}
+          DatagridBatchActionsToolbar(datagridState, width, ref)}
       </TableToolbar>
     </div>
   ) : (

@@ -463,3 +463,30 @@
   background-color: $interactive-01;
   content: '';
 }
+
+.#{$pkg-prefix}--datagrid__table-toolbar .#{$carbon-prefix}--batch-summary__para {
+  white-space: nowrap;
+}
+
+.#{$pkg-prefix}--datagrid__table-toolbar .#{$carbon-prefix}--batch-actions .#{$carbon-prefix}--batch-actions--active {
+  overflow-x: hidden;
+}
+
+.#{$pkg-prefix}--datagrid__table-toolbar .#{$pkg-prefix}--datagrid__button-menu--icon-only.#{$pkg-prefix}--button-menu {
+  min-width: 2.5rem;
+  display: flex;
+  justify-content: center;
+  margin-right: 0.75rem;
+}
+
+.#{$pkg-prefix}--datagrid__table-toolbar .#{$pkg-prefix}--datagrid__button-menu--icon-only.#{$pkg-prefix}--button-menu .#{$pkg-prefix}--button-menu__trigger {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-width: 3rem;
+  display: flex;
+  justify-content: center;
+  .#{$carbon-prefix}--btn__icon {
+    margin: 0;
+  }
+}

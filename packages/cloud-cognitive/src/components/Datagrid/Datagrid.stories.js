@@ -12,6 +12,7 @@ import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
+import { action } from '@storybook/addon-actions';
 import {
   Activity16,
   Restart16,
@@ -953,36 +954,46 @@ export const BatchActions = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
 
-  function downloadCsv() {
-    alert('Downloading...');
-  }
-
-  function refreshColumns() {
-    alert('refreshing...');
-  }
-
-  function leftPanelClick() {
-    alert('refreshing...');
-  }
-
-  const toolbarActions = {
-    selectAllButton: {
-      name: 'Select All',
+  const toolbarActions = [
+    {
+      label: 'Duplicate',
+      renderIcon: Add16,
+      onClick: action('Clicked batch action button'),
     },
-
-    actionButton: {
-      name: 'Action',
+    {
+      label: 'Add',
+      renderIcon: Add16,
+      onClick: action('Clicked batch action button'),
     },
-  };
+    {
+      label: 'Favorite',
+      renderIcon: Add16,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Publish to catalog',
+      renderIcon: Add16,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Download',
+      renderIcon: Add16,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Delete',
+      renderIcon: Add16,
+      onClick: action('Clicked batch action button'),
+      hasDivider: true,
+      kind: 'danger'
+    },
+  ];
 
   const datagridState = useDatagrid(
     {
       columns,
       data,
       batchActions: true,
-      downloadCsv,
-      refreshColumns,
-      leftPanelClick,
       toolbarActions,
       DatagridActions,
       DatagridBatchActions,

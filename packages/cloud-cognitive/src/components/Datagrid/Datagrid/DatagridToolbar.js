@@ -24,8 +24,8 @@ const { TableToolbar } = DataTable;
 const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   const [displayAllInMenu, setDisplayAllInMenu] = useState(false);
   const [initialListWidth, setInitialListWidth] = useState(null);
-  const [recievedInitialWidth, setRecievedInitialWidth] = useState(false);
-  const { selectedFlatRows, toggleAllRowsSelected, toolbarActions } =
+  const [receivedInitialWidth, setReceivedInitialWidth] = useState(false);
+  const { selectedFlatRows, toggleAllRowsSelected, toolbarBatchActions } =
     datagridState;
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
 
@@ -33,14 +33,14 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   // used to measure when all items are put inside
   // the ButtonMenu
   useEffect(() => {
-    if (totalSelected === 1 && !recievedInitialWidth) {
+    if (totalSelected === 1 && !receivedInitialWidth) {
       const batchActionListWidth = ref.current.querySelector(
         `.${carbon.prefix}--action-list`
       ).offsetWidth;
       setInitialListWidth(batchActionListWidth);
-      setRecievedInitialWidth(true);
+      setReceivedInitialWidth(true);
     }
-  }, [totalSelected, recievedInitialWidth, ref]);
+  }, [totalSelected, receivedInitialWidth, ref]);
 
   useEffect(() => {
     const summaryWidth = ref.current.querySelector(
@@ -55,23 +55,33 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 
   // Render batch actions in ButtonMenu
   const renderBatchActionOverflow = () => {
-    const actionsClone = [...toolbarActions];
+    const minWidthBeforeOverflowIcon = 380;
+    // Do not render ButtonMenu when there are 3 or less items
+    // and if there is enough available space to render all the items
+    if (toolbarBatchActions?.length <= 3 && !displayAllInMenu) {
+      return null;
+    }
     return (
       <ButtonMenu
-        label={width > 380 ? 'More' : null}
-        renderIcon={width > 380 ? Add16 : OverflowMenuVertical16}
+        label={width > minWidthBeforeOverflowIcon ? 'More' : null}
+        renderIcon={width > minWidthBeforeOverflowIcon ? Add16 : OverflowMenuVertical16}
         className={cx(`${blockClass}__button-menu`, {
-          [`${blockClass}__button-menu--icon-only`]: width <= 380,
+          [`${blockClass}__button-menu--icon-only`]: width <= minWidthBeforeOverflowIcon,
         })}
       >
-        {actionsClone.map((batchAction, index) => {
+        {toolbarBatchActions && toolbarBatchActions.map((batchAction, index) => {
           if (index < 2) {
             if (displayAllInMenu) {
               return (
                 <ButtonMenuItem
                   key={`${batchAction.label}-${index}`}
                   itemText={batchAction.label}
-                  onClick={batchAction.onClick}
+                  onClick={() => {
+                    batchAction.onClick()
+                    if (batchAction.type === 'select_all') {
+                      toggleAllRowsSelected(true);
+                    }
+                  }}
                 />
               );
             }
@@ -81,7 +91,12 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
             <ButtonMenuItem
               key={`${batchAction.label}-${index}`}
               itemText={batchAction.label}
-              onClick={batchAction.onClick}
+              onClick={() => {
+                batchAction.onClick()
+                if (batchAction.type === 'select_all') {
+                  toggleAllRowsSelected(true);
+                }
+              }}
             />
           );
         })}
@@ -90,7 +105,8 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   };
 
   // Only display the first two batch actions, the rest are
-  // displayed inside of the ButtonMenu
+  // displayed inside of the ButtonMenu if there are more than
+  // 3 batch actions
   return (
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
@@ -98,13 +114,18 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       onCancel={() => toggleAllRowsSelected(false)}
     >
       {!displayAllInMenu &&
-        toolbarActions?.map((batchAction, index) => {
-          if (index < 2) {
+        toolbarBatchActions && toolbarBatchActions?.map((batchAction, index) => {
+          if ((index < 2 && toolbarBatchActions.length > 3) || (index < 3 && toolbarBatchActions.length === 3)) {
             return (
               <TableBatchAction
                 key={`${batchAction.label}-${index}`}
                 renderIcon={batchAction.renderIcon}
-                onClick={batchAction.onClick}
+                onClick={() => {
+                  batchAction.onClick()
+                  if (batchAction.type === 'select_all') {
+                    toggleAllRowsSelected(true);
+                  }
+                }}
                 iconDescription={batchAction.label}
               >
                 {batchAction.label}

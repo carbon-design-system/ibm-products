@@ -950,11 +950,8 @@ const DatagridBatchActions = (datagridState) => {
   );
 };
 
-export const BatchActions = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-
-  const toolbarActions = [
+const getBatchActions = () => {
+  return [
     {
       label: 'Duplicate',
       renderIcon: Add16,
@@ -966,10 +963,11 @@ export const BatchActions = () => {
       onClick: action('Clicked batch action button'),
     },
     {
-      label: 'Favorite',
+      label: 'Select all',
       renderIcon: Add16,
       onClick: action('Clicked batch action button'),
-    },
+      type: 'select_all'
+    }, 
     {
       label: 'Publish to catalog',
       renderIcon: Add16,
@@ -987,14 +985,18 @@ export const BatchActions = () => {
       hasDivider: true,
       kind: 'danger',
     },
-  ];
+  ]
+}
 
+export const BatchActions = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
     {
       columns,
       data,
       batchActions: true,
-      toolbarActions,
+      toolbarBatchActions: getBatchActions(),
       DatagridActions,
       DatagridBatchActions,
     },

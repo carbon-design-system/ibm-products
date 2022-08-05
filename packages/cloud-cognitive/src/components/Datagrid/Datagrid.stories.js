@@ -966,8 +966,8 @@ const getBatchActions = () => {
       label: 'Select all',
       renderIcon: Add16,
       onClick: action('Clicked batch action button'),
-      type: 'select_all'
-    }, 
+      type: 'select_all',
+    },
     {
       label: 'Publish to catalog',
       renderIcon: Add16,
@@ -985,8 +985,8 @@ const getBatchActions = () => {
       hasDivider: true,
       kind: 'danger',
     },
-  ]
-}
+  ];
+};
 
 export const BatchActions = () => {
   const columns = React.useMemo(() => defaultHeader, []);

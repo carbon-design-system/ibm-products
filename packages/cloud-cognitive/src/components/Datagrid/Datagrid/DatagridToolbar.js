@@ -64,42 +64,46 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     return (
       <ButtonMenu
         label={width > minWidthBeforeOverflowIcon ? 'More' : null}
-        renderIcon={width > minWidthBeforeOverflowIcon ? Add16 : OverflowMenuVertical16}
+        renderIcon={
+          width > minWidthBeforeOverflowIcon ? Add16 : OverflowMenuVertical16
+        }
         className={cx(`${blockClass}__button-menu`, {
-          [`${blockClass}__button-menu--icon-only`]: width <= minWidthBeforeOverflowIcon,
+          [`${blockClass}__button-menu--icon-only`]:
+            width <= minWidthBeforeOverflowIcon,
         })}
       >
-        {toolbarBatchActions && toolbarBatchActions.map((batchAction, index) => {
-          if (index < 2) {
-            if (displayAllInMenu) {
-              return (
-                <ButtonMenuItem
-                  key={`${batchAction.label}-${index}`}
-                  itemText={batchAction.label}
-                  onClick={() => {
-                    batchAction.onClick()
-                    if (batchAction.type === 'select_all') {
-                      toggleAllRowsSelected(true);
-                    }
-                  }}
-                />
-              );
+        {toolbarBatchActions &&
+          toolbarBatchActions.map((batchAction, index) => {
+            if (index < 2) {
+              if (displayAllInMenu) {
+                return (
+                  <ButtonMenuItem
+                    key={`${batchAction.label}-${index}`}
+                    itemText={batchAction.label}
+                    onClick={() => {
+                      batchAction.onClick();
+                      if (batchAction.type === 'select_all') {
+                        toggleAllRowsSelected(true);
+                      }
+                    }}
+                  />
+                );
+              }
+              return null;
             }
-            return null;
-          }
-          return (
-            <ButtonMenuItem
-              key={`${batchAction.label}-${index}`}
-              itemText={batchAction.label}
-              onClick={() => {
-                batchAction.onClick()
-                if (batchAction.type === 'select_all') {
-                  toggleAllRowsSelected(true);
-                }
-              }}
-            />
-          );
-        })}
+            return (
+              <ButtonMenuItem
+                key={`${batchAction.label}-${index}`}
+                itemText={batchAction.label}
+                onClick={() => {
+                  batchAction.onClick();
+                  if (batchAction.type === 'select_all') {
+                    toggleAllRowsSelected(true);
+                  }
+                }}
+              />
+            );
+          })}
       </ButtonMenu>
     );
   };
@@ -114,14 +118,18 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       onCancel={() => toggleAllRowsSelected(false)}
     >
       {!displayAllInMenu &&
-        toolbarBatchActions && toolbarBatchActions?.map((batchAction, index) => {
-          if ((index < 2 && toolbarBatchActions.length > 3) || (index < 3 && toolbarBatchActions.length === 3)) {
+        toolbarBatchActions &&
+        toolbarBatchActions?.map((batchAction, index) => {
+          if (
+            (index < 2 && toolbarBatchActions.length > 3) ||
+            (index < 3 && toolbarBatchActions.length === 3)
+          ) {
             return (
               <TableBatchAction
                 key={`${batchAction.label}-${index}`}
                 renderIcon={batchAction.renderIcon}
                 onClick={() => {
-                  batchAction.onClick()
+                  batchAction.onClick();
                   if (batchAction.type === 'select_all') {
                     toggleAllRowsSelected(true);
                   }

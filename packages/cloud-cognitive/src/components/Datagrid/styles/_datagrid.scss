@@ -454,11 +454,11 @@
   }
 }
 
-.#{c4p-settings.$carbon-prefix}--data-table--selected {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--data-table--selected {
   position: relative;
 }
 
-.#{c4p-settings.$carbon-prefix}--data-table--selected::before {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--data-table--selected::before {
   position: absolute;
   left: 0;
   width: $spacing-02;

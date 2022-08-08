@@ -9,27 +9,40 @@ import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Code, Copy } from '@carbon/icons-react';
+import { act, renderHook } from '@testing-library/react-hooks';
 
 import { pkg } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { documentationLinks } from './preview-components/documentationLinks';
-import { WebTerminal } from '.';
+import { WebTerminal, WebTerminalProvider, useWebTerminal } from './index';
 
 const blockClass = `${pkg.prefix}--web-terminal`;
 const name = WebTerminal.displayName;
 const dataTestId = uuidv4();
 
+const MockWebTerminal = React.forwardRef(
+  (
+    { children, ...props }, // eslint-disable-line
+    ref
+  ) => (
+    <WebTerminalProvider>
+      <WebTerminal
+        isInitiallyOpen
+        closeIconDescription="Close terminal"
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </WebTerminal>
+    </WebTerminalProvider>
+  )
+);
+
 describe(name, () => {
   test('Renders the component `WebTerminal` if flag is enabled', () => {
     const { container } = render(
-      <WebTerminal
-        closeTerminal={() => {}}
-        open
-        closeIconDescription="Close terminal"
-      >
-        Body content
-      </WebTerminal>
+      <MockWebTerminal>Body content</MockWebTerminal>
     );
 
     expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
@@ -38,58 +51,79 @@ describe(name, () => {
   test('should attach a custom class to the web terminal', () => {
     const testClassName = 'test-class-name';
     const { container } = render(
-      <WebTerminal
-        closeTerminal={() => {}}
-        open
-        className={testClassName}
-        closeIconDescription="Close terminal"
-      >
+      <MockWebTerminal isInitiallyOpen className={testClassName}>
         Body content
-      </WebTerminal>
+      </MockWebTerminal>
     );
     expect(container.querySelector(`.${testClassName}`)).not.toBeNull();
   });
+
   test('should render child element content', () => {
-    render(
-      <WebTerminal
-        closeTerminal={() => {}}
-        open
-        closeIconDescription="Close terminal"
-      >
-        Body content
-      </WebTerminal>
-    );
+    render(<MockWebTerminal>Body content</MockWebTerminal>);
     expect(screen.getByText(/Body content/i)).toBeInTheDocument();
   });
-  test('should call close terminal function', () => {
-    const { click } = fireEvent;
-    const onCloseHandler = jest.fn();
-    render(
-      <WebTerminal
-        closeTerminal={onCloseHandler}
-        open
-        closeIconDescription="Close terminal"
-      >
-        Body content
-      </WebTerminal>
-    );
 
-    click(screen.getByLabelText('Close terminal'));
-    expect(onCloseHandler).toBeCalled();
+  it('custom hook should toggle web terminal', () => {
+    /**  Utilizing renderHook so jest knows about the custom hook and passing 
+         in the WebTerminalProvider so that the hook can consume the value  */
+    const { result } = renderHook(() => useWebTerminal(), {
+      wrapper: WebTerminalProvider,
+    });
+
+    // open should be false by default and check if openWebTerminal is a function
+    expect(result.current.open).toBe(false);
+    expect(typeof result.current.toggleWebTerminal).toBe('function');
+
+    act(() => {
+      result.current.toggleWebTerminal();
+    });
+
+    expect(result.current.open).toBe(true);
+
+    act(() => {
+      result.current.toggleWebTerminal();
+    });
+
+    expect(result.current.open).toBe(false);
   });
 
-  test('should render documentation link text', () => {
-    const overflowLabel = 'Open overflow';
+  it('custom hook should open and close web terminal', () => {
+    /**  Utilizing renderHook so jest knows about the custom hook and passing 
+         in the WebTerminalProvider so that the hook can consume the value  */
+    const { result } = renderHook(() => useWebTerminal(), {
+      wrapper: WebTerminalProvider,
+    });
+
+    // open should be false by default and check if openWebTerminal is a function
+    expect(result.current.open).toBe(false);
+    expect(typeof result.current.openWebTerminal).toBe('function');
+
+    // open web terminal
+    act(() => {
+      result.current.openWebTerminal();
+    });
+
+    // open should be true
+    expect(result.current.open).toBe(true);
+
+    // check if closeWebTerminal is a function
+    expect(typeof result.current.closeWebTerminal).toBe('function');
+
+    // close web terminal
+    act(() => {
+      result.current.closeWebTerminal();
+    });
+
+    // open should be false
+    expect(result.current.open).toBe(false);
+  });
+
+  it('should render documentation link text', () => {
+    const overflowLabel = 'Show documentation links';
     render(
-      <WebTerminal
-        closeTerminal={jest.fn()}
-        open
-        documentationLinks={documentationLinks}
-        closeIconDescription="Close terminal"
-        documentationLinksIconDescription={overflowLabel}
-      >
+      <MockWebTerminal documentationLinks={documentationLinks}>
         Body content
-      </WebTerminal>
+      </MockWebTerminal>
     );
     const { click } = userEvent;
     click(screen.getByRole('button', { name: overflowLabel }));
@@ -100,55 +134,38 @@ describe(name, () => {
 
   it('adds additional properties to the containing node', () => {
     const { container } = render(
-      <WebTerminal
-        closeTerminal={jest.fn()}
-        data-testid={dataTestId}
-        open
-        closeIconDescription="Close terminal"
-      >
-        Body content
-      </WebTerminal>
+      <MockWebTerminal data-testid={dataTestId}>Body content</MockWebTerminal>
     );
     expect(
       container.querySelector(`.${blockClass}[data-testid="${dataTestId}"]`)
     ).toBeInTheDocument();
   });
 
-  it('forwards a ref to an appropriate node', () => {
-    const ref = React.createRef();
-    render(
-      <WebTerminal
-        closeTerminal={jest.fn()}
-        open
-        ref={ref}
-        closeIconDescription="Close terminal"
-      >
-        Body content
-      </WebTerminal>
-    );
+  it('forwards a ref to an appropriate node', async () => {
+    const ref = React.createRef(null);
+    render(<MockWebTerminal ref={ref}>Body content</MockWebTerminal>);
+
+    /** 
+      This await is necessary so that the document loads completely and the ref isn't null */
+    await screen.findByText('Body content');
+
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
   });
 
   it('should call the animationEnd event', () => {
     const { animationEnd } = fireEvent;
     const { rerender, container } = render(
-      <WebTerminal
-        closeTerminal={jest.fn()}
-        open
-        closeIconDescription="Close terminal"
-      >
+      <MockWebTerminal isInitiallyOpen closeIconDescription="Close terminal">
         Body content
-      </WebTerminal>
+      </MockWebTerminal>
     );
+
     const outerElement = container.querySelector(`.${blockClass}`);
+
     rerender(
-      <WebTerminal
-        closeTerminal={jest.fn()}
-        open={false}
-        closeIconDescription="Close terminal"
-      >
+      <MockWebTerminal isInitiallyOpen closeIconDescription="Close terminal">
         Body content
-      </WebTerminal>
+      </MockWebTerminal>
     );
     animationEnd(outerElement);
     expect(outerElement).toBeNull;
@@ -158,11 +175,9 @@ describe(name, () => {
     const { click } = userEvent;
     const deploymentButtonFn = jest.fn();
     const copyLogsButtonFn = jest.fn();
+
     render(
-      <WebTerminal
-        open
-        closeIconDescription="Close terminal"
-        closeTerminal={jest.fn()}
+      <MockWebTerminal
         actions={[
           {
             renderIcon: (props) => <Code size={16} {...props} />,
@@ -177,10 +192,10 @@ describe(name, () => {
         ]}
       >
         Body content
-      </WebTerminal>
+      </MockWebTerminal>
     );
 
-    click(screen.getByRole('button', { name: /Create new deployment/i }));
+    click(screen.getByLabelText(/Create new deployment/i));
     expect(deploymentButtonFn).toHaveBeenCalledTimes(1);
 
     click(screen.getByRole('button', { name: /Copy logs/i }));

@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.25.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.25.0...@carbon/ibm-products@1.25.1) (2022-08-08)
+
+
+### Bug Fixes
+
+* change datagrid style files to partials ([#2153](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2153)) ([c8cfe3f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c8cfe3f3b38367a9d1ceed6203f9f72d8a050e1e))
+* **Datagrid:** fix style issues between Datagrid and Carbon data table ([#2156](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2156)) ([082877e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/082877e8f9204c74f0d5ca644a80e15a6b17016e))
+* single add select css updates ([#2149](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2149)) ([b09524b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b09524bb1953e69f7b6cdb7d762434b4b9dec7b5))
+
+
+
+
+
+# [1.25.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.24.0...@carbon/ibm-products@1.25.0) (2022-08-02)
+
+
+### Bug Fixes
+
+* **EmptyState:** update text-styles, spacing and button-size ([#2133](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2133)) ([1c27e3a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1c27e3add89734cee222174484c27d4d1d6e86eb))
+* update to Carbon v10 compatible versions to latest ([#2144](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2144)) ([c67ce20](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c67ce20cf586218f28d2ad7bba4de6fd4d21efae))
+
+
+### Features
+
+* **ImportModal:** render icon for import by url button ([#2146](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2146)) ([c707b8b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c707b8b23265909917794b0f31b4f93097dfbc05))
+* **WebTerminal:** refactors code to useContext and custom hooks  ([#2097](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2097)) ([e71e21b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e71e21b66782fa99edccaf230ec8365c27f6192e))
+
+
+
+
+
 # [1.24.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.23.1...@carbon/ibm-products@1.24.0) (2022-07-27)
 
 

@@ -104,6 +104,22 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   }
 }
 
+.#{$block-class} .#{$block-class}__selections-row:hover {
+  .#{$block-class}__selections-radio {
+    color: $interactive;
+  }
+
+  .#{$block-class}__selections-view-children svg {
+    color: $interactive;
+  }
+
+  button.#{$block-class}__selections-view-children.#{$carbon-prefix}--btn--ghost.#{$carbon-prefix}--btn--icon-only
+    .#{$carbon-prefix}--btn__icon
+    path {
+    fill: currentColor;
+  }
+}
+
 .#{$block-class}__sub-header {
   display: flex;
   align-items: flex-end;
@@ -290,6 +306,13 @@ button.#{$block-class}__global-filter-toggle {
 
 .#{$block-class}__meta-panel p.#{$block-class}__meta-panel-entry-title {
   @include type.type-style('productive-heading-01');
+}
+
+.#{$block-class} .#{$carbon-prefix}--structured-list-td {
+  height: $spacing-09;
+  padding-top: 0;
+  padding-bottom: 0;
+  vertical-align: middle;
 }
 
 .#{$block-class}__meta-panel p.#{$block-class}__meta-panel-entry-body {

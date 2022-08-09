@@ -1,0 +1,48 @@
+name: Create pull request from main # Sync feature branch with main
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 4 * * MON' # Update every Monday at 4:30am EST
+
+jobs:
+  merge-from-main:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3 # https://github.com/actions/checkout
+        with:
+          ref: carbon-v11
+          token: ${{secrets.GH_TOKEN_LERNA}}
+
+      - name: Fetch main branch # https://github.com/peter-evans/create-pull-request/blob/main/docs/examples.md#keep-a-branch-up-to-date-with-another
+        run: |
+          git fetch origin main:main
+          git reset --hard main
+
+      - name: Create pull request
+        id: create-pr
+        uses: peter-evans/create-pull-request@v4 # https://github.com/peter-evans/create-pull-request
+        with:
+          token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
+          commit-message: 'chore: merge main to C11'
+          committer: GitHub <noreply@github.com>
+          author:
+            ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          branch: 'merge-main'
+          branch-suffix: random
+          base: carbon-v11
+          title: 'chore: merge latest main'
+          body: |
+            This PR is automatically generated to merge updates to main to this branch on a regular basis. This is to ensure that the Carbon 11 branch remains in sync with latest fixes and updates to the main Carbon v10 branch.
+
+            #### What did you change?
+
+            Merges latest changes from main.
+
+            #### How did you test and verify your work?
+
+            This PR should not be merged until the following checks have been made:
+            - [ ] Any conflicts in the branch has been resolved.
+            - [ ] `yarn ci-check` runs cleanly and all tests pass (done automatically as part of the PR checks).
+            - [ ] the Netlify deploy-preview has been used to ensure that storybook runs and the main published components render correctly.

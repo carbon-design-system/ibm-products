@@ -24,13 +24,13 @@
   .#{$blockClass}__action {
     @include text-overflow;
   }
-
+  
   .#{$blockClass}
     .#{$blockClass}__overflow-menu {
-    width: carbon--mini-units($count: 6);
-    height: auto;
-    border-left: carbon--rem($px: 1px) solid $ui-03;
-    background-color: $interactive-01;
+      width: carbon--mini-units($count: 6);
+      height: auto;
+      border-left: carbon--rem($px: 1px) solid $ui-03;
+      background-color: $interactive-01;
   }
 
   .#{$blockClass}

@@ -35,8 +35,8 @@ const Columns = ({
   columns,
   setColumnsObject,
   onSelectColumn,
-  assitiveTextInstructionsLabel,
-  assitiveTextDisabledInstructionsLabel,
+  assistiveTextInstructionsLabel,
+  assistiveTextDisabledInstructionsLabel,
 }) => {
   const [ariaRegionText, setAriaRegionText] = React.useState('');
   const [focusIndex, setFocusIndex] = React.useState(-1);
@@ -87,8 +87,8 @@ const Columns = ({
             className={`${blockClass}__shared-ui--assistive-text`}
           >
             {filterString.length === 0
-              ? assitiveTextInstructionsLabel
-              : assitiveTextDisabledInstructionsLabel}
+              ? assistiveTextInstructionsLabel
+              : assistiveTextDisabledInstructionsLabel}
           </span>
           {columns
             .filter(
@@ -145,8 +145,8 @@ const Columns = ({
 };
 
 Columns.propTypes = {
-  assitiveTextDisabledInstructionsLabel: PropTypes.string,
-  assitiveTextInstructionsLabel: PropTypes.string,
+  assistiveTextDisabledInstructionsLabel: PropTypes.string,
+  assistiveTextInstructionsLabel: PropTypes.string,
   columns: PropTypes.array.isRequired,
   disabledInstructionsLabel: PropTypes.string,
   filterString: PropTypes.string.isRequired,

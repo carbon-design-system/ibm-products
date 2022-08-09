@@ -848,15 +848,15 @@ export const CustomizingColumns = () => {
         labels: {
           findColumnPlaceholderLabel: 'Find column',
           resetToDefaultLabel: 'Reset to default',
-          customizeModalHeadingLabel: 'Customize displayz',
+          customizeModalHeadingLabel: 'Customize display',
           primaryButtonTextLabel: 'Save',
           secondaryButtonTextLabel: 'Cancel',
           instructionsLabel:
             'Deselect columns to hide them. Click and drag the white box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
           iconTooltipLabel: 'Customize columns',
-          assitiveTextInstructionsLabel:
+          assistiveTextInstructionsLabel:
             'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
-          assitiveTextDisabledInstructionsLabel:
+          assistiveTextDisabledInstructionsLabel:
             'Reordering columns are disabled because they are filtered currently.',
         },
       },

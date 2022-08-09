@@ -28,8 +28,8 @@ const CustomizeColumnsModal = ({
   instructionsLabel = 'Deselect columns to hide them. Click and drag the white box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
   findColumnPlaceholderLabel = 'Find column',
   resetToDefaultLabel = 'Reset to default',
-  assitiveTextInstructionsLabel = 'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
-  assitiveTextDisabledInstructionsLabel = 'Reordering columns are disabled because they are filtered currently.',
+  assistiveTextInstructionsLabel = 'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
+  assistiveTextDisabledInstructionsLabel = 'Reordering columns are disabled because they are filtered currently.',
 }) => {
   const [searchText, setSearchText] = useState('');
   const [columnObjects, setColumnsObject] = useState(
@@ -112,9 +112,9 @@ const CustomizeColumnsModal = ({
       />
       {isOpen && (
         <Columns
-          assitiveTextInstructionsLabel={assitiveTextInstructionsLabel}
-          assitiveTextDisabledInstructionsLabel={
-            assitiveTextDisabledInstructionsLabel
+          assistiveTextInstructionsLabel={assistiveTextInstructionsLabel}
+          assistiveTextDisabledInstructionsLabel={
+            assistiveTextDisabledInstructionsLabel
           }
           columns={columnObjects}
           filterString={string}
@@ -130,8 +130,8 @@ const CustomizeColumnsModal = ({
 };
 
 CustomizeColumnsModal.propTypes = {
-  assitiveTextDisabledInstructionsLabel: PropTypes.string,
-  assitiveTextInstructionsLabel: PropTypes.string,
+  assistiveTextDisabledInstructionsLabel: PropTypes.string,
+  assistiveTextInstructionsLabel: PropTypes.string,
   columnDefinitions: PropTypes.array.isRequired,
   customizeModalHeadingLabel: PropTypes.string,
   findColumnPlaceholderLabel: PropTypes.string,

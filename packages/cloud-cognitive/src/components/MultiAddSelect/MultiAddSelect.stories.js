@@ -93,7 +93,6 @@ const defaultProps = {
   onCloseButtonText: 'Cancel',
   onSubmit: (selections) => console.log(selections),
   onSubmitButtonText: 'Add',
-  removeIconDescription: 'Remove',
   searchResultsLabel: 'Search results',
   title: 'Add business terms',
 };

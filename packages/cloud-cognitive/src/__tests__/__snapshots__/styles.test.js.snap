@@ -1857,24 +1857,39 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--empty-state {
   color: var(--cds-text-01, #161616);
 }
-.c4p--empty-state .c4p--empty-state__header,
-.c4p--empty-state .c4p--empty-state__subtitle {
-  padding-bottom: var(--cds-spacing-02, 0.25rem);
-  margin: 0;
-}
-.c4p--empty-state .c4p--empty-state__header--small {
+.c4p--empty-state .c4p--empty-state__header {
   font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
   font-weight: var(--cds-productive-heading-03-font-weight, 400);
   line-height: var(--cds-productive-heading-03-line-height, 1.4);
   letter-spacing: var(--cds-productive-heading-03-letter-spacing, 0);
+  padding-bottom: calc(var(--cds-spacing-01, 0.125rem) + var(--cds-spacing-02, 0.25rem));
+  margin: 0;
+}
+.c4p--empty-state .c4p--empty-state__subtitle {
+  font-size: var(--cds-body-long-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-long-01-font-weight, 400);
+  line-height: var(--cds-body-long-01-line-height, 1.42857);
+  letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
+  padding-bottom: var(--cds-spacing-05, 1rem);
+}
+.c4p--empty-state .c4p--empty-state__header--small {
+  font-size: var(--cds-body-short-02-font-size, 1rem);
+  font-weight: var(--cds-body-short-02-font-weight, 400);
+  line-height: var(--cds-body-short-02-line-height, 1.375);
+  letter-spacing: var(--cds-body-short-02-letter-spacing, 0);
+  padding-bottom: var(--cds-spacing-03, 0.5rem);
 }
 .c4p--empty-state .c4p--empty-state__subtitle--small {
-  font-size: var(--cds-body-short-01-font-size, 0.875rem);
-  font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.28572);
-  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  font-size: var(--cds-caption-01-font-size, 0.75rem);
+  font-weight: var(--cds-caption-01-font-weight, 400);
+  line-height: var(--cds-caption-01-line-height, 1.33333);
+  letter-spacing: var(--cds-caption-01-letter-spacing, 0.32px);
 }
 
+.c4p--empty-state__illustration {
+  height: auto;
+  margin-bottom: var(--cds-spacing-05, 1rem);
+}
 .c4p--empty-state__illustration.c4p--empty-state__illustration--lg {
   min-width: var(--cds-spacing-11, 5rem);
   max-width: var(--cds-spacing-11, 5rem);
@@ -1884,13 +1899,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: var(--cds-spacing-10, 4rem);
 }
 
-.c4p--empty-state__action-button,
-.c4p--empty-state__link {
-  margin-top: var(--cds-spacing-06, 1.5rem);
-}
-
 .c4p--empty-state .c4p--empty-state__action-button {
   display: block;
+  margin-bottom: var(--cds-spacing-05, 1rem);
 }
 
 .c4p--empty-state .c4p--empty-state__link {
@@ -3720,6 +3731,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
   line-height: var(--cds-productive-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
+  min-height: var(--cds-spacing-08, 2.5rem);
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

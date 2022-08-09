@@ -100,6 +100,22 @@
     }
   }
 
+  .#{$block-class} .#{$block-class}__selections-row:hover {
+    .#{$block-class}__selections-radio {
+      color: $interactive-04;
+    }
+
+    .#{$block-class}__selections-view-children svg {
+      color: $interactive-04;
+    }
+
+    button.#{$block-class}__selections-view-children.#{$carbon-prefix}--btn--ghost.#{$carbon-prefix}--btn--icon-only
+      .#{$carbon-prefix}--btn__icon
+      path {
+      fill: currentColor;
+    }
+  }
+
   .#{$block-class}__sub-header {
     display: flex;
     align-items: flex-end;
@@ -325,8 +341,9 @@
   }
 
   .#{$block-class} .#{$carbon-prefix}--structured-list-td {
-    height: 4rem;
-    padding: $spacing-05;
+    height: $layout-04;
+    padding-top: 0;
+    padding-bottom: 0;
     vertical-align: middle;
   }
 

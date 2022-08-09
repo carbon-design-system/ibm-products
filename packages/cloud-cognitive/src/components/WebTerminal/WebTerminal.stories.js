@@ -7,7 +7,7 @@
 
 // cspell:words joebob
 
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 // Carbon and package components we use.
 import { Code16 as Code, Copy16 as Copy } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
@@ -20,6 +20,7 @@ import { WebTerminal } from '.';
 import { WebTerminalContentWrapper } from './WebTerminalContentWrapper';
 import mdx from './WebTerminal.mdx';
 import { documentationLinks } from './preview-components/documentationLinks';
+import { WebTerminalProvider } from './hooks';
 
 import styles from './_storybook-styles.scss';
 
@@ -37,39 +38,27 @@ const actions = [
 ];
 
 const Template = (args) => {
-  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
-
-  const openTerminal = useCallback(() => setIsTerminalOpen(true), []);
-  const closeTerminal = useCallback(() => setIsTerminalOpen(false), []);
-
   return (
-    <div>
-      <Navigation openTerminal={openTerminal} />
+    <WebTerminalProvider>
+      <Navigation />
 
-      <WebTerminalContentWrapper isTerminalOpen={isTerminalOpen}>
+      <WebTerminalContentWrapper>
         This is where you would put content
       </WebTerminalContentWrapper>
 
-      <WebTerminal
-        open={isTerminalOpen}
-        closeTerminal={closeTerminal}
-        closeIconDescription="Close terminal"
-        {...args}
-      >
+      <WebTerminal closeIconDescription="Close terminal" {...args}>
         <div className="example-terminal">
           <p>Connection successful.</p>
-
           <p>
             DISCLAIMER: This is not a real terminal, you would pass your own
             terminal component into the children of the WebTerminal component.
           </p>
 
           <p>Please see the docs of this component for more information.</p>
-
           <p>joebob:~$</p>
         </div>
       </WebTerminal>
-    </div>
+    </WebTerminalProvider>
   );
 };
 

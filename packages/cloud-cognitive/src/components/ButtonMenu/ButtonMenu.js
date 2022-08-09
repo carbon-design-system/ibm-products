@@ -46,8 +46,6 @@ export let ButtonMenu = React.forwardRef(
       kind = defaults.kind,
       label,
       menuOptionsClass,
-      onClick,
-      open,
       renderIcon: Icon,
       size = defaults.size,
 
@@ -86,8 +84,6 @@ export let ButtonMenu = React.forwardRef(
         </div>
       )}
       innerRef={ref}
-      onClick={onClick}
-      open={open}
     >
       {children}
     </OverflowMenu>
@@ -136,16 +132,6 @@ ButtonMenu.propTypes = {
    * class name applied to the overflow options
    */
   menuOptionsClass: PropTypes.string,
-
-  /**
-   * handles the opening and closing of the menu
-   */
-   onClick: PropTypes.function,
-
-   /**
-   * handles the opening and closing of the menu
-   */
-    open: PropTypes.bool,
 
   /**
    * Optional prop to allow overriding the icon rendering.

@@ -63,8 +63,8 @@
   }
 
   .#{$blockClass}__overflow-menu__item {
-    max-width: none;
     position: relative;
+    max-width: none;    
   }
 
   .#{$blockClass}__overflow-menu__item__icon {

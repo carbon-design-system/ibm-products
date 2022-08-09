@@ -1,4 +1,4 @@
 module.exports = {
   root: true,
-  extends: ['stylelint-config-ibm-products']
+  extends: ['stylelint-config-ibm-products'],
 };

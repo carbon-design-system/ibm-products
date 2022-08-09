@@ -303,16 +303,16 @@ button.#{$block-class}__global-filter-toggle {
 }
 
 // the influencer sidebar needs to be even with the buttons
-.#{$block-class} .#{$tearsheet-class}__influencer {
+.#{$block-class}.#{$tearsheet-class} .#{$tearsheet-class}__influencer {
   max-width: 29rem;
   flex: 0 0 50%;
 }
 
-.#{$block-class} .#{$tearsheet-class}__header-description {
+.#{$block-class}.#{$tearsheet-class} .#{$tearsheet-class}__header-description {
   color: $text-secondary;
 }
 
-.#{$block-class} .#{$tearsheet-class}__content {
+.#{$block-class}.#{$tearsheet-class} .#{$tearsheet-class}__content {
   display: flex;
   flex-direction: column;
 }
@@ -360,4 +360,9 @@ button.#{$block-class}__global-filter-toggle {
 
 .#{$block-class} .#{$carbon-prefix}--checkbox-label-text {
   padding-left: $spacing-03;
+}
+
+.#{$carbon-prefix}--tooltip,
+.#{$carbon-prefix}--overflow-menu-options {
+  z-index: 9000;
 }

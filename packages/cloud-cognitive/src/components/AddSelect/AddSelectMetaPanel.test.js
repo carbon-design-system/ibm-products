@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import React from 'react';
 import { AddSelectMetaPanel } from './AddSelectMetaPanel';
 import { pkg } from '../../settings';
@@ -85,7 +85,8 @@ describe(componentName, () => {
       setDisplayMetaPanel,
     };
     render(<AddSelectMetaPanel {...newProps} />);
-    fireEvent.click(screen.getByText('test close icon'));
+    const btn = document.querySelector(`.${blockClass}-close`);
+    fireEvent.click(btn);
     expect(setDisplayMetaPanel).toHaveBeenCalled();
   });
 });

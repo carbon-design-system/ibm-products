@@ -83,11 +83,11 @@ MultiAddSelect.propTypes = {
       PropTypes.shape({
         avatar: PropTypes.shape({
           alt: PropTypes.string,
-          icon: PropTypes.object,
+          icon: PropTypes.func,
           src: PropTypes.string,
         }),
         children: PropTypes.object,
-        icon: PropTypes.object,
+        icon: PropTypes.func,
         id: PropTypes.string.isRequired,
         subtitle: PropTypes.string,
         title: PropTypes.string.isRequired,

@@ -7,4 +7,13 @@
 
 // AddSelect uses the following Carbon components:
 // Button, OverflowMenu, OverflowMenuItem
+@use '@carbon/react/scss/components/accordion';
+@use '@carbon/react/scss/components/breadcrumb';
+@use '@carbon/react/scss/components/button';
+@use '@carbon/react/scss/components/check-box';
+@use '@carbon/react/scss/components/dropdown';
+@use '@carbon/react/scss/components/overflow-menu';
+@use '@carbon/react/scss/components/radio-button';
+@use '@carbon/react/scss/components/tag';
+@use '@carbon/react/scss/components/text-input';
 @use '@carbon/styles/scss/components/structured-list';

@@ -21,20 +21,30 @@
   .#{$block-class} {
     color: $text-01;
 
-    .#{$block-class}__header,
-    .#{$block-class}__subtitle {
-      padding-bottom: $spacing-02;
+    .#{$block-class}__header {
+      @include carbon--type-style('productive-heading-03');
+      // stylelint-disable-next-line carbon/layout-token-use
+      padding-bottom: calc($spacing-01 + $spacing-02);
       margin: 0;
     }
+    .#{$block-class}__subtitle {
+      @include carbon--type-style('body-long-01');
+
+      padding-bottom: $spacing-05;
+    }
     .#{$block-class}__header--small {
-      @include carbon--type-style('productive-heading-03');
+      @include carbon--type-style('body-short-02');
+
+      padding-bottom: $spacing-03;
     }
     .#{$block-class}__subtitle--small {
-      @include carbon--type-style('body-short-01');
+      @include carbon--type-style('caption-01');
     }
   }
 
   .#{$block-class}__illustration {
+    height: auto;
+    margin-bottom: $spacing-05;
     &.#{$block-class}__illustration--lg {
       min-width: $spacing-11;
       max-width: $spacing-11;
@@ -45,12 +55,9 @@
     }
   }
 
-  .#{$block-class}__action-button,
-  .#{$block-class}__link {
-    margin-top: $spacing-06;
-  }
   .#{$block-class} .#{$block-class}__action-button {
     display: block;
+    margin-bottom: $spacing-05;
   }
   .#{$block-class} .#{$block-class}__link {
     display: block;

@@ -1,0 +1,66 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow/CreateTearsheetNarrow';
+import { EditTearsheetNarrow } from './EditTearsheetNarrow';
+import editNarrowTearsheet from './storybook_assets/edit-tearsheet-1.png';
+
+# EditTearsheetNarrow
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+### When to use
+
+- The original create flow was in a narrow tear sheet.
+- There are enough edits to require scrolling.
+- The content is more complex than what is allowed in a modal.
+
+### When not to use
+
+- The task is too small to warrant the tear sheet (i.e., only one field needs to
+  be edited) - use inline edit or a modal instead.
+- The user needs to interact with, compare, or have full view of the rest of the
+  screen’s content.
+- Input is required before a user can proceed - use a modal instead.
+- If there is a large amount of editable content or complex/multi -step
+  interactions needed - use a large tear sheet or side panel instead.
+
+Anatomy of EditTearsheet
+
+<img src={editNarrowTearsheet} alt="Example of EditTearsheetNarrow component" />
+
+1. **Header**: The header can include title, description, labels, and tabs.
+   Always include “Edit” in the title.
+
+2. **Main content area**: This area includes the editable content.
+
+3. **Save/cancel buttons**: The primary and secondary buttons are “Save” and
+   “Cancel”.
+
+4. **Background overlay**: An overlay which appears same as in modals
+
+## Example usage
+
+<!-- TODO: One example per designed use case. -->
+
+<Canvas>
+  <Story
+    id={getStoryId(EditTearsheetNarrow.displayName, 'edit-tearsheet-narrow')}
+  />
+</Canvas>
+
+## Code sample
+
+<CodesandboxLink exampleDirectory="CreateTearsheetNarrow" />
+
+## Component API
+
+<ArgsTable />

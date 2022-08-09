@@ -1,0 +1,66 @@
+import { parameters } from '../../../.storybook/preview';
+import { getDocsId } from '../../../.storybook';
+import GettingStarted from './docs/examples/GettingStarted/index.mdx';
+
+# GettingStartedLayout
+
+The GettingStartedLayout is a module designed to create a consistent and orderly
+getting started experience.
+
+[↳ Overview](#overview)  
+[↳ Component API](#component-api)  
+[↳ Anatomy](#anatomy)  
+[↳ Interactions](#interactions)  
+[↳ Variants](#variants)  
+[↳ Grid placement](#grid-placement)  
+[↳ Troubleshooting](#troubleshooting)
+
+### Overview
+
+The GettingStartedLayout module can be built using a combination of the
+`DescriptionModule`, `Button`,
+[paragraph](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p),
+[image](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img), and
+[grid](https://react.carbondesignsystem.com/?path=/docs/grid--narrow) elements.
+
+Everything passed in as a
+[render prop](https://reactjs.org/docs/render-props.html) child of
+`GettingStartedLayout` will be rendered.
+
+<Canvas>
+  <Story
+    id={getDocsId('microlayouts-gettingstartedlayout--default')}
+    parameters={parameters}
+  />
+</Canvas>
+
+### Component API
+
+<ArgsTable />
+
+_**\***Required property_
+
+Additional props passed into `GettingStartedLayout` will be forwarded along to
+the underlying getting started module container.
+
+#### Render props
+
+In order to make sure that everything works as intended, it’s important to pass
+all of the props of the component as fields on the object given to the prop
+getter. For example, to add an `illustration` child inside a
+`GettingStartedLayout`:
+
+```jsx
+<img {...getLayoutProps({ type: ’illustration' })}/>
+```
+
+Props provided are `description`, `primaryButton`, `secondaryButton`,
+`tertiaryButton`, `illustration`, and `additionalInfo`.
+
+### Examples
+
+<Row>
+  <GettingStarted />
+</Row>
+
+<Troubleshooting />

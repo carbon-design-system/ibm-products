@@ -6,6 +6,7 @@
 //
 
 import React, { useState, forwardRef } from 'react';
+import { Add20 } from '@carbon/icons-react';
 import {
   ComposedModal,
   ModalHeader,
@@ -45,6 +46,7 @@ export let ImportModal = forwardRef(
       fileDropHeader,
       fileDropLabel,
       fileUploadLabel,
+      inputButtonIcon,
       inputButtonText,
       inputId,
       inputLabel,
@@ -211,6 +213,7 @@ export let ImportModal = forwardRef(
               className={`${blockClass}__import-button`}
               size="sm"
               disabled={importButtonDisabled}
+              renderIcon={inputButtonIcon ? Add20 : null}
             >
               {inputButtonText}
             </Button>
@@ -300,6 +303,10 @@ ImportModal.propTypes = {
    * Label that appears when a file is uploaded to show number of files (1 / 1)
    */
   fileUploadLabel: PropTypes.string,
+  /**
+   * Button icon for import by url button
+   */
+  inputButtonIcon: PropTypes.bool,
   /**
    * Button text for import by url button
    */

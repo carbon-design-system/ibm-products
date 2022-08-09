@@ -4112,6 +4112,14 @@ Map {
       },
     },
   },
+  "GettingStartedLayout" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+    },
+  },
   "Header" => Object {
     "defaultProps": Object {
       "className": null,
@@ -10275,7 +10283,6 @@ Map {
       "onClick": [Function],
       "onKeyDown": [Function],
       "selected": false,
-      "text": "Provide text",
     },
     "displayName": "Switch",
     "propTypes": Object {

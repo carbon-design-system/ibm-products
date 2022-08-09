@@ -59,7 +59,6 @@ export let AddSelectBody = ({
   onSubmitButtonText,
   open,
   portalTarget,
-  removeIconDescription,
   searchResultsLabel,
   title,
   useNormalizedItems,
@@ -184,19 +183,17 @@ export let AddSelectBody = ({
   };
 
   const sidebarProps = {
+    appliedModifiers,
     closeIconDescription,
+    displayMetalPanel,
     influencerTitle,
     items: useNormalizedItems ? normalizedItems : items.entries,
     metaPanelTitle,
+    modifiers: items.modifiers,
     multiSelection,
     noSelectionDescription,
     noSelectionTitle,
-    removeIconDescription,
-    setMultiSelection,
-    displayMetalPanel,
     setDisplayMetaPanel,
-    modifiers: items.modifiers,
-    appliedModifiers,
   };
 
   const displayColumnView =
@@ -367,7 +364,6 @@ AddSelectBody.propTypes = {
   onSubmitButtonText: PropTypes.string,
   open: PropTypes.bool,
   portalTarget: PropTypes.node,
-  removeIconDescription: PropTypes.string,
   searchResultsLabel: PropTypes.string,
   title: PropTypes.string,
   useNormalizedItems: PropTypes.bool,

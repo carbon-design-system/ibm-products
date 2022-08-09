@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
@@ -19,7 +19,7 @@ import mdx from './ButtonMenu.mdx';
 
 import styles from './_storybook-styles.scss';
 
-import { Add16 } from '@carbon/icons-react';
+import { ChevronDown16, ChevronUp16 } from '@carbon/icons-react';
 
 export default {
   title: getStoryTitle(ButtonMenu.displayName),
@@ -37,8 +37,10 @@ export default {
 };
 
 const Template = (args) => {
+  const [ isOpen, setIsOpen ] = useState(false)
+
   return (
-    <ButtonMenu label="Primary button" renderIcon={Add16} {...args}>
+    <ButtonMenu label="Primary button" onClick={() => setIsOpen(!isOpen)} open={isOpen} renderIcon={isOpen ? ChevronUp16 : ChevronDown16} {...args}>
       <ButtonMenuItem
         itemText="Option 1a"
         onClick={action(`Click on Option 1`)}

@@ -65,6 +65,9 @@ const defaults = {
     DataSpreadsheet: false,
     Datagrid: false,
     ComboButton: false,
+    EditTearsheet: false,
+    EditTearsheetNarrow: false,
+    EditFullPage: false,
     /* new component flags here - comment used by generate CLI */
   },
 

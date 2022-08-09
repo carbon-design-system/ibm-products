@@ -25,8 +25,7 @@
     @include text-overflow;
   }
 
-  .#{$blockClass}
-    .#{$blockClass}__overflow-menu {
+  .#{$blockClass} .#{$blockClass}__overflow-menu {
     width: carbon--mini-units($count: 6);
     height: auto;
     border-left: carbon--rem($px: 1px) solid $ui-03;

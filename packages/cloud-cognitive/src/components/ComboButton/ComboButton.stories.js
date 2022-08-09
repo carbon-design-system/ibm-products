@@ -43,7 +43,7 @@ const Template = (args) => {
           <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
           <ComboButtonItem renderIcon={args.icon && args.icon}>ComboButtonItem 2</ComboButtonItem>
           <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
-          <ComboButtonItem hasdivider={args.hasDivider}>ComboButtonItem 4</ComboButtonItem>
+          <ComboButtonItem hasDivider={args.hasDivider}>ComboButtonItem 4</ComboButtonItem>
           <ComboButtonItem>ComboButtonItem 5</ComboButtonItem>
         </ComboButton>
 };

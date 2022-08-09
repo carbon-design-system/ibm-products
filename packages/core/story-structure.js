@@ -34,7 +34,7 @@ const s = [
         n: 'Components',
         s: [
           { n: 'Cards', s: ['c/ExpressiveCard', 'c/ProductiveCard'] },
-          { n: 'ComboButton', s: ['c/ComboButton']},
+          { n: 'ComboButton', s: ['c/ComboButton'] },
           { n: 'Datagrid', s: ['c/Datagrid'] },
           { n: 'DataSpreadsheet', s: ['c/DataSpreadsheet'] },
           { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
@@ -43,8 +43,6 @@ const s = [
           { n: 'Side panel', s: ['c/SidePanel'] },
           { n: 'Tag set', s: ['c/TagSet'] },
           { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
-          
-          
         ],
       },
       {

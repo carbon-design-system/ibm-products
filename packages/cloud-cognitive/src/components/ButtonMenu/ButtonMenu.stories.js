@@ -37,7 +37,6 @@ export default {
 };
 
 const Template = (args) => {
-
   return (
     <ButtonMenu label="Primary button" renderIcon={Add16} {...args}>
       <ButtonMenuItem

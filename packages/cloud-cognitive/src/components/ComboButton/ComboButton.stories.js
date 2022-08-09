@@ -19,7 +19,7 @@ import styles from './_combo-button.scss';
 
 const defaultArgs = {
   size: 'md',
-}
+};
 
 export default {
   title: getStoryTitle(ComboButton.displayName),
@@ -30,7 +30,7 @@ export default {
         type: 'radio',
       },
       options: ['sm', 'md', 'lg'],
-    }
+    },
   },
   subcomponents: {
     ComboButtonItem,
@@ -39,32 +39,38 @@ export default {
 };
 
 const Template = (args) => {
-  return <ComboButton {...args}>
-          <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
-          <ComboButtonItem renderIcon={args.icon && args.icon}>ComboButtonItem 2</ComboButtonItem>
-          <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
-          <ComboButtonItem hasDivider={args.hasDivider}>ComboButtonItem 4</ComboButtonItem>
-          <ComboButtonItem>ComboButtonItem 5</ComboButtonItem>
-        </ComboButton>
+  return (
+    <ComboButton {...args}>
+      <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
+      <ComboButtonItem renderIcon={args.icon && args.icon}>
+        ComboButtonItem 2
+      </ComboButtonItem>
+      <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
+      <ComboButtonItem hasDivider={args.hasDivider}>
+        ComboButtonItem 4
+      </ComboButtonItem>
+      <ComboButtonItem>ComboButtonItem 5</ComboButtonItem>
+    </ComboButton>
+  );
 };
 
 export const Default = prepareStory(Template, {
   args: {
     ...defaultArgs,
-    hasDivider: false
-  }
+    hasDivider: false,
+  },
 });
 
 export const WithDivider = prepareStory(Template, {
   args: {
     ...defaultArgs,
-    hasDivider: true
-  }
+    hasDivider: true,
+  },
 });
 
 export const WithIcon = prepareStory(Template, {
   args: {
     ...defaultArgs,
-    icon: CloudApp16
-  }
+    icon: CloudApp16,
+  },
 });

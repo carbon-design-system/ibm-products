@@ -35,8 +35,8 @@ const Columns = ({
   columns,
   setColumnsObject,
   onSelectColumn,
-  instructionsLabel = 'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
-  disabledInstructionsLabel = 'Reordering columns are disabled because they are filtered currently.',
+  assitiveTextInstructionsLabel,
+  assitiveTextDisabledInstructionsLabel,
 }) => {
   const [ariaRegionText, setAriaRegionText] = React.useState('');
   const [focusIndex, setFocusIndex] = React.useState(-1);
@@ -87,8 +87,8 @@ const Columns = ({
             className={`${blockClass}__shared-ui--assistive-text`}
           >
             {filterString.length === 0
-              ? instructionsLabel
-              : disabledInstructionsLabel}
+              ? assitiveTextInstructionsLabel
+              : assitiveTextDisabledInstructionsLabel}
           </span>
           {columns
             .filter(
@@ -145,6 +145,8 @@ const Columns = ({
 };
 
 Columns.propTypes = {
+  assitiveTextDisabledInstructionsLabel: PropTypes.string,
+  assitiveTextInstructionsLabel: PropTypes.string,
   columns: PropTypes.array.isRequired,
   disabledInstructionsLabel: PropTypes.string,
   filterString: PropTypes.string.isRequired,

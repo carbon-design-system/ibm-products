@@ -23,8 +23,8 @@ const Actions = ({
   originalColumnDefinitions,
   setColumnsObject,
   setSearchText,
-  findColumnPlaceholderLabel = 'Find column',
-  resetToDefaultLabel = 'Reset to default',
+  findColumnPlaceholderLabel,
+  resetToDefaultLabel,
 }) => {
   return (
     <div

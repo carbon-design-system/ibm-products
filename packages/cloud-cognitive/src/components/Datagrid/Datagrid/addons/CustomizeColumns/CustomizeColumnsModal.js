@@ -26,6 +26,10 @@ const CustomizeColumnsModal = ({
   primaryButtonTextLabel = 'Save',
   secondaryButtonTextLabel = 'Cancel',
   instructionsLabel = 'Deselect columns to hide them. Click and drag the white box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
+  findColumnPlaceholderLabel = 'Find column',
+  resetToDefaultLabel = 'Reset to default',
+  assitiveTextInstructionsLabel = 'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
+  assitiveTextDisabledInstructionsLabel = 'Reordering columns are disabled because they are filtered currently.',
 }) => {
   const [searchText, setSearchText] = useState('');
   const [columnObjects, setColumnsObject] = useState(
@@ -103,9 +107,15 @@ const CustomizeColumnsModal = ({
           setDirty();
         }}
         setSearchText={setSearchText}
+        findColumnPlaceholderLabel={findColumnPlaceholderLabel}
+        resetToDefaultLabel={resetToDefaultLabel}
       />
       {isOpen && (
         <Columns
+          assitiveTextInstructionsLabel={assitiveTextInstructionsLabel}
+          assitiveTextDisabledInstructionsLabel={
+            assitiveTextDisabledInstructionsLabel
+          }
           columns={columnObjects}
           filterString={string}
           onSelectColumn={onCheckboxCheck}
@@ -120,13 +130,17 @@ const CustomizeColumnsModal = ({
 };
 
 CustomizeColumnsModal.propTypes = {
+  assitiveTextDisabledInstructionsLabel: PropTypes.string,
+  assitiveTextInstructionsLabel: PropTypes.string,
   columnDefinitions: PropTypes.array.isRequired,
   customizeModalHeadingLabel: PropTypes.string,
+  findColumnPlaceholderLabel: PropTypes.string,
   instructionsLabel: PropTypes.string,
   isOpen: PropTypes.bool.isRequired,
   onSaveColumnPrefs: PropTypes.func.isRequired,
   originalColumnDefinitions: PropTypes.array.isRequired,
   primaryButtonTextLabel: PropTypes.string,
+  resetToDefaultLabel: PropTypes.string,
   secondaryButtonTextLabel: PropTypes.string,
   setIsModalOpen: PropTypes.func.isRequired,
 };

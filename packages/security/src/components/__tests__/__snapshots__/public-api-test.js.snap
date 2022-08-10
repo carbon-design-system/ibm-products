@@ -10283,7 +10283,6 @@ Map {
       "onClick": [Function],
       "onKeyDown": [Function],
       "selected": false,
-      "text": "Provide text",
     },
     "displayName": "Switch",
     "propTypes": Object {

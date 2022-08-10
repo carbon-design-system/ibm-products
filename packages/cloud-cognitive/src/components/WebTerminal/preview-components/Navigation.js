@@ -6,16 +6,19 @@ import {
   HeaderGlobalBar,
 } from '@carbon/react';
 import { Terminal, Search, User } from '@carbon/icons-react';
-import PropTypes from 'prop-types';
 
-const Navigation = ({ openTerminal }) => {
+import { useWebTerminal } from '../hooks';
+
+const Navigation = () => {
+  const { openWebTerminal } = useWebTerminal();
+
   return (
     <Header aria-label="IBM Platform Name">
       <HeaderName href="#" prefix="IBM">
         [Platform]
       </HeaderName>
       <HeaderGlobalBar>
-        <HeaderGlobalAction aria-label="Web terminal" onClick={openTerminal}>
+        <HeaderGlobalAction aria-label="Web terminal" onClick={openWebTerminal}>
           <Terminal size={20} />
         </HeaderGlobalAction>
         <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
@@ -27,13 +30,6 @@ const Navigation = ({ openTerminal }) => {
       </HeaderGlobalBar>
     </Header>
   );
-};
-
-Navigation.propTypes = {
-  /**
-   * Opens the terminal
-   */
-  openTerminal: PropTypes.func.isRequired,
 };
 
 export default Navigation;

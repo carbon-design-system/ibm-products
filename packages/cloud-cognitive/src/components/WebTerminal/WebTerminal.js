@@ -17,6 +17,7 @@ import { pkg } from '../../settings';
 import { Close, Help } from '@carbon/icons-react';
 import { Button, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { moderate02 } from '@carbon/motion';
+import { useWebTerminal } from './hooks';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
@@ -29,6 +30,7 @@ const defaults = {
   actions: Object.freeze([]),
   documentationLinks: Object.freeze([]),
   documentationLinksIconDescription: 'Show documentation links',
+  isInitiallyOpen: false,
 };
 
 export let WebTerminal = React.forwardRef(
@@ -40,16 +42,17 @@ export let WebTerminal = React.forwardRef(
       children,
       className,
       closeIconDescription,
-      closeTerminal,
       documentationLinks = defaults.documentationLinks,
       documentationLinksIconDescription = defaults.documentationLinksIconDescription,
-      open,
+      isInitiallyOpen = defaults.isInitiallyOpen,
 
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
+    const { open, closeWebTerminal, openWebTerminal } = useWebTerminal();
+
     const [shouldRender, setRender] = useState(open);
     const { matches: prefersReducedMotion } =
       window && window.matchMedia
@@ -71,6 +74,15 @@ export let WebTerminal = React.forwardRef(
       }
     }, [open]);
 
+    /**
+      On render, check if user want's the web terminal to be open by default
+    */
+    useEffect(() => {
+      if (isInitiallyOpen) {
+        openWebTerminal();
+      }
+    }, []); // eslint-disable-line
+
     /** 
       When the web terminal slide in animation is complete, sets render to false.
     */
@@ -88,7 +100,7 @@ export let WebTerminal = React.forwardRef(
       if (prefersReducedMotion) {
         setRender(false);
       }
-      closeTerminal();
+      closeWebTerminal();
     };
 
     return shouldRender ? (
@@ -195,11 +207,6 @@ WebTerminal.propTypes = {
   closeIconDescription: PropTypes.string.isRequired,
 
   /**
-   * Function that should set the open prop to false
-   */
-  closeTerminal: PropTypes.func.isRequired,
-
-  /**
    * Array of objects for each documentation link. Each documentation link uses the prop types of OverflowMenuItems. See more: https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu--default
    */
   documentationLinks: PropTypes.arrayOf(
@@ -209,12 +216,12 @@ WebTerminal.propTypes = {
   ),
 
   /**
-   * Icon description for the documentation link overflow menu
+   * Description for the documentation link overflow menu tooltip
    */
   documentationLinksIconDescription: PropTypes.string,
 
   /**
-   * Boolean that determines if the web terminal is opened or closed
+   * Optionally pass if the web terminal should be open by default
    */
-  open: PropTypes.bool.isRequired,
+  isInitiallyOpen: PropTypes.bool,
 };

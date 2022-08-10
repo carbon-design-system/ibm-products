@@ -359,7 +359,7 @@ describe(componentName, () => {
     };
     render(<AddSelectBody {...newProps} />);
     const metaBtn = document.querySelectorAll(
-      '.c4p--add-select__selections-view-meta'
+      `.${blockClass}__selections-view-meta`
     )[0];
     expect(metaBtn);
     fireEvent.click(metaBtn);
@@ -432,20 +432,20 @@ describe(componentName, () => {
     expect(screen.findByText('florida'));
     fireEvent.change(input, { target: { value: '' } });
     const selectAll = document.querySelector(
-      '.c4p--add-select__column__select-all input'
+      `.${blockClass}__column__select-all input`
     );
     fireEvent.click(selectAll);
     expect(
-      document.querySelectorAll('.c4p--add-select__sidebar-accordion-title')
+      document.querySelectorAll(`.${blockClass}__sidebar-accordion-title`)
         .length
     ).toBe(5);
     fireEvent.click(selectAll);
     expect(
-      document.querySelectorAll('.c4p--add-select__sidebar-accordion-title')
+      document.querySelectorAll(`.${blockClass}__sidebar-accordion-title`)
         .length
     ).toBe(0);
     fireEvent.click(
-      document.querySelector(`.c4p--add-select__selections-view-children`)
+      document.querySelector(`.${blockClass}__selections-view-children`)
     );
     expect(screen.findByText('Los Angeles'));
     const globalSearch = screen.getByPlaceholderText('Find business terms');

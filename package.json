@@ -155,7 +155,7 @@
     "**/*": "yarn spellcheck:files"
   },
   "dependencies": {
-    "stylelint-plugin-carbon-tokens": "2.0.0-beta.10"
+    "stylelint-plugin-carbon-tokens": "2.0.0-beta.14"
   },
   "packageManager": "yarn@3.2.1"
 }

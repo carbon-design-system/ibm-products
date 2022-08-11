@@ -879,6 +879,16 @@ describe(componentName, () => {
     jest.spyOn(global.console, 'warn').mockImplementation(() => {});
     jest.useFakeTimers();
     jest.spyOn(global, 'setTimeout');
+    window.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    }));
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+    window.ResizeObserver = ResizeObserver;
   });
 
   it('renders a basic data grid component with devTools attribute', () => {

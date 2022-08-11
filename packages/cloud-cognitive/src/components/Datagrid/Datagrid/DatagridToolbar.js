@@ -72,6 +72,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
             width <= minWidthBeforeOverflowIcon,
         })}
         menuOptionsClass={`${blockClass}__button-menu-options`}
+        flipped
       >
         {toolbarBatchActions &&
           toolbarBatchActions.map((batchAction, index) => {

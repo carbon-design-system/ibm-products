@@ -6,13 +6,14 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 // @flow
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'carbon-components-react';
 import { isColumnVisible } from './common';
 import Columns from './Columns';
 import Actions from './Actions';
 import { pkg } from '../../../../../settings';
+import { useCallback } from 'react';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -22,11 +23,13 @@ const CustomizeColumnsModal = ({
   onSaveColumnPrefs,
   columnDefinitions,
   originalColumnDefinitions,
-  customizeModalHeadingLabel = 'Customize display',
+  customizeModalHeadingLabel = 'Customize Columns',
   primaryButtonTextLabel = 'Save',
   secondaryButtonTextLabel = 'Cancel',
-  instructionsLabel = 'Deselect columns to hide them. Click and drag the white box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
+  instructionsLabel = 'Select columns to display them. Click and drag the box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
 }) => {
+  const [visibleColumns, setVisibleColumns] = useState('');
+  const [totalColumns, setTotalColumns] = useState('');
   const [searchText, setSearchText] = useState('');
   const [columnObjects, setColumnsObject] = useState(
     columnDefinitions
@@ -60,9 +63,11 @@ const CustomizeColumnsModal = ({
   };
 
   const onCheckboxCheck = (col, value) => {
+    //copy the modified column definition to columnObject
     const changedDefinitions = columnObjects.map((definition) => {
       if (definition.id === col.id) {
-        return { ...definition, isVisible: value };
+        definition.isVisible = value;
+        return definition;
       }
       return definition;
     });
@@ -76,12 +81,29 @@ const CustomizeColumnsModal = ({
     }
   };
 
+  const getVisibleColumnsCount = useCallback(() => {
+    let result = 0;
+
+    columnObjects.forEach((col) => {
+      if (col.isVisible) {
+        result++;
+      }
+    });
+    return result;
+  }, [columnObjects]);
+
   const string = searchText.trim().toLowerCase();
+
+  useEffect(() => {
+    setVisibleColumns(getVisibleColumnsCount());
+    setTotalColumns(columnObjects.length);
+  }, [getVisibleColumnsCount, columnObjects.length]);
+
   return (
     <Modal
       className={`${blockClass}__customize-columns-modal`}
       open={isOpen}
-      modalHeading={customizeModalHeadingLabel}
+      modalHeading={`${customizeModalHeadingLabel} (${visibleColumns}/${totalColumns})`}
       primaryButtonText={primaryButtonTextLabel}
       secondaryButtonText={secondaryButtonTextLabel}
       selectorPrimaryFocus={`.${blockClass}__customize-columns-column-list--focus`}
@@ -106,6 +128,8 @@ const CustomizeColumnsModal = ({
       />
       {isOpen && (
         <Columns
+          setVisibleColumns={setVisibleColumns}
+          getVisibleColumnsCount={getVisibleColumnsCount}
           columns={columnObjects}
           filterString={string}
           onSelectColumn={onCheckboxCheck}

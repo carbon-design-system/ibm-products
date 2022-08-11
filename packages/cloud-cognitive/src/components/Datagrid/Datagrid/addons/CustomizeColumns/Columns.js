@@ -31,12 +31,14 @@ const getNextIndex = (array, currentIndex, key) => {
 };
 
 const Columns = ({
+  getVisibleColumnsCount,
   filterString,
   columns,
   setColumnsObject,
   onSelectColumn,
   instructionsLabel = 'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
   disabledInstructionsLabel = 'Reordering columns are disabled because they are filtered currently.',
+  selectAllLabel = 'Column name',
 }) => {
   const [ariaRegionText, setAriaRegionText] = React.useState('');
   const [focusIndex, setFocusIndex] = React.useState(-1);
@@ -54,6 +56,50 @@ const Columns = ({
     },
     [columns, setColumnsObject]
   );
+
+  const setColumnStatus = (id, isVisible) => {
+    let list = document.querySelectorAll(
+      `li.${blockClass}__draggable-handleHolder`
+    );
+
+    list.forEach((li, i) => {
+      if (!columns[i].id.includes(id)) {
+        return;
+      }
+      li.setAttribute('selected', isVisible);
+    });
+  };
+
+  const initializeList = () => {
+    columns.forEach((col) => {
+      setColumnStatus(col.id, col.isVisible);
+    });
+  };
+
+  const setSelectAllColumnClassName = () => {
+    return `${blockClass}__draggable-handleHolder${
+      getVisibleColumnsCount() > 0 ? ' -selected' : ''
+    }`;
+  };
+
+  const setSelectAllCheckBox = () => {
+    let checkboxes = document.querySelectorAll(
+      `.${blockClass}__customize-columns-modal .bx--checkbox`
+    );
+    let selectAll = getVisibleColumnsCount() != columns.length;
+
+    for (let i = 1; i < checkboxes.length; i++) {
+      checkboxes[i].checked = selectAll;
+      onSelectColumn(columns[i - 1], selectAll);
+    }
+    if (getVisibleColumnsCount() == columns.length) {
+      document
+        .querySelectorAll('#customize-columns-select-all')[0]
+        .setAttribute('selected', getVisibleColumnsCount() > 0);
+    }
+  };
+
+  initializeList();
   return (
     <div className={`${blockClass}__customize-columns-column-list`}>
       <DndProvider backend={HTML5Backend}>
@@ -90,6 +136,25 @@ const Columns = ({
               ? instructionsLabel
               : disabledInstructionsLabel}
           </span>
+          <div
+            id={'customize-columns-select-all'}
+            className={setSelectAllColumnClassName()}
+            selected={'default'}
+          >
+            <Checkbox
+              wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
+              className={`${blockClass}__customize-columns-select-all`}
+              checked={getVisibleColumnsCount() == columns.length}
+              empty={getVisibleColumnsCount() == 0}
+              indeterminate={
+                getVisibleColumnsCount() < columns.length &&
+                getVisibleColumnsCount() > 0
+              }
+              onChange={setSelectAllCheckBox}
+              id={`${blockClass}__customization-column-select-all`}
+              labelText={selectAllLabel}
+            />
+          </div>
           {columns
             .filter(
               (colDef) =>
@@ -129,12 +194,16 @@ const Columns = ({
                 }}
               >
                 <Checkbox
-                  wrapperClassName={`${blockClass}__customize-columns-checkbox`}
+                  wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
                   checked={isColumnVisible(colDef)}
+                  // onChange={() => {
+                  //   checkBoxChangeHandler(colDef, !colDef.isVisible);
+                  // }}
                   onChange={onSelectColumn.bind(null, colDef)}
                   id={`${blockClass}__customization-column-${colDef.id}`}
                   labelText={colDef.Header.props.title}
                   title={colDef.Header.props.title}
+                  className={`${blockClass}__customize-columns-checkbox`}
                 />
               </DraggableElement>
             ))}
@@ -148,9 +217,13 @@ Columns.propTypes = {
   columns: PropTypes.array.isRequired,
   disabledInstructionsLabel: PropTypes.string,
   filterString: PropTypes.string.isRequired,
+  getVisibleColumnsCount: PropTypes.func.isRequired,
   instructionsLabel: PropTypes.string,
   onSelectColumn: PropTypes.func.isRequired,
+  selectAllLabel: PropTypes.string,
+  setColumnStatus: PropTypes.func,
   setColumnsObject: PropTypes.func.isRequired,
+  setVisibleColumns: PropTypes.func,
 };
 
 export default Columns;

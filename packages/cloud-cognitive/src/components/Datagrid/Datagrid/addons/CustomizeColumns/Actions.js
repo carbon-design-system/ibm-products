@@ -7,24 +7,17 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 
-import { Reset16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
-import { Button, Search } from 'carbon-components-react';
+import { Search } from 'carbon-components-react';
 import * as React from 'react';
-import keyBy from 'lodash/keyBy';
 import { pkg } from '../../../../../settings';
-import { isColumnVisible } from './common';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const Actions = ({
   searchText,
-  columns,
-  originalColumnDefinitions,
-  setColumnsObject,
   setSearchText,
   findColumnPlaceholderLabel = 'Find column',
-  resetToDefaultLabel = 'Reset to default',
 }) => {
   return (
     <div
@@ -42,28 +35,8 @@ const Actions = ({
         }}
         test-id={`${blockClass}__customize-columns-modal--search`}
       />
-      <Button
-        onClick={() => {
-          const reset = resetToOriginal(columns, originalColumnDefinitions);
-          setColumnsObject(reset);
-        }}
-        size="sm"
-        kind="ghost"
-        renderIcon={Reset16}
-        test-id={`${blockClass}__customize-columns-modal--reset`}
-      >
-        {resetToDefaultLabel}
-      </Button>
     </div>
   );
-};
-
-const resetToOriginal = (columnDefinitions, originalColumnDefinitions) => {
-  const keyedDefs = keyBy(columnDefinitions, 'id');
-  return originalColumnDefinitions.map((colDef) => ({
-    ...keyedDefs[colDef.id],
-    isVisible: isColumnVisible(colDef),
-  }));
 };
 
 Actions.propTypes = {

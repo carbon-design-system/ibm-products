@@ -96,6 +96,7 @@ const DraggableElement = ({
       {children}
     </>
   );
+
   return (
     <li
       className={cx(
@@ -110,6 +111,7 @@ const DraggableElement = ({
       ref={ref}
       aria-selected={isFocused}
       role="option"
+      selected="default"
       tabIndex={isFocused ? 0 : -1}
       onKeyPress={(e) => {
         if (e.key === ' ' && e.target === e.currentTarget && !disabled) {
@@ -128,10 +130,6 @@ const DraggableElement = ({
         if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
           onArrowKeyDown(e, isGrabbed, index);
         }
-      }}
-      onBlur={(e) => {
-        // handle when focus move to inner elements
-        setIsFocusedOnItem(e.currentTarget === e.target);
       }}
       onFocus={(e) => {
         // handle when focus move to li element

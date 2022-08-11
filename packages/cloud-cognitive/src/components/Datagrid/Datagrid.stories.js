@@ -528,6 +528,9 @@ export const SelectableRow = () => {
     {
       columns,
       data,
+      DatagridActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
     },
     useSelectRows
   );

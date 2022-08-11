@@ -153,9 +153,11 @@
     overflow-x: auto;
   }
 
-  .#{$block-class}__table-simple {
-    overflow: hidden;
+  table.#{$block-class}__table-simple {
+    display: flex;
+    overflow: auto;
     max-height: 100%;
+    flex-direction: column;
   }
 
   .#{$block-class}__head {

@@ -30,12 +30,19 @@
 	],
 	"body": "// stylelint-disable-next-line carbon/layout-token-use"
 },
-"Stylelint disable next line Carbon Motion": {
+"Stylelint disable next line Carbon Duraion": {
 	"scope": "scss",
 	"prefix": [
-		"//mo"
+		"//mod"
 	],
-	"body": "// stylelint-disable-next-line carbon/motion-token-use"
+	"body": "// stylelint-disable-next-line carbon/motion-eduration-use"
+},
+"Stylelint disable next line Carbon Easing": {
+	"scope": "scss",
+	"prefix": [
+		"//moe"
+	],
+	"body": "// stylelint-disable-next-line carbon/motion-easing-use"
 },
 "Stylelint disable next line Carbon Type": {
 	"scope": "scss",

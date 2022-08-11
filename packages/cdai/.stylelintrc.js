@@ -21,12 +21,14 @@ module.exports = {
       {
         severity: 'warning',
         acceptCarbonMiniUnitsFunction: true,
+        carbonPath: 'packages/security/node_modules/@carbon'
       },
     ],
-    'carbon/motion-token-use': [true, { severity: 'warning' }],
+    'carbon/motion-duration-use': [true, { severity: 'warning', carbonPath: 'packages/security/node_modules/@carbon'  }],
+    'carbon/motion-easing-use': [true, { severity: 'warning', carbonPath: 'packages/security/node_modules/@carbon'  }],
     'carbon/theme-token-use': [
       true,
-      { severity: 'warning', acceptUndefinedVariables: true },
+      { severity: 'warning', acceptUndefinedVariables: true, carbonPath: 'packages/security/node_modules/@carbon'  },
     ],
     'carbon/type-token-use': [
       true,
@@ -34,6 +36,7 @@ module.exports = {
         severity: 'warning',
         acceptCarbonTypeScaleFunction: true,
         acceptCarbonFontWeightFunction: true,
+        carbonPath: 'packages/security/node_modules/@carbon'
       },
     ],
   },

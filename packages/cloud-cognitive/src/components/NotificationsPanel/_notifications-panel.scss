@@ -66,8 +66,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
   max-height: 38.5rem;
   background-color: $background;
   color: $text-primary;
-  transition: transform $duration-fast-02;
-  transition-timing-function: motion(standard);
+  transition: transform $duration-fast-02 motion(standard);
 
   .#{$block-class}__header-container {
     position: sticky;
@@ -129,8 +128,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     background-color: $background;
     cursor: pointer;
     text-align: left;
-    transition: background-color $duration-moderate-02;
-    transition-timing-function: motion(standard);
+    transition: background-color $duration-moderate-02 motion(standard);
     .#{$block-class}__notification-title {
       margin-bottom: $spacing-02;
       color: $text-on-color;
@@ -191,6 +189,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
         padding: 0;
 
         .#{c4p-settings.$carbon-prefix}--btn__icon {
+          // stylelint-disable-next-line carbon/motion-easing-use
           transition: transform $duration-moderate-02 ease;
           /* stylelint-disable-next-line max-nesting-depth */
           @media (prefers-reduced-motion: reduce) {
@@ -241,8 +240,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     margin: 0 auto;
     background-color: $layer-02;
     content: '';
-    transition: background-color $duration-moderate-02;
-    transition-timing-function: motion(standard);
+    transition: background-color $duration-moderate-02 motion(standard);
   }
   .#{$block-class}__notification-today:hover
     + .#{$block-class}__notification-today:not(:first-of-type):before,

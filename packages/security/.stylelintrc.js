@@ -37,15 +37,19 @@ module.exports = {
     ],
     'carbon/layout-token-use': [
       true,
-      { severity: 'error', acceptUndefinedVariables: true },
+      { severity: 'error', acceptUndefinedVariables: true, carbonPath: 'packages/security/node_modules/@carbon' },
     ],
-    'carbon/motion-token-use': [
+    'carbon/motion-duration-use': [
       true,
-      { severity: 'error', acceptUndefinedVariables: true },
+      { severity: 'error', acceptUndefinedVariables: true, carbonPath: 'packages/security/node_modules/@carbon'  },
+    ],
+    'carbon/motion-easing-use': [
+      true,
+      { severity: 'error', acceptUndefinedVariables: true, carbonPath: 'packages/security/node_modules/@carbon'  },
     ],
     'carbon/theme-token-use': [
       true,
-      { severity: 'error', acceptUndefinedVariables: true },
+      { severity: 'error', acceptUndefinedVariables: true, carbonPath: 'packages/security/node_modules/@carbon'  },
     ],
     'carbon/type-token-use': [
       true,
@@ -54,6 +58,7 @@ module.exports = {
         acceptCarbonTypeScaleFunction: true,
         acceptCarbonFontWeightFunction: true,
         acceptUndefinedVariables: true,
+        carbonPath: 'packages/security/node_modules/@carbon'
       },
     ],
   },

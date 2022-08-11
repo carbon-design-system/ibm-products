@@ -178,11 +178,8 @@
       &--active {
         opacity: 1;
         transform: translate3d(0, 0, 0);
-        transition: all $duration--moderate-02;
-        transition-timing-function: carbon--motion(
-          $name: entrance,
-          $mode: expressive
-        );
+        transition: all $duration--moderate-02
+          carbon--motion($name: entrance, $mode: expressive);
         @media (prefers-reduced-motion: reduce) {
           transition: none;
         }
@@ -196,11 +193,9 @@
       &--active {
         opacity: 0;
         transform: $panel__transform;
-        transition: all $duration--moderate-02;
-        transition-timing-function: carbon--motion(
-          $name: exit,
-          $mode: expressive
-        );
+        transition: all $duration--moderate-02
+          carbon--motion($name: exit, $mode: expressive);
+
         @media (prefers-reduced-motion: reduce) {
           transition: none;
         }

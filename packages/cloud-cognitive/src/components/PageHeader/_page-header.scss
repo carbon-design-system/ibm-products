@@ -99,7 +99,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     $animation: background-and-shadow-appear;
   }
 
-  /* stylelint-disable-next-line carbon/motion-token-use -- non-standard duration used */
+  /* stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use -- non-standard duration used */
   animation: $animation $duration linear paused forwards;
   // Added separately for clarity
   animation-delay: calc(
@@ -202,6 +202,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     content: '';
     opacity: 0;
     transform: translateX(-50%) scaleX(1);
+    // stylelint-disable-next-line carbon/motion-easing-use
     transition: all $duration-moderate-01 ease-out;
   }
 

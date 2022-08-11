@@ -19,6 +19,8 @@ import {
   Download16,
   Filter16,
   Add16,
+  Edit16,
+  TrashCan16,
 } from '@carbon/icons-react';
 import { DataTable, Button, Pagination } from 'carbon-components-react';
 import {
@@ -1158,6 +1160,62 @@ export const StickyActionsColumn = () => {
           id: 'delete',
           itemText: 'Delete',
           hasDivider: true,
+          isDelete: true,
+          onClick: onActionClick,
+        },
+      ],
+    },
+    useStickyColumn,
+    useActionsColumn
+  );
+  return (
+    <Wrapper>
+      <h3>{msg}</h3>
+      <Datagrid datagridState={{ ...datagridState }} />
+      <p>More details documentation check the Notes section below</p>
+    </Wrapper>
+  );
+};
+
+export const RowActionButton = () => {
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader,
+      {
+        Header: '',
+        accessor: 'actions',
+        sticky: 'right',
+        width: 90,
+        isAction: true,
+      },
+    ],
+    []
+  );
+  const [data] = useState(makeData(10));
+  const [msg, setMsg] = useState('click action menu');
+  const onActionClick = (actionId, row) => {
+    const { original } = row;
+    setMsg(
+      `Clicked [${actionId}] on row: <${original.firstName} ${original.lastName}>`
+    );
+  };
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      rowActions: [
+        {
+          id: 'edit',
+          itemText: 'Edit',
+          icon: Edit16,
+          onClick: onActionClick,
+        },
+
+        {
+          id: 'delete',
+          itemText: 'Delete',
+          icon: TrashCan16,
           isDelete: true,
           onClick: onActionClick,
         },

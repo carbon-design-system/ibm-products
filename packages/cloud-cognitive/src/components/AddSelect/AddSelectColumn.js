@@ -29,6 +29,7 @@ const componentName = 'AddSelectColumn';
 
 export let AddSelectColumn = ({
   columnInputPlaceholder,
+  filterByLabel,
   header,
   items,
   multiSelection,
@@ -73,7 +74,7 @@ export let AddSelectColumn = ({
   // filtering
   const filterByOpts = filterBy ? entries.map((item) => item[filterBy]) : [];
 
-  const selectAllHandler = (checked) => {
+  const selectAllHandler = (event, { checked }) => {
     const itemIds = entries.map((item) => item.id);
     if (checked) {
       const newSelections = [...new Set([...multiSelection, ...itemIds])];
@@ -146,6 +147,7 @@ export let AddSelectColumn = ({
                 renderIcon={(props) => <Filter size={32} {...props} />}
                 className={`${colClass}-overflow`}
                 flipped
+                ariaLabel={filterByLabel}
               >
                 {filterByOpts.map((opt) => (
                   <div
@@ -158,7 +160,9 @@ export let AddSelectColumn = ({
                       <Checkbox
                         id={opt}
                         labelText={opt}
-                        onChange={(checked) => filterHandler(checked, opt)}
+                        onChange={(event, { checked }) =>
+                          filterHandler(checked, opt)
+                        }
                         checked={filters.find((o) => o === opt) ? true : false}
                       />
                     </div>
@@ -213,6 +217,7 @@ export let AddSelectColumn = ({
 
 AddSelectColumn.propTypes = {
   columnInputPlaceholder: PropTypes.string,
+  filterByLabel: PropTypes.string,
   header: PropTypes.string,
   items: PropTypes.object,
   multiSelection: PropTypes.array,

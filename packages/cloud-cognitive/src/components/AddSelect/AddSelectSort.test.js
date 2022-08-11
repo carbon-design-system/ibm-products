@@ -30,12 +30,13 @@ describe(componentName, () => {
   });
 
   it('renders', () => {
-    render(<AddSelectSort />);
+    render(<AddSelectSort sortByLabel="test sort title" />);
   });
 
   it('renders with options', () => {
     const props = {
       sortBy: ['title'],
+      sortByLabel: 'test sort title',
     };
     render(<AddSelectSort {...props} />);
   });
@@ -47,6 +48,7 @@ describe(componentName, () => {
       setSortAttribute: attributeHandler,
       setSortDirection: directionHandler,
       sortBy: ['title'],
+      sortByLabel: 'test sort title',
     };
     render(<AddSelectSort {...props} />);
     const menu = document.querySelector(`.${blockClass}_overflow`);

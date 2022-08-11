@@ -102,7 +102,7 @@ export let AddSelectList = ({
                     <>
                       <div className={`${blockClass}-checkbox`}>
                         <Checkbox
-                          onChange={(checked) =>
+                          onChange={(event, { checked }) =>
                             handleMultiSelection(item.id, checked)
                           }
                           labelText={item.title}

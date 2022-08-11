@@ -14,7 +14,12 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--add-select-sort`;
 const componentName = 'AddSelectSort';
 
-export let AddSelectSort = ({ setSortAttribute, setSortDirection, sortBy }) => {
+export let AddSelectSort = ({
+  setSortAttribute,
+  setSortDirection,
+  sortBy,
+  sortByLabel,
+}) => {
   const sortByOpts = sortBy
     ? sortBy.reduce((acc, cur) => {
         const opts = [
@@ -58,6 +63,7 @@ export let AddSelectSort = ({ setSortAttribute, setSortDirection, sortBy }) => {
           renderIcon={(props) => <ArrowsVertical size={32} {...props} />}
           className={`${blockClass}_overflow`}
           flipped
+          ariaLabel={sortByLabel}
         >
           {sortByOpts.map((opt) => (
             <OverflowMenuItem
@@ -77,6 +83,7 @@ AddSelectSort.propTypes = {
   setSortAttribute: PropTypes.func,
   setSortDirection: PropTypes.func,
   sortBy: PropTypes.array,
+  sortByLabel: PropTypes.string,
 };
 
 AddSelectSort.displayName = componentName;

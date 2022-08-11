@@ -11,7 +11,7 @@ import { AddSelectBody } from './AddSelectBody';
 import { pkg, carbon } from '../../settings';
 import { getGlobalFilterValues, normalize } from './add-select-utils';
 import { Document16 } from '@carbon/icons-react';
-import image from '../UserProfileImage/headshot.png'; // cspell:disable-line
+import image from '../UserProfileImage/headshot.jpg'; // cspell:disable-line
 
 const blockClass = `${pkg.prefix}--add-select`;
 const componentName = AddSelectBody.name;
@@ -336,8 +336,6 @@ describe(componentName, () => {
     render(<AddSelectBody {...newProps} />);
     const submitBtn = screen.getByText('Add');
     const opt1 = screen.getByLabelText('Kansas');
-    const opt2 = screen.getByLabelText('Texas');
-    const opt3 = screen.getByLabelText('Florida');
     fireEvent.click(opt1);
     const dropdown = document.querySelector('#add-select-modifier-1 button');
     fireEvent.click(dropdown);
@@ -345,18 +343,11 @@ describe(componentName, () => {
       `#add-select-modifier-1 .${carbon.prefix}--list-box__menu-item`
     );
     fireEvent.click(modifierOpts[1]);
-    fireEvent.click(opt2);
-    fireEvent.click(opt3);
-    fireEvent.click(opt3);
     fireEvent.click(submitBtn);
     expect(onSubmit).toBeCalledWith([
       {
         id: '1',
         role: 'admin',
-      },
-      {
-        id: '2',
-        role: 'editor',
       },
     ]);
   });
@@ -367,7 +358,9 @@ describe(componentName, () => {
       items: itemsWithMeta,
     };
     render(<AddSelectBody {...newProps} />);
-    const metaBtn = screen.getByText(newProps.metaIconDescription);
+    const metaBtn = document.querySelectorAll(
+      `.${blockClass}__selections-view-meta`
+    )[0];
     expect(metaBtn);
     fireEvent.click(metaBtn);
     expect(screen.getByText(newProps.metaPanelTitle));
@@ -439,20 +432,20 @@ describe(componentName, () => {
     expect(screen.findByText('florida'));
     fireEvent.change(input, { target: { value: '' } });
     const selectAll = document.querySelector(
-      '.c4p--add-select__column__select-all'
+      `.${blockClass}__column__select-all input`
     );
     fireEvent.click(selectAll);
     expect(
-      document.querySelectorAll('.c4p--add-select__sidebar-accordion-title')
+      document.querySelectorAll(`.${blockClass}__sidebar-accordion-title`)
         .length
     ).toBe(5);
     fireEvent.click(selectAll);
     expect(
-      document.querySelectorAll('.c4p--add-select__sidebar-accordion-title')
+      document.querySelectorAll(`.${blockClass}__sidebar-accordion-title`)
         .length
     ).toBe(0);
     fireEvent.click(
-      document.querySelector(`.c4p--add-select__selections-view-children`)
+      document.querySelector(`.${blockClass}__selections-view-children`)
     );
     expect(screen.findByText('Los Angeles'));
     const globalSearch = screen.getByPlaceholderText('Find business terms');

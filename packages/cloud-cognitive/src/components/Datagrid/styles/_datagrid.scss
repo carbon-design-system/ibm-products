@@ -451,11 +451,13 @@
   }
 }
 
-.#{$block-class} .#{$carbon-prefix}--data-table--selected {
+.#{$block-class}
+  .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) {
   position: relative;
 }
 
-.#{$block-class} .#{$carbon-prefix}--data-table--selected::before {
+.#{$block-class}
+  .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)::before {
   position: absolute;
   left: 0;
   width: $spacing-02;

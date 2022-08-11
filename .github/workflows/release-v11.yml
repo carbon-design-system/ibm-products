@@ -1,4 +1,4 @@
-name: Releases next branch # Builds and releases v11 supported version of @carbon/ibm-products
+name: Releases @carbon/ibm-products with v11 support # Builds and releases v11 supported version of @carbon/ibm-products
 
 on:
   workflow_dispatch:

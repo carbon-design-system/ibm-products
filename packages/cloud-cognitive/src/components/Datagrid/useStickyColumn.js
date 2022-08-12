@@ -98,9 +98,13 @@ const useStickyColumn = (hooks) => {
     const newHeaders = instance.headers;
     spacerIdx = newHeaders.findIndex((col) => col.id === 'spacer');
     stickyIdx = newHeaders.findIndex((col) => col.sticky === 'right');
+
     if (spacerIdx >= 0 && stickyIdx >= 0 && stickyIdx < spacerIdx) {
       const temp = newHeaders[spacerIdx];
       newHeaders[spacerIdx] = newHeaders[stickyIdx];
+      newHeaders[spacerIdx].canResize = false;
+      newHeaders[spacerIdx].disableResizing = true;
+      delete newHeaders[spacerIdx].getResizerProps;
       newHeaders[stickyIdx] = temp;
     }
   });
@@ -120,7 +124,7 @@ const changeProps = (elementName, headerCellRef, props, data) => {
       props,
       {
         className: cx({
-          [`${styleClassPrefix}-${elementName}`]: true, // apply sticky styles
+          [`${styleClassPrefix}-${elementName}`]: true,
           [`${blockClass}__resizableColumn`]: false,
           [`${blockClass}__sortableColumn`]: false,
         }),

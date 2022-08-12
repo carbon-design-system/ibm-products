@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act, renderHook } from '@testing-library/react-hooks';
 import { Code16 as Code, Copy16 as Copy } from '@carbon/icons-react';
@@ -168,22 +168,22 @@ describe(name, () => {
   });
 
   it('should call the animationEnd event', () => {
-    const { animationEnd } = fireEvent;
-    const { rerender, container } = render(
-      <MockWebTerminal isInitiallyOpen closeIconDescription="Close terminal">
-        Body content
-      </MockWebTerminal>
+    const { container } = render(
+      <div data-testid="container-id">
+        <MockWebTerminal isInitiallyOpen closeIconDescription="Close terminal">
+          Body content
+        </MockWebTerminal>
+      </div>
     );
+
+    const closeButton = screen.getByRole('button', {
+      name: /close terminal/i,
+    });
+    userEvent.click(closeButton);
 
     const outerElement = container.querySelector(`.${blockClass}`);
 
-    rerender(
-      <MockWebTerminal isInitiallyOpen closeIconDescription="Close terminal">
-        Body content
-      </MockWebTerminal>
-    );
-    animationEnd(outerElement);
-    expect(outerElement).toBeNull;
+    expect(outerElement).toBeNull();
   });
 
   it('should render action icon buttons', () => {
@@ -293,5 +293,56 @@ describe(name, () => {
       .getBoundingClientRect().width;
 
     expect(contentWrapperWidth).toBe(windowWidth - webTerminalWidth);
+  });
+
+  it('should reduce motion', () => {
+    let prefersReducedMotion = false;
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation(() => ({
+        matches: prefersReducedMotion,
+      })),
+    });
+
+    const dataTestId = uuidv4();
+
+    const { rerender } = render(
+      <MockWebTerminal
+        isInitiallyOpen
+        closeIconDescription="close web terminal"
+        data-testid={dataTestId}
+      >
+        Body content
+      </MockWebTerminal>
+    );
+
+    expect(window.matchMedia('(prefers-reduced-motion: reduce)').matches).toBe(
+      false
+    );
+    expect(screen.getByTestId(dataTestId).hasAttribute('style')).toBeTruthy();
+
+    // Check if reduce motion works
+    prefersReducedMotion = true;
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation(() => ({
+        matches: prefersReducedMotion,
+      })),
+    });
+
+    rerender(
+      <MockWebTerminal
+        isInitiallyOpen
+        closeIconDescription="close web terminal"
+        data-testid={dataTestId}
+      >
+        Body content
+      </MockWebTerminal>
+    );
+
+    expect(window.matchMedia('(prefers-reduced-motion: reduce)').matches).toBe(
+      true
+    );
+    expect(screen.getByTestId(dataTestId).getAttribute('style')).toBe('');
   });
 });

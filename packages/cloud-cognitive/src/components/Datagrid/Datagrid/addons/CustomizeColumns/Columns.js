@@ -196,9 +196,6 @@ const Columns = ({
                 <Checkbox
                   wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
                   checked={isColumnVisible(colDef)}
-                  // onChange={() => {
-                  //   checkBoxChangeHandler(colDef, !colDef.isVisible);
-                  // }}
                   onChange={onSelectColumn.bind(null, colDef)}
                   id={`${blockClass}__customization-column-${colDef.id}`}
                   labelText={colDef.Header.props.title}

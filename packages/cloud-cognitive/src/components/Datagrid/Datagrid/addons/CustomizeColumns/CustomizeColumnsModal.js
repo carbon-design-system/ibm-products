@@ -63,7 +63,6 @@ const CustomizeColumnsModal = ({
   };
 
   const onCheckboxCheck = (col, value) => {
-    //copy the modified column definition to columnObject
     const changedDefinitions = columnObjects.map((definition) => {
       if (definition.id === col.id) {
         definition.isVisible = value;

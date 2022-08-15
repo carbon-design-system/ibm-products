@@ -38,4 +38,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn lerna publish premajor --conventional-commits --preid rc --dist-tag next --ignore-changes 'config/**/*' 'packages/security/**/*' 'packages/cdai/**/*' 'packages/core/**/*' --yes # This publish command should ONLY run one time, otherwise it will continue to release the next major version! See https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2163 for series of publish commands
+        run: yarn lerna publish --preid rc --dist-tag next --create-release github --yes # This publishes subsequent v2.x.x releases

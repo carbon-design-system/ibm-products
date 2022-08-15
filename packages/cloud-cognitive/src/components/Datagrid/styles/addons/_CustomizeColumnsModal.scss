@@ -18,7 +18,7 @@
   }
 }
 
-.bx--form-item.bx--checkbox-wrapper.#{$block-class}__customize-columns-checkbox-wrapper {
+.#{$block-class}__customize-columns-checkbox-wrapper {
   margin-bottom: 0;
 }
 .#{$block-class}__customize-columns-checkbox-wrapper {
@@ -39,8 +39,8 @@
   border-bottom: none;
 }
 div.#{$block-class}__customize-columns-modal--actions,
-div.bx--search-magnifier,
-.bx--search-magnifier-icon {
+div.#{$carbon-prefix}--search-magnifier,
+.#{$carbon-prefix}--search-magnifier-icon {
   left: $spacing-06;
 }
 
@@ -66,17 +66,6 @@ div.bx--search-magnifier,
   padding-left: $spacing-08;
 }
 
-.bx--checkbox-label {
-  &.#{$block-class}__customize-columns-checkbox {
-    padding-left: $spacing-07;
-  }
-
-  &.#{$block-class}__customize-columns-select-all {
-    padding-left: $spacing-07;
-    @include carbon--font-weight('semibold');
-  }
-}
-
-#bx--modal-body--modal-2 {
+.#{$block-class} .#{$block-class}__customize-columns-modal .#{$carbon-prefix}--modal-content {
   margin-bottom: 0;
 }

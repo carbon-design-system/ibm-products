@@ -6,7 +6,7 @@
 //
 
 import React, { useState, forwardRef } from 'react';
-import { Add20 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 import {
   ComposedModal,
   ModalHeader,
@@ -215,7 +215,9 @@ export let ImportModal = forwardRef(
               className={`${blockClass}__import-button`}
               size="sm"
               disabled={importButtonDisabled}
-              renderIcon={inputButtonIcon ? Add20 : null}
+              renderIcon={
+                inputButtonIcon ? (props) => <Add size={20} {...props} /> : null
+              }
             >
               {inputButtonText}
             </Button>

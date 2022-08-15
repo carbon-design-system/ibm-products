@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,7 +7,7 @@
 
 import React, { useRef } from 'react';
 
-import { types as tagTypes } from 'carbon-components-react/es/components/Tag/Tag';
+import { TYPES as tagTypes } from '../TagSet/constants';
 import { pkg } from '../../settings';
 import {
   getStoryTitle,
@@ -119,9 +119,10 @@ const manyTags = [
 const hundredsOfTags = [];
 for (let i = 0; i < 200; i++) {
   const label = `Label_${i + 1}`;
-  const type = tagTypes[i % tagTypes.length];
+  const values = Object.keys(tagTypes);
+  const typeValue = values[Math.floor(Math.random() * values.length)];
 
-  hundredsOfTags.push({ type, label });
+  hundredsOfTags.push({ type: typeValue, label });
 }
 
 const overflowAndModalStrings = {

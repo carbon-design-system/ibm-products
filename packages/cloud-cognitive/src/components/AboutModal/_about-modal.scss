@@ -1,120 +1,128 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family' as *;
+
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '../../global/styles/project-settings' as c4p-settings;
 
-// AboutModal uses the following Carbon components:
-// ComposedModal, ModalHeader, ModalFooter, ModalBody, Tabs, Tab
-@import 'carbon-components/scss/components/modal/modal';
-@import 'carbon-components/scss/components/tabs/tabs';
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
-@mixin about-modal {
-  // The block part of our conventional BEM class names (blockClass__E--M).
-  $block-class: #{$pkg-prefix}--about-modal;
-
-  .#{$block-class} .#{$carbon-prefix}--modal-container {
-    grid-template-rows: auto auto 1fr auto;
-  }
-
-  .#{$block-class} .#{$block-class}__logo {
-    margin: $spacing-05;
-  }
-
-  .#{$block-class} .#{$block-class}__header {
-    padding: 0 20% $spacing-03 $spacing-05;
-    margin-bottom: 0;
-    grid-row: auto;
-  }
-
-  .#{$block-class} .#{$block-class}__title {
-    @include carbon--type-style('productive-heading-04');
-
-    color: $text-01;
-  }
-
-  .#{$block-class} .#{$block-class}__body {
-    @include carbon--type-style('body-short-02');
-
-    min-height: $layout-05;
-    padding: 0 20% 0 $spacing-05;
-    grid-row: auto;
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-
-  .#{$block-class}.#{$block-class}--with-tabs .#{$block-class}__body {
-    min-height: calc(#{$layout-05} + #{$spacing-08});
-    // stylelint-disable-next-line carbon/layout-token-use
-    margin-bottom: calc(#{$spacing-09} + #{$spacing-08});
-  }
-
-  .#{$block-class}.#{$block-class}--with-tabs
-    .#{$carbon-prefix}--modal-content--overflow-indicator {
-    // stylelint-disable-next-line carbon/layout-token-use
-    bottom: calc(#{$spacing-09} + #{$spacing-08});
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--modal-content--overflow-indicator {
-    background-image: linear-gradient(to bottom, #00000000, $ui-01);
-  }
-
-  .#{$block-class} .#{$block-class}__links-container {
-    margin-top: $spacing-05;
-  }
-
-  .#{$block-class} .#{$block-class}__links-container a + a {
-    padding-left: $spacing-03;
-    border-left: 1px solid $text-01;
-    margin-left: $spacing-03;
-  }
-
-  .#{$block-class} .#{$block-class}__legal-text,
-  .#{$block-class} .#{$block-class}__copyright-text {
-    margin-top: $spacing-07;
-    margin-bottom: 0;
-    color: $text-02;
-  }
-
-  .#{$block-class} .#{$block-class}__copyright-text {
-    margin-top: $spacing-05;
-  }
-
-  .#{$block-class} .#{$block-class}__footer {
-    position: relative;
-    height: rem(72px);
-    flex-direction: column;
-    justify-content: center;
-    background-color: $inverse-02;
-    color: $inverse-01;
-  }
-
-  .#{$block-class} .#{$block-class}__tab-container {
-    position: absolute;
-    bottom: 100%;
-  }
-
-  .#{$block-class} .#{$block-class}__version-label,
-  .#{$block-class} .#{$block-class}__version-number {
-    @include carbon--type-style('body-short-01');
-
-    padding-left: $spacing-05;
-    margin-top: 0;
-    margin-bottom: 0;
-    color: $inverse-01;
-  }
-
-  .#{$block-class} .#{$block-class}__version-label {
-    @include carbon--font-weight('semibold');
-  }
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-container {
+  grid-template-rows: auto auto 1fr auto;
 }
 
-@include exports('about-modal') {
-  @include about-modal;
+.#{$block-class} .#{$block-class}__logo {
+  margin: $spacing-05;
+}
+
+.#{$block-class} .#{$block-class}__header {
+  padding: 0 20% $spacing-03 $spacing-05;
+  margin-bottom: 0;
+  grid-row: auto;
+}
+
+.#{$block-class} .#{$block-class}__title {
+  @include type.type-style('productive-heading-04');
+
+  color: $text-primary;
+}
+
+.#{$block-class} .#{$block-class}__body {
+  @include type.type-style('body-short-02');
+
+  min-height: $spacing-10;
+  padding: 0 20% 0 $spacing-05;
+  grid-row: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.#{$block-class}.#{$block-class}--with-tabs .#{$block-class}__body {
+  min-height: calc(#{$spacing-10} + #{$spacing-08});
+  // stylelint-disable-next-line carbon/layout-token-use
+  margin-bottom: calc(#{$spacing-09} + #{$spacing-08});
+}
+
+.#{$block-class}.#{$block-class}--with-tabs
+  .#{c4p-settings.$carbon-prefix}--modal-content--overflow-indicator {
+  bottom: calc(#{$spacing-09} +#{$spacing-08});
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--modal-content--overflow-indicator {
+  background-image: linear-gradient(to bottom, #00000000, $layer-01);
+}
+
+.#{$block-class} .#{$block-class}__links-container {
+  margin-top: $spacing-05;
+}
+
+.#{$block-class} .#{$block-class}__links-container a + a {
+  padding-left: $spacing-03;
+  border-left: 1px solid $text-primary;
+  margin-left: $spacing-03;
+}
+
+.#{$block-class} .#{$block-class}__legal-text,
+.#{$block-class} .#{$block-class}__copyright-text {
+  margin-top: $spacing-07;
+  margin-bottom: 0;
+  color: $text-secondary;
+}
+
+.#{$block-class} .#{$block-class}__copyright-text {
+  margin-top: $spacing-05;
+}
+
+.#{$block-class} .#{$block-class}__footer {
+  position: relative;
+  height: $spacing-03 + $spacing-10;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $background-inverse;
+  color: $text-inverse;
+}
+
+.#{$block-class} .#{$block-class}__tab-container {
+  position: absolute;
+  bottom: 0;
+}
+
+.#{$block-class} .#{$block-class}__version-label,
+.#{$block-class} .#{$block-class}__version-number {
+  @include type.type-style('body-short-01');
+
+  padding-left: $spacing-05;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: $text-inverse;
+}
+
+.#{$block-class} .#{$block-class}__version-label {
+  @include font-weight('semibold');
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--tabs
+  .#{c4p-settings.$carbon-prefix}--tabs__nav-link,
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--tab-content {
+  @include type.type-style('body-short-01');
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--tab-content {
+  height: $spacing-03 + $spacing-10;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--tab-content:not([hidden]) {
+  display: flex;
+  align-items: center;
 }

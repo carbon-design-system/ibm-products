@@ -6,29 +6,21 @@
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
-@import '../../global/styles/mixins';
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins';
 
 // Other Carbon settings.
-// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+// TODO: @use 'carbon-components/scss/globals/grid/grid'; if needed
 
 // EditTearsheetNarrow uses the following Carbon components:
-// TODO: @import(s) of Carbon component styles used by EditTearsheetNarrow
+// TODO: @use(s) of Carbon component styles used by EditTearsheetNarrow
 
 // EditTearsheetNarrow uses the following Carbon for IBM Products components:
-// TODO: @import(s) of IBM Products component styles used by EditTearsheetNarrow
+// TODO: @use(s) of IBM Products component styles used by EditTearsheetNarrow
 
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
-@mixin edit-tearsheet-narrow {
-  // The block part of our conventional BEM class names (blockClass__E--M).
-  $block-class: #{$pkg-prefix}--edit-tearsheet-narrow;
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--edit-tearsheet-narrow;
 
-  .#{$block-class} {
-    // TODO: Styles.
-  }
-}
-
-@include exports('edit-tearsheet-narrow') {
-  @include edit-tearsheet-narrow;
+.#{$block-class} {
+  // TODO: Styles.
 }

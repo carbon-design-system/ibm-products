@@ -6,21 +6,21 @@
 //
 
 import React, { useState } from 'react';
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+// import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { SingleAddSelect } from '.';
 import mdx from './SingleAddSelect.mdx';
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 // import { action } from '@storybook/addon-actions';
 
 export default {
   title: getStoryTitle(SingleAddSelect.displayName),
   component: SingleAddSelect,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },

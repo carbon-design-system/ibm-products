@@ -6,23 +6,29 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@import './variables';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '../../../global/styles/project-settings' as c4p-settings;
+@use './variables';
 
 // used for tables within a expandable row
-.#{block-class}__expanded-row .#{$carbon-prefix}--data-table-container {
-  width: calc(100% - #{$layout-03});
-  border-left: 2px solid $interactive-01;
-  margin-left: $layout-03;
+.#{variables.$block-class}__expanded-row
+  .#{c4p-settings.$carbon-prefix}--data-table-container {
+  width: calc(100% - #{$spacing-07});
+  border-left: 2px solid $background-brand;
+  margin-left: $spacing-07;
   overflow-x: hidden;
 
-  tr.#{$block-class}__carbon-nested-row {
+  tr.#{variables.$block-class}__carbon-nested-row {
     border-left: none;
   }
 }
 
-.#{block-class}__expanded-row .#{$carbon-prefix}--data-table-container th {
+.#{variables.$block-class}__expanded-row
+  .#{c4p-settings.$carbon-prefix}--data-table-container
+  th {
   padding-top: 0;
   padding-bottom: 0;
-  border-top-color: $ui-03;
-  background-color: $ui-03;
+  border-top-color: $layer-accent-01;
+  background-color: $layer-accent-01;
 }

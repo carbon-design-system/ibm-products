@@ -13,11 +13,10 @@ import {
   InlineNotification,
   RadioButtonGroup,
   RadioButton,
-  Row,
   TextInput,
   Toggle,
   NumberInput,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 import { EditTearsheet } from '../EditTearsheet';
@@ -90,61 +89,57 @@ export const MultiFormEditTearsheet = ({
           description="It will also be used by your producers and consumers as part of the
           connection information, so make it something easy to recognize."
         >
-          <Row>
-            <Column xlg={8} lg={8} md={8} sm={8}>
-              <TextInput
-                labelText="Topic name"
-                placeholder="Enter topic name"
-                id="tearsheet-multi-form-story-text-input-multi-form-1"
-                value={formOneTextInputValue}
-                onChange={(event) => {
-                  if (event.target.value.length) {
-                    setIsInvalid(false);
-                  }
-                  setFormOneTextInputValue(event.target.value);
-                }}
-                invalid={isInvalid}
-                invalidText="This is a required field"
-                onBlur={() => {
-                  if (!formOneTextInputValue.length) {
-                    setIsInvalid(true);
-                  }
-                }}
-              />
-              <TextInput
-                labelText="Topic description (optional)"
-                id="tearsheet-multi-form-story-text-input-multi-form-1-input-2"
-                value={topicDescriptionValue}
-                placeholder="Enter topic description"
-                onChange={(event) =>
-                  setTopicDescriptionValue(event.target.value)
+          <Column xlg={8} lg={8} md={8} sm={8}>
+            <TextInput
+              labelText="Topic name"
+              placeholder="Enter topic name"
+              id="tearsheet-multi-form-story-text-input-multi-form-1"
+              value={formOneTextInputValue}
+              onChange={(event) => {
+                if (event.target.value.length) {
+                  setIsInvalid(false);
                 }
+                setFormOneTextInputValue(event.target.value);
+              }}
+              invalid={isInvalid}
+              invalidText="This is a required field"
+              onBlur={() => {
+                if (!formOneTextInputValue.length) {
+                  setIsInvalid(true);
+                }
+              }}
+            />
+            <TextInput
+              labelText="Topic description (optional)"
+              id="tearsheet-multi-form-story-text-input-multi-form-1-input-2"
+              value={topicDescriptionValue}
+              placeholder="Enter topic description"
+              onChange={(event) => setTopicDescriptionValue(event.target.value)}
+            />
+            <TextInput
+              labelText="Topic version (optional)"
+              id="tearsheet-multi-form-story-text-input-multi-form-1-input-3"
+              value={topicVersionValue}
+              placeholder="Enter topic version"
+              onChange={(event) => setTopicVersionValue(event.target.value)}
+            />
+            {hasSubmitError && (
+              <InlineNotification
+                kind="error"
+                title="Error"
+                subtitle="Resolve errors to continue"
+                onClose={() => setHasSubmitError(!hasSubmitError)}
               />
-              <TextInput
-                labelText="Topic version (optional)"
-                id="tearsheet-multi-form-story-text-input-multi-form-1-input-3"
-                value={topicVersionValue}
-                placeholder="Enter topic version"
-                onChange={(event) => setTopicVersionValue(event.target.value)}
-              />
-              {hasSubmitError && (
-                <InlineNotification
-                  kind="error"
-                  title="Error"
-                  subtitle="Resolve errors to continue"
-                  onClose={() => setHasSubmitError(!hasSubmitError)}
-                />
-              )}
-              <Toggle
-                className={`${blockClass}__error--toggle`}
-                id="simulated-error-toggle"
-                size="sm"
-                labelText="Simulate error"
-                onToggle={() => setHasSubmitError(!hasSubmitError)}
-                toggled={hasSubmitError}
-              />
-            </Column>
-          </Row>
+            )}
+            <Toggle
+              className={`${blockClass}__error--toggle`}
+              id="simulated-error-toggle"
+              size="sm"
+              labelText="Simulate error"
+              onToggle={() => setHasSubmitError(!hasSubmitError)}
+              toggled={hasSubmitError}
+            />
+          </Column>
         </EditTearsheetForm>
         <EditTearsheetForm
           title="Location"
@@ -152,17 +147,15 @@ export const MultiFormEditTearsheet = ({
           fieldsetLegendText=""
           description="Custom form description (see storybook implementation for new custom form capability)"
         >
-          <Row>
-            <Column xlg={8} lg={8} md={8} sm={8}>
-              <TextInput
-                value={topicLocationValue}
-                onChange={(event) => setTopicLocationValue(event.target.value)}
-                id="custom-form-input"
-                labelText="Location"
-                placeholder="Enter location"
-              />
-            </Column>
-          </Row>
+          <Column xlg={8} lg={8} md={8} sm={8}>
+            <TextInput
+              value={topicLocationValue}
+              onChange={(event) => setTopicLocationValue(event.target.value)}
+              id="custom-form-input"
+              labelText="Location"
+              placeholder="Enter location"
+            />
+          </Column>
         </EditTearsheetForm>
         <EditTearsheetForm
           title="Partitions"
@@ -173,22 +166,20 @@ export const MultiFormEditTearsheet = ({
           messages across the members of a consumer group."
           fieldsetLegendText="Partition information"
         >
-          <Row>
-            <Column xlg={3} lg={3}>
-              <NumberInput
-                id="carbon-number"
-                min={1}
-                max={100}
-                value={formTwoTextInputValue}
-                label="Partitions"
-                helperText="1 partition is sufficient for getting started but, production systems often have more."
-                invalidText="Max partitions is 100, min is 1"
-                onChange={(event) =>
-                  setFormTwoTextInputValue(event.imaginaryTarget.value)
-                }
-              />
-            </Column>
-          </Row>
+          <Column xlg={3} lg={3}>
+            <NumberInput
+              id="carbon-number"
+              min={1}
+              max={100}
+              value={formTwoTextInputValue}
+              label="Partitions"
+              helperText="1 partition is sufficient for getting started but, production systems often have more."
+              invalidText="Max partitions is 100, min is 1"
+              onChange={(event) =>
+                setFormTwoTextInputValue(event.imaginaryTarget.value)
+              }
+            />
+          </Column>
         </EditTearsheetForm>
         <EditTearsheetForm
           title="Message retention"
@@ -197,29 +188,23 @@ export const MultiFormEditTearsheet = ({
           will be missed."
           fieldsetLegendText="Message retention scheduling"
         >
-          <Row>
-            <Column xlg={8} lg={8} md={8} sm={8}>
-              <RadioButtonGroup
-                legendText="Message retention"
-                name="radio-button-group"
-                defaultSelected={formThreeTextInputValue}
-                onChange={(value) => setFormThreeTextInputValue(value)}
-                orientation="vertical"
-              >
-                <RadioButton labelText="A day" value="one-day" id="one-day" />
-                <RadioButton
-                  labelText="A week"
-                  value="one-week"
-                  id="one-week"
-                />
-                <RadioButton
-                  labelText="A month"
-                  value="one-month"
-                  id="one-month"
-                />
-              </RadioButtonGroup>
-            </Column>
-          </Row>
+          <Column xlg={8} lg={8} md={8} sm={8}>
+            <RadioButtonGroup
+              legendText="Message retention"
+              name="radio-button-group"
+              defaultSelected={formThreeTextInputValue}
+              onChange={(value) => setFormThreeTextInputValue(value)}
+              orientation="vertical"
+            >
+              <RadioButton labelText="A day" value="one-day" id="one-day" />
+              <RadioButton labelText="A week" value="one-week" id="one-week" />
+              <RadioButton
+                labelText="A month"
+                value="one-month"
+                id="one-month"
+              />
+            </RadioButtonGroup>
+          </Column>
         </EditTearsheetForm>
       </EditTearsheet>
     </div>

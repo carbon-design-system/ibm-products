@@ -12,7 +12,7 @@ import React from 'react';
 import { components } from '../../../.storybook';
 
 import { Card, CardSkeleton, SearchBar, StatusIcon } from '../..';
-import { Grid } from 'carbon-components-react';
+import { Grid } from '@carbon/react';
 
 import { image, label, link, tag, text as bodyText, title } from './_mocks_';
 

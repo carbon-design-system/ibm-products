@@ -4,12 +4,9 @@ import {
   HeaderName,
   HeaderGlobalAction,
   HeaderGlobalBar,
-} from 'carbon-components-react';
-import {
-  Terminal20 as Terminal,
-  Search20 as Search,
-  User20 as User,
-} from '@carbon/icons-react';
+} from '@carbon/react';
+import { Terminal, Search, User } from '@carbon/icons-react';
+
 import { useWebTerminal } from '../hooks';
 
 const Navigation = () => {
@@ -22,13 +19,13 @@ const Navigation = () => {
       </HeaderName>
       <HeaderGlobalBar>
         <HeaderGlobalAction aria-label="Web terminal" onClick={openWebTerminal}>
-          <Terminal />
+          <Terminal size={20} />
         </HeaderGlobalAction>
         <HeaderGlobalAction aria-label="Search" onClick={() => {}}>
-          <Search />
+          <Search size={20} />
         </HeaderGlobalAction>
         <HeaderGlobalAction aria-label="User" onClick={() => {}}>
-          <User />
+          <User size={20} />
         </HeaderGlobalAction>
       </HeaderGlobalBar>
     </Header>

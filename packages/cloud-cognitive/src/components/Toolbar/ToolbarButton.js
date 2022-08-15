@@ -5,36 +5,42 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Button } from 'carbon-components-react';
+import { IconButton } from '@carbon/react';
 import cx from 'classnames';
-import { bool, node, string } from 'prop-types';
+import { bool, func, node, string } from 'prop-types';
 import React, { forwardRef, useContext } from 'react';
 
 import { pkg } from '../../settings';
 
 import { blockClass as toolbarClass, ToolbarContext } from './Toolbar';
 
-const blockClass = `${toolbarClass}__button`;
+export const blockClass = `${toolbarClass}__button`;
 
 /** Toolbar buttons are common functions performed as part of a products interface or an open window.  */
-let ToolbarButton = forwardRef(
-  ({ caret, children, className, ...rest }, ref) => {
+export let ToolbarButton = forwardRef(
+  (
+    { caret, children, className, renderIcon, iconDescription = '', ...rest },
+    ref
+  ) => {
+    const Icon = renderIcon;
+
     return (
-      <Button
-        tooltipPosition={useContext(ToolbarContext)?.vertical && 'right'}
+      <IconButton
+        align={useContext(ToolbarContext)?.vertical && 'right'}
         {...rest}
+        label={iconDescription}
         ref={ref}
         className={cx(className, { [`${blockClass}--caret`]: caret })}
         kind="ghost"
         size="md"
-        hasIconOnly
       >
         <>
+          {Icon ? <Icon /> : null}
           {children}
 
           {caret && <span className={`${blockClass}__caret`} />}
         </>
-      </Button>
+      </IconButton>
     );
   }
 );
@@ -51,8 +57,12 @@ ToolbarButton.propTypes = {
 
   /** Provide an optional class to be applied to the containing node */
   className: string,
+
+  /** Specifies the label for the icon button */
+  iconDescription: string.isRequired,
+
+  /** Specifies the icon to be used by the ToolbarButton component */
+  renderIcon: func.isRequired,
 };
 
 ToolbarButton = pkg.checkComponentEnabled(ToolbarButton, componentName);
-
-export { blockClass, ToolbarButton };

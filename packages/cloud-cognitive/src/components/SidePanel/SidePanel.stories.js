@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import styles from './_storybook-styles.scss';
 import React, { useRef, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   Button,
   Grid,
-  Row,
   Column,
   TextArea,
   TextInput,
@@ -22,14 +22,11 @@ import {
   TableHead,
   TableRow,
   TableCell,
-} from 'carbon-components-react';
-import {
   Header,
   HeaderContainer,
   HeaderName,
-} from 'carbon-components-react/lib/components/UIShell';
-import { Copy20, TrashCan20, Settings20 } from '@carbon/icons-react';
-import styles from './_storybook-styles.scss';
+} from '@carbon/react';
+import { Copy, TrashCan, Settings } from '@carbon/icons-react';
 import {
   getStoryTitle,
   prepareStory,
@@ -439,13 +436,11 @@ const SlideInTemplate = ({ actions, ...args }) => {
     <>
       {renderUIShellHeader()}
       <Grid id="ibm-products-page-content">
-        <Row>
-          <Column>
-            <Button onClick={() => setOpen(!open)}>
-              {open ? 'Close side panel' : 'Open side panel'}
-            </Button>
-          </Column>
-        </Row>
+        <Column lg={16} md={8} sm={4}>
+          <Button onClick={() => setOpen(!open)}>
+            {open ? 'Close side panel' : 'Open side panel'}
+          </Button>
+        </Column>
       </Grid>
       <SidePanel
         {...args}
@@ -484,18 +479,18 @@ export const WithActionToolbar = prepareStory(SlideOverTemplate, {
       {
         leading: true,
         label: 'Copy',
-        icon: Copy20,
+        icon: (props) => <Copy size={16} {...props} />,
         onClick: action('Toolbar button clicked: Copy'),
         kind: 'primary',
       },
       {
         label: 'Settings',
-        icon: Settings20,
+        icon: (props) => <Settings size={16} {...props} />,
         onClick: action('Toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
-        icon: TrashCan20,
+        icon: (props) => <TrashCan size={16} {...props} />,
         onClick: action('Toolbar button clicked: Delete'),
       },
     ],
@@ -541,17 +536,17 @@ export const WithStaticTitleAndActionToolbar = prepareStory(SlideOverTemplate, {
     actionToolbarButtons: [
       {
         label: 'Copy',
-        icon: Copy20,
+        icon: (props) => <Copy size={16} {...props} />,
         onClick: action('Action toolbar button clicked: Copy'),
       },
       {
         label: 'Settings',
-        icon: Settings20,
+        icon: (props) => <Settings size={16} {...props} />,
         onClick: action('Action toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
-        icon: TrashCan20,
+        icon: (props) => <TrashCan size={16} {...props} />,
         onClick: action('Action toolbar button clicked: Delete'),
       },
     ],

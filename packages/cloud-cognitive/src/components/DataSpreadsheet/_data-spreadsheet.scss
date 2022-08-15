@@ -6,231 +6,249 @@
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
-@import '../../global/styles/mixins';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/type/scss/font-family';
+@use '@carbon/styles/scss/utilities';
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins' as *;
 
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
 @mixin set-header-borders {
-  border-right: 1px solid $active-ui;
-  border-bottom: 1px solid $active-ui;
+  border-right: 1px solid $border-subtle-selected-01;
+  border-bottom: 1px solid $border-subtle-selected-01;
 }
 @mixin set-active-header-borders {
-  border-right: 1px solid $text-03;
-  border-bottom: 1px solid $text-03;
+  border-right: 1px solid $text-placeholder;
+  border-bottom: 1px solid $text-placeholder;
 }
 @mixin set-body-borders {
-  border-right: 1px solid $ui-03;
-  border-bottom: 1px solid $ui-03;
+  border-right: 1px solid $border-subtle-01;
+  border-bottom: 1px solid $border-subtle-01;
 }
-@mixin data-spreadsheet {
-  // The block part of our conventional BEM class names (blockClass__E--M).
-  $block-class: #{$pkg-prefix}--data-spreadsheet;
-  $body-cell-background: $field-01;
-  $header-cell-background: $ui-03;
 
-  .#{$block-class} {
-    --#{$block-class}--total-width: 0;
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--data-spreadsheet;
+$body-cell-background: $field-01;
+$header-cell-background: $layer-accent-01;
 
-    display: inline-block;
-    border-spacing: 0;
+.#{$block-class} {
+  --#{$block-class}--total-width: 0;
 
-    &.#{$block-class}__container-has-focus {
-      outline: 2px solid $inverse-link;
-    }
+  display: inline-block;
+  border-spacing: 0;
 
-    .#{$block-class}__header--container {
-      position: relative;
-    }
+  &.#{$block-class}__container-has-focus {
+    outline: 2px solid $link-inverse;
+  }
 
-    .#{$block-class}__tr {
-      :last-child .#{$block-class}__body--td {
-        .#{$block-class}__td {
-          border-bottom: 0;
-        }
+  .#{$block-class}__header--container {
+    position: relative;
+  }
+
+  .#{$block-class}__tr {
+    :last-child .#{$block-class}__body--td {
+      .#{$block-class}__td {
+        border-bottom: 0;
       }
     }
+  }
 
-    .#{$block-class}__th,
-    .#{$block-class}__td {
-      @include carbon--type-style('body-short-01');
+  .#{$block-class}__th,
+  .#{$block-class}__td {
+    @include type.type-style('body-short-01');
 
+    width: 100%;
+    height: 100%;
+    padding: 0 $spacing-03;
+    border: 0;
+    margin: 0;
+    color: $text-primary;
+    font-family: inherit;
+  }
+
+  .#{$block-class}__body--td {
+    color: $text-secondary;
+  }
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  [role="'columnheader'"]:last-child,
+  [role="'gridcell'"]:last-child {
+    border-right: 1px solid $text-placeholder;
+  }
+  .#{$block-class}__th,
+  .#{$block-class}__td-th.#{$block-class}__td {
+    @include set-header-borders();
+
+    height: 100%;
+    background-color: $header-cell-background;
+    cursor: pointer;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:hover,
+    &:focus {
+      background-color: $background-selected-hover;
+    }
+  }
+  .#{$block-class}__th--select-all {
+    width: $spacing-10;
+  }
+  .#{$block-class}__td-th--cell-container,
+  .#{$block-class}__select-all-cell-container {
+    position: sticky;
+    z-index: 4;
+    left: 0;
+  }
+  .#{$block-class}__td-th.#{$block-class}__td {
+    @include font-family.font-weight('semibold');
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .#{$block-class}__td {
+    @include set-body-borders();
+
+    overflow: hidden;
+    margin: 0;
+    background-color: $body-cell-background;
+    cursor: cell;
+    text-align: left;
+  }
+  .#{$block-class}__th {
+    @include type.type-style('productive-heading-01');
+
+    color: $text-primary;
+    text-align: left;
+  }
+  .#{$block-class}__cell-editor {
+    @include type.type-style('body-short-01');
+    @include utilities.focus-outline('reset');
+
+    position: absolute;
+    z-index: 4;
+    display: none;
+    overflow: hidden;
+    min-width: initial;
+    min-height: initial;
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
+    margin: 0;
+    background-color: $body-cell-background;
+    color: $text-primary;
+    font-family: inherit;
+    resize: none;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:focus,
+    &:active {
+      @include utilities.focus-outline('outline');
+    }
+    &.#{$block-class}__cell-editor--active {
+      outline: $spacing-01 solid $background-brand;
+      outline-offset: -2px;
+    }
+  }
+  .#{$block-class}__cell-editor-ruler {
+    @include type.type-style('body-short-01');
+
+    position: absolute;
+    overflow: hidden;
+    width: fit-content;
+    max-width: var(--#{$block-class}--total-width);
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
+    visibility: hidden;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:focus {
+      outline: $spacing-01 solid $background-brand;
+    }
+  }
+  .#{$block-class}__active-cell--highlight {
+    @include type.type-style('body-short-01');
+    @include set-body-borders();
+
+    position: absolute;
+    z-index: 3;
+    display: none;
+    overflow: hidden;
+    // Could be fixed by using border-right but the fact that
+    // this element is positioned absolute prevents that from working
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    padding-right: calc(#{$spacing-03} - 1px);
+    padding-bottom: $spacing-01;
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    padding-left: calc(#{$spacing-03} - #{$spacing-01});
+    border: $spacing-01 solid $background-brand;
+    background-color: $body-cell-background;
+    color: $text-primary;
+    font-family: inherit;
+    text-align: left;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &[data-active-row-index='header'],
+    &[data-active-column-index='header'] {
+      z-index: 4;
+      background-color: transparent;
+    }
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:focus {
+      border: $spacing-01 solid $background-brand;
+      outline: 0;
+    }
+  }
+  .#{$block-class}__selection-area--element {
+    position: absolute;
+    z-index: 2;
+    border: 1px solid $background-brand;
+    pointer-events: none;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
       width: 100%;
       height: 100%;
-      padding: 0 $spacing-03;
-      border: 0;
-      margin: 0;
-      color: $text-01;
+      background-color: $background-brand;
+      content: '';
+      opacity: 0.2;
     }
-
-    .#{$block-class}__body--td {
-      color: $text-02;
-    }
-
-    [role="'columnheader'"]:last-child,
-    [role="'gridcell'"]:last-child {
-      border-right: 1px solid $text-03;
-    }
-    .#{$block-class}__th,
-    .#{$block-class}__td-th.#{$block-class}__td {
-      @include set-header-borders();
-
-      height: 100%;
-      background-color: $header-cell-background;
-      cursor: pointer;
-
-      &:hover,
-      &:focus {
-        background-color: $hover-selected-ui;
-      }
-    }
-    .#{$block-class}__th--select-all {
-      width: $spacing-10;
-    }
-    .#{$block-class}__td-th--cell-container,
-    .#{$block-class}__select-all-cell-container {
-      position: sticky;
+    &.#{$block-class}__selection-area--element-cloned {
       z-index: 4;
-      left: 0;
-    }
-    .#{$block-class}__td-th.#{$block-class}__td {
-      @include carbon--font-weight('semibold');
 
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-    }
-
-    .#{$block-class}__td {
-      @include set-body-borders();
-
-      overflow: hidden;
-      margin: 0;
-      background-color: $body-cell-background;
-      cursor: cell;
-      text-align: left;
-    }
-    .#{$block-class}__th {
-      @include carbon--type-style('productive-heading-01');
-
-      color: $text-01;
-      text-align: left;
-    }
-    .#{$block-class}__cell-editor {
-      @include carbon--type-style('body-short-01');
-
-      position: absolute;
-      z-index: 4;
-      display: none;
-      overflow: hidden;
-      /* stylelint-disable-next-line carbon/layout-token-use */
-      padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
-      margin: 0;
-      background-color: $body-cell-background;
-      color: $text-01;
-      resize: none;
-      &.#{$carbon-prefix}--text-area {
-        min-width: initial;
-        min-height: initial;
-      }
-      &.#{$block-class}__cell-editor--active {
-        outline: $spacing-01 solid $interactive-01;
-        outline-offset: -2px;
-      }
-    }
-    .#{$block-class}__cell-editor-ruler {
-      @include carbon--type-style('body-short-01');
-
-      position: absolute;
-      overflow: hidden;
-      width: fit-content;
-      max-width: var(--#{$block-class}--total-width);
-      /* stylelint-disable-next-line carbon/layout-token-use */
-      padding: 0 calc(#{$spacing-03} + 1px) 0 $spacing-03;
-      visibility: hidden;
-
-      &:focus {
-        outline: $spacing-01 solid $interactive-01;
-      }
-    }
-    .#{$block-class}__active-cell--highlight {
-      @include carbon--type-style('body-short-01');
-      @include set-body-borders();
-
-      position: absolute;
-      z-index: 3;
-      display: none;
-      overflow: hidden;
-      // Could be fixed by using border-right but the fact that
-      // this element is positioned absolute prevents that from working
-      /* stylelint-disable-next-line carbon/layout-token-use */
-      padding-right: calc(#{$spacing-03} - 1px);
-      padding-bottom: $spacing-01;
-      /* stylelint-disable-next-line carbon/layout-token-use */
-      padding-left: calc(#{$spacing-03} - #{$spacing-01});
-      border: $spacing-01 solid $interactive-01;
-      background-color: $body-cell-background;
-      color: $text-01;
-      text-align: left;
-
-      &[data-active-row-index='header'],
-      &[data-active-column-index='header'] {
-        z-index: 4;
-        background-color: transparent;
-      }
-
-      &:focus {
-        border: $spacing-01 solid $interactive-01;
-        outline: 0;
-      }
-    }
-    .#{$block-class}__selection-area--element {
-      position: absolute;
-      z-index: 2;
-      border: 1px solid $interactive-01;
-      pointer-events: none;
-
+      /* stylelint-disable-next-line max-nesting-depth */
       &::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: block;
-        width: 100%;
-        height: 100%;
-        background-color: $interactive-01;
-        content: '';
-        opacity: 0.2;
-      }
-      &.#{$block-class}__selection-area--element-cloned {
-        z-index: 4;
-
-        &::before {
-          background-color: $ui-05;
-          opacity: 0.25;
-        }
+        background-color: $border-inverse;
+        opacity: 0.25;
       }
     }
     .#{$block-class}__reorder-indicator-line {
       position: absolute;
       z-index: 4;
       width: $spacing-01;
-      background-color: $interactive-01;
+      background-color: $background-brand;
       pointer-events: none;
     }
     .#{$block-class}__th--active-header,
     .#{$block-class}__td-th--active-header.#{$block-class}__td {
       @include set-active-header-borders();
 
-      background-color: $hover-selected-ui;
+      background-color: $background-selected-hover;
     }
     .#{$block-class}__th--selected-header,
     .#{$block-class}__td-th--selected-header.#{$block-class}__td {
-      background-color: $inverse-02;
-      color: $inverse-01;
+      background-color: $background-inverse;
+      color: $text-inverse;
 
+      /* stylelint-disable-next-line max-nesting-depth */
       &:focus,
       &:hover {
-        background-color: $inverse-02;
+        background-color: $background-inverse;
       }
     }
     .#{$block-class}__th--selected-header.#{$block-class}__th {
@@ -243,8 +261,34 @@
       overscroll-behavior: none;
     }
   }
-}
+  .#{$block-class}__reorder-indicator-line {
+    position: absolute;
+    z-index: 4;
+    width: $spacing-01;
+    background-color: $background-brand;
+  }
+  .#{$block-class}__th--active-header,
+  .#{$block-class}__td-th--active-header.#{$block-class}__td {
+    background-color: $background-selected-hover;
+  }
+  .#{$block-class}__th--selected-header,
+  .#{$block-class}__td-th--selected-header.#{$block-class}__td {
+    background-color: $background-inverse;
+    color: $text-on-color;
 
-@include exports('data-spreadsheet') {
-  @include data-spreadsheet;
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:focus,
+    &:hover {
+      background-color: $background-inverse;
+    }
+  }
+  .#{$block-class}__th--selected-header.#{$block-class}__th {
+    cursor: grab;
+  }
+  .#{$block-class}__th--selected-header-reorder-active.#{$block-class}__th {
+    cursor: grabbing;
+  }
+  .#{$block-class}__list--container {
+    overscroll-behavior: none;
+  }
 }

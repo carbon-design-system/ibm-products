@@ -78,7 +78,22 @@ if (name) {
   const componentSCSSIndexData = readFileSync(componentSCSSIndexPath, 'utf-8');
   outputFileSync(
     componentSCSSIndexPath,
-    componentSCSSIndexData +
-      `@import './${substitutions.DISPLAY_NAME}/index';\n`
+    componentSCSSIndexData + `@use './${substitutions.DISPLAY_NAME}';\n`
+  );
+
+  // add new component to end of src/components/_index-with-carbon.scss
+  const componentWithCarbonSCSSIndexPath = join(
+    'src',
+    'components',
+    '_index-with-carbon.scss'
+  );
+  const componentWithCarbonSCSSIndexData = readFileSync(
+    componentWithCarbonSCSSIndexPath,
+    'utf-8'
+  );
+  outputFileSync(
+    componentWithCarbonSCSSIndexPath,
+    componentWithCarbonSCSSIndexData +
+      `@use './${substitutions.DISPLAY_NAME}/index-with-carbon as *';\n`
   );
 }

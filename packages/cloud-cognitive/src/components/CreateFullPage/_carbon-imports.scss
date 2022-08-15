@@ -1,0 +1,17 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// CreateFullPage uses the following Carbon components:
+// Grid, Row, Column, Form, ProgressIndicator, ProgressStep, Toggle,
+// ComposedModal, ModalHeader, ModalBody, ModalFooter, Button
+// Other Carbon settings.
+@use '@carbon/react/scss/grid';
+@use '@carbon/react/scss/components/form';
+@use '@carbon/react/scss/components/progress-indicator';
+@use '@carbon/react/scss/components/toggle';
+@use '@carbon/react/scss/components/modal';
+@use '@carbon/react/scss/components/button';

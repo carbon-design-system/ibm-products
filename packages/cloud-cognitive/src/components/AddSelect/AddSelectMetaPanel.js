@@ -1,7 +1,7 @@
 import React, { isValidElement } from 'react';
 import PropTypes from 'prop-types';
-import { Close16 } from '@carbon/icons-react';
-import { Button } from 'carbon-components-react';
+import { Close } from '@carbon/icons-react';
+import { Button } from '@carbon/react';
 import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--add-select__meta-panel`;
@@ -22,8 +22,8 @@ export let AddSelectMetaPanel = ({
       <div className={`${blockClass}-header`}>
         <p className={`${blockClass}-title`}>{title}</p>
         <Button
+          renderIcon={(props) => <Close size={16} {...props} />}
           className={`${blockClass}-close`}
-          renderIcon={Close16}
           iconDescription={closeIconDescription}
           tooltipPosition="left"
           tooltipAlignment="center"

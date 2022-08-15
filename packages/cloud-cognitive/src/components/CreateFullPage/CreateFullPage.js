@@ -17,14 +17,13 @@ import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 import {
-  Grid,
   ModalFooter,
   ComposedModal,
   ModalHeader,
   ModalBody,
   Button,
   Form,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { CreateInfluencer } from '../CreateInfluencer';
 import { ActionSet } from '../ActionSet';
 import {
@@ -137,31 +136,29 @@ export let CreateFullPage = React.forwardRef(
         <div className={`${blockClass}__body`}>
           <div className={`${blockClass}__main`}>
             <div className={`${blockClass}__content`}>
-              <Grid>
-                <Form className={`${blockClass}__form`}>
-                  <StepsContext.Provider
-                    value={{
-                      currentStep,
-                      setIsDisabled,
-                      setOnNext: (fn) => setOnNext(() => fn),
-                      setOnMount: (fn) => setOnMount(() => fn),
-                      setStepData,
-                      stepData,
-                    }}
-                  >
-                    {React.Children.map(children, (child, index) => (
-                      <StepNumberContext.Provider value={index + 1}>
-                        {child}
-                      </StepNumberContext.Provider>
-                    ))}
-                  </StepsContext.Provider>
-                </Form>
-              </Grid>
+              <Form className={`${blockClass}__form`}>
+                <StepsContext.Provider
+                  value={{
+                    currentStep,
+                    setIsDisabled,
+                    setOnNext: (fn) => setOnNext(() => fn),
+                    setOnMount: (fn) => setOnMount(() => fn),
+                    setStepData,
+                    stepData,
+                  }}
+                >
+                  {React.Children.map(children, (child, index) => (
+                    <StepNumberContext.Provider value={index + 1}>
+                      {child}
+                    </StepNumberContext.Provider>
+                  ))}
+                </StepsContext.Provider>
+              </Form>
             </div>
             <ActionSet
               className={`${blockClass}__buttons`}
               actions={createFullPageActions}
-              size="max"
+              size="2xl"
             />
           </div>
         </div>

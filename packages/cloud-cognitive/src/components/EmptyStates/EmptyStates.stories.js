@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Add20 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
 import {
   getStoryTitle,
@@ -25,7 +25,7 @@ import {
   UnauthorizedEmptyState,
 } from '.';
 
-import styles from './_storybook-styles.scss';
+// import styles from './_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(EmptyState.displayName),
@@ -39,7 +39,7 @@ export default {
     UnauthorizedEmptyState,
   },
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },
@@ -47,22 +47,16 @@ export default {
 };
 
 const emptyStateCommonProps = {
-  title: 'Empty state title',
-  subtitle: 'Description text explaining why this section is empty.',
+  title: 'Start by adding data assets',
+  subtitle: (
+    <>
+      Click <span>Upload assets</span> to upload your data
+    </>
+  ),
 };
 
 const Template = (args) => {
-  return (
-    <EmptyState
-      heading="Start by adding data assets"
-      subtext={
-        <p>
-          Click <span>Upload assets</span> to upload your data
-        </p>
-      }
-      {...args}
-    />
-  );
+  return <EmptyState {...args} />;
 };
 
 export const Default = prepareStory(Template, {
@@ -95,7 +89,7 @@ export const withActionIconButton = prepareStory(Template, {
     action: {
       text: 'Create new',
       onClick: action('Clicked empty state action button'),
-      renderIcon: Add20,
+      renderIcon: (props) => <Add size={20} {...props} />,
       iconDescription: 'Add icon',
     },
   },
@@ -117,7 +111,7 @@ export const withActionAndLink = prepareStory(Template, {
     action: {
       text: 'Create new',
       onClick: action('Clicked empty state action button'),
-      renderIcon: Add20,
+      renderIcon: (props) => <Add size={20} {...props} />,
       iconDescription: 'Add icon',
     },
     link: {

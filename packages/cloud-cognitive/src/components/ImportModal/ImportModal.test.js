@@ -8,8 +8,8 @@
 import { fireEvent, render, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-
 import { carbon } from '../../settings';
+
 import { ImportModal } from '.';
 
 global.fetch = jest.fn(() =>

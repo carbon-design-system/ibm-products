@@ -18,12 +18,8 @@ import {
   InlineLoading,
   Form,
   Button,
-} from 'carbon-components-react';
-import {
-  InformationFilled16,
-  Copy16,
-  ErrorFilled16,
-} from '@carbon/icons-react';
+} from '@carbon/react';
+import { InformationFilled, Copy, ErrorFilled } from '@carbon/icons-react';
 import { APIKeyDownloader } from './APIKeyDownloader';
 import { pkg } from '../../settings';
 
@@ -102,7 +98,7 @@ export let APIKeyModal = forwardRef(
     const hasNextStep = hasSteps && currentStep < customSteps.length - 1;
     const hasPreviousStep = hasSteps && currentStep !== 0;
     const copyButtonProps = {
-      renderIcon: Copy16,
+      renderIcon: (props) => <Copy size={16} {...props} />,
       iconDescription: copyIconDescription,
       ref: copyRef,
     };
@@ -262,7 +258,7 @@ export let APIKeyModal = forwardRef(
               {(copyError || error) && (
                 <div className={`${blockClass}__messaging`}>
                   <div className={`${blockClass}__error-icon`}>
-                    <ErrorFilled16 />
+                    <ErrorFilled size={16} />
                   </div>
                   <p className={`${blockClass}__messaging-text`}>
                     {copyError ? copyErrorText : errorText}
@@ -271,7 +267,7 @@ export let APIKeyModal = forwardRef(
               )}
               {apiKeyLoaded && (
                 <div className={`${blockClass}__messaging`}>
-                  <InformationFilled16 />
+                  <InformationFilled size={16} />
                   {hasDownloadLink ? (
                     <APIKeyDownloader
                       apiKey={apiKey}

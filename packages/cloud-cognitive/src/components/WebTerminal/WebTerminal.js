@@ -14,12 +14,8 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Close16 as Close, Help16 as Help } from '@carbon/icons-react';
-import {
-  Button,
-  OverflowMenu,
-  OverflowMenuItem,
-} from 'carbon-components-react';
+import { Close, Help } from '@carbon/icons-react';
+import { Button, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { moderate02 } from '@carbon/motion';
 import { useWebTerminal } from './hooks';
 
@@ -132,7 +128,7 @@ export let WebTerminal = React.forwardRef(
           <div className={`${blockClass}__actions`}>
             {showDocumentationLinks && (
               <OverflowMenu
-                renderIcon={Help}
+                renderIcon={(props) => <Help size={16} {...props} />}
                 iconDescription={documentationLinksIconDescription}
                 ariaLabel={documentationLinksIconDescription}
                 menuOptionsClass={`${blockClass}__documentation-overflow`}
@@ -151,12 +147,13 @@ export let WebTerminal = React.forwardRef(
                 onClick={onClick}
                 iconDescription={iconDescription}
                 kind="ghost"
+                aria-label={iconDescription}
               />
             ))}
           </div>
           <Button
             hasIconOnly
-            renderIcon={Close}
+            renderIcon={(props) => <Close size={16} {...props} />}
             kind="ghost"
             iconDescription={closeIconDescription}
             onClick={handleCloseTerminal}
@@ -185,7 +182,7 @@ WebTerminal.propTypes = {
    */
   actions: PropTypes.arrayOf(
     PropTypes.shape({
-      renderIcon: PropTypes.object.isRequired,
+      renderIcon: PropTypes.func.isRequired,
       onClick: PropTypes.func.isRequired,
       iconDescription: PropTypes.string.isRequired,
     })

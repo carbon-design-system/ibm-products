@@ -15,7 +15,7 @@ import {
   ModalBody,
   Search,
   Tag,
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
@@ -85,7 +85,11 @@ export const TagSetModal = ({
       size="sm"
       {...{ open, onClose }}
     >
-      <ModalHeader title={title} className={`${blockClass}__header`}>
+      <ModalHeader
+        className={`${blockClass}__header`}
+        closeModal={onClose}
+        title={title}
+      >
         <Search
           data-modal-primary-focus
           className={`${blockClass}__search`}

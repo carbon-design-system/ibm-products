@@ -13,16 +13,10 @@ import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
 import { action } from '@storybook/addon-actions';
-import {
-  Activity16,
-  Restart16,
-  Download16,
-  Filter16,
-  Add16,
-  Edit16,
-  TrashCan16,
-} from '@carbon/icons-react';
-import { DataTable, Button, Pagination } from 'carbon-components-react';
+import { Edit16, TrashCan16 } from '@carbon/icons-react';
+import { Activity, Add, Restart, Download, Filter } from '@carbon/icons-react';
+import { DataTable, Button, Pagination } from '@carbon/react';
+
 import {
   Datagrid,
   useDatagrid,
@@ -45,9 +39,9 @@ import {
 import {
   CustomizeColumnStory,
   RowSizeDropdownStory,
-  SelectAllWitHToggle,
+  // SelectAllWithToggle,
   LeftPanelStory,
-} from './Datagrid.stories';
+} from './Datagrid.stories-helpers';
 import mdx from './Datagrid.mdx';
 
 import { pkg } from '../../settings';
@@ -67,6 +61,10 @@ export default {
   },
 };
 
+const emptyStateTitle = 'Empty state title';
+const emptyStateDescription =
+  'Description text explaining why this card is empty.';
+const emptyStateSize = 'lg';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const Wrapper = ({ children }) => (
@@ -167,10 +165,6 @@ export const BasicUsage = () => {
 export const EmptyState = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(0));
-  const emptyStateTitle = 'Empty state title';
-  const emptyStateDescription =
-    'Description text explaining why this card is empty.';
-  const emptyStateSize = 'lg';
   const illustrationTheme = 'light';
 
   const datagridState = useDatagrid({
@@ -210,6 +204,9 @@ export const InitialLoad = () => {
     columns,
     data,
     isFetching,
+    emptyStateTitle,
+    emptyStateDescription,
+    emptyStateSize,
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -282,6 +279,9 @@ export const InfiniteScroll = () => {
       data,
       isFetching,
       fetchMoreData: fetchData,
+      emptyStateTitle,
+      emptyStateDescription,
+      emptyStateSize,
     },
     useInfiniteScroll
   );
@@ -685,7 +685,7 @@ const DatagridActions = (datagridState) => {
             kind="ghost"
             hasIconOnly
             tooltipPosition="bottom"
-            renderIcon={Download16}
+            renderIcon={(props) => <Download size={16} {...props} />}
             iconDescription={'Download CSV'}
             onClick={downloadCsv}
           />
@@ -695,14 +695,18 @@ const DatagridActions = (datagridState) => {
             kind="ghost"
             hasIconOnly
             tooltipPosition="bottom"
-            renderIcon={Filter16}
+            renderIcon={(props) => <Filter size={16} {...props} />}
             iconDescription={'Left panel'}
             onClick={leftPanelClick}
           />
         </div>
         <RowSizeDropdown {...rowSizeDropdownProps} />
         <div style={style} className={`${blockClass}__toolbar-divider`}>
-          <Button kind="ghost" renderIcon={Add16} iconDescription={'Action'}>
+          <Button
+            kind="ghost"
+            renderIcon={(props) => <Add size={16} {...props} />}
+            iconDescription={'Action'}
+          >
             Ghost button
           </Button>
         </div>
@@ -719,16 +723,16 @@ const DatagridActions = (datagridState) => {
           kind="ghost"
           hasIconOnly
           tooltipPosition="bottom"
-          renderIcon={Filter16}
+          renderIcon={(props) => <Filter size={16} {...props} />}
           iconDescription={'Left panel'}
           onClick={leftPanelClick}
         />
         <TableToolbarContent>
           <TableToolbarSearch
-            size="xl"
+            size="lg"
             id="columnSearch"
             persistent
-            placeHolderText={searchForAColumn}
+            placeholder={searchForAColumn}
             onChange={(e) => setGlobalFilter(e.target.value)}
           />
           <RowSizeDropdown {...rowSizeDropdownProps} />
@@ -737,7 +741,7 @@ const DatagridActions = (datagridState) => {
               kind="ghost"
               hasIconOnly
               tooltipPosition="bottom"
-              renderIcon={Restart16}
+              renderIcon={(props) => <Restart size={16} {...props} />}
               iconDescription={'Refresh'}
               onClick={refreshColumns}
             />
@@ -747,7 +751,7 @@ const DatagridActions = (datagridState) => {
               kind="ghost"
               hasIconOnly
               tooltipPosition="bottom"
-              renderIcon={Download16}
+              renderIcon={(props) => <Download size={16} {...props} />}
               iconDescription={'Download CSV'}
               onClick={downloadCsv}
             />
@@ -772,6 +776,9 @@ export const DatagridActionsToolbar = () => {
       data,
       DatagridActions,
       DatagridBatchActions,
+      emptyStateTitle: 'No items found',
+      emptyStateDescription: 'Description text',
+      emptyStateSize: 'lg',
     },
     useSelectRows
   );
@@ -800,6 +807,9 @@ export const SelectItemsInAllPages = () => {
       DatagridPagination,
       DatagridActions,
       DatagridBatchActions,
+      emptyStateTitle,
+      emptyStateDescription,
+      emptyStateSize,
     },
     useSelectRows,
     useSelectAllWithToggle
@@ -813,7 +823,7 @@ export const SelectItemsInAllPages = () => {
     </>
   );
 };
-SelectItemsInAllPages.story = SelectAllWitHToggle;
+// SelectItemsInAllPages.story = SelectAllWithToggle;
 
 export const CustomizingColumns = () => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -834,6 +844,9 @@ export const CustomizingColumns = () => {
       },
       DatagridActions,
       DatagridBatchActions,
+      emptyStateTitle,
+      emptyStateDescription,
+      emptyStateSize,
     },
     useCustomizeColumns,
     useColumnOrder
@@ -852,6 +865,7 @@ export const CustomizingColumns = () => {
     </>
   );
 };
+
 CustomizingColumns.story = CustomizeColumnStory;
 
 export const RowSizeDropdown = () => {
@@ -895,6 +909,9 @@ export const RowSizeDropdown = () => {
       },
       DatagridActions,
       DatagridBatchActions,
+      emptyStateTitle,
+      emptyStateDescription,
+      emptyStateSize,
     },
     useSelectRows
   );
@@ -923,6 +940,9 @@ export const LeftPanel = () => {
     data,
     DatagridActions,
     DatagridBatchActions,
+    emptyStateTitle,
+    emptyStateDescription,
+    emptyStateSize,
   });
 
   return (
@@ -945,7 +965,10 @@ const DatagridBatchActions = (datagridState) => {
       totalSelected={totalSelected}
       onCancel={() => toggleAllRowsSelected(false)}
     >
-      <TableBatchAction renderIcon={Activity16} onClick={onBatchAction}>
+      <TableBatchAction
+        renderIcon={(props) => <Activity size={16} {...props} />}
+        onClick={onBatchAction}
+      >
         {actionName}
       </TableBatchAction>
     </TableBatchActions>
@@ -956,33 +979,33 @@ const getBatchActions = () => {
   return [
     {
       label: 'Duplicate',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Add',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Select all',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
       type: 'select_all',
     },
     {
       label: 'Publish to catalog',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Download',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Delete',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
       hasDivider: true,
       kind: 'danger',
@@ -1001,6 +1024,9 @@ export const BatchActions = () => {
       toolbarBatchActions: getBatchActions(),
       DatagridActions,
       DatagridBatchActions,
+      emptyStateTitle,
+      emptyStateDescription,
+      emptyStateSize,
     },
     useSelectRows,
     useSelectAllWithToggle
@@ -1021,6 +1047,9 @@ export const DisableSelectRow = () => {
       endPlugins: [useDisableSelectRows],
       shouldDisableSelectRow: (row) => row.id % 2 === 0,
       disableSelectAll: true,
+      emptyStateTitle,
+      emptyStateDescription,
+      emptyStateSize,
     },
     useSelectRows
   );
@@ -1100,6 +1129,9 @@ export const TopAlignment = () => {
       ],
       DatagridActions,
       DatagridBatchActions,
+      emptyStateTitle,
+      emptyStateDescription,
+      emptyStateSize,
     },
     useSelectRows
   );

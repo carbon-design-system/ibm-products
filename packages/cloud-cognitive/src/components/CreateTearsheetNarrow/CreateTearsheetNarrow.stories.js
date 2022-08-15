@@ -14,7 +14,7 @@ import {
   NumberInput,
   TextInput,
   FormGroup,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { pkg } from '../../settings';
 import {
   getStoryTitle,
@@ -88,6 +88,7 @@ const Template = (args) => {
           onChange={(event) => setTopicName(event.target.value)}
         />
         <NumberInput
+          iconDescription="Choose a number"
           id="partition-count"
           min={1}
           max={100}
@@ -97,6 +98,7 @@ const Template = (args) => {
           onChange={(event) => setPartitionCount(event.imaginaryTarget.value)}
         />
         <NumberInput
+          iconDescription="Choose a number"
           id="replica-count"
           min={1}
           max={100}
@@ -106,6 +108,7 @@ const Template = (args) => {
           onChange={(event) => setReplicaCount(event.imaginaryTarget.value)}
         />
         <NumberInput
+          iconDescription="Choose a number"
           id="minimum-in-sync-count"
           min={1}
           max={100}
@@ -118,6 +121,7 @@ const Template = (args) => {
         />
         <div className={`${createTearsheetNarrowBlockClass}__flex-container`}>
           <NumberInput
+            iconDescription="Choose a number"
             id="retention-time"
             min={1}
             max={60}
@@ -136,6 +140,7 @@ const Template = (args) => {
           />
         </div>
         <NumberInput
+          iconDescription="Choose a number"
           id="quantity"
           min={1}
           max={100}
@@ -197,6 +202,7 @@ const WithValidationTemplate = (args) => {
             invalidText="This is a required field"
           />
           <NumberInput
+            iconDescription="Choose a number"
             id="partition-count"
             min={1}
             max={100}
@@ -206,6 +212,7 @@ const WithValidationTemplate = (args) => {
             onChange={(event) => setPartitionCount(event.imaginaryTarget.value)}
           />
           <NumberInput
+            iconDescription="Choose a number"
             id="replica-count"
             min={1}
             max={100}
@@ -215,6 +222,7 @@ const WithValidationTemplate = (args) => {
             onChange={(event) => setReplicaCount(event.imaginaryTarget.value)}
           />
           <NumberInput
+            iconDescription="Choose a number"
             id="minimum-in-sync-count"
             min={1}
             max={100}
@@ -232,6 +240,7 @@ const WithValidationTemplate = (args) => {
         >
           <div className={`${createTearsheetNarrowBlockClass}__flex-container`}>
             <NumberInput
+              iconDescription="Choose a number"
               id="retention-time"
               min={1}
               max={60}
@@ -252,6 +261,7 @@ const WithValidationTemplate = (args) => {
             />
           </div>
           <NumberInput
+            iconDescription="Choose a number"
             id="quantity"
             min={1}
             max={100}

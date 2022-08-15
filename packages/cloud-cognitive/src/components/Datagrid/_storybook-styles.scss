@@ -5,12 +5,16 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/project-settings';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // TODO: add any additional styles used by Datagrid.stories.js
 // helper class for the nested table
 
-$block-class: #{$pkg-prefix}--datagrid;
+$block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 
 .sb-show-main.sb-main-centered {
   height: 100vh;
@@ -27,7 +31,7 @@ $block-class: #{$pkg-prefix}--datagrid;
 }
 
 .carbon-nested-table {
-  border-bottom: 1px solid $ui-03;
+  border-bottom: 1px solid $border-subtle-01;
 
   .#{$block-class}__virtual-scrollbar > div > div:last-child td {
     border-bottom: none;
@@ -39,7 +43,7 @@ $block-class: #{$pkg-prefix}--datagrid;
 }
 
 /* only for storybook purpose. */
-.#{$pkg-prefix}--side-panel.#{$pkg-prefix}--side-panel__container {
+.#{c4p-settings.$pkg-prefix}--side-panel.#{c4p-settings.$pkg-prefix}--side-panel__container {
   top: 0;
   height: 100%;
 }
@@ -60,29 +64,29 @@ $block-class: #{$pkg-prefix}--datagrid;
 }
 
 .#{$block-class}__side-panel-label-text {
-  @include carbon--type-style('label-02');
+  @include type.type-style('body-compact-01');
 
-  color: $text-02;
+  color: $text-secondary;
 }
 
 .#{$block-class}__side-panel-value {
-  @include carbon--type-style('body-short-01');
+  @include type.type-style('body-short-01');
 
   padding-left: $spacing-03;
 }
 
 .#{$block-class}__side-panel-section-header {
-  @include carbon--type-style('productive-heading-01');
+  @include type.type-style('productive-heading-01');
 
   padding-bottom: $spacing-02;
 }
 
-.#{$pkg-prefix}--side-panel.#{$pkg-prefix}--side-panel__container.#{$pkg-prefix}--side-panel__container-right-placement {
+.#{c4p-settings.$pkg-prefix}--side-panel.#{c4p-settings.$pkg-prefix}--side-panel__container.#{c4p-settings.$pkg-prefix}--side-panel__container-right-placement {
   border: 0 none;
   box-shadow: none;
 }
 
-.#{$pkg-prefix}--side-panel__container
-  .#{$pkg-prefix}--side-panel__inner-content {
+.#{c4p-settings.$pkg-prefix}--side-panel__container
+  .#{c4p-settings.$pkg-prefix}--side-panel__inner-content {
   height: 100%;
 }

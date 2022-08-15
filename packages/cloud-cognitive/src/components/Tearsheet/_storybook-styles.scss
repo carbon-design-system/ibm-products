@@ -5,20 +5,21 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/project-settings';
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/spacing' as *;
 
 .tearsheet-stories__dummy-content-block {
-  padding: $layout-02 $layout-03;
+  padding: $spacing-06 $spacing-07;
 }
 
 .tearsheet-stories__narrow-content-block {
-  padding: $layout-01;
+  padding: $spacing-05;
 }
 
 .tearsheet-stories__tabs {
-  margin-left: calc(-1 * #{$layout-01});
+  margin-left: calc(-1 * #{$spacing-05});
 }
 
-.tearsheet-stories__tabs .#{$carbon-prefix}--tab-content {
+.tearsheet-stories__tabs .#{c4p-settings.$carbon-prefix}--tab-content {
   display: none;
 }

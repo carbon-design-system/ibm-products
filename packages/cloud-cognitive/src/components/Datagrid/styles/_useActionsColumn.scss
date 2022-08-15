@@ -6,19 +6,20 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@import './variables';
+@use '@carbon/styles/scss/spacing' as *;
+@use './variables';
 
-.#{$block-class}__actions-column-cell {
+.#{variables.$block-class}__actions-column-cell {
   display: flex;
   flex-flow: column;
   justify-content: center;
 }
 
-.#{$block-class}__actions-column-content {
+.#{variables.$block-class}__actions-column-content {
   display: flex;
   justify-content: center;
 }
 
-.#{$block-class}__actions-column-loading {
+.#{variables.$block-class}__actions-column-loading {
   margin-bottom: $spacing-03;
 }

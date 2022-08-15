@@ -8,9 +8,9 @@
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { carbon } from '../../settings';
 
 import { APIKeyModal } from '.';
-import { carbon } from '../../settings';
 
 Object.assign(navigator, {
   clipboard: {
@@ -120,7 +120,7 @@ describe(componentName, () => {
     expect(onRequestGenerate).toHaveBeenCalledWith('test-key');
 
     rerender(<APIKeyModal {...props} loading />);
-    getByText(props.loadingText);
+    getByText(props.loadingText, { selector: 'div' });
     rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
     await waitFor(() => getByText(props.downloadLinkText));
     getByText(props.downloadBodyText);

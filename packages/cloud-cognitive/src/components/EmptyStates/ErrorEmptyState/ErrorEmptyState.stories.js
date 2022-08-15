@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Add20 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 import mdx from './ErrorEmptyState.mdx';
 import {
   getStoryTitle,
@@ -16,13 +16,13 @@ import {
 
 import { ErrorEmptyState } from '.';
 
-import styles from '../_index.scss';
+// import styles from '../_index.scss';
 
 export default {
   title: getStoryTitle(ErrorEmptyState.displayName),
   component: ErrorEmptyState,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },
@@ -67,7 +67,7 @@ export const withActionIconButton = prepareStory(Template, {
     action: {
       text: 'Create new',
       onClick: action('Clicked empty state action button'),
-      renderIcon: Add20,
+      renderIcon: (props) => <Add size={20} {...props} />,
       iconDescription: 'Add icon',
     },
   },
@@ -89,7 +89,7 @@ export const withActionAndLink = prepareStory(Template, {
     action: {
       text: 'Create new',
       onClick: action('Clicked empty state action button'),
-      renderIcon: Add20,
+      renderIcon: (props) => <Add size={20} {...props} />,
       iconDescription: 'Add icon',
     },
     link: {

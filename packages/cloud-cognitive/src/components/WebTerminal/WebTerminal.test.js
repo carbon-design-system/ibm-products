@@ -8,8 +8,8 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { Code, Copy } from '@carbon/icons-react';
 import { act, renderHook } from '@testing-library/react-hooks';
-import { Code16 as Code, Copy16 as Copy } from '@carbon/icons-react';
 
 import { pkg } from '../../settings';
 
@@ -119,14 +119,17 @@ describe(name, () => {
   });
 
   it('should render documentation link text', () => {
+    const overflowLabel = 'Show documentation links';
     render(
       <MockWebTerminal documentationLinks={documentationLinks}>
         Body content
       </MockWebTerminal>
     );
     const { click } = userEvent;
-    click(screen.getByText(/Show documentation links/i));
-    expect(screen.getByText(/Kubernetes docs/i));
+    click(screen.getByRole('button', { name: overflowLabel }));
+    documentationLinks.forEach((link) => {
+      screen.getByText(link.itemText);
+    });
   });
 
   it('adds additional properties to the containing node', () => {
@@ -177,12 +180,12 @@ describe(name, () => {
       <MockWebTerminal
         actions={[
           {
-            renderIcon: Code,
+            renderIcon: (props) => <Code size={16} {...props} />,
             onClick: deploymentButtonFn,
             iconDescription: 'Create new deployment',
           },
           {
-            renderIcon: Copy,
+            renderIcon: (props) => <Copy size={16} {...props} />,
             onClick: copyLogsButtonFn,
             iconDescription: 'Copy logs',
           },
@@ -192,9 +195,10 @@ describe(name, () => {
       </MockWebTerminal>
     );
 
-    click(screen.getByText(/Create new deployment/i));
+    click(screen.getByLabelText(/Create new deployment/i));
     expect(deploymentButtonFn).toHaveBeenCalledTimes(1);
-    click(screen.getByText(/Copy logs/i));
+
+    click(screen.getByRole('button', { name: /Copy logs/i }));
     expect(copyLogsButtonFn).toHaveBeenCalledTimes(1);
   });
 });

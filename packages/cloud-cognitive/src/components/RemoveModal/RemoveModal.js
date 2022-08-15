@@ -14,7 +14,7 @@ import {
   ModalFooter,
   ModalBody,
   TextInput,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import PropTypes from 'prop-types';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -71,6 +71,7 @@ export let RemoveModal = forwardRef(
         {...rest}
         className={cx(blockClass, className)}
         size="sm"
+        aria-label={title}
         {...{
           open,
           ref,

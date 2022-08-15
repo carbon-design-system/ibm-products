@@ -1,0 +1,47 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Package all scss files here for those that want them all bundled up.
+
+@use './_Canary/canary';
+
+@use './APIKeyModal/index-with-carbon' as *;
+@use './AboutModal/index-with-carbon' as *;
+@use './ActionSet/index-with-carbon' as *;
+@use './ButtonMenu/index-with-carbon' as *;
+@use './Cascade/index-with-carbon' as *;
+@use './ComboButton/index-with-carbon' as *;
+@use './CreateFullPage/index-with-carbon' as *;
+@use './CreateModal/index-with-carbon' as *;
+@use './CreateSidePanel/index-with-carbon' as *;
+@use './CreateTearsheet/index-with-carbon' as *;
+@use './CreateTearsheetNarrow/index-with-carbon' as *;
+@use './EmptyStates/index-with-carbon' as *;
+@use './ExportModal/index-with-carbon' as *;
+@use './ExpressiveCard/index-with-carbon' as *;
+@use './HTTPErrors/index-with-carbon' as *;
+@use './ImportModal/index-with-carbon' as *;
+@use './ModifiedTabs/index-with-carbon' as *;
+@use './MultiAddSelect/index-with-carbon' as *;
+@use './NotificationsPanel/index-with-carbon' as *;
+@use './PageHeader/index-with-carbon' as *;
+@use './ProductiveCard/index-with-carbon' as *;
+@use './RemoveModal/index-with-carbon' as *;
+@use './Saving/index-with-carbon' as *;
+@use './SidePanel/index-with-carbon' as *;
+@use './SingleAddSelect/index-with-carbon' as *;
+@use './StatusIcon/index-with-carbon' as *;
+@use './TagSet/index-with-carbon' as *;
+@use './Tearsheet/index-with-carbon' as *;
+@use './Toolbar/index-with-carbon' as *;
+@use './WebTerminal/index-with-carbon' as *;
+@use './UserProfileImage/index-with-carbon' as *;
+@use './EditSidePanel/index-with-carbon' as *;
+@use './OptionsTile/index-with-carbon' as *;
+@use './InlineEdit/index-with-carbon' as *;
+@use './DataSpreadsheet/index-with-carbon' as *;
+@use './Datagrid/index-with-carbon' as *;

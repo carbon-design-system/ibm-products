@@ -12,13 +12,13 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import mdx from './UserProfileImage.mdx';
-import image from './headshot.png'; // cspell:disable-line
-import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
+import image from './headshot.jpg'; // cspell:disable-line
+// import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
 const defaultArgs = {
   backgroundColor: 'light-cyan',
   theme: 'light',
-  size: 'xlg',
+  size: 'xl',
 };
 
 export default {
@@ -47,11 +47,11 @@ export default {
       control: {
         type: 'radio',
       },
-      options: ['xlg', 'lg', 'md'],
+      options: ['xl', 'lg', 'md'],
     },
   },
   parameters: {
-    styles,
+    // styles,
     docs: { page: mdx },
   },
 };

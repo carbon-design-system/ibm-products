@@ -8,7 +8,7 @@
 import React, { forwardRef, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Column, FormGroup, Row } from 'carbon-components-react';
+import { Column, FormGroup, Grid } from '@carbon/react';
 import { StepsContext, StepNumberContext } from './CreateTearsheet';
 import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
@@ -102,7 +102,7 @@ export let CreateTearsheetStep = forwardRef(
         })}
         ref={ref}
       >
-        <Row>
+        <Grid narrow>
           <Column xlg={12} lg={12} md={8} sm={8}>
             <h4 className={`${blockClass}--title`}>{title}</h4>
             {subtitle && (
@@ -112,7 +112,7 @@ export let CreateTearsheetStep = forwardRef(
               <p className={`${blockClass}--description`}>{description}</p>
             )}
           </Column>
-        </Row>
+        </Grid>
         {hasFieldset ? (
           <FormGroup
             legendText={fieldsetLegendText}

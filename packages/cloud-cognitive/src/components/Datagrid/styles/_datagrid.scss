@@ -6,7 +6,11 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@import './variables';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/react/scss/components/button/tokens' as *;
+@use '../../../global/styles/project-settings' as c4p-settings;
+@use './variables' as *;
 
 .#{$block-class}__table-toolbar > section {
   z-index: 2;
@@ -20,7 +24,7 @@
 }
 
 .#{$block-class}__grid-container::-webkit-scrollbar-thumb {
-  background-color: $text-03;
+  background-color: $text-placeholder;
 }
 
 .#{$block-class}__grid-container table {
@@ -29,11 +33,11 @@
 
   &.#{$block-class}__vertical-align-center {
     .#{$block-class}__head {
-      .#{$carbon-prefix}--table-header-label {
+      .#{c4p-settings.$carbon-prefix}--table-header-label {
         display: flex;
         height: 100%;
         align-items: center;
-        color: $text-01;
+        color: $text-primary;
       }
     }
 
@@ -43,8 +47,8 @@
       padding-bottom: 0;
     }
 
-    td.#{$carbon-prefix}--table-column-checkbox,
-    th.#{$carbon-prefix}--table-column-checkbox {
+    td.#{c4p-settings.$carbon-prefix}--table-column-checkbox,
+    th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {
       /* stylelint-disable-next-line carbon/layout-token-use */
       padding-top: 0.6875rem;
 
@@ -56,7 +60,7 @@
     }
 
     .#{$block-class}__checkbox-cell {
-      th.#{$carbon-prefix}--table-column-checkbox {
+      th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {
         display: flex;
         height: 100%;
         align-items: center;
@@ -65,17 +69,17 @@
     }
 
     &.#{$block-class}__variable-row-height {
-      &.#{$carbon-prefix}--data-table--compact,
-      &.#{$carbon-prefix}--data-table--xs {
+      &.#{c4p-settings.$carbon-prefix}--data-table--compact,
+      &.#{c4p-settings.$carbon-prefix}--data-table--xs {
         .#{$block-class}__cell {
           padding-top: $spacing-01;
           padding-bottom: $spacing-01;
         }
       }
 
-      &.#{$carbon-prefix}--data-table--short,
-      &.#{$carbon-prefix}--data-table--sm,
-      &.#{$carbon-prefix}--data-table--md {
+      &.#{c4p-settings.$carbon-prefix}--data-table--short,
+      &.#{c4p-settings.$carbon-prefix}--data-table--sm,
+      &.#{c4p-settings.$carbon-prefix}--data-table--md {
         .#{$block-class}__cell {
           /* stylelint-disable-next-line carbon/layout-token-use */
           padding-top: rem(7px);
@@ -84,9 +88,9 @@
         }
       }
 
-      &.#{$carbon-prefix}--data-table--tall,
-      &.#{$carbon-prefix}--data-table--lg,
-      &.#{$carbon-prefix}--data-table--xl {
+      &.#{c4p-settings.$carbon-prefix}--data-table--tall,
+      &.#{c4p-settings.$carbon-prefix}--data-table--lg,
+      &.#{c4p-settings.$carbon-prefix}--data-table--xl {
         .#{$block-class}__cell {
           padding-top: $spacing-05;
           padding-bottom: $spacing-05;
@@ -96,32 +100,32 @@
   }
 
   &.#{$block-class}__vertical-align-top {
-    &.#{$carbon-prefix}--data-table--tall,
-    &.#{$carbon-prefix}--data-table--lg,
-    &.#{$carbon-prefix}--data-table--xl {
+    &.#{c4p-settings.$carbon-prefix}--data-table--tall,
+    &.#{c4p-settings.$carbon-prefix}--data-table--lg,
+    &.#{c4p-settings.$carbon-prefix}--data-table--xl {
       .#{$block-class}__cell {
         padding-top: $spacing-05;
       }
 
-      .#{$carbon-prefix}--table-header-label {
+      .#{c4p-settings.$carbon-prefix}--table-header-label {
         padding-top: $spacing-05;
       }
 
-      .#{$carbon-prefix}--table-column-checkbox {
+      .#{c4p-settings.$carbon-prefix}--table-column-checkbox {
         /* stylelint-disable-next-line carbon/layout-token-use */
         padding-top: rem(13px);
       }
     }
 
     &.#{$block-class}__variable-row-height {
-      &.#{$carbon-prefix}--data-table--tall,
-      &.#{$carbon-prefix}--data-table--lg,
-      &.#{$carbon-prefix}--data-table--xl {
+      &.#{c4p-settings.$carbon-prefix}--data-table--tall,
+      &.#{c4p-settings.$carbon-prefix}--data-table--lg,
+      &.#{c4p-settings.$carbon-prefix}--data-table--xl {
         .#{$block-class}__cell {
           padding-bottom: $spacing-05;
         }
 
-        .#{$carbon-prefix}--table-header-label {
+        .#{c4p-settings.$carbon-prefix}--table-header-label {
           padding-bottom: $spacing-05;
         }
       }
@@ -135,19 +139,19 @@
   }
 }
 .#{$block-class}__grid-container::-webkit-scrollbar-thumb {
-  background-color: $text-03;
+  background-color: $text-placeholder;
 }
 
 .#{$block-class}__grid-container::-webkit-scrollbar {
   width: 6px;
-  background-color: $ui-background;
+  background-color: $background;
 }
 .#{$block-class}__grid-container {
   display: block;
   width: 100%;
   padding-top: 0;
 
-  .#{$carbon-prefix}--data-table-content {
+  .#{c4p-settings.$carbon-prefix}--data-table-content {
     width: 100%;
     height: 100%;
     overflow-x: auto;
@@ -174,12 +178,12 @@
   }
 
   .#{$block-class}__virtual-scrollbar::-webkit-scrollbar-thumb {
-    background-color: $text-03;
+    background-color: $text-placeholder;
   }
 
   .#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
     width: 6px;
-    background-color: $ui-background;
+    background-color: $background;
   }
 
   .#{$block-class}__cell {
@@ -209,20 +213,20 @@
 
     .#{$block-class}__carbon-row:hover a {
       /* stylelint-disable-next-line declaration-no-important */
-      color: $hover-primary-text !important;
+      color: $link-primary-hover !important;
     }
   }
 
-  .#{$carbon-prefix}--select-input {
+  .#{c4p-settings.$carbon-prefix}--select-input {
     -webkit-appearance: none; // could be fixed by post-css plugin
   }
 
-  th.#{$carbon-prefix}--table-column-checkbox {
+  th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {
     display: block;
   }
 
-  td.#{$carbon-prefix}--table-column-checkbox,
-  th.#{$carbon-prefix}--table-column-checkbox {
+  td.#{c4p-settings.$carbon-prefix}--table-column-checkbox,
+  th.#{c4p-settings.$carbon-prefix}--table-column-checkbox {
     /* stylelint-disable-next-line declaration-no-important */
     padding-right: $spacing-06 !important;
   }
@@ -232,7 +236,7 @@
   display: table;
   height: 100%;
 
-  .#{$pkg-prefix}--empty-state {
+  .#{c4p-settings.$pkg-prefix}--empty-state {
     max-width: 280px;
   }
 }
@@ -275,27 +279,26 @@
 }
 
 .#{$block-class}__sortableColumn:hover {
-  background-color: $hover-selected-ui;
+  background-color: $background-selected-hover;
 }
 
 .#{$block-class}__resizableColumn {
   &.#{$block-class}__isResizing {
     .#{$block-class}__resizer {
-      border-right: $spacing-01 solid $hover-secondary;
+      border-right: $spacing-01 solid $button-secondary-hover;
     }
   }
 
   &.#{$block-class}__isSorted {
-    background-color: $hover-selected-ui;
+    background-color: $background-selected-hover;
   }
 }
 
 .#{$block-class}__resizableColumn:hover {
-  background-color: $hover-selected-ui;
-
+  background-color: $background-selected-hover;
   .#{$block-class}__resizer {
-    border-right: $spacing-01 solid $ui-04;
-    background-color: $hover-selected-ui;
+    border-right: $spacing-01 solid $border-strong-01;
+    background-color: $background-selected-hover;
   }
 }
 
@@ -313,12 +316,12 @@
 }
 
 .#{$block-class}__simple-body::-webkit-scrollbar-thumb {
-  background-color: $text-03;
+  background-color: $text-placeholder;
 }
 
 .#{$block-class}__simple-body::-webkit-scrollbar {
   width: 6px;
-  background-color: $ui-background;
+  background-color: $background;
 }
 
 .#{$block-class}__sticky.#{$block-class}__table-simple {
@@ -328,11 +331,11 @@
 
 .#{$block-class}__table-simple::-webkit-scrollbar {
   width: 6px;
-  background-color: $ui-background;
+  background-color: $background;
 }
 
 .#{$block-class}__table-simple::-webkit-scrollbar-thumb {
-  background-color: $text-03;
+  background-color: $text-placeholder;
 }
 .#{$block-class}__sticky.#{$block-class}__simple-body {
   overflow: auto;
@@ -344,7 +347,7 @@
   width: 100% !important;
 }
 
-.#{block-class}__displayFlex {
+.#{$block-class}__displayFlex {
   position: relative;
   display: flex;
   width: 100%;
@@ -355,7 +358,7 @@
 .#{$block-class}__datagridLeftPanel {
   display: flex;
   width: 388px; // as per UX specs.
-  background-color: $ui-01;
+  background-color: $layer-01;
 }
 
 .#{$block-class}__leftPanel-position {
@@ -383,7 +386,7 @@
     flex: 0 0 auto;
   }
 
-  .#{$carbon-prefix}--data-table-content {
+  .#{c4p-settings.$carbon-prefix}--data-table-content {
     flex: 1 1 0%;
   }
   .#{$block-class}__table-container {
@@ -403,11 +406,11 @@
   // Border applied to nested rows only on open chevron hover
   &.#{$block-class}__carbon-row-expanded-hover-active
     ~ .#{$block-class}__carbon-nested-row {
-    border-left: 1px solid $interactive-01;
+    border-left: 1px solid $button-primary;
   }
 }
 
-.#{$block-class} .#{$carbon-prefix}--data-table-header {
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--data-table-header {
   background: transparent;
 }
 
@@ -415,7 +418,7 @@
   display: flex;
   flex-wrap: wrap;
 
-  .#{$carbon-prefix}--data-table-header {
+  .#{c4p-settings.$carbon-prefix}--data-table-header {
     flex: 1 1 auto;
     padding-bottom: $spacing-05;
   }
@@ -423,15 +426,15 @@
   .#{$block-class}__table-toolbar {
     flex: 0 0 auto;
   }
-  .#{$carbon-prefix}--table-toolbar {
+  .#{c4p-settings.$carbon-prefix}--table-toolbar {
     background: transparent;
   }
 
-  .#{$carbon-prefix}__table-container {
+  .#{c4p-settings.$carbon-prefix}__table-container {
     flex: 1 1 100%;
   }
 
-  .#{$carbon-prefix}--table-toolbar {
+  .#{c4p-settings.$carbon-prefix}--table-toolbar {
     padding-top: $spacing-07;
   }
 
@@ -445,24 +448,24 @@
     left: 0;
     width: 1px;
     height: $spacing-05;
-    border-left: 1px solid $ui-03;
+    border-left: 1px solid $border-subtle-01;
     content: '';
     transform: translateY(-50%);
   }
 }
 
 .#{$block-class}
-  .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) {
+  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) {
   position: relative;
 }
 
 .#{$block-class}
-  .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)::before {
+  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)::before {
   position: absolute;
   left: 0;
   width: $spacing-02;
   height: 100%;
-  background-color: $interactive-01;
+  background-color: $background-brand;
   content: '';
 }
 

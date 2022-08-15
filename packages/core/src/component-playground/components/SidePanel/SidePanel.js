@@ -20,12 +20,14 @@ import {
   Row,
   TextInput,
   FormGroup,
-} from 'carbon-components-react';
-import { pkg, carbon } from '../../../../../cloud-cognitive/src/settings';
+  usePrefix,
+} from '@carbon/react';
+import { pkg } from '../../../../../cloud-cognitive/src/settings';
 
 import costaPic from '../../_story-assets/costa.jpeg';
 
 const SidePanel = (props) => {
+  const carbonPrefix = usePrefix();
   const [editValues, setEditValues] = useState(props.data);
   const [isInvalid, setIsInvalid] = useState(false);
   const blockClass = `${pkg.prefix}--create-side-panel`;
@@ -66,34 +68,32 @@ const SidePanel = (props) => {
         className={`${blockClass}__form`}
         legendText="Topic information"
       >
-        <div className={`${carbon.prefix}--row`}>
-          <div className={`${carbon.prefix}--col-lg-12`}>
-            <TextInput
-              labelText="Topic name"
-              id="tearsheet-multi-step-story-text-input-multi-step-1"
-              value={editValues ? editValues.topic.name : ''}
-              placeholder="Enter topic name"
-              onChange={(event) => {
-                if (event.target.value.length) {
-                  setIsInvalid(false);
-                }
-                setEditValues({
-                  ...editValues,
-                  topic: {
-                    ...editValues.topic,
-                    [event.target.name]: event.target.value,
-                  },
-                });
-              }}
-              name="name"
-              invalid={isInvalid}
-              invalidText="This is a required field"
-              onBlur={() => {
-                console.log('on blur');
-                //   if (!stepOneTextInputValue.length) setIsInvalid(true);
-              }}
-            />
-          </div>
+        <div className={`${carbonPrefix}--col-lg-12`}>
+          <TextInput
+            labelText="Topic name"
+            id="tearsheet-multi-step-story-text-input-multi-step-1"
+            value={editValues ? editValues.topic.name : ''}
+            placeholder="Enter topic name"
+            onChange={(event) => {
+              if (event.target.value.length) {
+                setIsInvalid(false);
+              }
+              setEditValues({
+                ...editValues,
+                topic: {
+                  ...editValues.topic,
+                  [event.target.name]: event.target.value,
+                },
+              });
+            }}
+            name="name"
+            invalid={isInvalid}
+            invalidText="This is a required field"
+            onBlur={() => {
+              console.log('on blur');
+              //   if (!stepOneTextInputValue.length) setIsInvalid(true);
+            }}
+          />
         </div>
         <TextInput
           labelText="Description"
@@ -112,35 +112,33 @@ const SidePanel = (props) => {
           }}
         />
 
-        <div className={`${carbon.prefix}--row`}>
-          <div className={`${carbon.prefix}--col-lg-3`}>
-            <UserProfileImage
-              backgroundColor="light-cyan"
-              theme="light"
-              size="xlg"
-              initials="CC"
-              imageDescription="blank"
-              image={costaPic}
-            />
-          </div>
-          <div className={`${carbon.prefix}--col-lg-10`}>
-            <TextInput
-              labelText="Author"
-              id="tearsheet-multi-step-story-text-input-multi-step-1-input-3"
-              value={editValues.topic.author}
-              name="author"
-              placeholder="Enter topic version"
-              onChange={(event) => {
-                setEditValues({
-                  ...editValues,
-                  topic: {
-                    ...editValues.topic,
-                    [event.target.name]: event.target.value,
-                  },
-                });
-              }}
-            />
-          </div>
+        <div className={`${carbonPrefix}--col-lg-3`}>
+          <UserProfileImage
+            backgroundColor="light-cyan"
+            theme="light"
+            size="xlg"
+            initials="CC"
+            imageDescription="blank"
+            image={costaPic}
+          />
+        </div>
+        <div className={`${carbonPrefix}--col-lg-10`}>
+          <TextInput
+            labelText="Author"
+            id="tearsheet-multi-step-story-text-input-multi-step-1-input-3"
+            value={editValues.topic.author}
+            name="author"
+            placeholder="Enter topic version"
+            onChange={(event) => {
+              setEditValues({
+                ...editValues,
+                topic: {
+                  ...editValues.topic,
+                  [event.target.name]: event.target.value,
+                },
+              });
+            }}
+          />
         </div>
       </FormGroup>
 
@@ -162,6 +160,7 @@ const SidePanel = (props) => {
         <Row>
           <Column xlg={12} lg={12} md={12}>
             <NumberInput
+              iconDescription="Choose a number"
               id="carbon-number"
               min={1}
               max={100}

@@ -10,7 +10,6 @@ import {
   DOCUMENT_POSITION_BROAD_FOLLOWING,
   selectorTabbable,
 } from './keyboardNavigation';
-
 import { carbon } from '../../../settings';
 
 /**

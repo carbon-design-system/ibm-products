@@ -6,6 +6,7 @@
  */
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { ActionBarItem } from '.';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg, carbon } from '../../settings';
@@ -18,11 +19,17 @@ const componentName = ActionBarItem.displayName;
 const className = `class-${uuidv4()}`;
 const content = `This is example content: ${uuidv4()}`;
 const dataTestId = uuidv4();
+const testLabel = 'Test label';
 
 describe(ActionBarItem.displayName, () => {
-  it('has no accessibility violations', async () => {
-    const { container } = render(<ActionBarItem>{content}</ActionBarItem>);
-
+  it.skip('has no accessibility violations', async () => {
+    const { container } = render(
+      <main>
+        <ActionBarItem label={testLabel}>{content}</ActionBarItem>
+      </main>
+    );
+    userEvent.tab();
+    expect(screen.getByText(content)).toHaveFocus();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
@@ -31,38 +38,47 @@ describe(ActionBarItem.displayName, () => {
     const myOnClick = jest.fn();
 
     // not enough room so should see an overflow.
-    render(<ActionBarItem onClick={myOnClick}>{content}</ActionBarItem>);
-
-    const btn = screen.getByText(content);
-    expect(btn).toHaveClass(`${carbon.prefix}--btn`);
-
-    click(btn);
-    expect(myOnClick).toBeCalled();
-  });
-
-  it('adds user classes', () => {
-    render(<ActionBarItem className={className}>{content}</ActionBarItem>);
-    const btn = screen.getByText(content);
-    expect(btn).toHaveClass(blockClass);
-    expect(btn).toHaveClass(className);
-  });
-
-  it('ignores user size and type settings', () => {
-    render(
-      <ActionBarItem size="lg" type="submit">
+    const { container } = render(
+      <ActionBarItem label={testLabel} onClick={myOnClick}>
         {content}
       </ActionBarItem>
     );
 
-    const btn = screen.getByText(content);
-    expect(btn).not.toHaveClass(`${carbon.prefix}--btn--lg`);
-    expect(btn).toHaveClass(`${carbon.prefix}--btn--md`);
-    expect(btn).toHaveAttribute('type', 'button');
+    const actionBarItemElement = container.querySelector(`.${blockClass}`);
+    expect(actionBarItemElement).toHaveClass(`${carbon.prefix}--btn`);
+
+    click(actionBarItemElement);
+    expect(myOnClick).toBeCalled();
+  });
+
+  it('adds user classes', () => {
+    const { container } = render(
+      <ActionBarItem label={testLabel} className={className}>
+        {content}
+      </ActionBarItem>
+    );
+    const actionBarItemElement = container.querySelector(`.${blockClass}`);
+    expect(actionBarItemElement).toHaveClass(blockClass);
+    expect(actionBarItemElement).toHaveClass(className);
+  });
+
+  it('ignores user size and type settings', () => {
+    const { container } = render(
+      <ActionBarItem label={testLabel} size="lg" type="submit">
+        {content}
+      </ActionBarItem>
+    );
+    const actionBarItemElement = container.querySelector(`.${blockClass}`);
+    expect(actionBarItemElement).not.toHaveClass(`${carbon.prefix}--btn--lg`);
+    expect(actionBarItemElement).toHaveClass(`${carbon.prefix}--btn--md`);
+    expect(actionBarItemElement).toHaveAttribute('type', 'button');
   });
 
   it('adds additional properties to the containing node', () => {
     const { container } = render(
-      <ActionBarItem data-testid={dataTestId}>{content}</ActionBarItem>
+      <ActionBarItem label={testLabel} data-testid={dataTestId}>
+        {content}
+      </ActionBarItem>
     );
 
     expect(
@@ -72,7 +88,11 @@ describe(ActionBarItem.displayName, () => {
 
   it('forwards a ref to the block element', () => {
     const ref = React.createRef();
-    render(<ActionBarItem ref={ref}>{content}</ActionBarItem>);
+    render(
+      <ActionBarItem label={testLabel} ref={ref}>
+        {content}
+      </ActionBarItem>
+    );
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
   });
 });

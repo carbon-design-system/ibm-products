@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,7 +9,7 @@ import React from 'react';
 
 import { StatusIcon } from '.';
 import mdx from './StatusIcon.mdx';
-import styles from './_storybook-styles.scss'; // import storybook which includes component and additional storybook styles
+// import styles from './_storybook-styles.scss'; // import storybook which includes component and additional storybook styles
 import {
   getStoryTitle,
   prepareStory,
@@ -22,7 +22,7 @@ export default {
     kind: {
       control: {
         type: 'select',
-        options: [
+        labels: [
           'fatal',
           'critical',
           'major-warning',
@@ -41,17 +41,17 @@ export default {
       control: {
         type: 'select',
       },
-      options: ['sm', 'md', 'lg', 'xlg'],
+      labels: ['sm', 'md', 'lg', 'xl'],
     },
     theme: {
       control: {
         type: 'radio',
       },
-      options: ['light', 'dark'],
+      labels: ['light', 'dark'],
     },
   },
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },

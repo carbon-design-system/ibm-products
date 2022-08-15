@@ -17,16 +17,9 @@ import '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import {
-  User20,
-  User24,
-  User32,
-  Group20,
-  Group24,
-  Group32,
-} from '@carbon/icons-react';
+import { User, Group } from '@carbon/icons-react';
 
-import { TooltipIcon } from 'carbon-components-react';
+import { IconButton } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--user-profile-image`;
@@ -57,14 +50,14 @@ export let UserProfileImage = React.forwardRef(
   ) => {
     const icons = {
       user: {
-        md: User20,
-        lg: User24,
-        xlg: User32,
+        md: (props) => <User size={20} {...props} />,
+        lg: (props) => <User size={24} {...props} />,
+        xl: (props) => <User size={32} {...props} />,
       },
       group: {
-        md: Group20,
-        lg: Group24,
-        xlg: Group32,
+        md: (props) => <Group size={20} {...props} />,
+        lg: (props) => <Group size={24} {...props} />,
+        xl: (props) => <Group size={32} {...props} />,
       },
     };
 
@@ -145,12 +138,13 @@ export let UserProfileImage = React.forwardRef(
     return (
       FillItem &&
       (tooltipText ? (
-        <TooltipIcon
-          tooltipText={tooltipText}
+        <IconButton
+          label={tooltipText}
           className={`${blockClass}__tooltip`}
+          kind="ghost"
         >
           {renderUserProfileImage()}
-        </TooltipIcon>
+        </IconButton>
       ) : (
         renderUserProfileImage()
       ))
@@ -191,7 +185,7 @@ UserProfileImage.propTypes = {
   /**
    * Provide a custom icon to use if you need to use an icon other than the included ones
    */
-  icon: PropTypes.object,
+  icon: PropTypes.func,
 
   /**
    * When passing the image prop, supply a full path to the image to be displayed.
@@ -216,7 +210,7 @@ UserProfileImage.propTypes = {
   /**
    * Set the size of the avatar circle
    */
-  size: PropTypes.oneOf(['xlg', 'lg', 'md']).isRequired,
+  size: PropTypes.oneOf(['xl', 'lg', 'md']).isRequired,
 
   /**
    * Set theme in which the component will be rendered

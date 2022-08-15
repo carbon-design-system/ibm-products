@@ -9,13 +9,13 @@ import { _4K16 } from '@carbon/icons-react';
 import React, { useEffect, useState, useRef } from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { Modal, RadioButton, RadioButtonGroup } from 'carbon-components-react';
+import { Modal, RadioButton, RadioButtonGroup } from '@carbon/react';
 import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { ModifiedTabs } from '.';
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+// import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 const commonStoryCode = {
   actionCloseTab: action('onCloseTab'),
@@ -26,7 +26,7 @@ const commonStoryCode = {
       {
         id: `tab-${tabId}`,
         label: `Tab ${tabId}`,
-        content: (
+        content: () => (
           <div style={{ color: '#00ff00' }}>Content for tab {tabId}</div>
         ),
       },
@@ -37,13 +37,14 @@ const commonStoryCode = {
 export default {
   title: getStoryTitle(ModifiedTabs.displayName),
   component: ModifiedTabs,
-  parameters: { styles },
+  parameters: {},
 };
 
 const Template = (args) => {
   // tabs handling code
   const [tabs, setTabs] = useState([]);
   const nextTabId = useRef(1);
+  const testRef = useRef();
 
   const { actionCloseTab, actionNewTab, addTab } = commonStoryCode;
 
@@ -80,6 +81,7 @@ const Template = (args) => {
         tabs={tabs}
         onCloseTab={handleCloseTab}
         onNewTab={handleNewTab}
+        ref={testRef}
       />
     </div>
   );
@@ -90,6 +92,7 @@ export const Default = prepareStory(Template, {
   args: {
     newTabLabel: 'Add new tab',
     newTabContent: <div>Your new tab is being prepared...</div>,
+    tabListAriaLabel: 'Modified tab list example',
   },
 });
 
@@ -187,6 +190,7 @@ export const WithExternalSavePrompt = prepareStory(
       props: {
         newTabLabel: 'Add new tab',
         newTabContent: <div>Your new tab is being prepared...</div>,
+        tabListAriaLabel: 'Modified tab list example',
       },
     },
   }

@@ -14,7 +14,7 @@ import {
 import { Saving } from '.';
 import mdx from './Saving.mdx';
 import wait from '../../global/js/utils/wait';
-import { TextArea } from 'carbon-components-react';
+import { TextArea } from '@carbon/react';
 
 export default {
   title: getStoryTitle(Saving.displayName),

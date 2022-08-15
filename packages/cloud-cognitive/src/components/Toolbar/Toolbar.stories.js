@@ -6,36 +6,32 @@
  */
 
 import {
-  AlignHorizontalCenter16,
-  ColorPalette16,
-  CopyFile16,
-  Draggable16,
-  Move16,
-  Minimize16,
-  OpenPanelLeft16,
-  OpenPanelRight16,
-  Pin16,
-  Printer16,
-  Save16,
-  Share16,
-  Undo16,
-  Upload16,
-  Redo16,
-  Rotate16,
-  RulerAlt16,
-  SettingsAdjust16,
-  Table16,
-  TextAlignCenter16,
-  TextCreation16,
-  ZoomIn16,
-  ZoomOut16,
+  AlignHorizontalCenter,
+  ColorPalette,
+  CopyFile,
+  Draggable,
+  Move,
+  Minimize,
+  OpenPanelLeft,
+  OpenPanelRight,
+  Pin,
+  Printer,
+  Save,
+  Share,
+  Undo,
+  Upload,
+  Redo,
+  Rotate,
+  RulerAlt,
+  SettingsAdjust,
+  Table,
+  TextAlignCenter,
+  TextCreation,
+  ZoomIn,
+  ZoomOut,
 } from '@carbon/icons-react';
 
-import {
-  Dropdown,
-  OverflowMenu,
-  OverflowMenuItem,
-} from 'carbon-components-react';
+import { Dropdown, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 import React, { useState } from 'react';
 
@@ -67,29 +63,65 @@ function _Toolbar(args) {
   return (
     <Toolbar {...args}>
       <ToolbarGroup>
-        <ToolbarButton iconDescription="Save" renderIcon={Save16} />
-        <ToolbarButton iconDescription="Share" renderIcon={Share16} />
-        <ToolbarButton iconDescription="Upload" renderIcon={Upload16} />
-        <ToolbarButton iconDescription="Print" renderIcon={Printer16} />
-      </ToolbarGroup>
-
-      <ToolbarGroup>
-        <ToolbarButton iconDescription="Undo" renderIcon={Undo16} />
-        <ToolbarButton iconDescription="Redo" renderIcon={Redo16} />
-        <ToolbarButton iconDescription="Zoom in" renderIcon={ZoomIn16} />
-        <ToolbarButton iconDescription="Zoom out" renderIcon={ZoomOut16} />
-        <ToolbarButton iconDescription="Minimize" renderIcon={Minimize16} />
-
         <ToolbarButton
-          iconDescription="Align horizontal center"
-          renderIcon={AlignHorizontalCenter16}
+          iconDescription="Save"
+          renderIcon={(props) => <Save size={16} {...props} />}
+        />
+        <ToolbarButton
+          iconDescription="Share"
+          renderIcon={(props) => <Share size={16} {...props} />}
+        />
+        <ToolbarButton
+          iconDescription="Upload"
+          renderIcon={(props) => <Upload size={16} {...props} />}
+        />
+        <ToolbarButton
+          iconDescription="Print"
+          renderIcon={(props) => <Printer size={16} {...props} />}
         />
       </ToolbarGroup>
 
       <ToolbarGroup>
-        <ToolbarButton iconDescription="Ruler" renderIcon={RulerAlt16} />
-        <ToolbarButton iconDescription="Pin" renderIcon={Pin16} />
-        <ToolbarButton iconDescription="Copy file" renderIcon={CopyFile16} />
+        <ToolbarButton
+          iconDescription="Undo"
+          renderIcon={(props) => <Undo size={16} {...props} />}
+        />
+        <ToolbarButton
+          iconDescription="Redo"
+          renderIcon={(props) => <Redo size={16} {...props} />}
+        />
+        <ToolbarButton
+          iconDescription="Zoom in"
+          renderIcon={(props) => <ZoomIn size={16} {...props} />}
+        />
+        <ToolbarButton
+          iconDescription="Zoom out"
+          renderIcon={(props) => <ZoomOut size={16} {...props} />}
+        />
+        <ToolbarButton
+          iconDescription="Minimize"
+          renderIcon={(props) => <Minimize size={16} {...props} />}
+        />
+
+        <ToolbarButton
+          iconDescription="Align horizontal center"
+          renderIcon={(props) => <AlignHorizontalCenter size={16} {...props} />}
+        />
+      </ToolbarGroup>
+
+      <ToolbarGroup>
+        <ToolbarButton
+          iconDescription="Ruler"
+          renderIcon={(props) => <RulerAlt size={16} {...props} />}
+        />
+        <ToolbarButton
+          iconDescription="Pin"
+          renderIcon={(props) => <Pin size={16} {...props} />}
+        />
+        <ToolbarButton
+          iconDescription="Copy file"
+          renderIcon={(props) => <CopyFile size={16} {...props} />}
+        />
       </ToolbarGroup>
 
       <ToolbarGroup>
@@ -105,13 +137,13 @@ function _Toolbar(args) {
       <ToolbarGroup>
         <ToolbarButton
           iconDescription="Text align center"
-          renderIcon={TextAlignCenter16}
+          renderIcon={(props) => <TextAlignCenter size={16} {...props} />}
           caret
         />
       </ToolbarGroup>
 
       <ToolbarGroup>
-        <OverflowMenu flipped>
+        <OverflowMenu ariaLabel="List" flipped>
           <OverflowMenuItem itemText="Color palette" />
           <OverflowMenuItem itemText="Text creation" />
           <OverflowMenuItem itemText="Bulleted list" />
@@ -120,11 +152,14 @@ function _Toolbar(args) {
       </ToolbarGroup>
 
       <ToolbarGroup>
-        <ToolbarButton iconDescription="Table" renderIcon={Table16} />
+        <ToolbarButton
+          iconDescription="Table"
+          renderIcon={(props) => <Table size={16} {...props} />}
+        />
 
         <ToolbarButton
           iconDescription="Settings adjust"
-          renderIcon={SettingsAdjust16}
+          renderIcon={(props) => <SettingsAdjust size={16} {...props} />}
         />
       </ToolbarGroup>
     </Toolbar>
@@ -141,44 +176,65 @@ function vertical(args) {
   return (
     <Toolbar {...args}>
       <ToolbarGroup>
-        <ToolbarButton iconDescription="Drag" renderIcon={Draggable16} />
+        <ToolbarButton
+          iconDescription="Drag"
+          renderIcon={(props) => <Draggable size={16} {...props} />}
+        />
       </ToolbarGroup>
 
       <ToolbarGroup>
-        <ToolbarButton iconDescription="Ruler" renderIcon={RulerAlt16} />
-        <ToolbarButton iconDescription="Pin" renderIcon={Pin16} />
+        <ToolbarButton
+          iconDescription="Ruler"
+          renderIcon={(props) => <RulerAlt size={16} {...props} />}
+        />
+        <ToolbarButton
+          iconDescription="Pin"
+          renderIcon={(props) => <Pin size={16} {...props} />}
+        />
 
         <ToolbarButton
           iconDescription="Color palette"
-          renderIcon={ColorPalette16}
+          renderIcon={(props) => <ColorPalette size={16} {...props} />}
         />
 
         <ToolbarButton
           iconDescription="Text creation"
-          renderIcon={TextCreation16}
+          renderIcon={(props) => <TextCreation size={16} {...props} />}
         />
       </ToolbarGroup>
 
       <ToolbarGroup>
         <ToolbarButton
           iconDescription="Open panel left"
-          renderIcon={OpenPanelLeft16}
+          renderIcon={(props) => <OpenPanelLeft size={16} {...props} />}
         />
 
         <ToolbarButton
           iconDescription="Open panel right"
-          renderIcon={OpenPanelRight16}
+          renderIcon={(props) => <OpenPanelRight size={16} {...props} />}
         />
       </ToolbarGroup>
 
       <ToolbarGroup>
-        <ToolbarButton iconDescription="Move" renderIcon={Move16} />
-        <ToolbarButton iconDescription="Rotate" renderIcon={Rotate16} />
+        <ToolbarButton
+          iconDescription="Move"
+          renderIcon={(props) => <Move size={16} {...props} />}
+        />
+        <ToolbarButton
+          iconDescription="Rotate"
+          renderIcon={(props) => <Rotate size={16} {...props} />}
+        />
       </ToolbarGroup>
 
       <ToolbarGroup>
-        <ToolbarButton iconDescription="Zoom in" renderIcon={ZoomIn16} />
-        <ToolbarButton iconDescription="Zoom out" renderIcon={ZoomOut16} />
+        <ToolbarButton
+          iconDescription="Zoom in"
+          renderIcon={(props) => <ZoomIn size={16} {...props} />}
+        />
+        <ToolbarButton
+          iconDescription="Zoom out"
+          renderIcon={(props) => <ZoomOut size={16} {...props} />}
+        />
       </ToolbarGroup>
     </Toolbar>
   );

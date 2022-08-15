@@ -17,8 +17,7 @@ import {
   TearsheetNarrow,
   TearsheetWide,
 } from './components';
-import { carbon } from '../../../cloud-cognitive/src/settings';
-//import { CardData } from './data';
+import { Column } from '@carbon/react';
 
 const App = () => {
   const [cards, setCards] = useState([]);
@@ -55,10 +54,6 @@ const App = () => {
     setCardToEdit,
   };
   const initialCardsToDisplay = 21;
-
-  // useEffect(() => {
-  //   console.log('updated', cardToEdit)
-  // }, [cardToEdit]);
 
   useEffect(() => {
     let tmpCards = [];
@@ -117,37 +112,28 @@ const App = () => {
         setIsOpen={setWideTearsheetOpen}
       />
 
-      <div className={`${carbon.prefix}--grid card-story`}>
-        <Cascade>
-          <div className={`${carbon.prefix}--row`}>
-            {/* {
-          getCards()
-        }  */}
-            {cards.map((card, index) => {
-              // console.log('card info', card);
-              return (
-                <div
-                  key={card.topic.name}
-                  className={`${carbon.prefix}--col-lg-4`}
-                  style={{
-                    // stylelint-disable-next-line carbon/layout-token-use
-                    marginTop: '36px',
-                  }}
-                >
-                  {/* <Card data={CardData} actions={actions} config={componentConfig} index={index + 1} /> */}
-                  <ProductiveCard
-                    data={cards[index]}
-                    index={index}
-                    cards={cards}
-                    actions={actions}
-                    config={componentConfig}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </Cascade>
-      </div>
+      <Cascade grid>
+        {cards.map((card, index) => {
+          return (
+            <Column
+              key={card.topic.name}
+              lg={4}
+              style={{
+                // stylelint-disable-next-line carbon/layout-token-use
+                marginTop: '36px',
+              }}
+            >
+              <ProductiveCard
+                data={cards[index]}
+                index={index}
+                cards={cards}
+                actions={actions}
+                config={componentConfig}
+              />
+            </Column>
+          );
+        })}
+      </Cascade>
     </div>
   );
 };

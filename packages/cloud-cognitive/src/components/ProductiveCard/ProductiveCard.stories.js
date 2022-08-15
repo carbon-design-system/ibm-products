@@ -6,9 +6,9 @@
 //
 
 import React from 'react';
-import cx from 'classnames';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { TrashCan16, Edit16 } from '@carbon/icons-react';
+import { TrashCan, Edit } from '@carbon/icons-react';
+import { Grid, Column, usePrefix } from '@carbon/react';
 import {
   getStoryTitle,
   prepareStory,
@@ -16,7 +16,6 @@ import {
 import { ProductiveCard } from '.';
 import mdx from './ProductiveCard.mdx';
 import { action } from '@storybook/addon-actions';
-import { carbon } from '../../settings';
 
 export default {
   title: getStoryTitle(ProductiveCard.displayName),
@@ -36,9 +35,12 @@ export default {
     },
   },
   decorators: [
-    (Story) => (
-      <div className={`${carbon.prefix}--grid card-story`}>{Story()}</div>
-    ),
+    (Story) => {
+      const carbonPrefix = usePrefix();
+      return (
+        <div className={`${carbonPrefix}--grid card-story`}>{Story()}</div>
+      );
+    },
   ],
 };
 
@@ -55,31 +57,27 @@ const defaultProps = {
   actionIcons: [
     {
       id: '1',
-      icon: Edit16,
+      icon: (props) => <Edit size={16} {...props} />,
       onClick: action('on click'),
-      onKeyDown: action('on keydown'),
       iconDescription: 'Edit',
     },
     {
       id: '2',
-      icon: TrashCan16,
+      icon: (props) => <TrashCan size={16} {...props} />,
       onClick: action('on click'),
-      onKeyDown: action('on keydown'),
       iconDescription: 'Delete',
     },
   ],
 };
 
-const getColClasses = (col) => cx(`${carbon.prefix}--col-lg-${col}`);
-
 const Template = (opts) => {
   const { children, columnSize, ...args } = opts;
   return (
-    <div className={`${carbon.prefix}--row`}>
-      <div className={getColClasses(columnSize)}>
+    <Grid>
+      <Column lg={columnSize}>
         <ProductiveCard {...args}>{children}</ProductiveCard>
-      </div>
-    </div>
+      </Column>
+    </Grid>
   );
 };
 
@@ -116,6 +114,7 @@ export const LabelOnly = prepareStory(Template, {
 export const WithOverflow = prepareStory(Template, {
   args: {
     ...defaultProps,
+    overflowAriaLabel: 'Overflow menu',
     overflowActions: [
       {
         id: '1',

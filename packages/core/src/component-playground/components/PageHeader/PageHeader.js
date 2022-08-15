@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { PageHeader as CCPageHeader } from '../../../../../cloud-cognitive/src';
-import { Lightning16, Bee24 } from '@carbon/icons-react';
+import { Lightning, Bee } from '@carbon/icons-react';
 
 const PageHeader = (props) => {
   const content = (
@@ -37,7 +37,10 @@ const PageHeader = (props) => {
 
   const actionBarItems = [1, 2, 3, 4].map((item, index) => ({
     key: `${index}_action_bar_item`,
-    renderIcon: index % 2 ? Lightning16 : Bee24,
+    renderIcon:
+      index % 2
+        ? (props) => <Lightning size={16} {...props} />
+        : (props) => <Bee size={16} {...props} />,
     iconDescription: `Action ${item}`,
     onClick: () => {},
   }));

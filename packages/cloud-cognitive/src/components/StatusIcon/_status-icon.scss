@@ -1,57 +1,58 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '@carbon/react/scss/colors' as *;
+@use '../../global/styles/project-settings' as *;
 
 $colors: (
   fatal: (
-    light: $carbon--black-100,
-    dark: $carbon--gray-50,
+    light: $black-100,
+    dark: $gray-50,
   ),
   critical: (
-    light: $carbon--red-60,
-    dark: $carbon--red-50,
+    light: $red-60,
+    dark: $red-50,
   ),
   major-warning: (
-    light: $carbon--orange-40,
-    dark: $carbon--orange-40,
+    light: $orange-40,
+    dark: $orange-40,
   ),
   minor-warning: (
-    light: $carbon--yellow-20,
-    dark: $carbon--yellow-20,
+    light: $yellow-20,
+    dark: $yellow-20,
   ),
   undefined: (
-    light: $carbon--purple-60,
-    dark: $carbon--purple-50,
+    light: $purple-60,
+    dark: $purple-50,
   ),
   unknown: (
-    light: $carbon--gray-60,
-    dark: $carbon--gray-50,
+    light: $gray-60,
+    dark: $gray-50,
   ),
   normal: (
-    light: $carbon--green-60,
-    dark: $carbon--green-50,
+    light: $green-60,
+    dark: $green-50,
   ),
   info: (
-    light: $carbon--blue-60,
-    dark: $carbon--blue-50,
+    light: $blue-60,
+    dark: $blue-50,
   ),
   in-progress: (
-    light: $carbon--blue-60,
-    dark: $carbon--blue-50,
+    light: $blue-60,
+    dark: $blue-50,
   ),
   running: (
-    light: $carbon--green-60,
-    dark: $carbon--green-50,
+    light: $green-60,
+    dark: $green-50,
   ),
   pending: (
-    light: $carbon--gray-60,
-    dark: $carbon--gray-50,
+    light: $gray-60,
+    dark: $gray-50,
   ),
 );
 
@@ -96,7 +97,7 @@ $block-class: #{$pkg-prefix}--status-icon;
 .#{$block-class}--light.#{$block-class}--light-minor-warning,
 .#{$block-class}--dark.#{$block-class}--dark-minor-warning {
   // stylelint-disable-next-line carbon/theme-token-use
-  fill: $carbon--yellow-20;
+  fill: $yellow-20;
 }
 
 .#{$block-class}--light.#{$block-class}--light-major-warning
@@ -106,13 +107,15 @@ $block-class: #{$pkg-prefix}--status-icon;
   path:nth-of-type(1),
 .#{$block-class}--dark.#{$block-class}--dark-minor-warning path:nth-of-type(1) {
   // stylelint-disable-next-line carbon/theme-token-use
-  fill: $carbon--gray-100;
+  fill: $gray-100;
 }
 
 @each $theme in $themes {
   @each $icon in $icons {
     @each $theme-key in $themes {
-      .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger
+      .#{$carbon-prefix}--btn--ghost:not([disabled])
+        .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon},
+      .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger
         .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon},
       .#{$block-class}--#{$theme}.#{$block-class}--#{$theme-key}-#{$icon} {
         @if $icon == in-progress {

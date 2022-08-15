@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,8 +11,8 @@ import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
 
-import { Tab, Tabs } from 'carbon-components-react';
-import { Lightning16, Bee32 } from '@carbon/icons-react';
+import { Tab, Tabs, TabList } from '@carbon/react';
+import { Lightning, Bee } from '@carbon/icons-react';
 
 import { PageHeader } from '.';
 import {
@@ -23,7 +23,7 @@ import {
   required,
 } from '../../global/js/utils/test-helper';
 
-import { types as tagTypes } from 'carbon-components-react/lib/components/Tag/Tag.js';
+import { TYPES as tagTypes } from '../TagSet/constants';
 
 const { prefix } = pkg;
 
@@ -34,8 +34,9 @@ const actionBarOverflowAriaLabel = 'Show additional action bar items';
 
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
   key: `a-key-${item}`,
-  renderIcon: Lightning16,
+  renderIcon: (props) => <Lightning size={16} {...props} />,
   iconDescription: `Action ${item}`,
+  label: `Action ${item}`,
   onClick: () => {},
 }));
 
@@ -82,10 +83,12 @@ const pageActionsCustom = {
 const subtitle = 'Optional subtitle if necessary';
 const navigation = (
   <Tabs data-testid="tabs">
-    <Tab label="Tab 1" />
-    <Tab label="Tab 2" />
-    <Tab label="Tab 3" />
-    <Tab label="Tab 4" />
+    <TabList aria-label="Tab list">
+      <Tab>Tab 1</Tab>
+      <Tab>Tab 2</Tab>
+      <Tab>Tab 3</Tab>
+      <Tab>Tab 4</Tab>
+    </TabList>
   </Tabs>
 );
 
@@ -107,7 +110,11 @@ const titleUserDefined = {
   breadcrumbContent: <span>{titleUserDefinedStrings.breadcrumbContent}</span>,
   asText: titleUserDefinedStrings.asText,
 };
-const titleObj = { text: 'Page title', loading: false, icon: Bee32 };
+const titleObj = {
+  text: 'Page title',
+  loading: false,
+  icon: (props) => <Bee size={32} {...props} />,
+};
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { prepareProps } from '../../global/js/utils/props-helper';
@@ -292,7 +299,9 @@ describe('PageHeader', () => {
         selector: `.${prefix}--breadcrumb-with-overflow__breadcrumb-container:not(.${prefix}--breadcrumb-with-overflow__breadcrumb-container--hidden) .${carbon.prefix}--link`,
       })
     ).toHaveLength(3);
-    expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
+    expect(document.querySelectorAll(`.${carbon.prefix}--tabs`)).toHaveLength(
+      1
+    );
     expect(screen.getAllByText(/Tab [1-4]/)).toHaveLength(4);
     expect(
       document.querySelectorAll(`.${blockClass}__page-actions`)
@@ -302,7 +311,6 @@ describe('PageHeader', () => {
       1
     );
     expect(screen.getByText(subtitle).textContent).toEqual(subtitle);
-    expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
     expect(
       screen.getAllByText('A tag', {
         // selector need to ignore sizing items
@@ -427,7 +435,9 @@ describe('PageHeader', () => {
     const { navigation } = testProps;
     render(<PageHeader {...{ navigation, withoutBackground: true }} />);
 
-    expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
+    expect(document.querySelectorAll(`.${carbon.prefix}--tabs`)).toHaveLength(
+      1
+    );
   });
 
   test('Navigation row renders when Tags but no Navigation', () => {
@@ -600,6 +610,7 @@ describe('PageHeader', () => {
       [
         required('actionBarOverflowAriaLabel', 'PageHeader'),
         required('overflowAriaLabel', 'ActionBar'),
+        required('ariaLabel', 'OverflowMenu'),
       ],
       () => {
         const { title } = testProps;
@@ -711,11 +722,11 @@ describe('PageHeader', () => {
 
   test('Has the same tag types as Carbon Tag', () => {
     // Same number of tags
-    expect(PageHeader.tagTypes.length).toEqual(tagTypes.length);
+    expect(PageHeader.tagTypes.length).toEqual(Object.keys(tagTypes).length);
 
     // Same value for each tag
     for (let i = 0; i < tagTypes.length; i++) {
-      expect(PageHeader.tagTypes).toContain(tagTypes[i]);
+      expect(PageHeader.tagTypes).toContain(Object.values(tagTypes)[i]);
     }
   });
 });

@@ -6,11 +6,7 @@
  */
 
 import React from 'react';
-import {
-  Header,
-  HeaderContainer,
-  HeaderName,
-} from 'carbon-components-react/lib/components/UIShell';
+import { Header, HeaderContainer, HeaderName } from '@carbon/react';
 
 const GlobalHeader = () => {
   return (

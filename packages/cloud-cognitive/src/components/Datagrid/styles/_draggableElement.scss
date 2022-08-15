@@ -24,14 +24,18 @@ svg.#{$block-class}__draggable-handleStyle.disable {
 
 .#{$block-class}__draggable-handleHolder {
   display: flex;
-  height: $spacing-07;
-  padding-left: $spacing-02;
-  margin-bottom: $spacing-03;
-  background: $ui-02;
+  height: $spacing-09;
+  padding-left: $spacing-05;
+  border-bottom: 1px solid $layer-active;
+  background-color: $layer;
   &.#{$block-class}__draggable-handleHolder-isOver {
     border: 2px dashed $focus;
     background-color: $highlight;
   }
+}
+
+.#{$block-class}__draggable-handleHolder:hover {
+  background-color: $layer-hover;
 }
 
 .#{$block-class}__draggable-handleHolder-droppable {
@@ -55,4 +59,20 @@ svg.#{$block-class}__draggable-handleStyle.disable {
   clip: rect(0 0 0 0);
   text-transform: none;
   white-space: nowrap;
+}
+
+[selected='true'] {
+  background-color: $layer-selected;
+}
+
+[selected='true']:hover {
+  background-color: $hover-selected-ui;
+}
+
+.-selected {
+  background-color: $layer-selected;
+}
+
+.-selected:hover {
+  background-color: $hover-selected-ui;
 }

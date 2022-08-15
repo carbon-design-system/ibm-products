@@ -13,22 +13,35 @@
     position: inherit;
     display: flex;
     flex-flow: column;
-    /* stylelint-disable-next-line declaration-no-important */
-    padding-top: 0 !important;
+    padding: 0;
+    margin: 0;
   }
 }
 
-.#{$block-class}__customize-columns-checkbox {
+.bx--form-item.bx--checkbox-wrapper.#{$block-class}__customize-columns-checkbox-wrapper {
+  margin-bottom: 0;
+}
+.#{$block-class}__customize-columns-checkbox-wrapper {
   display: flex;
   justify-content: center;
-  /* stylelint-disable-next-line declaration-no-important */
-  margin-bottom: 0 !important; // reset the bottom provided by carbon
 }
 
 .#{$block-class}__customize-columns-modal--actions {
   display: flex;
+  height: $spacing-09;
   flex-flow: row;
-  margin-bottom: $spacing-06;
+  background-color: $field-02;
+}
+
+.#{$block-class}__customize-columns-modal--actions input[role='searchbox'] {
+  height: $spacing-09;
+  padding-left: $spacing-08;
+  border-bottom: none;
+}
+div.#{$block-class}__customize-columns-modal--actions,
+div.bx--search-magnifier,
+.bx--search-magnifier-icon {
+  left: $spacing-06;
 }
 
 .#{$block-class}__customize-columns-modal--actions > button {
@@ -36,7 +49,9 @@
 }
 
 .#{$block-class}__customize-columns-instructions {
+  padding-left: $spacing-05;
   margin-bottom: $spacing-06;
+
   @include carbon--type-style('body-long-01');
 
   color: $text-01;
@@ -45,4 +60,23 @@
 .#{$block-class}__customize-columns-column-list {
   position: relative; // needed for the react-dnd, otherwise the drag preview will not work correctly
   overflow: auto;
+}
+
+#customize-columns-select-all {
+  padding-left: $spacing-08;
+}
+
+.bx--checkbox-label {
+  &.#{$block-class}__customize-columns-checkbox {
+    padding-left: $spacing-07;
+  }
+
+  &.#{$block-class}__customize-columns-select-all {
+    padding-left: $spacing-07;
+    @include carbon--font-weight('semibold');
+  }
+}
+
+#bx--modal-body--modal-2 {
+  margin-bottom: 0;
 }

@@ -54,7 +54,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
 .#{$block-class}.#{$block-class}--with-tabs
   .#{c4p-settings.$carbon-prefix}--modal-content--overflow-indicator {
-  bottom: calc(#{$spacing-09} +#{$spacing-08});
+  // stylelint-disable-next-line carbon/layout-token-use
+  bottom: calc(#{$spacing-09} + #{$spacing-08});
 }
 
 .#{$block-class}

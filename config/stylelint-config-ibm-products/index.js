@@ -71,6 +71,6 @@ module.exports = {
       },
     ],
     'no-duplicate-selectors': null,
-    'annotation-no-unknown': [true, { ignoreAnnotations: ["default"] }]
+    'annotation-no-unknown': [true, { ignoreAnnotations: ['default'] }],
   },
 };

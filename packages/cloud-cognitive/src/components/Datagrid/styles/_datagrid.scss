@@ -503,3 +503,14 @@
     margin: 0;
   }
 }
+
+.#{$block-class} .#{$carbon-prefix}--checkbox-label {
+  &.#{$block-class}__customize-columns-checkbox {
+    padding-left: $spacing-07;
+  }
+
+  &.#{$block-class}__customize-columns-select-all {
+    padding-left: $spacing-07;
+    @include carbon--font-weight('semibold');
+  }
+}

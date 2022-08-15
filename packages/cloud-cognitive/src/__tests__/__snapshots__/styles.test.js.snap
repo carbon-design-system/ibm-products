@@ -41,7 +41,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--about-modal.c4p--about-modal--with-tabs .cds--modal-content--overflow-indicator {
-  bottom: calc(3rem +2.5rem);
+  bottom: calc(3rem + 2.5rem);
 }
 
 .c4p--about-modal .cds--modal-content--overflow-indicator {

@@ -81,14 +81,7 @@ const CustomizeColumnsModal = ({
   };
 
   const getVisibleColumnsCount = useCallback(() => {
-    let result = 0;
-
-    columnObjects.forEach((col) => {
-      if (col.isVisible) {
-        result++;
-      }
-    });
-    return result;
+    return columnObjects.filter((col) => col.isVisible).length;
   }, [columnObjects]);
 
   const string = searchText.trim().toLowerCase();

@@ -6,6 +6,7 @@
 //
 
 // Standard imports.
+@use '@carbon/styles/scss/spacing' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 
@@ -29,6 +30,13 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   :global(.#{c4p-settings.$carbon-prefix}--checkbox) {
     display: none;
   }
+}
+
+.#{$block-class}__datagridWrap
+  .#{c4p-settings.$carbon-prefix}--overflow-menu-options
+  > .#{c4p-settings.$pkg-prefix}--datagrid__row-size-dropdown {
+  left: $spacing-01;
+  width: 112px;
 }
 
 .#{$block-class}__datagridWrap-simple {

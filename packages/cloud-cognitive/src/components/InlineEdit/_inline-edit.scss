@@ -25,7 +25,7 @@
 @mixin input-outline($color: $focus) {
   /* stylelint-disable-next-line carbon/theme-token-use */
   outline: $spacing-01 solid $color;
-  outline-offset: calc(-1 * $spacing-01);
+  outline-offset: calc(-1 * #{$spacing-01});
 
   @media screen and (prefers-contrast) {
     outline-style: dotted;

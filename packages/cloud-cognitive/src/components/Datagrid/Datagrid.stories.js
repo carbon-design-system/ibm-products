@@ -8,9 +8,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
-
 import { getStoryTitle } from '../../global/js/utils/story-helper';
-
 import { action } from '@storybook/addon-actions';
 import { Activity16, Add16 } from '@carbon/icons-react';
 import { DataTable } from 'carbon-components-react';

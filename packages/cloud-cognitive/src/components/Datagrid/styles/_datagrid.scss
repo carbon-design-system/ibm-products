@@ -523,3 +523,34 @@
 .#{$block-class} .#{$pkg-prefix}--button-menu {
   height: $spacing-09;
 }
+
+.#{$carbon-prefix}--body--with-modal-open .#{$block-class}__grid-container {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.#{$block-class}__toolbar-primary-overflow.primary-kind {
+  background-color: $interactive-01;
+}
+
+.#{$block-class}__toolbar-primary-overflow.primary-kind svg {
+  fill: $ui-background;
+}
+
+.#{$block-class}__toolbar-primary-overflow.primary-kind:hover,
+.#{$block-class}__toolbar-primary-overflow.primary-kind.#{$carbon-prefix}--overflow-menu--open:hover,
+.#{$block-class}__toolbar-primary-overflow.primary-kind.#{$carbon-prefix}--overflow-menu--open {
+  background-color: $hover-primary;
+}
+
+.#{$block-class}__toolbar-options.#{$carbon-prefix}--overflow-menu-options::after {
+  background-color: transparent;
+}
+
+.#{$block-class}__mobile-toolbar-modal .#{$carbon-prefix}--modal-container {
+  position: absolute;
+}
+
+.#{$block-class} .#{$carbon-prefix}--modal {
+  width: 100%;
+}

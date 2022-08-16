@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.26.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.25.1...@carbon/ibm-products@1.26.0) (2022-08-16)
+
+
+### Bug Fixes
+
+* **InlineEdit:** fix sass calc issue with carbon token ([#2158](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2158)) ([ac258e6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ac258e664f700819da467ff8d0fc80ad428e6ac4))
+
+
+### Features
+
+* Add Row Action Buttons ([#2168](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2168)) ([d0635bc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d0635bc637a7133eba6321a1b4f597ba3d60d8a4))
+* **Datagrid:** Batch actions ([#2022](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2022)) ([bb7e71b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/bb7e71b3a6b333c8b9ea6c0fb90d02e280042dc0))
+
+
+
+
+
 ## [1.25.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.25.0...@carbon/ibm-products@1.25.1) (2022-08-08)
 
 

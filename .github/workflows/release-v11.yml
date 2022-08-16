@@ -31,7 +31,7 @@ jobs:
         run: yarn
 
       - name: Continuous integration check (includes build)
-        run: yarn ci-check
+        run: yarn ci-check:v11
 
       # Dry run - `yarn lerna version --no-git-tag-version --no-push`
       - name: Publish

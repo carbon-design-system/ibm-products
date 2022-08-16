@@ -13,8 +13,15 @@ import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
 import { action } from '@storybook/addon-actions';
-import { Edit16, TrashCan16 } from '@carbon/icons-react';
-import { Activity, Add, Restart, Download, Filter } from '@carbon/icons-react';
+import {
+  Activity,
+  Add,
+  Download,
+  Edit,
+  Filter,
+  Restart,
+  TrashCan,
+} from '@carbon/icons-react';
 import { DataTable, Button, Pagination } from '@carbon/react';
 
 import {
@@ -1237,14 +1244,14 @@ export const RowActionButton = () => {
         {
           id: 'edit',
           itemText: 'Edit',
-          icon: Edit16,
+          icon: Edit,
           onClick: onActionClick,
         },
 
         {
           id: 'delete',
           itemText: 'Delete',
-          icon: TrashCan16,
+          icon: TrashCan,
           isDelete: true,
           onClick: onActionClick,
         },

@@ -3537,7 +3537,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit.c4p--inline-edit--invalid {
   /* stylelint-disable-next-line carbon/theme-token-use */
   outline: 0.125rem solid var(--cds-support-error, #da1e28);
-  outline-offset: -0.125rem;
+  outline-offset: calc(-1 * 0.125rem);
 }
 @media screen and (prefers-contrast) {
   .c4p--inline-edit.c4p--inline-edit--invalid {
@@ -3547,7 +3547,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit.c4p--inline-edit--editing {
   /* stylelint-disable-next-line carbon/theme-token-use */
   outline: 0.125rem solid var(--cds-focus, #0f62fe);
-  outline-offset: -0.125rem;
+  outline-offset: calc(-1 * 0.125rem);
   background-color: var(--cds-layer-01, #f4f4f4);
 }
 @media screen and (prefers-contrast) {

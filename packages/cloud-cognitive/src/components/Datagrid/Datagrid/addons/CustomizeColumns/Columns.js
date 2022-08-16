@@ -16,6 +16,7 @@ import update from 'immutability-helper';
 import { pkg } from '../../../../../settings';
 import DraggableElement from '../../DraggableElement';
 import { isColumnVisible } from './common';
+import classNames from 'classnames';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -57,31 +58,6 @@ const Columns = ({
     [columns, setColumnsObject]
   );
 
-  const setColumnStatus = (id, isVisible) => {
-    let list = document.querySelectorAll(
-      `li.${blockClass}__draggable-handleHolder`
-    );
-
-    list.forEach((li, i) => {
-      if (!columns[i].id.includes(id)) {
-        return;
-      }
-      li.setAttribute('selected', isVisible);
-    });
-  };
-
-  const initializeList = () => {
-    columns.forEach((col) => {
-      setColumnStatus(col.id, col.isVisible);
-    });
-  };
-
-  const setSelectAllColumnClassName = () => {
-    return `${blockClass}__draggable-handleHolder${
-      getVisibleColumnsCount() > 0 ? ' -selected' : ''
-    }`;
-  };
-
   const setSelectAllCheckBox = () => {
     let checkboxes = document.querySelectorAll(
       `.${blockClass}__customize-columns-modal .bx--checkbox`
@@ -92,14 +68,8 @@ const Columns = ({
       checkboxes[i].checked = selectAll;
       onSelectColumn(columns[i - 1], selectAll);
     }
-    if (getVisibleColumnsCount() == columns.length) {
-      document
-        .querySelectorAll('#customize-columns-select-all')[0]
-        .setAttribute('selected', getVisibleColumnsCount() > 0);
-    }
   };
 
-  initializeList();
   return (
     <div className={`${blockClass}__customize-columns-column-list`}>
       <DndProvider backend={HTML5Backend}>
@@ -138,8 +108,10 @@ const Columns = ({
           </span>
           <div
             id={'customize-columns-select-all'}
-            className={setSelectAllColumnClassName()}
-            selected={'default'}
+            className={classNames(`${blockClass}__draggable-handleHolder`, {
+              ['-selected']: getVisibleColumnsCount() > 0,
+            })}
+            selected={getVisibleColumnsCount() > 0}
           >
             <Checkbox
               wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
@@ -192,6 +164,7 @@ const Columns = ({
                     }
                   }
                 }}
+                selected={isColumnVisible(colDef)}
               >
                 <Checkbox
                   wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}

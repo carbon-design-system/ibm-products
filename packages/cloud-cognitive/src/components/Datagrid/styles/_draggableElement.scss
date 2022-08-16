@@ -34,6 +34,18 @@ svg.#{$block-class}__draggable-handleStyle.disable {
   }
 }
 
+.#{$block-class}__draggable-handleHolder-selected {
+  display: flex;
+  height: $spacing-09;
+  padding-left: $spacing-05;
+  border-bottom: 1px solid $layer-active;
+  background-color: $layer;
+  &.#{$block-class}__draggable-handleHolder-isOver {
+    border: 2px dashed $focus;
+    background-color: $highlight;
+  }
+}
+
 .#{$block-class}__draggable-handleHolder:hover {
   background-color: $layer-hover;
 }

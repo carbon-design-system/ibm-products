@@ -66,6 +66,8 @@ div.#{$carbon-prefix}--search-magnifier,
   padding-left: $spacing-08;
 }
 
-.#{$block-class} .#{$block-class}__customize-columns-modal .#{$carbon-prefix}--modal-content {
+.#{$block-class}
+  .#{$block-class}__customize-columns-modal
+  .#{$carbon-prefix}--modal-content {
   margin-bottom: 0;
 }

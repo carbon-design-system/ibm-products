@@ -30,6 +30,7 @@ const DraggableElement = ({
   onArrowKeyDown,
   isFocused,
   moveElement,
+  selected,
   positionLabel = 'Current position {index} of {total}',
   grabbedLabel = '{itemName} grabbed.',
   droppedLabel = '{itemName} dropped.',
@@ -103,9 +104,10 @@ const DraggableElement = ({
           [`${blockClass}__draggable-handleHolder-isOver`]: isOver && !disabled,
         },
         {
-          [`${blockClass}__wkc-draggable-handleHolder--grabbed`]: isGrabbed,
+          [`${blockClass}__draggable-handleHolder--grabbed`]: isGrabbed,
         },
-        `${blockClass}__draggable-handleHolder`
+        [`${blockClass}__draggable-handleHolder`],
+        { ['-selected']: selected }
       )}
       ref={ref}
       aria-selected={isFocused}
@@ -180,6 +182,7 @@ DraggableElement.propTypes = {
   onArrowKeyDown: PropTypes.func.isRequired,
   onGrab: PropTypes.func.isRequired,
   positionLabel: PropTypes.string,
+  selected: PropTypes.string,
   type: PropTypes.string.isRequired,
 };
 

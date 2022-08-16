@@ -6,6 +6,7 @@
 //
 
 // Standard imports.
+@use '@carbon/styles/scss/spacing' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 
@@ -32,8 +33,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 }
 
 .#{$block-class}__datagridWrap
-  .bx--overflow-menu-options
-  > .c4p--datagrid__row-size-dropdown {
+  .#{c4p-settings.$carbon-prefix}--overflow-menu-options
+  > .#{c4p-settings.$pkg-prefix}--datagrid__row-size-dropdown {
   left: $spacing-01;
   width: 112px;
 }

@@ -454,15 +454,55 @@
   }
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--data-table--selected {
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) {
   position: relative;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--data-table--selected::before {
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)::before {
   position: absolute;
   left: 0;
   width: $spacing-02;
   height: 100%;
   background-color: $background-brand;
   content: '';
+}
+
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$carbon-prefix}--batch-summary__para {
+  white-space: nowrap;
+}
+
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$carbon-prefix}--batch-actions
+  .#{c4p-settings.$carbon-prefix}--batch-actions--active {
+  overflow-x: hidden;
+}
+
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$pkg-prefix}--datagrid__button-menu--icon-only.#{c4p-settings.$pkg-prefix}--button-menu {
+  display: flex;
+  min-width: $spacing-08;
+  justify-content: center;
+  margin-right: $spacing-04;
+}
+
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$pkg-prefix}--datagrid__button-menu {
+  min-width: calc(#{$spacing-12} + #{$spacing-03});
+}
+
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$pkg-prefix}--datagrid__button-menu--icon-only.#{c4p-settings.$pkg-prefix}--button-menu
+  .#{c4p-settings.$pkg-prefix}--button-menu__trigger {
+  display: flex;
+  width: 100%;
+  min-width: $spacing-09;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  .#{c4p-settings.$carbon-prefix}--btn__icon {
+    margin: 0;
+  }
 }

@@ -9,12 +9,12 @@ import React from 'react';
 import cx from 'classnames';
 import { IconSkeleton, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { pkg } from '../../settings';
-
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const useActionsColumn = (hooks) => {
   const useAttachActionsOnInstance = (instance) => {
     const { rowActions, isFetching } = instance;
+
     if (rowActions && Array.isArray(rowActions)) {
       const addActionsMenu = (props, cellData) => {
         const { cell } = cellData;
@@ -24,53 +24,85 @@ const useActionsColumn = (hooks) => {
             props,
             {
               children: (
-                <div className={`${blockClass}__actions-column-content`}>
+                <div className={`${blockClass}__actions-column-contents`}>
                   {isFetching && (
                     <IconSkeleton
                       className={`${blockClass}__actions-column-loading`}
                     />
                   )}
-                  {!isFetching && (
-                    <OverflowMenu
-                      size="sm"
-                      light
-                      flipped
-                      onClick={(e) => e.stopPropagation()}
+                  {!isFetching && rowActions.length <= 2 && (
+                    <div
+                      className={`${blockClass}_actions-column`}
+                      style={{ display: 'flex' }}
                     >
                       {rowActions.map((action) => {
-                        const {
-                          id,
-                          onClick,
-                          shouldHideMenuItem,
-                          shouldDisableMenuItem,
-                          disabled,
-                          ...rest
-                        } = action;
-                        const hidden =
-                          typeof shouldHideMenuItem === 'function' &&
-                          shouldHideMenuItem(row);
-                        // shouldDisableMenuItem will override disabled because it's more specific
-                        // if shouldDisableMenuItem doesn't exists, fall back to disabled
-                        const isDisabledByRow =
-                          typeof shouldDisableMenuItem === 'function'
-                            ? shouldDisableMenuItem(row)
-                            : disabled;
-                        if (hidden) {
-                          return null;
-                        }
+                        const { id, itemText, onClick, icon } = action;
                         return (
-                          <OverflowMenuItem
-                            {...rest}
-                            disabled={isDisabledByRow}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              onClick(id, row, e);
-                            }}
-                            key={id}
-                          />
+                          <div
+                            className={`${blockClass}__actions-column-button`}
+                            key=""
+                          >
+                            <OverflowMenu
+                              renderIcon={icon}
+                              hasIconOnly
+                              light
+                              iconDescription={itemText}
+                              kind="ghost"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onClick(id, row, e);
+                              }}
+                            ></OverflowMenu>
+                          </div>
                         );
                       })}
-                    </OverflowMenu>
+                    </div>
+                  )}
+                  {!isFetching && rowActions.length > 2 && (
+                    <div>
+                      <OverflowMenu
+                        size="sm"
+                        light
+                        flipped
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      >
+                        {rowActions.map((action) => {
+                          const {
+                            id,
+                            onClick,
+                            shouldHideMenuItem,
+                            shouldDisableMenuItem,
+                            disabled,
+                            ...rest
+                          } = action;
+                          const hidden =
+                            typeof shouldHideMenuItem === 'function' &&
+                            shouldHideMenuItem(row);
+                          // shouldDisableMenuItem will override disabled because it's more specific
+                          // if shouldDisableMenuItem doesn't exists, fall back to disabled
+                          const isDisabledByRow =
+                            typeof shouldDisableMenuItem === 'function'
+                              ? shouldDisableMenuItem(row)
+                              : disabled;
+                          if (hidden) {
+                            return null;
+                          }
+                          return (
+                            <OverflowMenuItem
+                              {...rest}
+                              disabled={isDisabledByRow}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onClick(id, row, e);
+                              }}
+                              key={id}
+                            />
+                          );
+                        })}
+                      </OverflowMenu>
+                    </div>
                   )}
                 </div>
               ),

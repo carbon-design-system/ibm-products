@@ -42,7 +42,7 @@ const useHighlightSelection = (hooks) => {
       className: cx(
         `${blockClass}__carbon-row`,
         row.getToggleRowSelectedProps().checked
-          ? `${carbon.prefix}--data-table--selected`
+          ? `${carbon.prefix}--data-table--selected ${blockClass}__active-row`
           : ''
       ),
     },

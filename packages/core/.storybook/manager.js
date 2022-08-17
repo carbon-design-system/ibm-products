@@ -12,11 +12,11 @@ import React from 'react';
 
 import packageInfo from '../../cloud-cognitive/package.json';
 
-const { description } = packageInfo;
+const { description, version } = packageInfo;
 
 addons.setConfig({
   theme: create({
-    brandTitle: `${description} (v11 preview)`,
+    brandTitle: `${description} v${version}`,
   }),
 
   sidebar: {

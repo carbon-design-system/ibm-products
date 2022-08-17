@@ -2,6 +2,8 @@ name: Releases @carbon/ibm-products with v11 support # Builds and releases v11 s
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '30 4 * * TUE' # Release every Tuesday at 4:30am EST
 
 jobs:
   Release_v11:

@@ -46,7 +46,7 @@
   box-shadow: -2px 0 4px 0 rgba($ui-05, 0.25);
   // stylelint-disable-next-line carbon/layout-token-use
   transform: translateX(calc(100% + 6px));
-  // stylelint-disable-next-line carbon/motion-duration-use
+  // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
   transition: 0.3s ease-out;
   visibility: hidden;
 }

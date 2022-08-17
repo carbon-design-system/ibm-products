@@ -14,6 +14,7 @@
 
 .#{$ide-prefix}-create-header {
   padding-bottom: $spacing-05;
+  // stylelint-disable-next-line carbon/motion-easing-use
   transition: all $duration--moderate-02;
 
   &.fixed {
@@ -23,6 +24,7 @@
     padding-bottom: 0;
     background-color: $ui-01;
     box-shadow: inset 0 -1px 0 $ui-03;
+    // stylelint-disable-next-line carbon/motion-easing-use
     transition: all $duration--moderate-02;
 
     @media (prefers-reduced-motion: reduce) {
@@ -40,6 +42,7 @@
     .#{$ide-prefix}-create-heading-heading {
       @include carbon--type-style('body-short-01');
 
+      // stylelint-disable-next-line carbon/motion-easing-use
       transition: all $duration--moderate-02;
     }
 
@@ -52,6 +55,7 @@
       max-width: 100%;
       padding-bottom: $spacing-03;
       color: $text-02;
+      // stylelint-disable-next-line carbon/motion-easing-use
       transition: all $duration--moderate-02;
       @include carbon--type-style('body-short-01');
     }
@@ -62,18 +66,21 @@
       align-items: center;
       padding: $spacing-03;
       border-left: 1px solid $text-02;
-      animation: reveal $duration--moderate-02 $duration--moderate-01;
+      // stylelint-disable-next-line carbon/motion-easing-use
+      animation: $duration--moderate-02 $duration--moderate-01 reveal;
       animation-fill-mode: both;
     }
 
     .#{$prefix}--grid,
     .#{$prefix}--col {
       padding-right: 0;
+      // stylelint-disable-next-line carbon/motion-easing-use
       transition: all $duration--moderate-02;
     }
 
     .#{$prefix}--row {
       margin-right: 0;
+      // stylelint-disable-next-line carbon/motion-easing-use
       transition: all $duration--moderate-02;
     }
 
@@ -108,6 +115,7 @@
 
 .#{$ide-prefix}-create-heading-heading {
   margin-right: $spacing-03;
+  // stylelint-disable-next-line carbon/motion-easing-use
   transition: all $duration--moderate-02;
   @include carbon--type-style('productive-heading-05');
 }

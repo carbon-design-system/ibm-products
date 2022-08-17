@@ -94,6 +94,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "AlexanderMelox",
+      "name": "Alexander Melo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12755042?v=4",
+      "profile": "http://alexandermelo.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,

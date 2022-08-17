@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.0...@carbon/ibm-products@2.0.0-rc.1) (2022-08-17)
+
+
+### Bug Fixes
+
+* **AboutModal:** fix spacing issue causing build to break ([#2182](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2182)) ([c4cf0db](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c4cf0db582d9129093f8402a8d1d86c25efbb0f2))
+
+
+
+
+
 # [2.0.0-rc.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.25.1...@carbon/ibm-products@2.0.0-rc.0) (2022-08-15)
 
 

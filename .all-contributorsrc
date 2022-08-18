@@ -105,7 +105,8 @@
       ]
     }
   ],
-  "contributorsPerLine": 7,
+  "contributorsPerLine": 5,
+  "badgeTemplate": "[all-contributors-badge]: https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square",
   "projectName": "ibm-cloud-cognitive",
   "projectOwner": "carbon-design-system",
   "repoType": "github",

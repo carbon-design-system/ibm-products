@@ -530,7 +530,8 @@ export const SelectableRow = () => {
       columns,
       data,
     },
-    useSelectRows
+    useSelectRows,
+    useStickyColumn
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;

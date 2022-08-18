@@ -58,11 +58,13 @@ const SelectRow = (datagridState) => {
     toggleAllRowsSelected,
     onRadioSelect,
     columns,
+    withStickyColumn,
   } = datagridState;
   const selectDisabled = isFetching || row.getRowProps().selectDisabled;
   const { onChange, ...selectProps } = row.getToggleRowSelectedProps();
   const cellProps = cell.getCellProps();
-  const isFirstColumnStickyLeft = columns[0]?.sticky === 'left';
+  const isFirstColumnStickyLeft =
+    columns[0]?.sticky === 'left' && withStickyColumn;
   return (
     <TableSelectRow
       {...cellProps}

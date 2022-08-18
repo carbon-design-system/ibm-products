@@ -23,8 +23,10 @@ const SelectAll = (datagridState) => {
     DatagridPagination,
     radio,
     columns,
+    withStickyColumn,
   } = datagridState;
-  const isFirstColumnStickyLeft = columns[0]?.sticky === 'left';
+  const isFirstColumnStickyLeft =
+    columns[0]?.sticky === 'left' && withStickyColumn;
   if (hideSelectAll || radio) {
     return (
       <div

@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CloudApp16 } from '@carbon/icons-react';
 import React from 'react';
 
 import {
@@ -18,7 +17,7 @@ import { ComboButton, ComboButtonItem } from '..';
 import styles from './_combo-button.scss';
 
 const defaultArgs = {
-  size: 'md',
+  size: 'lg',
 };
 
 export default {
@@ -29,7 +28,7 @@ export default {
       control: {
         type: 'radio',
       },
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md', 'default'],
     },
   },
   subcomponents: {
@@ -45,11 +44,11 @@ const Template = (args) => {
       <ComboButtonItem renderIcon={args.icon && args.icon}>
         ComboButtonItem 2
       </ComboButtonItem>
-      <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
+      <ComboButtonItem disabled={args.disabled}>ComboButtonItem 3</ComboButtonItem>
       <ComboButtonItem hasDivider={args.hasDivider}>
         ComboButtonItem 4
       </ComboButtonItem>
-      <ComboButtonItem>ComboButtonItem 5</ComboButtonItem>
+      <ComboButtonItem danger={args.danger}>ComboButtonItem 5</ComboButtonItem>
     </ComboButton>
   );
 };
@@ -68,9 +67,16 @@ export const WithDivider = prepareStory(Template, {
   },
 });
 
-export const WithIcon = prepareStory(Template, {
+export const WithDanger = prepareStory(Template, {
   args: {
     ...defaultArgs,
-    icon: CloudApp16,
+    danger: true,
+  },
+});
+
+export const WithDisabled = prepareStory(Template, {
+  args: {
+    ...defaultArgs,
+    disabled: true,
   },
 });

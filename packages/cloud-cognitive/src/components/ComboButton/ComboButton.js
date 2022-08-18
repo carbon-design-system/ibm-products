@@ -63,7 +63,7 @@ export let ComboButton = React.forwardRef(
         {restActions.length > 0 && (
           <OverflowMenu
             {...overflowMenu}
-            className={`${blockClass}__overflow-menu`}
+            className={`${blockClass}__overflow-menu ${blockClass}__overflow-menu--${size}`}
             menuOptionsClass={`${blockClass}__overflow-menu__list`}
             onClick={() => !isOpen && setIsOpen(true)}
             onClose={() => setIsOpen(false)}
@@ -76,11 +76,11 @@ export let ComboButton = React.forwardRef(
             flipped
           >
             {restActions.map(
-              ({ children, renderIcon: Icon, ...action }, index) => (
+              ({ children, danger, renderIcon: Icon, ...action }, index) => (
                 <OverflowMenuItem
                   {...action}
                   key={`${blockClass}--${instanceId}__overflow-menu__item__${index}`}
-                  className={`${blockClass}__overflow-menu__item`}
+                  className={danger ? `${blockClass}__overflow-menu__item ${blockClass}__overflow-menu__item--danger` : `${blockClass}__overflow-menu__item`}
                   itemText={
                     <>
                       {children}

@@ -26,10 +26,26 @@
   }
 
   .#{$blockClass} .#{$blockClass}__overflow-menu {
-    width: carbon--mini-units($count: 6);
+    //width: carbon--mini-units($count: 8);
     height: auto;
     border-left: carbon--rem($px: 1px) solid $ui-03;
     background-color: $interactive-01;
+  }
+
+  .#{$blockClass}__overflow-menu--sm.#{$blockClass}__overflow-menu {
+    width: carbon--mini-units($count: 4);
+  }
+
+  .#{$blockClass}__overflow-menu--md.#{$blockClass}__overflow-menu {
+    width: carbon--mini-units($count: 5);
+  }
+
+  .#{$blockClass}__overflow-menu--default.#{$blockClass}__overflow-menu {
+    width: carbon--mini-units($count: 6);
+  }
+
+  .another-class {
+    color: $button-danger-primary;
   }
 
   .#{$blockClass}
@@ -61,9 +77,14 @@
     display: none;
   }
 
-  .#{$blockClass}__overflow-menu__item {
+  .#{$blockClass}__overflow-menu__item.#{$prefix}--overflow-menu-options__btn {
     position: relative;
     max-width: none;
+  }
+
+  .#{$blockClass}__overflow-menu__item--danger.#{$prefix}--overflow-menu-options__btn {
+    background-color: $button-danger-primary;
+    color: $text-on-color;
   }
 
   .#{$blockClass}__overflow-menu__item__icon {

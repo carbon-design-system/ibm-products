@@ -35,6 +35,11 @@
         align-items: center;
         color: $text-01;
       }
+      .#{$block-class}__head-select-all.#{$block-class}__checkbox-cell.#{$block-class}__checkbox-cell-sticky-left {
+        position: sticky;
+        z-index: 1;
+        left: 0;
+      }
     }
 
     .#{$block-class}__cell {
@@ -52,6 +57,10 @@
         display: flex;
         align-items: center;
         padding-top: 0;
+      }
+      &.#{$block-class}__checkbox-cell-sticky-left {
+        position: sticky;
+        left: 0;
       }
     }
 
@@ -154,8 +163,10 @@
   }
 
   .#{$block-class}__table-simple {
-    overflow: hidden;
+    display: flex;
+    overflow: auto;
     max-height: 100%;
+    flex-direction: column;
   }
 
   .#{$block-class}__head {
@@ -301,6 +312,12 @@
 
 .#{$block-class}__head-hidden-select-all {
   padding-right: $spacing-08;
+  &.#{$block-class}__select-all-sticky-left {
+    position: sticky;
+    z-index: 1;
+    left: 0;
+    background-color: $ui-03;
+  }
 }
 
 .#{$block-class}__simple-body {

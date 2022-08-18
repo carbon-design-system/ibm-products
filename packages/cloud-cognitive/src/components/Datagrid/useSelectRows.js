@@ -57,10 +57,12 @@ const SelectRow = (datagridState) => {
     radio,
     toggleAllRowsSelected,
     onRadioSelect,
+    columns,
   } = datagridState;
   const selectDisabled = isFetching || row.getRowProps().selectDisabled;
   const { onChange, ...selectProps } = row.getToggleRowSelectedProps();
   const cellProps = cell.getCellProps();
+  const isFirstColumnStickyLeft = columns[0]?.sticky === 'left';
   return (
     <TableSelectRow
       {...cellProps}
@@ -78,7 +80,9 @@ const SelectRow = (datagridState) => {
       }}
       id={`${tableId}-${row.index}`}
       name={`${tableId}-${row.index}-name`}
-      className={cx(`${blockClass}__checkbox-cell`, cellProps.className)}
+      className={cx(`${blockClass}__checkbox-cell`, cellProps.className, {
+        [`${blockClass}__checkbox-cell-sticky-left`]: isFirstColumnStickyLeft,
+      })}
       ariaLabel={`${tableId}-row-${row.index}`} // TODO: aria label should be i18n'ed
       disabled={selectDisabled}
     />

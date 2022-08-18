@@ -14,6 +14,7 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const styleClassPrefix = `${blockClass}__right-sticky-column`;
+const leftStickyStyleClassPrefix = `${blockClass}__left-sticky-column`;
 const OFFSET_SCROLL_CLASS = `${styleClassPrefix}-offset-scroll`;
 
 const useStickyColumn = (hooks) => {
@@ -127,6 +128,21 @@ const changeProps = (elementName, headerCellRef, props, data) => {
           [`${styleClassPrefix}-${elementName}`]: true,
           [`${blockClass}__resizableColumn`]: false,
           [`${blockClass}__sortableColumn`]: false,
+        }),
+        ...(headerCellRef && {
+          ref: headerCellRef,
+        }),
+      },
+    ];
+  }
+  if (column.sticky === 'left') {
+    return [
+      props,
+      {
+        className: cx({
+          [`${leftStickyStyleClassPrefix}-${elementName}`]: true,
+          [`${leftStickyStyleClassPrefix}-${elementName}--with-extra-select-column`]:
+            data?.instance?.batchActions || data?.instance?.radio,
         }),
         ...(headerCellRef && {
           ref: headerCellRef,

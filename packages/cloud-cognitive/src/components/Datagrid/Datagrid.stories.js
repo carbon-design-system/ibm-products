@@ -93,7 +93,6 @@ const defaultHeader = [
   {
     Header: 'First Name',
     accessor: 'firstName',
-    sticky: 'left',
   },
   {
     Header: 'Last Name',
@@ -553,7 +552,8 @@ export const RadioSelect = () => {
         },
       },
     },
-    useSelectRows
+    useSelectRows,
+    useStickyColumn
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -1134,6 +1134,10 @@ export const StickyActionsColumn = () => {
     {
       columns,
       data,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
+      DatagridActions,
+      DatagridBatchActions,
       rowActions: [
         {
           id: 'edit',
@@ -1163,7 +1167,9 @@ export const StickyActionsColumn = () => {
       ],
     },
     useStickyColumn,
-    useActionsColumn
+    useActionsColumn,
+    useSelectRows,
+    useSelectAllWithToggle
   );
   return (
     <Wrapper>

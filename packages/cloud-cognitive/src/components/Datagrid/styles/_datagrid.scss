@@ -195,7 +195,7 @@
     white-space: nowrap;
   }
 
-  .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer-multiline {
+  .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--multiline {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;

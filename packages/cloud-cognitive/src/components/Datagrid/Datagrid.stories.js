@@ -153,7 +153,17 @@ const defaultHeader = [
 const { TableBatchAction, TableBatchActions } = DataTable;
 
 export const BasicUsage = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader,
+      {
+        Header: 'Someone 11',
+        accessor: 'someone11',
+        multiLineWrap: true,
+      },
+    ],
+    []
+  );
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid({
     columns,

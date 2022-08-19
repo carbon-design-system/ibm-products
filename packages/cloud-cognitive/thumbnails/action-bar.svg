@@ -8,7 +8,7 @@
 <g style="mix-blend-mode:multiply">
 <rect x="60.5" y="75.5" width="199" height="41" stroke="#C6C6C6"/>
 </g>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M61 76H259V99.2653V114H61V76Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M61 76H259V100.49V116H61V76Z" fill="white"/>
 <rect opacity="0.891745" x="65" y="81" width="16" height="2" fill="#78A9FF"/>
 <rect opacity="0.891745" x="86" y="81" width="16" height="2" fill="#78A9FF"/>
 <rect x="65" y="95" width="54" height="3" fill="#A8A8A8"/>

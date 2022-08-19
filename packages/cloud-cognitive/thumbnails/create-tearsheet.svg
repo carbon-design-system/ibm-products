@@ -9,7 +9,7 @@
 <g style="mix-blend-mode:multiply">
 <rect x="60" y="29" width="200" height="122" fill="#8D8D8D"/>
 </g>
-<rect x="67" y="48" width="187" height="109" fill="white"/>
+<rect x="67" y="48" width="187" height="103" fill="white"/>
 <rect x="114" y="68" width="140" height="83" fill="#F4F4F4"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M68 49H254V61.2449V69H68V49Z" fill="white"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M68 69H113V118.592V150H68V69Z" fill="white"/>

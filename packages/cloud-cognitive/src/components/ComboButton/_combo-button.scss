@@ -44,8 +44,9 @@
     width: carbon--mini-units($count: 6);
   }
 
-  .another-class {
-    color: $button-danger-primary;
+  .#{$blockClass}__overflow-menu.bx--overflow-menu--open.#{$blockClass}__overflow-menu.bx--overflow-menu.bx--overflow-menu--open {
+    background-color: $interactive-01;
+    box-shadow: none;
   }
 
   .#{$blockClass}

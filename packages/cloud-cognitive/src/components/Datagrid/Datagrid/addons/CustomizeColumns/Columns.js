@@ -112,7 +112,12 @@ const Columns = ({
                 getVisibleColumnsCount() < columns.length &&
                 getVisibleColumnsCount() > 0
               }
-              onChange={()=> {onSelectAll(columns, getVisibleColumnsCount() !== columns.length);}}
+              onChange={() => {
+                onSelectAll(
+                  columns,
+                  getVisibleColumnsCount() !== columns.length
+                );
+              }}
               id={`${blockClass}__customization-column-select-all`}
               labelText={selectAllLabel}
             />

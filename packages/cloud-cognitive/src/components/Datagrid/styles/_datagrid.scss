@@ -162,11 +162,12 @@
     overflow-x: auto;
   }
 
-  .#{$block-class}__table-simple {
+  table.#{$block-class}__table-simple {
     display: flex;
     overflow: auto;
     max-height: 100%;
     flex-direction: column;
+    background-color: $ui-01;
   }
 
   .#{$block-class}__head {
@@ -204,6 +205,13 @@
     width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--multiline {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: initial;
   }
 
   .#{$block-class}__expanded-row {
@@ -343,14 +351,6 @@
   min-width: 0 !important;
 }
 
-.#{$block-class}__table-simple::-webkit-scrollbar {
-  width: 6px;
-  background-color: $ui-background;
-}
-
-.#{$block-class}__table-simple::-webkit-scrollbar-thumb {
-  background-color: $text-03;
-}
 .#{$block-class}__sticky.#{$block-class}__simple-body {
   overflow: auto;
 }

@@ -9,9 +9,8 @@
 <rect x="140" y="70" width="40" height="40" fill="#E0E0E0"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M164.707 85.086C165.097 85.4766 165.097 86.1094 164.707 86.5L157.207 94H154V90.793L161.5 83.293C161.891 82.9033 162.523 82.9033 162.914 83.293L164.707 85.086ZM166.5 95.5H153.5V96.5H166.5V95.5ZM162.207 83.9995L164 85.793L162.5 87.293L160.707 85.4996L162.207 83.9995ZM155 91.2071V93H156.793L161.793 88L160 86.2067L155 91.2071Z" fill="#161616"/>
 <path fill-rule="evenodd" clip-rule="evenodd" d="M120.5 89.5V85.5H119.5V89.5H115.5V90.5H119.5V94.5H120.5V90.5H124.5V89.5H120.5V89.5Z" fill="#161616"/>
-<rect width="81" height="26.001" transform="translate(119 115)" fill="white" style="mix-blend-mode:multiply"/>
-<rect width="40" height="4" transform="matrix(1 0 0 -1 139.5 119)" fill="white" style="mix-blend-mode:multiply"/>
-<path d="M155.5 119L159.5 115L163.5 119H155.5Z" fill="#393939"/>
-<path d="M119 121C119 119.895 119.895 119 121 119H198C199.105 119 200 119.895 200 121V139.001C200 140.106 199.105 141.001 198 141.001H121C119.895 141.001 119 140.106 119 139.001V121Z" fill="#393939"/>
+<rect width="0" height="4" transform="matrix(1 0 0 -1 160 119)" fill="white" style="mix-blend-mode:multiply"/>
+<path d="M156 119L160 115L164 119H156Z" fill="#393939"/>
+<rect x="119" y="119" width="81" height="22.001" rx="2" fill="#393939"/>
 <rect x="132" y="128" width="55" height="4" fill="#A8A8A8"/>
 </svg>

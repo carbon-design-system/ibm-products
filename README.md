@@ -9,7 +9,10 @@
 > various places and historical logs.
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[all-contributors-badge]: https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square
+
+[all-contributors-badge]:
+  https://img.shields.io/badge/all_contributors-12-orange.svg?style=flat-square
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![All Contributors][all-contributors-badge]](#contributors-)

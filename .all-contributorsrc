@@ -105,6 +105,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Ratheeshrajan",
+      "name": "Ratheesh Rajan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/305492?v=4",
+      "profile": "https://github.com/Ratheeshrajan",
+      "contributions": [
+        "code",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 5,

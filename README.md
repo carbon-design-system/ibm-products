@@ -105,7 +105,7 @@ Thanks goes to these wonderful people
   <tr>
     <td align="center"><a href="http://alexandermelo.com"><img src="https://avatars.githubusercontent.com/u/12755042?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alexander Melo</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=AlexanderMelox" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/Ratheeshrajan"><img src="https://avatars.githubusercontent.com/u/305492?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ratheesh Rajan</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=Ratheeshrajan" title="Code">💻</a> <a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/pulls?q=is%3Apr+reviewed-by%3ARatheeshrajan" title="Reviewed Pull Requests">👀</a></td>
-    <td align="center"><a href="https://janhassel.de"><img src="https://avatars.githubusercontent.com/u/28265588?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jan Hassel</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=janhassel" title="Code">💻</a><a href="#design-janhassel" title="Design">🎨</a></td>
+    <td align="center"><a href="https://janhassel.de"><img src="https://avatars.githubusercontent.com/u/28265588?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jan Hassel</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=janhassel" title="Code">💻</a><a href="#a11y-janhassel" title="Accessibility">️️️️♿️</a></td>
   </tr>
 </table>
 

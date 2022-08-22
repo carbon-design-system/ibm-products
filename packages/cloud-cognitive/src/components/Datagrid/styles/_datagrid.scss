@@ -198,6 +198,13 @@
     white-space: nowrap;
   }
 
+  .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--multiline {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: initial;
+  }
+
   .#{$block-class}__expanded-row {
     display: flex;
     overflow: hidden;

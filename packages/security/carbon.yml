@@ -2,7 +2,7 @@
 library:
   id: ibm-security
   name: IBM Security
-  description: Legacy and non-curated design implementations used in security
+  description: View legacy and non-curated design components used by IBM Security.
   externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal
 assets:
   decorator:

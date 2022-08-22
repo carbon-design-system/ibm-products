@@ -60,19 +60,6 @@ const Columns = ({
     [columns, setColumnsObject]
   );
 
-  const setSelectAllCheckBox = () => {
-    let checkboxes = document.querySelectorAll(
-      `.${blockClass}__customize-columns-modal .bx--checkbox`
-    );
-    let selectAll = getVisibleColumnsCount() !== columns.length;
-
-    for (let i = 0; i < checkboxes.length - 1; i++) {
-      columns[i].isVisible = selectAll;
-    }
-
-    onSelectAll(columns, selectAll);
-  };
-
   return (
     <div className={`${blockClass}__customize-columns-column-list`}>
       <DndProvider backend={HTML5Backend}>
@@ -125,7 +112,7 @@ const Columns = ({
                 getVisibleColumnsCount() < columns.length &&
                 getVisibleColumnsCount() > 0
               }
-              onChange={setSelectAllCheckBox}
+              onChange={()=> {onSelectAll(columns, getVisibleColumnsCount() !== columns.length);}}
               id={`${blockClass}__customization-column-select-all`}
               labelText={selectAllLabel}
             />

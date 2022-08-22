@@ -55,6 +55,7 @@ import cx from 'classnames';
 
 import styles from './_storybook-styles.scss';
 import { SidePanel } from '../SidePanel';
+import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -760,6 +761,20 @@ const DatagridActions = (datagridState) => {
               <CustomizeColumnsButton />
             </div>
           )}
+          <ButtonMenu label="Primary button" renderIcon={Add16}>
+            <ButtonMenuItem
+              itemText="Option 1"
+              onClick={action(`Click on ButtonMenu Option 1`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 2"
+              onClick={action(`Click on ButtonMenu Option 2`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 3"
+              onClick={action(`Click on ButtonMenu Option 3`)}
+            />
+          </ButtonMenu>
         </TableToolbarContent>
       </>
     ))

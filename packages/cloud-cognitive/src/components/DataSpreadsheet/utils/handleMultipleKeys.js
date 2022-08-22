@@ -322,7 +322,7 @@ export const handleMultipleKeys = ({
     } else {
       setTimeout(() => {
         updateToLastCell();
-      }, 1);
+      }, 1000);
     }
   }
 };

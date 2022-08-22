@@ -158,6 +158,7 @@
     overflow: auto;
     max-height: 100%;
     flex-direction: column;
+    background-color: $ui-01;
   }
 
   .#{$block-class}__head {
@@ -328,14 +329,6 @@
   min-width: 0 !important;
 }
 
-.#{$block-class}__table-simple::-webkit-scrollbar {
-  width: 6px;
-  background-color: $ui-background;
-}
-
-.#{$block-class}__table-simple::-webkit-scrollbar-thumb {
-  background-color: $text-03;
-}
 .#{$block-class}__sticky.#{$block-class}__simple-body {
   overflow: auto;
 }

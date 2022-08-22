@@ -17,7 +17,7 @@ import { ComboButton, ComboButtonItem } from '..';
 import styles from './_combo-button.scss';
 
 const defaultArgs = {
-  size: 'lg',
+  size: 'default',
 };
 
 export default {
@@ -57,6 +57,7 @@ export const Default = prepareStory(Template, {
   args: {
     ...defaultArgs,
     hasDivider: false,
+    size: "default"
   },
 });
 
@@ -64,6 +65,7 @@ export const WithDivider = prepareStory(Template, {
   args: {
     ...defaultArgs,
     hasDivider: true,
+    size: "default"
   },
 });
 
@@ -71,6 +73,7 @@ export const WithDanger = prepareStory(Template, {
   args: {
     ...defaultArgs,
     danger: true,
+    size: "default"
   },
 });
 
@@ -78,5 +81,6 @@ export const WithDisabled = prepareStory(Template, {
   args: {
     ...defaultArgs,
     disabled: true,
+    size: "default"
   },
 });

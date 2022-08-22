@@ -13,7 +13,7 @@ import {
 } from 'carbon-components-react';
 
 import classnames from 'classnames';
-import { node, shape, string, oneOf } from 'prop-types';
+import { node, shape, string, oneOf, bool } from 'prop-types';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -31,6 +31,7 @@ export let ComboButton = React.forwardRef(
     {
       children,
       className,
+      disabled,
       overflowMenu,
       size,
 
@@ -58,18 +59,19 @@ export let ComboButton = React.forwardRef(
         className={classnames(blockClass, className)}
         data-floating-menu-container
       >
-        <Button {...primaryAction} size={size} />
+        <Button {...primaryAction} size={size} className={`${blockClass}__btn--${size}`} disabled={disabled} />
 
         {restActions.length > 0 && (
           <OverflowMenu
             {...overflowMenu}
-            className={`${blockClass}__overflow-menu ${blockClass}__overflow-menu--${size}`}
+            className={disabled ? `${blockClass}__overflow-menu ${blockClass}__overflow-menu--${size} ${blockClass}__overflow-menu--disabled` : `${blockClass}__overflow-menu ${blockClass}__overflow-menu--${size}`}
+            disabled={disabled}
             menuOptionsClass={`${blockClass}__overflow-menu__list`}
             onClick={() => !isOpen && setIsOpen(true)}
             onClose={() => setIsOpen(false)}
             renderIcon={() =>
               createElement(isOpen ? ChevronUp16 : ChevronDown16, {
-                className: `${blockClass}__overflow-menu__icon`,
+                className: disabled ? `${blockClass}__overflow-menu__icon--disabled` : `${blockClass}__overflow-menu__icon`,
               })
             }
             size={size}
@@ -113,6 +115,9 @@ ComboButton.propTypes = {
 
   /** Provide an optional class to be applied to the containing node */
   className: string,
+
+  /** Provide an optional flag to disable the ComboButton */
+  disabled: bool,
 
   /** Provide the [props of the `OverflowMenu`](https://react.carbondesignsystem.com/?path=/docs/overflowmenu) */
   overflowMenu: shape(OverflowMenu.propTypes),

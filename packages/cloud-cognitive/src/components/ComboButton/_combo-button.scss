@@ -25,11 +25,31 @@
     @include text-overflow;
   }
 
+  .#{$blockClass}__btn--sm.bx--btn {
+    min-width: 128px;
+  }
+
+  .#{$blockClass}__btn--md.bx--btn {
+    min-width: 120px;
+  }
+
+  .#{$blockClass}__btn--default.bx--btn {
+    min-width: 112px;
+  }
   .#{$blockClass} .#{$blockClass}__overflow-menu {
-    //width: carbon--mini-units($count: 8);
     height: auto;
     border-left: carbon--rem($px: 1px) solid $ui-03;
     background-color: $interactive-01;
+  }
+  .c4p--combo-button .c4p--combo-button__overflow-menu:disabled,
+  .c4p--combo-button .c4p--combo-button__overflow-menu[disabled],
+  .#{$blockClass}__overflow-menu--disabled.c4p--combo-button__overflow-menu.bx--overflow-menu:hover {
+    background-color: $disabled-02;
+    cursor: not-allowed;
+  }
+
+  .c4p--combo-button__overflow-menu__icon--disabled {
+    fill: $disabled-03;
   }
 
   .#{$blockClass}__overflow-menu--sm.#{$blockClass}__overflow-menu {

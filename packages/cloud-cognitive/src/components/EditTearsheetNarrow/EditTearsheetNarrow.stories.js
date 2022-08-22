@@ -14,7 +14,7 @@ import {
   NumberInput,
   TextInput,
   FormGroup,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { pkg } from '../../settings';
 import {
   getStoryTitle,

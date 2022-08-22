@@ -104,6 +104,10 @@ ProductiveCard.propTypes = {
     })
   ),
   /**
+   * Aria label prop required for OverflowMenu
+   */
+  overflowAriaLabel: PropTypes.string,
+  /**
    * Optionally specify an href for your Button to become an <a> element
    */
   primaryButtonHref: PropTypes.string,

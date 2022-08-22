@@ -4,7 +4,11 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-@import '../../global/styles/project-settings';
+
+@use '@carbon/react' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/type' as *;
+@use '../../global/styles/project-settings' as *;
 
 $block-class: 'ccs-sb--display-box';
 
@@ -18,16 +22,16 @@ $indicator-height: $spacing-04;
   position: relative;
   display: inline-block;
   padding-top: $spacing-05; // space for the indicators
-  color: $text-05;
+  color: $text-helper;
 }
 
 .#{$block-class}__indicator {
   position: absolute;
   top: 0;
   width: 100%;
-  border-bottom: 1px solid $text-05;
+  border-bottom: 1px solid $text-helper;
   white-space: nowrap;
-  @include carbon--type-style('helper-text-01');
+  @include type-style('helper-text-01');
 }
 
 .#{$block-class}__message {
@@ -48,7 +52,7 @@ $indicator-height: $spacing-04;
   bottom: calc(-1 * $indicator-height);
   width: 0;
   height: 0;
-  border-top: $indicator-height solid $text-05;
+  border-top: $indicator-height solid $text-helper;
   border-right: $indicator-width solid transparent;
   border-left: $indicator-width solid transparent;
 }

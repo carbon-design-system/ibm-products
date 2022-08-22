@@ -15,7 +15,7 @@ import { pkg } from '../../settings';
 import { allPropTypes } from '../../global/js/utils/props-helper';
 
 // Carbon and package components we use.
-import { Button, ButtonSet, InlineLoading } from 'carbon-components-react';
+import { Button, ButtonSet, InlineLoading } from '@carbon/react';
 
 const blockClass = `${pkg.prefix}--action-set`;
 const componentName = 'ActionSet';
@@ -76,7 +76,7 @@ ActionSetButton.propTypes = {
 const defaultKind = 'primary';
 
 const willStack = (size, numberOfActions) =>
-  size === 'xs' || size === 'sm' || (size === 'md' && numberOfActions > 2);
+  size === 'sm' || (size === 'md' && numberOfActions > 2);
 
 // Default values for props
 const defaults = {
@@ -85,7 +85,7 @@ const defaults = {
 
 /**
  * An ActionSet presents a set of action buttons, constructed from bundles
- * of prop values and applying some layout rules. When the size is 'xs' or 'sm'
+ * of prop values and applying some layout rules. When the size is 'sm'
  * the buttons are stacked, and should only include primary and secondary
  * kinds. When the size is 'md' the buttons are stacked if there are three or
  * more. When the size is 'md' or 'lg', two buttons share the horizontal space.
@@ -112,7 +112,7 @@ export const ActionSet = React.forwardRef(
   ) => {
     const buttons = (actions && actions.slice?.(0)) || [];
 
-    // We stack the buttons in a xs/sm set, or if there are three or more in a md set.
+    // We stack the buttons in a sm set, or if there are three or more in a md set.
     const stacking = willStack(size, buttons.length);
 
     // Order of button kinds: ghost first, then danger--ghost, then most other types,
@@ -172,7 +172,7 @@ ActionSet.displayName = componentName;
 
 /**
  * A validator function to help validate the actions supplied for a particular
- * size of component. When the size is xs or sm, or md with three actions, the
+ * size of component. When the size is sm, or md with three actions, the
  * buttons will be stacked and a maximum of three buttons is applied with no
  * ghosts unless the ghost is the only button. Otherwise a maximum of four
  * buttons with a maximum of one ghost is applied. In either case, a maximum
@@ -298,5 +298,5 @@ ActionSet.propTypes = {
    * The size of the action set. Different button arrangements are used at
    * different sizes, to make best use of the available space.
    */
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xlg', 'max']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl']),
 };

@@ -156,6 +156,7 @@ describe(componentName, () => {
           onClick,
         },
       ],
+      overflowAriaLabel: 'Overflow menu',
       actionsPlacement: 'bottom',
     };
     const { container, rerender } = render(<Card {...props} />);

@@ -7,9 +7,9 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 
-import { Reset16 } from '@carbon/icons-react';
+import { Reset } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
-import { Button, Search } from 'carbon-components-react';
+import { Button, Search } from '@carbon/react';
 import * as React from 'react';
 import keyBy from 'lodash/keyBy';
 import { pkg } from '../../../../../settings';
@@ -49,7 +49,7 @@ const Actions = ({
         }}
         size="sm"
         kind="ghost"
-        renderIcon={Reset16}
+        renderIcon={(props) => <Reset size={16} {...props} />}
         test-id={`${blockClass}__customize-columns-modal--reset`}
       >
         {resetToDefaultLabel}

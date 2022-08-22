@@ -14,7 +14,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Grid, Form } from 'carbon-components-react';
+import { Form } from '@carbon/react';
 import wrapFocus from '../../global/js/utils/wrapFocus';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';
 import { CreateInfluencer } from '../CreateInfluencer';
@@ -182,26 +182,24 @@ export let CreateTearsheet = forwardRef(
           onBlur={handleBlur}
           ref={contentRef}
         >
-          <Grid>
-            <Form>
-              <StepsContext.Provider
-                value={{
-                  currentStep,
-                  setIsDisabled,
-                  setOnNext: (fn) => setOnNext(() => fn),
-                  setOnMount: (fn) => setOnMount(() => fn),
-                  setStepData,
-                  stepData,
-                }}
-              >
-                {React.Children.map(children, (child, index) => (
-                  <StepNumberContext.Provider value={index + 1}>
-                    {child}
-                  </StepNumberContext.Provider>
-                ))}
-              </StepsContext.Provider>
-            </Form>
-          </Grid>
+          <Form>
+            <StepsContext.Provider
+              value={{
+                currentStep,
+                setIsDisabled,
+                setOnNext: (fn) => setOnNext(() => fn),
+                setOnMount: (fn) => setOnMount(() => fn),
+                setStepData,
+                stepData,
+              }}
+            >
+              {React.Children.map(children, (child, index) => (
+                <StepNumberContext.Provider value={index + 1}>
+                  {child}
+                </StepNumberContext.Provider>
+              ))}
+            </StepsContext.Provider>
+          </Form>
         </div>
       </TearsheetShell>
     );

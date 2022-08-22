@@ -152,7 +152,7 @@ describe(componentName, () => {
     userEvent.click(edit);
     expect(component).toHaveClass(`${blockClass}--editing`);
 
-    expect(setTimeout).toHaveBeenCalledTimes(1);
+    expect(setTimeout).toHaveBeenCalled();
     jest.runOnlyPendingTimers();
     expect(input.scrollLeft).toEqual(9999); // scroll moved to end
 

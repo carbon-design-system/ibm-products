@@ -9,8 +9,8 @@
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Settings16 } from '@carbon/icons-react';
-import { Button } from 'carbon-components-react';
+import { Settings } from '@carbon/icons-react';
+import { IconButton } from '@carbon/react';
 import cx from 'classnames';
 import RowSizeRadioGroup from './RowSizeRadioGroup';
 import { pkg } from '../../../../../settings';
@@ -23,22 +23,22 @@ const RowSizeDropdown = ({ buttonLabel = 'Row height', ...props }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
     <>
-      <Button
-        hasIconOnly
+      <IconButton
         ref={buttonRef}
         kind="ghost"
-        tooltipPosition="left"
-        renderIcon={Settings16}
+        align="left"
         onClick={() => setIsOpen(!isOpen)}
-        iconDescription={buttonLabel}
-        className={cx({
+        label={buttonLabel}
+        className={cx(`${blockClass}__row-size-button`, {
           [`${blockClass}__row-size-button--open`]: isOpen,
         })}
-      />
+      >
+        <Settings size={16} />
+      </IconButton>
       {isOpen && (
         <RowSizeRadioGroup
           {...props}
-          buttonRef={buttonRef}
+          ref={buttonRef}
           hideRadioGroup={() => {
             setIsOpen(false);
           }}

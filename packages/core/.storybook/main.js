@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,12 +30,16 @@ module.exports = {
     '@storybook/addon-viewport',
     '@carbon/storybook-addon-theme/register',
   ],
+  framework: '@storybook/react',
 
   reactOptions: {
-    //fastRefresh: true, -- this option would be nice, but seems to cause errors, see https://github.com/storybookjs/storybook/issues/13745
+    fastRefresh: true, // THIS SEEMS TO BE FIXED -- this option would be nice, but seems to cause errors, see https://github.com/storybookjs/storybook/issues/13745
     strictMode: true,
   },
-  stories: ['../../../**/+(docs|src)/**/*+(-story|.stories).*'],
+  stories: [
+    '../../cloud-cognitive/+(docs|src)/**/*+(-story|.stories).*',
+    '../+(docs|src)/**/*+(-story|.stories).*',
+  ], // v11 will only show stories for C4P components (or at least until CDAI/Security move from v10 to v11)
   webpackFinal: async (configuration) =>
     merge(configuration, {
       cache: {
@@ -61,12 +65,17 @@ module.exports = {
               },
               'css-loader',
               {
-                loader: 'fast-sass-loader',
+                loader: 'sass-loader',
                 options: {
-                  includePaths: [
-                    resolve(__dirname, '..', 'node_modules'),
-                    resolve(__dirname, '..', '..', '..', 'node_modules'),
-                  ],
+                  implementation: require('sass'),
+                  sassOptions: {
+                    includePaths: [
+                      resolve(__dirname, '..', 'node_modules'),
+                      resolve(__dirname, '..', '..', '..', 'node_modules'),
+                    ],
+                  },
+                  warnRuleAsWarning: true,
+                  sourceMap: true,
                 },
               },
             ],

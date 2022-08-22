@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,7 @@ import { useResizeDetector } from 'react-resize-detector';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
 
 // Carbon and package components we use.
@@ -22,13 +22,13 @@ import {
   ComposedModal,
   ModalHeader,
   ModalBody,
-} from 'carbon-components-react';
+  usePrefix,
+} from '@carbon/react';
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 
 // The block part of our conventional BEM class names (bc__E--M).
 const bc = `${pkg.prefix}--tearsheet`;
-const bcModalHeader = `${carbon.prefix}--modal-header`;
 const componentName = 'TearsheetShell';
 
 const maxDepth = 3;
@@ -85,6 +85,8 @@ export const TearsheetShell = React.forwardRef(
     },
     ref
   ) => {
+    const carbonPrefix = usePrefix();
+    const bcModalHeader = `${carbonPrefix}--modal-header`;
     // node the modal tearsheet is hosted in
     const [portalTarget, setPortalTarget] = useState(null);
     useEffect(() => {
@@ -127,7 +129,7 @@ export const TearsheetShell = React.forwardRef(
       if (
         position === depth &&
         modalRef.current &&
-        !modalRef.current.innerModal.current.contains(document.activeElement)
+        !modalRef.current.contains(document.activeElement)
       ) {
         handleStackChange.claimFocus();
       }
@@ -136,10 +138,8 @@ export const TearsheetShell = React.forwardRef(
     // Callback to give the tearsheet the opportunity to claim focus
     handleStackChange.claimFocus = function () {
       const element = selectorPrimaryFocus
-        ? modalRef.current.innerModal.current.querySelector(
-            selectorPrimaryFocus
-          )
-        : modalRef.current.startSentinel.current;
+        ? modalRef.current.querySelector(selectorPrimaryFocus)
+        : modalRef.current;
       setTimeout(() => element.focus(), 1);
     };
 
@@ -232,8 +232,8 @@ export const TearsheetShell = React.forwardRef(
           preventCloseOnClickOutside={!isPassive}
           ref={modalRef}
           selectorsFloatingMenus={[
-            `.${carbon.prefix}--overflow-menu-options`,
-            `.${carbon.prefix}--tooltip`,
+            `.${carbonPrefix}--overflow-menu-options`,
+            `.${carbonPrefix}--tooltip`,
             '.flatpickr-calendar',
             `.${bc}__container`,
           ]}
@@ -248,6 +248,7 @@ export const TearsheetShell = React.forwardRef(
               closeClassName={cx({
                 [`${bc}__header--no-close-icon`]: !effectiveHasCloseIcon,
               })}
+              closeModal={onClose}
               iconDescription={closeIconDescription}
             >
               <Wrap className={`${bc}__header-content`}>
@@ -309,7 +310,7 @@ export const TearsheetShell = React.forwardRef(
                     actions={actions}
                     buttonSize={size === 'wide' ? 'xl' : null}
                     className={`${bc}__buttons`}
-                    size={size === 'wide' ? 'max' : 'lg'}
+                    size={size === 'wide' ? '2xl' : 'lg'}
                   />
                 </Wrap>
               )}

@@ -6,7 +6,7 @@
 //
 
 import React from 'react';
-import { Tag, Accordion, AccordionItem } from 'carbon-components-react';
+import { Tag, Accordion, AccordionItem } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { pkg } from '../../settings';

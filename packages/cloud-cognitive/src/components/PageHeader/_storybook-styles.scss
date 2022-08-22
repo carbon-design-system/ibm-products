@@ -5,20 +5,22 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/project-settings';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
 
-@import 'carbon-components/scss/components/ui-shell/ui-shell';
-@import 'carbon-components/scss/components/data-table/data-table';
-@import 'carbon-components/scss/components/button/button';
+@use '@carbon/react/scss/components/ui-shell';
+@use '@carbon/react/scss/components/data-table';
+@use '@carbon/react/scss/components/button';
 
 $story-class: 'page-header-stories';
 
 // cspell:disable-next-line
 .sbdocs .#{$story-class}__viewport {
   max-height: 500px;
-  background-color: $ui-background;
-  box-shadow: 0 0 4px 1px $ui-03;
-  color: $text-01;
+  background-color: $background;
+  box-shadow: 0 0 4px 1px $layer-accent-01;
+  color: $text-primary;
   overflow-y: auto;
 }
 
@@ -34,22 +36,24 @@ $story-class: 'page-header-stories';
   position: relative; // used to raise the stacking context and check it still goes under the page header
   padding-top: $spacing-05;
   margin-top: $spacing-05;
-  background-color: $ui-background;
-  color: $text-01;
+  background-color: $background;
+  color: $text-primary;
 }
 
 .#{$story-class}__dummy-content-block {
   min-height: 120vh;
-  background: $ui-01;
+  background: $layer-01;
   background-clip: content-box;
 }
 
 .#{$story-class}__dummy-content-text {
+  @include type.type-style('body-compact-01');
+
   padding: $spacing-05;
 }
 
 .#{$story-class}__status-icon {
-  fill: $support-02;
+  fill: $support-success;
   vertical-align: middle;
 }
 

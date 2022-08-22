@@ -17,7 +17,7 @@ import {
 
 import { AboutModal } from '.';
 
-import { Button, Link } from 'carbon-components-react';
+import { Button, Link } from '@carbon/react';
 
 import mdx from './AboutModal.mdx';
 
@@ -139,7 +139,9 @@ const Template = (storyName, storyInitiallyOpen, props) => {
         {...props}
         onClose={() => setOpen(false)}
         logo={logo}
+        modalAriaLabel="About this product"
         open={open}
+        tabListAriaLabel="Product info"
       />
     </>
   );

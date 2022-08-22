@@ -1,11 +1,10 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@import './global/styles/project-settings';
-
-@import './components/index';
-@import 'carbon-components/scss/globals/scss/styles';
+@forward './global/styles/project-settings';
+@forward './components/index';
+@forward '@carbon/react';

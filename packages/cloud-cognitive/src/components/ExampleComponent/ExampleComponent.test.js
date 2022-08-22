@@ -101,7 +101,7 @@ describe(componentName, () => {
   });
 
   it('renders the size property', () => {
-    renderComponent({ size: 'small' });
+    renderComponent({ size: 'sm' });
     screen
       .getAllByRole('button')
       .forEach((button) =>

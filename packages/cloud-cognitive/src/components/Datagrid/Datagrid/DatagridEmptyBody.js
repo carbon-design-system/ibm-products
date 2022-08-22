@@ -7,7 +7,7 @@
  */
 import React from 'react';
 import { pkg } from '../../../settings';
-import { DataTable } from 'carbon-components-react';
+import { DataTable } from '@carbon/react';
 import { NoDataEmptyState } from '../../EmptyStates/NoDataEmptyState';
 
 const blockClass = `${pkg.prefix}--datagrid`;

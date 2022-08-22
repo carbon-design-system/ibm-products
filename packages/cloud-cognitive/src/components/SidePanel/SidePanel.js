@@ -23,8 +23,8 @@ import { SIDE_PANEL_SIZES } from './constants';
 import { usePreviousValue } from '../../global/js/hooks';
 
 // Carbon and package components we use.
-import { Button } from 'carbon-components-react';
-import { Close20, ArrowLeft20 } from '@carbon/icons-react';
+import { Button } from '@carbon/react';
+import { Close, ArrowLeft } from '@carbon/icons-react';
 import { ActionSet } from '../ActionSet';
 
 const blockClass = `${pkg.prefix}--side-panel`;
@@ -588,9 +588,9 @@ export let SidePanel = React.forwardRef(
             <Button
               aria-label={navigationBackIconDescription}
               kind="ghost"
-              size="small"
+              size="sm"
               disabled={false}
-              renderIcon={ArrowLeft20}
+              renderIcon={(props) => <ArrowLeft size={20} {...props} />}
               iconDescription={navigationBackIconDescription}
               className={`${blockClass}__navigation-back-button`}
               onClick={onNavigationBack}
@@ -604,8 +604,8 @@ export let SidePanel = React.forwardRef(
         <Button
           aria-label={closeIconDescription}
           kind="ghost"
-          size="small"
-          renderIcon={Close20}
+          size="sm"
+          renderIcon={(props) => <Close size={20} {...props} />}
           iconDescription={closeIconDescription}
           className={`${blockClass}__close-button`}
           onClick={onRequestClose}
@@ -647,7 +647,7 @@ export let SidePanel = React.forwardRef(
                   {...rest}
                   key={label}
                   kind={kind || 'ghost'}
-                  size="small"
+                  size="sm"
                   renderIcon={icon}
                   iconDescription={label}
                   tooltipPosition="bottom"
@@ -757,7 +757,7 @@ export let SidePanel = React.forwardRef(
               <ActionSet
                 actions={actions}
                 className={primaryActionContainerClassNames}
-                size={size}
+                size={size === 'xs' ? 'sm' : size}
               />
             </div>
             <span
@@ -801,7 +801,7 @@ SidePanel.propTypes = {
     PropTypes.shape({
       label: PropTypes.string,
       leading: PropTypes.bool,
-      icon: PropTypes.object,
+      icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
       onClick: PropTypes.func,
       kind: PropTypes.oneOf(['ghost', 'tertiary', 'secondary', 'primary']),
     })
@@ -935,7 +935,7 @@ SidePanel.propTypes = {
   /**
    * Sets the size of the side panel
    */
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'max']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', '2xl']),
 
   /**
    * Determines if this panel slides in

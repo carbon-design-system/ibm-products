@@ -5,6 +5,9 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
@@ -31,7 +34,7 @@
     "build": "run-s clean build-all",
     "build-all": "run-p 'build:*'",
     "build:css": "run-s 'build:css:*'",
-    "build:css:compile": "sass -I ../../node_modules -I node_modules --no-source-map src/index.scss:css/index.css",
+    "build:css:compile": "sass --load-path node_modules --no-source-map src/index.scss:css/index.css",
     "build:css:minify": "cleancss -b --batch-suffix '.min' -O2 css/*.css",
     "build:js-esm": "cross-env BABEL_ENV=esm yarn build:js:modules -d es",
     "build:js-cjs": "cross-env BABEL_ENV=cjs yarn build:js:modules -d lib",

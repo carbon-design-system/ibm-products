@@ -5,128 +5,130 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/react/scss/components/button/tokens' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion';
+
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // Other Carbon settings.
-@import 'carbon-components/scss/globals/grid/grid';
+@use '@carbon/react/scss/grid' as *;
 
 // EditTearsheet uses the following Carbon components:
-@import 'carbon-components/scss/components/toggle/toggle';
-@import 'carbon-components/scss/components/ui-shell/side-nav';
+@use '@carbon/react/scss/components/toggle/toggle';
+@use '@carbon/react/scss/components/ui-shell/side-nav';
 
 // EditTearsheet uses the following IBM Products components:
 // TearsheetShell
-@import '../Tearsheet/tearsheet';
-@import '../CreateInfluencer/index';
+@use '../Tearsheet/tearsheet';
+@use '../CreateInfluencer/index';
 
-@mixin edit-tearsheet {
-  @keyframes form-content-entrance {
-    0% {
-      opacity: 0;
-      // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateY(-0.75rem);
-    }
-
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  $block-class: #{$pkg-prefix}--tearsheet-edit;
-  $form-block-class: #{$pkg-prefix}--tearsheet-edit__form;
-  $section-block-class: #{$pkg-prefix}--tearsheet-edit__section;
-  $tearsheet-divider-class: #{$pkg-prefix}--tearsheet-edit__section--divider;
-  $tearsheet-fieldset-class: #{$pkg-prefix}--tearsheet-edit__form--fieldset;
-
-  .#{$block-class} {
-    --#{$block-class}--total-width: 0;
-  }
-
-  .#{$block-class} .#{$form-block-class}__form--hidden-form {
-    display: none;
-  }
-
-  .#{$block-class} .#{$form-block-class}__form--visible-form {
-    animation-duration: $duration--slow-01;
-    animation-fill-mode: forwards;
-    animation-name: form-content-entrance;
-    animation-timing-function: $carbon--standard-easing;
+@keyframes form-content-entrance {
+  0% {
     opacity: 0;
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateY(-0.75rem);
   }
 
-  @media (prefers-reduced-motion) {
-    .#{$block-class} .#{$form-block-class}__form--visible-form {
-      animation: none;
-      opacity: 1;
-    }
-  }
-
-  .#{$block-class} .#{$block-class}__content {
-    height: 100%;
-    padding: $spacing-06;
-    overflow-x: hidden;
-  }
-
-  .#{$block-class} .#{$block-class}__content .#{$carbon-prefix}--grid {
-    padding: 0;
-    margin: 0;
-  }
-
-  .#{$block-class} .#{$block-class}__form--heading {
-    padding-bottom: $spacing-06;
-  }
-
-  .#{$block-class}
-    .#{$carbon-prefix}--btn-set
-    .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--disabled {
-    box-shadow: -0.0625rem 0 0 0 $button-separator;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--side-nav--ux {
-    position: initial;
-    width: 100%;
-    max-width: 100%;
-    background-color: transparent;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--side-nav__link:hover {
-    cursor: pointer;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--side-nav__overlay-active {
-    display: none;
-  }
-
-  .#{$block-class} .#{$block-class}__form--title,
-  .#{$block-class} .#{$block-class}__section--title {
-    margin-bottom: $spacing-05;
-  }
-
-  .#{$block-class} .#{$block-class}__section--subtitle,
-  .#{$block-class} .#{$block-class}__form--subtitle {
-    @include carbon--type-style('productive-heading-01');
-
-    margin-bottom: $spacing-03;
-  }
-
-  .#{$block-class} .#{$block-class}__section--description,
-  .#{$block-class} .#{$block-class}__form--description {
-    @include carbon--type-style('body-long-01');
-
-    margin-bottom: $spacing-06;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--fieldset {
-    margin-bottom: 0;
-  }
-
-  .#{$block-class} .#{$block-class}__form--fieldset > * {
-    margin-bottom: $spacing-05;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@include exports('edit-tearsheet') {
-  @include edit-tearsheet;
+$block-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit;
+$form-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__form;
+$section-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__section;
+$tearsheet-divider-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__section--divider;
+$tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__form--fieldset;
+
+.#{$block-class} {
+  --#{$block-class}--total-width: 0;
+}
+
+.#{$block-class} .#{$form-block-class}__form--hidden-form {
+  display: none;
+}
+
+.#{$block-class} .#{$form-block-class}__form--visible-form {
+  animation-duration: motion.$duration-slow-01;
+  animation-fill-mode: forwards;
+  animation-name: form-content-entrance;
+  animation-timing-function: motion.$standard-easing;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion) {
+  .#{$block-class} .#{$form-block-class}__form--visible-form {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+.#{$block-class} .#{$block-class}__content {
+  height: 100%;
+  padding: $spacing-06;
+  overflow-x: hidden;
+}
+
+.#{$block-class}
+  .#{$block-class}__content
+  .#{c4p-settings.$carbon-prefix}--grid {
+  padding: 0;
+  margin: 0;
+}
+
+.#{$block-class} .#{$block-class}__form--heading {
+  padding-bottom: $spacing-06;
+}
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--btn-set
+  .#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--disabled {
+  box-shadow: -0.0625rem 0 0 0 $button-separator;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--side-nav--ux {
+  position: initial;
+  width: 100%;
+  max-width: 100%;
+  background-color: transparent;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--side-nav__link:hover {
+  cursor: pointer;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--side-nav__overlay-active {
+  display: none;
+}
+
+.#{$block-class} .#{$block-class}__form--title,
+.#{$block-class} .#{$block-class}__section--title {
+  margin-bottom: $spacing-05;
+}
+
+.#{$block-class} .#{$block-class}__section--subtitle,
+.#{$block-class} .#{$block-class}__form--subtitle {
+  @include type.type-style('productive-heading-01');
+
+  margin-bottom: $spacing-03;
+}
+
+.#{$block-class} .#{$block-class}__section--description,
+.#{$block-class} .#{$block-class}__form--description {
+  @include type.type-style('body-long-01');
+
+  margin-bottom: $spacing-06;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--fieldset {
+  margin-bottom: 0;
+}
+
+.#{$block-class} .#{$block-class}__form--fieldset > * {
+  margin-bottom: $spacing-05;
 }

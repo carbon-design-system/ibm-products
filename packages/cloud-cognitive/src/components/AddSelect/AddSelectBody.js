@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Tag } from 'carbon-components-react';
+import { Tag } from '@carbon/react';
 import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
 import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
 import { AddSelectSidebar } from './AddSelectSidebar';
@@ -33,6 +33,7 @@ export let AddSelectBody = ({
   columnInputPlaceholder,
   defaultModifiers,
   description,
+  filterByLabel,
   globalFilterOpts,
   globalFiltersIconDescription,
   globalFiltersPlaceholderText,
@@ -60,6 +61,7 @@ export let AddSelectBody = ({
   open,
   portalTarget,
   searchResultsLabel,
+  sortByLabel,
   title,
   useNormalizedItems,
   ...rest
@@ -242,6 +244,7 @@ export let AddSelectBody = ({
               sortAttribute={sortAttribute}
               sortDirection={sortDirection}
               sortBy={globalSortBy}
+              sortByLabel={sortByLabel}
             />
           )}
         </div>
@@ -253,6 +256,7 @@ export let AddSelectBody = ({
             items={itemsToDisplay}
             columnInputPlaceholder={columnInputPlaceholder}
             header={path[0]?.title}
+            filterByLabel={filterByLabel}
           />
         </div>
       ) : (
@@ -305,6 +309,7 @@ AddSelectBody.propTypes = {
   columnInputPlaceholder: PropTypes.string,
   defaultModifiers: PropTypes.array,
   description: PropTypes.string,
+  filterByLabel: PropTypes.string,
   globalFilterOpts: PropTypes.array,
   globalFiltersIconDescription: PropTypes.string,
   globalFiltersPlaceholderText: PropTypes.string,
@@ -326,11 +331,11 @@ AddSelectBody.propTypes = {
       PropTypes.shape({
         avatar: PropTypes.shape({
           alt: PropTypes.string,
-          icon: PropTypes.object,
+          icon: PropTypes.func,
           src: PropTypes.string,
         }),
         children: PropTypes.object,
-        icon: PropTypes.object,
+        icon: PropTypes.func,
         id: PropTypes.string.isRequired,
         meta: PropTypes.oneOfType([
           PropTypes.arrayOf(
@@ -365,6 +370,7 @@ AddSelectBody.propTypes = {
   open: PropTypes.bool,
   portalTarget: PropTypes.node,
   searchResultsLabel: PropTypes.string,
+  sortByLabel: PropTypes.string,
   title: PropTypes.string,
   useNormalizedItems: PropTypes.bool,
 };

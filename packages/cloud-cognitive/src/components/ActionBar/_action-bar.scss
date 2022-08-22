@@ -6,62 +6,50 @@
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
-@import '../../global/styles/mixins';
+@use '@carbon/styles/scss/spacing' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins' as *;
 
-// ActionBar uses the following Carbon components:
-// Button, OverflowMenu, OverflowMenuItem
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+$_block-class: #{c4p-settings.$pkg-prefix}--action-bar;
+$block-class-overflow-items: #{$_block-class}-overflow-items;
 
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
-@mixin action-bar {
-  $block-class: #{$pkg-prefix}--action-bar;
-  $block-class-overflow-items: #{$block-class}-overflow-items;
-
-  @include block-wrap($block-class) {
-    &.#{$block-class} {
-      display: block;
-    }
-
-    .#{$block-class}__displayed-items {
-      display: inline-flex;
-      width: 100%;
-      white-space: nowrap;
-    }
-
-    .#{$block-class}__displayed-items--right {
-      justify-content: flex-end;
-    }
-
-    .#{$block-class-overflow-items} {
-      display: inline-block;
-    }
-
-    .#{$block-class}__hidden-sizing-items {
-      // This breadcrumb container is used to measure the width of all displayable breadcrumbs
-      @include measuring-container;
-    }
+@include block-wrap($block-class: $_block-class) {
+  &.#{$_block-class} {
+    display: block;
   }
 
-  @include block-wrap($block-class-overflow-items + '__options') {
-    .#{$block-class-overflow-items}__item {
-      padding: 0 $spacing-03;
-    }
+  .#{$_block-class}__displayed-items {
+    display: inline-flex;
+    width: 100%;
+    white-space: nowrap;
+  }
 
-    .#{$block-class-overflow-items}__item-content {
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
-    }
+  .#{$_block-class}__displayed-items--right {
+    justify-content: flex-end;
+  }
 
-    .#{$block-class-overflow-items}__item svg {
-      margin: 0 $spacing-02;
-    }
+  .#{$block-class-overflow-items} {
+    display: inline-block;
+  }
+
+  .#{$_block-class}__hidden-sizing-items {
+    // This breadcrumb container is used to measure the width of all displayable breadcrumbs
+    @include measuring-container;
   }
 }
 
-@include exports('action-bar') {
-  @include action-bar;
+@include block-wrap($block-class: $block-class-overflow-items + '__options') {
+  .#{$block-class-overflow-items}__item {
+    padding: 0 $spacing-03;
+  }
+
+  .#{$block-class-overflow-items}__item-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .#{$block-class-overflow-items}__item svg {
+    margin: 0 $spacing-02;
+  }
 }

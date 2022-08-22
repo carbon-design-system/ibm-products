@@ -1,50 +1,52 @@
 /*
 * Licensed Materials - Property of IBM
 * 5724-Q36
-* (c) Copyright IBM Corp. 2021
+* (c) Copyright IBM Corp. 2022
 * US Government Users Restricted Rights - Use, duplication or disclosure
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
-@import './variables';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use './variables';
 
-.#{$block-class}__draggable-handleStyle {
+.#{variables.$block-class}__draggable-handleStyle {
   display: flex;
   align-items: center;
   margin-right: $spacing-03;
   cursor: grab;
 }
 
-.#{$block-class}__draggable-handleStyle.disabled {
+.#{variables.$block-class}__draggable-handleStyle.disabled {
   pointer-events: none;
 }
 
-svg.#{$block-class}__draggable-handleStyle.disable {
-  fill: $disabled-02;
+svg.#{variables.$block-class}__draggable-handleStyle.disable {
+  fill: $icon-disabled;
 }
 
-.#{$block-class}__draggable-handleHolder {
+.#{variables.$block-class}__draggable-handleHolder {
   display: flex;
   height: $spacing-07;
   padding-left: $spacing-02;
   margin-bottom: $spacing-03;
-  background: $ui-02;
-  &.#{$block-class}__draggable-handleHolder-isOver {
+  background: $layer-02;
+  &.#{variables.$block-class}__draggable-handleHolder-isOver {
     border: 2px dashed $focus;
     background-color: $highlight;
   }
 }
 
-.#{$block-class}__draggable-handleHolder-droppable {
+.#{variables.$block-class}__draggable-handleHolder-droppable {
   display: flex;
   width: 100%;
 }
 
-.#{$block-class}__draggable-handleHolder--grabbed {
+.#{variables.$block-class}__draggable-handleHolder--grabbed {
   background-color: $highlight;
-  color: $text-01;
+  color: $text-primary;
 }
 
-.#{$block-class}__shared-ui--assistive-text {
+.#{variables.$block-class}__shared-ui--assistive-text {
   // hide the assistive text. can not use display: none which will also hide from ARIA
   position: absolute;
   overflow: hidden;

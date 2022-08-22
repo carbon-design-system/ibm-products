@@ -6,17 +6,18 @@
 //
 
 import React, { useState } from 'react';
-import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+// import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { MultiAddSelect } from '.';
 import mdx from './MultiAddSelect.mdx';
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 // import { action } from '@storybook/addon-actions';
-import image from '../UserProfileImage/headshot.png'; // cspell:disable-line
-import { Group24, Document16 } from '@carbon/icons-react';
+import image from '../UserProfileImage/headshot.jpg'; // cspell:disable-line
+import { Group, Document } from '@carbon/icons-react';
+
 import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--add-select__meta-panel`;
 
@@ -24,7 +25,7 @@ export default {
   title: getStoryTitle(MultiAddSelect.displayName),
   component: MultiAddSelect,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },
@@ -152,7 +153,7 @@ export const WithHierarchy = prepareStory(Template, {
                 title: 'file1.pdf',
                 fileType: 'pdf',
                 size: '100',
-                icon: Document16,
+                icon: (props) => <Document size={16} {...props} />,
                 tag: 'business',
                 children: {
                   entries: [
@@ -162,7 +163,7 @@ export const WithHierarchy = prepareStory(Template, {
                       title: '9000.html',
                       fileType: 'html',
                       size: '9000',
-                      icon: Document16,
+                      icon: (props) => <Document size={16} {...props} />,
                     },
                   ],
                 },
@@ -173,7 +174,7 @@ export const WithHierarchy = prepareStory(Template, {
                 title: 'index.js',
                 fileType: 'js',
                 size: '200',
-                icon: Document16,
+                icon: (props) => <Document size={16} {...props} />,
               },
               {
                 id: '1-3',
@@ -181,7 +182,7 @@ export const WithHierarchy = prepareStory(Template, {
                 title: 'sitemap.xml',
                 fileType: 'xml',
                 size: '10',
-                icon: Document16,
+                icon: (props) => <Document size={16} {...props} />,
               },
             ],
           },
@@ -198,7 +199,7 @@ export const WithHierarchy = prepareStory(Template, {
                 title: '7000.html',
                 fileType: 'html',
                 size: '7000',
-                icon: Document16,
+                icon: (props) => <Document size={16} {...props} />,
               },
             ],
           },
@@ -264,7 +265,7 @@ export const WithAvatars = prepareStory(Template, {
           title: 'item 2',
           subtitle: 'item 2 subtitle',
           avatar: {
-            icon: Group24,
+            icon: (props) => <Group size={24} {...props} />,
             backgroundColor: 'dark-green',
           },
         },
@@ -274,7 +275,7 @@ export const WithAvatars = prepareStory(Template, {
           title: 'item 3',
           subtitle: 'item 3 subtitle',
           avatar: {
-            icon: Group24,
+            icon: (props) => <Group size={24} {...props} />,
           },
         },
       ],

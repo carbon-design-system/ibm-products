@@ -1,122 +1,115 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
-// Card uses the following Carbon components:
-// Button, OverflowMenu, OverflowMenuItem
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+$block-class: #{c4p-settings.$pkg-prefix}--card;
 
-@mixin card {
-  $block-class: #{$pkg-prefix}--card;
-
-  .#{$block-class} {
-    background: $ui-01;
-    color: $text-01;
-  }
-
-  .#{$block-class}__clickable {
-    cursor: pointer;
-    transition: background $duration--fast-02;
-  }
-
-  .#{$block-class}__clickable:hover {
-    background: $hover-ui;
-  }
-
-  .#{$block-class}__media-left {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .#{$block-class}__media-left .#{$block-class}__content-container {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-  }
-
-  .#{$block-class}__media-left .#{$block-class}__footer {
-    align-self: flex-end;
-    margin-top: auto;
-  }
-
-  .#{$block-class}__media > * {
-    display: block;
-    max-width: 100%;
-  }
-
-  .#{$block-class}__header {
-    padding: $spacing-05;
-  }
-
-  .#{$block-class}__header-label-only {
-    padding-bottom: $spacing-03;
-  }
-
-  .#{$block-class}__header-label-only .#{$block-class}__label {
-    margin-bottom: 0;
-  }
-
-  .#{$block-class}__header-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .#{$block-class}__label {
-    @include carbon--type-style('label-01');
-
-    margin-bottom: $spacing-01;
-  }
-
-  .#{$block-class}__description {
-    @include carbon--type-style('caption-01');
-
-    margin-top: $spacing-01;
-  }
-
-  .#{$block-class}__body {
-    @include carbon--type-style('body-short-01');
-
-    padding: $spacing-05;
-    padding-top: 0;
-  }
-
-  .#{$block-class}__footer {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .#{$block-class}__actions {
-    display: flex;
-    flex-direction: row;
-    margin: $spacing-05;
-    margin-top: 0;
-  }
-
-  .#{$block-class}__icon {
-    color: inherit;
-    cursor: pointer;
-  }
-
-  .#{$block-class}__link {
-    color: inherit;
-    text-decoration: inherit;
-  }
-
-  .#{$block-class}__pictogram {
-    padding-top: $spacing-05;
-    padding-left: $spacing-05;
-  }
+.#{$block-class} {
+  background: $layer-01;
+  color: $text-primary;
 }
 
-@include exports('card') {
-  @include card;
+.#{$block-class}__clickable {
+  cursor: pointer;
+  transition: background $duration-fast-02;
+}
+
+.#{$block-class}__clickable:hover {
+  background: $background-hover;
+}
+
+.#{$block-class}__media-left {
+  display: flex;
+  flex-direction: row;
+}
+
+.#{$block-class}__media-left .#{$block-class}__content-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.#{$block-class}__media-left .#{$block-class}__footer {
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+.#{$block-class}__media > * {
+  display: block;
+  max-width: 100%;
+}
+
+.#{$block-class}__header {
+  padding: $spacing-05;
+}
+
+.#{$block-class}__header-label-only {
+  padding-bottom: $spacing-03;
+}
+
+.#{$block-class}__header-label-only .#{$block-class}__label {
+  margin-bottom: 0;
+}
+
+.#{$block-class}__header-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.#{$block-class}__label {
+  @include type-style('label-01');
+
+  margin-bottom: $spacing-01;
+}
+
+.#{$block-class}__description {
+  @include type-style('label-01');
+
+  margin-top: $spacing-01;
+}
+
+.#{$block-class}__body {
+  @include type-style('body-short-01');
+
+  padding: $spacing-05;
+  padding-top: 0;
+}
+
+.#{$block-class}__footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.#{$block-class}__actions {
+  display: flex;
+  flex-direction: row;
+  margin: $spacing-05;
+  margin-top: 0;
+}
+
+.#{$block-class}__icon {
+  color: inherit;
+  cursor: pointer;
+}
+
+.#{$block-class}__link {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.#{$block-class}__pictogram {
+  padding-top: $spacing-05;
+  padding-left: $spacing-05;
 }

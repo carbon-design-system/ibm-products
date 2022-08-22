@@ -6,29 +6,31 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@import './variables';
+@use '@carbon/styles/scss/theme' as *;
+@use '../../../global/styles/project-settings' as c4p-settings;
+@use './variables' as *;
 
 .#{$block-class}__sortableColumn {
-  .#{$carbon-prefix}--table-header-label .header-title {
+  .#{c4p-settings.$carbon-prefix}--table-header-label .header-title {
     display: inline-block;
     width: auto;
   }
-  .#{$carbon-prefix}--table-header-label {
+  .#{c4p-settings.$carbon-prefix}--table-header-label {
     display: block;
     width: 100%;
     height: 100%;
   }
-  .#{$carbon-prefix}--table-header-label button:focus,
-  .#{$carbon-prefix}--table-header-label button:active,
-  .#{$carbon-prefix}--table-header-label button:focus svg {
+  .#{c4p-settings.$carbon-prefix}--table-header-label button:focus,
+  .#{c4p-settings.$carbon-prefix}--table-header-label button:active,
+  .#{c4p-settings.$carbon-prefix}--table-header-label button:focus svg {
     /* stylelint-disable-next-line declaration-no-important */
     background: none !important;
     /* stylelint-disable-next-line declaration-no-important */
-    color: $text-01 !important;
+    color: $text-primary !important;
     /* stylelint-disable-next-line declaration-no-important */
     outline: none !important;
   }
-  .#{$carbon-prefix}--table-header-label button {
+  .#{c4p-settings.$carbon-prefix}--table-header-label button {
     width: 100%;
     min-width: 100%;
     min-height: 0;
@@ -38,18 +40,18 @@
     background: none !important;
     box-shadow: none;
     /* stylelint-disable-next-line declaration-no-important */
-    color: $text-01 !important;
+    color: $text-primary !important;
     font: inherit;
   }
-  .#{$carbon-prefix}--table-header-label button svg {
-    fill: $text-01;
+  .#{c4p-settings.$carbon-prefix}--table-header-label button svg {
+    fill: $text-primary;
     visibility: hidden;
   }
 }
 
 .#{$block-class}__sortableColumn:hover,
 .#{$block-class}__sortableColumn.#{$block-class}__isSorted {
-  .#{$carbon-prefix}--table-header-label svg {
+  .#{c4p-settings.$carbon-prefix}--table-header-label svg {
     visibility: visible;
   }
 }

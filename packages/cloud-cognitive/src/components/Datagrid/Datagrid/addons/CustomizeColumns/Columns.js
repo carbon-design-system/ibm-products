@@ -11,7 +11,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { Checkbox } from 'carbon-components-react';
+import { Checkbox } from '@carbon/react';
 import update from 'immutability-helper';
 import { pkg } from '../../../../../settings';
 import DraggableElement from '../../DraggableElement';

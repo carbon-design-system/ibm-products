@@ -8,7 +8,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ActionBar } from '.';
-import { Lightning16, Bee16 } from '@carbon/icons-react';
+import { Lightning, Bee } from '@carbon/icons-react';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
 import { pkg, carbon } from '../../settings';
@@ -17,8 +17,12 @@ const blockClass = `${pkg.prefix}--action-bar`;
 const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
   key: `key is this num ${num}`,
   id: `id-${num}`,
-  renderIcon: num % 2 ? Lightning16 : Bee16,
+  renderIcon:
+    num % 2
+      ? (props) => <Lightning size={16} {...props} />
+      : (props) => <Bee size={16} {...props} />,
   iconDescription: `Action ${num.toString().padStart(2, '0')}`,
+  label: `Action ${num.toString().padStart(2, '0')}`,
   onClick: () => {},
 }));
 
@@ -112,10 +116,10 @@ describe(ActionBar.displayName, () => {
     );
 
     screen.getByText(/Action 01/, {
-      selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+      selector: `.${blockClass}__displayed-items .${carbon.prefix}--popover-content.${carbon.prefix}--tooltip-content`,
     });
     screen.getByText(/Action 10/, {
-      selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+      selector: `.${blockClass}__displayed-items .${carbon.prefix}--popover-content.${carbon.prefix}--tooltip-content`,
     });
   });
 
@@ -131,7 +135,7 @@ describe(ActionBar.displayName, () => {
 
     expect(
       screen.queryByText(/Action 10/, {
-        selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+        selector: `.${blockClass}__displayed-items .${carbon.prefix}--popover-content.${carbon.prefix}--tooltip-content`,
       })
     ).toBeNull();
 
@@ -182,15 +186,15 @@ describe(ActionBar.displayName, () => {
     );
 
     screen.getByText(/Action 01/, {
-      selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+      selector: `.${blockClass}__displayed-items .${carbon.prefix}--popover-content.${carbon.prefix}--tooltip-content`,
     });
     screen.getByText(/Action 02/, {
-      selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+      selector: `.${blockClass}__displayed-items .${carbon.prefix}--popover-content.${carbon.prefix}--tooltip-content`,
     });
 
     expect(
       screen.queryByText(/Action 03/, {
-        selector: `.${blockClass}__displayed-items .${carbon.prefix}--assistive-text`,
+        selector: `.${blockClass}__displayed-items .${carbon.prefix}--popover-content.${carbon.prefix}--tooltip-content`,
       })
     ).toBeNull();
   });

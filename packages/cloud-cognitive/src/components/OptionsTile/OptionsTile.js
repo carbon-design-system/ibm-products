@@ -17,12 +17,12 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Toggle } from 'carbon-components-react';
+import { Toggle } from '@carbon/react';
 import {
-  ChevronDown16,
-  Locked16,
-  WarningAltFilled16,
-  WarningFilled16,
+  ChevronDown,
+  Locked,
+  WarningAltFilled,
+  WarningFilled,
 } from '@carbon/icons-react';
 import * as carbonMotion from '@carbon/motion';
 
@@ -191,15 +191,15 @@ export let OptionsTile = React.forwardRef(
       const summaryClasses = [`${blockClass}__summary`];
 
       if (invalid) {
-        Icon = WarningFilled16;
+        Icon = WarningFilled;
         text = invalidText;
         summaryClasses.push(`${blockClass}__summary--invalid`);
       } else if (warn) {
-        Icon = WarningAltFilled16;
+        Icon = WarningAltFilled;
         text = warnText;
         summaryClasses.push(`${blockClass}__summary--warn`);
       } else if (locked) {
-        Icon = Locked16;
+        Icon = Locked;
         summaryClasses.push(`${blockClass}__summary--locked`);
 
         if (!text) {
@@ -221,7 +221,7 @@ export let OptionsTile = React.forwardRef(
           </h6>
           {text && (
             <span className={cx(summaryClasses)} aria-hidden={summaryHidden}>
-              {Icon && <Icon />}
+              {Icon && <Icon size={16} />}
               <span className={`${blockClass}__summary-text`}>{text}</span>
             </span>
           )}
@@ -259,20 +259,21 @@ export let OptionsTile = React.forwardRef(
               onToggle={onToggle}
               size="sm"
               disabled={isLocked}
+              labelText={title}
             />
           </div>
         )}
         {isExpandable ? (
           <details open={isOpen} ref={detailsRef}>
             <summary className={`${blockClass}__header`} onClick={toggle}>
-              <ChevronDown16 className={`${blockClass}__chevron`} />
+              <ChevronDown size={16} className={`${blockClass}__chevron`} />
               {renderTitle()}
             </summary>
 
             <div className={`${blockClass}__content`} ref={contentRef}>
               {isLocked && (
                 <p className={`${blockClass}__locked-text`}>
-                  <Locked16 />
+                  <Locked size={16} />
                   {lockedText}
                 </p>
               )}

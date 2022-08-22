@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -7,8 +7,6 @@
 
 import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
-
-import { carbon } from '../../settings';
 
 import {
   Button,
@@ -20,7 +18,6 @@ import {
   SideNav,
   SideNavItems,
   SideNavLink,
-  Row,
   Tab,
   Tabs,
   Table,
@@ -29,15 +26,17 @@ import {
   TableBody,
   TableRow,
   TableCell,
-} from 'carbon-components-react';
+  usePrefix,
+  TabList,
+} from '@carbon/react';
 import {
-  CheckmarkFilled16,
-  Lightning16,
-  Bee24,
-  Printer16,
-  Security24,
-  Settings16,
-  VolumeMute16,
+  CheckmarkFilled,
+  Lightning,
+  Bee,
+  Printer,
+  Security,
+  Settings,
+  VolumeMute,
 } from '@carbon/icons-react';
 import cx from 'classnames';
 
@@ -61,8 +60,9 @@ const storyClass = 'page-header-stories';
 
 const makeActionBarItem = (item) => ({
   key: `a-key-${item}`,
-  renderIcon: Lightning16,
+  renderIcon: (props) => <Lightning size={16} {...props} />,
   iconDescription: `Action ${item}`,
+  label: `Action ${item}`,
 });
 const actionBarItems = {
   'No action bar': null,
@@ -70,9 +70,24 @@ const actionBarItems = {
   'Four items': [1, 2, 3, 4].map(makeActionBarItem),
   'Many items': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(makeActionBarItem),
   'In context items': [
-    { key: '1', renderIcon: Printer16, iconDescription: `Print` },
-    { key: '2', renderIcon: Settings16, iconDescription: `Settings` },
-    { key: '3', renderIcon: VolumeMute16, iconDescription: `Mute` },
+    {
+      key: '1',
+      renderIcon: (props) => <Printer size={16} {...props} />,
+      iconDescription: `Print`,
+      label: `Print`,
+    },
+    {
+      key: '2',
+      renderIcon: (props) => <Settings size={16} {...props} />,
+      iconDescription: `Settings`,
+      label: `Settings`,
+    },
+    {
+      key: '3',
+      renderIcon: (props) => <VolumeMute size={16} {...props} />,
+      iconDescription: `Mute`,
+      label: `Mute`,
+    },
   ],
 };
 
@@ -114,7 +129,8 @@ const children = {
   'Nothing in the available area': null,
   'A status indicator': (
     <>
-      <CheckmarkFilled16 className={`${storyClass}__status-icon`} /> Running
+      <CheckmarkFilled size={16} className={`${storyClass}__status-icon`} />{' '}
+      Running
     </>
   ),
   // cspell: disable
@@ -155,30 +171,36 @@ const navigation = {
   'No navigation': null,
   'Four tabs': (
     <Tabs>
-      <Tab label="Tab 1" />
-      <Tab label="Tab 2" />
-      <Tab label="Tab 3" />
-      <Tab label="Tab 4" />
+      <TabList aria-label="Tab list">
+        <Tab>Tab 1</Tab>
+        <Tab>Tab 2</Tab>
+        <Tab>Tab 3</Tab>
+        <Tab>Tab 4</Tab>
+      </TabList>
     </Tabs>
   ),
   'Many tabs': (
     <Tabs>
-      <Tab label="Tab 1" />
-      <Tab label="Tab 2" />
-      <Tab label="Tab 3" />
-      <Tab label="Tab 4" />
-      <Tab label="Tab 5" />
-      <Tab label="Tab 6" />
-      <Tab label="Tab 7" />
-      <Tab label="Tab 8" />
+      <TabList aria-label="Tab list">
+        <Tab>Tab 1</Tab>
+        <Tab>Tab 2</Tab>
+        <Tab>Tab 3</Tab>
+        <Tab>Tab 4</Tab>
+        <Tab>Tab 5</Tab>
+        <Tab>Tab 6</Tab>
+        <Tab>Tab 7</Tab>
+        <Tab>Tab 8</Tab>
+      </TabList>
     </Tabs>
   ),
   'In context tabs': (
     <Tabs>
-      <Tab label="Summary" />
-      <Tab label="Region 1" />
-      <Tab label="Region 2" />
-      <Tab label="Region 3" />
+      <TabList aria-label="Tab list">
+        <Tab>Summary</Tab>
+        <Tab>Region 1</Tab>
+        <Tab>Region 2</Tab>
+        <Tab>Region 3</Tab>
+      </TabList>
     </Tabs>
   ),
 };
@@ -243,12 +265,7 @@ const pageActions = {
   ],
   'User defined page actions': {
     content: (
-      <Button
-        type="button"
-        className={`${carbon.prefix}--button`}
-        size="field"
-        style={{ maxWidth: '100%' }}
-      >
+      <Button type="button" size="lg" style={{ maxWidth: '100%' }}>
         <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
           Custom component
         </span>
@@ -261,8 +278,7 @@ const pageActions = {
     content: (
       <Button
         type="button"
-        className={`${carbon.prefix}--button`}
-        size="field"
+        size="lg"
         style={{ maxWidth: '100%' }}
         title="Custom component with long content"
       >
@@ -322,17 +338,21 @@ const userDefinedStyle = { color: 'red', fontWeight: '600' };
 const title = {
   'No title': null,
   'Plain text title': 'Page title',
-  'Title with icon': { text: 'Page title', loading: false, icon: Bee24 },
+  'Title with icon': {
+    text: 'Page title',
+    loading: false,
+    icon: (props) => <Bee size={24} {...props} />,
+  },
   'Long title with icon': {
     text: 'A very long page title which will almost certainly have to be truncated at some point',
     loading: false,
-    icon: Bee24,
+    icon: (props) => <Bee size={24} {...props} />,
   },
   'Loading title': { text: 'Patience is a virtue', loading: true },
   'In context title': {
     text: 'Authentication activity',
     loading: false,
-    icon: Security24,
+    icon: (props) => <Security size={24} {...props} />,
   },
   'User defined title': {
     content: (
@@ -472,65 +492,61 @@ const demoSubtitle = 'This report details the monthly authentication failures';
 
 const dummyPageContent = (
   <Grid className={`${storyClass}__dummy-content`} narrow={true}>
-    <Row>
-      <Column
-        sm={1}
-        md={2}
-        lg={4}
-        className={`${storyClass}__dummy-content-block`}
-      >
-        <div className={`${storyClass}__dummy-content-text`}>Column #1</div>
-      </Column>
-      <Column
-        sm={1}
-        md={2}
-        lg={4}
-        className={`${storyClass}__dummy-content-block`}
-      >
-        <div className={`${storyClass}__dummy-content-text`}>Column #2</div>
-      </Column>
-      <Column
-        sm={2}
-        md={4}
-        lg={8}
-        className={`${storyClass}__dummy-content-block`}
-      >
-        <div className={`${storyClass}__dummy-content-text`}>Column #3</div>
-      </Column>
-    </Row>
+    <Column
+      sm={1}
+      md={2}
+      lg={4}
+      className={`${storyClass}__dummy-content-block`}
+    >
+      <div className={`${storyClass}__dummy-content-text`}>Column #1</div>
+    </Column>
+    <Column
+      sm={1}
+      md={2}
+      lg={4}
+      className={`${storyClass}__dummy-content-block`}
+    >
+      <div className={`${storyClass}__dummy-content-text`}>Column #2</div>
+    </Column>
+    <Column
+      sm={2}
+      md={4}
+      lg={8}
+      className={`${storyClass}__dummy-content-block`}
+    >
+      <div className={`${storyClass}__dummy-content-text`}>Column #3</div>
+    </Column>
   </Grid>
 );
 
 const demoDummyPageContent = (
   <section className={`${storyClass}__dummy-content`}>
     <Grid narrow={true}>
-      <Row>
-        <Column
-          sm={4}
-          md={8}
-          lg={16}
-          className={`${storyClass}__dummy-content-block`}
-        >
-          <Table>
-            <TableHead>
-              <TableRow>
-                {demoTableHeaders.map((header) => (
-                  <TableHeader key={header}>{header}</TableHeader>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {demoTableData.map((row) => (
-                <TableRow key={row.Index}>
-                  {Object.keys(row).map((key) => {
-                    return <TableCell key={key}>{row[key]}</TableCell>;
-                  })}
-                </TableRow>
+      <Column
+        sm={4}
+        md={8}
+        lg={16}
+        className={`${storyClass}__dummy-content-block`}
+      >
+        <Table>
+          <TableHead>
+            <TableRow>
+              {demoTableHeaders.map((header) => (
+                <TableHeader key={header}>{header}</TableHeader>
               ))}
-            </TableBody>
-          </Table>{' '}
-        </Column>
-      </Row>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {demoTableData.map((row) => (
+              <TableRow key={row.Index}>
+                {Object.keys(row).map((key) => {
+                  return <TableCell key={key}>{row[key]}</TableCell>;
+                })}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>{' '}
+      </Column>
     </Grid>
   </section>
 );
@@ -540,6 +556,7 @@ const actionTitleSave = action('title onSave');
 // Template.
 // eslint-disable-next-line react/prop-types
 const Template = ({ children, title, ...props }) => {
+  const carbonPrefix = usePrefix();
   // eslint-disable-next-line react/prop-types
   const [titleText, setTitleText] = useState(title?.text ?? title);
   const handleTitleSave = title?.onSave
@@ -579,7 +596,7 @@ const Template = ({ children, title, ...props }) => {
   // console.log(theTitle);
   return (
     <>
-      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+      <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
       <PageHeader
         {...props}
         title={
@@ -752,11 +769,12 @@ export const fullyLoadedAndSome = prepareStory(Template, {
 // Template for demo.
 // eslint-disable-next-line react/prop-types
 const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
+  const carbonPrefix = usePrefix();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
 
   return (
     <>
-      <style>{`.${carbon.prefix}--modal { opacity: 0; }`};</style>
+      <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
       <div
         className={cx(`${storyClass}__app`, {
           [`${storyClass}__app--whole-page-scroll`]:

@@ -8,10 +8,11 @@
 // @flow
 import React from 'react';
 import cx from 'classnames';
-import { TableSelectRow } from 'carbon-components-react';
+import { DataTable } from '@carbon/react';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
 import { selectionColumnId } from './common-column-ids';
 import { pkg, carbon } from '../../settings';
+const { TableSelectRow } = DataTable;
 
 const blockClass = `${pkg.prefix}--datagrid`;
 

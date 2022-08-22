@@ -8,12 +8,8 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  OverflowMenu,
-  OverflowMenuItem,
-  Checkbox,
-} from 'carbon-components-react';
-import { CaretDown16 } from '@carbon/icons-react';
+import { Checkbox, OverflowMenu, OverflowMenuItem } from '@carbon/react';
+import { CaretDown } from '@carbon/icons-react';
 import { pkg } from '../../../settings';
 // cspell:words columnheader
 
@@ -65,9 +61,15 @@ const SelectAllWithToggle = ({
           }}
           disabled={disabled}
           id={`${tableId}-select-all-checkbox-id`}
+          labelText={allRowsLabel}
+          hideLabel
         />
       </span>
-      <OverflowMenu renderIcon={CaretDown16} size="sm">
+      <OverflowMenu
+        renderIcon={(props) => <CaretDown size={16} {...props} />}
+        size="sm"
+        ariaLabel={allRowsLabel}
+      >
         <OverflowMenuItem
           itemText={allPageRowsLabel}
           requireTitle

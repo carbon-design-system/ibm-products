@@ -5,67 +5,62 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// Standard imports.
-@import '../../global/styles/project-settings';
-
 // ProductiveCard uses the following IBM Products components:
 // Card
-@import '../Card/card';
+@use '../Card/card' as *;
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
-@mixin card-productive {
-  $block-class: #{$pkg-prefix}--card;
+$block-class: #{c4p-settings.$pkg-prefix}--card;
 
-  .#{$block-class}__productive {
-    .#{$block-class}__header {
-      padding-right: 0;
-    }
-
-    .#{$block-class}__title {
-      @include carbon--type-style('productive-heading-02');
-    }
-
-    .#{$block-class}__title-lg .#{$block-class}__title {
-      @include carbon--type-style('productive-heading-03');
-    }
-
-    .#{$block-class}__body {
-      padding-top: $spacing-03;
-    }
-
-    .#{$block-class}__footer {
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid $ui-03;
-    }
-
-    .#{$block-class}__footer-no-button {
-      justify-content: flex-end;
-    }
-
-    .#{$block-class}__actions {
-      margin: 0;
-    }
-
-    .#{$block-class}__actions-header {
-      margin-top: calc(-1 * #{$spacing-02});
-      margin-right: $spacing-03;
-    }
-
-    .#{$block-class}__title-lg .#{$block-class}__actions-header,
-    .#{$block-class}__header-has-label .#{$block-class}__actions-header {
-      margin-top: 0;
-    }
-
-    .#{$block-class}__icon {
-      margin-right: $spacing-05;
-    }
-
-    .#{$block-class}__header-container {
-      align-items: start;
-    }
+.#{$block-class}__productive {
+  .#{$block-class}__header {
+    padding-right: 0;
   }
-}
 
-@include exports('card-productive') {
-  @include card-productive;
+  .#{$block-class}__title {
+    @include type.type-style('productive-heading-02');
+  }
+
+  .#{$block-class}__title-lg .#{$block-class}__title {
+    @include type.type-style('productive-heading-03');
+  }
+
+  .#{$block-class}__body {
+    padding-top: $spacing-03;
+  }
+
+  .#{$block-class}__footer {
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid theme.$border-subtle-01;
+  }
+
+  .#{$block-class}__footer-no-button {
+    justify-content: flex-end;
+  }
+
+  .#{$block-class}__actions {
+    margin: 0;
+  }
+
+  .#{$block-class}__actions-header {
+    margin-top: calc(-1 * #{$spacing-02});
+    margin-right: $spacing-03;
+  }
+
+  .#{$block-class}__title-lg .#{$block-class}__actions-header,
+  .#{$block-class}__header-has-label .#{$block-class}__actions-header {
+    margin-top: 0;
+  }
+
+  .#{$block-class}__icon {
+    margin-right: $spacing-05;
+  }
+
+  .#{$block-class}__header-container {
+    align-items: start;
+  }
 }

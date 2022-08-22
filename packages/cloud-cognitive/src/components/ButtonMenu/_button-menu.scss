@@ -6,31 +6,24 @@
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '@carbon/styles/scss/spacing' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
-// TODO: @import(s) of Carbon settings and component styles and other
+// TODO: @use(s) of Carbon settings and component styles and other
 // related component styles used by ButtonMenu
 
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
-@mixin button-menu {
-  // The block part of our conventional BEM class names (blockClass__E--M).
-  $block-class: #{$pkg-prefix}--button-menu;
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--button-menu;
 
-  .#{$block-class} {
-    min-width: 160px;
+.#{$block-class} {
+  min-width: 160px;
 
-    .#{$block-class}__trigger {
-      width: 100%;
-      padding: 0 $spacing-05;
-    }
-  }
-
-  .#{$block-class}__options.#{$carbon-prefix}--overflow-menu-options::after {
-    content: initial;
+  .#{$block-class}__trigger {
+    width: 100%;
+    padding: 0 $spacing-05;
   }
 }
 
-@include exports('button-menu') {
-  @include button-menu;
+.#{$block-class}__options.#{c4p-settings.$carbon-prefix}--overflow-menu-options::after {
+  content: initial;
 }

@@ -14,7 +14,7 @@ import {
   SideNav,
   SideNavItems,
   SideNavMenuItem,
-} from 'carbon-components-react';
+} from '@carbon/react';
 import { pkg } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';

@@ -84,7 +84,7 @@ ExpressiveCard.propTypes = {
   /**
    * Provides the icon that's displayed at the top of the card
    */
-  pictogram: PropTypes.object,
+  pictogram: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
    * Optionally specify an href for your Button to become an <a> element
    */

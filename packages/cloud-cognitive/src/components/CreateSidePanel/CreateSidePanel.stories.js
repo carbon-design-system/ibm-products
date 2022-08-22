@@ -8,20 +8,18 @@ import React, { useState } from 'react';
 import {
   Button,
   Grid,
-  Row,
   Column,
   TextInput,
   NumberInput,
   Dropdown,
   FormGroup,
-} from 'carbon-components-react';
-import {
   Header,
   HeaderContainer,
   HeaderName,
-} from 'carbon-components-react/lib/components/UIShell';
+  usePrefix,
+} from '@carbon/react';
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 import {
   getStoryTitle,
   prepareStory,
@@ -55,7 +53,6 @@ const defaultStoryProps = {
     'We recommend you fill out and evaluate these details at a minimum before deploying your topic.',
   primaryButtonText: 'Create',
   secondaryButtonText: 'Cancel',
-  selectorPrimaryFocus: `.${carbon.prefix}--text-input`,
 };
 
 const items = ['Day(s)', 'Month(s)', 'Year(s)'];
@@ -73,24 +70,24 @@ const renderUIShellHeader = () => (
 );
 
 const DefaultTemplate = ({ ...args }) => {
+  const carbonPrefix = usePrefix();
   const [open, setOpen] = useState(false);
   return (
     <>
       {renderUIShellHeader()}
       <Grid id="ibm-products-page-content">
-        <Row>
-          <Column>
-            <Button onClick={() => setOpen(!open)}>
-              {open ? 'Close side panel' : 'Open side panel'}
-            </Button>
-          </Column>
-        </Row>
+        <Column lg={{ span: 2, start: 8 }}>
+          <Button onClick={() => setOpen(!open)}>
+            {open ? 'Close side panel' : 'Open side panel'}
+          </Button>
+        </Column>
       </Grid>
       <CreateSidePanel
         {...args}
         open={open}
         onRequestClose={() => setOpen(false)}
-        selectorPrimaryFocus={`.${carbon.prefix}--text-input`}
+        onRequestSubmit={() => setOpen(false)}
+        selectorPrimaryFocus={`.${carbonPrefix}--text-input`}
       >
         <TextInput
           id="create-side-panel-topic-name-a"
@@ -105,6 +102,7 @@ const DefaultTemplate = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
         <NumberInput
           id="2"
@@ -113,6 +111,7 @@ const DefaultTemplate = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
         <NumberInput
           id="3"
@@ -121,6 +120,7 @@ const DefaultTemplate = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
         <div
           style={{
@@ -137,6 +137,7 @@ const DefaultTemplate = ({ ...args }) => {
             min={0}
             max={50}
             value={30}
+            iconDescription="Choose a number"
           />
           <Dropdown
             id="create-side-panel-dropdown-options-a"
@@ -154,6 +155,7 @@ const DefaultTemplate = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
       </CreateSidePanel>
     </>
@@ -161,6 +163,7 @@ const DefaultTemplate = ({ ...args }) => {
 };
 
 const TemplateWithFormValidation = ({ ...args }) => {
+  const carbonPrefix = usePrefix();
   const [open, setOpen] = useState(false);
   const [textInput, setTextInput] = useState('');
   const [invalid, setInvalid] = useState(false);
@@ -168,19 +171,19 @@ const TemplateWithFormValidation = ({ ...args }) => {
     <>
       {renderUIShellHeader()}
       <Grid id="ibm-products-page-content">
-        <Row>
-          <Column>
-            <Button onClick={() => setOpen(!open)}>
-              {open ? 'Close side panel' : 'Open side panel'}
-            </Button>
-          </Column>
-        </Row>
+        <Column lg={{ span: 2, start: 8 }}>
+          <Button onClick={() => setOpen(!open)}>
+            {open ? 'Close side panel' : 'Open side panel'}
+          </Button>
+        </Column>
       </Grid>
       <CreateSidePanel
         {...args}
         open={open}
         onRequestClose={() => setOpen(false)}
+        onRequestSubmit={() => setOpen(false)}
         disableSubmit={!textInput.length}
+        selectorPrimaryFocus={`.${carbonPrefix}--text-input`}
       >
         <TextInput
           id="create-side-panel-topic-name-b"
@@ -204,6 +207,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
         <NumberInput
           id="2"
@@ -212,6 +216,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
         <NumberInput
           id="3"
@@ -220,6 +225,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
         <div className={`${prefix}example-container`}>
           <NumberInput
@@ -229,6 +235,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
             min={0}
             max={50}
             value={30}
+            iconDescription="Choose a number"
           />
           <Dropdown
             id="create-side-panel-dropdown-options-b"
@@ -246,6 +253,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
       </CreateSidePanel>
     </>
@@ -253,6 +261,7 @@ const TemplateWithFormValidation = ({ ...args }) => {
 };
 
 const TemplateWithMultipleForms = ({ ...args }) => {
+  const carbonPrefix = usePrefix();
   const [open, setOpen] = useState(false);
   const [textInput, setTextInput] = useState('');
   const [invalid, setInvalid] = useState(false);
@@ -260,19 +269,19 @@ const TemplateWithMultipleForms = ({ ...args }) => {
     <>
       {renderUIShellHeader()}
       <Grid id="ibm-products-page-content">
-        <Row>
-          <Column>
-            <Button onClick={() => setOpen(!open)}>
-              {open ? 'Close side panel' : 'Open side panel'}
-            </Button>
-          </Column>
-        </Row>
+        <Column lg={{ span: 2, start: 8 }}>
+          <Button onClick={() => setOpen(!open)}>
+            {open ? 'Close side panel' : 'Open side panel'}
+          </Button>
+        </Column>
       </Grid>
       <CreateSidePanel
         {...args}
         open={open}
         onRequestClose={() => setOpen(false)}
+        onRequestSubmit={() => setOpen(false)}
         disableSubmit={!textInput.length}
+        selectorPrimaryFocus={`.${carbonPrefix}--text-input`}
       >
         <FormGroup
           className={`${blockClass}__form ${prefix}example-form-group`}
@@ -320,6 +329,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
             min={0}
             max={50}
             value={1}
+            iconDescription="Choose a number"
           />
           <NumberInput
             id="2"
@@ -328,6 +338,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
             min={0}
             max={50}
             value={1}
+            iconDescription="Choose a number"
           />
           <NumberInput
             id="3"
@@ -336,6 +347,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
             min={0}
             max={50}
             value={1}
+            iconDescription="Choose a number"
           />
           <div className={`${prefix}example-container`}>
             <NumberInput
@@ -345,6 +357,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
               min={0}
               max={50}
               value={30}
+              iconDescription="Choose a number"
             />
             <Dropdown
               id="create-side-panel-dropdown-options-c"
@@ -362,6 +375,7 @@ const TemplateWithMultipleForms = ({ ...args }) => {
             min={0}
             max={50}
             value={1}
+            iconDescription="Choose a number"
           />
         </FormGroup>
       </CreateSidePanel>

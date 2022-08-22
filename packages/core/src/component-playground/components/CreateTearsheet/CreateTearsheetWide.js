@@ -25,7 +25,7 @@ import {
   //Tab,
   TextInput,
   //Toggle,
-} from 'carbon-components-react';
+} from '@carbon/react';
 
 const MultiStepTearsheetWide = (props) => {
   const [createValues, setCreateValues] = useState({});
@@ -150,6 +150,7 @@ const MultiStepTearsheetWide = (props) => {
         <Row>
           <Column xlg={3} lg={4} md={3}>
             <NumberInput
+              iconDescription="Choose a number"
               id="carbon-number"
               min={1}
               max={100}

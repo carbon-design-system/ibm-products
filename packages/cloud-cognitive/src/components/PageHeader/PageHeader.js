@@ -7,11 +7,11 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { layout05, baseFontSize } from '@carbon/layout';
+import { spacing10, baseFontSize } from '@carbon/layout';
 import cx from 'classnames';
 import { useResizeDetector } from 'react-resize-detector';
 
-import { Grid, Column, Row, Button, Tag } from 'carbon-components-react';
+import { FlexGrid, Column, Row, Button, Tag } from '@carbon/react';
 import { breakpoints } from '@carbon/layout';
 
 import { useWindowResize, useNearestScroll } from '../../global/js/hooks';
@@ -28,7 +28,7 @@ import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
 import { TagSet, string_required_if_more_than_10_tags } from '../TagSet/TagSet';
 import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
-import { ChevronUp16 } from '@carbon/icons-react';
+import { ChevronUp } from '@carbon/icons-react';
 
 const componentName = 'PageHeader';
 
@@ -381,7 +381,8 @@ export let PageHeader = React.forwardRef(
         metrics.headerHeight > 0 &&
         (breadcrumbs || actionBarItems || tags || navigation)
       ) {
-        const startAddingAt = parseFloat(layout05, 10) * parseInt(baseFontSize);
+        const startAddingAt =
+          parseFloat(spacing10, 10) * parseInt(baseFontSize);
         const scrollRemaining = metrics.headerHeight - scrollYValue;
 
         /* don't know how to test resize */
@@ -485,7 +486,7 @@ export let PageHeader = React.forwardRef(
           ref={headerRef}
           {...getDevtoolsProps(componentName)}
         >
-          <Grid
+          <FlexGrid
             fullWidth={fullWidthGrid === true || fullWidthGrid === 'xl'}
             narrow={narrowGrid}
             className={cx({
@@ -649,7 +650,7 @@ export let PageHeader = React.forwardRef(
                       })}
                     >
                       <TagSet
-                        overflowAlign="start"
+                        overflowAlign="bottom-right"
                         {...{
                           allTagsModalSearchLabel,
                           allTagsModalSearchPlaceholderText,
@@ -686,7 +687,7 @@ export let PageHeader = React.forwardRef(
                       })}
                     >
                       <TagSet
-                        overflowAlign="end"
+                        overflowAlign="bottom-right"
                         {...{
                           allTagsModalSearchLabel,
                           allTagsModalSearchPlaceholderText,
@@ -701,7 +702,7 @@ export let PageHeader = React.forwardRef(
                 </Row>
               ) : null
             }
-          </Grid>
+          </FlexGrid>
           {hasCollapseButton ? (
             <Button
               className={cx(`${blockClass}__collapse-expand-toggle`, {
@@ -717,8 +718,8 @@ export let PageHeader = React.forwardRef(
               }
               kind="ghost"
               onClick={handleCollapseToggle}
-              renderIcon={ChevronUp16}
-              size="field"
+              renderIcon={(props) => <ChevronUp size={16} {...props} />}
+              size="md"
               tooltipPosition="bottom"
               tooltipAlignment="end"
               type="button"

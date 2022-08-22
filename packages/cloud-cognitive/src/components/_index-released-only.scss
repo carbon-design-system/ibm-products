@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2020
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,28 +8,28 @@
 // Package scss files here used by released components, or used by components
 // which are themselves used by released components.
 
-@import './AboutModal/index';
-@import './APIKeyModal/index';
-@import './ActionSet/index';
-@import './Cascade/index';
-@import './CreateModal/index';
-@import './CreateFullPage/index';
-@import './CreateSidePanel/index';
-@import './CreateTearsheetNarrow/index';
-@import './CreateTearsheet/index';
-@import './EmptyStates/index';
-@import './ExportModal/index';
-@import './ExpressiveCard/index';
-@import './HTTPErrors/index';
-@import './ImportModal/index';
-@import './InlineEdit/index';
-@import './NotificationsPanel/index';
-@import './PageHeader/index';
-@import './ProductiveCard/index';
-@import './RemoveModal/index';
-@import './Saving/index';
-@import './SidePanel/index';
-@import './StatusIcon/index';
-@import './TagSet/index';
-@import './Tearsheet/index';
-@import './UserProfileImage/index';
+@use './AboutModal';
+@use './APIKeyModal';
+@use './ActionSet';
+@use './Cascade';
+@use './CreateModal';
+@use './CreateFullPage';
+@use './CreateSidePanel';
+@use './CreateTearsheetNarrow';
+@use './CreateTearsheet';
+@use './EmptyStates';
+@use './ExportModal';
+@use './ExpressiveCard';
+@use './HTTPErrors';
+@use './InlineEdit';
+@use './ImportModal';
+@use './NotificationsPanel';
+@use './PageHeader';
+@use './ProductiveCard';
+@use './RemoveModal';
+@use './Saving';
+@use './SidePanel';
+@use './StatusIcon';
+@use './TagSet';
+@use './Tearsheet';
+@use './UserProfileImage';

@@ -15,8 +15,8 @@ import {
   StructuredListBody,
   StructuredListCell,
   Dropdown,
-} from 'carbon-components-react';
-import { ChevronRight16, View16 } from '@carbon/icons-react';
+} from '@carbon/react';
+import { ChevronRight, View } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
@@ -102,7 +102,7 @@ export let AddSelectList = ({
                     <>
                       <div className={`${blockClass}-checkbox`}>
                         <Checkbox
-                          onChange={(checked) =>
+                          onChange={(event, { checked }) =>
                             handleMultiSelection(item.id, checked)
                           }
                           labelText={item.title}
@@ -163,7 +163,9 @@ export let AddSelectList = ({
                   {item.children && (
                     <Button
                       className={`${blockClass}-view-children`}
-                      renderIcon={ChevronRight16}
+                      renderIcon={(props) => (
+                        <ChevronRight size={16} {...props} />
+                      )}
                       iconDescription={navIconDescription}
                       tooltipPosition="left"
                       tooltipAlignment="center"
@@ -177,7 +179,7 @@ export let AddSelectList = ({
                     <div className={`${blockClass}-hidden-hover`}>
                       <Button
                         className={`${blockClass}-view-meta`}
-                        renderIcon={View16}
+                        renderIcon={(props) => <View size={16} {...props} />}
                         iconDescription={metaIconDescription}
                         tooltipPosition="left"
                         tooltipAlignment="center"

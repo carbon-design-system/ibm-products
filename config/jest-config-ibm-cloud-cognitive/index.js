@@ -50,7 +50,7 @@ module.exports = {
   reporters: ['default'],
   setupFiles: [require.resolve('./setup/setupFiles')],
   setupFilesAfterEnv: [require.resolve('./setup/setupFilesAfterEnv')],
-  snapshotSerializers: [],
+  snapshotSerializers: ['enzyme-to-json/serializer'],
   testEnvironment: 'jsdom',
   testMatch: [
     '<rootDir>/**/__tests__/**/*.js?(x)',

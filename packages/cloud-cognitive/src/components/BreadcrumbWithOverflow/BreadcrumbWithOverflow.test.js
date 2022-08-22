@@ -112,7 +112,6 @@ describe(BreadcrumbWithOverflow.displayName, () => {
         breadcrumbs={breadcrumbItems}
       />
     );
-
     const visibleBreadcrumbs = screen.getAllByText(/Breadcrumb [0-9]/, {
       selector: `.${blockClass}__displayed-breadcrumb .${carbon.prefix}--link`,
     });

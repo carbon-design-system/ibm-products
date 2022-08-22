@@ -6,24 +6,24 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@import './variables';
+@use './variables';
 
-.#{$block-class}__right-align-header {
+.#{variables.$block-class}__right-align-header {
   width: 100%;
   text-align: right;
 }
 
-.#{$block-class}__right-align-header button {
+.#{variables.$block-class}__right-align-header button {
   text-align: right;
 }
 
-.#{$block-class}__right-align-cell-renderer {
+.#{variables.$block-class}__right-align-cell-renderer {
   width: 100%;
   /* stylelint-disable-next-line carbon/layout-token-use */
   padding-right: 23px;
   text-align: right;
 }
 
-.#{$block-class}__right-align-cell-renderer.sortDisabled {
+.#{variables.$block-class}__right-align-cell-renderer.sortDisabled {
   padding-right: 0;
 }

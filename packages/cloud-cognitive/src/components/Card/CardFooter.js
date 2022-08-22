@@ -7,7 +7,7 @@
 
 import React from 'react';
 import cx from 'classnames';
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
 const componentName = 'CardFooter';
@@ -47,7 +47,7 @@ export let CardFooter = ({
         <Button
           kind={secondaryButtonKind}
           onClick={onSecondaryButtonClick}
-          size="field"
+          size="md"
           renderIcon={secondaryButtonIcon}
           href={secondaryButtonHref}
         >
@@ -58,7 +58,7 @@ export let CardFooter = ({
         <Button
           kind={productive ? 'ghost' : primaryButtonKind}
           onClick={onPrimaryButtonClick}
-          size="field"
+          size="md"
           renderIcon={primaryButtonIcon}
           href={primaryButtonHref}
         >

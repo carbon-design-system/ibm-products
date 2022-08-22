@@ -7,19 +7,20 @@
 
 import React, { useEffect, useState } from 'react';
 import { action } from '@storybook/addon-actions';
-import { Button } from 'carbon-components-react';
 import {
+  Button,
   Header,
   HeaderContainer,
   HeaderName,
   HeaderGlobalBar,
   HeaderGlobalAction,
-} from 'carbon-components-react/lib/components/UIShell';
-import { User20, Notification20 } from '@carbon/icons-react';
+} from '@carbon/react';
+import { User, Notification } from '@carbon/icons-react';
 import { white } from '@carbon/colors';
 import styles from './_storybook-styles.scss';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { UnreadNotificationBell } from './preview-components/UnreadNotificationBell';
+import { pkg } from '../../settings';
 
 import { NotificationsPanel } from '.';
 
@@ -30,6 +31,8 @@ import {
 
 import mdx from './NotificationsPanel.mdx';
 import data from './NotificationsPanel_data';
+
+const storyBlockClass = `${pkg.prefix}--notifications-panel__story`;
 
 export default {
   title: getStoryTitle(NotificationsPanel.displayName),
@@ -45,7 +48,10 @@ export default {
 const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
   <HeaderContainer
     render={() => (
-      <Header aria-label="IBM Cloud Pak">
+      <Header
+        aria-label="IBM Cloud Pak"
+        className={`${storyBlockClass}--header`}
+      >
         <HeaderName href="/" prefix="IBM">
           Cloud Pak
         </HeaderName>
@@ -61,7 +67,8 @@ const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
             {hasUnreadNotifications ? (
               <UnreadNotificationBell />
             ) : (
-              <Notification20
+              <Notification
+                size={20}
                 style={{
                   /* stylelint-disable-next-line */
                   fill: white,
@@ -70,7 +77,8 @@ const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
             )}
           </HeaderGlobalAction>
           <HeaderGlobalAction aria-label="App switcher">
-            <User20
+            <User
+              size={20}
               style={{
                 /* stylelint-disable-next-line */
                 fill: white,

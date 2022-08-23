@@ -47,7 +47,8 @@
       "avatar_url": "https://avatars1.githubusercontent.com/u/6370760?v=4",
       "profile": "http://davidmenendez.net",
       "contributions": [
-        "code"
+        "code",
+        "review"
       ]
     },
     {
@@ -65,7 +66,8 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/10215203?v=4",
       "profile": "http://www.matthewdgallo.com",
       "contributions": [
-        "code"
+        "code",
+        "infra"
       ]
     },
     {
@@ -94,9 +96,19 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "AlexanderMelox",
+      "name": "Alexander Melo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12755042?v=4",
+      "profile": "http://alexandermelo.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
-  "contributorsPerLine": 7,
+  "contributorsPerLine": 5,
+  "badgeTemplate": "[all-contributors-badge]: https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square",
   "projectName": "ibm-cloud-cognitive",
   "projectOwner": "carbon-design-system",
   "repoType": "github",

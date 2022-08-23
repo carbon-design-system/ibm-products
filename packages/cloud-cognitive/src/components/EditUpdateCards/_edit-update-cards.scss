@@ -20,47 +20,57 @@
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin edit-update-cards {
-  // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--edit-update-cards;
 
   .#{$block-class} {
-    textarea, input {
-      padding: 0;
+    textarea,
+    input {
       width: 100%;
-      @include carbon--type-style('body-02')
+      padding: 0;
+      @include carbon--type-style('body-02');
     }
-    &##{$block-class}--edit { /*Used id for overriding the SVG path fill*/
+
+    &##{$block-class}--edit {
+      /* Used id for overriding the SVG path fill */
+
       .#{$pkg-prefix}--card__header {
+        // stylelint-disable-next-line carbon/theme-token-use
         background-color: $blue-60;
+        // stylelint-disable-next-line carbon/theme-token-use
         color: $white-0;
+
         button {
           &:hover {
             background-color: $hover-primary;
           }
+
           &:focus {
             box-shadow: none;
           }
+
           svg {
             path {
+              // stylelint-disable-next-line carbon/theme-token-use
               fill: $white-0;
             }
           }
-          &.#{$pkg-prefix}--loading{
+
+          &.#{$pkg-prefix}--loading {
             &:hover {
               background-color: transparent;
             }
           }
         }
       }
-      .#{$pkg-prefix}--loading{
-        animation-duration: .69s;
+      .#{$pkg-prefix}--loading {
+        animation-duration: $duration--slow-02;
         animation-fill-mode: forwards;
         animation-iteration-count: infinite;
         animation-name: rotate;
-        animation-timing-function: linear;
+        animation-timing-function: $carbon--standard-easing;
+
         &:hover {
           background-color: transparent;
-          color: white;
         }
       }
     }

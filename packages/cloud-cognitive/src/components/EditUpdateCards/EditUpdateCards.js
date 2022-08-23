@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, {useState} from 'react';
+import React from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -15,7 +15,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 import { ProductiveCard } from '../ProductiveCard';
-import { children } from 'cheerio/lib/api/traversing';
+// import { children } from 'cheerio/lib/api/traversing';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
@@ -62,9 +62,7 @@ export let EditUpdateCards = React.forwardRef(
       ...rest
     },
     ref
-
   ) => {
-
     // const [editMode, setEditMode] = useState(false);
 
     return (
@@ -95,16 +93,8 @@ export let EditUpdateCards = React.forwardRef(
           title={title}
           titleSize={titleSize}
         >
-          {editMode === false &&
-            <div>
-              {previewChildren}
-            </div>
-          }
-          {editMode &&
-            <div>
-              {editChildren}
-            </div>
-          }
+          {editMode === false && <div>{previewChildren}</div>}
+          {editMode && <div>{editChildren}</div>}
         </ProductiveCard>
       </div>
     );
@@ -123,6 +113,19 @@ EditUpdateCards.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 EditUpdateCards.propTypes = {
   /**
+   * Icons that are displayed on card. Refer to design documentation for implementation guidelines
+   */
+  actionIcons: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+      onKeyDown: PropTypes.func,
+      onClick: PropTypes.func,
+      iconDescription: PropTypes.string,
+      href: PropTypes.string,
+    })
+  ),
+  /**
    * Determines if the action icons are on the top or bottom of the card
    */
   actionsPlacement: PropTypes.oneOf(['top', 'bottom']),
@@ -135,9 +138,21 @@ EditUpdateCards.propTypes = {
    */
   description: PropTypes.string,
   /**
-  * Optional label for the top of the card
-  */
+   * Edit mode children
+   */
+  editChildren: PropTypes.node,
+  /**
+   * Edit mode
+   */
+  editMode: PropTypes.bool,
+  /**
+   * Optional label for the top of the card
+   */
   label: PropTypes.string,
+  /**
+   * Preview mode children
+   */
+  previewChildren: PropTypes.node,
   /**
    * Title that's displayed at the top of the card
    */

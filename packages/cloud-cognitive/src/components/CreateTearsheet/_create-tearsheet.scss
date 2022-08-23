@@ -51,6 +51,7 @@
   }
 
   .#{$block-class} .#{$step-block-class}__step--visible-step {
+    // stylelint-disable-next-line carbon/motion-easing-use
     animation: step-content-entrance $duration--slow-01;
     animation-fill-mode: forwards;
     animation-timing-function: $carbon--standard-easing;

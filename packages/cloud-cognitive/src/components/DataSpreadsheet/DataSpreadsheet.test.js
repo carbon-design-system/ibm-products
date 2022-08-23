@@ -52,6 +52,8 @@ const defaultProps = {
     },
   ],
   data,
+  selectAllAriaLabel: 'Select all',
+  spreadsheetAriaLabel: 'Example data spreadsheet',
 };
 
 describe(componentName, () => {

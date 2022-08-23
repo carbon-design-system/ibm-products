@@ -8,6 +8,7 @@
 // @flow
 import React from 'react';
 import { DataTable } from 'carbon-components-react';
+import cx from 'classnames';
 import { pkg } from '../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -21,9 +22,19 @@ const SelectAll = (datagridState) => {
     hideSelectAll,
     DatagridPagination,
     radio,
+    columns,
+    withStickyColumn,
   } = datagridState;
+  const isFirstColumnStickyLeft =
+    columns[0]?.sticky === 'left' && withStickyColumn;
   if (hideSelectAll || radio) {
-    return <div className={`${blockClass}__head-hidden-select-all`} />;
+    return (
+      <div
+        className={cx(`${blockClass}__head-hidden-select-all`, {
+          [`${blockClass}__select-all-sticky-left`]: isFirstColumnStickyLeft,
+        })}
+      />
+    );
   }
   const getProps = DatagridPagination
     ? getToggleAllPageRowsSelectedProps
@@ -31,7 +42,13 @@ const SelectAll = (datagridState) => {
   const { onChange, ...selectProps } = getProps();
   return (
     <div
-      className={`${blockClass}__head-select-all ${blockClass}__checkbox-cell`}
+      className={cx(
+        `${blockClass}__head-select-all`,
+        `${blockClass}__checkbox-cell`,
+        {
+          [`${blockClass}__checkbox-cell-sticky-left`]: isFirstColumnStickyLeft,
+        }
+      )}
     >
       <TableSelectAll
         {...selectProps}

@@ -65,18 +65,14 @@ const CustomizeColumnsModal = ({
 
   const onCheckboxCheck = (col, value) => {
     const changedDefinitions = columnObjects.map((definition) => {
-      if (definition.id === col.id) {
+      if (Array.isArray(col)) {
         return { ...definition, isVisible: value };
+      } else {
+        if (definition.id === col.id) {
+          return { ...definition, isVisible: value };
+        }
+        return definition;
       }
-      return definition;
-    });
-    setColumnObjects(changedDefinitions);
-    setDirty();
-  };
-
-  const onSelectAllCheck = (cols, value) => {
-    const changedDefinitions = cols.map((definition) => {
-      return { ...definition, isVisible: value };
     });
     setColumnObjects(changedDefinitions);
     setDirty();
@@ -136,7 +132,6 @@ const CustomizeColumnsModal = ({
             setColumnObjects(cols);
             setDirty();
           }}
-          onSelectAll={onSelectAllCheck}
         />
       )}
     </Modal>

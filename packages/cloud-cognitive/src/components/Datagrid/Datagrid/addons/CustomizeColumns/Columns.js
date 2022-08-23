@@ -38,7 +38,6 @@ const Columns = ({
   columns,
   setColumnsObject,
   onSelectColumn,
-  onSelectAll,
   instructionsLabel = 'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
   disabledInstructionsLabel = 'Reordering columns are disabled because they are filtered currently.',
   selectAllLabel = 'Column name',
@@ -113,7 +112,7 @@ const Columns = ({
                 getVisibleColumnsCount() > 0
               }
               onChange={() => {
-                onSelectAll(
+                onSelectColumn(
                   columns,
                   getVisibleColumnsCount() !== columns.length
                 );
@@ -184,7 +183,6 @@ Columns.propTypes = {
   filterString: PropTypes.string.isRequired,
   getVisibleColumnsCount: PropTypes.func.isRequired,
   instructionsLabel: PropTypes.string,
-  onSelectAll: PropTypes.func.isRequired,
   onSelectColumn: PropTypes.func.isRequired,
   selectAllLabel: PropTypes.string,
   setColumnStatus: PropTypes.func,

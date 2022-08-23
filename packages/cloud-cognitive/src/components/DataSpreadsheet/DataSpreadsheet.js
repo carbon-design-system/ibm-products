@@ -84,6 +84,8 @@ export let DataSpreadsheet = React.forwardRef(
       id,
       onActiveCellChange = defaults.onActiveCellChange,
       onSelectionAreaChange = defaults.onSelectionAreaChange,
+      selectAllAriaLabel,
+      spreadsheetAriaLabel,
       totalVisibleColumns,
 
       // Collect any other property values passed in.
@@ -630,6 +632,11 @@ export let DataSpreadsheet = React.forwardRef(
       return;
     };
 
+    // Mouse up on active cell
+    const handleActiveCellMouseUp = () => {
+      setClickAndHoldActive(false);
+    };
+
     // Mouse down on active cell
     const handleActiveCellMouseDown = () => {
       if (
@@ -801,6 +808,7 @@ export let DataSpreadsheet = React.forwardRef(
         tabIndex={0}
         aria-rowcount={rows?.length || 0}
         aria-colcount={columns?.length || 0}
+        aria-label={spreadsheetAriaLabel}
         onKeyDown={handleKeyPress}
         onFocus={() => setContainerHasFocus(true)}
       >
@@ -826,6 +834,7 @@ export let DataSpreadsheet = React.forwardRef(
             setHeaderCellHoldActive={setHeaderCellHoldActive}
             headerCellHoldActive={headerCellHoldActive}
             visibleColumns={visibleColumns}
+            selectAllAriaLabel={selectAllAriaLabel}
           />
 
           {/* BODY */}
@@ -864,6 +873,7 @@ export let DataSpreadsheet = React.forwardRef(
           />
           <button
             onMouseDown={handleActiveCellMouseDown}
+            onMouseUp={handleActiveCellMouseUp}
             onClick={handleActiveCellClick}
             onKeyDown={handleActiveCellKeyDown}
             onDoubleClick={handleActiveCellDoubleClick}
@@ -904,7 +914,7 @@ export let DataSpreadsheet = React.forwardRef(
             labelText=""
             aria-labelledby={
               activeCellCoordinates
-                ? `#${blockClass}__cell--${activeCellCoordinates?.row}--${activeCellCoordinates?.column}`
+                ? `${blockClass}__cell--${activeCellCoordinates?.row}--${activeCellCoordinates?.column}`
                 : null
             }
             className={cx(
@@ -988,6 +998,16 @@ DataSpreadsheet.propTypes = {
    * The event handler that is called when the selection area values change
    */
   onSelectionAreaChange: PropTypes.func,
+
+  /**
+   * The aria label applied to the Select all button
+   */
+  selectAllAriaLabel: PropTypes.string.isRequired,
+
+  /**
+   * The aria label applied to the Data spreadsheet component
+   */
+  spreadsheetAriaLabel: PropTypes.string.isRequired,
 
   /**
    * The total number of columns to be initially visible, additional columns will be rendered and

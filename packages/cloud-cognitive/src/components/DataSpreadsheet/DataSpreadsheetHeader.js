@@ -40,6 +40,7 @@ export const DataSpreadsheetHeader = forwardRef(
       updateActiveCellCoordinates,
       setHeaderCellHoldActive,
       headerCellHoldActive,
+      selectAllAriaLabel,
       visibleColumns,
     },
     ref
@@ -183,6 +184,7 @@ export const DataSpreadsheetHeader = forwardRef(
                 data-column-index="header"
                 type="button"
                 tabIndex={-1}
+                aria-label={selectAllAriaLabel}
                 onClick={handleSelectAllClick}
                 className={cx(
                   `${blockClass}__th`,
@@ -315,6 +317,11 @@ DataSpreadsheetHeader.propTypes = {
    * The scrollbar width
    */
   scrollBarSize: PropTypes.number,
+
+  /**
+   * The aria label applied to the Select all button
+   */
+  selectAllAriaLabel: PropTypes.string.isRequired,
 
   /**
    * All of the cell selection area items

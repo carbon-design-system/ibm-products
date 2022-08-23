@@ -29,9 +29,9 @@ import {
   useRowIsMouseOver,
   useStickyColumn,
   useActionsColumn,
+  useColumnOrder,
 } from '.';
 
-import { useColumnOrder } from 'react-table';
 import {
   DataTable,
   Button,

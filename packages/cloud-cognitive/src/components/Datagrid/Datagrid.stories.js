@@ -7,7 +7,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { useColumnOrder } from 'react-table';
+// import { useColumnOrder } from 'react-table';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
@@ -40,6 +40,7 @@ import {
   useColumnCenterAlign,
   useStickyColumn,
   useActionsColumn,
+  useColumnOrder,
 } from '.';
 
 import {

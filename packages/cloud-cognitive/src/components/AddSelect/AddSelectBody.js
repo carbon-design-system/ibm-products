@@ -147,6 +147,7 @@ export let AddSelectBody = ({
   const showTags = setShowTags();
 
   const commonListProps = {
+    displayMetalPanel,
     metaIconDescription,
     multi,
     multiSelection,
@@ -219,10 +220,18 @@ export let AddSelectBody = ({
           hasFiltersApplied={globalFiltersApplied}
           clearFiltersText={clearFiltersText}
         />
-        <div className={`${blockClass}__sub-header`}>
+        <div
+          className={cx(`${blockClass}__sub-header`, {
+            [`${blockClass}__sub-header-multi`]: multi,
+          })}
+        >
           <div className={`${blockClass}__tag-container`}>
             {showBreadsCrumbs ? (
-              <AddSelectBreadcrumbs path={path} onClick={pathOnclick} />
+              <AddSelectBreadcrumbs
+                path={path}
+                onClick={pathOnclick}
+                multi={multi}
+              />
             ) : (
               <p className={`${blockClass}__tag-container-label`}>
                 {searchTerm ? searchResultsLabel : itemsLabel}

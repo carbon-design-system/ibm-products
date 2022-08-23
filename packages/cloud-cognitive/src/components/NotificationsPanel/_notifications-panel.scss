@@ -60,8 +60,7 @@
     max-height: 38.5rem;
     background-color: $ui-background;
     color: $text-01;
-    transition: transform $duration--fast-02;
-    transition-timing-function: carbon--motion(standard);
+    transition: transform $duration--fast-02 carbon--motion(standard);
 
     .#{$block-class}__header-container {
       position: sticky;
@@ -123,8 +122,8 @@
       background-color: $ui-background;
       cursor: pointer;
       text-align: left;
-      transition: background-color $duration--moderate-02;
-      transition-timing-function: carbon--motion(standard);
+      transition: background-color $duration--moderate-02
+        carbon--motion(standard);
       .#{$block-class}__notification-title {
         margin-bottom: $spacing-02;
         color: $text-04;
@@ -228,8 +227,8 @@
       margin: 0 auto;
       background-color: $ui-02;
       content: '';
-      transition: background-color $duration--moderate-02;
-      transition-timing-function: carbon--motion(standard);
+      transition: background-color $duration--moderate-02
+        carbon--motion(standard);
     }
     .#{$block-class}__notification-today:hover
       + .#{$block-class}__notification-today:not(:first-of-type):before,

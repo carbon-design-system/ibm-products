@@ -30,7 +30,7 @@
   .#{$block-class}__element,
   .#{$block-class}__col {
     @media (prefers-reduced-motion: no-preference) {
-      // stylelint-disable-next-line carbon/motion-duration-use
+      // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
       animation: $animationProps fade; // stylelint note animation duration declared in $animationProps
       animation-fill-mode: forwards;
       opacity: 0;

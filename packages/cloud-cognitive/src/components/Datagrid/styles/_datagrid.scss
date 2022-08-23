@@ -506,6 +506,10 @@
   }
 }
 
+.#{$block-class} .#{$pkg-prefix}--button-menu {
+  height: $spacing-09;
+}
+
 .#{$block-class} .#{$carbon-prefix}--checkbox-label {
   &.#{$block-class}__customize-columns-checkbox {
     padding-left: $spacing-07;

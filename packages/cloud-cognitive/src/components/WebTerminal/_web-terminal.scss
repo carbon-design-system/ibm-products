@@ -1,5 +1,18 @@
+//
+// Copyright IBM Corp. 2021, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 // Standard imports.
 @import '../../global/styles/project-settings';
+
+// WebTerminal uses the following Carbon components:
+// Button
+// OverflowMenu
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
 
 $web-terminal-width: 40rem; // 640px
 $block-class: #{$pkg-prefix}--web-terminal;

@@ -182,7 +182,7 @@ export let AddSelectList = ({
                       value={item.value}
                       labelText={item.title}
                       onChange={() => handleSingleSelection(item.id)}
-                      selected={isSelected(item.id)}
+                      checked={isSelected(item.id)}
                     />
                   )}
                   {item.children && (

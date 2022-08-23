@@ -125,6 +125,15 @@
         "code",
         "a11y"
       ]
+    },
+    {
+      "login": "marion-bruells",
+      "name": "marion-bruells",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51152537?v=4",
+      "profile": "https://github.com/marion-bruells",
+      "contributions": [
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 5,

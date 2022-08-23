@@ -51,6 +51,7 @@ import { selectAllCells } from './utils/selectAllCells';
 import { handleEditSubmit } from './utils/handleEditSubmit';
 import { handleActiveCellInSelectionEnter } from './utils/handleActiveCellInSelectionEnter';
 import { handleActiveCellInSelectionTab } from './utils/handleActiveCellInSelectionTab';
+import { handleCellDeletion } from './utils/handleCellDeletion';
 // cspell:words rowcount colcount
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -66,6 +67,7 @@ const defaults = {
   onDataUpdate: Object.freeze(() => {}),
   onActiveCellChange: Object.freeze(() => {}),
   onSelectionAreaChange: Object.freeze(() => {}),
+  theme: 'light',
 };
 
 /**
@@ -86,6 +88,7 @@ export let DataSpreadsheet = React.forwardRef(
       onSelectionAreaChange = defaults.onSelectionAreaChange,
       selectAllAriaLabel,
       spreadsheetAriaLabel,
+      theme,
       totalVisibleColumns,
 
       // Collect any other property values passed in.
@@ -153,13 +156,13 @@ export let DataSpreadsheet = React.forwardRef(
 
     // Update the spreadsheet data after editing a cell
     const updateData = useCallback(
-      (rowIndex, columnId) => {
+      (rowIndex, columnId, newValue) => {
         onDataUpdate((prev) =>
           prev.map((row, index) => {
             if (index === rowIndex) {
               return {
                 ...prev[rowIndex],
-                [columnId]: cellEditorValue,
+                [columnId]: cellEditorValue || newValue,
               };
             }
             return row;
@@ -422,6 +425,28 @@ export let DataSpreadsheet = React.forwardRef(
           activeCellCoordinates.column === 'header'
         ) {
           switch (key) {
+            // Backspace
+            case 'Backspace': {
+              handleCellDeletion({
+                selectionAreas,
+                currentMatcher,
+                rows,
+                setActiveCellContent,
+                updateData,
+              });
+              break;
+            }
+            // Delete
+            case 'Delete': {
+              handleCellDeletion({
+                selectionAreas,
+                currentMatcher,
+                rows,
+                setActiveCellContent,
+                updateData,
+              });
+              break;
+            }
             // Enter
             case 'Enter': {
               handleActiveCellInSelectionEnter({
@@ -579,6 +604,7 @@ export let DataSpreadsheet = React.forwardRef(
         handleHomeEndKey,
         keysPressedList,
         usingMac,
+        updateData,
       ]
     );
 
@@ -801,6 +827,7 @@ export let DataSpreadsheet = React.forwardRef(
           `${blockClass}--interactive-cell-element`,
           {
             [`${blockClass}__container-has-focus`]: containerHasFocus,
+            [`${blockClass}__${theme}`]: theme === 'dark',
           }
         )}
         ref={spreadsheetRef}
@@ -1008,6 +1035,11 @@ DataSpreadsheet.propTypes = {
    * The aria label applied to the Data spreadsheet component
    */
   spreadsheetAriaLabel: PropTypes.string.isRequired,
+
+  /**
+   * The theme the DataSpreadsheet should use (only used to render active cell/selection area colors on dark theme)
+   */
+  theme: PropTypes.oneOf(['light', 'dark']),
 
   /**
    * The total number of columns to be initially visible, additional columns will be rendered and

@@ -289,7 +289,7 @@ export let InlineEdit = React.forwardRef(
           onPaste={handlePaste}
           suppressContentEditableWarning={true}
           ref={refInput}
-          data-placeholder={placeholder ?? labelText}
+          data-placeholder={placeholder}
         >
           {value}
         </div>

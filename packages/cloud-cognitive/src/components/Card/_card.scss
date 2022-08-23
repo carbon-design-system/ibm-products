@@ -23,6 +23,7 @@
 
   .#{$block-class}__clickable {
     cursor: pointer;
+    // stylelint-disable-next-line carbon/motion-easing-use
     transition: background $duration--fast-02;
   }
 

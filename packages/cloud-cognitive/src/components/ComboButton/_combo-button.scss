@@ -25,6 +25,10 @@
     @include text-overflow;
   }
 
+  .divider {
+    border-top: 1px solid $interactive-01;
+  }
+
   .#{$blockClass}__btn--sm.bx--btn {
     min-width: 128px;
   }

@@ -7,3 +7,4 @@
 
 export { ComboButton } from './ComboButton';
 export { ComboButtonItem } from './ComboButtonItem';
+export { ComboButtonItemDivider } from './ComboButtonItemDivider';

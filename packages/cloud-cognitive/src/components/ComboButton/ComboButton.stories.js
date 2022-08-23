@@ -12,7 +12,7 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 
-import { ComboButton, ComboButtonItem } from '..';
+import { ComboButton, ComboButtonItem, ComboButtonItemDivider } from '..';
 
 import styles from './_combo-button.scss';
 
@@ -44,6 +44,7 @@ const Template = (args) => {
       <ComboButtonItem renderIcon={args.icon && args.icon}>
         ComboButtonItem 2
       </ComboButtonItem>
+      <ComboButtonItemDivider />
       <ComboButtonItem disabled={args.disabled}>ComboButtonItem 3</ComboButtonItem>
       <ComboButtonItem hasDivider={args.hasDivider}>
         ComboButtonItem 4

@@ -125,7 +125,7 @@ ComboButton.propTypes = {
   /**
    * Set the size of the combo button
    */
-  size: oneOf(['sm', 'md', 'lg']),
+  size: oneOf(['sm', 'md', 'default']),
 };
 
 //export { ComboButton };

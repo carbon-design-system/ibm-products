@@ -1725,7 +1725,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 @media (prefers-reduced-motion: no-preference) {
   .c4p--cascade__element,
 .c4p--cascade__col {
-    /* stylelint-disable-next-line carbon/motion-duration-use -- Carbon animation duration defined above in $animationProps */
+    /* stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use -- Carbon animation duration defined above in $animationProps */
     animation: 240ms cubic-bezier(0.2, 0, 0.38, 0.9) 0s 1 fade;
     animation-fill-mode: forwards;
     opacity: 0;
@@ -2175,8 +2175,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   box-sizing: border-box;
   background-color: var(--cds-layer-01, #f4f4f4);
   color: var(--cds-text-primary, #161616);
-  transition: transform 240ms;
-  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  transition: transform 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .c4p--side-panel__container.c4p--side-panel__container--xs {
   width: 16rem;
@@ -2592,8 +2591,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding: 0 1rem;
   margin-bottom: 0.5rem;
   background-color: var(--cds-layer-01, #f4f4f4);
-  transition: transform 150ms;
-  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  transition: transform 150ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button {
   min-width: 2rem;
@@ -2724,8 +2722,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   width: 100%;
   height: 100%;
   background-color: var(--cds-overlay, rgba(22, 22, 22, 0.5));
-  transition: background-color 240ms;
-  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  transition: background-color 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 
 .c4p--create-side-panel.c4p--side-panel__container .c4p--create-side-panel__content-text {
@@ -2872,7 +2869,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   /* stylelint-disable-next-line function-no-unknown */
   z-index: 9000;
   align-items: flex-end;
-  transition: visibility 0 linear, background-color 240ms cubic-bezier(0, 0, 0.3, 1), opacity 240ms cubic-bezier(0, 0, 0.3, 1);
+  transition: visibility 0s linear, background-color 240ms cubic-bezier(0, 0, 0.3, 1), opacity 240ms cubic-bezier(0, 0, 0.3, 1);
 }
 @media (prefers-reduced-motion: reduce) {
   .c4p--tearsheet.is-visible {
@@ -4213,8 +4210,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-height: 38.5rem;
   background-color: var(--cds-background, #ffffff);
   color: var(--cds-text-primary, #161616);
-  transition: transform 110ms;
-  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  transition: transform 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__header-container {
   position: sticky;
@@ -4288,8 +4284,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-background, #ffffff);
   cursor: pointer;
   text-align: left;
-  transition: background-color 240ms;
-  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  transition: background-color 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-title {
   margin-bottom: 0.25rem;
@@ -4402,8 +4397,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin: 0 auto;
   background-color: var(--cds-layer-02, #ffffff);
   content: \\"\\";
-  transition: background-color 240ms;
-  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  transition: background-color 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification-today:hover + .c4p--notifications-panel__notification-today:not(:first-of-type):before,
 .c4p--notifications-panel__container .c4p--notifications-panel__notification-yesterday:hover + .c4p--notifications-panel__notification-yesterday:not(:first-of-type):before,

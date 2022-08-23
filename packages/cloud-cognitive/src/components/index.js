@@ -75,3 +75,4 @@ export {
 export { EditTearsheet } from './EditTearsheet';
 export { EditTearsheetNarrow } from './EditTearsheetNarrow';
 export { EditFullPage } from './EditFullPage';
+export { EditUpdateCards } from './EditUpdateCards';

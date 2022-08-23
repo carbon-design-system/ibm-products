@@ -1,0 +1,72 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+
+// Other Carbon settings.
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+
+// EditUpdateCards uses the following Carbon components:
+// TODO: @import(s) of Carbon component styles used by EditUpdateCards
+
+// EditUpdateCards uses the following Carbon for IBM Products components:
+// TODO: @import(s) of IBM Products component styles used by EditUpdateCards
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin edit-update-cards {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--edit-update-cards;
+
+  .#{$block-class} {
+    textarea, input {
+      padding: 0;
+      width: 100%;
+      @include carbon--type-style('body-02')
+    }
+    &##{$block-class}--edit { /*Used id for overriding the SVG path fill*/
+      .#{$pkg-prefix}--card__header {
+        background-color: $blue-60;
+        color: $white-0;
+        button {
+          &:hover {
+            background-color: $hover-primary;
+          }
+          &:focus {
+            box-shadow: none;
+          }
+          svg {
+            path {
+              fill: $white-0;
+            }
+          }
+          &.#{$pkg-prefix}--loading{
+            &:hover {
+              background-color: transparent;
+            }
+          }
+        }
+      }
+      .#{$pkg-prefix}--loading{
+        animation-duration: .69s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: rotate;
+        animation-timing-function: linear;
+        &:hover {
+          background-color: transparent;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+@include exports('edit-update-cards') {
+  @include edit-update-cards;
+}

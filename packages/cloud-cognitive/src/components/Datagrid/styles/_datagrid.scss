@@ -505,3 +505,7 @@
     margin: 0;
   }
 }
+
+.#{$block-class} .#{$pkg-prefix}--button-menu {
+  height: $spacing-09;
+}

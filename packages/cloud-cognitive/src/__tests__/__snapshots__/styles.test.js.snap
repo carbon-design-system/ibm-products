@@ -3971,6 +3971,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-helper-text-01-font-size: 0.75rem;
   --cds-helper-text-01-line-height: 1.33333;
   --cds-helper-text-01-letter-spacing: 0.32px;
+  --cds-helper-text-02-font-size: carbon--type-scale(2);
+  --cds-helper-text-02-font-weight: carbon--font-weight(\\"regular\\");
+  --cds-helper-text-02-line-height: 1.28572;
+  --cds-helper-text-02-letter-spacing: 0.16px;
   --cds-body-short-01-font-size: 0.875rem;
   --cds-body-short-01-font-weight: 400;
   --cds-body-short-01-line-height: 1.28572;

@@ -1,12 +1,12 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Code, Copy } from '@carbon/icons-react';
 import { act, renderHook } from '@testing-library/react-hooks';
@@ -15,7 +15,12 @@ import { pkg } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { documentationLinks } from './preview-components/documentationLinks';
-import { WebTerminal, WebTerminalProvider, useWebTerminal } from './index';
+import {
+  WebTerminal,
+  WebTerminalProvider,
+  WebTerminalContentWrapper,
+  useWebTerminal,
+} from './index';
 
 const blockClass = `${pkg.prefix}--web-terminal`;
 const name = WebTerminal.displayName;
@@ -40,12 +45,25 @@ const MockWebTerminal = React.forwardRef(
 );
 
 describe(name, () => {
-  test('Renders the component `WebTerminal` if flag is enabled', () => {
+  it('Renders the component `WebTerminal` if flag is enabled', () => {
     const { container } = render(
       <MockWebTerminal>Body content</MockWebTerminal>
     );
 
     expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
+  });
+
+  /**
+    We are skipping the a11y test for now since the only a11y violation 
+    is a potential violation. We can remove the skip once we fix our accessibility-checker
+    issue. https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2154
+  */
+  it.skip('has no accessibility violations', async () => {
+    const { container } = render(
+      <MockWebTerminal isInitiallyOpen>Body content</MockWebTerminal>
+    );
+
+    await expect(container).toBeAccessible();
   });
 
   test('should attach a custom class to the web terminal', () => {
@@ -58,7 +76,7 @@ describe(name, () => {
     expect(container.querySelector(`.${testClassName}`)).not.toBeNull();
   });
 
-  test('should render child element content', () => {
+  it('should render child element content', () => {
     render(<MockWebTerminal>Body content</MockWebTerminal>);
     expect(screen.getByText(/Body content/i)).toBeInTheDocument();
   });
@@ -153,22 +171,22 @@ describe(name, () => {
   });
 
   it('should call the animationEnd event', () => {
-    const { animationEnd } = fireEvent;
-    const { rerender, container } = render(
-      <MockWebTerminal isInitiallyOpen closeIconDescription="Close terminal">
-        Body content
-      </MockWebTerminal>
+    const { container } = render(
+      <div data-testid="container-id">
+        <MockWebTerminal isInitiallyOpen closeIconDescription="Close terminal">
+          Body content
+        </MockWebTerminal>
+      </div>
     );
+
+    const closeButton = screen.getByRole('button', {
+      name: /close terminal/i,
+    });
+    userEvent.click(closeButton);
 
     const outerElement = container.querySelector(`.${blockClass}`);
 
-    rerender(
-      <MockWebTerminal isInitiallyOpen closeIconDescription="Close terminal">
-        Body content
-      </MockWebTerminal>
-    );
-    animationEnd(outerElement);
-    expect(outerElement).toBeNull;
+    expect(outerElement).toBeNull();
   });
 
   it('should render action icon buttons', () => {
@@ -200,5 +218,135 @@ describe(name, () => {
 
     click(screen.getByRole('button', { name: /Copy logs/i }));
     expect(copyLogsButtonFn).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render the close icon description prop', () => {
+    render(
+      <MockWebTerminal
+        isInitiallyOpen
+        closeIconDescription="Close web terminal"
+      >
+        Body content
+      </MockWebTerminal>
+    );
+
+    expect(screen.getByText(/close web terminal/i)).toBeInTheDocument();
+  });
+
+  it('content wrapper should pass children', () => {
+    render(
+      <WebTerminalProvider>
+        <WebTerminalContentWrapper>body content</WebTerminalContentWrapper>
+      </WebTerminalProvider>
+    );
+
+    expect(screen.getByText(/body content/i)).toBeInTheDocument();
+  });
+
+  it('content wrapper should be full width when web terminal is closed', async () => {
+    const RenderComponent = (
+      { isInitiallyOpen = false, dataTestId = null } // eslint-disable-line
+    ) => (
+      <WebTerminalProvider>
+        <WebTerminalContentWrapper>content</WebTerminalContentWrapper>
+        <WebTerminal
+          isInitiallyOpen={isInitiallyOpen}
+          data-testid={dataTestId}
+          closeIconDescription="Close terminal"
+        >
+          Body content
+        </WebTerminal>
+      </WebTerminalProvider>
+    );
+
+    render(<RenderComponent />);
+
+    let windowWidth = document.body.getBoundingClientRect().width;
+    let contentWrapperWidth = screen
+      .getByText('content')
+      .getBoundingClientRect().width;
+
+    expect(contentWrapperWidth).toBe(windowWidth);
+  });
+
+  it('content wrapper should be reacting to the width of the web terminal when open ', async () => {
+    const RenderComponent = (
+      { isInitiallyOpen = false, dataTestId = null } // eslint-disable-line
+    ) => (
+      <WebTerminalProvider>
+        <WebTerminalContentWrapper>content</WebTerminalContentWrapper>
+        <WebTerminal
+          isInitiallyOpen={isInitiallyOpen}
+          data-testid={dataTestId}
+          closeIconDescription="Close terminal"
+        >
+          Body content
+        </WebTerminal>
+      </WebTerminalProvider>
+    );
+
+    const dataTestId = uuidv4();
+    render(<RenderComponent isInitiallyOpen dataTestId={dataTestId} />);
+
+    let windowWidth = document.body.getBoundingClientRect().width;
+    let contentWrapperWidth = screen
+      .getByText('content')
+      .getBoundingClientRect().width;
+    let webTerminalWidth = screen
+      .getByTestId(dataTestId)
+      .getBoundingClientRect().width;
+
+    expect(contentWrapperWidth).toBe(windowWidth - webTerminalWidth);
+  });
+
+  it('should reduce motion', () => {
+    let prefersReducedMotion = false;
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation(() => ({
+        matches: prefersReducedMotion,
+      })),
+    });
+
+    const dataTestId = uuidv4();
+
+    const { rerender } = render(
+      <MockWebTerminal
+        isInitiallyOpen
+        closeIconDescription="close web terminal"
+        data-testid={dataTestId}
+      >
+        Body content
+      </MockWebTerminal>
+    );
+
+    expect(window.matchMedia('(prefers-reduced-motion: reduce)').matches).toBe(
+      false
+    );
+    expect(screen.getByTestId(dataTestId).hasAttribute('style')).toBeTruthy();
+
+    // Check if reduce motion works
+    prefersReducedMotion = true;
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation(() => ({
+        matches: prefersReducedMotion,
+      })),
+    });
+
+    rerender(
+      <MockWebTerminal
+        isInitiallyOpen
+        closeIconDescription="close web terminal"
+        data-testid={dataTestId}
+      >
+        Body content
+      </MockWebTerminal>
+    );
+
+    expect(window.matchMedia('(prefers-reduced-motion: reduce)').matches).toBe(
+      true
+    );
+    expect(screen.getByTestId(dataTestId).getAttribute('style')).toBe('');
   });
 });

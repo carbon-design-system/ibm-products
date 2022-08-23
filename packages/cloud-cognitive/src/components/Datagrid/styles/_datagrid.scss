@@ -199,6 +199,13 @@
     white-space: nowrap;
   }
 
+  .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--multiline {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: initial;
+  }
+
   .#{$block-class}__expanded-row {
     display: flex;
     overflow: hidden;
@@ -502,6 +509,7 @@
   justify-content: center;
   padding: 0;
   margin: 0;
+
   .#{c4p-settings.$carbon-prefix}--btn__icon {
     margin: 0;
   }

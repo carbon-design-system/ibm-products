@@ -46,7 +46,7 @@ const newPerson = () => {
     someone8: namor.generate({ words: 1, numbers: 0 }),
     someone9: namor.generate({ words: 1, numbers: 0 }),
     someone10: namor.generate({ words: 1, numbers: 0 }),
-    someone11: namor.generate({ words: 1, numbers: 0 }),
+    someone11: namor.generate({ words: 4, numbers: 0 }),
     someone12: namor.generate({ words: 1, numbers: 0 }),
     someone13: namor.generate({ words: 1, numbers: 0 }),
     someone14: namor.generate({ words: 1, numbers: 0 }),

@@ -7,19 +7,20 @@
  */
 
 import React, { useState, useEffect } from 'react';
-// TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
 import { useColumnOrder } from 'react-table';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
+import { action } from '@storybook/addon-actions';
 import {
   Activity16,
   Restart16,
   Download16,
   Filter16,
   Add16,
+  Edit16,
+  TrashCan16,
 } from '@carbon/icons-react';
 import { DataTable, Button, Pagination } from 'carbon-components-react';
 import {
@@ -58,10 +59,6 @@ import { SidePanel } from '../SidePanel';
 export default {
   title: getStoryTitle(Datagrid.displayName),
   component: Datagrid,
-  // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
   parameters: {
     styles,
     docs: {
@@ -157,7 +154,17 @@ const defaultHeader = [
 const { TableBatchAction, TableBatchActions } = DataTable;
 
 export const BasicUsage = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader,
+      {
+        Header: 'Someone 11',
+        accessor: 'someone11',
+        multiLineWrap: true,
+      },
+    ],
+    []
+  );
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid({
     columns,
@@ -533,6 +540,9 @@ export const SelectableRow = () => {
     {
       columns,
       data,
+      DatagridActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
     },
     useSelectRows
   );
@@ -678,6 +688,7 @@ const DatagridActions = (datagridState) => {
       bottom: '-37px',
     },
   };
+
   return (
     isNothingSelected &&
     (useDenseHeader && useDenseHeader ? (
@@ -811,7 +822,7 @@ export const SelectItemsInAllPages = () => {
     <>
       <Datagrid datagridState={{ ...datagridState }} />
       <h3>Doc in Notes...</h3>
-      <p>{`Are all selected across all pages? - ${areAllSelected}`}</p>
+      <p>{`Are all entries selected across all pages? - ${areAllSelected}`}</p>
     </>
   );
 };
@@ -940,6 +951,7 @@ const DatagridBatchActions = (datagridState) => {
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
   const onBatchAction = () => alert('Batch action');
   const actionName = 'Action';
+
   return (
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
@@ -953,6 +965,44 @@ const DatagridBatchActions = (datagridState) => {
   );
 };
 
+const getBatchActions = () => {
+  return [
+    {
+      label: 'Duplicate',
+      renderIcon: Add16,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Add',
+      renderIcon: Add16,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Select all',
+      renderIcon: Add16,
+      onClick: action('Clicked batch action button'),
+      type: 'select_all',
+    },
+    {
+      label: 'Publish to catalog',
+      renderIcon: Add16,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Download',
+      renderIcon: Add16,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Delete',
+      renderIcon: Add16,
+      onClick: action('Clicked batch action button'),
+      hasDivider: true,
+      kind: 'danger',
+    },
+  ];
+};
+
 export const BatchActions = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
@@ -960,10 +1010,13 @@ export const BatchActions = () => {
     {
       columns,
       data,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
       DatagridActions,
       DatagridBatchActions,
     },
-    useSelectRows
+    useSelectRows,
+    useSelectAllWithToggle
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -987,8 +1040,6 @@ export const DisableSelectRow = () => {
 
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
-
-// export { StickyActionsColumn };
 
 NestedRows.story = {
   parameters: {
@@ -1119,6 +1170,62 @@ export const StickyActionsColumn = () => {
           id: 'delete',
           itemText: 'Delete',
           hasDivider: true,
+          isDelete: true,
+          onClick: onActionClick,
+        },
+      ],
+    },
+    useStickyColumn,
+    useActionsColumn
+  );
+  return (
+    <Wrapper>
+      <h3>{msg}</h3>
+      <Datagrid datagridState={{ ...datagridState }} />
+      <p>More details documentation check the Notes section below</p>
+    </Wrapper>
+  );
+};
+
+export const RowActionButton = () => {
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader,
+      {
+        Header: '',
+        accessor: 'actions',
+        sticky: 'right',
+        width: 90,
+        isAction: true,
+      },
+    ],
+    []
+  );
+  const [data] = useState(makeData(10));
+  const [msg, setMsg] = useState('click action menu');
+  const onActionClick = (actionId, row) => {
+    const { original } = row;
+    setMsg(
+      `Clicked [${actionId}] on row: <${original.firstName} ${original.lastName}>`
+    );
+  };
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      rowActions: [
+        {
+          id: 'edit',
+          itemText: 'Edit',
+          icon: Edit16,
+          onClick: onActionClick,
+        },
+
+        {
+          id: 'delete',
+          itemText: 'Delete',
+          icon: TrashCan16,
           isDelete: true,
           onClick: onActionClick,
         },

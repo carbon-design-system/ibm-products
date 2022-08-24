@@ -7,7 +7,6 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 
-// import * as React from 'react';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DndProvider } from 'react-dnd';

@@ -178,7 +178,7 @@ DraggableElement.propTypes = {
   onArrowKeyDown: PropTypes.func.isRequired,
   onGrab: PropTypes.func.isRequired,
   positionLabel: PropTypes.string,
-  selected: PropTypes.string,
+  selected: PropTypes.bool,
   type: PropTypes.string.isRequired,
 };
 

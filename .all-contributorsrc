@@ -134,6 +134,15 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "kai-liu",
+      "name": "kai-liu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/105320675?v=4",
+      "profile": "https://github.com/kai-liu",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,

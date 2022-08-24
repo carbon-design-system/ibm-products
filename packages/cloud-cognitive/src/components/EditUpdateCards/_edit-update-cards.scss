@@ -25,9 +25,12 @@
   .#{$block-class} {
     textarea,
     input {
+      font-size: carbon--type-scale(3);
+      letter-spacing: 0;
+      line-height: 1.5;
       width: 100%;
       padding: 0;
-      @include carbon--type-style('body-02');
+      // @include carbon--type-style('body-02');
     }
 
     &##{$block-class}--edit {

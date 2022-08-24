@@ -113,8 +113,8 @@ const Template = (args) => {
   );
 
   const edit = (
-    <Form onSubmit={onSave} id='editForm'>
-      <TextArea name='bodyCopy' labelText='' rows={2}>
+    <Form onSubmit={onSave} id="editForm">
+      <TextArea name="bodyCopy" labelText="" rows={2}>
         {bodyCopy}
       </TextArea>
     </Form>

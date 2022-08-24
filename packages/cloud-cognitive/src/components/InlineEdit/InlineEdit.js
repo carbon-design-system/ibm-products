@@ -72,7 +72,7 @@ export let InlineEdit = React.forwardRef(
     },
     refIn
   ) => {
-    const refInput = useRef(null);
+    const refInput = useRef({ innerText: value });
     const localRef = useRef(null);
     const ref = refIn || localRef;
     const [editing, setEditing] = useState(false);
@@ -277,7 +277,8 @@ export let InlineEdit = React.forwardRef(
           {...getDevtoolsProps(componentName)}
           {...{ id, size }}
           className={cx(`${blockClass}__input`, {
-            [`${blockClass}__input--empty`]: !value,
+            [`${blockClass}__input--empty`]:
+              refInput.current?.innerText?.length === 0,
           })}
           contentEditable
           aria-label={labelText}

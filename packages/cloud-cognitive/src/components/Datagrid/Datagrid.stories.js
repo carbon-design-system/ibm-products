@@ -8,6 +8,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
+import { getInlineEditColumns } from './utils/getInlineEditColumns';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
@@ -456,35 +457,13 @@ export const ClickableRow = () => {
 };
 
 export const InlineEdit = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const onInputChange = () => {
-    //const { original } = row;
-  };
+  const columns = React.useMemo(() => getInlineEditColumns(), []);
+  const [data, setData] = useState(makeData(10));
   const datagridState = useDatagrid(
     {
       columns,
       data,
-      inlineEditOptions: [
-        {
-          id: 'firstName',
-          editType: 'text',
-          disabled: false,
-          onChange: onInputChange,
-        },
-        {
-          id: 'lastName',
-          editType: 'text',
-          onClick: onInputChange,
-          disabled: false,
-        },
-        {
-          id: 'age',
-          editType: 'number',
-          onClick: onInputChange,
-          disabled: false,
-        },
-      ],
+      onDataUpdate: setData,
     },
     useInlineEdit
   );

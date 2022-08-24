@@ -154,6 +154,7 @@ export let DataSpreadsheet = React.forwardRef(
     // Update the spreadsheet data after editing a cell
     const updateData = useCallback(
       (rowIndex, columnId) => {
+        console.log({ columnId, rowIndex });
         onDataUpdate((prev) =>
           prev.map((row, index) => {
             if (index === rowIndex) {

@@ -20,10 +20,7 @@ const Actions = ({
   findColumnPlaceholderLabel = 'Find column',
 }) => {
   return (
-    <div
-      className={`${blockClass}__customize-columns-modal--actions`}
-      test-id={`${blockClass}__customize-columns-modal--actions`}
-    >
+    <div className={`${blockClass}__customize-columns-modal--actions`}>
       <Search
         placeholder={findColumnPlaceholderLabel}
         value={searchText}
@@ -33,7 +30,6 @@ const Actions = ({
           // TODO: is it performant?
           setSearchText(e.target.value);
         }}
-        test-id={`${blockClass}__customize-columns-modal--search`}
       />
     </div>
   );

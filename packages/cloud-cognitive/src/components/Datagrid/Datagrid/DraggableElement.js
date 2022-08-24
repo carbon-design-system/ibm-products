@@ -99,16 +99,12 @@ const DraggableElement = ({
   );
   return (
     <li
-      className={cx(
-        {
-          [`${blockClass}__draggable-handleHolder-isOver`]: isOver && !disabled,
-        },
-        {
-          [`${blockClass}__draggable-handleHolder--grabbed`]: isGrabbed,
-        },
-        [`${blockClass}__draggable-handleHolder`],
-        { ['-selected']: selected }
-      )}
+      className={cx({
+        [`${blockClass}__draggable-handleHolder-isOver`]: isOver && !disabled,
+        [`${blockClass}__draggable-handleHolder-grabbed`]: isGrabbed,
+        [`${blockClass}__draggable-handleHolder-selected`]: selected,
+        [`${blockClass}__draggable-handleHolder`]: !selected,
+      })}
       ref={ref}
       aria-selected={isFocused}
       role="option"

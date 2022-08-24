@@ -40,6 +40,7 @@ import {
   useStickyColumn,
   useActionsColumn,
   useColumnOrder,
+  useInlineEdit,
 } from '.';
 
 import {
@@ -452,6 +453,42 @@ export const ClickableRow = () => {
       </SidePanel>
     </div>
   );
+};
+
+export const InlineEdit = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(10));
+  const onInputChange = () => {
+    //const { original } = row;
+  };
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      inlineEditOptions: [
+        {
+          id: 'firstName',
+          editType: 'text',
+          disabled: false,
+          onChange: onInputChange,
+        },
+        {
+          id: 'lastName',
+          editType: 'text',
+          onClick: onInputChange,
+          disabled: false,
+        },
+        {
+          id: 'age',
+          editType: 'number',
+          onClick: onInputChange,
+          disabled: false,
+        },
+      ],
+    },
+    useInlineEdit
+  );
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 const DataTableSidePanelContent = (selectedRowValues) => {
@@ -1226,6 +1263,7 @@ export const RowActionButton = () => {
   const [data] = useState(makeData(10));
   const [msg, setMsg] = useState('click action menu');
   const onActionClick = (actionId, row) => {
+    console.log(onActionClick);
     const { original } = row;
     setMsg(
       `Clicked [${actionId}] on row: <${original.firstName} ${original.lastName}>`

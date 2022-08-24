@@ -85,12 +85,12 @@ const Template = (args) => {
       onClick: () => {
         setEditMode(false);
       },
-      iconDescription: 'Edit',
+      iconDescription: 'Cancel',
     },
     {
       id: '3',
       icon: Save16,
-      iconDescription: 'Edit',
+      iconDescription: 'Save',
       type: 'submit',
       form: 'editForm',
     },

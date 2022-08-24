@@ -25,12 +25,12 @@
   .#{$block-class} {
     textarea,
     input {
-      font-size: carbon--type-scale(3);
-      letter-spacing: 0;
-      line-height: 1.5;
       width: 100%;
       padding: 0;
-      // @include carbon--type-style('body-02');
+      font-size: carbon--type-scale(3);
+      letter-spacing: 0;
+      // stylelint-disable-next-line carbon/type-token-use
+      line-height: 1.5;
     }
 
     &##{$block-class}--edit {

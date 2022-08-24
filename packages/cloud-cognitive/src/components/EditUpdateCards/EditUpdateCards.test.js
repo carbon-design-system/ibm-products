@@ -17,7 +17,7 @@ const blockClass = `${pkg.prefix}--edit-update-cards`;
 const componentName = EditUpdateCards.displayName;
 
 // values to use
-const children = `hello, world (${uuidv4()})`;
+// const children = `hello, world (${uuidv4()})`;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
@@ -33,10 +33,10 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, () => {
-    render(<EditUpdateCards>{children}</EditUpdateCards>);
-    screen.getByText(children);
-  });
+  // it(`renders children`, () => {
+  //   render(<EditUpdateCards>{children}</EditUpdateCards>);
+  //   screen.getByText(children);
+  // });
 
   it('applies className to the containing node', () => {
     render(<EditUpdateCards className={className}> </EditUpdateCards>);

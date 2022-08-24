@@ -10,7 +10,7 @@ import {
   Button,
   ButtonSet,
   Dropdown,
-  TextInput,
+  Search,
   Tag,
 } from 'carbon-components-react';
 import cx from 'classnames';
@@ -92,7 +92,7 @@ export let AddSelectFilter = ({
   return (
     <>
       <div className={`${blockClass}-search`}>
-        <TextInput
+        <Search
           id="temp-id"
           labelText={inputLabel}
           placeholder={inputPlaceholder}
@@ -107,7 +107,8 @@ export let AddSelectFilter = ({
             onClick={() => setOpen(!open)}
             iconDescription={iconDescription}
             className={filterBtnClassnames}
-            size="md"
+            size="lg"
+            tooltipPosition="left"
           />
         )}
         {open && (

@@ -67,7 +67,8 @@
       "profile": "http://www.matthewdgallo.com",
       "contributions": [
         "code",
-        "infra"
+        "infra",
+        "review"
       ]
     },
     {
@@ -124,6 +125,24 @@
       "contributions": [
         "code",
         "a11y"
+      ]
+    },
+    {
+      "login": "marion-bruells",
+      "name": "marion-bruells",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51152537?v=4",
+      "profile": "https://github.com/marion-bruells",
+      "contributions": [
+        "design"
+      ]
+    },
+    {
+      "login": "kai-liu",
+      "name": "kai-liu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/105320675?v=4",
+      "profile": "https://github.com/kai-liu",
+      "contributions": [
+        "code"
       ]
     }
   ],

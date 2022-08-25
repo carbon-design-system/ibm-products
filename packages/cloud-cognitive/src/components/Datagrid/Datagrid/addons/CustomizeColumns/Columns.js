@@ -7,7 +7,7 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -16,6 +16,7 @@ import update from 'immutability-helper';
 import { pkg } from '../../../../../settings';
 import DraggableElement from '../../DraggableElement';
 import { isColumnVisible } from './common';
+import classNames from 'classnames';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -31,12 +32,14 @@ const getNextIndex = (array, currentIndex, key) => {
 };
 
 const Columns = ({
+  getVisibleColumnsCount,
   filterString,
   columns,
   setColumnsObject,
   onSelectColumn,
   assistiveTextInstructionsLabel,
   assistiveTextDisabledInstructionsLabel,
+  selectAllLabel,
 }) => {
   const [ariaRegionText, setAriaRegionText] = React.useState('');
   const [focusIndex, setFocusIndex] = React.useState(-1);
@@ -54,6 +57,7 @@ const Columns = ({
     },
     [columns, setColumnsObject]
   );
+
   return (
     <div className={`${blockClass}__customize-columns-column-list`}>
       <DndProvider backend={HTML5Backend}>
@@ -90,6 +94,38 @@ const Columns = ({
               ? assistiveTextInstructionsLabel
               : assistiveTextDisabledInstructionsLabel}
           </span>
+          <div
+            id={`${blockClass}__customize-columns-select-all`}
+            className={classNames(
+              {
+                [`${blockClass}__customize-columns-select-all`]:
+                  getVisibleColumnsCount() === 0,
+                [`${blockClass}__customize-columns-select-all-selected`]:
+                  getVisibleColumnsCount() > 0,
+              }
+
+              // `${blockClass}__customize-columns-select-all`,
+            )}
+            selected={getVisibleColumnsCount() > 0}
+          >
+            <Checkbox
+              wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
+              checked={getVisibleColumnsCount() === columns.length}
+              empty={!!getVisibleColumnsCount() === 0}
+              indeterminate={
+                getVisibleColumnsCount() < columns.length &&
+                getVisibleColumnsCount() > 0
+              }
+              onChange={() => {
+                onSelectColumn(
+                  columns,
+                  getVisibleColumnsCount() !== columns.length
+                );
+              }}
+              id={`${blockClass}__customization-column-select-all`}
+              labelText={selectAllLabel}
+            />
+          </div>
           {columns
             .filter(
               (colDef) =>
@@ -127,14 +163,16 @@ const Columns = ({
                     }
                   }
                 }}
+                selected={isColumnVisible(colDef)}
               >
                 <Checkbox
-                  wrapperClassName={`${blockClass}__customize-columns-checkbox`}
+                  wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
                   checked={isColumnVisible(colDef)}
                   onChange={onSelectColumn.bind(null, colDef)}
                   id={`${blockClass}__customization-column-${colDef.id}`}
                   labelText={colDef.Header.props.title}
                   title={colDef.Header.props.title}
+                  className={`${blockClass}__customize-columns-checkbox`}
                 />
               </DraggableElement>
             ))}
@@ -150,8 +188,11 @@ Columns.propTypes = {
   columns: PropTypes.array.isRequired,
   disabledInstructionsLabel: PropTypes.string,
   filterString: PropTypes.string.isRequired,
+  getVisibleColumnsCount: PropTypes.func.isRequired,
   instructionsLabel: PropTypes.string,
   onSelectColumn: PropTypes.func.isRequired,
+  selectAllLabel: PropTypes.string,
+  setColumnStatus: PropTypes.func,
   setColumnsObject: PropTypes.func.isRequired,
 };
 

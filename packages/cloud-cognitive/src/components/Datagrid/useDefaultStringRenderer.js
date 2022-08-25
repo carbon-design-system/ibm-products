@@ -6,6 +6,7 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import React from 'react';
+import cx from 'classnames';
 import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -13,7 +14,10 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const useDefaultStringRenderer = (hooks) => {
   const StringRenderer = (tableProps) => (
     <div
-      className={`${blockClass}__defaultStringRenderer`}
+      className={cx(`${blockClass}__defaultStringRenderer`, {
+        [`${blockClass}__defaultStringRenderer--multiline`]:
+          tableProps.column?.multiLineWrap,
+      })}
       title={tableProps.value}
     >
       {tableProps.value}

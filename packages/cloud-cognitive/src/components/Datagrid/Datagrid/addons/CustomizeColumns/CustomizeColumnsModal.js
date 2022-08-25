@@ -6,13 +6,14 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 // @flow
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'carbon-components-react';
 import { isColumnVisible } from './common';
 import Columns from './Columns';
 import Actions from './Actions';
 import { pkg } from '../../../../../settings';
+import { useCallback } from 'react';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -22,17 +23,20 @@ const CustomizeColumnsModal = ({
   onSaveColumnPrefs,
   columnDefinitions,
   originalColumnDefinitions,
-  customizeModalHeadingLabel = 'Customize display',
+  customizeModalHeadingLabel = 'Customize Columns',
   primaryButtonTextLabel = 'Save',
   secondaryButtonTextLabel = 'Cancel',
-  instructionsLabel = 'Deselect columns to hide them. Click and drag the white box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
+  instructionsLabel = 'Select columns to display them. Click and drag the box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
   findColumnPlaceholderLabel = 'Find column',
   resetToDefaultLabel = 'Reset to default',
   assistiveTextInstructionsLabel = 'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
   assistiveTextDisabledInstructionsLabel = 'Reordering columns are disabled because they are filtered currently.',
+  selectAllLabel = 'Column name',
 }) => {
+  const [visibleColumnsCount, setVisibleColumnsCount] = useState('');
+  const [totalColumns, setTotalColumns] = useState('');
   const [searchText, setSearchText] = useState('');
-  const [columnObjects, setColumnsObject] = useState(
+  const [columnObjects, setColumnObjects] = useState(
     columnDefinitions
       // hide the columns without Header, e.g the sticky actions, spacer
       .filter((colDef) => !!colDef.Header.props)
@@ -49,6 +53,7 @@ const CustomizeColumnsModal = ({
         return 0;
       })
   );
+
   const [isDirty, setIsDirty] = useState(false);
 
   const onRequestClose = () => {
@@ -65,12 +70,16 @@ const CustomizeColumnsModal = ({
 
   const onCheckboxCheck = (col, value) => {
     const changedDefinitions = columnObjects.map((definition) => {
-      if (definition.id === col.id) {
+      if (
+        (Array.isArray(col) && col.indexOf(definition) != null) ||
+        definition.id === col.id
+      ) {
         return { ...definition, isVisible: value };
       }
       return definition;
     });
-    setColumnsObject(changedDefinitions);
+
+    setColumnObjects(changedDefinitions);
     setDirty();
   };
 
@@ -80,12 +89,22 @@ const CustomizeColumnsModal = ({
     }
   };
 
+  const getVisibleColumnsCount = useCallback(() => {
+    return columnObjects.filter((col) => col.isVisible).length;
+  }, [columnObjects]);
+
   const string = searchText.trim().toLowerCase();
+
+  useEffect(() => {
+    setVisibleColumnsCount(getVisibleColumnsCount());
+    setTotalColumns(columnObjects.length);
+  }, [getVisibleColumnsCount, columnObjects.length]);
+
   return (
     <Modal
       className={`${blockClass}__customize-columns-modal`}
       open={isOpen}
-      modalHeading={customizeModalHeadingLabel}
+      modalHeading={`${customizeModalHeadingLabel} (${visibleColumnsCount}/${totalColumns})`}
       primaryButtonText={primaryButtonTextLabel}
       secondaryButtonText={secondaryButtonTextLabel}
       selectorPrimaryFocus={`.${blockClass}__customize-columns-column-list--focus`}
@@ -103,7 +122,7 @@ const CustomizeColumnsModal = ({
         originalColumnDefinitions={originalColumnDefinitions}
         searchText={searchText}
         setColumnsObject={(cols) => {
-          setColumnsObject(cols);
+          setColumnObjects(cols);
           setDirty();
         }}
         setSearchText={setSearchText}
@@ -116,13 +135,15 @@ const CustomizeColumnsModal = ({
           assistiveTextDisabledInstructionsLabel={
             assistiveTextDisabledInstructionsLabel
           }
+          getVisibleColumnsCount={getVisibleColumnsCount}
           columns={columnObjects}
           filterString={string}
           onSelectColumn={onCheckboxCheck}
           setColumnsObject={(cols) => {
-            setColumnsObject(cols);
+            setColumnObjects(cols);
             setDirty();
           }}
+          selectAllLabel={selectAllLabel}
         />
       )}
     </Modal>
@@ -142,6 +163,7 @@ CustomizeColumnsModal.propTypes = {
   primaryButtonTextLabel: PropTypes.string,
   resetToDefaultLabel: PropTypes.string,
   secondaryButtonTextLabel: PropTypes.string,
+  selectAllLabel: PropTypes.string,
   setIsModalOpen: PropTypes.func.isRequired,
 };
 

@@ -167,13 +167,18 @@ const WithManyColumns = ({ ...args }) => {
 
 export const dataSpreadsheet = prepareStory(Template, {
   storyName: 'Basic spreadsheet',
-  args: {},
+  args: {
+    selectAllAriaLabel: 'Select all',
+    spreadsheetAriaLabel: 'Example data spreadsheet',
+  },
 });
 
 export const largeDatasetSpreadsheet = prepareStory(LargeTemplate, {
   storyName: 'Large dataset',
   args: {
     cellSize: 'large',
+    selectAllAriaLabel: 'Select all',
+    spreadsheetAriaLabel: 'Example data spreadsheet',
   },
 });
 
@@ -181,12 +186,16 @@ export const emptyWithCells = prepareStory(EmptyWithCellsTemplate, {
   storyName: 'Empty with cells',
   args: {
     defaultEmptyRowCount: 24,
+    selectAllAriaLabel: 'Select all',
+    spreadsheetAriaLabel: 'Example data spreadsheet',
   },
 });
 
 export const withManyColumns = prepareStory(WithManyColumns, {
   storyName: 'With many columns',
   args: {
+    selectAllAriaLabel: 'Select all',
+    spreadsheetAriaLabel: 'Example data spreadsheet',
     totalVisibleColumns: 5,
   },
 });

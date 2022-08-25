@@ -9,12 +9,13 @@ import React from 'react';
 import { pkg } from '../../settings';
 import cx from 'classnames';
 import { InlineEdit } from '../InlineEdit';
+import { Dropdown } from 'carbon-components-react';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const useInlineEdit = (hooks) => {
   const addInlineEdit = (props, { cell, instance }) => {
-    const { onDataUpdate } = instance;
+    const { onDataUpdate, rowSize } = instance;
 
     // Saves the new cell data, onDataUpdate is a required function to be
     // passed to useDatagrid when using useInlineEdit
@@ -31,6 +32,41 @@ const useInlineEdit = (hooks) => {
           }
           return row;
         })
+      );
+    };
+
+    const renderDropdownItem = (item) => {
+      const includesIcon = !!item?.icon;
+      return includesIcon ? (
+        <>
+          {React.createElement(item.icon)}
+          <span className={cx(`${blockClass}__inline-edit--select-item`)}>
+            {item?.text}
+          </span>
+        </>
+      ) : (
+        item?.text
+      );
+    };
+
+    const renderSelectCell = () => {
+      const columnInlineEditConfig = cell.column.inlineEdit;
+      return (
+        <Dropdown
+          style={{
+            width: cell.column.totalWidth,
+          }}
+          className={cx(`${blockClass}__inline-edit--select`, {
+            [`${blockClass}__inline-edit--select-${rowSize}`]: rowSize,
+          })}
+          id="datagrid-inline-edit-select"
+          label="Dropdown menu options"
+          items={columnInlineEditConfig.items}
+          initialSelectedItem={cell.value}
+          itemToElement={(item) => renderDropdownItem(item)}
+          renderSelectedItem={(item) => renderDropdownItem(item)}
+          onChange={(item) => saveCellData(item.selectedItem)}
+        />
       );
     };
 
@@ -67,6 +103,7 @@ const useInlineEdit = (hooks) => {
                 value={cell.value}
               />
             )}
+            {editOptionItem === 'select' && renderSelectCell()}
             {/* Render default cell, if it's column is not inlineEdit */}
             {!editOptionItem && (
               <div

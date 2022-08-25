@@ -9,11 +9,46 @@
 @import '../../../global/styles/project-settings';
 @import './variables';
 
+$row-heights: (
+  xs: 1.5rem,
+  sm: 2rem,
+  md: 2.5rem,
+  lg: 3rem,
+  xl: 4rem,
+);
+
+@each $size, $size-value in $row-heights {
+  .#{$block-class}
+    .#{$block-class}__inline-edit--select.#{$block-class}__inline-edit--select-#{$size} {
+    height: $size-value;
+  }
+  .#{$block-class}
+    .#{$block-class}__inline-edit--select.#{$block-class}__inline-edit--select-#{$size}.#{$carbon-prefix}--list-box {
+    max-height: none;
+  }
+}
+
+.#{$block-class}__inline-edit--select
+  .#{$block-class}__inline-edit--select-item {
+  padding-bottom: $spacing-05;
+  padding-left: $spacing-05;
+}
+
+.#{$block-class}__inline-edit--select.#{$carbon-prefix}--dropdown {
+  width: inherit;
+  height: $spacing-09; // default row height
+  max-height: none;
+}
+
+.#{$block-class}__inline-edit--select,
+.#{$block-class}__inline-edit-cell {
+  margin-left: calc(-1 * #{$spacing-05});
+}
+
 .#{$block-class}__inline-edit-cell {
   display: flex;
   height: 100%;
   align-items: center;
-  transform: translateX(calc(-1 * #{$spacing-05}));
 }
 
 .#{$block-class}__inline-edit-cell:hover {

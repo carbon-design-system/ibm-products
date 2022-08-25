@@ -7,6 +7,13 @@
 
 import React from 'react';
 import namor from 'namor';
+import { inlineEditSelectItems } from './getInlineEditColumns';
+
+const getRandomInteger = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 
 export const makeData = (...lens) => {
   const makeDataLevel = (depth = 0) => {
@@ -30,6 +37,7 @@ export const range = (len) => {
 
 const newPerson = () => {
   const statusChance = Math.random();
+  const initialChartTypeIndex = getRandomInteger(0, 2);
   return {
     firstName: namor.generate({ words: 1, numbers: 0 }),
     lastName: namor.generate({ words: 1, numbers: 0 }),
@@ -62,6 +70,12 @@ const newPerson = () => {
         : statusChance > 0.33
         ? 'complicated'
         : 'single',
+    chartType:
+      initialChartTypeIndex === 0
+        ? inlineEditSelectItems[0]
+        : initialChartTypeIndex === 1
+        ? inlineEditSelectItems[1]
+        : inlineEditSelectItems[2],
   };
 };
 

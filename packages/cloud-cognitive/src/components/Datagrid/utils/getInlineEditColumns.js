@@ -5,6 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import {
+  ChartBubble16,
+  ChartColumnFloating16,
+  ChartVennDiagram16,
+} from '@carbon/icons-react';
+
+export const inlineEditSelectItems = [
+  {
+    id: 'option-0',
+    icon: ChartColumnFloating16,
+    text: 'Column Chart',
+  },
+  {
+    id: 'option-1',
+    icon: ChartBubble16,
+    text: 'Bubble Chart',
+  },
+  {
+    id: 'option-2',
+    icon: ChartVennDiagram16,
+    text: 'Venn Diagram',
+  },
+];
+
 export const getInlineEditColumns = () => {
   return [
     {
@@ -38,8 +62,12 @@ export const getInlineEditColumns = () => {
       width: 60,
     },
     {
-      Header: 'Someone 1',
-      accessor: 'someone1',
+      Header: 'Chart type',
+      accessor: 'chartType',
+      inlineEdit: {
+        type: 'select',
+        items: inlineEditSelectItems,
+      },
     },
     {
       Header: 'Someone 2',

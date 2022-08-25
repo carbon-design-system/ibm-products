@@ -40,7 +40,7 @@ export const handleCellDeletion = ({
   rangeWithCallback(lowestColumnIndex, greatestColumnIndex, (columnIndex) => {
     rangeWithCallback(lowestRowIndex, greatestRowIndex, (rowIndex) => {
       const cellProps = rows[rowIndex].cells[columnIndex];
-      updateData(rowIndex, cellProps.column.id, '');
+      updateData(rowIndex, cellProps?.column.id, '');
     });
   });
   setActiveCellContent(null);

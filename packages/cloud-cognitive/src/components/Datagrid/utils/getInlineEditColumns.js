@@ -16,12 +16,16 @@ export const getInlineEditColumns = () => {
     {
       Header: 'First Name',
       accessor: 'firstName',
-      editType: 'text',
+      inlineEdit: {
+        type: 'text',
+      },
     },
     {
       Header: 'Last Name',
       accessor: 'lastName',
-      editType: 'text',
+      inlineEdit: {
+        type: 'text',
+      },
     },
     {
       Header: 'Age',

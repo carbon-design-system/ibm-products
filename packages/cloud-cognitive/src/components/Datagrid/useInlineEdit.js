@@ -36,7 +36,7 @@ const useInlineEdit = (hooks) => {
 
     const editOptionItem = instance.columns
       .filter((obj) => obj.id === cell.column.id)
-      .map((obj) => obj.editType)
+      .map((obj) => obj.inlineEdit?.type)
       .toString();
 
     return [

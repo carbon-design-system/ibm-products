@@ -226,5 +226,6 @@ export const inlineEdit = prepareStory(Template, {
     cancelDescription: 'Cancel',
     saveDescription: 'Save',
     value: 'hello, world',
+    placeholder: 'placeholder text',
   },
 });

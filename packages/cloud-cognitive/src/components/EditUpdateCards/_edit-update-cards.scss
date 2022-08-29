@@ -36,8 +36,8 @@
     &##{$block-class}--edit {
       /* Used id for overriding the SVG path fill */
 
-      .#{$pkg-prefix}--card__header, .#{$pkg-prefix}--card__footer {
-
+      .#{$pkg-prefix}--card__header, 
+      .#{$pkg-prefix}--card__footer {
         button {
           &:hover {
             background-color: $hover-primary;
@@ -81,7 +81,6 @@
     }
     &:not(.#{$block-class}__actions-bottom) {
       &##{$block-class}--edit {
-
         .#{$pkg-prefix}--card__header {
           // stylelint-disable-next-line carbon/theme-token-use
           background-color: $blue-60;

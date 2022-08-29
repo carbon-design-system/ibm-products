@@ -7,12 +7,7 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-  TextInput,
-  Tag,
-  OverflowMenu,
-  Checkbox,
-} from 'carbon-components-react';
+import { Search, Tag, OverflowMenu, Checkbox } from 'carbon-components-react';
 import { Filter32 } from '@carbon/icons-react';
 import { pkg, carbon } from '../../settings';
 import { AddSelectList } from './AddSelectList';
@@ -121,7 +116,7 @@ export let AddSelectColumn = ({
     <>
       <div className={colClass}>
         <div className={`${colClass}-search-bar`}>
-          <TextInput
+          <Search
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             light
@@ -129,6 +124,7 @@ export let AddSelectColumn = ({
             className={`${colClass}-input`}
             id={uuidv4()}
             labelText={columnInputPlaceholder}
+            size="lg"
           />
           <div className={`${colClass}-sort-filter`}>
             <AddSelectSort

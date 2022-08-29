@@ -9,7 +9,8 @@ import React from 'react';
 import { pkg } from '../../settings';
 import cx from 'classnames';
 import { InlineEdit } from '../InlineEdit';
-import { Dropdown } from 'carbon-components-react';
+import { DatePicker, Dropdown, DatePickerInput } from 'carbon-components-react';
+import { prepareProps } from '../../global/js/utils/props-helper';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -70,6 +71,44 @@ const useInlineEdit = (hooks) => {
       );
     };
 
+    const renderDateCell = () => {
+      const columnInlineEditConfig = cell.column.inlineEdit;
+      const datePickerPreparedProps = prepareProps(columnInlineEditConfig, [
+        'type',
+        'datePickerInputProps',
+      ]);
+      const datePickerInputProps = columnInlineEditConfig.datePickerInputProps;
+      return (
+        <DatePicker
+          {...datePickerPreparedProps}
+          style={{
+            width: cell.column.totalWidth,
+          }}
+          datePickerType="single"
+          className={cx(`${blockClass}__inline-edit--date`, {
+            [`${blockClass}__inline-edit--date-${rowSize}`]: rowSize,
+          })}
+          onChange={(newDate) => {
+            const newDateObj = newDate[0];
+            datePickerPreparedProps?.onChange?.(newDateObj, cell);
+            document.activeElement?.blur();
+          }}
+        >
+          <DatePickerInput
+            {...datePickerInputProps}
+            value={cell.value}
+            placeholder={datePickerInputProps.placeholder || 'mm/dd/yyyy'}
+            labelText={datePickerInputProps.labelText || 'Set date'}
+            id={
+              datePickerInputProps.id ||
+              `${blockClass}__inline-edit--date-picker--${cell.row.index}`
+            }
+            hideLabel
+          />
+        </DatePicker>
+      );
+    };
+
     const editOptionItem = instance.columns
       .filter((obj) => obj.id === cell.column.id)
       .map((obj) => obj.inlineEdit?.type)
@@ -103,7 +142,10 @@ const useInlineEdit = (hooks) => {
                 value={cell.value}
               />
             )}
+            {/* Render select/dropdown cells */}
             {editOptionItem === 'select' && renderSelectCell()}
+            {/* Render date cells */}
+            {editOptionItem === 'date' && renderDateCell()}
             {/* Render default cell, if it's column is not inlineEdit */}
             {!editOptionItem && (
               <div

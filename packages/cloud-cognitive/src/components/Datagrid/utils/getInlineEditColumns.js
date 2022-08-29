@@ -10,6 +10,7 @@ import {
   ChartColumnFloating16,
   ChartVennDiagram16,
 } from '@carbon/icons-react';
+import { formatDate } from './makeData';
 
 export const inlineEditSelectItems = [
   {
@@ -29,7 +30,24 @@ export const inlineEditSelectItems = [
   },
 ];
 
-export const getInlineEditColumns = () => {
+export const getInlineEditColumns = ({ onDataUpdate }) => {
+  // Saves the new formatted date to the data passed to the Datagrid component
+  const updateCellDate = (formattedDate, cell) => {
+    const columnId = cell.column.id;
+    const rowIndex = cell.row.index;
+    onDataUpdate((prev) =>
+      prev.map((row, index) => {
+        if (index === rowIndex) {
+          return {
+            ...prev[rowIndex],
+            [columnId]: formattedDate,
+          };
+        }
+        return row;
+      })
+    );
+  };
+
   return [
     {
       Header: 'Row Index',
@@ -60,6 +78,22 @@ export const getInlineEditColumns = () => {
       Header: 'Visits',
       accessor: 'visits',
       width: 60,
+    },
+    {
+      Header: 'Active since',
+      accessor: 'activeSince',
+      inlineEdit: {
+        type: 'date',
+        // optionally pass props here to be passed through to Carbon's DatePicker component
+        onChange: (newDateObj, cell) => {
+          const formattedDate = formatDate(newDateObj);
+          updateCellDate(formattedDate, cell);
+        },
+        // optionally pass props here to be passed through to Carbon's DatePickerInput component
+        datePickerInputProps: {
+          labelText: 'Change active since date',
+        },
+      },
     },
     {
       Header: 'Chart type',

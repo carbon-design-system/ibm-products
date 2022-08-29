@@ -9,6 +9,28 @@ import React from 'react';
 import namor from 'namor';
 import { inlineEditSelectItems } from './getInlineEditColumns';
 
+// Ensures that months and days are all 2 digits, prefixes 0 if `num` is a single digit
+const padTo2Digits = (num) => {
+  return num.toString().padStart(2, '0');
+};
+
+// Format date to mm/dd/yyyy, this is the default `dateFormat` prop by Carbon's DatePicker
+// To achieve dd/mm/yyyy, update the `dateFormat` prop and pass a dd/mm/yyyy string
+export const formatDate = (date, format) => {
+  if (format === 'd/m/y') {
+    return [
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+      date.getFullYear(),
+    ].join('/');
+  }
+  return [
+    padTo2Digits(date.getMonth() + 1),
+    padTo2Digits(date.getDate()),
+    date.getFullYear(),
+  ].join('/');
+};
+
 const getRandomInteger = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -38,6 +60,11 @@ export const range = (len) => {
 const newPerson = () => {
   const statusChance = Math.random();
   const initialChartTypeIndex = getRandomInteger(0, 2);
+  const activeSinceDate = new Date();
+  let yesterdayDate = new Date();
+  yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+  let twoDaysAgoDate = new Date();
+  twoDaysAgoDate.setDate(twoDaysAgoDate.getDate() - 2);
   return {
     firstName: namor.generate({ words: 1, numbers: 0 }),
     lastName: namor.generate({ words: 1, numbers: 0 }),
@@ -76,6 +103,12 @@ const newPerson = () => {
         : initialChartTypeIndex === 1
         ? inlineEditSelectItems[1]
         : inlineEditSelectItems[2],
+    activeSince:
+      statusChance > 0.66
+        ? formatDate(activeSinceDate)
+        : statusChance > 0.33
+        ? formatDate(yesterdayDate)
+        : formatDate(twoDaysAgoDate),
   };
 };
 

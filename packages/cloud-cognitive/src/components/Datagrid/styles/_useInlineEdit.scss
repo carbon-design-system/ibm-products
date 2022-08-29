@@ -19,7 +19,10 @@ $row-heights: (
 
 @each $size, $size-value in $row-heights {
   .#{$block-class}
-    .#{$block-class}__inline-edit--select.#{$block-class}__inline-edit--select-#{$size} {
+    .#{$block-class}__inline-edit--select.#{$block-class}__inline-edit--select-#{$size},
+  .#{$block-class}
+    .#{$block-class}__inline-edit--date.#{$block-class}__inline-edit--date-#{$size}
+    .#{$carbon-prefix}--date-picker__input {
     height: $size-value;
   }
   .#{$block-class}
@@ -34,14 +37,30 @@ $row-heights: (
   padding-left: $spacing-05;
 }
 
-.#{$block-class}__inline-edit--select.#{$carbon-prefix}--dropdown {
+.#{$block-class}__inline-edit--select.#{$carbon-prefix}--dropdown,
+.#{$block-class}__inline-edit--date .#{$carbon-prefix}--date-picker__input {
   width: inherit;
   height: $spacing-09; // default row height
   max-height: none;
 }
 
+.#{$block-class}__inline-edit--date .#{$carbon-prefix}--date-picker-container {
+  width: inherit;
+}
+
+.#{$block-class}__inline-edit--date.#{$carbon-prefix}--date-picker.#{$carbon-prefix}--date-picker--single
+  .#{$carbon-prefix}--date-picker__input {
+  overflow: hidden;
+  width: 100%;
+  max-width: none;
+  padding-right: $spacing-07;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .#{$block-class}__inline-edit--select,
-.#{$block-class}__inline-edit-cell {
+.#{$block-class}__inline-edit-cell,
+.#{$block-class}__inline-edit--date {
   margin-left: calc(-1 * #{$spacing-05});
 }
 

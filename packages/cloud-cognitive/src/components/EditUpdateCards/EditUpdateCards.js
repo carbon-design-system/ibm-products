@@ -78,6 +78,7 @@ export let EditUpdateCards = React.forwardRef(
           {
             // switched classes dependant on props or state
             // example: [`${blockClass}__here-if-small`]: size === 'sm',
+            [`${blockClass}__actions-bottom`]: actionsPlacement === 'bottom'
           }
         )}
         ref={ref}

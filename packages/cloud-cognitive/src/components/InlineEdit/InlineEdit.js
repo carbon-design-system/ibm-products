@@ -72,7 +72,7 @@ export let InlineEdit = React.forwardRef(
     },
     refIn
   ) => {
-    const refInput = useRef(null);
+    const refInput = useRef({ innerText: value });
     const localRef = useRef(null);
     const ref = refIn || localRef;
     const [editing, setEditing] = useState(false);
@@ -290,7 +290,7 @@ export let InlineEdit = React.forwardRef(
           onPaste={handlePaste}
           suppressContentEditableWarning={true}
           ref={refInput}
-          data-placeholder={placeholder ?? labelText}
+          data-placeholder={placeholder}
         >
           {value}
         </div>

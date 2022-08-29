@@ -37,6 +37,7 @@
       /* Used id for overriding the SVG path fill */
 
       .#{$pkg-prefix}--card__header, .#{$pkg-prefix}--card__footer {
+
         button {
           &:hover {
             background-color: $hover-primary;
@@ -78,7 +79,6 @@
         }
       }
     }
-
     &:not(.#{$block-class}__actions-bottom) {
       &##{$block-class}--edit {
 

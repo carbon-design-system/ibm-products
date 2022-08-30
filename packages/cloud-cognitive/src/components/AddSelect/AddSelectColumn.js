@@ -121,7 +121,6 @@ export let AddSelectColumn = ({
           <Search
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            light
             placeholder={columnInputPlaceholder}
             className={`${colClass}-input`}
             id={uuidv4()}

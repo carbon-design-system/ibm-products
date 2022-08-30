@@ -41,17 +41,17 @@ export let ComboButton = React.forwardRef(
   ) => {
     const { current: instanceId } = useRef(uuidv4());
     const [isOpen, setIsOpen] = useState(false);
-
     const [primaryAction, ...restActions] = Children.toArray(children)
       .filter(Boolean)
-      .map(({ props: { children, ...props } }) => ({
+      .map(({ props: { children, ...props }, type }) => {        
+        return({
         ...props,
-        children: (
-          <span className={`${blockClass}__action`} title={children}>
+        children: ( 
+          <span className={type.displayName === "ComboButtonItem" ? `${blockClass}__action` : `${blockClass}__divider`} title={children} type={type}>
             {children}
           </span>
         ),
-      }));
+      })});
 
     return (
       <div
@@ -78,27 +78,31 @@ export let ComboButton = React.forwardRef(
             flipped
           >
             {restActions.map(
-              ({ children, danger, renderIcon: Icon, ...action }, index) => (
-                <OverflowMenuItem
-                  {...action}
-                  key={`${blockClass}--${instanceId}__overflow-menu__item__${index}`}
-                  className={danger ? `${blockClass}__overflow-menu__item ${blockClass}__overflow-menu__item--danger` : `${blockClass}__overflow-menu__item`}
-                  itemText={
-                    <>
-                      {children}
-
-                      {Icon && (
-                        <span
-                          className={`${blockClass}__overflow-menu__item__icon`}
-                        >
-                          <Icon />
-                        </span>
-                      )}
-                    </>
-                  }
-                  size={size}
-                />
-              )
+              ({ children, danger, renderIcon: Icon, ...action }, index) => {
+                if (children.props.type.displayName === "ComboButtonItem") {
+                  return (<OverflowMenuItem
+                    {...action}
+                    key={`${blockClass}--${instanceId}__overflow-menu__item__${index}`}
+                    className={danger ? `${blockClass}__overflow-menu__item ${blockClass}__overflow-menu__item--danger` : `${blockClass}__overflow-menu__item`}
+                    itemText={
+                      <>
+                        {children}
+  
+                        {Icon && (
+                          <span
+                            className={`${blockClass}__overflow-menu__item__icon`}
+                          >
+                            <Icon />
+                          </span>
+                        )}
+                      </>
+                    }
+                    size={size}
+                  />)
+                } else {
+                  return (children)
+                }                
+            }
             )}
           </OverflowMenu>
         )}
@@ -115,6 +119,9 @@ ComboButton.propTypes = {
 
   /** Provide an optional class to be applied to the containing node */
   className: string,
+
+  /** Provide an optional flag to disable the ComboButton */
+  danger: bool,
 
   /** Provide an optional flag to disable the ComboButton */
   disabled: bool,

@@ -8,7 +8,7 @@
 export { AboutModal } from './AboutModal';
 export { APIKeyModal } from './APIKeyModal';
 export { Cascade } from './Cascade';
-export { ComboButton, ComboButtonItem } from './ComboButton';
+export { ComboButton, ComboButtonItem, ComboButtonItemDivider } from './ComboButton';
 export { CreateFullPage, CreateFullPageStep } from './CreateFullPage';
 export { CreateModal } from './CreateModal';
 export { CreateSidePanel } from './CreateSidePanel';

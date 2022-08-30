@@ -25,10 +25,6 @@
     @include text-overflow;
   }
 
-  .divider {
-    border-top: 1px solid $interactive-01;
-  }
-
   .#{$blockClass}__btn--sm.bx--btn {
     min-width: 128px;
   }
@@ -45,14 +41,14 @@
     border-left: carbon--rem($px: 1px) solid $ui-03;
     background-color: $interactive-01;
   }
-  .c4p--combo-button .c4p--combo-button__overflow-menu:disabled,
-  .c4p--combo-button .c4p--combo-button__overflow-menu[disabled],
-  .#{$blockClass}__overflow-menu--disabled.c4p--combo-button__overflow-menu.bx--overflow-menu:hover {
+  .#{$blockClass} .#{$blockClass}__overflow-menu:disabled,
+  .#{$blockClass} .#{$blockClass}__overflow-menu[disabled],
+  .#{$blockClass}__overflow-menu--disabled.#{$blockClass}__overflow-menu.#{$prefix}--overflow-menu:hover {
     background-color: $disabled-02;
     cursor: not-allowed;
   }
 
-  .c4p--combo-button__overflow-menu__icon--disabled {
+  .#{$blockClass}__overflow-menu__icon--disabled {
     fill: $disabled-03;
   }
 
@@ -68,7 +64,7 @@
     width: carbon--mini-units($count: 6);
   }
 
-  .#{$blockClass}__overflow-menu.bx--overflow-menu--open.#{$blockClass}__overflow-menu.bx--overflow-menu.bx--overflow-menu--open {
+  .#{$blockClass}__overflow-menu.bx--overflow-menu--open.#{$blockClass}__overflow-menu.bx--overflow-menu.#{$prefix}--overflow-menu--open {
     background-color: $interactive-01;
     box-shadow: none;
   }
@@ -100,6 +96,20 @@
 
   .#{$blockClass}__overflow-menu__list:after {
     display: none;
+  }
+
+  .#{$blockClass}__divider {
+    width: 100%;
+    height: 1px;
+    background-color: $border-subtle;
+  }
+
+  .#{$blockClass}__overflow-menu__divider::before {
+    width: 100%;
+    height: 1px;
+    padding: 0;
+    border-top: 1px solid $button-danger-primary;
+    content: "'hello'";
   }
 
   .#{$blockClass}__overflow-menu__item.#{$prefix}--overflow-menu-options__btn {

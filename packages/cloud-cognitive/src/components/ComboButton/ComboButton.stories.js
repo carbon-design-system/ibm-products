@@ -44,12 +44,17 @@ const Template = (args) => {
       <ComboButtonItem renderIcon={args.icon && args.icon}>
         ComboButtonItem 2
       </ComboButtonItem>
-      <ComboButtonItemDivider />
       <ComboButtonItem disabled={args.disabled}>ComboButtonItem 3</ComboButtonItem>
-      <ComboButtonItem hasDivider={args.hasDivider}>
+      <ComboButtonItem>
         ComboButtonItem 4
       </ComboButtonItem>
+      {
+        args.hasDivider ? <ComboButtonItemDivider /> : null
+      }      
       <ComboButtonItem danger={args.danger}>ComboButtonItem 5</ComboButtonItem>
+      
+      
+      
     </ComboButton>
   );
 };
@@ -57,7 +62,6 @@ const Template = (args) => {
 export const Default = prepareStory(Template, {
   args: {
     ...defaultArgs,
-    hasDivider: false,
     size: "default"
   },
 });

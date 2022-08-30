@@ -10,6 +10,6 @@
  /**
  * The combo button item provides additional actions a user can take.
  */
-const ComboButtonItemDivider = () => (<div className='divider' />);
+const ComboButtonItemDivider = () => <div />;
 
 export { ComboButtonItemDivider };

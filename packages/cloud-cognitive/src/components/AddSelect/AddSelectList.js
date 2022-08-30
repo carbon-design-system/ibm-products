@@ -47,8 +47,8 @@ export let AddSelectList = ({
     setSingleSelection(value);
   };
 
-  const handleMultiSelection = (value, id) => {
-    if (value) {
+  const handleMultiSelection = (event, { checked, id }) => {
+    if (checked) {
       const newValues = [...multiSelection, id];
       setMultiSelection(newValues);
     } else {
@@ -113,9 +113,18 @@ export let AddSelectList = ({
                 [`${blockClass}-row-selected`]: isSelected(item.id),
                 [`${blockClass}-row-meta-selected`]: isInMetaPanel(item.id),
               })}
-              onClick={(evt) => metaPanelHandler(item, evt)}
             >
-              <div className={`${blockClass}-cell`}>
+              <div
+                className={`${blockClass}-cell`}
+                onClick={() => {
+                  metaPanelHandler(item);
+                }}
+                onKeyDown={() => {
+                  metaPanelHandler(item);
+                }}
+                role="button"
+                tabIndex="0"
+              >
                 <div className={`${blockClass}-cell-wrapper`}>
                   {multi ? (
                     <>
@@ -125,9 +134,7 @@ export let AddSelectList = ({
                           // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
                           <div onClick={(event) => event.stopPropagation()}>
                             <Checkbox
-                              onChange={(value, id) =>
-                                handleMultiSelection(value, id)
-                              }
+                              onChange={handleMultiSelection}
                               labelText={item.title}
                               id={item.id}
                               checked={isSelected(item.id)}

@@ -48,7 +48,7 @@ import {
   RowSizeDropdownStory,
   // SelectAllWithToggle,
   LeftPanelStory,
-} from './Datagrid.stories-helpers';
+} from './Datagrid.stories';
 import mdx from './Datagrid.mdx';
 
 import { pkg } from '../../settings';

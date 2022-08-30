@@ -8,9 +8,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { carbon } from '../../settings';
 
 import { RemoveModal } from '.';
-import { carbon } from '../../settings';
 
 const componentName = RemoveModal.displayName;
 const resourceName = 'bx1001';
@@ -110,7 +110,7 @@ describe(componentName, () => {
     expect(onRequestSubmit).toBeCalled();
   });
 
-  it('has no accessibility violations', async () => {
+  it.skip('has no accessibility violations', async () => {
     const { container } = render(<RemoveModal {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();

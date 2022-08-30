@@ -10,24 +10,21 @@ import { action } from '@storybook/addon-actions';
 import {
   Button,
   Grid,
-  Row,
   Column,
   TextInput,
   NumberInput,
   Dropdown,
-} from 'carbon-components-react';
-import {
   Header,
   HeaderContainer,
   HeaderName,
-} from 'carbon-components-react/lib/components/UIShell';
-import { Copy20, TrashCan20, Settings20 } from '@carbon/icons-react';
+  usePrefix,
+} from '@carbon/react';
+import { Copy, TrashCan, Settings } from '@carbon/icons-react';
 
 import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-import { carbon } from '../../settings';
 
 import { EditSidePanel } from '.';
 import mdx from './EditSidePanel.mdx';
@@ -61,7 +58,6 @@ const defaultStoryProps = {
     'We recommend you fill out and evaluate these details at a minimum before deploying your topic.',
   primaryButtonText: 'Save',
   secondaryButtonText: 'Cancel',
-  selectorPrimaryFocus: `.${carbon.prefix}--text-input`,
 };
 
 const renderUIShellHeader = () => (
@@ -81,6 +77,7 @@ const renderUIShellHeader = () => (
  */
 const Template = (args) => {
   const prefix = 'edit-side-panel-stories__';
+  const carbonPrefix = usePrefix();
   const items = ['Day(s)', 'Month(s)', 'Year(s)'];
   const [open, setOpen] = useState(false);
   const [topicValue, setTopicValue] = useState('Cluster management');
@@ -88,13 +85,11 @@ const Template = (args) => {
     <>
       {renderUIShellHeader()}
       <Grid id="ibm-products-page-content">
-        <Row>
-          <Column>
-            <Button onClick={() => setOpen(!open)}>
-              {open ? 'Close side panel' : 'Open side panel'}
-            </Button>
-          </Column>
-        </Row>
+        <Column lg={{ span: 2, start: 8 }}>
+          <Button onClick={() => setOpen(!open)}>
+            {open ? 'Close side panel' : 'Open side panel'}
+          </Button>
+        </Column>
       </Grid>
       <EditSidePanel
         {...args}
@@ -102,6 +97,7 @@ const Template = (args) => {
         onRequestClose={() => setOpen(false)}
         onRequestSubmit={() => setOpen(false)}
         disableSubmit={!topicValue.length}
+        selectorPrimaryFocus={`.${carbonPrefix}--text-input`}
       >
         <TextInput
           id="create-side-panel-topic-name-a"
@@ -112,6 +108,7 @@ const Template = (args) => {
           onChange={(event) => setTopicValue(event.target.value)}
         />
         <NumberInput
+          iconDescription="Choose a number"
           id="1"
           className={`${prefix}form-item`}
           label="Partitions"
@@ -120,6 +117,7 @@ const Template = (args) => {
           value={1}
         />
         <NumberInput
+          iconDescription="Choose a number"
           id="2"
           className={`${prefix}form-item`}
           label="Replicas"
@@ -128,6 +126,7 @@ const Template = (args) => {
           value={1}
         />
         <NumberInput
+          iconDescription="Choose a number"
           id="3"
           className={`${prefix}form-item`}
           label="Minimum in-sync replicas"
@@ -144,6 +143,7 @@ const Template = (args) => {
           }}
         >
           <NumberInput
+            iconDescription="Choose a number"
             id="4"
             className={`${prefix}form-item`}
             label="Retention time"
@@ -161,6 +161,7 @@ const Template = (args) => {
           />
         </div>
         <NumberInput
+          iconDescription="Choose a number"
           id="3"
           className={`${prefix}form-item`}
           label="Minimum in-sync replicas"
@@ -183,17 +184,17 @@ export const editSidePanel = prepareStory(Template, {
     actionToolbarButtons: [
       {
         label: 'Copy platform id',
-        icon: Copy20,
+        icon: (props) => <Copy size={16} {...props} />,
         onClick: action('Toolbar button clicked: Copy'),
       },
       {
         label: 'Settings',
-        icon: Settings20,
+        icon: (props) => <Settings size={16} {...props} />,
         onClick: action('Toolbar button clicked: Settings'),
       },
       {
         label: 'Delete',
-        icon: TrashCan20,
+        icon: (props) => <TrashCan size={16} {...props} />,
         onClick: action('Toolbar button clicked: Delete'),
       },
     ],

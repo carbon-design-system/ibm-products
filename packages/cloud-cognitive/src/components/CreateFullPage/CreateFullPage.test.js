@@ -19,7 +19,7 @@ import {
 import { CreateFullPage } from '.';
 import { CreateFullPageStep } from './CreateFullPageStep';
 
-import { TextInput } from 'carbon-components-react';
+import { TextInput } from '@carbon/react';
 
 const componentName = CreateFullPage.displayName;
 const blockClass = `${pkg.prefix}--create-full-page`;

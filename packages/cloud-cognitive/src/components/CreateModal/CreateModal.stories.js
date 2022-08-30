@@ -17,9 +17,10 @@ import {
   DatePickerInput,
   RadioButton,
   RadioButtonGroup,
-} from 'carbon-components-react';
+  usePrefix,
+} from '@carbon/react';
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 import {
   getStoryTitle,
   prepareStory,
@@ -47,13 +48,19 @@ export default {
 };
 
 const Template = ({ storyInitiallyOpen = true, story, children, ...args }) => {
+  const carbonPrefix = usePrefix();
   const [open, setOpen] = useState(storyInitiallyOpen);
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open {story?.storyName}</Button>
 
       <style>{`.${pkg.prefix}--create-modal { opacity: 0 }`};</style>
-      <CreateModal open={open} onRequestClose={() => setOpen(false)} {...args}>
+      <CreateModal
+        open={open}
+        onRequestClose={() => setOpen(false)}
+        {...args}
+        selectorPrimaryFocus={`.${carbonPrefix}--text-input`}
+      >
         {children}
       </CreateModal>
     </>
@@ -65,6 +72,7 @@ const TemplateWithFormValidation = ({
   story,
   ...args
 }) => {
+  const carbonPrefix = usePrefix();
   const [open, setOpen] = useState(storyInitiallyOpen);
   const [textInput, setTextInput] = useState('');
   const [invalid, setInvalid] = useState(false);
@@ -78,7 +86,7 @@ const TemplateWithFormValidation = ({
         open={open}
         onRequestClose={() => setOpen(false)}
         disableSubmit={textInput.length === 0 ? true : false}
-        selectorPrimaryFocus={`.${carbon.prefix}--text-input`}
+        selectorPrimaryFocus={`.${carbonPrefix}--text-input`}
       >
         <TextInput
           id="1"
@@ -126,7 +134,6 @@ const defaultProps = {
   subtitle: 'Your subtitle text will appear here',
   description:
     'This is example description text that will appear here in your modal ',
-  selectorPrimaryFocus: `.${carbon.prefix}--text-input`,
   primaryButtonText: 'Create',
   secondaryButtonText: 'Cancel',
 };
@@ -166,6 +173,7 @@ export const Default = prepareStory(Template, {
           min={0}
           max={50}
           value={1}
+          iconDescription="Choose a number"
         />
         <RadioButtonGroup
           legendText="Radio button legend text goes here"

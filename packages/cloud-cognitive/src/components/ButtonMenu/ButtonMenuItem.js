@@ -12,7 +12,7 @@ import React from 'react';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { OverflowMenuItem } from 'carbon-components-react';
+import { OverflowMenuItem } from '@carbon/react';
 
 const componentName = 'ButtonMenuItem';
 

@@ -8,7 +8,7 @@
 // @flow
 import React from 'react';
 import cx from 'classnames';
-import { DataTable } from 'carbon-components-react';
+import { DataTable } from '@carbon/react';
 import { selectionColumnId } from '../common-column-ids';
 import { pkg } from '../../../settings';
 

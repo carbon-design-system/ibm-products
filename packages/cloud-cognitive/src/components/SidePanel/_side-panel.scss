@@ -1,28 +1,30 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-// Standard imports.
-@import '../../global/styles/project-settings';
-@import '../../global/styles/mixins';
-@import './side-panel-variables';
-
 // Other Carbon settings.
-@import 'carbon-components/scss/globals/grid/grid';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/grid' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/utilities';
 
-// SidePanel uses the following Carbon components:
-// Button
-@import 'carbon-components/scss/components/button/button';
+// Standard imports.
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '../../global/styles/mixins' as *;
+@use './side-panel-variables' as *;
 
 // SidePanel uses the following IBM Products components:
 // ActionSet
-@import '../ActionSet/action-set';
+@use '../ActionSet/action-set';
 
-$block-class: #{$pkg-prefix}--side-panel;
-$action-set-block-class: #{$pkg-prefix}--action-set;
+$block-class: #{c4p-settings.$pkg-prefix}--side-panel;
+$action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
 @mixin sidePanelEntranceRight($size: map-get($side-panel-sizes, md)) {
   @keyframes side-panel-entrance-right {
@@ -78,7 +80,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   left: 0;
   width: 100%;
   height: 1px;
-  background-color: $decorative-01;
+  background-color: $border-subtle-02;
   content: '';
   opacity: var(--#{$block-class}--divider-opacity);
 }
@@ -91,437 +93,445 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
   -webkit-line-clamp: 2;
 }
 
-@mixin side-panel {
-  @keyframes side-panel-exit-left {
-    0% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    100% {
-      opacity: 0;
-      // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateX(calc(-1 * #{map-get($side-panel-sizes, md)}));
-    }
+@keyframes side-panel-exit-left {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
   }
 
-  @keyframes side-panel-exit-right {
-    0% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    100% {
-      opacity: 0;
-      // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateX(map-get($side-panel-sizes, md));
-    }
-  }
-
-  .#{$block-class}__container {
-    --#{$block-class}--subtitle-opacity: 1;
-    --#{$block-class}--title-container-height: 0;
-    --#{$block-class}--title-text-height: 0;
-    --#{$block-class}--subtitle-container-height: 0;
-    --#{$block-class}--action-bar-container-height: 0;
-    --#{$block-class}--divider-opacity: 0;
-    --#{$block-class}--title-y-position: 0;
-    --#{$block-class}--content-bottom-padding: #{$spacing-10};
-    --#{$block-class}--collapsed-title-y-position: 1rem;
-    --#{$block-class}--label-text-height: 0;
-
-    position: fixed;
-    z-index: z('modal');
-    top: $spacing-09;
-    height: calc(100% - 3rem);
-    box-sizing: border-box;
-    background-color: $ui-01;
-    color: $text-01;
-    transition: transform $duration--moderate-02 carbon--motion(standard);
-    @each $size, $size_value in $side-panel-sizes {
-      &.#{$block-class}__container--#{$size} {
-        @include setPanelSize($size_value);
-        .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation,
-        .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation,
-        .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation,
-        .#{$block-class}__actions-container.#{$action-set-block-class}--#{$size} {
-          @include setPanelSize($size_value);
-        }
-      }
-      &.#{$block-class}__container-right-placement.#{$block-class}__container--#{$size} {
-        @include sidePanelEntrance(right, $size_value);
-
-        right: 0;
-        border-left: 1px solid $decorative-01;
-      }
-      &.#{$block-class}__container-left-placement.#{$block-class}__container--#{$size} {
-        @include sidePanelEntrance(left, $size_value);
-
-        left: 0;
-        border-right: 1px solid $decorative-01;
-      }
-    }
-    &.#{$block-class}__container-with-action-toolbar.#{$block-class}__with-condensed-header {
-      .#{$block-class}__title-container {
-        &::before {
-          content: none;
-        }
-      }
-      .#{$block-class}__action-toolbar {
-        &::before {
-          @include setDividerStyles();
-        }
-      }
-    }
-    &.#{$block-class}__container-without-overlay {
-      box-shadow: 0 $spacing-01 $spacing-02 $overlay-01;
-    }
-    .#{$block-class}__title-container {
-      position: sticky;
-      z-index: 4;
-      top: 0;
-      height: calc(
-        var(--#{$block-class}--title-container-height) -
-          var(--#{$block-class}--label-text-height)
-      );
-      padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
-      background-color: $ui-01;
-
-      &::before {
-        @include setDividerStyles();
-      }
-      &.#{$block-class}__title-container--reduced-motion {
-        z-index: 5;
-        border-bottom: 1px solid $decorative-01;
-        margin-bottom: $spacing-05;
-      }
-      &.#{$block-class}__title-container--reduced-motion.#{$block-class}__title-container--no-title-animation {
-        border-bottom: 0;
-        margin-bottom: 0;
-      }
-      &.#{$block-class}__on-detail-step .#{$block-class}__collapsed-title-text {
-        top: $spacing-09;
-      }
-      &.#{$block-class}__title-container-without-title {
-        padding: 0;
-      }
-      &.#{$block-class}__title-container-without-title.#{$block-class}__on-detail-step-without-title {
-        height: calc(#{$spacing-08} + #{$spacing-02});
-        padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
-      }
-      &.#{$block-class}__title-container-without-title::before {
-        background-color: transparent;
-      }
-    }
-    &.#{$block-class}__container-is-animating {
-      pointer-events: none;
-    }
-    &.#{$block-class}__container-is-animating
-      .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation {
-      top: 0;
-    }
-    &.#{$block-class}__container-is-animating
-      .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
-      top: var(--#{$block-class}--title-text-height);
-    }
-    &.#{$block-class}__container-is-animating
-      .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
-      // stylelint-disable-next-line carbon/layout-token-use
-      top: calc(
-        var(--#{$block-class}--title-text-height) +
-          var(--#{$block-class}--subtitle-container-height)
-      );
-    }
-    .#{$block-class}__title-text {
-      @include carbon--type-style('productive-heading-03');
-      @include setCommonTitleStyles();
-
-      position: inherit;
-      z-index: 4;
-      background-color: $ui-01;
-      opacity: var(--#{$block-class}--subtitle-opacity);
-      transform: translateY(var(--#{$block-class}--title-y-position));
-    }
-    .#{$block-class}__label-text {
-      @include carbon--type-style('label-01');
-
-      overflow: hidden;
-      padding-right: $spacing-05;
-      opacity: var(--#{$block-class}--subtitle-opacity);
-      text-overflow: ellipsis;
-      transform: translateY(var(--#{$block-class}--title-y-position));
-      white-space: nowrap;
-    }
-    .#{$block-class}__collapsed-title-text {
-      @include carbon--type-style('productive-heading-02');
-      @include setCommonTitleStyles();
-
-      position: absolute;
-      top: $spacing-05;
-      opacity: var(--#{$block-class}--divider-opacity);
-      // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateY(var(--#{$block-class}--collapsed-title-y-position));
-    }
-    .#{$block-class}__subtitle-text {
-      @include carbon--type-style('body-short-01');
-
-      overflow: hidden;
-      padding: 0 $spacing-09 $spacing-05 $spacing-05;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
-      opacity: var(--#{$block-class}--subtitle-opacity);
-    }
-    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
-      position: fixed;
-      z-index: 2;
-      // stylelint-disable-next-line carbon/layout-token-use
-      top: calc(
-        var(--#{$block-class}--title-text-height) +
-          var(--#{$block-class}--label-text-height) + #{$spacing-09}
-      );
-      background-color: $ui-01;
-    }
-
-    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-is-animating {
-      top: var(--#{$block-class}--title-text-height);
-    }
-
-    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-without-title {
-      padding-top: $spacing-05;
-      padding-right: $spacing-09;
-    }
-
-    .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation.#{$block-class}__title-container-is-animating {
-      top: 0;
-    }
-
-    .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation {
-      position: fixed;
-      top: $spacing-09;
-      height: calc(
-        var(--#{$block-class}--title-text-height) +
-          var(--#{$block-class}--label-text-height)
-      );
-    }
-
-    .#{$block-class}__inner-content {
-      overflow: auto;
-      height: calc(100vh - 3rem);
-      // stylelint-disable-next-line carbon/layout-token-use
-      margin-top: calc(
-        var(--#{$block-class}--title-text-height) +
-          var(--#{$block-class}--subtitle-container-height) +
-          var(--#{$block-class}--action-bar-container-height) +
-          var(--#{$block-class}--label-text-height)
-      );
-      overflow-x: hidden;
-    }
-
-    .#{$block-class}__inner-content-with-actions {
-      height: calc(
-        100vh - (var(--#{$block-class}--content-bottom-padding) + 2rem)
-      );
-    }
-
-    .#{$block-class}__inner-content.#{$block-class}__static-inner-content {
-      height: calc(
-        100vh -
-          calc(
-            var(--#{$block-class}--title-text-height) +
-              var(--#{$block-class}--subtitle-container-height) +
-              var(--#{$block-class}--action-bar-container-height)
-          ) + (calc(-1 * (#{$spacing-09} + #{$spacing-10})))
-      );
-      padding-top: $spacing-05;
-    }
-
-    .#{$block-class}__inner-content.#{$block-class}__static-inner-content-no-actions {
-      height: calc(
-        100vh -
-          calc(
-            var(--#{$block-class}--title-text-height) +
-              var(--#{$block-class}--subtitle-container-height) +
-              var(--#{$block-class}--action-bar-container-height) +
-              var(--#{$block-class}--label-text-height)
-          )
-      );
-    }
-
-    .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
-      position: fixed;
-      // stylelint-disable-next-line carbon/layout-token-use
-      top: calc(
-        var(--#{$block-class}--title-text-height) +
-          var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
-      );
-      width: 100%;
-      border-bottom: 1px solid $decorative-01;
-    }
-
-    .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation
-      + .#{$block-class}__body-content {
-      // stylelint-disable-next-line carbon/layout-token-use
-      margin-top: calc(
-        var(--#{$block-class}--title-text-height) +
-          var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
-      );
-    }
-
-    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar {
-      border-bottom: 1px solid $decorative-01;
-      margin-bottom: $spacing-05;
-    }
-    .#{$block-class}__action-toolbar {
-      position: sticky;
-      z-index: 4;
-      /* stylelint-disable-next-line carbon/layout-token-use */
-      top: var(--#{$block-class}--title-height);
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 0 $spacing-05;
-      margin-bottom: $spacing-03;
-      background-color: $ui-01;
-      transition: transform $duration--moderate-01 carbon--motion(standard);
-      .#{$block-class}__action-toolbar-button {
-        min-width: 2rem;
-        &.#{$block-class}__action-toolbar-icon-only-button {
-          padding: 0;
-          color: $text-01;
-        }
-        &.#{$block-class}__action-toolbar-icon-only-button svg {
-          margin-left: $spacing-03;
-        }
-        &.#{$block-class}__action-toolbar-leading-button {
-          margin-right: $spacing-03;
-        }
-      }
-    }
-
-    .#{$carbon-prefix}--btn.#{$block-class}__navigation-back-button {
-      position: relative;
-      z-index: 5;
-      top: calc(-1 * #{$spacing-03});
-      left: calc(-1 * #{$spacing-03});
-    }
-    .#{$carbon-prefix}--btn.#{$block-class}__navigation-back-button,
-    .#{$carbon-prefix}--btn.#{$block-class}__close-button {
-      min-width: 2rem;
-      padding: 0;
-      color: $text-01;
-    }
-    .#{$carbon-prefix}--btn.#{$block-class}__close-button {
-      position: absolute;
-      z-index: 5;
-      top: $spacing-03;
-      right: $spacing-05;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: $ui-01;
-    }
-    .#{$carbon-prefix}--btn.#{$block-class}__close-button
-      .#{$carbon-prefix}--btn__icon {
-      margin: 0;
-    }
-    .#{$block-class}__body-content {
-      padding: $spacing-05;
-      padding-top: 0;
-    }
-    &.#{$block-class}__container-is-animating
-      .#{$block-class}__actions-container.#{$action-set-block-class}--max {
-      @include setPanelSize(100%);
-    }
-    .#{$block-class}__actions-container {
-      position: fixed;
-      bottom: 0;
-      border-top: 1px solid $decorative-01;
-      background-color: $ui-01;
-      &.#{$action-set-block-class}--max {
-        .#{$action-set-block-class}__action-button {
-          width: 100%;
-          max-width: 100%;
-        }
-
-        @include carbon--breakpoint(md) {
-          flex-direction: row;
-          .#{$action-set-block-class}__action-button {
-            width: 25%;
-          }
-        }
-
-        flex-direction: column;
-      }
-      .#{$action-set-block-class}__action-button {
-        height: $layout-05;
-      }
-      &.#{$block-class}__actions-container-condensed
-        .#{$action-set-block-class}__action-button {
-        height: $layout-04;
-      }
-    }
-  }
-
-  // form fields should receive correct background color
-  .#{$block-class}__container .#{$carbon-prefix}--text-input,
-  .#{$block-class}__container .#{$carbon-prefix}--text-area,
-  .#{$block-class}__container .#{$carbon-prefix}--search-input,
-  .#{$block-class}__container .#{$carbon-prefix}--select-input,
-  .#{$block-class}__container .#{$carbon-prefix}--dropdown,
-  .#{$block-class}__container .#{$carbon-prefix}--dropdown-list,
-  .#{$block-class}__container .#{$carbon-prefix}--number input[type='number'],
-  .#{$block-class}__container .#{$carbon-prefix}--date-picker__input {
-    background-color: $field-02;
-  }
-
-  @keyframes side-panel-overlay-entrance {
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 1;
-    }
-  }
-
-  @keyframes side-panel-overlay-exit {
-    0% {
-      opacity: 1;
-    }
-
-    100% {
-      opacity: 0;
-    }
-  }
-
-  .#{$block-class}__visually-hidden {
-    position: absolute;
-    overflow: hidden;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    border: 0;
+  100% {
+    opacity: 0;
     // stylelint-disable-next-line carbon/layout-token-use
-    margin: -1px;
-    clip: rect(0, 0, 0, 0);
-    visibility: inherit;
-    white-space: nowrap;
-  }
-
-  .#{$block-class}__overlay {
-    position: fixed;
-    z-index: z('overlay');
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: $overlay-01;
-    transition: background-color $duration--moderate-02 carbon--motion(standard);
+    transform: translateX(calc(-1 * #{map-get($side-panel-sizes, md)}));
   }
 }
 
-@include exports('side-panel') {
-  @include side-panel;
+@keyframes side-panel-exit-right {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateX(map-get($side-panel-sizes, md));
+  }
+}
+
+.#{$block-class}__container {
+  --#{$block-class}--subtitle-opacity: 1;
+  --#{$block-class}--title-container-height: 0;
+  --#{$block-class}--title-text-height: 0;
+  --#{$block-class}--subtitle-container-height: 0;
+  --#{$block-class}--action-bar-container-height: 0;
+  --#{$block-class}--divider-opacity: 0;
+  --#{$block-class}--title-y-position: 0;
+  --#{$block-class}--content-bottom-padding: #{$spacing-10};
+  --#{$block-class}--collapsed-title-y-position: 1rem;
+  --#{$block-class}--label-text-height: 0;
+
+  position: fixed;
+  // Need to disable stylelint until dart sass namespace support is added
+  /* stylelint-disable-next-line function-no-unknown */
+  z-index: utilities.z('modal');
+  top: $spacing-09;
+  height: calc(100% - 3rem);
+  box-sizing: border-box;
+  background-color: $layer-01;
+  color: $text-primary;
+  transition: transform $duration-moderate-02 motion(standard);
+  @each $size, $size_value in $side-panel-sizes {
+    &.#{$block-class}__container--#{$size} {
+      @include setPanelSize($size_value);
+      .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation,
+      .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation,
+      .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation,
+      .#{$block-class}__actions-container.#{$action-set-block-class}--#{$size} {
+        @include setPanelSize($size_value);
+      }
+    }
+    &.#{$block-class}__container-right-placement.#{$block-class}__container--#{$size} {
+      @include sidePanelEntrance(right, $size_value);
+
+      right: 0;
+      border-left: 1px solid $border-subtle-02;
+    }
+    &.#{$block-class}__container-left-placement.#{$block-class}__container--#{$size} {
+      @include sidePanelEntrance(left, $size_value);
+
+      left: 0;
+      border-right: 1px solid $border-subtle-02;
+    }
+  }
+  &.#{$block-class}__container-with-action-toolbar.#{$block-class}__with-condensed-header {
+    .#{$block-class}__title-container {
+      /* stylelint-disable-next-line max-nesting-depth */
+      &::before {
+        content: none;
+      }
+    }
+    .#{$block-class}__action-toolbar {
+      /* stylelint-disable-next-line max-nesting-depth */
+      &::before {
+        @include setDividerStyles();
+      }
+    }
+  }
+  &.#{$block-class}__container-without-overlay {
+    box-shadow: 0 $spacing-01 $spacing-02 $overlay;
+  }
+  .#{$block-class}__title-container {
+    position: sticky;
+    z-index: 4;
+    top: 0;
+    height: calc(
+      var(--#{$block-class}--title-container-height) -
+        var(--#{$block-class}--label-text-height)
+    );
+    padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
+    background-color: $layer-01;
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &::before {
+      @include setDividerStyles();
+    }
+    &.#{$block-class}__title-container--reduced-motion {
+      z-index: 5;
+      border-bottom: 1px solid $border-subtle-02;
+      margin-bottom: $spacing-05;
+    }
+    &.#{$block-class}__title-container--reduced-motion.#{$block-class}__title-container--no-title-animation {
+      border-bottom: 0;
+      margin-bottom: 0;
+    }
+    &.#{$block-class}__on-detail-step .#{$block-class}__collapsed-title-text {
+      top: $spacing-09;
+    }
+    &.#{$block-class}__title-container-without-title {
+      padding: 0;
+    }
+    &.#{$block-class}__title-container-without-title.#{$block-class}__on-detail-step-without-title {
+      height: calc(#{$spacing-08} + #{$spacing-02});
+      padding: $spacing-05 $spacing-05 $spacing-03 $spacing-05;
+    }
+    &.#{$block-class}__title-container-without-title::before {
+      background-color: transparent;
+    }
+  }
+  &.#{$block-class}__container-is-animating {
+    pointer-events: none;
+  }
+  &.#{$block-class}__container-is-animating
+    .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation {
+    top: 0;
+  }
+  &.#{$block-class}__container-is-animating
+    .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
+    top: var(--#{$block-class}--title-text-height);
+  }
+  &.#{$block-class}__container-is-animating
+    .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
+    // stylelint-disable-next-line carbon/layout-token-use
+    top: calc(
+      var(--#{$block-class}--title-text-height) +
+        var(--#{$block-class}--subtitle-container-height)
+    );
+  }
+  .#{$block-class}__title-text {
+    @include type.type-style('productive-heading-03');
+    @include setCommonTitleStyles();
+
+    position: inherit;
+    z-index: 4;
+    background-color: $layer-01;
+    opacity: var(--#{$block-class}--subtitle-opacity);
+    transform: translateY(var(--#{$block-class}--title-y-position));
+  }
+  .#{$block-class}__label-text {
+    @include type.type-style('label-01');
+
+    overflow: hidden;
+    padding-right: $spacing-05;
+    opacity: var(--#{$block-class}--subtitle-opacity);
+    text-overflow: ellipsis;
+    transform: translateY(var(--#{$block-class}--title-y-position));
+    white-space: nowrap;
+  }
+  .#{$block-class}__collapsed-title-text {
+    @include type.type-style('productive-heading-02');
+    @include setCommonTitleStyles();
+
+    position: absolute;
+    top: $spacing-05;
+    opacity: var(--#{$block-class}--divider-opacity);
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateY(var(--#{$block-class}--collapsed-title-y-position));
+  }
+  .#{$block-class}__subtitle-text {
+    @include type.type-style('body-short-01');
+
+    overflow: hidden;
+    padding: 0 $spacing-09 $spacing-05 $spacing-05;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    opacity: var(--#{$block-class}--subtitle-opacity);
+  }
+  .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation {
+    position: fixed;
+    z-index: 2;
+    // stylelint-disable-next-line carbon/layout-token-use
+    top: calc(
+      var(--#{$block-class}--title-text-height) +
+        var(--#{$block-class}--label-text-height) + #{$spacing-09}
+    );
+    background-color: $layer-01;
+  }
+
+  .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-is-animating {
+    top: var(--#{$block-class}--title-text-height);
+  }
+
+  .#{$block-class}__subtitle-text.#{$block-class}__subtitle-without-title {
+    padding-top: $spacing-05;
+    padding-right: $spacing-09;
+  }
+
+  .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation.#{$block-class}__title-container-is-animating {
+    top: 0;
+  }
+
+  .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation {
+    position: fixed;
+    top: $spacing-09;
+    height: calc(
+      var(--#{$block-class}--title-text-height) +
+        var(--#{$block-class}--label-text-height)
+    );
+  }
+
+  .#{$block-class}__inner-content {
+    overflow: auto;
+    height: calc(100vh - 3rem);
+    // stylelint-disable-next-line carbon/layout-token-use
+    margin-top: calc(
+      var(--#{$block-class}--title-text-height) +
+        var(--#{$block-class}--subtitle-container-height) +
+        var(--#{$block-class}--action-bar-container-height) +
+        var(--#{$block-class}--label-text-height)
+    );
+    overflow-x: hidden;
+  }
+
+  .#{$block-class}__inner-content-with-actions {
+    height: calc(
+      100vh - (var(--#{$block-class}--content-bottom-padding) + 2rem)
+    );
+  }
+
+  .#{$block-class}__inner-content.#{$block-class}__static-inner-content {
+    height: calc(
+      100vh -
+        calc(
+          var(--#{$block-class}--title-text-height) +
+            var(--#{$block-class}--subtitle-container-height) +
+            var(--#{$block-class}--action-bar-container-height)
+        ) + (calc(-1 * (#{$spacing-09} + #{$spacing-10})))
+    );
+    padding-top: $spacing-05;
+  }
+
+  .#{$block-class}__inner-content.#{$block-class}__static-inner-content-no-actions {
+    height: calc(
+      100vh -
+        calc(
+          var(--#{$block-class}--title-text-height) +
+            var(--#{$block-class}--subtitle-container-height) +
+            var(--#{$block-class}--action-bar-container-height) +
+            var(--#{$block-class}--label-text-height)
+        )
+    );
+  }
+
+  .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation {
+    position: fixed;
+    // stylelint-disable-next-line carbon/layout-token-use
+    top: calc(
+      var(--#{$block-class}--title-text-height) +
+        var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
+    );
+    width: 100%;
+    border-bottom: 1px solid $layer-active-01;
+  }
+
+  .#{$block-class}__action-toolbar.#{$block-class}__action-toolbar-no-animation
+    + .#{$block-class}__body-content {
+    // stylelint-disable-next-line carbon/layout-token-use
+    margin-top: calc(
+      var(--#{$block-class}--title-text-height) +
+        var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
+    );
+  }
+
+  .#{$block-class}__subtitle-text.#{$block-class}__subtitle-text-no-animation.#{$block-class}__subtitle-text-no-animation-no-action-toolbar {
+    border-bottom: 1px solid $layer-active-01;
+    margin-bottom: $spacing-05;
+  }
+  .#{$block-class}__action-toolbar {
+    position: sticky;
+    z-index: 4;
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    top: var(--#{$block-class}--title-height);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 $spacing-05;
+    margin-bottom: $spacing-03;
+    background-color: $layer-01;
+    transition: transform $duration-moderate-01 motion(standard);
+    .#{$block-class}__action-toolbar-button {
+      min-width: 2rem;
+      &.#{$block-class}__action-toolbar-icon-only-button {
+        padding: 0;
+        color: $text-primary;
+      }
+      &.#{$block-class}__action-toolbar-icon-only-button svg {
+        margin-left: $spacing-03;
+      }
+      &.#{$block-class}__action-toolbar-leading-button {
+        margin-right: $spacing-03;
+      }
+    }
+  }
+
+  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__navigation-back-button {
+    position: relative;
+    z-index: 5;
+    top: calc(-1 * #{$spacing-03});
+    left: calc(-1 * #{$spacing-03});
+  }
+  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__navigation-back-button,
+  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__close-button {
+    min-width: 2rem;
+    padding: 0;
+    color: $text-primary;
+  }
+  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__close-button {
+    position: absolute;
+    z-index: 5;
+    top: $spacing-03;
+    right: $spacing-05;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $layer-01;
+  }
+  .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__close-button
+    .#{c4p-settings.$carbon-prefix}--btn__icon {
+    margin: 0;
+  }
+  .#{$block-class}__body-content {
+    padding: $spacing-05;
+    padding-top: 0;
+  }
+  &.#{$block-class}__container-is-animating
+    .#{$block-class}__actions-container.#{$action-set-block-class}--2xl {
+    @include setPanelSize(100%);
+  }
+  .#{$block-class}__actions-container {
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid $border-subtle-02;
+    background-color: $layer-01;
+    &.#{$action-set-block-class}--2xl {
+      .#{$action-set-block-class}__action-button {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      @include breakpoint(md) {
+        flex-direction: row;
+        .#{$action-set-block-class}__action-button {
+          width: 25%;
+        }
+      }
+
+      flex-direction: column;
+    }
+    .#{$action-set-block-class}__action-button {
+      height: $spacing-10;
+    }
+    &.#{$block-class}__actions-container-condensed
+      .#{$action-set-block-class}__action-button {
+      height: $spacing-09;
+    }
+  }
+  &.#{$block-class}__container.#{$block-class}__container--xs
+    .#{$block-class}__actions-container.#{$action-set-block-class}--sm {
+    @include setPanelSize(map-get($side-panel-sizes, xs));
+  }
+}
+
+// form fields should receive correct background color
+.#{$block-class}__container .#{c4p-settings.$carbon-prefix}--text-input,
+.#{$block-class}__container .#{c4p-settings.$carbon-prefix}--text-area,
+.#{$block-class}__container .#{c4p-settings.$carbon-prefix}--search-input,
+.#{$block-class}__container .#{c4p-settings.$carbon-prefix}--select-input,
+.#{$block-class}__container .#{c4p-settings.$carbon-prefix}--dropdown,
+.#{$block-class}__container .#{c4p-settings.$carbon-prefix}--dropdown-list,
+.#{$block-class}__container
+  .#{c4p-settings.$carbon-prefix}--number
+  input[type='number'],
+.#{$block-class}__container
+  .#{c4p-settings.$carbon-prefix}--date-picker__input {
+  background-color: $field-02;
+}
+
+@keyframes side-panel-overlay-entrance {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes side-panel-overlay-exit {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.#{$block-class}__visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  // stylelint-disable-next-line carbon/layout-token-use
+  margin: -1px;
+  clip: rect(0, 0, 0, 0);
+  visibility: inherit;
+  white-space: nowrap;
+}
+
+.#{$block-class}__overlay {
+  position: fixed;
+  // Need to disable stylelint until dart sass namespace support is added
+  /* stylelint-disable-next-line function-no-unknown */
+  z-index: utilities.z('overlay');
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $overlay;
+  transition: background-color $duration-moderate-02 motion(standard);
 }

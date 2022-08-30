@@ -9,7 +9,7 @@ import React from 'react';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 import { scrollableAncestor } from '../../global/js/utils/scrollableAncestor';
-import { SkeletonText } from 'carbon-components-react';
+import { SkeletonText } from '@carbon/react';
 
 export const blockClass = `${pkg.prefix}--page-header`;
 

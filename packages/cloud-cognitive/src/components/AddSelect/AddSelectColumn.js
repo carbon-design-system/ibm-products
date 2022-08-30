@@ -7,9 +7,9 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Search, Tag, OverflowMenu, Checkbox } from 'carbon-components-react';
-import { Filter32 } from '@carbon/icons-react';
-import { pkg, carbon } from '../../settings';
+import { Search, Tag, OverflowMenu, Checkbox, usePrefix } from '@carbon/react';
+import { Filter } from '@carbon/icons-react';
+import { pkg } from '../../settings';
 import { AddSelectList } from './AddSelectList';
 import { AddSelectSort } from './AddSelectSort';
 import { sortItems } from './add-select-utils';
@@ -23,6 +23,7 @@ const componentName = 'AddSelectColumn';
 
 export let AddSelectColumn = ({
   columnInputPlaceholder,
+  filterByLabel,
   header,
   items,
   multiSelection,
@@ -32,6 +33,7 @@ export let AddSelectColumn = ({
   setPath,
   ...props
 }) => {
+  const carbonPrefix = usePrefix();
   const { parentSelected, setParentSelected } = useParentSelect();
   const [searchTerm, setSearchTerm] = useState('');
   const { sortDirection, setSortDirection, sortAttribute, setSortAttribute } =
@@ -66,7 +68,7 @@ export let AddSelectColumn = ({
   // filtering
   const filterByOpts = filterBy ? entries.map((item) => item[filterBy]) : [];
 
-  const selectAllHandler = (checked) => {
+  const selectAllHandler = (event, { checked }) => {
     const itemIds = entries.map((item) => item.id);
     if (checked) {
       const newSelections = [...new Set([...multiSelection, ...itemIds])];
@@ -137,22 +139,25 @@ export let AddSelectColumn = ({
             />
             {filterByOpts.length > 0 && (
               <OverflowMenu
-                renderIcon={Filter32}
+                renderIcon={(props) => <Filter size={32} {...props} />}
                 className={`${colClass}-overflow`}
                 flipped
+                ariaLabel={filterByLabel}
               >
                 {filterByOpts.map((opt) => (
                   <div
                     key={opt}
-                    className={`${carbon.prefix}--overflow-menu-options__option`}
+                    className={`${carbonPrefix}--overflow-menu-options__option`}
                   >
                     <div
-                      className={`${carbon.prefix}--overflow-menu-options__btn`}
+                      className={`${carbonPrefix}--overflow-menu-options__btn`}
                     >
                       <Checkbox
                         id={opt}
                         labelText={opt}
-                        onChange={(checked) => filterHandler(checked, opt)}
+                        onChange={(event, { checked }) =>
+                          filterHandler(checked, opt)
+                        }
                         checked={filters.find((o) => o === opt) ? true : false}
                       />
                     </div>
@@ -207,6 +212,7 @@ export let AddSelectColumn = ({
 
 AddSelectColumn.propTypes = {
   columnInputPlaceholder: PropTypes.string,
+  filterByLabel: PropTypes.string,
   header: PropTypes.string,
   items: PropTypes.object,
   multiSelection: PropTypes.array,

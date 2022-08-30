@@ -15,7 +15,7 @@ import { pkg, carbon } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Link } from 'carbon-components-react';
+import { Link } from '@carbon/react';
 import { AboutModal } from '.';
 
 import ExampleLogo from './_story-assets/example-logo.svg';
@@ -86,7 +86,13 @@ const versionNumber = `1.3.${uuidv4()}`;
 // render an AboutModal with content, logo, title, and any other required props
 const renderComponent = ({ ...rest }) =>
   render(
-    <AboutModal {...{ closeIconDescription, content, logo, title, ...rest }} />
+    <main>
+      <AboutModal
+        {...{ closeIconDescription, content, logo, title, ...rest }}
+        modalAriaLabel="About this product"
+        tabListAriaLabel="Product info"
+      />
+    </main>
   );
 
 describe(componentName, () => {
@@ -144,9 +150,9 @@ describe(componentName, () => {
     renderComponent({ additionalInfo, open: true });
     const tabToSelect = screen.getByRole('tab', { name: tabLabel2 });
     const tabSelected = `${carbon.prefix}--tabs__nav-item--selected`;
-    expect(tabToSelect.parentElement).not.toHaveClass(tabSelected);
+    expect(tabToSelect).not.toHaveClass(tabSelected);
     userEvent.click(tabToSelect);
-    expect(tabToSelect.parentElement).toHaveClass(tabSelected);
+    expect(tabToSelect).toHaveClass(tabSelected);
   });
 
   it('renders a version number', () => {
@@ -180,7 +186,6 @@ describe(componentName, () => {
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
     userEvent.click(closeButton);
-    expect(aboutModal).not.toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
   });
 
@@ -205,7 +210,7 @@ describe(componentName, () => {
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
     renderComponent({ ref });
-    expect(ref.current.outerModal.current).toHaveClass(blockClass);
+    expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', () => {

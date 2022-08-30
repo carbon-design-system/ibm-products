@@ -6,12 +6,8 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Add16, OverflowMenuVertical16 } from '@carbon/icons-react';
-import {
-  DataTable,
-  TableBatchActions,
-  TableBatchAction,
-} from 'carbon-components-react';
+import { Add, OverflowMenuVertical } from '@carbon/icons-react';
+import { DataTable, TableBatchActions, TableBatchAction } from '@carbon/react';
 import { useResizeDetector } from 'react-resize-detector';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
@@ -65,7 +61,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       <ButtonMenu
         label={width > minWidthBeforeOverflowIcon ? 'More' : null}
         renderIcon={
-          width > minWidthBeforeOverflowIcon ? Add16 : OverflowMenuVertical16
+          width > minWidthBeforeOverflowIcon ? Add : OverflowMenuVertical
         }
         className={cx(`${blockClass}__button-menu`, {
           [`${blockClass}__button-menu--icon-only`]:
@@ -160,14 +156,14 @@ const DatagridToolbar = (datagridState) => {
           DatagridBatchActionsToolbar(datagridState, width, ref)}
       </TableToolbar>
     </div>
-  ) : DatagridActions ? (
+  ) : (
     <div className={`${blockClass}__table-toolbar`}>
       <TableToolbar>
         {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
     </div>
-  ) : null;
+  );
 };
 
 export default DatagridToolbar;

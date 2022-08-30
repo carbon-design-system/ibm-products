@@ -7,15 +7,16 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Add } from '@carbon/icons-react';
+import { pkg } from '../../settings';
 
-import { Add20 } from '@carbon/icons-react';
-
+const blockClass = `${pkg.prefix}--modified-tabs`;
 export const ModifiedTabLabelNew = ({ label }) => {
   return (
-    <span className="modified-tabs__tab-new">
-      <span className="modified-tabs__tab-new__label">{label}</span>
-      <span className="modified-tabs__tab-new-img">
-        <Add20 />
+    <span className={`${blockClass}__tab-new`}>
+      <span className={`${blockClass}__tab-new__label`}>{label}</span>
+      <span className={`${blockClass}__tab-new-img`}>
+        <Add size={20} />
       </span>
     </span>
   );

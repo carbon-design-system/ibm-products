@@ -11,7 +11,7 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Form } from 'carbon-components-react';
+import { Form } from '@carbon/react';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';

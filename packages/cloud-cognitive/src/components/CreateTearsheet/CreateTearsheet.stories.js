@@ -30,7 +30,10 @@ export default {
     navigation: { control: { disable: true } },
     open: { control: { disable: true } },
   },
-  parameters: { styles, docs: { page: mdx } },
+  parameters: {
+    styles,
+    docs: { page: mdx },
+  },
 };
 
 const createTearsheetProps = {

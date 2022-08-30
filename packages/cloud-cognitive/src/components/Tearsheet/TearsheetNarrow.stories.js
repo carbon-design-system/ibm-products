@@ -11,7 +11,7 @@ import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
 
-import { Button, Form, FormGroup, TextInput } from 'carbon-components-react';
+import { Button, Form, FormGroup, TextInput } from '@carbon/react';
 
 import { Tearsheet } from '.';
 import { TearsheetNarrow, deprecatedProps } from './TearsheetNarrow';

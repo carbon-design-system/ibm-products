@@ -17,9 +17,9 @@ import {
 import { ButtonMenu, ButtonMenuItem } from '.';
 import mdx from './ButtonMenu.mdx';
 
-import styles from './_storybook-styles.scss';
+// import styles from './_storybook-styles.scss';
 
-import { Add16 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 
 export default {
   title: getStoryTitle(ButtonMenu.displayName),
@@ -29,7 +29,7 @@ export default {
   //   egProp: { control: 'color' },
   // },
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },
@@ -38,7 +38,12 @@ export default {
 
 const Template = (args) => {
   return (
-    <ButtonMenu label="Primary button" renderIcon={Add16} {...args}>
+    <ButtonMenu
+      label="Primary button"
+      menuAriaLabel="Primary button"
+      renderIcon={(props) => <Add size={16} {...props} />}
+      {...args}
+    >
       <ButtonMenuItem
         itemText="Option 1a"
         onClick={action(`Click on Option 1`)}

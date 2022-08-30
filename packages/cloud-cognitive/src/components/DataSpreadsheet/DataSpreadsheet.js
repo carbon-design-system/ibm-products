@@ -18,7 +18,6 @@ import { useBlockLayout, useTable, useColumnOrder } from 'react-table';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { TextArea } from 'carbon-components-react';
 
 import { pkg } from '../../settings';
 import { DataSpreadsheetBody } from './DataSpreadsheetBody';
@@ -891,7 +890,7 @@ export let DataSpreadsheet = React.forwardRef(
           >
             {activeCellContent}
           </button>
-          <TextArea
+          <textarea
             value={cellEditorValue}
             onKeyDown={handleEditSubmit({
               activeCellCoordinates,
@@ -911,7 +910,6 @@ export let DataSpreadsheet = React.forwardRef(
               cellEditorRulerRef.current.textContent = event.target.value;
             }}
             ref={cellEditorRef}
-            labelText=""
             aria-labelledby={
               activeCellCoordinates
                 ? `${blockClass}__cell--${activeCellCoordinates?.row}--${activeCellCoordinates?.column}`

@@ -7,7 +7,7 @@
  */
 import React, { useEffect } from 'react';
 import { VariableSizeList } from 'react-window';
-import { DataTable } from 'carbon-components-react';
+import { DataTable } from '@carbon/react';
 import { pkg } from '../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;

@@ -9,50 +9,42 @@
 // Carbon styles at the end -- this is to obtain a "worst case" for our own CSS,
 // to ensure we are resilient against different CSS loading orders and our
 // styles have the specificity necessary to override Carbon styles when needed.
-@import '../../cloud-cognitive/src/index-without-carbon';
+@use '../../cloud-cognitive/src/index-without-carbon' as *;
 
 // Load all Carbon styles now
-@import '../css/carbon';
-@import '../../security/src/index';
-@import 'docs';
+@use '../css/carbon';
+// @import '../../security/src/index';
+// @import 'docs';
+@use '@carbon/styles' as styles;
+@use '@carbon/styles/scss/theme' as *;
 
 // Setting attribute storybook-carbon-theme="XXX" on the html element
 // will set the carbon theme used for the storybook pane.
 // Adding class sb--use-carbon-theme-XXX on any element
 // will set the carbon theme used within that element.
-@if map-get($feature-flags, 'enable-css-custom-properties') {
-  :root,
-  .sb--use-carbon-theme-white {
-    @include carbon--theme(
-      $theme: $carbon--theme--white,
-      $emit-custom-properties: true
-    );
-  }
+body {
+  background-color: $background;
+}
 
-  :root[storybook-carbon-theme='g10'],
-  .sb--use-carbon-theme-g10 {
-    @include carbon--theme(
-      $theme: $carbon--theme--g10,
-      $emit-custom-properties: true
-    );
-  }
+:root,
+.sb--use-carbon-theme-white {
+  @include styles.theme(styles.$white);
+}
 
-  :root[storybook-carbon-theme='g90'],
-  .sb--use-carbon-theme-g90 {
-    @include carbon--theme(
-      $theme: $carbon--theme--g90,
-      $emit-custom-properties: true
-    );
-  }
+:root[storybook-carbon-theme='g10'],
+.sb--use-carbon-theme-g10 {
+  @include styles.theme(styles.$g10);
+}
 
-  [storybook-carbon-theme='debug'],
-  :root[storybook-carbon-theme='g100'],
-  .sb--use-carbon-theme-g100 {
-    @include carbon--theme(
-      $theme: $carbon--theme--g100,
-      $emit-custom-properties: true
-    );
-  }
+:root[storybook-carbon-theme='g90'],
+.sb--use-carbon-theme-g90 {
+  @include styles.theme(styles.$g90);
+}
+
+[storybook-carbon-theme='debug'],
+:root[storybook-carbon-theme='g100'],
+.sb--use-carbon-theme-g100 {
+  @include styles.theme(styles.$g100);
 }
 
 [storybook-carbon-theme='debug'] body {

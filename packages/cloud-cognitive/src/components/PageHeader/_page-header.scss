@@ -5,32 +5,32 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// Standard imports.
-@import '../../global/styles/project-settings';
-@import '../../global/styles/mixins';
-
 // Other Carbon settings.
-@import 'carbon-components/scss/globals/grid/grid';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/grid/flexbox';
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/utilities';
 
-// PageHeader uses the following Carbon components:
-// BreadcrumbItem, Grid, Column, Row, Button, SkeletonText, Tag
-@import 'carbon-components/scss/components/breadcrumb/breadcrumb';
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/skeleton/skeleton-text';
-@import 'carbon-components/scss/components/tag/tag';
+// Standard imports.
+@use '../../global/styles/project-settings' as *;
+@use '../../global/styles/mixins' as *;
 
 // PageHeader uses the following IBM Products components:
 // ActionBar, BreadcrumbWithOverflow, TagSet, ButtonSetWithOverflow
-@import '../ActionBar/action-bar';
-@import '../BreadcrumbWithOverflow/breadcrumb-with-overflow';
-@import '../TagSet/tag-set';
-@import '../ButtonSetWithOverflow/button-set-with-overflow';
+@use '../ActionBar/action-bar';
+@use '../BreadcrumbWithOverflow/breadcrumb-with-overflow';
+@use '../TagSet/tag-set';
+@use '../ButtonSetWithOverflow/button-set-with-overflow';
 
 $block-class: #{$pkg-prefix}--page-header;
 $breadcrumb-block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
 
 $raised-z-index: 99;
-$z-index-header-minus: z('header') - 1;
+/* stylelint-disable-next-line function-no-unknown */
+$z-index-header-minus: utilities.z('header') - 1;
 
 $left-section-std-width: 60%;
 $right-section-std-width: 100% - $left-section-std-width;
@@ -66,9 +66,9 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
 @mixin appearingBackground(
   $with-shadow: false,
-  $from-color: $ui-background,
-  $to-color: $ui-01,
-  $to-color-shadow: $ui-03
+  $from-color: $background,
+  $to-color: $layer-01,
+  $to-color-shadow: $layer-accent-01
 ) {
   // stylelint-disable-next-line carbon/theme-token-use
   --from-color: #{$from-color};
@@ -92,7 +92,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     $animation: background-and-shadow-appear;
   }
 
-  // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
+  /* stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use -- non-standard duration used */
   animation: $animation $duration linear paused forwards;
   // Added separately for clarity
   animation-delay: calc(
@@ -101,569 +101,557 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   content: '';
 }
 
-@mixin page-header {
-  @include block-wrap($block-class) {
-    &.#{$block-class} {
-      /* Bleed class for the background */
-      position: sticky;
-      /* z-index used to raise above any position relative content as per Carbon header */
-      /* dropped  1 below Carbon header so as not to overlay the side panel */
-      z-index: $z-index-header-minus;
-      /* stylelint-disable-next-line carbon/layout-token-use */
-      top: var(--#{$block-class}--header-top);
-      display: inline-block; /* cause top/bottom margin to reserve space */
-      width: 100%;
-      background-color: $ui-background;
-      color: $text-01;
+@include block-wrap($block-class) {
+  &.#{$block-class} {
+    /* Bleed class for the background */
+    position: sticky;
+    /* z-index used to raise above any position relative content as per Carbon header */
+    /* dropped  1 below Carbon header so as not to overlay the side panel */
+    z-index: $z-index-header-minus;
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    top: var(--#{$block-class}--header-top);
+    display: inline-block; /* cause top/bottom margin to reserve space */
+    width: 100%;
+    background-color: $background;
+    color: $text-primary;
 
-      /* custom props */
-      --#{$block-class}--breadcrumb-title-visibility: hidden;
-      --#{$block-class}--breadcrumb-title-opacity: 1;
-      --#{$block-class}--breadcrumb-top: 0; //1
-      --#{$block-class}--background-opacity: 1;
-      --#{$block-class}--breadcrumb-title-top: initial;
-      --#{$block-class}--button-set-in-breadcrumb-width-px: initial;
-      --#{$block-class}--navigation-buffer-top: $spacing-06;
+    /* custom props */
+    --#{$block-class}--breadcrumb-title-visibility: hidden;
+    --#{$block-class}--breadcrumb-title-opacity: 1;
+    --#{$block-class}--breadcrumb-top: 0; //1
+    --#{$block-class}--background-opacity: 1;
+    --#{$block-class}--breadcrumb-title-top: initial;
+    --#{$block-class}--button-set-in-breadcrumb-width-px: initial;
+    --#{$block-class}--navigation-buffer-top: $spacing-06;
+  }
+
+  &.#{$block-class}--has-navigation-tags-only {
+    --#{$block-class}--navigation-buffer-top: $spacing-04;
+  }
+
+  &::before {
+    @include appearingBackground(true);
+
+    z-index: -1;
+  }
+
+  .#{$block-class}--width--xl {
+    padding-right: $spacing-07;
+    padding-left: $spacing-07;
+  }
+
+  .#{$block-class}__breadcrumb-row {
+    position: sticky;
+    z-index: $raised-z-index;
+    top: var(--#{$block-class}--breadcrumb-top); //2
+    min-height: $spacing-08;
+
+    + .#{$block-class}__last-row-buffer--active {
+      height: $spacing-02;
     }
+  }
 
-    &.#{$block-class}--has-navigation-tags-only {
-      --#{$block-class}--navigation-buffer-top: $spacing-04;
-    }
+  .#{$block-class}__breadcrumb-row:not(.#{$block-class}__breadcrumb-row--has-action-bar) {
+    // lifts up page title when there is no action bar
+    min-height: $spacing-07;
+  }
 
-    &::before {
-      @include appearingBackground(true);
+  .#{$block-class}__breadcrumb-row--container {
+    display: flex;
+    min-width: 100%;
+    flex-wrap: nowrap;
+  }
 
-      z-index: -1;
-    }
+  .#{$block-class}__has-page-actions-without-action-bar {
+    // NOTE: the extra spacing accounts for carbon margins
+    min-width: calc(0.6 * (100% + 2 * #{$spacing-05}));
+    max-width: calc(0.6 * (100% + 2 * #{$spacing-05}));
+  }
 
-    .#{$block-class}--width--xl {
-      padding-right: $spacing-07;
-      padding-left: $spacing-07;
-    }
-
-    .#{$block-class}__breadcrumb-row {
-      position: sticky;
-      z-index: $raised-z-index;
-      top: var(--#{$block-class}--breadcrumb-top); //2
-      min-height: $spacing-08;
-
-      + .#{$block-class}__last-row-buffer--active {
-        height: $spacing-02;
-      }
-    }
-
-    .#{$block-class}__breadcrumb-row:not(.#{$block-class}__breadcrumb-row--has-action-bar) {
-      // lifts up page title when there is no action bar
-      min-height: $spacing-07;
-    }
-
-    .#{$block-class}__breadcrumb-row--container {
-      display: flex;
-      min-width: 100%;
-      flex-wrap: nowrap;
-    }
-
+  .#{$block-class}__has-page-actions-without-action-bar
     .#{$block-class}__has-page-actions-without-action-bar {
-      // NOTE: the extra spacing accounts for carbon margins
-      min-width: calc(0.6 * (100% + 2 * #{$spacing-05}));
-      max-width: calc(0.6 * (100% + 2 * #{$spacing-05}));
-    }
+    min-width: 100%;
+  }
 
-    .#{$block-class}__has-page-actions-without-action-bar
-      .#{$block-class}__has-page-actions-without-action-bar {
-      min-width: 100%;
-    }
+  .#{$block-class}__breadcrumb-row--has-action-bar
+    .#{$block-class}__breadcrumb-row--container {
+    min-width: calc(
+      100% +
+        (
+          var(--#{$block-class}--width-px) -
+            var(--#{$block-class}--breadcrumb-row-width-px)
+        ) / 2
+    );
+  }
+  .#{$block-class}__breadcrumb-row::after {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    display: block;
+    width: 50vw;
+    height: 1px;
+    /* creates a full width box shadow without causing scroll */
+    box-shadow: 0 1px 0 0 $layer-accent-01, 0 1px 0 0 $layer-accent-01;
+    content: '';
+    opacity: 0;
+    transform: translateX(-50%) scaleX(1);
+    // stylelint-disable-next-line carbon/motion-easing-use
+    transition: all $duration-moderate-01 ease-out;
+  }
 
-    .#{$block-class}__breadcrumb-row--has-action-bar
-      .#{$block-class}__breadcrumb-row--container {
-      min-width: calc(
-        100% +
-          (
-            var(--#{$block-class}--width-px) -
-              var(--#{$block-class}--breadcrumb-row-width-px)
-          ) / 2
-      );
-    }
-    .#{$block-class}__breadcrumb-row::after {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      display: block;
-      width: 50vw;
-      height: 1px;
-      /* creates a full width box shadow without causing scroll */
-      box-shadow: 0 1px 0 0 $ui-03, 0 1px 0 0 $ui-03;
-      content: '';
-      opacity: 0;
-      transform: translateX(-50%) scaleX(1);
-      // stylelint-disable-next-line carbon/motion-easing-use
-      transition: all $duration--moderate-01 ease-out;
-    }
+  .#{$block-class}__breadcrumb-row--next-to-tabs:not(.#{$block-class}__has-page-actions-without-action-bar)::after,
+  .#{$block-class}__breadcrumb-row--has-action-bar::after {
+    /* creates a full width box shadow without causing scroll */
+    box-shadow: 25vw 1px 0 0 $layer-accent-01, -25vw 1px 0 0 $layer-accent-01;
+    opacity: 1;
+  }
 
-    .#{$block-class}__breadcrumb-row--next-to-tabs:not(.#{$block-class}__has-page-actions-without-action-bar)::after,
-    .#{$block-class}__breadcrumb-row--has-action-bar::after {
-      /* creates a full width box shadow without causing scroll */
-      box-shadow: 25vw 1px 0 0 $ui-03, -25vw 1px 0 0 $ui-03;
-      opacity: 1;
-    }
+  .#{$block-class}__breadcrumb-container {
+    width: 100%;
+  }
 
-    .#{$block-class}__breadcrumb-container {
-      width: 100%;
-    }
+  .#{$block-class}__action-bar-column {
+    display: none;
+  }
 
+  .#{$block-class}__breadcrumb-row--has-breadcrumbs
     .#{$block-class}__action-bar-column {
-      display: none;
+    // back button displayed only
+    max-width: $right-section-alt-width;
+    flex: 0 1 $right-section-alt-width;
+
+    @include breakpoint(md) {
+      max-width: $right-section-std-width;
+      flex: 1 0 $right-section-std-width;
     }
+  }
 
-    .#{$block-class}__breadcrumb-row--has-breadcrumbs
-      .#{$block-class}__action-bar-column {
-      // back button displayed only
-      max-width: $right-section-alt-width;
-      flex: 0 1 $right-section-alt-width;
+  .#{$block-class}__breadcrumb-row--has-action-bar
+    .#{$block-class}__action-bar-column {
+    display: initial;
+  }
 
-      @include carbon--breakpoint(md) {
-        max-width: $right-section-std-width;
-        flex: 1 0 $right-section-std-width;
-      }
+  .#{$block-class}__action-bar-column-content {
+    display: flex;
+    justify-content: flex-end;
+    white-space: nowrap;
+
+    @include breakpoint-up('lg') {
+      flex-wrap: nowrap; /* assume enough space */
     }
+  }
 
-    .#{$block-class}__breadcrumb-row--has-action-bar
-      .#{$block-class}__action-bar-column {
-      display: initial;
-    }
+  .#{$block-class}__breadcrumb-row .#{$block-class}__page-actions {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: var(--#{$block-class}--button-set-in-breadcrumb-width-px);
+    flex: 1 1 var(--#{$block-class}--button-set-in-breadcrumb-width-px);
+    opacity: 0;
+    transition: opacity $duration-moderate-02 motion('entrance', 'productive');
+    visibility: hidden;
+    white-space: nowrap;
+  }
 
-    .#{$block-class}__action-bar-column-content {
-      display: flex;
-      justify-content: flex-end;
-      white-space: nowrap;
+  .#{$block-class}__breadcrumb-row
+    .#{$block-class}__page-actions--in-breadcrumb {
+    opacity: 1;
+    visibility: visible;
+  }
 
-      @include carbon--breakpoint-up('lg') {
-        flex-wrap: nowrap; /* assume enough space */
-      }
-    }
+  .#{$block-class}__breadcrumb-column {
+    overflow: hidden; /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
+    max-width: 100%;
+    flex: 0 0 100%;
 
-    .#{$block-class}__breadcrumb-row .#{$block-class}__page-actions {
-      position: relative;
-      display: inline-block;
-      width: 100%;
-      max-width: var(--#{$block-class}--button-set-in-breadcrumb-width-px);
-      flex: 1 1 var(--#{$block-class}--button-set-in-breadcrumb-width-px);
-      opacity: 0;
-      transition: opacity $duration--moderate-02
-        carbon--motion('entrance', 'productive');
-      visibility: hidden;
-      white-space: nowrap;
-    }
-
-    .#{$block-class}__breadcrumb-row
-      .#{$block-class}__page-actions--in-breadcrumb {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .#{$block-class}__breadcrumb-column {
+    @include breakpoint(md) {
       overflow: hidden; /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
-      max-width: 100%;
-      flex: 0 0 100%;
-
-      @include carbon--breakpoint(md) {
-        overflow: hidden; /* required for ellipsis in title, title not visible in breadcrumb with back arrow */
-      }
     }
+  }
 
-    .#{$block-class}__breadcrumb-row--has-action-bar.#{$block-class}__breadcrumb-row
-      .#{$block-class}__breadcrumb-column {
-      // back button displayed only
-      max-width: $left-section-alt-width;
-      flex: 0 1 $left-section-alt-width;
+  .#{$block-class}__breadcrumb-row--has-action-bar.#{$block-class}__breadcrumb-row
+    .#{$block-class}__breadcrumb-column {
+    // back button displayed only
+    max-width: $left-section-alt-width;
+    flex: 0 1 $left-section-alt-width;
 
-      @include carbon--breakpoint(md) {
-        max-width: $left-section-std-width;
-        flex: 0 1 $left-section-std-width;
-      }
+    @include breakpoint(md) {
+      max-width: $left-section-std-width;
+      flex: 0 1 $left-section-std-width;
     }
+  }
 
-    .#{$block-class}__has-page-actions-without-action-bar.#{$block-class}__breadcrumb-row
-      .#{$block-class}__breadcrumb-column {
-      // the width of the breadcrumb column is adjusted elsewhere to compensate
-      max-width: 100%;
-      flex: 0 1 100%;
-    }
+  .#{$block-class}__has-page-actions-without-action-bar.#{$block-class}__breadcrumb-row
+    .#{$block-class}__breadcrumb-column {
+    // the width of the breadcrumb column is adjusted elsewhere to compensate
+    max-width: 100%;
+    flex: 0 1 100%;
+  }
 
-    .#{$block-class}__breadcrumb-column--background,
-    .#{$block-class}__action-bar-column--background {
-      position: relative;
-    }
+  .#{$block-class}__breadcrumb-column--background,
+  .#{$block-class}__action-bar-column--background {
+    position: relative;
+  }
 
-    .#{$block-class}__breadcrumb-column--background::before,
-    .#{$block-class}__action-bar-column--background::before {
-      @include appearingBackground();
-    }
+  .#{$block-class}__breadcrumb-column--background::before,
+  .#{$block-class}__action-bar-column--background::before {
+    @include appearingBackground();
+  }
 
-    .#{$block-class}__action-bar-column--influenced-by-collapse-button {
-      padding-right: $spacing-08;
-    }
+  .#{$block-class}__action-bar-column--influenced-by-collapse-button {
+    padding-right: $spacing-08;
+  }
 
-    .#{$block-class}__breadcrumb {
-      @include carbon--type-style('label-01');
+  .#{$block-class}__breadcrumb {
+    @include type.type-style('label-01');
 
+    padding-top: $spacing-04;
+  }
+
+  .#{$block-class}--breadcrumb.#{$breadcrumb-block-class}__with-items {
+    padding-top: 0;
+    @include breakpoint(md) {
       padding-top: $spacing-04;
     }
+  }
 
-    .#{$block-class}--breadcrumb.#{$breadcrumb-block-class}__with-items {
-      padding-top: 0;
-      @include carbon--breakpoint(md) {
-        padding-top: $spacing-04;
-      }
+  .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item {
+    margin-right: $spacing-02;
+  }
+
+  .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item::after {
+    margin-left: $spacing-02;
+  }
+
+  .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item,
+  .#{$block-class}__breadcrumb
+    .#{$carbon-prefix}--breadcrumb-item
+    .#{$carbon-prefix}--link {
+    @include type.type-style('label-01');
+  }
+
+  .#{$block-class}__breadcrumb-title {
+    position: relative;
+
+    &:not(.#{$block-class}__breadcrumb-title--pre-collapsed) {
+      opacity: var(--#{$block-class}--breadcrumb-title-opacity);
+
+      transform: translateY(var(--#{$block-class}--breadcrumb-title-top));
+      visibility: var(--#{$block-class}--breadcrumb-title-visibility);
+    }
+  }
+
+  .#{$block-class}__breadcrumb-container--hidden
+    .#{$block-class}__breadcrumb-title.#{$block-class}__breadcrumb-title {
+    overflow: initial;
+  }
+
+  .#{$block-class}__action-bar {
+    width: 100%;
+    max-width: var(--#{$block-class}--max-action-bar-width-px);
+    flex: 1 1 var(--#{$block-class}--max-action-bar-width-px);
+    padding-top: $spacing-04;
+    margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
+    vertical-align: top;
+    white-space: nowrap;
+  }
+
+  .#{$block-class}__title-row {
+    margin-top: 0;
+    margin-bottom: 0;
+    transform: translateY(
+      $spacing-01
+    ); // position adjusted for editable title focus outline
+
+    @include breakpoint-up('md') {
+      flex-wrap: nowrap; /* assume enough space */
     }
 
-    .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item {
-      margin-right: $spacing-02;
+    &.#{$block-class}__title-row--under-action-bar {
+      margin-top: $spacing-05;
+      transform: translateY(0); // Not needed under action bar
     }
 
-    .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item::after {
-      margin-left: $spacing-02;
-    }
-
-    .#{$block-class}__breadcrumb .#{$carbon-prefix}--breadcrumb-item,
-    .#{$block-class}__breadcrumb
-      .#{$carbon-prefix}--breadcrumb-item
-      .#{$carbon-prefix}--link {
-      @include carbon--type-style('label-01');
-    }
-
-    .#{$block-class}__breadcrumb-title {
-      position: relative;
-
-      &:not(.#{$block-class}__breadcrumb-title--pre-collapsed) {
-        opacity: var(--#{$block-class}--breadcrumb-title-opacity);
-
-        transform: translateY(var(--#{$block-class}--breadcrumb-title-top));
-
-        visibility: var(--#{$block-class}--breadcrumb-title-visibility);
-      }
-    }
-
-    .#{$block-class}__breadcrumb-container--hidden
-      .#{$block-class}__breadcrumb-title.#{$block-class}__breadcrumb-title {
-      overflow: initial;
-    }
-
-    .#{$block-class}__action-bar {
-      width: 100%;
-      max-width: var(--#{$block-class}--max-action-bar-width-px);
-      flex: 1 1 var(--#{$block-class}--max-action-bar-width-px);
-      padding-top: $spacing-04;
-      margin-top: calc(-1 * #{$spacing-04}); /* align with breadcrumb */
-      vertical-align: top;
-      white-space: nowrap;
-    }
-
-    .#{$block-class}__title-row {
-      margin-top: 0;
-      margin-bottom: 0;
-      transform: translateY(
-        $spacing-01
-      ); // position adjusted for editable title focus outline
-
-      @include carbon--breakpoint-up('md') {
-        flex-wrap: nowrap; /* assume enough space */
-      }
-
-      &.#{$block-class}__title-row--under-action-bar {
-        margin-top: $spacing-05;
-        transform: translateY(0); // Not needed under action bar
-      }
-
-      + .#{$block-class}__last-row-buffer--active {
-        height: $spacing-07;
-      }
-
-      &.#{$block-class}__title-row--spacing-below-03 {
-        margin-bottom: $spacing-03;
-      }
-
-      &.#{$block-class}__title-row--spacing-below-05 {
-        + .#{$block-class}__last-row-buffer--active {
-          height: $spacing-05;
-        }
-      }
-
-      &.#{$block-class}__title-row--spacing-below-06 {
-        margin-bottom: $spacing-06;
-      }
-
-      &.#{$block-class}__title-row--no-breadcrumb-row {
-        margin-top: $spacing-07;
-      }
-    }
-
-    &.#{$block-class}--has-navigation
-      .#{$block-class}__title-row
-      + .#{$block-class}__last-row-buffer--active {
-      height: calc(#{$spacing-06});
-    }
-
-    &.#{$block-class}--has-navigation-tags-only
-      .#{$block-class}__title-row
-      + .#{$block-class}__last-row-buffer--active {
-      height: calc(#{$spacing-05});
-    }
-
-    .#{$block-class}__title-row--sticky {
-      position: sticky;
-    }
-
-    .#{$block-class}__breadcrumb-row--has-breadcrumbs
-      + .#{$block-class}__title-row--sticky {
-      // top: 0;
-      top: var(--#{$block-class}--breadcrumb-top); //2
-    }
-
-    .#{$block-class}__title-column {
-      min-height: 40px;
-      flex: 0 0 100%;
-
-      @include carbon--breakpoint-up('md') {
-        max-width: $left-section-std-width;
-        flex: 1 0 $left-section-std-width;
-      }
-    }
-
-    .#{$block-class}__title {
-      @include carbon--type-style('productive-heading-04');
-
-      min-height: $spacing-08;
-      overflow-x: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .#{$block-class}__title .#{$pkg-prefix}--inline-edit__value {
-      // The heading text sits 2px pixels lower in the inline edit which is aligned center
-      // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateY(-2px);
-    }
-
-    .#{$block-class}__title--editable {
-      display: flex;
-      overflow: visible;
-      // move to match non-editable version position
-      margin-top: calc(-1 * #{$spacing-01});
-      margin-left: calc(-1 * #{$spacing-05});
-    }
-
-    .#{$block-class}__title-skeleton {
+    + .#{$block-class}__last-row-buffer--active {
       height: $spacing-07;
     }
 
-    .#{$block-class}__title--fades {
-      opacity: calc(1 - var(--#{$block-class}--breadcrumb-title-opacity));
+    &.#{$block-class}__title-row--spacing-below-03 {
+      margin-bottom: $spacing-03;
     }
 
-    .#{$block-class}__title-icon {
-      margin-right: $spacing-04;
-      // stylelint-disable-next-line carbon/layout-token-use
-      transform: translateY(
-        -2px
-      ); // positional tweak requested by design review
-
-      vertical-align: middle;
-    }
-
-    .#{$block-class}__page-actions {
-      flex: 0 0 100%;
-      margin-top: $spacing-05;
-      white-space: nowrap;
-
-      @include carbon--breakpoint-up('md') {
-        max-width: $right-section-std-width;
-        flex: 0 1 $right-section-std-width;
-        margin-top: 0;
-      }
-    }
-
-    .#{$block-class}__page-actions
-      .#{$carbon-prefix}--btn-set
-      .#{$carbon-prefix}--btn {
-      width: initial;
-    }
-
-    .#{$block-class}__action-bar-column .#{$block-class}__page-actions {
-      margin-top: 0;
-    }
-
-    .#{$block-class}__page-actions-container {
-      justify-content: flex-start;
-
-      @include carbon--breakpoint-up('md') {
-        justify-content: flex-end;
-      }
-    }
-
-    .#{$block-class}__title-row .#{$block-class}__page-actions {
-      position: relative;
-      opacity: 1;
-      transition: all $duration--fast-02
-        carbon--motion('entrance', 'productive');
-      transition-property: opacity, visibility;
-      visibility: visible;
-    }
-
-    .#{$block-class}__title-row .#{$block-class}__page-actions::before {
-      @include appearingBackground();
-    }
-
-    .#{$block-class}__page-actions-content {
-      position: relative; // ensure appears over ::before
-      display: flex;
-      overflow: hidden;
-      width: 100%;
-      height: 100%;
-      justify-content: flex-end;
-    }
-
-    .#{$block-class}__title-row .#{$block-class}__page-actions--in-breadcrumb {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .#{$block-class}__subtitle-row {
-      display: -webkit-box;
-      overflow: hidden;
-      max-width: 100%;
-      margin-top: $spacing-03;
-
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-
-      @include carbon--breakpoint-up('md') {
-        max-width: $left-section-std-width;
-      }
-
+    &.#{$block-class}__title-row--spacing-below-05 {
       + .#{$block-class}__last-row-buffer--active {
         height: $spacing-05;
       }
     }
 
-    .#{$block-class}__subtitle {
-      @include carbon--type-style('body-long-01');
+    &.#{$block-class}__title-row--spacing-below-06 {
+      margin-bottom: $spacing-06;
     }
 
-    .#{$block-class}__available-row {
-      @include carbon--type-style('body-long-01');
-
-      margin-top: $spacing-03;
-
-      + .#{$block-class}__last-row-buffer--active {
-        height: $spacing-05;
-      }
+    &.#{$block-class}__title-row--no-breadcrumb-row {
+      margin-top: $spacing-07;
     }
+  }
 
-    .#{$block-class}__title-row + .#{$block-class}__available-row {
-      margin-top: $spacing-05;
+  &.#{$block-class}--has-navigation
+    .#{$block-class}__title-row
+    + .#{$block-class}__last-row-buffer--active {
+    height: calc(#{$spacing-06});
+  }
+
+  &.#{$block-class}--has-navigation-tags-only
+    .#{$block-class}__title-row
+    + .#{$block-class}__last-row-buffer--active {
+    height: calc(#{$spacing-05});
+  }
+
+  .#{$block-class}__title-row--sticky {
+    position: sticky;
+  }
+
+  .#{$block-class}__breadcrumb-row--has-breadcrumbs
+    + .#{$block-class}__title-row--sticky {
+    // top: 0;
+    top: var(--#{$block-class}--breadcrumb-top); //2
+  }
+
+  .#{$block-class}__title-column {
+    min-height: 40px;
+    flex: 0 0 100%;
+
+    @include breakpoint-up('md') {
+      max-width: $left-section-std-width;
+      flex: 1 0 $left-section-std-width;
     }
+  }
 
-    .#{$block-class}__available-row * {
-      // default content of available row to body-long-01
-      @include carbon--type-style('body-long-01');
-    }
+  .#{$block-class}__title {
+    @include type.type-style('productive-heading-04');
 
-    .#{$block-class}__navigation-row {
-      flex-wrap: wrap-reverse;
+    min-height: $spacing-08;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$block-class}__title .#{$pkg-prefix}--inline-edit__value {
+    // The heading text sits 2px pixels lower in the inline edit which is aligned center
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateY(-2px);
+  }
+
+  .#{$block-class}__title--editable {
+    display: flex;
+    overflow: visible;
+    // move to match non-editable version position
+    margin-top: calc(-1 * #{$spacing-01});
+    margin-left: calc(-1 * #{$spacing-05});
+  }
+
+  .#{$block-class}__title-skeleton {
+    height: $spacing-07;
+  }
+
+  .#{$block-class}__title--fades {
+    opacity: calc(1 - var(--#{$block-class}--breadcrumb-title-opacity));
+  }
+
+  .#{$block-class}__title-icon {
+    margin-right: $spacing-04;
+    // stylelint-disable-next-line carbon/layout-token-use
+    transform: translateY(-2px); // positional tweak requested by design review
+
+    vertical-align: middle;
+  }
+
+  .#{$block-class}__page-actions {
+    flex: 0 0 100%;
+    margin-top: $spacing-05;
+    white-space: nowrap;
+
+    @include breakpoint-up('md') {
+      max-width: $right-section-std-width;
+      flex: 0 1 $right-section-std-width;
       margin-top: 0;
-
-      .#{$carbon-prefix}--content-switcher {
-        box-sizing: content-box;
-        padding-bottom: $spacing-05;
-      }
     }
+  }
 
-    .#{$block-class}__navigation-row .#{$carbon-prefix}--tab-content {
-      display: none; /* need to figure out how to handle the tab content */
-    }
+  .#{$block-class}__page-actions
+    .#{$carbon-prefix}--btn-set
+    .#{$carbon-prefix}--btn {
+    width: initial;
+  }
 
-    .#{$block-class}__navigation-tabs {
-      margin-left: calc(-1 * #{$spacing-05});
-    }
+  .#{$block-class}__action-bar-column .#{$block-class}__page-actions {
+    margin-top: 0;
+  }
 
-    .#{$block-class}__navigation-row--has-tags
-      .#{$block-class}__navigation-tabs {
-      max-width: $left-section-alt-width;
-      flex: 0 1 $left-section-alt-width;
-    }
+  .#{$block-class}__page-actions-container {
+    justify-content: flex-start;
 
-    .#{$block-class}__navigation-tags {
-      display: flex;
-      max-width: $right-section-alt-width;
-      flex: 1 0 $right-section-alt-width;
-      align-items: center;
+    @include breakpoint-up('md') {
       justify-content: flex-end;
-      padding-top: $spacing-02;
-      // allow space for expand/collapse if we have a background
-      padding-right: $spacing-07;
-      padding-bottom: $spacing-02;
-      text-align: right;
-      white-space: nowrap;
-
-      @include carbon--breakpoint(md) {
-        padding-right: $spacing-05;
-      }
-    }
-
-    .#{$block-class}__navigation-tags--tags-only {
-      justify-content: flex-start;
-      padding-top: 0;
-      padding-bottom: $spacing-04;
-      margin-left: calc(-1 * #{$spacing-02});
-      text-align: initial;
-    }
-
-    .#{$block-class}__navigation-row .#{$carbon-prefix}--content-switcher-btn {
-      background-color: $ui-background;
-    }
-
-    .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$block-class}__collapse-expand-toggle {
-      position: absolute;
-      z-index: $raised-z-index + 1;
-      right: 0;
-      bottom: 0;
-    }
-
-    .#{$block-class}__collapse-expand-toggle .#{$carbon-prefix}--btn__icon {
-      // transform: rotate(-90deg); // accordion does this, but it feels odd in page header
-      transition: all $duration--slow-01 motion(standard, productive);
-    }
-
-    .#{$block-class}__collapse-expand-toggle--collapsed
-      .#{$carbon-prefix}--btn__icon {
-      // transform: rotate(90deg);
-      transform: scaleY(-1);
     }
   }
 
-  :root {
-    --#{$block-class}--tagset-tooltip-offset: 0;
+  .#{$block-class}__title-row .#{$block-class}__page-actions {
+    position: relative;
+    opacity: 1;
+    transition: all $duration-fast-02 motion('entrance', 'productive');
+    transition-property: opacity, visibility;
+    visibility: visible;
   }
 
-  .#{$block-class}__tagset-tooltip.#{$block-class}__tagset-tooltip {
-    // stylelint-disable-next-line
-    position: var(--#{$block-class}--tagset-tooltip-position) !important;
-    // stylelint-disable-next-line
-    top: var(--#{$block-class}--tagset-tooltip-offset) !important;
+  .#{$block-class}__title-row .#{$block-class}__page-actions::before {
+    @include appearingBackground();
   }
 
-  .#{$block-class}__navigation-tags-overflow.#{$carbon-prefix}--tooltip {
-    z-index: $z-index-header-minus;
+  .#{$block-class}__page-actions-content {
+    position: relative; // ensure appears over ::before
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-end;
   }
 
-  .#{$block-class}__action-bar-menu-options.#{$carbon-prefix}--overflow-menu-options,
-  .#{$carbon-prefix}--breadcrumb-menu-options.#{$carbon-prefix}--overflow-menu-options,
-  .#{$block-class}__button-set-menu-options.#{$carbon-prefix}--overflow-menu-options {
-    z-index: $z-index-header-minus;
+  .#{$block-class}__title-row .#{$block-class}__page-actions--in-breadcrumb {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .#{$block-class}__subtitle-row {
+    display: -webkit-box;
+    overflow: hidden;
+    max-width: 100%;
+    margin-top: $spacing-03;
+
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+
+    @include breakpoint-up('md') {
+      max-width: $left-section-std-width;
+    }
+
+    + .#{$block-class}__last-row-buffer--active {
+      height: $spacing-05;
+    }
+  }
+
+  .#{$block-class}__subtitle {
+    @include type.type-style('body-long-01');
+  }
+
+  .#{$block-class}__available-row {
+    @include type.type-style('body-long-01');
+
+    margin-top: $spacing-03;
+
+    + .#{$block-class}__last-row-buffer--active {
+      height: $spacing-05;
+    }
+  }
+
+  .#{$block-class}__title-row + .#{$block-class}__available-row {
+    margin-top: $spacing-05;
+  }
+
+  .#{$block-class}__available-row * {
+    // default content of available row to body-long-01
+    @include type.type-style('body-long-01');
+  }
+
+  .#{$block-class}__navigation-row {
+    flex-wrap: wrap-reverse;
+    margin-top: 0;
+
+    .#{$carbon-prefix}--content-switcher {
+      box-sizing: content-box;
+      padding-bottom: $spacing-05;
+    }
+  }
+
+  .#{$block-class}__navigation-row .#{$carbon-prefix}--tab-content {
+    display: none; /* need to figure out how to handle the tab content */
+  }
+
+  .#{$block-class}__navigation-tabs {
+    margin-left: calc(-1 * #{$spacing-05});
+  }
+
+  .#{$block-class}__navigation-row--has-tags .#{$block-class}__navigation-tabs {
+    max-width: $left-section-alt-width;
+    flex: 0 1 $left-section-alt-width;
+  }
+
+  .#{$block-class}__navigation-tags {
+    display: flex;
+    max-width: $right-section-alt-width;
+    flex: 1 0 $right-section-alt-width;
+    align-items: center;
+    justify-content: flex-end;
+    padding-top: $spacing-02;
+    // allow space for expand/collapse if we have a background
+    padding-right: $spacing-07;
+    padding-bottom: $spacing-02;
+    text-align: right;
+    white-space: nowrap;
+
+    @include breakpoint(md) {
+      padding-right: $spacing-05;
+    }
+  }
+
+  .#{$block-class}__navigation-tags--tags-only {
+    justify-content: flex-start;
+    padding-top: 0;
+    padding-bottom: $spacing-04;
+    margin-left: calc(-1 * #{$spacing-02});
+    text-align: initial;
+  }
+
+  .#{$block-class}__navigation-row .#{$carbon-prefix}--content-switcher-btn {
+    background-color: $background;
+  }
+
+  .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$block-class}__collapse-expand-toggle {
+    position: absolute;
+    z-index: $raised-z-index + 1;
+    right: 0;
+    bottom: 0;
+  }
+
+  .#{$block-class}__collapse-expand-toggle .#{$carbon-prefix}--btn__icon {
+    // transform: rotate(-90deg); // accordion does this, but it feels odd in page header
+    transition: all $duration-slow-01 motion(standard, productive);
+  }
+
+  .#{$block-class}__collapse-expand-toggle--collapsed
+    .#{$carbon-prefix}--btn__icon {
+    // transform: rotate(90deg);
+    transform: scaleY(-1);
   }
 }
 
-@include exports('page-header') {
-  @include page-header;
+:root {
+  --#{$block-class}--tagset-tooltip-offset: 0;
+}
+
+.#{$block-class}__tagset-tooltip.#{$block-class}__tagset-tooltip {
+  // stylelint-disable-next-line
+  position: var(--#{$block-class}--tagset-tooltip-position) !important;
+  // stylelint-disable-next-line
+  top: var(--#{$block-class}--tagset-tooltip-offset) !important;
+}
+
+.#{$block-class}__navigation-tags-overflow.#{$carbon-prefix}--tooltip {
+  z-index: $z-index-header-minus;
+}
+
+.#{$block-class}__action-bar-menu-options.#{$carbon-prefix}--overflow-menu-options,
+.#{$carbon-prefix}--breadcrumb-menu-options.#{$carbon-prefix}--overflow-menu-options,
+.#{$block-class}__button-set-menu-options.#{$carbon-prefix}--overflow-menu-options {
+  z-index: $z-index-header-minus;
 }

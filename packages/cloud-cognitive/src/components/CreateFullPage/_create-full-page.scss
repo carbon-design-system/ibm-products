@@ -6,175 +6,169 @@
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
-
-// Other Carbon settings.
-@import 'carbon-components/scss/globals/grid/grid';
-
-// CreateFullPage uses the following Carbon components:
-// Grid, Row, Column, Form, ProgressIndicator, ProgressStep, Toggle,
-// ComposedModal, ModalHeader, ModalBody, ModalFooter, Button
-@import 'carbon-components/scss/components/form/form';
-@import 'carbon-components/scss/components/progress-indicator/progress-indicator';
-@import 'carbon-components/scss/components/toggle/toggle';
-@import 'carbon-components/scss/components/modal/modal';
-@import 'carbon-components/scss/components/button/button';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '../../global/styles/project-settings' as c4p-settings;
 
 // CreateFullPage uses the following IBM Products components:
 // ActionSet, CreateInfluencer
-@import '../CreateInfluencer/index';
-@import '../ActionSet/action-set';
+@use '../CreateInfluencer/index' as *;
+@use '../ActionSet/action-set' as *;
 
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
-@mixin create-full-page {
-  // The block part of our conventional BEM class names (blockClass__E--M).
-  $block-class: #{$pkg-prefix}--create-full-page;
-  $step-block-class: #{$pkg-prefix}--create-full-page__step;
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
+$step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
 
-  .#{$block-class} .#{$block-class} {
-    color: $text-01;
-  }
+.#{$block-class} .#{$block-class} {
+  color: $text-primary;
+}
 
-  .#{$block-class} .#{$block-class}__content .#{$carbon-prefix}--grid {
-    padding-top: $spacing-06;
-    margin-right: 0;
+.#{$block-class}
+  .#{$block-class}__content
+  .#{c4p-settings.$carbon-prefix}--grid {
+  padding-top: $spacing-06;
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.#{$block-class} .#{$step-block-class}__step--hidden-step {
+  display: none;
+}
+
+.#{$block-class} .#{$step-block-class}__step--visible-step {
+  display: block;
+}
+
+.#{$block-class} .#{$block-class}__step-subtitle {
+  @include type.type-style('productive-heading-01');
+
+  max-width: 50%;
+  padding-left: $spacing-08;
+  margin-bottom: $spacing-03;
+}
+
+.#{$block-class} .#{$block-class}__step-description {
+  @include type.type-style('body-long-01');
+
+  max-width: 50%;
+  padding-left: $spacing-08;
+  margin-bottom: $spacing-06;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--fieldset {
+  margin-bottom: 0;
+}
+
+.#{$block-class} .#{$block-class}__step-fieldset > * {
+  margin-bottom: $spacing-05;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-close {
+  display: none;
+}
+
+.#{$block-class} {
+  display: flex;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+}
+
+.#{$block-class} .#{$block-class}__left-nav {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  overflow-y: auto;
+}
+
+.#{$block-class} .#{$block-class}__body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.#{$block-class} .#{$block-class}__main {
+  display: flex;
+  max-height: 100%;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.#{$block-class} .#{$block-class}__content {
+  overflow: auto;
+  flex-grow: 1;
+  padding-top: $spacing-06;
+  background-color: $background;
+  color: $text-primary;
+  overflow-x: hidden;
+}
+
+.#{$block-class} .#{$block-class}__step {
+  position: relative;
+  padding-bottom: $spacing-07;
+  .#{c4p-settings.$carbon-prefix}--css-grid {
     margin-left: 0;
-  }
-
-  .#{$block-class} .#{$step-block-class}__step--hidden-step {
-    display: none;
-  }
-
-  .#{$block-class} .#{$step-block-class}__step--visible-step {
-    display: block;
-  }
-
-  .#{$block-class} .#{$block-class}__step-subtitle {
-    @include carbon--type-style('productive-heading-01');
-
-    max-width: 50%;
-    margin-bottom: $spacing-03;
-  }
-
-  .#{$block-class} .#{$block-class}__step-description {
-    @include carbon--type-style('body-long-01');
-
-    max-width: 50%;
-    margin-bottom: $spacing-06;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--fieldset {
-    margin-bottom: 0;
-  }
-
-  .#{$block-class} .#{$block-class}__step-fieldset > * {
-    margin-bottom: $spacing-05;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--modal-close {
-    display: none;
-  }
-
-  .#{$block-class} {
-    display: flex;
-    height: 100vh;
-    padding: 0;
-    margin: 0;
-  }
-
-  .#{$block-class} .#{$block-class}__left-nav {
-    grid-column: 1 / -1;
-    grid-row: 1 / -1;
-    overflow-y: auto;
-  }
-
-  .#{$block-class} .#{$block-class}__body {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
-
-  .#{$block-class} .#{$block-class}__main {
-    display: flex;
-    max-height: 100%;
-    flex-direction: column;
-    flex-grow: 1;
-  }
-
-  .#{$block-class} .#{$block-class}__content {
-    overflow: auto;
-    flex-grow: 1;
-    background-color: $ui-background;
-    color: $text-01;
-    overflow-x: hidden;
-  }
-
-  .#{$block-class} .#{$block-class}__step {
-    position: relative;
-    padding-bottom: $spacing-07;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--side-nav--ux {
-    top: 0;
-    height: min-content;
-    padding-top: 0;
-    border-right: 1px solid $ui-03;
-    background-color: transparent;
-    grid-row: 1;
-    overflow-x: auto;
-  }
-
-  .#{$block-class} .#{$block-class}__section-divider {
-    position: relative;
-    display: block;
-    width: 0;
-    height: 1px;
-    margin: $spacing-07 calc(-1 * #{$spacing-08}) $spacing-07
-      calc(-1 * #{$spacing-08});
-
-    &::after {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 1px;
-      background-color: $ui-03;
-      content: '';
-    }
-  }
-
-  .#{$block-class} .#{$block-class}__step-title {
-    @include carbon--type-style('productive-heading-04');
-
-    max-width: 50%;
-    margin-bottom: $spacing-05;
-  }
-
-  .#{$block-class} .#{$block-class}__influencer {
-    display: grid;
-    flex: 0 0 257px;
-    border-right: 1px solid $ui-03;
-    background-color: $ui-01;
-    grid-template-columns: 100%;
-    grid-template-rows: 1fr auto;
-  }
-
-  .#{$block-class} .#{$block-class}__progress-indicator {
-    padding: $spacing-06;
-  }
-
-  .#{$block-class} .#{$block-class}__influencer-toggle {
-    padding: $spacing-06;
-    grid-column: 1 / -1;
-    grid-row: -1 / -1;
-  }
-
-  .#{$block-class} .#{$block-class}__buttons {
-    border-top: 1px solid $ui-03;
   }
 }
 
-@include exports('create-full-page') {
-  @include create-full-page;
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--side-nav--ux {
+  top: 0;
+  height: min-content;
+  padding-top: 0;
+  border-right: 1px solid $border-subtle-01;
+  background-color: transparent;
+  grid-row: 1;
+  overflow-x: auto;
+}
+
+.#{$block-class} .#{$block-class}__section-divider {
+  position: relative;
+  display: block;
+  width: 0;
+  height: 1px;
+  margin: $spacing-07 calc(-1 * #{$spacing-08}) $spacing-07
+    calc(-1 * #{$spacing-08});
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 1px;
+    background-color: $layer-accent-01;
+    content: '';
+  }
+}
+
+.#{$block-class} .#{$block-class}__step-title {
+  @include type.type-style('productive-heading-04');
+
+  max-width: 50%;
+  padding-left: $spacing-08;
+  margin-bottom: $spacing-05;
+}
+
+.#{$block-class} .#{$block-class}__influencer {
+  display: grid;
+  flex: 0 0 257px;
+  border-right: 1px solid $layer-accent-01;
+  background-color: $layer-01;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto;
+}
+
+.#{$block-class}
+  .#{$block-class}__progress-indicator.#{c4p-settings.$carbon-prefix}--progress {
+  padding: $spacing-06;
+}
+
+.#{$block-class} .#{$block-class}__influencer-toggle {
+  padding: $spacing-06;
+  grid-column: 1 / -1;
+  grid-row: -1 / -1;
+}
+
+.#{$block-class} .#{$block-class}__buttons {
+  border-top: 1px solid $layer-accent-01;
 }

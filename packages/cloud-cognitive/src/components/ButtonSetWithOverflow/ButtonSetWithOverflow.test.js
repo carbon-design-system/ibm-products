@@ -12,6 +12,8 @@ import { ButtonSetWithOverflow } from '.';
 import { Bee16 } from '@carbon/icons-react';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
+import { carbon } from '../../settings';
+
 const buttons = (handleClick) =>
   [1, 2, 3].map((num) => ({
     renderIcon: !(num % 3) ? Bee16 : null,
@@ -24,7 +26,7 @@ const buttons = (handleClick) =>
     },
   }));
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--button-set-with-overflow`;
 
 const buttonWidth = 200;

@@ -5,18 +5,19 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import './index';
 // shared card styles can be found in the Card folder
-@import '../Card/storybook-styles';
+@use '../Card/storybook-styles' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/theme' as *;
 
-$block-class: #{$pkg-prefix}--card;
+$block-class: #{c4p-settings.$pkg-prefix}--card;
 
 // aspect ratio box styling
-.card-story .#{$carbon-prefix}--aspect-ratio {
+.card-story .#{c4p-settings.$carbon-prefix}--aspect-ratio {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: $ui-03;
+  background: $layer-accent-01;
 }
 
 .#{$block-class}__media-left .#{$block-class}__media {

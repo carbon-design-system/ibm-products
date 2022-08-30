@@ -11,10 +11,10 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Button, OverflowMenu } from 'carbon-components-react';
+import { Button, OverflowMenu, usePrefix } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--button-menu`;
@@ -24,7 +24,7 @@ const componentName = 'ButtonMenu';
 
 // Default values for props
 const defaults = {
-  size: 'default',
+  size: 'lg',
   kind: 'primary',
 };
 
@@ -45,6 +45,7 @@ export let ButtonMenu = React.forwardRef(
       iconDescription,
       kind = defaults.kind,
       label,
+      menuAriaLabel,
       menuOptionsClass,
       renderIcon: Icon,
       size = defaults.size,
@@ -53,41 +54,45 @@ export let ButtonMenu = React.forwardRef(
       ...rest
     },
     ref
-  ) => (
-    <OverflowMenu
-      {
-        // Pass through any other property values as HTML attributes.
-        ...rest
-      }
-      className={cx(
-        blockClass, // Apply the block class to the main HTML element
-        className // Apply any supplied class names to the main HTML element.
-      )}
-      menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
-      renderIcon={() => (
-        <div
-          className={cx([
-            `${blockClass}__trigger`,
-            `${carbon.prefix}--btn`,
-            `${carbon.prefix}--btn--${kind}`,
-            `${carbon.prefix}--btn--${size}`,
-          ])}
-        >
-          {label}
-          {Icon && (
-            <Icon
-              aria-hidden="true"
-              aria-label={iconDescription}
-              className={`${carbon.prefix}--btn__icon`}
-            />
-          )}
-        </div>
-      )}
-      innerRef={ref}
-    >
-      {children}
-    </OverflowMenu>
-  )
+  ) => {
+    const carbonPrefix = usePrefix();
+    return (
+      <OverflowMenu
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
+        className={cx(
+          blockClass, // Apply the block class to the main HTML element
+          className // Apply any supplied class names to the main HTML element.
+        )}
+        ariaLabel={menuAriaLabel}
+        menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
+        renderIcon={() => (
+          <div
+            className={cx([
+              `${blockClass}__trigger`,
+              `${carbonPrefix}--btn`,
+              `${carbonPrefix}--btn--${kind}`,
+              `${carbonPrefix}--btn--${size}`,
+            ])}
+          >
+            {label}
+            {Icon && (
+              <Icon
+                aria-hidden="true"
+                aria-label={iconDescription}
+                className={`${carbonPrefix}--btn__icon`}
+              />
+            )}
+          </div>
+        )}
+        innerRef={ref}
+      >
+        {children}
+      </OverflowMenu>
+    );
+  }
 );
 
 // Return a placeholder if not released and not enabled by feature flag
@@ -127,6 +132,12 @@ ButtonMenu.propTypes = {
    * The button label for the menu trigger.
    */
   label: PropTypes.node,
+
+  /**
+   * Provide the ariaLabel prop to be passed to the OverflowMenu. This is distinctly
+   * separate from `label` to support icon only ButtonMenus
+   */
+  menuAriaLabel: PropTypes.string.isRequired,
 
   /**
    * class name applied to the overflow options

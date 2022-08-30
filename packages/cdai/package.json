@@ -5,6 +5,9 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
@@ -46,6 +49,17 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.18.9",
+    "@carbon/colors": "10.37.1",
+    "@carbon/grid": "10.43.1",
+    "@carbon/icons-react": "10.49.0",
+    "@carbon/import-once": "10.7.0",
+    "@carbon/layout": "10.37.1",
+    "@carbon/motion": "10.29.0",
+    "@carbon/themes": "10.54.0",
+    "@carbon/type": "10.44.0",
+    "carbon-components": "10.57.1",
+    "carbon-components-react": "7.57.1",
+    "carbon-icons": "7.0.7",
     "focus-trap-react": "^9.0.2",
     "pluralize": "^8.0.0",
     "react-highlighter": "^0.4.3",

@@ -16,7 +16,7 @@ import cx from 'classnames';
 import pkg from '../../global/js/package-settings';
 
 // Carbon and package components we use.
-import { CodeSnippet } from 'carbon-components-react';
+import { CodeSnippet } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--canary`;

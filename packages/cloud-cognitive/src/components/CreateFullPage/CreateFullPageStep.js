@@ -9,7 +9,7 @@ import React, { forwardRef, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { FormGroup } from 'carbon-components-react';
+import { FormGroup } from '@carbon/react';
 import { StepsContext, StepNumberContext } from './CreateFullPage';
 import { usePreviousValue, useRetrieveStepData } from '../../global/js/hooks';
 import pconsole from '../../global/js/utils/pconsole';

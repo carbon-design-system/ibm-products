@@ -6,8 +6,9 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@import './variables';
+@use '../../../global/styles/project-settings';
 
+$block-class: #{project-settings.$pkg-prefix}--datagrid;
 .#{$block-class}__center-align-header {
   width: 100%;
   text-align: center;

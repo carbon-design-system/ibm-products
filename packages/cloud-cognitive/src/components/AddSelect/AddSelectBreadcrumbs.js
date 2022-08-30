@@ -6,7 +6,7 @@
 //
 
 import React from 'react';
-import { Breadcrumb, BreadcrumbItem } from 'carbon-components-react';
+import { Breadcrumb, BreadcrumbItem } from '@carbon/react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';

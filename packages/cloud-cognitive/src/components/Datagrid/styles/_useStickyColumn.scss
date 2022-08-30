@@ -6,55 +6,57 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@import './variables';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use './variables';
 
-.#{$block-class}__right-sticky-column-cell {
+.#{variables.$block-class}__right-sticky-column-cell {
   /* stylelint-disable-next-line declaration-no-important */
   position: sticky !important;
   right: 0;
   display: flex;
   align-items: center;
-  border-left: 1px solid $ui-03;
+  border-left: 1px solid $layer-accent-01;
 }
 
-.#{$block-class}__right-sticky-column-header {
+.#{variables.$block-class}__right-sticky-column-header {
   /* stylelint-disable-next-line declaration-no-important */
   position: sticky !important;
   right: 0;
 }
 
-.#{$block-class}__left-sticky-column-cell {
+.#{variables.$block-class}__left-sticky-column-cell {
   /* stylelint-disable-next-line declaration-no-important */
   position: sticky !important;
   left: 0;
   display: flex;
   align-items: center;
-  border-right: 1px solid $ui-03;
+  border-right: 1px solid $layer-accent-01;
 }
 
-.#{$block-class}__left-sticky-column-header {
+.#{variables.$block-class}__left-sticky-column-header {
   /* stylelint-disable-next-line declaration-no-important */
   position: sticky !important;
   z-index: 1;
   left: 0;
 }
 
-.#{$block-class}__left-sticky-column-cell.#{$block-class}__left-sticky-column-cell--with-extra-select-column,
-.#{$block-class}__left-sticky-column-header.#{$block-class}__left-sticky-column-header--with-extra-select-column {
+.#{variables.$block-class}__left-sticky-column-cell.#{variables.$block-class}__left-sticky-column-cell--with-extra-select-column,
+.#{variables.$block-class}__left-sticky-column-header.#{variables.$block-class}__left-sticky-column-header--with-extra-select-column {
   left: $spacing-08;
 }
 
-.#{$block-class}__sticky-noShadow {
+.#{variables.$block-class}__sticky-noShadow {
   box-shadow: none;
 }
 
-.#{$block-class}__sticky-column-noShadow {
-  .#{$block-class}__right-sticky-column-cell {
+.#{variables.$block-class}__sticky-column-noShadow {
+  .#{variables.$block-class}__right-sticky-column-cell {
     box-shadow: none;
   }
 }
 
-.#{$block-class}__right-sticky-column-offset-scroll {
+.#{variables.$block-class}__right-sticky-column-offset-scroll {
   /* stylelint-disable-next-line */
   right: 6px !important; // offset the vertical scroll bar in the table body
 }

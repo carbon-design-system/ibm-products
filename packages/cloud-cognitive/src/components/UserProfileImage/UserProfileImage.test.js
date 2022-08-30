@@ -13,14 +13,14 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg, carbon } from '../../settings';
 
 import { UserProfileImage } from '.';
-import { Group24 } from '@carbon/icons-react';
+import { Group } from '@carbon/icons-react';
 
 const blockClass = `${pkg.prefix}--user-profile-image`;
 const componentName = UserProfileImage.displayName;
 
 const dataTestId = uuidv4();
 const kind = 'user';
-const size = 'xlg';
+const size = 'xl';
 const theme = 'light';
 
 const renderComponent = ({ ...rest }) =>
@@ -53,7 +53,7 @@ describe(componentName, () => {
   test('should return appropriately size circle based on size prop', () => {
     const { container } = renderComponent();
     const element = container.querySelector(`.${blockClass}`);
-    const hasSizeClass = element.className.includes('xlg');
+    const hasSizeClass = element.className.includes('xl');
     expect(hasSizeClass).toBeTruthy();
   });
 
@@ -100,10 +100,10 @@ describe(componentName, () => {
     expect(screen.getByText(/DN/));
   });
 
-  it('should render the tooltipIcon component if the tooltipText prop is passed', () => {
+  it('should render the IconButton component if the tooltipText prop is passed', () => {
     const { container } = renderComponent({ tooltipText: 'Display name' });
     const tooltipElement = container.querySelector(
-      `.${carbon.prefix}--tooltip__trigger`
+      `.${carbon.prefix}--icon-tooltip`
     );
     expect(tooltipElement).toBeTruthy();
   });
@@ -115,7 +115,7 @@ describe(componentName, () => {
 
   it('should display a custom icon if one is provided', () => {
     const { container } = renderComponent({
-      icon: Group24,
+      icon: (props) => <Group size={24} {...props} />,
       kind: null,
     });
     const renderedSVG = container.querySelector('svg');

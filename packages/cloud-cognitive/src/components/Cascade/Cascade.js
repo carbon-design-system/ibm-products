@@ -6,7 +6,7 @@
 //
 
 import React, { forwardRef } from 'react';
-import { Grid } from 'carbon-components-react';
+import { Grid } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';

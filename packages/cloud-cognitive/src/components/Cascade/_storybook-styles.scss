@@ -5,7 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '../../global/styles/project-settings';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
 
 #root {
   width: 100%;
@@ -16,8 +17,8 @@
   width: 400px;
   height: 300px;
   margin: $spacing-04;
-  background-color: $ui-05;
-  color: $text-04;
+  background-color: $layer-selected-inverse;
+  color: $text-on-color;
 }
 
 .grid-box {
@@ -27,6 +28,6 @@
   align-items: center;
   justify-content: center;
   margin-bottom: $spacing-03;
-  background-color: $ui-05;
-  color: $text-04;
+  background-color: $layer-selected-inverse;
+  color: $text-on-color;
 }

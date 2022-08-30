@@ -1,72 +1,64 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
-// HTTP errors use the following Carbon components:
-// Link
-@import 'carbon-components/scss/components/link/link';
+$block-class: #{c4p-settings.$pkg-prefix}--http-errors;
 
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
-@mixin http-errors {
-  $block-class: #{$pkg-prefix}--http-errors;
-
-  .#{$block-class} .#{$block-class}__content {
-    position: fixed;
-    z-index: 2;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -75%);
-    @include carbon--breakpoint(md) {
-      transform: translate(-50%, -100%);
-    }
-    @include carbon--breakpoint(lg) {
-      transform: translate(-50%, -50%);
-    }
+.#{$block-class} .#{$block-class}__content {
+  position: fixed;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  @include breakpoint(md) {
+    transform: translate(-50%, -100%);
   }
-  .#{$block-class} .#{$block-class}__error-code-label {
-    @include carbon--type-style('productive-heading-02');
-
-    margin-bottom: $spacing-02;
-  }
-  .#{$block-class} .#{$block-class}__title {
-    @include carbon--type-style('productive-heading-05');
-
-    margin-bottom: $spacing-04;
-  }
-  .#{$block-class} .#{$block-class}__description {
-    @include carbon--type-style('body-short-01');
-
-    margin-bottom: $spacing-06;
-  }
-  .#{$block-class} .#{$block-class}__error-code-label,
-  .#{$block-class} .#{$block-class}__title,
-  .#{$block-class} .#{$block-class}__description {
-    color: $text-01;
-  }
-  .#{$block-class} .#{$block-class}__link {
-    display: block;
-    margin-bottom: $spacing-02;
-  }
-  .#{$block-class} .#{$block-class}__image {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    max-height: 100%;
-    @include carbon--breakpoint-down(md) {
-      left: 10%;
-      transform: scale(1.5);
-    }
+  @include breakpoint(lg) {
+    transform: translate(-50%, -50%);
   }
 }
+.#{$block-class} .#{$block-class}__error-code-label {
+  @include type.type-style('productive-heading-02');
 
-@include exports($name: http-errors) {
-  @include http-errors;
+  margin-bottom: $spacing-02;
+}
+.#{$block-class} .#{$block-class}__title {
+  @include type.type-style('productive-heading-05');
+
+  margin-bottom: $spacing-04;
+}
+.#{$block-class} .#{$block-class}__description {
+  @include type.type-style('body-short-01');
+
+  margin-bottom: $spacing-06;
+}
+.#{$block-class} .#{$block-class}__error-code-label,
+.#{$block-class} .#{$block-class}__title,
+.#{$block-class} .#{$block-class}__description {
+  color: $text-primary;
+}
+.#{$block-class} .#{$block-class}__link {
+  display: block;
+  margin-bottom: $spacing-02;
+}
+.#{$block-class} .#{$block-class}__image {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  max-height: 100%;
+  @include breakpoint-down(md) {
+    left: 10%;
+    transform: scale(1.5);
+  }
 }

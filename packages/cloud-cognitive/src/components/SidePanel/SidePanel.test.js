@@ -11,17 +11,17 @@ import userEvent from '@testing-library/user-event';
 import { expectMultipleError } from '../../global/js/utils/test-helper';
 
 import React from 'react';
-import { TextInput } from 'carbon-components-react';
+import { TextInput } from '@carbon/react';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { SidePanel } from '.';
-import { Add16 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 
 const { prefix } = pkg;
 
 const blockClass = `${prefix}--side-panel`;
 const actionSetBlockClass = `${prefix}--action-set`;
-const sizes = ['xs', 'sm', 'md', 'lg', 'max'];
+const sizes = ['xs', 'sm', 'md', 'lg', '2xl'];
 
 const dataTestId = uuidv4();
 
@@ -365,7 +365,7 @@ describe('SidePanel', () => {
         },
         {
           label: 'Copy 2',
-          icon: Add16,
+          icon: (props) => <Add size={16} {...props} />,
           onClick: toolbarButtonFn2,
         },
       ],

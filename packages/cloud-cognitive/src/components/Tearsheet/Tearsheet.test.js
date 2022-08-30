@@ -15,9 +15,9 @@ import {
 } from '../../global/js/utils/test-helper';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { carbon, pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
-import { Button, ButtonSet, Tab, Tabs } from 'carbon-components-react';
+import { Button, ButtonSet, Tab, Tabs, TabList } from '@carbon/react';
 import { Tearsheet, TearsheetNarrow } from '.';
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
 
@@ -74,10 +74,12 @@ const tabLabel4 = `Tab ${uuidv4()} 4`;
 const navigation = (
   <div>
     <Tabs data-testid="tabs">
-      <Tab label={tabLabel1} />
-      <Tab label={tabLabel2} />
-      <Tab label={tabLabel3} />
-      <Tab label={tabLabel4} />
+      <TabList aria-label="Tab list">
+        <Tab>tabLabel1</Tab>
+        <Tab>tabLabel2</Tab>
+        <Tab>tabLabel3</Tab>
+        <Tab>tabLabel4</Tab>
+      </TabList>
     </Tabs>
   </div>
 );
@@ -212,7 +214,6 @@ const commonTests = (Ts, name, props, testActions) => {
       expect(tearsheet).toHaveClass('is-visible');
       expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
       userEvent.click(closeButton);
-      expect(tearsheet).not.toHaveClass('is-visible');
       expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
     });
 
@@ -264,7 +265,7 @@ const commonTests = (Ts, name, props, testActions) => {
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
     render(<Ts {...{ ...props, ref }} />);
-    expect(ref.current.outerModal.current).toHaveClass(blockClass);
+    expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', () => {
@@ -340,12 +341,24 @@ describe(componentName, () => {
   });
 
   it('renders navigation', () => {
-    render(<Tearsheet open {...{ navigation }} />);
-    expect(screen.queryAllByTestId('tabs')).toHaveLength(1);
-    screen.getByRole('tab', { name: tabLabel1 });
-    screen.getByRole('tab', { name: tabLabel2 });
-    screen.getByRole('tab', { name: tabLabel3 });
-    screen.getByRole('tab', { name: tabLabel4 });
+    render(
+      <Tearsheet open {...{ navigation }} closeIconDescription="Close icon" />
+    );
+    expect(document.querySelectorAll(`.${carbon.prefix}--tabs`)).toHaveLength(
+      1
+    );
+    const tabList = screen.getByRole('tablist', { name: 'Tab list' });
+    Array.from(tabList).forEach((tab, index) => {
+      const tabContent =
+        index === 0
+          ? tabLabel1
+          : index === 1
+          ? tabLabel2
+          : index === 2
+          ? tabLabel3
+          : tabLabel4;
+      expect(tab.textContent).toEqual(tabContent);
+    });
   });
 });
 

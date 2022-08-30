@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// cspell:words wojtekmaj
 // Avoid side effects from `Canary` in `cloud-cognitive/src/settings`.
 import settings from '../../../packages/cloud-cognitive/src/global/js/package-settings';
 
@@ -22,7 +23,7 @@ global.requestAnimationFrame = function requestAnimationFrame(callback) {
 };
 
 const enzyme = jest.requireActual('enzyme');
-const Adapter = jest.requireActual('enzyme-adapter-react-16');
+const Adapter = jest.requireActual('@wojtekmaj/enzyme-adapter-react-17');
 
 enzyme.configure({ adapter: new Adapter() });
 

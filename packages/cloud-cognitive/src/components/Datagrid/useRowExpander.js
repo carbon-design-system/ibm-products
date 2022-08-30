@@ -7,7 +7,7 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import React from 'react';
-import { ChevronDown16, ChevronUp16 } from '@carbon/icons-react';
+import { ChevronDown, ChevronUp } from '@carbon/icons-react';
 
 const useRowExpander = (hooks) => {
   const visibleColumns = (columns) => {
@@ -16,7 +16,11 @@ const useRowExpander = (hooks) => {
       Cell: ({ row }) =>
         row.canExpand && (
           <span {...row.getToggleRowExpandedProps()}>
-            {row.isExpanded ? <ChevronUp16 /> : <ChevronDown16 />}
+            {row.isExpanded ? (
+              <ChevronUp size={16} />
+            ) : (
+              <ChevronDown size={16} />
+            )}
           </span>
         ),
       width: 48,

@@ -47,6 +47,7 @@ AddSelect.propTypes = {
   closeIconDescription: PropTypes.string.isRequired,
   columnInputPlaceholder: PropTypes.string,
   description: PropTypes.string.isRequired,
+  filterByLabel: PropTypes.string,
   globalFilters: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -73,11 +74,11 @@ AddSelect.propTypes = {
       PropTypes.shape({
         avatar: PropTypes.shape({
           alt: PropTypes.string,
-          icon: PropTypes.object,
+          icon: PropTypes.func,
           src: PropTypes.string,
         }),
         children: PropTypes.object,
-        icon: PropTypes.object,
+        icon: PropTypes.func,
         id: PropTypes.string.isRequired,
         meta: PropTypes.oneOfType([
           PropTypes.arrayOf(
@@ -114,6 +115,7 @@ AddSelect.propTypes = {
    */
   portalTarget: PropTypes.node,
   searchResultsLabel: PropTypes.string,
+  sortByLabel: PropTypes.string,
   title: PropTypes.string.isRequired,
 };
 

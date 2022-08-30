@@ -15,7 +15,7 @@ import { pkg } from '../../settings';
 import { useResizeDetector } from 'react-resize-detector';
 
 // Carbon and package components we use.
-import { Button } from 'carbon-components-react';
+import { Button } from '@carbon/react';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { prepareProps } from '../../global/js/utils/props-helper';
 import { ActionBarItem } from './ActionBarItem';
@@ -74,7 +74,7 @@ export let ActionBar = React.forwardRef(
               overflowAriaLabel="hidden sizing overflow items"
               overflowItems={[]}
               key="hidden-overflow-menu"
-            ></ActionBarOverflowItems>
+            />
             {actions.map(({ key, id, ...rest }) => (
               <ActionBarItem
                 {...rest}
@@ -107,7 +107,7 @@ export let ActionBar = React.forwardRef(
             overflowAriaLabel={overflowAriaLabel}
             overflowItems={newOverflowItems}
             key={`overflow-menu-${internalId.current}`}
-          ></ActionBarOverflowItems>
+          />
         );
       }
 
@@ -234,8 +234,8 @@ ActionBar.displayName = componentName;
 ActionBar.propTypes = {
   /**
    * Specifies the action bar items. Each item is specified as an object
-   * with required fields: key for array rendering, renderIcon and
-   * iconDescription to provide the icon to display,
+   * with required fields: key for array rendering, renderIcon, iconDescription and
+   * label to provide the icon to display,
    * and optional 'onClick' to receive notifications when the button is clicked.
    * Additional fields in the object will be passed to the
    * Button component, and these can include 'disabled', 'ref', 'className',
@@ -260,6 +260,7 @@ ActionBar.propTypes = {
       key: PropTypes.string.isRequired,
       // Redefine as form different  to Button and a key prop used by ActionBarItems
       iconDescription: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
       renderIcon: Button.propTypes.renderIcon.isRequired,
       // We duplicate onClick here to improve DocGen in Storybook
       onClick: PropTypes.func,

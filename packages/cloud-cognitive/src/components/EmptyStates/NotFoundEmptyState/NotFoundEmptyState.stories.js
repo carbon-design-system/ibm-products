@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Add20 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 import mdx from './NotFoundEmptyState.mdx';
 import {
   getStoryTitle,
@@ -15,13 +15,13 @@ import {
 } from '../../../global/js/utils/story-helper';
 import { NotFoundEmptyState } from '.';
 
-import styles from '../_index.scss';
+// import styles from '../_index.scss';
 
 export default {
   title: getStoryTitle(NotFoundEmptyState.displayName),
   component: NotFoundEmptyState,
   parameters: {
-    styles,
+    // styles,
     docs: {
       page: mdx,
     },
@@ -66,7 +66,7 @@ export const withActionIconButton = prepareStory(Template, {
     action: {
       text: 'Create new',
       onClick: action('Clicked empty state action button'),
-      renderIcon: Add20,
+      renderIcon: (props) => <Add size={20} {...props} />,
       iconDescription: 'Add icon',
     },
   },
@@ -88,7 +88,7 @@ export const withActionAndLink = prepareStory(Template, {
     action: {
       text: 'Create new',
       onClick: action('Clicked empty state action button'),
-      renderIcon: Add20,
+      renderIcon: (props) => <Add size={20} {...props} />,
       iconDescription: 'Add icon',
     },
     link: {

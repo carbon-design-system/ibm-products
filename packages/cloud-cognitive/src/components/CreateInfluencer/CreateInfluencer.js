@@ -9,7 +9,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { ProgressIndicator, ProgressStep } from 'carbon-components-react';
+import { ProgressIndicator, ProgressStep } from '@carbon/react';
 import '../../global/js/utils/props-helper';
 
 import { pkg } from '../../settings';

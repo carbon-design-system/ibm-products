@@ -1,15 +1,19 @@
 /*
 * Licensed Materials - Property of IBM
 * 5724-Q36
-* (c) Copyright IBM Corp. 2021
+* (c) Copyright IBM Corp. 2021, 2022
 * US Government Users Restricted Rights - Use, duplication or disclosure
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@import '../variables';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '../../../../global/styles/project-settings' as c4p-settings;
+@use '../variables';
 
-.#{$block-class}__customize-columns-modal {
-  .#{$carbon-prefix}--modal-content {
+.#{variables.$block-class}__customize-columns-modal {
+  .#{c4p-settings.$carbon-prefix}--modal-content {
     position: inherit;
     display: flex;
     flex-flow: column;
@@ -18,69 +22,70 @@
   }
 }
 
-.#{$block-class}__customize-columns-checkbox-wrapper {
+.#{variables.$block-class}__customize-columns-checkbox-wrapper {
   margin-bottom: 0;
 }
-.#{$block-class}__customize-columns-checkbox-wrapper {
+.#{variables.$block-class}__customize-columns-checkbox-wrapper {
   display: flex;
   justify-content: center;
 }
 
-.#{$block-class}__customize-columns-modal--actions {
+.#{variables.$block-class}__customize-columns-modal--actions {
   display: flex;
   height: $spacing-09;
   flex-flow: row;
   background-color: $field-02;
 }
 
-.#{$block-class}__customize-columns-modal--actions input[role='searchbox'] {
+.#{variables.$block-class}__customize-columns-modal--actions
+  input[role='searchbox'] {
   height: $spacing-09;
   padding-left: $spacing-08;
   border-bottom: none;
 }
 
-.#{$block-class}__customize-columns-modal--actions > button {
+.#{variables.$block-class}__customize-columns-modal--actions > button {
   margin-left: $spacing-05;
 }
 
-.#{$block-class}__customize-columns-instructions {
+.#{variables.$block-class}__customize-columns-instructions {
   padding-left: $spacing-05;
   margin-bottom: $spacing-06;
 
-  @include carbon--type-style('body-long-01');
+  @include type.type-style('body-long-01');
 
-  color: $text-01;
+  color: $text-primary;
 }
 
-.#{$block-class}__customize-columns-column-list {
+.#{variables.$block-class}__customize-columns-column-list {
   position: relative; // needed for the react-dnd, otherwise the drag preview will not work correctly
   overflow: auto;
 }
 
-.#{$block-class}__customize-columns-select-all {
+.#{variables.$block-class}__customize-columns-select-all {
   display: flex;
   height: $spacing-09;
   padding-left: $spacing-08;
   border-bottom: 1px solid $layer-active;
-  background-color: $layer;
+  background-color: $layer-01;
 }
-.#{$block-class}__customize-columns-select-all:hover {
-  background-color: $layer-hover;
+.#{variables.$block-class}__customize-columns-select-all:hover {
+  background-color: $layer-hover-01;
 }
-.#{$block-class}__customize-columns-select-all-selected {
+.#{variables.$block-class}__customize-columns-select-all-selected {
   display: flex;
   height: $spacing-09;
   padding-left: $spacing-08;
   border-bottom: 1px solid $layer-active;
-  background-color: $layer-selected;
+  background-color: $layer-selected-01;
 }
 
-.#{$block-class}__customize-columns-select-all-selected:hover {
-  background-color: $hover-selected-ui;
+.#{variables.$block-class}__customize-columns-select-all-selected:hover {
+  background-color: $background-selected-hover;
 }
 
-.#{$block-class}
-  .#{$block-class}__customize-columns-modal
-  .#{$carbon-prefix}--modal-content {
+.#{variables.$block-class}
+  .#{variables.$block-class}__customize-columns-modal
+  .#{c4p-settings.$carbon-prefix}--modal-content {
   margin-bottom: 0;
 }

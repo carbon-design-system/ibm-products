@@ -6,83 +6,78 @@
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+@use '../../global/styles/project-settings' as c4p-settings;
 
-// ImportModal uses the following Carbon components:
-// ComposedModal, ModalHeader, ModalFooter, ModalBody,
-// FileUploaderDropContainer, FileUploaderItem, TextInput, Button
-@import 'carbon-components/scss/components/modal/modal';
-@import 'carbon-components/scss/components/file-uploader/file-uploader';
-@import 'carbon-components/scss/components/text-input/text-input';
-@import 'carbon-components/scss/components/button/button';
+$block-class: #{c4p-settings.$pkg-prefix}--import-modal;
 
-@mixin import-modal {
-  $block-class: #{$pkg-prefix}--import-modal;
-
-  .#{$block-class} .#{$carbon-prefix}--modal-close {
-    display: none;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--modal-footer .#{$carbon-prefix}--btn {
-    max-width: none;
-  }
-
-  .#{$block-class}.#{$carbon-prefix}--modal .#{$carbon-prefix}--modal-content {
-    padding-right: $spacing-05;
-  }
-
-  .#{$carbon-prefix}--file .#{$carbon-prefix}--file-container,
-  .#{$carbon-prefix}--file ~ .#{$carbon-prefix}--file-container {
-    margin-top: 0;
-  }
-
-  .#{$carbon-prefix}--modal-container--sm .#{$carbon-prefix}--modal-header {
-    padding-right: calc(20% - #{$spacing-05});
-  }
-
-  .#{$block-class}__input-group {
-    display: flex;
-  }
-
-  .#{$block-class}__import-button.#{$carbon-prefix}--btn {
-    margin-left: $spacing-03;
-  }
-
-  .#{$block-class}__file-container {
-    width: 100%;
-  }
-
-  .#{$block-class} .#{$block-class}__file-drop-header,
-  .#{$block-class} .#{$block-class}__label {
-    margin-bottom: $spacing-03;
-    @include carbon--type-style('productive-heading-01');
-  }
-
-  .#{$block-class}__helper-text {
-    margin-top: $spacing-06;
-    margin-bottom: $spacing-03;
-    @include carbon--type-style('helper-text-01');
-  }
-
-  .#{$block-class}__body {
-    padding-right: calc(20% - #{$spacing-05});
-    margin-bottom: $spacing-06;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--file__selected-file {
-    max-width: none;
-    background: $ui-02;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--file {
-    margin-bottom: $spacing-05;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--text-input:disabled {
-    background: $ui-02;
-  }
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-close {
+  display: none;
 }
 
-@include exports('import-modal') {
-  @include import-modal;
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--modal-footer
+  .#{c4p-settings.$carbon-prefix}--btn {
+  max-width: none;
+}
+
+.#{$block-class}.#{c4p-settings.$carbon-prefix}--modal
+  .#{c4p-settings.$carbon-prefix}--modal-content {
+  padding-right: $spacing-05;
+}
+
+.#{c4p-settings.$carbon-prefix}--file
+  .#{c4p-settings.$carbon-prefix}--file-container,
+.#{c4p-settings.$carbon-prefix}--file
+  ~ .#{c4p-settings.$carbon-prefix}--file-container {
+  margin-top: 0;
+}
+
+.#{c4p-settings.$carbon-prefix}--modal-container--sm
+  .#{c4p-settings.$carbon-prefix}--modal-header {
+  padding-right: calc(20% - #{$spacing-05});
+}
+
+.#{$block-class}__input-group {
+  display: flex;
+}
+
+.#{$block-class}__import-button.#{c4p-settings.$carbon-prefix}--btn {
+  margin-left: $spacing-03;
+}
+
+.#{$block-class}__file-container {
+  width: 100%;
+}
+
+.#{$block-class} .#{$block-class}__file-drop-header,
+.#{$block-class} .#{$block-class}__label {
+  margin-bottom: $spacing-03;
+  @include type.type-style('productive-heading-01');
+}
+
+.#{$block-class}__helper-text {
+  margin-top: $spacing-06;
+  margin-bottom: $spacing-03;
+  @include type.type-style('helper-text-01');
+}
+
+.#{$block-class}__body {
+  padding-right: calc(20% - #{$spacing-05});
+  margin-bottom: $spacing-06;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--file__selected-file {
+  max-width: none;
+  background: $layer-02;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--file {
+  margin-bottom: $spacing-05;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--text-input:disabled {
+  background: $layer-02;
 }

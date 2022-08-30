@@ -8,7 +8,7 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'carbon-components-react';
+import { Modal } from '@carbon/react';
 import { isColumnVisible } from './common';
 import Columns from './Columns';
 import Actions from './Actions';

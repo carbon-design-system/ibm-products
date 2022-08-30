@@ -7,14 +7,19 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { OverflowMenu, OverflowMenuItem } from 'carbon-components-react';
-import { ArrowsVertical32, ArrowUp16, ArrowDown16 } from '@carbon/icons-react';
+import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
+import { ArrowsVertical, ArrowUp, ArrowDown } from '@carbon/icons-react';
 import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--add-select-sort`;
 const componentName = 'AddSelectSort';
 
-export let AddSelectSort = ({ setSortAttribute, setSortDirection, sortBy }) => {
+export let AddSelectSort = ({
+  setSortAttribute,
+  setSortDirection,
+  sortBy,
+  sortByLabel,
+}) => {
   const sortByOpts = sortBy
     ? sortBy.reduce((acc, cur) => {
         const opts = [
@@ -22,7 +27,7 @@ export let AddSelectSort = ({ setSortAttribute, setSortDirection, sortBy }) => {
             id: `${cur}-asc`,
             itemText: (
               <>
-                <ArrowUp16 />
+                <ArrowUp size={16} />
                 {cur}
               </>
             ),
@@ -33,7 +38,7 @@ export let AddSelectSort = ({ setSortAttribute, setSortDirection, sortBy }) => {
             id: `${cur}-desc`,
             itemText: (
               <>
-                <ArrowDown16 />
+                <ArrowDown size={16} />
                 {cur}
               </>
             ),
@@ -55,9 +60,10 @@ export let AddSelectSort = ({ setSortAttribute, setSortDirection, sortBy }) => {
     <div className={blockClass}>
       {sortByOpts.length > 0 && (
         <OverflowMenu
+          renderIcon={(props) => <ArrowsVertical size={32} {...props} />}
           className={`${blockClass}_overflow`}
-          renderIcon={ArrowsVertical32}
           flipped
+          ariaLabel={sortByLabel}
         >
           {sortByOpts.map((opt) => (
             <OverflowMenuItem
@@ -77,6 +83,7 @@ AddSelectSort.propTypes = {
   setSortAttribute: PropTypes.func,
   setSortDirection: PropTypes.func,
   sortBy: PropTypes.array,
+  sortByLabel: PropTypes.string,
 };
 
 AddSelectSort.displayName = componentName;

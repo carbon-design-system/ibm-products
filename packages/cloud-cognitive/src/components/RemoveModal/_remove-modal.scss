@@ -1,40 +1,31 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 // Standard imports.
-@import '../../global/styles/project-settings';
+@use '@carbon/styles/scss/spacing' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
 
-// RemoveModal uses the following Carbon components:
-// Button, ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/modal/modal';
-@import 'carbon-components/scss/components/text-input/text-input';
+$block-class: #{c4p-settings.$pkg-prefix}--remove-modal;
 
-@mixin remove-modal {
-  $block-class: #{$pkg-prefix}--remove-modal;
-
-  .#{$block-class} .#{$carbon-prefix}--modal-footer .#{$carbon-prefix}--btn {
-    max-width: none;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--modal-content {
-    padding-right: $spacing-05;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--modal-close {
-    display: none;
-  }
-
-  .#{$block-class}__body {
-    padding-right: 20%;
-    margin-bottom: $spacing-05;
-  }
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--modal-footer
+  .#{c4p-settings.$carbon-prefix}--btn {
+  max-width: none;
 }
 
-@include exports('remove-modal') {
-  @include remove-modal;
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-content {
+  padding-right: $spacing-05;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-close {
+  display: none;
+}
+
+.#{$block-class}__body {
+  padding-right: 20%;
+  margin-bottom: $spacing-05;
 }

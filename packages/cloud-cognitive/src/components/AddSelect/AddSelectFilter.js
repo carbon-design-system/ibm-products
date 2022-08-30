@@ -6,16 +6,10 @@
 //
 
 import React, { useState } from 'react';
-import {
-  Button,
-  ButtonSet,
-  Dropdown,
-  Search,
-  Tag,
-} from 'carbon-components-react';
+import { Button, ButtonSet, Dropdown, Search, Tag } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { Filter16 } from '@carbon/icons-react';
+import { Filter } from '@carbon/icons-react';
 import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--add-select__global-filter`;
@@ -101,7 +95,7 @@ export let AddSelectFilter = ({
         />
         {showFilter && (
           <Button
-            renderIcon={Filter16}
+            renderIcon={(props) => <Filter size={16} {...props} />}
             hasIconOnly
             kind="ghost"
             onClick={() => setOpen(!open)}

@@ -6,7 +6,7 @@
 //
 
 import React, { useState, forwardRef } from 'react';
-import { Add20 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 import {
   ComposedModal,
   ModalHeader,
@@ -16,14 +16,15 @@ import {
   FileUploaderItem,
   TextInput,
   Button,
-} from 'carbon-components-react';
+  usePrefix,
+} from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 const componentName = 'ImportModal';
 
 // Default values for props
@@ -69,6 +70,7 @@ export let ImportModal = forwardRef(
     },
     ref
   ) => {
+    const carbonPrefix = usePrefix();
     const [files, setFiles] = useState([]);
     const [importUrl, setImportUrl] = useState('');
 
@@ -217,13 +219,15 @@ export let ImportModal = forwardRef(
               className={`${blockClass}__import-button`}
               size="sm"
               disabled={importButtonDisabled}
-              renderIcon={inputButtonIcon ? Add20 : null}
+              renderIcon={
+                inputButtonIcon ? (props) => <Add size={20} {...props} /> : null
+              }
             >
               {inputButtonText}
             </Button>
           </div>
           <div
-            className={`${carbon.prefix}--file-container ${blockClass}__file-container`}
+            className={`${carbonPrefix}--file-container ${blockClass}__file-container`}
           >
             {hasFiles && (
               <p className={`${blockClass}__helper-text`}>{fileStatusString}</p>
@@ -234,7 +238,7 @@ export let ImportModal = forwardRef(
                 onDelete={() => onRemoveFile(file.uuid)}
                 name={file.name}
                 status={file.status}
-                size="default"
+                size="lg"
                 uuid={file.uuid}
                 iconDescription={file.iconDescription}
                 invalid={file.invalid}

@@ -7,12 +7,12 @@
 
 import React, { forwardRef } from 'react';
 import cx from 'classnames';
-import { Button, InlineLoading } from 'carbon-components-react';
+import { Button, InlineLoading } from '@carbon/react';
 import {
-  Save16,
-  CheckmarkOutline16,
-  ErrorOutline16,
-  ErrorFilled16,
+  Save,
+  CheckmarkOutline,
+  ErrorOutline,
+  ErrorFilled,
 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 
@@ -46,22 +46,22 @@ export let Saving = forwardRef(
       default: {
         text: defaultText,
         iconDescription: defaultIconDescription,
-        icon: CheckmarkOutline16,
+        icon: (props) => <CheckmarkOutline size={16} {...props} />,
       },
       ['in-progress']: {
         text: inProgressText,
         iconDescription: inProgressIconDescription,
-        icon: InlineLoading,
+        icon: (props) => <InlineLoading size={16} {...props} />,
       },
       success: {
         text: successText,
         iconDescription: successIconDescription,
-        icon: Save16,
+        icon: (props) => <Save size={16} {...props} />,
       },
       fail: {
         text: failText,
         iconDescription: failIconDescription,
-        icon: ErrorOutline16,
+        icon: (props) => <ErrorOutline size={16} {...props} />,
       },
     };
     const blockClass = `${pkg.prefix}--saving`;
@@ -77,7 +77,7 @@ export let Saving = forwardRef(
           <div className={`${blockClass}__message`}>
             {status === 'fail' && (
               <div className={`${blockClass}__error-icon`}>
-                <ErrorFilled16 />
+                <ErrorFilled size={16} />
               </div>
             )}
             <p className={`${blockClass}__text`}>{statusObj[status]?.text}</p>

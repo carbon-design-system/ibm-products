@@ -126,7 +126,7 @@ export let AddSelectColumn = ({
             className={`${colClass}-input`}
             id={uuidv4()}
             labelText={columnInputPlaceholder}
-            size="lg"
+            size="md"
           />
           <div className={`${colClass}-sort-filter`}>
             <AddSelectSort

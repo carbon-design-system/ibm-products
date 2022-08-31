@@ -294,6 +294,7 @@ export class IdeCard extends React.Component {
             <div
               className={`${idePrefix}-card--tile-img`}
               {...idAttribute(`ide-card-${cardId}-launch-Image`)}
+              alt='Opens in new tab'
             >
               {renderGraphic(Launch20)}
             </div>

@@ -2039,7 +2039,7 @@ describe(componentName, () => {
 
     const customizeColumnsButton = screen.getByLabelText('Customize columns');
     fireEvent.click(customizeColumnsButton);
-    screen.getByText('Customize display');
+    screen.getByText(/Customize Columns/);
   });
 
   it('Top Alignment', () => {

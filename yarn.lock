@@ -1741,7 +1741,6 @@ __metadata:
     sinon: ^14.0.0
     uuid: ^8.3.2
   peerDependencies:
-    "@carbon/elements": ^10.55.0
     "@carbon/grid": ^10.43.1
     "@carbon/icons-react": ^10.49.0
     carbon-components: ^10.57.2

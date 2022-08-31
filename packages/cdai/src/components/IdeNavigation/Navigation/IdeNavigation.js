@@ -101,12 +101,12 @@ IdeNavigation.propTypes = {
   ariaAttributes: PropTypes.oneOfType([
     PropTypes.shape({
       /** aria labelledby markup which is applied to the navigation, referencing the label which describe the nav. Must be provided */
-      'aria-labelledby': PropTypes.string.isRequired
+      'aria-labelledby': PropTypes.string.isRequired,
     }),
     PropTypes.shape({
       /** aria label which is applied to the navigation. Must be provided, and be pre translated */
-      'aria-label': PropTypes.string.isRequired
-    })
+      'aria-label': PropTypes.string.isRequired,
+    }),
   ]),
   /** children. This should be/represent the current page selected by the user */
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
@@ -134,6 +134,6 @@ IdeNavigation.defaultProps = {
     'Click here to expand or collapse the navigation - change this for a pre translated string!',
   navigationLinks: [],
   ariaAttributes: {
-    'aria-label': 'Example Aria Labeled'
+    'aria-label': 'Example Aria Labeled',
   },
 };

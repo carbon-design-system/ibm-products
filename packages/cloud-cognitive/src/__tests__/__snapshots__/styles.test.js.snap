@@ -1041,6 +1041,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-ui-01, #f4f4f4);
   opacity: var(--c4p--side-panel--subtitle-opacity);
   transform: translateY(var(--c4p--side-panel--title-y-position));
+  word-break: break-word;
 }
 .c4p--side-panel__container .c4p--side-panel__label-text {
   font-size: var(--cds-label-01-font-size, 0.75rem);

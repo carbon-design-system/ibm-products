@@ -2,7 +2,8 @@
 library:
   id: ibm-products
   name: IBM Products
-  description: Discover React-based solutions designed for IBM's product portfolio.
+  description:
+    Discover React-based solutions designed for IBM's product portfolio.
   externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/
 assets:
   api-key-modal:
@@ -558,7 +559,7 @@ assets:
       - media
   web-terminal:
     name: Web terminal
-    status: experimental
+    status: stable
     type: pattern
     platform: web
     framework: react

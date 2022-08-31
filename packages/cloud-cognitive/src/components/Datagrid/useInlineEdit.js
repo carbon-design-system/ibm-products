@@ -9,6 +9,9 @@ import React from 'react';
 import { pkg } from '../../settings';
 import cx from 'classnames';
 import { InlineEdit } from '../InlineEdit';
+import { Button } from 'carbon-components-react';
+import { InlineEditText } from './Datagrid/addons/InlineEdit/InlineEditText';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -16,38 +19,32 @@ const useInlineEdit = (hooks) => {
   const addInlineEdit = (props, { cell, instance }) => {
     const { onDataUpdate } = instance;
 
-    // Saves the new cell data, onDataUpdate is a required function to be
-    // passed to useDatagrid when using useInlineEdit
-    const saveCellData = (newValue) => {
-      const columnId = cell.column.id;
-      const rowIndex = cell.row.index;
-      onDataUpdate((prev) =>
-        prev.map((row, index) => {
-          if (index === rowIndex) {
-            return {
-              ...prev[rowIndex],
-              [columnId]: newValue,
-            };
-          }
-          return row;
-        })
-      );
-    };
-
     const editOptionItem = instance.columns
       .filter((obj) => obj.id === cell.column.id)
       .map((obj) => obj.inlineEdit?.type)
       .toString();
 
+    const columnInlineEditConfig = cell.column.inlineEdit;
+    // console.log(cell);
+    // console.log(cell.row.index);
     return [
       props,
       {
-        className: cx({
-          [`${blockClass}__cell`]: true,
+        className: cx(`${blockClass}__cell`, {
+          [`${blockClass}__cell-inline-edit`]: true,
         }),
         children: (
           <>
             {editOptionItem === 'text' && (
+              <InlineEditText
+                config={columnInlineEditConfig}
+                tabIndex={-1}
+                value={cell.value}
+                cell={cell}
+                instance={instance}
+              />
+            )}
+            {/* {editOptionItem === 'text' && (
               <InlineEdit
                 style={{
                   width: cell.column.totalWidth,
@@ -66,17 +63,18 @@ const useInlineEdit = (hooks) => {
                 saveDescription="Save"
                 value={cell.value}
               />
-            )}
+            )} */}
             {/* Render default cell, if it's column is not inlineEdit */}
             {!editOptionItem && (
-              <div
-                className={cx(`${blockClass}__defaultStringRenderer`, {
-                  [`${blockClass}__defaultStringRenderer--multiline`]:
-                    cell.column?.multiLineWrap,
-                })}
-              >
-                {cell.value}
-              </div>
+              <InlineEditText
+                config={columnInlineEditConfig}
+                tabIndex={-1}
+                value={cell.value}
+                cell={cell}
+                instance={instance}
+                disabled
+                nonEditCell
+              />
             )}
           </>
         ),

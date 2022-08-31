@@ -464,6 +464,7 @@ export const InlineEdit = () => {
       columns,
       data,
       onDataUpdate: setData,
+      DatagridActions
     },
     useInlineEdit
   );

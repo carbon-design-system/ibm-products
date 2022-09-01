@@ -10,7 +10,6 @@ export const getInlineEditColumns = () => {
     {
       Header: 'Row Index',
       accessor: (row, i) => i,
-      sticky: 'left',
       id: 'rowIndex', // id is required when accessor is a function.
     },
     {

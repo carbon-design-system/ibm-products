@@ -83,6 +83,13 @@ $row-heights: (
 }
 
 .#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.#{$block-class}__inline-edit--outer-cell-button
   .#{$block-class}__inline-edit-button
   .#{$block-class}__inline-edit-button-label {
   overflow: hidden;

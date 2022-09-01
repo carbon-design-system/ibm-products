@@ -98,10 +98,7 @@ export const InlineEditText = ({
         case 'Enter': {
           if (inEditMode) {
             saveCellData(cellValue);
-            dispatch({ type: 'EXIT_EDIT_MODE', payload: {
-              activeCellId: cellId,
-              editId: null,
-            }});
+            dispatch({ type: 'EXIT_EDIT_MODE', payload: cellId });
             setInEditMode(false);
             sendFocusBackToGrid();
           }
@@ -109,10 +106,7 @@ export const InlineEditText = ({
         }
         case 'Escape': {
           if (inEditMode) {
-            dispatch({ type: 'EXIT_EDIT_MODE', payload: {
-              activeCellId: cellId,
-              editId: null,
-            }});
+            dispatch({ type: 'EXIT_EDIT_MODE', payload: cellId });
             setCellValue(value);
             setInEditMode(false);
             sendFocusBackToGrid();

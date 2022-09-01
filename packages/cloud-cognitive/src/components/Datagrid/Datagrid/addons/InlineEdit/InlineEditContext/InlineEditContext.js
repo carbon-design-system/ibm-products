@@ -17,13 +17,16 @@ const inlineEditReducer = (state, action) => {
     case 'ADD_GRID_ACTIVE_FOCUS': {
       return {
         ...state,
-        gridActive: true
+        gridActive: true,
+        activeCellId: 'column-0-row-0', // set default active cell when grid receives focus
       }
     }
     case 'REMOVE_GRID_ACTIVE_FOCUS': {
       return {
         ...state,
-        gridActive: false
+        gridActive: false,
+        editId: null,
+        activeCellId: null,
       }
     }
     case 'ENTER_EDIT_MODE': {
@@ -31,15 +34,13 @@ const inlineEditReducer = (state, action) => {
         ...state,
         activeCellId: action.payload.activeCellId,
         editId: action.payload.editId
-        // inEdit: true,
       }
     }
     case 'EXIT_EDIT_MODE': {
       return {
         ...state,
-        activeCellId: action.payload.activeCellId,
+        activeCellId: action.payload,
         editId: null
-        // inEdit: action.payload.inEdit,
       }
     }
     case 'UPDATE_ACTIVE_CELL_ID': {

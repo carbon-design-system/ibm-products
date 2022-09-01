@@ -60,7 +60,9 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
             <DatagridContent datagridState={datagridState} />
           </div>
         )}
-        {leftPanel === undefined && <DatagridContent datagridState={datagridState} />}
+        {leftPanel === undefined && (
+          <DatagridContent datagridState={datagridState} />
+        )}
       </div>
     </InlineEditProvider>
   );

@@ -19,7 +19,7 @@ $block-class: #{$pkg-prefix}--datagrid;
 .sb-show-main.sb-main-centered #root {
   width: 100%;
   height: 100vh;
-  padding: 2rem;
+  padding: $spacing-07;
 }
 
 .preview-position-fix {

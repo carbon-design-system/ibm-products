@@ -20,12 +20,13 @@ export const InlineEditButton = ({
   placeholder,
   tabIndex = -1,
   nonEditCell,
-  isActiveCell
+  isActiveCell,
 }) => {
   return (
     <div
       className={cx(`${blockClass}__inline-edit-button`, {
-        [`${blockClass}__inline-edit-button--disabled`]: disabled || nonEditCell,
+        [`${blockClass}__inline-edit-button--disabled`]:
+          disabled || nonEditCell,
         [`${blockClass}__inline-edit-button--with-label-icon`]: LabelIcon,
         [`${blockClass}__inline-edit-button--non-edit`]: nonEditCell,
         [`${blockClass}__inline-edit-button--active`]: isActiveCell,
@@ -35,18 +36,22 @@ export const InlineEditButton = ({
       aria-disabled={disabled || nonEditCell}
       role="button"
     >
-      {
-        LabelIcon && (
-          <div className={`${blockClass}__label-icon`}>
-            <LabelIcon />
-          </div>
-        )
-      }
-      { label !== '' ? <span className={cx(
-        `${blockClass}__inline-edit-button-label`, {
-          [`${blockClass}__inline-edit-button-label-with-icon`]: !nonEditCell // update later to some kind of renderIcon prop
-        }
-        )}>{label}</span> : (<span className={`${blockClass}__placeholder`}>{placeholder}</span>) }
+      {LabelIcon && (
+        <div className={`${blockClass}__label-icon`}>
+          <LabelIcon />
+        </div>
+      )}
+      {label !== '' ? (
+        <span
+          className={cx(`${blockClass}__inline-edit-button-label`, {
+            [`${blockClass}__inline-edit-button-label-with-icon`]: !nonEditCell, // update later to some kind of renderIcon prop
+          })}
+        >
+          {label}
+        </span>
+      ) : (
+        <span className={`${blockClass}__placeholder`}>{placeholder}</span>
+      )}
       {!nonEditCell && (
         <div className={`${blockClass}__inline-edit-button-icon`}>
           <Icon />
@@ -58,8 +63,10 @@ export const InlineEditButton = ({
 
 InlineEditButton.propTypes = {
   disabled: PropTypes.bool,
-  label: PropTypes.string,
+  isActiveCell: PropTypes.bool,
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   labelIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  nonEditCell: PropTypes.bool,
   placeholder: PropTypes.string,
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   tabIndex: PropTypes.number,

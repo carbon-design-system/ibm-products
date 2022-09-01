@@ -14,7 +14,6 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const useInlineEdit = (hooks) => {
   const addInlineEdit = (props, { cell, instance }) => {
-
     const editOptionItem = instance.columns
       .filter((obj) => obj.id === cell.column.id)
       .map((obj) => obj.inlineEdit?.type)

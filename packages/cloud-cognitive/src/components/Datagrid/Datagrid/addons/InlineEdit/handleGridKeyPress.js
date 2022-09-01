@@ -16,13 +16,18 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
   // If we reach this it means that tab was pressed while in
   // edit mode which should not remove the focus from the grid
   if (activeCellId === editId && key === 'Tab') {
-    const inlineEditArea = document.querySelector(`#${instance.tableId} .${blockClass}__table-with-inline-edit`);
+    event.preventDefault();
+    const inlineEditArea = document.querySelector(
+      `#${instance.tableId} .${blockClass}__table-with-inline-edit`
+    );
     inlineEditArea.focus();
     return;
   }
 
   // Stop grid key listener when in edit mode
-  const isEditing = document.activeElement.id === activeCellId && document.activeElement.id === editId;
+  const isEditing =
+    document.activeElement.id === activeCellId &&
+    document.activeElement.id === editId;
   if (isEditing || !gridActive) {
     return;
   }
@@ -32,24 +37,21 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
   }
   // Prevent arrow keys, home key, and end key from scrolling the page when the data spreadsheet container has focus
   if (
-    [
-      'End',
-      'Home',
-      'ArrowLeft',
-      'ArrowUp',
-      'ArrowRight',
-      'ArrowDown',
-    ].indexOf(key) > -1 &&
+    ['End', 'Home', 'ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'].indexOf(
+      key
+    ) > -1 &&
     !isEditing
   ) {
     event.preventDefault();
   }
-  const focusedCell = document.querySelector(`#${instance.tableId} .${blockClass}__table-with-inline-edit [data-cell-id="${activeCellId}"]`);
+  const focusedCell = document.querySelector(
+    `#${instance.tableId} .${blockClass}__table-with-inline-edit [data-cell-id="${activeCellId}"]`
+  );
   const isDisabledCell = !!focusedCell.getAttribute('data-disabled');
   const sharedUpdateParams = {
     oldId: activeCellId,
     instance,
-  }
+  };
   switch (key) {
     case 'Tab': {
       if (editId) {
@@ -61,31 +63,43 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
       break;
     }
     case 'ArrowRight': {
-      dispatch({ type: 'UPDATE_ACTIVE_CELL_ID', payload: {
-        direction: 'right',
-        ...sharedUpdateParams
-      }});
+      dispatch({
+        type: 'UPDATE_ACTIVE_CELL_ID',
+        payload: {
+          direction: 'right',
+          ...sharedUpdateParams,
+        },
+      });
       break;
     }
     case 'ArrowLeft': {
-      dispatch({ type: 'UPDATE_ACTIVE_CELL_ID', payload: {
-        direction: 'left',
-        ...sharedUpdateParams
-      }});
+      dispatch({
+        type: 'UPDATE_ACTIVE_CELL_ID',
+        payload: {
+          direction: 'left',
+          ...sharedUpdateParams,
+        },
+      });
       break;
     }
     case 'ArrowUp': {
-      dispatch({ type: 'UPDATE_ACTIVE_CELL_ID', payload: {
-        direction: 'up',
-        ...sharedUpdateParams
-      }});
+      dispatch({
+        type: 'UPDATE_ACTIVE_CELL_ID',
+        payload: {
+          direction: 'up',
+          ...sharedUpdateParams,
+        },
+      });
       break;
     }
     case 'ArrowDown': {
-      dispatch({ type: 'UPDATE_ACTIVE_CELL_ID', payload: {
-        direction: 'down',
-        ...sharedUpdateParams
-      }});
+      dispatch({
+        type: 'UPDATE_ACTIVE_CELL_ID',
+        payload: {
+          direction: 'down',
+          ...sharedUpdateParams,
+        },
+      });
       break;
     }
     case 'Enter': {
@@ -95,11 +109,14 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
       }
       // Only go into edit mode if there is no editId, meaning that we're not already in edit mode
       if (!editId) {
-        dispatch({ type: 'ENTER_EDIT_MODE', payload: {
-          activeCellId,
-          editId: activeCellId
-        } })
+        dispatch({
+          type: 'ENTER_EDIT_MODE',
+          payload: {
+            activeCellId,
+            editId: activeCellId,
+          },
+        });
       }
     }
   }
-}
+};

@@ -9,17 +9,19 @@
 // update cell coordinates more easily
 export const getCellIdAsObject = (oldId) => {
   const oldIdArr = oldId.split('-');
-  const updatedOldValuesArray = oldIdArr.map(item => {
+  const updatedOldValuesArray = oldIdArr.map((item) => {
     if (isNaN(item)) {
-      return item
+      return item;
     }
     return Number(item);
   });
   const indexArray = updatedOldValuesArray.filter(Number.isFinite);
-  const keyArray = updatedOldValuesArray.filter(item => typeof item === 'string');
-  const activeCellCoords = {}
+  const keyArray = updatedOldValuesArray.filter(
+    (item) => typeof item === 'string'
+  );
+  const activeCellCoords = {};
   keyArray.forEach((element, index) => {
     activeCellCoords[element] = indexArray[index];
   });
   return activeCellCoords;
-}
+};

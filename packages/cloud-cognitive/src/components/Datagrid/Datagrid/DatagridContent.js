@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import cx from 'classnames';
+import PropTypes from 'prop-types';
 import { DataTable } from 'carbon-components-react';
 import DatagridHead from './DatagridHead';
 import DatagridBody from './DatagridBody';
@@ -13,8 +14,8 @@ const { TableContainer, Table } = DataTable;
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-export const DatagridContent = ({datagridState}) => {
-  const {state, dispatch} = useContext(InlineEditContext);
+export const DatagridContent = ({ datagridState }) => {
+  const { state, dispatch } = useContext(InlineEditContext);
   const {
     getTableProps = () => {},
     withVirtualScroll,
@@ -28,7 +29,7 @@ export const DatagridContent = ({datagridState}) => {
     gridTitle,
     gridDescription,
     useDenseHeader,
-    withInlineEdit
+    withInlineEdit,
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
@@ -65,10 +66,17 @@ export const DatagridContent = ({datagridState}) => {
               { [`${blockClass}__table-grid-active`]: gridActive },
               getTableProps()?.className
             )}
-            role={withInlineEdit && "grid"}
+            role={withInlineEdit && 'grid'}
             tabIndex={withInlineEdit && 0}
-            onKeyDown={withInlineEdit ? event => handleGridKeyPress(event, dispatch, state, datagridState) : null}
-            onFocus={withInlineEdit ? () => handleGridFocus(state, dispatch) : null}
+            onKeyDown={
+              withInlineEdit
+                ? (event) =>
+                    handleGridKeyPress(event, dispatch, state, datagridState)
+                : null
+            }
+            onFocus={
+              withInlineEdit ? () => handleGridFocus(state, dispatch) : null
+            }
           >
             <DatagridHead {...datagridState} />
             <DatagridBody {...datagridState} rows={rows} />
@@ -84,4 +92,24 @@ export const DatagridContent = ({datagridState}) => {
       )}
     </>
   );
+};
+
+DatagridContent.propTypes = {
+  datagridState: PropTypes.shape({
+    getTableProps: PropTypes.func,
+    withVirtualScroll: PropTypes.bool,
+    DatagridPagination: PropTypes.element,
+    CustomizeColumnsModal: PropTypes.element,
+    isFetching: PropTypes.bool,
+    leftPanel: PropTypes.object,
+    fullHeightDatagrid: PropTypes.bool,
+    variableRowHeight: PropTypes.bool,
+    useDenseHeader: PropTypes.bool,
+    withInlineEdit: PropTypes.bool,
+    verticalAlign: PropTypes.string,
+    gridTitle: PropTypes.node,
+    gridDescription: PropTypes.node,
+    page: PropTypes.arrayOf(PropTypes.object),
+    rows: PropTypes.arrayOf(PropTypes.object),
+  }),
 };

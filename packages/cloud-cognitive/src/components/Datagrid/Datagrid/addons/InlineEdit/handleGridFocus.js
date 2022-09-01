@@ -11,7 +11,7 @@ export const handleGridFocus = (state, dispatch) => {
     // Initialize grid active state
     dispatch({
       type: 'ADD_GRID_ACTIVE_FOCUS',
-      payload: 'column-0-row-0'
+      payload: 'column-0-row-0',
     });
   }
-}
+};

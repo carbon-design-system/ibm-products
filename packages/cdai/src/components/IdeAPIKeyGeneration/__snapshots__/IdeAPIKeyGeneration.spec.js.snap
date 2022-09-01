@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`IdeAPIKeyGeneration unit tests IdeAPIKeyGeneration tolerates no props being provided, and renders with defaults 1`] = `
-Array [
+[
   <Modal
     aria-label="Generate API key"
     className="ide-api-key-generation "

@@ -195,7 +195,6 @@
         transform: $panel__transform;
         transition: all $duration--moderate-02
           carbon--motion($name: exit, $mode: expressive);
-
         @media (prefers-reduced-motion: reduce) {
           transition: none;
         }

@@ -7,7 +7,6 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { useColumnOrder } from 'react-table';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
@@ -41,6 +40,7 @@ import {
   useColumnCenterAlign,
   useStickyColumn,
   useActionsColumn,
+  useColumnOrder,
 } from '.';
 
 import {
@@ -48,7 +48,7 @@ import {
   RowSizeDropdownStory,
   // SelectAllWithToggle,
   LeftPanelStory,
-} from './Datagrid.stories-helpers';
+} from './Datagrid.stories';
 import mdx from './Datagrid.mdx';
 
 import { pkg } from '../../settings';
@@ -56,6 +56,7 @@ import cx from 'classnames';
 
 import styles from './_storybook-styles.scss';
 import { SidePanel } from '../SidePanel';
+import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -98,7 +99,6 @@ const defaultHeader = [
   {
     Header: 'First Name',
     accessor: 'firstName',
-    sticky: 'left',
   },
   {
     Header: 'Last Name',
@@ -547,8 +547,12 @@ export const SelectableRow = () => {
     {
       columns,
       data,
+      DatagridActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
     },
-    useSelectRows
+    useSelectRows,
+    useStickyColumn
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -570,7 +574,8 @@ export const RadioSelect = () => {
         },
       },
     },
-    useSelectRows
+    useSelectRows,
+    useStickyColumn
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -778,6 +783,23 @@ const DatagridActions = (datagridState) => {
               <CustomizeColumnsButton />
             </div>
           )}
+          <ButtonMenu
+            label="Primary button"
+            renderIcon={(props) => <Add size={16} {...props} />}
+          >
+            <ButtonMenuItem
+              itemText="Option 1"
+              onClick={action(`Click on ButtonMenu Option 1`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 2"
+              onClick={action(`Click on ButtonMenu Option 2`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 3"
+              onClick={action(`Click on ButtonMenu Option 3`)}
+            />
+          </ButtonMenu>
         </TableToolbarContent>
       </>
     ))
@@ -1183,6 +1205,10 @@ export const StickyActionsColumn = () => {
     {
       columns,
       data,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
+      DatagridActions,
+      DatagridBatchActions,
       rowActions: [
         {
           id: 'edit',
@@ -1212,7 +1238,9 @@ export const StickyActionsColumn = () => {
       ],
     },
     useStickyColumn,
-    useActionsColumn
+    useActionsColumn,
+    useSelectRows,
+    useSelectAllWithToggle
   );
   return (
     <Wrapper>

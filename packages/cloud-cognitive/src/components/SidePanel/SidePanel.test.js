@@ -15,7 +15,7 @@ import { TextInput } from '@carbon/react';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { SidePanel } from '.';
-import { Add16 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 
 const { prefix } = pkg;
 
@@ -365,7 +365,7 @@ describe('SidePanel', () => {
         },
         {
           label: 'Copy 2',
-          icon: Add16,
+          icon: (props) => <Add size={16} {...props} />,
           onClick: toolbarButtonFn2,
         },
       ],

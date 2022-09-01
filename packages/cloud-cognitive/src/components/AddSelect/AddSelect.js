@@ -8,10 +8,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { AddSelectBody } from './AddSelectBody';
-import { pkg } from '../../settings';
 import { normalize, getGlobalFilterValues } from './add-select-utils';
-
-const blockClass = `${pkg.prefix}--add-select`;
 const componentName = 'AddSelect';
 
 export let AddSelect = forwardRef(({ items, globalFilters, ...props }, ref) => {
@@ -34,7 +31,6 @@ export let AddSelect = forwardRef(({ items, globalFilters, ...props }, ref) => {
   return (
     <AddSelectBody
       {...props}
-      className={blockClass}
       ref={ref}
       items={items}
       normalizedItems={normalizedItems}

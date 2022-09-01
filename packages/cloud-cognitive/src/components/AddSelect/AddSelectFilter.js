@@ -6,7 +6,7 @@
 //
 
 import React, { useState } from 'react';
-import { Button, ButtonSet, Dropdown, TextInput, Tag } from '@carbon/react';
+import { Button, ButtonSet, Dropdown, Search, Tag } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { Filter } from '@carbon/icons-react';
@@ -86,7 +86,7 @@ export let AddSelectFilter = ({
   return (
     <>
       <div className={`${blockClass}-search`}>
-        <TextInput
+        <Search
           id="temp-id"
           labelText={inputLabel}
           placeholder={inputPlaceholder}
@@ -101,7 +101,8 @@ export let AddSelectFilter = ({
             onClick={() => setOpen(!open)}
             iconDescription={iconDescription}
             className={filterBtnClassnames}
-            size="md"
+            size="lg"
+            tooltipPosition="left"
           />
         )}
         {open && (

@@ -61,6 +61,7 @@ const singleProps = {
   onSubmitButtonText: 'submit selections',
   searchResultsLabel: 'Search results',
   title: 'Select category',
+  onClose: () => {},
 };
 
 const hierarchyItems = {
@@ -135,6 +136,7 @@ const multiProps = {
   onSubmitButtonText: 'Add',
   searchResultsLabel: 'Search results',
   title: 'Add business terms',
+  onClose: () => {},
 };
 
 const propsWithModifiers = {

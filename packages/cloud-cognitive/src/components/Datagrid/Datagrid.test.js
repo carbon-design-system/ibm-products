@@ -28,9 +28,9 @@ import {
   useRowIsMouseOver,
   useStickyColumn,
   useActionsColumn,
+  useColumnOrder,
 } from '.';
 
-import { useColumnOrder } from 'react-table';
 import {
   DataTable,
   Button,
@@ -2039,7 +2039,7 @@ describe(componentName, () => {
 
     const customizeColumnsButton = screen.getByLabelText('Customize columns');
     fireEvent.click(customizeColumnsButton);
-    screen.getByText('Customize display');
+    screen.getByText(/Customize Columns/);
   });
 
   it('Top Alignment', () => {

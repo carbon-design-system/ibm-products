@@ -78,6 +78,19 @@ export let AddSelectBody = ({
   const { parentSelected, setParentSelected } = useParentSelect();
   const { path, setPath, pathOnclick } = usePath(itemsLabel);
 
+  const resetState = () => {
+    setSingleSelection('');
+    setMultiSelection([]);
+    setSearchTerm('');
+    setAppliedGlobalFilters({});
+    setDisplayMetaPanel({});
+  };
+
+  const onCloseHandler = () => {
+    resetState();
+    onClose();
+  };
+
   const classNames = cx(className, blockClass, {
     [`${blockClass}__single`]: !multi,
     [`${blockClass}__multi`]: multi,
@@ -106,6 +119,7 @@ export let AddSelectBody = ({
     } else {
       onSubmit(singleSelection);
     }
+    onCloseHandler();
   };
 
   const setShowBreadsCrumbs = () => {
@@ -149,6 +163,7 @@ export let AddSelectBody = ({
   const showTags = setShowTags();
 
   const commonListProps = {
+    displayMetalPanel,
     metaIconDescription,
     multi,
     multiSelection,
@@ -172,7 +187,7 @@ export let AddSelectBody = ({
       {
         label: onCloseButtonText,
         kind: 'secondary',
-        onClick: onClose,
+        onClick: onCloseHandler,
       },
       {
         label: onSubmitButtonText,
@@ -221,10 +236,18 @@ export let AddSelectBody = ({
           hasFiltersApplied={globalFiltersApplied}
           clearFiltersText={clearFiltersText}
         />
-        <div className={`${blockClass}__sub-header`}>
+        <div
+          className={cx(`${blockClass}__sub-header`, {
+            [`${blockClass}__sub-header-multi`]: multi,
+          })}
+        >
           <div className={`${blockClass}__tag-container`}>
             {showBreadsCrumbs ? (
-              <AddSelectBreadcrumbs path={path} onClick={pathOnclick} />
+              <AddSelectBreadcrumbs
+                path={path}
+                onClick={pathOnclick}
+                multi={multi}
+              />
             ) : (
               <p className={`${blockClass}__tag-container-label`}>
                 {searchTerm ? searchResultsLabel : itemsLabel}

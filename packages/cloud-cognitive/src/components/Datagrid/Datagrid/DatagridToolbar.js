@@ -156,14 +156,14 @@ const DatagridToolbar = (datagridState) => {
           DatagridBatchActionsToolbar(datagridState, width, ref)}
       </TableToolbar>
     </div>
-  ) : (
+  ) : DatagridActions ? (
     <div className={`${blockClass}__table-toolbar`}>
       <TableToolbar>
         {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
     </div>
-  );
+  ) : null;
 };
 
 export default DatagridToolbar;

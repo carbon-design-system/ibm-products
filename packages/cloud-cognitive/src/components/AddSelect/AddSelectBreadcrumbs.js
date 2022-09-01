@@ -8,16 +8,23 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem } from '@carbon/react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
+import { pkg } from '../../settings';
 
+const blockClass = `${pkg.prefix}--add-select__breadcrumbs`;
 const componentName = 'AddSelectBreadcrumbs';
 
-export let AddSelectBreadcrumbs = ({ path, onClick }) => {
+export let AddSelectBreadcrumbs = ({ multi, onClick, path }) => {
   const clickHandler = (idx) => {
     onClick(idx);
   };
 
+  const classNames = cx(blockClass, {
+    [`${blockClass}-multi`]: multi,
+  });
+
   return (
-    <Breadcrumb noTrailingSlash>
+    <Breadcrumb noTrailingSlash className={classNames}>
       {path.map((entry, idx) => {
         const isCurrentPage = idx === path.length - 1;
         return (
@@ -35,6 +42,7 @@ export let AddSelectBreadcrumbs = ({ path, onClick }) => {
 };
 
 AddSelectBreadcrumbs.propTypes = {
+  multi: PropTypes.bool,
   onClick: PropTypes.func,
   path: PropTypes.array,
 };

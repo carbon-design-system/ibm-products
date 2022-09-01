@@ -30,6 +30,7 @@ const DraggableElement = ({
   onArrowKeyDown,
   isFocused,
   moveElement,
+  selected,
   positionLabel = 'Current position {index} of {total}',
   grabbedLabel = '{itemName} grabbed.',
   droppedLabel = '{itemName} dropped.',
@@ -98,15 +99,12 @@ const DraggableElement = ({
   );
   return (
     <li
-      className={cx(
-        {
-          [`${blockClass}__draggable-handleHolder-isOver`]: isOver && !disabled,
-        },
-        {
-          [`${blockClass}__wkc-draggable-handleHolder--grabbed`]: isGrabbed,
-        },
-        `${blockClass}__draggable-handleHolder`
-      )}
+      className={cx({
+        [`${blockClass}__draggable-handleHolder-isOver`]: isOver && !disabled,
+        [`${blockClass}__draggable-handleHolder-grabbed`]: isGrabbed,
+        [`${blockClass}__draggable-handleHolder-selected`]: selected,
+        [`${blockClass}__draggable-handleHolder`]: !selected,
+      })}
       ref={ref}
       aria-selected={isFocused}
       role="option"
@@ -180,6 +178,7 @@ DraggableElement.propTypes = {
   onArrowKeyDown: PropTypes.func.isRequired,
   onGrab: PropTypes.func.isRequired,
   positionLabel: PropTypes.string,
+  selected: PropTypes.bool,
   type: PropTypes.string.isRequired,
 };
 

@@ -26,14 +26,31 @@ svg.#{variables.$block-class}__draggable-handleStyle.disable {
 
 .#{variables.$block-class}__draggable-handleHolder {
   display: flex;
-  height: $spacing-07;
-  padding-left: $spacing-02;
-  margin-bottom: $spacing-03;
-  background: $layer-02;
-  &.#{variables.$block-class}__draggable-handleHolder-isOver {
-    border: 2px dashed $focus;
-    background-color: $highlight;
-  }
+  height: $spacing-09;
+  padding-left: $spacing-05;
+  border-bottom: 1px solid $layer-active;
+  background-color: $layer;
+}
+
+.#{variables.$block-class}__draggable-handleHolder:hover {
+  background-color: $layer-hover;
+}
+
+.#{variables.$block-class}__draggable-handleHolder-selected {
+  display: flex;
+  height: $spacing-09;
+  padding-left: $spacing-05;
+  border-bottom: 1px solid $layer-active;
+  background-color: $layer-selected;
+}
+
+.#{variables.$block-class}__draggable-handleHolder-selected:hover {
+  background-color: $layer-selected-hover-01;
+}
+
+.#{variables.$block-class}__draggable-handleHolder-isOver {
+  border: 2px dashed $focus;
+  background-color: $layer-selected-hover-01;
 }
 
 .#{variables.$block-class}__draggable-handleHolder-droppable {
@@ -41,7 +58,7 @@ svg.#{variables.$block-class}__draggable-handleStyle.disable {
   width: 100%;
 }
 
-.#{variables.$block-class}__draggable-handleHolder--grabbed {
+.#{variables.$block-class}__draggable-handleHolder-grabbed {
   background-color: $highlight;
   color: $text-primary;
 }

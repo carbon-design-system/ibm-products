@@ -13,7 +13,6 @@ import {
   StructuredListRow,
   StructuredListWrapper,
   StructuredListBody,
-  StructuredListCell,
   Dropdown,
 } from '@carbon/react';
 import { ChevronRight, View } from '@carbon/icons-react';
@@ -27,6 +26,7 @@ const componentName = 'AddSelectList';
 
 export let AddSelectList = ({
   appliedModifiers,
+  displayMetalPanel,
   filteredItems,
   metaIconDescription,
   modifiers,
@@ -47,7 +47,7 @@ export let AddSelectList = ({
     setSingleSelection(value);
   };
 
-  const handleMultiSelection = (id, checked) => {
+  const handleMultiSelection = (event, { checked, id }) => {
     if (checked) {
       const newValues = [...multiSelection, id];
       setMultiSelection(newValues);
@@ -61,7 +61,12 @@ export let AddSelectList = ({
     setParentSelected(id, title, parentId);
   };
 
-  const isSelected = (id) => multiSelection.includes(id);
+  const isSelected = (id) => {
+    if (multi) {
+      return multiSelection.includes(id);
+    }
+    return id === singleSelection;
+  };
 
   const getAvatarProps = ({ src, alt, icon, backgroundColor }) => ({
     className: `${blockClass}-cell-avatar`,
@@ -85,8 +90,20 @@ export let AddSelectList = ({
     setAppliedModifiers(modifiersClone);
   };
 
+  const metaPanelHandler = (item) => {
+    if (item.meta) {
+      setDisplayMetaPanel(item);
+    }
+  };
+
+  const isInMetaPanel = (id) => id === displayMetalPanel?.id;
+
   return (
-    <div className={`${blockClass}-wrapper`}>
+    <div
+      className={cx(`${blockClass}-wrapper`, {
+        [`${blockClass}-wrapper-multi`]: multi,
+      })}
+    >
       <StructuredListWrapper selection className={`${blockClass}`}>
         <StructuredListBody>
           {filteredItems.map((item) => (
@@ -94,22 +111,37 @@ export let AddSelectList = ({
               key={item.id}
               className={cx(`${blockClass}-row`, {
                 [`${blockClass}-row-selected`]: isSelected(item.id),
+                [`${blockClass}-row-meta-selected`]: isInMetaPanel(item.id),
               })}
             >
-              <StructuredListCell className={`${blockClass}-cell`}>
+              <div
+                className={`${blockClass}-cell`}
+                onClick={() => {
+                  metaPanelHandler(item);
+                }}
+                onKeyDown={() => {
+                  metaPanelHandler(item);
+                }}
+                role="button"
+                tabIndex="0"
+              >
                 <div className={`${blockClass}-cell-wrapper`}>
                   {multi ? (
                     <>
                       <div className={`${blockClass}-checkbox`}>
-                        <Checkbox
-                          onChange={(event, { checked }) =>
-                            handleMultiSelection(item.id, checked)
-                          }
-                          labelText={item.title}
-                          id={item.id}
-                          checked={isSelected(item.id)}
-                          className={`${blockClass}-checkbox-wrapper`}
-                        />
+                        {
+                          // hacky way to prevent checkbox from triggering the meta onclick handler
+                          // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+                          <div onClick={(event) => event.stopPropagation()}>
+                            <Checkbox
+                              onChange={handleMultiSelection}
+                              labelText={item.title}
+                              id={item.id}
+                              checked={isSelected(item.id)}
+                              className={`${blockClass}-checkbox-wrapper`}
+                            />
+                          </div>
+                        }
                         <div className={`${blockClass}-checkbox-label-wrapper`}>
                           {item.avatar && (
                             <UserProfileImage
@@ -157,7 +189,7 @@ export let AddSelectList = ({
                       value={item.value}
                       labelText={item.title}
                       onChange={() => handleSingleSelection(item.id)}
-                      selected={item.id === singleSelection}
+                      checked={isSelected(item.id)}
                     />
                   )}
                   {item.children && (
@@ -184,14 +216,13 @@ export let AddSelectList = ({
                         tooltipPosition="left"
                         tooltipAlignment="center"
                         hasIconOnly
-                        onClick={() => setDisplayMetaPanel(item)}
                         kind="ghost"
                         size="sm"
                       />
                     </div>
                   )}
                 </div>
-              </StructuredListCell>
+              </div>
             </StructuredListRow>
           ))}
         </StructuredListBody>
@@ -202,6 +233,7 @@ export let AddSelectList = ({
 
 AddSelectList.propTypes = {
   appliedModifiers: PropTypes.array,
+  displayMetalPanel: PropTypes.object,
   filteredItems: PropTypes.array,
   metaIconDescription: PropTypes.string,
   modifiers: PropTypes.object,

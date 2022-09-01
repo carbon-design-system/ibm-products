@@ -39,6 +39,11 @@
         align-items: center;
         color: $text-primary;
       }
+      .#{$block-class}__head-select-all.#{$block-class}__checkbox-cell.#{$block-class}__checkbox-cell-sticky-left {
+        position: sticky;
+        z-index: 1;
+        left: 0;
+      }
     }
 
     .#{$block-class}__cell {
@@ -56,6 +61,10 @@
         display: flex;
         align-items: center;
         padding-top: 0;
+      }
+      &.#{$block-class}__checkbox-cell-sticky-left {
+        position: sticky;
+        left: 0;
       }
     }
 
@@ -157,9 +166,12 @@
     overflow-x: auto;
   }
 
-  .#{$block-class}__table-simple {
-    overflow: hidden;
+  table.#{$block-class}__table-simple {
+    display: flex;
+    overflow: auto;
     max-height: 100%;
+    flex-direction: column;
+    background-color: $layer-01;
   }
 
   .#{$block-class}__head {
@@ -311,6 +323,12 @@
 
 .#{$block-class}__head-hidden-select-all {
   padding-right: $spacing-08;
+  &.#{$block-class}__select-all-sticky-left {
+    position: sticky;
+    z-index: 1;
+    left: 0;
+    background-color: $layer-accent-01;
+  }
 }
 
 .#{$block-class}__simple-body {
@@ -336,14 +354,6 @@
   min-width: 0 !important;
 }
 
-.#{$block-class}__table-simple::-webkit-scrollbar {
-  width: 6px;
-  background-color: $background;
-}
-
-.#{$block-class}__table-simple::-webkit-scrollbar-thumb {
-  background-color: $text-placeholder;
-}
 .#{$block-class}__sticky.#{$block-class}__simple-body {
   overflow: auto;
 }
@@ -509,8 +519,11 @@
   justify-content: center;
   padding: 0;
   margin: 0;
-
   .#{c4p-settings.$carbon-prefix}--btn__icon {
     margin: 0;
   }
+}
+
+.#{$block-class} .#{c4p-settings.$pkg-prefix}--button-menu {
+  height: $spacing-09;
 }

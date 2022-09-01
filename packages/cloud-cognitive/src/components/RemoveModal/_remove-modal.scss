@@ -25,10 +25,6 @@
     padding-right: $spacing-05;
   }
 
-  .#{$block-class} .#{$carbon-prefix}--modal-close {
-    display: none;
-  }
-
   .#{$block-class}__body {
     padding-right: 20%;
     margin-bottom: $spacing-05;

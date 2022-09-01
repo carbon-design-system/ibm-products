@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// Iterates through a numeric range and calls callback
+// function for each iteration
 export const rangeWithCallback = (start, end, fn) => {
   for (let i = start; i <= end; i++) {
     fn(i);

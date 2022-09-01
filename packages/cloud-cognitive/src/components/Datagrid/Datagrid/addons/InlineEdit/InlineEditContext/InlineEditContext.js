@@ -48,7 +48,8 @@ const inlineEditReducer = (state, action) => {
       if (!action.payload.direction) {
         return {
           ...state,
-          activeCellId: action.payload
+          activeCellId: action.payload,
+          editId: null,
         }
       }
       if (direction && typeof direction === 'string') {

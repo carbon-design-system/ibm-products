@@ -95,10 +95,16 @@ export const InlineEditText = ({
 
       switch (key) {
         // Save cell contents to data
+        case 'Tab':
         case 'Enter': {
           if (inEditMode) {
+            const totalRows = instance.rows.length;
+            const newCellId =
+              key === 'Enter'
+                ? `column-${columnIndex}-row-${cell.row.index < totalRows - 1 ? cell.row.index + 1 : cell.row.index}`
+                : `column-${columnIndex < instance.columns.length - 1 ? columnIndex + 1 : columnIndex}-row-${cell.row.index}`
             saveCellData(cellValue);
-            dispatch({ type: 'EXIT_EDIT_MODE', payload: cellId });
+            dispatch({ type: 'EXIT_EDIT_MODE', payload: newCellId });
             setInEditMode(false);
             sendFocusBackToGrid();
           }

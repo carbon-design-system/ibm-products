@@ -12,8 +12,17 @@ const blockClass = `${pkg.prefix}--datagrid`;
 export const handleGridKeyPress = (event, dispatch, state, instance) => {
   const { key } = event;
   const { gridActive, activeCellId, editId } = state;
+
+  // If we reach this it means that tab was pressed while in
+  // edit mode which should not remove the focus from the grid
+  if (activeCellId === editId && key === 'Tab') {
+    const inlineEditArea = document.querySelector(`#${instance.tableId} .${blockClass}__table-with-inline-edit`);
+    inlineEditArea.focus();
+    return;
+  }
+
   // Stop grid key listener when in edit mode
-  const isEditing = document.activeElement.id === activeCellId;
+  const isEditing = document.activeElement.id === activeCellId && document.activeElement.id === editId;
   if (isEditing || !gridActive) {
     return;
   }
@@ -43,7 +52,12 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
   }
   switch (key) {
     case 'Tab': {
-      dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS' });
+      if (editId) {
+        return;
+      }
+      if (!editId) {
+        dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS' });
+      }
       break;
     }
     case 'ArrowRight': {

@@ -6,9 +6,12 @@
  */
 
 export const handleGridFocus = (state, dispatch) => {
-  const activeCellPresent = !!state?.activeCellId;
-  dispatch({
-    type: 'ADD_GRID_ACTIVE_FOCUS',
-    payload: activeCellPresent ? state.activeCellId : 'column-0-row-0'
-  });
+  const { gridActive } = state;
+  if (!gridActive) {
+    // Initialize grid active state
+    dispatch({
+      type: 'ADD_GRID_ACTIVE_FOCUS',
+      payload: 'column-0-row-0'
+    });
+  }
 }

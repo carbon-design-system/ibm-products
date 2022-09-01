@@ -42,10 +42,6 @@ $row-heights: (
   transform: translateX(calc(-1 * #{$spacing-05}));
 }
 
-.#{$block-class}__inline-edit-cell:hover {
-  background-color: $active-ui;
-}
-
 .#{$block-class} .#{$pkg-prefix}--inline-edit__after-input-elements {
   display: flex;
   align-items: center;
@@ -65,27 +61,38 @@ $row-heights: (
   align-items: center;
   justify-content: space-between;
   padding-left: $spacing-05;
+  color: $text-02;
   cursor: pointer;
   outline: 0; // handled by active class
   &.#{$block-class}__inline-edit-button--non-edit {
     padding-left: 0;
   }
+  .#{$block-class}__inline-edit-button-icon {
+    fill: $icon-02;
+  }
 }
 
 .#{$block-class}__inline-edit--outer-cell-button
   .#{$block-class}__inline-edit-button:hover {
-  background-color: $field-02;
+  background-color: $hover-selected-ui;
+  color: $text-01;
+  .#{$block-class}__inline-edit-button-icon {
+    fill: $icon-01;
+  }
 }
 
 .#{$block-class}__inline-edit--outer-cell-button
   .#{$block-class}__inline-edit-button.#{$block-class}__inline-edit-button--active {
   @include input-outline;
+
+  background-color: $active-ui;
+  color: $text-01;
+  cursor: text;
 }
 
 .#{$block-class}__inline-edit--outer-cell-button
   .#{$block-class}__inline-edit-button--disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
+  color: $disabled-02;
   pointer-events: none;
 }
 

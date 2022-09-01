@@ -27,6 +27,11 @@ const CustomizeColumnsModal = ({
   primaryButtonTextLabel = 'Save',
   secondaryButtonTextLabel = 'Cancel',
   instructionsLabel = 'Select columns to display them. Click and drag the box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
+  findColumnPlaceholderLabel = 'Find column',
+  resetToDefaultLabel = 'Reset to default',
+  assistiveTextInstructionsLabel = 'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
+  assistiveTextDisabledInstructionsLabel = 'Reordering columns are disabled because they are filtered currently.',
+  selectAllLabel = 'Column name',
 }) => {
   const [visibleColumnsCount, setVisibleColumnsCount] = useState('');
   const [totalColumns, setTotalColumns] = useState('');
@@ -121,9 +126,15 @@ const CustomizeColumnsModal = ({
           setDirty();
         }}
         setSearchText={setSearchText}
+        findColumnPlaceholderLabel={findColumnPlaceholderLabel}
+        resetToDefaultLabel={resetToDefaultLabel}
       />
       {isOpen && (
         <Columns
+          assistiveTextInstructionsLabel={assistiveTextInstructionsLabel}
+          assistiveTextDisabledInstructionsLabel={
+            assistiveTextDisabledInstructionsLabel
+          }
           getVisibleColumnsCount={getVisibleColumnsCount}
           columns={columnObjects}
           filterString={string}
@@ -132,6 +143,7 @@ const CustomizeColumnsModal = ({
             setColumnObjects(cols);
             setDirty();
           }}
+          selectAllLabel={selectAllLabel}
         />
       )}
     </Modal>
@@ -139,14 +151,19 @@ const CustomizeColumnsModal = ({
 };
 
 CustomizeColumnsModal.propTypes = {
+  assistiveTextDisabledInstructionsLabel: PropTypes.string,
+  assistiveTextInstructionsLabel: PropTypes.string,
   columnDefinitions: PropTypes.array.isRequired,
   customizeModalHeadingLabel: PropTypes.string,
+  findColumnPlaceholderLabel: PropTypes.string,
   instructionsLabel: PropTypes.string,
   isOpen: PropTypes.bool.isRequired,
   onSaveColumnPrefs: PropTypes.func.isRequired,
   originalColumnDefinitions: PropTypes.array.isRequired,
   primaryButtonTextLabel: PropTypes.string,
+  resetToDefaultLabel: PropTypes.string,
   secondaryButtonTextLabel: PropTypes.string,
+  selectAllLabel: PropTypes.string,
   setIsModalOpen: PropTypes.func.isRequired,
 };
 

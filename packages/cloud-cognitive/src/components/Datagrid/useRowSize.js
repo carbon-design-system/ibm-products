@@ -12,11 +12,13 @@ import { RowSizeDropdown } from './Datagrid/addons/RowSize';
 const useRowSize = (hooks) => {
   const [internalRowSize, setRowSize] = useState('');
   hooks.useInstance.push((instance) => {
-    const { rowSizes, rowSize, onRowSizeChange } = instance;
+    const { rowSizeProps, rowSizes, rowSize, onRowSizeChange } = instance;
+    const { labels } = rowSizeProps || {};
     Object.assign(instance, {
       rowSize: internalRowSize || rowSize,
       rowSizeDropdownProps: {
         rowSizes,
+        ...labels,
         selectedOption: internalRowSize || rowSize,
         onChange: (value) => {
           setRowSize(value);

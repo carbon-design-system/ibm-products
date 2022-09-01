@@ -417,6 +417,13 @@ export let DataSpreadsheet = React.forwardRef(
             usingMac,
           });
         }
+        const deleteParams = {
+          selectionAreas,
+          currentMatcher,
+          rows,
+          setActiveCellContent,
+          updateData,
+        };
         // Allow arrow key navigation if there are less than two activeKeys OR
         // if one of the activeCellCoordinates is in a header position
         if (
@@ -427,24 +434,12 @@ export let DataSpreadsheet = React.forwardRef(
           switch (key) {
             // Backspace
             case 'Backspace': {
-              handleCellDeletion({
-                selectionAreas,
-                currentMatcher,
-                rows,
-                setActiveCellContent,
-                updateData,
-              });
+              handleCellDeletion(deleteParams);
               break;
             }
             // Delete
             case 'Delete': {
-              handleCellDeletion({
-                selectionAreas,
-                currentMatcher,
-                rows,
-                setActiveCellContent,
-                updateData,
-              });
+              handleCellDeletion(deleteParams);
               break;
             }
             // Enter

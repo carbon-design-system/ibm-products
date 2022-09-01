@@ -344,12 +344,12 @@ IdeCard.propTypes = {
   className: PropTypes.string,
   /** Optional prop - needed in case cardDisabled: true is provided to display the tooltip text */
   disabledText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /** Optional prop - if this is a link which opens in a new tab, explanatory text */
+  externalLinkText: PropTypes.string,
   /** OnClick handler - callback function to model the onClick behaviour of a card*/
   onInteract: PropTypes.func,
   /** Optional prop - set this to "external" to always display the launch out icon */
   secondaryGraphic: PropTypes.oneOf(['external']),
-  /** Optional prop - if this is a link which opens in a new tab, explanatory text */
-  externalLinkText: PropTypes.string,
 };
 
 IdeCard.defaultProps = {

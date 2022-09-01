@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-cdai",
   "description": "Carbon for Cloud & Cognitive CD&AI UI components",
-  "version": "1.22.17",
+  "version": "1.22.18",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -35,7 +35,6 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$)/'"
   },
   "peerDependencies": {
-    "@carbon/elements": "^10.55.0",
     "@carbon/grid": "^10.43.1",
     "@carbon/icons-react": "^10.49.0",
     "carbon-components": "^10.57.2",

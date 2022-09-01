@@ -10,7 +10,7 @@
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[all-contributors-badge]: https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square
+[all-contributors-badge]: https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 
@@ -106,6 +106,7 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/Ratheeshrajan"><img src="https://avatars.githubusercontent.com/u/305492?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ratheesh Rajan</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=Ratheeshrajan" title="Code">💻</a> <a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/pulls?q=is%3Apr+reviewed-by%3ARatheeshrajan" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://janhassel.de"><img src="https://avatars.githubusercontent.com/u/28265588?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jan Hassel</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=janhassel" title="Code">💻</a> <a href="#a11y-janhassel" title="Accessibility">️️️️♿️</a></td>
     <td align="center"><a href="https://github.com/marion-bruells"><img src="https://avatars.githubusercontent.com/u/51152537?v=4?s=100" width="100px;" alt=""/><br /><sub><b>marion-bruells</b></sub></a><br /><a href="#design-marion-bruells" title="Design">🎨</a></td>
+    <td align="center"><a href="https://github.com/kai-liu"><img src="https://avatars.githubusercontent.com/u/105320675?v=4?s=100" width="100px;" alt=""/><br /><sub><b>kai-liu</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=kai-liu" title="Code">💻</a></td>
   </tr>
 </table>
 

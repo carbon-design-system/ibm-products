@@ -5,6 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const handleGridFocus = (dispatch) => {
-  dispatch({ type: 'ADD_GRID_ACTIVE_FOCUS' });
+export const handleGridFocus = (state, dispatch) => {
+  console.log(state);
+  const activeCellPresent = !!state?.activeCellId;
+  dispatch({
+    type: 'ADD_GRID_ACTIVE_FOCUS',
+    payload: activeCellPresent ? state.activeCellId : 'column-0-row-0'
+  });
 }

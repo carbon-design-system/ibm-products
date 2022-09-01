@@ -18,7 +18,7 @@ const inlineEditReducer = (state, action) => {
       return {
         ...state,
         gridActive: true,
-        activeCellId: 'column-0-row-0', // set default active cell when grid receives focus
+        activeCellId: action.payload, // set default active cell when grid receives focus
       }
     }
     case 'REMOVE_GRID_ACTIVE_FOCUS': {

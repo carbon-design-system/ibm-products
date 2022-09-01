@@ -68,7 +68,7 @@ export const DatagridContent = ({datagridState}) => {
             role={withInlineEdit && "grid"}
             tabIndex={withInlineEdit && 0}
             onKeyDown={withInlineEdit ? event => handleGridKeyPress(event, dispatch, state, datagridState) : null}
-            onFocus={withInlineEdit ? () => handleGridFocus(dispatch) : null}
+            onFocus={withInlineEdit ? () => handleGridFocus(state, dispatch) : null}
           >
             <DatagridHead {...datagridState} />
             <DatagridBody {...datagridState} rows={rows} />

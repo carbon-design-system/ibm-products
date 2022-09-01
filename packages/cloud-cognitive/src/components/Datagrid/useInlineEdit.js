@@ -8,16 +8,12 @@
 import React from 'react';
 import { pkg } from '../../settings';
 import cx from 'classnames';
-import { InlineEdit } from '../InlineEdit';
-import { Button } from 'carbon-components-react';
 import { InlineEditText } from './Datagrid/addons/InlineEdit/InlineEditText';
-import uuidv4 from '../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const useInlineEdit = (hooks) => {
   const addInlineEdit = (props, { cell, instance }) => {
-    const { onDataUpdate } = instance;
 
     const editOptionItem = instance.columns
       .filter((obj) => obj.id === cell.column.id)
@@ -25,8 +21,6 @@ const useInlineEdit = (hooks) => {
       .toString();
 
     const columnInlineEditConfig = cell.column.inlineEdit;
-    // console.log(cell);
-    // console.log(cell.row.index);
     return [
       props,
       {
@@ -44,27 +38,7 @@ const useInlineEdit = (hooks) => {
                 instance={instance}
               />
             )}
-            {/* {editOptionItem === 'text' && (
-              <InlineEdit
-                style={{
-                  width: cell.column.totalWidth,
-                }}
-                className={cx({
-                  [`${blockClass}__inline-edit-cell`]: editOptionItem,
-                })}
-                editDescription="Edit cell"
-                onSave={(newValue) => {
-                  saveCellData(newValue);
-                }}
-                onCancel={(value) => {
-                  saveCellData(value);
-                }}
-                cancelDescription="Cancel"
-                saveDescription="Save"
-                value={cell.value}
-              />
-            )} */}
-            {/* Render default cell, if it's column is not inlineEdit */}
+            {/* Render default inline edit cell button, if it's column doesn't have an inline edit configuration */}
             {!editOptionItem && (
               <InlineEditText
                 config={columnInlineEditConfig}

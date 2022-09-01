@@ -6,7 +6,6 @@
  */
 
 export const handleGridFocus = (state, dispatch) => {
-  console.log(state);
   const activeCellPresent = !!state?.activeCellId;
   dispatch({
     type: 'ADD_GRID_ACTIVE_FOCUS',

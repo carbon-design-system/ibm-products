@@ -51,6 +51,8 @@ const defaults = {
     UnauthorizedEmptyState: true,
     UserProfileImage: true,
     WebTerminal: true,
+    WebTerminalContentWrapper: true,
+    WebTerminalProvider: true,
 
     // other public components not yet reviewed and released:
     MultiAddSelect: false,
@@ -59,8 +61,6 @@ const defaults = {
     Toolbar: false,
     ToolbarButton: false,
     ToolbarGroup: false,
-    WebTerminalContentWrapper: false,
-    WebTerminalProvider: false,
     EditSidePanel: false,
     CancelableTextEdit: false,
     DataSpreadsheet: false,

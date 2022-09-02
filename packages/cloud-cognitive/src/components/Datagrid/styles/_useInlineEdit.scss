@@ -24,7 +24,7 @@ $row-heights: (
   .#{$block-class}
     .#{$block-class}__inline-edit--outer-cell-button--#{$size}
     .#{$carbon-prefix}--number
-    input {
+    input[type='number'] {
     height: $size-value;
   }
   .#{$block-class}

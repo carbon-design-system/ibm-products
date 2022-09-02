@@ -85,7 +85,7 @@ $row-heights: (
 }
 
 .#{$block-class}__inline-edit--outer-cell-button
-  .#{$block-class}__inline-edit-button:hover {
+  .#{$block-class}__inline-edit-button:not(.#{$block-class}__inline-edit-button--disabled):hover {
   background-color: $hover-selected-ui;
   color: $text-01;
   .#{$block-class}__inline-edit-button-icon {
@@ -105,7 +105,7 @@ $row-heights: (
 .#{$block-class}__inline-edit--outer-cell-button
   .#{$block-class}__inline-edit-button--disabled {
   color: $disabled-02;
-  pointer-events: none;
+  cursor: not-allowed;
 }
 
 .#{$block-class}__inline-edit--outer-cell-button

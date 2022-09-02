@@ -29,7 +29,8 @@ export const InlineEditButton = ({
           disabled || nonEditCell,
         [`${blockClass}__inline-edit-button--with-label-icon`]: LabelIcon,
         [`${blockClass}__inline-edit-button--non-edit`]: nonEditCell,
-        [`${blockClass}__inline-edit-button--active`]: isActiveCell,
+        [`${blockClass}__inline-edit-button--{active}`]: isActiveCell,
+        [`${blockClass}__inline-edit-button--{disabled}`]: disabled,
       })}
       tabIndex={tabIndex}
       data-disabled={disabled || nonEditCell}

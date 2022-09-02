@@ -85,7 +85,7 @@ $row-heights: (
 }
 
 .#{$block-class}__inline-edit--outer-cell-button
-  .#{$block-class}__inline-edit-button:not(.#{$block-class}__inline-edit-button--disabled):hover {
+  .#{$block-class}__inline-edit-button:not([data-disabled='true']):hover {
   background-color: $hover-selected-ui;
   color: $text-01;
   .#{$block-class}__inline-edit-button-icon {
@@ -94,7 +94,7 @@ $row-heights: (
 }
 
 .#{$block-class}__inline-edit--outer-cell-button
-  .#{$block-class}__inline-edit-button.#{$block-class}__inline-edit-button--active {
+  .#{$block-class}__inline-edit-button.#{$block-class}__inline-edit-button--active:not([data-disabled='true']) {
   @include input-outline;
 
   background-color: $active-ui;

@@ -48,6 +48,17 @@ ProductiveCard = pkg.checkComponentEnabled(ProductiveCard, componentName);
 
 ProductiveCard.propTypes = {
   /**
+   * The icon that's displayed in the action ghost button
+   */
+  actionGhostButtonIcon: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  /**
+   * The text that's displayed in the action ghost button
+   */
+  actionGhostButtonText: PropTypes.string,
+  /**
    * Icons that are displayed on card. Refer to design documentation for implementation guidelines
    */
   actionIcons: PropTypes.arrayOf(
@@ -84,6 +95,10 @@ ProductiveCard.propTypes = {
    * Optional label for the top of the card
    */
   label: PropTypes.string,
+  /**
+   * Function that's called from the action ghost button
+   */
+  onActionGhostButtonClick: PropTypes.func,
   /**
    * Provides the callback for a clickable card
    */

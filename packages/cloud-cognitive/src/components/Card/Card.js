@@ -37,6 +37,8 @@ export let Card = forwardRef(
       // The component props, in alphabetical order (for consistency).
 
       actionIcons = defaults.actionIcons,
+      actionGhostButtonIcon,
+      actionGhostButtonText,
       actionsPlacement = defaults.actionsPlacement,
       children,
       className,
@@ -45,6 +47,7 @@ export let Card = forwardRef(
       label,
       media,
       mediaPosition = defaults.mediaPosition,
+      onActionGhostButtonClick,
       onClick,
       onKeyDown,
       onPrimaryButtonClick,
@@ -69,7 +72,10 @@ export let Card = forwardRef(
     ref
   ) => {
     const blockClass = `${pkg.prefix}--card`;
-    const hasActions = actionIcons.length > 0 || overflowActions.length > 0;
+    const hasActions =
+      actionIcons.length > 0 ||
+      overflowActions.length > 0 ||
+      actionGhostButtonText;
     const hasFooterActions = hasActions && actionsPlacement === 'bottom';
     const hasFooterButton = !!secondaryButtonText || !!primaryButtonText;
     const hasBottomBar = hasFooterActions || hasFooterButton;
@@ -187,6 +193,10 @@ export let Card = forwardRef(
 
     const getHeaderProps = () => ({
       actions: getActions(),
+      noActionIcons: actionIcons.length > 0 ? false : true,
+      actionGhostButtonText,
+      actionGhostButtonIcon,
+      onActionGhostButtonClick,
       actionsPlacement,
       description,
       hasActions: hasActions && actionsPlacement === 'top',
@@ -246,6 +256,11 @@ export let Card = forwardRef(
 );
 
 Card.propTypes = {
+  actionGhostButtonIcon: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  actionGhostButtonText: PropTypes.string,
   actionIcons: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -264,6 +279,7 @@ Card.propTypes = {
   label: PropTypes.string,
   media: PropTypes.node,
   mediaPosition: PropTypes.oneOf(['top', 'left']),
+  onActionGhostButtonClick: PropTypes.func,
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
   onPrimaryButtonClick: PropTypes.func,

@@ -3961,6 +3961,28 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-top: calc(-1 * var(--cds-spacing-02, 0.25rem));
   margin-right: var(--cds-spacing-03, 0.5rem);
 }
+.c4p--card__productive .c4p--card__actions-header .bx--btn:hover + .c4p--card__actions-header-ghost-button.bx--btn--ghost.bx--btn--sm::before {
+  opacity: 0;
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button.bx--btn--ghost.bx--btn--sm {
+  padding-right: calc(var(--cds-spacing-01, 0.125rem) + var(--cds-spacing-03, 0.5rem));
+  padding-left: calc(var(--cds-spacing-01, 0.125rem) + var(--cds-spacing-03, 0.5rem));
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button.bx--btn--ghost.bx--btn--sm::before {
+  position: absolute;
+  left: 0;
+  width: 0.05rem;
+  height: var(--cds-spacing-06, 1.5rem);
+  background-color: var(--cds-hover-ui, #e5e5e5);
+  content: "";
+  opacity: 1;
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button.bx--btn--ghost.bx--btn--sm:hover::before {
+  opacity: 0;
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button--only.bx--btn--ghost.bx--btn--sm::before {
+  opacity: 0;
+}
 .c4p--card__productive .c4p--card__title-lg .c4p--card__actions-header,
 .c4p--card__productive .c4p--card__header-has-label .c4p--card__actions-header {
   margin-top: 0;

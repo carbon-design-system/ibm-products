@@ -8,7 +8,7 @@
 import React from 'react';
 import cx from 'classnames';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { TrashCan16, Edit16 } from '@carbon/icons-react';
+import { TrashCan16, Edit16, Add16 } from '@carbon/icons-react';
 import {
   getStoryTitle,
   prepareStory,
@@ -165,5 +165,14 @@ export const WithButtonHref = prepareStory(Template, {
     ...defaultProps,
     primaryButtonText: 'Ghost button',
     primaryButtonHref: '#',
+  },
+});
+
+export const WithActionGhostButton = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    columnSize: 8,
+    actionGhostButtonText: 'Ghost button',
+    actionGhostButtonIcon: Add16,
   },
 });

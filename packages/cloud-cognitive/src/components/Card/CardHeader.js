@@ -9,6 +9,7 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
+import { Button } from 'carbon-components-react';
 const componentName = 'CardHeader';
 
 const defaults = {
@@ -18,6 +19,10 @@ const defaults = {
 
 export let CardHeader = ({
   actions,
+  noActionIcons,
+  actionGhostButtonText,
+  actionGhostButtonIcon,
+  onActionGhostButtonClick,
   description,
   hasActions = defaults.hasActions,
   label,
@@ -47,6 +52,21 @@ export let CardHeader = ({
             className={`${blockClass}__actions ${blockClass}__actions-header`}
           >
             {actions}
+            {actionGhostButtonText && (
+              <Button
+                kind="ghost"
+                size="small"
+                renderIcon={actionGhostButtonIcon}
+                onClick={onActionGhostButtonClick}
+                className={`${blockClass}__actions-header-ghost-button ${
+                  noActionIcons
+                    ? blockClass + '__actions-header-ghost-button--only'
+                    : ''
+                }`}
+              >
+                {actionGhostButtonText}
+              </Button>
+            )}
           </div>
         )}
       </div>
@@ -55,10 +75,17 @@ export let CardHeader = ({
 };
 
 CardHeader.propTypes = {
+  actionGhostButtonIcon: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object,
+  ]),
+  actionGhostButtonText: PropTypes.string,
   actions: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
   description: PropTypes.string,
   hasActions: PropTypes.bool,
   label: PropTypes.string,
+  noActionIcons: PropTypes.bool,
+  onActionGhostButtonClick: PropTypes.func,
   title: PropTypes.string,
   titleSize: PropTypes.oneOf(['default', 'large']),
 };

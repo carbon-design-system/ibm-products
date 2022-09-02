@@ -95,11 +95,14 @@ $row-heights: (
 
 .#{$block-class}__inline-edit--outer-cell-button
   .#{$block-class}__inline-edit-button.#{$block-class}__inline-edit-button--active:not([data-disabled='true']) {
-  @include input-outline;
-
   background-color: $active-ui;
   color: $text-01;
   cursor: text;
+}
+
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button.#{$block-class}__inline-edit-button--active {
+  @include input-outline;
 }
 
 .#{$block-class}__inline-edit--outer-cell-button

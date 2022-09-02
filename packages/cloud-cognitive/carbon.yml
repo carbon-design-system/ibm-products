@@ -5,6 +5,9 @@ library:
   description:
     Discover React-based solutions designed for IBM's product portfolio.
   externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/
+  designKits:
+    ibm-products-g10-figma:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/ibm-products-g10-figma
 assets:
   api-key-modal:
     name: API key modal

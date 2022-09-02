@@ -29,12 +29,18 @@ export const getInlineEditColumns = () => {
     {
       Header: 'Age',
       accessor: 'age',
-      width: 50,
+      width: 120,
+      inlineEdit: {
+        type: 'number',
+      },
     },
     {
       Header: 'Visits',
       accessor: 'visits',
-      width: 60,
+      width: 120,
+      inlineEdit: {
+        type: 'number',
+      },
     },
     {
       Header: 'Someone 1',

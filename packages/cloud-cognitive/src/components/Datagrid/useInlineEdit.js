@@ -9,6 +9,7 @@ import React from 'react';
 import { pkg } from '../../settings';
 import cx from 'classnames';
 import { InlineEditText } from './Datagrid/addons/InlineEdit/InlineEditText';
+import { InlineEditNumber } from './Datagrid/addons/InlineEdit/InlineEditNumber';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -30,6 +31,15 @@ const useInlineEdit = (hooks) => {
           <>
             {editOptionItem === 'text' && (
               <InlineEditText
+                config={columnInlineEditConfig}
+                tabIndex={-1}
+                value={cell.value}
+                cell={cell}
+                instance={instance}
+              />
+            )}
+            {editOptionItem === 'number' && (
+              <InlineEditNumber
                 config={columnInlineEditConfig}
                 tabIndex={-1}
                 value={cell.value}

@@ -20,8 +20,20 @@ $row-heights: (
 @each $size, $size-value in $row-heights {
   .#{$block-class}
     .#{$block-class}__inline-edit--outer-cell-button--#{$size}
-    .#{$carbon-prefix}--text-input {
+    .#{$carbon-prefix}--text-input,
+  .#{$block-class}
+    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{$carbon-prefix}--number
+    input {
     height: $size-value;
+  }
+  .#{$block-class}
+    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{$carbon-prefix}--number__control-btn::before,
+  .#{$block-class}
+    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{$carbon-prefix}--number__control-btn::after {
+    height: calc($size-value - 0.25rem);
   }
 }
 
@@ -111,8 +123,10 @@ $row-heights: (
   padding-right: $spacing-07;
 }
 
+.#{$block-class}__inline-edit--outer-cell-button .#{$carbon-prefix}--text-input,
 .#{$block-class}__inline-edit--outer-cell-button
-  .#{$carbon-prefix}--text-input {
+  .#{$carbon-prefix}--number
+  input[type='number'] {
   height: $spacing-09;
 }
 
@@ -126,5 +140,10 @@ $row-heights: (
   padding: 0;
   .#{$block-class}__inline-edit-button--non-edit {
     padding-left: $spacing-05;
+  }
+
+  .#{$carbon-prefix}--number input[type='number'] {
+    min-width: auto;
+    padding-right: $spacing-05;
   }
 }

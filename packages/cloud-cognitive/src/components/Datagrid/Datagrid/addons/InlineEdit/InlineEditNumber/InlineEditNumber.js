@@ -6,15 +6,15 @@ import React, {
   useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
-import { TextInput } from 'carbon-components-react';
-import { Edit16 } from '@carbon/icons-react';
+import { NumberInput } from 'carbon-components-react';
+import { ChevronSort16 } from '@carbon/icons-react';
 import { InlineEditButton } from '../InlineEditButton';
 import { pkg } from '../../../../../../settings';
 import cx from 'classnames';
 import { InlineEditContext } from '../InlineEditContext';
 
 const blockClass = `${pkg.prefix}--datagrid`;
-export const InlineEditText = ({
+export const InlineEditNumber = ({
   cell,
   instance,
   placeholder = '',
@@ -32,7 +32,7 @@ export const InlineEditText = ({
   const [cellValue, setCellValue] = useState(value);
   const { activeCellId, editId } = state;
 
-  const textInputRef = useRef();
+  const numberInputRef = useRef();
   const outerButtonElement = useRef();
 
   // If you are in edit mode and click outside of the cell,
@@ -65,7 +65,7 @@ export const InlineEditText = ({
   // Auto focus text input when entering edit mode
   useEffect(() => {
     if (inEditMode) {
-      textInputRef.current.focus();
+      numberInputRef.current.focus();
     }
   }, [inEditMode]);
 
@@ -159,14 +159,17 @@ export const InlineEditText = ({
       data-disabled={nonEditCell}
       onClick={!nonEditCell ? handleInlineCellClick : addActiveState}
       onKeyDown={!nonEditCell ? handleKeyDown : null}
-      className={cx(`${blockClass}__inline-edit--outer-cell-button`, {
-        [`${blockClass}__inline-edit--outer-cell-button--${rowSize}`]: rowSize,
-      })}
+      className={cx(
+        `${blockClass}__inline-edit--outer-cell-button`,
+        rowSize
+          ? [`${blockClass}__inline-edit--outer-cell-button--${rowSize}`]
+          : [`${blockClass}__inline-edit--outer-cell-button--lg`]
+      )}
     >
       {!inEditMode && (
         <InlineEditButton
           isActiveCell={cellId === activeCellId}
-          renderIcon={Edit16}
+          renderIcon={ChevronSort16}
           label={value}
           placeholder={placeholder}
           tabIndex={tabIndex}
@@ -174,21 +177,21 @@ export const InlineEditText = ({
         />
       )}
       {!nonEditCell && inEditMode && cellId === activeCellId && (
-        <TextInput
+        <NumberInput
           id={cellId}
           placeholder={placeholder}
           hideLabel
-          labelText={label}
+          label={label}
           defaultValue={cellValue}
-          onChange={(event) => setCellValue(event.target.value)}
-          ref={textInputRef}
+          onChange={(event) => setCellValue(event.imaginaryTarget.value)}
+          ref={numberInputRef}
         />
       )}
     </div>
   );
 };
 
-InlineEditText.propTypes = {
+InlineEditNumber.propTypes = {
   cell: PropTypes.object,
   config: PropTypes.object,
   instance: PropTypes.shape({

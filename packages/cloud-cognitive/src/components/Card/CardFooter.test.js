@@ -29,8 +29,8 @@ describe(name, () => {
   it('renders primary button', () => {
     const props = {
       hasButton: true,
+      primaryButtonPlacement: 'bottom',
       primaryButtonText: 'primary button',
-      primaryButtonPlacement: 'bottom'
     };
     const { getByText } = render(<CardFooter {...props} />);
     expect(getByText(props.primaryButtonText)).toBeVisible();
@@ -48,8 +48,8 @@ describe(name, () => {
   it('renders productive', () => {
     const props = {
       hasButton: true,
-      primaryButtonText: 'primary button',
       primaryButtonPlacement: 'bottom',
+      primaryButtonText: 'primary button',
       productive: true,
     };
     const { getByText, container } = render(<CardFooter {...props} />);

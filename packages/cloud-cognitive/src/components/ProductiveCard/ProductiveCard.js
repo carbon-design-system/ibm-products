@@ -48,17 +48,6 @@ ProductiveCard = pkg.checkComponentEnabled(ProductiveCard, componentName);
 
 ProductiveCard.propTypes = {
   /**
-   * The icon that's displayed in the action ghost button
-   */
-  actionGhostButtonIcon: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.object,
-  ]),
-  /**
-   * The text that's displayed in the action ghost button
-   */
-  actionGhostButtonText: PropTypes.string,
-  /**
    * Icons that are displayed on card. Refer to design documentation for implementation guidelines
    */
   actionIcons: PropTypes.arrayOf(
@@ -96,10 +85,6 @@ ProductiveCard.propTypes = {
    */
   label: PropTypes.string,
   /**
-   * Function that's called from the action ghost button
-   */
-  onActionGhostButtonClick: PropTypes.func,
-  /**
    * Provides the callback for a clickable card
    */
   onClick: PropTypes.func,
@@ -126,6 +111,10 @@ ProductiveCard.propTypes = {
    * Optional prop to allow overriding the icon rendering. Can be a React component class
    */
   primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  /**
+   * Determines if the primary button is on the top or bottom of the card
+   */
+  primaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   /**
    * The text that's displayed in the primary button
    */

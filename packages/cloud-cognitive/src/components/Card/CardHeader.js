@@ -20,9 +20,10 @@ const defaults = {
 export let CardHeader = ({
   actions,
   noActionIcons,
-  actionGhostButtonText,
-  actionGhostButtonIcon,
-  onActionGhostButtonClick,
+  onPrimaryButtonClick,
+  primaryButtonIcon,
+  primaryButtonPlacement,
+  primaryButtonText,
   description,
   hasActions = defaults.hasActions,
   label,
@@ -35,6 +36,10 @@ export let CardHeader = ({
     [`${headerClass}-label-only`]: label && !title && !description,
     [`${headerClass}-has-label`]: !!label,
     [`${blockClass}__title-lg`]: titleSize === 'large',
+  });
+  const actionGhostButton = `${blockClass}__actions-header-ghost-button`;
+  const actionGhostButtonClass = cx(actionGhostButton, {
+    [`${actionGhostButton}--only`]: noActionIcons,
   });
 
   return (
@@ -52,19 +57,15 @@ export let CardHeader = ({
             className={`${blockClass}__actions ${blockClass}__actions-header`}
           >
             {actions}
-            {actionGhostButtonText && (
+            {primaryButtonText && primaryButtonPlacement === 'top' && (
               <Button
                 kind="ghost"
                 size="small"
-                renderIcon={actionGhostButtonIcon}
-                onClick={onActionGhostButtonClick}
-                className={`${blockClass}__actions-header-ghost-button ${
-                  noActionIcons
-                    ? blockClass + '__actions-header-ghost-button--only'
-                    : ''
-                }`}
+                renderIcon={primaryButtonIcon}
+                onClick={onPrimaryButtonClick}
+                className={actionGhostButtonClass}
               >
-                {actionGhostButtonText}
+                {primaryButtonText}
               </Button>
             )}
           </div>
@@ -75,17 +76,15 @@ export let CardHeader = ({
 };
 
 CardHeader.propTypes = {
-  actionGhostButtonIcon: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.object,
-  ]),
-  actionGhostButtonText: PropTypes.string,
   actions: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
   description: PropTypes.string,
   hasActions: PropTypes.bool,
   label: PropTypes.string,
   noActionIcons: PropTypes.bool,
-  onActionGhostButtonClick: PropTypes.func,
+  onPrimaryButtonClick: PropTypes.func,
+  primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  primaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
+  primaryButtonText: PropTypes.string,
   title: PropTypes.string,
   titleSize: PropTypes.oneOf(['default', 'large']),
 };

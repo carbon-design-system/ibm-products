@@ -172,7 +172,8 @@ export const WithActionGhostButton = prepareStory(Template, {
   args: {
     ...defaultProps,
     columnSize: 8,
-    actionGhostButtonText: 'Ghost button',
-    actionGhostButtonIcon: Add16,
+    primaryButtonPlacement: 'top',
+    primaryButtonText: 'Ghost button',
+    primaryButtonIcon: Add16,
   },
 });

@@ -26,6 +26,7 @@ const defaults = {
   mediaPosition: 'top',
   overflowActions: Object.freeze([]),
   primaryButtonKind: 'primary',
+  primaryButtonPlacement: 'bottom',
   productive: false,
   secondaryButtonKind: 'secondary',
   titleSize: 'default',
@@ -35,10 +36,7 @@ export let Card = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-
       actionIcons = defaults.actionIcons,
-      actionGhostButtonIcon,
-      actionGhostButtonText,
       actionsPlacement = defaults.actionsPlacement,
       children,
       className,
@@ -47,7 +45,6 @@ export let Card = forwardRef(
       label,
       media,
       mediaPosition = defaults.mediaPosition,
-      onActionGhostButtonClick,
       onClick,
       onKeyDown,
       onPrimaryButtonClick,
@@ -57,6 +54,7 @@ export let Card = forwardRef(
       primaryButtonHref,
       primaryButtonIcon,
       primaryButtonKind = defaults.primaryButtonKind,
+      primaryButtonPlacement = defaults.primaryButtonPlacement,
       primaryButtonText,
       productive = defaults.productive,
       secondaryButtonHref,
@@ -75,9 +73,11 @@ export let Card = forwardRef(
     const hasActions =
       actionIcons.length > 0 ||
       overflowActions.length > 0 ||
-      actionGhostButtonText;
+      (primaryButtonText && primaryButtonPlacement === 'top');
     const hasFooterActions = hasActions && actionsPlacement === 'bottom';
-    const hasFooterButton = !!secondaryButtonText || !!primaryButtonText;
+    const hasFooterButton =
+      !!secondaryButtonText ||
+      (!!primaryButtonText && primaryButtonPlacement === 'bottom');
     const hasBottomBar = hasFooterActions || hasFooterButton;
     const hasClickEvent = !!onClick || !!onKeyDown;
     const clickableProps = {
@@ -192,14 +192,16 @@ export let Card = forwardRef(
     };
 
     const getHeaderProps = () => ({
-      actions: getActions(),
-      noActionIcons: actionIcons.length > 0 ? false : true,
-      actionGhostButtonText,
-      actionGhostButtonIcon,
-      onActionGhostButtonClick,
+      actions: actionsPlacement === 'top' ? getActions() : '',
+      noActionIcons:
+        actionIcons.length > 0 && actionsPlacement === 'top' ? false : true,
       actionsPlacement,
+      onPrimaryButtonClick,
+      primaryButtonIcon,
+      primaryButtonPlacement,
+      primaryButtonText,
       description,
-      hasActions: hasActions && actionsPlacement === 'top',
+      hasActions: hasActions,
       label,
       title,
       titleSize,
@@ -218,7 +220,7 @@ export let Card = forwardRef(
     };
 
     const getFooterProps = () => ({
-      actions: getActions(),
+      actions: actionsPlacement === 'bottom' ? getActions() : '',
       actionsPlacement,
       hasActions: hasFooterActions,
       hasButton: hasFooterButton,
@@ -227,6 +229,7 @@ export let Card = forwardRef(
       primaryButtonHref,
       primaryButtonIcon,
       primaryButtonKind,
+      primaryButtonPlacement,
       primaryButtonText,
       productive,
       secondaryButtonHref,
@@ -256,11 +259,6 @@ export let Card = forwardRef(
 );
 
 Card.propTypes = {
-  actionGhostButtonIcon: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.object,
-  ]),
-  actionGhostButtonText: PropTypes.string,
   actionIcons: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -279,7 +277,6 @@ Card.propTypes = {
   label: PropTypes.string,
   media: PropTypes.node,
   mediaPosition: PropTypes.oneOf(['top', 'left']),
-  onActionGhostButtonClick: PropTypes.func,
   onClick: PropTypes.func,
   onKeyDown: PropTypes.func,
   onPrimaryButtonClick: PropTypes.func,
@@ -296,6 +293,7 @@ Card.propTypes = {
   primaryButtonHref: PropTypes.string,
   primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   primaryButtonKind: PropTypes.oneOf(['primary', 'ghost']),
+  primaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   primaryButtonText: PropTypes.node,
   productive: PropTypes.bool,
   secondaryButtonHref: PropTypes.string,

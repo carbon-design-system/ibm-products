@@ -34,7 +34,6 @@ export const getInlineEditColumns = () => {
     {
       Header: 'Row Index',
       accessor: (row, i) => i,
-      sticky: 'left',
       id: 'rowIndex', // id is required when accessor is a function.
     },
     {
@@ -42,6 +41,7 @@ export const getInlineEditColumns = () => {
       accessor: 'firstName',
       inlineEdit: {
         type: 'text',
+        inputProps: {}, // These props are passed to the Carbon component used for inline editing
       },
     },
     {
@@ -49,17 +49,26 @@ export const getInlineEditColumns = () => {
       accessor: 'lastName',
       inlineEdit: {
         type: 'text',
+        inputProps: {}, // These props are passed to the Carbon component used for inline editing
       },
     },
     {
       Header: 'Age',
       accessor: 'age',
-      width: 50,
+      width: 120,
+      inlineEdit: {
+        type: 'number',
+        inputProps: {}, // These props are passed to the Carbon component used for inline editing
+      },
     },
     {
       Header: 'Visits',
       accessor: 'visits',
-      width: 60,
+      width: 120,
+      inlineEdit: {
+        type: 'number',
+        inputProps: {}, // These props are passed to the Carbon component used for inline editing
+      },
     },
     {
       Header: 'Chart type',

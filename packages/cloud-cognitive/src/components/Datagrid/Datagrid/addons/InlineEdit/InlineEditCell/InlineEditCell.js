@@ -30,11 +30,13 @@ export const InlineEditCell = ({
   value,
   label = 'Inline edit type text label',
   nonEditCell,
+  totalInlineEditColumns,
   type,
 }) => {
   const columnId = cell.column.id;
   const columnIndex = instance.columns.findIndex((col) => col.id === columnId);
   const cellId = `column-${columnIndex}-row-${cell.row.index}`;
+  const totalColumns = instance.columns.length;
 
   const { state, dispatch } = useContext(InlineEditContext);
   const [inEditMode, setInEditMode] = useState(false);
@@ -189,6 +191,8 @@ export const InlineEditCell = ({
           tabIndex={tabIndex}
           nonEditCell={nonEditCell}
           columnConfig={cell.column}
+          totalInlineEditColumns={totalInlineEditColumns}
+          totalColumns={totalColumns}
         />
       )}
       {!nonEditCell && inEditMode && cellId === activeCellId && (
@@ -247,6 +251,7 @@ InlineEditCell.propTypes = {
   nonEditCell: PropTypes.bool,
   placeholder: PropTypes.string,
   tabIndex: PropTypes.number,
+  totalInlineEditColumns: PropTypes.number,
   type: PropTypes.oneOf(['text', 'number', 'selection', 'date']),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };

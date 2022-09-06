@@ -46,6 +46,9 @@
       align-items: center;
       padding-top: 0;
       padding-bottom: 0;
+      &.#{$block-class}__cell--spacer {
+        padding: 0;
+      }
     }
 
     td.#{$carbon-prefix}--table-column-checkbox,

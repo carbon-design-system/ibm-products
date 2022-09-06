@@ -21,12 +21,24 @@ const useInlineEdit = (hooks) => {
         value={cell.value}
         cell={cell}
         instance={instance}
+        totalInlineEditColumns={totalInlineEditColumns}
         type={type}
       />
     );
 
     const columnInlineEditConfig = cell.column.inlineEdit;
     const inlineEditType = cell.column?.inlineEdit?.type;
+    const totalInlineEditColumns = instance.columns.filter(
+      (item) => item.inlineEdit
+    )?.length;
+    if (cell.column.id === 'spacer') {
+      return [
+        props,
+        {
+          className: cx(`${blockClass}__cell`, `${blockClass}__cell--spacer`),
+        },
+      ];
+    }
     return [
       props,
       {
@@ -50,6 +62,7 @@ const useInlineEdit = (hooks) => {
                 instance={instance}
                 disabled
                 nonEditCell
+                totalInlineEditColumns={totalInlineEditColumns}
                 type="text"
               />
             )}

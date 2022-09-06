@@ -22,7 +22,11 @@ export const InlineEditButton = ({
   nonEditCell,
   isActiveCell,
   columnConfig,
+  totalInlineEditColumns,
+  totalColumns,
 }) => {
+  const inlineEditColsLessThanHalfOfTotal =
+    totalInlineEditColumns < totalColumns / 2;
   return (
     <div
       className={cx(`${blockClass}__inline-edit-button`, {
@@ -31,6 +35,8 @@ export const InlineEditButton = ({
         [`${blockClass}__inline-edit-button--with-label-icon`]: LabelIcon,
         [`${blockClass}__inline-edit-button--non-edit`]: nonEditCell,
         [`${blockClass}__inline-edit-button--active`]: isActiveCell,
+        [`${blockClass}__inline-edit-button--edit-less-than-half-of-total-cols`]:
+          inlineEditColsLessThanHalfOfTotal,
       })}
       tabIndex={tabIndex}
       data-disabled={disabled || nonEditCell}
@@ -75,5 +81,7 @@ InlineEditButton.propTypes = {
   placeholder: PropTypes.string,
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   tabIndex: PropTypes.number,
+  totalColumns: PropTypes.number,
+  totalInlineEditColumns: PropTypes.number,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };

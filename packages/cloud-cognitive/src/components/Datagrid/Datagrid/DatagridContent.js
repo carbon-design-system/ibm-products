@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { DataTable } from 'carbon-components-react';
@@ -9,6 +9,7 @@ import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
 import { pkg } from '../../../settings';
 import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
+import { useClickOutside } from '../../../global/js/hooks';
 
 const { TableContainer, Table } = DataTable;
 
@@ -16,6 +17,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 export const DatagridContent = ({ datagridState }) => {
   const { state, dispatch } = useContext(InlineEditContext);
+  const { activeCellId } = state;
   const {
     getTableProps = () => {},
     withVirtualScroll,
@@ -34,6 +36,14 @@ export const DatagridContent = ({ datagridState }) => {
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
   const { gridActive } = state;
+  const gridAreaRef = useRef();
+
+  useClickOutside(gridAreaRef, () => {
+    if (!withInlineEdit) {
+      return;
+    }
+    dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS', payload: activeCellId });
+  });
 
   return (
     <>
@@ -50,7 +60,7 @@ export const DatagridContent = ({ datagridState }) => {
         description={gridDescription}
       >
         <DatagridToolbar {...datagridState} />
-        <div className={`${blockClass}__table-container`}>
+        <div className={`${blockClass}__table-container`} ref={gridAreaRef}>
           {leftPanel && leftPanel.isOpen && (
             <div className={`${blockClass}__datagridLeftPanel`}>
               {leftPanel.panelContent}

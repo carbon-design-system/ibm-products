@@ -82,6 +82,17 @@ $row-heights: (
   .#{$block-class}__inline-edit-button-icon {
     fill: $icon-02;
   }
+  // Always show renderIcon if inline edit columns are less than half of total columns
+  &:not(.#{$block-class}__inline-edit-button--edit-less-than-half-of-total-cols) {
+    .#{$block-class}__inline-edit-button-icon {
+      display: none;
+    }
+    &:hover {
+      .#{$block-class}__inline-edit-button-icon {
+        display: block;
+      }
+    }
+  }
 }
 
 .#{$block-class}__inline-edit--outer-cell-button
@@ -106,7 +117,7 @@ $row-heights: (
 }
 
 .#{$block-class}__inline-edit--outer-cell-button
-  .#{$block-class}__inline-edit-button--disabled {
+  .#{$block-class}__inline-edit-button--disabled:not(.#{$block-class}__inline-edit-button--edit-less-than-half-of-total-cols) {
   color: $disabled-02;
   cursor: not-allowed;
 }

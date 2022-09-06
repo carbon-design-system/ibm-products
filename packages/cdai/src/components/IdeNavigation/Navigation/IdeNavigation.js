@@ -97,13 +97,17 @@ export default class IdeNavigation extends React.Component {
 }
 
 IdeNavigation.propTypes = {
-  /** Required aria attributes. Both must be provided */
-  ariaAttributes: PropTypes.shape({
-    /** aria labelledby markup which is applied to the navigation, referencing the label which describe the nav. Must be provided */
-    'aria-labelledby': PropTypes.string.isRequired,
-    /** aria label which is applied to the navigation. Must be provided, and be pre translated */
-    'aria-label': PropTypes.string.isRequired,
-  }),
+  /** Required aria attributes. One or the other must be provided */
+  ariaAttributes: PropTypes.oneOfType([
+    PropTypes.shape({
+      /** aria labelledby markup which is applied to the navigation, referencing the label which describe the nav. Must be provided */
+      'aria-labelledby': PropTypes.string.isRequired,
+    }),
+    PropTypes.shape({
+      /** aria label which is applied to the navigation. Must be provided, and be pre translated */
+      'aria-label': PropTypes.string.isRequired,
+    }),
+  ]),
   /** children. This should be/represent the current page selected by the user */
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.array]),
   className: PropTypes.string,
@@ -131,6 +135,5 @@ IdeNavigation.defaultProps = {
   navigationLinks: [],
   ariaAttributes: {
     'aria-label': 'Example Aria Labeled',
-    'aria-labelledby': 'Example Aria Labeled by',
   },
 };

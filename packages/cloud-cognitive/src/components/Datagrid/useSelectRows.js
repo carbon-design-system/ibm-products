@@ -24,6 +24,11 @@ const useSelectRows = (hooks) => {
     Object.assign(instance, { rows: rowsWithSelect });
   };
   hooks.useInstance.push(useInstance);
+  hooks.useInstance.push((instance) => {
+    Object.assign(instance, {
+      withSelectRows: true,
+    });
+  });
   hooks.visibleColumns.push((columns) => [
     {
       id: selectionColumnId,

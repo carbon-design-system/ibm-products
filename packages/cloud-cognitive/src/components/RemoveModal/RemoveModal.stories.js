@@ -32,7 +32,7 @@ const defaultProps = {
   body: `Deleting ${resourceName} will permanently delete the configuration. This action cannot be undone.`,
   className: 'remove-modal-test',
   title: 'Confirm delete',
-  iconDescription: 'close',
+  iconDescription: 'Close',
   inputInvalidText: 'A valid value is required',
   inputLabelText: `Type ${resourceName} to confirm`,
   inputPlaceholderText: 'Name of resourceName',
@@ -40,7 +40,7 @@ const defaultProps = {
   open: true,
   primaryButtonText: 'Delete',
   resourceName,
-  secondaryButtonText: 'Close',
+  secondaryButtonText: 'Cancel',
   label: `Delete ${resourceName}`,
   preventCloseOnClickOutside: true,
 };

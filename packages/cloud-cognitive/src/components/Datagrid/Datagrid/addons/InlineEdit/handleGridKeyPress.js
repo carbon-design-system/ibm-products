@@ -54,11 +54,8 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
   };
   switch (key) {
     case 'Tab': {
-      if (editId) {
-        return;
-      }
       if (!editId) {
-        dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS' });
+        dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS', payload: activeCellId });
       }
       break;
     }
@@ -102,6 +99,8 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
       });
       break;
     }
+    case ' ':
+    case 'F2':
     case 'Enter': {
       // Disabled cells are not allowed to go into edit mode
       if (isDisabledCell) {

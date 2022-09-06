@@ -6,12 +6,12 @@
  */
 
 export const handleGridFocus = (state, dispatch) => {
-  const { gridActive } = state;
+  const { gridActive, previousActiveCellId } = state;
   if (!gridActive) {
     // Initialize grid active state
     dispatch({
       type: 'ADD_GRID_ACTIVE_FOCUS',
-      payload: 'column-0-row-0',
+      payload: previousActiveCellId || 'column-0-row-0', // If there is a previous active cell id that is found use that, otherwise use the first cell in the grid area
     });
   }
 };

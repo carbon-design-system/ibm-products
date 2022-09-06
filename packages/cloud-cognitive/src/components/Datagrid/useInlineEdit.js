@@ -8,48 +8,41 @@
 import React from 'react';
 import { pkg } from '../../settings';
 import cx from 'classnames';
-import { InlineEditText } from './Datagrid/addons/InlineEdit/InlineEditText';
-import { InlineEditNumber } from './Datagrid/addons/InlineEdit/InlineEditNumber';
+import { InlineEditCell } from './Datagrid/addons/InlineEdit/InlineEditCell';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const useInlineEdit = (hooks) => {
   const addInlineEdit = (props, { cell, instance }) => {
-    const editOptionItem = instance.columns
-      .filter((obj) => obj.id === cell.column.id)
-      .map((obj) => obj.inlineEdit?.type)
-      .toString();
+    const renderInlineEditComponent = (type) => (
+      <InlineEditCell
+        config={columnInlineEditConfig}
+        tabIndex={-1}
+        value={cell.value}
+        cell={cell}
+        instance={instance}
+        type={type}
+      />
+    );
 
     const columnInlineEditConfig = cell.column.inlineEdit;
+    const inlineEditType = cell.column?.inlineEdit?.type;
     return [
       props,
       {
         className: cx(`${blockClass}__cell`, {
           [`${blockClass}__cell-inline-edit`]: true,
         }),
+        role: 'gridcell',
         children: (
           <>
-            {editOptionItem === 'text' && (
-              <InlineEditText
-                config={columnInlineEditConfig}
-                tabIndex={-1}
-                value={cell.value}
-                cell={cell}
-                instance={instance}
-              />
-            )}
-            {editOptionItem === 'number' && (
-              <InlineEditNumber
-                config={columnInlineEditConfig}
-                tabIndex={-1}
-                value={cell.value}
-                cell={cell}
-                instance={instance}
-              />
-            )}
+            {inlineEditType === 'text' &&
+              renderInlineEditComponent(inlineEditType)}
+            {inlineEditType === 'number' &&
+              renderInlineEditComponent(inlineEditType)}
             {/* Render default inline edit cell button, if it's column doesn't have an inline edit configuration */}
-            {!editOptionItem && (
-              <InlineEditText
+            {!inlineEditType && (
+              <InlineEditCell
                 config={columnInlineEditConfig}
                 tabIndex={-1}
                 value={cell.value}
@@ -57,6 +50,7 @@ const useInlineEdit = (hooks) => {
                 instance={instance}
                 disabled
                 nonEditCell
+                type="text"
               />
             )}
           </>

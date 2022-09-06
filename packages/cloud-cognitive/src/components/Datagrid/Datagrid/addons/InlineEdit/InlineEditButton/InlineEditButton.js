@@ -21,6 +21,7 @@ export const InlineEditButton = ({
   tabIndex = -1,
   nonEditCell,
   isActiveCell,
+  columnConfig,
 }) => {
   return (
     <div
@@ -35,6 +36,7 @@ export const InlineEditButton = ({
       data-disabled={disabled || nonEditCell}
       aria-disabled={disabled || nonEditCell}
       role="button"
+      title={label}
     >
       {LabelIcon && (
         <div className={`${blockClass}__label-icon`}>
@@ -45,6 +47,8 @@ export const InlineEditButton = ({
         <span
           className={cx(`${blockClass}__inline-edit-button-label`, {
             [`${blockClass}__inline-edit-button-label-with-icon`]: !nonEditCell, // update later to some kind of renderIcon prop
+            [`${blockClass}__defaultStringRenderer--multiline`]:
+              columnConfig?.multiLineWrap,
           })}
         >
           {label}
@@ -62,6 +66,7 @@ export const InlineEditButton = ({
 };
 
 InlineEditButton.propTypes = {
+  columnConfig: PropTypes.object,
   disabled: PropTypes.bool,
   isActiveCell: PropTypes.bool,
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

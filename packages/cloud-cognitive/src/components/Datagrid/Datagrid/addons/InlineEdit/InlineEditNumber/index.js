@@ -1,1 +1,0 @@
-export { InlineEditNumber } from './InlineEditNumber';

@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2022, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, {
   useState,
   useRef,
@@ -6,22 +13,24 @@ import React, {
   useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
-import { NumberInput } from 'carbon-components-react';
-import { ChevronSort16 } from '@carbon/icons-react';
+import { TextInput, NumberInput } from 'carbon-components-react';
+import { Edit16, ChevronSort16 } from '@carbon/icons-react';
 import { InlineEditButton } from '../InlineEditButton';
 import { pkg } from '../../../../../../settings';
 import cx from 'classnames';
 import { InlineEditContext } from '../InlineEditContext';
 
 const blockClass = `${pkg.prefix}--datagrid`;
-export const InlineEditNumber = ({
+export const InlineEditCell = ({
   cell,
+  config,
   instance,
   placeholder = '',
   tabIndex,
   value,
   label = 'Inline edit type text label',
   nonEditCell,
+  type,
 }) => {
   const columnId = cell.column.id;
   const columnIndex = instance.columns.findIndex((col) => col.id === columnId);
@@ -31,7 +40,9 @@ export const InlineEditNumber = ({
   const [inEditMode, setInEditMode] = useState(false);
   const [cellValue, setCellValue] = useState(value);
   const { activeCellId, editId } = state;
+  const { inputProps } = config || {};
 
+  const textInputRef = useRef();
   const numberInputRef = useRef();
   const outerButtonElement = useRef();
 
@@ -65,9 +76,14 @@ export const InlineEditNumber = ({
   // Auto focus text input when entering edit mode
   useEffect(() => {
     if (inEditMode) {
-      numberInputRef.current.focus();
+      if (type === 'text') {
+        textInputRef.current.focus();
+      }
+      if (type === 'number') {
+        numberInputRef.current.focus();
+      }
     }
-  }, [inEditMode]);
+  }, [inEditMode, type]);
 
   // Initialize cellValue from value prop
   useEffect(() => {
@@ -159,39 +175,65 @@ export const InlineEditNumber = ({
       data-disabled={nonEditCell}
       onClick={!nonEditCell ? handleInlineCellClick : addActiveState}
       onKeyDown={!nonEditCell ? handleKeyDown : null}
-      className={cx(
-        `${blockClass}__inline-edit--outer-cell-button`,
-        rowSize
-          ? [`${blockClass}__inline-edit--outer-cell-button--${rowSize}`]
-          : [`${blockClass}__inline-edit--outer-cell-button--lg`]
-      )}
+      className={cx(`${blockClass}__inline-edit--outer-cell-button`, {
+        [`${blockClass}__inline-edit--outer-cell-button--${rowSize}`]: rowSize,
+        [`${blockClass}__inline-edit--outer-cell-button--lg`]: !rowSize,
+      })}
     >
       {!inEditMode && (
         <InlineEditButton
           isActiveCell={cellId === activeCellId}
-          renderIcon={ChevronSort16}
+          renderIcon={type === 'number' ? ChevronSort16 : Edit16}
           label={value}
           placeholder={placeholder}
           tabIndex={tabIndex}
           nonEditCell={nonEditCell}
+          columnConfig={cell.column}
         />
       )}
       {!nonEditCell && inEditMode && cellId === activeCellId && (
-        <NumberInput
-          id={cellId}
-          placeholder={placeholder}
-          hideLabel
-          label={label}
-          defaultValue={cellValue}
-          onChange={(event) => setCellValue(event.imaginaryTarget.value)}
-          ref={numberInputRef}
-        />
+        <>
+          {type === 'text' && (
+            <TextInput
+              labelText={label}
+              placeholder={placeholder}
+              {...inputProps}
+              id={cellId}
+              hideLabel
+              defaultValue={cellValue}
+              onChange={(event) => {
+                setCellValue(event.target.value);
+                if (inputProps.onChange) {
+                  inputProps.onChange(event.target.value);
+                }
+              }}
+              ref={textInputRef}
+            />
+          )}
+          {type === 'number' && (
+            <NumberInput
+              placeholder={placeholder}
+              label={label}
+              {...inputProps}
+              id={cellId}
+              hideLabel
+              defaultValue={cellValue}
+              onChange={(event) => {
+                setCellValue(event.imaginaryTarget.value);
+                if (inputProps.onChange) {
+                  inputProps.onChange(event.imaginaryTarget.value);
+                }
+              }}
+              ref={numberInputRef}
+            />
+          )}
+        </>
       )}
     </div>
   );
 };
 
-InlineEditNumber.propTypes = {
+InlineEditCell.propTypes = {
   cell: PropTypes.object,
   config: PropTypes.object,
   instance: PropTypes.shape({
@@ -205,5 +247,6 @@ InlineEditNumber.propTypes = {
   nonEditCell: PropTypes.bool,
   placeholder: PropTypes.string,
   tabIndex: PropTypes.number,
+  type: PropTypes.oneOf(['text', 'number', 'selection', 'date']),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };

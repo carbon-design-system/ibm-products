@@ -4,6 +4,9 @@ library:
   name: IBM Security
   description: View legacy and non-curated design components used by IBM Security.
   externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal
+  designKits:
+    ibm-products-g10-figma:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/ibm-products-g10-figma
 assets:
   decorator:
       name: Decorator

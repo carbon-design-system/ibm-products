@@ -53,6 +53,7 @@ export class IdeCard extends React.Component {
       cardDisabled,
       disabledText,
       secondaryGraphic,
+      externalLinkText,
     } = this.props;
 
     const { prefix } = settings;
@@ -98,7 +99,8 @@ export class IdeCard extends React.Component {
               cardContent,
               cardDisabled,
               disabledText,
-              secondaryGraphic
+              secondaryGraphic,
+              externalLinkText
             )}
           </ClickableTile>
         </div>
@@ -116,7 +118,8 @@ export class IdeCard extends React.Component {
     cardContent,
     cardDisabled,
     disabledText,
-    secondaryGraphic
+    secondaryGraphic,
+    externalLinkText
   ) => {
     let jsx = null;
     switch (cardType) {
@@ -135,7 +138,8 @@ export class IdeCard extends React.Component {
             {...idAttribute(`ide-card-${cardId}-text`)}
             className={`${idePrefix}-card--tile-text`}
           ></p>,
-          secondaryGraphic
+          secondaryGraphic,
+          externalLinkText
         );
         break;
       case 'node':
@@ -149,7 +153,8 @@ export class IdeCard extends React.Component {
           cardDisabled,
           disabledText,
           cardContent ? cardContent.node : undefined,
-          secondaryGraphic
+          secondaryGraphic,
+          externalLinkText
         );
         break;
       case 'externalLink':
@@ -166,7 +171,8 @@ export class IdeCard extends React.Component {
             {...idAttribute(`ide-card-${cardId}-text`)}
             className={`${idePrefix}-card--tile-text`}
           ></p>,
-          secondaryGraphic
+          secondaryGraphic,
+          externalLinkText
         );
         break;
       case 'link':
@@ -193,7 +199,8 @@ export class IdeCard extends React.Component {
                 </li>
               ))}
           </ul>,
-          secondaryGraphic
+          secondaryGraphic,
+          externalLinkText
         );
         break;
       case 'custom':
@@ -216,7 +223,8 @@ export class IdeCard extends React.Component {
     cardDisabled,
     disabledText,
     cardBody,
-    secondaryGraphic
+    secondaryGraphic,
+    externalLinkText
   ) => {
     return (
       <div
@@ -227,7 +235,8 @@ export class IdeCard extends React.Component {
           cardId,
           cardType,
           cardGraphic,
-          secondaryGraphic
+          secondaryGraphic,
+          externalLinkText
         )}
         <div className={`${idePrefix}-card--text-container`}>
           <p
@@ -271,7 +280,8 @@ export class IdeCard extends React.Component {
     cardId,
     cardType,
     cardGraphic,
-    secondaryGraphic
+    secondaryGraphic,
+    externalLinkText
   ) => {
     return (
       (cardGraphic || cardType === 'externalLink') && (
@@ -294,6 +304,7 @@ export class IdeCard extends React.Component {
             <div
               className={`${idePrefix}-card--tile-img`}
               {...idAttribute(`ide-card-${cardId}-launch-Image`)}
+              alt={externalLinkText}
             >
               {renderGraphic(Launch20)}
             </div>
@@ -333,6 +344,8 @@ IdeCard.propTypes = {
   className: PropTypes.string,
   /** Optional prop - needed in case cardDisabled: true is provided to display the tooltip text */
   disabledText: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /** Optional prop - if this is a link which opens in a new tab, explanatory text */
+  externalLinkText: PropTypes.string,
   /** OnClick handler - callback function to model the onClick behaviour of a card*/
   onInteract: PropTypes.func,
   /** Optional prop - set this to "external" to always display the launch out icon */
@@ -346,4 +359,5 @@ IdeCard.defaultProps = {
   cardDisabled: false,
   cardLinkTarget: '_blank',
   disabledText: '',
+  externalLinkText: 'Opens in new tab',
 };

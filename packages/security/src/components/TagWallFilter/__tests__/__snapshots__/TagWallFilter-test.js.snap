@@ -2,21 +2,21 @@
 
 exports[`TagWallFilter calls \`onChange\` when items are selected and unselected 1`] = `
 [MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "available": Object {
+  "calls": [
+    [
+      {
+        "available": {
           "allItems": undefined,
-          "items": Array [
-            Object {
+          "items": [
+            {
               "id": "0",
               "label": "TagWallFilter 0",
             },
           ],
         },
-        "selected": Object {
-          "items": Array [
-            Object {
+        "selected": {
+          "items": [
+            {
               "id": "1",
               "label": "TagWallFilter 1",
             },
@@ -24,29 +24,29 @@ exports[`TagWallFilter calls \`onChange\` when items are selected and unselected
         },
       },
     ],
-    Array [
-      Object {
-        "available": Object {
-          "allItems": Array [
-            Object {
+    [
+      {
+        "available": {
+          "allItems": [
+            {
               "id": "0",
               "label": "TagWallFilter 0",
             },
-            Object {
+            {
               "id": "1",
               "label": "TagWallFilter 1",
             },
           ],
-          "items": Array [],
+          "items": [],
         },
-        "selected": Object {
-          "items": Array [
-            Object {
+        "selected": {
+          "items": [
+            {
               "id": "0",
               "isSelected": true,
               "label": "TagWallFilter 0",
             },
-            Object {
+            {
               "id": "1",
               "label": "TagWallFilter 1",
             },
@@ -55,12 +55,12 @@ exports[`TagWallFilter calls \`onChange\` when items are selected and unselected
       },
     ],
   ],
-  "results": Array [
-    Object {
+  "results": [
+    {
       "type": "return",
       "value": undefined,
     },
-    Object {
+    {
       "type": "return",
       "value": undefined,
     },
@@ -70,30 +70,30 @@ exports[`TagWallFilter calls \`onChange\` when items are selected and unselected
 
 exports[`TagWallFilter calls \`onChange\` when items are selected and unselected 2`] = `
 [MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
-        "available": Object {
-          "allItems": Array [
-            Object {
+  "calls": [
+    [
+      {
+        "available": {
+          "allItems": [
+            {
               "id": "0",
               "label": "TagWallFilter 0",
             },
-            Object {
+            {
               "id": "1",
               "label": "TagWallFilter 1",
             },
           ],
-          "items": Array [
-            Object {
+          "items": [
+            {
               "id": "1",
               "label": "TagWallFilter 1",
             },
           ],
         },
-        "selected": Object {
-          "items": Array [
-            Object {
+        "selected": {
+          "items": [
+            {
               "id": "0",
               "isSelected": true,
               "label": "TagWallFilter 0",
@@ -103,8 +103,8 @@ exports[`TagWallFilter calls \`onChange\` when items are selected and unselected
       },
     ],
   ],
-  "results": Array [
-    Object {
+  "results": [
+    {
       "type": "return",
       "value": undefined,
     },
@@ -358,26 +358,26 @@ exports[`TagWallFilter renders 1`] = `
 `;
 
 exports[`TagWallFilter withItemReducer CLEAR_SELECTED_ITEMS clears selected items 1`] = `
-Object {
-  "available": Object {
-    "allItems": Array [],
-    "items": Array [],
+{
+  "available": {
+    "allItems": [],
+    "items": [],
   },
-  "selected": Object {
-    "items": Array [],
+  "selected": {
+    "items": [],
   },
 }
 `;
 
 exports[`TagWallFilter withItemReducer SELECT_ITEM selects an item 1`] = `
-Object {
-  "available": Object {
-    "allItems": Array [],
-    "items": Array [],
+{
+  "available": {
+    "allItems": [],
+    "items": [],
   },
-  "selected": Object {
-    "items": Array [
-      Object {
+  "selected": {
+    "items": [
+      {
         "id": "0",
         "isSelected": true,
         "label": "TagWallFilter 0",
@@ -388,18 +388,18 @@ Object {
 `;
 
 exports[`TagWallFilter withItemReducer UNSELECT_ITEM unselects an item 1`] = `
-Object {
-  "available": Object {
-    "allItems": Array [],
-    "items": Array [
-      Object {
+{
+  "available": {
+    "allItems": [],
+    "items": [
+      {
         "id": "0",
         "label": "TagWallFilter 0",
       },
     ],
   },
-  "selected": Object {
-    "items": Array [],
+  "selected": {
+    "items": [],
   },
 }
 `;

@@ -415,28 +415,28 @@ exports[`DataTablePagination Rendering renders the HTML of the node's subtree 1`
   <DataTable
     filterRows={[Function]}
     headers={
-      Array [
-        Object {
+      [
+        {
           "header": "Last sighted",
           "key": "lastSighted",
         },
-        Object {
+        {
           "header": "Name",
           "key": "name",
         },
-        Object {
+        {
           "header": "Type",
           "key": "type",
         },
-        Object {
+        {
           "header": "Attack phase",
           "key": "attackPhase",
         },
-        Object {
+        {
           "header": "Method",
           "key": "method",
         },
-        Object {
+        {
           "header": "Missing",
           "key": "missing",
         },
@@ -448,8 +448,8 @@ exports[`DataTablePagination Rendering renders the HTML of the node's subtree 1`
     missingDataCharacter="–"
     overflowMenuOnHover={true}
     rows={
-      Array [
-        Object {
+      [
+        {
           "attackPhase": "Initial Compromise",
           "id": "7c34f4507156b35",
           "lastSighted": "11/28/2018",
@@ -457,7 +457,7 @@ exports[`DataTablePagination Rendering renders the HTML of the node's subtree 1`
           "name": "IBM X-Force",
           "type": "IPv6",
         },
-        Object {
+        {
           "attackPhase": "Establish Foothold",
           "id": "38347816a51b0c5a8",
           "lastSighted": "06/28/2017",
@@ -465,7 +465,7 @@ exports[`DataTablePagination Rendering renders the HTML of the node's subtree 1`
           "name": "AppX",
           "type": "Hash",
         },
-        Object {
+        {
           "attackPhase": "Escalate Privileges",
           "id": "1d6116a2d1d03b4",
           "lastSighted": "05/30/2018",
@@ -473,7 +473,7 @@ exports[`DataTablePagination Rendering renders the HTML of the node's subtree 1`
           "name": "Bigfix",
           "type": "URL",
         },
-        Object {
+        {
           "attackPhase": "Cross-Site Scripting",
           "id": "c52b0419981221765",
           "lastSighted": "12/12/2018",
@@ -481,7 +481,7 @@ exports[`DataTablePagination Rendering renders the HTML of the node's subtree 1`
           "name": "Am I Affected",
           "type": "Hash",
         },
-        Object {
+        {
           "attackPhase": "SQL Injection Attack",
           "id": "697626e6f703131d",
           "lastSighted": "11/11/2018",
@@ -510,7 +510,7 @@ exports[`DataTablePagination Rendering renders the HTML of the node's subtree 1`
     pageRangeText={[Function]}
     pageSize={5}
     pageSizes={
-      Array [
+      [
         5,
         10,
         20,

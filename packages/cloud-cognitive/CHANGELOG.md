@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.2...@carbon/ibm-products@2.0.0-rc.3) (2022-09-06)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
 # [2.0.0-rc.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.1...@carbon/ibm-products@2.0.0-rc.2) (2022-08-23)
 
 **Note:** Version bump only for package @carbon/ibm-products

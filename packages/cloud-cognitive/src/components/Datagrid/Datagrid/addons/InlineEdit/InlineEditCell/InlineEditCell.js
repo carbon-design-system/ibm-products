@@ -222,6 +222,18 @@ export const InlineEditCell = ({
           sendFocusBackToGrid();
           inputProps?.onChange?.(item.selectedItem);
         }}
+        downshiftProps={{
+          onStateChange: (downshiftState) => {
+            const { isOpen } = downshiftState || {};
+            // !isOpen does not work in this case because a state change occurs on hover of the
+            // menu items and isOpen is changed to undefined which causes dispatch to be called unexpectedly
+            if (isOpen === false) {
+              dispatch({ type: 'EXIT_EDIT_MODE', payload: cellId });
+              setInEditMode(false);
+              sendFocusBackToGrid();
+            }
+          },
+        }}
         ref={dropdownRef}
       />
     );

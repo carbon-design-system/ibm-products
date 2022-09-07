@@ -15,6 +15,7 @@ export const InlineEditContext = createContext();
 const inlineEditReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_GRID_ACTIVE_FOCUS': {
+      console.log('ADD_GRID_ACTIVE_FOCUS');
       return {
         ...state,
         gridActive: true,
@@ -23,6 +24,7 @@ const inlineEditReducer = (state, action) => {
       };
     }
     case 'REMOVE_GRID_ACTIVE_FOCUS': {
+      console.log('REMOVE_GRID_ACTIVE_FOCUS');
       return {
         ...state,
         gridActive: false,
@@ -32,6 +34,7 @@ const inlineEditReducer = (state, action) => {
       };
     }
     case 'ENTER_EDIT_MODE': {
+      console.log('ENTER_EDIT_MODE');
       return {
         ...state,
         activeCellId: action.payload.activeCellId,
@@ -39,6 +42,7 @@ const inlineEditReducer = (state, action) => {
       };
     }
     case 'EXIT_EDIT_MODE': {
+      console.log('EXIT_EDIT_MODE');
       return {
         ...state,
         activeCellId: action.payload,
@@ -46,6 +50,7 @@ const inlineEditReducer = (state, action) => {
       };
     }
     case 'UPDATE_ACTIVE_CELL_ID': {
+      console.log('UPDATE_ACTIVE_CELL_ID');
       const { direction, oldId, instance } = action.payload;
       if (!action.payload.direction) {
         return {

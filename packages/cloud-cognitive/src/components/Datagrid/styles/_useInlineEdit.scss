@@ -81,6 +81,9 @@ $row-heights: (
   color: $text-02;
   cursor: pointer;
   outline: 0; // handled by active class
+  .#{$block-class}__label-icon {
+    padding-right: $spacing-05;
+  }
   &.#{$block-class}__inline-edit-button--non-edit {
     padding-left: 0;
   }
@@ -141,7 +144,7 @@ $row-heights: (
 .#{$block-class}__inline-edit--outer-cell-button
   .#{$block-class}__inline-edit-button
   .#{$block-class}__inline-edit-button-label.#{$block-class}__inline-edit-button-label-with-icon {
-  padding-right: $spacing-07;
+  padding-right: $spacing-09;
 }
 
 .#{$block-class}__inline-edit--outer-cell-button .#{$carbon-prefix}--text-input,
@@ -179,4 +182,10 @@ $row-heights: (
   width: inherit;
   height: $spacing-09; // default row height
   max-height: none;
+}
+
+.#{$block-class}
+  .#{$block-class}__inline-edit--select
+  .#{$carbon-prefix}--list-box__field {
+  @include input-outline();
 }

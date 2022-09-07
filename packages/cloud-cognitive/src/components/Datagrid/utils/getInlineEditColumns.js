@@ -74,8 +74,12 @@ export const getInlineEditColumns = () => {
       Header: 'Chart type',
       accessor: 'chartType',
       inlineEdit: {
-        type: 'select',
-        items: inlineEditSelectItems,
+        type: 'selection',
+        inputProps: {
+          // These props are passed to the Carbon component used for inline editing
+          items: inlineEditSelectItems,
+          onChange: (item) => console.log(item),
+        },
       },
     },
     {

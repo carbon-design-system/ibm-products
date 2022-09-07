@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { pkg } from '../../../../../settings';
+import { carbon, pkg } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -24,10 +24,27 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
     return;
   }
 
+  // Checks if the dropdown menu is open
+  const dropdownIsActive = () => {
+    const focusedElementRole = document.activeElement.getAttribute('role');
+    if (
+      focusedElementRole === 'listbox' &&
+      document.activeElement.classList.contains(
+        `${carbon.prefix}--list-box__menu`
+      )
+    ) {
+      // Prevents arrow keys from scrolling any other content when dropdown menu is open
+      event.preventDefault();
+      return true;
+    }
+    return false;
+  };
+
   // Stop grid key listener when in edit mode
   const isEditing =
-    document.activeElement.id === activeCellId &&
-    document.activeElement.id === editId;
+    (document.activeElement.id === activeCellId &&
+      document.activeElement.id === editId) ||
+    dropdownIsActive();
   if (isEditing || !gridActive) {
     return;
   }
@@ -108,6 +125,14 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
       }
       // Only go into edit mode if there is no editId, meaning that we're not already in edit mode
       if (!editId) {
+        const focusedType = focusedCell.getAttribute('data-inline-type');
+        // Open dropdown immediately after entering edit mode for selection type
+        if (focusedType === 'selection') {
+          setTimeout(() => {
+            const dropdownTrigger = focusedCell.querySelector('button');
+            dropdownTrigger?.click();
+          }, 1);
+        }
         dispatch({
           type: 'ENTER_EDIT_MODE',
           payload: {

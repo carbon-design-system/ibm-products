@@ -54,8 +54,7 @@ const useInlineEdit = (hooks) => {
             {inlineEditType === 'number' &&
               renderInlineEditComponent(inlineEditType)}
             {inlineEditType === 'selection' &&
-              renderInlineEditComponent(inlineEditType)
-            }
+              renderInlineEditComponent(inlineEditType)}
             {/* Render default inline edit cell button, if it's column doesn't have an inline edit configuration */}
             {!inlineEditType && (
               <InlineEditCell

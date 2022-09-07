@@ -14,7 +14,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { TextInput, NumberInput, Dropdown } from 'carbon-components-react';
-import { Edit16, ChevronSort16 } from '@carbon/icons-react';
+import { Edit16, ChevronSort16, ChevronDown16 } from '@carbon/icons-react';
 import { InlineEditButton } from '../InlineEditButton';
 import { pkg } from '../../../../../../settings';
 import cx from 'classnames';
@@ -46,6 +46,7 @@ export const InlineEditCell = ({
 
   const textInputRef = useRef();
   const numberInputRef = useRef();
+  const dropdownRef = useRef();
   const outerButtonElement = useRef();
 
   // If you are in edit mode and click outside of the cell,
@@ -60,6 +61,11 @@ export const InlineEditCell = ({
     saveCellData(cellValue);
   }, [activeCellId, cellId, nonEditCell, editId, cellValue, saveCellData]);
 
+  const openDropdown = () => {
+    const dropdownTrigger = dropdownRef?.current;
+    dropdownTrigger.click();
+  };
+
   const handleInlineCellClick = () => {
     if (!inEditMode) {
       dispatch({
@@ -70,6 +76,11 @@ export const InlineEditCell = ({
         },
       });
       setInEditMode(true);
+      setTimeout(() => {
+        if (type === 'selection') {
+          openDropdown();
+        }
+      }, 1);
     }
   };
 
@@ -121,6 +132,21 @@ export const InlineEditCell = ({
     inlineEditArea.focus();
   };
 
+  const getNewCellId = (key) => {
+    const totalRows = instance.rows.length;
+    const newCellId =
+      key === 'Enter'
+        ? `column-${columnIndex}-row-${
+            cell.row.index < totalRows - 1 ? cell.row.index + 1 : cell.row.index
+          }`
+        : `column-${
+            columnIndex < instance.columns.length - 1
+              ? columnIndex + 1
+              : columnIndex
+          }-row-${cell.row.index}`;
+    return newCellId;
+  };
+
   const handleKeyDown = (event) => {
     const { key } = event;
 
@@ -129,19 +155,7 @@ export const InlineEditCell = ({
       case 'Tab':
       case 'Enter': {
         if (inEditMode) {
-          const totalRows = instance.rows.length;
-          const newCellId =
-            key === 'Enter'
-              ? `column-${columnIndex}-row-${
-                  cell.row.index < totalRows - 1
-                    ? cell.row.index + 1
-                    : cell.row.index
-                }`
-              : `column-${
-                  columnIndex < instance.columns.length - 1
-                    ? columnIndex + 1
-                    : columnIndex
-                }-row-${cell.row.index}`;
+          const newCellId = getNewCellId(key);
           saveCellData(cellValue);
           dispatch({ type: 'EXIT_EDIT_MODE', payload: newCellId });
           setInEditMode(false);
@@ -185,22 +199,44 @@ export const InlineEditCell = ({
     const { inputProps } = config || {};
     return (
       <Dropdown
-        id="datagrid-inline-edit-select"
+        id={cellId}
         label="Dropdown menu options"
         {...inputProps}
+        hideLabel
         style={{
           width: cell.column.totalWidth,
         }}
         className={cx(`${blockClass}__inline-edit--select`, {
           [`${blockClass}__inline-edit--select-${rowSize}`]: rowSize,
         })}
-        items={config.items}
+        items={inputProps?.items || []}
         initialSelectedItem={cell.value}
         itemToElement={(item) => renderDropdownItem(item)}
         renderSelectedItem={(item) => renderDropdownItem(item)}
-        onChange={(item) => saveCellData(item.selectedItem)}
+        onChange={(item) => {
+          const newCellId = getNewCellId('Enter');
+          saveCellData(item.selectedItem);
+          setCellValue(item.selectedItem);
+          dispatch({ type: 'EXIT_EDIT_MODE', payload: newCellId });
+          setInEditMode(false);
+          sendFocusBackToGrid();
+          inputProps?.onChange?.(item.selectedItem);
+        }}
+        ref={dropdownRef}
       />
     );
+  };
+
+  const setRenderIcon = () => {
+    if (type === 'text') {
+      return Edit16;
+    }
+    if (type === 'number') {
+      return ChevronSort16;
+    }
+    if (type === 'selection') {
+      return ChevronDown16;
+    }
   };
 
   return (
@@ -211,6 +247,7 @@ export const InlineEditCell = ({
       data-column-index={columnIndex}
       data-row-index={cell.row.index}
       data-disabled={nonEditCell}
+      data-inline-type={type}
       onClick={!nonEditCell ? handleInlineCellClick : addActiveState}
       onKeyDown={!nonEditCell ? handleKeyDown : null}
       className={cx(`${blockClass}__inline-edit--outer-cell-button`, {
@@ -221,8 +258,9 @@ export const InlineEditCell = ({
       {!inEditMode && (
         <InlineEditButton
           isActiveCell={cellId === activeCellId}
-          renderIcon={type === 'number' ? ChevronSort16 : Edit16}
-          label={value}
+          renderIcon={setRenderIcon()}
+          label={type === 'selection' ? value.text : value}
+          labelIcon={value?.icon || null}
           placeholder={placeholder}
           tabIndex={tabIndex}
           nonEditCell={nonEditCell}
@@ -267,9 +305,7 @@ export const InlineEditCell = ({
               ref={numberInputRef}
             />
           )}
-          {type === 'selection' && (
-            renderSelectCell()
-          )}
+          {type === 'selection' && renderSelectCell()}
         </>
       )}
     </div>

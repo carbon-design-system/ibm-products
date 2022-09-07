@@ -14,7 +14,7 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { TextInput, NumberInput } from 'carbon-components-react';
-import { Edit16, ChevronSort16 } from '@carbon/icons-react';
+import { Edit16, CaretSort16 } from '@carbon/icons-react';
 import { InlineEditButton } from '../InlineEditButton';
 import { pkg } from '../../../../../../settings';
 import cx from 'classnames';
@@ -185,7 +185,7 @@ export const InlineEditCell = ({
       {!inEditMode && (
         <InlineEditButton
           isActiveCell={cellId === activeCellId}
-          renderIcon={type === 'number' ? ChevronSort16 : Edit16}
+          renderIcon={type === 'number' ? CaretSort16 : Edit16}
           label={value}
           placeholder={placeholder}
           tabIndex={tabIndex}

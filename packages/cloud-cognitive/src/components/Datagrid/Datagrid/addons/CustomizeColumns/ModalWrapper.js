@@ -12,12 +12,13 @@ import PropTypes from 'prop-types';
 import CustomizeColumnsModal from './CustomizeColumnsModal';
 
 const ModalWrapper = ({ instance }) => {
-  const { onSaveColumnPrefs, isModalOpen, setIsModalOpen, ...rest } =
+  const { onSaveColumnPrefs, isModalOpen, setIsModalOpen, labels, ...rest } =
     instance.customizeColumnsProps;
   if (isModalOpen) {
     return (
       <CustomizeColumnsModal
         {...rest}
+        {...labels}
         isOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
         columnDefinitions={instance.allColumns}

@@ -39,14 +39,14 @@ exports[`Panel Rendering renders the HTML of the node's subtree 1`] = `
     <PanelContainer
       className={null}
       closeButton={
-        Object {
+        {
           "label": "Label",
           "onClick": [Function],
         }
       }
       disableEscape={false}
       hasScrollingContent={false}
-      labels={Object {}}
+      labels={{}}
       primaryButton={null}
       renderFooter={null}
       rootNode={

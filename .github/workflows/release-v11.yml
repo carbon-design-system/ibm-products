@@ -40,6 +40,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn lerna publish --preid rc --dist-tag next --create-release
-          github --ignore-changes 'config/**/*' 'packages/security/**/*'
-          'packages/cdai/**/*' 'packages/core/**/*' --yes # This publishes subsequent v2.x.x releases
+        run: yarn lerna publish --preid rc --dist-tag next --no-verify-access --create-release github --ignore-changes 'config/**/*' 'packages/security/**/*' 'packages/cdai/**/*' 'packages/core/**/*' --yes # This publishes subsequent v2.x.x releases

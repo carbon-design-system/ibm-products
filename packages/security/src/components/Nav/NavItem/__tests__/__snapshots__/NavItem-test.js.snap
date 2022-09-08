@@ -5,20 +5,20 @@ exports[`NavItem Rendering renders correctly 1`] = `ShallowWrapper {}`;
 exports[`NavItem Rendering renders the HTML of the node's subtree 1`] = `
 LoadedCheerio {
   "0": Node {
-    "attribs": Object {
+    "attribs": {
       "class": "security--nav__list__item class security--nav__list__item--active",
       "label": "",
       "role": "menuitem",
     },
-    "children": Array [
+    "children": [
       Node {
-        "attribs": Object {
+        "attribs": {
           "class": "security--nav__list__item__link",
           "href": "#",
           "id": "security--nav__list__item__2",
           "tabindex": "0",
         },
-        "children": Array [
+        "children": [
           Node {
             "data": "Label",
             "next": null,
@@ -33,13 +33,13 @@ LoadedCheerio {
         "parent": [Circular],
         "prev": null,
         "type": "tag",
-        "x-attribsNamespace": Object {
+        "x-attribsNamespace": {
           "class": undefined,
           "href": undefined,
           "id": undefined,
           "tabindex": undefined,
         },
-        "x-attribsPrefix": Object {
+        "x-attribsPrefix": {
           "class": undefined,
           "href": undefined,
           "id": undefined,
@@ -51,7 +51,7 @@ LoadedCheerio {
     "namespace": "http://www.w3.org/1999/xhtml",
     "next": null,
     "parent": Node {
-      "children": Array [
+      "children": [
         [Circular],
       ],
       "name": "root",
@@ -62,12 +62,12 @@ LoadedCheerio {
     },
     "prev": null,
     "type": "tag",
-    "x-attribsNamespace": Object {
+    "x-attribsNamespace": {
       "class": undefined,
       "label": undefined,
       "role": undefined,
     },
-    "x-attribsPrefix": Object {
+    "x-attribsPrefix": {
       "class": undefined,
       "label": undefined,
       "role": undefined,
@@ -75,55 +75,55 @@ LoadedCheerio {
   },
   "_root": LoadedCheerio {
     "0": Node {
-      "children": Array [
+      "children": [
         Node {
-          "attribs": Object {},
-          "children": Array [
+          "attribs": {},
+          "children": [
             Node {
-              "attribs": Object {},
-              "children": Array [],
+              "attribs": {},
+              "children": [],
               "name": "head",
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Node {
-                "attribs": Object {},
-                "children": Array [],
+                "attribs": {},
+                "children": [],
                 "name": "body",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": null,
                 "parent": [Circular],
                 "prev": [Circular],
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
               "parent": [Circular],
               "prev": null,
               "type": "tag",
-              "x-attribsNamespace": Object {},
-              "x-attribsPrefix": Object {},
+              "x-attribsNamespace": {},
+              "x-attribsPrefix": {},
             },
             Node {
-              "attribs": Object {},
-              "children": Array [],
+              "attribs": {},
+              "children": [],
               "name": "body",
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": null,
               "parent": [Circular],
               "prev": Node {
-                "attribs": Object {},
-                "children": Array [],
+                "attribs": {},
+                "children": [],
                 "name": "head",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": [Circular],
                 "parent": [Circular],
                 "prev": null,
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
               "type": "tag",
-              "x-attribsNamespace": Object {},
-              "x-attribsPrefix": Object {},
+              "x-attribsNamespace": {},
+              "x-attribsPrefix": {},
             },
           ],
           "name": "html",
@@ -132,8 +132,8 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": null,
           "type": "tag",
-          "x-attribsNamespace": Object {},
-          "x-attribsPrefix": Object {},
+          "x-attribsNamespace": {},
+          "x-attribsPrefix": {},
         },
       ],
       "name": "root",
@@ -145,13 +145,13 @@ LoadedCheerio {
     },
     "_root": [Circular],
     "length": 1,
-    "options": Object {
+    "options": {
       "decodeEntities": true,
       "xml": false,
     },
   },
   "length": 1,
-  "options": Object {
+  "options": {
     "decodeEntities": true,
     "xml": false,
   },

@@ -79,11 +79,12 @@ export const InlineEditCell = ({
   useEffect(() => {
     if (
       previousState?.editId === cellId &&
-      previousState?.activeCellId === cellId
+      previousState?.activeCellId === cellId &&
+      activeCellId !== cellId
     ) {
       setInitialValue(cellValue);
     }
-  }, [previousState, cellId, cellValue]);
+  }, [previousState, cellId, cellValue, activeCellId]);
 
   const handleInlineCellClick = () => {
     if (!inEditMode) {

@@ -19,6 +19,7 @@ import { InlineEditButton } from '../InlineEditButton';
 import { pkg } from '../../../../../../settings';
 import cx from 'classnames';
 import { InlineEditContext } from '../InlineEditContext';
+import { usePreviousValue } from '../../../../../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 export const InlineEditCell = ({
@@ -43,6 +44,7 @@ export const InlineEditCell = ({
   const [cellValue, setCellValue] = useState(value);
   const [initialValue, setInitialValue] = useState();
   const { activeCellId, editId } = state;
+  const previousState = usePreviousValue({ editId, activeCellId });
   const { inputProps } = config || {};
 
   const textInputRef = useRef();
@@ -65,6 +67,17 @@ export const InlineEditCell = ({
       saveCellData(cellValue);
     }
   }, [activeCellId, cellId, nonEditCell, editId, cellValue, saveCellData]);
+
+  // Re-initializes initialValue if clicking outside of a cell that was previously
+  // in edit mode, otherwise `initialValue` becomes stale
+  useEffect(() => {
+    if (
+      previousState?.editId === cellId &&
+      previousState?.activeCellId === cellId
+    ) {
+      setInitialValue(cellValue);
+    }
+  }, [previousState, cellId, cellValue]);
 
   const handleInlineCellClick = () => {
     if (!inEditMode) {

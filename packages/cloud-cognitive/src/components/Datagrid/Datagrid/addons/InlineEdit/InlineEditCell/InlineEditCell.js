@@ -175,6 +175,10 @@ export const InlineEditCell = ({
       case 'Tab':
       case 'Enter': {
         if (inEditMode) {
+          // Dropdown saves are handled in the Dropdown's onChange prop
+          if (type === 'selection') {
+            return;
+          }
           const newCellId = getNewCellId(key);
           saveCellData(cellValue);
           setInitialValue(cellValue);
@@ -362,5 +366,9 @@ InlineEditCell.propTypes = {
   tabIndex: PropTypes.number,
   totalInlineEditColumns: PropTypes.number,
   type: PropTypes.oneOf(['text', 'number', 'selection', 'date']),
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.object]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+    PropTypes.object,
+  ]),
 };

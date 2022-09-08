@@ -41,12 +41,18 @@ export const InlineEditCell = ({
   const { state, dispatch } = useContext(InlineEditContext);
   const [inEditMode, setInEditMode] = useState(false);
   const [cellValue, setCellValue] = useState(value);
+  const [initialValue, setInitialValue] = useState();
   const { activeCellId, editId } = state;
   const { inputProps } = config || {};
 
   const textInputRef = useRef();
   const numberInputRef = useRef();
   const outerButtonElement = useRef();
+
+  useEffect(() => {
+    setInitialValue(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // If you are in edit mode and click outside of the cell,
   // this changes the cell back to the InlineEditButton
@@ -56,8 +62,8 @@ export const InlineEditCell = ({
     }
     if (activeCellId === cellId && editId === cellId && !nonEditCell) {
       setInEditMode(true);
+      saveCellData(cellValue);
     }
-    saveCellData(cellValue);
   }, [activeCellId, cellId, nonEditCell, editId, cellValue, saveCellData]);
 
   const handleInlineCellClick = () => {
@@ -143,6 +149,7 @@ export const InlineEditCell = ({
                     : columnIndex
                 }-row-${cell.row.index}`;
           saveCellData(cellValue);
+          setInitialValue(cellValue);
           dispatch({ type: 'EXIT_EDIT_MODE', payload: newCellId });
           setInEditMode(false);
           sendFocusBackToGrid();
@@ -152,7 +159,8 @@ export const InlineEditCell = ({
       case 'Escape': {
         if (inEditMode) {
           dispatch({ type: 'EXIT_EDIT_MODE', payload: cellId });
-          setCellValue(value);
+          setCellValue(initialValue);
+          saveCellData(initialValue);
           setInEditMode(false);
           sendFocusBackToGrid();
         }

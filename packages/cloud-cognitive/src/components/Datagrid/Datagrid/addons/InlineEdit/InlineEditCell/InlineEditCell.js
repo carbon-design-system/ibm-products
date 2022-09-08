@@ -362,5 +362,5 @@ InlineEditCell.propTypes = {
   tabIndex: PropTypes.number,
   totalInlineEditColumns: PropTypes.number,
   type: PropTypes.oneOf(['text', 'number', 'selection', 'date']),
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.object]),
 };

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`IdeNavigation unit tests view tests renders the expected structure with all provided 1`] = `
-Array [
+[
   <div
     className=" ide-navigation"
     data-ui-id="IdeNavigation"
@@ -44,7 +44,7 @@ Array [
         </IdeSideNavMenu>
         <IdeSideNavMenu
           renderIcon={
-            Object {
+            {
               "$$typeof": Symbol(react.forward_ref),
               "render": [Function],
             }
@@ -70,7 +70,7 @@ Array [
         <IdeSideNavLink
           href="javascript:void()"
           renderIcon={
-            Object {
+            {
               "$$typeof": Symbol(react.forward_ref),
               "render": [Function],
             }
@@ -102,7 +102,7 @@ Array [
 `;
 
 exports[`IdeNavigation unit tests view tests renders the expected structure with no props provided 1`] = `
-Array [
+[
   <div
     className=" ide-navigation"
     data-ui-id="IdeNavigation"
@@ -111,7 +111,6 @@ Array [
       addFocusListeners={false}
       addMouseListeners={false}
       aria-label="Example Aria Labeled"
-      aria-labelledby="Example Aria Labeled by"
       className="ide-navigation--nav-theme ide-navigation--nav-overrides "
       data-ui-id="IdeNavigation--left-nav"
       defaultExpanded={false}

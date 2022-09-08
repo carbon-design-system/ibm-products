@@ -14,11 +14,12 @@ import React, {
 } from 'react';
 import PropTypes from 'prop-types';
 import { TextInput, NumberInput, Dropdown } from 'carbon-components-react';
-import { Edit16, ChevronSort16, ChevronDown16 } from '@carbon/icons-react';
+import { Edit16, CaretSort16, ChevronDown16 } from '@carbon/icons-react';
 import { InlineEditButton } from '../InlineEditButton';
 import { pkg } from '../../../../../../settings';
 import cx from 'classnames';
 import { InlineEditContext } from '../InlineEditContext';
+import { usePreviousValue } from '../../../../../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 export const InlineEditCell = ({
@@ -41,13 +42,20 @@ export const InlineEditCell = ({
   const { state, dispatch } = useContext(InlineEditContext);
   const [inEditMode, setInEditMode] = useState(false);
   const [cellValue, setCellValue] = useState(value);
+  const [initialValue, setInitialValue] = useState();
   const { activeCellId, editId } = state;
+  const previousState = usePreviousValue({ editId, activeCellId });
   const { inputProps } = config || {};
 
   const textInputRef = useRef();
   const numberInputRef = useRef();
   const dropdownRef = useRef();
   const outerButtonElement = useRef();
+
+  useEffect(() => {
+    setInitialValue(value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // If you are in edit mode and click outside of the cell,
   // this changes the cell back to the InlineEditButton
@@ -57,14 +65,25 @@ export const InlineEditCell = ({
     }
     if (activeCellId === cellId && editId === cellId && !nonEditCell) {
       setInEditMode(true);
+      saveCellData(cellValue);
     }
-    saveCellData(cellValue);
   }, [activeCellId, cellId, nonEditCell, editId, cellValue, saveCellData]);
 
   const openDropdown = () => {
     const dropdownTrigger = dropdownRef?.current;
     dropdownTrigger.click();
   };
+
+  // Re-initializes initialValue if clicking outside of a cell that was previously
+  // in edit mode, otherwise `initialValue` becomes stale
+  useEffect(() => {
+    if (
+      previousState?.editId === cellId &&
+      previousState?.activeCellId === cellId
+    ) {
+      setInitialValue(cellValue);
+    }
+  }, [previousState, cellId, cellValue]);
 
   const handleInlineCellClick = () => {
     if (!inEditMode) {
@@ -157,6 +176,7 @@ export const InlineEditCell = ({
         if (inEditMode) {
           const newCellId = getNewCellId(key);
           saveCellData(cellValue);
+          setInitialValue(cellValue);
           dispatch({ type: 'EXIT_EDIT_MODE', payload: newCellId });
           setInEditMode(false);
           sendFocusBackToGrid();
@@ -166,7 +186,8 @@ export const InlineEditCell = ({
       case 'Escape': {
         if (inEditMode) {
           dispatch({ type: 'EXIT_EDIT_MODE', payload: cellId });
-          setCellValue(value);
+          setCellValue(initialValue);
+          saveCellData(initialValue);
           setInEditMode(false);
           sendFocusBackToGrid();
         }
@@ -244,7 +265,7 @@ export const InlineEditCell = ({
       return Edit16;
     }
     if (type === 'number') {
-      return ChevronSort16;
+      return CaretSort16;
     }
     if (type === 'selection') {
       return ChevronDown16;

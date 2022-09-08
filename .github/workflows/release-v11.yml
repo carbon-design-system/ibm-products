@@ -2,6 +2,8 @@ name: Releases @carbon/ibm-products with v11 support # Builds and releases v11 s
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '30 4 * * TUE' # Release every Tuesday at 4:30am EST
 
 jobs:
   Release_v11:
@@ -31,11 +33,11 @@ jobs:
         run: yarn
 
       - name: Continuous integration check (includes build)
-        run: yarn ci-check
+        run: yarn ci-check:v11
 
       # Dry run - `yarn lerna version --no-git-tag-version --no-push`
       - name: Publish
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: yarn lerna publish --preid rc --dist-tag next --create-release github --ignore-changes 'config/**/*' 'packages/security/**/*' 'packages/cdai/**/*' 'packages/core/**/*' --yes # This publishes subsequent v2.x.x releases
+        run: yarn lerna publish --preid rc --dist-tag next --no-verify-access --create-release github --ignore-changes 'config/**/*' 'packages/security/**/*' 'packages/cdai/**/*' 'packages/core/**/*' --yes # This publishes subsequent v2.x.x releases

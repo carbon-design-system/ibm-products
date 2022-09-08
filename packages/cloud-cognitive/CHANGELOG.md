@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.29.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.28.0...@carbon/ibm-products@1.29.0) (2022-09-06)
+
+
+### Bug Fixes
+
+* **Datagrid:** add withSelectColumns when using useSelectRows ([#2241](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2241)) ([2a5e194](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2a5e1948a16aa6cf4f1ba5126a58f1f99d1ec69d))
+* **removeModal:** Edit small inconsistencies from pal ([#2245](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2245)) ([5cb4b4e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5cb4b4ee6f3fc6ab69512811bb1dddca18e60194))
+* **SidePanel:** style update for title truncation issue ([#2239](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2239)) ([c88b085](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c88b085c542fb10a12a844f2b5c419e2e4676db4))
+* update to Carbon v10 compatible versions to latest ([#2249](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2249)) ([2a2ccfa](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2a2ccfaef41d5247724aed978fb62567932ea6dc))
+
+
+### Features
+
+* **WebTerminal:** Releases the WebTerminal 🚀 ([#2246](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2246)) ([2afe754](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2afe7542b29224574234ef9552dc3f62cb160dc6))
+
+
+
+
+
 # [1.28.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.27.0...@carbon/ibm-products@1.28.0) (2022-08-30)
 
 

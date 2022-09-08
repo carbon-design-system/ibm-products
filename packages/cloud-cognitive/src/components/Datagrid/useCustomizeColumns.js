@@ -17,6 +17,7 @@ const useCustomizeColumns = (hooks) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   hooks.useInstance.push((instance) => {
     const { customizeColumnsProps } = instance;
+    const { labels } = customizeColumnsProps || {};
     Object.assign(instance, {
       customizeColumnsProps: {
         ...customizeColumnsProps,
@@ -25,6 +26,7 @@ const useCustomizeColumns = (hooks) => {
       },
       CustomizeColumnsButton: (props) => (
         <ToggleButtonWrapper
+          iconTooltipLabel={labels?.iconTooltipLabel}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
           {...props}

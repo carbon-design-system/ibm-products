@@ -80,6 +80,7 @@ $row-heights: (
     padding-left: 0;
   }
   .#{$block-class}__inline-edit-button-icon {
+    height: $spacing-05;
     fill: $icon-02;
   }
   // Always show renderIcon if inline edit columns are less than half of total columns

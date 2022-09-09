@@ -30,29 +30,11 @@ export const inlineEditSelectItems = [
   },
 ];
 
-export const getInlineEditColumns = ({ onDataUpdate }) => {
-  // Saves the new formatted date to the data passed to the Datagrid component
-  const updateCellDate = (formattedDate, cell) => {
-    const columnId = cell.column.id;
-    const rowIndex = cell.row.index;
-    onDataUpdate((prev) =>
-      prev.map((row, index) => {
-        if (index === rowIndex) {
-          return {
-            ...prev[rowIndex],
-            [columnId]: formattedDate,
-          };
-        }
-        return row;
-      })
-    );
-  };
-
+export const getInlineEditColumns = () => {
   return [
     {
       Header: 'Row Index',
       accessor: (row, i) => i,
-      sticky: 'left',
       id: 'rowIndex', // id is required when accessor is a function.
     },
     {
@@ -60,6 +42,7 @@ export const getInlineEditColumns = ({ onDataUpdate }) => {
       accessor: 'firstName',
       inlineEdit: {
         type: 'text',
+        inputProps: {}, // These props are passed to the Carbon component used for inline editing
       },
     },
     {
@@ -67,40 +50,55 @@ export const getInlineEditColumns = ({ onDataUpdate }) => {
       accessor: 'lastName',
       inlineEdit: {
         type: 'text',
+        inputProps: {}, // These props are passed to the Carbon component used for inline editing
       },
     },
     {
       Header: 'Age',
       accessor: 'age',
-      width: 50,
+      width: 120,
+      inlineEdit: {
+        type: 'number',
+        inputProps: {}, // These props are passed to the Carbon component used for inline editing
+      },
     },
     {
       Header: 'Visits',
       accessor: 'visits',
-      width: 60,
+      width: 120,
+      inlineEdit: {
+        type: 'number',
+        inputProps: {}, // These props are passed to the Carbon component used for inline editing
+      },
     },
     {
       Header: 'Active since',
       accessor: 'activeSince',
       inlineEdit: {
         type: 'date',
-        // optionally pass props here to be passed through to Carbon's DatePicker component
-        onChange: (newDateObj, cell) => {
-          const formattedDate = formatDate(newDateObj);
-          updateCellDate(formattedDate, cell);
-        },
-        // optionally pass props here to be passed through to Carbon's DatePickerInput component
-        datePickerInputProps: {
+        inputProps: {
+          // optionally pass props here to be passed through to Carbon's DatePicker component
+          onChange: (newDateObj, cell) => {
+            console.log(newDateObj);
+          },
           labelText: 'Change active since date',
-        },
+          // optionally pass props here to be passed through to Carbon's DatePickerInput component
+          datePickerInputProps: {
+            labelText: 'Change active since date',
+          },
+        }
       },
     },
     {
       Header: 'Chart type',
       accessor: 'chartType',
       inlineEdit: {
-        type: 'select',
-        items: inlineEditSelectItems,
+        type: 'selection',
+        inputProps: {
+          // These props are passed to the Carbon component used for inline editing
+          items: inlineEditSelectItems,
+          onChange: (item) => console.log(item),
+        },
       },
     },
     {

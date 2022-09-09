@@ -459,7 +459,7 @@ export const ClickableRow = () => {
 export const InlineEdit = () => {
   const [data, setData] = useState(makeData(10));
   const columns = React.useMemo(
-    () => getInlineEditColumns({ onDataUpdate: setData }),
+    () => getInlineEditColumns(),
     []
   );
   const datagridState = useDatagrid(

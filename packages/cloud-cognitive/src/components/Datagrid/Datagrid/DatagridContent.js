@@ -42,7 +42,6 @@ export const DatagridContent = ({ datagridState }) => {
     if (!withInlineEdit) {
       return;
     }
-    console.log(target);
     // We return from here if we find a parent element with the selector below
     // because that element was initially part of the grid area but was removed
     // and swapped out with an input, i.e. text, number, selection, or date picker

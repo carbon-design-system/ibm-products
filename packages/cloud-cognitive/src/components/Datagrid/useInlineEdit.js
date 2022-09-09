@@ -40,7 +40,6 @@ const useInlineEdit = (hooks) => {
         },
       ];
     }
-
     return [
       props,
       {

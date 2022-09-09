@@ -142,7 +142,7 @@ const changeProps = (elementName, headerCellRef, props, data) => {
         className: cx({
           [`${leftStickyStyleClassPrefix}-${elementName}`]: true,
           [`${leftStickyStyleClassPrefix}-${elementName}--with-extra-select-column`]:
-            data?.instance?.withStickyColumn,
+            data?.instance?.withSelectRows,
         }),
         ...(headerCellRef && {
           ref: headerCellRef,

@@ -818,6 +818,18 @@ export const DatagridActionsToolbar = () => {
       data,
       DatagridActions,
       DatagridBatchActions,
+      rowSizeProps: {
+        labels: {
+          rowSizeLabels: {
+            xl: 'Extra large',
+            lg: 'Large (default)',
+            md: 'Medium',
+            sm: 'Small',
+            xs: 'Extra small',
+          },
+          legendText: 'Row height',
+        },
+      },
     },
     useSelectRows
   );
@@ -876,6 +888,21 @@ export const CustomizingColumns = () => {
       customizeColumnsProps: {
         onSaveColumnPrefs: (newColDefs) => {
           console.log(newColDefs);
+        },
+        labels: {
+          findColumnPlaceholderLabel: 'Find column',
+          resetToDefaultLabel: 'Reset to default',
+          customizeModalHeadingLabel: 'Customize display',
+          primaryButtonTextLabel: 'Save',
+          secondaryButtonTextLabel: 'Cancel',
+          instructionsLabel:
+            'Deselect columns to hide them. Click and drag the white box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
+          iconTooltipLabel: 'Customize columns',
+          assistiveTextInstructionsLabel:
+            'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
+          assistiveTextDisabledInstructionsLabel:
+            'Reordering columns are disabled because they are filtered currently.',
+          selectAllLabel: 'Column name',
         },
       },
       DatagridActions,
@@ -1243,6 +1270,7 @@ export const RowActionButton = () => {
   const [data] = useState(makeData(10));
   const [msg, setMsg] = useState('click action menu');
   const onActionClick = (actionId, row) => {
+    console.log(onActionClick);
     const { original } = row;
     setMsg(
       `Clicked [${actionId}] on row: <${original.firstName} ${original.lastName}>`

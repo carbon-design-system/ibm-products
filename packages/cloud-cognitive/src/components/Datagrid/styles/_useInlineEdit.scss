@@ -206,29 +206,3 @@ $row-heights: (
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-.#{$block-class}__inline-edit--select,
-.#{$block-class}__inline-edit-cell {
-  margin-left: calc(-1 * #{$spacing-05});
-}
-
-.#{$block-class}__inline-edit-cell {
-  display: flex;
-  height: 100%;
-  align-items: center;
-}
-
-.#{$block-class}__inline-edit-cell:hover {
-  background-color: $active-ui;
-}
-
-.#{$block-class} .#{$pkg-prefix}--inline-edit__after-input-elements {
-  display: flex;
-  align-items: center;
-}
-
-.#{$block-class}
-  .#{$block-class}__inline-edit--select
-  .#{$carbon-prefix}--list-box__field {
-  @include input-outline();
-}

@@ -6,7 +6,7 @@ import DatagridHead from './DatagridHead';
 import DatagridBody from './DatagridBody';
 import DatagridToolbar from './DatagridToolbar';
 import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
-import { pkg, carbon } from '../../../settings';
+import { pkg } from '../../../settings';
 import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 import { useClickOutside } from '../../../global/js/hooks';
@@ -47,10 +47,7 @@ export const DatagridContent = ({ datagridState }) => {
     // and swapped out with an input, i.e. text, number, selection, or date picker
     if (
       target.closest(`.${blockClass}__inline-edit-button`) ||
-      target.closest(`.${blockClass}__inline-edit--select`) ||
-      target.closest(
-        `.flatpickr-calendar.${carbon.prefix}--date-picker__calendar`
-      )
+      target.closest(`.${blockClass}__inline-edit--select`)
     ) {
       return;
     }

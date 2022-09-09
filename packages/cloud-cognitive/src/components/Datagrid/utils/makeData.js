@@ -9,23 +9,6 @@ import React from 'react';
 import namor from 'namor';
 import { inlineEditSelectItems } from './getInlineEditColumns';
 
-// Format date to mm/dd/yyyy, this is the default `dateFormat` prop by Carbon's DatePicker
-// To achieve dd/mm/yyyy, update the `dateFormat` prop and pass a dd/mm/yyyy string
-// export const formatDate = (date, format) => {
-//   if (format === 'd/m/y') {
-//     return [
-//       padTo2Digits(date.getMonth() + 1),
-//       padTo2Digits(date.getDate()),
-//       date.getFullYear(),
-//     ].join('/');
-//   }
-//   return [
-//     padTo2Digits(date.getMonth() + 1),
-//     padTo2Digits(date.getDate()),
-//     date.getFullYear(),
-//   ].join('/');
-// };
-
 const getRandomInteger = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);

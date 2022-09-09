@@ -13,8 +13,19 @@ import React, {
   useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
-import { TextInput, NumberInput, Dropdown, DatePicker, DatePickerInput } from 'carbon-components-react';
-import { Edit16, CaretSort16, ChevronDown16, Calendar16 } from '@carbon/icons-react';
+import {
+  TextInput,
+  NumberInput,
+  Dropdown,
+  DatePicker,
+  DatePickerInput,
+} from 'carbon-components-react';
+import {
+  Edit16,
+  CaretSort16,
+  ChevronDown16,
+  Calendar16,
+} from '@carbon/icons-react';
 import { InlineEditButton } from '../InlineEditButton';
 import { pkg } from '../../../../../../settings';
 import cx from 'classnames';
@@ -72,7 +83,10 @@ export const InlineEditCell = ({
   }, [activeCellId, cellId, nonEditCell, editId, cellValue, saveCellData]);
 
   const openDropdown = (type) => {
-    const dropdownTrigger = type === 'selection' ? dropdownRef?.current : datePickerRef?.current?.inputField;
+    const dropdownTrigger =
+      type === 'selection'
+        ? dropdownRef?.current
+        : datePickerRef?.current?.inputField;
     dropdownTrigger.click();
     if (type === 'date') {
       // datePickerRef.current.cal.calendarContainer.focus();
@@ -317,7 +331,7 @@ export const InlineEditCell = ({
         <DatePickerInput
           {...datePickerInputProps}
           style={{
-            position: 'static'
+            position: 'static',
           }}
           placeholder={datePickerInputProps?.placeholder || 'mm/dd/yyyy'}
           labelText={datePickerInputProps?.labelText || 'Set date'}
@@ -343,22 +357,14 @@ export const InlineEditCell = ({
       const maskedMonth = padTo2Digits(value.getMonth() + 1);
       const maskedDay = padTo2Digits(value.getDate());
       if (dateFormat === 'm/d/Y' || dateFormat === 'm/d/y') {
-        return [
-          maskedMonth,
-          maskedDay,
-          maskedFullYear
-        ].join('/')
+        return [maskedMonth, maskedDay, maskedFullYear].join('/');
       }
       if (dateFormat === 'd/m/Y' || dateFormat === 'd/m/y') {
-        return [
-          maskedDay,
-          maskedMonth,
-          maskedFullYear
-        ].join('/')
+        return [maskedDay, maskedMonth, maskedFullYear].join('/');
       }
     }
     return null;
-  }
+  };
 
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
@@ -380,7 +386,13 @@ export const InlineEditCell = ({
         <InlineEditButton
           isActiveCell={cellId === activeCellId}
           renderIcon={setRenderIcon()}
-          label={type === 'selection' ? value.text : type === 'date' ? buildDate(value) : value}
+          label={
+            type === 'selection'
+              ? value.text
+              : type === 'date'
+              ? buildDate(value)
+              : value
+          }
           labelIcon={value?.icon || null}
           placeholder={placeholder}
           tabIndex={tabIndex}

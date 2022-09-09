@@ -10,7 +10,6 @@ import {
   ChartColumnFloating16,
   ChartVennDiagram16,
 } from '@carbon/icons-react';
-import { formatDate } from './makeData';
 
 export const inlineEditSelectItems = [
   {
@@ -79,14 +78,14 @@ export const getInlineEditColumns = () => {
         inputProps: {
           // optionally pass props here to be passed through to Carbon's DatePicker component
           onChange: (newDateObj, cell) => {
-            console.log(newDateObj);
+            console.log(newDateObj, cell);
           },
           labelText: 'Change active since date',
           // optionally pass props here to be passed through to Carbon's DatePickerInput component
           datePickerInputProps: {
             labelText: 'Change active since date',
           },
-        }
+        },
       },
     },
     {

@@ -62,15 +62,18 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
 
   // Checks if the date picker is open
   const datePickerIsActive = () => {
-    const focusedCalendarElement = document.querySelector(`.${carbon.prefix}--date-picker__input.flatpickr-input.active`);
-    if (focusedCalendarElement || document.activeElement.classList.contains(
-      `flatpickr-day`
-    )) {
+    const focusedCalendarElement = document.querySelector(
+      `.${carbon.prefix}--date-picker__input.flatpickr-input.active`
+    );
+    if (
+      focusedCalendarElement ||
+      document.activeElement.classList.contains(`flatpickr-day`)
+    ) {
       event.preventDefault();
       return true;
     }
     return false;
-  }
+  };
 
   // Stop grid key listener when in edit mode
   const isEditing =

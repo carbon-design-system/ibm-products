@@ -49,7 +49,9 @@ export const DatagridContent = ({ datagridState }) => {
     if (
       target.closest(`.${blockClass}__inline-edit-button`) ||
       target.closest(`.${blockClass}__inline-edit--select`) ||
-      target.closest(`.flatpickr-calendar.${carbon.prefix}--date-picker__calendar`)
+      target.closest(
+        `.flatpickr-calendar.${carbon.prefix}--date-picker__calendar`
+      )
     ) {
       return;
     }

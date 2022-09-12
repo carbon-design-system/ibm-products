@@ -6,6 +6,7 @@
  */
 
 import { carbon, pkg } from '../../../../../settings';
+import { getCellIdAsObject } from './InlineEditContext/getCellIdAsObject';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -146,6 +147,36 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
           direction: 'down',
           ...sharedUpdateParams,
         },
+      });
+      break;
+    }
+    // Move active cell to first column in current row
+    case 'Home': {
+      const activeCellObject = getCellIdAsObject(activeCellId);
+      const newActiveCellCoords = {
+        ...activeCellObject,
+        column: 0,
+      }
+      const newActiveCellId = `column-${newActiveCellCoords.column}-row-${newActiveCellCoords.row}`;
+      dispatch({
+        type: 'UPDATE_ACTIVE_CELL_ID',
+        payload: newActiveCellId,
+      });
+      break;
+    }
+    case 'End': {
+      const activeCellObject = getCellIdAsObject(activeCellId);
+      const totalVisibleColumns = instance.visibleColumns.filter(
+        (item) => item.id !== 'spacer'
+      );
+      const newActiveCellCoords = {
+        ...activeCellObject,
+        column: totalVisibleColumns.length - 1,
+      }
+      const newActiveCellId = `column-${newActiveCellCoords.column}-row-${newActiveCellCoords.row}`;
+      dispatch({
+        type: 'UPDATE_ACTIVE_CELL_ID',
+        payload: newActiveCellId,
       });
       break;
     }

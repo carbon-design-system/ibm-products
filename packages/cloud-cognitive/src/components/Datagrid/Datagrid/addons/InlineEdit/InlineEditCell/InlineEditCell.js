@@ -41,7 +41,6 @@ export const InlineEditCell = ({
   placeholder = '',
   tabIndex,
   value,
-  label = 'Inline edit type text label',
   nonEditCell,
   totalInlineEditColumns,
   type,
@@ -55,6 +54,7 @@ export const InlineEditCell = ({
   const [inEditMode, setInEditMode] = useState(false);
   const [cellValue, setCellValue] = useState(value);
   const [initialValue, setInitialValue] = useState();
+  const [cellLabel, setCellLabel] = useState();
   const { activeCellId, editId } = state;
   const previousState = usePreviousValue({ editId, activeCellId });
   const { inputProps } = config || {};
@@ -67,6 +67,9 @@ export const InlineEditCell = ({
 
   useEffect(() => {
     setInitialValue(value);
+    const columnId = cell.column.id;
+    const columnLabel = instance.columns.find(item => item.id === columnId);
+    setCellLabel(typeof columnLabel.Header === 'string' ? columnLabel.Header : 'Inline edit cell label');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -245,7 +248,8 @@ export const InlineEditCell = ({
     return (
       <Dropdown
         id={cellId}
-        label="Dropdown menu options"
+        label={cellLabel ||"Dropdown menu options"}
+        ariaLabel={cellLabel ||"Dropdown menu options"}
         {...inputProps}
         hideLabel
         style={{
@@ -334,7 +338,7 @@ export const InlineEditCell = ({
             position: 'static',
           }}
           placeholder={datePickerInputProps?.placeholder || 'mm/dd/yyyy'}
-          labelText={datePickerInputProps?.labelText || 'Set date'}
+          labelText={datePickerInputProps?.labelText || cellLabel || 'Set date'}
           id={
             datePickerInputProps.id ||
             `${blockClass}__inline-edit--date-picker--${cell.row.index}`
@@ -407,7 +411,7 @@ export const InlineEditCell = ({
         <>
           {type === 'text' && (
             <TextInput
-              labelText={label}
+              labelText={cellLabel}
               placeholder={placeholder}
               {...inputProps}
               id={cellId}
@@ -425,7 +429,7 @@ export const InlineEditCell = ({
           {type === 'number' && (
             <NumberInput
               placeholder={placeholder}
-              label={label}
+              label={cellLabel}
               {...inputProps}
               id={cellId}
               hideLabel
@@ -457,7 +461,6 @@ InlineEditCell.propTypes = {
     rowSize: PropTypes.string,
     tableId: PropTypes.string,
   }),
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   nonEditCell: PropTypes.bool,
   placeholder: PropTypes.string,
   tabIndex: PropTypes.number,

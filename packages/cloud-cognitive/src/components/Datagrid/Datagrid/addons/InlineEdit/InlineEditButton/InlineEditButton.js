@@ -38,7 +38,8 @@ export const InlineEditButton = ({
         [`${blockClass}__inline-edit-button--active`]: isActiveCell,
         [`${blockClass}__inline-edit-button--edit-less-than-half-of-total-cols`]:
           inlineEditColsLessThanHalfOfTotal,
-        [`${blockClass}__inline-edit-button--${type}`]: type === 'date',
+        [`${blockClass}__inline-edit-button--${type}`]:
+          type === 'date' || type === 'selection',
       })}
       tabIndex={tabIndex}
       data-disabled={disabled || nonEditCell}

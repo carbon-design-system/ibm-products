@@ -68,8 +68,12 @@ export const InlineEditCell = ({
   useEffect(() => {
     setInitialValue(value);
     const columnId = cell.column.id;
-    const columnLabel = instance.columns.find(item => item.id === columnId);
-    setCellLabel(typeof columnLabel.Header === 'string' ? columnLabel.Header : 'Inline edit cell label');
+    const columnLabel = instance.columns.find((item) => item.id === columnId);
+    setCellLabel(
+      typeof columnLabel.Header === 'string'
+        ? columnLabel.Header
+        : 'Inline edit cell label'
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -248,8 +252,8 @@ export const InlineEditCell = ({
     return (
       <Dropdown
         id={cellId}
-        label={cellLabel ||"Dropdown menu options"}
-        ariaLabel={cellLabel ||"Dropdown menu options"}
+        label={cellLabel || 'Dropdown menu options'}
+        ariaLabel={cellLabel || 'Dropdown menu options'}
         {...inputProps}
         hideLabel
         style={{

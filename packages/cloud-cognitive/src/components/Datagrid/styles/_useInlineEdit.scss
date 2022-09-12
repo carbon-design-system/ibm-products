@@ -1,0 +1,166 @@
+/*
+* Licensed Materials - Property of IBM
+* 5724-Q36
+* (c) Copyright IBM Corp. 2021
+* US Government Users Restricted Rights - Use, duplication or disclosure
+* restricted by GSA ADP Schedule Contract with IBM Corp.
+*/
+
+@import '../../../global/styles/project-settings';
+@import './variables';
+
+$row-heights: (
+  xs: 1.5rem,
+  sm: 2rem,
+  md: 2.5rem,
+  lg: 3rem,
+  xl: 4rem,
+);
+
+@each $size, $size-value in $row-heights {
+  .#{$block-class}
+    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{$carbon-prefix}--text-input,
+  .#{$block-class}
+    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{$carbon-prefix}--number
+    input[type='number'] {
+    height: $size-value;
+  }
+  .#{$block-class}
+    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{$carbon-prefix}--number__control-btn::before,
+  .#{$block-class}
+    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{$carbon-prefix}--number__control-btn::after {
+    height: calc($size-value - 0.25rem);
+  }
+}
+
+@mixin input-outline($color: $focus) {
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  outline: $spacing-01 solid $color;
+  outline-offset: calc(-1 * #{$spacing-01});
+
+  @media screen and (prefers-contrast) {
+    outline-style: dotted;
+  }
+}
+
+.#{$block-class}__inline-edit-cell {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  transform: translateX(calc(-1 * #{$spacing-05}));
+}
+
+.#{$block-class} .#{$pkg-prefix}--inline-edit__after-input-elements {
+  display: flex;
+  align-items: center;
+}
+
+.#{$block-class}__inline-edit--outer-cell-button {
+  width: 100%;
+  height: calc(100% + 2px); // account for borders
+}
+
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: $spacing-05;
+  color: $text-02;
+  cursor: pointer;
+  outline: 0; // handled by active class
+  &.#{$block-class}__inline-edit-button--non-edit {
+    padding-left: 0;
+  }
+  .#{$block-class}__inline-edit-button-icon {
+    height: $spacing-05;
+    fill: $icon-02;
+  }
+  // Always show renderIcon if inline edit columns are less than half of total columns
+  &:not(.#{$block-class}__inline-edit-button--edit-less-than-half-of-total-cols) {
+    .#{$block-class}__inline-edit-button-icon {
+      display: none;
+    }
+
+    /* stylelint-disable-next-line */
+    &:hover {
+      .#{$block-class}__inline-edit-button-icon {
+        display: block;
+      }
+    }
+  }
+}
+
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button:not([data-disabled='true']):hover {
+  background-color: $hover-selected-ui;
+  color: $text-01;
+  .#{$block-class}__inline-edit-button-icon {
+    fill: $icon-01;
+  }
+}
+
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button.#{$block-class}__inline-edit-button--active:not([data-disabled='true']) {
+  background-color: $active-ui;
+  color: $text-01;
+  cursor: text;
+}
+
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button.#{$block-class}__inline-edit-button--active {
+  @include input-outline;
+}
+
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button--disabled:not(.#{$block-class}__inline-edit-button--edit-less-than-half-of-total-cols) {
+  color: $disabled-02;
+  cursor: not-allowed;
+}
+
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button
+  .#{$block-class}__inline-edit-button-label {
+  overflow: hidden;
+  padding-right: $spacing-05;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button
+  .#{$block-class}__inline-edit-button-label.#{$block-class}__inline-edit-button-label-with-icon {
+  padding-right: $spacing-07;
+}
+
+.#{$block-class}__inline-edit--outer-cell-button .#{$carbon-prefix}--text-input,
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$carbon-prefix}--number
+  input[type='number'] {
+  height: $spacing-09;
+}
+
+.#{$block-class}__inline-edit-button-icon {
+  position: absolute;
+  right: $spacing-05;
+}
+
+.#{$block-class}__table-with-inline-edit.#{$carbon-prefix}--data-table
+  .#{$block-class}__cell-inline-edit {
+  padding: 0;
+  .#{$block-class}__inline-edit-button--non-edit {
+    padding-left: $spacing-05;
+  }
+
+  .#{$carbon-prefix}--number input[type='number'] {
+    min-width: auto;
+    padding-right: $spacing-05;
+  }
+}

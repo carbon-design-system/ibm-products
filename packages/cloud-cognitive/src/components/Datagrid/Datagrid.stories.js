@@ -8,6 +8,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
+import { getInlineEditColumns } from './utils/getInlineEditColumns';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
@@ -40,6 +41,7 @@ import {
   useStickyColumn,
   useActionsColumn,
   useColumnOrder,
+  useInlineEdit,
 } from '.';
 
 import {
@@ -452,6 +454,21 @@ export const ClickableRow = () => {
       </SidePanel>
     </div>
   );
+};
+
+export const InlineEdit = () => {
+  const columns = React.useMemo(() => getInlineEditColumns(), []);
+  const [data, setData] = useState(makeData(10));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      onDataUpdate: setData,
+      DatagridActions,
+    },
+    useInlineEdit
+  );
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 const DataTableSidePanelContent = (selectedRowValues) => {
@@ -1253,6 +1270,7 @@ export const RowActionButton = () => {
   const [data] = useState(makeData(10));
   const [msg, setMsg] = useState('click action menu');
   const onActionClick = (actionId, row) => {
+    console.log(onActionClick);
     const { original } = row;
     setMsg(
       `Clicked [${actionId}] on row: <${original.firstName} ${original.lastName}>`

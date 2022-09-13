@@ -38,24 +38,19 @@ export default {
 };
 
 const Template = (args) => {
-  const myRef = useRef()
+  const myRef = useRef();
   return (
     <ComboButton {...args} ref={myRef}>
       <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
       <ComboButtonItem renderIcon={args.icon && args.icon}>
         ComboButtonItem 2
       </ComboButtonItem>
-      <ComboButtonItem disabled={args.disabled}>ComboButtonItem 3</ComboButtonItem>
-      <ComboButtonItem>
-        ComboButtonItem 4
+      <ComboButtonItem disabled={args.disabled}>
+        ComboButtonItem 3
       </ComboButtonItem>
-      {
-        args.hasDivider ? <ComboButtonItemDivider /> : null
-      }      
+      <ComboButtonItem>ComboButtonItem 4</ComboButtonItem>
+      {args.hasDivider ? <ComboButtonItemDivider /> : null}
       <ComboButtonItem danger={args.danger}>ComboButtonItem 5</ComboButtonItem>
-      
-      
-      
     </ComboButton>
   );
 };
@@ -63,7 +58,7 @@ const Template = (args) => {
 export const Default = prepareStory(Template, {
   args: {
     ...defaultArgs,
-    size: "md"
+    size: 'md',
   },
 });
 
@@ -71,7 +66,7 @@ export const WithDivider = prepareStory(Template, {
   args: {
     ...defaultArgs,
     hasDivider: true,
-    size: "md"
+    size: 'md',
   },
 });
 
@@ -79,7 +74,7 @@ export const WithDanger = prepareStory(Template, {
   args: {
     ...defaultArgs,
     danger: true,
-    size: "md"
+    size: 'md',
   },
 });
 
@@ -87,6 +82,6 @@ export const WithDisabled = prepareStory(Template, {
   args: {
     ...defaultArgs,
     disabled: true,
-    size: "default"
+    size: 'default',
   },
 });

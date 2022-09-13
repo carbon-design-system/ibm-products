@@ -28,7 +28,6 @@ ComboButtonItem.propTypes = {
 
   /** Provide an optional icon to render */
   renderIcon: oneOfType([func, object]),
-
 };
 
 export { ComboButtonItem };

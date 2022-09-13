@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.30.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.29.0...@carbon/ibm-products@1.30.0) (2022-09-13)
+
+
+### Features
+
+* **Datagrid:** inline edit - useInlineEdit hook, text and number types ([#2228](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2228)) ([4d6c839](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4d6c839e7130c841f58367c221953cb51785b16f))
+* **DataSpreadsheet:** add cell deletion and theme prop for designs ([#2220](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2220)) ([3acddc5](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3acddc598017c9afa453ec217154ebfe7b683dfb))
+* **ProductiveCard:** include ghost button in the Action Bar ([#2253](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2253)) ([865e3c0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/865e3c0216832f209d0c0492d4dbd332d3daabb2))
+
+
+
+
+
 # [1.29.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.28.0...@carbon/ibm-products@1.29.0) (2022-09-06)
 
 

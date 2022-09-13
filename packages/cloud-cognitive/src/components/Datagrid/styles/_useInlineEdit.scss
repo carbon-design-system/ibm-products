@@ -97,6 +97,9 @@ $row-heights: (
   &.#{$block-class}__inline-edit-button--date {
     @include carbon--font-family($name: mono);
   }
+  &.#{$block-class}__inline-edit-button--selection {
+    justify-content: flex-start;
+  }
   // Always show renderIcon if inline edit columns are less than half of total columns
   &:not(.#{$block-class}__inline-edit-button--edit-less-than-half-of-total-cols) {
     .#{$block-class}__inline-edit-button-icon {

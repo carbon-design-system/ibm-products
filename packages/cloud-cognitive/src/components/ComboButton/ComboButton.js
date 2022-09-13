@@ -37,32 +37,32 @@ export let ComboButton = React.forwardRef(
 
       // Collect any other property values passed in.
       ...rest
-    }
+    }, ref
   ) => {
     const { current: instanceId } = useRef(uuidv4());
     const [isOpen, setIsOpen] = useState(false);
     const [primaryAction, ...restActions] = Children.toArray(children)
       .filter(Boolean)
-      .map(({ props: { children, ...props }, type }) => {        
+      .map(({ props: { children, ...props }, type }, index) => {        
         return({
         ...props,
         children: (
-          <span className={classnames({
+          <span key={index} className={classnames({
               [`${blockClass}__action`]: type.displayName === "ComboButtonItem",
               [`${blockClass}__divider`]: type.displayName === "ComboButtonItemDivider"
             })}
-            title={children}
-            type={type}>
+            title={children}>
               {children}
           </span>
         ),
       })});
-
+      console.log('ref', ref)
     return (
       <div
         {...rest}
         className={classnames(blockClass, className)}
         data-floating-menu-container
+        ref={ref}
       >
         <Button {...primaryAction} size={size} className={`${blockClass}__btn--${size}`} disabled={disabled} />
 
@@ -91,7 +91,7 @@ export let ComboButton = React.forwardRef(
           >
             {restActions.map(
               ({ children, danger, renderIcon: Icon, ...action }, index) => {
-                if (children.props.type.displayName === "ComboButtonItem") {
+                if (children.props.type?.displayName === "ComboButtonItem") {
                   return (<OverflowMenuItem
                     {...action}
                     key={`${blockClass}--${instanceId}__overflow-menu__item__${index}`}

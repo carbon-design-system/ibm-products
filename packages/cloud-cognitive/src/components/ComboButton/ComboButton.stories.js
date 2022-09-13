@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 
 import {
   getStoryTitle,
@@ -38,8 +38,10 @@ export default {
 };
 
 const Template = (args) => {
+  const myRef = useRef()
+  console.log('my ref', myRef)
   return (
-    <ComboButton {...args}>
+    <ComboButton {...args} ref={myRef}>
       <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
       <ComboButtonItem renderIcon={args.icon && args.icon}>
         ComboButtonItem 2
@@ -62,7 +64,7 @@ const Template = (args) => {
 export const Default = prepareStory(Template, {
   args: {
     ...defaultArgs,
-    size: "default"
+    size: "md"
   },
 });
 
@@ -70,7 +72,7 @@ export const WithDivider = prepareStory(Template, {
   args: {
     ...defaultArgs,
     hasDivider: true,
-    size: "default"
+    size: "md"
   },
 });
 
@@ -78,7 +80,7 @@ export const WithDanger = prepareStory(Template, {
   args: {
     ...defaultArgs,
     danger: true,
-    size: "default"
+    size: "md"
   },
 });
 

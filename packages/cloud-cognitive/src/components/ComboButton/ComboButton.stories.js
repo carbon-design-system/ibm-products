@@ -39,7 +39,6 @@ export default {
 
 const Template = (args) => {
   const myRef = useRef()
-  console.log('my ref', myRef)
   return (
     <ComboButton {...args} ref={myRef}>
       <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>

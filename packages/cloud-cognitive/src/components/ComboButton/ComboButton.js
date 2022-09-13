@@ -56,7 +56,6 @@ export let ComboButton = React.forwardRef(
           </span>
         ),
       })});
-      console.log('ref', ref)
     return (
       <div
         {...rest}

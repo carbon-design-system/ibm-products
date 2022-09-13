@@ -11,7 +11,7 @@ import cx from 'classnames';
 import { TableSelectRow } from 'carbon-components-react';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
 import { selectionColumnId } from './common-column-ids';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -23,6 +23,11 @@ const useSelectRows = (hooks) => {
     Object.assign(instance, { rows: rowsWithSelect });
   };
   hooks.useInstance.push(useInstance);
+  hooks.useInstance.push((instance) => {
+    Object.assign(instance, {
+      withSelectRows: true,
+    });
+  });
   hooks.visibleColumns.push((columns) => [
     {
       id: selectionColumnId,
@@ -40,7 +45,7 @@ const useHighlightSelection = (hooks) => {
       className: cx(
         `${blockClass}__carbon-row`,
         row.getToggleRowSelectedProps().checked
-          ? 'bx--data-table--selected'
+          ? `${carbon.prefix}--data-table--selected ${blockClass}__active-row`
           : ''
       ),
     },
@@ -57,10 +62,14 @@ const SelectRow = (datagridState) => {
     radio,
     toggleAllRowsSelected,
     onRadioSelect,
+    columns,
+    withStickyColumn,
   } = datagridState;
   const selectDisabled = isFetching || row.getRowProps().selectDisabled;
   const { onChange, ...selectProps } = row.getToggleRowSelectedProps();
   const cellProps = cell.getCellProps();
+  const isFirstColumnStickyLeft =
+    columns[0]?.sticky === 'left' && withStickyColumn;
   return (
     <TableSelectRow
       {...cellProps}
@@ -78,7 +87,9 @@ const SelectRow = (datagridState) => {
       }}
       id={`${tableId}-${row.index}`}
       name={`${tableId}-${row.index}-name`}
-      className={cx(`${blockClass}__checkbox-cell`, cellProps.className)}
+      className={cx(`${blockClass}__checkbox-cell`, cellProps.className, {
+        [`${blockClass}__checkbox-cell-sticky-left`]: isFirstColumnStickyLeft,
+      })}
       ariaLabel={`${tableId}-row-${row.index}`} // TODO: aria label should be i18n'ed
       disabled={selectDisabled}
     />

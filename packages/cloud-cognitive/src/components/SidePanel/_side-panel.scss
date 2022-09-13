@@ -137,8 +137,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     box-sizing: border-box;
     background-color: $ui-01;
     color: $text-01;
-    transition: transform $duration--moderate-02;
-    transition-timing-function: carbon--motion(standard);
+    transition: transform $duration--moderate-02 carbon--motion(standard);
     @each $size, $size_value in $side-panel-sizes {
       &.#{$block-class}__container--#{$size} {
         @include setPanelSize($size_value);
@@ -242,6 +241,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       background-color: $ui-01;
       opacity: var(--#{$block-class}--subtitle-opacity);
       transform: translateY(var(--#{$block-class}--title-y-position));
+      word-break: break-word;
     }
     .#{$block-class}__label-text {
       @include carbon--type-style('label-01');
@@ -383,8 +383,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       padding: 0 $spacing-05;
       margin-bottom: $spacing-03;
       background-color: $ui-01;
-      transition: transform $duration--moderate-01;
-      transition-timing-function: carbon--motion(standard);
+      transition: transform $duration--moderate-01 carbon--motion(standard);
       .#{$block-class}__action-toolbar-button {
         min-width: 2rem;
         &.#{$block-class}__action-toolbar-icon-only-button {
@@ -520,8 +519,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     width: 100%;
     height: 100%;
     background-color: $overlay-01;
-    transition: background-color $duration--moderate-02;
-    transition-timing-function: carbon--motion(standard);
+    transition: background-color $duration--moderate-02 carbon--motion(standard);
   }
 }
 

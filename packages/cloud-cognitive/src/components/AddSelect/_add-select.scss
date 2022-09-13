@@ -26,7 +26,6 @@
 
   .#{$block-class}__selections {
     &.#{$carbon-prefix}--structured-list {
-      border-top: 1px solid $ui-03;
       margin-bottom: 0;
     }
 
@@ -36,8 +35,11 @@
 
     &-cell-wrapper {
       display: flex;
+      height: 3rem;
       align-items: center;
       justify-content: space-between;
+      padding: 0 $spacing-05;
+      border-bottom: 1px solid $ui-03;
     }
 
     &-cell-title {
@@ -52,6 +54,12 @@
       color: $text-02;
     }
 
+    &-cell {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     &-cell:hover .#{$block-class}__selections-hidden-hover {
       visibility: visible;
     }
@@ -60,12 +68,9 @@
       visibility: hidden;
     }
 
-    &-row-selected {
-      background: #e5e5e5;
-    }
-
-    &-row-selected .#{$block-class}__selections-hidden-hover {
-      visibility: visible;
+    &-row-selected#{$carbon-prefix}--structured-list-row {
+      border-bottom: 1px solid $selected-ui;
+      background-color: $selected-ui;
     }
 
     &-checkbox {
@@ -75,7 +80,7 @@
 
     &-checkbox-label-wrapper {
       display: flex;
-      margin-left: $spacing-03;
+      margin-left: $spacing-05;
     }
 
     &-checkbox-label-text {
@@ -98,6 +103,15 @@
     &-cell-icon {
       margin-right: $spacing-03;
     }
+
+    &-row {
+      border-left: 0.125rem solid transparent;
+    }
+
+    &-row-meta-selected {
+      border-left: 0.125rem solid $interactive-04;
+      background-color: $hover-row;
+    }
   }
 
   .#{$block-class} .#{$block-class}__selections-row:hover {
@@ -116,17 +130,38 @@
     }
   }
 
+  .#{$block-class}
+    #{$carbon-prefix}--structured-list--selection
+    .#{$block-class}__selections-row-selected#{$carbon-prefix}--structured-list-row:hover:not(#{$carbon-prefix}--structured-list-row--header-row):not(#{$carbon-prefix}--structured-list-row--selected) {
+    border-bottom: 1px solid $hover-selected-ui;
+    background-color: $hover-selected-ui;
+  }
+
   .#{$block-class}__sub-header {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+
+    &-multi {
+      padding: 0 $spacing-05;
+    }
+  }
+
+  .#{$block-class} #{$carbon-prefix}--structured-list-row {
+    border-bottom: 0;
+  }
+
+  .#{$block-class}
+    #{$carbon-prefix}--structured-list--selection
+    #{$carbon-prefix}--structured-list-row:hover:not(#{$carbon-prefix}--structured-list-row--header-row):not(#{$carbon-prefix}--structured-list-row--selected) {
+    border-bottom: 0;
   }
 
   // sidebar
 
   .#{$block-class}__sidebar-header {
     display: flex;
-    padding: $spacing-06 $spacing-05 $spacing-03 $spacing-05;
+    padding: $spacing-07 $spacing-05 $spacing-03 $spacing-05;
     border-bottom: 1px solid $ui-03;
 
     .#{$block-class}__sidebar-title {
@@ -151,7 +186,7 @@
   }
 
   .#{$block-class}__sidebar-body {
-    padding: $spacing-05;
+    padding: 0 $spacing-05;
   }
 
   .#{$block-class} .#{$block-class}__sidebar-item-header {
@@ -182,22 +217,52 @@
   .#{$block-class}__columns {
     display: flex;
     flex-direction: row;
+    flex-grow: 1;
     overflow-x: auto;
+
+    .#{$block-class}__selections-checkbox-label-wrapper {
+      margin-left: $spacing-03;
+    }
+
+    .#{$block-class}__selections-row#{$carbon-prefix}--structured-list-row {
+      border-left: 0;
+    }
+
+    .#{$block-class}__selections .#{$block-class}__selections-cell {
+      padding: 0;
+    }
+
+    .#{$block-class}__selections-cell-wrapper {
+      height: auto;
+      padding: 0 $spacing-03;
+    }
+
+    .#{$block-class}__tag-container {
+      padding: 0 $spacing-03;
+      margin-bottom: 0;
+    }
+
+    .#{$block-class}__selections-wrapper-multi {
+      padding: 0;
+    }
+
+    .#{$block-class}__selections#{$carbon-prefix}--structured-list {
+      border-top: 0;
+    }
   }
 
-  // table override
-  .#{$block-class}
-    .#{$block-class}__columns
-    .#{$carbon-prefix}--structured-list-td {
-    height: 0;
-    // stylelint-disable-next-line
-    padding: 0 !important;
+  .#{$block-class}__selections-wrapper-multi .#{$block-class}__selections-cell {
+    padding: 0 $spacing-05;
+  }
+
+  .#{$block-class}__selections-row:first-child
+    .#{$block-class}__selections-cell-wrapper {
+    border-top: 1px solid $ui-03;
   }
 
   .#{$block-class}__column {
     overflow: auto;
-    max-width: 15rem;
-    flex: 1 0 15rem;
+    flex: 0 0 20rem;
     padding: $spacing-05;
     border-top: 1px solid $ui-03;
     border-right: 1px solid $ui-03;
@@ -316,8 +381,7 @@
 
   // the influencer sidebar needs to be even with the buttons
   .#{$block-class} .#{$tearsheet-class}__influencer {
-    max-width: 29rem;
-    flex: 0 0 50%;
+    flex-basis: 22.5rem;
   }
 
   .#{$block-class} .#{$tearsheet-class}__header-description {
@@ -329,6 +393,12 @@
     flex-direction: column;
   }
 
+  .#{$block-class}.#{$block-class}__multi
+    .#{$pkg-prefix}--action-set.#{$carbon-prefix}--btn-set.#{$pkg-prefix}--action-set--max
+    .#{$pkg-prefix}--action-set__action-button {
+    max-width: 11.25rem;
+  }
+
   .#{$block-class} .#{$block-class}__items-label {
     @include carbon--type-style('productive-heading-01');
   }
@@ -338,13 +408,6 @@
     .#{$carbon-prefix}--modal-content
     p {
     padding-right: 0;
-  }
-
-  .#{$block-class} .#{$carbon-prefix}--structured-list-td {
-    height: $layout-04;
-    padding-top: 0;
-    padding-bottom: 0;
-    vertical-align: middle;
   }
 
   .#{$block-class} .#{$carbon-prefix}--radio-button__appearance {
@@ -373,6 +436,41 @@
 
   .#{$block-class} .#{$carbon-prefix}--checkbox-label-text {
     padding-left: $spacing-03;
+  }
+
+  .#{$block-class}__multi .#{$pkg-prefix}--empty-state {
+    max-width: 16rem;
+    margin-top: $layout-04;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--accordion__arrow {
+    transform: rotate(0deg);
+  }
+
+  .#{$block-class}
+    .#{$carbon-prefix}--accordion__item--active
+    .#{$carbon-prefix}--accordion__arrow {
+    transform: rotate(90deg);
+  }
+
+  .#{$block-class}
+    #{$carbon-prefix}--accordion--start
+    #{$carbon-prefix}--accordion__arrow {
+    margin: 0 0 0 $spacing-05;
+  }
+
+  .#{$block-class}
+    #{$carbon-prefix}--accordion--start
+    #{$carbon-prefix}--accordion__title {
+    margin: 0 $spacing-05 0 $spacing-03;
+  }
+
+  .#{$block-class}
+    #{$carbon-prefix}--accordion__item--active
+    #{$carbon-prefix}--accordion__content {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: $spacing-03;
   }
 }
 

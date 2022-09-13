@@ -2,8 +2,12 @@
 library:
   id: ibm-products
   name: IBM Products
-  description: A Carbon-powered React component library for IBM Products
+  description:
+    Discover React-based solutions designed for IBM's product portfolio.
   externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/
+  designKits:
+    ibm-products-g10-figma:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/ibm-products-g10-figma
 assets:
   api-key-modal:
     name: API key modal
@@ -558,7 +562,7 @@ assets:
       - media
   web-terminal:
     name: Web terminal
-    status: experimental
+    status: stable
     type: pattern
     platform: web
     framework: react

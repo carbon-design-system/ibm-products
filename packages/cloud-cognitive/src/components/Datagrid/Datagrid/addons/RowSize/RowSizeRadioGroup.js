@@ -23,7 +23,7 @@ const RowSizeRadioGroup = ({
   buttonRef,
   onChange,
   hideRadioGroup,
-  legendText = 'Row height',
+  legendText,
   rowSizeLabels = {
     xl: 'Extra large',
     lg: 'Large (default)',

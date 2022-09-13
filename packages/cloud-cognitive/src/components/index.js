@@ -71,6 +71,8 @@ export {
   useActionsColumn,
   useCustomizeColumns,
   useSelectAllWithToggle,
+  useColumnOrder,
+  useInlineEdit,
 } from './Datagrid';
 export { EditTearsheet } from './EditTearsheet';
 export { EditTearsheetNarrow } from './EditTearsheetNarrow';

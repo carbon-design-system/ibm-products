@@ -39,6 +39,23 @@
       outline: 2px solid $inverse-link;
     }
 
+    &.#{$block-class}__dark {
+      .#{$block-class}__active-cell--highlight,
+      .#{$block-class}__selection-area--element,
+      .#{$block-class}__active-cell--highlight:focus {
+        /* stylelint-disable-next-line carbon/theme-token-use */
+        border-color: $cyan-30;
+      }
+      .#{$block-class}__selection-area--element::before {
+        /* stylelint-disable-next-line carbon/theme-token-use */
+        background-color: $cyan-70;
+      }
+      .#{$block-class}__cell-editor.#{$block-class}__cell-editor--active {
+        /* stylelint-disable-next-line carbon/theme-token-use */
+        outline-color: $cyan-30;
+      }
+    }
+
     .#{$block-class}__header--container {
       position: relative;
     }
@@ -170,7 +187,7 @@
       padding-left: calc(#{$spacing-03} - #{$spacing-01});
       border: $spacing-01 solid $interactive-01;
       background-color: $body-cell-background;
-      color: $text-01;
+      color: $text-02;
       text-align: left;
 
       &[data-active-row-index='header'],

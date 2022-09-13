@@ -628,7 +628,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   width: 100vw;
   height: 1px;
   background-color: var(--cds-ui-03, #e0e0e0);
-  content: \\"\\";
+  content: "";
 }
 
 .c4p--create-full-page .c4p--create-full-page__step-title {
@@ -741,8 +741,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   box-sizing: border-box;
   background-color: var(--cds-ui-01, #f4f4f4);
   color: var(--cds-text-01, #161616);
-  transition: transform 240ms;
-  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  transition: transform 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .c4p--side-panel__container.c4p--side-panel__container--xs {
   width: 16rem;
@@ -969,7 +968,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   width: 100%;
   height: 1px;
   background-color: var(--cds-decorative-01, #e0e0e0);
-  content: \\"\\";
+  content: "";
   opacity: var(--c4p--side-panel--divider-opacity);
 }
 .c4p--side-panel__container.c4p--side-panel__container-without-overlay {
@@ -990,7 +989,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   width: 100%;
   height: 1px;
   background-color: var(--cds-decorative-01, #e0e0e0);
-  content: \\"\\";
+  content: "";
   opacity: var(--c4p--side-panel--divider-opacity);
 }
 .c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__title-container--reduced-motion {
@@ -1042,6 +1041,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-ui-01, #f4f4f4);
   opacity: var(--c4p--side-panel--subtitle-opacity);
   transform: translateY(var(--c4p--side-panel--title-y-position));
+  word-break: break-word;
 }
 .c4p--side-panel__container .c4p--side-panel__label-text {
   font-size: var(--cds-label-01-font-size, 0.75rem);
@@ -1151,8 +1151,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding: 0 var(--cds-spacing-05, 1rem);
   margin-bottom: var(--cds-spacing-03, 0.5rem);
   background-color: var(--cds-ui-01, #f4f4f4);
-  transition: transform 150ms;
-  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  transition: transform 150ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button {
   min-width: 2rem;
@@ -1278,8 +1277,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   width: 100%;
   height: 100%;
   background-color: var(--cds-overlay-01, rgba(22, 22, 22, 0.5));
-  transition: background-color 240ms;
-  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  transition: background-color 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 
 .c4p--create-side-panel.c4p--side-panel__container .c4p--create-side-panel__content-text {
@@ -2114,7 +2112,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--http-errors .c4p--http-errors__title {
   font-size: var(--cds-productive-heading-05-font-size, 2rem);
-  font-weight: var(--cds-productive-heading-05-font-weight, 400);
+  font-weight: var(--cds-productive-heading-05-font-weight, 300);
   line-height: var(--cds-productive-heading-05-line-height, 1.25);
   letter-spacing: var(--cds-productive-heading-05-letter-spacing, 0);
   margin-bottom: var(--cds-spacing-04, 0.75rem);
@@ -2393,7 +2391,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   box-sizing: border-box;
   border: 2px solid var(--cds-focus, #0f62fe);
   border-left: 0;
-  content: \\"\\";
+  content: "";
   pointer-events: none;
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel {
@@ -2730,7 +2728,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
-  --cds-productive-heading-05-font-weight: 400;
+  --cds-productive-heading-05-font-weight: 300;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
   --cds-productive-heading-06-font-size: 2.625rem;
@@ -2758,7 +2756,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
-  --cds-expressive-heading-05-font-weight: 400;
+  --cds-expressive-heading-05-font-weight: 300;
   --cds-expressive-heading-05-line-height: 1.25;
   --cds-expressive-heading-05-letter-spacing: 0;
   --cds-expressive-heading-06-font-size: 2rem;
@@ -2792,7 +2790,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-display-03-line-height: 1.19;
   --cds-display-03-letter-spacing: 0;
   --cds-display-04-font-size: 2.625rem;
-  --cds-display-04-font-weight: 600;
+  --cds-display-04-font-weight: 300;
   --cds-display-04-line-height: 1.19;
   --cds-display-04-letter-spacing: 0;
   --cds-legal-01-font-size: 0.75rem;
@@ -2836,7 +2834,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-heading-04-line-height: 1.28572;
   --cds-heading-04-letter-spacing: 0;
   --cds-heading-05-font-size: 2rem;
-  --cds-heading-05-font-weight: 400;
+  --cds-heading-05-font-weight: 300;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
   --cds-heading-06-font-size: 2.625rem;
@@ -2856,7 +2854,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-fluid-heading-04-line-height: 1.28572;
   --cds-fluid-heading-04-letter-spacing: 0;
   --cds-fluid-heading-05-font-size: 2rem;
-  --cds-fluid-heading-05-font-weight: 400;
+  --cds-fluid-heading-05-font-weight: 300;
   --cds-fluid-heading-05-line-height: 1.25;
   --cds-fluid-heading-05-letter-spacing: 0;
   --cds-fluid-heading-06-font-size: 2rem;
@@ -2890,7 +2888,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-fluid-display-03-line-height: 1.19;
   --cds-fluid-display-03-letter-spacing: 0;
   --cds-fluid-display-04-font-size: 2.625rem;
-  --cds-fluid-display-04-font-weight: 600;
+  --cds-fluid-display-04-font-weight: 300;
   --cds-fluid-display-04-line-height: 1.19;
   --cds-fluid-display-04-letter-spacing: 0;
   --cds-spacing-01: 0.125rem;
@@ -2941,8 +2939,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-height: 38.5rem;
   background-color: var(--cds-ui-background, #ffffff);
   color: var(--cds-text-01, #161616);
-  transition: transform 110ms;
-  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  transition: transform 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__header-container {
   position: sticky;
@@ -3007,8 +3004,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-ui-background, #ffffff);
   cursor: pointer;
   text-align: left;
-  transition: background-color 240ms;
-  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  transition: background-color 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-title {
   margin-bottom: var(--cds-spacing-02, 0.25rem);
@@ -3112,9 +3108,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   height: 1px;
   margin: 0 auto;
   background-color: var(--cds-ui-02, #ffffff);
-  content: \\"\\";
-  transition: background-color 240ms;
-  transition-timing-function: cubic-bezier(0.2, 0, 0.38, 0.9);
+  content: "";
+  transition: background-color 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification-today:hover + .c4p--notifications-panel__notification-today:not(:first-of-type):before,
 .c4p--notifications-panel__container .c4p--notifications-panel__notification-yesterday:hover + .c4p--notifications-panel__notification-yesterday:not(:first-of-type):before,
@@ -3343,7 +3338,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   width: 100%;
   height: var(--cds-spacing-07, 2rem);
   background: linear-gradient(to bottom, transparent, var(--cds-ui-01, #f4f4f4));
-  content: \\"\\";
+  content: "";
 }
 
 .c4p--tag-set-overflow__tooltip.c4p--tag-set-overflow__tooltip {
@@ -3483,7 +3478,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   height: 100%;
   animation: background-and-shadow-appear 1000ms linear paused forwards;
   animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
-  content: \\"\\";
+  content: "";
   z-index: -1;
 }
 .c4p--page-header .c4p--page-header--width--xl {
@@ -3526,7 +3521,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   height: 1px;
   /* creates a full width box shadow without causing scroll */
   box-shadow: 0 1px 0 0 var(--cds-ui-03, #e0e0e0), 0 1px 0 0 var(--cds-ui-03, #e0e0e0);
-  content: \\"\\";
+  content: "";
   opacity: 0;
   transform: translateX(-50%) scaleX(1);
   transition: all 150ms ease-out;
@@ -3622,7 +3617,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   height: 100%;
   animation: background-appear 1000ms linear paused forwards;
   animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
-  content: \\"\\";
+  content: "";
 }
 .c4p--page-header .c4p--page-header__action-bar-column--influenced-by-collapse-button {
   padding-right: var(--cds-spacing-08, 2.5rem);
@@ -3801,7 +3796,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   height: 100%;
   animation: background-appear 1000ms linear paused forwards;
   animation-delay: calc(-1000ms * var(--c4p--page-header--background-opacity));
-  content: \\"\\";
+  content: "";
 }
 .c4p--page-header .c4p--page-header__page-actions-content {
   position: relative;
@@ -3966,6 +3961,28 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-top: calc(-1 * var(--cds-spacing-02, 0.25rem));
   margin-right: var(--cds-spacing-03, 0.5rem);
 }
+.c4p--card__productive .c4p--card__actions-header .bx--btn:hover + .c4p--card__actions-header-ghost-button.bx--btn--ghost.bx--btn--sm::before {
+  opacity: 0;
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button.bx--btn--ghost.bx--btn--sm {
+  padding-right: calc(var(--cds-spacing-01, 0.125rem) + var(--cds-spacing-03, 0.5rem));
+  padding-left: calc(var(--cds-spacing-01, 0.125rem) + var(--cds-spacing-03, 0.5rem));
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button.bx--btn--ghost.bx--btn--sm::before {
+  position: absolute;
+  left: 0;
+  width: 0.05rem;
+  height: var(--cds-spacing-06, 1.5rem);
+  background-color: var(--cds-hover-ui, #e5e5e5);
+  content: "";
+  opacity: 1;
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button.bx--btn--ghost.bx--btn--sm:hover::before {
+  opacity: 0;
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button--only.bx--btn--ghost.bx--btn--sm::before {
+  opacity: 0;
+}
 .c4p--card__productive .c4p--card__title-lg .c4p--card__actions-header,
 .c4p--card__productive .c4p--card__header-has-label .c4p--card__actions-header {
   margin-top: 0;
@@ -3983,10 +4000,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--remove-modal .bx--modal-content {
   padding-right: var(--cds-spacing-05, 1rem);
-}
-
-.c4p--remove-modal .bx--modal-close {
-  display: none;
 }
 
 .c4p--remove-modal__body {
@@ -4827,6 +4840,912 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
   font-weight: 600;
+}
+
+@keyframes web-terminal-entrance {
+  from {
+    opacity: 0;
+    transform: translateX(40rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes web-terminal-exit {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(40rem);
+  }
+}
+/*
+  The reason for not using theme tokens in the web terminal
+  component is because we want these colors to always be the same
+  despite of which carbon theme the user has.
+*/
+.c4p--web-terminal {
+  --cds-interactive-01: #0f62fe;
+  --cds-interactive-02: #6f6f6f;
+  --cds-interactive-03: #ffffff;
+  --cds-interactive-04: #4589ff;
+  --cds-ui-background: #262626;
+  --cds-ui-01: #393939;
+  --cds-ui-02: #525252;
+  --cds-ui-03: #525252;
+  --cds-ui-04: #8d8d8d;
+  --cds-ui-05: #f4f4f4;
+  --cds-text-01: #f4f4f4;
+  --cds-text-02: #c6c6c6;
+  --cds-text-03: #6f6f6f;
+  --cds-text-04: #ffffff;
+  --cds-text-05: #8d8d8d;
+  --cds-text-error: #ffb3b8;
+  --cds-icon-01: #f4f4f4;
+  --cds-icon-02: #c6c6c6;
+  --cds-icon-03: #ffffff;
+  --cds-link-01: #78a9ff;
+  --cds-link-02: #a6c8ff;
+  --cds-inverse-link: #0f62fe;
+  --cds-field-01: #393939;
+  --cds-field-02: #525252;
+  --cds-inverse-01: #161616;
+  --cds-inverse-02: #f4f4f4;
+  --cds-support-01: #ff8389;
+  --cds-support-02: #42be65;
+  --cds-support-03: #f1c21b;
+  --cds-support-04: #4589ff;
+  --cds-inverse-support-01: #da1e28;
+  --cds-inverse-support-02: #24a148;
+  --cds-inverse-support-03: #f1c21b;
+  --cds-inverse-support-04: #0f62fe;
+  --cds-overlay-01: rgba(0, 0, 0, 0.65);
+  --cds-danger-01: #da1e28;
+  --cds-danger-02: #ff8389;
+  --cds-focus: #ffffff;
+  --cds-inverse-focus-ui: #0f62fe;
+  --cds-hover-primary: #0353e9;
+  --cds-active-primary: #002d9c;
+  --cds-hover-primary-text: #a6c8ff;
+  --cds-hover-secondary: #606060;
+  --cds-active-secondary: #393939;
+  --cds-hover-tertiary: #f4f4f4;
+  --cds-active-tertiary: #c6c6c6;
+  --cds-hover-ui: #4c4c4c;
+  --cds-hover-light-ui: #656565;
+  --cds-hover-selected-ui: #656565;
+  --cds-active-ui: #6f6f6f;
+  --cds-active-light-ui: #8d8d8d;
+  --cds-selected-ui: #525252;
+  --cds-selected-light-ui: #6f6f6f;
+  --cds-inverse-hover-ui: #e5e5e5;
+  --cds-hover-danger: #b81921;
+  --cds-active-danger: #750e13;
+  --cds-hover-row: #4c4c4c;
+  --cds-visited-link: #be95ff;
+  --cds-disabled-01: #393939;
+  --cds-disabled-02: #6f6f6f;
+  --cds-disabled-03: #a8a8a8;
+  --cds-highlight: #0043ce;
+  --cds-decorative-01: #6f6f6f;
+  --cds-button-separator: #161616;
+  --cds-skeleton-01: #353535;
+  --cds-skeleton-02: #525252;
+  --cds-background: #262626;
+  --cds-layer: #393939;
+  --cds-layer-accent: #525252;
+  --cds-layer-accent-hover: #636363;
+  --cds-layer-accent-active: #8d8d8d;
+  --cds-field: #393939;
+  --cds-background-inverse: #f4f4f4;
+  --cds-background-brand: #0f62fe;
+  --cds-interactive: #4589ff;
+  --cds-border-subtle: #525252;
+  --cds-border-strong: #8d8d8d;
+  --cds-border-inverse: #f4f4f4;
+  --cds-border-interactive: #4589ff;
+  --cds-text-primary: #f4f4f4;
+  --cds-text-secondary: #c6c6c6;
+  --cds-text-placeholder: #6f6f6f;
+  --cds-text-helper: #8d8d8d;
+  --cds-text-on-color: #ffffff;
+  --cds-text-inverse: #161616;
+  --cds-link-primary: #78a9ff;
+  --cds-link-secondary: #a6c8ff;
+  --cds-link-visited: #be95ff;
+  --cds-link-inverse: #0f62fe;
+  --cds-icon-primary: #f4f4f4;
+  --cds-icon-secondary: #c6c6c6;
+  --cds-icon-on-color: #ffffff;
+  --cds-icon-inverse: #161616;
+  --cds-support-error: #ff8389;
+  --cds-support-success: #42be65;
+  --cds-support-warning: #f1c21b;
+  --cds-support-info: #4589ff;
+  --cds-support-error-inverse: #da1e28;
+  --cds-support-success-inverse: #24a148;
+  --cds-support-warning-inverse: #f1c21b;
+  --cds-support-info-inverse: #0f62fe;
+  --cds-overlay: rgba(0, 0, 0, 0.65);
+  --cds-toggle-off: #8d8d8d;
+  --cds-shadow: rgba(0, 0, 0, 0.8);
+  --cds-button-primary: #0f62fe;
+  --cds-button-secondary: #6f6f6f;
+  --cds-button-tertiary: #ffffff;
+  --cds-button-danger-primary: #da1e28;
+  --cds-button-danger-secondary: #ff8389;
+  --cds-background-active: #6f6f6f;
+  --cds-layer-active: #6f6f6f;
+  --cds-button-danger-active: #750e13;
+  --cds-button-primary-active: #002d9c;
+  --cds-button-secondary-active: #393939;
+  --cds-button-tertiary-active: #c6c6c6;
+  --cds-focus-inset: #161616;
+  --cds-focus-inverse: #0f62fe;
+  --cds-background-hover: #4c4c4c;
+  --cds-layer-hover: #4c4c4c;
+  --cds-field-hover: #4c4c4c;
+  --cds-background-inverse-hover: #e5e5e5;
+  --cds-link-primary-hover: #a6c8ff;
+  --cds-button-danger-hover: #b81921;
+  --cds-button-primary-hover: #0353e9;
+  --cds-button-secondary-hover: #606060;
+  --cds-button-tertiary-hover: #f4f4f4;
+  --cds-background-selected: #525252;
+  --cds-background-selected-hover: #656565;
+  --cds-layer-selected: #525252;
+  --cds-layer-selected-hover: #656565;
+  --cds-layer-selected-inverse: #f4f4f4;
+  --cds-border-subtle-selected: #6f6f6f;
+  --cds-border-disabled: #393939;
+  --cds-text-disabled: #6f6f6f;
+  --cds-button-disabled: #6f6f6f;
+  --cds-icon-disabled: #6f6f6f;
+  --cds-text-on-color-disabled: #a8a8a8;
+  --cds-icon-on-color-disabled: #a8a8a8;
+  --cds-layer-selected-disabled: #a8a8a8;
+  --cds-skeleton-background: #353535;
+  --cds-skeleton-element: #525252;
+  --cds-brand-01: #0f62fe;
+  --cds-brand-02: #6f6f6f;
+  --cds-brand-03: #ffffff;
+  --cds-active-01: #6f6f6f;
+  --cds-hover-field: #4c4c4c;
+  --cds-danger: #da1e28;
+  --cds-caption-01-font-size: 0.75rem;
+  --cds-caption-01-font-weight: 400;
+  --cds-caption-01-line-height: 1.33333;
+  --cds-caption-01-letter-spacing: 0.32px;
+  --cds-caption-02-font-size: 0.875rem;
+  --cds-caption-02-font-weight: 400;
+  --cds-caption-02-line-height: 1.28572;
+  --cds-caption-02-letter-spacing: 0.32px;
+  --cds-label-01-font-size: 0.75rem;
+  --cds-label-01-font-weight: 400;
+  --cds-label-01-line-height: 1.33333;
+  --cds-label-01-letter-spacing: 0.32px;
+  --cds-label-02-font-size: 0.875rem;
+  --cds-label-02-font-weight: 400;
+  --cds-label-02-line-height: 1.28572;
+  --cds-label-02-letter-spacing: 0.16px;
+  --cds-helper-text-01-font-size: 0.75rem;
+  --cds-helper-text-01-line-height: 1.33333;
+  --cds-helper-text-01-letter-spacing: 0.32px;
+  --cds-helper-text-02-font-size: 0.875rem;
+  --cds-helper-text-02-line-height: 1.28572;
+  --cds-helper-text-02-letter-spacing: 0.16px;
+  --cds-body-short-01-font-size: 0.875rem;
+  --cds-body-short-01-font-weight: 400;
+  --cds-body-short-01-line-height: 1.28572;
+  --cds-body-short-01-letter-spacing: 0.16px;
+  --cds-body-long-01-font-size: 0.875rem;
+  --cds-body-long-01-font-weight: 400;
+  --cds-body-long-01-line-height: 1.42857;
+  --cds-body-long-01-letter-spacing: 0.16px;
+  --cds-body-short-02-font-size: 1rem;
+  --cds-body-short-02-font-weight: 400;
+  --cds-body-short-02-line-height: 1.375;
+  --cds-body-short-02-letter-spacing: 0;
+  --cds-body-long-02-font-size: 1rem;
+  --cds-body-long-02-font-weight: 400;
+  --cds-body-long-02-line-height: 1.5;
+  --cds-body-long-02-letter-spacing: 0;
+  --cds-code-01-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+  --cds-code-01-font-size: 0.75rem;
+  --cds-code-01-font-weight: 400;
+  --cds-code-01-line-height: 1.33333;
+  --cds-code-01-letter-spacing: 0.32px;
+  --cds-code-02-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+  --cds-code-02-font-size: 0.875rem;
+  --cds-code-02-font-weight: 400;
+  --cds-code-02-line-height: 1.42857;
+  --cds-code-02-letter-spacing: 0.32px;
+  --cds-heading-01-font-size: 0.875rem;
+  --cds-heading-01-font-weight: 600;
+  --cds-heading-01-line-height: 1.42857;
+  --cds-heading-01-letter-spacing: 0.16px;
+  --cds-productive-heading-01-font-size: 0.875rem;
+  --cds-productive-heading-01-font-weight: 600;
+  --cds-productive-heading-01-line-height: 1.28572;
+  --cds-productive-heading-01-letter-spacing: 0.16px;
+  --cds-heading-02-font-size: 1rem;
+  --cds-heading-02-font-weight: 600;
+  --cds-heading-02-line-height: 1.5;
+  --cds-heading-02-letter-spacing: 0;
+  --cds-productive-heading-02-font-size: 1rem;
+  --cds-productive-heading-02-font-weight: 600;
+  --cds-productive-heading-02-line-height: 1.375;
+  --cds-productive-heading-02-letter-spacing: 0;
+  --cds-productive-heading-03-font-size: 1.25rem;
+  --cds-productive-heading-03-font-weight: 400;
+  --cds-productive-heading-03-line-height: 1.4;
+  --cds-productive-heading-03-letter-spacing: 0;
+  --cds-productive-heading-04-font-size: 1.75rem;
+  --cds-productive-heading-04-font-weight: 400;
+  --cds-productive-heading-04-line-height: 1.28572;
+  --cds-productive-heading-04-letter-spacing: 0;
+  --cds-productive-heading-05-font-size: 2rem;
+  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-line-height: 1.25;
+  --cds-productive-heading-05-letter-spacing: 0;
+  --cds-productive-heading-06-font-size: 2.625rem;
+  --cds-productive-heading-06-font-weight: 300;
+  --cds-productive-heading-06-line-height: 1.199;
+  --cds-productive-heading-06-letter-spacing: 0;
+  --cds-productive-heading-07-font-size: 3.375rem;
+  --cds-productive-heading-07-font-weight: 300;
+  --cds-productive-heading-07-line-height: 1.199;
+  --cds-productive-heading-07-letter-spacing: 0;
+  --cds-expressive-heading-01-font-size: 0.875rem;
+  --cds-expressive-heading-01-font-weight: 600;
+  --cds-expressive-heading-01-line-height: 1.25;
+  --cds-expressive-heading-01-letter-spacing: 0.16px;
+  --cds-expressive-heading-02-font-size: 1rem;
+  --cds-expressive-heading-02-font-weight: 600;
+  --cds-expressive-heading-02-line-height: 1.5;
+  --cds-expressive-heading-02-letter-spacing: 0;
+  --cds-expressive-heading-03-font-size: 1.25rem;
+  --cds-expressive-heading-03-font-weight: 400;
+  --cds-expressive-heading-03-line-height: 1.4;
+  --cds-expressive-heading-03-letter-spacing: 0;
+  --cds-expressive-heading-04-font-size: 1.75rem;
+  --cds-expressive-heading-04-font-weight: 400;
+  --cds-expressive-heading-04-line-height: 1.28572;
+  --cds-expressive-heading-04-letter-spacing: 0;
+  --cds-expressive-heading-05-font-size: 2rem;
+  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-line-height: 1.25;
+  --cds-expressive-heading-05-letter-spacing: 0;
+  --cds-expressive-heading-06-font-size: 2rem;
+  --cds-expressive-heading-06-font-weight: 600;
+  --cds-expressive-heading-06-line-height: 1.25;
+  --cds-expressive-heading-06-letter-spacing: 0;
+  --cds-expressive-paragraph-01-font-size: 1.5rem;
+  --cds-expressive-paragraph-01-font-weight: 300;
+  --cds-expressive-paragraph-01-line-height: 1.334;
+  --cds-expressive-paragraph-01-letter-spacing: 0;
+  --cds-quotation-01-font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
+  --cds-quotation-01-font-size: 1.25rem;
+  --cds-quotation-01-font-weight: 400;
+  --cds-quotation-01-line-height: 1.3;
+  --cds-quotation-01-letter-spacing: 0;
+  --cds-quotation-02-font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
+  --cds-quotation-02-font-size: 2rem;
+  --cds-quotation-02-font-weight: 300;
+  --cds-quotation-02-line-height: 1.25;
+  --cds-quotation-02-letter-spacing: 0;
+  --cds-display-01-font-size: 2.625rem;
+  --cds-display-01-font-weight: 300;
+  --cds-display-01-line-height: 1.19;
+  --cds-display-01-letter-spacing: 0;
+  --cds-display-02-font-size: 2.625rem;
+  --cds-display-02-font-weight: 600;
+  --cds-display-02-line-height: 1.19;
+  --cds-display-02-letter-spacing: 0;
+  --cds-display-03-font-size: 2.625rem;
+  --cds-display-03-font-weight: 300;
+  --cds-display-03-line-height: 1.19;
+  --cds-display-03-letter-spacing: 0;
+  --cds-display-04-font-size: 2.625rem;
+  --cds-display-04-font-weight: 300;
+  --cds-display-04-line-height: 1.19;
+  --cds-display-04-letter-spacing: 0;
+  --cds-legal-01-font-size: 0.75rem;
+  --cds-legal-01-font-weight: 400;
+  --cds-legal-01-line-height: 1.33333;
+  --cds-legal-01-letter-spacing: 0.32px;
+  --cds-legal-02-font-size: 0.875rem;
+  --cds-legal-02-font-weight: 400;
+  --cds-legal-02-line-height: 1.28572;
+  --cds-legal-02-letter-spacing: 0.16px;
+  --cds-body-compact-01-font-size: 0.875rem;
+  --cds-body-compact-01-font-weight: 400;
+  --cds-body-compact-01-line-height: 1.28572;
+  --cds-body-compact-01-letter-spacing: 0.16px;
+  --cds-body-compact-02-font-size: 1rem;
+  --cds-body-compact-02-font-weight: 400;
+  --cds-body-compact-02-line-height: 1.375;
+  --cds-body-compact-02-letter-spacing: 0;
+  --cds-body-01-font-size: 0.875rem;
+  --cds-body-01-font-weight: 400;
+  --cds-body-01-line-height: 1.42857;
+  --cds-body-01-letter-spacing: 0.16px;
+  --cds-body-02-font-size: 1rem;
+  --cds-body-02-font-weight: 400;
+  --cds-body-02-line-height: 1.5;
+  --cds-body-02-letter-spacing: 0;
+  --cds-heading-compact-01-font-size: 0.875rem;
+  --cds-heading-compact-01-font-weight: 600;
+  --cds-heading-compact-01-line-height: 1.28572;
+  --cds-heading-compact-01-letter-spacing: 0.16px;
+  --cds-heading-compact-02-font-size: 1rem;
+  --cds-heading-compact-02-font-weight: 600;
+  --cds-heading-compact-02-line-height: 1.375;
+  --cds-heading-compact-02-letter-spacing: 0;
+  --cds-heading-03-font-size: 1.25rem;
+  --cds-heading-03-font-weight: 400;
+  --cds-heading-03-line-height: 1.4;
+  --cds-heading-03-letter-spacing: 0;
+  --cds-heading-04-font-size: 1.75rem;
+  --cds-heading-04-font-weight: 400;
+  --cds-heading-04-line-height: 1.28572;
+  --cds-heading-04-letter-spacing: 0;
+  --cds-heading-05-font-size: 2rem;
+  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-line-height: 1.25;
+  --cds-heading-05-letter-spacing: 0;
+  --cds-heading-06-font-size: 2.625rem;
+  --cds-heading-06-font-weight: 300;
+  --cds-heading-06-line-height: 1.199;
+  --cds-heading-06-letter-spacing: 0;
+  --cds-heading-07-font-size: 3.375rem;
+  --cds-heading-07-font-weight: 300;
+  --cds-heading-07-line-height: 1.199;
+  --cds-heading-07-letter-spacing: 0;
+  --cds-fluid-heading-03-font-size: 1.25rem;
+  --cds-fluid-heading-03-font-weight: 400;
+  --cds-fluid-heading-03-line-height: 1.4;
+  --cds-fluid-heading-03-letter-spacing: 0;
+  --cds-fluid-heading-04-font-size: 1.75rem;
+  --cds-fluid-heading-04-font-weight: 400;
+  --cds-fluid-heading-04-line-height: 1.28572;
+  --cds-fluid-heading-04-letter-spacing: 0;
+  --cds-fluid-heading-05-font-size: 2rem;
+  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-line-height: 1.25;
+  --cds-fluid-heading-05-letter-spacing: 0;
+  --cds-fluid-heading-06-font-size: 2rem;
+  --cds-fluid-heading-06-font-weight: 600;
+  --cds-fluid-heading-06-line-height: 1.25;
+  --cds-fluid-heading-06-letter-spacing: 0;
+  --cds-fluid-paragraph-01-font-size: 1.5rem;
+  --cds-fluid-paragraph-01-font-weight: 300;
+  --cds-fluid-paragraph-01-line-height: 1.334;
+  --cds-fluid-paragraph-01-letter-spacing: 0;
+  --cds-fluid-quotation-01-font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
+  --cds-fluid-quotation-01-font-size: 1.25rem;
+  --cds-fluid-quotation-01-font-weight: 400;
+  --cds-fluid-quotation-01-line-height: 1.3;
+  --cds-fluid-quotation-01-letter-spacing: 0;
+  --cds-fluid-quotation-02-font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
+  --cds-fluid-quotation-02-font-size: 2rem;
+  --cds-fluid-quotation-02-font-weight: 300;
+  --cds-fluid-quotation-02-line-height: 1.25;
+  --cds-fluid-quotation-02-letter-spacing: 0;
+  --cds-fluid-display-01-font-size: 2.625rem;
+  --cds-fluid-display-01-font-weight: 300;
+  --cds-fluid-display-01-line-height: 1.19;
+  --cds-fluid-display-01-letter-spacing: 0;
+  --cds-fluid-display-02-font-size: 2.625rem;
+  --cds-fluid-display-02-font-weight: 600;
+  --cds-fluid-display-02-line-height: 1.19;
+  --cds-fluid-display-02-letter-spacing: 0;
+  --cds-fluid-display-03-font-size: 2.625rem;
+  --cds-fluid-display-03-font-weight: 300;
+  --cds-fluid-display-03-line-height: 1.19;
+  --cds-fluid-display-03-letter-spacing: 0;
+  --cds-fluid-display-04-font-size: 2.625rem;
+  --cds-fluid-display-04-font-weight: 300;
+  --cds-fluid-display-04-line-height: 1.19;
+  --cds-fluid-display-04-letter-spacing: 0;
+  --cds-spacing-01: 0.125rem;
+  --cds-spacing-02: 0.25rem;
+  --cds-spacing-03: 0.5rem;
+  --cds-spacing-04: 0.75rem;
+  --cds-spacing-05: 1rem;
+  --cds-spacing-06: 1.5rem;
+  --cds-spacing-07: 2rem;
+  --cds-spacing-08: 2.5rem;
+  --cds-spacing-09: 3rem;
+  --cds-spacing-10: 4rem;
+  --cds-spacing-11: 5rem;
+  --cds-spacing-12: 6rem;
+  --cds-spacing-13: 10rem;
+  --cds-fluid-spacing-01: 0;
+  --cds-fluid-spacing-02: 2vw;
+  --cds-fluid-spacing-03: 5vw;
+  --cds-fluid-spacing-04: 10vw;
+  --cds-layout-01: 1rem;
+  --cds-layout-02: 1.5rem;
+  --cds-layout-03: 2rem;
+  --cds-layout-04: 3rem;
+  --cds-layout-05: 4rem;
+  --cds-layout-06: 6rem;
+  --cds-layout-07: 10rem;
+  --cds-container-01: 1.5rem;
+  --cds-container-02: 2rem;
+  --cds-container-03: 2.5rem;
+  --cds-container-04: 3rem;
+  --cds-container-05: 4rem;
+  --cds-size-xsmall: 1.5rem;
+  --cds-size-small: 2rem;
+  --cds-size-medium: 2.5rem;
+  --cds-size-large: 3rem;
+  --cds-size-xlarge: 4rem;
+  --cds-size-2XLarge: 5rem;
+  --cds-icon-size-01: 1rem;
+  --cds-icon-size-02: 1.25rem;
+  position: fixed;
+  top: var(--cds-spacing-09, 3rem);
+  right: 0;
+  width: 100%;
+  max-width: 40rem;
+  height: calc(100vh - var(--cds-spacing-09, 3rem));
+  border-left: 1px solid #262626;
+  color: var(--cds-text-01, #161616);
+  /* stylelint-disable-next-line  */
+  background-color: #161616;
+}
+
+.c4p--web-terminal__bar {
+  display: flex;
+  height: 3rem;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--cds-ui-background, #ffffff);
+}
+
+.c4p--web-terminal__actions {
+  display: flex;
+}
+
+.c4p--web-terminal__documentation-overflow {
+  --cds-interactive-01: #0f62fe;
+  --cds-interactive-02: #6f6f6f;
+  --cds-interactive-03: #ffffff;
+  --cds-interactive-04: #4589ff;
+  --cds-ui-background: #161616;
+  --cds-ui-01: #262626;
+  --cds-ui-02: #393939;
+  --cds-ui-03: #393939;
+  --cds-ui-04: #6f6f6f;
+  --cds-ui-05: #f4f4f4;
+  --cds-text-01: #f4f4f4;
+  --cds-text-02: #c6c6c6;
+  --cds-text-03: #6f6f6f;
+  --cds-text-04: #ffffff;
+  --cds-text-05: #8d8d8d;
+  --cds-text-error: #ff8389;
+  --cds-icon-01: #f4f4f4;
+  --cds-icon-02: #c6c6c6;
+  --cds-icon-03: #ffffff;
+  --cds-link-01: #78a9ff;
+  --cds-link-02: #a6c8ff;
+  --cds-inverse-link: #0f62fe;
+  --cds-field-01: #262626;
+  --cds-field-02: #393939;
+  --cds-inverse-01: #161616;
+  --cds-inverse-02: #f4f4f4;
+  --cds-support-01: #fa4d56;
+  --cds-support-02: #42be65;
+  --cds-support-03: #f1c21b;
+  --cds-support-04: #4589ff;
+  --cds-inverse-support-01: #da1e28;
+  --cds-inverse-support-02: #24a148;
+  --cds-inverse-support-03: #f1c21b;
+  --cds-inverse-support-04: #0f62fe;
+  --cds-overlay-01: rgba(0, 0, 0, 0.65);
+  --cds-danger-01: #da1e28;
+  --cds-danger-02: #fa4d56;
+  --cds-focus: #ffffff;
+  --cds-inverse-focus-ui: #0f62fe;
+  --cds-hover-primary: #0353e9;
+  --cds-active-primary: #002d9c;
+  --cds-hover-primary-text: #a6c8ff;
+  --cds-hover-secondary: #606060;
+  --cds-active-secondary: #393939;
+  --cds-hover-tertiary: #f4f4f4;
+  --cds-active-tertiary: #c6c6c6;
+  --cds-hover-ui: #353535;
+  --cds-hover-light-ui: #4c4c4c;
+  --cds-hover-selected-ui: #4c4c4c;
+  --cds-active-ui: #525252;
+  --cds-active-light-ui: #6f6f6f;
+  --cds-selected-ui: #393939;
+  --cds-selected-light-ui: #525252;
+  --cds-inverse-hover-ui: #e5e5e5;
+  --cds-hover-danger: #b81921;
+  --cds-active-danger: #750e13;
+  --cds-hover-row: #353535;
+  --cds-visited-link: #be95ff;
+  --cds-disabled-01: #262626;
+  --cds-disabled-02: #525252;
+  --cds-disabled-03: #8d8d8d;
+  --cds-highlight: #002d9c;
+  --cds-decorative-01: #525252;
+  --cds-button-separator: #161616;
+  --cds-skeleton-01: #353535;
+  --cds-skeleton-02: #525252;
+  --cds-background: #161616;
+  --cds-layer: #262626;
+  --cds-layer-accent: #393939;
+  --cds-layer-accent-hover: #474747;
+  --cds-layer-accent-active: #6f6f6f;
+  --cds-field: #262626;
+  --cds-background-inverse: #f4f4f4;
+  --cds-background-brand: #0f62fe;
+  --cds-interactive: #4589ff;
+  --cds-border-subtle: #393939;
+  --cds-border-strong: #6f6f6f;
+  --cds-border-inverse: #f4f4f4;
+  --cds-border-interactive: #4589ff;
+  --cds-text-primary: #f4f4f4;
+  --cds-text-secondary: #c6c6c6;
+  --cds-text-placeholder: #6f6f6f;
+  --cds-text-helper: #8d8d8d;
+  --cds-text-on-color: #ffffff;
+  --cds-text-inverse: #161616;
+  --cds-link-primary: #78a9ff;
+  --cds-link-secondary: #a6c8ff;
+  --cds-link-visited: #be95ff;
+  --cds-link-inverse: #0f62fe;
+  --cds-icon-primary: #f4f4f4;
+  --cds-icon-secondary: #c6c6c6;
+  --cds-icon-on-color: #ffffff;
+  --cds-icon-inverse: #161616;
+  --cds-support-error: #fa4d56;
+  --cds-support-success: #42be65;
+  --cds-support-warning: #f1c21b;
+  --cds-support-info: #4589ff;
+  --cds-support-error-inverse: #da1e28;
+  --cds-support-success-inverse: #24a148;
+  --cds-support-warning-inverse: #f1c21b;
+  --cds-support-info-inverse: #0f62fe;
+  --cds-overlay: rgba(0, 0, 0, 0.65);
+  --cds-toggle-off: #6f6f6f;
+  --cds-shadow: rgba(0, 0, 0, 0.8);
+  --cds-button-primary: #0f62fe;
+  --cds-button-secondary: #6f6f6f;
+  --cds-button-tertiary: #ffffff;
+  --cds-button-danger-primary: #da1e28;
+  --cds-button-danger-secondary: #fa4d56;
+  --cds-background-active: #525252;
+  --cds-layer-active: #525252;
+  --cds-button-danger-active: #750e13;
+  --cds-button-primary-active: #002d9c;
+  --cds-button-secondary-active: #393939;
+  --cds-button-tertiary-active: #c6c6c6;
+  --cds-focus-inset: #161616;
+  --cds-focus-inverse: #0f62fe;
+  --cds-background-hover: #353535;
+  --cds-layer-hover: #353535;
+  --cds-field-hover: #353535;
+  --cds-background-inverse-hover: #e5e5e5;
+  --cds-link-primary-hover: #a6c8ff;
+  --cds-button-danger-hover: #b81921;
+  --cds-button-primary-hover: #0353e9;
+  --cds-button-secondary-hover: #606060;
+  --cds-button-tertiary-hover: #f4f4f4;
+  --cds-background-selected: #393939;
+  --cds-background-selected-hover: #4c4c4c;
+  --cds-layer-selected: #393939;
+  --cds-layer-selected-hover: #4c4c4c;
+  --cds-layer-selected-inverse: #f4f4f4;
+  --cds-border-subtle-selected: #525252;
+  --cds-border-disabled: #262626;
+  --cds-text-disabled: #525252;
+  --cds-button-disabled: #525252;
+  --cds-icon-disabled: #525252;
+  --cds-text-on-color-disabled: #8d8d8d;
+  --cds-icon-on-color-disabled: #8d8d8d;
+  --cds-layer-selected-disabled: #8d8d8d;
+  --cds-skeleton-background: #353535;
+  --cds-skeleton-element: #525252;
+  --cds-brand-01: #0f62fe;
+  --cds-brand-02: #6f6f6f;
+  --cds-brand-03: #ffffff;
+  --cds-active-01: #525252;
+  --cds-hover-field: #353535;
+  --cds-danger: #da1e28;
+  --cds-caption-01-font-size: 0.75rem;
+  --cds-caption-01-font-weight: 400;
+  --cds-caption-01-line-height: 1.33333;
+  --cds-caption-01-letter-spacing: 0.32px;
+  --cds-caption-02-font-size: 0.875rem;
+  --cds-caption-02-font-weight: 400;
+  --cds-caption-02-line-height: 1.28572;
+  --cds-caption-02-letter-spacing: 0.32px;
+  --cds-label-01-font-size: 0.75rem;
+  --cds-label-01-font-weight: 400;
+  --cds-label-01-line-height: 1.33333;
+  --cds-label-01-letter-spacing: 0.32px;
+  --cds-label-02-font-size: 0.875rem;
+  --cds-label-02-font-weight: 400;
+  --cds-label-02-line-height: 1.28572;
+  --cds-label-02-letter-spacing: 0.16px;
+  --cds-helper-text-01-font-size: 0.75rem;
+  --cds-helper-text-01-line-height: 1.33333;
+  --cds-helper-text-01-letter-spacing: 0.32px;
+  --cds-helper-text-02-font-size: 0.875rem;
+  --cds-helper-text-02-line-height: 1.28572;
+  --cds-helper-text-02-letter-spacing: 0.16px;
+  --cds-body-short-01-font-size: 0.875rem;
+  --cds-body-short-01-font-weight: 400;
+  --cds-body-short-01-line-height: 1.28572;
+  --cds-body-short-01-letter-spacing: 0.16px;
+  --cds-body-long-01-font-size: 0.875rem;
+  --cds-body-long-01-font-weight: 400;
+  --cds-body-long-01-line-height: 1.42857;
+  --cds-body-long-01-letter-spacing: 0.16px;
+  --cds-body-short-02-font-size: 1rem;
+  --cds-body-short-02-font-weight: 400;
+  --cds-body-short-02-line-height: 1.375;
+  --cds-body-short-02-letter-spacing: 0;
+  --cds-body-long-02-font-size: 1rem;
+  --cds-body-long-02-font-weight: 400;
+  --cds-body-long-02-line-height: 1.5;
+  --cds-body-long-02-letter-spacing: 0;
+  --cds-code-01-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+  --cds-code-01-font-size: 0.75rem;
+  --cds-code-01-font-weight: 400;
+  --cds-code-01-line-height: 1.33333;
+  --cds-code-01-letter-spacing: 0.32px;
+  --cds-code-02-font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+  --cds-code-02-font-size: 0.875rem;
+  --cds-code-02-font-weight: 400;
+  --cds-code-02-line-height: 1.42857;
+  --cds-code-02-letter-spacing: 0.32px;
+  --cds-heading-01-font-size: 0.875rem;
+  --cds-heading-01-font-weight: 600;
+  --cds-heading-01-line-height: 1.42857;
+  --cds-heading-01-letter-spacing: 0.16px;
+  --cds-productive-heading-01-font-size: 0.875rem;
+  --cds-productive-heading-01-font-weight: 600;
+  --cds-productive-heading-01-line-height: 1.28572;
+  --cds-productive-heading-01-letter-spacing: 0.16px;
+  --cds-heading-02-font-size: 1rem;
+  --cds-heading-02-font-weight: 600;
+  --cds-heading-02-line-height: 1.5;
+  --cds-heading-02-letter-spacing: 0;
+  --cds-productive-heading-02-font-size: 1rem;
+  --cds-productive-heading-02-font-weight: 600;
+  --cds-productive-heading-02-line-height: 1.375;
+  --cds-productive-heading-02-letter-spacing: 0;
+  --cds-productive-heading-03-font-size: 1.25rem;
+  --cds-productive-heading-03-font-weight: 400;
+  --cds-productive-heading-03-line-height: 1.4;
+  --cds-productive-heading-03-letter-spacing: 0;
+  --cds-productive-heading-04-font-size: 1.75rem;
+  --cds-productive-heading-04-font-weight: 400;
+  --cds-productive-heading-04-line-height: 1.28572;
+  --cds-productive-heading-04-letter-spacing: 0;
+  --cds-productive-heading-05-font-size: 2rem;
+  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-line-height: 1.25;
+  --cds-productive-heading-05-letter-spacing: 0;
+  --cds-productive-heading-06-font-size: 2.625rem;
+  --cds-productive-heading-06-font-weight: 300;
+  --cds-productive-heading-06-line-height: 1.199;
+  --cds-productive-heading-06-letter-spacing: 0;
+  --cds-productive-heading-07-font-size: 3.375rem;
+  --cds-productive-heading-07-font-weight: 300;
+  --cds-productive-heading-07-line-height: 1.199;
+  --cds-productive-heading-07-letter-spacing: 0;
+  --cds-expressive-heading-01-font-size: 0.875rem;
+  --cds-expressive-heading-01-font-weight: 600;
+  --cds-expressive-heading-01-line-height: 1.25;
+  --cds-expressive-heading-01-letter-spacing: 0.16px;
+  --cds-expressive-heading-02-font-size: 1rem;
+  --cds-expressive-heading-02-font-weight: 600;
+  --cds-expressive-heading-02-line-height: 1.5;
+  --cds-expressive-heading-02-letter-spacing: 0;
+  --cds-expressive-heading-03-font-size: 1.25rem;
+  --cds-expressive-heading-03-font-weight: 400;
+  --cds-expressive-heading-03-line-height: 1.4;
+  --cds-expressive-heading-03-letter-spacing: 0;
+  --cds-expressive-heading-04-font-size: 1.75rem;
+  --cds-expressive-heading-04-font-weight: 400;
+  --cds-expressive-heading-04-line-height: 1.28572;
+  --cds-expressive-heading-04-letter-spacing: 0;
+  --cds-expressive-heading-05-font-size: 2rem;
+  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-line-height: 1.25;
+  --cds-expressive-heading-05-letter-spacing: 0;
+  --cds-expressive-heading-06-font-size: 2rem;
+  --cds-expressive-heading-06-font-weight: 600;
+  --cds-expressive-heading-06-line-height: 1.25;
+  --cds-expressive-heading-06-letter-spacing: 0;
+  --cds-expressive-paragraph-01-font-size: 1.5rem;
+  --cds-expressive-paragraph-01-font-weight: 300;
+  --cds-expressive-paragraph-01-line-height: 1.334;
+  --cds-expressive-paragraph-01-letter-spacing: 0;
+  --cds-quotation-01-font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
+  --cds-quotation-01-font-size: 1.25rem;
+  --cds-quotation-01-font-weight: 400;
+  --cds-quotation-01-line-height: 1.3;
+  --cds-quotation-01-letter-spacing: 0;
+  --cds-quotation-02-font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
+  --cds-quotation-02-font-size: 2rem;
+  --cds-quotation-02-font-weight: 300;
+  --cds-quotation-02-line-height: 1.25;
+  --cds-quotation-02-letter-spacing: 0;
+  --cds-display-01-font-size: 2.625rem;
+  --cds-display-01-font-weight: 300;
+  --cds-display-01-line-height: 1.19;
+  --cds-display-01-letter-spacing: 0;
+  --cds-display-02-font-size: 2.625rem;
+  --cds-display-02-font-weight: 600;
+  --cds-display-02-line-height: 1.19;
+  --cds-display-02-letter-spacing: 0;
+  --cds-display-03-font-size: 2.625rem;
+  --cds-display-03-font-weight: 300;
+  --cds-display-03-line-height: 1.19;
+  --cds-display-03-letter-spacing: 0;
+  --cds-display-04-font-size: 2.625rem;
+  --cds-display-04-font-weight: 300;
+  --cds-display-04-line-height: 1.19;
+  --cds-display-04-letter-spacing: 0;
+  --cds-legal-01-font-size: 0.75rem;
+  --cds-legal-01-font-weight: 400;
+  --cds-legal-01-line-height: 1.33333;
+  --cds-legal-01-letter-spacing: 0.32px;
+  --cds-legal-02-font-size: 0.875rem;
+  --cds-legal-02-font-weight: 400;
+  --cds-legal-02-line-height: 1.28572;
+  --cds-legal-02-letter-spacing: 0.16px;
+  --cds-body-compact-01-font-size: 0.875rem;
+  --cds-body-compact-01-font-weight: 400;
+  --cds-body-compact-01-line-height: 1.28572;
+  --cds-body-compact-01-letter-spacing: 0.16px;
+  --cds-body-compact-02-font-size: 1rem;
+  --cds-body-compact-02-font-weight: 400;
+  --cds-body-compact-02-line-height: 1.375;
+  --cds-body-compact-02-letter-spacing: 0;
+  --cds-body-01-font-size: 0.875rem;
+  --cds-body-01-font-weight: 400;
+  --cds-body-01-line-height: 1.42857;
+  --cds-body-01-letter-spacing: 0.16px;
+  --cds-body-02-font-size: 1rem;
+  --cds-body-02-font-weight: 400;
+  --cds-body-02-line-height: 1.5;
+  --cds-body-02-letter-spacing: 0;
+  --cds-heading-compact-01-font-size: 0.875rem;
+  --cds-heading-compact-01-font-weight: 600;
+  --cds-heading-compact-01-line-height: 1.28572;
+  --cds-heading-compact-01-letter-spacing: 0.16px;
+  --cds-heading-compact-02-font-size: 1rem;
+  --cds-heading-compact-02-font-weight: 600;
+  --cds-heading-compact-02-line-height: 1.375;
+  --cds-heading-compact-02-letter-spacing: 0;
+  --cds-heading-03-font-size: 1.25rem;
+  --cds-heading-03-font-weight: 400;
+  --cds-heading-03-line-height: 1.4;
+  --cds-heading-03-letter-spacing: 0;
+  --cds-heading-04-font-size: 1.75rem;
+  --cds-heading-04-font-weight: 400;
+  --cds-heading-04-line-height: 1.28572;
+  --cds-heading-04-letter-spacing: 0;
+  --cds-heading-05-font-size: 2rem;
+  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-line-height: 1.25;
+  --cds-heading-05-letter-spacing: 0;
+  --cds-heading-06-font-size: 2.625rem;
+  --cds-heading-06-font-weight: 300;
+  --cds-heading-06-line-height: 1.199;
+  --cds-heading-06-letter-spacing: 0;
+  --cds-heading-07-font-size: 3.375rem;
+  --cds-heading-07-font-weight: 300;
+  --cds-heading-07-line-height: 1.199;
+  --cds-heading-07-letter-spacing: 0;
+  --cds-fluid-heading-03-font-size: 1.25rem;
+  --cds-fluid-heading-03-font-weight: 400;
+  --cds-fluid-heading-03-line-height: 1.4;
+  --cds-fluid-heading-03-letter-spacing: 0;
+  --cds-fluid-heading-04-font-size: 1.75rem;
+  --cds-fluid-heading-04-font-weight: 400;
+  --cds-fluid-heading-04-line-height: 1.28572;
+  --cds-fluid-heading-04-letter-spacing: 0;
+  --cds-fluid-heading-05-font-size: 2rem;
+  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-line-height: 1.25;
+  --cds-fluid-heading-05-letter-spacing: 0;
+  --cds-fluid-heading-06-font-size: 2rem;
+  --cds-fluid-heading-06-font-weight: 600;
+  --cds-fluid-heading-06-line-height: 1.25;
+  --cds-fluid-heading-06-letter-spacing: 0;
+  --cds-fluid-paragraph-01-font-size: 1.5rem;
+  --cds-fluid-paragraph-01-font-weight: 300;
+  --cds-fluid-paragraph-01-line-height: 1.334;
+  --cds-fluid-paragraph-01-letter-spacing: 0;
+  --cds-fluid-quotation-01-font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
+  --cds-fluid-quotation-01-font-size: 1.25rem;
+  --cds-fluid-quotation-01-font-weight: 400;
+  --cds-fluid-quotation-01-line-height: 1.3;
+  --cds-fluid-quotation-01-letter-spacing: 0;
+  --cds-fluid-quotation-02-font-family: 'IBM Plex Serif', 'Georgia', Times, serif;
+  --cds-fluid-quotation-02-font-size: 2rem;
+  --cds-fluid-quotation-02-font-weight: 300;
+  --cds-fluid-quotation-02-line-height: 1.25;
+  --cds-fluid-quotation-02-letter-spacing: 0;
+  --cds-fluid-display-01-font-size: 2.625rem;
+  --cds-fluid-display-01-font-weight: 300;
+  --cds-fluid-display-01-line-height: 1.19;
+  --cds-fluid-display-01-letter-spacing: 0;
+  --cds-fluid-display-02-font-size: 2.625rem;
+  --cds-fluid-display-02-font-weight: 600;
+  --cds-fluid-display-02-line-height: 1.19;
+  --cds-fluid-display-02-letter-spacing: 0;
+  --cds-fluid-display-03-font-size: 2.625rem;
+  --cds-fluid-display-03-font-weight: 300;
+  --cds-fluid-display-03-line-height: 1.19;
+  --cds-fluid-display-03-letter-spacing: 0;
+  --cds-fluid-display-04-font-size: 2.625rem;
+  --cds-fluid-display-04-font-weight: 300;
+  --cds-fluid-display-04-line-height: 1.19;
+  --cds-fluid-display-04-letter-spacing: 0;
+  --cds-spacing-01: 0.125rem;
+  --cds-spacing-02: 0.25rem;
+  --cds-spacing-03: 0.5rem;
+  --cds-spacing-04: 0.75rem;
+  --cds-spacing-05: 1rem;
+  --cds-spacing-06: 1.5rem;
+  --cds-spacing-07: 2rem;
+  --cds-spacing-08: 2.5rem;
+  --cds-spacing-09: 3rem;
+  --cds-spacing-10: 4rem;
+  --cds-spacing-11: 5rem;
+  --cds-spacing-12: 6rem;
+  --cds-spacing-13: 10rem;
+  --cds-fluid-spacing-01: 0;
+  --cds-fluid-spacing-02: 2vw;
+  --cds-fluid-spacing-03: 5vw;
+  --cds-fluid-spacing-04: 10vw;
+  --cds-layout-01: 1rem;
+  --cds-layout-02: 1.5rem;
+  --cds-layout-03: 2rem;
+  --cds-layout-04: 3rem;
+  --cds-layout-05: 4rem;
+  --cds-layout-06: 6rem;
+  --cds-layout-07: 10rem;
+  --cds-container-01: 1.5rem;
+  --cds-container-02: 2rem;
+  --cds-container-03: 2.5rem;
+  --cds-container-04: 3rem;
+  --cds-container-05: 4rem;
+  --cds-size-xsmall: 1.5rem;
+  --cds-size-small: 2rem;
+  --cds-size-medium: 2.5rem;
+  --cds-size-large: 3rem;
+  --cds-size-xlarge: 4rem;
+  --cds-size-2XLarge: 5rem;
+  --cds-icon-size-01: 1rem;
+  --cds-icon-size-02: 1.25rem;
+}
+
+.c4p--web-terminal__body {
+  height: 100%;
+}
+
+.c4p--web-terminal-content-wrapper {
+  width: 100vw;
+  height: 100%;
+}
+
+.c4p--web-terminal-content-wrapper--open {
+  width: calc(100vw - 40rem);
 }
 "
 `;

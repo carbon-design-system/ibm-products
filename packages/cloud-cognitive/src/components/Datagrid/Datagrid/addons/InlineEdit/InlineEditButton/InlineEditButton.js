@@ -24,6 +24,7 @@ export const InlineEditButton = ({
   columnConfig,
   totalInlineEditColumns,
   totalColumns,
+  type,
 }) => {
   const inlineEditColsLessThanHalfOfTotal =
     totalInlineEditColumns < totalColumns / 2;
@@ -37,6 +38,8 @@ export const InlineEditButton = ({
         [`${blockClass}__inline-edit-button--active`]: isActiveCell,
         [`${blockClass}__inline-edit-button--edit-less-than-half-of-total-cols`]:
           inlineEditColsLessThanHalfOfTotal,
+        [`${blockClass}__inline-edit-button--${type}`]:
+          type === 'date' || type === 'selection',
       })}
       tabIndex={tabIndex}
       data-disabled={disabled || nonEditCell}
@@ -62,7 +65,7 @@ export const InlineEditButton = ({
       ) : (
         <span className={`${blockClass}__placeholder`}>{placeholder}</span>
       )}
-      {!nonEditCell && (
+      {!nonEditCell && Icon && (
         <div className={`${blockClass}__inline-edit-button-icon`}>
           <Icon />
         </div>
@@ -83,5 +86,6 @@ InlineEditButton.propTypes = {
   tabIndex: PropTypes.number,
   totalColumns: PropTypes.number,
   totalInlineEditColumns: PropTypes.number,
+  type: PropTypes.oneOf(['text', 'number', 'selection', 'date']),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };

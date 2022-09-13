@@ -14,6 +14,12 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const useInlineEdit = (hooks) => {
   const addInlineEdit = (props, { cell, instance }) => {
+    const columnInlineEditConfig = cell.column.inlineEdit;
+    const inlineEditType = cell.column?.inlineEdit?.type;
+    const totalInlineEditColumns = instance.columns.filter(
+      (item) => item.inlineEdit
+    )?.length;
+
     const renderInlineEditComponent = (type) => (
       <InlineEditCell
         config={columnInlineEditConfig}
@@ -26,11 +32,6 @@ const useInlineEdit = (hooks) => {
       />
     );
 
-    const columnInlineEditConfig = cell.column.inlineEdit;
-    const inlineEditType = cell.column?.inlineEdit?.type;
-    const totalInlineEditColumns = instance.columns.filter(
-      (item) => item.inlineEdit
-    )?.length;
     if (cell.column.id === 'spacer') {
       return [
         props,
@@ -51,6 +52,10 @@ const useInlineEdit = (hooks) => {
             {inlineEditType === 'text' &&
               renderInlineEditComponent(inlineEditType)}
             {inlineEditType === 'number' &&
+              renderInlineEditComponent(inlineEditType)}
+            {inlineEditType === 'selection' &&
+              renderInlineEditComponent(inlineEditType)}
+            {inlineEditType === 'date' &&
               renderInlineEditComponent(inlineEditType)}
             {/* Render default inline edit cell button, if it's column doesn't have an inline edit configuration */}
             {!inlineEditType && (

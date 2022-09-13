@@ -241,6 +241,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       background-color: $ui-01;
       opacity: var(--#{$block-class}--subtitle-opacity);
       transform: translateY(var(--#{$block-class}--title-y-position));
+      word-break: break-word;
     }
     .#{$block-class}__label-text {
       @include carbon--type-style('label-01');

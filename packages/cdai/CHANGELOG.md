@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.19](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.22.18...@carbon/ibm-cloud-cognitive-cdai@1.22.19) (2022-09-06)
+
+
+### Bug Fixes
+
+* Remove `@carbon/elements` from `@carbon/ibm-cloud-cognitive-cdai`'s peer dependencies ([#2242](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2242)) ([4aa2736](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4aa27361acb6cbf9a59b167f8543c000ae183310))
+* Require only one of `arial-label` or `aria-labelledby` in `<IdeNavigation>` ([#2243](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2243)) ([0b798ab](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0b798aba8b3073de854ad8848c17f0aff6091ae0))
+* Update IdeCard.js ([#2244](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2244)) ([6eba115](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6eba115ce5717119b7a5836753f764d26ca72956))
+* update to Carbon v10 compatible versions to latest ([#2249](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2249)) ([2a2ccfa](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2a2ccfaef41d5247724aed978fb62567932ea6dc))
+
+
+
+
+
 ## [1.22.18](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.22.17...@carbon/ibm-cloud-cognitive-cdai@1.22.18) (2022-08-30)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai

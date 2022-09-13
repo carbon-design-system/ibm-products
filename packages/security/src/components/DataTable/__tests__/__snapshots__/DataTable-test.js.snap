@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DataTable Interactions updates overflow menus position on scroll 1`] = `
-Object {
-  "style": Object {
+{
+  "style": {
     "transform": "translateX(-70px)",
   },
 }

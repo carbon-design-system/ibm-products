@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`IdeEmptyState renders when no props are defined 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={null}
@@ -14,7 +14,7 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the body prop is defined as a string 1`] = `
-Array [
+[
   <IdeEmptyState
     body="Custom body"
     button={null}
@@ -27,7 +27,7 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the button prop is defined as a function 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={[Function]}
@@ -40,11 +40,11 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the button prop is defined as an object 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={
-      Object {
+      {
         "kind": "primary",
         "onClick": [Function],
         "text": "Custom text",
@@ -59,7 +59,7 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the format prop is defined as lg 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={null}
@@ -72,7 +72,7 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the format prop is defined as sm 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={null}
@@ -85,7 +85,7 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the image prop is defined as a function that returns an image 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={null}
@@ -98,13 +98,13 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the image prop is defined as an object 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={null}
     format="lg"
     image={
-      Object {
+      {
         "alt": "Custom alt",
         "className": "custom-classname",
         "src": "custom.lg.svg",
@@ -117,7 +117,7 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the image prop is defined as apiError 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={null}
@@ -130,7 +130,7 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the image prop is defined as default 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={null}
@@ -143,7 +143,7 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the image prop is defined as deploy 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={null}
@@ -156,7 +156,7 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the image prop is defined as noSearchResults 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={null}
@@ -169,7 +169,7 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the image prop is defined as notAuthorized 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={null}
@@ -182,19 +182,19 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the links prop is defined as an array of objects 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={null}
     format="lg"
     image="default"
     links={
-      Array [
-        Object {
+      [
+        {
           "text": "Custom link 1",
           "url": "http://ibm.com",
         },
-        Object {
+        {
           "target": "_blank",
           "text": "Custom external link 2",
           "url": "http://ibm.com",
@@ -207,14 +207,14 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the links prop is defined as an object 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={null}
     format="lg"
     image="default"
     links={
-      Object {
+      {
         "text": "Custom link",
         "url": "http://ibm.com",
       }
@@ -225,7 +225,7 @@ Array [
 `;
 
 exports[`IdeEmptyState renders when the title prop is defined as a string 1`] = `
-Array [
+[
   <IdeEmptyState
     body={null}
     button={null}

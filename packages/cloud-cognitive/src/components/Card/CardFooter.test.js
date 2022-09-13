@@ -29,6 +29,7 @@ describe(name, () => {
   it('renders primary button', () => {
     const props = {
       hasButton: true,
+      primaryButtonPlacement: 'bottom',
       primaryButtonText: 'primary button',
     };
     const { getByText } = render(<CardFooter {...props} />);
@@ -47,6 +48,7 @@ describe(name, () => {
   it('renders productive', () => {
     const props = {
       hasButton: true,
+      primaryButtonPlacement: 'bottom',
       primaryButtonText: 'primary button',
       productive: true,
     };

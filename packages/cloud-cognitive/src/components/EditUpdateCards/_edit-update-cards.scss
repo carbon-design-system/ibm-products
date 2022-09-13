@@ -23,16 +23,6 @@
   $block-class: #{$pkg-prefix}--edit-update-cards;
 
   .#{$block-class} {
-    textarea,
-    input {
-      width: 100%;
-      padding: 0;
-      font-size: carbon--type-scale(3);
-      letter-spacing: 0;
-      // stylelint-disable-next-line carbon/type-token-use
-      line-height: 1.5;
-    }
-
     &##{$block-class}--edit {
       /* Used id for overriding the SVG path fill */
 

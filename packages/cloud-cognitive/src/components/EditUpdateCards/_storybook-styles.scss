@@ -12,3 +12,45 @@
 #root {
   width: 100%;
 }
+
+@mixin edit-update-cards {
+  $block-class: #{$pkg-prefix}--edit-update-cards;
+
+  .#{$block-class} {
+    textarea,
+    input,
+    select {
+      width: 100%;
+      height: auto;
+      padding: 0;
+      font-size: carbon--type-scale(3);
+      letter-spacing: 0;
+      // stylelint-disable-next-line carbon/type-token-use
+      line-height: 1.5;
+    }
+  }
+  .#{$block-class}--items {
+    margin-bottom: $spacing-06;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .#{$block-class}--icon-text {
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: $spacing-01;
+
+      path {
+        // stylelint-disable-next-line carbon/theme-token-use
+        fill: $green-50;
+      }
+    }
+  }
+}
+
+@include exports('edit-update-cards') {
+  @include edit-update-cards;
+}

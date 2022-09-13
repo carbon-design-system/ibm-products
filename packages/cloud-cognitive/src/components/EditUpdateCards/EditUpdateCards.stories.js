@@ -18,12 +18,23 @@ import { EditUpdateCards } from '.';
 import mdx from './EditUpdateCards.mdx';
 
 import styles from './_storybook-styles.scss';
-import { Column, Form, Grid, Row, TextArea } from 'carbon-components-react';
+import {
+  Column,
+  Form,
+  FormLabel,
+  Grid,
+  Row,
+  Select,
+  SelectItem,
+  TextArea,
+  TextInput,
+} from 'carbon-components-react';
 import {
   Edit16,
   Save16,
   Close16,
   ProgressBarRound16,
+  CheckmarkFilled16,
 } from '@carbon/icons-react';
 import { pkg /*, carbon */ } from '../../settings';
 
@@ -53,6 +64,25 @@ const Template = (args) => {
   const [bodyCopy, setBodyCopy] = useState(
     'Editable card body content block. description inviting the user to take action on the card.'
   );
+  const [name, setName] = useState('austin-server-123ABC');
+  const speedOptions = [
+    { value: '0', text: 'Choose speed' },
+    { value: '100', text: '100MBps' },
+    { value: '120', text: '120MBps' },
+    { value: '150', text: '150MBps' },
+    { value: '200', text: '200MBps' },
+  ];
+  const [speedValue, setSpeedValue] = useState('120');
+  const options = speedOptions.map((option) => {
+    return (
+      <SelectItem
+        key={option.value}
+        value={option.value}
+        text={option.text}
+        selected={option.value === speedValue}
+      />
+    );
+  });
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -63,10 +93,13 @@ const Template = (args) => {
 
     setTimeout(() => {
       setBodyCopy(event.target.bodyCopy.value);
+      setName(event.target.name.value);
+      setSpeedValue(event.target.speed.value);
       setEditMode(false);
       setLoading(false);
     }, 1000);
   };
+
   const actionIcons = [
     {
       id: '1',
@@ -108,22 +141,100 @@ const Template = (args) => {
 
   const preview = (
     <div>
-      <p>{bodyCopy}</p>
+      <Row>
+        <Column lg={8} className={pkg.prefix + `--edit-update-cards--items`}>
+          <FormLabel>Name</FormLabel>
+          <p>{name}</p>
+        </Column>
+        <Column lg={8} className={pkg.prefix + `--edit-update-cards--items`}>
+          <FormLabel>Link status</FormLabel>
+          <p className={pkg.prefix + `--edit-update-cards--icon-text`}>
+            <CheckmarkFilled16 />
+            Running
+          </p>
+        </Column>
+        <Column lg={8} className={pkg.prefix + `--edit-update-cards--items`}>
+          <FormLabel>Routing</FormLabel>
+          <p>Local</p>
+        </Column>
+        <Column lg={8} className={pkg.prefix + `--edit-update-cards--items`}>
+          <FormLabel>BGP status</FormLabel>
+          <p className={pkg.prefix + `--edit-update-cards--icon-text`}>
+            <CheckmarkFilled16 />
+            Running
+          </p>
+        </Column>
+        <Column lg={8} className={pkg.prefix + `--edit-update-cards--items`}>
+          <FormLabel>Location</FormLabel>
+          <p className={pkg.prefix + `--edit-update-cards--icon-text`}>
+            NA-West
+          </p>
+        </Column>
+        <Column lg={8} className={pkg.prefix + `--edit-update-cards--items`}>
+          <FormLabel>Speed</FormLabel>
+          <p className={pkg.prefix + `--edit-update-cards--icon-text`}>
+            {speedValue}MBps
+          </p>
+        </Column>
+        <Column lg={16} className={pkg.prefix + `--edit-update-cards--items`}>
+          <FormLabel>Other details</FormLabel>
+          <p>{bodyCopy}</p>
+        </Column>
+      </Row>
     </div>
   );
 
   const edit = (
     <Form onSubmit={onSave} id="editForm">
-      <TextArea name="bodyCopy" labelText="" rows={2}>
-        {bodyCopy}
-      </TextArea>
+      <Row>
+        <Column lg={8} className={pkg.prefix + `--edit-update-cards--items`}>
+          <TextInput name="name" labelText="Name" defaultValue={name} />
+        </Column>
+        <Column lg={8} className={pkg.prefix + `--edit-update-cards--items`}>
+          <FormLabel>Link status</FormLabel>
+          <p className={pkg.prefix + `--edit-update-cards--icon-text`}>
+            <CheckmarkFilled16 />
+            Running
+          </p>
+        </Column>
+        <Column lg={8} className={pkg.prefix + `--edit-update-cards--items`}>
+          <FormLabel>Routing</FormLabel>
+          <p>Local</p>
+        </Column>
+        <Column lg={8} className={pkg.prefix + `--edit-update-cards--items`}>
+          <FormLabel>BGP status</FormLabel>
+          <p className={pkg.prefix + `--edit-update-cards--icon-text`}>
+            <CheckmarkFilled16 />
+            Running
+          </p>
+        </Column>
+        <Column lg={8} className={pkg.prefix + `--edit-update-cards--items`}>
+          <FormLabel>Location</FormLabel>
+          <p className={pkg.prefix + `--edit-update-cards--icon-text`}>
+            NA-West
+          </p>
+        </Column>
+        <Column lg={8} className={pkg.prefix + `--edit-update-cards--items`}>
+          <Select labelText="Speed" name="speed">
+            {options}
+          </Select>
+        </Column>
+        <Column lg={16} className={pkg.prefix + `--edit-update-cards--items`}>
+          <TextArea
+            name="bodyCopy"
+            labelText="Other details"
+            rows={2}
+            defaultValue={bodyCopy}
+          />
+        </Column>
+      </Row>
     </Form>
   );
 
   return (
     <Grid>
       <Row>
-        <Column lg={6}>
+        <Column lg={7}>
           <EditUpdateCards
             // TODO: handle events with action or local handler.
             // onTodo={action('onTodo log action')}

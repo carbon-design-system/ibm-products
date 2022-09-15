@@ -90,6 +90,7 @@ $row-heights: (
   }
   &.#{$block-class}__inline-edit-button--non-edit {
     padding-left: 0;
+    cursor: default;
   }
   .#{$block-class}__inline-edit-button-icon {
     height: $spacing-05;

@@ -527,8 +527,3 @@
 .#{$block-class} .#{$pkg-prefix}--button-menu {
   height: $spacing-09;
 }
-
-.#{$block-class} .#{$block-class}__table-grid-active {
-  border: 2px solid $inverse-link;
-  outline: 0;
-}

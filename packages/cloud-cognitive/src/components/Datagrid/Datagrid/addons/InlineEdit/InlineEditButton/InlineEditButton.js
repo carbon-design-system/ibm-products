@@ -18,7 +18,6 @@ export const InlineEditButton = ({
   disabled,
   labelIcon: LabelIcon,
   placeholder,
-  tabIndex = -1,
   nonEditCell,
   isActiveCell,
   columnConfig,
@@ -41,7 +40,7 @@ export const InlineEditButton = ({
         [`${blockClass}__inline-edit-button--${type}`]:
           type === 'date' || type === 'selection',
       })}
-      tabIndex={tabIndex}
+      tabIndex={isActiveCell ? 0 : -1}
       data-disabled={disabled || nonEditCell}
       aria-disabled={disabled || nonEditCell}
       role="button"
@@ -83,7 +82,6 @@ InlineEditButton.propTypes = {
   nonEditCell: PropTypes.bool,
   placeholder: PropTypes.string,
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  tabIndex: PropTypes.number,
   totalColumns: PropTypes.number,
   totalInlineEditColumns: PropTypes.number,
   type: PropTypes.oneOf(['text', 'number', 'selection', 'date']),

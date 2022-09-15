@@ -142,9 +142,10 @@ const sharedDatagridProps = {
       onClick: action('Clicked row action: delete'),
     },
   ],
+  expandedContentHeight: 96,
 };
 
-const BasicUsage = ({ ...args }) => {
+const ExpandedRows = ({ ...args }) => {
   const expansionRenderer = ({ row }) => {
     console.log(row);
     return <div>Content for row index: {row.id}</div>;
@@ -164,7 +165,6 @@ const BasicUsage = ({ ...args }) => {
       DatagridActions,
       DatagridPagination,
       ExpandedRowContentComponent: expansionRenderer,
-      expandedContentHeight: 95,
       ...args.defaultGridProps,
     },
     useExpandedRow
@@ -174,12 +174,13 @@ const BasicUsage = ({ ...args }) => {
 };
 
 const BasicTemplateWrapper = ({ ...args }) => {
-  return <BasicUsage defaultGridProps={{ ...args }} />;
+  return <ExpandedRows defaultGridProps={{ ...args }} />;
 };
 
 const expandableRowControlProps = {
   gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
+  expandedContentHeight: sharedDatagridProps.expandedContentHeight,
 };
 const expandableRowStoryName = 'With expandable row';
 export const ExpandableRowStory = prepareStory(BasicTemplateWrapper, {
@@ -187,6 +188,7 @@ export const ExpandableRowStory = prepareStory(BasicTemplateWrapper, {
   argTypes: {
     gridTitle: ARG_TYPES.gridTitle,
     gridDescription: ARG_TYPES.gridDescription,
+    expandedContentHeight: ARG_TYPES.expandedContentHeight,
   },
   args: {
     ...expandableRowControlProps,

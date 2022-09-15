@@ -7,8 +7,11 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import React from 'react';
-import { ChevronDown16, ChevronUp16 } from '@carbon/icons-react';
+import { ChevronRight16 } from '@carbon/icons-react';
+import cx from 'classnames';
+import { pkg } from '../../settings';
 
+const blockClass = `${pkg.prefix}--datagrid`;
 const useRowExpander = (hooks) => {
   const visibleColumns = (columns) => {
     const expanderColumn = {
@@ -16,7 +19,12 @@ const useRowExpander = (hooks) => {
       Cell: ({ row }) =>
         row.canExpand && (
           <span {...row.getToggleRowExpandedProps()}>
-            {row.isExpanded ? <ChevronUp16 /> : <ChevronDown16 />}
+            <ChevronRight16
+              className={cx(`${blockClass}__expander-icon`, {
+                [`${blockClass}__expander-icon--not-open`]: !row.isExpanded,
+                [`${blockClass}__expander-icon--open`]: row.isExpanded,
+              })}
+            />
           </span>
         ),
       width: 48,

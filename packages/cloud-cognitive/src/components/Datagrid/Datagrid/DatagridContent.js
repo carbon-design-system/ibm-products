@@ -45,7 +45,10 @@ export const DatagridContent = ({ datagridState }) => {
     // We return from here if we find a parent element with the selector below
     // because that element was initially part of the grid area but was removed
     // and swapped out with an input, i.e. text, number, selection, or date picker
-    if (target.closest(`.${blockClass}__inline-edit-button`)) {
+    if (
+      target.closest(`.${blockClass}__inline-edit-button`) ||
+      target.closest(`.${blockClass}__inline-edit--select`)
+    ) {
       return;
     }
     dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS', payload: activeCellId });

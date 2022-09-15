@@ -13,13 +13,25 @@ import React, {
   useCallback,
 } from 'react';
 import PropTypes from 'prop-types';
-import { TextInput, NumberInput } from 'carbon-components-react';
-import { Edit16, CaretSort16 } from '@carbon/icons-react';
+import {
+  TextInput,
+  NumberInput,
+  Dropdown,
+  DatePicker,
+  DatePickerInput,
+} from 'carbon-components-react';
+import {
+  Edit16,
+  CaretSort16,
+  ChevronDown16,
+  Calendar16,
+} from '@carbon/icons-react';
 import { InlineEditButton } from '../InlineEditButton';
 import { pkg } from '../../../../../../settings';
 import cx from 'classnames';
 import { InlineEditContext } from '../InlineEditContext';
 import { usePreviousValue } from '../../../../../../global/js/hooks';
+import { prepareProps } from '../../../../../../global/js/utils/props-helper';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 export const InlineEditCell = ({
@@ -49,6 +61,8 @@ export const InlineEditCell = ({
 
   const textInputRef = useRef();
   const numberInputRef = useRef();
+  const dropdownRef = useRef();
+  const datePickerRef = useRef();
   const outerButtonElement = useRef();
 
   useEffect(() => {
@@ -59,7 +73,7 @@ export const InlineEditCell = ({
   // If you are in edit mode and click outside of the cell,
   // this changes the cell back to the InlineEditButton
   useEffect(() => {
-    if (activeCellId !== cellId) {
+    if (activeCellId !== cellId || !editId) {
       setInEditMode(false);
     }
     if (activeCellId === cellId && editId === cellId && !nonEditCell) {
@@ -67,6 +81,18 @@ export const InlineEditCell = ({
       saveCellData(cellValue);
     }
   }, [activeCellId, cellId, nonEditCell, editId, cellValue, saveCellData]);
+
+  const openDropdown = (type) => {
+    const dropdownTrigger =
+      type === 'selection'
+        ? dropdownRef?.current
+        : datePickerRef?.current?.inputField;
+    dropdownTrigger.click();
+    if (type === 'date') {
+      // datePickerRef.current.cal.calendarContainer.focus();
+      dropdownTrigger?.focus();
+    }
+  };
 
   // Re-initializes initialValue if clicking outside of a cell that was previously
   // in edit mode, otherwise `initialValue` becomes stale
@@ -90,6 +116,11 @@ export const InlineEditCell = ({
         },
       });
       setInEditMode(true);
+      setTimeout(() => {
+        if (type === 'selection' || type === 'date') {
+          openDropdown(type);
+        }
+      }, 1);
     }
   };
 
@@ -141,27 +172,33 @@ export const InlineEditCell = ({
     inlineEditArea.focus();
   };
 
+  const getNewCellId = (key) => {
+    const totalRows = instance.rows.length;
+    const newCellId =
+      key === 'Enter'
+        ? `column-${columnIndex}-row-${
+            cell.row.index < totalRows - 1 ? cell.row.index + 1 : cell.row.index
+          }`
+        : `column-${
+            columnIndex < instance.columns.length - 1
+              ? columnIndex + 1
+              : columnIndex
+          }-row-${cell.row.index}`;
+    return newCellId;
+  };
+
   const handleKeyDown = (event) => {
     const { key } = event;
-
     switch (key) {
       // Save cell contents to data
       case 'Tab':
       case 'Enter': {
         if (inEditMode) {
-          const totalRows = instance.rows.length;
-          const newCellId =
-            key === 'Enter'
-              ? `column-${columnIndex}-row-${
-                  cell.row.index < totalRows - 1
-                    ? cell.row.index + 1
-                    : cell.row.index
-                }`
-              : `column-${
-                  columnIndex < instance.columns.length - 1
-                    ? columnIndex + 1
-                    : columnIndex
-                }-row-${cell.row.index}`;
+          // Dropdown saves are handled in the Dropdown's/DatePicker's onChange prop
+          if (type === 'selection' || type === 'date') {
+            return;
+          }
+          const newCellId = getNewCellId(key);
           saveCellData(cellValue);
           setInitialValue(cellValue);
           dispatch({ type: 'EXIT_EDIT_MODE', payload: newCellId });
@@ -189,6 +226,146 @@ export const InlineEditCell = ({
     dispatch({ type: 'UPDATE_ACTIVE_CELL_ID', payload: cellId });
   };
 
+  const renderDropdownItem = (item) => {
+    const includesIcon = !!item?.icon;
+    return includesIcon ? (
+      <>
+        {React.createElement(item.icon)}
+        <span className={cx(`${blockClass}__inline-edit--select-item`)}>
+          {item?.text}
+        </span>
+      </>
+    ) : (
+      item?.text
+    );
+  };
+
+  const renderSelectCell = () => {
+    const { inputProps } = config || {};
+    return (
+      <Dropdown
+        id={cellId}
+        label="Dropdown menu options"
+        {...inputProps}
+        hideLabel
+        style={{
+          width: cell.column.totalWidth,
+        }}
+        className={cx(`${blockClass}__inline-edit--select`, {
+          [`${blockClass}__inline-edit--select-${rowSize}`]: rowSize,
+        })}
+        items={inputProps?.items || []}
+        initialSelectedItem={cell.value}
+        itemToElement={(item) => renderDropdownItem(item)}
+        renderSelectedItem={(item) => renderDropdownItem(item)}
+        onChange={(item) => {
+          const newCellId = getNewCellId('Enter');
+          saveCellData(item.selectedItem);
+          setCellValue(item.selectedItem);
+          dispatch({ type: 'EXIT_EDIT_MODE', payload: newCellId });
+          setInEditMode(false);
+          sendFocusBackToGrid();
+          inputProps?.onChange?.(item.selectedItem);
+        }}
+        downshiftProps={{
+          onStateChange: (downshiftState) => {
+            const { isOpen } = downshiftState || {};
+            // !isOpen does not work in this case because a state change occurs on hover of the
+            // menu items and isOpen is changed to undefined which causes dispatch to be called unexpectedly
+            if (isOpen === false) {
+              dispatch({ type: 'EXIT_EDIT_MODE', payload: cellId });
+              setInEditMode(false);
+              sendFocusBackToGrid();
+            }
+          },
+        }}
+        ref={dropdownRef}
+      />
+    );
+  };
+
+  const setRenderIcon = () => {
+    if (type === 'text') {
+      return Edit16;
+    }
+    if (type === 'number') {
+      return CaretSort16;
+    }
+    if (type === 'selection') {
+      return ChevronDown16;
+    }
+    if (type === 'date') {
+      return Calendar16;
+    }
+  };
+
+  const renderDateCell = () => {
+    const datePickerPreparedProps = prepareProps(config.inputProps, [
+      'datePickerInputProps',
+    ]);
+    const datePickerInputProps = config?.inputProps?.datePickerInputProps;
+    return (
+      <DatePicker
+        {...datePickerPreparedProps}
+        appendTo={outerButtonElement?.current?.parentElement}
+        ref={datePickerRef}
+        style={{
+          width: cell.column.totalWidth,
+        }}
+        datePickerType="single"
+        className={cx(`${blockClass}__inline-edit--date`, {
+          [`${blockClass}__inline-edit--date-${rowSize}`]: rowSize,
+        })}
+        onChange={(newDate) => {
+          const newDateObj = newDate[0];
+          datePickerPreparedProps?.onChange?.(newDateObj, cell);
+          const newCellId = getNewCellId('Enter');
+          saveCellData(newDateObj);
+          setCellValue(newDateObj);
+          setInEditMode(false);
+          sendFocusBackToGrid();
+          dispatch({ type: 'EXIT_EDIT_MODE', payload: newCellId });
+        }}
+        value={cell.value}
+      >
+        <DatePickerInput
+          {...datePickerInputProps}
+          style={{
+            position: 'static',
+          }}
+          placeholder={datePickerInputProps?.placeholder || 'mm/dd/yyyy'}
+          labelText={datePickerInputProps?.labelText || 'Set date'}
+          id={
+            datePickerInputProps.id ||
+            `${blockClass}__inline-edit--date-picker--${cell.row.index}`
+          }
+          hideLabel
+        />
+      </DatePicker>
+    );
+  };
+
+  // Ensures that months and days are all 2 digits, prefixes 0 if `num` is a single digit
+  const padTo2Digits = (num) => {
+    return num.toString().padStart(2, '0');
+  };
+
+  const buildDate = (value) => {
+    if (value instanceof Date) {
+      const { dateFormat = 'm/d/Y' } = config;
+      const maskedFullYear = value.getFullYear();
+      const maskedMonth = padTo2Digits(value.getMonth() + 1);
+      const maskedDay = padTo2Digits(value.getDate());
+      if (dateFormat === 'm/d/Y' || dateFormat === 'm/d/y') {
+        return [maskedMonth, maskedDay, maskedFullYear].join('/');
+      }
+      if (dateFormat === 'd/m/Y' || dateFormat === 'd/m/y') {
+        return [maskedDay, maskedMonth, maskedFullYear].join('/');
+      }
+    }
+    return null;
+  };
+
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
@@ -197,6 +374,7 @@ export const InlineEditCell = ({
       data-column-index={columnIndex}
       data-row-index={cell.row.index}
       data-disabled={nonEditCell}
+      data-inline-type={type}
       onClick={!nonEditCell ? handleInlineCellClick : addActiveState}
       onKeyDown={!nonEditCell ? handleKeyDown : null}
       className={cx(`${blockClass}__inline-edit--outer-cell-button`, {
@@ -207,14 +385,22 @@ export const InlineEditCell = ({
       {!inEditMode && (
         <InlineEditButton
           isActiveCell={cellId === activeCellId}
-          renderIcon={type === 'number' ? CaretSort16 : Edit16}
-          label={value}
+          renderIcon={setRenderIcon()}
+          label={
+            type === 'selection'
+              ? value.text
+              : type === 'date'
+              ? buildDate(value)
+              : value
+          }
+          labelIcon={value?.icon || null}
           placeholder={placeholder}
           tabIndex={tabIndex}
           nonEditCell={nonEditCell}
           columnConfig={cell.column}
           totalInlineEditColumns={totalInlineEditColumns}
           totalColumns={totalColumns}
+          type={type}
         />
       )}
       {!nonEditCell && inEditMode && cellId === activeCellId && (
@@ -253,6 +439,8 @@ export const InlineEditCell = ({
               ref={numberInputRef}
             />
           )}
+          {type === 'selection' && renderSelectCell()}
+          {type === 'date' && renderDateCell()}
         </>
       )}
     </div>
@@ -275,5 +463,9 @@ InlineEditCell.propTypes = {
   tabIndex: PropTypes.number,
   totalInlineEditColumns: PropTypes.number,
   type: PropTypes.oneOf(['text', 'number', 'selection', 'date']),
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.node,
+    PropTypes.object,
+  ]),
 };

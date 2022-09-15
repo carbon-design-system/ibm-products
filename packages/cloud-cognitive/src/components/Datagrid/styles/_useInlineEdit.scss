@@ -24,7 +24,12 @@ $row-heights: (
   .#{$block-class}
     .#{$block-class}__inline-edit--outer-cell-button--#{$size}
     .#{$carbon-prefix}--number
-    input[type='number'] {
+    input[type='number'],
+  .#{$block-class}
+    .#{$block-class}__inline-edit--select.#{$block-class}__inline-edit--select-#{$size},
+  .#{$block-class}
+    .#{$block-class}__inline-edit--date.#{$block-class}__inline-edit--date-#{$size}
+    .#{$carbon-prefix}--date-picker__input {
     height: $size-value;
   }
   .#{$block-class}
@@ -34,6 +39,10 @@ $row-heights: (
     .#{$block-class}__inline-edit--outer-cell-button--#{$size}
     .#{$carbon-prefix}--number__control-btn::after {
     height: calc($size-value - 0.25rem);
+  }
+  .#{$block-class}
+    .#{$block-class}__inline-edit--select.#{$block-class}__inline-edit--select-#{$size}.#{$carbon-prefix}--list-box {
+    max-height: none;
   }
 }
 
@@ -51,7 +60,6 @@ $row-heights: (
   display: flex;
   height: 100%;
   align-items: center;
-  transform: translateX(calc(-1 * #{$spacing-05}));
 }
 
 .#{$block-class} .#{$pkg-prefix}--inline-edit__after-input-elements {
@@ -76,12 +84,21 @@ $row-heights: (
   color: $text-02;
   cursor: pointer;
   outline: 0; // handled by active class
+  .#{$block-class}__label-icon {
+    padding-right: $spacing-05;
+  }
   &.#{$block-class}__inline-edit-button--non-edit {
     padding-left: 0;
   }
   .#{$block-class}__inline-edit-button-icon {
     height: $spacing-05;
     fill: $icon-02;
+  }
+  &.#{$block-class}__inline-edit-button--date {
+    @include carbon--font-family($name: mono);
+  }
+  &.#{$block-class}__inline-edit-button--selection {
+    justify-content: flex-start;
   }
   // Always show renderIcon if inline edit columns are less than half of total columns
   &:not(.#{$block-class}__inline-edit-button--edit-less-than-half-of-total-cols) {
@@ -137,7 +154,7 @@ $row-heights: (
 .#{$block-class}__inline-edit--outer-cell-button
   .#{$block-class}__inline-edit-button
   .#{$block-class}__inline-edit-button-label.#{$block-class}__inline-edit-button-label-with-icon {
-  padding-right: $spacing-07;
+  padding-right: $spacing-09;
 }
 
 .#{$block-class}__inline-edit--outer-cell-button .#{$carbon-prefix}--text-input,
@@ -154,6 +171,7 @@ $row-heights: (
 
 .#{$block-class}__table-with-inline-edit.#{$carbon-prefix}--data-table
   .#{$block-class}__cell-inline-edit {
+  position: relative;
   padding: 0;
   .#{$block-class}__inline-edit-button--non-edit {
     padding-left: $spacing-05;
@@ -163,4 +181,31 @@ $row-heights: (
     min-width: auto;
     padding-right: $spacing-05;
   }
+}
+
+.#{$block-class}__inline-edit--select
+  .#{$block-class}__inline-edit--select-item {
+  padding-bottom: $spacing-05;
+  padding-left: $spacing-05;
+}
+
+.#{$block-class}__inline-edit--select.#{$carbon-prefix}--dropdown,
+.#{$block-class}__inline-edit--date .#{$carbon-prefix}--date-picker__input {
+  width: inherit;
+  height: $spacing-09; // default row height
+  max-height: none;
+}
+
+.#{$block-class}__inline-edit--date .#{$carbon-prefix}--date-picker-container {
+  width: inherit;
+}
+
+.#{$block-class}__inline-edit--date.#{$carbon-prefix}--date-picker.#{$carbon-prefix}--date-picker--single
+  .#{$carbon-prefix}--date-picker__input {
+  overflow: hidden;
+  width: 100%;
+  max-width: none;
+  padding-right: $spacing-07;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -5,6 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import {
+  ChartBubble16,
+  ChartColumnFloating16,
+  ChartVennDiagram16,
+} from '@carbon/icons-react';
+
+export const inlineEditSelectItems = [
+  {
+    id: 'option-0',
+    icon: ChartColumnFloating16,
+    text: 'Column Chart',
+  },
+  {
+    id: 'option-1',
+    icon: ChartBubble16,
+    text: 'Bubble Chart',
+  },
+  {
+    id: 'option-2',
+    icon: ChartVennDiagram16,
+    text: 'Venn Diagram',
+  },
+];
+
 export const getInlineEditColumns = () => {
   return [
     {
@@ -47,8 +71,34 @@ export const getInlineEditColumns = () => {
       },
     },
     {
-      Header: 'Someone 1',
-      accessor: 'someone1',
+      Header: 'Active since',
+      accessor: 'activeSince',
+      inlineEdit: {
+        type: 'date',
+        inputProps: {
+          // optionally pass props here to be passed through to Carbon's DatePicker component
+          onChange: (newDateObj, cell) => {
+            console.log(newDateObj, cell);
+          },
+          labelText: 'Change active since date',
+          // optionally pass props here to be passed through to Carbon's DatePickerInput component
+          datePickerInputProps: {
+            labelText: 'Change active since date',
+          },
+        },
+      },
+    },
+    {
+      Header: 'Chart type',
+      accessor: 'chartType',
+      inlineEdit: {
+        type: 'selection',
+        inputProps: {
+          // These props are passed to the Carbon component used for inline editing
+          items: inlineEditSelectItems,
+          onChange: (item) => console.log(item),
+        },
+      },
     },
     {
       Header: 'Someone 2',

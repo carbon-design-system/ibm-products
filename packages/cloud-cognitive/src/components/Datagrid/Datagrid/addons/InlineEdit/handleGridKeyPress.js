@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { pkg } from '../../../../../settings';
+import { carbon, pkg } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -13,9 +13,17 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
   const { key } = event;
   const { gridActive, activeCellId, editId } = state;
 
+  const focusedCell = document.querySelector(
+    `#${instance.tableId} .${blockClass}__table-with-inline-edit [data-cell-id="${activeCellId}"]`
+  );
+
   // If we reach this it means that tab was pressed while in
   // edit mode which should not remove the focus from the grid
   if (activeCellId === editId && key === 'Tab') {
+    // Attempting to exit date picker
+    if (focusedCell.getAttribute('data-inline-type') === 'date') {
+      dispatch({ type: 'EXIT_EDIT_MODE', payload: activeCellId });
+    }
     event.preventDefault();
     const inlineEditArea = document.querySelector(
       `#${instance.tableId} .${blockClass}__table-with-inline-edit`
@@ -24,10 +32,55 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
     return;
   }
 
+  if (activeCellId === editId && key === 'Escape') {
+    if (focusedCell.getAttribute('data-inline-type') === 'date') {
+      dispatch({ type: 'EXIT_EDIT_MODE', payload: activeCellId });
+      event.preventDefault();
+      const inlineEditArea = document.querySelector(
+        `#${instance.tableId} .${blockClass}__table-with-inline-edit`
+      );
+      inlineEditArea.focus();
+      return;
+    }
+  }
+
+  // Checks if the dropdown menu is open
+  const dropdownIsActive = () => {
+    const focusedElementRole = document.activeElement.getAttribute('role');
+    if (
+      focusedElementRole === 'listbox' &&
+      document.activeElement.classList.contains(
+        `${carbon.prefix}--list-box__menu`
+      )
+    ) {
+      // Prevents arrow keys from scrolling any other content when dropdown menu is open
+      event.preventDefault();
+      return true;
+    }
+    return false;
+  };
+
+  // Checks if the date picker is open
+  const datePickerIsActive = () => {
+    const focusedCalendarElement = document.querySelector(
+      `.${carbon.prefix}--date-picker__input.flatpickr-input.active`
+    );
+    if (
+      focusedCalendarElement ||
+      document.activeElement.classList.contains(`flatpickr-day`)
+    ) {
+      event.preventDefault();
+      return true;
+    }
+    return false;
+  };
+
   // Stop grid key listener when in edit mode
   const isEditing =
-    document.activeElement.id === activeCellId &&
-    document.activeElement.id === editId;
+    (document.activeElement.id === activeCellId &&
+      document.activeElement.id === editId) ||
+    dropdownIsActive() ||
+    datePickerIsActive();
   if (isEditing || !gridActive) {
     return;
   }
@@ -44,9 +97,6 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
   ) {
     event.preventDefault();
   }
-  const focusedCell = document.querySelector(
-    `#${instance.tableId} .${blockClass}__table-with-inline-edit [data-cell-id="${activeCellId}"]`
-  );
   const isDisabledCell = !!focusedCell.getAttribute('data-disabled');
   const sharedUpdateParams = {
     oldId: activeCellId,
@@ -108,6 +158,21 @@ export const handleGridKeyPress = (event, dispatch, state, instance) => {
       }
       // Only go into edit mode if there is no editId, meaning that we're not already in edit mode
       if (!editId) {
+        const focusedType = focusedCell.getAttribute('data-inline-type');
+        // Open dropdown immediately after entering edit mode for selection type
+        if (focusedType === 'selection') {
+          setTimeout(() => {
+            const dropdownTrigger = focusedCell.querySelector('button');
+            dropdownTrigger?.click();
+          }, 1);
+        }
+        if (focusedType === 'date') {
+          setTimeout(() => {
+            const dateInputTrigger = focusedCell.querySelector('input');
+            dateInputTrigger?.click();
+            dateInputTrigger?.focus();
+          }, 1);
+        }
         dispatch({
           type: 'ENTER_EDIT_MODE',
           payload: {

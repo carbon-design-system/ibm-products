@@ -134,7 +134,10 @@ DatagridContent.propTypes = {
   datagridState: PropTypes.shape({
     getTableProps: PropTypes.func,
     withVirtualScroll: PropTypes.bool,
-    DatagridPagination: PropTypes.element,
+    DatagridPagination: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+    ]),
     CustomizeColumnsModal: PropTypes.element,
     isFetching: PropTypes.bool,
     leftPanel: PropTypes.object,

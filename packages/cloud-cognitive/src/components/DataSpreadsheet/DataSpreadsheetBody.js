@@ -470,6 +470,7 @@ export const DataSpreadsheetBody = forwardRef(
               className={cx(`${blockClass}__tr`)}
               data-row-index={index}
               aria-rowindex={index + 1}
+              aria-owns={`${blockClass}__cell-editor-text-area`}
             >
               {/* ROW HEADER BUTTON */}
               <div

@@ -107,7 +107,7 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://janhassel.de"><img src="https://avatars.githubusercontent.com/u/28265588?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jan Hassel</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=janhassel" title="Code">💻</a> <a href="#a11y-janhassel" title="Accessibility">️️️️♿️</a></td>
     <td align="center"><a href="https://github.com/marion-bruells"><img src="https://avatars.githubusercontent.com/u/51152537?v=4?s=100" width="100px;" alt=""/><br /><sub><b>marion-bruells</b></sub></a><br /><a href="#design-marion-bruells" title="Design">🎨</a></td>
     <td align="center"><a href="https://github.com/kai-liu"><img src="https://avatars.githubusercontent.com/u/105320675?v=4?s=100" width="100px;" alt=""/><br /><sub><b>kai-liu</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=kai-liu" title="Code">💻</a></td>
-å  </tr>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->

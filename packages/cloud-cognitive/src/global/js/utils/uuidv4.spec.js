@@ -6,12 +6,15 @@ describe('uuidv4', () => {
   });
 
   it('Uses Math.random when window is not defined', () => {
+    const { crypto } = window;
+    delete window.crypto;
     const mockMath = Object.create(global.Math);
     const mockMathRandom = jest.fn().mockReturnValue(0.5);
     mockMath.random = mockMathRandom;
     global.Math = mockMath;
 
     expect(uuidv4()).toEqual('98888888-9888-4888-a888-988888888888');
+    window.crypto = crypto;
   });
 
   it('Uses crypto from window when window is defined', () => {

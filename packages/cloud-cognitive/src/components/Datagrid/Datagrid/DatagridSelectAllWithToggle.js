@@ -8,6 +8,7 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { Checkbox, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { CaretDown } from '@carbon/icons-react';
 import { pkg } from '../../../settings';
@@ -27,6 +28,8 @@ const SelectAllWithToggle = ({
   getToggleAllRowsSelectedProps,
   allPageRowsLabel = 'Select all on page',
   allRowsLabel = 'Select all',
+  columns,
+  withStickyColumn,
 }) => {
   const [selectAllMode, setSelectAllMode] = useState(SELECT_ALL_PAGE_ROWS);
   useEffect(() => {
@@ -46,11 +49,15 @@ const SelectAllWithToggle = ({
       : getToggleAllRowsSelectedProps;
   const { onChange, ...selectProps } = getProps();
   const disabled = isFetching || selectProps.disabled;
+  const isFirstColumnStickyLeft =
+    columns[0]?.sticky === 'left' && withStickyColumn;
   return (
     <th
       role="columnheader"
       scope="col"
-      className={`${blockClass}__select-all-toggle-on`}
+      className={cx(`${blockClass}__select-all-toggle-on`, {
+        [`${blockClass}__select-all-sticky-left`]: isFirstColumnStickyLeft,
+      })}
     >
       <span>
         <Checkbox
@@ -105,12 +112,14 @@ const SelectAllWithToggle = ({
 SelectAllWithToggle.propTypes = {
   allPageRowsLabel: PropTypes.string,
   allRowsLabel: PropTypes.string,
+  columns: PropTypes.arrayOf(PropTypes.object),
   getToggleAllPageRowsSelectedProps: PropTypes.func.isRequired,
   getToggleAllRowsSelectedProps: PropTypes.func.isRequired,
   isAllRowsSelected: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool,
   selectAllToggle: PropTypes.object,
   tableId: PropTypes.string.isRequired,
+  withStickyColumn: PropTypes.bool,
 };
 
 export default SelectAllWithToggle;

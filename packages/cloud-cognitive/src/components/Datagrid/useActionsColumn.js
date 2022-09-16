@@ -13,7 +13,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const useActionsColumn = (hooks) => {
   const useAttachActionsOnInstance = (instance) => {
-    const { rowActions, isFetching } = instance;
+    const { rowActions, isFetching, selectedFlatRows } = instance;
 
     if (rowActions && Array.isArray(rowActions)) {
       const addActionsMenu = (props, cellData) => {
@@ -35,20 +35,49 @@ const useActionsColumn = (hooks) => {
                       className={`${blockClass}_actions-column`}
                       style={{ display: 'flex' }}
                     >
-                      {rowActions.map((action) => {
-                        const { id, itemText, onClick, icon } = action;
+                      {rowActions.map((action, index) => {
+                        const { id, itemText, onClick, icon, ...rest } = action;
+                        const selectedRowId = selectedFlatRows?.filter((item) =>
+                          item.id === row.id ? item.id : null
+                        );
                         return (
                           <div
-                            className={`${blockClass}__actions-column-button`}
-                            key=""
+                            className={cx(
+                              `${blockClass}__actions-column-button`,
+                              {
+                                [`${blockClass}__disabled-row-action-button`]:
+                                  selectedFlatRows &&
+                                  selectedFlatRows.length &&
+                                  selectedRowId &&
+                                  selectedRowId.length,
+                              }
+                            )}
+                            key={`${itemText}__${index}`}
                           >
                             <OverflowMenu
+                              {...rest}
                               renderIcon={icon}
                               hasIconOnly
                               light
                               iconDescription={itemText}
                               kind="ghost"
+                              className={cx({
+                                [`${blockClass}__disabled-row-action`]:
+                                  selectedFlatRows &&
+                                  selectedFlatRows.length &&
+                                  selectedRowId &&
+                                  selectedRowId.length,
+                              })}
                               onClick={(e) => {
+                                if (
+                                  selectedFlatRows &&
+                                  selectedFlatRows.length &&
+                                  selectedRowId &&
+                                  selectedRowId.length
+                                ) {
+                                  // Row actions should be disabled if row is selected and batchActions toolbar is active
+                                  return;
+                                }
                                 e.stopPropagation();
                                 onClick(id, row, e);
                               }}
@@ -110,6 +139,9 @@ const useActionsColumn = (hooks) => {
                 [`${blockClass}__actions-column-cell`]: true,
                 [`${blockClass}__cell`]: true,
               }),
+              style: {
+                width: 96,
+              },
             },
           ];
         }

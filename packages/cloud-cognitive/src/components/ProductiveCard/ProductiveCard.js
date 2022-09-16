@@ -116,6 +116,10 @@ ProductiveCard.propTypes = {
    */
   primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   /**
+   * Determines if the primary button is on the top or bottom of the card
+   */
+  primaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
+  /**
    * The text that's displayed in the primary button
    */
   primaryButtonText: PropTypes.node,

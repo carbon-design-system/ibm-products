@@ -29,7 +29,6 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
     );
     return null;
   }
-
   const {
     getTableProps = () => {},
     withVirtualScroll,

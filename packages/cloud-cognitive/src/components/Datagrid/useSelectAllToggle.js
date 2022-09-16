@@ -7,6 +7,7 @@
  */
 // @flow
 import React from 'react';
+import cx from 'classnames';
 import { selectionColumnId } from './common-column-ids';
 import SelectAllWithToggle from './Datagrid/DatagridSelectAllWithToggle';
 import { pkg } from '../../settings';
@@ -37,12 +38,16 @@ const useSelectAllWithToggleComponent = (hooks) => {
 const useAddClassNameToSelectRow = (hooks) => {
   hooks.getCellProps.push((props, data) => {
     const { column } = data.cell;
-    const { DatagridPagination } = data.instance;
+    const { DatagridPagination, columns, withStickyColumn } = data.instance;
+    const isFirstColumnStickyLeft =
+      columns[0]?.sticky === 'left' && withStickyColumn;
     if (column.id === selectionColumnId && DatagridPagination) {
       return [
         props,
         {
-          className: `${blockClass}__select-all-toggle-on`,
+          className: cx(`${blockClass}__select-all-toggle-on`, {
+            [`${blockClass}__select-all-sticky-left`]: isFirstColumnStickyLeft,
+          }),
         },
       ];
     }
@@ -58,6 +63,8 @@ const Header = (gridState) => {
     getToggleAllPageRowsSelectedProps,
     getToggleAllRowsSelectedProps,
     isAllRowsSelected,
+    withStickyColumn,
+    columns,
   } = gridState;
   const props = {
     tableId,
@@ -66,6 +73,8 @@ const Header = (gridState) => {
     getToggleAllPageRowsSelectedProps,
     getToggleAllRowsSelectedProps,
     isAllRowsSelected,
+    withStickyColumn,
+    columns,
   };
   return <SelectAllWithToggle {...props} />;
 };

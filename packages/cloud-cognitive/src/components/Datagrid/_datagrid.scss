@@ -12,6 +12,8 @@
 
 @use './styles/index';
 
+/* stylelint-disable max-nesting-depth */
+
 // Other Carbon settings.
 // TODO: @use '@carbon/react/scss/grid'; if needed
 
@@ -29,6 +31,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   width: 100%;
   :global(.#{c4p-settings.$carbon-prefix}--checkbox) {
     display: none;
+  }
+
+  .bx--overflow-menu-options > .c4p--datagrid__row-size-dropdown {
+    left: $spacing-01;
+    width: 112px;
   }
 }
 

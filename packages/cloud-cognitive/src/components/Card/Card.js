@@ -27,6 +27,7 @@ const defaults = {
   mediaPosition: 'top',
   overflowActions: Object.freeze([]),
   primaryButtonKind: 'primary',
+  primaryButtonPlacement: 'bottom',
   productive: false,
   secondaryButtonKind: 'secondary',
   titleSize: 'default',
@@ -36,7 +37,6 @@ export let Card = forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-
       actionIcons = defaults.actionIcons,
       actionsPlacement = defaults.actionsPlacement,
       children,
@@ -56,6 +56,7 @@ export let Card = forwardRef(
       primaryButtonHref,
       primaryButtonIcon,
       primaryButtonKind = defaults.primaryButtonKind,
+      primaryButtonPlacement = defaults.primaryButtonPlacement,
       primaryButtonText,
       productive = defaults.productive,
       secondaryButtonHref,
@@ -71,9 +72,14 @@ export let Card = forwardRef(
     ref
   ) => {
     const blockClass = `${pkg.prefix}--card`;
-    const hasActions = actionIcons.length > 0 || overflowActions.length > 0;
+    const hasActions =
+      actionIcons.length > 0 ||
+      overflowActions.length > 0 ||
+      (primaryButtonText && primaryButtonPlacement === 'top');
     const hasFooterActions = hasActions && actionsPlacement === 'bottom';
-    const hasFooterButton = !!secondaryButtonText || !!primaryButtonText;
+    const hasFooterButton =
+      !!secondaryButtonText ||
+      (!!primaryButtonText && primaryButtonPlacement === 'bottom');
     const hasBottomBar = hasFooterActions || hasFooterButton;
     const hasClickEvent = !!onClick || !!onKeyDown;
     const clickableProps = {
@@ -185,10 +191,16 @@ export let Card = forwardRef(
     };
 
     const getHeaderProps = () => ({
-      actions: getActions(),
+      actions: actionsPlacement === 'top' ? getActions() : '',
+      noActionIcons:
+        actionIcons.length > 0 && actionsPlacement === 'top' ? false : true,
       actionsPlacement,
+      onPrimaryButtonClick,
+      primaryButtonIcon,
+      primaryButtonPlacement,
+      primaryButtonText,
       description,
-      hasActions: hasActions && actionsPlacement === 'top',
+      hasActions: hasActions,
       label,
       title,
       titleSize,
@@ -207,7 +219,7 @@ export let Card = forwardRef(
     };
 
     const getFooterProps = () => ({
-      actions: getActions(),
+      actions: actionsPlacement === 'bottom' ? getActions() : '',
       actionsPlacement,
       hasActions: hasFooterActions,
       hasButton: hasFooterButton,
@@ -216,6 +228,7 @@ export let Card = forwardRef(
       primaryButtonHref,
       primaryButtonIcon,
       primaryButtonKind,
+      primaryButtonPlacement,
       primaryButtonText,
       productive,
       secondaryButtonHref,
@@ -280,6 +293,7 @@ Card.propTypes = {
   primaryButtonHref: PropTypes.string,
   primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   primaryButtonKind: PropTypes.oneOf(['primary', 'ghost']),
+  primaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   primaryButtonText: PropTypes.node,
   productive: PropTypes.bool,
   secondaryButtonHref: PropTypes.string,

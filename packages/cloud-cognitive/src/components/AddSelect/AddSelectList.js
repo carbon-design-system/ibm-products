@@ -113,6 +113,7 @@ export let AddSelectList = ({
                 [`${blockClass}-row-selected`]: isSelected(item.id),
                 [`${blockClass}-row-meta-selected`]: isInMetaPanel(item.id),
               })}
+              onClick={(evt) => metaPanelHandler(item, evt)}
             >
               <div
                 className={`${blockClass}-cell`}

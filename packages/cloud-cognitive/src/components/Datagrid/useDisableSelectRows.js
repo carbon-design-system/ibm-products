@@ -43,7 +43,9 @@ const updateSelectAll = (hooks) => {
         style: { cursor: 'pointer' },
         checked: isAllRowsSelected,
         disabled: instance.disableSelectAll,
-        title: 'Toggle All Rows Selected',
+        title:
+          instance?.disableSelectRowsProps?.labels?.toggleAllRowsLabel ||
+          'Toggle All Rows Selected',
         indeterminate: Boolean(
           !isAllRowsSelected &&
             Object.keys(instance.state.selectedRowIds).length
@@ -77,7 +79,9 @@ const updatePageSelectAll = (hooks) => {
         style: { cursor: 'pointer' },
         checked: isAllRowsSelected,
         disabled: instance.disableSelectAll,
-        title: 'Toggle All Rows Selected',
+        title:
+          instance?.disableSelectRowsProps?.labels?.toggleAllRowsLabel ||
+          'Toggle All Rows Selected',
         indeterminate: Boolean(
           !isAllRowsSelected &&
             instance.page.some(({ id }) => instance.state.selectedRowIds[id])

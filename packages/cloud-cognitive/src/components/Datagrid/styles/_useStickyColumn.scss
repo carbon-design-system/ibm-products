@@ -61,7 +61,7 @@
   right: 6px !important; // offset the vertical scroll bar in the table body
 }
 
-.#{$block-class}__select-all-toggle-on.#{$block-class}__select-all-sticky-left {
+.#{variables.$block-class}__select-all-toggle-on.#{$block-class}__select-all-sticky-left {
   position: sticky;
   z-index: 1;
   left: 0;

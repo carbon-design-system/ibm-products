@@ -85,6 +85,7 @@ $row-heights: (
   cursor: pointer;
   outline: 0; // handled by active class
   .#{$block-class}__label-icon {
+    height: $spacing-05;
     padding-right: $spacing-05;
   }
   &.#{$block-class}__inline-edit-button--non-edit {

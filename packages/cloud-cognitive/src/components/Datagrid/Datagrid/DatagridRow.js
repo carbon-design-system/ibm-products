@@ -43,6 +43,30 @@ const DatagridRow = (datagridState) => {
           `${blockClass}__carbon-row-expanded-hover-active`
         );
       }}
+      onKeyUp={(event) => {
+        if (
+          [
+            'ArrowRight',
+            'ArrowLeft',
+            'ArrowDown',
+            'ArrowUp',
+            'End',
+            'Home',
+          ].some((k) => k === event.key)
+        ) {
+          const rowsActive = document.querySelectorAll(
+            '.c4p--datagrid__carbon-row'
+          );
+          for (var i = 0; i < rowsActive.length; i++) {
+            rowsActive[i].classList.remove(
+              'c4p--datagrid__carbon-row-hover-active'
+            );
+          }
+          event.target
+            .closest('tr')
+            .classList.add(`${blockClass}__carbon-row-hover-active`);
+        }
+      }}
     >
       {row.cells.map((cell) => {
         const cellProps = cell.getCellProps();

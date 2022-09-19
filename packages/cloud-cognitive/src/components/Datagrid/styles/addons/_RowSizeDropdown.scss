@@ -8,10 +8,10 @@
 
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '../../../../global/styles/project-settings' as c4p-settings;
 @use '../variables';
 
 .#{variables.$block-class}__row-size-dropdown {
-  position: absolute;
   padding: $spacing-05;
   background-color: $background;
 
@@ -22,4 +22,12 @@
   background-color: $background;
 
   box-shadow: 1px 4px 8px -3px $overlay, -1px 6px 8px -5px $overlay;
+}
+
+.#{variables.$block-class}
+  .#{c4p-settings.$carbon-prefix}--popover--bottom-right.#{variables.$block-class}__row-height-settings-popover
+  .#{c4p-settings.$carbon-prefix}--popover-caret {
+  // Used to fix layout issue with IconButton caret inside of Popover component
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  left: -4px;
 }

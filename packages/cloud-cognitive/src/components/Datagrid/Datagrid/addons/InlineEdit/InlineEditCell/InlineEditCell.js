@@ -20,12 +20,7 @@ import {
   DatePicker,
   DatePickerInput,
 } from '@carbon/react';
-import {
-  Edit16,
-  CaretSort16,
-  ChevronDown16,
-  Calendar16,
-} from '@carbon/icons-react';
+import { Edit, CaretSort, ChevronDown, Calendar } from '@carbon/icons-react';
 import { InlineEditButton } from '../InlineEditButton';
 import { pkg } from '../../../../../../settings';
 import cx from 'classnames';
@@ -90,13 +85,17 @@ export const InlineEditCell = ({
   }, [activeCellId, cellId, nonEditCell, editId, cellValue, saveCellData]);
 
   const openDropdown = (type) => {
+    // *****
+    // Only added this querySelector because v11 Datepicker isn't forwarding the ref which breaks how we were handling this in v10
+    // *****
+    const datePickerInputElement = document.querySelector(
+      `#${blockClass}__inline-edit--date-picker--${cell.row.index}`
+    );
+
     const dropdownTrigger =
-      type === 'selection'
-        ? dropdownRef?.current
-        : datePickerRef?.current?.inputField;
+      type === 'selection' ? dropdownRef?.current : datePickerInputElement;
     dropdownTrigger.click();
     if (type === 'date') {
-      // datePickerRef.current.cal.calendarContainer.focus();
       dropdownTrigger?.focus();
     }
   };
@@ -294,16 +293,16 @@ export const InlineEditCell = ({
 
   const setRenderIcon = () => {
     if (type === 'text') {
-      return Edit16;
+      return (props) => <Edit size={16} {...props} />;
     }
     if (type === 'number') {
-      return CaretSort16;
+      return (props) => <CaretSort size={16} {...props} />;
     }
     if (type === 'selection') {
-      return ChevronDown16;
+      return (props) => <ChevronDown size={16} {...props} />;
     }
     if (type === 'date') {
-      return Calendar16;
+      return (props) => <Calendar size={16} {...props} />;
     }
   };
 
@@ -330,9 +329,12 @@ export const InlineEditCell = ({
           const newCellId = getNewCellId('Enter');
           saveCellData(newDateObj);
           setCellValue(newDateObj);
-          setInEditMode(false);
-          sendFocusBackToGrid();
-          dispatch({ type: 'EXIT_EDIT_MODE', payload: newCellId });
+          // To handle the interaction of the masked input when the DatePicker and updating
+          setTimeout(() => {
+            setInEditMode(false);
+            sendFocusBackToGrid();
+            dispatch({ type: 'EXIT_EDIT_MODE', payload: newCellId });
+          }, 1);
         }}
         value={cell.value}
       >
@@ -343,10 +345,7 @@ export const InlineEditCell = ({
           }}
           placeholder={datePickerInputProps?.placeholder || 'mm/dd/yyyy'}
           labelText={datePickerInputProps?.labelText || cellLabel || 'Set date'}
-          id={
-            datePickerInputProps.id ||
-            `${blockClass}__inline-edit--date-picker--${cell.row.index}`
-          }
+          id={`${blockClass}__inline-edit--date-picker--${cell.row.index}`}
           hideLabel
         />
       </DatePicker>
@@ -438,10 +437,10 @@ export const InlineEditCell = ({
               id={cellId}
               hideLabel
               defaultValue={cellValue}
-              onChange={(event) => {
-                setCellValue(event.imaginaryTarget.value);
+              onChange={(event, { value }) => {
+                setCellValue(value);
                 if (inputProps.onChange) {
-                  inputProps.onChange(event.imaginaryTarget.value);
+                  inputProps.onChange(value);
                 }
               }}
               ref={numberInputRef}

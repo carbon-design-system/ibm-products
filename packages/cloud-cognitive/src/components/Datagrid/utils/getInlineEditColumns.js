@@ -5,26 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import React from 'react';
 import {
-  ChartBubble16,
-  ChartColumnFloating16,
-  ChartVennDiagram16,
+  ChartBubble,
+  ChartColumnFloating,
+  ChartVennDiagram,
 } from '@carbon/icons-react';
 
 export const inlineEditSelectItems = [
   {
     id: 'option-0',
-    icon: ChartColumnFloating16,
+    icon: (props) => <ChartColumnFloating size={16} {...props} />,
     text: 'Column Chart',
   },
   {
     id: 'option-1',
-    icon: ChartBubble16,
+    icon: (props) => <ChartBubble size={16} {...props} />,
     text: 'Bubble Chart',
   },
   {
     id: 'option-2',
-    icon: ChartVennDiagram16,
+    icon: (props) => <ChartVennDiagram size={16} {...props} />,
     text: 'Venn Diagram',
   },
 ];
@@ -80,7 +81,6 @@ export const getInlineEditColumns = () => {
           onChange: (newDateObj, cell) => {
             console.log(newDateObj, cell);
           },
-          labelText: 'Change active since date',
           // optionally pass props here to be passed through to Carbon's DatePickerInput component
           datePickerInputProps: {
             labelText: 'Change active since date',

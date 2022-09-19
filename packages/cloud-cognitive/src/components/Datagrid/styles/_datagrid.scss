@@ -527,3 +527,15 @@
 .#{$block-class} .#{c4p-settings.$pkg-prefix}--button-menu {
   height: $spacing-09;
 }
+
+.#{$block-class} .#{$block-class}__table-grid-active {
+  border: 2px solid $link-inverse;
+  outline: 0;
+}
+
+.#{$block-class} .#{$block-class}__row-size-button {
+  display: flex;
+  width: $spacing-09;
+  height: $spacing-09;
+  justify-content: center;
+}

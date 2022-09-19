@@ -7,20 +7,16 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DataTable } from '@carbon/react';
 import cx from 'classnames';
-import DatagridHead from './DatagridHead';
-import DatagridBody from './DatagridBody';
-import DatagridToolbar from './DatagridToolbar';
 
 import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
 import pconsole from '../../../global/js/utils/pconsole';
+import { InlineEditProvider } from './addons/InlineEdit/InlineEditContext';
+import { DatagridContent } from './DatagridContent';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentName = 'Datagrid';
-
-const { TableContainer, Table } = DataTable;
 
 export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
   if (!datagridState) {
@@ -29,94 +25,46 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
     );
     return null;
   }
+
   const {
-    getTableProps = () => {},
     withVirtualScroll,
     DatagridPagination,
     isFetching,
     tableId,
-    CustomizeColumnsModal,
     leftPanel,
-    fullHeightDatagrid,
-    verticalAlign = 'center',
-    variableRowHeight,
     className,
-    gridTitle,
-    gridDescription,
-    useDenseHeader,
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
 
-  const dataGrid = (
-    <>
-      <TableContainer
-        className={cx(
-          `${blockClass}__grid-container`,
-          withVirtualScroll || fullHeightDatagrid
-            ? `${blockClass}__full-height`
-            : '',
-          DatagridPagination ? `${blockClass}__with-pagination` : '',
-          useDenseHeader ? `${blockClass}__dense-header` : ''
-        )}
-        title={gridTitle}
-        description={gridDescription}
-      >
-        <DatagridToolbar {...datagridState} />
-        <div className={`${blockClass}__table-container`}>
-          {leftPanel && leftPanel.isOpen && (
-            <div className={`${blockClass}__datagridLeftPanel`}>
-              {leftPanel.panelContent}
-            </div>
-          )}
-          <Table
-            {...getTableProps()}
-            className={cx(
-              withVirtualScroll ? '' : `${blockClass}__table-simple`,
-              `${blockClass}__vertical-align-${verticalAlign}`,
-              { [`${blockClass}__variable-row-height`]: variableRowHeight },
-              getTableProps()?.className
-            )}
-          >
-            <DatagridHead {...datagridState} />
-            <DatagridBody {...datagridState} rows={rows} />
-          </Table>
-        </div>
-      </TableContainer>
-      {rows?.length > 0 &&
-        !isFetching &&
-        DatagridPagination &&
-        DatagridPagination(datagridState)}
-      {CustomizeColumnsModal && (
-        <CustomizeColumnsModal instance={datagridState} />
-      )}
-    </>
-  );
-
   return (
-    <div
-      {...rest}
-      id={tableId}
-      ref={ref}
-      className={cx(
-        className,
-        blockClass,
-        withVirtualScroll
-          ? `${blockClass}__datagridWrap`
-          : `${blockClass}__datagridWrap-simple`,
-        !isFetching && rows.length === 0 ? `${blockClass}__empty-state` : ''
-      )}
-      {...getDevtoolsProps(componentName)}
-    >
-      {leftPanel && (
-        <div
-          className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
-        >
-          {dataGrid}
-        </div>
-      )}
-      {leftPanel === undefined && dataGrid}
-    </div>
+    <InlineEditProvider>
+      <div
+        {...rest}
+        id={tableId}
+        ref={ref}
+        className={cx(
+          className,
+          blockClass,
+          withVirtualScroll
+            ? `${blockClass}__datagridWrap`
+            : `${blockClass}__datagridWrap-simple`,
+          !isFetching && rows.length === 0 ? `${blockClass}__empty-state` : ''
+        )}
+        {...getDevtoolsProps(componentName)}
+      >
+        {leftPanel && (
+          <div
+            className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
+          >
+            <DatagridContent datagridState={datagridState} />
+          </div>
+        )}
+        {leftPanel === undefined && (
+          <DatagridContent datagridState={datagridState} />
+        )}
+      </div>
+    </InlineEditProvider>
   );
 });
 

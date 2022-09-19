@@ -6,8 +6,12 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@import '../../../global/styles/project-settings';
-@import './variables';
+@use '../../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button/tokens' as *;
+@use '@carbon/type' as *;
+@use './variables';
 
 $row-heights: (
   xs: 1.5rem,
@@ -18,30 +22,34 @@ $row-heights: (
 );
 
 @each $size, $size-value in $row-heights {
-  .#{$block-class}
-    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
-    .#{$carbon-prefix}--text-input,
-  .#{$block-class}
-    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
-    .#{$carbon-prefix}--number
+  .#{variables.$block-class}
+    .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{c4p-settings.$carbon-prefix}--text-input,
+  .#{variables.$block-class}
+    .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{c4p-settings.$carbon-prefix}--number
     input[type='number'],
-  .#{$block-class}
-    .#{$block-class}__inline-edit--select.#{$block-class}__inline-edit--select-#{$size},
-  .#{$block-class}
-    .#{$block-class}__inline-edit--date.#{$block-class}__inline-edit--date-#{$size}
-    .#{$carbon-prefix}--date-picker__input {
+  .#{variables.$block-class}
+    .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{variables.$block-class}__inline-edit--select
+    .#{c4p-settings.$carbon-prefix}--list-box.#{c4p-settings.$carbon-prefix}--dropdown,
+  .#{variables.$block-class}
+    .#{variables.$block-class}__inline-edit--date.#{variables.$block-class}__inline-edit--date-#{$size}
+    .#{c4p-settings.$carbon-prefix}--date-picker__input {
     height: $size-value;
   }
-  .#{$block-class}
-    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
-    .#{$carbon-prefix}--number__control-btn::before,
-  .#{$block-class}
-    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
-    .#{$carbon-prefix}--number__control-btn::after {
+  .#{variables.$block-class}
+    .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{c4p-settings.$carbon-prefix}--number__control-btn::before,
+  .#{variables.$block-class}
+    .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{c4p-settings.$carbon-prefix}--number__control-btn::after {
     height: calc($size-value - 0.25rem);
   }
-  .#{$block-class}
-    .#{$block-class}__inline-edit--select.#{$block-class}__inline-edit--select-#{$size}.#{$carbon-prefix}--list-box {
+  .#{variables.$block-class}
+    .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{variables.$block-class}__inline-edit--select
+    .#{c4p-settings.$carbon-prefix}--list-box {
     max-height: none;
   }
 }
@@ -56,24 +64,25 @@ $row-heights: (
   }
 }
 
-.#{$block-class}__inline-edit-cell {
+.#{variables.$block-class}__inline-edit-cell {
   display: flex;
   height: 100%;
   align-items: center;
 }
 
-.#{$block-class} .#{$pkg-prefix}--inline-edit__after-input-elements {
+.#{variables.$block-class}
+  .#{c4p-settings.$pkg-prefix}--inline-edit__after-input-elements {
   display: flex;
   align-items: center;
 }
 
-.#{$block-class}__inline-edit--outer-cell-button {
+.#{variables.$block-class}__inline-edit--outer-cell-button {
   width: 100%;
   height: calc(100% + 2px); // account for borders
 }
 
-.#{$block-class}__inline-edit--outer-cell-button
-  .#{$block-class}__inline-edit-button {
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{variables.$block-class}__inline-edit-button {
   position: relative;
   display: flex;
   width: 100%;
@@ -84,124 +93,134 @@ $row-heights: (
   color: $text-secondary;
   cursor: pointer;
   outline: 0; // handled by active class
-  .#{$block-class}__label-icon {
+  .#{variables.$block-class}__label-icon {
     padding-right: $spacing-05;
   }
-  &.#{$block-class}__inline-edit-button--non-edit {
+  &.#{variables.$block-class}__inline-edit-button--non-edit {
     padding-left: 0;
   }
-  .#{$block-class}__inline-edit-button-icon {
+  .#{variables.$block-class}__inline-edit-button-icon {
     height: $spacing-05;
     fill: $icon-secondary;
   }
-  &.#{$block-class}__inline-edit-button--date {
-    @include carbon--font-family($name: mono);
+  &.#{variables.$block-class}__inline-edit-button--date {
+    @include font-family($name: mono);
   }
-  &.#{$block-class}__inline-edit-button--selection {
+  &.#{variables.$block-class}__inline-edit-button--selection {
     justify-content: flex-start;
   }
   // Always show renderIcon if inline edit columns are less than half of total columns
-  &:not(.#{$block-class}__inline-edit-button--edit-less-than-half-of-total-cols) {
-    .#{$block-class}__inline-edit-button-icon {
+  &:not(.#{variables.$block-class}__inline-edit-button--edit-less-than-half-of-total-cols) {
+    .#{variables.$block-class}__inline-edit-button-icon {
       display: none;
     }
 
     /* stylelint-disable-next-line */
     &:hover {
-      .#{$block-class}__inline-edit-button-icon {
+      .#{variables.$block-class}__inline-edit-button-icon {
         display: block;
       }
     }
   }
 }
 
-.#{$block-class}__inline-edit--outer-cell-button
-  .#{$block-class}__inline-edit-button:not([data-disabled='true']):hover {
-  background-color: $layer-active-01;
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{variables.$block-class}__inline-edit-button:not([data-disabled='true']):hover {
+  background-color: $layer-active;
   color: $text-primary;
-  .#{$block-class}__inline-edit-button-icon {
+  .#{variables.$block-class}__inline-edit-button-icon {
     fill: $icon-primary;
   }
 }
 
-.#{$block-class}__inline-edit--outer-cell-button
-  .#{$block-class}__inline-edit-button.#{$block-class}__inline-edit-button--active:not([data-disabled='true']) {
-  background-color: $layer-active-01;
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{variables.$block-class}__inline-edit-button.#{variables.$block-class}__inline-edit-button--active:not([data-disabled='true']) {
+  background-color: $layer-active;
   color: $text-primary;
   cursor: text;
 }
 
-.#{$block-class}__inline-edit--outer-cell-button
-  .#{$block-class}__inline-edit-button.#{$block-class}__inline-edit-button--active {
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{variables.$block-class}__inline-edit-button.#{variables.$block-class}__inline-edit-button--active {
   @include input-outline;
 }
 
-.#{$block-class}__inline-edit--outer-cell-button
-  .#{$block-class}__inline-edit-button--disabled:not(.#{$block-class}__inline-edit-button--edit-less-than-half-of-total-cols) {
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{variables.$block-class}__inline-edit-button--disabled:not(.#{variables.$block-class}__inline-edit-button--edit-less-than-half-of-total-cols) {
   color: $button-disabled;
   cursor: not-allowed;
 }
 
-.#{$block-class}__inline-edit--outer-cell-button
-  .#{$block-class}__inline-edit-button
-  .#{$block-class}__inline-edit-button-label {
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{variables.$block-class}__inline-edit-button
+  .#{variables.$block-class}__inline-edit-button-label {
   overflow: hidden;
   padding-right: $spacing-05;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.#{$block-class}__inline-edit--outer-cell-button
-  .#{$block-class}__inline-edit-button
-  .#{$block-class}__inline-edit-button-label.#{$block-class}__inline-edit-button-label-with-icon {
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{variables.$block-class}__inline-edit-button
+  .#{variables.$block-class}__inline-edit-button-label.#{variables.$block-class}__inline-edit-button-label-with-icon {
   padding-right: $spacing-09;
 }
 
-.#{$block-class}__inline-edit--outer-cell-button .#{$carbon-prefix}--text-input,
-.#{$block-class}__inline-edit--outer-cell-button
-  .#{$carbon-prefix}--number
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{c4p-settings.$carbon-prefix}--text-input,
+.#{variables.$block-class}__inline-edit--outer-cell-button
+  .#{c4p-settings.$carbon-prefix}--number
   input[type='number'] {
   height: $spacing-09;
 }
 
-.#{$block-class}__inline-edit-button-icon {
+.#{variables.$block-class}__inline-edit-button-icon {
   position: absolute;
   right: $spacing-05;
 }
 
-.#{$block-class}__table-with-inline-edit.#{$carbon-prefix}--data-table
-  .#{$block-class}__cell-inline-edit {
+.#{variables.$block-class}__table-with-inline-edit.#{c4p-settings.$carbon-prefix}--data-table
+  .#{variables.$block-class}__cell-inline-edit {
   position: relative;
   padding: 0;
-  .#{$block-class}__inline-edit-button--non-edit {
+  .#{variables.$block-class}__inline-edit-button--non-edit {
     padding-left: $spacing-05;
   }
 
-  .#{$carbon-prefix}--number input[type='number'] {
+  .#{c4p-settings.$carbon-prefix}--number input[type='number'] {
     min-width: auto;
     padding-right: $spacing-05;
   }
 }
 
-.#{$block-class}__inline-edit--select
-  .#{$block-class}__inline-edit--select-item {
+.#{variables.$block-class}__inline-edit--select
+  .#{variables.$block-class}__inline-edit--select-item {
   padding-bottom: $spacing-05;
   padding-left: $spacing-05;
 }
 
-.#{$block-class}__inline-edit--select.#{$carbon-prefix}--dropdown,
-.#{$block-class}__inline-edit--date .#{$carbon-prefix}--date-picker__input {
+.#{variables.$block-class}__inline-edit--select.#{c4p-settings.$carbon-prefix}--dropdown,
+.#{variables.$block-class}__inline-edit--date
+  .#{c4p-settings.$carbon-prefix}--date-picker {
   width: inherit;
+}
+
+.#{variables.$block-class}__inline-edit--select.#{c4p-settings.$carbon-prefix}--dropdown,
+.#{variables.$block-class}__inline-edit--date
+  .#{c4p-settings.$carbon-prefix}--date-picker.#{c4p-settings.$carbon-prefix}--date-picker--single
+  .#{c4p-settings.$carbon-prefix}--date-picker__input {
+  width: 100%;
   height: $spacing-09; // default row height
   max-height: none;
 }
 
-.#{$block-class}__inline-edit--date .#{$carbon-prefix}--date-picker-container {
+.#{variables.$block-class}__inline-edit--date
+  .#{c4p-settings.$carbon-prefix}--date-picker-container {
   width: inherit;
 }
 
-.#{$block-class}__inline-edit--date.#{$carbon-prefix}--date-picker.#{$carbon-prefix}--date-picker--single
-  .#{$carbon-prefix}--date-picker__input {
+.#{variables.$block-class}__inline-edit--date.#{c4p-settings.$carbon-prefix}--date-picker.#{c4p-settings.$carbon-prefix}--date-picker--single
+  .#{c4p-settings.$carbon-prefix}--date-picker__input {
   overflow: hidden;
   width: 100%;
   max-width: none;

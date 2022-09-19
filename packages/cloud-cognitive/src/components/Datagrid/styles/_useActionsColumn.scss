@@ -7,6 +7,7 @@
 */
 
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme';
 @use './variables';
 
 .#{variables.$block-class}__actions-column-cell {
@@ -24,14 +25,15 @@
   margin-bottom: $spacing-03;
 }
 
-.#{$block-class} .#{$block-class}__disabled-row-action-button {
+.#{variables.$block-class}
+  .#{variables.$block-class}__disabled-row-action-button {
   cursor: not-allowed;
 }
 
-.#{$block-class} .#{$block-class}__disabled-row-action {
+.#{variables.$block-class} .#{variables.$block-class}__disabled-row-action {
   pointer-events: none;
 }
 
-.#{$block-class} .#{$block-class}__disabled-row-action svg {
-  fill: $layer-selected-disabled;
+.#{variables.$block-class} .#{variables.$block-class}__disabled-row-action svg {
+  fill: theme.$layer-selected-disabled;
 }

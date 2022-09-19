@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { DataTable, Button } from '@carbon/react';
-import { Download16, Filter16, Add16, Restart16 } from '@carbon/icons-react';
+import { Download, Filter, Add, Restart } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
@@ -50,7 +50,7 @@ export const DatagridActions = (datagridState) => {
             kind="ghost"
             hasIconOnly
             tooltipPosition="bottom"
-            renderIcon={Download16}
+            renderIcon={(props) => <Download size={16} {...props} />}
             iconDescription={'Download CSV'}
             onClick={downloadCsv}
           />
@@ -60,14 +60,18 @@ export const DatagridActions = (datagridState) => {
             kind="ghost"
             hasIconOnly
             tooltipPosition="bottom"
-            renderIcon={Filter16}
+            renderIcon={(props) => <Filter size={16} {...props} />}
             iconDescription={'Left panel'}
             onClick={leftPanelClick}
           />
         </div>
         <RowSizeDropdown {...rowSizeDropdownProps} />
         <div style={style} className={`${blockClass}__toolbar-divider`}>
-          <Button kind="ghost" renderIcon={Add16} iconDescription={'Action'}>
+          <Button
+            kind="ghost"
+            renderIcon={(props) => <Add size={16} {...props} />}
+            iconDescription={'Action'}
+          >
             Ghost button
           </Button>
         </div>
@@ -84,16 +88,16 @@ export const DatagridActions = (datagridState) => {
           kind="ghost"
           hasIconOnly
           tooltipPosition="bottom"
-          renderIcon={Filter16}
+          renderIcon={(props) => <Filter size={16} {...props} />}
           iconDescription={'Left panel'}
           onClick={leftPanelClick}
         />
         <TableToolbarContent>
           <TableToolbarSearch
-            size="xl"
+            size="lg"
             id="columnSearch"
             persistent
-            placeHolderText={searchForAColumn}
+            placeholder={searchForAColumn}
             onChange={(e) => setGlobalFilter(e.target.value)}
           />
           <RowSizeDropdown {...rowSizeDropdownProps} />
@@ -102,7 +106,7 @@ export const DatagridActions = (datagridState) => {
               kind="ghost"
               hasIconOnly
               tooltipPosition="bottom"
-              renderIcon={Restart16}
+              renderIcon={(props) => <Restart size={16} {...props} />}
               iconDescription={'Refresh'}
               onClick={refreshColumns}
             />
@@ -112,7 +116,7 @@ export const DatagridActions = (datagridState) => {
               kind="ghost"
               hasIconOnly
               tooltipPosition="bottom"
-              renderIcon={Download16}
+              renderIcon={(props) => <Download size={16} {...props} />}
               iconDescription={'Download CSV'}
               onClick={downloadCsv}
             />
@@ -122,7 +126,11 @@ export const DatagridActions = (datagridState) => {
               <CustomizeColumnsButton />
             </div>
           )}
-          <ButtonMenu label="Primary button" renderIcon={Add16}>
+          <ButtonMenu
+            menuAriaLabel="Primary action button menu"
+            label="Primary button"
+            renderIcon={(props) => <Add size={16} {...props} />}
+          >
             <ButtonMenuItem
               itemText="Option 1"
               onClick={action(`Click on ButtonMenu Option 1`)}

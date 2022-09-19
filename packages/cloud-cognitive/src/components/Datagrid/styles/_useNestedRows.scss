@@ -21,8 +21,6 @@
 }
 
 .#{$block-class} .#{$block-class}__expander-icon {
-  // Linter saying this is not a token, probably a v11 compatibility issue
-  /* stylelint-disable-next-line carbon/motion-duration-use */
   transition: transform $duration-fast-01 motion('standard', 'productive');
 }
 

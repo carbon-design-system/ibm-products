@@ -60,3 +60,9 @@
   /* stylelint-disable-next-line */
   right: 6px !important; // offset the vertical scroll bar in the table body
 }
+
+.#{variables.$block-class}__select-all-toggle-on.#{variables.$block-class}__select-all-sticky-left {
+  position: sticky;
+  z-index: 1;
+  left: 0;
+}

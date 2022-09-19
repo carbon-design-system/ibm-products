@@ -28,6 +28,7 @@ export let CardFooter = ({
   primaryButtonHref,
   primaryButtonIcon,
   primaryButtonKind = defaults.primaryButtonKind,
+  primaryButtonPlacement,
   primaryButtonText,
   productive = defaults.productive,
   secondaryButtonHref,
@@ -54,7 +55,7 @@ export let CardFooter = ({
           {secondaryButtonText}
         </Button>
       )}
-      {primaryButtonText && (
+      {primaryButtonText && primaryButtonPlacement === 'bottom' && (
         <Button
           kind={productive ? 'ghost' : primaryButtonKind}
           onClick={onPrimaryButtonClick}
@@ -79,6 +80,7 @@ CardFooter.propTypes = {
   primaryButtonHref: PropTypes.string,
   primaryButtonIcon: PropTypes.string,
   primaryButtonKind: PropTypes.oneOf(['primary', 'ghost']),
+  primaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   primaryButtonText: PropTypes.string,
   productive: PropTypes.bool,
   secondaryButtonHref: PropTypes.string,

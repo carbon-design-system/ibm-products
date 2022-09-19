@@ -8,27 +8,17 @@
 
 import React, { useState, useEffect } from 'react';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
+import { getInlineEditColumns } from './utils/getInlineEditColumns';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
 import { action } from '@storybook/addon-actions';
-import {
-  Activity,
-  Add,
-  Download,
-  Edit,
-  Filter,
-  Restart,
-  TrashCan,
-} from '@carbon/icons-react';
-import { DataTable, Button, Pagination } from '@carbon/react';
-
+import { Activity, Add } from '@carbon/icons-react';
+import { DataTable } from '@carbon/react';
 import {
   Datagrid,
   useDatagrid,
   useInfiniteScroll,
-  useNestedRows,
-  useExpandedRow,
   useRowIsMouseOver,
   useSelectRows,
   useOnRowClick,
@@ -41,12 +31,13 @@ import {
   useStickyColumn,
   useActionsColumn,
   useColumnOrder,
+  useInlineEdit,
 } from '.';
 
 import {
   CustomizeColumnStory,
   RowSizeDropdownStory,
-  // SelectAllWithToggle,
+  SelectAllWitHToggle,
   LeftPanelStory,
 } from './Datagrid.stories';
 import mdx from './Datagrid.mdx';
@@ -56,7 +47,9 @@ import cx from 'classnames';
 
 import styles from './_storybook-styles.scss';
 import { SidePanel } from '../SidePanel';
-import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
+import { DatagridActions } from './utils/DatagridActions';
+import { DatagridPagination } from './utils/DatagridPagination';
+import { Wrapper } from './utils/Wrapper';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -68,26 +61,7 @@ export default {
     },
   },
 };
-
-const emptyStateTitle = 'Empty state title';
-const emptyStateDescription =
-  'Description text explaining why this card is empty.';
-const emptyStateSize = 'lg';
 const blockClass = `${pkg.prefix}--datagrid`;
-
-const Wrapper = ({ children }) => (
-  <div
-    style={{
-      height: '100vh',
-      width: '100%',
-      padding: '1rem',
-      margin: '0',
-      zIndex: '0',
-    }}
-  >
-    {children}
-  </div>
-);
 
 const defaultHeader = [
   {
@@ -171,12 +145,14 @@ export const BasicUsage = () => {
     []
   );
   const [data] = useState(makeData(10));
+  const rows = React.useMemo(() => data, [data]);
+
   const datagridState = useDatagrid({
     columns,
-    data,
+    data: rows,
   });
 
-  return <Datagrid datagridState={{ ...datagridState }} />;
+  return <Datagrid datagridState={datagridState} />;
 };
 
 export const EmptyState = () => {
@@ -187,9 +163,6 @@ export const EmptyState = () => {
   const datagridState = useDatagrid({
     columns,
     data,
-    emptyStateTitle,
-    emptyStateDescription,
-    emptyStateSize,
     illustrationTheme,
     DatagridActions,
     DatagridBatchActions,
@@ -221,52 +194,6 @@ export const InitialLoad = () => {
     columns,
     data,
     isFetching,
-    emptyStateTitle,
-    emptyStateDescription,
-    emptyStateSize,
-  });
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-export const WithHeader = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(11));
-  const gridTitle = 'Data table title';
-  const gridDescription = 'Additional information if needed';
-  const datagridState = useDatagrid({
-    columns,
-    data,
-    gridTitle,
-    gridDescription,
-    initialState: {
-      pageSize: 10,
-      pageSizes: [5, 10, 25, 50],
-    },
-    DatagridActions,
-    DatagridPagination,
-  });
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-export const WithDenseHeader = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(11));
-  const gridTitle = 'Data table title';
-  const gridDescription = 'Additional information if needed';
-  const datagridState = useDatagrid({
-    columns,
-    data,
-    gridTitle,
-    gridDescription,
-    initialState: {
-      pageSize: 10,
-      pageSizes: [5, 10, 25, 50],
-    },
-    useDenseHeader: true,
-    DatagridActions,
-    DatagridPagination,
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -296,9 +223,6 @@ export const InfiniteScroll = () => {
       data,
       isFetching,
       fetchMoreData: fetchData,
-      emptyStateTitle,
-      emptyStateDescription,
-      emptyStateSize,
     },
     useInfiniteScroll
   );
@@ -324,24 +248,6 @@ export const TenThousandEntries = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
-  const updatePagination = ({ page, pageSize }) => {
-    console.log(state);
-    setPageSize(pageSize);
-    gotoPage(page - 1); // Carbon is non-zero-based
-  };
-
-  return (
-    <Pagination
-      page={state.pageIndex + 1} // react-table is zero-based
-      pageSize={state.pageSize}
-      pageSizes={state.pageSizes || [10, 20, 30, 40, 50]}
-      totalItems={rows.length}
-      onChange={updatePagination}
-    />
-  );
-};
-
 export const WithPagination = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(100));
@@ -354,70 +260,6 @@ export const WithPagination = () => {
     },
     DatagridPagination,
   });
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-export const NestedRows = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10, 5, 2, 2));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useNestedRows
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-export const ExpandedRow = () => {
-  const expansionRenderer = ({ row }) => <div>Content for {row.id}</div>;
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      ExpandedRowContentComponent: expansionRenderer,
-      expandedContentHeight: 95,
-    },
-    useExpandedRow
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-export const NestedTable = () => {
-  const [data] = useState(makeData(20));
-  const nestedColumns = React.useMemo(() => [...defaultHeader], []);
-  nestedColumns[0] = {
-    Header: 'Row #',
-    accessor: (row, i) => i,
-    sticky: 'left',
-  };
-  const nestedDatagridState = useDatagrid({
-    columns: nestedColumns,
-    data,
-    initialState: { pageSize: 10 },
-    DatagridPagination,
-  });
-
-  const expansionRenderer = () => (
-    <div className="carbon-nested-table">
-      <Datagrid datagridState={{ ...nestedDatagridState }} />
-    </div>
-  );
-
-  const columns = React.useMemo(() => defaultHeader, []);
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      ExpandedRowContentComponent: expansionRenderer,
-      expandedContentHeight: (nestedDatagridState.state.pageSize + 2) * 48 + 1, // +2 for header and pagination
-    },
-    useExpandedRow
-  );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
@@ -459,6 +301,21 @@ export const ClickableRow = () => {
       </SidePanel>
     </div>
   );
+};
+
+export const InlineEdit = () => {
+  const [data, setData] = useState(makeData(10));
+  const columns = React.useMemo(() => getInlineEditColumns(), []);
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      onDataUpdate: setData,
+      DatagridActions,
+    },
+    useInlineEdit
+  );
+  return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
 const DataTableSidePanelContent = (selectedRowValues) => {
@@ -670,142 +527,6 @@ export const CenterAlignedColumns = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-const DatagridActions = (datagridState) => {
-  const {
-    selectedFlatRows,
-    setGlobalFilter,
-    CustomizeColumnsButton,
-    RowSizeDropdown,
-    rowSizeDropdownProps,
-    useDenseHeader,
-  } = datagridState;
-  const downloadCsv = () => {
-    alert('Downloading...');
-  };
-  const { TableToolbarContent, TableToolbarSearch } = DataTable;
-
-  const refreshColumns = () => {
-    alert('refreshing...');
-  };
-  const leftPanelClick = () => {
-    alert('open/close left panel...');
-  };
-  const searchForAColumn = 'Search';
-  const isNothingSelected = selectedFlatRows.length === 0;
-  const style = {
-    'button:nth-child(1) > span:nth-child(1)': {
-      bottom: '-37px',
-    },
-  };
-
-  return (
-    isNothingSelected &&
-    (useDenseHeader && useDenseHeader ? (
-      <TableToolbarContent size="sm">
-        <div style={style}>
-          <Button
-            kind="ghost"
-            hasIconOnly
-            tooltipPosition="bottom"
-            renderIcon={(props) => <Download size={16} {...props} />}
-            iconDescription={'Download CSV'}
-            onClick={downloadCsv}
-          />
-        </div>
-        <div style={style}>
-          <Button
-            kind="ghost"
-            hasIconOnly
-            tooltipPosition="bottom"
-            renderIcon={(props) => <Filter size={16} {...props} />}
-            iconDescription={'Left panel'}
-            onClick={leftPanelClick}
-          />
-        </div>
-        <RowSizeDropdown {...rowSizeDropdownProps} />
-        <div style={style} className={`${blockClass}__toolbar-divider`}>
-          <Button
-            kind="ghost"
-            renderIcon={(props) => <Add size={16} {...props} />}
-            iconDescription={'Action'}
-          >
-            Ghost button
-          </Button>
-        </div>
-
-        {CustomizeColumnsButton && (
-          <div style={style}>
-            <CustomizeColumnsButton />
-          </div>
-        )}
-      </TableToolbarContent>
-    ) : (
-      <>
-        <Button
-          kind="ghost"
-          hasIconOnly
-          tooltipPosition="bottom"
-          renderIcon={(props) => <Filter size={16} {...props} />}
-          iconDescription={'Left panel'}
-          onClick={leftPanelClick}
-        />
-        <TableToolbarContent>
-          <TableToolbarSearch
-            size="lg"
-            id="columnSearch"
-            persistent
-            placeholder={searchForAColumn}
-            onChange={(e) => setGlobalFilter(e.target.value)}
-          />
-          <RowSizeDropdown {...rowSizeDropdownProps} />
-          <div style={style}>
-            <Button
-              kind="ghost"
-              hasIconOnly
-              tooltipPosition="bottom"
-              renderIcon={(props) => <Restart size={16} {...props} />}
-              iconDescription={'Refresh'}
-              onClick={refreshColumns}
-            />
-          </div>
-          <div style={style}>
-            <Button
-              kind="ghost"
-              hasIconOnly
-              tooltipPosition="bottom"
-              renderIcon={(props) => <Download size={16} {...props} />}
-              iconDescription={'Download CSV'}
-              onClick={downloadCsv}
-            />
-          </div>
-          {CustomizeColumnsButton && (
-            <div style={style}>
-              <CustomizeColumnsButton />
-            </div>
-          )}
-          <ButtonMenu
-            label="Primary button"
-            renderIcon={(props) => <Add size={16} {...props} />}
-          >
-            <ButtonMenuItem
-              itemText="Option 1"
-              onClick={action(`Click on ButtonMenu Option 1`)}
-            />
-            <ButtonMenuItem
-              itemText="Option 2"
-              onClick={action(`Click on ButtonMenu Option 2`)}
-            />
-            <ButtonMenuItem
-              itemText="Option 3"
-              onClick={action(`Click on ButtonMenu Option 3`)}
-            />
-          </ButtonMenu>
-        </TableToolbarContent>
-      </>
-    ))
-  );
-};
-
 export const DatagridActionsToolbar = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
@@ -815,9 +536,18 @@ export const DatagridActionsToolbar = () => {
       data,
       DatagridActions,
       DatagridBatchActions,
-      emptyStateTitle: 'No items found',
-      emptyStateDescription: 'Description text',
-      emptyStateSize: 'lg',
+      rowSizeProps: {
+        labels: {
+          rowSizeLabels: {
+            xl: 'Extra large',
+            lg: 'Large (default)',
+            md: 'Medium',
+            sm: 'Small',
+            xs: 'Extra small',
+          },
+          legendText: 'Row height',
+        },
+      },
     },
     useSelectRows
   );
@@ -846,9 +576,6 @@ export const SelectItemsInAllPages = () => {
       DatagridPagination,
       DatagridActions,
       DatagridBatchActions,
-      emptyStateTitle,
-      emptyStateDescription,
-      emptyStateSize,
     },
     useSelectRows,
     useSelectAllWithToggle
@@ -862,7 +589,7 @@ export const SelectItemsInAllPages = () => {
     </>
   );
 };
-// SelectItemsInAllPages.story = SelectAllWithToggle;
+SelectItemsInAllPages.story = SelectAllWitHToggle;
 
 export const CustomizingColumns = () => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -880,12 +607,24 @@ export const CustomizingColumns = () => {
         onSaveColumnPrefs: (newColDefs) => {
           console.log(newColDefs);
         },
+        labels: {
+          findColumnPlaceholderLabel: 'Find column',
+          resetToDefaultLabel: 'Reset to default',
+          customizeModalHeadingLabel: 'Customize display',
+          primaryButtonTextLabel: 'Save',
+          secondaryButtonTextLabel: 'Cancel',
+          instructionsLabel:
+            'Deselect columns to hide them. Click and drag the white box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
+          iconTooltipLabel: 'Customize columns',
+          assistiveTextInstructionsLabel:
+            'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
+          assistiveTextDisabledInstructionsLabel:
+            'Reordering columns are disabled because they are filtered currently.',
+          selectAllLabel: 'Column name',
+        },
       },
       DatagridActions,
       DatagridBatchActions,
-      emptyStateTitle,
-      emptyStateDescription,
-      emptyStateSize,
     },
     useCustomizeColumns,
     useColumnOrder
@@ -904,7 +643,6 @@ export const CustomizingColumns = () => {
     </>
   );
 };
-
 CustomizingColumns.story = CustomizeColumnStory;
 
 export const RowSizeDropdown = () => {
@@ -948,9 +686,6 @@ export const RowSizeDropdown = () => {
       },
       DatagridActions,
       DatagridBatchActions,
-      emptyStateTitle,
-      emptyStateDescription,
-      emptyStateSize,
     },
     useSelectRows
   );
@@ -979,9 +714,6 @@ export const LeftPanel = () => {
     data,
     DatagridActions,
     DatagridBatchActions,
-    emptyStateTitle,
-    emptyStateDescription,
-    emptyStateSize,
   });
 
   return (
@@ -1063,9 +795,6 @@ export const BatchActions = () => {
       toolbarBatchActions: getBatchActions(),
       DatagridActions,
       DatagridBatchActions,
-      emptyStateTitle,
-      emptyStateDescription,
-      emptyStateSize,
     },
     useSelectRows,
     useSelectAllWithToggle
@@ -1086,57 +815,11 @@ export const DisableSelectRow = () => {
       endPlugins: [useDisableSelectRows],
       shouldDisableSelectRow: (row) => row.id % 2 === 0,
       disableSelectAll: true,
-      emptyStateTitle,
-      emptyStateDescription,
-      emptyStateSize,
     },
     useSelectRows
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-NestedRows.story = {
-  parameters: {
-    notes: `## Sample usage
-    Data should look like this:
-
-    \`\`\`json
-    [
-      {
-        "name": "test 0", "subRows": [
-          {
-            "name": "test 0.0", "subRows": [
-              {
-                "name": "test 0.0.0"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "test 1"
-      }
-    ]
-    \`\`\`
-    <br />
-
-    \`\`\`js
-    const datagridState = useDatagrid(
-      {
-        columns,
-        data,
-      },
-      useRowExpander,
-      useNestedRows,
-    );
-    \`\`\`
-    <br />
-    \`\`\`html
-    <Datagrid {...datagridState} />
-    \`\`\`
-    `,
-  },
 };
 
 const makeDataWithTwoLines = (length) =>
@@ -1168,9 +851,6 @@ export const TopAlignment = () => {
       ],
       DatagridActions,
       DatagridBatchActions,
-      emptyStateTitle,
-      emptyStateDescription,
-      emptyStateSize,
     },
     useSelectRows
   );
@@ -1241,62 +921,6 @@ export const StickyActionsColumn = () => {
     useActionsColumn,
     useSelectRows,
     useSelectAllWithToggle
-  );
-  return (
-    <Wrapper>
-      <h3>{msg}</h3>
-      <Datagrid datagridState={{ ...datagridState }} />
-      <p>More details documentation check the Notes section below</p>
-    </Wrapper>
-  );
-};
-
-export const RowActionButton = () => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader,
-      {
-        Header: '',
-        accessor: 'actions',
-        sticky: 'right',
-        width: 90,
-        isAction: true,
-      },
-    ],
-    []
-  );
-  const [data] = useState(makeData(10));
-  const [msg, setMsg] = useState('click action menu');
-  const onActionClick = (actionId, row) => {
-    const { original } = row;
-    setMsg(
-      `Clicked [${actionId}] on row: <${original.firstName} ${original.lastName}>`
-    );
-  };
-
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      rowActions: [
-        {
-          id: 'edit',
-          itemText: 'Edit',
-          icon: Edit,
-          onClick: onActionClick,
-        },
-
-        {
-          id: 'delete',
-          itemText: 'Delete',
-          icon: TrashCan,
-          isDelete: true,
-          onClick: onActionClick,
-        },
-      ],
-    },
-    useStickyColumn,
-    useActionsColumn
   );
   return (
     <Wrapper>

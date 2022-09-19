@@ -1,14 +1,42 @@
-//
-// Copyright IBM Corp. 2021, 2022
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/*
+* Licensed Materials - Property of IBM
+* 5724-Q36
+* (c) Copyright IBM Corp. 2022
+* US Government Users Restricted Rights - Use, duplication or disclosure
+* restricted by GSA ADP Schedule Contract with IBM Corp.
+*/
 
 @use '../../../global/styles/project-settings';
+@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use './variables';
 
-$block-class: #{project-settings.$pkg-prefix}--datagrid;
-.#{$block-class}__expanded-row-content {
-  padding: $spacing-05 $spacing-05 $spacing-06 $spacing-10;
+@mixin shared-pseudo-styles() {
+  height: 1px;
+  background-color: $layer-accent;
+  content: '';
+}
+
+.#{variables.$block-class} .#{variables.$block-class}__expanded-row-content {
+  position: relative;
+  padding: $spacing-05 $spacing-05 $spacing-06 $spacing-09;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__expanded-row-content::before {
+  position: absolute;
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  top: -1px;
+  right: 0;
+  width: calc(100% - #{$spacing-09});
+  @include shared-pseudo-styles();
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__expanded-row-content::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  @include shared-pseudo-styles();
 }

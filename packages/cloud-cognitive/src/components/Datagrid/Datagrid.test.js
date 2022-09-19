@@ -963,8 +963,12 @@ describe(componentName, () => {
     fireEvent.click(leftPanelButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    const rowHeightButton = screen.getByText('Row height', { selector: 'span' })
-      .parentElement.previousSibling;
+    const rowHeightButton = screen.getByText((content, element) => {
+      return (
+        element.tagName.toLowerCase() === 'span' &&
+        content.startsWith('Row height')
+      );
+    }).parentElement.previousSibling;
     fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
@@ -1280,8 +1284,12 @@ describe(componentName, () => {
     fireEvent.click(leftPanelButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    const rowHeightButton = screen.getByText('Row height', { selector: 'span' })
-      .parentElement.previousSibling;
+    const rowHeightButton = screen.getByText((content, element) => {
+      return (
+        element.tagName.toLowerCase() === 'span' &&
+        content.startsWith('Row height')
+      );
+    }).parentElement.previousSibling;
     fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
@@ -1508,8 +1516,12 @@ describe(componentName, () => {
     fireEvent.click(leftPanelButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    const rowHeightButton = screen.getByText('Row height', { selector: 'span' })
-      .parentElement.previousSibling;
+    const rowHeightButton = screen.getByText((content, element) => {
+      return (
+        element.tagName.toLowerCase() === 'span' &&
+        content.startsWith('Row height')
+      );
+    }).parentElement.previousSibling;
     fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
@@ -1602,7 +1614,7 @@ describe(componentName, () => {
         .getAllByRole('table')[0]
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('div')[0].childNodes[1].classList[0]
-    ).toEqual('carbon-nested-table');
+    ).toEqual('c4p--datagrid__expanded-row-content');
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1740,8 +1752,12 @@ describe(componentName, () => {
     fireEvent.click(leftPanelButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    const rowHeightButton =
-      screen.getByText('Row height').parentElement.previousSibling;
+    const rowHeightButton = screen.getByText((content, element) => {
+      return (
+        element.tagName.toLowerCase() === 'span' &&
+        content.startsWith('Row height')
+      );
+    }).parentElement.previousSibling;
     fireEvent.click(rowHeightButton);
 
     expect(
@@ -2097,7 +2113,12 @@ describe(componentName, () => {
       `${carbon.prefix}--tooltip-content`
     );
 
-    const rowHeightButton = screen.getByLabelText('Row height');
+    const rowHeightButton = screen.getByText((content, element) => {
+      return (
+        element.tagName.toLowerCase() === 'span' &&
+        content.startsWith('Row height')
+      );
+    }).parentElement.previousSibling;
     fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [

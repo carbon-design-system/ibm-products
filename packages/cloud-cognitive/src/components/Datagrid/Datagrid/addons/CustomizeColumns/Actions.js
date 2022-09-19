@@ -14,11 +14,7 @@ import { pkg } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const Actions = ({
-  searchText,
-  setSearchText,
-  findColumnPlaceholderLabel = 'Find column',
-}) => {
+const Actions = ({ searchText, setSearchText, findColumnPlaceholderLabel }) => {
   return (
     <div className={`${blockClass}__customize-columns-modal--actions`}>
       <Search

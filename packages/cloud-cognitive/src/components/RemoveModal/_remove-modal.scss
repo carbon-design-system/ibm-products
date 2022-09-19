@@ -21,10 +21,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--remove-modal;
   padding-right: $spacing-05;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-close {
-  display: none;
-}
-
 .#{$block-class}__body {
   padding-right: 20%;
   margin-bottom: $spacing-05;

@@ -210,3 +210,8 @@ $row-heights: (
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.#{$carbon-prefix}--data-table .#{$block-class}__carbon-row-hover-active td {
+  border-top-color: $hover-ui;
+  background-color: $hover-ui;
+}

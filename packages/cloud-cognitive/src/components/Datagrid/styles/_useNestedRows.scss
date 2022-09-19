@@ -1,13 +1,14 @@
 /*
 * Licensed Materials - Property of IBM
 * 5724-Q36
-* (c) Copyright IBM Corp. 2020 - 2021
+* (c) Copyright IBM Corp. 2020 - 2022
 * US Government Users Restricted Rights - Use, duplication or disclosure
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
 @use '@carbon/styles/scss/theme' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/motion' as *;
 @use './variables' as *;
 
 .#{c4p-settings.$carbon-prefix}--data-table
@@ -17,4 +18,20 @@
   .#{$block-class}__cell {
     border-bottom: 1px solid $layer-accent-01;
   }
+}
+
+.#{$block-class} .#{$block-class}__expander-icon {
+  // Linter saying this is not a token, probably a v11 compatibility issue
+  /* stylelint-disable-next-line carbon/motion-duration-use */
+  transition: transform $duration-fast-01 motion('standard', 'productive');
+}
+
+.#{$block-class} .#{$block-class}__expander-icon--open {
+  transform: rotate(90deg);
+}
+
+.#{$block-class}__expanded-row
+  .#{$block-class}__carbon-row-expanded
+  td:first-child {
+  border-bottom: none;
 }

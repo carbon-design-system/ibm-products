@@ -276,10 +276,6 @@
   flex: 1 1 auto;
 }
 
-.#{$block-class}__with-pagination table tr:last-of-type > td {
-  border-bottom: none;
-}
-
 .#{$block-class}__resizer {
   position: absolute;
   z-index: 1;

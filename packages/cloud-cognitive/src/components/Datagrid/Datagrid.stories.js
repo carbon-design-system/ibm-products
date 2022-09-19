@@ -13,14 +13,12 @@ import { getInlineEditColumns } from './utils/getInlineEditColumns';
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
 import { action } from '@storybook/addon-actions';
-import { Activity16, Add16 } from '@carbon/icons-react';
+import { Activity, Add } from '@carbon/icons-react';
 import { DataTable } from '@carbon/react';
 import {
   Datagrid,
   useDatagrid,
   useInfiniteScroll,
-  useNestedRows,
-  useExpandedRow,
   useRowIsMouseOver,
   useSelectRows,
   useOnRowClick,
@@ -262,70 +260,6 @@ export const WithPagination = () => {
     },
     DatagridPagination,
   });
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-export const NestedRows = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10, 5, 2, 2));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useNestedRows
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-export const ExpandedRow = () => {
-  const expansionRenderer = ({ row }) => <div>Content for {row.id}</div>;
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      ExpandedRowContentComponent: expansionRenderer,
-      expandedContentHeight: 95,
-    },
-    useExpandedRow
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-export const NestedTable = () => {
-  const [data] = useState(makeData(20));
-  const nestedColumns = React.useMemo(() => [...defaultHeader], []);
-  nestedColumns[0] = {
-    Header: 'Row #',
-    accessor: (row, i) => i,
-    sticky: 'left',
-  };
-  const nestedDatagridState = useDatagrid({
-    columns: nestedColumns,
-    data,
-    initialState: { pageSize: 10 },
-    DatagridPagination,
-  });
-
-  const expansionRenderer = () => (
-    <div className="carbon-nested-table">
-      <Datagrid datagridState={{ ...nestedDatagridState }} />
-    </div>
-  );
-
-  const columns = React.useMemo(() => defaultHeader, []);
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      ExpandedRowContentComponent: expansionRenderer,
-      expandedContentHeight: (nestedDatagridState.state.pageSize + 2) * 48 + 1, // +2 for header and pagination
-    },
-    useExpandedRow
-  );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
@@ -802,7 +736,10 @@ const DatagridBatchActions = (datagridState) => {
       totalSelected={totalSelected}
       onCancel={() => toggleAllRowsSelected(false)}
     >
-      <TableBatchAction renderIcon={Activity16} onClick={onBatchAction}>
+      <TableBatchAction
+        renderIcon={(props) => <Activity size={16} {...props} />}
+        onClick={onBatchAction}
+      >
         {actionName}
       </TableBatchAction>
     </TableBatchActions>
@@ -813,33 +750,33 @@ const getBatchActions = () => {
   return [
     {
       label: 'Duplicate',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Add',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Select all',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
       type: 'select_all',
     },
     {
       label: 'Publish to catalog',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Download',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Delete',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
       hasDivider: true,
       kind: 'danger',
@@ -883,49 +820,6 @@ export const DisableSelectRow = () => {
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-NestedRows.story = {
-  parameters: {
-    notes: `## Sample usage
-    Data should look like this:
-
-    \`\`\`json
-    [
-      {
-        "name": "test 0", "subRows": [
-          {
-            "name": "test 0.0", "subRows": [
-              {
-                "name": "test 0.0.0"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "test 1"
-      }
-    ]
-    \`\`\`
-    <br />
-
-    \`\`\`js
-    const datagridState = useDatagrid(
-      {
-        columns,
-        data,
-      },
-      useRowExpander,
-      useNestedRows,
-    );
-    \`\`\`
-    <br />
-    \`\`\`html
-    <Datagrid {...datagridState} />
-    \`\`\`
-    `,
-  },
 };
 
 const makeDataWithTwoLines = (length) =>

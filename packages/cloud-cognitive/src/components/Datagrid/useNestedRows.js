@@ -5,13 +5,13 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
-import useRowExpander from './useRowExpander';
 import { pkg } from '../../settings';
+import useNestedRowExpander from './useNestedRowExpander';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const useNestedRows = (hooks) => {
-  useRowExpander(hooks);
+  useNestedRowExpander(hooks);
   const marginLeft = 24;
 
   const getRowProps = (props, { row }) => [

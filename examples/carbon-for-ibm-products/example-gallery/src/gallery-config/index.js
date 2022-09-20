@@ -46,6 +46,12 @@ const config = [
       'url( ' + defaultOrNot(require('./CreateSidePanel--thumbnail.png')) + ')',
   },
   {
+    label: 'Datagrid',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/Datagrid',
+    thumbnail:
+      'url( ' + defaultOrNot(require('./Datagrid--thumbnail.png')) + ')',
+  },
+  {
     label: 'Tearsheet',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/CreateTearsheet',
     thumbnail:

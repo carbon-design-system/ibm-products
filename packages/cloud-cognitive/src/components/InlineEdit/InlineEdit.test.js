@@ -271,8 +271,8 @@ describe(componentName, () => {
     // click cancel check result reverts
     userEvent.click(controls[0]);
     expect(component).not.toHaveClass(`${blockClass}--editing`);
-    // JSDom does not implement innerText, so cannot check toHaveTextContent
-    expect(input.innerText).toEqual(startingValue);
+    // JSDom does not implement textContent, so cannot check toHaveTextContent
+    expect(input.textContent).toEqual(startingValue);
 
     expect(handleChange).toBeCalledTimes(4); // 3 for ABC and once for cancel
     expect(handleSave).not.toBeCalled();

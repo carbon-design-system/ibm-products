@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.32.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.31.0...@carbon/ibm-products@1.32.0) (2022-09-20)
+
+
+### Features
+
+* **Datagrid:** add inline edit keyboard shortcuts ([#2269](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2269)) ([3d38e70](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3d38e706f68ecbec72bcd9b9db3213a9f68e26c2))
+
+
+
+
+
 # [1.31.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.30.0...@carbon/ibm-products@1.31.0) (2022-09-13)
 
 

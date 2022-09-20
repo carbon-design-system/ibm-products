@@ -15,13 +15,21 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const DatagridExpandedRow =
   (PreviousRowRenderer, ExpandedRowContentComponent) => (datagridState) => {
     const { row } = datagridState;
+    const { expandedContentHeight } = row || {};
     if (!row.isExpanded) {
       return PreviousRowRenderer(datagridState);
     }
     return (
       <div className={`${blockClass}__expanded-row`}>
         {PreviousRowRenderer(datagridState)}
-        {ExpandedRowContentComponent(datagridState)}
+        <div
+          className={`${blockClass}__expanded-row-content`}
+          style={{
+            height: expandedContentHeight ? expandedContentHeight : null,
+          }}
+        >
+          {ExpandedRowContentComponent(datagridState)}
+        </div>
       </div>
     );
   };

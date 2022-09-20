@@ -68,4 +68,11 @@ export const ARG_TYPES = {
     description:
       'This will allow the Datagrid component to use batch actions. _This value is set/passed inside of the `datagridState` object._',
   },
+  expandedContentHeight: {
+    control: {
+      type: 'number',
+    },
+    description:
+      'This value controls the height of the expanded content area. _This value is set/passed inside of the `datagridState` object._',
+  },
 };

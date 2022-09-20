@@ -48,6 +48,8 @@ const s = [
               'c/Datagrid/Extensions/Header',
               'c/Datagrid/Extensions/Settings',
               'c/Datagrid/Extensions/RowActionButtons',
+              'c/Datagrid/Extensions/ExpandableRow',
+              'c/Datagrid/Extensions/NestedRows',
             ],
           },
         ],

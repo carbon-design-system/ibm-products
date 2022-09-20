@@ -1709,7 +1709,7 @@ describe(componentName, () => {
         .getAllByRole('table')[0]
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('div')[0].childNodes[1].classList[0]
-    ).toEqual('carbon-nested-table');
+    ).toEqual('c4p--datagrid__expanded-row-content');
 
     const alertMock = jest.spyOn(window, 'alert');
 

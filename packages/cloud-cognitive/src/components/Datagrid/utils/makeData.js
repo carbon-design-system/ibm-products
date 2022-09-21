@@ -7,12 +7,20 @@
 
 import React from 'react';
 import namor from 'namor';
+import { StatusIcon } from '../../StatusIcon';
 import { inlineEditSelectItems } from './getInlineEditColumns';
 
-const getRandomInteger = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+const getRandomInteger = (min, max, decimalPlaces) => {
+  const roundedMin = Math.ceil(min);
+  const roundedMax = Math.floor(max);
+  const randomNumber = Math.random() * (max - min) + min;
+  if (!decimalPlaces) {
+    return (
+      Math.floor(Math.random() * (roundedMax - roundedMin + 1)) + roundedMin
+    );
+  }
+  const power = Math.pow(10, decimalPlaces);
+  return Math.floor(randomNumber * power) / power;
 };
 
 export const makeData = (...lens) => {
@@ -87,6 +95,30 @@ const newPerson = () => {
         : statusChance > 0.33
         ? yesterdayDate
         : twoDaysAgoDate,
+    bonus: `$\r${getRandomInteger(100, 500, 2)}`,
+    status_icon:
+      statusChance > 0.66 ? (
+        <StatusIcon
+          kind="critical"
+          size="sm"
+          theme="light"
+          iconDescription="Critical"
+        />
+      ) : statusChance > 0.33 ? (
+        <StatusIcon
+          kind="minor-warning"
+          size="sm"
+          theme="light"
+          iconDescription="Minor warning"
+        />
+      ) : (
+        <StatusIcon
+          kind="normal"
+          size="sm"
+          theme="light"
+          iconDescription="Normal"
+        />
+      ),
   };
 };
 

@@ -49,7 +49,8 @@ export const DatagridContent = ({ datagridState }) => {
     // and swapped out with an input, i.e. text, number, selection, or date picker
     if (
       target.closest(`.${blockClass}__inline-edit-button`) ||
-      target.closest(`.${blockClass}__inline-edit--select`)
+      target.closest(`.${blockClass}__inline-edit--select`) ||
+      target.closest(`.${blockClass}__row-size-button`)
     ) {
       return;
     }

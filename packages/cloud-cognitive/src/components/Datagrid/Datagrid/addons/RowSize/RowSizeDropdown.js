@@ -31,7 +31,7 @@ const RowSizeDropdown = ({ legendText = 'Row height', ...props }) => {
         renderIcon={Settings16}
         onClick={() => setIsOpen(!isOpen)}
         iconDescription={legendText}
-        className={cx({
+        className={cx(`${blockClass}__row-size-button`, {
           [`${blockClass}__row-size-button--open`]: isOpen,
         })}
       />

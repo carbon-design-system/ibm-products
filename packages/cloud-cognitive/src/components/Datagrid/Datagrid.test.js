@@ -9,7 +9,6 @@ import React, { useState, useEffect, forwardRef } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
-import { RightAlignedColumns } from './Datagrid.stories';
 import { makeData } from './utils/makeData';
 
 import { expectWarn } from '../../global/js/utils/test-helper';
@@ -29,6 +28,7 @@ import {
   useStickyColumn,
   useActionsColumn,
   useColumnOrder,
+  useColumnRightAlign,
 } from '.';
 
 import {
@@ -1879,6 +1879,35 @@ describe(componentName, () => {
     fireEvent.click(downloadButton);
     expect(alertMock).toHaveBeenCalledTimes(4);
   });
+
+  const RightAlignedColumns = () => {
+    const columns = React.useMemo(
+      () => [
+        ...defaultHeader.slice(0, 3),
+        {
+          Header: 'Age',
+          accessor: 'age',
+          rightAlignedColumn: true,
+        },
+        {
+          Header: 'Visits',
+          accessor: 'visits',
+          rightAlignedColumn: true,
+        },
+      ],
+      []
+    );
+    const [data] = useState(makeData(10));
+    const datagridState = useDatagrid(
+      {
+        columns,
+        data,
+      },
+      useColumnRightAlign
+    );
+
+    return <Datagrid datagridState={{ ...datagridState }} />;
+  };
 
   it('Right Aligned Columns', () => {
     render(

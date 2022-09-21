@@ -60,6 +60,12 @@ const config = [
       ')',
   },
   {
+    label: 'Datagrid',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/Datagrid',
+    thumbnail:
+      'url( ' + defaultOrNot(require('./Datagrid--thumbnail.png')) + ')',
+  },
+  {
     label: 'Empty State',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/EmptyStates',
     thumbnail:

@@ -3,32 +3,32 @@
 exports[`Toolbar Rendering renders correctly 1`] = `
 LoadedCheerio {
   "0": Node {
-    "attribs": Object {},
-    "children": Array [
+    "attribs": {},
+    "children": [
       Node {
-        "attribs": Object {
+        "attribs": {
           "aria-label": "Main navigation",
           "class": "security--toolbar class security--toolbar__minimized",
         },
-        "children": Array [
+        "children": [
           Node {
-            "attribs": Object {
+            "attribs": {
               "class": "security--toolbar__group",
             },
-            "children": Array [
+            "children": [
               Node {
-                "attribs": Object {},
-                "children": Array [
+                "attribs": {},
+                "children": [
                   Node {
-                    "attribs": Object {
+                    "attribs": {
                       "aria-expanded": "false",
                       "aria-label": "Toggle menu",
                       "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
                       "type": "button",
                     },
-                    "children": Array [
+                    "children": [
                       Node {
-                        "attribs": Object {
+                        "attribs": {
                           "aria-hidden": "true",
                           "class": "security--icon security--toolbar__icon",
                           "fill": "currentColor",
@@ -40,22 +40,22 @@ LoadedCheerio {
                           "width": "20",
                           "xmlns": "http://www.w3.org/2000/svg",
                         },
-                        "children": Array [
+                        "children": [
                           Node {
-                            "attribs": Object {
+                            "attribs": {
                               "d": "M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z",
                             },
-                            "children": Array [],
+                            "children": [],
                             "name": "path",
                             "namespace": "http://www.w3.org/2000/svg",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
                             "type": "tag",
-                            "x-attribsNamespace": Object {
+                            "x-attribsNamespace": {
                               "d": undefined,
                             },
-                            "x-attribsPrefix": Object {
+                            "x-attribsPrefix": {
                               "d": undefined,
                             },
                           },
@@ -66,7 +66,7 @@ LoadedCheerio {
                         "parent": [Circular],
                         "prev": null,
                         "type": "tag",
-                        "x-attribsNamespace": Object {
+                        "x-attribsNamespace": {
                           "aria-hidden": undefined,
                           "class": undefined,
                           "fill": undefined,
@@ -78,7 +78,7 @@ LoadedCheerio {
                           "width": undefined,
                           "xmlns": "http://www.w3.org/2000/xmlns/",
                         },
-                        "x-attribsPrefix": Object {
+                        "x-attribsPrefix": {
                           "aria-hidden": undefined,
                           "class": undefined,
                           "fill": undefined,
@@ -98,13 +98,13 @@ LoadedCheerio {
                     "parent": [Circular],
                     "prev": null,
                     "type": "tag",
-                    "x-attribsNamespace": Object {
+                    "x-attribsNamespace": {
                       "aria-expanded": undefined,
                       "aria-label": undefined,
                       "class": undefined,
                       "type": undefined,
                     },
-                    "x-attribsPrefix": Object {
+                    "x-attribsPrefix": {
                       "aria-expanded": undefined,
                       "aria-label": undefined,
                       "class": undefined,
@@ -118,8 +118,8 @@ LoadedCheerio {
                 "parent": [Circular],
                 "prev": null,
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
             ],
             "name": "ul",
@@ -128,10 +128,10 @@ LoadedCheerio {
             "parent": [Circular],
             "prev": null,
             "type": "tag",
-            "x-attribsNamespace": Object {
+            "x-attribsNamespace": {
               "class": undefined,
             },
-            "x-attribsPrefix": Object {
+            "x-attribsPrefix": {
               "class": undefined,
             },
           },
@@ -139,68 +139,68 @@ LoadedCheerio {
         "name": "nav",
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": Node {
-          "attribs": Object {
+          "attribs": {
             "class": "security--transition",
           },
-          "children": Array [],
+          "children": [],
           "name": "span",
           "namespace": "http://www.w3.org/1999/xhtml",
           "next": null,
           "parent": [Circular],
           "prev": [Circular],
           "type": "tag",
-          "x-attribsNamespace": Object {
+          "x-attribsNamespace": {
             "class": undefined,
           },
-          "x-attribsPrefix": Object {
+          "x-attribsPrefix": {
             "class": undefined,
           },
         },
         "parent": [Circular],
         "prev": null,
         "type": "tag",
-        "x-attribsNamespace": Object {
+        "x-attribsNamespace": {
           "aria-label": undefined,
           "class": undefined,
         },
-        "x-attribsPrefix": Object {
+        "x-attribsPrefix": {
           "aria-label": undefined,
           "class": undefined,
         },
       },
       Node {
-        "attribs": Object {
+        "attribs": {
           "class": "security--transition",
         },
-        "children": Array [],
+        "children": [],
         "name": "span",
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": null,
         "parent": [Circular],
         "prev": Node {
-          "attribs": Object {
+          "attribs": {
             "aria-label": "Main navigation",
             "class": "security--toolbar class security--toolbar__minimized",
           },
-          "children": Array [
+          "children": [
             Node {
-              "attribs": Object {
+              "attribs": {
                 "class": "security--toolbar__group",
               },
-              "children": Array [
+              "children": [
                 Node {
-                  "attribs": Object {},
-                  "children": Array [
+                  "attribs": {},
+                  "children": [
                     Node {
-                      "attribs": Object {
+                      "attribs": {
                         "aria-expanded": "false",
                         "aria-label": "Toggle menu",
                         "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
                         "type": "button",
                       },
-                      "children": Array [
+                      "children": [
                         Node {
-                          "attribs": Object {
+                          "attribs": {
                             "aria-hidden": "true",
                             "class": "security--icon security--toolbar__icon",
                             "fill": "currentColor",
@@ -212,22 +212,22 @@ LoadedCheerio {
                             "width": "20",
                             "xmlns": "http://www.w3.org/2000/svg",
                           },
-                          "children": Array [
+                          "children": [
                             Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "d": "M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z",
                               },
-                              "children": Array [],
+                              "children": [],
                               "name": "path",
                               "namespace": "http://www.w3.org/2000/svg",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "d": undefined,
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "d": undefined,
                               },
                             },
@@ -238,7 +238,7 @@ LoadedCheerio {
                           "parent": [Circular],
                           "prev": null,
                           "type": "tag",
-                          "x-attribsNamespace": Object {
+                          "x-attribsNamespace": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -250,7 +250,7 @@ LoadedCheerio {
                             "width": undefined,
                             "xmlns": "http://www.w3.org/2000/xmlns/",
                           },
-                          "x-attribsPrefix": Object {
+                          "x-attribsPrefix": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -270,13 +270,13 @@ LoadedCheerio {
                       "parent": [Circular],
                       "prev": null,
                       "type": "tag",
-                      "x-attribsNamespace": Object {
+                      "x-attribsNamespace": {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
                         "type": undefined,
                       },
-                      "x-attribsPrefix": Object {
+                      "x-attribsPrefix": {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
@@ -290,8 +290,8 @@ LoadedCheerio {
                   "parent": [Circular],
                   "prev": null,
                   "type": "tag",
-                  "x-attribsNamespace": Object {},
-                  "x-attribsPrefix": Object {},
+                  "x-attribsNamespace": {},
+                  "x-attribsPrefix": {},
                 },
               ],
               "name": "ul",
@@ -300,10 +300,10 @@ LoadedCheerio {
               "parent": [Circular],
               "prev": null,
               "type": "tag",
-              "x-attribsNamespace": Object {
+              "x-attribsNamespace": {
                 "class": undefined,
               },
-              "x-attribsPrefix": Object {
+              "x-attribsPrefix": {
                 "class": undefined,
               },
             },
@@ -314,20 +314,20 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": null,
           "type": "tag",
-          "x-attribsNamespace": Object {
+          "x-attribsNamespace": {
             "aria-label": undefined,
             "class": undefined,
           },
-          "x-attribsPrefix": Object {
+          "x-attribsPrefix": {
             "aria-label": undefined,
             "class": undefined,
           },
         },
         "type": "tag",
-        "x-attribsNamespace": Object {
+        "x-attribsNamespace": {
           "class": undefined,
         },
-        "x-attribsPrefix": Object {
+        "x-attribsPrefix": {
           "class": undefined,
         },
       },
@@ -336,7 +336,7 @@ LoadedCheerio {
     "namespace": "http://www.w3.org/1999/xhtml",
     "next": null,
     "parent": Node {
-      "children": Array [
+      "children": [
         [Circular],
       ],
       "name": "root",
@@ -347,60 +347,60 @@ LoadedCheerio {
     },
     "prev": null,
     "type": "tag",
-    "x-attribsNamespace": Object {},
-    "x-attribsPrefix": Object {},
+    "x-attribsNamespace": {},
+    "x-attribsPrefix": {},
   },
   "_root": LoadedCheerio {
     "0": Node {
-      "children": Array [
+      "children": [
         Node {
-          "attribs": Object {},
-          "children": Array [
+          "attribs": {},
+          "children": [
             Node {
-              "attribs": Object {},
-              "children": Array [],
+              "attribs": {},
+              "children": [],
               "name": "head",
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Node {
-                "attribs": Object {},
-                "children": Array [],
+                "attribs": {},
+                "children": [],
                 "name": "body",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": null,
                 "parent": [Circular],
                 "prev": [Circular],
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
               "parent": [Circular],
               "prev": null,
               "type": "tag",
-              "x-attribsNamespace": Object {},
-              "x-attribsPrefix": Object {},
+              "x-attribsNamespace": {},
+              "x-attribsPrefix": {},
             },
             Node {
-              "attribs": Object {},
-              "children": Array [],
+              "attribs": {},
+              "children": [],
               "name": "body",
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": null,
               "parent": [Circular],
               "prev": Node {
-                "attribs": Object {},
-                "children": Array [],
+                "attribs": {},
+                "children": [],
                 "name": "head",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": [Circular],
                 "parent": [Circular],
                 "prev": null,
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
               "type": "tag",
-              "x-attribsNamespace": Object {},
-              "x-attribsPrefix": Object {},
+              "x-attribsNamespace": {},
+              "x-attribsPrefix": {},
             },
           ],
           "name": "html",
@@ -409,8 +409,8 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": null,
           "type": "tag",
-          "x-attribsNamespace": Object {},
-          "x-attribsPrefix": Object {},
+          "x-attribsNamespace": {},
+          "x-attribsPrefix": {},
         },
       ],
       "name": "root",
@@ -422,13 +422,13 @@ LoadedCheerio {
     },
     "_root": [Circular],
     "length": 1,
-    "options": Object {
+    "options": {
       "decodeEntities": true,
       "xml": false,
     },
   },
   "length": 1,
-  "options": Object {
+  "options": {
     "decodeEntities": true,
     "xml": false,
   },
@@ -438,32 +438,32 @@ LoadedCheerio {
 exports[`Toolbar Rendering renders the HTML of the node's subtree 1`] = `
 LoadedCheerio {
   "0": Node {
-    "attribs": Object {},
-    "children": Array [
+    "attribs": {},
+    "children": [
       Node {
-        "attribs": Object {
+        "attribs": {
           "aria-label": "Main navigation",
           "class": "security--toolbar class security--toolbar__minimized",
         },
-        "children": Array [
+        "children": [
           Node {
-            "attribs": Object {
+            "attribs": {
               "class": "security--toolbar__group",
             },
-            "children": Array [
+            "children": [
               Node {
-                "attribs": Object {},
-                "children": Array [
+                "attribs": {},
+                "children": [
                   Node {
-                    "attribs": Object {
+                    "attribs": {
                       "aria-expanded": "false",
                       "aria-label": "Toggle menu",
                       "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
                       "type": "button",
                     },
-                    "children": Array [
+                    "children": [
                       Node {
-                        "attribs": Object {
+                        "attribs": {
                           "aria-hidden": "true",
                           "class": "security--icon security--toolbar__icon",
                           "fill": "currentColor",
@@ -475,22 +475,22 @@ LoadedCheerio {
                           "width": "20",
                           "xmlns": "http://www.w3.org/2000/svg",
                         },
-                        "children": Array [
+                        "children": [
                           Node {
-                            "attribs": Object {
+                            "attribs": {
                               "d": "M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z",
                             },
-                            "children": Array [],
+                            "children": [],
                             "name": "path",
                             "namespace": "http://www.w3.org/2000/svg",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
                             "type": "tag",
-                            "x-attribsNamespace": Object {
+                            "x-attribsNamespace": {
                               "d": undefined,
                             },
-                            "x-attribsPrefix": Object {
+                            "x-attribsPrefix": {
                               "d": undefined,
                             },
                           },
@@ -501,7 +501,7 @@ LoadedCheerio {
                         "parent": [Circular],
                         "prev": null,
                         "type": "tag",
-                        "x-attribsNamespace": Object {
+                        "x-attribsNamespace": {
                           "aria-hidden": undefined,
                           "class": undefined,
                           "fill": undefined,
@@ -513,7 +513,7 @@ LoadedCheerio {
                           "width": undefined,
                           "xmlns": "http://www.w3.org/2000/xmlns/",
                         },
-                        "x-attribsPrefix": Object {
+                        "x-attribsPrefix": {
                           "aria-hidden": undefined,
                           "class": undefined,
                           "fill": undefined,
@@ -533,13 +533,13 @@ LoadedCheerio {
                     "parent": [Circular],
                     "prev": null,
                     "type": "tag",
-                    "x-attribsNamespace": Object {
+                    "x-attribsNamespace": {
                       "aria-expanded": undefined,
                       "aria-label": undefined,
                       "class": undefined,
                       "type": undefined,
                     },
-                    "x-attribsPrefix": Object {
+                    "x-attribsPrefix": {
                       "aria-expanded": undefined,
                       "aria-label": undefined,
                       "class": undefined,
@@ -553,8 +553,8 @@ LoadedCheerio {
                 "parent": [Circular],
                 "prev": null,
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
             ],
             "name": "ul",
@@ -563,10 +563,10 @@ LoadedCheerio {
             "parent": [Circular],
             "prev": null,
             "type": "tag",
-            "x-attribsNamespace": Object {
+            "x-attribsNamespace": {
               "class": undefined,
             },
-            "x-attribsPrefix": Object {
+            "x-attribsPrefix": {
               "class": undefined,
             },
           },
@@ -574,68 +574,68 @@ LoadedCheerio {
         "name": "nav",
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": Node {
-          "attribs": Object {
+          "attribs": {
             "class": "security--transition",
           },
-          "children": Array [],
+          "children": [],
           "name": "span",
           "namespace": "http://www.w3.org/1999/xhtml",
           "next": null,
           "parent": [Circular],
           "prev": [Circular],
           "type": "tag",
-          "x-attribsNamespace": Object {
+          "x-attribsNamespace": {
             "class": undefined,
           },
-          "x-attribsPrefix": Object {
+          "x-attribsPrefix": {
             "class": undefined,
           },
         },
         "parent": [Circular],
         "prev": null,
         "type": "tag",
-        "x-attribsNamespace": Object {
+        "x-attribsNamespace": {
           "aria-label": undefined,
           "class": undefined,
         },
-        "x-attribsPrefix": Object {
+        "x-attribsPrefix": {
           "aria-label": undefined,
           "class": undefined,
         },
       },
       Node {
-        "attribs": Object {
+        "attribs": {
           "class": "security--transition",
         },
-        "children": Array [],
+        "children": [],
         "name": "span",
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": null,
         "parent": [Circular],
         "prev": Node {
-          "attribs": Object {
+          "attribs": {
             "aria-label": "Main navigation",
             "class": "security--toolbar class security--toolbar__minimized",
           },
-          "children": Array [
+          "children": [
             Node {
-              "attribs": Object {
+              "attribs": {
                 "class": "security--toolbar__group",
               },
-              "children": Array [
+              "children": [
                 Node {
-                  "attribs": Object {},
-                  "children": Array [
+                  "attribs": {},
+                  "children": [
                     Node {
-                      "attribs": Object {
+                      "attribs": {
                         "aria-expanded": "false",
                         "aria-label": "Toggle menu",
                         "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
                         "type": "button",
                       },
-                      "children": Array [
+                      "children": [
                         Node {
-                          "attribs": Object {
+                          "attribs": {
                             "aria-hidden": "true",
                             "class": "security--icon security--toolbar__icon",
                             "fill": "currentColor",
@@ -647,22 +647,22 @@ LoadedCheerio {
                             "width": "20",
                             "xmlns": "http://www.w3.org/2000/svg",
                           },
-                          "children": Array [
+                          "children": [
                             Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "d": "M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z",
                               },
-                              "children": Array [],
+                              "children": [],
                               "name": "path",
                               "namespace": "http://www.w3.org/2000/svg",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "d": undefined,
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "d": undefined,
                               },
                             },
@@ -673,7 +673,7 @@ LoadedCheerio {
                           "parent": [Circular],
                           "prev": null,
                           "type": "tag",
-                          "x-attribsNamespace": Object {
+                          "x-attribsNamespace": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -685,7 +685,7 @@ LoadedCheerio {
                             "width": undefined,
                             "xmlns": "http://www.w3.org/2000/xmlns/",
                           },
-                          "x-attribsPrefix": Object {
+                          "x-attribsPrefix": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -705,13 +705,13 @@ LoadedCheerio {
                       "parent": [Circular],
                       "prev": null,
                       "type": "tag",
-                      "x-attribsNamespace": Object {
+                      "x-attribsNamespace": {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
                         "type": undefined,
                       },
-                      "x-attribsPrefix": Object {
+                      "x-attribsPrefix": {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
@@ -725,8 +725,8 @@ LoadedCheerio {
                   "parent": [Circular],
                   "prev": null,
                   "type": "tag",
-                  "x-attribsNamespace": Object {},
-                  "x-attribsPrefix": Object {},
+                  "x-attribsNamespace": {},
+                  "x-attribsPrefix": {},
                 },
               ],
               "name": "ul",
@@ -735,10 +735,10 @@ LoadedCheerio {
               "parent": [Circular],
               "prev": null,
               "type": "tag",
-              "x-attribsNamespace": Object {
+              "x-attribsNamespace": {
                 "class": undefined,
               },
-              "x-attribsPrefix": Object {
+              "x-attribsPrefix": {
                 "class": undefined,
               },
             },
@@ -749,20 +749,20 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": null,
           "type": "tag",
-          "x-attribsNamespace": Object {
+          "x-attribsNamespace": {
             "aria-label": undefined,
             "class": undefined,
           },
-          "x-attribsPrefix": Object {
+          "x-attribsPrefix": {
             "aria-label": undefined,
             "class": undefined,
           },
         },
         "type": "tag",
-        "x-attribsNamespace": Object {
+        "x-attribsNamespace": {
           "class": undefined,
         },
-        "x-attribsPrefix": Object {
+        "x-attribsPrefix": {
           "class": undefined,
         },
       },
@@ -771,7 +771,7 @@ LoadedCheerio {
     "namespace": "http://www.w3.org/1999/xhtml",
     "next": null,
     "parent": Node {
-      "children": Array [
+      "children": [
         [Circular],
       ],
       "name": "root",
@@ -782,60 +782,60 @@ LoadedCheerio {
     },
     "prev": null,
     "type": "tag",
-    "x-attribsNamespace": Object {},
-    "x-attribsPrefix": Object {},
+    "x-attribsNamespace": {},
+    "x-attribsPrefix": {},
   },
   "_root": LoadedCheerio {
     "0": Node {
-      "children": Array [
+      "children": [
         Node {
-          "attribs": Object {},
-          "children": Array [
+          "attribs": {},
+          "children": [
             Node {
-              "attribs": Object {},
-              "children": Array [],
+              "attribs": {},
+              "children": [],
               "name": "head",
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Node {
-                "attribs": Object {},
-                "children": Array [],
+                "attribs": {},
+                "children": [],
                 "name": "body",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": null,
                 "parent": [Circular],
                 "prev": [Circular],
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
               "parent": [Circular],
               "prev": null,
               "type": "tag",
-              "x-attribsNamespace": Object {},
-              "x-attribsPrefix": Object {},
+              "x-attribsNamespace": {},
+              "x-attribsPrefix": {},
             },
             Node {
-              "attribs": Object {},
-              "children": Array [],
+              "attribs": {},
+              "children": [],
               "name": "body",
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": null,
               "parent": [Circular],
               "prev": Node {
-                "attribs": Object {},
-                "children": Array [],
+                "attribs": {},
+                "children": [],
                 "name": "head",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": [Circular],
                 "parent": [Circular],
                 "prev": null,
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
               "type": "tag",
-              "x-attribsNamespace": Object {},
-              "x-attribsPrefix": Object {},
+              "x-attribsNamespace": {},
+              "x-attribsPrefix": {},
             },
           ],
           "name": "html",
@@ -844,8 +844,8 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": null,
           "type": "tag",
-          "x-attribsNamespace": Object {},
-          "x-attribsPrefix": Object {},
+          "x-attribsNamespace": {},
+          "x-attribsPrefix": {},
         },
       ],
       "name": "root",
@@ -857,13 +857,13 @@ LoadedCheerio {
     },
     "_root": [Circular],
     "length": 1,
-    "options": Object {
+    "options": {
       "decodeEntities": true,
       "xml": false,
     },
   },
   "length": 1,
-  "options": Object {
+  "options": {
     "decodeEntities": true,
     "xml": false,
   },
@@ -874,15 +874,15 @@ exports[`Toolbar Rendering renders the panel correctly 1`] = `ShallowWrapper {}`
 
 exports[`Toolbar With renderAddons should click the addon icon 1`] = `
 [MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
+  "calls": [
+    [
+      {
         "target": "camera",
       },
     ],
   ],
-  "results": Array [
-    Object {
+  "results": [
+    {
       "type": "return",
       "value": undefined,
     },
@@ -892,16 +892,16 @@ exports[`Toolbar With renderAddons should click the addon icon 1`] = `
 
 exports[`Toolbar With renderAddons should focus the addon icon 1`] = `
 [MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
+  "calls": [
+    [
+      {
         "target": "camera",
         "type": "focus",
       },
     ],
   ],
-  "results": Array [
-    Object {
+  "results": [
+    {
       "type": "return",
       "value": undefined,
     },
@@ -911,16 +911,16 @@ exports[`Toolbar With renderAddons should focus the addon icon 1`] = `
 
 exports[`Toolbar With renderAddons should hover the addon icon 1`] = `
 [MockFunction] {
-  "calls": Array [
-    Array [
-      Object {
+  "calls": [
+    [
+      {
         "target": "camera",
         "type": "mouse over",
       },
     ],
   ],
-  "results": Array [
-    Object {
+  "results": [
+    {
       "type": "return",
       "value": undefined,
     },
@@ -934,55 +934,55 @@ exports[`Toolbar With renderAddons should render the addon icon tooltip 2`] = `
 LoadedCheerio {
   "_root": LoadedCheerio {
     "0": Node {
-      "children": Array [
+      "children": [
         Node {
-          "attribs": Object {},
-          "children": Array [
+          "attribs": {},
+          "children": [
             Node {
-              "attribs": Object {},
-              "children": Array [],
+              "attribs": {},
+              "children": [],
               "name": "head",
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Node {
-                "attribs": Object {},
-                "children": Array [],
+                "attribs": {},
+                "children": [],
                 "name": "body",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": null,
                 "parent": [Circular],
                 "prev": [Circular],
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
               "parent": [Circular],
               "prev": null,
               "type": "tag",
-              "x-attribsNamespace": Object {},
-              "x-attribsPrefix": Object {},
+              "x-attribsNamespace": {},
+              "x-attribsPrefix": {},
             },
             Node {
-              "attribs": Object {},
-              "children": Array [],
+              "attribs": {},
+              "children": [],
               "name": "body",
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": null,
               "parent": [Circular],
               "prev": Node {
-                "attribs": Object {},
-                "children": Array [],
+                "attribs": {},
+                "children": [],
                 "name": "head",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": [Circular],
                 "parent": [Circular],
                 "prev": null,
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
               "type": "tag",
-              "x-attribsNamespace": Object {},
-              "x-attribsPrefix": Object {},
+              "x-attribsNamespace": {},
+              "x-attribsPrefix": {},
             },
           ],
           "name": "html",
@@ -991,8 +991,8 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": null,
           "type": "tag",
-          "x-attribsNamespace": Object {},
-          "x-attribsPrefix": Object {},
+          "x-attribsNamespace": {},
+          "x-attribsPrefix": {},
         },
       ],
       "name": "root",
@@ -1004,44 +1004,44 @@ LoadedCheerio {
     },
     "_root": [Circular],
     "length": 1,
-    "options": Object {
+    "options": {
       "decodeEntities": true,
       "xml": false,
     },
   },
   "length": 0,
-  "options": Object {
+  "options": {
     "decodeEntities": true,
     "xml": false,
   },
   "prevObject": LoadedCheerio {
     "0": Node {
-      "attribs": Object {},
-      "children": Array [
+      "attribs": {},
+      "children": [
         Node {
-          "attribs": Object {
+          "attribs": {
             "aria-label": "Main navigation",
             "class": "security--toolbar security--toolbar__minimized",
           },
-          "children": Array [
+          "children": [
             Node {
-              "attribs": Object {
+              "attribs": {
                 "class": "security--toolbar__group",
               },
-              "children": Array [
+              "children": [
                 Node {
-                  "attribs": Object {},
-                  "children": Array [
+                  "attribs": {},
+                  "children": [
                     Node {
-                      "attribs": Object {
+                      "attribs": {
                         "aria-expanded": "false",
                         "aria-label": "Toggle menu",
                         "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
                         "type": "button",
                       },
-                      "children": Array [
+                      "children": [
                         Node {
-                          "attribs": Object {
+                          "attribs": {
                             "aria-hidden": "true",
                             "class": "security--icon security--toolbar__icon",
                             "fill": "currentColor",
@@ -1053,22 +1053,22 @@ LoadedCheerio {
                             "width": "20",
                             "xmlns": "http://www.w3.org/2000/svg",
                           },
-                          "children": Array [
+                          "children": [
                             Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "d": "M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z",
                               },
-                              "children": Array [],
+                              "children": [],
                               "name": "path",
                               "namespace": "http://www.w3.org/2000/svg",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "d": undefined,
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "d": undefined,
                               },
                             },
@@ -1079,7 +1079,7 @@ LoadedCheerio {
                           "parent": [Circular],
                           "prev": null,
                           "type": "tag",
-                          "x-attribsNamespace": Object {
+                          "x-attribsNamespace": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -1091,7 +1091,7 @@ LoadedCheerio {
                             "width": undefined,
                             "xmlns": "http://www.w3.org/2000/xmlns/",
                           },
-                          "x-attribsPrefix": Object {
+                          "x-attribsPrefix": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -1111,13 +1111,13 @@ LoadedCheerio {
                       "parent": [Circular],
                       "prev": null,
                       "type": "tag",
-                      "x-attribsNamespace": Object {
+                      "x-attribsNamespace": {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
                         "type": undefined,
                       },
-                      "x-attribsPrefix": Object {
+                      "x-attribsPrefix": {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
@@ -1128,17 +1128,17 @@ LoadedCheerio {
                   "name": "li",
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Node {
-                    "attribs": Object {},
-                    "children": Array [
+                    "attribs": {},
+                    "children": [
                       Node {
-                        "attribs": Object {
+                        "attribs": {
                           "aria-label": "Example addon",
                           "class": "security--button--icon security--toolbar__button",
                           "type": "button",
                         },
-                        "children": Array [
+                        "children": [
                           Node {
-                            "attribs": Object {
+                            "attribs": {
                               "aria-hidden": "true",
                               "class": "security--icon security--toolbar__icon",
                               "fill": "currentColor",
@@ -1150,74 +1150,74 @@ LoadedCheerio {
                               "width": "20",
                               "xmlns": "http://www.w3.org/2000/svg",
                             },
-                            "children": Array [
+                            "children": [
                               Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": Node {
-                                  "attribs": Object {
+                                  "attribs": {
                                     "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                                   },
-                                  "children": Array [],
+                                  "children": [],
                                   "name": "path",
                                   "namespace": "http://www.w3.org/2000/svg",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": [Circular],
                                   "type": "tag",
-                                  "x-attribsNamespace": Object {
+                                  "x-attribsNamespace": {
                                     "d": undefined,
                                   },
-                                  "x-attribsPrefix": Object {
+                                  "x-attribsPrefix": {
                                     "d": undefined,
                                   },
                                 },
                                 "parent": [Circular],
                                 "prev": null,
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
                               Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": Node {
-                                  "attribs": Object {
+                                  "attribs": {
                                     "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                                   },
-                                  "children": Array [],
+                                  "children": [],
                                   "name": "path",
                                   "namespace": "http://www.w3.org/2000/svg",
                                   "next": [Circular],
                                   "parent": [Circular],
                                   "prev": null,
                                   "type": "tag",
-                                  "x-attribsNamespace": Object {
+                                  "x-attribsNamespace": {
                                     "d": undefined,
                                   },
-                                  "x-attribsPrefix": Object {
+                                  "x-attribsPrefix": {
                                     "d": undefined,
                                   },
                                 },
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
@@ -1228,7 +1228,7 @@ LoadedCheerio {
                             "parent": [Circular],
                             "prev": null,
                             "type": "tag",
-                            "x-attribsNamespace": Object {
+                            "x-attribsNamespace": {
                               "aria-hidden": undefined,
                               "class": undefined,
                               "fill": undefined,
@@ -1240,7 +1240,7 @@ LoadedCheerio {
                               "width": undefined,
                               "xmlns": "http://www.w3.org/2000/xmlns/",
                             },
-                            "x-attribsPrefix": Object {
+                            "x-attribsPrefix": {
                               "aria-hidden": undefined,
                               "class": undefined,
                               "fill": undefined,
@@ -1260,12 +1260,12 @@ LoadedCheerio {
                         "parent": [Circular],
                         "prev": null,
                         "type": "tag",
-                        "x-attribsNamespace": Object {
+                        "x-attribsNamespace": {
                           "aria-label": undefined,
                           "class": undefined,
                           "type": undefined,
                         },
-                        "x-attribsPrefix": Object {
+                        "x-attribsPrefix": {
                           "aria-label": undefined,
                           "class": undefined,
                           "type": undefined,
@@ -1278,27 +1278,27 @@ LoadedCheerio {
                     "parent": [Circular],
                     "prev": [Circular],
                     "type": "tag",
-                    "x-attribsNamespace": Object {},
-                    "x-attribsPrefix": Object {},
+                    "x-attribsNamespace": {},
+                    "x-attribsPrefix": {},
                   },
                   "parent": [Circular],
                   "prev": null,
                   "type": "tag",
-                  "x-attribsNamespace": Object {},
-                  "x-attribsPrefix": Object {},
+                  "x-attribsNamespace": {},
+                  "x-attribsPrefix": {},
                 },
                 Node {
-                  "attribs": Object {},
-                  "children": Array [
+                  "attribs": {},
+                  "children": [
                     Node {
-                      "attribs": Object {
+                      "attribs": {
                         "aria-label": "Example addon",
                         "class": "security--button--icon security--toolbar__button",
                         "type": "button",
                       },
-                      "children": Array [
+                      "children": [
                         Node {
-                          "attribs": Object {
+                          "attribs": {
                             "aria-hidden": "true",
                             "class": "security--icon security--toolbar__icon",
                             "fill": "currentColor",
@@ -1310,74 +1310,74 @@ LoadedCheerio {
                             "width": "20",
                             "xmlns": "http://www.w3.org/2000/svg",
                           },
-                          "children": Array [
+                          "children": [
                             Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                               },
-                              "children": Array [],
+                              "children": [],
                               "name": "path",
                               "namespace": "http://www.w3.org/2000/svg",
                               "next": Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": [Circular],
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
                               "parent": [Circular],
                               "prev": null,
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "d": undefined,
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "d": undefined,
                               },
                             },
                             Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                               },
-                              "children": Array [],
+                              "children": [],
                               "name": "path",
                               "namespace": "http://www.w3.org/2000/svg",
                               "next": null,
                               "parent": [Circular],
                               "prev": Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": [Circular],
                                 "parent": [Circular],
                                 "prev": null,
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "d": undefined,
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "d": undefined,
                               },
                             },
@@ -1388,7 +1388,7 @@ LoadedCheerio {
                           "parent": [Circular],
                           "prev": null,
                           "type": "tag",
-                          "x-attribsNamespace": Object {
+                          "x-attribsNamespace": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -1400,7 +1400,7 @@ LoadedCheerio {
                             "width": undefined,
                             "xmlns": "http://www.w3.org/2000/xmlns/",
                           },
-                          "x-attribsPrefix": Object {
+                          "x-attribsPrefix": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -1420,12 +1420,12 @@ LoadedCheerio {
                       "parent": [Circular],
                       "prev": null,
                       "type": "tag",
-                      "x-attribsNamespace": Object {
+                      "x-attribsNamespace": {
                         "aria-label": undefined,
                         "class": undefined,
                         "type": undefined,
                       },
-                      "x-attribsPrefix": Object {
+                      "x-attribsPrefix": {
                         "aria-label": undefined,
                         "class": undefined,
                         "type": undefined,
@@ -1437,18 +1437,18 @@ LoadedCheerio {
                   "next": null,
                   "parent": [Circular],
                   "prev": Node {
-                    "attribs": Object {},
-                    "children": Array [
+                    "attribs": {},
+                    "children": [
                       Node {
-                        "attribs": Object {
+                        "attribs": {
                           "aria-expanded": "false",
                           "aria-label": "Toggle menu",
                           "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
                           "type": "button",
                         },
-                        "children": Array [
+                        "children": [
                           Node {
-                            "attribs": Object {
+                            "attribs": {
                               "aria-hidden": "true",
                               "class": "security--icon security--toolbar__icon",
                               "fill": "currentColor",
@@ -1460,22 +1460,22 @@ LoadedCheerio {
                               "width": "20",
                               "xmlns": "http://www.w3.org/2000/svg",
                             },
-                            "children": Array [
+                            "children": [
                               Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
@@ -1486,7 +1486,7 @@ LoadedCheerio {
                             "parent": [Circular],
                             "prev": null,
                             "type": "tag",
-                            "x-attribsNamespace": Object {
+                            "x-attribsNamespace": {
                               "aria-hidden": undefined,
                               "class": undefined,
                               "fill": undefined,
@@ -1498,7 +1498,7 @@ LoadedCheerio {
                               "width": undefined,
                               "xmlns": "http://www.w3.org/2000/xmlns/",
                             },
-                            "x-attribsPrefix": Object {
+                            "x-attribsPrefix": {
                               "aria-hidden": undefined,
                               "class": undefined,
                               "fill": undefined,
@@ -1518,13 +1518,13 @@ LoadedCheerio {
                         "parent": [Circular],
                         "prev": null,
                         "type": "tag",
-                        "x-attribsNamespace": Object {
+                        "x-attribsNamespace": {
                           "aria-expanded": undefined,
                           "aria-label": undefined,
                           "class": undefined,
                           "type": undefined,
                         },
-                        "x-attribsPrefix": Object {
+                        "x-attribsPrefix": {
                           "aria-expanded": undefined,
                           "aria-label": undefined,
                           "class": undefined,
@@ -1538,12 +1538,12 @@ LoadedCheerio {
                     "parent": [Circular],
                     "prev": null,
                     "type": "tag",
-                    "x-attribsNamespace": Object {},
-                    "x-attribsPrefix": Object {},
+                    "x-attribsNamespace": {},
+                    "x-attribsPrefix": {},
                   },
                   "type": "tag",
-                  "x-attribsNamespace": Object {},
-                  "x-attribsPrefix": Object {},
+                  "x-attribsNamespace": {},
+                  "x-attribsPrefix": {},
                 },
               ],
               "name": "ul",
@@ -1552,10 +1552,10 @@ LoadedCheerio {
               "parent": [Circular],
               "prev": null,
               "type": "tag",
-              "x-attribsNamespace": Object {
+              "x-attribsNamespace": {
                 "class": undefined,
               },
-              "x-attribsPrefix": Object {
+              "x-attribsPrefix": {
                 "class": undefined,
               },
             },
@@ -1563,68 +1563,68 @@ LoadedCheerio {
           "name": "nav",
           "namespace": "http://www.w3.org/1999/xhtml",
           "next": Node {
-            "attribs": Object {
+            "attribs": {
               "class": "security--transition",
             },
-            "children": Array [],
+            "children": [],
             "name": "span",
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": null,
             "parent": [Circular],
             "prev": [Circular],
             "type": "tag",
-            "x-attribsNamespace": Object {
+            "x-attribsNamespace": {
               "class": undefined,
             },
-            "x-attribsPrefix": Object {
+            "x-attribsPrefix": {
               "class": undefined,
             },
           },
           "parent": [Circular],
           "prev": null,
           "type": "tag",
-          "x-attribsNamespace": Object {
+          "x-attribsNamespace": {
             "aria-label": undefined,
             "class": undefined,
           },
-          "x-attribsPrefix": Object {
+          "x-attribsPrefix": {
             "aria-label": undefined,
             "class": undefined,
           },
         },
         Node {
-          "attribs": Object {
+          "attribs": {
             "class": "security--transition",
           },
-          "children": Array [],
+          "children": [],
           "name": "span",
           "namespace": "http://www.w3.org/1999/xhtml",
           "next": null,
           "parent": [Circular],
           "prev": Node {
-            "attribs": Object {
+            "attribs": {
               "aria-label": "Main navigation",
               "class": "security--toolbar security--toolbar__minimized",
             },
-            "children": Array [
+            "children": [
               Node {
-                "attribs": Object {
+                "attribs": {
                   "class": "security--toolbar__group",
                 },
-                "children": Array [
+                "children": [
                   Node {
-                    "attribs": Object {},
-                    "children": Array [
+                    "attribs": {},
+                    "children": [
                       Node {
-                        "attribs": Object {
+                        "attribs": {
                           "aria-expanded": "false",
                           "aria-label": "Toggle menu",
                           "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
                           "type": "button",
                         },
-                        "children": Array [
+                        "children": [
                           Node {
-                            "attribs": Object {
+                            "attribs": {
                               "aria-hidden": "true",
                               "class": "security--icon security--toolbar__icon",
                               "fill": "currentColor",
@@ -1636,22 +1636,22 @@ LoadedCheerio {
                               "width": "20",
                               "xmlns": "http://www.w3.org/2000/svg",
                             },
-                            "children": Array [
+                            "children": [
                               Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
@@ -1662,7 +1662,7 @@ LoadedCheerio {
                             "parent": [Circular],
                             "prev": null,
                             "type": "tag",
-                            "x-attribsNamespace": Object {
+                            "x-attribsNamespace": {
                               "aria-hidden": undefined,
                               "class": undefined,
                               "fill": undefined,
@@ -1674,7 +1674,7 @@ LoadedCheerio {
                               "width": undefined,
                               "xmlns": "http://www.w3.org/2000/xmlns/",
                             },
-                            "x-attribsPrefix": Object {
+                            "x-attribsPrefix": {
                               "aria-hidden": undefined,
                               "class": undefined,
                               "fill": undefined,
@@ -1694,13 +1694,13 @@ LoadedCheerio {
                         "parent": [Circular],
                         "prev": null,
                         "type": "tag",
-                        "x-attribsNamespace": Object {
+                        "x-attribsNamespace": {
                           "aria-expanded": undefined,
                           "aria-label": undefined,
                           "class": undefined,
                           "type": undefined,
                         },
-                        "x-attribsPrefix": Object {
+                        "x-attribsPrefix": {
                           "aria-expanded": undefined,
                           "aria-label": undefined,
                           "class": undefined,
@@ -1711,17 +1711,17 @@ LoadedCheerio {
                     "name": "li",
                     "namespace": "http://www.w3.org/1999/xhtml",
                     "next": Node {
-                      "attribs": Object {},
-                      "children": Array [
+                      "attribs": {},
+                      "children": [
                         Node {
-                          "attribs": Object {
+                          "attribs": {
                             "aria-label": "Example addon",
                             "class": "security--button--icon security--toolbar__button",
                             "type": "button",
                           },
-                          "children": Array [
+                          "children": [
                             Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "aria-hidden": "true",
                                 "class": "security--icon security--toolbar__icon",
                                 "fill": "currentColor",
@@ -1733,74 +1733,74 @@ LoadedCheerio {
                                 "width": "20",
                                 "xmlns": "http://www.w3.org/2000/svg",
                               },
-                              "children": Array [
+                              "children": [
                                 Node {
-                                  "attribs": Object {
+                                  "attribs": {
                                     "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                                   },
-                                  "children": Array [],
+                                  "children": [],
                                   "name": "path",
                                   "namespace": "http://www.w3.org/2000/svg",
                                   "next": Node {
-                                    "attribs": Object {
+                                    "attribs": {
                                       "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                                     },
-                                    "children": Array [],
+                                    "children": [],
                                     "name": "path",
                                     "namespace": "http://www.w3.org/2000/svg",
                                     "next": null,
                                     "parent": [Circular],
                                     "prev": [Circular],
                                     "type": "tag",
-                                    "x-attribsNamespace": Object {
+                                    "x-attribsNamespace": {
                                       "d": undefined,
                                     },
-                                    "x-attribsPrefix": Object {
+                                    "x-attribsPrefix": {
                                       "d": undefined,
                                     },
                                   },
                                   "parent": [Circular],
                                   "prev": null,
                                   "type": "tag",
-                                  "x-attribsNamespace": Object {
+                                  "x-attribsNamespace": {
                                     "d": undefined,
                                   },
-                                  "x-attribsPrefix": Object {
+                                  "x-attribsPrefix": {
                                     "d": undefined,
                                   },
                                 },
                                 Node {
-                                  "attribs": Object {
+                                  "attribs": {
                                     "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                                   },
-                                  "children": Array [],
+                                  "children": [],
                                   "name": "path",
                                   "namespace": "http://www.w3.org/2000/svg",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": Node {
-                                    "attribs": Object {
+                                    "attribs": {
                                       "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                                     },
-                                    "children": Array [],
+                                    "children": [],
                                     "name": "path",
                                     "namespace": "http://www.w3.org/2000/svg",
                                     "next": [Circular],
                                     "parent": [Circular],
                                     "prev": null,
                                     "type": "tag",
-                                    "x-attribsNamespace": Object {
+                                    "x-attribsNamespace": {
                                       "d": undefined,
                                     },
-                                    "x-attribsPrefix": Object {
+                                    "x-attribsPrefix": {
                                       "d": undefined,
                                     },
                                   },
                                   "type": "tag",
-                                  "x-attribsNamespace": Object {
+                                  "x-attribsNamespace": {
                                     "d": undefined,
                                   },
-                                  "x-attribsPrefix": Object {
+                                  "x-attribsPrefix": {
                                     "d": undefined,
                                   },
                                 },
@@ -1811,7 +1811,7 @@ LoadedCheerio {
                               "parent": [Circular],
                               "prev": null,
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "aria-hidden": undefined,
                                 "class": undefined,
                                 "fill": undefined,
@@ -1823,7 +1823,7 @@ LoadedCheerio {
                                 "width": undefined,
                                 "xmlns": "http://www.w3.org/2000/xmlns/",
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "aria-hidden": undefined,
                                 "class": undefined,
                                 "fill": undefined,
@@ -1843,12 +1843,12 @@ LoadedCheerio {
                           "parent": [Circular],
                           "prev": null,
                           "type": "tag",
-                          "x-attribsNamespace": Object {
+                          "x-attribsNamespace": {
                             "aria-label": undefined,
                             "class": undefined,
                             "type": undefined,
                           },
-                          "x-attribsPrefix": Object {
+                          "x-attribsPrefix": {
                             "aria-label": undefined,
                             "class": undefined,
                             "type": undefined,
@@ -1861,27 +1861,27 @@ LoadedCheerio {
                       "parent": [Circular],
                       "prev": [Circular],
                       "type": "tag",
-                      "x-attribsNamespace": Object {},
-                      "x-attribsPrefix": Object {},
+                      "x-attribsNamespace": {},
+                      "x-attribsPrefix": {},
                     },
                     "parent": [Circular],
                     "prev": null,
                     "type": "tag",
-                    "x-attribsNamespace": Object {},
-                    "x-attribsPrefix": Object {},
+                    "x-attribsNamespace": {},
+                    "x-attribsPrefix": {},
                   },
                   Node {
-                    "attribs": Object {},
-                    "children": Array [
+                    "attribs": {},
+                    "children": [
                       Node {
-                        "attribs": Object {
+                        "attribs": {
                           "aria-label": "Example addon",
                           "class": "security--button--icon security--toolbar__button",
                           "type": "button",
                         },
-                        "children": Array [
+                        "children": [
                           Node {
-                            "attribs": Object {
+                            "attribs": {
                               "aria-hidden": "true",
                               "class": "security--icon security--toolbar__icon",
                               "fill": "currentColor",
@@ -1893,74 +1893,74 @@ LoadedCheerio {
                               "width": "20",
                               "xmlns": "http://www.w3.org/2000/svg",
                             },
-                            "children": Array [
+                            "children": [
                               Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": Node {
-                                  "attribs": Object {
+                                  "attribs": {
                                     "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                                   },
-                                  "children": Array [],
+                                  "children": [],
                                   "name": "path",
                                   "namespace": "http://www.w3.org/2000/svg",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": [Circular],
                                   "type": "tag",
-                                  "x-attribsNamespace": Object {
+                                  "x-attribsNamespace": {
                                     "d": undefined,
                                   },
-                                  "x-attribsPrefix": Object {
+                                  "x-attribsPrefix": {
                                     "d": undefined,
                                   },
                                 },
                                 "parent": [Circular],
                                 "prev": null,
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
                               Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": Node {
-                                  "attribs": Object {
+                                  "attribs": {
                                     "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                                   },
-                                  "children": Array [],
+                                  "children": [],
                                   "name": "path",
                                   "namespace": "http://www.w3.org/2000/svg",
                                   "next": [Circular],
                                   "parent": [Circular],
                                   "prev": null,
                                   "type": "tag",
-                                  "x-attribsNamespace": Object {
+                                  "x-attribsNamespace": {
                                     "d": undefined,
                                   },
-                                  "x-attribsPrefix": Object {
+                                  "x-attribsPrefix": {
                                     "d": undefined,
                                   },
                                 },
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
@@ -1971,7 +1971,7 @@ LoadedCheerio {
                             "parent": [Circular],
                             "prev": null,
                             "type": "tag",
-                            "x-attribsNamespace": Object {
+                            "x-attribsNamespace": {
                               "aria-hidden": undefined,
                               "class": undefined,
                               "fill": undefined,
@@ -1983,7 +1983,7 @@ LoadedCheerio {
                               "width": undefined,
                               "xmlns": "http://www.w3.org/2000/xmlns/",
                             },
-                            "x-attribsPrefix": Object {
+                            "x-attribsPrefix": {
                               "aria-hidden": undefined,
                               "class": undefined,
                               "fill": undefined,
@@ -2003,12 +2003,12 @@ LoadedCheerio {
                         "parent": [Circular],
                         "prev": null,
                         "type": "tag",
-                        "x-attribsNamespace": Object {
+                        "x-attribsNamespace": {
                           "aria-label": undefined,
                           "class": undefined,
                           "type": undefined,
                         },
-                        "x-attribsPrefix": Object {
+                        "x-attribsPrefix": {
                           "aria-label": undefined,
                           "class": undefined,
                           "type": undefined,
@@ -2020,18 +2020,18 @@ LoadedCheerio {
                     "next": null,
                     "parent": [Circular],
                     "prev": Node {
-                      "attribs": Object {},
-                      "children": Array [
+                      "attribs": {},
+                      "children": [
                         Node {
-                          "attribs": Object {
+                          "attribs": {
                             "aria-expanded": "false",
                             "aria-label": "Toggle menu",
                             "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
                             "type": "button",
                           },
-                          "children": Array [
+                          "children": [
                             Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "aria-hidden": "true",
                                 "class": "security--icon security--toolbar__icon",
                                 "fill": "currentColor",
@@ -2043,22 +2043,22 @@ LoadedCheerio {
                                 "width": "20",
                                 "xmlns": "http://www.w3.org/2000/svg",
                               },
-                              "children": Array [
+                              "children": [
                                 Node {
-                                  "attribs": Object {
+                                  "attribs": {
                                     "d": "M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z",
                                   },
-                                  "children": Array [],
+                                  "children": [],
                                   "name": "path",
                                   "namespace": "http://www.w3.org/2000/svg",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": null,
                                   "type": "tag",
-                                  "x-attribsNamespace": Object {
+                                  "x-attribsNamespace": {
                                     "d": undefined,
                                   },
-                                  "x-attribsPrefix": Object {
+                                  "x-attribsPrefix": {
                                     "d": undefined,
                                   },
                                 },
@@ -2069,7 +2069,7 @@ LoadedCheerio {
                               "parent": [Circular],
                               "prev": null,
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "aria-hidden": undefined,
                                 "class": undefined,
                                 "fill": undefined,
@@ -2081,7 +2081,7 @@ LoadedCheerio {
                                 "width": undefined,
                                 "xmlns": "http://www.w3.org/2000/xmlns/",
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "aria-hidden": undefined,
                                 "class": undefined,
                                 "fill": undefined,
@@ -2101,13 +2101,13 @@ LoadedCheerio {
                           "parent": [Circular],
                           "prev": null,
                           "type": "tag",
-                          "x-attribsNamespace": Object {
+                          "x-attribsNamespace": {
                             "aria-expanded": undefined,
                             "aria-label": undefined,
                             "class": undefined,
                             "type": undefined,
                           },
-                          "x-attribsPrefix": Object {
+                          "x-attribsPrefix": {
                             "aria-expanded": undefined,
                             "aria-label": undefined,
                             "class": undefined,
@@ -2121,12 +2121,12 @@ LoadedCheerio {
                       "parent": [Circular],
                       "prev": null,
                       "type": "tag",
-                      "x-attribsNamespace": Object {},
-                      "x-attribsPrefix": Object {},
+                      "x-attribsNamespace": {},
+                      "x-attribsPrefix": {},
                     },
                     "type": "tag",
-                    "x-attribsNamespace": Object {},
-                    "x-attribsPrefix": Object {},
+                    "x-attribsNamespace": {},
+                    "x-attribsPrefix": {},
                   },
                 ],
                 "name": "ul",
@@ -2135,10 +2135,10 @@ LoadedCheerio {
                 "parent": [Circular],
                 "prev": null,
                 "type": "tag",
-                "x-attribsNamespace": Object {
+                "x-attribsNamespace": {
                   "class": undefined,
                 },
-                "x-attribsPrefix": Object {
+                "x-attribsPrefix": {
                   "class": undefined,
                 },
               },
@@ -2149,20 +2149,20 @@ LoadedCheerio {
             "parent": [Circular],
             "prev": null,
             "type": "tag",
-            "x-attribsNamespace": Object {
+            "x-attribsNamespace": {
               "aria-label": undefined,
               "class": undefined,
             },
-            "x-attribsPrefix": Object {
+            "x-attribsPrefix": {
               "aria-label": undefined,
               "class": undefined,
             },
           },
           "type": "tag",
-          "x-attribsNamespace": Object {
+          "x-attribsNamespace": {
             "class": undefined,
           },
-          "x-attribsPrefix": Object {
+          "x-attribsPrefix": {
             "class": undefined,
           },
         },
@@ -2171,7 +2171,7 @@ LoadedCheerio {
       "namespace": "http://www.w3.org/1999/xhtml",
       "next": null,
       "parent": Node {
-        "children": Array [
+        "children": [
           [Circular],
         ],
         "name": "root",
@@ -2182,60 +2182,60 @@ LoadedCheerio {
       },
       "prev": null,
       "type": "tag",
-      "x-attribsNamespace": Object {},
-      "x-attribsPrefix": Object {},
+      "x-attribsNamespace": {},
+      "x-attribsPrefix": {},
     },
     "_root": LoadedCheerio {
       "0": Node {
-        "children": Array [
+        "children": [
           Node {
-            "attribs": Object {},
-            "children": Array [
+            "attribs": {},
+            "children": [
               Node {
-                "attribs": Object {},
-                "children": Array [],
+                "attribs": {},
+                "children": [],
                 "name": "head",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": Node {
-                  "attribs": Object {},
-                  "children": Array [],
+                  "attribs": {},
+                  "children": [],
                   "name": "body",
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": null,
                   "parent": [Circular],
                   "prev": [Circular],
                   "type": "tag",
-                  "x-attribsNamespace": Object {},
-                  "x-attribsPrefix": Object {},
+                  "x-attribsNamespace": {},
+                  "x-attribsPrefix": {},
                 },
                 "parent": [Circular],
                 "prev": null,
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
               Node {
-                "attribs": Object {},
-                "children": Array [],
+                "attribs": {},
+                "children": [],
                 "name": "body",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": null,
                 "parent": [Circular],
                 "prev": Node {
-                  "attribs": Object {},
-                  "children": Array [],
+                  "attribs": {},
+                  "children": [],
                   "name": "head",
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": [Circular],
                   "parent": [Circular],
                   "prev": null,
                   "type": "tag",
-                  "x-attribsNamespace": Object {},
-                  "x-attribsPrefix": Object {},
+                  "x-attribsNamespace": {},
+                  "x-attribsPrefix": {},
                 },
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
             ],
             "name": "html",
@@ -2244,8 +2244,8 @@ LoadedCheerio {
             "parent": [Circular],
             "prev": null,
             "type": "tag",
-            "x-attribsNamespace": Object {},
-            "x-attribsPrefix": Object {},
+            "x-attribsNamespace": {},
+            "x-attribsPrefix": {},
           },
         ],
         "name": "root",
@@ -2257,13 +2257,13 @@ LoadedCheerio {
       },
       "_root": [Circular],
       "length": 1,
-      "options": Object {
+      "options": {
         "decodeEntities": true,
         "xml": false,
       },
     },
     "length": 1,
-    "options": Object {
+    "options": {
       "decodeEntities": true,
       "xml": false,
     },
@@ -2276,32 +2276,32 @@ exports[`Toolbar With renderAddons should render the toolbar with addon icon 1`]
 exports[`Toolbar With renderAddons should render the toolbar with addon icon 2`] = `
 LoadedCheerio {
   "0": Node {
-    "attribs": Object {},
-    "children": Array [
+    "attribs": {},
+    "children": [
       Node {
-        "attribs": Object {
+        "attribs": {
           "aria-label": "Main navigation",
           "class": "security--toolbar security--toolbar__minimized",
         },
-        "children": Array [
+        "children": [
           Node {
-            "attribs": Object {
+            "attribs": {
               "class": "security--toolbar__group",
             },
-            "children": Array [
+            "children": [
               Node {
-                "attribs": Object {},
-                "children": Array [
+                "attribs": {},
+                "children": [
                   Node {
-                    "attribs": Object {
+                    "attribs": {
                       "aria-expanded": "false",
                       "aria-label": "Toggle menu",
                       "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
                       "type": "button",
                     },
-                    "children": Array [
+                    "children": [
                       Node {
-                        "attribs": Object {
+                        "attribs": {
                           "aria-hidden": "true",
                           "class": "security--icon security--toolbar__icon",
                           "fill": "currentColor",
@@ -2313,22 +2313,22 @@ LoadedCheerio {
                           "width": "20",
                           "xmlns": "http://www.w3.org/2000/svg",
                         },
-                        "children": Array [
+                        "children": [
                           Node {
-                            "attribs": Object {
+                            "attribs": {
                               "d": "M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z",
                             },
-                            "children": Array [],
+                            "children": [],
                             "name": "path",
                             "namespace": "http://www.w3.org/2000/svg",
                             "next": null,
                             "parent": [Circular],
                             "prev": null,
                             "type": "tag",
-                            "x-attribsNamespace": Object {
+                            "x-attribsNamespace": {
                               "d": undefined,
                             },
-                            "x-attribsPrefix": Object {
+                            "x-attribsPrefix": {
                               "d": undefined,
                             },
                           },
@@ -2339,7 +2339,7 @@ LoadedCheerio {
                         "parent": [Circular],
                         "prev": null,
                         "type": "tag",
-                        "x-attribsNamespace": Object {
+                        "x-attribsNamespace": {
                           "aria-hidden": undefined,
                           "class": undefined,
                           "fill": undefined,
@@ -2351,7 +2351,7 @@ LoadedCheerio {
                           "width": undefined,
                           "xmlns": "http://www.w3.org/2000/xmlns/",
                         },
-                        "x-attribsPrefix": Object {
+                        "x-attribsPrefix": {
                           "aria-hidden": undefined,
                           "class": undefined,
                           "fill": undefined,
@@ -2371,13 +2371,13 @@ LoadedCheerio {
                     "parent": [Circular],
                     "prev": null,
                     "type": "tag",
-                    "x-attribsNamespace": Object {
+                    "x-attribsNamespace": {
                       "aria-expanded": undefined,
                       "aria-label": undefined,
                       "class": undefined,
                       "type": undefined,
                     },
-                    "x-attribsPrefix": Object {
+                    "x-attribsPrefix": {
                       "aria-expanded": undefined,
                       "aria-label": undefined,
                       "class": undefined,
@@ -2388,17 +2388,17 @@ LoadedCheerio {
                 "name": "li",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": Node {
-                  "attribs": Object {},
-                  "children": Array [
+                  "attribs": {},
+                  "children": [
                     Node {
-                      "attribs": Object {
+                      "attribs": {
                         "aria-label": "Example addon",
                         "class": "security--button--icon security--toolbar__button",
                         "type": "button",
                       },
-                      "children": Array [
+                      "children": [
                         Node {
-                          "attribs": Object {
+                          "attribs": {
                             "aria-hidden": "true",
                             "class": "security--icon security--toolbar__icon",
                             "fill": "currentColor",
@@ -2410,74 +2410,74 @@ LoadedCheerio {
                             "width": "20",
                             "xmlns": "http://www.w3.org/2000/svg",
                           },
-                          "children": Array [
+                          "children": [
                             Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                               },
-                              "children": Array [],
+                              "children": [],
                               "name": "path",
                               "namespace": "http://www.w3.org/2000/svg",
                               "next": Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": [Circular],
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
                               "parent": [Circular],
                               "prev": null,
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "d": undefined,
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "d": undefined,
                               },
                             },
                             Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                               },
-                              "children": Array [],
+                              "children": [],
                               "name": "path",
                               "namespace": "http://www.w3.org/2000/svg",
                               "next": null,
                               "parent": [Circular],
                               "prev": Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": [Circular],
                                 "parent": [Circular],
                                 "prev": null,
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "d": undefined,
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "d": undefined,
                               },
                             },
@@ -2488,7 +2488,7 @@ LoadedCheerio {
                           "parent": [Circular],
                           "prev": null,
                           "type": "tag",
-                          "x-attribsNamespace": Object {
+                          "x-attribsNamespace": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -2500,7 +2500,7 @@ LoadedCheerio {
                             "width": undefined,
                             "xmlns": "http://www.w3.org/2000/xmlns/",
                           },
-                          "x-attribsPrefix": Object {
+                          "x-attribsPrefix": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -2520,12 +2520,12 @@ LoadedCheerio {
                       "parent": [Circular],
                       "prev": null,
                       "type": "tag",
-                      "x-attribsNamespace": Object {
+                      "x-attribsNamespace": {
                         "aria-label": undefined,
                         "class": undefined,
                         "type": undefined,
                       },
-                      "x-attribsPrefix": Object {
+                      "x-attribsPrefix": {
                         "aria-label": undefined,
                         "class": undefined,
                         "type": undefined,
@@ -2538,27 +2538,27 @@ LoadedCheerio {
                   "parent": [Circular],
                   "prev": [Circular],
                   "type": "tag",
-                  "x-attribsNamespace": Object {},
-                  "x-attribsPrefix": Object {},
+                  "x-attribsNamespace": {},
+                  "x-attribsPrefix": {},
                 },
                 "parent": [Circular],
                 "prev": null,
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
               Node {
-                "attribs": Object {},
-                "children": Array [
+                "attribs": {},
+                "children": [
                   Node {
-                    "attribs": Object {
+                    "attribs": {
                       "aria-label": "Example addon",
                       "class": "security--button--icon security--toolbar__button",
                       "type": "button",
                     },
-                    "children": Array [
+                    "children": [
                       Node {
-                        "attribs": Object {
+                        "attribs": {
                           "aria-hidden": "true",
                           "class": "security--icon security--toolbar__icon",
                           "fill": "currentColor",
@@ -2570,74 +2570,74 @@ LoadedCheerio {
                           "width": "20",
                           "xmlns": "http://www.w3.org/2000/svg",
                         },
-                        "children": Array [
+                        "children": [
                           Node {
-                            "attribs": Object {
+                            "attribs": {
                               "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                             },
-                            "children": Array [],
+                            "children": [],
                             "name": "path",
                             "namespace": "http://www.w3.org/2000/svg",
                             "next": Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                               },
-                              "children": Array [],
+                              "children": [],
                               "name": "path",
                               "namespace": "http://www.w3.org/2000/svg",
                               "next": null,
                               "parent": [Circular],
                               "prev": [Circular],
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "d": undefined,
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "d": undefined,
                               },
                             },
                             "parent": [Circular],
                             "prev": null,
                             "type": "tag",
-                            "x-attribsNamespace": Object {
+                            "x-attribsNamespace": {
                               "d": undefined,
                             },
-                            "x-attribsPrefix": Object {
+                            "x-attribsPrefix": {
                               "d": undefined,
                             },
                           },
                           Node {
-                            "attribs": Object {
+                            "attribs": {
                               "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                             },
-                            "children": Array [],
+                            "children": [],
                             "name": "path",
                             "namespace": "http://www.w3.org/2000/svg",
                             "next": null,
                             "parent": [Circular],
                             "prev": Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                               },
-                              "children": Array [],
+                              "children": [],
                               "name": "path",
                               "namespace": "http://www.w3.org/2000/svg",
                               "next": [Circular],
                               "parent": [Circular],
                               "prev": null,
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "d": undefined,
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "d": undefined,
                               },
                             },
                             "type": "tag",
-                            "x-attribsNamespace": Object {
+                            "x-attribsNamespace": {
                               "d": undefined,
                             },
-                            "x-attribsPrefix": Object {
+                            "x-attribsPrefix": {
                               "d": undefined,
                             },
                           },
@@ -2648,7 +2648,7 @@ LoadedCheerio {
                         "parent": [Circular],
                         "prev": null,
                         "type": "tag",
-                        "x-attribsNamespace": Object {
+                        "x-attribsNamespace": {
                           "aria-hidden": undefined,
                           "class": undefined,
                           "fill": undefined,
@@ -2660,7 +2660,7 @@ LoadedCheerio {
                           "width": undefined,
                           "xmlns": "http://www.w3.org/2000/xmlns/",
                         },
-                        "x-attribsPrefix": Object {
+                        "x-attribsPrefix": {
                           "aria-hidden": undefined,
                           "class": undefined,
                           "fill": undefined,
@@ -2680,12 +2680,12 @@ LoadedCheerio {
                     "parent": [Circular],
                     "prev": null,
                     "type": "tag",
-                    "x-attribsNamespace": Object {
+                    "x-attribsNamespace": {
                       "aria-label": undefined,
                       "class": undefined,
                       "type": undefined,
                     },
-                    "x-attribsPrefix": Object {
+                    "x-attribsPrefix": {
                       "aria-label": undefined,
                       "class": undefined,
                       "type": undefined,
@@ -2697,18 +2697,18 @@ LoadedCheerio {
                 "next": null,
                 "parent": [Circular],
                 "prev": Node {
-                  "attribs": Object {},
-                  "children": Array [
+                  "attribs": {},
+                  "children": [
                     Node {
-                      "attribs": Object {
+                      "attribs": {
                         "aria-expanded": "false",
                         "aria-label": "Toggle menu",
                         "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
                         "type": "button",
                       },
-                      "children": Array [
+                      "children": [
                         Node {
-                          "attribs": Object {
+                          "attribs": {
                             "aria-hidden": "true",
                             "class": "security--icon security--toolbar__icon",
                             "fill": "currentColor",
@@ -2720,22 +2720,22 @@ LoadedCheerio {
                             "width": "20",
                             "xmlns": "http://www.w3.org/2000/svg",
                           },
-                          "children": Array [
+                          "children": [
                             Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "d": "M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z",
                               },
-                              "children": Array [],
+                              "children": [],
                               "name": "path",
                               "namespace": "http://www.w3.org/2000/svg",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "d": undefined,
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "d": undefined,
                               },
                             },
@@ -2746,7 +2746,7 @@ LoadedCheerio {
                           "parent": [Circular],
                           "prev": null,
                           "type": "tag",
-                          "x-attribsNamespace": Object {
+                          "x-attribsNamespace": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -2758,7 +2758,7 @@ LoadedCheerio {
                             "width": undefined,
                             "xmlns": "http://www.w3.org/2000/xmlns/",
                           },
-                          "x-attribsPrefix": Object {
+                          "x-attribsPrefix": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -2778,13 +2778,13 @@ LoadedCheerio {
                       "parent": [Circular],
                       "prev": null,
                       "type": "tag",
-                      "x-attribsNamespace": Object {
+                      "x-attribsNamespace": {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
                         "type": undefined,
                       },
-                      "x-attribsPrefix": Object {
+                      "x-attribsPrefix": {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
@@ -2798,12 +2798,12 @@ LoadedCheerio {
                   "parent": [Circular],
                   "prev": null,
                   "type": "tag",
-                  "x-attribsNamespace": Object {},
-                  "x-attribsPrefix": Object {},
+                  "x-attribsNamespace": {},
+                  "x-attribsPrefix": {},
                 },
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
             ],
             "name": "ul",
@@ -2812,10 +2812,10 @@ LoadedCheerio {
             "parent": [Circular],
             "prev": null,
             "type": "tag",
-            "x-attribsNamespace": Object {
+            "x-attribsNamespace": {
               "class": undefined,
             },
-            "x-attribsPrefix": Object {
+            "x-attribsPrefix": {
               "class": undefined,
             },
           },
@@ -2823,68 +2823,68 @@ LoadedCheerio {
         "name": "nav",
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": Node {
-          "attribs": Object {
+          "attribs": {
             "class": "security--transition",
           },
-          "children": Array [],
+          "children": [],
           "name": "span",
           "namespace": "http://www.w3.org/1999/xhtml",
           "next": null,
           "parent": [Circular],
           "prev": [Circular],
           "type": "tag",
-          "x-attribsNamespace": Object {
+          "x-attribsNamespace": {
             "class": undefined,
           },
-          "x-attribsPrefix": Object {
+          "x-attribsPrefix": {
             "class": undefined,
           },
         },
         "parent": [Circular],
         "prev": null,
         "type": "tag",
-        "x-attribsNamespace": Object {
+        "x-attribsNamespace": {
           "aria-label": undefined,
           "class": undefined,
         },
-        "x-attribsPrefix": Object {
+        "x-attribsPrefix": {
           "aria-label": undefined,
           "class": undefined,
         },
       },
       Node {
-        "attribs": Object {
+        "attribs": {
           "class": "security--transition",
         },
-        "children": Array [],
+        "children": [],
         "name": "span",
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": null,
         "parent": [Circular],
         "prev": Node {
-          "attribs": Object {
+          "attribs": {
             "aria-label": "Main navigation",
             "class": "security--toolbar security--toolbar__minimized",
           },
-          "children": Array [
+          "children": [
             Node {
-              "attribs": Object {
+              "attribs": {
                 "class": "security--toolbar__group",
               },
-              "children": Array [
+              "children": [
                 Node {
-                  "attribs": Object {},
-                  "children": Array [
+                  "attribs": {},
+                  "children": [
                     Node {
-                      "attribs": Object {
+                      "attribs": {
                         "aria-expanded": "false",
                         "aria-label": "Toggle menu",
                         "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
                         "type": "button",
                       },
-                      "children": Array [
+                      "children": [
                         Node {
-                          "attribs": Object {
+                          "attribs": {
                             "aria-hidden": "true",
                             "class": "security--icon security--toolbar__icon",
                             "fill": "currentColor",
@@ -2896,22 +2896,22 @@ LoadedCheerio {
                             "width": "20",
                             "xmlns": "http://www.w3.org/2000/svg",
                           },
-                          "children": Array [
+                          "children": [
                             Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "d": "M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z",
                               },
-                              "children": Array [],
+                              "children": [],
                               "name": "path",
                               "namespace": "http://www.w3.org/2000/svg",
                               "next": null,
                               "parent": [Circular],
                               "prev": null,
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "d": undefined,
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "d": undefined,
                               },
                             },
@@ -2922,7 +2922,7 @@ LoadedCheerio {
                           "parent": [Circular],
                           "prev": null,
                           "type": "tag",
-                          "x-attribsNamespace": Object {
+                          "x-attribsNamespace": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -2934,7 +2934,7 @@ LoadedCheerio {
                             "width": undefined,
                             "xmlns": "http://www.w3.org/2000/xmlns/",
                           },
-                          "x-attribsPrefix": Object {
+                          "x-attribsPrefix": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -2954,13 +2954,13 @@ LoadedCheerio {
                       "parent": [Circular],
                       "prev": null,
                       "type": "tag",
-                      "x-attribsNamespace": Object {
+                      "x-attribsNamespace": {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
                         "type": undefined,
                       },
-                      "x-attribsPrefix": Object {
+                      "x-attribsPrefix": {
                         "aria-expanded": undefined,
                         "aria-label": undefined,
                         "class": undefined,
@@ -2971,17 +2971,17 @@ LoadedCheerio {
                   "name": "li",
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Node {
-                    "attribs": Object {},
-                    "children": Array [
+                    "attribs": {},
+                    "children": [
                       Node {
-                        "attribs": Object {
+                        "attribs": {
                           "aria-label": "Example addon",
                           "class": "security--button--icon security--toolbar__button",
                           "type": "button",
                         },
-                        "children": Array [
+                        "children": [
                           Node {
-                            "attribs": Object {
+                            "attribs": {
                               "aria-hidden": "true",
                               "class": "security--icon security--toolbar__icon",
                               "fill": "currentColor",
@@ -2993,74 +2993,74 @@ LoadedCheerio {
                               "width": "20",
                               "xmlns": "http://www.w3.org/2000/svg",
                             },
-                            "children": Array [
+                            "children": [
                               Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": Node {
-                                  "attribs": Object {
+                                  "attribs": {
                                     "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                                   },
-                                  "children": Array [],
+                                  "children": [],
                                   "name": "path",
                                   "namespace": "http://www.w3.org/2000/svg",
                                   "next": null,
                                   "parent": [Circular],
                                   "prev": [Circular],
                                   "type": "tag",
-                                  "x-attribsNamespace": Object {
+                                  "x-attribsNamespace": {
                                     "d": undefined,
                                   },
-                                  "x-attribsPrefix": Object {
+                                  "x-attribsPrefix": {
                                     "d": undefined,
                                   },
                                 },
                                 "parent": [Circular],
                                 "prev": null,
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
                               Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": Node {
-                                  "attribs": Object {
+                                  "attribs": {
                                     "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                                   },
-                                  "children": Array [],
+                                  "children": [],
                                   "name": "path",
                                   "namespace": "http://www.w3.org/2000/svg",
                                   "next": [Circular],
                                   "parent": [Circular],
                                   "prev": null,
                                   "type": "tag",
-                                  "x-attribsNamespace": Object {
+                                  "x-attribsNamespace": {
                                     "d": undefined,
                                   },
-                                  "x-attribsPrefix": Object {
+                                  "x-attribsPrefix": {
                                     "d": undefined,
                                   },
                                 },
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
@@ -3071,7 +3071,7 @@ LoadedCheerio {
                             "parent": [Circular],
                             "prev": null,
                             "type": "tag",
-                            "x-attribsNamespace": Object {
+                            "x-attribsNamespace": {
                               "aria-hidden": undefined,
                               "class": undefined,
                               "fill": undefined,
@@ -3083,7 +3083,7 @@ LoadedCheerio {
                               "width": undefined,
                               "xmlns": "http://www.w3.org/2000/xmlns/",
                             },
-                            "x-attribsPrefix": Object {
+                            "x-attribsPrefix": {
                               "aria-hidden": undefined,
                               "class": undefined,
                               "fill": undefined,
@@ -3103,12 +3103,12 @@ LoadedCheerio {
                         "parent": [Circular],
                         "prev": null,
                         "type": "tag",
-                        "x-attribsNamespace": Object {
+                        "x-attribsNamespace": {
                           "aria-label": undefined,
                           "class": undefined,
                           "type": undefined,
                         },
-                        "x-attribsPrefix": Object {
+                        "x-attribsPrefix": {
                           "aria-label": undefined,
                           "class": undefined,
                           "type": undefined,
@@ -3121,27 +3121,27 @@ LoadedCheerio {
                     "parent": [Circular],
                     "prev": [Circular],
                     "type": "tag",
-                    "x-attribsNamespace": Object {},
-                    "x-attribsPrefix": Object {},
+                    "x-attribsNamespace": {},
+                    "x-attribsPrefix": {},
                   },
                   "parent": [Circular],
                   "prev": null,
                   "type": "tag",
-                  "x-attribsNamespace": Object {},
-                  "x-attribsPrefix": Object {},
+                  "x-attribsNamespace": {},
+                  "x-attribsPrefix": {},
                 },
                 Node {
-                  "attribs": Object {},
-                  "children": Array [
+                  "attribs": {},
+                  "children": [
                     Node {
-                      "attribs": Object {
+                      "attribs": {
                         "aria-label": "Example addon",
                         "class": "security--button--icon security--toolbar__button",
                         "type": "button",
                       },
-                      "children": Array [
+                      "children": [
                         Node {
-                          "attribs": Object {
+                          "attribs": {
                             "aria-hidden": "true",
                             "class": "security--icon security--toolbar__icon",
                             "fill": "currentColor",
@@ -3153,74 +3153,74 @@ LoadedCheerio {
                             "width": "20",
                             "xmlns": "http://www.w3.org/2000/svg",
                           },
-                          "children": Array [
+                          "children": [
                             Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                               },
-                              "children": Array [],
+                              "children": [],
                               "name": "path",
                               "namespace": "http://www.w3.org/2000/svg",
                               "next": Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": [Circular],
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
                               "parent": [Circular],
                               "prev": null,
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "d": undefined,
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "d": undefined,
                               },
                             },
                             Node {
-                              "attribs": Object {
+                              "attribs": {
                                 "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
                               },
-                              "children": Array [],
+                              "children": [],
                               "name": "path",
                               "namespace": "http://www.w3.org/2000/svg",
                               "next": null,
                               "parent": [Circular],
                               "prev": Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": [Circular],
                                 "parent": [Circular],
                                 "prev": null,
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
                               "type": "tag",
-                              "x-attribsNamespace": Object {
+                              "x-attribsNamespace": {
                                 "d": undefined,
                               },
-                              "x-attribsPrefix": Object {
+                              "x-attribsPrefix": {
                                 "d": undefined,
                               },
                             },
@@ -3231,7 +3231,7 @@ LoadedCheerio {
                           "parent": [Circular],
                           "prev": null,
                           "type": "tag",
-                          "x-attribsNamespace": Object {
+                          "x-attribsNamespace": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -3243,7 +3243,7 @@ LoadedCheerio {
                             "width": undefined,
                             "xmlns": "http://www.w3.org/2000/xmlns/",
                           },
-                          "x-attribsPrefix": Object {
+                          "x-attribsPrefix": {
                             "aria-hidden": undefined,
                             "class": undefined,
                             "fill": undefined,
@@ -3263,12 +3263,12 @@ LoadedCheerio {
                       "parent": [Circular],
                       "prev": null,
                       "type": "tag",
-                      "x-attribsNamespace": Object {
+                      "x-attribsNamespace": {
                         "aria-label": undefined,
                         "class": undefined,
                         "type": undefined,
                       },
-                      "x-attribsPrefix": Object {
+                      "x-attribsPrefix": {
                         "aria-label": undefined,
                         "class": undefined,
                         "type": undefined,
@@ -3280,18 +3280,18 @@ LoadedCheerio {
                   "next": null,
                   "parent": [Circular],
                   "prev": Node {
-                    "attribs": Object {},
-                    "children": Array [
+                    "attribs": {},
+                    "children": [
                       Node {
-                        "attribs": Object {
+                        "attribs": {
                           "aria-expanded": "false",
                           "aria-label": "Toggle menu",
                           "class": "security--button--icon security--toolbar__button security--button--icon--tooltip security--button--icon--tooltip--right",
                           "type": "button",
                         },
-                        "children": Array [
+                        "children": [
                           Node {
-                            "attribs": Object {
+                            "attribs": {
                               "aria-hidden": "true",
                               "class": "security--icon security--toolbar__icon",
                               "fill": "currentColor",
@@ -3303,22 +3303,22 @@ LoadedCheerio {
                               "width": "20",
                               "xmlns": "http://www.w3.org/2000/svg",
                             },
-                            "children": Array [
+                            "children": [
                               Node {
-                                "attribs": Object {
+                                "attribs": {
                                   "d": "M2 14.8H18V16H2zM2 11.2H18V12.399999999999999H2zM2 7.6H18V8.799999999999999H2zM2 4H18V5.2H2z",
                                 },
-                                "children": Array [],
+                                "children": [],
                                 "name": "path",
                                 "namespace": "http://www.w3.org/2000/svg",
                                 "next": null,
                                 "parent": [Circular],
                                 "prev": null,
                                 "type": "tag",
-                                "x-attribsNamespace": Object {
+                                "x-attribsNamespace": {
                                   "d": undefined,
                                 },
-                                "x-attribsPrefix": Object {
+                                "x-attribsPrefix": {
                                   "d": undefined,
                                 },
                               },
@@ -3329,7 +3329,7 @@ LoadedCheerio {
                             "parent": [Circular],
                             "prev": null,
                             "type": "tag",
-                            "x-attribsNamespace": Object {
+                            "x-attribsNamespace": {
                               "aria-hidden": undefined,
                               "class": undefined,
                               "fill": undefined,
@@ -3341,7 +3341,7 @@ LoadedCheerio {
                               "width": undefined,
                               "xmlns": "http://www.w3.org/2000/xmlns/",
                             },
-                            "x-attribsPrefix": Object {
+                            "x-attribsPrefix": {
                               "aria-hidden": undefined,
                               "class": undefined,
                               "fill": undefined,
@@ -3361,13 +3361,13 @@ LoadedCheerio {
                         "parent": [Circular],
                         "prev": null,
                         "type": "tag",
-                        "x-attribsNamespace": Object {
+                        "x-attribsNamespace": {
                           "aria-expanded": undefined,
                           "aria-label": undefined,
                           "class": undefined,
                           "type": undefined,
                         },
-                        "x-attribsPrefix": Object {
+                        "x-attribsPrefix": {
                           "aria-expanded": undefined,
                           "aria-label": undefined,
                           "class": undefined,
@@ -3381,12 +3381,12 @@ LoadedCheerio {
                     "parent": [Circular],
                     "prev": null,
                     "type": "tag",
-                    "x-attribsNamespace": Object {},
-                    "x-attribsPrefix": Object {},
+                    "x-attribsNamespace": {},
+                    "x-attribsPrefix": {},
                   },
                   "type": "tag",
-                  "x-attribsNamespace": Object {},
-                  "x-attribsPrefix": Object {},
+                  "x-attribsNamespace": {},
+                  "x-attribsPrefix": {},
                 },
               ],
               "name": "ul",
@@ -3395,10 +3395,10 @@ LoadedCheerio {
               "parent": [Circular],
               "prev": null,
               "type": "tag",
-              "x-attribsNamespace": Object {
+              "x-attribsNamespace": {
                 "class": undefined,
               },
-              "x-attribsPrefix": Object {
+              "x-attribsPrefix": {
                 "class": undefined,
               },
             },
@@ -3409,20 +3409,20 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": null,
           "type": "tag",
-          "x-attribsNamespace": Object {
+          "x-attribsNamespace": {
             "aria-label": undefined,
             "class": undefined,
           },
-          "x-attribsPrefix": Object {
+          "x-attribsPrefix": {
             "aria-label": undefined,
             "class": undefined,
           },
         },
         "type": "tag",
-        "x-attribsNamespace": Object {
+        "x-attribsNamespace": {
           "class": undefined,
         },
-        "x-attribsPrefix": Object {
+        "x-attribsPrefix": {
           "class": undefined,
         },
       },
@@ -3431,7 +3431,7 @@ LoadedCheerio {
     "namespace": "http://www.w3.org/1999/xhtml",
     "next": null,
     "parent": Node {
-      "children": Array [
+      "children": [
         [Circular],
       ],
       "name": "root",
@@ -3442,60 +3442,60 @@ LoadedCheerio {
     },
     "prev": null,
     "type": "tag",
-    "x-attribsNamespace": Object {},
-    "x-attribsPrefix": Object {},
+    "x-attribsNamespace": {},
+    "x-attribsPrefix": {},
   },
   "_root": LoadedCheerio {
     "0": Node {
-      "children": Array [
+      "children": [
         Node {
-          "attribs": Object {},
-          "children": Array [
+          "attribs": {},
+          "children": [
             Node {
-              "attribs": Object {},
-              "children": Array [],
+              "attribs": {},
+              "children": [],
               "name": "head",
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Node {
-                "attribs": Object {},
-                "children": Array [],
+                "attribs": {},
+                "children": [],
                 "name": "body",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": null,
                 "parent": [Circular],
                 "prev": [Circular],
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
               "parent": [Circular],
               "prev": null,
               "type": "tag",
-              "x-attribsNamespace": Object {},
-              "x-attribsPrefix": Object {},
+              "x-attribsNamespace": {},
+              "x-attribsPrefix": {},
             },
             Node {
-              "attribs": Object {},
-              "children": Array [],
+              "attribs": {},
+              "children": [],
               "name": "body",
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": null,
               "parent": [Circular],
               "prev": Node {
-                "attribs": Object {},
-                "children": Array [],
+                "attribs": {},
+                "children": [],
                 "name": "head",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": [Circular],
                 "parent": [Circular],
                 "prev": null,
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
               "type": "tag",
-              "x-attribsNamespace": Object {},
-              "x-attribsPrefix": Object {},
+              "x-attribsNamespace": {},
+              "x-attribsPrefix": {},
             },
           ],
           "name": "html",
@@ -3504,8 +3504,8 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": null,
           "type": "tag",
-          "x-attribsNamespace": Object {},
-          "x-attribsPrefix": Object {},
+          "x-attribsNamespace": {},
+          "x-attribsPrefix": {},
         },
       ],
       "name": "root",
@@ -3517,13 +3517,13 @@ LoadedCheerio {
     },
     "_root": [Circular],
     "length": 1,
-    "options": Object {
+    "options": {
       "decodeEntities": true,
       "xml": false,
     },
   },
   "length": 1,
-  "options": Object {
+  "options": {
     "decodeEntities": true,
     "xml": false,
   },
@@ -3533,14 +3533,14 @@ LoadedCheerio {
 exports[`Toolbar With renderAddons should render the toolbar with addon icon 3`] = `
 LoadedCheerio {
   "0": Node {
-    "attribs": Object {
+    "attribs": {
       "aria-label": "Example addon",
       "class": "security--button--icon security--toolbar__button",
       "type": "button",
     },
-    "children": Array [
+    "children": [
       Node {
-        "attribs": Object {
+        "attribs": {
           "aria-hidden": "true",
           "class": "security--icon security--toolbar__icon",
           "fill": "currentColor",
@@ -3552,74 +3552,74 @@ LoadedCheerio {
           "width": "20",
           "xmlns": "http://www.w3.org/2000/svg",
         },
-        "children": Array [
+        "children": [
           Node {
-            "attribs": Object {
+            "attribs": {
               "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
             },
-            "children": Array [],
+            "children": [],
             "name": "path",
             "namespace": "http://www.w3.org/2000/svg",
             "next": Node {
-              "attribs": Object {
+              "attribs": {
                 "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
               },
-              "children": Array [],
+              "children": [],
               "name": "path",
               "namespace": "http://www.w3.org/2000/svg",
               "next": null,
               "parent": [Circular],
               "prev": [Circular],
               "type": "tag",
-              "x-attribsNamespace": Object {
+              "x-attribsNamespace": {
                 "d": undefined,
               },
-              "x-attribsPrefix": Object {
+              "x-attribsPrefix": {
                 "d": undefined,
               },
             },
             "parent": [Circular],
             "prev": null,
             "type": "tag",
-            "x-attribsNamespace": Object {
+            "x-attribsNamespace": {
               "d": undefined,
             },
-            "x-attribsPrefix": Object {
+            "x-attribsPrefix": {
               "d": undefined,
             },
           },
           Node {
-            "attribs": Object {
+            "attribs": {
               "d": "M16,22a6,6,0,1,1,6-6A6,6,0,0,1,16,22Zm0-10a4,4,0,1,0,4,4A4,4,0,0,0,16,12Z",
             },
-            "children": Array [],
+            "children": [],
             "name": "path",
             "namespace": "http://www.w3.org/2000/svg",
             "next": null,
             "parent": [Circular],
             "prev": Node {
-              "attribs": Object {
+              "attribs": {
                 "d": "M29,26H3a1,1,0,0,1-1-1V8A1,1,0,0,1,3,7H9.46l1.71-2.55A1,1,0,0,1,12,4h8a1,1,0,0,1,.83.45L22.54,7H29a1,1,0,0,1,1,1V25A1,1,0,0,1,29,26ZM4,24H28V9H22a1,1,0,0,1-.83-.45L19.46,6H12.54L10.83,8.55A1,1,0,0,1,10,9H4Z",
               },
-              "children": Array [],
+              "children": [],
               "name": "path",
               "namespace": "http://www.w3.org/2000/svg",
               "next": [Circular],
               "parent": [Circular],
               "prev": null,
               "type": "tag",
-              "x-attribsNamespace": Object {
+              "x-attribsNamespace": {
                 "d": undefined,
               },
-              "x-attribsPrefix": Object {
+              "x-attribsPrefix": {
                 "d": undefined,
               },
             },
             "type": "tag",
-            "x-attribsNamespace": Object {
+            "x-attribsNamespace": {
               "d": undefined,
             },
-            "x-attribsPrefix": Object {
+            "x-attribsPrefix": {
               "d": undefined,
             },
           },
@@ -3630,7 +3630,7 @@ LoadedCheerio {
         "parent": [Circular],
         "prev": null,
         "type": "tag",
-        "x-attribsNamespace": Object {
+        "x-attribsNamespace": {
           "aria-hidden": undefined,
           "class": undefined,
           "fill": undefined,
@@ -3642,7 +3642,7 @@ LoadedCheerio {
           "width": undefined,
           "xmlns": "http://www.w3.org/2000/xmlns/",
         },
-        "x-attribsPrefix": Object {
+        "x-attribsPrefix": {
           "aria-hidden": undefined,
           "class": undefined,
           "fill": undefined,
@@ -3660,7 +3660,7 @@ LoadedCheerio {
     "namespace": "http://www.w3.org/1999/xhtml",
     "next": null,
     "parent": Node {
-      "children": Array [
+      "children": [
         [Circular],
       ],
       "name": "root",
@@ -3671,12 +3671,12 @@ LoadedCheerio {
     },
     "prev": null,
     "type": "tag",
-    "x-attribsNamespace": Object {
+    "x-attribsNamespace": {
       "aria-label": undefined,
       "class": undefined,
       "type": undefined,
     },
-    "x-attribsPrefix": Object {
+    "x-attribsPrefix": {
       "aria-label": undefined,
       "class": undefined,
       "type": undefined,
@@ -3684,55 +3684,55 @@ LoadedCheerio {
   },
   "_root": LoadedCheerio {
     "0": Node {
-      "children": Array [
+      "children": [
         Node {
-          "attribs": Object {},
-          "children": Array [
+          "attribs": {},
+          "children": [
             Node {
-              "attribs": Object {},
-              "children": Array [],
+              "attribs": {},
+              "children": [],
               "name": "head",
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Node {
-                "attribs": Object {},
-                "children": Array [],
+                "attribs": {},
+                "children": [],
                 "name": "body",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": null,
                 "parent": [Circular],
                 "prev": [Circular],
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
               "parent": [Circular],
               "prev": null,
               "type": "tag",
-              "x-attribsNamespace": Object {},
-              "x-attribsPrefix": Object {},
+              "x-attribsNamespace": {},
+              "x-attribsPrefix": {},
             },
             Node {
-              "attribs": Object {},
-              "children": Array [],
+              "attribs": {},
+              "children": [],
               "name": "body",
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": null,
               "parent": [Circular],
               "prev": Node {
-                "attribs": Object {},
-                "children": Array [],
+                "attribs": {},
+                "children": [],
                 "name": "head",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": [Circular],
                 "parent": [Circular],
                 "prev": null,
                 "type": "tag",
-                "x-attribsNamespace": Object {},
-                "x-attribsPrefix": Object {},
+                "x-attribsNamespace": {},
+                "x-attribsPrefix": {},
               },
               "type": "tag",
-              "x-attribsNamespace": Object {},
-              "x-attribsPrefix": Object {},
+              "x-attribsNamespace": {},
+              "x-attribsPrefix": {},
             },
           ],
           "name": "html",
@@ -3741,8 +3741,8 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": null,
           "type": "tag",
-          "x-attribsNamespace": Object {},
-          "x-attribsPrefix": Object {},
+          "x-attribsNamespace": {},
+          "x-attribsPrefix": {},
         },
       ],
       "name": "root",
@@ -3754,13 +3754,13 @@ LoadedCheerio {
     },
     "_root": [Circular],
     "length": 1,
-    "options": Object {
+    "options": {
       "decodeEntities": true,
       "xml": false,
     },
   },
   "length": 1,
-  "options": Object {
+  "options": {
     "decodeEntities": true,
     "xml": false,
   },

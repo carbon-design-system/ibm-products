@@ -19670,6 +19670,10 @@ li.bx--accordion__item--disabled:last-of-type {
   background-color: transparent;
 }
 
+.bx--multi-select:not(.bx--list-box--expanded) .bx--list-box__menu {
+  visibility: hidden;
+}
+
 .security--search-bar {
   display: flex;
 }

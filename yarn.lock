@@ -1744,8 +1744,8 @@ __metadata:
   peerDependencies:
     "@carbon/grid": ^10.43.1
     "@carbon/icons-react": ^10.49.0
-    carbon-components: ^10.58.0
-    carbon-components-react: ^7.59.0
+    carbon-components: ^10.58.1
+    carbon-components-react: ^7.59.1
     prop-types: ^15.8.1
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
@@ -1806,8 +1806,8 @@ __metadata:
     "@storybook/theming": ^6.5.12
     babel-loader: ^8.2.5
     babel-preset-ibm-cloud-cognitive: ^0.14.19
-    carbon-components: ^10.58.0
-    carbon-components-react: ^7.59.0
+    carbon-components: ^10.58.1
+    carbon-components-react: ^7.59.1
     carbon-icons: ^7.0.7
     css-loader: ^6.7.1
     fast-sass-loader: ^2.0.1
@@ -1864,8 +1864,8 @@ __metadata:
     "@carbon/motion": ^10.29.0
     "@carbon/themes": ^10.55.0
     "@carbon/type": ^10.45.0
-    carbon-components: ^10.58.0
-    carbon-components-react: ^7.59.0
+    carbon-components: ^10.58.1
+    carbon-components-react: ^7.59.1
     carbon-icons: ^7.0.7
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
@@ -1889,8 +1889,8 @@ __metadata:
     "@carbon/type": 10.45.0
     babel-plugin-macros: ^3.1.0
     babel-preset-ibm-cloud-cognitive: ^0.14.19
-    carbon-components: 10.58.0
-    carbon-components-react: 7.59.0
+    carbon-components: 10.58.1
+    carbon-components-react: 7.59.1
     carbon-icons: 7.0.7
     classnames: ^2.3.2
     clean-css-cli: ^5.6.1
@@ -9226,40 +9226,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components-react@npm:7.59.0":
-  version: 7.59.0
-  resolution: "carbon-components-react@npm:7.59.0"
-  dependencies:
-    "@babel/runtime": ^7.16.7
-    "@carbon/feature-flags": ^0.7.0
-    "@carbon/icons-react": ^10.49.0
-    "@carbon/layout": ^10.37.0
-    "@carbon/telemetry": 0.1.0
-    classnames: 2.3.1
-    copy-to-clipboard: ^3.3.1
-    downshift: 5.2.1
-    flatpickr: 4.6.9
-    invariant: ^2.2.3
-    lodash.debounce: ^4.0.8
-    lodash.findlast: ^4.5.0
-    lodash.isequal: ^4.5.0
-    lodash.omit: ^4.5.0
-    lodash.throttle: ^4.1.1
-    prop-types: ^15.7.2
-    react-is: ^17.0.2
-    use-resize-observer: ^6.0.0
-    wicg-inert: ^3.1.1
-    window-or-global: ^1.0.1
-  peerDependencies:
-    carbon-components: ^10.30.0
-    carbon-icons: ^7.0.7
-    react: ^16.8.6 || ^17.0.1
-    react-dom: ^16.8.6 || ^17.0.1
-  checksum: 7762d139dfa7a9ab7186f4c3d91381ba0cdc1299b6ee202233e7f67603900e4878e86a43d9a7e6bef37e1861c2124b0c4c3c20230c74853cbae3114902ecba79
-  languageName: node
-  linkType: hard
-
-"carbon-components-react@npm:^7.59.0":
+"carbon-components-react@npm:7.59.1, carbon-components-react@npm:^7.59.1":
   version: 7.59.1
   resolution: "carbon-components-react@npm:7.59.1"
   dependencies:
@@ -9292,15 +9259,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components@npm:10.58.0":
-  version: 10.58.0
-  resolution: "carbon-components@npm:10.58.0"
+"carbon-components@npm:10.58.1, carbon-components@npm:^10.58.1":
+  version: 10.58.1
+  resolution: "carbon-components@npm:10.58.1"
   dependencies:
     "@carbon/telemetry": 0.1.0
     flatpickr: 4.6.1
     lodash.debounce: ^4.0.8
     warning: ^3.0.0
-  checksum: 25dbc8c50908db559cfde297d458fdb4c31aa376bd94339b2d16191751c3e2f736689a180368f6727275e45c45260b9c6b8a71ebe3bb63816b995dffbe50a861
+  checksum: 23934961e1ba38517c35e07f4ebf479101bf65e99cb222977df62d19b4e858dba43f5f5f197f30a4ca840f6d1de7d2a8078d730e4a361aba1ca5b5454465f42c
   languageName: node
   linkType: hard
 

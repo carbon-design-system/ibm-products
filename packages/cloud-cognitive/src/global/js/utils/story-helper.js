@@ -36,8 +36,14 @@ export const getStoryTitle = (componentName) => {
  * @param {string} scenario The scenario name, also as a slug.
  * @returns The story id.
  */
-export const getStoryId = (componentName, scenario) =>
-  `${sanitize(getStoryTitle(componentName))}--${scenario}`;
+export const getStoryId = (componentName, scenario, subdirectory) => {
+  if (subdirectory) {
+    return `${sanitize(getStoryTitle(componentName))}-${sanitize(
+      subdirectory
+    )}--${scenario}`;
+  }
+  return `${sanitize(getStoryTitle(componentName))}--${scenario}`;
+};
 
 /**
  * A helper function to prepare storybook stories for export. This function

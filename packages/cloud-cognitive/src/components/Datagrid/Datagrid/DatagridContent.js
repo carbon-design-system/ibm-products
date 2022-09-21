@@ -10,6 +10,7 @@ import { pkg } from '../../../settings';
 import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 import { useClickOutside } from '../../../global/js/hooks';
+import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
 
 const { TableContainer, Table } = DataTable;
 
@@ -35,8 +36,9 @@ export const DatagridContent = ({ datagridState }) => {
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
-  const { gridActive } = state;
+  const { gridActive, editId } = state;
   const gridAreaRef = useRef();
+  const multiKeyTrackingRef = useRef();
 
   useClickOutside(gridAreaRef, (target) => {
     if (!withInlineEdit) {
@@ -52,6 +54,47 @@ export const DatagridContent = ({ datagridState }) => {
       return;
     }
     dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS', payload: activeCellId });
+  });
+
+  const renderTable = () => {
+    return (
+      <Table
+        {...getTableProps()}
+        className={cx(
+          withVirtualScroll ? '' : `${blockClass}__table-simple`,
+          `${blockClass}__vertical-align-${verticalAlign}`,
+          { [`${blockClass}__variable-row-height`]: variableRowHeight },
+          { [`${blockClass}__table-with-inline-edit`]: withInlineEdit },
+          { [`${blockClass}__table-grid-active`]: gridActive },
+          getTableProps()?.className
+        )}
+        role={withInlineEdit && 'grid'}
+        tabIndex={withInlineEdit && 0}
+        onKeyDown={
+          withInlineEdit
+            ? (event) =>
+                handleGridKeyPress({
+                  event,
+                  dispatch,
+                  state,
+                  instance: datagridState,
+                  keysPressedList,
+                  usingMac,
+                })
+            : null
+        }
+        onFocus={withInlineEdit ? () => handleGridFocus(state, dispatch) : null}
+      >
+        <DatagridHead {...datagridState} />
+        <DatagridBody {...datagridState} rows={rows} />
+      </Table>
+    );
+  };
+
+  const { keysPressedList, usingMac } = useMultipleKeyTracking({
+    ref: withInlineEdit ? multiKeyTrackingRef : null,
+    containerHasFocus: gridActive,
+    isEditing: !!editId,
   });
 
   return (
@@ -75,31 +118,11 @@ export const DatagridContent = ({ datagridState }) => {
               {leftPanel.panelContent}
             </div>
           )}
-          <Table
-            {...getTableProps()}
-            className={cx(
-              withVirtualScroll ? '' : `${blockClass}__table-simple`,
-              `${blockClass}__vertical-align-${verticalAlign}`,
-              { [`${blockClass}__variable-row-height`]: variableRowHeight },
-              { [`${blockClass}__table-with-inline-edit`]: withInlineEdit },
-              { [`${blockClass}__table-grid-active`]: gridActive },
-              getTableProps()?.className
-            )}
-            role={withInlineEdit && 'grid'}
-            tabIndex={withInlineEdit && 0}
-            onKeyDown={
-              withInlineEdit
-                ? (event) =>
-                    handleGridKeyPress(event, dispatch, state, datagridState)
-                : null
-            }
-            onFocus={
-              withInlineEdit ? () => handleGridFocus(state, dispatch) : null
-            }
-          >
-            <DatagridHead {...datagridState} />
-            <DatagridBody {...datagridState} rows={rows} />
-          </Table>
+          {withInlineEdit ? (
+            <div ref={multiKeyTrackingRef}>{renderTable()}</div>
+          ) : (
+            renderTable()
+          )}
         </div>
       </TableContainer>
       {rows?.length > 0 &&
@@ -117,7 +140,10 @@ DatagridContent.propTypes = {
   datagridState: PropTypes.shape({
     getTableProps: PropTypes.func,
     withVirtualScroll: PropTypes.bool,
-    DatagridPagination: PropTypes.element,
+    DatagridPagination: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+    ]),
     CustomizeColumnsModal: PropTypes.element,
     isFetching: PropTypes.bool,
     leftPanel: PropTypes.object,

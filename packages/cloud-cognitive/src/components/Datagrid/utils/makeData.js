@@ -43,6 +43,26 @@ export const range = (len) => {
   return arr;
 };
 
+const renderStatusIcon = (statusChance) => {
+  const iconProps = {
+    size: 'sm',
+    theme: 'light',
+    kind:
+      statusChance > 0.66
+        ? 'critical'
+        : statusChance > 0.33
+        ? 'minor-warning'
+        : 'normal',
+    iconDescription:
+      statusChance > 0.66
+        ? 'Critical'
+        : statusChance > 0.33
+        ? 'Minor warning'
+        : 'Normal',
+  };
+  return <StatusIcon {...iconProps} />;
+};
+
 const newPerson = () => {
   const statusChance = Math.random();
   const initialChartTypeIndex = getRandomInteger(0, 2);
@@ -96,29 +116,7 @@ const newPerson = () => {
         ? yesterdayDate
         : twoDaysAgoDate,
     bonus: `$\r${getRandomInteger(100, 500, 2)}`,
-    status_icon:
-      statusChance > 0.66 ? (
-        <StatusIcon
-          kind="critical"
-          size="sm"
-          theme="light"
-          iconDescription="Critical"
-        />
-      ) : statusChance > 0.33 ? (
-        <StatusIcon
-          kind="minor-warning"
-          size="sm"
-          theme="light"
-          iconDescription="Minor warning"
-        />
-      ) : (
-        <StatusIcon
-          kind="normal"
-          size="sm"
-          theme="light"
-          iconDescription="Normal"
-        />
-      ),
+    status_icon: renderStatusIcon(statusChance),
   };
 };
 

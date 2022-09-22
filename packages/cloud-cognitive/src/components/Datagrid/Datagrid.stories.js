@@ -19,17 +19,13 @@ import {
   Datagrid,
   useDatagrid,
   useInfiniteScroll,
-  useNestedRows,
-  useExpandedRow,
   useRowIsMouseOver,
   useSelectRows,
   useOnRowClick,
   useSortableColumns,
-  useColumnRightAlign,
   useDisableSelectRows,
   useCustomizeColumns,
   useSelectAllWithToggle,
-  useColumnCenterAlign,
   useStickyColumn,
   useActionsColumn,
   useColumnOrder,
@@ -272,70 +268,6 @@ export const WithPagination = () => {
 
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
-export const NestedRows = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10, 5, 2, 2));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useNestedRows
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-export const ExpandedRow = () => {
-  const expansionRenderer = ({ row }) => <div>Content for {row.id}</div>;
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      ExpandedRowContentComponent: expansionRenderer,
-      expandedContentHeight: 95,
-    },
-    useExpandedRow
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-export const NestedTable = () => {
-  const [data] = useState(makeData(20));
-  const nestedColumns = React.useMemo(() => [...defaultHeader], []);
-  nestedColumns[0] = {
-    Header: 'Row #',
-    accessor: (row, i) => i,
-    sticky: 'left',
-  };
-  const nestedDatagridState = useDatagrid({
-    columns: nestedColumns,
-    data,
-    initialState: { pageSize: 10 },
-    DatagridPagination,
-  });
-
-  const expansionRenderer = () => (
-    <div className="carbon-nested-table">
-      <Datagrid datagridState={{ ...nestedDatagridState }} />
-    </div>
-  );
-
-  const columns = React.useMemo(() => defaultHeader, []);
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      ExpandedRowContentComponent: expansionRenderer,
-      expandedContentHeight: (nestedDatagridState.state.pageSize + 2) * 48 + 1, // +2 for header and pagination
-    },
-    useExpandedRow
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
 
 export const ClickableRow = () => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -535,66 +467,6 @@ export const SortableColumns = () => {
       data,
     },
     useSortableColumns
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-export const RightAlignedColumns = () => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader.slice(0, 3),
-      {
-        Header: 'Age',
-        accessor: 'age',
-        rightAlignedColumn: true,
-      },
-      {
-        Header: 'Visits',
-        accessor: 'visits',
-        rightAlignedColumn: true,
-      },
-    ],
-    []
-  );
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useColumnRightAlign
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-export const CenterAlignedColumns = () => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader.slice(0, 3),
-      {
-        Header: 'Age',
-        accessor: 'age',
-        centerAlignedColumn: true,
-      },
-
-      {
-        Header: 'Visit',
-        accessor: 'visits',
-        centerAlignedColumn: true,
-      },
-    ],
-    []
-  );
-
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useColumnCenterAlign
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -890,49 +762,6 @@ export const DisableSelectRow = () => {
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-NestedRows.story = {
-  parameters: {
-    notes: `## Sample usage
-    Data should look like this:
-
-    \`\`\`json
-    [
-      {
-        "name": "test 0", "subRows": [
-          {
-            "name": "test 0.0", "subRows": [
-              {
-                "name": "test 0.0.0"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "test 1"
-      }
-    ]
-    \`\`\`
-    <br />
-
-    \`\`\`js
-    const datagridState = useDatagrid(
-      {
-        columns,
-        data,
-      },
-      useRowExpander,
-      useNestedRows,
-    );
-    \`\`\`
-    <br />
-    \`\`\`html
-    <Datagrid {...datagridState} />
-    \`\`\`
-    `,
-  },
 };
 
 const makeDataWithTwoLines = (length) =>

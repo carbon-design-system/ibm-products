@@ -49,15 +49,51 @@ export const DatagridContent = ({ datagridState }) => {
     // and swapped out with an input, i.e. text, number, selection, or date picker
     if (
       target.closest(`.${blockClass}__inline-edit-button`) ||
-      target.closest(`.${blockClass}__inline-edit--select`)
+      target.closest(`.${blockClass}__inline-edit--select`) ||
+      target.closest(`.${blockClass}__row-size-button`)
     ) {
       return;
     }
     dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS', payload: activeCellId });
   });
 
+  const renderTable = () => {
+    return (
+      <Table
+        {...getTableProps()}
+        className={cx(
+          withVirtualScroll ? '' : `${blockClass}__table-simple`,
+          `${blockClass}__vertical-align-${verticalAlign}`,
+          { [`${blockClass}__variable-row-height`]: variableRowHeight },
+          { [`${blockClass}__table-with-inline-edit`]: withInlineEdit },
+          { [`${blockClass}__table-grid-active`]: gridActive },
+          getTableProps()?.className
+        )}
+        role={withInlineEdit && 'grid'}
+        tabIndex={withInlineEdit && 0}
+        onKeyDown={
+          withInlineEdit
+            ? (event) =>
+                handleGridKeyPress({
+                  event,
+                  dispatch,
+                  state,
+                  instance: datagridState,
+                  keysPressedList,
+                  usingMac,
+                })
+            : null
+        }
+        onFocus={withInlineEdit ? () => handleGridFocus(state, dispatch) : null}
+      >
+        <DatagridHead {...datagridState} />
+        <DatagridBody {...datagridState} rows={rows} />
+      </Table>
+    );
+  };
+
   const { keysPressedList, usingMac } = useMultipleKeyTracking({
-    ref: multiKeyTrackingRef,
+    ref: withInlineEdit ? multiKeyTrackingRef : null,
     containerHasFocus: gridActive,
     isEditing: !!editId,
   });
@@ -83,40 +119,11 @@ export const DatagridContent = ({ datagridState }) => {
               {leftPanel.panelContent}
             </div>
           )}
-          <div ref={multiKeyTrackingRef}>
-            <Table
-              {...getTableProps()}
-              className={cx(
-                withVirtualScroll ? '' : `${blockClass}__table-simple`,
-                `${blockClass}__vertical-align-${verticalAlign}`,
-                { [`${blockClass}__variable-row-height`]: variableRowHeight },
-                { [`${blockClass}__table-with-inline-edit`]: withInlineEdit },
-                { [`${blockClass}__table-grid-active`]: gridActive },
-                getTableProps()?.className
-              )}
-              role={withInlineEdit && 'grid'}
-              tabIndex={withInlineEdit && 0}
-              onKeyDown={
-                withInlineEdit
-                  ? (event) =>
-                      handleGridKeyPress({
-                        event,
-                        dispatch,
-                        state,
-                        instance: datagridState,
-                        keysPressedList,
-                        usingMac,
-                      })
-                  : null
-              }
-              onFocus={
-                withInlineEdit ? () => handleGridFocus(state, dispatch) : null
-              }
-            >
-              <DatagridHead {...datagridState} />
-              <DatagridBody {...datagridState} rows={rows} />
-            </Table>
-          </div>
+          {withInlineEdit ? (
+            <div ref={multiKeyTrackingRef}>{renderTable()}</div>
+          ) : (
+            renderTable()
+          )}
         </div>
       </TableContainer>
       {rows?.length > 0 &&

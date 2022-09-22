@@ -44,7 +44,7 @@ export const useMultipleKeyTracking = ({
   }, []);
 
   useEffect(() => {
-    if (containerHasFocus && !isEditing) {
+    if (ref && containerHasFocus && !isEditing) {
       ref.current.onkeydown = ref.current.onkeyup = (event) => {
         // If keydown, we will add the new key to the keysPressedList array
         if (event.type === 'keydown') {
@@ -89,7 +89,7 @@ export const useMultipleKeyTracking = ({
     }
     // Remove handlers if the spreadsheet container loses focus
     // or is currently in edit mode
-    if (!containerHasFocus || isEditing) {
+    if ((ref && !containerHasFocus) || isEditing) {
       ref.current.onkeydown = undefined;
       ref.current.onkeyup = undefined;
       if (!previousState?.isEditing && isEditing) {

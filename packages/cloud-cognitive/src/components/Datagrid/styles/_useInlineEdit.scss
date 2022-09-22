@@ -94,6 +94,7 @@ $row-heights: (
   cursor: pointer;
   outline: 0; // handled by active class
   .#{variables.$block-class}__label-icon {
+    height: $spacing-05;
     padding-right: $spacing-05;
   }
   &.#{variables.$block-class}__inline-edit-button--non-edit {
@@ -227,4 +228,12 @@ $row-heights: (
   padding-right: $spacing-07;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.#{variables.$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  .#{variables.$block-class}__carbon-row-hover-active
+  td {
+  border-top-color: $layer-hover;
+  background-color: $layer-hover;
 }

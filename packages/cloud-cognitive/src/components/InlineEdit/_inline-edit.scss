@@ -105,10 +105,8 @@
       overflow: hidden;
       // positions text and placeholder including when showing placeholder
       // NOTE: Using flex does strange things to a caret in content editable
-      width: calc(100% - var(--#{$block-class}--toolbar-width) - $spacing-05);
-      max-width: calc(
-        100% - var(--#{$block-class}--toolbar-width) - $spacing-05
-      );
+      width: calc(100% - var(--#{$block-class}--toolbar-width) - #{$spacing-05});
+      max-width: calc(100% - var(--#{$block-class}--toolbar-width) - #{$spacing-05});
       min-height: var(--#{$block-class}--size);
       /* stylelint-disable-next-line carbon/layout-token-use */
       margin-right: var(--#{$block-class}--toolbar-width);

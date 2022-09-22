@@ -6,11 +6,13 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 // @flow
-import React from 'react';
+import React, { useContext } from 'react';
 import { DataTable, SkeletonText } from 'carbon-components-react';
 import { selectionColumnId } from '../common-column-ids';
 import cx from 'classnames';
 import { pkg, carbon } from '../../../settings';
+import { InlineEditContext } from './addons/InlineEdit/InlineEditContext/InlineEditContext';
+import { getCellIdAsObject } from './addons/InlineEdit/InlineEditContext/getCellIdAsObject';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -19,11 +21,16 @@ const { TableRow, TableCell } = DataTable;
 // eslint-disable-next-line react/prop-types
 const DatagridRow = (datagridState) => {
   const { row } = datagridState;
+  const { state } = useContext(InlineEditContext);
+  const { activeCellId } = state;
+  const activeCellObject = activeCellId && getCellIdAsObject(activeCellId);
   return (
     <TableRow
       className={cx(`${blockClass}__carbon-row`, {
         [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
         [`${carbon.prefix}--data-table--selected`]: row.isSelected,
+        [`${blockClass}__carbon-row-hover-active`]:
+          activeCellObject && row.index === activeCellObject.row,
       })}
       {...row.getRowProps()}
       key={row.id}

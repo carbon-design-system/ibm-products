@@ -26,7 +26,7 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
-import { Link } from 'carbon-components-react';
+import { Link } from '@carbon/react';
 import { pkg } from '../../../../settings';
 import cx from 'classnames';
 import { SidePanel } from '../../../SidePanel';

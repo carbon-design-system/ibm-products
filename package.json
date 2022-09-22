@@ -150,9 +150,15 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,md,mdx,scss}": "yarn lint:prettier:files",
-    "**/*.js": "yarn lint:es:files",
-    "**/*.scss": "yarn lint:style:files",
+    "**/*.{js,md,mdx,scss}": [
+      "yarn prettier --write"
+    ],
+    "**/*.js": [
+      "yarn eslint --fix"
+    ],
+    "**/*.scss": [
+      "yarn stylelint"
+    ],
     "**/*": "yarn spellcheck:files"
   },
   "dependencies": {

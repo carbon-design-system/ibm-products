@@ -23,11 +23,9 @@ import {
   useSelectRows,
   useOnRowClick,
   useSortableColumns,
-  useColumnRightAlign,
   useDisableSelectRows,
   useCustomizeColumns,
   useSelectAllWithToggle,
-  useColumnCenterAlign,
   useStickyColumn,
   useActionsColumn,
   useColumnOrder,
@@ -469,66 +467,6 @@ export const SortableColumns = () => {
       data,
     },
     useSortableColumns
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-export const RightAlignedColumns = () => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader.slice(0, 3),
-      {
-        Header: 'Age',
-        accessor: 'age',
-        rightAlignedColumn: true,
-      },
-      {
-        Header: 'Visits',
-        accessor: 'visits',
-        rightAlignedColumn: true,
-      },
-    ],
-    []
-  );
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useColumnRightAlign
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-export const CenterAlignedColumns = () => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader.slice(0, 3),
-      {
-        Header: 'Age',
-        accessor: 'age',
-        centerAlignedColumn: true,
-      },
-
-      {
-        Header: 'Visit',
-        accessor: 'visits',
-        centerAlignedColumn: true,
-      },
-    ],
-    []
-  );
-
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useColumnCenterAlign
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;

@@ -50,6 +50,7 @@ const s = [
               'c/Datagrid/Extensions/RowActionButtons',
               'c/Datagrid/Extensions/ExpandableRow',
               'c/Datagrid/Extensions/NestedRows',
+              'c/Datagrid/Extensions/ColumnAlignment',
             ],
           },
         ],

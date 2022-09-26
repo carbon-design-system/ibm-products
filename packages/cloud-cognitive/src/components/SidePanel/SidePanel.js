@@ -22,12 +22,12 @@ import wrapFocus from '../../global/js/utils/wrapFocus';
 import { pkg } from '../../settings';
 import { SIDE_PANEL_SIZES } from './constants';
 import { usePreviousValue } from '../../global/js/hooks';
-import { DURATIONS, EASINGS } from '../../global/js/utils/motionConstants';
 
 // Carbon and package components we use.
 import { Button } from 'carbon-components-react';
 import { Close20, ArrowLeft20 } from '@carbon/icons-react';
 import { ActionSet } from '../ActionSet';
+import { overlayVariants, panelVariants } from './motion/variants';
 
 const blockClass = `${pkg.prefix}--side-panel`;
 const componentName = 'SidePanel';
@@ -707,23 +707,11 @@ export let SidePanel = React.forwardRef(
               aria-label={title}
               onAnimationComplete={onAnimationEnd}
               onAnimationStart={(event) => onAnimationStart(event)}
-              initial={{
-                x: placement === 'right' ? '100%' : -320,
-              }}
-              animate={{
-                x: 0,
-                transition: {
-                  duration: DURATIONS.moderate02,
-                  ease: EASINGS.productive.standard,
-                },
-              }}
-              exit={{
-                x: placement === 'right' ? '100%' : -320,
-                transition: {
-                  duration: DURATIONS.moderate01,
-                  ease: EASINGS.productive.exit,
-                },
-              }}
+              variants={panelVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              custom={placement}
             >
               <span
                 ref={startTrapRef}
@@ -764,19 +752,10 @@ export let SidePanel = React.forwardRef(
             <AnimatePresence>
               {includeOverlay && (
                 <motion.div
-                  initial={{
-                    opacity: 0,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    transition: {
-                      duration: DURATIONS.moderate02,
-                      ease: EASINGS.productive.standard,
-                    },
-                  }}
-                  exit={{
-                    opacity: 0,
-                  }}
+                  variants={overlayVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
                   ref={sidePanelOverlayRef}
                   className={`${blockClass}__overlay`}
                 />

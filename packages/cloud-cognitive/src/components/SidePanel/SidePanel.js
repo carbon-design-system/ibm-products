@@ -7,6 +7,7 @@
 
 // Import portions of React that are needed.
 import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -26,6 +27,7 @@ import { usePreviousValue } from '../../global/js/hooks';
 import { Button } from '@carbon/react';
 import { Close, ArrowLeft } from '@carbon/icons-react';
 import { ActionSet } from '../ActionSet';
+import { overlayVariants, panelVariants } from './motion/variants';
 
 const blockClass = `${pkg.prefix}--side-panel`;
 const componentName = 'SidePanel';
@@ -79,7 +81,6 @@ export let SidePanel = React.forwardRef(
     },
     ref
   ) => {
-    const [shouldRender, setRender] = useState(open);
     const [animationComplete, setAnimationComplete] = useState(false);
     const [panelHeight, setPanelHeight] = useState(0);
     const sidePanelRef = useRef();
@@ -112,7 +113,7 @@ export let SidePanel = React.forwardRef(
         // height css custom property
         if (previousState?.size !== size) {
           scrollableSection.scrollTop = 0;
-          sidePanelOuter.style.setProperty(
+          sidePanelOuter?.style?.setProperty(
             `--${blockClass}--title-container-height`,
             `${Number(initialTitleHeight)}px`
           );
@@ -150,7 +151,7 @@ export let SidePanel = React.forwardRef(
         const actionsContainer = getActionsContainerElement();
         let actionsHeight = actionsContainer?.offsetHeight + 16; // add additional 1rem spacing to bottom padding
         actionsHeight = `${Math.round(actionsHeight / 16)}rem`;
-        sidePanelOuter?.style.setProperty(
+        sidePanelOuter?.style?.setProperty(
           `--${blockClass}--content-bottom-padding`,
           actionsHeight
         );
@@ -172,9 +173,9 @@ export let SidePanel = React.forwardRef(
       setPanelHeight(height);
       const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
       const actionsContainer = getActionsContainerElement();
-      let actionsHeight = actionsContainer.offsetHeight + 16; // add additional 1rem spacing to bottom padding
+      let actionsHeight = actionsContainer?.offsetHeight + 16; // add additional 1rem spacing to bottom padding
       actionsHeight = `${Math.round(actionsHeight / 16)}rem`;
-      sidePanelOuter.style.setProperty(
+      sidePanelOuter?.style?.setProperty(
         `--${blockClass}--content-bottom-padding`,
         actionsHeight
       );
@@ -368,7 +369,7 @@ export let SidePanel = React.forwardRef(
             }
           });
       }
-      if (open && shouldRender && !animateTitle) {
+      if (open && !animateTitle) {
         const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
         const sidePanelTitleElement = document.querySelector(
           `.${blockClass}__title-container .${blockClass}__title-text`
@@ -407,7 +408,6 @@ export let SidePanel = React.forwardRef(
       open,
       animateTitle,
       animationComplete,
-      shouldRender,
       panelHeight,
       title,
       size,
@@ -448,18 +448,10 @@ export let SidePanel = React.forwardRef(
       onUnmount,
     ]);
 
-    // initialize the side panel to open
-    useEffect(() => {
-      if (open) {
-        setRender(true);
-      }
-    }, [open]);
-
     // initializes the side panel to close
     const onAnimationEnd = () => {
       if (!open) {
         onUnmount?.();
-        setRender(false);
       }
       setAnimationComplete(true);
     };
@@ -473,12 +465,8 @@ export let SidePanel = React.forwardRef(
     }, [reducedMotion.matches]);
 
     // initializes the side panel to open
-    const onAnimationStart = (event) => {
-      event.persist();
-      const isPanelTarget = event.target.id === `${blockClass}-outer`;
-      if (isPanelTarget) {
-        setAnimationComplete(false);
-      }
+    const onAnimationStart = () => {
+      setAnimationComplete(false);
     };
 
     // used to reset margins of the slide in panel when closed/closing
@@ -495,14 +483,13 @@ export let SidePanel = React.forwardRef(
 
     useEffect(() => {
       if (!open && previousState?.open && reducedMotion.matches) {
-        setRender(false);
         onUnmount?.();
       }
     }, [open, onUnmount, reducedMotion.matches, previousState?.open]);
 
     // used to set margins of content for slide in panel version
     useEffect(() => {
-      if (shouldRender && slideIn) {
+      if (open && slideIn) {
         const pageContentElement = document.querySelector(selectorPageContent);
         if (placement && placement === 'right' && pageContentElement) {
           pageContentElement.style.marginRight = 0;
@@ -522,9 +509,9 @@ export let SidePanel = React.forwardRef(
       slideIn,
       selectorPageContent,
       placement,
-      shouldRender,
       size,
       reducedMotion.matches,
+      open,
     ]);
 
     // adds focus trap functionality
@@ -706,86 +693,77 @@ export let SidePanel = React.forwardRef(
     });
 
     return (
-      shouldRender && (
-        <>
-          <div
-            {...getDevtoolsProps(componentName)}
-            {...rest}
-            id={`${blockClass}-outer`}
-            className={mainPanelClassNames}
-            style={{
-              animation: !reducedMotion.matches
-                ? `${
-                    open
-                      ? placement === 'right'
-                        ? `side-panel-entrance-right ${moderate02}`
-                        : `side-panel-entrance-left ${moderate02}`
-                      : placement === 'right'
-                      ? `side-panel-exit-right ${moderate02}`
-                      : `side-panel-exit-left ${moderate02}`
-                  }`
-                : null,
-            }}
-            onAnimationEnd={onAnimationEnd}
-            onAnimationStart={(event) => onAnimationStart(event)}
-            onBlur={handleBlur}
-            ref={contentRef}
-            role="complementary"
-            aria-label={title}
-          >
-            <span
-              ref={startTrapRef}
-              tabIndex="0"
-              role="link"
-              className={`${blockClass}__visually-hidden`}
+      <AnimatePresence>
+        {open && (
+          <>
+            <motion.div
+              {...getDevtoolsProps(componentName)}
+              {...rest}
+              id={`${blockClass}-outer`}
+              className={mainPanelClassNames}
+              onBlur={handleBlur}
+              ref={contentRef}
+              role="complementary"
+              aria-label={title}
+              onAnimationComplete={onAnimationEnd}
+              onAnimationStart={(event) => onAnimationStart(event)}
+              variants={panelVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              custom={placement}
             >
-              Focus sentinel
-            </span>
-            {!animateTitle && renderHeader()}
-            <div
-              ref={sidePanelInnerRef}
-              className={cx(`${blockClass}__inner-content`, {
-                [`${blockClass}__static-inner-content`]: !animateTitle,
-                [`${blockClass}__static-inner-content-no-actions`]:
-                  !animateTitle && !actions?.length,
-                [`${blockClass}__inner-content-with-actions`]:
-                  actions && actions.length,
-              })}
-            >
-              {animateTitle && renderHeader()}
-              <div className={`${blockClass}__body-content`}>{children}</div>
-              <ActionSet
-                actions={actions}
-                className={primaryActionContainerClassNames}
-                size={size === 'xs' ? 'sm' : size}
-              />
-            </div>
-            <span
-              ref={endTrapRef}
-              tabIndex="0"
-              role="link"
-              className={`${blockClass}__visually-hidden`}
-            >
-              Focus sentinel
-            </span>
-          </div>
-          {includeOverlay && (
-            <div
-              ref={sidePanelOverlayRef}
-              className={`${blockClass}__overlay`}
-              style={{
-                animation: !reducedMotion.matches
-                  ? `${
-                      open
-                        ? `side-panel-overlay-entrance ${moderate02}`
-                        : `side-panel-overlay-exit ${moderate02}`
-                    }`
-                  : null,
-              }}
-            />
-          )}
-        </>
-      )
+              <span
+                ref={startTrapRef}
+                tabIndex="0"
+                role="link"
+                className={`${blockClass}__visually-hidden`}
+              >
+                Focus sentinel
+              </span>
+              {!animateTitle && renderHeader()}
+              <div
+                ref={sidePanelInnerRef}
+                className={cx(`${blockClass}__inner-content`, {
+                  [`${blockClass}__static-inner-content`]: !animateTitle,
+                  [`${blockClass}__static-inner-content-no-actions`]:
+                    !animateTitle && !actions?.length,
+                  [`${blockClass}__inner-content-with-actions`]:
+                    actions && actions.length,
+                })}
+              >
+                {animateTitle && renderHeader()}
+                <div className={`${blockClass}__body-content`}>{children}</div>
+                <ActionSet
+                  actions={actions}
+                  className={primaryActionContainerClassNames}
+                  size={size === 'xs' ? 'sm' : size}
+                />
+              </div>
+              <span
+                ref={endTrapRef}
+                tabIndex="0"
+                role="link"
+                className={`${blockClass}__visually-hidden`}
+              >
+                Focus sentinel
+              </span>
+            </motion.div>
+            <AnimatePresence>
+              {includeOverlay && (
+                <motion.div
+                  variants={overlayVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  ref={sidePanelOverlayRef}
+                  className={`${blockClass}__overlay`}
+                />
+              )}
+            </AnimatePresence>
+          </>
+        )}
+      </AnimatePresence>
     );
   }
 );

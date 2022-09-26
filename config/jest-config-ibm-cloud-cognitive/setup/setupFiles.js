@@ -19,7 +19,7 @@ global.__DEV__ = true;
 global.requestAnimationFrame = function requestAnimationFrame(callback) {
   // TODO: replace with async version
   // setTimeout(callback);
-  callback();
+  // callback();
 };
 
 const enzyme = jest.requireActual('enzyme');

@@ -114,6 +114,7 @@ export const InlineEditCell = ({
   }, [previousState, cellId, cellValue, activeCellId]);
 
   const handleInlineCellClick = () => {
+    console.log('click', cellId);
     if (!inEditMode) {
       dispatch({
         type: 'ENTER_EDIT_MODE',
@@ -137,10 +138,10 @@ export const InlineEditCell = ({
   useEffect(() => {
     if (inEditMode) {
       if (type === 'text') {
-        textInputRef.current.focus();
+        textInputRef?.current?.focus();
       }
       if (type === 'number') {
-        numberInputRef.current.focus();
+        numberInputRef?.current?.focus();
       }
     }
   }, [inEditMode, type]);

@@ -32,6 +32,7 @@ const inlineEditReducer = (state, action) => {
       };
     }
     case 'ENTER_EDIT_MODE': {
+      console.log('ENTER_EDIT_MODE', action.payload);
       return {
         ...state,
         activeCellId: action.payload.activeCellId,

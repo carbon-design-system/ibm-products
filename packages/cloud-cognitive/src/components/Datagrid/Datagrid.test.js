@@ -11,9 +11,10 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
 import { makeData } from './utils/makeData';
 
-import { carbon } from '../../settings';
+import { carbon, pkg } from '../../settings';
 import { expectWarn } from '../../global/js/utils/test-helper';
 import { Datagrid } from '.';
+import { getInlineEditColumns } from './utils/getInlineEditColumns';
 
 import {
   useInfiniteScroll,
@@ -30,6 +31,7 @@ import {
   useActionsColumn,
   useColumnOrder,
   useColumnRightAlign,
+  useInlineEdit,
 } from '.';
 
 import {
@@ -872,25 +874,29 @@ beforeAll(() => {
   });
 });
 
+const { ResizeObserver } = window;
+
+beforeEach(() => {
+  jest.spyOn(global.console, 'error').mockImplementation(() => {});
+  //This will suppress the warning about Arrows16 Component (will be removed in the next major version of @carbon/icons-react).
+  jest.spyOn(global.console, 'warn').mockImplementation(() => {});
+  jest.useFakeTimers();
+  jest.spyOn(global, 'setTimeout');
+  //@ts-ignore
+  delete window.ResizeObserver;
+  window.ResizeObserver = jest.fn().mockImplementation(() => ({
+    observe: jest.fn(),
+    unobserve: jest.fn(),
+    disconnect: jest.fn(),
+  }));
+});
+
+afterEach(() => {
+  window.ResizeObserver = ResizeObserver;
+  jest.restoreAllMocks();
+});
+
 describe(componentName, () => {
-  beforeEach(() => {
-    jest.spyOn(global.console, 'error').mockImplementation(() => {});
-    //This will suppress the warning about Arrows16 Component (will be removed in the next major version of @carbon/icons-react).
-    jest.spyOn(global.console, 'warn').mockImplementation(() => {});
-    jest.useFakeTimers();
-    jest.spyOn(global, 'setTimeout');
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-  });
-
-  afterEach(() => {
-    jest.restoreAllMocks();
-    window.ResizeObserver = ResizeObserver;
-  });
-
   it('renders a basic data grid component with devTools attribute', () => {
     render(<BasicUsage data-testid={dataTestId} />);
 
@@ -2580,4 +2586,77 @@ describe(componentName, () => {
       'Clicked [retire] on row:'
     );
   });
+});
+
+const testLabelText = 'Test label text';
+const DatagridInlineEditExample = () => {
+  const [data, setData] = useState(makeData(10));
+  const newInlineEditCols = getInlineEditColumns();
+  newInlineEditCols.splice(1, 1, {
+    Header: 'First Name',
+    accessor: 'firstName',
+    inlineEdit: {
+      type: 'text',
+      inputProps: {
+        labelText: testLabelText,
+      }, // These props are passed to the Carbon component used for inline editing
+    },
+  });
+  const columns = React.useMemo(() => newInlineEditCols, [newInlineEditCols]);
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      onDataUpdate: setData,
+      DatagridActions,
+    },
+    useInlineEdit
+  );
+  return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
+const blockClass = `${pkg.prefix}--datagrid`;
+it.only('should render an inline edit data grid and edit a cell', () => {
+  // const newEditValue = 'this value was updated via inline editing';
+  const { click, type } = userEvent;
+  const { container } = render(<DatagridInlineEditExample />);
+
+  // Get the first cell that supports inline edit
+  const firstInlineEditCell = container.querySelector(
+    `[data-cell-id="column-0-row-0"]`
+  );
+  const firstColumnCell = container.querySelector(
+    `[data-cell-id="column-1-row-0"]`
+  );
+  console.log(firstInlineEditCell);
+
+  // Click the cell to enter edit mode
+  click(firstInlineEditCell);
+  type(firstInlineEditCell, '{arrowright}'); // cspell:disable-line
+  type(document.activeElement.parentElement, '{enter}');
+  console.log(firstColumnCell.firstChild);
+  // Expect first child of `firstInlineEditCell` to be TextInput component
+  expect(firstColumnCell.firstChild).toHaveClass(
+    `${carbon.prefix}--text-input-wrapper`
+  );
+  const editInput =
+    firstColumnCell.firstChild.querySelector('input[type="text"]');
+  const outerCellButton = editInput.closest(
+    `.${blockClass}__inline-edit--outer-cell-button`
+  );
+  console.log(outerCellButton);
+  console.log(editInput.value, editInput.value.length);
+
+  editInput.focus();
+  editInput.setSelectionRange(0, editInput.value.length);
+  console.log(
+    editInput.value,
+    editInput.selectionStart,
+    editInput.selectionEnd
+  );
+  type(editInput, 'test');
+  type(outerCellButton, '{enter}');
+  console.log(editInput.value);
+  // Expect to find the labelText passed in from the inputProps object via column data
+  // screen.getByLabelText(testLabelText);
 });

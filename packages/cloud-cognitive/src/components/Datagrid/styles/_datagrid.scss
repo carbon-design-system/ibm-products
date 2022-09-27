@@ -528,3 +528,7 @@
   border: 2px solid $inverse-link;
   outline: 0;
 }
+
+.#{$block-class} .#{$block-class}__table-key-tracking-wrapper {
+  width: 100%;
+}

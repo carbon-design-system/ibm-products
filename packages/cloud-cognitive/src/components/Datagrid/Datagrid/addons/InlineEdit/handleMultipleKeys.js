@@ -75,4 +75,9 @@ export const handleMultipleKeys = ({
       }, 250);
     }
   }
+  // Shift + Tab
+  // This should remove the active grid state
+  if (keysPressedList.includes('Shift') && keysPressedList.includes('Tab')) {
+    dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS', payload: activeCellId });
+  }
 };

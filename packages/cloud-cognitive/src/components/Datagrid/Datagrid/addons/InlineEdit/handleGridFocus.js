@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const handleGridFocus = (state, dispatch, event) => {
-  console.log(event.target);
+export const handleGridFocus = (state, dispatch) => {
   const { gridActive, previousActiveCellId } = state;
   if (!gridActive) {
     // Initialize grid active state

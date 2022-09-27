@@ -15,7 +15,6 @@ export const InlineEditContext = createContext();
 const inlineEditReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_GRID_ACTIVE_FOCUS': {
-      console.log('ADD_GRID_ACTIVE_FOCUS');
       return {
         ...state,
         gridActive: true,
@@ -24,7 +23,6 @@ const inlineEditReducer = (state, action) => {
       };
     }
     case 'REMOVE_GRID_ACTIVE_FOCUS': {
-      console.log('REMOVE_GRID_ACTIVE_FOCUS');
       return {
         ...state,
         gridActive: false,

@@ -70,13 +70,17 @@
   }
 
   .#{$block-class}__heading {
+    overflow: hidden;
     grid-column: 2;
   }
 
   .#{$block-class}__title {
     @include carbon--type-style('productive-heading-01');
 
+    overflow: hidden;
     color: $text-01;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .#{$block-class}__summary {

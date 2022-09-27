@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.32.0...@carbon/ibm-products@1.32.1) (2022-09-27)
+
+
+### Bug Fixes
+
+* **Data Grid:** review feedback fix ([#2282](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2282)) ([690a7c6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/690a7c64ea8b506fbc2ccc18c546332deea05226))
+* **Datagrid:** allow row settings menu to work with inline edit ([#2299](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2299)) ([e840378](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e840378246ad9179c03c7b1110c59d8f30d03bec))
+* **Datagrid:** allow sticky columns to stick again ([#2281](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2281)) ([66b0b14](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/66b0b142297bb0844de1d4ddaf7811221be554bb))
+* **Datagrid:** row size drop down alignment ([#2288](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2288)) ([00b6a4a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/00b6a4af6e394bae502b8af24d553b111d3ee23a))
+* inline edit newline fix ([#2298](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2298)) ([0dbcbdf](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0dbcbdf2b9f1530a9efa6075159cdbbed5c13a08))
+* update option title trucation issue ([#2313](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2313)) ([73d6059](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/73d605946ac19e4ec965b07223ec93c84b1f39f9))
+* update to Carbon v10 compatible versions to latest ([#2276](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2276)) ([c35a363](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c35a3630ecb0dd60d920e57d81bd8f6e84aae008))
+
+
+
+
+
 # [1.32.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.31.0...@carbon/ibm-products@1.32.0) (2022-09-20)
 
 

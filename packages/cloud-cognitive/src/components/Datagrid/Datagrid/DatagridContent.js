@@ -88,7 +88,11 @@ export const DatagridContent = ({ datagridState }) => {
                 })
             : null
         }
-        onFocus={withInlineEdit ? () => handleGridFocus(state, dispatch) : null}
+        onFocus={
+          withInlineEdit
+            ? (event) => handleGridFocus(state, dispatch, event)
+            : null
+        }
       >
         <DatagridHead {...datagridState} />
         <DatagridBody {...datagridState} rows={rows} />
@@ -101,6 +105,8 @@ export const DatagridContent = ({ datagridState }) => {
     containerHasFocus: gridActive,
     isEditing: !!editId,
   });
+
+  console.log(keysPressedList);
 
   // Provides a width for the region outline for useInlineEdit
   useEffect(() => {

@@ -63,6 +63,24 @@ const renderStatusIcon = (statusChance) => {
   return <StatusIcon {...iconProps} />;
 };
 
+const renderDocLink = (statusChance) => {
+  const docLinkObj = {
+    href:
+      statusChance > 0.66
+        ? 'http://carbondesignsystem.com/'
+        : statusChance > 0.33
+        ? 'https://pages.github.ibm.com/cdai-design/pal/'
+        : 'http://carbon-for-ibm-products.netlify.app/',
+    text:
+      statusChance > 0.66
+        ? 'Carbon Design System'
+        : statusChance > 0.33
+        ? 'Carbon for IBM Products PAL'
+        : 'Carbon for IBM Products storybook',
+  };
+  return docLinkObj;
+};
+
 const newPerson = () => {
   const statusChance = Math.random();
   const initialChartTypeIndex = getRandomInteger(0, 2);
@@ -117,6 +135,7 @@ const newPerson = () => {
         : twoDaysAgoDate,
     bonus: `$\r${getRandomInteger(100, 500, 2)}`,
     status_icon: renderStatusIcon(statusChance),
+    doc_link: renderDocLink(statusChance),
   };
 };
 

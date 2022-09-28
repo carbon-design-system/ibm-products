@@ -42,7 +42,12 @@ export const getInlineEditColumns = () => {
       accessor: 'firstName',
       inlineEdit: {
         type: 'text',
-        inputProps: {}, // These props are passed to the Carbon component used for inline editing
+        // required for including validation, this is used to set the invalid prop internally
+        validator: (n) => n.length > 40,
+        // These props are passed to the Carbon component used for inline editing
+        inputProps: {
+          invalidText: 'Invalid text, character count must be less than 40',
+        },
       },
     },
     {
@@ -50,7 +55,12 @@ export const getInlineEditColumns = () => {
       accessor: 'lastName',
       inlineEdit: {
         type: 'text',
-        inputProps: {}, // These props are passed to the Carbon component used for inline editing
+        // required for including validation, this is used to set the invalid prop internally
+        validator: (n) => n.length > 40,
+        // These props are passed to the Carbon component used for inline editing
+        inputProps: {
+          invalidText: 'Invalid text, character count must be less than 40',
+        },
       },
     },
     {
@@ -58,8 +68,13 @@ export const getInlineEditColumns = () => {
       accessor: 'age',
       width: 120,
       inlineEdit: {
+        // required for including validation, this is used to set the invalid prop internally
+        validator: (n) => n && n < 18,
         type: 'number',
-        inputProps: {}, // These props are passed to the Carbon component used for inline editing
+        // These props are passed to the Carbon component used for inline editing
+        inputProps: {
+          invalidText: 'Invalid number, must be 18 or greater',
+        },
       },
     },
     {

@@ -7,7 +7,7 @@
  */
 
 import React, { useState } from 'react';
-import { Add16, Edit16, TrashCan16, Checkmark16 } from '@carbon/icons-react';
+import { Add, Edit, TrashCan, Checkmark } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
@@ -136,14 +136,14 @@ const sharedDatagridProps = {
     {
       id: 'edit',
       itemText: 'Edit',
-      icon: Edit16,
+      icon: Edit,
       onClick: action('Clicked row action: edit'),
     },
 
     {
       id: 'delete',
       itemText: 'Delete',
-      icon: TrashCan16,
+      icon: TrashCan,
       isDelete: true,
       onClick: action('Clicked row action: delete'),
     },
@@ -221,19 +221,19 @@ const manyRowActionButtonsProps = {
     {
       id: 'edit',
       itemText: 'Edit',
-      icon: Edit16,
+      icon: Edit,
       onClick: action('Clicked row action: edit'),
     },
     {
       id: 'approve',
       itemText: 'Approve',
-      icon: Checkmark16,
+      icon: Checkmark,
       onClick: action('Clicked row action: approve'),
     },
     {
       id: 'delete',
       itemText: 'Delete',
-      icon: TrashCan16,
+      icon: TrashCan,
       isDelete: true,
       hasDivider: true,
       onClick: action('Clicked row action: delete'),
@@ -299,33 +299,33 @@ const getBatchActions = () => {
   return [
     {
       label: 'Duplicate',
-      renderIcon: Add16,
+      renderIcon: Add,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Add',
-      renderIcon: Add16,
+      renderIcon: Add,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Select all',
-      renderIcon: Add16,
+      renderIcon: Add,
       onClick: action('Clicked batch action button'),
       type: 'select_all',
     },
     {
       label: 'Publish to catalog',
-      renderIcon: Add16,
+      renderIcon: Add,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Download',
-      renderIcon: Add16,
+      renderIcon: Add,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Delete',
-      renderIcon: Add16,
+      renderIcon: Add,
       onClick: action('Clicked batch action button'),
       hasDivider: true,
       kind: 'danger',

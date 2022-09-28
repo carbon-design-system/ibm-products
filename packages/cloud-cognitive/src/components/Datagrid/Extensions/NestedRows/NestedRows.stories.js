@@ -7,7 +7,7 @@
  */
 
 import React, { useState } from 'react';
-import { Edit16, TrashCan16 } from '@carbon/icons-react';
+import { Edit, TrashCan } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
@@ -129,14 +129,14 @@ const sharedDatagridProps = {
     {
       id: 'edit',
       itemText: 'Edit',
-      icon: Edit16,
+      icon: Edit,
       onClick: action('Clicked row action: edit'),
     },
 
     {
       id: 'delete',
       itemText: 'Delete',
-      icon: TrashCan16,
+      icon: TrashCan,
       isDelete: true,
       onClick: action('Clicked row action: delete'),
     },

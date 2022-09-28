@@ -216,8 +216,14 @@ $row-heights: (
   background-color: $hover-ui;
 }
 
-.#{$block-class} [data-invalid] ~ .#{$carbon-prefix}--form-requirement,
-.#{$block-class} [data-invalid] .#{$carbon-prefix}--form-requirement {
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  [data-invalid]
+  ~ .#{$carbon-prefix}--form-requirement,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  [data-invalid]
+  .#{$carbon-prefix}--form-requirement {
   position: absolute;
   z-index: 1;
   top: calc(100% - #{$spacing-01});
@@ -230,24 +236,35 @@ $row-heights: (
 }
 
 .#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
   .#{$carbon-prefix}--list-box[data-invalid]:focus-within
   ~ .#{$carbon-prefix}--form-requirement {
   outline: $spacing-01 solid $focus;
 }
 
-.#{$block-class} .#{$carbon-prefix}--list-box__invalid-icon,
-.#{$block-class} .#{$carbon-prefix}--text-input__invalid-icon,
-.#{$block-class} .#{$carbon-prefix}--number__invalid {
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--list-box__invalid-icon,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--text-input__invalid-icon,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--number__invalid {
   z-index: 2;
   top: calc(100% + #{$spacing-04} + #{$spacing-01});
   right: $spacing-03;
 }
 
-.#{$block-class} .#{$carbon-prefix}--number__invalid {
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--number__invalid {
   top: calc(100% + #{$spacing-02} + #{$spacing-01});
 }
 
-.#{$block-class} .#{$carbon-prefix}--form-requirement::before {
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--form-requirement::before {
   position: absolute;
   top: 0;
   left: $spacing-01;
@@ -257,7 +274,9 @@ $row-heights: (
   content: '';
 }
 
-.#{$block-class} .#{$carbon-prefix}--form-requirement::after {
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--form-requirement::after {
   position: absolute;
   top: $spacing-01;
   left: $spacing-03;
@@ -268,10 +287,12 @@ $row-heights: (
 }
 
 .#{$block-class} tbody tr:hover {
-  .#{$carbon-prefix}--form-requirement::before {
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+    .#{$carbon-prefix}--form-requirement::before {
     background-color: $ui-03;
   }
-  .#{$carbon-prefix}--form-requirement::after {
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+    .#{$carbon-prefix}--form-requirement::after {
     background-color: transparent;
   }
 }

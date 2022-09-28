@@ -9,14 +9,14 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { ButtonSetWithOverflow } from '.';
-import { Bee16 } from '@carbon/icons-react';
+import { Bee } from '@carbon/react/icons';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
 import { carbon } from '../../settings';
 
 const buttons = (handleClick) =>
   [1, 2, 3].map((num) => ({
-    renderIcon: !(num % 3) ? Bee16 : null,
+    renderIcon: !(num % 3) ? Bee : null,
     iconDescription: !(num % 3) ? 'Busy bee' : null,
     label: `Action ${num}`,
     key: `key-${num}`,

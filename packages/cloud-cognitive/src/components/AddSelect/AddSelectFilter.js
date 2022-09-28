@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import { Button, ButtonSet, Dropdown, Search, Tag } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { Filter } from '@carbon/icons-react';
+import { Filter } from '@carbon/react/icons';
 import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--add-select__global-filter`;

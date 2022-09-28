@@ -20,7 +20,7 @@ import {
   PasswordInput,
 } from '@carbon/react';
 import cx from 'classnames';
-import { ErrorFilled, CheckmarkFilled } from '@carbon/icons-react';
+import { ErrorFilled, CheckmarkFilled } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';

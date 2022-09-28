@@ -8,7 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { Bee, Lightning } from '@carbon/icons-react';
+import { Bee, Lightning } from '@carbon/react/icons';
 
 import {
   getStoryTitle,

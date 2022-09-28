@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { PageHeader as CCPageHeader } from '../../../../../cloud-cognitive/src';
-import { Lightning, Bee } from '@carbon/icons-react';
+import { Lightning, Bee } from '@carbon/react/icons';
 
 const PageHeader = (props) => {
   const content = (

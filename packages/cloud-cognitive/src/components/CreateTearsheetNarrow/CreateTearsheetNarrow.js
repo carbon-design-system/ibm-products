@@ -190,7 +190,7 @@ CreateTearsheetNarrow.propTypes = {
   /**
    * The main title of the tearsheet, displayed in the header area.
    */
-  title: PropTypes.node.isRequired,
+  title: PropTypes.node,
 
   /**
    * The position of the top of tearsheet in the viewport. The 'normal'

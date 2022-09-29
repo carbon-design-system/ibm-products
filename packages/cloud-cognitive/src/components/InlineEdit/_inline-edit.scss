@@ -105,9 +105,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
     overflow: hidden;
     // positions text and placeholder including when showing placeholder
     // NOTE: Using flex does strange things to a caret in content editable
-    width: calc(
-      100% - var(--#{$block-class}--toolbar-width) - #{$spacing-05}
-    );
+    width: calc(100% - var(--#{$block-class}--toolbar-width) - #{$spacing-05});
     max-width: calc(
       100% - var(--#{$block-class}--toolbar-width) - #{$spacing-05}
     );

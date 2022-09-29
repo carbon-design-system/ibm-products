@@ -7,7 +7,7 @@
  */
 import React from 'react';
 import { Button } from '@carbon/react';
-import { ArrowUp, ArrowDown, ArrowsVertical } from '@carbon/icons-react';
+import { ArrowUp, ArrowDown, ArrowsVertical } from '@carbon/react/icons';
 
 const ordering = {
   ASC: 'ASC',

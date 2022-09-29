@@ -37,7 +37,7 @@ import {
   Security,
   Settings,
   VolumeMute,
-} from '@carbon/icons-react';
+} from '@carbon/react/icons';
 import cx from 'classnames';
 
 import { ActionBarItem } from '../ActionBar';

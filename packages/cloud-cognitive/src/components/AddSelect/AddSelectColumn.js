@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Search, Tag, OverflowMenu, Checkbox, usePrefix } from '@carbon/react';
-import { Filter } from '@carbon/icons-react';
+import { Filter } from '@carbon/react/icons';
 import { pkg } from '../../settings';
 import { AddSelectList } from './AddSelectList';
 import { AddSelectSort } from './AddSelectSort';

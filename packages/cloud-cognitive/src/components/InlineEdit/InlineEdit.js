@@ -24,7 +24,7 @@ import {
   EditOff,
   Checkmark,
   WarningFilled,
-} from '@carbon/icons-react';
+} from '@carbon/react/icons';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--inline-edit`;

@@ -14,7 +14,7 @@ import cx from 'classnames';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Close, Help } from '@carbon/icons-react';
+import { Close, Help } from '@carbon/react/icons';
 import { Button, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { moderate02 } from '@carbon/motion';
 import { useWebTerminal } from './hooks';

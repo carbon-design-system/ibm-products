@@ -1,6 +1,6 @@
 import React, { isValidElement } from 'react';
 import PropTypes from 'prop-types';
-import { Close } from '@carbon/icons-react';
+import { Close } from '@carbon/react/icons';
 import { Button } from '@carbon/react';
 import { pkg } from '../../settings';
 

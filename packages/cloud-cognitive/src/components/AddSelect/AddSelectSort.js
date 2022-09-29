@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { OverflowMenu, OverflowMenuItem } from '@carbon/react';
-import { ArrowsVertical, ArrowUp, ArrowDown } from '@carbon/icons-react';
+import { ArrowsVertical, ArrowUp, ArrowDown } from '@carbon/react/icons';
 import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--add-select-sort`;

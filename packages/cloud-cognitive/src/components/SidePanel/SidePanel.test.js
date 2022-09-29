@@ -15,7 +15,7 @@ import { TextInput } from '@carbon/react';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { SidePanel } from '.';
-import { Add } from '@carbon/icons-react';
+import { Add } from '@carbon/react/icons';
 
 const { prefix } = pkg;
 

@@ -6,7 +6,7 @@
 //
 
 import React, { useState, forwardRef } from 'react';
-import { Add } from '@carbon/icons-react';
+import { Add } from '@carbon/react/icons';
 import {
   ComposedModal,
   ModalHeader,

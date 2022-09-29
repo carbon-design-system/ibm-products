@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ChevronDown, ChevronUp } from '@carbon/icons-react';
+import { ChevronDown, ChevronUp } from '@carbon/react/icons';
 
 import { Button, OverflowMenuItem, OverflowMenu } from '@carbon/react';
 

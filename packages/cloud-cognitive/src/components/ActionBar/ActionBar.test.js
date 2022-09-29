@@ -8,7 +8,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ActionBar } from '.';
-import { Lightning, Bee } from '@carbon/icons-react';
+import { Lightning, Bee } from '@carbon/react/icons';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
 import { pkg, carbon } from '../../settings';

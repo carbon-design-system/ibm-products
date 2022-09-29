@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { ProductiveCard as CCProductiveCard } from '../../../../../cloud-cognitive/src';
-import { TrashCan, Edit } from '@carbon/icons-react';
+import { TrashCan, Edit } from '@carbon/react/icons';
 import { StatusIcon } from '../../../../../cloud-cognitive/src';
 import { Column, Grid } from '@carbon/react';
 

@@ -13,7 +13,7 @@ import { getInlineEditColumns } from './utils/getInlineEditColumns';
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
 import { action } from '@storybook/addon-actions';
-import { Activity, Add } from '@carbon/icons-react';
+import { Activity, Add } from '@carbon/react/icons';
 import { DataTable } from '@carbon/react';
 import {
   Datagrid,
@@ -21,7 +21,6 @@ import {
   useInfiniteScroll,
   useRowIsMouseOver,
   useSelectRows,
-  useOnRowClick,
   useSortableColumns,
   useDisableSelectRows,
   useCustomizeColumns,
@@ -41,10 +40,8 @@ import {
 import mdx from './Datagrid.mdx';
 
 import { pkg } from '../../settings';
-import cx from 'classnames';
 
 import styles from './_storybook-styles.scss';
-import { SidePanel } from '../SidePanel';
 import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
@@ -262,45 +259,6 @@ export const WithPagination = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-export const ClickableRow = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const [openSidePanel, setOpenSidePanel] = useState(false);
-  const [rowData, setRowData] = useState({});
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      onRowClick: (row) => {
-        setOpenSidePanel(true);
-        setRowData(row);
-      },
-    },
-    useOnRowClick
-  );
-  return (
-    <div
-      className={cx(
-        openSidePanel
-          ? `page-content-wrapper side-panel-open`
-          : 'page-content-wrapper'
-      )}
-    >
-      <Datagrid datagridState={{ ...datagridState }} />
-      <SidePanel
-        selectorPageContent={true && '.page-content-wrapper'} // Only if SlideIn
-        open={openSidePanel}
-        onRequestClose={() => setOpenSidePanel(false)}
-        size={'sm'}
-        title={'Title'}
-        slideIn
-      >
-        <DataTableSidePanelContent rowData={rowData && rowData.original} />
-      </SidePanel>
-    </div>
-  );
-};
-
 export const InlineEdit = () => {
   const [data, setData] = useState(makeData(10));
   const columns = React.useMemo(() => getInlineEditColumns(), []);
@@ -314,54 +272,6 @@ export const InlineEdit = () => {
     useInlineEdit
   );
   return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-const DataTableSidePanelContent = (selectedRowValues) => {
-  const { rowData } = selectedRowValues;
-
-  const SidePanelSectionContent = ({ rowData, columns, sectionTitle }) => {
-    const finalData = columns.map((item) => Object.entries(rowData)[item]);
-    return (
-      <div className={`${blockClass}__side-panel-sections`}>
-        <h5 className={`${blockClass}__side-panel-section-header`}>
-          {sectionTitle}
-        </h5>
-        {finalData.map(([label, value], index) => {
-          return (
-            <div
-              key={index}
-              className={`${blockClass}__side-panel-section-inner`}
-            >
-              <div className={`${blockClass}__side-panel-label-text`}>
-                {label} :
-              </div>
-              <div className={`${blockClass}__side-panel-value`}>{value}</div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
-
-  return (
-    <div className={`${blockClass}__side-panel-content`}>
-      <SidePanelSectionContent
-        sectionTitle="Section title"
-        rowData={rowData && rowData}
-        columns={[0]}
-      />
-      <SidePanelSectionContent
-        sectionTitle="Personal details"
-        rowData={rowData && rowData}
-        columns={[1, 2, 3, 4]}
-      />
-      <SidePanelSectionContent
-        sectionTitle="Section title"
-        rowData={rowData && rowData}
-        columns={[5, 6, 7, 8, 9, 10, 11, 12]}
-      />
-    </div>
-  );
 };
 
 export const IsHoverOnRow = () => {

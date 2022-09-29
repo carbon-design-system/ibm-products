@@ -7,7 +7,7 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import React from 'react';
-import { ChevronRight } from '@carbon/icons-react';
+import { ChevronRight } from '@carbon/react/icons';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 

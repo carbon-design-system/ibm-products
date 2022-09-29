@@ -2297,7 +2297,6 @@ describe(componentName, () => {
 
     const getEditInput = (colHeader) => {
       return screen.getByLabelText(colHeader);
-      // return container.querySelector();
     };
 
     const selectTextInsideOfTextInput = (inputElement) => {

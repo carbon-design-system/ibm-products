@@ -81,7 +81,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
       )}
       title={titleText}
     >
-      {titleInnards}
+      <h1 className={`${blockClass}__title-wrapper`}>{titleInnards}</h1>
     </div>
   );
 };

@@ -6721,6 +6721,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transform: translateY(-2px);
   vertical-align: middle;
 }
+.c4p--page-header .c4p--page-header__title-wrapper {
+  font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
+  font-weight: var(--cds-productive-heading-04-font-weight, 400);
+  line-height: var(--cds-productive-heading-04-line-height, 1.28572);
+  letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
+}
 .c4p--page-header .c4p--page-header__page-actions {
   flex: 0 0 100%;
   margin-top: 1rem;

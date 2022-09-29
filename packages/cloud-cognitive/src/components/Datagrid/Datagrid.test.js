@@ -2502,6 +2502,89 @@ describe(componentName, () => {
     expect(alertMock).toHaveBeenCalledTimes(3);
   });
 
+  const inlineEditColumns = getInlineEditColumns();
+  const DatagridInlineEditExample = () => {
+    const [data, setData] = useState(makeData(10));
+    const columns = React.useMemo(() => inlineEditColumns, []);
+    const datagridState = useDatagrid(
+      {
+        columns,
+        data,
+        onDataUpdate: setData,
+        DatagridActions,
+      },
+      useInlineEdit
+    );
+    return <Datagrid datagridState={datagridState} />;
+  };
+  it('should render an inline edit data grid and allow for editing a cell', () => {
+    // Must be less than/equal to 40 characters with the current column inline edit config,
+    // which is set from `getInlineEditColumns()`
+    const newCellValue = 'value updated via inline editing';
+    const { click, type } = userEvent;
+    const { container } = render(<DatagridInlineEditExample />);
+    const firstColumnCell = container.querySelector(
+      `[data-cell-id="column-1-row-0"]`
+    );
+    const tableElement = container.querySelector('table');
+
+    const getEditInput = (colHeader) => {
+      return screen.getByLabelText(colHeader);
+    };
+
+    const selectTextInsideOfTextInput = (inputElement) => {
+      inputElement.setSelectionRange(0, inputElement.value.length);
+    };
+
+    // Click the cell to enter edit mode
+    click(firstColumnCell);
+
+    // Carbon text input should now exist because we clicked on an inline edit cell of type text
+    const editInput = getEditInput(inlineEditColumns[1].Header); // If not labelText is provided in the inputProps obj from the column data, column.Header is used by default
+    editInput.focus();
+    expect(editInput).toHaveFocus();
+
+    // Select all text within the input so we can add a completely new value
+    selectTextInsideOfTextInput(editInput);
+
+    // Type new cell value inside of text input
+    type(editInput, newCellValue);
+    expect(editInput.value).toEqual(newCellValue);
+
+    // Exit edit mode
+    type(editInput, '{enter}');
+
+    // Component has now exited edit mode, checking non edit mode button to have new cell value
+    expect(firstColumnCell.firstElementChild.getAttribute('title')).toEqual(
+      newCellValue
+    );
+
+    // Change active cell position
+    type(tableElement, '{arrowright}');
+
+    // Enter edit mode
+    type(tableElement, '{enter}');
+
+    // Get the text input now that we are in edit mode
+    const newEditInput = getEditInput(inlineEditColumns[2].Header);
+    newEditInput.focus();
+    expect(newEditInput).toHaveFocus();
+
+    // Select text inside text input
+    selectTextInsideOfTextInput(newEditInput);
+
+    // Type the new text value into the edit input
+    const newEditInputValue = 'second update made via keyboard';
+    type(newEditInput, newEditInputValue);
+    expect(newEditInput.value).toEqual(newEditInputValue);
+
+    // Exit edit mode
+    type(newEditInput, '{enter}');
+
+    // Check that new cell value can be found within the datagrid component
+    screen.getByText(newEditInputValue);
+  });
+
   it('Sticky Actions Column', () => {
     render(
       <StickyActionsColumn data-testid={dataTestId}></StickyActionsColumn>
@@ -2580,89 +2663,5 @@ describe(componentName, () => {
     expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
       'Clicked [retire] on row:'
     );
-  });
-
-  const DatagridInlineEditExample = () => {
-    const [data, setData] = useState(makeData(10));
-    const columns = React.useMemo(() => getInlineEditColumns(), []);
-    const datagridState = useDatagrid(
-      {
-        columns,
-        data,
-        onDataUpdate: setData,
-        DatagridActions,
-      },
-      useInlineEdit
-    );
-    return <Datagrid datagridState={datagridState} />;
-  };
-
-  it.only('should render an inline edit data grid and allow for editing a cell', () => {
-    // Must be less than/equal to 40 characters with the current column inline edit config,
-    // which is set from `getInlineEditColumns()`
-    const newCellValue = 'value updated via inline editing';
-    const colData = getInlineEditColumns();
-    const { click, type } = userEvent;
-    const { container } = render(<DatagridInlineEditExample />);
-    const firstColumnCell = container.querySelector(
-      `[data-cell-id="column-1-row-0"]`
-    );
-    const tableElement = container.querySelector('table');
-
-    const getEditInput = (colHeader) => {
-      return screen.getByLabelText(colHeader);
-    };
-
-    const selectTextInsideOfTextInput = (inputElement) => {
-      inputElement.setSelectionRange(0, inputElement.value.length);
-    };
-
-    // Click the cell to enter edit mode
-    click(firstColumnCell);
-
-    // Carbon text input should now exist because we clicked on an inline edit cell of type text
-    const editInput = getEditInput(colData[1].Header); // If not labelText is provided in the inputProps obj from the column data, column.Header is used by default
-    editInput.focus();
-    expect(editInput).toHaveFocus();
-
-    // Select all text within the input so we can add a completely new value
-    selectTextInsideOfTextInput(editInput);
-
-    // Type new cell value inside of text input
-    type(editInput, newCellValue);
-    expect(editInput.value).toEqual(newCellValue);
-
-    // Exit edit mode
-    type(editInput, '{enter}');
-
-    // Component has now exited edit mode, checking non edit mode button to have new cell value
-    expect(firstColumnCell.firstElementChild.getAttribute('title')).toEqual(
-      newCellValue
-    );
-
-    // Change active cell position
-    type(tableElement, '{arrowright}');
-
-    // Enter edit mode
-    type(tableElement, '{enter}');
-
-    // Get the text input now that we are in edit mode
-    const newEditInput = getEditInput(colData[2].Header);
-    newEditInput.focus();
-    expect(newEditInput).toHaveFocus();
-
-    // Select text inside text input
-    selectTextInsideOfTextInput(newEditInput);
-
-    // Type the new text value into the edit input
-    const newEditInputValue = 'second update made via keyboard';
-    type(newEditInput, newEditInputValue);
-    expect(newEditInput.value).toEqual(newEditInputValue);
-
-    // Exit edit mode
-    type(newEditInput, '{enter}');
-
-    // Check that new cell value can be found within the datagrid component
-    screen.getByText(newEditInputValue);
   });
 });

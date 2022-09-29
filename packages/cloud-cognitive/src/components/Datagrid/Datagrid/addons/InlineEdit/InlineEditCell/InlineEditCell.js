@@ -137,10 +137,10 @@ export const InlineEditCell = ({
   useEffect(() => {
     if (inEditMode) {
       if (type === 'text') {
-        textInputRef?.current?.focus();
+        textInputRef.current.focus();
       }
       if (type === 'number') {
-        numberInputRef?.current?.focus();
+        numberInputRef.current.focus();
       }
     }
   }, [inEditMode, type]);

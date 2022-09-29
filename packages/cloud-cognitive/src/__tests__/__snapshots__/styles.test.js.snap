@@ -3555,9 +3555,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit .c4p--inline-edit__input {
   display: inline-block;
   overflow: hidden;
-  width: calc(
-      100% - var(--c4p--inline-edit--toolbar-width) - 1rem
-    );
+  width: calc(100% - var(--c4p--inline-edit--toolbar-width) - 1rem);
   max-width: calc(
       100% - var(--c4p--inline-edit--toolbar-width) - 1rem
     );

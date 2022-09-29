@@ -38,7 +38,7 @@ $row-heights: (
   .#{$block-class}
     .#{$block-class}__inline-edit--outer-cell-button--#{$size}
     .#{$carbon-prefix}--number__control-btn::after {
-    height: calc($size-value - 0.25rem);
+    height: calc(#{$size-value} - 0.25rem);
   }
   .#{$block-class}
     .#{$block-class}__inline-edit--select.#{$block-class}__inline-edit--select-#{$size}.#{$carbon-prefix}--list-box {
@@ -214,4 +214,114 @@ $row-heights: (
 .#{$carbon-prefix}--data-table .#{$block-class}__carbon-row-hover-active td {
   border-top-color: $hover-ui;
   background-color: $hover-ui;
+}
+
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  [data-invalid]
+  ~ .#{$carbon-prefix}--form-requirement,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  [data-invalid]
+  .#{$carbon-prefix}--form-requirement {
+  position: absolute;
+  z-index: 1;
+  top: calc(100% - #{$spacing-01});
+  width: 100%;
+  padding: $spacing-03 $spacing-06 $spacing-03 $spacing-03;
+  margin: 0;
+  background-color: $ui-01;
+  outline: $spacing-01 solid $danger-02;
+  outline-offset: calc(-1 * #{$spacing-01});
+}
+
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--list-box[data-invalid]:focus-within
+  ~ .#{$carbon-prefix}--form-requirement {
+  outline: $spacing-01 solid $focus;
+}
+
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--list-box__invalid-icon,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--text-input__invalid-icon,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--number__invalid {
+  z-index: 2;
+  top: calc(100% + #{$spacing-04} + #{$spacing-01});
+  right: $spacing-03;
+}
+
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--number__invalid {
+  top: calc(100% + #{$spacing-02} + #{$spacing-01});
+}
+
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--form-requirement::before {
+  position: absolute;
+  top: 0;
+  left: $spacing-01;
+  width: calc(100% - (#{$spacing-01} * 2));
+  height: $spacing-01;
+  background-color: $ui-01;
+  content: '';
+}
+
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--form-requirement::after {
+  position: absolute;
+  top: $spacing-01;
+  left: $spacing-03;
+  width: calc(100% - (#{$spacing-03} * 2));
+  height: 1px;
+  background-color: $ui-03;
+  content: '';
+}
+
+.#{$block-class} tbody tr:hover {
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+    .#{$carbon-prefix}--form-requirement::before {
+    background-color: $ui-03;
+  }
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+    .#{$carbon-prefix}--form-requirement::after {
+    background-color: transparent;
+  }
+}
+
+// Keep input focus states using $support-01 when inline edit cell is invalid
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--text-input:focus,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--number
+  input[type='number']:focus,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--number
+  input[type='number']:focus
+  ~ .#{$carbon-prefix}--number__controls
+  .#{$carbon-prefix}--number__control-btn:hover,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--number__control-btn:focus {
+  outline-color: $support-01;
+}
+
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--number
+  input[type='number'][data-invalid]:focus
+  ~ .#{$carbon-prefix}--number__controls
+  .#{$carbon-prefix}--number__control-btn.up-icon::after {
+  background-color: $support-01;
 }

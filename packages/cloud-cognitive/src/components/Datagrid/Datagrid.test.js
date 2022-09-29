@@ -2598,7 +2598,7 @@ const DatagridInlineEditExample = () => {
   return <Datagrid datagridState={datagridState} />;
 };
 
-it.only('should render an inline edit data grid and allow for editing a cell', () => {
+it('should render an inline edit data grid and allow for editing a cell', () => {
   const newCellValue = 'this value was updated via inline editing';
   const colData = getInlineEditColumns();
   const { click, type } = userEvent;

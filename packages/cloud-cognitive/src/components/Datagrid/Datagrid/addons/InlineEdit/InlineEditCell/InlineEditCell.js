@@ -114,7 +114,6 @@ export const InlineEditCell = ({
   }, [previousState, cellId, cellValue, activeCellId]);
 
   const handleInlineCellClick = () => {
-    console.log('click', cellId);
     if (!inEditMode) {
       dispatch({
         type: 'ENTER_EDIT_MODE',

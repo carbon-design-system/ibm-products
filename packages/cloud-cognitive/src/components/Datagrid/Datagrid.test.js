@@ -10,9 +10,9 @@ import { render, screen, fireEvent } from '@testing-library/react'; // https://t
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
 import { makeData } from './utils/makeData';
-
 import { expectWarn } from '../../global/js/utils/test-helper';
 import { Datagrid } from '.';
+import { getInlineEditColumns } from './utils/getInlineEditColumns';
 
 import {
   useInfiniteScroll,
@@ -29,8 +29,8 @@ import {
   useActionsColumn,
   useColumnOrder,
   useColumnRightAlign,
+  useInlineEdit,
 } from '.';
-
 import {
   DataTable,
   Button,
@@ -40,12 +40,9 @@ import {
 } from '@carbon/react';
 import { Download, Restart, Filter, Activity } from '@carbon/icons-react';
 import { carbon } from '../../settings';
-
-// import { DatagridActions, DatagridBatchActions, DatagridPagination, } from './Datagrid.stories';
-
 import namor from 'namor';
-
 import userEvent from '@testing-library/user-event';
+// cspell:words arrowright
 
 const dataTestId = uuidv4();
 
@@ -870,25 +867,28 @@ beforeAll(() => {
   });
 });
 
+const { ResizeObserver } = window;
+
+beforeEach(() => {
+  jest.spyOn(global.console, 'error').mockImplementation(() => {});
+  //This will suppress the warning about Arrows16 Component (will be removed in the next major version of @carbon/icons-react).
+  jest.spyOn(global.console, 'warn').mockImplementation(() => {});
+  jest.useFakeTimers();
+  jest.spyOn(global, 'setTimeout');
+  delete window.ResizeObserver;
+  window.ResizeObserver = jest.fn().mockImplementation(() => ({
+    observe: jest.fn(),
+    unobserve: jest.fn(),
+    disconnect: jest.fn(),
+  }));
+});
+
+afterEach(() => {
+  window.ResizeObserver = ResizeObserver;
+  jest.restoreAllMocks();
+});
+
 describe(componentName, () => {
-  beforeEach(() => {
-    jest.spyOn(global.console, 'error').mockImplementation(() => {});
-    //This will suppress the warning about Arrows16 Component (will be removed in the next major version of @carbon/icons-react).
-    jest.spyOn(global.console, 'warn').mockImplementation(() => {});
-    jest.useFakeTimers();
-    jest.spyOn(global, 'setTimeout');
-    window.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
-    }));
-  });
-
-  afterEach(() => {
-    jest.restoreAllMocks();
-    window.ResizeObserver = ResizeObserver;
-  });
-
   it('renders a basic data grid component with devTools attribute', () => {
     render(<BasicUsage data-testid={dataTestId} />);
 
@@ -2268,5 +2268,88 @@ describe(componentName, () => {
     expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
       'Clicked [retire] on row:'
     );
+  });
+
+  const DatagridInlineEditExample = () => {
+    const [data, setData] = useState(makeData(10));
+    const columns = React.useMemo(() => getInlineEditColumns(), []);
+    const datagridState = useDatagrid(
+      {
+        columns,
+        data,
+        onDataUpdate: setData,
+        DatagridActions,
+      },
+      useInlineEdit
+    );
+    return <Datagrid datagridState={datagridState} />;
+  };
+
+  it('should render an inline edit data grid and allow for editing a cell', () => {
+    const newCellValue = 'value updated via inline editing';
+    const colData = getInlineEditColumns();
+    const { click, type } = userEvent;
+    const { container } = render(<DatagridInlineEditExample />);
+    const firstColumnCell = container.querySelector(
+      `[data-cell-id="column-1-row-0"]`
+    );
+    const tableElement = container.querySelector('table');
+
+    const getEditInput = (colHeader) => {
+      return screen.getByLabelText(colHeader);
+      // return container.querySelector();
+    };
+
+    const selectTextInsideOfTextInput = (inputElement) => {
+      inputElement.setSelectionRange(0, inputElement.value.length);
+    };
+
+    // Click the cell to enter edit mode
+    click(firstColumnCell);
+
+    // Carbon text input should now exist because we clicked on an inline edit cell of type text
+    const editInput = getEditInput(colData[1].Header); // If not labelText is provided in the inputProps obj from the column data, column.Header is used by default
+    editInput.focus();
+    expect(editInput).toHaveFocus();
+
+    // Select all text within the input so we can add a completely new value
+    selectTextInsideOfTextInput(editInput);
+
+    // Type new cell value inside of text input
+    type(editInput, newCellValue);
+    expect(editInput.value).toEqual(newCellValue);
+
+    // Exit edit mode
+    type(editInput, '{enter}');
+
+    // Component has now exited edit mode, checking non edit mode button to have new cell value
+    expect(firstColumnCell.firstElementChild.getAttribute('title')).toEqual(
+      newCellValue
+    );
+
+    // Change active cell position
+    type(tableElement, '{arrowright}');
+
+    // Enter edit mode
+    type(tableElement, '{enter}');
+
+    // Get the text input now that we are in edit mode
+    const newEditInput = getEditInput(colData[2].Header);
+    newEditInput.focus();
+    expect(newEditInput).toHaveFocus();
+
+    // Select text inside text input
+    selectTextInsideOfTextInput(newEditInput);
+
+    // Type the new text value into the edit input
+    const newEditInputValue = 'second update made via keyboard';
+    type(newEditInput, newEditInputValue);
+    expect(newEditInput.value).toEqual(newEditInputValue);
+
+    // Exit edit mode
+    type(newEditInput, '{enter}');
+
+    // Check that new cell value can be found within the datagrid component
+    screen.getByText(newEditInputValue);
   });
 });

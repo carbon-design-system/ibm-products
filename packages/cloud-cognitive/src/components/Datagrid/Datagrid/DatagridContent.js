@@ -119,7 +119,12 @@ export const DatagridContent = ({ datagridState }) => {
             </div>
           )}
           {withInlineEdit ? (
-            <div ref={multiKeyTrackingRef}>{renderTable()}</div>
+            <div
+              ref={multiKeyTrackingRef}
+              className={`${blockClass}__table-key-tracking-wrapper`}
+            >
+              {renderTable()}
+            </div>
           ) : (
             renderTable()
           )}

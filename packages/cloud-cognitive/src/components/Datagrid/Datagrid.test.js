@@ -2190,86 +2190,6 @@ describe(componentName, () => {
     expect(alertMock).toHaveBeenCalledTimes(3);
   });
 
-  it('Sticky Actions Column', () => {
-    render(
-      <StickyActionsColumn data-testid={dataTestId}></StickyActionsColumn>
-    );
-
-    expect(
-      screen.findByText(
-        'More details documentation check the Notes section below'
-      )
-    ).toBeDefined();
-    for (
-      var i = 0;
-      i <
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr').length;
-      i++
-    ) {
-      expect(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('tr')
-          .item(i)
-          .getElementsByTagName('td')[16].classList[0]
-      ).toEqual('c4p--datagrid__right-sticky-column-cell');
-    }
-
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[16]
-        .getElementsByClassName('c4p--datagrid__actions-column-contents')[0]
-        .getElementsByTagName('button')[0]
-    );
-
-    expect(
-      document
-        .getElementsByTagName('ul')[0]
-        .getElementsByTagName('li')[0]
-        .getElementsByTagName('button')[0].textContent
-    ).toEqual('Edit');
-    fireEvent.click(
-      document
-        .getElementsByTagName('ul')[0]
-        .getElementsByTagName('li')[0]
-        .getElementsByTagName('button')[0]
-    );
-    expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
-      'Clicked [edit] on row:'
-    );
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[16]
-        .getElementsByClassName('c4p--datagrid__actions-column-contents')[0]
-        .getElementsByTagName('button')[0]
-    );
-    expect(
-      document
-        .getElementsByTagName('ul')[0]
-        .getElementsByTagName('li')[2]
-        .getElementsByTagName('button')[0].textContent
-    ).toEqual('Retire');
-    fireEvent.click(
-      document
-        .getElementsByTagName('ul')[0]
-        .getElementsByTagName('li')[2]
-        .getElementsByTagName('button')[0]
-    );
-    expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
-      'Clicked [retire] on row:'
-    );
-  });
-
   const DatagridInlineEditExample = () => {
     const [data, setData] = useState(makeData(10));
     const columns = React.useMemo(() => getInlineEditColumns(), []);
@@ -2350,5 +2270,85 @@ describe(componentName, () => {
 
     // Check that new cell value can be found within the datagrid component
     screen.getByText(newEditInputValue);
+  });
+
+  it('Sticky Actions Column', () => {
+    render(
+      <StickyActionsColumn data-testid={dataTestId}></StickyActionsColumn>
+    );
+
+    expect(
+      screen.findByText(
+        'More details documentation check the Notes section below'
+      )
+    ).toBeDefined();
+    for (
+      var i = 0;
+      i <
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr').length;
+      i++
+    ) {
+      expect(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('tr')
+          .item(i)
+          .getElementsByTagName('td')[16].classList[0]
+      ).toEqual('c4p--datagrid__right-sticky-column-cell');
+    }
+
+    fireEvent.click(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('td')[16]
+        .getElementsByClassName('c4p--datagrid__actions-column-contents')[0]
+        .getElementsByTagName('button')[0]
+    );
+
+    expect(
+      document
+        .getElementsByTagName('ul')[0]
+        .getElementsByTagName('li')[0]
+        .getElementsByTagName('button')[0].textContent
+    ).toEqual('Edit');
+    fireEvent.click(
+      document
+        .getElementsByTagName('ul')[0]
+        .getElementsByTagName('li')[0]
+        .getElementsByTagName('button')[0]
+    );
+    expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
+      'Clicked [edit] on row:'
+    );
+    fireEvent.click(
+      screen
+        .getByRole('table')
+        .getElementsByTagName('tbody')[0]
+        .getElementsByTagName('tr')[0]
+        .getElementsByTagName('td')[16]
+        .getElementsByClassName('c4p--datagrid__actions-column-contents')[0]
+        .getElementsByTagName('button')[0]
+    );
+    expect(
+      document
+        .getElementsByTagName('ul')[0]
+        .getElementsByTagName('li')[2]
+        .getElementsByTagName('button')[0].textContent
+    ).toEqual('Retire');
+    fireEvent.click(
+      document
+        .getElementsByTagName('ul')[0]
+        .getElementsByTagName('li')[2]
+        .getElementsByTagName('button')[0]
+    );
+    expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
+      'Clicked [retire] on row:'
+    );
   });
 });

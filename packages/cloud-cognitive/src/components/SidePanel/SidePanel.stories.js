@@ -26,7 +26,7 @@ import {
   HeaderContainer,
   HeaderName,
 } from '@carbon/react';
-import { Copy, TrashCan, Settings } from '@carbon/icons-react';
+import { Copy, TrashCan, Settings } from '@carbon/react/icons';
 import {
   getStoryTitle,
   prepareStory,

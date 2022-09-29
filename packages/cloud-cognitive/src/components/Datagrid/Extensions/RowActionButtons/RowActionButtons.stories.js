@@ -7,7 +7,7 @@
  */
 
 import React, { useState } from 'react';
-import { Add, Edit, TrashCan, Checkmark } from '@carbon/icons-react';
+import { Add, Edit, TrashCan, Checkmark } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,

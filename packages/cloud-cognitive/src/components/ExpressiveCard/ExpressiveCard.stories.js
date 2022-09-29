@@ -7,7 +7,7 @@
 
 import React from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { ArrowRight, Cloud } from '@carbon/icons-react';
+import { ArrowRight, Cloud } from '@carbon/react/icons';
 import { AspectRatio, Column, Grid, usePrefix } from '@carbon/react';
 import {
   getStoryTitle,

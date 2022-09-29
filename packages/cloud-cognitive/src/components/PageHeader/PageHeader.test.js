@@ -12,7 +12,7 @@ import userEvent from '@testing-library/user-event';
 import { pkg, carbon } from '../../settings';
 
 import { Tab, Tabs, TabList } from '@carbon/react';
-import { Lightning, Bee } from '@carbon/icons-react';
+import { Lightning, Bee } from '@carbon/react/icons';
 
 import { PageHeader } from '.';
 import {

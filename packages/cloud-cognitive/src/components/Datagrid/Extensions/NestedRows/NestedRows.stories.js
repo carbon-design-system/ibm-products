@@ -7,7 +7,7 @@
  */
 
 import React, { useState } from 'react';
-import { Edit, TrashCan } from '@carbon/icons-react';
+import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,

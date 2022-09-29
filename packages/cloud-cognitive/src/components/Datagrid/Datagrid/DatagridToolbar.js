@@ -6,7 +6,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { Add, OverflowMenuVertical } from '@carbon/icons-react';
+import { Add, OverflowMenuVertical } from '@carbon/react/icons';
 import { DataTable, TableBatchActions, TableBatchAction } from '@carbon/react';
 import { useResizeDetector } from 'react-resize-detector';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';

@@ -19,7 +19,7 @@ import {
   Form,
   Button,
 } from '@carbon/react';
-import { InformationFilled, Copy, ErrorFilled } from '@carbon/icons-react';
+import { InformationFilled, Copy, ErrorFilled } from '@carbon/react/icons';
 import { APIKeyDownloader } from './APIKeyDownloader';
 import { pkg } from '../../settings';
 

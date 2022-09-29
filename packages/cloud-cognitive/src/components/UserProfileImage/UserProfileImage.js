@@ -17,7 +17,7 @@ import '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { User, Group } from '@carbon/icons-react';
+import { User, Group } from '@carbon/react/icons';
 
 import { IconButton } from '@carbon/react';
 

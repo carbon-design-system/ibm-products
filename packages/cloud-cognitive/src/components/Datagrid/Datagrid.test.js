@@ -38,7 +38,7 @@ import {
   TableBatchActions,
   TableBatchAction,
 } from '@carbon/react';
-import { Download, Restart, Filter, Activity } from '@carbon/icons-react';
+import { Download, Restart, Filter, Activity } from '@carbon/react/icons';
 import { carbon } from '../../settings';
 
 // import { DatagridActions, DatagridBatchActions, DatagridPagination, } from './Datagrid.stories';

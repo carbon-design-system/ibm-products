@@ -19,7 +19,7 @@ import mdx from './ButtonMenu.mdx';
 
 // import styles from './_storybook-styles.scss';
 
-import { Add } from '@carbon/icons-react';
+import { Add } from '@carbon/react/icons';
 
 export default {
   title: getStoryTitle(ButtonMenu.displayName),

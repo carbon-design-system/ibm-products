@@ -13,7 +13,7 @@ import { getInlineEditColumns } from './utils/getInlineEditColumns';
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
 import { action } from '@storybook/addon-actions';
-import { Activity, Add } from '@carbon/icons-react';
+import { Activity, Add } from '@carbon/react/icons';
 import { DataTable } from '@carbon/react';
 import {
   Datagrid,

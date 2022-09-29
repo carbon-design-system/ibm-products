@@ -878,7 +878,6 @@ beforeEach(() => {
   jest.spyOn(global.console, 'warn').mockImplementation(() => {});
   jest.useFakeTimers();
   jest.spyOn(global, 'setTimeout');
-  //@ts-ignore
   delete window.ResizeObserver;
   window.ResizeObserver = jest.fn().mockImplementation(() => ({
     observe: jest.fn(),

@@ -1,0 +1,62 @@
+/*
+* Licensed Materials - Property of IBM
+* 5724-Q36
+* (c) Copyright IBM Corp. 2022
+* US Government Users Restricted Rights - Use, duplication or disclosure
+* restricted by GSA ADP Schedule Contract with IBM Corp.
+*/
+
+@import '../variables';
+
+.#{$block-class}-filter-flyout__container {
+  position: relative;
+}
+
+.#{$block-class}-filter-flyout {
+  position: absolute;
+  display: grid;
+  grid-template-rows: 1fr rem(64px);
+  top: rem(48px);
+  right: 0;
+  background-color: $ui-02;
+  width: rem(642px);
+  min-height: rem(346px);
+  box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);
+
+  &__inner-container {
+    padding: $spacing-05 $spacing-05 $spacing-09 $spacing-05;
+
+    &::before {
+      display: block;
+      content: '';
+      position: absolute;
+      width: 46px;
+      height: rem(15px);
+      background-color: $ui-02;
+      top: rem(-7px);
+      right: 1px;
+    }
+  }
+
+  &__title {
+    display: block;
+    @include carbon--type-style('productive-heading-01');
+    margin-bottom: $spacing-06;
+  }
+
+  &__filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 32px;
+  }
+
+  // Carbon overrides
+  &__trigger {
+  }
+
+  &__trigger--open.bx--btn.bx--btn--icon-only {
+    position: relative;
+    background-color: $ui-02;
+    box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);
+  }
+}

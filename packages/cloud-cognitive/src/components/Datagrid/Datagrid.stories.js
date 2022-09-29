@@ -13,8 +13,26 @@ import { getInlineEditColumns } from './utils/getInlineEditColumns';
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
 import { action } from '@storybook/addon-actions';
-import { Activity16, Add16 } from '@carbon/icons-react';
-import { DataTable } from 'carbon-components-react';
+
+import {
+  Activity16,
+  Restart16,
+  Download16,
+  Filter16,
+  Add16,
+  Edit16,
+  TrashCan16,
+} from '@carbon/icons-react';
+import {
+  DataTable,
+  Button,
+  Pagination,
+  DatePicker,
+  DatePickerInput,
+  NumberInput,
+  Dropdown,
+} from 'carbon-components-react';
+
 import {
   Datagrid,
   useDatagrid,
@@ -34,6 +52,7 @@ import {
   useActionsColumn,
   useColumnOrder,
   useInlineEdit,
+  useFiltering,
 } from '.';
 
 import {
@@ -52,6 +71,8 @@ import { SidePanel } from '../SidePanel';
 import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
+import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
+import FilterFlyout from './Datagrid/addons/Filtering/FilterFlyout';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -89,6 +110,14 @@ const defaultHeader = [
     Header: 'Visits',
     accessor: 'visits',
     width: 60,
+  },
+  {
+    Header: 'Status',
+    accessor: 'status',
+  },
+  {
+    Header: 'Joined',
+    accessor: 'joined',
   },
   {
     Header: 'Someone 1',
@@ -388,6 +417,7 @@ export const InlineEdit = () => {
     },
     useInlineEdit
   );
+  console.log(datagridState);
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
@@ -483,6 +513,61 @@ export const SelectableRow = () => {
     },
     useSelectRows,
     useStickyColumn
+  );
+
+  return <Datagrid datagridState={{ ...datagridState }} />;
+};
+
+export const Filtering = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data, setData] = useState(makeData(10));
+
+  const FilterFlyoutContent = ({ handleNumberInput, handleDropdown }) => (
+    <>
+      <DatePicker datePickerType="range">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Joined start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="Joined end date"
+        />
+      </DatePicker>
+      <NumberInput
+        id="tj-input"
+        invalidText="Number is not valid"
+        label="Number input label"
+        step={1}
+        onChange={(event) => handleNumberInput({ column: 'visits', event })}
+      />
+      <Dropdown
+        id="marital-status-dropdown"
+        ariaLabel="Marital status dropdown"
+        items={['relationship', 'complicated', 'single']}
+        label="Marital status"
+        onChange={(event) => handleDropdown({ column: 'status', event })}
+      />
+    </>
+  );
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      DatagridActions,
+      onDataUpdate: setData,
+      FilterFlyoutContent,
+      filterProps: {
+        updateMethod: 'batch',
+      },
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
+    },
+    useSelectRows,
+    useFiltering
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;

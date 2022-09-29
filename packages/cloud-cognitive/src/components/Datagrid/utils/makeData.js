@@ -35,20 +35,54 @@ export const range = (len) => {
   return arr;
 };
 
+/** This function is only to create a random data point when the person joined */
+const getRandomDateJoined = () => {
+  const dateJoinedObj = randomDate(new Date(2022, 0, 1), new Date());
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const month = monthNames[dateJoinedObj.getMonth()];
+  const day = dateJoinedObj.getDay() + 1;
+  const year = dateJoinedObj.getFullYear();
+  const joined = `${month} ${day}, ${year}`;
+  return joined;
+};
+
 const newPerson = () => {
   const statusChance = Math.random();
+
   const initialChartTypeIndex = getRandomInteger(0, 2);
   const activeSinceDate = new Date();
   let yesterdayDate = new Date();
   yesterdayDate.setDate(yesterdayDate.getDate() - 1);
   let twoDaysAgoDate = new Date();
   twoDaysAgoDate.setDate(twoDaysAgoDate.getDate() - 2);
+
   return {
     firstName: namor.generate({ words: 1, numbers: 0 }),
     lastName: namor.generate({ words: 1, numbers: 0 }),
     age: Math.floor(Math.random() * 30),
     visits: Math.floor(Math.random() * 100),
     progress: Math.floor(Math.random() * 100),
+    status:
+      statusChance > 0.66
+        ? 'relationship'
+        : statusChance > 0.33
+        ? 'complicated'
+        : 'single',
+    joined: getRandomDateJoined(),
+
     someone1: namor.generate({ words: 1, numbers: 0 }),
     someone2: namor.generate({ words: 1, numbers: 0 }),
     someone3: namor.generate({ words: 1, numbers: 0 }),
@@ -69,12 +103,6 @@ const newPerson = () => {
     someone18: namor.generate({ words: 1, numbers: 0 }),
     someone19: namor.generate({ words: 1, numbers: 0 }),
     someone20: namor.generate({ words: 1, numbers: 0 }),
-    status:
-      statusChance > 0.66
-        ? 'relationship'
-        : statusChance > 0.33
-        ? 'complicated'
-        : 'single',
     chartType:
       initialChartTypeIndex === 0
         ? inlineEditSelectItems[0]
@@ -101,4 +129,10 @@ export const newPersonWithTwoLines = () => {
     lastName: namor.generate({ words: 1, numbers: 0 }),
     age: Math.floor(Math.random() * 30),
   };
+};
+
+const randomDate = (start, end) => {
+  return new Date(
+    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+  );
 };

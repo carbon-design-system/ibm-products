@@ -41,7 +41,6 @@ export const InlineEditCell = ({
   placeholder = '',
   tabIndex,
   value,
-  label = 'Inline edit type text label',
   nonEditCell,
   totalInlineEditColumns,
   type,
@@ -55,6 +54,7 @@ export const InlineEditCell = ({
   const [inEditMode, setInEditMode] = useState(false);
   const [cellValue, setCellValue] = useState(value);
   const [initialValue, setInitialValue] = useState();
+  const [cellLabel, setCellLabel] = useState();
   const { activeCellId, editId } = state;
   const previousState = usePreviousValue({ editId, activeCellId });
   const { inputProps } = config || {};
@@ -67,8 +67,41 @@ export const InlineEditCell = ({
 
   useEffect(() => {
     setInitialValue(value);
+    const columnId = cell.column.id;
+    const columnLabel = instance.columns.find((item) => item.id === columnId);
+    setCellLabel(
+      typeof columnLabel.Header === 'string'
+        ? columnLabel.Header
+        : 'Inline edit cell label'
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Reverts cellValue back to initialValue when exiting edit mode via clicking outside
+  // of the cell (either on a regular cell or clicking into another inline edit cell) and the
+  // edit input is in an invalid state
+  useEffect(() => {
+    if (
+      (previousState?.editId === cellId && !editId) ||
+      (previousState?.editId === cellId && cellId !== editId)
+    ) {
+      const { validator } = config || {};
+      const isInvalid = validator?.(cellValue);
+      if (isInvalid) {
+        setCellValue(initialValue);
+        saveCellData(initialValue);
+        return;
+      }
+    }
+  }, [
+    previousState?.editId,
+    editId,
+    cellId,
+    cellValue,
+    config,
+    initialValue,
+    saveCellData,
+  ]);
 
   // If you are in edit mode and click outside of the cell,
   // this changes the cell back to the InlineEditButton
@@ -198,6 +231,13 @@ export const InlineEditCell = ({
           if (type === 'selection' || type === 'date') {
             return;
           }
+          const { validator } = config || {};
+          const isInvalid = validator?.(cellValue);
+          // If an invalid state is detected, Tab/Enter should not do anything
+          // until the input has a valid state once again
+          if (isInvalid) {
+            return;
+          }
           const newCellId = getNewCellId(key);
           saveCellData(cellValue);
           setInitialValue(cellValue);
@@ -245,7 +285,8 @@ export const InlineEditCell = ({
     return (
       <Dropdown
         id={cellId}
-        label="Dropdown menu options"
+        label={cellLabel || 'Dropdown menu options'}
+        ariaLabel={cellLabel || 'Dropdown menu options'}
         {...inputProps}
         hideLabel
         style={{
@@ -334,7 +375,7 @@ export const InlineEditCell = ({
             position: 'static',
           }}
           placeholder={datePickerInputProps?.placeholder || 'mm/dd/yyyy'}
-          labelText={datePickerInputProps?.labelText || 'Set date'}
+          labelText={datePickerInputProps?.labelText || cellLabel || 'Set date'}
           id={
             datePickerInputProps.id ||
             `${blockClass}__inline-edit--date-picker--${cell.row.index}`
@@ -366,6 +407,53 @@ export const InlineEditCell = ({
     return null;
   };
 
+  const renderNumberInput = () => {
+    const { validator } = config || {};
+    return (
+      <NumberInput
+        placeholder={placeholder}
+        label={cellLabel}
+        {...inputProps}
+        id={cellId}
+        hideLabel
+        defaultValue={cellValue}
+        invalid={validator?.(cellValue)}
+        invalidText={inputProps?.invalidText || 'Provide missing invalidText'}
+        onChange={(event) => {
+          setCellValue(event.imaginaryTarget.value);
+          if (inputProps.onChange) {
+            inputProps.onChange(event.imaginaryTarget.value);
+          }
+        }}
+        ref={numberInputRef}
+      />
+    );
+  };
+
+  const renderTextInput = () => {
+    const { validator } = config || {};
+    const isInvalid = validator?.(cellValue);
+    return (
+      <TextInput
+        labelText={cellLabel}
+        placeholder={placeholder}
+        {...inputProps}
+        id={cellId}
+        hideLabel
+        defaultValue={cellValue}
+        invalid={isInvalid}
+        invalidText={inputProps?.invalidText || 'Provide missing invalidText'}
+        onChange={(event) => {
+          setCellValue(event.target.value);
+          if (inputProps.onChange) {
+            inputProps.onChange(event.target.value);
+          }
+        }}
+        ref={textInputRef}
+      />
+    );
+  };
+
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
@@ -380,6 +468,8 @@ export const InlineEditCell = ({
       className={cx(`${blockClass}__inline-edit--outer-cell-button`, {
         [`${blockClass}__inline-edit--outer-cell-button--${rowSize}`]: rowSize,
         [`${blockClass}__inline-edit--outer-cell-button--lg`]: !rowSize,
+        [`${blockClass}__inline-edit--outer-cell-button--invalid`]:
+          config?.validator?.(cellValue),
       })}
     >
       {!inEditMode && (
@@ -405,40 +495,8 @@ export const InlineEditCell = ({
       )}
       {!nonEditCell && inEditMode && cellId === activeCellId && (
         <>
-          {type === 'text' && (
-            <TextInput
-              labelText={label}
-              placeholder={placeholder}
-              {...inputProps}
-              id={cellId}
-              hideLabel
-              defaultValue={cellValue}
-              onChange={(event) => {
-                setCellValue(event.target.value);
-                if (inputProps.onChange) {
-                  inputProps.onChange(event.target.value);
-                }
-              }}
-              ref={textInputRef}
-            />
-          )}
-          {type === 'number' && (
-            <NumberInput
-              placeholder={placeholder}
-              label={label}
-              {...inputProps}
-              id={cellId}
-              hideLabel
-              defaultValue={cellValue}
-              onChange={(event) => {
-                setCellValue(event.imaginaryTarget.value);
-                if (inputProps.onChange) {
-                  inputProps.onChange(event.imaginaryTarget.value);
-                }
-              }}
-              ref={numberInputRef}
-            />
-          )}
+          {type === 'text' && renderTextInput()}
+          {type === 'number' && renderNumberInput()}
           {type === 'selection' && renderSelectCell()}
           {type === 'date' && renderDateCell()}
         </>
@@ -457,7 +515,6 @@ InlineEditCell.propTypes = {
     rowSize: PropTypes.string,
     tableId: PropTypes.string,
   }),
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   nonEditCell: PropTypes.bool,
   placeholder: PropTypes.string,
   tabIndex: PropTypes.number,

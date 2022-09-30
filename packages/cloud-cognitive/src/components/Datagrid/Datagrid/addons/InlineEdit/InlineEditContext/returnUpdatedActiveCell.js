@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { pkg } from '../../../../../../settings';
+
+const blockClass = `${pkg.prefix}--datagrid`;
 // This function returns the state back to the reducer after
 // determining the new active cell value
 export const returnUpdatedActiveCell = ({
@@ -38,6 +41,13 @@ export const returnUpdatedActiveCell = ({
         : activeCellCoords.row,
   };
   const newActiveCellId = `column-${newActiveCoords.column}-row-${newActiveCoords.row}`;
+  const newCellIdButton = document.querySelector(
+    `#${instance.tableId} .${blockClass}__table-with-inline-edit [data-cell-id="${newActiveCellId}"] .${blockClass}__inline-edit-button`
+  );
+  // Allows scrollable area to keep focused/active cell id visible
+  if (newCellIdButton) {
+    newCellIdButton?.focus();
+  }
   return {
     ...state,
     activeCellId: newActiveCellId,

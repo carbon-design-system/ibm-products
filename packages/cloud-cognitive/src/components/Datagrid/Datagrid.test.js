@@ -9,7 +9,6 @@ import React, { useState, useEffect } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
-import { RightAlignedColumns } from './Datagrid.stories';
 import { makeData } from './utils/makeData';
 
 import { carbon } from '../../settings';
@@ -30,6 +29,7 @@ import {
   useStickyColumn,
   useActionsColumn,
   useColumnOrder,
+  useColumnRightAlign,
 } from '.';
 
 import {
@@ -1709,7 +1709,7 @@ describe(componentName, () => {
         .getAllByRole('table')[0]
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('div')[0].childNodes[1].classList[0]
-    ).toEqual('carbon-nested-table');
+    ).toEqual('c4p--datagrid__expanded-row-content');
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -2036,6 +2036,35 @@ describe(componentName, () => {
       )[2]
     );
   });
+
+  const RightAlignedColumns = () => {
+    const columns = React.useMemo(
+      () => [
+        ...defaultHeader.slice(0, 3),
+        {
+          Header: 'Age',
+          accessor: 'age',
+          rightAlignedColumn: true,
+        },
+        {
+          Header: 'Visits',
+          accessor: 'visits',
+          rightAlignedColumn: true,
+        },
+      ],
+      []
+    );
+    const [data] = useState(makeData(10));
+    const datagridState = useDatagrid(
+      {
+        columns,
+        data,
+      },
+      useColumnRightAlign
+    );
+
+    return <Datagrid datagridState={{ ...datagridState }} />;
+  };
 
   it('Right Aligned Columns', () => {
     render(

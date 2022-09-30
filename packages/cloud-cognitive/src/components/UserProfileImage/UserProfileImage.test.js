@@ -13,7 +13,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg, carbon } from '../../settings';
 
 import { UserProfileImage } from '.';
-import { Group } from '@carbon/icons-react';
+import { Group } from '@carbon/react/icons';
 
 const blockClass = `${pkg.prefix}--user-profile-image`;
 const componentName = UserProfileImage.displayName;

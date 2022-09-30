@@ -13,7 +13,7 @@ import {
   CheckmarkOutline,
   ErrorOutline,
   ErrorFilled,
-} from '@carbon/icons-react';
+} from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';

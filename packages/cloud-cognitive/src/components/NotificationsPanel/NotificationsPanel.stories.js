@@ -15,7 +15,7 @@ import {
   HeaderGlobalBar,
   HeaderGlobalAction,
 } from '@carbon/react';
-import { User, Notification } from '@carbon/icons-react';
+import { User, Notification } from '@carbon/react/icons';
 import { white } from '@carbon/colors';
 import styles from './_storybook-styles.scss';
 import uuidv4 from '../../global/js/utils/uuidv4';

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CloudApp } from '@carbon/icons-react';
+import { CloudApp } from '@carbon/react/icons';
 import React from 'react';
 
 import {

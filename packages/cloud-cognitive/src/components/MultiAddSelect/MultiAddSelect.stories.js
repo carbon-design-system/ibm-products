@@ -16,7 +16,7 @@ import mdx from './MultiAddSelect.mdx';
 import { Button } from '@carbon/react';
 // import { action } from '@storybook/addon-actions';
 import image from '../UserProfileImage/headshot.jpg'; // cspell:disable-line
-import { Group, Document } from '@carbon/icons-react';
+import { Group, Document } from '@carbon/react/icons';
 
 import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--add-select__meta-panel`;

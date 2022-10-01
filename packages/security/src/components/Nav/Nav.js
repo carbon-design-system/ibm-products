@@ -15,8 +15,6 @@ import { getComponentNamespace } from '../../globals/namespace';
 
 export const navNamespace = getComponentNamespace('nav');
 
-const { name } = NavList;
-
 export default class Nav extends Component {
   constructor(props) {
     super(props);
@@ -110,7 +108,7 @@ export default class Nav extends Component {
    */
   handleListClick(id) {
     Children.forEach(this.props.children, ({ props, type }, index) => {
-      if (type.name === name) {
+      if (type.displayName === NavList.displayName) {
         const childId = `${navNamespace}__list--${index}`;
 
         if (childId !== id && !props.isExpandedOnPageload) {
@@ -142,7 +140,7 @@ export default class Nav extends Component {
 
         <ul className={`${navNamespace}__wrapper`} role="menubar">
           {Children.map(children, (child, index) =>
-            child.type.name === name
+            child.type.displayName === NavList.displayName
               ? this.buildNewListChild(child, index)
               : this.buildNewItemChild(child, index)
           )}

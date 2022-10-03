@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.2...@carbon/ibm-products@2.0.0-rc.3) (2022-09-30)
+
+
+### Bug Fixes
+
+* **Datagrid:** allow sticky column to stick again ([#2292](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2292)) ([fc2287a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fc2287acb9c557ae0f74aa6c1769d9bb53d9dd89))
+* inline edit newline fix ([#2300](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2300)) ([f3bb0c2](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f3bb0c2fce22a2105147aa52a063861055d16a19))
+* **InlineEdit:** fix calc interpolation issue (v11) ([#2321](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2321)) ([ab80980](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ab80980fa146373a8f3d778e1d59de962f0d7dee))
+* move carbon packages back to peer dependencies (v11) ([#2318](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2318)) ([17f0bdb](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/17f0bdbfdb358fc49d4c6979f984c210804aa437))
+
+
+### Features
+
+* **Datagrid:** add validation for types text/num ([#2317](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2317)) ([6bfb9ec](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6bfb9ec7bb473a1612e2f0de3debfac170623547))
+
+
+
+
+
 # [2.0.0-rc.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.1...@carbon/ibm-products@2.0.0-rc.2) (2022-08-23)
 
 **Note:** Version bump only for package @carbon/ibm-products

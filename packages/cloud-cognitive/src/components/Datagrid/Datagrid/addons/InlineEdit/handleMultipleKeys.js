@@ -7,6 +7,7 @@
 
 import { includesResourceKey } from '../../../../DataSpreadsheet/utils/handleMultipleKeys';
 import { pkg } from '../../../../../settings';
+import { getFocusableElements } from '../../../../../global/js/utils/getFocusableElements';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -73,6 +74,23 @@ export const handleMultipleKeys = ({
           payload: lastCellDataId,
         });
       }, 250);
+    }
+  }
+  // Shift + Tab
+  // This should remove the active grid state
+  if (
+    (keysPressedList.includes('ShiftLeft') ||
+      keysPressedList.includes('ShiftRight')) &&
+    keysPressedList.includes('Tab')
+  ) {
+    dispatch({ type: 'REMOVE_GRID_ACTIVE_FOCUS', payload: activeCellId });
+    const tableElement = document.querySelector(`#${instance.tableId}`);
+    const datagridFocusableElements = getFocusableElements(tableElement);
+    const indexOfTable = datagridFocusableElements.findIndex(
+      (item) => item instanceof HTMLTableElement
+    );
+    if (indexOfTable && Number.isFinite(indexOfTable)) {
+      datagridFocusableElements[indexOfTable]?.focus();
     }
   }
 };

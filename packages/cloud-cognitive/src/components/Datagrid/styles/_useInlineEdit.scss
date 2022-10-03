@@ -64,6 +64,10 @@ $row-heights: (
   }
 }
 
+.#{variables.$block-class} {
+  --#{variables.$block-class}--grid-header-height: 0;
+}
+
 .#{variables.$block-class}__inline-edit-cell {
   display: flex;
   height: 100%;
@@ -249,7 +253,9 @@ $row-heights: (
   bottom: 0;
   left: 0;
   width: 2px;
-  height: calc(100% - 50px);
+  height: calc(
+    100% - 50px - var(--#{variables.$block-class}--grid-header-height)
+  );
   background-color: $link-inverse;
   content: '';
 }
@@ -261,15 +267,16 @@ $row-heights: (
   right: 0;
   bottom: 0;
   width: 2px;
-  height: calc(100% - 50px);
+  height: calc(
+    100% - 50px - var(--#{variables.$block-class}--grid-header-height)
+  );
   background-color: $link-inverse;
   content: '';
 }
 
 .#{variables.$block-class}
   .#{variables.$block-class}__grid-container-grid-active
-  .#{variables.$block-class}__table-grid-active
-  thead::before {
+  .#{c4p-settings.$carbon-prefix}--data-table-content::before {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -284,7 +291,9 @@ $row-heights: (
   .#{variables.$block-class}__grid-container-grid-active.#{variables.$block-class}__grid-container-grid-active--without-toolbar::before,
 .#{variables.$block-class}
   .#{variables.$block-class}__grid-container-grid-active.#{variables.$block-class}__grid-container-grid-active--without-toolbar::after {
-  height: calc(100% - 2px);
+  height: calc(
+    100% - 2px - var(--#{variables.$block-class}--grid-header-height)
+  );
 }
 
 .#{variables.$block-class}
@@ -292,6 +301,12 @@ $row-heights: (
   .#{variables.$block-class}__table-container {
   outline: 2px solid $link-inverse;
   outline-offset: -2px;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__grid-container-inline-edit
+  .#{variables.$block-class}__table-container {
+  padding-top: $spacing-01;
 }
 
 .#{variables.$block-class}

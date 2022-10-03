@@ -116,7 +116,6 @@ export const DatagridContent = ({ datagridState }) => {
       px(totalColumnsWidth + 32)
     );
     if (gridTitle && gridActive) {
-      console.log(tableHeader, tableHeader.clientHeight);
       gridElement.style.setProperty(
         `--${blockClass}--grid-header-height`,
         px(tableHeader?.clientHeight)

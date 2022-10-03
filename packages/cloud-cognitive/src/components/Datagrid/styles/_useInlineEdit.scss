@@ -229,7 +229,7 @@ $row-heights: (
   bottom: 0;
   left: 0;
   width: 2px;
-  height: calc(100% - 50px);
+  height: calc(100% - 50px - var(--#{$block-class}--grid-header-height));
   background-color: $inverse-link;
   content: '';
 }
@@ -240,15 +240,14 @@ $row-heights: (
   right: 0;
   bottom: 0;
   width: 2px;
-  height: calc(100% - 50px);
+  height: calc(100% - 50px - var(--#{$block-class}--grid-header-height));
   background-color: $inverse-link;
   content: '';
 }
 
 .#{$block-class}
   .#{$block-class}__grid-container-grid-active
-  .#{$block-class}__table-grid-active
-  thead::before {
+  .#{$carbon-prefix}--data-table-content::before {
   position: absolute;
   z-index: 2;
   top: 0;
@@ -263,7 +262,7 @@ $row-heights: (
   .#{$block-class}__grid-container-grid-active.#{$block-class}__grid-container-grid-active--without-toolbar::before,
 .#{$block-class}
   .#{$block-class}__grid-container-grid-active.#{$block-class}__grid-container-grid-active--without-toolbar::after {
-  height: calc(100% - 2px);
+  height: calc(100% - 2px - var(--#{$block-class}--grid-header-height));
 }
 
 .#{$block-class}
@@ -271,6 +270,12 @@ $row-heights: (
   .#{$block-class}__table-container {
   outline: 2px solid $inverse-link;
   outline-offset: -2px;
+}
+
+.#{$block-class}
+  .#{$block-class}__grid-container-inline-edit
+  .#{$block-class}__table-container {
+  padding-top: $spacing-01;
 }
 
 .#{$block-class}

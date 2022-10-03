@@ -7,7 +7,7 @@ import DatagridHead from './DatagridHead';
 import DatagridBody from './DatagridBody';
 import DatagridToolbar from './DatagridToolbar';
 import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
-import { pkg } from '../../../settings';
+import { carbon, pkg } from '../../../settings';
 import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 import { useClickOutside } from '../../../global/js/hooks';
@@ -108,11 +108,28 @@ export const DatagridContent = ({ datagridState }) => {
       return;
     }
     const gridElement = document.querySelector(`#${tableId}`);
+    const tableHeader = document.querySelector(
+      `.${carbon.prefix}--data-table-header`
+    );
     gridElement.style.setProperty(
       `--${blockClass}--grid-width`,
       px(totalColumnsWidth + 32)
     );
-  }, [withInlineEdit, tableId, totalColumnsWidth, datagridState]);
+    if (gridTitle && gridActive) {
+      console.log(tableHeader, tableHeader.clientHeight);
+      gridElement.style.setProperty(
+        `--${blockClass}--grid-header-height`,
+        px(tableHeader?.clientHeight)
+      );
+    }
+  }, [
+    withInlineEdit,
+    tableId,
+    totalColumnsWidth,
+    datagridState,
+    gridTitle,
+    gridActive,
+  ]);
 
   return (
     <>
@@ -126,6 +143,7 @@ export const DatagridContent = ({ datagridState }) => {
           useDenseHeader ? `${blockClass}__dense-header` : '',
           {
             [`${blockClass}__grid-container-grid-active`]: gridActive,
+            [`${blockClass}__grid-container-inline-edit`]: withInlineEdit,
             [`${blockClass}__grid-container-grid-active--without-toolbar`]:
               withInlineEdit && !DatagridActions,
           }

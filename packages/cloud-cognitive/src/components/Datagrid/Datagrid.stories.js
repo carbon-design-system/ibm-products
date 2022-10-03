@@ -275,6 +275,8 @@ export const InlineEdit = () => {
       data,
       onDataUpdate: setData,
       DatagridActions,
+      gridTitle: 'Test',
+      gridDescription: 'Testing description',
     },
     useInlineEdit
   );

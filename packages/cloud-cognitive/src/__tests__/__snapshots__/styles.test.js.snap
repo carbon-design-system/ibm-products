@@ -3414,7 +3414,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: inline-block;
   overflow: hidden;
   width: calc(100% - var(--c4p--inline-edit--toolbar-width) - 1rem);
-  max-width: calc(100% - var(--c4p--inline-edit--toolbar-width) - 1rem);
+  max-width: calc(
+      100% - var(--c4p--inline-edit--toolbar-width) - 1rem
+    );
   min-height: var(--c4p--inline-edit--size);
   /* stylelint-disable-next-line carbon/layout-token-use */
   margin-right: var(--c4p--inline-edit--toolbar-width);

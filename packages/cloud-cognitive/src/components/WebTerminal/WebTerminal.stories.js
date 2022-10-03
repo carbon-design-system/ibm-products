@@ -9,7 +9,7 @@
 
 import React from 'react';
 // Carbon and package components we use.
-import { Code, Copy } from '@carbon/icons-react';
+import { Code, Copy } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import { Navigation } from './preview-components';
 import {

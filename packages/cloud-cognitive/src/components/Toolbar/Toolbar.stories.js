@@ -29,7 +29,7 @@ import {
   TextCreation,
   ZoomIn,
   ZoomOut,
-} from '@carbon/icons-react';
+} from '@carbon/react/icons';
 
 import { Dropdown, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 

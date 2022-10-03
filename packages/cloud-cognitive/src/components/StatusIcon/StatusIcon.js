@@ -19,7 +19,7 @@ import {
   InformationSquareFilled,
   Renew,
   Time,
-} from '@carbon/icons-react';
+} from '@carbon/react/icons';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';

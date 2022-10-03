@@ -8,7 +8,7 @@
  */
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Draggable } from '@carbon/icons-react';
+import { Draggable } from '@carbon/react/icons';
 import { useDrag, useDrop } from 'react-dnd';
 import cx from 'classnames';
 import { pkg } from '../../../settings';

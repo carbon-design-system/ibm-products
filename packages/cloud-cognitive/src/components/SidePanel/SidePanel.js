@@ -25,7 +25,7 @@ import { usePreviousValue } from '../../global/js/hooks';
 
 // Carbon and package components we use.
 import { Button } from '@carbon/react';
-import { Close, ArrowLeft } from '@carbon/icons-react';
+import { Close, ArrowLeft } from '@carbon/react/icons';
 import { ActionSet } from '../ActionSet';
 import { overlayVariants, panelVariants } from './motion/variants';
 

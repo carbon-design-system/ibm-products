@@ -1,4 +1,3 @@
-import { _4K16 } from '@carbon/icons-react';
 //
 // Copyright IBM Corp. 2020, 2020
 //

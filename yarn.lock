@@ -1856,13 +1856,7 @@ __metadata:
     "@babel/cli": ^7.18.10
     "@babel/core": ^7.18.13
     "@babel/runtime": ^7.18.9
-    "@carbon/grid": ^11.3.0
-    "@carbon/layout": ^11.3.0
-    "@carbon/motion": ^11.2.0
-    "@carbon/react": ^1.9.0-rc.0
     "@carbon/telemetry": ^0.1.0
-    "@carbon/themes": ^11.4.0
-    "@carbon/type": ^11.4.0
     babel-preset-ibm-cloud-cognitive: ^0.14.19
     chalk: ^4.1.2
     change-case: ^4.1.2
@@ -1887,6 +1881,12 @@ __metadata:
     sass: ^1.54.8
     yargs: ^17.5.1
   peerDependencies:
+    "@carbon/grid": ^11.3.0
+    "@carbon/layout": ^11.3.0
+    "@carbon/motion": ^11.2.0
+    "@carbon/react": ^1.13.0
+    "@carbon/themes": ^11.4.0
+    "@carbon/type": ^11.4.0
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
   languageName: unknown

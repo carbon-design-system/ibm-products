@@ -11,19 +11,21 @@ import React, { useState, useEffect, useRef } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Link, IconButton, usePrefix } from '@carbon/react';
-import { pkg } from '../../settings';
 import { useResizeDetector } from 'react-resize-detector';
-import { ArrowLeft } from '@carbon/icons-react';
 
 // Carbon and package components we use.
 import {
   Breadcrumb,
   BreadcrumbItem,
+  Link,
+  IconButton,
   OverflowMenu,
   OverflowMenuItem,
+  usePrefix,
 } from '@carbon/react';
-import { OverflowMenuHorizontal } from '@carbon/icons-react';
+import { pkg } from '../../settings';
+import { ArrowLeft, OverflowMenuHorizontal } from '@carbon/react/icons';
+
 import uuidv4 from '../../global/js/utils/uuidv4';
 import '../../global/js/utils/props-helper';
 

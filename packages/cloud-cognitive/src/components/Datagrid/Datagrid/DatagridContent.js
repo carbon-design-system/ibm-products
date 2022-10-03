@@ -1,7 +1,8 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { DataTable } from '@carbon/react';
+import { px } from '@carbon/layout';
 import DatagridHead from './DatagridHead';
 import DatagridBody from './DatagridBody';
 import DatagridToolbar from './DatagridToolbar';
@@ -33,6 +34,9 @@ export const DatagridContent = ({ datagridState }) => {
     gridDescription,
     useDenseHeader,
     withInlineEdit,
+    tableId,
+    DatagridActions,
+    totalColumnsWidth,
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
@@ -97,6 +101,18 @@ export const DatagridContent = ({ datagridState }) => {
     isEditing: !!editId,
   });
 
+  // Provides a width for the region outline for useInlineEdit
+  useEffect(() => {
+    if (!withInlineEdit) {
+      return;
+    }
+    const gridElement = document.querySelector(`#${tableId}`);
+    gridElement.style.setProperty(
+      `--${blockClass}--grid-width`,
+      px(totalColumnsWidth + 32)
+    );
+  }, [withInlineEdit, tableId, totalColumnsWidth, datagridState]);
+
   return (
     <>
       <TableContainer
@@ -106,7 +122,12 @@ export const DatagridContent = ({ datagridState }) => {
             ? `${blockClass}__full-height`
             : '',
           DatagridPagination ? `${blockClass}__with-pagination` : '',
-          useDenseHeader ? `${blockClass}__dense-header` : ''
+          useDenseHeader ? `${blockClass}__dense-header` : '',
+          {
+            [`${blockClass}__grid-container-grid-active`]: gridActive,
+            [`${blockClass}__grid-container-grid-active--without-toolbar`]:
+              withInlineEdit && !DatagridActions,
+          }
         )}
         title={gridTitle}
         description={gridDescription}
@@ -140,6 +161,7 @@ DatagridContent.propTypes = {
   datagridState: PropTypes.shape({
     getTableProps: PropTypes.func,
     withVirtualScroll: PropTypes.bool,
+    DatagridActions: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     DatagridPagination: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.func,
@@ -156,5 +178,7 @@ DatagridContent.propTypes = {
     gridDescription: PropTypes.node,
     page: PropTypes.arrayOf(PropTypes.object),
     rows: PropTypes.arrayOf(PropTypes.object),
+    tableId: PropTypes.string,
+    totalColumnsWidth: PropTypes.number,
   }),
 };

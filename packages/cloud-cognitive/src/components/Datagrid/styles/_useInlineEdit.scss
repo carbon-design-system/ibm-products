@@ -44,7 +44,7 @@ $row-heights: (
   .#{variables.$block-class}
     .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
     .#{c4p-settings.$carbon-prefix}--number__control-btn::after {
-    height: calc($size-value - 0.25rem);
+    height: calc(#{$size-value} - 0.25rem);
   }
   .#{variables.$block-class}
     .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
@@ -99,6 +99,7 @@ $row-heights: (
   }
   &.#{variables.$block-class}__inline-edit-button--non-edit {
     padding-left: 0;
+    cursor: default;
   }
   .#{variables.$block-class}__inline-edit-button-icon {
     height: $spacing-05;
@@ -236,4 +237,168 @@ $row-heights: (
   td {
   border-top-color: $layer-hover;
   background-color: $layer-hover;
+}
+
+// Custom border/outline for the focus region area, because of the scrolling
+// containers, using default border caused grid area width to be changed and
+// outlines were not present be
+.#{variables.$block-class}
+  .#{variables.$block-class}__grid-container-grid-active::before {
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  width: 2px;
+  height: calc(100% - 50px);
+  background-color: $link-inverse;
+  content: '';
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__grid-container-grid-active::after {
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  width: 2px;
+  height: calc(100% - 50px);
+  background-color: $link-inverse;
+  content: '';
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__grid-container-grid-active
+  .#{variables.$block-class}__table-grid-active
+  thead::before {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: var(--#{variables.$block-class}--grid-width);
+  height: 2px;
+  background-color: $link-inverse;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__grid-container-grid-active.#{variables.$block-class}__grid-container-grid-active--without-toolbar::before,
+.#{variables.$block-class}
+  .#{variables.$block-class}__grid-container-grid-active.#{variables.$block-class}__grid-container-grid-active--without-toolbar::after {
+  height: calc(100% - 2px);
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__grid-container-grid-active
+  .#{variables.$block-class}__table-container {
+  outline: 2px solid $link-inverse;
+  outline-offset: -2px;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  [data-invalid]
+  ~ .#{c4p-settings.$carbon-prefix}--form-requirement,
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  [data-invalid]
+  .#{c4p-settings.$carbon-prefix}--form-requirement {
+  position: absolute;
+  z-index: 3;
+  top: calc(100% - #{$spacing-01});
+  width: 100%;
+  padding: $spacing-03 $spacing-06 $spacing-03 $spacing-03;
+  margin: 0;
+  background-color: $layer-01;
+  outline: $spacing-01 solid $support-error;
+  outline-offset: calc(-1 * #{$spacing-01});
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{c4p-settings.$carbon-prefix}--list-box[data-invalid]:focus-within
+  ~ .#{c4p-settings.$carbon-prefix}--form-requirement {
+  outline: $spacing-01 solid $focus;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{c4p-settings.$carbon-prefix}--list-box__invalid-icon,
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{c4p-settings.$carbon-prefix}--text-input__invalid-icon,
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{c4p-settings.$carbon-prefix}--number__invalid {
+  z-index: 4;
+  top: calc(100% + #{$spacing-04} + #{$spacing-01});
+  right: $spacing-03;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{c4p-settings.$carbon-prefix}--number__invalid {
+  top: calc(100% + #{$spacing-02} + #{$spacing-01});
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{c4p-settings.$carbon-prefix}--form-requirement::before {
+  position: absolute;
+  top: 0;
+  left: $spacing-01;
+  width: calc(100% - (#{$spacing-01} * 2));
+  height: $spacing-01;
+  background-color: $layer-01;
+  content: '';
+}
+
+.#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{c4p-settings.$carbon-prefix}--form-requirement::after {
+  position: absolute;
+  top: $spacing-01;
+  left: $spacing-03;
+  width: calc(100% - (#{$spacing-03} * 2));
+  height: 1px;
+  background-color: $layer-accent-01;
+  content: '';
+}
+
+.#{variables.$block-class} tbody tr:hover {
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+    .#{c4p-settings.$carbon-prefix}--form-requirement::before {
+    background-color: $layer-accent-01;
+  }
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+    .#{c4p-settings.$carbon-prefix}--form-requirement::after {
+    background-color: transparent;
+  }
+}
+
+// Keep input focus states using $support-01 when inline edit cell is invalid
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{c4p-settings.$carbon-prefix}--text-input:focus,
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{c4p-settings.$carbon-prefix}--number
+  input[type='number']:focus,
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{c4p-settings.$carbon-prefix}--number
+  input[type='number']:focus
+  ~ .#{c4p-settings.$carbon-prefix}--number__controls
+  .#{c4p-settings.$carbon-prefix}--number__control-btn:hover,
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{c4p-settings.$carbon-prefix}--number__control-btn:focus {
+  outline-color: $support-error;
+}
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
+  .#{c4p-settings.$carbon-prefix}--number
+  input[type='number'][data-invalid]:focus
+  ~ .#{c4p-settings.$carbon-prefix}--number__controls
+  .#{c4p-settings.$carbon-prefix}--number__control-btn.up-icon::after {
+  background-color: $support-error;
 }

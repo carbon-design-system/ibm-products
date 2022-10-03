@@ -86,3 +86,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   .#{c4p-settings.$pkg-prefix}--side-panel__inner-content {
   height: 100%;
 }
+
+.#{$block-class}-story__custom-cell-wrapper.#{c4p-settings.$carbon-prefix}--link {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

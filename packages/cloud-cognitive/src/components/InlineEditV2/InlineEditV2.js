@@ -10,6 +10,7 @@ import {
   WarningFilled24,
 } from '@carbon/icons-react';
 import { pkg, carbon } from '../../settings';
+import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 const componentName = 'InlineEditV2';
 const blockClass = `${pkg.prefix}--inline-edit-v2`;
@@ -110,21 +111,21 @@ export let InlineEditV2 = forwardRef(
     };
 
     const onKeyHandler = (e) => {
-      switch (e.keyCode) {
-        case 27: // esc
+      switch (e.key) {
+        case 'Escape':
           escapeHandler();
           break;
-        case 13: // return
+        case 'Enter':
           returnHandler();
+          break;
+        default:
           break;
       }
     };
 
     return (
-      <>
+      <div {...rest} ref={ref} {...getDevtoolsProps(componentName)}>
         <div
-          {...rest}
-          ref={ref}
           className={cx(blockClass, {
             [`${blockClass}-focused`]: focused,
             [`${blockClass}-readonly`]: readOnly,
@@ -193,12 +194,15 @@ export let InlineEditV2 = forwardRef(
         {focused && invalid && (
           <p className={`${blockClass}__warning-text`}>{invalidLabel}</p>
         )}
-      </>
+      </div>
     );
   }
 );
 
 InlineEditV2 = pkg.checkComponentEnabled(InlineEditV2, componentName);
+
+InlineEditV2.displayName = componentName;
+
 InlineEditV2.propTypes = {
   cancelLabel: PropTypes.string.isRequired,
   editLabel: PropTypes.string.isRequired,
@@ -211,4 +215,3 @@ InlineEditV2.propTypes = {
   saveLabel: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
 };
-InlineEditV2.displayName = componentName;

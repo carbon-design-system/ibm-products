@@ -56,6 +56,10 @@ $row-heights: (
   }
 }
 
+.#{$block-class} {
+  --#{$block-class}--grid-header-height: 0;
+}
+
 .#{$block-class}__inline-edit-cell {
   display: flex;
   height: 100%;

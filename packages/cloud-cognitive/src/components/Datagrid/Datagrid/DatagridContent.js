@@ -115,20 +115,13 @@ export const DatagridContent = ({ datagridState }) => {
       `--${blockClass}--grid-width`,
       px(totalColumnsWidth + 32)
     );
-    if (gridTitle && gridActive) {
+    if (gridActive) {
       gridElement.style.setProperty(
         `--${blockClass}--grid-header-height`,
-        px(tableHeader?.clientHeight)
+        px(tableHeader?.clientHeight || 0)
       );
     }
-  }, [
-    withInlineEdit,
-    tableId,
-    totalColumnsWidth,
-    datagridState,
-    gridTitle,
-    gridActive,
-  ]);
+  }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
 
   return (
     <>

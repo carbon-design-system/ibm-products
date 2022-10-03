@@ -8,7 +8,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
-import { getInlineEditColumns } from './utils/getInlineEditColumns';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
@@ -28,7 +27,6 @@ import {
   useStickyColumn,
   useActionsColumn,
   useColumnOrder,
-  useInlineEdit,
 } from '.';
 
 import {
@@ -263,21 +261,6 @@ export const WithPagination = () => {
     DatagridPagination,
   });
 
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-export const InlineEdit = () => {
-  const [data, setData] = useState(makeData(10));
-  const columns = React.useMemo(() => getInlineEditColumns(), []);
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      onDataUpdate: setData,
-      DatagridActions,
-    },
-    useInlineEdit
-  );
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 

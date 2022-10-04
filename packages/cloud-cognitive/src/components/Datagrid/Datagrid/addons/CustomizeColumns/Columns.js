@@ -16,7 +16,7 @@ import update from 'immutability-helper';
 import { pkg } from '../../../../../settings';
 import DraggableElement from '../../DraggableElement';
 import { isColumnVisible } from './common';
-import classNames from 'classnames';
+import cx from 'classnames';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -96,22 +96,17 @@ const Columns = ({
           </span>
           <div
             id={`${blockClass}__customize-columns-select-all`}
-            className={classNames(
-              {
-                [`${blockClass}__customize-columns-select-all`]:
-                  getVisibleColumnsCount() === 0,
-                [`${blockClass}__customize-columns-select-all-selected`]:
-                  getVisibleColumnsCount() > 0,
-              }
-
-              // `${blockClass}__customize-columns-select-all`,
-            )}
+            className={cx({
+              [`${blockClass}__customize-columns-select-all`]:
+                getVisibleColumnsCount() === 0,
+              [`${blockClass}__customize-columns-select-all-selected`]:
+                getVisibleColumnsCount() > 0,
+            })}
             selected={getVisibleColumnsCount() > 0}
           >
             <Checkbox
-              wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
+              className={`${blockClass}__customize-columns-checkbox-wrapper`}
               checked={getVisibleColumnsCount() === columns.length}
-              empty={!!getVisibleColumnsCount() === 0}
               indeterminate={
                 getVisibleColumnsCount() < columns.length &&
                 getVisibleColumnsCount() > 0
@@ -166,13 +161,15 @@ const Columns = ({
                 selected={isColumnVisible(colDef)}
               >
                 <Checkbox
-                  wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
+                  className={cx(
+                    `${blockClass}__customize-columns-checkbox-wrapper`,
+                    `${blockClass}__customize-columns-checkbox`
+                  )}
                   checked={isColumnVisible(colDef)}
                   onChange={onSelectColumn.bind(null, colDef)}
                   id={`${blockClass}__customization-column-${colDef.id}`}
                   labelText={colDef.Header.props.title}
                   title={colDef.Header.props.title}
-                  className={`${blockClass}__customize-columns-checkbox`}
                 />
               </DraggableElement>
             ))}

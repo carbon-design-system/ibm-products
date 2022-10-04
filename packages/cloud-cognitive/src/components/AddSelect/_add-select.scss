@@ -484,7 +484,7 @@ button.#{$block-class}__global-filter-toggle {
   margin-top: $spacing-03;
 }
 
-.#{$carbon-prefix}--tooltip,
-.#{$carbon-prefix}--overflow-menu-options {
+.#{$block-class} .#{$carbon-prefix}--tooltip,
+.#{$block-class} .#{$carbon-prefix}--overflow-menu-options {
   z-index: 9000;
 }

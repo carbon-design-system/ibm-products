@@ -27,11 +27,7 @@ import {
   useActionsColumn,
 } from '.';
 
-import {
-  RowSizeDropdownStory,
-  SelectAllWitHToggle,
-  LeftPanelStory,
-} from './Datagrid.stories';
+import { SelectAllWitHToggle, LeftPanelStory } from './Datagrid.stories';
 import mdx from './Datagrid.mdx';
 
 import { pkg } from '../../settings';
@@ -425,59 +421,6 @@ export const SelectItemsInAllPages = () => {
   );
 };
 SelectItemsInAllPages.story = SelectAllWitHToggle;
-
-export const RowSizeDropdown = () => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader.slice(0, 3),
-      {
-        Header: 'Different cell content',
-        id: 'rowSizeDemo-cell',
-        disableSortBy: true,
-        Cell: ({ rowSize }) => rowSize,
-      },
-    ],
-    []
-  );
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      rowSize: 'xs',
-      rowSizes: [
-        {
-          value: 'xl',
-          labelText: 'More than super',
-        },
-        {
-          value: 'lg',
-          labelText: 'Super tall row',
-        },
-        {
-          value: 'md',
-        },
-        {
-          value: 'xs',
-          labelText: 'Teeny tiny row',
-        },
-      ],
-      onRowSizeChange: (value) => {
-        console.log('row size changed to: ', value);
-      },
-      DatagridActions,
-      DatagridBatchActions,
-    },
-    useSelectRows
-  );
-
-  return (
-    <Wrapper>
-      <Datagrid datagridState={{ ...datagridState }} />
-    </Wrapper>
-  );
-};
-RowSizeDropdown.story = RowSizeDropdownStory;
 
 export const LeftPanel = () => {
   const columns = React.useMemo(() => defaultHeader, []);

@@ -8296,8 +8296,8 @@ a.bx--overflow-menu-options__btn::before {
   display: flex;
   align-items: center;
   padding: 0.125rem 1rem;
-  background-color: var(--cds-inverse-02, #f4f4f4);
   border-radius: 0.125rem;
+  background-color: var(--cds-inverse-02, #f4f4f4);
   color: var(--cds-inverse-01, #161616);
   opacity: 0;
   pointer-events: none;
@@ -16098,7 +16098,7 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 @media screen and (-ms-high-contrast: active), (forced-colors: active) {
-  .bx--inline-notification__icon {
+  .bx--inline-notification .bx--inline-notification__close-icon {
     fill: ButtonText;
   }
 }
@@ -16370,7 +16370,7 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 @media screen and (-ms-high-contrast: active), (forced-colors: active) {
-  .bx--toast-notification__icon {
+  .bx--toast-notification .bx--toast-notification__close-icon {
     fill: ButtonText;
   }
 }
@@ -17060,8 +17060,8 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 1.75rem;
   align-items: center;
   justify-content: center;
-  background-color: var(--cds-icon-02, #c6c6c6);
   border-radius: 50%;
+  background-color: var(--cds-icon-02, #c6c6c6);
   color: var(--cds-inverse-01, #161616);
   object-fit: cover;
   text-transform: uppercase;
@@ -19765,8 +19765,8 @@ li.bx--accordion__item--disabled:last-of-type {
 .security--status-icon__icon--color {
   width: 0.5rem;
   height: 0.5rem;
-  background-color: var(--cds-icon-02, #c6c6c6);
   border-radius: 50%;
+  background-color: var(--cds-icon-02, #c6c6c6);
 }
 .security--status-icon__icon--color--error {
   background-color: var(--cds-support-01, #fa4d56);
@@ -23259,8 +23259,8 @@ optgroup.bx--select-optgroup:disabled,
   display: flex;
   align-items: center;
   padding: 0.125rem 1rem;
-  background-color: var(--cds-inverse-02, #f4f4f4);
   border-radius: 0.125rem;
+  background-color: var(--cds-inverse-02, #f4f4f4);
   color: var(--cds-inverse-01, #161616);
   opacity: 0;
   pointer-events: none;
@@ -23474,8 +23474,8 @@ optgroup.bx--select-optgroup:disabled,
   display: inline-block;
   width: 0.5rem;
   height: 0.5rem;
-  background-color: var(--cds-support-01, #fa4d56);
   border-radius: 50%;
+  background-color: var(--cds-support-01, #fa4d56);
   content: "";
 }
 .security--header__popover {
@@ -23619,8 +23619,8 @@ optgroup.bx--select-optgroup:disabled,
   display: flex;
   align-items: center;
   padding: 0.125rem 1rem;
-  background-color: var(--cds-inverse-02, #f4f4f4);
   border-radius: 0.125rem;
+  background-color: var(--cds-inverse-02, #f4f4f4);
   color: var(--cds-inverse-01, #161616);
   opacity: 0;
   pointer-events: none;
@@ -28399,6 +28399,7 @@ span.bx--pagination__text {
 @media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance::before {
     fill: ButtonText;
+    background-color: ButtonText;
   }
 }
 
@@ -30602,6 +30603,20 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 
 .bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch::before {
   border-radius: 0;
+}
+
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
+  .bx--toggle__switch::before {
+    outline: 1px solid transparent;
+  }
+}
+
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
+  .bx--toggle__switch::after,
+.bx--toggle-input:checked + .bx--toggle-input__label > .bx--toggle__switch::after {
+    outline: 1px solid transparent;
+    background-color: ButtonText;
+  }
 }
 
 .bx--header {

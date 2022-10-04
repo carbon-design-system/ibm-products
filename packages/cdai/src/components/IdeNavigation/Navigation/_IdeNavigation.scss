@@ -158,9 +158,9 @@
     display: flex;
     align-items: center;
     padding: carbon--mini-units(1) carbon--mini-units(2);
+    border-radius: $spacing-02;
     margin-left: carbon--mini-units(4.5);
     background-color: $ui-05;
-    border-radius: $spacing-02;
     font-weight: carbon--font-weight('regular');
   }
 }

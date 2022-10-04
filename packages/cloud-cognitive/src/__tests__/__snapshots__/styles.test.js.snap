@@ -2308,8 +2308,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit .c4p--inline-edit__input {
   display: inline-block;
   overflow: hidden;
-  width: calc(100% - var(--c4p--inline-edit--toolbar-width) - var(--cds-spacing-05, 1rem));
-  max-width: calc(100% - var(--c4p--inline-edit--toolbar-width) - var(--cds-spacing-05, 1rem));
+  width: calc(
+        100% - var(--c4p--inline-edit--toolbar-width) - var(--cds-spacing-05, 1rem)
+      );
+  max-width: calc(
+        100% - var(--c4p--inline-edit--toolbar-width) - var(--cds-spacing-05, 1rem)
+      );
   min-height: var(--c4p--inline-edit--size);
   /* stylelint-disable-next-line carbon/layout-token-use */
   margin-right: var(--c4p--inline-edit--toolbar-width);

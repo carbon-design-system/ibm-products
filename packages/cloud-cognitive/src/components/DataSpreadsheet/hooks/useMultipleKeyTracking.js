@@ -19,7 +19,11 @@ export const useMultipleKeyTracking = ({
   const [usingMac, setUsingMac] = useState('');
   const [windowFocused, setWindowFocused] = useState(hasFocus);
   const [keysPressedList, setKeysPressedList] = useState([]);
-  const previousState = usePreviousValue({ isEditing, windowFocused });
+  const previousState = usePreviousValue({
+    isEditing,
+    windowFocused,
+    containerHasFocus,
+  });
 
   // useEffect to check for window focus, if window loses focus
   // we need to clear out the keysPressedList
@@ -44,7 +48,7 @@ export const useMultipleKeyTracking = ({
   }, []);
 
   useEffect(() => {
-    if (containerHasFocus && !isEditing) {
+    if (ref && containerHasFocus && !isEditing) {
       ref.current.onkeydown = ref.current.onkeyup = (event) => {
         // If keydown, we will add the new key to the keysPressedList array
         if (event.type === 'keydown') {
@@ -89,10 +93,13 @@ export const useMultipleKeyTracking = ({
     }
     // Remove handlers if the spreadsheet container loses focus
     // or is currently in edit mode
-    if (!containerHasFocus || isEditing) {
+    if ((ref && !containerHasFocus) || isEditing) {
       ref.current.onkeydown = undefined;
       ref.current.onkeyup = undefined;
-      if (!previousState?.isEditing && isEditing) {
+      if (
+        (!previousState?.isEditing && isEditing) ||
+        (previousState?.containerHasFocus && !containerHasFocus)
+      ) {
         setKeysPressedList([]);
       }
     }
@@ -102,6 +109,7 @@ export const useMultipleKeyTracking = ({
     ref,
     isEditing,
     previousState?.isEditing,
+    previousState?.containerHasFocus,
     windowFocused,
     previousState?.windowFocused,
     usingMac,

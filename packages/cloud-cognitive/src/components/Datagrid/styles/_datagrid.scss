@@ -275,10 +275,6 @@
   flex: 1 1 auto;
 }
 
-.#{$block-class}__with-pagination table tr:last-of-type > td {
-  border-bottom: none;
-}
-
 .#{$block-class}__resizer {
   position: absolute;
   z-index: 1;
@@ -526,9 +522,4 @@
 
 .#{$block-class} .#{$pkg-prefix}--button-menu {
   height: $spacing-09;
-}
-
-.#{$block-class} .#{$block-class}__table-grid-active {
-  border: 2px solid $inverse-link;
-  outline: 0;
 }

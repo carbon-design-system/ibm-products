@@ -22,3 +22,15 @@
 .#{$block-class}__actions-column-loading {
   margin-bottom: $spacing-03;
 }
+
+.#{$block-class} .#{$block-class}__disabled-row-action-button {
+  cursor: not-allowed;
+}
+
+.#{$block-class} .#{$block-class}__disabled-row-action {
+  pointer-events: none;
+}
+
+.#{$block-class} .#{$block-class}__disabled-row-action svg {
+  fill: $disabled-03;
+}

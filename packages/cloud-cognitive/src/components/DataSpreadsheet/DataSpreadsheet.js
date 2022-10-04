@@ -914,6 +914,7 @@ export let DataSpreadsheet = React.forwardRef(
             {activeCellContent}
           </button>
           <TextArea
+            id={`${blockClass}__cell-editor-text-area`}
             value={cellEditorValue}
             onKeyDown={handleEditSubmit({
               activeCellCoordinates,

@@ -16098,7 +16098,7 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 @media screen and (-ms-high-contrast: active), (forced-colors: active) {
-  .bx--inline-notification__icon {
+  .bx--inline-notification .bx--inline-notification__close-icon {
     fill: ButtonText;
   }
 }
@@ -16370,7 +16370,7 @@ li.bx--accordion__item--disabled:last-of-type {
 }
 
 @media screen and (-ms-high-contrast: active), (forced-colors: active) {
-  .bx--toast-notification__icon {
+  .bx--toast-notification .bx--toast-notification__close-icon {
     fill: ButtonText;
   }
 }
@@ -28399,6 +28399,7 @@ span.bx--pagination__text {
 @media screen and (-ms-high-contrast: active), (forced-colors: active) {
   .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance::before {
     fill: ButtonText;
+    background-color: ButtonText;
   }
 }
 
@@ -30602,6 +30603,20 @@ a.bx--tabs__nav-link:focus, a.bx--tabs__nav-link:active {
 
 .bx--toggle.bx--skeleton + .bx--toggle-input__label .bx--toggle__switch::before {
   border-radius: 0;
+}
+
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
+  .bx--toggle__switch::before {
+    outline: 1px solid transparent;
+  }
+}
+
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
+  .bx--toggle__switch::after,
+.bx--toggle-input:checked + .bx--toggle-input__label > .bx--toggle__switch::after {
+    outline: 1px solid transparent;
+    background-color: ButtonText;
+  }
 }
 
 .bx--header {

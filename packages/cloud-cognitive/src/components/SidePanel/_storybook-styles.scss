@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,6 +7,7 @@
 
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/themes/scss/themes';
 @use '@carbon/styles/scss/type';
 
 $story-prefix: side-panel-stories__;
@@ -37,4 +38,8 @@ $story-prefix: side-panel-stories__;
   .#{$story-prefix}content-subtitle {
     margin: $spacing-05 0 $spacing-04;
   }
+}
+
+.#{$story-prefix}header {
+  @include theme(themes.$g100);
 }

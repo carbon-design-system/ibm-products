@@ -354,11 +354,11 @@ AddSelectBody.propTypes = {
       PropTypes.shape({
         avatar: PropTypes.shape({
           alt: PropTypes.string,
-          icon: PropTypes.func,
+          icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
           src: PropTypes.string,
         }),
         children: PropTypes.object,
-        icon: PropTypes.func,
+        icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
         id: PropTypes.string.isRequired,
         meta: PropTypes.oneOfType([
           PropTypes.arrayOf(

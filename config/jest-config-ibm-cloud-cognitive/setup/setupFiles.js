@@ -18,8 +18,8 @@ global.__DEV__ = true;
 const enzyme = jest.requireActual('enzyme');
 const Adapter = jest.requireActual('enzyme-adapter-react-16');
 
-global.requestAnimationFrame = function (callback) {
-  setTimeout(callback, 0);
+global.requestAnimationFrame = (callback) => {
+  return setTimeout(callback, 0);
 };
 
 enzyme.configure({ adapter: new Adapter() });

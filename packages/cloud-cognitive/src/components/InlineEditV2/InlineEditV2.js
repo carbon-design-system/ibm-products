@@ -37,6 +37,7 @@ export let InlineEditV2 = forwardRef(
     const [dirtyInput, setDirtyInput] = useState(false);
     const inputRef = useRef(null);
     const canSave = value !== initialValue && !invalid;
+    const escaping = useRef(false);
 
     useEffect(() => {
       if (!initialValue && !dirtyInput) {
@@ -55,8 +56,32 @@ export let InlineEditV2 = forwardRef(
       onChange(target.value);
     };
 
-    const onBlurHandler = (e) => {
+    const onFocusHandler = (e) => {
       if (readOnly) {
+        return;
+      }
+
+      if (!isTargetingChild(e)) {
+        inputRef.current.focus();
+        setFocused(true);
+      }
+    };
+
+    const onSaveHandler = () => {
+      setInitialValue(value);
+      setFocused(false);
+      setDirtyInput(false);
+      onSave();
+    };
+
+    const onCancelHandler = () => {
+      setFocused(false);
+      setDirtyInput(false);
+      onCancel(initialValue);
+    };
+
+    const onBlurHandler = (e) => {
+      if (readOnly || escaping.current) {
         return;
       }
 
@@ -69,58 +94,32 @@ export let InlineEditV2 = forwardRef(
       }
     };
 
-    const onFocusHandler = (e) => {
-      if (readOnly) {
-        return;
-      }
-
-      if (!isTargetingChild(e)) {
-        inputRef.current.focus();
-        setFocused(true);
-      }
-    };
-
-    const onSaveHandler = (resetFocus = true) => {
-      // when return or esc keys are used blur isn't being called, so don't reset the focus
-      if (resetFocus) {
-        setFocused(false);
-      }
-
-      setInitialValue(value);
-      setDirtyInput(false);
-      onSave();
-    };
-
-    const onCancelHandler = (resetFocus = true) => {
-      if (resetFocus) {
-        setFocused(false);
-      }
-
-      setDirtyInput(false);
-      onCancel(initialValue);
-    };
-
     const returnHandler = () => {
       if (canSave) {
-        onSaveHandler(false);
+        onSaveHandler();
       }
     };
 
     const escapeHandler = () => {
-      onCancelHandler(false);
+      onCancelHandler();
     };
 
     const onKeyHandler = (e) => {
+      // to prevent blur handler from being called twice add additional state to check if escape is being used
+      escaping.current = true;
       switch (e.key) {
         case 'Escape':
+          inputRef.current.blur();
           escapeHandler();
           break;
         case 'Enter':
+          inputRef.current.blur();
           returnHandler();
           break;
         default:
           break;
       }
+      escaping.current = false;
     };
 
     return (

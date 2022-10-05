@@ -1,12 +1,13 @@
-import React, { useContext, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { DataTable } from 'carbon-components-react';
+import { px } from '@carbon/layout';
 import DatagridHead from './DatagridHead';
 import DatagridBody from './DatagridBody';
 import DatagridToolbar from './DatagridToolbar';
 import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
-import { pkg } from '../../../settings';
+import { carbon, pkg } from '../../../settings';
 import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 import { useClickOutside } from '../../../global/js/hooks';
@@ -33,6 +34,9 @@ export const DatagridContent = ({ datagridState }) => {
     gridDescription,
     useDenseHeader,
     withInlineEdit,
+    tableId,
+    DatagridActions,
+    totalColumnsWidth,
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
@@ -98,6 +102,27 @@ export const DatagridContent = ({ datagridState }) => {
     isEditing: !!editId,
   });
 
+  // Provides a width for the region outline for useInlineEdit
+  useEffect(() => {
+    if (!withInlineEdit) {
+      return;
+    }
+    const gridElement = document.querySelector(`#${tableId}`);
+    const tableHeader = document.querySelector(
+      `.${carbon.prefix}--data-table-header`
+    );
+    gridElement.style.setProperty(
+      `--${blockClass}--grid-width`,
+      px(totalColumnsWidth + 32)
+    );
+    if (gridActive) {
+      gridElement.style.setProperty(
+        `--${blockClass}--grid-header-height`,
+        px(tableHeader?.clientHeight || 0)
+      );
+    }
+  }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
+
   return (
     <>
       <TableContainer
@@ -107,7 +132,13 @@ export const DatagridContent = ({ datagridState }) => {
             ? `${blockClass}__full-height`
             : '',
           DatagridPagination ? `${blockClass}__with-pagination` : '',
-          useDenseHeader ? `${blockClass}__dense-header` : ''
+          useDenseHeader ? `${blockClass}__dense-header` : '',
+          {
+            [`${blockClass}__grid-container-grid-active`]: gridActive,
+            [`${blockClass}__grid-container-inline-edit`]: withInlineEdit,
+            [`${blockClass}__grid-container-grid-active--without-toolbar`]:
+              withInlineEdit && !DatagridActions,
+          }
         )}
         title={gridTitle}
         description={gridDescription}
@@ -141,11 +172,15 @@ DatagridContent.propTypes = {
   datagridState: PropTypes.shape({
     getTableProps: PropTypes.func,
     withVirtualScroll: PropTypes.bool,
+    DatagridActions: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     DatagridPagination: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.func,
     ]),
-    CustomizeColumnsModal: PropTypes.element,
+    CustomizeColumnsModal: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+    ]),
     isFetching: PropTypes.bool,
     leftPanel: PropTypes.object,
     fullHeightDatagrid: PropTypes.bool,
@@ -157,5 +192,7 @@ DatagridContent.propTypes = {
     gridDescription: PropTypes.node,
     page: PropTypes.arrayOf(PropTypes.object),
     rows: PropTypes.arrayOf(PropTypes.object),
+    tableId: PropTypes.string,
+    totalColumnsWidth: PropTypes.number,
   }),
 };

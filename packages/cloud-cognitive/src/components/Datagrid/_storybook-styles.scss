@@ -86,3 +86,14 @@ $block-class: #{$pkg-prefix}--datagrid;
   .#{$pkg-prefix}--side-panel__inner-content {
   height: 100%;
 }
+
+.#{$block-class}-story__custom-cell-wrapper.#{$carbon-prefix}--link {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.#{$block-class}-story__hidden-column-id-snippet {
+  padding-top: $spacing-07;
+}

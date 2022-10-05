@@ -75,13 +75,3 @@ const oldConsole = {};
 global.afterEach(() => {
   jest.clearAllMocks();
 });
-
-global.beforeAll(() => {
-  jest
-    .spyOn(window, 'requestAnimationFrame')
-    .mockImplementation((callback) => callback());
-});
-
-global.afterAll(() => {
-  jest.clearAllMocks();
-});

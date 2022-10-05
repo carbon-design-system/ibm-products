@@ -15,13 +15,6 @@ setAllComponents(true);
 
 global.__DEV__ = true;
 
-// global.requestAnimationFrame = (cb) => cb();
-global.requestAnimationFrame = function requestAnimationFrame() {
-  // TODO: replace with async version
-  // setTimeout(callback);
-  // callback();
-};
-
 const enzyme = jest.requireActual('enzyme');
 const Adapter = jest.requireActual('enzyme-adapter-react-16');
 

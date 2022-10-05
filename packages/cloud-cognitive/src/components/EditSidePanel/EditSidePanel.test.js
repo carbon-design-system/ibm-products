@@ -12,6 +12,7 @@ import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { EditSidePanel } from '.';
+import { act } from 'react-dom/test-utils';
 
 const blockClass = `${pkg.prefix}--edit-side-panel`;
 const componentName = EditSidePanel.displayName;
@@ -74,8 +75,10 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = renderEditPanel();
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    await act(async () => {
+      await expect(container).toBeAccessible(componentName);
+      await expect(container).toHaveNoAxeViolations();
+    });
   });
 
   it(`renders children`, () => {

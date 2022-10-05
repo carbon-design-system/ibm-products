@@ -10,6 +10,7 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
+import { action } from '@storybook/addon-actions';
 import { InlineEditV2 } from '.';
 import mdx from './InlineEditV2.mdx';
 
@@ -22,6 +23,10 @@ export default {
     },
   },
 };
+
+const actionSave = action('save');
+const actionChange = action('change');
+const actionCancel = action('cancel');
 
 const defaultProps = {
   cancelLabel: 'Cancel',
@@ -41,14 +46,17 @@ const Template = (args) => {
 
   const onChange = (val) => {
     setValue(val);
+    actionChange(val);
   };
 
   const onSave = () => {
     console.log('saved!', value);
+    actionSave(value);
   };
 
   const onCancel = (initialVal) => {
     setValue(initialVal);
+    actionCancel(initialVal);
   };
 
   const props = {

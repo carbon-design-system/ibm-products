@@ -75,3 +75,17 @@ export const Default = prepareStory(Template, {
     ...defaultProps,
   },
 });
+
+export const Invalid = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    invalid: true,
+  },
+});
+
+export const ReadOnly = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    readOnly: true,
+  },
+});

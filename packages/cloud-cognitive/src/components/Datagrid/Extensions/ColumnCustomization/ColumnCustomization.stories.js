@@ -13,22 +13,33 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
-import { Datagrid, useDatagrid } from '../../index';
+import {
+  Datagrid,
+  useDatagrid,
+  useCustomizeColumns,
+  useColumnOrder,
+} from '../../index';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
+import { CodeSnippet } from 'carbon-components-react';
+import { pkg } from '../../../../settings';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Settings`,
+  title: `${getStoryTitle(
+    Datagrid.displayName
+  )}/Extensions/ColumnCustomization`,
   component: Datagrid,
   parameters: {
     styles,
     docs: { page: mdx },
   },
 };
+
+const blockClass = `${pkg.prefix}--datagrid`;
 
 const defaultHeader = [
   {
@@ -142,62 +153,87 @@ const sharedDatagridProps = {
       onClick: action('Clicked row action: delete'),
     },
   ],
-};
-
-const BasicUsage = ({ ...args }) => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader,
-      {
-        Header: 'Someone 11',
-        accessor: 'someone11',
-        multiLineWrap: true,
-      },
-    ],
-    []
-  );
-  const [data] = useState(makeData(10));
-  const rows = React.useMemo(() => data, [data]);
-
-  const datagridState = useDatagrid({
-    columns,
-    data: rows,
-    initialState: {
-      pageSize: 10,
-      pageSizes: [5, 10, 25, 50],
+  customizeColumnsProps: {
+    onSaveColumnPrefs: (newColDefs) => {
+      console.log(newColDefs);
     },
-    DatagridActions,
-    DatagridPagination,
-    ...args.defaultGridProps,
-  });
-
-  return <Datagrid datagridState={datagridState} />;
+    labels: {
+      findColumnPlaceholderLabel: 'Find column',
+      resetToDefaultLabel: 'Reset to default',
+      customizeModalHeadingLabel: 'Customize display',
+      primaryButtonTextLabel: 'Save',
+      secondaryButtonTextLabel: 'Cancel',
+      instructionsLabel:
+        'Deselect columns to hide them. Click and drag the white box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
+      iconTooltipLabel: 'Customize columns',
+      assistiveTextInstructionsLabel:
+        'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
+      assistiveTextDisabledInstructionsLabel:
+        'Reordering columns are disabled because they are filtered currently.',
+      selectAllLabel: 'Column name',
+    },
+  },
 };
 
-const BasicTemplateWrapper = ({ ...args }) => {
-  return <BasicUsage defaultGridProps={{ ...args }} />;
+const ColumnCustomizationUsage = ({ ...args }) => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(10));
+
+  const datagridState = useDatagrid(
+    {
+      className: `c4p--datagrid__hidden--columns`,
+      columns,
+      data,
+      initialState: {
+        pageSize: 10,
+        pageSizes: [5, 10, 25, 50],
+        hiddenColumns: ['age'],
+        columnOrder: [],
+      },
+      DatagridActions,
+      DatagridPagination,
+      ...args.defaultGridProps,
+    },
+    useCustomizeColumns,
+    useColumnOrder
+  );
+
+  return (
+    <>
+      <Datagrid datagridState={datagridState} />
+      <div className={`${blockClass}-story__hidden-column-id-snippet`}>
+        <p>Hidden column ids:</p>
+        <CodeSnippet type="multi">
+          {JSON.stringify(datagridState.state.hiddenColumns, null, 2)}
+        </CodeSnippet>
+      </div>
+    </>
+  );
 };
 
-const basicUsageControlProps = {
+const ColumnCustomizationWrapper = ({ ...args }) => {
+  return <ColumnCustomizationUsage defaultGridProps={{ ...args }} />;
+};
+
+const columnCustomizationControlProps = {
   gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
   useDenseHeader: sharedDatagridProps.useDenseHeader,
-  rowSize: sharedDatagridProps.rowSize,
-  rowSizes: sharedDatagridProps.rowSizes,
-  onRowSizeChange: sharedDatagridProps.onRowSizeChange,
+  customizeColumnsProps: sharedDatagridProps.customizeColumnsProps,
 };
-const basicUsageStoryName = 'With default row height settings';
-export const DefaultSettingsUsageStory = prepareStory(BasicTemplateWrapper, {
-  storyName: basicUsageStoryName,
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-    useDenseHeader: ARG_TYPES.useDenseHeader,
-    rowSize: ARG_TYPES.rowSize,
-    rowSizes: ARG_TYPES.rowSizes,
-    onRowSizeChange: ARG_TYPES.onRowSizeChange,
-  },
-  args: {
-    ...basicUsageControlProps,
-  },
-});
+const columnCustomizationStoryName = 'With column customization';
+export const ColumnCustomizationUsageStory = prepareStory(
+  ColumnCustomizationWrapper,
+  {
+    storyName: columnCustomizationStoryName,
+    argTypes: {
+      gridTitle: ARG_TYPES.gridTitle,
+      gridDescription: ARG_TYPES.gridDescription,
+      useDenseHeader: ARG_TYPES.useDenseHeader,
+      customizeColumnsProps: ARG_TYPES.customizeColumnsProps,
+    },
+    args: {
+      ...columnCustomizationControlProps,
+    },
+  }
+);

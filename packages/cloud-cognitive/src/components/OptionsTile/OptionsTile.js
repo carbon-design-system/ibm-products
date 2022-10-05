@@ -216,13 +216,15 @@ export let OptionsTile = React.forwardRef(
 
       return (
         <div className={`${blockClass}__heading`}>
-          <h6 id={titleId} className={`${blockClass}__title`}>
+          <h6 id={titleId} className={`${blockClass}__title`} title={title}>
             {title}
           </h6>
           {text && (
             <span className={cx(summaryClasses)} aria-hidden={summaryHidden}>
               {Icon && <Icon />}
-              <span className={`${blockClass}__summary-text`}>{text}</span>
+              <span className={`${blockClass}__summary-text`} title={text}>
+                {text}
+              </span>
             </span>
           )}
         </div>

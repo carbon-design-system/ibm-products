@@ -7,7 +7,7 @@ import {
   Checkmark24,
   Close24,
   EditOff24,
-  WarningFilled24,
+  WarningFilled16,
 } from '@carbon/icons-react';
 import { pkg, carbon } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -147,7 +147,7 @@ export let InlineEditV2 = forwardRef(
           {focused ? (
             <>
               {invalid && (
-                <WarningFilled24 className={`${blockClass}__warning-icon`} />
+                <WarningFilled16 className={`${blockClass}__warning-icon`} />
               )}
               <Button
                 hasIconOnly

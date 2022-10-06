@@ -10,7 +10,7 @@ import {
   ChartBubble,
   ChartColumnFloating,
   ChartVennDiagram,
-} from '@carbon/icons-react';
+} from '@carbon/react/icons';
 
 export const inlineEditSelectItems = [
   {

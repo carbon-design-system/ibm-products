@@ -9,7 +9,7 @@
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Settings } from '@carbon/icons-react';
+import { Settings } from '@carbon/react/icons';
 import { IconButton, Popover, PopoverContent } from '@carbon/react';
 import cx from 'classnames';
 import RowSizeRadioGroup from './RowSizeRadioGroup';

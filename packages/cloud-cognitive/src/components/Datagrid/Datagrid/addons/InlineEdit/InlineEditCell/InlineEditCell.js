@@ -20,7 +20,7 @@ import {
   DatePicker,
   DatePickerInput,
 } from '@carbon/react';
-import { Edit, CaretSort, ChevronDown, Calendar } from '@carbon/icons-react';
+import { Edit, CaretSort, ChevronDown, Calendar } from '@carbon/react/icons';
 import { InlineEditButton } from '../InlineEditButton';
 import { pkg } from '../../../../../../settings';
 import cx from 'classnames';

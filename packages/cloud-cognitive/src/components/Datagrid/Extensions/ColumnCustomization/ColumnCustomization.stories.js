@@ -13,22 +13,33 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
-import { Datagrid, useDatagrid, useExpandedRow } from '../../index';
+import {
+  Datagrid,
+  useDatagrid,
+  useCustomizeColumns,
+  useColumnOrder,
+} from '../../index';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
+import { CodeSnippet } from '@carbon/react';
+import { pkg } from '../../../../settings';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ExpandableRow`,
+  title: `${getStoryTitle(
+    Datagrid.displayName
+  )}/Extensions/ColumnCustomization`,
   component: Datagrid,
   parameters: {
     styles,
     docs: { page: mdx },
   },
 };
+
+const blockClass = `${pkg.prefix}--datagrid`;
 
 const defaultHeader = [
   {
@@ -142,55 +153,87 @@ const sharedDatagridProps = {
       onClick: action('Clicked row action: delete'),
     },
   ],
-  expandedContentHeight: 96,
+  customizeColumnsProps: {
+    onSaveColumnPrefs: (newColDefs) => {
+      console.log(newColDefs);
+    },
+    labels: {
+      findColumnPlaceholderLabel: 'Find column',
+      resetToDefaultLabel: 'Reset to default',
+      customizeModalHeadingLabel: 'Customize display',
+      primaryButtonTextLabel: 'Save',
+      secondaryButtonTextLabel: 'Cancel',
+      instructionsLabel:
+        'Deselect columns to hide them. Click and drag the white box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
+      iconTooltipLabel: 'Customize columns',
+      assistiveTextInstructionsLabel:
+        'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
+      assistiveTextDisabledInstructionsLabel:
+        'Reordering columns are disabled because they are filtered currently.',
+      selectAllLabel: 'Column name',
+    },
+  },
 };
 
-const ExpandedRows = ({ ...args }) => {
-  const expansionRenderer = ({ row }) => {
-    console.log(row);
-    return <div>Content for row index: {row.id}</div>;
-  };
-  const columns = React.useMemo(() => [...defaultHeader], []);
+const ColumnCustomizationUsage = ({ ...args }) => {
+  const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
-  const rows = React.useMemo(() => data, [data]);
 
   const datagridState = useDatagrid(
     {
+      className: `c4p--datagrid__hidden--columns`,
       columns,
-      data: rows,
+      data,
       initialState: {
         pageSize: 10,
         pageSizes: [5, 10, 25, 50],
+        hiddenColumns: ['age'],
+        columnOrder: [],
       },
       DatagridActions,
       DatagridPagination,
-      ExpandedRowContentComponent: expansionRenderer,
       ...args.defaultGridProps,
     },
-    useExpandedRow
+    useCustomizeColumns,
+    useColumnOrder
   );
 
-  return <Datagrid datagridState={datagridState} />;
+  return (
+    <>
+      <Datagrid datagridState={datagridState} />
+      <div className={`${blockClass}-story__hidden-column-id-snippet`}>
+        <p>Hidden column ids:</p>
+        <CodeSnippet type="multi">
+          {JSON.stringify(datagridState.state.hiddenColumns, null, 2)}
+        </CodeSnippet>
+      </div>
+    </>
+  );
 };
 
-const BasicTemplateWrapper = ({ ...args }) => {
-  return <ExpandedRows defaultGridProps={{ ...args }} />;
+const ColumnCustomizationWrapper = ({ ...args }) => {
+  return <ColumnCustomizationUsage defaultGridProps={{ ...args }} />;
 };
 
-const expandableRowControlProps = {
+const columnCustomizationControlProps = {
   gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
-  expandedContentHeight: sharedDatagridProps.expandedContentHeight,
+  useDenseHeader: sharedDatagridProps.useDenseHeader,
+  customizeColumnsProps: sharedDatagridProps.customizeColumnsProps,
 };
-const expandableRowStoryName = 'With expandable row';
-export const ExpandableRowStory = prepareStory(BasicTemplateWrapper, {
-  storyName: expandableRowStoryName,
-  argTypes: {
-    gridTitle: ARG_TYPES.gridTitle,
-    gridDescription: ARG_TYPES.gridDescription,
-    expandedContentHeight: ARG_TYPES.expandedContentHeight,
-  },
-  args: {
-    ...expandableRowControlProps,
-  },
-});
+const columnCustomizationStoryName = 'With column customization';
+export const ColumnCustomizationUsageStory = prepareStory(
+  ColumnCustomizationWrapper,
+  {
+    storyName: columnCustomizationStoryName,
+    argTypes: {
+      gridTitle: ARG_TYPES.gridTitle,
+      gridDescription: ARG_TYPES.gridDescription,
+      useDenseHeader: ARG_TYPES.useDenseHeader,
+      customizeColumnsProps: ARG_TYPES.customizeColumnsProps,
+    },
+    args: {
+      ...columnCustomizationControlProps,
+    },
+  }
+);

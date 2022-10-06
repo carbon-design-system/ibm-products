@@ -7,7 +7,7 @@
 
 import React from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { TrashCan, Edit } from '@carbon/icons-react';
+import { TrashCan, Edit } from '@carbon/react/icons';
 import { Grid, Column, usePrefix } from '@carbon/react';
 import {
   getStoryTitle,

@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "2.0.0-rc.2",
+  "version": "2.0.0-rc.3",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -75,6 +75,7 @@
   "dependencies": {
     "@babel/runtime": "^7.18.9",
     "@carbon/telemetry": "^0.1.0",
+    "framer-motion": "^6.5.1",
     "immutability-helper": "^3.1.1",
     "react-dnd": "^15.1.2",
     "react-dnd-html5-backend": "^15.1.3",

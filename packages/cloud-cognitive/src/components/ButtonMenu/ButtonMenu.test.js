@@ -13,7 +13,7 @@ import { pkg, carbon } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Add } from '@carbon/icons-react';
+import { Add } from '@carbon/react/icons';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
 

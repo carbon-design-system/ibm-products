@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { DataTable, Button } from '@carbon/react';
-import { Download, Filter, Add, Restart } from '@carbon/icons-react';
+import { Download, Filter, Add, Restart } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';

@@ -16,14 +16,12 @@ setAllComponents(true);
 
 global.__DEV__ = true;
 
-global.requestAnimationFrame = function requestAnimationFrame(callback) {
-  // TODO: replace with async version
-  // setTimeout(callback);
-  callback();
-};
-
 const enzyme = jest.requireActual('enzyme');
 const Adapter = jest.requireActual('@wojtekmaj/enzyme-adapter-react-17');
+
+global.requestAnimationFrame = (callback) => {
+  return setTimeout(callback, 0);
+};
 
 enzyme.configure({ adapter: new Adapter() });
 

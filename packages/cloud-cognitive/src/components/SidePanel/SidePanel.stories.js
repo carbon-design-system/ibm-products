@@ -370,7 +370,7 @@ const renderDataTable = () => {
 const renderUIShellHeader = () => (
   <HeaderContainer
     render={() => (
-      <Header aria-label="IBM Cloud Pak">
+      <Header aria-label="IBM Cloud Pak" className={`${prefix}header`}>
         <HeaderName href="/" prefix="IBM">
           Cloud Pak
         </HeaderName>

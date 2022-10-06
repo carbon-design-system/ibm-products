@@ -65,6 +65,7 @@
 .#{variables.$block-class}__customize-columns-select-all {
   display: flex;
   height: $spacing-09;
+  align-items: center;
   padding-left: $spacing-08;
   border-bottom: 1px solid $layer-active;
   background-color: $layer-01;
@@ -75,6 +76,7 @@
 .#{variables.$block-class}__customize-columns-select-all-selected {
   display: flex;
   height: $spacing-09;
+  align-items: center;
   padding-left: $spacing-08;
   border-bottom: 1px solid $layer-active;
   background-color: $layer-selected-01;

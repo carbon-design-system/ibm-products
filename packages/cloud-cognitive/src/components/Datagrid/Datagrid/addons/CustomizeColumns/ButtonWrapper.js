@@ -41,6 +41,10 @@ const ButtonWrapper = ({
   );
 };
 
+ButtonWrapper.defaultProps = {
+  onClick: () => {},
+};
+
 ButtonWrapper.propTypes = {
   iconTooltipLabel: PropTypes.string,
   isModalOpen: PropTypes.bool.isRequired,

@@ -52,6 +52,8 @@ const s = [
               'c/Datagrid/Extensions/NestedRows',
               'c/Datagrid/Extensions/ColumnAlignment',
               'c/Datagrid/Extensions/ClickableRow',
+              'c/Datagrid/Extensions/InlineEdit',
+              'c/Datagrid/Extensions/ColumnCustomization',
             ],
           },
         ],

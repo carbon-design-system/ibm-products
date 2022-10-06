@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.33.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.32.1...@carbon/ibm-products@1.33.0) (2022-10-04)
+
+
+### Bug Fixes
+
+* **CreateTearsheetNarrow:** Update formTitle prop as optional ([#2315](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2315)) ([5b3e946](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5b3e946f9b6f8a819b37bbe9b527d36ecf0751e1))
+* **InlineEdit:** fix calc interpolation issue ([#2311](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2311)) ([55f526a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/55f526a299007fa520e4f3022556c7709cb77e64))
+
+
+### Features
+
+* **Datagrid:** add validation to inline editing ([#2316](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2316)) ([3e572d6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3e572d630c6632d2c8a383f46dcb877978d63553))
+
+
+
+
+
 ## [1.32.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.32.0...@carbon/ibm-products@1.32.1) (2022-09-27)
 
 

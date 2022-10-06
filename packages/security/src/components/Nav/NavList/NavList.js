@@ -191,3 +191,5 @@ NavList.propTypes = {
   /** @type {string} Label of the list. */
   title: string,
 };
+
+NavList.displayName = 'NavList';

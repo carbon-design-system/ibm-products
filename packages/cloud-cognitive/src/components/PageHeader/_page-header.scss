@@ -466,6 +466,10 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     vertical-align: middle;
   }
 
+  .#{$block-class}__title-wrapper {
+    @include type.type-style('productive-heading-04');
+  }
+
   .#{$block-class}__page-actions {
     flex: 0 0 100%;
     margin-top: $spacing-05;

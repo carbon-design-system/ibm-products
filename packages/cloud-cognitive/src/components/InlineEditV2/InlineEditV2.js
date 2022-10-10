@@ -158,7 +158,7 @@ export let InlineEditV2 = forwardRef(
                 kind="ghost"
                 tabIndex={0}
                 key="cancel"
-                className={`${blockClass}__btn`}
+                className={`${blockClass}__btn ${blockClass}__btn-cancel`}
               />
               {canSave && (
                 <Button
@@ -170,14 +170,14 @@ export let InlineEditV2 = forwardRef(
                   kind="ghost"
                   tabIndex={0}
                   key="save"
-                  className={`${blockClass}__btn`}
+                  className={`${blockClass}__btn ${blockClass}__btn-save`}
                   disabled={!canSave}
                 />
               )}
             </>
           ) : (
             <Button
-              className={cx(`${blockClass}__btn`, `${blockClass}__btn-edit`)}
+              className={`${blockClass}__btn ${blockClass}__btn-edit`}
               hasIconOnly
               renderIcon={readOnly ? EditOff24 : Edit24}
               size="sm"
@@ -203,14 +203,50 @@ InlineEditV2 = pkg.checkComponentEnabled(InlineEditV2, componentName);
 InlineEditV2.displayName = componentName;
 
 InlineEditV2.propTypes = {
+  /**
+   * label for cancel button
+   */
   cancelLabel: PropTypes.string.isRequired,
+  /**
+   * label for edit button
+   */
   editLabel: PropTypes.string.isRequired,
+  /**
+   * determines if the input is invalid
+   */
   invalid: PropTypes.bool,
+  /**
+   * text that is displayed if the input is invalid
+   */
   invalidLabel: PropTypes.string,
+  /**
+   * handler that is called when the cancel button is pressed or when the user removes focus from the input and there is no new value
+   */
   onCancel: PropTypes.func.isRequired,
+  /**
+   * handler that is called when the input is updated
+   */
   onChange: PropTypes.func.isRequired,
+  /**
+   * handler that is called when the save button is pressed or when the user removes focus from the input if it has a new value
+   */
   onSave: PropTypes.func.isRequired,
+  /**
+   * determines if the input is in readOnly mode
+   */
   readOnly: PropTypes.bool,
+  /**
+   * label for save button
+   */
   saveLabel: PropTypes.string.isRequired,
+  /**
+   * current value of the input
+   */
   value: PropTypes.string.isRequired,
+};
+
+InlineEditV2.defaultProps = {
+  invalid: false,
+  invalidLabel: '',
+  readOnly: false,
 };

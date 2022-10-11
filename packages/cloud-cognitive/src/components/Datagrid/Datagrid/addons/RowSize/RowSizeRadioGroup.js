@@ -23,7 +23,7 @@ const RowSizeRadioGroup = ({
   buttonRef,
   onChange,
   hideRadioGroup,
-  legendText = 'Row height',
+  legendText,
   rowSizeLabels = {
     xl: 'Extra large',
     lg: 'Large (default)',
@@ -100,10 +100,7 @@ const getDropdownPosition = (buttonEle) => {
   const parent = buttonEle.parentElement;
   if (parent instanceof HTMLElement) {
     const top = buttonEle.offsetTop + buttonEle.offsetHeight;
-    const right =
-      parent.offsetWidth -
-      parent.offsetLeft -
-      (buttonEle.offsetLeft + buttonEle.offsetWidth);
+    const right = parent.offsetWidth - parent.offsetLeft - buttonEle.offsetLeft;
     return {
       top,
       right,

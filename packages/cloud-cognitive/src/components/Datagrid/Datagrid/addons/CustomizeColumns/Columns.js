@@ -37,9 +37,9 @@ const Columns = ({
   columns,
   setColumnsObject,
   onSelectColumn,
-  instructionsLabel = 'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
-  disabledInstructionsLabel = 'Reordering columns are disabled because they are filtered currently.',
-  selectAllLabel = 'Column name',
+  assistiveTextInstructionsLabel,
+  assistiveTextDisabledInstructionsLabel,
+  selectAllLabel,
 }) => {
   const [ariaRegionText, setAriaRegionText] = React.useState('');
   const [focusIndex, setFocusIndex] = React.useState(-1);
@@ -91,27 +91,22 @@ const Columns = ({
             className={`${blockClass}__shared-ui--assistive-text`}
           >
             {filterString.length === 0
-              ? instructionsLabel
-              : disabledInstructionsLabel}
+              ? assistiveTextInstructionsLabel
+              : assistiveTextDisabledInstructionsLabel}
           </span>
           <div
             id={`${blockClass}__customize-columns-select-all`}
-            className={classNames(
-              {
-                [`${blockClass}__customize-columns-select-all`]:
-                  getVisibleColumnsCount() === 0,
-                [`${blockClass}__customize-columns-select-all-selected`]:
-                  getVisibleColumnsCount() > 0,
-              }
-
-              // `${blockClass}__customize-columns-select-all`,
-            )}
+            className={classNames({
+              [`${blockClass}__customize-columns-select-all`]:
+                getVisibleColumnsCount() === 0,
+              [`${blockClass}__customize-columns-select-all-selected`]:
+                getVisibleColumnsCount() > 0,
+            })}
             selected={getVisibleColumnsCount() > 0}
           >
             <Checkbox
               wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
               checked={getVisibleColumnsCount() === columns.length}
-              empty={getVisibleColumnsCount() === 0}
               indeterminate={
                 getVisibleColumnsCount() < columns.length &&
                 getVisibleColumnsCount() > 0
@@ -183,6 +178,8 @@ const Columns = ({
 };
 
 Columns.propTypes = {
+  assistiveTextDisabledInstructionsLabel: PropTypes.string,
+  assistiveTextInstructionsLabel: PropTypes.string,
   columns: PropTypes.array.isRequired,
   disabledInstructionsLabel: PropTypes.string,
   filterString: PropTypes.string.isRequired,

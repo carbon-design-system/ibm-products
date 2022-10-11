@@ -17,7 +17,7 @@ import { pkg } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const RowSizeDropdown = ({ buttonLabel = 'Row height', ...props }) => {
+const RowSizeDropdown = ({ legendText = 'Row height', ...props }) => {
   const buttonRef = React.useRef({});
 
   const [isOpen, setIsOpen] = React.useState(false);
@@ -30,14 +30,15 @@ const RowSizeDropdown = ({ buttonLabel = 'Row height', ...props }) => {
         tooltipPosition="left"
         renderIcon={Settings16}
         onClick={() => setIsOpen(!isOpen)}
-        iconDescription={buttonLabel}
-        className={cx({
+        iconDescription={legendText}
+        className={cx(`${blockClass}__row-size-button`, {
           [`${blockClass}__row-size-button--open`]: isOpen,
         })}
       />
       {isOpen && (
         <RowSizeRadioGroup
           {...props}
+          legendText={legendText}
           buttonRef={buttonRef}
           hideRadioGroup={() => {
             setIsOpen(false);
@@ -49,8 +50,8 @@ const RowSizeDropdown = ({ buttonLabel = 'Row height', ...props }) => {
 };
 
 RowSizeDropdown.propTypes = {
-  buttonLabel: PropTypes.string,
   datagridName: PropTypes.string,
+  legendText: PropTypes.string,
   light: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   selectedOption: PropTypes.string,

@@ -39,24 +39,12 @@ const handleDropdown = ({ event, instance, column }) => {
 
 const useFiltering = (hooks) => {
   hooks.useInstance.push((instance) => {
-    const { filterProps, FilterFlyoutContent } = instance;
+    const { filterProps } = instance;
     // const { labels } = customizeColumnsProps || {};
     Object.assign(instance, {
       filterProps: {
         ...filterProps,
       },
-      FilterFlyoutButton: (props) => (
-        <FilterFlyout {...props}>
-          <FilterFlyoutContent
-            handleNumberInput={({ event, column }) =>
-              handleNumberInput({ event, instance, column })
-            }
-            handleDropdown={({ event, column }) =>
-              handleDropdown({ event, instance, column })
-            }
-          />
-        </FilterFlyout>
-      ),
     });
   });
 };

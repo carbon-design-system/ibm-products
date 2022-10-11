@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
 import { getInlineEditColumns } from './utils/getInlineEditColumns';
 
@@ -20,19 +20,16 @@ import {
   Download16,
   Filter16,
   Add16,
-  Edit16,
-  TrashCan16,
 } from '@carbon/icons-react';
 import {
   DataTable,
   Button,
-  Pagination,
   DatePicker,
   DatePickerInput,
   NumberInput,
   Dropdown,
 } from 'carbon-components-react';
-
+import debounce from 'lodash.debounce';
 import {
   Datagrid,
   useDatagrid,
@@ -72,7 +69,7 @@ import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
 import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
-import FilterFlyout from './Datagrid/addons/Filtering/FilterFlyout';
+import { FilterFlyout, FilterFlyoutButton } from './Datagrid/addons/Filtering';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -520,49 +517,175 @@ export const SelectableRow = () => {
 
 export const Filtering = () => {
   const columns = React.useMemo(() => defaultHeader, []);
-  const [data, setData] = useState(makeData(10));
+  const [data] = useState(makeData(10));
 
-  const FilterFlyoutContent = ({ handleNumberInput, handleDropdown }) => (
-    <>
-      <DatePicker datePickerType="range">
-        <DatePickerInput
-          id="date-picker-input-id-start"
-          placeholder="mm/dd/yyyy"
-          labelText="Joined start date"
-        />
-        <DatePickerInput
-          id="date-picker-input-id-finish"
-          placeholder="mm/dd/yyyy"
-          labelText="Joined end date"
-        />
-      </DatePicker>
-      <NumberInput
-        id="tj-input"
-        invalidText="Number is not valid"
-        label="Number input label"
-        step={1}
-        onChange={(event) => handleNumberInput({ column: 'visits', event })}
-      />
-      <Dropdown
-        id="marital-status-dropdown"
-        ariaLabel="Marital status dropdown"
-        items={['relationship', 'complicated', 'single']}
-        label="Marital status"
-        onChange={(event) => handleDropdown({ column: 'status', event })}
-      />
-    </>
-  );
+  const FilterDatagridActions = (datagridState) => {
+    const {
+      selectedFlatRows,
+      setGlobalFilter,
+      CustomizeColumnsButton,
+      RowSizeDropdown,
+      rowSizeDropdownProps,
+      useDenseHeader,
+      setFilter,
+    } = datagridState;
+
+    const downloadCsv = () => {
+      alert('Downloading...');
+    };
+    const { TableToolbarContent, TableToolbarSearch } = DataTable;
+
+    const refreshColumns = () => {
+      alert('refreshing...');
+    };
+    const leftPanelClick = () => {
+      alert('open/close left panel...');
+    };
+    const searchForAColumn = 'Search';
+    const isNothingSelected = selectedFlatRows.length === 0;
+    const style = {
+      'button:nth-child(1) > span:nth-child(1)': {
+        bottom: '-37px',
+      },
+    };
+
+    const renderFilterFlyout = useCallback(() => {
+      return (
+        <FilterFlyout updateMethod="instant">
+          <DatePicker datePickerType="range">
+            <DatePickerInput
+              id="date-picker-input-id-start"
+              placeholder="mm/dd/yyyy"
+              labelText="Joined start date"
+            />
+            <DatePickerInput
+              id="date-picker-input-id-finish"
+              placeholder="mm/dd/yyyy"
+              labelText="Joined end date"
+            />
+          </DatePicker>
+          <NumberInput
+            id="tj-input"
+            invalidText="Number is not valid"
+            label="Number input label"
+            allowEmpty
+            onChange={(event) => {
+              const column = 'visits';
+              setFilter(column, event.target.value);
+            }}
+          />
+          <Dropdown
+            id="marital-status-dropdown"
+            ariaLabel="Marital status dropdown"
+            items={['relationship', 'complicated', 'single']}
+            label="Marital status"
+            onChange={({ selectedItem }) => {
+              const column = 'status';
+              setFilter(column, selectedItem);
+            }}
+          />
+        </FilterFlyout>
+      );
+    }, []);
+
+    return (
+      isNothingSelected &&
+      (useDenseHeader && useDenseHeader ? (
+        <TableToolbarContent size="sm">
+          <div style={style}>
+            <Button
+              kind="ghost"
+              hasIconOnly
+              tooltipPosition="bottom"
+              renderIcon={Download16}
+              iconDescription={'Download CSV'}
+              onClick={downloadCsv}
+            />
+          </div>
+          <div style={style}>
+            <Button
+              kind="ghost"
+              hasIconOnly
+              tooltipPosition="bottom"
+              renderIcon={Filter16}
+              iconDescription={'Left panel'}
+              onClick={leftPanelClick}
+            />
+          </div>
+          {renderFilterFlyout()}
+          <RowSizeDropdown {...rowSizeDropdownProps} />
+          <div style={style} className={`${blockClass}__toolbar-divider`}>
+            <Button kind="ghost" renderIcon={Add16} iconDescription={'Action'}>
+              Ghost button
+            </Button>
+          </div>
+
+          {CustomizeColumnsButton && (
+            <div style={style}>
+              <CustomizeColumnsButton />
+            </div>
+          )}
+        </TableToolbarContent>
+      ) : (
+        <TableToolbarContent>
+          <TableToolbarSearch
+            size="xl"
+            id="columnSearch"
+            persistent
+            placeHolderText={searchForAColumn}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+          />
+          {renderFilterFlyout()}
+          <RowSizeDropdown {...rowSizeDropdownProps} />
+          <div style={style}>
+            <Button
+              kind="ghost"
+              hasIconOnly
+              tooltipPosition="bottom"
+              renderIcon={Restart16}
+              iconDescription={'Refresh'}
+              onClick={refreshColumns}
+            />
+          </div>
+          <div style={style}>
+            <Button
+              kind="ghost"
+              hasIconOnly
+              tooltipPosition="bottom"
+              renderIcon={Download16}
+              iconDescription={'Download CSV'}
+              onClick={downloadCsv}
+            />
+          </div>
+          {CustomizeColumnsButton && (
+            <div style={style}>
+              <CustomizeColumnsButton />
+            </div>
+          )}
+          <ButtonMenu label="Primary button" renderIcon={Add16}>
+            <ButtonMenuItem
+              itemText="Option 1"
+              onClick={action(`Click on ButtonMenu Option 1`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 2"
+              onClick={action(`Click on ButtonMenu Option 2`)}
+            />
+            <ButtonMenuItem
+              itemText="Option 3"
+              onClick={action(`Click on ButtonMenu Option 3`)}
+            />
+          </ButtonMenu>
+        </TableToolbarContent>
+      ))
+    );
+  };
 
   const datagridState = useDatagrid(
     {
       columns,
       data,
-      DatagridActions,
-      onDataUpdate: setData,
-      FilterFlyoutContent,
-      filterProps: {
-        updateMethod: 'batch',
-      },
+      DatagridActions: FilterDatagridActions,
       batchActions: true,
       toolbarBatchActions: getBatchActions(),
     },

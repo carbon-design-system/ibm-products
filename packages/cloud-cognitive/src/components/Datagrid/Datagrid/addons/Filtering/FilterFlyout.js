@@ -7,13 +7,15 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 
+import React, { useState, useCallback, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'carbon-components-react';
 import { Filter16 } from '@carbon/icons-react';
 import cx from 'classnames';
-import React, { useState } from 'react';
 import { ActionSet } from '../../../../ActionSet';
 import { pkg } from '../../../../../settings';
+import { BATCH, INSTANT } from './constants';
+import { useClickOutside } from '../../../../../../lib/global/js/hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-flyout`;
@@ -23,16 +25,51 @@ const componentClass = `${blockClass}-filter-flyout`;
   NOTES: 
   - https://stackoverflow.com/questions/72929659/react-child-component-state-is-lost-after-parent-component-re-renders
 */
+const FilterFlyout = ({ children, updateMethod = BATCH, title = 'Filter' }) => {
+  /** Refs */
+  const filterFlyoutRef = useRef(null);
 
-const FilterFlyout = ({
-  children,
-  updateMethod = 'batch',
-  title = 'Filter',
-}) => {
+  /** State */
   const [open, setOpen] = useState(false);
 
+  /** Memos */
+  const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
+
+  /** Methods */
   const openFlyout = () => setOpen(true);
   const closeFlyout = () => setOpen(false);
+
+  /** Effects */
+  useClickOutside(filterFlyoutRef, () => {
+    if (!open) {
+      return;
+    }
+    setOpen(false);
+  });
+
+  const renderActionSet = useCallback(() => {
+    return (
+      showActionSet && (
+        <ActionSet
+          actions={[
+            {
+              key: 1,
+              kind: 'primary',
+              label: 'Apply',
+              onClick: function noRefCheck() {},
+            },
+            {
+              key: 3,
+              kind: 'secondary',
+              label: 'Cancel',
+              onClick: closeFlyout,
+            },
+          ]}
+          size="md"
+        />
+      )
+    );
+  }, [showActionSet]);
 
   return (
     <div className={`${componentClass}__container`}>
@@ -47,31 +84,20 @@ const FilterFlyout = ({
           [`${componentClass}__trigger--open`]: open,
         })}
       />
-      {open && (
-        <div className={`${componentClass}`}>
-          <div className={`${componentClass}__inner-container`}>
-            <span className={`${componentClass}__title`}>{title}</span>
-            <div className={`${componentClass}__filters`}>{children}</div>
-          </div>
-          <ActionSet
-            actions={[
-              {
-                key: 1,
-                kind: 'primary',
-                label: 'Apply',
-                onClick: function noRefCheck() {},
-              },
-              {
-                key: 3,
-                kind: 'secondary',
-                label: 'Cancel',
-                onClick: closeFlyout,
-              },
-            ]}
-            size="md"
-          />
+      <div
+        ref={filterFlyoutRef}
+        className={cx(componentClass, {
+          [`${componentClass}--open`]: open,
+          [`${componentClass}--batch`]: showActionSet,
+          [`${componentClass}--instant`]: !showActionSet,
+        })}
+      >
+        <div className={`${componentClass}__inner-container`}>
+          <span className={`${componentClass}__title`}>{title}</span>
+          <div className={`${componentClass}__filters`}>{children}</div>
         </div>
-      )}
+        {renderActionSet()}
+      </div>
     </div>
   );
 };

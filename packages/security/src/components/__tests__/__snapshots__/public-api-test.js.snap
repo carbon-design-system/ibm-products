@@ -6378,6 +6378,7 @@ Map {
       "tabIndex": 0,
       "title": "",
     },
+    "displayName": "NavList",
     "propTypes": {
       "activeHref": {
         "type": "string",

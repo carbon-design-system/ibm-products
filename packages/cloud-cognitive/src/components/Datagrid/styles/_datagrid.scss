@@ -46,6 +46,9 @@
       align-items: center;
       padding-top: 0;
       padding-bottom: 0;
+      &.#{$block-class}__cell--spacer {
+        padding: 0;
+      }
     }
 
     td.#{$carbon-prefix}--table-column-checkbox,
@@ -270,10 +273,6 @@
 
 .#{$block-class}__empty-state .#{$block-class}__grid-container {
   flex: 1 1 auto;
-}
-
-.#{$block-class}__with-pagination table tr:last-of-type > td {
-  border-bottom: none;
 }
 
 .#{$block-class}__resizer {

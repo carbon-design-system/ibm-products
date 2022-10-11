@@ -630,3 +630,8 @@
   background-color: $hover-selected-ui;
   user-select: none;
 }
+
+.#{$block-class} .#{$block-class}__selected-header {
+  background-color: $hover-selected-ui;
+  user-select: none;
+}

@@ -2,5 +2,5 @@ $feature-flags: (
   enable-css-custom-properties: true,
 );
 
-@import '@carbon/elements/scss';
+@import 'carbon-components/scss/globals/scss/styles';
 @include carbon--theme();

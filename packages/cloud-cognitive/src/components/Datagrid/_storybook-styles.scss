@@ -93,3 +93,7 @@ $block-class: #{$pkg-prefix}--datagrid;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.#{$block-class}-story__hidden-column-id-snippet {
+  padding-top: $spacing-07;
+}

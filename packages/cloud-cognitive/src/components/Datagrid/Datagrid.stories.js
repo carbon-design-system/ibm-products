@@ -145,8 +145,7 @@ export const EmptyState = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(0));
   const emptyStateTitle = 'Empty state title';
-  const emptyStateDescription =
-    'Description text explaining why this card is empty.';
+  const emptyStateDescription = 'Description explaining why the table is empty';
   const emptyStateSize = 'lg';
   const illustrationTheme = 'light';
 

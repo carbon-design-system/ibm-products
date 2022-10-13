@@ -144,6 +144,9 @@ export const BasicUsage = () => {
 export const EmptyState = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(0));
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription = 'Description explaining why the table is empty';
+  const emptyStateSize = 'lg';
   const illustrationTheme = 'light';
 
   const datagridState = useDatagrid({
@@ -153,6 +156,9 @@ export const EmptyState = () => {
     DatagridActions,
     DatagridBatchActions,
     DatagridPagination,
+    emptyStateDescription,
+    emptyStateTitle,
+    emptyStateSize,
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;

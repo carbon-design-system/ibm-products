@@ -6,7 +6,7 @@
  */
 
 // @flow
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 import { TableHeader, TableRow } from '@carbon/react';
 import { selectionColumnId } from '../common-column-ids';
@@ -14,48 +14,178 @@ import { pkg } from '../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const HeaderRow = (datagridState, headRef, headerGroup) => (
-  <TableRow
-    {...headerGroup.getHeaderGroupProps({ role: false })}
-    className={cx(
-      `${blockClass}__head`,
-      headerGroup.getHeaderGroupProps().className
-    )}
-    ref={headRef}
-  >
-    {datagridState.headers
-      .filter(({ isVisible }) => isVisible)
-      .map((header) => {
-        if (header.id === selectionColumnId) {
-          // render directly without the wrapper TableHeader
-          return header.render('Header', { key: header.id });
-        }
-        return (
-          <TableHeader
-            {...header.getHeaderProps({ role: false })}
-            className={cx(
-              {
-                [`${blockClass}__resizableColumn`]: header.getResizerProps,
-                [`${blockClass}__isResizing`]: header.isResizing,
-                [`${blockClass}__sortableColumn`]: header.canSort,
-                [`${blockClass}__isSorted`]: header.isSorted,
-              },
-              header.getHeaderProps().className
-            )}
-            key={header.id}
-          >
-            {header.render('Header')}
-            {header.getResizerProps && (
-              <div
-                {...header.getResizerProps()}
-                className={`${blockClass}__resizer`}
-              />
-            )}
-          </TableHeader>
+const HeaderRow = (datagridState, headRef, headerGroup) => {
+  const [selectedHeader, setSelectedHeader] = useState([]);
+  const [selectedHeaderWidths, setSelectedHeaderWidths] = useState([]);
+  const [isResizing, setIsResizing] = useState('');
+  const [isDblClick, setIsDblClick] = useState(false);
+  const [dargStopped, setDargStopped] = useState(false);
+  const [colExpandWidth, setColExpandWidth] = useState('');
+  const [colExpandId, setColExpandId] = useState('');
+  const { state } = datagridState;
+  const { columnResizing } = state;
+
+  // Below is to handle multiple column resize and `double click` column to fit content.
+  const handleMultiColumSelect = (header, e) => {
+    setDargStopped(false);
+    if (e.shiftKey && !selectedHeader.some((item) => item.id === header.id)) {
+      const headerId = header.id;
+      setSelectedHeader((current) => [...current, header]);
+      setSelectedHeaderWidths((current) => [
+        ...current,
+        { [headerId]: header.width },
+      ]);
+      document.getSelection().removeAllRanges();
+    }
+    if (!e.shiftKey) {
+      setSelectedHeader([]); // Remove selection if `Shift` not pressed while clicking on resizer
+      setSelectedHeaderWidths([]);
+    }
+
+    if (e.detail === 2) {
+      setIsDblClick(true);
+      let cellWidths = [];
+      datagridState.rows.map((row) => {
+        const cell = document.querySelector(
+          `.row_${row.id}__column__${header.id}`
         );
-      })}
-  </TableRow>
-);
+        const colHeader = document.querySelector(`.column__${header.id}`);
+        cellWidths.push(cell.firstChild.scrollWidth);
+        setTimeout(() => {
+          const largest = Math.max.apply(0, cellWidths);
+          const newColWidth = largest + 32;
+          setColExpandWidth(newColWidth);
+          setColExpandId(header.id);
+          cell.style.width = newColWidth + 'px';
+          colHeader.style.width = newColWidth + 'px';
+        }, 1);
+      });
+    } else {
+      setIsDblClick(false);
+      setColExpandWidth('');
+      setColExpandId('');
+    }
+  };
+
+  useEffect(() => {
+    if (dargStopped) {
+      setSelectedHeader([]); // Remove column selection
+      setSelectedHeaderWidths([]); //Reset initial column widths selection
+    }
+  }, [dargStopped]);
+
+  useEffect(() => {
+    const colWidths = columnResizing.columnWidths;
+    const resizingCol = columnResizing.isResizingColumn;
+    if (resizingCol !== null && selectedHeader.length > 0) {
+      setIsResizing(resizingCol);
+      selectedHeader.map((col, idx) => {
+        if (col.id !== resizingCol) {
+          const initialColWidth = selectedHeaderWidths[idx][col.id]; // get initial width of selected columns
+          if (columnResizing.columnWidth > colWidths[resizingCol]) {
+            // check resize 'forward' or 'backward'
+            const resizeDiff =
+              columnResizing.columnWidth - colWidths[resizingCol]; // actual resized value of current resizing column
+            colWidths[col.id] = isNaN(resizeDiff)
+              ? initialColWidth
+              : initialColWidth - resizeDiff; // add actual resized value to the other selected column widths
+          } else {
+            const resizeDiff =
+              colWidths[resizingCol] - columnResizing.columnWidth;
+            colWidths[col.id] = isNaN(resizeDiff)
+              ? initialColWidth
+              : initialColWidth + resizeDiff;
+          }
+        }
+      });
+    } else {
+      if (
+        colWidths &&
+        (colWidths[isResizing] < columnResizing.columnWidth ||
+          colWidths[isResizing] > columnResizing.columnWidth)
+      ) {
+        // Check resize ended, 'columnResizing' firing even if we clicked on resizer.
+        setDargStopped(true);
+        columnResizing.columnWidth = colWidths[resizingCol];
+      }
+    }
+    if (isDblClick) {
+      columnResizing.isResizingColumn = colExpandId;
+      columnResizing.columnWidths[colExpandId] = colExpandWidth;
+      columnResizing.columnWidth = colExpandWidth;
+    }
+  }, [
+    columnResizing,
+    isResizing,
+    selectedHeader,
+    selectedHeaderWidths,
+    isDblClick,
+    colExpandWidth,
+    colExpandId,
+  ]);
+
+  return (
+    <TableRow
+      {...headerGroup.getHeaderGroupProps(({ role: false })}
+      className={cx(
+        `${blockClass}__head`,
+        headerGroup.getHeaderGroupProps().className
+      )}
+      ref={headRef}
+    >
+      {datagridState.headers
+        .filter(({ isVisible }) => isVisible)
+        .map((header) => {
+          if (header.id === selectionColumnId) {
+            // render directly without the wrapper TableHeader
+
+            return header.render('Header', { key: header.id });
+          }
+          const headerTitle =
+            typeof header.Header.props !== 'undefined'
+              ? header.Header.props.title
+              : '';
+          const arrayOfWords = headerTitle && headerTitle.split(' ');
+
+          return (
+            <TableHeader
+              {...header.getHeaderProps(({ role: false })}
+              className={cx(
+                {
+                  [`${blockClass}__resizableColumn`]: header.getResizerProps,
+                  [`${blockClass}__isResizing`]: header.isResizing,
+                  [`${blockClass}__sortableColumn`]: header.canSort,
+                  [`${blockClass}__isSorted`]: header.isSorted,
+                  [`${blockClass}__selected-header`]:
+                    !dargStopped &&
+                    selectedHeader.some((item) => item.id === header.id),
+                  [`${blockClass}__single-wrap-header`]:
+                    arrayOfWords.length === 1,
+                  [`${blockClass}__double-wrap-header`]:
+                    arrayOfWords.length > 1,
+                },
+                header.getHeaderProps().className,
+                `column__${header.id}`
+              )}
+              key={header.id}
+            >
+              {header.render('Header')}
+              {header.getResizerProps && (
+                // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+                <div
+                  {...header.getResizerProps()}
+                  className={`${blockClass}__resizer`}
+                  onClick={(event) => {
+                    handleMultiColumSelect(header, event);
+                  }}
+                />
+              )}
+            </TableHeader>
+          );
+        })}
+    </TableRow>
+  );
+};
 
 const useHeaderRow = (hooks) => {
   const useInstance = (instance) => {

@@ -215,6 +215,14 @@
     white-space: nowrap;
   }
 
+  .#{$block-class}__double-wrap-header .#{$block-class}__defaultStringRenderer {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: initial;
+    word-break: break-word;
+  }
+
   .#{$block-class}__defaultStringRenderer.#{$block-class}__defaultStringRenderer--multiline {
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -631,4 +639,14 @@
 
 .#{$block-class} .#{c4p-settings.$pkg-prefix}--datagrid__head-wrap {
   background-color: $layer-accent;
+}
+
+.#{$block-class} .#{$block-class}__table-grid-active {
+  border: 2px solid $background-selected-hover;
+  outline: 0;
+}
+
+.#{$block-class} .#{$block-class}__selected-header {
+  background-color: $background-selected-hover;
+  user-select: none;
 }

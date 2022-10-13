@@ -65,6 +65,7 @@ const defaults = {
     CancelableTextEdit: false,
     DataSpreadsheet: false,
     Datagrid: false,
+    ComboButton: false,
     EditTearsheet: false,
     EditTearsheetNarrow: false,
     EditFullPage: false,

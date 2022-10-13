@@ -126,7 +126,7 @@ assets:
       - content-block
   combo-button:
     name: Combo button
-    status: stable
+    status: experimental
     type: component
     platform: web
     framework: react

@@ -41,8 +41,22 @@ const s = [
           { n: 'Side panel', s: ['c/SidePanel'] },
           { n: 'Tag set', s: ['c/TagSet'] },
           { n: 'Tearsheet', s: ['c/Tearsheet', 'c/TearsheetNarrow'] },
-          { n: 'Datagrid', s: ['c/Datagrid'] },
           { n: 'DataSpreadsheet', s: ['c/DataSpreadsheet'] },
+          {
+            n: 'Datagrid',
+            s: [
+              'c/Datagrid',
+              'c/Datagrid/Extensions/Header',
+              'c/Datagrid/Extensions/RowHeightSettings',
+              'c/Datagrid/Extensions/RowActionButtons',
+              'c/Datagrid/Extensions/ExpandableRow',
+              'c/Datagrid/Extensions/NestedRows',
+              'c/Datagrid/Extensions/ColumnAlignment',
+              'c/Datagrid/Extensions/ClickableRow',
+              'c/Datagrid/Extensions/InlineEdit',
+              'c/Datagrid/Extensions/ColumnCustomization',
+            ],
+          },
         ],
       },
       {

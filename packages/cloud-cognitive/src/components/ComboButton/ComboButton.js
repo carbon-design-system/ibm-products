@@ -12,7 +12,7 @@ import {
   OverflowMenu,
 } from 'carbon-components-react';
 
-import classnames from 'classnames';
+import cx from 'classnames';
 import { node, shape, string, oneOf, bool } from 'prop-types';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -33,7 +33,7 @@ export let ComboButton = React.forwardRef(
       className,
       disabled,
       overflowMenu,
-      size,
+      size = 'lg',
 
       // Collect any other property values passed in.
       ...rest
@@ -45,14 +45,17 @@ export let ComboButton = React.forwardRef(
     const [primaryAction, ...restActions] = Children.toArray(children)
       .filter(Boolean)
       .map(({ props: { children, ...props }, type }, index) => {
+        const updatedProps = {
+          ...(type.displayName !== 'ComboButtonItemDivider' && { ...props }),
+          divider:
+            type.displayName === 'ComboButtonItemDivider' ? true : undefined,
+        };
         return {
-          ...props,
+          ...updatedProps,
           children: (
             <span
-              key={index}
-              className={classnames({
-                [`${blockClass}__action`]:
-                  type.displayName === 'ComboButtonItem',
+              key={`${index}_${type?.displayName}`}
+              className={cx(`${blockClass}__action`, {
                 [`${blockClass}__divider`]:
                   type.displayName === 'ComboButtonItemDivider',
               })}
@@ -63,10 +66,11 @@ export let ComboButton = React.forwardRef(
           ),
         };
       });
+
     return (
       <div
         {...rest}
-        className={classnames(blockClass, className)}
+        className={cx(blockClass, className)}
         data-floating-menu-container
         ref={ref}
       >
@@ -80,7 +84,7 @@ export let ComboButton = React.forwardRef(
         {restActions.length > 0 && (
           <OverflowMenu
             {...overflowMenu}
-            className={classnames({
+            className={cx({
               [`${blockClass}__overflow-menu ${blockClass}__overflow-menu--${size} ${blockClass}__overflow-menu--disabled`]:
                 disabled,
               [`${blockClass}__overflow-menu ${blockClass}__overflow-menu--${size}`]:
@@ -92,7 +96,7 @@ export let ComboButton = React.forwardRef(
             onClose={() => setIsOpen(false)}
             renderIcon={() =>
               createElement(isOpen ? ChevronUp16 : ChevronDown16, {
-                className: classnames({
+                className: cx({
                   [`${blockClass}__overflow-menu__icon--disabled`]: disabled,
                   [`${blockClass}__overflow-menu__icon`]: !disabled,
                 }),
@@ -103,15 +107,13 @@ export let ComboButton = React.forwardRef(
           >
             {restActions.map(
               ({ children, danger, renderIcon: Icon, ...action }, index) => {
-                if (children.props.type?.displayName === 'ComboButtonItem') {
+                if (!action.divider) {
                   return (
                     <OverflowMenuItem
                       {...action}
                       key={`${blockClass}--${instanceId}__overflow-menu__item__${index}`}
-                      className={classnames({
-                        [`${blockClass}__overflow-menu__item ${blockClass}__overflow-menu__item--danger`]:
-                          danger,
-                        [`${blockClass}__overflow-menu__item`]: !danger,
+                      className={cx(`${blockClass}__overflow-menu__item`, {
+                        [`${blockClass}__overflow-menu__item--danger`]: danger,
                       })}
                       itemText={
                         <>
@@ -151,9 +153,6 @@ ComboButton.propTypes = {
   className: string,
 
   /** Provide an optional flag to disable the ComboButton */
-  danger: bool,
-
-  /** Provide an optional flag to disable the ComboButton */
   disabled: bool,
 
   /** Provide the [props of the `OverflowMenu`](https://react.carbondesignsystem.com/?path=/docs/overflowmenu) */
@@ -162,7 +161,5 @@ ComboButton.propTypes = {
   /**
    * Set the size of the combo button
    */
-  size: oneOf(['sm', 'md', 'default']),
+  size: oneOf(['sm', 'md', 'lg']),
 };
-
-//export { ComboButton };

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -11,9 +11,6 @@
 @import 'carbon-components/scss/components/overflow-menu/overflow-menu';
 
 @include exports($name: combo-button) {
-  /// Sets the prefix for all IBM Security-specific classes.
-  /// @access private
-  /// @type String
   $blockClass: #{$pkg-prefix}--combo-button;
 
   .#{$blockClass} {
@@ -25,16 +22,19 @@
     @include text-overflow;
   }
 
-  .#{$blockClass}__btn--sm.bx--btn {
+  .#{$blockClass}__btn--sm.#{$carbon-prefix}--btn {
     min-width: 128px;
   }
 
-  .#{$blockClass}__btn--md.bx--btn {
+  .#{$blockClass}__btn--md.#{$carbon-prefix}--btn {
     min-width: 120px;
   }
 
-  .#{$blockClass}__btn--default.bx--btn {
+  .#{$blockClass}__btn--lg.#{$carbon-prefix}--btn {
     min-width: 112px;
+  }
+  .#{$blockClass}__btn--lg.#{$carbon-prefix}--btn--lg:not(.#{$carbon-prefix}--btn--icon-only) {
+    min-height: 3rem;
   }
   .#{$blockClass} .#{$blockClass}__overflow-menu {
     height: auto;
@@ -60,11 +60,11 @@
     width: carbon--mini-units($count: 5);
   }
 
-  .#{$blockClass}__overflow-menu--default.#{$blockClass}__overflow-menu {
+  .#{$blockClass}__overflow-menu--lg.#{$blockClass}__overflow-menu {
     width: carbon--mini-units($count: 6);
   }
 
-  .#{$blockClass}__overflow-menu.bx--overflow-menu--open.#{$blockClass}__overflow-menu.bx--overflow-menu.#{$prefix}--overflow-menu--open {
+  .#{$blockClass}__overflow-menu.#{$carbon-prefix}--overflow-menu--open.#{$blockClass}__overflow-menu.#{$carbon-prefix}--overflow-menu.#{$prefix}--overflow-menu--open {
     background-color: $interactive-01;
     box-shadow: none;
   }

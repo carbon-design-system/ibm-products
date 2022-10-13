@@ -97,7 +97,10 @@ export let CreateTearsheet = forwardRef(
       if (lastItem !== lastIncludedStep) {
         setLastIncludedStep(lastItem);
       }
-    }, [stepData, firstIncludedStep, lastIncludedStep]);
+      if (open && initialStep) {
+        setCurrentStep(initialStep);
+      }
+    }, [stepData, firstIncludedStep, lastIncludedStep, initialStep, open]);
 
     useCreateComponentFocus({
       previousState,

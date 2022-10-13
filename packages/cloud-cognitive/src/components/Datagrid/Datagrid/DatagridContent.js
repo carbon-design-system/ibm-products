@@ -177,7 +177,10 @@ DatagridContent.propTypes = {
       PropTypes.element,
       PropTypes.func,
     ]),
-    CustomizeColumnsModal: PropTypes.element,
+    CustomizeColumnsModal: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.func,
+    ]),
     isFetching: PropTypes.bool,
     leftPanel: PropTypes.object,
     fullHeightDatagrid: PropTypes.bool,

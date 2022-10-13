@@ -16,10 +16,6 @@ import { ComboButton, ComboButtonItem, ComboButtonItemDivider } from '..';
 
 import styles from './_combo-button.scss';
 
-const defaultArgs = {
-  size: 'default',
-};
-
 export default {
   title: getStoryTitle(ComboButton.displayName),
   component: ComboButton,
@@ -28,7 +24,7 @@ export default {
       control: {
         type: 'radio',
       },
-      options: ['sm', 'md', 'default'],
+      options: ['sm', 'md', 'lg'],
     },
   },
   subcomponents: {
@@ -40,7 +36,7 @@ export default {
 const Template = (args) => {
   const myRef = useRef();
   return (
-    <ComboButton {...args} ref={myRef}>
+    <ComboButton ref={myRef}>
       <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
       <ComboButtonItem renderIcon={args.icon && args.icon}>
         ComboButtonItem 2
@@ -49,39 +45,56 @@ const Template = (args) => {
         ComboButtonItem 3
       </ComboButtonItem>
       <ComboButtonItem>ComboButtonItem 4</ComboButtonItem>
-      {args.hasDivider ? <ComboButtonItemDivider /> : null}
       <ComboButtonItem danger={args.danger}>ComboButtonItem 5</ComboButtonItem>
     </ComboButton>
   );
 };
 
+const DividerTemplate = (args) => (
+  <ComboButton>
+    <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
+    <ComboButtonItem renderIcon={args.icon && args.icon}>
+      ComboButtonItem 2
+    </ComboButtonItem>
+    <ComboButtonItem disabled={args.disabled}>
+      ComboButtonItem 3
+    </ComboButtonItem>
+    <ComboButtonItem>ComboButtonItem 4</ComboButtonItem>
+    <ComboButtonItemDivider />
+    <ComboButtonItem danger={args.danger}>ComboButtonItem 5</ComboButtonItem>
+  </ComboButton>
+);
+
+const DisabledTemplate = (args) => (
+  <ComboButton disabled={args.disabled}>
+    <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
+    <ComboButtonItem renderIcon={args.icon && args.icon}>
+      ComboButtonItem 2
+    </ComboButtonItem>
+    <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
+    <ComboButtonItem>ComboButtonItem 4</ComboButtonItem>
+    <ComboButtonItemDivider />
+    <ComboButtonItem danger={args.danger}>ComboButtonItem 5</ComboButtonItem>
+  </ComboButton>
+);
+
 export const Default = prepareStory(Template, {
-  args: {
-    ...defaultArgs,
-    size: 'md',
-  },
+  args: {},
 });
 
-export const WithDivider = prepareStory(Template, {
-  args: {
-    ...defaultArgs,
-    hasDivider: true,
-    size: 'md',
-  },
+export const WithDivider = prepareStory(DividerTemplate, {
+  args: {},
 });
 
 export const WithDanger = prepareStory(Template, {
   args: {
-    ...defaultArgs,
     danger: true,
-    size: 'md',
+    disabled: true,
   },
 });
 
-export const WithDisabled = prepareStory(Template, {
+export const WithDisabled = prepareStory(DisabledTemplate, {
   args: {
-    ...defaultArgs,
     disabled: true,
-    size: 'default',
   },
 });

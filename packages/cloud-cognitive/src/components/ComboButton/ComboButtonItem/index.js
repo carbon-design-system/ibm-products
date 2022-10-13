@@ -17,11 +17,11 @@ ComboButtonItem.propTypes = {
   /** Provide the contents of the `ComboButtonItem` */
   children: node.isRequired,
 
+  /** Provide an optional flag to disable the ComboButton */
+  danger: bool,
+
   /** Specify whether the `ComboButton` should be disabled, or not */
   disabled: bool,
-
-  /** Specify whether the `ComboButtonItem` should have a divider, or not */
-  hasDivider: bool,
 
   /** Provide an optional `href` for the `ComboButtonItem` to become an `a` element */
   href: string,

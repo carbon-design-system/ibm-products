@@ -143,7 +143,7 @@ CreateTearsheetNarrow.propTypes = {
   formDescription: PropTypes.node,
 
   /**
-   * Specifies a required field that provides a title for a form
+   * Specifies a field that provides a title for a form
    */
   formTitle: PropTypes.node,
 

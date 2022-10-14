@@ -31,10 +31,10 @@ readdir(
               return;
             }
 
-            // Each instance of `../../../node_modules` should be changed to `../../node_modules`
+            // Each instance of `../../../node_modules` should be changed to `../../../../node_modules`
             const updatedMap = fileContents
               .split('../../../node_modules/')
-              .join('../../node_modules/');
+              .join('../../../../node_modules/');
 
             writeFile(
               path.join(__dirname, `../packages/cloud-cognitive/css/${file}`),

@@ -37,26 +37,7 @@ export const range = (len) => {
 
 /** This function is only to create a random data point when the person joined */
 const getRandomDateJoined = () => {
-  const dateJoinedObj = randomDate(new Date(2022, 0, 1), new Date());
-  const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
-  const month = monthNames[dateJoinedObj.getMonth()];
-  const day = dateJoinedObj.getDay() + 1;
-  const year = dateJoinedObj.getFullYear();
-  const joined = `${month} ${day}, ${year}`;
-  return joined;
+  return randomDate(new Date(2022, 0, 1), new Date());
 };
 
 const newPerson = () => {

@@ -29,7 +29,6 @@ import {
   NumberInput,
   Dropdown,
 } from 'carbon-components-react';
-import debounce from 'lodash.debounce';
 import {
   Datagrid,
   useDatagrid,
@@ -69,7 +68,7 @@ import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
 import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
-import { FilterFlyout, FilterFlyoutButton } from './Datagrid/addons/Filtering';
+import { FilterFlyout } from './Datagrid/addons/Filtering';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -115,6 +114,8 @@ const defaultHeader = [
   {
     Header: 'Joined',
     accessor: 'joined',
+    type: 'date',
+    filter: 'betweenDates',
   },
   {
     Header: 'Someone 1',
@@ -517,7 +518,7 @@ export const SelectableRow = () => {
 
 export const Filtering = () => {
   const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
+  const [data] = useState(makeData(20));
 
   const FilterDatagridActions = (datagridState) => {
     const {
@@ -528,6 +529,7 @@ export const Filtering = () => {
       rowSizeDropdownProps,
       useDenseHeader,
       setFilter,
+      filterProps,
     } = datagridState;
 
     const downloadCsv = () => {
@@ -551,8 +553,18 @@ export const Filtering = () => {
 
     const renderFilterFlyout = useCallback(() => {
       return (
-        <FilterFlyout updateMethod="instant">
-          <DatePicker datePickerType="range">
+        <FilterFlyout {...filterProps}>
+          <DatePicker
+            datePickerType="range"
+            onChange={([startDate, endDate]) => {
+              // If no end date is selected return because we need the end date to do computations
+              if (!endDate) {
+                return;
+              }
+              const column = 'joined';
+              setFilter(column, [startDate, endDate]);
+            }}
+          >
             <DatePickerInput
               id="date-picker-input-id-start"
               placeholder="mm/dd/yyyy"
@@ -681,10 +693,23 @@ export const Filtering = () => {
     );
   };
 
+  /** A function to convert your raw date data to a string that would be
+      displayed in the cell. */
+  const dateToString = (rawDate) => {
+    /** rawDate is the value initially passed in with the row data, since we don't 
+          know what data you are passing in from an API, or database we would need to know
+          how to display the date into a string */
+    return rawDate.toLocaleDateString();
+  };
+
   const datagridState = useDatagrid(
     {
       columns,
       data,
+      filterProps: {
+        dateToString,
+        updateMethod: 'instant',
+      },
       DatagridActions: FilterDatagridActions,
       batchActions: true,
       toolbarBatchActions: getBatchActions(),

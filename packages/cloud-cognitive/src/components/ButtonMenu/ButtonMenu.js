@@ -6,15 +6,20 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
+import { ChevronDown16, ChevronUp16 } from '@carbon/icons-react';
+import { useClickOutside } from '../../global/js/hooks';
 
 // Carbon and package components we use.
-import { Button, OverflowMenu } from 'carbon-components-react';
+import {
+  Button,
+  ButtonSet,
+} from 'carbon-components-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--button-menu`;
@@ -24,8 +29,11 @@ const componentName = 'ButtonMenu';
 
 // Default values for props
 const defaults = {
-  size: 'default',
+  size: 'lg',
   kind: 'primary',
+  open: false,
+  onClose: () => {},
+  onMenuButtonClick: () => {},
 };
 
 /**
@@ -46,48 +54,61 @@ export let ButtonMenu = React.forwardRef(
       kind = defaults.kind,
       label,
       menuOptionsClass,
-      renderIcon: Icon,
+      onClose = defaults.onClose,
+      onMenuButtonClick = defaults.onMenuButtonClick,
+      open = defaults.open,
+      renderIcon,
       size = defaults.size,
 
       // Collect any other property values passed in.
       ...rest
     },
     ref
-  ) => (
-    <OverflowMenu
-      {
-        // Pass through any other property values as HTML attributes.
-        ...rest
-      }
+  ) => {
+  const outerButtonMenuRef = useRef();
+  const localRef = ref || outerButtonMenuRef;
+
+  useClickOutside(localRef, () => {
+    onClose();
+  });
+
+  return (
+    <div
+      {...rest}
+      ref={localRef}
       className={cx(
         blockClass, // Apply the block class to the main HTML element
-        className // Apply any supplied class names to the main HTML element.
+        className, // Apply any supplied class names to the main HTML element.
+        {
+          [`${blockClass}__${size}`]: size
+        }
       )}
-      menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
-      renderIcon={() => (
-        <div
-          className={cx([
-            `${blockClass}__trigger`,
-            `${carbon.prefix}--btn`,
-            `${carbon.prefix}--btn--${kind}`,
-            `${carbon.prefix}--btn--${size}`,
-          ])}
-        >
-          {label}
-          {Icon && (
-            <Icon
-              aria-hidden="true"
-              aria-label={iconDescription}
-              className={`${carbon.prefix}--btn__icon`}
-            />
-          )}
-        </div>
-      )}
-      innerRef={ref}
     >
-      {children}
-    </OverflowMenu>
-  )
+      <Button
+        iconDescription={iconDescription}
+        size={size}
+        kind={kind}
+        renderIcon={
+          renderIcon
+            ? renderIcon
+            : open
+            ? ChevronUp16
+            : ChevronDown16
+        }
+        onClick={() => {
+          onMenuButtonClick();
+        }}
+      >{label}</Button>
+      {open && (
+        <ButtonSet
+          className={cx(`${blockClass}__button-set`, menuOptionsClass)}
+          stacked
+        >
+          {children}
+        </ButtonSet>
+      )}
+    </div>
+  )}
 );
 
 // Return a placeholder if not released and not enabled by feature flag
@@ -129,9 +150,24 @@ ButtonMenu.propTypes = {
   label: PropTypes.node,
 
   /**
-   * class name applied to the overflow options
+   * class name applied to the menu button list element
    */
   menuOptionsClass: PropTypes.string,
+
+  /**
+   * The setter fn for the open state
+   */
+  onClose: PropTypes.func,
+
+  /**
+   * The onClick fn for the menu button
+   */
+  onMenuButtonClick: PropTypes.func,
+
+  /**
+   * The open state for the button menu
+   */
+  open: PropTypes.bool,
 
   /**
    * Optional prop to allow overriding the icon rendering.
@@ -143,5 +179,5 @@ ButtonMenu.propTypes = {
    * The size of the button for the menu trigger. The values can be any valid
    * value for the carbon Button component 'size' prop.
    */
-  size: Button.propTypes.size,
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };

@@ -10,6 +10,8 @@
 
 // TODO: @import(s) of Carbon settings and component styles and other
 // related component styles used by ButtonMenu
+// @import 'carbon-components/scss/globals/scss/vendor/@carbon/styles/scss/components/popover/popover';
+@import 'carbon-components/scss/globals/scss/_helper-mixins.scss';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
@@ -18,6 +20,7 @@
   $block-class: #{$pkg-prefix}--button-menu;
 
   .#{$block-class} {
+    position: relative;
     min-width: 160px;
 
     .#{$block-class}__trigger {
@@ -28,6 +31,86 @@
 
   .#{$block-class}__options.#{$carbon-prefix}--overflow-menu-options::after {
     content: initial;
+  }
+
+  // Prototype styles
+  .#{$block-class}__button-set.#{$carbon-prefix}--btn-set.#{$carbon-prefix}--btn-set--stacked {
+    @include box-shadow;
+
+    position: absolute;
+    width: 100%;
+    .#{$block-class}__item-button.#{$carbon-prefix}--btn {
+      &:not(:focus),
+      &:first-of-type:not(:focus) {
+        box-shadow: none;
+      }
+
+      &::before {
+        position: absolute;
+        bottom: 1px;
+        left: $spacing-03;
+        width: calc(100% - 1rem);
+        height: 1px;
+        background-color: $button-separator;
+        content: '';
+      }
+
+      &:last-of-type::before {
+        background-color: transparent;
+      }
+
+      position: relative;
+      background-color: $ui-01;
+      color: $text-01;
+
+      &:hover {
+        background-color: $hover-ui;
+      }
+
+      // Remove visual divider if next sibling is not a button menu item button
+      &:has(+ :not(.#{$block-class}__item-button))::before {
+        background-color: transparent;
+      }
+    }
+
+    .#{$carbon-prefix}--accordion
+      .#{$carbon-prefix}--accordion__item
+      .#{$carbon-prefix}--accordion__heading {
+      align-items: center;
+    }
+    .#{$carbon-prefix}--accordion__content {
+      padding: 0;
+    }
+    .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--ghost {
+      color: $text-01;
+    }
+  }
+  .#{$block-class} .#{$carbon-prefix}--btn--lg:not(.bx--btn--icon-only) {
+    min-height: $spacing-09;
+    align-items: center;
+    padding-top: 11px;
+  }
+
+  .#{$block-class}__sm .#{$carbon-prefix}--btn,
+  .#{$block-class}__sm
+    .#{$carbon-prefix}--accordion
+    .#{$carbon-prefix}--accordion__item
+    .#{$carbon-prefix}--accordion__heading {
+    min-height: $spacing-07;
+  }
+  .#{$block-class}__md .#{$carbon-prefix}--btn,
+  .#{$block-class}__md
+    .#{$carbon-prefix}--accordion
+    .#{$carbon-prefix}--accordion__item
+    .#{$carbon-prefix}--accordion__heading {
+    min-height: $spacing-08;
+  }
+  .#{$block-class}__lg .#{$carbon-prefix}--btn,
+  .#{$block-class}__lg
+    .#{$carbon-prefix}--accordion
+    .#{$carbon-prefix}--accordion__item
+    .#{$carbon-prefix}--accordion__heading {
+    min-height: $spacing-09;
   }
 }
 

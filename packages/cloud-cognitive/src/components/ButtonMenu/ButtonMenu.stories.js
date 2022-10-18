@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 
@@ -15,11 +15,10 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
+import { Accordion, AccordionItem } from 'carbon-components-react';
 import mdx from './ButtonMenu.mdx';
 
 import styles from './_storybook-styles.scss';
-
-import { Add16 } from '@carbon/icons-react';
 
 export default {
   title: getStoryTitle(ButtonMenu.displayName),
@@ -36,31 +35,82 @@ export default {
   },
 };
 
-const Template = (args) => {
+const renderItems = (setIsOpen) => {
   return (
-    <ButtonMenu label="Primary button" renderIcon={Add16} {...args}>
+    <>
       <ButtonMenuItem
-        itemText="Option 1a"
-        onClick={action(`Click on Option 1`)}
-      />
+        onClick={() => {
+          action(`Click on Option 1`)
+          setIsOpen(false);
+        }}
+      >Option 1</ButtonMenuItem>
       <ButtonMenuItem
-        itemText="Option 2"
-        onClick={action(`Click on Option 2`)}
-      />
+        onClick={() => {
+          action(`Click on Option 2`)
+          setIsOpen(false);
+        }}
+      >Option 2</ButtonMenuItem>
       <ButtonMenuItem
-        itemText="Option 3"
-        onClick={action(`Click on Option 3`)}
-      />
+        onClick={() => {
+          action(`Click on Option 3`)
+          setIsOpen(false);
+        }}
+      >Option 3</ButtonMenuItem>
       <ButtonMenuItem
-        itemText="Option 4"
-        onClick={action(`Click on Option 4`)}
-        hasDivider
-      />
+        onClick={() => {
+          action(`Click on Option 4`)
+          setIsOpen(false);
+        }}
+      >Option 4</ButtonMenuItem>
+    </>
+  )
+}
+
+const Template = (args) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <ButtonMenu
+      open={isOpen}
+      onClose={() => setIsOpen(false)}
+      onMenuButtonClick={() => {
+        setIsOpen(prev => !prev);
+      }}
+      label="Primary button"
+      {...args}
+    >
+      {renderItems(setIsOpen)}
     </ButtonMenu>
   );
 };
 
+const NestedTemplate = (args) => {
+  const [isOpen, setIsOpen] = useState(false);
+  return <ButtonMenu
+    open={isOpen}
+    onClose={() => setIsOpen(false)}
+    onMenuButtonClick={() => {
+      setIsOpen(prev => !prev);
+    }}
+    label="Button menu"
+    {...args}
+  >
+    {renderItems(setIsOpen)}
+    <Accordion>
+      <AccordionItem title="Insights">
+        <ButtonMenuItem onClick={() => setIsOpen(false)} kind="ghost">Business criticality</ButtonMenuItem>
+        <ButtonMenuItem onClick={() => setIsOpen(false)} kind="ghost">Log anomaly</ButtonMenuItem>
+      </AccordionItem>
+    </Accordion>
+    {renderItems()}
+  </ButtonMenu>
+}
+
 export const buttonMenu = prepareStory(Template, {
   storyName: 'Button menu',
+  args: {},
+});
+
+export const nestedButtonMenu = prepareStory(NestedTemplate, {
+  storyName: 'Nested button menu',
   args: {},
 });

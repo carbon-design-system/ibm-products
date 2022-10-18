@@ -48,7 +48,7 @@ import {
 } from '@carbon/icons-react';
 import namor from 'namor';
 import userEvent from '@testing-library/user-event';
-// cspell:words arrowright
+// cspell:words arrowright, arrowup
 
 const dataTestId = uuidv4();
 
@@ -2526,6 +2526,7 @@ describe(componentName, () => {
     const firstColumnCell = container.querySelector(
       `[data-cell-id="column-1-row-0"]`
     );
+
     const tableElement = container.querySelector('table');
 
     const getEditInput = (colHeader) => {
@@ -2583,6 +2584,51 @@ describe(componentName, () => {
 
     // Check that new cell value can be found within the datagrid component
     screen.getByText(newEditInputValue);
+
+    //Number input testing
+    const thirdColumnCell = container.querySelector(
+      `[data-cell-id="column-3-row-0"]`
+    );
+
+    // Click the cell to enter edit mode
+    click(thirdColumnCell);
+    // Carbon number input should now exist because we clicked on an inline edit cell of type number
+    const numberInput = getEditInput(inlineEditColumns[3].Header); // If not labelText is provided in the inputProps obj from the column data, column.Header is used by default
+    numberInput.focus();
+    expect(numberInput).toHaveFocus();
+
+    //Get initial value from number input
+    const numberInputInitialValue = numberInput.value;
+
+    //get `-` button inside number input
+    const decButton = numberInput.parentElement.querySelector('button');
+
+    //click `-` button to decrement original value - 1
+    click(decButton);
+    expect(decButton).toHaveFocus();
+
+    //Get current number input value after `-` click
+    const currentInputValue = numberInput.value;
+
+    // Exit edit mode
+    type(numberInput, '{enter}');
+    expect(JSON.stringify(numberInputInitialValue - 1)).toBe(currentInputValue);
+
+    // Change active cell position
+    type(tableElement, '{arrowright}');
+
+    // Enter edit mode
+    type(tableElement, '{enter}');
+
+    // Get the number input now that we are in edit mode
+    const newNumberInput = getEditInput(inlineEditColumns[4].Header);
+    newNumberInput.focus();
+    expect(newNumberInput).toHaveFocus();
+
+    //type(newNumberInput, '{arrowup}');
+
+    // Exit edit mode
+    type(newNumberInput, '{enter}');
   });
 
   it('Sticky Actions Column', () => {

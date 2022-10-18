@@ -29,7 +29,7 @@ const selectorPrimaryFocus = `.${carbon.prefix}--text-input`;
 const dataTestId = uuidv4();
 
 // render a CreateModal with title, subtitle, description, and any other required props
-const renderComponent = ({ ...rest }, children) =>
+const renderComponent = ({ ...rest } = {}, children) =>
   render(
     <CreateModal
       open

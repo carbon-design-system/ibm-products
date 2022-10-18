@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CloudApp } from '@carbon/react/icons';
 import React from 'react';
 
 import {
@@ -20,20 +19,82 @@ import { ComboButton, ComboButtonItem } from '..';
 export default {
   title: getStoryTitle(ComboButton.displayName),
   component: ComboButton,
+  argTypes: {
+    size: {
+      control: {
+        type: 'radio',
+      },
+      options: ['sm', 'md', 'lg'],
+    },
+  },
   subcomponents: {
     ComboButtonItem,
   },
-  parameters: {
-    // styles
-  },
+  parameters: { styles },
 };
 
-export const Default = prepareStory(() => (
+const Template = (args) => {
+  const myRef = useRef();
+  return (
+    <ComboButton ref={myRef}>
+      <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
+      <ComboButtonItem renderIcon={args.icon && args.icon}>
+        ComboButtonItem 2
+      </ComboButtonItem>
+      <ComboButtonItem disabled={args.disabled}>
+        ComboButtonItem 3
+      </ComboButtonItem>
+      <ComboButtonItem>ComboButtonItem 4</ComboButtonItem>
+      <ComboButtonItem danger={args.danger}>ComboButtonItem 5</ComboButtonItem>
+    </ComboButton>
+  );
+};
+
+const DividerTemplate = (args) => (
   <ComboButton>
     <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
-    <ComboButtonItem renderIcon={(props) => <CloudApp size={16} {...props} />}>
+    <ComboButtonItem renderIcon={args.icon && args.icon}>
+      ComboButtonItem 2
+    </ComboButtonItem>
+    <ComboButtonItem disabled={args.disabled}>
+      ComboButtonItem 3
+    </ComboButtonItem>
+    <ComboButtonItem>ComboButtonItem 4</ComboButtonItem>
+    <ComboButtonItemDivider />
+    <ComboButtonItem danger={args.danger}>ComboButtonItem 5</ComboButtonItem>
+  </ComboButton>
+);
+
+const DisabledTemplate = (args) => (
+  <ComboButton disabled={args.disabled}>
+    <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
+    <ComboButtonItem renderIcon={args.icon && args.icon}>
       ComboButtonItem 2
     </ComboButtonItem>
     <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
+    <ComboButtonItem>ComboButtonItem 4</ComboButtonItem>
+    <ComboButtonItemDivider />
+    <ComboButtonItem danger={args.danger}>ComboButtonItem 5</ComboButtonItem>
   </ComboButton>
-));
+);
+
+export const Default = prepareStory(Template, {
+  args: {},
+});
+
+export const WithDivider = prepareStory(DividerTemplate, {
+  args: {},
+});
+
+export const WithDanger = prepareStory(Template, {
+  args: {
+    danger: true,
+    disabled: true,
+  },
+});
+
+export const WithDisabled = prepareStory(DisabledTemplate, {
+  args: {
+    disabled: true,
+  },
+});

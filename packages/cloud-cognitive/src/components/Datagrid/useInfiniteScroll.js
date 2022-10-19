@@ -15,7 +15,10 @@ const useInfiniteScroll = (hooks) => {
   useResizeTable(hooks);
 
   const useInstance = (instance) => {
-    const { isFetching, tableHeight, innerListRef, fetchMoreData } = instance;
+    const { isFetching, tableHeight, innerListRef, fetchMoreData, tableId } =
+      instance;
+    const tableElement = document.querySelector(`#${tableId}`);
+    const totalTableHeight = tableHeight || tableElement?.clientHeight;
 
     const loadMoreThreshold = 200;
 
@@ -33,7 +36,7 @@ const useInfiniteScroll = (hooks) => {
         if (
           !isFetching &&
           scrollDirection === 'forward' &&
-          scrollOffset + tableHeight >=
+          scrollOffset + totalTableHeight >=
             innerListRef.current.clientHeight - loadMoreThreshold
         ) {
           if (fetchMoreData) {

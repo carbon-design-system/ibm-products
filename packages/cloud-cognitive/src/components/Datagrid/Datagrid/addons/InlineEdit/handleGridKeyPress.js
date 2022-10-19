@@ -32,12 +32,12 @@ export const handleGridKeyPress = ({
     // Attempting to exit date picker
     if (focusedCell.getAttribute('data-inline-type') === 'date') {
       dispatch({ type: 'EXIT_EDIT_MODE', payload: activeCellId });
+      const inlineEditArea = document.querySelector(
+        `#${instance.tableId} .${blockClass}__table-with-inline-edit`
+      );
+      inlineEditArea.focus();
     }
     event.preventDefault();
-    const inlineEditArea = document.querySelector(
-      `#${instance.tableId} .${blockClass}__table-with-inline-edit`
-    );
-    inlineEditArea.focus();
     return;
   }
 

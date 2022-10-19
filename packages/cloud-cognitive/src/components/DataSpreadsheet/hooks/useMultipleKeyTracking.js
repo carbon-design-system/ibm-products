@@ -19,7 +19,11 @@ export const useMultipleKeyTracking = ({
   const [usingMac, setUsingMac] = useState('');
   const [windowFocused, setWindowFocused] = useState(hasFocus);
   const [keysPressedList, setKeysPressedList] = useState([]);
-  const previousState = usePreviousValue({ isEditing, windowFocused });
+  const previousState = usePreviousValue({
+    isEditing,
+    windowFocused,
+    containerHasFocus,
+  });
 
   // useEffect to check for window focus, if window loses focus
   // we need to clear out the keysPressedList
@@ -92,7 +96,10 @@ export const useMultipleKeyTracking = ({
     if ((ref && !containerHasFocus) || isEditing) {
       ref.current.onkeydown = undefined;
       ref.current.onkeyup = undefined;
-      if (!previousState?.isEditing && isEditing) {
+      if (
+        (!previousState?.isEditing && isEditing) ||
+        (previousState?.containerHasFocus && !containerHasFocus)
+      ) {
         setKeysPressedList([]);
       }
     }
@@ -102,6 +109,7 @@ export const useMultipleKeyTracking = ({
     ref,
     isEditing,
     previousState?.isEditing,
+    previousState?.containerHasFocus,
     windowFocused,
     previousState?.windowFocused,
     usingMac,

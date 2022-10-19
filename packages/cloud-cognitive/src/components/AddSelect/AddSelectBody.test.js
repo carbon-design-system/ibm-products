@@ -10,7 +10,7 @@ import React from 'react';
 import { AddSelectBody } from './AddSelectBody';
 import { pkg, carbon } from '../../settings';
 import { getGlobalFilterValues, normalize } from './add-select-utils';
-import { Document16 } from '@carbon/icons-react';
+import { Document } from '@carbon/react/icons';
 import image from '../UserProfileImage/headshot.jpg'; // cspell:disable-line
 
 const blockClass = `${pkg.prefix}--add-select`;
@@ -192,7 +192,7 @@ const itemWithIcon = {
       id: '1',
       value: 'kansas',
       title: 'Kansas',
-      icon: Document16,
+      icon: Document,
     },
   ],
 };

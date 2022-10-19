@@ -9,7 +9,7 @@
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Column } from '@carbon/icons-react';
+import { Column } from '@carbon/react/icons';
 import { Button } from '@carbon/react';
 import { pkg } from '../../../../../settings';
 
@@ -39,6 +39,10 @@ const ButtonWrapper = ({
       }}
     />
   );
+};
+
+ButtonWrapper.defaultProps = {
+  onClick: () => {},
 };
 
 ButtonWrapper.propTypes = {

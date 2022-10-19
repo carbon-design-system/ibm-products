@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Add } from '@carbon/icons-react';
+import { Add } from '@carbon/react/icons';
 import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--modified-tabs`;

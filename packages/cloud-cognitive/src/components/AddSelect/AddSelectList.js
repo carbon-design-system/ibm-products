@@ -15,7 +15,7 @@ import {
   StructuredListBody,
   Dropdown,
 } from '@carbon/react';
-import { ChevronRight, View } from '@carbon/icons-react';
+import { ChevronRight, View } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';

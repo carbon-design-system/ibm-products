@@ -2136,26 +2136,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   white-space: nowrap;
 }
 
-@keyframes side-panel-exit-left {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(calc(-1 * 30rem));
-  }
-}
-@keyframes side-panel-exit-right {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateX(30rem);
-  }
-}
 .c4p--side-panel__container {
   --c4p--side-panel--subtitle-opacity: 1;
   --c4p--side-panel--title-container-height: 0;
@@ -2175,7 +2155,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   box-sizing: border-box;
   background-color: var(--cds-layer-01, #f4f4f4);
   color: var(--cds-text-primary, #161616);
-  transition: transform 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 .c4p--side-panel__container.c4p--side-panel__container--xs {
   width: 16rem;
@@ -2189,36 +2168,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--xs {
-  width: 16rem;
-  max-width: 100%;
   right: 0;
   border-left: 1px solid var(--cds-border-subtle-02, #e0e0e0);
 }
-@keyframes side-panel-entrance-right {
-  0% {
-    opacity: 0;
-    transform: translateX(16rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 .c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--xs {
-  width: 16rem;
-  max-width: 100%;
   left: 0;
   border-right: 1px solid var(--cds-border-subtle-02, #e0e0e0);
-}
-@keyframes side-panel-entrance-left {
-  0% {
-    opacity: 0;
-    transform: translateX(-16rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 .c4p--side-panel__container.c4p--side-panel__container--sm {
   width: 20rem;
@@ -2232,36 +2187,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--sm {
-  width: 20rem;
-  max-width: 100%;
   right: 0;
   border-left: 1px solid var(--cds-border-subtle-02, #e0e0e0);
 }
-@keyframes side-panel-entrance-right {
-  0% {
-    opacity: 0;
-    transform: translateX(20rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 .c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--sm {
-  width: 20rem;
-  max-width: 100%;
   left: 0;
   border-right: 1px solid var(--cds-border-subtle-02, #e0e0e0);
-}
-@keyframes side-panel-entrance-left {
-  0% {
-    opacity: 0;
-    transform: translateX(-20rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 .c4p--side-panel__container.c4p--side-panel__container--md {
   width: 30rem;
@@ -2275,36 +2206,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--md {
-  width: 30rem;
-  max-width: 100%;
   right: 0;
   border-left: 1px solid var(--cds-border-subtle-02, #e0e0e0);
 }
-@keyframes side-panel-entrance-right {
-  0% {
-    opacity: 0;
-    transform: translateX(30rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 .c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--md {
-  width: 30rem;
-  max-width: 100%;
   left: 0;
   border-right: 1px solid var(--cds-border-subtle-02, #e0e0e0);
-}
-@keyframes side-panel-entrance-left {
-  0% {
-    opacity: 0;
-    transform: translateX(-30rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 .c4p--side-panel__container.c4p--side-panel__container--lg {
   width: 40rem;
@@ -2318,36 +2225,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--lg {
-  width: 40rem;
-  max-width: 100%;
   right: 0;
   border-left: 1px solid var(--cds-border-subtle-02, #e0e0e0);
 }
-@keyframes side-panel-entrance-right {
-  0% {
-    opacity: 0;
-    transform: translateX(40rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 .c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--lg {
-  width: 40rem;
-  max-width: 100%;
   left: 0;
   border-right: 1px solid var(--cds-border-subtle-02, #e0e0e0);
-}
-@keyframes side-panel-entrance-left {
-  0% {
-    opacity: 0;
-    transform: translateX(-40rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 .c4p--side-panel__container.c4p--side-panel__container--2xl {
   width: 75%;
@@ -2361,36 +2244,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   max-width: 100%;
 }
 .c4p--side-panel__container.c4p--side-panel__container-right-placement.c4p--side-panel__container--2xl {
-  width: 75%;
-  max-width: 100%;
   right: 0;
   border-left: 1px solid var(--cds-border-subtle-02, #e0e0e0);
 }
-@keyframes side-panel-entrance-right {
-  0% {
-    opacity: 0;
-    transform: translateX(75%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
 .c4p--side-panel__container.c4p--side-panel__container-left-placement.c4p--side-panel__container--2xl {
-  width: 75%;
-  max-width: 100%;
   left: 0;
   border-right: 1px solid var(--cds-border-subtle-02, #e0e0e0);
-}
-@keyframes side-panel-entrance-left {
-  0% {
-    opacity: 0;
-    transform: translateX(-75%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 .c4p--side-panel__container.c4p--side-panel__container-with-action-toolbar.c4p--side-panel__with-condensed-header .c4p--side-panel__title-container {
   /* stylelint-disable-next-line max-nesting-depth */
@@ -2722,7 +2581,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   width: 100%;
   height: 100%;
   background-color: var(--cds-overlay, rgba(22, 22, 22, 0.5));
-  transition: background-color 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
 
 .c4p--create-side-panel.c4p--side-panel__container .c4p--create-side-panel__content-text {
@@ -3556,7 +3414,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: inline-block;
   overflow: hidden;
   width: calc(100% - var(--c4p--inline-edit--toolbar-width) - 1rem);
-  max-width: calc(100% - var(--c4p--inline-edit--toolbar-width) - 1rem);
+  max-width: calc(
+      100% - var(--c4p--inline-edit--toolbar-width) - 1rem
+    );
   min-height: var(--c4p--inline-edit--size);
   /* stylelint-disable-next-line carbon/layout-token-use */
   margin-right: var(--c4p--inline-edit--toolbar-width);
@@ -6720,6 +6580,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-right: 0.75rem;
   transform: translateY(-2px);
   vertical-align: middle;
+}
+.c4p--page-header .c4p--page-header__title-wrapper {
+  font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
+  font-weight: var(--cds-productive-heading-04-font-weight, 400);
+  line-height: var(--cds-productive-heading-04-line-height, 1.28572);
+  letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
 }
 .c4p--page-header .c4p--page-header__page-actions {
   flex: 0 0 100%;

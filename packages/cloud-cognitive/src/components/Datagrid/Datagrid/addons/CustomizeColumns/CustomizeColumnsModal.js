@@ -112,7 +112,6 @@ const CustomizeColumnsModal = ({
       onRequestClose={onRequestClose}
       onRequestSubmit={onRequestSubmit}
       size="sm"
-      hasForm
     >
       <div className={`${blockClass}__customize-columns-instructions`}>
         {instructionsLabel}

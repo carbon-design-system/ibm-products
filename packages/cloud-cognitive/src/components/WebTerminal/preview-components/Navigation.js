@@ -12,7 +12,7 @@ import {
   HeaderGlobalAction,
   HeaderGlobalBar,
 } from '@carbon/react';
-import { Terminal, Search, User } from '@carbon/icons-react';
+import { Terminal, Search, User } from '@carbon/react/icons';
 
 import { useWebTerminal } from '../hooks';
 

@@ -28,7 +28,7 @@ import { ActionBar } from '../ActionBar/';
 import { BreadcrumbWithOverflow } from '../BreadcrumbWithOverflow';
 import { TagSet, string_required_if_more_than_10_tags } from '../TagSet/TagSet';
 import { ButtonSetWithOverflow } from '../ButtonSetWithOverflow';
-import { ChevronUp } from '@carbon/icons-react';
+import { ChevronUp } from '@carbon/react/icons';
 
 const componentName = 'PageHeader';
 

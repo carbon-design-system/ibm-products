@@ -8,7 +8,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Code, Copy } from '@carbon/icons-react';
+import { Code, Copy } from '@carbon/react/icons';
 import { act, renderHook } from '@testing-library/react-hooks';
 
 import { pkg } from '../../settings';

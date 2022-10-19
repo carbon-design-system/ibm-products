@@ -23,7 +23,7 @@ import {
   Locked,
   WarningAltFilled,
   WarningFilled,
-} from '@carbon/icons-react';
+} from '@carbon/react/icons';
 import * as carbonMotion from '@carbon/motion';
 
 // The block part of our conventional BEM class names (blockClass__E--M).

@@ -7,7 +7,7 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import React from 'react';
-import { ChevronDown, ChevronUp } from '@carbon/icons-react';
+import { ChevronDown, ChevronUp } from '@carbon/react/icons';
 
 const useRowExpander = (hooks) => {
   const visibleColumns = (columns) => {

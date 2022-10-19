@@ -17,44 +17,179 @@ import { Datagrid } from '.';
 
 <!-- TODO: Overview. -->
 
-The Datagrid component is an extension of Carbon's DataTable component. At the
-most basic level, the Datagrid component takes in columns and rows and renders a
-data table. There is a set of data table extensions which this component
+The `Datagrid` component is an extension of Carbon's DataTable component. At the
+most basic level, the `Datagrid` component takes in columns and rows and renders
+a data table. There is a set of data table extensions which this component
 provides support for, these can be found
 [here](https://pages.github.ibm.com/cdai-design/pal/components/data-table/overview/).
 This component is data driven and allows you to choose what pieces will be
 included based on the hooks/plugins that are provided.
 
-## Example usage
+## Getting started
+
+You can use the `Datagrid` component to create various kinds of Carbon data
+tables. Simply import the `Datagrid` along with any accompanying hooks (listed
+below) depending on what extensions you'd like to be included.
+
+```jsx
+import {
+  Datagrid,
+  useDatagrid,
+  useInfiniteScroll,
+  useNestedRows,
+  useSelectRows,
+  useExpandedRow,
+  useOnRowClick,
+  useSortableColumns,
+  useRowIsMouseOver,
+  useColumnRightAlign,
+  useDisableSelectRows,
+  useStickyColumn,
+  useActionsColumn,
+  useCustomizeColumns,
+  useSelectAllWithToggle,
+  useColumnCenterAlign,
+  useColumnOrder,
+  useInlineEdit,
+} from '@carbon/ibm-products';
+```
+
+## Basic
 
 <!-- TODO: One example per designed use case. -->
 
 Here is a basic usage example. The following component will render the datagrid
 seen below, with pagination and some toolbar actions. One of the key pieces to
-building the datagrid is the `useDatagrid` hook, this will give you all of the
-state/props required to render a Datagrid.
+building the `Datagrid` is the `useDatagrid` hook, this will give you all of the
+state/props required to render a `Datagrid`.
 
 ```jsx
 import { Datagrid, useDatagrid } from '@carbon/ibm-products';
-...
-...
+
 const App = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const rows = React.useMemo(() => data, [data]);
+  const columns = React.useMemo(() => defaultHeader, []); // These are the columns that will be used by the datagrid
+  const [data] = useState(makeData(10)); // This is the data that will be rendered by the datagrid
 
   const datagridState = useDatagrid({
     columns,
-    data: rows,
-    gridTitle: 'Data table title',
-    gridDescription: 'Additional information if needed'
-    initialState: {
-      pageSize: 10,
-      pageSizes: [5, 10, 25, 50],
-    },
-    DatagridActions,
-    DatagridPagination,
+    data,
   });
+
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
+<Canvas>
+  <Story id={getStoryId(Datagrid.displayName, 'basic-usage')} />
+</Canvas>
+
+### Column structure
+
+The columns that are passed to the `useDatagrid` hook will have the following
+structure:
+
+```jsx
+const columns = [
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName',
+  },
+];
+```
+
+To change the default/initial width of a column, add a `width` property to the
+column.
+
+```jsx
+const columns = [
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+    width: 120,
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName',
+    width: 180,
+  },
+];
+```
+
+If needed, it is also possible to wrap each cell in a containing element. See
+below:
+
+```jsx
+const columns = [
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName',
+    Cell: ({ cell: { value } }) => (
+      <span className="custom-cell-wrapper">{value}</span>
+    ),
+  },
+];
+```
+
+## Empty
+
+The `Datagrid` supports empty states, when the data prop passed to the
+`useDatagrid` hook is an empty array.
+
+```jsx
+import { Datagrid, useDatagrid } from '@carbon/ibm-products';
+
+const App = () => {
+  const columns = React.useMemo(() => defaultHeader, []); // These are the columns that will be used by the datagrid
+  const [data] = useState([]); // This is the data that will be rendered by the datagrid
+
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    emptyStateTitle: 'Empty state title',
+    emptyStateDescription: 'Description explaining why table is empty',
+    emptyStateSize: 'lg', // See empty state size options from the EmptyState component
+  });
+
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
+<Canvas>
+  <Story id={getStoryId(Datagrid.displayName, 'empty-state')} />
+</Canvas>
+
+## Expandable rows
+
+The `Datagrid` supports expandable rows with the use of the `useExpandedRow`
+hook.
+
+```jsx
+import { Datagrid, useDatagrid, useExpandedRow } from '@carbon/ibm-products';
+
+const App = () => {
+  const columns = React.useMemo(() => defaultHeader, []); // These are the columns that will be used by the datagrid
+  const [data] = useState(makeData(10)); // This is the data that will be rendered by the datagrid
+
+  const expansionRenderer = ({ row }) => {
+    return <div>Content for row index: {row.id}</div>;
+  };
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      ExpandedRowContentComponent: expansionRenderer,
+    },
+    useExpandedRow
+  );
 
   return <Datagrid datagridState={datagridState} />;
 };
@@ -64,15 +199,15 @@ const App = () => {
   <Story
     id={getStoryId(
       Datagrid.displayName,
-      'header-basic-usage-story',
-      '/Extensions/Header'
+      'expandable-row-story',
+      '/Extensions/ExpandableRow'
     )}
   />
 </Canvas>
 
 ## Code sample
 
-<!-- <CodesandboxLink exampleDirectory="Datagrid" /> -->
+<CodesandboxLink exampleDirectory="Datagrid" />
 
 ## Component API
 

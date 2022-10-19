@@ -1,0 +1,55 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/colors/' as *;
+@use '@carbon/type/' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
+
+// make the root full width to get a better idea of how the cards
+// look in a real grid situation
+/* stylelint-disable max-nesting-depth */
+#root {
+  width: 100%;
+}
+
+$block-class: #{c4p-settings.$pkg-prefix}--edit-update-cards;
+
+.#{$block-class} {
+  textarea,
+  input,
+  select {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    // stylelint-disable-next-line
+    font-size: type-scale(3);
+    letter-spacing: 0;
+    // stylelint-disable-next-line carbon/type-token-use
+    line-height: 1.5;
+  }
+}
+.#{$block-class}--items {
+  margin-bottom: $spacing-06;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+.#{$block-class}--icon-text {
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: $spacing-01;
+
+    path {
+      // stylelint-disable-next-line carbon/theme-token-use
+      fill: $green-50;
+    }
+  }
+}

@@ -81,6 +81,7 @@ const s = [
               'c/EditTearsheet',
               'c/EditTearsheetNarrow',
               'c/EditFullPage',
+              'c/EditUpdateCards',
             ],
           },
           {

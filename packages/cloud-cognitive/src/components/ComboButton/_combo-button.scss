@@ -23,15 +23,15 @@
   }
 
   .#{$blockClass}__btn--sm.#{$carbon-prefix}--btn {
-    min-width: 128px;
+    min-width: 8rem;
   }
 
   .#{$blockClass}__btn--md.#{$carbon-prefix}--btn {
-    min-width: 120px;
+    min-width: 7.5rem;
   }
 
   .#{$blockClass}__btn--lg.#{$carbon-prefix}--btn {
-    min-width: 112px;
+    min-width: 7rem;
   }
   .#{$blockClass}__btn--lg.#{$carbon-prefix}--btn--lg:not(.#{$carbon-prefix}--btn--icon-only) {
     min-height: 3rem;
@@ -100,16 +100,8 @@
 
   .#{$blockClass}__divider {
     width: 100%;
-    height: 1px;
+    height: 0.063rem;
     background-color: $border-subtle;
-  }
-
-  .#{$blockClass}__overflow-menu__divider::before {
-    width: 100%;
-    height: 1px;
-    padding: 0;
-    border-top: 1px solid $button-danger-primary;
-    content: "'hello'";
   }
 
   .#{$blockClass}__overflow-menu__item.#{$prefix}--overflow-menu-options__btn {

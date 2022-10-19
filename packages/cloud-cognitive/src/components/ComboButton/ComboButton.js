@@ -84,12 +84,10 @@ export let ComboButton = React.forwardRef(
         {restActions.length > 0 && (
           <OverflowMenu
             {...overflowMenu}
-            className={cx({
-              [`${blockClass}__overflow-menu ${blockClass}__overflow-menu--${size} ${blockClass}__overflow-menu--disabled`]:
-                disabled,
-              [`${blockClass}__overflow-menu ${blockClass}__overflow-menu--${size}`]:
-                !disabled,
-            })}
+            className={cx(
+              `${blockClass}__overflow-menu ${blockClass}__overflow-menu--${size}`,
+              { [`${blockClass}__overflow-menu--disabled`]: disabled }
+            )}
             disabled={disabled}
             menuOptionsClass={`${blockClass}__overflow-menu__list`}
             onClick={() => !isOpen && setIsOpen(true)}

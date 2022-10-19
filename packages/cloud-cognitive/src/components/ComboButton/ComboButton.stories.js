@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React from 'react';
 
 import {
   getStoryTitle,
@@ -34,9 +34,8 @@ export default {
 };
 
 const Template = (args) => {
-  const myRef = useRef();
   return (
-    <ComboButton ref={myRef}>
+    <ComboButton>
       <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
       <ComboButtonItem renderIcon={args.icon && args.icon}>
         ComboButtonItem 2

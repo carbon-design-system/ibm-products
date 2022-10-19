@@ -135,7 +135,8 @@ export let InlineEditV2 = forwardRef(
           <input
             className={cx(
               `${blockClass}__text-input`,
-              `${carbon.prefix}--text-input`
+              `${carbon.prefix}--text-input`,
+              `${carbon.prefix}--text-input--sm`
             )}
             type="text"
             value={value}

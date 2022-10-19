@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.34.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.34.0...@carbon/ibm-products@1.34.1) (2022-10-18)
+
+### Bug Fixes
+
+- **builds:** add script to fix `node_modules` path in sass source maps
+  ([#2358](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2358))
+  ([c450dc8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c450dc848108921f58ae190d1c109918c337965d))
+- update Carbon v10 compatible versions to latest
+  ([#2362](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2362))
+  ([e328904](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e328904b20bdc0c652661de829c0d1bfcb8738b6))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [1.34.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.33.0...@carbon/ibm-products@1.34.0) (2022-10-11)
 
 ### Bug Fixes

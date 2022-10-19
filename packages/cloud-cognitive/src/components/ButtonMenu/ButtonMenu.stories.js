@@ -13,6 +13,8 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
+import { pkg } from '../../settings';
+import cx from 'classnames';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
 import { Accordion, AccordionItem } from 'carbon-components-react';
@@ -40,31 +42,40 @@ const renderItems = (setIsOpen) => {
     <>
       <ButtonMenuItem
         onClick={() => {
-          action(`Click on Option 1`)
+          action(`Click on Option 1`);
           setIsOpen(false);
         }}
-      >Option 1</ButtonMenuItem>
+      >
+        Option 1
+      </ButtonMenuItem>
       <ButtonMenuItem
         onClick={() => {
-          action(`Click on Option 2`)
+          action(`Click on Option 2`);
           setIsOpen(false);
         }}
-      >Option 2</ButtonMenuItem>
+      >
+        Option 2
+      </ButtonMenuItem>
       <ButtonMenuItem
         onClick={() => {
-          action(`Click on Option 3`)
+          action(`Click on Option 3`);
           setIsOpen(false);
         }}
-      >Option 3</ButtonMenuItem>
+      >
+        Option 3
+      </ButtonMenuItem>
       <ButtonMenuItem
         onClick={() => {
-          action(`Click on Option 4`)
+          action(`Click on Option 4`);
           setIsOpen(false);
         }}
-      >Option 4</ButtonMenuItem>
+        disabled
+      >
+        Option 4
+      </ButtonMenuItem>
     </>
-  )
-}
+  );
+};
 
 const Template = (args) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,9 +84,9 @@ const Template = (args) => {
       open={isOpen}
       onClose={() => setIsOpen(false)}
       onMenuButtonClick={() => {
-        setIsOpen(prev => !prev);
+        setIsOpen((prev) => !prev);
       }}
-      label="Primary button"
+      label="Button menu"
       {...args}
     >
       {renderItems(setIsOpen)}
@@ -83,27 +94,82 @@ const Template = (args) => {
   );
 };
 
+const storyBlockClass = `${pkg.prefix}--button-menu__story`;
+
 const NestedTemplate = (args) => {
-  const [isOpen, setIsOpen] = useState(false);
-  return <ButtonMenu
-    open={isOpen}
-    onClose={() => setIsOpen(false)}
-    onMenuButtonClick={() => {
-      setIsOpen(prev => !prev);
-    }}
-    label="Button menu"
-    {...args}
-  >
-    {renderItems(setIsOpen)}
-    <Accordion>
-      <AccordionItem title="Insights">
-        <ButtonMenuItem onClick={() => setIsOpen(false)} kind="ghost">Business criticality</ButtonMenuItem>
-        <ButtonMenuItem onClick={() => setIsOpen(false)} kind="ghost">Log anomaly</ButtonMenuItem>
-      </AccordionItem>
-    </Accordion>
-    {renderItems()}
-  </ButtonMenu>
-}
+  const [optionAOpen, setOptionAOpen] = useState(false);
+  const [optionBOpen, setOptionBOpen] = useState(false);
+  const [optionCOpen, setOptionCOpen] = useState(false);
+  return (
+    <div className={cx(storyBlockClass)}>
+      <ButtonMenu
+        open={optionAOpen}
+        onClose={() => setOptionAOpen(false)}
+        onMenuButtonClick={() => {
+          setOptionAOpen((prev) => !prev);
+        }}
+        label="Example A"
+        {...args}
+      >
+        {renderItems(setOptionAOpen)}
+        <Accordion>
+          <AccordionItem title="Insights">
+            <ButtonMenuItem onClick={() => setOptionAOpen(false)} kind="ghost">
+              Business criticality
+            </ButtonMenuItem>
+            <ButtonMenuItem onClick={() => setOptionAOpen(false)} kind="ghost">
+              Log anomaly
+            </ButtonMenuItem>
+          </AccordionItem>
+        </Accordion>
+      </ButtonMenu>
+      <ButtonMenu
+        open={optionBOpen}
+        onClose={() => setOptionBOpen(false)}
+        onMenuButtonClick={() => {
+          setOptionBOpen((prev) => !prev);
+        }}
+        label="Example B"
+        {...args}
+      >
+        <Accordion>
+          <AccordionItem title="Insights">
+            <ButtonMenuItem onClick={() => setOptionBOpen(false)} kind="ghost">
+              Business criticality
+            </ButtonMenuItem>
+            <ButtonMenuItem onClick={() => setOptionBOpen(false)} kind="ghost">
+              Log anomaly
+            </ButtonMenuItem>
+          </AccordionItem>
+        </Accordion>
+        {renderItems(setOptionBOpen)}
+      </ButtonMenu>
+      <ButtonMenu
+        open={optionCOpen}
+        onClose={() => setOptionCOpen(false)}
+        onMenuButtonClick={() => {
+          setOptionCOpen((prev) => !prev);
+        }}
+        label="Example C"
+        {...args}
+      >
+        {renderItems(setOptionCOpen)}
+        <Accordion>
+          <AccordionItem title="Insights">
+            <ButtonMenuItem onClick={() => setOptionCOpen(false)} kind="ghost">
+              Business criticality
+            </ButtonMenuItem>
+            <ButtonMenuItem onClick={() => setOptionCOpen(false)} kind="ghost">
+              Log anomaly
+            </ButtonMenuItem>
+          </AccordionItem>
+        </Accordion>
+        <ButtonMenuItem>Option 5</ButtonMenuItem>
+        <ButtonMenuItem>Option 6</ButtonMenuItem>
+      </ButtonMenu>
+    </div>
+  );
+};
 
 export const buttonMenu = prepareStory(Template, {
   storyName: 'Button menu',

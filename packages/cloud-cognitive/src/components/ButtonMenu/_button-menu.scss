@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -10,8 +10,7 @@
 
 // TODO: @import(s) of Carbon settings and component styles and other
 // related component styles used by ButtonMenu
-// @import 'carbon-components/scss/globals/scss/vendor/@carbon/styles/scss/components/popover/popover';
-@import 'carbon-components/scss/globals/scss/_helper-mixins.scss';
+@import 'carbon-components/scss/globals/scss/_helper-mixins';
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
@@ -25,7 +24,6 @@
 
     .#{$block-class}__trigger {
       width: 100%;
-      padding: 0 $spacing-05;
     }
   }
 
@@ -33,7 +31,10 @@
     content: initial;
   }
 
-  // Prototype styles
+  .#{$block-class} .#{$carbon-prefix}--btn__icon {
+    pointer-events: none;
+  }
+
   .#{$block-class}__button-set.#{$carbon-prefix}--btn-set.#{$carbon-prefix}--btn-set--stacked {
     @include box-shadow;
 
@@ -47,6 +48,7 @@
 
       &::before {
         position: absolute;
+        /* stylelint-disable-next-line carbon/layout-token-use */
         bottom: 1px;
         left: $spacing-03;
         width: calc(100% - 1rem);
@@ -80,15 +82,20 @@
     }
     .#{$carbon-prefix}--accordion__content {
       padding: 0;
+      margin-top: $spacing-01;
     }
     .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--ghost {
       color: $text-01;
+
+      &[disabled] {
+        color: $disabled-02;
+      }
     }
   }
   .#{$block-class} .#{$carbon-prefix}--btn--lg:not(.bx--btn--icon-only) {
     min-height: $spacing-09;
     align-items: center;
-    padding-top: 11px;
+    padding-top: $spacing-04;
   }
 
   .#{$block-class}__sm .#{$carbon-prefix}--btn,

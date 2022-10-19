@@ -4,3 +4,13 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+
+$story-block-class: #{$pkg-prefix}--button-menu__story;
+
+.#{$story-block-class} {
+  display: flex;
+  column-gap: $spacing-05;
+}

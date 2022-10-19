@@ -16,10 +16,7 @@ import { ChevronDown16, ChevronUp16 } from '@carbon/icons-react';
 import { useClickOutside } from '../../global/js/hooks';
 
 // Carbon and package components we use.
-import {
-  Button,
-  ButtonSet,
-} from 'carbon-components-react';
+import { Button, ButtonSet } from 'carbon-components-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--button-menu`;
@@ -37,17 +34,14 @@ const defaults = {
 };
 
 /**
- * Combining a standard button with an overflow menu, this component appears
+ * Combining a standard button with a button set, this component appears
  * as a button and has all the usual carbon Button props and rendering, but
  * acts as an overflow menu when clicked. The ButtonMenu component can contain
- * zero to many ButtonMenuItem, which is identical to the carbon
- * OverflowMenuItem component.
+ * zero to many ButtonMenuItem/s and/or Accordions for nested menus.
  */
 export let ButtonMenu = React.forwardRef(
   (
     {
-      // The component props, in alphabetical order (for consistency).
-
       children,
       className,
       iconDescription,
@@ -65,50 +59,48 @@ export let ButtonMenu = React.forwardRef(
     },
     ref
   ) => {
-  const outerButtonMenuRef = useRef();
-  const localRef = ref || outerButtonMenuRef;
+    const outerButtonMenuRef = useRef();
+    const localRef = ref || outerButtonMenuRef;
 
-  useClickOutside(localRef, () => {
-    onClose();
-  });
+    useClickOutside(localRef, () => {
+      onClose();
+    });
 
-  return (
-    <div
-      {...rest}
-      ref={localRef}
-      className={cx(
-        blockClass, // Apply the block class to the main HTML element
-        className, // Apply any supplied class names to the main HTML element.
-        {
-          [`${blockClass}__${size}`]: size
-        }
-      )}
-    >
-      <Button
-        iconDescription={iconDescription}
-        size={size}
-        kind={kind}
-        renderIcon={
-          renderIcon
-            ? renderIcon
-            : open
-            ? ChevronUp16
-            : ChevronDown16
-        }
-        onClick={() => {
-          onMenuButtonClick();
-        }}
-      >{label}</Button>
-      {open && (
-        <ButtonSet
-          className={cx(`${blockClass}__button-set`, menuOptionsClass)}
-          stacked
+    return (
+      <div
+        {...rest}
+        ref={localRef}
+        className={cx(
+          blockClass, // Apply the block class to the main HTML element
+          className, // Apply any supplied class names to the main HTML element.
+          {
+            [`${blockClass}__${size}`]: size,
+          }
+        )}
+      >
+        <Button
+          iconDescription={iconDescription}
+          size={size}
+          kind={kind}
+          renderIcon={
+            renderIcon ? renderIcon : open ? ChevronUp16 : ChevronDown16
+          }
+          onClick={() => onMenuButtonClick?.()}
+          className={cx(`${blockClass}__trigger`)}
         >
-          {children}
-        </ButtonSet>
-      )}
-    </div>
-  )}
+          {label}
+        </Button>
+        {open && (
+          <ButtonSet
+            className={cx(`${blockClass}__button-set`, menuOptionsClass)}
+            stacked
+          >
+            {children}
+          </ButtonSet>
+        )}
+      </div>
+    );
+  }
 );
 
 // Return a placeholder if not released and not enabled by feature flag
@@ -126,7 +118,7 @@ ButtonMenu.propTypes = {
    * Provide the contents of the ButtonMenu. This should be one or more
    * ButtonMenuItem components.
    */
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  children: PropTypes.node.isRequired,
 
   /**
    * Provide an optional class to be applied to the containing node.

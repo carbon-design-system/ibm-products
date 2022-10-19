@@ -98,7 +98,16 @@ export let CreateTearsheet = forwardRef(
         setLastIncludedStep(lastItem);
       }
       if (open && initialStep) {
-        setCurrentStep(initialStep);
+        let numberOfHiddenSteps = 0;
+        stepData.forEach((step, stepIndex) => {
+          if (stepIndex + 1 > initialStep) {
+            return;
+          }
+          if (step.shouldIncludeStep === false) {
+            numberOfHiddenSteps += 1;
+          }
+        });
+        setCurrentStep(initialStep + numberOfHiddenSteps);
       }
     }, [stepData, firstIncludedStep, lastIncludedStep, initialStep, open]);
 
@@ -114,6 +123,7 @@ export let CreateTearsheet = forwardRef(
       previousState,
       open,
       setCurrentStep,
+      stepData,
       initialStep,
       totalSteps: stepData?.length,
       componentName,

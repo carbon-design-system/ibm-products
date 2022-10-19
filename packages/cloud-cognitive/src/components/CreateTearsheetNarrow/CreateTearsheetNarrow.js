@@ -143,9 +143,9 @@ CreateTearsheetNarrow.propTypes = {
   formDescription: PropTypes.node,
 
   /**
-   * Specifies a required field that provides a title for a form
+   * Specifies a field that provides a title for a form
    */
-  formTitle: PropTypes.node.isRequired,
+  formTitle: PropTypes.node,
 
   /**
    * A label for the tearsheet, displayed in the header area of the tearsheet

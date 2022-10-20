@@ -39,8 +39,6 @@ import {
   useSelectAllWithToggle,
   useStickyColumn,
   useActionsColumn,
-  useColumnOrder,
-  useInlineEdit,
   useFiltering,
 } from '.';
 

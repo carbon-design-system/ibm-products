@@ -15,16 +15,11 @@ import cx from 'classnames';
 import { ActionSet } from '../../../../ActionSet';
 import { pkg } from '../../../../../settings';
 import { BATCH, INSTANT } from './constants';
-import { useClickOutside } from '../../../../../../lib/global/js/hooks';
+import { useClickOutside } from '../../../../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-flyout`;
 
-//
-/**
-  NOTES: 
-  - https://stackoverflow.com/questions/72929659/react-child-component-state-is-lost-after-parent-component-re-renders
-*/
 const FilterFlyout = ({ children, updateMethod = BATCH, title = 'Filter' }) => {
   /** Refs */
   const filterFlyoutRef = useRef(null);
@@ -40,10 +35,13 @@ const FilterFlyout = ({ children, updateMethod = BATCH, title = 'Filter' }) => {
   const closeFlyout = () => setOpen(false);
 
   /** Effects */
-  useClickOutside(filterFlyoutRef, () => {
-    if (!open) {
+  useClickOutside(filterFlyoutRef, (target) => {
+    const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
+
+    if (!open || hasClickedOnDatePicker) {
       return;
     }
+
     setOpen(false);
   });
 
@@ -102,6 +100,13 @@ const FilterFlyout = ({ children, updateMethod = BATCH, title = 'Filter' }) => {
   );
 };
 
-FilterFlyout.propTypes = {};
+FilterFlyout.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  title: PropTypes.string,
+  updateMethod: PropTypes.oneOf([BATCH, INSTANT]),
+};
 
 export default FilterFlyout;

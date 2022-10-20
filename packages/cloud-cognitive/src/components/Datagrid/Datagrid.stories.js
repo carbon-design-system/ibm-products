@@ -116,6 +116,7 @@ const defaultHeader = [
     accessor: 'joined',
     type: 'date',
     filter: 'betweenDates',
+    Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
   },
   {
     Header: 'Someone 1',

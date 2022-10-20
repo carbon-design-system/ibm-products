@@ -352,7 +352,7 @@ export let PageHeader = React.forwardRef(
       ({ current }) => {
         // on window resize and other updates some values may have changed
         checkUpdateVerticalSpace();
-        setWidthIsNarrow(current.innerWidth < breakpoints.md.width); // small (below medium) media query
+        setWidthIsNarrow(current.innerWidth/16 < parseInt(breakpoints.md.width)); // small (below medium) media query
       },
       [
         actionBarItems,
@@ -754,7 +754,7 @@ export let PageHeader = React.forwardRef(
                   onWidthChange={handleWidthChange}
                   buttons={pageActions}
                   buttonSetOverflowLabel={pageActionsOverflowLabel}
-                  rightAlign
+                  rightAlign={!widthIsNarrow}
                 />
               )}
             </div>

@@ -8,7 +8,6 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
-import { getInlineEditColumns } from './utils/getInlineEditColumns';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
@@ -33,17 +32,11 @@ import {
   Datagrid,
   useDatagrid,
   useInfiniteScroll,
-  useNestedRows,
-  useExpandedRow,
   useRowIsMouseOver,
   useSelectRows,
-  useOnRowClick,
   useSortableColumns,
-  useColumnRightAlign,
   useDisableSelectRows,
-  useCustomizeColumns,
   useSelectAllWithToggle,
-  useColumnCenterAlign,
   useStickyColumn,
   useActionsColumn,
   useColumnOrder,
@@ -51,19 +44,12 @@ import {
   useFiltering,
 } from '.';
 
-import {
-  CustomizeColumnStory,
-  RowSizeDropdownStory,
-  SelectAllWitHToggle,
-  LeftPanelStory,
-} from './Datagrid.stories';
+import { SelectAllWitHToggle, LeftPanelStory } from './Datagrid.stories';
 import mdx from './Datagrid.mdx';
 
 import { pkg } from '../../settings';
-import cx from 'classnames';
 
 import styles from './_storybook-styles.scss';
-import { SidePanel } from '../SidePanel';
 import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
@@ -189,8 +175,7 @@ export const EmptyState = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(0));
   const emptyStateTitle = 'Empty state title';
-  const emptyStateDescription =
-    'Description text explaining why this card is empty.';
+  const emptyStateDescription = 'Description explaining why the table is empty';
   const emptyStateSize = 'lg';
   const illustrationTheme = 'light';
 
@@ -299,173 +284,6 @@ export const WithPagination = () => {
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;
-};
-export const NestedRows = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10, 5, 2, 2));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useNestedRows
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-export const ExpandedRow = () => {
-  const expansionRenderer = ({ row }) => <div>Content for {row.id}</div>;
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      ExpandedRowContentComponent: expansionRenderer,
-      expandedContentHeight: 95,
-    },
-    useExpandedRow
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-export const NestedTable = () => {
-  const [data] = useState(makeData(20));
-  const nestedColumns = React.useMemo(() => [...defaultHeader], []);
-  nestedColumns[0] = {
-    Header: 'Row #',
-    accessor: (row, i) => i,
-    sticky: 'left',
-  };
-  const nestedDatagridState = useDatagrid({
-    columns: nestedColumns,
-    data,
-    initialState: { pageSize: 10 },
-    DatagridPagination,
-  });
-
-  const expansionRenderer = () => (
-    <div className="carbon-nested-table">
-      <Datagrid datagridState={{ ...nestedDatagridState }} />
-    </div>
-  );
-
-  const columns = React.useMemo(() => defaultHeader, []);
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      ExpandedRowContentComponent: expansionRenderer,
-      expandedContentHeight: (nestedDatagridState.state.pageSize + 2) * 48 + 1, // +2 for header and pagination
-    },
-    useExpandedRow
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-export const ClickableRow = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const [openSidePanel, setOpenSidePanel] = useState(false);
-  const [rowData, setRowData] = useState({});
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      onRowClick: (row) => {
-        setOpenSidePanel(true);
-        setRowData(row);
-      },
-    },
-    useOnRowClick
-  );
-  return (
-    <div
-      className={cx(
-        openSidePanel
-          ? `page-content-wrapper side-panel-open`
-          : 'page-content-wrapper'
-      )}
-    >
-      <Datagrid datagridState={{ ...datagridState }} />
-      <SidePanel
-        selectorPageContent={true && '.page-content-wrapper'} // Only if SlideIn
-        open={openSidePanel}
-        onRequestClose={() => setOpenSidePanel(false)}
-        size={'sm'}
-        title={'Title'}
-        slideIn
-      >
-        <DataTableSidePanelContent rowData={rowData && rowData.original} />
-      </SidePanel>
-    </div>
-  );
-};
-
-export const InlineEdit = () => {
-  const [data, setData] = useState(makeData(10));
-  const columns = React.useMemo(() => getInlineEditColumns(), []);
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      onDataUpdate: setData,
-      DatagridActions,
-    },
-    useInlineEdit
-  );
-  console.log(datagridState);
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-const DataTableSidePanelContent = (selectedRowValues) => {
-  const { rowData } = selectedRowValues;
-
-  const SidePanelSectionContent = ({ rowData, columns, sectionTitle }) => {
-    const finalData = columns.map((item) => Object.entries(rowData)[item]);
-    return (
-      <div className={`${blockClass}__side-panel-sections`}>
-        <h5 className={`${blockClass}__side-panel-section-header`}>
-          {sectionTitle}
-        </h5>
-        {finalData.map(([label, value], index) => {
-          return (
-            <div
-              key={index}
-              className={`${blockClass}__side-panel-section-inner`}
-            >
-              <div className={`${blockClass}__side-panel-label-text`}>
-                {label} :
-              </div>
-              <div className={`${blockClass}__side-panel-value`}>{value}</div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
-
-  return (
-    <div className={`${blockClass}__side-panel-content`}>
-      <SidePanelSectionContent
-        sectionTitle="Section title"
-        rowData={rowData && rowData}
-        columns={[0]}
-      />
-      <SidePanelSectionContent
-        sectionTitle="Personal details"
-        rowData={rowData && rowData}
-        columns={[1, 2, 3, 4]}
-      />
-      <SidePanelSectionContent
-        sectionTitle="Section title"
-        rowData={rowData && rowData}
-        columns={[5, 6, 7, 8, 9, 10, 11, 12]}
-      />
-    </div>
-  );
 };
 
 export const IsHoverOnRow = () => {
@@ -774,66 +592,6 @@ export const SortableColumns = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-export const RightAlignedColumns = () => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader.slice(0, 3),
-      {
-        Header: 'Age',
-        accessor: 'age',
-        rightAlignedColumn: true,
-      },
-      {
-        Header: 'Visits',
-        accessor: 'visits',
-        rightAlignedColumn: true,
-      },
-    ],
-    []
-  );
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useColumnRightAlign
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-export const CenterAlignedColumns = () => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader.slice(0, 3),
-      {
-        Header: 'Age',
-        accessor: 'age',
-        centerAlignedColumn: true,
-      },
-
-      {
-        Header: 'Visit',
-        accessor: 'visits',
-        centerAlignedColumn: true,
-      },
-    ],
-    []
-  );
-
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-    },
-    useColumnCenterAlign
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
 export const DatagridActionsToolbar = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
@@ -897,113 +655,6 @@ export const SelectItemsInAllPages = () => {
   );
 };
 SelectItemsInAllPages.story = SelectAllWitHToggle;
-
-export const CustomizingColumns = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      className: `c4p--datagrid__hidden--columns`,
-      data,
-      initialState: {
-        hiddenColumns: ['age'],
-        columnOrder: [],
-      },
-      customizeColumnsProps: {
-        onSaveColumnPrefs: (newColDefs) => {
-          console.log(newColDefs);
-        },
-        labels: {
-          findColumnPlaceholderLabel: 'Find column',
-          resetToDefaultLabel: 'Reset to default',
-          customizeModalHeadingLabel: 'Customize display',
-          primaryButtonTextLabel: 'Save',
-          secondaryButtonTextLabel: 'Cancel',
-          instructionsLabel:
-            'Deselect columns to hide them. Click and drag the white box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
-          iconTooltipLabel: 'Customize columns',
-          assistiveTextInstructionsLabel:
-            'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
-          assistiveTextDisabledInstructionsLabel:
-            'Reordering columns are disabled because they are filtered currently.',
-          selectAllLabel: 'Column name',
-        },
-      },
-      DatagridActions,
-      DatagridBatchActions,
-    },
-    useCustomizeColumns,
-    useColumnOrder
-  );
-
-  return (
-    <>
-      <Datagrid datagridState={{ ...datagridState }} />
-      <div>
-        Hidden column ids:
-        <pre>{JSON.stringify(datagridState.state.hiddenColumns, null, 2)}</pre>
-      </div>
-      <p>
-        More details in the <strong>Notes</strong> section
-      </p>
-    </>
-  );
-};
-CustomizingColumns.story = CustomizeColumnStory;
-
-export const RowSizeDropdown = () => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader.slice(0, 3),
-      {
-        Header: 'Different cell content',
-        id: 'rowSizeDemo-cell',
-        disableSortBy: true,
-        Cell: ({ rowSize }) => rowSize,
-      },
-    ],
-    []
-  );
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      rowSize: 'xs',
-      rowSizes: [
-        {
-          value: 'xl',
-          labelText: 'More than super',
-        },
-        {
-          value: 'lg',
-          labelText: 'Super tall row',
-        },
-        {
-          value: 'md',
-        },
-        {
-          value: 'xs',
-          labelText: 'Teeny tiny row',
-        },
-      ],
-      onRowSizeChange: (value) => {
-        console.log('row size changed to: ', value);
-      },
-      DatagridActions,
-      DatagridBatchActions,
-    },
-    useSelectRows
-  );
-
-  return (
-    <Wrapper>
-      <Datagrid datagridState={{ ...datagridState }} />
-    </Wrapper>
-  );
-};
-RowSizeDropdown.story = RowSizeDropdownStory;
 
 export const LeftPanel = () => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -1124,49 +775,6 @@ export const DisableSelectRow = () => {
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
-NestedRows.story = {
-  parameters: {
-    notes: `## Sample usage
-    Data should look like this:
-
-    \`\`\`json
-    [
-      {
-        "name": "test 0", "subRows": [
-          {
-            "name": "test 0.0", "subRows": [
-              {
-                "name": "test 0.0.0"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "name": "test 1"
-      }
-    ]
-    \`\`\`
-    <br />
-
-    \`\`\`js
-    const datagridState = useDatagrid(
-      {
-        columns,
-        data,
-      },
-      useRowExpander,
-      useNestedRows,
-    );
-    \`\`\`
-    <br />
-    \`\`\`html
-    <Datagrid {...datagridState} />
-    \`\`\`
-    `,
-  },
 };
 
 const makeDataWithTwoLines = (length) =>

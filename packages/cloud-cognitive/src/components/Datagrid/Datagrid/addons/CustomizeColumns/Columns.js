@@ -96,22 +96,17 @@ const Columns = ({
           </span>
           <div
             id={`${blockClass}__customize-columns-select-all`}
-            className={classNames(
-              {
-                [`${blockClass}__customize-columns-select-all`]:
-                  getVisibleColumnsCount() === 0,
-                [`${blockClass}__customize-columns-select-all-selected`]:
-                  getVisibleColumnsCount() > 0,
-              }
-
-              // `${blockClass}__customize-columns-select-all`,
-            )}
+            className={classNames({
+              [`${blockClass}__customize-columns-select-all`]:
+                getVisibleColumnsCount() === 0,
+              [`${blockClass}__customize-columns-select-all-selected`]:
+                getVisibleColumnsCount() > 0,
+            })}
             selected={getVisibleColumnsCount() > 0}
           >
             <Checkbox
               wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
               checked={getVisibleColumnsCount() === columns.length}
-              empty={!!getVisibleColumnsCount() === 0}
               indeterminate={
                 getVisibleColumnsCount() < columns.length &&
                 getVisibleColumnsCount() > 0

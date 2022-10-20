@@ -7,12 +7,20 @@
 
 import React from 'react';
 import namor from 'namor';
+import { StatusIcon } from '../../StatusIcon';
 import { inlineEditSelectItems } from './getInlineEditColumns';
 
-const getRandomInteger = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+const getRandomInteger = (min, max, decimalPlaces) => {
+  const roundedMin = Math.ceil(min);
+  const roundedMax = Math.floor(max);
+  const randomNumber = Math.random() * (max - min) + min;
+  if (!decimalPlaces) {
+    return (
+      Math.floor(Math.random() * (roundedMax - roundedMin + 1)) + roundedMin
+    );
+  }
+  const power = Math.pow(10, decimalPlaces);
+  return Math.floor(randomNumber * power) / power;
 };
 
 export const makeData = (...lens) => {
@@ -38,6 +46,44 @@ export const range = (len) => {
 /** This function is only to create a random data point when the person joined */
 const getRandomDateJoined = () => {
   return randomDate(new Date(2022, 0, 1), new Date());
+};
+
+const renderStatusIcon = (statusChance) => {
+  const iconProps = {
+    size: 'sm',
+    theme: 'light',
+    kind:
+      statusChance > 0.66
+        ? 'critical'
+        : statusChance > 0.33
+        ? 'minor-warning'
+        : 'normal',
+    iconDescription:
+      statusChance > 0.66
+        ? 'Critical'
+        : statusChance > 0.33
+        ? 'Minor warning'
+        : 'Normal',
+  };
+  return <StatusIcon {...iconProps} />;
+};
+
+const renderDocLink = (statusChance) => {
+  const docLinkObj = {
+    href:
+      statusChance > 0.66
+        ? 'http://carbondesignsystem.com/'
+        : statusChance > 0.33
+        ? 'https://pages.github.ibm.com/cdai-design/pal/'
+        : 'http://carbon-for-ibm-products.netlify.app/',
+    text:
+      statusChance > 0.66
+        ? 'Carbon Design System'
+        : statusChance > 0.33
+        ? 'Carbon for IBM Products PAL'
+        : 'Carbon for IBM Products storybook',
+  };
+  return docLinkObj;
 };
 
 const newPerson = () => {
@@ -96,6 +142,9 @@ const newPerson = () => {
         : statusChance > 0.33
         ? yesterdayDate
         : twoDaysAgoDate,
+    bonus: `$\r${getRandomInteger(100, 500, 2)}`,
+    status_icon: renderStatusIcon(statusChance),
+    doc_link: renderDocLink(statusChance),
   };
 };
 

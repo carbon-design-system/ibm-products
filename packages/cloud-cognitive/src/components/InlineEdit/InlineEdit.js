@@ -72,7 +72,7 @@ export let InlineEdit = React.forwardRef(
     },
     refIn
   ) => {
-    const refInput = useRef({ innerText: value });
+    const refInput = useRef({ textContent: value });
     const localRef = useRef(null);
     const ref = refIn || localRef;
     const [editing, setEditing] = useState(false);
@@ -146,15 +146,15 @@ export let InlineEdit = React.forwardRef(
       document.getSelection().removeAllRanges();
 
       if (onSave) {
-        onSave(refInput.current.innerText);
+        onSave(refInput.current.textContent);
       }
     };
 
     const handleInput = () => {
-      setInternalValue(refInput.current.innerText);
+      setInternalValue(refInput.current.textContent);
 
       if (onChange) {
-        onChange(refInput.current.innerText);
+        onChange(refInput.current.textContent);
       }
     };
 
@@ -194,7 +194,7 @@ export let InlineEdit = React.forwardRef(
       }
     };
     const handleCancel = () => {
-      refInput.current.innerText = value;
+      refInput.current.textContent = value;
       handleInput(value);
       doSetEditing(false);
       document.getSelection().removeAllRanges();
@@ -278,7 +278,7 @@ export let InlineEdit = React.forwardRef(
           {...{ id, size }}
           className={cx(`${blockClass}__input`, {
             [`${blockClass}__input--empty`]:
-              refInput.current?.innerText?.length === 0,
+              refInput.current?.textContent?.length === 0,
           })}
           contentEditable
           aria-label={labelText}

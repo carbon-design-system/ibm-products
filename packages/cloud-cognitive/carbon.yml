@@ -416,7 +416,7 @@ assets:
       - content-block
   page-header:
     name: Page header
-    externalDocsUrl: sign/pal/components/page-header/usage
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/page-header/usage
     status: stable
     type: component
     platform: web

@@ -37,6 +37,7 @@ const DatagridVirtualBody = (datagridState) => {
     onScroll,
     innerListRef,
     tableHeight = 400,
+    virtualHeight,
     listRef,
     rowSize,
     DatagridPagination,
@@ -59,7 +60,7 @@ const DatagridVirtualBody = (datagridState) => {
   return (
     <TableBody {...getTableBodyProps()} onScroll={onScroll}>
       <VariableSizeList
-        height={tableHeight}
+        height={virtualHeight || tableHeight}
         itemCount={visibleRows.length}
         itemSize={(index) =>
           visibleRows[index].isExpanded

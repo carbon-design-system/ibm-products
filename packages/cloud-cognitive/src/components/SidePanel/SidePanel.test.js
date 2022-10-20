@@ -32,7 +32,7 @@ const selectorPageContentValue = '#side-panel-test-page-content';
 const onRequestCloseFn = jest.fn();
 const onUnmountFn = jest.fn();
 
-const renderSidePanel = ({ ...rest }, children = <p>test</p>) =>
+const renderSidePanel = ({ ...rest } = {}, children = <p>test</p>) =>
   render(
     <SidePanel
       {...{

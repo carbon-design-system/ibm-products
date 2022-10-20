@@ -161,20 +161,18 @@ export let InlineEditV2 = forwardRef(
                 key="cancel"
                 className={`${blockClass}__btn ${blockClass}__btn-cancel`}
               />
-              {canSave && (
-                <Button
-                  hasIconOnly
-                  renderIcon={Checkmark24}
-                  size="sm"
-                  iconDescription={saveLabel}
-                  onClick={onSaveHandler}
-                  kind="ghost"
-                  tabIndex={0}
-                  key="save"
-                  className={`${blockClass}__btn ${blockClass}__btn-save`}
-                  disabled={!canSave}
-                />
-              )}
+              <Button
+                hasIconOnly
+                renderIcon={Checkmark24}
+                size="sm"
+                iconDescription={saveLabel}
+                onClick={onSaveHandler}
+                kind="ghost"
+                tabIndex={0}
+                key="save"
+                className={`${blockClass}__btn ${blockClass}__btn-save`}
+                disabled={!canSave}
+              />
             </>
           ) : (
             <Button

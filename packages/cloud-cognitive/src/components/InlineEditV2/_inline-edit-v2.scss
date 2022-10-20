@@ -25,7 +25,7 @@
     }
 
     &:hover {
-      background: $hover-ui;
+      background: $field-01;
     }
 
     &:hover .#{$block-class}__btn-edit {
@@ -37,7 +37,7 @@
     }
 
     &-focused {
-      background: $hover-ui;
+      background: $field-01;
       outline: 2px solid $focus;
     }
 

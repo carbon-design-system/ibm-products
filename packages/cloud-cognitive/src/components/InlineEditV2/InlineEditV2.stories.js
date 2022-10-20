@@ -13,11 +13,13 @@ import {
 import { action } from '@storybook/addon-actions';
 import { InlineEditV2 } from '.';
 import mdx from './InlineEditV2.mdx';
+import styles from './_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(InlineEditV2.displayName),
   component: InlineEditV2,
   parameters: {
+    styles,
     docs: {
       page: mdx,
     },
@@ -67,7 +69,7 @@ const Template = (args) => {
     onCancel,
   };
 
-  return <InlineEditV2 {...props} />;
+  return <InlineEditV2 {...props} className="inline-edit-v2-example" />;
 };
 
 export const Default = prepareStory(Template, {

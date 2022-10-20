@@ -192,7 +192,7 @@ assets:
       - input-control
   create-tearsheet-narrow:
     name: Create tearsheet narrow
-    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/creation-flows/usage#wide-tearsheet
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/creation-flows/usage#narrow-tearsheet
     status: stable
     type: pattern
     platform: web

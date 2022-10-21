@@ -28,7 +28,7 @@ import {
 } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
-import { getNumberOfHiddenSteps } from '../../global/js/utils/getNumberOfHiddenSteps'
+import { getNumberOfHiddenSteps } from '../../global/js/utils/getNumberOfHiddenSteps';
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;

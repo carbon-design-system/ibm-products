@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
- export const getNumberOfHiddenSteps = (stepData, initialStep) => {
-    let numberOfHiddenSteps = 0;
-    stepData.forEach((step, stepIndex) => {
-      if (stepIndex + 1 > initialStep) {
-        return;
-      }
-      if (step.shouldIncludeStep === false) {
-        numberOfHiddenSteps += 1;
-      }
-    });
-    return numberOfHiddenSteps;
-  };
+export const getNumberOfHiddenSteps = (stepData, initialStep) => {
+  let numberOfHiddenSteps = 0;
+  stepData.forEach((step, stepIndex) => {
+    if (stepIndex + 1 > initialStep) {
+      return;
+    }
+    if (step.shouldIncludeStep === false) {
+      numberOfHiddenSteps += 1;
+    }
+  });
+  return numberOfHiddenSteps;
+};

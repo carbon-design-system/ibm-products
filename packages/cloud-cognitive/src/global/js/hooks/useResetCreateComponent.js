@@ -6,7 +6,7 @@
  */
 
 import { useEffect } from 'react';
-import { getNumberOfHiddenSteps } from '../utils/getNumberOfHiddenSteps'
+import { getNumberOfHiddenSteps } from '../utils/getNumberOfHiddenSteps';
 
 /**
  * Resets the current step of the create component if it has been closed.
@@ -62,6 +62,7 @@ export const useResetCreateComponent = ({
     open,
     previousState,
     setCurrentStep,
+    stepData,
     initialStep,
     totalSteps,
     componentName,

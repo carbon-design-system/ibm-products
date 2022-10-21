@@ -26,6 +26,7 @@ export let InlineEditV2 = forwardRef(
       onChange,
       onSave,
       readOnly,
+      readOnlyLabel,
       saveLabel,
       value,
       ...rest
@@ -180,10 +181,9 @@ export let InlineEditV2 = forwardRef(
               hasIconOnly
               renderIcon={readOnly ? EditOff24 : Edit24}
               size="sm"
-              iconDescription={editLabel}
+              iconDescription={readOnly ? readOnlyLabel : editLabel}
               onClick={onFocusHandler}
               kind="ghost"
-              disabled={readOnly}
               tabIndex={0}
               key="edit"
             />
@@ -234,6 +234,10 @@ InlineEditV2.propTypes = {
    * determines if the input is in readOnly mode
    */
   readOnly: PropTypes.bool,
+  /**
+   * label for the edit button that displays when in read only mode
+   */
+  readOnlyLabel: PropTypes.string,
   /**
    * label for save button
    */

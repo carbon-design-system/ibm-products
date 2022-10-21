@@ -46,6 +46,8 @@
     }
 
     &__warning-icon {
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      margin-right: 0.4375rem;
       color: $support-01;
     }
 
@@ -65,7 +67,8 @@
     outline: none;
   }
 
-  .#{$block-class}-readonly .#{$block-class}__text-input.#{$carbon-text-input} {
+  .#{$block-class}-readonly .#{$block-class}__text-input.#{$carbon-text-input},
+  .#{$block-class}-readonly .bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
     cursor: not-allowed;
   }
 

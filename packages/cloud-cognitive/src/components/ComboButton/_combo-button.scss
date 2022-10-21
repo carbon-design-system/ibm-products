@@ -98,11 +98,11 @@
     display: none;
   }
 
-  .#{$blockClass}__divider {
-    width: 100%;
-    height: 0.063rem;
-    background-color: $border-subtle;
-  }
+  // .#{$prefix}--overflow-menu-options__btn.#{$blockClass}__overflow-menu__divider {
+  //   width: 100%;
+  //   height: 0.063rem;
+  //   background-color: $border-subtle;
+  // }
 
   .#{$blockClass}__overflow-menu__item.#{$prefix}--overflow-menu-options__btn {
     position: relative;

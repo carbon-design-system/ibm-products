@@ -28,6 +28,7 @@ import {
 } from '../../global/js/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
+import { getNumberOfHiddenSteps } from '../../global/js/utils/getNumberOfHiddenSteps'
 
 const componentName = 'CreateTearsheet';
 const blockClass = `${pkg.prefix}--tearsheet-create`;
@@ -98,7 +99,8 @@ export let CreateTearsheet = forwardRef(
         setLastIncludedStep(lastItem);
       }
       if (open && initialStep) {
-        setCurrentStep(initialStep);
+        let numberOfHiddenSteps = getNumberOfHiddenSteps(stepData, initialStep);
+        setCurrentStep(Number(initialStep + numberOfHiddenSteps));
       }
     }, [stepData, firstIncludedStep, lastIncludedStep, initialStep, open]);
 
@@ -114,6 +116,7 @@ export let CreateTearsheet = forwardRef(
       previousState,
       open,
       setCurrentStep,
+      stepData,
       initialStep,
       totalSteps: stepData?.length,
       componentName,

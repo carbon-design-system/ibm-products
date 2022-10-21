@@ -44,23 +44,11 @@ export let ComboButton = React.forwardRef(
     const [isOpen, setIsOpen] = useState(false);
     const [primaryAction, ...restActions] = Children.toArray(children)
       .filter(Boolean)
-      .map(({ props: { children, ...props }, type }, index) => {
-        const updatedProps = {
-          ...(type.displayName !== 'ComboButtonItemDivider' && { ...props }),
-          divider:
-            type.displayName === 'ComboButtonItemDivider' ? true : undefined,
-        };
+      .map(({ props: { children, ...props } }) => {
         return {
-          ...updatedProps,
+          ...props,
           children: (
-            <span
-              key={`${index}_${type?.displayName}`}
-              className={cx(`${blockClass}__action`, {
-                [`${blockClass}__divider`]:
-                  type.displayName === 'ComboButtonItemDivider',
-              })}
-              title={children}
-            >
+            <span className={`${blockClass}__action`} title={children}>
               {children}
             </span>
           ),
@@ -85,8 +73,7 @@ export let ComboButton = React.forwardRef(
           <OverflowMenu
             {...overflowMenu}
             className={cx(
-              `${blockClass}__overflow-menu ${blockClass}__overflow-menu--${size}`,
-              { [`${blockClass}__overflow-menu--disabled`]: disabled }
+              `${blockClass}__overflow-menu ${blockClass}__overflow-menu--${size}`
             )}
             disabled={disabled}
             menuOptionsClass={`${blockClass}__overflow-menu__list`}
@@ -94,44 +81,35 @@ export let ComboButton = React.forwardRef(
             onClose={() => setIsOpen(false)}
             renderIcon={() =>
               createElement(isOpen ? ChevronUp16 : ChevronDown16, {
-                className: cx({
-                  [`${blockClass}__overflow-menu__icon--disabled`]: disabled,
-                  [`${blockClass}__overflow-menu__icon`]: !disabled,
-                }),
+                className: cx(`${blockClass}__overflow-menu__icon`),
               })
             }
             size={size}
             flipped
           >
             {restActions.map(
-              ({ children, danger, renderIcon: Icon, ...action }, index) => {
-                if (!action.divider) {
-                  return (
-                    <OverflowMenuItem
-                      {...action}
-                      key={`${blockClass}--${instanceId}__overflow-menu__item__${index}`}
-                      className={cx(`${blockClass}__overflow-menu__item`, {
-                        [`${blockClass}__overflow-menu__item--danger`]: danger,
-                      })}
-                      itemText={
-                        <>
-                          {children}
+              ({ children, renderIcon: Icon, ...action }, index) => {
+                return (
+                  <OverflowMenuItem
+                    {...action}
+                    key={`${blockClass}--${instanceId}__overflow-menu__item__${index}`}
+                    className={cx(`${blockClass}__overflow-menu__item`)}
+                    itemText={
+                      <>
+                        {children}
 
-                          {Icon && (
-                            <span
-                              className={`${blockClass}__overflow-menu__item__icon`}
-                            >
-                              <Icon />
-                            </span>
-                          )}
-                        </>
-                      }
-                      size={size}
-                    />
-                  );
-                } else {
-                  return children;
-                }
+                        {Icon && (
+                          <span
+                            className={`${blockClass}__overflow-menu__item__icon`}
+                          >
+                            <Icon />
+                          </span>
+                        )}
+                      </>
+                    }
+                    size={size}
+                  />
+                );
               }
             )}
           </OverflowMenu>
@@ -144,14 +122,26 @@ export let ComboButton = React.forwardRef(
 ComboButton = pkg.checkComponentEnabled(ComboButton, componentName);
 ComboButton.displayName = componentName;
 ComboButton.propTypes = {
+  /** Provide an optional flag to disable entire ComboButton */
+  buttonDisabled: bool,
+
   /** Provide the contents of the `ComboButton` */
   children: node.isRequired,
 
   /** Provide an optional class to be applied to the containing node */
   className: string,
 
-  /** Provide an optional flag to disable the ComboButton */
+  /** Provide an optional flag to disable the ComboButton or a selected ComboButtonItem */
   disabled: bool,
+
+  /** Provide an optional flag to disable a divider between ComboButtonItems */
+  hasDivider: bool,
+
+  /** Provide an optional flag to convert a ComboButtonItem to a delete item */
+  isDelete: bool,
+
+  /** Provide an optional flag to disable selected ComboButtonItem */
+  itemDisabled: bool,
 
   /** Provide the [props of the `OverflowMenu`](https://react.carbondesignsystem.com/?path=/docs/overflowmenu) */
   overflowMenu: shape(OverflowMenu.propTypes),

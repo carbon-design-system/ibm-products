@@ -17,14 +17,14 @@ ComboButtonItem.propTypes = {
   /** Provide the contents of the `ComboButtonItem` */
   children: node.isRequired,
 
-  /** Provide an optional flag to disable the ComboButton */
-  danger: bool,
-
   /** Specify whether the `ComboButton` should be disabled, or not */
   disabled: bool,
 
   /** Provide an optional `href` for the `ComboButtonItem` to become an `a` element */
   href: string,
+
+  /** Provide an optional flag to convert `ComboButtonItem` to a delete button */
+  isDelete: bool,
 
   /** Provide an optional icon to render */
   renderIcon: oneOfType([func, object]),

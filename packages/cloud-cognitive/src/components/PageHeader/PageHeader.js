@@ -352,7 +352,9 @@ export let PageHeader = React.forwardRef(
       ({ current }) => {
         // on window resize and other updates some values may have changed
         checkUpdateVerticalSpace();
-        setWidthIsNarrow(current.innerWidth/16 < parseInt(breakpoints.md.width)); // small (below medium) media query
+        setWidthIsNarrow(
+          current.innerWidth / 16 < parseInt(breakpoints.md.width)
+        ); // small (below medium) media query
       },
       [
         actionBarItems,

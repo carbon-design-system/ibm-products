@@ -12,7 +12,7 @@
 
 @mixin inline-edit-v2 {
   $block-class: #{$pkg-prefix}--inline-edit-v2;
-  $carbon-text-input: #{$carbon-prefix}--text-input;
+  $carbon-input: #{$carbon-prefix}--text-input;
 
   .#{$block-class} {
     display: flex;
@@ -60,20 +60,21 @@
   }
 
   // overrides
-  .#{$block-class}__text-input.#{$carbon-text-input} {
+  .#{$block-class}__text-input.#{$carbon-input} {
     border: none;
     background: transparent;
     cursor: pointer;
     outline: none;
   }
 
-  .#{$block-class}-readonly .#{$block-class}__text-input.#{$carbon-text-input},
-  .#{$block-class}-readonly .bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
+  .#{$block-class}-readonly .#{$block-class}__text-input.#{$carbon-input},
+  .#{$block-class}-readonly
+    .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger {
     cursor: not-allowed;
   }
 
-  .#{$block-class}__text-input.#{$carbon-text-input}:focus,
-  .#{$block-class}__text-input.#{$carbon-text-input}:active {
+  .#{$block-class}__text-input.#{$carbon-input}:focus,
+  .#{$block-class}__text-input.#{$carbon-input}:active {
     outline: none;
   }
 }

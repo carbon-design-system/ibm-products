@@ -11,7 +11,7 @@
   @include filter-panel-accordion-item;
 
   &__filter-list {
-    width: calc(100% + #{$carbon--spacing-05 / 2});
+    width: calc(100% + #{$carbon--spacing-05 * 0.5});
     padding-left: 0;
   }
 }

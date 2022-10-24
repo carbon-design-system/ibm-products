@@ -943,10 +943,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--side-panel__container .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation {
   position: fixed;
   z-index: 2;
-  top: calc(
-        var(--c4p--side-panel--title-text-height) +
-          var(--c4p--side-panel--label-text-height) + var(--cds-spacing-09, 3rem)
-      );
+  top: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--label-text-height));
   background-color: var(--cds-ui-01, #f4f4f4);
 }
 .c4p--side-panel__container .c4p--side-panel__subtitle-text.c4p--side-panel__subtitle-text-no-animation.c4p--side-panel__subtitle-text-is-animating {
@@ -961,7 +958,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--side-panel__container .c4p--side-panel__title-container.c4p--side-panel__title-container--no-title-animation {
   position: fixed;
-  top: var(--cds-spacing-09, 3rem);
   height: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--label-text-height));
 }
 .c4p--side-panel__container .c4p--side-panel__inner-content {
@@ -982,10 +978,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--side-panel__container .c4p--side-panel__action-toolbar.c4p--side-panel__action-toolbar-no-animation {
   position: fixed;
-  top: calc(
-        var(--c4p--side-panel--title-text-height) +
-          var(--c4p--side-panel--subtitle-container-height) + var(--cds-spacing-09, 3rem)
-      );
+  top: calc(var(--c4p--side-panel--title-text-height) + var(--c4p--side-panel--subtitle-container-height));
   width: 100%;
   border-bottom: 1px solid var(--cds-decorative-01, #e0e0e0);
 }

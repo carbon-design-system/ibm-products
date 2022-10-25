@@ -11,7 +11,7 @@ import { useMemo } from 'react';
 const useFiltering = (hooks) => {
   const filterTypes = useMemo(
     () => ({
-      betweenDates: (rows, id, [startDate, endDate]) => {
+      date: (rows, id, [startDate, endDate]) => {
         return rows.filter((row) => {
           const rowValue = row.values[id];
           if (

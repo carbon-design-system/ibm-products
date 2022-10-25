@@ -390,6 +390,7 @@ export const Filtering = () => {
       useDenseHeader,
       setFilter,
       filterProps,
+      applyFilters,
     } = datagridState;
 
     /** State for filters */
@@ -430,13 +431,8 @@ export const Filtering = () => {
         <FilterFlyout {...filterProps}>
           <DatePicker
             datePickerType="range"
-            onChange={([startDate, endDate]) => {
-              // If no end date is selected return because we need the end date to do computations
-              if (!endDate) {
-                return;
-              }
-              const column = 'joined';
-              setFilter(column, [startDate, endDate]);
+            onChange={(value) => {
+              applyFilters({ column: 'joined', type: 'date', value });
             }}
           >
             <DatePickerInput

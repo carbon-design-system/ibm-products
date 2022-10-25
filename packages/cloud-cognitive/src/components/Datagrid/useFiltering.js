@@ -31,8 +31,22 @@ const useFiltering = (hooks) => {
   );
 
   hooks.useInstance.push((instance) => {
-    const { filterProps } = instance;
+    const { filterProps, setFilter } = instance;
+
+    const applyFilters = ({ column, type, value }) => {
+      if (type === 'date') {
+        console.log({ value, type });
+        // If no end date is selected return because we need the end date to do computations
+        const [, endDate] = value;
+        if (!endDate) {
+          return;
+        }
+        setFilter(column, value);
+      }
+    };
+
     Object.assign(instance, {
+      applyFilters,
       filterProps,
       filterTypes,
     });

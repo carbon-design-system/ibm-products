@@ -26,7 +26,7 @@ import {
   Button,
   DatePicker,
   DatePickerInput,
-  NumberInput,
+  TextInput,
   Dropdown,
   Checkbox,
 } from 'carbon-components-react';
@@ -344,6 +344,7 @@ export const Filtering = () => {
     {
       Header: 'Visits',
       accessor: 'visits',
+      filter: 'number',
       width: 60,
     },
     {
@@ -446,14 +447,16 @@ export const Filtering = () => {
               labelText="Joined end date"
             />
           </DatePicker>
-          <NumberInput
-            id="tj-input"
-            invalidText="Number is not valid"
-            label="Number input label"
-            allowEmpty
+          <TextInput
+            invalidText="A valid value is required"
+            labelText="Visits"
+            placeholder="Type a number amount of visits"
             onChange={(event) => {
-              const column = 'visits';
-              setFilter(column, event.target.value);
+              applyFilters({
+                column: 'visits',
+                type: 'number',
+                value: event.target.value,
+              });
             }}
           />
           <Dropdown

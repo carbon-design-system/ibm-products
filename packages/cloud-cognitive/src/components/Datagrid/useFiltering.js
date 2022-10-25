@@ -26,6 +26,17 @@ const useFiltering = (hooks) => {
           }
         });
       },
+      number: (rows, id, value) => {
+        if (value === '') {
+          return rows;
+        }
+
+        const parsedValue = parseInt(value);
+        return rows.filter((row) => {
+          const rowValue = row.values[id];
+          return rowValue === parsedValue;
+        });
+      },
     }),
     []
   );
@@ -40,6 +51,9 @@ const useFiltering = (hooks) => {
         if (!endDate) {
           return;
         }
+        setFilter(column, value);
+      }
+      if (type === 'number') {
         setFilter(column, value);
       }
     };

@@ -55,7 +55,7 @@ $maps-sort-dir: 'asc';
     $map-of-maps: type-of($maps) == 'map';
 
     @if $map-of-maps {
-      $seed-map: nth(nth($maps, ceil(length($maps) / 2)), 2);
+      $seed-map: nth(nth($maps, ceil(length($maps) * 0.5)), 2);
 
       $seed-value: map-get-nested($seed-map, $keys...);
 
@@ -111,7 +111,7 @@ $maps-sort-dir: 'asc';
 
       @return map-merge(map-merge($less, $equal), $greater);
     } @else {
-      $seed-map: nth($maps, ceil(length($maps) / 2));
+      $seed-map: nth($maps, ceil(length($maps) * 0.5));
 
       $seed-value: map-get-nested($seed-map, $keys...);
 

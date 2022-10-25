@@ -31,7 +31,9 @@ $button--icon__transition__timing-function: $timing-function;
     $count: $count,
   );
 
-  $button--icon__tooltip__position: $button--icon__sizing__dimensions--size / 2;
+  $button--icon__tooltip__position: calc(
+    #{$button--icon__sizing__dimensions--size} * 0.5
+  );
 
   width: $button--icon__sizing__dimensions--size;
   height: $button--icon__sizing__dimensions--size;

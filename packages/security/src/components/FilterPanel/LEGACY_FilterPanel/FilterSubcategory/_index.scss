@@ -26,7 +26,7 @@
   }
 
   &__filter-list {
-    width: calc(100% + #{$filter-subcategory__spacing__padding / 2});
+    width: calc(100% + #{$filter-subcategory__spacing__padding * 0.5});
     padding-left: 0;
   }
 

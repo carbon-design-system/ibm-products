@@ -166,7 +166,7 @@ const Columns = ({
                     `${blockClass}__customize-columns-checkbox`
                   )}
                   checked={isColumnVisible(colDef)}
-                  onChange={onSelectColumn.bind(null, colDef)}
+                  onChange={(_, { checked }) => onSelectColumn(colDef, checked)}
                   id={`${blockClass}__customization-column-${colDef.id}`}
                   labelText={colDef.Header.props.title}
                   title={colDef.Header.props.title}

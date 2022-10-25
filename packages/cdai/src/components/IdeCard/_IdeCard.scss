@@ -22,7 +22,7 @@ $ide-card-size: carbon--mini-units(30);
   flex: 1 0 21%;
   padding: 0;
   // stylelint-disable-next-line carbon/layout-token-use
-  margin: $spacing-01 / 2;
+  margin: calc(#{$spacing-01} * 0.5);
   background-color: $ui-background;
 
   .#{$ide-prefix}-card--card-overides {

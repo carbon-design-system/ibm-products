@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.3...@carbon/ibm-products@2.0.0-rc.4) (2022-10-25)
+
+
+### Bug Fixes
+
+* **builds:** add script to fix `node_modules` path in sass source maps (v11) ([#2359](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2359)) ([a84342d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a84342d71439459843dca8ee3b9058f19c27e81b))
+* **CreateTearsheetNarrow:** Update formTitle prop as optional - v11 ([#2322](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2322)) ([3320f4a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3320f4ae94753ae5f699ebcca00256d199aa8dc6))
+* **Datagrid:** give table a default height for infinite scroll fn ([#2370](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2370)) ([78e2f8e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/78e2f8e6ca6c319daaf43eefb6329f6fbaec2cb3))
+* **Datagrid:** use new Checkbox onChange prop signature ([#2401](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2401)) ([c198236](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c1982363699d641d6755b2535b1dee8160083cc3))
+* **PageHeader:** Update page header to use h1 -v11 ([#2327](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2327)) ([9a4ac68](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9a4ac68f7d53bbf5b58b0deb4935cd63e7a6d94b))
+* **SidePanel:** fix static title positioning ([#2396](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2396)) ([85841b7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/85841b71e856b986048b2a74a23a38b69d5450d8))
+* **SidePanel:** motion refactor using framer motion (v11) ([#2314](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2314)) ([7bad2f2](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7bad2f271ec71cf8979b71a67cde0f212d0d5d6c))
+
+
+### Features
+
+* **Datagrid:** add new property to customize virtual body height ([#2382](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2382)) ([cd90d32](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/cd90d32a36585b5abad4b15a40fcdbdc5e38efe7))
+* **EditUpdateCards:** Edit and update cards - v11 ([#2374](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2374)) ([e233609](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e2336097fdbf4178c885d5960df726cc83c2dd99))
+
+
+
+
+
 # [2.0.0-rc.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.2...@carbon/ibm-products@2.0.0-rc.3) (2022-09-30)
 
 

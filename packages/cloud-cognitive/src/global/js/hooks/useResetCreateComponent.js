@@ -38,7 +38,10 @@ export const useResetCreateComponent = ({
         Number(initialStep) <= Number(totalSteps) &&
         Number(initialStep) > 0
       ) {
-        const numberOfHiddenSteps = getNumberOfHiddenSteps(stepData, initialStep);
+        const numberOfHiddenSteps = getNumberOfHiddenSteps(
+          stepData,
+          initialStep
+        );
         setCurrentStep(Number(initialStep + numberOfHiddenSteps));
       } else {
         // default should be fist includedStep instead of just 1

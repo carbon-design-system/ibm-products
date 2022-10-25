@@ -99,7 +99,10 @@ export let CreateTearsheet = forwardRef(
         setLastIncludedStep(lastItem);
       }
       if (open && initialStep) {
-        const numberOfHiddenSteps = getNumberOfHiddenSteps(stepData, initialStep);
+        const numberOfHiddenSteps = getNumberOfHiddenSteps(
+          stepData,
+          initialStep
+        );
         setCurrentStep(initialStep + numberOfHiddenSteps);
       }
     }, [stepData, firstIncludedStep, lastIncludedStep, initialStep, open]);

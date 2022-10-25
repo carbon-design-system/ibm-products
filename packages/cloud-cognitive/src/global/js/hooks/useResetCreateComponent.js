@@ -6,6 +6,7 @@
  */
 
 import { useEffect } from 'react';
+import { getNumberOfHiddenSteps } from '../utils/getNumberOfHiddenSteps';
 
 /**
  * Resets the current step of the create component if it has been closed.
@@ -14,6 +15,7 @@ import { useEffect } from 'react';
  * @param {object} useResetCreateComponent.previousState
  * @param {boolean} useResetCreateComponent.open
  * @param {Function} useResetCreateComponent.setCurrentStep
+ * @param {object} useResetCreateComponent.stepData
  * @param {number} useResetCreateComponent.initialStep
  * @param {number} useResetCreateComponent.totalSteps
  * @param {string} useResetCreateComponent.componentName
@@ -23,6 +25,7 @@ export const useResetCreateComponent = ({
   previousState,
   open,
   setCurrentStep,
+  stepData,
   initialStep,
   totalSteps,
   componentName,
@@ -35,7 +38,11 @@ export const useResetCreateComponent = ({
         Number(initialStep) <= Number(totalSteps) &&
         Number(initialStep) > 0
       ) {
-        setCurrentStep(Number(initialStep));
+        const numberOfHiddenSteps = getNumberOfHiddenSteps(
+          stepData,
+          initialStep
+        );
+        setCurrentStep(Number(initialStep + numberOfHiddenSteps));
       } else {
         // default should be fist includedStep instead of just 1
         setCurrentStep(firstIncludedStep);
@@ -58,6 +65,7 @@ export const useResetCreateComponent = ({
     open,
     previousState,
     setCurrentStep,
+    stepData,
     initialStep,
     totalSteps,
     componentName,

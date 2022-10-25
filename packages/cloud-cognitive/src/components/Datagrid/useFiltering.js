@@ -6,33 +6,35 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
-
-import { pkg } from '../../settings';
-const blockClass = `${pkg.prefix}--datagrid`;
+import { useMemo } from 'react';
 
 const useFiltering = (hooks) => {
-  hooks.getCellProps.push((props, { cell, instance }) => {
-    const {
-      filterProps: { dateToString },
-    } = instance;
-
-    /** Checks if cell is a date type and converts raw date input to string */
-    if (cell.column.type === 'date') {
-      return [
-        props,
-        {
-          className: `${blockClass}__cell`,
-          children: dateToString(cell.value),
-        },
-      ];
-    }
-    return [props, { className: `${blockClass}__cell` }];
-  });
+  const filterTypes = useMemo(
+    () => ({
+      betweenDates: (rows, id, [startDate, endDate]) => {
+        return rows.filter((row) => {
+          const rowValue = row.values[id];
+          if (
+            rowValue.getTime() <= endDate.getTime() &&
+            rowValue.getTime() >= startDate.getTime()
+          ) {
+            // In date range
+            return true;
+          } else {
+            // Not in date range
+            return false;
+          }
+        });
+      },
+    }),
+    []
+  );
 
   hooks.useInstance.push((instance) => {
     const { filterProps } = instance;
     Object.assign(instance, {
       filterProps,
+      filterTypes,
     });
   });
 };

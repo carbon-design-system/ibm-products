@@ -48,30 +48,9 @@ const useDatagrid = (params, ...plugins) => {
   ];
   const clientEndPlugins = params.endPlugins || [];
 
-  const filterTypes = useMemo(
-    () => ({
-      betweenDates: (rows, id, [startDate, endDate]) => {
-        return rows.filter((row) => {
-          const rowValue = row.values[id];
-          if (
-            rowValue.getTime() <= endDate.getTime() &&
-            rowValue.getTime() >= startDate.getTime()
-          ) {
-            // In date range
-            return true;
-          } else {
-            // Not in date range
-            return false;
-          }
-        });
-      },
-    }),
-    []
-  );
-
   const tableId = useMemo(() => uniqueId('datagrid-table-id'), []);
   const tableState = useTable(
-    { tableId, ...params, filterTypes },
+    { tableId, ...params },
     ...defaultPlugins,
     ...plugins,
     ...defaultEndPlugins,

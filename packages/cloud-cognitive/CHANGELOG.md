@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.35.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.34.1...@carbon/ibm-products@1.35.0) (2022-10-25)
+
+### Bug Fixes
+
+- **Datagrid:** get default table height for inifinite scroll
+  ([#2369](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2369))
+  ([720221a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/720221ac4c7e52ab8fac9394aa661a4a8c8c9e34))
+- design review fixes
+  ([#2376](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2376))
+  ([8bbd7b1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8bbd7b1c0af7cf02a2630b8c391abaa87ea49bc1))
+- Inline edit v2 design review
+  ([#2397](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2397))
+  ([643f900](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/643f900bd29135383371580fd29b5252c9301f99))
+- **SidePanel:** address positioning in static version
+  ([#2395](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2395))
+  ([1c9ae8c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1c9ae8c347352f4ffbd2d68f1c7f1fe6177478cf))
+
+### Features
+
+- **Datagrid:** allow for customizable virtual height
+  ([#2381](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2381))
+  ([b083c4b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b083c4bd6a597d917e90e2befc2c795139c6890c))
+- **EditUpdateCards:** Edit and update cards
+  ([#2212](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2212))
+  ([ac140f8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ac140f8f8320f4985d95a8a270a440fd7b5cb2cf))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.34.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.34.0...@carbon/ibm-products@1.34.1) (2022-10-18)
 
 ### Bug Fixes

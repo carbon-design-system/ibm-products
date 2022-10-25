@@ -52,8 +52,9 @@ const useFiltering = (hooks) => {
           return;
         }
         setFilter(column, value);
-      }
-      if (type === 'number') {
+      } else if (type === 'number') {
+        setFilter(column, value);
+      } else {
         setFilter(column, value);
       }
     };

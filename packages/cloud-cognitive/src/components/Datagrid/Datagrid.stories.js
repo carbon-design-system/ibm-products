@@ -465,8 +465,11 @@ export const Filtering = () => {
             items={['relationship', 'complicated', 'single']}
             label="Marital status"
             onChange={({ selectedItem }) => {
-              const column = 'status';
-              setFilter(column, selectedItem);
+              applyFilters({
+                column: 'status',
+                type: 'text',
+                value: selectedItem,
+              });
             }}
           />
           <fieldset className="bx--fieldset">

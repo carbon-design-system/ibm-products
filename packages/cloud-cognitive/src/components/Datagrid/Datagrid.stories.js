@@ -8,6 +8,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
+import { StatusIcon } from '../StatusIcon';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
@@ -27,6 +28,7 @@ import {
   DatePickerInput,
   NumberInput,
   Dropdown,
+  Checkbox,
 } from 'carbon-components-react';
 import {
   Datagrid,
@@ -98,9 +100,6 @@ const defaultHeader = [
   {
     Header: 'Joined',
     accessor: 'joined',
-    type: 'date',
-    filter: 'betweenDates',
-    Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
   },
   {
     Header: 'Someone 1',
@@ -129,18 +128,6 @@ const defaultHeader = [
   {
     Header: 'Someone 7',
     accessor: 'someone7',
-  },
-  {
-    Header: 'Someone 8',
-    accessor: 'someone8',
-  },
-  {
-    Header: 'Someone 9',
-    accessor: 'someone9',
-  },
-  {
-    Header: 'Someone 10',
-    accessor: 'someone10',
   },
 ];
 
@@ -334,7 +321,63 @@ export const SelectableRow = () => {
 };
 
 export const Filtering = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
+  const headers = [
+    {
+      Header: 'Row Index',
+      accessor: (row, i) => i,
+      sticky: 'left',
+      id: 'rowIndex', // id is required when accessor is a function.
+    },
+    {
+      Header: 'First Name',
+      accessor: 'firstName',
+    },
+    {
+      Header: 'Last Name',
+      accessor: 'lastName',
+    },
+    {
+      Header: 'Age',
+      accessor: 'age',
+      width: 50,
+    },
+    {
+      Header: 'Visits',
+      accessor: 'visits',
+      width: 60,
+    },
+    {
+      Header: 'Status',
+      accessor: 'status',
+    },
+    // Shows the date filter example
+    {
+      Header: 'Joined',
+      accessor: 'joined',
+      type: 'date',
+      filter: 'betweenDates',
+      Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
+    },
+    // Shows the radio button filter example
+    {
+      Header: 'Password strength',
+      accessor: 'status_icon',
+      Cell: ({ cell: { value } }) => (
+        <span
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <StatusIcon {...value} />
+          {value.iconDescription}
+        </span>
+      ),
+    },
+  ];
+
+  const columns = React.useMemo(() => headers, []);
   const [data] = useState(makeData(20));
 
   const FilterDatagridActions = (datagridState) => {
@@ -348,6 +391,13 @@ export const Filtering = () => {
       setFilter,
       filterProps,
     } = datagridState;
+
+    /** State for filters */
+    const [passwordOptions, setPasswordOptions] = useState([
+      { label: 'Normal', selected: false },
+      { label: 'Minor warning', selected: false },
+      { label: 'Critical', selected: false },
+    ]);
 
     const downloadCsv = () => {
       alert('Downloading...');
@@ -366,6 +416,13 @@ export const Filtering = () => {
       'button:nth-child(1) > span:nth-child(1)': {
         bottom: '-37px',
       },
+    };
+
+    const handlePasswordStrengthChange = (isSelected, id) => {
+      const passwordOptionsCopy = [...passwordOptions];
+      const option = passwordOptionsCopy.find((option) => option.label === id);
+      option.selected = isSelected;
+      setPasswordOptions(passwordOptionsCopy);
     };
 
     const renderFilterFlyout = useCallback(() => {
@@ -413,6 +470,22 @@ export const Filtering = () => {
               setFilter(column, selectedItem);
             }}
           />
+          <fieldset className="bx--fieldset">
+            <legend className="bx--label">Password strength</legend>
+            {passwordOptions.map((option) => (
+              <Checkbox
+                key={option.label}
+                selected={option.selected}
+                labelText={option.label}
+                onChange={(isSelected) => {
+                  handlePasswordStrengthChange(isSelected, option.label);
+                  const column = 'status_icon';
+                  setFilter(column);
+                }}
+                id={option.label}
+              />
+            ))}
+          </fieldset>
         </FilterFlyout>
       );
     }, []);

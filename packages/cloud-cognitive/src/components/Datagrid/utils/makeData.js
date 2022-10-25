@@ -7,7 +7,6 @@
 
 import React from 'react';
 import namor from 'namor';
-import { StatusIcon } from '../../StatusIcon';
 import { inlineEditSelectItems } from './getInlineEditColumns';
 
 const getRandomInteger = (min, max, decimalPlaces) => {
@@ -65,7 +64,7 @@ const renderStatusIcon = (statusChance) => {
         ? 'Minor warning'
         : 'Normal',
   };
-  return <StatusIcon {...iconProps} />;
+  return iconProps;
 };
 
 const renderDocLink = (statusChance) => {

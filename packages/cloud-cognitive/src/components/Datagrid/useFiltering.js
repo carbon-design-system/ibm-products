@@ -35,7 +35,6 @@ const useFiltering = (hooks) => {
 
     const applyFilters = ({ column, type, value }) => {
       if (type === 'date') {
-        console.log({ value, type });
         // If no end date is selected return because we need the end date to do computations
         const [, endDate] = value;
         if (!endDate) {

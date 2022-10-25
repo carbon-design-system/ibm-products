@@ -6690,9 +6690,9 @@ __metadata:
   linkType: hard
 
 "@types/node@npm:*":
-  version: 18.11.2
-  resolution: "@types/node@npm:18.11.2"
-  checksum: 0ff5c90fb9ab653e018b858479aea4d2f763b07b31f9502383d408936f525ca37cac82ea27774a0dd0356ff9badba2792a6a3fff94f79fd7c82ee2a892c43ed5
+  version: 18.11.3
+  resolution: "@types/node@npm:18.11.3"
+  checksum: 3a2a9142d891a90a195c296149bf64a69cc0abcc42f543be911ab22b2e0ead85ff077f90af92f0f13f6e3e5e72501469200fd753dfd1101825d4646a89d3ee47
   languageName: node
   linkType: hard
 
@@ -17871,13 +17871,13 @@ __metadata:
   linkType: hard
 
 "loader-utils@npm:^2.0.0":
-  version: 2.0.2
-  resolution: "loader-utils@npm:2.0.2"
+  version: 2.0.3
+  resolution: "loader-utils@npm:2.0.3"
   dependencies:
     big.js: ^5.2.2
     emojis-list: ^3.0.0
     json5: ^2.1.2
-  checksum: 9078d1ed47cadc57f4c6ddbdb2add324ee7da544cea41de3b7f1128e8108fcd41cd3443a85b7ee8d7d8ac439148aa221922774efe4cf87506d4fb054d5889303
+  checksum: d055c61ce5927b64cb4af40218606603a7d3a39adb7b6eec116bb31d19203875950e478152dea056de404eced8e87e9bfd336ec636591ded040ea451f63c7d88
   languageName: node
   linkType: hard
 

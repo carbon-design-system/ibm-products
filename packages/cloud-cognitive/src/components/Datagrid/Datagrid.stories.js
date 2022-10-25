@@ -355,14 +355,14 @@ export const Filtering = () => {
     {
       Header: 'Joined',
       accessor: 'joined',
-      type: 'date',
-      filter: 'betweenDates',
+      filter: 'date',
       Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
     },
     // Shows the radio button filter example
     {
       Header: 'Password strength',
       accessor: 'status_icon',
+      filter: '',
       Cell: ({ cell: { value } }) => (
         <span
           style={{
@@ -389,7 +389,6 @@ export const Filtering = () => {
       RowSizeDropdown,
       rowSizeDropdownProps,
       useDenseHeader,
-      setFilter,
       filterProps,
       applyFilters,
     } = datagridState;
@@ -433,7 +432,7 @@ export const Filtering = () => {
           <DatePicker
             datePickerType="range"
             onChange={(value) => {
-              applyFilters({ column: 'joined', type: 'date', value });
+              applyFilters({ column: 'joined', value });
             }}
           >
             <DatePickerInput
@@ -454,7 +453,6 @@ export const Filtering = () => {
             onChange={(event) => {
               applyFilters({
                 column: 'visits',
-                type: 'number',
                 value: event.target.value,
               });
             }}
@@ -467,7 +465,6 @@ export const Filtering = () => {
             onChange={({ selectedItem }) => {
               applyFilters({
                 column: 'status',
-                type: 'text',
                 value: selectedItem,
               });
             }}
@@ -481,8 +478,10 @@ export const Filtering = () => {
                 labelText={option.label}
                 onChange={(isSelected) => {
                   handlePasswordStrengthChange(isSelected, option.label);
-                  const column = 'status_icon';
-                  setFilter(column);
+                  applyFilters({
+                    column: 'status_icon',
+                    value: passwordOptions,
+                  });
                 }}
                 id={option.label}
               />

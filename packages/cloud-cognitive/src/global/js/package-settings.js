@@ -32,7 +32,7 @@ const defaults = {
     HTTPError404: true,
     HTTPErrorOther: true,
     ImportModal: true,
-    InlineEdit: true,
+    InlineEditV1: true,
     NotificationsPanel: true,
     NoDataEmptyState: true,
     NoTagsEmptyState: true,

@@ -100,6 +100,7 @@ const defaultHeader = [
   {
     Header: 'Joined',
     accessor: 'joined',
+    Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
   },
   {
     Header: 'Someone 1',
@@ -361,20 +362,29 @@ export const Filtering = () => {
     // Shows the radio button filter example
     {
       Header: 'Password strength',
-      accessor: 'status_icon',
+      accessor: 'passwordStrength',
       filter: '',
-      Cell: ({ cell: { value } }) => (
-        <span
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <StatusIcon {...value} />
-          {value.iconDescription}
-        </span>
-      ),
+      Cell: ({ cell: { value } }) => {
+        const iconProps = {
+          size: 'sm',
+          theme: 'light',
+          kind: value,
+          iconDescription: value,
+        };
+
+        return (
+          <span
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <StatusIcon {...iconProps} />
+            {iconProps.iconDescription}
+          </span>
+        );
+      },
     },
   ];
 

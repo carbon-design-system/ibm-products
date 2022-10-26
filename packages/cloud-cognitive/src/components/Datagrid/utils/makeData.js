@@ -47,24 +47,12 @@ const getRandomDateJoined = () => {
   return randomDate(new Date(2022, 0, 1), new Date());
 };
 
-const renderStatusIcon = (statusChance) => {
-  const iconProps = {
-    size: 'sm',
-    theme: 'light',
-    kind:
-      statusChance > 0.66
-        ? 'critical'
-        : statusChance > 0.33
-        ? 'minor-warning'
-        : 'normal',
-    iconDescription:
-      statusChance > 0.66
-        ? 'Critical'
-        : statusChance > 0.33
-        ? 'Minor warning'
-        : 'Normal',
-  };
-  return iconProps;
+const getPasswordStrength = (statusChance) => {
+  return statusChance > 0.66
+    ? 'critical'
+    : statusChance > 0.33
+    ? 'minor-warning'
+    : 'normal';
 };
 
 const renderDocLink = (statusChance) => {
@@ -142,7 +130,7 @@ const newPerson = () => {
         ? yesterdayDate
         : twoDaysAgoDate,
     bonus: `$\r${getRandomInteger(100, 500, 2)}`,
-    status_icon: renderStatusIcon(statusChance),
+    passwordStrength: getPasswordStrength(statusChance),
     doc_link: renderDocLink(statusChance),
   };
 };

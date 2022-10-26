@@ -363,7 +363,7 @@ export const Filtering = () => {
     {
       Header: 'Password strength',
       accessor: 'passwordStrength',
-      filter: '',
+      filter: 'checkbox',
       Cell: ({ cell: { value } }) => {
         const iconProps = {
           size: 'sm',
@@ -405,9 +405,9 @@ export const Filtering = () => {
 
     /** State for filters */
     const [passwordOptions, setPasswordOptions] = useState([
-      { label: 'Normal', selected: false },
-      { label: 'Minor warning', selected: false },
-      { label: 'Critical', selected: false },
+      { label: 'Normal', value: 'normal', selected: false },
+      { label: 'Minor warning', value: 'minor-warning', selected: false },
+      { label: 'Critical', value: 'critical', selected: false },
     ]);
 
     const downloadCsv = () => {
@@ -489,7 +489,7 @@ export const Filtering = () => {
                 onChange={(isSelected) => {
                   handlePasswordStrengthChange(isSelected, option.label);
                   applyFilters({
-                    column: 'status_icon',
+                    column: 'passwordStrength',
                     value: passwordOptions,
                   });
                 }}

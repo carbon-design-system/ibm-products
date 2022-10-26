@@ -37,6 +37,22 @@ const useFiltering = (hooks) => {
           return rowValue === parsedValue;
         });
       },
+      checkbox: (rows, id, value) => {
+        // gets all the items that are selected and returns their value
+        const selectedItems = value
+          .filter((item) => item.selected)
+          .map((item) => item.value);
+
+        // if the user removed all checkboxes then display all rows
+        if (selectedItems.length === 0) {
+          return rows;
+        }
+
+        return rows.filter((row) => {
+          const rowValue = row.values[id];
+          return selectedItems.includes(rowValue);
+        });
+      },
     }),
     []
   );
@@ -53,8 +69,6 @@ const useFiltering = (hooks) => {
         if (!endDate) {
           return;
         }
-        setFilter(column, value);
-      } else if (type === 'number') {
         setFilter(column, value);
       } else {
         setFilter(column, value);

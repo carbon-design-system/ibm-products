@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import { pkg } from '../../settings';
 import { InlineEditV1 } from '../InlineEditV1';
 import { InlineEditV2 } from '../InlineEditV2';
 
@@ -9,6 +10,8 @@ import { InlineEditV2 } from '../InlineEditV2';
  * since this is a temporary solution the named export should just remain InlineEdit unlike how
  * Card works as a base layer for Productive and Expressive cards.
  */
+
+const componentName = 'InlineEdit';
 
 export let InlineEdit = forwardRef(({ v2, ...rest }, ref) => {
   const props = {
@@ -21,6 +24,10 @@ export let InlineEdit = forwardRef(({ v2, ...rest }, ref) => {
 
   return <InlineEditV1 {...props} />;
 });
+
+InlineEdit = pkg.checkComponentEnabled(InlineEdit, componentName);
+
+InlineEdit.displayName = componentName;
 
 InlineEdit.propTypes = {
   v2: PropTypes.bool,

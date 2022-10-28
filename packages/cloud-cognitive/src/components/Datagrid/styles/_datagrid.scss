@@ -530,3 +530,34 @@
   height: $spacing-09;
   justify-content: center;
 }
+
+.#{c4p-settings.$carbon-prefix}--body--with-modal-open .#{$block-class}__grid-container {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal{
+  width: 100%;
+}
+
+.#{$block-class}__toolbar-primary-overflow.primary-kind {
+  background-color: $interactive;
+}
+
+.#{$block-class}__toolbar-primary-overflow.primary-kind svg {
+  fill: $background;
+}
+
+.#{$block-class}__toolbar-primary-overflow.primary-kind:hover,
+.#{$block-class}__toolbar-primary-overflow.primary-kind.#{c4p-settings.$carbon-prefix}--overflow-menu--open:hover,
+.#{$block-class}__toolbar-primary-overflow.primary-kind.#{c4p-settings.$carbon-prefix}--overflow-menu--open {
+  background-color: $button-primary-hover;
+}
+
+.#{$block-class}__toolbar-options.#{c4p-settings.$carbon-prefix}--overflow-menu-options::after {
+  background-color: transparent;
+}
+
+.#{$block-class}__mobile-toolbar-modal .#{c4p-settings.$carbon-prefix}--modal-container {
+  position: absolute;
+}

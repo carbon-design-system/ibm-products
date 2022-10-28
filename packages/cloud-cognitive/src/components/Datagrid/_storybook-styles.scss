@@ -97,3 +97,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 .#{$block-class}-story__hidden-column-id-snippet {
   padding-top: $spacing-07;
 }
+
+.#{$block-class}__mobile-toolbar-modal .#{c4p-settings.$carbon-prefix}--dropdown__wrapper {
+  margin-bottom: $spacing-07;
+}

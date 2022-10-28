@@ -1,0 +1,39 @@
+{
+  "name": "carbon-v11-template",
+  "keywords": [
+    "carbon",
+    "ibm",
+    "ibm-products",
+    "component",
+    "datagrid",
+    "datatable",
+    "v11",
+    "carbon-v11"
+  ],
+  "license": "Apache-2.0",
+  "main": "src/index.js",
+  "dependencies": {
+    "@carbon/ibm-products": "^2.0.0-rc.4",
+    "@carbon/react": "^1.15.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "latest",
+    "sass": "^1.55.0"
+  },
+  "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
+  "scripts": {
+    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

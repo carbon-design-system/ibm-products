@@ -22,6 +22,14 @@ const config = [
       'url( ' + defaultOrNot(require('./AboutModal--thumbnail.png')) + ')',
   },
   {
+    label: 'Carbon v11 template',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/Carbon-v11-template',
+    thumbnail:
+      'url( ' +
+      defaultOrNot(require('./Carbon-v11-template--thumbnail.png')) +
+      ')',
+  },
+  {
     label: 'Cascade',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/Cascade',
     thumbnail:

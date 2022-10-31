@@ -389,7 +389,7 @@ export const Filtering = () => {
   ];
 
   const columns = React.useMemo(() => headers, []);
-  const [data] = useState(makeData(20));
+  const [data] = useState(makeData(100));
 
   const FilterDatagridActions = (datagridState) => {
     const {
@@ -438,7 +438,7 @@ export const Filtering = () => {
 
     const renderFilterFlyout = useCallback(() => {
       return (
-        <FilterFlyout {...filterProps}>
+        <FilterFlyout {...filterProps} datagridState={datagridState}>
           <DatePicker
             datePickerType="range"
             onChange={(value) => {
@@ -472,6 +472,7 @@ export const Filtering = () => {
             ariaLabel="Marital status dropdown"
             items={['relationship', 'complicated', 'single']}
             label="Marital status"
+            titleText="Marital status"
             onChange={({ selectedItem }) => {
               applyFilters({
                 column: 'status',
@@ -609,7 +610,7 @@ export const Filtering = () => {
       data,
       filterProps: {
         dateToString,
-        updateMethod: 'instant',
+        updateMethod: 'batch',
       },
       DatagridActions: FilterDatagridActions,
       batchActions: true,

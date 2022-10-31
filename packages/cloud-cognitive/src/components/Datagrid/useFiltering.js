@@ -6,9 +6,16 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
+import { BATCH } from './Datagrid/addons/Filtering/constants';
+
+let filtersObjectArray = [];
 
 const useFiltering = (hooks) => {
+  // When using batch actions we have to store the filters to then apply them later
+  // const [filtersObjectArray, setFiltersObjectArray] = useState([]);
+  // const [shouldApplyFilters, setShouldApplyFilters] = useState(false);
+
   const filterTypes = useMemo(
     () => ({
       date: (rows, id, [startDate, endDate]) => {
@@ -57,28 +64,41 @@ const useFiltering = (hooks) => {
     []
   );
 
+  // useEffect(() => console.log(filtersObjectArray), [filtersObjectArray]);
+  useEffect(() => console.log('render'), []);
+
   hooks.useInstance.push((instance) => {
-    const { filterProps, setFilter, headers } = instance;
+    console.log('hook useInstance');
+    const {
+      filterProps: { updateMethod },
+      setFilter,
+      headers,
+    } = instance;
 
     const applyFilters = ({ column, value }) => {
-      let type = headers.find((header) => header.id === column).filter;
+      const type = headers.find((header) => header.id === column).filter;
 
-      if (type === 'date') {
-        // If no end date is selected return because we need the end date to do computations
-        const [, endDate] = value;
-        if (!endDate) {
-          return;
-        }
-        setFilter(column, value);
+      // // If no end date is selected return because we need the end date to do computations
+      if (type === 'date' && !value[1]) {
+        return;
+      }
+
+      if (updateMethod === BATCH) {
+        filtersObjectArray = [...filtersObjectArray, { id: column, value }];
+        // setFiltersObjectArray((old) => {
+        //   console.log('setFiltersObjectArray');
+        //   return [...old, { id: column, value }];
+        // });
       } else {
+        console.log('else ');
         setFilter(column, value);
       }
     };
 
     Object.assign(instance, {
       applyFilters,
-      filterProps,
       filterTypes,
+      filtersObjectArray,
     });
   });
 };

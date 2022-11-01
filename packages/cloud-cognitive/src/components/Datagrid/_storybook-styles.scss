@@ -98,6 +98,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   padding-top: $spacing-07;
 }
 
-.#{$block-class}__mobile-toolbar-modal .#{c4p-settings.$carbon-prefix}--dropdown__wrapper {
+.#{$block-class}__mobile-toolbar-modal
+  .#{c4p-settings.$carbon-prefix}--dropdown__wrapper {
   margin-bottom: $spacing-07;
 }

@@ -6,14 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect, useLayoutEffect  } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
 import { action } from '@storybook/addon-actions';
 import { Activity, Add, ChevronDown } from '@carbon/react/icons';
-import { 
+import {
   DataTable,
   OverflowMenu,
   OverflowMenuItem,
@@ -21,7 +21,7 @@ import {
   ModalBody,
   ModalHeader,
   ModalFooter,
-  Dropdown
+  Dropdown,
 } from '@carbon/react';
 import {
   Datagrid,

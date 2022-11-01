@@ -531,12 +531,13 @@
   justify-content: center;
 }
 
-.#{c4p-settings.$carbon-prefix}--body--with-modal-open .#{$block-class}__grid-container {
+.#{c4p-settings.$carbon-prefix}--body--with-modal-open
+  .#{$block-class}__grid-container {
   overflow: hidden;
   height: 100vh;
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal{
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal {
   width: 100%;
 }
 
@@ -558,6 +559,7 @@
   background-color: transparent;
 }
 
-.#{$block-class}__mobile-toolbar-modal .#{c4p-settings.$carbon-prefix}--modal-container {
+.#{$block-class}__mobile-toolbar-modal
+  .#{c4p-settings.$carbon-prefix}--modal-container {
   position: absolute;
 }

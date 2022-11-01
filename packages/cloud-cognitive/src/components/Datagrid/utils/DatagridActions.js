@@ -5,17 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, {useLayoutEffect, useState } from 'react';
-import { DataTable, 
-  Button, 
-  OverflowMenu, 
-  OverflowMenuItem, 
+import React, { useLayoutEffect, useState } from 'react';
+import {
+  DataTable,
+  Button,
+  OverflowMenu,
+  OverflowMenuItem,
   ComposedModal,
   ModalBody,
   ModalHeader,
   ModalFooter,
-  Dropdown } from '@carbon/react';
-import { Download, Filter, Add, Restart, ChevronDown } from '@carbon/react/icons';
+  Dropdown,
+} from '@carbon/react';
+import {
+  Download,
+  Filter,
+  Add,
+  Restart,
+  ChevronDown,
+} from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
@@ -89,11 +97,7 @@ export const DatagridActions = (datagridState) => {
             </div>
             <RowSizeDropdown {...rowSizeDropdownProps} />
             <div style={style} className={`${blockClass}__toolbar-divider`}>
-              <Button
-                kind="ghost"
-                renderIcon={Add}
-                iconDescription={'Action'}
-              >
+              <Button kind="ghost" renderIcon={Add} iconDescription={'Action'}>
                 Ghost button
               </Button>
             </div>

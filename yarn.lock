@@ -12509,7 +12509,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-carbon@npm:^2.16.0":
+"eslint-config-carbon@npm:^2.17.0":
   version: 2.17.0
   resolution: "eslint-config-carbon@npm:2.17.0"
   dependencies:
@@ -15297,7 +15297,7 @@ __metadata:
     copyfiles: ^2.4.1
     cspell: ^6.12.0
     eslint: ^8.25.0
-    eslint-config-carbon: ^2.16.0
+    eslint-config-carbon: ^2.17.0
     husky: ^8.0.1
     jest: ^29.2.0
     json: ^11.0.0

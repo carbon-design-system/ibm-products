@@ -108,7 +108,7 @@ export const DatagridContent = ({ datagridState }) => {
       return;
     }
     const gridElement = document.querySelector(`#${tableId}`);
-    const tableHeader = document.querySelector(
+    const tableHeader = gridElement?.querySelector(
       `.${carbon.prefix}--data-table-header`
     );
     gridElement.style.setProperty(

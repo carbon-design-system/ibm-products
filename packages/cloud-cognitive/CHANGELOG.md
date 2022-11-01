@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.35.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.35.0...@carbon/ibm-products@1.35.1) (2022-11-01)
+
+### Bug Fixes
+
+- **CreateTearsheet:** fix initialStep issue when open=true
+  ([#2353](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2353))
+  ([09e5ea9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/09e5ea9b59a0e706a716ca7b904b57e992bab061))
+- **Datagrid:** render pagination as component
+  ([#2415](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2415))
+  ([15f8db4](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/15f8db4851252f735e5dee1ba090f2e8ea64f481))
+- **PageHeader:** button alignment logic based on variable value
+  ([#2391](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2391))
+  ([0e2055a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0e2055aa930fcdd9635a9e2249b1b56cb42d5200))
+- **PageHeader:** restrict useEffect logic to prevent scroll
+  ([#2410](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2410))
+  ([ecc11df](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ecc11dff50d377ae69c4bd990a8aa2fa952e8cc7))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [1.35.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.34.1...@carbon/ibm-products@1.35.0) (2022-10-25)
 
 ### Bug Fixes

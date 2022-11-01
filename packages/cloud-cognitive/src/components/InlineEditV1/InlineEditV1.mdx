@@ -3,9 +3,12 @@ import {
   getStoryId,
   CodesandboxLink,
 } from '../../global/js/utils/story-helper';
-import { InlineEdit } from '.';
+import { InlineEditV1 } from '.';
 
 # InlineEdit
+
+**This component is being deprecated. Please switch to the V2 version as soon as
+possible.**
 
 ## Table of Contents
 
@@ -22,7 +25,7 @@ import { InlineEdit } from '.';
 <!-- TODO: One example per designed use case. -->
 
 <Canvas>
-  <Story id={getStoryId(InlineEdit.displayName, 'inline-edit')} />
+  <Story id={getStoryId(InlineEditV1.displayName, 'inline-edit')} />
 </Canvas>
 
 ## Code sample

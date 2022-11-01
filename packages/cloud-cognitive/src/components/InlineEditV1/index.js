@@ -5,4 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { InlineEditV2 } from './InlineEditV2';
+export { InlineEditV1 } from './InlineEditV1';

@@ -6,11 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
-=======
-import React, { useState, useEffect, useLayoutEffect } from 'react';
->>>>>>> 6802a2cc7 (chore(Datagrid): lint fix)
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';

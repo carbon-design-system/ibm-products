@@ -231,6 +231,9 @@ export const InfiniteScroll = () => {
       data,
       isFetching,
       fetchMoreData: fetchData,
+      virtualHeight: 540,
+      emptyStateTitle: 'Empty state title',
+      emptyStateDescription: 'Description explaining why the table is empty',
     },
     useInfiniteScroll
   );

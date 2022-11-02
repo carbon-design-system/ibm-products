@@ -21,6 +21,7 @@ const defaultProps = {
   onChange: () => {},
   onSave: () => {},
   readOnly: false,
+  readOnlyLabel: 'This value is read only',
   saveLabel: 'Save',
   value: 'default',
 };

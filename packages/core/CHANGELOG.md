@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.39.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.38.1...@carbon/ibm-cloud-cognitive-core@0.39.0) (2022-10-25)
+
+### Features
+
+- **EditUpdateCards:** Edit and update cards
+  ([#2212](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2212))
+  ([ac140f8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ac140f8f8320f4985d95a8a270a440fd7b5cb2cf))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [0.38.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.38.0...@carbon/ibm-cloud-cognitive-core@0.38.1) (2022-10-18)
 
 ### Bug Fixes

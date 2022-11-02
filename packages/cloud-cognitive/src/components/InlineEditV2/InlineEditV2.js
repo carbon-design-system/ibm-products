@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2022, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { useState, useEffect, forwardRef, useRef } from 'react';
 import { Button } from 'carbon-components-react';
 import cx from 'classnames';
@@ -26,6 +33,7 @@ export let InlineEditV2 = forwardRef(
       onChange,
       onSave,
       readOnly,
+      readOnlyLabel,
       saveLabel,
       value,
       ...rest
@@ -161,20 +169,18 @@ export let InlineEditV2 = forwardRef(
                 key="cancel"
                 className={`${blockClass}__btn ${blockClass}__btn-cancel`}
               />
-              {canSave && (
-                <Button
-                  hasIconOnly
-                  renderIcon={Checkmark24}
-                  size="sm"
-                  iconDescription={saveLabel}
-                  onClick={onSaveHandler}
-                  kind="ghost"
-                  tabIndex={0}
-                  key="save"
-                  className={`${blockClass}__btn ${blockClass}__btn-save`}
-                  disabled={!canSave}
-                />
-              )}
+              <Button
+                hasIconOnly
+                renderIcon={Checkmark24}
+                size="sm"
+                iconDescription={saveLabel}
+                onClick={onSaveHandler}
+                kind="ghost"
+                tabIndex={0}
+                key="save"
+                className={`${blockClass}__btn ${blockClass}__btn-save`}
+                disabled={!canSave}
+              />
             </>
           ) : (
             <Button
@@ -182,10 +188,9 @@ export let InlineEditV2 = forwardRef(
               hasIconOnly
               renderIcon={readOnly ? EditOff24 : Edit24}
               size="sm"
-              iconDescription={editLabel}
+              iconDescription={readOnly ? readOnlyLabel : editLabel}
               onClick={onFocusHandler}
               kind="ghost"
-              disabled={readOnly}
               tabIndex={0}
               key="edit"
             />
@@ -236,6 +241,10 @@ InlineEditV2.propTypes = {
    * determines if the input is in readOnly mode
    */
   readOnly: PropTypes.bool,
+  /**
+   * label for the edit button that displays when in read only mode
+   */
+  readOnlyLabel: PropTypes.string,
   /**
    * label for save button
    */

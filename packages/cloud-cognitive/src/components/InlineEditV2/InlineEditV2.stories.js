@@ -39,8 +39,8 @@ const defaultProps = {
   onCancel: () => {},
   onChange: () => {},
   onSave: () => {},
-  readOnly: false,
-  readOnlyLabel: 'This value is read only',
+  // readOnly: false,
+  // readOnlyLabel: 'This value is read only',
   saveLabel: 'Save',
   v2: true,
   value: 'default',
@@ -88,9 +88,9 @@ export const Invalid = prepareStory(Template, {
   },
 });
 
-export const ReadOnly = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    readOnly: true,
-  },
-});
+// export const ReadOnly = prepareStory(Template, {
+//   args: {
+//     ...defaultProps,
+//     readOnly: true,
+//   },
+// });

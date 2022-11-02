@@ -20,8 +20,8 @@ const defaultProps = {
   onCancel: () => {},
   onChange: () => {},
   onSave: () => {},
-  readOnly: false,
-  readOnlyLabel: 'This value is read only',
+  // readOnly: false,
+  // readOnlyLabel: 'This value is read only',
   saveLabel: 'Save',
   value: 'default',
 };
@@ -31,15 +31,15 @@ describe(componentName, () => {
     render(<InlineEditV2 {...defaultProps} />);
   });
 
-  it('renders in readOnly mode', () => {
-    render(<InlineEditV2 {...defaultProps} readOnly />);
-    const input = screen.getByDisplayValue(defaultProps.value);
-    expect(input).toHaveAttribute('readOnly');
+  // it('renders in readOnly mode', () => {
+  //   render(<InlineEditV2 {...defaultProps} readOnly />);
+  //   const input = screen.getByDisplayValue(defaultProps.value);
+  //   expect(input).toHaveAttribute('readOnly');
 
-    // for coverage
-    fireEvent.focus(input);
-    fireEvent.blur(input);
-  });
+  //   // for coverage
+  //   fireEvent.focus(input);
+  //   fireEvent.blur(input);
+  // });
 
   it('renders in invalid mode', () => {
     render(<InlineEditV2 {...defaultProps} invalid />);

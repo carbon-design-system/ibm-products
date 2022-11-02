@@ -100,7 +100,7 @@ const getDropdownPosition = (buttonEle) => {
   const parent = buttonEle.parentElement;
   if (parent instanceof HTMLElement) {
     const top = buttonEle.offsetTop + buttonEle.offsetHeight;
-    const right = parent.offsetWidth - parent.offsetLeft - buttonEle.offsetLeft;
+    const right = parent.offsetWidth - (buttonEle.offsetLeft + buttonEle.offsetWidth);
     return {
       top,
       right,

@@ -595,21 +595,11 @@ export const Filtering = () => {
     );
   };
 
-  /** A function to convert your raw date data to a string that would be
-      displayed in the cell. */
-  const dateToString = (rawDate) => {
-    /** rawDate is the value initially passed in with the row data, since we don't 
-          know what data you are passing in from an API, or database we would need to know
-          how to display the date into a string */
-    return rawDate.toLocaleDateString();
-  };
-
   const datagridState = useDatagrid(
     {
       columns,
       data,
       filterProps: {
-        dateToString,
         updateMethod: 'batch',
       },
       DatagridActions: FilterDatagridActions,

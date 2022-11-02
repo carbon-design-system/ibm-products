@@ -13,8 +13,6 @@ export const FilterProvider = ({
   // When using batch actions we have to store the filters to then apply them later
   const filtersObjectArray = useRef([]);
 
-  const { updateMethod } = filterProps;
-
   const applyFilters = ({ column, value }) => {
     const type = headers.find((header) => header.id === column).filter;
 
@@ -23,7 +21,7 @@ export const FilterProvider = ({
       return;
     }
 
-    if (updateMethod === BATCH) {
+    if (filterProps?.updateMethod === BATCH) {
       // check if the filter already exists in the array
       const filter = filtersObjectArray.current?.find(
         (item) => item.id === column
@@ -38,7 +36,7 @@ export const FilterProvider = ({
           { id: column, value },
         ];
       }
-    } else if (updateMethod === INSTANT) {
+    } else if (filterProps?.updateMethod === INSTANT) {
       setFilter(column, value);
     }
   };

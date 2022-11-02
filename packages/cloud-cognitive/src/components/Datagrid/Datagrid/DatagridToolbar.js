@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Add16, OverflowMenuVertical16 } from '@carbon/icons-react';
 import {
   DataTable,
@@ -16,6 +16,7 @@ import { useResizeDetector } from 'react-resize-detector';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
+import { FilterContext } from './addons/Filtering';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -149,22 +150,29 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 };
 
 const DatagridToolbar = (datagridState) => {
+  const { applyFilters } = useContext(FilterContext);
   const { width, ref } = useResizeDetector();
   const { DatagridActions, DatagridBatchActions, batchActions } = datagridState;
+
+  const datagridStateWithFilterProps = {
+    ...datagridState,
+    applyFilters,
+  };
 
   return batchActions && DatagridActions ? (
     <div ref={ref} className={`${blockClass}__table-toolbar`}>
       <TableToolbar>
-        {DatagridActions && DatagridActions(datagridState)}
+        {DatagridActions && DatagridActions(datagridStateWithFilterProps)}
         {DatagridBatchActionsToolbar &&
-          DatagridBatchActionsToolbar(datagridState, width, ref)}
+          DatagridBatchActionsToolbar(datagridStateWithFilterProps, width, ref)}
       </TableToolbar>
     </div>
   ) : DatagridActions ? (
     <div className={`${blockClass}__table-toolbar`}>
       <TableToolbar>
-        {DatagridActions && DatagridActions(datagridState)}
-        {DatagridBatchActions && DatagridBatchActions(datagridState)}
+        {DatagridActions && DatagridActions(datagridStateWithFilterProps)}
+        {DatagridBatchActions &&
+          DatagridBatchActions(datagridStateWithFilterProps)}
       </TableToolbar>
     </div>
   ) : null;

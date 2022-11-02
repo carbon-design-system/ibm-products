@@ -6,16 +6,9 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
-import { useEffect, useMemo } from 'react';
-import { BATCH } from './Datagrid/addons/Filtering/constants';
-
-let filtersObjectArray = [];
+import { useMemo } from 'react';
 
 const useFiltering = (hooks) => {
-  // When using batch actions we have to store the filters to then apply them later
-  // const [filtersObjectArray, setFiltersObjectArray] = useState([]);
-  // const [shouldApplyFilters, setShouldApplyFilters] = useState(false);
-
   const filterTypes = useMemo(
     () => ({
       date: (rows, id, [startDate, endDate]) => {
@@ -64,41 +57,13 @@ const useFiltering = (hooks) => {
     []
   );
 
-  // useEffect(() => console.log(filtersObjectArray), [filtersObjectArray]);
-  useEffect(() => console.log('render'), []);
-
   hooks.useInstance.push((instance) => {
-    console.log('hook useInstance');
-    const {
-      filterProps: { updateMethod },
-      setFilter,
-      headers,
-    } = instance;
-
-    const applyFilters = ({ column, value }) => {
-      const type = headers.find((header) => header.id === column).filter;
-
-      // // If no end date is selected return because we need the end date to do computations
-      if (type === 'date' && !value[1]) {
-        return;
-      }
-
-      if (updateMethod === BATCH) {
-        filtersObjectArray = [...filtersObjectArray, { id: column, value }];
-        // setFiltersObjectArray((old) => {
-        //   console.log('setFiltersObjectArray');
-        //   return [...old, { id: column, value }];
-        // });
-      } else {
-        console.log('else ');
-        setFilter(column, value);
-      }
-    };
+    const { filterProps, setAllFilters } = instance;
+    const getFilterFlyoutProps = () => ({ ...filterProps, setAllFilters });
 
     Object.assign(instance, {
-      applyFilters,
       filterTypes,
-      filtersObjectArray,
+      getFilterFlyoutProps,
     });
   });
 };

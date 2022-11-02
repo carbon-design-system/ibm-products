@@ -399,7 +399,7 @@ export const Filtering = () => {
       RowSizeDropdown,
       rowSizeDropdownProps,
       useDenseHeader,
-      filterProps,
+      getFilterFlyoutProps,
       applyFilters,
     } = datagridState;
 
@@ -438,7 +438,7 @@ export const Filtering = () => {
 
     const renderFilterFlyout = useCallback(() => {
       return (
-        <FilterFlyout {...filterProps} datagridState={datagridState}>
+        <FilterFlyout {...getFilterFlyoutProps()}>
           <DatePicker
             datePickerType="range"
             onChange={(value) => {

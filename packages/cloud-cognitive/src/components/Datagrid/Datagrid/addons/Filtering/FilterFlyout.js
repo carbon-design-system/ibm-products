@@ -7,7 +7,13 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 
-import React, { useState, useCallback, useRef, useMemo } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useRef,
+  useMemo,
+  useContext,
+} from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'carbon-components-react';
 import { Filter16 } from '@carbon/icons-react';
@@ -16,13 +22,21 @@ import { ActionSet } from '../../../../ActionSet';
 import { pkg } from '../../../../../settings';
 import { BATCH, INSTANT } from './constants';
 import { useClickOutside } from '../../../../../global/js/hooks';
+import { FilterContext } from './FilterProvider';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-flyout`;
 
-const FilterFlyout = ({ children, updateMethod = BATCH, title = 'Filter' }) => {
+const FilterFlyout = ({
+  children,
+  updateMethod = BATCH,
+  title = 'Filter',
+  shouldClickOutsideToClose = false,
+  setAllFilters,
+}) => {
   /** Refs */
   const filterFlyoutRef = useRef(null);
+  const { filtersObjectArray } = useContext(FilterContext);
 
   /** State */
   const [open, setOpen] = useState(false);
@@ -34,8 +48,17 @@ const FilterFlyout = ({ children, updateMethod = BATCH, title = 'Filter' }) => {
   const openFlyout = () => setOpen(true);
   const closeFlyout = () => setOpen(false);
 
+  const onApply = useCallback(() => {
+    setAllFilters(filtersObjectArray.current);
+    closeFlyout();
+  }, [setAllFilters, filtersObjectArray]);
+
   /** Effects */
   useClickOutside(filterFlyoutRef, (target) => {
+    if (shouldClickOutsideToClose === false) {
+      return;
+    }
+
     const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
 
     if (!open || hasClickedOnDatePicker) {
@@ -54,7 +77,7 @@ const FilterFlyout = ({ children, updateMethod = BATCH, title = 'Filter' }) => {
               key: 1,
               kind: 'primary',
               label: 'Apply',
-              onClick: function noRefCheck() {},
+              onClick: onApply,
             },
             {
               key: 3,
@@ -67,7 +90,7 @@ const FilterFlyout = ({ children, updateMethod = BATCH, title = 'Filter' }) => {
         />
       )
     );
-  }, [showActionSet]);
+  }, [showActionSet, onApply]);
 
   return (
     <div className={`${componentClass}__container`}>
@@ -76,7 +99,7 @@ const FilterFlyout = ({ children, updateMethod = BATCH, title = 'Filter' }) => {
         hasIconOnly
         tooltipPosition="bottom"
         renderIcon={Filter16}
-        iconDescription={'Open filters'}
+        iconDescription={`${open ? 'Close' : 'Open'} filters`}
         onClick={open ? closeFlyout : openFlyout}
         className={cx(`${componentClass}__trigger`, {
           [`${componentClass}__trigger--open`]: open,
@@ -105,8 +128,10 @@ FilterFlyout.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  setAllFilters: PropTypes.func.isRequired,
+  shouldClickOutsideToClose: PropTypes.bool,
   title: PropTypes.string,
-  updateMethod: PropTypes.oneOf([BATCH, INSTANT]),
+  updateMethod: PropTypes.oneOf([BATCH, INSTANT]).isRequired,
 };
 
 export default FilterFlyout;

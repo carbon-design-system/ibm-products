@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -14,18 +14,12 @@ import { pkg } from '../../../settings';
 import pconsole from '../../../global/js/utils/pconsole';
 import { InlineEditProvider } from './addons/InlineEdit/InlineEditContext';
 import { DatagridContent } from './DatagridContent';
+import { FilterProvider } from './addons/Filtering/FilterProvider';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentName = 'Datagrid';
 
 export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
-  if (!datagridState) {
-    pconsole.warn(
-      'Datagrid was not passed datagridState which is required to render this component.'
-    );
-    return null;
-  }
-
   const {
     withVirtualScroll,
     DatagridPagination,
@@ -33,38 +27,59 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
     tableId,
     leftPanel,
     className,
+    headers,
+    setFilter,
+    filterProps,
   } = datagridState;
+
+  const filterProviderProps = useMemo(
+    () => ({
+      headers,
+      setFilter,
+      filterProps,
+    }),
+    [headers, setFilter, filterProps]
+  );
+
+  if (!datagridState) {
+    pconsole.warn(
+      'Datagrid was not passed datagridState which is required to render this component.'
+    );
+    return null;
+  }
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
 
   return (
-    <InlineEditProvider>
-      <div
-        {...rest}
-        id={tableId}
-        ref={ref}
-        className={cx(
-          className,
-          blockClass,
-          withVirtualScroll
-            ? `${blockClass}__datagridWrap`
-            : `${blockClass}__datagridWrap-simple`,
-          !isFetching && rows.length === 0 ? `${blockClass}__empty-state` : ''
-        )}
-        {...getDevtoolsProps(componentName)}
-      >
-        {leftPanel && (
-          <div
-            className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
-          >
+    <FilterProvider {...filterProviderProps}>
+      <InlineEditProvider>
+        <div
+          {...rest}
+          id={tableId}
+          ref={ref}
+          className={cx(
+            className,
+            blockClass,
+            withVirtualScroll
+              ? `${blockClass}__datagridWrap`
+              : `${blockClass}__datagridWrap-simple`,
+            !isFetching && rows.length === 0 ? `${blockClass}__empty-state` : ''
+          )}
+          {...getDevtoolsProps(componentName)}
+        >
+          {leftPanel && (
+            <div
+              className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
+            >
+              <DatagridContent datagridState={datagridState} />
+            </div>
+          )}
+          {leftPanel === undefined && (
             <DatagridContent datagridState={datagridState} />
-          </div>
-        )}
-        {leftPanel === undefined && (
-          <DatagridContent datagridState={datagridState} />
-        )}
-      </div>
-    </InlineEditProvider>
+          )}
+        </div>
+      </InlineEditProvider>
+    </FilterProvider>
   );
 });
 

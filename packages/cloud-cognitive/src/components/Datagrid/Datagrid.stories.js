@@ -392,7 +392,7 @@ export const Filtering = () => {
   ];
 
   const columns = React.useMemo(() => headers, []);
-  const [data] = useState(makeData(100));
+  const [data] = useState(makeData(20));
 
   const FilterDatagridActions = (datagridState) => {
     const {
@@ -609,6 +609,7 @@ export const Filtering = () => {
         primaryActionLabel: 'Apply',
         secondaryActionLabel: 'Cancel',
         flyoutIconDescription: 'Open filters',
+        shouldClickOutsideToClose: false,
         onFlyoutOpen: () => console.log('onFlyoutOpen'),
         onFlyoutClose: () => console.log('onFlyoutClose'),
       },

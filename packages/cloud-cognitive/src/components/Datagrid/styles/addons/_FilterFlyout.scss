@@ -28,7 +28,7 @@ $action-set-height: rem(64px);
   }
 
   &--batch {
-    grid-template-rows: 1fr rem(64px);
+    grid-template-rows: 1fr rem(48px);
     min-height: rem(346px);
   }
 
@@ -65,6 +65,11 @@ $action-set-height: rem(64px);
   }
 
   // Carbon overrides
+  .#{$pkg-prefix}--action-set .#{$pkg-prefix}--action-set__action-button {
+    // TODO: Change when this issue is resolved https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2437
+    height: rem(48px);
+  }
+
   &__trigger--open.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only {
     position: relative;
     background-color: $ui-02;

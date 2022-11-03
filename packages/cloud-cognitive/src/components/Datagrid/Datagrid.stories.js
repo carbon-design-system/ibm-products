@@ -47,7 +47,7 @@ import {
 import { SelectAllWitHToggle, LeftPanelStory } from './Datagrid.stories';
 import mdx from './Datagrid.mdx';
 
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 import styles from './_storybook-styles.scss';
 import { DatagridActions } from './utils/DatagridActions';
@@ -483,8 +483,10 @@ export const Filtering = () => {
               });
             }}
           />
-          <fieldset className="bx--fieldset">
-            <legend className="bx--label">Password strength</legend>
+          <fieldset className={`${carbon.prefix}--fieldset`}>
+            <legend className={`${carbon.prefix}--label`}>
+              Password strength
+            </legend>
             {passwordOptions.map((option) => (
               <Checkbox
                 key={option.label}

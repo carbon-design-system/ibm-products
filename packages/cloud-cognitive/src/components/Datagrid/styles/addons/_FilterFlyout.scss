@@ -65,10 +65,7 @@ $action-set-height: rem(64px);
   }
 
   // Carbon overrides
-  &__trigger {
-  }
-
-  &__trigger--open.bx--btn.bx--btn--icon-only {
+  &__trigger--open.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only {
     position: relative;
     background-color: $ui-02;
     box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);

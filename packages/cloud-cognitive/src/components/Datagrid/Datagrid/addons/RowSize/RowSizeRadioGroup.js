@@ -45,8 +45,8 @@ const RowSizeRadioGroup = ({
     <div
       className={`${blockClass}__row-size-dropdown`}
       style={{
-        top,
-        right,
+        top: top/16 + 'rem',
+        right: right/16 + 'rem',
       }}
       role="presentation"
       onClick={(e) => {

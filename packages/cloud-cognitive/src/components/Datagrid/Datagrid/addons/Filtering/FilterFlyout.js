@@ -30,6 +30,7 @@ const componentClass = `${blockClass}-filter-flyout`;
 const FilterFlyout = ({
   children,
   updateMethod = BATCH,
+  flyoutIconDescription = 'Open filters',
   title = 'Filter',
   primaryActionLabel = 'Apply',
   onFlyoutOpen = () => {},
@@ -115,7 +116,7 @@ const FilterFlyout = ({
         hasIconOnly
         tooltipPosition="bottom"
         renderIcon={Filter16}
-        iconDescription={`${open ? 'Close' : 'Open'} filters`}
+        iconDescription={flyoutIconDescription}
         onClick={open ? closeFlyout : openFlyout}
         className={cx(`${componentClass}__trigger`, {
           [`${componentClass}__trigger--open`]: open,
@@ -147,6 +148,10 @@ FilterFlyout.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  /**
+   * Icon description for the filter flyout button
+   */
+  flyoutIconDescription: PropTypes.string,
   /**
    * Callback when the flyout closes
    */

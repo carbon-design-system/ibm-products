@@ -606,6 +606,7 @@ export const Filtering = () => {
         updateMethod: 'batch',
         primaryActionLabel: 'Apply',
         secondaryActionLabel: 'Cancel',
+        flyoutIconDescription: 'Open filters',
         onFlyoutOpen: () => console.log('onFlyoutOpen'),
         onFlyoutClose: () => console.log('onFlyoutClose'),
       },

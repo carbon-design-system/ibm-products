@@ -604,6 +604,10 @@ export const Filtering = () => {
       data,
       filterProps: {
         updateMethod: 'batch',
+        primaryActionLabel: 'Apply',
+        secondaryActionLabel: 'Cancel',
+        onFlyoutOpen: () => console.log('onFlyoutOpen'),
+        onFlyoutClose: () => console.log('onFlyoutClose'),
       },
       DatagridActions: FilterDatagridActions,
       batchActions: true,

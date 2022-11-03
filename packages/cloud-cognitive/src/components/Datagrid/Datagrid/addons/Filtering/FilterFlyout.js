@@ -31,7 +31,11 @@ const FilterFlyout = ({
   children,
   updateMethod = BATCH,
   title = 'Filter',
+  primaryActionLabel = 'Apply',
+  onFlyoutOpen = () => {},
+  onFlyoutClose = () => {},
   shouldClickOutsideToClose = false,
+  secondaryActionLabel = 'Cancel',
   setAllFilters,
 }) => {
   /** Refs */
@@ -45,13 +49,19 @@ const FilterFlyout = ({
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
 
   /** Methods */
-  const openFlyout = () => setOpen(true);
-  const closeFlyout = () => setOpen(false);
+  const openFlyout = () => {
+    setOpen(true);
+    onFlyoutOpen();
+  };
+  const closeFlyout = useCallback(() => {
+    setOpen(false);
+    onFlyoutClose();
+  }, [onFlyoutClose]);
 
   const onApply = useCallback(() => {
     setAllFilters(filtersObjectArray.current);
     closeFlyout();
-  }, [setAllFilters, filtersObjectArray]);
+  }, [setAllFilters, filtersObjectArray, closeFlyout]);
 
   /** Effects */
   useClickOutside(filterFlyoutRef, (target) => {
@@ -76,13 +86,13 @@ const FilterFlyout = ({
             {
               key: 1,
               kind: 'primary',
-              label: 'Apply',
+              label: primaryActionLabel,
               onClick: onApply,
             },
             {
               key: 3,
               kind: 'secondary',
-              label: 'Cancel',
+              label: secondaryActionLabel,
               onClick: closeFlyout,
             },
           ]}
@@ -90,7 +100,13 @@ const FilterFlyout = ({
         />
       )
     );
-  }, [showActionSet, onApply]);
+  }, [
+    showActionSet,
+    onApply,
+    primaryActionLabel,
+    secondaryActionLabel,
+    closeFlyout,
+  ]);
 
   return (
     <div className={`${componentClass}__container`}>
@@ -124,13 +140,44 @@ const FilterFlyout = ({
 };
 
 FilterFlyout.propTypes = {
+  /**
+   * React children of carbon filters
+   */
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  /**
+   * Callback when the flyout closes
+   */
+  onFlyoutClose: PropTypes.func,
+  /**
+   * Callback when the flyout opens
+   */
+  onFlyoutOpen: PropTypes.func,
+  /**
+   * Label text of the primary action in the flyout
+   */
+  primaryActionLabel: PropTypes.string,
+  /**
+   * Label text of the secondary action in the flyout
+   */
+  secondaryActionLabel: PropTypes.string,
+  /**
+   * Function that sets all the filters, this comes from the datagridState
+   */
   setAllFilters: PropTypes.func.isRequired,
+  /**
+   * Boolean if you want the flyout to close when clicked outside of the parent
+   */
   shouldClickOutsideToClose: PropTypes.bool,
+  /**
+   * Title of the filter flyout
+   */
   title: PropTypes.string,
+  /**
+   * The update method used to apply the filters
+   */
   updateMethod: PropTypes.oneOf([BATCH, INSTANT]).isRequired,
 };
 

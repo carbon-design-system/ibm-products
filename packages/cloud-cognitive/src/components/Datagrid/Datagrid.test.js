@@ -1411,14 +1411,15 @@ describe(componentName, () => {
   });
 
   function clickRow(rowNumber) {
-    var row = screen
+    const row = screen
       .getByRole('table')
       .getElementsByTagName('tbody')[0]
       .getElementsByTagName('tr')[rowNumber];
 
-    fireEvent.click(
-      row.getElementsByTagName('td')[0].getElementsByTagName('span')[0]
+    const rowExpander = row.querySelector(
+      `button[aria-label="Expand current row"]`
     );
+    fireEvent.click(rowExpander);
 
     setTimeout(1000);
 
@@ -1443,7 +1444,7 @@ describe(componentName, () => {
         .getElementsByClassName('c4p--datagrid__expanded-row')[0]
         .getElementsByTagName('tr')[0]
         .getElementsByTagName('td')[0]
-        .getElementsByTagName('span')[0]
+        .getElementsByTagName('button')[0]
     );
 
     expect(
@@ -1607,7 +1608,7 @@ describe(componentName, () => {
         .getElementsByTagName('tbody')[0]
         .getElementsByTagName('tr')[0]
         .getElementsByTagName('td')[0]
-        .getElementsByTagName('span')[0]
+        .getElementsByTagName('button')[0]
     );
     expect(
       screen

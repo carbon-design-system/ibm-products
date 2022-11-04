@@ -27,8 +27,10 @@ export let InlineEditV2 = forwardRef(
     {
       cancelLabel,
       editLabel,
+      id,
       invalid,
       invalidLabel,
+      labelText,
       onCancel,
       onChange,
       onSave,
@@ -141,7 +143,11 @@ export let InlineEditV2 = forwardRef(
           onFocus={onFocusHandler}
           onBlur={onBlurHandler}
         >
+          <label className={`${blockClass}__text-input-label`} htmlFor={id}>
+            {labelText}
+          </label>
           <input
+            id={id}
             className={cx(
               `${blockClass}__text-input`,
               `${carbon.prefix}--text-input`,
@@ -221,6 +227,10 @@ InlineEditV2.propTypes = {
    */
   editLabel: PropTypes.string.isRequired,
   /**
+   * Specify a custom id for the input
+   */
+  id: PropTypes.string.isRequired,
+  /**
    * determines if the input is invalid
    */
   invalid: PropTypes.bool,
@@ -228,6 +238,10 @@ InlineEditV2.propTypes = {
    * text that is displayed if the input is invalid
    */
   invalidLabel: PropTypes.string,
+  /**
+   * Provide the text that will be read by a screen reader when visiting this control
+   */
+  labelText: PropTypes.string.isRequired,
   /**
    * handler that is called when the cancel button is pressed or when the user removes focus from the input and there is no new value
    */

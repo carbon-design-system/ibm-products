@@ -642,13 +642,12 @@ SelectItemsInAllPages.story = SelectAllWitHToggle;
 export const LeftPanel = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+  // const sections = [{ title: "Source Details", subsections: <Accordion><AccordionItem title="IP address"><Checkbox labelText='Jambo' id="checkbox-label-1" /> <Checkbox labelText={`Bingus`} id="checkbox-label-2" /></AccordionItem><AccordionItem title="IP address"><Checkbox labelText='Jumbos' id="checkbox-label-3" /> <Checkbox labelText="memow" id="checkbox-label-4" /></AccordionItem></Accordion>}];
   const datagridState = useDatagrid({
     leftPanel: {
       isOpen: true, // this toggling will happen from datagridActions.
       panelContent: (
-        <div className={`${blockClass}__panel-content`}>
-          Panel content will go here along with any button interactions
-        </div>
+        // <FilterPanelSkeleton header='Filter' filterSections={sections}/>
       ),
     },
     columns,

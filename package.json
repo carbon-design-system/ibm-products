@@ -154,7 +154,7 @@
       "yarn prettier --write"
     ],
     "**/*.js": [
-      "yarn eslint --fix"
+      "yarn dlx eslint --fix"
     ],
     "**/*.scss": [
       "yarn stylelint"

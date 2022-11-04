@@ -21,8 +21,12 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   const [displayAllInMenu, setDisplayAllInMenu] = useState(false);
   const [initialListWidth, setInitialListWidth] = useState(null);
   const [receivedInitialWidth, setReceivedInitialWidth] = useState(false);
-  const { selectedFlatRows, toggleAllRowsSelected, toolbarBatchActions } =
-    datagridState;
+  const {
+    selectedFlatRows,
+    toggleAllRowsSelected,
+    toolbarBatchActions,
+    setGlobalFilter,
+  } = datagridState;
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
 
   // Get initial width of batch actions container,
@@ -114,7 +118,10 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
       totalSelected={totalSelected}
-      onCancel={() => toggleAllRowsSelected(false)}
+      onCancel={() => {
+        toggleAllRowsSelected(false);
+        setGlobalFilter(null);
+      }}
     >
       {!displayAllInMenu &&
         toolbarBatchActions &&

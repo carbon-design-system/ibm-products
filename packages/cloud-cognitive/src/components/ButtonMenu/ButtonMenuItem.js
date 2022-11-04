@@ -24,14 +24,23 @@ const blockClass = `${pkg.prefix}--button-menu`;
  * A menu item to include in a button menu component. This component has the
  * same props and behaviors as carbon Button.
  */
-export let ButtonMenuItem = React.forwardRef(({ className, ...rest }, ref) => (
-  <Button
-    className={cx(className, `${blockClass}__item-button`)}
-    kind="ghost"
-    {...rest}
-    ref={ref}
-  />
-));
+export let ButtonMenuItem = React.forwardRef(
+  ({ className, kind, ...rest }, ref) => {
+    let props = { ...rest };
+    console.log(props);
+    return (
+      <Button
+        className={cx(
+          className,
+          kind ? `${blockClass}__item--danger` : `${blockClass}__item-button`
+        )}
+        kind={kind ? kind : 'ghost'}
+        {...rest}
+        ref={ref}
+      />
+    );
+  }
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 ButtonMenuItem = pkg.checkComponentEnabled(ButtonMenuItem, componentName);

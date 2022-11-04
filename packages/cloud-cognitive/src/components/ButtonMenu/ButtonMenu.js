@@ -29,6 +29,8 @@ const defaults = {
   size: 'lg',
   kind: 'primary',
   open: false,
+  isDanger: false,
+  isDisabled: false,
   onClose: () => {},
   onMenuButtonClick: () => {},
 };
@@ -130,6 +132,16 @@ ButtonMenu.propTypes = {
    * be read by screen readers
    */
   iconDescription: Button.propTypes.iconDescription,
+
+  /**
+   * Optional flag to set a menuItem Button type to "danger"
+   */
+  isDanger: PropTypes.bool,
+
+  /**
+   * Optional flag to set a menuItem to "disabled"
+   */
+  isDisabled: PropTypes.bool,
 
   /**
    * The three types the menu button supports: primary, tertiary and ghost.

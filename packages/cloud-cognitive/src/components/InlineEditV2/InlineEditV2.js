@@ -13,7 +13,7 @@ import {
   Edit24,
   Checkmark24,
   Close24,
-  EditOff24,
+  // EditOff24,
   WarningFilled16,
 } from '@carbon/icons-react';
 import { pkg, carbon } from '../../settings';
@@ -32,8 +32,8 @@ export let InlineEditV2 = forwardRef(
       onCancel,
       onChange,
       onSave,
-      readOnly,
-      readOnlyLabel,
+      // readOnly,
+      // readOnlyLabel,
       saveLabel,
       value,
       ...rest
@@ -65,9 +65,9 @@ export let InlineEditV2 = forwardRef(
     };
 
     const onFocusHandler = (e) => {
-      if (readOnly) {
-        return;
-      }
+      // if (readOnly) {
+      //   return;
+      // }
 
       if (!isTargetingChild(e)) {
         inputRef.current.focus();
@@ -89,7 +89,8 @@ export let InlineEditV2 = forwardRef(
     };
 
     const onBlurHandler = (e) => {
-      if (readOnly || escaping.current) {
+      // if (readOnly || escaping.current) {
+      if (escaping.current) {
         return;
       }
 
@@ -135,7 +136,7 @@ export let InlineEditV2 = forwardRef(
         <div
           className={cx(blockClass, {
             [`${blockClass}-focused`]: focused,
-            [`${blockClass}-readonly`]: readOnly,
+            // [`${blockClass}-readonly`]: readOnly,
           })}
           onFocus={onFocusHandler}
           onBlur={onBlurHandler}
@@ -150,7 +151,7 @@ export let InlineEditV2 = forwardRef(
             value={value}
             onChange={onChangeHandler}
             ref={inputRef}
-            readOnly={readOnly}
+            // readOnly={readOnly}
             onKeyDown={onKeyHandler}
           />
           {focused ? (
@@ -186,9 +187,11 @@ export let InlineEditV2 = forwardRef(
             <Button
               className={`${blockClass}__btn ${blockClass}__btn-edit`}
               hasIconOnly
-              renderIcon={readOnly ? EditOff24 : Edit24}
+              // renderIcon={readOnly ? EditOff24 : Edit24}
+              renderIcon={Edit24}
               size="sm"
-              iconDescription={readOnly ? readOnlyLabel : editLabel}
+              // iconDescription={readOnly ? readOnlyLabel : editLabel}
+              iconDescription={editLabel}
               onClick={onFocusHandler}
               kind="ghost"
               tabIndex={0}
@@ -240,11 +243,11 @@ InlineEditV2.propTypes = {
   /**
    * determines if the input is in readOnly mode
    */
-  readOnly: PropTypes.bool,
+  // readOnly: PropTypes.bool,
   /**
    * label for the edit button that displays when in read only mode
    */
-  readOnlyLabel: PropTypes.string,
+  // readOnlyLabel: PropTypes.string,
   /**
    * label for save button
    */
@@ -258,5 +261,5 @@ InlineEditV2.propTypes = {
 InlineEditV2.defaultProps = {
   invalid: false,
   invalidLabel: '',
-  readOnly: false,
+  // readOnly: false,
 };

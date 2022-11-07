@@ -10,6 +10,7 @@
 
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { rem } from '@carbon/layout';
 import { RadioButtonGroup, RadioButton } from 'carbon-components-react';
 import isArray from 'lodash/isArray';
 import { pkg } from '../../../../../settings';
@@ -45,8 +46,8 @@ const RowSizeRadioGroup = ({
     <div
       className={`${blockClass}__row-size-dropdown`}
       style={{
-        top: top/16 + 'rem',
-        right: right/16 + 'rem',
+        top: rem(top),
+        right: rem(right),
       }}
       role="presentation"
       onClick={(e) => {
@@ -100,7 +101,8 @@ const getDropdownPosition = (buttonEle) => {
   const parent = buttonEle.parentElement;
   if (parent instanceof HTMLElement) {
     const top = buttonEle.offsetTop + buttonEle.offsetHeight;
-    const right = parent.offsetWidth - (buttonEle.offsetLeft + buttonEle.offsetWidth);
+    const right =
+      parent.offsetWidth - (buttonEle.offsetLeft + buttonEle.offsetWidth);
     return {
       top,
       right,

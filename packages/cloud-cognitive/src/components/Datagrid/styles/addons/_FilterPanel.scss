@@ -1,0 +1,35 @@
+/*
+* Licensed Materials - Property of IBM
+* 5724-Q36
+* (c) Copyright IBM Corp. 2022
+* US Government Users Restricted Rights - Use, duplication or disclosure
+* restricted by GSA ADP Schedule Contract with IBM Corp.
+*/
+
+@import '../variables';
+
+$action-set-height: rem(64px);
+
+.#{$block-class}-filter-panel__container {
+  position: relative;
+  width: 100%;
+}
+
+.#{$block-class}-filter-panel {
+    display: none;
+    padding: 2px 14px;
+
+    &--open {
+        display: grid;
+    }
+
+    &__category-title {
+        font-size: 14px;
+        font-weight: 500;
+        padding: 18px 14px;
+    }
+
+    &__category {
+        padding-bottom: 24px;
+    }
+}

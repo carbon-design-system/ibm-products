@@ -29,6 +29,9 @@ import {
   TextInput,
   Dropdown,
   Checkbox,
+  RadioButtonGroup,
+  RadioButton,
+  FormGroup,
 } from 'carbon-components-react';
 import {
   Datagrid,
@@ -47,7 +50,7 @@ import {
 import { SelectAllWitHToggle, LeftPanelStory } from './Datagrid.stories';
 import mdx from './Datagrid.mdx';
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 
 import styles from './_storybook-styles.scss';
 import { DatagridActions } from './utils/DatagridActions';
@@ -362,7 +365,7 @@ export const Filtering = () => {
       filter: 'date',
       Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
     },
-    // Shows the radio button filter example
+    // Shows the checkbox filter example
     {
       Header: 'Password strength',
       accessor: 'passwordStrength',
@@ -388,6 +391,11 @@ export const Filtering = () => {
           </span>
         );
       },
+    },
+    // Shows the checkbox filter example
+    {
+      Header: 'Role',
+      accessor: 'role',
     },
   ];
 
@@ -470,23 +478,8 @@ export const Filtering = () => {
               });
             }}
           />
-          <Dropdown
-            id="marital-status-dropdown"
-            ariaLabel="Marital status dropdown"
-            items={['relationship', 'complicated', 'single']}
-            label="Marital status"
-            titleText="Marital status"
-            onChange={({ selectedItem }) => {
-              applyFilters({
-                column: 'status',
-                value: selectedItem,
-              });
-            }}
-          />
-          <fieldset className={`${carbon.prefix}--fieldset`}>
-            <legend className={`${carbon.prefix}--label`}>
-              Password strength
-            </legend>
+
+          <FormGroup legendText="Password strength">
             {passwordOptions.map((option) => (
               <Checkbox
                 key={option.label}
@@ -502,7 +495,49 @@ export const Filtering = () => {
                 id={option.label}
               />
             ))}
-          </fieldset>
+          </FormGroup>
+          <FormGroup legendText="Role">
+            <RadioButtonGroup
+              orientation="vertical"
+              legend="Group Legend"
+              name="role-radio-button-group"
+              onChange={(selected) => {
+                applyFilters({
+                  column: 'role',
+                  value: selected,
+                });
+              }}
+            >
+              <RadioButton
+                id="developer"
+                labelText="Developer"
+                value="developer"
+              />
+              <RadioButton
+                id="designer"
+                labelText="Designer"
+                value="designer"
+              />
+              <RadioButton
+                id="researcher"
+                labelText="Researcher"
+                value="researcher"
+              />
+            </RadioButtonGroup>
+          </FormGroup>
+          <Dropdown
+            id="marital-status-dropdown"
+            ariaLabel="Marital status dropdown"
+            items={['relationship', 'complicated', 'single']}
+            label="Marital status"
+            titleText="Marital status"
+            onChange={({ selectedItem }) => {
+              applyFilters({
+                column: 'status',
+                value: selectedItem,
+              });
+            }}
+          />
         </FilterFlyout>
       );
     }, []);

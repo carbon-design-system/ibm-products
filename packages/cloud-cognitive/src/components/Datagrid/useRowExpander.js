@@ -8,21 +8,37 @@
  */
 import React from 'react';
 import { ChevronDown, ChevronUp } from '@carbon/react/icons';
+import { pkg, carbon } from '../../settings';
+import cx from 'classnames';
+
+const blockClass = `${pkg.prefix}--datagrid`;
 
 const useRowExpander = (hooks) => {
   const visibleColumns = (columns) => {
     const expanderColumn = {
       id: 'expander',
-      Cell: ({ row }) =>
-        row.canExpand && (
-          <span {...row.getToggleRowExpandedProps()}>
-            {row.isExpanded ? (
-              <ChevronUp size={16} />
-            ) : (
-              <ChevronDown size={16} />
-            )}
-          </span>
-        ),
+      Cell: ({ row }) => {
+        return (
+          row.canExpand && (
+            <button
+              type="button"
+              aria-label="Expand current row"
+              className={cx(
+                `${blockClass}__row-expander`,
+                `${carbon.prefix}--btn`,
+                `${carbon.prefix}--btn--ghost`
+              )}
+              {...row.getToggleRowExpandedProps()}
+            >
+              {row.isExpanded ? (
+                <ChevronUp className={`${blockClass}__row-expander--icon`} />
+              ) : (
+                <ChevronDown className={`${blockClass}__row-expander--icon`} />
+              )}
+            </button>
+          )
+        );
+      },
       width: 48,
       disableResizing: true,
       disableSortBy: true,

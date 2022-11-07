@@ -47,26 +47,30 @@ const getRandomDateJoined = () => {
   return randomDate(new Date(2022, 0, 1), new Date());
 };
 
-const getPasswordStrength = (statusChance) => {
-  return statusChance > 0.66
+const getPasswordStrength = () => {
+  const chance = Math.random();
+
+  return chance > 0.66
     ? 'critical'
-    : statusChance > 0.33
+    : chance > 0.33
     ? 'minor-warning'
     : 'normal';
 };
 
-const renderDocLink = (statusChance) => {
+const renderDocLink = () => {
+  const chance = Math.random();
+
   const docLinkObj = {
     href:
-      statusChance > 0.66
+      chance > 0.66
         ? 'http://carbondesignsystem.com/'
-        : statusChance > 0.33
+        : chance > 0.33
         ? 'https://pages.github.ibm.com/cdai-design/pal/'
         : 'http://carbon-for-ibm-products.netlify.app/',
     text:
-      statusChance > 0.66
+      chance > 0.66
         ? 'Carbon Design System'
-        : statusChance > 0.33
+        : chance > 0.33
         ? 'Carbon for IBM Products PAL'
         : 'Carbon for IBM Products storybook',
   };
@@ -75,6 +79,8 @@ const renderDocLink = (statusChance) => {
 
 const newPerson = () => {
   const statusChance = Math.random();
+  const roleChance = Math.random();
+  const activeChance = Math.random();
 
   const initialChartTypeIndex = getRandomInteger(0, 2);
   const activeSinceDate = new Date();
@@ -95,6 +101,12 @@ const newPerson = () => {
         : statusChance > 0.33
         ? 'complicated'
         : 'single',
+    role:
+      roleChance > 0.66
+        ? 'developer'
+        : roleChance > 0.33
+        ? 'designer'
+        : 'researcher',
     joined: getRandomDateJoined(),
 
     someone1: namor.generate({ words: 1, numbers: 0 }),
@@ -124,14 +136,14 @@ const newPerson = () => {
         ? inlineEditSelectItems[1]
         : inlineEditSelectItems[2],
     activeSince:
-      statusChance > 0.66
+      activeChance > 0.66
         ? activeSinceDate
-        : statusChance > 0.33
+        : activeChance > 0.33
         ? yesterdayDate
         : twoDaysAgoDate,
     bonus: `$\r${getRandomInteger(100, 500, 2)}`,
-    passwordStrength: getPasswordStrength(statusChance),
-    doc_link: renderDocLink(statusChance),
+    passwordStrength: getPasswordStrength(),
+    doc_link: renderDocLink(),
   };
 };
 

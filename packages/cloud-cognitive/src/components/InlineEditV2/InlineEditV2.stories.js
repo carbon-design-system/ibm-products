@@ -34,8 +34,10 @@ const actionCancel = action('cancel');
 const defaultProps = {
   cancelLabel: 'Cancel',
   editLabel: 'Edit',
+  id: 'story-id',
   invalid: false,
   invalidLabel: 'This field is required',
+  labelText: 'Label text',
   onCancel: () => {},
   onChange: () => {},
   onSave: () => {},

@@ -967,13 +967,13 @@ describe(componentName, () => {
 
     expect(
       document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
     ).toBeDefined();
     fireEvent.click(
       document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
     );
 
     const rowSizeDropDown = [
@@ -1014,13 +1014,13 @@ describe(componentName, () => {
       document
         .getElementsByClassName(
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[1]
+        )[2]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Refresh');
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
+      )[2]
     );
     expect(alertMock).toHaveBeenCalledTimes(2);
 
@@ -1028,13 +1028,13 @@ describe(componentName, () => {
       document
         .getElementsByClassName(
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
+        )[3]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Download CSV');
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
+      )[3]
     );
     expect(alertMock).toHaveBeenCalledTimes(3);
 
@@ -1332,13 +1332,13 @@ describe(componentName, () => {
 
     expect(
       document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
     ).toBeDefined();
     fireEvent.click(
       document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
     );
 
     const rowSizeDropDown = [
@@ -1379,13 +1379,13 @@ describe(componentName, () => {
       document
         .getElementsByClassName(
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[1]
+        )[2]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Refresh');
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
+      )[2]
     );
     expect(alertMock).toHaveBeenCalledTimes(2);
 
@@ -1393,13 +1393,13 @@ describe(componentName, () => {
       document
         .getElementsByClassName(
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
+        )[3]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Download CSV');
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
+      )[3]
     );
     expect(alertMock).toHaveBeenCalledTimes(3);
 
@@ -1593,13 +1593,13 @@ describe(componentName, () => {
 
     expect(
       document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
     ).toBeDefined();
     fireEvent.click(
       document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
     );
 
     const rowSizeDropDown = [
@@ -1640,13 +1640,13 @@ describe(componentName, () => {
       document
         .getElementsByClassName(
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[1]
+        )[2]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Refresh');
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
+      )[2]
     );
     expect(alertMock).toHaveBeenCalledTimes(2);
 
@@ -1654,13 +1654,13 @@ describe(componentName, () => {
       document
         .getElementsByClassName(
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
+        )[3]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Download CSV');
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
+      )[3]
     );
     expect(alertMock).toHaveBeenCalledTimes(3);
   });
@@ -1858,19 +1858,19 @@ describe(componentName, () => {
     expect(
       document
         .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-        )[0]
+          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+        )[1]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Row height');
 
     fireEvent.click(
       document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
     );
     expect(
       document.getElementsByClassName(
-        'c4p--datagrid__row-size-button--open bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+        'c4p--datagrid__row-size-button--open bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
       )[0]
     ).toBeDefined();
     expect(
@@ -1984,8 +1984,8 @@ describe(componentName, () => {
 
     fireEvent.click(
       document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
     );
 
     expect(alertMock).toHaveBeenCalledTimes(2);
@@ -2001,7 +2001,7 @@ describe(componentName, () => {
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
+      )[0]
     );
 
     expect(alertMock).toHaveBeenCalledTimes(3);
@@ -2010,14 +2010,14 @@ describe(componentName, () => {
       document
         .getElementsByClassName(
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[1]
+        )[2]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Refresh');
 
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
+      )[2]
     );
 
     expect(alertMock).toHaveBeenCalledTimes(4);
@@ -2026,14 +2026,14 @@ describe(componentName, () => {
       document
         .getElementsByClassName(
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
+        )[3]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Download CSV');
 
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
+      )[3]
     );
   });
 
@@ -2186,7 +2186,7 @@ describe(componentName, () => {
 
     fireEvent.click(
       document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
       )[0]
     );
 
@@ -2210,14 +2210,14 @@ describe(componentName, () => {
       document
         .getElementsByClassName(
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[1]
+        )[2]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Refresh');
 
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
+      )[2]
     );
 
     expect(alertMock).toHaveBeenCalledTimes(3);
@@ -2226,14 +2226,14 @@ describe(componentName, () => {
       document
         .getElementsByClassName(
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
+        )[3]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Download CSV');
 
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
+      )[3]
     );
 
     expect(alertMock).toHaveBeenCalledTimes(4);
@@ -2330,13 +2330,13 @@ describe(componentName, () => {
       document
         .getElementsByClassName(
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[1]
+        )[2]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Refresh');
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
+      )[2]
     );
     expect(alertMock).toHaveBeenCalledTimes(2);
 
@@ -2344,13 +2344,13 @@ describe(componentName, () => {
       document
         .getElementsByClassName(
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
+        )[3]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Download CSV');
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
+      )[3]
     );
     expect(alertMock).toHaveBeenCalledTimes(3);
 
@@ -2430,13 +2430,13 @@ describe(componentName, () => {
 
     expect(
       document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
     ).toBeDefined();
     fireEvent.click(
       document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
+        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
+      )[1]
     );
 
     const rowSizeDropDown = [
@@ -2476,13 +2476,13 @@ describe(componentName, () => {
       document
         .getElementsByClassName(
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[1]
+        )[2]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Refresh');
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
+      )[2]
     );
     expect(alertMock).toHaveBeenCalledTimes(2);
 
@@ -2490,13 +2490,13 @@ describe(componentName, () => {
       document
         .getElementsByClassName(
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
+        )[3]
         .getElementsByTagName('div')[0].textContent
     ).toEqual('Download CSV');
     fireEvent.click(
       document.getElementsByClassName(
         'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
+      )[3]
     );
     expect(alertMock).toHaveBeenCalledTimes(3);
   });

@@ -1674,7 +1674,7 @@ describe(componentName, () => {
       .getElementsByTagName('tr')[0];
     const firstRow = row
       .getElementsByTagName('td')[0]
-      .getElementsByTagName('span')[0];
+      .getElementsByTagName('button')[0];
 
     fireEvent.click(firstRow);
 
@@ -1687,7 +1687,9 @@ describe(componentName, () => {
 
     if (nestedRow.className === 'c4p--datagrid__carbon-nested-row') {
       fireEvent.click(
-        nestedRow.getElementsByTagName('td')[0].getElementsByTagName('span')[0]
+        nestedRow
+          .getElementsByTagName('td')[0]
+          .getElementsByTagName('button')[0]
       );
     }
 

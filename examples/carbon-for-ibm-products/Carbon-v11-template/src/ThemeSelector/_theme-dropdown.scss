@@ -1,0 +1,29 @@
+@use '@carbon/styles' as styles;
+$prefix: cds;
+
+.carbon-theme--white {
+  @include styles.theme(styles.$white);
+}
+
+.carbon-theme--g10 {
+  @include styles.theme(styles.$g10);
+}
+
+.carbon-theme--g90 {
+  @include styles.theme(styles.$g90);
+}
+
+.carbon-theme--g100 {
+  @include styles.theme(styles.$g100);
+}
+
+.carbon-theme-dropdown {
+  position: fixed;
+  bottom: 1rem; // stylelint-disable-line carbon/layout-token-use
+  left: 1rem; // stylelint-disable-line carbon/layout-token-use
+  min-width: 11.5rem;
+}
+
+.carbon-theme-dropdown .#{$prefix}--label {
+  @include styles.type-style('label-01');
+}

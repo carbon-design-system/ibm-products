@@ -108,7 +108,7 @@ export const DatagridContent = ({ datagridState }) => {
       return;
     }
     const gridElement = document.querySelector(`#${tableId}`);
-    const tableHeader = document.querySelector(
+    const tableHeader = gridElement?.querySelector(
       `.${carbon.prefix}--data-table-header`
     );
     gridElement.style.setProperty(
@@ -157,10 +157,9 @@ export const DatagridContent = ({ datagridState }) => {
           )}
         </div>
       </TableContainer>
-      {rows?.length > 0 &&
-        !isFetching &&
-        DatagridPagination &&
-        DatagridPagination(datagridState)}
+      {rows?.length > 0 && !isFetching && DatagridPagination && (
+        <DatagridPagination {...datagridState} />
+      )}
       {CustomizeColumnsModal && (
         <CustomizeColumnsModal instance={datagridState} />
       )}

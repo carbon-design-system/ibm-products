@@ -27,7 +27,7 @@ const RowSizeDropdown = ({ legendText = 'Row height', ...props }) => {
         hasIconOnly
         ref={buttonRef}
         kind="ghost"
-        tooltipPosition="left"
+        tooltipPosition="bottom"
         renderIcon={Settings16}
         onClick={() => setIsOpen(!isOpen)}
         iconDescription={legendText}

@@ -57,7 +57,6 @@ export {
 } from './WebTerminal';
 export { EditSidePanel } from './EditSidePanel';
 export { OptionsTile } from './OptionsTile';
-export { InlineEdit } from './InlineEdit';
 export { DataSpreadsheet } from './DataSpreadsheet';
 export {
   Datagrid,
@@ -82,4 +81,6 @@ export { EditTearsheet } from './EditTearsheet';
 export { EditTearsheetNarrow } from './EditTearsheetNarrow';
 export { EditFullPage } from './EditFullPage';
 export { EditUpdateCards } from './EditUpdateCards';
+
+export { InlineEdit } from './InlineEdit';
 export { InlineEditV2 } from './InlineEditV2';

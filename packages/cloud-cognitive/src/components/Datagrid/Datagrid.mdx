@@ -17,44 +17,179 @@ import { Datagrid } from '.';
 
 <!-- TODO: Overview. -->
 
-The Datagrid component is an extension of Carbon's DataTable component. At the
-most basic level, the Datagrid component takes in columns and rows and renders a
-data table. There is a set of data table extensions which this component
+The `Datagrid` component is an extension of Carbon's DataTable component. At the
+most basic level, the `Datagrid` component takes in columns and rows and renders
+a data table. There is a set of data table extensions which this component
 provides support for, these can be found
 [here](https://pages.github.ibm.com/cdai-design/pal/components/data-table/overview/).
 This component is data driven and allows you to choose what pieces will be
 included based on the hooks/plugins that are provided.
 
-## Example usage
+## Getting started
+
+You can use the `Datagrid` component to create various kinds of Carbon data
+tables. Simply import the `Datagrid` along with any accompanying hooks (listed
+below) depending on what extensions you'd like to be included.
+
+```jsx
+import {
+  Datagrid,
+  useDatagrid,
+  useInfiniteScroll,
+  useNestedRows,
+  useSelectRows,
+  useExpandedRow,
+  useOnRowClick,
+  useSortableColumns,
+  useRowIsMouseOver,
+  useColumnRightAlign,
+  useDisableSelectRows,
+  useStickyColumn,
+  useActionsColumn,
+  useCustomizeColumns,
+  useSelectAllWithToggle,
+  useColumnCenterAlign,
+  useColumnOrder,
+  useInlineEdit,
+} from '@carbon/ibm-products';
+```
+
+## Basic
 
 <!-- TODO: One example per designed use case. -->
 
 Here is a basic usage example. The following component will render the datagrid
 seen below, with pagination and some toolbar actions. One of the key pieces to
-building the datagrid is the `useDatagrid` hook, this will give you all of the
-state/props required to render a Datagrid.
+building the `Datagrid` is the `useDatagrid` hook, this will give you all of the
+state/props required to render a `Datagrid`.
 
 ```jsx
 import { Datagrid, useDatagrid } from '@carbon/ibm-products';
-...
-...
+
 const App = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const rows = React.useMemo(() => data, [data]);
+  const columns = React.useMemo(() => defaultHeader, []); // These are the columns that will be used by the datagrid
+  const [data] = useState(makeData(10)); // This is the data that will be rendered by the datagrid
 
   const datagridState = useDatagrid({
     columns,
-    data: rows,
-    gridTitle: 'Data table title',
-    gridDescription: 'Additional information if needed'
-    initialState: {
-      pageSize: 10,
-      pageSizes: [5, 10, 25, 50],
-    },
-    DatagridActions,
-    DatagridPagination,
+    data,
   });
+
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
+<Canvas>
+  <Story id={getStoryId(Datagrid.displayName, 'basic-usage')} />
+</Canvas>
+
+### Column structure
+
+The columns that are passed to the `useDatagrid` hook will have the following
+structure:
+
+```jsx
+const columns = [
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName',
+  },
+];
+```
+
+To change the default/initial width of a column, add a `width` property to the
+column.
+
+```jsx
+const columns = [
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+    width: 120,
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName',
+    width: 180,
+  },
+];
+```
+
+If needed, it is also possible to wrap each cell in a containing element. See
+below:
+
+```jsx
+const columns = [
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName',
+    Cell: ({ cell: { value } }) => (
+      <span className="custom-cell-wrapper">{value}</span>
+    ),
+  },
+];
+```
+
+## Empty
+
+The `Datagrid` supports empty states, when the data prop passed to the
+`useDatagrid` hook is an empty array.
+
+```jsx
+import { Datagrid, useDatagrid } from '@carbon/ibm-products';
+
+const App = () => {
+  const columns = React.useMemo(() => defaultHeader, []); // These are the columns that will be used by the datagrid
+  const [data] = useState([]); // This is the data that will be rendered by the datagrid
+
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    emptyStateTitle: 'Empty state title',
+    emptyStateDescription: 'Description explaining why table is empty',
+    emptyStateSize: 'lg', // See empty state size options from the EmptyState component
+  });
+
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
+<Canvas>
+  <Story id={getStoryId(Datagrid.displayName, 'empty-state')} />
+</Canvas>
+
+## Expandable rows
+
+The `Datagrid` supports expandable rows with the use of the `useExpandedRow`
+hook.
+
+```jsx
+import { Datagrid, useDatagrid, useExpandedRow } from '@carbon/ibm-products';
+
+const App = () => {
+  const columns = React.useMemo(() => defaultHeader, []); // These are the columns that will be used by the datagrid
+  const [data] = useState(makeData(10)); // This is the data that will be rendered by the datagrid
+
+  const expansionRenderer = ({ row }) => {
+    return <div>Content for row index: {row.id}</div>;
+  };
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      ExpandedRowContentComponent: expansionRenderer,
+    },
+    useExpandedRow
+  );
 
   return <Datagrid datagridState={datagridState} />;
 };
@@ -64,15 +199,216 @@ const App = () => {
   <Story
     id={getStoryId(
       Datagrid.displayName,
-      'header-basic-usage-story',
-      '/Extensions/Header'
+      'expandable-row-story',
+      '/Extensions/ExpandableRow'
+    )}
+  />
+</Canvas>
+
+## Column alignment
+
+The default column alignment in the `Datagrid` is left, however there is support
+for center and right aligned as well. See
+[design guidance](https://pages.github.ibm.com/cdai-design/pal/components/data-table/column-alignment/usage)
+for details around when to change default column alignment.
+
+```jsx
+import {
+  Datagrid,
+  useDatagrid,
+  useColumnCenterAlign,
+  useColumnRightAlign,
+} from '@carbon/ibm-products';
+
+const defaultColumns = [
+  ...defaultCols,
+  {
+    Header: 'Bonus',
+    accessor: 'bonus',
+    width: 120,
+    rightAlignedColumn: true,
+  },
+  {
+    Header: 'Status',
+    accessor: 'status_icon',
+    width: 100,
+    centerAlignedColumn: true,
+  },
+];
+
+const App = () => {
+  const columns = React.useMemo(() => [...defaultHeader], []);
+  const [data] = useState(makeData(10));
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      initialState: {
+        pageSize: 10,
+        pageSizes: [5, 10, 25, 50],
+      },
+      DatagridActions,
+      DatagridPagination,
+    },
+    useColumnCenterAlign,
+    useColumnRightAlign
+  );
+
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
+<Canvas>
+  <Story
+    id={getStoryId(
+      Datagrid.displayName,
+      'column-alignment-story',
+      '/Extensions/ColumnAlignment'
+    )}
+  />
+</Canvas>
+
+## Inline editing
+
+The `Datagrid` supports inline editing when used with the `useInlineEdit` hook
+and columns are provided the required configuration. The four data types
+supported are strings, numbers, dates, and selection (dropdown).
+
+Below are example column configuration for the support inline edit data types:
+
+Default/string:
+
+```json
+{
+  Header: 'First Name',
+  accessor: 'firstName',
+  inlineEdit: {
+    type: 'text',
+    // required for including validation, this is used to set the invalid prop internally
+    validator: (n) => n.length >= 40,
+    // These props are passed to the Carbon component used for inline editing, in this case the TextInput
+    inputProps: {
+      invalidText: 'Invalid text, character count must be less than 40',
+    },
+  },
+}
+```
+
+Number:
+
+```json
+{
+  Header: 'Age',
+  accessor: 'age',
+  width: 120,
+  inlineEdit: {
+    // required for including validation, this is used to set the invalid prop internally
+    validator: (n) => n && n < 18,
+    type: 'number',
+    // These props are passed to the Carbon component used for inline editing, in this case NumberInput
+    inputProps: {
+      invalidText: 'Invalid number, must be 18 or greater',
+    },
+  },
+},
+```
+
+Date:
+
+```jsx
+{
+  Header: 'Active since',
+  accessor: 'activeSince',
+  inlineEdit: {
+    type: 'date',
+    inputProps: {
+      // optionally pass props here to be passed through to Carbon's DatePicker component
+      onChange: (newDateObj, cell) => {
+        console.log(newDateObj, cell);
+      },
+      labelText: 'Change active since date',
+      // optionally pass props here to be passed through to Carbon's DatePickerInput component
+      datePickerInputProps: {
+        labelText: 'Change active since date',
+      },
+    },
+  },
+},
+```
+
+Selection:
+
+```jsx
+{
+  Header: 'Chart type',
+  accessor: 'chartType',
+  inlineEdit: {
+    type: 'selection',
+    inputProps: {
+      // These props are passed to the Carbon component used for inline editing
+      items: [
+        {
+          id: 'option-0',
+          icon: ChartColumnFloating16,
+          text: 'Column Chart',
+        },
+        {
+          id: 'option-1',
+          icon: ChartBubble16,
+          text: 'Bubble Chart',
+        },
+        {
+          id: 'option-2',
+          icon: ChartVennDiagram16,
+          text: 'Venn Diagram',
+        },
+      ],
+      onChange: (item) => {
+        console.log(item);
+      },
+    },
+  },
+},
+```
+
+Using the column structure outlined above, along with the use of the
+`useInlineEdit` hook, the Datagrid will support inline editing. See example
+below:
+
+```jsx
+import { Datagrid, useDatagrid, useInlineEdit } from '@carbon/ibm-products';
+
+const App = () => {
+  const [data, setData] = useState(makeData(10));
+  const columns = React.useMemo(() => getInlineEditColumns(), []); // These columns follow the inline edit column configuration detailed above
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      onDataUpdate: setData,
+    },
+    useInlineEdit
+  );
+
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
+<Canvas>
+  <Story
+    id={getStoryId(
+      Datagrid.displayName,
+      'inline-edit-usage-story',
+      '/Extensions/InlineEdit'
     )}
   />
 </Canvas>
 
 ## Code sample
 
-<!-- <CodesandboxLink exampleDirectory="Datagrid" /> -->
+<CodesandboxLink exampleDirectory="Datagrid" />
 
 ## Component API
 

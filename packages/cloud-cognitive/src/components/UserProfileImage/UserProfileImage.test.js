@@ -23,7 +23,7 @@ const kind = 'user';
 const size = 'xlg';
 const theme = 'light';
 
-const renderComponent = ({ ...rest }) =>
+const renderComponent = ({ ...rest } = {}) =>
   render(<UserProfileImage {...{ kind, size, theme, ...rest }} />);
 
 describe(componentName, () => {

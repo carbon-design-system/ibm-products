@@ -33,6 +33,7 @@ const defaults = {
     HTTPErrorOther: true,
     ImportModal: true,
     InlineEdit: true,
+    InlineEditV1: true,
     NotificationsPanel: true,
     NoDataEmptyState: true,
     NoTagsEmptyState: true,
@@ -68,6 +69,7 @@ const defaults = {
     EditTearsheet: false,
     EditTearsheetNarrow: false,
     EditFullPage: false,
+    EditUpdateCards: false,
     InlineEditV2: false,
     /* new component flags here - comment used by generate CLI */
   },

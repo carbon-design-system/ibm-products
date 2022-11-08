@@ -2,8 +2,7 @@
 library:
   id: ibm-products
   name: IBM Products
-  description:
-    Discover React-based solutions designed for IBM's product portfolio.
+  description: Discover React-based solutions designed for IBM’s product portfolio.
   externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/
   designKits:
     ibm-products-g10-figma:
@@ -11,6 +10,7 @@ library:
 assets:
   api-key-modal:
     name: API key modal
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/generating-api-key/usage
     status: stable
     type: pattern
     platform: web
@@ -26,6 +26,7 @@ assets:
       - form
   about-modal:
     name: About modal
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/about-modal/usage
     status: stable
     type: pattern
     platform: web
@@ -112,6 +113,7 @@ assets:
       - input-control
   cascade:
     name: Cascade
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/cascade
     status: stable
     type: pattern
     platform: web
@@ -126,6 +128,7 @@ assets:
       - content-block
   combo-button:
     name: Combo button
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/button-guidance/menu-and-combo-buttons
     status: stable
     type: component
     platform: web
@@ -140,6 +143,7 @@ assets:
       - input-control
   create-full-page:
     name: Create full page
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/creation-flows/usage#full-page
     status: stable
     type: pattern
     platform: web
@@ -156,6 +160,7 @@ assets:
       - form
   create-modal:
     name: Create modal
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/creation-flows/usage#modal
     status: stable
     type: pattern
     platform: web
@@ -171,6 +176,7 @@ assets:
       - form
   create-tearsheet:
     name: Create tearsheet
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/creation-flows/usage#wide-tearsheet
     status: stable
     type: pattern
     platform: web
@@ -186,6 +192,7 @@ assets:
       - input-control
   create-tearsheet-narrow:
     name: Create tearsheet narrow
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/creation-flows/usage#narrow-tearsheet
     status: stable
     type: pattern
     platform: web
@@ -201,6 +208,7 @@ assets:
       - input-control
   data-spreadsheet:
     name: Data spreadsheet
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/data-spreadsheet/usage
     status: experimental
     type: component
     platform: web
@@ -232,6 +240,7 @@ assets:
       - data-display
   edit-side-panel:
     name: Edit side panel
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#side-panel-edit
     status: experimental
     type: pattern
     platform: web
@@ -247,6 +256,7 @@ assets:
       - form
   empty-state:
     name: Empty state
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/empty-state/usage
     status: stable
     type: pattern
     platform: web
@@ -261,6 +271,7 @@ assets:
       - content-element
   export-modal:
     name: Export modal
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/exporting/usage
     status: stable
     type: pattern
     platform: web
@@ -276,6 +287,7 @@ assets:
       - form
   expressive-card:
     name: Expressive card
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/card/expressive/usage
     status: stable
     type: component
     platform: web
@@ -291,6 +303,7 @@ assets:
       - contextual-navigation
   http-error:
     name: HTTP error
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/http-errors/usage
     status: stable
     type: pattern
     platform: web
@@ -307,6 +320,7 @@ assets:
       - contextual-navigation
   import-modal:
     name: Import modal
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/importing/usage
     status: stable
     type: pattern
     platform: web
@@ -323,6 +337,7 @@ assets:
       - form
   inline-edit:
     name: Inline edit
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#inline-edit
     status: stable
     type: pattern
     platform: web
@@ -337,6 +352,7 @@ assets:
       - input-control
   modified-tabs:
     name: Modified tabs
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/modified-tabs/usage
     status: experimental
     type: component
     platform: web
@@ -351,6 +367,7 @@ assets:
       - input-control
   multi-add-select:
     name: Multi add select
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/add-and-select/usage
     status: experimental
     type: pattern
     platform: web
@@ -366,6 +383,7 @@ assets:
       - content-block
   notifications-panel:
     name: Notifications panel
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/notifications/usage
     status: stable
     type: pattern
     platform: web
@@ -381,6 +399,7 @@ assets:
       - system-feedback
   options-tile:
     name: Options tile
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/options-tile/usage
     status: stable
     type: component
     platform: web
@@ -397,6 +416,7 @@ assets:
       - content-block
   page-header:
     name: Page header
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/page-header/usage
     status: stable
     type: component
     platform: web
@@ -413,6 +433,7 @@ assets:
       - content-block
   productive-card:
     name: Productive card
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/card/productive/usage
     status: stable
     type: component
     platform: web
@@ -428,6 +449,7 @@ assets:
       - input-control
   remove-modal:
     name: Remove modal
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/removing/usage
     status: stable
     type: pattern
     platform: web
@@ -443,6 +465,7 @@ assets:
       - input-control
   saving:
     name: Saving
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/saving/usage
     status: stable
     type: pattern
     platform: web
@@ -458,6 +481,7 @@ assets:
       - system-feedback
   side-panel:
     name: Side panel
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/side-panel/usage
     status: stable
     type: component
     platform: web
@@ -475,6 +499,7 @@ assets:
       - data-display
   single-add-select:
     name: Single add select
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/add-and-select/usage
     status: experimental
     type: pattern
     platform: web
@@ -489,6 +514,7 @@ assets:
       - form
   status-icon:
     name: Status icon
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/status-icons/usage
     status: stable
     type: pattern
     platform: web
@@ -505,6 +531,7 @@ assets:
       - system-feedback
   tag-set:
     name: Tag set
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/tag-set/usage
     status: stable
     type: component
     platform: web
@@ -519,6 +546,7 @@ assets:
       - data-display
   tearsheet:
     name: Tearsheet
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/tearsheet/usage
     status: stable
     type: component
     platform: web
@@ -534,6 +562,7 @@ assets:
       - form
   toolbar:
     name: Toolbar
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/toolbars/usage
     status: experimental
     type: pattern
     platform: web
@@ -548,6 +577,7 @@ assets:
       - input-control
   user-profile-image:
     name: User profile image
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/usage
     status: stable
     type: pattern
     platform: web
@@ -562,6 +592,7 @@ assets:
       - media
   web-terminal:
     name: Web terminal
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/web-terminal/usage
     status: stable
     type: pattern
     platform: web

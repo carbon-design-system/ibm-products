@@ -127,7 +127,7 @@ const FilterFlyout = ({
       <div
         ref={filterFlyoutRef}
         className={cx(componentClass, {
-          // [`${componentClass}--open`]: open,
+          [`${componentClass}--open`]: open,
           [`${componentClass}--batch`]: showActionSet,
           [`${componentClass}--instant`]: !showActionSet,
         })}

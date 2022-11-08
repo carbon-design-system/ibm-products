@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.5...@carbon/ibm-products@2.0.0-rc.6) (2022-11-08)
+
+
+### Bug Fixes
+
+* **Datagrid:** allow keyboard interaction with row expander ([#2435](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2435)) ([068a0bc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/068a0bc8e2086cae3dc842c8bd0d435b015eedaf))
+* **Datagrid:** clear global filter in onCancel ([#2441](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2441)) ([ec73f19](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ec73f19ba1aebbfbfc908e968569ff228ce45872))
+
+
+
+
+
 # [2.0.0-rc.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.4...@carbon/ibm-products@2.0.0-rc.5) (2022-11-01)
 
 

@@ -39,5 +39,5 @@ jobs:
       - name: Publish
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
         run: yarn lerna publish --preid rc --dist-tag next --no-verify-access --create-release github --ignore-changes 'config/**/*' 'packages/security/**/*' 'packages/cdai/**/*' 'packages/core/**/*' --yes # This publishes subsequent v2.x.x releases

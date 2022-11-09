@@ -6,58 +6,39 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
+import React, { useEffect, useState } from 'react';
 import { StatusIcon } from '../StatusIcon';
+import { makeData, newPersonWithTwoLines, range } from './utils/makeData';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
 import { action } from '@storybook/addon-actions';
 
-import {
-  Activity16,
-  Restart16,
-  Download16,
-  Filter16,
-  Add16,
-} from '@carbon/icons-react';
-import {
-  DataTable,
-  Button,
-  DatePicker,
-  DatePickerInput,
-  TextInput,
-  Dropdown,
-  Checkbox,
-  RadioButtonGroup,
-  RadioButton,
-  FormGroup,
-} from 'carbon-components-react';
+import { Activity16, Add16 } from '@carbon/icons-react';
+import { DataTable } from 'carbon-components-react';
 import {
   Datagrid,
+  useActionsColumn,
   useDatagrid,
+  useDisableSelectRows,
+  useFiltering,
   useInfiniteScroll,
   useRowIsMouseOver,
+  useSelectAllWithToggle,
   useSelectRows,
   useSortableColumns,
-  useDisableSelectRows,
-  useSelectAllWithToggle,
   useStickyColumn,
-  useActionsColumn,
-  useFiltering,
 } from '.';
 
-import { SelectAllWitHToggle, LeftPanelStory } from './Datagrid.stories';
 import mdx from './Datagrid.mdx';
+import { LeftPanelStory, SelectAllWitHToggle } from './Datagrid.stories';
 
 import { pkg } from '../../settings';
 
-import styles from './_storybook-styles.scss';
 import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
-import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
-import { FilterFlyout } from './Datagrid/addons/Filtering';
+import styles from './_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -402,238 +383,112 @@ export const Filtering = () => {
   const columns = React.useMemo(() => headers, []);
   const [data] = useState(makeData(20));
 
-  const FilterDatagridActions = (datagridState) => {
-    const {
-      selectedFlatRows,
-      setGlobalFilter,
-      CustomizeColumnsButton,
-      RowSizeDropdown,
-      rowSizeDropdownProps,
-      useDenseHeader,
-      getFilterFlyoutProps,
-      applyFilters,
-    } = datagridState;
-
-    /** State for filters */
-    const [passwordOptions, setPasswordOptions] = useState([
-      { label: 'Normal', value: 'normal', selected: false },
-      { label: 'Minor warning', value: 'minor-warning', selected: false },
-      { label: 'Critical', value: 'critical', selected: false },
-    ]);
-
-    const downloadCsv = () => {
-      alert('Downloading...');
-    };
-    const { TableToolbarContent, TableToolbarSearch } = DataTable;
-
-    const refreshColumns = () => {
-      alert('refreshing...');
-    };
-    const leftPanelClick = () => {
-      alert('open/close left panel...');
-    };
-    const searchForAColumn = 'Search';
-    const isNothingSelected = selectedFlatRows.length === 0;
-    const style = {
-      'button:nth-child(1) > span:nth-child(1)': {
-        bottom: '-37px',
+  const filters = [
+    {
+      type: 'date',
+      column: 'joined',
+      props: {
+        DatePicker: {
+          datePickerType: 'range',
+        },
+        DatePickerInput: {
+          start: {
+            id: 'date-picker-input-id-start',
+            placeholder: 'mm/dd/yyyy',
+            labelText: 'Joined start date',
+          },
+          end: {
+            id: 'date-picker-input-id-end',
+            placeholder: 'mm/dd/yyyy',
+            labelText: 'Joined end date',
+          },
+        },
       },
-    };
-
-    const handlePasswordStrengthChange = (isSelected, id) => {
-      const passwordOptionsCopy = [...passwordOptions];
-      const option = passwordOptionsCopy.find((option) => option.label === id);
-      option.selected = isSelected;
-      setPasswordOptions(passwordOptionsCopy);
-    };
-
-    const renderFilterFlyout = useCallback(() => {
-      return (
-        <FilterFlyout {...getFilterFlyoutProps()}>
-          <DatePicker
-            datePickerType="range"
-            onChange={(value) => {
-              applyFilters({ column: 'joined', value });
-            }}
-          >
-            <DatePickerInput
-              id="date-picker-input-id-start"
-              placeholder="mm/dd/yyyy"
-              labelText="Joined start date"
-            />
-            <DatePickerInput
-              id="date-picker-input-id-finish"
-              placeholder="mm/dd/yyyy"
-              labelText="Joined end date"
-            />
-          </DatePicker>
-          <TextInput
-            invalidText="A valid value is required"
-            labelText="Visits"
-            placeholder="Type a number amount of visits"
-            onChange={(event) => {
-              applyFilters({
-                column: 'visits',
-                value: event.target.value,
-              });
-            }}
-          />
-
-          <FormGroup legendText="Password strength">
-            {passwordOptions.map((option) => (
-              <Checkbox
-                key={option.label}
-                selected={option.selected}
-                labelText={option.label}
-                onChange={(isSelected) => {
-                  handlePasswordStrengthChange(isSelected, option.label);
-                  applyFilters({
-                    column: 'passwordStrength',
-                    value: passwordOptions,
-                  });
-                }}
-                id={option.label}
-              />
-            ))}
-          </FormGroup>
-          <FormGroup legendText="Role">
-            <RadioButtonGroup
-              orientation="vertical"
-              legend="Group Legend"
-              name="role-radio-button-group"
-              onChange={(selected) => {
-                applyFilters({
-                  column: 'role',
-                  value: selected,
-                });
-              }}
-            >
-              <RadioButton
-                id="developer"
-                labelText="Developer"
-                value="developer"
-              />
-              <RadioButton
-                id="designer"
-                labelText="Designer"
-                value="designer"
-              />
-              <RadioButton
-                id="researcher"
-                labelText="Researcher"
-                value="researcher"
-              />
-            </RadioButtonGroup>
-          </FormGroup>
-          <Dropdown
-            id="marital-status-dropdown"
-            ariaLabel="Marital status dropdown"
-            items={['relationship', 'complicated', 'single']}
-            label="Marital status"
-            titleText="Marital status"
-            onChange={({ selectedItem }) => {
-              applyFilters({
-                column: 'status',
-                value: selectedItem,
-              });
-            }}
-          />
-        </FilterFlyout>
-      );
-    }, []);
-
-    return (
-      isNothingSelected &&
-      (useDenseHeader && useDenseHeader ? (
-        <TableToolbarContent size="sm">
-          <div style={style}>
-            <Button
-              kind="ghost"
-              hasIconOnly
-              tooltipPosition="bottom"
-              renderIcon={Download16}
-              iconDescription={'Download CSV'}
-              onClick={downloadCsv}
-            />
-          </div>
-          <div style={style}>
-            <Button
-              kind="ghost"
-              hasIconOnly
-              tooltipPosition="bottom"
-              renderIcon={Filter16}
-              iconDescription={'Left panel'}
-              onClick={leftPanelClick}
-            />
-          </div>
-          {renderFilterFlyout()}
-          <RowSizeDropdown {...rowSizeDropdownProps} />
-          <div style={style} className={`${blockClass}__toolbar-divider`}>
-            <Button kind="ghost" renderIcon={Add16} iconDescription={'Action'}>
-              Ghost button
-            </Button>
-          </div>
-
-          {CustomizeColumnsButton && (
-            <div style={style}>
-              <CustomizeColumnsButton />
-            </div>
-          )}
-        </TableToolbarContent>
-      ) : (
-        <TableToolbarContent>
-          <TableToolbarSearch
-            size="xl"
-            id="columnSearch"
-            persistent
-            placeHolderText={searchForAColumn}
-            onChange={(e) => setGlobalFilter(e.target.value)}
-          />
-          {renderFilterFlyout()}
-          <RowSizeDropdown {...rowSizeDropdownProps} />
-          <div style={style}>
-            <Button
-              kind="ghost"
-              hasIconOnly
-              tooltipPosition="bottom"
-              renderIcon={Restart16}
-              iconDescription={'Refresh'}
-              onClick={refreshColumns}
-            />
-          </div>
-          <div style={style}>
-            <Button
-              kind="ghost"
-              hasIconOnly
-              tooltipPosition="bottom"
-              renderIcon={Download16}
-              iconDescription={'Download CSV'}
-              onClick={downloadCsv}
-            />
-          </div>
-          {CustomizeColumnsButton && (
-            <div style={style}>
-              <CustomizeColumnsButton />
-            </div>
-          )}
-          <ButtonMenu label="Primary button" renderIcon={Add16}>
-            <ButtonMenuItem
-              itemText="Option 1"
-              onClick={action(`Click on ButtonMenu Option 1`)}
-            />
-            <ButtonMenuItem
-              itemText="Option 2"
-              onClick={action(`Click on ButtonMenu Option 2`)}
-            />
-            <ButtonMenuItem
-              itemText="Option 3"
-              onClick={action(`Click on ButtonMenu Option 3`)}
-            />
-          </ButtonMenu>
-        </TableToolbarContent>
-      ))
-    );
-  };
+    },
+    {
+      type: 'number',
+      column: 'visits',
+      props: {
+        NumberInput: {
+          min: 0,
+          id: 'visits-number-input',
+          invalidText: 'A valid value is required',
+          label: 'Visits',
+          placeholder: 'Type a number amount of visits',
+        },
+      },
+    },
+    {
+      type: 'checkbox',
+      column: 'passwordStrength',
+      props: {
+        FormGroup: {
+          legendText: 'Password strength',
+        },
+        Checkbox: [
+          {
+            id: 'normal',
+            labelText: 'Normal',
+            value: 'normal',
+          },
+          {
+            id: 'minor-warning',
+            labelText: 'Minor warning',
+            value: 'minor-warning',
+          },
+          {
+            id: 'critical',
+            labelText: 'Critical',
+            value: 'critical',
+          },
+        ],
+      },
+    },
+    {
+      type: 'radio',
+      column: 'role',
+      props: {
+        FormGroup: {
+          legendText: 'Role',
+        },
+        RadioButtonGroup: {
+          orientation: 'vertical',
+          legend: 'Role legend',
+          name: 'role-radio-button-group',
+        },
+        RadioButton: [
+          {
+            id: 'developer',
+            labelText: 'Developer',
+            value: 'developer',
+          },
+          {
+            id: 'designer',
+            labelText: 'Designer',
+            value: 'designer',
+          },
+          {
+            id: 'researcher',
+            labelText: 'Researcher',
+            value: 'researcher',
+          },
+        ],
+      },
+    },
+    {
+      type: 'dropdown',
+      column: 'status',
+      props: {
+        Dropdown: {
+          id: 'marital-status-dropdown',
+          ariaLabel: 'Marital status dropdown',
+          items: ['relationship', 'complicated', 'single'],
+          label: 'Marital status',
+          titleText: 'Marital status',
+        },
+      },
+    },
+  ];
 
   const datagridState = useDatagrid(
     {
@@ -647,8 +502,9 @@ export const Filtering = () => {
         shouldClickOutsideToClose: false,
         onFlyoutOpen: () => console.log('onFlyoutOpen'),
         onFlyoutClose: () => console.log('onFlyoutClose'),
+        filters,
       },
-      DatagridActions: FilterDatagridActions,
+      DatagridActions,
       batchActions: true,
       toolbarBatchActions: getBatchActions(),
     },

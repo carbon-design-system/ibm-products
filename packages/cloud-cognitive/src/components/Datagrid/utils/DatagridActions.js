@@ -5,12 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useMemo } from 'react';
-import { DataTable, Button } from 'carbon-components-react';
-import { Download16, Filter16, Add16, Restart16 } from '@carbon/icons-react';
+import { Add16, Download16, Restart16 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
+import { Button, DataTable } from 'carbon-components-react';
+import React, { useMemo } from 'react';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
+import { FilterFlyout } from '../Datagrid/addons/Filtering';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -22,6 +23,8 @@ export const DatagridActions = (datagridState) => {
     RowSizeDropdown,
     rowSizeDropdownProps,
     useDenseHeader,
+    filterProps,
+    getFilterFlyoutProps,
   } = datagridState;
 
   const downloadCsv = () => {
@@ -32,9 +35,7 @@ export const DatagridActions = (datagridState) => {
   const refreshColumns = () => {
     alert('refreshing...');
   };
-  const leftPanelClick = () => {
-    alert('open/close left panel...');
-  };
+
   const searchForAColumn = 'Search';
   const isNothingSelected = useMemo(
     () => selectedFlatRows.length === 0,
@@ -48,6 +49,9 @@ export const DatagridActions = (datagridState) => {
     }),
     []
   );
+
+  const renderFilterFlyout = () =>
+    filterProps && <FilterFlyout {...getFilterFlyoutProps()} />;
 
   return (
     isNothingSelected &&
@@ -63,16 +67,7 @@ export const DatagridActions = (datagridState) => {
             onClick={downloadCsv}
           />
         </div>
-        <div style={style}>
-          <Button
-            kind="ghost"
-            hasIconOnly
-            tooltipPosition="bottom"
-            renderIcon={Filter16}
-            iconDescription={'Left panel'}
-            onClick={leftPanelClick}
-          />
-        </div>
+        {renderFilterFlyout()}
         <RowSizeDropdown {...rowSizeDropdownProps} />
         <div style={style} className={`${blockClass}__toolbar-divider`}>
           <Button kind="ghost" renderIcon={Add16} iconDescription={'Action'}>
@@ -95,6 +90,7 @@ export const DatagridActions = (datagridState) => {
           placeHolderText={searchForAColumn}
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
+        {renderFilterFlyout()}
         <RowSizeDropdown {...rowSizeDropdownProps} />
         <div style={style}>
           <Button

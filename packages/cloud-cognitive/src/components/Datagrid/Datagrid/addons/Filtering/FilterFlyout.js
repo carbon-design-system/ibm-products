@@ -7,30 +7,42 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 
-import React, {
-  useState,
-  useCallback,
-  useRef,
-  useMemo,
-  useContext,
-} from 'react';
-import PropTypes from 'prop-types';
-import { Button } from 'carbon-components-react';
 import { Filter16 } from '@carbon/icons-react';
+import {
+  Button,
+  Checkbox,
+  DatePicker,
+  DatePickerInput,
+  Dropdown,
+  FormGroup,
+  NumberInput,
+  RadioButton,
+  RadioButtonGroup,
+} from 'carbon-components-react';
 import cx from 'classnames';
-import { ActionSet } from '../../../../ActionSet';
-import { pkg } from '../../../../../settings';
-import { BATCH, INSTANT } from './constants';
+import PropTypes from 'prop-types';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useClickOutside } from '../../../../../global/js/hooks';
+import { pkg } from '../../../../../settings';
+import { ActionSet } from '../../../../ActionSet';
+import { BATCH, INSTANT } from './constants';
 import { FilterContext } from './FilterProvider';
+import useInitialStateFromFilters from './hooks/useInitialStateFromFilters';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-flyout`;
 
 const FilterFlyout = ({
-  children,
   updateMethod = BATCH,
   flyoutIconDescription = 'Open filters',
+  filters = [],
   title = 'Filter',
   primaryActionLabel = 'Apply',
   onFlyoutOpen = () => {},
@@ -47,6 +59,7 @@ const FilterFlyout = ({
 
   /** State */
   const [open, setOpen] = useState(false);
+  const [filtersState, setFiltersState] = useInitialStateFromFilters(filters);
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
@@ -86,6 +99,99 @@ const FilterFlyout = ({
 
     setOpen(false);
   });
+
+  useEffect(() => {
+    console.log(filtersState);
+  }, [filtersState]);
+
+  /** Render the individual filter component */
+  const renderFilter = useCallback(
+    ({ type, column, props }) => {
+      if (type === 'date') {
+        return (
+          <DatePicker
+            datePickerType="range"
+            {...props.DatePicker}
+            onChange={(value) => {
+              // applyFilters({ column: 'joined', value });
+            }}
+          >
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Start date"
+              {...props.DatePickerInput.start}
+            />
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="End date"
+              {...props.DatePickerInput.end}
+            />
+          </DatePicker>
+        );
+      } else if (type === 'number') {
+        return <NumberInput {...props.NumberInput} />;
+      } else if (type === 'checkbox') {
+        return (
+          <FormGroup {...props.FormGroup.legendText}>
+            {filtersState[column].map((option) => (
+              <Checkbox
+                key={option.label}
+                {...option}
+                onChange={(isSelected) => {
+                  // handlePasswordStrengthChange(isSelected, option.label);
+                  // applyFilters({
+                  //   column: 'passwordStrength',
+                  //   value: passwordOptions,
+                  // });
+                  console.log('checkbox change');
+                }}
+              />
+            ))}
+          </FormGroup>
+        );
+      } else if (type === 'radio') {
+        return (
+          <FormGroup {...props.FormGroup}>
+            <RadioButtonGroup
+              {...props.RadioButtonGroup}
+              onChange={(selected) => {
+                // applyFilters({
+                //   column: 'role',
+                //   value: selected,
+                // });
+              }}
+            >
+              {props.RadioButton.map((radio) => (
+                <RadioButton
+                  key={radio.id ?? radio.labelText ?? radio.value}
+                  {...radio}
+                />
+              ))}
+            </RadioButtonGroup>
+          </FormGroup>
+        );
+      } else if (type === 'dropdown') {
+        return (
+          <Dropdown
+            onChange={({ selectedItem }) => {
+              // applyFilters({
+              //   column: 'status',
+              //   value: selectedItem,
+              // });
+            }}
+            {...props.Dropdown}
+          />
+        );
+      }
+    },
+    [filtersState]
+  );
+
+  /** Renders all filters */
+  const renderFilters = useCallback(
+    () => filters.map(renderFilter),
+    [filters, renderFilter]
+  );
 
   const renderActionSet = useCallback(() => {
     return (
@@ -134,7 +240,7 @@ const FilterFlyout = ({
       >
         <div className={`${componentClass}__inner-container`}>
           <span className={`${componentClass}__title`}>{title}</span>
-          <div className={`${componentClass}__filters`}>{children}</div>
+          <div className={`${componentClass}__filters`}>{renderFilters()}</div>
         </div>
         {renderActionSet()}
       </div>

@@ -8,7 +8,8 @@
 import React, { useEffect } from 'react';
 import { VariableSizeList } from 'react-window';
 import { DataTable } from 'carbon-components-react';
-import { pkg } from '../../../settings';
+import { carbon, pkg } from '../../../settings';
+import DatagridHead from './DatagridHead';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -43,7 +44,6 @@ const DatagridVirtualBody = (datagridState) => {
     DatagridPagination,
     page,
     handleResize,
-    withOverflowRow,
   } = datagridState;
 
   useEffect(() => {
@@ -54,41 +54,46 @@ const DatagridVirtualBody = (datagridState) => {
   if (listRef && listRef.current) {
     listRef.current.resetAfterIndex(0);
   }
+  const virtualBodyWidth = document.getElementsByClassName(
+    `${carbon.prefix}--data-table-content`
+  )[0].offsetWidth;
 
   const visibleRows = (DatagridPagination && page) || rows;
-
   return (
-    <TableBody {...getTableBodyProps()} onScroll={onScroll}>
-      <VariableSizeList
-        height={virtualHeight || tableHeight}
-        itemCount={visibleRows.length}
-        itemSize={(index) =>
-          visibleRows[index].isExpanded
-            ? (visibleRows[index].expandedContentHeight || 0) + rowHeight
-            : rowHeight
-        }
-        estimatedItemSize={rowHeight}
-        onScroll={onScroll}
-        innerRef={innerListRef}
-        ref={listRef}
-        className={`${blockClass}__virtual-scrollbar`}
-      >
-        {({ index, style }) => {
-          const row = visibleRows[index];
-          prepareRow(row);
-          return (
-            <div
-              style={{
-                ...style,
-                overflow: withOverflowRow ? 'visible' : 'hidden',
-              }}
-            >
-              {row.RowRenderer({ ...datagridState, row })}
-            </div>
-          );
-        }}
-      </VariableSizeList>
-    </TableBody>
+    <div style={{ width: virtualBodyWidth }}>
+      <DatagridHead {...datagridState} />
+      <TableBody {...getTableBodyProps()} onScroll={onScroll}>
+        <VariableSizeList
+          height={virtualHeight || tableHeight}
+          itemCount={visibleRows.length}
+          itemSize={(index) =>
+            visibleRows[index].isExpanded
+              ? (visibleRows[index].expandedContentHeight || 0) + rowHeight
+              : rowHeight
+          }
+          estimatedItemSize={rowHeight}
+          onScroll={onScroll}
+          innerRef={innerListRef}
+          ref={listRef}
+          className={`${blockClass}__virtual-scrollbar`}
+          style={{ width: virtualBodyWidth }}
+        >
+          {({ index, style }) => {
+            const row = visibleRows[index];
+            prepareRow(row);
+            return (
+              <div
+                style={{
+                  ...style,
+                }}
+              >
+                {row.RowRenderer({ ...datagridState, row })}
+              </div>
+            );
+          }}
+        </VariableSizeList>
+      </TableBody>
+    </div>
   );
 };
 

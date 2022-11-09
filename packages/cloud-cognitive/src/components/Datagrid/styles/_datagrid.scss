@@ -524,17 +524,15 @@
   height: $spacing-09;
 }
 
-.#{$block-class}__virtual-scrollbar {
-  &::-webkit-scrollbar {
-    width: 10px;
-    height: 7px;
-  }
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 7px;
+}
 
-  &::-webkit-scrollbar-track {
-    background: $layer;
-  }
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar-track {
+  background: $layer;
+}
 
-  &::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-  }
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 5px;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const addFiltersToState = (filters) => {
   const initialFilterState = {};
@@ -16,7 +16,7 @@ const addFiltersToState = (filters) => {
     } else if (type === 'date') {
       initialFilterState[column] = [undefined, undefined];
     } else if (type === 'number') {
-      initialFilterState[column] = 0;
+      initialFilterState[column] = '';
     } else if (type === 'radio') {
       initialFilterState[column] = '';
     } else if (type === 'dropdown') {
@@ -29,10 +29,6 @@ const addFiltersToState = (filters) => {
 
 const useInitialStateFromFilters = (filters) => {
   const [state, setState] = useState(addFiltersToState(filters));
-
-  useEffect(() => {
-    setState(addFiltersToState(filters));
-  }, [filters]);
 
   return [state, setState];
 };

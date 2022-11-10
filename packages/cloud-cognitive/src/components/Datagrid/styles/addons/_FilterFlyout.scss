@@ -75,4 +75,8 @@ $action-set-height: rem(64px);
     background-color: $ui-02;
     box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);
   }
+
+  .#{$carbon-prefix}--fieldset {
+    margin-bottom: 0;
+  }
 }

@@ -58,8 +58,13 @@ const useFiltering = (hooks) => {
   );
 
   hooks.useInstance.push((instance) => {
-    const { filterProps, setAllFilters } = instance;
-    const getFilterFlyoutProps = () => ({ ...filterProps, setAllFilters });
+    const { filterProps, setAllFilters, setFilter, headers } = instance;
+    const getFilterFlyoutProps = () => ({
+      ...filterProps,
+      setAllFilters,
+      setFilter,
+      headers,
+    });
 
     Object.assign(instance, {
       filterTypes,

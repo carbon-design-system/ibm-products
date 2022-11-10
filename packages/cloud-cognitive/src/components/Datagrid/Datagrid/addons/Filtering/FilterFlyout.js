@@ -33,7 +33,6 @@ import { useClickOutside } from '../../../../../global/js/hooks';
 import { pkg } from '../../../../../settings';
 import { ActionSet } from '../../../../ActionSet';
 import { BATCH, INSTANT } from './constants';
-import { FilterContext } from './FilterProvider';
 import useInitialStateFromFilters from './hooks/useInitialStateFromFilters';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -41,6 +40,7 @@ const componentClass = `${blockClass}-filter-flyout`;
 
 const FilterFlyout = ({
   updateMethod = BATCH,
+  headers,
   flyoutIconDescription = 'Open filters',
   filters = [],
   title = 'Filter',
@@ -52,10 +52,12 @@ const FilterFlyout = ({
   shouldClickOutsideToClose = false,
   secondaryActionLabel = 'Cancel',
   setAllFilters,
+  setFilter,
 }) => {
   /** Refs */
   const filterFlyoutRef = useRef(null);
-  const { filtersObjectArray } = useContext(FilterContext);
+  // When using batch actions we have to store the filters to then apply them later
+  const filtersObjectArray = useRef([]);
 
   /** State */
   const [open, setOpen] = useState(false);
@@ -85,6 +87,37 @@ const FilterFlyout = ({
     closeFlyout();
   }, [onCancel, closeFlyout]);
 
+  const applyFilters = useCallback(
+    ({ column, value }) => {
+      const type = headers.find((header) => header.id === column).filter;
+
+      // If no end date is selected return because we need the end date to do computations
+      if (type === 'date' && !value[1]) {
+        return;
+      }
+
+      if (updateMethod === BATCH) {
+        // check if the filter already exists in the array
+        const filter = filtersObjectArray.current?.find(
+          (item) => item.id === column
+        );
+
+        // if filter exists in array then update the filter's new value
+        if (filter) {
+          filter.value = value;
+        } else {
+          filtersObjectArray.current = [
+            ...filtersObjectArray.current,
+            { id: column, value },
+          ];
+        }
+      } else if (updateMethod === INSTANT) {
+        setFilter(column, value);
+      }
+    },
+    [headers, setFilter, updateMethod]
+  );
+
   /** Effects */
   useClickOutside(filterFlyoutRef, (target) => {
     if (shouldClickOutsideToClose === false) {
@@ -110,11 +143,13 @@ const FilterFlyout = ({
       if (type === 'date') {
         return (
           <DatePicker
-            datePickerType="range"
             {...props.DatePicker}
             onChange={(value) => {
-              // applyFilters({ column: 'joined', value });
+              setFiltersState({ ...filtersState, [column]: value });
+              applyFilters({ column, value });
             }}
+            value={filtersState[column]}
+            datePickerType="range"
           >
             <DatePickerInput
               placeholder="mm/dd/yyyy"
@@ -129,21 +164,40 @@ const FilterFlyout = ({
           </DatePicker>
         );
       } else if (type === 'number') {
-        return <NumberInput {...props.NumberInput} />;
+        return (
+          <NumberInput
+            step={1}
+            allowEmpty
+            hideSteppers
+            {...props.NumberInput}
+            onChange={(event) => {
+              setFiltersState({
+                ...filtersState,
+                [column]: event.target.value,
+              });
+              applyFilters({ column, value: event.target.value });
+            }}
+            value={filtersState[column]}
+          />
+        );
       } else if (type === 'checkbox') {
         return (
-          <FormGroup {...props.FormGroup.legendText}>
+          <FormGroup {...props.FormGroup}>
             {filtersState[column].map((option) => (
               <Checkbox
                 key={option.label}
                 {...option}
                 onChange={(isSelected) => {
-                  // handlePasswordStrengthChange(isSelected, option.label);
-                  // applyFilters({
-                  //   column: 'passwordStrength',
-                  //   value: passwordOptions,
-                  // });
-                  console.log('checkbox change');
+                  const checkboxCopy = filtersState[column];
+                  const foundCheckbox = checkboxCopy.find(
+                    (checkbox) => checkbox.value === option.value
+                  );
+                  foundCheckbox.selected = isSelected;
+                  setFiltersState({ ...filtersState, [column]: checkboxCopy });
+                  applyFilters({
+                    column,
+                    value: [...filtersState[column]],
+                  });
                 }}
               />
             ))}
@@ -155,10 +209,11 @@ const FilterFlyout = ({
             <RadioButtonGroup
               {...props.RadioButtonGroup}
               onChange={(selected) => {
-                // applyFilters({
-                //   column: 'role',
-                //   value: selected,
-                // });
+                setFiltersState({ ...filtersState, [column]: selected });
+                applyFilters({
+                  column,
+                  value: selected,
+                });
               }}
             >
               {props.RadioButton.map((radio) => (
@@ -173,18 +228,19 @@ const FilterFlyout = ({
       } else if (type === 'dropdown') {
         return (
           <Dropdown
-            onChange={({ selectedItem }) => {
-              // applyFilters({
-              //   column: 'status',
-              //   value: selectedItem,
-              // });
-            }}
             {...props.Dropdown}
+            onChange={({ selectedItem }) => {
+              setFiltersState({ ...filtersState, [column]: selectedItem });
+              applyFilters({
+                column,
+                value: selectedItem,
+              });
+            }}
           />
         );
       }
     },
-    [filtersState]
+    [filtersState, applyFilters, setFiltersState]
   );
 
   /** Renders all filters */

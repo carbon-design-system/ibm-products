@@ -495,11 +495,11 @@ export const Filtering = () => {
       columns,
       data,
       filterProps: {
-        updateMethod: 'batch',
+        updateMethod: 'instant',
         primaryActionLabel: 'Apply',
         secondaryActionLabel: 'Cancel',
         flyoutIconDescription: 'Open filters',
-        shouldClickOutsideToClose: false,
+        shouldClickOutsideToClose: true,
         onFlyoutOpen: () => console.log('onFlyoutOpen'),
         onFlyoutClose: () => console.log('onFlyoutClose'),
         filters,

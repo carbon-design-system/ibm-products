@@ -28,6 +28,7 @@ const DatagridRow = (datagridState) => {
     <TableRow
       className={cx(`${blockClass}__carbon-row`, {
         [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
+        [`${blockClass}__carbon-row-expandable`]: row.canExpand,
         [`${carbon.prefix}--data-table--selected`]: row.isSelected,
         [`${blockClass}__carbon-row-hover-active`]:
           activeCellObject && row.index === activeCellObject.row,
@@ -51,7 +52,7 @@ const DatagridRow = (datagridState) => {
         );
       }}
     >
-      {row.cells.map((cell) => {
+      {row.cells.map((cell, index) => {
         const cellProps = cell.getCellProps();
         const { children, ...restProps } = cellProps;
         const content = children || (
@@ -66,7 +67,10 @@ const DatagridRow = (datagridState) => {
         }
         return (
           <TableCell
-            className={`${blockClass}__cell`}
+            className={cx(`${blockClass}__cell`, {
+              [`${blockClass}__expandable-row-cell`]:
+                row.canExpand && index === 0,
+            })}
             {...restProps}
             key={cell.column.id}
           >

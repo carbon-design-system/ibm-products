@@ -275,15 +275,18 @@ const FilterFlyout = ({
               kind: 'primary',
               label: primaryActionLabel,
               onClick: apply,
+              isExpressive: false,
             },
             {
               key: 3,
               kind: 'secondary',
               label: secondaryActionLabel,
               onClick: cancel,
+              isExpressive: false,
             },
           ]}
           size="md"
+          buttonSize="md"
         />
       )
     );

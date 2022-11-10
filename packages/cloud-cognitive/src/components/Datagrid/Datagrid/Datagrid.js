@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
@@ -19,6 +19,13 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const componentName = 'Datagrid';
 
 export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
+  if (!datagridState) {
+    pconsole.warn(
+      'Datagrid was not passed datagridState which is required to render this component.'
+    );
+    return null;
+  }
+
   const {
     withVirtualScroll,
     DatagridPagination,
@@ -27,13 +34,6 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
     leftPanel,
     className,
   } = datagridState;
-
-  if (!datagridState) {
-    pconsole.warn(
-      'Datagrid was not passed datagridState which is required to render this component.'
-    );
-    return null;
-  }
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
 

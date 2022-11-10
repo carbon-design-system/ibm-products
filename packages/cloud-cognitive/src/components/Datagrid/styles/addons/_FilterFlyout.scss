@@ -16,11 +16,11 @@ $action-set-height: rem(64px);
 
 .#{$block-class}-filter-flyout {
   position: absolute;
-  display: none;
-  top: rem(48px);
+  top: $spacing-09;
   right: 0;
-  background-color: $ui-02;
+  display: none;
   width: rem(642px);
+  background-color: $ui-02;
   box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);
 
   &--open {
@@ -28,28 +28,32 @@ $action-set-height: rem(64px);
   }
 
   &--batch {
-    grid-template-rows: 1fr rem(48px);
     min-height: rem(346px);
+    grid-template-rows: 1fr rem(48px);
   }
 
   &--instant {
-    grid-template-rows: 1fr;
     min-height: rem(282px);
+    grid-template-rows: 1fr;
   }
 
   &__inner-container {
     padding: $spacing-05 $spacing-05 $spacing-09 $spacing-05;
+  }
 
-    &::before {
-      display: block;
-      content: '';
-      position: absolute;
-      width: 46px;
-      height: rem(15px);
-      background-color: $ui-02;
-      top: rem(-7px);
-      right: 1px;
-    }
+  &__inner-container::before {
+    position: absolute;
+    // stylelint-disable-next-line carbon/layout-token-use
+    top: rem(-7px);
+    // stylelint-disable-next-line carbon/layout-token-use
+    right: 1px;
+    display: block;
+    content: '';
+    // stylelint-disable-next-line carbon/layout-token-use
+    width: rem(46px);
+    // stylelint-disable-next-line carbon/layout-token-use
+    height: rem(15px);
+    background-color: $ui-02;
   }
 
   &__title {
@@ -60,8 +64,8 @@ $action-set-height: rem(64px);
 
   &__filters {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 16px 32px;
+    grid-template-columns: 1fr 1fr;
   }
 
   // Carbon overrides

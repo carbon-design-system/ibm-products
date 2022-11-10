@@ -269,4 +269,18 @@ describe(`${componentName}.validateActions`, () => {
     );
     expect(v('md', props.twoGhosts, prop, componentName)).toBeInstanceOf(Error);
   });
+
+  it('should render both expressive and regular buttons inside of the button set', () => {
+    const { rerender } = render(<ActionSet actions={[actionG]} />);
+    const actionButton = screen.getByText(labelG);
+    expect(actionButton).toHaveClass(
+      `${carbon.prefix}--btn--expressive`,
+      `${blockClass}__action-button--expressive`
+    );
+    rerender(<ActionSet actions={[{ ...actionG, isExpressive: false }]} />);
+    expect(actionButton).not.toHaveClass(
+      `${carbon.prefix}--btn--expressive`,
+      `${blockClass}__action-button--expressive`
+    );
+  });
 });

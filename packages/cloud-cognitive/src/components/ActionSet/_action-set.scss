@@ -22,15 +22,20 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 .#{$action-set-block-class} .#{$action-set-block-class}__action-button {
   @include type.type-style('body-short-01');
 
-  height: $spacing-10;
   align-items: center;
-  padding-top: $spacing-05;
-  padding-bottom: $spacing-07;
   margin: 0;
+
+  &.#{$action-set-block-class}__action-button--expressive {
+    height: $spacing-10;
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-07;
+  }
 }
 
 .#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set
-  .#{$action-set-block-class}__action-button.#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--expressive {
+  .#{$action-set-block-class}__action-button.#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--expressive,
+.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set
+  .#{$action-set-block-class}__action-button.#{c4p-settings.$carbon-prefix}--btn {
   max-width: none;
 }
 

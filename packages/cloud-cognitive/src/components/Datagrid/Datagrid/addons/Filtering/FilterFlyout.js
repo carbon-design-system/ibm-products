@@ -21,18 +21,19 @@ import {
 } from 'carbon-components-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { useClickOutside } from '../../../../../global/js/hooks';
 import { pkg } from '../../../../../settings';
 import { ActionSet } from '../../../../ActionSet';
-import { BATCH, INSTANT } from './constants';
+import {
+  BATCH,
+  INSTANT,
+  DATE,
+  NUMBER,
+  CHECKBOX,
+  RADIO,
+  DROPDOWN,
+} from './constants';
 import useInitialStateFromFilters from './hooks/useInitialStateFromFilters';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -40,7 +41,6 @@ const componentClass = `${blockClass}-filter-flyout`;
 
 const FilterFlyout = ({
   updateMethod = BATCH,
-  headers,
   flyoutIconDescription = 'Open filters',
   filters = [],
   title = 'Filter',
@@ -54,14 +54,16 @@ const FilterFlyout = ({
   setAllFilters,
   setFilter,
 }) => {
-  /** Refs */
-  const filterFlyoutRef = useRef(null);
-  // When using batch actions we have to store the filters to then apply them later
-  const filtersObjectArray = useRef([]);
-
   /** State */
   const [open, setOpen] = useState(false);
   const [filtersState, setFiltersState] = useInitialStateFromFilters(filters);
+
+  /** Refs */
+  const filterFlyoutRef = useRef(null);
+  // When using batch actions we have to store the filters to then apply them later
+  const [filtersObjectArray, setFiltersObjectArray] = useState([]);
+  const prevFiltersRef = useRef(JSON.stringify(filtersState));
+  const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
@@ -77,28 +79,39 @@ const FilterFlyout = ({
   }, [onFlyoutClose]);
 
   const apply = useCallback(() => {
-    setAllFilters(filtersObjectArray.current);
+    setAllFilters(filtersObjectArray);
     closeFlyout();
     onApply();
-  }, [setAllFilters, filtersObjectArray, closeFlyout, onApply]);
+
+    // updates the ref so next time the flyout opens we have records of the previous filters
+    prevFiltersRef.current = JSON.stringify(filtersState);
+    prevFiltersObjectArrayRef.current = JSON.stringify(filtersObjectArray);
+  }, [setAllFilters, filtersObjectArray, closeFlyout, onApply, filtersState]);
 
   const cancel = useCallback(() => {
+    revertToPreviousFilters();
     onCancel();
     closeFlyout();
-  }, [onCancel, closeFlyout]);
+  }, [onCancel, closeFlyout, revertToPreviousFilters]);
+
+  // If the user decides to cancel or click outside the flyout, it reverts back to the filters that were
+  // there when they opened the flyout
+  const revertToPreviousFilters = useCallback(() => {
+    setFiltersState(JSON.parse(prevFiltersRef.current));
+    setFiltersObjectArray(JSON.parse(prevFiltersObjectArrayRef.current));
+  }, [setFiltersState]);
 
   const applyFilters = useCallback(
-    ({ column, value }) => {
-      const type = headers.find((header) => header.id === column).filter;
-
+    ({ column, value, type }) => {
       // If no end date is selected return because we need the end date to do computations
-      if (type === 'date' && !value[1]) {
+      if (type === DATE && !value[1]) {
         return;
       }
 
       if (updateMethod === BATCH) {
+        const filtersObjectArrayCopy = [...filtersObjectArray];
         // check if the filter already exists in the array
-        const filter = filtersObjectArray.current?.find(
+        const filter = filtersObjectArrayCopy.find(
           (item) => item.id === column
         );
 
@@ -106,16 +119,15 @@ const FilterFlyout = ({
         if (filter) {
           filter.value = value;
         } else {
-          filtersObjectArray.current = [
-            ...filtersObjectArray.current,
-            { id: column, value },
-          ];
+          filtersObjectArrayCopy.push({ id: column, value });
         }
+
+        setFiltersObjectArray(filtersObjectArrayCopy);
       } else if (updateMethod === INSTANT) {
         setFilter(column, value);
       }
     },
-    [headers, setFilter, updateMethod]
+    [setFilter, updateMethod, filtersObjectArray]
   );
 
   /** Effects */
@@ -130,23 +142,19 @@ const FilterFlyout = ({
       return;
     }
 
-    setOpen(false);
+    cancel();
   });
-
-  useEffect(() => {
-    console.log(filtersState);
-  }, [filtersState]);
 
   /** Render the individual filter component */
   const renderFilter = useCallback(
-    ({ type, column, props }) => {
-      if (type === 'date') {
+    ({ type, column, props: components }) => {
+      if (type === DATE) {
         return (
           <DatePicker
-            {...props.DatePicker}
+            {...components.DatePicker}
             onChange={(value) => {
               setFiltersState({ ...filtersState, [column]: value });
-              applyFilters({ column, value });
+              applyFilters({ column, value, type });
             }}
             value={filtersState[column]}
             datePickerType="range"
@@ -154,38 +162,38 @@ const FilterFlyout = ({
             <DatePickerInput
               placeholder="mm/dd/yyyy"
               labelText="Start date"
-              {...props.DatePickerInput.start}
+              {...components.DatePickerInput.start}
             />
             <DatePickerInput
               placeholder="mm/dd/yyyy"
               labelText="End date"
-              {...props.DatePickerInput.end}
+              {...components.DatePickerInput.end}
             />
           </DatePicker>
         );
-      } else if (type === 'number') {
+      } else if (type === NUMBER) {
         return (
           <NumberInput
             step={1}
             allowEmpty
             hideSteppers
-            {...props.NumberInput}
+            {...components.NumberInput}
             onChange={(event) => {
               setFiltersState({
                 ...filtersState,
                 [column]: event.target.value,
               });
-              applyFilters({ column, value: event.target.value });
+              applyFilters({ column, value: event.target.value, type });
             }}
             value={filtersState[column]}
           />
         );
-      } else if (type === 'checkbox') {
+      } else if (type === CHECKBOX) {
         return (
-          <FormGroup {...props.FormGroup}>
+          <FormGroup {...components.FormGroup}>
             {filtersState[column].map((option) => (
               <Checkbox
-                key={option.label}
+                key={option.labelText}
                 {...option}
                 onChange={(isSelected) => {
                   const checkboxCopy = filtersState[column];
@@ -197,26 +205,30 @@ const FilterFlyout = ({
                   applyFilters({
                     column,
                     value: [...filtersState[column]],
+                    type,
                   });
                 }}
+                checked={option.selected}
               />
             ))}
           </FormGroup>
         );
-      } else if (type === 'radio') {
+      } else if (type === RADIO) {
         return (
-          <FormGroup {...props.FormGroup}>
+          <FormGroup {...components.FormGroup}>
             <RadioButtonGroup
-              {...props.RadioButtonGroup}
+              {...components.RadioButtonGroup}
+              valueSelected={filtersState[column]}
               onChange={(selected) => {
                 setFiltersState({ ...filtersState, [column]: selected });
                 applyFilters({
                   column,
                   value: selected,
+                  type,
                 });
               }}
             >
-              {props.RadioButton.map((radio) => (
+              {components.RadioButton.map((radio) => (
                 <RadioButton
                   key={radio.id ?? radio.labelText ?? radio.value}
                   {...radio}
@@ -225,12 +237,16 @@ const FilterFlyout = ({
             </RadioButtonGroup>
           </FormGroup>
         );
-      } else if (type === 'dropdown') {
+      } else if (type === DROPDOWN) {
         return (
           <Dropdown
-            {...props.Dropdown}
+            {...components.Dropdown}
             onChange={({ selectedItem }) => {
-              setFiltersState({ ...filtersState, [column]: selectedItem });
+              setFiltersState({
+                ...filtersState,
+                [column]: selectedItem,
+                type,
+              });
               applyFilters({
                 column,
                 value: selectedItem,
@@ -314,6 +330,17 @@ FilterFlyout.propTypes = {
   ]).isRequired,
 
   /**
+   * Array of filters to render
+   */
+  filters: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      column: PropTypes.string.isRequired,
+      props: PropTypes.object.isRequired,
+    })
+  ).isRequired,
+
+  /**
    * Icon description for the filter flyout button
    */
   flyoutIconDescription: PropTypes.string,
@@ -352,6 +379,11 @@ FilterFlyout.propTypes = {
    * Function that sets all the filters, this comes from the datagridState
    */
   setAllFilters: PropTypes.func.isRequired,
+
+  /**
+   * Function that sets an individual filter, this comes from the datagridState
+   */
+  setFilter: PropTypes.func.isRequired,
 
   /**
    * Boolean if you want the flyout to close when clicked outside of the parent

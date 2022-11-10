@@ -7,3 +7,8 @@
 /** Update methods can either be batch or instant */
 export const BATCH = 'batch';
 export const INSTANT = 'instant';
+export const DATE = 'date';
+export const NUMBER = 'number';
+export const CHECKBOX = 'checkbox';
+export const RADIO = 'radio';
+export const Dropdown = 'dropdown';

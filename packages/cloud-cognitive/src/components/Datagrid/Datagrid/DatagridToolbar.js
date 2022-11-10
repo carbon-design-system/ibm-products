@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Add16, OverflowMenuVertical16 } from '@carbon/icons-react';
 import {
   DataTable,

@@ -230,14 +230,17 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
-  height: var(--cds-spacing-10, 4rem);
   align-items: center;
-  padding-top: var(--cds-spacing-05, 1rem);
-  padding-bottom: var(--cds-spacing-07, 2rem);
   margin: 0;
 }
+.c4p--action-set .c4p--action-set__action-button.c4p--action-set__action-button--expressive {
+  height: var(--cds-spacing-10, 4rem);
+  padding-top: var(--cds-spacing-05, 1rem);
+  padding-bottom: var(--cds-spacing-07, 2rem);
+}
 
-.c4p--action-set.bx--btn-set .c4p--action-set__action-button.bx--btn.bx--btn--expressive {
+.c4p--action-set.bx--btn-set .c4p--action-set__action-button.bx--btn.bx--btn--expressive,
+.c4p--action-set.bx--btn-set .c4p--action-set__action-button.bx--btn {
   max-width: none;
 }
 

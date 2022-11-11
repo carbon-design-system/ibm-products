@@ -10,7 +10,7 @@
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[all-contributors-badge]: https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square
+[all-contributors-badge]: https://img.shields.io/badge/all_contributors-15-orange.svg
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 

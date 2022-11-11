@@ -677,21 +677,24 @@ export const LeftPanel = () => {
     },
   ];
 
+
   const datagridState = useDatagrid({
-    leftPanel: {
-      isOpen: true, // this toggling will happen from datagridActions.
-      panelContent: (
-        <FilterPanelSkeleton
-          header="Filter"
-          filterSections={sections}
-          updateMethod="instant"
-        />
-      ),
+    filterProps: {
+      variation: 'panel',
+      updateMethod: 'batch',
+      primaryActionLabel: 'Apply',
+      secondaryActionLabel: 'Cancel',
+      flyoutIconDescription: 'Open filters',
+      shouldClickOutsideToClose: false,
+      onFlyoutOpen: () => console.log('onFlyoutOpen'),
+      onFlyoutClose: () => console.log('onFlyoutClose'),
+      sections,
     },
     columns,
     data,
     DatagridActions,
-    DatagridBatchActions,
+    batchActions: true,
+    toolbarBatchActions: getBatchActions(),
   });
 
   return (

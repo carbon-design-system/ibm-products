@@ -1,18 +1,11 @@
 import React, { useState, useRef, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { 
-  ActionSet,
-  Accordion,
-  AccordionItem, 
-  Button,
-  Checkbox
-} from 'carbon-components-react';
+import { ActionSet, Button } from 'carbon-components-react';
 import { pkg } from '../../../../../settings';
 import { Filter16 } from '@carbon/icons-react';
 import { BATCH, INSTANT } from './constants';
 import cx from 'classnames';
 import { Search } from 'carbon-components-react';
-import { children } from 'cheerio/lib/api/traversing';
 
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -55,11 +48,10 @@ const FilterPanelSkeleton = ({ title, updateMethod = BATCH, filterSections }) =>
           )
         );
       }, [showActionSet]);
-      console.log(filterSections)
 
     return (
         <div className={`${componentClass}__container`}>
-          <Button
+            <Button
                 kind="ghost"
                 hasIconOnly
                 tooltipPosition="bottom"
@@ -72,33 +64,16 @@ const FilterPanelSkeleton = ({ title, updateMethod = BATCH, filterSections }) =>
             />
             <div
                 ref={filterPanelRef}
-                className={cx(componentClass, {
-                  [`${componentClass}--open`]: open,
-                  [`${componentClass}--batch`]: showActionSet,
-                  [`${componentClass}--instant`]: !showActionSet,
-                })}
             >
                 <h1>{title}</h1>
-                <Search labelText="Filter search" placeHolderText="Find filters" light={true} size='sm'></Search>
+                <Search labelText="Filter search" placeHolderText="Find filters" light={false} size='sm'></Search>
                 <div className={`${componentClass}__inner-container`}>
                     {filterSections.map((category) => {
-                      return (
-                        <>
-                        <div className={`${componentClass}__category-title`}>{category.title}</div>
-                        <Accordion>
-                        {category.subsections.map((subsection) => {
-                          return (
-                            <AccordionItem title={subsection.title} key={subsection.title}>
-                              {subsection.children}
-                            </AccordionItem>
-                          )
-                        })}
-                        </Accordion>
-                        </>
-                      )
+                        <h3>{category.title}</h3>
+                        {category.subsections}
                     })}
                 </div>
-                {renderActionSet()}
+                {renderActionSet}
             </div>
         </div>
     );

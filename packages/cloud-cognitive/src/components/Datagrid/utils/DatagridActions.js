@@ -11,6 +11,7 @@ import { Button, DataTable } from 'carbon-components-react';
 import React, { useMemo } from 'react';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
+import { Filter16 } from '@carbon/icons-react';
 import { FilterFlyout } from '../Datagrid/addons/Filtering';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -54,11 +55,22 @@ export const DatagridActions = (datagridState) => {
     filterProps?.variation === 'flyout' && (
       <FilterFlyout {...getFilterFlyoutProps()} />
     );
+    
+  const renderFilterPanelButton = () =>
+    filterProps.variation === 'panel' &&  
+    <Button
+      kind="ghost"
+      hasIconOnly
+      tooltipPosition="bottom"
+      renderIcon={Filter16}
+      iconDescription={'Open filters'}
+    /> 
 
   return (
     isNothingSelected &&
     (useDenseHeader && useDenseHeader ? (
       <TableToolbarContent size="sm">
+        {renderFilterPanelButton()}
         <div style={style}>
           <Button
             kind="ghost"
@@ -85,6 +97,7 @@ export const DatagridActions = (datagridState) => {
       </TableToolbarContent>
     ) : (
       <TableToolbarContent>
+        {renderFilterPanelButton()}
         <TableToolbarSearch
           size="xl"
           id="columnSearch"

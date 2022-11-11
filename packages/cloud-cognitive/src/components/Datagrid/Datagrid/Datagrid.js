@@ -32,7 +32,7 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
     DatagridPagination,
     isFetching,
     tableId,
-    leftPanel,
+    filterProps,
     className,
     state: { filters },
   } = datagridState;

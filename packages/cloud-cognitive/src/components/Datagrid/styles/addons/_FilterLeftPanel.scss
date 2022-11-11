@@ -10,17 +10,29 @@
 
 $action-set-height: rem(64px);
 
-.#{$block-class}-filter-panel__container {
+.#{$block-class}-filterLeftPanel__container {
   position: relative;
-  width: 100%;
+  width: 388px;
+  background-color: $ui-01;
 }
 
-.#{$block-class}-filter-panel {
+.#{$block-class}-filterLeftPanel {
     display: none;
     padding: 2px 14px;
 
     &--open {
         display: grid;
+    }
+
+    &__title {
+        font-size: 16px;
+        font-weight: 600;
+        padding: 12px;
+    }
+
+    &__titleAndClose {
+        display: flex;
+        justify-content: space-between;
     }
 
     &__category-title {

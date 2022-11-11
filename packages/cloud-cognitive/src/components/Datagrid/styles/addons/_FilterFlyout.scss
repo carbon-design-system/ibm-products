@@ -48,9 +48,9 @@ $action-set-height: rem(64px);
     // stylelint-disable-next-line carbon/layout-token-use
     right: 1px;
     display: block;
-    content: '';
     // stylelint-disable-next-line carbon/layout-token-use
     width: rem(46px);
+    content: '';
     // stylelint-disable-next-line carbon/layout-token-use
     height: rem(15px);
     background-color: $ui-02;

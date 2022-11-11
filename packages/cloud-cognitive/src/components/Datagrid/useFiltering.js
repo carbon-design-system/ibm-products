@@ -59,7 +59,9 @@ const useFiltering = (hooks) => {
 
   hooks.useInstance.push((instance) => {
     const { filterProps, setAllFilters, setFilter, headers } = instance;
+    const defaultProps = { variation: 'flyout' };
     const getFilterFlyoutProps = () => ({
+      ...defaultProps,
       ...filterProps,
       setAllFilters,
       setFilter,
@@ -67,6 +69,7 @@ const useFiltering = (hooks) => {
     });
 
     Object.assign(instance, {
+      filterProps: { ...defaultProps, ...instance.filterProps },
       filterTypes,
       getFilterFlyoutProps,
     });

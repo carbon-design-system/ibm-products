@@ -499,6 +499,7 @@ export const Filtering = () => {
       columns,
       data,
       filterProps: {
+        variation: 'flyout',
         updateMethod: 'batch',
         primaryActionLabel: 'Apply',
         secondaryActionLabel: 'Cancel',

@@ -51,7 +51,9 @@ export const DatagridActions = (datagridState) => {
   );
 
   const renderFilterFlyout = () =>
-    filterProps && <FilterFlyout {...getFilterFlyoutProps()} />;
+    filterProps.variation === 'flyout' && (
+      <FilterFlyout {...getFilterFlyoutProps()} />
+    );
 
   return (
     isNothingSelected &&

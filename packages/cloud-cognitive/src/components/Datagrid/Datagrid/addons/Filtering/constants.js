@@ -11,4 +11,4 @@ export const DATE = 'date';
 export const NUMBER = 'number';
 export const CHECKBOX = 'checkbox';
 export const RADIO = 'radio';
-export const Dropdown = 'dropdown';
+export const DROPDOWN = 'dropdown';

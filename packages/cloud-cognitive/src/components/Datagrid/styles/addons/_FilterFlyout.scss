@@ -6,6 +6,8 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
+// stylelint-disable carbon/layout-token-use
+
 @import '../variables';
 
 $action-set-height: rem(64px);
@@ -22,61 +24,57 @@ $action-set-height: rem(64px);
   width: rem(642px);
   background-color: $ui-02;
   box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);
+}
 
-  &--open {
-    display: grid;
-  }
+.#{$block-class}-filter-flyout--open {
+  display: grid;
+}
 
-  &--batch {
-    min-height: rem(346px);
-    grid-template-rows: 1fr rem(48px);
-  }
+.#{$block-class}-filter-flyout--batch {
+  min-height: rem(346px);
+  grid-template-rows: 1fr rem(48px);
+}
 
-  &--instant {
-    min-height: rem(282px);
-    grid-template-rows: 1fr;
-  }
+.#{$block-class}-filter-flyout--instant {
+  min-height: rem(282px);
+  grid-template-rows: 1fr;
+}
 
-  &__inner-container {
-    padding: $spacing-05 $spacing-05 $spacing-09 $spacing-05;
-  }
+.#{$block-class}-filter-flyout__inner-container {
+  padding: $spacing-05 $spacing-05 $spacing-09 $spacing-05;
+}
 
-  &__inner-container::before {
-    position: absolute;
-    // stylelint-disable-next-line carbon/layout-token-use
-    top: rem(-7px);
-    // stylelint-disable-next-line carbon/layout-token-use
-    right: 1px;
-    display: block;
-    // stylelint-disable-next-line carbon/layout-token-use
-    width: rem(46px);
-    content: '';
-    // stylelint-disable-next-line carbon/layout-token-use
-    height: rem(15px);
-    background-color: $ui-02;
-  }
+.#{$block-class}-filter-flyout__inner-container::before {
+  position: absolute;
+  top: rem(-7px);
+  right: 1px;
+  display: block;
+  width: rem(46px);
+  height: rem(15px);
+  background-color: $ui-02;
+  content: '';
+}
 
-  &__title {
-    display: block;
-    @include carbon--type-style('productive-heading-01');
-    margin-bottom: $spacing-06;
-  }
+.#{$block-class}-filter-flyout__title {
+  display: block;
+  @include carbon--type-style('productive-heading-01');
 
-  &__filters {
-    display: grid;
-    gap: 16px 32px;
-    grid-template-columns: 1fr 1fr;
-  }
+  margin-bottom: $spacing-06;
+}
 
-  // Carbon overrides
+.#{$block-class}-filter-flyout__filters {
+  display: grid;
+  gap: rem(16px) rem(32px);
+  grid-template-columns: 1fr 1fr;
+}
 
-  &__trigger--open.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only {
-    position: relative;
-    background-color: $ui-02;
-    box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);
-  }
+// Carbon overrides
+.#{$block-class}-filter-flyout__trigger--open.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only {
+  position: relative;
+  background-color: $ui-02;
+  box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);
+}
 
-  .#{$carbon-prefix}--fieldset {
-    margin-bottom: 0;
-  }
+.#{$block-class}-filter-flyout .#{$carbon-prefix}--fieldset {
+  margin-bottom: 0;
 }

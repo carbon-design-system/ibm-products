@@ -85,7 +85,11 @@ export const getFilteredItems = (
     if (searchTerm || globalFiltersApplied) {
       const results = itemIds
         .reduce((prev, cur) => {
-          if (normalizedItems[cur].title.toLowerCase().includes(searchTerm.toLowerCase())) {
+          if (
+            normalizedItems[cur].title
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())
+          ) {
             prev.push(normalizedItems[cur]);
           }
           return prev;

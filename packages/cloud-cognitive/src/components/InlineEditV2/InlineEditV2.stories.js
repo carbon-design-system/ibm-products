@@ -44,7 +44,6 @@ const defaultProps = {
   // readOnly: false,
   // readOnlyLabel: 'This value is read only',
   saveLabel: 'Save',
-  v2: true,
   value: 'default',
 };
 

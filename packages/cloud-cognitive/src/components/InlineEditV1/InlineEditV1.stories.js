@@ -14,6 +14,7 @@ import {
 } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 
+import { InlineEdit } from '../InlineEdit/InlineEdit';
 import { InlineEditV1 } from '.';
 import mdx from './InlineEditV1.mdx';
 
@@ -198,7 +199,7 @@ const Template = ({
       style={{ width: containerWidth }}
       className={inlineEditFullWidth ? 'component-full-width' : ''}
     >
-      <InlineEditV1
+      <InlineEdit
         {...rest}
         {...{
           editDescription,
@@ -211,6 +212,7 @@ const Template = ({
           saveDescription,
           value,
         }}
+        v1
       />
     </div>
   );

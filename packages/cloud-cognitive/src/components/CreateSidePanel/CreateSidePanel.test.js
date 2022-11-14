@@ -25,7 +25,7 @@ const selectorPrimaryFocus = `.${carbon.prefix}--text-input`;
 const formTitle = 'This is a test form title';
 const blockClass = `${pkg.prefix}--create-side-panel`;
 
-const renderComponent = ({ ...rest }, children = <p>test</p>) =>
+const renderComponent = ({ ...rest } = {}, children = <p>test</p>) =>
   render(
     <>
       <CreateSidePanel

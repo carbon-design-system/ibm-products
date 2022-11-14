@@ -215,6 +215,9 @@ export const InfiniteScroll = () => {
       data,
       isFetching,
       fetchMoreData: fetchData,
+      virtualHeight: 540,
+      emptyStateTitle: 'Empty state title',
+      emptyStateDescription: 'Description explaining why the table is empty',
     },
     useInfiniteScroll
   );
@@ -290,6 +293,8 @@ export const IsHoverOnRow = () => {
 export const SelectableRow = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription = 'Description explaining why the table is empty';
   const datagridState = useDatagrid(
     {
       columns,
@@ -297,6 +302,8 @@ export const SelectableRow = () => {
       DatagridActions,
       batchActions: true,
       toolbarBatchActions: getBatchActions(),
+      emptyStateTitle,
+      emptyStateDescription,
     },
     useSelectRows,
     useStickyColumn

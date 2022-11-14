@@ -31,6 +31,7 @@ const ActionSetButton = React.forwardRef(
       kind,
       label,
       loading,
+      isExpressive = true,
       // Collect any other property values passed in.
       ...rest
     },
@@ -41,12 +42,13 @@ const ActionSetButton = React.forwardRef(
         // Pass through any other property values as HTML attributes.
         ...rest
       }
-      isExpressive
+      isExpressive={isExpressive}
       className={cx(className, [
         `${blockClass}__action-button`,
         {
           [`${blockClass}__action-button--ghost`]:
             kind === 'ghost' || kind === 'danger--ghost',
+          [`${blockClass}__action-button--expressive`]: isExpressive,
         },
       ])}
       disabled={disabled || loading || false}

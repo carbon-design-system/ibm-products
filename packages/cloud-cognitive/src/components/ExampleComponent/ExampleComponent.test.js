@@ -25,7 +25,7 @@ const primaryButtonLabel = `hello, world (${uuidv4()})`;
 const secondaryButtonLabel = `goodbye (${uuidv4()})`;
 
 // render an ExampleComponent with button labels and any other required props
-const renderComponent = ({ ...rest }) =>
+const renderComponent = ({ ...rest } = {}) =>
   render(
     <ExampleComponent
       {...{ primaryButtonLabel, secondaryButtonLabel, ...rest }}

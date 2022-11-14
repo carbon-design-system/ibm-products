@@ -31,7 +31,7 @@ const secondaryButtonText = 'Cancel';
 const onRequestSubmitFn = jest.fn();
 const onRequestCloseFn = jest.fn();
 
-const renderEditPanel = ({ ...rest }, children = childrenContent) =>
+const renderEditPanel = ({ ...rest } = {}, children = childrenContent) =>
   render(
     <EditSidePanel
       open

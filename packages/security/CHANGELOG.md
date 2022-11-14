@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.11](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.13.10...@carbon/ibm-security@2.13.11) (2022-11-08)
+
+**Note:** Version bump only for package @carbon/ibm-security
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [2.13.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.13.9...@carbon/ibm-security@2.13.10) (2022-11-01)
+
+**Note:** Version bump only for package @carbon/ibm-security
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [2.13.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.13.8...@carbon/ibm-security@2.13.9) (2022-10-25)
+
+**Note:** Version bump only for package @carbon/ibm-security
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [2.13.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-security@2.13.7...@carbon/ibm-security@2.13.8) (2022-10-18)
 
 ### Bug Fixes

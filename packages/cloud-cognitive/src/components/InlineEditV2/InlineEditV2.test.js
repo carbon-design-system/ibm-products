@@ -14,13 +14,17 @@ const componentName = InlineEditV2.displayName;
 
 const defaultProps = {
   cancelLabel: 'Cancel',
+  className: 'inline-edit-test',
   editLabel: 'Edit',
+  id: 'test-id',
   invalid: false,
   invalidLabel: 'This field is required',
+  labelText: 'test label',
   onCancel: () => {},
   onChange: () => {},
   onSave: () => {},
-  readOnly: false,
+  // readOnly: false,
+  // readOnlyLabel: 'This value is read only',
   saveLabel: 'Save',
   value: 'default',
 };
@@ -30,15 +34,15 @@ describe(componentName, () => {
     render(<InlineEditV2 {...defaultProps} />);
   });
 
-  it('renders in readOnly mode', () => {
-    render(<InlineEditV2 {...defaultProps} readOnly />);
-    const input = screen.getByDisplayValue(defaultProps.value);
-    expect(input).toHaveAttribute('readOnly');
+  // it('renders in readOnly mode', () => {
+  //   render(<InlineEditV2 {...defaultProps} readOnly />);
+  //   const input = screen.getByDisplayValue(defaultProps.value);
+  //   expect(input).toHaveAttribute('readOnly');
 
-    // for coverage
-    fireEvent.focus(input);
-    fireEvent.blur(input);
-  });
+  //   // for coverage
+  //   fireEvent.focus(input);
+  //   fireEvent.blur(input);
+  // });
 
   it('renders in invalid mode', () => {
     render(<InlineEditV2 {...defaultProps} invalid />);
@@ -182,5 +186,37 @@ describe(componentName, () => {
     fireEvent.focus(input);
     fireEvent.keyDown(input, { key: 'Enter' });
     expect(onSave).toHaveBeenCalled();
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<InlineEditV2 {...defaultProps} />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('applies className to the containing node', () => {
+    const { container } = render(<InlineEditV2 {...defaultProps} />);
+    expect(container.firstChild).toHaveClass(defaultProps.className);
+  });
+
+  const dataTestId = 'data-testid';
+
+  it('adds additional properties to the containing node', () => {
+    render(<InlineEditV2 {...defaultProps} data-testid={dataTestId} />);
+    screen.getByTestId(dataTestId);
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<InlineEditV2 {...defaultProps} ref={ref} />);
+    expect(ref.current).not.toBeNull();
+  });
+
+  it('adds the Devtools attribute to the containing node', () => {
+    render(<InlineEditV2 {...defaultProps} data-testid={dataTestId} />);
+
+    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+      componentName
+    );
   });
 });

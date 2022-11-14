@@ -37,7 +37,7 @@ const defaultProps = {
   onRequestSubmit: onRequestSubmitFn,
 };
 
-const renderComponent = ({ ...rest }) =>
+const renderComponent = ({ ...rest } = {}) =>
   render(
     <CreateTearsheetNarrow {...defaultProps} {...rest}>
       {children}

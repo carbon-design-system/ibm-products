@@ -246,7 +246,7 @@ const pageActions = {
       <Button
         type="button"
         className={`${carbon.prefix}--button`}
-        size="field"
+        size="md"
         style={{ maxWidth: '100%' }}
       >
         <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -262,7 +262,7 @@ const pageActions = {
       <Button
         type="button"
         className={`${carbon.prefix}--button`}
-        size="field"
+        size="md"
         style={{ maxWidth: '100%' }}
         title="Custom component with long content"
       >

@@ -42,7 +42,8 @@
 @use './UserProfileImage';
 @use './EditSidePanel';
 @use './OptionsTile';
-@use './InlineEdit';
+@use './InlineEditV1';
+@use './InlineEditV2';
 @use './DataSpreadsheet';
 @use './Datagrid';
 @use './EditTearsheet';

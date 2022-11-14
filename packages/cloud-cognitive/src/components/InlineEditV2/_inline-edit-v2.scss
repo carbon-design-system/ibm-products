@@ -1,0 +1,83 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '../../global/styles/project-settings' as *;
+@use '@carbon/styles/scss/type';
+
+$block-class: #{$pkg-prefix}--inline-edit-v2;
+$carbon-input: #{$carbon-prefix}--text-input;
+
+.#{$block-class} {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  cursor: pointer;
+}
+
+.#{$block-class}-readonly {
+  cursor: not-allowed;
+}
+
+.#{$block-class}:hover {
+  background: $field-01;
+}
+
+.#{$block-class}:hover .#{$block-class}__btn-edit {
+  visibility: visible;
+}
+
+.#{$block-class}__btn-edit {
+  visibility: hidden;
+}
+
+.#{$block-class}-focused {
+  background: $field-01;
+  outline: 2px solid $focus;
+}
+
+.#{$block-class}__text-input {
+  flex: 1;
+}
+
+.#{$block-class}__text-input-label {
+  display: none;
+}
+
+.#{$block-class}__warning-icon {
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  margin-right: 0.4375rem;
+  color: $support-error;
+}
+
+.#{$block-class}__warning-text {
+  @include type.type-style('label-01');
+
+  margin-top: $spacing-03;
+  color: $support-error;
+}
+
+// overrides
+.#{$block-class}__text-input.#{$carbon-input} {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+.#{$block-class}-readonly .#{$block-class}__text-input.#{$carbon-input},
+.#{$block-class}-readonly
+  .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger {
+  cursor: not-allowed;
+}
+
+.#{$block-class}__text-input.#{$carbon-input}:focus,
+.#{$block-class}__text-input.#{$carbon-input}:active {
+  outline: none;
+}

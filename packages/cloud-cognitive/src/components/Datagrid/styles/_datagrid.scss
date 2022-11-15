@@ -7,6 +7,8 @@
 */
 
 @import './variables';
+// Other Carbon settings.
+@import 'carbon-components/scss/globals/scss/helper-mixins';
 
 .#{$block-class}__table-toolbar > section {
   z-index: 2;
@@ -522,4 +524,54 @@
 
 .#{$block-class} .#{$pkg-prefix}--button-menu {
   height: $spacing-09;
+}
+
+.#{$block-class} .#{$block-class}__col-resizer-range {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: calc(#{$spacing-03} * -1);
+  width: 1rem;
+  height: 100%;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+.#{$block-class} .#{$block-class}__col-resizer-range:focus {
+  @include focus-outline('outline');
+}
+
+.#{$block-class} .#{$block-class}__col-resizer-range:focus::before {
+  position: absolute;
+  width: 1rem;
+  height: 100%;
+  background-image: url('../Datagrid/addons/DragIcon/dragIcon.svg');
+  background-position-y: center;
+  background-repeat: no-repeat;
+  content: '';
+}
+
+.#{$block-class} .#{$block-class}__col-resizer-range:focus::after {
+  position: absolute;
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  top: var(--#{$block-class}--row-height);
+  right: $spacing-03;
+  width: 1px;
+  height: calc(
+    var(--#{$block-class}--grid-height) - var(--#{$block-class}--row-height)
+  );
+  background-color: $active-ui;
+  content: '';
+}
+
+.#{$block-class} .#{$block-class}__col-resizer-range::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
 }

@@ -14,10 +14,15 @@ const DatagridHead = (datagridState) => {
   const { headerGroups = [], headRef, HeaderRow } = datagridState;
   return (
     <TableHead>
-      {headerGroups.map((headerGroup) =>
+      {headerGroups.map((headerGroup, index) => (
         // doesn't support header grouping.
-        HeaderRow(datagridState, headRef, headerGroup)
-      )}
+        <HeaderRow
+          datagridState={datagridState}
+          headerGroup={headerGroup}
+          ref={headRef}
+          key={`header__${index}`}
+        />
+      ))}
     </TableHead>
   );
 };

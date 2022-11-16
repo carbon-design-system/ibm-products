@@ -11,6 +11,7 @@ import cx from 'classnames';
 import { DataTable } from 'carbon-components-react';
 import { selectionColumnId } from '../common-column-ids';
 import { pkg } from '../../../settings';
+import { px } from '@carbon/layout';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -50,15 +51,17 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
           `.row_${row.id}__column__${header.id}`
         );
         const colHeader = document.querySelector(`.column__${header.id}`);
-        cellWidths.push(cell.firstChild.scrollWidth);
-        setTimeout(() => {
-          const largest = Math.max.apply(0, cellWidths);
-          const newColWidth = largest + 32;
-          setColExpandWidth(newColWidth);
-          setColExpandId(header.id);
-          cell.style.width = newColWidth + 'px';
-          colHeader.style.width = newColWidth + 'px';
-        }, 1);
+        if (cell.firstChild.scrollWidth) {
+          cellWidths.push(cell.firstChild.scrollWidth, colHeader.scrollWidth);
+          setTimeout(() => {
+            const largest = Math.max.apply(0, cellWidths);
+            const newColWidth = largest + 32;
+            setColExpandWidth(newColWidth);
+            setColExpandId(header.id);
+            cell.style.width = px(newColWidth);
+            colHeader.style.width = px(newColWidth);
+          }, 1);
+        }
       });
     } else {
       setIsDblClick(false);

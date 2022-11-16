@@ -20,7 +20,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
   const [selectedHeaderWidths, setSelectedHeaderWidths] = useState([]);
   const [isResizing, setIsResizing] = useState('');
   const [isDblClick, setIsDblClick] = useState(false);
-  const [dargStopped, setDargStopped] = useState(false);
+  const [dragStopped, setDragStopped] = useState(false);
   const [colExpandWidth, setColExpandWidth] = useState('');
   const [colExpandId, setColExpandId] = useState('');
   const { state } = datagridState;
@@ -28,7 +28,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
 
   // Below is to handle multiple column resize and `double click` column to fit content.
   const handleMultiColumSelect = (header, e) => {
-    setDargStopped(false);
+    setDragStopped(false);
     if (e.shiftKey && !selectedHeader.some((item) => item.id === header.id)) {
       const headerId = header.id;
       setSelectedHeader((current) => [...current, header]);
@@ -71,11 +71,11 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
   };
 
   useEffect(() => {
-    if (dargStopped) {
+    if (dragStopped) {
       setSelectedHeader([]); // Remove column selection
       setSelectedHeaderWidths([]); //Reset initial column widths selection
     }
-  }, [dargStopped]);
+  }, [dragStopped]);
 
   useEffect(() => {
     const colWidths = columnResizing.columnWidths;
@@ -108,7 +108,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
           colWidths[isResizing] > columnResizing.columnWidth)
       ) {
         // Check resize ended, 'columnResizing' firing even if we clicked on resizer.
-        setDargStopped(true);
+        setDragStopped(true);
         columnResizing.columnWidth = colWidths[resizingCol];
       }
     }
@@ -160,7 +160,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                   [`${blockClass}__sortableColumn`]: header.canSort,
                   [`${blockClass}__isSorted`]: header.isSorted,
                   [`${blockClass}__selected-header`]:
-                    !dargStopped &&
+                    !dragStopped &&
                     selectedHeader.some((item) => item.id === header.id),
                   [`${blockClass}__single-wrap-header`]:
                     arrayOfWords.length === 1,

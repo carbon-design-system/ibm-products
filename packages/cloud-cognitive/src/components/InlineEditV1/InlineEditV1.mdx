@@ -3,9 +3,9 @@ import {
   getStoryId,
   CodesandboxLink,
 } from '../../global/js/utils/story-helper';
-import { InlineEdit } from '.';
+import { InlineEditV1 } from '.';
 
-# InlineEdit
+# InlineEditV1
 
 ## Table of Contents
 
@@ -15,14 +15,16 @@ import { InlineEdit } from '.';
 
 ## Overview
 
-<!-- TODO: Overview. -->
+Please note- v2 of the inline edit pattern is the recommended version. If you
+want to use the v1 version all you to do is pass in `v1` and refer to the v1 API
+documentation below.
 
 ## Example usage
 
 <!-- TODO: One example per designed use case. -->
 
 <Canvas>
-  <Story id={getStoryId(InlineEdit.displayName, 'inline-edit')} />
+  <Story id={getStoryId(InlineEditV1.displayName, 'inline-edit')} />
 </Canvas>
 
 ## Code sample

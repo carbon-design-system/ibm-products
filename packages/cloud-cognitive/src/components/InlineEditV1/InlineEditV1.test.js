@@ -12,10 +12,10 @@ import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { InlineEdit } from '.';
+import { InlineEditV1 } from '.';
 
 const blockClass = `${pkg.prefix}--inline-edit`;
-const componentName = InlineEdit.displayName;
+const componentName = InlineEditV1.displayName;
 
 // values to use
 const className = `class-${uuidv4()}`;
@@ -29,14 +29,14 @@ const value = 'hello; world';
 const requiredProps = { editDescription, cancelDescription, saveDescription };
 
 describe(componentName, () => {
-  it('renders a component InlineEdit', () => {
-    const { container } = render(<InlineEdit {...requiredProps} />);
+  it('renders a component InlineEditV1', () => {
+    const { container } = render(<InlineEditV1 {...requiredProps} />);
     expect(container.firstChild).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
     const { container } = render(
-      <InlineEdit
+      <InlineEditV1
         {...{
           editDescription,
           id,
@@ -53,24 +53,24 @@ describe(componentName, () => {
 
   it('applies className to the containing node', () => {
     const { container } = render(
-      <InlineEdit className={className} {...requiredProps} />
+      <InlineEditV1 className={className} {...requiredProps} />
     );
     expect(container.firstChild).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {
-    render(<InlineEdit data-testid={dataTestId} {...requiredProps} />);
+    render(<InlineEditV1 data-testid={dataTestId} {...requiredProps} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(<InlineEdit ref={ref} {...requiredProps} />);
+    render(<InlineEditV1 ref={ref} {...requiredProps} />);
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', () => {
-    render(<InlineEdit data-testid={dataTestId} {...requiredProps} />);
+    render(<InlineEditV1 data-testid={dataTestId} {...requiredProps} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
@@ -80,7 +80,7 @@ describe(componentName, () => {
   it('can start and stop edit with focus', () => {
     const startingValue = value;
     const { container } = render(
-      <InlineEdit {...requiredProps} value={startingValue} />
+      <InlineEditV1 {...requiredProps} value={startingValue} />
     );
 
     // do after render
@@ -116,7 +116,7 @@ describe(componentName, () => {
   it('can start and stop edit with enter', () => {
     const startingValue = value;
     const { container } = render(
-      <InlineEdit {...requiredProps} value={startingValue} />
+      <InlineEditV1 {...requiredProps} value={startingValue} />
     );
 
     const input = screen.getByRole('textbox');
@@ -137,7 +137,7 @@ describe(componentName, () => {
   it('can start and cancel an edit using buttons', () => {
     const startingValue = value;
     const { container } = render(
-      <InlineEdit {...requiredProps} value={startingValue} />
+      <InlineEditV1 {...requiredProps} value={startingValue} />
     );
     const component = container.querySelector(`.${blockClass}`);
 
@@ -172,7 +172,7 @@ describe(componentName, () => {
   it('can start edit clicking left on the component (left of input)', () => {
     const startingValue = value;
     const { container } = render(
-      <InlineEdit {...requiredProps} value={startingValue} />
+      <InlineEditV1 {...requiredProps} value={startingValue} />
     );
     const input = screen.getByRole('textbox');
     const component = container.querySelector(`.${blockClass}`);
@@ -200,7 +200,7 @@ describe(componentName, () => {
     const handleCancel = fn();
 
     const { container } = render(
-      <InlineEdit
+      <InlineEditV1
         {...requiredProps}
         value={startingValue}
         onChange={handleChange}
@@ -241,7 +241,7 @@ describe(componentName, () => {
     const handleCancel = fn();
 
     const { container } = render(
-      <InlineEdit
+      <InlineEditV1
         {...requiredProps}
         value={startingValue}
         onChange={handleChange}
@@ -283,7 +283,7 @@ describe(componentName, () => {
     const startingValue = value;
 
     const { container } = render(
-      <InlineEdit {...requiredProps} value={startingValue} disabled={true} />
+      <InlineEditV1 {...requiredProps} value={startingValue} disabled={true} />
     );
     const component = container.querySelector(`.${blockClass}`);
 
@@ -297,7 +297,7 @@ describe(componentName, () => {
     const startingValue = value;
 
     const { container } = render(
-      <InlineEdit {...requiredProps} value={startingValue} />
+      <InlineEditV1 {...requiredProps} value={startingValue} />
     );
     const component = container.querySelector(`.${blockClass}`);
 
@@ -322,7 +322,7 @@ describe(componentName, () => {
     const startingValue = value;
     const clipboardString = 'AString';
 
-    render(<InlineEdit {...requiredProps} value={startingValue} />);
+    render(<InlineEditV1 {...requiredProps} value={startingValue} />);
 
     const input = screen.getByRole('textbox');
     userEvent.click(input);
@@ -337,7 +337,11 @@ describe(componentName, () => {
     const invalidText = 'That is not valid';
 
     const { container } = render(
-      <InlineEdit {...requiredProps} invalid={true} invalidText={invalidText} />
+      <InlineEditV1
+        {...requiredProps}
+        invalid={true}
+        invalidText={invalidText}
+      />
     );
     const component = container.querySelector(`.${blockClass}`);
 
@@ -349,7 +353,7 @@ describe(componentName, () => {
   it('can start and stop edit with escape', () => {
     const startingValue = value;
     const { container } = render(
-      <InlineEdit {...requiredProps} value={startingValue} />
+      <InlineEditV1 {...requiredProps} value={startingValue} />
     );
 
     const input = screen.getByRole('textbox');

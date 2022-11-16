@@ -92,7 +92,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
     window.innerWidth = buttonWidth * 2.5;
 
     const myOnClick = jest.fn();
-    const buttonMenuLabel = 'button menu label';
+    const buttonMenuLabel = 'Button menu';
 
     render(
       <ButtonSetWithOverflow

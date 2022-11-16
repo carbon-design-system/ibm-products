@@ -6,18 +6,17 @@
  */
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { ButtonMenu, ButtonMenuItem } from '.';
+import { ButtonMenuItem } from '.';
 import { pkg } from '../../settings';
 
 const blockClass = `${pkg.prefix}--button-menu`;
 
 it('renders component to screen', () => {
-  render(
-    <ButtonMenu iconDescription="some description">
-      <ButtonMenuItem />
-      <ButtonMenuItem />
-      <ButtonMenuItem />
-    </ButtonMenu>
-  );
-  expect(screen.getByRole('button')).toHaveClass(`${blockClass}__trigger`);
+  render(<ButtonMenuItem />);
+  expect(screen.getByRole('button')).toHaveClass(`${blockClass}__item-button`);
+});
+
+it('renders danger menu item', () => {
+  render(<ButtonMenuItem kind="danger" />);
+  expect(screen.getByRole('button')).toHaveClass(`${blockClass}__item--danger`);
 });

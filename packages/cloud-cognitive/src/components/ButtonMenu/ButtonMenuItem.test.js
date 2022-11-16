@@ -20,3 +20,8 @@ it('renders danger menu item', () => {
   render(<ButtonMenuItem kind="danger" />);
   expect(screen.getByRole('button')).toHaveClass(`${blockClass}__item--danger`);
 });
+
+it('renders disabled menu item', () => {
+  render(<ButtonMenuItem disabled />);
+  expect(screen.getByRole('button')).toHaveAttribute('disabled');
+});

@@ -89,7 +89,7 @@ export const DatagridContent = ({ datagridState }) => {
         }
         onFocus={withInlineEdit ? () => handleGridFocus(state, dispatch) : null}
       >
-        <DatagridHead {...datagridState} />
+        {!withVirtualScroll ? <DatagridHead {...datagridState} /> : ''}
         <DatagridBody {...datagridState} rows={rows} />
       </Table>
     );

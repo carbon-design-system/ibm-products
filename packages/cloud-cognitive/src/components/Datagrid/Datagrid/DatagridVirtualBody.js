@@ -9,6 +9,8 @@ import React, { useEffect } from 'react';
 import { VariableSizeList } from 'react-window';
 import { DataTable } from '@carbon/react';
 import { pkg } from '../../../settings';
+import DatagridHead from './DatagridHead';
+import { px } from '@carbon/layout';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -44,7 +46,22 @@ const DatagridVirtualBody = (datagridState) => {
     page,
     handleResize,
     withOverflowRow,
+    tableId
   } = datagridState;
+
+  const gridElement = document.querySelector(`#${tableId}`);
+
+  const syncScroll = (e) => {
+    const virtualBody = e.target;
+    document.querySelector(`.${blockClass}__head-warp`).scrollLeft =
+      virtualBody.scrollLeft;
+    const spacerColumn = document.querySelector(
+      `.${blockClass}__head-warp thead th:last-child`
+    );
+    spacerColumn.style.width = px(
+      32 + (virtualBody.offsetWidth - virtualBody.clientWidth)
+    ); // scrollbar width to header column to fix header alignment
+  };
 
   useEffect(() => {
     handleResize();
@@ -58,7 +75,14 @@ const DatagridVirtualBody = (datagridState) => {
   const visibleRows = (DatagridPagination && page) || rows;
 
   return (
-    <TableBody {...getTableBodyProps()} onScroll={onScroll}>
+    <>
+    <div
+      className={`${blockClass}__head-warp`}
+      style={{ width: gridElement?.clientWidth, overflow: 'hidden' }}
+    >
+      <DatagridHead {...datagridState} />
+    </div>
+    <TableBody {...getTableBodyProps()} onScroll={(e) => syncScroll(e)}>
       <VariableSizeList
         height={virtualHeight || tableHeight}
         itemCount={visibleRows.length}
@@ -72,6 +96,7 @@ const DatagridVirtualBody = (datagridState) => {
         innerRef={innerListRef}
         ref={listRef}
         className={`${blockClass}__virtual-scrollbar`}
+        style={{ width: gridElement?.clientWidth }}
       >
         {({ index, style }) => {
           const row = visibleRows[index];
@@ -79,8 +104,7 @@ const DatagridVirtualBody = (datagridState) => {
           return (
             <div
               style={{
-                ...style,
-                overflow: withOverflowRow ? 'visible' : 'hidden',
+                ...style
               }}
             >
               {row.RowRenderer({ ...datagridState, row })}
@@ -89,6 +113,7 @@ const DatagridVirtualBody = (datagridState) => {
         }}
       </VariableSizeList>
     </TableBody>
+    </>
   );
 };
 

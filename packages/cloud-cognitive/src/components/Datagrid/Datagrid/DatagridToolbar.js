@@ -160,8 +160,14 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 
 const DatagridToolbar = (datagridState) => {
   const { width, ref } = useResizeDetector();
-  const { DatagridActions, DatagridBatchActions, batchActions } = datagridState;
-  const { filterTags } = useContext(FilterContext);
+  const { DatagridActions, DatagridBatchActions, batchActions, state } =
+    datagridState;
+  const { filterTags, onClearFilters } = useContext(FilterContext);
+
+  const renderFilterSummary = () =>
+    state.filters.length > 0 && (
+      <FilterSummary filters={filterTags} clearFilters={onClearFilters} />
+    );
 
   return batchActions && DatagridActions ? (
     <div ref={ref} className={`${blockClass}__table-toolbar`}>
@@ -170,7 +176,7 @@ const DatagridToolbar = (datagridState) => {
         {DatagridBatchActionsToolbar &&
           DatagridBatchActionsToolbar(datagridState, width, ref)}
       </TableToolbar>
-      <FilterSummary filters={filterTags} />
+      {renderFilterSummary()}
     </div>
   ) : DatagridActions ? (
     <div className={`${blockClass}__table-toolbar`}>
@@ -178,7 +184,7 @@ const DatagridToolbar = (datagridState) => {
         {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
-      <FilterSummary filters={filterTags} />
+      {renderFilterSummary()}
     </div>
   ) : null;
 };

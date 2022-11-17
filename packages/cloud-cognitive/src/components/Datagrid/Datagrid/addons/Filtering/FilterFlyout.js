@@ -21,7 +21,8 @@ import {
 } from 'carbon-components-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
+import { useContext } from 'react';
 import { useClickOutside } from '../../../../../global/js/hooks';
 import { pkg } from '../../../../../settings';
 import { ActionSet } from '../../../../ActionSet';
@@ -34,7 +35,9 @@ import {
   NUMBER,
   RADIO,
 } from './constants';
+import { FilterContext } from './FilterProvider';
 import useInitialStateFromFilters from './hooks/useInitialStateFromFilters';
+import { getInitialStateFromFilters } from './utils';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-flyout`;
@@ -54,6 +57,9 @@ const FilterFlyout = ({
   setAllFilters,
   setFilter,
 }) => {
+  /** Context state and methods */
+  const { onClearFilters } = useContext(FilterContext);
+
   /** State */
   const [open, setOpen] = useState(false);
   const [filtersState, setFiltersState] = useInitialStateFromFilters(filters);
@@ -66,19 +72,19 @@ const FilterFlyout = ({
   const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
 
   /** Memos */
-  const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
+  const showActionSet = updateMethod === BATCH;
 
   /** Methods */
   const openFlyout = () => {
     setOpen(true);
     onFlyoutOpen();
   };
-  const closeFlyout = useCallback(() => {
+  const closeFlyout = () => {
     setOpen(false);
     onFlyoutClose();
-  }, [onFlyoutClose]);
+  };
 
-  const apply = useCallback(() => {
+  const apply = () => {
     setAllFilters(filtersObjectArray);
     closeFlyout();
     onApply();
@@ -86,20 +92,36 @@ const FilterFlyout = ({
     // updates the ref so next time the flyout opens we have records of the previous filters
     prevFiltersRef.current = JSON.stringify(filtersState);
     prevFiltersObjectArrayRef.current = JSON.stringify(filtersObjectArray);
-  }, [setAllFilters, filtersObjectArray, closeFlyout, onApply, filtersState]);
+  };
 
-  const cancel = useCallback(() => {
+  const cancel = () => {
     revertToPreviousFilters();
     onCancel();
     closeFlyout();
-  }, [onCancel, closeFlyout, revertToPreviousFilters]);
+  };
+
+  const reset = () => {
+    // Get the initial values for the filters
+    const initialFiltersState = getInitialStateFromFilters(filters);
+    const initialFiltersObjectArray = [];
+
+    // Set the state to the initial values
+    setFiltersState(initialFiltersState);
+    setFiltersObjectArray(initialFiltersObjectArray);
+
+    // Update their respective refs so everything is in sync
+    prevFiltersRef.current = JSON.stringify(initialFiltersState);
+    prevFiltersObjectArrayRef.current = JSON.stringify(
+      initialFiltersObjectArray
+    );
+  };
 
   // If the user decides to cancel or click outside the flyout, it reverts back to the filters that were
   // there when they opened the flyout
-  const revertToPreviousFilters = useCallback(() => {
+  const revertToPreviousFilters = () => {
     setFiltersState(JSON.parse(prevFiltersRef.current));
     setFiltersObjectArray(JSON.parse(prevFiltersObjectArrayRef.current));
-  }, [setFiltersState]);
+  };
 
   const applyFilters = useCallback(
     ({ column, value, type }) => {
@@ -266,7 +288,7 @@ const FilterFlyout = ({
     [filters, renderFilter]
   );
 
-  const renderActionSet = useCallback(() => {
+  const renderActionSet = () => {
     return (
       showActionSet && (
         <ActionSet
@@ -291,7 +313,7 @@ const FilterFlyout = ({
         />
       )
     );
-  }, [showActionSet, apply, primaryActionLabel, secondaryActionLabel, cancel]);
+  };
 
   return (
     <div className={`${componentClass}__container`}>

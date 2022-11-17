@@ -1,34 +1,15 @@
+/*
+ * Licensed Materials - Property of IBM
+ * 5724-Q36
+ * (c) Copyright IBM Corp. 2022
+ * US Government Users Restricted Rights - Use, duplication or disclosure
+ * restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
 import { useState } from 'react';
-
-const addFiltersToState = (filters) => {
-  const initialFilterState = {};
-
-  filters.forEach(({ type, column, props }) => {
-    if (type === 'checkbox') {
-      initialFilterState[column] = props.Checkbox.map(
-        ({ id, labelText, value }) => ({
-          id,
-          labelText,
-          value,
-          selected: false,
-        })
-      );
-    } else if (type === 'date') {
-      initialFilterState[column] = [undefined, undefined];
-    } else if (type === 'number') {
-      initialFilterState[column] = '';
-    } else if (type === 'radio') {
-      initialFilterState[column] = '';
-    } else if (type === 'dropdown') {
-      initialFilterState[column] = '';
-    }
-  });
-
-  return initialFilterState;
-};
+import { getInitialStateFromFilters } from '../utils';
 
 const useInitialStateFromFilters = (filters) => {
-  const [state, setState] = useState(addFiltersToState(filters));
+  const [state, setState] = useState(getInitialStateFromFilters(filters));
 
   return [state, setState];
 };

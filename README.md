@@ -10,14 +10,14 @@
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[all-contributors-badge]: https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square
+[all-contributors-badge]: https://img.shields.io/badge/all_contributors-15-orange.svg
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 
 [![All Contributors][all-contributors-badge]](#contributors-)
 [![Licensed under the Apache License, Version 2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/LICENSE)
 [![Build status](https://github.com/carbon-design-system/ibm-cloud-cognitive/workflows/ci/badge.svg)](https://github.com/carbon-design-system/ibm-cloud-cognitive/actions?query=workflow%3Aci)
-[![Netlify status](https://img.shields.io/netlify/19d81e71-7987-4124-8a3a-36e051486e6b)](https://app.netlify.com/sites/ibm-cloud-cognitive/deploys)
+[![Netlify status](https://img.shields.io/netlify/f850c678-e8be-43c0-aa95-b2b9cca8ac21)](https://app.netlify.com/sites/carbon-for-ibm-products/deploys)
 [![GitHub Lerna version](https://img.shields.io/github/lerna-json/v/carbon-design-system/ibm-cloud-cognitive)](https://lerna.js.org)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)
 

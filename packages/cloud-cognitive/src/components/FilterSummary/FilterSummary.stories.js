@@ -1,4 +1,3 @@
-//cspell: disable
 /**
  * Copyright IBM Corp. 2022, 2022
  *
@@ -23,27 +22,21 @@ export default {
 // eslint-disable-next-line react/prop-types
 export const Default = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [filters, setFilters] = useState({
-    name: 'Thor',
-    location: 'Asgard',
-    weapon: 'Mjölnir',
-  });
+  const [filters, setFilters] = useState([
+    { key: 'name', value: 'Thor' },
+    { key: 'location', value: 'Asgard' },
+    //cspell: disable
+    { key: 'weapon', value: 'Mjölnir' },
+    //cspell: enable
+  ]);
 
-  const onTagClose = (key) => {
-    const newFilters = { ...filters };
-    delete newFilters[key];
-    setFilters(newFilters);
-  };
-
-  const clearFilters = () => setFilters({});
+  const clearFilters = () => setFilters([]);
 
   return (
     <FilterSummary
       clearFiltersText="Clear filters"
       filters={filters}
-      onClose={onTagClose}
       clearFilters={clearFilters}
-      tagSize="md"
     />
   );
 };
@@ -51,29 +44,24 @@ export const Default = () => {
 // eslint-disable-next-line react/prop-types
 export const WithManyTags = () => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [filters, setFilters] = useState({
-    Project: 'Goldmember',
-    Owner: 'Austin Powers',
-    'Middle name': 'Danger',
-    Spy: 'True',
-    Title: 'International man of mystery',
-  });
 
-  const onTagClose = (key) => {
-    const newFilters = { ...filters };
-    delete newFilters[key];
-    setFilters(newFilters);
-  };
+  const [filters, setFilters] = useState([
+    //cspell: disable
+    { key: 'project', value: 'Goldmember' },
+    //cspell: enable
+    { key: 'owner', value: 'Austin Powers' },
+    { key: 'middle name', value: 'Danger' },
+    { key: 'spy', value: true },
+    { key: 'title', value: 'International man of mystery' },
+  ]);
 
-  const clearFilters = () => setFilters({});
+  const clearFilters = () => setFilters([]);
 
   return (
     <FilterSummary
       clearFiltersText="Clear filters"
       filters={filters}
-      onClose={onTagClose}
       clearFilters={clearFilters}
-      tagSize="md"
     />
   );
 };

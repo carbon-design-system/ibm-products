@@ -1,3 +1,9 @@
+/**
+ * Copyright IBM Corp. 2022, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import { Button } from 'carbon-components-react';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -13,13 +19,13 @@ let FilterSummary = React.forwardRef(
       className = '',
       clearFiltersText = 'Clear filters',
       clearFilters = () => {},
-      filters = {},
+      filters = [],
     },
     ref
   ) => {
-    const tagFilters = Object.keys(filters).map((filterType) => ({
+    const tagFilters = filters.map(({ key, value }) => ({
       type: 'gray',
-      label: `${filterType}: ${filters[filterType]}`,
+      label: `${key}: ${value}`,
     }));
 
     return (
@@ -39,13 +45,14 @@ let FilterSummary = React.forwardRef(
   }
 );
 
-FilterSummary.displayName = 'FilterSummary';
+const componentName = 'FilterSummary';
+FilterSummary.displayName = componentName;
 
 FilterSummary.propTypes = {
   className: PropTypes.string,
   clearFilters: PropTypes.func.isRequired,
   clearFiltersText: PropTypes.string,
-  filters: PropTypes.object.isRequired,
+  filters: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default FilterSummary;

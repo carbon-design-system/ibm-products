@@ -14,8 +14,9 @@ import {
 } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 
-import { InlineEdit } from '.';
-import mdx from './InlineEdit.mdx';
+import { InlineEdit } from '../InlineEdit/InlineEdit';
+import { InlineEditV1 } from '.';
+import mdx from './InlineEditV1.mdx';
 
 import styles from './_storybook-styles.scss';
 
@@ -55,8 +56,8 @@ const buttonTooltipPositionOptions = {
 };
 
 export default {
-  title: getStoryTitle(InlineEdit.displayName),
-  component: InlineEdit,
+  title: getStoryTitle(InlineEditV1.displayName),
+  component: InlineEditV1,
   argTypes: {
     buttonTooltipAlignment: {
       control: {
@@ -211,6 +212,7 @@ const Template = ({
           saveDescription,
           value,
         }}
+        v1
       />
     </div>
   );

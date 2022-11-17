@@ -16,6 +16,9 @@ import { useResizeDetector } from 'react-resize-detector';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
+import { FilterSummary } from '../../FilterSummary';
+import { useContext } from 'react';
+import { FilterContext } from './addons/Filtering/FilterProvider';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -158,6 +161,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 const DatagridToolbar = (datagridState) => {
   const { width, ref } = useResizeDetector();
   const { DatagridActions, DatagridBatchActions, batchActions } = datagridState;
+  const { filterTags } = useContext(FilterContext);
 
   return batchActions && DatagridActions ? (
     <div ref={ref} className={`${blockClass}__table-toolbar`}>
@@ -166,6 +170,7 @@ const DatagridToolbar = (datagridState) => {
         {DatagridBatchActionsToolbar &&
           DatagridBatchActionsToolbar(datagridState, width, ref)}
       </TableToolbar>
+      <FilterSummary filters={filterTags} />
     </div>
   ) : DatagridActions ? (
     <div className={`${blockClass}__table-toolbar`}>
@@ -173,6 +178,7 @@ const DatagridToolbar = (datagridState) => {
         {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
+      <FilterSummary filters={filterTags} />
     </div>
   ) : null;
 };

@@ -27,12 +27,12 @@ import { pkg } from '../../../../../settings';
 import { ActionSet } from '../../../../ActionSet';
 import {
   BATCH,
-  INSTANT,
-  DATE,
-  NUMBER,
   CHECKBOX,
-  RADIO,
+  DATE,
   DROPDOWN,
+  INSTANT,
+  NUMBER,
+  RADIO,
 } from './constants';
 import useInitialStateFromFilters from './hooks/useInitialStateFromFilters';
 
@@ -57,11 +57,11 @@ const FilterFlyout = ({
   /** State */
   const [open, setOpen] = useState(false);
   const [filtersState, setFiltersState] = useInitialStateFromFilters(filters);
+  const [filtersObjectArray, setFiltersObjectArray] = useState([]);
 
   /** Refs */
   const filterFlyoutRef = useRef(null);
   // When using batch actions we have to store the filters to then apply them later
-  const [filtersObjectArray, setFiltersObjectArray] = useState([]);
   const prevFiltersRef = useRef(JSON.stringify(filtersState));
   const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
 
@@ -119,7 +119,7 @@ const FilterFlyout = ({
         if (filter) {
           filter.value = value;
         } else {
-          filtersObjectArrayCopy.push({ id: column, value });
+          filtersObjectArrayCopy.push({ id: column, value, type });
         }
 
         setFiltersObjectArray(filtersObjectArrayCopy);
@@ -250,6 +250,7 @@ const FilterFlyout = ({
               applyFilters({
                 column,
                 value: selectedItem,
+                type,
               });
             }}
           />

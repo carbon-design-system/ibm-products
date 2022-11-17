@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.36.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.35.2...@carbon/ibm-products@1.36.0) (2022-11-15)
+
+### Bug Fixes
+
+- **ActionSet:** allow for non expressive buttons
+  ([#2447](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2447))
+  ([e297a36](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e297a366df420c87905463bf61678c248d16c5b7))
+- add select filter fix
+  ([#2455](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2455))
+  ([19ac075](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/19ac075aa88a6f3f0a964f670ca4168dba0afb47))
+- **Datagrid:**
+  [#2291](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2291)
+  extend last nested row border
+  ([#2443](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2443))
+  ([a8311a8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a8311a8f0c4e547d2ad06f80c8c2f8071ca569f4))
+
+### Features
+
+- **OptionsTile:** add onChange prop and useContrallableState hook
+  ([#2456](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2456))
+  ([ab2c5bc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ab2c5bc9958557c6a4541d76cf8eb07d230cf4da))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.35.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.35.1...@carbon/ibm-products@1.35.2) (2022-11-08)
 
 ### Bug Fixes

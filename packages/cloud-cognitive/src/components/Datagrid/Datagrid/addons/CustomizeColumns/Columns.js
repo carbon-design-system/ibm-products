@@ -75,8 +75,9 @@ const Columns = ({
           }}
           tabIndex={0}
           onFocus={(e) => {
+            //console.log(e.target, e.currentTarget)
             if (e.target === e.currentTarget) {
-              setFocusIndex(0);
+              //setFocusIndex(0);
             }
           }}
         >

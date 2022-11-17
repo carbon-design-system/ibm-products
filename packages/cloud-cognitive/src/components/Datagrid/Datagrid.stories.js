@@ -677,7 +677,6 @@ export const LeftPanel = () => {
     },
   ];
 
-
   const datagridState = useDatagrid({
     filterProps: {
       variation: 'panel',

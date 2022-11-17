@@ -10,18 +10,25 @@
 
 $action-set-height: rem(64px);
 
-.#{$block-class}-filterLeftPanel__container {
+.#{$block-class}-filter-left-panel__container {
   position: relative;
   width: 388px;
   background-color: $ui-01;
+  border-right: 1px $ui-03 solid;
 }
 
-.#{$block-class}-filterLeftPanel {
+.#{$block-class}-filter-left-panel__inner-container {
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.#{$block-class}-filter-left-panel {
     display: none;
     padding: 2px 14px;
 
     &--open {
-        display: grid;
+        display: flex;
+        flex-direction: column;
     }
 
     &__title {
@@ -30,9 +37,13 @@ $action-set-height: rem(64px);
         padding: 12px;
     }
 
-    &__titleAndClose {
+    &__heading {
         display: flex;
         justify-content: space-between;
+    }
+
+    &__search {
+        padding-bottom: 12px;
     }
 
     &__category-title {
@@ -44,4 +55,14 @@ $action-set-height: rem(64px);
     &__category {
         padding-bottom: 24px;
     }
+
+    // button {
+    //     padding-bottom: 18px;
+    // }
+}
+
+button {
+    .#{$block-class}-filter-left-panel__action-set {
+        margin-bottom: 12px;
+    } 
 }

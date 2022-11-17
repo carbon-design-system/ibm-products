@@ -17,7 +17,6 @@ import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
 import { FilterSummary } from '../../FilterSummary';
-import { useContext } from 'react';
 import { FilterContext } from './addons/Filtering/FilterProvider';
 import { CLEAR_FILTERS } from './addons/Filtering/constants';
 
@@ -160,7 +159,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 };
 
 const DatagridToolbar = (datagridState) => {
-  // const { applyFilters } = useContext(FilterContext);
+  const { applyFilters } = useContext(FilterContext);
   const [filterLeftPanelOpen, setFilterLeftPanelOpen] = useState(false);
   const { width, ref } = useResizeDetector();
   const { DatagridActions, DatagridBatchActions, batchActions, state } =
@@ -177,7 +176,7 @@ const DatagridToolbar = (datagridState) => {
 
   const datagridStateWithFilterProps = {
     ...datagridState,
-    // applyFilters,
+    applyFilters,
     filterLeftPanelOpen,
     setFilterLeftPanelOpen,
   };

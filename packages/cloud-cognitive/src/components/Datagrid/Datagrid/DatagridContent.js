@@ -12,7 +12,7 @@ import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 import { useClickOutside } from '../../../global/js/hooks';
 import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
-import {FilterLeftPanel} from './addons/Filtering';
+import FilterLeftPanel from './addons/Filtering/FilterLeftPanel';
 
 const { TableContainer, Table } = DataTable;
 
@@ -40,7 +40,7 @@ export const DatagridContent = ({ datagridState }) => {
     totalColumnsWidth,
   } = datagridState;
 
-  console.log({filterProps})
+  console.log(datagridState);
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
   const { gridActive, editId } = state;
@@ -148,7 +148,15 @@ export const DatagridContent = ({ datagridState }) => {
       >
         <DatagridToolbar {...datagridState} />
         <div className={`${blockClass}__table-container`} ref={gridAreaRef}>
-          {filterProps.variation === 'panel' && <FilterLeftPanel title="Filter" filterSections={filterProps.sections} updateMethod="batch" open={true}/>}
+          {filterProps?.variation === 'panel' && (
+            <FilterLeftPanel
+              title="Filter"
+              filterSections={filterProps.sections}
+              updateMethod="batch"
+              open={true}
+              tableID={tableId}
+            />
+          )}
           {withInlineEdit ? (
             <div ref={multiKeyTrackingRef}>{renderTable()}</div>
           ) : (
@@ -182,6 +190,7 @@ DatagridContent.propTypes = {
     isFetching: PropTypes.bool,
     leftPanel: PropTypes.object,
     fullHeightDatagrid: PropTypes.bool,
+    filterProps: PropTypes.object,
     variableRowHeight: PropTypes.bool,
     useDenseHeader: PropTypes.bool,
     withInlineEdit: PropTypes.bool,
@@ -194,10 +203,3 @@ DatagridContent.propTypes = {
     totalColumnsWidth: PropTypes.number,
   }),
 };
-
-
-// {filterProps.variation === 'panel' && <FilterLeftPanel 
-// header="Filter"
-// filterSections={filterProps.sections}
-// updateMethod="batch"
-// open={true} />}

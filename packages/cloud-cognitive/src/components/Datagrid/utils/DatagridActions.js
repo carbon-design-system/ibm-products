@@ -57,13 +57,14 @@ export const DatagridActions = (datagridState) => {
     );
     
   const renderFilterPanelButton = () =>
-    filterProps.variation === 'panel' &&  
+    filterProps?.variation === 'panel' &&  
     <Button
       kind="ghost"
       hasIconOnly
       tooltipPosition="bottom"
       renderIcon={Filter16}
       iconDescription={'Open filters'}
+      className="filter-left-panel__button"
     /> 
 
   return (

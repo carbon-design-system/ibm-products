@@ -88,7 +88,6 @@ export let ButtonMenu = React.forwardRef(
             renderIcon ? renderIcon : open ? ChevronUp16 : ChevronDown16
           }
           onClick={() => {
-            console.log('clicking');
             onMenuButtonClick?.();
           }}
           className={cx(`${blockClass}__trigger`)}

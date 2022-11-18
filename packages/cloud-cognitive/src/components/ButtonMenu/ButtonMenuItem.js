@@ -26,8 +26,6 @@ const blockClass = `${pkg.prefix}--button-menu`;
  */
 export let ButtonMenuItem = React.forwardRef(
   ({ className, kind, ...rest }, ref) => {
-    let props = { ...rest };
-    console.log(props);
     return (
       <Button
         className={cx(

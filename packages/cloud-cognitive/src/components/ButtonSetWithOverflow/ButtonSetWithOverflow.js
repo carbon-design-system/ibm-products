@@ -14,7 +14,6 @@ import { ButtonSet, Button } from 'carbon-components-react';
 import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
 
 import { pkg, carbon } from '../../settings';
-import { prepareProps } from '../../global/js/utils/props-helper';
 const blockClass = `${pkg.prefix}--button-set-with-overflow`;
 const componentName = 'ButtonSetWithOverflow';
 
@@ -109,9 +108,33 @@ export const ButtonSetWithOverflow = ({
     );
   });
   const AButtonMenu = React.forwardRef(({ buttons, ...rest }, ref) => {
+    const [isOpen, setIsOpen] = useState(false);
     return (
-      <ButtonMenu {...rest} ref={ref} label={buttonSetOverflowLabel}>
-        {buttons
+      <ButtonMenu
+        label={buttonSetOverflowLabel}
+        onClose={() => setIsOpen(false)}
+        onMenuButtonClick={() => {
+          setIsOpen((prev) => !prev);
+        }}
+        open={isOpen}
+        {...rest}
+        ref={ref}
+      >
+        {buttons.map(({ label, key, kind }) => {
+          return (
+            <ButtonMenuItem
+              key={key}
+              onClick={() => {
+                setIsOpen(false);
+              }}
+              kind={kind == 'danger' ? 'danger' : null}
+            >
+              {label}
+            </ButtonMenuItem>
+          );
+        })}
+
+        {/* {buttons
           .map(({ label, key, kind, ...other }) => (
             <ButtonMenuItem
               key={key && `button-menu-${key}`}
@@ -120,7 +143,7 @@ export const ButtonSetWithOverflow = ({
               {...prepareProps(other, ['iconDescription', 'renderIcon'])}
             />
           ))
-          .reverse()}
+          .reverse()} */}
       </ButtonMenu>
     );
   });

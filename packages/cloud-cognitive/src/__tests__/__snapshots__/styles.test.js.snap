@@ -1966,7 +1966,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--http-errors .c4p--http-errors__title {
   font-size: var(--cds-productive-heading-05-font-size, 2rem);
-  font-weight: var(--cds-productive-heading-05-font-weight, 300);
+  font-weight: var(--cds-productive-heading-05-font-weight, 400);
   line-height: var(--cds-productive-heading-05-line-height, 1.25);
   letter-spacing: var(--cds-productive-heading-05-letter-spacing, 0);
   margin-bottom: var(--cds-spacing-04, 0.75rem);
@@ -2586,7 +2586,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
-  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
   --cds-productive-heading-06-font-size: 2.625rem;
@@ -2614,7 +2614,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
-  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-font-weight: 400;
   --cds-expressive-heading-05-line-height: 1.25;
   --cds-expressive-heading-05-letter-spacing: 0;
   --cds-expressive-heading-06-font-size: 2rem;
@@ -2692,7 +2692,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-heading-04-line-height: 1.28572;
   --cds-heading-04-letter-spacing: 0;
   --cds-heading-05-font-size: 2rem;
-  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
   --cds-heading-06-font-size: 2.625rem;
@@ -2712,7 +2712,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-fluid-heading-04-line-height: 1.28572;
   --cds-fluid-heading-04-letter-spacing: 0;
   --cds-fluid-heading-05-font-size: 2rem;
-  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-font-weight: 400;
   --cds-fluid-heading-05-line-height: 1.25;
   --cds-fluid-heading-05-letter-spacing: 0;
   --cds-fluid-heading-06-font-size: 2rem;
@@ -4952,7 +4952,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
-  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
   --cds-productive-heading-06-font-size: 2.625rem;
@@ -4980,7 +4980,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
-  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-font-weight: 400;
   --cds-expressive-heading-05-line-height: 1.25;
   --cds-expressive-heading-05-letter-spacing: 0;
   --cds-expressive-heading-06-font-size: 2rem;
@@ -5058,7 +5058,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-heading-04-line-height: 1.28572;
   --cds-heading-04-letter-spacing: 0;
   --cds-heading-05-font-size: 2rem;
-  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
   --cds-heading-06-font-size: 2.625rem;
@@ -5078,7 +5078,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-fluid-heading-04-line-height: 1.28572;
   --cds-fluid-heading-04-letter-spacing: 0;
   --cds-fluid-heading-05-font-size: 2rem;
-  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-font-weight: 400;
   --cds-fluid-heading-05-line-height: 1.25;
   --cds-fluid-heading-05-letter-spacing: 0;
   --cds-fluid-heading-06-font-size: 2rem;
@@ -5397,7 +5397,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
-  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
   --cds-productive-heading-06-font-size: 2.625rem;
@@ -5425,7 +5425,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
-  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-font-weight: 400;
   --cds-expressive-heading-05-line-height: 1.25;
   --cds-expressive-heading-05-letter-spacing: 0;
   --cds-expressive-heading-06-font-size: 2rem;
@@ -5503,7 +5503,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-heading-04-line-height: 1.28572;
   --cds-heading-04-letter-spacing: 0;
   --cds-heading-05-font-size: 2rem;
-  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
   --cds-heading-06-font-size: 2.625rem;
@@ -5523,7 +5523,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-fluid-heading-04-line-height: 1.28572;
   --cds-fluid-heading-04-letter-spacing: 0;
   --cds-fluid-heading-05-font-size: 2rem;
-  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-font-weight: 400;
   --cds-fluid-heading-05-line-height: 1.25;
   --cds-fluid-heading-05-letter-spacing: 0;
   --cds-fluid-heading-06-font-size: 2rem;

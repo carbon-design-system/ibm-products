@@ -51,7 +51,7 @@ export const DatagridActions = (datagridState) => {
   );
 
   const renderFilterFlyout = () =>
-    filterProps.variation === 'flyout' && (
+    filterProps?.variation === 'flyout' && (
       <FilterFlyout {...getFilterFlyoutProps()} />
     );
 

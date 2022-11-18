@@ -162,11 +162,14 @@ const DatagridToolbar = (datagridState) => {
   const { width, ref } = useResizeDetector();
   const { DatagridActions, DatagridBatchActions, batchActions, state } =
     datagridState;
-  const { filterTags, onClearFilters } = useContext(FilterContext);
+  const { filterTags, EventEmitter } = useContext(FilterContext);
 
   const renderFilterSummary = () =>
     state.filters.length > 0 && (
-      <FilterSummary filters={filterTags} clearFilters={onClearFilters} />
+      <FilterSummary
+        filters={filterTags}
+        clearFilters={() => EventEmitter.dispatch('clearFilters')}
+      />
     );
 
   return batchActions && DatagridActions ? (

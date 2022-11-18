@@ -22,6 +22,7 @@ import {
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useCallback, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { useContext } from 'react';
 import { useClickOutside } from '../../../../../global/js/hooks';
 import { pkg } from '../../../../../settings';
@@ -58,7 +59,7 @@ const FilterFlyout = ({
   setFilter,
 }) => {
   /** Context state and methods */
-  const { onClearFilters } = useContext(FilterContext);
+  const { EventEmitter } = useContext(FilterContext);
 
   /** State */
   const [open, setOpen] = useState(false);
@@ -108,6 +109,7 @@ const FilterFlyout = ({
     // Set the state to the initial values
     setFiltersState(initialFiltersState);
     setFiltersObjectArray(initialFiltersObjectArray);
+    setAllFilters([]);
 
     // Update their respective refs so everything is in sync
     prevFiltersRef.current = JSON.stringify(initialFiltersState);
@@ -165,6 +167,11 @@ const FilterFlyout = ({
     }
 
     cancel();
+  });
+
+  useEffect(function subscribeToEmitter() {
+    // This event is emitted from the DatagridToolbar component when clearFilters is clicked in FilterSummary
+    EventEmitter.subscribe('clearFilters', reset);
   });
 
   /** Render the individual filter component */

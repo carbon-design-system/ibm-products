@@ -10,6 +10,42 @@ import { DATE, DROPDOWN, NUMBER, RADIO, CHECKBOX } from './constants';
 
 export const FilterContext = createContext();
 
+// class EventEmitter {
+//   #events = {};
+
+//   dispatch(event, data) {
+//     if (!this.#events[event]) {
+//       return;
+//     }
+//     this.#events[event].forEach((callback) => callback(data));
+//   }
+
+//   subscribe(event, callback) {
+//     if (!this.#events[event]) {
+//       this.#events[event] = [];
+//     } else {
+//       this.#events[event].push(callback);
+//     }
+//   }
+// }
+
+const EventEmitter = {
+  events: {},
+  dispatch: function (event, data) {
+    if (!this.events[event]) {
+      return;
+    }
+    this.events[event].forEach((callback) => callback(data));
+  },
+  subscribe: function (event, callback) {
+    if (!this.events[event]) {
+      this.events[event] = [];
+    } else {
+      this.events[event].push(callback);
+    }
+  },
+};
+
 const prepareFiltersForTags = (filters) => {
   const tags = [];
 
@@ -39,7 +75,7 @@ export const FilterProvider = ({ children, filters }) => {
 
   const onClearFilters = (callback) => callback();
 
-  const value = { filterTags, onClearFilters };
+  const value = { filterTags, onClearFilters, EventEmitter };
 
   return (
     <FilterContext.Provider value={value}>{children}</FilterContext.Provider>

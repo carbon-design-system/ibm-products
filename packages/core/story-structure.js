@@ -136,6 +136,7 @@ const s = [
           'c/CancelableTextEdit',
           'c/ComboButton',
           'c/ExampleComponent',
+          'c/FilterSummary',
           'c/TearsheetShell',
         ],
       },

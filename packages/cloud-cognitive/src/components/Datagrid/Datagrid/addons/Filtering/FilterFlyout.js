@@ -184,6 +184,7 @@ const FilterFlyout = ({
             onChange={(value) => {
               setFiltersState({ ...filtersState, [column]: value });
               applyFilters({ column, value, type });
+              components.DatePicker.onChange?.(value);
             }}
             value={filtersState[column]}
             datePickerType="range"
@@ -213,6 +214,7 @@ const FilterFlyout = ({
                 [column]: event.target.value,
               });
               applyFilters({ column, value: event.target.value, type });
+              components.NumberInput.onChange?.(event);
             }}
             value={filtersState[column]}
           />
@@ -236,6 +238,7 @@ const FilterFlyout = ({
                     value: [...filtersState[column]],
                     type,
                   });
+                  components.option.onChange?.(isSelected);
                 }}
                 checked={option.selected}
               />
@@ -255,6 +258,7 @@ const FilterFlyout = ({
                   value: selected,
                   type,
                 });
+                components.RadioButtonGroup.onChange?.(selected);
               }}
             >
               {components.RadioButton.map((radio) => (
@@ -281,6 +285,7 @@ const FilterFlyout = ({
                 value: selectedItem,
                 type,
               });
+              components.Dropdown.onChange?.(selectedItem);
             }}
           />
         );

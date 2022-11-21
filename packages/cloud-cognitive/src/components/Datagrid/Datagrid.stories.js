@@ -498,6 +498,9 @@ export const Filtering = () => {
     {
       columns,
       data,
+      emptyStateTitle: 'No filters match',
+      emptyStateDescription:
+        'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
       filterProps: {
         variation: 'flyout',
         updateMethod: 'batch',
@@ -505,8 +508,8 @@ export const Filtering = () => {
         secondaryActionLabel: 'Cancel',
         flyoutIconDescription: 'Open filters',
         shouldClickOutsideToClose: false,
-        onFlyoutOpen: () => console.log('onFlyoutOpen'),
-        onFlyoutClose: () => console.log('onFlyoutClose'),
+        onFlyoutOpen: action('onFlyoutOpen'),
+        onFlyoutClose: action('onFlyoutClose'),
         filters,
       },
       DatagridActions,

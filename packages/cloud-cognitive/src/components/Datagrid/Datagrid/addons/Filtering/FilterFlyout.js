@@ -6,7 +6,6 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
-
 import { Filter16 } from '@carbon/icons-react';
 import {
   Button,
@@ -30,6 +29,7 @@ import { ActionSet } from '../../../../ActionSet';
 import {
   BATCH,
   CHECKBOX,
+  CLEAR_FILTERS,
   DATE,
   DROPDOWN,
   INSTANT,
@@ -171,7 +171,7 @@ const FilterFlyout = ({
 
   useEffect(function subscribeToEmitter() {
     // This event is emitted from the DatagridToolbar component when clearFilters is clicked in FilterSummary
-    EventEmitter.subscribe('clearFilters', reset);
+    EventEmitter.subscribe(CLEAR_FILTERS, reset);
   });
 
   /** Render the individual filter component */

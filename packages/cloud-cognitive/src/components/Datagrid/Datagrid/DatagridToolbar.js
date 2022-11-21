@@ -19,6 +19,7 @@ import cx from 'classnames';
 import { FilterSummary } from '../../FilterSummary';
 import { useContext } from 'react';
 import { FilterContext } from './addons/Filtering/FilterProvider';
+import { CLEAR_FILTERS } from './addons/Filtering/constants';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -168,7 +169,7 @@ const DatagridToolbar = (datagridState) => {
     state.filters.length > 0 && (
       <FilterSummary
         filters={filterTags}
-        clearFilters={() => EventEmitter.dispatch('clearFilters')}
+        clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
       />
     );
 

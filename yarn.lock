@@ -7532,9 +7532,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accessibility-checker@npm:^3.1.41":
-  version: 3.1.41
-  resolution: "accessibility-checker@npm:3.1.41"
+"accessibility-checker@npm:3.1.40":
+  version: 3.1.40
+  resolution: "accessibility-checker@npm:3.1.40"
   dependencies:
     axios: ^0.27.2
     chromedriver: "*"
@@ -7544,7 +7544,7 @@ __metadata:
     uuid: ^8.3.2
   bin:
     achecker: bin/achecker.js
-  checksum: bade3e392caada7d183d3438f92c256394d83d2e14df6900e8265c9029bd183796dbbdf10dbe42ae6e3eb14dc0ec5e4c27c05b1bcf75b5f96c9e8f31fa19daf7
+  checksum: b5ec3099310a147d1552b2ea138fb2b16b8f995db6193fc5a90d78832520b2ed42354d6afe28111ae4da5a5b9f2e0ac5c67d951d3a62eff42bae12f88e2a48cb
   languageName: node
   linkType: hard
 
@@ -16888,7 +16888,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.20.2
     "@testing-library/jest-dom": ^5.16.5
-    accessibility-checker: ^3.1.41
+    accessibility-checker: 3.1.40
     axe-core: ^4.5.2
     babel-jest: ^29.3.1
     babel-preset-ibm-cloud-cognitive: ^0.14.23

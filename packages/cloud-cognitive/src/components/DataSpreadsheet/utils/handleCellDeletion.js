@@ -9,12 +9,22 @@ import { deepCloneObject } from '../../../global/js/utils/deepCloneObject';
 import { rangeWithCallback } from '../../../global/js/utils/rangeWithCallback';
 
 export const handleCellDeletion = ({
+  activeCellCoordinates,
   selectionAreas,
   currentMatcher,
   rows,
   setActiveCellContent,
   updateData,
 }) => {
+  // This means that the delete key has been pressed when the active cell is in a header,
+  // not within the spreadsheet body. To delete an entire row/column, it must first be
+  // selected, and then can be deleted.
+  if (
+    activeCellCoordinates?.column === 'header' ||
+    activeCellCoordinates?.row === 'header'
+  ) {
+    return;
+  }
   const selectionAreaClone = deepCloneObject(selectionAreas);
   const indexOfCurrentSelectionArea = selectionAreaClone.findIndex(
     (item) => item.matcher === currentMatcher

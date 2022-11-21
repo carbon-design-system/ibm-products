@@ -299,7 +299,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion: no-preference) {
   .c4p--cascade__element,
-.c4p--cascade__col {
+  .c4p--cascade__col {
     animation: 240ms cubic-bezier(0.2, 0, 0.38, 0.9) 0s 1 fade;
     animation-fill-mode: forwards;
     opacity: 0;
@@ -473,9 +473,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 @media (prefers-reduced-motion) {
   .c4p--create-influencer__side-nav-opening,
-.c4p--create-influencer__progress-indicator-opening,
-.c4p--create-influencer__side-nav-closing,
-.c4p--create-influencer__progress-indicator-closing {
+  .c4p--create-influencer__progress-indicator-opening,
+  .c4p--create-influencer__side-nav-closing,
+  .c4p--create-influencer__progress-indicator-closing {
     animation: none;
     opacity: 1;
   }
@@ -2933,7 +2933,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion: reduce) {
   .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-more-button .bx--btn__icon,
-.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button .bx--btn__icon {
+  .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button .bx--btn__icon {
     transition: none;
   }
 }
@@ -3095,7 +3095,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     display: none;
   }
   .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-back,
-.c4p--breadcrumb-with-overflow .bx--breadcrumb-item:last-child {
+  .c4p--breadcrumb-with-overflow .bx--breadcrumb-item:last-child {
     display: inline-flex;
     vertical-align: middle;
   }
@@ -4005,7 +4005,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4016,7 +4016,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4027,7 +4027,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4038,7 +4038,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4049,7 +4049,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4060,7 +4060,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4071,7 +4071,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4082,7 +4082,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4093,7 +4093,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4104,7 +4104,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4115,7 +4115,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4126,7 +4126,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4137,7 +4137,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4148,7 +4148,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4159,7 +4159,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4170,7 +4170,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4182,7 +4182,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion: reduce) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4194,7 +4194,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion: reduce) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4217,7 +4217,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4228,7 +4228,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4239,7 +4239,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4250,7 +4250,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4261,7 +4261,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4272,7 +4272,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4283,7 +4283,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4294,7 +4294,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4305,7 +4305,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4316,7 +4316,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4327,7 +4327,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4338,7 +4338,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4349,7 +4349,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4360,7 +4360,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4371,7 +4371,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4382,7 +4382,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4393,7 +4393,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4404,7 +4404,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4416,7 +4416,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion: reduce) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4428,7 +4428,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion: reduce) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4451,7 +4451,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4462,7 +4462,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }

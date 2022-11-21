@@ -48,7 +48,7 @@ const renderComboButton = (overflowMenuItemCount = 0) => {
 
 const getComboBox = () => screen.getByTestId(COMBO_BUTTON_TESTID);
 const getOverflowMenuButton = () =>
-  screen.getByLabelText('open and close list of options');
+  screen.getByLabelText('Open and close list of options');
 
 const clickComboBox = (overflowMenuButton) => {
   userEvent.click(overflowMenuButton);

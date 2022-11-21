@@ -226,7 +226,7 @@ exports[`Styles Bundle 1`] = `
   --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
-  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
   --cds-productive-heading-06-font-size: 2.625rem;
@@ -254,7 +254,7 @@ exports[`Styles Bundle 1`] = `
   --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
-  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-font-weight: 400;
   --cds-expressive-heading-05-line-height: 1.25;
   --cds-expressive-heading-05-letter-spacing: 0;
   --cds-expressive-heading-06-font-size: 2rem;
@@ -332,7 +332,7 @@ exports[`Styles Bundle 1`] = `
   --cds-heading-04-line-height: 1.28572;
   --cds-heading-04-letter-spacing: 0;
   --cds-heading-05-font-size: 2rem;
-  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
   --cds-heading-06-font-size: 2.625rem;
@@ -352,7 +352,7 @@ exports[`Styles Bundle 1`] = `
   --cds-fluid-heading-04-line-height: 1.28572;
   --cds-fluid-heading-04-letter-spacing: 0;
   --cds-fluid-heading-05-font-size: 2rem;
-  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-font-weight: 400;
   --cds-fluid-heading-05-line-height: 1.25;
   --cds-fluid-heading-05-letter-spacing: 0;
   --cds-fluid-heading-06-font-size: 2rem;
@@ -796,7 +796,7 @@ exports[`Styles Bundle 1`] = `
   --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
-  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
   --cds-productive-heading-06-font-size: 2.625rem;
@@ -824,7 +824,7 @@ exports[`Styles Bundle 1`] = `
   --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
-  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-font-weight: 400;
   --cds-expressive-heading-05-line-height: 1.25;
   --cds-expressive-heading-05-letter-spacing: 0;
   --cds-expressive-heading-06-font-size: 2rem;
@@ -902,7 +902,7 @@ exports[`Styles Bundle 1`] = `
   --cds-heading-04-line-height: 1.28572;
   --cds-heading-04-letter-spacing: 0;
   --cds-heading-05-font-size: 2rem;
-  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
   --cds-heading-06-font-size: 2.625rem;
@@ -922,7 +922,7 @@ exports[`Styles Bundle 1`] = `
   --cds-fluid-heading-04-line-height: 1.28572;
   --cds-fluid-heading-04-letter-spacing: 0;
   --cds-fluid-heading-05-font-size: 2rem;
-  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-font-weight: 400;
   --cds-fluid-heading-05-line-height: 1.25;
   --cds-fluid-heading-05-letter-spacing: 0;
   --cds-fluid-heading-06-font-size: 2rem;
@@ -1154,7 +1154,7 @@ h1 {
 
 h2 {
   font-size: var(--cds-productive-heading-05-font-size, 2rem);
-  font-weight: var(--cds-productive-heading-05-font-weight, 300);
+  font-weight: var(--cds-productive-heading-05-font-weight, 400);
   line-height: var(--cds-productive-heading-05-line-height, 1.25);
   letter-spacing: var(--cds-productive-heading-05-letter-spacing, 0);
 }
@@ -4074,7 +4074,7 @@ body {
   .ibm-type-f {
     font-size: 1.75rem;
     line-height: 1.25;
-    font-weight: 300;
+    font-weight: 400;
     font-size: calc(1.75rem +
       0.25 *
       ((100vw - 82rem) / 17)
@@ -4084,7 +4084,7 @@ body {
 @media (min-width: 99rem) {
   .ibm-type-f {
     font-size: 2rem;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 2rem;
   }
 }
@@ -4098,7 +4098,7 @@ body {
 
 .ibm-type-h {
   font-size: var(--cds-productive-heading-05-font-size, 2rem);
-  font-weight: var(--cds-productive-heading-05-font-weight, 300);
+  font-weight: var(--cds-productive-heading-05-font-weight, 400);
   line-height: var(--cds-productive-heading-05-line-height, 1.25);
   letter-spacing: var(--cds-productive-heading-05-letter-spacing, 0);
 }
@@ -8611,7 +8611,7 @@ a.bx--overflow-menu-options__btn::before {
   --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
-  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
   --cds-productive-heading-06-font-size: 2.625rem;
@@ -8639,7 +8639,7 @@ a.bx--overflow-menu-options__btn::before {
   --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
-  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-font-weight: 400;
   --cds-expressive-heading-05-line-height: 1.25;
   --cds-expressive-heading-05-letter-spacing: 0;
   --cds-expressive-heading-06-font-size: 2rem;
@@ -8717,7 +8717,7 @@ a.bx--overflow-menu-options__btn::before {
   --cds-heading-04-line-height: 1.28572;
   --cds-heading-04-letter-spacing: 0;
   --cds-heading-05-font-size: 2rem;
-  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
   --cds-heading-06-font-size: 2.625rem;
@@ -8737,7 +8737,7 @@ a.bx--overflow-menu-options__btn::before {
   --cds-fluid-heading-04-line-height: 1.28572;
   --cds-fluid-heading-04-letter-spacing: 0;
   --cds-fluid-heading-05-font-size: 2rem;
-  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-font-weight: 400;
   --cds-fluid-heading-05-line-height: 1.25;
   --cds-fluid-heading-05-letter-spacing: 0;
   --cds-fluid-heading-06-font-size: 2rem;
@@ -10421,7 +10421,10 @@ fieldset[disabled] .bx--form__helper-text {
 }
 
 .bx--action-list .bx--btn:disabled {
-  color: var(--cds-text-on-color-disabled, #8d8d8d);
+  border-color: transparent;
+  background-color: transparent;
+  color: var(--cds-text-on-color, #ffffff);
+  opacity: 0.5;
 }
 
 .bx--action-list .bx--btn .bx--btn__icon {
@@ -12120,7 +12123,7 @@ th .bx--table-sort__flex {
 }
 .security--error-page__title {
   font-size: var(--cds-productive-heading-05-font-size, 2rem);
-  font-weight: var(--cds-productive-heading-05-font-weight, 300);
+  font-weight: var(--cds-productive-heading-05-font-weight, 400);
   line-height: var(--cds-productive-heading-05-line-height, 1.25);
   letter-spacing: var(--cds-productive-heading-05-letter-spacing, 0);
   margin-top: 0.75rem;
@@ -16610,7 +16613,7 @@ li.bx--accordion__item--disabled:last-of-type {
   --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
-  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
   --cds-productive-heading-06-font-size: 2.625rem;
@@ -16638,7 +16641,7 @@ li.bx--accordion__item--disabled:last-of-type {
   --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
-  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-font-weight: 400;
   --cds-expressive-heading-05-line-height: 1.25;
   --cds-expressive-heading-05-letter-spacing: 0;
   --cds-expressive-heading-06-font-size: 2rem;
@@ -16716,7 +16719,7 @@ li.bx--accordion__item--disabled:last-of-type {
   --cds-heading-04-line-height: 1.28572;
   --cds-heading-04-letter-spacing: 0;
   --cds-heading-05-font-size: 2rem;
-  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
   --cds-heading-06-font-size: 2.625rem;
@@ -16736,7 +16739,7 @@ li.bx--accordion__item--disabled:last-of-type {
   --cds-fluid-heading-04-line-height: 1.28572;
   --cds-fluid-heading-04-letter-spacing: 0;
   --cds-fluid-heading-05-font-size: 2rem;
-  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-font-weight: 400;
   --cds-fluid-heading-05-line-height: 1.25;
   --cds-fluid-heading-05-letter-spacing: 0;
   --cds-fluid-heading-06-font-size: 2rem;
@@ -21054,7 +21057,7 @@ optgroup.bx--select-optgroup:disabled,
 }
 .security--tearsheet--small__title {
   font-size: var(--cds-productive-heading-05-font-size, 2rem);
-  font-weight: var(--cds-productive-heading-05-font-weight, 300);
+  font-weight: var(--cds-productive-heading-05-font-weight, 400);
   line-height: var(--cds-productive-heading-05-line-height, 1.25);
   letter-spacing: var(--cds-productive-heading-05-letter-spacing, 0);
   margin-top: 0;
@@ -21621,7 +21624,7 @@ optgroup.bx--select-optgroup:disabled,
   --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
-  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
   --cds-productive-heading-06-font-size: 2.625rem;
@@ -21649,7 +21652,7 @@ optgroup.bx--select-optgroup:disabled,
   --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
-  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-font-weight: 400;
   --cds-expressive-heading-05-line-height: 1.25;
   --cds-expressive-heading-05-letter-spacing: 0;
   --cds-expressive-heading-06-font-size: 2rem;
@@ -21727,7 +21730,7 @@ optgroup.bx--select-optgroup:disabled,
   --cds-heading-04-line-height: 1.28572;
   --cds-heading-04-letter-spacing: 0;
   --cds-heading-05-font-size: 2rem;
-  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
   --cds-heading-06-font-size: 2.625rem;
@@ -21747,7 +21750,7 @@ optgroup.bx--select-optgroup:disabled,
   --cds-fluid-heading-04-line-height: 1.28572;
   --cds-fluid-heading-04-letter-spacing: 0;
   --cds-fluid-heading-05-font-size: 2rem;
-  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-font-weight: 400;
   --cds-fluid-heading-05-line-height: 1.25;
   --cds-fluid-heading-05-letter-spacing: 0;
   --cds-fluid-heading-06-font-size: 2rem;
@@ -22208,7 +22211,7 @@ optgroup.bx--select-optgroup:disabled,
   --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
-  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
   --cds-productive-heading-06-font-size: 2.625rem;
@@ -22236,7 +22239,7 @@ optgroup.bx--select-optgroup:disabled,
   --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
-  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-font-weight: 400;
   --cds-expressive-heading-05-line-height: 1.25;
   --cds-expressive-heading-05-letter-spacing: 0;
   --cds-expressive-heading-06-font-size: 2rem;
@@ -22314,7 +22317,7 @@ optgroup.bx--select-optgroup:disabled,
   --cds-heading-04-line-height: 1.28572;
   --cds-heading-04-letter-spacing: 0;
   --cds-heading-05-font-size: 2rem;
-  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
   --cds-heading-06-font-size: 2.625rem;
@@ -22334,7 +22337,7 @@ optgroup.bx--select-optgroup:disabled,
   --cds-fluid-heading-04-line-height: 1.28572;
   --cds-fluid-heading-04-letter-spacing: 0;
   --cds-fluid-heading-05-font-size: 2rem;
-  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-font-weight: 400;
   --cds-fluid-heading-05-line-height: 1.25;
   --cds-fluid-heading-05-letter-spacing: 0;
   --cds-fluid-heading-06-font-size: 2rem;
@@ -24237,7 +24240,7 @@ optgroup.bx--select-optgroup:disabled,
   --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
-  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
   --cds-productive-heading-06-font-size: 2.625rem;
@@ -24265,7 +24268,7 @@ optgroup.bx--select-optgroup:disabled,
   --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
-  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-font-weight: 400;
   --cds-expressive-heading-05-line-height: 1.25;
   --cds-expressive-heading-05-letter-spacing: 0;
   --cds-expressive-heading-06-font-size: 2rem;
@@ -24343,7 +24346,7 @@ optgroup.bx--select-optgroup:disabled,
   --cds-heading-04-line-height: 1.28572;
   --cds-heading-04-letter-spacing: 0;
   --cds-heading-05-font-size: 2rem;
-  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
   --cds-heading-06-font-size: 2.625rem;
@@ -24363,7 +24366,7 @@ optgroup.bx--select-optgroup:disabled,
   --cds-fluid-heading-04-line-height: 1.28572;
   --cds-fluid-heading-04-letter-spacing: 0;
   --cds-fluid-heading-05-font-size: 2rem;
-  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-font-weight: 400;
   --cds-fluid-heading-05-line-height: 1.25;
   --cds-fluid-heading-05-letter-spacing: 0;
   --cds-fluid-heading-06-font-size: 2rem;
@@ -33950,7 +33953,7 @@ strong {
 
 .bx--type-productive-heading-05 {
   font-size: var(--cds-productive-heading-05-font-size, 2rem);
-  font-weight: var(--cds-productive-heading-05-font-weight, 300);
+  font-weight: var(--cds-productive-heading-05-font-weight, 400);
   line-height: var(--cds-productive-heading-05-line-height, 1.25);
   letter-spacing: var(--cds-productive-heading-05-letter-spacing, 0);
 }
@@ -34024,7 +34027,7 @@ strong {
 @media (min-width: 82rem) {
   .bx--type-expressive-heading-03 {
     font-size: 1.25rem;
-    line-height: 1.25;
+    line-height: 1.4;
     font-size: calc(1.25rem +
       0.25 *
       ((100vw - 82rem) / 17)
@@ -34053,7 +34056,7 @@ strong {
   .bx--type-expressive-heading-04 {
     font-size: 1.75rem;
     line-height: 1.25;
-    font-weight: 300;
+    font-weight: 400;
     font-size: calc(1.75rem +
       0.25 *
       ((100vw - 82rem) / 17)
@@ -34063,14 +34066,14 @@ strong {
 @media (min-width: 99rem) {
   .bx--type-expressive-heading-04 {
     font-size: 2rem;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 2rem;
   }
 }
 
 .bx--type-expressive-heading-05 {
   font-size: 2rem;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.25;
   letter-spacing: 0;
   font-size: calc(2rem +
@@ -34081,6 +34084,7 @@ strong {
 @media (min-width: 42rem) {
   .bx--type-expressive-heading-05 {
     font-size: 2.25rem;
+    font-weight: 300;
     line-height: 1.22;
     letter-spacing: 0;
     font-size: calc(2.25rem +

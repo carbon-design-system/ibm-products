@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021
+// Copyright IBM Corp. 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -37,8 +37,9 @@ const defaultProps = {
   closeIconDescription: 'Close',
   columnInputPlaceholder: 'Find',
   description: 'Select business terms from the list',
-  globalSearchLabel: 'test input label',
+  globalSearchLabel: 'global search label',
   globalSearchPlaceholder: 'Find business terms',
+  illustrationTheme: 'light',
   influencerTitle: 'Selected business terms',
   items: {
     entries: [
@@ -93,7 +94,7 @@ const defaultProps = {
   onCloseButtonText: 'Cancel',
   onSubmit: (selections) => console.log(selections),
   onSubmitButtonText: 'Add',
-  searchResultsLabel: 'Search results',
+  searchResultsTitle: 'Search results',
   title: 'Add business terms',
 };
 
@@ -131,6 +132,7 @@ export const WithHierarchy = prepareStory(Template, {
       },
     ],
     globalFiltersIconDescription: 'Filter',
+    globalFiltersLabel: 'Filters',
     globalFiltersPlaceholderText: 'Choose an option',
     globalFiltersPrimaryButtonText: 'Apply',
     globalFiltersSecondaryButtonText: 'Reset',
@@ -256,6 +258,7 @@ export const WithAvatars = prepareStory(Template, {
           avatar: {
             src: image,
             alt: 'head shot',
+            theme: 'light',
           },
         },
         {
@@ -266,6 +269,7 @@ export const WithAvatars = prepareStory(Template, {
           avatar: {
             icon: Group24,
             backgroundColor: 'dark-green',
+            theme: 'light',
           },
         },
         {
@@ -275,6 +279,7 @@ export const WithAvatars = prepareStory(Template, {
           subtitle: 'item 3 subtitle',
           avatar: {
             icon: Group24,
+            theme: 'light',
           },
         },
       ],

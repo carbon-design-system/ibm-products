@@ -136,6 +136,7 @@ const s = [
           'c/ButtonSetWithOverflow',
           'c/CancelableTextEdit',
           'c/ExampleComponent',
+          'c/FilterSummary',
           'c/TearsheetShell',
         ],
       },

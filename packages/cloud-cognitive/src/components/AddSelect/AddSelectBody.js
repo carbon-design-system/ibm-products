@@ -80,7 +80,7 @@ export let AddSelectBody = forwardRef(
     const { sortDirection, setSortDirection, sortAttribute, setSortAttribute } =
       useItemSort();
     const { parentSelected, setParentSelected } = useParentSelect();
-    const { path, setPath, pathOnclick } = usePath(itemsLabel);
+    const { path, setPath, pathOnclick, resetPath } = usePath(itemsLabel);
 
     const resetState = () => {
       setSingleSelection('');
@@ -88,6 +88,11 @@ export let AddSelectBody = forwardRef(
       setSearchTerm('');
       setAppliedGlobalFilters({});
       setDisplayMetaPanel({});
+      setAppliedModifiers(defaultModifiers);
+      setSortAttribute('');
+      setSortDirection('');
+      setParentSelected(null);
+      resetPath();
     };
 
     const onCloseHandler = () => {

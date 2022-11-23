@@ -42,10 +42,20 @@ const usePath = (itemsLabel = '') => {
     setPath([...pathCopy]);
   };
 
+  const resetPath = () => {
+    setPath([
+      {
+        id: 'base_of_path',
+        title: itemsLabel,
+      },
+    ]);
+  };
+
   return {
     path,
     setPath: handler,
     pathOnclick: pathClickHandler,
+    resetPath,
   };
 };
 

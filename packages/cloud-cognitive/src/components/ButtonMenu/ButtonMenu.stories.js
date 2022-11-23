@@ -42,14 +42,16 @@ const renderItems = (setIsOpen, args) => {
           action(`Click on Option 1`);
           setIsOpen(false);
         }}
+        size={args.size}
       >
-        Option 1a
+        Option 1
       </ButtonMenuItem>
       <ButtonMenuItem
         onClick={() => {
           action(`Click on Option 2`);
           setIsOpen(false);
         }}
+        size={args.size}
       >
         Option 2
       </ButtonMenuItem>
@@ -59,6 +61,7 @@ const renderItems = (setIsOpen, args) => {
           setIsOpen(false);
         }}
         disabled={args.isDisabled ? true : false}
+        size={args.size}
       >
         Option 3
       </ButtonMenuItem>
@@ -68,6 +71,7 @@ const renderItems = (setIsOpen, args) => {
           setIsOpen(false);
         }}
         kind={args.isDanger ? 'danger' : null}
+        size={args.size}
       >
         Option 4
       </ButtonMenuItem>
@@ -97,5 +101,6 @@ export const buttonMenu = prepareStory(Template, {
   args: {
     isDanger: false,
     isDisabled: false,
+    size: 'md',
   },
 });

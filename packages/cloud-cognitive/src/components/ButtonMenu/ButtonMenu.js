@@ -26,11 +26,9 @@ const componentName = 'ButtonMenu';
 
 // Default values for props
 const defaults = {
-  size: 'lg',
+  size: 'md',
   kind: 'primary',
   open: false,
-  isDanger: false,
-  isDisabled: false,
   onClose: () => {},
   onMenuButtonClick: () => {},
 };

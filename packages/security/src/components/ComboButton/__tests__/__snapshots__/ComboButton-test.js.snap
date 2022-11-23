@@ -43,7 +43,7 @@ exports[`ComboButton renders a combo button with children and an overflow menu 1
       <button
         aria-expanded="false"
         aria-haspopup="true"
-        aria-label="open and close list of options"
+        aria-label="Open and close list of options"
         class="security--button bx--btn bx--btn--primary security--combo-button__button security--combo-button__overflow-menu bx--overflow-menu bx--overflow-menu--md"
         type="button"
       >

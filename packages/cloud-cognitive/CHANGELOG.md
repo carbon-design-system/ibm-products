@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.7...@carbon/ibm-products@2.0.0-rc.8) (2022-11-22)
+
+
+### Bug Fixes
+
+* **DataSpreadsheet:** prevent delete error from header ([#2477](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2477)) ([107666f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/107666fb61d723cda486c36ec6160bc9e6815cdc))
+* **PageHeader:** Page header title truncation v11 ([#2479](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2479)) ([e8d2926](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e8d2926689114503e45e7db38fb94f85a5709506))
+
+
+### Features
+
+* inline edit v2 for v11 ([#2461](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2461)) ([3ea4363](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3ea43633fddb8e37f3a4d9df1cb79f02c4d1e849))
+
+
+
+
+
 # [2.0.0-rc.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.6...@carbon/ibm-products@2.0.0-rc.7) (2022-11-15)
 
 

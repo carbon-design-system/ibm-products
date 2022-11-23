@@ -3286,13 +3286,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--button-menu__button-set.bx--btn-set.bx--btn-set--stacked .c4p--button-menu__item-button.bx--btn:has(+ :not(.c4p--button-menu__item-button))::before {
   background-color: transparent;
 }
-.c4p--button-menu__button-set.bx--btn-set.bx--btn-set--stacked .bx--accordion .bx--accordion__item .bx--accordion__heading {
-  align-items: center;
-}
-.c4p--button-menu__button-set.bx--btn-set.bx--btn-set--stacked .bx--accordion__content {
-  padding: 0;
-  margin-top: var(--cds-spacing-01, 0.125rem);
-}
 .c4p--button-menu__button-set.bx--btn-set.bx--btn-set--stacked .bx--btn.bx--btn--ghost {
   color: var(--cds-text-01, #161616);
 }
@@ -3303,22 +3296,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--button-menu .bx--btn--lg:not(.bx--btn--icon-only) {
   min-height: var(--cds-spacing-09, 3rem);
   align-items: center;
-  padding-top: var(--cds-spacing-04, 0.75rem);
-}
-
-.c4p--button-menu__sm .bx--btn,
-.c4p--button-menu__sm .bx--accordion .bx--accordion__item .bx--accordion__heading {
-  min-height: var(--cds-spacing-07, 2rem);
-}
-
-.c4p--button-menu__md .bx--btn,
-.c4p--button-menu__md .bx--accordion .bx--accordion__item .bx--accordion__heading {
-  min-height: var(--cds-spacing-08, 2.5rem);
-}
-
-.c4p--button-menu__lg .bx--btn,
-.c4p--button-menu__lg .bx--accordion .bx--accordion__item .bx--accordion__heading {
-  min-height: var(--cds-spacing-09, 3rem);
 }
 
 .c4p--button-set-with-overflow.c4p--button-set-with-overflow {

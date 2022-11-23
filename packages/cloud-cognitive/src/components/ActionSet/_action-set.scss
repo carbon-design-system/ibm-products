@@ -96,7 +96,9 @@
   .#{$block-class}.#{$carbon-prefix}--btn-set.#{$block-class}--max
     .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
   .#{$block-class}.#{$carbon-prefix}--btn-set.#{$block-class}--row-quadruple
-    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost) {
+    .#{$block-class}__action-button:not(
+      .#{$block-class}__action-button--ghost
+    ) {
     max-width: rem(232px);
     flex: 0 1 25%;
   }

@@ -132,7 +132,9 @@
 
   .#{$block-class}
     #{$carbon-prefix}--structured-list--selection
-    .#{$block-class}__selections-row-selected#{$carbon-prefix}--structured-list-row:hover:not(#{$carbon-prefix}--structured-list-row--header-row):not(#{$carbon-prefix}--structured-list-row--selected) {
+    .#{$block-class}__selections-row-selected#{$carbon-prefix}--structured-list-row:hover:not(
+      #{$carbon-prefix}--structured-list-row--header-row
+    ):not(#{$carbon-prefix}--structured-list-row--selected) {
     border-bottom: 1px solid $hover-selected-ui;
     background-color: $hover-selected-ui;
   }
@@ -153,7 +155,9 @@
 
   .#{$block-class}
     #{$carbon-prefix}--structured-list--selection
-    #{$carbon-prefix}--structured-list-row:hover:not(#{$carbon-prefix}--structured-list-row--header-row):not(#{$carbon-prefix}--structured-list-row--selected) {
+    #{$carbon-prefix}--structured-list-row:hover:not(
+      #{$carbon-prefix}--structured-list-row--header-row
+    ):not(#{$carbon-prefix}--structured-list-row--selected) {
     border-bottom: 0;
   }
 

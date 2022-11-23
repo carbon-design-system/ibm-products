@@ -152,7 +152,9 @@ $right-section-alt-width: 100% - $left-section-alt-width;
       }
     }
 
-    .#{$block-class}__breadcrumb-row:not(.#{$block-class}__breadcrumb-row--has-action-bar) {
+    .#{$block-class}__breadcrumb-row:not(
+        .#{$block-class}__breadcrumb-row--has-action-bar
+      ) {
       // lifts up page title when there is no action bar
       min-height: $spacing-07;
     }
@@ -200,7 +202,9 @@ $right-section-alt-width: 100% - $left-section-alt-width;
       transition: all $duration--moderate-01 ease-out;
     }
 
-    .#{$block-class}__breadcrumb-row--next-to-tabs:not(.#{$block-class}__has-page-actions-without-action-bar)::after,
+    .#{$block-class}__breadcrumb-row--next-to-tabs:not(
+        .#{$block-class}__has-page-actions-without-action-bar
+      )::after,
     .#{$block-class}__breadcrumb-row--has-action-bar::after {
       /* creates a full width box shadow without causing scroll */
       box-shadow: 25vw 1px 0 0 $ui-03, -25vw 1px 0 0 $ui-03;

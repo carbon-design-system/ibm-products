@@ -29,8 +29,8 @@ const defaults = {
   size: 'lg',
   kind: 'primary',
   open: false,
-  isDanger: false,
-  isDisabled: false,
+  //isDanger: false,
+  //isDisabled: false,
   onClose: () => {},
   onMenuButtonClick: () => {},
 };

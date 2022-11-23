@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.37.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.36.0...@carbon/ibm-products@1.37.0) (2022-11-22)
+
+### Bug Fixes
+
+- **DataSpreadsheet:** prevent delete error from header
+  ([#2476](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2476))
+  ([aab2809](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/aab28099e43f336722b642b3532a07ea51c9d135))
+- **PageHeader:** Page header title truncation
+  ([#2472](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2472))
+  ([78a9251](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/78a925170f6131d454f4488e0943f41248419f56))
+- update to Carbon v10 compatible versions to latest
+  ([#2462](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2462))
+  ([4353991](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/43539912353a965549f0f2e5f8245168d2ce1c98))
+
+### Features
+
+- adds FilterSummary
+  ([#2466](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2466))
+  ([46dd712](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/46dd7120f088d3f05ecd653d44058f3e51d76c9c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [1.36.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.35.2...@carbon/ibm-products@1.36.0) (2022-11-15)
 
 ### Bug Fixes

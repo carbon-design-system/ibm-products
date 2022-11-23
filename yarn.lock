@@ -2357,9 +2357,9 @@ __metadata:
   linkType: hard
 
 "@cspell/dict-csharp@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "@cspell/dict-csharp@npm:4.0.1"
-  checksum: 68b02faa2662ddf1c86b7ddfff4027c490910d77d0e190cad0142346ac9991943729b04520c7c35ad78b7d095f7244ac25252a3538af00516ce5c7c532ef9787
+  version: 4.0.2
+  resolution: "@cspell/dict-csharp@npm:4.0.2"
+  checksum: d2ecb2aada51c5f0d6d557fd4f0c6eddb5b299e0955e066c49cd2afe96a1c6fe0afde699fdb885dd3183603a1efbd1d793b6a490b8d039256445b4b154b7375b
   languageName: node
   linkType: hard
 
@@ -6715,9 +6715,9 @@ __metadata:
   linkType: hard
 
 "@types/lodash@npm:^4.14.167":
-  version: 4.14.189
-  resolution: "@types/lodash@npm:4.14.189"
-  checksum: 096d1e0954794fb76bd6a0ea443067f02004b53e3c59ac6e3fed88817a1468fc2e6614abdf44341f5e0fdff5f9a3c94a934cc9ff7126e07efbcd94355a21fe45
+  version: 4.14.190
+  resolution: "@types/lodash@npm:4.14.190"
+  checksum: 353a55a1222a57224ead8bd3379fabb2e3e3f6685f599c48b1b66f099d8e9e015e6c6352c6e2275954004c3bb510377804c63117233c6f187700b6ab78adfa02
   languageName: node
   linkType: hard
 
@@ -7037,11 +7037,11 @@ __metadata:
   linkType: hard
 
 "@types/yargs@npm:^17.0.8":
-  version: 17.0.13
-  resolution: "@types/yargs@npm:17.0.13"
+  version: 17.0.14
+  resolution: "@types/yargs@npm:17.0.14"
   dependencies:
     "@types/yargs-parser": "*"
-  checksum: 0ab269abc2da2223cf0a8c16d578850fbe327d40fb85724b5c3f9f6cf38d03656ef699518c05d4df3bc337339ec6d0aad7df01682a9dca4783ad1ccc7336cf12
+  checksum: 7c571560434e1295b31dfd7f8d3b4a88dbb8bfe8db0054cea35f829f86b1251f67e41eaa0cb5990f17e5ed9b1a508c686b2b9f15c3bafc467ba58989ac9223e8
   languageName: node
   linkType: hard
 
@@ -12137,8 +12137,8 @@ __metadata:
   linkType: hard
 
 "downshift@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "downshift@npm:7.0.1"
+  version: 7.0.4
+  resolution: "downshift@npm:7.0.4"
   dependencies:
     "@babel/runtime": ^7.14.8
     compute-scroll-into-view: ^1.0.17
@@ -12147,7 +12147,7 @@ __metadata:
     tslib: ^2.3.0
   peerDependencies:
     react: ">=16.12.0"
-  checksum: f2dc82171ee64777e82ad86ab8e08f1015bef289ab26799337f43a8465bd55f6b484cad4ab40030b57891e99ed3a7d41b27dd560a0929635133c41cee802bc32
+  checksum: ea59a368427078d199023a299df0fefe2f4463d3207be5a769d9c2703ca61db8e72b5b64e5a12a5152385e6de705ebe3f3e2826c14f65baa69b4f8537657cc1d
   languageName: node
   linkType: hard
 
@@ -12333,12 +12333,12 @@ __metadata:
   linkType: hard
 
 "enhanced-resolve@npm:^5.10.0":
-  version: 5.11.0
-  resolution: "enhanced-resolve@npm:5.11.0"
+  version: 5.12.0
+  resolution: "enhanced-resolve@npm:5.12.0"
   dependencies:
-    graceful-fs: ^4.2.9
+    graceful-fs: ^4.2.4
     tapable: ^2.2.0
-  checksum: ed5169b49adc0bc89b3532f2fae6abd01e8f3bdb9c3b60194a7ead386c9e307727aab5efe756183dda9ad05f0d301e8994e818da6b987dd223392ced2d3f6aff
+  checksum: bf3f787facaf4ce3439bef59d148646344e372bef5557f0d37ea8aa02c51f50a925cd1f07b8d338f18992c29f544ec235a8c64bcdb56030196c48832a5494174
   languageName: node
   linkType: hard
 
@@ -22084,11 +22084,11 @@ __metadata:
   linkType: hard
 
 "prettier@npm:^2.7.1":
-  version: 2.7.1
-  resolution: "prettier@npm:2.7.1"
+  version: 2.8.0
+  resolution: "prettier@npm:2.8.0"
   bin:
     prettier: bin-prettier.js
-  checksum: 55a4409182260866ab31284d929b3cb961e5fdb91fe0d2e099dac92eaecec890f36e524b4c19e6ceae839c99c6d7195817579cdffc8e2c80da0cb794463a748b
+  checksum: 72004ce0cc9bb097daf3e3833f62495768724392c1d5b178dd47372337616e9e50ecbb0804f236596223f7b5eb1bbe69cefc8957dca21112c5777e77ef73a564
   languageName: node
   linkType: hard
 

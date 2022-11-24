@@ -170,7 +170,9 @@ export let CreateFullPage = React.forwardRef(
           size="sm"
           open={modalIsOpen}
           aria-label={modalTitle}
-          onClose={()=>setModalIsOpen(false)}
+          onClose={() => {
+            setModalIsOpen(false);
+          }}
         >
           <ModalHeader title={modalTitle} />
           <ModalBody>

@@ -2345,6 +2345,65 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-support-error, #da1e28);
 }
 
+.c4p--inline-edit-v2 {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  cursor: pointer;
+}
+.c4p--inline-edit-v2-readonly {
+  cursor: not-allowed;
+}
+.c4p--inline-edit-v2:hover {
+  background: var(--cds-field-01, #f4f4f4);
+}
+.c4p--inline-edit-v2:hover .c4p--inline-edit-v2__btn-edit {
+  visibility: visible;
+}
+.c4p--inline-edit-v2__btn-edit {
+  visibility: hidden;
+}
+.c4p--inline-edit-v2-focused {
+  background: var(--cds-field-01, #f4f4f4);
+  outline: 2px solid var(--cds-focus, #0f62fe);
+}
+.c4p--inline-edit-v2__text-input {
+  flex: 1;
+}
+.c4p--inline-edit-v2__text-input-label {
+  display: none;
+}
+.c4p--inline-edit-v2__warning-icon {
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  margin-right: 0.4375rem;
+  color: var(--cds-support-01, #da1e28);
+}
+.c4p--inline-edit-v2__warning-text {
+  font-size: var(--cds-caption-01-font-size, 0.75rem);
+  font-weight: var(--cds-caption-01-font-weight, 400);
+  line-height: var(--cds-caption-01-line-height, 1.33333);
+  letter-spacing: var(--cds-caption-01-letter-spacing, 0.32px);
+  margin-top: var(--cds-spacing-03, 0.5rem);
+  color: var(--cds-support-01, #da1e28);
+}
+
+.c4p--inline-edit-v2__text-input.bx--text-input {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+.c4p--inline-edit-v2-readonly .c4p--inline-edit-v2__text-input.bx--text-input,
+.c4p--inline-edit-v2-readonly .bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
+  cursor: not-allowed;
+}
+
+.c4p--inline-edit-v2__text-input.bx--text-input:focus,
+.c4p--inline-edit-v2__text-input.bx--text-input:active {
+  outline: none;
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;

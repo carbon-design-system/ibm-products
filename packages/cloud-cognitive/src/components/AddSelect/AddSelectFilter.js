@@ -19,6 +19,7 @@ export let AddSelectFilter = ({
   appliedFilters,
   clearFiltersText,
   filterOpts,
+  filtersLabel,
   handleFilter,
   handleSearch,
   hasFiltersApplied,
@@ -87,7 +88,7 @@ export let AddSelectFilter = ({
     <>
       <div className={`${blockClass}-search`}>
         <Search
-          id="temp-id"
+          id="add-select-global-search-filter"
           labelText={inputLabel}
           placeholder={inputPlaceholder}
           value={searchTerm}
@@ -108,7 +109,7 @@ export let AddSelectFilter = ({
         {open && (
           <div className={blockClass}>
             <div className={`${blockClass}-content`}>
-              <p>Filters</p>
+              <p>{filtersLabel}</p>
               <div className={`${blockClass}-opts`}>
                 {filterOpts.map((filterOpts) => (
                   <Dropdown
@@ -171,6 +172,7 @@ AddSelectFilter.propTypes = {
   appliedFilters: PropTypes.object,
   clearFiltersText: PropTypes.string,
   filterOpts: PropTypes.array,
+  filtersLabel: PropTypes.string,
   handleFilter: PropTypes.func,
   handleSearch: PropTypes.func,
   hasFiltersApplied: PropTypes.bool,

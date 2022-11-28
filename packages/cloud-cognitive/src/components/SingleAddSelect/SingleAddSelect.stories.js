@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021
+// Copyright IBM Corp. 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -30,8 +30,9 @@ export default {
 const defaultProps = {
   className: 'placeholder-class',
   description: 'select a category lorem ipsum',
-  globalSearchLabel: 'test input title',
+  globalSearchLabel: 'global search label',
   globalSearchPlaceholder: 'Find categories',
+  illustrationTheme: 'light',
   items: {
     entries: [
       {
@@ -58,7 +59,7 @@ const defaultProps = {
   onCloseButtonText: 'Cancel',
   onSubmit: (selection) => console.log(selection),
   onSubmitButtonText: 'Select',
-  searchResultsLabel: 'Search results',
+  searchResultsTitle: 'Search results',
   title: 'Select category',
 };
 

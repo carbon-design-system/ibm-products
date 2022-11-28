@@ -54,12 +54,14 @@ AddSelect.propTypes = {
     })
   ),
   globalFiltersIconDescription: PropTypes.string,
+  globalFiltersLabel: PropTypes.string,
   globalFiltersPlaceholderText: PropTypes.string,
   globalFiltersPrimaryButtonText: PropTypes.string,
   globalFiltersSecondaryButtonText: PropTypes.string,
   globalSearchLabel: PropTypes.string.isRequired,
   globalSearchPlaceholder: PropTypes.string,
   globalSortBy: PropTypes.array,
+  illustrationTheme: PropTypes.oneOf(['light', 'dark']),
   influencerTitle: PropTypes.string,
   items: PropTypes.shape({
     modifiers: PropTypes.shape({
@@ -75,6 +77,7 @@ AddSelect.propTypes = {
           alt: PropTypes.string,
           icon: PropTypes.object,
           src: PropTypes.string,
+          theme: PropTypes.oneOf(['light', 'dark']),
         }),
         children: PropTypes.object,
         icon: PropTypes.object,
@@ -113,7 +116,7 @@ AddSelect.propTypes = {
    * portal target for the all tags modal
    */
   portalTarget: PropTypes.node,
-  searchResultsLabel: PropTypes.string,
+  searchResultsTitle: PropTypes.string,
   title: PropTypes.string.isRequired,
 };
 

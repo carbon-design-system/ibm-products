@@ -163,11 +163,11 @@ describe(componentName, () => {
     expect(screen.getByTitle('editor')).toBeInTheDocument();
   });
 
-  // it('has no accessibility violations', async () => {
-  //   const { container } = render(<AddSelect {...defaultProps} />);
-  //   await expect(container).toBeAccessible(componentName);
-  //   await expect(container).toHaveNoAxeViolations();
-  // });
+  xit('has no accessibility violations', async () => {
+    const { container } = render(<AddSelect {...defaultProps} />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
+  });
 
   it('applies className to the containing node', () => {
     const { container } = render(

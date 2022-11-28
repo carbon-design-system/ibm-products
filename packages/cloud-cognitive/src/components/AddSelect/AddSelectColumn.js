@@ -162,7 +162,7 @@ export let AddSelectColumn = ({
             )}
           </div>
         </div>
-        <div className={`${blockClass}__tag-container`}>
+        <div className={`${blockClass}__tags`}>
           <Checkbox
             id={`${uuidv4()}-select-all`}
             className={`${colClass}__select-all`}
@@ -170,9 +170,7 @@ export let AddSelectColumn = ({
             onChange={selectAllHandler}
             labelText={
               <>
-                <span className={`${blockClass}__tag-container-label`}>
-                  {header}
-                </span>
+                <span className={`${blockClass}__tags-label`}>{header}</span>
                 <Tag type="gray" size="sm">
                   {colItems.length}
                 </Tag>

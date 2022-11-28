@@ -1,21 +1,22 @@
-/**
- * Copyright IBM Corp. 2021
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
 
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { AddSelect } from './AddSelect';
 import { pkg } from '../../settings';
 
-const componentName = AddSelect.name;
+const componentName = AddSelect.displayName;
 
 const defaultProps = {
   closeIconDescription: 'test icon description',
   description: 'test description',
-  globalSearchLabel: 'test filter label',
+  globalFiltersLabel: 'filters',
+  globalSearchLabel: 'global search label',
   items: {
     entries: [
       {
@@ -160,5 +161,29 @@ describe(componentName, () => {
     };
     render(<AddSelect {...newProps} />);
     expect(screen.getByTitle('editor')).toBeInTheDocument();
+  });
+
+  xit('has no accessibility violations', async () => {
+    const { container } = render(<AddSelect {...defaultProps} />);
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('applies className to the containing node', () => {
+    const { container } = render(
+      <AddSelect {...defaultProps} className="test-class" />
+    );
+    expect(container.firstChild).toHaveClass('test-class');
+  });
+
+  it('adds additional properties to the containing node', () => {
+    render(<AddSelect {...defaultProps} data-testid="test-id" />);
+    screen.getByTestId('test-id');
+  });
+
+  it('forwards a ref to an appropriate node', () => {
+    const ref = React.createRef();
+    render(<AddSelect {...defaultProps} ref={ref} />);
+    expect(ref.current).not.toBeNull();
   });
 });

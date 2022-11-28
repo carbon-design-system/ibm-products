@@ -64,8 +64,10 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
     justify-content: center;
   }
 
-  &-cell:hover .#{$block-class}__selections-hidden-hover, .#{$carbon-prefix}--structured-list-row:focus-within .#{$block-class}__selections-hidden-hover {
-      visibility: visible;
+  &-cell:hover .#{$block-class}__selections-hidden-hover,
+  .#{$carbon-prefix}--structured-list-row:focus-within
+    .#{$block-class}__selections-hidden-hover {
+    visibility: visible;
   }
 
   &-hidden-hover {

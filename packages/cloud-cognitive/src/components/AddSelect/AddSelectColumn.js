@@ -174,9 +174,7 @@ export let AddSelectColumn = ({
             onChange={selectAllHandler}
             labelText={
               <>
-                <span className={`${blockClass}__tag-label`}>
-                  {header}
-                </span>
+                <span className={`${blockClass}__tag-label`}>{header}</span>
                 <Tag type="gray" size="sm">
                   {colItems.length}
                 </Tag>

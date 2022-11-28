@@ -371,9 +371,6 @@ export let InlineEditV1 = React.forwardRef(
   }
 );
 
-// Return a placeholder if not released and not enabled by feature flag
-InlineEditV1 = pkg.checkComponentEnabled(InlineEditV1, componentName);
-
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 InlineEditV1.displayName = componentName;

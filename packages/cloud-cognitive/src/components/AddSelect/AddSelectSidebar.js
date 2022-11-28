@@ -19,6 +19,7 @@ export let AddSelectSidebar = ({
   appliedModifiers,
   closeIconDescription,
   displayMetalPanel,
+  illustrationTheme,
   influencerTitle,
   items,
   metaPanelTitle,
@@ -104,6 +105,7 @@ export let AddSelectSidebar = ({
             subtitle={noSelectionDescription}
             title={noSelectionTitle}
             size="sm"
+            illustrationTheme={illustrationTheme}
           />
         </div>
       )}
@@ -115,6 +117,7 @@ AddSelectSidebar.propTypes = {
   appliedModifiers: PropTypes.array,
   closeIconDescription: PropTypes.string,
   displayMetalPanel: PropTypes.object,
+  illustrationTheme: PropTypes.oneOf(['light', 'dark']),
   influencerTitle: PropTypes.string,
   items: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   metaPanelTitle: PropTypes.string,

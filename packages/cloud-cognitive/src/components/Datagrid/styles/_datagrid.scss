@@ -536,3 +536,7 @@
 .#{$block-class}__virtual-scrollbar::-webkit-scrollbar-thumb {
   border-radius: 5px;
 }
+
+.#{$block-class}__virtualScrollContainer {
+  width: 100%;
+}

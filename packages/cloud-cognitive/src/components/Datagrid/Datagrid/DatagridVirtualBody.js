@@ -45,10 +45,8 @@ const DatagridVirtualBody = (datagridState) => {
     DatagridPagination,
     page,
     handleResize,
-    tableId,
+    gridRef,
   } = datagridState;
-
-  const gridElement = document.querySelector(`#${tableId}`);
 
   const syncScroll = (e) => {
     const virtualBody = e.target;
@@ -75,7 +73,7 @@ const DatagridVirtualBody = (datagridState) => {
     <>
       <div
         className={`${blockClass}__head-warp`}
-        style={{ width: gridElement?.clientWidth, overflow: 'hidden' }}
+        style={{ width: gridRef.current?.clientWidth, overflow: 'hidden' }}
       >
         <DatagridHead {...datagridState} />
       </div>
@@ -93,7 +91,7 @@ const DatagridVirtualBody = (datagridState) => {
           innerRef={innerListRef}
           ref={listRef}
           className={`${blockClass}__virtual-scrollbar`}
-          style={{ width: gridElement?.clientWidth }}
+          style={{ width: gridRef.current?.clientWidth }}
         >
           {({ index, style }) => {
             const row = visibleRows[index];

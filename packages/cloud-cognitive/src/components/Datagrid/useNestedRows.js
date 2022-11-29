@@ -62,9 +62,14 @@ const useNestedRows = (hooks) => {
     ];
   };
 
+  const useInstance = (instance) => {
+    Object.assign(instance, { withNestedRows: true });
+  };
+
   hooks.getRowProps.push(getRowProps);
   hooks.getRowProps.push(getRowStyles);
   hooks.getCellProps.push(getCellProps);
+  hooks.useInstance.push(useInstance);
 };
 
 export default useNestedRows;

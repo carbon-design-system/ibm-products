@@ -29,7 +29,7 @@ const rowHeights = {
 
 // eslint-disable-next-line react/prop-types
 const DatagridRow = (datagridState) => {
-  const { row, rowSize } = datagridState;
+  const { row, rowSize, withNestedRows } = datagridState;
   const { state } = useContext(InlineEditContext);
   const { activeCellId } = state;
   const activeCellObject = activeCellId && getCellIdAsObject(activeCellId);
@@ -64,6 +64,9 @@ const DatagridRow = (datagridState) => {
       {...row.getRowProps()}
       key={row.id}
       onMouseEnter={(event) => {
+        if (!withNestedRows) {
+          return;
+        }
         const subRowCount = getVisibleNestedRowCount(row);
         const totalNestedRowIndicatorHeight = px(
           subRowCount * rowHeights[rowSize]

@@ -8,6 +8,7 @@
 // @flow
 import React, { useContext } from 'react';
 import { DataTable, SkeletonText } from '@carbon/react';
+import { px } from '@carbon/layout';
 import { selectionColumnId } from '../common-column-ids';
 import cx from 'classnames';
 import { pkg, carbon } from '../../../settings';
@@ -18,12 +19,39 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const { TableRow, TableCell } = DataTable;
 
+const rowHeights = {
+  xs: 24,
+  sm: 32,
+  md: 40,
+  lg: 48,
+  xl: 64,
+};
+
 // eslint-disable-next-line react/prop-types
 const DatagridRow = (datagridState) => {
-  const { row } = datagridState;
+  const { row, rowSize } = datagridState;
   const { state } = useContext(InlineEditContext);
   const { activeCellId } = state;
   const activeCellObject = activeCellId && getCellIdAsObject(activeCellId);
+
+  const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
+    let totalVisibleNested = 0;
+    if (isExpanded && subRows?.length) {
+      totalVisibleNested += subRows.length;
+      subRows.forEach((nestedRow) => {
+        if (nestedRow.isExpanded) {
+          totalVisibleNested += nestedRow.subRows.length;
+          nestedRow.subRows.forEach((r) => {
+            if (r.isExpanded) {
+              totalVisibleNested += r.subRows.length;
+            }
+          });
+        }
+      });
+    }
+    return totalVisibleNested;
+  };
+
   return (
     <TableRow
       className={cx(`${blockClass}__carbon-row`, {
@@ -36,11 +64,31 @@ const DatagridRow = (datagridState) => {
       {...row.getRowProps()}
       key={row.id}
       onMouseEnter={(event) => {
+        const subRowCount = getVisibleNestedRowCount(row);
+        const totalNestedRowIndicatorHeight = px(
+          subRowCount * rowHeights[rowSize]
+        );
         const hoverRow = event.target.closest(
           `.${blockClass}__carbon-row-expanded`
         );
         hoverRow?.classList.add(
           `${blockClass}__carbon-row-expanded-hover-active`
+        );
+        const rowExpanderButton = hoverRow?.querySelector(
+          `.${blockClass}__row-expander`
+        );
+        const rowSizeValue = rowSize || 'lg';
+        hoverRow?.style?.setProperty(
+          `--${blockClass}--indicator-height`,
+          totalNestedRowIndicatorHeight
+        );
+        hoverRow?.style?.setProperty(
+          `--${blockClass}--row-height`,
+          px(rowHeights[rowSizeValue])
+        );
+        hoverRow?.style?.setProperty(
+          `--${blockClass}--indicator-offset-amount`,
+          px(rowExpanderButton?.offsetLeft || 0)
         );
       }}
       onMouseLeave={(event) => {

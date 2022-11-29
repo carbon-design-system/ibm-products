@@ -35,21 +35,14 @@ const DatagridRow = (datagridState) => {
   const activeCellObject = activeCellId && getCellIdAsObject(activeCellId);
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
-    let totalVisibleNested = 0;
-    if (isExpanded && subRows?.length) {
-      totalVisibleNested += subRows.length;
-      subRows.forEach((nestedRow) => {
-        if (nestedRow.isExpanded) {
-          totalVisibleNested += nestedRow.subRows.length;
-          nestedRow.subRows.forEach((r) => {
-            if (r.isExpanded) {
-              totalVisibleNested += r.subRows.length;
-            }
-          });
-        }
+    let size = 0;
+    if (isExpanded && subRows) {
+      size += subRows.length;
+      subRows.forEach((child) => {
+        size += getVisibleNestedRowCount(child);
       });
     }
-    return totalVisibleNested;
+    return size;
   };
 
   return (

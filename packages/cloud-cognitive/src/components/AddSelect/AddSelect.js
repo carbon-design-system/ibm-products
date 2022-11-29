@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -55,12 +55,14 @@ AddSelect.propTypes = {
     })
   ),
   globalFiltersIconDescription: PropTypes.string,
+  globalFiltersLabel: PropTypes.string,
   globalFiltersPlaceholderText: PropTypes.string,
   globalFiltersPrimaryButtonText: PropTypes.string,
   globalFiltersSecondaryButtonText: PropTypes.string,
   globalSearchLabel: PropTypes.string.isRequired,
   globalSearchPlaceholder: PropTypes.string,
   globalSortBy: PropTypes.array,
+  illustrationTheme: PropTypes.oneOf(['light', 'dark']),
   influencerTitle: PropTypes.string,
   items: PropTypes.shape({
     modifiers: PropTypes.shape({
@@ -76,6 +78,7 @@ AddSelect.propTypes = {
           alt: PropTypes.string,
           icon: PropTypes.func,
           src: PropTypes.string,
+          theme: PropTypes.oneOf(['light', 'dark']),
         }),
         children: PropTypes.object,
         icon: PropTypes.func,
@@ -114,7 +117,7 @@ AddSelect.propTypes = {
    * portal target for the all tags modal
    */
   portalTarget: PropTypes.node,
-  searchResultsLabel: PropTypes.string,
+  searchResultsTitle: PropTypes.string,
   sortByLabel: PropTypes.string,
   title: PropTypes.string.isRequired,
 };

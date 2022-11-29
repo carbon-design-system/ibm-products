@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 /**
  * to be able to more easily and efficiently the child entries the data needs to be
  * normalized. this function recursively goes through the data array to build a single

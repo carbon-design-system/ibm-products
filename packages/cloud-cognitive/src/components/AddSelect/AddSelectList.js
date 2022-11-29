@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,11 +9,11 @@ import React from 'react';
 import {
   Button,
   Checkbox,
+  Dropdown,
   RadioButton,
   StructuredListRow,
   StructuredListWrapper,
   StructuredListBody,
-  Dropdown,
 } from '@carbon/react';
 import { ChevronRight, View } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
@@ -68,10 +68,10 @@ export let AddSelectList = ({
     return id === singleSelection;
   };
 
-  const getAvatarProps = ({ src, alt, icon, backgroundColor }) => ({
+  const getAvatarProps = ({ src, alt, icon, backgroundColor, theme }) => ({
     className: `${blockClass}-cell-avatar`,
     size: 'lg',
-    theme: 'light',
+    theme,
     image: src,
     imageDescription: alt,
     icon,
@@ -110,8 +110,8 @@ export let AddSelectList = ({
             <StructuredListRow
               key={item.id}
               className={cx(`${blockClass}-row`, {
-                [`${blockClass}-row-selected`]: isSelected(item.id),
-                [`${blockClass}-row-meta-selected`]: isInMetaPanel(item.id),
+                [`${blockClass}-row--selected`]: isSelected(item.id),
+                [`${blockClass}-row-meta--selected`]: isInMetaPanel(item.id),
               })}
               onClick={(evt) => metaPanelHandler(item, evt)}
             >

@@ -1,9 +1,9 @@
-/**
- * Copyright IBM Corp. 2021
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
 
 import { render, fireEvent, screen } from '@testing-library/react';
 import React from 'react';
@@ -59,7 +59,7 @@ const singleProps = {
   onCloseButtonText: 'Cancel',
   onSubmit: (selection) => console.log(selection),
   onSubmitButtonText: 'submit selections',
-  searchResultsLabel: 'Search results',
+  searchResultsTitle: 'Search results',
   title: 'Select category',
   onClose: () => {},
 };
@@ -118,6 +118,7 @@ const multiProps = {
   columnInputPlaceholder: 'Find',
   description: 'Select business terms from the list',
   defaultModifiers: [],
+  globalFiltersLabel: 'filters',
   globalSearchLabel: 'test input label',
   globalSearchPlaceholder: 'Find business terms',
   influencerTitle: 'Selected business terms',
@@ -134,7 +135,7 @@ const multiProps = {
   onCloseButtonText: 'Cancel',
   onSubmit: (selections) => console.log(selections),
   onSubmitButtonText: 'Add',
-  searchResultsLabel: 'Search results',
+  searchResultsTitle: 'Search results',
   title: 'Add business terms',
   onClose: () => {},
 };
@@ -206,6 +207,7 @@ const itemWithAvatar = {
       avatar: {
         src: image,
         alt: 'head shot',
+        theme: 'light',
       },
     },
   ],

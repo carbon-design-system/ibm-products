@@ -157,7 +157,9 @@
   .#{$block-class} .#{$carbon-prefix}--structured-list-row,
   .#{$block-class}
     .#{$block-class}__selections.#{$carbon-prefix}--structured-list--selection
-    .#{$carbon-prefix}--structured-list-row:hover:not(.#{$carbon-prefix}--structured-list-row--header-row):not(.#{$carbon-prefix}--structured-list-row--selected) {
+    .#{$carbon-prefix}--structured-list-row:hover:not(
+      .#{$carbon-prefix}--structured-list-row--header-row
+    ):not(.#{$carbon-prefix}--structured-list-row--selected) {
     border-bottom: 0;
   }
 

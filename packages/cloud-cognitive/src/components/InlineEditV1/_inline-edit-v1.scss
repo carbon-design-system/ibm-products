@@ -268,7 +268,9 @@
     }
 
     &.#{$block-class}--editing
-      .#{$block-class}__toolbar--animation:not(.#{$block-class}__toolbar--saveable)
+      .#{$block-class}__toolbar--animation:not(
+        .#{$block-class}__toolbar--saveable
+      )
       .#{$block-class}__save {
       overflow: hidden;
       width: 0;

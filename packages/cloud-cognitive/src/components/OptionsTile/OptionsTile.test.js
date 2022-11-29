@@ -157,7 +157,9 @@ describe(componentName, () => {
   });
 
   it('can be controlled by setting props.open', () => {
-    const { container, rerender } = render(<OptionsTile {...props} />);
+    const { container, rerender } = render(
+      <OptionsTile {...props} open={false} />
+    );
     expect(container.querySelector('details').open).toBe(false);
 
     rerender(<OptionsTile {...props} open={true} />);
@@ -198,5 +200,16 @@ describe(componentName, () => {
     expect(onToggle).not.toBeCalled();
     fireEvent.click(screen.getByRole('switch'));
     expect(onToggle).toBeCalled();
+  });
+
+  it('should call the onChange prop if provided when option tile is opened or closed', () => {
+    const onChangeFn = jest.fn();
+    const { container } = render(
+      <OptionsTile onChange={onChangeFn} {...props} />
+    );
+    fireEvent.click(container.querySelector('summary'));
+    expect(onChangeFn).toHaveBeenCalledTimes(1);
+    fireEvent.click(container.querySelector('summary'));
+    expect(onChangeFn).toHaveBeenCalledTimes(2);
   });
 });

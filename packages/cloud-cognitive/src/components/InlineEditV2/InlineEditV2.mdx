@@ -1,0 +1,28 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { InlineEditV2 } from '.';
+
+# InlineEditV2
+
+[Usage guidelines](#)
+
+Please note- v2 of the inline edit pattern is the recommended version. If you
+want to use the v1 version all you to do is pass in `v1` and refer to the v1 API
+documentation.
+
+## Example usage
+
+<Canvas>
+  <Story id={getStoryId(InlineEditV2.displayName, 'default')} />
+</Canvas>
+
+## Code sample
+
+<CodesandboxLink exampleDirectory="InlineEditV2" />
+
+## Component API
+
+<ArgsTable />

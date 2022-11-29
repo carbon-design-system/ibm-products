@@ -422,6 +422,7 @@ export let DataSpreadsheet = React.forwardRef(
           rows,
           setActiveCellContent,
           updateData,
+          activeCellCoordinates,
         };
         // Allow arrow key navigation if there are less than two activeKeys OR
         // if one of the activeCellCoordinates is in a header position

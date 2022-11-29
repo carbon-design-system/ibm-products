@@ -6,7 +6,7 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
-@use '../../../global/styles/project-settings';
+@use '../../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use './variables';
@@ -39,4 +39,22 @@
   left: 0;
   width: 100%;
   @include shared-pseudo-styles();
+}
+
+.#{variables.$block-class}__carbon-row.#{variables.$block-class}__carbon-row-expandable
+  .#{variables.$block-class}__cell.#{variables.$block-class}__expandable-row-cell {
+  padding: $spacing-03;
+  padding-right: 0;
+}
+
+.#{variables.$block-class}__row-expander.#{c4p-settings.$carbon-prefix}--btn {
+  display: flex;
+  width: $spacing-07;
+  height: $spacing-07;
+  min-height: $spacing-07;
+  justify-content: center;
+  padding: 0;
+  .#{variables.$block-class}__row-expander--icon {
+    fill: $layer-selected-inverse;
+  }
 }

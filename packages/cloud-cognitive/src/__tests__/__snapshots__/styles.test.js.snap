@@ -167,14 +167,17 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
-  height: 4rem;
   align-items: center;
-  padding-top: 1rem;
-  padding-bottom: 2rem;
   margin: 0;
 }
+.c4p--action-set .c4p--action-set__action-button.c4p--action-set__action-button--expressive {
+  height: 4rem;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
 
-.c4p--action-set.cds--btn-set .c4p--action-set__action-button.cds--btn.cds--btn--expressive {
+.c4p--action-set.cds--btn-set .c4p--action-set__action-button.cds--btn.cds--btn--expressive,
+.c4p--action-set.cds--btn-set .c4p--action-set__action-button.cds--btn {
   max-width: none;
 }
 
@@ -6573,12 +6576,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-right: 0.75rem;
   transform: translateY(-2px);
   vertical-align: middle;
-}
-.c4p--page-header .c4p--page-header__title-wrapper {
-  font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
-  font-weight: var(--cds-productive-heading-04-font-weight, 400);
-  line-height: var(--cds-productive-heading-04-line-height, 1.28572);
-  letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
 }
 .c4p--page-header .c4p--page-header__page-actions {
   flex: 0 0 100%;

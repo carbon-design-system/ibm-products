@@ -3,6 +3,67 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.7...@carbon/ibm-products@2.0.0-rc.8) (2022-11-22)
+
+
+### Bug Fixes
+
+* **DataSpreadsheet:** prevent delete error from header ([#2477](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2477)) ([107666f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/107666fb61d723cda486c36ec6160bc9e6815cdc))
+* **PageHeader:** Page header title truncation v11 ([#2479](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2479)) ([e8d2926](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e8d2926689114503e45e7db38fb94f85a5709506))
+
+
+### Features
+
+* inline edit v2 for v11 ([#2461](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2461)) ([3ea4363](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3ea43633fddb8e37f3a4d9df1cb79f02c4d1e849))
+
+
+
+
+
+# [2.0.0-rc.7](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.6...@carbon/ibm-products@2.0.0-rc.7) (2022-11-15)
+
+
+### Bug Fixes
+
+* **ActionSet:** allow for non expressive buttons (v11) ([#2448](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2448)) ([e3fd916](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e3fd91659c32f1f94087984c501177966d701617))
+* add select filter fix ([#2460](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2460)) ([2ba986b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2ba986b21cae19556939de06c0997cb013ceb469))
+* **Datagrid:** extend last nested row bottom border ([#2444](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2444)) ([362fd2d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/362fd2d03063d8e82d0c8c9fd6dc43945315f4e6))
+
+
+### Features
+
+* **OptionsTile:** add useControllableState hook, add onChange prop ([#2459](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2459)) ([e5f688b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e5f688b998f251508bd2753cb895a9a6a61e1db4))
+
+
+
+
+
+# [2.0.0-rc.6](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.5...@carbon/ibm-products@2.0.0-rc.6) (2022-11-08)
+
+
+### Bug Fixes
+
+* **Datagrid:** allow keyboard interaction with row expander ([#2435](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2435)) ([068a0bc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/068a0bc8e2086cae3dc842c8bd0d435b015eedaf))
+* **Datagrid:** clear global filter in onCancel ([#2441](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2441)) ([ec73f19](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ec73f19ba1aebbfbfc908e968569ff228ce45872))
+
+
+
+
+
+# [2.0.0-rc.5](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.4...@carbon/ibm-products@2.0.0-rc.5) (2022-11-01)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** fix initialStep issue when open=true - v11 ([#2354](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2354)) ([0a8c617](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0a8c617bc50f0a46e4ddf018937317ec767f4394))
+* **Datagrid:** render pagination as component ([#2416](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2416)) ([e4bc6ad](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e4bc6ad6fd7d34d5acf57e672e11d6af50ef5e72))
+* **PageHeader:** button alignment logic based on variable value - v11 ([#2392](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2392)) ([dd7a058](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/dd7a0589c86a4359cb0b0861585810e6acf867f7))
+* **PageHeader:** restrict useEffect logic to prevent scroll ([#2411](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2411)) ([f0b5575](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f0b55753fa49b4aa6b0e157777eb4c85a1207432))
+
+
+
+
+
 # [2.0.0-rc.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.3...@carbon/ibm-products@2.0.0-rc.4) (2022-10-25)
 
 

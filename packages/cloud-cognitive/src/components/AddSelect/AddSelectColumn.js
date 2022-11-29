@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -166,7 +166,7 @@ export let AddSelectColumn = ({
             )}
           </div>
         </div>
-        <div className={`${blockClass}__tag-container`}>
+        <div className={`${blockClass}__tags`}>
           <Checkbox
             id={`${uuidv4()}-select-all`}
             className={`${colClass}__select-all`}
@@ -174,9 +174,7 @@ export let AddSelectColumn = ({
             onChange={selectAllHandler}
             labelText={
               <>
-                <span className={`${blockClass}__tag-container-label`}>
-                  {header}
-                </span>
+                <span className={`${blockClass}__tag-label`}>{header}</span>
                 <Tag type="gray" size="sm">
                   {colItems.length}
                 </Tag>

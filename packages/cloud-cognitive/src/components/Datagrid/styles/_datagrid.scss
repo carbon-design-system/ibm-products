@@ -473,7 +473,9 @@
 }
 
 .#{$block-class}
-  .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)::before {
+  .#{$carbon-prefix}--data-table--selected:not(
+    .#{$block-class}__active-row
+  )::before {
   position: absolute;
   left: 0;
   width: $spacing-02;

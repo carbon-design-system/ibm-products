@@ -299,7 +299,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion: no-preference) {
   .c4p--cascade__element,
-.c4p--cascade__col {
+  .c4p--cascade__col {
     animation: 240ms cubic-bezier(0.2, 0, 0.38, 0.9) 0s 1 fade;
     animation-fill-mode: forwards;
     opacity: 0;
@@ -473,9 +473,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 @media (prefers-reduced-motion) {
   .c4p--create-influencer__side-nav-opening,
-.c4p--create-influencer__progress-indicator-opening,
-.c4p--create-influencer__side-nav-closing,
-.c4p--create-influencer__progress-indicator-closing {
+  .c4p--create-influencer__progress-indicator-opening,
+  .c4p--create-influencer__side-nav-closing,
+  .c4p--create-influencer__progress-indicator-closing {
     animation: none;
     opacity: 1;
   }
@@ -1966,7 +1966,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 .c4p--http-errors .c4p--http-errors__title {
   font-size: var(--cds-productive-heading-05-font-size, 2rem);
-  font-weight: var(--cds-productive-heading-05-font-weight, 300);
+  font-weight: var(--cds-productive-heading-05-font-weight, 400);
   line-height: var(--cds-productive-heading-05-line-height, 1.25);
   letter-spacing: var(--cds-productive-heading-05-letter-spacing, 0);
   margin-bottom: var(--cds-spacing-04, 0.75rem);
@@ -2345,6 +2345,65 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-support-error, #da1e28);
 }
 
+.c4p--inline-edit-v2 {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  cursor: pointer;
+}
+.c4p--inline-edit-v2-readonly {
+  cursor: not-allowed;
+}
+.c4p--inline-edit-v2:hover {
+  background: var(--cds-field-01, #f4f4f4);
+}
+.c4p--inline-edit-v2:hover .c4p--inline-edit-v2__btn-edit {
+  visibility: visible;
+}
+.c4p--inline-edit-v2__btn-edit {
+  visibility: hidden;
+}
+.c4p--inline-edit-v2-focused {
+  background: var(--cds-field-01, #f4f4f4);
+  outline: 2px solid var(--cds-focus, #0f62fe);
+}
+.c4p--inline-edit-v2__text-input {
+  flex: 1;
+}
+.c4p--inline-edit-v2__text-input-label {
+  display: none;
+}
+.c4p--inline-edit-v2__warning-icon {
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  margin-right: 0.4375rem;
+  color: var(--cds-support-01, #da1e28);
+}
+.c4p--inline-edit-v2__warning-text {
+  font-size: var(--cds-caption-01-font-size, 0.75rem);
+  font-weight: var(--cds-caption-01-font-weight, 400);
+  line-height: var(--cds-caption-01-line-height, 1.33333);
+  letter-spacing: var(--cds-caption-01-letter-spacing, 0.32px);
+  margin-top: var(--cds-spacing-03, 0.5rem);
+  color: var(--cds-support-01, #da1e28);
+}
+
+.c4p--inline-edit-v2__text-input.bx--text-input {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+.c4p--inline-edit-v2-readonly .c4p--inline-edit-v2__text-input.bx--text-input,
+.c4p--inline-edit-v2-readonly .bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
+  cursor: not-allowed;
+}
+
+.c4p--inline-edit-v2__text-input.bx--text-input:focus,
+.c4p--inline-edit-v2__text-input.bx--text-input:active {
+  outline: none;
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -2586,7 +2645,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
-  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
   --cds-productive-heading-06-font-size: 2.625rem;
@@ -2614,7 +2673,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
-  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-font-weight: 400;
   --cds-expressive-heading-05-line-height: 1.25;
   --cds-expressive-heading-05-letter-spacing: 0;
   --cds-expressive-heading-06-font-size: 2rem;
@@ -2692,7 +2751,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-heading-04-line-height: 1.28572;
   --cds-heading-04-letter-spacing: 0;
   --cds-heading-05-font-size: 2rem;
-  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
   --cds-heading-06-font-size: 2.625rem;
@@ -2712,7 +2771,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-fluid-heading-04-line-height: 1.28572;
   --cds-fluid-heading-04-letter-spacing: 0;
   --cds-fluid-heading-05-font-size: 2rem;
-  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-font-weight: 400;
   --cds-fluid-heading-05-line-height: 1.25;
   --cds-fluid-heading-05-letter-spacing: 0;
   --cds-fluid-heading-06-font-size: 2rem;
@@ -2933,7 +2992,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion: reduce) {
   .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-more-button .bx--btn__icon,
-.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button .bx--btn__icon {
+  .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button .bx--btn__icon {
     transition: none;
   }
 }
@@ -3095,7 +3154,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
     display: none;
   }
   .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-back,
-.c4p--breadcrumb-with-overflow .bx--breadcrumb-item:last-child {
+  .c4p--breadcrumb-with-overflow .bx--breadcrumb-item:last-child {
     display: inline-flex;
     vertical-align: middle;
   }
@@ -3609,12 +3668,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   transform: translateY(-2px);
   vertical-align: middle;
 }
-.c4p--page-header .c4p--page-header__title-wrapper {
-  font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
-  font-weight: var(--cds-productive-heading-04-font-weight, 400);
-  line-height: var(--cds-productive-heading-04-line-height, 1.28572);
-  letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
-}
 .c4p--page-header .c4p--page-header__page-actions {
   flex: 0 0 100%;
   margin-top: var(--cds-spacing-05, 1rem);
@@ -4005,7 +4058,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4016,7 +4069,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4027,7 +4080,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4038,7 +4091,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4049,7 +4102,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4060,7 +4113,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4071,7 +4124,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4082,7 +4135,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4093,7 +4146,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4104,7 +4157,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4115,7 +4168,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4126,7 +4179,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4137,7 +4190,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4148,7 +4201,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4159,7 +4212,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4170,7 +4223,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4182,7 +4235,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion: reduce) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4194,7 +4247,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion: reduce) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4217,7 +4270,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4228,7 +4281,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4239,7 +4292,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4250,7 +4303,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4261,7 +4314,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4272,7 +4325,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4283,7 +4336,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4294,7 +4347,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4305,7 +4358,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4316,7 +4369,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4327,7 +4380,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4338,7 +4391,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4349,7 +4402,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4360,7 +4413,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4371,7 +4424,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4382,7 +4435,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4393,7 +4446,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4404,7 +4457,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4416,7 +4469,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion: reduce) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4428,7 +4481,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion: reduce) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4451,7 +4504,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -4462,7 +4515,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion) {
   .bx--btn.bx--btn--icon-only.bx--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -4952,7 +5005,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
-  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
   --cds-productive-heading-06-font-size: 2.625rem;
@@ -4980,7 +5033,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
-  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-font-weight: 400;
   --cds-expressive-heading-05-line-height: 1.25;
   --cds-expressive-heading-05-letter-spacing: 0;
   --cds-expressive-heading-06-font-size: 2rem;
@@ -5058,7 +5111,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-heading-04-line-height: 1.28572;
   --cds-heading-04-letter-spacing: 0;
   --cds-heading-05-font-size: 2rem;
-  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
   --cds-heading-06-font-size: 2.625rem;
@@ -5078,7 +5131,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-fluid-heading-04-line-height: 1.28572;
   --cds-fluid-heading-04-letter-spacing: 0;
   --cds-fluid-heading-05-font-size: 2rem;
-  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-font-weight: 400;
   --cds-fluid-heading-05-line-height: 1.25;
   --cds-fluid-heading-05-letter-spacing: 0;
   --cds-fluid-heading-06-font-size: 2rem;
@@ -5397,7 +5450,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-productive-heading-04-line-height: 1.28572;
   --cds-productive-heading-04-letter-spacing: 0;
   --cds-productive-heading-05-font-size: 2rem;
-  --cds-productive-heading-05-font-weight: 300;
+  --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
   --cds-productive-heading-06-font-size: 2.625rem;
@@ -5425,7 +5478,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-expressive-heading-04-line-height: 1.28572;
   --cds-expressive-heading-04-letter-spacing: 0;
   --cds-expressive-heading-05-font-size: 2rem;
-  --cds-expressive-heading-05-font-weight: 300;
+  --cds-expressive-heading-05-font-weight: 400;
   --cds-expressive-heading-05-line-height: 1.25;
   --cds-expressive-heading-05-letter-spacing: 0;
   --cds-expressive-heading-06-font-size: 2rem;
@@ -5503,7 +5556,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-heading-04-line-height: 1.28572;
   --cds-heading-04-letter-spacing: 0;
   --cds-heading-05-font-size: 2rem;
-  --cds-heading-05-font-weight: 300;
+  --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
   --cds-heading-06-font-size: 2.625rem;
@@ -5523,7 +5576,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --cds-fluid-heading-04-line-height: 1.28572;
   --cds-fluid-heading-04-letter-spacing: 0;
   --cds-fluid-heading-05-font-size: 2rem;
-  --cds-fluid-heading-05-font-weight: 300;
+  --cds-fluid-heading-05-font-weight: 400;
   --cds-fluid-heading-05-line-height: 1.25;
   --cds-fluid-heading-05-letter-spacing: 0;
   --cds-fluid-heading-06-font-size: 2rem;

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 
 import { action } from '@storybook/addon-actions';
 
@@ -36,22 +36,16 @@ export default {
   },
 };
 
-const renderItems = (setIsOpen, args) => {
+const Template = (args) => {
   return (
     <ButtonMenu label="Primary button" renderIcon={ChevronDown16} {...args}>
       <ButtonMenuItem
-        onClick={() => {
-          action(`Click on Option 1`);
-          setIsOpen(false);
-        }}
-        size={args.size}
-      >
-        Option 1
-      </ButtonMenuItem>
+        itemText="Option 1"
+        onClick={action(`Click on Option 1`)}
+      />
       <ButtonMenuItem
         onClick={() => {
           action(`Click on Option 2`);
-          setIsOpen(false);
         }}
         size={args.size}
       >
@@ -60,7 +54,6 @@ const renderItems = (setIsOpen, args) => {
       <ButtonMenuItem
         onClick={() => {
           action(`Click on Option 3`);
-          setIsOpen(false);
         }}
         disabled={args.isDisabled ? true : false}
         size={args.size}
@@ -68,32 +61,11 @@ const renderItems = (setIsOpen, args) => {
         Option 3
       </ButtonMenuItem>
       <ButtonMenuItem
-        onClick={() => {
-          action(`Click on Option 4`);
-          setIsOpen(false);
-        }}
-        kind={args.isDanger ? 'danger' : null}
-        size={args.size}
-      >
-        Option 4
-      </ButtonMenuItem>
-    </ButtonMenu>
-  );
-};
-
-const Template = (args) => {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <ButtonMenu
-      open={isOpen}
-      onClose={() => setIsOpen(false)}
-      onMenuButtonClick={() => {
-        setIsOpen((prev) => !prev);
-      }}
-      label="Button menu"
-      {...args}
-    >
-      {renderItems(setIsOpen, args)}
+        itemText="Option 4"
+        onClick={action(`Click on Option 4`)}
+        hasDivider={args.hasDivider}
+        isDelete={args.isDelete}
+      />
     </ButtonMenu>
   );
 };
@@ -101,8 +73,7 @@ const Template = (args) => {
 export const buttonMenu = prepareStory(Template, {
   storyName: 'Button menu',
   args: {
-    isDanger: false,
-    isDisabled: false,
-    size: 'md',
+    hasDivider: false,
+    isDelete: false,
   },
 });

@@ -10,20 +10,40 @@ import { DATE, DROPDOWN, NUMBER, RADIO, CHECKBOX } from './constants';
 
 export const FilterContext = createContext();
 
+const EventEmitter = {
+  events: {},
+  dispatch: function (event, data) {
+    if (!this.events[event]) {
+      return;
+    }
+    this.events[event].forEach((callback) => callback(data));
+  },
+  subscribe: function (event, callback) {
+    if (!this.events[event]) {
+      this.events[event] = [];
+    } else {
+      this.events[event].push(callback);
+    }
+  },
+};
+
 const prepareFiltersForTags = (filters) => {
   const tags = [];
 
   filters.forEach(({ id, type, value }) => {
     if (type === DROPDOWN || type === RADIO || type === NUMBER) {
-      tags.push({ [id]: value });
+      tags.push({ key: id, value });
     } else if (type === DATE) {
       const [startDate, endDate] = value;
       tags.push({
-        [id]: `${startDate.toLocaleString()} - ${endDate.toLocaleString()}`,
+        key: id,
+        value: `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`,
       });
     } else if (type === CHECKBOX) {
       value.forEach((checkbox) => {
-        tags.push({ [id]: checkbox.value });
+        if (checkbox.selected) {
+          tags.push({ key: id, value: checkbox.value });
+        }
       });
     }
   });
@@ -32,13 +52,9 @@ const prepareFiltersForTags = (filters) => {
 };
 
 export const FilterProvider = ({ children, filters }) => {
-  console.log(filters);
-
   const filterTags = prepareFiltersForTags(filters);
 
-  console.log({ filterTags });
-
-  const value = { filterTags };
+  const value = { filterTags, EventEmitter };
 
   return (
     <FilterContext.Provider value={value}>{children}</FilterContext.Provider>
@@ -52,50 +68,3 @@ FilterProvider.propTypes = {
   ]).isRequired,
   filters: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
-
-[
-  {
-    id: 'joined',
-    value: ['2022-10-02T04:00:00.000Z', '2022-10-26T04:00:00.000Z'],
-    type: 'date',
-  },
-  {
-    id: 'visits',
-    value: '1',
-    type: 'number',
-  },
-  {
-    id: 'passwordStrength',
-    value: [
-      {
-        id: 'normal',
-        labelText: 'Normal',
-        value: 'normal',
-        selected: true,
-      },
-      {
-        id: 'minor-warning',
-        labelText: 'Minor warning',
-        value: 'minor-warning',
-        selected: true,
-      },
-      {
-        id: 'critical',
-        labelText: 'Critical',
-        value: 'critical',
-        selected: false,
-      },
-    ],
-    type: 'checkbox',
-  },
-  {
-    id: 'role',
-    value: 'developer',
-    type: 'radio',
-  },
-  {
-    id: 'status',
-    value: 'complicated',
-    type: 'dropdown',
-  },
-];

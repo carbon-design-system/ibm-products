@@ -1,0 +1,80 @@
+/*
+* Licensed Materials - Property of IBM
+* 5724-Q36
+* (c) Copyright IBM Corp. 2022
+* US Government Users Restricted Rights - Use, duplication or disclosure
+* restricted by GSA ADP Schedule Contract with IBM Corp.
+*/
+
+// stylelint-disable carbon/layout-token-use
+
+@import '../variables';
+
+$action-set-height: rem(64px);
+
+.#{$block-class}-filter-flyout__container {
+  position: relative;
+}
+
+.#{$block-class}-filter-flyout {
+  position: absolute;
+  top: $spacing-09;
+  right: 0;
+  display: none;
+  width: rem(642px);
+  background-color: $ui-02;
+  box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);
+}
+
+.#{$block-class}-filter-flyout--open {
+  display: grid;
+}
+
+.#{$block-class}-filter-flyout--batch {
+  min-height: rem(346px);
+  grid-template-rows: 1fr rem(48px);
+}
+
+.#{$block-class}-filter-flyout--instant {
+  min-height: rem(282px);
+  grid-template-rows: 1fr;
+}
+
+.#{$block-class}-filter-flyout__inner-container {
+  padding: $spacing-05 $spacing-05 $spacing-09 $spacing-05;
+}
+
+.#{$block-class}-filter-flyout__inner-container::before {
+  position: absolute;
+  top: rem(-7px);
+  right: 1px;
+  display: block;
+  width: rem(46px);
+  height: rem(15px);
+  background-color: $ui-02;
+  content: '';
+}
+
+.#{$block-class}-filter-flyout__title {
+  display: block;
+  @include carbon--type-style('productive-heading-01');
+
+  margin-bottom: $spacing-06;
+}
+
+.#{$block-class}-filter-flyout__filters {
+  display: grid;
+  gap: rem(16px) rem(32px);
+  grid-template-columns: 1fr 1fr;
+}
+
+// Carbon overrides
+.#{$block-class}-filter-flyout__trigger--open.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only {
+  position: relative;
+  background-color: $ui-02;
+  box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);
+}
+
+.#{$block-class}-filter-flyout .#{$carbon-prefix}--fieldset {
+  margin-bottom: 0;
+}

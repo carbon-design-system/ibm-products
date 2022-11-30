@@ -40,7 +40,7 @@ const Template = (args) => {
   return (
     <ButtonMenu label="Primary button" renderIcon={ChevronDown16} {...args}>
       <ButtonMenuItem
-        itemText="Option 1a"
+        itemText="Option 1"
         onClick={action(`Click on Option 1`)}
       />
       <ButtonMenuItem
@@ -54,7 +54,8 @@ const Template = (args) => {
       <ButtonMenuItem
         itemText="Option 4"
         onClick={action(`Click on Option 4`)}
-        hasDivider
+        hasDivider={args.hasDivider}
+        isDelete={args.isDelete}
       />
     </ButtonMenu>
   );
@@ -62,5 +63,8 @@ const Template = (args) => {
 
 export const buttonMenu = prepareStory(Template, {
   storyName: 'Button menu',
-  args: {},
+  args: {
+    hasDivider: false,
+    isDelete: false,
+  },
 });

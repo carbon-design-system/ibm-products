@@ -14,6 +14,8 @@ import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 export const DatagridActions = (datagridState) => {
+
+  console.log(datagridState)
   const {
     selectedFlatRows,
     setGlobalFilter,

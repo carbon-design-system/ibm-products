@@ -39,6 +39,8 @@ import {
 import styles from './_storybook-styles.scss';
 
 import mdx from './Tearsheet.mdx';
+import { CreateTearsheetStep } from '../CreateTearsheet/CreateTearsheetStep';
+import { CreateTearsheet } from '../CreateTearsheet/CreateTearsheet';
 
 export default {
   title: getStoryTitle(Tearsheet.displayName),
@@ -190,7 +192,7 @@ const Template = ({ actions, portalTargetCustomDomNode, ...args }) => {
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
       <Button onClick={() => setOpen(true)}>Open Tearsheet</Button>
       <div ref={ref}>
-        <Tearsheet
+        {/* <Tearsheet
           {...args}
           actions={wiredActions}
           open={open}
@@ -198,7 +200,27 @@ const Template = ({ actions, portalTargetCustomDomNode, ...args }) => {
           portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
         >
           {mainContent}
-        </Tearsheet>
+        </Tearsheet> */}
+        <CreateTearsheet
+        open={open}
+        backButtonText="Back"
+        cancelButtonText="Cancel"
+        nextButtonText="Next"
+        submitButtonText="Save"
+        onClose={() => setOpen(false)}
+        onRequestSubmit={() => {}}
+        >
+          <CreateTearsheetStep hasFieldset={false} title="Step 1" description="">
+            <TextInput
+              id="field1"
+              labelText="Field 1"
+              onFocus={() => console.log("Focused!")}
+            />
+          </CreateTearsheetStep>
+          <CreateTearsheetStep hasFieldset={false} title="Step 2" description="">
+            <TextInput id="field2" labelText="Field 2" />
+          </CreateTearsheetStep>
+        </CreateTearsheet>
       </div>
     </>
   );
@@ -366,6 +388,19 @@ export const tearsheet = prepareStory(Template, {
 
 export const withNavigation = prepareStory(Template, {
   storyName: 'Tearsheet with navigation',
+  args: {
+    closeIconDescription,
+    description,
+    label,
+    navigation: tabs,
+    onClose: action('onClose called'),
+    title,
+    actions: 7,
+  },
+});
+
+export const withJambos = prepareStory(Template, {
+  storyName: 'Tearsheet with Jams',
   args: {
     closeIconDescription,
     description,

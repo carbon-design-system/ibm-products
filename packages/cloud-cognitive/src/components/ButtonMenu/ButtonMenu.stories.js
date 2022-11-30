@@ -19,6 +19,8 @@ import mdx from './ButtonMenu.mdx';
 
 import styles from './_storybook-styles.scss';
 
+import { ChevronDown16 } from '@carbon/icons-react';
+
 export default {
   title: getStoryTitle(ButtonMenu.displayName),
   component: ButtonMenu,
@@ -36,7 +38,7 @@ export default {
 
 const renderItems = (setIsOpen, args) => {
   return (
-    <>
+    <ButtonMenu label="Primary button" renderIcon={ChevronDown16} {...args}>
       <ButtonMenuItem
         onClick={() => {
           action(`Click on Option 1`);
@@ -75,7 +77,7 @@ const renderItems = (setIsOpen, args) => {
       >
         Option 4
       </ButtonMenuItem>
-    </>
+    </ButtonMenu>
   );
 };
 

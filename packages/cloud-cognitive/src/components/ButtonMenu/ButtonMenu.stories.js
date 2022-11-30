@@ -54,8 +54,6 @@ const Template = (args) => {
       <ButtonMenuItem
         itemText="Option 4"
         onClick={action(`Click on Option 4`)}
-        hasDivider={args.hasDivider}
-        isDelete={args.isDelete}
       />
     </ButtonMenu>
   );
@@ -64,7 +62,6 @@ const Template = (args) => {
 export const buttonMenu = prepareStory(Template, {
   storyName: 'Button menu',
   args: {
-    hasDivider: false,
-    isDelete: false,
+    size: 'md',
   },
 });

@@ -416,10 +416,20 @@
 }
 
 .#{$block-class}__carbon-row-expanded {
-  // Border applied to nested rows only on open chevron hover
-  &.#{$block-class}__carbon-row-expanded-hover-active
-    ~ .#{$block-class}__carbon-nested-row {
-    border-left: 1px solid $button-primary;
+  position: relative;
+  &.#{$block-class}__carbon-row-expanded-hover-active::before {
+    position: absolute;
+    z-index: 2;
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    top: var(--#{$block-class}--row-height);
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    left: calc(
+      var(--#{$block-class}--indicator-offset-amount) + #{$spacing-05}
+    );
+    width: 1px;
+    height: var(--#{$block-class}--indicator-height);
+    border-left: 1px solid $background-brand;
+    content: '';
   }
 }
 

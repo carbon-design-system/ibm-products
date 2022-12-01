@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 /**
  * to be able to more easily and efficiently the child entries the data needs to be
  * normalized. this function recursively goes through the data array to build a single
@@ -85,7 +92,11 @@ export const getFilteredItems = (
     if (searchTerm || globalFiltersApplied) {
       const results = itemIds
         .reduce((prev, cur) => {
-          if (normalizedItems[cur].title.toLowerCase().includes(searchTerm)) {
+          if (
+            normalizedItems[cur].title
+              .toLowerCase()
+              .includes(searchTerm.toLowerCase())
+          ) {
             prev.push(normalizedItems[cur]);
           }
           return prev;
@@ -123,7 +134,7 @@ export const getFilteredItems = (
   } else {
     if (searchTerm) {
       return items.entries.filter((item) =>
-        item.title.toLowerCase().includes(searchTerm)
+        item.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
     return items.entries;

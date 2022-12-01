@@ -15,6 +15,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
+import { useControllableState } from '../../global/js/hooks';
 
 // Carbon and package components we use.
 import { Toggle } from 'carbon-components-react';
@@ -34,6 +35,7 @@ const componentName = 'OptionsTile';
 
 // Default values for props
 const defaults = {
+  onChange: () => {},
   size: 'xl',
 };
 
@@ -52,6 +54,7 @@ export let OptionsTile = React.forwardRef(
       invalidText,
       locked,
       lockedText,
+      onChange = defaults.onChange,
       onToggle,
       open,
       size = defaults.size,
@@ -66,9 +69,14 @@ export let OptionsTile = React.forwardRef(
     },
     ref
   ) => {
-    const [isOpen, setIsOpen] = useState(open);
     const [prevIsOpen, setPrevIsOpen] = useState(open);
     const [closing, setClosing] = useState(false);
+
+    const [isOpen, setIsOpen] = useControllableState({
+      value: open,
+      defaultValue: open || null,
+      onChange: (value) => onChange(value),
+    });
 
     const detailsRef = useRef(null);
     const contentRef = useRef(null);
@@ -336,6 +344,12 @@ OptionsTile.propTypes = {
    * Provide a text explaining why the OptionsTile is in locked state.
    */
   lockedText: PropTypes.string,
+
+  /**
+   * Provide a function which will be called each time the user
+   * toggles the open state of the OptionsTile.
+   */
+  onChange: PropTypes.func,
 
   /**
    * Provide a function which will be called each time the user

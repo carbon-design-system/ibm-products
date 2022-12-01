@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021
+// Copyright IBM Corp. 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -8,7 +8,19 @@
 // Standard imports.
 @import '../../global/styles/project-settings';
 
+@import '../Tearsheet/index';
+@import '../CreateInfluencer/index';
+
+@import 'carbon-components/scss/components/accordion/accordion';
+@import 'carbon-components/scss/components/breadcrumb/breadcrumb';
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/checkbox/checkbox';
+@import 'carbon-components/scss/components/dropdown/dropdown';
+@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+@import 'carbon-components/scss/components/radio-button/radio-button';
+@import 'carbon-components/scss/components/search/search';
 @import 'carbon-components/scss/components/structured-list/structured-list';
+@import 'carbon-components/scss/components/tag/tag';
 
 @mixin add-select {
   $block-class: #{$pkg-prefix}--add-select;
@@ -60,7 +72,9 @@
       justify-content: center;
     }
 
-    &-cell:hover .#{$block-class}__selections-hidden-hover {
+    &-cell:hover .#{$block-class}__selections-hidden-hover,
+    .#{$carbon-prefix}--structured-list-row:focus-within
+      .#{$block-class}__selections-hidden-hover {
       visibility: visible;
     }
 
@@ -68,7 +82,7 @@
       visibility: hidden;
     }
 
-    &-row-selected#{$carbon-prefix}--structured-list-row {
+    &-row--selected.#{$carbon-prefix}--structured-list-row {
       border-bottom: 1px solid $selected-ui;
       background-color: $selected-ui;
     }
@@ -108,7 +122,7 @@
       border-left: 0.125rem solid transparent;
     }
 
-    &-row-meta-selected {
+    &-row-meta--selected {
       border-left: 0.125rem solid $interactive-04;
       background-color: $hover-row;
     }
@@ -130,13 +144,6 @@
     }
   }
 
-  .#{$block-class}
-    #{$carbon-prefix}--structured-list--selection
-    .#{$block-class}__selections-row-selected#{$carbon-prefix}--structured-list-row:hover:not(#{$carbon-prefix}--structured-list-row--header-row):not(#{$carbon-prefix}--structured-list-row--selected) {
-    border-bottom: 1px solid $hover-selected-ui;
-    background-color: $hover-selected-ui;
-  }
-
   .#{$block-class}__sub-header {
     display: flex;
     align-items: flex-end;
@@ -147,13 +154,12 @@
     }
   }
 
-  .#{$block-class} #{$carbon-prefix}--structured-list-row {
-    border-bottom: 0;
-  }
-
+  .#{$block-class} .#{$carbon-prefix}--structured-list-row,
   .#{$block-class}
-    #{$carbon-prefix}--structured-list--selection
-    #{$carbon-prefix}--structured-list-row:hover:not(#{$carbon-prefix}--structured-list-row--header-row):not(#{$carbon-prefix}--structured-list-row--selected) {
+    .#{$block-class}__selections.#{$carbon-prefix}--structured-list--selection
+    .#{$carbon-prefix}--structured-list-row:hover:not(
+      .#{$carbon-prefix}--structured-list-row--header-row
+    ):not(.#{$carbon-prefix}--structured-list-row--selected) {
     border-bottom: 0;
   }
 
@@ -224,7 +230,7 @@
       margin-left: $spacing-03;
     }
 
-    .#{$block-class}__selections-row#{$carbon-prefix}--structured-list-row {
+    .#{$block-class}__selections-row.#{$carbon-prefix}--structured-list-row {
       border-left: 0;
     }
 
@@ -237,7 +243,7 @@
       padding: 0 $spacing-03;
     }
 
-    .#{$block-class}__tag-container {
+    .#{$block-class}__tags {
       padding: 0 $spacing-03;
       margin-bottom: 0;
     }
@@ -246,7 +252,7 @@
       padding: 0;
     }
 
-    .#{$block-class}__selections#{$carbon-prefix}--structured-list {
+    .#{$block-class}__selections.#{$carbon-prefix}--structured-list {
       border-top: 0;
     }
   }
@@ -284,7 +290,7 @@
     }
   }
 
-  .#{$block-class}__tag-container {
+  .#{$block-class}__tags {
     display: flex;
     align-items: center;
     margin-top: $spacing-05;
@@ -375,7 +381,11 @@
 
   // overrides
 
-  .#{$block-class}__tag-container .#{$carbon-prefix}--tag {
+  .#{$block-class}__selections .#{$carbon-prefix}--list-box__menu {
+    left: auto;
+  }
+
+  .#{$block-class}__tags .#{$carbon-prefix}--tag {
     margin: 0;
   }
 
@@ -440,7 +450,7 @@
 
   .#{$block-class}__multi .#{$pkg-prefix}--empty-state {
     max-width: 16rem;
-    margin-top: $layout-04;
+    margin-top: $spacing-09;
   }
 
   .#{$block-class} .#{$carbon-prefix}--accordion__arrow {
@@ -454,20 +464,20 @@
   }
 
   .#{$block-class}
-    #{$carbon-prefix}--accordion--start
-    #{$carbon-prefix}--accordion__arrow {
+    .#{$carbon-prefix}--accordion--start
+    .#{$carbon-prefix}--accordion__arrow {
     margin: 0 0 0 $spacing-05;
   }
 
   .#{$block-class}
-    #{$carbon-prefix}--accordion--start
-    #{$carbon-prefix}--accordion__title {
+    .#{$carbon-prefix}--accordion--start
+    .#{$carbon-prefix}--accordion__title {
     margin: 0 $spacing-05 0 $spacing-03;
   }
 
   .#{$block-class}
-    #{$carbon-prefix}--accordion__item--active
-    #{$carbon-prefix}--accordion__content {
+    .#{$carbon-prefix}--accordion__item--active
+    .#{$carbon-prefix}--accordion__content {
     padding-top: 0;
     padding-bottom: 0;
     margin-top: $spacing-03;

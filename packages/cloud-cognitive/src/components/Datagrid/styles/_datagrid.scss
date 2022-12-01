@@ -523,3 +523,8 @@
 .#{$block-class} .#{$pkg-prefix}--button-menu {
   height: $spacing-09;
 }
+
+.#{$block-class}__customize-columns-checkbox-wrapper.#{$carbon-prefix}--form-item {
+  flex: 0 0 auto;
+  margin-right: $spacing-03;
+}

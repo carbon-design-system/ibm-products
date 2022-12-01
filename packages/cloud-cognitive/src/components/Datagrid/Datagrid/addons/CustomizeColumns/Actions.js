@@ -15,25 +15,6 @@ import { pkg } from '../../../../../settings';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const Actions = ({ searchText, setSearchText, findColumnPlaceholderLabel }) => {
-  
-  const getHighlightedText= (text, highlight) => {
-    // Split on highlight term and include term into parts, ignore case
-
-    const searchTextItems = document.querySelectorAll('.bx--checkbox-label-text');
-
-    console.log(searchTextItems[1].textContent);
-    
-    // searchTextItems.map((item) =>{
-    //   console.log(item);
-    // });
-    // const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-    // return <span> { parts.map((part, i) => 
-    //     <span key={i} style={part.toLowerCase() === highlight.toLowerCase() ? { fontWeight: 'bold' } : {} }>
-    //         { part }
-    //     </span>)
-    // } </span>;
-  }
-
   return (
     <div className={`${blockClass}__customize-columns-modal--actions`}>
       <Search
@@ -44,7 +25,6 @@ const Actions = ({ searchText, setSearchText, findColumnPlaceholderLabel }) => {
         onChange={(e) => {
           // TODO: is it performant?
           setSearchText(e.target.value);
-          getHighlightedText(searchText);
         }}
       />
     </div>

@@ -22,15 +22,15 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^chalk$)/'"
   },
   "devDependencies": {
-    "npm-check-updates": "^16.4.1"
+    "npm-check-updates": "^16.4.3"
   },
   "peerDependencies": {
     "jest": "^29.3.1"
   },
   "dependencies": {
-    "@babel/core": "^7.20.2",
+    "@babel/core": "^7.20.5",
     "@testing-library/jest-dom": "^5.16.5",
-    "accessibility-checker": "3.1.40",
+    "accessibility-checker": "3.1.41",
     "axe-core": "^4.5.2",
     "babel-jest": "^29.3.1",
     "babel-preset-ibm-cloud-cognitive": "^0.14.24",

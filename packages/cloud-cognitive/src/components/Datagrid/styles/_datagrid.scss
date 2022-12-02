@@ -483,9 +483,7 @@
 }
 
 .#{$block-class}
-  .#{$carbon-prefix}--data-table--selected:not(
-    .#{$block-class}__active-row
-  )::before {
+  .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)::before {
   position: absolute;
   left: 0;
   width: $spacing-02;
@@ -541,17 +539,17 @@
   height: 100vh;
 }
 
-.#{$block-class}__toolbar-primary-overflow.primary-kind {
+.#{$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger {
   background-color: $interactive-01;
 }
 
-.#{$block-class}__toolbar-primary-overflow.primary-kind svg {
+.#{$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger svg {
   fill: $ui-background;
 }
 
-.#{$block-class}__toolbar-primary-overflow.primary-kind:hover,
-.#{$block-class}__toolbar-primary-overflow.primary-kind.#{$carbon-prefix}--overflow-menu--open:hover,
-.#{$block-class}__toolbar-primary-overflow.primary-kind.#{$carbon-prefix}--overflow-menu--open {
+.#{$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger:hover,
+.#{$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{$carbon-prefix}--overflow-menu--open:hover,
+.#{$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{$carbon-prefix}--overflow-menu--open {
   background-color: $hover-primary;
 }
 

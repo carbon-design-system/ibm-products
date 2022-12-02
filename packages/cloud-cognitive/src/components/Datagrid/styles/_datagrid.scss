@@ -541,17 +541,18 @@
   width: 100%;
 }
 
-.#{$block-class}__toolbar-primary-overflow.primary-kind {
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger {
   background-color: $interactive;
 }
 
-.#{$block-class}__toolbar-primary-overflow.primary-kind svg {
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger
+  svg {
   fill: $background;
 }
 
-.#{$block-class}__toolbar-primary-overflow.primary-kind:hover,
-.#{$block-class}__toolbar-primary-overflow.primary-kind.#{c4p-settings.$carbon-prefix}--overflow-menu--open:hover,
-.#{$block-class}__toolbar-primary-overflow.primary-kind.#{c4p-settings.$carbon-prefix}--overflow-menu--open {
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger:hover,
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{c4p-settings.$carbon-prefix}--overflow-menu--open:hover,
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{c4p-settings.$carbon-prefix}--overflow-menu--open {
   background-color: $button-primary-hover;
 }
 

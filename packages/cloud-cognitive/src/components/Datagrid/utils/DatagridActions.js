@@ -197,7 +197,7 @@ export const DatagridActions = (datagridState) => {
           size="lg"
           flipped
           renderIcon={ChevronDown}
-          className={`${blockClass}__toolbar-primary-overflow primary-kind`}
+          className={`${blockClass}__toolbar-menu__trigger`}
           menuOptionsClass={`${blockClass}__toolbar-options`}
         >
           <OverflowMenuItem

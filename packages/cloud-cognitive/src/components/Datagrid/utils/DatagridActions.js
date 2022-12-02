@@ -8,15 +8,16 @@
 import { Add16, Download16, Restart16 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import { Button, DataTable } from 'carbon-components-react';
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { Filter16 } from '@carbon/icons-react';
-import { FilterFlyout } from '../Datagrid/addons/Filtering';
+import { FilterContext, FilterFlyout } from '../Datagrid/addons/Filtering';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 export const DatagridActions = (datagridState) => {
+  const { setLeftPanelOpen } = useContext(FilterContext);
   const {
     selectedFlatRows,
     setGlobalFilter,
@@ -65,6 +66,7 @@ export const DatagridActions = (datagridState) => {
       renderIcon={Filter16}
       iconDescription={'Open filters'}
       className="filter-left-panel__button"
+      onClick={() => setLeftPanelOpen(true)}
     /> 
 
   return (

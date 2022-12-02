@@ -159,8 +159,6 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 };
 
 const DatagridToolbar = (datagridState) => {
-  const { applyFilters } = useContext(FilterContext);
-  const [filterLeftPanelOpen, setFilterLeftPanelOpen] = useState(false);
   const { width, ref } = useResizeDetector();
   const { DatagridActions, DatagridBatchActions, batchActions, state } =
     datagridState;
@@ -173,13 +171,6 @@ const DatagridToolbar = (datagridState) => {
         clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
       />
     );
-
-  const datagridStateWithFilterProps = {
-    ...datagridState,
-    applyFilters,
-    filterLeftPanelOpen,
-    setFilterLeftPanelOpen,
-  };
 
   return batchActions && DatagridActions ? (
     <div ref={ref} className={`${blockClass}__table-toolbar`}>

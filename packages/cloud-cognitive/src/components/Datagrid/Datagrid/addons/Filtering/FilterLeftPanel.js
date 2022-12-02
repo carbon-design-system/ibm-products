@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo, useEffect } from 'react';
+import React, { useRef, useMemo, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import {
   Accordion,
@@ -11,35 +11,41 @@ import { BATCH, INSTANT } from './constants';
 import cx from 'classnames';
 import { Close32 } from '@carbon/icons-react';
 import { ActionSet } from '../../../../ActionSet';
+import { FilterContext } from '.';
 
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-left-panel`;
 
-const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, open, tableID }) => {
+const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, tableID }) => {
   /** Refs */
   const filterLeftPanelRef = useRef(null);
   const tableRef = useRef();
   const headerRef = useRef();
   const buttonRef = useRef();
   const buttonSetRef = useRef();
-  buttonRef.current = document.querySelector('button.filter-left-panel__button');
-  console.log(buttonRef);
 
-  useEffect(() => {
+  /** Effects */
+  useEffect(function setRefsOnMount() {
+    buttonRef.current = document.querySelector('button.filter-left-panel__button');
     tableRef.current = document.querySelector(`#${tableID} .bx--data-table`)
   }, [tableID])
- 
-  /** State */
-  const [panelOpen, setPanelOpen] = useState(open);
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
 
-  /** Methods */
-  const openPanel = () => setPanelOpen(true);
-  const closePanel = () => setPanelOpen(false);
+  /** Context */
+  const { leftPanelOpen, setLeftPanelOpen } = useContext(FilterContext);
 
+  console.log(leftPanelOpen);
+
+  /** Methods */
+  const closePanel = () => setLeftPanelOpen(false);
+
+  const onCancel = () => {
+    closePanel();
+  }
+  
   const renderActionSet = () => {
     return (
       showActionSet && (
@@ -56,7 +62,7 @@ const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, open, ta
               key: 3,
               kind: 'secondary',
               label: "Cancel",
-              onClick: null,
+              onClick: onCancel(),
               isExpressive: false,
             },
           ]}
@@ -76,14 +82,13 @@ const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, open, ta
   const buttonSetHeight = buttonSetRef.current?.getBoundingClientRect().height;
 
   return (
-    <div className={`${componentClass}__container`}>
-      <div
-        ref={filterLeftPanelRef}
-        className={cx(componentClass, {
-          [`${componentClass}--open`]: panelOpen,
-          [`${componentClass}--batch`]: showActionSet,
-          [`${componentClass}--instant`]: !showActionSet,
-        })}
+    <div 
+      className={cx(componentClass, `${componentClass}__container`, {
+      [`${componentClass}--open`]: true,
+      [`${componentClass}--batch`]: showActionSet,
+      [`${componentClass}--instant`]: !showActionSet,
+      })}
+      ref={filterLeftPanelRef}
       >
         <div className={`${componentClass}__heading`} ref={headerRef}>
           <h1 className={`${componentClass}__title`}>{title}</h1>
@@ -120,7 +125,6 @@ const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, open, ta
             );
           })}
         </div>
-      </div>
       {renderActionSet()}
     </div>
   );

@@ -541,6 +541,7 @@
 }
 
 .#{$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger {
+  flex-shrink: 0;
   background-color: $interactive-01;
 }
 

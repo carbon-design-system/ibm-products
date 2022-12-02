@@ -45,6 +45,7 @@ export const ActionBarOverflowItems = ({
         return (
           <OverflowMenuItem
             className={`${blockClass}__item`}
+            onClick={item.props.onClick}
             itemText={
               <div
                 className={`${blockClass}__item-content`}

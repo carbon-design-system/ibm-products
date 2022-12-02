@@ -25,15 +25,20 @@
   .#{$block-class} .#{$block-class}__action-button {
     @include carbon--type-style('body-short-01');
 
-    height: $spacing-10;
     align-items: center;
-    padding-top: $spacing-05;
-    padding-bottom: $spacing-07;
     margin: 0;
+
+    &.#{$block-class}__action-button--expressive {
+      height: $spacing-10;
+      padding-top: $spacing-05;
+      padding-bottom: $spacing-07;
+    }
   }
 
   .#{$block-class}.#{$carbon-prefix}--btn-set
-    .#{$block-class}__action-button.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--expressive {
+    .#{$block-class}__action-button.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--expressive,
+  .#{$block-class}.#{$carbon-prefix}--btn-set
+    .#{$block-class}__action-button.#{$carbon-prefix}--btn {
     max-width: none;
   }
 
@@ -91,7 +96,9 @@
   .#{$block-class}.#{$carbon-prefix}--btn-set.#{$block-class}--max
     .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost),
   .#{$block-class}.#{$carbon-prefix}--btn-set.#{$block-class}--row-quadruple
-    .#{$block-class}__action-button:not(.#{$block-class}__action-button--ghost) {
+    .#{$block-class}__action-button:not(
+      .#{$block-class}__action-button--ghost
+    ) {
     max-width: rem(232px);
     flex: 0 1 25%;
   }

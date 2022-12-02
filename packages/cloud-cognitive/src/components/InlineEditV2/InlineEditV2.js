@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2022, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { useState, useEffect, forwardRef, useRef } from 'react';
 import { Button } from 'carbon-components-react';
 import cx from 'classnames';
@@ -6,7 +13,7 @@ import {
   Edit24,
   Checkmark24,
   Close24,
-  EditOff24,
+  // EditOff24,
   WarningFilled16,
 } from '@carbon/icons-react';
 import { pkg, carbon } from '../../settings';
@@ -20,13 +27,15 @@ export let InlineEditV2 = forwardRef(
     {
       cancelLabel,
       editLabel,
+      id,
       invalid,
       invalidLabel,
+      labelText,
       onCancel,
       onChange,
       onSave,
-      readOnly,
-      readOnlyLabel,
+      // readOnly,
+      // readOnlyLabel,
       saveLabel,
       value,
       ...rest
@@ -58,9 +67,9 @@ export let InlineEditV2 = forwardRef(
     };
 
     const onFocusHandler = (e) => {
-      if (readOnly) {
-        return;
-      }
+      // if (readOnly) {
+      //   return;
+      // }
 
       if (!isTargetingChild(e)) {
         inputRef.current.focus();
@@ -82,7 +91,8 @@ export let InlineEditV2 = forwardRef(
     };
 
     const onBlurHandler = (e) => {
-      if (readOnly || escaping.current) {
+      // if (readOnly || escaping.current) {
+      if (escaping.current) {
         return;
       }
 
@@ -128,12 +138,16 @@ export let InlineEditV2 = forwardRef(
         <div
           className={cx(blockClass, {
             [`${blockClass}-focused`]: focused,
-            [`${blockClass}-readonly`]: readOnly,
+            // [`${blockClass}-readonly`]: readOnly,
           })}
           onFocus={onFocusHandler}
           onBlur={onBlurHandler}
         >
+          <label className={`${blockClass}__text-input-label`} htmlFor={id}>
+            {labelText}
+          </label>
           <input
+            id={id}
             className={cx(
               `${blockClass}__text-input`,
               `${carbon.prefix}--text-input`,
@@ -143,7 +157,7 @@ export let InlineEditV2 = forwardRef(
             value={value}
             onChange={onChangeHandler}
             ref={inputRef}
-            readOnly={readOnly}
+            // readOnly={readOnly}
             onKeyDown={onKeyHandler}
           />
           {focused ? (
@@ -179,9 +193,11 @@ export let InlineEditV2 = forwardRef(
             <Button
               className={`${blockClass}__btn ${blockClass}__btn-edit`}
               hasIconOnly
-              renderIcon={readOnly ? EditOff24 : Edit24}
+              // renderIcon={readOnly ? EditOff24 : Edit24}
+              renderIcon={Edit24}
               size="sm"
-              iconDescription={readOnly ? readOnlyLabel : editLabel}
+              // iconDescription={readOnly ? readOnlyLabel : editLabel}
+              iconDescription={editLabel}
               onClick={onFocusHandler}
               kind="ghost"
               tabIndex={0}
@@ -197,8 +213,6 @@ export let InlineEditV2 = forwardRef(
   }
 );
 
-InlineEditV2 = pkg.checkComponentEnabled(InlineEditV2, componentName);
-
 InlineEditV2.displayName = componentName;
 
 InlineEditV2.propTypes = {
@@ -211,6 +225,10 @@ InlineEditV2.propTypes = {
    */
   editLabel: PropTypes.string.isRequired,
   /**
+   * Specify a custom id for the input
+   */
+  id: PropTypes.string.isRequired,
+  /**
    * determines if the input is invalid
    */
   invalid: PropTypes.bool,
@@ -218,6 +236,10 @@ InlineEditV2.propTypes = {
    * text that is displayed if the input is invalid
    */
   invalidLabel: PropTypes.string,
+  /**
+   * Provide the text that will be read by a screen reader when visiting this control
+   */
+  labelText: PropTypes.string.isRequired,
   /**
    * handler that is called when the cancel button is pressed or when the user removes focus from the input and there is no new value
    */
@@ -233,11 +255,11 @@ InlineEditV2.propTypes = {
   /**
    * determines if the input is in readOnly mode
    */
-  readOnly: PropTypes.bool,
+  // readOnly: PropTypes.bool,
   /**
    * label for the edit button that displays when in read only mode
    */
-  readOnlyLabel: PropTypes.string,
+  // readOnlyLabel: PropTypes.string,
   /**
    * label for save button
    */
@@ -251,5 +273,5 @@ InlineEditV2.propTypes = {
 InlineEditV2.defaultProps = {
   invalid: false,
   invalidLabel: '',
-  readOnly: false,
+  // readOnly: false,
 };

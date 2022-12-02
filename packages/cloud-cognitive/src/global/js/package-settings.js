@@ -69,7 +69,6 @@ const defaults = {
     EditTearsheetNarrow: false,
     EditFullPage: false,
     EditUpdateCards: false,
-    InlineEditV2: false,
     /* new component flags here - comment used by generate CLI */
   },
 

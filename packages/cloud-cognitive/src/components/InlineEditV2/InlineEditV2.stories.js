@@ -1,9 +1,9 @@
-//
-// Copyright IBM Corp. 2020, 2021
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * Copyright IBM Corp. 2022, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import React, { useState } from 'react';
 import {
@@ -11,6 +11,7 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
+import { InlineEdit } from '../InlineEdit/InlineEdit';
 import { InlineEditV2 } from '.';
 import mdx from './InlineEditV2.mdx';
 import styles from './_storybook-styles.scss';
@@ -33,14 +34,17 @@ const actionCancel = action('cancel');
 const defaultProps = {
   cancelLabel: 'Cancel',
   editLabel: 'Edit',
+  id: 'story-id',
   invalid: false,
   invalidLabel: 'This field is required',
+  labelText: 'Label text',
   onCancel: () => {},
   onChange: () => {},
   onSave: () => {},
-  readOnly: false,
-  readOnlyLabel: 'This value is read only',
+  // readOnly: false,
+  // readOnlyLabel: 'This value is read only',
   saveLabel: 'Save',
+  v2: true,
   value: 'default',
 };
 
@@ -70,7 +74,7 @@ const Template = (args) => {
     onCancel,
   };
 
-  return <InlineEditV2 {...props} className="inline-edit-v2-example" />;
+  return <InlineEdit {...props} className="inline-edit-v2-example" />;
 };
 
 export const Default = prepareStory(Template, {
@@ -86,9 +90,9 @@ export const Invalid = prepareStory(Template, {
   },
 });
 
-export const ReadOnly = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    readOnly: true,
-  },
-});
+// export const ReadOnly = prepareStory(Template, {
+//   args: {
+//     ...defaultProps,
+//     readOnly: true,
+//   },
+// });

@@ -76,8 +76,19 @@ const s = [
           {
             n: 'Edit and update',
             s: [
-              'c/InlineEdit',
-              'c/InlineEditV2',
+              {
+                n: 'Inline edit',
+                s: [
+                  {
+                    n: 'V1',
+                    s: ['c/InlineEditV1'],
+                  },
+                  {
+                    n: 'V2',
+                    s: ['c/InlineEditV2'],
+                  },
+                ],
+              },
               'c/EditSidePanel',
               'c/EditTearsheet',
               'c/EditTearsheetNarrow',
@@ -125,6 +136,7 @@ const s = [
           'c/CancelableTextEdit',
           'c/ComboButton',
           'c/ExampleComponent',
+          'c/FilterSummary',
           'c/TearsheetShell',
         ],
       },

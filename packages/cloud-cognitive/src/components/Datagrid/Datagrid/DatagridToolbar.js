@@ -16,6 +16,10 @@ import { useResizeDetector } from 'react-resize-detector';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
+import { FilterSummary } from '../../FilterSummary';
+import { useContext } from 'react';
+import { FilterContext } from './addons/Filtering/FilterProvider';
+import { CLEAR_FILTERS } from './addons/Filtering/constants';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -25,8 +29,12 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   const [displayAllInMenu, setDisplayAllInMenu] = useState(false);
   const [initialListWidth, setInitialListWidth] = useState(null);
   const [receivedInitialWidth, setReceivedInitialWidth] = useState(false);
-  const { selectedFlatRows, toggleAllRowsSelected, toolbarBatchActions } =
-    datagridState;
+  const {
+    selectedFlatRows,
+    toggleAllRowsSelected,
+    toolbarBatchActions,
+    setGlobalFilter,
+  } = datagridState;
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
 
   // Get initial width of batch actions container,
@@ -117,7 +125,10 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
       totalSelected={totalSelected}
-      onCancel={() => toggleAllRowsSelected(false)}
+      onCancel={() => {
+        toggleAllRowsSelected(false);
+        setGlobalFilter(null);
+      }}
     >
       {!displayAllInMenu &&
         toolbarBatchActions &&
@@ -150,7 +161,17 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 
 const DatagridToolbar = (datagridState) => {
   const { width, ref } = useResizeDetector();
-  const { DatagridActions, DatagridBatchActions, batchActions } = datagridState;
+  const { DatagridActions, DatagridBatchActions, batchActions, state } =
+    datagridState;
+  const { filterTags, EventEmitter } = useContext(FilterContext);
+
+  const renderFilterSummary = () =>
+    state.filters.length > 0 && (
+      <FilterSummary
+        filters={filterTags}
+        clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
+      />
+    );
 
   return batchActions && DatagridActions ? (
     <div ref={ref} className={`${blockClass}__table-toolbar`}>
@@ -159,6 +180,7 @@ const DatagridToolbar = (datagridState) => {
         {DatagridBatchActionsToolbar &&
           DatagridBatchActionsToolbar(datagridState, width, ref)}
       </TableToolbar>
+      {renderFilterSummary()}
     </div>
   ) : DatagridActions ? (
     <div className={`${blockClass}__table-toolbar`}>
@@ -166,6 +188,7 @@ const DatagridToolbar = (datagridState) => {
         {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
+      {renderFilterSummary()}
     </div>
   ) : null;
 };

@@ -540,3 +540,38 @@
   height: $spacing-09;
   justify-content: center;
 }
+
+.#{c4p-settings.$carbon-prefix}--body--with-modal-open
+  .#{$block-class}__grid-container {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal {
+  width: 100%;
+}
+
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger {
+  flex-shrink: 0;
+  background-color: $interactive;
+}
+
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger
+  svg {
+  fill: $background;
+}
+
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger:hover,
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{c4p-settings.$carbon-prefix}--overflow-menu--open:hover,
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{c4p-settings.$carbon-prefix}--overflow-menu--open {
+  background-color: $button-primary-hover;
+}
+
+.#{$block-class}__toolbar-options.#{c4p-settings.$carbon-prefix}--overflow-menu-options::after {
+  background-color: transparent;
+}
+
+.#{$block-class}__mobile-toolbar-modal
+  .#{c4p-settings.$carbon-prefix}--modal-container {
+  position: absolute;
+}

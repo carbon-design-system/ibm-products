@@ -238,7 +238,7 @@ const FilterFlyout = ({
                     value: [...filtersState[column]],
                     type,
                   });
-                  components.option.onChange?.(isSelected);
+                  option.onChange?.(isSelected);
                 }}
                 checked={option.selected}
               />
@@ -274,11 +274,11 @@ const FilterFlyout = ({
         return (
           <Dropdown
             {...components.Dropdown}
+            selectedItem={filtersState[column]}
             onChange={({ selectedItem }) => {
               setFiltersState({
                 ...filtersState,
                 [column]: selectedItem,
-                type,
               });
               applyFilters({
                 column,
@@ -359,14 +359,6 @@ const FilterFlyout = ({
 };
 
 FilterFlyout.propTypes = {
-  /**
-   * React children of carbon filters
-   */
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-
   /**
    * Array of filters to render
    */

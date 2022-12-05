@@ -5,9 +5,25 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { DataTable, Button } from '@carbon/react';
-import { Download, Filter, Add, Restart } from '@carbon/react/icons';
+import React, { useLayoutEffect, useState } from 'react';
+import {
+  DataTable,
+  Button,
+  OverflowMenu,
+  OverflowMenuItem,
+  ComposedModal,
+  ModalBody,
+  ModalHeader,
+  ModalFooter,
+  Dropdown,
+} from '@carbon/react';
+import {
+  Download,
+  Filter,
+  Add,
+  Restart,
+  ChevronDown,
+} from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
@@ -39,7 +55,7 @@ export const DatagridActions = (datagridState) => {
   const searchForAColumn = 'Search';
   const isNothingSelected = selectedFlatRows.length === 0;
   const style = {
-    'button:nth-child(1) > span:nth-child(1)': {
+    'button:nthChild(1) > span:nthChild(1)': {
       bottom: '-37px',
     },
   };
@@ -49,64 +65,89 @@ export const DatagridActions = (datagridState) => {
       <FilterFlyout {...getFilterFlyoutProps()} />
     );
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [size, setSize] = useState(window.innerWidth);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize(window.innerWidth);
+    }
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
+  const mobileToolbar = size < 672 ? true : false;
+  const items = ['Option 1', 'Option 2', 'Option 3'];
   return (
     isNothingSelected &&
     (useDenseHeader && useDenseHeader ? (
       <TableToolbarContent size="sm">
-        <div style={style}>
-          <Button
-            kind="ghost"
-            hasIconOnly
-            tooltipPosition="bottom"
-            renderIcon={(props) => <Download size={16} {...props} />}
-            iconDescription={'Download CSV'}
-            onClick={downloadCsv}
-          />
-        </div>
-        <div style={style}>
-          <Button
-            kind="ghost"
-            hasIconOnly
-            tooltipPosition="bottom"
-            renderIcon={(props) => <Filter size={16} {...props} />}
-            iconDescription={'Left panel'}
-            onClick={leftPanelClick}
-          />
-        </div>
-        {renderFilterFlyout()}
-        <RowSizeDropdown {...rowSizeDropdownProps} />
-        <div style={style} className={`${blockClass}__toolbar-divider`}>
-          <Button
-            kind="ghost"
-            renderIcon={(props) => <Add size={16} {...props} />}
-            iconDescription={'Action'}
-          >
-            Ghost button
-          </Button>
-        </div>
+        {!mobileToolbar ? (
+          <>
+            <div style={style}>
+              <Button
+                kind="ghost"
+                hasIconOnly
+                tooltipPosition="bottom"
+                renderIcon={Download}
+                iconDescription={'Download CSV'}
+                onClick={downloadCsv}
+              />
+            </div>
+            <div style={style}>
+              <Button
+                kind="ghost"
+                hasIconOnly
+                tooltipPosition="bottom"
+                renderIcon={Filter}
+                iconDescription={'Left panel'}
+                onClick={leftPanelClick}
+              />
+            </div>
+            {renderFilterFlyout()}
+            <RowSizeDropdown {...rowSizeDropdownProps} />
+            <div style={style} className={`${blockClass}__toolbar-divider`}>
+              <Button kind="ghost" renderIcon={Add} iconDescription={'Action'}>
+                Ghost button
+              </Button>
+            </div>
 
-        {CustomizeColumnsButton && (
-          <div style={style}>
-            <CustomizeColumnsButton />
-          </div>
+            {CustomizeColumnsButton && (
+              <div style={style}>
+                <CustomizeColumnsButton />
+              </div>
+            )}
+          </>
+        ) : (
+          <OverflowMenu ariaLabel="Tools" size="md" flipped>
+            <OverflowMenuItem
+              itemText="Filter"
+              hasDivider
+              requireTitle
+              onClick={() => setModalOpen(true)}
+            />
+            <OverflowMenuItem itemText="Export" hasDivider requireTitle />
+            <OverflowMenuItem itemText="Settings" hasDivider requireTitle />
+            <OverflowMenuItem itemText="Import items" hasDivider requireTitle />
+            <OverflowMenuItem itemText="Create" hasDivider requireTitle />
+          </OverflowMenu>
         )}
       </TableToolbarContent>
-    ) : (
+    ) : !mobileToolbar ? (
       <>
         <Button
           kind="ghost"
           hasIconOnly
           tooltipPosition="bottom"
-          renderIcon={(props) => <Filter size={16} {...props} />}
+          renderIcon={Filter}
           iconDescription={'Left panel'}
           onClick={leftPanelClick}
         />
         <TableToolbarContent>
           <TableToolbarSearch
-            size="lg"
+            size="xl"
             id="columnSearch"
             persistent
-            placeholder={searchForAColumn}
+            placeHolderText={searchForAColumn}
             onChange={(e) => setGlobalFilter(e.target.value)}
           />
           {renderFilterFlyout()}
@@ -116,7 +157,7 @@ export const DatagridActions = (datagridState) => {
               kind="ghost"
               hasIconOnly
               tooltipPosition="bottom"
-              renderIcon={(props) => <Restart size={16} {...props} />}
+              renderIcon={Restart}
               iconDescription={'Refresh'}
               onClick={refreshColumns}
             />
@@ -126,7 +167,7 @@ export const DatagridActions = (datagridState) => {
               kind="ghost"
               hasIconOnly
               tooltipPosition="bottom"
-              renderIcon={(props) => <Download size={16} {...props} />}
+              renderIcon={Download}
               iconDescription={'Download CSV'}
               onClick={downloadCsv}
             />
@@ -136,11 +177,7 @@ export const DatagridActions = (datagridState) => {
               <CustomizeColumnsButton />
             </div>
           )}
-          <ButtonMenu
-            menuAriaLabel="Primary action button menu"
-            label="Primary button"
-            renderIcon={(props) => <Add size={16} {...props} />}
-          >
+          <ButtonMenu label="Primary button" renderIcon={Add}>
             <ButtonMenuItem
               itemText="Option 1"
               onClick={action(`Click on ButtonMenu Option 1`)}
@@ -156,6 +193,71 @@ export const DatagridActions = (datagridState) => {
           </ButtonMenu>
         </TableToolbarContent>
       </>
+    ) : (
+      <TableToolbarContent>
+        <TableToolbarSearch
+          size="xl"
+          id="columnSearch"
+          persistent
+          placeHolderText={searchForAColumn}
+          onChange={(e) => setGlobalFilter(e.target.value)}
+        />
+        <OverflowMenu
+          ariaLabel="Tools"
+          size="lg"
+          flipped
+          renderIcon={ChevronDown}
+          className={`${blockClass}__toolbar-menu__trigger`}
+          menuOptionsClass={`${blockClass}__toolbar-options`}
+        >
+          <OverflowMenuItem
+            itemText="Filter"
+            hasDivider
+            requireTitle
+            onClick={() => setModalOpen(true)}
+          />
+          <OverflowMenuItem itemText="Export" hasDivider requireTitle />
+          <OverflowMenuItem itemText="Settings" hasDivider requireTitle />
+          <OverflowMenuItem itemText="Import items" hasDivider requireTitle />
+          <OverflowMenuItem itemText="Create" hasDivider requireTitle />
+        </OverflowMenu>
+        {modalOpen && (
+          <ComposedModal
+            size="lg"
+            open={modalOpen && modalOpen}
+            onClose={() => setModalOpen(false)}
+            className={`${blockClass}__mobile-toolbar-modal`}
+          >
+            <ModalHeader>
+              <h4>Filters</h4>
+            </ModalHeader>
+            <ModalBody>
+              <Dropdown
+                initialSelectedItem={items[2]}
+                items={items}
+                titleText="Label"
+                id="filter1"
+              />
+              <Dropdown
+                initialSelectedItem={items[2]}
+                items={items}
+                titleText="Label"
+                id="filter2"
+              />
+              <Dropdown
+                initialSelectedItem={items[2]}
+                items={items}
+                titleText="Label"
+                id="filter3"
+              />
+            </ModalBody>
+            <ModalFooter
+              primaryButtonText="Apply"
+              secondaryButtonText="Cancel"
+            />
+          </ComposedModal>
+        )}
+      </TableToolbarContent>
     ))
   );
 };

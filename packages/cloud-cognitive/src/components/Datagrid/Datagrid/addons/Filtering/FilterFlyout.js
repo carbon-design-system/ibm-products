@@ -241,7 +241,7 @@ const FilterFlyout = ({
                     value: [...filtersState[column]],
                     type,
                   });
-                  option.onChange?.(selected);
+                  option.onChange?.(checked);
                 }}
                 checked={option.selected}
               />

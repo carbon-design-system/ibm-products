@@ -25,6 +25,7 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
+import { StatusIcon } from '../../../StatusIcon';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ColumnAlignment`,

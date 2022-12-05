@@ -11,6 +11,7 @@ import { Download, Filter, Add, Restart } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
+import { FilterFlyout } from '../Datagrid/addons/Filtering';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 export const DatagridActions = (datagridState) => {
@@ -21,6 +22,8 @@ export const DatagridActions = (datagridState) => {
     RowSizeDropdown,
     rowSizeDropdownProps,
     useDenseHeader,
+    filterProps,
+    getFilterFlyoutProps,
   } = datagridState;
   const downloadCsv = () => {
     alert('Downloading...');
@@ -40,6 +43,11 @@ export const DatagridActions = (datagridState) => {
       bottom: '-37px',
     },
   };
+
+  const renderFilterFlyout = () =>
+    filterProps?.variation === 'flyout' && (
+      <FilterFlyout {...getFilterFlyoutProps()} />
+    );
 
   return (
     isNothingSelected &&
@@ -65,6 +73,7 @@ export const DatagridActions = (datagridState) => {
             onClick={leftPanelClick}
           />
         </div>
+        {renderFilterFlyout()}
         <RowSizeDropdown {...rowSizeDropdownProps} />
         <div style={style} className={`${blockClass}__toolbar-divider`}>
           <Button
@@ -100,6 +109,7 @@ export const DatagridActions = (datagridState) => {
             placeholder={searchForAColumn}
             onChange={(e) => setGlobalFilter(e.target.value)}
           />
+          {renderFilterFlyout()}
           <RowSizeDropdown {...rowSizeDropdownProps} />
           <div style={style}>
             <Button

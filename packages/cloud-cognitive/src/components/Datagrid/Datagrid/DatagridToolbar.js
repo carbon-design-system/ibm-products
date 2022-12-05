@@ -5,13 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Add, OverflowMenuVertical } from '@carbon/react/icons';
 import { DataTable, TableBatchActions, TableBatchAction } from '@carbon/react';
 import { useResizeDetector } from 'react-resize-detector';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
+// import { FilterSummary } from '../../FilterSummary';
+import { FilterContext } from './addons/Filtering/FilterProvider';
+import { CLEAR_FILTERS } from './addons/Filtering/constants';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -154,7 +157,17 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 
 const DatagridToolbar = (datagridState) => {
   const { width, ref } = useResizeDetector();
-  const { DatagridActions, DatagridBatchActions, batchActions } = datagridState;
+  const { DatagridActions, DatagridBatchActions, batchActions, state } =
+    datagridState;
+  const { filterTags, EventEmitter } = useContext(FilterContext);
+
+  // const renderFilterSummary = () =>
+  //   state.filters.length > 0 && (
+  //     <FilterSummary
+  //       filters={filterTags}
+  //       clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
+  //     />
+  //   );
 
   return batchActions && DatagridActions ? (
     <div ref={ref} className={`${blockClass}__table-toolbar`}>
@@ -163,6 +176,7 @@ const DatagridToolbar = (datagridState) => {
         {DatagridBatchActionsToolbar &&
           DatagridBatchActionsToolbar(datagridState, width, ref)}
       </TableToolbar>
+      {/* {renderFilterSummary()} */}
     </div>
   ) : DatagridActions ? (
     <div className={`${blockClass}__table-toolbar`}>
@@ -170,6 +184,7 @@ const DatagridToolbar = (datagridState) => {
         {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
+      {/* {renderFilterSummary()} */}
     </div>
   ) : null;
 };

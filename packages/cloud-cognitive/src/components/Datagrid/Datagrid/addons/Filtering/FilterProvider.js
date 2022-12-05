@@ -7,8 +7,6 @@
 import React, { createContext } from 'react';
 import PropTypes from 'prop-types';
 import { DATE, DROPDOWN, NUMBER, RADIO, CHECKBOX } from './constants';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 export const FilterContext = createContext();
 

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.8...@carbon/ibm-products@2.0.0-rc.9) (2022-12-06)
+
+
+### Bug Fixes
+
+* **ActionBar:** add overflow menu item onClick ([#2520](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2520)) ([6f6311d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6f6311db69c2a68b8b027054f5ef46640f16edd6))
+* **create full page:** modal close issue fixed ([#2522](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2522)) ([a3a8ded](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a3a8deda35c7aa97ed864b33c371d921ff97a435))
+* Multi add select review fixes v11 ([#2495](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2495)) ([db8e9dd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/db8e9dda30563041262fb6e801ead676f79bc40e))
+
+
+
+
+
 # [2.0.0-rc.8](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.7...@carbon/ibm-products@2.0.0-rc.8) (2022-11-22)
 
 

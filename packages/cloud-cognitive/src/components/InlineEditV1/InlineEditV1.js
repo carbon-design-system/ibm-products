@@ -83,7 +83,7 @@ export let InlineEditV1 = React.forwardRef(
     const validationIcon = showValidation ? <WarningFilled16 /> : null;
 
     pconsole.warn(
-      'the v1 version of this component is being deprecated. please switch to the v2 component as soon as possible.'
+      `${componentName}: the v1 version of this component is being deprecated. please switch to the v2 component as soon as possible.`
     );
 
     // sanitize the tooltip values

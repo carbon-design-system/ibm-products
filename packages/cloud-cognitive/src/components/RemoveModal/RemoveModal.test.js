@@ -111,6 +111,12 @@ describe(componentName, () => {
     expect(onRequestSubmit).toBeCalled();
   });
 
+  it('disables the primary button when primaryButtonDisabled is used', () => {
+    render(<RemoveModal {...defaultProps} primaryButtonDisabled />);
+    const primaryButton = screen.getByText(defaultProps.primaryButtonText);
+    expect(primaryButton).toHaveAttribute('disabled');
+  });
+
   it.skip('has no accessibility violations', async () => {
     const { container } = render(<RemoveModal {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);

@@ -9,11 +9,11 @@ import React from 'react';
 import {
   Button,
   Checkbox,
+  Dropdown,
   RadioButton,
   StructuredListRow,
   StructuredListWrapper,
   StructuredListBody,
-  Dropdown,
 } from 'carbon-components-react';
 import { ChevronRight16, View16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
@@ -68,10 +68,10 @@ export let AddSelectList = ({
     return id === singleSelection;
   };
 
-  const getAvatarProps = ({ src, alt, icon, backgroundColor }) => ({
+  const getAvatarProps = ({ src, alt, icon, backgroundColor, theme }) => ({
     className: `${blockClass}-cell-avatar`,
     size: 'lg',
-    theme: 'light',
+    theme,
     image: src,
     imageDescription: alt,
     icon,
@@ -110,10 +110,11 @@ export let AddSelectList = ({
             <StructuredListRow
               key={item.id}
               className={cx(`${blockClass}-row`, {
-                [`${blockClass}-row-selected`]: isSelected(item.id),
-                [`${blockClass}-row-meta-selected`]: isInMetaPanel(item.id),
+                [`${blockClass}-row--selected`]: isSelected(item.id),
+                [`${blockClass}-row-meta--selected`]: isInMetaPanel(item.id),
               })}
               onClick={(evt) => metaPanelHandler(item, evt)}
+              label
             >
               <div className={`${blockClass}-cell`}>
                 <div className={`${blockClass}-cell-wrapper`}>

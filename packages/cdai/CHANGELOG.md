@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.23.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.22.25...@carbon/ibm-cloud-cognitive-cdai@1.23.0) (2022-12-06)
+
+### Features
+
+- **Datagrid:** Filter flyout
+  ([#2406](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2406))
+  ([d375308](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d3753083154f1c48b52164e2d2ae56d53dc0be7a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.22.25](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.22.24...@carbon/ibm-cloud-cognitive-cdai@1.22.25) (2022-11-22)
+
+### Bug Fixes
+
+- update to Carbon v10 compatible versions to latest
+  ([#2462](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2462))
+  ([4353991](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/43539912353a965549f0f2e5f8245168d2ce1c98))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.22.24](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.22.23...@carbon/ibm-cloud-cognitive-cdai@1.22.24) (2022-11-08)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai

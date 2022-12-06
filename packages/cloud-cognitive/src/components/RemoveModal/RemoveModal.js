@@ -38,6 +38,7 @@ export let RemoveModal = forwardRef(
       onRequestSubmit,
       open,
       preventCloseOnClickOutside,
+      primaryButtonDisabled,
       primaryButtonText,
       resourceName,
       secondaryButtonText,
@@ -53,8 +54,16 @@ export let RemoveModal = forwardRef(
     const onChangeHandler = (e) => {
       setUserInput(e.target.value);
     };
-    const primaryButtonDisabled =
-      textConfirmation && userInput !== resourceName;
+    const checkPrimaryButtonDisabled = () => {
+      // user control should be used primarily
+      if (primaryButtonDisabled) {
+        return true;
+      } else if (textConfirmation && userInput !== resourceName) {
+        return true;
+      }
+      return false;
+    };
+    const primaryButtonStatus = checkPrimaryButtonDisabled();
     const blockClass = `${pkg.prefix}--remove-modal`;
 
     // Clear the user input this way so that if the onRequestSubmit handler fails for some reason
@@ -113,7 +122,7 @@ export let RemoveModal = forwardRef(
             type="submit"
             kind="danger"
             onClick={onRequestSubmit}
-            disabled={primaryButtonDisabled}
+            disabled={primaryButtonStatus}
           >
             {primaryButtonText}
           </Button>
@@ -171,6 +180,10 @@ RemoveModal.propTypes = {
    * Prevent closing on click outside of modal
    */
   preventCloseOnClickOutside: PropTypes.bool,
+  /**
+   * Specify whether the primary button should be disabled. This value will override textConfirmation
+   */
+  primaryButtonDisabled: PropTypes.bool,
   /**
    * Specify the text for the primary button
    */

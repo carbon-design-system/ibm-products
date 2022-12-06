@@ -23,6 +23,7 @@ const defaultProps = {
   inputPlaceholderText: 'name of resourceName',
   label: 'test label',
   open: true,
+  primaryButtonDisabled: false,
   primaryButtonText: 'primary button text',
   resourceName,
   secondaryButtonText: 'secondary button text',

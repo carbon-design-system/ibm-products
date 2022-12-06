@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pconsole } from '../../global/js/utils/pconsole';
+import pconsole from '../../global/js/utils/pconsole';
 import { pkg, carbon } from '../../settings';
 
 // Carbon and package components we use.

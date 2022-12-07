@@ -29,6 +29,15 @@ const value = 'hello; world';
 const requiredProps = { editDescription, cancelDescription, saveDescription };
 
 describe(componentName, () => {
+  let mockWarn;
+  beforeEach(() => {
+    mockWarn = jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    mockWarn.mockRestore();
+  });
+
   it('renders a component InlineEdit', () => {
     const { container } = render(<InlineEditV1 {...requiredProps} />);
     expect(container.firstChild).toHaveClass(blockClass);

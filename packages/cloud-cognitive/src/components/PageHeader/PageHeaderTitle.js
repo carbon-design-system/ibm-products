@@ -49,7 +49,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
         ) : isEditable ? (
           <InlineEdit
             v1
-            hideLabe
+            hideLabel
             value={text}
             {...{
               editDescription,

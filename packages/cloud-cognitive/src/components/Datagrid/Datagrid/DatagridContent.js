@@ -12,6 +12,7 @@ import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 import { useClickOutside } from '../../../global/js/hooks';
 import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
+import FilterLeftPanel from './addons/Filtering/FilterLeftPanel';
 
 const { TableContainer, Table } = DataTable;
 
@@ -26,7 +27,7 @@ export const DatagridContent = ({ datagridState }) => {
     DatagridPagination,
     isFetching,
     CustomizeColumnsModal,
-    leftPanel,
+    filterProps,
     fullHeightDatagrid,
     verticalAlign = 'center',
     variableRowHeight,
@@ -38,6 +39,8 @@ export const DatagridContent = ({ datagridState }) => {
     DatagridActions,
     totalColumnsWidth,
   } = datagridState;
+
+  console.log(datagridState);
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
   const { gridActive, editId } = state;
@@ -145,10 +148,13 @@ export const DatagridContent = ({ datagridState }) => {
       >
         <DatagridToolbar {...datagridState} />
         <div className={`${blockClass}__table-container`} ref={gridAreaRef}>
-          {leftPanel && leftPanel.isOpen && (
-            <div className={`${blockClass}__datagridLeftPanel`}>
-              {leftPanel.panelContent}
-            </div>
+          {filterProps?.variation === 'panel' && (
+            <FilterLeftPanel
+              title="Filter"
+              filterSections={filterProps.sections}
+              updateMethod="batch"
+              tableID={tableId}
+            />
           )}
           {withInlineEdit ? (
             <div ref={multiKeyTrackingRef}>{renderTable()}</div>
@@ -183,6 +189,7 @@ DatagridContent.propTypes = {
     isFetching: PropTypes.bool,
     leftPanel: PropTypes.object,
     fullHeightDatagrid: PropTypes.bool,
+    filterProps: PropTypes.object,
     variableRowHeight: PropTypes.bool,
     useDenseHeader: PropTypes.bool,
     withInlineEdit: PropTypes.bool,

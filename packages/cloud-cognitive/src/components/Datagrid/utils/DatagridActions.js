@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+
 import React, { useLayoutEffect, useMemo, useState } from 'react';
 import {
   Button,
@@ -24,13 +25,17 @@ import {
   Restart16,
 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
+import { Button, DataTable } from 'carbon-components-react';
+import React, { useContext, useMemo } from 'react';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
-import { FilterFlyout } from '../Datagrid/addons/Filtering';
+import { Filter16 } from '@carbon/icons-react';
+import { FilterContext, FilterFlyout } from '../Datagrid/addons/Filtering';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 export const DatagridActions = (datagridState) => {
+  const { setLeftPanelOpen } = useContext(FilterContext);
   const {
     selectedFlatRows,
     setGlobalFilter,
@@ -69,6 +74,18 @@ export const DatagridActions = (datagridState) => {
     filterProps?.variation === 'flyout' && (
       <FilterFlyout {...getFilterFlyoutProps()} />
     );
+    
+  const renderFilterPanelButton = () =>
+    filterProps?.variation === 'panel' &&  
+    <Button
+      kind="ghost"
+      hasIconOnly
+      tooltipPosition="bottom"
+      renderIcon={Filter16}
+      iconDescription={'Open filters'}
+      className="filter-left-panel__button"
+      onClick={() => setLeftPanelOpen(true)}
+    /> 
 
   const [modalOpen, setModalOpen] = useState(false);
   const [size, setSize] = useState(window.innerWidth);
@@ -80,14 +97,17 @@ export const DatagridActions = (datagridState) => {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
+
   const mobileToolbar = size < 672 ? true : false;
   const items = ['Option 1', 'Option 2', 'Option 3'];
   return (
     isNothingSelected &&
     (useDenseHeader && useDenseHeader ? (
       <TableToolbarContent size="sm">
+
         {!mobileToolbar ? (
           <>
+            {renderFilterPanelButton()}
             <div style={style}>
               <Button
                 kind="ghost"
@@ -162,6 +182,7 @@ export const DatagridActions = (datagridState) => {
             onClick={downloadCsv}
           />
         </div>
+
         {CustomizeColumnsButton && (
           <div style={style}>
             <CustomizeColumnsButton />
@@ -184,6 +205,7 @@ export const DatagridActions = (datagridState) => {
       </TableToolbarContent>
     ) : (
       <TableToolbarContent>
+        {renderFilterPanelButton()}
         <TableToolbarSearch
           size="xl"
           id="columnSearch"
@@ -191,6 +213,47 @@ export const DatagridActions = (datagridState) => {
           placeHolderText={searchForAColumn}
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
+        {renderFilterFlyout()}
+        <RowSizeDropdown {...rowSizeDropdownProps} />
+        <div style={style}>
+          <Button
+            kind="ghost"
+            hasIconOnly
+            tooltipPosition="bottom"
+            renderIcon={Restart16}
+            iconDescription={'Refresh'}
+            onClick={refreshColumns}
+          />
+        </div>
+        <div style={style}>
+          <Button
+            kind="ghost"
+            hasIconOnly
+            tooltipPosition="bottom"
+            renderIcon={Download16}
+            iconDescription={'Download CSV'}
+            onClick={downloadCsv}
+          />
+        </div>
+        {CustomizeColumnsButton && (
+          <div style={style}>
+            <CustomizeColumnsButton />
+          </div>
+        )}
+        <ButtonMenu label="Primary button" renderIcon={Add16}>
+          <ButtonMenuItem
+            itemText="Option 1"
+            onClick={action(`Click on ButtonMenu Option 1`)}
+          />
+          <ButtonMenuItem
+            itemText="Option 2"
+            onClick={action(`Click on ButtonMenu Option 2`)}
+          />
+          <ButtonMenuItem
+            itemText="Option 3"
+            onClick={action(`Click on ButtonMenu Option 3`)}
+          />
+        </ButtonMenu>
         <OverflowMenu
           ariaLabel="Tools"
           size="lg"

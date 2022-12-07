@@ -32,7 +32,7 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
     DatagridPagination,
     isFetching,
     tableId,
-    leftPanel,
+    filterProps,
     className,
     state: { filters },
   } = datagridState;
@@ -56,14 +56,16 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
           )}
           {...getDevtoolsProps(componentName)}
         >
-          {leftPanel && (
+
+          {filterProps?.variation === 'panel' && (
             <div
               className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
             >
               <DatagridContent datagridState={datagridState} />
             </div>
           )}
-          {leftPanel === undefined && (
+
+          {filterProps?.variation === undefined && (
             <DatagridContent datagridState={datagridState} />
           )}
         </div>

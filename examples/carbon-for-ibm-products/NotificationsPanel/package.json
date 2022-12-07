@@ -3,16 +3,15 @@
   "main": "src/index.js",
   "dependencies": {
     "@carbon/elements": "^10",
-    "@carbon/ibm-products": "latest",
+    "@carbon/ibm-products": "^1",
     "@carbon/icons-react": "^10",
     "carbon-components": "^10",
     "carbon-components-react": "^7",
     "carbon-icons": "latest",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-scripts": "4.0.3",
-    "sass": "^1.43.4",
-    "uuid": "8.3.2"
+    "react": "^17",
+    "react-dom": "^17",
+    "react-scripts": "^5",
+    "sass": "latest"
   },
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
   "resolutions": {

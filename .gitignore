@@ -41,6 +41,10 @@ pids
 coverage
 /junit.xml
 
+# Other testing
+packages/cloud-cognitive/accessibility-checker
+packages/security/accessibility-checker
+
 # Dependency directory
 node_modules
 .pnp.*

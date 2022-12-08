@@ -46,5 +46,12 @@ export const useCreateComponentFocus = ({
         nextButton?.focus();
       }
     }
-  }, [currentStep, previousState, blockClass, onMount, skipElements, focusedElementIndex]);
+  }, [
+    currentStep,
+    previousState,
+    blockClass,
+    onMount,
+    skipElements,
+    focusedElementIndex,
+  ]);
 };

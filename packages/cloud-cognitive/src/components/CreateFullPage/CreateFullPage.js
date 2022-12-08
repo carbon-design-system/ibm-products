@@ -278,7 +278,7 @@ CreateFullPage.propTypes = {
   /**
    * Specifies elements to skip over for auto focus.
    */
-   skipFocusElements: PropTypes.object,
+  skipFocusElements: PropTypes.object,
 
   /**
    * The submit button text

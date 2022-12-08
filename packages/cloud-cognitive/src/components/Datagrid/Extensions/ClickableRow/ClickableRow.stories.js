@@ -233,6 +233,8 @@ const DataTableSidePanelContent = (selectedRowValues) => {
           {sectionTitle}
         </h5>
         {finalData.map(([label, value], index) => {
+          const formattedValue =
+            value instanceof Date ? value.toString() : value;
           return (
             <div
               key={index}
@@ -241,7 +243,9 @@ const DataTableSidePanelContent = (selectedRowValues) => {
               <div className={`${blockClass}__side-panel-label-text`}>
                 {label} :
               </div>
-              <div className={`${blockClass}__side-panel-value`}>{value}</div>
+              <div className={`${blockClass}__side-panel-value`}>
+                {formattedValue}
+              </div>
             </div>
           );
         })}

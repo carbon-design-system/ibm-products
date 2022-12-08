@@ -377,19 +377,6 @@ export const withNavigation = prepareStory(Template, {
   },
 });
 
-export const withJambos = prepareStory(Template, {
-  storyName: 'Tearsheet with Jams',
-  args: {
-    closeIconDescription,
-    description,
-    label,
-    navigation: tabs,
-    onClose: action('onClose called'),
-    title,
-    actions: 7,
-  },
-});
-
 export const withInfluencer = prepareStory(Template, {
   storyName: 'Tearsheet with influencer',
   args: {

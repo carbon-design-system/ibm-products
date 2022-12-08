@@ -281,7 +281,7 @@ export const InlineEditCell = ({
   };
 
   const handleTransformedItem = (items) => {
-    items?.length && typeof items[0] === 'object'
+    return items?.length && typeof items[0] === 'object'
       ? (item) => renderDropdownItem(item)
       : null;
   };

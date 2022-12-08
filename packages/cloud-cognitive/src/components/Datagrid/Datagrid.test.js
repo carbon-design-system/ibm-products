@@ -2599,20 +2599,27 @@ describe(componentName, () => {
 
     //Get initial value from number input
     const numberInputInitialValue = numberInput.value;
-
     //get `-` button inside number input
     const decButton = numberInput.parentElement.querySelector('button');
 
-    //click `-` button to decrement original value - 1
-    click(decButton);
-    expect(decButton).toHaveFocus();
+    //Check value is valid
+    if (numberInputInitialValue > 18) {
+      //click `-` button to decrement original value - 1
+      click(decButton);
+      expect(decButton).toHaveFocus();
 
-    //Get current number input value after `-` click
-    const currentInputValue = numberInput.value;
+      //Get current number input value after `-` click
+      const currentInputValue = numberInput.value;
 
-    // Exit edit mode
-    type(numberInput, '{enter}');
-    expect(JSON.stringify(numberInputInitialValue - 1)).toBe(currentInputValue);
+      // Exit edit mode
+      type(numberInput, '{enter}');
+      expect(JSON.stringify(numberInputInitialValue - 1)).toBe(
+        currentInputValue
+      );
+    } else {
+      // Exit from invalid mode
+      type(numberInput, '{escape}');
+    }
 
     // Change active cell position
     type(tableElement, '{arrowright}');
@@ -2622,13 +2629,24 @@ describe(componentName, () => {
 
     // Get the number input now that we are in edit mode
     const newNumberInput = getEditInput(inlineEditColumns[4].Header);
+    const numberInputEditCell = newNumberInput
+      .closest('.c4p--datagrid__inline-edit--outer-cell-button')
+      .getAttribute('data-cell-id');
+
     newNumberInput.focus();
     expect(newNumberInput).toHaveFocus();
-
-    //type(newNumberInput, '{arrowup}');
+    //Increment value
+    const newNumInputValue = parseInt(newNumberInput.value) + 1;
+    fireEvent.change(newNumberInput, { target: { value: newNumInputValue } });
 
     // Exit edit mode
     type(newNumberInput, '{enter}');
+
+    //Get updated cell value
+    const updatedCellValue = container.querySelector(
+      `[data-cell-id="${numberInputEditCell}"]`
+    ).firstChild.textContent;
+    expect(updatedCellValue).toBe(JSON.stringify(newNumInputValue));
   });
 
   it('Sticky Actions Column', () => {

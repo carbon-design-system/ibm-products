@@ -486,6 +486,7 @@
   .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)
   ::before {
   position: absolute;
+  top: 0;
   left: 0;
   width: $spacing-02;
   height: 100%;

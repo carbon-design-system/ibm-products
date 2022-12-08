@@ -40,8 +40,6 @@ export const DatagridContent = ({ datagridState }) => {
     totalColumnsWidth,
   } = datagridState;
 
-  console.log(datagridState);
-
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
   const { gridActive, editId } = state;
   const gridAreaRef = useRef();

@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
-import React, { useLayoutEffect, useMemo, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useState, useContext } from 'react';
 import {
   Button,
   DataTable,
@@ -25,8 +24,6 @@ import {
   Restart16,
 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
-import { Button, DataTable } from 'carbon-components-react';
-import React, { useContext, useMemo } from 'react';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { Filter16 } from '@carbon/icons-react';
@@ -74,18 +71,19 @@ export const DatagridActions = (datagridState) => {
     filterProps?.variation === 'flyout' && (
       <FilterFlyout {...getFilterFlyoutProps()} />
     );
-    
+
   const renderFilterPanelButton = () =>
-    filterProps?.variation === 'panel' &&  
-    <Button
-      kind="ghost"
-      hasIconOnly
-      tooltipPosition="bottom"
-      renderIcon={Filter16}
-      iconDescription={'Open filters'}
-      className="filter-left-panel__button"
-      onClick={() => setLeftPanelOpen(true)}
-    /> 
+    filterProps?.variation === 'panel' && (
+      <Button
+        kind="ghost"
+        hasIconOnly
+        tooltipPosition="bottom"
+        renderIcon={Filter16}
+        iconDescription={'Open filters'}
+        className="filter-left-panel__button"
+        onClick={() => setLeftPanelOpen(true)}
+      />
+    );
 
   const [modalOpen, setModalOpen] = useState(false);
   const [size, setSize] = useState(window.innerWidth);
@@ -97,14 +95,12 @@ export const DatagridActions = (datagridState) => {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
-
   const mobileToolbar = size < 672 ? true : false;
   const items = ['Option 1', 'Option 2', 'Option 3'];
   return (
     isNothingSelected &&
     (useDenseHeader && useDenseHeader ? (
       <TableToolbarContent size="sm">
-
         {!mobileToolbar ? (
           <>
             {renderFilterPanelButton()}

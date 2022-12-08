@@ -65,6 +65,7 @@ export let CreateTearsheet = forwardRef(
       onClose,
       onRequestSubmit,
       open,
+      skipFocusElements,
       submitButtonText,
       title,
       verticalPosition = defaults.verticalPosition,
@@ -112,6 +113,7 @@ export let CreateTearsheet = forwardRef(
       currentStep,
       blockClass,
       onMount,
+      skipFocusElements
     });
     useValidCreateStepCount(stepData.length, componentName);
     useResetCreateComponent({
@@ -291,6 +293,11 @@ CreateTearsheet.propTypes = {
    * Specifies whether the tearsheet is currently open.
    */
   open: PropTypes.bool,
+
+  /**
+   * Specifies elements to skip over for auto focus.
+   */
+   skipFocusElements: PropTypes.object,
 
   /**
    * The submit button text

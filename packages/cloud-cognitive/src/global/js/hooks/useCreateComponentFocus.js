@@ -14,7 +14,9 @@ export const useCreateComponentFocus = ({
   currentStep,
   blockClass,
   onMount,
+  skipElements = [],
 }) => {
+  let focusedElementIndex = 0;
   useEffect(() => {
     if (typeof onMount === 'function') {
       onMount();
@@ -29,7 +31,14 @@ export const useCreateComponentFocus = ({
         ? getFocusableElements(visibleStepInnerContent)
         : [];
       if (focusableStepElements && focusableStepElements.length) {
-        focusableStepElements[0].focus();
+        while (
+          skipElements.includes(
+            focusableStepElements[focusedElementIndex].className
+          )
+        ) {
+          focusedElementIndex++;
+        }
+        focusableStepElements[focusedElementIndex].focus();
       } else {
         const nextButton = document.querySelector(
           `.${blockClass}__create-button`
@@ -37,5 +46,12 @@ export const useCreateComponentFocus = ({
         nextButton?.focus();
       }
     }
-  }, [currentStep, previousState, blockClass, onMount]);
+  }, [
+    currentStep,
+    previousState,
+    blockClass,
+    onMount,
+    skipElements,
+    focusedElementIndex,
+  ]);
 };

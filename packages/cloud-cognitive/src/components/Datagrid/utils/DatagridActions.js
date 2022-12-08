@@ -31,7 +31,6 @@ import { FilterFlyout } from '../Datagrid/addons/Filtering';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 export const DatagridActions = (datagridState) => {
-
   const {
     selectedFlatRows,
     setGlobalFilter,

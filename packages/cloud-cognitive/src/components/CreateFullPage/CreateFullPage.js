@@ -61,6 +61,7 @@ export let CreateFullPage = React.forwardRef(
       nextButtonText,
       onClose,
       onRequestSubmit,
+      skipFocusElements,
       submitButtonText,
       ...rest
     },
@@ -96,6 +97,7 @@ export let CreateFullPage = React.forwardRef(
       currentStep,
       blockClass,
       onMount,
+      skipFocusElements,
     });
     useValidCreateStepCount(stepData.length, componentName);
     useCreateComponentStepChange({
@@ -269,6 +271,12 @@ CreateFullPage.propTypes = {
    * The aria label to be used for the UI Shell SideNav Carbon component
    */
   sideNavAriaLabel: PropTypes.string,
+
+  /**
+   * Specifies elements to skip over for auto focus.
+   */
+   skipFocusElements: PropTypes.object,
+
   /**
    * The submit button text
    */

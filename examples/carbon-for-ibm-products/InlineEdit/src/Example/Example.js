@@ -31,6 +31,9 @@ export const Example = () => {
       saveLabel="Save"
       v2
       value={value}
+      cancelDescription="Cancel the current action"
+      editDescription="Edit the current value"
+      saveDescription="Save the current value"
     />
   );
 };

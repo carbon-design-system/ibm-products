@@ -35,7 +35,9 @@ import { Example as RemoveModalExample } from './RemoveModal/src/Example/Example
 import { Example as SavingExample } from './Saving/src/Example/Example'
 import { Example as SidePanelExample } from './SidePanel/src/Example/Example'
 import { Example as StatusIconExample } from './StatusIcon/src/Example/Example'
+/* skipped import see 'example-gallery-builder' 
 import { Example as TagSetExample } from './TagSet/src/Example/Example'
+*/
 import { Example as TearsheetExample } from './Tearsheet/src/Example/Example'
 import { Example as UserProfileImageExample } from './UserProfileImage/src/Example/Example'
 import { Example as WebTerminalExample } from './WebTerminal/src/Example/Example'
@@ -165,7 +167,7 @@ describe('All examples', () => {
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
-  it('TagSet renders', () => {
+  it.skip('TagSet renders', () => {
     render(<TagSetExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();

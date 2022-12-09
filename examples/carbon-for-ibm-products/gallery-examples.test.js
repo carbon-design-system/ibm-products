@@ -9,45 +9,43 @@ import React from 'react';
 import { render } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import { init } from './test-common';
 
-import { Example as APIKeyModalExample } from './APIKeyModal/src/Example/Example';
-import { Example as AboutModalExample } from './AboutModal/src/Example/Example';
-/* skipped import see 'example-gallery-builder'
+import { Example as APIKeyModalExample } from './APIKeyModal/src/Example/Example'
+import { Example as AboutModalExample } from './AboutModal/src/Example/Example'
+/* skipped import see 'example-gallery-builder' 
 import { Example as CarbonV11TemplateExample } from './Carbon-v11-template/src/Example/Example'
 */
-import { Example as CascadeExample } from './Cascade/src/Example/Example';
-import { Example as CreateFullPageExample } from './CreateFullPage/src/Example/Example';
-import { Example as CreateModalExample } from './CreateModal/src/Example/Example';
-import { Example as CreateSidePanelExample } from './CreateSidePanel/src/Example/Example';
-import { Example as CreateTearsheetExample } from './CreateTearsheet/src/Example/Example';
-import { Example as CreateTearsheetNarrowExample } from './CreateTearsheetNarrow/src/Example/Example';
-import { Example as DatagridExample } from './Datagrid/src/Example/Example';
-import { Example as EmptyStatesExample } from './EmptyStates/src/Example/Example';
-import { Example as ExportModalExample } from './ExportModal/src/Example/Example';
-import { Example as ExpressiveCardExample } from './ExpressiveCard/src/Example/Example';
-import { Example as HTTPErrorsExample } from './HTTPErrors/src/Example/Example';
-import { Example as ImportModalExample } from './ImportModal/src/Example/Example';
-import { Example as InlineEditExample } from './InlineEdit/src/Example/Example';
-import { Example as NotificationsPanelExample } from './NotificationsPanel/src/Example/Example';
-import { Example as OptionsTileExample } from './OptionsTile/src/Example/Example';
-import { Example as PageHeaderExample } from './PageHeader/src/Example/Example';
-import { Example as ProductiveCardExample } from './ProductiveCard/src/Example/Example';
-import { Example as RemoveModalExample } from './RemoveModal/src/Example/Example';
-import { Example as SavingExample } from './Saving/src/Example/Example';
-import { Example as SidePanelExample } from './SidePanel/src/Example/Example';
-import { Example as StatusIconExample } from './StatusIcon/src/Example/Example';
-/* skipped import see 'example-gallery-builder'
+import { Example as CascadeExample } from './Cascade/src/Example/Example'
+import { Example as CreateFullPageExample } from './CreateFullPage/src/Example/Example'
+import { Example as CreateModalExample } from './CreateModal/src/Example/Example'
+import { Example as CreateSidePanelExample } from './CreateSidePanel/src/Example/Example'
+import { Example as CreateTearsheetExample } from './CreateTearsheet/src/Example/Example'
+import { Example as CreateTearsheetNarrowExample } from './CreateTearsheetNarrow/src/Example/Example'
+import { Example as DatagridExample } from './Datagrid/src/Example/Example'
+import { Example as EmptyStatesExample } from './EmptyStates/src/Example/Example'
+import { Example as ExportModalExample } from './ExportModal/src/Example/Example'
+import { Example as ExpressiveCardExample } from './ExpressiveCard/src/Example/Example'
+import { Example as HTTPErrorsExample } from './HTTPErrors/src/Example/Example'
+import { Example as ImportModalExample } from './ImportModal/src/Example/Example'
+import { Example as InlineEditExample } from './InlineEdit/src/Example/Example'
+import { Example as NotificationsPanelExample } from './NotificationsPanel/src/Example/Example'
+import { Example as OptionsTileExample } from './OptionsTile/src/Example/Example'
+import { Example as PageHeaderExample } from './PageHeader/src/Example/Example'
+import { Example as ProductiveCardExample } from './ProductiveCard/src/Example/Example'
+import { Example as RemoveModalExample } from './RemoveModal/src/Example/Example'
+import { Example as SavingExample } from './Saving/src/Example/Example'
+import { Example as SidePanelExample } from './SidePanel/src/Example/Example'
+import { Example as StatusIconExample } from './StatusIcon/src/Example/Example'
 import { Example as TagSetExample } from './TagSet/src/Example/Example'
-*/
-import { Example as TearsheetExample } from './Tearsheet/src/Example/Example';
-import { Example as UserProfileImageExample } from './UserProfileImage/src/Example/Example';
-import { Example as WebTerminalExample } from './WebTerminal/src/Example/Example';
-import { Example as CcsBaseReact16Example } from './ccs-base-react-16/src/Example/Example';
-import { Example as CcsBaseReact17Example } from './ccs-base-react-17/src/Example/Example';
-import { Example as PrefixExampleExample } from './prefix-example/src/Example/Example';
+import { Example as TearsheetExample } from './Tearsheet/src/Example/Example'
+import { Example as UserProfileImageExample } from './UserProfileImage/src/Example/Example'
+import { Example as WebTerminalExample } from './WebTerminal/src/Example/Example'
+import { Example as CcsBaseReact16Example } from './ccs-base-react-16/src/Example/Example'
+import { Example as CcsBaseReact17Example } from './ccs-base-react-17/src/Example/Example'
+import { Example as PrefixExampleExample } from './prefix-example/src/Example/Example'
 describe('All examples', () => {
   init(beforeEach, afterEach);
 
-  it('APIKeyModal renders', () => {
+    it('APIKeyModal renders', () => {
     render(<APIKeyModalExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
@@ -97,7 +95,7 @@ describe('All examples', () => {
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
-  it.skip('EmptyStates renders', () => {
+  it('EmptyStates renders', () => {
     render(<EmptyStatesExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
@@ -162,12 +160,12 @@ describe('All examples', () => {
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
-  it.skip('StatusIcon renders', () => {
+  it('StatusIcon renders', () => {
     render(<StatusIconExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
-  it.skip('TagSet renders', () => {
+  it('TagSet renders', () => {
     render(<TagSetExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
@@ -177,7 +175,7 @@ describe('All examples', () => {
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
-  it.skip('UserProfileImage renders', () => {
+  it('UserProfileImage renders', () => {
     render(<UserProfileImageExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
@@ -192,12 +190,12 @@ describe('All examples', () => {
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
-  it.skip('CcsBaseReact17 renders', () => {
+  it('CcsBaseReact17 renders', () => {
     render(<CcsBaseReact17Example />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
-  it.skip('PrefixExample renders', () => {
+  it('PrefixExample renders', () => {
     render(<PrefixExampleExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();

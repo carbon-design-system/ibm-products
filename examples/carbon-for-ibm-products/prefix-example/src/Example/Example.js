@@ -59,6 +59,7 @@ export const Example = () => {
             label: 'Technologies used',
           },
         ]}
+        closeIconDescription="Close"
         content={
           <>This is example content for an About Modal with all props set.</>
         }

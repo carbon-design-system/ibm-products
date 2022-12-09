@@ -148,12 +148,7 @@ const writeGalleryTests = (testPath, directories) => {
     'Carbon-v11-template', // non standard test
     'TagSet', //  Jest encountered an unexpected token - /node_modules/carbon-components-react/es/components/Tag/Tag.js:1
   ];
-  const skipExamples = [
-    'EmptyStates', // TypeError: Cannot read properties of undefined (reading 'state') - theme.stat.currentTheme.value
-    'StatusIcon', // TypeError: Cannot read properties of undefined (reading 'state') - theme.stat.currentTheme.value
-    'UserProfileImage', // TypeError: Cannot read properties of undefined (reading 'state') - theme.stat.currentTheme.value
-    'WebTerminal', // TypeError: Cannot read properties of undefined (reading 'open') - _useWebTerminal.open,
-  ];
+  const skipExamples = ['WebTerminal'];
 
   const header = `/**
  * Copyright IBM Corp. 2020, 2021

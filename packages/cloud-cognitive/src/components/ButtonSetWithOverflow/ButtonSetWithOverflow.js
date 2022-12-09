@@ -18,7 +18,7 @@ import { prepareProps } from '../../global/js/utils/props-helper';
 const blockClass = `${pkg.prefix}--button-set-with-overflow`;
 const componentName = 'ButtonSetWithOverflow';
 
-const buttonSize = 'field';
+const buttonSize = 'md';
 
 export const ButtonSetWithOverflow = ({
   buttons,

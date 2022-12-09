@@ -149,16 +149,10 @@ const writeGalleryTests = (testPath, directories) => {
     'TagSet', //  Jest encountered an unexpected token - /node_modules/carbon-components-react/es/components/Tag/Tag.js:1
   ];
   const skipExamples = [
-    'Cascade', // "Warning: Unsupported style property %s.
-    'CreateFullPage', // "Warning: React does not recognize the `%s` prop on a DOM element.
     'EmptyStates', // TypeError: Cannot read properties of undefined (reading 'state') - theme.stat.currentTheme.value
-    'InlineEdit', // "Warning: React does not recognize the `%s` prop on a DOM element.
     'StatusIcon', // TypeError: Cannot read properties of undefined (reading 'state') - theme.stat.currentTheme.value
     'UserProfileImage', // TypeError: Cannot read properties of undefined (reading 'state') - theme.stat.currentTheme.value
     'WebTerminal', // TypeError: Cannot read properties of undefined (reading 'open') - _useWebTerminal.open,
-    'ccs-base-react-16', // "Warning: <%s /> is using incorrect casing. Use PascalCase for React components
-    'ccs-base-react-17', // "Warning: <%s /> is using incorrect casing. Use PascalCase for React components
-    'prefix-example', // "Warning: <%s /> is using incorrect casing. Use PascalCase for React components
   ];
 
   const header = `/**
@@ -180,7 +174,9 @@ import { init } from './test-common';
   directories.forEach((dir) => {
     const ignoreExample = ingoreExample.includes(dir);
 
-    const sanitizedDir = dir.replace(/-/g, '_');
+    const sanitizedDir = dir
+      .replace(/(-|_)\w/g, (m) => m[1].toUpperCase())
+      .replace(/./, (m) => m.toUpperCase());
 
     const skipImport = `/* skipped import see 'example-gallery-builder'`;
     if (ignoreExample) {

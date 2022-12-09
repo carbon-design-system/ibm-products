@@ -21,14 +21,17 @@ import { InlineEditV2 } from '../InlineEditV2';
 const componentName = 'InlineEdit';
 
 export let InlineEdit = forwardRef(({ v2, ...rest }, ref) => {
+  console.log('hello');
   const props = {
     ...rest,
     ref,
   };
   if (v2 === true) {
+    console.log('V2 in use');
     return <InlineEditV2 {...props} />;
   }
 
+  console.log('v1 in use');
   return <InlineEditV1 {...props} />;
 });
 

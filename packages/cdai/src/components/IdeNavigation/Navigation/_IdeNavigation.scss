@@ -58,11 +58,15 @@
 }
 
 // remove the hover behaviour from the side nav
-.#{$prefix}--side-nav.#{$prefix}--side-nav--rail:not(.#{$prefix}--side-nav--fixed):not(.#{$prefix}--side-product-nav):hover {
+.#{$prefix}--side-nav.#{$prefix}--side-nav--rail:not(
+    .#{$prefix}--side-nav--fixed
+  ):not(.#{$prefix}--side-product-nav):hover {
   width: carbon--mini-units(6);
 }
 
-.#{$prefix}--side-nav.#{$prefix}--side-nav--rail:not(.#{$prefix}--side-nav--fixed):not(.#{$prefix}--side-product-nav):hover.#{$prefix}--side-nav--expanded {
+.#{$prefix}--side-nav.#{$prefix}--side-nav--rail:not(
+    .#{$prefix}--side-nav--fixed
+  ):not(.#{$prefix}--side-product-nav):hover.#{$prefix}--side-nav--expanded {
   width: carbon--mini-units(32);
 }
 

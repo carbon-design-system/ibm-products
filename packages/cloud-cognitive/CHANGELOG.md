@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.39.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.38.0...@carbon/ibm-products@1.39.0) (2022-12-06)
+
+### Bug Fixes
+
+- **ActionBar:** overflow menu item onClick
+  ([#2511](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2511))
+  ([d8f0f08](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d8f0f08b7d7dd5ccfc89b49174e63d267d1548eb))
+- **create full page:** modal close issue fixed
+  ([#2488](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2488))
+  ([567b4cf](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/567b4cfe47f70997b3565e994d9f63e9ed0bde6a))
+
+### Features
+
+- **Datagrid:** Filter flyout
+  ([#2406](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2406))
+  ([d375308](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d3753083154f1c48b52164e2d2ae56d53dc0be7a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [1.38.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.37.0...@carbon/ibm-products@1.38.0) (2022-11-29)
+
+### Bug Fixes
+
+- Multi add select review fixes
+  ([#2487](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2487))
+  ([9555e77](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9555e779cb105e891135503c6b2c1b52b8607d44))
+
+### Features
+
+- inline edit v2 release
+  ([#2482](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2482))
+  ([80b1a8e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/80b1a8ee315de86a80bc898d48b0b4131d764e4e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [1.37.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.36.0...@carbon/ibm-products@1.37.0) (2022-11-22)
 
 ### Bug Fixes

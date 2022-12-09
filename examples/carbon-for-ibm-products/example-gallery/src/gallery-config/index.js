@@ -74,6 +74,12 @@ const config = [
       'url( ' + defaultOrNot(require('./Datagrid--thumbnail.png')) + ')',
   },
   {
+    label: 'DataSpreadsheet',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/DataSpreadsheet',
+    thumbnail:
+      'url( ' + defaultOrNot(require('./DataSpreadsheet--thumbnail.png')) + ')',
+  },
+  {
     label: 'Empty State',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/EmptyStates',
     thumbnail:

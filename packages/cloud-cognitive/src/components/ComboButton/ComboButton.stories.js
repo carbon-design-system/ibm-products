@@ -16,6 +16,14 @@ import { ComboButton, ComboButtonItem } from '..';
 
 import styles from './_combo-button.scss';
 
+const modifiers = {
+  'Is Delete': { isDelete: true },
+  'No Delete': { isDelete: false },
+  'Has Divider': { hasDivider: true },
+  'No Divider': { hasDivider: false },
+  'Item Disabled': { itemDisabled: true },
+  'Item Active': { itemDisabled: false },
+};
 export default {
   title: getStoryTitle(ComboButton.displayName),
   component: ComboButton,
@@ -26,6 +34,15 @@ export default {
       },
       options: ['sm', 'md', 'lg'],
     },
+    // }
+    modifiers: {
+      control: {
+        type: 'select',
+        labels: Object.keys(modifiers),
+      },
+      options: Object.values(modifiers).map((_k, i) => i),
+      mapping: Object.values(modifiers),
+    },
   },
   subcomponents: {
     ComboButtonItem,
@@ -34,19 +51,20 @@ export default {
 };
 
 const Template = (args) => {
+  console.log(args);
   return (
-    <ComboButton disabled={args.buttonDisabled}>
+    <ComboButton disabled={args.buttonDisabled} size={args.size}>
       <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
       <ComboButtonItem renderIcon={args.icon && args.icon}>
         ComboButtonItem 2
       </ComboButtonItem>
-      <ComboButtonItem disabled={args.itemDisabled}>
+      <ComboButtonItem disabled={args?.modifiers?.itemDisabled}>
         ComboButtonItem 3
       </ComboButtonItem>
-      <ComboButtonItem hasDivider={args.hasDivider}>
+      <ComboButtonItem hasDivider={args?.modifiers?.hasDivider}>
         ComboButtonItem 4
       </ComboButtonItem>
-      <ComboButtonItem isDelete={args.isDelete}>
+      <ComboButtonItem isDelete={args?.modifiers?.isDelete}>
         ComboButtonItem 5
       </ComboButtonItem>
     </ComboButton>
@@ -83,10 +101,11 @@ const Template = (args) => {
 
 export const Default = prepareStory(Template, {
   args: {
-    hasDivider: false,
-    isDelete: false,
+    //hasDivider: false,
+    //isDelete: false,
     buttonDisabled: false,
-    itemDisabled: false,
+    size: 'md',
+    //itemDisabled: false,
   },
 });
 

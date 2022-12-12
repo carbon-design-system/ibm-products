@@ -33,7 +33,7 @@ export let ComboButton = React.forwardRef(
       className,
       disabled,
       overflowMenu,
-      size = 'lg',
+      size,
 
       // Collect any other property values passed in.
       ...rest
@@ -134,14 +134,26 @@ ComboButton.propTypes = {
   /** Provide an optional flag to disable the ComboButton or a selected ComboButtonItem */
   disabled: bool,
 
-  /** Provide an optional flag to disable a divider between ComboButtonItems */
-  hasDivider: bool,
+  // /** Provide an optional flag to disable a divider between ComboButtonItems */
+  // hasDivider: bool,
 
-  /** Provide an optional flag to convert a ComboButtonItem to a delete item */
-  isDelete: bool,
+  // /** Provide an optional flag to convert a ComboButtonItem to a delete item */
+  // isDelete: bool,
 
-  /** Provide an optional flag to disable selected ComboButtonItem */
-  itemDisabled: bool,
+  // /** Provide an optional flag to disable selected ComboButtonItem */
+  // itemDisabled: bool,
+
+  /** Optional flags supplied as:
+   * - hasDivider: places a divider between menu items
+   * - isDelete: converts menu item to danger button
+   * - isDisabled: converts menu item disabled menu item
+   */
+  modifiers: oneOf([
+    shape({
+      hasDivider: bool,
+      isDelete: bool,
+    }),
+  ]),
 
   /** Provide the [props of the `OverflowMenu`](https://react.carbondesignsystem.com/?path=/docs/overflowmenu) */
   overflowMenu: shape(OverflowMenu.propTypes),

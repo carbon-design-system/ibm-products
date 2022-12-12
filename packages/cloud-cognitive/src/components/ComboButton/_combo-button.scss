@@ -33,9 +33,13 @@
   .#{$blockClass}__btn--lg.#{$carbon-prefix}--btn {
     min-width: 7rem;
   }
-  .#{$blockClass}__btn--lg.#{$carbon-prefix}--btn--lg:not(.#{$carbon-prefix}--btn--icon-only) {
+
+  .#{$blockClass}__btn--lg.#{$carbon-prefix}--btn--lg:not(
+      .#{$carbon-prefix}--btn--icon-only
+    ) {
     min-height: 3rem;
   }
+
   .#{$blockClass} .#{$blockClass}__overflow-menu {
     height: auto;
     border-left: carbon--rem($px: 1px) solid $ui-03;

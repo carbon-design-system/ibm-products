@@ -407,11 +407,6 @@ FilterFlyout.propTypes = {
   setAllFilters: PropTypes.func.isRequired,
 
   /**
-   * Function that sets an individual filter, this comes from the datagridState
-   */
-  setFilter: PropTypes.func.isRequired,
-
-  /**
    * Title of the filter flyout
    */
   title: PropTypes.string,

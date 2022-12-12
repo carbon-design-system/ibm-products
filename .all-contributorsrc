@@ -144,6 +144,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "jagathgj",
+      "name": "Jagath Jayakumar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/29351394?v=4",
+      "profile": "https://www.hellojagath.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,
@@ -152,5 +161,6 @@
   "projectOwner": "carbon-design-system",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }

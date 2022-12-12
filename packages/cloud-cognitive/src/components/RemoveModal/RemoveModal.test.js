@@ -23,6 +23,7 @@ const defaultProps = {
   inputPlaceholderText: 'name of resourceName',
   label: 'test label',
   open: true,
+  primaryButtonDisabled: false,
   primaryButtonText: 'primary button text',
   resourceName,
   secondaryButtonText: 'secondary button text',
@@ -108,6 +109,12 @@ describe(componentName, () => {
     });
     click(screen.getByText(props.primaryButtonText));
     expect(onRequestSubmit).toBeCalled();
+  });
+
+  it('disables the primary button when primaryButtonDisabled is used', () => {
+    render(<RemoveModal {...defaultProps} primaryButtonDisabled />);
+    const primaryButton = screen.getByText(defaultProps.primaryButtonText);
+    expect(primaryButton).toHaveAttribute('disabled');
   });
 
   it.skip('has no accessibility violations', async () => {

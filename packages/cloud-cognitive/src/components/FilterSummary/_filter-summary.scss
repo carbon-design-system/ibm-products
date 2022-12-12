@@ -15,5 +15,6 @@ $block-class: #{$pkg-prefix}--filter-summary;
   width: 100%;
   align-items: center;
   padding: $spacing-03;
+  border-top: 1px solid $border-subtle-01;
   background: $layer-01;
 }

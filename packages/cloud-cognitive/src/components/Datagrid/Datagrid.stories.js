@@ -27,7 +27,7 @@ import {
   useFiltering,
 } from '.';
 
-import { SelectAllWitHToggle, LeftPanelStory } from './Datagrid.stories';
+import { SelectAllWitHToggle, LeftPanelStory } from './Datagrid.stories/index';
 import mdx from './Datagrid.mdx';
 
 import { pkg } from '../../settings';
@@ -500,11 +500,10 @@ export const Filtering = () => {
         'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
       filterProps: {
         variation: 'flyout', // default
-        updateMethod: 'batch', // default
+        updateMethod: 'instant', // default
         primaryActionLabel: 'Apply', // default
         secondaryActionLabel: 'Cancel', // default
         flyoutIconDescription: 'Open filters', // default
-        shouldClickOutsideToClose: false, // default
         onFlyoutOpen: action('onFlyoutOpen'),
         onFlyoutClose: action('onFlyoutClose'),
         filters,

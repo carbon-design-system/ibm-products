@@ -167,24 +167,25 @@ import { init } from './test-common';
   const tests = [];
 
   directories.forEach((dir) => {
-    const ignoreExample = ingoreExample.includes(dir);
+    const ignoreExamples = ingoreExample.includes(dir);
 
     const sanitizedDir = dir
       .replace(/(-|_)\w/g, (m) => m[1].toUpperCase())
       .replace(/./, (m) => m.toUpperCase());
 
     const skipImport = `/* skipped import see 'example-gallery-builder'`;
-    if (ignoreExample) {
+    if (ignoreExamples) {
       exampleImports.push(`${skipImport} `);
     }
     exampleImports.push(
       `import { Example as ${sanitizedDir}Example } from './${dir}/src/Example/Example'`
     );
-    if (ignoreExample) {
+    if (ignoreExamples) {
       exampleImports.push(`*/`);
     }
 
-    const skipTest = ignoreExample || skipExamples.includes(dir) ? '.skip' : '';
+    const skipTest =
+      ignoreExamples || skipExamples.includes(dir) ? '.skip' : '';
 
     tests.push(`  it${skipTest}('${sanitizedDir} renders', () => {
     render(<${sanitizedDir}Example />);

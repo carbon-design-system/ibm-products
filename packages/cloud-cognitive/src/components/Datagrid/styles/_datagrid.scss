@@ -416,10 +416,20 @@
 }
 
 .#{$block-class}__carbon-row-expanded {
-  // Border applied to nested rows only on open chevron hover
-  &.#{$block-class}__carbon-row-expanded-hover-active
-    ~ .#{$block-class}__carbon-nested-row {
-    border-left: 1px solid $button-primary;
+  position: relative;
+  &.#{$block-class}__carbon-row-expanded-hover-active::before {
+    position: absolute;
+    z-index: 2;
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    top: var(--#{$block-class}--row-height);
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    left: calc(
+      var(--#{$block-class}--indicator-offset-amount) + #{$spacing-05}
+    );
+    width: 1px;
+    height: var(--#{$block-class}--indicator-height);
+    border-left: 1px solid $background-brand;
+    content: '';
   }
 }
 
@@ -546,4 +556,39 @@
 
 .#{$block-class}__virtualScrollContainer {
   width: 100%;
+}
+
+.#{c4p-settings.$carbon-prefix}--body--with-modal-open
+  .#{$block-class}__grid-container {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal {
+  width: 100%;
+}
+
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger {
+  flex-shrink: 0;
+  background-color: $interactive;
+}
+
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger
+  svg {
+  fill: $background;
+}
+
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger:hover,
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{c4p-settings.$carbon-prefix}--overflow-menu--open:hover,
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{c4p-settings.$carbon-prefix}--overflow-menu--open {
+  background-color: $button-primary-hover;
+}
+
+.#{$block-class}__toolbar-options.#{c4p-settings.$carbon-prefix}--overflow-menu-options::after {
+  background-color: transparent;
+}
+
+.#{$block-class}__mobile-toolbar-modal
+  .#{c4p-settings.$carbon-prefix}--modal-container {
+  position: absolute;
 }

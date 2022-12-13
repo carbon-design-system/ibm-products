@@ -97,7 +97,11 @@ const DatagridVirtualBody = (datagridState) => {
             const row = visibleRows[index];
             prepareRow(row);
             return (
-              <div style={{ ...style }}>
+              <div
+                style={{
+                  ...style,
+                }}
+              >
                 {row.RowRenderer({ ...datagridState, row })}
               </div>
             );

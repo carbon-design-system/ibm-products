@@ -550,6 +550,7 @@
 }
 
 .#{$block-class}__virtualScrollContainer {
+  width: 100%;
 }
 
 .#{$carbon-prefix}--body--with-modal-open .#{$block-class}__grid-container {

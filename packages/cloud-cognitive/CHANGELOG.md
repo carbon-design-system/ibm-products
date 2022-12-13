@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.9...@carbon/ibm-products@2.0.0-rc.10) (2022-12-13)
+
+
+### Bug Fixes
+
+* adds primaryButtonDisabled prop ([#2533](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2533)) ([924125b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/924125b11c677185e51b1c41c8ed40624e78c444))
+* adds primaryButtonDisabled test to RemoveModal v11 ([#2535](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2535)) ([07ef4ce](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/07ef4ce03067048f9729d126dda62105c6d789e0))
+* card action bug fix v11 ([#2550](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2550)) ([bc7129c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/bc7129c9d4dfb2bca4ea55db4a53647dcda19025))
+* **Datagrid:** update inline edit selection type to support string items (v11) ([#2547](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2547)) ([f4b236c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f4b236c885d1524e6962f3618d9383688787f8e8))
+
+
+
+
+
 # [2.0.0-rc.9](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.8...@carbon/ibm-products@2.0.0-rc.9) (2022-12-06)
 
 

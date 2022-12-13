@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useEffect, forwardRef, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from 'carbon-components-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -165,44 +166,60 @@ export let InlineEditV2 = forwardRef(
               {invalid && (
                 <WarningFilled16 className={`${blockClass}__warning-icon`} />
               )}
-              <Button
-                hasIconOnly
-                renderIcon={Close24}
-                size="sm"
-                iconDescription={cancelLabel}
-                onClick={onCancelHandler}
-                kind="ghost"
-                tabIndex={0}
-                key="cancel"
-                className={`${blockClass}__btn ${blockClass}__btn-cancel`}
-              />
-              <Button
-                hasIconOnly
-                renderIcon={Checkmark24}
-                size="sm"
-                iconDescription={saveLabel}
-                onClick={onSaveHandler}
-                kind="ghost"
-                tabIndex={0}
-                key="save"
-                className={`${blockClass}__btn ${blockClass}__btn-save`}
-                disabled={!canSave}
-              />
+              <AnimatePresence>
+                <motion.div
+                  initial={{ translateX: 100 }}
+                  animate={{ translateX: 0 }}
+                  exit={{ translateX: -100 }}
+                >
+                  <Button
+                    hasIconOnly
+                    renderIcon={Close24}
+                    size="sm"
+                    iconDescription={cancelLabel}
+                    onClick={onCancelHandler}
+                    kind="ghost"
+                    tabIndex={0}
+                    key="cancel"
+                    className={`${blockClass}__btn ${blockClass}__btn-cancel`}
+                  />
+                  <Button
+                    hasIconOnly
+                    renderIcon={Checkmark24}
+                    size="sm"
+                    iconDescription={saveLabel}
+                    onClick={onSaveHandler}
+                    kind="ghost"
+                    tabIndex={0}
+                    key="save"
+                    className={`${blockClass}__btn ${blockClass}__btn-save`}
+                    disabled={!canSave}
+                  />
+                </motion.div>
+              </AnimatePresence>
             </>
           ) : (
-            <Button
-              className={`${blockClass}__btn ${blockClass}__btn-edit`}
-              hasIconOnly
-              // renderIcon={readOnly ? EditOff24 : Edit24}
-              renderIcon={Edit24}
-              size="sm"
-              // iconDescription={readOnly ? readOnlyLabel : editLabel}
-              iconDescription={editLabel}
-              onClick={onFocusHandler}
-              kind="ghost"
-              tabIndex={0}
-              key="edit"
-            />
+            <AnimatePresence>
+              <motion.div
+                initial={{ translateX: 100 }}
+                animate={{ translateX: 0 }}
+                exit={{ translateX: -100 }}
+              >
+                <Button
+                  className={`${blockClass}__btn ${blockClass}__btn-edit`}
+                  hasIconOnly
+                  // renderIcon={readOnly ? EditOff24 : Edit24}
+                  renderIcon={Edit24}
+                  size="sm"
+                  // iconDescription={readOnly ? readOnlyLabel : editLabel}
+                  iconDescription={editLabel}
+                  onClick={onFocusHandler}
+                  kind="ghost"
+                  tabIndex={0}
+                  key="edit"
+                />
+              </motion.div>
+            </AnimatePresence>
           )}
         </div>
         {focused && invalid && (

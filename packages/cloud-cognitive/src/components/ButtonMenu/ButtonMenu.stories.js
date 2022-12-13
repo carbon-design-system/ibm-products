@@ -19,7 +19,7 @@ import mdx from './ButtonMenu.mdx';
 
 import styles from './_storybook-styles.scss';
 
-import { Add16 } from '@carbon/icons-react';
+import { ChevronDown16 } from '@carbon/icons-react';
 
 export default {
   title: getStoryTitle(ButtonMenu.displayName),
@@ -38,9 +38,9 @@ export default {
 
 const Template = (args) => {
   return (
-    <ButtonMenu label="Primary button" renderIcon={Add16} {...args}>
+    <ButtonMenu label="Primary button" renderIcon={ChevronDown16} {...args}>
       <ButtonMenuItem
-        itemText="Option 1a"
+        itemText="Option 1"
         onClick={action(`Click on Option 1`)}
       />
       <ButtonMenuItem
@@ -54,7 +54,6 @@ const Template = (args) => {
       <ButtonMenuItem
         itemText="Option 4"
         onClick={action(`Click on Option 4`)}
-        hasDivider
       />
     </ButtonMenu>
   );
@@ -62,5 +61,7 @@ const Template = (args) => {
 
 export const buttonMenu = prepareStory(Template, {
   storyName: 'Button menu',
-  args: {},
+  args: {
+    size: 'md',
+  },
 });

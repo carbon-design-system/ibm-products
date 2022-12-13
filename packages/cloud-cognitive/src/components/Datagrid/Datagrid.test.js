@@ -1677,8 +1677,7 @@ describe(componentName, () => {
       .getElementsByTagName('button')[0];
 
     fireEvent.click(firstRow);
-
-    expect(row.classList[1]).toEqual('c4p--datagrid__carbon-row-expanded');
+    expect(row.classList[0]).toEqual('c4p--datagrid__carbon-row-expanded');
 
     const nestedRow = screen
       .getByRole('table')

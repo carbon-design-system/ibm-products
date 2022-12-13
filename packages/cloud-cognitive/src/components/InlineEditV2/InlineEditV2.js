@@ -213,8 +213,6 @@ export let InlineEditV2 = forwardRef(
   }
 );
 
-InlineEditV2 = pkg.checkComponentEnabled(InlineEditV2, componentName);
-
 InlineEditV2.displayName = componentName;
 
 InlineEditV2.propTypes = {

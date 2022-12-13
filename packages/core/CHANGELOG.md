@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.40.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.40.0...@carbon/ibm-cloud-cognitive-core@0.40.1) (2022-12-10)
+
+### Bug Fixes
+
+- **ButtonMenu:** Revert back to OverflowMenu
+  ([#2521](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2521))
+  ([19b3277](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/19b3277d897f86a8c26f383b553c5cd706912e0e))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [0.40.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.39.1...@carbon/ibm-cloud-cognitive-core@0.40.0) (2022-11-22)
+
+### Bug Fixes
+
+- update to Carbon v10 compatible versions to latest
+  ([#2462](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2462))
+  ([4353991](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/43539912353a965549f0f2e5f8245168d2ce1c98))
+
+### Features
+
+- adds FilterSummary
+  ([#2466](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2466))
+  ([46dd712](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/46dd7120f088d3f05ecd653d44058f3e51d76c9c))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [0.39.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.39.0...@carbon/ibm-cloud-cognitive-core@0.39.1) (2022-11-08)
 
 ### Bug Fixes

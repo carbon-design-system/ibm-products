@@ -280,6 +280,12 @@ export const InlineEditCell = ({
     );
   };
 
+  const handleTransformedItem = (items) => {
+    return items?.length && typeof items[0] === 'object'
+      ? (item) => renderDropdownItem(item)
+      : null;
+  };
+
   const renderSelectCell = () => {
     const { inputProps } = config || {};
     return (
@@ -297,8 +303,8 @@ export const InlineEditCell = ({
         })}
         items={inputProps?.items || []}
         initialSelectedItem={cell.value}
-        itemToElement={(item) => renderDropdownItem(item)}
-        renderSelectedItem={(item) => renderDropdownItem(item)}
+        itemToElement={handleTransformedItem(inputProps?.items)}
+        renderSelectedItem={handleTransformedItem(inputProps?.items)}
         onChange={(item) => {
           const newCellId = getNewCellId('Enter');
           saveCellData(item.selectedItem);
@@ -478,7 +484,7 @@ export const InlineEditCell = ({
           renderIcon={setRenderIcon()}
           label={
             type === 'selection'
-              ? value.text
+              ? value?.text ?? value
               : type === 'date'
               ? buildDate(value)
               : value

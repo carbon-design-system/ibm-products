@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { AddSelect } from '../AddSelect';
@@ -20,7 +27,6 @@ export let SingleAddSelect = forwardRef((props, ref) => {
     'multi',
     'noSelectionDescription',
     'noSelectionTitle',
-    'removeIconDescription',
   ]);
   return (
     <AddSelect {...validProps} ref={ref} {...getDevtoolsProps(componentName)} />
@@ -46,6 +52,10 @@ SingleAddSelect.propTypes = {
    * placeholder for global search input
    */
   globalSearchPlaceholder: PropTypes.string,
+  /**
+   * the theme for the empty state illustration
+   */
+  illustrationTheme: PropTypes.oneOf(['light', 'dark']),
   /**
    * object that contains the item data. for more information reference the
    * "Structuring items" section in the docs tab
@@ -95,7 +105,7 @@ SingleAddSelect.propTypes = {
   /**
    * text that displays when displaying filtered items
    */
-  searchResultsLabel: PropTypes.string,
+  searchResultsTitle: PropTypes.string,
   /**
    * header text
    */

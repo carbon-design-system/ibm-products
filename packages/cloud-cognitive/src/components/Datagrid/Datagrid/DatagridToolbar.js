@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Add16, OverflowMenuVertical16 } from '@carbon/icons-react';
 import {
   DataTable,
@@ -17,7 +17,6 @@ import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
 import { FilterSummary } from '../../FilterSummary';
-import { useContext } from 'react';
 import { FilterContext } from './addons/Filtering/FilterProvider';
 import { CLEAR_FILTERS } from './addons/Filtering/constants';
 

@@ -31,7 +31,7 @@ import {
 } from '.';
 
 import mdx from './Datagrid.mdx';
-import { LeftPanelStory, SelectAllWitHToggle } from './Datagrid.stories';
+import { LeftPanelStory, SelectAllWithToggle } from './Datagrid.stories';
 
 import { pkg } from '../../settings';
 
@@ -637,24 +637,64 @@ export const SelectItemsInAllPages = () => {
     </>
   );
 };
-SelectItemsInAllPages.story = SelectAllWitHToggle;
+SelectItemsInAllPages.story = SelectAllWithToggle;
 
 export const LeftPanel = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+  const sections = [
+    {
+      title: 'Source Details',
+      subsections: [
+        { title: "IP Address", children: <div>Heyo</div>},
+        { title: "Bingus hands", children: <div>Hello</div>},
+        { title: "Dingus", children: <div>Ello</div>},
+      ],
+    },
+    {
+      title: 'Source Meat',
+      subsections: [
+        { title: "IP Address", children: <div>Heyo</div>},
+        { title: "Bingus hands", children: <div>Hello</div>},
+        { title: "Dingus", children: <div>Ello</div>},
+      ],
+    },
+    {
+      title: 'Source Hands',
+      subsections: [
+        { title: "IP Address", children: <div>Heyo</div>},
+        { title: "Bingus hands", children: <div>Hello</div>},
+        { title: "Dingus", children: <div>Ello</div>},
+      ],
+    },
+    {
+      title: 'Source Legs',
+      subsections: [
+        { title: "IP Address", children: <div>Heyo</div>},
+        { title: "Bingus hands", children: <div>Hello</div>},
+        { title: "Dingus", children: <div>Ello</div>},
+      ],
+    },
+  ];
+
   const datagridState = useDatagrid({
-    leftPanel: {
-      isOpen: true, // this toggling will happen from datagridActions.
-      panelContent: (
-        <div className={`${blockClass}__panel-content`}>
-          Panel content will go here along with any button interactions
-        </div>
-      ),
+    filterProps: {
+      variation: 'panel',
+      updateMethod: 'batch',
+      primaryActionLabel: 'Apply',
+      secondaryActionLabel: 'Cancel',
+      flyoutIconDescription: 'Open filters',
+      shouldClickOutsideToClose: false,
+      onFlyoutOpen: () => console.log('onFlyoutOpen'),
+      onFlyoutClose: () => console.log('onFlyoutClose'),
+      sections,
     },
     columns,
     data,
     DatagridActions,
     DatagridBatchActions,
+    batchActions: true,
+    toolbarBatchActions: getBatchActions(),
   });
 
   return (

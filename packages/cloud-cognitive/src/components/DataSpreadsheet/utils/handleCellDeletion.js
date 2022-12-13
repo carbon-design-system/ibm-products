@@ -32,20 +32,20 @@ export const handleCellDeletion = ({
   const selectionAreaToEmptyContents =
     selectionAreaClone[indexOfCurrentSelectionArea];
   const lowestColumnIndex = Math.min(
-    selectionAreaToEmptyContents.point1.column,
-    selectionAreaToEmptyContents.point2.column
+    selectionAreaToEmptyContents?.point1?.column,
+    selectionAreaToEmptyContents?.point2?.column
   );
   const greatestColumnIndex = Math.max(
-    selectionAreaToEmptyContents.point1.column,
-    selectionAreaToEmptyContents.point2.column
+    selectionAreaToEmptyContents?.point1?.column,
+    selectionAreaToEmptyContents?.point2?.column
   );
   const lowestRowIndex = Math.min(
-    selectionAreaToEmptyContents.point1.row,
-    selectionAreaToEmptyContents.point2.row
+    selectionAreaToEmptyContents?.point1?.row,
+    selectionAreaToEmptyContents?.point2?.row
   );
   const greatestRowIndex = Math.max(
-    selectionAreaToEmptyContents.point1.row,
-    selectionAreaToEmptyContents.point2.row
+    selectionAreaToEmptyContents?.point1?.row,
+    selectionAreaToEmptyContents?.point2?.row
   );
   rangeWithCallback(lowestColumnIndex, greatestColumnIndex, (columnIndex) => {
     rangeWithCallback(lowestRowIndex, greatestRowIndex, (rowIndex) => {

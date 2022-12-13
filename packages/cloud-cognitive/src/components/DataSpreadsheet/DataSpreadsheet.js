@@ -176,9 +176,7 @@ export let DataSpreadsheet = React.forwardRef(
       const activeCellHighlight = spreadsheetRef.current.querySelector(
         `.${blockClass}__active-cell--highlight`
       );
-      if (activeCellHighlight) {
-        activeCellHighlight.style.display = 'none';
-      }
+      activeCellHighlight.style.display = 'none';
     }, [spreadsheetRef]);
 
     const removeCellEditor = useCallback(() => {

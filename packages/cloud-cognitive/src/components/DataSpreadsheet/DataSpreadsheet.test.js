@@ -6,7 +6,7 @@
  */
 
 import React, { forwardRef, useState } from 'react';
-import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, fireEvent, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
@@ -15,10 +15,12 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { DataSpreadsheet } from '.';
 import { generateData } from './utils/generateData';
 
-// cspell:words rowcount
+// cspell:words rowcount colcount
 
 const blockClass = `${pkg.prefix}--data-spreadsheet`;
 const componentName = DataSpreadsheet.displayName;
+const activeCellChangeFn = jest.fn();
+const onSelectionAreaChangeFn = jest.fn();
 
 // values to use
 const className = `class-${uuidv4()}`;
@@ -57,6 +59,9 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
   it('renders a component DataSpreadsheet', () => {
     render(<DataSpreadsheet {...defaultProps} />);
     expect(screen.getByRole('grid')).toHaveClass(blockClass);
@@ -236,5 +241,358 @@ describe(componentName, () => {
     );
     const ariaRowCountValue = ref?.current.getAttribute('aria-rowcount');
     expect(Number(ariaRowCountValue)).toEqual(defaultEmptyRowCount);
+  });
+
+  const EditableSpreadsheet = forwardRef(({ ...rest }, ref) => {
+    const [data, setData] = useState(() => generateData({ rows: 16 }));
+    return (
+      <DataSpreadsheet
+        {...defaultProps}
+        {...rest}
+        ref={ref}
+        columns={defaultProps.columns}
+        data={data}
+        onDataUpdate={setData}
+        id="spreadsheet--id"
+      />
+    );
+  });
+
+  it('should edit the cell contents, submit the change, and confirm the new value exists', async () => {
+    const newCellValue = "I'm the new cell value";
+    const { click, keyboard, tab, type } = userEvent;
+    const ref = React.createRef();
+    render(
+      <EditableSpreadsheet
+        ref={ref}
+        onActiveCellChange={activeCellChangeFn}
+        onSelectionAreaChange={onSelectionAreaChangeFn}
+      />
+    );
+    const activeCellElement = ref?.current.querySelector(
+      `.${blockClass}__active-cell--highlight`
+    );
+    const cellToEdit = ref?.current.querySelector(`#${blockClass}__cell--0--1`);
+    const cellEditor = ref?.current.querySelector(
+      `#${blockClass}__cell-editor-text-area`
+    );
+    click(cellToEdit);
+    expect(activeCellChangeFn).toHaveBeenCalled();
+    keyboard('{Enter}');
+    cellEditor.setSelectionRange(0, cellEditor.value.length);
+    type(cellEditor, newCellValue);
+    tab();
+    keyboard('{ArrowLeft}');
+    expect(activeCellElement.textContent).toEqual(newCellValue);
+  });
+
+  it('should save value after clicking on another cell while in edit mode', () => {
+    const newCellValue = "I'm the new cell value";
+    const { click, keyboard, type } = userEvent;
+    const ref = React.createRef();
+    render(
+      <EditableSpreadsheet
+        ref={ref}
+        onActiveCellChange={activeCellChangeFn}
+        onSelectionAreaChange={onSelectionAreaChangeFn}
+      />
+    );
+    const cellToEdit = ref?.current.querySelector(`#${blockClass}__cell--0--1`);
+    const cellEditor = ref?.current.querySelector(
+      `#${blockClass}__cell-editor-text-area`
+    );
+    click(cellToEdit);
+    expect(activeCellChangeFn).toHaveBeenCalled();
+    keyboard('{Enter}');
+    cellEditor.setSelectionRange(0, cellEditor.value.length);
+    type(cellEditor, newCellValue);
+    const nextCell = ref?.current.querySelector(`#${blockClass}__cell--0--3`);
+    click(nextCell);
+    const updatedCell = ref?.current.querySelector(
+      `#${blockClass}__cell--0--1`
+    );
+    expect(updatedCell.textContent).toEqual(newCellValue);
+  });
+
+  it('should set initial placement of active cell on the select all button', () => {
+    const ref = React.createRef();
+    const { keyboard } = userEvent;
+    const { container } = render(
+      <DataSpreadsheet
+        {...defaultProps}
+        ref={ref}
+        onActiveCellChange={activeCellChangeFn}
+        onSelectionAreaChange={onSelectionAreaChangeFn}
+      />
+    );
+    const activeCellElement = ref?.current.querySelector(
+      `.${blockClass}__active-cell--highlight`
+    );
+    act(() => {
+      container.firstChild.focus();
+      keyboard('{ArrowDown}');
+    });
+    expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
+      'header'
+    );
+    expect(activeCellElement.getAttribute('data-active-column-index')).toEqual(
+      'header'
+    );
+  });
+
+  it('should move the active cell with arrow keys as expected', () => {
+    const { click, keyboard } = userEvent;
+    const ref = React.createRef();
+    render(
+      <EditableSpreadsheet
+        ref={ref}
+        onActiveCellChange={activeCellChangeFn}
+        onSelectionAreaChange={onSelectionAreaChangeFn}
+      />
+    );
+    const activeCellElement = ref?.current.querySelector(
+      `.${blockClass}__active-cell--highlight`
+    );
+    const cellToEdit = ref?.current.querySelector(`#${blockClass}__cell--0--1`);
+    click(cellToEdit);
+    keyboard('{ArrowRight}');
+    const activeCellRowIndex = activeCellElement.getAttribute(
+      'data-active-row-index'
+    );
+    const activeCellColumnIndex = activeCellElement.getAttribute(
+      'data-active-column-index'
+    );
+    expect(parseInt(activeCellRowIndex)).toEqual(0);
+    expect(parseInt(activeCellColumnIndex)).toEqual(2);
+    keyboard('{ArrowUp}');
+    expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
+      'header'
+    );
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(2);
+    keyboard('{ArrowDown}');
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(0);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(2);
+    keyboard('{ArrowDown}');
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(1);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(2);
+  });
+
+  it('should empty the contents of a cell with the delete key', () => {
+    const { click, keyboard } = userEvent;
+    const ref = React.createRef();
+    render(
+      <EditableSpreadsheet
+        ref={ref}
+        onActiveCellChange={activeCellChangeFn}
+        onSelectionAreaChange={onSelectionAreaChangeFn}
+      />
+    );
+    const activeCellElement = ref?.current.querySelector(
+      `.${blockClass}__active-cell--highlight`
+    );
+    const cellToEdit = ref?.current.querySelector(`#${blockClass}__cell--0--1`);
+    click(cellToEdit);
+    expect(activeCellChangeFn).toHaveBeenCalled();
+    keyboard('{Backspace}');
+    expect(activeCellElement.textContent).toEqual('');
+    keyboard('{ArrowRight}');
+    keyboard('{Delete}');
+    expect(activeCellElement.textContent).toEqual('');
+
+    // Home button should move active cell to first column in the current row
+    keyboard('{Home}');
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(0);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(0);
+
+    // Home and resource key should move active cell to first column of the first row
+    keyboard('{End}');
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(0);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(defaultProps.columns.length - 1);
+  });
+
+  it('should remove spreadsheet focus using tab key', () => {
+    const ref = React.createRef();
+    const { tab } = userEvent;
+    const { container } = render(
+      <DataSpreadsheet
+        {...defaultProps}
+        ref={ref}
+        onActiveCellChange={activeCellChangeFn}
+        onSelectionAreaChange={onSelectionAreaChangeFn}
+      />
+    );
+    act(() => {
+      container.firstChild.focus();
+    });
+    tab();
+    expect(ref.current).not.toHaveClass(`${blockClass}__container-has-focus`);
+  });
+
+  it('should navigate the active cell inside cell headers as expected', () => {
+    const ref = React.createRef();
+    const { keyboard } = userEvent;
+    const { container } = render(
+      <DataSpreadsheet
+        {...defaultProps}
+        ref={ref}
+        onActiveCellChange={activeCellChangeFn}
+        onSelectionAreaChange={onSelectionAreaChangeFn}
+      />
+    );
+    const activeCellElement = ref?.current.querySelector(
+      `.${blockClass}__active-cell--highlight`
+    );
+    act(() => {
+      container.firstChild.focus();
+    });
+    keyboard('{ArrowDown}');
+    expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
+      'header'
+    );
+    expect(activeCellElement.getAttribute('data-active-column-index')).toEqual(
+      'header'
+    );
+    keyboard('{ArrowRight}');
+    expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
+      'header'
+    );
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(0);
+    keyboard('{ArrowUp}');
+    expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
+      'header'
+    );
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(0);
+    keyboard('{ArrowDown}');
+    keyboard('{ArrowLeft}');
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(0);
+    expect(activeCellElement.getAttribute('data-active-column-index')).toEqual(
+      'header'
+    );
+    keyboard('{ArrowLeft}');
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(0);
+    expect(activeCellElement.getAttribute('data-active-column-index')).toEqual(
+      'header'
+    );
+    keyboard('{ArrowRight}');
+    keyboard('{ArrowDown}');
+    keyboard('{ArrowDown}');
+    keyboard('{ArrowUp}');
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(1);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(0);
+    keyboard('{ArrowRight}');
+    keyboard('{ArrowRight}');
+    keyboard('{ArrowRight}');
+    keyboard('{ArrowRight}');
+    keyboard('{ArrowRight}');
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(1);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(5);
+    // If active cell is positioned in the last column, it shouldn't change position again if right arrow key is pressed
+    keyboard('{ArrowRight}');
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(1);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(5);
+  });
+
+  it('should go into edit mode with double click on a cell', () => {
+    const ref = React.createRef();
+    const { keyboard, dblClick } = userEvent;
+    const { container } = render(
+      <DataSpreadsheet
+        {...defaultProps}
+        ref={ref}
+        onSelectionAreaChange={onSelectionAreaChangeFn}
+      />
+    );
+    const activeCellElement = ref?.current.querySelector(
+      `.${blockClass}__active-cell--highlight`
+    );
+    act(() => {
+      container.firstChild.focus();
+    });
+    keyboard('{ArrowDown}');
+    keyboard('{ArrowDown}');
+    keyboard('{ArrowRight}');
+    dblClick(activeCellElement);
+    const cellEditor = ref?.current.querySelector(
+      `#${blockClass}__cell-editor-text-area`
+    );
+    expect(cellEditor).toHaveClass(`${blockClass}__cell-editor--active`);
+  });
+
+  it('should use default values for columns and data if none are provided', () => {
+    const ref = React.createRef();
+    render(
+      <DataSpreadsheet
+        ref={ref}
+        onSelectionAreaChange={onSelectionAreaChangeFn}
+        spreadsheetAriaLabel="Test label"
+        selectAllAriaLabel="Select all test label"
+      />
+    );
+    expect(parseInt(ref?.current.getAttribute('aria-colcount'))).toEqual(0);
+    expect(parseInt(ref?.current.getAttribute('aria-rowcount'))).toEqual(0);
+  });
+
+  it('should do nothing on meta key usage and prevent default tab key behavior during edit', () => {
+    const ref = React.createRef();
+    const { keyboard, dblClick } = userEvent;
+    render(
+      <EditableSpreadsheet
+        ref={ref}
+        onActiveCellChange={activeCellChangeFn}
+        onSelectionAreaChange={onSelectionAreaChangeFn}
+      />
+    );
+    const activeCellElement = ref?.current.querySelector(
+      `.${blockClass}__active-cell--highlight`
+    );
+    act(() => {
+      ref?.current.focus();
+    });
+    keyboard('{ArrowDown}');
+    keyboard('{ArrowDown}');
+    keyboard('{ArrowRight}');
+    keyboard('{Meta}');
+    // Tab key during editing should do nothing
+    dblClick(activeCellElement);
+    keyboard('{Tab}');
+    expect(ref.current).toHaveClass(`${blockClass}__container-has-focus`);
   });
 });

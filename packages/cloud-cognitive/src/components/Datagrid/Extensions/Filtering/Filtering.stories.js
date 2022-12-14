@@ -276,26 +276,60 @@ const filters = [
 ];
 
 export const FilteringUsageStory = prepareStory(FilteringTemplateWrapper, {
-  storyName: 'Filter flyout',
+  storyName: 'Filter flyout - batch',
   argTypes: {
     gridTitle: ARG_TYPES.gridTitle,
     gridDescription: ARG_TYPES.gridDescription,
     useDenseHeader: ARG_TYPES.useDenseHeader,
+    filterProps: ARG_TYPES.filterProps,
   },
   args: {
     gridTitle: 'Data table title',
     gridDescription: 'Additional information if needed',
     useDenseHeader: false,
+    emptyStateTitle: 'No filters match',
+    emptyStateDescription:
+      'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
     filterProps: {
       variation: 'flyout',
       updateMethod: 'batch',
       primaryActionLabel: 'Apply',
       secondaryActionLabel: 'Cancel',
       flyoutIconDescription: 'Open filters',
-      shouldClickOutsideToClose: false,
       onFlyoutOpen: action('onFlyoutOpen'),
       onFlyoutClose: action('onFlyoutClose'),
       filters,
     },
   },
 });
+
+export const FilteringInstantUsageStory = prepareStory(
+  FilteringTemplateWrapper,
+  {
+    storyName: 'Filter flyout - instant',
+    argTypes: {
+      gridTitle: ARG_TYPES.gridTitle,
+      gridDescription: ARG_TYPES.gridDescription,
+      useDenseHeader: ARG_TYPES.useDenseHeader,
+      filterProps: ARG_TYPES.filterProps,
+    },
+    args: {
+      gridTitle: 'Data table title',
+      gridDescription: 'Additional information if needed',
+      useDenseHeader: false,
+      emptyStateTitle: 'No filters match',
+      emptyStateDescription:
+        'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+      filterProps: {
+        variation: 'flyout',
+        updateMethod: 'instant',
+        primaryActionLabel: 'Apply',
+        secondaryActionLabel: 'Cancel',
+        flyoutIconDescription: 'Open filters',
+        onFlyoutOpen: action('onFlyoutOpen'),
+        onFlyoutClose: action('onFlyoutClose'),
+        filters,
+      },
+    },
+  }
+);

@@ -1,0 +1,20 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use '../../global/styles/project-settings' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+$block-class: #{$pkg-prefix}--filter-summary;
+
+.#{$block-class} {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: $spacing-03;
+  border-top: 1px solid $border-subtle-01;
+  background: $layer-01;
+}

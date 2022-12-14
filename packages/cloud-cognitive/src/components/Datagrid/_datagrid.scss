@@ -48,7 +48,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 
 .#{$block-class}__datagridWrap-simple {
   display: flex;
-  overflow: hidden;
   width: 100%;
   height: 100%;
   flex-direction: column;

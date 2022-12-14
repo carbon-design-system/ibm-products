@@ -7,7 +7,11 @@
  */
 // @flow
 import React from 'react';
+<<<<<<< HEAD
 import { DataTable } from '@carbon/react';
+=======
+import { DataTable } from 'carbon-components-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 

@@ -23,6 +23,10 @@ global.requestAnimationFrame = (callback) => {
   return setTimeout(callback, 0);
 };
 
+global.requestAnimationFrame = (callback) => {
+  return setTimeout(callback, 0);
+};
+
 enzyme.configure({ adapter: new Adapter() });
 
 if (global.HTMLElement) {

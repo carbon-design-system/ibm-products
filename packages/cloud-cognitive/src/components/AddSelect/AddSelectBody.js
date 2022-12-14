@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Tag } from '@carbon/react';
@@ -26,6 +26,7 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--add-select`;
 const componentName = 'AddSelectBody';
 
+<<<<<<< HEAD
 export let AddSelectBody = ({
   className,
   clearFiltersText,
@@ -95,19 +96,91 @@ export let AddSelectBody = ({
     [`${blockClass}__single`]: !multi,
     [`${blockClass}__multi`]: multi,
   });
+=======
+export let AddSelectBody = forwardRef(
+  (
+    {
+      className,
+      clearFiltersText,
+      closeIconDescription,
+      columnInputPlaceholder,
+      defaultModifiers,
+      description,
+      globalFilterOpts,
+      globalFiltersLabel,
+      globalFiltersIconDescription,
+      globalFiltersPlaceholderText,
+      globalFiltersPrimaryButtonText,
+      globalFiltersSecondaryButtonText,
+      globalSearchLabel,
+      globalSearchPlaceholder,
+      globalSortBy,
+      illustrationTheme,
+      influencerTitle,
+      items,
+      itemsLabel,
+      metaIconDescription,
+      metaPanelTitle,
+      multi,
+      navIconDescription,
+      noResultsDescription,
+      noResultsTitle,
+      noSelectionDescription,
+      noSelectionTitle,
+      normalizedItems,
+      onClose,
+      onCloseButtonText,
+      onSubmit,
+      onSubmitButtonText,
+      open,
+      portalTarget,
+      searchResultsTitle,
+      title,
+      useNormalizedItems,
+      ...rest
+    },
+    ref
+  ) => {
+    // hooks
+    const [singleSelection, setSingleSelection] = useState('');
+    const [multiSelection, setMultiSelection] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [appliedGlobalFilters, setAppliedGlobalFilters] = useState({});
+    const [displayMetalPanel, setDisplayMetaPanel] = useState({});
+    const [appliedModifiers, setAppliedModifiers] = useState(defaultModifiers);
+    const { sortDirection, setSortDirection, sortAttribute, setSortAttribute } =
+      useItemSort();
+    const { parentSelected, setParentSelected } = useParentSelect();
+    const { path, setPath, pathOnclick, resetPath } = usePath(itemsLabel);
 
-  const globalFilterKeys = Object.keys(appliedGlobalFilters);
-  const globalFiltersApplied = globalFilterKeys.length > 0;
+    const resetState = () => {
+      setSingleSelection('');
+      setMultiSelection([]);
+      setSearchTerm('');
+      setAppliedGlobalFilters({});
+      setDisplayMetaPanel({});
+      setAppliedModifiers(defaultModifiers);
+      setSortAttribute('');
+      setSortDirection('');
+      setParentSelected(null);
+      resetPath();
+    };
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
-  // handlers
-  const handleSearch = (term) => {
-    setSearchTerm(term);
-  };
+    const onCloseHandler = () => {
+      resetState();
+      onClose();
+    };
 
-  const handleFilter = (filters) => {
-    setAppliedGlobalFilters(filters);
-  };
+    const tearsheetClassnames = cx(className, blockClass, {
+      [`${blockClass}__single`]: !multi,
+      [`${blockClass}__multi`]: multi,
+    });
 
+    const globalFilterKeys = Object.keys(appliedGlobalFilters);
+    const globalFiltersApplied = globalFilterKeys.length > 0;
+
+<<<<<<< HEAD
   const submitHandler = () => {
     if (multi && appliedModifiers.length > 0) {
       const selections = multiSelection.map((item) => {
@@ -121,47 +194,54 @@ export let AddSelectBody = ({
     }
     onCloseHandler();
   };
+=======
+    // handlers
+    const handleSearch = (term) => {
+      setSearchTerm(term);
+    };
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
-  const setShowBreadsCrumbs = () => {
-    if (searchTerm || globalFiltersApplied || !path || path.length === 0) {
-      return false;
-    }
-    return true;
-  };
+    const handleFilter = (filters) => {
+      setAppliedGlobalFilters(filters);
+    };
 
-  const setShowTags = () => {
-    if (searchTerm) {
+    const submitHandler = () => {
+      if (multi && appliedModifiers.length > 0) {
+        const selections = multiSelection.map((item) => {
+          return appliedModifiers.find((mod) => mod.id === item);
+        });
+        onSubmit(selections);
+      } else if (multi && appliedModifiers.length === 0) {
+        onSubmit(multiSelection);
+      } else {
+        onSubmit(singleSelection);
+      }
+      onCloseHandler();
+    };
+
+    const setShowBreadsCrumbs = () => {
+      if (searchTerm || globalFiltersApplied || !path || path.length === 0) {
+        return false;
+      }
       return true;
-    }
-    if (useNormalizedItems) {
-      return false;
-    }
-    return true;
-  };
+    };
 
-  const parentSelectionHandler = (id, title, parentId) => {
-    setParentSelected(id);
-    setPath(id, title, parentId);
-  };
+    const setShowTags = () => {
+      if (searchTerm) {
+        return true;
+      }
+      if (useNormalizedItems) {
+        return false;
+      }
+      return true;
+    };
 
-  const sortFn = sortItems(sortAttribute, sortDirection);
-  const itemsToDisplay = getFilteredItems(
-    useNormalizedItems,
-    normalizedItems,
-    searchTerm,
-    globalFiltersApplied,
-    globalFilterKeys,
-    appliedGlobalFilters,
-    sortFn,
-    multi,
-    items,
-    path
-  );
-  const hasResults = itemsToDisplay.length > 0;
-  const showBreadsCrumbs = setShowBreadsCrumbs();
-  const showSort = (searchTerm || globalFiltersApplied) && hasResults;
-  const showTags = setShowTags();
+    const parentSelectionHandler = (id, title, parentId) => {
+      setParentSelected(id);
+      setPath(id, title, parentId);
+    };
 
+<<<<<<< HEAD
   const commonListProps = {
     displayMetalPanel,
     metaIconDescription,
@@ -198,24 +278,80 @@ export let AddSelectBody = ({
     ],
     portalTarget,
   };
+=======
+    const sortFn = sortItems(sortAttribute, sortDirection);
+    const itemsToDisplay = getFilteredItems(
+      useNormalizedItems,
+      normalizedItems,
+      searchTerm,
+      globalFiltersApplied,
+      globalFilterKeys,
+      appliedGlobalFilters,
+      sortFn,
+      multi,
+      items,
+      path
+    );
+    const hasResults = itemsToDisplay.length > 0;
+    const showBreadsCrumbs = setShowBreadsCrumbs();
+    const showSort = (searchTerm || globalFiltersApplied) && hasResults;
+    const showTags = setShowTags();
 
-  const sidebarProps = {
-    appliedModifiers,
-    closeIconDescription,
-    displayMetalPanel,
-    influencerTitle,
-    items: useNormalizedItems ? normalizedItems : items.entries,
-    metaPanelTitle,
-    modifiers: items.modifiers,
-    multiSelection,
-    noSelectionDescription,
-    noSelectionTitle,
-    setDisplayMetaPanel,
-  };
+    const commonListProps = {
+      displayMetalPanel,
+      metaIconDescription,
+      multi,
+      multiSelection,
+      navIconDescription,
+      path,
+      setMultiSelection,
+      setPath,
+      setSingleSelection,
+      singleSelection,
+      setDisplayMetaPanel,
+      parentId: path[0].id,
+    };
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
-  const displayColumnView =
-    multi && useNormalizedItems && !searchTerm && !globalFiltersApplied;
+    const commonTearsheetProps = {
+      ...rest,
+      className: tearsheetClassnames,
+      open,
+      title,
+      description,
+      actions: [
+        {
+          label: onCloseButtonText,
+          kind: 'secondary',
+          onClick: onCloseHandler,
+        },
+        {
+          label: onSubmitButtonText,
+          kind: 'primary',
+          onClick: submitHandler,
+          disabled: multi ? multiSelection.length === 0 : !singleSelection,
+        },
+      ],
+      portalTarget,
+      ref,
+    };
 
+    const sidebarProps = {
+      appliedModifiers,
+      closeIconDescription,
+      displayMetalPanel,
+      illustrationTheme,
+      influencerTitle,
+      items: useNormalizedItems ? normalizedItems : items.entries,
+      metaPanelTitle,
+      modifiers: items.modifiers,
+      multiSelection,
+      noSelectionDescription,
+      noSelectionTitle,
+      setDisplayMetaPanel,
+    };
+
+<<<<<<< HEAD
   // main content
   const body = (
     <>
@@ -281,36 +417,105 @@ export let AddSelectBody = ({
             header={path[0]?.title}
             filterByLabel={filterByLabel}
           />
-        </div>
-      ) : (
-        <div>
-          {hasResults ? (
-            <AddSelectList
-              {...commonListProps}
-              filteredItems={itemsToDisplay}
-              modifiers={items.modifiers}
-              appliedModifiers={appliedModifiers}
-              setAppliedModifiers={setAppliedModifiers}
-              setParentSelected={parentSelectionHandler}
-              parentSelected={parentSelected}
-              parentId={parentSelected || path[0].id}
-            />
-          ) : (
-            <div className={`${blockClass}__body`}>
-              <NoDataEmptyState
-                subtitle={noResultsDescription}
-                title={noResultsTitle}
-              />
-            </div>
-          )}
-        </div>
-      )}
-    </>
-  );
+=======
+    const displayColumnView =
+      multi && useNormalizedItems && !searchTerm && !globalFiltersApplied;
 
-  return (
-    <div {...rest}>
-      {multi ? (
+    // main content
+    const body = (
+      <>
+        <div className={`${blockClass}__header`}>
+          <AddSelectFilter
+            inputLabel={globalSearchLabel}
+            inputPlaceholder={globalSearchPlaceholder}
+            searchTerm={searchTerm}
+            handleSearch={handleSearch}
+            multi={multi}
+            filterOpts={globalFilterOpts}
+            filtersLabel={globalFiltersLabel}
+            handleFilter={handleFilter}
+            primaryButtonText={globalFiltersPrimaryButtonText}
+            secondaryButtonText={globalFiltersSecondaryButtonText}
+            placeholder={globalFiltersPlaceholderText}
+            iconDescription={globalFiltersIconDescription}
+            appliedFilters={appliedGlobalFilters}
+            hasFiltersApplied={globalFiltersApplied}
+            clearFiltersText={clearFiltersText}
+          />
+          <div
+            className={cx(`${blockClass}__sub-header`, {
+              [`${blockClass}__sub-header-multi`]: multi,
+            })}
+          >
+            <div className={`${blockClass}__tags`}>
+              {showBreadsCrumbs ? (
+                <AddSelectBreadcrumbs
+                  path={path}
+                  onClick={pathOnclick}
+                  multi={multi}
+                />
+              ) : (
+                <p className={`${blockClass}__tags-label`}>
+                  {searchTerm ? searchResultsTitle : itemsLabel}
+                </p>
+              )}
+              {showTags && (
+                <Tag type="gray" size="sm">
+                  {itemsToDisplay.length}
+                </Tag>
+              )}
+            </div>
+            {showSort && (
+              <AddSelectSort
+                items={itemsToDisplay}
+                setSortAttribute={setSortAttribute}
+                setSortDirection={setSortDirection}
+                sortAttribute={sortAttribute}
+                sortDirection={sortDirection}
+                sortBy={globalSortBy}
+              />
+            )}
+          </div>
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+        </div>
+        {displayColumnView ? (
+          <div className={`${blockClass}__columns`}>
+            <AddSelectColumn
+              {...commonListProps}
+              items={itemsToDisplay}
+              columnInputPlaceholder={columnInputPlaceholder}
+              header={path[0]?.title}
+            />
+          </div>
+        ) : (
+          <div>
+            {hasResults ? (
+              <AddSelectList
+                {...commonListProps}
+                filteredItems={itemsToDisplay}
+                modifiers={items.modifiers}
+                appliedModifiers={appliedModifiers}
+                setAppliedModifiers={setAppliedModifiers}
+                setParentSelected={parentSelectionHandler}
+                parentSelected={parentSelected}
+                parentId={parentSelected || path[0].id}
+              />
+            ) : (
+              <div className={`${blockClass}__body`}>
+                <NoDataEmptyState
+                  subtitle={noResultsDescription}
+                  title={noResultsTitle}
+                  illustrationTheme={illustrationTheme}
+                />
+              </div>
+            )}
+          </div>
+        )}
+      </>
+    );
+
+    if (multi) {
+      return (
         <Tearsheet
           {...commonTearsheetProps}
           influencer={multi && <AddSelectSidebar {...sidebarProps} />}
@@ -318,12 +523,12 @@ export let AddSelectBody = ({
         >
           {body}
         </Tearsheet>
-      ) : (
-        <TearsheetNarrow {...commonTearsheetProps}>{body}</TearsheetNarrow>
-      )}
-    </div>
-  );
-};
+      );
+    }
+
+    return <TearsheetNarrow {...commonTearsheetProps}>{body}</TearsheetNarrow>;
+  }
+);
 
 AddSelectBody.propTypes = {
   className: PropTypes.string,
@@ -335,12 +540,14 @@ AddSelectBody.propTypes = {
   filterByLabel: PropTypes.string,
   globalFilterOpts: PropTypes.array,
   globalFiltersIconDescription: PropTypes.string,
+  globalFiltersLabel: PropTypes.string,
   globalFiltersPlaceholderText: PropTypes.string,
   globalFiltersPrimaryButtonText: PropTypes.string,
   globalFiltersSecondaryButtonText: PropTypes.string,
   globalSearchLabel: PropTypes.string.isRequired,
   globalSearchPlaceholder: PropTypes.string,
   globalSortBy: PropTypes.array,
+  illustrationTheme: PropTypes.oneOf(['light', 'dark']),
   influencerTitle: PropTypes.string,
   items: PropTypes.shape({
     modifiers: PropTypes.shape({
@@ -356,6 +563,7 @@ AddSelectBody.propTypes = {
           alt: PropTypes.string,
           icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
           src: PropTypes.string,
+          theme: PropTypes.oneOf(['light', 'dark']),
         }),
         children: PropTypes.object,
         icon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
@@ -392,8 +600,12 @@ AddSelectBody.propTypes = {
   onSubmitButtonText: PropTypes.string,
   open: PropTypes.bool,
   portalTarget: PropTypes.node,
+<<<<<<< HEAD
   searchResultsLabel: PropTypes.string,
   sortByLabel: PropTypes.string,
+=======
+  searchResultsTitle: PropTypes.string,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   title: PropTypes.string,
   useNormalizedItems: PropTypes.bool,
 };

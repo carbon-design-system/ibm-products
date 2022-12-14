@@ -6,12 +6,19 @@
 //
 
 // Standard imports.
+<<<<<<< HEAD
 
 // Other Carbon settings.
 // TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
 @use '@carbon/colors/' as *;
 @use '@carbon/motion/' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
+=======
+@import '../../global/styles/project-settings';
+
+// Other Carbon settings.
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
 // EditUpdateCards uses the following Carbon components:
 // TODO: @import(s) of Carbon component styles used by EditUpdateCards
@@ -21,6 +28,7 @@
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
+<<<<<<< HEAD
 /* stylelint-disable max-nesting-depth */
 $block-class: #{c4p-settings.$pkg-prefix}--edit-update-cards;
 
@@ -75,11 +83,77 @@ $block-class: #{c4p-settings.$pkg-prefix}--edit-update-cards;
   &:not(.#{$block-class}__actions-bottom) {
     &##{$block-class}--edit {
       .#{c4p-settings.$pkg-prefix}--card__header {
+=======
+@mixin edit-update-cards {
+  $block-class: #{$pkg-prefix}--edit-update-cards;
+
+  .#{$block-class} {
+    &##{$block-class}--edit {
+      /* Used id for overriding the SVG path fill */
+
+      .#{$pkg-prefix}--card__header,
+      .#{$pkg-prefix}--card__footer {
+        button {
+          &:hover {
+            background-color: $hover-primary;
+          }
+
+          &:focus {
+            box-shadow: none;
+          }
+
+          svg {
+            path {
+              // stylelint-disable-next-line carbon/theme-token-use
+              fill: $white-0;
+            }
+          }
+
+          &.#{$pkg-prefix}--loading {
+            &:hover {
+              background-color: transparent;
+            }
+          }
+        }
+      }
+      .#{$pkg-prefix}--card__footer {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
         // stylelint-disable-next-line carbon/theme-token-use
         background-color: $blue-60;
         // stylelint-disable-next-line carbon/theme-token-use
         color: $white-0;
       }
+<<<<<<< HEAD
     }
   }
 }
+=======
+      .#{$pkg-prefix}--loading {
+        animation-duration: $duration--slow-02;
+        animation-fill-mode: forwards;
+        animation-iteration-count: infinite;
+        animation-name: rotate;
+        animation-timing-function: $carbon--standard-easing;
+
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+    &:not(.#{$block-class}__actions-bottom) {
+      &##{$block-class}--edit {
+        .#{$pkg-prefix}--card__header {
+          // stylelint-disable-next-line carbon/theme-token-use
+          background-color: $blue-60;
+          // stylelint-disable-next-line carbon/theme-token-use
+          color: $white-0;
+        }
+      }
+    }
+  }
+}
+
+@include exports('edit-update-cards') {
+  @include edit-update-cards;
+}
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8

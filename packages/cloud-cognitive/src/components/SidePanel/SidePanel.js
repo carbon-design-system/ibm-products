@@ -737,7 +737,11 @@ export let SidePanel = React.forwardRef(
                 <ActionSet
                   actions={actions}
                   className={primaryActionContainerClassNames}
+<<<<<<< HEAD
                   size={size === 'xs' ? 'sm' : size}
+=======
+                  size={size}
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
                 />
               </div>
               <span

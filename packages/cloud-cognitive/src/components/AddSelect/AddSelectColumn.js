@@ -7,9 +7,15 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import { Search, Tag, OverflowMenu, Checkbox, usePrefix } from '@carbon/react';
 import { Filter } from '@carbon/react/icons';
 import { pkg } from '../../settings';
+=======
+import { Search, Tag, OverflowMenu, Checkbox } from 'carbon-components-react';
+import { Filter32 } from '@carbon/icons-react';
+import { pkg, carbon } from '../../settings';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import { AddSelectList } from './AddSelectList';
 import { AddSelectSort } from './AddSelectSort';
 import { sortItems } from './add-select-utils';
@@ -125,7 +131,11 @@ export let AddSelectColumn = ({
             className={`${colClass}-input`}
             id={uuidv4()}
             labelText={columnInputPlaceholder}
+<<<<<<< HEAD
             size="md"
+=======
+            size="lg"
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
           />
           <div className={`${colClass}-sort-filter`}>
             <AddSelectSort
@@ -166,7 +176,7 @@ export let AddSelectColumn = ({
             )}
           </div>
         </div>
-        <div className={`${blockClass}__tag-container`}>
+        <div className={`${blockClass}__tags`}>
           <Checkbox
             id={`${uuidv4()}-select-all`}
             className={`${colClass}__select-all`}
@@ -174,9 +184,7 @@ export let AddSelectColumn = ({
             onChange={selectAllHandler}
             labelText={
               <>
-                <span className={`${blockClass}__tag-container-label`}>
-                  {header}
-                </span>
+                <span className={`${blockClass}__tags-label`}>{header}</span>
                 <Tag type="gray" size="sm">
                   {colItems.length}
                 </Tag>

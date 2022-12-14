@@ -5,11 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
-import React, { useRef, useState } from 'react';
-
-// Other standard imports.
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -39,10 +37,19 @@ const defaults = {
 };
 
 const buttons = ['cancel', 'edit', 'save'];
+=======
+import { pkg } from '../../settings';
+import { InlineEditV1 } from '../InlineEditV1';
+import { InlineEditV2 } from '../InlineEditV2';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
 /**
- * TODO: A description of the component.
+ * this is a wrapper component that will allow us to support v1 and v2 versions of InlineEdit
+ * if the user passes in the v2 feature flag the v2 version of the component will be rendered
+ * since this is a temporary solution the named export should just remain InlineEdit unlike how
+ * Card works as a base layer for Productive and Expressive cards.
  */
+<<<<<<< HEAD
 export let InlineEdit = React.forwardRef(
   (
     {
@@ -364,115 +371,27 @@ export let InlineEdit = React.forwardRef(
         )}
       </div>
     );
-  }
-);
+=======
 
-// Return a placeholder if not released and not enabled by feature flag
+const componentName = 'InlineEdit';
+
+export let InlineEdit = forwardRef(({ v2, ...rest }, ref) => {
+  const props = {
+    ...rest,
+    ref,
+  };
+  if (v2 === true) {
+    return <InlineEditV2 {...props} />;
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+  }
+
+  return <InlineEditV1 {...props} />;
+});
+
 InlineEdit = pkg.checkComponentEnabled(InlineEdit, componentName);
 
-// The display name of the component, used by React. Note that displayName
-// is used in preference to relying on function.name.
 InlineEdit.displayName = componentName;
 
-// The types and DocGen commentary for the component props,
-// in alphabetical order (for consistency).
-// See https://www.npmjs.com/package/prop-types#usage.
 InlineEdit.propTypes = {
-  /**
-   * buttonTooltipAlignment from the standard tooltip. Default center.
-   *
-   * Can be passed either as one of tooltip options or as an object specifying cancel, edit and save separately
-   */
-  buttonTooltipAlignment: PropTypes.oneOfType([
-    PropTypes.oneOf(['start', 'center', 'end']),
-    PropTypes.shape({
-      cancel: PropTypes.oneOf(['start', 'center', 'end']),
-      edit: PropTypes.oneOf(['start', 'center', 'end']),
-      save: PropTypes.oneOf(['start', 'center', 'end']),
-    }),
-  ]),
-  /**
-   * buttonTooltipPosition from the standard tooltip
-   *
-   * Can be passed either as one of tooltip options or as an object specifying cancel, edit and save separately
-   */
-  buttonTooltipPosition: PropTypes.oneOfType([
-    PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-    PropTypes.shape({
-      cancel: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-      edit: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-      save: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-    }),
-  ]),
-  /**
-   * label for cancel button
-   */ cancelDescription: PropTypes.string.isRequired,
-  /**
-   * Provide an optional class to be applied to the containing node.
-   */
-  className: PropTypes.string,
-  /**
-   * disable edit
-   */
-  disabled: PropTypes.bool,
-  /**
-   * By default the edit icon is shown on hover only.
-   */
-  editAlwaysVisible: PropTypes.bool,
-  /**
-   * Label for the edit button
-   */
-  editDescription: PropTypes.string.isRequired,
-  /**
-   * ID for inline edit
-   */
-  id: PropTypes.string,
-  /**
-   * set invalid state for input
-   */
-  invalid: PropTypes.bool,
-  /**
-   * text shown when invalid is true
-   */
-  invalidText: PropTypes.string,
-  /**
-   * label for text input
-   */
-  labelText: PropTypes.string,
-  /**
-   * change background to light version (mimic React TextInput)
-   */
-  light: PropTypes.bool,
-  /**
-   * method called on cancel event
-   */
-  onCancel: PropTypes.func,
-  /**
-   * method called on input event (it's a React thing onChange behaves like on input).
-   *
-   * NOTE: caller to handle invalid states and associated text
-   */
-  onChange: PropTypes.func,
-  /**
-   * method called on change event
-   *
-   * NOTE: caller to handle invalid states and associated text
-   */
-  onSave: PropTypes.func,
-  /**
-   * placeholder for text input
-   */
-  placeholder: PropTypes.string,
-  /**
-   * label for save button
-   */
-  saveDescription: PropTypes.string.isRequired,
-  /**
-   * vertical size of control
-   */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
-  /**
-   * initial/unedited value
-   */
-  value: PropTypes.string,
+  v2: PropTypes.bool,
 };

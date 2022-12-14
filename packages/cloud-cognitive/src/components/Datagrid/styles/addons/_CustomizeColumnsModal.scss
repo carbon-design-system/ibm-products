@@ -22,10 +22,17 @@
   }
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}__customize-columns-checkbox-wrapper {
   margin-bottom: 0;
 }
 .#{variables.$block-class}__customize-columns-checkbox-wrapper {
+=======
+.#{$block-class}__customize-columns-checkbox-wrapper {
+  margin-bottom: 0;
+}
+.#{$block-class}__customize-columns-checkbox-wrapper {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   display: flex;
   justify-content: center;
 }
@@ -37,8 +44,12 @@
   background-color: $field-02;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}__customize-columns-modal--actions
   input[role='searchbox'] {
+=======
+.#{$block-class}__customize-columns-modal--actions input[role='searchbox'] {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   height: $spacing-09;
   padding-left: $spacing-08;
   border-bottom: none;
@@ -48,9 +59,17 @@
   margin-left: $spacing-05;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}__customize-columns-instructions {
   padding-left: $spacing-05;
   margin-bottom: $spacing-06;
+=======
+.#{$block-class}__customize-columns-instructions {
+  padding-left: $spacing-05;
+  margin-bottom: $spacing-06;
+
+  @include carbon--type-style('body-long-01');
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
   @include type.type-style('body-long-01');
 
@@ -62,6 +81,7 @@
   overflow: auto;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}__customize-columns-select-all {
   display: flex;
   height: $spacing-09;
@@ -89,5 +109,32 @@
 .#{variables.$block-class}
   .#{variables.$block-class}__customize-columns-modal
   .#{c4p-settings.$carbon-prefix}--modal-content {
+=======
+.#{$block-class}__customize-columns-select-all {
+  display: flex;
+  height: $spacing-09;
+  padding-left: $spacing-08;
+  border-bottom: 1px solid $layer-active;
+  background-color: $layer;
+}
+.#{$block-class}__customize-columns-select-all:hover {
+  background-color: $layer-hover;
+}
+.#{$block-class}__customize-columns-select-all-selected {
+  display: flex;
+  height: $spacing-09;
+  padding-left: $spacing-08;
+  border-bottom: 1px solid $layer-active;
+  background-color: $layer-selected;
+}
+
+.#{$block-class}__customize-columns-select-all-selected:hover {
+  background-color: $hover-selected-ui;
+}
+
+.#{$block-class}
+  .#{$block-class}__customize-columns-modal
+  .#{$carbon-prefix}--modal-content {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   margin-bottom: 0;
 }

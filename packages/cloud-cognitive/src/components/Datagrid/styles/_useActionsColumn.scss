@@ -25,6 +25,7 @@
   margin-bottom: $spacing-03;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}
   .#{variables.$block-class}__disabled-row-action-button {
   cursor: not-allowed;
@@ -36,4 +37,16 @@
 
 .#{variables.$block-class} .#{variables.$block-class}__disabled-row-action svg {
   fill: theme.$layer-selected-disabled;
+=======
+.#{$block-class} .#{$block-class}__disabled-row-action-button {
+  cursor: not-allowed;
+}
+
+.#{$block-class} .#{$block-class}__disabled-row-action {
+  pointer-events: none;
+}
+
+.#{$block-class} .#{$block-class}__disabled-row-action svg {
+  fill: $disabled-03;
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 }

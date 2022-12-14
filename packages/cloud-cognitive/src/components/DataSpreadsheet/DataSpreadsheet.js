@@ -422,6 +422,10 @@ export let DataSpreadsheet = React.forwardRef(
           rows,
           setActiveCellContent,
           updateData,
+<<<<<<< HEAD
+=======
+          activeCellCoordinates,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
         };
         // Allow arrow key navigation if there are less than two activeKeys OR
         // if one of the activeCellCoordinates is in a header position
@@ -912,7 +916,11 @@ export let DataSpreadsheet = React.forwardRef(
           >
             {activeCellContent}
           </button>
+<<<<<<< HEAD
           <textarea
+=======
+          <TextArea
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
             id={`${blockClass}__cell-editor-text-area`}
             value={cellEditorValue}
             onKeyDown={handleEditSubmit({

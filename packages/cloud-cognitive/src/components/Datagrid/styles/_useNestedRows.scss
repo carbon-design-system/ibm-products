@@ -21,7 +21,11 @@
 }
 
 .#{$block-class} .#{$block-class}__expander-icon {
+<<<<<<< HEAD
   transition: transform $duration-fast-01 motion('standard', 'productive');
+=======
+  transition: transform $duration--fast-01 motion(entrance, productive);
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 }
 
 .#{$block-class} .#{$block-class}__expander-icon--open {
@@ -33,3 +37,23 @@
   td:first-child {
   border-bottom: none;
 }
+<<<<<<< HEAD
+=======
+
+.#{$block-class} .#{$block-class}__carbon-row-expandable {
+  position: relative;
+}
+
+.#{$block-class}
+  tr.#{$block-class}__carbon-nested-row
+  + :not(tr.#{$block-class}__carbon-nested-row)::before {
+  position: absolute;
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  top: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: $border-subtle;
+  content: '';
+}
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8

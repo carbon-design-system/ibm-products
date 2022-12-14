@@ -7,7 +7,11 @@
  */
 
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { Edit, TrashCan } from '@carbon/react/icons';
+=======
+import { Edit16, TrashCan16 } from '@carbon/icons-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
@@ -23,6 +27,10 @@ import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
+<<<<<<< HEAD
+=======
+import { StatusIcon } from '../../../StatusIcon';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 
@@ -67,10 +75,38 @@ const defaultHeader = [
     rightAlignedColumn: true,
   },
   {
+<<<<<<< HEAD
     Header: 'Status',
     accessor: 'status_icon',
     width: 100,
     centerAlignedColumn: true,
+=======
+    Header: 'Password strength',
+    accessor: 'passwordStrength',
+    width: 100,
+    centerAlignedColumn: true,
+    Cell: ({ cell: { value } }) => {
+      const iconProps = {
+        size: 'sm',
+        theme: 'light',
+        kind: value,
+        iconDescription: value,
+      };
+
+      return (
+        <span
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <StatusIcon {...iconProps} />
+          {iconProps.iconDescription}
+        </span>
+      );
+    },
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   },
   {
     Header: 'Someone 1',
@@ -147,14 +183,22 @@ const sharedDatagridProps = {
     {
       id: 'edit',
       itemText: 'Edit',
+<<<<<<< HEAD
       icon: Edit,
+=======
+      icon: Edit16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       onClick: action('Clicked row action: edit'),
     },
 
     {
       id: 'delete',
       itemText: 'Delete',
+<<<<<<< HEAD
       icon: TrashCan,
+=======
+      icon: TrashCan16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       isDelete: true,
       onClick: action('Clicked row action: delete'),
     },

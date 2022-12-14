@@ -30,6 +30,30 @@ svg.#{variables.$block-class}__draggable-handleStyle.disable {
   padding-left: $spacing-05;
   border-bottom: 1px solid $layer-active;
   background-color: $layer;
+<<<<<<< HEAD
+=======
+}
+
+.#{$block-class}__draggable-handleHolder:hover {
+  background-color: $layer-hover;
+}
+
+.#{$block-class}__draggable-handleHolder-selected {
+  display: flex;
+  height: $spacing-09;
+  padding-left: $spacing-05;
+  border-bottom: 1px solid $layer-active;
+  background-color: $layer-selected;
+}
+
+.#{$block-class}__draggable-handleHolder-selected:hover {
+  background-color: $hover-selected-ui;
+}
+
+.#{$block-class}__draggable-handleHolder-isOver {
+  border: 2px dashed $focus;
+  background-color: $hover-selected-ui;
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 }
 
 .#{variables.$block-class}__draggable-handleHolder:hover {
@@ -58,7 +82,11 @@ svg.#{variables.$block-class}__draggable-handleStyle.disable {
   width: 100%;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}__draggable-handleHolder-grabbed {
+=======
+.#{$block-class}__draggable-handleHolder-grabbed {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   background-color: $highlight;
   color: $text-primary;
 }

@@ -7,9 +7,15 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import React from 'react';
+<<<<<<< HEAD
 import { ChevronRight } from '@carbon/react/icons';
 import cx from 'classnames';
 import { pkg } from '../../settings';
+=======
+import { ChevronRight16 } from '@carbon/icons-react';
+import cx from 'classnames';
+import { pkg, carbon } from '../../settings';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const useNestedRowExpander = (hooks) => {
@@ -18,6 +24,7 @@ const useNestedRowExpander = (hooks) => {
       id: 'expander',
       Cell: ({ row }) =>
         row.canExpand && (
+<<<<<<< HEAD
           <span {...row.getToggleRowExpandedProps()}>
             <ChevronRight
               className={cx(`${blockClass}__expander-icon`, {
@@ -26,6 +33,29 @@ const useNestedRowExpander = (hooks) => {
               })}
             />
           </span>
+=======
+          <button
+            type="button"
+            aria-label="Expand current row"
+            className={cx(
+              `${blockClass}__row-expander`,
+              `${carbon.prefix}--btn`,
+              `${carbon.prefix}--btn--ghost`
+            )}
+            {...row.getToggleRowExpandedProps()}
+          >
+            <ChevronRight16
+              className={cx(
+                `${blockClass}__expander-icon`,
+                `${blockClass}__row-expander--icon`,
+                {
+                  [`${blockClass}__expander-icon--not-open`]: !row.isExpanded,
+                  [`${blockClass}__expander-icon--open`]: row.isExpanded,
+                }
+              )}
+            />
+          </button>
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
         ),
       width: 48,
       disableResizing: true,

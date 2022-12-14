@@ -1,0 +1,88 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import 'carbon-components/scss/components/button/button';
+@import 'carbon-components/scss/components/text-input/text-input';
+
+@mixin inline-edit-v2 {
+  $block-class: #{$pkg-prefix}--inline-edit-v2;
+  $carbon-input: #{$carbon-prefix}--text-input;
+
+  .#{$block-class} {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    cursor: pointer;
+
+    &-readonly {
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      background: $field-01;
+    }
+
+    &:hover .#{$block-class}__btn-edit {
+      visibility: visible;
+    }
+
+    &__btn-edit {
+      visibility: hidden;
+    }
+
+    &-focused {
+      background: $field-01;
+      outline: 2px solid $focus;
+    }
+
+    &__text-input {
+      flex: 1;
+    }
+
+    &__text-input-label {
+      display: none;
+    }
+
+    &__warning-icon {
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      margin-right: 0.4375rem;
+      color: $support-01;
+    }
+
+    &__warning-text {
+      @include carbon--type-style('caption-01');
+
+      margin-top: $spacing-03;
+      color: $support-01;
+    }
+  }
+
+  // overrides
+  .#{$block-class}__text-input.#{$carbon-input} {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .#{$block-class}-readonly .#{$block-class}__text-input.#{$carbon-input},
+  .#{$block-class}-readonly
+    .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger {
+    cursor: not-allowed;
+  }
+
+  .#{$block-class}__text-input.#{$carbon-input}:focus,
+  .#{$block-class}__text-input.#{$carbon-input}:active {
+    outline: none;
+  }
+}
+
+@include exports('inline-edit-v2') {
+  @include inline-edit-v2;
+}

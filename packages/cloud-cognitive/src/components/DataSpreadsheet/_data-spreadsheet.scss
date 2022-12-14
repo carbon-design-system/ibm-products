@@ -38,6 +38,7 @@ $header-cell-background: $layer-accent-01;
   display: inline-block;
   border-spacing: 0;
 
+<<<<<<< HEAD
   &.#{$block-class}__container-has-focus {
     outline: 2px solid $link-inverse;
   }
@@ -45,6 +46,28 @@ $header-cell-background: $layer-accent-01;
   .#{$block-class}__header--container {
     position: relative;
   }
+=======
+    &.#{$block-class}__dark {
+      .#{$block-class}__active-cell--highlight,
+      .#{$block-class}__selection-area--element,
+      .#{$block-class}__active-cell--highlight:focus {
+        /* stylelint-disable-next-line carbon/theme-token-use */
+        border-color: $cyan-30;
+      }
+      .#{$block-class}__selection-area--element::before {
+        /* stylelint-disable-next-line carbon/theme-token-use */
+        background-color: $cyan-70;
+      }
+      .#{$block-class}__cell-editor.#{$block-class}__cell-editor--active {
+        /* stylelint-disable-next-line carbon/theme-token-use */
+        outline-color: $cyan-30;
+      }
+    }
+
+    .#{$block-class}__header--container {
+      position: relative;
+    }
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
   .#{$block-class}__tr {
     :last-child .#{$block-class}__body--td {
@@ -209,6 +232,7 @@ $header-cell-background: $layer-accent-01;
     /* stylelint-disable-next-line max-nesting-depth */
     &::before {
       position: absolute;
+<<<<<<< HEAD
       top: 0;
       left: 0;
       display: block;
@@ -217,6 +241,33 @@ $header-cell-background: $layer-accent-01;
       background-color: $background-brand;
       content: '';
       opacity: 0.2;
+=======
+      z-index: 3;
+      display: none;
+      overflow: hidden;
+      // Could be fixed by using border-right but the fact that
+      // this element is positioned absolute prevents that from working
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      padding-right: calc(#{$spacing-03} - 1px);
+      padding-bottom: $spacing-01;
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      padding-left: calc(#{$spacing-03} - #{$spacing-01});
+      border: $spacing-01 solid $interactive-01;
+      background-color: $body-cell-background;
+      color: $text-02;
+      text-align: left;
+
+      &[data-active-row-index='header'],
+      &[data-active-column-index='header'] {
+        z-index: 4;
+        background-color: transparent;
+      }
+
+      &:focus {
+        border: $spacing-01 solid $interactive-01;
+        outline: 0;
+      }
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     }
     &.#{$block-class}__selection-area--element-cloned {
       z-index: 4;

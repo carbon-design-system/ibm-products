@@ -6,12 +6,28 @@
  */
 
 import React, { useEffect, useState } from 'react';
+<<<<<<< HEAD
 import { Add, OverflowMenuVertical } from '@carbon/react/icons';
 import { DataTable, TableBatchActions, TableBatchAction } from '@carbon/react';
+=======
+import { Add16, OverflowMenuVertical16 } from '@carbon/icons-react';
+import {
+  DataTable,
+  TableBatchActions,
+  TableBatchAction,
+} from 'carbon-components-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import { useResizeDetector } from 'react-resize-detector';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
+<<<<<<< HEAD
+=======
+import { FilterSummary } from '../../FilterSummary';
+import { useContext } from 'react';
+import { FilterContext } from './addons/Filtering/FilterProvider';
+import { CLEAR_FILTERS } from './addons/Filtering/constants';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -21,8 +37,17 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   const [displayAllInMenu, setDisplayAllInMenu] = useState(false);
   const [initialListWidth, setInitialListWidth] = useState(null);
   const [receivedInitialWidth, setReceivedInitialWidth] = useState(false);
+<<<<<<< HEAD
   const { selectedFlatRows, toggleAllRowsSelected, toolbarBatchActions } =
     datagridState;
+=======
+  const {
+    selectedFlatRows,
+    toggleAllRowsSelected,
+    toolbarBatchActions,
+    setGlobalFilter,
+  } = datagridState;
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
 
   // Get initial width of batch actions container,
@@ -61,7 +86,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       <ButtonMenu
         label={width > minWidthBeforeOverflowIcon ? 'More' : null}
         renderIcon={
+<<<<<<< HEAD
           width > minWidthBeforeOverflowIcon ? Add : OverflowMenuVertical
+=======
+          width > minWidthBeforeOverflowIcon ? Add16 : OverflowMenuVertical16
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
         }
         className={cx(`${blockClass}__button-menu`, {
           [`${blockClass}__button-menu--icon-only`]:
@@ -69,7 +98,10 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
         })}
         menuOptionsClass={`${blockClass}__button-menu-options`}
         flipped
+<<<<<<< HEAD
         menuAriaLabel={'Batch actions'}
+=======
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       >
         {toolbarBatchActions &&
           toolbarBatchActions.map((batchAction, index) => {
@@ -114,7 +146,14 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
       totalSelected={totalSelected}
+<<<<<<< HEAD
       onCancel={() => toggleAllRowsSelected(false)}
+=======
+      onCancel={() => {
+        toggleAllRowsSelected(false);
+        setGlobalFilter(null);
+      }}
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     >
       {!displayAllInMenu &&
         toolbarBatchActions &&
@@ -147,7 +186,21 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 
 const DatagridToolbar = (datagridState) => {
   const { width, ref } = useResizeDetector();
+<<<<<<< HEAD
   const { DatagridActions, DatagridBatchActions, batchActions } = datagridState;
+=======
+  const { DatagridActions, DatagridBatchActions, batchActions, state } =
+    datagridState;
+  const { filterTags, EventEmitter } = useContext(FilterContext);
+
+  const renderFilterSummary = () =>
+    state.filters.length > 0 && (
+      <FilterSummary
+        filters={filterTags}
+        clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
+      />
+    );
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
   return batchActions && DatagridActions ? (
     <div ref={ref} className={`${blockClass}__table-toolbar`}>
@@ -156,6 +209,10 @@ const DatagridToolbar = (datagridState) => {
         {DatagridBatchActionsToolbar &&
           DatagridBatchActionsToolbar(datagridState, width, ref)}
       </TableToolbar>
+<<<<<<< HEAD
+=======
+      {renderFilterSummary()}
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     </div>
   ) : DatagridActions ? (
     <div className={`${blockClass}__table-toolbar`}>
@@ -163,6 +220,7 @@ const DatagridToolbar = (datagridState) => {
         {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}
       </TableToolbar>
+      {renderFilterSummary()}
     </div>
   ) : null;
 };

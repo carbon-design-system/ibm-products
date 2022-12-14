@@ -151,10 +151,19 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     }
   }
 
+<<<<<<< HEAD
   .#{$block-class}__breadcrumb-row:not(.#{$block-class}__breadcrumb-row--has-action-bar) {
     // lifts up page title when there is no action bar
     min-height: $spacing-07;
   }
+=======
+    .#{$block-class}__breadcrumb-row:not(
+        .#{$block-class}__breadcrumb-row--has-action-bar
+      ) {
+      // lifts up page title when there is no action bar
+      min-height: $spacing-07;
+    }
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
   .#{$block-class}__breadcrumb-row--container {
     display: flex;
@@ -206,9 +215,20 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     opacity: 1;
   }
 
+<<<<<<< HEAD
   .#{$block-class}__breadcrumb-container {
     width: 100%;
   }
+=======
+    .#{$block-class}__breadcrumb-row--next-to-tabs:not(
+        .#{$block-class}__has-page-actions-without-action-bar
+      )::after,
+    .#{$block-class}__breadcrumb-row--has-action-bar::after {
+      /* creates a full width box shadow without causing scroll */
+      box-shadow: 25vw 1px 0 0 $ui-03, -25vw 1px 0 0 $ui-03;
+      opacity: 1;
+    }
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
   .#{$block-class}__action-bar-column {
     display: none;

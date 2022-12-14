@@ -7,7 +7,10 @@
 
 import React from 'react';
 import namor from 'namor';
+<<<<<<< HEAD
 import { StatusIcon } from '../../StatusIcon';
+=======
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import { inlineEditSelectItems } from './getInlineEditColumns';
 
 const getRandomInteger = (min, max, decimalPlaces) => {
@@ -43,6 +46,7 @@ export const range = (len) => {
   return arr;
 };
 
+<<<<<<< HEAD
 const renderStatusIcon = (statusChance) => {
   const iconProps = {
     size: 'sm',
@@ -75,6 +79,37 @@ const renderDocLink = (statusChance) => {
       statusChance > 0.66
         ? 'Carbon Design System'
         : statusChance > 0.33
+=======
+/** This function is only to create a random data point when the person joined */
+const getRandomDateJoined = () => {
+  return randomDate(new Date(2022, 0, 1), new Date());
+};
+
+const getPasswordStrength = () => {
+  const chance = Math.random();
+
+  return chance > 0.66
+    ? 'critical'
+    : chance > 0.33
+    ? 'minor-warning'
+    : 'normal';
+};
+
+const renderDocLink = () => {
+  const chance = Math.random();
+
+  const docLinkObj = {
+    href:
+      chance > 0.66
+        ? 'http://carbondesignsystem.com/'
+        : chance > 0.33
+        ? 'https://pages.github.ibm.com/cdai-design/pal/'
+        : 'http://carbon-for-ibm-products.netlify.app/',
+    text:
+      chance > 0.66
+        ? 'Carbon Design System'
+        : chance > 0.33
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
         ? 'Carbon for IBM Products PAL'
         : 'Carbon for IBM Products storybook',
   };
@@ -83,18 +118,42 @@ const renderDocLink = (statusChance) => {
 
 const newPerson = () => {
   const statusChance = Math.random();
+<<<<<<< HEAD
+=======
+  const roleChance = Math.random();
+  const activeChance = Math.random();
+
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   const initialChartTypeIndex = getRandomInteger(0, 2);
   const activeSinceDate = new Date();
   let yesterdayDate = new Date();
   yesterdayDate.setDate(yesterdayDate.getDate() - 1);
   let twoDaysAgoDate = new Date();
   twoDaysAgoDate.setDate(twoDaysAgoDate.getDate() - 2);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   return {
     firstName: namor.generate({ words: 1, numbers: 0 }),
     lastName: namor.generate({ words: 1, numbers: 0 }),
     age: Math.floor(Math.random() * 30),
     visits: Math.floor(Math.random() * 100),
     progress: Math.floor(Math.random() * 100),
+    status:
+      statusChance > 0.66
+        ? 'relationship'
+        : statusChance > 0.33
+        ? 'complicated'
+        : 'single',
+    role:
+      roleChance > 0.66
+        ? 'developer'
+        : roleChance > 0.33
+        ? 'designer'
+        : 'researcher',
+    joined: getRandomDateJoined(),
+
     someone1: namor.generate({ words: 1, numbers: 0 }),
     someone2: namor.generate({ words: 1, numbers: 0 }),
     someone3: namor.generate({ words: 1, numbers: 0 }),
@@ -115,12 +174,15 @@ const newPerson = () => {
     someone18: namor.generate({ words: 1, numbers: 0 }),
     someone19: namor.generate({ words: 1, numbers: 0 }),
     someone20: namor.generate({ words: 1, numbers: 0 }),
+<<<<<<< HEAD
     status:
       statusChance > 0.66
         ? 'relationship'
         : statusChance > 0.33
         ? 'complicated'
         : 'single',
+=======
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     chartType:
       initialChartTypeIndex === 0
         ? inlineEditSelectItems[0]
@@ -128,6 +190,7 @@ const newPerson = () => {
         ? inlineEditSelectItems[1]
         : inlineEditSelectItems[2],
     activeSince:
+<<<<<<< HEAD
       statusChance > 0.66
         ? activeSinceDate
         : statusChance > 0.33
@@ -136,6 +199,16 @@ const newPerson = () => {
     bonus: `$\r${getRandomInteger(100, 500, 2)}`,
     status_icon: renderStatusIcon(statusChance),
     doc_link: renderDocLink(statusChance),
+=======
+      activeChance > 0.66
+        ? activeSinceDate
+        : activeChance > 0.33
+        ? yesterdayDate
+        : twoDaysAgoDate,
+    bonus: `$\r${getRandomInteger(100, 500, 2)}`,
+    passwordStrength: getPasswordStrength(),
+    doc_link: renderDocLink(),
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   };
 };
 
@@ -150,4 +223,10 @@ export const newPersonWithTwoLines = () => {
     lastName: namor.generate({ words: 1, numbers: 0 }),
     age: Math.floor(Math.random() * 30),
   };
+};
+
+const randomDate = (start, end) => {
+  return new Date(
+    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+  );
 };

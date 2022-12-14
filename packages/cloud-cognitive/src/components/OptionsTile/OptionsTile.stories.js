@@ -85,8 +85,17 @@ const Template = (args) => {
   const disableControls = args.enabled === false || isLocked;
 
   return (
+<<<<<<< HEAD
     <OptionsTile onToggle={action('onToggle')} {...args}>
       <FormGroup aria-labelledby={titleId} legendText="">
+=======
+    <OptionsTile
+      onToggle={action('onToggle')}
+      onChange={action('onChange')}
+      {...args}
+    >
+      <FormGroup aria-labelledby={titleId} legendText="" hasMargin={false}>
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
         <p>
           User interface defines the language the application is displayed in.
           Locale sets the regional display formats for information like time,
@@ -128,7 +137,18 @@ const TemplateStatic = ({ enabled, ...rest }) => {
     action('onToggle')(e);
   }
 
-  return <OptionsTile onToggle={onToggle} {...rest} enabled={liveEnabled} />;
+  function onChange(value) {
+    action('onChange')(value);
+  }
+
+  return (
+    <OptionsTile
+      onToggle={onToggle}
+      onChange={onChange}
+      {...rest}
+      enabled={liveEnabled}
+    />
+  );
 };
 
 export const optionsTile = prepareStory(Template, {

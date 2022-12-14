@@ -75,7 +75,11 @@ export let Card = forwardRef(
     const hasActions =
       actionIcons.length > 0 ||
       overflowActions.length > 0 ||
+<<<<<<< HEAD
       (primaryButtonText && primaryButtonPlacement === 'top');
+=======
+      (!!primaryButtonText && primaryButtonPlacement === 'top');
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     const hasFooterActions = hasActions && actionsPlacement === 'bottom';
     const hasFooterButton =
       !!secondaryButtonText ||

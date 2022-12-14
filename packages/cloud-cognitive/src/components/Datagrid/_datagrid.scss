@@ -33,6 +33,27 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
     display: none;
   }
 
+<<<<<<< HEAD
+  .bx--overflow-menu-options > .c4p--datagrid__row-size-dropdown {
+    left: $spacing-01;
+    width: 112px;
+=======
+  .#{$block-class}__datagridWrap-simple {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+
+    /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
+    :global {
+      .#{$carbon-prefix}--pagination {
+        // newer version of carbon pagination has scroll which doesn't make any sense, removing it
+        /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+        overflow-x: unset;
+      }
+    }
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+  }
+
   .bx--overflow-menu-options > .c4p--datagrid__row-size-dropdown {
     left: $spacing-01;
     width: 112px;

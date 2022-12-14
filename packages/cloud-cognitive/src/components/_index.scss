@@ -9,6 +9,7 @@
 
 @use './_Canary/canary';
 
+<<<<<<< HEAD
 @use './APIKeyModal';
 @use './AboutModal';
 @use './ActionSet';
@@ -49,3 +50,48 @@
 @use './EditTearsheetNarrow';
 @use './EditFullPage';
 @use './EditUpdateCards';
+=======
+@import './APIKeyModal/index';
+@import './AboutModal/index';
+@import './ActionSet/index';
+@import './ButtonMenu/index';
+@import './Cascade/index';
+@import './ComboButton/index';
+@import './CreateFullPage/index';
+@import './CreateModal/index';
+@import './CreateSidePanel/index';
+@import './CreateTearsheet/index';
+@import './CreateTearsheetNarrow/index';
+@import './EmptyStates/index';
+@import './ExportModal/index';
+@import './ExpressiveCard/index';
+@import './FilterSummary/index';
+@import './HTTPErrors/index';
+@import './ImportModal/index';
+@import './ModifiedTabs/index';
+@import './MultiAddSelect/index';
+@import './NotificationsPanel/index';
+@import './PageHeader/index';
+@import './ProductiveCard/index';
+@import './RemoveModal/index';
+@import './Saving/index';
+@import './SidePanel/index';
+@import './SingleAddSelect/index';
+@import './StatusIcon/index';
+@import './TagSet/index';
+@import './Tearsheet/index';
+@import './Toolbar/index';
+@import './WebTerminal/index';
+@import './UserProfileImage/index';
+@import './EditSidePanel/index';
+@import './OptionsTile/index';
+@import './DataSpreadsheet/index';
+@import './Datagrid/index';
+@import './EditTearsheet/index';
+@import './EditTearsheetNarrow/index';
+@import './EditFullPage/index';
+@import './EditUpdateCards/index';
+
+@import './InlineEditV1/index';
+@import './InlineEditV2/index';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8

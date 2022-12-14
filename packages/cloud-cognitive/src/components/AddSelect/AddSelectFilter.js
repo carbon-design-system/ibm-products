@@ -6,7 +6,17 @@
 //
 
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { Button, ButtonSet, Dropdown, Search, Tag } from '@carbon/react';
+=======
+import {
+  Button,
+  ButtonSet,
+  Dropdown,
+  Search,
+  Tag,
+} from 'carbon-components-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { Filter } from '@carbon/react/icons';
@@ -19,6 +29,7 @@ export let AddSelectFilter = ({
   appliedFilters,
   clearFiltersText,
   filterOpts,
+  filtersLabel,
   handleFilter,
   handleSearch,
   hasFiltersApplied,
@@ -87,7 +98,11 @@ export let AddSelectFilter = ({
     <>
       <div className={`${blockClass}-search`}>
         <Search
+<<<<<<< HEAD
           id="temp-id"
+=======
+          id="add-select-global-search-filter"
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
           labelText={inputLabel}
           placeholder={inputPlaceholder}
           value={searchTerm}
@@ -108,7 +123,7 @@ export let AddSelectFilter = ({
         {open && (
           <div className={blockClass}>
             <div className={`${blockClass}-content`}>
-              <p>Filters</p>
+              <p>{filtersLabel}</p>
               <div className={`${blockClass}-opts`}>
                 {filterOpts.map((filterOpts) => (
                   <Dropdown
@@ -171,6 +186,7 @@ AddSelectFilter.propTypes = {
   appliedFilters: PropTypes.object,
   clearFiltersText: PropTypes.string,
   filterOpts: PropTypes.array,
+  filtersLabel: PropTypes.string,
   handleFilter: PropTypes.func,
   handleSearch: PropTypes.func,
   hasFiltersApplied: PropTypes.bool,

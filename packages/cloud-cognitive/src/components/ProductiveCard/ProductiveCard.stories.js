@@ -7,8 +7,12 @@
 
 import React from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
+<<<<<<< HEAD
 import { TrashCan, Edit } from '@carbon/react/icons';
 import { Grid, Column, usePrefix } from '@carbon/react';
+=======
+import { TrashCan16, Edit16, Add16 } from '@carbon/icons-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import {
   getStoryTitle,
   prepareStory,
@@ -173,6 +177,10 @@ export const WithActionGhostButton = prepareStory(Template, {
     columnSize: 8,
     primaryButtonPlacement: 'top',
     primaryButtonText: 'Ghost button',
+<<<<<<< HEAD
     primaryButtonIcon: (props) => <TrashCan size={16} {...props} />,
+=======
+    primaryButtonIcon: Add16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   },
 });

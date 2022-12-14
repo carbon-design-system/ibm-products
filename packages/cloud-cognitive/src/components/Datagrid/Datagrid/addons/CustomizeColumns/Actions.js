@@ -8,7 +8,11 @@
  */
 
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import { Search } from '@carbon/react';
+=======
+import { Search } from 'carbon-components-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import * as React from 'react';
 import { pkg } from '../../../../../settings';
 

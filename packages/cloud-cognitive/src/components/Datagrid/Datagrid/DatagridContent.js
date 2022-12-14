@@ -1,7 +1,11 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import { DataTable } from '@carbon/react';
+=======
+import { DataTable } from 'carbon-components-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import { px } from '@carbon/layout';
 import DatagridHead from './DatagridHead';
 import DatagridBody from './DatagridBody';
@@ -53,7 +57,12 @@ export const DatagridContent = ({ datagridState }) => {
     // and swapped out with an input, i.e. text, number, selection, or date picker
     if (
       target.closest(`.${blockClass}__inline-edit-button`) ||
+<<<<<<< HEAD
       target.closest(`.${blockClass}__inline-edit--select`)
+=======
+      target.closest(`.${blockClass}__inline-edit--select`) ||
+      target.closest(`.${blockClass}__row-size-button`)
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     ) {
       return;
     }
@@ -107,7 +116,11 @@ export const DatagridContent = ({ datagridState }) => {
       return;
     }
     const gridElement = document.querySelector(`#${tableId}`);
+<<<<<<< HEAD
     const tableHeader = document.querySelector(
+=======
+    const tableHeader = gridElement?.querySelector(
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       `.${carbon.prefix}--data-table-header`
     );
     gridElement.style.setProperty(
@@ -156,10 +169,16 @@ export const DatagridContent = ({ datagridState }) => {
           )}
         </div>
       </TableContainer>
+<<<<<<< HEAD
       {rows?.length > 0 &&
         !isFetching &&
         DatagridPagination &&
         DatagridPagination(datagridState)}
+=======
+      {rows?.length > 0 && !isFetching && DatagridPagination && (
+        <DatagridPagination {...datagridState} />
+      )}
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       {CustomizeColumnsModal && (
         <CustomizeColumnsModal instance={datagridState} />
       )}

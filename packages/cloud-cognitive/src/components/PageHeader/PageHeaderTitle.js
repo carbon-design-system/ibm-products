@@ -71,7 +71,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
     titleText = asText;
   }
   return (
-    <div
+    <h1
       className={cx(
         `${blockClass}__title`,
         { [`${blockClass}__title--editable`]: isEditable },
@@ -81,8 +81,13 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
       )}
       title={titleText}
     >
+<<<<<<< HEAD
       <h1 className={`${blockClass}__title-wrapper`}>{titleInnards}</h1>
     </div>
+=======
+      {titleInnards}
+    </h1>
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   );
 };
 

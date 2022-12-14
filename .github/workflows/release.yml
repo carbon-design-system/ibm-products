@@ -38,7 +38,11 @@ jobs:
       - name: Publish
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
+<<<<<<< HEAD
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+=======
+          NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
         run: yarn lerna publish --no-verify-access --create-release github --yes
 
       - name: Rename to ibm-cloud-cognitive for legacy publish
@@ -58,5 +62,9 @@ jobs:
       - name: Publish with old name
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
+<<<<<<< HEAD
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+=======
+          NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
         run: yarn lerna publish from-package --no-verify-access --yes

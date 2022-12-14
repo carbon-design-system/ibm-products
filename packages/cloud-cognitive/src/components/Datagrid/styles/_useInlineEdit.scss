@@ -6,12 +6,17 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
+<<<<<<< HEAD
 @use '../../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/components/button/tokens' as *;
 @use '@carbon/type' as *;
 @use './variables';
+=======
+@import '../../../global/styles/project-settings';
+@import './variables';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
 $row-heights: (
   xs: 1.5rem,
@@ -22,6 +27,7 @@ $row-heights: (
 );
 
 @each $size, $size-value in $row-heights {
+<<<<<<< HEAD
   .#{variables.$block-class}
     .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
     .#{c4p-settings.$carbon-prefix}--text-input,
@@ -50,6 +56,32 @@ $row-heights: (
     .#{variables.$block-class}__inline-edit--outer-cell-button--#{$size}
     .#{variables.$block-class}__inline-edit--select
     .#{c4p-settings.$carbon-prefix}--list-box {
+=======
+  .#{$block-class}
+    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{$carbon-prefix}--text-input,
+  .#{$block-class}
+    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{$carbon-prefix}--number
+    input[type='number'],
+  .#{$block-class}
+    .#{$block-class}__inline-edit--select.#{$block-class}__inline-edit--select-#{$size},
+  .#{$block-class}
+    .#{$block-class}__inline-edit--date.#{$block-class}__inline-edit--date-#{$size}
+    .#{$carbon-prefix}--date-picker__input {
+    height: $size-value;
+  }
+  .#{$block-class}
+    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{$carbon-prefix}--number__control-btn::before,
+  .#{$block-class}
+    .#{$block-class}__inline-edit--outer-cell-button--#{$size}
+    .#{$carbon-prefix}--number__control-btn::after {
+    height: calc(#{$size-value} - 0.25rem);
+  }
+  .#{$block-class}
+    .#{$block-class}__inline-edit--select.#{$block-class}__inline-edit--select-#{$size}.#{$carbon-prefix}--list-box {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     max-height: none;
   }
 }
@@ -64,36 +96,60 @@ $row-heights: (
   }
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class} {
   --#{variables.$block-class}--grid-header-height: 0;
 }
 
 .#{variables.$block-class}__inline-edit-cell {
+=======
+.#{$block-class} {
+  --#{$block-class}--grid-header-height: 0;
+}
+
+.#{$block-class}__inline-edit-cell {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   display: flex;
   height: 100%;
   align-items: center;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}
   .#{c4p-settings.$pkg-prefix}--inline-edit__after-input-elements {
+=======
+.#{$block-class} .#{$pkg-prefix}--inline-edit__after-input-elements {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   display: flex;
   align-items: center;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}__inline-edit--outer-cell-button {
+=======
+.#{$block-class}__inline-edit--outer-cell-button {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   width: 100%;
   height: calc(100% + 2px); // account for borders
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}__inline-edit--outer-cell-button
   .#{variables.$block-class}__inline-edit-button {
   position: relative;
+=======
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button {
+  position: relative;
+  z-index: 2;
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   display: flex;
   width: 100%;
   height: 100%;
   align-items: center;
   justify-content: space-between;
   padding-left: $spacing-05;
+<<<<<<< HEAD
   color: $text-secondary;
   cursor: pointer;
   outline: 0; // handled by active class
@@ -118,18 +174,51 @@ $row-heights: (
   // Always show renderIcon if inline edit columns are less than half of total columns
   &:not(.#{variables.$block-class}__inline-edit-button--edit-less-than-half-of-total-cols) {
     .#{variables.$block-class}__inline-edit-button-icon {
+=======
+  color: $text-02;
+  cursor: pointer;
+  outline: 0; // handled by active class
+  .#{$block-class}__label-icon {
+    height: $spacing-05;
+    padding-right: $spacing-05;
+  }
+  &.#{$block-class}__inline-edit-button--non-edit {
+    padding-left: 0;
+    cursor: default;
+  }
+  .#{$block-class}__inline-edit-button-icon {
+    height: $spacing-05;
+    fill: $icon-02;
+  }
+  &.#{$block-class}__inline-edit-button--date {
+    @include carbon--font-family($name: mono);
+  }
+  &.#{$block-class}__inline-edit-button--selection {
+    justify-content: flex-start;
+  }
+  // Always show renderIcon if inline edit columns are less than half of total columns
+  &:not(
+      .#{$block-class}__inline-edit-button--edit-less-than-half-of-total-cols
+    ) {
+    .#{$block-class}__inline-edit-button-icon {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       display: none;
     }
 
     /* stylelint-disable-next-line */
     &:hover {
+<<<<<<< HEAD
       .#{variables.$block-class}__inline-edit-button-icon {
+=======
+      .#{$block-class}__inline-edit-button-icon {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
         display: block;
       }
     }
   }
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}__inline-edit--outer-cell-button
   .#{variables.$block-class}__inline-edit-button:not([data-disabled='true']):hover {
   background-color: $layer-active;
@@ -160,12 +249,49 @@ $row-heights: (
 .#{variables.$block-class}__inline-edit--outer-cell-button
   .#{variables.$block-class}__inline-edit-button
   .#{variables.$block-class}__inline-edit-button-label {
+=======
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button:not([data-disabled='true']):hover {
+  background-color: $hover-selected-ui;
+  color: $text-01;
+  .#{$block-class}__inline-edit-button-icon {
+    fill: $icon-01;
+  }
+}
+
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button.#{$block-class}__inline-edit-button--active:not(
+    [data-disabled='true']
+  ) {
+  background-color: $active-ui;
+  color: $text-01;
+  cursor: text;
+}
+
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button.#{$block-class}__inline-edit-button--active {
+  @include input-outline;
+}
+
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button--disabled:not(
+    .#{$block-class}__inline-edit-button--edit-less-than-half-of-total-cols
+  ) {
+  color: $disabled-02;
+  cursor: not-allowed;
+}
+
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button
+  .#{$block-class}__inline-edit-button-label {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   overflow: hidden;
   padding-right: $spacing-05;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}__inline-edit--outer-cell-button
   .#{variables.$block-class}__inline-edit-button
   .#{variables.$block-class}__inline-edit-button-label.#{variables.$block-class}__inline-edit-button-label-with-icon {
@@ -176,15 +302,31 @@ $row-heights: (
   .#{c4p-settings.$carbon-prefix}--text-input,
 .#{variables.$block-class}__inline-edit--outer-cell-button
   .#{c4p-settings.$carbon-prefix}--number
+=======
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$block-class}__inline-edit-button
+  .#{$block-class}__inline-edit-button-label.#{$block-class}__inline-edit-button-label-with-icon {
+  padding-right: $spacing-09;
+}
+
+.#{$block-class}__inline-edit--outer-cell-button .#{$carbon-prefix}--text-input,
+.#{$block-class}__inline-edit--outer-cell-button
+  .#{$carbon-prefix}--number
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   input[type='number'] {
   height: $spacing-09;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}__inline-edit-button-icon {
+=======
+.#{$block-class}__inline-edit-button-icon {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   position: absolute;
   right: $spacing-05;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}__table-with-inline-edit.#{c4p-settings.$carbon-prefix}--data-table
   .#{variables.$block-class}__cell-inline-edit {
   position: relative;
@@ -194,17 +336,34 @@ $row-heights: (
   }
 
   .#{c4p-settings.$carbon-prefix}--number input[type='number'] {
+=======
+.#{$block-class}__table-with-inline-edit.#{$carbon-prefix}--data-table
+  .#{$block-class}__cell-inline-edit {
+  position: relative;
+  padding: 0;
+  .#{$block-class}__inline-edit-button--non-edit {
+    padding-left: $spacing-05;
+  }
+
+  .#{$carbon-prefix}--number input[type='number'] {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     min-width: auto;
     padding-right: $spacing-05;
   }
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}__inline-edit--select
   .#{variables.$block-class}__inline-edit--select-item {
+=======
+.#{$block-class}__inline-edit--select
+  .#{$block-class}__inline-edit--select-item {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   padding-bottom: $spacing-05;
   padding-left: $spacing-05;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}__inline-edit--select.#{c4p-settings.$carbon-prefix}--dropdown,
 .#{variables.$block-class}__inline-edit--date
   .#{c4p-settings.$carbon-prefix}--date-picker {
@@ -216,10 +375,16 @@ $row-heights: (
   .#{c4p-settings.$carbon-prefix}--date-picker.#{c4p-settings.$carbon-prefix}--date-picker--single
   .#{c4p-settings.$carbon-prefix}--date-picker__input {
   width: 100%;
+=======
+.#{$block-class}__inline-edit--select.#{$carbon-prefix}--dropdown,
+.#{$block-class}__inline-edit--date .#{$carbon-prefix}--date-picker__input {
+  width: inherit;
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   height: $spacing-09; // default row height
   max-height: none;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}__inline-edit--date
   .#{c4p-settings.$carbon-prefix}--date-picker-container {
   width: inherit;
@@ -227,6 +392,14 @@ $row-heights: (
 
 .#{variables.$block-class}__inline-edit--date.#{c4p-settings.$carbon-prefix}--date-picker.#{c4p-settings.$carbon-prefix}--date-picker--single
   .#{c4p-settings.$carbon-prefix}--date-picker__input {
+=======
+.#{$block-class}__inline-edit--date .#{$carbon-prefix}--date-picker-container {
+  width: inherit;
+}
+
+.#{$block-class}__inline-edit--date.#{$carbon-prefix}--date-picker.#{$carbon-prefix}--date-picker--single
+  .#{$carbon-prefix}--date-picker__input {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   overflow: hidden;
   width: 100%;
   max-width: none;
@@ -235,6 +408,7 @@ $row-heights: (
   white-space: nowrap;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}
   .#{c4p-settings.$carbon-prefix}--data-table
   .#{variables.$block-class}__carbon-row-hover-active
@@ -248,11 +422,25 @@ $row-heights: (
 // outlines were not present be
 .#{variables.$block-class}
   .#{variables.$block-class}__grid-container-grid-active::before {
+=======
+.#{$block-class}
+  .#{$carbon-prefix}--data-table
+  .#{$block-class}__carbon-row-hover-active
+  td {
+  border-top-color: $hover-ui;
+  background-color: $hover-ui;
+}
+
+// Custom border/outline for the focus region, because of the scrolling
+// containers, using default border or outline did not
+.#{$block-class} .#{$block-class}__grid-container-grid-active::before {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   position: absolute;
   z-index: 2;
   bottom: 0;
   left: 0;
   width: 2px;
+<<<<<<< HEAD
   height: calc(
     100% - 50px - var(--#{variables.$block-class}--grid-header-height)
   );
@@ -262,11 +450,20 @@ $row-heights: (
 
 .#{variables.$block-class}
   .#{variables.$block-class}__grid-container-grid-active::after {
+=======
+  height: calc(100% - 50px - var(--#{$block-class}--grid-header-height));
+  background-color: $inverse-link;
+  content: '';
+}
+
+.#{$block-class} .#{$block-class}__grid-container-grid-active::after {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   position: absolute;
   z-index: 2;
   right: 0;
   bottom: 0;
   width: 2px;
+<<<<<<< HEAD
   height: calc(
     100% - 50px - var(--#{variables.$block-class}--grid-header-height)
   );
@@ -277,11 +474,22 @@ $row-heights: (
 .#{variables.$block-class}
   .#{variables.$block-class}__grid-container-grid-active
   .#{c4p-settings.$carbon-prefix}--data-table-content::before {
+=======
+  height: calc(100% - 50px - var(--#{$block-class}--grid-header-height));
+  background-color: $inverse-link;
+  content: '';
+}
+
+.#{$block-class}
+  .#{$block-class}__grid-container-grid-active
+  .#{$carbon-prefix}--data-table-content::before {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   position: absolute;
   z-index: 2;
   top: 0;
   right: 0;
   left: 0;
+<<<<<<< HEAD
   width: var(--#{variables.$block-class}--grid-width);
   height: 2px;
   background-color: $link-inverse;
@@ -317,12 +525,48 @@ $row-heights: (
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
   [data-invalid]
   .#{c4p-settings.$carbon-prefix}--form-requirement {
+=======
+  width: var(--#{$block-class}--grid-width);
+  height: 2px;
+  background-color: $inverse-link;
+}
+
+.#{$block-class}
+  .#{$block-class}__grid-container-grid-active.#{$block-class}__grid-container-grid-active--without-toolbar::before,
+.#{$block-class}
+  .#{$block-class}__grid-container-grid-active.#{$block-class}__grid-container-grid-active--without-toolbar::after {
+  height: calc(100% - 2px - var(--#{$block-class}--grid-header-height));
+}
+
+.#{$block-class}
+  .#{$block-class}__grid-container-grid-active
+  .#{$block-class}__table-container {
+  outline: 2px solid $inverse-link;
+  outline-offset: -2px;
+}
+
+.#{$block-class}
+  .#{$block-class}__grid-container-inline-edit
+  .#{$block-class}__table-container {
+  padding-top: $spacing-01;
+}
+
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  [data-invalid]
+  ~ .#{$carbon-prefix}--form-requirement,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  [data-invalid]
+  .#{$carbon-prefix}--form-requirement {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   position: absolute;
   z-index: 3;
   top: calc(100% - #{$spacing-01});
   width: 100%;
   padding: $spacing-03 $spacing-06 $spacing-03 $spacing-03;
   margin: 0;
+<<<<<<< HEAD
   background-color: $layer-01;
   outline: $spacing-01 solid $support-error;
   outline-offset: calc(-1 * #{$spacing-01});
@@ -344,11 +588,35 @@ $row-heights: (
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
   .#{c4p-settings.$carbon-prefix}--number__invalid {
+=======
+  background-color: $ui-01;
+  outline: $spacing-01 solid $danger-02;
+  outline-offset: calc(-1 * #{$spacing-01});
+}
+
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--list-box[data-invalid]:focus-within
+  ~ .#{$carbon-prefix}--form-requirement {
+  outline: $spacing-01 solid $focus;
+}
+
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--list-box__invalid-icon,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--text-input__invalid-icon,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--number__invalid {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   z-index: 4;
   top: calc(100% + #{$spacing-04} + #{$spacing-01});
   right: $spacing-03;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
   .#{c4p-settings.$carbon-prefix}--number__invalid {
@@ -358,22 +626,43 @@ $row-heights: (
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
   .#{c4p-settings.$carbon-prefix}--form-requirement::before {
+=======
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--number__invalid {
+  top: calc(100% + #{$spacing-02} + #{$spacing-01});
+}
+
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--form-requirement::before {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   position: absolute;
   top: 0;
   left: $spacing-01;
   width: calc(100% - (#{$spacing-01} * 2));
   height: $spacing-01;
+<<<<<<< HEAD
   background-color: $layer-01;
   content: '';
 }
 
 .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
   .#{c4p-settings.$carbon-prefix}--form-requirement::after {
+=======
+  background-color: $ui-01;
+  content: '';
+}
+
+.#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--form-requirement::after {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   position: absolute;
   top: $spacing-01;
   left: $spacing-03;
   width: calc(100% - (#{$spacing-03} * 2));
   height: 1px;
+<<<<<<< HEAD
   background-color: $layer-accent-01;
   content: '';
 }
@@ -385,11 +674,25 @@ $row-heights: (
   }
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
     .#{c4p-settings.$carbon-prefix}--form-requirement::after {
+=======
+  background-color: $ui-03;
+  content: '';
+}
+
+.#{$block-class} tbody tr:hover {
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+    .#{$carbon-prefix}--form-requirement::before {
+    background-color: $ui-03;
+  }
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+    .#{$carbon-prefix}--form-requirement::after {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     background-color: transparent;
   }
 }
 
 // Keep input focus states using $support-01 when inline edit cell is invalid
+<<<<<<< HEAD
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
   .#{c4p-settings.$carbon-prefix}--text-input:focus,
@@ -416,4 +719,32 @@ $row-heights: (
   ~ .#{c4p-settings.$carbon-prefix}--number__controls
   .#{c4p-settings.$carbon-prefix}--number__control-btn.up-icon::after {
   background-color: $support-error;
+=======
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--text-input:focus,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--number
+  input[type='number']:focus,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--number
+  input[type='number']:focus
+  ~ .#{$carbon-prefix}--number__controls
+  .#{$carbon-prefix}--number__control-btn:hover,
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--number__control-btn:focus {
+  outline-color: $support-01;
+}
+
+.#{$block-class}
+  .#{$block-class}__inline-edit--outer-cell-button--invalid
+  .#{$carbon-prefix}--number
+  input[type='number'][data-invalid]:focus
+  ~ .#{$carbon-prefix}--number__controls
+  .#{$carbon-prefix}--number__control-btn.up-icon::after {
+  background-color: $support-01;
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 }

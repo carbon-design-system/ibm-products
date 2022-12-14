@@ -42,8 +42,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--modified-tabs;
   height: 2.5rem;
   padding: $spacing-04;
   border: $spacing-01 solid transparent;
-  background-color: transparent;
   border-radius: 0;
+  background-color: transparent;
   cursor: pointer;
   transition: background-color $duration-fast-02 motion(standard, productive);
   // stylelint-disable-next-line max-nesting-depth

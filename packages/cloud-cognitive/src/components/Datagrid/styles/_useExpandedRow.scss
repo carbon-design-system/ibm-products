@@ -6,6 +6,7 @@
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
 
+<<<<<<< HEAD
 @use '../../../global/styles/project-settings';
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
@@ -18,12 +19,27 @@
 }
 
 .#{variables.$block-class} .#{variables.$block-class}__expanded-row-content {
+=======
+@import './variables';
+
+@mixin shared-pseudo-styles() {
+  height: 1px;
+  background-color: $ui-03;
+  content: '';
+}
+
+.#{$block-class} .#{$block-class}__expanded-row-content {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   position: relative;
   padding: $spacing-05 $spacing-05 $spacing-06 $spacing-09;
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}
   .#{variables.$block-class}__expanded-row-content::before {
+=======
+.#{$block-class} .#{$block-class}__expanded-row-content::before {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   position: absolute;
   /* stylelint-disable-next-line carbon/layout-token-use */
   top: -1px;
@@ -32,11 +48,36 @@
   @include shared-pseudo-styles();
 }
 
+<<<<<<< HEAD
 .#{variables.$block-class}
   .#{variables.$block-class}__expanded-row-content::after {
+=======
+.#{$block-class} .#{$block-class}__expanded-row-content::after {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   @include shared-pseudo-styles();
 }
+<<<<<<< HEAD
+=======
+
+.#{$block-class}__carbon-row.#{$block-class}__carbon-row-expandable
+  .#{$block-class}__cell.#{$block-class}__expandable-row-cell {
+  padding: $spacing-03;
+  padding-right: 0;
+}
+
+.#{$block-class}__row-expander.#{$carbon-prefix}--btn {
+  display: flex;
+  width: $spacing-07;
+  height: $spacing-07;
+  min-height: $spacing-07;
+  justify-content: center;
+  padding: 0;
+  .#{$block-class}__row-expander--icon {
+    fill: $ui-05;
+  }
+}
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8

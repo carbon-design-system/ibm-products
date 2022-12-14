@@ -6378,6 +6378,10 @@ Map {
       "tabIndex": 0,
       "title": "",
     },
+<<<<<<< HEAD
+=======
+    "displayName": "NavList",
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     "propTypes": {
       "activeHref": {
         "type": "string",
@@ -6534,11 +6538,15 @@ Map {
       "_threadCount": 0,
     },
     "defaultProps": {
+<<<<<<< HEAD
       "ariaLabel": "open and close list of options",
+=======
+      "ariaLabel": "Open and close list of options",
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       "direction": "bottom",
       "flipped": false,
       "focusTrap": true,
-      "iconDescription": "open and close list of options",
+      "iconDescription": "Open and close list of options",
       "light": false,
       "menuOffset": [Function],
       "menuOffsetFlip": [Function],
@@ -9782,12 +9790,24 @@ Map {
       "name": {
         "type": "string",
       },
+<<<<<<< HEAD
       "onChange": {
         "type": "func",
       },
       "onRelease": {
         "type": "func",
       },
+=======
+      "onBlur": {
+        "type": "func",
+      },
+      "onChange": {
+        "type": "func",
+      },
+      "onRelease": {
+        "type": "func",
+      },
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       "required": {
         "type": "bool",
       },

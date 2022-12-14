@@ -7,7 +7,11 @@
  */
 
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { Add, Edit, TrashCan, Checkmark } from '@carbon/react/icons';
+=======
+import { Add16, Edit16, TrashCan16, Checkmark16 } from '@carbon/icons-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
@@ -136,14 +140,22 @@ const sharedDatagridProps = {
     {
       id: 'edit',
       itemText: 'Edit',
+<<<<<<< HEAD
       icon: Edit,
+=======
+      icon: Edit16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       onClick: action('Clicked row action: edit'),
     },
 
     {
       id: 'delete',
       itemText: 'Delete',
+<<<<<<< HEAD
       icon: TrashCan,
+=======
+      icon: TrashCan16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       isDelete: true,
       onClick: action('Clicked row action: delete'),
     },
@@ -221,19 +233,31 @@ const manyRowActionButtonsProps = {
     {
       id: 'edit',
       itemText: 'Edit',
+<<<<<<< HEAD
       icon: Edit,
+=======
+      icon: Edit16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       onClick: action('Clicked row action: edit'),
     },
     {
       id: 'approve',
       itemText: 'Approve',
+<<<<<<< HEAD
       icon: Checkmark,
+=======
+      icon: Checkmark16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       onClick: action('Clicked row action: approve'),
     },
     {
       id: 'delete',
       itemText: 'Delete',
+<<<<<<< HEAD
       icon: TrashCan,
+=======
+      icon: TrashCan16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       isDelete: true,
       hasDivider: true,
       onClick: action('Clicked row action: delete'),
@@ -299,33 +323,57 @@ const getBatchActions = () => {
   return [
     {
       label: 'Duplicate',
+<<<<<<< HEAD
       renderIcon: Add,
+=======
+      renderIcon: Add16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Add',
+<<<<<<< HEAD
       renderIcon: Add,
+=======
+      renderIcon: Add16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Select all',
+<<<<<<< HEAD
       renderIcon: Add,
+=======
+      renderIcon: Add16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       onClick: action('Clicked batch action button'),
       type: 'select_all',
     },
     {
       label: 'Publish to catalog',
+<<<<<<< HEAD
       renderIcon: Add,
+=======
+      renderIcon: Add16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Download',
+<<<<<<< HEAD
       renderIcon: Add,
+=======
+      renderIcon: Add16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Delete',
+<<<<<<< HEAD
       renderIcon: Add,
+=======
+      renderIcon: Add16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       onClick: action('Clicked batch action button'),
       hasDivider: true,
       kind: 'danger',

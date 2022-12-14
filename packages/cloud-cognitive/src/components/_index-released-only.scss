@@ -8,6 +8,7 @@
 // Package scss files here used by released components, or used by components
 // which are themselves used by released components.
 
+<<<<<<< HEAD
 @use './AboutModal';
 @use './APIKeyModal';
 @use './ActionSet';
@@ -34,3 +35,32 @@
 @use './Tearsheet';
 @use './UserProfileImage';
 @use './WebTerminal';
+=======
+@import './AboutModal/index';
+@import './APIKeyModal/index';
+@import './ActionSet/index';
+@import './Cascade/index';
+@import './CreateModal/index';
+@import './CreateFullPage/index';
+@import './CreateSidePanel/index';
+@import './CreateTearsheetNarrow/index';
+@import './CreateTearsheet/index';
+@import './EmptyStates/index';
+@import './ExportModal/index';
+@import './ExpressiveCard/index';
+@import './HTTPErrors/index';
+@import './ImportModal/index';
+@import './InlineEditV1/index';
+@import './InlineEditV2/index';
+@import './NotificationsPanel/index';
+@import './PageHeader/index';
+@import './ProductiveCard/index';
+@import './RemoveModal/index';
+@import './Saving/index';
+@import './SidePanel/index';
+@import './StatusIcon/index';
+@import './TagSet/index';
+@import './Tearsheet/index';
+@import './UserProfileImage/index';
+@import './WebTerminal/index';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8

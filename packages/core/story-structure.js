@@ -33,6 +33,7 @@ const s = [
       {
         n: 'Components',
         s: [
+          { n: 'Button menu', s: ['c/ButtonMenu'] },
           { n: 'Tag set', s: ['c/TagSet'] },
           { n: 'Cards', s: ['c/ExpressiveCard', 'c/ProductiveCard'] },
           { n: 'Modified tabs', s: ['c/ModifiedTabs'] },
@@ -76,7 +77,19 @@ const s = [
           {
             n: 'Edit and update',
             s: [
-              'c/InlineEdit',
+              {
+                n: 'Inline edit',
+                s: [
+                  {
+                    n: 'V1',
+                    s: ['c/InlineEditV1'],
+                  },
+                  {
+                    n: 'V2',
+                    s: ['c/InlineEditV2'],
+                  },
+                ],
+              },
               'c/EditSidePanel',
               'c/EditTearsheet',
               'c/EditTearsheetNarrow',
@@ -119,11 +132,11 @@ const s = [
           'c/ActionBar',
           'c/ActionSet',
           'c/BreadcrumbWithOverflow',
-          'c/ButtonMenu',
           'c/ButtonSetWithOverflow',
           'c/CancelableTextEdit',
           'c/ComboButton',
           'c/ExampleComponent',
+          'c/FilterSummary',
           'c/TearsheetShell',
         ],
       },

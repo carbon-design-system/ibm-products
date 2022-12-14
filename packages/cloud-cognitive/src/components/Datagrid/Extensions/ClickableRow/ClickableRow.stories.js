@@ -7,7 +7,11 @@
  */
 
 import React, { useState } from 'react';
+<<<<<<< HEAD
 import { Edit, TrashCan } from '@carbon/react/icons';
+=======
+import { Edit16, TrashCan16 } from '@carbon/icons-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
@@ -26,7 +30,11 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
+<<<<<<< HEAD
 import { Link } from '@carbon/react';
+=======
+import { Link } from 'carbon-components-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import { pkg } from '../../../../settings';
 import cx from 'classnames';
 import { SidePanel } from '../../../SidePanel';
@@ -163,14 +171,22 @@ const sharedDatagridProps = {
     {
       id: 'edit',
       itemText: 'Edit',
+<<<<<<< HEAD
       icon: Edit,
+=======
+      icon: Edit16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       onClick: action('Clicked row action: edit'),
     },
 
     {
       id: 'delete',
       itemText: 'Delete',
+<<<<<<< HEAD
       icon: TrashCan,
+=======
+      icon: TrashCan16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       isDelete: true,
       onClick: action('Clicked row action: delete'),
     },
@@ -233,6 +249,11 @@ const DataTableSidePanelContent = (selectedRowValues) => {
           {sectionTitle}
         </h5>
         {finalData.map(([label, value], index) => {
+<<<<<<< HEAD
+=======
+          const formattedValue =
+            value instanceof Date ? value.toString() : value;
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
           return (
             <div
               key={index}
@@ -241,7 +262,13 @@ const DataTableSidePanelContent = (selectedRowValues) => {
               <div className={`${blockClass}__side-panel-label-text`}>
                 {label} :
               </div>
+<<<<<<< HEAD
               <div className={`${blockClass}__side-panel-value`}>{value}</div>
+=======
+              <div className={`${blockClass}__side-panel-value`}>
+                {formattedValue}
+              </div>
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
             </div>
           );
         })}

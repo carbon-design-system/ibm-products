@@ -10,7 +10,12 @@
 
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 import { RadioButtonGroup, RadioButton } from '@carbon/react';
+=======
+import { rem } from '@carbon/layout';
+import { RadioButtonGroup, RadioButton } from 'carbon-components-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import isArray from 'lodash/isArray';
 import { pkg } from '../../../../../settings';
 import { useClickOutside } from '../../../../../global/js/hooks';
@@ -45,6 +50,13 @@ const RowSizeRadioGroup = ({
     <div
       ref={popoverContentRef}
       className={`${blockClass}__row-size-dropdown`}
+<<<<<<< HEAD
+=======
+      style={{
+        top: rem(top),
+        right: rem(right),
+      }}
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       role="presentation"
       onClick={(e) => {
         e.stopPropagation();
@@ -93,6 +105,23 @@ const getBackwardCompatibleRowSize = (rowSize) => {
   return rowSizeMap[rowSize] || rowSize;
 };
 
+<<<<<<< HEAD
+=======
+const getDropdownPosition = (buttonEle) => {
+  const parent = buttonEle.parentElement;
+  if (parent instanceof HTMLElement) {
+    const top = buttonEle.offsetTop + buttonEle.offsetHeight;
+    const right =
+      parent.offsetWidth - (buttonEle.offsetLeft + buttonEle.offsetWidth);
+    return {
+      top,
+      right,
+    };
+  }
+  return { top: 0, right: 0 };
+};
+
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 RowSizeRadioGroup.defaultProps = {
   rowSizes: [
     {

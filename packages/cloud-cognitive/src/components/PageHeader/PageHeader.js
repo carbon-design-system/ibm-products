@@ -352,7 +352,9 @@ export let PageHeader = React.forwardRef(
       ({ current }) => {
         // on window resize and other updates some values may have changed
         checkUpdateVerticalSpace();
-        setWidthIsNarrow(current.innerWidth < breakpoints.md.width); // small (below medium) media query
+        setWidthIsNarrow(
+          current.innerWidth / 16 < parseInt(breakpoints.md.width)
+        ); // small (below medium) media query
       },
       [
         actionBarItems,
@@ -437,7 +439,7 @@ export let PageHeader = React.forwardRef(
     };
 
     useEffect(() => {
-      if (typeof collapseHeader === 'boolean') {
+      if (collapseHeader === true) {
         utilSetCollapsed(
           collapseHeader,
           metrics.headerOffset,
@@ -718,7 +720,11 @@ export let PageHeader = React.forwardRef(
               }
               kind="ghost"
               onClick={handleCollapseToggle}
+<<<<<<< HEAD
               renderIcon={(props) => <ChevronUp size={16} {...props} />}
+=======
+              renderIcon={ChevronUp16}
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
               size="md"
               tooltipPosition="bottom"
               tooltipAlignment="end"
@@ -755,7 +761,7 @@ export let PageHeader = React.forwardRef(
                   onWidthChange={handleWidthChange}
                   buttons={pageActions}
                   buttonSetOverflowLabel={pageActionsOverflowLabel}
-                  rightAlign
+                  rightAlign={!widthIsNarrow}
                 />
               )}
             </div>

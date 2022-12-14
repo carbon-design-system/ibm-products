@@ -35,6 +35,10 @@ export const ARG_TYPES = {
     type: { name: 'string', required: false },
   },
   emptyStateSize: { control: 'select', options: ['sm', 'lg'] },
+<<<<<<< HEAD
+=======
+  emptyStateType: { control: 'select', options: ['error', 'noData'] },
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   useDenseHeader: {
     control: { type: 'radio' },
     options: [true, false],

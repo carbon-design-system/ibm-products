@@ -9,8 +9,17 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+<<<<<<< HEAD
 import { Checkbox, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import { CaretDown } from '@carbon/react/icons';
+=======
+import {
+  OverflowMenu,
+  OverflowMenuItem,
+  Checkbox,
+} from 'carbon-components-react';
+import { CaretDown16 } from '@carbon/icons-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import { pkg } from '../../../settings';
 // cspell:words columnheader
 

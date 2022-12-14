@@ -9,13 +9,19 @@ import React from 'react';
 import {
   Button,
   Checkbox,
+  Dropdown,
   RadioButton,
   StructuredListRow,
   StructuredListWrapper,
   StructuredListBody,
+<<<<<<< HEAD
   Dropdown,
 } from '@carbon/react';
 import { ChevronRight, View } from '@carbon/react/icons';
+=======
+} from 'carbon-components-react';
+import { ChevronRight16, View16 } from '@carbon/icons-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
@@ -47,8 +53,13 @@ export let AddSelectList = ({
     setSingleSelection(value);
   };
 
+<<<<<<< HEAD
   const handleMultiSelection = (event, { checked, id }) => {
     if (checked) {
+=======
+  const handleMultiSelection = (value, id) => {
+    if (value) {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       const newValues = [...multiSelection, id];
       setMultiSelection(newValues);
     } else {
@@ -68,10 +79,10 @@ export let AddSelectList = ({
     return id === singleSelection;
   };
 
-  const getAvatarProps = ({ src, alt, icon, backgroundColor }) => ({
+  const getAvatarProps = ({ src, alt, icon, backgroundColor, theme }) => ({
     className: `${blockClass}-cell-avatar`,
     size: 'lg',
-    theme: 'light',
+    theme,
     image: src,
     imageDescription: alt,
     icon,
@@ -110,6 +121,7 @@ export let AddSelectList = ({
             <StructuredListRow
               key={item.id}
               className={cx(`${blockClass}-row`, {
+<<<<<<< HEAD
                 [`${blockClass}-row-selected`]: isSelected(item.id),
                 [`${blockClass}-row-meta-selected`]: isInMetaPanel(item.id),
               })}
@@ -126,6 +138,15 @@ export let AddSelectList = ({
                 role="button"
                 tabIndex="0"
               >
+=======
+                [`${blockClass}-row--selected`]: isSelected(item.id),
+                [`${blockClass}-row-meta--selected`]: isInMetaPanel(item.id),
+              })}
+              onClick={(evt) => metaPanelHandler(item, evt)}
+              label
+            >
+              <div className={`${blockClass}-cell`}>
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
                 <div className={`${blockClass}-cell-wrapper`}>
                   {multi ? (
                     <>
@@ -135,7 +156,13 @@ export let AddSelectList = ({
                           // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
                           <div onClick={(event) => event.stopPropagation()}>
                             <Checkbox
+<<<<<<< HEAD
                               onChange={handleMultiSelection}
+=======
+                              onChange={(value, id) =>
+                                handleMultiSelection(value, id)
+                              }
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
                               labelText={item.title}
                               id={item.id}
                               checked={isSelected(item.id)}

@@ -144,13 +144,30 @@
       "contributions": [
         "code"
       ]
+<<<<<<< HEAD
     }
   ],
   "contributorsPerLine": 5,
   "badgeTemplate": "[all-contributors-badge]: https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square",
+=======
+    },
+    {
+      "login": "jagathgj",
+      "name": "Jagath Jayakumar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/29351394?v=4",
+      "profile": "https://www.hellojagath.com",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 5,
+  "badgeTemplate": "[all-contributors-badge]: https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg",
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   "projectName": "ibm-cloud-cognitive",
   "projectOwner": "carbon-design-system",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true
+  "skipCi": true,
+  "commitConvention": "angular"
 }

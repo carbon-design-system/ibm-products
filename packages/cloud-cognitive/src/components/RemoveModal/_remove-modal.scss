@@ -11,6 +11,7 @@
 
 $block-class: #{c4p-settings.$pkg-prefix}--remove-modal;
 
+<<<<<<< HEAD
 .#{$block-class}
   .#{c4p-settings.$carbon-prefix}--modal-footer
   .#{c4p-settings.$carbon-prefix}--btn {
@@ -19,6 +20,23 @@ $block-class: #{c4p-settings.$pkg-prefix}--remove-modal;
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--modal-content {
   padding-right: $spacing-05;
+=======
+@mixin remove-modal {
+  $block-class: #{$pkg-prefix}--remove-modal;
+
+  .#{$block-class} .#{$carbon-prefix}--modal-footer .#{$carbon-prefix}--btn {
+    max-width: none;
+  }
+
+  .#{$block-class} .#{$carbon-prefix}--modal-content {
+    padding-right: $spacing-05;
+  }
+
+  .#{$block-class}__body {
+    padding-right: 20%;
+    margin-bottom: $spacing-05;
+  }
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 }
 
 .#{$block-class}__body {

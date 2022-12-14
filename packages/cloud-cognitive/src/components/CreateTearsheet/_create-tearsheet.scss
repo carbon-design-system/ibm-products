@@ -34,6 +34,7 @@
   }
 }
 
+<<<<<<< HEAD
 $create-tearsheet-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create;
 $step-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step;
 $section-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__section;
@@ -47,6 +48,15 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--
   animation-timing-function: $standard-easing;
   opacity: 0;
 }
+=======
+  .#{$block-class} .#{$step-block-class}__step--visible-step {
+    // stylelint-disable-next-line carbon/motion-easing-use
+    animation: step-content-entrance $duration--slow-01;
+    animation-fill-mode: forwards;
+    animation-timing-function: $carbon--standard-easing;
+    opacity: 0;
+  }
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
 .#{$create-tearsheet-block-class} {
   --#{$create-tearsheet-block-class}--total-width: 0;

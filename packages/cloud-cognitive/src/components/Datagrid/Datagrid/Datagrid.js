@@ -14,6 +14,10 @@ import { pkg } from '../../../settings';
 import pconsole from '../../../global/js/utils/pconsole';
 import { InlineEditProvider } from './addons/InlineEdit/InlineEditContext';
 import { DatagridContent } from './DatagridContent';
+<<<<<<< HEAD
+=======
+import { FilterProvider } from './addons/Filtering/FilterProvider';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentName = 'Datagrid';
@@ -33,11 +37,16 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
     tableId,
     leftPanel,
     className,
+<<<<<<< HEAD
+=======
+    state: { filters },
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
 
   return (
+<<<<<<< HEAD
     <InlineEditProvider>
       <div
         {...rest}
@@ -65,6 +74,37 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
         )}
       </div>
     </InlineEditProvider>
+=======
+    <FilterProvider filters={filters}>
+      <InlineEditProvider>
+        <div
+          {...rest}
+          id={tableId}
+          ref={ref}
+          className={cx(
+            className,
+            blockClass,
+            withVirtualScroll
+              ? `${blockClass}__datagridWrap`
+              : `${blockClass}__datagridWrap-simple`,
+            !isFetching && rows.length === 0 ? `${blockClass}__empty-state` : ''
+          )}
+          {...getDevtoolsProps(componentName)}
+        >
+          {leftPanel && (
+            <div
+              className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
+            >
+              <DatagridContent datagridState={datagridState} />
+            </div>
+          )}
+          {leftPanel === undefined && (
+            <DatagridContent datagridState={datagridState} />
+          )}
+        </div>
+      </InlineEditProvider>
+    </FilterProvider>
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   );
 });
 

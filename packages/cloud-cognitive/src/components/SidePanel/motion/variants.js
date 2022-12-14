@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**
  * Copyright IBM Corp. 2022, 2022
  *
@@ -5,6 +6,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+=======
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import { DURATIONS, EASINGS } from '../../../global/js/utils/motionConstants';
 
 export const overlayVariants = {

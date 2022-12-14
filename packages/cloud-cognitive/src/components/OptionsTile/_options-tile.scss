@@ -71,15 +71,30 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
   @include focus-outline('outline');
 }
 
+<<<<<<< HEAD
 .#{$block-class}__heading {
   grid-column: 2;
 }
+=======
+  .#{$block-class}__heading {
+    overflow: hidden;
+    grid-column: 2;
+  }
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
 .#{$block-class}__title {
   @include type.type-style('productive-heading-01');
 
+<<<<<<< HEAD
   color: $text-primary;
 }
+=======
+    overflow: hidden;
+    color: $text-01;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
 .#{$block-class}__summary {
   @include type.type-style('helper-text-01');

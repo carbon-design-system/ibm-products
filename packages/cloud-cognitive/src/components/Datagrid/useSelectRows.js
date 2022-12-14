@@ -12,7 +12,10 @@ import { DataTable } from '@carbon/react';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
 import { selectionColumnId } from './common-column-ids';
 import { pkg, carbon } from '../../settings';
+<<<<<<< HEAD
 const { TableSelectRow } = DataTable;
+=======
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
 const blockClass = `${pkg.prefix}--datagrid`;
 

@@ -16,7 +16,11 @@ import update from 'immutability-helper';
 import { pkg } from '../../../../../settings';
 import DraggableElement from '../../DraggableElement';
 import { isColumnVisible } from './common';
+<<<<<<< HEAD
 import cx from 'classnames';
+=======
+import classNames from 'classnames';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -96,7 +100,11 @@ const Columns = ({
           </span>
           <div
             id={`${blockClass}__customize-columns-select-all`}
+<<<<<<< HEAD
             className={cx({
+=======
+            className={classNames({
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
               [`${blockClass}__customize-columns-select-all`]:
                 getVisibleColumnsCount() === 0,
               [`${blockClass}__customize-columns-select-all-selected`]:
@@ -105,7 +113,11 @@ const Columns = ({
             selected={getVisibleColumnsCount() > 0}
           >
             <Checkbox
+<<<<<<< HEAD
               className={`${blockClass}__customize-columns-checkbox-wrapper`}
+=======
+              wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
               checked={getVisibleColumnsCount() === columns.length}
               indeterminate={
                 getVisibleColumnsCount() < columns.length &&
@@ -161,15 +173,20 @@ const Columns = ({
                 selected={isColumnVisible(colDef)}
               >
                 <Checkbox
+<<<<<<< HEAD
                   className={cx(
                     `${blockClass}__customize-columns-checkbox-wrapper`,
                     `${blockClass}__customize-columns-checkbox`
                   )}
+=======
+                  wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
                   checked={isColumnVisible(colDef)}
                   onChange={onSelectColumn.bind(null, colDef)}
                   id={`${blockClass}__customization-column-${colDef.id}`}
                   labelText={colDef.Header.props.title}
                   title={colDef.Header.props.title}
+                  className={`${blockClass}__customize-columns-checkbox`}
                 />
               </DraggableElement>
             ))}

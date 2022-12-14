@@ -42,9 +42,55 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
     justify-content: flex-end;
   }
 
+<<<<<<< HEAD
   .#{$block-class}__actions {
     margin: 0;
   }
+=======
+    .#{$block-class}__actions-header {
+      margin-top: calc(-1 * #{$spacing-02});
+      margin-right: $spacing-03;
+
+      .bx--btn {
+        &:hover {
+          + .#{$block-class}__actions-header-ghost-button.bx--btn--ghost.bx--btn--sm {
+            &::before {
+              opacity: 0;
+            }
+          }
+        }
+      }
+    }
+
+    .#{$block-class}__actions-header-ghost-button.bx--btn--ghost.bx--btn--sm {
+      // stylelint-disable-next-line carbon/layout-token-use
+      padding-right: calc($spacing-01 + $spacing-03);
+      // stylelint-disable-next-line carbon/layout-token-use
+      padding-left: calc($spacing-01 + $spacing-03);
+
+      &::before {
+        position: absolute;
+        left: 0;
+        width: 0.05rem;
+        height: $spacing-06;
+        background-color: $hover-ui;
+        content: '';
+        opacity: 1;
+      }
+
+      &:hover {
+        &::before {
+          opacity: 0;
+        }
+      }
+    }
+
+    .#{$block-class}__actions-header-ghost-button--only.bx--btn--ghost.bx--btn--sm {
+      &::before {
+        opacity: 0;
+      }
+    }
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
   .#{$block-class}__actions-header {
     margin-top: calc(-1 * #{$spacing-02});

@@ -5,27 +5,47 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+<<<<<<< HEAD
 import React from 'react';
 import {
   ChartBubble,
   ChartColumnFloating,
   ChartVennDiagram,
 } from '@carbon/react/icons';
+=======
+import {
+  ChartBubble16,
+  ChartColumnFloating16,
+  ChartVennDiagram16,
+} from '@carbon/icons-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
 export const inlineEditSelectItems = [
   {
     id: 'option-0',
+<<<<<<< HEAD
     icon: (props) => <ChartColumnFloating size={16} {...props} />,
+=======
+    icon: ChartColumnFloating16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     text: 'Column Chart',
   },
   {
     id: 'option-1',
+<<<<<<< HEAD
     icon: (props) => <ChartBubble size={16} {...props} />,
+=======
+    icon: ChartBubble16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     text: 'Bubble Chart',
   },
   {
     id: 'option-2',
+<<<<<<< HEAD
     icon: (props) => <ChartVennDiagram size={16} {...props} />,
+=======
+    icon: ChartVennDiagram16,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     text: 'Venn Diagram',
   },
 ];
@@ -43,7 +63,11 @@ export const getInlineEditColumns = () => {
       inlineEdit: {
         type: 'text',
         // required for including validation, this is used to set the invalid prop internally
+<<<<<<< HEAD
         validator: (n) => n.length > 40,
+=======
+        validator: (n) => n.length >= 40,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
         // These props are passed to the Carbon component used for inline editing
         inputProps: {
           invalidText: 'Invalid text, character count must be less than 40',
@@ -56,7 +80,11 @@ export const getInlineEditColumns = () => {
       inlineEdit: {
         type: 'text',
         // required for including validation, this is used to set the invalid prop internally
+<<<<<<< HEAD
         validator: (n) => n.length > 40,
+=======
+        validator: (n) => n.length >= 40,
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
         // These props are passed to the Carbon component used for inline editing
         inputProps: {
           invalidText: 'Invalid text, character count must be less than 40',
@@ -96,6 +124,10 @@ export const getInlineEditColumns = () => {
           onChange: (newDateObj, cell) => {
             console.log(newDateObj, cell);
           },
+<<<<<<< HEAD
+=======
+          labelText: 'Change active since date',
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
           // optionally pass props here to be passed through to Carbon's DatePickerInput component
           datePickerInputProps: {
             labelText: 'Change active since date',
@@ -111,7 +143,13 @@ export const getInlineEditColumns = () => {
         inputProps: {
           // These props are passed to the Carbon component used for inline editing
           items: inlineEditSelectItems,
+<<<<<<< HEAD
           onChange: (item) => console.log(item),
+=======
+          onChange: (item) => {
+            console.log(item);
+          },
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
         },
       },
     },

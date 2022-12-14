@@ -5,6 +5,7 @@
 * US Government Users Restricted Rights - Use, duplication or disclosure
 * restricted by GSA ADP Schedule Contract with IBM Corp.
 */
+<<<<<<< HEAD
 @use './datagrid';
 @use './useNestedRows';
 @use './useNestedTable';
@@ -19,3 +20,20 @@
 @use './useExpandedRow';
 @use './draggableElement';
 @use './useInlineEdit';
+=======
+@import './datagrid';
+@import './useNestedRows';
+@import './useNestedTable';
+@import './useSortableColumns';
+@import './useColumnRightAlign';
+@import './useColumnCenterAlign';
+@import './useStickyColumn';
+@import './useActionsColumn';
+@import './addons/CustomizeColumnsModal';
+@import './addons/RowSizeDropdown';
+@import './addons/FilterFlyout';
+@import './useSelectAllToggle';
+@import './useExpandedRow';
+@import './draggableElement';
+@import './useInlineEdit';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8

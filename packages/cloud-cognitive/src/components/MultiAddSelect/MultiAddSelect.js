@@ -1,3 +1,10 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { AddSelect } from '../AddSelect';
@@ -65,6 +72,10 @@ MultiAddSelect.propTypes = {
    */
   globalSearchPlaceholder: PropTypes.string,
   /**
+   * the theme for the empty state illustration
+   */
+  illustrationTheme: PropTypes.oneOf(['light', 'dark']),
+  /**
    * title that displays in the sidebar / influencer
    */
   influencerTitle: PropTypes.string,
@@ -85,6 +96,7 @@ MultiAddSelect.propTypes = {
           alt: PropTypes.string,
           icon: PropTypes.func,
           src: PropTypes.string,
+          theme: PropTypes.oneOf(['light', 'dark']),
         }),
         children: PropTypes.object,
         icon: PropTypes.func,
@@ -136,13 +148,9 @@ MultiAddSelect.propTypes = {
    */
   open: PropTypes.bool,
   /**
-   * description for the remove item icon
-   */
-  removeIconDescription: PropTypes.string,
-  /**
    * text that displays when displaying filtered items
    */
-  searchResultsLabel: PropTypes.string,
+  searchResultsTitle: PropTypes.string,
   /**
    * header text
    */

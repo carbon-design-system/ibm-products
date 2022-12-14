@@ -21,9 +21,20 @@ $fadeEnd: translateY(0);
     transform: $fadeStart;
   }
 
+<<<<<<< HEAD
   100% {
     opacity: 1;
     transform: $fadeEnd;
+=======
+  .#{$block-class}__element,
+  .#{$block-class}__col {
+    @media (prefers-reduced-motion: no-preference) {
+      // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
+      animation: $animationProps fade; // stylelint note animation duration declared in $animationProps
+      animation-fill-mode: forwards;
+      opacity: 0;
+    }
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   }
 }
 

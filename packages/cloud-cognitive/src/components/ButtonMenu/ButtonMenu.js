@@ -24,7 +24,7 @@ const componentName = 'ButtonMenu';
 
 // Default values for props
 const defaults = {
-  size: 'lg',
+  size: 'md',
   kind: 'primary',
 };
 
@@ -154,5 +154,5 @@ ButtonMenu.propTypes = {
    * The size of the button for the menu trigger. The values can be any valid
    * value for the carbon Button component 'size' prop.
    */
-  size: Button.propTypes.size,
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };

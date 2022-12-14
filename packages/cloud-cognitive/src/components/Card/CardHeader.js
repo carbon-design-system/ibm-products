@@ -9,7 +9,11 @@ import React from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
+<<<<<<< HEAD
 import { Button } from '@carbon/react';
+=======
+import { Button } from 'carbon-components-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 const componentName = 'CardHeader';
 
 const defaults = {

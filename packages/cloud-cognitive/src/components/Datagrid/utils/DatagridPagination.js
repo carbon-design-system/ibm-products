@@ -7,7 +7,11 @@
  */
 
 import React from 'react';
+<<<<<<< HEAD
 import { Pagination } from '@carbon/react';
+=======
+import { Pagination } from 'carbon-components-react';
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
 export const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
   const updatePagination = ({ page, pageSize }) => {

@@ -49,6 +49,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
 .#{$block-class}__container {
   @include theme($g100);
 
+<<<<<<< HEAD
   position: fixed;
   z-index: 2;
   top: $spacing-09;
@@ -61,6 +62,20 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
   background-color: $background;
   color: $text-primary;
   transition: transform $duration-fast-02 motion(standard);
+=======
+    position: fixed;
+    z-index: 2;
+    top: $spacing-09;
+    right: 0;
+    overflow: auto;
+    min-width: 22.75rem;
+    max-width: 22.75rem;
+    min-height: 38.5rem;
+    max-height: 38.5rem;
+    background-color: $ui-background;
+    color: $text-01;
+    transition: transform $duration--fast-02 carbon--motion(standard);
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
   .#{$block-class}__header-container {
     position: sticky;
@@ -133,6 +148,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
       color: $text-on-color;
       @include font-weight('semibold');
     }
+<<<<<<< HEAD
     .#{$block-class}__notifications-link {
       @include type.type-style('label-01');
     }
@@ -141,6 +157,25 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
       margin-right: $spacing-03;
       &.#{$block-class}__notification-status-icon-error {
         fill: $support-error;
+=======
+    .#{$block-class}__notification {
+      position: relative;
+      display: flex;
+      width: 100%;
+      min-height: 6.25rem;
+      align-items: flex-start;
+      padding: $spacing-05;
+      border: 0;
+      background-color: $ui-background;
+      cursor: pointer;
+      text-align: left;
+      transition: background-color $duration--moderate-02
+        carbon--motion(standard);
+      .#{$block-class}__notification-title {
+        margin-bottom: $spacing-02;
+        color: $text-04;
+        @include carbon--font-weight('regular');
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       }
       &.#{$block-class}__notification-status-icon-success {
         fill: $support-success;
@@ -208,7 +243,27 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     .#{$block-class}__dismiss-single-button {
       position: absolute;
       top: 0;
+<<<<<<< HEAD
       right: 0;
+=======
+      width: calc(100% - (2 * #{$spacing-05}));
+      height: 1px;
+      margin: 0 auto;
+      background-color: $ui-02;
+      content: '';
+      transition: background-color $duration--moderate-02
+        carbon--motion(standard);
+    }
+    .#{$block-class}__notification-today:hover
+      + .#{$block-class}__notification-today:not(:first-of-type):before,
+    .#{$block-class}__notification-yesterday:hover
+      + .#{$block-class}__notification-yesterday:not(:first-of-type):before,
+    .#{$block-class}__notification-previous:hover
+      + .#{$block-class}__notification-previous:not(:first-of-type):before {
+      background-color: transparent;
+    }
+    .#{$block-class}__main-section-empty.#{$block-class}__main-section {
+>>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       display: flex;
       min-width: 2rem;
       align-items: center;

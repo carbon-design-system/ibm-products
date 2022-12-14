@@ -177,7 +177,7 @@ import { init } from './test-common';
       exampleImports.push(`${skipImport} `);
     }
     exampleImports.push(
-      `import { Example as ${sanitizedDir}Example } from './${dir}/src/Example/Example'`
+      `import { Example as ${sanitizedDir}Example } from './${dir}/src/Example/Example';`
     );
     if (ignoreExamples) {
       exampleImports.push(`*/`);
@@ -194,10 +194,11 @@ import { init } from './test-common';
   });
 
   const preTest = `
+
 describe('All examples', () => {
   init(beforeEach, afterEach);
 
-  `;
+`;
 
   const postTest = `
 });
@@ -206,7 +207,7 @@ describe('All examples', () => {
   fs.writeFileSync(testPath, header);
   fs.appendFileSync(testPath, exampleImports.join('\n'));
   fs.appendFileSync(testPath, preTest);
-  fs.appendFileSync(testPath, tests.join('\n'));
+  fs.appendFileSync(testPath, tests.join('\n\n'));
   fs.appendFileSync(testPath, postTest);
 };
 

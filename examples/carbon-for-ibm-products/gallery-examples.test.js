@@ -186,7 +186,7 @@ describe('All examples', () => {
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
-  it.skip('WebTerminal renders', () => {
+  it('WebTerminal renders', () => {
     render(<WebTerminalExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();

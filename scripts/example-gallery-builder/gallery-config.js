@@ -147,7 +147,7 @@ const writeGalleryTests = (testPath, directories) => {
   const ingoreExample = [
     'Carbon-v11-template', // non standard test
   ];
-  const skipExamples = ['WebTerminal'];
+  const skipExamples = [];
 
   const header = `/**
  * Copyright IBM Corp. 2020, 2021

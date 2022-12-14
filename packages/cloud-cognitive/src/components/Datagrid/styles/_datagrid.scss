@@ -542,6 +542,23 @@
   justify-content: center;
 }
 
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 7px;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar-track {
+  background: $layer;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+.#{$block-class}__virtualScrollContainer {
+  width: 100%;
+}
+
 .#{c4p-settings.$carbon-prefix}--body--with-modal-open
   .#{$block-class}__grid-container {
   overflow: hidden;

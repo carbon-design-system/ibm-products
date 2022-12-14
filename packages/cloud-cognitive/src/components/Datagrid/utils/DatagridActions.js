@@ -93,16 +93,6 @@ export const DatagridActions = (datagridState) => {
                 onClick={downloadCsv}
               />
             </div>
-            <div style={style}>
-              <Button
-                kind="ghost"
-                hasIconOnly
-                tooltipPosition="bottom"
-                renderIcon={Filter}
-                iconDescription={'Left panel'}
-                onClick={leftPanelClick}
-              />
-            </div>
             {renderFilterFlyout()}
             <RowSizeDropdown {...rowSizeDropdownProps} />
             <div style={style} className={`${blockClass}__toolbar-divider`}>
@@ -133,66 +123,56 @@ export const DatagridActions = (datagridState) => {
         )}
       </TableToolbarContent>
     ) : !mobileToolbar ? (
-      <>
-        <Button
-          kind="ghost"
-          hasIconOnly
-          tooltipPosition="bottom"
-          renderIcon={Filter}
-          iconDescription={'Left panel'}
-          onClick={leftPanelClick}
+      <TableToolbarContent>
+        <TableToolbarSearch
+          size="xl"
+          id="columnSearch"
+          persistent
+          placeHolderText={searchForAColumn}
+          onChange={(e) => setGlobalFilter(e.target.value)}
         />
-        <TableToolbarContent>
-          <TableToolbarSearch
-            size="xl"
-            id="columnSearch"
-            persistent
-            placeHolderText={searchForAColumn}
-            onChange={(e) => setGlobalFilter(e.target.value)}
+        {renderFilterFlyout()}
+        <RowSizeDropdown {...rowSizeDropdownProps} />
+        <div style={style}>
+          <Button
+            kind="ghost"
+            hasIconOnly
+            tooltipPosition="bottom"
+            renderIcon={Restart}
+            iconDescription={'Refresh'}
+            onClick={refreshColumns}
           />
-          {renderFilterFlyout()}
-          <RowSizeDropdown {...rowSizeDropdownProps} />
+        </div>
+        <div style={style}>
+          <Button
+            kind="ghost"
+            hasIconOnly
+            tooltipPosition="bottom"
+            renderIcon={Download}
+            iconDescription={'Download CSV'}
+            onClick={downloadCsv}
+          />
+        </div>
+        {CustomizeColumnsButton && (
           <div style={style}>
-            <Button
-              kind="ghost"
-              hasIconOnly
-              tooltipPosition="bottom"
-              renderIcon={Restart}
-              iconDescription={'Refresh'}
-              onClick={refreshColumns}
-            />
+            <CustomizeColumnsButton />
           </div>
-          <div style={style}>
-            <Button
-              kind="ghost"
-              hasIconOnly
-              tooltipPosition="bottom"
-              renderIcon={Download}
-              iconDescription={'Download CSV'}
-              onClick={downloadCsv}
-            />
-          </div>
-          {CustomizeColumnsButton && (
-            <div style={style}>
-              <CustomizeColumnsButton />
-            </div>
-          )}
-          <ButtonMenu label="Primary button" renderIcon={Add}>
-            <ButtonMenuItem
-              itemText="Option 1"
-              onClick={action(`Click on ButtonMenu Option 1`)}
-            />
-            <ButtonMenuItem
-              itemText="Option 2"
-              onClick={action(`Click on ButtonMenu Option 2`)}
-            />
-            <ButtonMenuItem
-              itemText="Option 3"
-              onClick={action(`Click on ButtonMenu Option 3`)}
-            />
-          </ButtonMenu>
-        </TableToolbarContent>
-      </>
+        )}
+        <ButtonMenu label="Primary button" renderIcon={Add}>
+          <ButtonMenuItem
+            itemText="Option 1"
+            onClick={action(`Click on ButtonMenu Option 1`)}
+          />
+          <ButtonMenuItem
+            itemText="Option 2"
+            onClick={action(`Click on ButtonMenu Option 2`)}
+          />
+          <ButtonMenuItem
+            itemText="Option 3"
+            onClick={action(`Click on ButtonMenu Option 3`)}
+          />
+        </ButtonMenu>
+      </TableToolbarContent>
     ) : (
       <TableToolbarContent>
         <TableToolbarSearch

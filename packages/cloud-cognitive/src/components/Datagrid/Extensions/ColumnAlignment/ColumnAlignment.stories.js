@@ -25,6 +25,7 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
+import { StatusIcon } from '../../../StatusIcon';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ColumnAlignment`,
@@ -67,10 +68,31 @@ const defaultHeader = [
     rightAlignedColumn: true,
   },
   {
-    Header: 'Status',
-    accessor: 'status_icon',
+    Header: 'Password strength',
+    accessor: 'passwordStrength',
     width: 100,
     centerAlignedColumn: true,
+    Cell: ({ cell: { value } }) => {
+      const iconProps = {
+        size: 'sm',
+        theme: 'light',
+        kind: value,
+        iconDescription: value,
+      };
+
+      return (
+        <span
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <StatusIcon {...iconProps} />
+          {iconProps.iconDescription}
+        </span>
+      );
+    },
   },
   {
     Header: 'Someone 1',

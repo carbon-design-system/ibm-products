@@ -58,7 +58,7 @@ describe(name, () => {
     is a potential violation. We can remove the skip once we fix our accessibility-checker
     issue. https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2154
   */
-  it.skip('has no accessibility violations', async () => {
+  xit('has no accessibility violations', async () => {
     const { container } = render(
       <MockWebTerminal isInitiallyOpen>Body content</MockWebTerminal>
     );

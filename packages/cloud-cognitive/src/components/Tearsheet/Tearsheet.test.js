@@ -95,7 +95,7 @@ const commonTests = (Ts, name, props, testActions) => {
     );
   });
 
-  it.skip('has no accessibility violations', async () => {
+  xit('has no accessibility violations', async () => {
     const { container } = render(
       <Ts {...{ ...props, closeIconDescription, label, title }} />
     );

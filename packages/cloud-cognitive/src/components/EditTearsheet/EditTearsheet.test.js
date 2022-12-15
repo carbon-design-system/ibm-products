@@ -140,7 +140,7 @@ describe(componentName, () => {
     expect(Array(...editTearsheetForms)).toStrictEqual([]);
   });
 
-  it('has no accessibility violations', async () => {
+  xit('has no accessibility violations', async () => {
     const { container } = renderEditTearsheet({ ...defaultProps });
     await expect(() => container.toBeAccessible());
     await expect(() => container.toHaveNoAxeViolations());

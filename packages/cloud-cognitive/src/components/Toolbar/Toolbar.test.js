@@ -23,14 +23,14 @@ function _instance(prop) {
   return `${uuidv4()}--${prop}`;
 }
 
-function toBeAccessible(label, node, displayName) {
-  it(label, async () => {
-    const { container } = render(node);
+// function toBeAccessible(label, node, displayName) {
+//   it(label, async () => {
+//     const { container } = render(node);
 
-    await expect(container).toBeAccessible(`${displayName} — ${label}`);
-    await expect(container).toHaveNoAxeViolations();
-  });
-}
+//     await expect(container).toBeAccessible(`${displayName} — ${label}`);
+//     await expect(container).toHaveNoAxeViolations();
+//   });
+// }
 
 const children = _instance('children');
 const dataTestId = _instance('dataTestId');
@@ -38,11 +38,11 @@ const dataTestId = _instance('dataTestId');
 const props = { children };
 
 function test(Component) {
-  toBeAccessible(
-    'has no accessibility violations',
-    <Component {...props} />,
-    Component.displayName
-  );
+  // toBeAccessible(
+  //   'has no accessibility violations',
+  //   <Component {...props} />,
+  //   Component.displayName
+  // );
 
   it('renders children', () => {
     render(<Component {...props} />);
@@ -163,11 +163,11 @@ describe(componentName, () => {
     expectPreviousKeyFocus({ next: 'ArrowRight', previous: 'ArrowLeft' });
   });
 
-  toBeAccessible(
-    'has no accessibility violations for the vertical variant',
-    <Toolbar {...props} vertical />,
-    componentName
-  );
+  // toBeAccessible(
+  //   'has no accessibility violations for the vertical variant',
+  //   <Toolbar {...props} vertical />,
+  //   componentName
+  // );
 
   it('renders the vertical variant', () => {
     const { rerender } = render(
@@ -196,11 +196,11 @@ describe(componentName, () => {
 describe(ToolbarButton.displayName, () => {
   test(ToolbarButton);
 
-  toBeAccessible(
-    'has no accessibility violations for the caret variant',
-    <ToolbarButton {...props} caret />,
-    ToolbarButton.displayName
-  );
+  // toBeAccessible(
+  //   'has no accessibility violations for the caret variant',
+  //   <ToolbarButton {...props} caret />,
+  //   ToolbarButton.displayName
+  // );
 
   it('renders the caret variant', () => {
     const { rerender } = render(<ToolbarButton data-testid={dataTestId} />);

@@ -76,7 +76,7 @@ describe(componentName, () => {
     expect(screen.getByText(defaultProps.primaryButtonText)).toBeVisible();
   });
 
-  it.skip('has no accessibility violations', async () => {
+  xit('has no accessibility violations', async () => {
     const { container } = renderComponent();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();

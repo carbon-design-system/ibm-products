@@ -43,7 +43,7 @@ describe(componentName, () => {
     expect(container.firstChild).toHaveClass(blockClass);
   });
 
-  it('has no accessibility violations', async () => {
+  xit('has no accessibility violations', async () => {
     const { container } = render(
       <InlineEditV1
         {...{
@@ -327,7 +327,7 @@ describe(componentName, () => {
     expect(component).toHaveClass(`${blockClass}--editing`);
   });
 
-  it.skip('Handles clipboard data', () => {
+  xit('Handles clipboard data', () => {
     const startingValue = value;
     const clipboardString = 'AString';
 

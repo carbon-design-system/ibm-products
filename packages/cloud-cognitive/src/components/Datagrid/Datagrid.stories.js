@@ -30,7 +30,7 @@ import {
 } from '.';
 
 import mdx from './Datagrid.mdx';
-import { LeftPanelStory, SelectAllWitHToggle } from './Datagrid.stories';
+import { LeftPanelStory, SelectAllWitHToggle } from './Datagrid.stories/index';
 
 import { pkg } from '../../settings';
 
@@ -147,6 +147,16 @@ export const EmptyState = () => {
   const emptyStateDescription = 'Description explaining why the table is empty';
   const emptyStateSize = 'lg';
   const illustrationTheme = 'light';
+  const emptyStateAction = {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add16,
+    iconDescription: 'Add icon',
+  };
+  const emptyStateLink = {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  };
 
   const datagridState = useDatagrid({
     columns,
@@ -155,6 +165,8 @@ export const EmptyState = () => {
     emptyStateDescription,
     emptyStateSize,
     illustrationTheme,
+    emptyStateAction,
+    emptyStateLink,
     DatagridActions,
     DatagridBatchActions,
     DatagridPagination,
@@ -506,7 +518,6 @@ export const Filtering = () => {
         primaryActionLabel: 'Apply',
         secondaryActionLabel: 'Cancel',
         flyoutIconDescription: 'Open filters',
-        shouldClickOutsideToClose: false,
         onFlyoutOpen: action('onFlyoutOpen'),
         onFlyoutClose: action('onFlyoutClose'),
         filters,

@@ -3477,7 +3477,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: 0;
   right: 0;
   display: flex;
-  width: var(--c4p--inline-edit--toolbar-width);
   height: 100%;
   justify-content: space-between;
   cursor: text;
@@ -3500,8 +3499,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel {
   display: inline-flex;
-  width: var(--c4p--inline-edit--size);
-  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);
@@ -3565,8 +3562,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit {
   display: inline-flex;
-  width: var(--c4p--inline-edit--size);
-  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);
@@ -3594,8 +3589,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--inline-edit .c4p--inline-edit__validation-icon {
   display: inline-flex;
-  width: var(--c4p--inline-edit--size);
-  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);

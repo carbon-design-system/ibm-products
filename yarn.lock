@@ -12710,9 +12710,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-carbon@npm:2.17.0":
-  version: 2.17.0
-  resolution: "eslint-config-carbon@npm:2.17.0"
+"eslint-config-carbon@npm:2.18.0":
+  version: 2.18.0
+  resolution: "eslint-config-carbon@npm:2.18.0"
   dependencies:
     babel-eslint: ^10.1.0
     eslint-config-airbnb: ^19.0.0
@@ -12730,7 +12730,7 @@ __metadata:
     eslint-restricted-globals: ^0.2.0
   peerDependencies:
     eslint: ^6.0.0 || ^7.0.0
-  checksum: 78cf97cf5cff1cac010124de2dbd37cbf96d4968c402a3af36f179b502deba6886870c8765b1c787befea20610edae91de136c4719c222d235abed4e0150c036
+  checksum: eb8c8aaa27db9578372835c9f672da8bb25e4a222e10a7af3acf7cbf938baa1d0a67db9761de19737ff6ca01cc5957baee06dc389fe1f4af068c3bec4c36b15e
   languageName: node
   linkType: hard
 
@@ -15527,7 +15527,7 @@ __metadata:
     copyfiles: ^2.4.1
     cspell: ^6.14.2
     eslint: ^8.27.0
-    eslint-config-carbon: 2.17.0
+    eslint-config-carbon: 2.18.0
     husky: ^8.0.2
     jest: ^29.3.1
     json: ^11.0.0
@@ -15544,7 +15544,7 @@ __metadata:
     rimraf: ^3.0.2
     stylelint: ^14.15.0
     stylelint-config-ibm-products: "*"
-    stylelint-plugin-carbon-tokens: 2.1.0
+    stylelint-plugin-carbon-tokens: 2.2.0
     webpack: ^5.75.0
   languageName: unknown
   linkType: soft
@@ -25507,7 +25507,7 @@ __metadata:
     stylelint-config-standard: ^29.0.0
     stylelint-config-standard-scss: ^6.1.0
     stylelint-no-unsupported-browser-features: ^6.0.1
-    stylelint-plugin-carbon-tokens: 2.1.0
+    stylelint-plugin-carbon-tokens: 2.2.0
   peerDependencies:
     stylelint: ^14.15.0
   languageName: unknown
@@ -25696,9 +25696,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-plugin-carbon-tokens@npm:2.1.0":
-  version: 2.1.0
-  resolution: "stylelint-plugin-carbon-tokens@npm:2.1.0"
+"stylelint-plugin-carbon-tokens@npm:2.2.0":
+  version: 2.2.0
+  resolution: "stylelint-plugin-carbon-tokens@npm:2.2.0"
   dependencies:
     lodash: ^4.17.21
     postcss: ^8.4.16
@@ -25710,7 +25710,7 @@ __metadata:
     "@carbon/motion": ">=10 <= 11"
     "@carbon/themes": ">=10 <= 11"
     "@carbon/type": ">=10 <= 11"
-  checksum: 11e458a14eb82eec77249f291e8a776a8a0a3c4621957f4e9308ae9d9ba439e407cb7c97f6a47a82686e23aa1e5d63499c7109050692f7f748643fcd9fbb174c
+  checksum: f9f5829f3d614fda177b2df33fbe618316e9934fcbedd39c16cf77a38629e757078ee738a12d2cf843e2afc96f1031e88d4756ae6fb4f0d734258bb2c20ec455
   languageName: node
   linkType: hard
 

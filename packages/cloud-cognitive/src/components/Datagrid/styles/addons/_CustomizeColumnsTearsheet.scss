@@ -1,0 +1,100 @@
+/*
+* Licensed Materials - Property of IBM
+* 5724-Q36
+* (c) Copyright IBM Corp. 2021
+* US Government Users Restricted Rights - Use, duplication or disclosure
+* restricted by GSA ADP Schedule Contract with IBM Corp.
+*/
+
+@import '../variables';
+
+.#{$block-class}__customize-columns-tearsheet {
+  .#{$carbon-prefix}--tearsheet-content {
+    position: inherit;
+    display: flex;
+    flex-flow: column;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.#{$block-class}__customize-columns-checkbox-wrapper {
+  margin-bottom: 0;
+}
+.#{$block-class}__customize-columns-checkbox-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-left: 0.5rem;
+}
+
+.#{$block-class}__customize-columns-tearsheet--actions {
+  display: flex;
+  height: $spacing-09;
+  flex-flow: row;
+  background-color: $field-02;
+
+  .bx--search-magnifier svg {
+    left: 1rem;
+  }
+
+  .bx--search-close {
+    height: 100% !important; 
+  }
+}
+
+.#{$block-class}__customize-columns-tearsheet--actions input[role='searchbox'] {
+  height: $spacing-09;
+  padding-left: $spacing-08;
+  border-bottom: none;
+}
+
+.#{$block-class}__customize-columns-tearsheet--actions > button {
+  margin-left: $spacing-05;
+}
+
+.#{$block-class}__customize-columns-instructions {
+  padding-left: $spacing-05;
+  margin-bottom: $spacing-06;
+
+  @include carbon--type-style('body-long-01');
+
+  color: $text-01;
+}
+
+.#{$block-class}__customize-columns-column-list {
+  position: relative; // needed for the react-dnd, otherwise the drag preview will not work correctly
+}
+
+.#{$block-class}__customize-columns-select-all {
+  display: flex;
+  height: $spacing-09;
+  padding-left: $spacing-08;
+  border-bottom: 1px solid $layer-active;
+  background-color: $layer;
+
+  label {
+    font-weight: 600;
+  }
+}
+
+.#{$block-class}__customize-columns-select-all:hover {
+  background-color: $layer-hover;
+}
+.#{$block-class}__customize-columns-select-all-selected {
+  display: flex;
+  height: $spacing-09;
+  padding-left: $spacing-08;
+  border-bottom: 1px solid $layer-active;
+  background-color: $layer-selected;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+
+  label {
+    font-weight: 600;
+  }
+}
+
+.#{$block-class}__customize-columns-select-all-selected:hover {
+  background-color: $hover-selected-ui;
+}

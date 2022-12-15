@@ -8,12 +8,12 @@
 // @flow
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'carbon-components-react';
 import { isColumnVisible } from './common';
 import Columns from './Columns';
 import Actions from './Actions';
 import { pkg } from '../../../../../settings';
 import { useCallback } from 'react';
+import { TearsheetNarrow } from '../../../../Tearsheet';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -99,24 +99,17 @@ const CustomizeColumnsModal = ({
     setVisibleColumnsCount(getVisibleColumnsCount());
     setTotalColumns(columnObjects.length);
   }, [getVisibleColumnsCount, columnObjects.length]);
-
   return (
-    <Modal
-      className={`${blockClass}__customize-columns-modal`}
+    <TearsheetNarrow
+      className={`${blockClass}__customize-columns-tearsheet`}
       open={isOpen}
-      modalHeading={`${customizeModalHeadingLabel} (${visibleColumnsCount}/${totalColumns})`}
-      primaryButtonText={primaryButtonTextLabel}
-      secondaryButtonText={secondaryButtonTextLabel}
-      selectorPrimaryFocus={`.${blockClass}__customize-columns-column-list--focus`}
-      primaryButtonDisabled={!isDirty}
-      onRequestClose={onRequestClose}
-      onRequestSubmit={onRequestSubmit}
-      size="sm"
-      hasForm
+      title={`${customizeModalHeadingLabel} (${visibleColumnsCount}/${totalColumns})`}
+      description={instructionsLabel}
+      actions={[
+        { kind: 'secondary', label: secondaryButtonTextLabel, onClick: onRequestClose },
+        { kind: 'primary', label: primaryButtonTextLabel, onClick: onRequestSubmit },
+      ]}
     >
-      <div className={`${blockClass}__customize-columns-instructions`}>
-        {instructionsLabel}
-      </div>
       <Actions
         columns={columnObjects}
         originalColumnDefinitions={originalColumnDefinitions}
@@ -146,7 +139,7 @@ const CustomizeColumnsModal = ({
           selectAllLabel={selectAllLabel}
         />
       )}
-    </Modal>
+    </TearsheetNarrow>
   );
 };
 

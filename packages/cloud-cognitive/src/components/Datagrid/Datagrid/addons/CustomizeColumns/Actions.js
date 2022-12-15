@@ -16,7 +16,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const Actions = ({ searchText, setSearchText, findColumnPlaceholderLabel }) => {
   return (
-    <div className={`${blockClass}__customize-columns-modal--actions`}>
+    <div className={`${blockClass}__customize-columns-tearsheet--actions`}>
       <Search
         placeholder={findColumnPlaceholderLabel}
         value={searchText}

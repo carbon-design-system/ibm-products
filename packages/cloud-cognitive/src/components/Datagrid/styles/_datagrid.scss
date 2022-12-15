@@ -485,6 +485,7 @@
 .#{$block-class}
   .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)::before {
   position: absolute;
+  top: 0;
   left: 0;
   width: $spacing-02;
   height: 100%;
@@ -539,6 +540,23 @@
   width: $spacing-09;
   height: $spacing-09;
   justify-content: center;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 7px;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar-track {
+  background: $layer;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+.#{$block-class}__virtualScrollContainer {
+  width: 100%;
 }
 
 .#{c4p-settings.$carbon-prefix}--body--with-modal-open

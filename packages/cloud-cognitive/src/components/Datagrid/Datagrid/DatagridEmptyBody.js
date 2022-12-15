@@ -23,6 +23,8 @@ const DatagridEmptyBody = (datagridState) => {
     emptyStateSize,
     emptyStateType = 'noData',
     illustrationTheme,
+    emptyStateAction,
+    emptyStateLink,
   } = datagridState;
 
   return (
@@ -38,6 +40,8 @@ const DatagridEmptyBody = (datagridState) => {
               size={emptyStateSize}
               title={emptyStateTitle}
               subtitle={emptyStateDescription}
+              action={emptyStateAction}
+              link={emptyStateLink}
             />
           )}
           {emptyStateType === 'noData' && (
@@ -46,6 +50,8 @@ const DatagridEmptyBody = (datagridState) => {
               size={emptyStateSize}
               title={emptyStateTitle}
               subtitle={emptyStateDescription}
+              action={emptyStateAction}
+              link={emptyStateLink}
             />
           )}
         </TableCell>

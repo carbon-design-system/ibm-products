@@ -179,10 +179,14 @@ export const InitialLoad = () => {
     fetchData();
   }, []);
 
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription = 'Description explaining why the table is empty';
   const datagridState = useDatagrid({
     columns,
     data,
     isFetching,
+    emptyStateTitle,
+    emptyStateDescription,
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;

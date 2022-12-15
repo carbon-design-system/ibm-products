@@ -161,8 +161,6 @@ const DatagridToolbar = (datagridState) => {
     datagridState;
   const { filterTags, EventEmitter } = useContext(FilterContext);
 
-  console.log({ filters: state.filters });
-
   const renderFilterSummary = () =>
     state.filters.length > 0 && (
       <FilterSummary

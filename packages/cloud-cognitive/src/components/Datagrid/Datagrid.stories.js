@@ -30,7 +30,7 @@ import {
 } from '.';
 
 import mdx from './Datagrid.mdx';
-import { LeftPanelStory, SelectAllWitHToggle } from './Datagrid.stories';
+import { LeftPanelStory, SelectAllWitHToggle } from './Datagrid.stories/index';
 
 import { pkg } from '../../settings';
 
@@ -518,7 +518,6 @@ export const Filtering = () => {
         primaryActionLabel: 'Apply',
         secondaryActionLabel: 'Cancel',
         flyoutIconDescription: 'Open filters',
-        shouldClickOutsideToClose: false,
         onFlyoutOpen: action('onFlyoutOpen'),
         onFlyoutClose: action('onFlyoutClose'),
         filters,

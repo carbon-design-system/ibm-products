@@ -17,13 +17,7 @@ import {
   ModalFooter,
   Dropdown,
 } from '@carbon/react';
-import {
-  Download,
-  Filter,
-  Add,
-  Restart,
-  ChevronDown,
-} from '@carbon/react/icons';
+import { Download, Add, Restart, ChevronDown } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
@@ -49,9 +43,7 @@ export const DatagridActions = (datagridState) => {
   const refreshColumns = () => {
     alert('refreshing...');
   };
-  const leftPanelClick = () => {
-    alert('open/close left panel...');
-  };
+
   const searchForAColumn = 'Search';
   const isNothingSelected = selectedFlatRows.length === 0;
   const style = {

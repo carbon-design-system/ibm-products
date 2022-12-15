@@ -23,7 +23,6 @@ import {
   useSelectAllWithToggle,
   useStickyColumn,
   useActionsColumn,
-  useFiltering,
 } from '.';
 
 import { SelectAllWithToggle, LeftPanelStory } from './Datagrid.stories/index';

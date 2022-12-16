@@ -12,6 +12,7 @@ const useParentDimensions = (hooks) => {
   const headRef = useRef();
   const innerListRef = useRef();
   const listRef = useRef();
+  const gridRef = useRef();
   const [tableHeight, setTableHeight] = useState();
 
   const useInstance = (instance) => {
@@ -70,6 +71,7 @@ const useParentDimensions = (hooks) => {
       innerListRef,
       handleResize,
       listRef,
+      gridRef,
     });
   };
   hooks.useInstance.push(useInstance);

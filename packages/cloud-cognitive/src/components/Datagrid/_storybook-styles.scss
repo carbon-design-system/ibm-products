@@ -105,10 +105,12 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 
 .storybook-#{$block-class}__validation-code-snippet {
   @include type.font-family($name: mono);
-  @include type.type-style('body-compact-01');
+  @include type.type-style('code-01');
 
-  padding: 0 $spacing-02;
+  display: inline-block;
+  padding: 0 $spacing-03;
   margin-right: $spacing-03;
   background-color: $field-01;
+  border: 2px solid transparent;
   border-radius: $spacing-02;
 }

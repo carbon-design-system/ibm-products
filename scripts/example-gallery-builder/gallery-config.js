@@ -145,9 +145,10 @@ const writeGalleryConfig = (galleryConfigPath, config) => {
 const writeGalleryTests = (testPath, directories) => {
   // TODO: remove these workarounds for non-standard examples
   const ingoreExample = [
-    'Carbon-v11-template', // non standard test
+    //  example folder which should not be imported
+    'Carbon-v11-template', // Carbon v11 not supported in v1 repo
   ];
-  const skipExamples = [];
+  const skipExamples = []; // example folder names to be skipped
 
   const header = `/**
  * Copyright IBM Corp. 2020, 2021

@@ -12710,9 +12710,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-carbon@npm:2.18.0":
-  version: 2.18.0
-  resolution: "eslint-config-carbon@npm:2.18.0"
+"eslint-config-carbon@npm:2.17.0":
+  version: 2.17.0
+  resolution: "eslint-config-carbon@npm:2.17.0"
   dependencies:
     babel-eslint: ^10.1.0
     eslint-config-airbnb: ^19.0.0
@@ -12730,7 +12730,7 @@ __metadata:
     eslint-restricted-globals: ^0.2.0
   peerDependencies:
     eslint: ^6.0.0 || ^7.0.0
-  checksum: eb8c8aaa27db9578372835c9f672da8bb25e4a222e10a7af3acf7cbf938baa1d0a67db9761de19737ff6ca01cc5957baee06dc389fe1f4af068c3bec4c36b15e
+  checksum: 78cf97cf5cff1cac010124de2dbd37cbf96d4968c402a3af36f179b502deba6886870c8765b1c787befea20610edae91de136c4719c222d235abed4e0150c036
   languageName: node
   linkType: hard
 
@@ -15527,7 +15527,7 @@ __metadata:
     copyfiles: ^2.4.1
     cspell: ^6.14.2
     eslint: ^8.27.0
-    eslint-config-carbon: 2.18.0
+    eslint-config-carbon: 2.17.0
     husky: ^8.0.2
     jest: ^29.3.1
     json: ^11.0.0

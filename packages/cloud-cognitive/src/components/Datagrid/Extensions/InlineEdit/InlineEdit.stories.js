@@ -14,11 +14,15 @@ import {
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
 import { Datagrid, useDatagrid, useInlineEdit } from '../../index';
+import { pkg } from '../../../../settings';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { getInlineEditColumns } from '../../utils/getInlineEditColumns';
+
+const blockClass = `${pkg.prefix}--datagrid`;
+const storybookBlockClass = `storybook-${blockClass}__validation-code-snippet`;
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/InlineEdit`,
@@ -90,7 +94,18 @@ const InlineEditUsage = ({ ...args }) => {
     useInlineEdit
   );
 
-  return <Datagrid datagridState={datagridState} />;
+  return (
+    <div>
+      <Datagrid datagridState={datagridState} />
+      <p>
+        The following inline edit columns incorporate validation:
+        <code className={storybookBlockClass}>{'first_name'}</code>
+        <code className={storybookBlockClass}>{'last_name'}</code>
+        <code className={storybookBlockClass}>{'age'}</code>
+        <code className={storybookBlockClass}>{'visits'}</code>
+      </p>
+    </div>
+  );
 };
 
 const InlineEditTemplateWrapper = ({ ...args }) => {

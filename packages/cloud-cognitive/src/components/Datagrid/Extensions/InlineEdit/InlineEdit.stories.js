@@ -102,24 +102,28 @@ const InlineEditUsage = ({ ...args }) => {
         <CodeSnippet
           className={`${storyBlockClass}__validation-code-snippet`}
           type="inline"
+          hideCopyButton
         >
           first_name
         </CodeSnippet>
         <CodeSnippet
           className={`${storyBlockClass}__validation-code-snippet`}
           type="inline"
+          hideCopyButton
         >
           last_name
         </CodeSnippet>
         <CodeSnippet
           className={`${storyBlockClass}__validation-code-snippet`}
           type="inline"
+          hideCopyButton
         >
           age
         </CodeSnippet>
         <CodeSnippet
           className={`${storyBlockClass}__validation-code-snippet`}
           type="inline"
+          hideCopyButton
         >
           visits
         </CodeSnippet>

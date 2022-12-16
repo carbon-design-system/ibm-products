@@ -104,4 +104,7 @@ $block-class: #{$pkg-prefix}--datagrid;
 
 .storybook-#{$block-class}__validation-code-snippet {
   margin-right: $spacing-03;
+  // prevent code-snippet from inheriting font-size
+  // stylelint-disable-next-line carbon/type-token-use
+  font-size: 0;
 }

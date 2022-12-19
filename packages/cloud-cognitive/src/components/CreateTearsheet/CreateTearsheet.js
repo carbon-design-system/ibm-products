@@ -46,7 +46,7 @@ export const StepNumberContext = createContext(-1);
 const defaults = {
   verticalPosition: 'normal',
   influencerWidth: 'narrow',
-  skipFocusElements: [],
+  firstFocusElement: '',
 };
 
 export let CreateTearsheet = forwardRef(
@@ -66,7 +66,7 @@ export let CreateTearsheet = forwardRef(
       onClose,
       onRequestSubmit,
       open,
-      skipFocusElements = defaults.skipFocusElements,
+      firstFocusElement = defaults.firstFocusElement,
       submitButtonText,
       title,
       verticalPosition = defaults.verticalPosition,
@@ -114,7 +114,7 @@ export let CreateTearsheet = forwardRef(
       currentStep,
       blockClass,
       onMount,
-      skipFocusElements,
+      firstFocusElement,
     });
     useValidCreateStepCount(stepData.length, componentName);
     useResetCreateComponent({
@@ -256,6 +256,11 @@ CreateTearsheet.propTypes = {
   description: PropTypes.node,
 
   /**
+   * Specifies elements to focus on first on render.
+   */
+  firstFocusElement: PropTypes.string,
+
+  /**
    * Used to set the size of the influencer
    */
   influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
@@ -296,11 +301,6 @@ CreateTearsheet.propTypes = {
    * Specifies whether the tearsheet is currently open.
    */
   open: PropTypes.bool,
-
-  /**
-   * Specifies elements to skip over for auto focus.
-   */
-  skipFocusElements: PropTypes.object,
 
   /**
    * The submit button text

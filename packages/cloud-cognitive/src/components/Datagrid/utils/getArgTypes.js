@@ -35,6 +35,7 @@ export const ARG_TYPES = {
     type: { name: 'string', required: false },
   },
   emptyStateSize: { control: 'select', options: ['sm', 'lg'] },
+  emptyStateType: { control: 'select', options: ['error', 'noData'] },
   useDenseHeader: {
     control: { type: 'radio' },
     options: [true, false],
@@ -79,5 +80,11 @@ export const ARG_TYPES = {
     control: 'object',
     description:
       'This is an object containing all of the props used with the column customization extension. _This value is set/passed inside of the `datagridState` object._',
+  },
+  filterProps: {
+    name: 'Filter props',
+    control: 'object',
+    description:
+      'This is an object for all the props passed into the filter flyout and filter panel',
   },
 };

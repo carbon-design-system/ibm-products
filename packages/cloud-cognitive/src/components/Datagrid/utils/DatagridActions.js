@@ -179,7 +179,6 @@ export const DatagridActions = (datagridState) => {
             onClick={downloadCsv}
           />
         </div>
-
         {CustomizeColumnsButton && (
           <div style={style}>
             <CustomizeColumnsButton />

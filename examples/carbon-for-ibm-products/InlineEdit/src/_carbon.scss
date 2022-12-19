@@ -2,5 +2,6 @@ $feature-flags: (
   enable-css-custom-properties: true,
 );
 
-@import 'carbon-components/scss/globals/scss/styles';
-@include carbon--theme();
+// vars accounts for most things except for the typography
+@import 'carbon-components/scss/globals/scss/vars';
+@import 'carbon-components/scss/globals/scss/typography';

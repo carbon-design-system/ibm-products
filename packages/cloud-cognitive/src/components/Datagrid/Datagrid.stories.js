@@ -11,7 +11,6 @@ import { StatusIcon } from '../StatusIcon';
 import { makeData, newPersonWithTwoLines, range } from './utils/makeData';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
-
 import { action } from '@storybook/addon-actions';
 
 import { Activity16, Add16 } from '@carbon/icons-react';
@@ -148,6 +147,16 @@ export const EmptyState = () => {
   const emptyStateDescription = 'Description explaining why the table is empty';
   const emptyStateSize = 'lg';
   const illustrationTheme = 'light';
+  const emptyStateAction = {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add16,
+    iconDescription: 'Add icon',
+  };
+  const emptyStateLink = {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  };
 
   const datagridState = useDatagrid({
     columns,
@@ -156,6 +165,8 @@ export const EmptyState = () => {
     emptyStateDescription,
     emptyStateSize,
     illustrationTheme,
+    emptyStateAction,
+    emptyStateLink,
     DatagridActions,
     DatagridBatchActions,
     DatagridPagination,
@@ -182,10 +193,14 @@ export const InitialLoad = () => {
     fetchData();
   }, []);
 
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription = 'Description explaining why the table is empty';
   const datagridState = useDatagrid({
     columns,
     data,
     isFetching,
+    emptyStateTitle,
+    emptyStateDescription,
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;

@@ -82,8 +82,11 @@ export const getInlineEditColumns = () => {
       accessor: 'visits',
       width: 120,
       inlineEdit: {
+        validator: (n) => n && n < 10,
         type: 'number',
-        inputProps: {}, // These props are passed to the Carbon component used for inline editing
+        inputProps: {
+          invalidText: 'Invalid number, must be 10 or greater',
+        }, // These props are passed to the Carbon component used for inline editing
       },
     },
     {

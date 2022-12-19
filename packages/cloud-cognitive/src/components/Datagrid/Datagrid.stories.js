@@ -143,6 +143,16 @@ export const EmptyState = () => {
   const emptyStateDescription = 'Description explaining why the table is empty';
   const emptyStateSize = 'lg';
   const illustrationTheme = 'light';
+  const emptyStateAction = {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add,
+    iconDescription: 'Add icon',
+  };
+  const emptyStateLink = {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  };
 
   const datagridState = useDatagrid({
     columns,
@@ -154,6 +164,8 @@ export const EmptyState = () => {
     emptyStateDescription,
     emptyStateTitle,
     emptyStateSize,
+    emptyStateAction,
+    emptyStateLink,
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -177,10 +189,14 @@ export const InitialLoad = () => {
     fetchData();
   }, []);
 
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription = 'Description explaining why the table is empty';
   const datagridState = useDatagrid({
     columns,
     data,
     isFetching,
+    emptyStateTitle,
+    emptyStateDescription,
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;

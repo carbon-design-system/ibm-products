@@ -17,8 +17,8 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const ButtonWrapper = ({
   onClick,
-  setIsModalOpen,
-  isModalOpen,
+  setIsTearsheetOpen,
+  isTearsheetOpen,
   iconTooltipLabel = 'Customize columns',
   ...rest
 }) => {
@@ -32,7 +32,7 @@ const ButtonWrapper = ({
       hasIconOnly
       test-id={`${blockClass}__customize-columns-trigger`}
       onClick={() => {
-        setIsModalOpen(!isModalOpen);
+        setIsTearsheetOpen(!isTearsheetOpen);
         if (typeof onClick === 'function') {
           onClick();
         }
@@ -43,9 +43,9 @@ const ButtonWrapper = ({
 
 ButtonWrapper.propTypes = {
   iconTooltipLabel: PropTypes.string,
-  isModalOpen: PropTypes.bool.isRequired,
+  isTearsheetOpen: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
-  setIsModalOpen: PropTypes.func.isRequired,
+  setIsTearsheetOpen: PropTypes.func.isRequired,
 };
 
 export default ButtonWrapper;

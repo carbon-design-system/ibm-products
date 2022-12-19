@@ -25,7 +25,7 @@ export const DatagridContent = ({ datagridState }) => {
     withVirtualScroll,
     DatagridPagination,
     isFetching,
-    CustomizeColumnsModal,
+    CustomizeColumnsTearsheet,
     leftPanel,
     fullHeightDatagrid,
     verticalAlign = 'center',
@@ -160,8 +160,8 @@ export const DatagridContent = ({ datagridState }) => {
       {rows?.length > 0 && !isFetching && DatagridPagination && (
         <DatagridPagination {...datagridState} />
       )}
-      {CustomizeColumnsModal && (
-        <CustomizeColumnsModal instance={datagridState} />
+      {CustomizeColumnsTearsheet && (
+        <CustomizeColumnsTearsheet instance={datagridState} />
       )}
     </>
   );
@@ -176,7 +176,7 @@ DatagridContent.propTypes = {
       PropTypes.element,
       PropTypes.func,
     ]),
-    CustomizeColumnsModal: PropTypes.oneOfType([
+    CustomizeColumnsTearsheet: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.func,
     ]),

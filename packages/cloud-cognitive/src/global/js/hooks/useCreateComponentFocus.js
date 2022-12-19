@@ -14,7 +14,7 @@ export const useCreateComponentFocus = ({
   currentStep,
   blockClass,
   onMount,
-  skipElements = [],
+  firstFocusElement = '',
 }) => {
   let focusedElementIndex = 0;
   useEffect(() => {
@@ -31,12 +31,13 @@ export const useCreateComponentFocus = ({
         ? getFocusableElements(visibleStepInnerContent)
         : [];
       if (focusableStepElements && focusableStepElements.length) {
-        while (
-          skipElements.includes(
+        if (firstFocusElement) {
+          while (
+            firstFocusElement !==
             focusableStepElements[focusedElementIndex].className
-          )
-        ) {
-          focusedElementIndex++;
+          ) {
+            focusedElementIndex++;
+          }
         }
         focusableStepElements[focusedElementIndex].focus();
       } else {
@@ -51,7 +52,7 @@ export const useCreateComponentFocus = ({
     previousState,
     blockClass,
     onMount,
-    skipElements,
+    firstFocusElement,
     focusedElementIndex,
   ]);
 };

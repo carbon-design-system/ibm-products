@@ -536,6 +536,23 @@
   height: $spacing-09;
 }
 
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 7px;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar-track {
+  background: $layer;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+.#{$block-class}__virtualScrollContainer {
+  width: 100%;
+}
+
 .#{$carbon-prefix}--body--with-modal-open .#{$block-class}__grid-container {
   overflow: hidden;
   height: 100vh;

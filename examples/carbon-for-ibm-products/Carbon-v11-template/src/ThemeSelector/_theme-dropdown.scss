@@ -1,7 +1,7 @@
-@use "@carbon/styles/scss/theme" as *;
-@use "@carbon/styles/scss/themes";
-@use "@carbon/styles/scss/type";
-@use "@carbon/styles/scss/config";
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config';
 
 .carbon-theme--white {
   @include theme(themes.$white, true);
@@ -27,5 +27,5 @@
 }
 
 .carbon-theme-dropdown .#{config.$prefix}--label {
-  @include type.type-style("label-01");
+  @include type.type-style('label-01');
 }

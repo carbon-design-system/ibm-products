@@ -8,12 +8,13 @@
 import { useState } from 'react';
 
 const usePath = (itemsLabel = '') => {
-  const [path, setPath] = useState([
+  const defaultPath = [
     {
       id: 'base_of_path',
       title: itemsLabel,
     },
-  ]);
+  ];
+  const [path, setPath] = useState(defaultPath);
 
   const handler = (id, title, parentId) => {
     if (path.find((entry) => entry.id === id)) {
@@ -43,12 +44,7 @@ const usePath = (itemsLabel = '') => {
   };
 
   const resetPath = () => {
-    setPath([
-      {
-        id: 'base_of_path',
-        title: itemsLabel,
-      },
-    ]);
+    setPath(defaultPath);
   };
 
   return {

@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.41.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.40.0...@carbon/ibm-products@1.41.0) (2022-12-20)
+
+### Bug Fixes
+
+- **DataGrid:** empty state with action and link
+  ([#2561](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2561))
+  ([a9fc689](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a9fc6893f46e17a11ceee25812b586b53e9a7cd9))
+- **Datagrid:** fixes bugs and issues for design review
+  ([#2559](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2559))
+  ([471c46e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/471c46eaeb078df04372bf94b470e68ba9732293))
+- **Datagrid:** resolve react hook error from datagrid row
+  ([#2574](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2574))
+  ([b2ce873](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b2ce87370cd5db83cda56a208ed38b597c7b7de0))
+- **DataGrid:** virtual scrollbar not visible
+  ([#2451](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2451))
+  ([719a881](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/719a88161b1e18a7cf7c7bb635280d53785796ae))
+
+### Features
+
+- **Datagrid:** makes seperate story file and adds docs for FilterFlyout (v10)
+  ([#2568](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2568))
+  ([1ed3a18](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1ed3a18d22e3368d11d26270681e815b560cba87))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [1.40.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.39.0...@carbon/ibm-products@1.40.0) (2022-12-10)
 
 ### Bug Fixes

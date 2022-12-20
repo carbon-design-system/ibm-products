@@ -9,7 +9,7 @@
 @import '../variables';
 
 .#{$block-class}__customize-columns-tearsheet {
-  .#{$carbon-prefix}--tearsheet-content {
+  .#{$pkg-prefix}--tearsheet-content {
     position: inherit;
     display: flex;
     flex-flow: column;
@@ -19,33 +19,10 @@
 }
 
 .#{$block-class}__customize-columns-checkbox-wrapper {
-  margin-bottom: 0;
-}
-.#{$block-class}__customize-columns-checkbox-wrapper {
   display: flex;
   justify-content: center;
-  padding-left: 0.5rem;
-}
-
-.#{$block-class}__customize-columns-tearsheet--actions {
-  display: flex;
-  height: $spacing-09;
-  flex-flow: row;
-  background-color: $field-02;
-
-  .bx--search-magnifier svg {
-    left: 1rem;
-  }
-
-  .bx--search-close {
-    height: 100% !important; 
-  }
-}
-
-.#{$block-class}__customize-columns-tearsheet--actions input[role='searchbox'] {
-  height: $spacing-09;
-  padding-left: $spacing-08;
-  border-bottom: none;
+  padding-left: $spacing-03;
+  margin-bottom: 0;
 }
 
 .#{$block-class}__customize-columns-tearsheet--actions > button {
@@ -55,9 +32,6 @@
 .#{$block-class}__customize-columns-instructions {
   padding-left: $spacing-05;
   margin-bottom: $spacing-06;
-
-  @include carbon--type-style('body-long-01');
-
   color: $text-01;
 }
 
@@ -71,8 +45,11 @@
   padding-left: $spacing-08;
   border-bottom: 1px solid $layer-active;
   background-color: $layer;
+  position: sticky;
+  z-index: 1;
+  top: 0;
 
-  label {
+  .bx--checkbox-label-text {
     font-weight: 600;
   }
 }
@@ -80,19 +57,9 @@
 .#{$block-class}__customize-columns-select-all:hover {
   background-color: $layer-hover;
 }
-.#{$block-class}__customize-columns-select-all-selected {
-  display: flex;
-  height: $spacing-09;
-  padding-left: $spacing-08;
-  border-bottom: 1px solid $layer-active;
-  background-color: $layer-selected;
-  position: sticky;
-  top: 0;
-  z-index: 1;
 
-  label {
-    font-weight: 600;
-  }
+.#{$block-class}__customize-columns-select-all-selected {
+  background-color: $layer-selected;
 }
 
 .#{$block-class}__customize-columns-select-all-selected:hover {

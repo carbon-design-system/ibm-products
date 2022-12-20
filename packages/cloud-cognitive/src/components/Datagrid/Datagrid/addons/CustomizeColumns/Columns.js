@@ -99,7 +99,7 @@ const Columns = ({
             className={classNames({
               [`${blockClass}__customize-columns-select-all`]:
                 getVisibleColumnsCount() === 0,
-              [`${blockClass}__customize-columns-select-all-selected`]:
+              [`${blockClass}__customize-columns-select-all ${blockClass}__customize-columns-select-all-selected`]:
                 getVisibleColumnsCount() > 0,
             })}
             selected={getVisibleColumnsCount() > 0}

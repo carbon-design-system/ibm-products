@@ -23,7 +23,7 @@ const CustomizeColumnsTearsheet = ({
   onSaveColumnPrefs,
   columnDefinitions,
   originalColumnDefinitions,
-  customizeTearsheetHeadingLabel = 'Customize Columns',
+  customizeTearsheetHeadingLabel = 'Customize columns',
   primaryButtonTextLabel = 'Save',
   secondaryButtonTextLabel = 'Cancel',
   instructionsLabel = 'Select columns to display them. Click and drag the box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
@@ -106,8 +106,17 @@ const CustomizeColumnsTearsheet = ({
       title={`${customizeTearsheetHeadingLabel} (${visibleColumnsCount}/${totalColumns})`}
       description={instructionsLabel}
       actions={[
-        { kind: 'secondary', label: secondaryButtonTextLabel, onClick: onRequestClose },
-        { kind: 'primary', label: primaryButtonTextLabel, onClick: onRequestSubmit },
+        {
+          kind: 'secondary',
+          label: secondaryButtonTextLabel,
+          onClick: onRequestClose,
+        },
+        {
+          kind: 'primary',
+          label: primaryButtonTextLabel,
+          onClick: onRequestSubmit,
+          disabled: !isDirty,
+        },
       ]}
     >
       <Actions

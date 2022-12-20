@@ -20,7 +20,7 @@ const Actions = ({ searchText, setSearchText, findColumnPlaceholderLabel }) => {
       <Search
         placeholder={findColumnPlaceholderLabel}
         value={searchText}
-        size="sm"
+        size="xl"
         labelText={findColumnPlaceholderLabel}
         onChange={(e) => {
           // TODO: is it performant?

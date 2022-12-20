@@ -7,6 +7,7 @@
  */
 
 import React, { useState } from 'react';
+import { CodeSnippet } from 'carbon-components-react';
 import { Edit16, TrashCan16 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import {
@@ -14,11 +15,14 @@ import {
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
 import { Datagrid, useDatagrid, useInlineEdit } from '../../index';
+import { pkg } from '../../../../settings';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { getInlineEditColumns } from '../../utils/getInlineEditColumns';
+
+const storyBlockClass = `storybook-${pkg.prefix}--datagrid`;
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/InlineEdit`,
@@ -90,7 +94,42 @@ const InlineEditUsage = ({ ...args }) => {
     useInlineEdit
   );
 
-  return <Datagrid datagridState={datagridState} />;
+  return (
+    <div>
+      <Datagrid datagridState={datagridState} />
+      <p>
+        The following inline edit columns incorporate validation:
+        <CodeSnippet
+          className={`${storyBlockClass}__validation-code-snippet`}
+          type="inline"
+          hideCopyButton
+        >
+          first_name
+        </CodeSnippet>
+        <CodeSnippet
+          className={`${storyBlockClass}__validation-code-snippet`}
+          type="inline"
+          hideCopyButton
+        >
+          last_name
+        </CodeSnippet>
+        <CodeSnippet
+          className={`${storyBlockClass}__validation-code-snippet`}
+          type="inline"
+          hideCopyButton
+        >
+          age
+        </CodeSnippet>
+        <CodeSnippet
+          className={`${storyBlockClass}__validation-code-snippet`}
+          type="inline"
+          hideCopyButton
+        >
+          visits
+        </CodeSnippet>
+      </p>
+    </div>
+  );
 };
 
 const InlineEditTemplateWrapper = ({ ...args }) => {

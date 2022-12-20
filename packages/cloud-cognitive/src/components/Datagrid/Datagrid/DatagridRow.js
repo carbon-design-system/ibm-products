@@ -28,9 +28,6 @@ const rowHeights = {
 // eslint-disable-next-line react/prop-types
 const DatagridRow = (datagridState) => {
   const { row, rowSize, withNestedRows } = datagridState;
-  const { state } = useContext(InlineEditContext);
-  const { activeCellId } = state;
-  const activeCellObject = activeCellId && getCellIdAsObject(activeCellId);
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
     let size = 0;

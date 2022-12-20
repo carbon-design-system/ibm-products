@@ -7,4 +7,3 @@
 export { default as FilterFlyout } from './FilterFlyout';
 export { default as FilterLeftPanel } from './FilterLeftPanel';
 export { FilterProvider, FilterContext } from './FilterProvider';
-

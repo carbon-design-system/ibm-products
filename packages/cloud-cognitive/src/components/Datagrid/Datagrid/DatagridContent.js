@@ -38,6 +38,7 @@ export const DatagridContent = ({ datagridState }) => {
     tableId,
     DatagridActions,
     totalColumnsWidth,
+    gridRef,
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
@@ -91,7 +92,7 @@ export const DatagridContent = ({ datagridState }) => {
         }
         onFocus={withInlineEdit ? () => handleGridFocus(state, dispatch) : null}
       >
-        <DatagridHead {...datagridState} />
+        {!withVirtualScroll ? <DatagridHead {...datagridState} /> : null}
         <DatagridBody {...datagridState} rows={rows} />
       </Table>
     );
@@ -156,6 +157,13 @@ export const DatagridContent = ({ datagridState }) => {
           )}
           {withInlineEdit ? (
             <div ref={multiKeyTrackingRef}>{renderTable()}</div>
+          ) : withVirtualScroll ? (
+            <div
+              className={`${blockClass}__virtualScrollContainer`}
+              ref={gridRef}
+            >
+              {renderTable()}
+            </div>
           ) : (
             renderTable()
           )}
@@ -191,6 +199,7 @@ DatagridContent.propTypes = {
     variableRowHeight: PropTypes.bool,
     useDenseHeader: PropTypes.bool,
     withInlineEdit: PropTypes.bool,
+    filterProps: PropTypes.object,
     verticalAlign: PropTypes.string,
     gridTitle: PropTypes.node,
     gridDescription: PropTypes.node,
@@ -198,5 +207,6 @@ DatagridContent.propTypes = {
     rows: PropTypes.arrayOf(PropTypes.object),
     tableId: PropTypes.string,
     totalColumnsWidth: PropTypes.number,
+    gridRef: PropTypes.object,
   }),
 };

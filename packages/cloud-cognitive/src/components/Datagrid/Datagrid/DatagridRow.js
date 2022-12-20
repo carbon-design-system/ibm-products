@@ -6,14 +6,12 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 // @flow
-import React, { useContext } from 'react';
+import React from 'react';
 import { DataTable, SkeletonText } from 'carbon-components-react';
 import { px } from '@carbon/layout';
 import cx from 'classnames';
 import { selectionColumnId } from '../common-column-ids';
 import { pkg, carbon } from '../../../settings';
-import { InlineEditContext } from './addons/InlineEdit/InlineEditContext/InlineEditContext';
-import { getCellIdAsObject } from './addons/InlineEdit/InlineEditContext/getCellIdAsObject';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -51,8 +49,6 @@ const DatagridRow = (datagridState) => {
         [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
         [`${blockClass}__carbon-row-expandable`]: row.canExpand,
         [`${carbon.prefix}--data-table--selected`]: row.isSelected,
-        [`${blockClass}__carbon-row-hover-active`]:
-          activeCellObject && row.index === activeCellObject.row,
       })}
       {...row.getRowProps()}
       key={row.id}

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useLayoutEffect, useMemo, useState, useContext } from 'react';
+import React, { useLayoutEffect, useMemo, useContext, useState } from 'react';
 import {
   Button,
   DataTable,
@@ -21,12 +21,13 @@ import {
   Add16,
   ChevronDown16,
   Download16,
+  Filter16,
   Restart16,
 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
-import { Filter16 } from '@carbon/icons-react';
+
 import { FilterContext, FilterFlyout } from '../Datagrid/addons/Filtering';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -149,6 +150,7 @@ export const DatagridActions = (datagridState) => {
       </TableToolbarContent>
     ) : !mobileToolbar ? (
       <TableToolbarContent>
+        {renderFilterPanelButton()}
         <TableToolbarSearch
           size="xl"
           id="columnSearch"
@@ -178,7 +180,6 @@ export const DatagridActions = (datagridState) => {
             onClick={downloadCsv}
           />
         </div>
-
         {CustomizeColumnsButton && (
           <div style={style}>
             <CustomizeColumnsButton />

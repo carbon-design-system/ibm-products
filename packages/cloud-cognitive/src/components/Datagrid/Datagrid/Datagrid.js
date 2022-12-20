@@ -56,18 +56,13 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
           )}
           {...getDevtoolsProps(componentName)}
         >
-
-          {filterProps?.variation === 'panel' && (
+          {filterProps?.variation === 'panel' ? (
             <div
               className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
             >
               <DatagridContent datagridState={datagridState} />
             </div>
-          )}
-
-          {filterProps?.variation === undefined && (
-            <DatagridContent datagridState={datagridState} />
-          )}
+          ) : (<DatagridContent datagridState={datagridState} />)}
         </div>
       </InlineEditProvider>
     </FilterProvider>

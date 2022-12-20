@@ -30,7 +30,7 @@ import {
 } from '.';
 
 import mdx from './Datagrid.mdx';
-import { LeftPanelStory, SelectAllWitHToggle } from './Datagrid.stories';
+import { LeftPanelStory, SelectAllWithToggle } from './Datagrid.stories';
 
 import { pkg } from '../../settings';
 
@@ -147,6 +147,16 @@ export const EmptyState = () => {
   const emptyStateDescription = 'Description explaining why the table is empty';
   const emptyStateSize = 'lg';
   const illustrationTheme = 'light';
+  const emptyStateAction = {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add16,
+    iconDescription: 'Add icon',
+  };
+  const emptyStateLink = {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  };
 
   const datagridState = useDatagrid({
     columns,
@@ -155,6 +165,8 @@ export const EmptyState = () => {
     emptyStateDescription,
     emptyStateSize,
     illustrationTheme,
+    emptyStateAction,
+    emptyStateLink,
     DatagridActions,
     DatagridBatchActions,
     DatagridPagination,
@@ -181,10 +193,14 @@ export const InitialLoad = () => {
     fetchData();
   }, []);
 
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription = 'Description explaining why the table is empty';
   const datagridState = useDatagrid({
     columns,
     data,
     isFetching,
+    emptyStateTitle,
+    emptyStateDescription,
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -636,7 +652,7 @@ export const SelectItemsInAllPages = () => {
     </>
   );
 };
-SelectItemsInAllPages.story = SelectAllWitHToggle;
+SelectItemsInAllPages.story = SelectAllWithToggle;
 
 export const LeftPanel = () => {
   const columns = React.useMemo(() => defaultHeader, []);
@@ -691,6 +707,7 @@ export const LeftPanel = () => {
     columns,
     data,
     DatagridActions,
+    DatagridBatchActions,
     batchActions: true,
     toolbarBatchActions: getBatchActions(),
   });

@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-key */
+
 import React, { useRef, useMemo, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -36,16 +38,14 @@ const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, tableID 
 
   /** Context */
   const { leftPanelOpen, setLeftPanelOpen } = useContext(FilterContext);
-
-  console.log(leftPanelOpen);
-
+  
   /** Methods */
   const closePanel = () => setLeftPanelOpen(false);
 
   const onCancel = () => {
     closePanel();
   }
-  
+
   const renderActionSet = () => {
     return (
       showActionSet && (
@@ -62,7 +62,7 @@ const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, tableID 
               key: 3,
               kind: 'secondary',
               label: "Cancel",
-              onClick: onCancel(),
+              onClick: () => onCancel(),
               isExpressive: false,
             },
           ]}
@@ -105,7 +105,7 @@ const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, tableID 
         <div style={{ height: (tableHeight - headerHeight - buttonHeight - buttonSetHeight) }} className={`${componentClass}__inner-container`}>
           {filterSections.map((category) => {
             return (
-              <>
+              <div className={`${componentClass}__category`}>
                 <div className={`${componentClass}__category-title`}>
                   {category.title}
                 </div>
@@ -121,11 +121,12 @@ const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, tableID 
                     );
                   })}
                 </Accordion>
-              </>
+
+              </div>
             );
           })}
         </div>
-      {renderActionSet()}
+        {renderActionSet()}
     </div>
   );
 };
@@ -136,5 +137,6 @@ FilterLeftPanel.propTypes = {
   title: PropTypes.string,
   updateMethod: PropTypes.oneOf([BATCH, INSTANT]),
 };
+
 
 export default FilterLeftPanel;

@@ -20,11 +20,12 @@ $action-set-height: rem(64px);
 .#{$block-class}-filter-left-panel__inner-container {
     overflow: hidden;
     overflow-y: scroll;
+    padding: 0px 16px;
 }
 
 .#{$block-class}-filter-left-panel {
     display: none;
-    padding: 2px 14px;
+    // padding: 2px 14px;
 
     &--open {
         display: flex;
@@ -34,16 +35,18 @@ $action-set-height: rem(64px);
     &__title {
         font-size: 16px;
         font-weight: 600;
-        padding: 12px;
+        padding: 16px 0px;
     }
 
     &__heading {
         display: flex;
         justify-content: space-between;
+        padding: 0px 16px;
     }
 
     &__search {
-        padding-bottom: 12px;
+        padding: 0px 16px;
+        padding-bottom: 24px;
     }
 
     &__category-title {
@@ -53,16 +56,11 @@ $action-set-height: rem(64px);
     }
 
     &__category {
-        padding-bottom: 24px;
+        padding-bottom: 14px;
     }
-
-    // button {
-    //     padding-bottom: 18px;
-    // }
 }
 
-button {
-    .#{$block-class}-filter-left-panel__action-set {
-        margin-bottom: 12px;
-    } 
-}
+.#{$block-class}-filter-left-panel__action-set {
+    // margin-bottom: 12px;
+    height: 64px;
+} 

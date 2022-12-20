@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-key */
+
 import React, { useRef, useMemo, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -37,7 +38,7 @@ const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, tableID 
 
   /** Context */
   const { leftPanelOpen, setLeftPanelOpen } = useContext(FilterContext);
-
+  
   /** Methods */
   const closePanel = () => setLeftPanelOpen(false);
 
@@ -80,11 +81,6 @@ const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, tableID 
   const buttonHeight = buttonRef.current?.getBoundingClientRect().height;
   const buttonSetHeight = buttonSetRef.current?.getBoundingClientRect().height;
 
-  console.log('A:', tableHeight);
-  console.log('B:', headerHeight);
-  console.log('C:', buttonHeight);
-  console.log('D:', buttonSetHeight);
-
   return (
     <div 
       className={cx(componentClass, `${componentClass}__container`, {
@@ -125,6 +121,7 @@ const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, tableID 
                     );
                   })}
                 </Accordion>
+
               </div>
             );
           })}
@@ -140,5 +137,6 @@ FilterLeftPanel.propTypes = {
   title: PropTypes.string,
   updateMethod: PropTypes.oneOf([BATCH, INSTANT]),
 };
+
 
 export default FilterLeftPanel;

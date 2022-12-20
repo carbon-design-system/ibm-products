@@ -195,6 +195,7 @@ DatagridContent.propTypes = {
     isFetching: PropTypes.bool,
     leftPanel: PropTypes.object,
     fullHeightDatagrid: PropTypes.bool,
+    filterProps: PropTypes.object,
     variableRowHeight: PropTypes.bool,
     useDenseHeader: PropTypes.bool,
     withInlineEdit: PropTypes.bool,

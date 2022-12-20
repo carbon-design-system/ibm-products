@@ -27,6 +27,7 @@ import {
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
+
 import { FilterContext, FilterFlyout } from '../Datagrid/addons/Filtering';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -103,7 +104,7 @@ export const DatagridActions = (datagridState) => {
       <TableToolbarContent size="sm">
         {!mobileToolbar ? (
           <>
-          {renderFilterPanelButton()}
+            {renderFilterPanelButton()}
             <div style={style}>
               <Button
                 kind="ghost"

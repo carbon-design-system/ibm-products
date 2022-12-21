@@ -8,9 +8,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
-
 import { getStoryTitle } from '../../global/js/utils/story-helper';
-
 import { action } from '@storybook/addon-actions';
 import { Activity, Add } from '@carbon/react/icons';
 import { DataTable } from '@carbon/react';
@@ -27,7 +25,7 @@ import {
   useActionsColumn,
 } from '.';
 
-import { SelectAllWitHToggle, LeftPanelStory } from './Datagrid.stories';
+import { SelectAllWithToggle, LeftPanelStory } from './Datagrid.stories/index';
 import mdx from './Datagrid.mdx';
 
 import { pkg } from '../../settings';
@@ -75,6 +73,15 @@ const defaultHeader = [
     width: 60,
   },
   {
+    Header: 'Status',
+    accessor: 'status',
+  },
+  {
+    Header: 'Joined',
+    accessor: 'joined',
+    Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
+  },
+  {
     Header: 'Someone 1',
     accessor: 'someone1',
   },
@@ -101,18 +108,6 @@ const defaultHeader = [
   {
     Header: 'Someone 7',
     accessor: 'someone7',
-  },
-  {
-    Header: 'Someone 8',
-    accessor: 'someone8',
-  },
-  {
-    Header: 'Someone 9',
-    accessor: 'someone9',
-  },
-  {
-    Header: 'Someone 10',
-    accessor: 'someone10',
   },
 ];
 
@@ -148,6 +143,16 @@ export const EmptyState = () => {
   const emptyStateDescription = 'Description explaining why the table is empty';
   const emptyStateSize = 'lg';
   const illustrationTheme = 'light';
+  const emptyStateAction = {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add,
+    iconDescription: 'Add icon',
+  };
+  const emptyStateLink = {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  };
 
   const datagridState = useDatagrid({
     columns,
@@ -159,6 +164,8 @@ export const EmptyState = () => {
     emptyStateDescription,
     emptyStateTitle,
     emptyStateSize,
+    emptyStateAction,
+    emptyStateLink,
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -182,10 +189,14 @@ export const InitialLoad = () => {
     fetchData();
   }, []);
 
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription = 'Description explaining why the table is empty';
   const datagridState = useDatagrid({
     columns,
     data,
     isFetching,
+    emptyStateTitle,
+    emptyStateDescription,
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -426,7 +437,7 @@ export const SelectItemsInAllPages = () => {
     </>
   );
 };
-SelectItemsInAllPages.story = SelectAllWitHToggle;
+SelectItemsInAllPages.story = SelectAllWithToggle;
 
 export const LeftPanel = () => {
   const columns = React.useMemo(() => defaultHeader, []);

@@ -102,3 +102,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   .#{c4p-settings.$carbon-prefix}--dropdown__wrapper {
   margin-bottom: $spacing-07;
 }
+
+.storybook-#{$block-class}__validation-code-snippet {
+  @include type.font-family($name: mono);
+  @include type.type-style('code-01');
+
+  display: inline-block;
+  padding: 0 $spacing-03;
+  border: 2px solid transparent;
+  margin-right: $spacing-03;
+  background-color: $field-01;
+  border-radius: $spacing-02;
+}

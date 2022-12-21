@@ -8,19 +8,19 @@
 @import '../variables';
 
 .#{$block-class}__customize-columns-tearsheet {
-  .#{$pkg-prefix}--tearsheet-content {
+  .#{$pkg-prefix}--tearsheet__content {
     display: flex;
     flex-flow: column;
   }
 }
 
 .#{$block-class}__customize-columns-tearsheet--actions {
-  position: sticky;
-  z-index: 1;
-  top: 0;
+  .#{$carbon-prefix}--search-input {
+    border-bottom: 1px solid $ui-03;
+  }
 }
 
-.#{$block-class}__customize-columns--checkbox-wrapper {
+.#{$block-class}__customize-columns-checkbox-wrapper {
   display: flex;
   justify-content: center;
   padding-left: $spacing-03;
@@ -29,31 +29,32 @@
 
 .#{$block-class}__customize-columns-column-list {
   position: relative; // needed for the react-dnd, otherwise the drag preview will not work correctly
+  overflow: auto;
 }
 
-.#{$block-class}__customize-columns--select-all {
+.#{$block-class}__customize-columns-select-all {
   position: sticky;
   z-index: 1;
-  top: $spacing-09;
+  top: 0;
   display: flex;
   height: $spacing-09;
   padding-left: $spacing-08;
   border-bottom: 1px solid $layer-active;
   background-color: $layer;
 
-  .#{$pkg-prefix}--checkbox-label-text {
+  .#{$carbon-prefix}--checkbox-label-text {
     @include carbon--font-weight($weight: semibold);
   }
 }
 
-.#{$block-class}__customize-columns--select-all:hover {
+.#{$block-class}__customize-columns-select-all:hover {
   background-color: $layer-hover;
 }
 
-.#{$block-class}__customize-columns--select-all-selected {
+.#{$block-class}__customize-columns-select-all--selected {
   background-color: $layer-selected;
 }
 
-.#{$block-class}__customize-columns--select-all-selected:hover {
+.#{$block-class}__customize-columns-select-all--selected:hover {
   background-color: $hover-selected-ui;
 }

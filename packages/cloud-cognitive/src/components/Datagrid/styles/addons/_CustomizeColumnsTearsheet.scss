@@ -10,58 +10,51 @@
 
 .#{$block-class}__customize-columns-tearsheet {
   .#{$pkg-prefix}--tearsheet-content {
-    position: inherit;
     display: flex;
     flex-flow: column;
-    padding: 0;
-    margin: 0;
   }
 }
 
-.#{$block-class}__customize-columns-checkbox-wrapper {
+.#{$block-class}__customize-columns-tearsheet--actions {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+}
+
+.#{$block-class}__customize-columns--checkbox-wrapper {
   display: flex;
   justify-content: center;
   padding-left: $spacing-03;
   margin-bottom: 0;
 }
 
-.#{$block-class}__customize-columns-tearsheet--actions > button {
-  margin-left: $spacing-05;
-}
-
-.#{$block-class}__customize-columns-instructions {
-  padding-left: $spacing-05;
-  margin-bottom: $spacing-06;
-  color: $text-01;
-}
-
 .#{$block-class}__customize-columns-column-list {
   position: relative; // needed for the react-dnd, otherwise the drag preview will not work correctly
 }
 
-.#{$block-class}__customize-columns-select-all {
+.#{$block-class}__customize-columns--select-all {
   display: flex;
+  position: sticky;
   height: $spacing-09;
+  top: $spacing-09;
+  z-index: 1;
   padding-left: $spacing-08;
   border-bottom: 1px solid $layer-active;
   background-color: $layer;
-  position: sticky;
-  z-index: 1;
-  top: 0;
 
   .bx--checkbox-label-text {
-    font-weight: 600;
+    @include carbon--font-weight($weight: semibold);
   }
 }
 
-.#{$block-class}__customize-columns-select-all:hover {
+.#{$block-class}__customize-columns--select-all:hover {
   background-color: $layer-hover;
 }
 
-.#{$block-class}__customize-columns-select-all-selected {
+.#{$block-class}__customize-columns--select-all-selected {
   background-color: $layer-selected;
 }
 
-.#{$block-class}__customize-columns-select-all-selected:hover {
+.#{$block-class}__customize-columns--select-all-selected:hover {
   background-color: $hover-selected-ui;
 }

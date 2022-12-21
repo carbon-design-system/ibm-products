@@ -6,7 +6,7 @@ import {
   Accordion,
   AccordionItem,
   Button,
-  Search, 
+  Search,
 } from 'carbon-components-react';
 import { pkg } from '../../../../../settings';
 import { BATCH, INSTANT } from './constants';
@@ -15,36 +15,39 @@ import { Close32 } from '@carbon/icons-react';
 import { ActionSet } from '../../../../ActionSet';
 import { FilterContext } from '.';
 
-
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-left-panel`;
 
-const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, tableID }) => {
+const FilterLeftPanel = ({
+  title,
+  updateMethod = BATCH,
+  filterSections,
+  tableID,
+}) => {
   /** Refs */
   const filterLeftPanelRef = useRef(null);
   const tableRef = useRef();
-  const headerRef = useRef();
-  const buttonRef = useRef();
-  const buttonSetRef = useRef();
 
   /** Effects */
-  useEffect(function setRefsOnMount() {
-    buttonRef.current = document.querySelector('button.filter-left-panel__button');
-    tableRef.current = document.querySelector(`#${tableID} .bx--data-table`)
-  }, [tableID])
+  useEffect(
+    function setRefsOnMount() {
+      tableRef.current = document.querySelector(`#${tableID} .bx--data-table`);
+    },
+    [tableID]
+  );
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
 
   /** Context */
   const { leftPanelOpen, setLeftPanelOpen } = useContext(FilterContext);
-  
+
   /** Methods */
   const closePanel = () => setLeftPanelOpen(false);
 
-  const onCancel = () => {
+  const cancel = () => {
     closePanel();
-  }
+  };
 
   const renderActionSet = () => {
     return (
@@ -54,79 +57,78 @@ const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, tableID 
             {
               key: 1,
               kind: 'primary',
-              label: "Apply",
+              label: 'Apply',
               onClick: null,
-              isExpressive: false,
             },
             {
               key: 3,
               kind: 'secondary',
-              label: "Cancel",
-              onClick: () => onCancel(),
-              isExpressive: false,
+              label: 'Cancel',
+              onClick: cancel,
             },
           ]}
           className={`${componentClass}__action-set`}
-          size="md"
-          buttonSize="md"
-          style={{ padding: 0 }}
-          ref={buttonSetRef}
         />
       )
     );
   };
 
-  const tableHeight = tableRef.current?.getBoundingClientRect().height;
-  const headerHeight = headerRef.current?.getBoundingClientRect().height;
-  const buttonHeight = buttonRef.current?.getBoundingClientRect().height;
-  const buttonSetHeight = buttonSetRef.current?.getBoundingClientRect().height;
+  const panelHeight = tableRef.current?.getBoundingClientRect().height;
 
   return (
-    <div 
+    <div
+      style={{
+        height: panelHeight,
+      }}
       className={cx(componentClass, `${componentClass}__container`, {
-      [`${componentClass}--open`]: true,
-      [`${componentClass}--batch`]: showActionSet,
-      [`${componentClass}--instant`]: !showActionSet,
+        [`${componentClass}--open`]: leftPanelOpen,
+        [`${componentClass}--batch`]: showActionSet,
+        [`${componentClass}--instant`]: !showActionSet,
       })}
       ref={filterLeftPanelRef}
-      >
-        <div className={`${componentClass}__heading`} ref={headerRef}>
-          <h1 className={`${componentClass}__title`}>{title}</h1>
-          <Button hasIconOnly renderIcon={Close32} iconDescription='button-chan' kind='ghost'/>
-        </div>
-        <div className={`${componentClass}__search`}>
-          <Search
-            labelText="Filter search"
-            placeHolderText="Find filters"
-            light={true}
-            size="sm"
-          />
-        </div>
-        <div style={{ height: (tableHeight - headerHeight - buttonHeight - buttonSetHeight) }} className={`${componentClass}__inner-container`}>
-          {filterSections.map((category) => {
-            return (
-              <div className={`${componentClass}__category`}>
-                <div className={`${componentClass}__category-title`}>
-                  {category.title}
-                </div>
-                <Accordion>
-                  {category.subsections.map((subsection) => {
-                    return (
-                      <AccordionItem
-                        title={subsection.title}
-                        key={subsection.title}
-                      >
-                        {subsection.children}
-                      </AccordionItem>
-                    );
-                  })}
-                </Accordion>
-
+    >
+      <div className={`${componentClass}__heading`}>
+        <h1 className={`${componentClass}__title`}>{title}</h1>
+        <Button
+          hasIconOnly
+          renderIcon={Close32}
+          iconDescription="button-chan"
+          kind="ghost"
+          onClick={cancel}
+        />
+      </div>
+      <div className={`${componentClass}__search`}>
+        <Search
+          labelText="Filter search"
+          placeHolderText="Find filters"
+          light={true}
+          size="sm"
+        />
+      </div>
+      <div className={`${componentClass}__inner-container`}>
+        {filterSections.map((category) => {
+          return (
+            <div className={`${componentClass}__category`}>
+              <div className={`${componentClass}__category-title`}>
+                {category.title}
               </div>
-            );
-          })}
-        </div>
-        {renderActionSet()}
+              <Accordion>
+                {category.subsections.map((subsection) => {
+                  return (
+                    <AccordionItem
+                      title={subsection.title}
+                      key={subsection.title}
+                    >
+                      {subsection.children}
+                    </AccordionItem>
+                  );
+                })}
+              </Accordion>
+            </div>
+          );
+        })}
+      </div>
+      {renderActionSet()}
     </div>
   );
 };
@@ -134,9 +136,9 @@ const FilterLeftPanel = ({ title, updateMethod = BATCH, filterSections, tableID 
 FilterLeftPanel.propTypes = {
   filterSections: PropTypes.array,
   open: PropTypes.bool,
+  tableID: PropTypes.string.isRequired,
   title: PropTypes.string,
   updateMethod: PropTypes.oneOf([BATCH, INSTANT]),
 };
-
 
 export default FilterLeftPanel;

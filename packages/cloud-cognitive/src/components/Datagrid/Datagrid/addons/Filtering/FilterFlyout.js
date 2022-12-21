@@ -157,8 +157,10 @@ const FilterFlyout = ({
   /** Effects */
   useClickOutside(filterFlyoutRef, (target) => {
     const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
+    const hasClickedOnDropdown =
+      target.className === 'bx--list-box__menu-item__option';
 
-    if (!open || hasClickedOnDatePicker) {
+    if (!open || hasClickedOnDatePicker || hasClickedOnDropdown) {
       return;
     }
 
@@ -177,6 +179,7 @@ const FilterFlyout = ({
         return (
           <DatePicker
             {...components.DatePicker}
+            key={column}
             onChange={(value) => {
               setFiltersState({ ...filtersState, [column]: value });
               applyFilters({ column, value, type });

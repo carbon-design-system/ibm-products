@@ -1,15 +1,18 @@
-@import '../carbon';
-@import '@carbon/ibm-products/scss/index';
+@use "@carbon/react/scss/spacing";
+@use "@carbon/react/scss/theme" as *;
+@use "@carbon/react/scss/config";
 
-$block-class: 'full-page-example';
-$preview-block-class: #{full-page-example}--create-full-page-sandbox;
+$block-class: "full-page-example";
+$preview-block-class: #{$block-class}--create-full-page-sandbox;
 
-.#{$preview-block-class} .#{full-page-example}--create-full-page__content {
-  background-color: $ui-background;
-  color: $text-01;
+.#{$preview-block-class} .#{$block-class}--create-full-page__content {
+  background-color: $background;
+  color: $text-primary;
 }
 
-.#{$preview-block-class}__step-fieldset--no-label .#{$prefix}--fieldset legend {
+.#{$preview-block-class}__step-fieldset--no-label
+  .#{config.$prefix}--fieldset
+  legend {
   position: absolute;
   overflow: hidden;
   width: 1px;
@@ -20,6 +23,6 @@ $preview-block-class: #{full-page-example}--create-full-page-sandbox;
 }
 
 .#{$preview-block-class} .bx--form-item {
-  margin-bottom: $spacing-05;
+  margin-bottom: spacing.$spacing-05;
   z-index: 99;
 }

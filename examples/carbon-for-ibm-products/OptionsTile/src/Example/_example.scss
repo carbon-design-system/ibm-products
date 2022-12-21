@@ -1,19 +1,21 @@
-@import '../carbon';
+@use "@carbon/react/scss/theme";
+@use "@carbon/react/scss/spacing";
+@use "@carbon/react/scss/config";
 
 .container {
   width: 80vw;
   min-width: 16rem;
 }
 
-.#{$prefix}--fieldset.recovery-location {
-  margin: $spacing-06 0;
+.#{config.$prefix}--fieldset.recovery-location {
+  margin: spacing.$spacing-06 0;
 }
 
 .recovery-location__button {
-  margin-top: $spacing-04;
+  margin-top: spacing.$spacing-04;
 }
 
 .threshold-tile {
-  margin-top: $spacing-04;
-  background-color: $ui-02;
+  margin-top: spacing.$spacing-04;
+  background-color: theme.$layer-02;
 }

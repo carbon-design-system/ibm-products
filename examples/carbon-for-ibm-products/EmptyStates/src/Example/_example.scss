@@ -1,17 +1,20 @@
-@import '../carbon';
+@use "@carbon/react/scss/theme";
+@use "@carbon/react/scss/spacing";
+@use "@carbon/react/scss/type";
+@use "@carbon/react/scss/config";
 
 .empty-state-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: $spacing-09;
+  margin-top: spacing.$spacing-09;
 }
 
-.#{$prefix}--label {
-  @include carbon--type-style('label-01');
+.#{config.$prefix}--label {
+  @include type.type-style("label-01");
 
-  margin-bottom: $spacing-03;
+  margin-bottom: spacing.$spacing-03;
 }
 
-.#{$prefix}--dropdown__wrapper {
+.#{config.$prefix}--dropdown__wrapper {
   max-width: 400px;
 }

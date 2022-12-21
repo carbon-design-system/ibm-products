@@ -1,37 +1,41 @@
-@import '../carbon';
+@use "@carbon/react/scss/theme";
+@use "@carbon/react/scss/spacing";
+@use "@carbon/react/scss/config";
+@use "@carbon/react/scss/type";
 
 .main--content {
   display: flex;
   width: 100%;
-  height: calc(100vh - #{$spacing-09});
+  height: calc(100vh - #{spacing.$spacing-09});
   align-items: center;
   justify-content: center;
-  margin-top: $spacing-09;
+  margin-top: spacing.$spacing-09;
 }
 
-.#{$prefix}body-content {
-  .#{$prefix}text-inputs {
+.#{config.$prefix}body-content {
+  .#{config.$prefix}text-inputs {
     display: flex;
-    margin: $spacing-05 0;
+    margin: spacing.$spacing-05 0;
   }
-  .#{$prefix}text-inputs #side-panel-story-text-input-a,
-  .#{$prefix}text-inputs #side-panel-story-text-input-c {
-    margin-right: $spacing-05;
+  .#{config.$prefix}text-inputs #side-panel-story-text-input-a,
+  .#{config.$prefix}text-inputs #side-panel-story-text-input-c {
+    margin-right: spacing.$spacing-05;
   }
-  .#{$prefix}text-area-container {
+  .#{config.$prefix}text-area-container {
     position: relative;
   }
-  .#{$prefix}text-area-container .#{$prefix}allowed-characters {
-    @include carbon--type-style('label-01');
+  .#{config.$prefix}text-area-container .#{config.$prefix}allowed-characters {
+    @include type.type-style("label-01");
 
     position: absolute;
     right: 0;
-    color: $text-02;
+    color: theme.$text-secondary;
   }
-  .#{$prefix}text-area-container .#{$prefix}allowed-characters-invalid {
-    color: $support-01;
+  .#{config.$prefix}text-area-container
+    .#{config.$prefix}allowed-characters-invalid {
+    color: theme.$support-error;
   }
-  .#{$prefix}content-subtitle {
-    margin: $spacing-05 0 $spacing-04;
+  .#{config.$prefix}content-subtitle {
+    margin: spacing.$spacing-05 0 spacing.$spacing-04;
   }
 }

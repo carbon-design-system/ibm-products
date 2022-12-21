@@ -1,21 +1,19 @@
-@import 'carbon';
+@use "@carbon/react/scss/theme";
+@use "@carbon/react/scss/spacing";
 
-$pkg-prefix: 'tst';
-@import 'carbon-components/scss/components/modal/modal';
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/dropdown/dropdown';
-@import '@carbon/ibm-products/scss/index';
-
-body {
-  @include carbon--theme();
-
-  background-color: $ui-background;
-  color: $text-01;
+:root {
+  @include theme.theme();
 }
+
+$pkg-prefix: "tst";
+@import "@carbon/styles/scss/components/modal/modal";
+@import "@carbon/styles/scss/components/button/button";
+@import "@carbon/styles/scss/components/dropdown/dropdown";
+@import "@carbon/ibm-products/scss/index";
 
 .app {
   display: flex;
-  min-height: calc(100vh - $spacing-09);
+  min-height: calc(100vh - spacing.$spacing-09);
   align-items: center;
   justify-content: center;
 }

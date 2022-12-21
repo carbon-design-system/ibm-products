@@ -1,4 +1,5 @@
-@import './carbon';
+@use "@carbon/react/scss/spacing";
+@use "@carbon/react/scss/theme";
 
 body {
   overflow-x: hidden;
@@ -7,8 +8,8 @@ body {
 .app.app {
   width: 100vw;
   min-height: 100vh;
-  background-color: $ui-background;
-  color: $text-01;
+  background-color: theme.$background;
+  color: theme.$text-primary;
 }
 
 .app .app__container {
@@ -21,18 +22,18 @@ body {
 }
 
 .app .app__title {
-  margin-top: $spacing-10;
+  margin-top: spacing.$spacing-10;
 }
 
 .app .app__filter {
-  margin-top: $spacing-07;
+  margin-top: spacing.$spacing-07;
 }
 
 .app .app__gallery {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: $spacing-07;
+  margin-top: spacing.$spacing-07;
 }
 
 $item-width: 320px;
@@ -41,7 +42,7 @@ $item-height: 240px;
 .app .app__gallery-item {
   width: $item-width;
   height: $item-height;
-  margin-bottom: $spacing-06;
+  margin-bottom: spacing.$spacing-06;
 }
 
 .app .app__gallery-item--dummy {

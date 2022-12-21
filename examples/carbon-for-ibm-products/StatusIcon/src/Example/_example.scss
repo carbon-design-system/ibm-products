@@ -1,16 +1,17 @@
-@import '../carbon';
+@use "@carbon/react/scss/theme";
+@use "@carbon/react/scss/spacing";
 
 .ccs-theme-dropdown {
   position: fixed;
-  bottom: $spacing-05;
-  left: $spacing-05;
+  bottom: spacing.$spacing-05;
+  left: spacing.$spacing-05;
   min-width: 11.5rem;
 }
 
 .ccs-status-dropdown {
   position: fixed;
-  top: $spacing-05;
-  left: $spacing-05;
+  top: spacing.$spacing-05;
+  left: spacing.$spacing-05;
   min-width: 11.5rem;
 }
 

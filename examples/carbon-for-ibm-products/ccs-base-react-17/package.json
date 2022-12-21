@@ -3,19 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@carbon/elements": "^10",
-    "@carbon/ibm-products": "latest",
-    "@carbon/icons-react": "^10",
+    "@carbon/ibm-products": "^2.0.0-rc.11",
+    "@carbon/react": "^1.19.0",
     "@testing-library/jest-dom": "latest",
     "@testing-library/react": "^12",
     "@testing-library/user-event": "latest",
-    "carbon-components": "^10",
-    "carbon-components-react": "^7",
-    "carbon-icons": "latest",
     "eslint-config-react-app": "^6.0.0",
     "react": "^17",
     "react-dom": "^17",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5",
     "sass": "^1.49.10",
     "web-vitals": "^1.0.1"
   },
@@ -28,12 +24,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [

@@ -1,4 +1,6 @@
-@import '../carbon';
+@use "@carbon/react/scss/theme";
+@use "@carbon/react/scss/spacing";
+@use "@carbon/react/scss/components/button/tokens";
 
 .display-box {
   display: flex;
@@ -8,13 +10,13 @@
 }
 
 .display-box__details {
-  margin: $spacing-07 0;
+  margin: spacing.$spacing-07 0;
 }
 
 .display-box__content {
   width: var(--content-width);
-  border: 1px dashed $text-01;
-  margin-top: $spacing-09;
+  border: 1px dashed theme.$text-primary;
+  margin-top: spacing.$spacing-09;
 }
 
 .display-box__slider {
@@ -22,7 +24,7 @@
   height: 2px;
   -webkit-appearance: none;
   appearance: none;
-  background: $ui-04;
+  background: theme.$toggle-off;
   border-radius: 1px;
   opacity: 0.7;
   outline: none;
@@ -37,7 +39,7 @@
 }
 
 .display-box__slider:hover {
-  background: $text-01;
+  background: theme.$text-primary;
 }
 
 .display-box__slider::-webkit-slider-thumb {
@@ -45,23 +47,23 @@
   height: 20px;
   -webkit-appearance: none;
   appearance: none;
-  background: $text-01;
+  background: theme.$text-primary;
   border-radius: 50%;
   cursor: pointer;
 }
 
 .display-box__slider::-webkit-slider-thumb:hover {
-  background-color: $interactive-01;
+  background-color: tokens.$button-primary;
 }
 
 .display-box__slider::-moz-range-thumb {
   width: 20px;
   height: 20px;
-  background: $text-01;
+  background: theme.$text-primary;
   border-radius: 50%;
   cursor: pointer;
 }
 
 .display-box__slider::-moz-range-thumb:hover {
-  background-color: $interactive-01;
+  background-color: tokens.$button-primary;
 }

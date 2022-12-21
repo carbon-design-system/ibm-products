@@ -1,4 +1,5 @@
-@import '../carbon';
+@use "@carbon/react/scss/theme";
+@use "@carbon/react/scss/spacing";
 
 .main--content {
   display: flex;
@@ -6,5 +7,5 @@
   height: calc(100vh - 3rem);
   align-items: center;
   justify-content: center;
-  margin-top: $spacing-09;
+  margin-top: spacing.$spacing-09;
 }

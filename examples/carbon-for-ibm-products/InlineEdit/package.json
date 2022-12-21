@@ -1,0 +1,36 @@
+{
+  "name": "inline-edit-example",
+  "keywords": [
+    "carbon",
+    "ibm",
+    "ibm-products",
+    "component",
+    "inline-edit"
+  ],
+  "license": "Apache-2.0",
+  "main": "src/index.js",
+  "dependencies": {
+    "@carbon/ibm-products": "^2.0.0-rc.11",
+    "@carbon/react": "^1.19.0",
+    "react": "^17",
+    "react-dom": "^17",
+    "react-scripts": "^5",
+    "sass": "latest"
+  },
+  "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

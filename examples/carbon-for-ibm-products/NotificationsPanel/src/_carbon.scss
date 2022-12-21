@@ -1,6 +1,0 @@
-$feature-flags: (
-  enable-css-custom-properties: true,
-);
-
-@import '@carbon/elements/scss';
-@include carbon--theme();

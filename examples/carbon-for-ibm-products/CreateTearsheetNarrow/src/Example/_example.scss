@@ -1,4 +1,5 @@
-@import '../carbon';
+@use "@carbon/react/scss/spacing";
+@use "@carbon/react/scss/config";
 
 $story-class: create-tearsheet-narrow--story;
 
@@ -7,12 +8,12 @@ $story-class: create-tearsheet-narrow--story;
   align-items: baseline;
 }
 
-.#{$story-class}__flex-container .#{$prefix}--form-item {
-  margin-right: $spacing-04;
+.#{$story-class}__flex-container .#{config.$prefix}--form-item {
+  margin-right: spacing.$spacing-04;
 }
 
-.#{$story-class}__flex-container .#{$prefix}--form-item,
+.#{$story-class}__flex-container .#{config.$prefix}--form-item,
 .#{$story-class}__flex-container
-  .#{$prefix}--dropdown__wrapper.#{$prefix}--list-box__wrapper {
+  .#{config.$prefix}--dropdown__wrapper.#{config.$prefix}--list-box__wrapper {
   width: 50%;
 }

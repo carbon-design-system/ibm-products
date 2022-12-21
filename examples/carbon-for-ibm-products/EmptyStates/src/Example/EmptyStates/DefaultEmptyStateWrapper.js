@@ -1,22 +1,22 @@
-import React from 'react';
-import { Add20 } from '@carbon/icons-react';
-import { EmptyState } from '@carbon/ibm-products';
+import React from "react";
+import { Add } from "@carbon/icons-react";
+import { EmptyState } from "@carbon/ibm-products";
 
 export const DefaultEmptyStateWrapper = () => {
   return (
     <EmptyState
-      size="sm"
-      title="No data found"
-      subtitle="We were unable to retrieve any data."
+      size='sm'
+      title='No data found'
+      subtitle='We were unable to retrieve any data.'
       action={{
-        text: 'Create new',
-        onClick: () => console.log('Action click'),
-        renderIcon: Add20,
-        iconDescription: 'Add icon',
+        text: "Create new",
+        onClick: () => console.log("Action click"),
+        renderIcon: (props) => <Add {...props} size='20' />,
+        iconDescription: "Add icon"
       }}
       link={{
-        text: 'View documentation',
-        href: 'https://www.carbondesignsystem.com',
+        text: "View documentation",
+        href: "https://www.carbondesignsystem.com"
       }}
     />
   );

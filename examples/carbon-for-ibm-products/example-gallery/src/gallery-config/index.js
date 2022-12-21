@@ -110,6 +110,12 @@ const config = [
       'url( ' + defaultOrNot(require('./ImportModal--thumbnail.png')) + ')',
   },
   {
+    label: 'InlineEdit',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/InlineEdit',
+    thumbnail:
+      'url( ' + defaultOrNot(require('./InlineEdit--thumbnail.png')) + ')',
+  },
+  {
     label: 'Notifications Panel',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/NotificationsPanel',
     thumbnail:

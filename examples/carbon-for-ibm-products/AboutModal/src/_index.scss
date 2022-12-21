@@ -1,15 +1,12 @@
-@import 'carbon';
+@use "@carbon/react/scss/theme";
 
-body {
-  @include carbon--theme();
-
-  background-color: $ui-background;
-  color: $text-01;
+:root {
+  @include theme.theme();
 }
 
 .app {
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - spacing.$spacing-09);
   align-items: center;
   justify-content: center;
 }

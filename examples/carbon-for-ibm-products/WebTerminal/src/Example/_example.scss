@@ -1,20 +1,23 @@
-@import '../carbon';
+@use "@carbon/react/scss/theme";
+@use "@carbon/react/scss/spacing";
+@use "@carbon/react/scss/type";
+@use "@carbon/react/scss/colors";
 
 .main--content {
   width: 100%;
-  margin-top: $spacing-09;
+  margin-top: spacing.$spacing-09;
 }
 
 .main--content .example-terminal {
-  @include carbon--type-style('code-02');
+  @include type.type-style("code-02");
 
-  padding: $spacing-05;
+  padding: spacing.$spacing-05;
   // stylelint-disable-next-line carbon/theme-token-use
-  color: $gray-10;
+  color: colors.$gray-10;
 }
 
 .main--content .example-terminal p {
-  @include carbon--type-style('body-short-01');
+  @include type.type-style("body-short-01");
 
-  padding-bottom: $spacing-07;
+  padding-bottom: spacing.$spacing-07;
 }

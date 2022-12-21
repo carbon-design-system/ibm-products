@@ -1,16 +1,14 @@
-@import 'carbon';
+@use "@carbon/react/scss/theme";
+@use "@carbon/react/scss/spacing";
 
-body {
-  @include carbon--theme();
-
-  background-color: $ui-background;
-  color: $text-01;
+:root {
+  @include theme.theme();
 }
 
 .app {
   display: flex;
-  min-height: calc(100vh - $spacing-09);
+  min-height: calc(100vh - spacing.$spacing-09);
   align-items: center;
   justify-content: center;
-  padding: $spacing-09;
+  padding: spacing.$spacing-09;
 }

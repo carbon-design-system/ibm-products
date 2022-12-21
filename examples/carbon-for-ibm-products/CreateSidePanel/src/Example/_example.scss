@@ -1,5 +1,7 @@
-@import '../carbon';
-@import '@carbon/ibm-products/scss/index';
+@use "@carbon/react/scss/theme";
+@use "@carbon/react/scss/config";
+@use "@carbon/react/scss/spacing";
+@import "@carbon/ibm-products/scss/index";
 
 #ibm-products-page-content {
   display: flex;
@@ -12,15 +14,15 @@ $story-prefix: create-side-panel-stories__;
 .#{$story-prefix}example-container {
   display: grid;
   align-items: flex-end;
-  grid-gap: $spacing-04;
+  grid-gap: spacing.$spacing-04;
   grid-template-columns: 1fr 1fr;
 }
 
-.#{$story-prefix}example-form-group .#{$prefix}--label {
+.#{$story-prefix}example-form-group .#{config.$prefix}--label {
   margin-bottom: 0;
 }
 
 .#{$block-class} .#{$carbon-prefix}--number__control-btn::before,
 .#{$block-class} .#{$carbon-prefix}--number__control-btn::after {
-  background-color: $field-02;
+  background-color: theme.$field-02;
 }

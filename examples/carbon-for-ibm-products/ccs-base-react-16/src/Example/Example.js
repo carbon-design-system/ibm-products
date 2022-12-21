@@ -1,6 +1,6 @@
 // cspell:words grafana
 
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 // ----------------------------------------------------
 // This is an example showing use of the
@@ -8,11 +8,11 @@ import React, { useState } from 'react';
 // from the @carbon/ibm-products component library.
 // ----------------------------------------------------
 
-import { AboutModal } from '@carbon/ibm-products';
-import { Button, Link } from 'carbon-components-react';
+import { AboutModal } from "@carbon/ibm-products";
+import { Button, Link } from "@carbon/react";
 
-import ExampleLogo from './media/example-logo.svg';
-import './_example.scss';
+import ExampleLogo from "./media/example-logo.svg";
+import "./_example.scss";
 
 export const Example = () => {
   const [open, setOpen] = useState(false);
@@ -21,7 +21,7 @@ export const Example = () => {
     <>
       <Button onClick={() => setOpen(true)}>Show AboutModal</Button>
       <AboutModal
-        additionalInfo={[{ label: 'Version number', content: '1.3.41' }]}
+        additionalInfo={[{ label: "Version number", content: "1.3.41" }]}
         content={
           <>
             This is an example of the AboutModal from the Carbon for IBM
@@ -32,37 +32,37 @@ export const Example = () => {
         copyrightText={<>Copyright &copy; 2020 IBM corporation</>}
         links={[
           <Link
-            href="https://carbon-for-ibm-products.netlify.app/"
-            key="View storybook"
+            href='https://carbon-for-ibm-products.netlify.app/'
+            key='View storybook'
           >
             View the components
           </Link>,
           <Link
-            href="https://github.com/carbon-design-system/ibm-products/blob/main/LICENSE"
-            key="License"
+            href='https://github.com/carbon-design-system/ibm-products/blob/main/LICENSE'
+            key='License'
           >
             License
           </Link>,
           <Link
-            href="https://www.npmjs.com/package/@carbon/ibm-products"
-            key="npm"
+            href='https://www.npmjs.com/package/@carbon/ibm-products'
+            key='npm'
           >
             Install from npm
           </Link>,
-          <Link href="https://www.carbondesignsystem.com/" key="Carbon">
+          <Link href='https://www.carbondesignsystem.com/' key='Carbon'>
             Carbon Design System
-          </Link>,
+          </Link>
         ]}
         logo={
           <img
             src={ExampleLogo}
-            alt="Example product or service logo"
-            style={{ maxWidth: '6rem' }}
+            alt='Example product or service logo'
+            style={{ maxWidth: "6rem" }}
           />
         }
         title={
           <>
-            IBM <span style={{ fontWeight: '600' }}>Products components</span>
+            IBM <span style={{ fontWeight: "600" }}>Products components</span>
           </>
         }
         onClose={() => setOpen(false)}

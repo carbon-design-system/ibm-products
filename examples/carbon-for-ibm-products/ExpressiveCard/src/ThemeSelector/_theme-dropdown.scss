@@ -1,19 +1,22 @@
-@import '../carbon';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/config';
 
 .carbon-theme--white {
-  @include carbon--theme($carbon--theme--white, true);
+  @include theme(themes.$white, true);
 }
 
 .carbon-theme--g10 {
-  @include carbon--theme($carbon--theme--g10, true);
+  @include theme(themes.$g10, true);
 }
 
 .carbon-theme--g90 {
-  @include carbon--theme($carbon--theme--g90, true);
+  @include theme(themes.$g90, true);
 }
 
 .carbon-theme--g100 {
-  @include carbon--theme($carbon--theme--g100, true);
+  @include theme(themes.$g100, true);
 }
 
 .carbon-theme-dropdown {
@@ -23,6 +26,6 @@
   min-width: 11.5rem;
 }
 
-.carbon-theme-dropdown .#{$prefix}--label {
-  @include carbon--type-style('label-01');
+.carbon-theme-dropdown .#{config.$prefix}--label {
+  @include type.type-style('label-01');
 }

@@ -43,6 +43,7 @@ coverage
 
 # Dependency directory
 node_modules
+**/node_modules
 .pnp.*
 .yarn/*
 !.yarn/patches

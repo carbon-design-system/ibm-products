@@ -1,10 +1,9 @@
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2021
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
 
 @import '../variables';
 
@@ -33,16 +32,16 @@
 }
 
 .#{$block-class}__customize-columns--select-all {
-  display: flex;
   position: sticky;
-  height: $spacing-09;
-  top: $spacing-09;
   z-index: 1;
+  top: $spacing-09;
+  display: flex;
+  height: $spacing-09;
   padding-left: $spacing-08;
   border-bottom: 1px solid $layer-active;
   background-color: $layer;
 
-  .bx--checkbox-label-text {
+  .#{$pkg-prefix}--checkbox-label-text {
     @include carbon--font-weight($weight: semibold);
   }
 }

@@ -8,6 +8,10 @@
 export const BATCH = 'batch';
 export const INSTANT = 'instant';
 
+/** Constants for filter variation */
+export const FLYOUT = 'flyout';
+export const PANEL = 'panel';
+
 /** Constants for filter type */
 export const DATE = 'date';
 export const NUMBER = 'number';

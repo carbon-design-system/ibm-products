@@ -441,37 +441,157 @@ SelectItemsInAllPages.story = SelectAllWithToggle;
 export const LeftPanel = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+
   const sections = [
     {
       title: 'Source Details',
       subsections: [
-        { title: 'IP Address', children: <div>Heyo</div> },
-        { title: 'Bingus hands', children: <div>Hello</div> },
-        { title: 'Dingus', children: <div>Ello</div> },
+        {
+          title: 'IP Address',
+          filters: [
+            {
+              type: 'date',
+              column: 'joined',
+              props: {
+                DatePicker: {
+                  datePickerType: 'range',
+                },
+                DatePickerInput: {
+                  start: {
+                    id: 'date-picker-input-id-start',
+                    placeholder: 'mm/dd/yyyy',
+                    labelText: 'Joined start date',
+                  },
+                  end: {
+                    id: 'date-picker-input-id-end',
+                    placeholder: 'mm/dd/yyyy',
+                    labelText: 'Joined end date',
+                  },
+                },
+              },
+            },
+            {
+              type: 'checkbox',
+              column: 'passwordStrength',
+              props: {
+                FormGroup: {
+                  legendText: 'Password strength',
+                },
+                Checkbox: [
+                  {
+                    id: 'normal',
+                    labelText: 'Normal',
+                    value: 'normal',
+                  },
+                  {
+                    id: 'minor-warning',
+                    labelText: 'Minor warning',
+                    value: 'minor-warning',
+                  },
+                  {
+                    id: 'critical',
+                    labelText: 'Critical',
+                    value: 'critical',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+        {
+          title: 'Bingus hands',
+          filters: [
+            {
+              type: 'dropdown',
+              column: 'status',
+              props: {
+                Dropdown: {
+                  id: 'marital-status-dropdown',
+                  ariaLabel: 'Marital status dropdown',
+                  items: ['relationship', 'complicated', 'single'],
+                  label: 'Marital status',
+                  titleText: 'Marital status',
+                },
+              },
+            },
+          ],
+        },
       ],
     },
     {
       title: 'Source Meat',
       subsections: [
-        { title: 'IP Address', children: <div>Heyo</div> },
-        { title: 'Bingus hands', children: <div>Hello</div> },
-        { title: 'Dingus', children: <div>Ello</div> },
+        {
+          title: 'IP Address',
+          filters: [
+            {
+              type: 'radio',
+              column: 'role',
+              props: {
+                FormGroup: {
+                  legendText: 'Role',
+                },
+                RadioButtonGroup: {
+                  orientation: 'vertical',
+                  legend: 'Role legend',
+                  name: 'role-radio-button-group',
+                },
+                RadioButton: [
+                  {
+                    id: 'developer',
+                    labelText: 'Developer',
+                    value: 'developer',
+                  },
+                  {
+                    id: 'designer',
+                    labelText: 'Designer',
+                    value: 'designer',
+                  },
+                  {
+                    id: 'researcher',
+                    labelText: 'Researcher',
+                    value: 'researcher',
+                  },
+                ],
+              },
+            },
+          ],
+        },
+        {
+          title: 'Bingus hands',
+          filters: [
+            {
+              type: 'number',
+              column: 'visits',
+              props: {
+                NumberInput: {
+                  min: 0,
+                  id: 'visits-number-input',
+                  invalidText: 'A valid value is required',
+                  label: 'Visits',
+                  placeholder: 'Type a number amount of visits',
+                },
+              },
+            },
+          ],
+        },
+        { title: 'Dingus', filters: [] },
       ],
     },
     {
       title: 'Source Hands',
       subsections: [
-        { title: 'IP Address', children: <div>Heyo</div> },
-        { title: 'Bingus hands', children: <div>Hello</div> },
-        { title: 'Dingus', children: <div>Ello</div> },
+        { title: 'IP Address', filters: [] },
+        { title: 'Bingus hands', filters: [] },
+        { title: 'Dingus', filters: [] },
       ],
     },
     {
       title: 'Source Legs',
       subsections: [
-        { title: 'IP Address', children: <div>Heyo</div> },
-        { title: 'Bingus hands', children: <div>Hello</div> },
-        { title: 'Dingus', children: <div>Ello</div> },
+        { title: 'IP Address', filters: [] },
+        { title: 'Bingus hands', filters: [] },
+        { title: 'Dingus', filters: [] },
       ],
     },
   ];

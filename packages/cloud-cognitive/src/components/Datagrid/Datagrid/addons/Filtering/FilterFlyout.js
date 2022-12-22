@@ -32,6 +32,7 @@ import {
   CLEAR_FILTERS,
   DATE,
   DROPDOWN,
+  FLYOUT,
   INSTANT,
   NUMBER,
   RADIO,
@@ -61,7 +62,10 @@ const FilterFlyout = ({
 
   /** State */
   const [open, setOpen] = useState(false);
-  const [filtersState, setFiltersState] = useInitialStateFromFilters(filters);
+  const [filtersState, setFiltersState] = useInitialStateFromFilters(
+    filters,
+    FLYOUT
+  );
   const [filtersObjectArray, setFiltersObjectArray] = useState([]);
 
   /** Refs */
@@ -203,6 +207,7 @@ const FilterFlyout = ({
       } else if (type === NUMBER) {
         return (
           <NumberInput
+            key={column}
             step={1}
             allowEmpty
             hideSteppers
@@ -220,7 +225,7 @@ const FilterFlyout = ({
         );
       } else if (type === CHECKBOX) {
         return (
-          <FormGroup {...components.FormGroup}>
+          <FormGroup key={column} {...components.FormGroup}>
             {filtersState[column].map((option) => (
               <Checkbox
                 key={option.labelText}
@@ -246,7 +251,7 @@ const FilterFlyout = ({
         );
       } else if (type === RADIO) {
         return (
-          <FormGroup {...components.FormGroup}>
+          <FormGroup key={column} {...components.FormGroup}>
             <RadioButtonGroup
               {...components.RadioButtonGroup}
               valueSelected={filtersState[column]}
@@ -272,6 +277,7 @@ const FilterFlyout = ({
       } else if (type === DROPDOWN) {
         return (
           <Dropdown
+            key={column}
             {...components.Dropdown}
             selectedItem={filtersState[column]}
             onChange={({ selectedItem }) => {

@@ -20,7 +20,7 @@
   pointer-events: none;
 }
 
-#{variables.$block-class}__draggable-handleStyle.disabled svg {
+.#{variables.$block-class}__draggable-handleStyle.disabled svg {
   fill: $icon-disabled;
 }
 

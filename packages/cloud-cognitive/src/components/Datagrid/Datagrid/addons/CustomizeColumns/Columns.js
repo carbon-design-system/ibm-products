@@ -160,7 +160,7 @@ const Columns = ({
                 selected={isColumnVisible(colDef)}
               >
                 <Checkbox
-                  className={cx(
+                  className={classNames(
                     `${blockClass}__customize-columns-checkbox-wrapper`,
                     `${blockClass}__customize-columns-checkbox`
                   )}

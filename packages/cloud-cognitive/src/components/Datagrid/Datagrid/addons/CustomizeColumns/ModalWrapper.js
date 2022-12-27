@@ -9,7 +9,7 @@
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import CustomizeColumnsModal from './CustomizeColumnsModal';
+import CustomizeColumnsModal from './CustomizeColumnsTearsheet';
 
 const ModalWrapper = ({ instance }) => {
   const { onSaveColumnPrefs, isModalOpen, setIsModalOpen, labels, ...rest } =

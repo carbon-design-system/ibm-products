@@ -1386,6 +1386,12 @@ Map {
               ],
               "type": "oneOfType",
             },
+            "isKeyBackward": {
+              "type": "func",
+            },
+            "isKeyForward": {
+              "type": "func",
+            },
             "onActivate": {
               "type": "func",
             },
@@ -1456,6 +1462,9 @@ Map {
                 },
               ],
               "type": "shape",
+            },
+            "trapStack": {
+              "type": "array",
             },
           },
         ],
@@ -7236,6 +7245,12 @@ Map {
               ],
               "type": "oneOfType",
             },
+            "isKeyBackward": {
+              "type": "func",
+            },
+            "isKeyForward": {
+              "type": "func",
+            },
             "onActivate": {
               "type": "func",
             },
@@ -7306,6 +7321,9 @@ Map {
                 },
               ],
               "type": "shape",
+            },
+            "trapStack": {
+              "type": "array",
             },
           },
         ],
@@ -7562,6 +7580,12 @@ Map {
               ],
               "type": "oneOfType",
             },
+            "isKeyBackward": {
+              "type": "func",
+            },
+            "isKeyForward": {
+              "type": "func",
+            },
             "onActivate": {
               "type": "func",
             },
@@ -7632,6 +7656,9 @@ Map {
                 },
               ],
               "type": "shape",
+            },
+            "trapStack": {
+              "type": "array",
             },
           },
         ],

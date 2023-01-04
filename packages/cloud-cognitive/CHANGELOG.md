@@ -3,6 +3,93 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.41.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.40.0...@carbon/ibm-products@1.41.0) (2022-12-20)
+
+### Bug Fixes
+
+- **DataGrid:** empty state with action and link
+  ([#2561](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2561))
+  ([a9fc689](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a9fc6893f46e17a11ceee25812b586b53e9a7cd9))
+- **Datagrid:** fixes bugs and issues for design review
+  ([#2559](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2559))
+  ([471c46e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/471c46eaeb078df04372bf94b470e68ba9732293))
+- **Datagrid:** resolve react hook error from datagrid row
+  ([#2574](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2574))
+  ([b2ce873](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b2ce87370cd5db83cda56a208ed38b597c7b7de0))
+- **DataGrid:** virtual scrollbar not visible
+  ([#2451](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2451))
+  ([719a881](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/719a88161b1e18a7cf7c7bb635280d53785796ae))
+
+### Features
+
+- **Datagrid:** makes seperate story file and adds docs for FilterFlyout (v10)
+  ([#2568](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2568))
+  ([1ed3a18](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1ed3a18d22e3368d11d26270681e815b560cba87))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [1.40.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.39.0...@carbon/ibm-products@1.40.0) (2022-12-10)
+
+### Bug Fixes
+
+- adds primaryButtonDisabled prop
+  ([#2532](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2532))
+  ([1424a5a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1424a5aa2e3d3815f135acbb17f59258fc5085f5))
+- **ButtonMenu:** Revert back to OverflowMenu
+  ([#2521](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2521))
+  ([19b3277](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/19b3277d897f86a8c26f383b553c5cd706912e0e))
+- card action bug fix
+  ([#2549](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2549))
+  ([1307c38](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1307c3819c6180382eb483927ddb50124ac3932d))
+- **Datagrid:** address date issue with clickable row side panel
+  ([#2544](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2544))
+  ([6559047](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6559047a988869651c3cc59104004e1c9d3a9909))
+- **Datagrid:** fixed some issues in filter flyout
+  ([#2528](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2528))
+  ([52d33d3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/52d33d34b98ca7c237b9d5cf0f58ba9f8e7f8dc5))
+- **Datagrid:** update inline edit selection type to support string items
+  ([#2546](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2546))
+  ([fbb85f5](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fbb85f5482927b4f1b21e9eb7bc3d8bae9ea3f83))
+- **InlineEdit:** move warning inside component
+  ([#2531](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2531))
+  ([ccbf36d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ccbf36d6876ddf06eeb9d5ff7946a10f8921b667))
+
+### Features
+
+- **Datagrid:** add empty state type option
+  ([#2558](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2558))
+  ([05bae71](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/05bae710bdf91967d2e976b5c0b77c458a388c12))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [1.39.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.38.0...@carbon/ibm-products@1.39.0) (2022-12-06)
+
+### Bug Fixes
+
+- **ActionBar:** overflow menu item onClick
+  ([#2511](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2511))
+  ([d8f0f08](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d8f0f08b7d7dd5ccfc89b49174e63d267d1548eb))
+- **create full page:** modal close issue fixed
+  ([#2488](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2488))
+  ([567b4cf](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/567b4cfe47f70997b3565e994d9f63e9ed0bde6a))
+
+### Features
+
+- **Datagrid:** Filter flyout
+  ([#2406](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2406))
+  ([d375308](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d3753083154f1c48b52164e2d2ae56d53dc0be7a))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [1.38.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.37.0...@carbon/ibm-products@1.38.0) (2022-11-29)
 
 ### Bug Fixes

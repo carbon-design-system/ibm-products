@@ -53,10 +53,8 @@ const FilterFlyout = ({
   onFlyoutClose = () => {},
   onApply = () => {},
   onCancel = () => {},
-  shouldClickOutsideToClose = false,
   secondaryActionLabel = 'Cancel',
   setAllFilters,
-  setFilter,
 }) => {
   /** Context state and methods */
   const { EventEmitter } = useContext(FilterContext);
@@ -96,8 +94,11 @@ const FilterFlyout = ({
   };
 
   const cancel = () => {
-    revertToPreviousFilters();
-    onCancel();
+    // Reverting to previous filters only applies when using batch actions
+    if (updateMethod === BATCH) {
+      revertToPreviousFilters();
+      onCancel();
+    }
     closeFlyout();
   };
 
@@ -132,34 +133,29 @@ const FilterFlyout = ({
         return;
       }
 
-      if (updateMethod === BATCH) {
-        const filtersObjectArrayCopy = [...filtersObjectArray];
-        // check if the filter already exists in the array
-        const filter = filtersObjectArrayCopy.find(
-          (item) => item.id === column
-        );
+      const filtersObjectArrayCopy = [...filtersObjectArray];
+      // check if the filter already exists in the array
+      const filter = filtersObjectArrayCopy.find((item) => item.id === column);
 
-        // if filter exists in array then update the filter's new value
-        if (filter) {
-          filter.value = value;
-        } else {
-          filtersObjectArrayCopy.push({ id: column, value, type });
-        }
+      // if filter exists in array then update the filter's new value
+      if (filter) {
+        filter.value = value;
+      } else {
+        filtersObjectArrayCopy.push({ id: column, value, type });
+      }
 
-        setFiltersObjectArray(filtersObjectArrayCopy);
-      } else if (updateMethod === INSTANT) {
-        setFilter(column, value);
+      setFiltersObjectArray(filtersObjectArrayCopy);
+
+      // Automatically apply the filters if the updateMethod is instant
+      if (updateMethod === INSTANT) {
+        setAllFilters(filtersObjectArrayCopy);
       }
     },
-    [setFilter, updateMethod, filtersObjectArray]
+    [setAllFilters, updateMethod, filtersObjectArray]
   );
 
   /** Effects */
   useClickOutside(filterFlyoutRef, (target) => {
-    if (shouldClickOutsideToClose === false) {
-      return;
-    }
-
     const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
 
     if (!open || hasClickedOnDatePicker) {
@@ -238,7 +234,7 @@ const FilterFlyout = ({
                     value: [...filtersState[column]],
                     type,
                   });
-                  components.option.onChange?.(isSelected);
+                  option.onChange?.(isSelected);
                 }}
                 checked={option.selected}
               />
@@ -274,11 +270,11 @@ const FilterFlyout = ({
         return (
           <Dropdown
             {...components.Dropdown}
+            selectedItem={filtersState[column]}
             onChange={({ selectedItem }) => {
               setFiltersState({
                 ...filtersState,
                 [column]: selectedItem,
-                type,
               });
               applyFilters({
                 column,
@@ -360,14 +356,6 @@ const FilterFlyout = ({
 
 FilterFlyout.propTypes = {
   /**
-   * React children of carbon filters
-   */
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-
-  /**
    * Array of filters to render
    */
   filters: PropTypes.arrayOf(
@@ -417,16 +405,6 @@ FilterFlyout.propTypes = {
    * Function that sets all the filters, this comes from the datagridState
    */
   setAllFilters: PropTypes.func.isRequired,
-
-  /**
-   * Function that sets an individual filter, this comes from the datagridState
-   */
-  setFilter: PropTypes.func.isRequired,
-
-  /**
-   * Boolean if you want the flyout to close when clicked outside of the parent
-   */
-  shouldClickOutsideToClose: PropTypes.bool,
 
   /**
    * Title of the filter flyout

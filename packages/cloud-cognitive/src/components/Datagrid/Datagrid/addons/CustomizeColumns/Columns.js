@@ -74,11 +74,6 @@ const Columns = ({
             }
           }}
           tabIndex={0}
-          onFocus={(e) => {
-            if (e.target === e.currentTarget) {
-              setFocusIndex(0);
-            }
-          }}
         >
           <span
             aria-live="assertive"
@@ -127,52 +122,84 @@ const Columns = ({
                 filterString.length === 0 ||
                 colDef.Header.props.title.toLowerCase().includes(filterString)
             )
-            .map((colDef, i) => (
-              <DraggableElement
-                key={colDef.id}
-                index={i}
-                listData={columns}
-                setListData={setColumnsObject}
-                id={`dnd-datagrid-columns-${colDef.id}`}
-                type="column-customization"
-                disabled={filterString.length > 0}
-                ariaLabel={colDef.Header.props.title}
-                onGrab={setAriaRegionText}
-                isFocused={focusIndex === i}
-                moveElement={moveElement}
-                onArrowKeyDown={(e, isGrabbed, currentIndex) => {
-                  if (isGrabbed) {
-                    const nextIndex = getNextIndex(
-                      columns,
-                      currentIndex,
-                      e.key
-                    );
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (nextIndex >= 0) {
-                      setFocusIndex(nextIndex);
-                      moveElement(currentIndex, nextIndex);
-                      e.target.scrollIntoView({
-                        block: 'center',
-                      });
+            .map((colDef, i) => {
+              const searchString = new RegExp('(' + filterString + ')');
+              const res = filterString.length
+                ? colDef.Header.props.title.toLowerCase().split(searchString)
+                : null;
+              const firstWord =
+                res !== null
+                  ? res[0] === ''
+                    ? res[1].charAt(0).toUpperCase() + res[1].substring(1)
+                    : res[0].charAt(0).toUpperCase() + res[0].substring(1)
+                  : null;
+              const highlightedText =
+                res !== null
+                  ? res[0] === ''
+                    ? `<strong>${firstWord}</strong>` + res[2]
+                    : firstWord + `<strong>${res[1]}</strong>` + res[2]
+                  : colDef.Header.props.title;
+
+              const listContents = (
+                <>
+                  <Checkbox
+                    className={cx(
+                      `${blockClass}__customize-columns-checkbox-wrapper`,
+                      `${blockClass}__customize-columns-checkbox`
+                    )}
+                    checked={isColumnVisible(colDef)}
+                    onChange={(_, { checked }) =>
+                      onSelectColumn(colDef, checked)
                     }
+                    id={`${blockClass}__customization-column-${colDef.id}`}
+                    labelText={colDef.Header.props.title}
+                    title={colDef.Header.props.title}
+                    hideLabel
+                  />
+                  {
+                    <div
+                      dangerouslySetInnerHTML={{ __html: highlightedText }}
+                    ></div>
                   }
-                }}
-                selected={isColumnVisible(colDef)}
-              >
-                <Checkbox
-                  className={cx(
-                    `${blockClass}__customize-columns-checkbox-wrapper`,
-                    `${blockClass}__customize-columns-checkbox`
-                  )}
-                  checked={isColumnVisible(colDef)}
-                  onChange={(_, { checked }) => onSelectColumn(colDef, checked)}
-                  id={`${blockClass}__customization-column-${colDef.id}`}
-                  labelText={colDef.Header.props.title}
-                  title={colDef.Header.props.title}
-                />
-              </DraggableElement>
-            ))}
+                </>
+              );
+              return (
+                <DraggableElement
+                  key={colDef.id}
+                  index={i}
+                  listData={columns}
+                  setListData={setColumnsObject}
+                  id={`dnd-datagrid-columns-${colDef.id}`}
+                  type="column-customization"
+                  disabled={filterString.length > 0}
+                  ariaLabel={colDef.Header.props.title}
+                  onGrab={setAriaRegionText}
+                  isFocused={focusIndex === i}
+                  moveElement={moveElement}
+                  onArrowKeyDown={(e, isGrabbed, currentIndex) => {
+                    if (isGrabbed) {
+                      const nextIndex = getNextIndex(
+                        columns,
+                        currentIndex,
+                        e.key
+                      );
+                      e.preventDefault();
+                      e.stopPropagation();
+                      if (nextIndex >= 0) {
+                        setFocusIndex(nextIndex);
+                        moveElement(currentIndex, nextIndex);
+                        e.target.scrollIntoView({
+                          block: 'center',
+                        });
+                      }
+                    }
+                  }}
+                  selected={isColumnVisible(colDef)}
+                >
+                  {listContents}
+                </DraggableElement>
+              );
+            })}
         </ol>
       </DndProvider>
     </div>

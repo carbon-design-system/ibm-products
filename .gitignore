@@ -12,6 +12,11 @@ css
 results
 storybook-static
 
+# examples module files and folders
+examples/carbon-for-ibm-products/**/node_modules
+examples/carbon-for-ibm-products/**/.yarn
+examples/carbon-for-ibm-products/**/yarn.lock
+
 # Config files
 .npmrc
 

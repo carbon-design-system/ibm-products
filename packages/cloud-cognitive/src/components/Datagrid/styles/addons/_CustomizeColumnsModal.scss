@@ -46,11 +46,14 @@
 .#{$block-class}__customize-columns-modal--actions
   input[role='searchbox']
   ~ button {
-  height: $spacing-09;
   width: $spacing-09;
-  &:hover {
+  height: $spacing-09;
+}
+
+.#{$block-class}__customize-columns-modal--actions
+  input[role='searchbox']
+  ~ button:hover {
     border-bottom: none;
-  }
 }
 
 .#{$block-class}__customize-columns-instructions {

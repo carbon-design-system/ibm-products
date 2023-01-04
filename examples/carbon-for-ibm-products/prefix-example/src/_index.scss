@@ -1,5 +1,6 @@
 @use '@carbon/react/scss/theme';
 @use '@carbon/react/scss/spacing';
+@use '@carbon/react/scss/reset'; // needed when not pulling in index-full-carbon.css
 
 :root {
   @include theme.theme();

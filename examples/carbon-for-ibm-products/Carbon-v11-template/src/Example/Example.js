@@ -2,33 +2,35 @@
 
 import React, { useState } from 'react';
 
-import '../config'; // must come before @carbon/ibm-products... imports
+// ----------------------------------------------------
+// This is an example showing use of the
+// AboutModal component
+// from the @carbon/ibm-products component library.
+// ----------------------------------------------------
 
 import { AboutModal } from '@carbon/ibm-products';
-import { Button, Link } from 'carbon-components-react';
+import { Button, Link } from '@carbon/react';
 
 import exampleLogo from './media/example-logo.svg';
 import './_example.scss';
 
-// config.js enables components that have not yet been reviewed/released
-// but which we want to use in their 'canary' form. Note that that has to
-// be done in an import so that it happens before all component imports.
-
-import '../config'; // must come before @carbon/ibm-products component instance created
-
 export const Example = () => {
   const [isOpen, setIsOpen] = useState(true);
+
   const handleOpenModalClick = () => {
     setIsOpen(true);
   };
+
   const handleCloseModal = () => {
     setIsOpen(false);
   };
 
   return (
     <>
-      <Button onClick={handleOpenModalClick}>Reopen About Modal</Button>
-      <style>{`.exp-about-modal { opacity: 0 };`}</style>
+      <Button kind="secondary" onClick={handleOpenModalClick}>
+        Reopen the About Modal dialog
+      </Button>
+
       <AboutModal
         open={isOpen}
         additionalInfo={[
@@ -83,7 +85,15 @@ export const Example = () => {
         onClose={handleCloseModal}
         title={
           <>
-            IBM <span style={{ fontWeight: '600' }}>Watson AI Ops</span>
+            IBM{' '}
+            <span
+              style={
+                // stylelint-disable-next-line carbon/type-token-use
+                { fontWeight: '600' }
+              }
+            >
+              Watson AI Ops
+            </span>
           </>
         }
       />

@@ -9,6 +9,8 @@ import React, { useEffect } from 'react';
 import { VariableSizeList } from 'react-window';
 import { DataTable } from '@carbon/react';
 import { pkg } from '../../../settings';
+import DatagridHead from './DatagridHead';
+import { px } from '@carbon/layout';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -43,8 +45,20 @@ const DatagridVirtualBody = (datagridState) => {
     DatagridPagination,
     page,
     handleResize,
-    withOverflowRow,
+    gridRef,
   } = datagridState;
+
+  const syncScroll = (e) => {
+    const virtualBody = e.target;
+    document.querySelector(`.${blockClass}__head-warp`).scrollLeft =
+      virtualBody.scrollLeft;
+    const spacerColumn = document.querySelector(
+      `.${blockClass}__head-warp thead th:last-child`
+    );
+    spacerColumn.style.width = px(
+      32 + (virtualBody.offsetWidth - virtualBody.clientWidth)
+    ); // scrollbar width to header column to fix header alignment
+  };
 
   useEffect(() => {
     handleResize();
@@ -58,37 +72,45 @@ const DatagridVirtualBody = (datagridState) => {
   const visibleRows = (DatagridPagination && page) || rows;
 
   return (
-    <TableBody {...getTableBodyProps()} onScroll={onScroll}>
-      <VariableSizeList
-        height={virtualHeight || tableHeight}
-        itemCount={visibleRows.length}
-        itemSize={(index) =>
-          visibleRows[index].isExpanded
-            ? (visibleRows[index].expandedContentHeight || 0) + rowHeight
-            : rowHeight
-        }
-        estimatedItemSize={rowHeight}
-        onScroll={onScroll}
-        innerRef={innerListRef}
-        ref={listRef}
-        className={`${blockClass}__virtual-scrollbar`}
+    <>
+      <div
+        className={`${blockClass}__head-warp`}
+        style={{ width: gridRef.current?.clientWidth, overflow: 'hidden' }}
       >
-        {({ index, style }) => {
-          const row = visibleRows[index];
-          prepareRow(row);
-          return (
-            <div
-              style={{
-                ...style,
-                overflow: withOverflowRow ? 'visible' : 'hidden',
-              }}
-            >
-              {row.RowRenderer({ ...datagridState, row })}
-            </div>
-          );
-        }}
-      </VariableSizeList>
-    </TableBody>
+        <DatagridHead {...datagridState} />
+      </div>
+      <TableBody {...getTableBodyProps()} onScroll={(e) => syncScroll(e)}>
+        <VariableSizeList
+          height={virtualHeight || tableHeight}
+          itemCount={visibleRows.length}
+          itemSize={(index) =>
+            visibleRows[index].isExpanded
+              ? (visibleRows[index].expandedContentHeight || 0) + rowHeight
+              : rowHeight
+          }
+          estimatedItemSize={rowHeight}
+          onScroll={onScroll}
+          innerRef={innerListRef}
+          ref={listRef}
+          className={`${blockClass}__virtual-scrollbar`}
+          style={{ width: gridRef.current?.clientWidth }}
+        >
+          {({ index, style }) => {
+            const row = visibleRows[index];
+            prepareRow(row);
+            return (
+              <div
+                style={{
+                  ...style,
+                }}
+              >
+                {row.RowRenderer({ ...datagridState, row })}
+              </div>
+            );
+          }}
+        </VariableSizeList>
+      </TableBody>
+    </>
   );
 };
 

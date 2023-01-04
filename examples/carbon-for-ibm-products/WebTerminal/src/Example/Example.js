@@ -1,15 +1,15 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback } from 'react';
 
 import {
   Header,
   HeaderContainer,
   HeaderName,
   HeaderGlobalBar,
-  HeaderGlobalAction
-} from "@carbon/react";
-import { Terminal } from "@carbon/icons-react";
+  HeaderGlobalAction,
+} from '@carbon/react';
+import { Terminal } from '@carbon/icons-react';
 
-import "./_example.scss";
+import './_example.scss';
 
 // config.js enables components that have not yet been reviewed/released
 // but which we want to use in their 'canary' form. Note that that has to
@@ -19,8 +19,8 @@ import {
   useWebTerminal,
   WebTerminal,
   WebTerminalContentWrapper,
-  WebTerminalProvider
-} from "@carbon/ibm-products";
+  WebTerminalProvider,
+} from '@carbon/ibm-products';
 
 const ExampleInner = () => {
   const { openWebTerminal } = useWebTerminal();
@@ -29,15 +29,15 @@ const ExampleInner = () => {
     <>
       <HeaderContainer
         render={() => (
-          <Header aria-label='IBM [Product]'>
-            <HeaderName href='/' prefix='IBM'>
+          <Header aria-label="IBM [Product]">
+            <HeaderName href="/" prefix="IBM">
               [Product]
             </HeaderName>
             <HeaderGlobalBar>
               <HeaderGlobalAction
-                aria-label='Web terminal'
+                aria-label="Web terminal"
                 onClick={openWebTerminal}
-                tooltipAlignment='end'
+                tooltipAlignment="end"
               >
                 <Terminal />
               </HeaderGlobalAction>
@@ -47,38 +47,38 @@ const ExampleInner = () => {
       />
 
       <WebTerminalContentWrapper>
-        <div className='main--content'>
+        <div className="main--content">
           <WebTerminal
-            closeIconDescription='Close terminal'
-            documentationLinksIconDescription='Documentation links'
+            closeIconDescription="Close terminal"
+            documentationLinksIconDescription="Documentation links"
             documentationLinks={[
               {
-                itemText: "BX/ICP docs",
-                href: "#",
-                onClick: () => console.log("clicked"),
-                openInNewTab: false
+                itemText: 'BX/ICP docs',
+                href: '#',
+                onClick: () => console.log('clicked'),
+                openInNewTab: false,
               },
               {
-                itemText: "Kube docs",
-                href: "#",
-                onClick: () => console.log("clicked"),
-                openInNewTab: true
+                itemText: 'Kube docs',
+                href: '#',
+                onClick: () => console.log('clicked'),
+                openInNewTab: true,
               },
               {
-                itemText: "Docker docs",
-                href: "#",
-                onClick: () => console.log("clicked"),
-                openInNewTab: true
+                itemText: 'Docker docs',
+                href: '#',
+                onClick: () => console.log('clicked'),
+                openInNewTab: true,
               },
               {
-                itemText: "Helm docs",
-                href: "#",
-                onClick: () => console.log("clicked"),
-                openInNewTab: true
-              }
+                itemText: 'Helm docs',
+                href: '#',
+                onClick: () => console.log('clicked'),
+                openInNewTab: true,
+              },
             ]}
           >
-            <div className='example-terminal'>
+            <div className="example-terminal">
               <p>Connection successful.</p>
 
               <p>

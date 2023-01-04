@@ -1,21 +1,21 @@
-import React from "react";
-import { render } from "react-dom";
+import React from 'react';
+import { render } from 'react-dom';
 
 // This example uses this CSS build to minimize CodeSandBox transpile times
-import "@carbon/ibm-products/css/index-full-carbon.css";
-import "./_index.scss";
+import '@carbon/ibm-products/css/index-full-carbon.css';
+import './_index.scss';
 
-import { Example } from "./Example/Example";
+import { Example } from './Example/Example';
 
-import { ThemeProvider } from "./ThemeSelector/ThemeContext";
-import { ThemeDropdown } from "./ThemeSelector/ThemeDropdown";
+import { ThemeProvider } from './ThemeSelector/ThemeContext';
+import { ThemeDropdown } from './ThemeSelector/ThemeDropdown';
 
 render(
   <ThemeProvider>
-    <div className='app'>
+    <div className="app">
       <Example />
       <ThemeDropdown />
     </div>
   </ThemeProvider>,
-  document.getElementById("root")
+  document.getElementById('root')
 );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Header,
   HeaderMenuButton,
@@ -10,9 +10,9 @@ import {
   // SideNavLink,
   // SideNavMenu,
   // SideNavMenuItem,
-  SkipToContent
-} from "@carbon/react";
-import { Notification, UserAvatar, Switcher } from "@carbon/icons-react";
+  SkipToContent,
+} from '@carbon/react';
+import { Notification, UserAvatar, Switcher } from '@carbon/icons-react';
 //import Fade16 from "@carbon/icons-react/lib/fade/16";
 
 const Notification20 = (props) => <Notification size={20} {...props} />;
@@ -28,27 +28,27 @@ export const CommonHeader = ({ className }) => {
   };
 
   return (
-    <Header aria-label='Carbon Tutorial' className={className}>
+    <Header aria-label="Carbon Tutorial" className={className}>
       <SkipToContent />
       <HeaderMenuButton
-        aria-label='Open menu'
+        aria-label="Open menu"
         isCollapsible
         onClick={handleClickSideNavExpand}
         isActive={isSideNavExpanded}
       />
 
-      <HeaderName href='/' prefix='IBM'>
+      <HeaderName href="/" prefix="IBM">
         Cloud PAK Automation Hub
       </HeaderName>
 
       <HeaderGlobalBar>
-        <HeaderGlobalAction aria-label='Notifications'>
+        <HeaderGlobalAction aria-label="Notifications">
           <Notification20 />
         </HeaderGlobalAction>
-        <HeaderGlobalAction aria-label='User Avatar'>
+        <HeaderGlobalAction aria-label="User Avatar">
           <UserAvatar20 />
         </HeaderGlobalAction>
-        <HeaderGlobalAction aria-label='App Switcher'>
+        <HeaderGlobalAction aria-label="App Switcher">
           <Switcher20 />
         </HeaderGlobalAction>
       </HeaderGlobalBar>

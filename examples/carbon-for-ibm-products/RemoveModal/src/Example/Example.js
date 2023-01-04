@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import { RemoveModal } from "@carbon/ibm-products";
-import { Button } from "@carbon/react";
+import React, { useState } from 'react';
+import { RemoveModal } from '@carbon/ibm-products';
+import { Button } from '@carbon/react';
 
 export const Example = () => {
   const [open, setOpen] = useState(true);
-  const resourceName = "bx1001";
+  const resourceName = 'bx1001';
   const props = {
     body: `Deleting ${resourceName} will permanently delete the configuration. This action cannot be undone.`,
-    className: "remove-modal-test",
-    title: "Confirm delete",
-    iconDescription: "close",
-    inputInvalidText: "A valid value is required",
+    className: 'remove-modal-test',
+    title: 'Confirm delete',
+    iconDescription: 'close',
+    inputInvalidText: 'A valid value is required',
     inputLabelText: `Type ${resourceName} to confirm`,
-    inputPlaceholderText: "Name of resourceName",
+    inputPlaceholderText: 'Name of resourceName',
     open,
     onClose: () => setOpen(false),
-    primaryButtonText: "Delete",
+    primaryButtonText: 'Delete',
     resourceName,
-    secondaryButtonText: "Close",
+    secondaryButtonText: 'Close',
     label: `Delete ${resourceName}`,
-    textConfirmation: true
+    textConfirmation: true,
   };
   return (
     <>

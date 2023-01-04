@@ -1,12 +1,12 @@
-import "./App.scss";
+import './App.scss';
 
-import { GalleryCard } from "./GalleryCard";
+import { GalleryCard } from './GalleryCard';
 
-import config from "./gallery-config";
-import { Search } from "@carbon/react";
-import { useState } from "react";
-import { ThemeProvider } from "./ThemeSelector/ThemeContext";
-import { ThemeDropdown } from "./ThemeSelector/ThemeDropdown";
+import config from './gallery-config';
+import { Search } from '@carbon/react';
+import { useState } from 'react';
+import { ThemeProvider } from './ThemeSelector/ThemeContext';
+import { ThemeDropdown } from './ThemeSelector/ThemeDropdown';
 
 const App = () => {
   const [filteredConfig, setFilteredConfig] = useState(config);
@@ -15,40 +15,40 @@ const App = () => {
     if (!ev.target.value) {
       setFilteredConfig(config);
     } else {
-      const filter = new RegExp(ev.target.value, "i");
+      const filter = new RegExp(ev.target.value, 'i');
       setFilteredConfig(config.filter((item) => filter.test(item.label)));
     }
   };
 
   return (
     <ThemeProvider>
-      <div className='app'>
-        <div className='app__container'>
-          <h1 className='app__title'>
+      <div className="app">
+        <div className="app__container">
+          <h1 className="app__title">
             Carbon for IBM Products - gallery of examples
           </h1>
           <Search
-            className='app__filter'
-            labelText='Find a Carbon for IBM Products example'
+            className="app__filter"
+            labelText="Find a Carbon for IBM Products example"
             onChange={handleSearch}
-            placeholder='Filter sandboxes'
+            placeholder="Filter sandboxes"
           />
-          <div className='app__gallery'>
+          <div className="app__gallery">
             {filteredConfig.map((item, index) => (
               <GalleryCard
-                className='app__gallery-item'
+                className="app__gallery-item"
                 key={index}
                 title={item.label}
                 url={item.url}
-                target='_blank' // NOTE: _top and _parent do not seem to work in codesandbox
+                target="_blank" // NOTE: _top and _parent do not seem to work in codesandbox
                 thumbnail={item.thumbnail}
               />
             ))}
             {Array.from({ length: 10 }).map((_, index) => (
               <div
-                className='app__gallery-item--dummy'
+                className="app__gallery-item--dummy"
                 key={`dummy--${index}`}
-                aria-hidden='true'
+                aria-hidden="true"
               />
             ))}
           </div>

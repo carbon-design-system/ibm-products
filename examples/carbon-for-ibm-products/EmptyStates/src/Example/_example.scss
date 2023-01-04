@@ -1,7 +1,7 @@
-@use "@carbon/react/scss/theme";
-@use "@carbon/react/scss/spacing";
-@use "@carbon/react/scss/type";
-@use "@carbon/react/scss/config";
+@use '@carbon/react/scss/theme';
+@use '@carbon/react/scss/spacing';
+@use '@carbon/react/scss/type';
+@use '@carbon/react/scss/config';
 
 .empty-state-wrapper {
   display: flex;
@@ -10,7 +10,7 @@
 }
 
 .#{config.$prefix}--label {
-  @include type.type-style("label-01");
+  @include type.type-style('label-01');
 
   margin-bottom: spacing.$spacing-03;
 }

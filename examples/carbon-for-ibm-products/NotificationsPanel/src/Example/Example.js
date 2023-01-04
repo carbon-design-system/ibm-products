@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import {
   Button,
   Header,
   HeaderContainer,
   HeaderName,
   HeaderGlobalBar,
-  HeaderGlobalAction
-} from "@carbon/react";
-import { Notification } from "@carbon/icons-react";
+  HeaderGlobalAction,
+} from '@carbon/react';
+import { Notification } from '@carbon/icons-react';
 
-import "./_example.scss";
+import './_example.scss';
 
-import { NotificationsPanel } from "@carbon/ibm-products";
-import { sampleData } from "./sampleData";
+import { NotificationsPanel } from '@carbon/ibm-products';
+import { sampleData } from './sampleData';
 
 export const Example = () => {
   const [open, setOpen] = useState(false);
@@ -22,13 +22,13 @@ export const Example = () => {
   const addNewNotification = () => {
     const newNotification = {
       id: uuidv4(),
-      type: "success",
-      title: "Deployed app successfully",
-      description: "Application has been deployed.",
+      type: 'success',
+      title: 'Deployed app successfully',
+      description: 'Application has been deployed.',
       timestamp: new Date(),
       unread: true,
       onNotificationClick: (notification) =>
-        console.log(`Clicked on notification with id "${notification.id}"`)
+        console.log(`Clicked on notification with id "${notification.id}"`),
     };
     setNotificationsData((arr) => [...arr, newNotification]);
   };
@@ -37,13 +37,13 @@ export const Example = () => {
     <>
       <HeaderContainer
         render={() => (
-          <Header aria-label='IBM [Product]'>
-            <HeaderName href='/' prefix='IBM'>
+          <Header aria-label="IBM [Product]">
+            <HeaderName href="/" prefix="IBM">
               [Product]
             </HeaderName>
             <HeaderGlobalBar>
               <HeaderGlobalAction
-                aria-label='Notifications'
+                aria-label="Notifications"
                 onClick={() => setOpen(!open)}
               >
                 <Notification size={20} />
@@ -52,17 +52,17 @@ export const Example = () => {
           </Header>
         )}
       />
-      <div className='main--content'>
+      <div className="main--content">
         <Button onClick={addNewNotification}>Add new notification</Button>
         <NotificationsPanel
           open={open}
           onClickOutside={() => setOpen(false)}
           data={notificationsData}
           onDoNotDisturbChange={(event) =>
-            console.log("Toggled do not disturb", event)
+            console.log('Toggled do not disturb', event)
           }
-          onViewAllClick={() => console.log("Clicked view all button")}
-          onSettingsClick={() => console.log("Clicked settings gear button")}
+          onViewAllClick={() => console.log('Clicked view all button')}
+          onSettingsClick={() => console.log('Clicked settings gear button')}
           onDismissAllNotifications={() => setNotificationsData([])}
           onDismissSingleNotification={({ id }) => {
             let tempData = [...notificationsData];

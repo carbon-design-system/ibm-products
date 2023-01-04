@@ -1,8 +1,8 @@
-@use "@carbon/react/scss/spacing";
-@use "@carbon/react/scss/type";
+@use '@carbon/react/scss/spacing';
+@use '@carbon/react/scss/type';
 
 // imports carbon settings
-$baseClass: "gallery-card";
+$baseClass: 'gallery-card';
 
 .#{$baseClass}.#{$baseClass} {
   position: relative;
@@ -18,7 +18,7 @@ $baseClass: "gallery-card";
 }
 
 .#{$baseClass} .#{$baseClass}__title {
-  @include type.type-style("productive-heading-03");
+  @include type.type-style('productive-heading-03');
 
   overflow: hidden;
   flex: 1 1 20%;

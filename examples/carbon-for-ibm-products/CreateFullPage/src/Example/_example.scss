@@ -1,8 +1,8 @@
-@use "@carbon/react/scss/spacing";
-@use "@carbon/react/scss/theme" as *;
-@use "@carbon/react/scss/config";
+@use '@carbon/react/scss/spacing';
+@use '@carbon/react/scss/theme' as *;
+@use '@carbon/react/scss/config';
 
-$block-class: "full-page-example";
+$block-class: 'full-page-example';
 $preview-block-class: #{$block-class}--create-full-page-sandbox;
 
 .#{$preview-block-class} .#{$block-class}--create-full-page__content {

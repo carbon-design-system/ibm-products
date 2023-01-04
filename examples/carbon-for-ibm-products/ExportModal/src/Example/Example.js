@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { ExportModal } from "@carbon/ibm-products";
-import { Button } from "@carbon/react";
+import React, { useState } from 'react';
+import { ExportModal } from '@carbon/ibm-products';
+import { Button } from '@carbon/react';
 
 export const Example = () => {
   const [open, setOpen] = useState(true);
@@ -20,14 +20,14 @@ export const Example = () => {
   };
 
   const defaultProps = {
-    filename: "Sample02.pdf",
-    inputLabel: "File name",
+    filename: 'Sample02.pdf',
+    inputLabel: 'File name',
     onClose: () => {},
     onRequestSubmit: () => {},
     open: true,
-    primaryButtonText: "Export",
-    secondaryButtonText: "Cancel",
-    title: "Export"
+    primaryButtonText: 'Export',
+    secondaryButtonText: 'Cancel',
+    title: 'Export',
   };
 
   return (
@@ -39,10 +39,10 @@ export const Example = () => {
         onRequestSubmit={onSubmitHandler}
         loading={loading}
         successful={successful}
-        loadingMessage='Exporting file...'
-        successMessage='The file has been exported.'
+        loadingMessage="Exporting file..."
+        successMessage="The file has been exported."
         error={error}
-        errorMessage='Server error 500'
+        errorMessage="Server error 500"
       />
       <Button onClick={() => setOpen(true)}>Launch modal</Button>
     </>

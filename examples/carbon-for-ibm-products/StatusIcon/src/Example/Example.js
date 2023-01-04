@@ -31,8 +31,8 @@ export const Example = () => {
   );
   const [size, setSize] = useState('xlg');
   const useDarkThemeStatusIcon =
-    theme.state.currentTheme.value === 'carbon-theme--g90' ||
-    theme.state.currentTheme.value === 'carbon-theme--g100';
+    theme?.state?.currentTheme?.value === 'carbon-theme--g90' ||
+    theme?.state?.currentTheme?.value === 'carbon-theme--g100';
   return (
     <>
       <div className="ccs-status-dropdown">

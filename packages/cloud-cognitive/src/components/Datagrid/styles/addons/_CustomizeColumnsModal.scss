@@ -53,7 +53,7 @@
 .#{$block-class}__customize-columns-modal--actions
   input[role='searchbox']
   ~ button:hover {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .#{$block-class}__customize-columns-instructions {

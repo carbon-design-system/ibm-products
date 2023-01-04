@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -113,7 +113,7 @@ const deleteAndRecreateGalleryConfigDir = (galleryConfigDir) => {
 
 const writeGalleryConfig = (galleryConfigPath, config) => {
   const header = `/**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -151,7 +151,7 @@ const writeGalleryTests = (testPath, directories) => {
   const skipExamples = []; // example folder names to be skipped
 
   const header = `/**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.

@@ -46,7 +46,6 @@ export const StepNumberContext = createContext(-1);
 const defaults = {
   verticalPosition: 'normal',
   influencerWidth: 'narrow',
-  firstFocusElement: '',
 };
 
 export let CreateTearsheet = forwardRef(
@@ -66,7 +65,7 @@ export let CreateTearsheet = forwardRef(
       onClose,
       onRequestSubmit,
       open,
-      firstFocusElement = defaults.firstFocusElement,
+      firstFocusElement,
       submitButtonText,
       title,
       verticalPosition = defaults.verticalPosition,

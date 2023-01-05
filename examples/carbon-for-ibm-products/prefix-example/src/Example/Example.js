@@ -14,8 +14,6 @@ import './_example.scss';
 // but which we want to use in their 'canary' form. Note that that has to
 // be done in an import so that it happens before all component imports.
 
-import '../config'; // must come before @carbon/ibm-products component instance created
-
 export const Example = () => {
   const [isOpen, setIsOpen] = useState(true);
   const handleOpenModalClick = () => {

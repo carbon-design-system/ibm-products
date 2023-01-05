@@ -15,12 +15,16 @@ import './_example.scss';
 // but which we want to use in their 'canary' form. Note that that has to
 // be done in an import so that it happens before all component imports.
 
-import { WebTerminal } from '@carbon/ibm-products';
+import {
+  useWebTerminal,
+  WebTerminal,
+  WebTerminalContentWrapper,
+  WebTerminalProvider,
+} from '@carbon/ibm-products';
 
-export const Example = () => {
-  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
-  const openTerminal = useCallback(() => setIsTerminalOpen(true), []);
-  const closeTerminal = useCallback(() => setIsTerminalOpen(false), []);
+const ExampleInner = () => {
+  const { openWebTerminal } = useWebTerminal();
+
   return (
     <>
       <HeaderContainer
@@ -32,7 +36,8 @@ export const Example = () => {
             <HeaderGlobalBar>
               <HeaderGlobalAction
                 aria-label="Web terminal"
-                onClick={openTerminal}
+                onClick={openWebTerminal}
+                tooltipAlignment="end"
               >
                 <Terminal />
               </HeaderGlobalAction>
@@ -40,51 +45,64 @@ export const Example = () => {
           </Header>
         )}
       />
-      <div className="main--content">
-        <WebTerminal
-          open={isTerminalOpen}
-          closeTerminal={closeTerminal}
-          documentationLinks={[
-            {
-              label: 'BX/ICP docs',
-              href: '#',
-              onClick: () => console.log('clicked'),
-              openInNewTab: false,
-            },
-            {
-              label: 'Kube docs',
-              href: '#',
-              onClick: () => console.log('clicked'),
-              openInNewTab: true,
-            },
-            {
-              label: 'Docker docs',
-              href: '#',
-              onClick: () => console.log('clicked'),
-              openInNewTab: true,
-            },
-            {
-              label: 'Helm docs',
-              href: '#',
-              onClick: () => console.log('clicked'),
-              openInNewTab: true,
-            },
-          ]}
-        >
-          <div className="example-terminal">
-            <p>Connection successful.</p>
 
-            <p>
-              DISCLAIMER: This is not a real terminal, you would pass your own
-              terminal component into the children of the WebTerminal component.
-            </p>
+      <WebTerminalContentWrapper>
+        <div className="main--content">
+          <WebTerminal
+            closeIconDescription="Close terminal"
+            documentationLinksIconDescription="Documentation links"
+            documentationLinks={[
+              {
+                itemText: 'BX/ICP docs',
+                href: '#',
+                onClick: () => console.log('clicked'),
+                openInNewTab: false,
+              },
+              {
+                itemText: 'Kube docs',
+                href: '#',
+                onClick: () => console.log('clicked'),
+                openInNewTab: true,
+              },
+              {
+                itemText: 'Docker docs',
+                href: '#',
+                onClick: () => console.log('clicked'),
+                openInNewTab: true,
+              },
+              {
+                itemText: 'Helm docs',
+                href: '#',
+                onClick: () => console.log('clicked'),
+                openInNewTab: true,
+              },
+            ]}
+          >
+            <div className="example-terminal">
+              <p>Connection successful.</p>
 
-            <p>Please see the docs of this component for more information.</p>
+              <p>
+                DISCLAIMER: This is not a real terminal, you would pass your own
+                terminal component into the children of the WebTerminal
+                component.
+              </p>
 
-            <p>joe bob:~$</p>
-          </div>
-        </WebTerminal>
-      </div>
+              <p>Please see the docs of this component for more information.</p>
+
+              <p>joe bob:~$</p>
+            </div>
+          </WebTerminal>
+        </div>
+      </WebTerminalContentWrapper>
     </>
+  );
+};
+
+export const Example = () => {
+  // Web terminal needs a provider to work
+  return (
+    <WebTerminalProvider>
+      <ExampleInner />
+    </WebTerminalProvider>
   );
 };

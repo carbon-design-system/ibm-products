@@ -3,9 +3,7 @@ $feature-flags: (
   enable-css-custom-properties: true,
 );
 
-// imports carbon settings
-@import '@carbon/elements/scss/elements';
-
 // import vars and mixins not loaded without a carbon component scss file
-@import 'carbon-components/scss/globals/scss/vars';
+@import 'carbon-components/scss/globals/scss/typography';
 @import 'carbon-components/scss/globals/scss/helper-mixins';
+@import 'carbon-components/scss/globals/scss/vars';

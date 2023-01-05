@@ -54,6 +54,7 @@ svg.#{$block-class}__draggable-handleStyle.disable {
 .#{$block-class}__draggable-handleHolder-droppable {
   display: flex;
   width: 100%;
+  align-items: center;
 }
 
 .#{$block-class}__draggable-handleHolder-grabbed {

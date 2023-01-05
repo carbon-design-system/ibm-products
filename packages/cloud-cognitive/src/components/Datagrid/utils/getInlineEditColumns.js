@@ -99,6 +99,7 @@ export const getInlineEditColumns = () => {
             console.log(newDateObj, cell);
           },
           labelText: 'Change active since date',
+          dateFormat:"d/m/Y",
           // optionally pass props here to be passed through to Carbon's DatePickerInput component
           datePickerInputProps: {
             labelText: 'Change active since date',

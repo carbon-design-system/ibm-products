@@ -49,6 +49,7 @@ export const MultiStepTearsheet = ({
   cancelButtonText,
   className,
   description,
+  firstFocusElement,
   influencerWidth,
   label,
   nextButtonText,
@@ -109,6 +110,7 @@ export const MultiStepTearsheet = ({
             }, simulatedDelay);
           })
         }
+        firstFocusElement={firstFocusElement}
       >
         <CreateTearsheetStep
           onNext={() => {

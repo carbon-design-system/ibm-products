@@ -397,17 +397,23 @@ export const InlineEditCell = ({
   };
 
   const buildDate = (value) => {
+    const dateFormat = config?.inputProps?.dateFormat;
     if (value instanceof Date) {
-      const { dateFormat = 'm/d/Y' } = config;
       const maskedFullYear = value.getFullYear();
       const maskedMonth = padTo2Digits(value.getMonth() + 1);
       const maskedDay = padTo2Digits(value.getDate());
-      if (dateFormat === 'm/d/Y' || dateFormat === 'm/d/y') {
+      if (dateFormat === 'm/d/Y' || value === 'm/d/y') {
         return [maskedMonth, maskedDay, maskedFullYear].join('/');
       }
-      if (dateFormat === 'd/m/Y' || dateFormat === 'd/m/y') {
+      if (
+        dateFormat === 'd/m/Y' ||
+        dateFormat === 'd/m/y' ||
+        dateFormat === undefined
+      ) {
         return [maskedDay, maskedMonth, maskedFullYear].join('/');
       }
+    } else {
+      return value;
     }
     return null;
   };

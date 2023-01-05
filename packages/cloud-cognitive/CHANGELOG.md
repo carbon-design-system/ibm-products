@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.11](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.10...@carbon/ibm-products@2.0.0-rc.11) (2022-12-20)
+
+
+### Bug Fixes
+
+* **DataGrid:** empty state enhancement with action and link v11 ([#2562](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2562)) ([417dd1d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/417dd1d8fcd4b20180190b858938520d21902dec))
+* **Datagrid:** resolve react hooks error from datagrid row ([#2575](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2575)) ([61ba3c5](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/61ba3c57090568c895186234f6292e8e83c4b434))
+* **DataGrid:** virtual scrollbar not visible v11 ([#2467](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2467)) ([fd00b33](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/fd00b330fbeb3a87bb02df02d8941a90543aaad7))
+
+
+### Features
+
+* **Datagrid:** adds FilterFlyout and FilterSummary v11 ([#2525](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2525)) ([189489c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/189489c4a2021ce380a5fe63b6cf9caead52b332))
+* **Datagrid:** makes seperate story file and adds docs for FilterFlyout (v11) ([#2570](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2570)) ([6aa356d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6aa356d1a5cd0e18e623242611f4b7719b644aa2))
+
+
+
+
+
 # [2.0.0-rc.10](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.9...@carbon/ibm-products@2.0.0-rc.10) (2022-12-13)
 
 

@@ -542,6 +542,11 @@
   justify-content: center;
 }
 
+.#{$block-class}__customize-columns-checkbox-wrapper.#{c4p-settings.$carbon-prefix}--form-item {
+  flex: 0 0 auto;
+  margin-right: $spacing-03;
+}
+
 .#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
   width: 10px;
   height: 7px;

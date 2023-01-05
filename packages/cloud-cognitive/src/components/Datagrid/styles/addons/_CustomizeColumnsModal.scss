@@ -48,6 +48,19 @@
   margin-left: $spacing-05;
 }
 
+.#{variables.$block-class}__customize-columns-modal--actions
+  input[role='searchbox']
+  ~ button {
+  width: $spacing-09;
+  height: $spacing-09;
+}
+
+.#{variables.$block-class}__customize-columns-modal--actions
+  input[role='searchbox']
+  ~ button:hover {
+  border-bottom: none;
+}
+
 .#{variables.$block-class}__customize-columns-instructions {
   padding-left: $spacing-05;
   margin-bottom: $spacing-06;

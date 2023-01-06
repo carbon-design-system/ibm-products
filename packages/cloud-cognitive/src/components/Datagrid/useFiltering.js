@@ -78,4 +78,3 @@ const useFiltering = (hooks) => {
 };
 
 export default useFiltering;
-

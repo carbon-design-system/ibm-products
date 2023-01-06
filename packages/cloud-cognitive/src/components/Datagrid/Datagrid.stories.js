@@ -25,8 +25,9 @@ import {
   useSelectRows,
   useSortableColumns,
   useStickyColumn,
+  useFiltering,
 } from '.';
-
+import { StatusIcon } from '../StatusIcon';
 import mdx from './Datagrid.mdx';
 import { LeftPanelStory, SelectAllWithToggle } from './Datagrid.stories/index';
 
@@ -439,8 +440,79 @@ export const SelectItemsInAllPages = () => {
 SelectItemsInAllPages.story = SelectAllWithToggle;
 
 export const LeftPanel = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
+  const headers = [
+    {
+      Header: 'Row Index',
+      accessor: (row, i) => i,
+      sticky: 'left',
+      id: 'rowIndex', // id is required when accessor is a function.
+    },
+    {
+      Header: 'First Name',
+      accessor: 'firstName',
+    },
+    {
+      Header: 'Last Name',
+      accessor: 'lastName',
+    },
+    {
+      Header: 'Age',
+      accessor: 'age',
+      width: 50,
+    },
+    {
+      Header: 'Visits',
+      accessor: 'visits',
+      filter: 'number',
+      width: 60,
+    },
+    {
+      Header: 'Status',
+      accessor: 'status',
+    },
+    // Shows the date filter example
+    {
+      Header: 'Joined',
+      accessor: 'joined',
+      filter: 'date',
+      Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
+    },
+    // Shows the checkbox filter example
+    {
+      Header: 'Password strength',
+      accessor: 'passwordStrength',
+      filter: 'checkbox',
+      Cell: ({ cell: { value } }) => {
+        const iconProps = {
+          size: 'sm',
+          theme: 'light',
+          kind: value,
+          iconDescription: value,
+        };
+
+        return (
+          <span
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <StatusIcon {...iconProps} />
+            {iconProps.iconDescription}
+          </span>
+        );
+      },
+    },
+    // Shows the checkbox filter example
+    {
+      Header: 'Role',
+      accessor: 'role',
+    },
+  ];
+
+  const columns = React.useMemo(() => headers, []);
+  const [data] = useState(makeData(20));
 
   const sections = [
     {
@@ -596,25 +668,27 @@ export const LeftPanel = () => {
     },
   ];
 
-  const datagridState = useDatagrid({
-    filterProps: {
-      variation: 'panel',
-      updateMethod: 'batch',
-      primaryActionLabel: 'Apply',
-      secondaryActionLabel: 'Cancel',
-      flyoutIconDescription: 'Open filters',
-      shouldClickOutsideToClose: false,
-      onFlyoutOpen: () => console.log('onFlyoutOpen'),
-      onFlyoutClose: () => console.log('onFlyoutClose'),
-      sections,
+  const datagridState = useDatagrid(
+    {
+      filterProps: {
+        variation: 'panel',
+        updateMethod: 'batch',
+        primaryActionLabel: 'Apply',
+        secondaryActionLabel: 'Cancel',
+        flyoutIconDescription: 'Open filters',
+        onFlyoutOpen: () => console.log('onFlyoutOpen'),
+        onFlyoutClose: () => console.log('onFlyoutClose'),
+        sections,
+      },
+      columns,
+      data,
+      DatagridActions,
+      DatagridBatchActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
     },
-    columns,
-    data,
-    DatagridActions,
-    DatagridBatchActions,
-    batchActions: true,
-    toolbarBatchActions: getBatchActions(),
-  });
+    useFiltering
+  );
 
   return (
     <Wrapper>

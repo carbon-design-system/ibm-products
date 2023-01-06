@@ -8,7 +8,7 @@
 import { FLYOUT, PANEL } from './constants';
 
 // This functions takes the filters passed in and makes an object to track it's state
-export const getInitialStateFromFilters = (filters, variation) => {
+export const getInitialStateFromFilters = (filters, variation = FLYOUT) => {
   const initialFilterState = {};
 
   if (variation === FLYOUT) {

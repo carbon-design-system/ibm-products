@@ -10,7 +10,7 @@
 
 .#{$block-class}-filter-left-panel__container {
   position: relative;
-  width: 388px;
+  width: rem(320px);
   border-top: 1px $ui-03 solid;
   border-right: 1px $ui-03 solid;
   background-color: $ui-01;
@@ -37,17 +37,16 @@
   &__heading {
     display: flex;
     justify-content: space-between;
-    padding: 0px 16px;
+    padding-left: $spacing-05;
   }
 
   &__search {
-    padding: 0px 16px;
-    padding-bottom: 8px;
+    padding: 0 $spacing-05 $spacing-06;
   }
 
   &__category-title {
     @include carbon--type-style('heading-01');
-    padding: 18px 0px;
+    margin-bottom: 18px;
   }
 
   &__category {
@@ -56,13 +55,16 @@
 }
 
 .#{$block-class}-filter-left-panel__action-set {
-  // margin-bottom: 12px;
-  height: 64px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: rem(64px);
 }
 
 // Overrides
 .#{$block-class}-filter-left-panel__container .bx--accordion__title {
-  margin: 0px;
+  margin: 0;
 }
 
 .#{$block-class}-filter-left-panel__container .bx--accordion__arrow {
@@ -70,6 +72,13 @@
 }
 
 .#{$block-class}-filter-left-panel__container .bx--accordion__content {
-  padding-left: 0;
   padding-right: 0;
+  padding-left: 0;
+}
+
+// Makes sure every child (filter) inside the accordion content has space in between
+.#{$block-class}-filter-left-panel__container
+  .bx--accordion__content
+  > *:not(:last-child) {
+  margin-bottom: $spacing-05;
 }

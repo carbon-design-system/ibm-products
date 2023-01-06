@@ -23,6 +23,7 @@ export const DatagridContent = ({ datagridState }) => {
   const { activeCellId } = state;
   const {
     getTableProps = () => {},
+    getFilterFlyoutProps,
     withVirtualScroll,
     DatagridPagination,
     isFetching,
@@ -153,6 +154,7 @@ export const DatagridContent = ({ datagridState }) => {
               filterSections={filterProps.sections}
               updateMethod="batch"
               tableID={tableId}
+              {...getFilterFlyoutProps()}
             />
           )}
           {withInlineEdit ? (
@@ -199,7 +201,6 @@ DatagridContent.propTypes = {
     variableRowHeight: PropTypes.bool,
     useDenseHeader: PropTypes.bool,
     withInlineEdit: PropTypes.bool,
-    filterProps: PropTypes.object,
     verticalAlign: PropTypes.string,
     gridTitle: PropTypes.node,
     gridDescription: PropTypes.node,
@@ -208,5 +209,7 @@ DatagridContent.propTypes = {
     tableId: PropTypes.string,
     totalColumnsWidth: PropTypes.number,
     gridRef: PropTypes.object,
+    setAllFilters: PropTypes.func,
+    getFilterProps: PropTypes.func,
   }),
 };

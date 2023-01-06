@@ -108,7 +108,7 @@ const FilterFlyout = ({
 
   const reset = () => {
     // Get the initial values for the filters
-    const initialFiltersState = getInitialStateFromFilters(filters);
+    const initialFiltersState = getInitialStateFromFilters(filters, FLYOUT);
     const initialFiltersObjectArray = [];
 
     // Set the state to the initial values
@@ -183,7 +183,6 @@ const FilterFlyout = ({
         return (
           <DatePicker
             {...components.DatePicker}
-            key={column}
             onChange={(value) => {
               setFiltersState({ ...filtersState, [column]: value });
               applyFilters({ column, value, type });
@@ -207,7 +206,6 @@ const FilterFlyout = ({
       } else if (type === NUMBER) {
         return (
           <NumberInput
-            key={column}
             step={1}
             allowEmpty
             hideSteppers
@@ -225,7 +223,7 @@ const FilterFlyout = ({
         );
       } else if (type === CHECKBOX) {
         return (
-          <FormGroup key={column} {...components.FormGroup}>
+          <FormGroup {...components.FormGroup}>
             {filtersState[column].map((option) => (
               <Checkbox
                 key={option.labelText}
@@ -251,7 +249,7 @@ const FilterFlyout = ({
         );
       } else if (type === RADIO) {
         return (
-          <FormGroup key={column} {...components.FormGroup}>
+          <FormGroup {...components.FormGroup}>
             <RadioButtonGroup
               {...components.RadioButtonGroup}
               valueSelected={filtersState[column]}
@@ -277,7 +275,6 @@ const FilterFlyout = ({
       } else if (type === DROPDOWN) {
         return (
           <Dropdown
-            key={column}
             {...components.Dropdown}
             selectedItem={filtersState[column]}
             onChange={({ selectedItem }) => {

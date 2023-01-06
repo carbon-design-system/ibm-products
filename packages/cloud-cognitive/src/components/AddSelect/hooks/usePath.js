@@ -5,16 +5,24 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const usePath = (itemsLabel = '') => {
-  const defaultPath = [
+  const [path, setPath] = useState([
     {
       id: 'base_of_path',
       title: itemsLabel,
     },
-  ];
-  const [path, setPath] = useState(defaultPath);
+  ]);
+
+  useEffect(() => {
+    setPath([
+      {
+        id: 'base_of_path',
+        title: itemsLabel,
+      },
+    ]);
+  }, [itemsLabel]);
 
   const handler = (id, title, parentId) => {
     if (path.find((entry) => entry.id === id)) {
@@ -44,7 +52,12 @@ const usePath = (itemsLabel = '') => {
   };
 
   const resetPath = () => {
-    setPath(defaultPath);
+    setPath([
+      {
+        id: 'base_of_path',
+        title: itemsLabel,
+      },
+    ]);
   };
 
   return {

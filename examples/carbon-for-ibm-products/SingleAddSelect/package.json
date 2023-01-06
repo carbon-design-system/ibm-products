@@ -1,0 +1,37 @@
+{
+  "name": "single-add-select",
+  "main": "src/index.js",
+  "dependencies": {
+    "@carbon/elements": "^10",
+    "@carbon/ibm-products": "^1",
+    "@carbon/icons-react": "^10",
+    "carbon-components": "^10",
+    "carbon-components-react": "^7",
+    "carbon-icons": "latest",
+    "react": "^17",
+    "react-dom": "^17",
+    "react-scripts": "^5",
+    "sass": "latest"
+  },
+  "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
+  "resolutions": {
+    "**/request/minimist": "^1.2.6"
+  },
+  "scripts": {
+    "start": "react-scripts start"
+  },
+  "keywords": [],
+  "description": "",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

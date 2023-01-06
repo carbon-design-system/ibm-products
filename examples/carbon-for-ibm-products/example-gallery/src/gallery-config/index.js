@@ -116,6 +116,11 @@ const config = [
       'url( ' + defaultOrNot(require('./InlineEdit--thumbnail.png')) + ')',
   },
   {
+    label: 'Multi Add Select',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/MultiAddSelect',
+    thumbnail: 'url( ' + defaultOrNot(require('undefined')) + ')',
+  },
+  {
     label: 'Notifications Panel',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/NotificationsPanel',
     thumbnail:
@@ -157,6 +162,11 @@ const config = [
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/SidePanel',
     thumbnail:
       'url( ' + defaultOrNot(require('./SidePanel--thumbnail.png')) + ')',
+  },
+  {
+    label: 'Single Add Select',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/SingleAddSelect',
+    thumbnail: 'url( ' + defaultOrNot(require('undefined')) + ')',
   },
   {
     label: 'StatusIcon',

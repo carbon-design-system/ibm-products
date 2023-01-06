@@ -202,6 +202,8 @@ $motion-duration: $duration-moderate-02;
     @include breakpoint-up('md') {
       max-width: 60%;
     }
+
+    word-break: break-all;
   }
 
   &.#{$block-class}--narrow .#{$block-class}__header-description {

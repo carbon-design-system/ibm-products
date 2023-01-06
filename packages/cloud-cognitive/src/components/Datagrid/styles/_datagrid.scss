@@ -536,6 +536,11 @@
   height: $spacing-09;
 }
 
+.#{$block-class}__customize-columns-checkbox-wrapper.#{$carbon-prefix}--form-item {
+  flex: 0 0 auto;
+  margin-right: $spacing-03;
+}
+
 .#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
   width: 10px;
   height: 7px;

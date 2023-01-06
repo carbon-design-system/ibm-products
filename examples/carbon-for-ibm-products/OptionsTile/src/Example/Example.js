@@ -64,6 +64,7 @@ export const Example = () => {
         summary={summary}
         enabled={enabled}
         onToggle={setEnabled}
+        title="Auto recovery"
       >
         <Dropdown
           id={`${id}--autorecovery--type`}

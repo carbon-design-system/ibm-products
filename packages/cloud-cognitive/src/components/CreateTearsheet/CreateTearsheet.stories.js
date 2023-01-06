@@ -46,6 +46,7 @@ const createTearsheetProps = {
   className: 'test-class-name',
   label: '',
   influencerWidth: 'narrow',
+  firstFocusElement: '#tearsheet-multi-step-story-text-input-multi-step-1',
 };
 
 export const multiStepTearsheet = prepareStory(MultiStepTearsheet, {

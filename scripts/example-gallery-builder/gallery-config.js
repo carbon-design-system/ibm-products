@@ -157,7 +157,6 @@ const writeGalleryTests = (testPath, directories) => {
       reason: 'Carbon v11 not supported in v1 repo.',
     },
   };
-  const skipExamples = []; // example folder names to be skipped
 
   const header = `/**
  * Copyright IBM Corp. 2020, 2023

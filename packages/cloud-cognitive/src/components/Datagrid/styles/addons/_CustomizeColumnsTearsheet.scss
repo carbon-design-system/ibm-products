@@ -21,7 +21,8 @@
   }
 }
 
-.#{variables.$block-class}__customize-columns-tearsheet--actions input[role='searchbox'] {
+.#{variables.$block-class}__customize-columns-tearsheet--actions
+  input[role='searchbox'] {
   height: $spacing-09;
   padding-left: $spacing-09;
   border-bottom: 1px solid $background-active;
@@ -62,7 +63,3 @@
 .#{variables.$block-class}__customize-columns-select-all--selected {
   background-color: $layer-selected;
 }
-
-// .#{variables.$block-class}__customize-columns-select-all--selected:hover {
-//   background-color: $background-selected;
-// }

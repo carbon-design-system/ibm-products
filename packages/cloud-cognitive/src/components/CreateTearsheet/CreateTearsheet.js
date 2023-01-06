@@ -300,11 +300,6 @@ CreateTearsheet.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * Specifies elements to skip over for auto focus.
-   */
-   skipFocusElements: PropTypes.object,
-
-  /**
    * The submit button text
    */
   submitButtonText: PropTypes.string.isRequired,

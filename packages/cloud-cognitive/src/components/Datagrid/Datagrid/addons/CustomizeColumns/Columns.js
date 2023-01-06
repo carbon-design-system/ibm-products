@@ -89,13 +89,10 @@ const Columns = ({
           </span>
           <div
             id={`${blockClass}__customize-columns-select-all`}
-            className={cx(
-              `${blockClass}__customize-columns-select-all`,
-              {
-                [`${blockClass}__customize-columns-select-all--selected`]:
-                  getVisibleColumnsCount() > 0,
-              }
-            )}
+            className={cx(`${blockClass}__customize-columns-select-all`, {
+              [`${blockClass}__customize-columns-select-all--selected`]:
+                getVisibleColumnsCount() > 0,
+            })}
             selected={getVisibleColumnsCount() > 0}
           >
             <Checkbox

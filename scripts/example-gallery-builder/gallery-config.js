@@ -143,11 +143,20 @@ const writeGalleryConfig = (galleryConfigPath, config) => {
 };
 
 const writeGalleryTests = (testPath, directories) => {
-  // TODO: remove these workarounds for non-standard examples
-  const ingoreExample = [
+  const dontTest = {
     //  example folder which should not be imported
-    'Carbon-v11-template', // Carbon v11 not supported in v1 repo
-  ];
+    // 'Import fails': { /* <-- directory name */
+    // skipImport: true, reason: 'Carbon v11 not supported in v1 repo.'
+    //  },
+    //  example folder which should not be tested but can be imported
+    // 'Test fails': { /* <-- directory name */
+    //   skipTest: true, reason: 'Test currently fails due to XYZ.'
+    //  },
+    'Carbon-v11-template': {
+      skipImport: true,
+      reason: 'Carbon v11 not supported in v1 repo.',
+    },
+  };
   const skipExamples = []; // example folder names to be skipped
 
   const header = `/**
@@ -167,27 +176,30 @@ import { init } from './test-common';
   const tests = [];
 
   directories.forEach((dir) => {
-    const ignoreExamples = ingoreExample.includes(dir);
+    const skipImport = dontTest[dir]?.skipImport;
+    const skipTest = skipImport || dontTest[dir]?.skipTest;
+    const skipReason = dontTest[dir]?.reason;
 
     const sanitizedDir = dir
       .replace(/(-|_)\w/g, (m) => m[1].toUpperCase())
       .replace(/./, (m) => m.toUpperCase());
 
-    const skipImport = `/* skipped import see 'example-gallery-builder'`;
-    if (ignoreExamples) {
-      exampleImports.push(`${skipImport} `);
+    if (skipImport) {
+      exampleImports.push(`/* ** SKIP IMPORT **, reason:  '${skipReason}' `);
     }
     exampleImports.push(
       `import { Example as ${sanitizedDir}Example } from './${dir}/src/Example/Example';`
     );
-    if (ignoreExamples) {
+    if (skipImport) {
       exampleImports.push(`*/`);
     }
 
-    const skipTest =
-      ignoreExamples || skipExamples.includes(dir) ? '.skip' : '';
+    const skipTestString = skipTest ? '.skip' : '';
+    let skipTestReason = skipTest
+      ? `  /* ** SKIP TEST **, reason: '${skipReason}' */\n`
+      : '';
 
-    tests.push(`  it${skipTest}('${sanitizedDir} renders', () => {
+    tests.push(`${skipTestReason}  it${skipTestString}('${sanitizedDir} renders', () => {
     render(<${sanitizedDir}Example />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();

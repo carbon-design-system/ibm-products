@@ -512,7 +512,7 @@ export const LeftPanel = () => {
   ];
 
   const columns = React.useMemo(() => headers, []);
-  const [data] = useState(makeData(20));
+  const [data] = useState(makeData(50));
 
   const sections = [
     {

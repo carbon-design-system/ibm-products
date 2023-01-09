@@ -368,12 +368,6 @@
   flex-direction: row;
 }
 
-.#{$block-class}__datagridLeftPanel {
-  display: flex;
-  width: 388px; // as per UX specs.
-  background-color: $ui-01;
-}
-
 .#{$block-class}__leftPanel-position {
   display: inherit;
 }
@@ -387,7 +381,7 @@
 
   .#{$block-class}__grid-container {
     display: flex;
-    overflow: hidden;
+    // overflow: hidden;
     flex-direction: column;
   }
 
@@ -395,21 +389,48 @@
     width: 100%;
   }
 
-  .#{$block-class}__datagridLeftPanel {
-    flex: 0 0 auto;
-  }
-
   .#{$carbon-prefix}--data-table-content {
     flex: 1 1 0%;
   }
   .#{$block-class}__table-container {
-    overflow: hidden;
+    overflow: visible;
+    display: grid;
+    background-color: red;
+    grid-template-columns: rem(320px) 1fr;
+    grid-template-areas:
+      'summary summary'
+      'table table';
+  }
+
+  .#{$block-class}__table-container--filter-open {
+    grid-template-areas:
+      'filter-panel table'
+      'filter-panel table';
+  }
+
+  .#{$block-class}__table-container--filter-open-with-summary {
+    grid-template-areas:
+      'filter-panel summary'
+      'filter-panel table';
+    grid-template-rows: rem(48px) 1fr;
+  }
+
+  .bx--data-table-content {
+    grid-area: table;
+  }
+
+  .c4p--datagrid-filter-left-panel {
+    grid-area: filter-panel;
+  }
+
+  .#{$block-class}__table-container .#{$block-class}__filter-summary {
+    grid-area: summary;
   }
 }
 
 .#{$block-class}__table-container {
   position: relative;
-  display: flex;
+
   overflow: auto;
   width: 100%;
   max-height: 100%;
@@ -535,7 +556,6 @@
 .#{$block-class} .#{$pkg-prefix}--button-menu {
   height: $spacing-09;
 }
-
 
 .#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
   width: 10px;

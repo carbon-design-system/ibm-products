@@ -11,6 +11,8 @@
 .#{$block-class}-filter-left-panel__container {
   position: relative;
   width: rem(320px);
+  min-height: 600px;
+  max-height: 100vh;
   border-top: 1px $ui-03 solid;
   border-right: 1px $ui-03 solid;
   background-color: $ui-01;
@@ -27,6 +29,8 @@
   &--open {
     display: flex;
     flex-direction: column;
+    position: sticky;
+    top: 0;
   }
 
   &__title {
@@ -55,10 +59,7 @@
 }
 
 .#{$block-class}-filter-left-panel__action-set {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  margin-top: auto;
   height: rem(64px);
 }
 

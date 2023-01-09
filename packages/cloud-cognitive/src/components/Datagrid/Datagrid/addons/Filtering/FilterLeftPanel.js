@@ -311,13 +311,8 @@ const FilterLeftPanel = ({
     );
   };
 
-  const panelHeight = tableRef.current?.getBoundingClientRect().height;
-
   return (
     <div
-      style={{
-        height: panelHeight,
-      }}
       className={cx(componentClass, `${componentClass}__container`, {
         [`${componentClass}--open`]: leftPanelOpen,
         [`${componentClass}--batch`]: showActionSet,

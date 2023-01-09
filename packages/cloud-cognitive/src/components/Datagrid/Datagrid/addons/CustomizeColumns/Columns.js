@@ -1,10 +1,8 @@
-// @flow
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2021
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2022, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
@@ -91,10 +89,8 @@ const Columns = ({
           </span>
           <div
             id={`${blockClass}__customize-columns-select-all`}
-            className={cx({
-              [`${blockClass}__customize-columns-select-all`]:
-                getVisibleColumnsCount() === 0,
-              [`${blockClass}__customize-columns-select-all-selected`]:
+            className={cx(`${blockClass}__customize-columns-select-all`, {
+              [`${blockClass}__customize-columns-select-all--selected`]:
                 getVisibleColumnsCount() > 0,
             })}
             selected={getVisibleColumnsCount() > 0}

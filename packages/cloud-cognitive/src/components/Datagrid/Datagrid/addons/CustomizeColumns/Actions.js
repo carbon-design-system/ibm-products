@@ -1,10 +1,8 @@
-// @flow
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2021
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2022, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 import PropTypes from 'prop-types';
@@ -16,11 +14,11 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const Actions = ({ searchText, setSearchText, findColumnPlaceholderLabel }) => {
   return (
-    <div className={`${blockClass}__customize-columns-modal--actions`}>
+    <div className={`${blockClass}__customize-columns-tearsheet--actions`}>
       <Search
         placeholder={findColumnPlaceholderLabel}
         value={searchText}
-        size="sm"
+        size="lg"
         labelText={findColumnPlaceholderLabel}
         onChange={(e) => {
           // TODO: is it performant?

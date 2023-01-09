@@ -198,11 +198,13 @@ import { init } from './test-common';
       ? `  /* ** SKIP TEST **, reason: '${skipReason}' */\n`
       : '';
 
-    tests.push(`${skipTestReason}  it${skipTestString}('${sanitizedDir} renders', () => {
+    if (!skipImport) {
+      tests.push(`${skipTestReason}  it${skipTestString}('${sanitizedDir} renders', () => {
     render(<${sanitizedDir}Example />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });`);
+    }
   });
 
   const preTest = `

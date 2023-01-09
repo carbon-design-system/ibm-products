@@ -28,6 +28,7 @@ import { Example as ExpressiveCardExample } from './ExpressiveCard/src/Example/E
 import { Example as HTTPErrorsExample } from './HTTPErrors/src/Example/Example';
 import { Example as ImportModalExample } from './ImportModal/src/Example/Example';
 import { Example as InlineEditExample } from './InlineEdit/src/Example/Example';
+import { Example as MultiAddSelectExample } from './MultiAddSelect/src/Example/Example';
 import { Example as NotificationsPanelExample } from './NotificationsPanel/src/Example/Example';
 import { Example as OptionsTileExample } from './OptionsTile/src/Example/Example';
 import { Example as PageHeaderExample } from './PageHeader/src/Example/Example';
@@ -35,6 +36,7 @@ import { Example as ProductiveCardExample } from './ProductiveCard/src/Example/E
 import { Example as RemoveModalExample } from './RemoveModal/src/Example/Example';
 import { Example as SavingExample } from './Saving/src/Example/Example';
 import { Example as SidePanelExample } from './SidePanel/src/Example/Example';
+import { Example as SingleAddSelectExample } from './SingleAddSelect/src/Example/Example';
 import { Example as StatusIconExample } from './StatusIcon/src/Example/Example';
 import { Example as TagSetExample } from './TagSet/src/Example/Example';
 import { Example as TearsheetExample } from './Tearsheet/src/Example/Example';
@@ -58,13 +60,6 @@ describe('All examples', () => {
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
-
-  /* ** SKIP TEST **, reason: 'Carbon v11 not supported in v1 repo.' */
-  // it.skip('CarbonV11Template renders', () => {
-  //   render(<CarbonV11TemplateExample />);
-  //   // expect no errors int the console
-  //   expect(console.error).not.toHaveBeenCalled();
-  // });
 
   it('Cascade renders', () => {
     render(<CascadeExample />);
@@ -150,6 +145,12 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
+  it('MultiAddSelect renders', () => {
+    render(<MultiAddSelectExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
   it('NotificationsPanel renders', () => {
     render(<NotificationsPanelExample />);
     // expect no errors int the console
@@ -188,6 +189,12 @@ describe('All examples', () => {
 
   it('SidePanel renders', () => {
     render(<SidePanelExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('SingleAddSelect renders', () => {
+    render(<SingleAddSelectExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

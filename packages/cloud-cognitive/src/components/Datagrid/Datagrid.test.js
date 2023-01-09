@@ -2087,7 +2087,7 @@ describe(componentName, () => {
 
     const customizeColumnsButton = screen.getByLabelText('Customize columns');
     fireEvent.click(customizeColumnsButton);
-    screen.getByText(/Customize Columns/);
+    screen.getByRole('heading', { name: /Customize columns/ });
   });
 
   it('Top Alignment', () => {

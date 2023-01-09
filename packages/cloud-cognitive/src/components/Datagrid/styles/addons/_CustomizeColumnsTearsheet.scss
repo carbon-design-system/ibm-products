@@ -1,0 +1,65 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/type/scss/font-family';
+@use '@carbon/layout' as *;
+
+@use '../../../../global/styles/project-settings' as c4p-settings;
+@use '../variables';
+
+.#{variables.$block-class}__customize-columns-tearsheet {
+  .#{c4p-settings.$pkg-prefix}--tearsheet__content {
+    display: flex;
+    flex-flow: column;
+  }
+}
+
+.#{variables.$block-class}__customize-columns-tearsheet--actions
+  input[role='searchbox'] {
+  height: $spacing-09;
+  padding-left: $spacing-09;
+  border-bottom: 1px solid $background-active;
+}
+
+.#{variables.$block-class}__customize-columns-checkbox-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-left: $spacing-03;
+  margin-bottom: 0;
+}
+
+.#{variables.$block-class}__customize-columns-column-list {
+  position: relative; // needed for the react-dnd, otherwise the drag preview will not work correctly
+  overflow: auto;
+}
+
+.#{variables.$block-class}__customize-columns-select-all,
+.#{variables.$block-class}__customize-columns-select-all--selected {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  display: flex;
+  height: $spacing-09;
+  padding-left: $spacing-08;
+  border-bottom: 1px solid $layer-active;
+  background-color: $layer;
+
+  .#{c4p-settings.$carbon-prefix}--checkbox-label-text {
+    @include font-family.font-weight('semibold');
+  }
+}
+
+.#{variables.$block-class}__customize-columns-select-all:hover {
+  background-color: $layer-hover;
+}
+
+.#{variables.$block-class}__customize-columns-select-all--selected {
+  background-color: $layer-selected;
+}

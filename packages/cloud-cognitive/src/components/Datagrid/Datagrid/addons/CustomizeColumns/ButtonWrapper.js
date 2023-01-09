@@ -1,10 +1,8 @@
-// @flow
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2021
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2022, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 import * as React from 'react';
@@ -17,8 +15,8 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const ButtonWrapper = ({
   onClick,
-  setIsModalOpen,
-  isModalOpen,
+  setIsTearsheetOpen,
+  isTearsheetOpen,
   iconTooltipLabel = 'Customize columns',
   ...rest
 }) => {
@@ -32,7 +30,7 @@ const ButtonWrapper = ({
       hasIconOnly
       test-id={`${blockClass}__customize-columns-trigger`}
       onClick={() => {
-        setIsModalOpen(!isModalOpen);
+        setIsTearsheetOpen(!isTearsheetOpen);
         if (typeof onClick === 'function') {
           onClick();
         }
@@ -47,9 +45,9 @@ ButtonWrapper.defaultProps = {
 
 ButtonWrapper.propTypes = {
   iconTooltipLabel: PropTypes.string,
-  isModalOpen: PropTypes.bool.isRequired,
+  isTearsheetOpen: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
-  setIsModalOpen: PropTypes.func.isRequired,
+  setIsTearsheetOpen: PropTypes.func.isRequired,
 };
 
 export default ButtonWrapper;

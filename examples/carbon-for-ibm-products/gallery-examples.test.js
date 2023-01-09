@@ -53,16 +53,8 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  /* ** SKIP TEST **, reason: 'Test currently fails due to XYZ.' */
-  it.skip('AboutModal renders', () => {
+  it('AboutModal renders', () => {
     render(<AboutModalExample />);
-    // expect no errors int the console
-    expect(console.error).not.toHaveBeenCalled();
-  });
-
-  /* ** SKIP TEST **, reason: 'Carbon v11 not supported in v1 repo.' */
-  it.skip('CarbonV11Template renders', () => {
-    render(<CarbonV11TemplateExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

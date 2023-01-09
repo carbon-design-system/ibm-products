@@ -20,15 +20,13 @@ for (let i = 0; i < 200; i++) {
 }
 
 export const Example = () => (
-  <>
-    <DisplayBox componentName={TagSet.displayName}>
-      <TagSet
-        tags={tags}
-        allTagsModalSearchLabel="Filter tags"
-        allTagsModalTitle="All tags"
-        allTagsModalSearchPlaceholderText="Filter tags"
-        showAllTagsLabel="Show all tags"
-      />
-    </DisplayBox>
-  </>
+  <DisplayBox componentName={TagSet.displayName}>
+    <TagSet
+      tags={tags}
+      allTagsModalSearchLabel="Filter tags"
+      allTagsModalTitle="All tags"
+      allTagsModalSearchPlaceholderText="Filter tags"
+      showAllTagsLabel="Show all tags"
+    />
+  </DisplayBox>
 );

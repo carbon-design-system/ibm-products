@@ -1,29 +1,28 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2021
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2022, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
-// @flow
+
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Modal } from 'carbon-components-react';
 import { isColumnVisible } from './common';
 import Columns from './Columns';
 import Actions from './Actions';
 import { pkg } from '../../../../../settings';
 import { useCallback } from 'react';
+import { TearsheetNarrow } from '../../../../Tearsheet';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const CustomizeColumnsModal = ({
+const CustomizeColumnsTearsheet = ({
   isOpen,
-  setIsModalOpen,
+  setIsTearsheetOpen,
   onSaveColumnPrefs,
   columnDefinitions,
   originalColumnDefinitions,
-  customizeModalHeadingLabel = 'Customize Columns',
+  customizeTearsheetHeadingLabel = 'Customize columns',
   primaryButtonTextLabel = 'Save',
   secondaryButtonTextLabel = 'Cancel',
   instructionsLabel = 'Select columns to display them. Click and drag the box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
@@ -57,10 +56,10 @@ const CustomizeColumnsModal = ({
   const [isDirty, setIsDirty] = useState(false);
 
   const onRequestClose = () => {
-    setIsModalOpen(false);
+    setIsTearsheetOpen(false);
   };
   const onRequestSubmit = () => {
-    setIsModalOpen(false);
+    setIsTearsheetOpen(false);
     const updatedColumns = columnObjects.map((colDef) => ({
       id: colDef.id,
       isVisible: colDef.isVisible,
@@ -99,24 +98,26 @@ const CustomizeColumnsModal = ({
     setVisibleColumnsCount(getVisibleColumnsCount());
     setTotalColumns(columnObjects.length);
   }, [getVisibleColumnsCount, columnObjects.length]);
-
   return (
-    <Modal
-      className={`${blockClass}__customize-columns-modal`}
+    <TearsheetNarrow
+      className={`${blockClass}__customize-columns-tearsheet`}
       open={isOpen}
-      modalHeading={`${customizeModalHeadingLabel} (${visibleColumnsCount}/${totalColumns})`}
-      primaryButtonText={primaryButtonTextLabel}
-      secondaryButtonText={secondaryButtonTextLabel}
-      selectorPrimaryFocus={`.${blockClass}__customize-columns-column-list--focus`}
-      primaryButtonDisabled={!isDirty}
-      onRequestClose={onRequestClose}
-      onRequestSubmit={onRequestSubmit}
-      size="sm"
-      hasForm
+      title={`${customizeTearsheetHeadingLabel} (${visibleColumnsCount}/${totalColumns})`}
+      description={instructionsLabel}
+      actions={[
+        {
+          kind: 'secondary',
+          label: secondaryButtonTextLabel,
+          onClick: onRequestClose,
+        },
+        {
+          kind: 'primary',
+          label: primaryButtonTextLabel,
+          onClick: onRequestSubmit,
+          disabled: !isDirty,
+        },
+      ]}
     >
-      <div className={`${blockClass}__customize-columns-instructions`}>
-        {instructionsLabel}
-      </div>
       <Actions
         columns={columnObjects}
         originalColumnDefinitions={originalColumnDefinitions}
@@ -146,15 +147,15 @@ const CustomizeColumnsModal = ({
           selectAllLabel={selectAllLabel}
         />
       )}
-    </Modal>
+    </TearsheetNarrow>
   );
 };
 
-CustomizeColumnsModal.propTypes = {
+CustomizeColumnsTearsheet.propTypes = {
   assistiveTextDisabledInstructionsLabel: PropTypes.string,
   assistiveTextInstructionsLabel: PropTypes.string,
   columnDefinitions: PropTypes.array.isRequired,
-  customizeModalHeadingLabel: PropTypes.string,
+  customizeTearsheetHeadingLabel: PropTypes.string,
   findColumnPlaceholderLabel: PropTypes.string,
   instructionsLabel: PropTypes.string,
   isOpen: PropTypes.bool.isRequired,
@@ -164,7 +165,7 @@ CustomizeColumnsModal.propTypes = {
   resetToDefaultLabel: PropTypes.string,
   secondaryButtonTextLabel: PropTypes.string,
   selectAllLabel: PropTypes.string,
-  setIsModalOpen: PropTypes.func.isRequired,
+  setIsTearsheetOpen: PropTypes.func.isRequired,
 };
 
-export default CustomizeColumnsModal;
+export default CustomizeColumnsTearsheet;

@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 
 // ----------------------------------------------------
 // This is an example showing use of the
-// SingleAddSelect component
+// MultiAddSelect component
 // from the @carbon/ibm-products component library.
 // ----------------------------------------------------
 
 import { MultiAddSelect } from '@carbon/ibm-products';
 import { Button } from 'carbon-components-react';
+
+import { pkg } from '@carbon/ibm-products';
+// Must be done before first use of MultiAddSelect
+pkg.component.MultiAddSelect = true;
+
 const blockClass = `c4p--add-select__meta-panel`;
 
 const defaultProps = {

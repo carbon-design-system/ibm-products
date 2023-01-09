@@ -9,6 +9,10 @@ import React, { useState } from 'react';
 import { SingleAddSelect } from '@carbon/ibm-products';
 import { Button } from 'carbon-components-react';
 
+import { pkg } from '@carbon/ibm-products';
+// Must be done before first use of SingleAddSelect
+pkg.component.SingleAddSelect = true;
+
 const defaultProps = {
   className: 'placeholder-class',
   description: 'select a category lorem ipsum',

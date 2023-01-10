@@ -395,7 +395,7 @@
   .#{$block-class}__table-container {
     overflow: visible;
     display: grid;
-    background-color: red;
+    background-color: $ui-01;
     grid-template-columns: rem(320px) 1fr;
     grid-template-areas:
       'summary summary'
@@ -425,6 +425,10 @@
 
   .#{$block-class}__table-container .#{$block-class}__filter-summary {
     grid-area: summary;
+  }
+
+  .c4p--datagrid__table-simple {
+    height: 100%;
   }
 }
 

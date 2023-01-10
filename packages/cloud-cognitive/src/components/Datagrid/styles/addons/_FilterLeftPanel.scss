@@ -19,8 +19,8 @@
 }
 
 .#{$block-class}-filter-left-panel__inner-container {
+  overflow: auto;
   padding: 0 $spacing-05;
-  overflow-y: scroll;
 }
 
 .#{$block-class}-filter-left-panel {
@@ -33,15 +33,15 @@
     top: 0;
   }
 
-  &__title {
-    padding: $spacing-05 0;
-    @include carbon--type-style('productive-heading-02');
-  }
-
   &__heading {
     display: flex;
     justify-content: space-between;
     padding-left: $spacing-05;
+  }
+
+  &__title {
+    padding: $spacing-05 0;
+    @include carbon--type-style('productive-heading-02');
   }
 
   &__search {
@@ -50,6 +50,7 @@
 
   &__category-title {
     @include carbon--type-style('heading-01');
+
     margin-bottom: 18px;
   }
 
@@ -59,8 +60,11 @@
 }
 
 .#{$block-class}-filter-left-panel__action-set {
-  margin-top: auto;
+  position: sticky;
+  z-index: 1; // To layer action set on top of content behind when sticky
+  bottom: 0;
   height: rem(64px);
+  margin-top: auto;
 }
 
 // Overrides

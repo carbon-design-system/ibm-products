@@ -48,10 +48,10 @@ const FilterLeftPanel = ({
   title,
   updateMethod = BATCH,
   filterSections,
-  tableID,
   setAllFilters,
   onApply = () => {},
   onCancel = () => {},
+  showFilterSearch = false,
 }) => {
   /** State */
   const [filtersState, setFiltersState] = useInitialStateFromFilters(
@@ -61,18 +61,12 @@ const FilterLeftPanel = ({
   const [filtersObjectArray, setFiltersObjectArray] = useState([]);
 
   /** Refs */
-  const tableRef = useRef();
+  const filterHeadingRef = useRef();
+  const filterSearchRef = useRef();
+  const actionSetRef = useRef();
   // When using batch actions we have to store the filters to then apply them later
   const prevFiltersRef = useRef(JSON.stringify(filtersState));
   const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
-
-  /** Effects */
-  useEffect(
-    function setRefsOnMount() {
-      tableRef.current = document.querySelector(`#${tableID} .bx--data-table`);
-    },
-    [tableID]
-  );
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
@@ -306,9 +300,25 @@ const FilterLeftPanel = ({
             },
           ]}
           className={`${componentClass}__action-set`}
+          ref={actionSetRef}
         />
       )
     );
+  };
+
+  const getScrollableContainerHeight = () => {
+    const filterHeadingHeight =
+      filterHeadingRef.current?.getBoundingClientRect().height;
+    const filterSearchHeight =
+      filterSearchRef.current?.getBoundingClientRect().height;
+    const actionSetHeight =
+      actionSetRef.current?.getBoundingClientRect().height;
+
+    const height = `calc(100vh - ${filterHeadingHeight}px - ${
+      showFilterSearch ? filterSearchHeight : 0
+    }px - ${updateMethod === BATCH ? actionSetHeight : 0}px)`;
+
+    return height;
   };
 
   return (
@@ -319,7 +329,7 @@ const FilterLeftPanel = ({
         [`${componentClass}--instant`]: !showActionSet,
       })}
     >
-      <div className={`${componentClass}__heading`}>
+      <div ref={filterHeadingRef} className={`${componentClass}__heading`}>
         <h1 className={`${componentClass}__title`}>{title}</h1>
         <Button
           hasIconOnly
@@ -329,15 +339,20 @@ const FilterLeftPanel = ({
           onClick={cancel}
         />
       </div>
-      <div className={`${componentClass}__search`}>
-        <Search
-          labelText="Filter search"
-          placeHolderText="Find filters"
-          light={true}
-          size="sm"
-        />
-      </div>
-      <div className={`${componentClass}__inner-container`}>
+      {showFilterSearch && (
+        <div ref={filterSearchRef} className={`${componentClass}__search`}>
+          <Search
+            labelText="Filter search"
+            placeHolderText="Find filters"
+            light={true}
+            size="sm"
+          />
+        </div>
+      )}
+      <div
+        className={`${componentClass}__inner-container`}
+        style={{ height: getScrollableContainerHeight() }}
+      >
         {filterSections.map((category) => {
           return (
             <div className={`${componentClass}__category`}>

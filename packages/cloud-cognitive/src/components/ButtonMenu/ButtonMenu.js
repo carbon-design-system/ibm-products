@@ -24,7 +24,7 @@ const componentName = 'ButtonMenu';
 
 // Default values for props
 const defaults = {
-  size: 'default',
+  size: 'lg',
   kind: 'primary',
 };
 

@@ -2830,6 +2830,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  word-break: break-all;
 }
 @media (min-width: 42rem) {
   .c4p--tearsheet .c4p--tearsheet__header-description {

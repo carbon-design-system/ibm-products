@@ -133,7 +133,7 @@ export let AddSelectBody = forwardRef(
     };
 
     const setShowBreadsCrumbs = () => {
-      if (searchTerm || globalFiltersApplied || !path || path.length === 0) {
+      if (useNormalizedItems === false || searchTerm || globalFiltersApplied) {
         return false;
       }
       return true;

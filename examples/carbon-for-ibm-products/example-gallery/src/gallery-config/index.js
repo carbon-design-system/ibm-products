@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -116,6 +116,12 @@ const config = [
       'url( ' + defaultOrNot(require('./InlineEdit--thumbnail.png')) + ')',
   },
   {
+    label: 'Multi Add Select',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/MultiAddSelect',
+    thumbnail:
+      'url( ' + defaultOrNot(require('./MultiAddSelect--thumbnail.png')) + ')',
+  },
+  {
     label: 'Notifications Panel',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/NotificationsPanel',
     thumbnail:
@@ -157,6 +163,12 @@ const config = [
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/SidePanel',
     thumbnail:
       'url( ' + defaultOrNot(require('./SidePanel--thumbnail.png')) + ')',
+  },
+  {
+    label: 'Single Add Select',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/SingleAddSelect',
+    thumbnail:
+      'url( ' + defaultOrNot(require('./SingleAddSelect--thumbnail.png')) + ')',
   },
   {
     label: 'StatusIcon',

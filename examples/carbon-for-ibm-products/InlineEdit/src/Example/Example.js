@@ -19,18 +19,21 @@ export const Example = () => {
 
   return (
     <InlineEdit
-      cancelLabel="Cancel"
+      // cancelLabel="Cancel"
       className="inline-edit-example"
-      editLabel="Edit"
+      // editLabel="Edit"
       id="example-id"
-      invalidLabel="This field is required"
+      // invalidLabel="This field is required"
       labelText="Label text"
       onCancel={onCancel}
       onChange={onChange}
       onSave={onSave}
-      saveLabel="Save"
-      v2
+      // saveLabel="Save"
+      // v2
       value={value}
+      cancelDescription="Cancel the current action"
+      editDescription="Edit the current value"
+      saveDescription="Save the current value"
     />
   );
 };

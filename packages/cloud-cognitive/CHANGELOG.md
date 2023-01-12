@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.41.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.41.0...@carbon/ibm-products@1.41.1) (2023-01-10)
+
+### Bug Fixes
+
+- **CreateTearsheet:** Add firstFocusElement
+  ([#2551](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2551))
+  ([dc3e4c0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/dc3e4c06ed7a451617d30c3db0298be3aea440a5))
+- **Datagrid:** ColumnCustomizationModal to Tearsheet Narrow
+  ([#2582](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2582))
+  ([04075a9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/04075a937814bbb3e6fc2acd2b559b133e85490b))
+- **DataGrid:** customize column focus and search highlight
+  ([#2518](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2518))
+  ([cad8d19](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/cad8d1919f86ad8068b3affd23bcc7c3ede7c6b3))
+- exports useFiltering (v10)
+  ([#2597](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2597))
+  ([f306e43](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f306e4397b8da48890692e55e18bfa8f4f672ec6))
+- single add select review fixes
+  ([#2583](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2583))
+  ([c7211b9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c7211b99383af7fe6351e132dc02e85ce14a28fd))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 # [1.41.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.40.0...@carbon/ibm-products@1.41.0) (2022-12-20)
 
 ### Bug Fixes

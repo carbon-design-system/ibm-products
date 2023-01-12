@@ -140,7 +140,7 @@ const newPerson = () => {
         ? activeSinceDate
         : activeChance > 0.33
         ? yesterdayDate
-        : twoDaysAgoDate,
+        : '23/05/2020',
     bonus: `$\r${getRandomInteger(100, 500, 2)}`,
     passwordStrength: getPasswordStrength(),
     doc_link: renderDocLink(),

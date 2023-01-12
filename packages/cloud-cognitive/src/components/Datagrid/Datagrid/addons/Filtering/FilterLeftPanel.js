@@ -52,6 +52,7 @@ const FilterLeftPanel = ({
   onApply = () => {},
   onCancel = () => {},
   showFilterSearch = false,
+  filterPanelMinHeight = 600,
 }) => {
   /** State */
   const [filtersState, setFiltersState] = useInitialStateFromFilters(
@@ -117,30 +118,17 @@ const FilterLeftPanel = ({
   };
 
   /** Render the individual filter component */
-  const renderFilter = ({
-    type,
-    column,
-    props: components,
-    sectionTitle,
-    subSectionTitle,
-  }) => {
+  const renderFilter = ({ type, column, props: components }) => {
     if (type === DATE) {
       return (
         <DatePicker
           {...components.DatePicker}
           onChange={(value) => {
-            // Update state
-            const filtersStateCopy = { ...filtersState };
-            filtersStateCopy[sectionTitle][subSectionTitle][column] = value;
-            setFiltersState(filtersStateCopy);
-
-            // Apply the filters to react table
+            setFiltersState({ ...filtersState, [column]: value });
             applyFilters({ column, value, type });
-
-            // Optionally pass the value back to the user
             components.DatePicker.onChange?.(value);
           }}
-          value={filtersState[sectionTitle][subSectionTitle][column]}
+          value={filtersState[column]}
           datePickerType="range"
         >
           <DatePickerInput
@@ -163,51 +151,35 @@ const FilterLeftPanel = ({
           hideSteppers
           {...components.NumberInput}
           onChange={(event) => {
-            // Update state
-            const filtersStateCopy = { ...filtersState };
-            filtersStateCopy[sectionTitle][subSectionTitle][column] =
-              event.target.value;
-            setFiltersState(filtersStateCopy);
-
-            // Apply the filters to react table
+            setFiltersState({
+              ...filtersState,
+              [column]: event.target.value,
+            });
             applyFilters({ column, value: event.target.value, type });
-
-            // Optionally pass the value back to the user
             components.NumberInput.onChange?.(event);
           }}
-          value={filtersState[sectionTitle][subSectionTitle][column]}
+          value={filtersState[column]}
         />
       );
     } else if (type === CHECKBOX) {
       return (
         <FormGroup {...components.FormGroup}>
-          {filtersState[sectionTitle][subSectionTitle][column].map((option) => (
+          {filtersState[column].map((option) => (
             <Checkbox
               key={option.labelText}
               {...option}
               onChange={(isSelected) => {
-                // Update state
-                const checkboxCopy =
-                  filtersState[sectionTitle][subSectionTitle][column];
+                const checkboxCopy = filtersState[column];
                 const foundCheckbox = checkboxCopy.find(
                   (checkbox) => checkbox.value === option.value
                 );
                 foundCheckbox.selected = isSelected;
-                const filtersStateCopy = { ...filtersState };
-                filtersStateCopy[sectionTitle][subSectionTitle][column] =
-                  checkboxCopy;
-                setFiltersState(filtersStateCopy);
-
-                // Apply the filters to react table
+                setFiltersState({ ...filtersState, [column]: checkboxCopy });
                 applyFilters({
                   column,
-                  value: [
-                    ...filtersStateCopy[sectionTitle][subSectionTitle][column],
-                  ],
+                  value: [...filtersState[column]],
                   type,
                 });
-
-                // Optionally pass the value back to the user
                 option.onChange?.(isSelected);
               }}
               checked={option.selected}
@@ -220,22 +192,14 @@ const FilterLeftPanel = ({
         <FormGroup {...components.FormGroup}>
           <RadioButtonGroup
             {...components.RadioButtonGroup}
-            valueSelected={filtersState[sectionTitle][subSectionTitle][column]}
+            valueSelected={filtersState[column]}
             onChange={(selected) => {
-              // Update state
-              const filtersStateCopy = { ...filtersState };
-              filtersStateCopy[sectionTitle][subSectionTitle][column] =
-                selected;
-              setFiltersState(filtersStateCopy);
-
-              // Apply the filters to react table
+              setFiltersState({ ...filtersState, [column]: selected });
               applyFilters({
                 column,
                 value: selected,
                 type,
               });
-
-              // Optionally pass the value back to the user
               components.RadioButtonGroup.onChange?.(selected);
             }}
           >
@@ -252,34 +216,23 @@ const FilterLeftPanel = ({
       return (
         <Dropdown
           {...components.Dropdown}
-          selectedItem={filtersState[sectionTitle][subSectionTitle][column]}
+          selectedItem={filtersState[column]}
           onChange={({ selectedItem }) => {
-            // Update state
-            const filtersStateCopy = { ...filtersState };
-            filtersStateCopy[sectionTitle][subSectionTitle][column] =
-              selectedItem;
-            setFiltersState(filtersStateCopy);
-
-            // Apply the filters to react table
+            setFiltersState({
+              ...filtersState,
+              [column]: selectedItem,
+            });
             applyFilters({
               column,
               value: selectedItem,
               type,
             });
-
-            // Optionally pass the value back to the user
             components.Dropdown.onChange?.(selectedItem);
           }}
         />
       );
     }
-  };
-
-  /** Renders all filters */
-  const renderFilters = ({ sectionTitle, subSectionTitle, filters }) =>
-    filters.map(({ type, column, props }) =>
-      renderFilter({ type, column, props, sectionTitle, subSectionTitle })
-    );
+  }
 
   const renderActionSet = () => {
     return (
@@ -291,12 +244,14 @@ const FilterLeftPanel = ({
               kind: 'primary',
               label: 'Apply',
               onClick: apply,
+              disabled: true,
             },
             {
               key: 3,
               kind: 'secondary',
               label: 'Cancel',
               onClick: cancel,
+              disabled: true,
             },
           ]}
           className={`${componentClass}__action-set`}
@@ -353,28 +308,27 @@ const FilterLeftPanel = ({
         className={`${componentClass}__inner-container`}
         style={{ height: getScrollableContainerHeight() }}
       >
-        {filterSections.map((category) => {
+        {filterSections.map(({ categoryTitle = null, filters = [], showAsAccordion }) => {
           return (
             <div className={`${componentClass}__category`}>
-              <div className={`${componentClass}__category-title`}>
-                {category.title}
-              </div>
-              <Accordion>
-                {category.subsections.map((subsection) => {
+              {categoryTitle && (
+                <div className={`${componentClass}__category-title`}>
+                  {categoryTitle}
+                </div>
+              )}
+
+              {showAsAccordion ? <Accordion>
+                {filters.map(({filterLabel, filter}) => {
                   return (
                     <AccordionItem
-                      title={subsection.title}
-                      key={subsection.title}
+                      title={filterLabel}
+                      key={filterLabel}
                     >
-                      {renderFilters({
-                        sectionTitle: category.title,
-                        subSectionTitle: subsection.title,
-                        filters: subsection.filters,
-                      })}
+                      {renderFilter(filter)}
                     </AccordionItem>
                   );
                 })}
-              </Accordion>
+              </Accordion> : filters.map(({filter}) => renderFilter(filter))}
             </div>
           );
         })}

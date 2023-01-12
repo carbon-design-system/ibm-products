@@ -9,9 +9,11 @@
 @import '../variables';
 
 .#{$block-class}-filter-left-panel__container {
+  --filter-panel-min-height: rem(600px);
+
   position: relative;
   width: rem(320px);
-  min-height: 600px;
+  min-height: var(--filter-panel-min-height);
   max-height: 100vh;
   border-top: 1px $ui-03 solid;
   border-right: 1px $ui-03 solid;

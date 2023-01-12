@@ -516,154 +516,137 @@ export const LeftPanel = () => {
 
   const sections = [
     {
-      title: 'Source Details',
-      subsections: [
+      categoryTitle: 'Category title',
+      showAsAccordion: true,
+      filters: [
         {
-          title: 'IP Address',
-          filters: [
-            {
-              type: 'date',
-              column: 'joined',
-              props: {
-                DatePicker: {
-                  datePickerType: 'range',
+          filterLabel: 'Joined',
+          filter: {
+            type: 'date',
+            column: 'joined',
+            props: {
+              DatePicker: {
+                datePickerType: 'range',
+              },
+              DatePickerInput: {
+                start: {
+                  id: 'date-picker-input-id-start',
+                  placeholder: 'mm/dd/yyyy',
+                  labelText: 'Joined start date',
                 },
-                DatePickerInput: {
-                  start: {
-                    id: 'date-picker-input-id-start',
-                    placeholder: 'mm/dd/yyyy',
-                    labelText: 'Joined start date',
-                  },
-                  end: {
-                    id: 'date-picker-input-id-end',
-                    placeholder: 'mm/dd/yyyy',
-                    labelText: 'Joined end date',
-                  },
+                end: {
+                  id: 'date-picker-input-id-end',
+                  placeholder: 'mm/dd/yyyy',
+                  labelText: 'Joined end date',
                 },
               },
             },
-            {
-              type: 'checkbox',
-              column: 'passwordStrength',
-              props: {
-                FormGroup: {
-                  legendText: 'Password strength',
-                },
-                Checkbox: [
-                  {
-                    id: 'normal',
-                    labelText: 'Normal',
-                    value: 'normal',
-                  },
-                  {
-                    id: 'minor-warning',
-                    labelText: 'Minor warning',
-                    value: 'minor-warning',
-                  },
-                  {
-                    id: 'critical',
-                    labelText: 'Critical',
-                    value: 'critical',
-                  },
-                ],
-              },
-            },
-          ],
+          },
         },
         {
-          title: 'Bingus hands',
-          filters: [
-            {
-              type: 'dropdown',
-              column: 'status',
-              props: {
-                Dropdown: {
-                  id: 'marital-status-dropdown',
-                  ariaLabel: 'Marital status dropdown',
-                  items: ['relationship', 'complicated', 'single'],
-                  label: 'Marital status',
-                  titleText: 'Marital status',
-                },
+          filterLabel: 'Status',
+          filter: {
+            type: 'dropdown',
+            column: 'status',
+            props: {
+              Dropdown: {
+                id: 'marital-status-dropdown',
+                ariaLabel: 'Marital status dropdown',
+                items: ['relationship', 'complicated', 'single'],
+                label: 'Marital status',
+                titleText: 'Marital status',
               },
             },
-          ],
+          },
         },
       ],
     },
     {
-      title: 'Source Meat',
-      subsections: [
+      categoryTitle: 'Category title',
+      filters: [
         {
-          title: 'IP Address',
-          filters: [
-            {
-              type: 'radio',
-              column: 'role',
-              props: {
-                FormGroup: {
-                  legendText: 'Role',
-                },
-                RadioButtonGroup: {
-                  orientation: 'vertical',
-                  legend: 'Role legend',
-                  name: 'role-radio-button-group',
-                },
-                RadioButton: [
-                  {
-                    id: 'developer',
-                    labelText: 'Developer',
-                    value: 'developer',
-                  },
-                  {
-                    id: 'designer',
-                    labelText: 'Designer',
-                    value: 'designer',
-                  },
-                  {
-                    id: 'researcher',
-                    labelText: 'Researcher',
-                    value: 'researcher',
-                  },
-                ],
+          filterLabel: 'Role',
+          filter: {
+            type: 'radio',
+            column: 'role',
+            props: {
+              FormGroup: {
+                legendText: 'Role',
               },
+              RadioButtonGroup: {
+                orientation: 'vertical',
+                legend: 'Role legend',
+                name: 'role-radio-button-group',
+              },
+              RadioButton: [
+                {
+                  id: 'developer',
+                  labelText: 'Developer',
+                  value: 'developer',
+                },
+                {
+                  id: 'designer',
+                  labelText: 'Designer',
+                  value: 'designer',
+                },
+                {
+                  id: 'researcher',
+                  labelText: 'Researcher',
+                  value: 'researcher',
+                },
+              ],
             },
-          ],
+          },
         },
         {
-          title: 'Bingus hands',
-          filters: [
-            {
-              type: 'number',
-              column: 'visits',
-              props: {
-                NumberInput: {
-                  min: 0,
-                  id: 'visits-number-input',
-                  invalidText: 'A valid value is required',
-                  label: 'Visits',
-                  placeholder: 'Type a number amount of visits',
-                },
+          filterLabel: 'Visits',
+          filter: {
+            type: 'number',
+            column: 'visits',
+            props: {
+              NumberInput: {
+                min: 0,
+                id: 'visits-number-input',
+                invalidText: 'A valid value is required',
+                label: 'Visits',
+                placeholder: 'Type a number amount of visits',
               },
             },
-          ],
+          },
         },
-        { title: 'Dingus', filters: [] },
       ],
     },
     {
-      title: 'Source Hands',
-      subsections: [
-        { title: 'IP Address', filters: [] },
-        { title: 'Bingus hands', filters: [] },
-        { title: 'Dingus', filters: [] },
-      ],
-    },
-    {
-      title: 'Source Legs',
-      subsections: [
-        { title: 'IP Address', filters: [] },
-        { title: 'Bingus hands', filters: [] },
-        { title: 'Dingus', filters: [] },
+      filters: [
+        {
+          filterLabel: 'Password strength',
+          filter: {
+            type: 'checkbox',
+            column: 'passwordStrength',
+            props: {
+              FormGroup: {
+                legendText: 'Password strength',
+              },
+              Checkbox: [
+                {
+                  id: 'normal',
+                  labelText: 'Normal',
+                  value: 'normal',
+                },
+                {
+                  id: 'minor-warning',
+                  labelText: 'Minor warning',
+                  value: 'minor-warning',
+                },
+                {
+                  id: 'critical',
+                  labelText: 'Critical',
+                  value: 'critical',
+                },
+              ],
+            },
+          },
+        },
       ],
     },
   ];
@@ -900,3 +883,26 @@ export const StickyActionsColumn = () => {
     </Wrapper>
   );
 };
+
+// const state = [
+//   {
+//     accessor: 'joined',
+//     value: [undefined, undefined],
+//   },
+//   {
+//     accessor: 'visits',
+//     value: [10],
+//   },
+//   {
+//     accessor: 'status',
+//     value: ['single']
+//   },
+//   {
+//     accessor: 'passwordStrength',
+//     value: ['normal', 'critical']
+//   },
+//   {
+//     accessor: 'role',
+//     value: ['developer']
+//   },
+// ];

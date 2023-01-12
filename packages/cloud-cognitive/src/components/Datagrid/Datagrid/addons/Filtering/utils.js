@@ -11,64 +11,37 @@ import { FLYOUT, PANEL } from './constants';
 export const getInitialStateFromFilters = (filters, variation = FLYOUT) => {
   const initialFilterState = {};
 
-  if (variation === FLYOUT) {
-    filters.forEach(({ type, column, props }) => {
-      if (type === 'checkbox') {
-        initialFilterState[column] = props.Checkbox.map(
-          ({ id, labelText, value }) => ({
-            id,
-            labelText,
-            value,
-            selected: false,
-          })
-        );
-      } else if (type === 'date') {
-        initialFilterState[column] = [undefined, undefined];
-      } else if (type === 'number') {
-        initialFilterState[column] = '';
-      } else if (type === 'radio') {
-        initialFilterState[column] = '';
-      } else if (type === 'dropdown') {
-        initialFilterState[column] = '';
-      }
-    });
-  } else if (variation === PANEL) {
-    filters.forEach(({ title: sectionTitle, subsections }) => {
-      if (!initialFilterState[sectionTitle]) {
-        initialFilterState[sectionTitle] = {};
-      }
+  const setInitialState = ({ type, column, props }) => {
+    if (type === 'checkbox') {
+      initialFilterState[column] = props.Checkbox.map(
+        ({ id, labelText, value }) => ({
+          id,
+          labelText,
+          value,
+          selected: false,
+        })
+      );
+    } else if (type === 'date') {
+      initialFilterState[column] = [undefined, undefined];
+    } else if (type === 'number') {
+      initialFilterState[column] = '';
+    } else if (type === 'radio') {
+      initialFilterState[column] = '';
+    } else if (type === 'dropdown') {
+      initialFilterState[column] = '';
+    }
+  }
 
-      subsections.forEach(({ title: subSectionTitle, filters }) => {
-        if (!initialFilterState[sectionTitle][subSectionTitle]) {
-          initialFilterState[sectionTitle][subSectionTitle] = {};
-        }
-        filters.forEach(({ type, column, props }) => {
-          if (type === 'checkbox') {
-            initialFilterState[sectionTitle][subSectionTitle][column] =
-              props.Checkbox.map(({ id, labelText, value }) => ({
-                id,
-                labelText,
-                value,
-                selected: false,
-              }));
-          } else if (type === 'date') {
-            initialFilterState[sectionTitle][subSectionTitle][column] = [
-              undefined,
-              undefined,
-            ];
-          } else if (type === 'number') {
-            initialFilterState[sectionTitle][subSectionTitle][column] = '';
-          } else if (type === 'radio') {
-            initialFilterState[sectionTitle][subSectionTitle][column] = '';
-          } else if (type === 'dropdown') {
-            initialFilterState[sectionTitle][subSectionTitle][column] = '';
-          }
-        });
-      });
-    });
+  if (variation === FLYOUT) {
+    filters.forEach(setInitialState);
+  } else if (variation === PANEL) {
+    filters.forEach(({filters: sections = [] }) => {
+      sections.forEach(({ filter }) => setInitialState(filter));
+    })
   } else {
     console.error('No variation passed into useInitialStateFromFilters');
   }
 
   return initialFilterState;
 };
+

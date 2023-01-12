@@ -90,6 +90,7 @@ const FilterFlyout = ({
   const apply = () => {
     setAllFilters(filtersObjectArray);
     closeFlyout();
+    // From the user
     onApply();
 
     // updates the ref so next time the flyout opens we have records of the previous filters

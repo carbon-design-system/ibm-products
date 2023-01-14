@@ -30,14 +30,14 @@ export const getInitialStateFromFilters = (filters, variation = FLYOUT) => {
     } else if (type === 'dropdown') {
       initialFilterState[column] = '';
     }
-  }
+  };
 
   if (variation === FLYOUT) {
     filters.forEach(setInitialState);
   } else if (variation === PANEL) {
-    filters.forEach(({filters: sections = [] }) => {
+    filters.forEach(({ filters: sections = [] }) => {
       sections.forEach(({ filter }) => setInitialState(filter));
-    })
+    });
   } else {
     console.error('No variation passed into useInitialStateFromFilters');
   }
@@ -45,3 +45,27 @@ export const getInitialStateFromFilters = (filters, variation = FLYOUT) => {
   return initialFilterState;
 };
 
+// This functions checks if the filter state is the initial state the component starts with
+export const isInitialState = (state) => {
+  // Gets all the values of the state
+  const values = Object.values(state);
+
+  return values.every((val) => {
+    const valueIsDateOrCheckbox = Array.isArray(val);
+
+    // Check if it state is a checkbox or date
+    if (valueIsDateOrCheckbox) {
+      const isDate = val[0] === undefined || val[0] instanceof Date;
+      const isCheckbox = typeof val[0] === 'object' && 'selected' in val[0];
+
+      if (isDate && val[1] === undefined) {
+        return true;
+      } else if (isCheckbox) {
+        return val.every(({ selected }) => selected === false);
+      }
+    } else if (val === '') {
+      return true;
+    }
+    return false;
+  });
+};

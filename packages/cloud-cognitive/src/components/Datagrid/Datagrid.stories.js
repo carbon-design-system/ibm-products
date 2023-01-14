@@ -883,26 +883,3 @@ export const StickyActionsColumn = () => {
     </Wrapper>
   );
 };
-
-// const state = [
-//   {
-//     accessor: 'joined',
-//     value: [undefined, undefined],
-//   },
-//   {
-//     accessor: 'visits',
-//     value: [10],
-//   },
-//   {
-//     accessor: 'status',
-//     value: ['single']
-//   },
-//   {
-//     accessor: 'passwordStrength',
-//     value: ['normal', 'critical']
-//   },
-//   {
-//     accessor: 'role',
-//     value: ['developer']
-//   },
-// ];

@@ -21,8 +21,6 @@ import {
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useCallback, useRef, useState } from 'react';
-import { useEffect } from 'react';
-import { useContext } from 'react';
 import { useClickOutside } from '../../../../../global/js/hooks';
 import { pkg } from '../../../../../settings';
 import { ActionSet } from '../../../../ActionSet';
@@ -37,8 +35,10 @@ import {
   NUMBER,
   RADIO,
 } from './constants';
-import { FilterContext } from './FilterProvider';
-import useInitialStateFromFilters from './hooks/useInitialStateFromFilters';
+import {
+  useInitialStateFromFilters,
+  useSubscribeToEventEmitter,
+} from './hooks';
 import { getInitialStateFromFilters } from './utils';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -57,9 +57,6 @@ const FilterFlyout = ({
   secondaryActionLabel = 'Cancel',
   setAllFilters,
 }) => {
-  /** Context state and methods */
-  const { EventEmitter } = useContext(FilterContext);
-
   /** State */
   const [open, setOpen] = useState(false);
   const [filtersState, setFiltersState] = useInitialStateFromFilters(
@@ -172,10 +169,7 @@ const FilterFlyout = ({
     cancel();
   });
 
-  useEffect(function subscribeToEmitter() {
-    // This event is emitted from the DatagridToolbar component when clearFilters is clicked in FilterSummary
-    EventEmitter.subscribe(CLEAR_FILTERS, reset);
-  });
+  useSubscribeToEventEmitter(CLEAR_FILTERS, reset);
 
   /** Render the individual filter component */
   const renderFilter = useCallback(

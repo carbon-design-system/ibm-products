@@ -9,8 +9,6 @@
 @import '../variables';
 
 .#{$block-class}-filter-left-panel__container {
-  --filter-panel-min-height: rem(600px);
-
   position: relative;
   width: rem(320px);
   min-height: var(--filter-panel-min-height);
@@ -25,40 +23,46 @@
   padding: 0 $spacing-05;
 }
 
+// Adds extra space to the last category so the scroll shows everything visible when you reach the bottom
+.#{$block-class}-filter-left-panel__inner-container
+  .#{$block-class}-filter-left-panel__category:last-of-type {
+  padding-bottom: $spacing-11;
+}
+
 .#{$block-class}-filter-left-panel {
   display: none;
+}
 
-  &--open {
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 0;
-  }
+.#{$block-class}-filter-left-panel--open {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+}
 
-  &__heading {
-    display: flex;
-    justify-content: space-between;
-    padding-left: $spacing-05;
-  }
+.#{$block-class}-filter-left-panel__heading {
+  display: flex;
+  justify-content: space-between;
+  padding-left: $spacing-05;
+}
 
-  &__title {
-    padding: $spacing-05 0;
-    @include carbon--type-style('productive-heading-02');
-  }
+.#{$block-class}-filter-left-panel__title {
+  padding: $spacing-05 0;
+  @include carbon--type-style('productive-heading-02');
+}
 
-  &__search {
-    padding: 0 $spacing-05 $spacing-06;
-  }
+.#{$block-class}-filter-left-panel__search {
+  padding: 0 $spacing-05 $spacing-06;
+}
 
-  &__category-title {
-    @include carbon--type-style('heading-01');
+.#{$block-class}-filter-left-panel__category-title {
+  @include carbon--type-style('heading-01');
 
-    margin-bottom: 18px;
-  }
+  margin-bottom: $spacing-05;
+}
 
-  &__category {
-    padding-bottom: 14px;
-  }
+.#{$block-class}-filter-left-panel__category {
+  padding-bottom: $spacing-06;
 }
 
 .#{$block-class}-filter-left-panel__action-set {
@@ -75,7 +79,7 @@
 }
 
 .#{$block-class}-filter-left-panel__container .bx--accordion__arrow {
-  margin: 2px 0 0;
+  margin: $spacing-01 0 0;
 }
 
 .#{$block-class}-filter-left-panel__container .bx--accordion__content {

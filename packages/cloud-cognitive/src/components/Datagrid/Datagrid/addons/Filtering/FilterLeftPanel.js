@@ -1,13 +1,6 @@
 /* eslint-disable react/jsx-key */
 
-import React, {
-  useRef,
-  useMemo,
-  useEffect,
-  useContext,
-  useCallback,
-  useState,
-} from 'react';
+import React, { useRef, useMemo, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Accordion,
@@ -39,7 +32,11 @@ import cx from 'classnames';
 import { Close32 } from '@carbon/icons-react';
 import { ActionSet } from '../../../../ActionSet';
 import { FilterContext } from '.';
-import useInitialStateFromFilters from './hooks/useInitialStateFromFilters';
+import {
+  useInitialStateFromFilters,
+  useSubscribeToEventEmitter,
+} from './hooks';
+import { isInitialState, getInitialStateFromFilters } from './utils';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-left-panel`;
@@ -62,6 +59,7 @@ const FilterLeftPanel = ({
   const [filtersObjectArray, setFiltersObjectArray] = useState([]);
 
   /** Refs */
+  const filterPanelRef = useRef();
   const filterHeadingRef = useRef();
   const filterSearchRef = useRef();
   const actionSetRef = useRef();
@@ -71,6 +69,7 @@ const FilterLeftPanel = ({
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
+  const shouldDisableButtons = isInitialState(filtersState);
 
   /** Context */
   const { leftPanelOpen, setLeftPanelOpen } = useContext(FilterContext);
@@ -80,11 +79,31 @@ const FilterLeftPanel = ({
 
   const cancel = () => {
     closePanel();
+    onCancel();
+  };
+
+  const reset = () => {
+    // Get the initial values for the filters
+    const initialFiltersState = getInitialStateFromFilters(
+      filterSections,
+      PANEL
+    );
+    const initialFiltersObjectArray = [];
+
+    // Set the state to the initial values
+    setFiltersState(initialFiltersState);
+    setFiltersObjectArray(initialFiltersObjectArray);
+    setAllFilters([]);
+
+    // Update their respective refs so everything is in sync
+    prevFiltersRef.current = JSON.stringify(initialFiltersState);
+    prevFiltersObjectArrayRef.current = JSON.stringify(
+      initialFiltersObjectArray
+    );
   };
 
   const apply = () => {
     setAllFilters(filtersObjectArray);
-    closePanel();
     onApply();
 
     // updates the ref so next time the flyout opens we have records of the previous filters
@@ -232,7 +251,7 @@ const FilterLeftPanel = ({
         />
       );
     }
-  }
+  };
 
   const renderActionSet = () => {
     return (
@@ -244,14 +263,14 @@ const FilterLeftPanel = ({
               kind: 'primary',
               label: 'Apply',
               onClick: apply,
-              disabled: true,
+              disabled: shouldDisableButtons,
             },
             {
               key: 3,
               kind: 'secondary',
               label: 'Cancel',
               onClick: cancel,
-              disabled: true,
+              disabled: shouldDisableButtons,
             },
           ]}
           className={`${componentClass}__action-set`}
@@ -260,6 +279,19 @@ const FilterLeftPanel = ({
       )
     );
   };
+
+  /** Effects */
+  useEffect(
+    function onMount() {
+      filterPanelRef.current?.style.setProperty(
+        '--filter-panel-min-height',
+        `${filterPanelMinHeight}px` // TODO: use carbon rem function
+      );
+    },
+    [filterPanelMinHeight]
+  );
+
+  useSubscribeToEventEmitter(CLEAR_FILTERS, reset);
 
   const getScrollableContainerHeight = () => {
     const filterHeadingHeight =
@@ -278,6 +310,7 @@ const FilterLeftPanel = ({
 
   return (
     <div
+      ref={filterPanelRef}
       className={cx(componentClass, `${componentClass}__container`, {
         [`${componentClass}--open`]: leftPanelOpen,
         [`${componentClass}--batch`]: showActionSet,
@@ -308,30 +341,33 @@ const FilterLeftPanel = ({
         className={`${componentClass}__inner-container`}
         style={{ height: getScrollableContainerHeight() }}
       >
-        {filterSections.map(({ categoryTitle = null, filters = [], showAsAccordion }) => {
-          return (
-            <div className={`${componentClass}__category`}>
-              {categoryTitle && (
-                <div className={`${componentClass}__category-title`}>
-                  {categoryTitle}
-                </div>
-              )}
+        {filterSections.map(
+          ({ categoryTitle = null, filters = [], showAsAccordion }) => {
+            return (
+              <div className={`${componentClass}__category`}>
+                {categoryTitle && (
+                  <div className={`${componentClass}__category-title`}>
+                    {categoryTitle}
+                  </div>
+                )}
 
-              {showAsAccordion ? <Accordion>
-                {filters.map(({filterLabel, filter}) => {
-                  return (
-                    <AccordionItem
-                      title={filterLabel}
-                      key={filterLabel}
-                    >
-                      {renderFilter(filter)}
-                    </AccordionItem>
-                  );
-                })}
-              </Accordion> : filters.map(({filter}) => renderFilter(filter))}
-            </div>
-          );
-        })}
+                {showAsAccordion ? (
+                  <Accordion>
+                    {filters.map(({ filterLabel, filter }) => {
+                      return (
+                        <AccordionItem title={filterLabel} key={filterLabel}>
+                          {renderFilter(filter)}
+                        </AccordionItem>
+                      );
+                    })}
+                  </Accordion>
+                ) : (
+                  filters.map(({ filter }) => renderFilter(filter))
+                )}
+              </div>
+            );
+          }
+        )}
       </div>
       {renderActionSet()}
     </div>
@@ -339,8 +375,13 @@ const FilterLeftPanel = ({
 };
 
 FilterLeftPanel.propTypes = {
+  filterPanelMinHeight: PropTypes.number,
   filterSections: PropTypes.array,
+  onApply: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
   open: PropTypes.bool,
+  setAllFilters: PropTypes.func.isRequired,
+  showFilterSearch: PropTypes.bool,
   tableID: PropTypes.string.isRequired,
   title: PropTypes.string,
   updateMethod: PropTypes.oneOf([BATCH, INSTANT]),

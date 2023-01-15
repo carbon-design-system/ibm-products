@@ -28,10 +28,10 @@
     "jest": "^29.3.1"
   },
   "dependencies": {
-    "@babel/core": "^7.20.7",
+    "@babel/core": "^7.20.12",
     "@testing-library/jest-dom": "^5.16.5",
-    "accessibility-checker": "3.1.40",
-    "axe-core": "^4.6.1",
+    "accessibility-checker": "3.1.42",
+    "axe-core": "^4.6.2",
     "babel-jest": "^29.3.1",
     "babel-preset-ibm-cloud-cognitive": "^0.14.25",
     "chalk": "^4.1.2",

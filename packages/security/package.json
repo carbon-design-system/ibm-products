@@ -66,7 +66,7 @@
     "carbon-components-react": "7.59.5",
     "carbon-icons": "7.0.7",
     "classnames": "^2.3.2",
-    "downshift": "^7.0.5",
+    "downshift": "^7.2.0",
     "export-to-csv": "^0.2.1",
     "focus-trap-react": "^10.0.2",
     "invariant": "^2.2.4",
@@ -96,7 +96,7 @@
     "npm-run-all": "^4.1.5",
     "param-case": "^3.0.4",
     "recompose": "^0.30.0",
-    "rimraf": "^3.0.2",
+    "rimraf": "^4.0.5",
     "sass": "^1.57.1"
   },
   "sideEffects": [

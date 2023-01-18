@@ -16,6 +16,7 @@ import {
   RadioButton,
   RadioButtonGroup,
 } from 'carbon-components-react';
+import { rem } from '@carbon/layout';
 import { pkg } from '../../../../../settings';
 import {
   BATCH,
@@ -43,6 +44,7 @@ const componentClass = `${blockClass}-filter-left-panel`;
 
 const FilterLeftPanel = ({
   title,
+  closeIconDescription = 'Close filter panel',
   updateMethod = BATCH,
   filterSections,
   setAllFilters,
@@ -57,6 +59,9 @@ const FilterLeftPanel = ({
     PANEL
   );
   const [filtersObjectArray, setFiltersObjectArray] = useState([]);
+  const [shouldDisableButtons, setShouldDisableButtons] = useState(
+    isInitialState(filtersState)
+  );
 
   /** Refs */
   const filterPanelRef = useRef();
@@ -69,7 +74,6 @@ const FilterLeftPanel = ({
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
-  const shouldDisableButtons = isInitialState(filtersState);
 
   /** Context */
   const { leftPanelOpen, setLeftPanelOpen } = useContext(FilterContext);
@@ -77,9 +81,19 @@ const FilterLeftPanel = ({
   /** Methods */
   const closePanel = () => setLeftPanelOpen(false);
 
+  // If the user decides to cancel or click outside the flyout, it reverts back to the filters that were
+  // there when they opened the flyout
+  const revertToPreviousFilters = () => {
+    setFiltersState(JSON.parse(prevFiltersRef.current));
+    setFiltersObjectArray(JSON.parse(prevFiltersObjectArrayRef.current));
+  };
+
   const cancel = () => {
-    closePanel();
-    onCancel();
+    // Reverting to previous filters only applies when using batch actions
+    if (updateMethod === BATCH) {
+      revertToPreviousFilters();
+      onCancel();
+    }
   };
 
   const reset = () => {
@@ -105,6 +119,7 @@ const FilterLeftPanel = ({
   const apply = () => {
     setAllFilters(filtersObjectArray);
     onApply();
+    setShouldDisableButtons(true);
 
     // updates the ref so next time the flyout opens we have records of the previous filters
     prevFiltersRef.current = JSON.stringify(filtersState);
@@ -143,11 +158,11 @@ const FilterLeftPanel = ({
         <DatePicker
           {...components.DatePicker}
           onChange={(value) => {
-            setFiltersState({ ...filtersState, [column]: value });
+            setFiltersState({ ...filtersState, [column]: { value, type } });
             applyFilters({ column, value, type });
             components.DatePicker.onChange?.(value);
           }}
-          value={filtersState[column]}
+          value={filtersState[column].value}
           datePickerType="range"
         >
           <DatePickerInput
@@ -172,31 +187,40 @@ const FilterLeftPanel = ({
           onChange={(event) => {
             setFiltersState({
               ...filtersState,
-              [column]: event.target.value,
+              [column]: {
+                value: event.target.value,
+                type,
+              },
             });
             applyFilters({ column, value: event.target.value, type });
             components.NumberInput.onChange?.(event);
           }}
-          value={filtersState[column]}
+          value={filtersState[column].value}
         />
       );
     } else if (type === CHECKBOX) {
       return (
         <FormGroup {...components.FormGroup}>
-          {filtersState[column].map((option) => (
+          {filtersState[column].value.map((option) => (
             <Checkbox
               key={option.labelText}
               {...option}
               onChange={(isSelected) => {
-                const checkboxCopy = filtersState[column];
+                const checkboxCopy = filtersState[column].value;
                 const foundCheckbox = checkboxCopy.find(
                   (checkbox) => checkbox.value === option.value
                 );
                 foundCheckbox.selected = isSelected;
-                setFiltersState({ ...filtersState, [column]: checkboxCopy });
+                setFiltersState({
+                  ...filtersState,
+                  [column]: {
+                    value: checkboxCopy,
+                    type,
+                  },
+                });
                 applyFilters({
                   column,
-                  value: [...filtersState[column]],
+                  value: [...filtersState[column].value],
                   type,
                 });
                 option.onChange?.(isSelected);
@@ -211,9 +235,15 @@ const FilterLeftPanel = ({
         <FormGroup {...components.FormGroup}>
           <RadioButtonGroup
             {...components.RadioButtonGroup}
-            valueSelected={filtersState[column]}
+            valueSelected={filtersState[column].value}
             onChange={(selected) => {
-              setFiltersState({ ...filtersState, [column]: selected });
+              setFiltersState({
+                ...filtersState,
+                [column]: {
+                  value: selected,
+                  type,
+                },
+              });
               applyFilters({
                 column,
                 value: selected,
@@ -235,11 +265,14 @@ const FilterLeftPanel = ({
       return (
         <Dropdown
           {...components.Dropdown}
-          selectedItem={filtersState[column]}
+          selectedItem={filtersState[column].value}
           onChange={({ selectedItem }) => {
             setFiltersState({
               ...filtersState,
-              [column]: selectedItem,
+              [column]: {
+                value: selectedItem,
+                type,
+              },
             });
             applyFilters({
               column,
@@ -282,13 +315,20 @@ const FilterLeftPanel = ({
 
   /** Effects */
   useEffect(
-    function onMount() {
+    function setPanelMinimumHeight() {
       filterPanelRef.current?.style.setProperty(
         '--filter-panel-min-height',
-        `${filterPanelMinHeight}px` // TODO: use carbon rem function
+        rem(filterPanelMinHeight)
       );
     },
     [filterPanelMinHeight]
+  );
+
+  useEffect(
+    function updateDisabledButtonsState() {
+      setShouldDisableButtons(isInitialState(filtersState));
+    },
+    [filtersState]
   );
 
   useSubscribeToEventEmitter(CLEAR_FILTERS, reset);
@@ -322,9 +362,9 @@ const FilterLeftPanel = ({
         <Button
           hasIconOnly
           renderIcon={Close32}
-          iconDescription="button-chan"
+          iconDescription={closeIconDescription}
           kind="ghost"
-          onClick={cancel}
+          onClick={closePanel}
         />
       </div>
       {showFilterSearch && (
@@ -377,12 +417,11 @@ const FilterLeftPanel = ({
 FilterLeftPanel.propTypes = {
   filterPanelMinHeight: PropTypes.number,
   filterSections: PropTypes.array,
-  onApply: PropTypes.func.isRequired,
-  onCancel: PropTypes.func.isRequired,
+  onApply: PropTypes.func,
+  onCancel: PropTypes.func,
   open: PropTypes.bool,
   setAllFilters: PropTypes.func.isRequired,
   showFilterSearch: PropTypes.bool,
-  tableID: PropTypes.string.isRequired,
   title: PropTypes.string,
   updateMethod: PropTypes.oneOf([BATCH, INSTANT]),
 };

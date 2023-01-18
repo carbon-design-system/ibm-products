@@ -179,7 +179,6 @@ export const DatagridContent = ({ datagridState }) => {
               title="Filter"
               filterSections={filterProps.sections}
               updateMethod="batch"
-              tableID={tableId}
               {...getFilterFlyoutProps()}
             />
           )}

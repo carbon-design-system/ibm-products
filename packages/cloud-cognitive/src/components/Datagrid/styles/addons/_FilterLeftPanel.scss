@@ -18,6 +18,17 @@
   background-color: $ui-01;
 }
 
+.#{$block-class}-filter-left-panel__container::before {
+  position: absolute;
+  top: -1px; // stylelint-disable-line
+  left: 0;
+  display: block;
+  width: rem(48px); // size of filter panel button
+  height: 1px;
+  background-color: $ui-01;
+  content: '';
+}
+
 .#{$block-class}-filter-left-panel__inner-container {
   overflow: auto;
   padding: 0 $spacing-05;
@@ -74,22 +85,29 @@
 }
 
 // Overrides
-.#{$block-class}-filter-left-panel__container .bx--accordion__title {
+.#{$block-class}-filter-left-panel__container
+  .#{$carbon-prefix}--accordion__title {
   margin: 0;
 }
 
-.#{$block-class}-filter-left-panel__container .bx--accordion__arrow {
+.#{$block-class}-filter-left-panel__container
+  .#{$carbon-prefix}--accordion__arrow {
   margin: $spacing-01 0 0;
 }
 
-.#{$block-class}-filter-left-panel__container .bx--accordion__content {
+.#{$block-class}-filter-left-panel__container
+  .#{$carbon-prefix}--accordion__content {
   padding-right: 0;
   padding-left: 0;
 }
 
 // Makes sure every child (filter) inside the accordion content has space in between
 .#{$block-class}-filter-left-panel__container
-  .bx--accordion__content
+  .#{$carbon-prefix}--accordion__content
   > *:not(:last-child) {
   margin-bottom: $spacing-05;
+}
+
+.#{$carbon-prefix}--btn.c4p--datagrid-filter-panel-open-button--open {
+  border-right: 1px solid $ui-03;
 }

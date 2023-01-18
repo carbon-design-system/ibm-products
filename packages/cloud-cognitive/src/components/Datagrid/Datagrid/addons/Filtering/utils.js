@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { FLYOUT, PANEL } from './constants';
+import { CHECKBOX, DATE, FLYOUT, PANEL } from './constants';
 
 // This functions takes the filters passed in and makes an object to track it's state
 export const getInitialStateFromFilters = (filters, variation = FLYOUT) => {
@@ -13,22 +13,35 @@ export const getInitialStateFromFilters = (filters, variation = FLYOUT) => {
 
   const setInitialState = ({ type, column, props }) => {
     if (type === 'checkbox') {
-      initialFilterState[column] = props.Checkbox.map(
-        ({ id, labelText, value }) => ({
+      initialFilterState[column] = {
+        value: props.Checkbox.map(({ id, labelText, value }) => ({
           id,
           labelText,
           value,
           selected: false,
-        })
-      );
+        })),
+        type,
+      };
     } else if (type === 'date') {
-      initialFilterState[column] = [undefined, undefined];
+      initialFilterState[column] = {
+        value: [undefined, undefined],
+        type,
+      };
     } else if (type === 'number') {
-      initialFilterState[column] = '';
+      initialFilterState[column] = {
+        value: '',
+        type,
+      };
     } else if (type === 'radio') {
-      initialFilterState[column] = '';
+      initialFilterState[column] = {
+        value: '',
+        type,
+      };
     } else if (type === 'dropdown') {
-      initialFilterState[column] = '';
+      initialFilterState[column] = {
+        value: '',
+        type,
+      };
     }
   };
 
@@ -50,22 +63,17 @@ export const isInitialState = (state) => {
   // Gets all the values of the state
   const values = Object.values(state);
 
-  return values.every((val) => {
-    const valueIsDateOrCheckbox = Array.isArray(val);
-
-    // Check if it state is a checkbox or date
-    if (valueIsDateOrCheckbox) {
-      const isDate = val[0] === undefined || val[0] instanceof Date;
-      const isCheckbox = typeof val[0] === 'object' && 'selected' in val[0];
-
-      if (isDate && val[1] === undefined) {
-        return true;
-      } else if (isCheckbox) {
-        return val.every(({ selected }) => selected === false);
-      }
-    } else if (val === '') {
-      return true;
+  const isEachStateInItsInitialValue = values.every(({ value, type }) => {
+    if (type === CHECKBOX) {
+      // Checks to see if each checkbox state is set to selected = false
+      return value.every(({ selected }) => selected === false);
+    } else if (type === DATE) {
+      // Checks to see if the start and end value aren't date objects
+      return !(value[1] instanceof Date);
+    } else {
+      return value === '';
     }
-    return false;
   });
+
+  return isEachStateInItsInitialValue;
 };

@@ -100,7 +100,7 @@ export default {
     onClose: { control: { disable: true } },
     navigation: { control: { disable: true } },
     open: { control: { disable: true } },
-    portalTargetCustomDomNode: {
+    portalTarget: {
       control: { type: 'boolean' },
       description:
         'Set portalTarget prop to specify dom node, defaults to document.body.',
@@ -164,7 +164,7 @@ const title = 'Title of the tearsheet';
 
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, portalTargetCustomDomNode, ...args }) => {
+const Template = ({ actions, portalTarget, ...args }) => {
   const [open, setOpen] = useState(false);
 
   const wiredActions =
@@ -195,7 +195,7 @@ const Template = ({ actions, portalTargetCustomDomNode, ...args }) => {
           actions={wiredActions}
           open={open}
           onClose={() => setOpen(false)}
-          portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
+          portalTarget={portalTarget ? ref.current : undefined}
         >
           {mainContent}
         </Tearsheet>
@@ -205,7 +205,7 @@ const Template = ({ actions, portalTargetCustomDomNode, ...args }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const StackedTemplate = ({ actions, portalTargetCustomDomNode, ...args }) => {
+const StackedTemplate = ({ actions, portalTarget, ...args }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
@@ -290,7 +290,7 @@ const StackedTemplate = ({ actions, portalTargetCustomDomNode, ...args }) => {
           open={open1}
           onClose={() => setOpen1(false)}
           selectorPrimaryFocus="#stacked-input-1"
-          portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
+          portalTarget={portalTarget ? ref.current : undefined}
         >
           <div className="tearsheet-stories__dummy-content-block">
             Main content 1
@@ -320,7 +320,7 @@ const StackedTemplate = ({ actions, portalTargetCustomDomNode, ...args }) => {
           open={open2}
           onClose={() => setOpen2(false)}
           selectorPrimaryFocus="#stacked-input-2"
-          portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
+          portalTarget={portalTarget ? ref.current : undefined}
         >
           <div className="tearsheet-stories__dummy-content-block">
             Main content 2
@@ -337,7 +337,7 @@ const StackedTemplate = ({ actions, portalTargetCustomDomNode, ...args }) => {
           open={open3}
           onClose={() => setOpen3(false)}
           selectorPrimaryFocus="#stacked-input-3"
-          portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
+          portalTarget={portalTarget ? ref.current : undefined}
         >
           <div className="tearsheet-stories__dummy-content-block">
             Main content 3

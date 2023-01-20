@@ -85,7 +85,7 @@ export const DatagridActions = (datagridState) => {
         className={cx(`${blockClass}-filter-panel-open-button`, {
           [`${blockClass}-filter-panel-open-button--open`]: leftPanelOpen,
         })}
-        onClick={() => setLeftPanelOpen(true)}
+        onClick={() => setLeftPanelOpen((open) => !open)}
       />
     );
 

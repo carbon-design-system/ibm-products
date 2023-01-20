@@ -143,6 +143,25 @@ const FilterLeftPanel = ({
       filtersObjectArrayCopy.push({ id: column, value, type });
     }
 
+    if (type === CHECKBOX) {
+      /**
+      When all checkboxes of a group are all unselected the value still exists in the filtersObjectArray
+      This checks if all the checkboxes are selected = false and removes it from the array
+     */
+      const index = filtersObjectArrayCopy.findIndex(
+        (filter) => filter.id === column
+      );
+
+      // If all the selected state is false remove from array
+      const shouldRemoveFromArray = filtersObjectArrayCopy[index].value.every(
+        (val) => val.selected === false
+      );
+
+      if (shouldRemoveFromArray) {
+        filtersObjectArrayCopy.splice(index, 1);
+      }
+    }
+
     setFiltersObjectArray(filtersObjectArrayCopy);
 
     // // Automatically apply the filters if the updateMethod is instant
@@ -415,6 +434,7 @@ const FilterLeftPanel = ({
 };
 
 FilterLeftPanel.propTypes = {
+  closeIconDescription: PropTypes.string,
   filterPanelMinHeight: PropTypes.number,
   filterSections: PropTypes.array,
   onApply: PropTypes.func,

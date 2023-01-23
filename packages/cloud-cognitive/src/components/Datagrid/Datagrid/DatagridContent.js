@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2022, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { useContext, useEffect, useRef } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -31,7 +38,7 @@ export const DatagridContent = ({ datagridState }) => {
     withVirtualScroll,
     DatagridPagination,
     isFetching,
-    CustomizeColumnsModal,
+    CustomizeColumnsTearsheet,
     filterProps,
     fullHeightDatagrid,
     verticalAlign = 'center',
@@ -199,8 +206,8 @@ export const DatagridContent = ({ datagridState }) => {
       {rows?.length > 0 && !isFetching && DatagridPagination && (
         <DatagridPagination {...datagridState} />
       )}
-      {CustomizeColumnsModal && (
-        <CustomizeColumnsModal instance={datagridState} />
+      {CustomizeColumnsTearsheet && (
+        <CustomizeColumnsTearsheet instance={datagridState} />
       )}
     </>
   );
@@ -209,13 +216,14 @@ export const DatagridContent = ({ datagridState }) => {
 DatagridContent.propTypes = {
   datagridState: PropTypes.shape({
     getTableProps: PropTypes.func,
+    getFilterFlyoutProps: PropTypes.func,
     withVirtualScroll: PropTypes.bool,
     DatagridActions: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     DatagridPagination: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.func,
     ]),
-    CustomizeColumnsModal: PropTypes.oneOfType([
+    CustomizeColumnsTearsheet: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.func,
     ]),
@@ -236,5 +244,6 @@ DatagridContent.propTypes = {
     gridRef: PropTypes.object,
     setAllFilters: PropTypes.func,
     getFilterProps: PropTypes.func,
+    state: PropTypes.object,
   }),
 };

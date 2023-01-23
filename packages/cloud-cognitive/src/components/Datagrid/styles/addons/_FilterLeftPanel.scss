@@ -11,8 +11,7 @@
 .#{$block-class}-filter-left-panel__container {
   position: relative;
   width: rem(320px);
-  min-height: var(--filter-panel-min-height);
-  max-height: 100vh;
+  height: min(var(--filter-panel-min-height), 100vh);
   border-top: 1px $ui-03 solid;
   border-right: 1px $ui-03 solid;
   background-color: $ui-01;
@@ -32,6 +31,7 @@
 .#{$block-class}-filter-left-panel__inner-container {
   overflow: auto;
   padding: 0 $spacing-05;
+  overscroll-behavior: contain;
 }
 
 // Adds extra space to the last category so the scroll shows everything visible when you reach the bottom

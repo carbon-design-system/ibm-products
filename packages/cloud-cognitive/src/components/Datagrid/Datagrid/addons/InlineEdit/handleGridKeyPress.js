@@ -63,7 +63,6 @@ export const handleGridKeyPress = ({
       )
     ) {
       // Prevents arrow keys from scrolling any other content when dropdown menu is open
-      event.preventDefault();
       return true;
     }
     return false;

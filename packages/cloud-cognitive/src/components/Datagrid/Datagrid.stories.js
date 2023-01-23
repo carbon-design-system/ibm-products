@@ -659,7 +659,6 @@ export const LeftPanel = () => {
         primaryActionLabel: 'Apply',
         secondaryActionLabel: 'Cancel',
         flyoutIconDescription: 'Open filters',
-        showFilterSearch: true,
         emptyStateTitle: 'No filters match',
         emptyStateDescription:
           'Data was not found with the current filters applied. Change filters or clear filters to see other results.',

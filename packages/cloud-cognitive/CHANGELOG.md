@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.41.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.41.1...@carbon/ibm-products@1.41.2) (2023-01-17)
+
+### Bug Fixes
+
+- **ButtonMenu:** update lg size
+  ([#2609](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2609))
+  ([de53c03](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/de53c03fd2db9dd2fc0d62496b806c4a32d824e5))
+- **DataGrid:** date input to accept string date
+  ([#2592](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2592))
+  ([b9704bd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b9704bdc55b2e04500a3a7a3cdcc651a4059b918))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.41.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.41.0...@carbon/ibm-products@1.41.1) (2023-01-10)
 
 ### Bug Fixes

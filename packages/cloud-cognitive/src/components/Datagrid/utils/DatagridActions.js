@@ -44,6 +44,7 @@ export const DatagridActions = (datagridState) => {
     useDenseHeader,
     filterProps,
     getFilterFlyoutProps,
+    data,
   } = datagridState;
 
   const downloadCsv = () => {
@@ -86,6 +87,7 @@ export const DatagridActions = (datagridState) => {
           [`${blockClass}-filter-panel-open-button--open`]: leftPanelOpen,
         })}
         onClick={() => setLeftPanelOpen((open) => !open)}
+        disabled={data.length === 0}
       />
     );
 

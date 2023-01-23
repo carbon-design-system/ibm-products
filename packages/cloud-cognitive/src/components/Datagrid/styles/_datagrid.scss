@@ -424,9 +424,6 @@
   }
 
   .#{$block-class}__table-container .#{$block-class}__filter-summary {
-    position: sticky;
-    z-index: 1; // Need to position FilterSummary on top of table when scrolling
-    top: 0;
     border-bottom: 1px solid $ui-03;
     grid-area: summary;
   }

@@ -56,6 +56,7 @@ const FilterFlyout = ({
   onCancel = () => {},
   secondaryActionLabel = 'Cancel',
   setAllFilters,
+  data = [],
 }) => {
   /** State */
   const [open, setOpen] = useState(false);
@@ -367,6 +368,7 @@ const FilterFlyout = ({
         className={cx(`${componentClass}__trigger`, {
           [`${componentClass}__trigger--open`]: open,
         })}
+        disabled={data.length === 0}
       />
       <div
         ref={filterFlyoutRef}
@@ -387,6 +389,11 @@ const FilterFlyout = ({
 };
 
 FilterFlyout.propTypes = {
+  /**
+   * All data rows in the table
+   */
+  data: PropTypes.array.isRequired,
+
   /**
    * Array of filters to render
    */

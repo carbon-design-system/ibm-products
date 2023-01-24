@@ -40,6 +40,8 @@
   padding-left: $spacing-05;
   border-bottom: 1px solid $layer-active;
   background-color: $layer-selected;
+  /* stylelint-disable-next-line carbon/type-token-use */
+  line-height: 1; // center align text within row
 }
 
 .#{$block-class}__draggable-handleHolder-selected:hover {

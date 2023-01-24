@@ -6,5 +6,9 @@ lib
 umd
 dist
 
+# Other testing
+packages/cloud-cognitive/accessibility-checker
+packages/security/accessibility-checker
+
 # Managed by Lerna - https://github.com/lerna/lerna/tree/main/commands/version#--conventional-commits
 CHANGELOG.md

@@ -9,4 +9,5 @@
 module.exports = {
   failLevels: ['violation'],
   policies: ['WCAG_2_1'],
+  cacheFolder: './accessibility-checker',
 };

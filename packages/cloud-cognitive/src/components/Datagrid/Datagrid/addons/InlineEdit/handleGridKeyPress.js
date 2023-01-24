@@ -78,7 +78,6 @@ export const handleGridKeyPress = ({
       focusedCalendarElement ||
       document.activeElement.classList.contains(`flatpickr-day`)
     ) {
-      //event.preventDefault();
       return true;
     }
     return false;

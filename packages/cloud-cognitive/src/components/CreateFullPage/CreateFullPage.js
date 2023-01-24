@@ -61,6 +61,7 @@ export let CreateFullPage = React.forwardRef(
       nextButtonText,
       onClose,
       onRequestSubmit,
+      firstFocusElement,
       submitButtonText,
       ...rest
     },
@@ -96,6 +97,7 @@ export let CreateFullPage = React.forwardRef(
       currentStep,
       blockClass,
       onMount,
+      firstFocusElement,
     });
     useValidCreateStepCount(stepData.length, componentName);
     useCreateComponentStepChange({
@@ -170,6 +172,9 @@ export let CreateFullPage = React.forwardRef(
           size="sm"
           open={modalIsOpen}
           aria-label={modalTitle}
+          onClose={() => {
+            setModalIsOpen(false);
+          }}
         >
           <ModalHeader title={modalTitle} />
           <ModalBody>
@@ -227,6 +232,11 @@ CreateFullPage.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specifies elements to focus on first on render.
+   */
+  firstFocusElement: PropTypes.string,
+
+  /**
    * The primary 'danger' button text in the modal
    */
   modalDangerButtonText: PropTypes.string.isRequired,
@@ -269,6 +279,7 @@ CreateFullPage.propTypes = {
    * The aria label to be used for the UI Shell SideNav Carbon component
    */
   sideNavAriaLabel: PropTypes.string,
+
   /**
    * The submit button text
    */

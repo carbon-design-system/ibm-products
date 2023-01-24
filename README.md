@@ -10,7 +10,7 @@
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[all-contributors-badge]: https://img.shields.io/badge/all_contributors-15-orange.svg
+[all-contributors-badge]: https://img.shields.io/badge/all_contributors-16-orange.svg
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 
@@ -87,27 +87,32 @@ Thanks goes to these wonderful people
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
-  <tr>
-    <td align="center"><a href="http://simonfinney.dev"><img src="https://avatars2.githubusercontent.com/u/3846874?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Simon Finney</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=SimonFinney" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/lee-chase"><img src="https://avatars0.githubusercontent.com/u/15086604?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Lee Chase</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=lee-chase" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/moores2"><img src="https://avatars2.githubusercontent.com/u/6977424?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Simon Moore</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=moores2" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/joshblack"><img src="https://avatars1.githubusercontent.com/u/3901764?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Josh Black</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=joshblack" title="Code">💻</a></td>
-    <td align="center"><a href="http://davidmenendez.net"><img src="https://avatars1.githubusercontent.com/u/6370760?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Menendez</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=davidmenendez" title="Code">💻</a> <a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/pulls?q=is%3Apr+reviewed-by%3Adavidmenendez" title="Reviewed Pull Requests">👀</a></td>
-  </tr>
-  <tr>
-    <td align="center"><a href="https://github.com/vladbalanescu"><img src="https://avatars2.githubusercontent.com/u/16047402?v=4?s=100" width="100px;" alt=""/><br /><sub><b>vladbalanescu</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=vladbalanescu" title="Code">💻</a></td>
-    <td align="center"><a href="http://www.matthewdgallo.com"><img src="https://avatars0.githubusercontent.com/u/10215203?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Matthew Gallo</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=matthewgallo" title="Code">💻</a> <a href="#infra-matthewgallo" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/pulls?q=is%3Apr+reviewed-by%3Amatthewgallo" title="Reviewed Pull Requests">👀</a></td>
-    <td align="center"><a href="https://github.com/asfordmatt"><img src="https://avatars2.githubusercontent.com/u/14233261?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Matt Chapman</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=asfordmatt" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/dbrugger"><img src="https://avatars1.githubusercontent.com/u/10086178?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dominik Brugger</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=dbrugger" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/polinaouk"><img src="https://avatars2.githubusercontent.com/u/24444328?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Polina Olemskaia</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=polinaouk" title="Code">💻</a></td>
-  </tr>
-  <tr>
-    <td align="center"><a href="http://alexandermelo.com"><img src="https://avatars.githubusercontent.com/u/12755042?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alexander Melo</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=AlexanderMelox" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/Ratheeshrajan"><img src="https://avatars.githubusercontent.com/u/305492?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ratheesh Rajan</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=Ratheeshrajan" title="Code">💻</a> <a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/pulls?q=is%3Apr+reviewed-by%3ARatheeshrajan" title="Reviewed Pull Requests">👀</a></td>
-    <td align="center"><a href="https://janhassel.de"><img src="https://avatars.githubusercontent.com/u/28265588?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jan Hassel</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=janhassel" title="Code">💻</a> <a href="#a11y-janhassel" title="Accessibility">️️️️♿️</a></td>
-    <td align="center"><a href="https://github.com/marion-bruells"><img src="https://avatars.githubusercontent.com/u/51152537?v=4?s=100" width="100px;" alt=""/><br /><sub><b>marion-bruells</b></sub></a><br /><a href="#design-marion-bruells" title="Design">🎨</a></td>
-    <td align="center"><a href="https://github.com/kai-liu"><img src="https://avatars.githubusercontent.com/u/105320675?v=4?s=100" width="100px;" alt=""/><br /><sub><b>kai-liu</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=kai-liu" title="Code">💻</a></td>
-  </tr>
+  <tbody>
+    <tr>
+      <td align="center"><a href="http://simonfinney.dev"><img src="https://avatars2.githubusercontent.com/u/3846874?v=4?s=100" width="100px;" alt="Simon Finney"/><br /><sub><b>Simon Finney</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=SimonFinney" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/lee-chase"><img src="https://avatars0.githubusercontent.com/u/15086604?v=4?s=100" width="100px;" alt="Lee Chase"/><br /><sub><b>Lee Chase</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=lee-chase" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/moores2"><img src="https://avatars2.githubusercontent.com/u/6977424?v=4?s=100" width="100px;" alt="Simon Moore"/><br /><sub><b>Simon Moore</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=moores2" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/joshblack"><img src="https://avatars1.githubusercontent.com/u/3901764?v=4?s=100" width="100px;" alt="Josh Black"/><br /><sub><b>Josh Black</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=joshblack" title="Code">💻</a></td>
+      <td align="center"><a href="http://davidmenendez.net"><img src="https://avatars1.githubusercontent.com/u/6370760?v=4?s=100" width="100px;" alt="David Menendez"/><br /><sub><b>David Menendez</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=davidmenendez" title="Code">💻</a> <a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/pulls?q=is%3Apr+reviewed-by%3Adavidmenendez" title="Reviewed Pull Requests">👀</a></td>
+    </tr>
+    <tr>
+      <td align="center"><a href="https://github.com/vladbalanescu"><img src="https://avatars2.githubusercontent.com/u/16047402?v=4?s=100" width="100px;" alt="vladbalanescu"/><br /><sub><b>vladbalanescu</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=vladbalanescu" title="Code">💻</a></td>
+      <td align="center"><a href="http://www.matthewdgallo.com"><img src="https://avatars0.githubusercontent.com/u/10215203?v=4?s=100" width="100px;" alt="Matthew Gallo"/><br /><sub><b>Matthew Gallo</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=matthewgallo" title="Code">💻</a> <a href="#infra-matthewgallo" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/pulls?q=is%3Apr+reviewed-by%3Amatthewgallo" title="Reviewed Pull Requests">👀</a></td>
+      <td align="center"><a href="https://github.com/asfordmatt"><img src="https://avatars2.githubusercontent.com/u/14233261?v=4?s=100" width="100px;" alt="Matt Chapman"/><br /><sub><b>Matt Chapman</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=asfordmatt" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/dbrugger"><img src="https://avatars1.githubusercontent.com/u/10086178?v=4?s=100" width="100px;" alt="Dominik Brugger"/><br /><sub><b>Dominik Brugger</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=dbrugger" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/polinaouk"><img src="https://avatars2.githubusercontent.com/u/24444328?v=4?s=100" width="100px;" alt="Polina Olemskaia"/><br /><sub><b>Polina Olemskaia</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=polinaouk" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center"><a href="http://alexandermelo.com"><img src="https://avatars.githubusercontent.com/u/12755042?v=4?s=100" width="100px;" alt="Alexander Melo"/><br /><sub><b>Alexander Melo</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=AlexanderMelox" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/Ratheeshrajan"><img src="https://avatars.githubusercontent.com/u/305492?v=4?s=100" width="100px;" alt="Ratheesh Rajan"/><br /><sub><b>Ratheesh Rajan</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=Ratheeshrajan" title="Code">💻</a> <a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/pulls?q=is%3Apr+reviewed-by%3ARatheeshrajan" title="Reviewed Pull Requests">👀</a></td>
+      <td align="center"><a href="https://janhassel.de"><img src="https://avatars.githubusercontent.com/u/28265588?v=4?s=100" width="100px;" alt="Jan Hassel"/><br /><sub><b>Jan Hassel</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=janhassel" title="Code">💻</a> <a href="#a11y-janhassel" title="Accessibility">️️️️♿️</a></td>
+      <td align="center"><a href="https://github.com/marion-bruells"><img src="https://avatars.githubusercontent.com/u/51152537?v=4?s=100" width="100px;" alt="marion-bruells"/><br /><sub><b>marion-bruells</b></sub></a><br /><a href="#design-marion-bruells" title="Design">🎨</a></td>
+      <td align="center"><a href="https://github.com/kai-liu"><img src="https://avatars.githubusercontent.com/u/105320675?v=4?s=100" width="100px;" alt="kai-liu"/><br /><sub><b>kai-liu</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=kai-liu" title="Code">💻</a></td>
+    </tr>
+    <tr>
+      <td align="center"><a href="https://www.hellojagath.com"><img src="https://avatars.githubusercontent.com/u/29351394?v=4?s=100" width="100px;" alt="Jagath Jayakumar"/><br /><sub><b>Jagath Jayakumar</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=jagathgj" title="Code">💻</a></td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->

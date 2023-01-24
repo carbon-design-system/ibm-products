@@ -6,6 +6,7 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import { pkg } from '../../settings';
+import cx from 'classnames';
 import useNestedRowExpander from './useNestedRowExpander';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -14,10 +15,17 @@ const useNestedRows = (hooks) => {
   useNestedRowExpander(hooks);
   const marginLeft = 24;
 
-  const getRowProps = (props, { row }) => [
-    props,
-    { className: row.depth > 0 ? `${blockClass}__carbon-nested-row` : '' },
-  ];
+  const getRowProps = (props, { row }) => {
+    return [
+      props,
+      {
+        className: cx({
+          [`${blockClass}__carbon-nested-row`]: row.depth > 0,
+          [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
+        }),
+      },
+    ];
+  };
   const getRowStyles = (props, { row }) => [
     props,
     {
@@ -50,9 +58,14 @@ const useNestedRows = (hooks) => {
     ];
   };
 
+  const useInstance = (instance) => {
+    Object.assign(instance, { withNestedRows: true });
+  };
+
   hooks.getRowProps.push(getRowProps);
   hooks.getRowProps.push(getRowStyles);
   hooks.getCellProps.push(getCellProps);
+  hooks.useInstance.push(useInstance);
 };
 
 export default useNestedRows;

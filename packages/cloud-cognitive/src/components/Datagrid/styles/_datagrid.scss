@@ -416,10 +416,20 @@
 }
 
 .#{$block-class}__carbon-row-expanded {
-  // Border applied to nested rows only on open chevron hover
-  &.#{$block-class}__carbon-row-expanded-hover-active
-    ~ .#{$block-class}__carbon-nested-row {
+  position: relative;
+  &.#{$block-class}__carbon-row-expanded-hover-active::before {
+    position: absolute;
+    z-index: 2;
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    top: var(--#{$block-class}--row-height);
+    /* stylelint-disable-next-line carbon/layout-token-use */
+    left: calc(
+      var(--#{$block-class}--indicator-offset-amount) + #{$spacing-05}
+    );
+    width: 1px;
+    height: var(--#{$block-class}--indicator-height);
     border-left: 1px solid $active-ui;
+    content: '';
   }
 }
 
@@ -473,8 +483,10 @@
 }
 
 .#{$block-class}
-  .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)::before {
+  .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)
+  ::before {
   position: absolute;
+  top: 0;
   left: 0;
   width: $spacing-02;
   height: 100%;
@@ -522,4 +534,58 @@
 
 .#{$block-class} .#{$pkg-prefix}--button-menu {
   height: $spacing-09;
+}
+
+.#{$block-class}__customize-columns-checkbox-wrapper.#{$carbon-prefix}--form-item {
+  flex: 0 0 auto;
+  margin-right: $spacing-03;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 7px;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar-track {
+  background: $layer;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+.#{$block-class}__virtualScrollContainer {
+  width: 100%;
+}
+
+.#{$carbon-prefix}--body--with-modal-open .#{$block-class}__grid-container {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.#{$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger {
+  flex-shrink: 0;
+  background-color: $interactive-01;
+}
+
+.#{$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger svg {
+  fill: $ui-background;
+}
+
+.#{$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger:hover,
+.#{$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{$carbon-prefix}--overflow-menu--open:hover,
+.#{$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{$carbon-prefix}--overflow-menu--open {
+  background-color: $hover-primary;
+}
+
+.#{$block-class}__toolbar-options.#{$carbon-prefix}--overflow-menu-options::after {
+  background-color: transparent;
+}
+
+.#{$block-class}__mobile-toolbar-modal .#{$carbon-prefix}--modal-container {
+  position: absolute;
+}
+
+.#{$block-class} .#{$carbon-prefix}--modal {
+  width: 100%;
 }

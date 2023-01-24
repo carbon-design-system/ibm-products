@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import pconsole from '../../global/js/utils/pconsole';
 import { pkg, carbon } from '../../settings';
 
 // Carbon and package components we use.
@@ -39,10 +40,6 @@ const defaults = {
 };
 
 const buttons = ['cancel', 'edit', 'save'];
-
-console.warn(
-  'the v1 version of this component is being deprecated. please switch to the v2 component as soon as possible.'
-);
 
 /**
  * TODO: A description of the component.
@@ -84,6 +81,10 @@ export let InlineEditV1 = React.forwardRef(
     const showValidation = invalid; // || warn;
     const validationText = invalidText; // || warnText;
     const validationIcon = showValidation ? <WarningFilled16 /> : null;
+
+    pconsole.warn(
+      `${componentName}: the v1 version of this component is being deprecated. please switch to the v2 component as soon as possible.`
+    );
 
     // sanitize the tooltip values
     const alignIsObject = typeof buttonTooltipAlignment === 'object';
@@ -370,9 +371,6 @@ export let InlineEditV1 = React.forwardRef(
     );
   }
 );
-
-// Return a placeholder if not released and not enabled by feature flag
-InlineEditV1 = pkg.checkComponentEnabled(InlineEditV1, componentName);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.

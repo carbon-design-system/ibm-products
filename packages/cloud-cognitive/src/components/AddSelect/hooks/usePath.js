@@ -1,4 +1,11 @@
-import { useState } from 'react';
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+import { useState, useEffect } from 'react';
 
 const usePath = (itemsLabel = '') => {
   const [path, setPath] = useState([
@@ -7,6 +14,15 @@ const usePath = (itemsLabel = '') => {
       title: itemsLabel,
     },
   ]);
+
+  useEffect(() => {
+    setPath([
+      {
+        id: 'base_of_path',
+        title: itemsLabel,
+      },
+    ]);
+  }, [itemsLabel]);
 
   const handler = (id, title, parentId) => {
     if (path.find((entry) => entry.id === id)) {
@@ -35,10 +51,20 @@ const usePath = (itemsLabel = '') => {
     setPath([...pathCopy]);
   };
 
+  const resetPath = () => {
+    setPath([
+      {
+        id: 'base_of_path',
+        title: itemsLabel,
+      },
+    ]);
+  };
+
   return {
     path,
     setPath: handler,
     pathOnclick: pathClickHandler,
+    resetPath,
   };
 };
 

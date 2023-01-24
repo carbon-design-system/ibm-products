@@ -1,0 +1,60 @@
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../variables';
+
+.#{$block-class}__customize-columns-tearsheet {
+  .#{$pkg-prefix}--tearsheet__content {
+    display: flex;
+    flex-flow: column;
+  }
+}
+
+.#{$block-class}__customize-columns-tearsheet--actions {
+  .#{$carbon-prefix}--search-input {
+    border-bottom: 1px solid $ui-03;
+  }
+}
+
+.#{$block-class}__customize-columns-checkbox-wrapper {
+  display: flex;
+  justify-content: center;
+  padding-left: $spacing-03;
+  margin-bottom: 0;
+}
+
+.#{$block-class}__customize-columns-column-list {
+  position: relative; // needed for the react-dnd, otherwise the drag preview will not work correctly
+  overflow: auto;
+}
+
+.#{$block-class}__customize-columns-select-all {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  display: flex;
+  height: $spacing-09;
+  padding-left: $spacing-08;
+  border-bottom: 1px solid $layer-active;
+  background-color: $layer;
+
+  .#{$carbon-prefix}--checkbox-label-text {
+    @include carbon--font-weight($weight: semibold);
+  }
+}
+
+.#{$block-class}__customize-columns-select-all:hover {
+  background-color: $layer-hover;
+}
+
+.#{$block-class}__customize-columns-select-all--selected {
+  background-color: $layer-selected;
+}
+
+.#{$block-class}__customize-columns-select-all--selected:hover {
+  background-color: $hover-selected-ui;
+}

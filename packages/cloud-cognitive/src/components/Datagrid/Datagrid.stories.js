@@ -6,36 +6,36 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useEffect } from 'react';
-import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
+import React, { useEffect, useState } from 'react';
+import { makeData, newPersonWithTwoLines, range } from './utils/makeData';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
-
 import { action } from '@storybook/addon-actions';
+
 import { Activity16, Add16 } from '@carbon/icons-react';
 import { DataTable } from 'carbon-components-react';
 import {
   Datagrid,
+  useActionsColumn,
   useDatagrid,
+  useDisableSelectRows,
   useInfiniteScroll,
   useRowIsMouseOver,
+  useSelectAllWithToggle,
   useSelectRows,
   useSortableColumns,
-  useDisableSelectRows,
-  useSelectAllWithToggle,
   useStickyColumn,
-  useActionsColumn,
 } from '.';
 
-import { SelectAllWitHToggle, LeftPanelStory } from './Datagrid.stories';
 import mdx from './Datagrid.mdx';
+import { LeftPanelStory, SelectAllWithToggle } from './Datagrid.stories/index';
 
 import { pkg } from '../../settings';
 
-import styles from './_storybook-styles.scss';
 import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
+import styles from './_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -75,6 +75,15 @@ const defaultHeader = [
     width: 60,
   },
   {
+    Header: 'Status',
+    accessor: 'status',
+  },
+  {
+    Header: 'Joined',
+    accessor: 'joined',
+    Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
+  },
+  {
     Header: 'Someone 1',
     accessor: 'someone1',
   },
@@ -101,18 +110,6 @@ const defaultHeader = [
   {
     Header: 'Someone 7',
     accessor: 'someone7',
-  },
-  {
-    Header: 'Someone 8',
-    accessor: 'someone8',
-  },
-  {
-    Header: 'Someone 9',
-    accessor: 'someone9',
-  },
-  {
-    Header: 'Someone 10',
-    accessor: 'someone10',
   },
 ];
 
@@ -148,6 +145,16 @@ export const EmptyState = () => {
   const emptyStateDescription = 'Description explaining why the table is empty';
   const emptyStateSize = 'lg';
   const illustrationTheme = 'light';
+  const emptyStateAction = {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add16,
+    iconDescription: 'Add icon',
+  };
+  const emptyStateLink = {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  };
 
   const datagridState = useDatagrid({
     columns,
@@ -156,6 +163,8 @@ export const EmptyState = () => {
     emptyStateDescription,
     emptyStateSize,
     illustrationTheme,
+    emptyStateAction,
+    emptyStateLink,
     DatagridActions,
     DatagridBatchActions,
     DatagridPagination,
@@ -182,10 +191,14 @@ export const InitialLoad = () => {
     fetchData();
   }, []);
 
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription = 'Description explaining why the table is empty';
   const datagridState = useDatagrid({
     columns,
     data,
     isFetching,
+    emptyStateTitle,
+    emptyStateDescription,
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -426,7 +439,7 @@ export const SelectItemsInAllPages = () => {
     </>
   );
 };
-SelectItemsInAllPages.story = SelectAllWitHToggle;
+SelectItemsInAllPages.story = SelectAllWithToggle;
 
 export const LeftPanel = () => {
   const columns = React.useMemo(() => defaultHeader, []);

@@ -24,7 +24,7 @@ const componentName = 'ButtonMenu';
 
 // Default values for props
 const defaults = {
-  size: 'default',
+  size: 'lg',
   kind: 'primary',
 };
 
@@ -53,41 +53,46 @@ export let ButtonMenu = React.forwardRef(
       ...rest
     },
     ref
-  ) => (
-    <OverflowMenu
-      {
-        // Pass through any other property values as HTML attributes.
-        ...rest
-      }
-      className={cx(
-        blockClass, // Apply the block class to the main HTML element
-        className // Apply any supplied class names to the main HTML element.
-      )}
-      menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
-      renderIcon={() => (
-        <div
-          className={cx([
-            `${blockClass}__trigger`,
-            `${carbon.prefix}--btn`,
-            `${carbon.prefix}--btn--${kind}`,
-            `${carbon.prefix}--btn--${size}`,
-          ])}
-        >
-          {label}
-          {Icon && (
-            <Icon
-              aria-hidden="true"
-              aria-label={iconDescription}
-              className={`${carbon.prefix}--btn__icon`}
-            />
-          )}
-        </div>
-      )}
-      innerRef={ref}
-    >
-      {children}
-    </OverflowMenu>
-  )
+  ) => {
+    const buttonSize = size === 'lg' ? 'default' : size;
+
+    return (
+      <OverflowMenu
+        {
+          // Pass through any other property values as HTML attributes.
+          ...rest
+        }
+        className={cx(
+          blockClass, // Apply the block class to the main HTML element
+          className // Apply any supplied class names to the main HTML element.
+        )}
+        menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
+        size={size}
+        renderIcon={() => (
+          <div
+            className={cx([
+              `${blockClass}__trigger`,
+              `${carbon.prefix}--btn`,
+              `${carbon.prefix}--btn--${kind}`,
+              `${carbon.prefix}--btn--${buttonSize}`,
+            ])}
+          >
+            {label}
+            {Icon && (
+              <Icon
+                aria-hidden="true"
+                aria-label={iconDescription}
+                className={`${carbon.prefix}--btn__icon`}
+              />
+            )}
+          </div>
+        )}
+        innerRef={ref}
+      >
+        {children}
+      </OverflowMenu>
+    );
+  }
 );
 
 // Return a placeholder if not released and not enabled by feature flag
@@ -143,5 +148,5 @@ ButtonMenu.propTypes = {
    * The size of the button for the menu trigger. The values can be any valid
    * value for the carbon Button component 'size' prop.
    */
-  size: Button.propTypes.size,
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };

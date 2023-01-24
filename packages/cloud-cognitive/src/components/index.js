@@ -72,6 +72,7 @@ export {
   useSelectAllWithToggle,
   useColumnOrder,
   useInlineEdit,
+  useFiltering,
 } from './Datagrid';
 export { EditTearsheet } from './EditTearsheet';
 export { EditTearsheetNarrow } from './EditTearsheetNarrow';
@@ -79,4 +80,3 @@ export { EditFullPage } from './EditFullPage';
 export { EditUpdateCards } from './EditUpdateCards';
 
 export { InlineEdit } from './InlineEdit';
-export { InlineEditV2 } from './InlineEditV2';

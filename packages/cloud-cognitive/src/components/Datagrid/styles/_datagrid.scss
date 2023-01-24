@@ -419,7 +419,7 @@
   // Border applied to nested rows only on open chevron hover
   &.#{$block-class}__carbon-row-expanded-hover-active
     ~ .#{$block-class}__carbon-nested-row {
-    border-left: 1px solid $interactive-01;
+    border-left: 1px solid $active-ui;
   }
 }
 

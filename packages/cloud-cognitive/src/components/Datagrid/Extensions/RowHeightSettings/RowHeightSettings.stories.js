@@ -107,20 +107,24 @@ const sharedDatagridProps = {
   rowSize: 'lg',
   rowSizes: [
     {
-      value: 'xl',
-      labelText: 'Extra large',
+      value: 'xs',
+      labelText: 'Extra small',
     },
     {
-      value: 'lg',
-      labelText: 'Large',
+      value: 'sm',
+      labelText: 'Small',
     },
     {
       value: 'md',
       labelText: 'Medium',
     },
     {
-      value: 'xs',
-      labelText: 'Small',
+      value: 'lg',
+      labelText: 'Large',
+    },
+    {
+      value: 'xl',
+      labelText: 'Extra large',
     },
   ],
   onRowSizeChange: (value) => {
@@ -151,7 +155,7 @@ const BasicUsage = ({ ...args }) => {
       {
         Header: 'Someone 11',
         accessor: 'someone11',
-        multiLineWrap: true,
+        multiLineWrap: false,
       },
     ],
     []

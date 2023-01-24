@@ -63,6 +63,7 @@ export const handleGridKeyPress = ({
       )
     ) {
       // Prevents arrow keys from scrolling any other content when dropdown menu is open
+      event.preventDefault();
       return true;
     }
     return false;
@@ -77,7 +78,7 @@ export const handleGridKeyPress = ({
       focusedCalendarElement ||
       document.activeElement.classList.contains(`flatpickr-day`)
     ) {
-      event.preventDefault();
+      //event.preventDefault();
       return true;
     }
     return false;

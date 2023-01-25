@@ -167,7 +167,12 @@ export const DatagridActions = (datagridState) => {
           </div>
         )}
         <RowSizeDropdown {...rowSizeDropdownProps} />
-        <ButtonMenu label="Primary button" renderIcon={Add16}>
+        <ButtonMenu
+          label="Primary button"
+          size="lg"
+          light
+          renderIcon={ChevronDown16}
+        >
           <ButtonMenuItem
             itemText="Option 1"
             onClick={action(`Click on ButtonMenu Option 1`)}

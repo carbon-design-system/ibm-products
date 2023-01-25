@@ -377,7 +377,7 @@ export const SortableColumns = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-export const DatagridActionsToolbar = () => {
+export const ActionsDropdown = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(

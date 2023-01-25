@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.41.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.41.2...@carbon/ibm-products@1.41.3) (2023-01-24)
+
+### Bug Fixes
+
+- tagset overflow first open
+  ([#2611](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2611))
+  ([9d5e4c2](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9d5e4c26c43451fb7a5581b05139529318bf09b6))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.41.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.41.1...@carbon/ibm-products@1.41.2) (2023-01-17)
 
 ### Bug Fixes

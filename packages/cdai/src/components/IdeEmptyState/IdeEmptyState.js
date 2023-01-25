@@ -58,12 +58,12 @@ const IdeEmptyState = ({ body, button, format, image, links, title }) => {
     const finalLinks = Array.isArray(links) ? links : [links];
     return (
       <ul>
-        {finalLinks.map(({ text, url, target = '_top' }) => (
+        {finalLinks.map(({ text, url, target = '_top', onClick, ...other }) => (
           <li
             {...{ className: `${prefix}__link`, key: `${text}:${url}` }}
             key={`${text}:${url}`}
           >
-            <CarbonLink href={url} target={target}>
+            <CarbonLink href={url} target={target} onClick={(e) => onClick(e)} {...other}>
               {text}
             </CarbonLink>
             {target === '_blank' && (

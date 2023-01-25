@@ -590,6 +590,11 @@
   background-color: $button-primary-hover;
 }
 
+// extra specificity to override Carbon default
+.#{$block-class}__toolbar-options.#{$block-class}__toolbar-options {
+  background-color: $layer-02;
+}
+
 .#{$block-class}__toolbar-options.#{c4p-settings.$carbon-prefix}--overflow-menu-options::after {
   background-color: transparent;
 }

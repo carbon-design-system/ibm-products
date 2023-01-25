@@ -22,7 +22,7 @@
   top: -1px; // stylelint-disable-line
   left: 0;
   display: block;
-  width: rem(48px); // size of filter panel button
+  width: rem(47px); // size of filter panel button
   height: 1px;
   background-color: $ui-01;
   content: '';
@@ -107,6 +107,7 @@
   margin-bottom: $spacing-05;
 }
 
-.#{$carbon-prefix}--btn.c4p--datagrid-filter-panel-open-button--open {
+.#{$carbon-prefix}--btn.c4p--datagrid-filter-panel-open-button {
   border-right: 1px solid $ui-03;
+  border-bottom: none;
 }

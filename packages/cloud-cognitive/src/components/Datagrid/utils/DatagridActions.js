@@ -25,7 +25,6 @@ import {
   Restart16,
 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
-import cx from 'classnames';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 
@@ -34,7 +33,7 @@ import { FilterContext, FilterFlyout } from '../Datagrid/addons/Filtering';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 export const DatagridActions = (datagridState) => {
-  const { setLeftPanelOpen, leftPanelOpen } = useContext(FilterContext);
+  const { setLeftPanelOpen } = useContext(FilterContext);
   const {
     selectedFlatRows,
     setGlobalFilter,
@@ -83,9 +82,7 @@ export const DatagridActions = (datagridState) => {
         tooltipPosition="bottom"
         renderIcon={Filter16}
         iconDescription={'Open filters'}
-        className={cx(`${blockClass}-filter-panel-open-button`, {
-          [`${blockClass}-filter-panel-open-button--open`]: leftPanelOpen,
-        })}
+        className={`${blockClass}-filter-panel-open-button`}
         onClick={() => setLeftPanelOpen((open) => !open)}
         disabled={data.length === 0}
       />

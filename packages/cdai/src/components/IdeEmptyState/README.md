@@ -171,10 +171,12 @@ An array of links objects.
   {
     text: '...', (String, required)
     url: '...', (String, required)
+    onClick: () => ..., (Function, optional)
   },
   {
     text: '...', (String, required)
     url: '...', (String, required)
+    onClick: () => ..., (Function, optional)
   },
 ]
 ```
@@ -186,6 +188,10 @@ The text to display when rendering the link. Must be pre-translated.
 ##### url: String (Required)
 
 The link's destination.
+
+##### onClick: Function (Optional)
+
+The event handler for when the button is clicked.
 
 ## Remaining items to implement/designed
 

@@ -183,6 +183,7 @@ const FilterLeftPanel = ({
           }}
           value={filtersState[column].value}
           datePickerType="range"
+          light
         >
           <DatePickerInput
             placeholder="mm/dd/yyyy"
@@ -215,6 +216,7 @@ const FilterLeftPanel = ({
             components.NumberInput.onChange?.(event);
           }}
           value={filtersState[column].value}
+          light
         />
       );
     } else if (type === CHECKBOX) {
@@ -300,6 +302,7 @@ const FilterLeftPanel = ({
             });
             components.Dropdown.onChange?.(selectedItem);
           }}
+          light
         />
       );
     }

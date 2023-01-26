@@ -176,7 +176,6 @@ An array of links objects.
   {
     text: '...', (String, required)
     url: '...', (String, required)
-    onClick: () => ..., (Function, optional)
   },
 ]
 ```
@@ -191,7 +190,7 @@ The link's destination.
 
 ##### onClick: Function (Optional)
 
-The event handler for when the button is clicked.
+The optional event handler for when the button is clicked.
 
 ## Remaining items to implement/designed
 

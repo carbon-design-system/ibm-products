@@ -380,6 +380,7 @@
 
   .#{$block-class}__grid-container {
     display: flex;
+    overflow: visible;
     flex-direction: column;
   }
 
@@ -389,30 +390,13 @@
 
   .#{$block-class}__table-container {
     display: flex;
-    overflow: visible;
+    overflow: hidden;
     background-color: $ui-01;
   }
 
   .#{$block-class}__table-container-inner {
     overflow: hidden;
     flex: 1;
-  }
-
-  .#{$pkg-prefix}--datagrid-filter-left-panel {
-    flex: 0 0 rem(320px);
-    margin-left: rem(-320px); // stylelint-disable-line
-    opacity: 0;
-    transition: margin $duration--moderate-02 motion(exit, productive)
-        $duration--fast-01,
-      opacity $duration--fast-01 motion(exit, productive);
-  }
-
-  .#{$block-class}__table-container--filter-open
-    .#{$pkg-prefix}--datagrid-filter-left-panel {
-    margin-left: 0;
-    opacity: 1;
-    transition: margin $duration--moderate-02 motion(entrance, productive),
-      opacity $duration--moderate-02 motion(exit, productive) 150ms;
   }
 
   .#{$block-class}__table-container .#{$block-class}__filter-summary {

@@ -153,7 +153,6 @@ export const DatagridContent = ({ datagridState }) => {
   return (
     <>
       <TableContainer
-        style={{ overflow: 'visible' }}
         className={cx(
           `${blockClass}__grid-container`,
           withVirtualScroll || fullHeightDatagrid

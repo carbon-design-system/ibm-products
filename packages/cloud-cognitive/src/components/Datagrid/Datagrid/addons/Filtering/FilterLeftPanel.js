@@ -30,6 +30,8 @@ import {
   RADIO,
 } from './constants';
 import cx from 'classnames';
+import { motion } from 'framer-motion';
+import { panelVariants } from './motion/variants';
 import { Close32 } from '@carbon/icons-react';
 import { ActionSet } from '../../../../ActionSet';
 import { FilterContext } from '.';
@@ -371,13 +373,32 @@ const FilterLeftPanel = ({
   };
 
   return (
-    <div
+    <motion.div
       ref={filterPanelRef}
       className={cx(componentClass, `${componentClass}__container`, {
         [`${componentClass}--open`]: leftPanelOpen,
         [`${componentClass}--batch`]: showActionSet,
         [`${componentClass}--instant`]: !showActionSet,
       })}
+      initial={false}
+      animate={leftPanelOpen ? 'visible' : 'hidden'}
+      variants={panelVariants}
+      onAnimationStart={() => {
+        document.querySelector(
+          '.c4p--datagrid__table-container'
+        ).style.overflow = 'hidden';
+      }}
+      onAnimationComplete={() => {
+        if (
+          leftPanelOpen &&
+          document.querySelector('.c4p--datagrid__table-container').style
+            .overflow === 'hidden'
+        ) {
+          document.querySelector(
+            '.c4p--datagrid__table-container'
+          ).style.overflow = 'visible';
+        }
+      }}
     >
       <div ref={filterHeadingRef} className={`${componentClass}__heading`}>
         <h1 className={`${componentClass}__title`}>{title}</h1>
@@ -432,7 +453,7 @@ const FilterLeftPanel = ({
         )}
       </div>
       {renderActionSet()}
-    </div>
+    </motion.div>
   );
 };
 

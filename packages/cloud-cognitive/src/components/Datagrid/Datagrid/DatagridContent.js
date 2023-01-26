@@ -153,6 +153,7 @@ export const DatagridContent = ({ datagridState }) => {
   return (
     <>
       <TableContainer
+        style={{ overflow: leftPanelOpen ? 'visible' : 'hidden' }}
         className={cx(
           `${blockClass}__grid-container`,
           withVirtualScroll || fullHeightDatagrid
@@ -175,12 +176,9 @@ export const DatagridContent = ({ datagridState }) => {
         <div
           className={cx(`${blockClass}__table-container`, {
             [`${blockClass}__table-container--filter-open`]: leftPanelOpen,
-            [`${blockClass}__table-container--filter-open-with-summary`]:
-              leftPanelOpen && filterTags.length > 0,
           })}
           ref={gridAreaRef}
         >
-          {renderFilterSummary()}
           {filterProps?.variation === 'panel' && (
             <FilterLeftPanel
               title="Filter"
@@ -189,18 +187,21 @@ export const DatagridContent = ({ datagridState }) => {
               {...getFilterFlyoutProps()}
             />
           )}
-          {withInlineEdit ? (
-            <div ref={multiKeyTrackingRef}>{renderTable()}</div>
-          ) : withVirtualScroll ? (
-            <div
-              className={`${blockClass}__virtualScrollContainer`}
-              ref={gridRef}
-            >
-              {renderTable()}
-            </div>
-          ) : (
-            renderTable()
-          )}
+          <div className={`${blockClass}__table-container-inner`}>
+            {renderFilterSummary()}
+            {withInlineEdit ? (
+              <div ref={multiKeyTrackingRef}>{renderTable()}</div>
+            ) : withVirtualScroll ? (
+              <div
+                className={`${blockClass}__virtualScrollContainer`}
+                ref={gridRef}
+              >
+                {renderTable()}
+              </div>
+            ) : (
+              renderTable()
+            )}
+          </div>
         </div>
       </TableContainer>
       {rows?.length > 0 && !isFetching && DatagridPagination && (

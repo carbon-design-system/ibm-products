@@ -41,7 +41,8 @@
 }
 
 .#{$block-class}-filter-left-panel {
-  display: none;
+  // display: none;
+  display: block;
 }
 
 .#{$block-class}-filter-left-panel--open {

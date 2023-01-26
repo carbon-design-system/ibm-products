@@ -375,57 +375,43 @@
 .#{$block-class}__datagridWithPanel {
   position: relative;
   display: flex;
-  width: 100%;
   height: 100%;
   flex-direction: column;
 
   .#{$block-class}__grid-container {
     display: flex;
-    // overflow: hidden;
     flex-direction: column;
-  }
-
-  .#{$block-class}__table-toolbar {
-    width: 100%;
   }
 
   .#{$carbon-prefix}--data-table-content {
     flex: 1 1 0%;
   }
+
   .#{$block-class}__table-container {
-    display: grid;
+    display: flex;
     overflow: visible;
     background-color: $ui-01;
-    grid-template-areas:
-      'summary summary'
-      'table table';
-    grid-template-columns: rem(320px) 1fr;
   }
 
-  .#{$block-class}__table-container--filter-open {
-    grid-template-areas:
-      'filter-panel table'
-      'filter-panel table';
-  }
-
-  .#{$block-class}__table-container--filter-open-with-summary {
-    grid-template-areas:
-      'filter-panel summary'
-      'filter-panel table';
-    grid-template-rows: rem(48px) 1fr;
-  }
-
-  .#{$carbon-prefix}--data-table-content {
-    grid-area: table;
+  .#{$block-class}__table-container-inner {
+    overflow: hidden;
+    flex: 1;
   }
 
   .#{$pkg-prefix}--datagrid-filter-left-panel {
-    grid-area: filter-panel;
+    flex: 0 0 rem(320px);
+    margin-left: rem(-320px); // stylelint-disable-line
+    transition: margin $duration--moderate-02 motion(exit, productive);
+  }
+
+  .#{$block-class}__table-container--filter-open
+    .#{$pkg-prefix}--datagrid-filter-left-panel {
+    margin-left: 0;
+    transition: margin $duration--moderate-02 motion(entrance, productive);
   }
 
   .#{$block-class}__table-container .#{$block-class}__filter-summary {
     border-bottom: 1px solid $ui-03;
-    grid-area: summary;
   }
 
   .#{$pkg-prefix}--datagrid__table-simple {

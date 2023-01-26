@@ -401,13 +401,18 @@
   .#{$pkg-prefix}--datagrid-filter-left-panel {
     flex: 0 0 rem(320px);
     margin-left: rem(-320px); // stylelint-disable-line
-    transition: margin $duration--moderate-02 motion(exit, productive);
+    opacity: 0;
+    transition: margin $duration--moderate-02 motion(exit, productive)
+        $duration--fast-01,
+      opacity $duration--fast-01 motion(exit, productive);
   }
 
   .#{$block-class}__table-container--filter-open
     .#{$pkg-prefix}--datagrid-filter-left-panel {
     margin-left: 0;
-    transition: margin $duration--moderate-02 motion(entrance, productive);
+    opacity: 1;
+    transition: margin $duration--moderate-02 motion(entrance, productive),
+      opacity $duration--moderate-02 motion(exit, productive) 150ms;
   }
 
   .#{$block-class}__table-container .#{$block-class}__filter-summary {

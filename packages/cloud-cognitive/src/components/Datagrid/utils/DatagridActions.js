@@ -85,6 +85,7 @@ export const DatagridActions = (datagridState) => {
         className={`${blockClass}-filter-panel-open-button`}
         onClick={() => setLeftPanelOpen((open) => !open)}
         disabled={data.length === 0}
+        tooltipAlignment="start"
       />
     );
 

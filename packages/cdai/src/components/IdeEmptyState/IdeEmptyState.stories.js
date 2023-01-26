@@ -86,4 +86,18 @@ storiesOf(getComponentLabel('IdeEmptyState'), module)
         ),
       }}
     />
+  ))
+  .add('Custom links: function', () => (
+    <IdeEmptyState
+      {...{
+      links: object('links', [
+          { 
+          text: 'Custom link whith a function', 
+          url: '#', 
+          onClick: () => console.log("This link has a custom function") 
+        },
+          { text: 'Custom link whithout a function', url: '#'},
+        ]),
+      }}
+    />
   ));

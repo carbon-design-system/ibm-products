@@ -188,7 +188,12 @@ export const DatagridActions = (datagridState) => {
             <CustomizeColumnsButton />
           </div>
         )}
-        <ButtonMenu label="Primary button" renderIcon={Add16}>
+        <ButtonMenu
+          label="Primary button"
+          size="lg"
+          light
+          renderIcon={ChevronDown16}
+        >
           <ButtonMenuItem
             itemText="Option 1"
             onClick={action(`Click on ButtonMenu Option 1`)}

@@ -225,6 +225,11 @@ IdeEmptyState.propTypes = {
        * The target prop to apply to the anchor link
        */
       target: PropTypes.string,
+      /**
+       * The onClick prop to apply a custom function
+       * when the button is clicked
+       */
+      onClick: PropTypes.func,
     }),
     /**
      * An array of links objects.

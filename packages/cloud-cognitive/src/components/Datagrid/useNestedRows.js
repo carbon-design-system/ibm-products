@@ -33,9 +33,9 @@ const useNestedRows = (hooks) => {
         marginLeft: `${row.depth > 0 ? marginLeft : 0}px`,
         paddingLeft: `${
           row.depth > 1
-            ? (marginLeft * 2) + (row.depth - 1) * (marginLeft + (marginLeft/3))
+            ? marginLeft * 2 + (row.depth - 1) * (marginLeft + marginLeft / 3)
             : row.depth === 1
-            ? (marginLeft * 2)
+            ? marginLeft * 2
             : 0
         }px`,
         maxWidth: `calc(100% - ${marginLeft * row.depth}px)`,
@@ -52,7 +52,7 @@ const useNestedRows = (hooks) => {
         style: {
           marginRight: `${
             isFirstCell && cell.row.depth > 0
-              ? `${(-32 * cell.row.depth) - 18}px`
+              ? `${-32 * cell.row.depth - 18}px`
               : ''
           }`,
         },

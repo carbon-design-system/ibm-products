@@ -390,7 +390,7 @@
 
   .#{$block-class}__table-container {
     display: flex;
-    overflow: hidden;
+    overflow: visible;
     background-color: $ui-01;
   }
 

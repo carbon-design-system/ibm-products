@@ -31,7 +31,11 @@ import {
 } from './constants';
 import cx from 'classnames';
 import { motion } from 'framer-motion';
-import { panelVariants } from './motion/variants';
+import {
+  panelVariants,
+  innerContainerVariants,
+  actionSetVariants,
+} from './motion/variants';
 import { Close32 } from '@carbon/icons-react';
 import { ActionSet } from '../../../../ActionSet';
 import { FilterContext } from '.';
@@ -43,6 +47,8 @@ import { isInitialState, getInitialStateFromFilters } from './utils';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-left-panel`;
+
+const MotionActionSet = motion(ActionSet);
 
 const FilterLeftPanel = ({
   title,
@@ -313,7 +319,7 @@ const FilterLeftPanel = ({
   const renderActionSet = () => {
     return (
       showActionSet && (
-        <ActionSet
+        <MotionActionSet
           actions={[
             {
               key: 1,
@@ -332,6 +338,7 @@ const FilterLeftPanel = ({
           ]}
           className={`${componentClass}__action-set`}
           ref={actionSetRef}
+          variants={actionSetVariants}
         />
       )
     );
@@ -383,76 +390,62 @@ const FilterLeftPanel = ({
       initial={false}
       animate={leftPanelOpen ? 'visible' : 'hidden'}
       variants={panelVariants}
-      onAnimationStart={() => {
-        document.querySelector(
-          '.c4p--datagrid__table-container'
-        ).style.overflow = 'hidden';
-      }}
-      onAnimationComplete={() => {
-        if (
-          leftPanelOpen &&
-          document.querySelector('.c4p--datagrid__table-container').style
-            .overflow === 'hidden'
-        ) {
-          document.querySelector(
-            '.c4p--datagrid__table-container'
-          ).style.overflow = 'visible';
-        }
-      }}
     >
-      <div ref={filterHeadingRef} className={`${componentClass}__heading`}>
-        <h1 className={`${componentClass}__title`}>{title}</h1>
-        <Button
-          hasIconOnly
-          renderIcon={Close32}
-          iconDescription={closeIconDescription}
-          kind="ghost"
-          onClick={closePanel}
-        />
-      </div>
-      {showFilterSearch && (
-        <div ref={filterSearchRef} className={`${componentClass}__search`}>
-          <Search
-            labelText="Filter search"
-            placeHolderText="Find filters"
-            light={true}
-            size="sm"
+      <motion.div variants={innerContainerVariants}>
+        <div ref={filterHeadingRef} className={`${componentClass}__heading`}>
+          <h1 className={`${componentClass}__title`}>{title}</h1>
+          <Button
+            hasIconOnly
+            renderIcon={Close32}
+            iconDescription={closeIconDescription}
+            kind="ghost"
+            onClick={closePanel}
           />
         </div>
-      )}
-      <div
-        className={`${componentClass}__inner-container`}
-        style={{ height: getScrollableContainerHeight() }}
-      >
-        {filterSections.map(
-          ({ categoryTitle = null, filters = [], showAsAccordion }) => {
-            return (
-              <div className={`${componentClass}__category`}>
-                {categoryTitle && (
-                  <div className={`${componentClass}__category-title`}>
-                    {categoryTitle}
-                  </div>
-                )}
-
-                {showAsAccordion ? (
-                  <Accordion>
-                    {filters.map(({ filterLabel, filter }) => {
-                      return (
-                        <AccordionItem title={filterLabel} key={filterLabel}>
-                          {renderFilter(filter)}
-                        </AccordionItem>
-                      );
-                    })}
-                  </Accordion>
-                ) : (
-                  filters.map(({ filter }) => renderFilter(filter))
-                )}
-              </div>
-            );
-          }
+        {showFilterSearch && (
+          <div ref={filterSearchRef} className={`${componentClass}__search`}>
+            <Search
+              labelText="Filter search"
+              placeHolderText="Find filters"
+              light={true}
+              size="sm"
+            />
+          </div>
         )}
-      </div>
-      {renderActionSet()}
+        <div
+          className={`${componentClass}__inner-container`}
+          style={{ height: getScrollableContainerHeight() }}
+        >
+          {filterSections.map(
+            ({ categoryTitle = null, filters = [], showAsAccordion }) => {
+              return (
+                <div className={`${componentClass}__category`}>
+                  {categoryTitle && (
+                    <div className={`${componentClass}__category-title`}>
+                      {categoryTitle}
+                    </div>
+                  )}
+
+                  {showAsAccordion ? (
+                    <Accordion>
+                      {filters.map(({ filterLabel, filter }) => {
+                        return (
+                          <AccordionItem title={filterLabel} key={filterLabel}>
+                            {renderFilter(filter)}
+                          </AccordionItem>
+                        );
+                      })}
+                    </Accordion>
+                  ) : (
+                    filters.map(({ filter }) => renderFilter(filter))
+                  )}
+                </div>
+              );
+            }
+          )}
+        </div>
+        {renderActionSet()}
+      </motion.div>
     </motion.div>
   );
 };

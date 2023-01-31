@@ -26,7 +26,7 @@ import {
 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
-import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
+import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu'
 
 import { FilterContext, FilterFlyout } from '../Datagrid/addons/Filtering';
 
@@ -44,6 +44,7 @@ export const DatagridActions = (datagridState) => {
     filterProps,
     getFilterFlyoutProps,
     data,
+    FilterFlyout,
   } = datagridState;
 
   const downloadCsv = () => {

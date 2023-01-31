@@ -43,7 +43,8 @@ import {
   useInitialStateFromFilters,
   useSubscribeToEventEmitter,
 } from './hooks';
-import { isInitialState, getInitialStateFromFilters } from './utils';
+import { getInitialStateFromFilters } from './utils';
+import isEqual from 'lodash/isEqual';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-left-panel`;
@@ -67,9 +68,7 @@ const FilterLeftPanel = ({
     PANEL
   );
   const [filtersObjectArray, setFiltersObjectArray] = useState([]);
-  const [shouldDisableButtons, setShouldDisableButtons] = useState(
-    isInitialState(filtersState)
-  );
+  const [shouldDisableButtons, setShouldDisableButtons] = useState(true);
 
   /** Refs */
   const filterPanelRef = useRef();
@@ -357,7 +356,9 @@ const FilterLeftPanel = ({
 
   useEffect(
     function updateDisabledButtonsState() {
-      setShouldDisableButtons(isInitialState(filtersState));
+      setShouldDisableButtons(
+        isEqual(filtersState, JSON.parse(prevFiltersRef.current))
+      );
     },
     [filtersState]
   );

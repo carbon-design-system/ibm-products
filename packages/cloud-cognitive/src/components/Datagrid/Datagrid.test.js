@@ -2517,7 +2517,7 @@ describe(componentName, () => {
     );
     return <Datagrid datagridState={datagridState} />;
   };
-  it('should render an inline edit data grid and allow for editing a cell', () => {
+  it('should render an inline edit data grid and allow for editing a cell', async () => {
     // Must be less than/equal to 40 characters with the current column inline edit config,
     // which is set from `getInlineEditColumns()`
     const newCellValue = 'value updated via inline editing';
@@ -2647,6 +2647,63 @@ describe(componentName, () => {
       `[data-cell-id="${numberInputEditCell}"]`
     ).firstChild.textContent;
     expect(updatedCellValue).toBe(JSON.stringify(newNumInputValue));
+
+    //Date input testing
+    const fifthColumnCell = container.querySelector(
+      `[data-cell-id="column-5-row-0"]`
+    );
+
+    // Click the cell to enter edit mode
+    click(fifthColumnCell);
+    // Carbon date picker input should now exist because we clicked on an inline edit cell of type date
+    const dateInput = fifthColumnCell.getElementsByTagName('input')[0]; // select input from first cell
+    dateInput.focus();
+    expect(dateInput).toHaveFocus();
+
+    const dateInputInitialValue = dateInput.value;
+
+    //get next day of selected day from calendar
+    const nextDay = document.querySelector(
+      '.selected.bx--date-picker__day + .bx--date-picker__day'
+    );
+
+    await nextDay.focus();
+
+    expect(nextDay).toHaveFocus();
+
+    //click next day
+    click(nextDay);
+
+    const updatedDate =
+      fifthColumnCell.firstChild.firstElementChild.textContent;
+
+    expect(updatedDate).not.toBe(dateInputInitialValue);
+
+    const fifthColumnSecondCell = container.querySelector(
+      `[data-cell-id="column-5-row-1"]`
+    );
+
+    //Enter edit mode
+    type(fifthColumnSecondCell.firstChild, '{enter}');
+
+    const secondDateInput =
+      fifthColumnSecondCell.getElementsByTagName('input')[0]; // select input from second cell
+
+    secondDateInput.focus();
+
+    expect(secondDateInput).toHaveFocus();
+
+    secondDateInput.setSelectionRange(0, secondDateInput.value.length);
+
+    const dateInputNewValue = '01/18/2020';
+
+    await type(secondDateInput, dateInputNewValue);
+
+    expect(secondDateInput.value).toEqual(dateInputNewValue);
+
+    //Exit edit mode
+    type(secondDateInput, '{enter}');
+
   });
 
   it('Sticky Actions Column', () => {

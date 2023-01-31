@@ -428,7 +428,7 @@
     );
     width: 1px;
     height: var(--#{$block-class}--indicator-height);
-    border-left: 1px solid $active-ui;
+    border-left: 1px solid $border-subtle-selected-01;
     content: '';
   }
 }

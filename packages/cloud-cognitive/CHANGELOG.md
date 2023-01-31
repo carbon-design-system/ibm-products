@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.41.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.41.3...@carbon/ibm-products@1.41.4) (2023-01-31)
+
+### Bug Fixes
+
+- **DataGrid:** date input support typing date
+  ([#2619](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2619))
+  ([d808b9f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d808b9f4f1e0f03bc2b89ebf76bf93b362d72ba3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.41.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.41.2...@carbon/ibm-products@1.41.3) (2023-01-24)
 
 ### Bug Fixes

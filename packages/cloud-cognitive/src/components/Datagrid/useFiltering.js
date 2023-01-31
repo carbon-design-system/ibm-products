@@ -6,6 +6,7 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import { useMemo } from 'react';
+import { FilterFlyout } from './Datagrid/addons/Filtering';
 
 const useFiltering = (hooks) => {
   const filterTypes = useMemo(
@@ -70,6 +71,7 @@ const useFiltering = (hooks) => {
       filterProps: { ...defaultProps, ...instance.filterProps },
       filterTypes,
       getFilterFlyoutProps,
+      FilterFlyout,
     });
   });
 };

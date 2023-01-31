@@ -75,6 +75,7 @@ export {
   useColumnOrder,
   useInlineEdit,
   useFiltering,
+  FilterFlyout,
 } from './Datagrid';
 export { EditTearsheet } from './EditTearsheet';
 export { EditTearsheetNarrow } from './EditTearsheetNarrow';

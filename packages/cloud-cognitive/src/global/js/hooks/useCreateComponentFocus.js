@@ -6,7 +6,7 @@
  */
 
 import { useEffect } from 'react';
-import { getFocusableElements } from '../utils/getFocusableElements';
+import wait from '../utils/wait';
 
 // Focus the first focusable element and call the onMount prop for the current step if one is provided
 export const useCreateComponentFocus = ({
@@ -14,6 +14,7 @@ export const useCreateComponentFocus = ({
   currentStep,
   blockClass,
   onMount,
+  firstFocusElement,
 }) => {
   useEffect(() => {
     if (typeof onMount === 'function') {
@@ -21,21 +22,18 @@ export const useCreateComponentFocus = ({
     }
   }, [onMount]);
   useEffect(() => {
+    // because of how handleStackChange.claimFocus in TearsheetShell works a timeout is required to focus on specific elements
+    const awaitFocus = async (elm) => {
+      await wait(10);
+      elm.focus();
+    };
     if (previousState?.currentStep !== currentStep && currentStep > 0) {
-      const visibleStepInnerContent = document.querySelector(
-        `.${blockClass}__step.${blockClass}__step__step--visible-step`
-      );
-      const focusableStepElements = visibleStepInnerContent
-        ? getFocusableElements(visibleStepInnerContent)
-        : [];
-      if (focusableStepElements && focusableStepElements.length) {
-        focusableStepElements[0].focus();
-      } else {
-        const nextButton = document.querySelector(
-          `.${blockClass}__create-button`
-        );
-        nextButton?.focus();
+      if (firstFocusElement) {
+        const elm = document.querySelector(firstFocusElement);
+        if (elm) {
+          awaitFocus(elm);
+        }
       }
     }
-  }, [currentStep, previousState, blockClass, onMount]);
+  }, [currentStep, previousState, blockClass, onMount, firstFocusElement]);
 };

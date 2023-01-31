@@ -58,7 +58,8 @@
   }
 }
 
-.#{c4p-settings.$carbon-prefix}--data-table td.#{$block-class}__expandable-row-cell {
+.#{c4p-settings.$carbon-prefix}--data-table
+  td.#{$block-class}__expandable-row-cell {
   padding-left: 0;
 }
 

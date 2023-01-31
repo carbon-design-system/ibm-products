@@ -21,7 +21,6 @@ import { Download, Add, Restart, ChevronDown } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
-import { FilterFlyout } from '../Datagrid/addons/Filtering';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 export const DatagridActions = (datagridState) => {
@@ -34,6 +33,7 @@ export const DatagridActions = (datagridState) => {
     useDenseHeader,
     filterProps,
     getFilterFlyoutProps,
+    FilterFlyout,
   } = datagridState;
   const downloadCsv = () => {
     alert('Downloading...');

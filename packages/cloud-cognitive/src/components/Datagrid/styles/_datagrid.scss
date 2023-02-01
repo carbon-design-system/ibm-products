@@ -589,3 +589,9 @@
 .#{$block-class} .#{$carbon-prefix}--modal {
   width: 100%;
 }
+
+.#{$block-class}__table-toolbar--sm, .#{$block-class}__table-toolbar--xs {
+  .#{$pkg-prefix}--filter-summary {
+    padding: 0 $spacing-03;
+  }
+}

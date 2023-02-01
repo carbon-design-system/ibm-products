@@ -161,7 +161,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 
 const DatagridToolbar = (datagridState) => {
   const { width, ref } = useResizeDetector();
-  const { DatagridActions, DatagridBatchActions, batchActions, state } =
+  const { DatagridActions, DatagridBatchActions, batchActions, state, rowSize } =
     datagridState;
   const { filterTags, EventEmitter } = useContext(FilterContext);
 
@@ -173,8 +173,10 @@ const DatagridToolbar = (datagridState) => {
       />
     );
 
+  const getRowHeight = rowSize ? rowSize : 'lg';
+  
   return batchActions && DatagridActions ? (
-    <div ref={ref} className={`${blockClass}__table-toolbar`}>
+    <div ref={ref} className={cx(`${blockClass}__table-toolbar`, `${blockClass}__table-toolbar--${getRowHeight}`)}>
       <TableToolbar>
         {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActionsToolbar &&

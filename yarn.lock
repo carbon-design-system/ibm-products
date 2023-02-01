@@ -1729,7 +1729,7 @@ __metadata:
     pluralize: ^8.0.0
     react-highlighter: ^0.4.3
     react-select: ^5.7.0
-    rimraf: ^4.1.2
+    rimraf: ~3 || > 4.1
     sinon: ^15.0.1
     uuid: ^9.0.0
   peerDependencies:
@@ -1808,7 +1808,7 @@ __metadata:
     react: ^16.14.0
     react-dom: ^16.14.0
     regenerator-runtime: ^0.13.11
-    rimraf: ^4.1.2
+    rimraf: ~3 || > 4.1
     sass: ^1.58.0
     style-loader: ^3.3.1
     typescript: ^4.9.5
@@ -1845,7 +1845,7 @@ __metadata:
     react-resize-detector: ^8.0.3
     react-table: ^7.8.0
     react-window: ^1.8.8
-    rimraf: ^4.1.2
+    rimraf: ~3 || > 4.1
     sass: ^1.58.0
     yargs: ^17.6.2
   peerDependencies:
@@ -1908,7 +1908,7 @@ __metadata:
     react-dnd-html5-backend: ^16.0.1
     react-transition-group: ^4.4.5
     recompose: ^0.30.0
-    rimraf: ^4.1.2
+    rimraf: ~3 || > 4.1
     sass: ^1.58.0
     throttle-debounce: ^5.0.0
   peerDependencies:
@@ -1983,7 +1983,7 @@ __metadata:
     global: ^4.4.0
     npm-check-updates: ^16.6.3
     npm-run-all: ^4.1.5
-    rimraf: ^4.1.2
+    rimraf: ~3 || > 4.1
   peerDependencies:
     react: "*"
     vue: "*"
@@ -15585,7 +15585,7 @@ __metadata:
     prettier-config-carbon: ^0.8.0
     react: ^16.14.0
     react-dom: ^16.14.0
-    rimraf: ^4.1.2
+    rimraf: ~3 || > 4.1
     stylelint: ^14.16.1
     stylelint-config-ibm-products: "*"
     stylelint-plugin-carbon-tokens: 2.2.0
@@ -24109,7 +24109,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:3.0.2, rimraf@npm:^3.0.0, rimraf@npm:^3.0.2":
+"rimraf@npm:3.0.2, rimraf@npm:^3.0.0, rimraf@npm:^3.0.2, rimraf@npm:~3 || > 4.1":
   version: 3.0.2
   resolution: "rimraf@npm:3.0.2"
   dependencies:
@@ -24128,15 +24128,6 @@ __metadata:
   bin:
     rimraf: ./bin.js
   checksum: cdc7f6eacb17927f2a075117a823e1c5951792c6498ebcce81ca8203454a811d4cf8900314154d3259bb8f0b42ab17f67396a8694a54cae3283326e57ad250cd
-  languageName: node
-  linkType: hard
-
-"rimraf@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "rimraf@npm:4.1.2"
-  bin:
-    rimraf: dist/cjs/src/bin.js
-  checksum: 480b8147fd9bcbef3ac118f88a7b1169c3872977a3411a0c84df838bfc30e175a394c0db6f9619fc8b8a886a18c6d779d5e74f380a0075ecc710afaf81b3f50c
   languageName: node
   linkType: hard
 

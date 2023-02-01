@@ -65,7 +65,7 @@
     "jest-environment-jsdom": "^29.4.1",
     "node-sass": "^8.0.0",
     "npm-check-updates": "^16.6.3",
-    "rimraf": "^4.1.2",
+    "rimraf": "~3 || > 4.1",
     "sinon": "^15.0.1"
   },
   "babel": {

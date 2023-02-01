@@ -26,9 +26,9 @@ import {
 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
-import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu'
+import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 
-import { FilterContext, FilterFlyout } from '../Datagrid/addons/Filtering';
+import { FilterContext } from '../Datagrid/addons/Filtering';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 

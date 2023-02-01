@@ -12,7 +12,7 @@
 @use '../../../global/styles/project-settings' as c4p-settings;
 @use './variables' as *;
 
-.#{$block-class}__table-toolbar>section {
+.#{$block-class}__table-toolbar > section {
   z-index: 2;
   overflow: visible; // RowSizeDropdown depend on this
 }
@@ -39,7 +39,6 @@
         align-items: center;
         color: $text-primary;
       }
-
       .#{$block-class}__head-select-all.#{$block-class}__checkbox-cell.#{$block-class}__checkbox-cell-sticky-left {
         position: sticky;
         z-index: 1;
@@ -63,7 +62,6 @@
         align-items: center;
         padding-top: 0;
       }
-
       &.#{$block-class}__checkbox-cell-sticky-left {
         position: sticky;
         left: 0;
@@ -80,7 +78,6 @@
     }
 
     &.#{$block-class}__variable-row-height {
-
       &.#{c4p-settings.$carbon-prefix}--data-table--compact,
       &.#{c4p-settings.$carbon-prefix}--data-table--xs {
         .#{$block-class}__cell {
@@ -112,7 +109,6 @@
   }
 
   &.#{$block-class}__vertical-align-top {
-
     &.#{c4p-settings.$carbon-prefix}--data-table--tall,
     &.#{c4p-settings.$carbon-prefix}--data-table--lg,
     &.#{c4p-settings.$carbon-prefix}--data-table--xl {
@@ -131,7 +127,6 @@
     }
 
     &.#{$block-class}__variable-row-height {
-
       &.#{c4p-settings.$carbon-prefix}--data-table--tall,
       &.#{c4p-settings.$carbon-prefix}--data-table--lg,
       &.#{c4p-settings.$carbon-prefix}--data-table--xl {
@@ -152,7 +147,6 @@
     }
   }
 }
-
 .#{$block-class}__grid-container::-webkit-scrollbar-thumb {
   background-color: $text-placeholder;
 }
@@ -161,7 +155,6 @@
   width: 6px;
   background-color: $background;
 }
-
 .#{$block-class}__grid-container {
   display: block;
   width: 100%;
@@ -318,7 +311,6 @@
 
 .#{$block-class}__resizableColumn:hover {
   background-color: $background-selected-hover;
-
   .#{$block-class}__resizer {
     border-right: $spacing-01 solid $border-strong-01;
     background-color: $background-selected-hover;
@@ -327,7 +319,6 @@
 
 .#{$block-class}__head-hidden-select-all {
   padding-right: $spacing-08;
-
   &.#{$block-class}__select-all-sticky-left {
     position: sticky;
     z-index: 1;
@@ -363,7 +354,7 @@
   overflow: auto;
 }
 
-.#{$block-class}__sticky.#{$block-class}__table-simple thead>div {
+.#{$block-class}__sticky.#{$block-class}__table-simple thead > div {
   overflow: hidden;
   /* stylelint-disable-next-line declaration-no-important */
   width: 100% !important;
@@ -411,7 +402,6 @@
   .#{c4p-settings.$carbon-prefix}--data-table-content {
     flex: 1 1 0%;
   }
-
   .#{$block-class}__table-container {
     overflow: hidden;
   }
@@ -427,14 +417,15 @@
 
 .#{$block-class}__carbon-row-expanded {
   position: relative;
-
   &.#{$block-class}__carbon-row-expanded-hover-active::before {
     position: absolute;
     z-index: 2;
     /* stylelint-disable-next-line carbon/layout-token-use */
     top: var(--#{$block-class}--row-height);
     /* stylelint-disable-next-line carbon/layout-token-use */
-    left: calc(var(--#{$block-class}--indicator-offset-amount) + #{$spacing-05});
+    left: calc(
+      var(--#{$block-class}--indicator-offset-amount) + #{$spacing-05}
+    );
     width: 1px;
     height: var(--#{$block-class}--indicator-height);
     border-left: 1px solid $background-brand;
@@ -458,7 +449,6 @@
   .#{$block-class}__table-toolbar {
     flex: 0 0 auto;
   }
-
   .#{c4p-settings.$carbon-prefix}--table-toolbar {
     background: transparent;
   }
@@ -487,11 +477,16 @@
   }
 }
 
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) {
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(
+    .#{$block-class}__active-row
+  ) {
   position: relative;
 }
-
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)::before {
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(
+    .#{$block-class}__active-row
+  )::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -501,33 +496,39 @@
   content: '';
 }
 
-.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar .#{c4p-settings.$carbon-prefix}--batch-summary__para {
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$carbon-prefix}--batch-summary__para {
   white-space: nowrap;
 }
 
-.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar .#{c4p-settings.$carbon-prefix}--batch-actions .#{c4p-settings.$carbon-prefix}--batch-actions--active {
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$carbon-prefix}--batch-actions
+  .#{c4p-settings.$carbon-prefix}--batch-actions--active {
   overflow-x: hidden;
 }
 
-.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar .#{c4p-settings.$pkg-prefix}--datagrid__button-menu--icon-only.#{c4p-settings.$pkg-prefix}--button-menu {
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$pkg-prefix}--datagrid__button-menu--icon-only.#{c4p-settings.$pkg-prefix}--button-menu {
   display: flex;
   min-width: $spacing-08;
   justify-content: center;
   margin-right: $spacing-04;
 }
 
-.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar .#{c4p-settings.$pkg-prefix}--datagrid__button-menu {
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$pkg-prefix}--datagrid__button-menu {
   min-width: calc(#{$spacing-12} + #{$spacing-03});
 }
 
-.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar .#{c4p-settings.$pkg-prefix}--datagrid__button-menu--icon-only.#{c4p-settings.$pkg-prefix}--button-menu .#{c4p-settings.$pkg-prefix}--button-menu__trigger {
+.#{c4p-settings.$pkg-prefix}--datagrid__table-toolbar
+  .#{c4p-settings.$pkg-prefix}--datagrid__button-menu--icon-only.#{c4p-settings.$pkg-prefix}--button-menu
+  .#{c4p-settings.$pkg-prefix}--button-menu__trigger {
   display: flex;
   width: 100%;
   min-width: $spacing-09;
   justify-content: center;
   padding: 0;
   margin: 0;
-
   .#{c4p-settings.$carbon-prefix}--btn__icon {
     margin: 0;
   }
@@ -566,7 +567,8 @@
   width: 100%;
 }
 
-.#{c4p-settings.$carbon-prefix}--body--with-modal-open .#{$block-class}__grid-container {
+.#{c4p-settings.$carbon-prefix}--body--with-modal-open
+  .#{$block-class}__grid-container {
   overflow: hidden;
   height: 100vh;
 }
@@ -580,7 +582,8 @@
   background-color: $interactive;
 }
 
-.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger svg {
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger
+  svg {
   fill: $background;
 }
 
@@ -599,7 +602,8 @@
   background-color: transparent;
 }
 
-.#{$block-class}__mobile-toolbar-modal .#{c4p-settings.$carbon-prefix}--modal-container {
+.#{$block-class}__mobile-toolbar-modal
+  .#{c4p-settings.$carbon-prefix}--modal-container {
   position: absolute;
 }
 

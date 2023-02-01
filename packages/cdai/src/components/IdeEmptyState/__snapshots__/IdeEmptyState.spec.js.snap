@@ -224,6 +224,27 @@ exports[`IdeEmptyState renders when the links prop is defined as an object 1`] =
 ]
 `;
 
+exports[`IdeEmptyState renders when the links prop is defined as an object 2`] = `
+[
+  <IdeEmptyState
+    body={null}
+    button={null}
+    format="lg"
+    image="default"
+    links={
+      [
+        {
+          "onClick": [Function],
+          "text": "Custom link 1",
+          "url": "#",
+        },
+      ]
+    }
+    title="CHANGE ME"
+  />,
+]
+`;
+
 exports[`IdeEmptyState renders when the title prop is defined as a string 1`] = `
 [
   <IdeEmptyState

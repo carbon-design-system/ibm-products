@@ -478,12 +478,16 @@
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) {
+  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(
+    .#{$block-class}__active-row
+  ) {
   position: relative;
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)::before {
+  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(
+    .#{$block-class}__active-row
+  )::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -604,7 +608,8 @@
   position: absolute;
 }
 
-.#{$block-class}__table-toolbar--sm, .#{$block-class}__table-toolbar--xs {
+.#{$block-class}__table-toolbar--sm,
+.#{$block-class}__table-toolbar--xs {
   .#{c4p-settings.$pkg-prefix}--filter-summary {
     padding: 0 $spacing-03;
   }

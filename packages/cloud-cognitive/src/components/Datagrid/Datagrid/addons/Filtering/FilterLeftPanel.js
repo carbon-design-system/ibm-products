@@ -135,7 +135,7 @@ const FilterLeftPanel = ({
 
   const applyFilters = ({ column, value, type }) => {
     // If no end date is selected return because we need the end date to do computations
-    if (type === DATE && !value[1]) {
+    if (type === DATE && value.length > 0 && !value[1]) {
       return;
     }
 
@@ -150,6 +150,7 @@ const FilterLeftPanel = ({
       filtersObjectArrayCopy.push({ id: column, value, type });
     }
 
+    // ATTENTION: this is where you would reset or remove individual filters from the filters array
     if (type === CHECKBOX) {
       /**
       When all checkboxes of a group are all unselected the value still exists in the filtersObjectArray
@@ -165,6 +166,19 @@ const FilterLeftPanel = ({
       );
 
       if (shouldRemoveFromArray) {
+        filtersObjectArrayCopy.splice(index, 1);
+      }
+    } else if (type === DATE) {
+      if (value.length === 0) {
+        /**
+        Checks to see if the date value is an empty array, if it is that means the user wants
+        to reset the date filter
+      */
+        const index = filtersObjectArrayCopy.findIndex(
+          (filter) => filter.id === column
+        );
+
+        // Remove it from the filters array since there is nothing to filter
         filtersObjectArrayCopy.splice(index, 1);
       }
     }

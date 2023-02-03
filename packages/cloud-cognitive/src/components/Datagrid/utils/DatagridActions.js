@@ -82,7 +82,7 @@ export const DatagridActions = (datagridState) => {
         hasIconOnly
         tooltipPosition="bottom"
         renderIcon={Filter16}
-        iconDescription={'Open filters'}
+        iconDescription={filterProps.panelIconDescription}
         className={`${blockClass}-filter-panel-open-button`}
         onClick={() => setLeftPanelOpen((open) => !open)}
         disabled={data.length === 0}

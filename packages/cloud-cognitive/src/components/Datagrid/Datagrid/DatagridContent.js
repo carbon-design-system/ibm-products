@@ -180,10 +180,10 @@ export const DatagridContent = ({ datagridState }) => {
         >
           {filterProps?.variation === 'panel' && (
             <FilterLeftPanel
-              title="Filter"
-              filterSections={filterProps.sections}
               updateMethod="batch"
               {...getFilterFlyoutProps()}
+              title={filterProps.panelTitle}
+              filterSections={filterProps.sections}
             />
           )}
           <div className={`${blockClass}__table-container-inner`}>

@@ -513,6 +513,7 @@ export const LeftPanel = () => {
 
   const columns = React.useMemo(() => headers, []);
   const [data] = useState(makeData(50));
+  const [leftPanelOpen, setLeftPanelOpen] = useState(false);
 
   const sections = [
     {
@@ -658,11 +659,21 @@ export const LeftPanel = () => {
         updateMethod: 'batch',
         primaryActionLabel: 'Apply',
         secondaryActionLabel: 'Cancel',
-        flyoutIconDescription: 'Open filters',
+        panelIconDescription: `${leftPanelOpen ? 'Close' : 'Open'} filters`,
+        closeIconDescription: 'Close panel',
         emptyStateTitle: 'No filters match',
         emptyStateDescription:
           'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
         sections,
+        onPanelOpen: (open) => {
+          setLeftPanelOpen(open);
+          action('onPanelOpen');
+        },
+        onPanelClose: (open) => {
+          setLeftPanelOpen(open);
+          action('onPanelClose');
+        },
+        panelTitle: 'Filter',
       },
       columns,
       data,

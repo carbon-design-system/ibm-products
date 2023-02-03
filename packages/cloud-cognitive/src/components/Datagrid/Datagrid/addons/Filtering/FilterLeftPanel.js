@@ -59,6 +59,8 @@ const FilterLeftPanel = ({
   setAllFilters,
   onApply = () => {},
   onCancel = () => {},
+  onPanelOpen = () => {},
+  onPanelClose = () => {},
   showFilterSearch = false,
   filterPanelMinHeight = 600,
 }) => {
@@ -359,6 +361,17 @@ const FilterLeftPanel = ({
 
   /** Effects */
   useEffect(
+    function liftOpenStateToParent() {
+      if (leftPanelOpen) {
+        onPanelOpen(leftPanelOpen);
+      } else {
+        onPanelClose(leftPanelOpen);
+      }
+    },
+    [leftPanelOpen, onPanelClose, onPanelOpen]
+  );
+
+  useEffect(
     function setPanelMinimumHeight() {
       filterPanelRef.current?.style.setProperty(
         '--filter-panel-min-height',
@@ -414,6 +427,8 @@ const FilterLeftPanel = ({
             renderIcon={Close32}
             iconDescription={closeIconDescription}
             kind="ghost"
+            tooltipPosition="bottom"
+            tooltipAlignment="end"
             onClick={closePanel}
           />
         </div>
@@ -471,6 +486,8 @@ FilterLeftPanel.propTypes = {
   filterSections: PropTypes.array,
   onApply: PropTypes.func,
   onCancel: PropTypes.func,
+  onPanelClose: PropTypes.func,
+  onPanelOpen: PropTypes.func,
   open: PropTypes.bool,
   setAllFilters: PropTypes.func.isRequired,
   showFilterSearch: PropTypes.bool,

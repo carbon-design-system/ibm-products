@@ -157,22 +157,8 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 
 const DatagridToolbar = (datagridState) => {
   const { width, ref } = useResizeDetector();
-  const {
-    DatagridActions,
-    DatagridBatchActions,
-    batchActions,
-    state,
-    rowSize,
-  } = datagridState;
-  const { filterTags, EventEmitter } = useContext(FilterContext);
-
-  const renderFilterSummary = () =>
-    state.filters.length > 0 && (
-      <FilterSummary
-        filters={filterTags}
-        clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
-      />
-    );
+  const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
+    datagridState;
 
   const getRowHeight = rowSize ? rowSize : 'lg';
 

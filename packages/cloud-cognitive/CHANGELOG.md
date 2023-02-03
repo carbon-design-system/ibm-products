@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.42.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.41.4...@carbon/ibm-products@1.42.0) (2023-02-01)
+
+### Bug Fixes
+
+- **Datagrid:** export useColumnCenterAlign
+  ([#2631](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2631))
+  ([028a012](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/028a01211640da0d5603ee301beca93c1acc9832))
+
+### Features
+
+- **Datagrid:** exports FilterFlyout through datagridState
+  ([#2638](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2638))
+  ([11b9588](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/11b95883db76f7ce323fa6036f37cab255e4c620))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
 ## [1.41.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.41.3...@carbon/ibm-products@1.41.4) (2023-01-31)
 
 ### Bug Fixes

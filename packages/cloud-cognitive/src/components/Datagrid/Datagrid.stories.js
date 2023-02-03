@@ -661,9 +661,6 @@ export const LeftPanel = () => {
         secondaryActionLabel: 'Cancel',
         panelIconDescription: `${leftPanelOpen ? 'Close' : 'Open'} filters`,
         closeIconDescription: 'Close panel',
-        emptyStateTitle: 'No filters match',
-        emptyStateDescription:
-          'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
         sections,
         onPanelOpen: (open) => {
           setLeftPanelOpen(open);
@@ -677,6 +674,9 @@ export const LeftPanel = () => {
       },
       columns,
       data,
+      emptyStateTitle: 'No filters match',
+      emptyStateDescription:
+        'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
       DatagridActions,
       DatagridBatchActions,
       batchActions: true,

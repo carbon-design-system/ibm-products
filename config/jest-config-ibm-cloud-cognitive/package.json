@@ -30,7 +30,7 @@
   "dependencies": {
     "@babel/core": "^7.20.12",
     "@testing-library/jest-dom": "^5.16.5",
-    "accessibility-checker": "3.1.43",
+    "accessibility-checker": "3.1.40",
     "axe-core": "^4.6.3",
     "babel-jest": "^29.4.1",
     "babel-preset-ibm-cloud-cognitive": "^0.14.25",

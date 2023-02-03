@@ -615,10 +615,6 @@ export const LeftPanel = () => {
             },
           },
         },
-      ],
-    },
-    {
-      filters: [
         {
           filterLabel: 'Password strength',
           filter: {

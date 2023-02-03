@@ -71,6 +71,12 @@
   padding-bottom: $spacing-06;
 }
 
+// This selects all filter elements inside of categories and give them 16px margin bottom
+.#{$block-class}-filter-left-panel__category
+  > *:not(.c4p--datagrid-filter-left-panel__category-title, .bx--accordion) {
+  margin-bottom: $spacing-05;
+}
+
 .#{$block-class}-filter-left-panel__action-set {
   position: sticky;
   z-index: 1; // To layer action set on top of content behind when sticky

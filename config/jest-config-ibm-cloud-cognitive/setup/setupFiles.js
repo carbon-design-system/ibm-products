@@ -25,6 +25,8 @@ global.requestAnimationFrame = (callback) => {
 enzyme.configure({ adapter: new Adapter() });
 
 if (global.HTMLElement) {
+  HTMLCanvasElement.prototype.getContext = jest.fn();
+
   // This is a quirk that we need to bring in due to how our `tabbable` dependency
   // determines what nodes are focusable. Without this override, it's unable to
   // determine whether or not things are visible in JSDOM. With it, we get

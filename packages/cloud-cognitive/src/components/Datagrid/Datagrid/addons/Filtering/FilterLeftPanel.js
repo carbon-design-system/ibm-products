@@ -71,6 +71,7 @@ const FilterLeftPanel = ({
   );
   const [filtersObjectArray, setFiltersObjectArray] = useState([]);
   const [shouldDisableButtons, setShouldDisableButtons] = useState(true);
+  const [showDividerLine, setShowDividerLine] = useState(false);
 
   /** Refs */
   const filterPanelRef = useRef();
@@ -359,6 +360,14 @@ const FilterLeftPanel = ({
     );
   };
 
+  const onInnerContainerScroll = (event) => {
+    if (event.target.scrollTop > 0) {
+      setShowDividerLine(true);
+    } else {
+      setShowDividerLine(false);
+    }
+  };
+
   /** Effects */
   useEffect(
     function liftOpenStateToParent() {
@@ -420,7 +429,12 @@ const FilterLeftPanel = ({
       variants={panelVariants}
     >
       <motion.div variants={innerContainerVariants}>
-        <div ref={filterHeadingRef} className={`${componentClass}__heading`}>
+        <header
+          ref={filterHeadingRef}
+          className={cx(`${componentClass}__heading`, {
+            [`${componentClass}__heading--with-divider`]: showDividerLine,
+          })}
+        >
           <h1 className={`${componentClass}__title`}>{title}</h1>
           <Button
             hasIconOnly
@@ -431,20 +445,22 @@ const FilterLeftPanel = ({
             tooltipAlignment="end"
             onClick={closePanel}
           />
-        </div>
-        {showFilterSearch && (
-          <div ref={filterSearchRef} className={`${componentClass}__search`}>
-            <Search
-              labelText="Filter search"
-              placeHolderText="Find filters"
-              light={true}
-              size="sm"
-            />
-          </div>
-        )}
+          {showFilterSearch && (
+            <div ref={filterSearchRef} className={`${componentClass}__search`}>
+              <Search
+                labelText="Filter search"
+                placeHolderText="Find filters"
+                light={true}
+                size="sm"
+              />
+            </div>
+          )}
+        </header>
+
         <div
           className={`${componentClass}__inner-container`}
           style={{ height: getScrollableContainerHeight() }}
+          onScroll={onInnerContainerScroll}
         >
           {filterSections.map(
             ({ categoryTitle = null, filters = [], showAsAccordion }) => {

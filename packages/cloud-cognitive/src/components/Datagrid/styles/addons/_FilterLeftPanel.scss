@@ -29,6 +29,8 @@
 }
 
 .#{$block-class}-filter-left-panel__inner-container {
+  position: relative;
+  z-index: 0;
   overflow: auto;
   padding: 0 $spacing-05;
   overscroll-behavior: contain;
@@ -49,6 +51,11 @@
   display: flex;
   justify-content: space-between;
   padding-left: $spacing-05;
+  border-bottom: 1px solid transparent;
+}
+
+.#{$block-class}-filter-left-panel__heading--with-divider {
+  border-bottom: 1px solid $ui-03;
 }
 
 .#{$block-class}-filter-left-panel__title {

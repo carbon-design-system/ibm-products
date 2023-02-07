@@ -62,7 +62,9 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
             >
               <DatagridContent datagridState={datagridState} />
             </div>
-          ) : (<DatagridContent datagridState={datagridState} />)}
+          ) : (
+            <DatagridContent datagridState={datagridState} />
+          )}
         </div>
       </InlineEditProvider>
     </FilterProvider>

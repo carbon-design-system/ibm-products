@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.16](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.15...@carbon/ibm-products@2.0.0-rc.16) (2023-02-07)
+
+
+### Bug Fixes
+
+* **Datagrid:** export useColumnCenterAlign v11 ([#2632](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2632)) ([a76f6ea](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a76f6eac2ab83abe4525fccb2916b070f407b76a))
+* **DataGrid:** filter summary add heights options v11 ([#2643](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2643)) ([990e8c6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/990e8c6ded95cdc5109ea8a9fc4d0e0cd52818ad))
+* **Tearsheet:** prevent description breaking ([#2646](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2646)) ([c04c4db](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c04c4dbc0ebea7e6c7f25fea6319067db70c7cac))
+
+
+### Features
+
+* exports filter flyout from datagridState ([#2639](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2639)) ([a576047](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a576047896dad647ce33e76fc3a852de66dc8246))
+
+
+
+
+
 # [2.0.0-rc.15](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.14...@carbon/ibm-products@2.0.0-rc.15) (2023-01-31)
 
 

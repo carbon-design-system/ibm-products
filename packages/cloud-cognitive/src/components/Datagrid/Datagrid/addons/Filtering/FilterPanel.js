@@ -436,7 +436,7 @@ const FilterPanel = ({
             [`${componentClass}__heading--with-divider`]: showDividerLine,
           })}
         >
-          <h1 className={`${componentClass}__title`}>{title}</h1>
+          <div className={`${componentClass}__title`}>{title}</div>
           <Button
             hasIconOnly
             renderIcon={Close32}

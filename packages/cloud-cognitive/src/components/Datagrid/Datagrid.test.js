@@ -927,7 +927,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
+        .getElementsByClassName('c4p--datagrid__head-select-all')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
@@ -947,7 +947,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
+        .getElementsByClassName('c4p--datagrid__head-select-all')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
@@ -1037,13 +1037,13 @@ describe(componentName, () => {
       )[3]
     );
     expect(alertMock).toHaveBeenCalledTimes(3);
-
+    
     fireEvent.click(
       screen
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[0]
+        .getElementsByClassName('c4p--datagrid__head-select-all')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
     );
@@ -1414,19 +1414,19 @@ describe(componentName, () => {
 
     expect(
       unClickableRow
-        .getElementsByTagName('td')[0]
+        .getElementsByTagName('td')[1]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
     ).toHaveAttribute('disabled');
 
     clickableRow
-      .getElementsByTagName('td')[0]
+      .getElementsByTagName('td')[1]
       .getElementsByTagName('div')[0]
       .getElementsByTagName('input')[0];
 
     fireEvent(
       clickableRow
-        .getElementsByTagName('td')[0]
+        .getElementsByTagName('td')[1]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0],
       new MouseEvent('click')
@@ -1540,7 +1540,7 @@ describe(componentName, () => {
       .getElementsByTagName('tbody')[0]
       .getElementsByTagName('tr')[rowNumber];
     var button = row
-      .getElementsByTagName('td')[0]
+      .getElementsByTagName('td')[1]
       .getElementsByTagName('div')[0]
       .getElementsByTagName('input')[0];
 
@@ -1740,7 +1740,7 @@ describe(componentName, () => {
           .getElementsByTagName('tbody')[0]
           .getElementsByTagName('tr')
           .item(currentRowNumber)
-          .getElementsByTagName('td')[0]
+          .getElementsByTagName('td')[1]
           .getElementsByTagName('div')[0]
           .getElementsByTagName('input')[0]
       );
@@ -1765,7 +1765,7 @@ describe(componentName, () => {
           .getElementsByTagName('tbody')[0]
           .getElementsByTagName('tr')
           .item(currentRowNumber)
-          .getElementsByTagName('td')[0]
+          .getElementsByTagName('td')[1]
           .getElementsByTagName('div')[0]
           .getElementsByTagName('input')[0]
       );
@@ -1801,7 +1801,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[0]
+        .getElementsByTagName('th')[1]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
     );
@@ -1825,7 +1825,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[0]
+        .getElementsByTagName('th')[1]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
     );
@@ -1917,7 +1917,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[0]
+        .getElementsByTagName('th')[1]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
     );
@@ -1936,7 +1936,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[0]
+        .getElementsByTagName('th')[1]
         .getElementsByTagName('button')[0]
     );
 
@@ -2111,7 +2111,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
+        .getElementsByClassName('c4p--datagrid__head-select-all')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0]
@@ -2248,7 +2248,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
+        .getElementsByClassName('c4p--datagrid__head-select-all')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0]
@@ -2269,7 +2269,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('div')[0]
+        .getElementsByClassName('c4p--datagrid__head-select-all')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0]
@@ -2282,7 +2282,7 @@ describe(componentName, () => {
     //Selects only one row (in this case, the first one).
     fireEvent.click(
       selectIndividualRow
-        .getElementsByTagName('td')[0]
+        .getElementsByTagName('td')[1]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0]
     );
@@ -2388,7 +2388,7 @@ describe(componentName, () => {
       .getByRole('table')
       .getElementsByTagName('thead')[0]
       .getElementsByTagName('tr')[0]
-      .getElementsByTagName('div')[0]
+      .getElementsByClassName('c4p--datagrid__head-select-all')[0]
       .getElementsByTagName('th')[0]
       .getElementsByTagName('div')[0]
       .getElementsByTagName('input')[0];
@@ -2406,7 +2406,7 @@ describe(componentName, () => {
     for (var j = 0; j < topAlignmentRows.length; j++) {
       fireEvent.click(
         topAlignmentRows[j]
-          .getElementsByTagName('td')[0]
+          .getElementsByTagName('td')[1]
           .getElementsByTagName('div')[0]
           .getElementsByTagName('input')[0]
       );

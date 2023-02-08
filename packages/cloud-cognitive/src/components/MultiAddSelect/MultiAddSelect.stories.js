@@ -139,6 +139,7 @@ export const WithHierarchy = prepareStory(Template, {
     globalSortBy: ['title'],
     items: {
       sortBy: ['title'],
+      filterBy: 'title',
       entries: [
         {
           id: '1',

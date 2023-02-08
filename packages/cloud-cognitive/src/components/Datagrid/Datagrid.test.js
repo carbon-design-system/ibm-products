@@ -1037,7 +1037,7 @@ describe(componentName, () => {
       )[3]
     );
     expect(alertMock).toHaveBeenCalledTimes(3);
-    
+
     fireEvent.click(
       screen
         .getByRole('table')

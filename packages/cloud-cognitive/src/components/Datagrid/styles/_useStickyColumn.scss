@@ -14,22 +14,13 @@
   right: 0;
   display: flex;
   align-items: center;
-  border-left: 1px solid $ui-03;
+  border-left: 1px solid $active-light-ui;
 }
 
 .#{$block-class}__right-sticky-column-header {
   /* stylelint-disable-next-line declaration-no-important */
   position: sticky !important;
   right: 0;
-}
-
-.#{$block-class}__left-sticky-column-cell {
-  /* stylelint-disable-next-line declaration-no-important */
-  position: sticky !important;
-  left: 0;
-  display: flex;
-  align-items: center;
-  border-right: 1px solid $ui-03;
 }
 
 .#{$block-class}__left-sticky-column-header {
@@ -39,9 +30,38 @@
   left: 0;
 }
 
-.#{$block-class}__left-sticky-column-cell.#{$block-class}__left-sticky-column-cell--with-extra-select-column,
-.#{$block-class}__left-sticky-column-header.#{$block-class}__left-sticky-column-header--with-extra-select-column {
-  left: $spacing-08;
+td.#{$block-class}__left-sticky-column--sticky-border {
+  border-right: 1px solid $active-light-ui;
+}
+
+.#{$block-class}__left-sticky-column {
+  /* stylelint-disable-next-line declaration-no-important */
+  position: sticky !important;
+  z-index: 1;
+  left: 0;
+  align-items: center;
+  display: flex;
+}
+
+td.#{$block-class}__checkbox-cell {
+  border-left: 1px solid $ui-03;
+}
+
+.#{$block-class}__checkbox-cell .#{$carbon-prefix}--checkbox-label::before {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.#{$block-class}__left-sticky-column {
+
+  &.#{$block-class}__head-select-all,
+  &.#{$block-class}__extra-select-column {
+    left: $spacing-09;
+  }
+}
+
+.#{$block-class}__left-sticky-column+.#{$block-class}__checkbox-cell+.#{$block-class}__left-sticky-column {
+  left: $spacing-12;
 }
 
 .#{$block-class}__sticky-noShadow {

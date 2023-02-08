@@ -6,7 +6,7 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useLayoutEffect, useState } from 'react';
 import debounce from 'lodash/debounce';
 import cx from 'classnames';
 import { pkg } from '../../settings';
@@ -21,9 +21,18 @@ const useStickyColumn = (hooks) => {
   const tableBodyRef = useRef();
   const stickyHeaderCellRef = useRef();
 
-  hooks.getCellProps.push(changeProps.bind(null, 'cell', null));
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setWindowSize(window.innerWidth);
+    }
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
+  hooks.getCellProps.push(changeProps.bind(null, 'cell', null, windowSize));
   hooks.getHeaderProps.push(
-    changeProps.bind(null, 'header', stickyHeaderCellRef)
+    changeProps.bind(null, 'header', stickyHeaderCellRef, windowSize)
   );
   hooks.getTableBodyProps.push(addTableBodyProps.bind(null, tableBodyRef));
   hooks.getHeaderGroupProps.push((props) => [
@@ -118,7 +127,7 @@ const addTableBodyProps = (tableBodyRef, props) => [
   },
 ];
 
-const changeProps = (elementName, headerCellRef, props, data) => {
+const changeProps = (elementName, headerCellRef, windowSize, props, data) => {
   const column = data.column || data.cell.column;
   if (column.sticky === 'right') {
     return [
@@ -139,10 +148,16 @@ const changeProps = (elementName, headerCellRef, props, data) => {
     return [
       props,
       {
-        className: cx({
-          [`${leftStickyStyleClassPrefix}-${elementName}`]: true,
-          [`${leftStickyStyleClassPrefix}-${elementName}--with-extra-select-column`]:
-            data?.instance?.withSelectRows,
+        className: cx(`${blockClass}__cell`, {
+          [`${leftStickyStyleClassPrefix}`]: true && windowSize > 671,
+          [`${leftStickyStyleClassPrefix}-${elementName}`]:
+            true && windowSize > 671,
+          [`${leftStickyStyleClassPrefix}--sticky-border`]:
+            column?.selectColumn &&
+            column?.sticky === 'left' &&
+            windowSize > 671,
+          [`${leftStickyStyleClassPrefix}--sticky-border`]:
+            data?.instance?.columns[1]?.id === column.id && windowSize > 671,
         }),
         ...(headerCellRef && {
           ref: headerCellRef,

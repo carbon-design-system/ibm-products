@@ -13,8 +13,11 @@
   width: rem(320px);
   height: clamp(var(--filter-panel-min-height), 100%, 100vh);
   border-top: 1px $ui-03 solid;
-  border-right: 1px $ui-03 solid;
   background-color: $ui-01;
+}
+
+.#{$block-class}-filter-panel__container--open {
+  border-right: 1px $ui-03 solid;
 }
 
 .#{$block-class}-filter-panel__container::before {

@@ -441,12 +441,6 @@ SelectItemsInAllPages.story = SelectAllWithToggle;
 export const FilterPanel = () => {
   const headers = [
     {
-      Header: 'Row Index',
-      accessor: (row, i) => i,
-      sticky: 'left',
-      id: 'rowIndex', // id is required when accessor is a function.
-    },
-    {
       Header: 'First Name',
       accessor: 'firstName',
     },
@@ -457,13 +451,11 @@ export const FilterPanel = () => {
     {
       Header: 'Age',
       accessor: 'age',
-      width: 50,
     },
     {
       Header: 'Visits',
       accessor: 'visits',
       filter: 'number',
-      width: 60,
     },
     {
       Header: 'Status',

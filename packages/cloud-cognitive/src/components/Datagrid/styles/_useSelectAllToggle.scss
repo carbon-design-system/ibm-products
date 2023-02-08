@@ -7,17 +7,21 @@
 */
 
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
 @use './variables';
 
-th.#{variables.$block-class}__select-all-toggle-on,
-td.#{variables.$block-class}__select-all-toggle-on {
-  /* stylelint-disable-next-line declaration-no-important */
-  width: 4.5rem !important;
-  /* stylelint-disable-next-line declaration-no-important */
-  min-width: initial !important;
-  box-sizing: border-box;
-  flex: 0 0 auto;
+.#{variables.$block-class}__grid-container {
+  th.#{variables.$block-class}__select-all-toggle-on,
+  td.#{variables.$block-class}__select-all-toggle-on {
+    /* stylelint-disable-next-line declaration-no-important */
+    width: 4.5rem !important;
+    /* stylelint-disable-next-line declaration-no-important */
+    min-width: initial !important;
+    box-sizing: border-box;
+    flex: 0 0 auto;
+  }
 }
+
 th.#{variables.$block-class}__select-all-toggle-on {
   display: flex;
   align-items: center;
@@ -26,4 +30,8 @@ th.#{variables.$block-class}__select-all-toggle-on {
 
 th.#{variables.$block-class}__select-all-toggle-on.button {
   margin-left: $spacing-01;
+}
+
+td.#{variables.$block-class}__select-all-toggle-on {
+  border-left: 1px solid $layer-accent-01;
 }

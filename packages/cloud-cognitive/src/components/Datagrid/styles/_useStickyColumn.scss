@@ -8,6 +8,7 @@
 
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '../../../global/styles/project-settings' as c4p-settings;
 @use './variables';
 
 .#{variables.$block-class}__right-sticky-column-cell {
@@ -25,15 +26,6 @@
   right: 0;
 }
 
-.#{variables.$block-class}__left-sticky-column-cell {
-  /* stylelint-disable-next-line declaration-no-important */
-  position: sticky !important;
-  left: 0;
-  display: flex;
-  align-items: center;
-  border-right: 1px solid $layer-accent-01;
-}
-
 .#{variables.$block-class}__left-sticky-column-header {
   /* stylelint-disable-next-line declaration-no-important */
   position: sticky !important;
@@ -41,9 +33,40 @@
   left: 0;
 }
 
-.#{variables.$block-class}__left-sticky-column-cell.#{variables.$block-class}__left-sticky-column-cell--with-extra-select-column,
-.#{variables.$block-class}__left-sticky-column-header.#{variables.$block-class}__left-sticky-column-header--with-extra-select-column {
-  left: $spacing-08;
+td.#{variables.$block-class}__left-sticky-column--sticky-border {
+  border-right: 1px solid $layer-accent-01;
+}
+
+.#{variables.$block-class}__left-sticky-column {
+  /* stylelint-disable-next-line declaration-no-important */
+  position: sticky !important;
+  z-index: 1;
+  left: 0;
+  display: flex;
+  align-items: center;
+}
+
+td.#{variables.$block-class}__checkbox-cell {
+  border-left: 1px solid $layer-accent-01;
+}
+
+.#{variables.$block-class}__checkbox-cell
+  .#{c4p-settings.$carbon-prefix}--checkbox-label::before {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.#{variables.$block-class}__left-sticky-column {
+  &.#{variables.$block-class}__head-select-all,
+  &.#{variables.$block-class}__extra-select-column {
+    left: $spacing-09;
+  }
+}
+
+.#{variables.$block-class}__left-sticky-column
+  + .#{variables.$block-class}__checkbox-cell
+  + .#{variables.$block-class}__left-sticky-column {
+  left: $spacing-12;
 }
 
 .#{variables.$block-class}__sticky-noShadow {

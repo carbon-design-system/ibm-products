@@ -6,7 +6,7 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 // @flow
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { DataTable } from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
@@ -14,6 +14,15 @@ import { pkg } from '../../../settings';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const SelectAll = (datagridState) => {
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setWindowSize(window.innerWidth);
+    }
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
   const {
     isFetching,
     getToggleAllRowsSelectedProps,
@@ -31,7 +40,8 @@ const SelectAll = (datagridState) => {
     return (
       <div
         className={cx(`${blockClass}__head-hidden-select-all`, {
-          [`${blockClass}__select-all-sticky-left`]: isFirstColumnStickyLeft,
+          [`${blockClass}__select-all-sticky-left`]:
+            isFirstColumnStickyLeft && windowSize > 671,
         })}
       />
     );
@@ -46,7 +56,8 @@ const SelectAll = (datagridState) => {
         `${blockClass}__head-select-all`,
         `${blockClass}__checkbox-cell`,
         {
-          [`${blockClass}__checkbox-cell-sticky-left`]: isFirstColumnStickyLeft,
+          [`${blockClass}__checkbox-cell-sticky-left`]:
+            isFirstColumnStickyLeft && windowSize > 671,
         }
       )}
     >

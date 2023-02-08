@@ -39,9 +39,10 @@ export default {
 
 const defaultHeader = [
   {
-    Header: 'Row Index',
+    Header: '',
     accessor: (row, i) => i,
     id: 'rowIndex', // id is required when accessor is a function.
+    width: 48,
   },
   {
     Header: 'First Name',
@@ -158,7 +159,6 @@ const RowActionButtons = ({ ...args }) => {
         Header: '',
         accessor: 'actions',
         sticky: 'right',
-        width: 96,
         isAction: true,
       },
     ],

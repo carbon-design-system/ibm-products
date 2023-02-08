@@ -49,14 +49,19 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const defaultHeader = [
   {
-    Header: 'Row Index',
+    Header: '',
     accessor: (row, i) => i,
     sticky: 'left',
     id: 'rowIndex', // id is required when accessor is a function.
+    width: 48,
+    centerAlignedColumn: true,
+    disableResizing: true,
+    disableSortBy: true,
   },
   {
     Header: 'First Name',
     accessor: 'firstName',
+    sticky: 'left',
   },
   {
     Header: 'Last Name',
@@ -120,7 +125,7 @@ export const BasicUsage = () => {
       {
         Header: 'Someone 11',
         accessor: 'someone11',
-        multiLineWrap: true,
+        multiLineWrap: true, //If `multiLineWrap` is required only for specific columns
       },
     ],
     []
@@ -131,6 +136,7 @@ export const BasicUsage = () => {
   const datagridState = useDatagrid({
     columns,
     data: rows,
+    multiLineWrapAll: true, // If `multiLineWrap` is required for all columns in data grid
   });
 
   return <Datagrid datagridState={datagridState} />;
@@ -599,7 +605,7 @@ export const TopAlignment = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-export const StickyActionsColumn = () => {
+export const FrozenColumns = () => {
   const columns = React.useMemo(
     () => [
       ...defaultHeader,
@@ -607,14 +613,13 @@ export const StickyActionsColumn = () => {
         Header: '',
         accessor: 'actions',
         sticky: 'right',
-        width: 60,
         isAction: true,
       },
     ],
     []
   );
   const [data] = useState(makeData(10));
-  const [msg, setMsg] = useState('click action menu');
+  const [msg, setMsg] = useState('');
   const onActionClick = (actionId, row) => {
     const { original } = row;
     setMsg(
@@ -665,8 +670,8 @@ export const StickyActionsColumn = () => {
   );
   return (
     <Wrapper>
-      <h3>{msg}</h3>
       <Datagrid datagridState={{ ...datagridState }} />
+      <p>{msg}</p>
       <p>More details documentation check the Notes section below</p>
     </Wrapper>
   );

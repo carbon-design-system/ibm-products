@@ -30,12 +30,15 @@ const useSelectRows = (hooks) => {
     });
   });
   hooks.visibleColumns.push((columns) => [
+    columns[0],
     {
       id: selectionColumnId,
       Header: (gridState) => <SelectAll {...gridState} />,
       Cell: (gridState) => <SelectRow {...gridState} />,
+      sticky: columns[0]?.sticky === 'left' ? 'left' : null,
+      selectColumn: true,
     },
-    ...columns,
+    ...columns.slice(1),
   ]);
 };
 
@@ -65,12 +68,15 @@ const SelectRow = (datagridState) => {
     onRadioSelect,
     columns,
     withStickyColumn,
+    withSelectRows,
   } = datagridState;
   const selectDisabled = isFetching || row.getRowProps().selectDisabled;
   const { onChange, ...selectProps } = row.getToggleRowSelectedProps();
   const cellProps = cell.getCellProps();
   const isFirstColumnStickyLeft =
-    columns[0]?.sticky === 'left' && withStickyColumn;
+    columns[0]?.sticky === 'left' &&
+    !(columns[1]?.sticky === 'left') &&
+    withStickyColumn;
   return (
     <TableSelectRow
       {...cellProps}
@@ -88,9 +94,16 @@ const SelectRow = (datagridState) => {
       }}
       id={`${tableId}-${row.index}`}
       name={`${tableId}-${row.index}-name`}
-      className={cx(`${blockClass}__checkbox-cell`, cellProps.className, {
-        [`${blockClass}__checkbox-cell-sticky-left`]: isFirstColumnStickyLeft,
-      })}
+      className={cx(
+        `${blockClass}__checkbox-cell`,
+        `${blockClass}__cell`,
+        cellProps.className,
+        {
+          [`${blockClass}__left-sticky-column--sticky-border`]:
+            isFirstColumnStickyLeft,
+          [`${blockClass}__extra-select-column`]: withSelectRows,
+        }
+      )}
       ariaLabel={`${tableId}-row-${row.index}`} // TODO: aria label should be i18n'ed
       disabled={selectDisabled}
     />

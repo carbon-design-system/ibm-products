@@ -247,8 +247,10 @@
   td.#{$carbon-prefix}--table-column-checkbox,
   th.#{$carbon-prefix}--table-column-checkbox {
     /* stylelint-disable-next-line declaration-no-important */
-    padding-right: $spacing-05 !important;
     width: $spacing-09 !important;
+    /* stylelint-disable-next-line declaration-no-important */
+    padding-right: $spacing-05 !important;
+   
   }
 }
 
@@ -320,14 +322,15 @@
 }
 
 .#{$block-class}__head-hidden-select-all {
+  /* stylelint-disable-next-line carbon/layout-token-use */
   padding-right: 3.4rem;
 
   &.#{$block-class}__select-all-sticky-left {
     position: sticky;
     z-index: 1;
     left: $spacing-09;
-    background-color: $ui-03;
     width: 3.4rem;
+    background-color: $ui-03;
   }
 }
 
@@ -368,7 +371,7 @@
   display: flex;
 
   tr.#{$block-class}__sticky {
-    width: unset;
+    width: auto;
   }
 }
 

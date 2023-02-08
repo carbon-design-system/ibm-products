@@ -39,8 +39,8 @@ td.#{$block-class}__left-sticky-column--sticky-border {
   position: sticky !important;
   z-index: 1;
   left: 0;
-  align-items: center;
   display: flex;
+  align-items: center;
 }
 
 td.#{$block-class}__checkbox-cell {
@@ -48,8 +48,8 @@ td.#{$block-class}__checkbox-cell {
 }
 
 .#{$block-class}__checkbox-cell .#{$carbon-prefix}--checkbox-label::before {
-  margin-left: 0;
   margin-right: 0;
+  margin-left: 0;
 }
 
 .#{$block-class}__left-sticky-column {

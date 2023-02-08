@@ -472,6 +472,7 @@ export const FilterPanel = () => {
     {
       Header: 'Password strength',
       accessor: 'passwordStrength',
+      width: 200,
       filter: 'checkbox',
       Cell: ({ cell: { value } }) => {
         const iconProps = {
@@ -489,7 +490,7 @@ export const FilterPanel = () => {
               alignItems: 'center',
             }}
           >
-            <StatusIcon {...iconProps} />
+            <StatusIcon style={{ marginRight: '8px' }} {...iconProps} />
             {iconProps.iconDescription}
           </span>
         );

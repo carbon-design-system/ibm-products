@@ -345,7 +345,7 @@ const FilterPanel = ({
               disabled: shouldDisableButtons,
             },
             {
-              key: 3,
+              key: 2,
               kind: 'secondary',
               label: 'Cancel',
               onClick: cancel,

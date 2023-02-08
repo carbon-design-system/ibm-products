@@ -463,7 +463,7 @@ const FilterPanel = ({
           onScroll={onInnerContainerScroll}
         >
           {filterSections.map(
-            ({ categoryTitle = null, filters = [], showAsAccordion }) => {
+            ({ categoryTitle = null, filters = [], hasAccordion }) => {
               return (
                 <div className={`${componentClass}__category`}>
                   {categoryTitle && (
@@ -472,7 +472,7 @@ const FilterPanel = ({
                     </div>
                   )}
 
-                  {showAsAccordion ? (
+                  {hasAccordion ? (
                     <Accordion>
                       {filters.map(({ filterLabel, filter }) => {
                         return (

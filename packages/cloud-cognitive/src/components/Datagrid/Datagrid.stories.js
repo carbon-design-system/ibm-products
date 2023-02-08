@@ -510,7 +510,7 @@ export const FilterPanel = () => {
   const sections = [
     {
       categoryTitle: 'Category title',
-      showAsAccordion: true,
+      hasAccordion: true,
       filters: [
         {
           filterLabel: 'Joined',

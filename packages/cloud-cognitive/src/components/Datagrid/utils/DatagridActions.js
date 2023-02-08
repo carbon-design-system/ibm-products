@@ -26,7 +26,6 @@ import {
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
-import { FilterFlyout } from '../Datagrid/addons/Filtering';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -40,6 +39,7 @@ export const DatagridActions = (datagridState) => {
     useDenseHeader,
     filterProps,
     getFilterFlyoutProps,
+    FilterFlyout,
   } = datagridState;
 
   const downloadCsv = () => {
@@ -167,7 +167,12 @@ export const DatagridActions = (datagridState) => {
             <CustomizeColumnsButton />
           </div>
         )}
-        <ButtonMenu label="Primary button" renderIcon={Add16}>
+        <ButtonMenu
+          label="Primary button"
+          size="lg"
+          light
+          renderIcon={ChevronDown16}
+        >
           <ButtonMenuItem
             itemText="Option 1"
             onClick={action(`Click on ButtonMenu Option 1`)}

@@ -1,5 +1,67 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.42.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.42.0...@carbon/ibm-products@1.42.1) (2023-02-07)
+
+
+### Bug Fixes
+
+* **DataGrid:** filter summary add heights options ([#2644](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2644)) ([24b393d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/24b393dd71b08bb9082d420f9a87568a3f7c08ec))
+* **Tearsheet:** prevent description breaking ([#2645](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2645)) ([46055ec](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/46055ec2cf6528d4a6e0510508eaa127856b27ed))
+
+
+
+
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [1.42.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.41.4...@carbon/ibm-products@1.42.0) (2023-02-01)
+
+### Bug Fixes
+
+- **Datagrid:** export useColumnCenterAlign
+  ([#2631](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2631))
+  ([028a012](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/028a01211640da0d5603ee301beca93c1acc9832))
+
+### Features
+
+- **Datagrid:** exports FilterFlyout through datagridState
+  ([#2638](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2638))
+  ([11b9588](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/11b95883db76f7ce323fa6036f37cab255e4c620))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.41.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.41.3...@carbon/ibm-products@1.41.4) (2023-01-31)
+
+### Bug Fixes
+
+- **DataGrid:** date input support typing date
+  ([#2619](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2619))
+  ([d808b9f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d808b9f4f1e0f03bc2b89ebf76bf93b362d72ba3))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.41.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.41.2...@carbon/ibm-products@1.41.3) (2023-01-24)
+
+### Bug Fixes
+
+- tagset overflow first open
+  ([#2611](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2611))
+  ([9d5e4c2](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9d5e4c26c43451fb7a5581b05139529318bf09b6))
+
+# Change Log
+
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 

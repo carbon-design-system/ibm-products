@@ -64,7 +64,9 @@ building the `Datagrid` is the `useDatagrid` hook, this will give you all of the
 state/props required to render a `Datagrid`.
 
 #### Multi line wrap
-This setting enables the table cell text wrap to two lines. This can be turned on for only one column in the datagrid or for every column.
+
+This setting enables the table cell text wrap to two lines. This can be turned
+on for only one column in the datagrid or for every column.
 
 ```jsx
 import { Datagrid, useDatagrid } from '@carbon/ibm-products';
@@ -88,7 +90,7 @@ const App = () => {
   const datagridState = useDatagrid({
     columns,
     data,
-    multiLineWrapAll: true // If `multiLineWrap` is required for all columns in data grid
+    multiLineWrapAll: true, // If `multiLineWrap` is required for all columns in data grid
   });
 
   return <Datagrid datagridState={datagridState} />;

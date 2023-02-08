@@ -8,7 +8,7 @@
 
 @import './variables';
 
-.#{$block-class}__table-toolbar>section {
+.#{$block-class}__table-toolbar > section {
   z-index: 2;
   overflow: visible; // RowSizeDropdown depend on this
 }
@@ -80,7 +80,6 @@
     }
 
     &.#{$block-class}__variable-row-height {
-
       &.#{$carbon-prefix}--data-table--compact,
       &.#{$carbon-prefix}--data-table--xs {
         .#{$block-class}__cell {
@@ -112,7 +111,6 @@
   }
 
   &.#{$block-class}__vertical-align-top {
-
     &.#{$carbon-prefix}--data-table--tall,
     &.#{$carbon-prefix}--data-table--lg,
     &.#{$carbon-prefix}--data-table--xl {
@@ -131,7 +129,6 @@
     }
 
     &.#{$block-class}__variable-row-height {
-
       &.#{$carbon-prefix}--data-table--tall,
       &.#{$carbon-prefix}--data-table--lg,
       &.#{$carbon-prefix}--data-table--xl {
@@ -361,7 +358,7 @@
   overflow: auto;
 }
 
-.#{$block-class}__sticky.#{$block-class}__table-simple thead>div {
+.#{$block-class}__sticky.#{$block-class}__table-simple thead > div {
   overflow: hidden;
   /* stylelint-disable-next-line declaration-no-important */
   width: 100% !important;
@@ -440,7 +437,9 @@
     /* stylelint-disable-next-line carbon/layout-token-use */
     top: var(--#{$block-class}--row-height);
     /* stylelint-disable-next-line carbon/layout-token-use */
-    left: calc(var(--#{$block-class}--indicator-offset-amount) + #{$spacing-05});
+    left: calc(
+      var(--#{$block-class}--indicator-offset-amount) + #{$spacing-05}
+    );
     width: 1px;
     height: var(--#{$block-class}--indicator-height);
     border-left: 1px solid $interactive-01;
@@ -493,11 +492,14 @@
   }
 }
 
-.#{$block-class} .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) {
+.#{$block-class}
+  .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) {
   position: relative;
 }
 
-.#{$block-class} .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) ::before {
+.#{$block-class}
+  .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)
+  ::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -507,26 +509,33 @@
   content: '';
 }
 
-.#{$pkg-prefix}--datagrid__table-toolbar .#{$carbon-prefix}--batch-summary__para {
+.#{$pkg-prefix}--datagrid__table-toolbar
+  .#{$carbon-prefix}--batch-summary__para {
   white-space: nowrap;
 }
 
-.#{$pkg-prefix}--datagrid__table-toolbar .#{$carbon-prefix}--batch-actions .#{$carbon-prefix}--batch-actions--active {
+.#{$pkg-prefix}--datagrid__table-toolbar
+  .#{$carbon-prefix}--batch-actions
+  .#{$carbon-prefix}--batch-actions--active {
   overflow-x: hidden;
 }
 
-.#{$pkg-prefix}--datagrid__table-toolbar .#{$pkg-prefix}--datagrid__button-menu--icon-only.#{$pkg-prefix}--button-menu {
+.#{$pkg-prefix}--datagrid__table-toolbar
+  .#{$pkg-prefix}--datagrid__button-menu--icon-only.#{$pkg-prefix}--button-menu {
   display: flex;
   min-width: $spacing-08;
   justify-content: center;
   margin-right: $spacing-04;
 }
 
-.#{$pkg-prefix}--datagrid__table-toolbar .#{$pkg-prefix}--datagrid__button-menu {
+.#{$pkg-prefix}--datagrid__table-toolbar
+  .#{$pkg-prefix}--datagrid__button-menu {
   min-width: calc(#{$spacing-12} + #{$spacing-03});
 }
 
-.#{$pkg-prefix}--datagrid__table-toolbar .#{$pkg-prefix}--datagrid__button-menu--icon-only.#{$pkg-prefix}--button-menu .#{$pkg-prefix}--button-menu__trigger {
+.#{$pkg-prefix}--datagrid__table-toolbar
+  .#{$pkg-prefix}--datagrid__button-menu--icon-only.#{$pkg-prefix}--button-menu
+  .#{$pkg-prefix}--button-menu__trigger {
   display: flex;
   width: 100%;
   min-width: $spacing-09;

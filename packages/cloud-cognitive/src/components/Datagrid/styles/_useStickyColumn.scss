@@ -53,14 +53,15 @@ td.#{$block-class}__checkbox-cell {
 }
 
 .#{$block-class}__left-sticky-column {
-
   &.#{$block-class}__head-select-all,
   &.#{$block-class}__extra-select-column {
     left: $spacing-09;
   }
 }
 
-.#{$block-class}__left-sticky-column+.#{$block-class}__checkbox-cell+.#{$block-class}__left-sticky-column {
+.#{$block-class}__left-sticky-column
+  + .#{$block-class}__checkbox-cell
+  + .#{$block-class}__left-sticky-column {
   left: $spacing-12;
 }
 

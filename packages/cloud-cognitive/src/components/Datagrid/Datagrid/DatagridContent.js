@@ -19,7 +19,7 @@ import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 import { useClickOutside } from '../../../global/js/hooks';
 import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
-import FilterLeftPanel from './addons/Filtering/FilterLeftPanel';
+import FilterPanel from './addons/Filtering/FilterPanel';
 import { FilterSummary } from '../../FilterSummary';
 import { FilterContext } from './addons/Filtering';
 import { CLEAR_FILTERS } from './addons/Filtering/constants';
@@ -179,7 +179,7 @@ export const DatagridContent = ({ datagridState }) => {
           ref={gridAreaRef}
         >
           {filterProps?.variation === 'panel' && (
-            <FilterLeftPanel
+            <FilterPanel
               updateMethod="batch"
               {...getFilterFlyoutProps()}
               title={filterProps.panelTitle}

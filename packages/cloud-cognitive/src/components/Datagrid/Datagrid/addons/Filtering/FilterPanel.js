@@ -47,11 +47,11 @@ import { getInitialStateFromFilters } from './utils';
 import isEqual from 'lodash/isEqual';
 
 const blockClass = `${pkg.prefix}--datagrid`;
-const componentClass = `${blockClass}-filter-left-panel`;
+const componentClass = `${blockClass}-filter-panel`;
 
 const MotionActionSet = motion(ActionSet);
 
-const FilterLeftPanel = ({
+const FilterPanel = ({
   title,
   closeIconDescription = 'Close filter panel',
   updateMethod = BATCH,
@@ -496,7 +496,7 @@ const FilterLeftPanel = ({
   );
 };
 
-FilterLeftPanel.propTypes = {
+FilterPanel.propTypes = {
   closeIconDescription: PropTypes.string,
   filterPanelMinHeight: PropTypes.number,
   filterSections: PropTypes.array,
@@ -511,4 +511,4 @@ FilterLeftPanel.propTypes = {
   updateMethod: PropTypes.oneOf([BATCH, INSTANT]),
 };
 
-export default FilterLeftPanel;
+export default FilterPanel;

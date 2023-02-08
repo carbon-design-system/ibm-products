@@ -29,8 +29,7 @@ import {
 } from '.';
 import { StatusIcon } from '../StatusIcon';
 import mdx from './Datagrid.mdx';
-import { LeftPanelStory, SelectAllWithToggle } from './Datagrid.stories/index';
-
+import { SelectAllWithToggle } from './Datagrid.stories/index';
 import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
@@ -439,7 +438,7 @@ export const SelectItemsInAllPages = () => {
 };
 SelectItemsInAllPages.story = SelectAllWithToggle;
 
-export const LeftPanel = () => {
+export const FilterPanel = () => {
   const headers = [
     {
       Header: 'Row Index',
@@ -513,7 +512,7 @@ export const LeftPanel = () => {
 
   const columns = React.useMemo(() => headers, []);
   const [data] = useState(makeData(50));
-  const [leftPanelOpen, setLeftPanelOpen] = useState(false);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
 
   const sections = [
     {
@@ -655,15 +654,15 @@ export const LeftPanel = () => {
         updateMethod: 'batch',
         primaryActionLabel: 'Apply',
         secondaryActionLabel: 'Cancel',
-        panelIconDescription: `${leftPanelOpen ? 'Close' : 'Open'} filters`,
+        panelIconDescription: `${isPanelOpen ? 'Close' : 'Open'} filters`,
         closeIconDescription: 'Close panel',
         sections,
         onPanelOpen: (open) => {
-          setLeftPanelOpen(open);
+          setIsPanelOpen(open);
           action('onPanelOpen');
         },
         onPanelClose: (open) => {
-          setLeftPanelOpen(open);
+          setIsPanelOpen(open);
           action('onPanelClose');
         },
         panelTitle: 'Filter',
@@ -687,7 +686,6 @@ export const LeftPanel = () => {
     </Wrapper>
   );
 };
-LeftPanel.story = LeftPanelStory;
 
 const DatagridBatchActions = (datagridState) => {
   const { selectedFlatRows, toggleAllRowsSelected } = datagridState;

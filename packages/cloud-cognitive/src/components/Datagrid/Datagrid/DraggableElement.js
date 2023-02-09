@@ -142,7 +142,7 @@ const DraggableElement = ({
       {isDragging && !isOver ? (
         <div
           ref={preview}
-          className="${blockClass}__draggable-handleHolder-droppable"
+          className={`${blockClass}__draggable-handleHolder-droppable ${blockClass}__draggable-handleHolder-droppable--origin`}
         >
           {content}
         </div>

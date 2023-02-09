@@ -7,6 +7,8 @@
 
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/motion' as *;
 @use './variables';
 
 .#{variables.$block-class}__draggable-handleStyle {
@@ -27,7 +29,6 @@
 .#{variables.$block-class}__draggable-handleHolder {
   display: flex;
   height: $spacing-09;
-  padding-left: $spacing-05;
   border-bottom: 1px solid $layer-active;
   background-color: $layer;
 }
@@ -39,7 +40,6 @@
 .#{variables.$block-class}__draggable-handleHolder-selected {
   display: flex;
   height: $spacing-09;
-  padding-left: $spacing-05;
   border-bottom: 1px solid $layer-active;
   background-color: $layer-selected;
 }
@@ -50,15 +50,23 @@
 
 .#{variables.$block-class}__draggable-handleHolder-isOver {
   border: 2px dashed $focus;
-  background-color: $layer-selected-hover-01;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  background-color: colors.$blue-10;
 }
 
 .#{variables.$block-class}__draggable-handleHolder-droppable {
   display: flex;
   width: 100%;
   align-items: center;
+  padding-left: $spacing-05;
   /* stylelint-disable-next-line carbon/type-token-use */
   line-height: 1; // center align text within row
+  transition-property: opacity;
+}
+
+.#{variables.$block-class}__draggable-handleHolder-droppable.#{variables.$block-class}__draggable-handleHolder-droppable--origin {
+  opacity: 0.5;
+  transition: opacity $duration-moderate-01 motion(entrance, productive);
 }
 
 .#{variables.$block-class}__draggable-handleHolder-grabbed {

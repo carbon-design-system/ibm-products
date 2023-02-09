@@ -32,7 +32,7 @@ import {
 } from '.';
 
 import {
-  DataTable,
+  TableToolbarContent, TableToolbarSearch,
   Button,
   Pagination,
   TableBatchActions,
@@ -162,7 +162,6 @@ const DatagridActions = (datagridState) => {
   const downloadCsv = () => {
     alert('Downloading...');
   };
-  const { TableToolbarContent, TableToolbarSearch } = DataTable;
 
   const refreshColumns = () => {
     alert('refreshing...');

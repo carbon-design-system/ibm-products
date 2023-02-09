@@ -32,7 +32,8 @@ import {
 } from '.';
 
 import {
-  TableToolbarContent, TableToolbarSearch,
+  TableToolbarContent,
+  TableToolbarSearch,
   Button,
   Pagination,
   TableBatchActions,

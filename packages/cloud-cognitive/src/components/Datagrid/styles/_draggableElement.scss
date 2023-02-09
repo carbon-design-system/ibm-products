@@ -57,6 +57,8 @@
   display: flex;
   width: 100%;
   align-items: center;
+  /* stylelint-disable-next-line carbon/type-token-use */
+  line-height: 1; // center align text within row
 }
 
 .#{variables.$block-class}__draggable-handleHolder-grabbed {

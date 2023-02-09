@@ -31,7 +31,11 @@
 .#{variables.$block-class}__customize-columns-checkbox-wrapper {
   display: flex;
   justify-content: center;
-  padding-left: $spacing-03;
+  padding-left: $spacing-02;
+}
+
+.#{variables.$block-class}__customize-columns-column-list
+  .#{variables.$block-class}__customize-columns-checkbox-wrapper.#{c4p-settings.$carbon-prefix}--form-item {
   margin-bottom: 0;
 }
 

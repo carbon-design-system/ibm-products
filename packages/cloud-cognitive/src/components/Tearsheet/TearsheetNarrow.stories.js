@@ -90,7 +90,7 @@ const title = 'Title of the tearsheet';
 
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, portalTarget, ...args }) => {
+const Template = ({ actions, ...args }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef();
 
@@ -127,7 +127,7 @@ const Template = ({ actions, portalTarget, ...args }) => {
 };
 
 // eslint-disable-next-line react/prop-types
-const StackedTemplate = ({ actions, portalTarget, ...args }) => {
+const StackedTemplate = ({ actions, ...args }) => {
   const [open1, setOpen1] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);

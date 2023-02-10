@@ -228,7 +228,6 @@ DatagridContent.propTypes = {
       PropTypes.func,
     ]),
     isFetching: PropTypes.bool,
-    leftPanel: PropTypes.object,
     fullHeightDatagrid: PropTypes.bool,
     filterProps: PropTypes.object,
     variableRowHeight: PropTypes.bool,

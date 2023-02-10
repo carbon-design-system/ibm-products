@@ -101,7 +101,7 @@ export default {
     navigation: { control: { disable: true } },
     open: { control: { disable: true } },
     portalTarget: {
-      control: { type: 'boolean' },
+      control: { disable: true },
       description:
         'Set portalTarget prop to specify dom node, defaults to document.body.',
     },
@@ -195,7 +195,6 @@ const Template = ({ actions, portalTarget, ...args }) => {
           actions={wiredActions}
           open={open}
           onClose={() => setOpen(false)}
-          portalTarget={portalTarget ? ref.current : undefined}
         >
           {mainContent}
         </Tearsheet>
@@ -290,7 +289,6 @@ const StackedTemplate = ({ actions, portalTarget, ...args }) => {
           open={open1}
           onClose={() => setOpen1(false)}
           selectorPrimaryFocus="#stacked-input-1"
-          portalTarget={portalTarget ? ref.current : undefined}
         >
           <div className="tearsheet-stories__dummy-content-block">
             Main content 1
@@ -320,7 +318,6 @@ const StackedTemplate = ({ actions, portalTarget, ...args }) => {
           open={open2}
           onClose={() => setOpen2(false)}
           selectorPrimaryFocus="#stacked-input-2"
-          portalTarget={portalTarget ? ref.current : undefined}
         >
           <div className="tearsheet-stories__dummy-content-block">
             Main content 2
@@ -337,7 +334,6 @@ const StackedTemplate = ({ actions, portalTarget, ...args }) => {
           open={open3}
           onClose={() => setOpen3(false)}
           selectorPrimaryFocus="#stacked-input-3"
-          portalTarget={portalTarget ? ref.current : undefined}
         >
           <div className="tearsheet-stories__dummy-content-block">
             Main content 3

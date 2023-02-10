@@ -24,7 +24,7 @@ export default {
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),
     portalTarget: {
-      control: { type: 'boolean' },
+      control: { disable: true },
       description:
         'Set portalTarget prop to specify dom node, defaults to document.body.',
     },
@@ -58,7 +58,6 @@ const Template = ({ portalTarget, ...args }) => {
       <TearsheetShell
         className={className}
         {...args}
-        portalTarget={portalTarget ? ref.current : undefined}
       >
         {dummyContent}
       </TearsheetShell>

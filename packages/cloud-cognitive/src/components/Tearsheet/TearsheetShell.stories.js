@@ -23,11 +23,7 @@ export default {
   parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),
-    portalTarget: {
-      control: { disable: true },
-      description:
-        'Set portalTarget prop to specify dom node, defaults to document.body.',
-    },
+    portalTarget: { control: { disable: true } },
   },
 };
 

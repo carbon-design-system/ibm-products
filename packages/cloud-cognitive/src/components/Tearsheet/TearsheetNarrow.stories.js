@@ -57,11 +57,7 @@ export default {
     title: { control: { type: 'text' } },
     onClose: { control: { disable: true } },
     open: { control: { disable: true } },
-    portalTarget: {
-      control: { disable: true },
-      description:
-        'Set portalTarget prop to specify dom node, defaults to document.body.',
-    },
+    portalTarget: { control: { disable: true } },
   },
 };
 

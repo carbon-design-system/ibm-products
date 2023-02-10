@@ -50,15 +50,12 @@ const dummyContent = (
 );
 
 // Template.
-const Template = ({ portalTarget, ...args }) => {
+const Template = (args) => {
   const ref = useRef();
 
   return (
     <div ref={ref}>
-      <TearsheetShell
-        className={className}
-        {...args}
-      >
+      <TearsheetShell className={className} {...args}>
         {dummyContent}
       </TearsheetShell>
     </div>

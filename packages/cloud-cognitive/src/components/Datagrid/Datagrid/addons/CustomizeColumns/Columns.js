@@ -144,6 +144,7 @@ const Columns = ({
                   <Checkbox
                     wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
                     checked={isColumnVisible(colDef)}
+                    disabled={!!colDef.sticky}
                     onChange={onSelectColumn.bind(null, colDef)}
                     id={`${blockClass}__customization-column-${colDef.id}`}
                     labelText={colDef.Header.props.title}
@@ -158,6 +159,9 @@ const Columns = ({
                   }
                 </>
               );
+
+              const isFrozenColumn = !!colDef.sticky;
+
               return (
                 <DraggableElement
                   key={colDef.id}
@@ -166,7 +170,7 @@ const Columns = ({
                   setListData={setColumnsObject}
                   id={`dnd-datagrid-columns-${colDef.id}`}
                   type="column-customization"
-                  disabled={filterString.length > 0}
+                  disabled={filterString.length > 0 || isFrozenColumn}
                   ariaLabel={colDef.Header.props.title}
                   onGrab={setAriaRegionText}
                   isFocused={focusIndex === i}
@@ -189,6 +193,7 @@ const Columns = ({
                       }
                     }
                   }}
+                  isSticky={isFrozenColumn}
                   selected={isColumnVisible(colDef)}
                 >
                   {listContents}

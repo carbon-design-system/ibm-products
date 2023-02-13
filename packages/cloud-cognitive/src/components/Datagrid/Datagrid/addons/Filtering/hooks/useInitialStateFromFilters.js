@@ -6,10 +6,13 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import { useState } from 'react';
+import { FLYOUT } from '../constants';
 import { getInitialStateFromFilters } from '../utils';
 
-const useInitialStateFromFilters = (filters) => {
-  const [state, setState] = useState(getInitialStateFromFilters(filters));
+const useInitialStateFromFilters = (filters, variation = FLYOUT) => {
+  const [state, setState] = useState(
+    getInitialStateFromFilters(filters, variation)
+  );
 
   return [state, setState];
 };

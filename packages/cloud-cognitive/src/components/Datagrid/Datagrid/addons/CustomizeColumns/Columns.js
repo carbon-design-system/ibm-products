@@ -138,13 +138,13 @@ const Columns = ({
                     ? `<strong>${firstWord}</strong>` + res[2]
                     : firstWord + `<strong>${res[1]}</strong>` + res[2]
                   : colDef.Header.props.title;
-
+              const isFrozenColumn = !!colDef.sticky;
               const listContents = (
                 <>
                   <Checkbox
                     wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
                     checked={isColumnVisible(colDef)}
-                    disabled={!!colDef.sticky}
+                    disabled={isFrozenColumn}
                     onChange={onSelectColumn.bind(null, colDef)}
                     id={`${blockClass}__customization-column-${colDef.id}`}
                     labelText={colDef.Header.props.title}
@@ -159,8 +159,6 @@ const Columns = ({
                   }
                 </>
               );
-
-              const isFrozenColumn = !!colDef.sticky;
 
               return (
                 <DraggableElement

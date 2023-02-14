@@ -439,7 +439,7 @@ const FilterPanel = ({
           <div className={`${componentClass}__title`}>{title}</div>
           <Button
             hasIconOnly
-            renderIcon={(props) => <Close size={32} {...props} />}
+            renderIcon={(props) => <Close size={16} {...props} />}
             iconDescription={closeIconDescription}
             kind="ghost"
             tooltipPosition="bottom"

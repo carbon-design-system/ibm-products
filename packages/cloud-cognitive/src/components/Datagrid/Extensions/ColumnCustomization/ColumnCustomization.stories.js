@@ -296,7 +296,7 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
     useCustomizeColumns,
     useColumnOrder,
     useStickyColumn,
-    useActionsColumn,
+    useActionsColumn
   );
 
   return (

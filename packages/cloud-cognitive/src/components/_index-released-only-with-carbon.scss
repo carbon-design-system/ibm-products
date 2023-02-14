@@ -9,7 +9,6 @@
 // which are themselves used by released components.
 
 @use './AboutModal/index-with-carbon' as *;
-@use './AddSelect/index-with-carbon' as *;
 @use './APIKeyModal/index-with-carbon' as *;
 @use './ActionSet/index-with-carbon' as *;
 @use './Cascade/index-with-carbon' as *;
@@ -24,12 +23,14 @@
 @use './HTTPErrors/index-with-carbon' as *;
 @use './InlineEditV1/index-with-carbon' as *;
 @use './ImportModal/index-with-carbon' as *;
+@use './MultiAddSelect/index-with-carbon' as *;
 @use './NotificationsPanel/index-with-carbon' as *;
 @use './PageHeader/index-with-carbon' as *;
 @use './ProductiveCard/index-with-carbon' as *;
 @use './RemoveModal/index-with-carbon' as *;
 @use './Saving/index-with-carbon' as *;
 @use './SidePanel/index-with-carbon' as *;
+@use './SingleAddSelect/index-with-carbon' as *;
 @use './StatusIcon/index-with-carbon' as *;
 @use './TagSet/index-with-carbon' as *;
 @use './Tearsheet/index-with-carbon' as *;

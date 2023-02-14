@@ -368,12 +368,6 @@
   flex-direction: row;
 }
 
-.#{$block-class}__datagridLeftPanel {
-  display: flex;
-  width: 388px; // as per UX specs.
-  background-color: $layer-01;
-}
-
 .#{$block-class}__leftPanel-position {
   display: inherit;
 }
@@ -381,13 +375,12 @@
 .#{$block-class}__datagridWithPanel {
   position: relative;
   display: flex;
-  width: 100%;
   height: 100%;
   flex-direction: column;
 
   .#{$block-class}__grid-container {
     display: flex;
-    overflow: hidden;
+    overflow: visible;
     flex-direction: column;
   }
 
@@ -395,15 +388,23 @@
     width: 100%;
   }
 
-  .#{$block-class}__datagridLeftPanel {
-    flex: 0 0 auto;
+  .#{$block-class}__table-container {
+    display: flex;
+    overflow: visible;
+    background-color: $layer-01;
   }
 
-  .#{c4p-settings.$carbon-prefix}--data-table-content {
-    flex: 1 1 0%;
-  }
-  .#{$block-class}__table-container {
+  .#{$block-class}__table-container-inner {
     overflow: hidden;
+    flex: 1;
+  }
+
+  .#{$block-class}__table-container .#{$block-class}__filter-summary {
+    border-bottom: 1px solid $layer-03;
+  }
+
+  .#{c4p-settings.$pkg-prefix}--datagrid__table-simple {
+    height: 100%;
   }
 }
 
@@ -413,6 +414,7 @@
   overflow: auto;
   width: 100%;
   max-height: 100%;
+  overflow-y: scroll;
 }
 
 .#{$block-class}__carbon-row-expanded {

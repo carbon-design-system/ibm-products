@@ -1,12 +1,13 @@
 /*
  * Licensed Materials - Property of IBM
  * 5724-Q36
- * (c) Copyright IBM Corp. 2022
+ * (c) Copyright IBM Corp. 2023
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import { useMemo } from 'react';
 import { FilterFlyout } from './Datagrid/addons/Filtering';
+import { BATCH } from './Datagrid/addons/Filtering/constants';
 
 const useFiltering = (hooks) => {
   const filterTypes = useMemo(
@@ -58,13 +59,20 @@ const useFiltering = (hooks) => {
   );
 
   hooks.useInstance.push((instance) => {
-    const { filterProps, setAllFilters, headers } = instance;
-    const defaultProps = { variation: 'flyout' };
+    const { filterProps, setAllFilters, setFilter, headers, data } = instance;
+
+    const defaultProps = {
+      variation: 'flyout',
+      updateMethod: BATCH,
+      panelIconDescription: 'Open filter panel',
+    };
     const getFilterFlyoutProps = () => ({
       ...defaultProps,
       ...filterProps,
       setAllFilters,
+      setFilter,
       headers,
+      data,
     });
 
     Object.assign(instance, {

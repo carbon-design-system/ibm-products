@@ -23,7 +23,7 @@
     $actual: 'get-fixed-size($unitQuantity: #{$unitQuantity})',
     $expected: 'carbon--mini-units($count: #{$unitQuantity})',
     $url:
-      'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/carbon-for-ibm-security/layout.md#functions'
+      'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/carbon-for-ibm-security/layout.md#functions',
   );
 
   @return carbon--mini-units($count: $unitQuantity);

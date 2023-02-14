@@ -185,7 +185,7 @@ const Columns = ({
                       );
                       e.preventDefault();
                       e.stopPropagation();
-                      if (nextIndex >= 0) {
+                      if (nextIndex >= 0 && !columns[nextIndex]?.sticky) {
                         setFocusIndex(nextIndex);
                         moveElement(currentIndex, nextIndex);
                         e.target.scrollIntoView({

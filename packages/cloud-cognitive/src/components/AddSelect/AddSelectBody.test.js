@@ -65,6 +65,7 @@ const singleProps = {
 };
 
 const hierarchyItems = {
+  filterBy: 'title',
   entries: [
     ...defaultItems.entries,
     {
@@ -462,5 +463,11 @@ describe(componentName, () => {
     const globalSearch = screen.getByPlaceholderText('Find business terms');
     fireEvent.change(globalSearch, { target: { value: 'florida' } });
     fireEvent.change(globalSearch, { target: { value: '' } });
+    const filterBy = document.querySelector(
+      '.c4p--add-select__column-overflow'
+    );
+    expect(filterBy).toBeVisible();
+    // there appears to be an issue with overflow menu and testing
+    // fireEvent.click(filterBy);
   });
 });

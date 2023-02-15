@@ -164,7 +164,7 @@ const sharedDatagridProps = {
       primaryButtonTextLabel: 'Save',
       secondaryButtonTextLabel: 'Cancel',
       instructionsLabel:
-        'Deselect columns to hide them. Click and drag the white box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
+        'Deselect columns to hide them. Drag rows to change column order. These specifications will be saved if you leave and return to the data table.',
       iconTooltipLabel: 'Customize columns',
       assistiveTextInstructionsLabel:
         'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',

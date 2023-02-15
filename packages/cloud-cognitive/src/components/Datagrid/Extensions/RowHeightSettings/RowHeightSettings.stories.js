@@ -149,17 +149,7 @@ const sharedDatagridProps = {
 };
 
 const BasicUsage = ({ ...args }) => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader,
-      {
-        Header: 'Someone 11',
-        accessor: 'someone11',
-        multiLineWrap: false,
-      },
-    ],
-    []
-  );
+  const columns = React.useMemo(() => [...defaultHeader], []);
   const [data] = useState(makeData(10));
   const rows = React.useMemo(() => data, [data]);
 

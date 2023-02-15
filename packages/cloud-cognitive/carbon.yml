@@ -377,7 +377,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-multiaddselect-canary
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-multiaddselect
     tags:
       - form
       - content-block
@@ -509,7 +509,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-singleaddselect-canary
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-singleaddselect
     tags:
       - form
   status-icon:

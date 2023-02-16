@@ -50,12 +50,6 @@ td.#{variables.$block-class}__checkbox-cell {
   border-left: 1px solid $layer-accent-01;
 }
 
-.#{variables.$block-class}__checkbox-cell
-  .#{c4p-settings.$carbon-prefix}--checkbox-label::before {
-  margin-right: 0;
-  margin-left: 0;
-}
-
 .#{variables.$block-class}__left-sticky-column {
   &.#{variables.$block-class}__head-select-all,
   &.#{variables.$block-class}__extra-select-column {

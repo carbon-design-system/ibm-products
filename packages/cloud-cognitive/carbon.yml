@@ -368,7 +368,7 @@ assets:
   multi-add-select:
     name: Multi add select
     externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/add-and-select/usage
-    status: experimental
+    status: stable
     type: pattern
     platform: web
     framework: react
@@ -377,7 +377,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-multiaddselect-canary
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-multiaddselect
     tags:
       - form
       - content-block
@@ -500,7 +500,7 @@ assets:
   single-add-select:
     name: Single add select
     externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/add-and-select/usage
-    status: experimental
+    status: stable
     type: pattern
     platform: web
     framework: react
@@ -509,7 +509,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-singleaddselect-canary
+        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-singleaddselect
     tags:
       - form
   status-icon:

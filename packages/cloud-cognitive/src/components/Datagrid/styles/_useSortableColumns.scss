@@ -23,8 +23,10 @@
     width: 100%;
     height: 100%;
   }
-  .#{c4p-settings.$carbon-prefix}--table-header-label .#{c4p-settings.$carbon-prefix}--table-sort:focus,
-  .#{c4p-settings.$carbon-prefix}--table-header-label .#{c4p-settings.$carbon-prefix}--table-sort:active,
+  .#{c4p-settings.$carbon-prefix}--table-header-label
+    .#{c4p-settings.$carbon-prefix}--table-sort:focus,
+  .#{c4p-settings.$carbon-prefix}--table-header-label
+    .#{c4p-settings.$carbon-prefix}--table-sort:active,
   .#{c4p-settings.$carbon-prefix}--table-header-label button:focus svg {
     /* stylelint-disable-next-line declaration-no-important */
     background: none !important;
@@ -32,14 +34,17 @@
     color: $text-primary !important;
   }
 
-  .#{c4p-settings.$carbon-prefix}--table-header-label .#{c4p-settings.$carbon-prefix}--table-sort:focus,
-  .#{c4p-settings.$carbon-prefix}--table-header-label .#{c4p-settings.$carbon-prefix}--table-sort:active {
+  .#{c4p-settings.$carbon-prefix}--table-header-label
+    .#{c4p-settings.$carbon-prefix}--table-sort:focus,
+  .#{c4p-settings.$carbon-prefix}--table-header-label
+    .#{c4p-settings.$carbon-prefix}--table-sort:active {
     & + .#{$block-class}__resizer {
       z-index: -1;
     }
   }
 
-  .#{c4p-settings.$carbon-prefix}--table-header-label .#{c4p-settings.$carbon-prefix}--table-sort {
+  .#{c4p-settings.$carbon-prefix}--table-header-label
+    .#{c4p-settings.$carbon-prefix}--table-sort {
     width: 100%;
     min-width: 100%;
     padding: 0 $spacing-05;
@@ -50,7 +55,9 @@
     color: $text-primary !important;
     font: inherit;
   }
-  .#{c4p-settings.$carbon-prefix}--table-header-label .#{c4p-settings.$carbon-prefix}--table-sort svg {
+  .#{c4p-settings.$carbon-prefix}--table-header-label
+    .#{c4p-settings.$carbon-prefix}--table-sort
+    svg {
     fill: $text-primary;
     visibility: hidden;
   }

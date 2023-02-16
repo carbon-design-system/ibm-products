@@ -54,8 +54,8 @@ const useSortableColumns = (hooks) => {
             {column.Header}
           </Button>
         );
-      return { 
-        ...column, 
+      return {
+        ...column,
         Header,
         minWidth: column.disableSortBy === true ? 0 : 90,
       };

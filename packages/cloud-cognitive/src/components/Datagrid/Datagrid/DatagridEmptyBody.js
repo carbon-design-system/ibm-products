@@ -7,12 +7,10 @@
  */
 import React from 'react';
 import { pkg } from '../../../settings';
-import { DataTable } from '@carbon/react';
+import { TableBody, TableRow, TableCell } from '@carbon/react';
 import { NoDataEmptyState, ErrorEmptyState } from '../../EmptyStates';
 
 const blockClass = `${pkg.prefix}--datagrid`;
-
-const { TableBody, TableRow, TableCell } = DataTable;
 
 const DatagridEmptyBody = (datagridState) => {
   const {

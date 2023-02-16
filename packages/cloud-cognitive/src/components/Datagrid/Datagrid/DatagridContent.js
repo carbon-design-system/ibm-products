@@ -8,7 +8,7 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import { DataTable } from '@carbon/react';
+import { Table, TableContainer } from '@carbon/react';
 import { px } from '@carbon/layout';
 import DatagridHead from './DatagridHead';
 import DatagridBody from './DatagridBody';
@@ -19,8 +19,6 @@ import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 import { useClickOutside } from '../../../global/js/hooks';
 import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
-
-const { TableContainer, Table } = DataTable;
 
 const blockClass = `${pkg.prefix}--datagrid`;
 

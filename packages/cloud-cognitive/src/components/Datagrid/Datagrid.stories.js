@@ -11,7 +11,7 @@ import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { Activity, Add } from '@carbon/react/icons';
-import { DataTable } from '@carbon/react';
+import { TableBatchAction, TableBatchActions } from '@carbon/react';
 import {
   Datagrid,
   useDatagrid,
@@ -110,8 +110,6 @@ const defaultHeader = [
     accessor: 'someone7',
   },
 ];
-
-const { TableBatchAction, TableBatchActions } = DataTable;
 
 export const BasicUsage = () => {
   const columns = React.useMemo(

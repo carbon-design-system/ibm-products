@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.17](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.16...@carbon/ibm-products@2.0.0-rc.17) (2023-02-14)
+
+
+### Bug Fixes
+
+* **Datagrid:** column customization styles v11 ([#2661](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2661)) ([8800919](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/880091921ef8afe9bfa830ccf45f17fa0a11afa5))
+
+
+### Features
+
+* imports all DataTable pieces from `@carbon/react` (v11) ([#2662](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2662)) ([91ca133](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/91ca13368dc177e819ba5fe1a50d6495737e6fe7))
+
+
+
+
+
 # [2.0.0-rc.16](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.15...@carbon/ibm-products@2.0.0-rc.16) (2023-02-07)
 
 

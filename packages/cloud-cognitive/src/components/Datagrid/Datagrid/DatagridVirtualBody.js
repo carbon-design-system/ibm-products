@@ -7,14 +7,12 @@
  */
 import React, { useEffect } from 'react';
 import { VariableSizeList } from 'react-window';
-import { DataTable } from '@carbon/react';
+import { TableBody } from '@carbon/react';
 import { pkg } from '../../../settings';
 import DatagridHead from './DatagridHead';
 import { px } from '@carbon/layout';
 
 const blockClass = `${pkg.prefix}--datagrid`;
-
-const { TableBody } = DataTable;
 
 const rowSizeMap = {
   xs: 24,

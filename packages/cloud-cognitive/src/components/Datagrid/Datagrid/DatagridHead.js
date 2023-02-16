@@ -6,9 +6,7 @@
  */
 
 import React from 'react';
-import { DataTable } from '@carbon/react';
-
-const { TableHead } = DataTable;
+import { TableHead } from '@carbon/react';
 
 const DatagridHead = (datagridState) => {
   const { headerGroups = [], headRef, HeaderRow } = datagridState;

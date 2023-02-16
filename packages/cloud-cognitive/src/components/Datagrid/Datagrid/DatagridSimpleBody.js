@@ -6,13 +6,11 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import React from 'react';
-import { DataTable } from '@carbon/react';
+import { TableBody } from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
-
-const { TableBody } = DataTable;
 
 const DatagridSimpleBody = (datagridState) => {
   const { getTableBodyProps, rows, prepareRow } = datagridState;

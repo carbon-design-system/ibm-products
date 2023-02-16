@@ -7,7 +7,8 @@
 
 import React, { useLayoutEffect, useState } from 'react';
 import {
-  DataTable,
+  TableToolbarContent,
+  TableToolbarSearch,
   Button,
   OverflowMenu,
   OverflowMenuItem,
@@ -38,8 +39,6 @@ export const DatagridActions = (datagridState) => {
   const downloadCsv = () => {
     alert('Downloading...');
   };
-  const { TableToolbarContent, TableToolbarSearch } = DataTable;
-
   const refreshColumns = () => {
     alert('refreshing...');
   };

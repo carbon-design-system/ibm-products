@@ -7,7 +7,11 @@
 
 import React, { useEffect, useState, useContext } from 'react';
 import { Add, OverflowMenuVertical } from '@carbon/react/icons';
-import { DataTable, TableBatchActions, TableBatchAction } from '@carbon/react';
+import {
+  TableToolbar,
+  TableBatchActions,
+  TableBatchAction,
+} from '@carbon/react';
 import { useResizeDetector } from 'react-resize-detector';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
@@ -17,8 +21,6 @@ import { FilterContext } from './addons/Filtering/FilterProvider';
 import { CLEAR_FILTERS } from './addons/Filtering/constants';
 
 const blockClass = `${pkg.prefix}--datagrid`;
-
-const { TableToolbar } = DataTable;
 
 const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   const [displayAllInMenu, setDisplayAllInMenu] = useState(false);

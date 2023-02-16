@@ -108,3 +108,28 @@ $block-class: #{$pkg-prefix}--datagrid;
   // stylelint-disable-next-line carbon/type-token-use
   font-size: 0;
 }
+
+.#{$block-class} .expanded-content {
+  display: flex;
+
+  .expanded-content__child:not(:last-child) {
+    margin-right: 2rem;
+  }
+
+  .expanded-content__row {
+    display: flex;
+
+    span {
+      flex: 0 1 50%;
+    }
+
+    span:first-child:not(:last-child) {
+      margin-right: 1rem;
+      color: $text-secondary;
+    }
+  }
+
+  .expanded-content__title {
+    padding-bottom: 1rem;
+  }
+}

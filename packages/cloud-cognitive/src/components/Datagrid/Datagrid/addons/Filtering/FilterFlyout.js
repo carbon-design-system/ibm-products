@@ -37,6 +37,7 @@ import {
 } from './constants';
 import {
   useInitialStateFromFilters,
+  useShouldDisableButtons,
   useSubscribeToEventEmitter,
 } from './hooks';
 import { getInitialStateFromFilters } from './utils';
@@ -72,6 +73,13 @@ const FilterFlyout = ({
   const prevFiltersRef = useRef(JSON.stringify(filtersState));
   const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
 
+  const [shouldDisableButtons, setShouldDisableButtons] =
+    useShouldDisableButtons({
+      initialValue: true,
+      filtersState,
+      prevFiltersRef,
+    });
+
   /** Memos */
   const showActionSet = updateMethod === BATCH;
 
@@ -90,6 +98,8 @@ const FilterFlyout = ({
     closeFlyout();
     // From the user
     onApply();
+
+    setShouldDisableButtons(true);
 
     // updates the ref so next time the flyout opens we have records of the previous filters
     prevFiltersRef.current = JSON.stringify(filtersState);
@@ -340,6 +350,7 @@ const FilterFlyout = ({
               label: primaryActionLabel,
               onClick: apply,
               isExpressive: false,
+              disabled: shouldDisableButtons,
             },
             {
               key: 3,
@@ -347,6 +358,7 @@ const FilterFlyout = ({
               label: secondaryActionLabel,
               onClick: cancel,
               isExpressive: false,
+              disabled: shouldDisableButtons,
             },
           ]}
           size="md"

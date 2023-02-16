@@ -99,6 +99,7 @@ const FilterFlyout = ({
     // From the user
     onApply();
 
+    // When the user clicks apply, the action set buttons should be disabled again
     setShouldDisableButtons(true);
 
     // updates the ref so next time the flyout opens we have records of the previous filters

@@ -47,11 +47,6 @@ td.#{$block-class}__checkbox-cell {
   border-left: 1px solid $ui-03;
 }
 
-.#{$block-class}__checkbox-cell .#{$carbon-prefix}--checkbox-label::before {
-  margin-right: 0;
-  margin-left: 0;
-}
-
 .#{$block-class}__left-sticky-column {
   &.#{$block-class}__head-select-all,
   &.#{$block-class}__extra-select-column {

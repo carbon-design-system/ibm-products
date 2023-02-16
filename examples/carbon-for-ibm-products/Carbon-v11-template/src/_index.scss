@@ -1,0 +1,5 @@
+@use '@carbon/react/scss/theme';
+
+:root {
+  @include theme.theme();
+}

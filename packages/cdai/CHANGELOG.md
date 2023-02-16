@@ -1,5 +1,40 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.24.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.24.0...@carbon/ibm-cloud-cognitive-cdai@1.24.1) (2023-02-07)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [1.24.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.23.1...@carbon/ibm-cloud-cognitive-cdai@1.24.0) (2023-01-31)
+
+### Features
+
+- add a custom onClick function and other props in IdeEmptyState …
+  ([#2626](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2626))
+  ([7fcde6b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7fcde6b26f9f79158ed74483b185dd030ee0ffac))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.23.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.23.0...@carbon/ibm-cloud-cognitive-cdai@1.23.1) (2023-01-10)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+# Change Log
+
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 

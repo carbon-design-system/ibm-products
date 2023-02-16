@@ -58,12 +58,17 @@ const IdeEmptyState = ({ body, button, format, image, links, title }) => {
     const finalLinks = Array.isArray(links) ? links : [links];
     return (
       <ul>
-        {finalLinks.map(({ text, url, target = '_top' }) => (
+        {finalLinks.map(({ text, url, target = '_top', onClick, ...other }) => (
           <li
             {...{ className: `${prefix}__link`, key: `${text}:${url}` }}
             key={`${text}:${url}`}
           >
-            <CarbonLink href={url} target={target}>
+            <CarbonLink
+              href={url}
+              target={target}
+              onClick={(e) => (onClick ? onClick(e) : false)}
+              {...other}
+            >
               {text}
             </CarbonLink>
             {target === '_blank' && (
@@ -220,6 +225,11 @@ IdeEmptyState.propTypes = {
        * The target prop to apply to the anchor link
        */
       target: PropTypes.string,
+      /**
+       * The onClick prop to apply a custom function
+       * when the button is clicked
+       */
+      onClick: PropTypes.func,
     }),
     /**
      * An array of links objects.

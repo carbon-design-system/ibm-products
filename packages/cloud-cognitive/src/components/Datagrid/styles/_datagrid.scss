@@ -368,12 +368,6 @@
   flex-direction: row;
 }
 
-.#{$block-class}__datagridLeftPanel {
-  display: flex;
-  width: 388px; // as per UX specs.
-  background-color: $ui-01;
-}
-
 .#{$block-class}__leftPanel-position {
   display: inherit;
 }
@@ -381,38 +375,44 @@
 .#{$block-class}__datagridWithPanel {
   position: relative;
   display: flex;
-  width: 100%;
   height: 100%;
   flex-direction: column;
 
   .#{$block-class}__grid-container {
     display: flex;
-    overflow: hidden;
+    overflow: visible;
     flex-direction: column;
-  }
-
-  .#{$block-class}__table-toolbar {
-    width: 100%;
-  }
-
-  .#{$block-class}__datagridLeftPanel {
-    flex: 0 0 auto;
   }
 
   .#{$carbon-prefix}--data-table-content {
     flex: 1 1 0%;
   }
+
   .#{$block-class}__table-container {
+    display: flex;
+    overflow: visible;
+    background-color: $ui-01;
+  }
+
+  .#{$block-class}__table-container-inner {
     overflow: hidden;
+    flex: 1;
+  }
+
+  .#{$block-class}__table-container .#{$block-class}__filter-summary {
+    border-bottom: 1px solid $ui-03;
+  }
+
+  .#{$pkg-prefix}--datagrid__table-simple {
+    height: 100%;
   }
 }
 
 .#{$block-class}__table-container {
   position: relative;
-  display: flex;
-  overflow: auto;
   width: 100%;
   max-height: 100%;
+  overflow-y: scroll;
 }
 
 .#{$block-class}__carbon-row-expanded {
@@ -536,6 +536,11 @@
   height: $spacing-09;
 }
 
+.#{$block-class}__customize-columns-checkbox-wrapper.#{$carbon-prefix}--form-item {
+  flex: 0 0 auto;
+  margin-right: $spacing-03;
+}
+
 .#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
   width: 10px;
   height: 7px;
@@ -583,4 +588,11 @@
 
 .#{$block-class} .#{$carbon-prefix}--modal {
   width: 100%;
+}
+
+.#{$block-class}__table-toolbar--sm,
+.#{$block-class}__table-toolbar--xs {
+  .#{$pkg-prefix}--filter-summary {
+    padding: 0 $spacing-03;
+  }
 }

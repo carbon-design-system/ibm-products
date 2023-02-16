@@ -1,10 +1,10 @@
-/*
-* Licensed Materials - Property of IBM
-* 5724-Q36
-* (c) Copyright IBM Corp. 2021
-* US Government Users Restricted Rights - Use, duplication or disclosure
-* restricted by GSA ADP Schedule Contract with IBM Corp.
-*/
+//
+// Copyright IBM Corp. 2022, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @import './variables';
 
 .#{$block-class}__draggable-handleStyle {
@@ -18,14 +18,13 @@
   pointer-events: none;
 }
 
-svg.#{$block-class}__draggable-handleStyle.disable {
-  fill: $disabled-02;
+.#{$block-class}__draggable-handleStyle.disabled svg {
+  fill: $disabled-03;
 }
 
 .#{$block-class}__draggable-handleHolder {
   display: flex;
   height: $spacing-09;
-  padding-left: $spacing-05;
   border-bottom: 1px solid $layer-active;
   background-color: $layer;
 }
@@ -37,7 +36,6 @@ svg.#{$block-class}__draggable-handleStyle.disable {
 .#{$block-class}__draggable-handleHolder-selected {
   display: flex;
   height: $spacing-09;
-  padding-left: $spacing-05;
   border-bottom: 1px solid $layer-active;
   background-color: $layer-selected;
 }
@@ -48,12 +46,23 @@ svg.#{$block-class}__draggable-handleStyle.disable {
 
 .#{$block-class}__draggable-handleHolder-isOver {
   border: 2px dashed $focus;
-  background-color: $hover-selected-ui;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  background-color: $blue-10;
 }
 
 .#{$block-class}__draggable-handleHolder-droppable {
   display: flex;
   width: 100%;
+  align-items: center;
+  padding-left: $spacing-05;
+  /* stylelint-disable-next-line carbon/type-token-use */
+  line-height: 1; // center align text within row
+  transition-property: opacity;
+}
+
+.#{$block-class}__draggable-handleHolder-droppable.#{$block-class}__draggable-handleHolder-droppable--origin {
+  opacity: 0.5;
+  transition: opacity $duration--moderate-01 motion(entrance, productive);
 }
 
 .#{$block-class}__draggable-handleHolder-grabbed {

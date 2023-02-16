@@ -42,9 +42,9 @@ import { FilterContext } from '.';
 import {
   useInitialStateFromFilters,
   useSubscribeToEventEmitter,
+  useShouldDisableButtons,
 } from './hooks';
 import { getInitialStateFromFilters } from './utils';
-import isEqual from 'lodash/isEqual';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-panel`;
@@ -52,7 +52,7 @@ const componentClass = `${blockClass}-filter-panel`;
 const MotionActionSet = motion(ActionSet);
 
 const FilterPanel = ({
-  title,
+  title = 'Filter',
   closeIconDescription = 'Close filter panel',
   updateMethod = BATCH,
   filterSections,
@@ -70,7 +70,6 @@ const FilterPanel = ({
     PANEL
   );
   const [filtersObjectArray, setFiltersObjectArray] = useState([]);
-  const [shouldDisableButtons, setShouldDisableButtons] = useState(true);
   const [showDividerLine, setShowDividerLine] = useState(false);
 
   /** Refs */
@@ -81,6 +80,14 @@ const FilterPanel = ({
   // When using batch actions we have to store the filters to then apply them later
   const prevFiltersRef = useRef(JSON.stringify(filtersState));
   const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
+
+  /** State from hooks */
+  const [shouldDisableButtons, setShouldDisableButtons] =
+    useShouldDisableButtons({
+      initialValue: true,
+      filtersState,
+      prevFiltersRef,
+    });
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
@@ -389,15 +396,6 @@ const FilterPanel = ({
       );
     },
     [filterPanelMinHeight]
-  );
-
-  useEffect(
-    function updateDisabledButtonsState() {
-      setShouldDisableButtons(
-        isEqual(filtersState, JSON.parse(prevFiltersRef.current))
-      );
-    },
-    [filtersState]
   );
 
   useSubscribeToEventEmitter(CLEAR_FILTERS, reset);

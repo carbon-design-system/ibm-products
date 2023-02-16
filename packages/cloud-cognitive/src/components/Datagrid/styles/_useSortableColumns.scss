@@ -8,9 +8,12 @@
 
 @use '@carbon/styles/scss/theme' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/spacing' as *;
 @use './variables' as *;
 
 .#{$block-class}__sortableColumn {
+  /* stylelint-disable-next-line declaration-no-important */
+  padding: 0 !important;
   .#{c4p-settings.$carbon-prefix}--table-header-label .header-title {
     display: inline-block;
     width: auto;
@@ -20,30 +23,34 @@
     width: 100%;
     height: 100%;
   }
-  .#{c4p-settings.$carbon-prefix}--table-header-label button:focus,
-  .#{c4p-settings.$carbon-prefix}--table-header-label button:active,
+  .#{c4p-settings.$carbon-prefix}--table-header-label .#{c4p-settings.$carbon-prefix}--table-sort:focus,
+  .#{c4p-settings.$carbon-prefix}--table-header-label .#{c4p-settings.$carbon-prefix}--table-sort:active,
   .#{c4p-settings.$carbon-prefix}--table-header-label button:focus svg {
     /* stylelint-disable-next-line declaration-no-important */
     background: none !important;
     /* stylelint-disable-next-line declaration-no-important */
     color: $text-primary !important;
-    /* stylelint-disable-next-line declaration-no-important */
-    outline: none !important;
   }
-  .#{c4p-settings.$carbon-prefix}--table-header-label button {
+
+  .#{c4p-settings.$carbon-prefix}--table-header-label .#{c4p-settings.$carbon-prefix}--table-sort:focus,
+  .#{c4p-settings.$carbon-prefix}--table-header-label .#{c4p-settings.$carbon-prefix}--table-sort:active {
+    & + .#{$block-class}__resizer {
+      z-index: -1;
+    }
+  }
+
+  .#{c4p-settings.$carbon-prefix}--table-header-label .#{c4p-settings.$carbon-prefix}--table-sort {
     width: 100%;
     min-width: 100%;
-    min-height: 0;
-    padding: 0;
+    padding: 0 $spacing-05;
     border: none;
     /* stylelint-disable-next-line declaration-no-important */
     background: none !important;
-    box-shadow: none;
     /* stylelint-disable-next-line declaration-no-important */
     color: $text-primary !important;
     font: inherit;
   }
-  .#{c4p-settings.$carbon-prefix}--table-header-label button svg {
+  .#{c4p-settings.$carbon-prefix}--table-header-label .#{c4p-settings.$carbon-prefix}--table-sort svg {
     fill: $text-primary;
     visibility: hidden;
   }

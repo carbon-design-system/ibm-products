@@ -6,6 +6,7 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import React from 'react';
+import { carbon } from '../../settings';
 import { Button } from '@carbon/react';
 import { ArrowUp, ArrowDown, ArrowsVertical } from '@carbon/react/icons';
 
@@ -48,11 +49,16 @@ const useSortableColumns = (hooks) => {
             onClick={() => onSortClick(headerProp.column)}
             kind="ghost"
             renderIcon={(props) => icon(headerProp.column, props)}
+            className={`${carbon.prefix}--table-sort`}
           >
             {column.Header}
           </Button>
         );
-      return { ...column, Header };
+      return { 
+        ...column, 
+        Header,
+        minWidth: column.disableSortBy === true ? 0 : 90,
+      };
     });
     return [...sortableColumns];
   };

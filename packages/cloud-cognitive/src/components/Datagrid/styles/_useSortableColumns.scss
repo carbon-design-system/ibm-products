@@ -32,7 +32,7 @@
   }
   .#{$carbon-prefix}--table-header-label .#{$carbon-prefix}--table-sort:focus,
   .#{$carbon-prefix}--table-header-label .#{$carbon-prefix}--table-sort:active {
-    & + .#{$block-class}__resizer {
+    + .#{$block-class}__resizer {
       z-index: -1;
     }
   }

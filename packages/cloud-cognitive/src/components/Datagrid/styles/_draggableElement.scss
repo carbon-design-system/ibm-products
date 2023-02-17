@@ -23,7 +23,7 @@
 }
 
 .#{variables.$block-class}__draggable-handleStyle.disabled svg {
-  fill: $icon-disabled;
+  fill: $icon-on-color-disabled;
 }
 
 .#{variables.$block-class}__draggable-handleHolder {
@@ -72,6 +72,10 @@
 .#{variables.$block-class}__draggable-handleHolder-grabbed {
   background-color: $highlight;
   color: $text-primary;
+}
+
+.#{variables.$block-class}__draggable-handleHolder--sticky {
+  color: $text-on-color-disabled;
 }
 
 .#{variables.$block-class}__shared-ui--assistive-text {

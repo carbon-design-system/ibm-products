@@ -321,6 +321,7 @@
 }
 
 .#{$block-class}__head-hidden-select-all {
+  padding-right: $spacing-09;
   &.#{$block-class}__select-all-sticky-left {
     position: sticky;
     z-index: 1;

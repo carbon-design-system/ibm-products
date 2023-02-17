@@ -7,7 +7,7 @@
  */
 // @flow
 import React, { useLayoutEffect, useState } from 'react';
-import { DataTable, TableSelectAll } from '@carbon/react';
+import { TableSelectAll } from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 

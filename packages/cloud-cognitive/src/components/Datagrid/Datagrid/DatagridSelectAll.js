@@ -7,7 +7,7 @@
  */
 // @flow
 import React, { useLayoutEffect, useState } from 'react';
-import { DataTable } from '@carbon/react';
+import { DataTable, TableSelectAll } from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 
@@ -71,7 +71,5 @@ const SelectAll = (datagridState) => {
     </div>
   );
 };
-
-const { TableSelectAll } = DataTable;
 
 export { SelectAll };

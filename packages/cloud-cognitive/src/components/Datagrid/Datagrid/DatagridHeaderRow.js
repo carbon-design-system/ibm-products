@@ -8,7 +8,7 @@
 // @flow
 import React from 'react';
 import cx from 'classnames';
-import { DataTable } from '@carbon/react';
+import { TableHeader, TableRow } from '@carbon/react';
 import { selectionColumnId } from '../common-column-ids';
 import { pkg } from '../../../settings';
 
@@ -56,8 +56,6 @@ const HeaderRow = (datagridState, headRef, headerGroup) => (
       })}
   </TableRow>
 );
-
-const { TableHeader, TableRow } = DataTable;
 
 const useHeaderRow = (hooks) => {
   const useInstance = (instance) => {

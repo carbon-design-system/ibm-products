@@ -392,6 +392,10 @@ $row-heights: (
   outline-color: $support-01;
 }
 
+.#{$block-class} .#{$carbon-prefix}--text-input:focus {
+  background: $active-ui;
+}
+
 .#{$block-class}
   .#{$block-class}__inline-edit--outer-cell-button--invalid
   .#{$carbon-prefix}--number

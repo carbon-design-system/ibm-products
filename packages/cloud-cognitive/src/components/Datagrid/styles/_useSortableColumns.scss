@@ -38,7 +38,7 @@
     .#{c4p-settings.$carbon-prefix}--table-sort:focus,
   .#{c4p-settings.$carbon-prefix}--table-header-label
     .#{c4p-settings.$carbon-prefix}--table-sort:active {
-    & + .#{$block-class}__resizer {
+    + .#{$block-class}__resizer {
       z-index: -1;
     }
   }

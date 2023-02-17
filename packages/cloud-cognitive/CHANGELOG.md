@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.43.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.42.1...@carbon/ibm-products@1.43.0) (2023-02-14)
+
+
+### Bug Fixes
+
+* datagrid inline edit review fixes ([#2640](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2640)) ([e181ed8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e181ed878286730fc92c195d6063da93ce7bd917))
+* **Datagrid:** column customization styles ([#2660](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2660)) ([c11951d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c11951db317fea77926c67656883adadd93c7164))
+
+
+### Features
+
+* **Datagrid:** adds FilterPanel (v10) ([#2586](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2586)) ([3974e0d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3974e0deaaab616f46367c081bac052d2fc23f2f)), closes [#2474](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2474)
+
+
+
+
+
 ## [1.42.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.42.0...@carbon/ibm-products@1.42.1) (2023-02-07)
 
 

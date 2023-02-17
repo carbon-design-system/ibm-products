@@ -321,8 +321,7 @@
 }
 
 .#{$block-class}__head-hidden-select-all {
-  /* stylelint-disable-next-line carbon/layout-token-use */
-  padding-right: 3.4rem;
+  padding-right: $spacing-09;
 
   &.#{$block-class}__select-all-sticky-left {
     position: sticky;

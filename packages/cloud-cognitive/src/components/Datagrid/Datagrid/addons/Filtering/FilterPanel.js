@@ -66,6 +66,8 @@ const FilterPanel = ({
   filterPanelMinHeight = 600,
   primaryActionLabel = 'Apply',
   secondaryActionLabel = 'Cancel',
+  searchLabelText = 'Filter search',
+  searchPlaceholder = 'Find filters',
 }) => {
   /** State */
   const [filtersState, setFiltersState] = useInitialStateFromFilters(
@@ -456,8 +458,8 @@ const FilterPanel = ({
             <div ref={filterSearchRef} className={`${componentClass}__search`}>
               <Layer>
                 <Search
-                  labelText="Filter search"
-                  placeholder="Find filters"
+                  labelText={searchLabelText}
+                  placeholder={searchPlaceHolder}
                   size="sm"
                 />
               </Layer>
@@ -514,6 +516,8 @@ FilterPanel.propTypes = {
   onPanelOpen: PropTypes.func,
   open: PropTypes.bool,
   primaryActionLabel: PropTypes.string,
+  searchLabelText: PropTypes.string,
+  searchPlaceHolder: PropTypes.string,
   secondaryActionLabel: PropTypes.string,
   setAllFilters: PropTypes.func.isRequired,
   showFilterSearch: PropTypes.bool,

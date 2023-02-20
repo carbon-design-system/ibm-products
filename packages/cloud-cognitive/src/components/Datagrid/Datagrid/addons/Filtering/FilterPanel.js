@@ -459,7 +459,7 @@ const FilterPanel = ({
               <Layer>
                 <Search
                   labelText={searchLabelText}
-                  placeholder={searchPlaceHolder}
+                  placeholder={searchPlaceholder}
                   size="sm"
                 />
               </Layer>

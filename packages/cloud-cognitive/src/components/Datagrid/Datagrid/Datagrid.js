@@ -58,7 +58,7 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
         >
           {filterProps?.variation === 'panel' ? (
             <div
-              className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
+              className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex`}
             >
               <DatagridContent datagridState={datagridState} />
             </div>

@@ -15,6 +15,7 @@ import {
   NumberInput,
   RadioButton,
   RadioButtonGroup,
+  Layer,
 } from '@carbon/react';
 import { rem } from '@carbon/layout';
 import { pkg } from '../../../../../settings';
@@ -63,6 +64,8 @@ const FilterPanel = ({
   onPanelClose = () => {},
   showFilterSearch = false,
   filterPanelMinHeight = 600,
+  primaryActionLabel = 'Apply',
+  secondaryActionLabel = 'Cancel',
 }) => {
   /** State */
   const [filtersState, setFiltersState] = useInitialStateFromFilters(
@@ -199,50 +202,52 @@ const FilterPanel = ({
     switch (type) {
       case DATE:
         return (
-          <DatePicker
-            {...components.DatePicker}
-            onChange={(value) => {
-              setFiltersState({ ...filtersState, [column]: { value, type } });
-              applyFilters({ column, value, type });
-              components.DatePicker.onChange?.(value);
-            }}
-            value={filtersState[column].value}
-            datePickerType="range"
-            light
-          >
-            <DatePickerInput
-              placeholder="mm/dd/yyyy"
-              labelText="Start date"
-              {...components.DatePickerInput.start}
-            />
-            <DatePickerInput
-              placeholder="mm/dd/yyyy"
-              labelText="End date"
-              {...components.DatePickerInput.end}
-            />
-          </DatePicker>
+          <Layer>
+            <DatePicker
+              {...components.DatePicker}
+              onChange={(value) => {
+                setFiltersState({ ...filtersState, [column]: { value, type } });
+                applyFilters({ column, value, type });
+                components.DatePicker.onChange?.(value);
+              }}
+              value={filtersState[column].value}
+              datePickerType="range"
+            >
+              <DatePickerInput
+                placeholder="mm/dd/yyyy"
+                labelText="Start date"
+                {...components.DatePickerInput.start}
+              />
+              <DatePickerInput
+                placeholder="mm/dd/yyyy"
+                labelText="End date"
+                {...components.DatePickerInput.end}
+              />
+            </DatePicker>
+          </Layer>
         );
       case NUMBER:
         return (
-          <NumberInput
-            step={1}
-            allowEmpty
-            hideSteppers
-            {...components.NumberInput}
-            onChange={(event) => {
-              setFiltersState({
-                ...filtersState,
-                [column]: {
-                  value: event.target.value,
-                  type,
-                },
-              });
-              applyFilters({ column, value: event.target.value, type });
-              components.NumberInput.onChange?.(event);
-            }}
-            value={filtersState[column].value}
-            light
-          />
+          <Layer>
+            <NumberInput
+              step={1}
+              allowEmpty
+              hideSteppers
+              {...components.NumberInput}
+              onChange={(event) => {
+                setFiltersState({
+                  ...filtersState,
+                  [column]: {
+                    value: event.target.value,
+                    type,
+                  },
+                });
+                applyFilters({ column, value: event.target.value, type });
+                components.NumberInput.onChange?.(event);
+              }}
+              value={filtersState[column].value}
+            />
+          </Layer>
         );
       case CHECKBOX:
         return (
@@ -309,26 +314,27 @@ const FilterPanel = ({
         );
       case DROPDOWN:
         return (
-          <Dropdown
-            {...components.Dropdown}
-            selectedItem={filtersState[column].value}
-            onChange={({ selectedItem }) => {
-              setFiltersState({
-                ...filtersState,
-                [column]: {
+          <Layer>
+            <Dropdown
+              {...components.Dropdown}
+              selectedItem={filtersState[column].value}
+              onChange={({ selectedItem }) => {
+                setFiltersState({
+                  ...filtersState,
+                  [column]: {
+                    value: selectedItem,
+                    type,
+                  },
+                });
+                applyFilters({
+                  column,
                   value: selectedItem,
                   type,
-                },
-              });
-              applyFilters({
-                column,
-                value: selectedItem,
-                type,
-              });
-              components.Dropdown.onChange?.(selectedItem);
-            }}
-            light
-          />
+                });
+                components.Dropdown.onChange?.(selectedItem);
+              }}
+            />
+          </Layer>
         );
     }
   };
@@ -341,14 +347,14 @@ const FilterPanel = ({
             {
               key: 1,
               kind: 'primary',
-              label: 'Apply',
+              label: primaryActionLabel,
               onClick: apply,
               disabled: shouldDisableButtons,
             },
             {
               key: 2,
               kind: 'secondary',
-              label: 'Cancel',
+              label: secondaryActionLabel,
               onClick: cancel,
               disabled: shouldDisableButtons,
             },
@@ -448,12 +454,13 @@ const FilterPanel = ({
           />
           {showFilterSearch && (
             <div ref={filterSearchRef} className={`${componentClass}__search`}>
-              <Search
-                labelText="Filter search"
-                placeholder="Find filters"
-                light={true}
-                size="sm"
-              />
+              <Layer>
+                <Search
+                  labelText="Filter search"
+                  placeholder="Find filters"
+                  size="sm"
+                />
+              </Layer>
             </div>
           )}
         </header>
@@ -506,6 +513,8 @@ FilterPanel.propTypes = {
   onPanelClose: PropTypes.func,
   onPanelOpen: PropTypes.func,
   open: PropTypes.bool,
+  primaryActionLabel: PropTypes.string,
+  secondaryActionLabel: PropTypes.string,
   setAllFilters: PropTypes.func.isRequired,
   showFilterSearch: PropTypes.bool,
   title: PropTypes.string,

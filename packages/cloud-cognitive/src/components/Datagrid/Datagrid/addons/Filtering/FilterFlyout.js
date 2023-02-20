@@ -17,6 +17,7 @@ import {
   NumberInput,
   RadioButton,
   RadioButtonGroup,
+  usePrefix,
 } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -74,6 +75,7 @@ const FilterFlyout = ({
 
   /** Memos */
   const showActionSet = updateMethod === BATCH;
+  const carbonPrefix = usePrefix();
 
   /** Methods */
   const openFlyout = () => {
@@ -180,7 +182,7 @@ const FilterFlyout = ({
   useClickOutside(filterFlyoutRef, (target) => {
     const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
     const hasClickedOnDropdown =
-      target.className === 'bx--list-box__menu-item__option';
+      target.className === `${carbonPrefix}--list-box__menu-item__option`;
 
     if (!open || hasClickedOnDatePicker || hasClickedOnDropdown) {
       return;

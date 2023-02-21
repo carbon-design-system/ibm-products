@@ -476,15 +476,11 @@
 }
 
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(
-    .#{$block-class}__active-row
-  ) {
+  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) {
   position: relative;
 }
 .#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(
-    .#{$block-class}__active-row
-  )::before {
+  .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)::before {
   position: absolute;
   top: 0;
   left: 0;

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.18](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.17...@carbon/ibm-products@2.0.0-rc.18) (2023-02-21)
+
+
+### Features
+
+* **Datagrid:** show fixed columns in column customization v11 ([#2667](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2667)) ([b95d0d3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b95d0d33a9acded60fd438a4c70d5695dc63a9e3))
+
+
+
+
+
 # [2.0.0-rc.17](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.16...@carbon/ibm-products@2.0.0-rc.17) (2023-02-14)
 
 

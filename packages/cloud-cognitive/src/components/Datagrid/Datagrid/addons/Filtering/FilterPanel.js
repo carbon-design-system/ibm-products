@@ -517,7 +517,7 @@ FilterPanel.propTypes = {
   open: PropTypes.bool,
   primaryActionLabel: PropTypes.string,
   searchLabelText: PropTypes.string,
-  searchPlaceHolder: PropTypes.string,
+  searchPlaceholder: PropTypes.string,
   secondaryActionLabel: PropTypes.string,
   setAllFilters: PropTypes.func.isRequired,
   showFilterSearch: PropTypes.bool,

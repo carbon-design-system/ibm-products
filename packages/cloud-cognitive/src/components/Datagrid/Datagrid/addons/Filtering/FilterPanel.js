@@ -99,10 +99,10 @@ const FilterPanel = ({
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
 
   /** Context */
-  const { leftPanelOpen, setLeftPanelOpen } = useContext(FilterContext);
+  const { panelOpen, setPanelOpen } = useContext(FilterContext);
 
   /** Methods */
-  const closePanel = () => setLeftPanelOpen(false);
+  const closePanel = () => setPanelOpen(false);
 
   // If the user decides to cancel or click outside the flyout, it reverts back to the filters that were
   // there when they opened the flyout
@@ -412,13 +412,13 @@ const FilterPanel = ({
   /** Effects */
   useEffect(
     function liftOpenStateToParent() {
-      if (leftPanelOpen) {
-        onPanelOpen(leftPanelOpen);
+      if (panelOpen) {
+        onPanelOpen(panelOpen);
       } else {
-        onPanelClose(leftPanelOpen);
+        onPanelClose(panelOpen);
       }
     },
-    [leftPanelOpen, onPanelClose, onPanelOpen]
+    [panelOpen, onPanelClose, onPanelOpen]
   );
 
   useEffect(
@@ -452,12 +452,12 @@ const FilterPanel = ({
     <motion.div
       ref={filterPanelRef}
       className={cx(componentClass, `${componentClass}__container`, {
-        [`${componentClass}--open`]: leftPanelOpen,
+        [`${componentClass}--open`]: panelOpen,
         [`${componentClass}--batch`]: showActionSet,
         [`${componentClass}--instant`]: !showActionSet,
       })}
       initial={false}
-      animate={leftPanelOpen ? 'visible' : 'hidden'}
+      animate={panelOpen ? 'visible' : 'hidden'}
       variants={panelVariants}
     >
       <motion.div variants={innerContainerVariants}>

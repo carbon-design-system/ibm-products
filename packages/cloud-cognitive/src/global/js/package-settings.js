@@ -33,7 +33,6 @@ const defaults = {
     HTTPErrorOther: true,
     ImportModal: true,
     InlineEdit: true,
-    MultiAddSelect: true,
     NotificationsPanel: true,
     NoDataEmptyState: true,
     NoTagsEmptyState: true,
@@ -45,7 +44,6 @@ const defaults = {
     RemoveModal: true,
     Saving: true,
     SidePanel: true,
-    SingleAddSelect: true,
     StatusIcon: true,
     TagSet: true,
     Tearsheet: true,
@@ -57,6 +55,8 @@ const defaults = {
     WebTerminalProvider: true,
 
     // other public components not yet reviewed and released:
+    MultiAddSelect: false,
+    SingleAddSelect: false,
     ModifiedTabs: false,
     Toolbar: false,
     ToolbarButton: false,

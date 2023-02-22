@@ -110,18 +110,17 @@ export const DatagridActions = (datagridState) => {
               />
             </div>
             {renderFilterFlyout()}
+            {CustomizeColumnsButton && (
+              <div style={style}>
+                <CustomizeColumnsButton />
+              </div>
+            )}
             <RowSizeDropdown {...rowSizeDropdownProps} />
             <div style={style} className={`${blockClass}__toolbar-divider`}>
               <Button kind="ghost" renderIcon={Add} iconDescription={'Action'}>
                 Ghost button
               </Button>
             </div>
-
-            {CustomizeColumnsButton && (
-              <div style={style}>
-                <CustomizeColumnsButton />
-              </div>
-            )}
           </>
         ) : (
           <OverflowMenu ariaLabel="Tools" size="md" flipped>
@@ -149,7 +148,6 @@ export const DatagridActions = (datagridState) => {
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
         {renderFilterFlyout()}
-        <RowSizeDropdown {...rowSizeDropdownProps} />
         <div style={style}>
           <Button
             kind="ghost"
@@ -175,6 +173,7 @@ export const DatagridActions = (datagridState) => {
             <CustomizeColumnsButton />
           </div>
         )}
+        <RowSizeDropdown {...rowSizeDropdownProps} />
         <ButtonMenu
           label="Primary button"
           renderIcon={ChevronDown}

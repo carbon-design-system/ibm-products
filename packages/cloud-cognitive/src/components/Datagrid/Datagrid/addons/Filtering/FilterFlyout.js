@@ -206,6 +206,12 @@ const FilterFlyout = ({
 
   /** Render the individual filter component */
   const renderFilter = ({ type, column, props: components }) => {
+    if (
+      filtersState[column].value === '' &&
+      (type === DROPDOWN || type === RADIO)
+    ) {
+      filtersState[column].value = 'Any';
+    }
     if (type === DATE) {
       return (
         <DatePicker

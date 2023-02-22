@@ -32,7 +32,7 @@ import { FilterContext } from '../Datagrid/addons/Filtering';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 export const DatagridActions = (datagridState) => {
-  const { setLeftPanelOpen } = useContext(FilterContext);
+  const { setPanelOpen } = useContext(FilterContext);
   const {
     selectedFlatRows,
     setGlobalFilter,
@@ -74,7 +74,7 @@ export const DatagridActions = (datagridState) => {
         renderIcon={(props) => <Filter size={16} {...props} />}
         iconDescription={filterProps.panelIconDescription}
         className={`${blockClass}-filter-panel-open-button`}
-        onClick={() => setLeftPanelOpen((open) => !open)}
+        onClick={() => setPanelOpen((open) => !open)}
         disabled={data.length === 0}
         tooltipAlignment="start"
       />

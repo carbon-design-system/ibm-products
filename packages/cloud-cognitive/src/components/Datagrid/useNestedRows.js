@@ -30,7 +30,6 @@ const useNestedRows = (hooks) => {
     props,
     {
       style: {
-        marginLeft: `${row.depth > 0 ? marginLeft : 0}px`,
         paddingLeft: `${
           row.depth > 1
             ? marginLeft * 2 + (row.depth - 1) * (marginLeft + marginLeft / 3)

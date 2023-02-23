@@ -44,11 +44,7 @@ const Highlight = React.memo(({ children, search }) => {
   // Remainder of string did not match (could be empty)
   newChildren.push(children.substring(index));
 
-  return (
-    <>
-      {newChildren}
-    </>
-  );
+  return newChildren;
 });
 
 Highlight.displayName = 'Highlight';

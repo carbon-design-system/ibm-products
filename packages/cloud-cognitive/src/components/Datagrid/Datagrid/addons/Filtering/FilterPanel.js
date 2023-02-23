@@ -157,7 +157,7 @@ const FilterPanel = ({
         isEqual(filtersState, JSON.parse(prevFiltersRef.current))
       );
     },
-    [filtersState]
+    [filtersState, prevFiltersRef]
   );
 
   useSubscribeToEventEmitter(CLEAR_FILTERS, reset);

@@ -23,7 +23,6 @@ import {
   NUMBER,
   RADIO,
   DROPDOWN,
-  FLYOUT,
   PANEL,
 } from '../constants';
 import useInitialStateFromFilters from './useInitialStateFromFilters';

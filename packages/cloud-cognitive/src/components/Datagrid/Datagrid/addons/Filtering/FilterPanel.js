@@ -27,8 +27,11 @@ import {
 import { Close32 } from '@carbon/icons-react';
 import { ActionSet } from '../../../../ActionSet';
 import { FilterContext } from '.';
-import { useFilters, useSubscribeToEventEmitter } from './hooks';
-import isEqual from 'lodash/isEqual';
+import {
+  useFilters,
+  useSubscribeToEventEmitter,
+  useShouldDisableButtons,
+} from './hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-panel`;

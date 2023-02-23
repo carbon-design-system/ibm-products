@@ -1,3 +1,4 @@
+/* eslint-disable jsdoc/check-param-names */
 /*
  * Licensed Materials - Property of IBM
  * 5724-Q36

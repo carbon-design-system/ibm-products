@@ -16,13 +16,17 @@ import { idePrefix } from '../../globals/js/settings';
 
 const Highlight = React.memo(({ children, search }) => {
   if (
-    typeof children !== 'string' || // We accept arbitrary React nodes but we can't highlight them
+    // We accept arbitrary React nodes but we can't highlight them
+    typeof children !== "string" ||
     !search
   ) {
     return children;
   }
 
-  const searchRegExp = new RegExp(search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'ig');
+  const searchRegExp = new RegExp(
+    search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+    "ig"
+  );
   const newChildren = [];
   let result;
   let index = 0;
@@ -47,11 +51,11 @@ const Highlight = React.memo(({ children, search }) => {
   return newChildren;
 });
 
-Highlight.displayName = 'Highlight';
+Highlight.displayName = "Highlight";
 
 Highlight.propTypes = {
   children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  search: PropTypes.string
+  search: PropTypes.string,
 };
 
 // custom styling

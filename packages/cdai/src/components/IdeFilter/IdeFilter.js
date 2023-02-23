@@ -7,13 +7,57 @@
 
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Highlight from 'react-highlighter';
 import pluralize from 'pluralize';
 import CreatableSelect from 'react-select/creatable';
 import { Tag } from 'carbon-components-react';
 import { Close16, Search16 } from '@carbon/icons-react';
 
 import { idePrefix } from '../../globals/js/settings';
+
+const Highlight = React.memo(({ children, search }) => {
+  if (
+    typeof children !== 'string' || // We accept arbitrary React nodes but we can't highlight them
+    !search
+  ) {
+    return children;
+  }
+
+  const searchRegExp = new RegExp(search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'ig');
+  const newChildren = [];
+  let result;
+  let index = 0;
+
+  while ((result = searchRegExp.exec(children)) !== null) {
+    newChildren.push(
+      // Non-matching substring (could be empty)
+      children.substring(index, result.index),
+
+      // Matching substring (can't be empty)
+      <mark key={newChildren.length}>
+        {children.substring(result.index, searchRegExp.lastIndex)}
+      </mark>
+    );
+
+    index = searchRegExp.lastIndex;
+  }
+
+  // Remainder of string did not match (could be empty)
+  newChildren.push(children.substring(index));
+
+  return (
+    <>
+      {newChildren}
+    </>
+  );
+});
+
+Highlight.displayName = 'Highlight';
+
+Highlight.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  search: PropTypes.string
+};
+
 // custom styling
 const customStyles = {
   multiValueLabel: (provided) => ({

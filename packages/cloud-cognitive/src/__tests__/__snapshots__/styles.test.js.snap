@@ -1432,7 +1432,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (min-width: 42rem) {
   .c4p--tearsheet .c4p--tearsheet__header-description {
-    max-width: 60%;
+    max-width: 80%;
   }
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header-description {
@@ -3719,6 +3719,10 @@ button.c4p--add-select__global-filter-toggle--open {
   height: var(--cds-spacing-07, 2rem);
   background: linear-gradient(to bottom, transparent, var(--cds-ui-01, #f4f4f4));
   content: "";
+}
+
+.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag-item .bx--tag {
+  border-radius: 0;
 }
 
 .c4p--tag-set-overflow__tooltip.c4p--tag-set-overflow__tooltip {

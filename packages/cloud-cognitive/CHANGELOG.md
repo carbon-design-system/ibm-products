@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.44.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.44.0...@carbon/ibm-products@1.44.1) (2023-02-24)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
+# [1.44.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.43.0...@carbon/ibm-products@1.44.0) (2023-02-21)
+
+
+### Features
+
+* **Datagrid:** show fixed columns in column customization ([#2665](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2665)) ([05c8bad](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/05c8bad8607fcab4b98ee467ceaae0d27f869844))
+
+
+### Reverts
+
+* Revert "chore: add select release (#2664)" (#2684) ([5a8afca](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5a8afca33ed1469a4d6e258d638a5433f471455c)), closes [#2664](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2664) [#2684](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2684)
+
+
+
+
+
 # [1.43.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.42.1...@carbon/ibm-products@1.43.0) (2023-02-14)
 
 

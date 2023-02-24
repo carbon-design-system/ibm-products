@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-cdai",
   "description": "Carbon for Cloud & Cognitive CD&AI UI components",
-  "version": "1.24.1",
+  "version": "1.24.2",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -47,7 +47,6 @@
     "@babel/runtime": "^7.20.13",
     "focus-trap-react": "^10.0.2",
     "pluralize": "^8.0.0",
-    "react-highlighter": "^0.4.3",
     "react-select": "^5.7.0",
     "uuid": "^9.0.0"
   },

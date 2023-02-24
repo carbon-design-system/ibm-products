@@ -189,6 +189,19 @@ const FilterPanel = ({
         // Remove it from the filters array since there is nothing to filter
         filtersObjectArrayCopy.splice(index, 1);
       }
+    } else if (type === DROPDOWN || type === RADIO) {
+      if (value === 'Any') {
+        /**
+        Checks to see if the selected value is 'Any', that means the user wants
+        to reset specific filter
+      */
+        const index = filtersObjectArrayCopy.findIndex(
+          (filter) => filter.id === column
+        );
+
+        // Remove it from the filters array
+        filtersObjectArrayCopy.splice(index, 1);
+      }
     }
 
     setFiltersObjectArray(filtersObjectArrayCopy);
@@ -288,7 +301,11 @@ const FilterPanel = ({
           <FormGroup {...components.FormGroup}>
             <RadioButtonGroup
               {...components.RadioButtonGroup}
-              valueSelected={filtersState[column].value}
+              valueSelected={
+                filtersState[column]?.value === ''
+                  ? 'Any'
+                  : filtersState[column]?.value
+              }
               onChange={(selected) => {
                 setFiltersState({
                   ...filtersState,
@@ -305,6 +322,7 @@ const FilterPanel = ({
                 components.RadioButtonGroup.onChange?.(selected);
               }}
             >
+              <RadioButton id="any" labelText="Any" value="Any" />
               {components.RadioButton.map((radio) => (
                 <RadioButton
                   key={radio.id ?? radio.labelText ?? radio.value}
@@ -319,7 +337,12 @@ const FilterPanel = ({
           <Layer>
             <Dropdown
               {...components.Dropdown}
-              selectedItem={filtersState[column].value}
+              selectedItem={
+                filtersState[column]?.value === ''
+                  ? 'Any'
+                  : filtersState[column]?.value
+              }
+              items={['Any', ...components.Dropdown.items]}
               onChange={({ selectedItem }) => {
                 setFiltersState({
                   ...filtersState,

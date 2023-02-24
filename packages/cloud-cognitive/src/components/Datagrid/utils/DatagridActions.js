@@ -163,7 +163,6 @@ export const DatagridActions = (datagridState) => {
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
         {renderFilterFlyout()}
-        <RowSizeDropdown {...rowSizeDropdownProps} />
         <div style={style}>
           <Button
             kind="ghost"
@@ -189,6 +188,7 @@ export const DatagridActions = (datagridState) => {
             <CustomizeColumnsButton />
           </div>
         )}
+        <RowSizeDropdown {...rowSizeDropdownProps} />
         <ButtonMenu
           label="Primary button"
           size="lg"

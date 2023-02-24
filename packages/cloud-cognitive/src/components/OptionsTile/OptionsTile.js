@@ -18,7 +18,7 @@ import { pkg } from '../../settings';
 import { useControllableState } from '../../global/js/hooks';
 
 // Carbon and package components we use.
-import { Toggle } from '@carbon/react';
+import { Layer, Toggle } from '@carbon/react';
 import {
   ChevronDown,
   Locked,
@@ -279,13 +279,15 @@ export let OptionsTile = React.forwardRef(
             </summary>
 
             <div className={`${blockClass}__content`} ref={contentRef}>
-              {isLocked && (
-                <p className={`${blockClass}__locked-text`}>
-                  <Locked size={16} />
-                  {lockedText}
-                </p>
-              )}
-              {children}
+              <Layer>
+                {isLocked && (
+                  <p className={`${blockClass}__locked-text`}>
+                    <Locked size={16} />
+                    {lockedText}
+                  </p>
+                )}
+                {children}
+              </Layer>
             </div>
           </details>
         ) : (

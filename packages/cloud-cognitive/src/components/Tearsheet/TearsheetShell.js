@@ -472,7 +472,7 @@ TearsheetShell.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * portal target for the all tags modal
+   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
    */
   portalTarget: PropTypes.node,
 

@@ -1,3 +1,10 @@
+/**
+ * Copyright IBM Corp. 2022, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 /* eslint-disable react/jsx-key */
 
 import React, { useRef, useMemo, useContext, useState, useEffect } from 'react';
@@ -43,9 +50,9 @@ import { FilterContext } from '.';
 import {
   useInitialStateFromFilters,
   useSubscribeToEventEmitter,
+  useShouldDisableButtons,
 } from './hooks';
 import { getInitialStateFromFilters } from './utils';
-import isEqual from 'lodash/isEqual';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-panel`;
@@ -53,7 +60,7 @@ const componentClass = `${blockClass}-filter-panel`;
 const MotionActionSet = motion(ActionSet);
 
 const FilterPanel = ({
-  title,
+  title = 'Filter',
   closeIconDescription = 'Close filter panel',
   updateMethod = BATCH,
   filterSections,
@@ -75,7 +82,6 @@ const FilterPanel = ({
     PANEL
   );
   const [filtersObjectArray, setFiltersObjectArray] = useState([]);
-  const [shouldDisableButtons, setShouldDisableButtons] = useState(true);
   const [showDividerLine, setShowDividerLine] = useState(false);
 
   /** Refs */
@@ -86,6 +92,14 @@ const FilterPanel = ({
   // When using batch actions we have to store the filters to then apply them later
   const prevFiltersRef = useRef(JSON.stringify(filtersState));
   const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
+
+  /** State from hooks */
+  const [shouldDisableButtons, setShouldDisableButtons] =
+    useShouldDisableButtons({
+      initialValue: true,
+      filtersState,
+      prevFiltersRef,
+    });
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
@@ -133,7 +147,9 @@ const FilterPanel = ({
 
   const apply = () => {
     setAllFilters(filtersObjectArray);
+    // From the user
     onApply();
+    // When the user clicks apply, the action set buttons should be disabled again
     setShouldDisableButtons(true);
 
     // updates the ref so next time the flyout opens we have records of the previous filters
@@ -397,15 +413,6 @@ const FilterPanel = ({
       );
     },
     [filterPanelMinHeight]
-  );
-
-  useEffect(
-    function updateDisabledButtonsState() {
-      setShouldDisableButtons(
-        isEqual(filtersState, JSON.parse(prevFiltersRef.current))
-      );
-    },
-    [filtersState]
   );
 
   useSubscribeToEventEmitter(CLEAR_FILTERS, reset);

@@ -209,12 +209,6 @@ const FilterPanel = ({
 
   /** Render the individual filter component */
   const renderFilter = ({ type, column, props: components }) => {
-    if (
-      filtersState[column].value === '' &&
-      (type === DROPDOWN || type === RADIO)
-    ) {
-      filtersState[column].value = 'Any';
-    }
     switch (type) {
       case DATE:
         return (
@@ -300,7 +294,7 @@ const FilterPanel = ({
           <FormGroup {...components.FormGroup}>
             <RadioButtonGroup
               {...components.RadioButtonGroup}
-              valueSelected={filtersState[column]?.value}
+              valueSelected={filtersState[column]?.value === '' ? 'Any' : filtersState[column]?.value}
               onChange={(selected) => {
                 setFiltersState({
                   ...filtersState,
@@ -317,7 +311,7 @@ const FilterPanel = ({
                 components.RadioButtonGroup.onChange?.(selected);
               }}
             >
-              {<RadioButton id="any" labelText="Any" value="Any" />}
+              <RadioButton id="any" labelText="Any" value="Any" />
               {components.RadioButton.map((radio) => (
                 <RadioButton
                   key={radio.id ?? radio.labelText ?? radio.value}
@@ -332,7 +326,7 @@ const FilterPanel = ({
           <Dropdown
             {...components.Dropdown}
             items={['Any', ...components.Dropdown.items]}
-            selectedItem={filtersState[column].value}
+            selectedItem={filtersState[column].value === '' ? 'Any' :  filtersState[column].value === ''}
             onChange={({ selectedItem }) => {
               setFiltersState({
                 ...filtersState,

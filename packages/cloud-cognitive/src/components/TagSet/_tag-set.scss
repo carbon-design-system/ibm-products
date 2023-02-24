@@ -114,6 +114,12 @@ $block-class-modal: #{$block-class}-modal;
     }
   }
 
+  .#{$block-class-overflow}__tooltip
+    .#{$block-class-overflow}__tag-item
+    .#{$carbon-prefix}--tag {
+    border-radius: 0;
+  }
+
   @include block-wrap('#{$block-class-overflow}__tooltip') {
     &.#{$block-class-overflow}__tooltip {
       // removes the min width in Carbon

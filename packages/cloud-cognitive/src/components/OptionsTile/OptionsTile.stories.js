@@ -107,7 +107,6 @@ const Template = (args) => {
           warn={isWarn}
           warnText="A language change requires a restart of the application"
           disabled={disableControls}
-          light
         />
         <Dropdown
           id={`${id}-locale`}
@@ -116,7 +115,6 @@ const Template = (args) => {
           items={locales}
           initialSelectedItem={locales[0]}
           disabled={disableControls}
-          light
         />
       </FormGroup>
     </OptionsTile>

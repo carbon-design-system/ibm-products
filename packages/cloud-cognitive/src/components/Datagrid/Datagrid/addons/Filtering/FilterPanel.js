@@ -294,7 +294,11 @@ const FilterPanel = ({
           <FormGroup {...components.FormGroup}>
             <RadioButtonGroup
               {...components.RadioButtonGroup}
-              valueSelected={filtersState[column]?.value === '' ? 'Any' : filtersState[column]?.value}
+              valueSelected={
+                filtersState[column]?.value === ''
+                  ? 'Any'
+                  : filtersState[column]?.value
+              }
               onChange={(selected) => {
                 setFiltersState({
                   ...filtersState,
@@ -326,7 +330,11 @@ const FilterPanel = ({
           <Dropdown
             {...components.Dropdown}
             items={['Any', ...components.Dropdown.items]}
-            selectedItem={filtersState[column].value === '' ? 'Any' :  filtersState[column].value === ''}
+            selectedItem={
+              filtersState[column].value === ''
+                ? 'Any'
+                : filtersState[column].value === ''
+            }
             onChange={({ selectedItem }) => {
               setFiltersState({
                 ...filtersState,

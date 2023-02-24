@@ -288,7 +288,11 @@ const FilterFlyout = ({
         <FormGroup {...components.FormGroup}>
           <RadioButtonGroup
             {...components.RadioButtonGroup}
-            valueSelected={filtersState[column]?.value === '' ? 'Any' : filtersState[column]?.value}
+            valueSelected={
+              filtersState[column]?.value === ''
+                ? 'Any'
+                : filtersState[column]?.value
+            }
             onChange={(selected) => {
               setFiltersState({
                 ...filtersState,
@@ -319,7 +323,11 @@ const FilterFlyout = ({
       return (
         <Dropdown
           {...components.Dropdown}
-          selectedItem={filtersState[column].value === '' ? 'Any' :  filtersState[column].value === ''}
+          selectedItem={
+            filtersState[column].value === ''
+              ? 'Any'
+              : filtersState[column].value === ''
+          }
           items={['Any', ...components.Dropdown.items]}
           onChange={({ selectedItem }) => {
             setFiltersState({

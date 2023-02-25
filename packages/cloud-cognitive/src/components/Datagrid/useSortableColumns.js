@@ -6,9 +6,12 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import React from 'react';
-import { carbon } from '../../settings';
+import cx from 'classnames';
+import { pkg, carbon } from '../../settings';
 import { Button } from 'carbon-components-react';
 import { ArrowUp16, ArrowDown16, Arrows16 } from '@carbon/icons-react';
+
+const blockClass = `${pkg.prefix}--datagrid`;
 
 const ordering = {
   ASC: 'ASC',
@@ -49,7 +52,15 @@ const useSortableColumns = (hooks) => {
             onClick={() => onSortClick(headerProp.column)}
             kind="ghost"
             renderIcon={icon(headerProp.column)}
-            className={`${carbon.prefix}--table-sort`}
+            className={cx(
+              `${carbon.prefix}--table-sort ${blockClass}--table-sort`,
+              {
+                [`${blockClass}--table-sort--desc`]:
+                  headerProp.column.isSortedDesc,
+                [`${blockClass}--table-sort--asc`]:
+                  headerProp.column.isSortedDesc === false,
+              }
+            )}
           >
             {column.Header}
           </Button>

@@ -9,8 +9,6 @@
 @import './variables';
 
 .#{$block-class}__sortableColumn {
-  /* stylelint-disable-next-line declaration-no-important */
-  padding: 0 !important;
   .#{$carbon-prefix}--table-header-label .header-title {
     display: inline-block;
     width: auto;
@@ -50,6 +48,11 @@
   .#{$carbon-prefix}--table-header-label .#{$carbon-prefix}--table-sort svg {
     fill: $text-01;
     visibility: hidden;
+  }
+
+  .#{$carbon-prefix}--table-sort.#{$block-class}--table-sort {
+    width: calc(100% + #{$spacing-07}); // offset due to inner label
+    margin: 0 calc(-1 * #{$spacing-05}); // fill width area of parent table colum header
   }
 }
 

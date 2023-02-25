@@ -9,7 +9,7 @@ import React from 'react';
 import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
 import { Button } from 'carbon-components-react';
-import { ArrowUp16, ArrowDown16, Arrows16 } from '@carbon/icons-react';
+import { ArrowUp16, Arrows16 } from '@carbon/icons-react';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -37,7 +37,7 @@ const useSortableColumns = (hooks) => {
             case false:
               return ArrowUp16;
             case true:
-              return ArrowDown16;
+              return ArrowUp16;
             default:
               return Arrows16;
           }

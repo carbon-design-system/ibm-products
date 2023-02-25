@@ -48,6 +48,7 @@
   .#{$carbon-prefix}--table-header-label .#{$carbon-prefix}--table-sort svg {
     fill: $text-01;
     opacity: 0;
+    transition: transform $duration--fast-02 motion(standard, productive);
     visibility: hidden;
   }
 
@@ -64,4 +65,8 @@
     opacity: 1;
     visibility: visible;
   }
+}
+
+.#{$block-class}__sortableColumn .#{$block-class}--table-sort--desc svg {
+  transform: rotate(180deg);
 }

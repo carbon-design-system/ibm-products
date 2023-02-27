@@ -32,7 +32,8 @@ import {
 } from '.';
 
 import {
-  DataTable,
+  TableToolbarContent,
+  TableToolbarSearch,
   Button,
   Pagination,
   TableBatchActions,
@@ -162,7 +163,6 @@ const DatagridActions = (datagridState) => {
   const downloadCsv = () => {
     alert('Downloading...');
   };
-  const { TableToolbarContent, TableToolbarSearch } = DataTable;
 
   const refreshColumns = () => {
     alert('refreshing...');
@@ -472,29 +472,6 @@ const RowSizeDropdown = ({ ...rest }) => {
     },
     useSelectRows
   );
-
-  return (
-    <Wrapper>
-      <Datagrid datagridState={{ ...datagridState }} {...rest} />
-    </Wrapper>
-  );
-};
-
-const LeftPanel = ({ ...rest }) => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid({
-    columns,
-    data,
-    leftPanel: {
-      isOpen: true, // this toggling will happen from datagridActions.
-      panelContent: (
-        <div>Panel content will go here along with any button interactions</div>
-      ),
-    },
-    DatagridActions,
-    DatagridBatchActions,
-  });
 
   return (
     <Wrapper>
@@ -1490,87 +1467,6 @@ describe(componentName, () => {
     hideSelectAll(8);
   });
 
-  it('Left Panel', () => {
-    render(<LeftPanel data-testid={dataTestId}></LeftPanel>);
-
-    const alertMock = jest.spyOn(window, 'alert');
-
-    expect(
-      screen.getByText(
-        'Panel content will go here along with any button interactions'
-      )
-    ).toBeVisible();
-
-    expect(
-      screen.getByText(
-        'Panel content will go here along with any button interactions'
-      ).parentElement.classList[0]
-    ).toEqual('c4p--datagrid__datagridLeftPanel');
-
-    expect(
-      document.getElementsByClassName(`${carbon.prefix}--search-input`)[0]
-    ).toBeDefined();
-
-    // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
-    const leftPanelButton =
-      screen.getByText('Left panel').parentElement.previousSibling;
-    fireEvent.click(leftPanelButton);
-    expect(alertMock).toHaveBeenCalledTimes(1);
-
-    const rowHeightButton = screen.getByText((content, element) => {
-      return (
-        element.tagName.toLowerCase() === 'span' &&
-        content.startsWith('Row height')
-      );
-    }).parentElement.previousSibling;
-    fireEvent.click(rowHeightButton);
-
-    const rowSizeDropDown = [
-      'Extra large',
-      'Large (default)',
-      'Medium',
-      'Small',
-      'Extra small',
-    ];
-    const rowSizeOptionsCount = document
-      .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
-      .getElementsByTagName('div')[0]
-      .getElementsByTagName('fieldset')[0]
-      .getElementsByTagName('div').length;
-
-    for (var k = 0; k < rowSizeOptionsCount; k++) {
-      expect(
-        document
-          .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
-          .getElementsByTagName('div')[0]
-          .getElementsByTagName('fieldset')[0]
-          .getElementsByTagName('div')
-          .item(k)
-          .getElementsByTagName('label')[0]
-          .getElementsByTagName('span')[1].textContent
-      ).toEqual(rowSizeDropDown[k]);
-    }
-
-    fireEvent.click(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('button')[0]
-    );
-    expect(alertMock).toHaveBeenCalledTimes(2);
-
-    // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
-    const refreshButton =
-      screen.getByText('Refresh').parentElement.previousSibling;
-    fireEvent.click(refreshButton);
-    expect(alertMock).toHaveBeenCalledTimes(3);
-
-    const downloadButton =
-      screen.getByText('Download CSV').parentElement.previousSibling;
-    fireEvent.click(downloadButton);
-    expect(alertMock).toHaveBeenCalledTimes(4);
-  });
-
   it('Nested Rows', () => {
     render(<NestedRows data-testid={dataTestId}></NestedRows>);
 
@@ -2087,7 +1983,7 @@ describe(componentName, () => {
 
     const customizeColumnsButton = screen.getByLabelText('Customize columns');
     fireEvent.click(customizeColumnsButton);
-    screen.getByText(/Customize Columns/);
+    screen.getByRole('heading', { name: /Customize columns/ });
   });
 
   it('Top Alignment', () => {

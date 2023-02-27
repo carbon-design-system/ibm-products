@@ -1,10 +1,8 @@
-// @flow
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2021
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2022, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
@@ -74,11 +72,6 @@ const Columns = ({
             }
           }}
           tabIndex={0}
-          onFocus={(e) => {
-            if (e.target === e.currentTarget) {
-              setFocusIndex(0);
-            }
-          }}
         >
           <span
             aria-live="assertive"
@@ -96,10 +89,8 @@ const Columns = ({
           </span>
           <div
             id={`${blockClass}__customize-columns-select-all`}
-            className={cx({
-              [`${blockClass}__customize-columns-select-all`]:
-                getVisibleColumnsCount() === 0,
-              [`${blockClass}__customize-columns-select-all-selected`]:
+            className={cx(`${blockClass}__customize-columns-select-all`, {
+              [`${blockClass}__customize-columns-select-all--selected`]:
                 getVisibleColumnsCount() > 0,
             })}
             selected={getVisibleColumnsCount() > 0}
@@ -127,52 +118,88 @@ const Columns = ({
                 filterString.length === 0 ||
                 colDef.Header.props.title.toLowerCase().includes(filterString)
             )
-            .map((colDef, i) => (
-              <DraggableElement
-                key={colDef.id}
-                index={i}
-                listData={columns}
-                setListData={setColumnsObject}
-                id={`dnd-datagrid-columns-${colDef.id}`}
-                type="column-customization"
-                disabled={filterString.length > 0}
-                ariaLabel={colDef.Header.props.title}
-                onGrab={setAriaRegionText}
-                isFocused={focusIndex === i}
-                moveElement={moveElement}
-                onArrowKeyDown={(e, isGrabbed, currentIndex) => {
-                  if (isGrabbed) {
-                    const nextIndex = getNextIndex(
-                      columns,
-                      currentIndex,
-                      e.key
-                    );
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (nextIndex >= 0) {
-                      setFocusIndex(nextIndex);
-                      moveElement(currentIndex, nextIndex);
-                      e.target.scrollIntoView({
-                        block: 'center',
-                      });
+            .map((colDef, i) => {
+              const searchString = new RegExp('(' + filterString + ')');
+              const res = filterString.length
+                ? colDef.Header.props.title.toLowerCase().split(searchString)
+                : null;
+              const firstWord =
+                res !== null
+                  ? res[0] === ''
+                    ? res[1].charAt(0).toUpperCase() + res[1].substring(1)
+                    : res[0].charAt(0).toUpperCase() + res[0].substring(1)
+                  : null;
+              const highlightedText =
+                res !== null
+                  ? res[0] === ''
+                    ? `<strong>${firstWord}</strong>` + res[2]
+                    : firstWord + `<strong>${res[1]}</strong>` + res[2]
+                  : colDef.Header.props.title;
+
+              const isFrozenColumn = !!colDef.sticky;
+
+              const listContents = (
+                <>
+                  <Checkbox
+                    className={cx(
+                      `${blockClass}__customize-columns-checkbox-wrapper`,
+                      `${blockClass}__customize-columns-checkbox`
+                    )}
+                    checked={isColumnVisible(colDef)}
+                    disabled={isFrozenColumn}
+                    onChange={(_, { checked }) =>
+                      onSelectColumn(colDef, checked)
                     }
+                    id={`${blockClass}__customization-column-${colDef.id}`}
+                    labelText={colDef.Header.props.title}
+                    title={colDef.Header.props.title}
+                    hideLabel
+                  />
+                  {
+                    <div
+                      dangerouslySetInnerHTML={{ __html: highlightedText }}
+                    ></div>
                   }
-                }}
-                selected={isColumnVisible(colDef)}
-              >
-                <Checkbox
-                  className={cx(
-                    `${blockClass}__customize-columns-checkbox-wrapper`,
-                    `${blockClass}__customize-columns-checkbox`
-                  )}
-                  checked={isColumnVisible(colDef)}
-                  onChange={(_, { checked }) => onSelectColumn(colDef, checked)}
-                  id={`${blockClass}__customization-column-${colDef.id}`}
-                  labelText={colDef.Header.props.title}
-                  title={colDef.Header.props.title}
-                />
-              </DraggableElement>
-            ))}
+                </>
+              );
+              return (
+                <DraggableElement
+                  key={colDef.id}
+                  index={i}
+                  listData={columns}
+                  setListData={setColumnsObject}
+                  id={`dnd-datagrid-columns-${colDef.id}`}
+                  type="column-customization"
+                  disabled={filterString.length > 0 || isFrozenColumn}
+                  ariaLabel={colDef.Header.props.title}
+                  onGrab={setAriaRegionText}
+                  isFocused={focusIndex === i}
+                  isSticky={isFrozenColumn}
+                  moveElement={moveElement}
+                  onArrowKeyDown={(e, isGrabbed, currentIndex) => {
+                    if (isGrabbed) {
+                      const nextIndex = getNextIndex(
+                        columns,
+                        currentIndex,
+                        e.key
+                      );
+                      e.preventDefault();
+                      e.stopPropagation();
+                      if (nextIndex >= 0 && !columns[nextIndex]?.sticky) {
+                        setFocusIndex(nextIndex);
+                        moveElement(currentIndex, nextIndex);
+                        e.target.scrollIntoView({
+                          block: 'center',
+                        });
+                      }
+                    }
+                  }}
+                  selected={isColumnVisible(colDef)}
+                >
+                  {listContents}
+                </DraggableElement>
+              );
+            })}
         </ol>
       </DndProvider>
     </div>

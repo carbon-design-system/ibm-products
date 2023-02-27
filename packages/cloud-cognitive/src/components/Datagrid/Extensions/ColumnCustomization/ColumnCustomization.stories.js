@@ -7,7 +7,7 @@
  */
 
 import React, { useState } from 'react';
-import { Edit, TrashCan } from '@carbon/react/icons';
+import { Checkmark, Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
@@ -18,6 +18,8 @@ import {
   useDatagrid,
   useCustomizeColumns,
   useColumnOrder,
+  useStickyColumn,
+  useActionsColumn,
 } from '../../index';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
@@ -160,11 +162,11 @@ const sharedDatagridProps = {
     labels: {
       findColumnPlaceholderLabel: 'Find column',
       resetToDefaultLabel: 'Reset to default',
-      customizeModalHeadingLabel: 'Customize display',
+      customizeTearsheetHeadingLabel: 'Customize display',
       primaryButtonTextLabel: 'Save',
       secondaryButtonTextLabel: 'Cancel',
       instructionsLabel:
-        'Deselect columns to hide them. Click and drag the white box to reorder the columns. These specifications will be saved and persist if you leave and return to the data table.',
+        'Deselect columns to hide them. Drag rows to change column order. These specifications will be saved if you leave and return to the data table.',
       iconTooltipLabel: 'Customize columns',
       assistiveTextInstructionsLabel:
         'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
@@ -226,6 +228,100 @@ export const ColumnCustomizationUsageStory = prepareStory(
   ColumnCustomizationWrapper,
   {
     storyName: columnCustomizationStoryName,
+    argTypes: {
+      gridTitle: ARG_TYPES.gridTitle,
+      gridDescription: ARG_TYPES.gridDescription,
+      useDenseHeader: ARG_TYPES.useDenseHeader,
+      customizeColumnsProps: ARG_TYPES.customizeColumnsProps,
+    },
+    args: {
+      ...columnCustomizationControlProps,
+    },
+  }
+);
+
+const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader,
+      {
+        Header: '',
+        accessor: 'actions',
+        sticky: 'right',
+        width: 48,
+        isAction: true,
+      },
+    ],
+    []
+  );
+  const [data] = useState(makeData(10));
+
+  const datagridState = useDatagrid(
+    {
+      className: `c4p--datagrid__hidden--columns`,
+      columns,
+      data,
+      initialState: {
+        pageSize: 10,
+        pageSizes: [5, 10, 25, 50],
+        hiddenColumns: ['age'],
+        columnOrder: [],
+      },
+      DatagridActions,
+      DatagridPagination,
+      rowActions: [
+        {
+          id: 'edit',
+          itemText: 'Edit',
+          icon: Edit,
+          onClick: action('Clicked row action: edit'),
+        },
+        {
+          id: 'approve',
+          itemText: 'Approve',
+          icon: Checkmark,
+          onClick: action('Clicked row action: approve'),
+        },
+        {
+          id: 'delete',
+          itemText: 'Delete',
+          icon: TrashCan,
+          isDelete: true,
+          hasDivider: true,
+          onClick: action('Clicked row action: delete'),
+        },
+      ],
+      ...args.defaultGridProps,
+    },
+    useCustomizeColumns,
+    useColumnOrder,
+    useStickyColumn,
+    useActionsColumn
+  );
+
+  return (
+    <>
+      <Datagrid datagridState={datagridState} />
+      <div className={`${blockClass}-story__hidden-column-id-snippet`}>
+        <p>Hidden column ids:</p>
+        <CodeSnippet type="multi">
+          {JSON.stringify(datagridState.state.hiddenColumns, null, 2)}
+        </CodeSnippet>
+      </div>
+    </>
+  );
+};
+
+const ColumnCustomizationWithFixedWrapper = ({ ...args }) => {
+  return <ColumnCustomizationWithFixedColumn defaultGridProps={{ ...args }} />;
+};
+
+const columnCustomizationFixedStoryName =
+  'With column customization and frozen columns';
+export const ColumnCustomizationWithFixedColumnStory = prepareStory(
+  ColumnCustomizationWithFixedWrapper,
+  {
+    storyName: columnCustomizationFixedStoryName,
     argTypes: {
       gridTitle: ARG_TYPES.gridTitle,
       gridDescription: ARG_TYPES.gridDescription,

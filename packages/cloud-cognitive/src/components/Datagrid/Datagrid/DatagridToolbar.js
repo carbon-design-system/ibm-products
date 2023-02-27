@@ -7,15 +7,17 @@
 
 import React, { useEffect, useState } from 'react';
 import { Add, OverflowMenuVertical } from '@carbon/react/icons';
-import { DataTable, TableBatchActions, TableBatchAction } from '@carbon/react';
+import {
+  TableToolbar,
+  TableBatchActions,
+  TableBatchAction,
+} from '@carbon/react';
 import { useResizeDetector } from 'react-resize-detector';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
 
 const blockClass = `${pkg.prefix}--datagrid`;
-
-const { TableToolbar } = DataTable;
 
 const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   const [displayAllInMenu, setDisplayAllInMenu] = useState(false);
@@ -154,10 +156,19 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 
 const DatagridToolbar = (datagridState) => {
   const { width, ref } = useResizeDetector();
-  const { DatagridActions, DatagridBatchActions, batchActions } = datagridState;
+  const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
+    datagridState;
+
+  const getRowHeight = rowSize ? rowSize : 'lg';
 
   return batchActions && DatagridActions ? (
-    <div ref={ref} className={`${blockClass}__table-toolbar`}>
+    <div
+      ref={ref}
+      className={cx(
+        `${blockClass}__table-toolbar`,
+        `${blockClass}__table-toolbar--${getRowHeight}`
+      )}
+    >
       <TableToolbar>
         {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActionsToolbar &&

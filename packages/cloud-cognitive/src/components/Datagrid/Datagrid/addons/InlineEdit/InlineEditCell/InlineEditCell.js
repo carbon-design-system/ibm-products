@@ -279,6 +279,12 @@ export const InlineEditCell = ({
     );
   };
 
+  const handleTransformedItem = (items) => {
+    return items?.length && typeof items[0] === 'object'
+      ? (item) => renderDropdownItem(item)
+      : null;
+  };
+
   const renderSelectCell = () => {
     const { inputProps } = config || {};
     return (
@@ -296,8 +302,8 @@ export const InlineEditCell = ({
         })}
         items={inputProps?.items || []}
         initialSelectedItem={cell.value}
-        itemToElement={(item) => renderDropdownItem(item)}
-        renderSelectedItem={(item) => renderDropdownItem(item)}
+        itemToElement={handleTransformedItem(inputProps?.items)}
+        renderSelectedItem={handleTransformedItem(inputProps?.items)}
         onChange={(item) => {
           const newCellId = getNewCellId('Enter');
           saveCellData(item.selectedItem);
@@ -391,17 +397,23 @@ export const InlineEditCell = ({
   };
 
   const buildDate = (value) => {
+    const dateFormat = config?.inputProps?.dateFormat;
     if (value instanceof Date) {
-      const { dateFormat = 'm/d/Y' } = config;
       const maskedFullYear = value.getFullYear();
       const maskedMonth = padTo2Digits(value.getMonth() + 1);
       const maskedDay = padTo2Digits(value.getDate());
-      if (dateFormat === 'm/d/Y' || dateFormat === 'm/d/y') {
+      if (dateFormat === 'm/d/Y' || value === 'm/d/y') {
         return [maskedMonth, maskedDay, maskedFullYear].join('/');
       }
-      if (dateFormat === 'd/m/Y' || dateFormat === 'd/m/y') {
+      if (
+        dateFormat === 'd/m/Y' ||
+        dateFormat === 'd/m/y' ||
+        dateFormat === undefined
+      ) {
         return [maskedDay, maskedMonth, maskedFullYear].join('/');
       }
+    } else {
+      return value;
     }
     return null;
   };
@@ -477,7 +489,7 @@ export const InlineEditCell = ({
           renderIcon={setRenderIcon()}
           label={
             type === 'selection'
-              ? value.text
+              ? value?.text ?? value
               : type === 'date'
               ? buildDate(value)
               : value

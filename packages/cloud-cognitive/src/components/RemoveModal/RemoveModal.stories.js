@@ -38,6 +38,7 @@ const defaultProps = {
   inputPlaceholderText: 'Name of resourceName',
   onClose: () => false,
   open: true,
+  primaryButtonDisabled: false,
   primaryButtonText: 'Delete',
   resourceName,
   secondaryButtonText: 'Cancel',

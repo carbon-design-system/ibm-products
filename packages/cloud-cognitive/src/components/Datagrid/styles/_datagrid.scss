@@ -368,26 +368,20 @@
   flex-direction: row;
 }
 
-.#{$block-class}__datagridLeftPanel {
-  display: flex;
-  width: 388px; // as per UX specs.
-  background-color: $layer-01;
-}
-
-.#{$block-class}__leftPanel-position {
-  display: inherit;
+.#{$block-class}__table-container-inner {
+  overflow: hidden;
+  flex: 1;
 }
 
 .#{$block-class}__datagridWithPanel {
   position: relative;
   display: flex;
-  width: 100%;
   height: 100%;
   flex-direction: column;
 
   .#{$block-class}__grid-container {
     display: flex;
-    overflow: hidden;
+    overflow: visible;
     flex-direction: column;
   }
 
@@ -395,15 +389,18 @@
     width: 100%;
   }
 
-  .#{$block-class}__datagridLeftPanel {
-    flex: 0 0 auto;
+  .#{$block-class}__table-container {
+    display: flex;
+    overflow: visible;
+    background-color: $layer-01;
   }
 
-  .#{c4p-settings.$carbon-prefix}--data-table-content {
-    flex: 1 1 0%;
+  .#{$block-class}__table-container .#{$block-class}__filter-summary {
+    border-bottom: 1px solid $layer-03;
   }
-  .#{$block-class}__table-container {
-    overflow: hidden;
+
+  .#{c4p-settings.$pkg-prefix}--datagrid__table-simple {
+    height: 100%;
   }
 }
 
@@ -413,6 +410,7 @@
   overflow: auto;
   width: 100%;
   max-height: 100%;
+  overflow-y: auto;
 }
 
 .#{$block-class}__carbon-row-expanded {
@@ -447,8 +445,9 @@
   }
 
   .#{$block-class}__table-toolbar {
-    flex: 0 0 auto;
+    flex: 1 0 auto;
   }
+
   .#{c4p-settings.$carbon-prefix}--table-toolbar {
     background: transparent;
   }
@@ -481,10 +480,10 @@
   .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row) {
   position: relative;
 }
-
 .#{$block-class}
   .#{c4p-settings.$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)::before {
   position: absolute;
+  top: 0;
   left: 0;
   width: $spacing-02;
   height: 100%;
@@ -539,4 +538,73 @@
   width: $spacing-09;
   height: $spacing-09;
   justify-content: center;
+}
+
+.#{$block-class}__customize-columns-checkbox-wrapper.#{c4p-settings.$carbon-prefix}--form-item {
+  flex: 0 0 auto;
+  margin-right: $spacing-03;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  height: 7px;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar-track {
+  background: $layer;
+}
+
+.#{$block-class}__virtual-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+
+.#{$block-class}__virtualScrollContainer {
+  width: 100%;
+}
+
+.#{c4p-settings.$carbon-prefix}--body--with-modal-open
+  .#{$block-class}__grid-container {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.#{$block-class} .#{c4p-settings.$carbon-prefix}--modal {
+  width: 100%;
+}
+
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger {
+  flex-shrink: 0;
+  background-color: $interactive;
+}
+
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger
+  svg {
+  fill: $background;
+}
+
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger:hover,
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{c4p-settings.$carbon-prefix}--overflow-menu--open:hover,
+.#{c4p-settings.$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger.#{c4p-settings.$carbon-prefix}--overflow-menu--open {
+  background-color: $button-primary-hover;
+}
+
+// extra specificity to override Carbon default
+.#{$block-class}__toolbar-options.#{$block-class}__toolbar-options {
+  background-color: $layer-02;
+}
+
+.#{$block-class}__toolbar-options.#{c4p-settings.$carbon-prefix}--overflow-menu-options::after {
+  background-color: transparent;
+}
+
+.#{$block-class}__mobile-toolbar-modal
+  .#{c4p-settings.$carbon-prefix}--modal-container {
+  position: absolute;
+}
+
+.#{$block-class}__table-toolbar--sm,
+.#{$block-class}__table-toolbar--xs {
+  .#{c4p-settings.$pkg-prefix}--filter-summary {
+    padding: 0 $spacing-03;
+  }
 }

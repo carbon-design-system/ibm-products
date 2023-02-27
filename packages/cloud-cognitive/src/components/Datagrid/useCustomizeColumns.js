@@ -9,30 +9,30 @@
 
 import * as React from 'react';
 import {
-  CustomizeColumnsModalWrapper,
+  CustomizeColumnsTearsheetWrapper,
   ToggleButtonWrapper,
 } from './Datagrid/addons/CustomizeColumns';
 
 const useCustomizeColumns = (hooks) => {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [isTearsheetOpen, setIsTearsheetOpen] = React.useState(false);
   hooks.useInstance.push((instance) => {
     const { customizeColumnsProps } = instance;
     const { labels } = customizeColumnsProps || {};
     Object.assign(instance, {
       customizeColumnsProps: {
         ...customizeColumnsProps,
-        isModalOpen,
-        setIsModalOpen,
+        isTearsheetOpen,
+        setIsTearsheetOpen,
       },
       CustomizeColumnsButton: (props) => (
         <ToggleButtonWrapper
           iconTooltipLabel={labels?.iconTooltipLabel}
-          isModalOpen={isModalOpen}
-          setIsModalOpen={setIsModalOpen}
+          isTearsheetOpen={isTearsheetOpen}
+          setIsTearsheetOpen={setIsTearsheetOpen}
           {...props}
         />
       ),
-      CustomizeColumnsModal: CustomizeColumnsModalWrapper,
+      CustomizeColumnsTearsheet: CustomizeColumnsTearsheetWrapper,
     });
   });
 };

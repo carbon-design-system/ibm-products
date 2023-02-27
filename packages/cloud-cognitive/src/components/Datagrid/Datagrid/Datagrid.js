@@ -14,6 +14,7 @@ import { pkg } from '../../../settings';
 import pconsole from '../../../global/js/utils/pconsole';
 import { InlineEditProvider } from './addons/InlineEdit/InlineEditContext';
 import { DatagridContent } from './DatagridContent';
+import { FilterProvider } from './addons/Filtering/FilterProvider';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentName = 'Datagrid';
@@ -31,40 +32,42 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
     DatagridPagination,
     isFetching,
     tableId,
-    leftPanel,
+    filterProps,
     className,
+    state: { filters },
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
 
   return (
-    <InlineEditProvider>
-      <div
-        {...rest}
-        id={tableId}
-        ref={ref}
-        className={cx(
-          className,
-          blockClass,
-          withVirtualScroll
-            ? `${blockClass}__datagridWrap`
-            : `${blockClass}__datagridWrap-simple`,
-          !isFetching && rows.length === 0 ? `${blockClass}__empty-state` : ''
-        )}
-        {...getDevtoolsProps(componentName)}
-      >
-        {leftPanel && (
-          <div
-            className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
-          >
+    <FilterProvider filters={filters}>
+      <InlineEditProvider>
+        <div
+          {...rest}
+          id={tableId}
+          ref={ref}
+          className={cx(
+            className,
+            blockClass,
+            withVirtualScroll
+              ? `${blockClass}__datagridWrap`
+              : `${blockClass}__datagridWrap-simple`,
+            !isFetching && rows.length === 0 ? `${blockClass}__empty-state` : ''
+          )}
+          {...getDevtoolsProps(componentName)}
+        >
+          {filterProps?.variation === 'panel' ? (
+            <div
+              className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex`}
+            >
+              <DatagridContent datagridState={datagridState} />
+            </div>
+          ) : (
             <DatagridContent datagridState={datagridState} />
-          </div>
-        )}
-        {leftPanel === undefined && (
-          <DatagridContent datagridState={datagridState} />
-        )}
-      </div>
-    </InlineEditProvider>
+          )}
+        </div>
+      </InlineEditProvider>
+    </FilterProvider>
   );
 });
 

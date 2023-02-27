@@ -3223,6 +3223,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   visibility: hidden;
 }
 
+.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag-item .bx--tag {
+  border-radius: 0;
+}
+
 .c4p--tag-set-modal.c4p--tag-set-modal {
   text-align: initial;
   white-space: initial;

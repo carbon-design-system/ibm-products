@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.44.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.44.0...@carbon/ibm-products@1.44.1) (2023-02-24)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
 # [1.44.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.43.0...@carbon/ibm-products@1.44.0) (2023-02-21)
 
 

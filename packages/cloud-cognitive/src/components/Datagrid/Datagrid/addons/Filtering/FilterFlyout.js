@@ -326,7 +326,7 @@ const FilterFlyout = ({
           selectedItem={
             filtersState[column].value === ''
               ? 'Any'
-              : filtersState[column].value === ''
+              : filtersState[column].value
           }
           items={['Any', ...components.Dropdown.items]}
           onChange={({ selectedItem }) => {

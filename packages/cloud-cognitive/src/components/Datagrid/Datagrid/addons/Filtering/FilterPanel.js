@@ -333,7 +333,7 @@ const FilterPanel = ({
             selectedItem={
               filtersState[column].value === ''
                 ? 'Any'
-                : filtersState[column].value === ''
+                : filtersState[column].value
             }
             onChange={({ selectedItem }) => {
               setFiltersState({

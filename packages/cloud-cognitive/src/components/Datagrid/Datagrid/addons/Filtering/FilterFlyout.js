@@ -1,11 +1,11 @@
 // @flow
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2022
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2022, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
+
 import { Filter16 } from '@carbon/icons-react';
 import {
   Button,
@@ -37,6 +37,7 @@ import {
 } from './constants';
 import {
   useInitialStateFromFilters,
+  useShouldDisableButtons,
   useSubscribeToEventEmitter,
 } from './hooks';
 import { getInitialStateFromFilters } from './utils';
@@ -72,6 +73,13 @@ const FilterFlyout = ({
   const prevFiltersRef = useRef(JSON.stringify(filtersState));
   const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
 
+  const [shouldDisableButtons, setShouldDisableButtons] =
+    useShouldDisableButtons({
+      initialValue: true,
+      filtersState,
+      prevFiltersRef,
+    });
+
   /** Memos */
   const showActionSet = updateMethod === BATCH;
 
@@ -90,6 +98,9 @@ const FilterFlyout = ({
     closeFlyout();
     // From the user
     onApply();
+
+    // When the user clicks apply, the action set buttons should be disabled again
+    setShouldDisableButtons(true);
 
     // updates the ref so next time the flyout opens we have records of the previous filters
     prevFiltersRef.current = JSON.stringify(filtersState);
@@ -162,6 +173,19 @@ const FilterFlyout = ({
         );
 
         if (shouldRemoveFromArray) {
+          filtersObjectArrayCopy.splice(index, 1);
+        }
+      } else if (type === DROPDOWN || type === RADIO) {
+        if (value === 'Any') {
+          /**
+          Checks to see if the selected value is 'Any', that means the user wants
+          to reset specific filter
+        */
+          const index = filtersObjectArrayCopy.findIndex(
+            (filter) => filter.id === column
+          );
+
+          // Remove it from the filters array
           filtersObjectArrayCopy.splice(index, 1);
         }
       }
@@ -275,7 +299,11 @@ const FilterFlyout = ({
         <FormGroup {...components.FormGroup}>
           <RadioButtonGroup
             {...components.RadioButtonGroup}
-            valueSelected={filtersState[column].value}
+            valueSelected={
+              filtersState[column]?.value === ''
+                ? 'Any'
+                : filtersState[column]?.value
+            }
             onChange={(selected) => {
               setFiltersState({
                 ...filtersState,
@@ -292,6 +320,7 @@ const FilterFlyout = ({
               components.RadioButtonGroup.onChange?.(selected);
             }}
           >
+            <RadioButton id="any" labelText="Any" value="Any" />
             {components.RadioButton.map((radio) => (
               <RadioButton
                 key={radio.id ?? radio.labelText ?? radio.value}
@@ -305,7 +334,12 @@ const FilterFlyout = ({
       return (
         <Dropdown
           {...components.Dropdown}
-          selectedItem={filtersState[column].value}
+          selectedItem={
+            filtersState[column].value === ''
+              ? 'Any'
+              : filtersState[column].value
+          }
+          items={['Any', ...components.Dropdown.items]}
           onChange={({ selectedItem }) => {
             setFiltersState({
               ...filtersState,
@@ -340,6 +374,7 @@ const FilterFlyout = ({
               label: primaryActionLabel,
               onClick: apply,
               isExpressive: false,
+              disabled: shouldDisableButtons,
             },
             {
               key: 3,
@@ -347,6 +382,7 @@ const FilterFlyout = ({
               label: secondaryActionLabel,
               onClick: cancel,
               isExpressive: false,
+              disabled: shouldDisableButtons,
             },
           ]}
           size="md"

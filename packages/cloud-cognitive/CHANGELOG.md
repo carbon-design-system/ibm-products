@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.45.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.44.1...@carbon/ibm-products@1.45.0) (2023-02-28)
+
+
+### Bug Fixes
+
+* datagrid design review row height settings ([#2625](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2625)) ([b3b4384](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b3b4384bd9f44f0c1d3b22c1c64909a7c7878e3b))
+* **DataGrid:** any option in filter panel flyout ([#2687](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2687)) ([2b01061](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2b0106113cbed4e70ead3744abb37b1e0adf38cd))
+* **DataGrid:** restore toolbar responsiveness ([#2692](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2692)) ([12a0538](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/12a0538fb3a85baadae81c8fa127e64ab8b1a753))
+
+
+### Features
+
+* **Datagrid:** Custom hook to handle `ActionSet` disabled state for `FilterPanel` & `FilterFlyout` ([#2676](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2676)) ([461d1ea](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/461d1ea675d6c3eed0cd55f89f12d2eaf9cc501a))
+
+
+
+
+
+## [1.44.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.44.0...@carbon/ibm-products@1.44.1) (2023-02-24)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
 # [1.44.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.43.0...@carbon/ibm-products@1.44.0) (2023-02-21)
 
 

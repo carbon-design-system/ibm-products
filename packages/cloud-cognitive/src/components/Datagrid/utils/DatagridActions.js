@@ -163,7 +163,6 @@ export const DatagridActions = (datagridState) => {
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
         {renderFilterFlyout()}
-        <RowSizeDropdown {...rowSizeDropdownProps} />
         <div style={style}>
           <Button
             kind="ghost"
@@ -189,6 +188,7 @@ export const DatagridActions = (datagridState) => {
             <CustomizeColumnsButton />
           </div>
         )}
+        <RowSizeDropdown {...rowSizeDropdownProps} />
         <ButtonMenu
           label="Primary button"
           size="lg"
@@ -211,7 +211,6 @@ export const DatagridActions = (datagridState) => {
       </TableToolbarContent>
     ) : (
       <TableToolbarContent>
-        {renderFilterPanelButton()}
         <TableToolbarSearch
           size="xl"
           id="columnSearch"
@@ -219,47 +218,6 @@ export const DatagridActions = (datagridState) => {
           placeHolderText={searchForAColumn}
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
-        {renderFilterFlyout()}
-        <RowSizeDropdown {...rowSizeDropdownProps} />
-        <div style={style}>
-          <Button
-            kind="ghost"
-            hasIconOnly
-            tooltipPosition="bottom"
-            renderIcon={Restart16}
-            iconDescription={'Refresh'}
-            onClick={refreshColumns}
-          />
-        </div>
-        <div style={style}>
-          <Button
-            kind="ghost"
-            hasIconOnly
-            tooltipPosition="bottom"
-            renderIcon={Download16}
-            iconDescription={'Download CSV'}
-            onClick={downloadCsv}
-          />
-        </div>
-        {CustomizeColumnsButton && (
-          <div style={style}>
-            <CustomizeColumnsButton />
-          </div>
-        )}
-        <ButtonMenu label="Primary button" renderIcon={Add16}>
-          <ButtonMenuItem
-            itemText="Option 1"
-            onClick={action(`Click on ButtonMenu Option 1`)}
-          />
-          <ButtonMenuItem
-            itemText="Option 2"
-            onClick={action(`Click on ButtonMenu Option 2`)}
-          />
-          <ButtonMenuItem
-            itemText="Option 3"
-            onClick={action(`Click on ButtonMenu Option 3`)}
-          />
-        </ButtonMenu>
         <OverflowMenu
           ariaLabel="Tools"
           size="lg"

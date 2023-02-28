@@ -111,25 +111,26 @@ $block-class: #{$pkg-prefix}--datagrid;
 
 .#{$block-class} .expanded-content {
   display: flex;
+}
 
-  .expanded-content__child:not(:last-child) {
-    margin-right: 2rem;
-  }
+.expanded-content__title {
+  padding-bottom: $spacing-05;
+}
 
-  .expanded-content__row {
-    display: flex;
+.expanded-content__row {
+  display: flex;
+}
 
-    span {
-      flex: 0 1 50%;
-    }
+.expanded-content__row span {
+  flex: 0 1 50%;
+}
 
-    span:first-child:not(:last-child) {
-      margin-right: 1rem;
-      color: $text-secondary;
-    }
-  }
+.expanded-content__row span:first-child:not(:last-child) {
+  margin-right: $spacing-05;
+  color: $text-secondary;
+}
 
-  .expanded-content__title {
-    padding-bottom: 1rem;
-  }
+.expanded-content__child:not(:last-child) {
+  flex: 0 1 rem(450);
+  margin-right: $spacing-07;
 }

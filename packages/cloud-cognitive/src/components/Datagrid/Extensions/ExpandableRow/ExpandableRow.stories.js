@@ -162,7 +162,6 @@ const ExpandedRows = ({ ...args }) => {
       <div className='expanded-content__child'>
         <h5 className='expanded-content__title'>Provision status</h5>
         <div className='expanded-content__row'><span>Case #0001 created by RJ Smithson on 02/02/2023 9:30</span></div>
-       
       </div>
     </div>;
   };

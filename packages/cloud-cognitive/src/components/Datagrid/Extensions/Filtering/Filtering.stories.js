@@ -7,7 +7,7 @@
  */
 
 import React, { useState } from 'react';
-import { Add16 } from '@carbon/icons-react';
+import { Add } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
@@ -34,33 +34,33 @@ const getBatchActions = () => {
   return [
     {
       label: 'Duplicate',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Add',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Select all',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
       type: 'select_all',
     },
     {
       label: 'Publish to catalog',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Download',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Delete',
-      renderIcon: Add16,
+      renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
       hasDivider: true,
       kind: 'danger',
@@ -69,16 +69,16 @@ const getBatchActions = () => {
 };
 
 const FilteringUsage = ({ defaultGridProps }) => {
-  const { gridDescription, gridTitle, useDenseHeader, filterProps } =
-    defaultGridProps;
+  const {
+    gridDescription,
+    gridTitle,
+    useDenseHeader,
+    filterProps,
+    emptyStateTitle,
+    emptyStateDescription,
+  } = defaultGridProps;
 
   const headers = [
-    {
-      Header: 'Row Index',
-      accessor: (row, i) => i,
-      sticky: 'left',
-      id: 'rowIndex', // id is required when accessor is a function.
-    },
     {
       Header: 'First Name',
       accessor: 'firstName',
@@ -157,6 +157,8 @@ const FilteringUsage = ({ defaultGridProps }) => {
       gridTitle,
       gridDescription,
       useDenseHeader,
+      emptyStateTitle,
+      emptyStateDescription,
     },
     useFiltering
   );

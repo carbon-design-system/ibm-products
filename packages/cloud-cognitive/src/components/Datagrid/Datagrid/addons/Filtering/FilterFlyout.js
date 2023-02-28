@@ -1,11 +1,11 @@
 // @flow
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2022
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2022, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
+
 import { Filter } from '@carbon/react/icons';
 import {
   Button,
@@ -17,12 +17,11 @@ import {
   NumberInput,
   RadioButton,
   RadioButtonGroup,
+  usePrefix,
 } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useCallback, useRef, useState } from 'react';
-import { useEffect } from 'react';
-import { useContext } from 'react';
 import { useClickOutside } from '../../../../../global/js/hooks';
 import { pkg } from '../../../../../settings';
 import { ActionSet } from '../../../../ActionSet';
@@ -32,12 +31,16 @@ import {
   CLEAR_FILTERS,
   DATE,
   DROPDOWN,
+  FLYOUT,
   INSTANT,
   NUMBER,
   RADIO,
 } from './constants';
-import { FilterContext } from './FilterProvider';
-import useInitialStateFromFilters from './hooks/useInitialStateFromFilters';
+import {
+  useInitialStateFromFilters,
+  useSubscribeToEventEmitter,
+  useShouldDisableButtons,
+} from './hooks';
 import { getInitialStateFromFilters } from './utils';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -55,13 +58,14 @@ const FilterFlyout = ({
   onCancel = () => {},
   secondaryActionLabel = 'Cancel',
   setAllFilters,
+  data = [],
 }) => {
-  /** Context state and methods */
-  const { EventEmitter } = useContext(FilterContext);
-
   /** State */
   const [open, setOpen] = useState(false);
-  const [filtersState, setFiltersState] = useInitialStateFromFilters(filters);
+  const [filtersState, setFiltersState] = useInitialStateFromFilters(
+    filters,
+    FLYOUT
+  );
   const [filtersObjectArray, setFiltersObjectArray] = useState([]);
 
   /** Refs */
@@ -70,8 +74,17 @@ const FilterFlyout = ({
   const prevFiltersRef = useRef(JSON.stringify(filtersState));
   const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
 
+  /** State from hooks */
+  const [shouldDisableButtons, setShouldDisableButtons] =
+    useShouldDisableButtons({
+      initialValue: true,
+      filtersState,
+      prevFiltersRef,
+    });
+
   /** Memos */
   const showActionSet = updateMethod === BATCH;
+  const carbonPrefix = usePrefix();
 
   /** Methods */
   const openFlyout = () => {
@@ -86,7 +99,10 @@ const FilterFlyout = ({
   const apply = () => {
     setAllFilters(filtersObjectArray);
     closeFlyout();
+    // From the user
     onApply();
+    // When the user clicks apply, the action set buttons should be disabled again
+    setShouldDisableButtons(true);
 
     // updates the ref so next time the flyout opens we have records of the previous filters
     prevFiltersRef.current = JSON.stringify(filtersState);
@@ -104,7 +120,7 @@ const FilterFlyout = ({
 
   const reset = () => {
     // Get the initial values for the filters
-    const initialFiltersState = getInitialStateFromFilters(filters);
+    const initialFiltersState = getInitialStateFromFilters(filters, FLYOUT);
     const initialFiltersObjectArray = [];
 
     // Set the state to the initial values
@@ -144,6 +160,38 @@ const FilterFlyout = ({
         filtersObjectArrayCopy.push({ id: column, value, type });
       }
 
+      if (type === CHECKBOX) {
+        /**
+        When all checkboxes of a group are all unselected the value still exists in the filtersObjectArray
+        This checks if all the checkboxes are selected = false and removes it from the array
+       */
+        const index = filtersObjectArrayCopy.findIndex(
+          (filter) => filter.id === column
+        );
+
+        // If all the selected state is false remove from array
+        const shouldRemoveFromArray = filtersObjectArrayCopy[index].value.every(
+          (val) => val.selected === false
+        );
+
+        if (shouldRemoveFromArray) {
+          filtersObjectArrayCopy.splice(index, 1);
+        }
+      } else if (type === DROPDOWN || type === RADIO) {
+        if (value === 'Any') {
+          /**
+          Checks to see if the selected value is 'Any', that means the user wants
+          to reset specific filter
+        */
+          const index = filtersObjectArrayCopy.findIndex(
+            (filter) => filter.id === column
+          );
+
+          // Remove it from the filters array
+          filtersObjectArrayCopy.splice(index, 1);
+        }
+      }
+
       setFiltersObjectArray(filtersObjectArrayCopy);
 
       // Automatically apply the filters if the updateMethod is instant
@@ -157,142 +205,162 @@ const FilterFlyout = ({
   /** Effects */
   useClickOutside(filterFlyoutRef, (target) => {
     const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
+    const hasClickedOnDropdown =
+      target.className === `${carbonPrefix}--list-box__menu-item__option`;
 
-    if (!open || hasClickedOnDatePicker) {
+    if (!open || hasClickedOnDatePicker || hasClickedOnDropdown) {
       return;
     }
 
     cancel();
   });
 
-  useEffect(function subscribeToEmitter() {
-    // This event is emitted from the DatagridToolbar component when clearFilters is clicked in FilterSummary
-    EventEmitter.subscribe(CLEAR_FILTERS, reset);
-  });
+  useSubscribeToEventEmitter(CLEAR_FILTERS, reset);
 
   /** Render the individual filter component */
-  const renderFilter = useCallback(
-    ({ type, column, props: components }) => {
-      const key = `${type}-${column}-${Math.random()}`;
-      if (type === DATE) {
-        return (
-          <DatePicker
-            key={key}
-            {...components.DatePicker}
-            onChange={(value) => {
-              setFiltersState({ ...filtersState, [column]: value });
-              applyFilters({ column, value, type });
-              components.DatePicker.onChange?.(value);
-            }}
-            value={filtersState[column]}
-            datePickerType="range"
-          >
-            <DatePickerInput
-              placeholder="mm/dd/yyyy"
-              labelText="Start date"
-              {...components.DatePickerInput.start}
-            />
-            <DatePickerInput
-              placeholder="mm/dd/yyyy"
-              labelText="End date"
-              {...components.DatePickerInput.end}
-            />
-          </DatePicker>
-        );
-      } else if (type === NUMBER) {
-        return (
-          <NumberInput
-            key={key}
-            step={1}
-            allowEmpty
-            hideSteppers
-            {...components.NumberInput}
-            onChange={(event) => {
-              setFiltersState({
-                ...filtersState,
-                [column]: event.target.value,
-              });
-              applyFilters({ column, value: event.target.value, type });
-              components.NumberInput.onChange?.(event);
-            }}
-            value={filtersState[column]}
+  const renderFilter = ({ type, column, props: components }) => {
+    if (type === DATE) {
+      return (
+        <DatePicker
+          {...components.DatePicker}
+          onChange={(value) => {
+            setFiltersState({ ...filtersState, [column]: { value, type } });
+            applyFilters({ column, value, type });
+            components.DatePicker.onChange?.(value);
+          }}
+          value={filtersState[column].value}
+          datePickerType="range"
+        >
+          <DatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Start date"
+            {...components.DatePickerInput.start}
           />
-        );
-      } else if (type === CHECKBOX) {
-        return (
-          <FormGroup key={key} {...components.FormGroup}>
-            {filtersState[column].map((option) => (
-              <Checkbox
-                key={option.labelText}
-                {...option}
-                onChange={(_, { checked }) => {
-                  const checkboxCopy = filtersState[column];
-                  const foundCheckbox = checkboxCopy.find(
-                    (checkbox) => checkbox.value === option.value
-                  );
-                  foundCheckbox.selected = checked;
-                  setFiltersState({ ...filtersState, [column]: checkboxCopy });
-                  applyFilters({
-                    column,
-                    value: [...filtersState[column]],
+          <DatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="End date"
+            {...components.DatePickerInput.end}
+          />
+        </DatePicker>
+      );
+    } else if (type === NUMBER) {
+      return (
+        <NumberInput
+          step={1}
+          allowEmpty
+          hideSteppers
+          {...components.NumberInput}
+          onChange={(event) => {
+            setFiltersState({
+              ...filtersState,
+              [column]: {
+                value: event.target.value,
+                type,
+              },
+            });
+            applyFilters({ column, value: event.target.value, type });
+            components.NumberInput.onChange?.(event);
+          }}
+          value={filtersState[column].value}
+        />
+      );
+    } else if (type === CHECKBOX) {
+      return (
+        <FormGroup {...components.FormGroup}>
+          {filtersState[column].value.map((option) => (
+            <Checkbox
+              key={option.labelText}
+              {...option}
+              onChange={(_, { checked: isSelected }) => {
+                const checkboxCopy = filtersState[column].value;
+                const foundCheckbox = checkboxCopy.find(
+                  (checkbox) => checkbox.value === option.value
+                );
+                foundCheckbox.selected = isSelected;
+                setFiltersState({
+                  ...filtersState,
+                  [column]: {
+                    value: checkboxCopy,
                     type,
-                  });
-                  option.onChange?.(checked);
-                }}
-                checked={option.selected}
-              />
-            ))}
-          </FormGroup>
-        );
-      } else if (type === RADIO) {
-        return (
-          <FormGroup key={key} {...components.FormGroup}>
-            <RadioButtonGroup
-              {...components.RadioButtonGroup}
-              valueSelected={filtersState[column]}
-              onChange={(selected) => {
-                setFiltersState({ ...filtersState, [column]: selected });
+                  },
+                });
                 applyFilters({
                   column,
-                  value: selected,
+                  value: [...filtersState[column].value],
                   type,
                 });
-                components.RadioButtonGroup.onChange?.(selected);
+                option.onChange?.(isSelected);
               }}
-            >
-              {components.RadioButton.map((radio) => (
-                <RadioButton
-                  key={radio.id ?? radio.labelText ?? radio.value}
-                  {...radio}
-                />
-              ))}
-            </RadioButtonGroup>
-          </FormGroup>
-        );
-      } else if (type === DROPDOWN) {
-        return (
-          <Dropdown
-            key={key}
-            {...components.Dropdown}
-            selectedItem={filtersState[column]}
-            onChange={({ selectedItem }) => {
+              checked={option.selected}
+            />
+          ))}
+        </FormGroup>
+      );
+    } else if (type === RADIO) {
+      return (
+        <FormGroup {...components.FormGroup}>
+          <RadioButtonGroup
+            {...components.RadioButtonGroup}
+            valueSelected={
+              filtersState[column]?.value === ''
+                ? 'Any'
+                : filtersState[column]?.value
+            }
+            onChange={(selected) => {
               setFiltersState({
                 ...filtersState,
-                [column]: selectedItem,
+                [column]: {
+                  value: selected,
+                  type,
+                },
               });
               applyFilters({
                 column,
-                value: selectedItem,
+                value: selected,
                 type,
               });
-              components.Dropdown.onChange?.(selectedItem);
+              components.RadioButtonGroup.onChange?.(selected);
             }}
-          />
-        );
-      }
-    },
-    [filtersState, applyFilters, setFiltersState]
-  );
+          >
+            <RadioButton id="any" labelText="Any" value="Any" />
+            {components.RadioButton.map((radio) => (
+              <RadioButton
+                key={radio.id ?? radio.labelText ?? radio.value}
+                {...radio}
+              />
+            ))}
+          </RadioButtonGroup>
+        </FormGroup>
+      );
+    } else if (type === DROPDOWN) {
+      return (
+        <Dropdown
+          {...components.Dropdown}
+          selectedItem={
+            filtersState[column]?.value === ''
+              ? 'Any'
+              : filtersState[column]?.value
+          }
+          items={['Any', ...components.Dropdown.items]}
+          onChange={({ selectedItem }) => {
+            setFiltersState({
+              ...filtersState,
+              [column]: {
+                value: selectedItem,
+                type,
+              },
+            });
+            applyFilters({
+              column,
+              value: selectedItem,
+              type,
+            });
+            components.Dropdown.onChange?.(selectedItem);
+          }}
+        />
+      );
+    }
+  };
 
   /** Renders all filters */
   const renderFilters = () => filters.map(renderFilter);
@@ -308,6 +376,7 @@ const FilterFlyout = ({
               label: primaryActionLabel,
               onClick: apply,
               isExpressive: false,
+              disabled: shouldDisableButtons,
             },
             {
               key: 3,
@@ -315,6 +384,7 @@ const FilterFlyout = ({
               label: secondaryActionLabel,
               onClick: cancel,
               isExpressive: false,
+              disabled: shouldDisableButtons,
             },
           ]}
           size="md"
@@ -336,6 +406,7 @@ const FilterFlyout = ({
         className={cx(`${componentClass}__trigger`, {
           [`${componentClass}__trigger--open`]: open,
         })}
+        disabled={data.length === 0}
       />
       <div
         ref={filterFlyoutRef}
@@ -356,6 +427,11 @@ const FilterFlyout = ({
 };
 
 FilterFlyout.propTypes = {
+  /**
+   * All data rows in the table
+   */
+  data: PropTypes.array.isRequired,
+
   /**
    * Array of filters to render
    */

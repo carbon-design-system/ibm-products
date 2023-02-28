@@ -103,6 +103,7 @@ const sharedDatagridProps = {
   emptyStateSize: 'lg',
   gridTitle: 'Data table title',
   gridDescription: 'Additional information if needed',
+  expandedContentAlign: 'flex-start',
   useDenseHeader: false,
   rowSize: 'lg',
   rowSizes: [
@@ -146,11 +147,56 @@ const sharedDatagridProps = {
 };
 
 const ExpandedRows = ({ ...args }) => {
-  const expansionRenderer = ({ row }) => {
+  const expansionRenderer = ({ row, expandedContentAlign }) => {
     console.log(row);
-    return <div>Content for row index: {row.id}</div>;
+    return (
+      <div
+        className="expanded-content"
+        style={{ justifyContent: `${expandedContentAlign}` }}
+      >
+        <div className="expanded-content__child">
+          <h5 className="expanded-content__title">Details</h5>
+          <div className="expanded-content__row">
+            <span>Date created</span>
+            <span>
+              {new Date(2023, 0, 0, 0, 0, 0, 0).toUTCString().slice(0, -4)}
+            </span>
+          </div>
+          <div className="expanded-content__row">
+            <span>User IP address</span>
+            <span>10.123.11/29</span>
+          </div>
+          <div className="expanded-content__row">
+            <span>User IP address</span>
+            <span>10.123.11/29</span>
+          </div>
+          <div className="expanded-content__row">
+            <span>IBM IP address</span>
+            <span>10.123.20/29</span>
+          </div>
+          <div className="expanded-content__row">
+            <span>BGP ASN</span>
+            <span>63888</span>
+          </div>
+          <div className="expanded-content__row">
+            <span>IBM ASN</span>
+            <span>12733</span>
+          </div>
+          <div className="expanded-content__row">
+            <span>Router</span>
+            <span>ZCV-DRK-TZ03</span>
+          </div>
+        </div>
+        <div className="expanded-content__child">
+          <h5 className="expanded-content__title">Provision status</h5>
+          <div className="expanded-content__row">
+            <span>Case #0001 created by RJ Smithson on 02/02/2023 9:30</span>
+          </div>
+        </div>
+      </div>
+    );
   };
-  const columns = React.useMemo(() => [...defaultHeader], []);
+  const columns = React.useMemo(() => [...defaultHeader.slice(0, 6)], []);
   const [data] = useState(makeData(10));
   const rows = React.useMemo(() => data, [data]);
 
@@ -180,7 +226,7 @@ const BasicTemplateWrapper = ({ ...args }) => {
 const expandableRowControlProps = {
   gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
-  expandedContentHeight: sharedDatagridProps.expandedContentHeight,
+  expandedContentAlign: sharedDatagridProps.expandedContentAlign,
 };
 const expandableRowStoryName = 'With expandable row';
 export const ExpandableRowStory = prepareStory(BasicTemplateWrapper, {
@@ -188,7 +234,7 @@ export const ExpandableRowStory = prepareStory(BasicTemplateWrapper, {
   argTypes: {
     gridTitle: ARG_TYPES.gridTitle,
     gridDescription: ARG_TYPES.gridDescription,
-    expandedContentHeight: ARG_TYPES.expandedContentHeight,
+    expandedContentAlign: ARG_TYPES.expandedContentAlign,
   },
   args: {
     ...expandableRowControlProps,

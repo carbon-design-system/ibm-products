@@ -114,3 +114,29 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   background-color: $field-01;
   border-radius: $spacing-02;
 }
+
+.#{$block-class} .expanded-content {
+  display: flex;
+}
+
+.expanded-content__title {
+  padding-bottom: $spacing-05;
+}
+
+.expanded-content__row {
+  display: flex;
+}
+
+.expanded-content__row span {
+  flex: 0 1 50%;
+}
+
+.expanded-content__row span:first-child:not(:last-child) {
+  margin-right: $spacing-05;
+  color: $text-secondary;
+}
+
+.expanded-content__child:not(:last-child) {
+  flex: 0 1 calc($spacing-05 * 30);
+  margin-right: $spacing-07;
+}

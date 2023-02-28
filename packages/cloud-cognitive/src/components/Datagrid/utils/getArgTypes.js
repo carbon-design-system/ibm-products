@@ -86,4 +86,9 @@ export const ARG_TYPES = {
     description:
       'This is an object for all the props passed into the filter flyout and filter panel',
   },
+  expandedContentAlign: {
+    control: 'select',
+    options: ['flex-start', 'space-between'],
+    description: 'This sets the alignment of content inside expanded row.',
+  },
 };

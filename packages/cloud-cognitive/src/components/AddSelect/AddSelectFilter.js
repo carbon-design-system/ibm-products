@@ -102,7 +102,7 @@ export let AddSelectFilter = ({
             onClick={() => setOpen(!open)}
             iconDescription={iconDescription}
             className={filterBtnClassnames}
-            size="lg"
+            size="md"
             tooltipPosition="left"
           />
         )}

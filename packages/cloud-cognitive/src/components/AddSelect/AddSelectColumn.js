@@ -126,6 +126,7 @@ export let AddSelectColumn = ({
             id={uuidv4()}
             labelText={columnInputPlaceholder}
             size="md"
+            light
           />
           <div className={`${colClass}-sort-filter`}>
             <AddSelectSort
@@ -142,6 +143,7 @@ export let AddSelectColumn = ({
                 className={`${colClass}-overflow`}
                 flipped
                 ariaLabel={filterByLabel}
+                light
               >
                 {filterByOpts.map((opt) => (
                   <div

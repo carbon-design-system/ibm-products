@@ -131,6 +131,6 @@ $block-class: #{$pkg-prefix}--datagrid;
 }
 
 .expanded-content__child:not(:last-child) {
-  flex: 0 1 rem(450);
+  flex: 0 1 calc($spacing-05 * 30);
   margin-right: $spacing-07;
 }

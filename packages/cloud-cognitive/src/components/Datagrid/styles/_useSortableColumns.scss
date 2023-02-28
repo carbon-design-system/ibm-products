@@ -12,8 +12,6 @@
 @use './variables' as *;
 
 .#{$block-class}__sortableColumn {
-  /* stylelint-disable-next-line declaration-no-important */
-  padding: 0 !important;
   .#{c4p-settings.$carbon-prefix}--table-header-label .header-title {
     display: inline-block;
     width: auto;
@@ -60,6 +58,11 @@
     svg {
     fill: $text-primary;
     visibility: hidden;
+  }
+
+  .#{c4p-settings.$carbon-prefix}--table-sort.#{$block-class}--table-sort {
+    width: calc(100% + #{$spacing-07}); // offset due to inner label
+    margin: 0 calc(-1 * #{$spacing-05}); // fill width of parent table column header
   }
 }
 

@@ -57,6 +57,7 @@
     .#{c4p-settings.$carbon-prefix}--table-sort
     svg {
     fill: $text-primary;
+    opacity: 0;
     visibility: hidden;
   }
 
@@ -67,8 +68,10 @@
 }
 
 .#{$block-class}__sortableColumn:hover,
+.#{$block-class}__sortableColumn:focus-within,
 .#{$block-class}__sortableColumn.#{$block-class}__isSorted {
   .#{c4p-settings.$carbon-prefix}--table-header-label svg {
+    opacity: 1;
     visibility: visible;
   }
 }

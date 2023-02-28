@@ -1,13 +1,17 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2020
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2020, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
+
 import React from 'react';
+import cx from 'classnames';
+import { pkg, carbon } from '../../settings';
 import { Button } from '@carbon/react';
 import { ArrowUp, ArrowDown, ArrowsVertical } from '@carbon/react/icons';
+
+const blockClass = `${pkg.prefix}--datagrid`;
 
 const ordering = {
   ASC: 'ASC',
@@ -48,11 +52,24 @@ const useSortableColumns = (hooks) => {
             onClick={() => onSortClick(headerProp.column)}
             kind="ghost"
             renderIcon={(props) => icon(headerProp.column, props)}
+            className={cx(
+              `${carbon.prefix}--table-sort ${blockClass}--table-sort`,
+              {
+                [`${blockClass}--table-sort--desc`]:
+                  headerProp.column.isSortedDesc,
+                [`${blockClass}--table-sort--asc`]:
+                  headerProp.column.isSortedDesc === false,
+              }
+            )}
           >
             {column.Header}
           </Button>
         );
-      return { ...column, Header };
+      return {
+        ...column,
+        Header,
+        minWidth: column.disableSortBy === true ? 0 : 90,
+      };
     });
     return [...sortableColumns];
   };

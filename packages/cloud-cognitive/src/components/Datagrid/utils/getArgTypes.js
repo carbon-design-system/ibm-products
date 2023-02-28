@@ -90,7 +90,6 @@ export const ARG_TYPES = {
   expandedContentAlign: {
     control: 'select',
     options: ['flex-start', 'space-between'],
-    description:
-      'This sets the alignment of content inside expanded row.',
+    description: 'This sets the alignment of content inside expanded row.',
   },
 };

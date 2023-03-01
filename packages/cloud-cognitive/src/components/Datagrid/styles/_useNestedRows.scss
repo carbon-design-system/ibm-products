@@ -55,7 +55,7 @@
 }
 
 .#{$carbon-prefix}--data-table td.#{$block-class}__expandable-row-cell {
-  padding-left: 0;
+  padding-left: $spacing-03;
 }
 
 .#{$block-class}__carbon-row-expanded {

@@ -445,7 +445,9 @@
   }
 
   .#{$block-class}__table-toolbar {
+    display: flex;
     flex: 1 0 auto;
+    align-items: flex-end;
   }
 
   .#{c4p-settings.$carbon-prefix}--table-toolbar {
@@ -454,10 +456,6 @@
 
   .#{c4p-settings.$carbon-prefix}__table-container {
     flex: 1 1 100%;
-  }
-
-  .#{c4p-settings.$carbon-prefix}--table-toolbar {
-    padding-top: $spacing-07;
   }
 
   .#{$block-class}__toolbar-divider {

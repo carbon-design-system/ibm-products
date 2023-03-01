@@ -448,6 +448,8 @@
 
   .#{$block-class}__table-toolbar {
     flex: 1 0 auto;
+    display: flex;
+    align-items: flex-end;
   }
   .#{$carbon-prefix}--table-toolbar {
     background: transparent;
@@ -455,10 +457,6 @@
 
   .#{$carbon-prefix}__table-container {
     flex: 1 1 100%;
-  }
-
-  .#{$carbon-prefix}--table-toolbar {
-    padding-top: $spacing-07;
   }
 
   .#{$block-class}__toolbar-divider {

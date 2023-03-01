@@ -91,7 +91,7 @@
     "prettier-config-carbon": "^0.8.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "rimraf": "^4",
+    "rimraf": "~3 || > 4.1",
     "stylelint": "^15.1.0",
     "stylelint-config-ibm-products": "*",
     "webpack": "^5.75.0"

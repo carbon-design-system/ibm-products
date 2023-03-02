@@ -28,7 +28,6 @@ import {
   useSubscribeToEventEmitter,
   useShouldDisableButtons,
 } from './hooks';
-import isEqual from 'lodash/isEqual';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-panel`;

@@ -201,7 +201,7 @@ const useFilters = ({
               <Checkbox
                 key={option.labelText}
                 {...option}
-                onChange={(isSelected) => {
+                onChange={(_, { checked: isSelected }) => {
                   const checkboxCopy = filtersState[column].value;
                   const foundCheckbox = checkboxCopy.find(
                     (checkbox) => checkbox.value === option.value

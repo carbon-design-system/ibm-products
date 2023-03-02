@@ -1,11 +1,11 @@
 // @flow
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2023
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2022, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
+
 import { Filter } from '@carbon/react/icons';
 import { Button, usePrefix } from '@carbon/react';
 import cx from 'classnames';
@@ -15,7 +15,11 @@ import { useClickOutside } from '../../../../../global/js/hooks';
 import { pkg } from '../../../../../settings';
 import { ActionSet } from '../../../../ActionSet';
 import { BATCH, CLEAR_FILTERS, FLYOUT, INSTANT } from './constants';
-import { useSubscribeToEventEmitter, useFilters } from './hooks';
+import {
+  useSubscribeToEventEmitter,
+  useFilters,
+  useShouldDisableButtons,
+} from './hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-flyout`;
@@ -55,6 +59,14 @@ const FilterFlyout = ({
   /** Refs */
   const filterFlyoutRef = useRef(null);
 
+  /** State from hooks */
+  const [shouldDisableButtons, setShouldDisableButtons] =
+    useShouldDisableButtons({
+      initialValue: true,
+      filtersState,
+      prevFiltersRef,
+    });
+
   /** Memos */
   const showActionSet = updateMethod === BATCH;
   const carbonPrefix = usePrefix();
@@ -74,6 +86,8 @@ const FilterFlyout = ({
     closeFlyout();
     // From the user
     onApply();
+    // When the user clicks apply, the action set buttons should be disabled again
+    setShouldDisableButtons(true);
 
     // updates the ref so next time the flyout opens we have records of the previous filters
     prevFiltersRef.current = JSON.stringify(filtersState);
@@ -118,6 +132,7 @@ const FilterFlyout = ({
               label: primaryActionLabel,
               onClick: apply,
               isExpressive: false,
+              disabled: shouldDisableButtons,
             },
             {
               key: 3,
@@ -125,6 +140,7 @@ const FilterFlyout = ({
               label: secondaryActionLabel,
               onClick: cancel,
               isExpressive: false,
+              disabled: shouldDisableButtons,
             },
           ]}
           size="md"

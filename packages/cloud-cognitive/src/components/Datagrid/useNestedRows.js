@@ -37,7 +37,6 @@ const useNestedRows = (hooks) => {
             ? marginLeft * 2
             : 0
         }px`,
-        maxWidth: `calc(100% - ${marginLeft * row.depth}px)`,
       },
     },
   ];

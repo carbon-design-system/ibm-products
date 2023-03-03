@@ -137,6 +137,24 @@ const columns = [
   },
 ];
 ```
+To hide a column from customization, add a `hideFromCustomizeColumn` property to the
+column.
+
+```jsx
+const columns = [
+  {
+    Header: 'First Name',
+    accessor: 'firstName',
+    hideFromCustomizeColumn: true,
+    width: 120,
+  },
+  {
+    Header: 'Last Name',
+    accessor: 'lastName',
+    width: 180,
+  },
+];
+```
 
 ## Empty
 

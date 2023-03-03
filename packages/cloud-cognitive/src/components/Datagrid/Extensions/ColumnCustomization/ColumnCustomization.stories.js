@@ -55,8 +55,9 @@ const defaultHeader = [
     accessor: 'firstName',
   },
   {
-    Header: 'Last Name',
+    Header: '',
     accessor: 'lastName',
+    hideFromCustomizeColumn: true
   },
   {
     Header: 'Age',

@@ -118,8 +118,8 @@ const Columns = ({
           {columns
             .filter(
               (colDef) =>
-                filterString.length === 0 ||
-                colDef.Header.props.title.toLowerCase().includes(filterString)
+              (filterString.length === 0 ||
+                colDef.Header.props.title.toLowerCase().includes(filterString)) && !colDef.hideFromCustomizeColumn
             )
             .map((colDef, i) => {
               const searchString = new RegExp('(' + filterString + ')');

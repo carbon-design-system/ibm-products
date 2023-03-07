@@ -409,6 +409,10 @@ $row-heights: (
   outline-color: $support-error;
 }
 
+.#{variables.$block-class} .#{c4p-settings.$carbon-prefix}--text-input:focus {
+  background: $layer-active-01;
+}
+
 .#{variables.$block-class}
   .#{variables.$block-class}__inline-edit--outer-cell-button--invalid
   .#{c4p-settings.$carbon-prefix}--number

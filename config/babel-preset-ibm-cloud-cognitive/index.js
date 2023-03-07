@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@ module.exports = () => ({
         ...(BABEL_ENV && { modules: BABEL_ENV === 'cjs' && 'commonjs' }),
         targets: {
           browsers: ['extends browserslist-config-carbon'],
-          node: '12',
+          node: '16',
         },
       },
     ],

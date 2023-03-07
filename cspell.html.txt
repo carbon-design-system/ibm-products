@@ -4,6 +4,7 @@ describedby
 divs
 easings
 evenodd
+figcaption
 hellip
 labelledby
 listitem

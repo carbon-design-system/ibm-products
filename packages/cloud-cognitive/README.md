@@ -41,6 +41,22 @@ Then you can import the component styles in your `index.js`.
 import '@carbon/ibm-products/css/index.min.css';
 ```
 
+### Webpack 4
+
+Our package requires support for ES modules (see
+[#2378](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2378#issuecomment-1319276192)).
+In Webpack 5, these are supported by default. In Webpack 4, you will need to add
+the [following rule](https://stackoverflow.com/a/72149467) to your config.
+
+```js
+rules: [
+  {
+    test: /\.mjs$/,
+    include: /node_modules/,
+    type: 'javascript/auto',
+  },
+],
+
 ### Peer dependencies
 
 `@carbon/ibm-products` is built on top of Carbon components and has a number of
@@ -127,21 +143,6 @@ To build all the packages, run the following command.
 
 ```shell
 yarn build
-```
-
-Our package does require support for ES modules (see
-[#2378](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2378#issuecomment-1319276192)).
-In Webpack 5, these are supported by default. In Webpack 4, you will need to add
-the [following rule](https://stackoverflow.com/a/72149467) to your config.
-
-```js
-rules: [
-  {
-    test: /\.mjs$/,
-    include: /node_modules/,
-    type: 'javascript/auto',
-  },
-],
 ```
 
 ## Browser support

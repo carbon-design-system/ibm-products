@@ -1,7 +1,7 @@
 {
   "name": "babel-preset-ibm-cloud-cognitive",
   "private": true,
-  "version": "0.14.26",
+  "version": "0.14.27",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {

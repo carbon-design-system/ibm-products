@@ -56,6 +56,7 @@ rules: [
     type: 'javascript/auto',
   },
 ],
+```
 
 ### Peer dependencies
 

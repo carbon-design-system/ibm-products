@@ -129,6 +129,7 @@ const addTableBodyProps = (tableBodyRef, props) => [
 
 const changeProps = (elementName, headerCellRef, windowSize, props, data) => {
   const column = data.column || data.cell.column;
+  const stickyLeftColumns = data?.instance?.visibleColumns.filter((col) => col.sticky === 'left');
   if (column.sticky === 'right') {
     return [
       props,
@@ -152,12 +153,7 @@ const changeProps = (elementName, headerCellRef, windowSize, props, data) => {
           [`${leftStickyStyleClassPrefix}`]: true && windowSize > 671,
           [`${leftStickyStyleClassPrefix}-${elementName}`]:
             true && windowSize > 671,
-          [`${leftStickyStyleClassPrefix}--sticky-border`]:
-            column?.selectColumn &&
-            column?.sticky === 'left' &&
-            windowSize > 671,
-          [`${leftStickyStyleClassPrefix}--sticky-border`]:
-            data?.instance?.columns[1]?.id === column.id && windowSize > 671,
+          [`${leftStickyStyleClassPrefix}--sticky-border`]: stickyLeftColumns[(stickyLeftColumns.length - 1)].id === column.id && windowSize > 671,
         }),
         ...(headerCellRef && {
           ref: headerCellRef,

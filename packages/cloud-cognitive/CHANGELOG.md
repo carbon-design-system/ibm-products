@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.46.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.45.0...@carbon/ibm-products@1.46.0) (2023-03-07)
+
+
+### Bug Fixes
+
+* **DataGrid:** sort column focus ([#2673](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2673)) ([92ef4ff](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/92ef4ffc5152846c0618622814b55290d3aa7933))
+
+
+### Features
+
+* **Datagrid:** Extracts Filtering logic into `useFilters` hook ([#2690](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2690)) ([7dd1b49](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7dd1b49c487517d57f467817f2ddafcb38d2a7f1))
+
+
+
+
+
 # [1.45.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.44.1...@carbon/ibm-products@1.45.0) (2023-02-28)
 
 

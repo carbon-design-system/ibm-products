@@ -78,7 +78,7 @@ CardFooter.propTypes = {
   onPrimaryButtonClick: PropTypes.func,
   onSecondaryButtonClick: PropTypes.func,
   primaryButtonHref: PropTypes.string,
-  primaryButtonIcon: PropTypes.string,
+  primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   primaryButtonKind: PropTypes.oneOf(['primary', 'ghost']),
   primaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   primaryButtonText: PropTypes.string,

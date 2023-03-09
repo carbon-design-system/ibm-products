@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.20](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.19...@carbon/ibm-products@2.0.0-rc.20) (2023-03-07)
+
+
+### Bug Fixes
+
+* **DataGrid:** sort column focus v11 ([#2674](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2674)) ([161190a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/161190a01ef717dcfe0b3a9c20a639c1509434d2))
+
+
+
+
+
 # [2.0.0-rc.19](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.18...@carbon/ibm-products@2.0.0-rc.19) (2023-02-28)
 
 

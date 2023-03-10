@@ -1,7 +1,7 @@
 /*
  * Licensed Materials - Property of IBM
  * 5724-Q36
- * (c) Copyright IBM Corp. 2020
+ * (c) Copyright IBM Corp. 2023
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
@@ -56,7 +56,7 @@ const SelectAll = (datagridState) => {
         `${blockClass}__head-select-all`,
         `${blockClass}__checkbox-cell`,
         {
-          [`${blockClass}__left-sticky-column`]:
+          [`${blockClass}__checkbox-cell-sticky-left`]:
             isFirstColumnStickyLeft && windowSize > 671,
         }
       )}

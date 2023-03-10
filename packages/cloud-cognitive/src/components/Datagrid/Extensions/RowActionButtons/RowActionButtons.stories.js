@@ -39,10 +39,9 @@ export default {
 
 const defaultHeader = [
   {
-    Header: '',
+    Header: 'Row Index',
     accessor: (row, i) => i,
     id: 'rowIndex', // id is required when accessor is a function.
-    width: 48,
   },
   {
     Header: 'First Name',

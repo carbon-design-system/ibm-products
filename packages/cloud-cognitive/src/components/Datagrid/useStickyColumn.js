@@ -148,16 +148,11 @@ const changeProps = (elementName, headerCellRef, windowSize, props, data) => {
     return [
       props,
       {
-        className: cx(`${blockClass}__cell`, {
-          [`${leftStickyStyleClassPrefix}`]: true && windowSize > 671,
+        className: cx({
           [`${leftStickyStyleClassPrefix}-${elementName}`]:
             true && windowSize > 671,
-          [`${leftStickyStyleClassPrefix}--sticky-border`]:
-            column?.selectColumn &&
-            column?.sticky === 'left' &&
-            windowSize > 671,
-          [`${leftStickyStyleClassPrefix}--sticky-border`]:
-            data?.instance?.columns[1]?.id === column.id && windowSize > 671,
+          [`${leftStickyStyleClassPrefix}-${elementName}--with-extra-select-column`]:
+            data?.instance?.withSelectRows && windowSize > 671,
         }),
         ...(headerCellRef && {
           ref: headerCellRef,

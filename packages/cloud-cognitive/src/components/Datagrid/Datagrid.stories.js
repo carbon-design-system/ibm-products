@@ -49,19 +49,14 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const defaultHeader = [
   {
-    Header: '',
+    Header: 'Row Index',
     accessor: (row, i) => i,
     sticky: 'left',
     id: 'rowIndex', // id is required when accessor is a function.
-    width: 48,
-    centerAlignedColumn: true,
-    disableResizing: true,
-    disableSortBy: true,
   },
   {
     Header: 'First Name',
     accessor: 'firstName',
-    sticky: 'left',
   },
   {
     Header: 'Last Name',

@@ -480,29 +480,6 @@ const RowSizeDropdown = ({ ...rest }) => {
   );
 };
 
-const LeftPanel = ({ ...rest }) => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid({
-    columns,
-    data,
-    leftPanel: {
-      isOpen: true, // this toggling will happen from datagridActions.
-      panelContent: (
-        <div>Panel content will go here along with any button interactions</div>
-      ),
-    },
-    DatagridActions,
-    DatagridBatchActions,
-  });
-
-  return (
-    <Wrapper>
-      <Datagrid datagridState={{ ...datagridState }} {...rest} />
-    </Wrapper>
-  );
-};
-
 const CustomizingColumns = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
@@ -925,7 +902,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByClassName('c4p--datagrid__head-select-all')[0]
+        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
@@ -947,7 +924,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByClassName('c4p--datagrid__head-select-all')[0]
+        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
@@ -1012,7 +989,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByClassName('c4p--datagrid__head-select-all')[0]
+        .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
     );
@@ -1341,19 +1318,19 @@ describe(componentName, () => {
 
     expect(
       unClickableRow
-        .getElementsByTagName('td')[1]
+        .getElementsByTagName('td')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
     ).toHaveAttribute('disabled');
 
     clickableRow
-      .getElementsByTagName('td')[1]
+      .getElementsByTagName('td')[0]
       .getElementsByTagName('div')[0]
       .getElementsByTagName('input')[0];
 
     fireEvent(
       clickableRow
-        .getElementsByTagName('td')[1]
+        .getElementsByTagName('td')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0],
       new MouseEvent('click')
@@ -1468,7 +1445,7 @@ describe(componentName, () => {
       .getElementsByTagName('tbody')[0]
       .getElementsByTagName('tr')[rowNumber];
     var button = row
-      .getElementsByTagName('td')[1]
+      .getElementsByTagName('td')[0]
       .getElementsByTagName('div')[0]
       .getElementsByTagName('input')[0];
 
@@ -1488,87 +1465,6 @@ describe(componentName, () => {
     hideSelectAll(5);
 
     hideSelectAll(8);
-  });
-
-  it('Left Panel', () => {
-    render(<LeftPanel data-testid={dataTestId}></LeftPanel>);
-
-    const alertMock = jest.spyOn(window, 'alert');
-
-    expect(
-      screen.getByText(
-        'Panel content will go here along with any button interactions'
-      )
-    ).toBeVisible();
-
-    expect(
-      screen.getByText(
-        'Panel content will go here along with any button interactions'
-      ).parentElement.classList[0]
-    ).toEqual('c4p--datagrid__datagridLeftPanel');
-
-    expect(
-      document.getElementsByClassName(`${carbon.prefix}--search-input`)[0]
-    ).toBeDefined();
-
-    // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
-    const leftPanelButton =
-      screen.getByText('Left panel').parentElement.previousSibling;
-    fireEvent.click(leftPanelButton);
-    expect(alertMock).toHaveBeenCalledTimes(1);
-
-    const rowHeightButton = screen.getByText((content, element) => {
-      return (
-        element.tagName.toLowerCase() === 'span' &&
-        content.startsWith('Row height')
-      );
-    }).parentElement.previousSibling;
-    fireEvent.click(rowHeightButton);
-
-    const rowSizeDropDown = [
-      'Extra large',
-      'Large (default)',
-      'Medium',
-      'Small',
-      'Extra small',
-    ];
-    const rowSizeOptionsCount = document
-      .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
-      .getElementsByTagName('div')[0]
-      .getElementsByTagName('fieldset')[0]
-      .getElementsByTagName('div').length;
-
-    for (var k = 0; k < rowSizeOptionsCount; k++) {
-      expect(
-        document
-          .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
-          .getElementsByTagName('div')[0]
-          .getElementsByTagName('fieldset')[0]
-          .getElementsByTagName('div')
-          .item(k)
-          .getElementsByTagName('label')[0]
-          .getElementsByTagName('span')[1].textContent
-      ).toEqual(rowSizeDropDown[k]);
-    }
-
-    fireEvent.click(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('button')[0]
-    );
-    expect(alertMock).toHaveBeenCalledTimes(2);
-
-    // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
-    const refreshButton =
-      screen.getByText('Refresh').parentElement.previousSibling;
-    fireEvent.click(refreshButton);
-    expect(alertMock).toHaveBeenCalledTimes(3);
-
-    const downloadButton =
-      screen.getByText('Download CSV').parentElement.previousSibling;
-    fireEvent.click(downloadButton);
-    expect(alertMock).toHaveBeenCalledTimes(4);
   });
 
   it('Nested Rows', () => {
@@ -1672,7 +1568,7 @@ describe(componentName, () => {
           .getElementsByTagName('tbody')[0]
           .getElementsByTagName('tr')
           .item(currentRowNumber)
-          .getElementsByTagName('td')[1]
+          .getElementsByTagName('td')[0]
           .getElementsByTagName('div')[0]
           .getElementsByTagName('input')[0]
       );
@@ -1708,7 +1604,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[1]
+        .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
     );
@@ -1732,7 +1628,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[1]
+        .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
     );
@@ -1810,7 +1706,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[1]
+        .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('input')[0]
     );
@@ -1829,7 +1725,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByTagName('th')[1]
+        .getElementsByTagName('th')[0]
         .getElementsByTagName('button')[0]
     );
 
@@ -2000,7 +1896,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByClassName('c4p--datagrid__head-select-all')[0]
+        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0]
@@ -2023,7 +1919,7 @@ describe(componentName, () => {
         .getByRole('table')
         .getElementsByTagName('thead')[0]
         .getElementsByTagName('tr')[0]
-        .getElementsByClassName('c4p--datagrid__head-select-all')[0]
+        .getElementsByTagName('div')[0]
         .getElementsByTagName('th')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0]
@@ -2036,7 +1932,7 @@ describe(componentName, () => {
     //Selects only one row (in this case, the first one).
     fireEvent.click(
       selectIndividualRow
-        .getElementsByTagName('td')[1]
+        .getElementsByTagName('td')[0]
         .getElementsByTagName('div')[0]
         .getElementsByTagName('label')[0]
     );
@@ -2108,7 +2004,7 @@ describe(componentName, () => {
       .getByRole('table')
       .getElementsByTagName('thead')[0]
       .getElementsByTagName('tr')[0]
-      .getElementsByClassName('c4p--datagrid__head-select-all')[0]
+      .getElementsByTagName('div')[0]
       .getElementsByTagName('th')[0]
       .getElementsByTagName('div')[0]
       .getElementsByTagName('input')[0];
@@ -2126,7 +2022,7 @@ describe(componentName, () => {
     for (var j = 0; j < topAlignmentRows.length; j++) {
       fireEvent.click(
         topAlignmentRows[j]
-          .getElementsByTagName('td')[1]
+          .getElementsByTagName('td')[0]
           .getElementsByTagName('div')[0]
           .getElementsByTagName('input')[0]
       );

@@ -23,11 +23,7 @@ export default {
   parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),
-    portalTargetCustomDomNode: {
-      control: { type: 'boolean' },
-      description:
-        'Set portalTarget prop to specify dom node, defaults to document.body.',
-    },
+    portalTarget: { control: { disable: true } },
   },
 };
 
@@ -50,16 +46,12 @@ const dummyContent = (
 );
 
 // Template.
-const Template = ({ portalTargetCustomDomNode, ...args }) => {
+const Template = (args) => {
   const ref = useRef();
 
   return (
     <div ref={ref}>
-      <TearsheetShell
-        className={className}
-        {...args}
-        portalTarget={portalTargetCustomDomNode ? ref.current : undefined}
-      >
+      <TearsheetShell className={className} {...args}>
         {dummyContent}
       </TearsheetShell>
     </div>

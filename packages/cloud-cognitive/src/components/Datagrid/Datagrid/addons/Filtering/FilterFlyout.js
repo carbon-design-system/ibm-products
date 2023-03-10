@@ -1,44 +1,25 @@
 // @flow
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2022
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2022, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
+
 import { Filter } from '@carbon/react/icons';
-import {
-  Button,
-  Checkbox,
-  DatePicker,
-  DatePickerInput,
-  Dropdown,
-  FormGroup,
-  NumberInput,
-  RadioButton,
-  RadioButtonGroup,
-} from '@carbon/react';
+import { Button, usePrefix } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useCallback, useRef, useState } from 'react';
-import { useEffect } from 'react';
-import { useContext } from 'react';
+import React, { useRef, useState } from 'react';
 import { useClickOutside } from '../../../../../global/js/hooks';
 import { pkg } from '../../../../../settings';
 import { ActionSet } from '../../../../ActionSet';
+import { BATCH, CLEAR_FILTERS, FLYOUT, INSTANT } from './constants';
 import {
-  BATCH,
-  CHECKBOX,
-  CLEAR_FILTERS,
-  DATE,
-  DROPDOWN,
-  INSTANT,
-  NUMBER,
-  RADIO,
-} from './constants';
-import { FilterContext } from './FilterProvider';
-import useInitialStateFromFilters from './hooks/useInitialStateFromFilters';
-import { getInitialStateFromFilters } from './utils';
+  useSubscribeToEventEmitter,
+  useFilters,
+  useShouldDisableButtons,
+} from './hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-flyout`;
@@ -55,23 +36,40 @@ const FilterFlyout = ({
   onCancel = () => {},
   secondaryActionLabel = 'Cancel',
   setAllFilters,
+  data = [],
 }) => {
-  /** Context state and methods */
-  const { EventEmitter } = useContext(FilterContext);
-
   /** State */
   const [open, setOpen] = useState(false);
-  const [filtersState, setFiltersState] = useInitialStateFromFilters(filters);
-  const [filtersObjectArray, setFiltersObjectArray] = useState([]);
+
+  const {
+    filtersState,
+    prevFiltersObjectArrayRef,
+    prevFiltersRef,
+    revertToPreviousFilters,
+    reset,
+    renderFilter,
+    filtersObjectArray,
+  } = useFilters({
+    updateMethod,
+    filters,
+    setAllFilters,
+    variation: FLYOUT,
+  });
 
   /** Refs */
   const filterFlyoutRef = useRef(null);
-  // When using batch actions we have to store the filters to then apply them later
-  const prevFiltersRef = useRef(JSON.stringify(filtersState));
-  const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
+
+  /** State from hooks */
+  const [shouldDisableButtons, setShouldDisableButtons] =
+    useShouldDisableButtons({
+      initialValue: true,
+      filtersState,
+      prevFiltersRef,
+    });
 
   /** Memos */
   const showActionSet = updateMethod === BATCH;
+  const carbonPrefix = usePrefix();
 
   /** Methods */
   const openFlyout = () => {
@@ -86,7 +84,10 @@ const FilterFlyout = ({
   const apply = () => {
     setAllFilters(filtersObjectArray);
     closeFlyout();
+    // From the user
     onApply();
+    // When the user clicks apply, the action set buttons should be disabled again
+    setShouldDisableButtons(true);
 
     // updates the ref so next time the flyout opens we have records of the previous filters
     prevFiltersRef.current = JSON.stringify(filtersState);
@@ -102,197 +103,20 @@ const FilterFlyout = ({
     closeFlyout();
   };
 
-  const reset = () => {
-    // Get the initial values for the filters
-    const initialFiltersState = getInitialStateFromFilters(filters);
-    const initialFiltersObjectArray = [];
-
-    // Set the state to the initial values
-    setFiltersState(initialFiltersState);
-    setFiltersObjectArray(initialFiltersObjectArray);
-    setAllFilters([]);
-
-    // Update their respective refs so everything is in sync
-    prevFiltersRef.current = JSON.stringify(initialFiltersState);
-    prevFiltersObjectArrayRef.current = JSON.stringify(
-      initialFiltersObjectArray
-    );
-  };
-
-  // If the user decides to cancel or click outside the flyout, it reverts back to the filters that were
-  // there when they opened the flyout
-  const revertToPreviousFilters = () => {
-    setFiltersState(JSON.parse(prevFiltersRef.current));
-    setFiltersObjectArray(JSON.parse(prevFiltersObjectArrayRef.current));
-  };
-
-  const applyFilters = useCallback(
-    ({ column, value, type }) => {
-      // If no end date is selected return because we need the end date to do computations
-      if (type === DATE && !value[1]) {
-        return;
-      }
-
-      const filtersObjectArrayCopy = [...filtersObjectArray];
-      // check if the filter already exists in the array
-      const filter = filtersObjectArrayCopy.find((item) => item.id === column);
-
-      // if filter exists in array then update the filter's new value
-      if (filter) {
-        filter.value = value;
-      } else {
-        filtersObjectArrayCopy.push({ id: column, value, type });
-      }
-
-      setFiltersObjectArray(filtersObjectArrayCopy);
-
-      // Automatically apply the filters if the updateMethod is instant
-      if (updateMethod === INSTANT) {
-        setAllFilters(filtersObjectArrayCopy);
-      }
-    },
-    [setAllFilters, updateMethod, filtersObjectArray]
-  );
-
   /** Effects */
   useClickOutside(filterFlyoutRef, (target) => {
     const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
+    const hasClickedOnDropdown =
+      target.className === `${carbonPrefix}--list-box__menu-item__option`;
 
-    if (!open || hasClickedOnDatePicker) {
+    if (!open || hasClickedOnDatePicker || hasClickedOnDropdown) {
       return;
     }
 
     cancel();
   });
 
-  useEffect(function subscribeToEmitter() {
-    // This event is emitted from the DatagridToolbar component when clearFilters is clicked in FilterSummary
-    EventEmitter.subscribe(CLEAR_FILTERS, reset);
-  });
-
-  /** Render the individual filter component */
-  const renderFilter = useCallback(
-    ({ type, column, props: components }) => {
-      const key = `${type}-${column}-${Math.random()}`;
-      if (type === DATE) {
-        return (
-          <DatePicker
-            key={key}
-            {...components.DatePicker}
-            onChange={(value) => {
-              setFiltersState({ ...filtersState, [column]: value });
-              applyFilters({ column, value, type });
-              components.DatePicker.onChange?.(value);
-            }}
-            value={filtersState[column]}
-            datePickerType="range"
-          >
-            <DatePickerInput
-              placeholder="mm/dd/yyyy"
-              labelText="Start date"
-              {...components.DatePickerInput.start}
-            />
-            <DatePickerInput
-              placeholder="mm/dd/yyyy"
-              labelText="End date"
-              {...components.DatePickerInput.end}
-            />
-          </DatePicker>
-        );
-      } else if (type === NUMBER) {
-        return (
-          <NumberInput
-            key={key}
-            step={1}
-            allowEmpty
-            hideSteppers
-            {...components.NumberInput}
-            onChange={(event) => {
-              setFiltersState({
-                ...filtersState,
-                [column]: event.target.value,
-              });
-              applyFilters({ column, value: event.target.value, type });
-              components.NumberInput.onChange?.(event);
-            }}
-            value={filtersState[column]}
-          />
-        );
-      } else if (type === CHECKBOX) {
-        return (
-          <FormGroup key={key} {...components.FormGroup}>
-            {filtersState[column].map((option) => (
-              <Checkbox
-                key={option.labelText}
-                {...option}
-                onChange={(_, { checked }) => {
-                  const checkboxCopy = filtersState[column];
-                  const foundCheckbox = checkboxCopy.find(
-                    (checkbox) => checkbox.value === option.value
-                  );
-                  foundCheckbox.selected = checked;
-                  setFiltersState({ ...filtersState, [column]: checkboxCopy });
-                  applyFilters({
-                    column,
-                    value: [...filtersState[column]],
-                    type,
-                  });
-                  option.onChange?.(checked);
-                }}
-                checked={option.selected}
-              />
-            ))}
-          </FormGroup>
-        );
-      } else if (type === RADIO) {
-        return (
-          <FormGroup key={key} {...components.FormGroup}>
-            <RadioButtonGroup
-              {...components.RadioButtonGroup}
-              valueSelected={filtersState[column]}
-              onChange={(selected) => {
-                setFiltersState({ ...filtersState, [column]: selected });
-                applyFilters({
-                  column,
-                  value: selected,
-                  type,
-                });
-                components.RadioButtonGroup.onChange?.(selected);
-              }}
-            >
-              {components.RadioButton.map((radio) => (
-                <RadioButton
-                  key={radio.id ?? radio.labelText ?? radio.value}
-                  {...radio}
-                />
-              ))}
-            </RadioButtonGroup>
-          </FormGroup>
-        );
-      } else if (type === DROPDOWN) {
-        return (
-          <Dropdown
-            key={key}
-            {...components.Dropdown}
-            selectedItem={filtersState[column]}
-            onChange={({ selectedItem }) => {
-              setFiltersState({
-                ...filtersState,
-                [column]: selectedItem,
-              });
-              applyFilters({
-                column,
-                value: selectedItem,
-                type,
-              });
-              components.Dropdown.onChange?.(selectedItem);
-            }}
-          />
-        );
-      }
-    },
-    [filtersState, applyFilters, setFiltersState]
-  );
+  useSubscribeToEventEmitter(CLEAR_FILTERS, reset);
 
   /** Renders all filters */
   const renderFilters = () => filters.map(renderFilter);
@@ -308,6 +132,7 @@ const FilterFlyout = ({
               label: primaryActionLabel,
               onClick: apply,
               isExpressive: false,
+              disabled: shouldDisableButtons,
             },
             {
               key: 3,
@@ -315,6 +140,7 @@ const FilterFlyout = ({
               label: secondaryActionLabel,
               onClick: cancel,
               isExpressive: false,
+              disabled: shouldDisableButtons,
             },
           ]}
           size="md"
@@ -336,6 +162,7 @@ const FilterFlyout = ({
         className={cx(`${componentClass}__trigger`, {
           [`${componentClass}__trigger--open`]: open,
         })}
+        disabled={data.length === 0}
       />
       <div
         ref={filterFlyoutRef}
@@ -356,6 +183,11 @@ const FilterFlyout = ({
 };
 
 FilterFlyout.propTypes = {
+  /**
+   * All data rows in the table
+   */
+  data: PropTypes.array.isRequired,
+
   /**
    * Array of filters to render
    */

@@ -65,6 +65,7 @@ export let CreateTearsheet = forwardRef(
       onClose,
       onRequestSubmit,
       open,
+      firstFocusElement,
       submitButtonText,
       title,
       verticalPosition = defaults.verticalPosition,
@@ -103,7 +104,11 @@ export let CreateTearsheet = forwardRef(
           stepData,
           initialStep
         );
+<<<<<<< HEAD
         setCurrentStep(initialStep + numberOfHiddenSteps);
+=======
+        setCurrentStep(Number(initialStep + numberOfHiddenSteps));
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
       }
     }, [stepData, firstIncludedStep, lastIncludedStep, initialStep, open]);
 
@@ -112,6 +117,7 @@ export let CreateTearsheet = forwardRef(
       currentStep,
       blockClass,
       onMount,
+      firstFocusElement,
     });
     useValidCreateStepCount(stepData.length, componentName);
     useResetCreateComponent({
@@ -249,6 +255,11 @@ CreateTearsheet.propTypes = {
    * A description of the flow, displayed in the header area of the tearsheet.
    */
   description: PropTypes.node,
+
+  /**
+   * Specifies elements to focus on first on render.
+   */
+  firstFocusElement: PropTypes.string,
 
   /**
    * Used to set the size of the influencer

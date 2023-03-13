@@ -29,6 +29,7 @@ const value = 'hello; world';
 const requiredProps = { editDescription, cancelDescription, saveDescription };
 
 describe(componentName, () => {
+<<<<<<< HEAD:packages/cloud-cognitive/src/components/InlineEditV1/InlineEditV1.test.js
   let mockWarn;
   beforeEach(() => {
     mockWarn = jest.spyOn(console, 'warn').mockImplementation(() => {});
@@ -39,6 +40,9 @@ describe(componentName, () => {
   });
 
   it('renders a component InlineEdit', () => {
+=======
+  it('renders a component InlineEditV1', () => {
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212:packages/cloud-cognitive/src/components/InlineEdit/InlineEdit.test.js
     const { container } = render(<InlineEditV1 {...requiredProps} />);
     expect(container.firstChild).toHaveClass(blockClass);
   });

@@ -4,7 +4,11 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+<<<<<<< HEAD
 import { Button } from 'carbon-components-react';
+=======
+import { Button } from '@carbon/react';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';

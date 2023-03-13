@@ -8,9 +8,12 @@
 import React from 'react';
 import namor from 'namor';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { StatusIcon } from '../../StatusIcon';
 =======
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 import { inlineEditSelectItems } from './getInlineEditColumns';
 
 const getRandomInteger = (min, max, decimalPlaces) => {
@@ -47,6 +50,7 @@ export const range = (len) => {
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const renderStatusIcon = (statusChance) => {
   const iconProps = {
     size: 'sm',
@@ -65,19 +69,37 @@ const renderStatusIcon = (statusChance) => {
         : 'Normal',
   };
   return <StatusIcon {...iconProps} />;
+=======
+/** This function is only to create a random data point when the person joined */
+const getRandomDateJoined = () => {
+  return randomDate(new Date(2022, 0, 1), new Date());
 };
 
-const renderDocLink = (statusChance) => {
+const getPasswordStrength = () => {
+  const chance = Math.random();
+
+  return chance > 0.66
+    ? 'critical'
+    : chance > 0.33
+    ? 'minor-warning'
+    : 'normal';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
+};
+
+const renderDocLink = () => {
+  const chance = Math.random();
+
   const docLinkObj = {
     href:
-      statusChance > 0.66
+      chance > 0.66
         ? 'http://carbondesignsystem.com/'
-        : statusChance > 0.33
+        : chance > 0.33
         ? 'https://pages.github.ibm.com/cdai-design/pal/'
         : 'http://carbon-for-ibm-products.netlify.app/',
     text:
-      statusChance > 0.66
+      chance > 0.66
         ? 'Carbon Design System'
+<<<<<<< HEAD
         : statusChance > 0.33
 =======
 /** This function is only to create a random data point when the person joined */
@@ -110,6 +132,9 @@ const renderDocLink = () => {
         ? 'Carbon Design System'
         : chance > 0.33
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+        : chance > 0.33
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
         ? 'Carbon for IBM Products PAL'
         : 'Carbon for IBM Products storybook',
   };
@@ -119,11 +144,17 @@ const renderDocLink = () => {
 const newPerson = () => {
   const statusChance = Math.random();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   const roleChance = Math.random();
   const activeChance = Math.random();
 
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+  const roleChance = Math.random();
+  const activeChance = Math.random();
+
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   const initialChartTypeIndex = getRandomInteger(0, 2);
   const activeSinceDate = new Date();
   let yesterdayDate = new Date();
@@ -131,9 +162,13 @@ const newPerson = () => {
   let twoDaysAgoDate = new Date();
   twoDaysAgoDate.setDate(twoDaysAgoDate.getDate() - 2);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   return {
     firstName: namor.generate({ words: 1, numbers: 0 }),
     lastName: namor.generate({ words: 1, numbers: 0 }),
@@ -175,6 +210,7 @@ const newPerson = () => {
     someone19: namor.generate({ words: 1, numbers: 0 }),
     someone20: namor.generate({ words: 1, numbers: 0 }),
 <<<<<<< HEAD
+<<<<<<< HEAD
     status:
       statusChance > 0.66
         ? 'relationship'
@@ -183,6 +219,8 @@ const newPerson = () => {
         : 'single',
 =======
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     chartType:
       initialChartTypeIndex === 0
         ? inlineEditSelectItems[0]
@@ -191,12 +229,17 @@ const newPerson = () => {
         : inlineEditSelectItems[2],
     activeSince:
 <<<<<<< HEAD
+<<<<<<< HEAD
       statusChance > 0.66
+=======
+      activeChance > 0.66
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
         ? activeSinceDate
-        : statusChance > 0.33
+        : activeChance > 0.33
         ? yesterdayDate
-        : twoDaysAgoDate,
+        : '23/05/2020',
     bonus: `$\r${getRandomInteger(100, 500, 2)}`,
+<<<<<<< HEAD
     status_icon: renderStatusIcon(statusChance),
     doc_link: renderDocLink(statusChance),
 =======
@@ -209,6 +252,10 @@ const newPerson = () => {
     passwordStrength: getPasswordStrength(),
     doc_link: renderDocLink(),
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+    passwordStrength: getPasswordStrength(),
+    doc_link: renderDocLink(),
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   };
 };
 

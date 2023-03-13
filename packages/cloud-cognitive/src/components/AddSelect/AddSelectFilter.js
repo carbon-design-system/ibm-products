@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -99,10 +99,14 @@ export let AddSelectFilter = ({
       <div className={`${blockClass}-search`}>
         <Search
 <<<<<<< HEAD
+<<<<<<< HEAD
           id="temp-id"
 =======
           id="add-select-global-search-filter"
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+          id="add-select-global-search-filter"
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
           labelText={inputLabel}
           placeholder={inputPlaceholder}
           value={searchTerm}

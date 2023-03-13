@@ -250,10 +250,15 @@ const DataTableSidePanelContent = (selectedRowValues) => {
         </h5>
         {finalData.map(([label, value], index) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
           const formattedValue =
             value instanceof Date ? value.toString() : value;
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+          const formattedValue =
+            value instanceof Date ? value.toString() : value;
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
           return (
             <div
               key={index}
@@ -263,12 +268,18 @@ const DataTableSidePanelContent = (selectedRowValues) => {
                 {label} :
               </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
               <div className={`${blockClass}__side-panel-value`}>{value}</div>
 =======
               <div className={`${blockClass}__side-panel-value`}>
                 {formattedValue}
               </div>
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+              <div className={`${blockClass}__side-panel-value`}>
+                {formattedValue}
+              </div>
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
             </div>
           );
         })}

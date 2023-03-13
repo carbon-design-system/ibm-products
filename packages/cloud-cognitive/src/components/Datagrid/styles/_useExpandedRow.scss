@@ -7,7 +7,11 @@
 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 @use '../../../global/styles/project-settings';
+=======
+@use '../../../global/styles/project-settings' as c4p-settings;
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use './variables';
@@ -31,7 +35,7 @@
 .#{$block-class} .#{$block-class}__expanded-row-content {
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   position: relative;
-  padding: $spacing-05 $spacing-05 $spacing-06 $spacing-09;
+  padding: $spacing-05 $spacing-05 $spacing-06 $spacing-10;
 }
 
 <<<<<<< HEAD
@@ -61,23 +65,40 @@
   @include shared-pseudo-styles();
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 .#{$block-class}__carbon-row.#{$block-class}__carbon-row-expandable
   .#{$block-class}__cell.#{$block-class}__expandable-row-cell {
+=======
+
+.#{variables.$block-class}__carbon-row.#{variables.$block-class}__carbon-row-expandable
+  .#{variables.$block-class}__cell.#{variables.$block-class}__expandable-row-cell {
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   padding: $spacing-03;
   padding-right: 0;
 }
 
+<<<<<<< HEAD
 .#{$block-class}__row-expander.#{$carbon-prefix}--btn {
+=======
+.#{variables.$block-class}__row-expander.#{c4p-settings.$carbon-prefix}--btn {
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   display: flex;
   width: $spacing-07;
   height: $spacing-07;
   min-height: $spacing-07;
   justify-content: center;
   padding: 0;
+<<<<<<< HEAD
   .#{$block-class}__row-expander--icon {
     fill: $ui-05;
   }
 }
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+  .#{variables.$block-class}__row-expander--icon {
+    fill: $layer-selected-inverse;
+  }
+}
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212

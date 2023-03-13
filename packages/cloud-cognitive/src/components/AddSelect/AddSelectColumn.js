@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -184,7 +184,11 @@ export let AddSelectColumn = ({
             onChange={selectAllHandler}
             labelText={
               <>
+<<<<<<< HEAD
                 <span className={`${blockClass}__tags-label`}>{header}</span>
+=======
+                <span className={`${blockClass}__tag-label`}>{header}</span>
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
                 <Tag type="gray" size="sm">
                   {colItems.length}
                 </Tag>

@@ -1,11 +1,19 @@
 //
+<<<<<<< HEAD
 // Copyright IBM Corp. 2022
+=======
+// Copyright IBM Corp. 2022, 2022
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
+<<<<<<< HEAD
 import { useState } from 'react';
+=======
+import { useState, useEffect } from 'react';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
 const usePath = (itemsLabel = '') => {
   const [path, setPath] = useState([
@@ -14,6 +22,15 @@ const usePath = (itemsLabel = '') => {
       title: itemsLabel,
     },
   ]);
+
+  useEffect(() => {
+    setPath([
+      {
+        id: 'base_of_path',
+        title: itemsLabel,
+      },
+    ]);
+  }, [itemsLabel]);
 
   const handler = (id, title, parentId) => {
     if (path.find((entry) => entry.id === id)) {

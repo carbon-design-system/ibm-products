@@ -281,7 +281,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     // stylelint-disable-next-line carbon/layout-token-use
     top: calc(
       var(--#{$block-class}--title-text-height) +
-        var(--#{$block-class}--label-text-height) + #{$spacing-09}
+        var(--#{$block-class}--label-text-height)
     );
     background-color: $layer-01;
   }
@@ -311,7 +311,6 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
 
   .#{$block-class}__title-container.#{$block-class}__title-container--no-title-animation {
     position: fixed;
-    top: $spacing-09;
     height: calc(
       var(--#{$block-class}--title-text-height) +
         var(--#{$block-class}--label-text-height)
@@ -412,7 +411,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
     // stylelint-disable-next-line carbon/layout-token-use
     top: calc(
       var(--#{$block-class}--title-text-height) +
-        var(--#{$block-class}--subtitle-container-height) + #{$spacing-09}
+        var(--#{$block-class}--subtitle-container-height)
     );
     width: 100%;
     border-bottom: 1px solid $layer-active-01;

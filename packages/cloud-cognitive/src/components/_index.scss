@@ -24,6 +24,7 @@
 @use './EmptyStates';
 @use './ExportModal';
 @use './ExpressiveCard';
+@use './FilterSummary/index';
 @use './HTTPErrors';
 @use './ImportModal';
 @use './ModifiedTabs';
@@ -43,7 +44,8 @@
 @use './UserProfileImage';
 @use './EditSidePanel';
 @use './OptionsTile';
-@use './InlineEdit';
+@use './InlineEditV1';
+@use './InlineEditV2';
 @use './DataSpreadsheet';
 @use './Datagrid';
 @use './EditTearsheet';

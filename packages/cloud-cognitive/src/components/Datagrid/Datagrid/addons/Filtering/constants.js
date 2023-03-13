@@ -8,6 +8,13 @@
 export const BATCH = 'batch';
 export const INSTANT = 'instant';
 
+<<<<<<< HEAD
+=======
+/** Constants for filter variation */
+export const FLYOUT = 'flyout';
+export const PANEL = 'panel';
+
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 /** Constants for filter type */
 export const DATE = 'date';
 export const NUMBER = 'number';
@@ -17,3 +24,10 @@ export const DROPDOWN = 'dropdown';
 
 /** Constants for event emitters */
 export const CLEAR_FILTERS = 'clearFilters';
+<<<<<<< HEAD
+=======
+
+/** Constants for panel dimensions */
+export const PANEL_WIDTH = 320;
+export const ACTION_SET_HEIGHT = 64;
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212

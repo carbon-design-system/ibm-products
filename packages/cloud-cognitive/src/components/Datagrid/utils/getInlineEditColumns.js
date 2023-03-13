@@ -110,8 +110,11 @@ export const getInlineEditColumns = () => {
       accessor: 'visits',
       width: 120,
       inlineEdit: {
+        validator: (n) => n && n < 10,
         type: 'number',
-        inputProps: {}, // These props are passed to the Carbon component used for inline editing
+        inputProps: {
+          invalidText: 'Invalid number, must be 10 or greater',
+        }, // These props are passed to the Carbon component used for inline editing
       },
     },
     {
@@ -125,9 +128,13 @@ export const getInlineEditColumns = () => {
             console.log(newDateObj, cell);
           },
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
           labelText: 'Change active since date',
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+          dateFormat: 'd/m/Y',
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
           // optionally pass props here to be passed through to Carbon's DatePickerInput component
           datePickerInputProps: {
             labelText: 'Change active since date',

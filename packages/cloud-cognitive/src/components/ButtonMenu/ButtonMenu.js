@@ -68,6 +68,7 @@ export let ButtonMenu = React.forwardRef(
         )}
         ariaLabel={menuAriaLabel}
         menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
+        size={size}
         renderIcon={() => (
           <div
             className={cx([
@@ -151,8 +152,8 @@ ButtonMenu.propTypes = {
   renderIcon: Button.propTypes.renderIcon,
 
   /**
-   * The size of the button for the menu trigger. The values can be any valid
-   * value for the carbon Button component 'size' prop.
+   * The size of the button for the menu trigger.
+   * The menu button supports: sm, md, lg
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };

@@ -8,6 +8,7 @@
 import React, { useEffect, useState } from 'react';
 <<<<<<< HEAD
 import { Add, OverflowMenuVertical } from '@carbon/react/icons';
+<<<<<<< HEAD
 import { DataTable, TableBatchActions, TableBatchAction } from '@carbon/react';
 =======
 import { Add16, OverflowMenuVertical16 } from '@carbon/icons-react';
@@ -17,6 +18,13 @@ import {
   TableBatchAction,
 } from 'carbon-components-react';
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+import {
+  TableToolbar,
+  TableBatchActions,
+  TableBatchAction,
+} from '@carbon/react';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 import { useResizeDetector } from 'react-resize-detector';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
@@ -31,23 +39,27 @@ import { CLEAR_FILTERS } from './addons/Filtering/constants';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const { TableToolbar } = DataTable;
-
 const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   const [displayAllInMenu, setDisplayAllInMenu] = useState(false);
   const [initialListWidth, setInitialListWidth] = useState(null);
   const [receivedInitialWidth, setReceivedInitialWidth] = useState(false);
 <<<<<<< HEAD
+<<<<<<< HEAD
   const { selectedFlatRows, toggleAllRowsSelected, toolbarBatchActions } =
     datagridState;
 =======
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   const {
     selectedFlatRows,
     toggleAllRowsSelected,
     toolbarBatchActions,
     setGlobalFilter,
   } = datagridState;
+<<<<<<< HEAD
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
 
   // Get initial width of batch actions container,
@@ -147,13 +159,19 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       shouldShowBatchActions={totalSelected > 0}
       totalSelected={totalSelected}
 <<<<<<< HEAD
+<<<<<<< HEAD
       onCancel={() => toggleAllRowsSelected(false)}
 =======
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
       onCancel={() => {
         toggleAllRowsSelected(false);
         setGlobalFilter(null);
       }}
+<<<<<<< HEAD
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     >
       {!displayAllInMenu &&
         toolbarBatchActions &&
@@ -187,6 +205,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 const DatagridToolbar = (datagridState) => {
   const { width, ref } = useResizeDetector();
 <<<<<<< HEAD
+<<<<<<< HEAD
   const { DatagridActions, DatagridBatchActions, batchActions } = datagridState;
 =======
   const { DatagridActions, DatagridBatchActions, batchActions, state } =
@@ -201,9 +220,21 @@ const DatagridToolbar = (datagridState) => {
       />
     );
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+  const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
+    datagridState;
+
+  const getRowHeight = rowSize ? rowSize : 'lg';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
   return batchActions && DatagridActions ? (
-    <div ref={ref} className={`${blockClass}__table-toolbar`}>
+    <div
+      ref={ref}
+      className={cx(
+        `${blockClass}__table-toolbar`,
+        `${blockClass}__table-toolbar--${getRowHeight}`
+      )}
+    >
       <TableToolbar>
         {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActionsToolbar &&

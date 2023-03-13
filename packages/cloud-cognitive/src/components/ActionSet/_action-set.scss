@@ -23,11 +23,14 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 .#{$action-set-block-class} .#{$action-set-block-class}__action-button {
   @include type.type-style('body-short-01');
 
-  height: $spacing-10;
   align-items: center;
-  padding-top: $spacing-05;
-  padding-bottom: $spacing-07;
   margin: 0;
+
+  &.#{$action-set-block-class}__action-button--expressive {
+    height: $spacing-10;
+    padding-top: $spacing-05;
+    padding-bottom: $spacing-07;
+  }
 }
 =======
     align-items: center;
@@ -49,7 +52,9 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 
 .#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set
-  .#{$action-set-block-class}__action-button.#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--expressive {
+  .#{$action-set-block-class}__action-button.#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--expressive,
+.#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set
+  .#{$action-set-block-class}__action-button.#{c4p-settings.$carbon-prefix}--btn {
   max-width: none;
 }
 

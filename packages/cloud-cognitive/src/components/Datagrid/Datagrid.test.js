@@ -32,7 +32,8 @@ import {
 } from '.';
 
 import {
-  DataTable,
+  TableToolbarContent,
+  TableToolbarSearch,
   Button,
   Pagination,
   TableBatchActions,
@@ -162,7 +163,6 @@ const DatagridActions = (datagridState) => {
   const downloadCsv = () => {
     alert('Downloading...');
   };
-  const { TableToolbarContent, TableToolbarSearch } = DataTable;
 
   const refreshColumns = () => {
     alert('refreshing...');
@@ -472,29 +472,6 @@ const RowSizeDropdown = ({ ...rest }) => {
     },
     useSelectRows
   );
-
-  return (
-    <Wrapper>
-      <Datagrid datagridState={{ ...datagridState }} {...rest} />
-    </Wrapper>
-  );
-};
-
-const LeftPanel = ({ ...rest }) => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid({
-    columns,
-    data,
-    leftPanel: {
-      isOpen: true, // this toggling will happen from datagridActions.
-      panelContent: (
-        <div>Panel content will go here along with any button interactions</div>
-      ),
-    },
-    DatagridActions,
-    DatagridBatchActions,
-  });
 
   return (
     <Wrapper>
@@ -1515,6 +1492,10 @@ describe(componentName, () => {
       .getByRole('table')
       .getElementsByTagName('tbody')[0]
       .getElementsByTagName('tr')[rowNumber];
+<<<<<<< HEAD
+=======
+
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     const rowExpander = row.querySelector(
       `button[aria-label="Expand current row"]`
     );
@@ -1589,6 +1570,7 @@ describe(componentName, () => {
     hideSelectAll(8);
   });
 
+<<<<<<< HEAD
   it('Left Panel', () => {
     render(<LeftPanel data-testid={dataTestId}></LeftPanel>);
 
@@ -1714,6 +1696,8 @@ describe(componentName, () => {
     expect(alertMock).toHaveBeenCalledTimes(4);
   });
 
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   it('Nested Rows', () => {
     render(<NestedRows data-testid={dataTestId}></NestedRows>);
 
@@ -1726,6 +1710,10 @@ describe(componentName, () => {
       .getElementsByTagName('button')[0];
 
     fireEvent.click(firstRow);
+<<<<<<< HEAD
+=======
+
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     expect(row.classList[0]).toEqual('c4p--datagrid__carbon-row-expanded');
 
     const nestedRow = screen
@@ -2461,7 +2449,7 @@ describe(componentName, () => {
 
     const customizeColumnsButton = screen.getByLabelText('Customize columns');
     fireEvent.click(customizeColumnsButton);
-    screen.getByText(/Customize Columns/);
+    screen.getByRole('heading', { name: /Customize columns/ });
   });
 
   it('Top Alignment', () => {

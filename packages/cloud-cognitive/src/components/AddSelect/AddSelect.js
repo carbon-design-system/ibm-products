@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -118,7 +118,11 @@ AddSelect.propTypes = {
    */
   portalTarget: PropTypes.node,
 <<<<<<< HEAD
+<<<<<<< HEAD
   searchResultsLabel: PropTypes.string,
+=======
+  searchResultsTitle: PropTypes.string,
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   sortByLabel: PropTypes.string,
 =======
   searchResultsTitle: PropTypes.string,

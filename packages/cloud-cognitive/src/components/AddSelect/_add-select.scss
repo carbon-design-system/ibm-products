@@ -1,5 +1,9 @@
 //
+<<<<<<< HEAD
 // Copyright IBM Corp. 2022
+=======
+// Copyright IBM Corp. 2022, 2022
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -99,7 +103,13 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   &-cell:hover .#{$block-class}__selections-hidden-hover {
+=======
+  &-cell:hover .#{$block-class}__selections-hidden-hover,
+  .#{$carbon-prefix}--structured-list-row:focus-within
+    .#{$block-class}__selections-hidden-hover {
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     visibility: visible;
   }
 =======
@@ -121,7 +131,11 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   &-row-selected#{$carbon-prefix}--structured-list-row {
+=======
+  &-row--selected.#{$carbon-prefix}--structured-list-row {
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     border-bottom: 1px solid $layer-selected-01;
     background-color: $layer-selected-01;
   }
@@ -189,7 +203,7 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   }
 
-  &-row-meta-selected {
+  &-row-meta--selected {
     border-left: 0.125rem solid $interactive;
     background-color: $layer-hover-01;
   }
@@ -231,6 +245,7 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   }
 }
 
+<<<<<<< HEAD
 .#{$block-class}
   #{$carbon-prefix}--structured-list--selection
   .#{$block-class}__selections-row-selected#{$carbon-prefix}--structured-list-row:hover:not(#{$carbon-prefix}--structured-list-row--header-row):not(#{$carbon-prefix}--structured-list-row--selected) {
@@ -239,6 +254,8 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
 }
 
 <<<<<<< HEAD
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 .#{$block-class}__sub-header {
   display: flex;
   align-items: flex-end;
@@ -255,13 +272,13 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   }
 }
 
-.#{$block-class} #{$carbon-prefix}--structured-list-row {
+.#{$block-class} .#{$carbon-prefix}--structured-list-row {
   border-bottom: 0;
 }
 
 .#{$block-class}
-  #{$carbon-prefix}--structured-list--selection
-  #{$carbon-prefix}--structured-list-row:hover:not(#{$carbon-prefix}--structured-list-row--header-row):not(#{$carbon-prefix}--structured-list-row--selected) {
+  .#{$carbon-prefix}--structured-list--selection
+  .#{$carbon-prefix}--structured-list-row:hover:not(.#{$carbon-prefix}--structured-list-row--header-row):not(.#{$carbon-prefix}--structured-list-row--selected) {
   border-bottom: 0;
 }
 
@@ -393,7 +410,11 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   .#{$block-class}__selections-row#{$carbon-prefix}--structured-list-row {
+=======
+  .#{$block-class}__selections-row.#{$carbon-prefix}--structured-list-row {
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     border-left: 0;
 =======
   .#{$block-class}__tags {
@@ -417,7 +438,7 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
     padding: 0 $spacing-03;
   }
 
-  .#{$block-class}__tag-container {
+  .#{$block-class}__tags {
     padding: 0 $spacing-03;
     margin-bottom: 0;
   }
@@ -426,7 +447,7 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
     padding: 0;
   }
 
-  .#{$block-class}__selections#{$carbon-prefix}--structured-list {
+  .#{$block-class}__selections.#{$carbon-prefix}--structured-list {
     border-top: 0;
   }
 }
@@ -464,7 +485,7 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   }
 }
 
-.#{$block-class}__tag-container {
+.#{$block-class}__tags {
   display: flex;
   align-items: center;
   margin-top: $spacing-05;
@@ -587,7 +608,11 @@ button.#{$block-class}__global-filter-toggle {
 
 // overrides
 
-.#{$block-class}__tag-container .#{$carbon-prefix}--tag {
+.#{$block-class}__selections .#{$carbon-prefix}--list-box__menu {
+  left: auto;
+}
+
+.#{$block-class}__tags .#{$carbon-prefix}--tag {
   margin: 0;
 }
 
@@ -708,20 +733,20 @@ button.#{$block-class}__global-filter-toggle {
 }
 
 .#{$block-class}
-  #{$carbon-prefix}--accordion--start
-  #{$carbon-prefix}--accordion__arrow {
+  .#{$carbon-prefix}--accordion--start
+  .#{$carbon-prefix}--accordion__arrow {
   margin: 0 0 0 $spacing-05;
 }
 
 .#{$block-class}
-  #{$carbon-prefix}--accordion--start
-  #{$carbon-prefix}--accordion__title {
+  .#{$carbon-prefix}--accordion--start
+  .#{$carbon-prefix}--accordion__title {
   margin: 0 $spacing-05 0 $spacing-03;
 }
 
 .#{$block-class}
-  #{$carbon-prefix}--accordion__item--active
-  #{$carbon-prefix}--accordion__content {
+  .#{$carbon-prefix}--accordion__item--active
+  .#{$carbon-prefix}--accordion__content {
   padding-top: 0;
   padding-bottom: 0;
   margin-top: $spacing-03;

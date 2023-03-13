@@ -15,9 +15,13 @@ import pconsole from '../../../global/js/utils/pconsole';
 import { InlineEditProvider } from './addons/InlineEdit/InlineEditContext';
 import { DatagridContent } from './DatagridContent';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { FilterProvider } from './addons/Filtering/FilterProvider';
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+import { FilterProvider } from './addons/Filtering/FilterProvider';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentName = 'Datagrid';
@@ -35,17 +39,22 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
     DatagridPagination,
     isFetching,
     tableId,
-    leftPanel,
+    filterProps,
     className,
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     state: { filters },
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+    state: { filters },
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
 
   return (
+<<<<<<< HEAD
 <<<<<<< HEAD
     <InlineEditProvider>
       <div
@@ -100,11 +109,40 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
           )}
           {leftPanel === undefined && (
             <DatagridContent datagridState={datagridState} />
+=======
+    <FilterProvider filters={filters}>
+      <InlineEditProvider>
+        <div
+          {...rest}
+          id={tableId}
+          ref={ref}
+          className={cx(
+            className,
+            blockClass,
+            withVirtualScroll
+              ? `${blockClass}__datagridWrap`
+              : `${blockClass}__datagridWrap-simple`,
+            !isFetching && rows.length === 0 ? `${blockClass}__empty-state` : ''
+          )}
+          {...getDevtoolsProps(componentName)}
+        >
+          {filterProps?.variation === 'panel' ? (
+            <div
+              className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex`}
+            >
+              <DatagridContent datagridState={datagridState} />
+            </div>
+          ) : (
+            <DatagridContent datagridState={datagridState} />
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
           )}
         </div>
       </InlineEditProvider>
     </FilterProvider>
+<<<<<<< HEAD
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   );
 });
 

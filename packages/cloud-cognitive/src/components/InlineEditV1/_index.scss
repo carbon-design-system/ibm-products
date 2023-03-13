@@ -4,9 +4,20 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+<<<<<<< HEAD
 
 <<<<<<< HEAD:packages/cloud-cognitive/src/components/InlineEdit/_index.scss
 @use './inline-edit';
 =======
 @import './inline-edit-v1';
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8:packages/cloud-cognitive/src/components/InlineEditV1/_index.scss
+=======
+<<<<<<< HEAD:packages/cloud-cognitive/src/components/InlineEditV2/_storybook-styles.scss
+.inline-edit-v2-example {
+  width: 15rem;
+}
+=======
+
+@use './inline-edit-v1';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212:packages/cloud-cognitive/src/components/InlineEditV1/_index.scss
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212

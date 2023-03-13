@@ -11,17 +11,25 @@
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <<<<<<< HEAD
+<<<<<<< HEAD
 [all-contributors-badge]: https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square
 =======
 [all-contributors-badge]: https://img.shields.io/badge/all_contributors-16-orange.svg
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+[all-contributors-badge]: https://img.shields.io/badge/all_contributors-16-orange.svg
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 
 [![All Contributors][all-contributors-badge]](#contributors-)
 [![Licensed under the Apache License, Version 2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/LICENSE)
 [![Build status](https://github.com/carbon-design-system/ibm-cloud-cognitive/actions/workflows/ci.yml/badge.svg)](https://github.com/carbon-design-system/ibm-cloud-cognitive/actions/workflows/ci.yml)
+<<<<<<< HEAD
 [![Netlify status](https://img.shields.io/netlify/f850c678-e8be-43c0-aa95-b2b9cca8ac21)](https://app.netlify.com/sites/carbon-for-ibm-products/deploys)
+=======
+[![Netlify status](https://img.shields.io/netlify/e8cd9972-0fc8-4c51-a911-e9a930ca6605)](https://app.netlify.com/sites/v11-carbon-for-ibm-products/deploys)
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 [![GitHub Lerna version](https://img.shields.io/github/lerna-json/v/carbon-design-system/ibm-cloud-cognitive)](https://lerna.js.org)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)
 
@@ -92,6 +100,7 @@ Thanks goes to these wonderful people
 <!-- markdownlint-disable -->
 <table>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <tr>
     <td align="center"><a href="http://simonfinney.dev"><img src="https://avatars2.githubusercontent.com/u/3846874?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Simon Finney</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=SimonFinney" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/lee-chase"><img src="https://avatars0.githubusercontent.com/u/15086604?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Lee Chase</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=lee-chase" title="Code">💻</a></td>
@@ -114,6 +123,8 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/kai-liu"><img src="https://avatars.githubusercontent.com/u/105320675?v=4?s=100" width="100px;" alt=""/><br /><sub><b>kai-liu</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=kai-liu" title="Code">💻</a></td>
   </tr>
 =======
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   <tbody>
     <tr>
       <td align="center"><a href="http://simonfinney.dev"><img src="https://avatars2.githubusercontent.com/u/3846874?v=4?s=100" width="100px;" alt="Simon Finney"/><br /><sub><b>Simon Finney</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=SimonFinney" title="Code">💻</a></td>
@@ -140,7 +151,10 @@ Thanks goes to these wonderful people
       <td align="center"><a href="https://www.hellojagath.com"><img src="https://avatars.githubusercontent.com/u/29351394?v=4?s=100" width="100px;" alt="Jagath Jayakumar"/><br /><sub><b>Jagath Jayakumar</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=jagathgj" title="Code">💻</a></td>
     </tr>
   </tbody>
+<<<<<<< HEAD
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 </table>
 
 <!-- markdownlint-restore -->

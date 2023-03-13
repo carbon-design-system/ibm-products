@@ -6,9 +6,15 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 // @flow
+<<<<<<< HEAD
 import React, { useContext } from 'react';
 <<<<<<< HEAD
 import { DataTable, SkeletonText } from '@carbon/react';
+=======
+import React from 'react';
+import { TableRow, TableCell, SkeletonText } from '@carbon/react';
+import { px } from '@carbon/layout';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 import { selectionColumnId } from '../common-column-ids';
 =======
 import { DataTable, SkeletonText } from 'carbon-components-react';
@@ -17,12 +23,16 @@ import { px } from '@carbon/layout';
 import cx from 'classnames';
 import { selectionColumnId } from '../common-column-ids';
 import { pkg, carbon } from '../../../settings';
-import { InlineEditContext } from './addons/InlineEdit/InlineEditContext/InlineEditContext';
-import { getCellIdAsObject } from './addons/InlineEdit/InlineEditContext/getCellIdAsObject';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const { TableRow, TableCell } = DataTable;
+const rowHeights = {
+  xs: 24,
+  sm: 32,
+  md: 40,
+  lg: 48,
+  xl: 64,
+};
 
 const rowHeights = {
   xs: 24,
@@ -35,6 +45,7 @@ const rowHeights = {
 // eslint-disable-next-line react/prop-types
 const DatagridRow = (datagridState) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
   const { row } = datagridState;
   const { state } = useContext(InlineEditContext);
   const { activeCellId } = state;
@@ -44,6 +55,9 @@ const DatagridRow = (datagridState) => {
   const { state } = useContext(InlineEditContext);
   const { activeCellId } = state;
   const activeCellObject = activeCellId && getCellIdAsObject(activeCellId);
+=======
+  const { row, rowSize, withNestedRows } = datagridState;
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
     let size = 0;
@@ -56,15 +70,16 @@ const DatagridRow = (datagridState) => {
     return size;
   };
 
+<<<<<<< HEAD
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   return (
     <TableRow
       className={cx(`${blockClass}__carbon-row`, {
         [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
         [`${blockClass}__carbon-row-expandable`]: row.canExpand,
         [`${carbon.prefix}--data-table--selected`]: row.isSelected,
-        [`${blockClass}__carbon-row-hover-active`]:
-          activeCellObject && row.index === activeCellObject.row,
       })}
       {...row.getRowProps()}
       key={row.id}

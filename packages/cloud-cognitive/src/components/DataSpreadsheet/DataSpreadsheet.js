@@ -176,9 +176,7 @@ export let DataSpreadsheet = React.forwardRef(
       const activeCellHighlight = spreadsheetRef.current.querySelector(
         `.${blockClass}__active-cell--highlight`
       );
-      if (activeCellHighlight) {
-        activeCellHighlight.style.display = 'none';
-      }
+      activeCellHighlight.style.display = 'none';
     }, [spreadsheetRef]);
 
     const removeCellEditor = useCallback(() => {
@@ -423,9 +421,13 @@ export let DataSpreadsheet = React.forwardRef(
           setActiveCellContent,
           updateData,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
           activeCellCoordinates,
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+          activeCellCoordinates,
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
         };
         // Allow arrow key navigation if there are less than two activeKeys OR
         // if one of the activeCellCoordinates is in a header position

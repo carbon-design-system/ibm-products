@@ -7,9 +7,13 @@
  */
 import { pkg } from '../../settings';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import cx from 'classnames';
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+import cx from 'classnames';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 import useNestedRowExpander from './useNestedRowExpander';
 
 const blockClass = `${pkg.prefix}--datagrid`;

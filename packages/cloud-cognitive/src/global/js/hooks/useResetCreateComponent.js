@@ -65,6 +65,7 @@ export const useResetCreateComponent = ({
     open,
     previousState,
     setCurrentStep,
+    stepData,
     initialStep,
     totalSteps,
     componentName,

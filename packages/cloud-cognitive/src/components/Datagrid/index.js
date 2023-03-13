@@ -24,6 +24,10 @@ export { default as useColumnCenterAlign } from './useColumnCenterAlign';
 export { default as useColumnOrder } from './useColumnOrder';
 export { default as useInlineEdit } from './useInlineEdit';
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 export { default as useFiltering } from './useFiltering';
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+export { default as useFiltering } from './useFiltering';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212

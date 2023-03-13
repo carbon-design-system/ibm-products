@@ -8,10 +8,14 @@
 // @flow
 import React from 'react';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { DataTable } from '@carbon/react';
 =======
 import { DataTable } from 'carbon-components-react';
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+import { TableSelectAll } from '@carbon/react';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 
@@ -64,7 +68,5 @@ const SelectAll = (datagridState) => {
     </div>
   );
 };
-
-const { TableSelectAll } = DataTable;
 
 export { SelectAll };

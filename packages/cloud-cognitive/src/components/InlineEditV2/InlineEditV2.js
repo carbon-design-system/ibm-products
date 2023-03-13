@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useEffect, forwardRef, useRef } from 'react';
+<<<<<<< HEAD
 import { Button } from 'carbon-components-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -16,6 +17,18 @@ import {
   // EditOff24,
   WarningFilled16,
 } from '@carbon/icons-react';
+=======
+import { Button } from '@carbon/react';
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import {
+  Edit,
+  Checkmark,
+  Close,
+  // EditOff,
+  WarningFilled,
+} from '@carbon/react/icons';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 import { pkg, carbon } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
@@ -163,11 +176,22 @@ export let InlineEditV2 = forwardRef(
           {focused ? (
             <>
               {invalid && (
+<<<<<<< HEAD
                 <WarningFilled16 className={`${blockClass}__warning-icon`} />
               )}
               <Button
                 hasIconOnly
                 renderIcon={Close24}
+=======
+                <WarningFilled
+                  size={16}
+                  className={`${blockClass}__warning-icon`}
+                />
+              )}
+              <Button
+                hasIconOnly
+                renderIcon={() => <Close size={24} />}
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
                 size="sm"
                 iconDescription={cancelLabel}
                 onClick={onCancelHandler}
@@ -178,7 +202,11 @@ export let InlineEditV2 = forwardRef(
               />
               <Button
                 hasIconOnly
+<<<<<<< HEAD
                 renderIcon={Checkmark24}
+=======
+                renderIcon={() => <Checkmark size={24} />}
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
                 size="sm"
                 iconDescription={saveLabel}
                 onClick={onSaveHandler}
@@ -194,7 +222,11 @@ export let InlineEditV2 = forwardRef(
               className={`${blockClass}__btn ${blockClass}__btn-edit`}
               hasIconOnly
               // renderIcon={readOnly ? EditOff24 : Edit24}
+<<<<<<< HEAD
               renderIcon={Edit24}
+=======
+              renderIcon={() => <Edit size={24} />}
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
               size="sm"
               // iconDescription={readOnly ? readOnlyLabel : editLabel}
               iconDescription={editLabel}
@@ -213,6 +245,11 @@ export let InlineEditV2 = forwardRef(
   }
 );
 
+<<<<<<< HEAD
+=======
+InlineEditV2 = pkg.checkComponentEnabled(InlineEditV2, componentName);
+
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 InlineEditV2.displayName = componentName;
 
 InlineEditV2.propTypes = {

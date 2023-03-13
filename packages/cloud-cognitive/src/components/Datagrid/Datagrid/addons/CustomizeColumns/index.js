@@ -6,5 +6,5 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 
-export { default as CustomizeColumnsModalWrapper } from './ModalWrapper';
+export { default as CustomizeColumnsTearsheetWrapper } from './TearsheetWrapper';
 export { default as ToggleButtonWrapper } from './ButtonWrapper';

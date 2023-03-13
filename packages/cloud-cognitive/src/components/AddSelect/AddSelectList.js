@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022
+// Copyright IBM Corp. 2022, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -15,7 +15,10 @@ import {
   StructuredListWrapper,
   StructuredListBody,
 <<<<<<< HEAD
+<<<<<<< HEAD
   Dropdown,
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 } from '@carbon/react';
 import { ChevronRight, View } from '@carbon/react/icons';
 =======
@@ -122,8 +125,13 @@ export let AddSelectList = ({
               key={item.id}
               className={cx(`${blockClass}-row`, {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 [`${blockClass}-row-selected`]: isSelected(item.id),
                 [`${blockClass}-row-meta-selected`]: isInMetaPanel(item.id),
+=======
+                [`${blockClass}-row--selected`]: isSelected(item.id),
+                [`${blockClass}-row-meta--selected`]: isInMetaPanel(item.id),
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
               })}
               onClick={(evt) => metaPanelHandler(item, evt)}
             >

@@ -8,6 +8,7 @@
 
 // stylelint-disable carbon/layout-token-use
 
+<<<<<<< HEAD
 @import '../variables';
 
 $action-set-height: rem(64px);
@@ -17,11 +18,29 @@ $action-set-height: rem(64px);
 }
 
 .#{$block-class}-filter-flyout {
+=======
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/layout' as *;
+
+@use '../../../../global/styles/project-settings' as c4p-settings;
+@use '../variables';
+
+$action-set-height: rem(64px);
+
+.#{variables.$block-class}-filter-flyout__container {
+  position: relative;
+}
+
+.#{variables.$block-class}-filter-flyout {
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   position: absolute;
   top: $spacing-09;
   right: 0;
   display: none;
   width: rem(642px);
+<<<<<<< HEAD
   background-color: $ui-02;
   box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);
 }
@@ -31,26 +50,50 @@ $action-set-height: rem(64px);
 }
 
 .#{$block-class}-filter-flyout--batch {
+=======
+  background-color: $layer-02;
+  box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);
+}
+
+.#{variables.$block-class}-filter-flyout--open {
+  display: grid;
+}
+
+.#{variables.$block-class}-filter-flyout--batch {
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   min-height: rem(346px);
   grid-template-rows: 1fr rem(48px);
 }
 
+<<<<<<< HEAD
 .#{$block-class}-filter-flyout--instant {
+=======
+.#{variables.$block-class}-filter-flyout--instant {
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   min-height: rem(282px);
   grid-template-rows: 1fr;
 }
 
+<<<<<<< HEAD
 .#{$block-class}-filter-flyout__inner-container {
   padding: $spacing-05 $spacing-05 $spacing-09 $spacing-05;
 }
 
 .#{$block-class}-filter-flyout__inner-container::before {
+=======
+.#{variables.$block-class}-filter-flyout__inner-container {
+  padding: $spacing-05 $spacing-05 $spacing-09 $spacing-05;
+}
+
+.#{variables.$block-class}-filter-flyout__inner-container::before {
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   position: absolute;
   top: rem(-7px);
   right: 1px;
   display: block;
   width: rem(46px);
   height: rem(15px);
+<<<<<<< HEAD
   background-color: $ui-02;
   content: '';
 }
@@ -58,17 +101,31 @@ $action-set-height: rem(64px);
 .#{$block-class}-filter-flyout__title {
   display: block;
   @include carbon--type-style('productive-heading-01');
+=======
+  background-color: $layer-02;
+  content: '';
+}
+
+.#{variables.$block-class}-filter-flyout__title {
+  display: block;
+  @include type-style('heading-compact-01');
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
   margin-bottom: $spacing-06;
 }
 
+<<<<<<< HEAD
 .#{$block-class}-filter-flyout__filters {
+=======
+.#{variables.$block-class}-filter-flyout__filters {
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   display: grid;
   gap: rem(16px) rem(32px);
   grid-template-columns: 1fr 1fr;
 }
 
 // Carbon overrides
+<<<<<<< HEAD
 .#{$block-class}-filter-flyout__trigger--open.#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only {
   position: relative;
   background-color: $ui-02;
@@ -76,5 +133,15 @@ $action-set-height: rem(64px);
 }
 
 .#{$block-class}-filter-flyout .#{$carbon-prefix}--fieldset {
+=======
+.#{variables.$block-class}-filter-flyout__trigger--open.#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--icon-only {
+  position: relative;
+  background-color: $layer-02;
+  box-shadow: 0 1px rem(8px) 0 rgba(0, 0, 0, 0.25);
+}
+
+.#{variables.$block-class}-filter-flyout
+  .#{c4p-settings.$carbon-prefix}--fieldset {
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   margin-bottom: 0;
 }

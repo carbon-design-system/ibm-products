@@ -33,6 +33,7 @@ import { StatusIcon } from '../../../StatusIcon';
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
+import { StatusIcon } from '../../../StatusIcon';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ColumnAlignment`,
@@ -76,6 +77,7 @@ const defaultHeader = [
   },
   {
 <<<<<<< HEAD
+<<<<<<< HEAD
     Header: 'Status',
     accessor: 'status_icon',
     width: 100,
@@ -85,6 +87,12 @@ const defaultHeader = [
     accessor: 'passwordStrength',
     width: 100,
     centerAlignedColumn: true,
+=======
+    Header: 'Password strength',
+    accessor: 'passwordStrength',
+    width: 100,
+    centerAlignedColumn: true,
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     Cell: ({ cell: { value } }) => {
       const iconProps = {
         size: 'sm',
@@ -106,7 +114,10 @@ const defaultHeader = [
         </span>
       );
     },
+<<<<<<< HEAD
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   },
   {
     Header: 'Someone 1',

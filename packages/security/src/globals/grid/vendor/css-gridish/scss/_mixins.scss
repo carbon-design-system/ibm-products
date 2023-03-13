@@ -1,4 +1,6 @@
 // Set the width of a grid’s column
+@use "sass:math";
+
 @mixin grid($breakpoint, $breakpointName) {
   @if (map-get($breakpoint, columns) != null) {
     $columnSize: get-fluid-size($breakpointName, 1);
@@ -12,9 +14,8 @@
       &.#{$prefix}-grid--fixed-columns {
         grid-template-columns: repeat(
           auto-fill,
-          map-get($breakpoint, breakpoint) *
-            1rem /
-            map-get($breakpoint, columns)
+          math.div(map-get($breakpoint, breakpoint) *
+            1rem, map-get($breakpoint, columns))
         );
       }
 
@@ -52,9 +53,8 @@
         // Loop each column in current breakpoint for new class
         // Ex: .yourPrefix-grid__col--sm--1, .yourPrefix-grid__col--sm--2, etc.
         @for $i from 1 through map-get($currentBreakpoint, columns) {
-          $columnMultiplier: $i *
-            map-get($breakpoint, columns) /
-            map-get($currentBreakpoint, columns);
+          $columnMultiplier: math.div($i *
+            map-get($breakpoint, columns), map-get($currentBreakpoint, columns));
           $columnSize: get-fluid-size($name, $columnMultiplier);
 
           $isSecondToLast: is-same-breakpoint(

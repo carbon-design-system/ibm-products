@@ -2,10 +2,14 @@
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
 <<<<<<< HEAD
+<<<<<<< HEAD
   "version": "2.0.0-rc.3",
 =======
   "version": "1.40.0",
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+  "version": "2.0.0-rc.20",
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",

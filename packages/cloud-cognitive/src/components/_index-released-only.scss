@@ -22,14 +22,16 @@
 @use './ExportModal';
 @use './ExpressiveCard';
 @use './HTTPErrors';
-@use './InlineEdit';
+@use './InlineEditV1';
 @use './ImportModal';
+@use './MultiAddSelect';
 @use './NotificationsPanel';
 @use './PageHeader';
 @use './ProductiveCard';
 @use './RemoveModal';
 @use './Saving';
 @use './SidePanel';
+@use './SingleAddSelect';
 @use './StatusIcon';
 @use './TagSet';
 @use './Tearsheet';

@@ -1,4 +1,5 @@
 // @flow
+<<<<<<< HEAD
 /*
  * Licensed Materials - Property of IBM
  * 5724-Q36
@@ -39,6 +40,29 @@ import {
 import { FilterContext } from './FilterProvider';
 import useInitialStateFromFilters from './hooks/useInitialStateFromFilters';
 import { getInitialStateFromFilters } from './utils';
+=======
+/**
+ * Copyright IBM Corp. 2022, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+import { Filter } from '@carbon/react/icons';
+import { Button, usePrefix } from '@carbon/react';
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import React, { useRef, useState } from 'react';
+import { useClickOutside } from '../../../../../global/js/hooks';
+import { pkg } from '../../../../../settings';
+import { ActionSet } from '../../../../ActionSet';
+import { BATCH, CLEAR_FILTERS, FLYOUT, INSTANT } from './constants';
+import {
+  useSubscribeToEventEmitter,
+  useFilters,
+  useShouldDisableButtons,
+} from './hooks';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-flyout`;
@@ -53,6 +77,7 @@ const FilterFlyout = ({
   onFlyoutClose = () => {},
   onApply = () => {},
   onCancel = () => {},
+<<<<<<< HEAD
   shouldClickOutsideToClose = false,
   secondaryActionLabel = 'Cancel',
   setAllFilters,
@@ -74,6 +99,44 @@ const FilterFlyout = ({
 
   /** Memos */
   const showActionSet = updateMethod === BATCH;
+=======
+  secondaryActionLabel = 'Cancel',
+  setAllFilters,
+  data = [],
+}) => {
+  /** State */
+  const [open, setOpen] = useState(false);
+
+  const {
+    filtersState,
+    prevFiltersObjectArrayRef,
+    prevFiltersRef,
+    revertToPreviousFilters,
+    reset,
+    renderFilter,
+    filtersObjectArray,
+  } = useFilters({
+    updateMethod,
+    filters,
+    setAllFilters,
+    variation: FLYOUT,
+  });
+
+  /** Refs */
+  const filterFlyoutRef = useRef(null);
+
+  /** State from hooks */
+  const [shouldDisableButtons, setShouldDisableButtons] =
+    useShouldDisableButtons({
+      initialValue: true,
+      filtersState,
+      prevFiltersRef,
+    });
+
+  /** Memos */
+  const showActionSet = updateMethod === BATCH;
+  const carbonPrefix = usePrefix();
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
   /** Methods */
   const openFlyout = () => {
@@ -88,7 +151,14 @@ const FilterFlyout = ({
   const apply = () => {
     setAllFilters(filtersObjectArray);
     closeFlyout();
+<<<<<<< HEAD
     onApply();
+=======
+    // From the user
+    onApply();
+    // When the user clicks apply, the action set buttons should be disabled again
+    setShouldDisableButtons(true);
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
     // updates the ref so next time the flyout opens we have records of the previous filters
     prevFiltersRef.current = JSON.stringify(filtersState);
@@ -96,6 +166,7 @@ const FilterFlyout = ({
   };
 
   const cancel = () => {
+<<<<<<< HEAD
     revertToPreviousFilters();
     onCancel();
     closeFlyout();
@@ -163,12 +234,30 @@ const FilterFlyout = ({
     const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
 
     if (!open || hasClickedOnDatePicker) {
+=======
+    // Reverting to previous filters only applies when using batch actions
+    if (updateMethod === BATCH) {
+      revertToPreviousFilters();
+      onCancel();
+    }
+    closeFlyout();
+  };
+
+  /** Effects */
+  useClickOutside(filterFlyoutRef, (target) => {
+    const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
+    const hasClickedOnDropdown =
+      target.className === `${carbonPrefix}--list-box__menu-item__option`;
+
+    if (!open || hasClickedOnDatePicker || hasClickedOnDropdown) {
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
       return;
     }
 
     cancel();
   });
 
+<<<<<<< HEAD
   useEffect(function subscribeToEmitter() {
     // This event is emitted from the DatagridToolbar component when clearFilters is clicked in FilterSummary
     EventEmitter.subscribe(CLEAR_FILTERS, reset);
@@ -299,6 +388,12 @@ const FilterFlyout = ({
     () => filters.map(renderFilter),
     [filters, renderFilter]
   );
+=======
+  useSubscribeToEventEmitter(CLEAR_FILTERS, reset);
+
+  /** Renders all filters */
+  const renderFilters = () => filters.map(renderFilter);
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
   const renderActionSet = () => {
     return (
@@ -311,6 +406,10 @@ const FilterFlyout = ({
               label: primaryActionLabel,
               onClick: apply,
               isExpressive: false,
+<<<<<<< HEAD
+=======
+              disabled: shouldDisableButtons,
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
             },
             {
               key: 3,
@@ -318,6 +417,10 @@ const FilterFlyout = ({
               label: secondaryActionLabel,
               onClick: cancel,
               isExpressive: false,
+<<<<<<< HEAD
+=======
+              disabled: shouldDisableButtons,
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
             },
           ]}
           size="md"
@@ -333,12 +436,20 @@ const FilterFlyout = ({
         kind="ghost"
         hasIconOnly
         tooltipPosition="bottom"
+<<<<<<< HEAD
         renderIcon={Filter16}
+=======
+        renderIcon={() => <Filter size={16} />}
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
         iconDescription={flyoutIconDescription}
         onClick={open ? closeFlyout : openFlyout}
         className={cx(`${componentClass}__trigger`, {
           [`${componentClass}__trigger--open`]: open,
         })}
+<<<<<<< HEAD
+=======
+        disabled={data.length === 0}
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
       />
       <div
         ref={filterFlyoutRef}
@@ -360,6 +471,14 @@ const FilterFlyout = ({
 
 FilterFlyout.propTypes = {
   /**
+<<<<<<< HEAD
+=======
+   * All data rows in the table
+   */
+  data: PropTypes.array.isRequired,
+
+  /**
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
    * Array of filters to render
    */
   filters: PropTypes.arrayOf(
@@ -411,6 +530,7 @@ FilterFlyout.propTypes = {
   setAllFilters: PropTypes.func.isRequired,
 
   /**
+<<<<<<< HEAD
    * Function that sets an individual filter, this comes from the datagridState
    */
   setFilter: PropTypes.func.isRequired,
@@ -421,6 +541,8 @@ FilterFlyout.propTypes = {
   shouldClickOutsideToClose: PropTypes.bool,
 
   /**
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
    * Title of the filter flyout
    */
   title: PropTypes.string,

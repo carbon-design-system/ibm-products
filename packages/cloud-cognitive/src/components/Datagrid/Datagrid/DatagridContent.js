@@ -1,11 +1,22 @@
+/**
+ * Copyright IBM Corp. 2022, 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React, { useContext, useEffect, useRef } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
+<<<<<<< HEAD
 <<<<<<< HEAD
 import { DataTable } from '@carbon/react';
 =======
 import { DataTable } from 'carbon-components-react';
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+import { TableContainer, Table } from '@carbon/react';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 import { px } from '@carbon/layout';
 import DatagridHead from './DatagridHead';
 import DatagridBody from './DatagridBody';
@@ -13,24 +24,27 @@ import DatagridToolbar from './DatagridToolbar';
 import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
 import { carbon, pkg } from '../../../settings';
 import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
+import { FilterContext, FilterPanel } from './addons/Filtering';
 import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 import { useClickOutside } from '../../../global/js/hooks';
 import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
-
-const { TableContainer, Table } = DataTable;
+import { FilterSummary } from '../../FilterSummary';
+import { CLEAR_FILTERS } from './addons/Filtering/constants';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 export const DatagridContent = ({ datagridState }) => {
-  const { state, dispatch } = useContext(InlineEditContext);
-  const { activeCellId } = state;
+  const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
+  const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
+  const { activeCellId, gridActive, editId } = inlineEditState;
   const {
     getTableProps = () => {},
+    getFilterFlyoutProps,
     withVirtualScroll,
     DatagridPagination,
     isFetching,
-    CustomizeColumnsModal,
-    leftPanel,
+    CustomizeColumnsTearsheet,
+    filterProps,
     fullHeightDatagrid,
     verticalAlign = 'center',
     variableRowHeight,
@@ -41,10 +55,11 @@ export const DatagridContent = ({ datagridState }) => {
     tableId,
     DatagridActions,
     totalColumnsWidth,
+    gridRef,
+    state,
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
-  const { gridActive, editId } = state;
   const gridAreaRef = useRef();
   const multiKeyTrackingRef = useRef();
 
@@ -89,16 +104,20 @@ export const DatagridContent = ({ datagridState }) => {
                 handleGridKeyPress({
                   event,
                   dispatch,
-                  state,
+                  inlineEditState,
                   instance: datagridState,
                   keysPressedList,
                   usingMac,
                 })
             : null
         }
-        onFocus={withInlineEdit ? () => handleGridFocus(state, dispatch) : null}
+        onFocus={
+          withInlineEdit
+            ? () => handleGridFocus(inlineEditState, dispatch)
+            : null
+        }
       >
-        <DatagridHead {...datagridState} />
+        {!withVirtualScroll ? <DatagridHead {...datagridState} /> : null}
         <DatagridBody {...datagridState} rows={rows} />
       </Table>
     );
@@ -117,10 +136,14 @@ export const DatagridContent = ({ datagridState }) => {
     }
     const gridElement = document.querySelector(`#${tableId}`);
 <<<<<<< HEAD
+<<<<<<< HEAD
     const tableHeader = document.querySelector(
 =======
     const tableHeader = gridElement?.querySelector(
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+    const tableHeader = gridElement?.querySelector(
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
       `.${carbon.prefix}--data-table-header`
     );
     gridElement.style.setProperty(
@@ -134,6 +157,15 @@ export const DatagridContent = ({ datagridState }) => {
       );
     }
   }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
+
+  const renderFilterSummary = () =>
+    state.filters.length > 0 && (
+      <FilterSummary
+        className={`${blockClass}__filter-summary`}
+        filters={filterTags}
+        clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
+      />
+    );
 
   return (
     <>
@@ -156,19 +188,38 @@ export const DatagridContent = ({ datagridState }) => {
         description={gridDescription}
       >
         <DatagridToolbar {...datagridState} />
-        <div className={`${blockClass}__table-container`} ref={gridAreaRef}>
-          {leftPanel && leftPanel.isOpen && (
-            <div className={`${blockClass}__datagridLeftPanel`}>
-              {leftPanel.panelContent}
-            </div>
+        <div
+          className={cx(`${blockClass}__table-container`, {
+            [`${blockClass}__table-container--filter-open`]: panelOpen,
+          })}
+          ref={gridAreaRef}
+        >
+          {filterProps?.variation === 'panel' && (
+            <FilterPanel
+              updateMethod="batch"
+              {...getFilterFlyoutProps()}
+              title={filterProps.panelTitle}
+              filterSections={filterProps.sections}
+            />
           )}
-          {withInlineEdit ? (
-            <div ref={multiKeyTrackingRef}>{renderTable()}</div>
-          ) : (
-            renderTable()
-          )}
+          <div className={`${blockClass}__table-container-inner`}>
+            {renderFilterSummary()}
+            {withInlineEdit ? (
+              <div ref={multiKeyTrackingRef}>{renderTable()}</div>
+            ) : withVirtualScroll ? (
+              <div
+                className={`${blockClass}__virtualScrollContainer`}
+                ref={gridRef}
+              >
+                {renderTable()}
+              </div>
+            ) : (
+              renderTable()
+            )}
+          </div>
         </div>
       </TableContainer>
+<<<<<<< HEAD
 <<<<<<< HEAD
       {rows?.length > 0 &&
         !isFetching &&
@@ -181,6 +232,13 @@ export const DatagridContent = ({ datagridState }) => {
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
       {CustomizeColumnsModal && (
         <CustomizeColumnsModal instance={datagridState} />
+=======
+      {rows?.length > 0 && !isFetching && DatagridPagination && (
+        <DatagridPagination {...datagridState} />
+      )}
+      {CustomizeColumnsTearsheet && (
+        <CustomizeColumnsTearsheet instance={datagridState} />
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
       )}
     </>
   );
@@ -189,19 +247,20 @@ export const DatagridContent = ({ datagridState }) => {
 DatagridContent.propTypes = {
   datagridState: PropTypes.shape({
     getTableProps: PropTypes.func,
+    getFilterFlyoutProps: PropTypes.func,
     withVirtualScroll: PropTypes.bool,
     DatagridActions: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     DatagridPagination: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.func,
     ]),
-    CustomizeColumnsModal: PropTypes.oneOfType([
+    CustomizeColumnsTearsheet: PropTypes.oneOfType([
       PropTypes.element,
       PropTypes.func,
     ]),
     isFetching: PropTypes.bool,
-    leftPanel: PropTypes.object,
     fullHeightDatagrid: PropTypes.bool,
+    filterProps: PropTypes.object,
     variableRowHeight: PropTypes.bool,
     useDenseHeader: PropTypes.bool,
     withInlineEdit: PropTypes.bool,
@@ -212,5 +271,9 @@ DatagridContent.propTypes = {
     rows: PropTypes.arrayOf(PropTypes.object),
     tableId: PropTypes.string,
     totalColumnsWidth: PropTypes.number,
+    gridRef: PropTypes.object,
+    setAllFilters: PropTypes.func,
+    getFilterProps: PropTypes.func,
+    state: PropTypes.object,
   }),
 };

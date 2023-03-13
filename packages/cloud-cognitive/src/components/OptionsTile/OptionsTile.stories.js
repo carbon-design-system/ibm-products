@@ -86,7 +86,15 @@ const Template = (args) => {
 
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
     <OptionsTile onToggle={action('onToggle')} {...args}>
+=======
+    <OptionsTile
+      onToggle={action('onToggle')}
+      onChange={action('onChange')}
+      {...args}
+    >
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
       <FormGroup aria-labelledby={titleId} legendText="">
 =======
     <OptionsTile
@@ -112,7 +120,6 @@ const Template = (args) => {
           warn={isWarn}
           warnText="A language change requires a restart of the application"
           disabled={disableControls}
-          light
         />
         <Dropdown
           id={`${id}-locale`}
@@ -121,7 +128,6 @@ const Template = (args) => {
           items={locales}
           initialSelectedItem={locales[0]}
           disabled={disableControls}
-          light
         />
       </FormGroup>
     </OptionsTile>

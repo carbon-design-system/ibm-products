@@ -8,7 +8,7 @@
  */
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { Draggable } from '@carbon/react/icons';
+import { Draggable, Locked } from '@carbon/react/icons';
 import { useDrag, useDrop } from 'react-dnd';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
@@ -29,6 +29,7 @@ const DraggableElement = ({
   onGrab,
   onArrowKeyDown,
   isFocused,
+  isSticky,
   moveElement,
   selected,
   positionLabel = 'Current position {index} of {total}',
@@ -92,7 +93,7 @@ const DraggableElement = ({
           `${blockClass}__draggable-handleStyle`
         )}
       >
-        <Draggable size={16} />
+        {isSticky ? <Locked size={16} /> : <Draggable size={16} />}
       </div>
       {children}
     </>
@@ -103,6 +104,7 @@ const DraggableElement = ({
         [`${blockClass}__draggable-handleHolder-isOver`]: isOver && !disabled,
         [`${blockClass}__draggable-handleHolder-grabbed`]: isGrabbed,
         [`${blockClass}__draggable-handleHolder-selected`]: selected,
+        [`${blockClass}__draggable-handleHolder--sticky`]: isSticky,
         [`${blockClass}__draggable-handleHolder`]: !selected,
       })}
       ref={ref}
@@ -142,7 +144,7 @@ const DraggableElement = ({
       {isDragging && !isOver ? (
         <div
           ref={preview}
-          className="${blockClass}__draggable-handleHolder-droppable"
+          className={`${blockClass}__draggable-handleHolder-droppable ${blockClass}__draggable-handleHolder-droppable--origin`}
         >
           {content}
         </div>
@@ -173,6 +175,7 @@ DraggableElement.propTypes = {
   id: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   isFocused: PropTypes.bool.isRequired,
+  isSticky: PropTypes.bool,
   listData: PropTypes.array.isRequired,
   moveElement: PropTypes.func.isRequired,
   onArrowKeyDown: PropTypes.func.isRequired,

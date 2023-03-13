@@ -4,7 +4,11 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+<<<<<<< HEAD
 import React, { createContext } from 'react';
+=======
+import React, { createContext, useState } from 'react';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 import PropTypes from 'prop-types';
 import { DATE, DROPDOWN, NUMBER, RADIO, CHECKBOX } from './constants';
 
@@ -53,8 +57,14 @@ const prepareFiltersForTags = (filters) => {
 
 export const FilterProvider = ({ children, filters }) => {
   const filterTags = prepareFiltersForTags(filters);
+<<<<<<< HEAD
 
   const value = { filterTags, EventEmitter };
+=======
+  const [panelOpen, setPanelOpen] = useState(false);
+
+  const value = { filterTags, EventEmitter, panelOpen, setPanelOpen };
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
   return (
     <FilterContext.Provider value={value}>{children}</FilterContext.Provider>

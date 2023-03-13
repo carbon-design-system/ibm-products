@@ -10,9 +10,13 @@ import { rangeWithCallback } from '../../../global/js/utils/rangeWithCallback';
 
 export const handleCellDeletion = ({
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   activeCellCoordinates,
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+  activeCellCoordinates,
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   selectionAreas,
   currentMatcher,
   rows,
@@ -20,7 +24,10 @@ export const handleCellDeletion = ({
   updateData,
 }) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   // This means that the delete key has been pressed when the active cell is in a header,
   // not within the spreadsheet body. To delete an entire row/column, it must first be
   // selected, and then can be deleted.
@@ -30,7 +37,10 @@ export const handleCellDeletion = ({
   ) {
     return;
   }
+<<<<<<< HEAD
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   const selectionAreaClone = deepCloneObject(selectionAreas);
   const indexOfCurrentSelectionArea = selectionAreaClone.findIndex(
     (item) => item.matcher === currentMatcher
@@ -38,20 +48,20 @@ export const handleCellDeletion = ({
   const selectionAreaToEmptyContents =
     selectionAreaClone[indexOfCurrentSelectionArea];
   const lowestColumnIndex = Math.min(
-    selectionAreaToEmptyContents.point1.column,
-    selectionAreaToEmptyContents.point2.column
+    selectionAreaToEmptyContents?.point1?.column,
+    selectionAreaToEmptyContents?.point2?.column
   );
   const greatestColumnIndex = Math.max(
-    selectionAreaToEmptyContents.point1.column,
-    selectionAreaToEmptyContents.point2.column
+    selectionAreaToEmptyContents?.point1?.column,
+    selectionAreaToEmptyContents?.point2?.column
   );
   const lowestRowIndex = Math.min(
-    selectionAreaToEmptyContents.point1.row,
-    selectionAreaToEmptyContents.point2.row
+    selectionAreaToEmptyContents?.point1?.row,
+    selectionAreaToEmptyContents?.point2?.row
   );
   const greatestRowIndex = Math.max(
-    selectionAreaToEmptyContents.point1.row,
-    selectionAreaToEmptyContents.point2.row
+    selectionAreaToEmptyContents?.point1?.row,
+    selectionAreaToEmptyContents?.point2?.row
   );
   rangeWithCallback(lowestColumnIndex, greatestColumnIndex, (columnIndex) => {
     rangeWithCallback(lowestRowIndex, greatestRowIndex, (rowIndex) => {

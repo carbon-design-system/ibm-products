@@ -8,6 +8,7 @@
 import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -160,149 +161,23 @@ export let InlineEdit = React.forwardRef(
 
     const handleInput = () => {
       setInternalValue(refInput.current.textContent);
+=======
+import { pkg } from '../../settings';
+import { InlineEditV1 } from '../InlineEditV1';
+import { InlineEditV2 } from '../InlineEditV2';
 
-      if (onChange) {
-        onChange(refInput.current.textContent);
-      }
-    };
+/**
+ * this is a wrapper component that will allow us to support v1 and v2 versions of InlineEdit
+ * in the V11 branch, v2 is the set by default.
+ * if the user passes in the v1 feature flag the v1 version of the component will be rendered
+ * since this is a temporary solution the named export should just remain InlineEdit unlike how
+ * Card works as a base layer for Productive and Expressive cards.
+ */
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
-    // pasting into contentEditable not supported by userEvent
-    const handlePaste = /* istanbul ignore next */ (ev) => {
-      ev.preventDefault();
+const componentName = 'InlineEdit';
 
-      // Get clipboard as plain text
-      const text = (ev.clipboardData || window.clipboardData).getData(
-        'text/plain'
-      );
-
-      // remove \n
-      const sanitizedText = text
-        .replaceAll(/\n/g, '') // remove carriage returns
-        .replaceAll(/\t/g, '  '); // replace tab with two spaces
-
-      if (document.queryCommandSupported('insertText')) {
-        document.execCommand('insertText', false, sanitizedText);
-      } else {
-        // Insert text at the current position of caret
-        const range = document.getSelection().getRangeAt(0);
-        range.deleteContents();
-
-        const textNode = document.createTextNode(sanitizedText);
-        range.insertNode(textNode);
-        // move selection end of textNode
-        range.selectNodeContents(textNode);
-        range.collapse(false);
-
-        // remove existing range
-        const selection = document.getSelection();
-        selection.removeAllRanges();
-
-        // set the new range
-        selection.addRange(range);
-      }
-    };
-    const handleCancel = () => {
-      refInput.current.textContent = value;
-      handleInput(value);
-      doSetEditing(false);
-      document.getSelection().removeAllRanges();
-
-      if (onCancel) {
-        onCancel(value);
-      }
-    };
-    const handleBlur = (ev) => {
-      if (!ref.current.contains(ev.relatedTarget)) {
-        handleSave();
-      }
-    };
-
-    const handleKeyDown = (ev) => {
-      switch (ev.key) {
-        case 'Enter':
-          ev.preventDefault();
-          refInput.current.blur(); // will cause save
-          break;
-        case 'Escape':
-          handleCancel();
-          break;
-      }
-    };
-
-    /*
-      The HTML is structured as follows:
-
-    <container>
-      <!-- margin left of input to match Carbon -->
-      <content-editable>
-      <-- margin right of input space for after-input-elements -->
-      <after-input-elements>
-    </container>
-
-     NOTE:
-     - An input is not used as this would not permit a heading tag e.g. <h2>.
-     - Some padding is added to the left 16px standard for a Carbon text input
-     - The after-input-elements are position absolute with a margin to on the input to reserve space. Using inline-flex
-     - does not measure space properly for the input otherwise.
-     - The content editable is not expected to change size when buttons are added, to ensure the text does not move space
-      is reserved up front for buttons and invalid icon. Mostly this is only noticed if the width of the component is not 100%.
-      which can be shown by setting inlineEditFullWidth to false in storybook.
-
-     In making content-editable behave like an input of type text we have to account for.
-     - Enforcing a single line
-     - Pasting of non-text e.g. html or text with carriage returns
-     - The padding and border not hiding typed in text.
-     - Placing the cursor at the start or end depending on area clicked (before for left-padding)
-    */
-
-    const toolbarAnimation = true;
-
-    return (
-      // eslint-disable-next-line
-      <div
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          `${blockClass}--${size}`,
-          // `${carbonPrefix}--btn ${carbonPrefix}--btn--ghost`, // make like a ghost button
-          {
-            // switched classes dependant on props or state
-            [`${blockClass}--disabled`]: disabled,
-            [`${blockClass}--editing`]: editing,
-            [`${blockClass}--invalid`]: invalid,
-            [`${blockClass}--light`]: light,
-            [`${blockClass}--overflows`]:
-              refInput.current &&
-              refInput.current.scrollWidth > refInput.current.offsetWidth,
-          }
-        )}
-        onClick={handleEdit} // disabled eslint for click handler
-        onBlur={handleBlur}
-        ref={ref}
-      >
-        <div
-          {...rest}
-          {...getDevtoolsProps(componentName)}
-          {...{ id, size }}
-          className={cx(`${blockClass}__input`, {
-            [`${blockClass}__input--empty`]:
-              refInput.current?.textContent?.length === 0,
-          })}
-          contentEditable
-          aria-label={labelText}
-          role="textbox"
-          tabIndex={disabled ? -1 : 0}
-          onFocus={handleFocus}
-          onInput={handleInput}
-          onKeyDown={handleKeyDown}
-          onPaste={handlePaste}
-          suppressContentEditableWarning={true}
-          ref={refInput}
-          data-placeholder={placeholder}
-        >
-          {value}
-        </div>
-
+<<<<<<< HEAD
         <div
           className={cx(`${blockClass}__after-input-elements`)}
           // tabindex -1 fixes blur target test when clicking on after-input-elements background
@@ -376,16 +251,27 @@ export let InlineEdit = React.forwardRef(
 const componentName = 'InlineEdit';
 
 export let InlineEdit = forwardRef(({ v2, ...rest }, ref) => {
+=======
+export let InlineEdit = forwardRef(({ v1, ...rest }, ref) => {
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   const props = {
     ...rest,
     ref,
   };
+<<<<<<< HEAD
   if (v2 === true) {
     return <InlineEditV2 {...props} />;
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   }
 
   return <InlineEditV1 {...props} />;
+=======
+  if (v1 === true) {
+    return <InlineEditV1 {...props} />;
+  }
+
+  return <InlineEditV2 {...props} />;
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 });
 
 InlineEdit = pkg.checkComponentEnabled(InlineEdit, componentName);
@@ -393,5 +279,9 @@ InlineEdit = pkg.checkComponentEnabled(InlineEdit, componentName);
 InlineEdit.displayName = componentName;
 
 InlineEdit.propTypes = {
+<<<<<<< HEAD
   v2: PropTypes.bool,
+=======
+  v1: PropTypes.bool,
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 };

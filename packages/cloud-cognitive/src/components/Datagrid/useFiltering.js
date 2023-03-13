@@ -1,12 +1,24 @@
+<<<<<<< HEAD
 // @flow
 /*
  * Licensed Materials - Property of IBM
  * 5724-Q36
  * (c) Copyright IBM Corp. 2022
+=======
+/*
+ * Licensed Materials - Property of IBM
+ * 5724-Q36
+ * (c) Copyright IBM Corp. 2023
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import { useMemo } from 'react';
+<<<<<<< HEAD
+=======
+import { FilterFlyout } from './Datagrid/addons/Filtering';
+import { BATCH } from './Datagrid/addons/Filtering/constants';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
 const useFiltering = (hooks) => {
   const filterTypes = useMemo(
@@ -58,20 +70,38 @@ const useFiltering = (hooks) => {
   );
 
   hooks.useInstance.push((instance) => {
+<<<<<<< HEAD
     const { filterProps, setAllFilters, setFilter, headers } = instance;
     const defaultProps = { variation: 'flyout' };
+=======
+    const { filterProps, setAllFilters, setFilter, headers, data } = instance;
+
+    const defaultProps = {
+      variation: 'flyout',
+      updateMethod: BATCH,
+      panelIconDescription: 'Open filter panel',
+    };
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     const getFilterFlyoutProps = () => ({
       ...defaultProps,
       ...filterProps,
       setAllFilters,
       setFilter,
       headers,
+<<<<<<< HEAD
+=======
+      data,
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     });
 
     Object.assign(instance, {
       filterProps: { ...defaultProps, ...instance.filterProps },
       filterTypes,
       getFilterFlyoutProps,
+<<<<<<< HEAD
+=======
+      FilterFlyout,
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     });
   });
 };

@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+<<<<<<< HEAD
 import pconsole from '../../global/js/utils/pconsole';
 import { pkg, carbon } from '../../settings';
 
@@ -26,6 +27,20 @@ import {
   Checkmark16,
   WarningFilled16,
 } from '@carbon/icons-react';
+=======
+import { pkg } from '../../settings';
+
+// Carbon and package components we use.
+/* TODO: @use(s) of carbon components and other package components. */
+import { Button, IconButton, usePrefix } from '@carbon/react';
+import {
+  Close,
+  Edit,
+  EditOff,
+  Checkmark,
+  WarningFilled,
+} from '@carbon/react/icons';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--inline-edit`;
@@ -73,6 +88,10 @@ export let InlineEditV1 = React.forwardRef(
     },
     refIn
   ) => {
+<<<<<<< HEAD
+=======
+    const carbonPrefix = usePrefix();
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     const refInput = useRef({ textContent: value });
     const localRef = useRef(null);
     const ref = refIn || localRef;
@@ -80,11 +99,15 @@ export let InlineEditV1 = React.forwardRef(
     const [internalValue, setInternalValue] = useState(value);
     const showValidation = invalid; // || warn;
     const validationText = invalidText; // || warnText;
+<<<<<<< HEAD
     const validationIcon = showValidation ? <WarningFilled16 /> : null;
 
     pconsole.warn(
       `${componentName}: the v1 version of this component is being deprecated. please switch to the v2 component as soon as possible.`
     );
+=======
+    const validationIcon = showValidation ? <WarningFilled size={16} /> : null;
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
     // sanitize the tooltip values
     const alignIsObject = typeof buttonTooltipAlignment === 'object';
@@ -261,7 +284,11 @@ export let InlineEditV1 = React.forwardRef(
           blockClass, // Apply the block class to the main HTML element
           className, // Apply any supplied class names to the main HTML element.
           `${blockClass}--${size}`,
+<<<<<<< HEAD
           // `${carbon.prefix}--btn ${carbon.prefix}--btn--ghost`, // make like a ghost button
+=======
+          // `${carbonPrefix}--btn ${carbonPrefix}--btn--ghost`, // make like a ghost button
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
           {
             // switched classes dependant on props or state
             [`${blockClass}--disabled`]: disabled,
@@ -328,7 +355,11 @@ export let InlineEditV1 = React.forwardRef(
                   hasIconOnly
                   iconDescription={cancelDescription}
                   onClick={handleCancel}
+<<<<<<< HEAD
                   renderIcon={Close16}
+=======
+                  renderIcon={(props) => <Close size={16} {...props} />}
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
                   {...tipPositions.cancel}
                 />
                 <Button
@@ -337,17 +368,26 @@ export let InlineEditV1 = React.forwardRef(
                   hasIconOnly
                   iconDescription={saveDescription}
                   onClick={handleSave}
+<<<<<<< HEAD
                   renderIcon={Checkmark16}
+=======
+                  renderIcon={(props) => <Checkmark size={16} {...props} />}
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
                   disabled={value === internalValue}
                   {...tipPositions.save}
                 />
               </>
             ) : (
+<<<<<<< HEAD
               <Button
+=======
+              <IconButton
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
                 className={cx(`${blockClass}__edit`, {
                   [`${blockClass}__edit--always-visible`]: editAlwaysVisible,
                 })}
                 kind="ghost"
+<<<<<<< HEAD
                 hasIconOnly
                 iconDescription={editDescription}
                 onClick={handleEdit}
@@ -356,13 +396,26 @@ export let InlineEditV1 = React.forwardRef(
                 tabIndex={-1}
                 {...tipPositions.edit}
               />
+=======
+                label={editDescription}
+                onClick={handleEdit}
+                disabled={disabled}
+                {...tipPositions.edit}
+              >
+                {disabled ? <EditOff size={16} /> : <Edit size={16} />}
+              </IconButton>
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
             )}
           </div>
         </div>
         <div className={cx(`${blockClass}__disabled-cover`)} />
         {showValidation && validationText && validationText.length > 0 && (
           <div
+<<<<<<< HEAD
             className={`${blockClass}__validation-text ${carbon.prefix}--form-requirement`}
+=======
+            className={`${blockClass}__validation-text ${carbonPrefix}--form-requirement`}
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
           >
             {validationText}
           </div>
@@ -372,6 +425,12 @@ export let InlineEditV1 = React.forwardRef(
   }
 );
 
+<<<<<<< HEAD
+=======
+// Return a placeholder if not released and not enabled by feature flag
+InlineEditV1 = pkg.checkComponentEnabled(InlineEditV1, componentName);
+
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 InlineEditV1.displayName = componentName;

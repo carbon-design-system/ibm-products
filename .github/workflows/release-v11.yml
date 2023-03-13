@@ -43,8 +43,12 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
 <<<<<<< HEAD
+<<<<<<< HEAD
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 =======
           NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+          NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
         run: yarn lerna publish --preid rc --dist-tag next --no-verify-access --create-release github --ignore-changes 'config/**/*' 'packages/security/**/*' 'packages/cdai/**/*' 'packages/core/**/*' --yes # This publishes subsequent v2.x.x releases

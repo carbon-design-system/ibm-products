@@ -14,8 +14,13 @@ import {
 } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 
+<<<<<<< HEAD:packages/cloud-cognitive/src/components/InlineEditV1/InlineEditV1.stories.js
 import { InlineEditV1 } from '.';
 import { InlineEdit } from '../InlineEdit/InlineEdit';
+=======
+import { InlineEdit } from '../InlineEdit/InlineEdit';
+import { InlineEditV1 } from '.';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212:packages/cloud-cognitive/src/components/InlineEdit/InlineEdit.stories.js
 import mdx from './InlineEditV1.mdx';
 
 import styles from './_storybook-styles.scss';
@@ -212,6 +217,7 @@ const Template = ({
           saveDescription,
           value,
         }}
+        v1
       />
     </div>
   );

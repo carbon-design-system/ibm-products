@@ -8,16 +8,19 @@
 import React from 'react';
 import { pkg } from '../../../settings';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { DataTable } from '@carbon/react';
 import { NoDataEmptyState } from '../../EmptyStates/NoDataEmptyState';
 =======
 import { DataTable } from 'carbon-components-react';
 import { NoDataEmptyState, ErrorEmptyState } from '../../EmptyStates';
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+import { TableBody, TableRow, TableCell } from '@carbon/react';
+import { NoDataEmptyState, ErrorEmptyState } from '../../EmptyStates';
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 
 const blockClass = `${pkg.prefix}--datagrid`;
-
-const { TableBody, TableRow, TableCell } = DataTable;
 
 const DatagridEmptyBody = (datagridState) => {
   const {
@@ -28,6 +31,8 @@ const DatagridEmptyBody = (datagridState) => {
     emptyStateSize,
     emptyStateType = 'noData',
     illustrationTheme,
+    emptyStateAction,
+    emptyStateLink,
   } = datagridState;
 
   return (
@@ -43,6 +48,11 @@ const DatagridEmptyBody = (datagridState) => {
               size={emptyStateSize}
               title={emptyStateTitle}
               subtitle={emptyStateDescription}
+<<<<<<< HEAD
+=======
+              action={emptyStateAction}
+              link={emptyStateLink}
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
             />
           )}
           {emptyStateType === 'noData' && (
@@ -51,6 +61,11 @@ const DatagridEmptyBody = (datagridState) => {
               size={emptyStateSize}
               title={emptyStateTitle}
               subtitle={emptyStateDescription}
+<<<<<<< HEAD
+=======
+              action={emptyStateAction}
+              link={emptyStateLink}
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
             />
           )}
         </TableCell>

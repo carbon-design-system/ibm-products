@@ -3,11 +3,15 @@ library:
   id: ibm-products
   name: IBM Products
 <<<<<<< HEAD
+<<<<<<< HEAD
   description:
     Discover React-based solutions designed for IBM's product portfolio.
 =======
   description: Discover React-based solutions designed for IBM’s product portfolio.
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+  description: Discover React-based solutions designed for IBM’s product portfolio.
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
   externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/
   designKits:
     ibm-products-g10-figma:
@@ -25,7 +29,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-generating-an-api-key-apikeymodal
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-generating-an-api-key-apikeymodal
     tags:
       - system-feedback
       - form
@@ -41,7 +45,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-about-modal-aboutmodal
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-about-modal-aboutmodal
     tags:
       - system-feedback
       - content-block
@@ -56,7 +60,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-actionbar
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-actionbar
     tags:
       - input-control
   action-set:
@@ -70,7 +74,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-actionset
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-actionset
     tags:
       - data-display
   breadcrumb-with-overflow:
@@ -84,7 +88,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-breadcrumbwithoverflow
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-breadcrumbwithoverflow
     tags:
       - structural-navigation
       - contextual-navigation
@@ -99,7 +103,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-buttonmenu
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-buttonmenu
     tags:
       - input-control
   button-set-with-overflow:
@@ -113,7 +117,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-buttonsetwithoverflow
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-buttonsetwithoverflow
     tags:
       - input-control
   cascade:
@@ -128,7 +132,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-cascade-cascade
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-cascade-cascade
     tags:
       - content-block
   combo-button:
@@ -143,7 +147,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-combobutton
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-internal-combobutton
     tags:
       - input-control
   create-full-page:
@@ -158,7 +162,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-create-flows-createfullpage
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-create-flows-createfullpage
     tags:
       - content-block
       - system-feedback
@@ -175,7 +179,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-create-flows-createmodal
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-create-flows-createmodal
     tags:
       - input-control
       - form
@@ -191,7 +195,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-create-flows-createtearsheet
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-create-flows-createtearsheet
     tags:
       - form
       - input-control
@@ -207,7 +211,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-create-flows-createtearsheetnarrow
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-create-flows-createtearsheetnarrow
     tags:
       - form
       - input-control
@@ -223,7 +227,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-dataspreadsheet-dataspreadsheet-canary
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-dataspreadsheet-dataspreadsheet-canary
     tags:
       - input-control
       - data-display
@@ -238,7 +242,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-datagrid-datagrid-canary
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-datagrid-datagrid-canary
     tags:
       - input-control
       - content-block
@@ -255,7 +259,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-edit-and-update-editsidepanel-canary
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-edit-and-update-editsidepanel-canary
     tags:
       - input-control
       - form
@@ -271,7 +275,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-empty-state-emptystate
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-empty-state-emptystate
     tags:
       - content-element
   export-modal:
@@ -286,7 +290,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-export-exportmodal
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-export-exportmodal
     tags:
       - system-feedback
       - form
@@ -302,7 +306,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-cards-expressivecard
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-cards-expressivecard
     tags:
       - content-block
       - contextual-navigation
@@ -318,7 +322,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-http-errors
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-http-errors
     tags:
       - system-feedback
       - content-block
@@ -335,7 +339,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-import-and-upload-importmodal
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-import-and-upload-importmodal
     tags:
       - system-feedback
       - input-control
@@ -352,7 +356,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-edit-and-update-inlineedit
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-edit-and-update-inlineedit
     tags:
       - input-control
   modified-tabs:
@@ -367,13 +371,17 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-modified-tabs-modifiedtabs-canary
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-modified-tabs-modifiedtabs-canary
     tags:
       - input-control
   multi-add-select:
     name: Multi add select
     externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/add-and-select/usage
+<<<<<<< HEAD
     status: experimental
+=======
+    status: stable
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     type: pattern
     platform: web
     framework: react
@@ -382,7 +390,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-multiaddselect-canary
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-multiaddselect
     tags:
       - form
       - content-block
@@ -398,7 +406,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-notifications-notificationspanel
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-notifications-notificationspanel
     tags:
       - input-control
       - system-feedback
@@ -414,7 +422,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-options-tile-optionstile
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-options-tile-optionstile
     tags:
       - input-control
       - form
@@ -431,7 +439,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-page-header-pageheader
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-page-header-pageheader
     tags:
       - structural-navigation
       - shell
@@ -448,7 +456,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-cards-productivecard
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-cards-productivecard
     tags:
       - content-block
       - input-control
@@ -464,7 +472,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-remove-removemodal
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-remove-removemodal
     tags:
       - system-feedback
       - input-control
@@ -480,7 +488,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-saving-saving
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-saving-saving
     tags:
       - input-control
       - system-feedback
@@ -496,7 +504,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-side-panel-sidepanel
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-side-panel-sidepanel
     tags:
       - input-control
       - form
@@ -505,7 +513,11 @@ assets:
   single-add-select:
     name: Single add select
     externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/add-and-select/usage
+<<<<<<< HEAD
     status: experimental
+=======
+    status: stable
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     type: pattern
     platform: web
     framework: react
@@ -514,7 +526,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-singleaddselect-canary
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-add-select-singleaddselect
     tags:
       - form
   status-icon:
@@ -529,7 +541,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-status-icons-statusicon
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-status-icons-statusicon
     tags:
       - media
       - content-element
@@ -546,7 +558,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-tag-set-tagset
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-tag-set-tagset
     tags:
       - data-display
   tearsheet:
@@ -561,7 +573,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-tearsheet-tearsheet
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-tearsheet-tearsheet
     tags:
       - input-control
       - form
@@ -577,7 +589,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-toolbars-toolbar-canary
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-toolbars-toolbar-canary
     tags:
       - input-control
   user-profile-image:
@@ -592,15 +604,19 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-user-profile-images-userprofileimage
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-user-profile-images-userprofileimage
     tags:
       - media
   web-terminal:
     name: Web terminal
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/web-terminal/usage
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/web-terminal/usage
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
     status: stable
     type: pattern
     platform: web
@@ -610,7 +626,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-web-terminal-webterminal-canary
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-web-terminal-webterminal
     tags:
       - content-block
       - shell

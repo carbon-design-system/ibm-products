@@ -1,5 +1,9 @@
 //
+<<<<<<< HEAD
 // Copyright IBM Corp. 2022
+=======
+// Copyright IBM Corp. 2022, 2022
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -281,10 +285,14 @@ export const WithAvatars = prepareStory(Template, {
           avatar: {
 <<<<<<< HEAD
             icon: (props) => <Group size={24} {...props} />,
+<<<<<<< HEAD
 =======
             icon: Group24,
             theme: 'light',
 >>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
+=======
+            theme: 'light',
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
           },
         },
       ],

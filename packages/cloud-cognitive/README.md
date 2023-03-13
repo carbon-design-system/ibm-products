@@ -11,7 +11,11 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg)](#contributors-)
 [![Licensed under the Apache License, Version 2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/LICENSE)
 [![Build status](https://github.com/carbon-design-system/ibm-cloud-cognitive/actions/workflows/ci.yml/badge.svg)](https://github.com/carbon-design-system/ibm-cloud-cognitive/actions/workflows/ci.yml)
+<<<<<<< HEAD
 [![Netlify status](https://img.shields.io/netlify/f850c678-e8be-43c0-aa95-b2b9cca8ac21)](https://app.netlify.com/sites/carbon-for-ibm-products/deploys)
+=======
+[![Netlify status](https://img.shields.io/netlify/e8cd9972-0fc8-4c51-a911-e9a930ca6605)](https://app.netlify.com/sites/v11-carbon-for-ibm-products/deploys)
+>>>>>>> b1256ee15584a536b87ff6bef3242a13b22a6212
 [![GitHub Lerna version](https://img.shields.io/github/lerna-json/v/carbon-design-system/ibm-cloud-cognitive)](https://lerna.js.org)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)
 
@@ -39,6 +43,23 @@ Then you can import the component styles in your `index.js`.
 
 ```js
 import '@carbon/ibm-products/css/index.min.css';
+```
+
+### Webpack 4
+
+Our package requires support for ES modules (see
+[#2378](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2378#issuecomment-1319276192)).
+In Webpack 5, these are supported by default. In Webpack 4, you will need to add
+the [following rule](https://stackoverflow.com/a/72149467) to your config.
+
+```js
+rules: [
+  {
+    test: /\.mjs$/,
+    include: /node_modules/,
+    type: 'javascript/auto',
+  },
+],
 ```
 
 ### Peer dependencies

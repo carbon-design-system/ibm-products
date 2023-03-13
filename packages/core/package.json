@@ -1,11 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-<<<<<<< HEAD
-  "version": "0.37.2",
-=======
   "version": "0.40.1",
->>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -32,39 +28,6 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$)/'"
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "@babel/core": "^7.18.13",
-    "@carbon/grid": "^11.3.0",
-    "@carbon/layout": "^11.3.0",
-    "@carbon/motion": "^11.2.0",
-    "@carbon/react": "^1.9.0-rc.0",
-    "@carbon/storybook-addon-theme": "^0.22.24",
-    "@carbon/themes": "^11.4.0",
-    "@carbon/type": "^11.4.0",
-    "@storybook/addon-actions": "^6.5.10",
-    "@storybook/addon-controls": "^6.5.10",
-    "@storybook/addon-docs": "^6.5.10",
-    "@storybook/addon-info": "^5.3.21",
-    "@storybook/addon-knobs": "^6.3.1",
-    "@storybook/addon-links": "^6.5.10",
-    "@storybook/addon-storysource": "^6.5.10",
-    "@storybook/addon-viewport": "^6.5.10",
-    "@storybook/addons": "^6.5.10",
-    "@storybook/api": "^6.5.10",
-    "@storybook/builder-webpack5": "^6.5.10",
-    "@storybook/components": "^6.5.10",
-    "@storybook/core-events": "^6.5.10",
-    "@storybook/csf": "^0.0.1",
-    "@storybook/manager-webpack5": "^6.5.10",
-    "@storybook/react": "^6.5.10",
-    "@storybook/theming": "^6.5.10",
-    "babel-loader": "^8.2.5",
-    "babel-preset-ibm-cloud-cognitive": "^0.14.18",
-    "css-loader": "^6.7.1",
-    "dotenv-webpack": "6.0.4",
-    "fast-sass-loader": "^2.0.1",
-    "npm-check-updates": "^16.0.6",
-=======
     "@babel/core": "^7.20.2",
     "@carbon/elements": "^10.56.1",
     "@carbon/grid": "10.43.1",
@@ -100,25 +63,16 @@
     "css-loader": "^6.7.2",
     "fast-sass-loader": "^2.0.1",
     "npm-check-updates": "^16.4.1",
->>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     "npm-run-all": "^4.1.5",
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "regenerator-runtime": "^0.13.10",
     "rimraf": "^3.0.2",
-<<<<<<< HEAD
-    "sass": "^1.54.4",
-    "sass-loader": "^13.0.0",
-    "style-loader": "^3.3.1",
-    "typescript": "^4.8.2",
-    "webpack": "^5.74.0",
-=======
     "sass": "^1.56.1",
     "style-loader": "^3.3.1",
     "typescript": "^4.8.4",
     "webpack": "^5.75.0",
->>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     "webpack-merge": "^5.8.0"
   }
 }

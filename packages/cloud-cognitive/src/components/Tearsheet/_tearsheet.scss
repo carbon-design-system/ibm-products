@@ -159,6 +159,11 @@ $motion-duration: $duration-moderate-02;
     margin: 0;
   }
 
+  &.#{$block-class}--narrow .#{$block-class}__header-description {
+    max-width: 80%;
+  }
+
+
   .#{$block-class}__header-content {
     display: flex;
     justify-content: space-between;

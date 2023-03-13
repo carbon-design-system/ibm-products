@@ -66,39 +66,17 @@
     "upgrade:manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "@babel/core": "^7.18.13",
-    "@babel/eslint-parser": "^7.18.9",
-    "@carbon/component-usage-report": "*",
-    "@commitlint/cli": "^17.1.2",
-    "@commitlint/config-conventional": "^17.1.0",
-=======
     "@babel/core": "^7.20.2",
     "@babel/eslint-parser": "^7.19.1",
     "@carbon/component-usage-report": "*",
     "@commitlint/cli": "^17.2.0",
     "@commitlint/config-conventional": "^17.2.0",
->>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     "@testing-library/dom": "^8.11.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "^13.5.0",
     "cheerio": "^1.0.0-rc.12",
     "copyfiles": "^2.4.1",
-<<<<<<< HEAD
-    "cspell": "^6.8.1",
-    "eslint": "^8.23.0",
-    "eslint-config-carbon": "^2.14.0",
-    "husky": "^8.0.1",
-    "jest": "^29.0.1",
-    "json": "^11.0.0",
-    "lerna": "^5.5.0",
-    "lint-staged": "^13.0.3",
-    "npm-check-updates": "^16.0.6",
-    "npm-run-all": "^4.1.5",
-    "npm-upgrade": "^3.1.0",
-    "postcss": "^8.4.16",
-=======
     "cspell": "^6.14.2",
     "eslint": "^8.27.0",
     "eslint-config-carbon": "2.17.0",
@@ -111,17 +89,12 @@
     "npm-run-all": "^4.1.5",
     "npm-upgrade": "^3.1.0",
     "postcss": "^8.4.19",
->>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     "prettier": "^2.7.1",
     "prettier-config-carbon": "^0.8.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "rimraf": "^3.0.2",
-<<<<<<< HEAD
-    "stylelint": "^14.11.0",
-=======
     "stylelint": "^14.15.0",
->>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
     "stylelint-config-ibm-products": "*",
     "webpack": "^5.75.0"
   },
@@ -180,17 +153,6 @@
     }
   },
   "lint-staged": {
-<<<<<<< HEAD
-    "packages/cloud-cognitive/**/*.{js,md,mdx,scss}": "yarn lint:prettier:files",
-    "packages/cloud-cognitive/**/*.js": "yarn lint:es:files",
-    "packages/cloud-cognitive/**/*.scss": "yarn lint:style:files",
-    "packages/cloud-cognitive/**/*": "yarn spellcheck:files"
-  },
-  "dependencies": {
-    "stylelint-plugin-carbon-tokens": "2.0.0"
-  },
-  "packageManager": "yarn@3.2.3"
-=======
     "**/*.{js,md,mdx,scss}": [
       "yarn prettier --write"
     ],
@@ -206,5 +168,4 @@
     "stylelint-plugin-carbon-tokens": "2.1.0"
   },
   "packageManager": "yarn@3.2.4"
->>>>>>> 05ee7cdcf736a836aafbb7b74e11211b4a5787c8
 }

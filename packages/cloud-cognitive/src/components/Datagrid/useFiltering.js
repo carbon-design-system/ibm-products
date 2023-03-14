@@ -7,6 +7,8 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import { useMemo } from 'react';
+import { FilterFlyout } from './Datagrid/addons/Filtering';
+import { BATCH } from './Datagrid/addons/Filtering/constants';
 
 const useFiltering = (hooks) => {
   const filterTypes = useMemo(
@@ -58,19 +60,27 @@ const useFiltering = (hooks) => {
   );
 
   hooks.useInstance.push((instance) => {
-    const { filterProps, setAllFilters, headers } = instance;
-    const defaultProps = { variation: 'flyout' };
+    const { filterProps, setAllFilters, setFilter, headers, data } = instance;
+
+    const defaultProps = {
+      variation: 'flyout',
+      updateMethod: BATCH,
+      panelIconDescription: 'Open filter panel',
+    };
     const getFilterFlyoutProps = () => ({
       ...defaultProps,
       ...filterProps,
       setAllFilters,
+      setFilter,
       headers,
+      data,
     });
 
     Object.assign(instance, {
       filterProps: { ...defaultProps, ...instance.filterProps },
       filterTypes,
       getFilterFlyoutProps,
+      FilterFlyout,
     });
   });
 };

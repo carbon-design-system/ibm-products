@@ -19,21 +19,27 @@ import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
 import { useClickOutside } from '../../../global/js/hooks';
 import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
+import FilterPanel from './addons/Filtering/FilterPanel';
+import { FilterSummary } from '../../FilterSummary';
+import { FilterContext } from './addons/Filtering';
+import { CLEAR_FILTERS } from './addons/Filtering/constants';
 
 const { TableContainer, Table } = DataTable;
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 export const DatagridContent = ({ datagridState }) => {
-  const { state, dispatch } = useContext(InlineEditContext);
-  const { activeCellId } = state;
+  const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
+  const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
+  const { activeCellId, gridActive, editId } = inlineEditState;
   const {
     getTableProps = () => {},
+    getFilterFlyoutProps,
     withVirtualScroll,
     DatagridPagination,
     isFetching,
     CustomizeColumnsTearsheet,
-    leftPanel,
+    filterProps,
     fullHeightDatagrid,
     verticalAlign = 'center',
     variableRowHeight,
@@ -45,10 +51,10 @@ export const DatagridContent = ({ datagridState }) => {
     DatagridActions,
     totalColumnsWidth,
     gridRef,
+    state,
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
-  const { gridActive, editId } = state;
   const gridAreaRef = useRef();
   const multiKeyTrackingRef = useRef();
 
@@ -89,14 +95,18 @@ export const DatagridContent = ({ datagridState }) => {
                 handleGridKeyPress({
                   event,
                   dispatch,
-                  state,
+                  inlineEditState,
                   instance: datagridState,
                   keysPressedList,
                   usingMac,
                 })
             : null
         }
-        onFocus={withInlineEdit ? () => handleGridFocus(state, dispatch) : null}
+        onFocus={
+          withInlineEdit
+            ? () => handleGridFocus(inlineEditState, dispatch)
+            : null
+        }
       >
         {!withVirtualScroll ? <DatagridHead {...datagridState} /> : null}
         <DatagridBody {...datagridState} rows={rows} />
@@ -131,6 +141,15 @@ export const DatagridContent = ({ datagridState }) => {
     }
   }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
 
+  const renderFilterSummary = () =>
+    state.filters.length > 0 && (
+      <FilterSummary
+        className={`${blockClass}__filter-summary`}
+        filters={filterTags}
+        clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
+      />
+    );
+
   return (
     <>
       <TableContainer
@@ -152,24 +171,36 @@ export const DatagridContent = ({ datagridState }) => {
         description={gridDescription}
       >
         <DatagridToolbar {...datagridState} />
-        <div className={`${blockClass}__table-container`} ref={gridAreaRef}>
-          {leftPanel && leftPanel.isOpen && (
-            <div className={`${blockClass}__datagridLeftPanel`}>
-              {leftPanel.panelContent}
-            </div>
+
+        <div
+          className={cx(`${blockClass}__table-container`, {
+            [`${blockClass}__table-container--filter-open`]: panelOpen,
+          })}
+          ref={gridAreaRef}
+        >
+          {filterProps?.variation === 'panel' && (
+            <FilterPanel
+              updateMethod="batch"
+              {...getFilterFlyoutProps()}
+              title={filterProps.panelTitle}
+              filterSections={filterProps.sections}
+            />
           )}
-          {withInlineEdit ? (
-            <div ref={multiKeyTrackingRef}>{renderTable()}</div>
-          ) : withVirtualScroll ? (
-            <div
-              className={`${blockClass}__virtualScrollContainer`}
-              ref={gridRef}
-            >
-              {renderTable()}
-            </div>
-          ) : (
-            renderTable()
-          )}
+          <div className={`${blockClass}__table-container-inner`}>
+            {renderFilterSummary()}
+            {withInlineEdit ? (
+              <div ref={multiKeyTrackingRef}>{renderTable()}</div>
+            ) : withVirtualScroll ? (
+              <div
+                className={`${blockClass}__virtualScrollContainer`}
+                ref={gridRef}
+              >
+                {renderTable()}
+              </div>
+            ) : (
+              renderTable()
+            )}
+          </div>
         </div>
       </TableContainer>
       {rows?.length > 0 && !isFetching && DatagridPagination && (
@@ -185,6 +216,7 @@ export const DatagridContent = ({ datagridState }) => {
 DatagridContent.propTypes = {
   datagridState: PropTypes.shape({
     getTableProps: PropTypes.func,
+    getFilterFlyoutProps: PropTypes.func,
     withVirtualScroll: PropTypes.bool,
     DatagridActions: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     DatagridPagination: PropTypes.oneOfType([
@@ -196,8 +228,8 @@ DatagridContent.propTypes = {
       PropTypes.func,
     ]),
     isFetching: PropTypes.bool,
-    leftPanel: PropTypes.object,
     fullHeightDatagrid: PropTypes.bool,
+    filterProps: PropTypes.object,
     variableRowHeight: PropTypes.bool,
     useDenseHeader: PropTypes.bool,
     withInlineEdit: PropTypes.bool,
@@ -209,5 +241,8 @@ DatagridContent.propTypes = {
     tableId: PropTypes.string,
     totalColumnsWidth: PropTypes.number,
     gridRef: PropTypes.object,
+    setAllFilters: PropTypes.func,
+    getFilterProps: PropTypes.func,
+    state: PropTypes.object,
   }),
 };

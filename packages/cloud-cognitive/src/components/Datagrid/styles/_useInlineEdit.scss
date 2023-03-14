@@ -129,7 +129,7 @@ $row-heights: (
   background-color: $hover-selected-ui;
   color: $text-01;
   .#{$block-class}__inline-edit-button-icon {
-    fill: $icon-01;
+    color: $icon-01;
   }
 }
 
@@ -137,9 +137,13 @@ $row-heights: (
   .#{$block-class}__inline-edit-button.#{$block-class}__inline-edit-button--active:not(
     [data-disabled='true']
   ) {
-  background-color: $active-ui;
-  color: $text-01;
+  background-color: $field-01;
+  color: $text-02;
   cursor: text;
+
+  .#{$block-class}__inline-edit-button-icon {
+    color: $icon-02;
+  }
 }
 
 .#{$block-class}__inline-edit--outer-cell-button

@@ -204,7 +204,7 @@
       -webkit-line-clamp: 2;
 
       @include carbon--breakpoint-up('md') {
-        max-width: 80%;
+        max-width: 60%;
       }
 
       word-break: break-word;

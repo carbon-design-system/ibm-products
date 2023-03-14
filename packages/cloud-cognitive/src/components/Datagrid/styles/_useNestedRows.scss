@@ -7,6 +7,7 @@
 */
 
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
 @use '@carbon/styles/scss/motion' as *;
 @use './variables' as *;
@@ -49,4 +50,22 @@
   height: 1px;
   background-color: $border-subtle;
   content: '';
+}
+
+.#{$block-class} tr.#{$block-class}__carbon-nested-row {
+  td:first-child:empty,
+  .#{$block-class}__expandable-row-cell {
+    border-bottom: none;
+  }
+}
+
+.#{c4p-settings.$carbon-prefix}--data-table
+  td.#{$block-class}__expandable-row-cell {
+  padding-left: $spacing-03;
+}
+
+.#{$block-class}__carbon-row-expanded {
+  .#{$block-class}__expandable-row-cell {
+    border-bottom: none;
+  }
 }

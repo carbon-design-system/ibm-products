@@ -1727,7 +1727,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (prefers-reduced-motion: no-preference) {
   .c4p--cascade__element,
-.c4p--cascade__col {
+  .c4p--cascade__col {
     /* stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use -- Carbon animation duration defined above in $animationProps */
     animation: 240ms cubic-bezier(0.2, 0, 0.38, 0.9) 0s 1 fade;
     animation-fill-mode: forwards;
@@ -1903,9 +1903,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 
 @media (prefers-reduced-motion) {
   .c4p--create-influencer__side-nav-opening,
-.c4p--create-influencer__progress-indicator-opening,
-.c4p--create-influencer__side-nav-closing,
-.c4p--create-influencer__progress-indicator-closing {
+  .c4p--create-influencer__progress-indicator-opening,
+  .c4p--create-influencer__side-nav-closing,
+  .c4p--create-influencer__progress-indicator-closing {
     animation: none;
     opacity: 1;
   }
@@ -2007,7 +2007,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: 0;
   height: min-content;
   padding-top: 0;
-  border-right: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-right: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   background-color: transparent;
   grid-row: 1;
   overflow-x: auto;
@@ -2788,12 +2788,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header {
   padding: 1.5rem 2rem;
-  border-bottom: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-bottom: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   margin: 0;
 }
 .c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header {
   padding: 1rem;
-  border-bottom: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-bottom: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   margin: 0;
 }
 .c4p--tearsheet .c4p--tearsheet__header-content {
@@ -2849,6 +2849,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header.c4p--tearsheet__header--with-close-icon {
   padding-right: 4rem;
 }
+.c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header-description {
+  max-width: 80%;
+}
 .c4p--tearsheet .c4p--tearsheet__header-navigation {
   margin: 0.75rem 0 0;
 }
@@ -2864,7 +2867,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--tearsheet .c4p--tearsheet__influencer {
   flex: 0 0 257px;
-  border-right: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-right: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   overflow-y: auto;
 }
 .c4p--tearsheet .c4p--tearsheet__influencer.c4p--tearsheet__influencer p {
@@ -2887,7 +2890,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--tearsheet .c4p--tearsheet__main .c4p--tearsheet__influencer {
   border-right: none;
-  border-left: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-left: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 .c4p--tearsheet .c4p--tearsheet__content {
   overflow: auto;
@@ -2929,7 +2932,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet .c4p--tearsheet__buttons {
   display: inline-flex;
   min-width: 100%;
-  border-top: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-top: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__buttons {
   background: var(--cds-background, #ffffff);
@@ -3889,15 +3892,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--add-select__selections-row:first-child .c4p--add-select__selections-cell-wrapper {
-  border-top: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-top: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 
 .c4p--add-select__column {
   overflow: auto;
   flex: 0 0 20rem;
   padding: 1rem;
-  border-top: 1px solid var(--cds-border-subtle-01, #e0e0e0);
-  border-right: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-top: 1px solid var(--cds-border-subtle-01, #c6c6c6);
+  border-right: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 .c4p--add-select__column-search-bar {
   display: flex;
@@ -4139,6 +4142,9 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-border-subtle-selected-01: #525252;
   --cds-border-subtle-selected-02: #6f6f6f;
   --cds-border-subtle-selected-03: #8d8d8d;
+  --cds-border-tile-01: #525252;
+  --cds-border-tile-02: #6f6f6f;
+  --cds-border-tile-03: #8d8d8d;
   --cds-field-01: #262626;
   --cds-field-02: #393939;
   --cds-field-03: #525252;
@@ -4150,6 +4156,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus-inverse: #0f62fe;
   --cds-highlight: #002d9c;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
+  --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;
   --cds-icon-on-color: #ffffff;
   --cds-icon-on-color-disabled: rgba(255, 255, 255, 0.25);
@@ -4235,6 +4242,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-label-01-font-weight: 400;
   --cds-label-01-line-height: 1.33333;
   --cds-label-01-letter-spacing: 0.32px;
+  --cds-label-02-font-size: 0.875rem;
+  --cds-label-02-font-weight: 400;
+  --cds-label-02-line-height: 1.28572;
+  --cds-label-02-letter-spacing: 0.16px;
   --cds-helper-text-01-font-size: 0.75rem;
   --cds-helper-text-01-line-height: 1.33333;
   --cds-helper-text-01-letter-spacing: 0.32px;
@@ -4296,11 +4307,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
-  --cds-productive-heading-06-font-size: 2rem;
+  --cds-productive-heading-06-font-size: 2.625rem;
   --cds-productive-heading-06-font-weight: 300;
   --cds-productive-heading-06-line-height: 1.199;
   --cds-productive-heading-06-letter-spacing: 0;
-  --cds-productive-heading-07-font-size: 2.625rem;
+  --cds-productive-heading-07-font-size: 3.375rem;
   --cds-productive-heading-07-font-weight: 300;
   --cds-productive-heading-07-line-height: 1.19;
   --cds-productive-heading-07-letter-spacing: 0;
@@ -4355,7 +4366,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-display-03-line-height: 1.19;
   --cds-display-03-letter-spacing: 0;
   --cds-display-04-font-size: 2.625rem;
-  --cds-display-04-font-weight: 600;
+  --cds-display-04-font-weight: 300;
   --cds-display-04-line-height: 1.19;
   --cds-display-04-letter-spacing: 0;
   --cds-legal-01-font-size: 0.75rem;
@@ -4402,11 +4413,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
-  --cds-heading-06-font-size: 2rem;
+  --cds-heading-06-font-size: 2.625rem;
   --cds-heading-06-font-weight: 300;
   --cds-heading-06-line-height: 1.199;
   --cds-heading-06-letter-spacing: 0;
-  --cds-heading-07-font-size: 2.625rem;
+  --cds-heading-07-font-size: 3.375rem;
   --cds-heading-07-font-weight: 300;
   --cds-heading-07-line-height: 1.19;
   --cds-heading-07-letter-spacing: 0;
@@ -4453,7 +4464,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-fluid-display-03-line-height: 1.19;
   --cds-fluid-display-03-letter-spacing: 0;
   --cds-fluid-display-04-font-size: 2.625rem;
-  --cds-fluid-display-04-font-weight: 600;
+  --cds-fluid-display-04-font-weight: 300;
   --cds-fluid-display-04-line-height: 1.19;
   --cds-fluid-display-04-letter-spacing: 0;
   --cds-layer: var(--cds-layer-01, #f4f4f4);
@@ -4466,9 +4477,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-layer-accent-active: var(--cds-layer-accent-active-01, #a8a8a8);
   --cds-field: var(--cds-field-01, #f4f4f4);
   --cds-field-hover: var(--cds-field-hover-01, #e8e8e8);
-  --cds-border-subtle: var(--cds-border-subtle-01, #e0e0e0);
+  --cds-border-subtle: var(--cds-border-subtle-01, #c6c6c6);
   --cds-border-subtle-selected: var(--cds-border-subtle-selected-01, #c6c6c6);
   --cds-border-strong: var(--cds-border-strong-01, #8d8d8d);
+  --cds-border-tile: var(--cds-border-tile-01, #c6c6c6);
   position: fixed;
   z-index: 2;
   top: 3rem;
@@ -4580,7 +4592,7 @@ button.c4p--add-select__global-filter-toggle--open {
   fill: var(--cds-support-error, #da1e28);
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-status-icon.c4p--notifications-panel__notification-status-icon-success {
-  fill: var(--cds-support-success, #198038);
+  fill: var(--cds-support-success, #24a148);
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-status-icon.c4p--notifications-panel__notification-status-icon-warning {
   fill: var(--cds-support-warning, #f1c21b);
@@ -4626,7 +4638,7 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion: reduce) {
   .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-more-button .cds--btn__icon,
-.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button .cds--btn__icon {
+  .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button .cds--btn__icon {
     transition: none;
   }
 }
@@ -5075,13 +5087,13 @@ button.c4p--add-select__global-filter-toggle--open {
 
 @media (min-width: 42rem) {
   .cds--col,
-.cds--col-md {
+  .cds--col-md {
     max-width: 100%;
     flex-basis: 0;
     flex-grow: 1;
   }
   .cds--col--auto,
-.cds--col-md--auto {
+  .cds--col-md--auto {
     width: auto;
     max-width: 100%;
     flex: 1 0 0%;
@@ -5413,13 +5425,13 @@ button.c4p--add-select__global-filter-toggle--open {
 
 @media (min-width: 66rem) {
   .cds--col,
-.cds--col-lg {
+  .cds--col-lg {
     max-width: 100%;
     flex-basis: 0;
     flex-grow: 1;
   }
   .cds--col--auto,
-.cds--col-lg--auto {
+  .cds--col-lg--auto {
     width: auto;
     max-width: 100%;
     flex: 1 0 0%;
@@ -5815,13 +5827,13 @@ button.c4p--add-select__global-filter-toggle--open {
 
 @media (min-width: 82rem) {
   .cds--col,
-.cds--col-xlg {
+  .cds--col-xlg {
     max-width: 100%;
     flex-basis: 0;
     flex-grow: 1;
   }
   .cds--col--auto,
-.cds--col-xlg--auto {
+  .cds--col-xlg--auto {
     width: auto;
     max-width: 100%;
     flex: 1 0 0%;
@@ -6217,13 +6229,13 @@ button.c4p--add-select__global-filter-toggle--open {
 
 @media (min-width: 99rem) {
   .cds--col,
-.cds--col-max {
+  .cds--col-max {
     max-width: 100%;
     flex-basis: 0;
     flex-grow: 1;
   }
   .cds--col--auto,
-.cds--col-max--auto {
+  .cds--col-max--auto {
     width: auto;
     max-width: 100%;
     flex: 1 0 0%;
@@ -6455,7 +6467,7 @@ button.c4p--add-select__global-filter-toggle--open {
     display: none;
   }
   .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-back,
-.c4p--breadcrumb-with-overflow .cds--breadcrumb-item:last-child {
+  .c4p--breadcrumb-with-overflow .cds--breadcrumb-item:last-child {
     display: inline-flex;
     vertical-align: middle;
   }
@@ -7190,7 +7202,7 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--card__productive .c4p--card__footer {
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-top: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 .c4p--card__productive .c4p--card__footer-no-button {
   justify-content: flex-end;
@@ -7281,8 +7293,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7294,8 +7306,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7307,8 +7319,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7320,8 +7332,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7333,8 +7345,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7346,8 +7358,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7359,8 +7371,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7372,8 +7384,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7385,8 +7397,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7398,8 +7410,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7411,8 +7423,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7424,8 +7436,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7437,8 +7449,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7450,8 +7462,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7463,8 +7475,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7476,8 +7488,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7490,8 +7502,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion: reduce) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7504,8 +7516,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion: reduce) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7531,8 +7543,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7544,8 +7556,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7557,8 +7569,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7570,8 +7582,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7583,8 +7595,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7596,8 +7608,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7609,8 +7621,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7622,8 +7634,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7635,8 +7647,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7648,8 +7660,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7661,8 +7673,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7674,8 +7686,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7687,8 +7699,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7700,8 +7712,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7713,8 +7725,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7726,8 +7738,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7739,8 +7751,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7752,8 +7764,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7766,8 +7778,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion: reduce) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7780,8 +7792,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion: reduce) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7807,8 +7819,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7820,8 +7832,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -8090,6 +8102,9 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-border-subtle-selected-01: #6f6f6f;
   --cds-border-subtle-selected-02: #8d8d8d;
   --cds-border-subtle-selected-03: #a8a8a8;
+  --cds-border-tile-01: #6f6f6f;
+  --cds-border-tile-02: #8d8d8d;
+  --cds-border-tile-03: #a8a8a8;
   --cds-field-01: #393939;
   --cds-field-02: #525252;
   --cds-field-03: #6f6f6f;
@@ -8101,6 +8116,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus-inverse: #0f62fe;
   --cds-highlight: #0043ce;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
+  --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;
   --cds-icon-on-color: #ffffff;
   --cds-icon-on-color-disabled: rgba(255, 255, 255, 0.25);
@@ -8186,6 +8202,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-label-01-font-weight: 400;
   --cds-label-01-line-height: 1.33333;
   --cds-label-01-letter-spacing: 0.32px;
+  --cds-label-02-font-size: 0.875rem;
+  --cds-label-02-font-weight: 400;
+  --cds-label-02-line-height: 1.28572;
+  --cds-label-02-letter-spacing: 0.16px;
   --cds-helper-text-01-font-size: 0.75rem;
   --cds-helper-text-01-line-height: 1.33333;
   --cds-helper-text-01-letter-spacing: 0.32px;
@@ -8247,11 +8267,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
-  --cds-productive-heading-06-font-size: 2rem;
+  --cds-productive-heading-06-font-size: 2.625rem;
   --cds-productive-heading-06-font-weight: 300;
   --cds-productive-heading-06-line-height: 1.199;
   --cds-productive-heading-06-letter-spacing: 0;
-  --cds-productive-heading-07-font-size: 2.625rem;
+  --cds-productive-heading-07-font-size: 3.375rem;
   --cds-productive-heading-07-font-weight: 300;
   --cds-productive-heading-07-line-height: 1.19;
   --cds-productive-heading-07-letter-spacing: 0;
@@ -8306,7 +8326,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-display-03-line-height: 1.19;
   --cds-display-03-letter-spacing: 0;
   --cds-display-04-font-size: 2.625rem;
-  --cds-display-04-font-weight: 600;
+  --cds-display-04-font-weight: 300;
   --cds-display-04-line-height: 1.19;
   --cds-display-04-letter-spacing: 0;
   --cds-legal-01-font-size: 0.75rem;
@@ -8353,11 +8373,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
-  --cds-heading-06-font-size: 2rem;
+  --cds-heading-06-font-size: 2.625rem;
   --cds-heading-06-font-weight: 300;
   --cds-heading-06-line-height: 1.199;
   --cds-heading-06-letter-spacing: 0;
-  --cds-heading-07-font-size: 2.625rem;
+  --cds-heading-07-font-size: 3.375rem;
   --cds-heading-07-font-weight: 300;
   --cds-heading-07-line-height: 1.19;
   --cds-heading-07-letter-spacing: 0;
@@ -8404,7 +8424,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-fluid-display-03-line-height: 1.19;
   --cds-fluid-display-03-letter-spacing: 0;
   --cds-fluid-display-04-font-size: 2.625rem;
-  --cds-fluid-display-04-font-weight: 600;
+  --cds-fluid-display-04-font-weight: 300;
   --cds-fluid-display-04-line-height: 1.19;
   --cds-fluid-display-04-letter-spacing: 0;
   --cds-layer: var(--cds-layer-01, #f4f4f4);
@@ -8417,9 +8437,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-layer-accent-active: var(--cds-layer-accent-active-01, #a8a8a8);
   --cds-field: var(--cds-field-01, #f4f4f4);
   --cds-field-hover: var(--cds-field-hover-01, #e8e8e8);
-  --cds-border-subtle: var(--cds-border-subtle-01, #e0e0e0);
+  --cds-border-subtle: var(--cds-border-subtle-01, #c6c6c6);
   --cds-border-subtle-selected: var(--cds-border-subtle-selected-01, #c6c6c6);
   --cds-border-strong: var(--cds-border-strong-01, #8d8d8d);
+  --cds-border-tile: var(--cds-border-tile-01, #c6c6c6);
   position: fixed;
   top: 3rem;
   right: 0;
@@ -8466,6 +8487,9 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-border-subtle-selected-01: #525252;
   --cds-border-subtle-selected-02: #6f6f6f;
   --cds-border-subtle-selected-03: #8d8d8d;
+  --cds-border-tile-01: #525252;
+  --cds-border-tile-02: #6f6f6f;
+  --cds-border-tile-03: #8d8d8d;
   --cds-field-01: #262626;
   --cds-field-02: #393939;
   --cds-field-03: #525252;
@@ -8477,6 +8501,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus-inverse: #0f62fe;
   --cds-highlight: #002d9c;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
+  --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;
   --cds-icon-on-color: #ffffff;
   --cds-icon-on-color-disabled: rgba(255, 255, 255, 0.25);
@@ -8562,6 +8587,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-label-01-font-weight: 400;
   --cds-label-01-line-height: 1.33333;
   --cds-label-01-letter-spacing: 0.32px;
+  --cds-label-02-font-size: 0.875rem;
+  --cds-label-02-font-weight: 400;
+  --cds-label-02-line-height: 1.28572;
+  --cds-label-02-letter-spacing: 0.16px;
   --cds-helper-text-01-font-size: 0.75rem;
   --cds-helper-text-01-line-height: 1.33333;
   --cds-helper-text-01-letter-spacing: 0.32px;
@@ -8623,11 +8652,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
-  --cds-productive-heading-06-font-size: 2rem;
+  --cds-productive-heading-06-font-size: 2.625rem;
   --cds-productive-heading-06-font-weight: 300;
   --cds-productive-heading-06-line-height: 1.199;
   --cds-productive-heading-06-letter-spacing: 0;
-  --cds-productive-heading-07-font-size: 2.625rem;
+  --cds-productive-heading-07-font-size: 3.375rem;
   --cds-productive-heading-07-font-weight: 300;
   --cds-productive-heading-07-line-height: 1.19;
   --cds-productive-heading-07-letter-spacing: 0;
@@ -8682,7 +8711,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-display-03-line-height: 1.19;
   --cds-display-03-letter-spacing: 0;
   --cds-display-04-font-size: 2.625rem;
-  --cds-display-04-font-weight: 600;
+  --cds-display-04-font-weight: 300;
   --cds-display-04-line-height: 1.19;
   --cds-display-04-letter-spacing: 0;
   --cds-legal-01-font-size: 0.75rem;
@@ -8729,11 +8758,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
-  --cds-heading-06-font-size: 2rem;
+  --cds-heading-06-font-size: 2.625rem;
   --cds-heading-06-font-weight: 300;
   --cds-heading-06-line-height: 1.199;
   --cds-heading-06-letter-spacing: 0;
-  --cds-heading-07-font-size: 2.625rem;
+  --cds-heading-07-font-size: 3.375rem;
   --cds-heading-07-font-weight: 300;
   --cds-heading-07-line-height: 1.19;
   --cds-heading-07-letter-spacing: 0;
@@ -8780,7 +8809,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-fluid-display-03-line-height: 1.19;
   --cds-fluid-display-03-letter-spacing: 0;
   --cds-fluid-display-04-font-size: 2.625rem;
-  --cds-fluid-display-04-font-weight: 600;
+  --cds-fluid-display-04-font-weight: 300;
   --cds-fluid-display-04-line-height: 1.19;
   --cds-fluid-display-04-letter-spacing: 0;
   --cds-layer: var(--cds-layer-01, #f4f4f4);
@@ -8793,9 +8822,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-layer-accent-active: var(--cds-layer-accent-active-01, #a8a8a8);
   --cds-field: var(--cds-field-01, #f4f4f4);
   --cds-field-hover: var(--cds-field-hover-01, #e8e8e8);
-  --cds-border-subtle: var(--cds-border-subtle-01, #e0e0e0);
+  --cds-border-subtle: var(--cds-border-subtle-01, #c6c6c6);
   --cds-border-subtle-selected: var(--cds-border-subtle-selected-01, #c6c6c6);
   --cds-border-strong: var(--cds-border-strong-01, #8d8d8d);
+  --cds-border-tile: var(--cds-border-tile-01, #c6c6c6);
 }
 
 .c4p--web-terminal__body {

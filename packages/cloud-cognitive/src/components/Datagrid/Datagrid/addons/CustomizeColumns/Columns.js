@@ -136,6 +136,8 @@ const Columns = ({
                     : firstWord + `<strong>${res[1]}</strong>` + res[2]
                   : colDef.Header.props.title;
 
+              const isFrozenColumn = !!colDef.sticky;
+
               const listContents = (
                 <>
                   <Checkbox
@@ -144,6 +146,7 @@ const Columns = ({
                       `${blockClass}__customize-columns-checkbox`
                     )}
                     checked={isColumnVisible(colDef)}
+                    disabled={isFrozenColumn}
                     onChange={(_, { checked }) =>
                       onSelectColumn(colDef, checked)
                     }
@@ -167,10 +170,11 @@ const Columns = ({
                   setListData={setColumnsObject}
                   id={`dnd-datagrid-columns-${colDef.id}`}
                   type="column-customization"
-                  disabled={filterString.length > 0}
+                  disabled={filterString.length > 0 || isFrozenColumn}
                   ariaLabel={colDef.Header.props.title}
                   onGrab={setAriaRegionText}
                   isFocused={focusIndex === i}
+                  isSticky={isFrozenColumn}
                   moveElement={moveElement}
                   onArrowKeyDown={(e, isGrabbed, currentIndex) => {
                     if (isGrabbed) {
@@ -181,7 +185,7 @@ const Columns = ({
                       );
                       e.preventDefault();
                       e.stopPropagation();
-                      if (nextIndex >= 0) {
+                      if (nextIndex >= 0 && !columns[nextIndex]?.sticky) {
                         setFocusIndex(nextIndex);
                         moveElement(currentIndex, nextIndex);
                         e.target.scrollIntoView({

@@ -203,7 +203,7 @@ $motion-duration: $duration-moderate-02;
       max-width: 60%;
     }
 
-    word-break: break-all;
+    word-break: break-word;
   }
 
   &.#{$block-class}--narrow .#{$block-class}__header-description {

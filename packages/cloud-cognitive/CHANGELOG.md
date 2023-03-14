@@ -3,6 +3,109 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.21](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.20...@carbon/ibm-products@2.0.0-rc.21) (2023-03-14)
+
+
+### Bug Fixes
+
+* **DataGrid:** dense headeralignment fix ([#2712](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2712)) ([50040b4](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/50040b48315b695254f28e16f617fd7fc2d67d52))
+* **options-tile:** add safe area around toggle ([#2706](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2706)) ([16ca6f0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/16ca6f042eb5345019ca521b701f06c3c01c2a1c))
+
+
+### Features
+
+* **Datagrid:** Extracts Filtering logic into useFilters hook (v11) ([#2697](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2697)) ([b1256ee](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b1256ee15584a536b87ff6bef3242a13b22a6212))
+
+
+
+
+
+# [2.0.0-rc.20](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.19...@carbon/ibm-products@2.0.0-rc.20) (2023-03-07)
+
+
+### Bug Fixes
+
+* **DataGrid:** sort column focus v11 ([#2674](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2674)) ([161190a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/161190a01ef717dcfe0b3a9c20a639c1509434d2))
+
+
+
+
+
+# [2.0.0-rc.19](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.18...@carbon/ibm-products@2.0.0-rc.19) (2023-02-28)
+
+
+### Bug Fixes
+
+* **DataGrid:** any option in filter panel v11 ([#2701](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2701)) ([80b32f4](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/80b32f45b267efa288fd6aac07eafce1a6702994))
+* **Datagrid:** row height settings style fixes v11 ([#2691](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2691)) ([7b09fd0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7b09fd0ef19c369b469360fabaa16aaa9a23993d))
+* **options-tile:** use layer ([#2693](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2693)) ([8c111ca](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8c111ca23c497936a75a704a5933ade3bca94bc2))
+
+
+### Features
+
+* adds FilterPanel (v11) ([#2669](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2669)) ([5c0871c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5c0871c3faf708294ce5384e7e0518424409abbf))
+* **Datagrid:** Custom hook to handle `ActionSet` disabled state for `FilterPanel` & `FilterFlyout `(v11) ([#2688](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2688)) ([73646dd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/73646ddd9758caf6a15f24333c15ad69e4268808))
+
+
+
+
+
+# [2.0.0-rc.18](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.17...@carbon/ibm-products@2.0.0-rc.18) (2023-02-21)
+
+
+### Features
+
+* **Datagrid:** show fixed columns in column customization v11 ([#2667](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2667)) ([b95d0d3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b95d0d33a9acded60fd438a4c70d5695dc63a9e3))
+
+
+
+
+
+# [2.0.0-rc.17](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.16...@carbon/ibm-products@2.0.0-rc.17) (2023-02-14)
+
+
+### Bug Fixes
+
+* **Datagrid:** column customization styles v11 ([#2661](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2661)) ([8800919](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/880091921ef8afe9bfa830ccf45f17fa0a11afa5))
+
+
+### Features
+
+* imports all DataTable pieces from `@carbon/react` (v11) ([#2662](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2662)) ([91ca133](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/91ca13368dc177e819ba5fe1a50d6495737e6fe7))
+
+
+
+
+
+# [2.0.0-rc.16](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.15...@carbon/ibm-products@2.0.0-rc.16) (2023-02-07)
+
+
+### Bug Fixes
+
+* **Datagrid:** export useColumnCenterAlign v11 ([#2632](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2632)) ([a76f6ea](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a76f6eac2ab83abe4525fccb2916b070f407b76a))
+* **DataGrid:** filter summary add heights options v11 ([#2643](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2643)) ([990e8c6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/990e8c6ded95cdc5109ea8a9fc4d0e0cd52818ad))
+* **Tearsheet:** prevent description breaking ([#2646](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2646)) ([c04c4db](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c04c4dbc0ebea7e6c7f25fea6319067db70c7cac))
+
+
+### Features
+
+* exports filter flyout from datagridState ([#2639](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2639)) ([a576047](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a576047896dad647ce33e76fc3a852de66dc8246))
+
+
+
+
+
+# [2.0.0-rc.15](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.14...@carbon/ibm-products@2.0.0-rc.15) (2023-01-31)
+
+
+### Bug Fixes
+
+* **DataGrid:** date input support typing date ([#2620](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2620)) ([29defff](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/29defff3170fc849fbabd5cc72cc99fc9e23c52d))
+
+
+
+
+
 # [2.0.0-rc.14](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.13...@carbon/ibm-products@2.0.0-rc.14) (2023-01-24)
 
 

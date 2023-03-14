@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useContext } from 'react';
 import {
-  DataTable,
+  TableToolbarContent,
+  TableToolbarSearch,
   Button,
   OverflowMenu,
   OverflowMenuItem,
@@ -17,14 +18,21 @@ import {
   ModalFooter,
   Dropdown,
 } from '@carbon/react';
-import { Download, Add, Restart, ChevronDown } from '@carbon/react/icons';
+import {
+  Download,
+  Add,
+  Restart,
+  ChevronDown,
+  Filter,
+} from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
-import { FilterFlyout } from '../Datagrid/addons/Filtering';
+import { FilterContext } from '../Datagrid/addons/Filtering';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 export const DatagridActions = (datagridState) => {
+  const { setPanelOpen } = useContext(FilterContext);
   const {
     selectedFlatRows,
     setGlobalFilter,
@@ -34,12 +42,12 @@ export const DatagridActions = (datagridState) => {
     useDenseHeader,
     filterProps,
     getFilterFlyoutProps,
+    FilterFlyout,
+    data,
   } = datagridState;
   const downloadCsv = () => {
     alert('Downloading...');
   };
-  const { TableToolbarContent, TableToolbarSearch } = DataTable;
-
   const refreshColumns = () => {
     alert('refreshing...');
   };
@@ -55,6 +63,21 @@ export const DatagridActions = (datagridState) => {
   const renderFilterFlyout = () =>
     filterProps?.variation === 'flyout' && (
       <FilterFlyout {...getFilterFlyoutProps()} />
+    );
+
+  const renderFilterPanelButton = () =>
+    filterProps?.variation === 'panel' && (
+      <Button
+        kind="ghost"
+        hasIconOnly
+        tooltipPosition="bottom"
+        renderIcon={(props) => <Filter size={16} {...props} />}
+        iconDescription={filterProps.panelIconDescription}
+        className={`${blockClass}-filter-panel-open-button`}
+        onClick={() => setPanelOpen((open) => !open)}
+        disabled={data.length === 0}
+        tooltipAlignment="start"
+      />
     );
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -75,6 +98,7 @@ export const DatagridActions = (datagridState) => {
       <TableToolbarContent size="sm">
         {!mobileToolbar ? (
           <>
+            {renderFilterPanelButton()}
             <div style={style}>
               <Button
                 kind="ghost"
@@ -86,18 +110,17 @@ export const DatagridActions = (datagridState) => {
               />
             </div>
             {renderFilterFlyout()}
+            {CustomizeColumnsButton && (
+              <div style={style}>
+                <CustomizeColumnsButton />
+              </div>
+            )}
             <RowSizeDropdown {...rowSizeDropdownProps} />
             <div style={style} className={`${blockClass}__toolbar-divider`}>
               <Button kind="ghost" renderIcon={Add} iconDescription={'Action'}>
                 Ghost button
               </Button>
             </div>
-
-            {CustomizeColumnsButton && (
-              <div style={style}>
-                <CustomizeColumnsButton />
-              </div>
-            )}
           </>
         ) : (
           <OverflowMenu ariaLabel="Tools" size="md" flipped>
@@ -116,6 +139,7 @@ export const DatagridActions = (datagridState) => {
       </TableToolbarContent>
     ) : !mobileToolbar ? (
       <TableToolbarContent>
+        {renderFilterPanelButton()}
         <TableToolbarSearch
           size="xl"
           id="columnSearch"
@@ -124,7 +148,6 @@ export const DatagridActions = (datagridState) => {
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
         {renderFilterFlyout()}
-        <RowSizeDropdown {...rowSizeDropdownProps} />
         <div style={style}>
           <Button
             kind="ghost"
@@ -150,6 +173,7 @@ export const DatagridActions = (datagridState) => {
             <CustomizeColumnsButton />
           </div>
         )}
+        <RowSizeDropdown {...rowSizeDropdownProps} />
         <ButtonMenu
           label="Primary button"
           renderIcon={ChevronDown}
@@ -171,6 +195,7 @@ export const DatagridActions = (datagridState) => {
       </TableToolbarContent>
     ) : (
       <TableToolbarContent>
+        {renderFilterPanelButton()}
         <TableToolbarSearch
           size="xl"
           id="columnSearch"
@@ -178,6 +203,7 @@ export const DatagridActions = (datagridState) => {
           placeHolderText={searchForAColumn}
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
+        {renderFilterFlyout()}
         <OverflowMenu
           ariaLabel="Tools"
           size="lg"

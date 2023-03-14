@@ -7,15 +7,13 @@
  */
 // @flow
 import React from 'react';
-import { DataTable, SkeletonText } from '@carbon/react';
+import { TableRow, TableCell, SkeletonText } from '@carbon/react';
 import { px } from '@carbon/layout';
 import { selectionColumnId } from '../common-column-ids';
 import cx from 'classnames';
 import { pkg, carbon } from '../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
-
-const { TableRow, TableCell } = DataTable;
 
 const rowHeights = {
   xs: 24,

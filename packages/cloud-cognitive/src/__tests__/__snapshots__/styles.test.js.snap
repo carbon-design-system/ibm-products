@@ -1435,7 +1435,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 @media (min-width: 42rem) {
   .c4p--tearsheet .c4p--tearsheet__header-description {
-    max-width: 80%;
+    max-width: 60%;
   }
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header-description {

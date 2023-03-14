@@ -445,7 +445,7 @@
     );
     width: 1px;
     height: var(--#{$block-class}--indicator-height);
-    border-left: 1px solid $interactive-01;
+    border-left: 1px solid $active-ui;
     content: '';
   }
 }

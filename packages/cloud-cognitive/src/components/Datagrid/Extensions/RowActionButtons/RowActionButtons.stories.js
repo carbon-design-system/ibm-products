@@ -158,7 +158,6 @@ const RowActionButtons = ({ ...args }) => {
         Header: '',
         accessor: 'actions',
         sticky: 'right',
-        width: 96,
         isAction: true,
       },
     ],

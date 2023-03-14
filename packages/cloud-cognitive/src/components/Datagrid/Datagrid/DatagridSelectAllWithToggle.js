@@ -6,7 +6,7 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 // @flow
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Checkbox, OverflowMenu, OverflowMenuItem } from '@carbon/react';
@@ -38,6 +38,15 @@ const SelectAllWithToggle = ({
     }
   }, [isAllRowsSelected, selectAllMode, onSelectAllRows]);
 
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setWindowSize(window.innerWidth);
+    }
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
   const { onSelectAllRows, labels } = selectAllToggle || {};
   if (labels) {
     allPageRowsLabel = labels.allPageRows || allPageRowsLabel;
@@ -56,7 +65,8 @@ const SelectAllWithToggle = ({
       role="columnheader"
       scope="col"
       className={cx(`${blockClass}__select-all-toggle-on`, {
-        [`${blockClass}__select-all-sticky-left`]: isFirstColumnStickyLeft,
+        [`${blockClass}__select-all-sticky-left`]:
+          isFirstColumnStickyLeft && windowSize > 671,
       })}
     >
       <span>

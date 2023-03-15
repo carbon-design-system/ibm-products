@@ -15,21 +15,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-        with: # token: ${{ secrets.GH_TOKEN_LERNA }}
-          - name: Create PR
-            uses: peter-evans/create-pull-request@v4
+        # with:
+        #   token: ${{ secrets.GH_TOKEN_LERNA }}
 
-            with: # ${{ secrets.GH_TOKEN_LERNA }}
-              base: carbon-v11
-              branch: ${{ github.event.pull_request.head.ref }}-sync
-              branch-suffix: random
-              commit-message:
-                ${{ github.event.pull_request.title }} — sync across versions
-              draft: true
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v4
 
-              title:
-                ${{ github.event.pull_request.title }} — sync across versions
-              body: |
-                This automatically syncs the commit for '${{ github.event.pull_request.title }}' across versions:
+        with: # ${{ secrets.GH_TOKEN_LERNA }}
+          base: carbon-v11
+          branch: ${{ github.event.pull_request.head.ref }}-sync
+          branch-suffix: random
+          commit-message:
+            ${{ github.event.pull_request.title }} — sync across versions
+          draft: true
 
-                ${{ github.event.pull_request.body }}
+          title: ${{ github.event.pull_request.title }} — sync across versions
+          body: |
+            This automatically syncs the commit for '${{ github.event.pull_request.title }}' across versions:
+
+            ${{ github.event.pull_request.body }}

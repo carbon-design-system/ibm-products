@@ -31,13 +31,13 @@ jobs:
           branch: ${{ github.event.pull_request.head.ref }}-sync
           branch-suffix: random
           commit-message:
-            ${{ github.event.pull_request.title }} — sync across versions
+            ${{ github.event.pull_request.title }} — sync commit
           draft: true
 
-          title: ${{ github.event.pull_request.title }} — sync across versions
+          title: ${{ github.event.pull_request.title }} — sync commit
           body: |
-            **Note:** To avoid [repeatedly re-resolving previously resolved conflicts](https://git-scm.com/docs/gitfaq#Documentation/gitfaq.txt-Whatkindsofproblemscanoccurwhenmerginglong-livedbrancheswithsquashmerges), merge this PR with a regular merge commit.
+            **Note:** To avoid [re-resolving previously resolved conflicts](https://git-scm.com/docs/gitfaq#Documentation/gitfaq.txt-Whatkindsofproblemscanoccurwhenmerginglong-livedbrancheswithsquashmerges), merge this PR with a regular merge commit.
 
-            This automatically syncs the commit for '${{ github.event.pull_request.title }}':
+            This automatically syncs the commit `${{ github.event.pull_request.title }}` across versions:
 
             ${{ github.event.pull_request.body }}

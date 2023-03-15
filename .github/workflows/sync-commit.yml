@@ -1,0 +1,37 @@
+name: Sync commits across versions
+
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+
+jobs:
+  sync-commit:
+    # if: github.event.pull_request.merged == true
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+
+          # token: ${{ secrets.GH_TOKEN_LERNA }}
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v4
+        with:
+          # ${{ secrets.GH_TOKEN_LERNA }}
+
+          base: carbon-v11
+          branch: ${{ github.event.pull_request.head.ref }}-sync
+          branch-suffix: random
+          commit-message:
+            ${{ github.event.pull_request.title }} — sync across versions
+          draft: true
+
+          title: ${{ github.event.pull_request.title }} — sync across versions
+          body: |
+            This automatically syncs the commit for '${{ github.event.pull_request.title }}' across versions:
+
+            ${{ github.event.pull_request.body }}

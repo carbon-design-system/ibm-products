@@ -84,7 +84,7 @@ CardFooter.propTypes = {
   primaryButtonText: PropTypes.string,
   productive: PropTypes.bool,
   secondaryButtonHref: PropTypes.string,
-  secondaryButtonIcon: PropTypes.string,
+  secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
   secondaryButtonText: PropTypes.string,
 };

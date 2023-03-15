@@ -2,12 +2,12 @@ name: Sync commits across versions
 
 on:
   pull_request:
-    branches: [main]
+    branches: [sync-commit]
     types: [closed]
 
 jobs:
   sync-commit:
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
 
     runs-on: ubuntu-latest
 

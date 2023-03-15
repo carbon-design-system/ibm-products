@@ -21,7 +21,7 @@ jobs:
 
         with: # token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
           base: carbon-v11
-          branch: ${{ github.event.pull_request.head.  }}-sync
+          branch: ${{ github.event.pull_request.head.ref }}-sync
           branch-suffix: random
           commit-message:
             ${{ github.event.pull_request.title }} — sync across versions

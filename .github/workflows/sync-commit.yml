@@ -18,6 +18,9 @@ jobs:
 
       - name: Cherry pick
         run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
           git fetch origin sync-commit
           git cherry-pick -X theirs ${{ github.event.pull_request.merge_commit_sha }}
 

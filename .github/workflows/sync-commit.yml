@@ -2,7 +2,7 @@ name: Sync commits across versions
 
 on:
   pull_request:
-    branches: [sync-commit]
+    branches: [sync-commit] # TODO: Rename to `main` before submitting.
     types: [closed]
 
 jobs:
@@ -17,6 +17,8 @@ jobs:
           ref: carbon-v11
 
       - name: Cherry pick
+
+        # TODO: Rename to `main` before submitting.
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
@@ -27,12 +29,12 @@ jobs:
       - name: Create PR
         uses: peter-evans/create-pull-request@v4
 
-        with: # token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
+        with: # TODO: Include before submitting — token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
           branch: ${{ github.event.pull_request.head.ref }}-sync
           branch-suffix: random
-          commit-message:
-            ${{ github.event.pull_request.title }} — sync commit
+          commit-message: ${{ github.event.pull_request.title }} — sync commit
           draft: true
+          labels: Carbon v11
 
           title: ${{ github.event.pull_request.title }} — sync commit
           body: |

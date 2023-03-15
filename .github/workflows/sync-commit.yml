@@ -7,7 +7,7 @@ on:
 
 jobs:
   sync-commit:
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true # Merged PRs to `main`.
     runs-on: ubuntu-latest
 
     steps:
@@ -32,14 +32,20 @@ jobs:
         with: # TODO: Include before submitting — token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
           branch: ${{ github.event.pull_request.head.ref }}-sync
           branch-suffix: random
+
           commit-message: ${{ github.event.pull_request.title }} — sync commit
-          draft: true
-          labels: Carbon v11
 
           title: ${{ github.event.pull_request.title }} — sync commit
           body: |
-            **Note:** To avoid [re-resolving previously resolved conflicts](https://git-scm.com/docs/gitfaq#Documentation/gitfaq.txt-Whatkindsofproblemscanoccurwhenmerginglong-livedbrancheswithsquashmerges), merge this PR with a regular merge commit.
+            **Note:** To avoid [re-resolving previously resolved conflicts](https://git-scm.com/docs/gitfaq#Documentation/gitfaq.txt-Whatkindsofproblemscanoccurwhenmerginglong-livedbrancheswithsquashmerges), this PR is merged with a merge commit.
 
             This automatically syncs the commit '${{ github.event.pull_request.title }}' across versions:
 
             ${{ github.event.pull_request.body }}
+
+          # Override default merge method for release branches to merge commit — https://kodiakhq.com/docs/config-reference#mergemethod-1
+          labels: |
+            Carbon v11
+            kodiak: merge.method = 'merge'
+
+          draft: true

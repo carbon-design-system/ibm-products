@@ -14,13 +14,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          ref: carbon-v11
+
+      - name: Cherry pick
+        run: git cherry-pick -X theirs ${{ github.event.pull_request.merge_commit_sha }}
 
       - name: Create PR
         uses: peter-evans/create-pull-request@v4
 
         with: # token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
-          base: carbon-v11
           branch: ${{ github.event.pull_request.head.ref }}-sync
           branch-suffix: random
           commit-message:

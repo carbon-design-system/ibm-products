@@ -28,7 +28,7 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$)/'"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.12",
+    "@babel/core": "^7.21.3",
     "@carbon/elements": "^10.56.1",
     "@carbon/grid": "10.43.1",
     "@carbon/icons-react": "10.49.0",
@@ -62,17 +62,17 @@
     "carbon-icons": "^7.0.7",
     "css-loader": "^6.7.3",
     "fast-sass-loader": "^2.0.1",
-    "npm-check-updates": "^16.7.4",
+    "npm-check-updates": "^16.7.12",
     "npm-run-all": "^4.1.5",
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "regenerator-runtime": "^0.13.11",
-    "rimraf": "~3 || > 4.1",
-    "sass": "^1.58.1",
-    "style-loader": "^3.3.1",
+    "rimraf": "^4",
+    "sass": "^1.59.3",
+    "style-loader": "^3.3.2",
     "typescript": "^4.9.5",
-    "webpack": "^5.75.0",
+    "webpack": "^5.76.1",
     "webpack-merge": "^5.8.0"
   }
 }

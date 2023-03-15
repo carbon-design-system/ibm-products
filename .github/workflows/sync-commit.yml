@@ -36,6 +36,8 @@ jobs:
 
           title: ${{ github.event.pull_request.title }} — sync across versions
           body: |
-            This automatically syncs the commit for '${{ github.event.pull_request.title }}' across versions:
+            **Note:** To avoid [repeatedly re-resolving previously resolved conflicts](https://git-scm.com/docs/gitfaq#Documentation/gitfaq.txt-Whatkindsofproblemscanoccurwhenmerginglong-livedbrancheswithsquashmerges), merge this PR with a regular merge commit.
+
+            This automatically syncs the commit for '${{ github.event.pull_request.title }}':
 
             ${{ github.event.pull_request.body }}

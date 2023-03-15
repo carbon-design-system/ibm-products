@@ -144,7 +144,7 @@ const useActionsColumn = (hooks) => {
                 [`${blockClass}__cell`]: true,
               }),
               style: {
-                width: 96,
+                width: rowActions.length > 2 ? 48 : 96,
               },
             },
           ];
@@ -154,6 +154,30 @@ const useActionsColumn = (hooks) => {
       hooks.getCellProps.push(addActionsMenu);
     }
   };
+
+  const useStickyHeaderWidth = (instance) => {
+    const { rowActions } = instance;
+    if (rowActions && Array.isArray(rowActions)) {
+      const addHeaderWidth = (props, cellData) => {
+        const { column } = cellData;
+        if (column.isAction) {
+          return [
+            props,
+            {
+              style: {
+                ...props.style,
+                width: rowActions.length > 2 ? 48 : 96, // set header width based on action length
+              },
+            },
+          ];
+        }
+        return [props];
+      };
+      hooks.getHeaderProps.push(addHeaderWidth);
+    }
+  };
+
+  hooks.useInstance.push(useStickyHeaderWidth);
   hooks.useInstance.push(useAttachActionsOnInstance);
 };
 

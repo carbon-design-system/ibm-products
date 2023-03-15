@@ -1,12 +1,12 @@
 /*
  * Licensed Materials - Property of IBM
  * 5724-Q36
- * (c) Copyright IBM Corp. 2020
+ * (c) Copyright IBM Corp. 2023
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 // @flow
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import cx from 'classnames';
 import { TableSelectRow } from 'carbon-components-react';
 import { SelectAll } from './Datagrid/DatagridSelectAll';
@@ -65,6 +65,16 @@ const SelectRow = (datagridState) => {
     columns,
     withStickyColumn,
   } = datagridState;
+
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setWindowSize(window.innerWidth);
+    }
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
   const selectDisabled = isFetching || row.getRowProps().selectDisabled;
   const { onChange, ...selectProps } = row.getToggleRowSelectedProps();
   const cellProps = cell.getCellProps();
@@ -88,7 +98,8 @@ const SelectRow = (datagridState) => {
       id={`${tableId}-${row.index}`}
       name={`${tableId}-${row.index}-name`}
       className={cx(`${blockClass}__checkbox-cell`, cellProps.className, {
-        [`${blockClass}__checkbox-cell-sticky-left`]: isFirstColumnStickyLeft,
+        [`${blockClass}__checkbox-cell-sticky-left`]:
+          isFirstColumnStickyLeft && windowSize > 671,
       })}
       ariaLabel={`${tableId}-row-${row.index}`} // TODO: aria label should be i18n'ed
       disabled={selectDisabled}

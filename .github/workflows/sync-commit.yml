@@ -17,7 +17,9 @@ jobs:
           ref: carbon-v11
 
       - name: Cherry pick
-        run: git cherry-pick -X theirs ${{ github.event.pull_request.merge_commit_sha }}
+        run: |
+          git fetch origin sync-commit
+          git cherry-pick -X theirs ${{ github.event.pull_request.merge_commit_sha }}
 
       - name: Create PR
         uses: peter-evans/create-pull-request@v4

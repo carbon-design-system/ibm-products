@@ -16,6 +16,7 @@ jobs:
         with:
           ref: carbon-v11
 
+      # https://git-scm.com/docs/git-cherry-pick#_options
       - name: Cherry pick
 
         # TODO: Rename to `main` before submitting.
@@ -24,7 +25,7 @@ jobs:
           git config user.email github-actions@github.com
 
           git fetch origin sync-commit
-          git cherry-pick -X theirs ${{ github.event.pull_request.merge_commit_sha }}
+          git cherry-pick -xX patience --keep-redundant-commits ${{ github.event.pull_request.merge_commit_sha }}
 
       - name: Create PR
         uses: peter-evans/create-pull-request@v4
@@ -37,11 +38,16 @@ jobs:
 
           title: ${{ github.event.pull_request.title }} — sync commit
           body: |
-            **Note:** To avoid [re-resolving previously resolved conflicts](https://git-scm.com/docs/gitfaq#Documentation/gitfaq.txt-Whatkindsofproblemscanoccurwhenmerginglong-livedbrancheswithsquashmerges), this PR is merged with a merge commit.
+            This automates [cherry picking](https://git-scm.com/docs/git-cherry-pick) the '${{ github.event.pull_request.title }}' commit across versions:
 
-            This automatically syncs the commit '${{ github.event.pull_request.title }}' across versions:
+            <details>
+              <summary>'${{ github.event.pull_request.title }}' body</summary>
 
             ${{ github.event.pull_request.body }}
+
+            </details>
+
+            **Note:** To avoid [re-resolving previously resolved conflicts](https://git-scm.com/docs/gitfaq#Documentation/gitfaq.txt-Whatkindsofproblemscanoccurwhenmerginglong-livedbrancheswithsquashmerges), this PR is merged with a merge commit.
 
           # Override default merge method for release branches to merge commit — https://kodiakhq.com/docs/config-reference#mergemethod-1
           labels: |

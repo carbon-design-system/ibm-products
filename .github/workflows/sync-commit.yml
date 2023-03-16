@@ -25,7 +25,7 @@ jobs:
           git config user.email github-actions@github.com
 
           git fetch origin sync-commit
-          git cherry-pick -xX patience --keep-redundant-commits ${{ github.event.pull_request.merge_commit_sha }}
+          git cherry-pick -xX theirs --keep-redundant-commits ${{ github.event.pull_request.merge_commit_sha }}
 
       - name: Create PR
         uses: peter-evans/create-pull-request@v4

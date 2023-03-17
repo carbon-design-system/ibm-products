@@ -12,7 +12,13 @@ import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs';
 import LinkTo from '@storybook/addon-links/react';
 import { themes } from '@storybook/theming';
 
-import { Column, Row } from '@carbon/react';
+import {
+  Column,
+  Row,
+  ToastNotification,
+  UnorderedList,
+  ListItem,
+} from '@carbon/react';
 import React, { useEffect } from 'react';
 
 import { pkg } from '../../cloud-cognitive/src/settings';
@@ -37,12 +43,28 @@ const Style = ({ children, styles }) => {
 };
 
 const decorators = [
-  (storyFn, { parameters: { styles } }) => {
+  (storyFn, { args, parameters: { styles } }) => {
     const story = storyFn();
 
     return (
       <div className="preview-position-fix">
         <Style styles={index}>
+          {args.usesFeatureFlags ? (
+            <ToastNotification
+              caption={
+                <UnorderedList>
+                  {args.usesFeatureFlags.map((flag) => (
+                    <ListItem key={flag} style={{ color: '#f4f4f4' }}>
+                      {flag}
+                    </ListItem>
+                  ))}
+                </UnorderedList>
+              }
+              iconDescription="Close notification"
+              timeout={0}
+              title="Feature flags enabled"
+            />
+          ) : null}
           {styles ? <Style styles={styles}>{story}</Style> : story}
         </Style>
       </div>
@@ -129,4 +151,12 @@ const parameters = {
   },
 };
 
-export { decorators, parameters, Style };
+const argTypes = {
+  usesFeatureFlags: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export { argTypes, decorators, parameters, Style };

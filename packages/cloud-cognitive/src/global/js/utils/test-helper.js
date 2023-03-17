@@ -197,11 +197,19 @@ export const expectMultipleWarn = (messages, test) => {
  * @param {Function} test the test function to call, during which the call to
  * console.error will be expected.
  */
-export const expectError = (message, test) => {
+export const expectError = (message, test, inArrayOfErrors) => {
   const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
   const result = test();
-  expect(error).toBeCalledTimes(1);
-  expect(error).toHaveBeenCalledWith(...makeMatcherArray(message));
+  if (inArrayOfErrors) {
+    expect(error).toBeCalled();
+  } else {
+    expect(error).toBeCalledTimes(1);
+  }
+  if (inArrayOfErrors) {
+    expect(error.mock.calls[0]).toContain(message);
+  } else {
+    expect(error).toHaveBeenCalledWith(...makeMatcherArray(message));
+  }
   error.mockRestore();
   return result;
 };
@@ -224,6 +232,7 @@ export const expectMultipleError = (messages, test) => {
   const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
   const result = test();
   expect(error).toBeCalledTimes(messages.length);
+
   messages.forEach((args, index) =>
     expect(error).toHaveBeenNthCalledWith(index + 1, ...makeMatcherArray(args))
   );

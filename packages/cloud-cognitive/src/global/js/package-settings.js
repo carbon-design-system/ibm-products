@@ -78,6 +78,7 @@ const defaults = {
   feature: {
     'a-new-feature': false,
     'default-portal-target-body': true,
+    'DataGrid.useInfiniteScroll': false,
   },
 };
 
@@ -85,6 +86,8 @@ const warningMessageComponent = (property) =>
   `Carbon for IBM Products (WARNING): Component "${property}" enabled via feature flags. This component has not yet completed its review process.`;
 const warningMessageFeature = (property) =>
   `Carbon for IBM Products (WARNING): Feature "${property}" enabled via feature flags.`;
+const errorMessageFeature = (property) =>
+  `Carbon for IBM Products (Error): Feature "${property}" not enabled. To enable see the notes on feature flags in the README.`;
 const warningMessageAllComponents =
   'Carbon for IBM Products (WARNING): All components enabled through use of setAllComponents. This includes components that have not yet completed their review process.';
 const warningMessageAllFeatures =
@@ -153,6 +156,15 @@ export default {
 
   isFeatureEnabled: (featureName, byDefault = false) => {
     return byDefault ? defaults.feature[featureName] : feature[featureName];
+  },
+
+  checkReportFeatureEnabled(featureName) {
+    if (feature[featureName]) {
+      // NOTE: Warning emitted if feature flag is enabled (see Proxy above)
+      return true;
+    } else {
+      console.error(errorMessageFeature(featureName));
+    }
   },
 
   isFeaturePublic: (featureName, byDefault = false) => {

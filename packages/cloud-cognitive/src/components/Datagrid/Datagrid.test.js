@@ -11,8 +11,9 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
 import { makeData } from './utils/makeData';
 
-import { expectWarn } from '../../global/js/utils/test-helper';
+import { expectError, expectWarn } from '../../global/js/utils/test-helper';
 import { Datagrid } from '.';
+import { pkg } from '../../settings';
 
 import {
   useInfiniteScroll,
@@ -274,9 +275,25 @@ const EmptyUsage = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...dataGridState }} {...rest}></Datagrid>;
 };
 
+const TenThousandEntriesWithoutFeatureFlag = ({ ...rest }) => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(10000));
+  // pkg.feature['DataGrid.useInfiniteScroll'] = true;
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+    },
+    useInfiniteScroll
+  );
+
+  return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
+};
+
 const TenThousandEntries = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10000));
+  pkg.feature['DataGrid.useInfiniteScroll'] = true;
   const datagridState = useDatagrid(
     {
       columns,
@@ -1138,6 +1155,18 @@ describe(componentName, () => {
   });
 
   //Ten Thousand Entries
+  it('render logs an error if infinite scroll not enabled', () => {
+    expectError(
+      'Carbon for IBM Products (Error): Feature "DataGrid.useInfiniteScroll" not enabled. To enable see the notes on feature flags in the README.',
+      () => {
+        render(
+          <TenThousandEntriesWithoutFeatureFlag data-testid={dataTestId} />
+        );
+      },
+      true
+    );
+  });
+
   it('renders Ten Thousand table entries', () => {
     render(<TenThousandEntries data-testid={dataTestId}></TenThousandEntries>);
 

@@ -10,9 +10,13 @@ import debounce from 'lodash/debounce';
 import useParentDimensions from './useParentDimensions';
 import useResizeTable from './useResizeTable';
 
+import { pkg } from '../../settings';
+
 const useInfiniteScroll = (hooks) => {
   useParentDimensions(hooks);
   useResizeTable(hooks);
+
+  pkg.checkReportFeatureEnabled('DataGrid.useInfiniteScroll');
 
   const useInstance = (instance) => {
     const { isFetching, tableHeight, innerListRef, fetchMoreData, tableId } =

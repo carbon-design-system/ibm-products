@@ -87,7 +87,6 @@
     "data-uri.macro": "^1.0.0",
     "deepmerge": "^4.3.0",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.7",
     "faker": "^5.5.3",
     "jest": "^29.4.2",
     "jest-config-ibm-cloud-cognitive": "^0.24.13",

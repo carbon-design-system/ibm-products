@@ -817,17 +817,8 @@ SidePanel.propTypes = {
           'danger',
           'primary',
         ]),
-        tooltipPosition: PropTypes.oneOf([
-          'top',
-          'right',
-          'bottom',
-          'left',
-        ]),
-        tooltipAlignment: PropTypes.oneOf([
-          'start',
-          'center',
-          'end',
-        ]),
+        tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+        tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
         label: PropTypes.string,
         loading: PropTypes.bool,
         // we duplicate this Button prop to improve the DocGen here

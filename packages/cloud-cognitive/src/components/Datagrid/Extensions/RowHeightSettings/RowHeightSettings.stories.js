@@ -107,20 +107,24 @@ const sharedDatagridProps = {
   rowSize: 'lg',
   rowSizes: [
     {
-      value: 'xl',
-      labelText: 'Extra large',
+      value: 'xs',
+      labelText: 'Extra small',
     },
     {
-      value: 'lg',
-      labelText: 'Large',
+      value: 'sm',
+      labelText: 'Small',
     },
     {
       value: 'md',
       labelText: 'Medium',
     },
     {
-      value: 'xs',
-      labelText: 'Small',
+      value: 'lg',
+      labelText: 'Large',
+    },
+    {
+      value: 'xl',
+      labelText: 'Extra large',
     },
   ],
   onRowSizeChange: (value) => {
@@ -145,17 +149,7 @@ const sharedDatagridProps = {
 };
 
 const BasicUsage = ({ ...args }) => {
-  const columns = React.useMemo(
-    () => [
-      ...defaultHeader,
-      {
-        Header: 'Someone 11',
-        accessor: 'someone11',
-        multiLineWrap: true,
-      },
-    ],
-    []
-  );
+  const columns = React.useMemo(() => [...defaultHeader], []);
   const [data] = useState(makeData(10));
   const rows = React.useMemo(() => data, [data]);
 

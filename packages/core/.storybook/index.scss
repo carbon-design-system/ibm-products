@@ -17,6 +17,8 @@
 // @import 'docs';
 @use '@carbon/styles' as styles;
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/config';
 
 // Setting attribute storybook-carbon-theme="XXX" on the html element
 // will set the carbon theme used for the storybook pane.
@@ -49,4 +51,12 @@ body {
 
 [storybook-carbon-theme='debug'] body {
   color: initial;
+}
+
+.preview__notification--feature-flag {
+  margin: $spacing-05 0;
+}
+
+.preview__notification--feature-flag .#{config.$prefix}--list--unordered {
+  margin-top: $spacing-04;
 }

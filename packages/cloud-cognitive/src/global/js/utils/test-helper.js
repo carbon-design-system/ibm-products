@@ -184,6 +184,49 @@ export const expectMultipleWarn = (messages, test) => {
   return result;
 };
 
+const checkLogging = (mock, message, outOfMany) => {
+  console.log('message', message);
+  if (message) {
+    if (outOfMany) {
+      expect(mock).toBeCalled();
+    } else {
+      expect(mock).toBeCalledTimes(1);
+    }
+    if (outOfMany) {
+      expect(mock.mock.calls[0]).toContain(message);
+    } else {
+      expect(mock).toHaveBeenCalledWith(...makeMatcherArray(message));
+    }
+  }
+};
+
+/**
+ * A helper function to enable a test to expect a single call to
+ * console.error, for example when intentionally omitting a required prop
+ * or supplying an invalid prop type or value for the purposes of the test.
+ * @param {errors: {string|regex|function|[]}, warnings: {string|regex|function|[]}} messages the expected parameters for the call to
+ * console.error or console.warn, which must be called exactly once. A single string or regex or an
+ * expect matcher can be used to match a single-argument call to console.error (most common),
+ * while an array of strings and/or regex and/or expect matchers can be used to match a
+ * multiple-argument call. Strings can be full or substring matches to the corresponding
+ * argument.
+ * @param {Function} test the test function to call, during which the call to
+ * console.error will be expected.
+ */
+export const expectLogging = ({ errors, warnings }, test, outOfMany) => {
+  const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
+  const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+
+  const result = test();
+
+  // checkLogging(error, errors, outOfMany);
+  // checkLogging(warn, warnings, outOfMany);
+
+  error.mockRestore();
+  warn.mockRestore();
+  return result;
+};
+
 /**
  * A helper function to enable a test to expect a single call to
  * console.error, for example when intentionally omitting a required prop
@@ -197,15 +240,15 @@ export const expectMultipleWarn = (messages, test) => {
  * @param {Function} test the test function to call, during which the call to
  * console.error will be expected.
  */
-export const expectError = (message, test, inArrayOfErrors) => {
+export const expectError = (message, test, outOfMany) => {
   const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
   const result = test();
-  if (inArrayOfErrors) {
+  if (outOfMany) {
     expect(error).toBeCalled();
   } else {
     expect(error).toBeCalledTimes(1);
   }
-  if (inArrayOfErrors) {
+  if (outOfMany) {
     expect(error.mock.calls[0]).toContain(message);
   } else {
     expect(error).toHaveBeenCalledWith(...makeMatcherArray(message));

@@ -78,7 +78,7 @@ const defaults = {
   feature: {
     'a-new-feature': false,
     'default-portal-target-body': true,
-    'DataGrid.useInfiniteScroll': false,
+    'Datagrid.useInfiniteScroll': false,
   },
 };
 
@@ -105,7 +105,10 @@ const component = new Proxy(
   { ...defaults.component },
   {
     set(target, property, value) {
-      value && !silent && console.warn(warningMessageComponent(property));
+      if (target[property] !== true && !silent && value) {
+        // not already true, not silent, and now true
+        console.warn(warningMessageComponent(property));
+      }
       target[property] = value;
       return true; // value set
     },
@@ -119,7 +122,10 @@ const feature = new Proxy(
   { ...defaults.feature },
   {
     set(target, property, value) {
-      value && !silent && console.warn(warningMessageFeature(property));
+      if (target[property] !== true && !silent && value) {
+        // not already true, not silent, and now true
+        console.warn(warningMessageFeature(property));
+      }
       target[property] = value;
       return true; // value set
     },

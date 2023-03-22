@@ -278,7 +278,7 @@ const EmptyUsage = ({ ...rest }) => {
 const TenThousandEntriesWithoutFeatureFlag = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10000));
-  // pkg.feature['DataGrid.useInfiniteScroll'] = true;
+  // pkg.feature['Datagrid.useInfiniteScroll'] = true;
   const datagridState = useDatagrid(
     {
       columns,
@@ -293,7 +293,7 @@ const TenThousandEntriesWithoutFeatureFlag = ({ ...rest }) => {
 const TenThousandEntries = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10000));
-  pkg.feature['DataGrid.useInfiniteScroll'] = true;
+  pkg.feature['Datagrid.useInfiniteScroll'] = true;
   const datagridState = useDatagrid(
     {
       columns,
@@ -1157,7 +1157,7 @@ describe(componentName, () => {
   //Ten Thousand Entries
   it('render logs an error if infinite scroll not enabled', () => {
     expectError(
-      'Carbon for IBM Products (Error): Feature "DataGrid.useInfiniteScroll" not enabled. To enable see the notes on feature flags in the README.',
+      'Carbon for IBM Products (Error): Feature "Datagrid.useInfiniteScroll" not enabled. To enable see the notes on feature flags in the README.',
       () => {
         render(
           <TenThousandEntriesWithoutFeatureFlag data-testid={dataTestId} />

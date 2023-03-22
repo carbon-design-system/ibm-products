@@ -15,9 +15,10 @@ import { themes } from '@storybook/theming';
 import {
   Column,
   Row,
-  ToastNotification,
+  ActionableNotification,
   UnorderedList,
   ListItem,
+  NotificationActionButton,
 } from '@carbon/react';
 import React, { useEffect } from 'react';
 
@@ -46,24 +47,33 @@ const decorators = [
   (storyFn, { args, parameters: { styles } }) => {
     const story = storyFn();
 
+    JSON.stringify(args.featureFlags);
+
     return (
       <div className="preview-position-fix">
         <Style styles={index}>
-          {args.usesFeatureFlags ? (
-            <ToastNotification
-              caption={
-                <UnorderedList>
-                  {args.usesFeatureFlags.map((flag) => (
-                    <ListItem key={flag} style={{ color: '#f4f4f4' }}>
-                      {flag}
-                    </ListItem>
-                  ))}
-                </UnorderedList>
-              }
-              iconDescription="Close notification"
-              timeout={0}
-              title="Feature flags enabled"
-            />
+          {args.featureFlags ? (
+            <ActionableNotification
+              className="preview__notification--feature-flag"
+              kind="warning"
+              inline
+              actionButtonLabel="More information"
+              statusIconDescription="describes the close button"
+              title="This story uses the following feature flags to enable/disable some functionality. See the README for more information."
+              onActionButtonClick={() => {
+                window.open(
+                  'https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/cloud-cognitive#enabling-canary-components-and-flagged-features'
+                );
+              }}
+            >
+              <UnorderedList>
+                {Object.keys(args.featureFlags).map((flagKey) => (
+                  <ListItem key={flagKey} style={{ color: '#f4f4f4' }}>
+                    {flagKey}: {`${args.featureFlags[flagKey]}`}
+                  </ListItem>
+                ))}
+              </UnorderedList>
+            </ActionableNotification>
           ) : null}
           {styles ? <Style styles={styles}>{story}</Style> : story}
         </Style>
@@ -152,7 +162,7 @@ const parameters = {
 };
 
 const argTypes = {
-  usesFeatureFlags: {
+  featureFlags: {
     table: {
       disable: true,
     },

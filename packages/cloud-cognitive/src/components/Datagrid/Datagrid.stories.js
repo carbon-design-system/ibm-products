@@ -220,7 +220,7 @@ export const InfiniteScroll = () => {
   }, []);
 
   pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
-  pkg.feature['DataGrid.useInfiniteScroll'] = true;
+  pkg.feature['Datagrid.useInfiniteScroll'] = true;
   pkg._silenceWarnings(true);
 
   const datagridState = useDatagrid(
@@ -243,7 +243,7 @@ export const InfiniteScroll = () => {
   );
 };
 InfiniteScroll.args = {
-  usesFeatureFlags: ['DataGrid.useInfiniteScroll'],
+  featureFlags: ['Datagrid.useInfiniteScroll'],
 };
 
 export const TenThousandEntries = () => {

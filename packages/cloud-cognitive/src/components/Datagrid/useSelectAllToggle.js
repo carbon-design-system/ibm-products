@@ -6,7 +6,7 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 // @flow
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import cx from 'classnames';
 import { selectionColumnId } from './common-column-ids';
 import SelectAllWithToggle from './Datagrid/DatagridSelectAllWithToggle';
@@ -36,6 +36,15 @@ const useSelectAllWithToggleComponent = (hooks) => {
 };
 
 const useAddClassNameToSelectRow = (hooks) => {
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setWindowSize(window.innerWidth);
+    }
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
   hooks.getCellProps.push((props, data) => {
     const { column } = data.cell;
     const { DatagridPagination, columns, withStickyColumn } = data.instance;
@@ -46,7 +55,8 @@ const useAddClassNameToSelectRow = (hooks) => {
         props,
         {
           className: cx(`${blockClass}__select-all-toggle-on`, {
-            [`${blockClass}__select-all-sticky-left`]: isFirstColumnStickyLeft,
+            [`${blockClass}__select-all-sticky-left`]:
+              isFirstColumnStickyLeft && windowSize > 671,
           }),
         },
       ];

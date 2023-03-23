@@ -27,7 +27,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 export const DatagridContent = ({ datagridState }) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
-  const { filterTags, EventEmitter, leftPanelOpen } = useContext(FilterContext);
+  const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
   const { activeCellId, gridActive, editId } = inlineEditState;
   const {
     getTableProps = () => {},
@@ -169,7 +169,7 @@ export const DatagridContent = ({ datagridState }) => {
         <DatagridToolbar {...datagridState} />
         <div
           className={cx(`${blockClass}__table-container`, {
-            [`${blockClass}__table-container--filter-open`]: leftPanelOpen,
+            [`${blockClass}__table-container--filter-open`]: panelOpen,
           })}
           ref={gridAreaRef}
         >

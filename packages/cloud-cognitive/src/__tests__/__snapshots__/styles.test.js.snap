@@ -2007,7 +2007,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: 0;
   height: min-content;
   padding-top: 0;
-  border-right: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-right: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   background-color: transparent;
   grid-row: 1;
   overflow-x: auto;
@@ -2788,12 +2788,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header {
   padding: 1.5rem 2rem;
-  border-bottom: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-bottom: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   margin: 0;
 }
 .c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header {
   padding: 1rem;
-  border-bottom: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-bottom: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   margin: 0;
 }
 .c4p--tearsheet .c4p--tearsheet__header-content {
@@ -2864,7 +2864,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--tearsheet .c4p--tearsheet__influencer {
   flex: 0 0 257px;
-  border-right: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-right: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   overflow-y: auto;
 }
 .c4p--tearsheet .c4p--tearsheet__influencer.c4p--tearsheet__influencer p {
@@ -2882,19 +2882,17 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet .c4p--tearsheet__main {
   display: flex;
   flex-direction: row;
+  background-color: var(--cds-layer);
   grid-column: 1/-1;
   grid-row: 1/-1;
 }
 .c4p--tearsheet .c4p--tearsheet__main .c4p--tearsheet__influencer {
   border-right: none;
-  border-left: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-left: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 .c4p--tearsheet .c4p--tearsheet__content {
   overflow: auto;
   flex-grow: 1;
-}
-.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content {
-  background: var(--cds-background, #ffffff);
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--pagination,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--pagination__control-buttons,
@@ -2906,7 +2904,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--dropdown-list,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--number input[type=number],
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--date-picker__input {
-  background-color: var(--cds-field-01, #f4f4f4);
+  background-color: var(--cds-field);
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--select--inline .cds--select-input {
   background-color: transparent;
@@ -2929,7 +2927,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet .c4p--tearsheet__buttons {
   display: inline-flex;
   min-width: 100%;
-  border-top: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-top: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__buttons {
   background: var(--cds-background, #ffffff);
@@ -3889,15 +3887,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--add-select__selections-row:first-child .c4p--add-select__selections-cell-wrapper {
-  border-top: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-top: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 
 .c4p--add-select__column {
   overflow: auto;
   flex: 0 0 20rem;
   padding: 1rem;
-  border-top: 1px solid var(--cds-border-subtle-01, #e0e0e0);
-  border-right: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-top: 1px solid var(--cds-border-subtle-01, #c6c6c6);
+  border-right: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 .c4p--add-select__column-search-bar {
   display: flex;
@@ -4139,6 +4137,9 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-border-subtle-selected-01: #525252;
   --cds-border-subtle-selected-02: #6f6f6f;
   --cds-border-subtle-selected-03: #8d8d8d;
+  --cds-border-tile-01: #525252;
+  --cds-border-tile-02: #6f6f6f;
+  --cds-border-tile-03: #8d8d8d;
   --cds-field-01: #262626;
   --cds-field-02: #393939;
   --cds-field-03: #525252;
@@ -4150,6 +4151,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus-inverse: #0f62fe;
   --cds-highlight: #002d9c;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
+  --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;
   --cds-icon-on-color: #ffffff;
   --cds-icon-on-color-disabled: rgba(255, 255, 255, 0.25);
@@ -4235,6 +4237,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-label-01-font-weight: 400;
   --cds-label-01-line-height: 1.33333;
   --cds-label-01-letter-spacing: 0.32px;
+  --cds-label-02-font-size: 0.875rem;
+  --cds-label-02-font-weight: 400;
+  --cds-label-02-line-height: 1.28572;
+  --cds-label-02-letter-spacing: 0.16px;
   --cds-helper-text-01-font-size: 0.75rem;
   --cds-helper-text-01-line-height: 1.33333;
   --cds-helper-text-01-letter-spacing: 0.32px;
@@ -4296,11 +4302,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
-  --cds-productive-heading-06-font-size: 2rem;
+  --cds-productive-heading-06-font-size: 2.625rem;
   --cds-productive-heading-06-font-weight: 300;
   --cds-productive-heading-06-line-height: 1.199;
   --cds-productive-heading-06-letter-spacing: 0;
-  --cds-productive-heading-07-font-size: 2.625rem;
+  --cds-productive-heading-07-font-size: 3.375rem;
   --cds-productive-heading-07-font-weight: 300;
   --cds-productive-heading-07-line-height: 1.19;
   --cds-productive-heading-07-letter-spacing: 0;
@@ -4355,7 +4361,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-display-03-line-height: 1.19;
   --cds-display-03-letter-spacing: 0;
   --cds-display-04-font-size: 2.625rem;
-  --cds-display-04-font-weight: 600;
+  --cds-display-04-font-weight: 300;
   --cds-display-04-line-height: 1.19;
   --cds-display-04-letter-spacing: 0;
   --cds-legal-01-font-size: 0.75rem;
@@ -4402,11 +4408,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
-  --cds-heading-06-font-size: 2rem;
+  --cds-heading-06-font-size: 2.625rem;
   --cds-heading-06-font-weight: 300;
   --cds-heading-06-line-height: 1.199;
   --cds-heading-06-letter-spacing: 0;
-  --cds-heading-07-font-size: 2.625rem;
+  --cds-heading-07-font-size: 3.375rem;
   --cds-heading-07-font-weight: 300;
   --cds-heading-07-line-height: 1.19;
   --cds-heading-07-letter-spacing: 0;
@@ -4453,7 +4459,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-fluid-display-03-line-height: 1.19;
   --cds-fluid-display-03-letter-spacing: 0;
   --cds-fluid-display-04-font-size: 2.625rem;
-  --cds-fluid-display-04-font-weight: 600;
+  --cds-fluid-display-04-font-weight: 300;
   --cds-fluid-display-04-line-height: 1.19;
   --cds-fluid-display-04-letter-spacing: 0;
   --cds-layer: var(--cds-layer-01, #f4f4f4);
@@ -4466,9 +4472,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-layer-accent-active: var(--cds-layer-accent-active-01, #a8a8a8);
   --cds-field: var(--cds-field-01, #f4f4f4);
   --cds-field-hover: var(--cds-field-hover-01, #e8e8e8);
-  --cds-border-subtle: var(--cds-border-subtle-01, #e0e0e0);
+  --cds-border-subtle: var(--cds-border-subtle-01, #c6c6c6);
   --cds-border-subtle-selected: var(--cds-border-subtle-selected-01, #c6c6c6);
   --cds-border-strong: var(--cds-border-strong-01, #8d8d8d);
+  --cds-border-tile: var(--cds-border-tile-01, #c6c6c6);
   position: fixed;
   z-index: 2;
   top: 3rem;
@@ -4580,7 +4587,7 @@ button.c4p--add-select__global-filter-toggle--open {
   fill: var(--cds-support-error, #da1e28);
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-status-icon.c4p--notifications-panel__notification-status-icon-success {
-  fill: var(--cds-support-success, #198038);
+  fill: var(--cds-support-success, #24a148);
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-status-icon.c4p--notifications-panel__notification-status-icon-warning {
   fill: var(--cds-support-warning, #f1c21b);
@@ -7190,7 +7197,7 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--card__productive .c4p--card__footer {
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-top: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 .c4p--card__productive .c4p--card__footer-no-button {
   justify-content: flex-end;
@@ -8090,6 +8097,9 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-border-subtle-selected-01: #6f6f6f;
   --cds-border-subtle-selected-02: #8d8d8d;
   --cds-border-subtle-selected-03: #a8a8a8;
+  --cds-border-tile-01: #6f6f6f;
+  --cds-border-tile-02: #8d8d8d;
+  --cds-border-tile-03: #a8a8a8;
   --cds-field-01: #393939;
   --cds-field-02: #525252;
   --cds-field-03: #6f6f6f;
@@ -8101,6 +8111,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus-inverse: #0f62fe;
   --cds-highlight: #0043ce;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
+  --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;
   --cds-icon-on-color: #ffffff;
   --cds-icon-on-color-disabled: rgba(255, 255, 255, 0.25);
@@ -8186,6 +8197,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-label-01-font-weight: 400;
   --cds-label-01-line-height: 1.33333;
   --cds-label-01-letter-spacing: 0.32px;
+  --cds-label-02-font-size: 0.875rem;
+  --cds-label-02-font-weight: 400;
+  --cds-label-02-line-height: 1.28572;
+  --cds-label-02-letter-spacing: 0.16px;
   --cds-helper-text-01-font-size: 0.75rem;
   --cds-helper-text-01-line-height: 1.33333;
   --cds-helper-text-01-letter-spacing: 0.32px;
@@ -8247,11 +8262,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
-  --cds-productive-heading-06-font-size: 2rem;
+  --cds-productive-heading-06-font-size: 2.625rem;
   --cds-productive-heading-06-font-weight: 300;
   --cds-productive-heading-06-line-height: 1.199;
   --cds-productive-heading-06-letter-spacing: 0;
-  --cds-productive-heading-07-font-size: 2.625rem;
+  --cds-productive-heading-07-font-size: 3.375rem;
   --cds-productive-heading-07-font-weight: 300;
   --cds-productive-heading-07-line-height: 1.19;
   --cds-productive-heading-07-letter-spacing: 0;
@@ -8306,7 +8321,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-display-03-line-height: 1.19;
   --cds-display-03-letter-spacing: 0;
   --cds-display-04-font-size: 2.625rem;
-  --cds-display-04-font-weight: 600;
+  --cds-display-04-font-weight: 300;
   --cds-display-04-line-height: 1.19;
   --cds-display-04-letter-spacing: 0;
   --cds-legal-01-font-size: 0.75rem;
@@ -8353,11 +8368,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
-  --cds-heading-06-font-size: 2rem;
+  --cds-heading-06-font-size: 2.625rem;
   --cds-heading-06-font-weight: 300;
   --cds-heading-06-line-height: 1.199;
   --cds-heading-06-letter-spacing: 0;
-  --cds-heading-07-font-size: 2.625rem;
+  --cds-heading-07-font-size: 3.375rem;
   --cds-heading-07-font-weight: 300;
   --cds-heading-07-line-height: 1.19;
   --cds-heading-07-letter-spacing: 0;
@@ -8404,7 +8419,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-fluid-display-03-line-height: 1.19;
   --cds-fluid-display-03-letter-spacing: 0;
   --cds-fluid-display-04-font-size: 2.625rem;
-  --cds-fluid-display-04-font-weight: 600;
+  --cds-fluid-display-04-font-weight: 300;
   --cds-fluid-display-04-line-height: 1.19;
   --cds-fluid-display-04-letter-spacing: 0;
   --cds-layer: var(--cds-layer-01, #f4f4f4);
@@ -8417,9 +8432,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-layer-accent-active: var(--cds-layer-accent-active-01, #a8a8a8);
   --cds-field: var(--cds-field-01, #f4f4f4);
   --cds-field-hover: var(--cds-field-hover-01, #e8e8e8);
-  --cds-border-subtle: var(--cds-border-subtle-01, #e0e0e0);
+  --cds-border-subtle: var(--cds-border-subtle-01, #c6c6c6);
   --cds-border-subtle-selected: var(--cds-border-subtle-selected-01, #c6c6c6);
   --cds-border-strong: var(--cds-border-strong-01, #8d8d8d);
+  --cds-border-tile: var(--cds-border-tile-01, #c6c6c6);
   position: fixed;
   top: 3rem;
   right: 0;
@@ -8466,6 +8482,9 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-border-subtle-selected-01: #525252;
   --cds-border-subtle-selected-02: #6f6f6f;
   --cds-border-subtle-selected-03: #8d8d8d;
+  --cds-border-tile-01: #525252;
+  --cds-border-tile-02: #6f6f6f;
+  --cds-border-tile-03: #8d8d8d;
   --cds-field-01: #262626;
   --cds-field-02: #393939;
   --cds-field-03: #525252;
@@ -8477,6 +8496,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus-inverse: #0f62fe;
   --cds-highlight: #002d9c;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
+  --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;
   --cds-icon-on-color: #ffffff;
   --cds-icon-on-color-disabled: rgba(255, 255, 255, 0.25);
@@ -8562,6 +8582,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-label-01-font-weight: 400;
   --cds-label-01-line-height: 1.33333;
   --cds-label-01-letter-spacing: 0.32px;
+  --cds-label-02-font-size: 0.875rem;
+  --cds-label-02-font-weight: 400;
+  --cds-label-02-line-height: 1.28572;
+  --cds-label-02-letter-spacing: 0.16px;
   --cds-helper-text-01-font-size: 0.75rem;
   --cds-helper-text-01-line-height: 1.33333;
   --cds-helper-text-01-letter-spacing: 0.32px;
@@ -8623,11 +8647,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
-  --cds-productive-heading-06-font-size: 2rem;
+  --cds-productive-heading-06-font-size: 2.625rem;
   --cds-productive-heading-06-font-weight: 300;
   --cds-productive-heading-06-line-height: 1.199;
   --cds-productive-heading-06-letter-spacing: 0;
-  --cds-productive-heading-07-font-size: 2.625rem;
+  --cds-productive-heading-07-font-size: 3.375rem;
   --cds-productive-heading-07-font-weight: 300;
   --cds-productive-heading-07-line-height: 1.19;
   --cds-productive-heading-07-letter-spacing: 0;
@@ -8682,7 +8706,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-display-03-line-height: 1.19;
   --cds-display-03-letter-spacing: 0;
   --cds-display-04-font-size: 2.625rem;
-  --cds-display-04-font-weight: 600;
+  --cds-display-04-font-weight: 300;
   --cds-display-04-line-height: 1.19;
   --cds-display-04-letter-spacing: 0;
   --cds-legal-01-font-size: 0.75rem;
@@ -8729,11 +8753,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
-  --cds-heading-06-font-size: 2rem;
+  --cds-heading-06-font-size: 2.625rem;
   --cds-heading-06-font-weight: 300;
   --cds-heading-06-line-height: 1.199;
   --cds-heading-06-letter-spacing: 0;
-  --cds-heading-07-font-size: 2.625rem;
+  --cds-heading-07-font-size: 3.375rem;
   --cds-heading-07-font-weight: 300;
   --cds-heading-07-line-height: 1.19;
   --cds-heading-07-letter-spacing: 0;
@@ -8780,7 +8804,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-fluid-display-03-line-height: 1.19;
   --cds-fluid-display-03-letter-spacing: 0;
   --cds-fluid-display-04-font-size: 2.625rem;
-  --cds-fluid-display-04-font-weight: 600;
+  --cds-fluid-display-04-font-weight: 300;
   --cds-fluid-display-04-line-height: 1.19;
   --cds-fluid-display-04-letter-spacing: 0;
   --cds-layer: var(--cds-layer-01, #f4f4f4);
@@ -8793,9 +8817,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-layer-accent-active: var(--cds-layer-accent-active-01, #a8a8a8);
   --cds-field: var(--cds-field-01, #f4f4f4);
   --cds-field-hover: var(--cds-field-hover-01, #e8e8e8);
-  --cds-border-subtle: var(--cds-border-subtle-01, #e0e0e0);
+  --cds-border-subtle: var(--cds-border-subtle-01, #c6c6c6);
   --cds-border-subtle-selected: var(--cds-border-subtle-selected-01, #c6c6c6);
   --cds-border-strong: var(--cds-border-strong-01, #8d8d8d);
+  --cds-border-tile: var(--cds-border-tile-01, #c6c6c6);
 }
 
 .c4p--web-terminal__body {

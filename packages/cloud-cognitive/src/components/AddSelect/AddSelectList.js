@@ -6,12 +6,7 @@
 //
 
 import React from 'react';
-import {
-  Button,
-  Checkbox,
-  Dropdown,
-  RadioButton,
-} from '@carbon/react';
+import { Button, Checkbox, Dropdown, RadioButton } from '@carbon/react';
 import { ChevronRight, View } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import cx from 'classnames';

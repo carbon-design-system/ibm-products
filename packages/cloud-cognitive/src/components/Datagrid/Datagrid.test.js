@@ -278,7 +278,7 @@ const EmptyUsage = ({ ...rest }) => {
 const TenThousandEntriesWithoutFeatureFlag = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10000));
-  // pkg.feature['Datagrid.useInfiniteScroll'] = true;
+  pkg.feature['Datagrid.useInfiniteScroll'] = false;
   const datagridState = useDatagrid(
     {
       columns,

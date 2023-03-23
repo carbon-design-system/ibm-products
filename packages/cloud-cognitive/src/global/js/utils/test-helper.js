@@ -184,18 +184,10 @@ export const expectMultipleWarn = (messages, test) => {
   return result;
 };
 
-const checkLogging = (mock, message, outOfMany) => {
+const checkLogging = (mock, message) => {
   if (message) {
-    if (outOfMany) {
-      expect(mock).toBeCalled();
-    } else {
-      expect(mock).toBeCalledTimes(1);
-    }
-    if (outOfMany) {
-      expect(mock.mock.calls[0]).toContain(message);
-    } else {
-      expect(mock).toHaveBeenCalledWith(...makeMatcherArray(message));
-    }
+    expect(mock).toBeCalled();
+    expect(mock).toHaveBeenCalledWith(...makeMatcherArray(message));
   }
 };
 
@@ -212,14 +204,14 @@ const checkLogging = (mock, message, outOfMany) => {
  * @param {Function} test the test function to call, during which the call to
  * console.error will be expected.
  */
-export const expectLogging = ({ errors, warnings }, test, outOfMany) => {
+export const expectLogging = ({ errors, warnings }, test) => {
   const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
   const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
 
   const result = test();
 
-  checkLogging(error, errors, outOfMany);
-  checkLogging(warn, warnings, outOfMany);
+  checkLogging(error, errors);
+  checkLogging(warn, warnings);
 
   error.mockRestore();
   warn.mockRestore();
@@ -239,14 +231,11 @@ export const expectLogging = ({ errors, warnings }, test, outOfMany) => {
  * @param {Function} test the test function to call, during which the call to
  * console.error will be expected.
  */
-export const expectError = (message, test, outOfMany) => {
+export const expectError = (message, test) => {
   const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
   const result = test();
 
-  error.mock.calls[0].forEach((arg) => {
-    console.log(arg);
-  });
-  checkLogging(error, message, outOfMany);
+  checkLogging(error, message);
 
   error.mockRestore();
   return result;

@@ -1,0 +1,124 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+// @import '../../global/styles/mixins';
+
+@mixin term-closed-defaults {
+  background-color: $interactive-02;
+  border: none;
+  border-radius: 100px;
+  padding: 1px $spacing-03 1px $spacing-03;
+  white-space: nowrap;
+  &:hover {
+    cursor: pointer;
+    background-color: $hover-secondary;
+  }
+}
+@mixin term-open-defaults {
+  @include term-closed-defaults();
+  padding-right: 0;
+  svg {
+    margin: 0 $spacing-02 0 $spacing-01;
+    vertical-align: text-top;
+    height: 18px;
+  }
+}
+@mixin body-defaults {
+  @include carbon--type-style('body-long-01');
+  display: block;
+  border-left-width: 1.25px;
+  border-left-style: solid;
+  animation: fade 600ms;
+  margin: $spacing-02 0;
+  padding: $spacing-03 $spacing-04;
+}
+// Other Carbon settings.
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+// NonLinearReading uses the following Carbon components:
+// TODO: @import(s) of Carbon component styles used by NonLinearReading
+// NonLinearReading uses the following Carbon for IBM Products components:
+// TODO: @import(s) of IBM Products component styles used by NonLinearReading
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin non-linear-reading {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--non-linear-reading;
+  @keyframes fade {
+    0% {
+      opacity: 0;
+    }
+    15% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .#{$block-class} {
+    &--term {
+      &-light {
+        &-closed {
+          @include term-closed-defaults();
+          color: $inverse-01;
+          background-color: $interactive-02;
+          &:hover {
+            background-color: $hover-secondary;
+          }
+        }
+        &-open {
+          @include term-open-defaults();
+          background-color: $purple-20;
+          color: $text-01;
+          &:hover {
+            background-color: #dcc7ff;
+          }
+        }
+      }
+
+      &-dark {
+        &-closed {
+          @include carbon--theme($carbon--theme--g100, true);
+          @include term-closed-defaults();
+          color: $text-04;
+          background-color: $interactive-02;
+          &:hover {
+            background-color: $hover-secondary;
+          }
+        }
+        &-open {
+          @include carbon--theme($carbon--theme--g100, true);
+          @include term-open-defaults();
+          background-color: #491d8b;
+          color: $text-04;
+          &:hover {
+            background-color: #7f3ae7;
+          }
+        }
+      }
+    }
+
+    &--body {
+      &-light {
+        @include body-defaults();
+        border-left-color: #6929c4;
+        color: #6929c4;
+      }
+      &-dark {
+        @include carbon--theme($carbon--theme--g100, true);
+        @include body-defaults();
+        border-left-color: #d4bbff;
+        color: #d4bbff;
+      }
+    }
+  }
+}
+@include exports('non-linear-reading') {
+  @include non-linear-reading;
+}

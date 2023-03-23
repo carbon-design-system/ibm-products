@@ -140,6 +140,10 @@ const s = [
           'c/TearsheetShell',
         ],
       },
+      {
+        n: 'Novice to pro',
+        s: ['c/NonLinearReading'],
+      },
     ],
   },
   {

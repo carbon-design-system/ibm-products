@@ -1391,6 +1391,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   border-bottom: 1px solid var(--cds-ui-03, #e0e0e0);
   margin: 0;
 }
+.c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header-description {
+  max-width: 80%;
+}
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header--with-close-icon {
   padding-right: var(--cds-spacing-10, 4rem);
 }

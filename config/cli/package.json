@@ -33,7 +33,7 @@
     "inquirer": "^9.1.4",
     "npm-check-updates": "^16.7.4",
     "prettier": "^2.8.4",
-    "prettier-config-carbon": "^0.8.0",
+    "prettier-config-carbon": "^0.9.0",
     "remark": "^14.0.2",
     "semver": "^7.3.8",
     "yargs": "^17.6.2"

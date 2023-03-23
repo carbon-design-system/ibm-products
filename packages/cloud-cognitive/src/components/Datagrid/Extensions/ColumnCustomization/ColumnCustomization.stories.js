@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -47,7 +47,6 @@ const defaultHeader = [
   {
     Header: 'Row Index',
     accessor: (row, i) => i,
-    sticky: 'left',
     id: 'rowIndex', // id is required when accessor is a function.
   },
   {
@@ -241,9 +240,17 @@ export const ColumnCustomizationUsageStory = prepareStory(
 );
 
 const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
+  const stickyHeaders = defaultHeader.slice(1, 15);
+
   const columns = React.useMemo(
     () => [
-      ...defaultHeader,
+      {
+        Header: 'Row Index',
+        accessor: (row, i) => i,
+        sticky: 'left',
+        id: 'rowIndex', // id is required when accessor is a function.
+      },
+      ...stickyHeaders,
       {
         Header: '',
         accessor: 'actions',

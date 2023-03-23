@@ -123,15 +123,18 @@ pkg.setAllComponents(true);
 
 // Enable a feature flagged examples
 pkg.feature.nameOfFeature = true;
-pkg.feature['Component.feature'] = true; 
+pkg.feature['Component.feature'] = true;
 
 // Live dangerously: enable all pre-release features!
 pkg.setAllFeatures(true);
 ```
 
-**Note:** The above settings must happen before a component first renders or a feature is first used.
+**Note:** The above settings must happen before a component first renders or a
+feature is first used.
 
-**Note: 2** In the case of features implemented via hooks the feature may function without enabling. In all cases features that disabled by default will log in the console a warning if enabled via a feature flag or an error if not.
+**Note: 2** In the case of features implemented via hooks the feature may
+function without enabling. In all cases features that disabled by default will
+log in the console a warning if enabled via a feature flag or an error if not.
 
 ### Building and running locally
 

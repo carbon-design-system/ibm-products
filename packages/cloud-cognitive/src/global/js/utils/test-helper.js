@@ -185,7 +185,6 @@ export const expectMultipleWarn = (messages, test) => {
 };
 
 const checkLogging = (mock, message, outOfMany) => {
-  console.log('message', message);
   if (message) {
     if (outOfMany) {
       expect(mock).toBeCalled();
@@ -219,8 +218,8 @@ export const expectLogging = ({ errors, warnings }, test, outOfMany) => {
 
   const result = test();
 
-  // checkLogging(error, errors, outOfMany);
-  // checkLogging(warn, warnings, outOfMany);
+  checkLogging(error, errors, outOfMany);
+  checkLogging(warn, warnings, outOfMany);
 
   error.mockRestore();
   warn.mockRestore();

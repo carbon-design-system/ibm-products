@@ -180,29 +180,17 @@ describe(componentName, () => {
   });
 
   it('does NOT log an error when useExample used and feature flag enabled', () => {
-    const spy = jest.spyOn(global.console, 'warn').mockImplementation(() => {});
-
     pkg.feature['ExampleComponent.useExample'] = true;
 
-    expectLogging(
-      {
-        warnings:
-          'Carbon for IBM Products (Warn): Feature "ExampleComponent.useExample" not enabled. To enable see the notes on feature flags in the README.',
-      },
-      () => {
-        render(
-          <ExampleComponent
-            {...{
-              usesExampleHook: 10,
-              primaryButtonLabel,
-              secondaryButtonLabel,
-              secondaryIcon: Add,
-            }}
-          />
-        );
-      }
+    render(
+      <ExampleComponent
+        {...{
+          usesExampleHook: 10,
+          primaryButtonLabel,
+          secondaryButtonLabel,
+          secondaryIcon: Add,
+        }}
+      />
     );
-
-    spy.mockRestore();
   });
 });

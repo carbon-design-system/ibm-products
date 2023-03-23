@@ -60,7 +60,6 @@ const componentName = 'DataSpreadsheet';
 
 // Default values for props
 const defaults = {
-  cellSize: 'sm',
   columns: Object.freeze([]),
   data: Object.freeze([]),
   defaultEmptyRowCount: 16,
@@ -77,7 +76,7 @@ export let DataSpreadsheet = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).
-      cellSize = defaults.cellSize,
+      cellSize,
       className,
       columns = defaults.columns,
       data = defaults.data,

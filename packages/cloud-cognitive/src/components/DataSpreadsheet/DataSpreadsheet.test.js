@@ -25,6 +25,8 @@ const onSelectionAreaChangeFn = jest.fn();
 // values to use
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
+// eslint-disable-next-line no-unused-vars
+const bigData = generateData({ rows: 1, extraColumns: true }); // for coverage;
 const data = generateData({ rows: 16 });
 const defaultProps = {
   columns: [
@@ -56,6 +58,7 @@ const defaultProps = {
   data,
   selectAllAriaLabel: 'Select all',
   spreadsheetAriaLabel: 'Example data spreadsheet',
+  cellSize: 'sm',
 };
 
 describe(componentName, () => {
@@ -98,6 +101,7 @@ describe(componentName, () => {
     render(
       <DataSpreadsheet
         {...defaultProps}
+        cellSize="xs"
         ref={ref}
         onActiveCellChange={activeCellChangeFn}
       />
@@ -123,11 +127,12 @@ describe(componentName, () => {
 
   it('should select an entire row, adding a selection area', () => {
     const ref = React.createRef();
-    const { click } = userEvent;
+    const { click, tab, keyboard } = userEvent;
     const activeCellChangeFn = jest.fn();
     render(
       <DataSpreadsheet
         {...defaultProps}
+        cellSize="md"
         ref={ref}
         onActiveCellChange={activeCellChangeFn}
       />
@@ -140,17 +145,22 @@ describe(componentName, () => {
       `.${blockClass}__selection-area--element`
     );
     expect(selectionArea).toBeInTheDocument();
+
+    // for coverage
+    tab();
+    keyboard('{Enter}');
   });
 
   it('should select an entire column, adding a selection area, and reorder columns', () => {
     const ref = React.createRef();
-    const { click } = userEvent;
+    const { click, keyboard } = userEvent;
     const { mouseMove, mouseDown, mouseUp } = fireEvent;
     const activeCellChangeFn = jest.fn();
     const onSelectionAreaChangeFn = jest.fn();
     render(
       <DataSpreadsheet
         {...defaultProps}
+        cellSize="lg"
         ref={ref}
         onActiveCellChange={activeCellChangeFn}
         onSelectionAreaChange={onSelectionAreaChangeFn}
@@ -185,11 +195,14 @@ describe(componentName, () => {
     expect(firstColumnHeaderText).not.toEqual(
       firstColumnHeaderTextAfterReorder
     );
+
+    // for coverage
+    keyboard('{Enter}');
   });
 
   it('should select all cells when clicking on select all cell button', () => {
     const ref = React.createRef();
-    const { click } = userEvent;
+    const { click, keyboard } = userEvent;
     render(
       <DataSpreadsheet
         {...defaultProps}
@@ -212,6 +225,11 @@ describe(componentName, () => {
     expect(selectionArea).toBeInTheDocument();
     expect(activeCell).toBeInTheDocument();
     expect(onSelectionAreaChangeFn).toHaveBeenCalledTimes(1);
+
+    // coverage
+    click(selectAllButton);
+    keyboard('{Enter>10/}');
+    keyboard('{Tab>10/}');
   });
 
   const EmptySpreadsheet = forwardRef(({ ...rest }, ref) => {
@@ -424,6 +442,11 @@ describe(componentName, () => {
     expect(
       parseInt(activeCellElement.getAttribute('data-active-column-index'))
     ).toEqual(defaultProps.columns.length - 1);
+
+    // coverage
+    keyboard('{Home}');
+    keyboard('{ArrowLeft}');
+    keyboard('{Delete}');
   });
 
   it('should remove spreadsheet focus using tab key', () => {

@@ -2882,6 +2882,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet .c4p--tearsheet__main {
   display: flex;
   flex-direction: row;
+  background-color: var(--cds-layer);
   grid-column: 1/-1;
   grid-row: 1/-1;
 }
@@ -2893,9 +2894,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   overflow: auto;
   flex-grow: 1;
 }
-.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content {
-  background: var(--cds-background, #ffffff);
-}
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--pagination,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--pagination__control-buttons,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--text-input,
@@ -2906,7 +2904,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--dropdown-list,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--number input[type=number],
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--date-picker__input {
-  background-color: var(--cds-field-01, #f4f4f4);
+  background-color: var(--cds-field);
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--select--inline .cds--select-input {
   background-color: transparent;

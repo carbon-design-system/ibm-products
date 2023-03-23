@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,7 +38,8 @@ const CustomizeColumnsTearsheet = ({
   const [columnObjects, setColumnObjects] = useState(
     columnDefinitions
       // hide the columns without Header, e.g the sticky actions, spacer
-      .filter((colDef) => !!colDef.Header.props && !colDef.isAction)
+      .filter((colDef) => !!colDef.Header.props && !!colDef.Header.props.title)
+      .filter((colDef) => !colDef.isAction)
       // only sort the hidden column to the end when modal reopen
       .sort((defA, defB) => {
         const isVisibleA = isColumnVisible(defA);

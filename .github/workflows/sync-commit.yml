@@ -2,7 +2,7 @@ name: Sync commits across versions
 
 on:
   pull_request:
-    branches: [sync-commit] # TODO: Rename to `main` before submitting.
+    branches: [main]
     types: [closed]
 
 jobs:
@@ -19,18 +19,18 @@ jobs:
       # https://git-scm.com/docs/git-cherry-pick#_options
       - name: Cherry pick
 
-        # TODO: Rename to `main` before submitting.
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-          git fetch origin sync-commit
+          git fetch origin main
           git cherry-pick -xX theirs --keep-redundant-commits ${{ github.event.pull_request.merge_commit_sha }}
 
       - name: Create PR
         uses: peter-evans/create-pull-request@v4
 
-        with: # TODO: Include before submitting — token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
+        with:
+          token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
           branch: ${{ github.event.pull_request.head.ref }}-sync
           branch-suffix: random
 
@@ -51,7 +51,7 @@ jobs:
 
           # Override default merge method for release branches to merge commit — https://kodiakhq.com/docs/config-reference#mergemethod-1
           labels: |
-            Carbon v11
             kodiak: merge.method = 'merge'
+            v2
 
           draft: true

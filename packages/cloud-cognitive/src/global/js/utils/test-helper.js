@@ -242,16 +242,12 @@ export const expectLogging = ({ errors, warnings }, test, outOfMany) => {
 export const expectError = (message, test, outOfMany) => {
   const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
   const result = test();
-  if (outOfMany) {
-    expect(error).toBeCalled();
-  } else {
-    expect(error).toBeCalledTimes(1);
-  }
-  if (outOfMany) {
-    expect(error.mock.calls[0]).toContain(message);
-  } else {
-    expect(error).toHaveBeenCalledWith(...makeMatcherArray(message));
-  }
+
+  error.mock.calls[0].forEach((arg) => {
+    console.log(arg);
+  });
+  checkLogging(error, message, outOfMany);
+
   error.mockRestore();
   return result;
 };

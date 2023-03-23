@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -11,55 +11,118 @@
 @import 'carbon-components/scss/components/overflow-menu/overflow-menu';
 
 @include exports($name: combo-button) {
-  /// Sets the prefix for all IBM Security-specific classes.
-  /// @access private
-  /// @type String
-  $security--prefix: security;
+  $blockClass: #{$pkg-prefix}--combo-button;
 
-  .#{$security--prefix}--combo-button {
+  .#{$blockClass} {
     position: relative;
     display: inline-flex;
   }
 
-  .#{$security--prefix}--combo-button__action {
+  .#{$blockClass}__action {
     @include text-overflow;
   }
 
-  .#{$security--prefix}--combo-button
-    .#{$security--prefix}--combo-button__overflow-menu {
-    width: carbon--mini-units($count: 6);
+  .#{$blockClass}__btn--sm.#{$carbon-prefix}--btn {
+    min-width: 8rem;
+  }
+
+  .#{$blockClass}__btn--md.#{$carbon-prefix}--btn {
+    min-width: 7.5rem;
+  }
+
+  .#{$blockClass}__btn--lg.#{$carbon-prefix}--btn {
+    min-width: 7rem;
+  }
+
+  .#{$blockClass}__btn--lg.#{$carbon-prefix}--btn--lg:not(
+      .#{$carbon-prefix}--btn--icon-only
+    ) {
+    min-height: 3rem;
+  }
+
+  .#{$blockClass} .#{$blockClass}__overflow-menu {
     height: auto;
     border-left: carbon--rem($px: 1px) solid $ui-03;
     background-color: $interactive-01;
   }
+  .#{$blockClass} .#{$blockClass}__overflow-menu:disabled,
+  .#{$blockClass} .#{$blockClass}__overflow-menu[disabled],
+  .#{$blockClass}__overflow-menu--disabled.#{$blockClass}__overflow-menu.#{$prefix}--overflow-menu:hover {
+    background-color: $disabled-02;
+    cursor: not-allowed;
+  }
 
-  .#{$security--prefix}--combo-button__overflow-menu.#{$prefix}--overflow-menu:hover,
-  .#{$security--prefix}--combo-button__overflow-menu.#{$prefix}--overflow-menu--open {
+  .#{$blockClass}__overflow-menu__icon--disabled {
+    fill: $disabled-03;
+  }
+
+  .#{$blockClass}__overflow-menu--sm.#{$blockClass}__overflow-menu {
+    width: carbon--mini-units($count: 4);
+  }
+
+  .#{$blockClass}__overflow-menu--md.#{$blockClass}__overflow-menu {
+    width: carbon--mini-units($count: 5);
+  }
+
+  .#{$blockClass}__overflow-menu--lg.#{$blockClass}__overflow-menu {
+    width: carbon--mini-units($count: 6);
+  }
+
+  .#{$blockClass}__overflow-menu.#{$carbon-prefix}--overflow-menu--open.#{$blockClass}__overflow-menu.#{$carbon-prefix}--overflow-menu.#{$prefix}--overflow-menu--open {
+    background-color: $interactive-01;
+    box-shadow: none;
+  }
+
+  .#{$blockClass}
+    .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+    visibility: hidden;
+  }
+
+  .#{$blockClass}__overflow-menu.#{$prefix}--overflow-menu:hover,
+  .#{$blockClass}__overflow-menu.#{$prefix}--overflow-menu--open,
+  .#{$blockClass}__overflow-menu.#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open,
+  .#{$blockClass}__overflow-menu.#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--open:hover {
     background-color: $hover-primary;
   }
 
-  .#{$security--prefix}--combo-button__overflow-menu.#{$prefix}--overflow-menu:active {
+  .#{$blockClass}__overflow-menu.#{$prefix}--overflow-menu:active {
     background-color: $active-primary;
   }
 
-  .#{$security--prefix}--combo-button__overflow-menu__icon {
+  .#{$blockClass}__overflow-menu__icon {
     fill: $icon-03;
     pointer-events: none;
   }
 
-  .#{$security--prefix}--combo-button__overflow-menu__list {
+  .#{$blockClass}__overflow-menu__list.#{$prefix}--overflow-menu-options {
     width: 100%;
   }
 
-  .#{$security--prefix}--combo-button__overflow-menu__list:after {
+  .#{$blockClass}__overflow-menu__list:after {
     display: none;
   }
 
-  .#{$security--prefix}--combo-button__overflow-menu__item {
+  // .#{$prefix}--overflow-menu-options__btn.#{$blockClass}__overflow-menu__divider {
+  //   width: 100%;
+  //   height: 0.063rem;
+  //   background-color: $border-subtle;
+  // }
+
+  .#{$blockClass}__overflow-menu__item.#{$prefix}--overflow-menu-options__btn {
+    position: relative;
     max-width: none;
   }
 
-  .#{$security--prefix}--combo-button__overflow-menu__item__icon {
+  .#{$blockClass}__overflow-menu__item--danger.#{$prefix}--overflow-menu-options__btn {
+    background-color: $button-danger-primary;
+    color: $text-on-color;
+  }
+
+  .#{$blockClass}__overflow-menu__item__icon {
     margin-left: auto;
+  }
+
+  .#{$prefix}--btn.#{$prefix}--btn--lg:not(.#{$prefix}--btn--icon-only) {
+    align-items: center;
   }
 }

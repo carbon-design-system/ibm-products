@@ -38,6 +38,40 @@ const DatagridRow = (datagridState) => {
     return size;
   };
 
+  const hoverHandler = (event) => {
+    const subRowCount = getVisibleNestedRowCount(row);
+    const totalNestedRowIndicatorHeight = px(subRowCount * rowHeights[rowSize]);
+    const hoverRow = event.target.closest(
+      `.${blockClass}__carbon-row-expanded`
+    );
+    hoverRow?.classList.add(`${blockClass}__carbon-row-expanded-hover-active`);
+    const rowExpanderButton = hoverRow?.querySelector(
+      `.${blockClass}__row-expander`
+    );
+    const rowSizeValue = rowSize || 'lg';
+    hoverRow?.style?.setProperty(
+      `--${blockClass}--indicator-height`,
+      totalNestedRowIndicatorHeight
+    );
+    hoverRow?.style?.setProperty(
+      `--${blockClass}--row-height`,
+      px(rowHeights[rowSizeValue])
+    );
+    hoverRow?.style?.setProperty(
+      `--${blockClass}--indicator-offset-amount`,
+      px(rowExpanderButton?.offsetLeft || 0)
+    );
+  };
+
+  const focusRemover = () => {
+    const elements = document.querySelectorAll(
+      `.${blockClass}__carbon-row-expanded`
+    );
+    elements.forEach((el) => {
+      el.classList.remove(`${blockClass}__carbon-row-expanded-hover-active`);
+    });
+  };
+
   return (
     <TableRow
       className={cx(`${blockClass}__carbon-row`, {
@@ -51,32 +85,7 @@ const DatagridRow = (datagridState) => {
         if (!withNestedRows) {
           return;
         }
-        const subRowCount = getVisibleNestedRowCount(row);
-        const totalNestedRowIndicatorHeight = px(
-          subRowCount * rowHeights[rowSize]
-        );
-        const hoverRow = event.target.closest(
-          `.${blockClass}__carbon-row-expanded`
-        );
-        hoverRow?.classList.add(
-          `${blockClass}__carbon-row-expanded-hover-active`
-        );
-        const rowExpanderButton = hoverRow?.querySelector(
-          `.${blockClass}__row-expander`
-        );
-        const rowSizeValue = rowSize || 'lg';
-        hoverRow?.style?.setProperty(
-          `--${blockClass}--indicator-height`,
-          totalNestedRowIndicatorHeight
-        );
-        hoverRow?.style?.setProperty(
-          `--${blockClass}--row-height`,
-          px(rowHeights[rowSizeValue])
-        );
-        hoverRow?.style?.setProperty(
-          `--${blockClass}--indicator-offset-amount`,
-          px(rowExpanderButton?.offsetLeft || 0)
-        );
+        hoverHandler(event);
       }}
       onMouseLeave={(event) => {
         const hoverRow = event.target.closest(
@@ -85,6 +94,24 @@ const DatagridRow = (datagridState) => {
         hoverRow?.classList.remove(
           `${blockClass}__carbon-row-expanded-hover-active`
         );
+      }}
+      onFocus={(event) => {
+        if (!withNestedRows) {
+          return;
+        }
+        hoverHandler(event);
+      }}
+      onBlur={() => {
+        focusRemover();
+      }}
+      onKeyUp={(event) => {
+        if (!withNestedRows) {
+          return;
+        }
+        if (event.key === 'Enter' || event.key === 'Space') {
+          focusRemover();
+          hoverHandler(event);
+        }
       }}
     >
       {row.cells.map((cell, index) => {

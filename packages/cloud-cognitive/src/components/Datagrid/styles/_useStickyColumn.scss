@@ -16,7 +16,7 @@
   right: 0;
   display: flex;
   align-items: center;
-  border-left: 1px solid $layer-accent-01;
+  border-left: 1px solid $layer-active-02;
 }
 
 .#{variables.$block-class}__right-sticky-column-header {
@@ -31,7 +31,7 @@
   left: 0;
   display: flex;
   align-items: center;
-  border-right: 1px solid $layer-accent-01;
+  border-right: 1px solid $layer-active-02;
 }
 
 .#{variables.$block-class}__left-sticky-column-header {
@@ -43,7 +43,7 @@
 
 .#{variables.$block-class}__left-sticky-column-cell.#{variables.$block-class}__left-sticky-column-cell--with-extra-select-column,
 .#{variables.$block-class}__left-sticky-column-header.#{variables.$block-class}__left-sticky-column-header--with-extra-select-column {
-  left: $spacing-08;
+  left: $spacing-09;
 }
 
 .#{variables.$block-class}__sticky-noShadow {

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2022
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -266,6 +266,7 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class}__main {
     display: flex;
     flex-direction: row;
+    background-color: $layer;
     grid-column: 1 / -1;
     grid-row: 1 / -1;
   }
@@ -281,9 +282,7 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--wide .#{$block-class}__content {
-    background: $background;
-
-    // revert the background color overridden by #{$carbon-prefix}--modal styles
+    // Revert background color overridden by Carbon's modal - https://github.com/carbon-design-system/carbon/blob/main/packages/styles/scss/components/modal/_modal.scss#L54
     .#{$carbon-prefix}--pagination,
     .#{$carbon-prefix}--pagination__control-buttons,
     .#{$carbon-prefix}--text-input,
@@ -294,7 +293,7 @@ $motion-duration: $duration-moderate-02;
     .#{$carbon-prefix}--dropdown-list,
     .#{$carbon-prefix}--number input[type='number'],
     .#{$carbon-prefix}--date-picker__input {
-      background-color: $field-01;
+      background-color: $field;
     }
 
     .#{$carbon-prefix}--select--inline .#{$carbon-prefix}--select-input {

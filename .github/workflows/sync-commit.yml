@@ -1,0 +1,57 @@
+name: Sync commits across versions
+
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+
+jobs:
+  sync-commit:
+    if: github.event.pull_request.merged == true # Merged PRs to `main`.
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: carbon-v11
+
+      # https://git-scm.com/docs/git-cherry-pick#_options
+      - name: Cherry pick
+
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+          git fetch origin main
+          git cherry-pick -xX theirs --keep-redundant-commits ${{ github.event.pull_request.merge_commit_sha }}
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v4
+
+        with:
+          token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
+          branch: ${{ github.event.pull_request.head.ref }}-sync
+          branch-suffix: random
+
+          commit-message: ${{ github.event.pull_request.title }} — sync commit
+
+          title: ${{ github.event.pull_request.title }} — sync commit
+          body: |
+            This automates [cherry picking](https://git-scm.com/docs/git-cherry-pick) the '${{ github.event.pull_request.title }}' commit across versions:
+
+            <details>
+              <summary>'${{ github.event.pull_request.title }}' body</summary>
+
+            ${{ github.event.pull_request.body }}
+
+            </details>
+
+            **Note:** To avoid [re-resolving previously resolved conflicts](https://git-scm.com/docs/gitfaq#Documentation/gitfaq.txt-Whatkindsofproblemscanoccurwhenmerginglong-livedbrancheswithsquashmerges), this PR is merged with a merge commit.
+
+          # Override default merge method for release branches to merge commit — https://kodiakhq.com/docs/config-reference#mergemethod-1
+          labels: |
+            kodiak: merge.method = 'merge'
+            v2
+
+          draft: true

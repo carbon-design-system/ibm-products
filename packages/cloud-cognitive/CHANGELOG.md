@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.46.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.46.1...@carbon/ibm-products@1.46.2) (2023-03-21)
+
+
+### Bug Fixes
+
+* cardfooter button icon props update ([#2729](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2729)) ([5d7f4d2](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5d7f4d2ef11e46d14b2726b69ef9cdc559800c32))
+* **DataGrid:** design review horizontal scrolling ([#2657](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2657)) ([99685c0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/99685c0bd98630a8f67383e0698d9ede98493a71))
+* **nested row:** border color and align fixed ([#2621](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2621)) ([3b81a0e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3b81a0ec56d829f65bf4092a971098811d7b8bc2))
+
+
+
+
+
 ## [1.46.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.46.0...@carbon/ibm-products@1.46.1) (2023-03-14)
 
 

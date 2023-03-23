@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.22](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.21...@carbon/ibm-products@2.0.0-rc.22) (2023-03-21)
+
+
+### Bug Fixes
+
+* cardfooter button icon props update v11 ([#2730](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2730)) ([ef12540](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ef12540a95300366ff6e79dc81952be48562a8ad))
+* **DataGrid:** design review horizontal scrolling (v11) ([#2659](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2659)) ([4b6784a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4b6784a324a33234d717ed07f5ab8ac1289ac0cc))
+* **nested rows:** fixed border color and align ([#2622](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2622)) ([00de831](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/00de831f68e31820a3a671e8dcda2a4549c483e3))
+
+
+### Features
+
+* upgrade Carbon dependencies to latest compatible versions ([#2731](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2731)) ([d40545e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d40545e16d81760334e9b0e1c33ae69f142addb1))
+
+
+
+
+
 # [2.0.0-rc.21](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.20...@carbon/ibm-products@2.0.0-rc.21) (2023-03-14)
 
 

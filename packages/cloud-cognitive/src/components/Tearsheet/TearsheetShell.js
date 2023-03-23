@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,10 +20,12 @@ import pconsole from '../../global/js/utils/pconsole';
 import {
   Button,
   ComposedModal,
+  Layer,
   ModalHeader,
   ModalBody,
   usePrefix,
 } from '@carbon/react';
+
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 
@@ -287,10 +289,15 @@ export const TearsheetShell = React.forwardRef(
               {influencer}
             </Wrap>
             <Wrap className={`${bc}__right`}>
-              <Wrap alwaysRender={includeActions} className={`${bc}__main`}>
+              <Wrap
+                className={`${bc}__main`}
+                alwaysRender={includeActions}
+                element={Layer}
+              >
                 <Wrap
-                  alwaysRender={influencer && influencerPosition === 'right'}
                   className={`${bc}__content`}
+                  alwaysRender={influencer && influencerPosition === 'right'}
+                  element={Layer}
                 >
                   {children}
                 </Wrap>

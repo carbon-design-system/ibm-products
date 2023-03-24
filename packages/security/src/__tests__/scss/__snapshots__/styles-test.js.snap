@@ -27181,7 +27181,7 @@ optgroup.bx--select-optgroup:disabled,
   }
 }
 
-.bx--modal-content p,
+.bx--modal-content > p,
 .bx--modal-content__regular-content {
   padding-right: 20%;
   font-size: var(--cds-body-long-01-font-size, 0.875rem);
@@ -27223,7 +27223,7 @@ optgroup.bx--select-optgroup:disabled,
 .bx--modal-container--xs .bx--modal-content__regular-content {
   padding-right: var(--cds-spacing-05, 1rem);
 }
-.bx--modal-container--xs .bx--modal-content p {
+.bx--modal-container--xs .bx--modal-content > p {
   padding-right: 0;
 }
 @media (min-width: 42rem) {
@@ -27246,7 +27246,7 @@ optgroup.bx--select-optgroup:disabled,
 .bx--modal-container--sm .bx--modal-content__regular-content {
   padding-right: var(--cds-spacing-05, 1rem);
 }
-.bx--modal-container--sm .bx--modal-content p {
+.bx--modal-container--sm .bx--modal-content > p {
   padding-right: 0;
 }
 @media (min-width: 42rem) {
@@ -27259,7 +27259,7 @@ optgroup.bx--select-optgroup:disabled,
     width: 42%;
     max-height: 72%;
   }
-  .bx--modal-container--sm .bx--modal-content p,
+  .bx--modal-container--sm .bx--modal-content > p,
   .bx--modal-container--sm .bx--modal-content__regular-content {
     padding-right: 20%;
   }

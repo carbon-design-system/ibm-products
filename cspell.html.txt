@@ -17,6 +17,7 @@ rsquo
 searchbox
 tabindex
 tbody
+valign
 viewports
 xlink
 hellip

@@ -3053,8 +3053,12 @@ Map {
         "front": 12,
         "maxLength": 20,
       },
+      "noBorderRadius": false,
       "noIcon": false,
+      "noTailTruncation": false,
+      "noType": false,
       "onClick": undefined,
+      "onClickValue": undefined,
       "onContextMenu": [Function],
       "score": undefined,
       "scoreDescription": [Function],
@@ -3099,10 +3103,22 @@ Map {
         ],
         "type": "shape",
       },
+      "noBorderRadius": {
+        "type": "bool",
+      },
       "noIcon": {
         "type": "bool",
       },
+      "noTailTruncation": {
+        "type": "bool",
+      },
+      "noType": {
+        "type": "bool",
+      },
       "onClick": {
+        "type": "func",
+      },
+      "onClickValue": {
         "type": "func",
       },
       "onContextMenu": {
@@ -3555,6 +3571,7 @@ Map {
             "danger--ghost",
             "danger--tertiary",
             "tertiary",
+            "ghost-danger",
           ],
         ],
         "type": "oneOf",
@@ -3639,6 +3656,7 @@ Map {
             "danger--ghost",
             "danger--tertiary",
             "tertiary",
+            "ghost-danger",
           ],
         ],
         "type": "oneOf",
@@ -5737,6 +5755,7 @@ Map {
             "danger--ghost",
             "danger--tertiary",
             "tertiary",
+            "ghost-danger",
           ],
         ],
         "type": "oneOf",

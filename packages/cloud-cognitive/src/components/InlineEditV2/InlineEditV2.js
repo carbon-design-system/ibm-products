@@ -19,6 +19,7 @@ import {
 } from '@carbon/icons-react';
 import { pkg, carbon } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { spacing07, spacing10 } from '@carbon/layout';
 
 const componentName = 'InlineEditV2';
 const blockClass = `${pkg.prefix}--inline-edit-v2`;
@@ -168,9 +169,9 @@ export let InlineEditV2 = forwardRef(
               )}
               <AnimatePresence>
                 <motion.div
-                  initial={{ translateX: 100 }}
-                  animate={{ translateX: 0 }}
-                  exit={{ translateX: -100 }}
+                  initial={{ width: spacing07 }}
+                  animate={{ width: spacing10 }}
+                  exit={{ width: spacing07 }}
                 >
                   <Button
                     hasIconOnly
@@ -201,9 +202,9 @@ export let InlineEditV2 = forwardRef(
           ) : (
             <AnimatePresence>
               <motion.div
-                initial={{ translateX: 100 }}
-                animate={{ translateX: 0 }}
-                exit={{ translateX: -100 }}
+                initial={{ width: spacing10 }}
+                animate={{ width: spacing07 }}
+                exit={{ width: spacing10 }}
               >
                 <Button
                   className={`${blockClass}__btn ${blockClass}__btn-edit`}

@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.46.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.46.1...@carbon/ibm-products@1.46.2) (2023-03-21)
+
+
+### Bug Fixes
+
+* cardfooter button icon props update ([#2729](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2729)) ([5d7f4d2](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5d7f4d2ef11e46d14b2726b69ef9cdc559800c32))
+* **DataGrid:** design review horizontal scrolling ([#2657](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2657)) ([99685c0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/99685c0bd98630a8f67383e0698d9ede98493a71))
+* **nested row:** border color and align fixed ([#2621](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2621)) ([3b81a0e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3b81a0ec56d829f65bf4092a971098811d7b8bc2))
+
+
+
+
+
+## [1.46.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.46.0...@carbon/ibm-products@1.46.1) (2023-03-14)
+
+
+### Bug Fixes
+
+* **DataGrid:** dense header alignment ([#2711](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2711)) ([ac94837](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ac9483798d7479ba127242f88e228b6aea81314e))
+* **options-tile:** add safe area around toggle ([#2705](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2705)) ([2f290d8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/2f290d8665ed7a73a94f743e80d5463766efa07c))
+
+
+
+
+
 # [1.46.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.45.0...@carbon/ibm-products@1.46.0) (2023-03-07)
 
 

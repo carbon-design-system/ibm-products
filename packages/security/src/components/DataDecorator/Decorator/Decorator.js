@@ -11,8 +11,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Icon } from '@carbon/ibm-security';
 import { getDecoratorProps, namespace, icons } from './constants';
-import styles from './SecurityDecorator.module.scss';
-
+// import styles from './SecurityDecorator.module.scss';
+const styles = {};
 const SecurityDecorator = ({
   active,
   className,
@@ -81,15 +81,15 @@ const SecurityDecorator = ({
             />
           </span>
         )}
-        <span className={`${namespace}__type ${styles.type}`}>{type}</span>
+        <span className={`${namespace}__type`}>{type}</span>
       </>
     );
   };
 
   const renderValue = () => (
     <span
-      className={classnames(`${namespace}__value`, styles.value, {
-        [styles.noTailTruncation]: noTailTruncation,
+      className={classnames(`${namespace}__value`, {
+        [`${namespace}__noTailTruncation}`]: noTailTruncation,
       })}
       title={title || value}
     >
@@ -108,7 +108,7 @@ const SecurityDecorator = ({
     [`${namespace}--interactive`]: onClick,
     [`${namespace}--active`]: active,
     [`${namespace}--inline`]: inline,
-    [styles.noBorderRadius]: noBorderRadius,
+    [`${namespace}--noBorderRadius}`]: noBorderRadius,
   });
 
   const interactiveProps = {
@@ -122,7 +122,7 @@ const SecurityDecorator = ({
     return (
       <a
         href={href}
-        className={`${commonClasses} ${styles.pill}`}
+        className={`${commonClasses} ${namespace}__pill`}
         tabIndex={0}
         {...interactiveProps}
       >
@@ -138,7 +138,7 @@ const SecurityDecorator = ({
       // eslint-disable-next-line react/button-has-type
       <button
         data-testid="de-decorator-pill"
-        className={`${commonClasses} ${styles.pill}`}
+        className={`${commonClasses} ${namespace}__pill`}
         {...interactiveProps}
       >
         {renderType()}
@@ -176,8 +176,9 @@ const SecurityDecorator = ({
   // non-interactive pill
   return (
     <span
+      // TODO: what to do with all data-testid?
       data-testid="de-decorator-pill"
-      className={`${commonClasses} ${styles.pill}`}
+      className={`${commonClasses} ${namespace}__pill`}
       onContextMenu={handleContextMenuClick}
     >
       {renderType()}

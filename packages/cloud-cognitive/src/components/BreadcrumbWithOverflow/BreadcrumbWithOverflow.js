@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -310,17 +310,15 @@ export let BreadcrumbWithOverflow = ({
         >
           {backItem?.href && (backItem?.label || backItem?.title) && (
             <BreadcrumbItem className={cx(`${blockClass}__breadcrumb-back`)}>
-              <Link
+              <IconButton
+                align="right"
                 href={backItem.href}
-                renderIcon={() => (
-                  <IconButton
-                    label={backItem.title || backItem.label}
-                    align="right"
-                  >
-                    <ArrowLeft size={16} />
-                  </IconButton>
-                )}
-              />
+                kind="ghost"
+                label={backItem.title || backItem.label}
+                size="sm"
+              >
+                <ArrowLeft size={16} />
+              </IconButton>
             </BreadcrumbItem>
           )}
           {displayedBreadcrumbItems}

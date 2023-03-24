@@ -40,6 +40,8 @@
   border-left-width: 1.25px;
   border-left-style: solid;
   margin: $spacing-02 0;
+  // Novice to pro does not always use Carbon defaults/tokens
+  // stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use
   animation: fade 600ms;
 }
 

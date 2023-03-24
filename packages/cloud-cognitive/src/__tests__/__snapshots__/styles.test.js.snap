@@ -2404,6 +2404,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   outline: none;
 }
 
+.c4p--inline-edit-v2__text-input + div {
+  display: flex;
+  overflow: hidden;
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;

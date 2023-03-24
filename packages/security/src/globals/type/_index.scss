@@ -72,7 +72,7 @@ $type-style-deprecation-map: (
     $actual: 'type-scale-item($scale-item: #{$scale-item})',
     $expected: 'carbon--type-style($name: #{$name})',
     $url:
-      'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/carbon-for-ibm-security/type.md#functions'
+      'https://github.com/carbon-design-system/ibm-security/blob/master/docs/migration/carbon-for-ibm-security/type.md#functions',
   );
 
   @include carbon--type-style($name: $name);

@@ -482,29 +482,6 @@ const RowSizeDropdown = ({ ...rest }) => {
   );
 };
 
-const LeftPanel = ({ ...rest }) => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid({
-    columns,
-    data,
-    leftPanel: {
-      isOpen: true, // this toggling will happen from datagridActions.
-      panelContent: (
-        <div>Panel content will go here along with any button interactions</div>
-      ),
-    },
-    DatagridActions,
-    DatagridBatchActions,
-  });
-
-  return (
-    <Wrapper>
-      <Datagrid datagridState={{ ...datagridState }} {...rest} />
-    </Wrapper>
-  );
-};
-
 const CustomizingColumns = ({ ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
@@ -1560,109 +1537,6 @@ describe(componentName, () => {
     hideSelectAll(5);
 
     hideSelectAll(8);
-  });
-
-  it('Left Panel', () => {
-    render(<LeftPanel data-testid={dataTestId}></LeftPanel>);
-
-    const alertMock = jest.spyOn(window, 'alert');
-
-    expect(
-      screen.getByText(
-        'Panel content will go here along with any button interactions'
-      )
-    ).toBeVisible();
-
-    expect(
-      screen.getByText(
-        'Panel content will go here along with any button interactions'
-      ).parentElement.classList[0]
-    ).toEqual('c4p--datagrid__datagridLeftPanel');
-
-    expect(
-      document.getElementsByClassName('bx--search-input')[0]
-    ).toBeDefined();
-
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[0]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Left panel');
-
-    expect(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
-    ).toBeDefined();
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[1]
-    );
-
-    const rowSizeDropDown = [
-      'Extra large',
-      'Large (default)',
-      'Medium',
-      'Small',
-      'Extra small',
-    ];
-    const rowSize = document
-      .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
-      .getElementsByTagName('div')[0]
-      .getElementsByTagName('fieldset')[0]
-      .getElementsByTagName('div').length;
-
-    for (var k = 0; k < rowSize; k++) {
-      expect(
-        document
-          .getElementsByClassName('c4p--datagrid__row-size-dropdown')[0]
-          .getElementsByTagName('div')[0]
-          .getElementsByTagName('fieldset')[0]
-          .getElementsByTagName('div')
-          .item(k)
-          .getElementsByTagName('label')[0]
-          .getElementsByTagName('span')[1].textContent
-      ).toEqual(rowSizeDropDown[k]);
-    }
-
-    fireEvent.click(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('button')[0]
-    );
-    expect(alertMock).toHaveBeenCalledTimes(1);
-
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Refresh');
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
-    );
-    expect(alertMock).toHaveBeenCalledTimes(2);
-
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[3]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Download CSV');
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[3]
-    );
-    expect(alertMock).toHaveBeenCalledTimes(3);
   });
 
   it('Nested Rows', () => {

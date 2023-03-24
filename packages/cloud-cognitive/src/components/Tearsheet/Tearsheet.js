@@ -204,6 +204,11 @@ Tearsheet.propTypes = {
   open: PropTypes.bool,
 
   /**
+   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   */
+  portalTarget: PropTypes.node,
+
+  /**
    * The main title of the tearsheet, displayed in the header area.
    */
   title: PropTypes.node,

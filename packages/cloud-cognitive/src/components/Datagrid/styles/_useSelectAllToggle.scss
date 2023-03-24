@@ -8,15 +8,18 @@
 
 @import './variables';
 
-th.#{$block-class}__select-all-toggle-on,
-td.#{$block-class}__select-all-toggle-on {
-  /* stylelint-disable-next-line declaration-no-important */
-  width: 4.5rem !important;
-  /* stylelint-disable-next-line declaration-no-important */
-  min-width: initial !important;
-  box-sizing: border-box;
-  flex: 0 0 auto;
+.#{$block-class}__grid-container {
+  th.#{$block-class}__select-all-toggle-on,
+  td.#{$block-class}__select-all-toggle-on {
+    /* stylelint-disable-next-line declaration-no-important */
+    width: 4.5rem !important;
+    /* stylelint-disable-next-line declaration-no-important */
+    min-width: initial !important;
+    box-sizing: border-box;
+    flex: 0 0 auto;
+  }
 }
+
 th.#{$block-class}__select-all-toggle-on {
   display: flex;
   align-items: center;

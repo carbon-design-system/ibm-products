@@ -23,7 +23,11 @@
 .#{$block-class}__customize-columns-checkbox-wrapper {
   display: flex;
   justify-content: center;
-  padding-left: $spacing-03;
+  padding-left: $spacing-02;
+}
+
+.#{$block-class}__customize-columns-column-list
+  .#{$block-class}__customize-columns-checkbox-wrapper.#{$carbon-prefix}--form-item {
   margin-bottom: 0;
 }
 

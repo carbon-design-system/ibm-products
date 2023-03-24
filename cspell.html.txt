@@ -4,6 +4,7 @@ describedby
 divs
 easings
 evenodd
+figcaption
 hellip
 labelledby
 listitem
@@ -16,6 +17,7 @@ rsquo
 searchbox
 tabindex
 tbody
+valign
 viewports
 xlink
 hellip

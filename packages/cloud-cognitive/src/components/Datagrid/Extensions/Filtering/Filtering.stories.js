@@ -69,8 +69,14 @@ const getBatchActions = () => {
 };
 
 const FilteringUsage = ({ defaultGridProps }) => {
-  const { gridDescription, gridTitle, useDenseHeader, filterProps } =
-    defaultGridProps;
+  const {
+    gridDescription,
+    gridTitle,
+    useDenseHeader,
+    filterProps,
+    emptyStateTitle,
+    emptyStateDescription,
+  } = defaultGridProps;
 
   const headers = [
     {
@@ -157,6 +163,8 @@ const FilteringUsage = ({ defaultGridProps }) => {
       gridTitle,
       gridDescription,
       useDenseHeader,
+      emptyStateTitle,
+      emptyStateDescription,
     },
     useFiltering
   );

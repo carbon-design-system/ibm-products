@@ -138,12 +138,13 @@ const Columns = ({
                     ? `<strong>${firstWord}</strong>` + res[2]
                     : firstWord + `<strong>${res[1]}</strong>` + res[2]
                   : colDef.Header.props.title;
-
+              const isFrozenColumn = !!colDef.sticky;
               const listContents = (
                 <>
                   <Checkbox
                     wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
                     checked={isColumnVisible(colDef)}
+                    disabled={isFrozenColumn}
                     onChange={onSelectColumn.bind(null, colDef)}
                     id={`${blockClass}__customization-column-${colDef.id}`}
                     labelText={colDef.Header.props.title}
@@ -158,6 +159,7 @@ const Columns = ({
                   }
                 </>
               );
+
               return (
                 <DraggableElement
                   key={colDef.id}
@@ -166,7 +168,7 @@ const Columns = ({
                   setListData={setColumnsObject}
                   id={`dnd-datagrid-columns-${colDef.id}`}
                   type="column-customization"
-                  disabled={filterString.length > 0}
+                  disabled={filterString.length > 0 || isFrozenColumn}
                   ariaLabel={colDef.Header.props.title}
                   onGrab={setAriaRegionText}
                   isFocused={focusIndex === i}
@@ -180,7 +182,8 @@ const Columns = ({
                       );
                       e.preventDefault();
                       e.stopPropagation();
-                      if (nextIndex >= 0) {
+
+                      if (nextIndex >= 0 && !columns[nextIndex]?.sticky) {
                         setFocusIndex(nextIndex);
                         moveElement(currentIndex, nextIndex);
                         e.target.scrollIntoView({
@@ -189,6 +192,7 @@ const Columns = ({
                       }
                     }
                   }}
+                  isSticky={isFrozenColumn}
                   selected={isColumnVisible(colDef)}
                 >
                   {listContents}

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useLayoutEffect, useMemo, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useContext, useState } from 'react';
 import {
   Button,
   DataTable,
@@ -21,15 +21,19 @@ import {
   Add16,
   ChevronDown16,
   Download16,
+  Filter16,
   Restart16,
 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 
+import { FilterContext } from '../Datagrid/addons/Filtering';
+
 const blockClass = `${pkg.prefix}--datagrid`;
 
 export const DatagridActions = (datagridState) => {
+  const { setPanelOpen } = useContext(FilterContext);
   const {
     selectedFlatRows,
     setGlobalFilter,
@@ -39,6 +43,7 @@ export const DatagridActions = (datagridState) => {
     useDenseHeader,
     filterProps,
     getFilterFlyoutProps,
+    data,
     FilterFlyout,
   } = datagridState;
 
@@ -70,6 +75,21 @@ export const DatagridActions = (datagridState) => {
       <FilterFlyout {...getFilterFlyoutProps()} />
     );
 
+  const renderFilterPanelButton = () =>
+    filterProps?.variation === 'panel' && (
+      <Button
+        kind="ghost"
+        hasIconOnly
+        tooltipPosition="bottom"
+        renderIcon={Filter16}
+        iconDescription={filterProps.panelIconDescription}
+        className={`${blockClass}-filter-panel-open-button`}
+        onClick={() => setPanelOpen((open) => !open)}
+        disabled={data.length === 0}
+        tooltipAlignment="start"
+      />
+    );
+
   const [modalOpen, setModalOpen] = useState(false);
   const [size, setSize] = useState(window.innerWidth);
   useLayoutEffect(() => {
@@ -88,6 +108,7 @@ export const DatagridActions = (datagridState) => {
       <TableToolbarContent size="sm">
         {!mobileToolbar ? (
           <>
+            {renderFilterPanelButton()}
             <div style={style}>
               <Button
                 kind="ghost"
@@ -133,6 +154,7 @@ export const DatagridActions = (datagridState) => {
       </TableToolbarContent>
     ) : !mobileToolbar ? (
       <TableToolbarContent>
+        {renderFilterPanelButton()}
         <TableToolbarSearch
           size="xl"
           id="columnSearch"
@@ -141,7 +163,6 @@ export const DatagridActions = (datagridState) => {
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
         {renderFilterFlyout()}
-        <RowSizeDropdown {...rowSizeDropdownProps} />
         <div style={style}>
           <Button
             kind="ghost"
@@ -167,6 +188,7 @@ export const DatagridActions = (datagridState) => {
             <CustomizeColumnsButton />
           </div>
         )}
+        <RowSizeDropdown {...rowSizeDropdownProps} />
         <ButtonMenu
           label="Primary button"
           size="lg"

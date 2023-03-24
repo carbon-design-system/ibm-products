@@ -7,37 +7,42 @@
 
 // Standard imports.
 @import '../../global/styles/project-settings';
-// @import '../../global/styles/mixins';
 
 @mixin term-closed-defaults {
-  background-color: $interactive-02;
+  // stylelint-disable-next-line carbon/layout-token-use
+  padding: 1px $spacing-03 1px $spacing-03;
   border: none;
   border-radius: 100px;
-  padding: 1px $spacing-03 1px $spacing-03;
+  background-color: $interactive-02;
   white-space: nowrap;
+
   &:hover {
-    cursor: pointer;
     background-color: $hover-secondary;
+    cursor: pointer;
   }
 }
 @mixin term-open-defaults {
   @include term-closed-defaults();
+
   padding-right: 0;
+
   svg {
+    height: 18px;
     margin: 0 $spacing-02 0 $spacing-01;
     vertical-align: text-top;
-    height: 18px;
   }
 }
 @mixin body-defaults {
   @include carbon--type-style('body-long-01');
+
   display: block;
+  padding: $spacing-03 $spacing-04;
   border-left-width: 1.25px;
   border-left-style: solid;
-  animation: fade 600ms;
   margin: $spacing-02 0;
-  padding: $spacing-03 $spacing-04;
+  animation: fade 600ms;
 }
+
 // Other Carbon settings.
 // TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
 // NonLinearReading uses the following Carbon components:
@@ -49,13 +54,16 @@
 @mixin non-linear-reading {
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--non-linear-reading;
+
   @keyframes fade {
     0% {
       opacity: 0;
     }
+
     15% {
       opacity: 0;
     }
+
     100% {
       opacity: 1;
     }
@@ -66,17 +74,25 @@
       &-light {
         &-closed {
           @include term-closed-defaults();
-          color: $inverse-01;
+
           background-color: $interactive-02;
+          color: $inverse-01;
+
           &:hover {
             background-color: $hover-secondary;
           }
         }
+
         &-open {
           @include term-open-defaults();
+
+          // Novice to pro does not always use Carbon defaults/tokens
+          // stylelint-disable-next-line carbon/theme-token-use
           background-color: $purple-20;
           color: $text-01;
+
           &:hover {
+            // stylelint-disable-next-line carbon/theme-token-use
             background-color: #dcc7ff;
           }
         }
@@ -86,18 +102,25 @@
         &-closed {
           @include carbon--theme($carbon--theme--g100, true);
           @include term-closed-defaults();
-          color: $text-04;
+
           background-color: $interactive-02;
+          color: $text-04;
+
           &:hover {
             background-color: $hover-secondary;
           }
         }
+
         &-open {
           @include carbon--theme($carbon--theme--g100, true);
           @include term-open-defaults();
+
+          // stylelint-disable-next-line carbon/theme-token-use
           background-color: #491d8b;
           color: $text-04;
+
           &:hover {
+            // stylelint-disable-next-line carbon/theme-token-use
             background-color: #7f3ae7;
           }
         }
@@ -107,13 +130,20 @@
     &--body {
       &-light {
         @include body-defaults();
+
+        // stylelint-disable-next-line carbon/theme-token-use
         border-left-color: #6929c4;
+        // stylelint-disable-next-line carbon/theme-token-use
         color: #6929c4;
       }
+
       &-dark {
         @include carbon--theme($carbon--theme--g100, true);
         @include body-defaults();
+
+        // stylelint-disable-next-line carbon/theme-token-use
         border-left-color: #d4bbff;
+        // stylelint-disable-next-line carbon/theme-token-use
         color: #d4bbff;
       }
     }

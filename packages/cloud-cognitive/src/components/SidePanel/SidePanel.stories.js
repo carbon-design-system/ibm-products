@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   Button,
@@ -564,5 +564,85 @@ export const WithoutTitle = prepareStory(SlideOverTemplate, {
     actions: 0,
     title: null,
     includeOverlay: true,
+  },
+});
+
+const DoubleSlideOverTemplate = ({ minimalContent, actions, ...args }) => {
+  const [openId, setOpenId] = useState(-1);
+  const [nextId, setNextId] = useState(-1);
+  const testRef = useRef();
+
+  const handleOpen = (id) => () => {
+    const doNext = openId !== id;
+    if (openId !== -1) {
+      setOpenId(-1); // reset openId to close the other panel
+    }
+    if (doNext) {
+      setNextId(id);
+    }
+  };
+
+  useEffect(() => {
+    if (nextId !== -1) {
+      setOpenId(nextId);
+      setNextId(-1);
+    }
+  }, [nextId]);
+
+  return (
+    <>
+      {renderUIShellHeader()}
+      <Grid id="ibm-products-page-content">
+        <Row>
+          <Column>
+            <Button onClick={handleOpen(0)}>
+              {openId === 0 ? 'Close side panel 1' : 'Open side panel 1'}
+            </Button>
+            <Button onClick={handleOpen(1)}>
+              {openId === 1 ? 'Close side panel 2' : 'Open side panel 2'}
+            </Button>
+          </Column>
+        </Row>
+      </Grid>
+      <SidePanel
+        {...args}
+        open={openId === 0}
+        onRequestClose={() => setOpenId(-1)}
+        actions={actionSets[actions]}
+        ref={testRef}
+      >
+        {!minimalContent && (
+          <div>
+            <div>Panel 1</div>
+            <ChildrenContent />
+          </div>
+        )}
+      </SidePanel>
+      <SidePanel
+        {...args}
+        open={openId === 1}
+        onRequestClose={() => setOpenId(-1)}
+        actions={actionSets[actions]}
+        ref={testRef}
+      >
+        {!minimalContent && (
+          <div>
+            <div>Panel 2</div>
+            <ChildrenContent />
+          </div>
+        )}
+      </SidePanel>
+    </>
+  );
+};
+
+export const DoubleSlideIn = prepareStory(DoubleSlideOverTemplate, {
+  args: {
+    placement: 'right',
+    slideIn: true,
+    selectorPageContent: '#ibm-products-page-content',
+    actions: 0,
+    ...defaultStoryProps,
+    labelText: 'Incident management',
   },
 });

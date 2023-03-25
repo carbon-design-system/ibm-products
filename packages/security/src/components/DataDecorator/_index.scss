@@ -21,62 +21,63 @@
     $count: 12.5,
   );
 
-  $namespace: &;
-  //.isc {
-  //  &Container {
-  //    // flex content is no-wrap by default, so type/value parts do not wrap at narrower width
-  //    display: inline-flex;
-  //    max-width: 100%;
-  //  }
-  //
-  //  &TypePill {
-  //    border: $border;
-  //    border-top-left-radius: $round-border;
-  //    border-bottom-left-radius: $round-border;
-  //    padding-left: 0.5rem;
-  //
-  //    .type {
-  //      // remove redundant spacing
-  //      border-right: 0;
-  //    }
-  //  }
-  //
-  //  &ValuePill {
-  //    border: $border;
-  //    // remove redundant spacing
-  //    border-left: 0;
-  //    border-top-right-radius: $round-border;
-  //    border-bottom-right-radius: $round-border;
-  //    padding-right: 0.5rem;
-  //    min-width: 0;
-  //
-  //    .noTailTruncation {
-  //      // was '30ch' which forcibly truncates content at 30ch and does not grow anymore even with more unused space
-  //      max-width: unset;
-  //    }
-  //  }
-  //}
-  //
+  $decoratorBlock: &;
 
-  &__pill {
+  // value tail truncation at inline content
+  &__value {
+    display: inline;
+
+    &--fit-value {
+      // was '30ch' which forcibly truncates content at 30ch and does not grow anymore even with more unused space
+      max-width: unset;
+    }
+  }
+
+  &__dual {
+    &-container {
+      // flex content is no-wrap by default, so type/value parts do not wrap at narrower width
+      display: inline-flex;
+      max-width: 100%;
+    }
+
+    &-type-pill {
+      border: $border;
+      border-top-left-radius: $round-border;
+      border-bottom-left-radius: $round-border;
+      padding-left: 0.5rem;
+
+      #{$decoratorBlock}__type {
+        // remove redundant spacing
+        border-right: 0;
+      }
+    }
+
+    &-value-pill {
+      border: $border;
+      // remove redundant spacing
+      border-left: 0;
+      border-top-right-radius: $round-border;
+      border-bottom-right-radius: $round-border;
+      padding-right: 0.5rem;
+      min-width: 0;
+    }
+  }
+
+  &__pill,
+  &__link {
     padding: 0 $carbon--spacing-03;
     border: $border;
     border-radius: $round-border;
 
-    #{$namespace}__type {
+    #{$decoratorBlock}__type {
       border-right: $border;
     }
 
     // override blue text
-    #{$namespace}__value {
+    #{$decoratorBlock}__value {
       color: $text-01;
     }
 
-    #{$namespace}__noTailTruncation {
-      // was '30ch' which forcibly truncates content at 30ch and does not grow anymore even with more unused space
-      max-width: unset;
-    }
-    //
     // interactive hover
     &[class*='interactive'] {
       &:hover,
@@ -86,21 +87,25 @@
         border-color: $hovered-border-color;
         cursor: pointer;
 
-        #{$namespace}__type {
+        #{$decoratorBlock}__type {
           border-color: $hovered-border-color;
         }
 
-        #{$namespace}__value {
+        #{$decoratorBlock}__value {
           text-decoration: unset;
         }
       }
     }
   }
 
-  //.#{$namespace}--noBorderRadius {
+  // decorator with href should show value link UI cue
+  &__link[class*='interactive']:hover {
+    #{$decoratorBlock}__value {
+      text-decoration: underline;
+    }
+  }
+
   &--noBorderRadius {
     border-radius: unset;
   }
 }
-
-

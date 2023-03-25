@@ -12,8 +12,7 @@ import React from 'react';
 import { Icon } from '@carbon/ibm-security';
 import { getDecoratorProps, namespace, icons } from './constants';
 // import styles from './SecurityDecorator.module.scss';
-const styles = {};
-const SecurityDecorator = ({
+const Decorator = ({
   active,
   className,
   href,
@@ -25,7 +24,7 @@ const SecurityDecorator = ({
                               noTruncation(conflict with midTruncation)
                               ...
                               */
-  noTailTruncation,
+  fitValue,
   noBorderRadius,
   noType,
   noIcon,
@@ -89,7 +88,7 @@ const SecurityDecorator = ({
   const renderValue = () => (
     <span
       className={classnames(`${namespace}__value`, {
-        [`${namespace}__noTailTruncation}`]: noTailTruncation,
+        [`${namespace}__value--fit-value`]: fitValue,
       })}
       title={title || value}
     >
@@ -105,10 +104,10 @@ const SecurityDecorator = ({
   );
 
   const commonClasses = classnames(namespace, classes, className, {
-    [`${namespace}--interactive`]: onClick,
+    [`${namespace}--interactive`]: onClick || href,
     [`${namespace}--active`]: active,
     [`${namespace}--inline`]: inline,
-    [`${namespace}--noBorderRadius}`]: noBorderRadius,
+    [`${namespace}--noBorderRadius`]: noBorderRadius,
   });
 
   const interactiveProps = {
@@ -122,7 +121,7 @@ const SecurityDecorator = ({
     return (
       <a
         href={href}
-        className={`${commonClasses} ${namespace}__pill`}
+        className={`${commonClasses} ${namespace}__link`}
         tabIndex={0}
         {...interactiveProps}
       >
@@ -147,23 +146,23 @@ const SecurityDecorator = ({
     );
   }
 
-  // isc-decorator: left type button, right value button
+  // dual decorator: left type button, right value button
   if (onClick && onClickValue) {
     return (
       <div
-        className={styles.iscContainer}
+        className={`${namespace}__dual-container`}
         data-testid={`decorator-${type}-${value}`}
       >
         {/* eslint-disable-next-line react/button-has-type */}
         <button
-          className={`${commonClasses} ${styles.iscTypePill}`}
+          className={`${commonClasses} ${namespace}__dual-type-pill`}
           {...interactiveProps}
         >
           {renderType()}
         </button>
         {/* eslint-disable-next-line react/button-has-type */}
         <button
-          className={`${commonClasses} ${styles.iscValuePill}`}
+          className={`${commonClasses} ${namespace}__dual-value-pill`}
           {...interactiveProps}
           onClick={onClickValue}
         >
@@ -187,12 +186,15 @@ const SecurityDecorator = ({
   );
 };
 
-SecurityDecorator.propTypes = {
+Decorator.propTypes = {
   /** @type {boolean} Whether the Decorator is active */
   active: PropTypes.bool,
 
   /** @type {string} Additional classes to add. */
   className: PropTypes.string,
+
+  /** @type {boolean} Whether the Decorator stretches to fit value */
+  fitValue: PropTypes.bool,
 
   /** @type {string} The href for the Decorator. */
   href: PropTypes.string,
@@ -223,9 +225,6 @@ SecurityDecorator.propTypes = {
 
   /** @type {boolean} Whether the Decorator includes an icon */
   noIcon: PropTypes.bool,
-
-  /** @type {boolean} Whether the Decorator truncates long value at trail */
-  noTailTruncation: PropTypes.bool,
 
   /** @type {boolean} Whether the Decorator includes the type part (left part) */
   noType: PropTypes.bool,
@@ -269,7 +268,7 @@ SecurityDecorator.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-SecurityDecorator.defaultProps = {
+Decorator.defaultProps = {
   active: false,
   className: '',
   href: undefined,
@@ -280,7 +279,7 @@ SecurityDecorator.defaultProps = {
   noType: false,
   noBorderRadius: false,
   noIcon: false,
-  noTailTruncation: false,
+  fitValue: false,
   score: undefined,
   scoreThresholds: [0, 4, 7, 10],
   title: '',
@@ -343,6 +342,6 @@ function generateIconExports(...iconNames) {
   return namedExports;
 }
 
-Object.assign(SecurityDecorator, generateIconExports(...Object.keys(icons)));
+Object.assign(Decorator, generateIconExports(...Object.keys(icons)));
 
-export default SecurityDecorator;
+export default Decorator;

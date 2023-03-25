@@ -7,18 +7,18 @@ import { action } from '@storybook/addon-actions';
 
 import React from 'react';
 
+import { components } from '../../../../.storybook';
+import { carbonPrefix } from '../../../globals/namespace';
+
 import { Decorator } from '../../..';
 
 import { props, midLine } from '../_mocks_';
 
-const components = name => name;
-// const carbonPrefix = 'bx';
-
-const { type, value, score } = props;
+const { type, value, score, href } = props;
 const { scoreThresholds } = Decorator.defaultProps;
 
 export default {
-  title: components('Decorator'),
+  title: components(Decorator.name),
   components: Decorator,
   argTypes: {
     type: {
@@ -41,20 +41,23 @@ export default {
     noIcon: {
       name: 'No icon (`noIcon`)',
     },
+    noBorderRadius: {
+      name: 'Square shaped'
+    }
   },
-  // decorators: [
-  //   (Story, { args: { description, ...storyArgs } }) => (
-  //     <>
-  //       <p className={`${carbonPrefix}--type-body-long-01`}>{description}</p>
-  //       <p>
-  //         <Story {...storyArgs} />
-  //       </p>
-  //     </>
-  //   ),
-  // ],
+  decorators: [
+    (Story, { args: { description, ...storyArgs } }) => (
+      <>
+        <p className={`${carbonPrefix}--type-body-long-01`}>{description}</p>
+        <p>
+          <Story {...storyArgs} />
+        </p>
+      </>
+    ),
+  ],
 };
 
-export const Default = storyProps => <Decorator {...storyProps} />;
+export const Default = (storyProps) => <Decorator {...storyProps} />;
 Default.args = {
   description: 'This Decorator is readonly',
   type,
@@ -63,6 +66,7 @@ Default.args = {
   score,
   active: false,
   noIcon: false,
+  noBorderRadius: false,
 };
 
 export const MidLineTruncation = Default.bind({});
@@ -81,7 +85,7 @@ MidLineTruncation.args = {
   },
 };
 
-export const Inline = storyProps => (
+export const Inline = (storyProps) => (
   <>
     <span>This is an inline Decorator </span>
     <Decorator {...storyProps} inline />
@@ -92,6 +96,14 @@ Inline.args = {
   ...Default.args,
   description: '',
   inline: true,
+};
+
+export const WithHref = Default.bind({});
+WithHref.storyName = 'with href';
+WithHref.args = {
+  ...Default.args,
+  description: 'This Decorator is a link.',
+  href,
 };
 
 export const WithOnClick = Default.bind({});
@@ -106,7 +118,8 @@ export const WithOnClickValue = Default.bind({});
 WithOnClickValue.storyName = 'Type/Value can be clicked apart';
 WithOnClickValue.args = {
   ...Default.args,
-  description: '"Type" on the left and "Value" on the right can be clicked apart',
+  description:
+    '"Type" on the left and "Value" on the right can be clicked apart',
   onClick: action('onClick'),
   onClickValue: action('onClickValue'),
 };
@@ -132,7 +145,7 @@ Icons.argTypes = {
   },
 };
 
-export const Responsive = storyProps => {
+export const Responsive = (storyProps) => {
   const readOnlyProps = { onClick: undefined, onClickValue: undefined };
   const shorterValueProp = { value: 'https://ibm.com' };
   return (
@@ -160,8 +173,9 @@ export const Responsive = storyProps => {
 };
 Responsive.args = {
   ...WithOnClickValue.args,
-  description: 'Decorator grows/shrinks to fit its content in flex container after wrap',
+  description:
+    'Decorator grows/shrinks to fit its content in flex container after wrap',
   type: 'URL',
   value: 'https://www.ibm.com/products/cloud-pak-for-security/use-cases',
-  noTailTruncation: true,
+  fitValue: true,
 };

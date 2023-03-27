@@ -5,13 +5,12 @@
 
 import deprecate from 'carbon-components-react/es/prop-types/deprecate';
 
-/* eslint-disable react/destructuring-assignment,valid-jsdoc */
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Icon } from '@carbon/ibm-security';
 import { getDecoratorProps, namespace, icons } from './constants';
-// import styles from './SecurityDecorator.module.scss';
+import Icon from '../../Icon';
+
 const Decorator = ({
   active,
   className,
@@ -97,7 +96,7 @@ const Decorator = ({
     </span>
   );
 
-  const commonClasses = classnames(namespace, classes, className, {
+  const decoratorClasses = classnames(namespace, classes, className, {
     [`${namespace}--interactive`]: onClick || href,
     [`${namespace}--active`]: active,
     [`${namespace}--inline`]: inline,
@@ -115,7 +114,7 @@ const Decorator = ({
     return (
       <a
         href={href}
-        className={`${commonClasses} ${namespace}__link`}
+        className={`${decoratorClasses} ${namespace}__link`}
         tabIndex={0}
         {...interactiveProps}
       >
@@ -131,7 +130,7 @@ const Decorator = ({
       // eslint-disable-next-line react/button-has-type
       <button
         data-testid={`${namespace}-pill`}
-        className={`${commonClasses} ${namespace}__pill`}
+        className={`${decoratorClasses} ${namespace}__pill`}
         {...interactiveProps}
       >
         {renderType()}
@@ -149,14 +148,14 @@ const Decorator = ({
       >
         {/* eslint-disable-next-line react/button-has-type */}
         <button
-          className={`${commonClasses} ${namespace}__dual-type-pill`}
+          className={`${decoratorClasses} ${namespace}__dual-type-pill`}
           {...interactiveProps}
         >
           {renderType()}
         </button>
         {/* eslint-disable-next-line react/button-has-type */}
         <button
-          className={`${commonClasses} ${namespace}__dual-value-pill`}
+          className={`${decoratorClasses} ${namespace}__dual-value-pill`}
           {...interactiveProps}
           onClick={onClickValue}
         >
@@ -170,7 +169,7 @@ const Decorator = ({
   return (
     <span
       data-testid={`${namespace}-pill`}
-      className={`${commonClasses} ${namespace}__pill`}
+      className={`${decoratorClasses} ${namespace}__pill`}
       onContextMenu={handleContextMenuClick}
     >
       {renderType()}

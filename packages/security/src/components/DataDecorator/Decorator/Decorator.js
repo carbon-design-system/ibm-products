@@ -18,12 +18,6 @@ const Decorator = ({
   href,
   inline,
   midLineTruncation,
-  /*
-                              TODO: positive naming? like
-                              fitValue(not clear)
-                              noTruncation(conflict with midTruncation)
-                              ...
-                              */
   fitValue,
   noBorderRadius,
   noType,
@@ -198,11 +192,8 @@ Decorator.propTypes = {
   /** @type {string} The href for the Decorator. */
   href: PropTypes.string,
 
-  // TODO: do we want to remove this as it's not used at all, not even in
-  // spreaded props?
   /** @type {boolean} Whether the Decorator can be interacted with */
-  // eslint-disable-next-line react/no-unused-prop-types,
-  // react/require-default-props
+  // eslint-disable-next-line react/no-unused-prop-types, react/require-default-props
   inert: deprecate(
     PropTypes.bool,
     `\nThe prop \`inert\` for Decorator has been deprecated. The Decorator will now be considered "inert" (non-interactive) by default. You can make a Decorator interactive by adding an \`href\` or \`onClick\` prop.`

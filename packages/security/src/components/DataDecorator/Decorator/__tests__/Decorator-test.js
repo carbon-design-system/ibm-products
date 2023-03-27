@@ -247,7 +247,7 @@ Object.keys(icons).forEach((icon) => {
 });
 
 // TODO: merge tests back to other tests above?
-describe('Decorator(DE)', () => {
+describe('New decorator', () => {
   it.each([() => undefined, undefined])('render as pill ', (onClickHandler) => {
     const { getByTestId } = render(
       <Decorator type="IP" value="10.0.0.0" onClick={onClickHandler} />

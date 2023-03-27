@@ -23,11 +23,6 @@
 
   $decoratorBlock: &;
 
-  // remove value width limitation
-  &__value--fit-value {
-    max-width: unset;
-  }
-
   &__dual {
     &-container {
       // flex content is no-wrap by default, so type/value parts do not wrap at narrower width
@@ -98,6 +93,17 @@
     #{$decoratorBlock}__value {
       text-decoration: underline;
     }
+  }
+
+  &--active {
+    #{$decoratorBlock}__value {
+      color: $active-ui;
+    }
+  }
+
+  // remove value width limitation
+  &__value--fit-value {
+    max-width: unset;
   }
 
   &--no-border-radius {

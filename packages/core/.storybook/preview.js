@@ -57,9 +57,10 @@ const decorators = [
               className="preview__notification--feature-flag"
               kind="warning"
               inline
-              actionButtonLabel="More information"
+              lowContrast
+              actionButtonLabel="Learn more"
               statusIconDescription="describes the close button"
-              title="This story uses the following feature flags to enable/disable some functionality. See the README for more information."
+              title="This story uses the following feature flags to enable or disable some functionality."
               onActionButtonClick={() => {
                 window.open(
                   'https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/cloud-cognitive#enabling-canary-components-and-flagged-features'
@@ -68,7 +69,7 @@ const decorators = [
             >
               <UnorderedList>
                 {Object.keys(args.featureFlags).map((flagKey) => (
-                  <ListItem key={flagKey} style={{ color: '#f4f4f4' }}>
+                  <ListItem key={flagKey}>
                     {flagKey}: {`${args.featureFlags[flagKey]}`}
                   </ListItem>
                 ))}

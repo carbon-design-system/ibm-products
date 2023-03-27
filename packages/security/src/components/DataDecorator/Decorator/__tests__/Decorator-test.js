@@ -252,7 +252,7 @@ describe('Decorator(DE)', () => {
     const { getByTestId } = render(
       <Decorator type="IP" value="10.0.0.0" onClick={onClickHandler} />
     );
-    expect(getByTestId('de-decorator-pill')).toBeVisible();
+    expect(getByTestId(`${namespace}-pill`)).toBeVisible();
   });
 
   it('"Type" and "Value" are rendered as individual buttons in order when "Value" click event handler is specified', () => {
@@ -281,10 +281,7 @@ describe('Decorator(DE)', () => {
     expect(onClickValue).toHaveBeenCalledTimes(1);
   });
 
-  // TODO: discussion in progress: CP4SCORE-11015
-  it.todo('new menu item "View detail"');
-
-  it('no border-radius is applied when noBorderRadius is set', () => {
+  it('has no-border-radius class when noBorderRadius is set', () => {
     const { getByRole } = render(
       <Decorator
         noType
@@ -296,7 +293,7 @@ describe('Decorator(DE)', () => {
       />
     );
     expect(getByRole('button', { name: '10.0.0.0' })).toHaveClass(
-      'noBorderRadius'
+      `${namespace}--no-border-radius`
     );
   });
 

@@ -3045,6 +3045,7 @@ Map {
     "defaultProps": {
       "active": false,
       "className": "",
+      "fitValue": false,
       "href": undefined,
       "inline": false,
       "midLineTruncation": {
@@ -3055,7 +3056,6 @@ Map {
       },
       "noBorderRadius": false,
       "noIcon": false,
-      "noTailTruncation": false,
       "noType": false,
       "onClick": undefined,
       "onClickValue": undefined,
@@ -3076,6 +3076,9 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+      "fitValue": {
+        "type": "bool",
       },
       "href": {
         "type": "string",
@@ -3107,9 +3110,6 @@ Map {
         "type": "bool",
       },
       "noIcon": {
-        "type": "bool",
-      },
-      "noTailTruncation": {
         "type": "bool",
       },
       "noType": {

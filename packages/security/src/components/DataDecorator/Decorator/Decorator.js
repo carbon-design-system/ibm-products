@@ -107,7 +107,7 @@ const Decorator = ({
     [`${namespace}--interactive`]: onClick || href,
     [`${namespace}--active`]: active,
     [`${namespace}--inline`]: inline,
-    [`${namespace}--noBorderRadius`]: noBorderRadius,
+    [`${namespace}--no-border-radius`]: noBorderRadius,
   });
 
   const interactiveProps = {
@@ -136,7 +136,7 @@ const Decorator = ({
     return (
       // eslint-disable-next-line react/button-has-type
       <button
-        data-testid="de-decorator-pill"
+        data-testid={`${namespace}-pill`}
         className={`${commonClasses} ${namespace}__pill`}
         {...interactiveProps}
       >
@@ -151,7 +151,7 @@ const Decorator = ({
     return (
       <div
         className={`${namespace}__dual-container`}
-        data-testid={`decorator-${type}-${value}`}
+        data-testid={`${namespace}-${type}-${value}`}
       >
         {/* eslint-disable-next-line react/button-has-type */}
         <button
@@ -175,8 +175,7 @@ const Decorator = ({
   // non-interactive pill
   return (
     <span
-      // TODO: what to do with all data-testid?
-      data-testid="de-decorator-pill"
+      data-testid={`${namespace}-pill`}
       className={`${commonClasses} ${namespace}__pill`}
       onContextMenu={handleContextMenuClick}
     >

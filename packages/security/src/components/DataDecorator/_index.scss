@@ -17,20 +17,15 @@
 
   // common design(spacing, shape, text color)
   $border: 1px solid $decorative-01;
-  $round-border: carbon--mini-units(
+  $round-border-radius: carbon--mini-units(
     $count: 12.5,
   );
 
   $decoratorBlock: &;
 
-  // value tail truncation at inline content
-  &__value {
-    display: inline;
-
-    &--fit-value {
-      // was '30ch' which forcibly truncates content at 30ch and does not grow anymore even with more unused space
-      max-width: unset;
-    }
+  // remove value width limitation
+  &__value--fit-value {
+    max-width: unset;
   }
 
   &__dual {
@@ -42,8 +37,8 @@
 
     &-type-pill {
       border: $border;
-      border-top-left-radius: $round-border;
-      border-bottom-left-radius: $round-border;
+      border-top-left-radius: $round-border-radius;
+      border-bottom-left-radius: $round-border-radius;
       padding-left: 0.5rem;
 
       #{$decoratorBlock}__type {
@@ -56,8 +51,8 @@
       border: $border;
       // remove redundant spacing
       border-left: 0;
-      border-top-right-radius: $round-border;
-      border-bottom-right-radius: $round-border;
+      border-top-right-radius: $round-border-radius;
+      border-bottom-right-radius: $round-border-radius;
       padding-right: 0.5rem;
       min-width: 0;
     }
@@ -67,7 +62,7 @@
   &__link {
     padding: 0 $carbon--spacing-03;
     border: $border;
-    border-radius: $round-border;
+    border-radius: $round-border-radius;
 
     #{$decoratorBlock}__type {
       border-right: $border;
@@ -98,14 +93,14 @@
     }
   }
 
-  // decorator with href should show value link UI cue
+  // show value link UI cue on hover on decorator with href
   &__link[class*='interactive']:hover {
     #{$decoratorBlock}__value {
       text-decoration: underline;
     }
   }
 
-  &--noBorderRadius {
+  &--no-border-radius {
     border-radius: unset;
   }
 }

@@ -69,6 +69,12 @@ $block-class-modal: #{$_block-class}-modal;
     max-width: 0;
     visibility: hidden;
   }
+
+  .#{$block-class-overflow}__tooltip
+    .#{$block-class-overflow}__tag-item
+    .#{$carbon-prefix}--tag {
+    border-radius: 0;
+  }
 }
 
 @include block-wrap('#{$block-class-modal}') {

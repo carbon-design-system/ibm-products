@@ -29,7 +29,7 @@ export const DisplayBox = ({ children, componentName }) => {
             value={sliderValue}
             id="display-box__slider"
             className="display-box__slider"
-            onInput={handleSliderChange}
+            onChange={handleSliderChange}
           />
         </label>
         <p className="display-box__details">

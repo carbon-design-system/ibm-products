@@ -1,0 +1,16 @@
+@import 'carbon';
+
+body {
+  @include carbon--theme();
+
+  background-color: $ui-background;
+  color: $text-01;
+}
+
+.app {
+  display: flex;
+  min-height: calc(100vh - $spacing-09);
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-09;
+}

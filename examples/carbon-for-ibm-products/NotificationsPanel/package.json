@@ -11,7 +11,8 @@
     "react": "^17",
     "react-dom": "^17",
     "react-scripts": "^5",
-    "sass": "latest"
+    "sass": "latest",
+    "uuid": "9.0.0"
   },
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
   "resolutions": {

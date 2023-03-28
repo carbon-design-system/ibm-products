@@ -65,7 +65,7 @@ export const Example = () => {
         subtitle="This is the unique name used to recognize your topic"
         description="It will also be used by your producers and consumers as part of the
         connection information, so make it something easy to recognize."
-        formLegendText="Topic name"
+        fieldsetLegendText="Topic name"
         onNext={() => {
           return new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -144,7 +144,7 @@ export const Example = () => {
         description="Partitions are distributed across the brokers in order to increase the
         scalability of your topic. You can also use them to distribute
         messages across the members of a consumer group."
-        formLegendText="Partitions"
+        fieldsetLegendText="Partitions"
         disableSubmit={
           !stepTwoTextInputValue ||
           stepTwoTextInputValue > 100 ||
@@ -174,7 +174,7 @@ export const Example = () => {
         subtitle="This is how long messages are retained before they are deleted."
         description="If your messages are not read by a consumer within this time, they
         will be missed."
-        formLegendText="Message retention"
+        fieldsetLegendText="Message retention"
         disableSubmit={!stepThreeTextInputValue}
         onNext={() => Promise.resolve()}
       >

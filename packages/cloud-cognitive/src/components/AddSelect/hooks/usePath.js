@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const usePath = (itemsLabel = '') => {
   const [path, setPath] = useState([
@@ -14,6 +14,15 @@ const usePath = (itemsLabel = '') => {
       title: itemsLabel,
     },
   ]);
+
+  useEffect(() => {
+    setPath([
+      {
+        id: 'base_of_path',
+        title: itemsLabel,
+      },
+    ]);
+  }, [itemsLabel]);
 
   const handler = (id, title, parentId) => {
     if (path.find((entry) => entry.id === id)) {

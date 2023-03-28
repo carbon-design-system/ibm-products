@@ -81,8 +81,8 @@ describe(componentName, () => {
   });
 
   it('renders size prop', () => {
-    renderMenu({ size: 'lg' });
-    expect(screen.getByText(label)).toHaveClass(`${carbon.prefix}--btn--lg`);
+    renderMenu({ size: 'md' });
+    expect(screen.getByText(label)).toHaveClass(`${carbon.prefix}--btn--md`);
   });
 
   it('adds additional props to the containing node', () => {

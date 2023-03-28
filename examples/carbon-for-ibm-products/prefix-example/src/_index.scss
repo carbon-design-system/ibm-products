@@ -4,7 +4,13 @@ $pkg-prefix: 'tst';
 @import 'carbon-components/scss/components/modal/modal';
 @import 'carbon-components/scss/components/button/button';
 @import 'carbon-components/scss/components/dropdown/dropdown';
-@import '@carbon/ibm-products/scss/index';
+
+// Actually want to do this, but codesandbox does not load SCSS properly just yet
+// @import '@carbon/ibm-products/scss/index';
+//
+// replaced with
+//
+@import '@carbon/ibm-products/scss/components/AboutModal/index';
 
 body {
   @include carbon--theme();

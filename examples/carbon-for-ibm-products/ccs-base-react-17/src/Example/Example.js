@@ -29,6 +29,7 @@ export const Example = () => {
             of the Carbon Design System and Carbon Components React.
           </>
         }
+        closeIconDescription="Close"
         copyrightText={<>Copyright &copy; 2020 IBM corporation</>}
         links={[
           <Link

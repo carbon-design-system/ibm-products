@@ -22,6 +22,7 @@ export const Example = () => {
       <Button onClick={() => setOpen(true)}>Show AboutModal</Button>
       <AboutModal
         additionalInfo={[{ label: 'Version number', content: '1.3.41' }]}
+        closeIconDescription="Close"
         content={
           <>
             This is an example of the AboutModal from the Carbon for IBM

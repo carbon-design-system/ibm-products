@@ -6,12 +6,8 @@ import '@carbon/ibm-products/css/index-full-carbon.css';
 import './_index.scss';
 
 import { Example } from './Example/Example';
-import { Button } from 'carbon-components-react';
 import { ThemeProvider } from './ThemeSelector/ThemeContext';
 import { ThemeDropdown } from './ThemeSelector/ThemeDropdown';
-
-const handleRestartClick = () =>
-  document.getAnimations().forEach((anim) => anim.play());
 
 render(
   <ThemeProvider>

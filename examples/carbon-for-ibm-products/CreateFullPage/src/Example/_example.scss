@@ -1,5 +1,6 @@
 @import '../carbon';
-@import '@carbon/ibm-products/scss/index';
+@import 'carbon-components/scss/globals/scss/_import-once';
+@import '@carbon/ibm-products/scss/global/styles/project-settings';
 
 $block-class: 'full-page-example';
 $preview-block-class: #{full-page-example}--create-full-page-sandbox;
@@ -20,6 +21,6 @@ $preview-block-class: #{full-page-example}--create-full-page-sandbox;
 }
 
 .#{$preview-block-class} .bx--form-item {
-  margin-bottom: $spacing-05;
   z-index: 99;
+  margin-bottom: $spacing-05;
 }

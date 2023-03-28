@@ -79,4 +79,15 @@ describe('IdeEmptyState', () => {
     ],
     'an array of objects'
   );
+  rendersWhenPropIsDefined(
+    'links',
+    [
+      {
+        text: 'Custom link 1',
+        url: '#',
+        onClick: () => console.log('custom function'),
+      },
+    ],
+    'an object'
+  );
 });

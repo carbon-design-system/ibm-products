@@ -16,7 +16,7 @@ const useDefaultStringRenderer = (hooks) => {
     <div
       className={cx(`${blockClass}__defaultStringRenderer`, {
         [`${blockClass}__defaultStringRenderer--multiline`]:
-          tableProps.column?.multiLineWrap,
+          tableProps.column?.multiLineWrap || tableProps?.multiLineWrapAll,
       })}
       title={tableProps.value}
     >

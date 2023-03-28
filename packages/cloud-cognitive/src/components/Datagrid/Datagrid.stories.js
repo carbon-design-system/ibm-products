@@ -7,7 +7,6 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { StatusIcon } from '../StatusIcon';
 import { makeData, newPersonWithTwoLines, range } from './utils/makeData';
 
 import { getStoryTitle } from '../../global/js/utils/story-helper';
@@ -20,20 +19,17 @@ import {
   useActionsColumn,
   useDatagrid,
   useDisableSelectRows,
-  useFiltering,
   useInfiniteScroll,
   useRowIsMouseOver,
   useSelectAllWithToggle,
   useSelectRows,
   useSortableColumns,
   useStickyColumn,
+  useFiltering,
 } from '.';
-
+import { StatusIcon } from '../StatusIcon';
 import mdx from './Datagrid.mdx';
-import { LeftPanelStory, SelectAllWitHToggle } from './Datagrid.stories';
-
-import { pkg } from '../../settings';
-
+import { SelectAllWithToggle } from './Datagrid.stories/index';
 import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
@@ -49,7 +45,6 @@ export default {
     },
   },
 };
-const blockClass = `${pkg.prefix}--datagrid`;
 
 const defaultHeader = [
   {
@@ -124,7 +119,7 @@ export const BasicUsage = () => {
       {
         Header: 'Someone 11',
         accessor: 'someone11',
-        multiLineWrap: true,
+        multiLineWrap: true, //If `multiLineWrap` is required only for specific columns
       },
     ],
     []
@@ -135,6 +130,7 @@ export const BasicUsage = () => {
   const datagridState = useDatagrid({
     columns,
     data: rows,
+    multiLineWrapAll: true, // If `multiLineWrap` is required for all columns in data grid
   });
 
   return <Datagrid datagridState={datagridState} />;
@@ -147,6 +143,16 @@ export const EmptyState = () => {
   const emptyStateDescription = 'Description explaining why the table is empty';
   const emptyStateSize = 'lg';
   const illustrationTheme = 'light';
+  const emptyStateAction = {
+    text: 'Create new',
+    onClick: action('Clicked empty state action button'),
+    renderIcon: Add16,
+    iconDescription: 'Add icon',
+  };
+  const emptyStateLink = {
+    text: 'View documentation',
+    href: 'https://www.carbondesignsystem.com',
+  };
 
   const datagridState = useDatagrid({
     columns,
@@ -155,6 +161,8 @@ export const EmptyState = () => {
     emptyStateDescription,
     emptyStateSize,
     illustrationTheme,
+    emptyStateAction,
+    emptyStateLink,
     DatagridActions,
     DatagridBatchActions,
     DatagridPagination,
@@ -181,10 +189,14 @@ export const InitialLoad = () => {
     fetchData();
   }, []);
 
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription = 'Description explaining why the table is empty';
   const datagridState = useDatagrid({
     columns,
     data,
     isFetching,
+    emptyStateTitle,
+    emptyStateDescription,
   });
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -311,217 +323,6 @@ export const SelectableRow = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-export const Filtering = () => {
-  const headers = [
-    {
-      Header: 'Row Index',
-      accessor: (row, i) => i,
-      sticky: 'left',
-      id: 'rowIndex', // id is required when accessor is a function.
-    },
-    {
-      Header: 'First Name',
-      accessor: 'firstName',
-    },
-    {
-      Header: 'Last Name',
-      accessor: 'lastName',
-    },
-    {
-      Header: 'Age',
-      accessor: 'age',
-      width: 50,
-    },
-    {
-      Header: 'Visits',
-      accessor: 'visits',
-      filter: 'number',
-      width: 60,
-    },
-    {
-      Header: 'Status',
-      accessor: 'status',
-    },
-    // Shows the date filter example
-    {
-      Header: 'Joined',
-      accessor: 'joined',
-      filter: 'date',
-      Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
-    },
-    // Shows the checkbox filter example
-    {
-      Header: 'Password strength',
-      accessor: 'passwordStrength',
-      filter: 'checkbox',
-      Cell: ({ cell: { value } }) => {
-        const iconProps = {
-          size: 'sm',
-          theme: 'light',
-          kind: value,
-          iconDescription: value,
-        };
-
-        return (
-          <span
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <StatusIcon {...iconProps} />
-            {iconProps.iconDescription}
-          </span>
-        );
-      },
-    },
-    // Shows the checkbox filter example
-    {
-      Header: 'Role',
-      accessor: 'role',
-    },
-  ];
-
-  const columns = React.useMemo(() => headers, []);
-  const [data] = useState(makeData(20));
-
-  const filters = [
-    {
-      type: 'date',
-      column: 'joined',
-      props: {
-        DatePicker: {
-          datePickerType: 'range',
-        },
-        DatePickerInput: {
-          start: {
-            id: 'date-picker-input-id-start',
-            placeholder: 'mm/dd/yyyy',
-            labelText: 'Joined start date',
-          },
-          end: {
-            id: 'date-picker-input-id-end',
-            placeholder: 'mm/dd/yyyy',
-            labelText: 'Joined end date',
-          },
-        },
-      },
-    },
-    {
-      type: 'number',
-      column: 'visits',
-      props: {
-        NumberInput: {
-          min: 0,
-          id: 'visits-number-input',
-          invalidText: 'A valid value is required',
-          label: 'Visits',
-          placeholder: 'Type a number amount of visits',
-        },
-      },
-    },
-    {
-      type: 'checkbox',
-      column: 'passwordStrength',
-      props: {
-        FormGroup: {
-          legendText: 'Password strength',
-        },
-        Checkbox: [
-          {
-            id: 'normal',
-            labelText: 'Normal',
-            value: 'normal',
-          },
-          {
-            id: 'minor-warning',
-            labelText: 'Minor warning',
-            value: 'minor-warning',
-          },
-          {
-            id: 'critical',
-            labelText: 'Critical',
-            value: 'critical',
-          },
-        ],
-      },
-    },
-    {
-      type: 'radio',
-      column: 'role',
-      props: {
-        FormGroup: {
-          legendText: 'Role',
-        },
-        RadioButtonGroup: {
-          orientation: 'vertical',
-          legend: 'Role legend',
-          name: 'role-radio-button-group',
-        },
-        RadioButton: [
-          {
-            id: 'developer',
-            labelText: 'Developer',
-            value: 'developer',
-          },
-          {
-            id: 'designer',
-            labelText: 'Designer',
-            value: 'designer',
-          },
-          {
-            id: 'researcher',
-            labelText: 'Researcher',
-            value: 'researcher',
-          },
-        ],
-      },
-    },
-    {
-      type: 'dropdown',
-      column: 'status',
-      props: {
-        Dropdown: {
-          id: 'marital-status-dropdown',
-          ariaLabel: 'Marital status dropdown',
-          items: ['relationship', 'complicated', 'single'],
-          label: 'Marital status',
-          titleText: 'Marital status',
-        },
-      },
-    },
-  ];
-
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      emptyStateTitle: 'No filters match',
-      emptyStateDescription:
-        'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-      filterProps: {
-        variation: 'flyout',
-        updateMethod: 'batch',
-        primaryActionLabel: 'Apply',
-        secondaryActionLabel: 'Cancel',
-        flyoutIconDescription: 'Open filters',
-        shouldClickOutsideToClose: false,
-        onFlyoutOpen: action('onFlyoutOpen'),
-        onFlyoutClose: action('onFlyoutClose'),
-        filters,
-      },
-      DatagridActions,
-      batchActions: true,
-      toolbarBatchActions: getBatchActions(),
-    },
-    useSelectRows,
-    useFiltering
-  );
-
-  return <Datagrid datagridState={{ ...datagridState }} />;
-};
-
 export const RadioSelect = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
@@ -574,7 +375,7 @@ export const SortableColumns = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-export const DatagridActionsToolbar = () => {
+export const ActionsDropdown = () => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
@@ -636,25 +437,242 @@ export const SelectItemsInAllPages = () => {
     </>
   );
 };
-SelectItemsInAllPages.story = SelectAllWitHToggle;
+SelectItemsInAllPages.story = SelectAllWithToggle;
 
-export const LeftPanel = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const datagridState = useDatagrid({
-    leftPanel: {
-      isOpen: true, // this toggling will happen from datagridActions.
-      panelContent: (
-        <div className={`${blockClass}__panel-content`}>
-          Panel content will go here along with any button interactions
-        </div>
-      ),
+export const FilterPanel = () => {
+  const headers = [
+    {
+      Header: 'First Name',
+      accessor: 'firstName',
     },
-    columns,
-    data,
-    DatagridActions,
-    DatagridBatchActions,
-  });
+    {
+      Header: 'Last Name',
+      accessor: 'lastName',
+    },
+    {
+      Header: 'Age',
+      accessor: 'age',
+    },
+    {
+      Header: 'Visits',
+      accessor: 'visits',
+      filter: 'number',
+    },
+    {
+      Header: 'Status',
+      accessor: 'status',
+    },
+    // Shows the date filter example
+    {
+      Header: 'Joined',
+      accessor: 'joined',
+      filter: 'date',
+      Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
+    },
+    // Shows the checkbox filter example
+    {
+      Header: 'Password strength',
+      accessor: 'passwordStrength',
+      width: 200,
+      filter: 'checkbox',
+      Cell: ({ cell: { value } }) => {
+        const iconProps = {
+          size: 'sm',
+          theme: 'light',
+          kind: value,
+          iconDescription: value,
+        };
+
+        return (
+          <span
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <StatusIcon style={{ marginRight: '8px' }} {...iconProps} />
+            {iconProps.iconDescription}
+          </span>
+        );
+      },
+    },
+    // Shows the checkbox filter example
+    {
+      Header: 'Role',
+      accessor: 'role',
+    },
+  ];
+
+  const columns = React.useMemo(() => headers, []);
+  const [data] = useState(makeData(50));
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+
+  const sections = [
+    {
+      categoryTitle: 'Category title',
+      hasAccordion: true,
+      filters: [
+        {
+          filterLabel: 'Joined',
+          filter: {
+            type: 'date',
+            column: 'joined',
+            props: {
+              DatePicker: {
+                datePickerType: 'range',
+              },
+              DatePickerInput: {
+                start: {
+                  id: 'date-picker-input-id-start',
+                  placeholder: 'mm/dd/yyyy',
+                  labelText: 'Joined start date',
+                },
+                end: {
+                  id: 'date-picker-input-id-end',
+                  placeholder: 'mm/dd/yyyy',
+                  labelText: 'Joined end date',
+                },
+              },
+            },
+          },
+        },
+        {
+          filterLabel: 'Status',
+          filter: {
+            type: 'dropdown',
+            column: 'status',
+            props: {
+              Dropdown: {
+                id: 'marital-status-dropdown',
+                ariaLabel: 'Marital status dropdown',
+                items: ['relationship', 'complicated', 'single'],
+                label: 'Marital status',
+                titleText: 'Marital status',
+              },
+            },
+          },
+        },
+      ],
+    },
+    {
+      categoryTitle: 'Category title',
+      filters: [
+        {
+          filterLabel: 'Role',
+          filter: {
+            type: 'radio',
+            column: 'role',
+            props: {
+              FormGroup: {
+                legendText: 'Role',
+              },
+              RadioButtonGroup: {
+                orientation: 'vertical',
+                legend: 'Role legend',
+                name: 'role-radio-button-group',
+              },
+              RadioButton: [
+                {
+                  id: 'developer',
+                  labelText: 'Developer',
+                  value: 'developer',
+                },
+                {
+                  id: 'designer',
+                  labelText: 'Designer',
+                  value: 'designer',
+                },
+                {
+                  id: 'researcher',
+                  labelText: 'Researcher',
+                  value: 'researcher',
+                },
+              ],
+            },
+          },
+        },
+        {
+          filterLabel: 'Visits',
+          filter: {
+            type: 'number',
+            column: 'visits',
+            props: {
+              NumberInput: {
+                min: 0,
+                id: 'visits-number-input',
+                invalidText: 'A valid value is required',
+                label: 'Visits',
+                placeholder: 'Type a number amount of visits',
+              },
+            },
+          },
+        },
+        {
+          filterLabel: 'Password strength',
+          filter: {
+            type: 'checkbox',
+            column: 'passwordStrength',
+            props: {
+              FormGroup: {
+                legendText: 'Password strength',
+              },
+              Checkbox: [
+                {
+                  id: 'normal',
+                  labelText: 'Normal',
+                  value: 'normal',
+                },
+                {
+                  id: 'minor-warning',
+                  labelText: 'Minor warning',
+                  value: 'minor-warning',
+                },
+                {
+                  id: 'critical',
+                  labelText: 'Critical',
+                  value: 'critical',
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+  ];
+
+  const datagridState = useDatagrid(
+    {
+      filterProps: {
+        variation: 'panel',
+        updateMethod: 'batch',
+        primaryActionLabel: 'Apply',
+        secondaryActionLabel: 'Cancel',
+        panelIconDescription: `${isPanelOpen ? 'Close' : 'Open'} filters`,
+        closeIconDescription: 'Close panel',
+        sections,
+        onPanelOpen: (open) => {
+          setIsPanelOpen(open);
+          action('onPanelOpen');
+        },
+        onPanelClose: (open) => {
+          setIsPanelOpen(open);
+          action('onPanelClose');
+        },
+        panelTitle: 'Filter',
+      },
+      columns,
+      data,
+      emptyStateTitle: 'No filters match',
+      emptyStateDescription:
+        'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+      DatagridActions,
+      DatagridBatchActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
+    },
+    useFiltering
+  );
 
   return (
     <Wrapper>
@@ -662,7 +680,6 @@ export const LeftPanel = () => {
     </Wrapper>
   );
 };
-LeftPanel.story = LeftPanelStory;
 
 const DatagridBatchActions = (datagridState) => {
   const { selectedFlatRows, toggleAllRowsSelected } = datagridState;
@@ -795,7 +812,7 @@ export const TopAlignment = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-export const StickyActionsColumn = () => {
+export const FrozenColumns = () => {
   const columns = React.useMemo(
     () => [
       ...defaultHeader,
@@ -803,14 +820,13 @@ export const StickyActionsColumn = () => {
         Header: '',
         accessor: 'actions',
         sticky: 'right',
-        width: 60,
         isAction: true,
       },
     ],
     []
   );
   const [data] = useState(makeData(10));
-  const [msg, setMsg] = useState('click action menu');
+  const [msg, setMsg] = useState('');
   const onActionClick = (actionId, row) => {
     const { original } = row;
     setMsg(
@@ -861,8 +877,8 @@ export const StickyActionsColumn = () => {
   );
   return (
     <Wrapper>
-      <h3>{msg}</h3>
       <Datagrid datagridState={{ ...datagridState }} />
+      <p>{msg}</p>
       <p>More details documentation check the Notes section below</p>
     </Wrapper>
   );

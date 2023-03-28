@@ -1,5 +1,70 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.24.4](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.24.3...@carbon/ibm-cloud-cognitive-cdai@1.24.4) (2023-03-28)
+
+
+### Bug Fixes
+
+* update to Carbon v10 compatible versions to latest ([#2739](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2739)) ([7065855](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/70658550120822ab0a6dd296bc9022cc7d0856db))
+
+
+
+
+
+## [1.24.3](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.24.2...@carbon/ibm-cloud-cognitive-cdai@1.24.3) (2023-03-07)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+## [1.24.2](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.24.1...@carbon/ibm-cloud-cognitive-cdai@1.24.2) (2023-02-24)
+
+
+### Bug Fixes
+
+* Replace `react-highlighter` ([#2698](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2698)) ([ca6a718](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ca6a718b58322980bd31451c11ba5d64b03c4f8f))
+
+
+
+
+
+## [1.24.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.24.0...@carbon/ibm-cloud-cognitive-cdai@1.24.1) (2023-02-07)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+
+
+
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [1.24.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.23.1...@carbon/ibm-cloud-cognitive-cdai@1.24.0) (2023-01-31)
+
+### Features
+
+- add a custom onClick function and other props in IdeEmptyState …
+  ([#2626](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2626))
+  ([7fcde6b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7fcde6b26f9f79158ed74483b185dd030ee0ffac))
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [1.23.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-cdai@1.23.0...@carbon/ibm-cloud-cognitive-cdai@1.23.1) (2023-01-10)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-cdai
+
+# Change Log
+
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 

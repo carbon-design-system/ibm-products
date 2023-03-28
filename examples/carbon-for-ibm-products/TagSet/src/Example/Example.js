@@ -7,7 +7,8 @@ import './_example.scss';
 // be done in an import so that it happens before all component imports.
 
 import { TagSet } from '@carbon/ibm-products';
-import { types as tagTypes } from 'carbon-components-react/es/components/Tag/Tag';
+// importing from /es/ does not work in current test config
+import { types as tagTypes } from 'carbon-components-react/lib/components/Tag/Tag';
 import { DisplayBox } from '../components/DisplayBox';
 
 const tags = [];
@@ -19,15 +20,13 @@ for (let i = 0; i < 200; i++) {
 }
 
 export const Example = () => (
-  <>
-    <DisplayBox componentName={TagSet.displayName}>
-      <TagSet
-        tags={tags}
-        allTagsModalSearchLabel="Filter tags"
-        allTagsModalTile="All tags"
-        allTagsModalSearchPlaceholderText="Filter tags"
-        showAllTagsLabel="Show all tags"
-      />
-    </DisplayBox>
-  </>
+  <DisplayBox componentName={TagSet.displayName}>
+    <TagSet
+      tags={tags}
+      allTagsModalSearchLabel="Filter tags"
+      allTagsModalTitle="All tags"
+      allTagsModalSearchPlaceholderText="Filter tags"
+      showAllTagsLabel="Show all tags"
+    />
+  </DisplayBox>
 );

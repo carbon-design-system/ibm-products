@@ -7,7 +7,6 @@ es
 lib
 dist
 umd
-examples
 
 node_modules
 packages/*/examples/*

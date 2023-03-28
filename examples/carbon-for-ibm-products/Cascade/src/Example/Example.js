@@ -11,7 +11,7 @@ import { Cascade } from '@carbon/ibm-products';
 import './_example.scss';
 
 export const Example = () => (
-  <Cascade style={{ 'max-width': '728px' }}>
+  <Cascade style={{ maxWidth: '728px' }}>
     <div className="box" />
     <div className="box" />
     <div className="box" />

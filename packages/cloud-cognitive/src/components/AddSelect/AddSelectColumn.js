@@ -95,7 +95,6 @@ export let AddSelectColumn = ({
     if (filters.length === 0) {
       return true;
     }
-    const { filterBy } = item;
     const filterByValue = item[filterBy];
     return filters.some((filter) => filter === filterByValue);
   };
@@ -150,6 +149,7 @@ export let AddSelectColumn = ({
                       className={`${carbon.prefix}--overflow-menu-options__btn`}
                     >
                       <Checkbox
+                        className={`${colClass}-filter-checkbox`}
                         id={opt}
                         labelText={opt}
                         onChange={(checked) => filterHandler(checked, opt)}

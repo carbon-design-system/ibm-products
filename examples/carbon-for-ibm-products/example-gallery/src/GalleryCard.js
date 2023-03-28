@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import './GalleryCard.scss';
@@ -19,4 +20,11 @@ export const GalleryCard = ({ className, title, url, thumbnail }) => {
       <h1 className={`${baseClass}__title`}>{title}</h1>
     </ClickableTile>
   );
+};
+
+GalleryCard.propTypes = {
+  className: PropTypes.string,
+  thumbnail: PropTypes.string,
+  title: PropTypes.string,
+  url: PropTypes.string,
 };

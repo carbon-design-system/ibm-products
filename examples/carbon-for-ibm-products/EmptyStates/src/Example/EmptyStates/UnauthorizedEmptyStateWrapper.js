@@ -6,8 +6,8 @@ import { ThemeContext } from '../../ThemeSelector/ThemeContext';
 export const UnauthorizedEmptyStateWrapper = () => {
   const theme = useContext(ThemeContext);
   const useDarkModeIllustration =
-    theme.state.currentTheme.value === 'carbon-theme--g90' ||
-    theme.state.currentTheme.value === 'carbon-theme--g100';
+    theme?.state?.currentTheme?.value === 'carbon-theme--g90' ||
+    theme?.state?.currentTheme?.value === 'carbon-theme--g100';
 
   return (
     <UnauthorizedEmptyState

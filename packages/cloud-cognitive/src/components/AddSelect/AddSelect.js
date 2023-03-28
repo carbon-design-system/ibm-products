@@ -70,7 +70,7 @@ AddSelect.propTypes = {
       options: PropTypes.array,
     }),
     sortBy: PropTypes.array,
-    filterBy: PropTypes.array,
+    filterBy: PropTypes.string,
     entries: PropTypes.arrayOf(
       PropTypes.shape({
         avatar: PropTypes.shape({

@@ -47,7 +47,9 @@ export const TagSetOverflow = React.forwardRef(
     const overflowTagContent = useRef(null);
 
     const handleChange = (ev, { open }) => {
-      setTipOpen(open);
+      if (ev.type === 'click') {
+        setTipOpen(() => open);
+      }
     };
 
     const handleShowAllTagsClick = (ev) => {

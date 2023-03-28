@@ -1,0 +1,28 @@
+@import '../carbon';
+
+.carbon-theme--white {
+  @include carbon--theme($carbon--theme--white, true);
+}
+
+.carbon-theme--g10 {
+  @include carbon--theme($carbon--theme--g10, true);
+}
+
+.carbon-theme--g90 {
+  @include carbon--theme($carbon--theme--g90, true);
+}
+
+.carbon-theme--g100 {
+  @include carbon--theme($carbon--theme--g100, true);
+}
+
+.carbon-theme-dropdown {
+  position: fixed;
+  bottom: 1rem; // stylelint-disable-line carbon/layout-token-use
+  left: 1rem; // stylelint-disable-line carbon/layout-token-use
+  min-width: 11.5rem;
+}
+
+.carbon-theme-dropdown .#{$prefix}--label {
+  @include carbon--type-style('label-01');
+}

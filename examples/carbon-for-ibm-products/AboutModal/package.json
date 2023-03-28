@@ -19,6 +19,7 @@
     "carbon-icons": "latest",
     "react": "^17",
     "react-dom": "^17",
+    "react-resize-detector": "^7.1.2",
     "react-scripts": "^5",
     "sass": "latest"
   },

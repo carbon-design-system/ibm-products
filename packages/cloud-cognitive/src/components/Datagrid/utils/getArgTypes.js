@@ -81,4 +81,15 @@ export const ARG_TYPES = {
     description:
       'This is an object containing all of the props used with the column customization extension. _This value is set/passed inside of the `datagridState` object._',
   },
+  filterProps: {
+    name: 'Filter props',
+    control: 'object',
+    description:
+      'This is an object for all the props passed into the filter flyout and filter panel',
+  },
+  expandedContentAlign: {
+    control: 'select',
+    options: ['flex-start', 'space-between'],
+    description: 'This sets the alignment of content inside expanded row.',
+  },
 };

@@ -1,5 +1,51 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.0.29](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/stylelint-config-ibm-products@0.0.28...stylelint-config-ibm-products@0.0.29) (2023-03-28)
+
+
+### Bug Fixes
+
+* update to Carbon v10 compatible versions to latest ([#2739](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2739)) ([7065855](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/70658550120822ab0a6dd296bc9022cc7d0856db))
+
+
+
+
+
+## [0.0.28](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/stylelint-config-ibm-products@0.0.27...stylelint-config-ibm-products@0.0.28) (2023-03-07)
+
+**Note:** Version bump only for package stylelint-config-ibm-products
+
+
+
+
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.0.27](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/stylelint-config-ibm-products@0.0.26...stylelint-config-ibm-products@0.0.27) (2023-01-10)
+
+**Note:** Version bump only for package stylelint-config-ibm-products
+
+# Change Log
+
+All notable changes to this project will be documented in this file. See
+[Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+## [0.0.26](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/stylelint-config-ibm-products@0.0.25...stylelint-config-ibm-products@0.0.26) (2022-12-20)
+
+### Bug Fixes
+
+- update to Carbon v10 compatible versions to latest
+  ([#2572](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2572))
+  ([4040e09](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/4040e0925bcf5c3276a42248b35e0737adc8c36e))
+
+# Change Log
+
 All notable changes to this project will be documented in this file. See
 [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 

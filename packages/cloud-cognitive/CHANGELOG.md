@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.23](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.22...@carbon/ibm-products@2.0.0-rc.23) (2023-03-28)
+
+
+### Bug Fixes
+
+* add `Layer` to `Tearsheet` ([#2762](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2762)) ([6c94cd7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6c94cd7adbfdac7779d0bbe3b0f1456d3ff3ea03))
+* datagrid inline edit focus background color v11 ([#2723](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2723)) ([b7e8736](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b7e8736772d0b426104b1214049cf7199d0cb501))
+* **Datagrid:** hide columns with no header title ([#2746](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2746)) ([5e8b46b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5e8b46bb8cf902b0390426d4b95fe3a697d88a91))
+* use v1 inline edit in page header ([#2514](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2514)) ([069e042](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/069e042e6003828482d83d83a4025cd3f190f30e))
+
+
+### Features
+
+* **SidePanel:** expose tooltip props ([#2757](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2757)) ([ba9ccdd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ba9ccdd41e2c8624db715bc2659efd7ae0e385e3))
+
+
+
+
+
 # [2.0.0-rc.22](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.21...@carbon/ibm-products@2.0.0-rc.22) (2023-03-21)
 
 

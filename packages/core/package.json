@@ -68,7 +68,7 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "regenerator-runtime": "^0.13.11",
-    "rimraf": "~3 || > 4.1",
+    "rimraf": "^4.2.0",
     "sass": "^1.59.3",
     "style-loader": "^3.3.2",
     "typescript": "^4.9.5",

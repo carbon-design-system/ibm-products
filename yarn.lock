@@ -1739,7 +1739,7 @@ __metadata:
     npm-check-updates: ^16.7.12
     pluralize: ^8.0.0
     react-select: ^5.7.0
-    rimraf: ~3 || > 4.1
+    rimraf: ^4.2.0
     sinon: ^15.0.2
     uuid: ^9.0.0
   peerDependencies:
@@ -1818,7 +1818,7 @@ __metadata:
     react: ^16.14.0
     react-dom: ^16.14.0
     regenerator-runtime: ^0.13.11
-    rimraf: ~3 || > 4.1
+    rimraf: ^4.2.0
     sass: ^1.59.3
     style-loader: ^3.3.2
     typescript: ^4.9.5
@@ -1855,7 +1855,7 @@ __metadata:
     react-resize-detector: ^8.0.4
     react-table: ^7.8.0
     react-window: ^1.8.8
-    rimraf: ~3 || > 4.1
+    rimraf: ^4.2.0
     sass: ^1.59.3
     yargs: ^17.7.1
   peerDependencies:
@@ -1917,7 +1917,7 @@ __metadata:
     react-dnd-html5-backend: ^16.0.1
     react-transition-group: ^4.4.5
     recompose: ^0.30.0
-    rimraf: ~3 || > 4.1
+    rimraf: ^4.2.0
     sass: ^1.59.3
     throttle-debounce: ^5.0.0
   peerDependencies:
@@ -1992,7 +1992,7 @@ __metadata:
     global: ^4.4.0
     npm-check-updates: ^16.7.12
     npm-run-all: ^4.1.5
-    rimraf: ~3 || > 4.1
+    rimraf: ^4.2.0
   peerDependencies:
     react: "*"
     vue: "*"
@@ -15128,7 +15128,7 @@ __metadata:
     prettier-config-carbon: ^0.9.0
     react: ^16.14.0
     react-dom: ^16.14.0
-    rimraf: ~3 || > 4.1
+    rimraf: ^4.2.0
     stylelint: ^15.1.0
     stylelint-config-ibm-products: "*"
     stylelint-plugin-carbon-tokens: 2.2.0
@@ -23878,7 +23878,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rimraf@npm:^4.1.2, rimraf@npm:~3 || > 4.1":
+"rimraf@npm:^4.1.2":
   version: 4.4.0
   resolution: "rimraf@npm:4.4.0"
   dependencies:
@@ -23886,6 +23886,17 @@ __metadata:
   bin:
     rimraf: dist/cjs/src/bin.js
   checksum: 0cedaf9d138589d1bb0ab851f05804c6d30827aa66563472b04ab76245f83537e23e7b94f1f79ea6c368c0d84a18fcde6a756fca3a44c967e08792671b3a0a6e
+  languageName: node
+  linkType: hard
+
+"rimraf@npm:^4.2.0":
+  version: 4.4.1
+  resolution: "rimraf@npm:4.4.1"
+  dependencies:
+    glob: ^9.2.0
+  bin:
+    rimraf: dist/cjs/src/bin.js
+  checksum: b786adc02651e2e24bbedb04bbdea80652fc9612632931ff2d9f898c5e4708fe30956186597373c568bd5230a4dc2fadfc816ccacba8a1daded3a006a6b74f1a
   languageName: node
   linkType: hard
 

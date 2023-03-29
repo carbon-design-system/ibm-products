@@ -53,9 +53,9 @@ const prepareFiltersForTags = (filters) => {
 
 export const FilterProvider = ({ children, filters }) => {
   const filterTags = prepareFiltersForTags(filters);
-  const [leftPanelOpen, setLeftPanelOpen] = useState(false);
+  const [panelOpen, setPanelOpen] = useState(false);
 
-  const value = { filterTags, EventEmitter, leftPanelOpen, setLeftPanelOpen };
+  const value = { filterTags, EventEmitter, panelOpen, setPanelOpen };
 
   return (
     <FilterContext.Provider value={value}>{children}</FilterContext.Provider>

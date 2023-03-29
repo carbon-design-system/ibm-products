@@ -70,6 +70,10 @@
   color: $text-01;
 }
 
+.#{$block-class}__draggable-handleHolder--sticky {
+  color: $disabled-03;
+}
+
 .#{$block-class}__shared-ui--assistive-text {
   // hide the assistive text. can not use display: none which will also hide from ARIA
   position: absolute;

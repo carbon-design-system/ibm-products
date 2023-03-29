@@ -1,4 +1,10 @@
 /* eslint-disable react/jsx-key */
+/**
+ * Copyright IBM Corp. 2022, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 import React, { useRef, useMemo, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
@@ -7,28 +13,10 @@ import {
   AccordionItem,
   Button,
   Search,
-  Checkbox,
-  DatePicker,
-  DatePickerInput,
-  Dropdown,
-  FormGroup,
-  NumberInput,
-  RadioButton,
-  RadioButtonGroup,
 } from 'carbon-components-react';
 import { rem } from '@carbon/layout';
 import { pkg } from '../../../../../settings';
-import {
-  BATCH,
-  CHECKBOX,
-  CLEAR_FILTERS,
-  DATE,
-  DROPDOWN,
-  INSTANT,
-  NUMBER,
-  PANEL,
-  RADIO,
-} from './constants';
+import { BATCH, CLEAR_FILTERS, INSTANT, PANEL } from './constants';
 import cx from 'classnames';
 import { motion } from 'framer-motion';
 import {
@@ -40,11 +28,10 @@ import { Close32 } from '@carbon/icons-react';
 import { ActionSet } from '../../../../ActionSet';
 import { FilterContext } from '.';
 import {
-  useInitialStateFromFilters,
+  useFilters,
   useSubscribeToEventEmitter,
+  useShouldDisableButtons,
 } from './hooks';
-import { getInitialStateFromFilters } from './utils';
-import isEqual from 'lodash/isEqual';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-panel`;
@@ -52,7 +39,7 @@ const componentClass = `${blockClass}-filter-panel`;
 const MotionActionSet = motion(ActionSet);
 
 const FilterPanel = ({
-  title,
+  title = 'Filter',
   closeIconDescription = 'Close filter panel',
   updateMethod = BATCH,
   filterSections,
@@ -65,38 +52,45 @@ const FilterPanel = ({
   filterPanelMinHeight = 600,
 }) => {
   /** State */
-  const [filtersState, setFiltersState] = useInitialStateFromFilters(
-    filterSections,
-    PANEL
-  );
-  const [filtersObjectArray, setFiltersObjectArray] = useState([]);
-  const [shouldDisableButtons, setShouldDisableButtons] = useState(true);
   const [showDividerLine, setShowDividerLine] = useState(false);
+
+  const {
+    filtersState,
+    prevFiltersObjectArrayRef,
+    prevFiltersRef,
+    revertToPreviousFilters,
+    reset,
+    renderFilter,
+    filtersObjectArray,
+  } = useFilters({
+    updateMethod,
+    filters: filterSections,
+    setAllFilters,
+    variation: PANEL,
+  });
 
   /** Refs */
   const filterPanelRef = useRef();
   const filterHeadingRef = useRef();
   const filterSearchRef = useRef();
   const actionSetRef = useRef();
-  // When using batch actions we have to store the filters to then apply them later
-  const prevFiltersRef = useRef(JSON.stringify(filtersState));
-  const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
+
+  /** State from hooks */
+  const [shouldDisableButtons, setShouldDisableButtons] =
+    useShouldDisableButtons({
+      initialValue: true,
+      filtersState,
+      prevFiltersRef,
+    });
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
 
   /** Context */
-  const { leftPanelOpen, setLeftPanelOpen } = useContext(FilterContext);
+  const { panelOpen, setPanelOpen } = useContext(FilterContext);
 
   /** Methods */
-  const closePanel = () => setLeftPanelOpen(false);
-
-  // If the user decides to cancel or click outside the flyout, it reverts back to the filters that were
-  // there when they opened the flyout
-  const revertToPreviousFilters = () => {
-    setFiltersState(JSON.parse(prevFiltersRef.current));
-    setFiltersObjectArray(JSON.parse(prevFiltersObjectArrayRef.current));
-  };
+  const closePanel = () => setPanelOpen(false);
 
   const cancel = () => {
     // Reverting to previous filters only applies when using batch actions
@@ -106,231 +100,18 @@ const FilterPanel = ({
     }
   };
 
-  const reset = () => {
-    // Get the initial values for the filters
-    const initialFiltersState = getInitialStateFromFilters(
-      filterSections,
-      PANEL
-    );
-    const initialFiltersObjectArray = [];
-
-    // Set the state to the initial values
-    setFiltersState(initialFiltersState);
-    setFiltersObjectArray(initialFiltersObjectArray);
-    setAllFilters([]);
-
-    // Update their respective refs so everything is in sync
-    prevFiltersRef.current = JSON.stringify(initialFiltersState);
-    prevFiltersObjectArrayRef.current = JSON.stringify(
-      initialFiltersObjectArray
-    );
-  };
-
   const apply = () => {
     setAllFilters(filtersObjectArray);
+
+    // From the user
     onApply();
+
+    // When the user clicks apply, the action set buttons should be disabled again
     setShouldDisableButtons(true);
 
     // updates the ref so next time the flyout opens we have records of the previous filters
     prevFiltersRef.current = JSON.stringify(filtersState);
     prevFiltersObjectArrayRef.current = JSON.stringify(filtersObjectArray);
-  };
-
-  const applyFilters = ({ column, value, type }) => {
-    // If no end date is selected return because we need the end date to do computations
-    if (type === DATE && value.length > 0 && !value[1]) {
-      return;
-    }
-
-    const filtersObjectArrayCopy = [...filtersObjectArray];
-    // // check if the filter already exists in the array
-    const filter = filtersObjectArrayCopy.find((item) => item.id === column);
-
-    // // if filter exists in array then update the filter's new value
-    if (filter) {
-      filter.value = value;
-    } else {
-      filtersObjectArrayCopy.push({ id: column, value, type });
-    }
-
-    // ATTENTION: this is where you would reset or remove individual filters from the filters array
-    if (type === CHECKBOX) {
-      /**
-      When all checkboxes of a group are all unselected the value still exists in the filtersObjectArray
-      This checks if all the checkboxes are selected = false and removes it from the array
-     */
-      const index = filtersObjectArrayCopy.findIndex(
-        (filter) => filter.id === column
-      );
-
-      // If all the selected state is false remove from array
-      const shouldRemoveFromArray = filtersObjectArrayCopy[index].value.every(
-        (val) => val.selected === false
-      );
-
-      if (shouldRemoveFromArray) {
-        filtersObjectArrayCopy.splice(index, 1);
-      }
-    } else if (type === DATE) {
-      if (value.length === 0) {
-        /**
-        Checks to see if the date value is an empty array, if it is that means the user wants
-        to reset the date filter
-      */
-        const index = filtersObjectArrayCopy.findIndex(
-          (filter) => filter.id === column
-        );
-
-        // Remove it from the filters array since there is nothing to filter
-        filtersObjectArrayCopy.splice(index, 1);
-      }
-    }
-
-    setFiltersObjectArray(filtersObjectArrayCopy);
-
-    // // Automatically apply the filters if the updateMethod is instant
-    if (updateMethod === INSTANT) {
-      setAllFilters(filtersObjectArrayCopy);
-    }
-  };
-
-  /** Render the individual filter component */
-  const renderFilter = ({ type, column, props: components }) => {
-    switch (type) {
-      case DATE:
-        return (
-          <DatePicker
-            {...components.DatePicker}
-            onChange={(value) => {
-              setFiltersState({ ...filtersState, [column]: { value, type } });
-              applyFilters({ column, value, type });
-              components.DatePicker.onChange?.(value);
-            }}
-            value={filtersState[column].value}
-            datePickerType="range"
-            light
-          >
-            <DatePickerInput
-              placeholder="mm/dd/yyyy"
-              labelText="Start date"
-              {...components.DatePickerInput.start}
-            />
-            <DatePickerInput
-              placeholder="mm/dd/yyyy"
-              labelText="End date"
-              {...components.DatePickerInput.end}
-            />
-          </DatePicker>
-        );
-      case NUMBER:
-        return (
-          <NumberInput
-            step={1}
-            allowEmpty
-            hideSteppers
-            {...components.NumberInput}
-            onChange={(event) => {
-              setFiltersState({
-                ...filtersState,
-                [column]: {
-                  value: event.target.value,
-                  type,
-                },
-              });
-              applyFilters({ column, value: event.target.value, type });
-              components.NumberInput.onChange?.(event);
-            }}
-            value={filtersState[column].value}
-            light
-          />
-        );
-      case CHECKBOX:
-        return (
-          <FormGroup {...components.FormGroup}>
-            {filtersState[column].value.map((option) => (
-              <Checkbox
-                key={option.labelText}
-                {...option}
-                onChange={(isSelected) => {
-                  const checkboxCopy = filtersState[column].value;
-                  const foundCheckbox = checkboxCopy.find(
-                    (checkbox) => checkbox.value === option.value
-                  );
-                  foundCheckbox.selected = isSelected;
-                  setFiltersState({
-                    ...filtersState,
-                    [column]: {
-                      value: checkboxCopy,
-                      type,
-                    },
-                  });
-                  applyFilters({
-                    column,
-                    value: [...filtersState[column].value],
-                    type,
-                  });
-                  option.onChange?.(isSelected);
-                }}
-                checked={option.selected}
-              />
-            ))}
-          </FormGroup>
-        );
-      case RADIO:
-        return (
-          <FormGroup {...components.FormGroup}>
-            <RadioButtonGroup
-              {...components.RadioButtonGroup}
-              valueSelected={filtersState[column].value}
-              onChange={(selected) => {
-                setFiltersState({
-                  ...filtersState,
-                  [column]: {
-                    value: selected,
-                    type,
-                  },
-                });
-                applyFilters({
-                  column,
-                  value: selected,
-                  type,
-                });
-                components.RadioButtonGroup.onChange?.(selected);
-              }}
-            >
-              {components.RadioButton.map((radio) => (
-                <RadioButton
-                  key={radio.id ?? radio.labelText ?? radio.value}
-                  {...radio}
-                />
-              ))}
-            </RadioButtonGroup>
-          </FormGroup>
-        );
-      case DROPDOWN:
-        return (
-          <Dropdown
-            {...components.Dropdown}
-            selectedItem={filtersState[column].value}
-            onChange={({ selectedItem }) => {
-              setFiltersState({
-                ...filtersState,
-                [column]: {
-                  value: selectedItem,
-                  type,
-                },
-              });
-              applyFilters({
-                column,
-                value: selectedItem,
-                type,
-              });
-              components.Dropdown.onChange?.(selectedItem);
-            }}
-            light
-          />
-        );
-    }
   };
 
   const renderActionSet = () => {
@@ -372,13 +153,13 @@ const FilterPanel = ({
   /** Effects */
   useEffect(
     function liftOpenStateToParent() {
-      if (leftPanelOpen) {
-        onPanelOpen(leftPanelOpen);
+      if (panelOpen) {
+        onPanelOpen(panelOpen);
       } else {
-        onPanelClose(leftPanelOpen);
+        onPanelClose(panelOpen);
       }
     },
-    [leftPanelOpen, onPanelClose, onPanelOpen]
+    [panelOpen, onPanelClose, onPanelOpen]
   );
 
   useEffect(
@@ -389,15 +170,6 @@ const FilterPanel = ({
       );
     },
     [filterPanelMinHeight]
-  );
-
-  useEffect(
-    function updateDisabledButtonsState() {
-      setShouldDisableButtons(
-        isEqual(filtersState, JSON.parse(prevFiltersRef.current))
-      );
-    },
-    [filtersState]
   );
 
   useSubscribeToEventEmitter(CLEAR_FILTERS, reset);
@@ -421,12 +193,12 @@ const FilterPanel = ({
     <motion.div
       ref={filterPanelRef}
       className={cx(componentClass, `${componentClass}__container`, {
-        [`${componentClass}--open`]: leftPanelOpen,
+        [`${componentClass}--open`]: panelOpen,
         [`${componentClass}--batch`]: showActionSet,
         [`${componentClass}--instant`]: !showActionSet,
       })}
       initial={false}
-      animate={leftPanelOpen ? 'visible' : 'hidden'}
+      animate={panelOpen ? 'visible' : 'hidden'}
       variants={panelVariants}
     >
       <motion.div variants={innerContainerVariants}>

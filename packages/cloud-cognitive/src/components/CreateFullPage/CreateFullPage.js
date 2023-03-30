@@ -185,6 +185,7 @@ export let CreateFullPage = React.forwardRef(
               onClick={() => {
                 setModalIsOpen(!modalIsOpen);
               }}
+              data-modal-primary-focus
             >
               {modalSecondaryButtonText}
             </Button>

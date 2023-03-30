@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -17,21 +17,24 @@ $block-class: #{c4p-settings.$pkg-prefix}--empty-state;
   color: $text-primary;
 
   .#{$block-class}__header {
-    @include type.type-style('productive-heading-03');
+    @include type.type-style('heading-03');
     // stylelint-disable-next-line carbon/layout-token-use
     padding-bottom: calc($spacing-01 + $spacing-02);
     margin: 0;
   }
+
   .#{$block-class}__subtitle {
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
 
     padding-bottom: $spacing-05;
   }
+
   .#{$block-class}__header--small {
-    @include type.type-style('body-short-02');
+    @include type.type-style('body-compact-02');
 
     padding-bottom: $spacing-03;
   }
+
   .#{$block-class}__subtitle--small {
     @include type.type-style('label-01');
   }

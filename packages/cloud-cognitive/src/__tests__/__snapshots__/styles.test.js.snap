@@ -3717,13 +3717,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   flex-direction: column;
   justify-content: center;
 }
-.c4p--add-select__selections-cell:hover .c4p--add-select__selections-hidden-hover,
-.c4p--add-select__selections .cds--structured-list-row:focus-within .c4p--add-select__selections-hidden-hover {
-  visibility: visible;
-}
-.c4p--add-select__selections-hidden-hover {
-  visibility: hidden;
-}
 .c4p--add-select__selections-row--selected.cds--structured-list-row {
   border-bottom: 1px solid var(--cds-layer-selected-01, #e0e0e0);
   background-color: var(--cds-layer-selected-01, #e0e0e0);

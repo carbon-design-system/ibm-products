@@ -22,16 +22,19 @@ $block-class: #{c4p-settings.$pkg-prefix}--empty-state;
     padding-bottom: $spacing-03;
     margin: 0;
   }
+
   .#{$block-class}__subtitle {
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
 
     padding-bottom: $spacing-05;
   }
+
   .#{$block-class}__header--small {
-    @include type.type-style('body-short-02');
+    @include type.type-style('body-compact-02');
 
     padding-bottom: $spacing-03;
   }
+
   .#{$block-class}__subtitle--small {
     @include type.type-style('label-01');
   }

@@ -17,7 +17,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--empty-state;
   color: $text-primary;
 
   .#{$block-class}__header {
-    @include type.type-style('productive-heading-03');
+    @include type.type-style('heading-03');
 
     padding-bottom: $spacing-03;
     margin: 0;

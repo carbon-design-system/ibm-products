@@ -150,7 +150,6 @@ export let AddSelectList = ({
                           id={`add-select-modifier-${item.id}`}
                           type="inline"
                           items={modifiers.options}
-                          light
                           label={modifiers.label}
                           disabled={!isSelected(item.id)}
                           className={`${blockClass}-dropdown`}

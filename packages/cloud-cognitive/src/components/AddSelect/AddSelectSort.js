@@ -64,7 +64,6 @@ export let AddSelectSort = ({
           className={`${blockClass}_overflow`}
           flipped
           ariaLabel={sortByLabel}
-          light
         >
           {sortByOpts.map((opt) => (
             <OverflowMenuItem

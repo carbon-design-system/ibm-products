@@ -117,7 +117,6 @@ export let AddSelectFilter = ({
                     key={filterOpts.id}
                     titleText={filterOpts.label}
                     items={filterOpts.opts}
-                    light
                     onChange={(value) => onchangeHandler(value, filterOpts.id)}
                     selectedItem={getSelectedItem(filterOpts.id)}
                     label={placeholder}

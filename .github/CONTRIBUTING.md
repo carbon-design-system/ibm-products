@@ -31,7 +31,7 @@ and follow the guide below.
 Go to the
 [Carbon for IBM Products repository on GitHub](https://github.com/carbon-design-system/ibm-cloud-cognitive)
 and [fork the repo](https://help.github.com/articles/fork-a-repo/),
-[syncing with the original repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced).
+[syncing with the original repo](https://docs.github.com/en/get-started/quickstart/fork-a-repo#configuring-git-to-sync-your-fork-with-the-upstream-repository).
 
 ### 2. Work in a branch
 

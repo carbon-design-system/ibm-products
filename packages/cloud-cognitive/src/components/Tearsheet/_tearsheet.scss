@@ -155,6 +155,10 @@
       margin: 0;
     }
 
+    &.#{$block-class}--narrow .#{$block-class}__header-description {
+      max-width: 80%;
+    }
+
     &.#{$block-class}--wide .#{$block-class}__header--with-close-icon {
       padding-right: $spacing-10;
     }

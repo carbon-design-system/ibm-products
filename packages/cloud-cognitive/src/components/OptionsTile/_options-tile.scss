@@ -23,12 +23,19 @@
   $block-class: #{$pkg-prefix}--options-tile;
 
   .#{$block-class} {
+    position: relative;
     border-bottom: 1px solid $ui-03;
     background-color: $ui-01;
   }
 
   .#{$block-class}__toggle-container {
-    position: relative;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: calc(
+      #{$spacing-05} + 2rem + #{$spacing-05}
+    ); // spacing + toggle width + spacing
   }
 
   .#{$block-class}__toggle {

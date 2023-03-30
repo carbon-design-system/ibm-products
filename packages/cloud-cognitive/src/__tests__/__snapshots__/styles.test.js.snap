@@ -2849,6 +2849,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header.c4p--tearsheet__header--with-close-icon {
   padding-right: 4rem;
 }
+.c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header-description {
+  max-width: 80%;
+}
 .c4p--tearsheet .c4p--tearsheet__header-navigation {
   margin: 0.75rem 0 0;
 }

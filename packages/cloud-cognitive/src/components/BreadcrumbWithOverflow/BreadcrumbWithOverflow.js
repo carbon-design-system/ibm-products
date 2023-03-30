@@ -18,6 +18,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   IconButton,
+  Link,
   OverflowMenu,
   OverflowMenuItem,
   usePrefix,
@@ -309,15 +310,20 @@ export let BreadcrumbWithOverflow = ({
         >
           {backItem?.href && (backItem?.label || backItem?.title) && (
             <BreadcrumbItem className={cx(`${blockClass}__breadcrumb-back`)}>
-              <IconButton
-                align="right"
+              <Link
                 href={backItem.href}
-                kind="ghost"
-                label={backItem.title || backItem.label}
-                size="sm"
-              >
-                <ArrowLeft size={16} />
-              </IconButton>
+                renderIcon={() => (
+                  <IconButton
+                    className={`${blockClass}__back__button`}
+                    align="right"
+                    kind="ghost"
+                    label={backItem.title || backItem.label}
+                    size="sm"
+                  >
+                    <ArrowLeft size={16} />
+                  </IconButton>
+                )}
+              />
             </BreadcrumbItem>
           )}
           {displayedBreadcrumbItems}

@@ -31,7 +31,7 @@ jobs:
         uses: peter-evans/create-pull-request@v4
 
         with:
-          token: ${{ secrets.CREATE_PR_ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }} # https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret
           branch: ${{ github.event.pull_request.head.ref }}-sync
           branch-suffix: random
 

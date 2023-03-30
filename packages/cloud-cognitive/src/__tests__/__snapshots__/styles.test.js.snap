@@ -2436,7 +2436,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-bottom: 1rem;
 }
 .c4p--side-panel__container .c4p--side-panel__action-toolbar {
-  position: sticky;
+  position: fixed;
   z-index: 4;
   /* stylelint-disable-next-line carbon/layout-token-use */
   top: var(--c4p--side-panel--title-height);

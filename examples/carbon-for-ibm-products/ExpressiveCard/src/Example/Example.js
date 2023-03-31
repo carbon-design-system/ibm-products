@@ -17,8 +17,9 @@ export const Example = () => {
   return (
     <Grid>
       <Row>
-        <Column lg={8}></Column>
-        <ExpressiveCard {...defaultProps} />
+        <Column sm={4} md={8} lg={4}>
+          <ExpressiveCard {...defaultProps} />
+        </Column>
       </Row>
     </Grid>
   );

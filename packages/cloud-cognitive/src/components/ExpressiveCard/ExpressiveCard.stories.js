@@ -27,7 +27,19 @@ export default {
     },
   },
   argTypes: {
-    columnSize: {
+    columnSizeSm: {
+      control: {
+        type: 'select',
+      },
+      options: [4, 8, 12, 16],
+    },
+    columnSizeMd: {
+      control: {
+        type: 'select',
+      },
+      options: [4, 8, 12, 16],
+    },
+    columnSizeLg: {
       control: {
         type: 'select',
       },
@@ -53,7 +65,9 @@ export default {
 const defaultProps = {
   label: 'Label',
   title: 'Title',
-  columnSize: 4,
+  columnSizeSm: 4,
+  columnSizeMd: 8,
+  columnSizeLg: 4,
   children: (
     <p>
       expressive card body content block. description inviting the user to take
@@ -64,10 +78,10 @@ const defaultProps = {
 };
 
 const Template = (opts) => {
-  const { children, columnSize, ...args } = opts;
+  const { children, columnSizeSm, columnSizeMd, columnSizeLg, ...args } = opts;
   return (
     <Grid>
-      <Column lg={columnSize}>
+      <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
         <ExpressiveCard {...args}>{children}</ExpressiveCard>
       </Column>
     </Grid>
@@ -75,10 +89,10 @@ const Template = (opts) => {
 };
 
 const MediaTemplate = (opts) => {
-  const { children, columnSize, mediaRatio = '1x1', ...args } = opts;
+  const { children, columnSizeSm, columnSizeMd, columnSizeLg, mediaRatio = '1x1', ...args } = opts;
   return (
     <Grid>
-      <Column lg={columnSize}>
+      <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
         <ExpressiveCard
           media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
           {...args}

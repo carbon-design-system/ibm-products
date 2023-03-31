@@ -21,11 +21,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   }
 
   .#{$block-class}__title {
-    @include type.type-style('productive-heading-02');
+    @include type.type-style('heading-compact-02');
   }
 
   .#{$block-class}__title-lg .#{$block-class}__title {
-    @include type.type-style('productive-heading-03');
+    @include type.type-style('heading-03');
   }
 
   .#{$block-class}__body {
@@ -44,11 +44,38 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 
   .#{$block-class}__actions {
     margin: 0;
+    height: $spacing-07;
   }
 
   .#{$block-class}__actions-header {
     margin-top: calc(-1 * #{$spacing-02});
     margin-right: $spacing-03;
+  }
+
+  .#{$block-class}__actions-header-ghost-button {
+    padding: calc(0.375rem - 3px) 16px;
+    // stylelint-disable-next-line carbon/layout-token-use
+    padding-right: calc($spacing-01 + $spacing-03);
+    // stylelint-disable-next-line carbon/layout-token-use
+    padding-left: calc($spacing-01 + $spacing-03);
+
+    min-height: $spacing-07;
+
+    &::before {
+      position: absolute;
+      left: 0;
+      width: 0.05rem;
+      height: $spacing-06;
+      background-color: theme.$layer-hover-01;
+      content: '';
+      opacity: 1;
+    }
+
+    &:hover {
+      &::before {
+        opacity: 0;
+      }
+    }
   }
 
   .#{$block-class}__title-lg .#{$block-class}__actions-header,

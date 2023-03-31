@@ -48,6 +48,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
           <SkeletonText className={`${blockClass}__title-skeleton`} />
         ) : isEditable ? (
           <InlineEdit
+            v1
             hideLabel
             value={text}
             {...{

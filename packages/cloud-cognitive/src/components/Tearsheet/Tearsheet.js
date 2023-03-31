@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -105,8 +105,8 @@ Tearsheet.propTypes = {
    * display a loading indicator, and 'onClick' to receive notifications when
    * the button is clicked. Additional fields in the object will be passed to
    * the Button component, and these can include 'disabled', 'ref', 'className',
-   * and any other Button props. Any other fields in the object will be passed
-   * through to the button element as HTML attributes.
+   * and any other Button props, except 'size'. Any other fields in the object will
+   * be passed through to the button element as HTML attributes.
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */

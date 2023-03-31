@@ -105,6 +105,8 @@ export const TearsheetShell = React.forwardRef(
     const modalRef = ref || localRef;
     const { width, ref: resizer } = useResizeDetector({ handleHeight: false });
 
+    const wide = size === 'wide';
+
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
     const [depth, setDepth] = useState(0);
     const [position, setPosition] = useState(0);
@@ -219,8 +221,8 @@ export const TearsheetShell = React.forwardRef(
             [`${bc}--stacked-${position}-of-${depth}`]:
               // Don't apply this on the initial open of a single tearsheet.
               depth > 1 || (depth === 1 && prevDepth.current > 1),
-            [`${bc}--wide`]: size === 'wide',
-            [`${bc}--narrow`]: size !== 'wide',
+            [`${bc}--wide`]: wide,
+            [`${bc}--narrow`]: !wide,
           })}
           style={{
             [`--${bc}--stacking-scale-factor-single`]: (width - 32) / width,
@@ -292,12 +294,12 @@ export const TearsheetShell = React.forwardRef(
               <Wrap
                 className={`${bc}__main`}
                 alwaysRender={includeActions}
-                element={Layer}
+                element={wide ? Layer : undefined}
               >
                 <Wrap
                   className={`${bc}__content`}
                   alwaysRender={influencer && influencerPosition === 'right'}
-                  element={Layer}
+                  element={wide ? Layer : undefined}
                 >
                   {children}
                 </Wrap>
@@ -315,9 +317,9 @@ export const TearsheetShell = React.forwardRef(
                 <Wrap className={`${bc}__button-container`}>
                   <ActionSet
                     actions={actions}
-                    buttonSize={size === 'wide' ? 'xl' : null}
+                    buttonSize={wide ? '2xl' : null}
                     className={`${bc}__buttons`}
-                    size={size === 'wide' ? '2xl' : 'lg'}
+                    size={wide ? '2xl' : 'lg'}
                   />
                 </Wrap>
               )}

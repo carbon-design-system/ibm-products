@@ -47,13 +47,6 @@ export let NonLinearReading = React.forwardRef(
       setOpen((prevState) => !prevState);
     };
 
-    const handleKeyDown = (event) => {
-      const { key } = event;
-      if (key === ' ' || key === 'Enter') {
-        handleToggle();
-      }
-    };
-
     return (
       <span
         {...rest}
@@ -65,13 +58,13 @@ export let NonLinearReading = React.forwardRef(
         {' '}
         <button
           type="button"
+          aria-expanded={isOpen}
           className={cx(`${blockClass}__term-${theme}`, [
             isOpen
               ? [`${blockClass}__term-${theme}--open`]
               : [`${blockClass}__term-${theme}--closed`],
           ])}
           onClick={handleToggle}
-          onKeyDown={handleKeyDown}
         >
           {children}
           {isOpen && <ChevronUp16 />}

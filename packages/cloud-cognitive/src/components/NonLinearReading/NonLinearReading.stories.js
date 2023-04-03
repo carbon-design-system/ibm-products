@@ -32,11 +32,10 @@ const defaultProps = {
   theme: 'light',
 };
 
+// As a standalone component, the "story" is meaningless:
+// just a pill for a term, expanding to show its definition.
+// Should always be shown in context with surrounding text.
 const Template = (args) => {
-  return <NonLinearReading {...args} />;
-};
-
-const TemplateInContext = (args) => {
   return (
     <>
       XDR Connect’s correlation
@@ -48,14 +47,6 @@ const TemplateInContext = (args) => {
 };
 
 export const Default = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    children: 'Term',
-    definition: 'Definition',
-  },
-});
-
-export const inContext = prepareStory(TemplateInContext, {
   args: {
     ...defaultProps,
     children: 'engine,',

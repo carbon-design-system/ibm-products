@@ -209,7 +209,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--action-set.cds--btn-set.c4p--action-set--xl .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost),
 .c4p--action-set.cds--btn-set.c4p--action-set--2xl .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost),
 .c4p--action-set.cds--btn-set.c4p--action-set--row-quadruple .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost) {
-  max-width: rem(232px);
+  max-width: 14.5rem;
   flex: 0 1 25%;
 }
 
@@ -2885,6 +2885,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet .c4p--tearsheet__main {
   display: flex;
   flex-direction: row;
+  background-color: var(--cds-layer);
   grid-column: 1/-1;
   grid-row: 1/-1;
 }
@@ -2896,9 +2897,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   overflow: auto;
   flex-grow: 1;
 }
-.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content {
-  background: var(--cds-background, #ffffff);
-}
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--pagination,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--pagination__control-buttons,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--text-input,
@@ -2909,7 +2907,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--dropdown-list,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--number input[type=number],
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--date-picker__input {
-  background-color: var(--cds-field-01, #f4f4f4);
+  background-color: var(--cds-field);
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--select--inline .cds--select-input {
   background-color: transparent;
@@ -3095,25 +3093,25 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-primary, #161616);
 }
 .c4p--empty-state .c4p--empty-state__header {
-  font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
-  font-weight: var(--cds-productive-heading-03-font-weight, 400);
-  line-height: var(--cds-productive-heading-03-line-height, 1.4);
-  letter-spacing: var(--cds-productive-heading-03-letter-spacing, 0);
+  font-size: var(--cds-heading-03-font-size, 1.25rem);
+  font-weight: var(--cds-heading-03-font-weight, 400);
+  line-height: var(--cds-heading-03-line-height, 1.4);
+  letter-spacing: var(--cds-heading-03-letter-spacing, 0);
   padding-bottom: 0.375rem;
   margin: 0;
 }
 .c4p--empty-state .c4p--empty-state__subtitle {
-  font-size: var(--cds-body-long-01-font-size, 0.875rem);
-  font-weight: var(--cds-body-long-01-font-weight, 400);
-  line-height: var(--cds-body-long-01-line-height, 1.42857);
-  letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
+  font-size: var(--cds-body-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-01-font-weight, 400);
+  line-height: var(--cds-body-01-line-height, 1.42857);
+  letter-spacing: var(--cds-body-01-letter-spacing, 0.16px);
   padding-bottom: 1rem;
 }
 .c4p--empty-state .c4p--empty-state__header--small {
-  font-size: var(--cds-body-short-02-font-size, 1rem);
-  font-weight: var(--cds-body-short-02-font-weight, 400);
-  line-height: var(--cds-body-short-02-line-height, 1.375);
-  letter-spacing: var(--cds-body-short-02-letter-spacing, 0);
+  font-size: var(--cds-body-compact-02-font-size, 1rem);
+  font-weight: var(--cds-body-compact-02-font-weight, 400);
+  line-height: var(--cds-body-compact-02-line-height, 1.375);
+  letter-spacing: var(--cds-body-compact-02-letter-spacing, 0);
   padding-bottom: 0.5rem;
 }
 .c4p--empty-state .c4p--empty-state__subtitle--small {
@@ -3311,26 +3309,26 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--http-errors .c4p--http-errors__error-code-label {
-  font-size: var(--cds-productive-heading-02-font-size, 1rem);
-  font-weight: var(--cds-productive-heading-02-font-weight, 600);
-  line-height: var(--cds-productive-heading-02-line-height, 1.375);
-  letter-spacing: var(--cds-productive-heading-02-letter-spacing, 0);
+  font-size: var(--cds-heading-compact-02-font-size, 1rem);
+  font-weight: var(--cds-heading-compact-02-font-weight, 600);
+  line-height: var(--cds-heading-compact-02-line-height, 1.375);
+  letter-spacing: var(--cds-heading-compact-02-letter-spacing, 0);
   margin-bottom: 0.25rem;
 }
 
 .c4p--http-errors .c4p--http-errors__title {
-  font-size: var(--cds-productive-heading-05-font-size, 2rem);
-  font-weight: var(--cds-productive-heading-05-font-weight, 400);
-  line-height: var(--cds-productive-heading-05-line-height, 1.25);
-  letter-spacing: var(--cds-productive-heading-05-letter-spacing, 0);
+  font-size: var(--cds-heading-05-font-size, 2rem);
+  font-weight: var(--cds-heading-05-font-weight, 400);
+  line-height: var(--cds-heading-05-line-height, 1.25);
+  letter-spacing: var(--cds-heading-05-letter-spacing, 0);
   margin-bottom: 0.75rem;
 }
 
 .c4p--http-errors .c4p--http-errors__description {
-  font-size: var(--cds-body-short-01-font-size, 0.875rem);
-  font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.28572);
-  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  font-size: var(--cds-body-compact-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-compact-01-font-weight, 400);
+  line-height: var(--cds-body-compact-01-line-height, 1.28572);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing, 0.16px);
   margin-bottom: 1.5rem;
 }
 
@@ -3481,7 +3479,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: 0;
   right: 0;
   display: flex;
-  width: var(--c4p--inline-edit--toolbar-width);
   height: 100%;
   justify-content: space-between;
   cursor: text;
@@ -3504,8 +3501,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel {
   display: inline-flex;
-  width: var(--c4p--inline-edit--size);
-  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);
@@ -3569,8 +3564,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit {
   display: inline-flex;
-  width: var(--c4p--inline-edit--size);
-  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);
@@ -3598,8 +3591,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--inline-edit .c4p--inline-edit__validation-icon {
   display: inline-flex;
-  width: var(--c4p--inline-edit--size);
-  max-width: var(--c4p--inline-edit--size);
   height: 100%;
   min-height: initial;
   max-height: var(--c4p--inline-edit--size);
@@ -3728,13 +3719,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-.c4p--add-select__selections-cell:hover .c4p--add-select__selections-hidden-hover,
-.c4p--add-select__selections .cds--structured-list-row:focus-within .c4p--add-select__selections-hidden-hover {
-  visibility: visible;
-}
-.c4p--add-select__selections-hidden-hover {
-  visibility: hidden;
 }
 .c4p--add-select__selections-row--selected.cds--structured-list-row {
   border-bottom: 1px solid var(--cds-layer-selected-01, #e0e0e0);

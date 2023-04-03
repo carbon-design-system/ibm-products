@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,10 +20,12 @@ import pconsole from '../../global/js/utils/pconsole';
 import {
   Button,
   ComposedModal,
+  Layer,
   ModalHeader,
   ModalBody,
   usePrefix,
 } from '@carbon/react';
+
 import { ActionSet } from '../ActionSet';
 import { Wrap } from '../../global/js/utils/Wrap';
 
@@ -102,6 +104,8 @@ export const TearsheetShell = React.forwardRef(
     const localRef = useRef();
     const modalRef = ref || localRef;
     const { width, ref: resizer } = useResizeDetector({ handleHeight: false });
+
+    const wide = size === 'wide';
 
     // Keep track of the stack depth and our position in it (1-based, 0=closed)
     const [depth, setDepth] = useState(0);
@@ -217,8 +221,8 @@ export const TearsheetShell = React.forwardRef(
             [`${bc}--stacked-${position}-of-${depth}`]:
               // Don't apply this on the initial open of a single tearsheet.
               depth > 1 || (depth === 1 && prevDepth.current > 1),
-            [`${bc}--wide`]: size === 'wide',
-            [`${bc}--narrow`]: size !== 'wide',
+            [`${bc}--wide`]: wide,
+            [`${bc}--narrow`]: !wide,
           })}
           style={{
             [`--${bc}--stacking-scale-factor-single`]: (width - 32) / width,
@@ -287,10 +291,15 @@ export const TearsheetShell = React.forwardRef(
               {influencer}
             </Wrap>
             <Wrap className={`${bc}__right`}>
-              <Wrap alwaysRender={includeActions} className={`${bc}__main`}>
+              <Wrap
+                className={`${bc}__main`}
+                alwaysRender={includeActions}
+                element={wide ? Layer : undefined}
+              >
                 <Wrap
-                  alwaysRender={influencer && influencerPosition === 'right'}
                   className={`${bc}__content`}
+                  alwaysRender={influencer && influencerPosition === 'right'}
+                  element={wide ? Layer : undefined}
                 >
                   {children}
                 </Wrap>
@@ -308,9 +317,9 @@ export const TearsheetShell = React.forwardRef(
                 <Wrap className={`${bc}__button-container`}>
                   <ActionSet
                     actions={actions}
-                    buttonSize={size === 'wide' ? 'xl' : null}
+                    buttonSize={wide ? '2xl' : null}
                     className={`${bc}__buttons`}
-                    size={size === 'wide' ? '2xl' : 'lg'}
+                    size={wide ? '2xl' : 'lg'}
                   />
                 </Wrap>
               )}

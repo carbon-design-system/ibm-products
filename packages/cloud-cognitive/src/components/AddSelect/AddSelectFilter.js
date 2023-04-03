@@ -102,7 +102,7 @@ export let AddSelectFilter = ({
             onClick={() => setOpen(!open)}
             iconDescription={iconDescription}
             className={filterBtnClassnames}
-            size="lg"
+            size="md"
             tooltipPosition="left"
           />
         )}
@@ -117,7 +117,6 @@ export let AddSelectFilter = ({
                     key={filterOpts.id}
                     titleText={filterOpts.label}
                     items={filterOpts.opts}
-                    light
                     onChange={(value) => onchangeHandler(value, filterOpts.id)}
                     selectedItem={getSelectedItem(filterOpts.id)}
                     label={placeholder}

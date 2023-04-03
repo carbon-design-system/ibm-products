@@ -153,6 +153,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "Laura-Marshall",
+      "name": "Laura Marshall",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53219208?v=4",
+      "profile": "https://github.com/Laura-Marshall",
+      "contributions": [
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 5,

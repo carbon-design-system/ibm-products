@@ -508,6 +508,16 @@ export const FilterPanel = () => {
   const [data] = useState(makeData(50));
   const [isPanelOpen, setIsPanelOpen] = useState(false);
 
+  // This is to show off the View all button in checkboxes
+  const dummyCheckboxes = Array(80)
+    .fill(null)
+    .map((_, index) => ({
+      id: index,
+      labelText: 'Dummy checkbox',
+      value: 'dummy-checkbox',
+      disabled: true,
+    }));
+
   const sections = [
     {
       categoryTitle: 'Category title',
@@ -617,6 +627,11 @@ export const FilterPanel = () => {
               FormGroup: {
                 legendText: 'Password strength',
               },
+              MultiAddSelect: {
+                // If the checkbox count surpasses 10 or more we render a MultiAddSelect. These props here will overwrite the MultiAddSelect props
+                noSelectionDescription:
+                  'Select a password strength to be included in the filter search.',
+              },
               Checkbox: [
                 {
                   id: 'normal',
@@ -633,6 +648,7 @@ export const FilterPanel = () => {
                   labelText: 'Critical',
                   value: 'critical',
                 },
+                ...dummyCheckboxes,
               ],
             },
           },

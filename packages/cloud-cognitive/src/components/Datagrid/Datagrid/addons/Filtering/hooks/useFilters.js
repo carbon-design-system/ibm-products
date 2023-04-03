@@ -27,6 +27,7 @@ import {
 } from '../constants';
 import useInitialStateFromFilters from './useInitialStateFromFilters';
 import { getInitialStateFromFilters } from '../utils';
+import OverflowCheckboxes from '../OverflowCheckboxes';
 
 const useFilters = ({
   updateMethod,
@@ -144,6 +145,53 @@ const useFilters = ({
   const renderFilter = ({ type, column, props: components }) => {
     const isPanel = variation === PANEL;
 
+    const renderCheckboxes = () => {
+      if (variation === PANEL && filtersState[column].value.length > 10) {
+        return (
+          <OverflowCheckboxes
+            components={components}
+            type={type}
+            column={column}
+            setFiltersState={setFiltersState}
+            filtersState={filtersState}
+            applyFilters={applyFilters}
+          />
+        );
+      }
+
+      return (
+        <FormGroup {...components.FormGroup}>
+          {filtersState[column].value.map((option) => (
+            <Checkbox
+              key={option.id}
+              {...option}
+              onChange={(isSelected) => {
+                const checkboxCopy = filtersState[column].value;
+                const foundCheckbox = checkboxCopy.find(
+                  (checkbox) => checkbox.value === option.value
+                );
+                foundCheckbox.selected = isSelected;
+                setFiltersState({
+                  ...filtersState,
+                  [column]: {
+                    value: checkboxCopy,
+                    type,
+                  },
+                });
+                applyFilters({
+                  column,
+                  value: [...filtersState[column].value],
+                  type,
+                });
+                option.onChange?.(isSelected);
+              }}
+              checked={option.selected}
+            />
+          ))}
+        </FormGroup>
+      );
+    };
+
     switch (type) {
       case DATE:
         return (
@@ -193,37 +241,7 @@ const useFilters = ({
           />
         );
       case CHECKBOX:
-        return (
-          <FormGroup {...components.FormGroup}>
-            {filtersState[column].value.map((option) => (
-              <Checkbox
-                key={option.labelText}
-                {...option}
-                onChange={(isSelected) => {
-                  const checkboxCopy = filtersState[column].value;
-                  const foundCheckbox = checkboxCopy.find(
-                    (checkbox) => checkbox.value === option.value
-                  );
-                  foundCheckbox.selected = isSelected;
-                  setFiltersState({
-                    ...filtersState,
-                    [column]: {
-                      value: checkboxCopy,
-                      type,
-                    },
-                  });
-                  applyFilters({
-                    column,
-                    value: [...filtersState[column].value],
-                    type,
-                  });
-                  option.onChange?.(isSelected);
-                }}
-                checked={option.selected}
-              />
-            ))}
-          </FormGroup>
-        );
+        return renderCheckboxes();
       case RADIO:
         return (
           <FormGroup {...components.FormGroup}>

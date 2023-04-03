@@ -22,11 +22,12 @@ export const getInitialStateFromFilters = (filters, variation = FLYOUT) => {
   const setInitialState = ({ type, column, props }) => {
     if (type === CHECKBOX) {
       initialFilterState[column] = {
-        value: props.Checkbox.map(({ id, labelText, value }) => ({
+        value: props.Checkbox.map(({ id, labelText, value, ...rest }) => ({
           id,
           labelText,
           value,
           selected: false,
+          ...rest,
         })),
         type,
       };
@@ -64,4 +65,10 @@ export const getInitialStateFromFilters = (filters, variation = FLYOUT) => {
   }
 
   return initialFilterState;
+};
+
+export const convertCamelCaseToSentenceCase = (string) => {
+  const result = string.replace(/([A-Z])/g, ' $1');
+  const sentenceCase = result.charAt(0).toUpperCase() + result.slice(1);
+  return sentenceCase;
 };

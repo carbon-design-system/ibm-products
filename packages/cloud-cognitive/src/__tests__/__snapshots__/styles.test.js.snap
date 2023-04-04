@@ -1933,8 +1933,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-productive-heading-01-font-weight, 600);
   line-height: var(--cds-productive-heading-01-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px);
-  max-width: 50%;
-  padding-left: 2.5rem;
   margin-bottom: 0.5rem;
 }
 
@@ -1943,8 +1941,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-body-long-01-font-weight, 400);
   line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
-  max-width: 50%;
-  padding-left: 2.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -1999,9 +1995,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   position: relative;
   padding-bottom: 2rem;
 }
-.c4p--create-full-page .c4p--create-full-page__step .cds--css-grid {
-  margin-left: 0;
-}
 
 .c4p--create-full-page .cds--side-nav--ux {
   top: 0;
@@ -2036,8 +2029,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
   line-height: var(--cds-productive-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
-  max-width: 50%;
-  padding-left: 2.5rem;
   margin-bottom: 1rem;
 }
 

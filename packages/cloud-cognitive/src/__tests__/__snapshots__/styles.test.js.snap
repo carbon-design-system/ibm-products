@@ -1996,6 +1996,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding-bottom: 2rem;
 }
 
+.c4p--create-full-page__step .cds--css-grid {
+  margin-left: 0;
+}
+
 .c4p--create-full-page .cds--side-nav--ux {
   top: 0;
   height: min-content;

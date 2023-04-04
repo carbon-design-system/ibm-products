@@ -209,7 +209,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--action-set.cds--btn-set.c4p--action-set--xl .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost),
 .c4p--action-set.cds--btn-set.c4p--action-set--2xl .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost),
 .c4p--action-set.cds--btn-set.c4p--action-set--row-quadruple .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost) {
-  max-width: rem(232px);
+  max-width: 14.5rem;
   flex: 0 1 25%;
 }
 
@@ -1933,8 +1933,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-productive-heading-01-font-weight, 600);
   line-height: var(--cds-productive-heading-01-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px);
-  max-width: 50%;
-  padding-left: 2.5rem;
   margin-bottom: 0.5rem;
 }
 
@@ -1943,8 +1941,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-body-long-01-font-weight, 400);
   line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
-  max-width: 50%;
-  padding-left: 2.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -1999,9 +1995,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   position: relative;
   padding-bottom: 2rem;
 }
-.c4p--create-full-page .c4p--create-full-page__step .cds--css-grid {
-  margin-left: 0;
-}
 
 .c4p--create-full-page .cds--side-nav--ux {
   top: 0;
@@ -2036,8 +2029,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
   line-height: var(--cds-productive-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
-  max-width: 50%;
-  padding-left: 2.5rem;
   margin-bottom: 1rem;
 }
 
@@ -2848,6 +2839,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header.c4p--tearsheet__header--with-close-icon {
   padding-right: 4rem;
+}
+.c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header-description {
+  max-width: 80%;
 }
 .c4p--tearsheet .c4p--tearsheet__header-navigation {
   margin: 0.75rem 0 0;
@@ -3716,13 +3710,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-.c4p--add-select__selections-cell:hover .c4p--add-select__selections-hidden-hover,
-.c4p--add-select__selections .cds--structured-list-row:focus-within .c4p--add-select__selections-hidden-hover {
-  visibility: visible;
-}
-.c4p--add-select__selections-hidden-hover {
-  visibility: hidden;
 }
 .c4p--add-select__selections-row--selected.cds--structured-list-row {
   border-bottom: 1px solid var(--cds-layer-selected-01, #e0e0e0);

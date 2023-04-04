@@ -303,7 +303,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     margin-bottom: $spacing-05;
   }
   .#{$block-class}__action-toolbar {
-    position: fixed;
+    position: sticky;
     z-index: 4;
     /* stylelint-disable-next-line carbon/layout-token-use */
     top: var(--#{$block-class}--title-height);

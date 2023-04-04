@@ -209,7 +209,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--action-set.cds--btn-set.c4p--action-set--xl .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost),
 .c4p--action-set.cds--btn-set.c4p--action-set--2xl .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost),
 .c4p--action-set.cds--btn-set.c4p--action-set--row-quadruple .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost) {
-  max-width: rem(232px);
+  max-width: 14.5rem;
   flex: 0 1 25%;
 }
 
@@ -2849,6 +2849,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header.c4p--tearsheet__header--with-close-icon {
   padding-right: 4rem;
 }
+.c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header-description {
+  max-width: 80%;
+}
 .c4p--tearsheet .c4p--tearsheet__header-navigation {
   margin: 0.75rem 0 0;
 }
@@ -3716,13 +3719,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-.c4p--add-select__selections-cell:hover .c4p--add-select__selections-hidden-hover,
-.c4p--add-select__selections .cds--structured-list-row:focus-within .c4p--add-select__selections-hidden-hover {
-  visibility: visible;
-}
-.c4p--add-select__selections-hidden-hover {
-  visibility: hidden;
 }
 .c4p--add-select__selections-row--selected.cds--structured-list-row {
   border-bottom: 1px solid var(--cds-layer-selected-01, #e0e0e0);

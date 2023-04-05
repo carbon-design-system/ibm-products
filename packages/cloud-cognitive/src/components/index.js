@@ -81,3 +81,4 @@ export { EditFullPage } from './EditFullPage';
 export { EditUpdateCards } from './EditUpdateCards';
 
 export { InlineEdit } from './InlineEdit';
+export { NonLinearReading } from './NonLinearReading';

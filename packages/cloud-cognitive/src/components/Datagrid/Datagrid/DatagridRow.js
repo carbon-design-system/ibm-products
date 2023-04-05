@@ -25,7 +25,7 @@ const DatagridRow = (datagridState) => {
         [`${blockClass}__carbon-row-expanded`]: row.isExpanded,
         [`${carbon.prefix}--data-table--selected`]: row.isSelected,
       })}
-      {...row.getRowProps()}
+      {...row.getRowProps({role:false})}
       key={row.id}
       onMouseEnter={(event) => {
         const hoverRow = event.target.closest(
@@ -44,8 +44,8 @@ const DatagridRow = (datagridState) => {
         );
       }}
     >
-      {row.cells.map((cell) => {
-        const cellProps = cell.getCellProps();
+      {row.cells.map((cell, index) => {
+        const cellProps = cell.getCellProps({role:false});
         const { children, ...restProps } = cellProps;
         const content = children || (
           <>
@@ -60,7 +60,12 @@ const DatagridRow = (datagridState) => {
         return (
           <TableCell
             className={cx(
-              [`${blockClass}__cell`],
+              `${blockClass}__cell`,
+              `row_${cell.row.id}__column__${cell.column.id}`,
+              {
+                [`${blockClass}__expandable-row-cell`]:
+                  row.canExpand && index === 0,
+              },
               [`row_${cell.row.id}__column__${cell.column.id}`]
             )}
             {...restProps}

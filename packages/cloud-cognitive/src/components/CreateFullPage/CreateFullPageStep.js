@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,7 @@ import React, { forwardRef, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { FormGroup } from '@carbon/react';
+import { Column, FormGroup, Grid } from '@carbon/react';
 import { StepsContext, StepNumberContext } from './CreateFullPage';
 import { usePreviousValue, useRetrieveStepData } from '../../global/js/hooks';
 import pconsole from '../../global/js/utils/pconsole';
@@ -86,6 +86,8 @@ export let CreateFullPageStep = forwardRef(
       }
     }, [stepsContext, stepNumber, disableSubmit, onNext]);
 
+    const span = { span: 50 }; // Half.
+
     return stepsContext ? (
       <section
         {
@@ -100,11 +102,32 @@ export let CreateFullPageStep = forwardRef(
         })}
         ref={ref}
       >
-        <h5 className={`${blockClass}-title`}>{title}</h5>
-        {subtitle && <h6 className={`${blockClass}-subtitle`}>{subtitle}</h6>}
-        {description && (
-          <p className={`${blockClass}-description`}>{description}</p>
-        )}
+        <Grid>
+          <Column {...span}>
+            <Grid>
+              <Column className={`${blockClass}-title`} as="h5" {...span}>
+                {title}
+              </Column>
+
+              {subtitle && (
+                <Column className={`${blockClass}-subtitle`} as="h6" {...span}>
+                  {subtitle}
+                </Column>
+              )}
+
+              {description && (
+                <Column
+                  className={`${blockClass}-description`}
+                  as="p"
+                  {...span}
+                >
+                  {description}
+                </Column>
+              )}
+            </Grid>
+          </Column>
+        </Grid>
+
         {hasFieldset ? (
           <FormGroup
             legendText={fieldsetLegendText}

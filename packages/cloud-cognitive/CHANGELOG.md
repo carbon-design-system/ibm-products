@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.24](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.23...@carbon/ibm-products@2.0.0-rc.24) (2023-04-04)
+
+
+### Bug Fixes
+
+* add select keyboard accessibility adjustments ([#2709](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2709)) ([f35dabb](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f35dabb83d7fc640e44afc0d16681da52e06f67f))
+* **create-full-page:** focus modal secondary button ([#2790](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2790)) ([76d92f6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/76d92f6141103e5d49f9f02166ef2423f1b0fe3c))
+* **create-full-page:** update button sizes ([#2788](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2788)) ([85b8627](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/85b86275cee3ed3f2d6edb7a0336ac33e26d5b01))
+* **empty-state:** update type tokens ([#2779](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2779)) ([4147836](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/41478361309d730e7f85ba1e67b1abb0eb604e36))
+* **http-errors:** update type tokens ([#2780](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2780)) ([df903a3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/df903a30b3c8bba705670bec2b79222195477370))
+* **tearsheet-shell:** use `Layer` for `wide` only ([#2789](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2789)) ([614d333](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/614d333a4b4bad946a58e83329106f05ba481351))
+* **tearsheet:** fix button sizes ([#2776](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2776)) ([38a01e0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/38a01e0b449a8efd29837f3ac2fe3816577c1940))
+* **TearsheetNarrow:** increase description width to 80% ([#2795](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2795)) ([98180ff](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/98180ff6a1135ce5694a73704f3105f44c37e970))
+
+
+
+
+
 # [2.0.0-rc.23](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.22...@carbon/ibm-products@2.0.0-rc.23) (2023-03-28)
 
 

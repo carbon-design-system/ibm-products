@@ -51,7 +51,7 @@ const DatagridRow = (datagridState) => {
         );
       }}
     >
-      {row.cells.map((cell) => {
+      {row.cells.map((cell, index) => {
         const cellProps = cell.getCellProps();
         const { children, ...restProps } = cellProps;
         const content = children || (
@@ -68,6 +68,10 @@ const DatagridRow = (datagridState) => {
           <TableCell
             className={cx(
               [`${blockClass}__cell`],
+              {
+                [`${blockClass}__expandable-row-cell`]:
+                  row.canExpand && index === 0,
+              },
               [`row_${cell.row.id}__column__${cell.column.id}`]
             )}
             {...restProps}

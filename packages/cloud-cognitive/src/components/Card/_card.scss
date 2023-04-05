@@ -96,13 +96,24 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 .#{$block-class}__actions {
   display: flex;
   flex-direction: row;
-  margin: $spacing-05;
-  margin-top: 0;
+}
+
+.#{$block-class}__actions-header > * > button {
+  padding: 7px !important;
 }
 
 .#{$block-class}__icon {
   color: inherit;
   cursor: pointer;
+  padding: 7px $spacing-03 !important;
+}
+
+.#{$block-class}__icon:hover {
+  background-color: var(--cds-layer-hover);
+}
+
+#{$block-class}__icon:active {
+  color: var(--cds-link-primary-hover, #0043ce);
 }
 
 .#{$block-class}__link {

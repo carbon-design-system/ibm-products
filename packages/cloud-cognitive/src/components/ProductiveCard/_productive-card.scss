@@ -44,7 +44,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 
   .#{$block-class}__actions {
     margin: 0;
-    height: $spacing-07;
+    min-height: $spacing-07;
   }
 
   .#{$block-class}__actions-header {

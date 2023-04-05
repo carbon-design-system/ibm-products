@@ -21,7 +21,7 @@
   .#{$carbon-prefix}--table-header-label .#{$carbon-prefix}--table-sort:active,
   .#{$carbon-prefix}--table-header-label
     .#{$carbon-prefix}--table-sort:focus
-    svg {
+    .#{$block-class}__sortable-icon {
     /* stylelint-disable-next-line declaration-no-important */
     background: none !important;
     /* stylelint-disable-next-line declaration-no-important */
@@ -44,7 +44,9 @@
     color: $text-01 !important;
     font: inherit;
   }
-  .#{$carbon-prefix}--table-header-label .#{$carbon-prefix}--table-sort svg {
+  .#{$carbon-prefix}--table-header-label
+    .#{$carbon-prefix}--table-sort
+    .#{$block-class}__sortable-icon {
     fill: $text-01;
     opacity: 0;
     transition: transform $duration--fast-02 motion(standard, productive);
@@ -60,12 +62,14 @@
 .#{$block-class}__sortableColumn:hover,
 .#{$block-class}__sortableColumn:focus-within,
 .#{$block-class}__sortableColumn.#{$block-class}__isSorted {
-  .#{$carbon-prefix}--table-header-label svg {
+  .#{$carbon-prefix}--table-header-label .#{$block-class}__sortable-icon {
     opacity: 1;
     visibility: visible;
   }
 }
 
-.#{$block-class}__sortableColumn .#{$block-class}--table-sort--desc svg {
+.#{$block-class}__sortableColumn
+  .#{$block-class}--table-sort--desc
+  .#{$block-class}__sortable-icon {
   transform: rotate(180deg);
 }

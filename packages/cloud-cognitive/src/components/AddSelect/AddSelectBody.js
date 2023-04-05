@@ -22,6 +22,7 @@ import { useItemSort } from './hooks/useItemSort';
 import useParentSelect from './hooks/useParentSelect';
 import usePath from './hooks/usePath';
 import { pkg } from '../../settings';
+import useFocus from './hooks/useFocus';
 
 const blockClass = `${pkg.prefix}--add-select`;
 const componentName = 'AddSelectBody';
@@ -172,6 +173,8 @@ export let AddSelectBody = forwardRef(
     const showSort = (searchTerm || globalFiltersApplied) && hasResults;
     const showTags = setShowTags();
 
+    const [focus, setFocus] = useFocus(itemsToDisplay.length);
+
     const commonListProps = {
       displayMetalPanel,
       metaIconDescription,
@@ -185,6 +188,8 @@ export let AddSelectBody = forwardRef(
       singleSelection,
       setDisplayMetaPanel,
       parentId: path[0].id,
+      focus,
+      setFocus,
     };
 
     const commonTearsheetProps = {

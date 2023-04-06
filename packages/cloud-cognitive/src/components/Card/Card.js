@@ -12,7 +12,7 @@ import {
   IconButton,
   OverflowMenu,
   OverflowMenuItem,
-  Layer
+  Layer,
 } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { CardHeader } from './CardHeader';

@@ -89,7 +89,14 @@ const Template = (opts) => {
 };
 
 const MediaTemplate = (opts) => {
-  const { children, columnSizeSm, columnSizeMd, columnSizeLg, mediaRatio = '1x1', ...args } = opts;
+  const {
+    children,
+    columnSizeSm,
+    columnSizeMd,
+    columnSizeLg,
+    mediaRatio = '1x1',
+    ...args
+  } = opts;
   return (
     <Grid>
       <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>

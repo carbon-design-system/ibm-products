@@ -2978,6 +2978,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--tearsheet-create .c4p--tearsheet-create__step__step--visible-step {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  margin-left: 0;
   animation: step-content-entrance 400ms;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
@@ -2989,7 +2992,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--tearsheet-create__step .cds--css-grid {
-  padding-left: 0;
   margin-left: 0;
 }
 
@@ -3012,7 +3014,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--tearsheet-create .c4p--tearsheet-create__content {
   height: 100%;
-  padding: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   overflow-x: hidden;
 }
 

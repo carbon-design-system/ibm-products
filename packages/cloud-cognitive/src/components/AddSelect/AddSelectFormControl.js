@@ -3,7 +3,7 @@ import {
   RadioButton,
   RadioButtonChecked,
   Checkbox,
-  CheckboxChecked,
+  CheckboxCheckedFilled,
 } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import { pkg } from '../../settings';
@@ -18,11 +18,12 @@ export let AddSelectFormControl = ({ item, onClick, selected, type }) => {
     id: item.id,
     className: `${blockClass}-form-control-wrapper`,
     [`aria-label`]: item.title,
+    size: 20,
   };
 
   const getCheckbox = () => {
     if (selected) {
-      return <CheckboxChecked {...controlProps} />;
+      return <CheckboxCheckedFilled {...controlProps} />;
     }
 
     return <Checkbox {...controlProps} />;

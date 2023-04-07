@@ -10,13 +10,16 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 import { AddSelectRow } from './AddSelectRow';
+import useFocus from './hooks/useFocus';
 
 const blockClass = `${pkg.prefix}--add-select__selections`;
 const componentName = 'AddSelectList';
 
-export let AddSelectList = ({ filteredItems, focus, multi, ...rest }) => {
+export let AddSelectList = ({ filteredItems, multi, ...rest }) => {
+  const [focus, setFocus] = useFocus(filteredItems.length);
   return (
     <div
+      id="add-select-focus"
       className={cx(`${blockClass}-wrapper`, {
         [`${blockClass}-wrapper-multi`]: multi,
       })}
@@ -31,10 +34,11 @@ export let AddSelectList = ({ filteredItems, focus, multi, ...rest }) => {
             <AddSelectRow
               key={item.id}
               index={index}
-              focused={focus === index}
+              focus={focus}
               setSize={filteredItems.length}
               item={item}
               multi={multi}
+              setFocus={setFocus}
               {...rest}
             />
           ))}

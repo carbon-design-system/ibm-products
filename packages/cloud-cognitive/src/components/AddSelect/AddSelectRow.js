@@ -20,7 +20,7 @@ export let AddSelectRow = ({
   appliedModifiers,
   displayMetalPanel,
   index,
-  focused,
+  focus,
   item,
   metaIconDescription,
   modifiers,
@@ -39,15 +39,43 @@ export let AddSelectRow = ({
   const ref = useRef(null);
 
   useEffect(() => {
-    const refCopy = ref;
-    if (focused) {
-      refCopy.current.focus();
+    if (focus === index) {
+      ref.current.focus();
     }
-  }, [focused, setFocus]);
+  }, [focus, index]);
 
-  const focusHandler = useCallback(() => {
-    setFocus(index);
-  }, [index, setFocus]);
+  const isSelected = () => {
+    if (multi) {
+      return multiSelection.includes(item.id);
+    }
+    return item.id === singleSelection;
+  };
+
+  const getTabIndex = () => {
+    // on initial load make the first item tabbable
+    if (index === 0 && focus === '') {
+      return 0;
+    }
+
+    // make it so only the last focused item is tabbable
+    if (focus === index && focus !== '') {
+      return 0;
+    }
+
+    // make unfocused items un-tabbable
+    return -1;
+  };
+
+  const focusHandler = useCallback(
+    (reset) => {
+      setFocus(reset ? '' : index);
+    },
+    [setFocus, index]
+  );
+
+  const handleSingleSelection = () => {
+    setSingleSelection(item.id);
+  };
 
   const onSelectKeyDown = ({ key }) => {
     if (key === 'Enter') {
@@ -58,15 +86,7 @@ export let AddSelectRow = ({
       }
     } else if (key === 'ArrowRight' && item.children) {
       onNavigateItem();
-      setFocus('');
     }
-  };
-
-  const hasModifiers = modifiers?.options?.length > 0;
-
-  const handleSingleSelection = () => {
-    focusHandler();
-    setSingleSelection(item.id);
   };
 
   const handleMultiSelection = () => {
@@ -81,14 +101,8 @@ export let AddSelectRow = ({
   };
 
   const onNavigateItem = () => {
+    focusHandler(true);
     setParentSelected(item.id, item.title, parentId);
-  };
-
-  const isSelected = () => {
-    if (multi) {
-      return multiSelection.includes(item.id);
-    }
-    return item.id === singleSelection;
   };
 
   const modifierHandler = (id, selectedItem) => {
@@ -108,7 +122,8 @@ export let AddSelectRow = ({
   };
 
   const isInMetaPanel = (id) => id === displayMetalPanel?.id;
-
+  const hasModifiers = modifiers?.options?.length > 0;
+  const tabIndex = getTabIndex();
   const selected = isSelected();
 
   return (
@@ -118,7 +133,7 @@ export let AddSelectRow = ({
         [`${blockClass}-row-meta--selected`]: isInMetaPanel(item.id),
       })}
       onKeyDown={onSelectKeyDown}
-      tabIndex={focused ? 0 : -1}
+      tabIndex={tabIndex}
       ref={ref}
       role="row"
     >
@@ -191,7 +206,7 @@ AddSelectRow.propTypes = {
   appliedModifiers: PropTypes.array,
   displayMetalPanel: PropTypes.object,
   filteredItems: PropTypes.array,
-  focused: PropTypes.bool,
+  focus: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   index: PropTypes.number,
   item: PropTypes.object,
   metaIconDescription: PropTypes.string,

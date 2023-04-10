@@ -98,12 +98,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   flex-direction: row;
 }
 
-.#{$block-class}__actions-header > * > button {
-  padding: 7px !important;
-}
-
 .#{$block-class}__icon {
-  padding: 7px $spacing-03 !important;
+  padding: $spacing-03;
   color: inherit;
   cursor: pointer;
 }

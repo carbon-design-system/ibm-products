@@ -141,22 +141,6 @@ export const WithMedia = prepareStory(MediaTemplate, {
   },
 });
 
-export const WithActionIcon = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    actionIcons: [
-      {
-        id: '1',
-        icon: (props) => <ArrowRight size={24} {...props} />,
-        onClick: action('on click'),
-        iconDescription: 'Next',
-      },
-    ],
-    primaryButtonText: '',
-    mediaRatio: null,
-  },
-});
-
 export const WithActionIconHref = prepareStory(Template, {
   args: {
     ...defaultProps,

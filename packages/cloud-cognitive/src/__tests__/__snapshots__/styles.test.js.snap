@@ -7196,6 +7196,8 @@ button.c4p--add-select__global-filter-toggle--open {
   padding: 0 1rem;
   padding-right: 0.625rem;
   padding-left: 0.625rem;
+  /* stylelint-disable-next-line max-nesting-depth */
+  /* stylelint-disable-next-line max-nesting-depth */
 }
 .c4p--card__productive .c4p--card__actions-header-ghost-button::before {
   position: absolute;
@@ -7205,6 +7207,9 @@ button.c4p--add-select__global-filter-toggle--open {
   background-color: var(--cds-layer-hover-01, #e8e8e8);
   content: "";
   opacity: 1;
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button:hover {
+  /* stylelint-disable-next-line max-nesting-depth */
 }
 .c4p--card__productive .c4p--card__actions-header-ghost-button:hover::before {
   opacity: 0;

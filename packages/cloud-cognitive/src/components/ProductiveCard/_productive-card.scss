@@ -60,6 +60,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
     // stylelint-disable-next-line carbon/layout-token-use
     padding-left: calc($spacing-01 + $spacing-03);
 
+    /* stylelint-disable-next-line max-nesting-depth */
     &::before {
       position: absolute;
       left: 0;
@@ -70,7 +71,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
       opacity: 1;
     }
 
+    /* stylelint-disable-next-line max-nesting-depth */
     &:hover {
+      /* stylelint-disable-next-line max-nesting-depth */
       &::before {
         opacity: 0;
       }

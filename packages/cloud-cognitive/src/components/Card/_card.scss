@@ -103,17 +103,17 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 }
 
 .#{$block-class}__icon {
+  padding: 7px $spacing-03 !important;
   color: inherit;
   cursor: pointer;
-  padding: 7px $spacing-03 !important;
 }
 
 .#{$block-class}__icon:hover {
-  background-color: var(--cds-layer-hover);
+  background-color: $layer-hover-01;
 }
 
 #{$block-class}__icon:active {
-  color: var(--cds-link-primary-hover, #0043ce);
+  color: $link-primary-hover;
 }
 
 .#{$block-class}__link {

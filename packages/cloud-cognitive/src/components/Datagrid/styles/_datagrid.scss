@@ -209,8 +209,10 @@
   }
 
   .#{$block-class}__defaultStringRenderer {
+    display: flex;
     overflow: hidden;
     width: 100%;
+    align-items: center;
     text-overflow: ellipsis;
     white-space: nowrap;
   }

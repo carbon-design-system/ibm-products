@@ -26,6 +26,7 @@
     background: none !important;
     /* stylelint-disable-next-line declaration-no-important */
     color: $text-01 !important;
+    cursor: default;
   }
   .#{$carbon-prefix}--table-header-label .#{$carbon-prefix}--table-sort:focus,
   .#{$carbon-prefix}--table-header-label .#{$carbon-prefix}--table-sort:active {
@@ -48,9 +49,9 @@
     .#{$carbon-prefix}--table-sort
     .#{$block-class}__sortable-icon {
     fill: $text-01;
-    opacity: 0;
+    opacity: 1;
     transition: transform $duration--fast-02 motion(standard, productive);
-    visibility: hidden;
+    visibility: visible;
   }
 
   .#{$carbon-prefix}--table-sort.#{$block-class}--table-sort {
@@ -72,4 +73,8 @@
   .#{$block-class}--table-sort--desc
   .#{$block-class}__sortable-icon {
   transform: rotate(180deg);
+}
+
+.#{$block-class}__sortableColumn .bx--table-header-label .bx--table-sort {
+  cursor: default;
 }

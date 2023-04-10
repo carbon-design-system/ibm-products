@@ -49,63 +49,77 @@ export default {
 const defaultHeader = [
   {
     Header: 'Row Index',
+    tooltipText: 'Some example tooltip text',
     accessor: (row, i) => i,
     sticky: 'left',
     id: 'rowIndex', // id is required when accessor is a function.
   },
   {
-    Header: 'First Name',
+    Header: 'First name',
+    tooltipText: 'Some example tooltip text',
     accessor: 'firstName',
   },
   {
     Header: 'Last Name',
+    tooltipText: 'Some example tooltip text',
     accessor: 'lastName',
   },
   {
     Header: 'Age',
+    tooltipText: 'Some example tooltip text',
     accessor: 'age',
     width: 50,
   },
   {
     Header: 'Visits',
+    tooltipText: 'Some example tooltip text',
     accessor: 'visits',
     width: 60,
   },
   {
     Header: 'Status',
+    tooltipText: 'Some example tooltip text',
     accessor: 'status',
   },
   {
     Header: 'Joined',
+    tooltipText: 'Some example tooltip text',
     accessor: 'joined',
     Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
   },
   {
     Header: 'Someone 1',
+    tooltipText: 'Some example tooltip text',
     accessor: 'someone1',
   },
   {
     Header: 'Someone 2',
+    tooltipText: 'Some example tooltip text',
     accessor: 'someone2',
   },
   {
     Header: 'Someone 3',
+    tooltipText: 'Some example tooltip text',
     accessor: 'someone3',
   },
   {
     Header: 'Someone 4',
+    tooltipText: 'Some example tooltip text',
     accessor: 'someone4',
   },
   {
     Header: 'Someone 5',
+    tooltipText: 'Some example tooltip text',
     accessor: 'someone5',
   },
   {
     Header: 'Someone 6',
+    tooltipText: 'Some example tooltip text',
     accessor: 'someone6',
   },
   {
     Header: 'Someone 7',
+    tooltipText: 'Some example tooltip text',
     accessor: 'someone7',
   },
 ];

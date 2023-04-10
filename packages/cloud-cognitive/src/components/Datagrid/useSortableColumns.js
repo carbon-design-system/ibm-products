@@ -8,8 +8,9 @@
 import React from 'react';
 import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
-import { Button } from 'carbon-components-react';
-import { ArrowUp16, Arrows16 } from '@carbon/icons-react';
+// import { Button } from 'carbon-components-react';
+import { TooltipIcon } from 'carbon-components-react';
+import { ArrowUp16, Arrows16, Information16 } from '@carbon/icons-react';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -64,10 +65,9 @@ const useSortableColumns = (hooks) => {
         column.disableSortBy === true ? (
           column.Header
         ) : (
-          <Button
-            onClick={() => onSortClick(headerProp.column)}
-            kind="ghost"
-            renderIcon={icon(headerProp.column)}
+          <div
+            // kind="ghost"
+            // renderIcon={icon(headerProp.column)}
             className={cx(
               `${carbon.prefix}--table-sort ${blockClass}--table-sort`,
               {
@@ -79,7 +79,21 @@ const useSortableColumns = (hooks) => {
             )}
           >
             {column.Header}
-          </Button>
+            {column.tooltipText && (
+              <TooltipIcon
+                tooltipText={column.tooltipText}
+                renderIcon={Information16}
+                style={{
+                  marginLeft: '.5rem',
+                }}
+              />
+            )}
+            <TooltipIcon
+              tooltipText="Sort column"
+              renderIcon={icon(headerProp.column)}
+              onClick={() => onSortClick(headerProp.column)}
+            />
+          </div>
         );
       return {
         ...column,

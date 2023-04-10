@@ -38,6 +38,7 @@ const Columns = ({
   assistiveTextInstructionsLabel,
   assistiveTextDisabledInstructionsLabel,
   selectAllLabel,
+  isTableSortable,
 }) => {
   const [ariaRegionText, setAriaRegionText] = React.useState('');
   const [focusIndex, setFocusIndex] = React.useState(-1);
@@ -117,19 +118,37 @@ const Columns = ({
           </div>
           {columns
             // hide the columns without Header, e.g the sticky actions, spacer
-            .filter(
-              (colDef) => !!colDef.Header.props && !!colDef.Header.props.title
-            )
+            .filter((colDef) => {
+              const sortableTitle =
+                isTableSortable && colDef.Header().props.children.props?.title;
+              return (
+                (!!colDef.Header.props && !!colDef.Header.props?.title) ||
+                (isTableSortable && !!sortableTitle)
+              );
+            })
             .filter((colDef) => !colDef.isAction)
-            .filter(
-              (colDef) =>
+            .filter((colDef) => {
+              const sortableTitle =
+                isTableSortable && colDef.Header().props.children.props?.title;
+              return (
                 filterString.length === 0 ||
-                colDef.Header.props.title.toLowerCase().includes(filterString)
-            )
+                ((isTableSortable
+                  ? sortableTitle?.toLowerCase().includes(filterString)
+                  : colDef.Header.props?.title
+                      ?.toLowerCase()
+                      .includes(filterString)) &&
+                  colDef.id !== 'spacer')
+              );
+            })
             .map((colDef, i) => {
+              const isSortableColumn = !!colDef.canSort && !!isTableSortable;
+              const sortableTitle =
+                isTableSortable && colDef.Header().props.children.props?.title;
               const searchString = new RegExp('(' + filterString + ')');
               const res = filterString.length
-                ? colDef.Header.props.title.toLowerCase().split(searchString)
+                ? isSortableColumn
+                  ? sortableTitle.toLowerCase().split(searchString)
+                  : colDef.Header.props.title.toLowerCase().split(searchString)
                 : null;
               const firstWord =
                 res !== null
@@ -142,7 +161,9 @@ const Columns = ({
                   ? res[0] === ''
                     ? `<strong>${firstWord}</strong>` + res[2]
                     : firstWord + `<strong>${res[1]}</strong>` + res[2]
-                  : colDef.Header.props.title;
+                  : isSortableColumn
+                  ? sortableTitle
+                  : colDef.Header.props?.title;
               const isFrozenColumn = !!colDef.sticky;
               const listContents = (
                 <>
@@ -152,8 +173,16 @@ const Columns = ({
                     disabled={isFrozenColumn}
                     onChange={onSelectColumn.bind(null, colDef)}
                     id={`${blockClass}__customization-column-${colDef.id}`}
-                    labelText={colDef.Header.props.title}
-                    title={colDef.Header.props.title}
+                    labelText={
+                      isSortableColumn
+                        ? sortableTitle
+                        : colDef.Header.props?.title
+                    }
+                    title={
+                      isSortableColumn
+                        ? sortableTitle
+                        : colDef.Header.props?.title
+                    }
                     className={`${blockClass}__customize-columns-checkbox`}
                     hideLabel
                   />
@@ -174,7 +203,11 @@ const Columns = ({
                   id={`dnd-datagrid-columns-${colDef.id}`}
                   type="column-customization"
                   disabled={filterString.length > 0 || isFrozenColumn}
-                  ariaLabel={colDef.Header.props.title}
+                  ariaLabel={
+                    isSortableColumn
+                      ? sortableTitle
+                      : colDef.Header.props?.title
+                  }
                   onGrab={setAriaRegionText}
                   isFocused={focusIndex === i}
                   moveElement={moveElement}
@@ -218,6 +251,7 @@ Columns.propTypes = {
   filterString: PropTypes.string.isRequired,
   getVisibleColumnsCount: PropTypes.func.isRequired,
   instructionsLabel: PropTypes.string,
+  isTableSortable: PropTypes.bool.isRequired,
   onSelectColumn: PropTypes.func.isRequired,
   selectAllLabel: PropTypes.string,
   setColumnStatus: PropTypes.func,

@@ -87,7 +87,7 @@ const useSortableColumns = (hooks) => {
         minWidth: column.disableSortBy === true ? 0 : 90,
       };
     });
-    return instance.customizeColumnsProps.isTearsheetOpen
+    return instance.customizeColumnsProps?.isTearsheetOpen
       ? visibleColumns
       : [...sortableColumns];
   };

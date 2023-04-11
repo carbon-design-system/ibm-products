@@ -78,7 +78,7 @@ export let AddSelectRow = ({
   };
 
   const onSelectKeyDown = ({ key }) => {
-    if (key === 'Enter') {
+    if (key === 'Enter' || key === ' ') {
       if (multi) {
         handleMultiSelection();
       } else {

@@ -6,15 +6,7 @@
 //
 
 import React from 'react';
-import {
-  Button,
-  Checkbox,
-  Dropdown,
-  RadioButton,
-  StructuredListRow,
-  StructuredListWrapper,
-  StructuredListBody,
-} from '@carbon/react';
+import { Button, Checkbox, Dropdown, RadioButton } from '@carbon/react';
 import { ChevronRight, View } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -104,36 +96,23 @@ export let AddSelectList = ({
         [`${blockClass}-wrapper-multi`]: multi,
       })}
     >
-      <StructuredListWrapper selection className={`${blockClass}`}>
-        <StructuredListBody>
+      <div className={`${blockClass}`}>
+        <div className={`${blockClass}-body`}>
           {filteredItems.map((item) => (
-            <StructuredListRow
+            <div
               key={item.id}
               className={cx(`${blockClass}-row`, {
                 [`${blockClass}-row--selected`]: isSelected(item.id),
                 [`${blockClass}-row-meta--selected`]: isInMetaPanel(item.id),
               })}
-              onClick={(evt) => metaPanelHandler(item, evt)}
             >
-              <div
-                className={`${blockClass}-cell`}
-                onClick={() => {
-                  metaPanelHandler(item);
-                }}
-                onKeyDown={() => {
-                  metaPanelHandler(item);
-                }}
-                role="button"
-                tabIndex="0"
-              >
+              <div className={`${blockClass}-cell`}>
                 <div className={`${blockClass}-cell-wrapper`}>
                   {multi ? (
                     <>
                       <div className={`${blockClass}-checkbox`}>
                         {
-                          // hacky way to prevent checkbox from triggering the meta onclick handler
-                          // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-                          <div onClick={(event) => event.stopPropagation()}>
+                          <div>
                             <Checkbox
                               onChange={handleMultiSelection}
                               labelText={item.title}
@@ -171,10 +150,9 @@ export let AddSelectList = ({
                           id={`add-select-modifier-${item.id}`}
                           type="inline"
                           items={modifiers.options}
-                          light
                           label={modifiers.label}
                           disabled={!isSelected(item.id)}
-                          className={`${blockClass}-dropdown ${blockClass}-hidden-hover`}
+                          className={`${blockClass}-dropdown`}
                           initialSelectedItem={item[modifiers.id]}
                           onChange={({ selectedItem }) =>
                             modifierHandler(item.id, selectedItem)
@@ -209,25 +187,24 @@ export let AddSelectList = ({
                     />
                   )}
                   {item.meta && (
-                    <div className={`${blockClass}-hidden-hover`}>
-                      <Button
-                        className={`${blockClass}-view-meta`}
-                        renderIcon={(props) => <View size={16} {...props} />}
-                        iconDescription={metaIconDescription}
-                        tooltipPosition="left"
-                        tooltipAlignment="center"
-                        hasIconOnly
-                        kind="ghost"
-                        size="sm"
-                      />
-                    </div>
+                    <Button
+                      className={`${blockClass}-view-meta`}
+                      renderIcon={(props) => <View size={16} {...props} />}
+                      iconDescription={metaIconDescription}
+                      tooltipPosition="left"
+                      tooltipAlignment="center"
+                      hasIconOnly
+                      kind="ghost"
+                      size="sm"
+                      onClick={() => metaPanelHandler(item)}
+                    />
                   )}
                 </div>
               </div>
-            </StructuredListRow>
+            </div>
           ))}
-        </StructuredListBody>
-      </StructuredListWrapper>
+        </div>
+      </div>
     </div>
   );
 };

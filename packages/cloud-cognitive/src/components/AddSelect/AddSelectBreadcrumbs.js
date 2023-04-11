@@ -15,7 +15,8 @@ const blockClass = `${pkg.prefix}--add-select__breadcrumbs`;
 const componentName = 'AddSelectBreadcrumbs';
 
 export let AddSelectBreadcrumbs = ({ multi, onClick, path }) => {
-  const clickHandler = (idx) => {
+  const clickHandler = (e, idx) => {
+    e.preventDefault();
     onClick(idx);
   };
 
@@ -31,7 +32,8 @@ export let AddSelectBreadcrumbs = ({ multi, onClick, path }) => {
           <BreadcrumbItem
             key={entry.id}
             isCurrentPage={isCurrentPage}
-            onClick={() => clickHandler(idx)}
+            onClick={(e) => clickHandler(e, idx)}
+            href="#"
           >
             {entry.title}
           </BreadcrumbItem>

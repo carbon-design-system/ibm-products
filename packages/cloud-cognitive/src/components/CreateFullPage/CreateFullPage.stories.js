@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -103,7 +103,7 @@ const Template = ({ ...args }) => {
           disableSubmit={!textInput}
         >
           <Grid>
-            <Column lg={6}>
+            <Column xlg={5} lg={5} md={4} sm={4}>
               <TextInput
                 id="test-1"
                 invalidText="A valid value is required"
@@ -176,53 +176,61 @@ const Template = ({ ...args }) => {
           secondaryLabel="Optional"
         >
           <Grid>
-            <Column lg={{ span: 6, start: 1 }}>
-              <TextInput
-                id="test-2"
-                invalidText="A valid value is required"
-                labelText="Topic name (optional)"
-                placeholder="Enter topic name"
-              />
-            </Column>
-            <Column lg={{ span: 4, start: 1 }}>
-              <NumberInput
-                id="test-3"
-                invalidText="Number is not valid"
-                label="Label (optional)"
-                max={100}
-                min={0}
-                step={10}
-                value={0}
-                iconDescription="Choose a number"
-              />
-              <NumberInput
-                id="test-4"
-                invalidText="Number is not valid"
-                label="Label (optional)"
-                max={100}
-                min={0}
-                step={10}
-                value={0}
-                iconDescription="Choose a number"
-              />
-            </Column>
-            <Column lg={{ span: 6, start: 1 }}>
-              <TextInput
-                id="test-5"
-                invalidText="A valid value is required"
-                labelText="Minimum in-sync replicas (optional)"
-                placeholder="Enter topic name"
-              />
+            <Column xlg={5} lg={5} md={4} sm={4}>
+              <Grid>
+                <Column xlg={5} lg={5} md={4} sm={4}>
+                  <TextInput
+                    id="test-2"
+                    invalidText="A valid value is required"
+                    labelText="Topic name (optional)"
+                    placeholder="Enter topic name"
+                  />
+                </Column>
+
+                <Column span={3}>
+                  <NumberInput
+                    id="test-3"
+                    invalidText="Number is not valid"
+                    label="Label (optional)"
+                    max={100}
+                    min={0}
+                    step={10}
+                    value={0}
+                    iconDescription="Choose a number"
+                  />
+
+                  <NumberInput
+                    id="test-4"
+                    invalidText="Number is not valid"
+                    label="Label (optional)"
+                    max={100}
+                    min={0}
+                    step={10}
+                    value={0}
+                    iconDescription="Choose a number"
+                  />
+                </Column>
+
+                <Column xlg={5} lg={5} md={4} sm={4}>
+                  <TextInput
+                    id="test-5"
+                    invalidText="A valid value is required"
+                    labelText="Minimum in-sync replicas (optional)"
+                    placeholder="Enter topic name"
+                  />
+                </Column>
+              </Grid>
             </Column>
           </Grid>
         </CreateFullPageStep>
+
         <CreateFullPageStep
           title="Message retention"
           subtitle="This is how many copies of a topic will be made for high availability"
           description="The partitions of each topic can be replicated across a configurable number of brokers"
         >
           <Grid>
-            <Column lg={8}>
+            <Column span={100}>
               <RadioButtonGroup
                 defaultSelected="standard"
                 legend="Group Legend"
@@ -290,7 +298,7 @@ const TemplateWithSections = ({ ...args }) => {
           disableSubmit={!textInput}
         >
           <Grid>
-            <Column lg={8}>
+            <Column xlg={5} lg={5} md={4} sm={4}>
               <FormGroup
                 className={`${blockClass}__step-fieldset ${storyClass}__step-fieldset--label`}
                 legendText="Partition"
@@ -342,66 +350,95 @@ const TemplateWithSections = ({ ...args }) => {
               </FormGroup>
             </Column>
           </Grid>
+
           <span className={`${blockClass}__section-divider`} />
-          <h5 className={`${blockClass}__step-title`}>Core configuration</h5>
-          <h6 className={`${blockClass}__step-subtitle`}>
-            This is how long messages are retained before they are deleted.
-          </h6>
+
           <Grid>
-            <Column lg={8}>
+            <Column span={50}>
+              <h5 className={`${blockClass}__step-title`}>
+                Core configuration
+              </h5>
+
+              <h6 className={`${blockClass}__step-subtitle`}>
+                This is how long messages are retained before they are deleted.
+              </h6>
+            </Column>
+          </Grid>
+
+          <Grid>
+            <Column xlg={8} lg={8} md={4} sm={4}>
               <FormGroup
                 className={`${blockClass}__step-fieldset ${storyClass}__step-fieldset--label`}
                 legendText="Core configuration"
               >
-                <p
-                  className={`${blockClass}__step-description ${storyClass}__step-description`}
-                >
-                  If your messages are not read by a consumer within this time,
-                  they will be missed.
-                </p>
-                <TextInput
-                  id="test-7"
-                  invalidText="A valid value is required"
-                  labelText="Topic name (optional)"
-                  placeholder="Enter topic name"
-                />
-                <NumberInput
-                  id="test-8"
-                  invalidText="Number is not valid"
-                  label="Label (optional)"
-                  max={100}
-                  min={0}
-                  step={10}
-                  value={0}
-                  iconDescription="Choose a number"
-                />
-                <NumberInput
-                  id="test-9"
-                  invalidText="Number is not valid"
-                  label="Label (optional)"
-                  max={100}
-                  min={0}
-                  step={10}
-                  value={0}
-                  iconDescription="Choose a number"
-                />
-                <TextInput
-                  id="test-10"
-                  invalidText="A valid value is required"
-                  labelText="Minimum in-sync replicas (optional)"
-                  placeholder="Enter topic name"
-                />
+                <Grid>
+                  <Column span={50}>
+                    <p
+                      className={`${blockClass}__step-description ${storyClass}__step-description`}
+                    >
+                      If your messages are not read by a consumer within this
+                      time, they will be missed.
+                    </p>
+                  </Column>
+
+                  <Column xlg={5} lg={5} md={4} sm={4}>
+                    <Grid>
+                      <Column xlg={5} lg={5} md={4} sm={4}>
+                        <TextInput
+                          id="test-7"
+                          invalidText="A valid value is required"
+                          labelText="Topic name (optional)"
+                          placeholder="Enter topic name"
+                        />
+                      </Column>
+
+                      <Column span={3}>
+                        <NumberInput
+                          id="test-8"
+                          invalidText="Number is not valid"
+                          label="Label (optional)"
+                          max={100}
+                          min={0}
+                          step={10}
+                          value={0}
+                          iconDescription="Choose a number"
+                        />
+
+                        <NumberInput
+                          id="test-9"
+                          invalidText="Number is not valid"
+                          label="Label (optional)"
+                          max={100}
+                          min={0}
+                          step={10}
+                          value={0}
+                          iconDescription="Choose a number"
+                        />
+                      </Column>
+
+                      <Column xlg={5} lg={5} md={4} sm={4}>
+                        <TextInput
+                          id="test-10"
+                          invalidText="A valid value is required"
+                          labelText="Minimum in-sync replicas (optional)"
+                          placeholder="Enter topic name"
+                        />
+                      </Column>
+                    </Grid>
+                  </Column>
+                </Grid>
               </FormGroup>
             </Column>
           </Grid>
         </CreateFullPageStep>
+
         <CreateFullPageStep
           title="Message retention"
           subtitle="This is how many copies of a topic will be made for high availability"
           description="The partitions of each topic can be replicated across a configurable number of brokers."
         >
           <Grid>
-            <Column lg={8}>
+            <Column span={100}>
               <RadioButtonGroup
                 defaultSelected="standard"
                 legend="Group Legend"

@@ -35,14 +35,38 @@ const useSortableColumns = (hooks) => {
         if (col.isSorted) {
           switch (col.isSortedDesc) {
             case false:
-              return <ArrowUp size={16} {...props} />;
+              return (
+                <ArrowUp
+                  size={16}
+                  {...props}
+                  className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
+                />
+              );
             case true:
-              return <ArrowDown size={16} {...props} />;
+              return (
+                <ArrowDown
+                  size={16}
+                  {...props}
+                  className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
+                />
+              );
             default:
-              return <ArrowsVertical size={16} {...props} />;
+              return (
+                <ArrowsVertical
+                  size={16}
+                  {...props}
+                  className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
+                />
+              );
           }
         }
-        return <ArrowsVertical size={16} {...props} />;
+        return (
+          <ArrowsVertical
+            size={16}
+            {...props}
+            className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
+          />
+        );
       };
       const Header = (headerProp) =>
         column.disableSortBy === true ? (

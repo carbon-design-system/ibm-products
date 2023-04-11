@@ -1008,17 +1008,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-ui-01, #f4f4f4);
   transition: transform 150ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
-.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button {
-  min-width: 2rem;
-}
-.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button.c4p--side-panel__action-toolbar-icon-only-button {
-  padding: 0;
-  color: var(--cds-text-01, #161616);
-}
-.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button.c4p--side-panel__action-toolbar-icon-only-button svg {
-  margin-left: var(--cds-spacing-03, 0.5rem);
-}
-.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button.c4p--side-panel__action-toolbar-leading-button {
+.c4p--side-panel__container .c4p--side-panel__action-toolbar-leading-button {
   margin-right: var(--cds-spacing-03, 0.5rem);
 }
 .c4p--side-panel__container .bx--btn.c4p--side-panel__navigation-back-button {

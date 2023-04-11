@@ -1023,15 +1023,18 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   padding: 0;
   color: var(--cds-text-01, #161616);
 }
-.c4p--side-panel__container .bx--btn.c4p--side-panel__close-button {
+.c4p--side-panel__container .c4p--side-panel__close-button {
   position: absolute;
   z-index: 5;
   top: var(--cds-spacing-03, 0.5rem);
-  right: var(--cds-spacing-05, 1rem);
+  right: var(--cds-spacing-03, 0.5rem);
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: var(--cds-ui-01, #f4f4f4);
+}
+.c4p--side-panel__container .c4p--side-panel__close-button--without-title {
+  right: var(--cds-spacing-05, 1rem);
 }
 .c4p--side-panel__container .bx--btn.c4p--side-panel__close-button .bx--btn__icon {
   margin: 0;

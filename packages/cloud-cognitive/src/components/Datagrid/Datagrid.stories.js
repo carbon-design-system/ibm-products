@@ -110,12 +110,96 @@ const defaultHeader = [
   },
 ];
 
+const getTempColumns = (rows) => {
+  return [
+    {
+      Header: 'Row Index',
+      accessor: (row, i) => i,
+      sticky: 'left',
+      id: 'rowIndex', // id is required when accessor is a function.
+      width: getAutoSizedColumnWidth(rows, 'rowIndex', 'Row Index'),
+    },
+    {
+      Header: 'First Name',
+      accessor: 'firstName',
+    },
+    {
+      Header: 'Last Name',
+      accessor: 'lastName',
+      width: getAutoSizedColumnWidth(rows, 'lastName', 'Last name'),
+    },
+    {
+      Header: 'Age',
+      accessor: 'age',
+      width: getAutoSizedColumnWidth(rows, 'age', 'Age'),
+    },
+    {
+      Header: 'Visits',
+      accessor: 'visits',
+      width: getAutoSizedColumnWidth(rows, 'visits', 'Visits'),
+    },
+    {
+      Header: 'Status',
+      accessor: 'status',
+    },
+    {
+      Header: 'Joined',
+      accessor: 'joined',
+      Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
+    },
+    {
+      Header: 'Someone 1',
+      accessor: 'someone1',
+    },
+    {
+      Header: 'Someone 2',
+      accessor: 'someone2',
+    },
+    {
+      Header: 'Someone 3',
+      accessor: 'someone3',
+    },
+    {
+      Header: 'Someone 4',
+      accessor: 'someone4',
+    },
+    {
+      Header: 'Someone 5',
+      accessor: 'someone5',
+    },
+    {
+      Header: 'Someone 6',
+      accessor: 'someone6',
+    },
+    {
+      Header: 'Someone 7',
+      accessor: 'someone7',
+    },
+  ]
+}
+
 const { TableBatchAction, TableBatchActions } = DataTable;
 
+const getAutoSizedColumnWidth = (rows, accessor, headerText) => {
+  const maxWidth = 400
+  const minWidth = 58;
+  const magicSpacing = 10
+  const cellLength = Math.max(
+    ...rows.map(row => (`${row[accessor]}` || '').length),
+    headerText.length,
+  )
+  if (cellLength <= 3) {
+    return minWidth;
+  }
+  return Math.min(maxWidth, cellLength * magicSpacing + 16)
+}
+
 export const BasicUsage = () => {
+  const [data] = useState(makeData(10));
+  const rows = React.useMemo(() => data, [data]);
   const columns = React.useMemo(
     () => [
-      ...defaultHeader,
+      ...getTempColumns(rows),
       {
         Header: 'Someone 11',
         accessor: 'someone11',
@@ -124,13 +208,14 @@ export const BasicUsage = () => {
     ],
     []
   );
-  const [data] = useState(makeData(10));
-  const rows = React.useMemo(() => data, [data]);
 
   const datagridState = useDatagrid({
     columns,
     data: rows,
     multiLineWrapAll: true, // If `multiLineWrap` is required for all columns in data grid
+    // defaultColumn: {
+    //   width: 'auto'
+    // }
   });
 
   return <Datagrid datagridState={datagridState} />;

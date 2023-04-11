@@ -1031,7 +1031,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--cds-ui-01, #f4f4f4);
 }
 .c4p--side-panel__container .bx--btn.c4p--side-panel__close-button .bx--btn__icon {
   margin: 0;

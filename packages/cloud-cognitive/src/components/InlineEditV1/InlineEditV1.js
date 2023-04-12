@@ -17,7 +17,7 @@ import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 /* TODO: @use(s) of carbon components and other package components. */
-import { Button, IconButton, usePrefix } from '@carbon/react';
+import { IconButton, usePrefix } from '@carbon/react';
 import {
   Close,
   Edit,

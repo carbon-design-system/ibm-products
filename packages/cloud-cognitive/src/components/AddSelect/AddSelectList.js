@@ -11,9 +11,6 @@ import {
   Checkbox,
   Dropdown,
   RadioButton,
-  StructuredListRow,
-  StructuredListWrapper,
-  StructuredListBody,
 } from 'carbon-components-react';
 import { ChevronRight16, View16 } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
@@ -104,17 +101,15 @@ export let AddSelectList = ({
         [`${blockClass}-wrapper-multi`]: multi,
       })}
     >
-      <StructuredListWrapper selection className={`${blockClass}`}>
-        <StructuredListBody>
+      <div className={`${blockClass}`}>
+        <div className={`${blockClass}-body`}>
           {filteredItems.map((item) => (
-            <StructuredListRow
+            <div
               key={item.id}
               className={cx(`${blockClass}-row`, {
                 [`${blockClass}-row--selected`]: isSelected(item.id),
                 [`${blockClass}-row-meta--selected`]: isInMetaPanel(item.id),
               })}
-              onClick={(evt) => metaPanelHandler(item, evt)}
-              label
             >
               <div className={`${blockClass}-cell`}>
                 <div className={`${blockClass}-cell-wrapper`}>
@@ -122,9 +117,7 @@ export let AddSelectList = ({
                     <>
                       <div className={`${blockClass}-checkbox`}>
                         {
-                          // hacky way to prevent checkbox from triggering the meta onclick handler
-                          // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
-                          <div onClick={(event) => event.stopPropagation()}>
+                          <div>
                             <Checkbox
                               onChange={(value, id) =>
                                 handleMultiSelection(value, id)
@@ -164,10 +157,9 @@ export let AddSelectList = ({
                           id={`add-select-modifier-${item.id}`}
                           type="inline"
                           items={modifiers.options}
-                          light
                           label={modifiers.label}
                           disabled={!isSelected(item.id)}
-                          className={`${blockClass}-dropdown ${blockClass}-hidden-hover`}
+                          className={`${blockClass}-dropdown`}
                           initialSelectedItem={item[modifiers.id]}
                           onChange={({ selectedItem }) =>
                             modifierHandler(item.id, selectedItem)
@@ -200,25 +192,24 @@ export let AddSelectList = ({
                     />
                   )}
                   {item.meta && (
-                    <div className={`${blockClass}-hidden-hover`}>
-                      <Button
-                        className={`${blockClass}-view-meta`}
-                        renderIcon={View16}
-                        iconDescription={metaIconDescription}
-                        tooltipPosition="left"
-                        tooltipAlignment="center"
-                        hasIconOnly
-                        kind="ghost"
-                        size="sm"
-                      />
-                    </div>
+                    <Button
+                      className={`${blockClass}-view-meta`}
+                      renderIcon={View16}
+                      iconDescription={metaIconDescription}
+                      tooltipPosition="left"
+                      tooltipAlignment="center"
+                      hasIconOnly
+                      kind="ghost"
+                      size="sm"
+                      onClick={() => metaPanelHandler(item)}
+                    />
                   )}
                 </div>
               </div>
-            </StructuredListRow>
+            </div>
           ))}
-        </StructuredListBody>
-      </StructuredListWrapper>
+        </div>
+      </div>
     </div>
   );
 };

@@ -332,6 +332,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     padding: 0;
     color: $text-primary;
   }
+
   .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__close-button {
     position: absolute;
     z-index: 5;
@@ -340,8 +341,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $layer-01;
   }
+
   .#{c4p-settings.$carbon-prefix}--btn.#{$block-class}__close-button
     .#{c4p-settings.$carbon-prefix}--btn__icon {
     margin: 0;

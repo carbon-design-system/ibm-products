@@ -1031,7 +1031,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--cds-ui-01, #f4f4f4);
 }
 .c4p--side-panel__container .bx--btn.c4p--side-panel__close-button .bx--btn__icon {
   margin: 0;
@@ -2396,6 +2395,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit-v2__text-input.bx--text-input:focus,
 .c4p--inline-edit-v2__text-input.bx--text-input:active {
   outline: none;
+}
+
+.c4p--inline-edit-v2__text-input + div {
+  display: flex;
+  overflow: hidden;
 }
 
 @keyframes fade-in {

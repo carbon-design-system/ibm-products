@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -43,16 +43,12 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
 .#{$block-class} .#{$block-class}__step-subtitle {
   @include type.type-style('productive-heading-01');
 
-  max-width: 50%;
-  padding-left: $spacing-08;
   margin-bottom: $spacing-03;
 }
 
 .#{$block-class} .#{$block-class}__step-description {
   @include type.type-style('body-long-01');
 
-  max-width: 50%;
-  padding-left: $spacing-08;
   margin-bottom: $spacing-06;
 }
 
@@ -106,9 +102,10 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
 .#{$block-class} .#{$block-class}__step {
   position: relative;
   padding-bottom: $spacing-07;
-  .#{c4p-settings.$carbon-prefix}--css-grid {
-    margin-left: 0;
-  }
+}
+
+.#{$block-class}__step .#{c4p-settings.$carbon-prefix}--css-grid {
+  margin-left: 0;
 }
 
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--side-nav--ux {
@@ -144,8 +141,6 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
 .#{$block-class} .#{$block-class}__step-title {
   @include type.type-style('productive-heading-04');
 
-  max-width: 50%;
-  padding-left: $spacing-08;
   margin-bottom: $spacing-05;
 }
 

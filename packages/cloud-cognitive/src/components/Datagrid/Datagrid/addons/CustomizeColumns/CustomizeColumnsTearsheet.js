@@ -37,9 +37,6 @@ const CustomizeColumnsTearsheet = ({
   const [searchText, setSearchText] = useState('');
   const [columnObjects, setColumnObjects] = useState(
     columnDefinitions
-      // hide the columns without Header, e.g the sticky actions, spacer
-      .filter((colDef) => !!colDef.Header.props && !!colDef.Header.props.title)
-      .filter((colDef) => !colDef.isAction)
       // only sort the hidden column to the end when modal reopen
       .sort((defA, defB) => {
         const isVisibleA = isColumnVisible(defA);

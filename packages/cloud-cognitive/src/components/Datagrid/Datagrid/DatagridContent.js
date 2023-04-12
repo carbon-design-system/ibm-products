@@ -91,9 +91,9 @@ export const DatagridContent = ({ datagridState }) => {
                 handleGridKeyPress({
                   event,
                   dispatch,
-                  inlineEditState,
                   instance: datagridState,
                   keysPressedList,
+                  state: inlineEditState,
                   usingMac,
                 })
             : null

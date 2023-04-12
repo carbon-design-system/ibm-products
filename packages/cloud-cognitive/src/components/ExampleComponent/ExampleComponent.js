@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -15,7 +15,7 @@ import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 import { Button, ButtonSet } from '@carbon/react';
-
+import useExample from './useExample';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--example-component`;
 const componentName = 'ExampleComponent';
@@ -26,6 +26,7 @@ const componentName = 'ExampleComponent';
 const defaults = {
   primaryKind: 'primary',
   secondaryKind: 'secondary',
+  secondaryIcon: null,
   size: 'lg',
 };
 
@@ -41,12 +42,14 @@ export let ExampleComponent = React.forwardRef(
       boxedBorder,
       className,
       disabled,
+      usesExampleHook,
       onPrimaryClick,
       onSecondaryClick,
       primaryButtonLabel,
       primaryKind = defaults.primaryKind,
       secondaryButtonLabel,
       secondaryKind = defaults.secondaryKind,
+      secondaryIcon = defaults.secondaryIcon,
       size = defaults.size,
       style,
 
@@ -55,6 +58,10 @@ export let ExampleComponent = React.forwardRef(
     },
     ref
   ) => {
+    const [thePrimaryButtonLabel, setThePrimaryButtonLabel] =
+      useState(primaryButtonLabel);
+    const [exampleUse] = useExample(usesExampleHook);
+
     const modeClass = boxedBorder
       ? `${blockClass}--boxed-set`
       : `${blockClass}--shadow-set`;
@@ -70,6 +77,26 @@ export let ExampleComponent = React.forwardRef(
         onSecondaryClick(e);
       }
     };
+
+    const theSecondaryIcon = useRef(
+      secondaryIcon &&
+        pkg.checkReportFeatureEnabled('ExampleComponent.secondaryIcon')
+        ? secondaryIcon
+        : null
+    );
+
+    useEffect(() => {
+      if (
+        usesExampleHook !== undefined &&
+        pkg.checkReportFeatureEnabled('ExampleComponent.useExample')
+      ) {
+        setThePrimaryButtonLabel(
+          `${primaryButtonLabel} ${exampleUse.toFixed(1)}s`
+        );
+      } else {
+        setThePrimaryButtonLabel(primaryButtonLabel);
+      }
+    }, [primaryButtonLabel, usesExampleHook, exampleUse]);
 
     return (
       <ButtonSet
@@ -97,6 +124,7 @@ export let ExampleComponent = React.forwardRef(
           className={`${blockClass}__secondary-button`}
           kind={secondaryKind}
           onClick={handleSecondaryClick}
+          renderIcon={theSecondaryIcon.current}
           {...{ disabled, size }}
         >
           {secondaryButtonLabel}
@@ -107,7 +135,7 @@ export let ExampleComponent = React.forwardRef(
           onClick={handlePrimaryClick}
           {...{ disabled, size }}
         >
-          {primaryButtonLabel}
+          {thePrimaryButtonLabel}
         </Button>
       </ButtonSet>
     );
@@ -171,6 +199,11 @@ ExampleComponent.propTypes = {
   secondaryButtonLabel: PropTypes.string.isRequired,
 
   /**
+   * The icon to use for the secondary button.
+   */
+  secondaryIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
    * The kind of button for the secondary button ('secondary' or 'tertiary').
    */
   secondaryKind: PropTypes.oneOf(['secondary', 'tertiary']),
@@ -184,4 +217,9 @@ ExampleComponent.propTypes = {
    * Optional style settings for the containing node.
    */
   style: PropTypes.object,
+
+  /**
+   * Hook example timeout (in seconds) or undefined
+   */
+  usesExampleHook: PropTypes.number,
 };

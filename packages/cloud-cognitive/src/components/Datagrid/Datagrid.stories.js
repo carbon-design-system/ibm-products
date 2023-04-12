@@ -34,6 +34,7 @@ import styles from './_storybook-styles.scss';
 import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
+import { pkg } from '../../settings';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -218,6 +219,10 @@ export const InfiniteScroll = () => {
     fetchData();
   }, []);
 
+  pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
+  pkg.feature['Datagrid.useInfiniteScroll'] = true;
+  pkg._silenceWarnings(true);
+
   const datagridState = useDatagrid(
     {
       columns,
@@ -236,6 +241,9 @@ export const InfiniteScroll = () => {
       <Datagrid datagridState={{ ...datagridState }} />
     </Wrapper>
   );
+};
+InfiniteScroll.args = {
+  featureFlags: ['Datagrid.useInfiniteScroll'],
 };
 
 export const TenThousandEntries = () => {

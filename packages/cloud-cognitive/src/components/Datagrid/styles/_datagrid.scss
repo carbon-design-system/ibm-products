@@ -628,3 +628,7 @@
     padding: 0 $spacing-03;
   }
 }
+
+.#{$block-class} .#{c4p-settings.$pkg-prefix}--datagrid__head-wrap {
+  background-color: $layer-accent;
+}

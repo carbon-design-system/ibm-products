@@ -3712,23 +3712,17 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   border-bottom: 1px solid var(--cds-layer-selected-01, #e0e0e0);
   background-color: var(--cds-layer-selected-01, #e0e0e0);
 }
-.c4p--add-select__selections-checkbox {
+.c4p--add-select__selections-form-control {
   display: flex;
   align-items: center;
 }
-.c4p--add-select__selections-checkbox-label-wrapper {
+.c4p--add-select__selections-form-control-label-wrapper {
   display: flex;
   margin-left: 1rem;
 }
-.c4p--add-select__selections-checkbox-label-text {
+.c4p--add-select__selections-form-control-label-text {
   display: flex;
   flex-direction: column;
-}
-.c4p--add-select__selections-checkbox-wrapper.cds--form-item {
-  flex: 0;
-}
-.c4p--add-select__selections-checkbox-wrapper .cds--checkbox-label-text {
-  display: none;
 }
 .c4p--add-select__selections-cell-avatar {
   margin-right: 0.5rem;
@@ -3835,7 +3829,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   flex-grow: 1;
   overflow-x: auto;
 }
-.c4p--add-select__columns .c4p--add-select__selections-checkbox-label-wrapper {
+.c4p--add-select__columns .c4p--add-select__selections-form-control-label-wrapper {
   margin-left: 0.5rem;
 }
 .c4p--add-select__columns .c4p--add-select__selections-row.cds--structured-list-row {
@@ -4034,10 +4028,6 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--add-select .cds--accordion__item .c4p--add-select__sidebar-accordion-title button {
   opacity: 0;
-}
-
-.c4p--add-select .cds--checkbox-label-text {
-  padding-left: 0.5rem;
 }
 
 .c4p--add-select__multi .c4p--empty-state {

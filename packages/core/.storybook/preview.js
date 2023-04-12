@@ -12,7 +12,14 @@ import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs';
 import LinkTo from '@storybook/addon-links/react';
 import { themes } from '@storybook/theming';
 
-import { Column, Row } from '@carbon/react';
+import {
+  Column,
+  Row,
+  ActionableNotification,
+  UnorderedList,
+  ListItem,
+  NotificationActionButton,
+} from '@carbon/react';
 import React, { useEffect } from 'react';
 
 import { pkg } from '../../cloud-cognitive/src/settings';
@@ -37,12 +44,38 @@ const Style = ({ children, styles }) => {
 };
 
 const decorators = [
-  (storyFn, { parameters: { styles } }) => {
+  (storyFn, { args, parameters: { styles } }) => {
     const story = storyFn();
+
+    JSON.stringify(args.featureFlags);
 
     return (
       <div className="preview-position-fix">
         <Style styles={index}>
+          {args.featureFlags ? (
+            <ActionableNotification
+              className="preview__notification--feature-flag"
+              kind="warning"
+              inline
+              lowContrast
+              actionButtonLabel="Learn more"
+              statusIconDescription="describes the close button"
+              title="This story uses the following feature flags to enable or disable some functionality."
+              onActionButtonClick={() => {
+                window.open(
+                  'https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/cloud-cognitive#enabling-canary-components-and-flagged-features'
+                );
+              }}
+            >
+              <UnorderedList>
+                {Object.keys(args.featureFlags).map((flagKey) => (
+                  <ListItem key={flagKey}>
+                    {flagKey}: {`${args.featureFlags[flagKey]}`}
+                  </ListItem>
+                ))}
+              </UnorderedList>
+            </ActionableNotification>
+          ) : null}
           {styles ? <Style styles={styles}>{story}</Style> : story}
         </Style>
       </div>
@@ -129,4 +162,12 @@ const parameters = {
   },
 };
 
-export { decorators, parameters, Style };
+const argTypes = {
+  featureFlags: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export { argTypes, decorators, parameters, Style };

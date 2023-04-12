@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -89,7 +89,7 @@ export let CreateTearsheetStep = forwardRef(
     }, [stepsContext, stepNumber, disableSubmit, onNext]);
 
     return stepsContext ? (
-      <div
+      <Grid
         {
           // Pass through any other property values as HTML attributes.
           ...rest
@@ -102,28 +102,31 @@ export let CreateTearsheetStep = forwardRef(
         })}
         ref={ref}
       >
-        <Grid narrow>
-          <Column xlg={12} lg={12} md={8} sm={8}>
-            <h4 className={`${blockClass}--title`}>{title}</h4>
-            {subtitle && (
-              <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
-            )}
-            {description && (
-              <p className={`${blockClass}--description`}>{description}</p>
-            )}
-          </Column>
-        </Grid>
-        {hasFieldset ? (
-          <FormGroup
-            legendText={fieldsetLegendText}
-            className={`${blockClass}--fieldset`}
-          >
-            {children}
-          </FormGroup>
-        ) : (
-          children
-        )}
-      </div>
+        <Column xlg={12} lg={12} md={8} sm={4}>
+          <h4 className={`${blockClass}--title`}>{title}</h4>
+
+          {subtitle && (
+            <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
+          )}
+
+          {description && (
+            <p className={`${blockClass}--description`}>{description}</p>
+          )}
+        </Column>
+
+        <Column span={100}>
+          {hasFieldset ? (
+            <FormGroup
+              legendText={fieldsetLegendText}
+              className={`${blockClass}--fieldset`}
+            >
+              {children}
+            </FormGroup>
+          ) : (
+            children
+          )}
+        </Column>
+      </Grid>
     ) : (
       pconsole.warn(
         `You have tried using a ${componentName} component outside of a CreateTearsheet. This is not allowed. ${componentName}s should always be children of the CreateTearsheet`

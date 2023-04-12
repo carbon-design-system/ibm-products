@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useEffect, forwardRef, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -18,6 +19,7 @@ import {
 } from '@carbon/react/icons';
 import { pkg, carbon } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import { spacing07, spacing10 } from '@carbon/layout';
 
 const componentName = 'InlineEditV2';
 const blockClass = `${pkg.prefix}--inline-edit-v2`;
@@ -168,44 +170,60 @@ export let InlineEditV2 = forwardRef(
                   className={`${blockClass}__warning-icon`}
                 />
               )}
-              <Button
-                hasIconOnly
-                renderIcon={() => <Close size={24} />}
-                size="sm"
-                iconDescription={cancelLabel}
-                onClick={onCancelHandler}
-                kind="ghost"
-                tabIndex={0}
-                key="cancel"
-                className={`${blockClass}__btn ${blockClass}__btn-cancel`}
-              />
-              <Button
-                hasIconOnly
-                renderIcon={() => <Checkmark size={24} />}
-                size="sm"
-                iconDescription={saveLabel}
-                onClick={onSaveHandler}
-                kind="ghost"
-                tabIndex={0}
-                key="save"
-                className={`${blockClass}__btn ${blockClass}__btn-save`}
-                disabled={!canSave}
-              />
+              <AnimatePresence>
+                <motion.div
+                  initial={{ width: spacing07 }}
+                  animate={{ width: spacing10 }}
+                  exit={{ width: spacing07 }}
+                >
+                  <Button
+                    hasIconOnly
+                    renderIcon={() => <Close size={16} />}
+                    size="sm"
+                    iconDescription={cancelLabel}
+                    onClick={onCancelHandler}
+                    kind="ghost"
+                    tabIndex={0}
+                    key="cancel"
+                    className={`${blockClass}__btn ${blockClass}__btn-cancel`}
+                  />
+                  <Button
+                    hasIconOnly
+                    renderIcon={() => <Checkmark size={16} />}
+                    size="sm"
+                    iconDescription={saveLabel}
+                    onClick={onSaveHandler}
+                    kind="ghost"
+                    tabIndex={0}
+                    key="save"
+                    className={`${blockClass}__btn ${blockClass}__btn-save`}
+                    disabled={!canSave}
+                  />
+                </motion.div>
+              </AnimatePresence>
             </>
           ) : (
-            <Button
-              className={`${blockClass}__btn ${blockClass}__btn-edit`}
-              hasIconOnly
-              // renderIcon={readOnly ? EditOff24 : Edit24}
-              renderIcon={() => <Edit size={24} />}
-              size="sm"
-              // iconDescription={readOnly ? readOnlyLabel : editLabel}
-              iconDescription={editLabel}
-              onClick={onFocusHandler}
-              kind="ghost"
-              tabIndex={0}
-              key="edit"
-            />
+            <AnimatePresence>
+              <motion.div
+                initial={{ width: spacing10 }}
+                animate={{ width: spacing07 }}
+                exit={{ width: spacing10 }}
+              >
+                <Button
+                  className={`${blockClass}__btn ${blockClass}__btn-edit`}
+                  hasIconOnly
+                  // renderIcon={readOnly ? EditOff24 : Edit24}
+                  renderIcon={() => <Edit size={16} />}
+                  size="sm"
+                  // iconDescription={readOnly ? readOnlyLabel : editLabel}
+                  iconDescription={editLabel}
+                  onClick={onFocusHandler}
+                  kind="ghost"
+                  tabIndex={0}
+                  key="edit"
+                />
+              </motion.div>
+            </AnimatePresence>
           )}
         </div>
         {focused && invalid && (

@@ -34,12 +34,6 @@
 
 @mixin input-button-defaults($block-class) {
   display: inline-flex;
-  height: 100%;
-  min-height: initial;
-  max-height: var(--#{$block-class}--size);
-  align-items: center;
-  justify-content: center;
-
   border: 2px solid transparent;
 }
 
@@ -258,7 +252,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
   &.#{$block-class}--editing
     .#{$block-class}__toolbar--animation
     .#{$block-class}__save {
-    overflow: visible;
+    // clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+
     width: var(--#{$block-class}--edit-size);
     transition: all $duration-moderate-02 motion(standard, productive);
     transition-property: margin, padding;
@@ -267,41 +262,12 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
   &.#{$block-class}--editing
     .#{$block-class}__toolbar--animation:not(.#{$block-class}__toolbar--saveable)
     .#{$block-class}__save {
-    overflow: hidden;
     width: 0;
     padding: 0;
     border-right: 0;
     border-left: 0;
-  }
 
-  &.#{$block-class}--editing
-    .#{$block-class}__toolbar--animation
-    .#{$block-class}__save {
-    margin-right: 0;
-    transition: all $duration-moderate-02 motion(standard, productive);
-    transition-property: margin, padding;
-
-    svg {
-      transition: width $duration-moderate-02 motion(standard, productive);
-      @media (prefers-reduced-motion: reduce) {
-        transition: none;
-      }
-    }
-  }
-
-  &.#{$block-class}--editing
-    .#{$block-class}__toolbar--animation:not(.#{$block-class}__toolbar--saveable)
-    .#{$block-class}__save {
-    padding-right: 0;
-    padding-left: 0;
-    border-right: 0;
-    border-left: 0;
-    margin-right: calc(-1 * var(--#{$block-class}--size));
-
-    svg {
-      overflow: hidden;
-      width: 0;
-    }
+    // clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
   }
 
   &.#{$block-class}.#{$block-class} .#{$block-class}__edit {

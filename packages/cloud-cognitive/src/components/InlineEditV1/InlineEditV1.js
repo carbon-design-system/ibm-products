@@ -318,25 +318,27 @@ export let InlineEditV1 = React.forwardRef(
             )}
             {editing ? (
               <>
-                <Button
+                <IconButton
                   className={`${blockClass}__cancel`}
                   kind="ghost"
-                  hasIconOnly
-                  iconDescription={cancelDescription}
+                  label={cancelDescription}
                   onClick={handleCancel}
-                  renderIcon={(props) => <Close size={16} {...props} />}
+                  size={size}
                   {...tipPositions.cancel}
-                />
-                <Button
+                >
+                  <Close size={16} />
+                </IconButton>
+                <IconButton
                   className={`${blockClass}__save`}
                   kind="ghost"
-                  hasIconOnly
-                  iconDescription={saveDescription}
+                  label={saveDescription}
                   onClick={handleSave}
-                  renderIcon={(props) => <Checkmark size={16} {...props} />}
                   disabled={value === internalValue}
+                  size={size}
                   {...tipPositions.save}
-                />
+                >
+                  <Checkmark size={16} />
+                </IconButton>
               </>
             ) : (
               <IconButton
@@ -347,6 +349,7 @@ export let InlineEditV1 = React.forwardRef(
                 label={editDescription}
                 onClick={handleEdit}
                 disabled={disabled}
+                size={size}
                 {...tipPositions.edit}
               >
                 {disabled ? <EditOff size={16} /> : <Edit size={16} />}

@@ -135,6 +135,8 @@ export let InlineEditV2 = forwardRef(
       escaping.current = false;
     };
 
+    console.log({ editLabel, saveLabel, cancelLabel });
+
     return (
       <div {...rest} ref={ref} {...getDevtoolsProps(componentName)}>
         <div
@@ -177,7 +179,6 @@ export let InlineEditV2 = forwardRef(
                   exit={{ width: spacing07 }}
                 >
                   <IconButton
-                    hasIconOnly
                     size="sm"
                     label={cancelLabel}
                     onClick={onCancelHandler}
@@ -189,7 +190,6 @@ export let InlineEditV2 = forwardRef(
                     <Close size={16} />
                   </IconButton>
                   <IconButton
-                    hasIconOnly
                     size="sm"
                     label={saveLabel}
                     onClick={onSaveHandler}
@@ -213,10 +213,7 @@ export let InlineEditV2 = forwardRef(
               >
                 <IconButton
                   className={`${blockClass}__btn ${blockClass}__btn-edit`}
-                  hasIconOnly
-                  // renderIcon={readOnly ? EditOff24 : Edit24}
                   size="sm"
-                  // iconDescription={readOnly ? readOnlyLabel : editLabel}
                   label={editLabel}
                   onClick={onFocusHandler}
                   kind="ghost"

@@ -7,7 +7,7 @@
 
 import React, { useState, useEffect, forwardRef, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from '@carbon/react';
+import { IconButton } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import {
@@ -176,29 +176,31 @@ export let InlineEditV2 = forwardRef(
                   animate={{ width: spacing10 }}
                   exit={{ width: spacing07 }}
                 >
-                  <Button
+                  <IconButton
                     hasIconOnly
-                    renderIcon={() => <Close size={16} />}
                     size="sm"
-                    iconDescription={cancelLabel}
+                    label={cancelLabel}
                     onClick={onCancelHandler}
                     kind="ghost"
                     tabIndex={0}
                     key="cancel"
                     className={`${blockClass}__btn ${blockClass}__btn-cancel`}
-                  />
-                  <Button
+                  >
+                    <Close size={16} />
+                  </IconButton>
+                  <IconButton
                     hasIconOnly
-                    renderIcon={() => <Checkmark size={16} />}
                     size="sm"
-                    iconDescription={saveLabel}
+                    label={saveLabel}
                     onClick={onSaveHandler}
                     kind="ghost"
                     tabIndex={0}
                     key="save"
                     className={`${blockClass}__btn ${blockClass}__btn-save`}
                     disabled={!canSave}
-                  />
+                  >
+                    <Checkmark size={16} />
+                  </IconButton>
                 </motion.div>
               </AnimatePresence>
             </>
@@ -209,19 +211,20 @@ export let InlineEditV2 = forwardRef(
                 animate={{ width: spacing07 }}
                 exit={{ width: spacing10 }}
               >
-                <Button
+                <IconButton
                   className={`${blockClass}__btn ${blockClass}__btn-edit`}
                   hasIconOnly
                   // renderIcon={readOnly ? EditOff24 : Edit24}
-                  renderIcon={() => <Edit size={16} />}
                   size="sm"
                   // iconDescription={readOnly ? readOnlyLabel : editLabel}
-                  iconDescription={editLabel}
+                  label={editLabel}
                   onClick={onFocusHandler}
                   kind="ghost"
                   tabIndex={0}
                   key="edit"
-                />
+                >
+                  <Edit size={16} />
+                </IconButton>
               </motion.div>
             </AnimatePresence>
           )}

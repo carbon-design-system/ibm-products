@@ -26,6 +26,7 @@ import {
   useSortableColumns,
   useStickyColumn,
   useFiltering,
+  getAutoSizedColumnWidth,
 } from '.';
 import { StatusIcon } from '../StatusIcon';
 import mdx from './Datagrid.mdx';
@@ -141,6 +142,7 @@ const getTempColumns = (rows) => {
     {
       Header: 'Status',
       accessor: 'status',
+      width: getAutoSizedColumnWidth(rows, 'status', 'Status'),
     },
     {
       Header: 'Joined',
@@ -175,24 +177,10 @@ const getTempColumns = (rows) => {
       Header: 'Someone 7',
       accessor: 'someone7',
     },
-  ]
-}
+  ];
+};
 
 const { TableBatchAction, TableBatchActions } = DataTable;
-
-const getAutoSizedColumnWidth = (rows, accessor, headerText) => {
-  const maxWidth = 400
-  const minWidth = 58;
-  const magicSpacing = 10
-  const cellLength = Math.max(
-    ...rows.map(row => (`${row[accessor]}` || '').length),
-    headerText.length,
-  )
-  if (cellLength <= 3) {
-    return minWidth;
-  }
-  return Math.min(maxWidth, cellLength * magicSpacing + 16)
-}
 
 export const BasicUsage = () => {
   const [data] = useState(makeData(10));

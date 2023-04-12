@@ -252,8 +252,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
   &.#{$block-class}--editing
     .#{$block-class}__toolbar--animation
     .#{$block-class}__save {
-    // clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-
     width: var(--#{$block-class}--edit-size);
     transition: all $duration-moderate-02 motion(standard, productive);
     transition-property: margin, padding;
@@ -266,8 +264,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
     padding: 0;
     border-right: 0;
     border-left: 0;
-
-    // clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
   }
 
   &.#{$block-class}.#{$block-class} .#{$block-class}__edit {

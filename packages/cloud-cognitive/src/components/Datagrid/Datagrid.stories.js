@@ -47,71 +47,7 @@ export default {
   },
 };
 
-const defaultHeader = [
-  {
-    Header: 'Row Index',
-    accessor: (row, i) => i,
-    sticky: 'left',
-    id: 'rowIndex', // id is required when accessor is a function.
-  },
-  {
-    Header: 'First Name',
-    accessor: 'firstName',
-  },
-  {
-    Header: 'Last Name',
-    accessor: 'lastName',
-  },
-  {
-    Header: 'Age',
-    accessor: 'age',
-    width: 50,
-  },
-  {
-    Header: 'Visits',
-    accessor: 'visits',
-    width: 60,
-  },
-  {
-    Header: 'Status',
-    accessor: 'status',
-  },
-  {
-    Header: 'Joined',
-    accessor: 'joined',
-    Cell: ({ cell: { value } }) => <span>{value.toLocaleDateString()}</span>,
-  },
-  {
-    Header: 'Someone 1',
-    accessor: 'someone1',
-  },
-  {
-    Header: 'Someone 2',
-    accessor: 'someone2',
-  },
-  {
-    Header: 'Someone 3',
-    accessor: 'someone3',
-  },
-  {
-    Header: 'Someone 4',
-    accessor: 'someone4',
-  },
-  {
-    Header: 'Someone 5',
-    accessor: 'someone5',
-  },
-  {
-    Header: 'Someone 6',
-    accessor: 'someone6',
-  },
-  {
-    Header: 'Someone 7',
-    accessor: 'someone7',
-  },
-];
-
-const getTempColumns = (rows) => {
+const getColumns = (rows) => {
   return [
     {
       Header: 'Row Index',
@@ -187,7 +123,7 @@ export const BasicUsage = () => {
   const rows = React.useMemo(() => data, [data]);
   const columns = React.useMemo(
     () => [
-      ...getTempColumns(rows),
+      ...getColumns(rows),
       {
         Header: 'Someone 11',
         accessor: 'someone11',
@@ -201,17 +137,14 @@ export const BasicUsage = () => {
     columns,
     data: rows,
     multiLineWrapAll: true, // If `multiLineWrap` is required for all columns in data grid
-    // defaultColumn: {
-    //   width: 'auto'
-    // }
   });
 
   return <Datagrid datagridState={datagridState} />;
 };
 
 export const EmptyState = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(0));
+  const columns = React.useMemo(() => getColumns(data), []);
   const emptyStateTitle = 'Empty state title';
   const emptyStateDescription = 'Description explaining why the table is empty';
   const emptyStateSize = 'lg';
@@ -245,8 +178,8 @@ export const EmptyState = () => {
 };
 
 export const InitialLoad = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
   const [data, setData] = useState(makeData(0));
+  const columns = React.useMemo(() => getColumns(data), []);
 
   const [isFetching, setIsFetching] = useState(false);
   const fetchData = () =>
@@ -276,8 +209,8 @@ export const InitialLoad = () => {
 };
 
 export const InfiniteScroll = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
   const [data, setData] = useState(makeData(0));
+  const columns = React.useMemo(() => getColumns(data), []);
 
   const [isFetching, setIsFetching] = useState(false);
   const fetchData = () =>
@@ -314,8 +247,8 @@ export const InfiniteScroll = () => {
 };
 
 export const TenThousandEntries = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10000));
+  const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
     {
       columns,
@@ -328,8 +261,8 @@ export const TenThousandEntries = () => {
 };
 
 export const WithPagination = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(100));
+  const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid({
     columns,
     data,
@@ -350,9 +283,10 @@ export const IsHoverOnRow = () => {
     }
     return '';
   };
+  const [data] = useState(makeData(10));
   const columns = React.useMemo(
     () => [
-      ...defaultHeader.slice(0, 3),
+      ...getColumns(data).slice(0, 3),
       {
         Header: 'Is hover on row?',
         id: 'isHoveringColumn',
@@ -362,7 +296,6 @@ export const IsHoverOnRow = () => {
     ],
     []
   );
-  const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
     {
       columns,
@@ -375,8 +308,8 @@ export const IsHoverOnRow = () => {
 };
 
 export const SelectableRow = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+  const columns = React.useMemo(() => getColumns(data), []);
   const emptyStateTitle = 'Empty state title';
   const emptyStateDescription = 'Description explaining why the table is empty';
   const datagridState = useDatagrid(
@@ -397,8 +330,8 @@ export const SelectableRow = () => {
 };
 
 export const RadioSelect = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+  const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
     {
       columns,
@@ -420,8 +353,8 @@ export const RadioSelect = () => {
 };
 
 export const HideSelectAll = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+  const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
     {
       columns,
@@ -435,8 +368,8 @@ export const HideSelectAll = () => {
 };
 
 export const SortableColumns = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+  const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
     {
       columns,
@@ -449,8 +382,8 @@ export const SortableColumns = () => {
 };
 
 export const ActionsDropdown = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+  const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
     {
       columns,
@@ -477,8 +410,8 @@ export const ActionsDropdown = () => {
 };
 
 export const SelectItemsInAllPages = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(100));
+  const columns = React.useMemo(() => getColumns(data), []);
   const [areAllSelected, setAreAllSelected] = useState(false);
   const datagridState = useDatagrid(
     {
@@ -812,8 +745,8 @@ const getBatchActions = () => {
 };
 
 export const BatchActions = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+  const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
     {
       columns,
@@ -831,8 +764,8 @@ export const BatchActions = () => {
 };
 
 export const DisableSelectRow = () => {
-  const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
+  const columns = React.useMemo(() => getColumns(data), []);
   const datagridState = useDatagrid(
     {
       columns,
@@ -853,8 +786,8 @@ const makeDataWithTwoLines = (length) =>
   range(length).map(() => newPersonWithTwoLines());
 
 export const TopAlignment = () => {
-  const columns = React.useMemo(() => defaultHeader.slice(0, 3), []);
   const [data] = useState(makeDataWithTwoLines(10));
+  const columns = React.useMemo(() => getColumns(data).slice(0, 3), []);
   const datagridState = useDatagrid(
     {
       columns,
@@ -886,9 +819,10 @@ export const TopAlignment = () => {
 };
 
 export const FrozenColumns = () => {
+  const [data] = useState(makeData(10));
   const columns = React.useMemo(
     () => [
-      ...defaultHeader,
+      ...getColumns(data),
       {
         Header: '',
         accessor: 'actions',
@@ -898,7 +832,6 @@ export const FrozenColumns = () => {
     ],
     []
   );
-  const [data] = useState(makeData(10));
   const [msg, setMsg] = useState('');
   const onActionClick = (actionId, row) => {
     const { original } = row;

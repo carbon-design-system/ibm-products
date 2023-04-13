@@ -35,14 +35,30 @@ const useSortableColumns = (hooks) => {
         if (col.isSorted) {
           switch (col.isSortedDesc) {
             case false:
-              return ArrowUp16;
+              return () => (
+                <ArrowUp16
+                  className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
+                />
+              );
             case true:
-              return ArrowUp16;
+              return () => (
+                <ArrowUp16
+                  className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
+                />
+              );
             default:
-              return Arrows16;
+              return () => (
+                <Arrows16
+                  className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
+                />
+              );
           }
         }
-        return Arrows16;
+        return () => (
+          <Arrows16
+            className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
+          />
+        );
       };
       const Header = (headerProp) =>
         column.disableSortBy === true ? (

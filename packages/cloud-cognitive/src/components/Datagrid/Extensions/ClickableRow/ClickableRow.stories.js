@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -286,7 +286,8 @@ const ClickableRowWithPanel = ({ ...args }) => {
     {
       columns,
       data,
-      onRowClick: (row) => {
+      onRowClick: (row, event) => {
+        action()(event);
         setOpenSidePanel(true);
         setRowData(row);
       },

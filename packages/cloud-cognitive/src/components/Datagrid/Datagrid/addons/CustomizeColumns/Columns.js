@@ -113,6 +113,11 @@ const Columns = ({
             />
           </div>
           {columns
+            // hide the columns without Header, e.g the sticky actions, spacer
+            .filter(
+              (colDef) => !!colDef.Header.props && !!colDef.Header.props.title
+            )
+            .filter((colDef) => !colDef.isAction)
             .filter(
               (colDef) =>
                 filterString.length === 0 ||

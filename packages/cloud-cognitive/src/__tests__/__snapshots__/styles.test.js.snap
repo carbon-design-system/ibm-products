@@ -209,7 +209,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--action-set.cds--btn-set.c4p--action-set--xl .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost),
 .c4p--action-set.cds--btn-set.c4p--action-set--2xl .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost),
 .c4p--action-set.cds--btn-set.c4p--action-set--row-quadruple .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost) {
-  max-width: rem(232px);
+  max-width: 14.5rem;
   flex: 0 1 25%;
 }
 
@@ -1933,8 +1933,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-productive-heading-01-font-weight, 600);
   line-height: var(--cds-productive-heading-01-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px);
-  max-width: 50%;
-  padding-left: 2.5rem;
   margin-bottom: 0.5rem;
 }
 
@@ -1943,8 +1941,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-body-long-01-font-weight, 400);
   line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
-  max-width: 50%;
-  padding-left: 2.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -1999,7 +1995,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   position: relative;
   padding-bottom: 2rem;
 }
-.c4p--create-full-page .c4p--create-full-page__step .cds--css-grid {
+
+.c4p--create-full-page__step .cds--css-grid {
   margin-left: 0;
 }
 
@@ -2036,8 +2033,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
   line-height: var(--cds-productive-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
-  max-width: 50%;
-  padding-left: 2.5rem;
   margin-bottom: 1rem;
 }
 
@@ -2448,17 +2443,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-layer-01, #f4f4f4);
   transition: transform 150ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
-.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button {
-  min-width: 2rem;
-}
-.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button.c4p--side-panel__action-toolbar-icon-only-button {
-  padding: 0;
-  color: var(--cds-text-primary, #161616);
-}
-.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button.c4p--side-panel__action-toolbar-icon-only-button svg {
-  margin-left: 0.5rem;
-}
-.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button.c4p--side-panel__action-toolbar-leading-button {
+.c4p--side-panel__container .c4p--side-panel__action-toolbar-leading-button {
   margin-right: 0.5rem;
 }
 .c4p--side-panel__container .cds--btn.c4p--side-panel__navigation-back-button {
@@ -2481,7 +2466,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--cds-layer-01, #f4f4f4);
 }
 .c4p--side-panel__container .cds--btn.c4p--side-panel__close-button .cds--btn__icon {
   margin: 0;
@@ -2849,6 +2833,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header.c4p--tearsheet__header--with-close-icon {
   padding-right: 4rem;
 }
+.c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header-description {
+  max-width: 80%;
+}
 .c4p--tearsheet .c4p--tearsheet__header-navigation {
   margin: 0.75rem 0 0;
 }
@@ -2990,6 +2977,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--tearsheet-create .c4p--tearsheet-create__step__step--visible-step {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  margin-left: 0;
   animation: step-content-entrance 400ms;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
@@ -3001,7 +2991,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--tearsheet-create__step .cds--css-grid {
-  padding-left: 0;
   margin-left: 0;
 }
 
@@ -3024,7 +3013,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--tearsheet-create .c4p--tearsheet-create__content {
   height: 100%;
-  padding: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   overflow-x: hidden;
 }
 
@@ -3094,7 +3084,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-heading-03-font-weight, 400);
   line-height: var(--cds-heading-03-line-height, 1.4);
   letter-spacing: var(--cds-heading-03-letter-spacing, 0);
-  padding-bottom: 0.375rem;
+  padding-bottom: 0.5rem;
   margin: 0;
 }
 .c4p--empty-state .c4p--empty-state__subtitle {
@@ -3717,34 +3707,21 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   flex-direction: column;
   justify-content: center;
 }
-.c4p--add-select__selections-cell:hover .c4p--add-select__selections-hidden-hover,
-.c4p--add-select__selections .cds--structured-list-row:focus-within .c4p--add-select__selections-hidden-hover {
-  visibility: visible;
-}
-.c4p--add-select__selections-hidden-hover {
-  visibility: hidden;
-}
 .c4p--add-select__selections-row--selected.cds--structured-list-row {
   border-bottom: 1px solid var(--cds-layer-selected-01, #e0e0e0);
   background-color: var(--cds-layer-selected-01, #e0e0e0);
 }
-.c4p--add-select__selections-checkbox {
+.c4p--add-select__selections-form-control {
   display: flex;
   align-items: center;
 }
-.c4p--add-select__selections-checkbox-label-wrapper {
+.c4p--add-select__selections-form-control-label-wrapper {
   display: flex;
   margin-left: 1rem;
 }
-.c4p--add-select__selections-checkbox-label-text {
+.c4p--add-select__selections-form-control-label-text {
   display: flex;
   flex-direction: column;
-}
-.c4p--add-select__selections-checkbox-wrapper.cds--form-item {
-  flex: 0;
-}
-.c4p--add-select__selections-checkbox-wrapper .cds--checkbox-label-text {
-  display: none;
 }
 .c4p--add-select__selections-cell-avatar {
   margin-right: 0.5rem;
@@ -3851,7 +3828,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   flex-grow: 1;
   overflow-x: auto;
 }
-.c4p--add-select__columns .c4p--add-select__selections-checkbox-label-wrapper {
+.c4p--add-select__columns .c4p--add-select__selections-form-control-label-wrapper {
   margin-left: 0.5rem;
 }
 .c4p--add-select__columns .c4p--add-select__selections-row.cds--structured-list-row {
@@ -4050,10 +4027,6 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--add-select .cds--accordion__item .c4p--add-select__sidebar-accordion-title button {
   opacity: 0;
-}
-
-.c4p--add-select .cds--checkbox-label-text {
-  padding-left: 0.5rem;
 }
 
 .c4p--add-select__multi .c4p--empty-state {

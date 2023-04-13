@@ -74,6 +74,7 @@ export {
   useColumnOrder,
   useInlineEdit,
   useFiltering,
+  getAutoSizedColumnWidth,
 } from './Datagrid';
 export { EditTearsheet } from './EditTearsheet';
 export { EditTearsheetNarrow } from './EditTearsheetNarrow';

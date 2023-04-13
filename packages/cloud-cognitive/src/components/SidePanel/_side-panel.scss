@@ -327,6 +327,7 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       padding: 0;
       color: $text-01;
     }
+
     .#{$carbon-prefix}--btn.#{$block-class}__close-button {
       position: absolute;
       z-index: 5;
@@ -335,8 +336,8 @@ $action-set-block-class: #{$pkg-prefix}--action-set;
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: $ui-01;
     }
+
     .#{$carbon-prefix}--btn.#{$block-class}__close-button
       .#{$carbon-prefix}--btn__icon {
       margin: 0;

@@ -131,7 +131,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
         toolbarBatchActions?.map((batchAction, index) => {
           if (
             (index < 2 && toolbarBatchActions.length > 3) ||
-            (index < 3 && toolbarBatchActions.length === 3)
+            (index < 3 && toolbarBatchActions.length <= 3)
           ) {
             return (
               <TableBatchAction

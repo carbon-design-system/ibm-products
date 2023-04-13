@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -647,8 +647,6 @@ export let SidePanel = React.forwardRef(
                     `${blockClass}__action-toolbar-button`,
                     className,
                     {
-                      [`${blockClass}__action-toolbar-icon-only-button`]:
-                        icon && !leading,
                       [`${blockClass}__action-toolbar-leading-button`]: leading,
                     },
                   ])}

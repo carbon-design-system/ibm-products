@@ -50,6 +50,10 @@ const FilterPanel = ({
   onPanelClose = () => {},
   showFilterSearch = false,
   filterPanelMinHeight = 600,
+  primaryActionLabel = 'Apply',
+  secondaryActionLabel = 'Cancel',
+  searchLabelText = 'Filter search',
+  searchPlaceholder = 'Find filters',
 }) => {
   /** State */
   const [showDividerLine, setShowDividerLine] = useState(false);
@@ -122,14 +126,14 @@ const FilterPanel = ({
             {
               key: 1,
               kind: 'primary',
-              label: 'Apply',
+              label: primaryActionLabel,
               onClick: apply,
               disabled: shouldDisableButtons,
             },
             {
               key: 2,
               kind: 'secondary',
-              label: 'Cancel',
+              label: secondaryActionLabel,
               onClick: cancel,
               disabled: shouldDisableButtons,
             },
@@ -221,8 +225,8 @@ const FilterPanel = ({
           {showFilterSearch && (
             <div ref={filterSearchRef} className={`${componentClass}__search`}>
               <Search
-                labelText="Filter search"
-                placeHolderText="Find filters"
+                labelText={searchLabelText}
+                placeHolderText={searchPlaceholder}
                 light={true}
                 size="sm"
               />
@@ -278,6 +282,10 @@ FilterPanel.propTypes = {
   onPanelClose: PropTypes.func,
   onPanelOpen: PropTypes.func,
   open: PropTypes.bool,
+  primaryActionLabel: PropTypes.string,
+  searchLabelText: PropTypes.string,
+  searchPlaceholder: PropTypes.string,
+  secondaryActionLabel: PropTypes.string,
   setAllFilters: PropTypes.func.isRequired,
   showFilterSearch: PropTypes.bool,
   title: PropTypes.string,

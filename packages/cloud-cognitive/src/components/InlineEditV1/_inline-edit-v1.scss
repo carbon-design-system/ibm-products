@@ -32,11 +32,6 @@
   }
 }
 
-@mixin input-button-defaults($block-class) {
-  display: inline-flex;
-  border: 2px solid transparent;
-}
-
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
 
@@ -221,32 +216,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
 
   &.#{$block-class}.#{$block-class} .#{$block-class}__save,
   &.#{$block-class}.#{$block-class} .#{$block-class}__cancel {
-    @include input-button-defaults($block-class);
-
-    // input does not have focus
-    &:hover {
-      outline: initial;
-    }
-
-    &:focus:active,
-    &:focus {
-      // border focus input does NOT have focus
-      border-color: $focus;
-      box-shadow: initial;
-      outline: initial;
-    }
-
-    &:focus:active:hover {
-      box-shadow: inset 0 0 0 1px $field-01;
-    }
-
-    &::before {
-      background-color: transparent;
-    }
-
-    &[disabled] {
-      border-color: transparent;
-    }
+    display: inline-flex;
   }
 
   &.#{$block-class}--editing
@@ -266,19 +236,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
     border-left: 0;
   }
 
-  &.#{$block-class}.#{$block-class} .#{$block-class}__edit {
-    @include input-button-defaults($block-class);
-    // pointer-events: none;
-    &:hover,
-    &:active,
-    &:focus {
-      border-color: transparent;
-      background-color: transparent;
-      box-shadow: initial;
-      outline: initial;
-    }
-  }
-
   @media (hover: hover) {
     // if hover is the primary input mechanism hide edit button
     .#{$block-class}__edit {
@@ -293,10 +250,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
 
   .#{$block-class}__edit--always-visible {
     opacity: 1;
-  }
-
-  .#{$block-class}__validation-icon {
-    @include input-button-defaults($block-class);
   }
 
   &.#{$block-class}--invalid .#{$block-class}__validation-icon {

@@ -3488,24 +3488,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel {
   display: inline-flex;
-  border: 2px solid transparent;
-}
-.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:hover {
-  outline: initial;
-}
-.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:focus:active, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:focus, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:focus:active, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:focus {
-  border-color: var(--cds-focus, #0f62fe);
-  box-shadow: initial;
-  outline: initial;
-}
-.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:focus:active:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:focus:active:hover {
-  box-shadow: inset 0 0 0 1px var(--cds-field-01, #f4f4f4);
-}
-.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save::before, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel::before {
-  background-color: transparent;
-}
-.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save[disabled], .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel[disabled] {
-  border-color: transparent;
 }
 .c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save {
   width: var(--c4p--inline-edit--edit-size);
@@ -3518,16 +3500,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   border-right: 0;
   border-left: 0;
 }
-.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit {
-  display: inline-flex;
-  border: 2px solid transparent;
-}
-.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:active, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:focus {
-  border-color: transparent;
-  background-color: transparent;
-  box-shadow: initial;
-  outline: initial;
-}
 @media (hover: hover) {
   .c4p--inline-edit .c4p--inline-edit__edit {
     opacity: 0;
@@ -3539,10 +3511,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--inline-edit .c4p--inline-edit__edit--always-visible {
   opacity: 1;
-}
-.c4p--inline-edit .c4p--inline-edit__validation-icon {
-  display: inline-flex;
-  border: 2px solid transparent;
 }
 .c4p--inline-edit.c4p--inline-edit--invalid .c4p--inline-edit__validation-icon {
   color: var(--cds-support-error, #da1e28);

@@ -135,8 +135,6 @@ export let InlineEditV2 = forwardRef(
       escaping.current = false;
     };
 
-    console.log({ editLabel, saveLabel, cancelLabel });
-
     return (
       <div {...rest} ref={ref} {...getDevtoolsProps(componentName)}>
         <div

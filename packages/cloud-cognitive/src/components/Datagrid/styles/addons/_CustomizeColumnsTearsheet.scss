@@ -10,6 +10,7 @@
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/type/scss/font-family';
 @use '@carbon/layout' as *;
+@use '@carbon/layout/scss/convert';
 
 @use '../../../../global/styles/project-settings' as c4p-settings;
 @use '../variables';
@@ -28,10 +29,18 @@
   border-bottom: 1px solid $background-active;
 }
 
-.#{variables.$block-class}__customize-columns-checkbox-wrapper {
+.#{c4p-settings.$carbon-prefix}--form-item.#{c4p-settings.$carbon-prefix}--checkbox-wrapper.#{variables.$block-class}__customize-columns-checkbox {
   display: flex;
+  flex: initial;
+  align-items: center;
   justify-content: center;
-  padding-left: $spacing-02;
+}
+
+.#{variables.$block-class}__customize-columns-column-list
+  .#{variables.$block-class}__customize-columns-checkbox-visible-label {
+  // Disabling linter only to match the spacing that Carbon uses for the Checkbox label
+  /* stylelint-disable-next-line */
+  padding-left: convert.rem(6px);
 }
 
 .#{variables.$block-class}__customize-columns-column-list
@@ -42,6 +51,10 @@
 .#{variables.$block-class}__customize-columns-column-list {
   position: relative; // needed for the react-dnd, otherwise the drag preview will not work correctly
   overflow: auto;
+}
+
+.#{variables.$block-class}__customize-columns-select-all {
+  align-items: center;
 }
 
 .#{variables.$block-class}__customize-columns-select-all,

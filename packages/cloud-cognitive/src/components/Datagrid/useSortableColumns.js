@@ -32,7 +32,7 @@ const useSortableColumns = (hooks) => {
     };
     const sortableColumns = visibleColumns.map((column) => {
       const icon = (col, props) => {
-        if (col.isSorted) {
+        if (col?.isSorted) {
           switch (col.isSortedDesc) {
             case false:
               return (
@@ -73,16 +73,16 @@ const useSortableColumns = (hooks) => {
           column.Header
         ) : (
           <Button
-            onClick={() => onSortClick(headerProp.column)}
+            onClick={() => onSortClick(headerProp?.column)}
             kind="ghost"
-            renderIcon={(props) => icon(headerProp.column, props)}
+            renderIcon={(props) => icon(headerProp?.column, props)}
             className={cx(
               `${carbon.prefix}--table-sort ${blockClass}--table-sort`,
               {
                 [`${blockClass}--table-sort--desc`]:
-                  headerProp.column.isSortedDesc,
+                  headerProp?.column.isSortedDesc,
                 [`${blockClass}--table-sort--asc`]:
-                  headerProp.column.isSortedDesc === false,
+                  headerProp?.column.isSortedDesc === false,
               }
             )}
           >
@@ -95,7 +95,9 @@ const useSortableColumns = (hooks) => {
         minWidth: column.disableSortBy === true ? 0 : 90,
       };
     });
-    return [...sortableColumns];
+    return instance.customizeColumnsProps?.isTearsheetOpen
+      ? visibleColumns
+      : [...sortableColumns];
   };
 
   const sortInstanceProps = (instance) => {

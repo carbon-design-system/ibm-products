@@ -257,6 +257,7 @@
     &.#{$block-class}--editing
       .#{$block-class}__toolbar--animation
       .#{$block-class}__save {
+      overflow: visible;
       width: var(--#{$block-class}--edit-size);
       transition: all $duration--moderate-02 motion(standard, productive);
       transition-property: margin, padding;
@@ -267,6 +268,7 @@
         .#{$block-class}__toolbar--saveable
       )
       .#{$block-class}__save {
+      overflow: hidden;
       width: 0;
       padding: 0;
       border-right: 0;

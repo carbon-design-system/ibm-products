@@ -19,40 +19,10 @@ import { Link } from '@carbon/react';
 import { AboutModal } from '.';
 
 import ExampleLogo from './_story-assets/example-logo.svg';
-import ansibleLogo from './_story-assets/ansible-logo.png';
-import grafanaLogo from './_story-assets/grafana-logo.png';
-import jsLogo from './_story-assets/js-logo.png';
 
 const blockClass = `${pkg.prefix}--about-modal`;
 const componentName = AboutModal.displayName;
 
-const tabLabel1 = `Version number ${uuidv4()}`;
-const tabLabel2 = `Technologies (${uuidv4()}) used`;
-const additionalInfo = [
-  { label: tabLabel1, content: '1.3.41' },
-  {
-    label: tabLabel2,
-    content: (
-      <>
-        <img
-          src={grafanaLogo}
-          alt="Grafana"
-          className="about-modal-stories--tech-logo"
-        />
-        <img
-          src={ansibleLogo}
-          alt="Ansible"
-          className="about-modal-stories--tech-logo"
-        />
-        <img
-          src={jsLogo}
-          alt="JavaScript"
-          className="about-modal-stories--tech-logo"
-        />
-      </>
-    ),
-  },
-];
 const className = `class-${uuidv4()}`;
 const closeIconDescription = `close ${uuidv4()}`;
 const content = `This is example content: ${uuidv4()}`;
@@ -62,7 +32,7 @@ const logoAltText = `Example product ${uuidv4()} logo`;
 const logo = (
   <img src={ExampleLogo} alt={logoAltText} style={{ maxWidth: '6rem' }} />
 );
-const legalText = `Legal test text ${uuidv4()}`;
+const generalText = `Legal test text ${uuidv4()}`;
 const linkText = `Carbon (${uuidv4()}) Design System`;
 const linkHref = `https://www.carbondesignsystem.com/${uuidv4()}`;
 const links = [
@@ -90,7 +60,6 @@ const renderComponent = ({ ...rest }) =>
       <AboutModal
         {...{ closeIconDescription, content, logo, title, ...rest }}
         modalAriaLabel="About this product"
-        tabListAriaLabel="Product info"
       />
     </main>
   );
@@ -136,30 +105,14 @@ describe(componentName, () => {
     expect(link.href).toEqual(linkHref);
   });
 
-  it('renders legal text', () => {
-    renderComponent({ legalText, open: true });
-    screen.getByText(legalText);
+  it('renders general text', () => {
+    renderComponent({ generalText, open: true });
+    screen.getByText(generalText);
   });
 
   it('renders copyright text', () => {
     renderComponent({ copyrightText, open: true });
     screen.getByText(copyrightText);
-  });
-
-  it('renders a clickable carbon tab for additional info', () => {
-    renderComponent({ additionalInfo, open: true });
-    const tabToSelect = screen.getByRole('tab', { name: tabLabel2 });
-    const tabSelected = `${carbon.prefix}--tabs__nav-item--selected`;
-    expect(tabToSelect).not.toHaveClass(tabSelected);
-    userEvent.click(tabToSelect);
-    expect(tabToSelect).toHaveClass(tabSelected);
-  });
-
-  it('renders a version number', () => {
-    renderComponent({
-      additionalInfo: [{ label: tabLabel1, content: versionNumber }],
-    });
-    screen.getByText(versionNumber);
   });
 
   it('is visible when open is true', () => {

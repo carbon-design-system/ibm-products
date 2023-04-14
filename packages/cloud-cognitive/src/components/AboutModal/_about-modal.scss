@@ -21,11 +21,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 }
 
 .#{$block-class} .#{$block-class}__logo {
-  margin: $spacing-05;
+  margin: $spacing-05 $spacing-05 $spacing-07	$spacing-05;
 }
 
 .#{$block-class} .#{$block-class}__header {
-  padding: 0 20% $spacing-03 $spacing-05;
+  padding: 0 20% 0 $spacing-05;
   margin-bottom: 0;
   grid-row: auto;
 }
@@ -41,30 +41,23 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
   min-height: $spacing-10;
   padding: 0 20% 0 $spacing-05;
+  margin-bottom: $spacing-06;
   grid-row: auto;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-.#{$block-class}.#{$block-class}--with-tabs .#{$block-class}__body {
-  min-height: calc(#{$spacing-10} + #{$spacing-08});
-  // stylelint-disable-next-line carbon/layout-token-use
-  margin-bottom: calc(#{$spacing-09} + #{$spacing-08});
-}
-
-.#{$block-class}.#{$block-class}--with-tabs
-  .#{c4p-settings.$carbon-prefix}--modal-content--overflow-indicator {
-  // stylelint-disable-next-line carbon/layout-token-use
-  bottom: calc(#{$spacing-09} + #{$spacing-08});
-}
-
 .#{$block-class}
   .#{c4p-settings.$carbon-prefix}--modal-content--overflow-indicator {
   background-image: linear-gradient(to bottom, #00000000, $layer-01);
+
+  // stylelint-disable-next-line carbon/layout-token-use
+  bottom: #{$spacing-06};
 }
 
 .#{$block-class} .#{$block-class}__links-container {
-  margin-top: $spacing-05;
+  @include type.type-style('body-short-01');
+  margin-top: $spacing-06;
 }
 
 .#{$block-class} .#{$block-class}__links-container a + a {
@@ -73,9 +66,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
   margin-left: $spacing-03;
 }
 
-.#{$block-class} .#{$block-class}__legal-text,
+.#{$block-class} .#{$block-class}__general-text,
 .#{$block-class} .#{$block-class}__copyright-text {
-  margin-top: $spacing-07;
+  @include type.type-style('label-01');
+  margin-top: $spacing-06;
   margin-bottom: 0;
   color: $text-secondary;
 }
@@ -84,46 +78,32 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
   margin-top: $spacing-05;
 }
 
+p.c4p--about-modal__general-text:first-child,
+p.c4p--about-modal__copyright-text:first-child {
+  margin-top: $spacing-07;
+}
+
 .#{$block-class} .#{$block-class}__footer {
   position: relative;
-  height: $spacing-03 + $spacing-10;
+  height: calc(#{$spacing-05} + #{$spacing-02} + #{$spacing-06} + #{$spacing-07});
   flex-direction: column;
   justify-content: center;
   background-color: $background-inverse;
   color: $text-inverse;
 }
 
-.#{$block-class} .#{$block-class}__tab-container {
-  position: absolute;
-  bottom: 0;
-}
-
-.#{$block-class} .#{$block-class}__version-label,
-.#{$block-class} .#{$block-class}__version-number {
-  @include type.type-style('body-short-01');
-
-  padding-left: $spacing-05;
-  margin-top: 0;
-  margin-bottom: 0;
+.#{$block-class} .#{$block-class}__footer-label,
+.#{$block-class} .#{$block-class}__footer-content {
+  @include type.type-style('label-01');
   color: $text-inverse;
 }
 
-.#{$block-class} .#{$block-class}__version-label {
+.#{$block-class} .#{$block-class}__footer-label {
   @include font-weight('semibold');
+  padding: $spacing-05 0 0 $spacing-05;
+  margin-bottom: $spacing-02;
 }
 
-.#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--tabs
-  .#{c4p-settings.$carbon-prefix}--tabs__nav-link,
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--tab-content {
-  @include type.type-style('body-short-01');
-}
-
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--tab-content {
-  height: $spacing-03 + $spacing-10;
-}
-
-.#{$block-class} .#{c4p-settings.$carbon-prefix}--tab-content:not([hidden]) {
-  display: flex;
-  align-items: center;
+.#{$block-class} .#{$block-class}__footer-content {
+  padding: 0 0 $spacing-05 $spacing-05;
 }

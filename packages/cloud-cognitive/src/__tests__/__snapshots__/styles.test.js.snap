@@ -6,11 +6,11 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--about-modal .c4p--about-modal__logo {
-  margin: 1rem;
+  margin: 1rem 1rem 2rem 1rem;
 }
 
 .c4p--about-modal .c4p--about-modal__header {
-  padding: 0 20% 0.5rem 1rem;
+  padding: 0 20% 0 1rem;
   margin-bottom: 0;
   grid-row: auto;
 }
@@ -30,26 +30,23 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: var(--cds-body-short-02-letter-spacing, 0);
   min-height: 4rem;
   padding: 0 20% 0 1rem;
+  margin-bottom: 1.5rem;
   grid-row: auto;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-.c4p--about-modal.c4p--about-modal--with-tabs .c4p--about-modal__body {
-  min-height: calc(4rem + 2.5rem);
-  margin-bottom: calc(3rem + 2.5rem);
-}
-
-.c4p--about-modal.c4p--about-modal--with-tabs .cds--modal-content--overflow-indicator {
-  bottom: calc(3rem + 2.5rem);
-}
-
 .c4p--about-modal .cds--modal-content--overflow-indicator {
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--cds-layer-01, #f4f4f4));
+  bottom: 1.5rem;
 }
 
 .c4p--about-modal .c4p--about-modal__links-container {
-  margin-top: 1rem;
+  font-size: var(--cds-body-short-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-short-01-font-weight, 400);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
+  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  margin-top: 1.5rem;
 }
 
 .c4p--about-modal .c4p--about-modal__links-container a + a {
@@ -58,9 +55,13 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-left: 0.5rem;
 }
 
-.c4p--about-modal .c4p--about-modal__legal-text,
+.c4p--about-modal .c4p--about-modal__general-text,
 .c4p--about-modal .c4p--about-modal__copyright-text {
-  margin-top: 2rem;
+  font-size: var(--cds-label-01-font-size, 0.75rem);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.33333);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+  margin-top: 1.5rem;
   margin-bottom: 0;
   color: var(--cds-text-secondary, #525252);
 }
@@ -69,51 +70,37 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-top: 1rem;
 }
 
+p.c4p--about-modal__general-text:first-child,
+p.c4p--about-modal__copyright-text:first-child {
+  margin-top: 2rem;
+}
+
 .c4p--about-modal .c4p--about-modal__footer {
   position: relative;
-  height: 4.5rem;
+  height: calc(1rem + 0.25rem + 1.5rem + 2rem);
   flex-direction: column;
   justify-content: center;
   background-color: var(--cds-background-inverse, #393939);
   color: var(--cds-text-inverse, #ffffff);
 }
 
-.c4p--about-modal .c4p--about-modal__tab-container {
-  position: absolute;
-  bottom: 0;
-}
-
-.c4p--about-modal .c4p--about-modal__version-label,
-.c4p--about-modal .c4p--about-modal__version-number {
-  font-size: var(--cds-body-short-01-font-size, 0.875rem);
-  font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.28572);
-  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
-  padding-left: 1rem;
-  margin-top: 0;
-  margin-bottom: 0;
+.c4p--about-modal .c4p--about-modal__footer-label,
+.c4p--about-modal .c4p--about-modal__footer-content {
+  font-size: var(--cds-label-01-font-size, 0.75rem);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.33333);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
   color: var(--cds-text-inverse, #ffffff);
 }
 
-.c4p--about-modal .c4p--about-modal__version-label {
+.c4p--about-modal .c4p--about-modal__footer-label {
   font-weight: 600;
+  padding: 1rem 0 0 1rem;
+  margin-bottom: 0.25rem;
 }
 
-.c4p--about-modal .cds--tabs .cds--tabs__nav-link,
-.c4p--about-modal .cds--tab-content {
-  font-size: var(--cds-body-short-01-font-size, 0.875rem);
-  font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.28572);
-  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
-}
-
-.c4p--about-modal .cds--tab-content {
-  height: 4.5rem;
-}
-
-.c4p--about-modal .cds--tab-content:not([hidden]) {
-  display: flex;
-  align-items: center;
+.c4p--about-modal .c4p--about-modal__footer-content {
+  padding: 0 0 1rem 1rem;
 }
 
 .c4p--apikey-modal .cds--modal-close {

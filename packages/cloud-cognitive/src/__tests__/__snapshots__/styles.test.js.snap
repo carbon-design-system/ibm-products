@@ -3406,6 +3406,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   /* stylelint-disable-next-line carbon/layout-token-use */
   margin-right: var(--c4p--inline-edit--toolbar-width);
   margin-left: 1rem;
+  color: var(--cds-text-primary, #161616);
   font-family: inherit;
   line-height: var(--c4p--inline-edit--size);
 }
@@ -3472,6 +3473,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--inline-edit.c4p--inline-edit--invalid .c4p--inline-edit__after-input-elements {
   --c4p--inline-edit--toolbar-width: calc(3 * var(--c4p--inline-edit--size));
+}
+.c4p--inline-edit .c4p--inline-edit__toolbar {
+  display: flex;
+  align-items: center;
 }
 .c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar::after {
   position: absolute;

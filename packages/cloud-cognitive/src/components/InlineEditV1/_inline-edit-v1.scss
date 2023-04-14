@@ -60,7 +60,6 @@
 
     &:hover {
       --#{$block-class}--background-color: #{$hover-field};
-      // background-color: $background-color;
     }
 
     position: relative;
@@ -116,6 +115,7 @@
       margin-right: var(--#{$block-class}--toolbar-width);
       // room for toolbar
       margin-left: $spacing-05;
+      color: $text-01;
       // stylelint-disable-next-line carbon/type-token-use
       line-height: var(--#{$block-class}--size);
 
@@ -206,10 +206,6 @@
       --#{$block-class}--toolbar-width: calc(3 * var(--#{$block-class}--size));
     }
 
-    .#{$block-class}__toolbar--animation {
-      // width: ;
-    }
-
     &.#{$block-class}--editing .#{$block-class}__toolbar::after {
       // cover top and bottom when focus within block
       // doing the same on the buttons is problematic when animating
@@ -261,7 +257,7 @@
     &.#{$block-class}--editing
       .#{$block-class}__toolbar--animation
       .#{$block-class}__save {
-      overflow: visible;
+      overflow: hidden;
       width: var(--#{$block-class}--edit-size);
       transition: all $duration--moderate-02 motion(standard, productive);
       transition-property: margin, padding;
@@ -272,7 +268,6 @@
         .#{$block-class}__toolbar--saveable
       )
       .#{$block-class}__save {
-      overflow: hidden;
       width: 0;
       padding: 0;
       border-right: 0;

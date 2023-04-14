@@ -52,7 +52,6 @@ $carbon-input: #{$carbon-prefix}--text-input;
 }
 
 .#{$block-class}__warning-icon {
-  /* stylelint-disable-next-line carbon/layout-token-use */
   margin: $spacing-03;
   color: $support-error;
 }

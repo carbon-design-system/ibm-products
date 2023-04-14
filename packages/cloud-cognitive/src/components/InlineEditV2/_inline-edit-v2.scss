@@ -81,3 +81,9 @@ $carbon-input: #{$carbon-prefix}--text-input;
 .#{$block-class}__text-input.#{$carbon-input}:active {
   outline: none;
 }
+
+.#{$block-class}__text-input + div {
+  // animation div
+  display: flex;
+  overflow: hidden;
+}

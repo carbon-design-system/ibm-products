@@ -7933,6 +7933,10 @@ button.c4p--add-select__global-filter-toggle--open {
   border-radius: 50%;
 }
 
+.c4p--user-profile-image__tooltip:focus {
+  border-width: 0.25rem;
+}
+
 .cds--tooltip__trigger .c4p--user-profile-image svg,
 .c4p--user-profile-image__tooltip.cds--btn--ghost:not([disabled]) svg {
   fill: var(--cds-layer-01, #f4f4f4);

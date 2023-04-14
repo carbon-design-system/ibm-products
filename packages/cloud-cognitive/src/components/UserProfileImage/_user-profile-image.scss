@@ -92,6 +92,10 @@ $theme-keys: map-keys($themes);
   border-radius: 50%;
 }
 
+.#{$block-class}__tooltip:focus {
+  border-width: $spacing-02;
+}
+
 .#{$carbon-prefix}--tooltip__trigger .#{$block-class} svg,
 .#{$block-class}__tooltip.#{$carbon-prefix}--btn--ghost:not([disabled]) svg {
   fill: $layer-01;

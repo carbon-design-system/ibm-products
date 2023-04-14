@@ -2368,7 +2368,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: none;
 }
 .c4p--inline-edit-v2__warning-icon {
-  /* stylelint-disable-next-line carbon/layout-token-use */
   margin: var(--cds-spacing-03, 0.5rem);
   color: var(--cds-support-01, #da1e28);
 }

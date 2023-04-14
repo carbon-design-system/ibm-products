@@ -1689,8 +1689,7 @@ describe(componentName, () => {
     fireEvent.click(rowHeightButton);
 
     expect(
-      screen.getByText('Row height', { selector: 'span' }).parentElement
-        .previousSibling
+      screen.getByLabelText('Row height', { selector: 'button' })
     ).toHaveClass(`c4p--datagrid__row-size-button--open`);
     expect(
       document.getElementsByClassName('c4p--datagrid__row-size-dropdown')

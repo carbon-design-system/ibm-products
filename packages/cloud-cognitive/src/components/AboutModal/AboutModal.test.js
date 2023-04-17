@@ -52,12 +52,12 @@ const title = (
   </>
 );
 
-// render an AboutModal with content, logo, title, and any other required props
+// render an AboutModal with content, logo, title, copyrightText and any other required props
 const renderComponent = ({ ...rest }) =>
   render(
     <main>
       <AboutModal
-        {...{ closeIconDescription, content, logo, title, ...rest }}
+        {...{ closeIconDescription, content, logo, title, copyrightText, ...rest }}
         modalAriaLabel="About this product"
       />
     </main>

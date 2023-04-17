@@ -105,7 +105,7 @@ export default {
           </Link>,
           <Link href="#" key="link3">
             Link action
-        </Link>
+          </Link>,
         ],
       },
     },
@@ -198,8 +198,7 @@ export const withAdditionalInfo = prepareStory(
   }
 );
 
-const withLinksStoryName =
-  'About modal with links';
+const withLinksStoryName = 'About modal with links';
 export const withLinksBody = prepareStory(
   Template.bind({}, withLinksStoryName, true),
   {
@@ -212,8 +211,7 @@ export const withLinksBody = prepareStory(
   }
 );
 
-const withLegalStoryName =
-  'About modal with legal and copyright text';
+const withLegalStoryName = 'About modal with legal and copyright text';
 export const withLegalBody = prepareStory(
   Template.bind({}, withLegalStoryName, true),
   {

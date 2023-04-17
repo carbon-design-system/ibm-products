@@ -21,7 +21,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 }
 
 .#{$block-class} .#{$block-class}__logo {
-  margin: $spacing-05 $spacing-05 $spacing-07	$spacing-05;
+  margin: $spacing-05 $spacing-05 $spacing-07 $spacing-05;
 }
 
 .#{$block-class} .#{$block-class}__header {
@@ -49,14 +49,13 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 
 .#{$block-class}
   .#{c4p-settings.$carbon-prefix}--modal-content--overflow-indicator {
-  background-image: linear-gradient(to bottom, #00000000, $layer-01);
-
-  // stylelint-disable-next-line carbon/layout-token-use
   bottom: #{$spacing-06};
+  background-image: linear-gradient(to bottom, #00000000, $layer-01);
 }
 
 .#{$block-class} .#{$block-class}__links-container {
   @include type.type-style('body-short-01');
+
   margin-top: $spacing-06;
 }
 
@@ -69,6 +68,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 .#{$block-class} .#{$block-class}__general-text,
 .#{$block-class} .#{$block-class}__copyright-text {
   @include type.type-style('label-01');
+
   margin-top: $spacing-06;
   margin-bottom: 0;
   color: $text-secondary;
@@ -85,7 +85,9 @@ p.c4p--about-modal__copyright-text:first-child {
 
 .#{$block-class} .#{$block-class}__footer {
   position: relative;
-  height: calc(#{$spacing-05} + #{$spacing-02} + #{$spacing-06} + #{$spacing-07});
+  height: calc(
+    #{$spacing-05} + #{$spacing-02} + #{$spacing-06} + #{$spacing-07}
+  );
   flex-direction: column;
   justify-content: center;
   background-color: $background-inverse;
@@ -95,11 +97,13 @@ p.c4p--about-modal__copyright-text:first-child {
 .#{$block-class} .#{$block-class}__footer-label,
 .#{$block-class} .#{$block-class}__footer-content {
   @include type.type-style('label-01');
+
   color: $text-inverse;
 }
 
 .#{$block-class} .#{$block-class}__footer-label {
   @include font-weight('semibold');
+
   padding: $spacing-05 0 0 $spacing-05;
   margin-bottom: $spacing-02;
 }

@@ -97,7 +97,7 @@ export let AboutModal = React.forwardRef(
         }
         className={cx(
           blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
+          className // Apply any supplied class names to the main HTML element.
         )}
         aria-label={modalAriaLabel}
         {...{ onClose, open, ref, ...getDevtoolsProps(componentName) }}
@@ -122,13 +122,13 @@ export let AboutModal = React.forwardRef(
             id={contentId}
           >
             {content}
-            {links && links.length > 0 &&
+            {links && links.length > 0 && (
               <div className={`${blockClass}__links-container`}>
                 {links.map((link, i) => (
                   <React.Fragment key={i}>{link}</React.Fragment>
                 ))}
               </div>
-            }
+            )}
             {generalText && (
               <p className={`${blockClass}__general-text`}>{generalText}</p>
             )}
@@ -137,16 +137,15 @@ export let AboutModal = React.forwardRef(
             )}
           </div>
         </ModalBody>
-        {additionalInfo &&
-          additionalInfo.length > 0 && (
-            <ModalFooter className={`${blockClass}__footer`}>
-                <p className={`${blockClass}__footer-label`}>
-                  {additionalInfo[0].label}
-                </p>
-                <p className={`${blockClass}__footer-content`}>
-                  {additionalInfo[0].content}
-                </p>
-            </ModalFooter>
+        {additionalInfo && additionalInfo.length > 0 && (
+          <ModalFooter className={`${blockClass}__footer`}>
+            <p className={`${blockClass}__footer-label`}>
+              {additionalInfo[0].label}
+            </p>
+            <p className={`${blockClass}__footer-content`}>
+              {additionalInfo[0].content}
+            </p>
+          </ModalFooter>
         )}
       </ComposedModal>
     );

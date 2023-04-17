@@ -23,13 +23,7 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  Tabs,
-  TabList,
-  TabPanels,
-  TabPanel,
-  Tab,
 } from '@carbon/react';
-import { isRequiredIf } from '../../global/js/utils/props-helper';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--about-modal`;

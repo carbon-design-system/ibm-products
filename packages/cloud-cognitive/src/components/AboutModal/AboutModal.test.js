@@ -11,7 +11,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -51,7 +51,6 @@ const title = (
     IBM <span>{titleText}</span>
   </>
 );
-const versionNumber = `1.3.${uuidv4()}`;
 
 // render an AboutModal with content, logo, title, and any other required props
 const renderComponent = ({ ...rest }) =>

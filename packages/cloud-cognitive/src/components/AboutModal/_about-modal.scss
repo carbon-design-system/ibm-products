@@ -97,8 +97,8 @@ p.c4p--about-modal__copyright-text:first-child {
   @include type.type-style('label-01');
 
   padding: $spacing-05 0 0 $spacing-05;
-  color: $text-secondary;
   margin-bottom: $spacing-02;
+  color: $text-secondary;
 }
 
 .#{$block-class} .#{$block-class}__footer-content {

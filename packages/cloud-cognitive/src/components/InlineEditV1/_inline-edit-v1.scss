@@ -47,7 +47,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
 
   &:hover {
     --#{$block-class}--background-color: #{$background-hover};
-    // background-color: $background-color;
   }
 
   position: relative;
@@ -101,6 +100,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
     margin-right: var(--#{$block-class}--toolbar-width);
     // room for toolbar
     margin-left: $spacing-05;
+    color: $text-primary;
     font-family: inherit;
     // stylelint-disable-next-line carbon/type-token-use
     line-height: var(--#{$block-class}--size);
@@ -192,8 +192,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
     --#{$block-class}--toolbar-width: calc(3 * var(--#{$block-class}--size));
   }
 
-  .#{$block-class}__toolbar--animation {
-    // width: ;
+  .#{$block-class}__toolbar {
+    display: flex;
+    align-items: center;
   }
 
   &.#{$block-class}--editing .#{$block-class}__toolbar::after {

@@ -6,7 +6,6 @@
  */
 
 import React, { useState, useEffect, forwardRef, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { IconButton } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -19,7 +18,6 @@ import {
 } from '@carbon/react/icons';
 import { pkg, carbon } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { spacing07, spacing10 } from '@carbon/layout';
 
 const componentName = 'InlineEditV2';
 const blockClass = `${pkg.prefix}--inline-edit-v2`;
@@ -139,7 +137,8 @@ export let InlineEditV2 = forwardRef(
       <div {...rest} ref={ref} {...getDevtoolsProps(componentName)}>
         <div
           className={cx(blockClass, {
-            [`${blockClass}-focused`]: focused,
+            [`${blockClass}--focused`]: focused,
+            [`${blockClass}--invalid`]: invalid,
             // [`${blockClass}-readonly`]: readOnly,
           })}
           onFocus={onFocusHandler}
@@ -162,67 +161,54 @@ export let InlineEditV2 = forwardRef(
             // readOnly={readOnly}
             onKeyDown={onKeyHandler}
           />
-          {focused ? (
-            <>
-              {invalid && (
-                <WarningFilled
-                  size={16}
-                  className={`${blockClass}__warning-icon`}
-                />
-              )}
-              <AnimatePresence>
-                <motion.div
-                  initial={{ width: spacing07 }}
-                  animate={{ width: spacing10 }}
-                  exit={{ width: spacing07 }}
-                >
-                  <IconButton
-                    size="sm"
-                    label={cancelLabel}
-                    onClick={onCancelHandler}
-                    kind="ghost"
-                    tabIndex={0}
-                    key="cancel"
-                    className={`${blockClass}__btn ${blockClass}__btn-cancel`}
-                  >
-                    <Close size={16} />
-                  </IconButton>
-                  <IconButton
-                    size="sm"
-                    label={saveLabel}
-                    onClick={onSaveHandler}
-                    kind="ghost"
-                    tabIndex={0}
-                    key="save"
-                    className={`${blockClass}__btn ${blockClass}__btn-save`}
-                    disabled={!canSave}
-                  >
-                    <Checkmark size={16} />
-                  </IconButton>
-                </motion.div>
-              </AnimatePresence>
-            </>
-          ) : (
-            <AnimatePresence>
-              <motion.div
-                initial={{ width: spacing10 }}
-                animate={{ width: spacing07 }}
-                exit={{ width: spacing10 }}
-              >
+          <div className={`${blockClass}__toolbar`}>
+            {focused ? (
+              <>
+                {invalid && (
+                  <WarningFilled
+                    size={16}
+                    className={`${blockClass}__warning-icon`}
+                  />
+                )}
                 <IconButton
-                  className={`${blockClass}__btn ${blockClass}__btn-edit`}
                   size="sm"
-                  label={editLabel}
-                  onClick={onFocusHandler}
+                  label={cancelLabel}
+                  onClick={onCancelHandler}
                   kind="ghost"
                   tabIndex={0}
-                  key="edit"
+                  key="cancel"
+                  className={`${blockClass}__btn ${blockClass}__btn-cancel`}
                 >
-                  <Edit size={16} />
+                  <Close size={16} />
                 </IconButton>
-              </motion.div>
-            </AnimatePresence>
-          )}
+
+                <IconButton
+                  size="sm"
+                  label={saveLabel}
+                  onClick={onSaveHandler}
+                  kind="ghost"
+                  tabIndex={0}
+                  key="save"
+                  className={`${blockClass}__btn ${blockClass}__btn-save`}
+                  disabled={!canSave}
+                >
+                  <Checkmark size={16} />
+                </IconButton>
+              </>
+            ) : (
+              <IconButton
+                className={`${blockClass}__btn ${blockClass}__btn-edit`}
+                size="sm"
+                label={editLabel}
+                onClick={onFocusHandler}
+                kind="ghost"
+                tabIndex={0}
+                key="edit"
+              >
+                <Edit size={16} />
+              </IconButton>
+            )}
+          </div>
         </div>
         {focused && invalid && (
           <p className={`${blockClass}__warning-text`}>{invalidLabel}</p>

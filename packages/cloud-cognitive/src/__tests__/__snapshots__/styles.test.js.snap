@@ -82,21 +82,15 @@ p.c4p--about-modal__copyright-text:first-child {
   );
   flex-direction: column;
   justify-content: center;
-  background-color: var(--cds-background-inverse, #393939);
-  color: var(--cds-text-inverse, #ffffff);
+  background-color: var(--cds-layer-02, #ffffff);
 }
 
-.c4p--about-modal .c4p--about-modal__footer-label,
-.c4p--about-modal .c4p--about-modal__footer-content {
+.c4p--about-modal .c4p--about-modal__footer-label {
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
   line-height: var(--cds-label-01-line-height, 1.33333);
   letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
-  color: var(--cds-text-inverse, #ffffff);
-}
-
-.c4p--about-modal .c4p--about-modal__footer-label {
-  font-weight: 600;
+  color: var(--cds-text-secondary, #525252);
   padding: 1rem 0 0 1rem;
   margin-bottom: 0.25rem;
 }

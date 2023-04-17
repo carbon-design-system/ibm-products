@@ -23,6 +23,7 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
+  Theme,
 } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -132,14 +133,16 @@ export let AboutModal = React.forwardRef(
           </div>
         </ModalBody>
         {additionalInfo && additionalInfo.length > 0 && (
-          <ModalFooter className={`${blockClass}__footer`}>
-            <p className={`${blockClass}__footer-label`}>
-              {additionalInfo[0].label}
-            </p>
-            <p className={`${blockClass}__footer-content`}>
-              {additionalInfo[0].content}
-            </p>
-          </ModalFooter>
+          <Theme theme="g100">
+            <ModalFooter className={`${blockClass}__footer`}>
+              <p className={`${blockClass}__footer-label`}>
+                {additionalInfo[0].label}
+              </p>
+              <p className={`${blockClass}__footer-content`}>
+                {additionalInfo[0].content}
+              </p>
+            </ModalFooter>
+          </Theme>
         )}
       </ComposedModal>
     );

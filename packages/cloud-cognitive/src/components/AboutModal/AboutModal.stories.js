@@ -243,7 +243,7 @@ export const withDarkTheme = prepareStory(
   {
     storyName: withDarkThemeStoryName,
     args: {
-      className: 'sb--use-carbon-theme-g90',
+      className: 'sb--use-carbon-theme-g100',
       ...commonArgs,
     },
   }

@@ -57,7 +57,14 @@ const renderComponent = ({ ...rest }) =>
   render(
     <main>
       <AboutModal
-        {...{ closeIconDescription, content, logo, title, copyrightText, ...rest }}
+        {...{
+          closeIconDescription,
+          content,
+          logo,
+          title,
+          copyrightText,
+          ...rest,
+        }}
         modalAriaLabel="About this product"
       />
     </main>

@@ -132,7 +132,6 @@ const useFilters = ({
         filtersObjectArrayCopy.splice(index, 1);
       }
     } else if (type === NUMBER) {
-      console.log('using number', { value, filtersObjectArrayCopy });
       // If the value is empty remove it from the filtersObjectArray
       if (value === '') {
         // Find the column that uses number and displays an empty string

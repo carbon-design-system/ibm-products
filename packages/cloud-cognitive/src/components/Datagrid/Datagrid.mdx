@@ -773,6 +773,27 @@ filterProps: {
   />
 </Canvas>
 
+## Auto size column to fit content
+
+The `getAutoSizedColumnWidth` utility function can be used to auto size columns
+based on it's content. The width will be set to that of the largest cell in the
+column or the column header, whichever is greater. If this is not used, the
+width will be set to the default column width (150px) or the value passed to the
+`width` property in the column definition. See example below:
+
+```jsx
+  import { Datagrid, useDatagrid, getAutoSizedColumnWidth } from '@carbon/ibm-products';
+  ...
+  const myColumns = [
+    {
+      Header: 'Column 1',
+      accessor: 'column_1',
+      width: getAutoSizedColumnWidth(rows, 'column_1', 'Column 1'),
+    }
+  ]
+  ...
+```
+
 ## Code sample
 
 <CodesandboxLink exampleDirectory="Datagrid" />

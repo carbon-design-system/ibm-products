@@ -68,6 +68,7 @@ const RowSizeRadioGroup = ({
             }
             return (
               <RadioButton
+                className={`${blockClass}__row-size-radio-button`}
                 key={option.value}
                 labelText={labelText}
                 value={option.value}

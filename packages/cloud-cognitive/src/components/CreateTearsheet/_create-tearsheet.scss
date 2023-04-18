@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2021, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -41,6 +41,11 @@ $tearsheet-divider-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__section
 $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--fieldset;
 
 .#{$create-tearsheet-block-class} .#{$step-block-class}__step--visible-step {
+  padding-right: $spacing-03;
+  padding-left: $spacing-03;
+
+  margin-left: 0;
+
   // stylelint-disable-next-line carbon/motion-easing-use
   animation: step-content-entrance $duration-slow-01;
   animation-fill-mode: forwards;
@@ -53,7 +58,6 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--
 }
 
 .#{$step-block-class} .#{c4p-settings.$carbon-prefix}--css-grid {
-  padding-left: 0;
   margin-left: 0;
 }
 
@@ -78,7 +82,8 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--
 
 .#{$create-tearsheet-block-class} .#{$create-tearsheet-block-class}__content {
   height: 100%;
-  padding: $spacing-06;
+  padding-top: $spacing-06;
+  padding-bottom: $spacing-06;
   overflow-x: hidden;
 }
 

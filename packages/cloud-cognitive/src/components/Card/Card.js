@@ -12,6 +12,7 @@ import {
   IconButton,
   OverflowMenu,
   OverflowMenuItem,
+  Layer,
 } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { CardHeader } from './CardHeader';
@@ -95,16 +96,18 @@ export let Card = forwardRef(
         const pos = actionsPlacement === 'top' ? 'bottom' : 'top';
         const size = actionsPlacement === 'top' ? 'sm' : 'md';
         return (
-          <OverflowMenu
-            size={size}
-            direction={pos}
-            flipped
-            ariaLabel={overflowAriaLabel}
-          >
-            {overflowActions.map(({ id, ...rest }) => (
-              <OverflowMenuItem key={id} {...rest} />
-            ))}
-          </OverflowMenu>
+          <Layer level={2}>
+            <OverflowMenu
+              size={size}
+              direction={pos}
+              flipped
+              ariaLabel={overflowAriaLabel}
+            >
+              {overflowActions.map(({ id, ...rest }) => (
+                <OverflowMenuItem key={id} {...rest} />
+              ))}
+            </OverflowMenu>
+          </Layer>
         );
       }
 

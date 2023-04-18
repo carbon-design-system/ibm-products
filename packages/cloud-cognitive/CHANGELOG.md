@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.26](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.25...@carbon/ibm-products@2.0.0-rc.26) (2023-04-18)
+
+
+### Bug Fixes
+
+* Add select accessibility refactor v11 ([#2817](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2817)) ([c948b9f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c948b9fcbfa60ec67961ca36c4466f0938d66fef))
+* **Datagrid:** fix batch action logic to show one/two actions ([f64464f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f64464f82476df81373560d61d5ae4ebd65c8350))
+* **Datagrid:** fix how open state value is set ([#2865](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2865)) ([8789d88](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8789d88532db7550ec96f723a58f570ef0b8b734))
+* **Datagrid:** refactor RowSizeDropdown to use ToggleTip ([e9037a9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e9037a9d0b550fb50d9b5f0f270cc0e52cb58856))
+* **Datagrid:** sortable and customizable columns work together now (v11) ([#2867](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2867)) ([58e0b4e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/58e0b4eb993da86d642f832f598fdacd08f9d3bd))
+* Inline edit fixes package v2 ([#2872](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2872)) ([b8f5c2b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b8f5c2bed0f5402342e530394ff082ebdf990826))
+* **side-panel:** fix close button hover state ([#2835](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2835)) ([198c168](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/198c1689b38b5fe6c14a71fdfaab689f860f7bfa))
+
+
+### Features
+
+* **Datagrid:** add option for auto sizing columns ([880ddbf](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/880ddbfb8ed2aa982e746ccfd5e6396efe014757))
+* possible feature flag usage ([#2748](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2748)) ([3d21f47](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3d21f4711d3bfe419ab8269c0ccbdb48d4ddb34a))
+* **storybook:** new fn getSelectedCarbonTheme ([46f8ad9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/46f8ad9fba06104833b1729a2b1adc029e93a53d))
+
+
+
+
+
 # [2.0.0-rc.25](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.24...@carbon/ibm-products@2.0.0-rc.25) (2023-04-11)
 
 

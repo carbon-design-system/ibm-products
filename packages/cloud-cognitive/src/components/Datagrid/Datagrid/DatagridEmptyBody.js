@@ -27,7 +27,7 @@ const DatagridEmptyBody = (datagridState) => {
 
   return (
     <TableBody
-      {...getTableBodyProps({role:false})}
+      {...getTableBodyProps({ role: false })}
       className={`${blockClass}__empty-state-body`}
     >
       <TableRow>

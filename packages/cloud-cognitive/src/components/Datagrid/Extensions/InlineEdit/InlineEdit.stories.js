@@ -13,7 +13,12 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
-import { Datagrid, useDatagrid, useInlineEdit } from '../../index';
+import {
+  Datagrid,
+  useDatagrid,
+  useInlineEdit,
+  useEditableCell,
+} from '../../index';
 import { pkg } from '../../../../settings';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
@@ -25,7 +30,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const storybookBlockClass = `storybook-${blockClass}__validation-code-snippet`;
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/InlineEdit`,
+  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/EditableCell`,
   component: Datagrid,
   parameters: {
     styles,
@@ -115,12 +120,60 @@ const InlineEditTemplateWrapper = ({ ...args }) => {
   return <InlineEditUsage defaultGridProps={{ ...args }} />;
 };
 
+const EditableCellUsage = ({ ...args }) => {
+  const [data, setData] = useState(makeData(10));
+  const columns = React.useMemo(() => getInlineEditColumns(), []);
+
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      onDataUpdate: setData,
+      ...args.defaultGridProps,
+    },
+    useEditableCell
+  );
+
+  return (
+    <div>
+      <Datagrid datagridState={datagridState} />
+      <p>
+        The following inline edit columns incorporate validation:
+        <code className={storybookBlockClass}>{'first_name'}</code>
+        <code className={storybookBlockClass}>{'last_name'}</code>
+        <code className={storybookBlockClass}>{'age'}</code>
+        <code className={storybookBlockClass}>{'visits'}</code>
+      </p>
+    </div>
+  );
+};
+
+const EditableCellTemplateWrapper = ({ ...args }) => {
+  return <EditableCellUsage defaultGridProps={{ ...args }} />;
+};
+
 const inlineEditUsageControlProps = {
   gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
   useDenseHeader: sharedDatagridProps.useDenseHeader,
 };
-const basicUsageStoryName = 'With inline edit';
+
+export const EditableCellUsageStory = prepareStory(
+  EditableCellTemplateWrapper,
+  {
+    storyName: 'Using useEditableCell hook',
+    argTypes: {
+      gridTitle: ARG_TYPES.gridTitle,
+      gridDescription: ARG_TYPES.gridDescription,
+      useDenseHeader: ARG_TYPES.useDenseHeader,
+    },
+    args: {
+      ...inlineEditUsageControlProps,
+    },
+  }
+);
+
+const basicUsageStoryName = 'Using deprecated useInlineEdit hook';
 export const InlineEditUsageStory = prepareStory(InlineEditTemplateWrapper, {
   storyName: basicUsageStoryName,
   argTypes: {
@@ -130,5 +183,6 @@ export const InlineEditUsageStory = prepareStory(InlineEditTemplateWrapper, {
   },
   args: {
     ...inlineEditUsageControlProps,
+    featureFlags: ['Datagrid.useInlineEdit'],
   },
 });

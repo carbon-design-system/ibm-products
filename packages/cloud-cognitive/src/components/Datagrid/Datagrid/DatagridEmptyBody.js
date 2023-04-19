@@ -1,14 +1,18 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2020
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2020, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
+
 import React from 'react';
 import { pkg } from '../../../settings';
 import { TableBody, TableRow, TableCell } from '@carbon/react';
-import { NoDataEmptyState, ErrorEmptyState } from '../../EmptyStates';
+import {
+  NoDataEmptyState,
+  ErrorEmptyState,
+  NotFoundEmptyState,
+} from '../../EmptyStates';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -25,6 +29,15 @@ const DatagridEmptyBody = (datagridState) => {
     emptyStateLink,
   } = datagridState;
 
+  const emptyStateProps = {
+    illustrationTheme,
+    size: emptyStateSize,
+    title: emptyStateTitle,
+    subtitle: emptyStateDescription,
+    action: emptyStateAction,
+    link: emptyStateLink,
+  };
+
   return (
     <TableBody
       {...getTableBodyProps()}
@@ -33,24 +46,13 @@ const DatagridEmptyBody = (datagridState) => {
       <TableRow>
         <TableCell colSpan={headers.length}>
           {emptyStateType === 'error' && (
-            <ErrorEmptyState
-              illustrationTheme={illustrationTheme}
-              size={emptyStateSize}
-              title={emptyStateTitle}
-              subtitle={emptyStateDescription}
-              action={emptyStateAction}
-              link={emptyStateLink}
-            />
+            <ErrorEmptyState {...emptyStateProps} />
           )}
           {emptyStateType === 'noData' && (
-            <NoDataEmptyState
-              illustrationTheme={illustrationTheme}
-              size={emptyStateSize}
-              title={emptyStateTitle}
-              subtitle={emptyStateDescription}
-              action={emptyStateAction}
-              link={emptyStateLink}
-            />
+            <NoDataEmptyState {...emptyStateProps} />
+          )}
+          {emptyStateType === 'notFound' && (
+            <NotFoundEmptyState {...emptyStateProps} />
           )}
         </TableCell>
       </TableRow>

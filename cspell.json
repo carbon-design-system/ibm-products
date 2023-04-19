@@ -109,6 +109,8 @@
     "tearsheets",
     "textbox",
     "timeframe",
+    "toggletip",
+    "toggletipbutton",
     "treegrid",
     "treeview",
     "uuidv",

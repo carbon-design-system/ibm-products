@@ -12,6 +12,7 @@ import {
   IconButton,
   OverflowMenu,
   OverflowMenuItem,
+  Layer,
 } from '@carbon/react';
 import PropTypes from 'prop-types';
 import { CardHeader } from './CardHeader';
@@ -95,16 +96,18 @@ export let Card = forwardRef(
         const pos = actionsPlacement === 'top' ? 'bottom' : 'top';
         const size = actionsPlacement === 'top' ? 'sm' : 'md';
         return (
-          <OverflowMenu
-            size={size}
-            direction={pos}
-            flipped
-            ariaLabel={overflowAriaLabel}
-          >
-            {overflowActions.map(({ id, ...rest }) => (
-              <OverflowMenuItem key={id} {...rest} />
-            ))}
-          </OverflowMenu>
+          <Layer level={2}>
+            <OverflowMenu
+              size={size}
+              direction={pos}
+              flipped
+              ariaLabel={overflowAriaLabel}
+            >
+              {overflowActions.map(({ id, ...rest }) => (
+                <OverflowMenuItem key={id} {...rest} />
+              ))}
+            </OverflowMenu>
+          </Layer>
         );
       }
 
@@ -272,8 +275,16 @@ Card.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   clickZone: PropTypes.oneOf(['one', 'two', 'three']),
-  description: PropTypes.string,
-  label: PropTypes.string,
+  description: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
   media: PropTypes.node,
   mediaPosition: PropTypes.oneOf(['top', 'left']),
   onClick: PropTypes.func,
@@ -300,7 +311,11 @@ Card.propTypes = {
   secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
   secondaryButtonText: PropTypes.string,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
   titleSize: PropTypes.oneOf(['default', 'large']),
 };
 

@@ -132,6 +132,17 @@ const useFilters = ({
         // Remove it from the filters array
         filtersObjectArrayCopy.splice(index, 1);
       }
+    } else if (type === NUMBER) {
+      // If the value is empty remove it from the filtersObjectArray
+      if (value === '') {
+        // Find the column that uses number and displays an empty string
+        const index = filtersObjectArrayCopy.findIndex(
+          (filter) => filter.id === column
+        );
+
+        // Remove it from the filters array
+        filtersObjectArrayCopy.splice(index, 1);
+      }
     }
 
     setFiltersObjectArray(filtersObjectArrayCopy);

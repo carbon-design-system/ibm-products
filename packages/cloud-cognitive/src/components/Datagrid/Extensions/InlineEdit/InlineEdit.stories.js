@@ -83,6 +83,9 @@ const sharedDatagridProps = {
 const InlineEditUsage = ({ ...args }) => {
   const [data, setData] = useState(makeData(10));
   const columns = React.useMemo(() => getInlineEditColumns(), []);
+  pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
+  pkg.feature['Datagrid.useInlineEdit'] = true;
+  pkg._silenceWarnings(true);
 
   const datagridState = useDatagrid(
     {

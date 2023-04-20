@@ -106,6 +106,7 @@ Thanks goes to these wonderful people
     <tr>
       <td align="center" valign="top" width="20%"><a href="https://github.com/Laura-Marshall"><img src="https://avatars.githubusercontent.com/u/53219208?v=4?s=100" width="100px;" alt="Laura Marshall"/><br /><sub><b>Laura Marshall</b></sub></a><br /><a href="#design-Laura-Marshall" title="Design">🎨</a></td>
       <td align="center" valign="top" width="20%"><a href="https://github.com/glapadre"><img src="https://avatars.githubusercontent.com/u/25260547?v=4?s=100" width="100px;" alt="Drew Glapa"/><br /><sub><b>Drew Glapa</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=glapadre" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://linkedin.com/in/mslilypeng/"><img src="https://avatars.githubusercontent.com/u/3118961?v=4?s=100" width="100px;" alt="Lily"/><br /><sub><b>Lily</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=lily-peng" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

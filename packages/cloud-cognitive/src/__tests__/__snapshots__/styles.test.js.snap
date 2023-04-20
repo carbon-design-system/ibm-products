@@ -6303,9 +6303,6 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--action-bar .c4p--action-bar__displayed-items--right {
   justify-content: flex-end;
 }
-.c4p--action-bar .c4p--action-bar-overflow-items {
-  display: inline-block;
-}
 .c4p--action-bar .c4p--action-bar__hidden-sizing-items {
   position: absolute;
   top: -100vh;
@@ -7045,7 +7042,7 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--page-header .c4p--page-header__navigation-row .cds--content-switcher-btn {
   background-color: var(--cds-background, #ffffff);
 }
-.c4p--page-header .cds--btn.cds--btn--icon-only.c4p--page-header__collapse-expand-toggle {
+.c4p--page-header .c4p--page-header__collapse-expand-toggle {
   position: absolute;
   z-index: 100;
   right: 0;
@@ -7054,7 +7051,7 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--page-header .c4p--page-header__collapse-expand-toggle .cds--btn__icon {
   transition: all 400ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
-.c4p--page-header .c4p--page-header__collapse-expand-toggle--collapsed .cds--btn__icon {
+.c4p--page-header .c4p--page-header__collapse-expand-toggle--collapsed svg {
   transform: scaleY(-1);
 }
 

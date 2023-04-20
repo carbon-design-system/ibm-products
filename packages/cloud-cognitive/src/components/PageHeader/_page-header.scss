@@ -616,7 +616,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     background-color: $background;
   }
 
-  .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$block-class}__collapse-expand-toggle {
+  .#{$block-class}__collapse-expand-toggle {
     position: absolute;
     z-index: $raised-z-index + 1;
     right: 0;
@@ -628,8 +628,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
     transition: all $duration-slow-01 motion(standard, productive);
   }
 
-  .#{$block-class}__collapse-expand-toggle--collapsed
-    .#{$carbon-prefix}--btn__icon {
+  .#{$block-class}__collapse-expand-toggle--collapsed svg {
     // transform: rotate(90deg);
     transform: scaleY(-1);
   }

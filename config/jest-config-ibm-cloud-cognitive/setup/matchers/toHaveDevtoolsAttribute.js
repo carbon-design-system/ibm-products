@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Avoid side effects from `Canary` in `cloud-cognitive/src/settings`.
+// Avoid side effects from `Canary` in `ibm-products/src/settings`.
 import settings from '../../../../packages/ibm-products/src/global/js/package-settings';
 
 const { devtoolsAttribute, getDevtoolsId } = settings;

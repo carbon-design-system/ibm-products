@@ -265,7 +265,7 @@ const pageActions = {
   ],
   'User defined page actions': {
     content: (
-      <Button type="button" size="lg" style={{ maxWidth: '100%' }}>
+      <Button type="button" size="md" style={{ maxWidth: '100%' }}>
         <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
           Custom component
         </span>
@@ -278,7 +278,7 @@ const pageActions = {
     content: (
       <Button
         type="button"
-        size="lg"
+        size="md"
         style={{ maxWidth: '100%' }}
         title="Custom component with long content"
       >

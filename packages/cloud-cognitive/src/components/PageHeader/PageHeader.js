@@ -706,26 +706,29 @@ export let PageHeader = React.forwardRef(
             }
           </FlexGrid>
           {hasCollapseButton ? (
-            <Button
+            <div
               className={cx(`${blockClass}__collapse-expand-toggle`, {
                 [`${blockClass}__collapse-expand-toggle--collapsed`]:
                   fullyCollapsed,
               })}
-              hasIconOnly={true}
-              iconDescription={
-                /* istanbul ignore next */
-                fullyCollapsed
-                  ? expandHeaderIconDescription
-                  : collapseHeaderIconDescription
-              }
-              kind="ghost"
-              onClick={handleCollapseToggle}
-              renderIcon={(props) => <ChevronUp size={16} {...props} />}
-              size="md"
-              tooltipPosition="bottom"
-              tooltipAlignment="end"
-              type="button"
-            />
+            >
+              <Button
+                hasIconOnly={true}
+                iconDescription={
+                  /* istanbul ignore next */
+                  fullyCollapsed
+                    ? expandHeaderIconDescription
+                    : collapseHeaderIconDescription
+                }
+                kind="ghost"
+                onClick={handleCollapseToggle}
+                renderIcon={(props) => <ChevronUp size={16} {...props} />}
+                size="md"
+                tooltipPosition="bottom"
+                tooltipAlignment="end"
+                type="button"
+              />
+            </div>
           ) : null}
         </section>
       </>

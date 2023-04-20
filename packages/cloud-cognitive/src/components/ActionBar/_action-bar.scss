@@ -28,10 +28,6 @@ $block-class-overflow-items: #{$_block-class}-overflow-items;
     justify-content: flex-end;
   }
 
-  .#{$block-class-overflow-items} {
-    display: inline-block;
-  }
-
   .#{$_block-class}__hidden-sizing-items {
     // This breadcrumb container is used to measure the width of all displayable breadcrumbs
     @include measuring-container;

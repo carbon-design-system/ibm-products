@@ -3160,10 +3160,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   fill: var(--cds-button-danger-primary, #da1e28);
 }
 
-.cds--modal-content.c4p--export-modal__body-container {
-  padding-bottom: 1.5rem;
-}
-
 .c4p--card {
   background-color: var(--cds-layer-01, #f4f4f4);
   color: var(--cds-text-primary, #161616);

@@ -65,6 +65,7 @@ export let AddSelectBody = forwardRef(
       open,
       portalTarget,
       searchResultsTitle,
+      sortByLabel,
       title,
       useNormalizedItems,
       ...rest
@@ -292,6 +293,7 @@ export let AddSelectBody = forwardRef(
               columnInputPlaceholder={columnInputPlaceholder}
               header={path[0]?.title}
               filterByLabel={filterByLabel}
+              sortByLabel={sortByLabel}
             />
           </div>
         ) : (

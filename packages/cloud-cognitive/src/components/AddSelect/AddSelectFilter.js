@@ -6,7 +6,7 @@
 //
 
 import React, { useState } from 'react';
-import { Button, ButtonSet, Dropdown, Search, Tag } from '@carbon/react';
+import { Button, ButtonSet, Dropdown, Search, Tag, Layer } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { Filter } from '@carbon/react/icons';
@@ -112,15 +112,16 @@ export let AddSelectFilter = ({
               <p>{filtersLabel}</p>
               <div className={`${blockClass}-opts`}>
                 {filterOpts.map((filterOpts) => (
-                  <Dropdown
-                    id={filterOpts.id}
-                    key={filterOpts.id}
-                    titleText={filterOpts.label}
-                    items={filterOpts.opts}
-                    onChange={(value) => onchangeHandler(value, filterOpts.id)}
-                    selectedItem={getSelectedItem(filterOpts.id)}
-                    label={placeholder}
-                  />
+                  <Layer key={filterOpts.id}>
+                    <Dropdown
+                      id={filterOpts.id}
+                      titleText={filterOpts.label}
+                      items={filterOpts.opts}
+                      onChange={(value) => onchangeHandler(value, filterOpts.id)}
+                      selectedItem={getSelectedItem(filterOpts.id)}
+                      label={placeholder}
+                    />
+                  </Layer>
                 ))}
               </div>
             </div>

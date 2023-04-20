@@ -97,6 +97,8 @@ const defaultProps = {
   onSubmitButtonText: 'Add',
   searchResultsTitle: 'Search results',
   title: 'Add business terms',
+  sortByLabel: 'Sort',
+  filterByLabel: 'Filter',
 };
 
 const Template = (args) => {

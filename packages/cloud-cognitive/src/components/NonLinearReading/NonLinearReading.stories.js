@@ -42,8 +42,8 @@ export default {
 const defaultProps = {
   definition: (
     <>
-      This is a <strong>technical</strong> component that uses a set of{' '}
-      <em>rules</em> to process alerts from your{' '}
+      This is a technical component that uses a set of rules to process alerts
+      from your{' '}
       <a href="https://www.ibm.com/" target="_blank" rel="noreferrer">
         sources
       </a>

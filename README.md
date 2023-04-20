@@ -10,7 +10,7 @@
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[all-contributors-badge]: https://img.shields.io/badge/all_contributors-17-orange.svg
+[all-contributors-badge]: https://img.shields.io/badge/all_contributors-18-orange.svg
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <!-- prettier-ignore-end -->
 
@@ -112,6 +112,7 @@ Thanks goes to these wonderful people
     <tr>
       <td align="center" valign="top" width="20%"><a href="https://www.hellojagath.com"><img src="https://avatars.githubusercontent.com/u/29351394?v=4?s=100" width="100px;" alt="Jagath Jayakumar"/><br /><sub><b>Jagath Jayakumar</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=jagathgj" title="Code">💻</a></td>
       <td align="center" valign="top" width="20%"><a href="https://github.com/Laura-Marshall"><img src="https://avatars.githubusercontent.com/u/53219208?v=4?s=100" width="100px;" alt="Laura Marshall"/><br /><sub><b>Laura Marshall</b></sub></a><br /><a href="#design-Laura-Marshall" title="Design">🎨</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/glapadre"><img src="https://avatars.githubusercontent.com/u/25260547?v=4?s=100" width="100px;" alt="Drew Glapa"/><br /><sub><b>Drew Glapa</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=glapadre" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

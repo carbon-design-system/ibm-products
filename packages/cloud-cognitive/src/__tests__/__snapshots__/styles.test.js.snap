@@ -6511,6 +6511,7 @@ button.c4p--add-select__global-filter-toggle--open {
   padding: 0;
   margin: 0;
   background-color: inherit;
+  border-radius: 0;
   color: inherit;
   text-overflow: ellipsis;
   white-space: nowrap;

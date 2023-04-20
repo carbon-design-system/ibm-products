@@ -6,7 +6,7 @@
  */
 
 // Avoid side effects from `Canary` in `cloud-cognitive/src/settings`.
-import settings from '../../../../packages/cloud-cognitive/src/global/js/package-settings';
+import settings from '../../../../packages/ibm-products/src/global/js/package-settings';
 
 const { devtoolsAttribute, getDevtoolsId } = settings;
 

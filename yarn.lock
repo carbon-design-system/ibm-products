@@ -1825,9 +1825,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/ibm-products@workspace:packages/cloud-cognitive":
+"@carbon/ibm-products@workspace:packages/ibm-products":
   version: 0.0.0-use.local
-  resolution: "@carbon/ibm-products@workspace:packages/cloud-cognitive"
+  resolution: "@carbon/ibm-products@workspace:packages/ibm-products"
   dependencies:
     "@babel/cli": ^7.20.7
     "@babel/core": ^7.20.12

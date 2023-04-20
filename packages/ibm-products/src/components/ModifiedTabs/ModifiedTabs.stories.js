@@ -6,7 +6,7 @@ import { _4K16 } from '@carbon/icons-react';
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { Modal, RadioButton, RadioButtonGroup } from 'carbon-components-react';
@@ -58,12 +58,12 @@ const Template = (args) => {
     setTabs(tabs.filter((tab) => tab.id !== tabId));
   };
 
-  useEffect(() => {
-    for (let i = 1; i < 5; i++) {
-      addTab(nextTabId.current, setTabs);
-      nextTabId.current += 1;
-    }
-  }, [addTab]);
+  // useEffect(() => {
+  //   for (let i = 1; i < 5; i++) {
+  //     addTab(nextTabId.current, setTabs);
+  //     nextTabId.current += 1;
+  //   }
+  // }, [addTab]);
 
   // template
   return (
@@ -114,12 +114,12 @@ const TemplateWithExternalSavePrompt = (args) => {
     nextTabId.current += 1;
   };
 
-  useEffect(() => {
-    for (let i = 1; i < 5; i++) {
-      addTab(nextTabId.current, setTabs);
-      nextTabId.current += 1;
-    }
-  }, [addTab]);
+  // useEffect(() => {
+  //   for (let i = 1; i < 5; i++) {
+  //     addTab(nextTabId.current, setTabs);
+  //     nextTabId.current += 1;
+  //   }
+  // }, [addTab]);
 
   // ***** modal handling code ****
   const [modalVisible, setModalVisible] = useState(false);

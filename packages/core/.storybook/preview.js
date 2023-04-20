@@ -15,7 +15,7 @@ import { themes } from '@storybook/theming';
 import { Column, Row } from 'carbon-components-react';
 import React, { useEffect } from 'react';
 
-import { pkg } from '../../cloud-cognitive/src/settings';
+import { pkg } from '../../ibm-products/src/settings';
 
 import index from './index.scss';
 import { getSectionSequence } from '../story-structure';

@@ -162,6 +162,15 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "glapadre",
+      "name": "Drew Glapa",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25260547?v=4",
+      "profile": "https://github.com/glapadre",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,

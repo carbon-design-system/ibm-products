@@ -37,7 +37,7 @@ npm:
 
 | Package name                                          | Description                                                                                                       |
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| [`@carbon/ibm-products`](./packages/cloud-cognitive)  | A curated set of components and patterns, built on top of Carbon and designed by the Carbon for IBM Products team |
+| [`@carbon/ibm-products`](./packages/ibm-products)     | A curated set of components and patterns, built on top of Carbon and designed by the Carbon for IBM Products team |
 | [`@carbon/ibm-cloud-cognitive-cdai`](./packages/cdai) | Legacy and non-curated design implementations used in application integration                                     |
 | [`@carbon/ibm-security`](./packages/security)         | Legacy and non-curated design implementations used in security                                                    |
 

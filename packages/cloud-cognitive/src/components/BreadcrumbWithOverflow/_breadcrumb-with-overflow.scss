@@ -52,6 +52,10 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
     padding: 0;
   }
 
+  .#{$_block-class}__back__button.#{c4p-settings.$carbon-prefix}--btn--ghost:hover {
+    background-color: inherit;
+  }
+
   @include breakpoint-down(md) {
     .#{c4p-settings.$carbon-prefix}--breadcrumb-item {
       display: none;

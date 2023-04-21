@@ -3815,6 +3815,10 @@ c4p--card__icon:active {
   border-bottom: 1px solid var(--cds-border-strong-01, #8d8d8d);
 }
 
+.c4p--add-select-sort_overflow {
+  z-index: 9999;
+}
+
 .c4p--add-select__tags {
   display: flex;
   align-items: center;
@@ -3827,7 +3831,7 @@ c4p--card__icon:active {
 
 .c4p--add-select__global-filter {
   position: absolute;
-  z-index: 6000;
+  z-index: 999999;
   right: 0;
   width: 100%;
   max-width: 40rem;
@@ -3991,8 +3995,8 @@ button.c4p--add-select__global-filter-toggle--open {
   margin-top: 0.5rem;
 }
 
-.c4p--add-select .cds--tooltip,
-.c4p--add-select .cds--overflow-menu-options {
+.c4p--add-select + div .cds--tooltip,
+.c4p--add-select + div .cds--overflow-menu-options {
   z-index: 9000;
 }
 

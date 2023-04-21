@@ -56,11 +56,19 @@ ExpressiveCard.propTypes = {
   /**
    * Optional header description
    */
-  description: PropTypes.string,
+  description: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
   /**
    * Optional label for the top of the card
    */
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
   /**
    * Optional media content like an image to be placed in the card
    */
@@ -120,7 +128,11 @@ ExpressiveCard.propTypes = {
   /**
    * Title that's displayed at the top of the card
    */
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
 };
 
 ExpressiveCard.displayName = componentName;

@@ -12,7 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { useResizeDetector } from 'react-resize-detector';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import { moderate02 } from '@carbon/motion';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -169,7 +169,8 @@ export let SidePanel = React.forwardRef(
     }, [labelText, title]);
 
     /* istanbul ignore next */
-    const handleResize = (width, height) => {
+    const handleResize = ({ height }) => {
+      console.log(height);
       setPanelHeight(height);
       const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
       const actionsContainer = getActionsContainerElement();
@@ -686,11 +687,7 @@ export let SidePanel = React.forwardRef(
 
     const contentRef = ref || sidePanelRef;
 
-    useResizeDetector({
-      handleHeight: true,
-      onResize: handleResize,
-      targetRef: contentRef,
-    });
+    useResizeObserver(contentRef, { callback: handleResize });
 
     return (
       <AnimatePresence>

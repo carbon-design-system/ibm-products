@@ -9,8 +9,10 @@
 @import '../../global/styles/project-settings';
 
 @mixin keyword-closed-defaults {
+  height: rem(20px);
+  padding-top: 0;
   // stylelint-disable-next-line carbon/layout-token-use
-  padding: rem(1px) 0 rem(1px) $spacing-03;
+  padding-right: rem(3px);
   border-width: rem(1px);
   border-style: solid;
   border-radius: $spacing-04;
@@ -23,7 +25,7 @@
   // The "up" chevron
   svg {
     // stylelint-disable-next-line carbon/layout-token-use
-    margin: rem(1px) $spacing-02 0 $spacing-01;
+    margin: rem(1px) 0 0 0;
     vertical-align: text-top;
   }
 }
@@ -153,7 +155,7 @@
 
       // override default link color to compensate for a gradient background.
       a {
-        color: $link-02;
+        color: $link-01;
       }
     }
   }

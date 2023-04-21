@@ -60,7 +60,7 @@ const defaultProps = {
 // just a pill for a keyword, expanding to show its definition.
 // Should always be shown in context with surrounding text.
 
-const TemplateSingleUse = (args) => {
+const TemplateSingleLevel = (args) => {
   const theme = getSelectedCarbonTheme();
 
   return (
@@ -73,7 +73,7 @@ const TemplateSingleUse = (args) => {
   );
 };
 
-const TemplateMultipleUse = (args) => {
+const TemplateMultipleLevel = (args) => {
   const theme = getSelectedCarbonTheme();
 
   return (
@@ -149,14 +149,14 @@ const TemplateWithGradientBG = (args) => {
   );
 };
 
-export const SingleUse = prepareStory(TemplateSingleUse, {
+export const SingleLevel = prepareStory(TemplateSingleLevel, {
   args: {
     ...defaultProps,
     children: 'engine,',
   },
 });
 
-export const MultipleUse = prepareStory(TemplateMultipleUse, {
+export const MultipleLevel = prepareStory(TemplateMultipleLevel, {
   args: {
     ...defaultProps,
   },

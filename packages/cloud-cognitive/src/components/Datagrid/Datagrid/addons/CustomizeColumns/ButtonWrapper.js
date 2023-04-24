@@ -18,6 +18,7 @@ const ButtonWrapper = ({
   setIsTearsheetOpen,
   isTearsheetOpen,
   iconTooltipLabel = 'Customize columns',
+  tooltipPosition = 'bottom',
   ...rest
 }) => {
   return (
@@ -25,7 +26,7 @@ const ButtonWrapper = ({
       {...rest}
       renderIcon={Column16}
       iconDescription={iconTooltipLabel}
-      tooltipPosition="left"
+      tooltipPosition={tooltipPosition}
       kind="ghost"
       hasIconOnly
       test-id={`${blockClass}__customize-columns-trigger`}
@@ -44,6 +45,7 @@ ButtonWrapper.propTypes = {
   isTearsheetOpen: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
   setIsTearsheetOpen: PropTypes.func.isRequired,
+  tooltipPosition: Button.propTypes.tooltipPosition,
 };
 
 export default ButtonWrapper;

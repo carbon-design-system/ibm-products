@@ -60,7 +60,6 @@
 
     &:hover {
       --#{$block-class}--background-color: #{$hover-field};
-      // background-color: $background-color;
     }
 
     position: relative;
@@ -116,6 +115,7 @@
       margin-right: var(--#{$block-class}--toolbar-width);
       // room for toolbar
       margin-left: $spacing-05;
+      color: $text-01;
       // stylelint-disable-next-line carbon/type-token-use
       line-height: var(--#{$block-class}--size);
 
@@ -204,10 +204,6 @@
     &.#{$block-class}--invalid .#{$block-class}__after-input-elements {
       // width: room for validation, and two buttons
       --#{$block-class}--toolbar-width: calc(3 * var(--#{$block-class}--size));
-    }
-
-    .#{$block-class}__toolbar--animation {
-      // width: ;
     }
 
     &.#{$block-class}--editing .#{$block-class}__toolbar::after {

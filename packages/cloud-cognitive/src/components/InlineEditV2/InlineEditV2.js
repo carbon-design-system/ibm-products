@@ -137,7 +137,8 @@ export let InlineEditV2 = forwardRef(
       <div {...rest} ref={ref} {...getDevtoolsProps(componentName)}>
         <div
           className={cx(blockClass, {
-            [`${blockClass}-focused`]: focused,
+            [`${blockClass}--focused`]: focused,
+            [`${blockClass}--invalid`]: invalid,
             // [`${blockClass}-readonly`]: readOnly,
           })}
           onFocus={onFocusHandler}
@@ -160,50 +161,53 @@ export let InlineEditV2 = forwardRef(
             // readOnly={readOnly}
             onKeyDown={onKeyHandler}
           />
-          {focused ? (
-            <>
-              {invalid && (
-                <WarningFilled16 className={`${blockClass}__warning-icon`} />
-              )}
+          <div className={`${blockClass}__toolbar`}>
+            {focused ? (
+              <>
+                {invalid && (
+                  <WarningFilled16 className={`${blockClass}__warning-icon`} />
+                )}
+                <Button
+                  hasIconOnly
+                  renderIcon={Close24}
+                  size="sm"
+                  iconDescription={cancelLabel}
+                  onClick={onCancelHandler}
+                  kind="ghost"
+                  tabIndex={0}
+                  key="cancel"
+                  className={`${blockClass}__btn ${blockClass}__btn-cancel`}
+                />
+
+                <Button
+                  hasIconOnly
+                  renderIcon={Checkmark24}
+                  size="sm"
+                  iconDescription={saveLabel}
+                  onClick={onSaveHandler}
+                  kind="ghost"
+                  tabIndex={0}
+                  key="save"
+                  className={`${blockClass}__btn ${blockClass}__btn-save`}
+                  disabled={!canSave}
+                />
+              </>
+            ) : (
               <Button
+                className={`${blockClass}__btn ${blockClass}__btn-edit`}
                 hasIconOnly
-                renderIcon={Close24}
+                // renderIcon={readOnly ? EditOff24 : Edit24}
+                renderIcon={Edit24}
                 size="sm"
-                iconDescription={cancelLabel}
-                onClick={onCancelHandler}
+                // iconDescription={readOnly ? readOnlyLabel : editLabel}
+                iconDescription={editLabel}
+                onClick={onFocusHandler}
                 kind="ghost"
                 tabIndex={0}
-                key="cancel"
-                className={`${blockClass}__btn ${blockClass}__btn-cancel`}
+                key="edit"
               />
-              <Button
-                hasIconOnly
-                renderIcon={Checkmark24}
-                size="sm"
-                iconDescription={saveLabel}
-                onClick={onSaveHandler}
-                kind="ghost"
-                tabIndex={0}
-                key="save"
-                className={`${blockClass}__btn ${blockClass}__btn-save`}
-                disabled={!canSave}
-              />
-            </>
-          ) : (
-            <Button
-              className={`${blockClass}__btn ${blockClass}__btn-edit`}
-              hasIconOnly
-              // renderIcon={readOnly ? EditOff24 : Edit24}
-              renderIcon={Edit24}
-              size="sm"
-              // iconDescription={readOnly ? readOnlyLabel : editLabel}
-              iconDescription={editLabel}
-              onClick={onFocusHandler}
-              kind="ghost"
-              tabIndex={0}
-              key="edit"
-            />
-          )}
+            )}
+          </div>
         </div>
         {focused && invalid && (
           <p className={`${blockClass}__warning-text`}>{invalidLabel}</p>

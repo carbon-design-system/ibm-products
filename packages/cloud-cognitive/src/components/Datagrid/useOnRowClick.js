@@ -23,7 +23,7 @@ const useOnRowClick = (hooks) => {
         }
       };
 
-      const handleOnKeyDown = (event) => {
+      const onKeyDown = (event) => {
         const { key } = event;
         if (key === 'Enter') {
           onClick();
@@ -32,7 +32,7 @@ const useOnRowClick = (hooks) => {
 
       return [
         props,
-        { onClick, onKeyDown: handleOnKeyDown },
+        { onClick, onKeyDown },
         {
           tabIndex: 0,
           style: {

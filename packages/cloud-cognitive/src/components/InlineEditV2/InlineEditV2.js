@@ -22,6 +22,10 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 const componentName = 'InlineEditV2';
 const blockClass = `${pkg.prefix}--inline-edit-v2`;
 
+const defaults = {
+  size: 'sm',
+};
+
 export let InlineEditV2 = forwardRef(
   (
     {
@@ -38,6 +42,7 @@ export let InlineEditV2 = forwardRef(
       onSave,
       // readOnly,
       // readOnlyLabel,
+      size = defaults.size,
       saveLabel,
       value,
       ...rest
@@ -138,7 +143,7 @@ export let InlineEditV2 = forwardRef(
     return (
       <div {...rest} ref={ref} {...getDevtoolsProps(componentName)}>
         <div
-          className={cx(blockClass, {
+          className={cx(blockClass, `${blockClass}--${size}`, {
             [`${blockClass}--focused`]: focused,
             [`${blockClass}--invalid`]: invalid,
             // [`${blockClass}--readonly`]: readOnly,
@@ -154,7 +159,7 @@ export let InlineEditV2 = forwardRef(
             className={cx(
               `${blockClass}__text-input`,
               `${carbon.prefix}--text-input`,
-              `${carbon.prefix}--text-input--sm`
+              `${carbon.prefix}--text-input--${size}`
             )}
             type="text"
             value={value}
@@ -172,7 +177,7 @@ export let InlineEditV2 = forwardRef(
                 <Button
                   hasIconOnly
                   renderIcon={Close24}
-                  size="sm"
+                  size={size}
                   iconDescription={cancelLabel}
                   onClick={onCancelHandler}
                   kind="ghost"
@@ -184,7 +189,7 @@ export let InlineEditV2 = forwardRef(
                 <Button
                   hasIconOnly
                   renderIcon={Checkmark24}
-                  size="sm"
+                  size={size}
                   iconDescription={saveLabel}
                   onClick={onSaveHandler}
                   kind="ghost"
@@ -203,7 +208,7 @@ export let InlineEditV2 = forwardRef(
                 hasIconOnly
                 // renderIcon={readOnly ? EditOff24 : Edit24}
                 renderIcon={Edit24}
-                size="sm"
+                size={size}
                 // iconDescription={readOnly ? readOnlyLabel : editLabel}
                 iconDescription={editLabel}
                 onClick={onFocusHandler}
@@ -287,6 +292,10 @@ InlineEditV2.propTypes = {
    * label for save button
    */
   saveLabel: PropTypes.string.isRequired,
+  /**
+   * vertical size of control
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
   /**
    * current value of the input
    */

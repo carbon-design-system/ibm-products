@@ -262,7 +262,7 @@ InlineEditV2.propTypes = {
   /**
    * Provide the text that will be read by a screen reader when visiting this control
    */
-  labelText: PropTypes.string,
+  labelText: PropTypes.string.isRequired,
   /**
    * handler that is called when the cancel button is pressed or when the user removes focus from the input and there is no new value
    */

@@ -69,6 +69,12 @@ $block-class-modal: #{$block-class}-modal;
     }
   }
 
+  .#{$block-class-overflow}__tooltip
+    .#{$block-class-overflow}__tag-item
+    .#{$carbon-prefix}--tag {
+    border-radius: 0;
+  }
+
   @include block-wrap('#{$block-class-modal}') {
     &.#{$block-class-modal} {
       // not to be overridden by use in tag set

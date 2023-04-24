@@ -23,10 +23,18 @@ const useOnRowClick = (hooks) => {
         }
       };
 
+      const handleOnKeyDown = (event) => {
+        const { key } = event;
+        if (key === 'Enter') {
+          onClick();
+        }
+      };
+
       return [
         props,
-        { onClick },
+        { onClick, onKeyDown: handleOnKeyDown },
         {
+          tabIndex: 0,
           style: {
             cursor: 'pointer',
           },

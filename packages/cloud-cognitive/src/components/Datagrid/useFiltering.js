@@ -11,6 +11,8 @@ import { FilterFlyout } from './Datagrid/addons/Filtering';
 import { BATCH } from './Datagrid/addons/Filtering/constants';
 
 const useFiltering = (hooks) => {
+  // TODO: test state here and push back up to custom hook level
+
   const filterTypes = useMemo(
     () => ({
       date: (rows, id, [startDate, endDate]) => {

@@ -48,6 +48,31 @@ const useDatagrid = (params, ...plugins) => {
   ];
   const clientEndPlugins = params.endPlugins || [];
 
+  // Start of the refactor
+  const checkIfPascalCase = (word) => {
+    const pattern = /^[A-Z][A-Za-z]*$/;
+    return pattern.test(word);
+  };
+
+  // Create a new object to seperate props that we own vs react-table
+  const c4pParams = {};
+
+  // Check each key in the params sent in by the user
+  Object.keys(params).forEach((key) => {
+    // For each key check if the key is pascal case, if it is pascal case
+    // we can assume that the value is a component
+    if (checkIfPascalCase(key)) {
+      // Add it to our own seperate obj
+      c4pParams[key] = params[key];
+
+      // TODO: use prepareProps here
+      // Delete it from the original object
+      delete params[key];
+    }
+  });
+
+  // End of the refactor
+
   const tableId = useMemo(() => uniqueId('datagrid-table-id'), []);
   const tableState = useTable(
     { tableId, ...params },
@@ -56,7 +81,11 @@ const useDatagrid = (params, ...plugins) => {
     ...defaultEndPlugins,
     ...clientEndPlugins
   );
-  return tableState;
+
+  return {
+    ...tableState,
+    ...c4pParams,
+  };
 };
 
 export default useDatagrid;

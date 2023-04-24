@@ -21,12 +21,19 @@
 $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 
 .#{$block-class} {
-  border-bottom: 1px solid $border-subtle-01;
-  background-color: $layer-01;
+  position: relative;
+  border-bottom: 1px solid $border-subtle;
+  background-color: $layer;
 }
 
 .#{$block-class}__toggle-container {
-  position: relative;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: calc(
+    #{$spacing-05} + 2rem + #{$spacing-05}
+  ); // spacing + toggle width + spacing
 }
 
 .#{$block-class}__toggle {

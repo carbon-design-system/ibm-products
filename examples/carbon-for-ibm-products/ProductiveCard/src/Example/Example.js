@@ -38,7 +38,7 @@ export const Example = () => {
   return (
     <Grid>
       <Row>
-        <Column lg={8}>
+        <Column sm={4} md={8} lg={4}>
           <ProductiveCard {...defaultProps} />
         </Column>
       </Row>

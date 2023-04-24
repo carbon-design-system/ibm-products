@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -624,6 +624,8 @@ export let SidePanel = React.forwardRef(
                 label,
                 kind,
                 icon,
+                tooltipPosition,
+                tooltipAlignment,
                 leading,
                 disabled,
                 className,
@@ -637,16 +639,14 @@ export let SidePanel = React.forwardRef(
                   size="sm"
                   renderIcon={icon}
                   iconDescription={label}
-                  tooltipPosition="bottom"
-                  tooltipAlignment="center"
+                  tooltipPosition={tooltipPosition || 'bottom'}
+                  tooltipAlignment={tooltipAlignment || 'start'}
                   hasIconOnly={!leading}
                   disabled={disabled}
                   className={cx([
                     `${blockClass}__action-toolbar-button`,
                     className,
                     {
-                      [`${blockClass}__action-toolbar-icon-only-button`]:
-                        icon && !leading,
                       [`${blockClass}__action-toolbar-leading-button`]: leading,
                     },
                   ])}
@@ -782,6 +782,8 @@ SidePanel.propTypes = {
       icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
       onClick: PropTypes.func,
       kind: PropTypes.oneOf(['ghost', 'tertiary', 'secondary', 'primary']),
+      tooltipAlignment: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+      tooltipPosition: PropTypes.oneOf(['start', 'center', 'end']),
     })
   ),
 
@@ -789,7 +791,10 @@ SidePanel.propTypes = {
    * The primary actions to be shown in the side panel. Each action is
    * specified as an object with optional fields: 'label' to supply the button
    * label, 'kind' to select the button kind (must be 'primary', 'secondary' or
-   * 'ghost'), 'loading' to display a loading indicator, and 'onClick' to
+   * 'ghost'), 'tooltipPosition' to select where the tooltip is placed around
+   * the button (must be 'top', 'right', 'bottom', or 'left'), 'tooltipAlignment'
+   * to select how the tooltip is aligned with the button (must be 'start',
+   * 'center', or 'end', 'loading' to display a loading indicator, and 'onClick' to
    * receive notifications when the button is clicked. Additional fields in the
    * object will be passed to the Button component, and these can include
    * 'disabled', 'ref', 'className', and any other Button props. Any other
@@ -810,6 +815,8 @@ SidePanel.propTypes = {
           'danger',
           'primary',
         ]),
+        tooltipPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+        tooltipAlignment: PropTypes.oneOf(['start', 'center', 'end']),
         label: PropTypes.string,
         loading: PropTypes.bool,
         // we duplicate this Button prop to improve the DocGen here

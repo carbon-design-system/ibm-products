@@ -78,6 +78,7 @@ const defaults = {
   feature: {
     'a-new-feature': false,
     'default-portal-target-body': true,
+    'Datagrid.useInfiniteScroll': false,
   },
 };
 
@@ -85,6 +86,8 @@ const warningMessageComponent = (property) =>
   `Carbon for IBM Products (WARNING): Component "${property}" enabled via feature flags. This component has not yet completed its review process.`;
 const warningMessageFeature = (property) =>
   `Carbon for IBM Products (WARNING): Feature "${property}" enabled via feature flags.`;
+const errorMessageFeature = (property) =>
+  `Carbon for IBM Products (Error): Feature "${property}" not enabled. To enable see the notes on feature flags in the README.`;
 const warningMessageAllComponents =
   'Carbon for IBM Products (WARNING): All components enabled through use of setAllComponents. This includes components that have not yet completed their review process.';
 const warningMessageAllFeatures =
@@ -102,7 +105,10 @@ const component = new Proxy(
   { ...defaults.component },
   {
     set(target, property, value) {
-      value && !silent && console.warn(warningMessageComponent(property));
+      if (target[property] !== true && !silent && value) {
+        // not already true, not silent, and now true
+        console.warn(warningMessageComponent(property));
+      }
       target[property] = value;
       return true; // value set
     },
@@ -116,7 +122,10 @@ const feature = new Proxy(
   { ...defaults.feature },
   {
     set(target, property, value) {
-      value && !silent && console.warn(warningMessageFeature(property));
+      if (target[property] !== true && !silent && value) {
+        // not already true, not silent, and now true
+        console.warn(warningMessageFeature(property));
+      }
       target[property] = value;
       return true; // value set
     },
@@ -153,6 +162,15 @@ export default {
 
   isFeatureEnabled: (featureName, byDefault = false) => {
     return byDefault ? defaults.feature[featureName] : feature[featureName];
+  },
+
+  checkReportFeatureEnabled(featureName) {
+    if (feature[featureName]) {
+      // NOTE: Warning emitted if feature flag is enabled (see Proxy above)
+      return true;
+    } else {
+      console.error(errorMessageFeature(featureName));
+    }
   },
 
   isFeaturePublic: (featureName, byDefault = false) => {

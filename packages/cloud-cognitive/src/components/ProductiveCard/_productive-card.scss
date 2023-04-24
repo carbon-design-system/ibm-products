@@ -21,11 +21,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   }
 
   .#{$block-class}__title {
-    @include type.type-style('productive-heading-02');
+    @include type.type-style('heading-compact-02');
   }
 
   .#{$block-class}__title-lg .#{$block-class}__title {
-    @include type.type-style('productive-heading-03');
+    @include type.type-style('heading-03');
   }
 
   .#{$block-class}__body {
@@ -43,12 +43,41 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   }
 
   .#{$block-class}__actions {
+    min-height: $spacing-07;
     margin: 0;
   }
 
   .#{$block-class}__actions-header {
     margin-top: calc(-1 * #{$spacing-02});
     margin-right: $spacing-03;
+  }
+
+  .#{$block-class}__actions-header-ghost-button {
+    min-height: $spacing-07;
+    padding: 0 $spacing-05;
+    // stylelint-disable-next-line carbon/layout-token-use
+    padding-right: calc($spacing-01 + $spacing-03);
+    // stylelint-disable-next-line carbon/layout-token-use
+    padding-left: calc($spacing-01 + $spacing-03);
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &::before {
+      position: absolute;
+      left: 0;
+      width: 0.05rem;
+      height: $spacing-06;
+      background-color: theme.$layer-hover-01;
+      content: '';
+      opacity: 1;
+    }
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:hover {
+      /* stylelint-disable-next-line max-nesting-depth */
+      &::before {
+        opacity: 0;
+      }
+    }
   }
 
   .#{$block-class}__title-lg .#{$block-class}__actions-header,

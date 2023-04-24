@@ -7,7 +7,7 @@
 
 import React from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { ArrowRight, Cloud } from '@carbon/react/icons';
+import { ArrowRight, Cloud, Add } from '@carbon/react/icons';
 import { AspectRatio, Column, Grid, usePrefix } from '@carbon/react';
 import {
   getStoryTitle,
@@ -27,7 +27,19 @@ export default {
     },
   },
   argTypes: {
-    columnSize: {
+    columnSizeSm: {
+      control: {
+        type: 'select',
+      },
+      options: [4, 8, 12, 16],
+    },
+    columnSizeMd: {
+      control: {
+        type: 'select',
+      },
+      options: [4, 8, 12, 16],
+    },
+    columnSizeLg: {
       control: {
         type: 'select',
       },
@@ -53,7 +65,9 @@ export default {
 const defaultProps = {
   label: 'Label',
   title: 'Title',
-  columnSize: 4,
+  columnSizeSm: 4,
+  columnSizeMd: 8,
+  columnSizeLg: 4,
   children: (
     <p>
       expressive card body content block. description inviting the user to take
@@ -64,10 +78,10 @@ const defaultProps = {
 };
 
 const Template = (opts) => {
-  const { children, columnSize, ...args } = opts;
+  const { children, columnSizeSm, columnSizeMd, columnSizeLg, ...args } = opts;
   return (
     <Grid>
-      <Column lg={columnSize}>
+      <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
         <ExpressiveCard {...args}>{children}</ExpressiveCard>
       </Column>
     </Grid>
@@ -75,10 +89,17 @@ const Template = (opts) => {
 };
 
 const MediaTemplate = (opts) => {
-  const { children, columnSize, mediaRatio = '1x1', ...args } = opts;
+  const {
+    children,
+    columnSizeSm,
+    columnSizeMd,
+    columnSizeLg,
+    mediaRatio = '1x1',
+    ...args
+  } = opts;
   return (
     <Grid>
-      <Column lg={columnSize}>
+      <Column sm={columnSizeSm} md={columnSizeMd} lg={columnSizeLg}>
         <ExpressiveCard
           media={<AspectRatio ratio={mediaRatio}>{mediaRatio}</AspectRatio>}
           {...args}
@@ -117,22 +138,6 @@ export const WithCaption = prepareStory(Template, {
 export const WithMedia = prepareStory(MediaTemplate, {
   args: {
     ...defaultProps,
-  },
-});
-
-export const WithActionIcon = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    actionIcons: [
-      {
-        id: '1',
-        icon: (props) => <ArrowRight size={24} {...props} />,
-        onClick: action('on click'),
-        iconDescription: 'Next',
-      },
-    ],
-    primaryButtonText: '',
-    mediaRatio: null,
   },
 });
 
@@ -187,5 +192,12 @@ export const WithButtonHref = prepareStory(Template, {
     secondaryButtonHref: '#',
     secondaryButtonText: 'Secondary',
     secondaryButtonKind: 'ghost',
+  },
+});
+
+export const WithButtonIcon = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    primaryButtonIcon: (props) => <Add size={16} {...props} />,
   },
 });

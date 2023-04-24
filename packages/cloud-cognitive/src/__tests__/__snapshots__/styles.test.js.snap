@@ -209,7 +209,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--action-set.cds--btn-set.c4p--action-set--xl .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost),
 .c4p--action-set.cds--btn-set.c4p--action-set--2xl .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost),
 .c4p--action-set.cds--btn-set.c4p--action-set--row-quadruple .c4p--action-set__action-button:not(.c4p--action-set__action-button--ghost) {
-  max-width: rem(232px);
+  max-width: 14.5rem;
   flex: 0 1 25%;
 }
 
@@ -1933,8 +1933,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-productive-heading-01-font-weight, 600);
   line-height: var(--cds-productive-heading-01-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-01-letter-spacing, 0.16px);
-  max-width: 50%;
-  padding-left: 2.5rem;
   margin-bottom: 0.5rem;
 }
 
@@ -1943,8 +1941,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-body-long-01-font-weight, 400);
   line-height: var(--cds-body-long-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
-  max-width: 50%;
-  padding-left: 2.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -1999,7 +1995,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   position: relative;
   padding-bottom: 2rem;
 }
-.c4p--create-full-page .c4p--create-full-page__step .cds--css-grid {
+
+.c4p--create-full-page__step .cds--css-grid {
   margin-left: 0;
 }
 
@@ -2007,7 +2004,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: 0;
   height: min-content;
   padding-top: 0;
-  border-right: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-right: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   background-color: transparent;
   grid-row: 1;
   overflow-x: auto;
@@ -2036,8 +2033,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   font-weight: var(--cds-productive-heading-04-font-weight, 400);
   line-height: var(--cds-productive-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
-  max-width: 50%;
-  padding-left: 2.5rem;
   margin-bottom: 1rem;
 }
 
@@ -2448,17 +2443,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   background-color: var(--cds-layer-01, #f4f4f4);
   transition: transform 150ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
-.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button {
-  min-width: 2rem;
-}
-.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button.c4p--side-panel__action-toolbar-icon-only-button {
-  padding: 0;
-  color: var(--cds-text-primary, #161616);
-}
-.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button.c4p--side-panel__action-toolbar-icon-only-button svg {
-  margin-left: 0.5rem;
-}
-.c4p--side-panel__container .c4p--side-panel__action-toolbar .c4p--side-panel__action-toolbar-button.c4p--side-panel__action-toolbar-leading-button {
+.c4p--side-panel__container .c4p--side-panel__action-toolbar-leading-button {
   margin-right: 0.5rem;
 }
 .c4p--side-panel__container .cds--btn.c4p--side-panel__navigation-back-button {
@@ -2481,7 +2466,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--cds-layer-01, #f4f4f4);
 }
 .c4p--side-panel__container .cds--btn.c4p--side-panel__close-button .cds--btn__icon {
   margin: 0;
@@ -2788,12 +2772,12 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header {
   padding: 1.5rem 2rem;
-  border-bottom: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-bottom: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   margin: 0;
 }
 .c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header {
   padding: 1rem;
-  border-bottom: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-bottom: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   margin: 0;
 }
 .c4p--tearsheet .c4p--tearsheet__header-content {
@@ -2849,6 +2833,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__header.c4p--tearsheet__header--with-close-icon {
   padding-right: 4rem;
 }
+.c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header-description {
+  max-width: 80%;
+}
 .c4p--tearsheet .c4p--tearsheet__header-navigation {
   margin: 0.75rem 0 0;
 }
@@ -2864,7 +2851,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--tearsheet .c4p--tearsheet__influencer {
   flex: 0 0 257px;
-  border-right: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-right: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   overflow-y: auto;
 }
 .c4p--tearsheet .c4p--tearsheet__influencer.c4p--tearsheet__influencer p {
@@ -2882,19 +2869,17 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet .c4p--tearsheet__main {
   display: flex;
   flex-direction: row;
+  background-color: var(--cds-layer);
   grid-column: 1/-1;
   grid-row: 1/-1;
 }
 .c4p--tearsheet .c4p--tearsheet__main .c4p--tearsheet__influencer {
   border-right: none;
-  border-left: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-left: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 .c4p--tearsheet .c4p--tearsheet__content {
   overflow: auto;
   flex-grow: 1;
-}
-.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content {
-  background: var(--cds-background, #ffffff);
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--pagination,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--pagination__control-buttons,
@@ -2906,7 +2891,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--dropdown-list,
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--number input[type=number],
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--date-picker__input {
-  background-color: var(--cds-field-01, #f4f4f4);
+  background-color: var(--cds-field);
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--select--inline .cds--select-input {
   background-color: transparent;
@@ -2929,7 +2914,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--tearsheet .c4p--tearsheet__buttons {
   display: inline-flex;
   min-width: 100%;
-  border-top: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-top: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__buttons {
   background: var(--cds-background, #ffffff);
@@ -2992,6 +2977,9 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   }
 }
 .c4p--tearsheet-create .c4p--tearsheet-create__step__step--visible-step {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  margin-left: 0;
   animation: step-content-entrance 400ms;
   animation-fill-mode: forwards;
   animation-timing-function: cubic-bezier(0.5, 0, 0.1, 1);
@@ -3003,7 +2991,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--tearsheet-create__step .cds--css-grid {
-  padding-left: 0;
   margin-left: 0;
 }
 
@@ -3026,7 +3013,8 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--tearsheet-create .c4p--tearsheet-create__content {
   height: 100%;
-  padding: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   overflow-x: hidden;
 }
 
@@ -3092,25 +3080,25 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   color: var(--cds-text-primary, #161616);
 }
 .c4p--empty-state .c4p--empty-state__header {
-  font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
-  font-weight: var(--cds-productive-heading-03-font-weight, 400);
-  line-height: var(--cds-productive-heading-03-line-height, 1.4);
-  letter-spacing: var(--cds-productive-heading-03-letter-spacing, 0);
-  padding-bottom: 0.375rem;
+  font-size: var(--cds-heading-03-font-size, 1.25rem);
+  font-weight: var(--cds-heading-03-font-weight, 400);
+  line-height: var(--cds-heading-03-line-height, 1.4);
+  letter-spacing: var(--cds-heading-03-letter-spacing, 0);
+  padding-bottom: 0.5rem;
   margin: 0;
 }
 .c4p--empty-state .c4p--empty-state__subtitle {
-  font-size: var(--cds-body-long-01-font-size, 0.875rem);
-  font-weight: var(--cds-body-long-01-font-weight, 400);
-  line-height: var(--cds-body-long-01-line-height, 1.42857);
-  letter-spacing: var(--cds-body-long-01-letter-spacing, 0.16px);
+  font-size: var(--cds-body-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-01-font-weight, 400);
+  line-height: var(--cds-body-01-line-height, 1.42857);
+  letter-spacing: var(--cds-body-01-letter-spacing, 0.16px);
   padding-bottom: 1rem;
 }
 .c4p--empty-state .c4p--empty-state__header--small {
-  font-size: var(--cds-body-short-02-font-size, 1rem);
-  font-weight: var(--cds-body-short-02-font-weight, 400);
-  line-height: var(--cds-body-short-02-line-height, 1.375);
-  letter-spacing: var(--cds-body-short-02-letter-spacing, 0);
+  font-size: var(--cds-body-compact-02-font-size, 1rem);
+  font-weight: var(--cds-body-compact-02-font-weight, 400);
+  line-height: var(--cds-body-compact-02-line-height, 1.375);
+  letter-spacing: var(--cds-body-compact-02-letter-spacing, 0);
   padding-bottom: 0.5rem;
 }
 .c4p--empty-state .c4p--empty-state__subtitle--small {
@@ -3172,22 +3160,18 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   fill: var(--cds-button-danger-primary, #da1e28);
 }
 
-.cds--modal-content.c4p--export-modal__body-container {
-  padding-bottom: 1.5rem;
-}
-
 .c4p--card {
-  background: var(--cds-layer-01, #f4f4f4);
+  background-color: var(--cds-layer-01, #f4f4f4);
   color: var(--cds-text-primary, #161616);
 }
 
 .c4p--card__clickable {
   cursor: pointer;
-  transition: background 110ms;
+  transition: background-color 110ms;
 }
 
 .c4p--card__clickable:hover {
-  background: var(--cds-background-hover, rgba(141, 141, 141, 0.12));
+  background-color: var(--cds-layer-hover-01, #e8e8e8);
 }
 
 .c4p--card__media-left {
@@ -3247,10 +3231,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--card__body {
-  font-size: var(--cds-body-short-01-font-size, 0.875rem);
-  font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.28572);
-  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  font-size: var(--cds-body-compact-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-compact-01-font-weight, 400);
+  line-height: var(--cds-body-compact-01-line-height, 1.28572);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing, 0.16px);
   padding: 1rem;
   padding-top: 0;
 }
@@ -3263,13 +3247,20 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--card__actions {
   display: flex;
   flex-direction: row;
-  margin: 1rem;
-  margin-top: 0;
 }
 
 .c4p--card__icon {
+  padding: 0.5rem;
   color: inherit;
   cursor: pointer;
+}
+
+.c4p--card__icon:hover {
+  background-color: var(--cds-layer-hover-01, #e8e8e8);
+}
+
+c4p--card__icon:active {
+  color: var(--cds-link-primary-hover, #0043ce);
 }
 
 .c4p--card__link {
@@ -3283,10 +3274,10 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--card__title {
-  font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
-  font-weight: var(--cds-productive-heading-03-font-weight, 400);
-  line-height: var(--cds-productive-heading-03-line-height, 1.4);
-  letter-spacing: var(--cds-productive-heading-03-letter-spacing, 0);
+  font-size: var(--cds-heading-03-font-size, 1.25rem);
+  font-weight: var(--cds-heading-03-font-weight, 400);
+  line-height: var(--cds-heading-03-line-height, 1.4);
+  letter-spacing: var(--cds-heading-03-letter-spacing, 0);
 }
 
 .c4p--http-errors .c4p--http-errors__content {
@@ -3308,26 +3299,26 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--http-errors .c4p--http-errors__error-code-label {
-  font-size: var(--cds-productive-heading-02-font-size, 1rem);
-  font-weight: var(--cds-productive-heading-02-font-weight, 600);
-  line-height: var(--cds-productive-heading-02-line-height, 1.375);
-  letter-spacing: var(--cds-productive-heading-02-letter-spacing, 0);
+  font-size: var(--cds-heading-compact-02-font-size, 1rem);
+  font-weight: var(--cds-heading-compact-02-font-weight, 600);
+  line-height: var(--cds-heading-compact-02-line-height, 1.375);
+  letter-spacing: var(--cds-heading-compact-02-letter-spacing, 0);
   margin-bottom: 0.25rem;
 }
 
 .c4p--http-errors .c4p--http-errors__title {
-  font-size: var(--cds-productive-heading-05-font-size, 2rem);
-  font-weight: var(--cds-productive-heading-05-font-weight, 400);
-  line-height: var(--cds-productive-heading-05-line-height, 1.25);
-  letter-spacing: var(--cds-productive-heading-05-letter-spacing, 0);
+  font-size: var(--cds-heading-05-font-size, 2rem);
+  font-weight: var(--cds-heading-05-font-weight, 400);
+  line-height: var(--cds-heading-05-line-height, 1.25);
+  letter-spacing: var(--cds-heading-05-letter-spacing, 0);
   margin-bottom: 0.75rem;
 }
 
 .c4p--http-errors .c4p--http-errors__description {
-  font-size: var(--cds-body-short-01-font-size, 0.875rem);
-  font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.28572);
-  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
+  font-size: var(--cds-body-compact-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-compact-01-font-weight, 400);
+  line-height: var(--cds-body-compact-01-line-height, 1.28572);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing, 0.16px);
   margin-bottom: 1.5rem;
 }
 
@@ -3418,6 +3409,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   /* stylelint-disable-next-line carbon/layout-token-use */
   margin-right: var(--c4p--inline-edit--toolbar-width);
   margin-left: 1rem;
+  color: var(--cds-text-primary, #161616);
   font-family: inherit;
   line-height: var(--c4p--inline-edit--size);
 }
@@ -3478,13 +3470,16 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   top: 0;
   right: 0;
   display: flex;
-  width: var(--c4p--inline-edit--toolbar-width);
   height: 100%;
   justify-content: space-between;
   cursor: text;
 }
 .c4p--inline-edit.c4p--inline-edit--invalid .c4p--inline-edit__after-input-elements {
   --c4p--inline-edit--toolbar-width: calc(3 * var(--c4p--inline-edit--size));
+}
+.c4p--inline-edit .c4p--inline-edit__toolbar {
+  display: flex;
+  align-items: center;
 }
 .c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar::after {
   position: absolute;
@@ -3501,85 +3496,17 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel {
   display: inline-flex;
-  width: var(--c4p--inline-edit--size);
-  max-width: var(--c4p--inline-edit--size);
-  height: 100%;
-  min-height: initial;
-  max-height: var(--c4p--inline-edit--size);
-  align-items: center;
-  justify-content: center;
-  border: 2px solid transparent;
-}
-.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:hover {
-  outline: initial;
-}
-.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:focus:active, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:focus, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:focus:active, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:focus {
-  border-color: var(--cds-focus, #0f62fe);
-  box-shadow: initial;
-  outline: initial;
-}
-.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save:focus:active:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel:focus:active:hover {
-  box-shadow: inset 0 0 0 1px var(--cds-field-01, #f4f4f4);
-}
-.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save::before, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel::before {
-  background-color: transparent;
-}
-.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__save[disabled], .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__cancel[disabled] {
-  border-color: transparent;
 }
 .c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save {
-  overflow: visible;
   width: var(--c4p--inline-edit--edit-size);
   transition: all 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
   transition-property: margin, padding;
 }
 .c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation:not(.c4p--inline-edit__toolbar--saveable) .c4p--inline-edit__save {
-  overflow: hidden;
   width: 0;
   padding: 0;
   border-right: 0;
   border-left: 0;
-}
-.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save {
-  margin-right: 0;
-  transition: all 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
-  transition-property: margin, padding;
-}
-.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save svg {
-  transition: width 240ms cubic-bezier(0.2, 0, 0.38, 0.9);
-}
-@media (prefers-reduced-motion: reduce) {
-  .c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation .c4p--inline-edit__save svg {
-    transition: none;
-  }
-}
-.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation:not(.c4p--inline-edit__toolbar--saveable) .c4p--inline-edit__save {
-  padding-right: 0;
-  padding-left: 0;
-  border-right: 0;
-  border-left: 0;
-  margin-right: calc(-1 * var(--c4p--inline-edit--size));
-}
-.c4p--inline-edit.c4p--inline-edit--editing .c4p--inline-edit__toolbar--animation:not(.c4p--inline-edit__toolbar--saveable) .c4p--inline-edit__save svg {
-  overflow: hidden;
-  width: 0;
-}
-.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit {
-  display: inline-flex;
-  width: var(--c4p--inline-edit--size);
-  max-width: var(--c4p--inline-edit--size);
-  height: 100%;
-  min-height: initial;
-  max-height: var(--c4p--inline-edit--size);
-  align-items: center;
-  justify-content: center;
-  border: 2px solid transparent;
-}
-.c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:hover, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:active, .c4p--inline-edit.c4p--inline-edit.c4p--inline-edit .c4p--inline-edit__edit:focus {
-  border-color: transparent;
-  background-color: transparent;
-  box-shadow: initial;
-  outline: initial;
 }
 @media (hover: hover) {
   .c4p--inline-edit .c4p--inline-edit__edit {
@@ -3592,17 +3519,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--inline-edit .c4p--inline-edit__edit--always-visible {
   opacity: 1;
-}
-.c4p--inline-edit .c4p--inline-edit__validation-icon {
-  display: inline-flex;
-  width: var(--c4p--inline-edit--size);
-  max-width: var(--c4p--inline-edit--size);
-  height: 100%;
-  min-height: initial;
-  max-height: var(--c4p--inline-edit--size);
-  align-items: center;
-  justify-content: center;
-  border: 2px solid transparent;
 }
 .c4p--inline-edit.c4p--inline-edit--invalid .c4p--inline-edit__validation-icon {
   color: var(--cds-support-error, #da1e28);
@@ -3726,34 +3642,21 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   flex-direction: column;
   justify-content: center;
 }
-.c4p--add-select__selections-cell:hover .c4p--add-select__selections-hidden-hover,
-.c4p--add-select__selections .cds--structured-list-row:focus-within .c4p--add-select__selections-hidden-hover {
-  visibility: visible;
-}
-.c4p--add-select__selections-hidden-hover {
-  visibility: hidden;
-}
 .c4p--add-select__selections-row--selected.cds--structured-list-row {
   border-bottom: 1px solid var(--cds-layer-selected-01, #e0e0e0);
   background-color: var(--cds-layer-selected-01, #e0e0e0);
 }
-.c4p--add-select__selections-checkbox {
+.c4p--add-select__selections-form-control {
   display: flex;
   align-items: center;
 }
-.c4p--add-select__selections-checkbox-label-wrapper {
+.c4p--add-select__selections-form-control-label-wrapper {
   display: flex;
   margin-left: 1rem;
 }
-.c4p--add-select__selections-checkbox-label-text {
+.c4p--add-select__selections-form-control-label-text {
   display: flex;
   flex-direction: column;
-}
-.c4p--add-select__selections-checkbox-wrapper.cds--form-item {
-  flex: 0;
-}
-.c4p--add-select__selections-checkbox-wrapper .cds--checkbox-label-text {
-  display: none;
 }
 .c4p--add-select__selections-cell-avatar {
   margin-right: 0.5rem;
@@ -3860,7 +3763,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   flex-grow: 1;
   overflow-x: auto;
 }
-.c4p--add-select__columns .c4p--add-select__selections-checkbox-label-wrapper {
+.c4p--add-select__columns .c4p--add-select__selections-form-control-label-wrapper {
   margin-left: 0.5rem;
 }
 .c4p--add-select__columns .c4p--add-select__selections-row.cds--structured-list-row {
@@ -3889,15 +3792,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--add-select__selections-row:first-child .c4p--add-select__selections-cell-wrapper {
-  border-top: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-top: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 
 .c4p--add-select__column {
   overflow: auto;
   flex: 0 0 20rem;
   padding: 1rem;
-  border-top: 1px solid var(--cds-border-subtle-01, #e0e0e0);
-  border-right: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-top: 1px solid var(--cds-border-subtle-01, #c6c6c6);
+  border-right: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 .c4p--add-select__column-search-bar {
   display: flex;
@@ -4061,10 +3964,6 @@ button.c4p--add-select__global-filter-toggle--open {
   opacity: 0;
 }
 
-.c4p--add-select .cds--checkbox-label-text {
-  padding-left: 0.5rem;
-}
-
 .c4p--add-select__multi .c4p--empty-state {
   max-width: 16rem;
   margin-top: 3rem;
@@ -4139,6 +4038,9 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-border-subtle-selected-01: #525252;
   --cds-border-subtle-selected-02: #6f6f6f;
   --cds-border-subtle-selected-03: #8d8d8d;
+  --cds-border-tile-01: #525252;
+  --cds-border-tile-02: #6f6f6f;
+  --cds-border-tile-03: #8d8d8d;
   --cds-field-01: #262626;
   --cds-field-02: #393939;
   --cds-field-03: #525252;
@@ -4150,6 +4052,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus-inverse: #0f62fe;
   --cds-highlight: #002d9c;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
+  --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;
   --cds-icon-on-color: #ffffff;
   --cds-icon-on-color-disabled: rgba(255, 255, 255, 0.25);
@@ -4235,6 +4138,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-label-01-font-weight: 400;
   --cds-label-01-line-height: 1.33333;
   --cds-label-01-letter-spacing: 0.32px;
+  --cds-label-02-font-size: 0.875rem;
+  --cds-label-02-font-weight: 400;
+  --cds-label-02-line-height: 1.28572;
+  --cds-label-02-letter-spacing: 0.16px;
   --cds-helper-text-01-font-size: 0.75rem;
   --cds-helper-text-01-line-height: 1.33333;
   --cds-helper-text-01-letter-spacing: 0.32px;
@@ -4296,11 +4203,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
-  --cds-productive-heading-06-font-size: 2rem;
+  --cds-productive-heading-06-font-size: 2.625rem;
   --cds-productive-heading-06-font-weight: 300;
   --cds-productive-heading-06-line-height: 1.199;
   --cds-productive-heading-06-letter-spacing: 0;
-  --cds-productive-heading-07-font-size: 2.625rem;
+  --cds-productive-heading-07-font-size: 3.375rem;
   --cds-productive-heading-07-font-weight: 300;
   --cds-productive-heading-07-line-height: 1.19;
   --cds-productive-heading-07-letter-spacing: 0;
@@ -4355,7 +4262,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-display-03-line-height: 1.19;
   --cds-display-03-letter-spacing: 0;
   --cds-display-04-font-size: 2.625rem;
-  --cds-display-04-font-weight: 600;
+  --cds-display-04-font-weight: 300;
   --cds-display-04-line-height: 1.19;
   --cds-display-04-letter-spacing: 0;
   --cds-legal-01-font-size: 0.75rem;
@@ -4402,11 +4309,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
-  --cds-heading-06-font-size: 2rem;
+  --cds-heading-06-font-size: 2.625rem;
   --cds-heading-06-font-weight: 300;
   --cds-heading-06-line-height: 1.199;
   --cds-heading-06-letter-spacing: 0;
-  --cds-heading-07-font-size: 2.625rem;
+  --cds-heading-07-font-size: 3.375rem;
   --cds-heading-07-font-weight: 300;
   --cds-heading-07-line-height: 1.19;
   --cds-heading-07-letter-spacing: 0;
@@ -4453,7 +4360,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-fluid-display-03-line-height: 1.19;
   --cds-fluid-display-03-letter-spacing: 0;
   --cds-fluid-display-04-font-size: 2.625rem;
-  --cds-fluid-display-04-font-weight: 600;
+  --cds-fluid-display-04-font-weight: 300;
   --cds-fluid-display-04-line-height: 1.19;
   --cds-fluid-display-04-letter-spacing: 0;
   --cds-layer: var(--cds-layer-01, #f4f4f4);
@@ -4466,9 +4373,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-layer-accent-active: var(--cds-layer-accent-active-01, #a8a8a8);
   --cds-field: var(--cds-field-01, #f4f4f4);
   --cds-field-hover: var(--cds-field-hover-01, #e8e8e8);
-  --cds-border-subtle: var(--cds-border-subtle-01, #e0e0e0);
+  --cds-border-subtle: var(--cds-border-subtle-01, #c6c6c6);
   --cds-border-subtle-selected: var(--cds-border-subtle-selected-01, #c6c6c6);
   --cds-border-strong: var(--cds-border-strong-01, #8d8d8d);
+  --cds-border-tile: var(--cds-border-tile-01, #c6c6c6);
   position: fixed;
   z-index: 2;
   top: 3rem;
@@ -4580,7 +4488,7 @@ button.c4p--add-select__global-filter-toggle--open {
   fill: var(--cds-support-error, #da1e28);
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-status-icon.c4p--notifications-panel__notification-status-icon-success {
-  fill: var(--cds-support-success, #198038);
+  fill: var(--cds-support-success, #24a148);
 }
 .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-status-icon.c4p--notifications-panel__notification-status-icon-warning {
   fill: var(--cds-support-warning, #f1c21b);
@@ -6395,9 +6303,6 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--action-bar .c4p--action-bar__displayed-items--right {
   justify-content: flex-end;
 }
-.c4p--action-bar .c4p--action-bar-overflow-items {
-  display: inline-block;
-}
 .c4p--action-bar .c4p--action-bar__hidden-sizing-items {
   position: absolute;
   top: -100vh;
@@ -6599,6 +6504,7 @@ button.c4p--add-select__global-filter-toggle--open {
   padding: 0;
   margin: 0;
   background-color: inherit;
+  border-radius: 0;
   color: inherit;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -7137,7 +7043,7 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--page-header .c4p--page-header__navigation-row .cds--content-switcher-btn {
   background-color: var(--cds-background, #ffffff);
 }
-.c4p--page-header .cds--btn.cds--btn--icon-only.c4p--page-header__collapse-expand-toggle {
+.c4p--page-header .c4p--page-header__collapse-expand-toggle {
   position: absolute;
   z-index: 100;
   right: 0;
@@ -7146,7 +7052,7 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--page-header .c4p--page-header__collapse-expand-toggle .cds--btn__icon {
   transition: all 400ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
-.c4p--page-header .c4p--page-header__collapse-expand-toggle--collapsed .cds--btn__icon {
+.c4p--page-header .c4p--page-header__collapse-expand-toggle--collapsed svg {
   transform: scaleY(-1);
 }
 
@@ -7173,16 +7079,16 @@ button.c4p--add-select__global-filter-toggle--open {
   padding-right: 0;
 }
 .c4p--card__productive .c4p--card__title {
-  font-size: var(--cds-productive-heading-02-font-size, 1rem);
-  font-weight: var(--cds-productive-heading-02-font-weight, 600);
-  line-height: var(--cds-productive-heading-02-line-height, 1.375);
-  letter-spacing: var(--cds-productive-heading-02-letter-spacing, 0);
+  font-size: var(--cds-heading-compact-02-font-size, 1rem);
+  font-weight: var(--cds-heading-compact-02-font-weight, 600);
+  line-height: var(--cds-heading-compact-02-line-height, 1.375);
+  letter-spacing: var(--cds-heading-compact-02-letter-spacing, 0);
 }
 .c4p--card__productive .c4p--card__title-lg .c4p--card__title {
-  font-size: var(--cds-productive-heading-03-font-size, 1.25rem);
-  font-weight: var(--cds-productive-heading-03-font-weight, 400);
-  line-height: var(--cds-productive-heading-03-line-height, 1.4);
-  letter-spacing: var(--cds-productive-heading-03-letter-spacing, 0);
+  font-size: var(--cds-heading-03-font-size, 1.25rem);
+  font-weight: var(--cds-heading-03-font-weight, 400);
+  line-height: var(--cds-heading-03-line-height, 1.4);
+  letter-spacing: var(--cds-heading-03-letter-spacing, 0);
 }
 .c4p--card__productive .c4p--card__body {
   padding-top: 0.5rem;
@@ -7190,17 +7096,41 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--card__productive .c4p--card__footer {
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid var(--cds-border-subtle-01, #e0e0e0);
+  border-top: 1px solid var(--cds-border-subtle-01, #c6c6c6);
 }
 .c4p--card__productive .c4p--card__footer-no-button {
   justify-content: flex-end;
 }
 .c4p--card__productive .c4p--card__actions {
+  min-height: 2rem;
   margin: 0;
 }
 .c4p--card__productive .c4p--card__actions-header {
   margin-top: calc(-1 * 0.25rem);
   margin-right: 0.5rem;
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button {
+  min-height: 2rem;
+  padding: 0 1rem;
+  padding-right: 0.625rem;
+  padding-left: 0.625rem;
+  /* stylelint-disable-next-line max-nesting-depth */
+  /* stylelint-disable-next-line max-nesting-depth */
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button::before {
+  position: absolute;
+  left: 0;
+  width: 0.05rem;
+  height: 1.5rem;
+  background-color: var(--cds-layer-hover-01, #e8e8e8);
+  content: "";
+  opacity: 1;
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button:hover {
+  /* stylelint-disable-next-line max-nesting-depth */
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button:hover::before {
+  opacity: 0;
 }
 .c4p--card__productive .c4p--card__title-lg .c4p--card__actions-header,
 .c4p--card__productive .c4p--card__header-has-label .c4p--card__actions-header {
@@ -7960,6 +7890,11 @@ button.c4p--add-select__global-filter-toggle--open {
   border-radius: 50%;
 }
 
+.cds--btn--ghost.c4p--user-profile-image__tooltip:focus {
+  border: 0;
+  box-shadow: 0 0 0 0.25rem var(--cds-focus, #0f62fe);
+}
+
 .cds--tooltip__trigger .c4p--user-profile-image svg,
 .c4p--user-profile-image__tooltip.cds--btn--ghost:not([disabled]) svg {
   fill: var(--cds-layer-01, #f4f4f4);
@@ -8090,6 +8025,9 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-border-subtle-selected-01: #6f6f6f;
   --cds-border-subtle-selected-02: #8d8d8d;
   --cds-border-subtle-selected-03: #a8a8a8;
+  --cds-border-tile-01: #6f6f6f;
+  --cds-border-tile-02: #8d8d8d;
+  --cds-border-tile-03: #a8a8a8;
   --cds-field-01: #393939;
   --cds-field-02: #525252;
   --cds-field-03: #6f6f6f;
@@ -8101,6 +8039,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus-inverse: #0f62fe;
   --cds-highlight: #0043ce;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
+  --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;
   --cds-icon-on-color: #ffffff;
   --cds-icon-on-color-disabled: rgba(255, 255, 255, 0.25);
@@ -8186,6 +8125,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-label-01-font-weight: 400;
   --cds-label-01-line-height: 1.33333;
   --cds-label-01-letter-spacing: 0.32px;
+  --cds-label-02-font-size: 0.875rem;
+  --cds-label-02-font-weight: 400;
+  --cds-label-02-line-height: 1.28572;
+  --cds-label-02-letter-spacing: 0.16px;
   --cds-helper-text-01-font-size: 0.75rem;
   --cds-helper-text-01-line-height: 1.33333;
   --cds-helper-text-01-letter-spacing: 0.32px;
@@ -8247,11 +8190,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
-  --cds-productive-heading-06-font-size: 2rem;
+  --cds-productive-heading-06-font-size: 2.625rem;
   --cds-productive-heading-06-font-weight: 300;
   --cds-productive-heading-06-line-height: 1.199;
   --cds-productive-heading-06-letter-spacing: 0;
-  --cds-productive-heading-07-font-size: 2.625rem;
+  --cds-productive-heading-07-font-size: 3.375rem;
   --cds-productive-heading-07-font-weight: 300;
   --cds-productive-heading-07-line-height: 1.19;
   --cds-productive-heading-07-letter-spacing: 0;
@@ -8306,7 +8249,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-display-03-line-height: 1.19;
   --cds-display-03-letter-spacing: 0;
   --cds-display-04-font-size: 2.625rem;
-  --cds-display-04-font-weight: 600;
+  --cds-display-04-font-weight: 300;
   --cds-display-04-line-height: 1.19;
   --cds-display-04-letter-spacing: 0;
   --cds-legal-01-font-size: 0.75rem;
@@ -8353,11 +8296,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
-  --cds-heading-06-font-size: 2rem;
+  --cds-heading-06-font-size: 2.625rem;
   --cds-heading-06-font-weight: 300;
   --cds-heading-06-line-height: 1.199;
   --cds-heading-06-letter-spacing: 0;
-  --cds-heading-07-font-size: 2.625rem;
+  --cds-heading-07-font-size: 3.375rem;
   --cds-heading-07-font-weight: 300;
   --cds-heading-07-line-height: 1.19;
   --cds-heading-07-letter-spacing: 0;
@@ -8404,7 +8347,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-fluid-display-03-line-height: 1.19;
   --cds-fluid-display-03-letter-spacing: 0;
   --cds-fluid-display-04-font-size: 2.625rem;
-  --cds-fluid-display-04-font-weight: 600;
+  --cds-fluid-display-04-font-weight: 300;
   --cds-fluid-display-04-line-height: 1.19;
   --cds-fluid-display-04-letter-spacing: 0;
   --cds-layer: var(--cds-layer-01, #f4f4f4);
@@ -8417,9 +8360,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-layer-accent-active: var(--cds-layer-accent-active-01, #a8a8a8);
   --cds-field: var(--cds-field-01, #f4f4f4);
   --cds-field-hover: var(--cds-field-hover-01, #e8e8e8);
-  --cds-border-subtle: var(--cds-border-subtle-01, #e0e0e0);
+  --cds-border-subtle: var(--cds-border-subtle-01, #c6c6c6);
   --cds-border-subtle-selected: var(--cds-border-subtle-selected-01, #c6c6c6);
   --cds-border-strong: var(--cds-border-strong-01, #8d8d8d);
+  --cds-border-tile: var(--cds-border-tile-01, #c6c6c6);
   position: fixed;
   top: 3rem;
   right: 0;
@@ -8466,6 +8410,9 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-border-subtle-selected-01: #525252;
   --cds-border-subtle-selected-02: #6f6f6f;
   --cds-border-subtle-selected-03: #8d8d8d;
+  --cds-border-tile-01: #525252;
+  --cds-border-tile-02: #6f6f6f;
+  --cds-border-tile-03: #8d8d8d;
   --cds-field-01: #262626;
   --cds-field-02: #393939;
   --cds-field-03: #525252;
@@ -8477,6 +8424,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-focus-inverse: #0f62fe;
   --cds-highlight: #002d9c;
   --cds-icon-disabled: rgba(244, 244, 244, 0.25);
+  --cds-icon-interactive: #ffffff;
   --cds-icon-inverse: #161616;
   --cds-icon-on-color: #ffffff;
   --cds-icon-on-color-disabled: rgba(255, 255, 255, 0.25);
@@ -8562,6 +8510,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-label-01-font-weight: 400;
   --cds-label-01-line-height: 1.33333;
   --cds-label-01-letter-spacing: 0.32px;
+  --cds-label-02-font-size: 0.875rem;
+  --cds-label-02-font-weight: 400;
+  --cds-label-02-line-height: 1.28572;
+  --cds-label-02-letter-spacing: 0.16px;
   --cds-helper-text-01-font-size: 0.75rem;
   --cds-helper-text-01-line-height: 1.33333;
   --cds-helper-text-01-letter-spacing: 0.32px;
@@ -8623,11 +8575,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-productive-heading-05-font-weight: 400;
   --cds-productive-heading-05-line-height: 1.25;
   --cds-productive-heading-05-letter-spacing: 0;
-  --cds-productive-heading-06-font-size: 2rem;
+  --cds-productive-heading-06-font-size: 2.625rem;
   --cds-productive-heading-06-font-weight: 300;
   --cds-productive-heading-06-line-height: 1.199;
   --cds-productive-heading-06-letter-spacing: 0;
-  --cds-productive-heading-07-font-size: 2.625rem;
+  --cds-productive-heading-07-font-size: 3.375rem;
   --cds-productive-heading-07-font-weight: 300;
   --cds-productive-heading-07-line-height: 1.19;
   --cds-productive-heading-07-letter-spacing: 0;
@@ -8682,7 +8634,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-display-03-line-height: 1.19;
   --cds-display-03-letter-spacing: 0;
   --cds-display-04-font-size: 2.625rem;
-  --cds-display-04-font-weight: 600;
+  --cds-display-04-font-weight: 300;
   --cds-display-04-line-height: 1.19;
   --cds-display-04-letter-spacing: 0;
   --cds-legal-01-font-size: 0.75rem;
@@ -8729,11 +8681,11 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-heading-05-font-weight: 400;
   --cds-heading-05-line-height: 1.25;
   --cds-heading-05-letter-spacing: 0;
-  --cds-heading-06-font-size: 2rem;
+  --cds-heading-06-font-size: 2.625rem;
   --cds-heading-06-font-weight: 300;
   --cds-heading-06-line-height: 1.199;
   --cds-heading-06-letter-spacing: 0;
-  --cds-heading-07-font-size: 2.625rem;
+  --cds-heading-07-font-size: 3.375rem;
   --cds-heading-07-font-weight: 300;
   --cds-heading-07-line-height: 1.19;
   --cds-heading-07-letter-spacing: 0;
@@ -8780,7 +8732,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-fluid-display-03-line-height: 1.19;
   --cds-fluid-display-03-letter-spacing: 0;
   --cds-fluid-display-04-font-size: 2.625rem;
-  --cds-fluid-display-04-font-weight: 600;
+  --cds-fluid-display-04-font-weight: 300;
   --cds-fluid-display-04-line-height: 1.19;
   --cds-fluid-display-04-letter-spacing: 0;
   --cds-layer: var(--cds-layer-01, #f4f4f4);
@@ -8793,9 +8745,10 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-layer-accent-active: var(--cds-layer-accent-active-01, #a8a8a8);
   --cds-field: var(--cds-field-01, #f4f4f4);
   --cds-field-hover: var(--cds-field-hover-01, #e8e8e8);
-  --cds-border-subtle: var(--cds-border-subtle-01, #e0e0e0);
+  --cds-border-subtle: var(--cds-border-subtle-01, #c6c6c6);
   --cds-border-subtle-selected: var(--cds-border-subtle-selected-01, #c6c6c6);
   --cds-border-strong: var(--cds-border-strong-01, #8d8d8d);
+  --cds-border-tile: var(--cds-border-tile-01, #c6c6c6);
 }
 
 .c4p--web-terminal__body {

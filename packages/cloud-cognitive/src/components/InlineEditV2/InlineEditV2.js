@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useEffect, forwardRef, useRef } from 'react';
-import { Button } from '@carbon/react';
+import { IconButton } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import {
@@ -137,7 +137,8 @@ export let InlineEditV2 = forwardRef(
       <div {...rest} ref={ref} {...getDevtoolsProps(componentName)}>
         <div
           className={cx(blockClass, {
-            [`${blockClass}-focused`]: focused,
+            [`${blockClass}--focused`]: focused,
+            [`${blockClass}--invalid`]: invalid,
             // [`${blockClass}-readonly`]: readOnly,
           })}
           onFocus={onFocusHandler}
@@ -160,53 +161,54 @@ export let InlineEditV2 = forwardRef(
             // readOnly={readOnly}
             onKeyDown={onKeyHandler}
           />
-          {focused ? (
-            <>
-              {invalid && (
-                <WarningFilled
-                  size={16}
-                  className={`${blockClass}__warning-icon`}
-                />
-              )}
-              <Button
-                hasIconOnly
-                renderIcon={() => <Close size={24} />}
+          <div className={`${blockClass}__toolbar`}>
+            {focused ? (
+              <>
+                {invalid && (
+                  <WarningFilled
+                    size={16}
+                    className={`${blockClass}__warning-icon`}
+                  />
+                )}
+                <IconButton
+                  size="sm"
+                  label={cancelLabel}
+                  onClick={onCancelHandler}
+                  kind="ghost"
+                  tabIndex={0}
+                  key="cancel"
+                  className={`${blockClass}__btn ${blockClass}__btn-cancel`}
+                >
+                  <Close size={16} />
+                </IconButton>
+
+                <IconButton
+                  size="sm"
+                  label={saveLabel}
+                  onClick={onSaveHandler}
+                  kind="ghost"
+                  tabIndex={0}
+                  key="save"
+                  className={`${blockClass}__btn ${blockClass}__btn-save`}
+                  disabled={!canSave}
+                >
+                  <Checkmark size={16} />
+                </IconButton>
+              </>
+            ) : (
+              <IconButton
+                className={`${blockClass}__btn ${blockClass}__btn-edit`}
                 size="sm"
-                iconDescription={cancelLabel}
-                onClick={onCancelHandler}
+                label={editLabel}
+                onClick={onFocusHandler}
                 kind="ghost"
                 tabIndex={0}
-                key="cancel"
-                className={`${blockClass}__btn ${blockClass}__btn-cancel`}
-              />
-              <Button
-                hasIconOnly
-                renderIcon={() => <Checkmark size={24} />}
-                size="sm"
-                iconDescription={saveLabel}
-                onClick={onSaveHandler}
-                kind="ghost"
-                tabIndex={0}
-                key="save"
-                className={`${blockClass}__btn ${blockClass}__btn-save`}
-                disabled={!canSave}
-              />
-            </>
-          ) : (
-            <Button
-              className={`${blockClass}__btn ${blockClass}__btn-edit`}
-              hasIconOnly
-              // renderIcon={readOnly ? EditOff24 : Edit24}
-              renderIcon={() => <Edit size={24} />}
-              size="sm"
-              // iconDescription={readOnly ? readOnlyLabel : editLabel}
-              iconDescription={editLabel}
-              onClick={onFocusHandler}
-              kind="ghost"
-              tabIndex={0}
-              key="edit"
-            />
-          )}
+                key="edit"
+              >
+                <Edit size={16} />
+              </IconButton>
+            )}
+          </div>
         </div>
         {focused && invalid && (
           <p className={`${blockClass}__warning-text`}>{invalidLabel}</p>

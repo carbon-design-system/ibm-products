@@ -231,7 +231,7 @@ export let AddSelectBody = forwardRef(
     // main content
     const body = (
       <>
-        <div className={`${blockClass}__header`}>
+        <div id="add-select" className={`${blockClass}__header`}>
           <AddSelectFilter
             inputLabel={globalSearchLabel}
             inputPlaceholder={globalSearchPlaceholder}

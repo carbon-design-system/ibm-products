@@ -22,7 +22,7 @@ $carbon-input: #{$carbon-prefix}--text-input;
   cursor: pointer;
 }
 
-.#{$block-class}-readonly {
+.#{$block-class}--readonly {
   cursor: not-allowed;
 }
 
@@ -30,12 +30,17 @@ $carbon-input: #{$carbon-prefix}--text-input;
   background: $field-01;
 }
 
-.#{$block-class}:hover .#{$block-class}__btn-edit {
+.#{$block-class}:hover .#{$block-class}__btn-edit,
+.#{$block-class}__btn-edit.#{$block-class}__btn-edit--always-visible {
   visibility: visible;
 }
 
 .#{$block-class}__btn-edit {
   visibility: hidden;
+}
+
+.#{$block-class}--invalid {
+  outline: 2px solid $support-error;
 }
 
 .#{$block-class}--focused {
@@ -52,6 +57,7 @@ $carbon-input: #{$carbon-prefix}--text-input;
 }
 
 .#{$block-class}__warning-icon {
+  width: $spacing-05;
   margin: $spacing-03;
   color: $support-error;
 }
@@ -71,11 +77,11 @@ $carbon-input: #{$carbon-prefix}--text-input;
   outline: none;
 }
 
-.#{$block-class}-readonly .#{$block-class}__text-input.#{$carbon-input},
-.#{$block-class}-readonly
-  .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger {
-  cursor: not-allowed;
-}
+// .#{$block-class}-readonly .#{$block-class}__text-input.#{$carbon-input},
+// .#{$block-class}-readonly
+//   .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger {
+//   cursor: not-allowed;
+// }
 
 .#{$block-class}__text-input.#{$carbon-input}:focus,
 .#{$block-class}__text-input.#{$carbon-input}:active {
@@ -93,7 +99,7 @@ $carbon-input: #{$carbon-prefix}--text-input;
 }
 
 .#{$block-class}--invalid .#{$block-class}__toolbar {
-  --toolbar-width: #{$spacing-07};
+  --toolbar-width: #{$spacing-10};
   --toolbar-width-focussed: #{$spacing-12};
 }
 

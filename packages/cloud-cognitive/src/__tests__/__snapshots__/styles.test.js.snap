@@ -2340,6 +2340,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--inline-edit-v2 {
+  --c4p--inline-edit-v2--size: var(--cds-spacing-07, 2rem);
   display: flex;
   align-items: center;
   background: transparent;
@@ -2347,6 +2348,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 .c4p--inline-edit-v2-readonly {
   cursor: not-allowed;
+}
+.c4p--inline-edit-v2--sm {
+  --c4p--inline-edit-v2--size: var(--cds-spacing-07, 2rem);
+}
+.c4p--inline-edit-v2--md {
+  --c4p--inline-edit-v2--size: var(--cds-spacing-08, 2.5rem);
+}
+.c4p--inline-edit-v2--lg {
+  --c4p--inline-edit-v2--size: var(--cds-spacing-09, 3rem);
 }
 .c4p--inline-edit-v2:hover {
   background: var(--cds-field-01, #f4f4f4);
@@ -2398,16 +2408,16 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--inline-edit-v2__toolbar {
-  --toolbar-width: var(--cds-spacing-07, 2rem);
-  --toolbar-width-focussed: var(--cds-spacing-10, 4rem);
+  --toolbar-width: var(--c4p--inline-edit-v2--size);
+  --toolbar-width-focussed: calc(2 * var(--c4p--inline-edit-v2--size));
   display: inline-flex;
   overflow: hidden;
   width: var(--toolbar-width);
 }
 
 .c4p--inline-edit-v2--invalid .c4p--inline-edit-v2__toolbar {
-  --toolbar-width: var(--cds-spacing-10, 4rem);
-  --toolbar-width-focussed: var(--cds-spacing-12, 6rem);
+  --toolbar-width: calc(2 * var(--c4p--inline-edit-v2--size));
+  --toolbar-width-focussed: calc(3 * var(--c4p--inline-edit-v2--size));
 }
 
 @keyframes slide-in {

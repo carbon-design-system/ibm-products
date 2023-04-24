@@ -273,8 +273,16 @@ Card.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   clickZone: PropTypes.oneOf(['one', 'two', 'three']),
-  description: PropTypes.string,
-  label: PropTypes.string,
+  description: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
   media: PropTypes.node,
   mediaPosition: PropTypes.oneOf(['top', 'left']),
   onClick: PropTypes.func,
@@ -300,7 +308,11 @@ Card.propTypes = {
   secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
   secondaryButtonText: PropTypes.string,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
   titleSize: PropTypes.oneOf(['default', 'large']),
 };
 

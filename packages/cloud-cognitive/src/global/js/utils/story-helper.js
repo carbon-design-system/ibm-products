@@ -84,3 +84,14 @@ CodesandboxLink.propTypes = {
    */
   exampleDirectory: PropTypes.string,
 };
+
+/**
+ * A helper function that finds the designated theme on the Storybook canvas.
+ * @returns "dark" or "light"
+ */
+export const getSelectedCarbonTheme = () => {
+  const themeId = document
+    .querySelector('html')
+    .getAttribute('storybook-carbon-theme');
+  return themeId === 'g90' || themeId === 'g100' ? 'dark' : 'light';
+};

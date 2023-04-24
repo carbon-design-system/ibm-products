@@ -8,7 +8,7 @@
 import React from 'react';
 import cx from 'classnames';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { ArrowRight24, Cloud32 } from '@carbon/icons-react';
+import { ArrowRight24, Cloud32, Add16 } from '@carbon/icons-react';
 import { AspectRatio } from 'carbon-components-react';
 import {
   getStoryTitle,
@@ -190,5 +190,12 @@ export const WithButtonHref = prepareStory(Template, {
     secondaryButtonHref: '#',
     secondaryButtonText: 'Secondary',
     secondaryButtonKind: 'ghost',
+  },
+});
+
+export const WithButtonIcon = prepareStory(Template, {
+  args: {
+    ...defaultProps,
+    primaryButtonIcon: Add16,
   },
 });

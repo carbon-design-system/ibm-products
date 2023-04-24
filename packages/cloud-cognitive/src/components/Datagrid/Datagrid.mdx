@@ -63,6 +63,11 @@ seen below, with pagination and some toolbar actions. One of the key pieces to
 building the `Datagrid` is the `useDatagrid` hook, this will give you all of the
 state/props required to render a `Datagrid`.
 
+#### Multi line wrap
+
+This setting enables the table cell text wrap to two lines. This can be turned
+on for only one column in the datagrid or for every column.
+
 ```jsx
 import { Datagrid, useDatagrid } from '@carbon/ibm-products';
 
@@ -70,9 +75,22 @@ const App = () => {
   const columns = React.useMemo(() => defaultHeader, []); // These are the columns that will be used by the datagrid
   const [data] = useState(makeData(10)); // This is the data that will be rendered by the datagrid
 
+  const columns = React.useMemo(
+    () => [
+      ...defaultHeader,
+      {
+        Header: 'Someone 11',
+        accessor: 'someone11',
+        multiLineWrap: true, //If `multiLineWrap` is required only for specific columns
+      },
+    ],
+    []
+  );
+
   const datagridState = useDatagrid({
     columns,
     data,
+    multiLineWrapAll: true, // If `multiLineWrap` is required for all columns in data grid
   });
 
   return <Datagrid datagridState={datagridState} />;
@@ -775,6 +793,30 @@ filterProps: {
     )}
   />
 </Canvas>
+
+## Auto size column to fit content
+
+The `getAutoSizedColumnWidth` utility function can be used to auto size columns
+based on it's content. The width will be set to that of the largest cell in the
+column or the column header, whichever is greater. If this is not used, the
+width will be set to the default column width (150px) or the value passed to the
+`width` property in the column definition. See example below:
+
+```jsx
+  import { Datagrid, useDatagrid, getAutoSizedColumnWidth } from '@carbon/ibm-products';
+
+  ...
+
+  const myColumns = [
+    {
+      Header: 'Column 1',
+      accessor: 'column_1',
+      width: getAutoSizedColumnWidth(rows, 'column_1', 'Column 1'),
+    }
+  ]
+
+  ...
+```
 
 ## Code sample
 

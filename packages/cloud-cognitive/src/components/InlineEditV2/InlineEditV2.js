@@ -26,10 +26,12 @@ export let InlineEditV2 = forwardRef(
   (
     {
       cancelLabel,
+      editAlwaysVisible,
       editLabel,
       id,
       invalid,
-      invalidLabel,
+      invalidLabel: deprecated_invalidLabel,
+      invalidText,
       labelText,
       onCancel,
       onChange,
@@ -139,7 +141,7 @@ export let InlineEditV2 = forwardRef(
           className={cx(blockClass, {
             [`${blockClass}--focused`]: focused,
             [`${blockClass}--invalid`]: invalid,
-            // [`${blockClass}-readonly`]: readOnly,
+            // [`${blockClass}--readonly`]: readOnly,
           })}
           onFocus={onFocusHandler}
           onBlur={onBlurHandler}
@@ -162,11 +164,11 @@ export let InlineEditV2 = forwardRef(
             onKeyDown={onKeyHandler}
           />
           <div className={`${blockClass}__toolbar`}>
+            {invalid && (
+              <WarningFilled16 className={`${blockClass}__warning-icon`} />
+            )}
             {focused ? (
               <>
-                {invalid && (
-                  <WarningFilled16 className={`${blockClass}__warning-icon`} />
-                )}
                 <Button
                   hasIconOnly
                   renderIcon={Close24}
@@ -194,7 +196,10 @@ export let InlineEditV2 = forwardRef(
               </>
             ) : (
               <Button
-                className={`${blockClass}__btn ${blockClass}__btn-edit`}
+                className={cx(`${blockClass}__btn`, `${blockClass}__btn-edit`, {
+                  [`${blockClass}__btn-edit--always-visible`]:
+                    editAlwaysVisible,
+                })}
                 hasIconOnly
                 // renderIcon={readOnly ? EditOff24 : Edit24}
                 renderIcon={Edit24}
@@ -209,8 +214,10 @@ export let InlineEditV2 = forwardRef(
             )}
           </div>
         </div>
-        {focused && invalid && (
-          <p className={`${blockClass}__warning-text`}>{invalidLabel}</p>
+        {invalid && (
+          <p className={`${blockClass}__warning-text`}>
+            {invalidText ?? deprecated_invalidLabel}
+          </p>
         )}
       </div>
     );
@@ -219,11 +226,23 @@ export let InlineEditV2 = forwardRef(
 
 InlineEditV2.displayName = componentName;
 
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   * invalidLabel was misnamed, using invalidText to match Carbon
+   */
+  invalidText: PropTypes.string,
+};
+
 InlineEditV2.propTypes = {
   /**
    * label for cancel button
    */
   cancelLabel: PropTypes.string.isRequired,
+  /**
+   * By default the edit icon is shown on hover only.
+   */
+  editAlwaysVisible: PropTypes.bool,
   /**
    * label for edit button
    */
@@ -239,11 +258,11 @@ InlineEditV2.propTypes = {
   /**
    * text that is displayed if the input is invalid
    */
-  invalidLabel: PropTypes.string,
+  invalidText: PropTypes.string,
   /**
    * Provide the text that will be read by a screen reader when visiting this control
    */
-  labelText: PropTypes.string.isRequired,
+  labelText: PropTypes.string,
   /**
    * handler that is called when the cancel button is pressed or when the user removes focus from the input and there is no new value
    */
@@ -272,6 +291,8 @@ InlineEditV2.propTypes = {
    * current value of the input
    */
   value: PropTypes.string.isRequired,
+
+  ...deprecatedProps,
 };
 
 InlineEditV2.defaultProps = {

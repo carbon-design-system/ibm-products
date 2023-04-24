@@ -28,12 +28,17 @@
       background: $field-01;
     }
 
-    &:hover .#{$block-class}__btn-edit {
+    &:hover .#{$block-class}__btn-edit,
+    .#{$block-class}__btn-edit.#{$block-class}__btn-edit--always-visible {
       visibility: visible;
     }
 
     &__btn-edit {
       visibility: hidden;
+    }
+
+    &--invalid {
+      outline: 2px solid $support-01;
     }
 
     &--focused {
@@ -50,6 +55,7 @@
     }
 
     &__warning-icon {
+      width: $spacing-05;
       margin: $spacing-03;
       color: $support-01;
     }
@@ -70,11 +76,11 @@
     outline: none;
   }
 
-  .#{$block-class}-readonly .#{$block-class}__text-input.#{$carbon-input},
-  .#{$block-class}-readonly
-    .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger {
-    cursor: not-allowed;
-  }
+  // .#{$block-class}--readonly .#{$block-class}__text-input.#{$carbon-input},
+  // .#{$block-class}--readonly
+  //   .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger {
+  //   cursor: not-allowed;
+  // }
 
   .#{$block-class}__text-input.#{$carbon-input}:focus,
   .#{$block-class}__text-input.#{$carbon-input}:active {
@@ -92,7 +98,7 @@
   }
 
   .#{$block-class}--invalid .#{$block-class}__toolbar {
-    --toolbar-width: #{$spacing-07};
+    --toolbar-width: #{$spacing-10};
     --toolbar-width-focussed: #{$spacing-12};
   }
 

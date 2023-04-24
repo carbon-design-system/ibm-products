@@ -2351,11 +2351,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit-v2:hover {
   background: var(--cds-field-01, #f4f4f4);
 }
-.c4p--inline-edit-v2:hover .c4p--inline-edit-v2__btn-edit {
+.c4p--inline-edit-v2:hover .c4p--inline-edit-v2__btn-edit,
+.c4p--inline-edit-v2 .c4p--inline-edit-v2__btn-edit.c4p--inline-edit-v2__btn-edit--always-visible {
   visibility: visible;
 }
 .c4p--inline-edit-v2__btn-edit {
   visibility: hidden;
+}
+.c4p--inline-edit-v2--invalid {
+  outline: 2px solid var(--cds-support-01, #da1e28);
 }
 .c4p--inline-edit-v2--focused {
   background: var(--cds-field-01, #f4f4f4);
@@ -2368,6 +2372,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   display: none;
 }
 .c4p--inline-edit-v2__warning-icon {
+  width: var(--cds-spacing-05, 1rem);
   margin: var(--cds-spacing-03, 0.5rem);
   color: var(--cds-support-01, #da1e28);
 }
@@ -2387,11 +2392,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   outline: none;
 }
 
-.c4p--inline-edit-v2-readonly .c4p--inline-edit-v2__text-input.bx--text-input,
-.c4p--inline-edit-v2-readonly .bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
-  cursor: not-allowed;
-}
-
 .c4p--inline-edit-v2__text-input.bx--text-input:focus,
 .c4p--inline-edit-v2__text-input.bx--text-input:active {
   outline: none;
@@ -2406,7 +2406,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--inline-edit-v2--invalid .c4p--inline-edit-v2__toolbar {
-  --toolbar-width: var(--cds-spacing-07, 2rem);
+  --toolbar-width: var(--cds-spacing-10, 4rem);
   --toolbar-width-focussed: var(--cds-spacing-12, 6rem);
 }
 

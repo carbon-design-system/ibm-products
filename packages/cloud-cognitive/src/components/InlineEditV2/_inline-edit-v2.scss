@@ -16,10 +16,25 @@ $block-class: #{$pkg-prefix}--inline-edit-v2;
 $carbon-input: #{$carbon-prefix}--text-input;
 
 .#{$block-class} {
+  --#{$block-class}--size: #{$spacing-07};
+
   display: flex;
   align-items: center;
   background: transparent;
   cursor: pointer;
+}
+
+.#{$block-class}--sm {
+  --#{$block-class}--size: #{$spacing-07};
+}
+
+.#{$block-class}--md {
+  --#{$block-class}--size: #{$spacing-08};
+}
+
+.#{$block-class}--lg {
+  /* April 2023 max text input size */
+  --#{$block-class}--size: #{$spacing-09};
 }
 
 .#{$block-class}--readonly {
@@ -89,8 +104,8 @@ $carbon-input: #{$carbon-prefix}--text-input;
 }
 
 .#{$block-class}__toolbar {
-  --toolbar-width: #{$spacing-07};
-  --toolbar-width-focussed: #{$spacing-10};
+  --toolbar-width: var(--#{$block-class}--size);
+  --toolbar-width-focussed: calc(2 * var(--#{$block-class}--size));
 
   // animation div
   display: inline-flex;
@@ -99,8 +114,8 @@ $carbon-input: #{$carbon-prefix}--text-input;
 }
 
 .#{$block-class}--invalid .#{$block-class}__toolbar {
-  --toolbar-width: #{$spacing-10};
-  --toolbar-width-focussed: #{$spacing-12};
+  --toolbar-width: calc(2 * var(--#{$block-class}--size));
+  --toolbar-width-focussed: calc(3 * var(--#{$block-class}--size));
 }
 
 @keyframes slide-in {

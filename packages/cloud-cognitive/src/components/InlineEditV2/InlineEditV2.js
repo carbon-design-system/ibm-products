@@ -22,6 +22,10 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 const componentName = 'InlineEditV2';
 const blockClass = `${pkg.prefix}--inline-edit-v2`;
 
+const defaults = {
+  size: 'sm',
+};
+
 export let InlineEditV2 = forwardRef(
   (
     {
@@ -39,6 +43,7 @@ export let InlineEditV2 = forwardRef(
       // readOnly,
       // readOnlyLabel,
       saveLabel,
+      size = defaults.size,
       value,
       ...rest
     },
@@ -138,7 +143,7 @@ export let InlineEditV2 = forwardRef(
     return (
       <div {...rest} ref={ref} {...getDevtoolsProps(componentName)}>
         <div
-          className={cx(blockClass, {
+          className={cx(blockClass, `${blockClass}--${size}`, {
             [`${blockClass}--focused`]: focused,
             [`${blockClass}--invalid`]: invalid,
             // [`${blockClass}--readonly`]: readOnly,
@@ -154,7 +159,7 @@ export let InlineEditV2 = forwardRef(
             className={cx(
               `${blockClass}__text-input`,
               `${carbon.prefix}--text-input`,
-              `${carbon.prefix}--text-input--sm`
+              `${carbon.prefix}--text-input--${size}`
             )}
             type="text"
             value={value}
@@ -173,7 +178,7 @@ export let InlineEditV2 = forwardRef(
             {focused ? (
               <>
                 <IconButton
-                  size="sm"
+                  size={size}
                   label={cancelLabel}
                   onClick={onCancelHandler}
                   kind="ghost"
@@ -185,7 +190,7 @@ export let InlineEditV2 = forwardRef(
                 </IconButton>
 
                 <IconButton
-                  size="sm"
+                  size={size}
                   label={saveLabel}
                   onClick={onSaveHandler}
                   kind="ghost"
@@ -203,7 +208,7 @@ export let InlineEditV2 = forwardRef(
                   [`${blockClass}__btn-edit--always-visible`]:
                     editAlwaysVisible,
                 })}
-                size="sm"
+                size={size}
                 label={editLabel}
                 onClick={onFocusHandler}
                 kind="ghost"
@@ -291,6 +296,10 @@ InlineEditV2.propTypes = {
    * label for save button
    */
   saveLabel: PropTypes.string.isRequired,
+  /**
+   * vertical size of control
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
   /**
    * current value of the input
    */

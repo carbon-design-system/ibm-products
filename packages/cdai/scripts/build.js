@@ -3,11 +3,10 @@
 const cpx = require('cpx');
 const { exec } = require('child_process');
 const path = require('path');
-const rimraf = require('rimraf');
+const { rimraf } = require('rimraf');
 const util = require('util');
 
 const copy = util.promisify(cpx.copy);
-const rimrafAsync = util.promisify(rimraf);
 const execAsync = (commands, env) =>
   new Promise((resolve, reject) => {
     const options = {
@@ -41,7 +40,7 @@ async function build() {
   // eslint-disable-next-line no-console
   console.log('Deleting old build folders...');
   await Promise.all(
-    buildDirectories.map((dir) => rimrafAsync(`${ROOT_DIR}/${dir}`))
+    buildDirectories.map((dir) => rimraf(`${ROOT_DIR}/${dir}`))
   );
 
   const buildSteps = [

@@ -58,3 +58,15 @@
 [storybook-carbon-theme='debug'] body {
   color: initial;
 }
+
+.preview__notification--feature-flag {
+  margin: $spacing-05 0;
+}
+
+.preview__notification--feature-flag .#{$prefix}--list--unordered {
+  margin-top: $spacing-04;
+}
+
+.preview__notification-button {
+  margin: $spacing-04 0;
+}

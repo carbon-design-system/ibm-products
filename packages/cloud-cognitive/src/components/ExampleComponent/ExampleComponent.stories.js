@@ -6,6 +6,7 @@
  */
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import { Add16 } from '@carbon/icons-react';
 
 import {
   getStoryTitle,
@@ -14,6 +15,7 @@ import {
 
 import { ExampleComponent } from '.';
 import mdx from './ExampleComponent.mdx';
+import { pkg } from '../../settings';
 
 import styles from './_storybook-styles.scss';
 
@@ -31,7 +33,15 @@ export default {
   },
 };
 
-const Template = (args) => {
+const Template = ({ featureFlags, ...args }) => {
+  if (featureFlags) {
+    pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
+    Object.keys(featureFlags).forEach((flagKey) => {
+      pkg.feature[flagKey] = featureFlags[flagKey];
+    });
+    pkg._silenceWarnings(true);
+  }
+
   return (
     <ExampleComponent
       primaryButtonLabel="Primary"
@@ -53,4 +63,49 @@ export const boxedSet = prepareStory(Template, {
     borderColor: '#141414',
     boxedBorder: true,
   },
+});
+
+export const featureFlagSecondaryIconFalse = prepareStory(Template, {
+  args: {
+    ...exampleComponent.args,
+    secondaryIcon: Add16,
+    featureFlags: { ['ExampleComponent.secondaryIcon']: false },
+  },
+});
+
+export const featureFlagSecondaryIconTrue = prepareStory(Template, {
+  args: {
+    ...exampleComponent.args,
+    secondaryIcon: Add16,
+    featureFlags: { ['ExampleComponent.secondaryIcon']: true },
+  },
+});
+
+const HookedTemplate = ({ featureFlags, ...args }) => {
+  if (featureFlags) {
+    pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
+    Object.keys(featureFlags).forEach((flagKey) => {
+      pkg.feature[flagKey] = featureFlags[flagKey];
+    });
+    pkg._silenceWarnings(true);
+  }
+
+  return (
+    <ExampleComponent
+      usesExampleHook={10}
+      primaryButtonLabel="Primary"
+      secondaryButtonLabel="Secondary"
+      onPrimaryClick={action('onPrimaryClick')}
+      onSecondaryClick={action('onSecondaryClick')}
+      {...args}
+    />
+  );
+};
+
+export const exampleHookDisabledComponent = prepareStory(HookedTemplate, {
+  args: { featureFlags: { ['ExampleComponent.useExample']: false } },
+});
+
+export const exampleHookEnabledComponent = prepareStory(HookedTemplate, {
+  args: { featureFlags: { ['ExampleComponent.useExample']: true } },
 });

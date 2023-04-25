@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.50.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.49.0...@carbon/ibm-products@1.50.0) (2023-04-25)
+
+
+### Bug Fixes
+
+* allow nodes to be passed to additional card props ([#2885](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2885)) ([c8499bf](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c8499bf4b6d262938c8585ac3b1cefb711b00d26))
+* **Datagrid:** invalid aria role ([#2882](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2882)) ([9c788fe](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9c788fef290f7a30c3d0d62da8e660a356851bca))
+* **TagSet:** removed border radius to show descenders ([#2707](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2707)) ([bb75256](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/bb75256049a08c29451a847f583d9c3ffa9d5fcd))
+
+
+### Features
+
+* **Datagrid:** add support for NotFound empty state ([#2887](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2887)) ([8a3651b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8a3651b7e004b112911c1068007e88b65a02b193))
+
+
+
+
+
 # [1.49.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.48.0...@carbon/ibm-products@1.49.0) (2023-04-18)
 
 

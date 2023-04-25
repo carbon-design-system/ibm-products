@@ -38,6 +38,7 @@ export let InlineEditV2 = forwardRef(
       // readOnlyLabel,
       saveLabel,
       value,
+
       ...rest
     },
     ref

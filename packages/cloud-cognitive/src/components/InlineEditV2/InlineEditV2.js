@@ -33,6 +33,7 @@ export let InlineEditV2 = forwardRef(
       editAlwaysVisible,
       editLabel,
       id,
+      inheritTypography,
       invalid,
       invalidLabel: deprecated_invalidLabel,
       invalidText,
@@ -146,6 +147,7 @@ export let InlineEditV2 = forwardRef(
           className={cx(blockClass, `${blockClass}--${size}`, {
             [`${blockClass}--focused`]: focused,
             [`${blockClass}--invalid`]: invalid,
+            [`${blockClass}--inherit-type`]: inheritTypography,
             // [`${blockClass}--readonly`]: readOnly,
           })}
           onFocus={onFocusHandler}
@@ -260,6 +262,14 @@ InlineEditV2.propTypes = {
    * Specify a custom id for the input
    */
   id: PropTypes.string.isRequired,
+  /**
+   * inheritTypography - causes the text entry field to inherit typography settings
+   * assigned to the container. This is useful when editing titles for instance.
+   *
+   * NOTE: The size property limits the vertical size of the input element.
+   * Inherited font's should be selected to fit within the size selected.
+   */
+  inheritTypography: PropTypes.bool,
   /**
    * determines if the input is invalid
    */

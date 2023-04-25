@@ -67,13 +67,21 @@ $carbon-input: #{$carbon-prefix}--text-input;
   flex: 1;
 }
 
+.#{$block-class}--inherit-type .#{$block-class}__text-input {
+  /* match font of container */
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
 .#{$block-class}__text-input-label {
   display: none;
 }
 
 .#{$block-class}__warning-icon {
   width: $spacing-05;
-  margin: $spacing-03;
+  margin: auto $spacing-03;
   color: $support-error;
 }
 
@@ -114,8 +122,11 @@ $carbon-input: #{$carbon-prefix}--text-input;
 }
 
 .#{$block-class}--invalid .#{$block-class}__toolbar {
-  --toolbar-width: calc(2 * var(--#{$block-class}--size));
-  --toolbar-width-focussed: calc(3 * var(--#{$block-class}--size));
+  // width of invalid icon is always $spacing-07 ($spacing-05 + 2 * $spacing-03 margin)
+  --toolbar-width: calc(var(--#{$block-class}--size) + #{$spacing-07});
+  --toolbar-width-focussed: calc(
+    2 * var(--#{$block-class}--size) + #{$spacing-07}
+  );
 }
 
 @keyframes slide-in {

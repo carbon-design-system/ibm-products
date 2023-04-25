@@ -57,6 +57,7 @@
   }
 
   &--toggle {
+    /* stylelint-disable-next-line media-feature-range-notation */
     @media (max-width: 320px) {
       #{get-component-namespace($component-name: $type-layout__name)}__cell {
         display: block;

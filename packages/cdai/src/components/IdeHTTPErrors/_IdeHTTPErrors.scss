@@ -37,6 +37,7 @@ $max: 1584px;
   margin-top: $spacing-03;
   @include carbon--type-style('productive-heading-05');
   // sm
+  /* stylelint-disable-next-line media-feature-range-notation */
   @media (min-width: 0) and (max-width: $sm) {
     @include carbon--type-style('productive-heading-03');
   }
@@ -79,6 +80,7 @@ $max: 1584px;
   z-index: 1;
   width: carbon--mini-units(125);
   // sm
+  /* stylelint-disable-next-line media-feature-range-notation */
   @media (min-width: 0) and (max-width: $sm) {
     padding-top: $layout-05;
     margin-top: -$spacing-03;

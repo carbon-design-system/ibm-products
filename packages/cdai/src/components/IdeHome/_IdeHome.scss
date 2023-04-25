@@ -83,6 +83,7 @@ $ide-home-card-height: 16rem;
   max-width: 50%;
   flex: 1 0 50%;
   margin-bottom: $spacing-01;
+  /* stylelint-disable-next-line media-feature-range-notation */
   @media (min-width: 42rem) {
     max-width: 25%;
     flex: 1 0 25%;

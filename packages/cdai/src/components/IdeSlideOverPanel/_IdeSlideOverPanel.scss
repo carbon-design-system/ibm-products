@@ -19,6 +19,7 @@
   top: 0;
   right: 0;
   bottom: 0;
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
   left: 0;
   transition: background-color $duration--slow-02 motion(exit, expressive),
     opacity $duration--moderate-02 motion(exit, expressive),
@@ -73,6 +74,7 @@
   top: 0;
   right: 0;
   bottom: 0;
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
   left: 0;
   display: flex;
   flex: 1;

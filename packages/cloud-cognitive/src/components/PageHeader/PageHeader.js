@@ -165,7 +165,7 @@ export let PageHeader = React.forwardRef(
     const handleResizeActionBarColumn = ({ width }) => {
       /* don't know how to test resize */
       /* istanbul ignore next */
-      setActionBarColumnWidth({ width });
+      setActionBarColumnWidth(width);
     };
 
     /* istanbul ignore next */

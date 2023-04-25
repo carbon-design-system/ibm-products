@@ -170,7 +170,6 @@ export let SidePanel = React.forwardRef(
 
     /* istanbul ignore next */
     const handleResize = ({ height }) => {
-      console.log(height);
       setPanelHeight(height);
       const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
       const actionsContainer = getActionsContainerElement();

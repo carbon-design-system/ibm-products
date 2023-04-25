@@ -104,9 +104,7 @@ export const TearsheetShell = React.forwardRef(
     const localRef = useRef();
     const resizer = useRef(null);
     const modalRef = ref || localRef;
-    const { width } = useResizeObserver(resizer, (size) =>
-      console.log('size', size)
-    );
+    const { width } = useResizeObserver(resizer);
 
     const wide = size === 'wide';
 

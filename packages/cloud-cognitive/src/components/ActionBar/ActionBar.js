@@ -56,6 +56,9 @@ export let ActionBar = React.forwardRef(
     const sizingRef = useRef(null);
     const sizes = useRef({});
 
+    const backupRef = useRef();
+    const localRef = ref || backupRef;
+
     // create hidden sizing items
     useEffect(() => {
       // Hidden action bar and items used to calculate sizes
@@ -197,10 +200,10 @@ export let ActionBar = React.forwardRef(
 
     // // resize of the items
     useResizeObserver(sizingRef, { callback: handleResize });
-    useResizeObserver(ref, { callback: handleResize });
+    useResizeObserver(localRef, { callback: handleResize });
 
     return (
-      <div {...rest} className={cx([blockClass, className])} ref={ref}>
+      <div {...rest} className={cx([blockClass, className])} ref={localRef}>
         {hiddenSizingItems}
 
         <div

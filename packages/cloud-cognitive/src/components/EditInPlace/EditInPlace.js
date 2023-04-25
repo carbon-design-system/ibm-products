@@ -14,8 +14,6 @@ import { InlineEditV2 } from '../InlineEditV2';
 /**
  * this is a wrapper component that will allow us to support the rename of InlineEdit to EditInPlace
  *
- * if ComponentRename.InlineEdit.Editable is not enabled via a feature flag then
- * this wrapper log
  * if the user passes in the v2 feature flag the v2 version of the component will be rendered
  * since this is a temporary solution the named export should just remain InlineEdit unlike how
  * Card works as a base layer for Productive and Expressive cards.

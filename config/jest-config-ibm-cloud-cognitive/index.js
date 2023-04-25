@@ -46,6 +46,7 @@ module.exports = {
     },
   },
   moduleFileExtensions: ['js', 'json', 'node'],
+  modulePathIgnorePatterns: ['<rootDir>/examples'],
   resolver: require.resolve('./setup/resolver.js'),
   reporters: ['default'],
   setupFiles: [require.resolve('./setup/setupFiles')],

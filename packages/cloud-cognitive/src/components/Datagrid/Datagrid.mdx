@@ -928,37 +928,37 @@ according to their persistent strategy.
     treated as `true`)
 
 ```jsx
-  const columns = React.useMemo(() => defaultHeader, []);
-  const [data] = useState(makeData(10));
-  const DatagridActions = (datagridState) => (
-    <TableToolbarContent>
-      <TableToolbarSearch ... />
-      <Button ... />
-      <datagridState.CustomizeColumnsButton />
-    </TableToolbarContent>
-  )
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      initialState: {
-        hiddenColumns: ['age'],
-        columnOrder: [],
-      },
-      customizeColumnsProps: {
-        onSaveColumnPrefs: (newColDefs) => {
-          console.log(newColDefs);
-        },
-      },
-      DatagridActions,
+const columns = React.useMemo(() => defaultHeader, []);
+const [data] = useState(makeData(10));
+const DatagridActions = (datagridState) => (
+  <TableToolbarContent>
+    <TableToolbarSearch ... />
+    <Button ... />
+    <datagridState.CustomizeColumnsButton />
+  </TableToolbarContent>
+)
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    initialState: {
+      hiddenColumns: ['age'],
+      columnOrder: [],
     },
-    useCustomizeColumns,
-    useColumnOrder,
-  );
+    customizeColumnsProps: {
+      onSaveColumnPrefs: (newColDefs) => {
+        console.log(newColDefs);
+      },
+    },
+    DatagridActions,
+  },
+  useCustomizeColumns,
+  useColumnOrder,
+);
 
-  return (
-    <Datagrid datagridState={datagridState} />
-  );
+return (
+  <Datagrid datagridState={datagridState} />
+);
 ```
 
 ## Disabling select rows
@@ -1036,6 +1036,235 @@ const datagridState = useDatagrid(
   },
   useInfiniteScroll
 );
+```
+
+## Nested rows
+
+Nested rows allow disclosing content in data tables progressively by displaying
+primary data first (parent row) and enabling users to navigate secondary
+information levels (child rows).
+
+1. Include the `useNestedRows` hook
+2. Make sure that any row you want to have nested rows in your data has a
+   `subRows` property with an array of objects for each nested row. The row
+   expander will be included by default as long as the `useNestedRows` hook is
+   provided and it is detected that a row has `subRows` within it.
+
+```jsx
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+  },
+  useNestedRows
+);
+
+return <Datagrid datagridState={datagridState} />;
+```
+
+## Row click
+
+Datagrid supports adding a click event on an entire row with the use of the
+`useOnRowClick` hook.
+
+1. Include the `useOnRowClick` hook
+2. Add the `onRowClick` property, this is a callback function that will be
+   called when a row is clicked. It will give back the row and the click event.
+
+```jsx
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    onRowClick: (row, event) => {
+      ...
+    },
+  },
+  useOnRowClick
+);
+
+return <Datagrid datagridState={datagridState} />;
+```
+
+## Detect row hover
+
+There may be cases when you want to detect if a user is hovering on a particular
+row. In this case, use the `useRowIsMouseOver` hook.
+
+1. Include the `useRowIsMouseOver` hook
+2. When hover is detected on a row, a property called `isMouseOver` is changed
+   from `false` to `true` within that row.
+
+## Select items across all pages
+
+By default, selecting all items with paginated rows will result in just the
+current page rows being selected. Incorporating the `useSelectAllWithToggle`
+hook will provide the option to select all rows across all pages.
+
+1. Include `useSelectAllWithToggle` and `useSelectRows` hook
+2. Add the `selectAllToggle` property to the `useDatagrid` hook
+
+- optionally pass in labels to ensure proper translation
+- optionally pass in `onSelectAllRows`, function that will be called via the
+  select all rows checkbox onChange
+
+```jsx
+const [data] = useState(makeData(100));
+const columns = React.useMemo(() => getColumns(data), []);
+const [areAllSelected, setAreAllSelected] = useState(false);
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    initialState: {
+      pageSize: 10,
+      pageSizes: [5, 10, 25, 50],
+    },
+    selectAllToggle: {
+      labels: {
+        allRows: 'Select all',
+        allPageRows: 'Select all on page',
+      },
+      onSelectAllRows: setAreAllSelected,
+    },
+    DatagridPagination,
+    DatagridActions,
+    DatagridBatchActions,
+  },
+  useSelectRows,
+  useSelectAllWithToggle
+);
+
+return (
+  <>
+    <Datagrid datagridState={datagridState} />
+    <p>{`Are all entries selected across all pages? - ${areAllSelected}`}</p>
+  </>
+);
+```
+
+## Selecting rows
+
+When building a Datagrid that requires selectable rows, use the `useSelectRows`
+hook.
+
+1. Include `useSelectRows` hook
+2. Add `onRowSelect` to the `useDatagrid` hook, this is a callback function
+   called when on a row's selection checkbox onChange, and sends back the row
+   object and the event
+
+```jsx
+const [data] = useState(makeData(10));
+const columns = React.useMemo(() => getColumns(data), []);
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    onRowSelect: (row, event) => console.log(row, event),
+  },
+  useSelectRows
+);
+
+return <Datagrid datagridState={datagridState} />;
+```
+
+The select all checkbox can be optionally hidden by settings the `hideSelectAll`
+property to `true` in the `useDatagrid` hook.
+
+```jsx
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    onRowSelect: (row, event) => console.log(row, event),
+    hideSelectAll: true,
+  },
+  useSelectRows
+);
+```
+
+Datagrid also provides the option to use radio selection in cases where only one
+row should be selected at a time. Additionally, you can have preselected
+row/rows, see example below.
+
+```jsx
+const [data] = useState(makeData(10));
+const columns = React.useMemo(() => getColumns(data), []);
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    radio: true,
+    onRadioSelect: (row) => console.log(`Row clicked: ${row.id}`),
+    initialState: {
+      selectedRowIds: {
+        3: true,
+      },
+    },
+  },
+  useSelectRows
+);
+
+return <Datagrid datagridState={datagridState} />;
+```
+
+## Sortable columns
+
+To add sortable columns to your Datagrid, simply add the `useSortableColumns`
+hook. This will allow each column header to be clickable and sort each column in
+either ascending or descending order.
+
+1. Include `useSortableColumns` hook
+
+```jsx
+const [data] = useState(makeData(10));
+const columns = React.useMemo(() => getColumns(data), []);
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+  },
+  useSortableColumns
+);
+
+return <Datagrid datagridState={datagridState} />;
+```
+
+## Sticky column
+
+Sticky columns can be useful when you have many columns that create a horizontal
+scroll and you have important data in the first or last column that you always
+want to be visible.
+
+1. Include the `useStickyColumn` hook
+2. Sticky columns can _only_ be applied to the first and the last columns in the
+   Datagrid. To have the first column stick, add `sticky: 'left'` to the first
+   column definition. To have the last column stick, add `sticky: 'right'` to
+   the last column definition.
+
+```jsx
+const columns = [
+  {
+    Header: 'First column',
+    accessor: 'first_column',
+    sticky: 'left',
+  },
+  {
+    ...
+  },
+  {
+    ...
+  }
+];
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+  },
+  useStickyColumn
+);
+
+return <Datagrid datagridState={datagridState} />;
 ```
 
 ## Code sample

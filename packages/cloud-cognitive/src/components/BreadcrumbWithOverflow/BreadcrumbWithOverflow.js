@@ -11,7 +11,7 @@ import React, { useState, useEffect, useRef } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { useResizeDetector } from 'react-resize-detector';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 // Carbon and package components we use.
 import {
@@ -268,27 +268,16 @@ export let BreadcrumbWithOverflow = ({
     checkFullyVisibleBreadcrumbItems();
   };
 
-  /* istanbul ignore next */ // not sure how to test resize
-  const handleBreadcrumbItemsResize = () => {
-    /* istanbul ignore next */ // not sure how to test resize
-    checkFullyVisibleBreadcrumbItems();
-  };
-
   let backItem = breadcrumbs[breadcrumbs.length - 1];
   /* istanbul ignore if */ // not sure how to test media queries
   if (backItem.isCurrentPage) {
     backItem = breadcrumbs[breadcrumbs.length - 2];
   }
 
-  useResizeDetector({
-    onResize: handleBreadcrumbItemsResize,
-    targetRef: sizingContainerRef,
-  });
-
-  useResizeDetector({
-    onResize: handleResize,
-    targetRef: breadcrumbItemWithOverflow,
-  });
+  // container resize
+  useResizeObserver(sizingContainerRef, { callback: handleResize });
+  // item resize
+  useResizeObserver(breadcrumbItemWithOverflow, { callback: handleResize });
 
   return (
     <div

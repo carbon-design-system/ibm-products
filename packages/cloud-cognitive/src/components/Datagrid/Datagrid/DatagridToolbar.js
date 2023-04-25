@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Add, OverflowMenuVertical } from '@carbon/react/icons';
 import {
   TableToolbar,
   TableBatchActions,
   TableBatchAction,
 } from '@carbon/react';
-import { useResizeDetector } from 'react-resize-detector';
+import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
@@ -155,7 +155,8 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
 };
 
 const DatagridToolbar = (datagridState) => {
-  const { width, ref } = useResizeDetector();
+  const ref = useRef(null);
+  const { width } = useResizeObserver(ref);
   const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
     datagridState;
 

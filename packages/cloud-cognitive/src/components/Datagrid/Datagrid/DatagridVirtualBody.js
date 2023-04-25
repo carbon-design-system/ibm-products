@@ -11,7 +11,7 @@ import { TableBody } from '@carbon/react';
 import { pkg } from '../../../settings';
 import DatagridHead from './DatagridHead';
 import { px } from '@carbon/layout';
-import { useResizeDetector } from 'react-resize-detector';
+import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -52,7 +52,7 @@ const DatagridVirtualBody = (datagridState) => {
     gridRefElement.style.width = gridRefElement?.clientWidth;
   };
 
-  useResizeDetector({ onResize: handleVirtualGridResize, targetRef: gridRef });
+  useResizeObserver(gridRef, { callback: handleVirtualGridResize });
 
   const syncScroll = (e) => {
     const virtualBody = e.target;

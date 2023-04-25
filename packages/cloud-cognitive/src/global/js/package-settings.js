@@ -80,7 +80,8 @@ const defaults = {
   feature: {
     'a-new-feature': false,
     'default-portal-target-body': true,
-    'ComponentRename.InlineEdit.Editable': false,
+    'ExampleComponent.secondaryIcon': false,
+    'ExampleComponent.useExample': false,
   },
 };
 

@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.27](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.26...@carbon/ibm-products@2.0.0-rc.27) (2023-04-25)
+
+
+### Bug Fixes
+
+* allow nodes to be passed to additional card props v11 ([#2886](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2886)) ([5c2639a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5c2639a52e3b831316a113e52e8748e867c6370d))
+* **card:** Add styles.test.js.snap ([3597da8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3597da8e4d68071e61b599dc0557a2c38fde45f1))
+* **card:** CI Lint updates ([64f225a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/64f225ab8f61cea0469641e4e616912d6c009d1e))
+* **card:** CI Lint updates ([78034f0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/78034f07042098674b0cc57191b34478ae453ab2))
+* **card:** Remove with action icon ([450025c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/450025c4fdd272b858a9c7d41d568950f20a59a0))
+* **card:** update button requirements ([856e369](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/856e369a3b643bc4721fc7cd123df14b70e9d228))
+* **card:** update card design review ([#2763](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2763)) ([edab7e1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/edab7e1f834c4172a9aca5e0bf73819ebddb2685))
+* **card:** Update style errors ([6dfbfc3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6dfbfc3caacd822efb0da59778c76f3608ea37a0))
+* **card:** Update tests ([8eb30e0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8eb30e0443f0de9ea7045c3ce12eef13f4783e61))
+* **Datagrid:** filtering number empty tag bug (v11) ([#2880](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2880)) ([b7ed43a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b7ed43a8a52117db4a7436451ee15b8329a6674b))
+* **Datagrid:** invalid aria role ([7ab6d49](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7ab6d499872b960fb789a0d5a7c69037ca464b30))
+* **Datagrid:** removed explicit role from tbody ([8c10b54](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8c10b5450934681bff2457f82b21ac3f93dac4b1))
+* styling issues found in 2830 ([#2890](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2890)) ([46ea160](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/46ea1600dc11efc2b0ca06d9a2d730d1fee84fee))
+* **TagSet:** remove tag radius in overflow ([#2897](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2897)) ([17cd5b5](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/17cd5b5ede6dbdc1b8706983636c51c5379f508f))
+* user profile image focus v11 ([#2874](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2874)) ([d7f4dfd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d7f4dfda92481086b1e7993cc11af7dfe8ef91b7))
+
+
+### Features
+
+* **Datagrid:** add support for NotFound empty state ([efff037](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/efff0373fd464af6f578cb16579cfd72d17aacb0))
+
+
+
+
+
 # [2.0.0-rc.26](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.25...@carbon/ibm-products@2.0.0-rc.26) (2023-04-18)
 
 

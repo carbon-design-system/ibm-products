@@ -221,6 +221,12 @@ for center and right aligned as well. See
 [design guidance](https://pages.github.ibm.com/cdai-design/pal/components/data-table/column-alignment/usage)
 for details around when to change default column alignment.
 
+To utilize center or right aligned columns refer to the steps below:
+
+1. Include `useColumnCenterAlign` or `useColumnRightAlign` hook/s.
+2. Add `rightAlignedColumn` or `centerAlignedColumn` to the column object in
+   which you which to change the default column alignment.
+
 ```jsx
 import {
   Datagrid,

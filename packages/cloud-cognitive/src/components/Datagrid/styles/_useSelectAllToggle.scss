@@ -8,6 +8,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/theme' as *;
 @use './variables';
+@use '../../../global/styles/project-settings' as c4p-settings;
 
 .#{variables.$block-class}__grid-container {
   th.#{variables.$block-class}__select-all-toggle-on,
@@ -31,6 +32,6 @@ th.#{variables.$block-class}__select-all-toggle-on.button {
   margin-left: $spacing-01;
 }
 
-.#{$block-class}__select-all-toggle-overflow.#{$carbon-prefix}--overflow-menu-options--sm.#{$carbon-prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+.#{variables.$block-class}__select-all-toggle-overflow.#{c4p-settings.$carbon-prefix}--overflow-menu-options--sm.#{c4p-settings.$carbon-prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
   width: $spacing-13;
 }

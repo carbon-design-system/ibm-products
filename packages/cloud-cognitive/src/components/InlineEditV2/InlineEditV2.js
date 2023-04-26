@@ -46,6 +46,7 @@ export let InlineEditV2 = forwardRef(
       size = defaults.size,
       saveLabel,
       value,
+
       ...rest
     },
     ref

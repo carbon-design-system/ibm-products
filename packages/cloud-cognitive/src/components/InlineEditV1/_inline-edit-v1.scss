@@ -37,7 +37,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
 
 @include block-wrap($block-class) {
   --#{$block-class}--size: #{$spacing-08};
-  --#{$block-class}--icon-size: #{$spacing-05};
   --#{$block-class}--background-color: #{$layer-01};
   --#{$block-class}--toolbar-width: calc(2 * var(--#{$block-class}--size));
 
@@ -67,12 +66,15 @@ $block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
 
   &.#{$block-class}--sm {
     --#{$block-class}--size: #{$spacing-07};
-    --#{$block-class}--icon-size: #{$spacing-05};
+  }
+
+  &.#{$block-class}--md {
+    --#{$block-class}--size: #{$spacing-08};
   }
 
   &.#{$block-class}--lg {
+    /* April 2023 max text input size */
     --#{$block-class}--size: #{$spacing-09};
-    --#{$block-class}--icon-size: #{$spacing-05};
   }
 
   &.#{$block-class}--invalid {

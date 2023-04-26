@@ -36,7 +36,7 @@ const defaultProps = {
   editLabel: 'Edit',
   id: 'story-id',
   invalid: false,
-  invalidLabel: 'This field is required',
+  invalidText: 'This field is required',
   labelText: 'Label text',
   onCancel: () => {},
   onChange: () => {},

@@ -22,20 +22,28 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 const componentName = 'InlineEditV2';
 const blockClass = `${pkg.prefix}--inline-edit-v2`;
 
+const defaults = {
+  size: 'sm',
+};
+
 export let InlineEditV2 = forwardRef(
   (
     {
       cancelLabel,
+      editAlwaysVisible,
       editLabel,
       id,
+      inheritTypography,
       invalid,
-      invalidLabel,
+      invalidLabel: deprecated_invalidLabel,
+      invalidText,
       labelText,
       onCancel,
       onChange,
       onSave,
       // readOnly,
       // readOnlyLabel,
+      size = defaults.size,
       saveLabel,
       value,
 
@@ -137,10 +145,11 @@ export let InlineEditV2 = forwardRef(
     return (
       <div {...rest} ref={ref} {...getDevtoolsProps(componentName)}>
         <div
-          className={cx(blockClass, {
+          className={cx(blockClass, `${blockClass}--${size}`, {
             [`${blockClass}--focused`]: focused,
             [`${blockClass}--invalid`]: invalid,
-            // [`${blockClass}-readonly`]: readOnly,
+            [`${blockClass}--inherit-type`]: inheritTypography,
+            // [`${blockClass}--readonly`]: readOnly,
           })}
           onFocus={onFocusHandler}
           onBlur={onBlurHandler}
@@ -153,7 +162,7 @@ export let InlineEditV2 = forwardRef(
             className={cx(
               `${blockClass}__text-input`,
               `${carbon.prefix}--text-input`,
-              `${carbon.prefix}--text-input--sm`
+              `${carbon.prefix}--text-input--${size}`
             )}
             type="text"
             value={value}
@@ -163,15 +172,15 @@ export let InlineEditV2 = forwardRef(
             onKeyDown={onKeyHandler}
           />
           <div className={`${blockClass}__toolbar`}>
+            {invalid && (
+              <WarningFilled16 className={`${blockClass}__warning-icon`} />
+            )}
             {focused ? (
               <>
-                {invalid && (
-                  <WarningFilled16 className={`${blockClass}__warning-icon`} />
-                )}
                 <Button
                   hasIconOnly
                   renderIcon={Close24}
-                  size="sm"
+                  size={size}
                   iconDescription={cancelLabel}
                   onClick={onCancelHandler}
                   kind="ghost"
@@ -183,7 +192,7 @@ export let InlineEditV2 = forwardRef(
                 <Button
                   hasIconOnly
                   renderIcon={Checkmark24}
-                  size="sm"
+                  size={size}
                   iconDescription={saveLabel}
                   onClick={onSaveHandler}
                   kind="ghost"
@@ -195,11 +204,14 @@ export let InlineEditV2 = forwardRef(
               </>
             ) : (
               <Button
-                className={`${blockClass}__btn ${blockClass}__btn-edit`}
+                className={cx(`${blockClass}__btn`, `${blockClass}__btn-edit`, {
+                  [`${blockClass}__btn-edit--always-visible`]:
+                    editAlwaysVisible,
+                })}
                 hasIconOnly
                 // renderIcon={readOnly ? EditOff24 : Edit24}
                 renderIcon={Edit24}
-                size="sm"
+                size={size}
                 // iconDescription={readOnly ? readOnlyLabel : editLabel}
                 iconDescription={editLabel}
                 onClick={onFocusHandler}
@@ -210,8 +222,10 @@ export let InlineEditV2 = forwardRef(
             )}
           </div>
         </div>
-        {focused && invalid && (
-          <p className={`${blockClass}__warning-text`}>{invalidLabel}</p>
+        {invalid && (
+          <p className={`${blockClass}__warning-text`}>
+            {invalidText ?? deprecated_invalidLabel}
+          </p>
         )}
       </div>
     );
@@ -220,11 +234,23 @@ export let InlineEditV2 = forwardRef(
 
 InlineEditV2.displayName = componentName;
 
+export const deprecatedProps = {
+  /**
+   * **Deprecated**
+   * invalidLabel was misnamed, using invalidText to match Carbon
+   */
+  invalidText: PropTypes.string,
+};
+
 InlineEditV2.propTypes = {
   /**
    * label for cancel button
    */
   cancelLabel: PropTypes.string.isRequired,
+  /**
+   * By default the edit icon is shown on hover only.
+   */
+  editAlwaysVisible: PropTypes.bool,
   /**
    * label for edit button
    */
@@ -234,13 +260,21 @@ InlineEditV2.propTypes = {
    */
   id: PropTypes.string.isRequired,
   /**
+   * inheritTypography - causes the text entry field to inherit typography settings
+   * assigned to the container. This is useful when editing titles for instance.
+   *
+   * NOTE: The size property limits the vertical size of the input element.
+   * Inherited font's should be selected to fit within the size selected.
+   */
+  inheritTypography: PropTypes.bool,
+  /**
    * determines if the input is invalid
    */
   invalid: PropTypes.bool,
   /**
    * text that is displayed if the input is invalid
    */
-  invalidLabel: PropTypes.string,
+  invalidText: PropTypes.string,
   /**
    * Provide the text that will be read by a screen reader when visiting this control
    */
@@ -270,9 +304,15 @@ InlineEditV2.propTypes = {
    */
   saveLabel: PropTypes.string.isRequired,
   /**
+   * vertical size of control
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  /**
    * current value of the input
    */
   value: PropTypes.string.isRequired,
+
+  ...deprecatedProps,
 };
 
 InlineEditV2.defaultProps = {

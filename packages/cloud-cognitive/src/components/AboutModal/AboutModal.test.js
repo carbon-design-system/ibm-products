@@ -101,7 +101,6 @@ describe(componentName, () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
   });
 

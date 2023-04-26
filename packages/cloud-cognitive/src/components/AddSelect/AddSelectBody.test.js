@@ -227,7 +227,6 @@ describe(componentName, () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });

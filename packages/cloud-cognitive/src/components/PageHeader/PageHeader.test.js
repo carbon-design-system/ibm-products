@@ -227,7 +227,6 @@ describe('PageHeader', () => {
       mock.mock.mockRestore();
     });
     mockElement.mockRestore();
-    jest.restoreAllMocks();
     window.scrollTo = scrollTo;
     window.ResizeObserver = ResizeObserver;
   });

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -17,8 +17,8 @@ import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import {
   Breadcrumb,
   BreadcrumbItem,
-  Link,
   IconButton,
+  Link,
   OverflowMenu,
   OverflowMenuItem,
   usePrefix,
@@ -303,8 +303,11 @@ export let BreadcrumbWithOverflow = ({
                 href={backItem.href}
                 renderIcon={() => (
                   <IconButton
-                    label={backItem.title || backItem.label}
+                    className={`${blockClass}__back__button`}
                     align="right"
+                    kind="ghost"
+                    label={backItem.title || backItem.label}
+                    size="sm"
                   >
                     <ArrowLeft size={16} />
                   </IconButton>

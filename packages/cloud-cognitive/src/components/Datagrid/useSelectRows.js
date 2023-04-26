@@ -62,6 +62,7 @@ const SelectRow = (datagridState) => {
     radio,
     toggleAllRowsSelected,
     onRadioSelect,
+    onRowSelect,
     columns,
     withStickyColumn,
   } = datagridState;
@@ -94,6 +95,7 @@ const SelectRow = (datagridState) => {
           }
         }
         onChange(e);
+        onRowSelect?.(row, e);
       }}
       id={`${tableId}-${row.index}`}
       name={`${tableId}-${row.index}-name`}

@@ -8,7 +8,7 @@
 // Import portions of React that are needed.
 import React, { useEffect, useState, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { useResizeDetector } from 'react-resize-detector';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -102,8 +102,9 @@ export const TearsheetShell = React.forwardRef(
     }, [portalTargetIn]);
 
     const localRef = useRef();
+    const resizer = useRef(null);
     const modalRef = ref || localRef;
-    const { width, ref: resizer } = useResizeDetector({ handleHeight: false });
+    const { width } = useResizeObserver(resizer);
 
     const wide = size === 'wide';
 

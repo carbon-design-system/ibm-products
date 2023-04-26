@@ -327,6 +327,7 @@ export const SelectableRow = () => {
       toolbarBatchActions: getBatchActions(),
       emptyStateTitle,
       emptyStateDescription,
+      onRowSelect: (row, event) => console.log(row, event),
     },
     useSelectRows,
     useStickyColumn

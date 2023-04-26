@@ -152,6 +152,9 @@ export let InlineEditV2 = forwardRef(
             [`${blockClass}--focused`]: focused,
             [`${blockClass}--invalid`]: invalid,
             [`${blockClass}--inherit-type`]: inheritTypography,
+            [`${blockClass}--overflows`]:
+              inputRef.current &&
+              inputRef.current.scrollWidth > inputRef.current.offsetWidth,
             // [`${blockClass}--readonly`]: readOnly,
           })}
           onFocus={onFocusHandler}
@@ -174,6 +177,9 @@ export let InlineEditV2 = forwardRef(
             // readOnly={readOnly}
             onKeyDown={onKeyHandler}
           />
+          <div className={`${blockClass}__ellipsis`} aria-hidden={!focused}>
+            &hellip;
+          </div>
           <div className={`${blockClass}__toolbar`}>
             {invalid && (
               <WarningFilled

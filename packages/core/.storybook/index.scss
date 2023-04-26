@@ -61,6 +61,7 @@
 
 .preview__notification--feature-flag {
   margin: $spacing-05 0;
+  word-break: break-word;
 }
 
 .preview__notification--feature-flag .#{$prefix}--list--unordered {

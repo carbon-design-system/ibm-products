@@ -58,26 +58,29 @@ const decorators = [
               lowContrast
               statusIconDescription="describes the close button"
               title="This story uses the following feature flags to enable or disable some functionality."
-            >
-              <UnorderedList>
-                {Object.keys(args.featureFlags).map((flagKey) => (
-                  <ListItem key={flagKey}>
-                    {flagKey}: {`${args.featureFlags[flagKey]}`}
-                  </ListItem>
-                ))}
-              </UnorderedList>
-              <Button
-                className="preview__notification-button"
-                kind="ghost"
-                onClick={() => {
-                  window.open(
-                    'https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/cloud-cognitive#enabling-canary-components-and-flagged-features'
-                  );
-                }}
-              >
-                Learn more
-              </Button>
-            </ToastNotification>
+              caption={
+                <>
+                  <UnorderedList>
+                    {Object.keys(args.featureFlags).map((flagKey) => (
+                      <ListItem key={flagKey}>
+                        {flagKey}: {`${args.featureFlags[flagKey]}`}
+                      </ListItem>
+                    ))}
+                  </UnorderedList>
+                  <Button
+                    className="preview__notification-button"
+                    kind="ghost"
+                    onClick={() => {
+                      window.open(
+                        'https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/cloud-cognitive#enabling-canary-components-and-flagged-features'
+                      );
+                    }}
+                  >
+                    Learn more
+                  </Button>
+                </>
+              }
+            />
           ) : null}
           {styles ? <Style styles={styles}>{story}</Style> : story}
         </Style>

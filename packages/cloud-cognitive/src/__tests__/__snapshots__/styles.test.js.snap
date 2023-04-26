@@ -3349,7 +3349,6 @@ c4p--card__icon:active {
 
 .c4p--inline-edit {
   --c4p--inline-edit--size: 2.5rem;
-  --c4p--inline-edit--icon-size: 1rem;
   --c4p--inline-edit--background-color: var(--cds-layer-01, #f4f4f4);
   --c4p--inline-edit--toolbar-width: calc(2 * var(--c4p--inline-edit--size));
   position: relative;
@@ -3371,11 +3370,13 @@ c4p--card__icon:active {
 }
 .c4p--inline-edit.c4p--inline-edit--sm {
   --c4p--inline-edit--size: 2rem;
-  --c4p--inline-edit--icon-size: 1rem;
+}
+.c4p--inline-edit.c4p--inline-edit--md {
+  --c4p--inline-edit--size: 2.5rem;
 }
 .c4p--inline-edit.c4p--inline-edit--lg {
+  /* April 2023 max text input size */
   --c4p--inline-edit--size: 3rem;
-  --c4p--inline-edit--icon-size: 1rem;
 }
 .c4p--inline-edit.c4p--inline-edit--invalid {
   /* stylelint-disable-next-line carbon/theme-token-use */

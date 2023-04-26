@@ -77,7 +77,11 @@ export let CardHeader = ({
 
 CardHeader.propTypes = {
   actions: PropTypes.oneOfType([PropTypes.array, PropTypes.node]),
-  description: PropTypes.string,
+  description: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
   hasActions: PropTypes.bool,
   label: PropTypes.string,
   noActionIcons: PropTypes.bool,
@@ -85,7 +89,11 @@ CardHeader.propTypes = {
   primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   primaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   primaryButtonText: PropTypes.string,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
   titleSize: PropTypes.oneOf(['default', 'large']),
 };
 

@@ -10,18 +10,34 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '../../global/styles/project-settings' as *;
 @use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/motion' as *;
 
 $block-class: #{$pkg-prefix}--inline-edit-v2;
 $carbon-input: #{$carbon-prefix}--text-input;
 
 .#{$block-class} {
+  --#{$block-class}--size: #{$spacing-07};
+
   display: flex;
   align-items: center;
   background: transparent;
   cursor: pointer;
 }
 
-.#{$block-class}-readonly {
+.#{$block-class}--sm {
+  --#{$block-class}--size: #{$spacing-07};
+}
+
+.#{$block-class}--md {
+  --#{$block-class}--size: #{$spacing-08};
+}
+
+.#{$block-class}--lg {
+  /* April 2023 max text input size */
+  --#{$block-class}--size: #{$spacing-09};
+}
+
+.#{$block-class}--readonly {
   cursor: not-allowed;
 }
 
@@ -29,7 +45,8 @@ $carbon-input: #{$carbon-prefix}--text-input;
   background: $field-01;
 }
 
-.#{$block-class}:hover .#{$block-class}__btn-edit {
+.#{$block-class}:hover .#{$block-class}__btn-edit,
+.#{$block-class}__btn-edit.#{$block-class}__btn-edit--always-visible {
   visibility: visible;
 }
 
@@ -37,7 +54,11 @@ $carbon-input: #{$carbon-prefix}--text-input;
   visibility: hidden;
 }
 
-.#{$block-class}-focused {
+.#{$block-class}--invalid {
+  outline: 2px solid $support-error;
+}
+
+.#{$block-class}--focused {
   background: $field-01;
   outline: 2px solid $focus;
 }
@@ -46,13 +67,21 @@ $carbon-input: #{$carbon-prefix}--text-input;
   flex: 1;
 }
 
+.#{$block-class}--inherit-type .#{$block-class}__text-input {
+  /* match font of container */
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
 .#{$block-class}__text-input-label {
   display: none;
 }
 
 .#{$block-class}__warning-icon {
-  /* stylelint-disable-next-line carbon/layout-token-use */
-  margin-right: 0.4375rem;
+  width: $spacing-05;
+  margin: auto $spacing-03;
   color: $support-error;
 }
 
@@ -71,13 +100,55 @@ $carbon-input: #{$carbon-prefix}--text-input;
   outline: none;
 }
 
-.#{$block-class}-readonly .#{$block-class}__text-input.#{$carbon-input},
-.#{$block-class}-readonly
-  .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger {
-  cursor: not-allowed;
-}
+// .#{$block-class}-readonly .#{$block-class}__text-input.#{$carbon-input},
+// .#{$block-class}-readonly
+//   .#{$carbon-prefix}--btn.#{$carbon-prefix}--btn--icon-only.#{$carbon-prefix}--tooltip__trigger {
+//   cursor: not-allowed;
+// }
 
 .#{$block-class}__text-input.#{$carbon-input}:focus,
 .#{$block-class}__text-input.#{$carbon-input}:active {
   outline: none;
+}
+
+.#{$block-class}__toolbar {
+  --toolbar-width: var(--#{$block-class}--size);
+  --toolbar-width-focussed: calc(2 * var(--#{$block-class}--size));
+
+  // animation div
+  display: inline-flex;
+  overflow: hidden;
+  width: var(--toolbar-width);
+}
+
+.#{$block-class}--invalid .#{$block-class}__toolbar {
+  // width of invalid icon is always $spacing-07 ($spacing-05 + 2 * $spacing-03 margin)
+  --toolbar-width: calc(var(--#{$block-class}--size) + #{$spacing-07});
+  --toolbar-width-focussed: calc(
+    2 * var(--#{$block-class}--size) + #{$spacing-07}
+  );
+}
+
+@keyframes slide-in {
+  0% {
+    overflow: hidden;
+    width: var(--toolbar-width);
+  }
+
+  99% {
+    overflow: hidden;
+    width: var(--toolbar-width-focussed);
+  }
+
+  100% {
+    overflow: visible;
+    width: var(--toolbar-width-focussed);
+  }
+}
+
+.#{$block-class}--focused .#{$block-class}__toolbar {
+  overflow: initial;
+  width: var(--toolbar-width-focussed);
+
+  animation: slide-in $duration-moderate-01 motion(entrance, productive);
 }

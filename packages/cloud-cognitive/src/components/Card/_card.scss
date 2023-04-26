@@ -15,18 +15,18 @@
 $block-class: #{c4p-settings.$pkg-prefix}--card;
 
 .#{$block-class} {
-  background: $layer-01;
+  background-color: $layer-01;
   color: $text-primary;
 }
 
 .#{$block-class}__clickable {
   cursor: pointer;
   // stylelint-disable-next-line carbon/motion-easing-use
-  transition: background $duration-fast-02;
+  transition: background-color $duration-fast-02;
 }
 
 .#{$block-class}__clickable:hover {
-  background: $background-hover;
+  background-color: $layer-hover-01;
 }
 
 .#{$block-class}__media-left {
@@ -82,7 +82,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 }
 
 .#{$block-class}__body {
-  @include type-style('body-short-01');
+  @include type-style('body-compact-01');
 
   padding: $spacing-05;
   padding-top: 0;
@@ -96,13 +96,20 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 .#{$block-class}__actions {
   display: flex;
   flex-direction: row;
-  margin: $spacing-05;
-  margin-top: 0;
 }
 
 .#{$block-class}__icon {
+  padding: $spacing-03;
   color: inherit;
   cursor: pointer;
+}
+
+.#{$block-class}__icon:hover {
+  background-color: $layer-hover-01;
+}
+
+#{$block-class}__icon:active {
+  color: $link-primary-hover;
 }
 
 .#{$block-class}__link {

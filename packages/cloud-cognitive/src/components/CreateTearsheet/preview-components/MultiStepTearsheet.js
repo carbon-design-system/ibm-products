@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,8 +29,8 @@ const blockClass = `${pkg.prefix}--tearsheet-create-multi-step`;
 const CustomStep = ({ value1, setValue1, ...rest }) => {
   return (
     <CreateTearsheetStep {...rest} disableSubmit={!value1}>
-      <Grid narrow>
-        <Column xlg={8} lg={8} md={8} sm={8}>
+      <Grid>
+        <Column xlg={8} lg={8} md={8} sm={4}>
           <TextInput
             value={value1}
             onChange={(event) => setValue1(event.target.value)}
@@ -134,8 +134,8 @@ export const MultiStepTearsheet = ({
           description="It will also be used by your producers and consumers as part of the
           connection information, so make it something easy to recognize."
         >
-          <Grid narrow>
-            <Column xlg={8} lg={8} md={8} sm={8}>
+          <Grid>
+            <Column xlg={8} lg={8} md={8} sm={4}>
               <TextInput
                 labelText="Topic name"
                 placeholder="Enter topic name"
@@ -218,8 +218,8 @@ export const MultiStepTearsheet = ({
           messages across the members of a consumer group."
           fieldsetLegendText="Partition information"
         >
-          <Grid narrow>
-            <Column xlg={3} lg={3}>
+          <Grid>
+            <Column xlg={3} lg={3} md={8} sm={4}>
               <NumberInput
                 iconDescription="Choose a number"
                 id="carbon-number"
@@ -245,8 +245,8 @@ export const MultiStepTearsheet = ({
           will be missed."
           fieldsetLegendText="Message retention scheduling"
         >
-          <Grid narrow>
-            <Column xlg={8} lg={8} md={8} sm={8}>
+          <Grid>
+            <Column xlg={8} lg={8} md={8} sm={4}>
               <RadioButtonGroup
                 legendText="Message retention"
                 name="radio-button-group"

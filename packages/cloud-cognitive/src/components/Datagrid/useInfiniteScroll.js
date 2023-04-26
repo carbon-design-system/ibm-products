@@ -5,14 +5,20 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import debounce from 'lodash/debounce';
 import useParentDimensions from './useParentDimensions';
 import useResizeTable from './useResizeTable';
 
+import { pkg } from '../../settings';
+
 const useInfiniteScroll = (hooks) => {
   useParentDimensions(hooks);
   useResizeTable(hooks);
+
+  useEffect(() => {
+    pkg.checkReportFeatureEnabled('Datagrid.useInfiniteScroll');
+  }, []);
 
   const useInstance = (instance) => {
     const { isFetching, tableHeight, innerListRef, fetchMoreData, tableId } =

@@ -14,5 +14,5 @@
 $block-class: #{c4p-settings.$pkg-prefix}--card;
 
 .#{$block-class}__title {
-  @include type.type-style('productive-heading-03');
+  @include type.type-style('heading-03');
 }

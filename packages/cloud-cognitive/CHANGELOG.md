@@ -3,6 +3,116 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.27](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.26...@carbon/ibm-products@2.0.0-rc.27) (2023-04-25)
+
+
+### Bug Fixes
+
+* allow nodes to be passed to additional card props v11 ([#2886](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2886)) ([5c2639a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5c2639a52e3b831316a113e52e8748e867c6370d))
+* **card:** Add styles.test.js.snap ([3597da8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3597da8e4d68071e61b599dc0557a2c38fde45f1))
+* **card:** CI Lint updates ([64f225a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/64f225ab8f61cea0469641e4e616912d6c009d1e))
+* **card:** CI Lint updates ([78034f0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/78034f07042098674b0cc57191b34478ae453ab2))
+* **card:** Remove with action icon ([450025c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/450025c4fdd272b858a9c7d41d568950f20a59a0))
+* **card:** update button requirements ([856e369](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/856e369a3b643bc4721fc7cd123df14b70e9d228))
+* **card:** update card design review ([#2763](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2763)) ([edab7e1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/edab7e1f834c4172a9aca5e0bf73819ebddb2685))
+* **card:** Update style errors ([6dfbfc3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6dfbfc3caacd822efb0da59778c76f3608ea37a0))
+* **card:** Update tests ([8eb30e0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8eb30e0443f0de9ea7045c3ce12eef13f4783e61))
+* **Datagrid:** filtering number empty tag bug (v11) ([#2880](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2880)) ([b7ed43a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b7ed43a8a52117db4a7436451ee15b8329a6674b))
+* **Datagrid:** invalid aria role ([7ab6d49](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/7ab6d499872b960fb789a0d5a7c69037ca464b30))
+* **Datagrid:** removed explicit role from tbody ([8c10b54](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8c10b5450934681bff2457f82b21ac3f93dac4b1))
+* styling issues found in 2830 ([#2890](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2890)) ([46ea160](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/46ea1600dc11efc2b0ca06d9a2d730d1fee84fee))
+* **TagSet:** remove tag radius in overflow ([#2897](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2897)) ([17cd5b5](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/17cd5b5ede6dbdc1b8706983636c51c5379f508f))
+* user profile image focus v11 ([#2874](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2874)) ([d7f4dfd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d7f4dfda92481086b1e7993cc11af7dfe8ef91b7))
+
+
+### Features
+
+* **Datagrid:** add support for NotFound empty state ([efff037](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/efff0373fd464af6f578cb16579cfd72d17aacb0))
+
+
+
+
+
+# [2.0.0-rc.26](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.25...@carbon/ibm-products@2.0.0-rc.26) (2023-04-18)
+
+
+### Bug Fixes
+
+* Add select accessibility refactor v11 ([#2817](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2817)) ([c948b9f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c948b9fcbfa60ec67961ca36c4466f0938d66fef))
+* **Datagrid:** fix batch action logic to show one/two actions ([f64464f](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f64464f82476df81373560d61d5ae4ebd65c8350))
+* **Datagrid:** fix how open state value is set ([#2865](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2865)) ([8789d88](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8789d88532db7550ec96f723a58f570ef0b8b734))
+* **Datagrid:** refactor RowSizeDropdown to use ToggleTip ([e9037a9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e9037a9d0b550fb50d9b5f0f270cc0e52cb58856))
+* **Datagrid:** sortable and customizable columns work together now (v11) ([#2867](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2867)) ([58e0b4e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/58e0b4eb993da86d642f832f598fdacd08f9d3bd))
+* Inline edit fixes package v2 ([#2872](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2872)) ([b8f5c2b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b8f5c2bed0f5402342e530394ff082ebdf990826))
+* **side-panel:** fix close button hover state ([#2835](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2835)) ([198c168](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/198c1689b38b5fe6c14a71fdfaab689f860f7bfa))
+
+
+### Features
+
+* **Datagrid:** add option for auto sizing columns ([880ddbf](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/880ddbfb8ed2aa982e746ccfd5e6396efe014757))
+* possible feature flag usage ([#2748](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2748)) ([3d21f47](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/3d21f4711d3bfe419ab8269c0ccbdb48d4ddb34a))
+* **storybook:** new fn getSelectedCarbonTheme ([46f8ad9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/46f8ad9fba06104833b1729a2b1adc029e93a53d))
+
+
+
+
+
+# [2.0.0-rc.25](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.24...@carbon/ibm-products@2.0.0-rc.25) (2023-04-11)
+
+
+### Bug Fixes
+
+* **create-full-page:** fix grid usage examples ([#2807](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2807)) ([6af2692](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6af26923fb3d8211c363ee130b965203133a362c))
+* **create-full-page:** revert grid regression ([#2809](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2809)) ([379d98d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/379d98dd42e4d01b13a9d66957d9aebb04d25458))
+* **create-tearsheet:** fix grid usage examples ([d2e61f1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d2e61f1591cdb1e2cc50b6ece3c11f542b771f3f))
+* **Datagrid:** add background to virtual body header, fix svg scoping ([1f75e9c](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1f75e9cd3f3dc059a3a509f63fdab22530371e76))
+* **Datagrid:** address bug with keyboard interaction for inline edit ([72fa80a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/72fa80abb407d5aed90073a7ad193b067c883455))
+* **Datagrid:** filter from Columns component to prevent ordering issues ([#2827](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2827)) ([74032e6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/74032e6fd81c5cbc636958c0a3a69b45a605bdc3))
+* **empty-state:** update header spacing ([#2766](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2766)) ([#2781](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2781)) ([a1a8ef1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/a1a8ef15ac15c43f3f26676a5647c182e3c0039c))
+* **side-panel:** fix icon button alignment ([#2814](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2814)) ([52f6fbc](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/52f6fbc152b9b046e1e6b9b70545778110242cb8))
+* **sidepanel toolbar:** tooltip truncate issue fix ([#2787](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2787)) ([e943f14](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e943f14a8af84ee8ebf7ef1de9262a5fcdc146d3))
+
+
+
+
+
+# [2.0.0-rc.24](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.23...@carbon/ibm-products@2.0.0-rc.24) (2023-04-04)
+
+
+### Bug Fixes
+
+* add select keyboard accessibility adjustments ([#2709](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2709)) ([f35dabb](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/f35dabb83d7fc640e44afc0d16681da52e06f67f))
+* **create-full-page:** focus modal secondary button ([#2790](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2790)) ([76d92f6](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/76d92f6141103e5d49f9f02166ef2423f1b0fe3c))
+* **create-full-page:** update button sizes ([#2788](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2788)) ([85b8627](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/85b86275cee3ed3f2d6edb7a0336ac33e26d5b01))
+* **empty-state:** update type tokens ([#2779](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2779)) ([4147836](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/41478361309d730e7f85ba1e67b1abb0eb604e36))
+* **http-errors:** update type tokens ([#2780](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2780)) ([df903a3](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/df903a30b3c8bba705670bec2b79222195477370))
+* **tearsheet-shell:** use `Layer` for `wide` only ([#2789](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2789)) ([614d333](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/614d333a4b4bad946a58e83329106f05ba481351))
+* **tearsheet:** fix button sizes ([#2776](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2776)) ([38a01e0](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/38a01e0b449a8efd29837f3ac2fe3816577c1940))
+* **TearsheetNarrow:** increase description width to 80% ([#2795](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2795)) ([98180ff](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/98180ff6a1135ce5694a73704f3105f44c37e970))
+
+
+
+
+
+# [2.0.0-rc.23](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.22...@carbon/ibm-products@2.0.0-rc.23) (2023-03-28)
+
+
+### Bug Fixes
+
+* add `Layer` to `Tearsheet` ([#2762](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2762)) ([6c94cd7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/6c94cd7adbfdac7779d0bbe3b0f1456d3ff3ea03))
+* datagrid inline edit focus background color v11 ([#2723](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2723)) ([b7e8736](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b7e8736772d0b426104b1214049cf7199d0cb501))
+* **Datagrid:** hide columns with no header title ([#2746](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2746)) ([5e8b46b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/5e8b46bb8cf902b0390426d4b95fe3a697d88a91))
+* use v1 inline edit in page header ([#2514](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2514)) ([069e042](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/069e042e6003828482d83d83a4025cd3f190f30e))
+
+
+### Features
+
+* **SidePanel:** expose tooltip props ([#2757](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2757)) ([ba9ccdd](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/ba9ccdd41e2c8624db715bc2659efd7ae0e385e3))
+
+
+
+
+
 # [2.0.0-rc.22](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.21...@carbon/ibm-products@2.0.0-rc.22) (2023-03-21)
 
 

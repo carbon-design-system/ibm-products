@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { useResizeDetector } from 'react-resize-detector';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import { moderate02 } from '@carbon/motion';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -169,7 +169,7 @@ export let SidePanel = React.forwardRef(
     }, [labelText, title]);
 
     /* istanbul ignore next */
-    const handleResize = (width, height) => {
+    const handleResize = ({ height }) => {
       setPanelHeight(height);
       const sidePanelOuter = document.querySelector(`#${blockClass}-outer`);
       const actionsContainer = getActionsContainerElement();
@@ -640,15 +640,13 @@ export let SidePanel = React.forwardRef(
                   renderIcon={icon}
                   iconDescription={label}
                   tooltipPosition={tooltipPosition || 'bottom'}
-                  tooltipAlignment={tooltipAlignment || 'center'}
+                  tooltipAlignment={tooltipAlignment || 'start'}
                   hasIconOnly={!leading}
                   disabled={disabled}
                   className={cx([
                     `${blockClass}__action-toolbar-button`,
                     className,
                     {
-                      [`${blockClass}__action-toolbar-icon-only-button`]:
-                        icon && !leading,
                       [`${blockClass}__action-toolbar-leading-button`]: leading,
                     },
                   ])}
@@ -688,11 +686,7 @@ export let SidePanel = React.forwardRef(
 
     const contentRef = ref || sidePanelRef;
 
-    useResizeDetector({
-      handleHeight: true,
-      onResize: handleResize,
-      targetRef: contentRef,
-    });
+    useResizeObserver(contentRef, { callback: handleResize });
 
     return (
       <AnimatePresence>

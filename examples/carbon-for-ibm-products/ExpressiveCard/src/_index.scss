@@ -3,8 +3,8 @@
 body {
   @include carbon--theme();
 
-  background-color: $ui-background;
-  color: $text-01;
+  background-color: $background;
+  color: $text-primary;
 }
 
 .app {

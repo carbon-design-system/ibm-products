@@ -2385,6 +2385,15 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   letter-spacing: inherit;
   line-height: inherit;
 }
+.c4p--inline-edit-v2__ellipsis {
+  position: relative;
+  margin-left: calc(-1 * var(--cds-spacing-05, 1rem));
+  opacity: 0;
+}
+.c4p--inline-edit-v2--overflows:not(.c4p--inline-edit-v2--focused) .c4p--inline-edit-v2__ellipsis {
+  opacity: 1;
+}
+
 .c4p--inline-edit-v2__text-input-label {
   display: none;
 }

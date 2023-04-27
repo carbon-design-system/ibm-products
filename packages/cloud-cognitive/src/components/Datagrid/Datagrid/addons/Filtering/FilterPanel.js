@@ -247,7 +247,10 @@ const FilterPanel = ({
           {filterSections.map(
             ({ categoryTitle = null, filters = [], hasAccordion }) => {
               return (
-                <div className={`${componentClass}__category`}>
+                <div
+                  key={categoryTitle}
+                  className={`${componentClass}__category`}
+                >
                   {categoryTitle && (
                     <div className={`${componentClass}__category-title`}>
                       {categoryTitle}

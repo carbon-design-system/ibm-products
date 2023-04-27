@@ -48,18 +48,18 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
           <SkeletonText className={`${blockClass}__title-skeleton`} />
         ) : isEditable ? (
           <InlineEdit
-            v1
-            hideLabel
+            buttonTooltipDirection="bottom"
+            v2
             value={text}
-            {...{
-              editDescription,
-              onChange,
-              onSave,
-              labelText: editableLabel,
-              revertDescription,
-              saveDescription,
-            }}
-            buttonTooltipPosition="bottom"
+            cancelLabel={revertDescription}
+            editLabel={editDescription}
+            saveLabel={saveDescription}
+            labelText={editableLabel}
+            onChange={onChange}
+            // buttonTooltipPosition="bottom"
+            onSave={onSave}
+            size="md"
+            inheritTypography
             {...rest}
           />
         ) : (
@@ -87,7 +87,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
   );
 };
 
-export const inlineEditRequired = ({ onSave }) => !!onSave;
+export const InlineEditRequired = ({ onSave }) => !!onSave;
 
 PageHeaderTitle.propTypes = {
   // passed from page header
@@ -124,13 +124,13 @@ PageHeaderTitle.propTypes = {
       loading: PropTypes.bool,
 
       // inline edit version properties
-      editDescription: PropTypes.string.isRequired.if(inlineEditRequired),
-      editableLabel: PropTypes.string.isRequired.if(inlineEditRequired),
-      id: PropTypes.string.isRequired.if(inlineEditRequired),
+      editDescription: PropTypes.string.isRequired.if(InlineEditRequired),
+      editableLabel: PropTypes.string.isRequired.if(InlineEditRequired),
+      id: PropTypes.string.isRequired.if(InlineEditRequired),
       onChange: PropTypes.func,
       onSave: PropTypes.func,
-      revertDescription: PropTypes.string.isRequired.if(inlineEditRequired),
-      saveDescription: PropTypes.string.isRequired.if(inlineEditRequired),
+      revertDescription: PropTypes.string.isRequired.if(InlineEditRequired),
+      saveDescription: PropTypes.string.isRequired.if(InlineEditRequired),
       // Update docgen if changed
     }),
     PropTypes.string,

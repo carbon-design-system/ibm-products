@@ -1082,12 +1082,14 @@ PageHeader.propTypes = {
       loading: PropTypes.bool,
 
       // inline edit version properties
-      editableLabel: PropTypes.string, // .isRequired.if(inlineEditRequired),
-      id: PropTypes.string, // .isRequired.if(inlineEditRequired),
+      editableLabel: PropTypes.string, // .isRequired.if(InlineEditRequired),
+      id: PropTypes.string, // .isRequired.if(InlineEditRequired),
+      onCancel: PropTypes.func,
       onChange: PropTypes.func,
       onSave: PropTypes.func,
-      cancelDescription: PropTypes.string, //.isRequired.if(inlineEditRequired),
-      saveDescription: PropTypes.string, //.isRequired.if(inlineEditRequired),
+      cancelDescription: PropTypes.string, //.isRequired.if(InlineEditRequired),
+      editDescription: PropTypes.string, // .isRequired.if(InlineEditRequired),
+      saveDescription: PropTypes.string, //.isRequired.if(InlineEditRequired),
       // Update docgen if changed
     }),
     PropTypes.string,

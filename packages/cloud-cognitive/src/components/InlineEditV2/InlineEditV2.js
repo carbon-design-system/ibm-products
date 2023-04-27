@@ -23,12 +23,16 @@ const componentName = 'InlineEditV2';
 const blockClass = `${pkg.prefix}--inline-edit-v2`;
 
 const defaults = {
+  buttonTooltipAlignment: 'center',
+  buttonTooltipPosition: 'top',
   size: 'sm',
 };
 
 export let InlineEditV2 = forwardRef(
   (
     {
+      buttonTooltipAlignment,
+      buttonTooltipPosition,
       cancelLabel,
       editAlwaysVisible,
       editLabel,
@@ -187,6 +191,8 @@ export let InlineEditV2 = forwardRef(
                   tabIndex={0}
                   key="cancel"
                   className={`${blockClass}__btn ${blockClass}__btn-cancel`}
+                  tooltipAlignment={buttonTooltipAlignment}
+                  tooltipPosition={buttonTooltipPosition}
                 >
                   <Close size={16} />
                 </IconButton>
@@ -200,6 +206,8 @@ export let InlineEditV2 = forwardRef(
                   key="save"
                   className={`${blockClass}__btn ${blockClass}__btn-save`}
                   disabled={!canSave}
+                  tooltipAlignment={buttonTooltipAlignment}
+                  tooltipPosition={buttonTooltipPosition}
                 >
                   <Checkmark size={16} />
                 </IconButton>
@@ -216,6 +224,8 @@ export let InlineEditV2 = forwardRef(
                 kind="ghost"
                 tabIndex={0}
                 key="edit"
+                tooltipAlignment={buttonTooltipAlignment}
+                tooltipPosition={buttonTooltipPosition}
               >
                 <Edit size={16} />
               </IconButton>
@@ -246,9 +256,34 @@ export const deprecatedProps = {
 
 InlineEditV2.propTypes = {
   /**
-   * label for cancel button
+   * buttonTooltipAlignment from the standard tooltip. Default center.
+   *
+   * Can be passed either as one of tooltip options or as an object specifying cancel, edit and save separately
    */
-  cancelLabel: PropTypes.string.isRequired,
+  buttonTooltipAlignment: PropTypes.oneOfType([
+    PropTypes.oneOf(['start', 'center', 'end']),
+    PropTypes.shape({
+      cancel: PropTypes.oneOf(['start', 'center', 'end']),
+      edit: PropTypes.oneOf(['start', 'center', 'end']),
+      save: PropTypes.oneOf(['start', 'center', 'end']),
+    }),
+  ]),
+  /**
+   * buttonTooltipPosition from the standard tooltip
+   *
+   * Can be passed either as one of tooltip options or as an object specifying cancel, edit and save separately
+   */
+  buttonTooltipPosition: PropTypes.oneOfType([
+    PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+    PropTypes.shape({
+      cancel: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+      edit: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+      save: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+    }),
+  ]),
+  /**
+   * label for cancel button
+   */ cancelLabel: PropTypes.string.isRequired,
   /**
    * By default the edit icon is shown on hover only.
    */
@@ -316,10 +351,4 @@ InlineEditV2.propTypes = {
   value: PropTypes.string.isRequired,
 
   ...deprecatedProps,
-};
-
-InlineEditV2.defaultProps = {
-  invalid: false,
-  invalidLabel: '',
-  // readOnly: false,
 };

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -11,14 +11,14 @@ import React, { useState, useEffect, useRef } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { useResizeDetector } from 'react-resize-detector';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 // Carbon and package components we use.
 import {
   Breadcrumb,
   BreadcrumbItem,
-  Link,
   IconButton,
+  Link,
   OverflowMenu,
   OverflowMenuItem,
   usePrefix,
@@ -268,27 +268,16 @@ export let BreadcrumbWithOverflow = ({
     checkFullyVisibleBreadcrumbItems();
   };
 
-  /* istanbul ignore next */ // not sure how to test resize
-  const handleBreadcrumbItemsResize = () => {
-    /* istanbul ignore next */ // not sure how to test resize
-    checkFullyVisibleBreadcrumbItems();
-  };
-
   let backItem = breadcrumbs[breadcrumbs.length - 1];
   /* istanbul ignore if */ // not sure how to test media queries
   if (backItem.isCurrentPage) {
     backItem = breadcrumbs[breadcrumbs.length - 2];
   }
 
-  useResizeDetector({
-    onResize: handleBreadcrumbItemsResize,
-    targetRef: sizingContainerRef,
-  });
-
-  useResizeDetector({
-    onResize: handleResize,
-    targetRef: breadcrumbItemWithOverflow,
-  });
+  // container resize
+  useResizeObserver(sizingContainerRef, { callback: handleResize });
+  // item resize
+  useResizeObserver(breadcrumbItemWithOverflow, { callback: handleResize });
 
   return (
     <div
@@ -314,8 +303,11 @@ export let BreadcrumbWithOverflow = ({
                 href={backItem.href}
                 renderIcon={() => (
                   <IconButton
-                    label={backItem.title || backItem.label}
+                    className={`${blockClass}__back__button`}
                     align="right"
+                    kind="ghost"
+                    label={backItem.title || backItem.label}
+                    size="sm"
                   >
                     <ArrowLeft size={16} />
                   </IconButton>

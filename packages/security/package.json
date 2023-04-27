@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-security",
   "description": "Carbon for Cloud & Cognitive IBM Security UI components",
-  "version": "2.13.16",
+  "version": "2.13.17",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",

@@ -1,10 +1,8 @@
-// @flow
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2021
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2021, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 import * as React from 'react';
@@ -29,7 +27,7 @@ const RowSizeDropdown = ({ legendText = 'Row height', ...props }) => {
         kind="ghost"
         tooltipPosition="bottom"
         renderIcon={Settings16}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen((prevOpen) => !prevOpen)}
         iconDescription={legendText}
         className={cx(`${blockClass}__row-size-button`, {
           [`${blockClass}__row-size-button--open`]: isOpen,

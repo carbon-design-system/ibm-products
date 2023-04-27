@@ -77,6 +77,7 @@ const s = [
           {
             n: 'Edit and update',
             s: [
+              'c/EditInPlace',
               {
                 n: 'Inline edit',
                 s: [
@@ -139,6 +140,10 @@ const s = [
           'c/FilterSummary',
           'c/TearsheetShell',
         ],
+      },
+      {
+        n: 'Novice to pro',
+        s: ['c/NonLinearReading'],
       },
     ],
   },

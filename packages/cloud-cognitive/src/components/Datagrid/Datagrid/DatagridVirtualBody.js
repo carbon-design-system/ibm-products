@@ -1,16 +1,17 @@
 /*
  * Licensed Materials - Property of IBM
  * 5724-Q36
- * (c) Copyright IBM Corp. 2020 - 2021
+ * (c) Copyright IBM Corp. 2020 - 2023
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 import React, { useEffect } from 'react';
 import { VariableSizeList } from 'react-window';
 import { DataTable } from 'carbon-components-react';
+import { px } from '@carbon/layout';
+import { useResizeDetector } from 'react-resize-detector';
 import { pkg } from '../../../settings';
 import DatagridHead from './DatagridHead';
-import { px } from '@carbon/layout';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -48,12 +49,19 @@ const DatagridVirtualBody = (datagridState) => {
     gridRef,
   } = datagridState;
 
+  const handleVirtualGridResize = () => {
+    const gridRefElement = gridRef?.current;
+    gridRefElement.style.width = gridRefElement?.clientWidth;
+  };
+
+  useResizeDetector({ onResize: handleVirtualGridResize, targetRef: gridRef });
+
   const syncScroll = (e) => {
     const virtualBody = e.target;
-    document.querySelector(`.${blockClass}__head-warp`).scrollLeft =
+    document.querySelector(`.${blockClass}__head-wrap`).scrollLeft =
       virtualBody.scrollLeft;
     const spacerColumn = document.querySelector(
-      `.${blockClass}__head-warp thead th:last-child`
+      `.${blockClass}__head-wrap thead th:last-child`
     );
     spacerColumn.style.width = px(
       32 + (virtualBody.offsetWidth - virtualBody.clientWidth)
@@ -72,12 +80,15 @@ const DatagridVirtualBody = (datagridState) => {
   return (
     <>
       <div
-        className={`${blockClass}__head-warp`}
+        className={`${blockClass}__head-wrap`}
         style={{ width: gridRef.current?.clientWidth, overflow: 'hidden' }}
       >
         <DatagridHead {...datagridState} />
       </div>
-      <TableBody {...getTableBodyProps()} onScroll={(e) => syncScroll(e)}>
+      <TableBody
+        {...getTableBodyProps({ role: false })}
+        onScroll={(e) => syncScroll(e)}
+      >
         <VariableSizeList
           height={virtualHeight || tableHeight}
           itemCount={visibleRows.length}

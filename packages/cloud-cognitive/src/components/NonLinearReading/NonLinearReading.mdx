@@ -1,0 +1,129 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { NonLinearReading } from '.';
+
+# NonLinearReading
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+The
+[non-linear reading](https://pages.github.ibm.com/cdai-design/pal/novice-to-pro/components/nonlinear-reading/usage/)
+component provides a way to explain concepts more broadly and succinctly while
+allowing users to read more detail as needed without leaving their context.
+
+Use non-linear reading when space is limited to share a brief, at-a-glance,
+summary of a concept that may require more explanation for some users. You can
+also use this component when the level of detail or the amount of context needed
+on a topic will vary across users and you don’t want to over-explain to more
+mature users. Non-linear reading is helpful to provide context for the first
+time a user engages with the product as well as for introducing new concepts
+later on as they get more familiar with base-level functionality.
+
+_[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
+is a continuous learning methodology + framework aimed to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users._
+
+## Example usage
+
+### Minimal
+
+All you need for the basics.
+
+<Canvas>
+  <Story id={getStoryId(NonLinearReading.displayName, 'non-linear-reading')} />
+</Canvas>
+
+### In series
+
+Multiple non-linear reading components can be used in the same text block.
+
+<Canvas>
+  <Story id={getStoryId(NonLinearReading.displayName, 'in-series')} />
+</Canvas>
+
+```jsx
+After we create your
+  <NonLinearReading
+    definition={
+      <>
+        <Link
+          href="https://www.ibm.com/products/qradar-xdr-connect"
+          target={'_blank'}
+          rel="noreferrer"
+        >
+          XDR Connect’s
+        </Link>{' '}
+        correlation engine <strong>creates the case for you</strong>, by
+        processing data from alerts across multiple security tools—including
+        your own connected security systems—in order to save you time.
+      </>
+    }
+  >
+    case,
+  </NonLinearReading>
+  we also
+  <NonLinearReading
+    definition="By starting the investigation, we help to reduce your manual workload. We gather all available evidence for you to review; use Watson Cybersecurity to scrape the web for additional, previously unknown threat intelligence; and start taking note of anything that happened before and after the incident, to get a more detailed view."
+  >
+    investigate
+  </NonLinearReading>
+for you. More insights are uncovered by analyzing relevant data from your
+tools, and enriching them. We visualize the incident’s progression on the
+Attack graph; and we recommend remediation steps.
+```
+
+### Embedded
+
+Non-linear reading components can be embedded one inside another.
+
+<Canvas>
+  <Story id={getStoryId(NonLinearReading.displayName, 'embedded')} />
+</Canvas>
+
+```jsx
+Findings are created by the
+  <NonLinearReading
+    definition={
+      <>
+        We examine the alerts from each source, and
+        <NonLinearReading
+          definition="Correlation allows us to identify connections between common observables, tactics, and techniques, and to remove any duplicate data, thereby streamlining the investigation for you."
+        >
+          correlate
+        </NonLinearReading>
+        them together with rules. While a case can contain multiple alerts,
+        a single finding can only be created from a single alert. So, when
+        you select a finding, you can drill right down to the raw data
+        behind it: the payload. We also use our
+        <NonLinearReading
+          definition="Our threat intelligence service contains an enrichment capability. During the enrichment process, we add context that is used to establish the severity of artifacts associated with a finding. This is what determines the severity of the finding itself. Bear in mind that each case can have multiple findings, and every finding will have its own severity."
+        >
+          threat intelligence service
+        </NonLinearReading>
+        to establish the severity of the artifacts.
+      </>
+    }
+  >
+    alerts ingested
+  </NonLinearReading>
+from your own security systems. The findings here are confirmed findings
+that have been created from alerts ingested from your own sources, before
+being enriched to create cases.
+```
+
+<!-- ## Code sample -->
+
+<!-- <CodesandboxLink exampleDirectory="NonLinearReading" /> -->
+
+## Component API
+
+<ArgsTable />

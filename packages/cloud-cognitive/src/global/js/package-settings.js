@@ -24,6 +24,7 @@ const defaults = {
     CreateTearsheet: true,
     CreateTearsheetStep: true,
     CreateTearsheetDivider: true,
+    EditInPlace: true,
     EmptyState: true,
     ErrorEmptyState: true,
     ExportModal: true,
@@ -70,6 +71,9 @@ const defaults = {
     EditFullPage: false,
     EditUpdateCards: false,
     ButtonMenu: false,
+
+    // Novice to pro components not yet reviewed and released:
+    NonLinearReading: false,
     /* new component flags here - comment used by generate CLI */
   },
 

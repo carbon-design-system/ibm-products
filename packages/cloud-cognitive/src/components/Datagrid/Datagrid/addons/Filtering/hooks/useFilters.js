@@ -33,13 +33,15 @@ const useFilters = ({
   filters = [],
   setAllFilters,
   variation,
+  initialFilters,
 }) => {
   /** State */
   const [filtersState, setFiltersState] = useInitialStateFromFilters(
     filters,
-    variation
+    variation,
+    initialFilters
   );
-  const [filtersObjectArray, setFiltersObjectArray] = useState([]);
+  const [filtersObjectArray, setFiltersObjectArray] = useState(initialFilters);
 
   // When using batch actions we have to store the filters to then apply them later
   const prevFiltersRef = useRef(JSON.stringify(filtersState));

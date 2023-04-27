@@ -50,7 +50,11 @@ const FilterPanel = ({
   onPanelClose = () => {},
   showFilterSearch = false,
   filterPanelMinHeight = 600,
+  initialFilters = [],
 }) => {
+  //  Save the initial filters we only need the filters once
+  const initialFiltersRef = useRef(initialFilters);
+
   /** State */
   const [showDividerLine, setShowDividerLine] = useState(false);
 
@@ -67,6 +71,7 @@ const FilterPanel = ({
     filters: filterSections,
     setAllFilters,
     variation: PANEL,
+    initialFilters: initialFiltersRef.current,
   });
 
   /** Refs */

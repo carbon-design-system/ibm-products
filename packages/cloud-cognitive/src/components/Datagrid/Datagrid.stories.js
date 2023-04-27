@@ -641,8 +641,48 @@ export const FilterPanel = () => {
     },
   ];
 
+  const initialFilters = [
+    {
+      id: 'passwordStrength',
+      type: 'checkbox',
+      value: [
+        {
+          id: 'normal',
+          labelText: 'Normal',
+          value: 'normal',
+          selected: true,
+        },
+        {
+          id: 'minor-warning',
+          labelText: 'Minor warning',
+          value: 'minor-warning',
+          selected: false,
+        },
+        {
+          id: 'critical',
+          labelText: 'Critical',
+          value: 'critical',
+          selected: false,
+        },
+      ],
+    },
+    {
+      id: 'role',
+      type: 'radio',
+      value: 'developer',
+    },
+    {
+      id: 'visits',
+      type: 'number',
+      value: '1',
+    },
+  ];
+
   const datagridState = useDatagrid(
     {
+      initialState: {
+        filters: initialFilters,
+      },
       filterProps: {
         variation: 'panel',
         updateMethod: 'batch',

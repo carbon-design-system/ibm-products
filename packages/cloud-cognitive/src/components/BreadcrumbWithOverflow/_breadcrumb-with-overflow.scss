@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -45,6 +45,15 @@ $_block-class: #{c4p-settings.$pkg-prefix}--breadcrumb-with-overflow;
 
   .#{$_block-class}__breadcrumb-back {
     display: none;
+  }
+
+  .#{$_block-class}__back__button.#{c4p-settings.$carbon-prefix}--btn {
+    min-height: revert;
+    padding: 0;
+  }
+
+  .#{$_block-class}__back__button.#{c4p-settings.$carbon-prefix}--btn--ghost:hover {
+    background-color: inherit;
   }
 
   @include breakpoint-down(md) {

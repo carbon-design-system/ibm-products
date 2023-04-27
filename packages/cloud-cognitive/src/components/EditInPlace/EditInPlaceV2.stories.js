@@ -11,14 +11,13 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
-import { InlineEdit } from '../InlineEdit/InlineEdit';
-import { InlineEditV2 } from '.';
-import mdx from './InlineEditV2.mdx';
-import styles from './_storybook-styles.scss';
+import { EditInPlace } from '.';
+import mdx from '../InlineEditV2/InlineEditV2.mdx';
+import styles from '../InlineEditV2/_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(InlineEditV2.displayName),
-  component: InlineEditV2,
+  title: getStoryTitle(EditInPlace.displayName),
+  component: EditInPlace,
   parameters: {
     styles,
     docs: {
@@ -36,7 +35,7 @@ const defaultProps = {
   editLabel: 'Edit',
   id: 'story-id',
   invalid: false,
-  invalidText: 'This field is required',
+  invalidLabel: 'This field is required',
   labelText: 'Label text',
   onCancel: () => {},
   onChange: () => {},
@@ -74,19 +73,12 @@ const Template = (args) => {
     onCancel,
   };
 
-  return <InlineEdit {...props} className="inline-edit-v2-example" />;
+  return <EditInPlace {...props} className="inline-edit-v2-example" />;
 };
 
-export const Default = prepareStory(Template, {
+export const Version2 = prepareStory(Template, {
   args: {
     ...defaultProps,
-  },
-});
-
-export const Invalid = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    invalid: true,
   },
 });
 

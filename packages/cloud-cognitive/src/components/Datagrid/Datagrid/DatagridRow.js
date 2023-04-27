@@ -81,7 +81,7 @@ const DatagridRow = (datagridState) => {
         [`${blockClass}__carbon-row-expandable`]: row.canExpand,
         [`${carbon.prefix}--data-table--selected`]: row.isSelected,
       })}
-      {...row.getRowProps()}
+      {...row.getRowProps({ role: false })}
       key={row.id}
       onMouseEnter={(event) => {
         if (!withNestedRows) {
@@ -117,7 +117,7 @@ const DatagridRow = (datagridState) => {
       }}
     >
       {row.cells.map((cell, index) => {
-        const cellProps = cell.getCellProps();
+        const cellProps = cell.getCellProps({ role: false });
         const { children, ...restProps } = cellProps;
         const content = children || (
           <>

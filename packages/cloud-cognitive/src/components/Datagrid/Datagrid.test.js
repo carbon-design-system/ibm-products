@@ -2191,57 +2191,23 @@ describe(componentName, () => {
   it('Customizing Columns', () => {
     render(<CustomizingColumns data-testid={dataTestId}></CustomizingColumns>);
 
-    var alertMock = jest.spyOn(window, 'alert');
+    const alertMock = jest.spyOn(window, 'alert');
 
-    fireEvent.click(
-      document
-        .getElementsByClassName('c4p--datagrid__table-toolbar')[0]
-        .getElementsByTagName('section')[0]
-        .getElementsByTagName('button')[0]
-    );
+    const leftPanelButton = screen.getByLabelText('Left panel');
+    fireEvent.click(leftPanelButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[2]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Refresh');
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[2]
-    );
+    const refreshButton = screen.getByLabelText('Refresh');
+    fireEvent.click(refreshButton);
     expect(alertMock).toHaveBeenCalledTimes(2);
 
-    expect(
-      document
-        .getElementsByClassName(
-          'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-        )[3]
-        .getElementsByTagName('div')[0].textContent
-    ).toEqual('Download CSV');
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
-      )[3]
-    );
+    const downloadButton = screen.getByLabelText('Download CSV');
+    fireEvent.click(downloadButton);
     expect(alertMock).toHaveBeenCalledTimes(3);
 
-    expect(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    ).toBeDefined();
-    fireEvent.click(
-      document.getElementsByClassName(
-        'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--left bx--tooltip--align-center'
-      )[0]
-    );
-    expect(
-      document.getElementById('bx--modal-header__heading--modal-2')
-    ).toBeDefined();
+    const customizeColumnsButton = screen.getByLabelText('Customize columns');
+    fireEvent.click(customizeColumnsButton);
+    screen.getByRole('heading', { name: /Customize columns/ });
   });
 
   it('Top Alignment', () => {

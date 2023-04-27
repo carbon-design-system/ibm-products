@@ -32,33 +32,49 @@ const useSortableColumns = (hooks) => {
     };
     const sortableColumns = visibleColumns.map((column) => {
       const icon = (col) => {
-        if (col.isSorted) {
+        if (col?.isSorted) {
           switch (col.isSortedDesc) {
             case false:
-              return ArrowUp16;
+              return () => (
+                <ArrowUp16
+                  className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
+                />
+              );
             case true:
-              return ArrowUp16;
+              return () => (
+                <ArrowUp16
+                  className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
+                />
+              );
             default:
-              return Arrows16;
+              return () => (
+                <Arrows16
+                  className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
+                />
+              );
           }
         }
-        return Arrows16;
+        return () => (
+          <Arrows16
+            className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
+          />
+        );
       };
       const Header = (headerProp) =>
         column.disableSortBy === true ? (
           column.Header
         ) : (
           <Button
-            onClick={() => onSortClick(headerProp.column)}
+            onClick={() => onSortClick(headerProp?.column)}
             kind="ghost"
-            renderIcon={icon(headerProp.column)}
+            renderIcon={icon(headerProp?.column)}
             className={cx(
               `${carbon.prefix}--table-sort ${blockClass}--table-sort`,
               {
                 [`${blockClass}--table-sort--desc`]:
-                  headerProp.column.isSortedDesc,
+                  headerProp?.column.isSortedDesc,
                 [`${blockClass}--table-sort--asc`]:
-                  headerProp.column.isSortedDesc === false,
+                  headerProp?.column.isSortedDesc === false,
               }
             )}
           >
@@ -71,7 +87,9 @@ const useSortableColumns = (hooks) => {
         minWidth: column.disableSortBy === true ? 0 : 90,
       };
     });
-    return [...sortableColumns];
+    return instance.customizeColumnsProps?.isTearsheetOpen
+      ? visibleColumns
+      : [...sortableColumns];
   };
 
   const sortInstanceProps = (instance) => {

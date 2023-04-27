@@ -31,15 +31,13 @@ const CustomizeColumnsTearsheet = ({
   assistiveTextInstructionsLabel = 'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
   assistiveTextDisabledInstructionsLabel = 'Reordering columns are disabled because they are filtered currently.',
   selectAllLabel = 'Column name',
+  isTableSortable,
 }) => {
   const [visibleColumnsCount, setVisibleColumnsCount] = useState('');
   const [totalColumns, setTotalColumns] = useState('');
   const [searchText, setSearchText] = useState('');
   const [columnObjects, setColumnObjects] = useState(
     columnDefinitions
-      // hide the columns without Header, e.g the sticky actions, spacer
-      .filter((colDef) => !!colDef.Header.props && !!colDef.Header.props.title)
-      .filter((colDef) => !colDef.isAction)
       // only sort the hidden column to the end when modal reopen
       .sort((defA, defB) => {
         const isVisibleA = isColumnVisible(defA);
@@ -146,6 +144,7 @@ const CustomizeColumnsTearsheet = ({
             setDirty();
           }}
           selectAllLabel={selectAllLabel}
+          isTableSortable={isTableSortable}
         />
       )}
     </TearsheetNarrow>
@@ -160,6 +159,7 @@ CustomizeColumnsTearsheet.propTypes = {
   findColumnPlaceholderLabel: PropTypes.string,
   instructionsLabel: PropTypes.string,
   isOpen: PropTypes.bool.isRequired,
+  isTableSortable: PropTypes.bool.isRequired,
   onSaveColumnPrefs: PropTypes.func.isRequired,
   originalColumnDefinitions: PropTypes.array.isRequired,
   primaryButtonTextLabel: PropTypes.string,

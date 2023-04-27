@@ -79,11 +79,19 @@ ProductiveCard.propTypes = {
   /**
    * Optional header description
    */
-  description: PropTypes.string,
+  description: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
   /**
    * Optional label for the top of the card
    */
-  label: PropTypes.string,
+  label: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
   /**
    * Provides the callback for a clickable card
    */
@@ -122,7 +130,11 @@ ProductiveCard.propTypes = {
   /**
    * Title that's displayed at the top of the card
    */
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.node,
+  ]),
   /**
    * Determines title size
    */

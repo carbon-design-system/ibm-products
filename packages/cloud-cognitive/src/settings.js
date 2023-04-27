@@ -4,6 +4,7 @@ import pkgSettings from './global/js/package-settings';
 import { settings as carbonSettings } from 'carbon-components';
 import React from 'react';
 import { themes } from '@carbon/themes';
+import pconsole from './global/js/utils/pconsole';
 
 export const carbon = {
   get prefix() {
@@ -17,12 +18,28 @@ export const carbon = {
   },
 };
 
+const componentDeprecatedWarning = (name, details) =>
+  `Carbon for IBM Products (WARNING): Component "${name}" is deprecated. ${details}`;
+
+pkgSettings.logDeprecated = (component, name) => {
+  if (component?.deprecated) {
+    const { level, details } = component.deprecated;
+    const logUsing = pconsole?.[level] ?? pconsole.error;
+
+    logUsing(
+      componentDeprecatedWarning(name || component.displayName, details)
+    );
+  }
+};
+
 // Check that a component is enabled. This function returns a stub which checks
 // the component status on first use and then renders as the component or as
 // a Canary placeholder initialized with the name of the replaced component.
 // Note that the returned stub carries any other properties which had already
 // been assigned (eg propTypes, displayName, etc).
 pkgSettings.checkComponentEnabled = (component, name) => {
+  pkgSettings.logDeprecated(component, name);
+
   if (component.render) {
     // The component is a forward-ref, so make a stub forward-ref.
     const forward = React.forwardRef((props, ref) =>

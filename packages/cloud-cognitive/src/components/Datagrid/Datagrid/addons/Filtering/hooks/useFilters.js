@@ -56,8 +56,15 @@ const useFilters = ({
   };
 
   const reset = () => {
+    // When we reset we want the "initialFilters" to be an empty array
+    const initialFilters = [];
+
     // Get the initial values for the filters
-    const initialFiltersState = getInitialStateFromFilters(filters, variation);
+    const initialFiltersState = getInitialStateFromFilters(
+      filters,
+      variation,
+      initialFilters
+    );
     const initialFiltersObjectArray = [];
 
     // Set the state to the initial values

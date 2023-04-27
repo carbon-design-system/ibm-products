@@ -282,6 +282,16 @@ FilterPanel.propTypes = {
   closeIconDescription: PropTypes.string,
   filterPanelMinHeight: PropTypes.number,
   filterSections: PropTypes.array,
+  /**
+   * Filters that should be applied on load
+   */
+  initialFilters: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      value: PropTypes.any.isRequired,
+    })
+  ),
   onApply: PropTypes.func,
   onCancel: PropTypes.func,
   onPanelClose: PropTypes.func,

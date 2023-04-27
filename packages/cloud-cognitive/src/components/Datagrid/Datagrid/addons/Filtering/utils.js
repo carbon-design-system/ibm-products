@@ -29,7 +29,7 @@ const applyInitialFilters = (filterState, initialFilters) => {
 export const getInitialStateFromFilters = (
   filters,
   variation = FLYOUT,
-  initialFilters
+  initialFilters = []
 ) => {
   const initialFilterState = {};
 
@@ -77,7 +77,9 @@ export const getInitialStateFromFilters = (
     console.error('No variation passed into useInitialStateFromFilters');
   }
 
-  applyInitialFilters(initialFilterState, initialFilters);
+  if (initialFilters.length > 0) {
+    applyInitialFilters(initialFilterState, initialFilters);
+  }
 
   return initialFilterState;
 };

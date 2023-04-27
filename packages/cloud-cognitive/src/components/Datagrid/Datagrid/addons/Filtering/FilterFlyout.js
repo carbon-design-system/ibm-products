@@ -37,7 +37,11 @@ const FilterFlyout = ({
   secondaryActionLabel = 'Cancel',
   setAllFilters,
   data = [],
+  initialFilters = [],
 }) => {
+  //  Save the initial filters we only need the filters once when it loads
+  const initialFiltersRef = useRef(initialFilters);
+
   /** State */
   const [open, setOpen] = useState(false);
 
@@ -54,6 +58,7 @@ const FilterFlyout = ({
     filters,
     setAllFilters,
     variation: FLYOUT,
+    initialFilters: initialFiltersRef.current,
   });
 
   /** Refs */
@@ -196,12 +201,23 @@ FilterFlyout.propTypes = {
       column: PropTypes.string.isRequired,
       props: PropTypes.object.isRequired,
     })
-  ).isRequired,
+  ),
 
   /**
    * Icon description for the filter flyout button
    */
   flyoutIconDescription: PropTypes.string,
+
+  /**
+   * Filters that should be applied on load
+   */
+  initialFilters: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      value: PropTypes.any.isRequired,
+    })
+  ),
 
   /**
    * Callback when the apply button is clicked

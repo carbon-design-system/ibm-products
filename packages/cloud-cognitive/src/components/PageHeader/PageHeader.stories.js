@@ -569,7 +569,7 @@ const Template = ({ children, title, ...props }) => {
         actionTitleSave(titleText);
       }
     : null;
-  const handleTitleChange = title?.onSave
+  const handleTitleChange = title?.onChange
     ? (val) => {
         actionTitleChange(val);
         setTitleText(val);

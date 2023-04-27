@@ -13692,6 +13692,9 @@ li.bx--accordion__item--disabled:last-of-type {
 .security--layout-module--description-list--stacked .security--type-layout__container__cell:not(:first-of-type) {
   padding-left: 0;
 }
+.security--layout-module--description-list--toggle {
+  /* stylelint-disable-next-line media-feature-range-notation */
+}
 @media (max-width: 320px) {
   .security--layout-module--description-list--toggle .security--type-layout__container__cell {
     display: block;
@@ -21134,6 +21137,7 @@ optgroup.bx--select-optgroup:disabled,
   top: 0;
   right: 0;
   bottom: 0;
+  /* stylelint-disable-next-line declaration-block-no-redundant-longhand-properties */
   left: 0;
   display: flex;
   justify-content: center;

@@ -6818,7 +6818,7 @@ button.c4p--add-select__global-filter-toggle--open {
   white-space: nowrap;
 }
 .c4p--page-header .c4p--page-header__title-row {
-  margin-top: 0;
+  margin-top: 0.125rem; /* spacing needed in case of editable title, otherwise top of focus indicator hidden */
   margin-bottom: 0;
   transform: translateY(0.125rem);
 }
@@ -6877,9 +6877,6 @@ button.c4p--add-select__global-filter-toggle--open {
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-.c4p--page-header .c4p--page-header__title .c4p--inline-edit__value {
-  transform: translateY(-2px);
 }
 .c4p--page-header .c4p--page-header__title--editable {
   display: flex;

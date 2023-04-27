@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,7 +12,14 @@ import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs';
 import LinkTo from '@storybook/addon-links/react';
 import { themes } from '@storybook/theming';
 
-import { Column, Row } from 'carbon-components-react';
+import {
+  Button,
+  Column,
+  Row,
+  InlineNotification,
+  UnorderedList,
+  ListItem,
+} from 'carbon-components-react';
 import React, { useEffect } from 'react';
 
 import { pkg } from '../../cloud-cognitive/src/settings';
@@ -37,12 +44,50 @@ const Style = ({ children, styles }) => {
 };
 
 const decorators = [
-  (storyFn, { parameters: { styles } }) => {
+  (storyFn, { args, parameters: { styles } }) => {
     const story = storyFn();
+
+    JSON.stringify(args.featureFlags);
 
     return (
       <div className="preview-position-fix">
         <Style styles={index}>
+          {args.featureFlags ? (
+            <InlineNotification
+              className="preview__notification--feature-flag"
+              kind="warning"
+              lowContrast
+              actions={
+                <Button
+                  className="preview__notification--feature-flag-action-button"
+                  kind="ghost"
+                  onClick={() => {
+                    window.open(
+                      'https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/cloud-cognitive#enabling-canary-components-and-flagged-features'
+                    );
+                  }}
+                >
+                  Learn more
+                </Button>
+              }
+              // actionButtonLabel="Learn more"
+              statusIconDescription="describes the close button"
+              title="This story uses the following feature flags to enable or disable some functionality."
+              // onActionButtonClick={() => {
+              //   window.open(
+              //     'https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/cloud-cognitive#enabling-canary-components-and-flagged-features'
+              //   );
+              // }}
+            >
+              <UnorderedList>
+                {Object.keys(args.featureFlags).map((flagKey) => (
+                  <ListItem key={flagKey}>
+                    {flagKey}: {`${args.featureFlags[flagKey]}`}
+                  </ListItem>
+                ))}
+              </UnorderedList>
+            </InlineNotification>
+          ) : null}
           {styles ? <Style styles={styles}>{story}</Style> : story}
         </Style>
       </div>

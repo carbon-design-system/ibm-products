@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -35,6 +35,7 @@ import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
 import styles from './_storybook-styles.scss';
+import { pkg } from '../../settings';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -43,6 +44,13 @@ export default {
     styles,
     docs: {
       page: mdx,
+    },
+  },
+  argTypes: {
+    featureFlags: {
+      table: {
+        disable: true,
+      },
     },
   },
 };
@@ -648,6 +656,12 @@ export const FilterPanel = () => {
     },
   ];
 
+  // Warnings are ordinarily silenced in storybook, add this to test
+  pkg._silenceWarnings(false);
+  // Enable feature flag for `useFiltering` hook
+  pkg.feature['Datagrid.useFiltering'] = true;
+  pkg._silenceWarnings(true);
+
   const datagridState = useDatagrid(
     {
       filterProps: {
@@ -686,6 +700,10 @@ export const FilterPanel = () => {
       <Datagrid datagridState={{ ...datagridState }} />
     </Wrapper>
   );
+};
+
+FilterPanel.args = {
+  featureFlags: ['Datagrid.useFiltering'],
 };
 
 const DatagridBatchActions = (datagridState) => {

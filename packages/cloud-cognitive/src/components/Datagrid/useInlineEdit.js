@@ -1,11 +1,11 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2022
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2022, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import { pkg } from '../../settings';
 import cx from 'classnames';
 import { InlineEditCell } from './Datagrid/addons/InlineEdit/InlineEditCell';
@@ -13,6 +13,10 @@ import { InlineEditCell } from './Datagrid/addons/InlineEdit/InlineEditCell';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const useInlineEdit = (hooks) => {
+  useEffect(() => {
+    pkg.checkReportFeatureEnabled('Datagrid.useInlineEdit');
+  }, []);
+
   const addInlineEdit = (props, { cell, instance }) => {
     const columnInlineEditConfig = cell.column.inlineEdit;
     const inlineEditType = cell.column?.inlineEdit?.type;

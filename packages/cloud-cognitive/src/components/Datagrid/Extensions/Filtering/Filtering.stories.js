@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,6 +20,7 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { StatusIcon } from '../../../StatusIcon';
+import { pkg } from '../../../../settings';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Filtering`,
@@ -27,6 +28,13 @@ export default {
   parameters: {
     styles,
     docs: { page: mdx },
+  },
+  argTypes: {
+    featureFlags: {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 
@@ -151,6 +159,12 @@ const FilteringUsage = ({ defaultGridProps }) => {
 
   const columns = React.useMemo(() => headers, []);
   const [data] = useState(makeData(20));
+
+  // Warnings are ordinarily silenced in storybook, add this to test
+  pkg._silenceWarnings(false);
+  // Enable feature flag for `useFiltering` hook
+  pkg.feature['Datagrid.useFiltering'] = true;
+  pkg._silenceWarnings(true);
 
   const datagridState = useDatagrid(
     {
@@ -308,6 +322,7 @@ export const FilteringUsageStory = prepareStory(FilteringTemplateWrapper, {
       onFlyoutClose: action('onFlyoutClose'),
       filters,
     },
+    featureFlags: ['Datagrid.useFiltering'],
   },
 });
 
@@ -338,6 +353,7 @@ export const FilteringInstantUsageStory = prepareStory(
         onFlyoutClose: action('onFlyoutClose'),
         filters,
       },
+      featureFlags: ['Datagrid.useFiltering'],
     },
   }
 );

@@ -77,6 +77,7 @@ const s = [
           {
             n: 'Edit and update',
             s: [
+              'c/EditInPlace',
               {
                 n: 'Inline edit',
                 s: [

@@ -24,6 +24,7 @@ const defaults = {
     CreateTearsheet: true,
     CreateTearsheetStep: true,
     CreateTearsheetDivider: true,
+    EditInPlace: true,
     EmptyState: true,
     ErrorEmptyState: true,
     ExportModal: true,

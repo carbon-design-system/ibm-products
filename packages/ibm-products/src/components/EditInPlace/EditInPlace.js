@@ -289,7 +289,8 @@ EditInPlace.propTypes = {
   ]),
   /**
    * label for cancel button
-   */ cancelLabel: PropTypes.string.isRequired,
+   */
+  cancelLabel: PropTypes.string.isRequired,
   /**
    * By default the edit icon is shown on hover only.
    */

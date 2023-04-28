@@ -3180,7 +3180,6 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   --toolbar-width: var(--c4p--edit-in-place--size);
   --toolbar-width-focussed: calc(2 * var(--c4p--edit-in-place--size));
   display: inline-flex;
-  overflow: hidden;
   width: var(--toolbar-width);
 }
 

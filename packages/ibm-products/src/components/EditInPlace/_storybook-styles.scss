@@ -4,24 +4,12 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-
-@use '@carbon/type/scss/scale';
 @use '../../global/styles/display-box';
-@use '../../global/styles/project-settings' as c4p-settings;
 
-.inline-edit-stories__viewport {
+$block-class: 'edit-in-place-example';
+
+.#{$block-class}__viewport {
   // width: 300px; // larger than standard size needed by text input at standard font size (html input attribute size)
   // stylelint-disable-next-line carbon/layout-token-use
   margin: 100px;
-}
-
-$block-class: #{c4p-settings.$pkg-prefix}--inline-edit;
-
-.component-full-width {
-  .#{$block-class} {
-    width: 100%;
-  }
-  .#{$block-class} .#{$block-class}__input {
-    @include scale.font-size(2);
-  }
 }

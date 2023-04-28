@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,9 +8,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { ProductiveCard as CCProductiveCard } from '../../../../../cloud-cognitive/src';
+import { ProductiveCard as CCProductiveCard } from '../../../../../ibm-products/src';
 import { TrashCan, Edit } from '@carbon/react/icons';
-import { StatusIcon } from '../../../../../cloud-cognitive/src';
+import { StatusIcon } from '../../../../../ibm-products/src';
 import { Column, Grid } from '@carbon/react';
 
 const ProductiveCard = (props) => {

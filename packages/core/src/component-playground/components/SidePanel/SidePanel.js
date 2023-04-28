@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import {
   SidePanel as CCSidePanel,
   UserProfileImage,
-} from '../../../../../cloud-cognitive/src';
+} from '../../../../../ibm-products/src';
 import {
   Column,
   NumberInput,
@@ -22,7 +22,7 @@ import {
   FormGroup,
   usePrefix,
 } from '@carbon/react';
-import { pkg } from '../../../../../cloud-cognitive/src/settings';
+import { pkg } from '../../../../../ibm-products/src/settings';
 
 import costaPic from '../../_story-assets/costa.jpeg';
 

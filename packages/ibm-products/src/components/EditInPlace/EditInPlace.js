@@ -23,16 +23,13 @@ const componentName = 'EditInPlace';
 const blockClass = `${pkg.prefix}--edit-in-place`;
 
 const defaults = {
-  buttonTooltipAlignment: 'center',
-  buttonTooltipPosition: 'top',
+  tooltipAlignment: 'top',
   size: 'sm',
 };
 
 export let EditInPlace = forwardRef(
   (
     {
-      buttonTooltipAlignment,
-      buttonTooltipPosition,
       cancelLabel,
       editAlwaysVisible,
       editLabel,
@@ -49,6 +46,7 @@ export let EditInPlace = forwardRef(
       // readOnlyLabel,
       saveLabel,
       size = defaults.size,
+      tooltipAlignment,
       value,
       ...rest
     },
@@ -60,6 +58,15 @@ export let EditInPlace = forwardRef(
     const inputRef = useRef(null);
     const canSave = value !== initialValue && !invalid;
     const escaping = useRef(false);
+
+    const tipAlignIsObject = typeof tooltipAlignment === 'object';
+    const tipAlignments = ['edit', 'save', 'cancel'].reduce((acc, tips) => {
+      acc[tips] =
+        (tipAlignIsObject ? tooltipAlignment[tips] : tooltipAlignment) ??
+        defaults.tooltipAlignment;
+
+      return acc;
+    }, {});
 
     useEffect(() => {
       if (!initialValue && !dirtyInput) {
@@ -190,6 +197,7 @@ export let EditInPlace = forwardRef(
             {focused ? (
               <>
                 <IconButton
+                  align={tipAlignments.cancel}
                   size={size}
                   label={cancelLabel}
                   onClick={onCancelHandler}
@@ -197,13 +205,12 @@ export let EditInPlace = forwardRef(
                   tabIndex={0}
                   key="cancel"
                   className={`${blockClass}__btn ${blockClass}__btn-cancel`}
-                  tooltipAlignment={buttonTooltipAlignment}
-                  tooltipPosition={buttonTooltipPosition}
                 >
                   <Close size={16} />
                 </IconButton>
 
                 <IconButton
+                  align={tipAlignments.cancel}
                   size={size}
                   label={saveLabel}
                   onClick={onSaveHandler}
@@ -212,14 +219,13 @@ export let EditInPlace = forwardRef(
                   key="save"
                   className={`${blockClass}__btn ${blockClass}__btn-save`}
                   disabled={!canSave}
-                  tooltipAlignment={buttonTooltipAlignment}
-                  tooltipPosition={buttonTooltipPosition}
                 >
                   <Checkmark size={16} />
                 </IconButton>
               </>
             ) : (
               <IconButton
+                align={tipAlignments.cancel}
                 className={cx(`${blockClass}__btn`, `${blockClass}__btn-edit`, {
                   [`${blockClass}__btn-edit--always-visible`]:
                     editAlwaysVisible,
@@ -230,8 +236,6 @@ export let EditInPlace = forwardRef(
                 kind="ghost"
                 tabIndex={0}
                 key="edit"
-                tooltipAlignment={buttonTooltipAlignment}
-                tooltipPosition={buttonTooltipPosition}
               >
                 <Edit size={16} />
               </IconButton>
@@ -260,33 +264,18 @@ export const deprecatedProps = {
   invalidText: PropTypes.string,
 };
 
+const alignPropType = PropTypes.oneOf([
+  'top',
+  'top-left',
+  'top-right',
+  'bottom',
+  'bottom-left',
+  'bottom-right',
+  'left',
+  'right',
+]);
+
 EditInPlace.propTypes = {
-  /**
-   * buttonTooltipAlignment from the standard tooltip. Default center.
-   *
-   * Can be passed either as one of tooltip options or as an object specifying cancel, edit and save separately
-   */
-  buttonTooltipAlignment: PropTypes.oneOfType([
-    PropTypes.oneOf(['start', 'center', 'end']),
-    PropTypes.shape({
-      cancel: PropTypes.oneOf(['start', 'center', 'end']),
-      edit: PropTypes.oneOf(['start', 'center', 'end']),
-      save: PropTypes.oneOf(['start', 'center', 'end']),
-    }),
-  ]),
-  /**
-   * buttonTooltipPosition from the standard tooltip
-   *
-   * Can be passed either as one of tooltip options or as an object specifying cancel, edit and save separately
-   */
-  buttonTooltipPosition: PropTypes.oneOfType([
-    PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-    PropTypes.shape({
-      cancel: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-      edit: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-      save: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-    }),
-  ]),
   /**
    * label for cancel button
    */
@@ -352,6 +341,19 @@ EditInPlace.propTypes = {
    * vertical size of control
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  /**
+   * tooltipAlignment from the standard tooltip. Default center.
+   *
+   * Can be passed either as one of tooltip options or as an object specifying cancel, edit and save separately
+   */
+  tooltipAlignment: PropTypes.oneOfType([
+    alignPropType,
+    PropTypes.shape({
+      cancel: alignPropType,
+      edit: alignPropType,
+      save: alignPropType,
+    }),
+  ]),
   /**
    * current value of the input
    */

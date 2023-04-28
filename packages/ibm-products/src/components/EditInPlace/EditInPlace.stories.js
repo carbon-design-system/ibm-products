@@ -18,6 +18,23 @@ import styles from './_storybook-styles.scss';
 
 const storyClass = 'edit-in-place-example';
 
+const tooltipAlignmentOptions = {
+  'Default / undefined': undefined,
+  'All top': 'top',
+  'All top-left': 'top-left',
+  'All top-right': 'top-right',
+  'All bottom': 'bottom',
+  'All bottom-left': 'bottom-left',
+  'All bottom-right': 'bottom-right',
+  'All left': 'left',
+  'All right': 'right',
+  'Edit and save right, cancel left': {
+    edit: 'right',
+    cancel: 'left',
+    save: 'right',
+  },
+};
+
 export default {
   title: getStoryTitle(EditInPlace.displayName),
   component: EditInPlace,
@@ -26,6 +43,14 @@ export default {
       control: { type: 'range', min: 20, max: 800, step: 10 },
       description:
         'Controls containing element width. Used for demonstration purposes, not property of the component.',
+    },
+    tooltipAlignment: {
+      control: {
+        type: 'select',
+        labels: Object.keys(tooltipAlignmentOptions),
+      },
+      options: Object.values(tooltipAlignmentOptions).map((_k, i) => i),
+      mapping: Object.values(tooltipAlignmentOptions),
     },
   },
   parameters: {

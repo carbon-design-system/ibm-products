@@ -210,7 +210,7 @@ export let EditInPlace = forwardRef(
                 </IconButton>
 
                 <IconButton
-                  align={tipAlignments.cancel}
+                  align={tipAlignments.save}
                   size={size}
                   label={saveLabel}
                   onClick={onSaveHandler}
@@ -225,7 +225,7 @@ export let EditInPlace = forwardRef(
               </>
             ) : (
               <IconButton
-                align={tipAlignments.cancel}
+                align={tipAlignments.edit}
                 className={cx(`${blockClass}__btn`, `${blockClass}__btn-edit`, {
                   [`${blockClass}__btn-edit--always-visible`]:
                     editAlwaysVisible,

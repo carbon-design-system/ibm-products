@@ -375,7 +375,9 @@ InlineEditV1.deprecated = {
   level: 'warn',
   details: `The v1 version of this component is being deprecated. please switch to the v2 component as soon as possible.`,
 };
-pkg.logDeprecated(InlineEditV1, componentName);
+
+// needed to show deprecation message but based on host component name
+InlineEditV1 = pkg.checkComponentEnabled(InlineEditV1, 'InlineEdit');
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).

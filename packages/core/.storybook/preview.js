@@ -22,7 +22,7 @@ import {
 } from '@carbon/react';
 import React, { useEffect } from 'react';
 
-import { pkg } from '../../cloud-cognitive/src/settings';
+import { pkg } from '../../ibm-products/src/settings';
 
 import index from './index.scss';
 import { getSectionSequence } from '../story-structure';
@@ -63,7 +63,7 @@ const decorators = [
               title="This story uses the following feature flags to enable or disable some functionality."
               onActionButtonClick={() => {
                 window.open(
-                  'https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/cloud-cognitive#enabling-canary-components-and-flagged-features'
+                  'https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/ibm-products#enabling-canary-components-and-flagged-features'
                 );
               }}
             >

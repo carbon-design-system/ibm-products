@@ -10,7 +10,7 @@ import { create } from '@storybook/theming/create';
 
 import React from 'react';
 
-import packageInfo from '../../cloud-cognitive/package.json';
+import packageInfo from '../../ibm-products/package.json';
 
 const { description, version } = packageInfo;
 

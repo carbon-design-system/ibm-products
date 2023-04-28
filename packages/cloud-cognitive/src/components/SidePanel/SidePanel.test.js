@@ -91,7 +91,6 @@ describe('SidePanel', () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
   });
 

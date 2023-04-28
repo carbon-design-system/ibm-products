@@ -118,7 +118,6 @@ describe(componentName, () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
     jest.useRealTimers();
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;

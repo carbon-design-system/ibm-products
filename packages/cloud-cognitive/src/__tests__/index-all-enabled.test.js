@@ -49,7 +49,6 @@ describe(name, () => {
   afterEach(() => {
     mockError.mockRestore();
     mockWarn.mockRestore();
-    jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
   });
 

@@ -22,7 +22,7 @@ import {
   TitleBarModule,
 } from '../..';
 
-import { PageHeader } from '../../../../cloud-cognitive/src/components/PageHeader/PageHeader';
+import { PageHeader } from '../../../../ibm-products/src/components/PageHeader/PageHeader';
 
 import config from './stories';
 

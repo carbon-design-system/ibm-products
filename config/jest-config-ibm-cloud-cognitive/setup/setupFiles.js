@@ -6,8 +6,8 @@
  */
 
 // cspell:words wojtekmaj
-// Avoid side effects from `Canary` in `cloud-cognitive/src/settings`.
-import settings from '../../../packages/cloud-cognitive/src/global/js/package-settings';
+// Avoid side effects from `Canary` in `ibm-products/src/settings`.
+import settings from '../../../packages/ibm-products/src/global/js/package-settings';
 
 const { _silenceWarnings, setAllComponents } = settings;
 

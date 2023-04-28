@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "run-s build:carbon build:storybook",
-    "build:carbon": "yarn dlx sass --style=expanded --load-path ../cloud-cognitive/node_modules --load-path ../../node_modules --load-path node_modules .storybook/carbon.scss:css/carbon.css",
+    "build:carbon": "yarn dlx sass --style=expanded --load-path ../ibm-products/node_modules --load-path ../../node_modules --load-path node_modules .storybook/carbon.scss:css/carbon.css",
     "build:storybook": "yarn dlx cross-env \"NODE_OPTIONS=--max_old_space_size=8192\" && build-storybook -s ./public",
     "clean": "yarn dlx rimraf storybook-static css",
     "start": "run-s build:carbon start:storybook",

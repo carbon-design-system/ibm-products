@@ -53,7 +53,7 @@ export {
 } from './WebTerminal';
 export { EditSidePanel } from './EditSidePanel';
 export { OptionsTile } from './OptionsTile';
-export { InlineEdit } from './InlineEdit';
+export { EditInPlace } from './EditInPlace';
 export { DataSpreadsheet } from './DataSpreadsheet';
 export {
   Datagrid,

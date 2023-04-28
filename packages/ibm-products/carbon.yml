@@ -2,7 +2,8 @@
 library:
   id: ibm-products
   name: IBM Products
-  description: Discover React-based solutions designed for IBM’s product portfolio.
+  description:
+    Discover React-based solutions designed for IBM’s product portfolio.
   externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/
   designKits:
     ibm-products-g10-figma:
@@ -347,7 +348,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-edit-and-update-inlineedit
+        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-edit-and-update-editinplace
     tags:
       - input-control
   modified-tabs:

@@ -11,17 +11,16 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
-import { InlineEdit } from '../InlineEdit/InlineEdit';
-import { InlineEditV2 } from '.';
+import { EditInPlace } from '.';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
-import mdx from './InlineEditV2.mdx';
+import mdx from './EditInPlace.mdx';
 import styles from './_storybook-styles.scss';
 
 const storyClass = 'inline-edit-v2-example';
 
 export default {
-  title: getStoryTitle(InlineEditV2.displayName),
-  component: InlineEditV2,
+  title: getStoryTitle(EditInPlace.displayName),
+  component: EditInPlace,
   argTypes: {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
@@ -91,7 +90,7 @@ const Template = ({ containerWidth, ...args }) => {
 
   return (
     <div style={{ width: containerWidth }}>
-      <InlineEdit {...props} className="inline-edit-v2-example" />
+      <EditInPlace {...props} className="inline-edit-v2-example" />
     </div>
   );
 };

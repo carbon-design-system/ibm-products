@@ -8,9 +8,9 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { InlineEditV2 } from '.';
+import { EditInPlace } from '.';
 
-const componentName = InlineEditV2.displayName;
+const componentName = EditInPlace.displayName;
 
 const defaultProps = {
   cancelLabel: 'Cancel',
@@ -30,12 +30,12 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
-  it('renders InlineEditV2', () => {
-    render(<InlineEditV2 {...defaultProps} />);
+  it('renders EditInPlace', () => {
+    render(<EditInPlace {...defaultProps} />);
   });
 
   // it('renders in readOnly mode', () => {
-  //   render(<InlineEditV2 {...defaultProps} readOnly />);
+  //   render(<EditInPlace {...defaultProps} readOnly />);
   //   const input = screen.getByDisplayValue(defaultProps.value);
   //   expect(input).toHaveAttribute('readOnly');
 
@@ -45,21 +45,21 @@ describe(componentName, () => {
   // });
 
   it('renders in invalid mode', () => {
-    render(<InlineEditV2 {...defaultProps} invalid />);
+    render(<EditInPlace {...defaultProps} invalid />);
     const input = screen.getByDisplayValue(defaultProps.value);
     userEvent.click(input);
     expect(screen.getByText(defaultProps.invalidLabel)).toBeVisible();
   });
 
   it('focuses the input when the component is clicked', () => {
-    render(<InlineEditV2 {...defaultProps} />);
+    render(<EditInPlace {...defaultProps} />);
     const input = screen.getByDisplayValue(defaultProps.value);
     userEvent.click(input);
     expect(screen.getByLabelText(defaultProps.cancelLabel)).toBeVisible();
   });
 
   it('focuses the input when the edit button is clicked', () => {
-    render(<InlineEditV2 {...defaultProps} />);
+    render(<EditInPlace {...defaultProps} />);
     const editBtn = screen.getByLabelText(defaultProps.editLabel);
     userEvent.click(editBtn);
     expect(screen.getByLabelText(defaultProps.cancelLabel)).toBeVisible();
@@ -71,7 +71,7 @@ describe(componentName, () => {
       ...defaultProps,
       onChange,
     };
-    render(<InlineEditV2 {...props} />);
+    render(<EditInPlace {...props} />);
     const input = screen.getByDisplayValue(props.value);
     fireEvent.change(input, {
       target: { value: 'new value' },
@@ -90,8 +90,8 @@ describe(componentName, () => {
       ...defaultProps,
       onSave,
     };
-    const { rerender } = render(<InlineEditV2 {...props} />);
-    rerender(<InlineEditV2 {...props} value="new value" />);
+    const { rerender } = render(<EditInPlace {...props} />);
+    rerender(<EditInPlace {...props} value="new value" />);
     userEvent.click(screen.getByLabelText(props.editLabel));
     userEvent.click(screen.getByLabelText(props.saveLabel));
     expect(onSave).toHaveBeenCalled();
@@ -103,8 +103,8 @@ describe(componentName, () => {
       ...defaultProps,
       onCancel,
     };
-    const { rerender } = render(<InlineEditV2 {...props} />);
-    rerender(<InlineEditV2 {...props} value="new value" />);
+    const { rerender } = render(<EditInPlace {...props} />);
+    rerender(<EditInPlace {...props} value="new value" />);
     userEvent.click(screen.getByLabelText(props.editLabel));
     userEvent.click(screen.getByLabelText(props.cancelLabel));
     expect(onCancel).toHaveBeenCalled();
@@ -116,8 +116,8 @@ describe(componentName, () => {
       ...defaultProps,
       onSave,
     };
-    const { rerender } = render(<InlineEditV2 {...props} />);
-    rerender(<InlineEditV2 {...props} value="new value" />);
+    const { rerender } = render(<EditInPlace {...props} />);
+    rerender(<EditInPlace {...props} value="new value" />);
     userEvent.click(screen.getByLabelText(props.editLabel));
     const input = screen.getByDisplayValue('new value');
     fireEvent.blur(input);
@@ -130,7 +130,7 @@ describe(componentName, () => {
       ...defaultProps,
       onCancel,
     };
-    render(<InlineEditV2 {...props} />);
+    render(<EditInPlace {...props} />);
     userEvent.click(screen.getByLabelText(props.editLabel));
     const input = screen.getByDisplayValue(props.value);
     fireEvent.blur(input);
@@ -138,7 +138,7 @@ describe(componentName, () => {
   });
 
   it('handles keydown', () => {
-    render(<InlineEditV2 {...defaultProps} />);
+    render(<EditInPlace {...defaultProps} />);
     const input = screen.getByDisplayValue(defaultProps.value);
 
     // for coverage- default switch statement case
@@ -152,7 +152,7 @@ describe(componentName, () => {
       ...defaultProps,
       onCancel,
     };
-    const { rerender } = render(<InlineEditV2 {...props} />);
+    const { rerender } = render(<EditInPlace {...props} />);
     const input = screen.getByDisplayValue(props.value);
 
     // clicks escape without making changes
@@ -161,7 +161,7 @@ describe(componentName, () => {
     expect(onCancel).toHaveBeenCalled();
 
     // clicks escape with new value
-    rerender(<InlineEditV2 {...props} value="new value" />);
+    rerender(<EditInPlace {...props} value="new value" />);
     fireEvent.focus(input);
     fireEvent.keyDown(input, { key: 'Escape' });
     expect(onCancel).toHaveBeenCalled();
@@ -173,7 +173,7 @@ describe(componentName, () => {
       ...defaultProps,
       onSave,
     };
-    const { rerender } = render(<InlineEditV2 {...props} />);
+    const { rerender } = render(<EditInPlace {...props} />);
     const input = screen.getByDisplayValue(props.value);
 
     // clicks enter without making changes
@@ -182,38 +182,38 @@ describe(componentName, () => {
     expect(onSave).not.toHaveBeenCalled();
 
     // clicks enter with new value
-    rerender(<InlineEditV2 {...props} value="new value" />);
+    rerender(<EditInPlace {...props} value="new value" />);
     fireEvent.focus(input);
     fireEvent.keyDown(input, { key: 'Enter' });
     expect(onSave).toHaveBeenCalled();
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<InlineEditV2 {...defaultProps} />);
+    const { container } = render(<EditInPlace {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', () => {
-    const { container } = render(<InlineEditV2 {...defaultProps} />);
+    const { container } = render(<EditInPlace {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'data-testid';
 
   it('adds additional properties to the containing node', () => {
-    render(<InlineEditV2 {...defaultProps} data-testid={dataTestId} />);
+    render(<EditInPlace {...defaultProps} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(<InlineEditV2 {...defaultProps} ref={ref} />);
+    render(<EditInPlace {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
   it('adds the Devtools attribute to the containing node', () => {
-    render(<InlineEditV2 {...defaultProps} data-testid={dataTestId} />);
+    render(<EditInPlace {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

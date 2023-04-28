@@ -20,7 +20,7 @@ import { pkg, carbon } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 const componentName = 'EditInPlace';
-const blockClass = `${pkg.prefix}--inline-edit-v2`;
+const blockClass = `${pkg.prefix}--edit-in-place`;
 
 const defaults = {
   buttonTooltipAlignment: 'center',

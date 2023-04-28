@@ -16,7 +16,7 @@ import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import mdx from './EditInPlace.mdx';
 import styles from './_storybook-styles.scss';
 
-const storyClass = 'inline-edit-v2-example';
+const storyClass = 'edit-in-place-example';
 
 export default {
   title: getStoryTitle(EditInPlace.displayName),
@@ -90,7 +90,7 @@ const Template = ({ containerWidth, ...args }) => {
 
   return (
     <div style={{ width: containerWidth }}>
-      <EditInPlace {...props} className="inline-edit-v2-example" />
+      <EditInPlace {...props} className="edit-in-place-example" />
     </div>
   );
 };

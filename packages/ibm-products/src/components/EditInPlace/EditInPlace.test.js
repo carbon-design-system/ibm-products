@@ -14,7 +14,7 @@ const componentName = EditInPlace.displayName;
 
 const defaultProps = {
   cancelLabel: 'Cancel',
-  className: 'inline-edit-test',
+  className: 'edit-in-place-test',
   editLabel: 'Edit',
   id: 'test-id',
   invalid: false,

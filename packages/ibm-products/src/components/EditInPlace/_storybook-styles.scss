@@ -6,7 +6,7 @@
 //
 @use '../../global/styles/display-box';
 
-$block-class: 'inline-edit-v2-example';
+$block-class: 'edit-in-place-example';
 
 .#{$block-class}__viewport {
   // width: 300px; // larger than standard size needed by text input at standard font size (html input attribute size)

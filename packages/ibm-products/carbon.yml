@@ -336,14 +336,14 @@ assets:
       - system-feedback
       - input-control
       - form
-  inline-edit:
+  edit-in-place:
     name: Inline edit
-    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#inline-edit
+    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#edit-in-place
     status: stable
     type: pattern
     platform: web
     framework: react
-    thumbnailPath: './thumbnails/inline-edit.svg'
+    thumbnailPath: './thumbnails/edit-in-place.svg'
     demoLinks:
       - type: storybook
         name: Storybook

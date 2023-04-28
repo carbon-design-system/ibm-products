@@ -4,6 +4,13 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-.inline-edit-v2-example {
-  width: 15rem;
+
+@import '../../global/styles/display-box';
+
+$block-class: 'inline-edit-v2-example';
+
+.#{$block-class}__viewport {
+  // width: 300px; // larger than standard size needed by text input at standard font size (html input attribute size)
+  // stylelint-disable-next-line carbon/layout-token-use
+  margin: 100px;
 }

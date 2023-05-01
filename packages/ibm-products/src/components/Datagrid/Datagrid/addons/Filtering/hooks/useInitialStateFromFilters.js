@@ -9,9 +9,13 @@ import { useState } from 'react';
 import { FLYOUT } from '../constants';
 import { getInitialStateFromFilters } from '../utils';
 
-const useInitialStateFromFilters = (filters, variation = FLYOUT) => {
+const useInitialStateFromFilters = (
+  filters,
+  variation = FLYOUT,
+  initialFilters = []
+) => {
   const [state, setState] = useState(
-    getInitialStateFromFilters(filters, variation)
+    getInitialStateFromFilters(filters, variation, initialFilters)
   );
 
   return [state, setState];

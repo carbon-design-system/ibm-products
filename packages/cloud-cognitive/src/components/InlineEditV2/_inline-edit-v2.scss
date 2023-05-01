@@ -72,6 +72,16 @@
       line-height: inherit;
     }
 
+    &__ellipsis {
+      position: relative;
+      margin-left: calc(-1 * $spacing-05);
+      opacity: 0;
+    }
+
+    &--overflows:not(.#{$block-class}--focused) .#{$block-class}__ellipsis {
+      opacity: 1;
+    }
+
     &__text-input-label {
       display: none;
     }

@@ -356,6 +356,7 @@ export const tearsheet = prepareStory(Template, {
     onClose: action('onClose called'),
     title,
     actions: 7,
+    selectorPrimaryFocus: '#tss-ft1',
   },
 });
 

@@ -181,16 +181,16 @@ AboutModal.propTypes = {
   closeIconDescription: PropTypes.string.isRequired,
 
   /**
-   * Trademark and copyright information. Displays first year of
-   * product release to current year.
-   */
-  copyrightText: PropTypes.node.isRequired,
-
-  /**
    * Subhead text providing any relevant product disclaimers including
    * legal information (optional)
    */
   content: PropTypes.node,
+
+  /**
+   * Trademark and copyright information. Displays first year of
+   * product release to current year.
+   */
+  copyrightText: PropTypes.node.isRequired,
 
   /**
    * An array of Carbon `Link` component if there are additional information

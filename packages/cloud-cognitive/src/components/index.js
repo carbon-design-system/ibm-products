@@ -73,6 +73,7 @@ export {
   useSelectAllWithToggle,
   useColumnOrder,
   useInlineEdit,
+  useEditableCell,
   useFiltering,
   getAutoSizedColumnWidth,
 } from './Datagrid';

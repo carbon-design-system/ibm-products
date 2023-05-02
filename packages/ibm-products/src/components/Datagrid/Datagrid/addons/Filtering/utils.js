@@ -15,8 +15,22 @@ import {
   RADIO,
 } from './constants';
 
+const applyInitialFilters = (filterState, initialFilters) => {
+  Object.keys(filterState).forEach((key) => {
+    const hasInitialFilter = initialFilters.find((filter) => filter.id === key);
+
+    if (hasInitialFilter) {
+      filterState[key].value = hasInitialFilter.value;
+    }
+  });
+};
+
 // This functions takes the filters passed in and makes an object to track it's state
-export const getInitialStateFromFilters = (filters, variation = FLYOUT) => {
+export const getInitialStateFromFilters = (
+  filters,
+  variation = FLYOUT,
+  initialFilters = []
+) => {
   const initialFilterState = {};
 
   const setInitialState = ({ type, column, props }) => {
@@ -61,6 +75,10 @@ export const getInitialStateFromFilters = (filters, variation = FLYOUT) => {
     });
   } else {
     console.error('No variation passed into useInitialStateFromFilters');
+  }
+
+  if (initialFilters.length > 0) {
+    applyInitialFilters(initialFilterState, initialFilters);
   }
 
   return initialFilterState;

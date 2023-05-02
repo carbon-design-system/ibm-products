@@ -24,6 +24,7 @@ const defaults = {
     CreateTearsheet: true,
     CreateTearsheetStep: true,
     CreateTearsheetDivider: true,
+    EditInPlace: true,
     EmptyState: true,
     ErrorEmptyState: true,
     ExportModal: true,
@@ -32,8 +33,6 @@ const defaults = {
     HTTPError404: true,
     HTTPErrorOther: true,
     ImportModal: true,
-    InlineEdit: true,
-    InlineEditV1: true,
     MultiAddSelect: true,
     NotificationsPanel: true,
     NoDataEmptyState: true,
@@ -58,7 +57,6 @@ const defaults = {
     WebTerminalProvider: true,
 
     // other public components not yet reviewed and released:
-    ModifiedTabs: false,
     Toolbar: false,
     ToolbarButton: false,
     ToolbarGroup: false,
@@ -70,7 +68,6 @@ const defaults = {
     EditTearsheetNarrow: false,
     EditFullPage: false,
     EditUpdateCards: false,
-    InlineEditV2: false,
     /* new component flags here - comment used by generate CLI */
   },
 
@@ -79,6 +76,7 @@ const defaults = {
     'a-new-feature': false,
     'default-portal-target-body': true,
     'Datagrid.useInfiniteScroll': false,
+    'Datagrid.useInlineEdit': false,
   },
 };
 

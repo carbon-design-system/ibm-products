@@ -379,6 +379,9 @@ const title = {
     onSave: () => {
       // gets replaced in template
     },
+    onCancel: () => {
+      // gets replaced in template
+    },
     cancelDescription: 'Cancel',
     saveDescription: 'Save',
     text: 'An editable title',
@@ -553,19 +556,31 @@ const demoDummyPageContent = (
 
 const actionTitleChange = action('title onChange');
 const actionTitleSave = action('title onSave');
+const actionTitleCancel = action('title change cancelled');
 // Template.
 // eslint-disable-next-line react/prop-types
 const Template = ({ children, title, ...props }) => {
   const carbonPrefix = usePrefix();
   // eslint-disable-next-line react/prop-types
   const [titleText, setTitleText] = useState(title?.text ?? title);
+
   const handleTitleSave = title?.onSave
+    ? () => {
+        actionTitleSave(titleText);
+      }
+    : null;
+  const handleTitleChange = title?.onChange
     ? (val) => {
-        actionTitleSave(val);
+        actionTitleChange(val);
         setTitleText(val);
       }
     : null;
-  const handleTitleChange = title?.onSave ? actionTitleChange : null;
+  const handleTitleCancel = title?.onCancel
+    ? (val) => {
+        actionTitleCancel(val);
+        setTitleText(val);
+      }
+    : null;
 
   // const [theTitle, setTheTitle] = useState({});
 
@@ -606,6 +621,7 @@ const Template = ({ children, title, ...props }) => {
                 text: titleText,
                 onChange: handleTitleChange,
                 onSave: handleTitleSave,
+                onCancel: handleTitleCancel,
               }
             : title
         }

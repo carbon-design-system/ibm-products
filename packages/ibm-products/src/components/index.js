@@ -31,7 +31,6 @@ export { ExportModal } from './ExportModal';
 export { ExpressiveCard } from './ExpressiveCard';
 export { HTTPError403, HTTPError404, HTTPErrorOther } from './HTTPErrors';
 export { ImportModal } from './ImportModal';
-export { ModifiedTabs } from './ModifiedTabs';
 export { MultiAddSelect } from './MultiAddSelect';
 export { NotificationsPanel } from './NotificationsPanel';
 export { PageHeader } from './PageHeader';
@@ -53,7 +52,7 @@ export {
 } from './WebTerminal';
 export { EditSidePanel } from './EditSidePanel';
 export { OptionsTile } from './OptionsTile';
-export { InlineEdit } from './InlineEdit';
+export { EditInPlace } from './EditInPlace';
 export { DataSpreadsheet } from './DataSpreadsheet';
 export {
   Datagrid,

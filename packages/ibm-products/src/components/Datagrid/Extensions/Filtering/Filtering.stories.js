@@ -30,6 +30,38 @@ export default {
   },
 };
 
+const initialFilters = [
+  {
+    id: 'passwordStrength',
+    type: 'checkbox',
+    value: [
+      {
+        id: 'normal',
+        labelText: 'Normal',
+        value: 'normal',
+        selected: true,
+      },
+      {
+        id: 'minor-warning',
+        labelText: 'Minor warning',
+        value: 'minor-warning',
+        selected: false,
+      },
+      {
+        id: 'critical',
+        labelText: 'Critical',
+        value: 'critical',
+        selected: false,
+      },
+    ],
+  },
+  {
+    id: 'role',
+    type: 'radio',
+    value: 'developer',
+  },
+];
+
 const getBatchActions = () => {
   return [
     {
@@ -76,6 +108,7 @@ const FilteringUsage = ({ defaultGridProps }) => {
     filterProps,
     emptyStateTitle,
     emptyStateDescription,
+    initialState,
   } = defaultGridProps;
 
   const headers = [
@@ -159,6 +192,7 @@ const FilteringUsage = ({ defaultGridProps }) => {
       useDenseHeader,
       emptyStateTitle,
       emptyStateDescription,
+      initialState,
     },
     useFiltering
   );
@@ -316,6 +350,40 @@ export const FilteringInstantUsageStory = prepareStory(
       filterProps: ARG_TYPES.filterProps,
     },
     args: {
+      gridTitle: 'Data table title',
+      gridDescription: 'Additional information if needed',
+      useDenseHeader: false,
+      emptyStateTitle: 'No filters match',
+      emptyStateDescription:
+        'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+      filterProps: {
+        variation: 'flyout',
+        updateMethod: 'instant',
+        primaryActionLabel: 'Apply',
+        secondaryActionLabel: 'Cancel',
+        flyoutIconDescription: 'Open filters',
+        onFlyoutOpen: action('onFlyoutOpen'),
+        onFlyoutClose: action('onFlyoutClose'),
+        filters,
+      },
+    },
+  }
+);
+
+export const FilteringInitialFiltersUsageStory = prepareStory(
+  FilteringTemplateWrapper,
+  {
+    storyName: 'Filter flyout - with initial filters',
+    argTypes: {
+      gridTitle: ARG_TYPES.gridTitle,
+      gridDescription: ARG_TYPES.gridDescription,
+      useDenseHeader: ARG_TYPES.useDenseHeader,
+      filterProps: ARG_TYPES.filterProps,
+    },
+    args: {
+      initialState: {
+        filters: initialFilters,
+      },
       gridTitle: 'Data table title',
       gridDescription: 'Additional information if needed',
       useDenseHeader: false,

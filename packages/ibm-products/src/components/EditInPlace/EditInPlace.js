@@ -19,14 +19,15 @@ import {
 import { pkg, carbon } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
-const componentName = 'InlineEditV2';
-const blockClass = `${pkg.prefix}--inline-edit-v2`;
+const componentName = 'EditInPlace';
+const blockClass = `${pkg.prefix}--edit-in-place`;
 
 const defaults = {
+  tooltipAlignment: 'top',
   size: 'sm',
 };
 
-export let InlineEditV2 = forwardRef(
+export let EditInPlace = forwardRef(
   (
     {
       cancelLabel,
@@ -45,6 +46,7 @@ export let InlineEditV2 = forwardRef(
       // readOnlyLabel,
       saveLabel,
       size = defaults.size,
+      tooltipAlignment,
       value,
       ...rest
     },
@@ -56,6 +58,15 @@ export let InlineEditV2 = forwardRef(
     const inputRef = useRef(null);
     const canSave = value !== initialValue && !invalid;
     const escaping = useRef(false);
+
+    const tipAlignIsObject = typeof tooltipAlignment === 'object';
+    const tipAlignments = ['edit', 'save', 'cancel'].reduce((acc, tips) => {
+      acc[tips] =
+        (tipAlignIsObject ? tooltipAlignment[tips] : tooltipAlignment) ??
+        defaults.tooltipAlignment;
+
+      return acc;
+    }, {});
 
     useEffect(() => {
       if (!initialValue && !dirtyInput) {
@@ -148,6 +159,9 @@ export let InlineEditV2 = forwardRef(
             [`${blockClass}--focused`]: focused,
             [`${blockClass}--invalid`]: invalid,
             [`${blockClass}--inherit-type`]: inheritTypography,
+            [`${blockClass}--overflows`]:
+              inputRef.current &&
+              inputRef.current.scrollWidth > inputRef.current.offsetWidth,
             // [`${blockClass}--readonly`]: readOnly,
           })}
           onFocus={onFocusHandler}
@@ -170,6 +184,9 @@ export let InlineEditV2 = forwardRef(
             // readOnly={readOnly}
             onKeyDown={onKeyHandler}
           />
+          <div className={`${blockClass}__ellipsis`} aria-hidden={!focused}>
+            &hellip;
+          </div>
           <div className={`${blockClass}__toolbar`}>
             {invalid && (
               <WarningFilled
@@ -180,6 +197,7 @@ export let InlineEditV2 = forwardRef(
             {focused ? (
               <>
                 <IconButton
+                  align={tipAlignments.cancel}
                   size={size}
                   label={cancelLabel}
                   onClick={onCancelHandler}
@@ -192,6 +210,7 @@ export let InlineEditV2 = forwardRef(
                 </IconButton>
 
                 <IconButton
+                  align={tipAlignments.save}
                   size={size}
                   label={saveLabel}
                   onClick={onSaveHandler}
@@ -206,6 +225,7 @@ export let InlineEditV2 = forwardRef(
               </>
             ) : (
               <IconButton
+                align={tipAlignments.edit}
                 className={cx(`${blockClass}__btn`, `${blockClass}__btn-edit`, {
                   [`${blockClass}__btn-edit--always-visible`]:
                     editAlwaysVisible,
@@ -232,9 +252,9 @@ export let InlineEditV2 = forwardRef(
   }
 );
 
-InlineEditV2 = pkg.checkComponentEnabled(InlineEditV2, componentName);
+EditInPlace = pkg.checkComponentEnabled(EditInPlace, componentName);
 
-InlineEditV2.displayName = componentName;
+EditInPlace.displayName = componentName;
 
 export const deprecatedProps = {
   /**
@@ -244,7 +264,18 @@ export const deprecatedProps = {
   invalidText: PropTypes.string,
 };
 
-InlineEditV2.propTypes = {
+const alignPropType = PropTypes.oneOf([
+  'top',
+  'top-left',
+  'top-right',
+  'bottom',
+  'bottom-left',
+  'bottom-right',
+  'left',
+  'right',
+]);
+
+EditInPlace.propTypes = {
   /**
    * label for cancel button
    */
@@ -311,15 +342,22 @@ InlineEditV2.propTypes = {
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
   /**
+   * tooltipAlignment from the standard tooltip. Default center.
+   *
+   * Can be passed either as one of tooltip options or as an object specifying cancel, edit and save separately
+   */
+  tooltipAlignment: PropTypes.oneOfType([
+    alignPropType,
+    PropTypes.shape({
+      cancel: alignPropType,
+      edit: alignPropType,
+      save: alignPropType,
+    }),
+  ]),
+  /**
    * current value of the input
    */
   value: PropTypes.string.isRequired,
 
   ...deprecatedProps,
-};
-
-InlineEditV2.defaultProps = {
-  invalid: false,
-  invalidLabel: '',
-  // readOnly: false,
 };

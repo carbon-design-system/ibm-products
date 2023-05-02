@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { SkeletonText } from '@carbon/react';
-import { InlineEdit } from '../';
+import { EditInPlace } from '../';
 
 /**
  *
@@ -24,7 +24,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
     onSave,
     editDescription,
     editableLabel,
-    revertDescription,
+    cancelDescription,
     saveDescription,
     ...rest
   } = title;
@@ -47,19 +47,17 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
         {loading ? (
           <SkeletonText className={`${blockClass}__title-skeleton`} />
         ) : isEditable ? (
-          <InlineEdit
-            v1
-            hideLabel
+          <EditInPlace
+            tooltipAlignment="bottom"
             value={text}
-            {...{
-              editDescription,
-              onChange,
-              onSave,
-              labelText: editableLabel,
-              revertDescription,
-              saveDescription,
-            }}
-            buttonTooltipPosition="bottom"
+            cancelLabel={cancelDescription}
+            editLabel={editDescription}
+            saveLabel={saveDescription}
+            labelText={editableLabel}
+            onChange={onChange}
+            onSave={onSave}
+            size="md"
+            inheritTypography
             {...rest}
           />
         ) : (
@@ -87,7 +85,7 @@ export const PageHeaderTitle = ({ blockClass, hasBreadcrumbRow, title }) => {
   );
 };
 
-export const inlineEditRequired = ({ onSave }) => !!onSave;
+export const editInPlaceRequired = ({ onSave }) => !!onSave;
 
 PageHeaderTitle.propTypes = {
   // passed from page header
@@ -109,7 +107,7 @@ PageHeaderTitle.propTypes = {
    *    - onSave: function to process a confirmed change
    *    - editDescription: description for edit button
    *    - editableLabel: label for edit required if onSave supplied
-   *    - revertDescription: description for edit revert button
+   *    - cancelDescription: description for edit cancel button
    *    - saveDescription: description for edit save button
    * - Object containing user defined contents. These must fit within the area defined for the title in both main part of the header and the breadcrumb.
    *    - content: title or name of current location shown in main part of page header
@@ -124,13 +122,13 @@ PageHeaderTitle.propTypes = {
       loading: PropTypes.bool,
 
       // inline edit version properties
-      editDescription: PropTypes.string.isRequired.if(inlineEditRequired),
-      editableLabel: PropTypes.string.isRequired.if(inlineEditRequired),
-      id: PropTypes.string.isRequired.if(inlineEditRequired),
+      editDescription: PropTypes.string.isRequired.if(editInPlaceRequired),
+      editableLabel: PropTypes.string.isRequired.if(editInPlaceRequired),
+      id: PropTypes.string.isRequired.if(editInPlaceRequired),
       onChange: PropTypes.func,
       onSave: PropTypes.func,
-      revertDescription: PropTypes.string.isRequired.if(inlineEditRequired),
-      saveDescription: PropTypes.string.isRequired.if(inlineEditRequired),
+      cancelDescription: PropTypes.string.isRequired.if(editInPlaceRequired),
+      saveDescription: PropTypes.string.isRequired.if(editInPlaceRequired),
       // Update docgen if changed
     }),
     PropTypes.string,

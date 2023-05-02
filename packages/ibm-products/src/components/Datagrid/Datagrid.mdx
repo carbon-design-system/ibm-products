@@ -417,6 +417,32 @@ const App = () => {
   />
 </Canvas>
 
+At this time, it is possible to still use the deprecated `useInlineEdit` hook
+but requires setting a feature flag. See example below:
+
+```jsx
+import {
+  Datagrid,
+  useDatagrid,
+  useInlineEdit,
+  pkg,
+} from '@carbon/ibm-products';
+
+const MyInlineEditDatagrid = () => {
+  pkg.feature['Datagrid.useInlineEdit'] = true;
+  const [data, setData] = useState(gridData);
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      onDataUpdate: setData,
+    },
+    useInlineEdit
+  );
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
 ## Filtering
 
 Table filtering allows a user to add or remove data items from a data table by

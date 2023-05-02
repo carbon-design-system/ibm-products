@@ -57,7 +57,6 @@ const defaults = {
     WebTerminalProvider: true,
 
     // other public components not yet reviewed and released:
-    ModifiedTabs: false,
     Toolbar: false,
     ToolbarButton: false,
     ToolbarGroup: false,

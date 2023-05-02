@@ -1,18 +1,24 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2022
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2022, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import { pkg } from '../../settings';
 import cx from 'classnames';
 import { InlineEditCell } from './Datagrid/addons/InlineEdit/InlineEditCell';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const useInlineEdit = (hooks) => {
+const useInlineEdit = (hooks, usingEditableCell) => {
+  useEffect(() => {
+    if (!usingEditableCell) {
+      pkg.checkReportFeatureEnabled('Datagrid.useInlineEdit');
+    }
+  }, [usingEditableCell]);
+
   const addInlineEdit = (props, { cell, instance }) => {
     const columnInlineEditConfig = cell.column.inlineEdit;
     const inlineEditType = cell.column?.inlineEdit?.type;
@@ -40,14 +46,20 @@ const useInlineEdit = (hooks) => {
         },
       ];
     }
+
     return [
       props,
       {
         className: cx(`${blockClass}__cell`, {
-          [`${blockClass}__cell-inline-edit`]: true,
+          [`${blockClass}__cell-inline-edit`]:
+            !!usingEditableCell ||
+            pkg.isFeatureEnabled('Datagrid.useInlineEdit')
+              ? true
+              : '',
         }),
         role: 'gridcell',
-        children: (
+        children: (!!usingEditableCell ||
+          pkg.isFeatureEnabled('Datagrid.useInlineEdit')) && (
           <>
             {inlineEditType === 'text' &&
               renderInlineEditComponent(inlineEditType)}
@@ -79,7 +91,10 @@ const useInlineEdit = (hooks) => {
   hooks.getCellProps.push(addInlineEdit);
   hooks.useInstance.push((instance) => {
     Object.assign(instance, {
-      withInlineEdit: true,
+      withInlineEdit:
+        !!usingEditableCell || pkg.isFeatureEnabled('Datagrid.useInlineEdit')
+          ? true
+          : false,
     });
   });
 };

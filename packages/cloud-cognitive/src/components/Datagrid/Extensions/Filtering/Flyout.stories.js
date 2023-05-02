@@ -23,7 +23,7 @@ import { StatusIcon } from '../../../StatusIcon';
 import { pkg } from '../../../../settings';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Filtering`,
+  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Filtering/Flyout`,
   component: Datagrid,
   parameters: {
     styles,
@@ -84,6 +84,7 @@ const FilteringUsage = ({ defaultGridProps }) => {
     filterProps,
     emptyStateTitle,
     emptyStateDescription,
+    initialState,
   } = defaultGridProps;
 
   const headers = [
@@ -170,6 +171,7 @@ const FilteringUsage = ({ defaultGridProps }) => {
     {
       columns,
       data,
+      initialState,
       DatagridActions,
       batchActions: true,
       toolbarBatchActions: getBatchActions(),
@@ -297,8 +299,8 @@ const filters = [
   },
 ];
 
-export const FilteringUsageStory = prepareStory(FilteringTemplateWrapper, {
-  storyName: 'Filter flyout - batch',
+export const FlyoutBatch = prepareStory(FilteringTemplateWrapper, {
+  storyName: 'Filter flyout with batch update',
   argTypes: {
     gridTitle: ARG_TYPES.gridTitle,
     gridDescription: ARG_TYPES.gridDescription,
@@ -326,34 +328,67 @@ export const FilteringUsageStory = prepareStory(FilteringTemplateWrapper, {
   },
 });
 
-export const FilteringInstantUsageStory = prepareStory(
-  FilteringTemplateWrapper,
-  {
-    storyName: 'Filter flyout - instant',
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-      filterProps: ARG_TYPES.filterProps,
+export const FlyoutInstant = prepareStory(FilteringTemplateWrapper, {
+  storyName: 'Filter flyout with instant update',
+  argTypes: {
+    gridTitle: ARG_TYPES.gridTitle,
+    gridDescription: ARG_TYPES.gridDescription,
+    useDenseHeader: ARG_TYPES.useDenseHeader,
+    filterProps: ARG_TYPES.filterProps,
+  },
+  args: {
+    gridTitle: 'Data table title',
+    gridDescription: 'Additional information if needed',
+    useDenseHeader: false,
+    emptyStateTitle: 'No filters match',
+    emptyStateDescription:
+      'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+    filterProps: {
+      variation: 'flyout',
+      updateMethod: 'instant',
+      primaryActionLabel: 'Apply',
+      secondaryActionLabel: 'Cancel',
+      flyoutIconDescription: 'Open filters',
+      onFlyoutOpen: action('onFlyoutOpen'),
+      onFlyoutClose: action('onFlyoutClose'),
+      filters,
     },
-    args: {
-      gridTitle: 'Data table title',
-      gridDescription: 'Additional information if needed',
-      useDenseHeader: false,
-      emptyStateTitle: 'No filters match',
-      emptyStateDescription:
-        'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-      filterProps: {
-        variation: 'flyout',
-        updateMethod: 'instant',
-        primaryActionLabel: 'Apply',
-        secondaryActionLabel: 'Cancel',
-        flyoutIconDescription: 'Open filters',
-        onFlyoutOpen: action('onFlyoutOpen'),
-        onFlyoutClose: action('onFlyoutClose'),
-        filters,
-      },
-      featureFlags: ['Datagrid.useFiltering'],
+  },
+});
+
+export const FlyoutWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
+  storyName: 'Filter flyout with initial filters',
+  argTypes: {
+    gridTitle: ARG_TYPES.gridTitle,
+    gridDescription: ARG_TYPES.gridDescription,
+    useDenseHeader: ARG_TYPES.useDenseHeader,
+    filterProps: ARG_TYPES.filterProps,
+  },
+  args: {
+    initialState: {
+      filters: [
+        {
+          id: 'role',
+          type: 'radio',
+          value: 'developer',
+        },
+      ],
     },
-  }
-);
+    gridTitle: 'Data table title',
+    gridDescription: 'Additional information if needed',
+    useDenseHeader: false,
+    emptyStateTitle: 'No filters match',
+    emptyStateDescription:
+      'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+    filterProps: {
+      variation: 'flyout',
+      updateMethod: 'instant',
+      primaryActionLabel: 'Apply',
+      secondaryActionLabel: 'Cancel',
+      flyoutIconDescription: 'Open filters',
+      onFlyoutOpen: action('onFlyoutOpen'),
+      onFlyoutClose: action('onFlyoutClose'),
+      filters,
+    },
+  },
+});

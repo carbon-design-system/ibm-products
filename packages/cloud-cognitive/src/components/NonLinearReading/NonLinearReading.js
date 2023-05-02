@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { ChevronUp16 } from '@carbon/icons-react';
+import { ChevronDown16 } from '@carbon/icons-react';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
@@ -50,7 +50,7 @@ export let NonLinearReading = React.forwardRef(
     return (
       <span
         {...rest}
-        className={cx(blockClass, className)}
+        className={cx(blockClass, `${blockClass}__${theme}`, className)}
         ref={ref}
         role="main"
         {...getDevtoolsProps(componentName)}
@@ -59,19 +59,17 @@ export let NonLinearReading = React.forwardRef(
         <button
           type="button"
           aria-expanded={isOpen}
-          className={cx(`${blockClass}__term-${theme}`, [
+          className={cx(`${blockClass}__keyword`, [
             isOpen
-              ? [`${blockClass}__term-${theme}--open`]
-              : [`${blockClass}__term-${theme}--closed`],
+              ? [`${blockClass}__keyword-open`]
+              : [`${blockClass}__keyword-closed`],
           ])}
           onClick={handleToggle}
         >
           {children}
-          {isOpen && <ChevronUp16 />}
+          <ChevronDown16 />
         </button>{' '}
-        {isOpen && (
-          <span className={`${blockClass}--body-${theme}`}>{definition}</span>
-        )}{' '}
+        {isOpen && <span className={`${blockClass}__body`}>{definition}</span>}{' '}
       </span>
     );
   }
@@ -86,7 +84,7 @@ NonLinearReading.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 NonLinearReading.propTypes = {
   /**
-   * The term of the component appears as a pill.
+   * The keyword of the component appears as a pill.
    */
   children: PropTypes.node.isRequired,
 
@@ -96,7 +94,7 @@ NonLinearReading.propTypes = {
   className: PropTypes.string,
 
   /**
-   * The content that appears when the term is toggled open.
+   * The content that appears when the keyword is toggled open.
    */
   definition: PropTypes.node.isRequired,
 

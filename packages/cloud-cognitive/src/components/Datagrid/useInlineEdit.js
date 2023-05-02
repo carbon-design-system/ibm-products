@@ -9,13 +9,22 @@ import React, { useEffect } from 'react';
 import { pkg } from '../../settings';
 import cx from 'classnames';
 import { InlineEditCell } from './Datagrid/addons/InlineEdit/InlineEditCell';
+import { warn } from '../../global/js/utils/pconsole';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const useInlineEdit = (hooks) => {
+const useInlineEdit = (hooks, usingEditableCell) => {
   useEffect(() => {
     pkg.checkReportFeatureEnabled('Datagrid.useInlineEdit');
   }, []);
+
+  useEffect(() => {
+    if (!usingEditableCell) {
+      warn(
+        `The 'useInlineEdit' hook is being renamed in Carbon for IBM Products v2 to 'useEditableCell'. You can use this newly renamed hook now or upgrade when moving to v2.`
+      );
+    }
+  }, [usingEditableCell]);
 
   const addInlineEdit = (props, { cell, instance }) => {
     const columnInlineEditConfig = cell.column.inlineEdit;

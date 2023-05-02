@@ -19,6 +19,9 @@ import { Link } from '@carbon/react';
 import { AboutModal } from '.';
 
 import ExampleLogo from './_story-assets/example-logo.svg';
+import ansibleLogo from './_story-assets/ansible-logo.png';
+import grafanaLogo from './_story-assets/grafana-logo.png';
+import jsLogo from './_story-assets/js-logo.png';
 
 const blockClass = `${pkg.prefix}--about-modal`;
 const componentName = AboutModal.displayName;
@@ -153,7 +156,12 @@ describe(componentName, () => {
 
   it('renders additional info in footer', () => {
     renderComponent({
-      additionalInfo: [{ label: additionalInfo.at(0).label, content: additionalInfo.at(0).content }],
+      additionalInfo: [
+        {
+          label: additionalInfo.at(0).label,
+          content: additionalInfo.at(0).content,
+        },
+      ],
     });
   });
 

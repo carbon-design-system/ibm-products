@@ -116,7 +116,9 @@ export let AboutModal = React.forwardRef(
             ref={contentRef}
             id={contentId}
           >
-            <div className={`${blockClass}__version-number`}>{versionNumber}</div>
+            <div className={`${blockClass}__version-number`}>
+              {versionNumber}
+            </div>
             {links && links.length > 0 && (
               <div className={`${blockClass}__links-container`}>
                 {links.map((link, i) => (
@@ -124,9 +126,7 @@ export let AboutModal = React.forwardRef(
                 ))}
               </div>
             )}
-            {content && (
-              <p className={`${blockClass}__content`}>{content}</p>
-            )}
+            {content && <p className={`${blockClass}__content`}>{content}</p>}
             {copyrightText && (
               <p className={`${blockClass}__copyright-text`}>{copyrightText}</p>
             )}

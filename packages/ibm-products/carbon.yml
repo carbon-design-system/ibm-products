@@ -351,21 +351,6 @@ assets:
         url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-edit-and-update-editinplace
     tags:
       - input-control
-  modified-tabs:
-    name: Modified tabs
-    externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/components/modified-tabs/usage
-    status: experimental
-    type: component
-    platform: web
-    framework: react
-    thumbnailPath: './thumbnails/modified-tabs.svg'
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://v11-carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-modified-tabs-modifiedtabs-canary
-    tags:
-      - input-control
   multi-add-select:
     name: Multi add select
     externalDocsUrl: https://pages.github.ibm.com/cdai-design/pal/patterns/add-and-select/usage

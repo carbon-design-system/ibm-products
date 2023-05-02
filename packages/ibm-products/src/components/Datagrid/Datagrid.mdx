@@ -51,6 +51,7 @@ import {
   useColumnCenterAlign,
   useColumnOrder,
   useInlineEdit,
+  useEditableCell,
 } from '@carbon/ibm-products';
 ```
 
@@ -282,11 +283,13 @@ const App = () => {
 
 ## Inline editing
 
-The `Datagrid` supports inline editing when used with the `useInlineEdit` hook
-and columns are provided the required configuration. The four data types
-supported are strings, numbers, dates, and selection (dropdown).
+The `Datagrid` supports inline editing when used with the `useEditableCell` hook
+(previously named `useInlineEdit` in v1) and columns are provided the required
+configuration. The four data types supported are strings, numbers, dates, and
+selection (dropdown).
 
-Below are example column configuration for the support inline edit data types:
+Below are example column configurations for the supported inline edit data
+types:
 
 Default/string:
 
@@ -384,14 +387,50 @@ Selection:
 ```
 
 Using the column structure outlined above, along with the use of the
-`useInlineEdit` hook, the Datagrid will support inline editing. See example
-below:
+`useEditableCell` hook (previously named `useInlineEdit` in v1), the Datagrid
+will support inline editing. See example below:
 
 ```jsx
-import { Datagrid, useDatagrid, useInlineEdit } from '@carbon/ibm-products';
+import { Datagrid, useDatagrid, useEditableCell } from '@carbon/ibm-products';
 const App = () => {
   const [data, setData] = useState(makeData(10));
   const columns = React.useMemo(() => getInlineEditColumns(), []); // These columns follow the inline edit column configuration detailed above
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      onDataUpdate: setData,
+    },
+    useEditableCell
+  );
+  return <Datagrid datagridState={datagridState} />;
+};
+```
+
+<Canvas>
+  <Story
+    id={getStoryId(
+      Datagrid.displayName,
+      'editable-cell-usage-story',
+      '/Extensions/EditableCell'
+    )}
+  />
+</Canvas>
+
+At this time, it is possible to still use the deprecated `useInlineEdit` hook
+but requires setting a feature flag. See example below:
+
+```jsx
+import {
+  Datagrid,
+  useDatagrid,
+  useInlineEdit,
+  pkg,
+} from '@carbon/ibm-products';
+
+const MyInlineEditDatagrid = () => {
+  pkg.feature['Datagrid.useInlineEdit'] = true;
+  const [data, setData] = useState(gridData);
   const datagridState = useDatagrid(
     {
       columns,
@@ -403,16 +442,6 @@ const App = () => {
   return <Datagrid datagridState={datagridState} />;
 };
 ```
-
-<Canvas>
-  <Story
-    id={getStoryId(
-      Datagrid.displayName,
-      'inline-edit-usage-story',
-      '/Extensions/InlineEdit'
-    )}
-  />
-</Canvas>
 
 ## Filtering
 

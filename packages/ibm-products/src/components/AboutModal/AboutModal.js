@@ -45,7 +45,6 @@ export let AboutModal = React.forwardRef(
       additionalInfo,
       className,
       closeIconDescription,
-      versionNumber,
       copyrightText,
       content,
       links,
@@ -54,6 +53,7 @@ export let AboutModal = React.forwardRef(
       onClose,
       open,
       productName,
+      versionNumber,
       // Collect any other property values passed in.
       ...rest
     },
@@ -181,11 +181,6 @@ AboutModal.propTypes = {
   closeIconDescription: PropTypes.string.isRequired,
 
   /**
-   * Text that provides information on the version number of your product.
-   */
-  versionNumber: PropTypes.node.isRequired,
-
-  /**
    * Trademark and copyright information. Displays first year of
    * product release to current year.
    */
@@ -232,4 +227,9 @@ AboutModal.propTypes = {
    * Please follow these guidelines to ensure proper execution.
    */
   productName: PropTypes.node.isRequired,
+
+  /**
+   * Text that provides information on the version number of your product.
+   */
+  versionNumber: PropTypes.node.isRequired,
 };

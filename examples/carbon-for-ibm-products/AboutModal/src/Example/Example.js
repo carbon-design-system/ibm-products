@@ -35,36 +35,30 @@ export const Example = () => {
         open={isOpen}
         additionalInfo={[
           {
-            content: '1.3.41',
-            label: 'Version number',
-          },
-          {
             content: (
               <>
                 <img
                   alt="Grafana"
-                  className="about-modal-stories--tech-logo"
+                  className="c4p-about-modal__stories--tech-logo"
                   src={require('./media/grafana-logo.png')}
                 />
                 <img
                   alt="Ansible"
-                  className="about-modal-stories--tech-logo"
+                  className="c4p-about-modal__stories--tech-logo"
                   src={require('./media/ansible-logo.png')}
                 />
                 <img
                   alt="JavaScript"
-                  className="about-modal-stories--tech-logo"
+                  className="c4p-about-modal__stories--tech-logo"
                   src={require('./media/js-logo.png')}
                 />
               </>
             ),
-            label: 'Technologies used',
+            label: 'Powered by',
           },
         ]}
         closeIconDescription="Close"
-        content={
-          <>This is example content for an About Modal with all props set.</>
-        }
+        versionNumber={<>Version 0.0.0</>}
         copyrightText={<>Copyright © 2020 IBM corporation</>}
         legalText="This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information."
         links={[
@@ -83,7 +77,7 @@ export const Example = () => {
           />
         }
         onClose={handleCloseModal}
-        title={
+        productName={
           <>
             IBM{' '}
             <span

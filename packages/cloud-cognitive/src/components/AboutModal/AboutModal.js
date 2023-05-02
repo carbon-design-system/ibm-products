@@ -45,15 +45,15 @@ export let AboutModal = React.forwardRef(
       additionalInfo,
       className,
       closeIconDescription,
-      content,
+      versionNumber,
       copyrightText,
-      generalText,
+      content,
       links,
       logo,
       modalAriaLabel,
       onClose,
       open,
-      title,
+      productName,
       // Collect any other property values passed in.
       ...rest
     },
@@ -102,8 +102,8 @@ export let AboutModal = React.forwardRef(
           className={`${blockClass}__header`}
           closeModal={onClose}
           iconDescription={closeIconDescription}
-          label={title}
-          labelClassName={`${blockClass}__title`}
+          label={productName}
+          labelClassName={`${blockClass}__product-name`}
         />
         <ModalBody
           aria-label={hasScrollingContent ? '' : null}
@@ -116,7 +116,7 @@ export let AboutModal = React.forwardRef(
             ref={contentRef}
             id={contentId}
           >
-            {content}
+            <div className={`${blockClass}__version-number`}>{versionNumber}</div>
             {links && links.length > 0 && (
               <div className={`${blockClass}__links-container`}>
                 {links.map((link, i) => (
@@ -124,8 +124,8 @@ export let AboutModal = React.forwardRef(
                 ))}
               </div>
             )}
-            {generalText && (
-              <p className={`${blockClass}__general-text`}>{generalText}</p>
+            {content && (
+              <p className={`${blockClass}__content`}>{content}</p>
             )}
             {copyrightText && (
               <p className={`${blockClass}__copyright-text`}>{copyrightText}</p>
@@ -181,11 +181,9 @@ AboutModal.propTypes = {
   closeIconDescription: PropTypes.string.isRequired,
 
   /**
-   * A summary that appears immediately beneath the title, and might
-   * include information such as: version name, server name,
-   * user name, user role, browser version, browser OS etc.
+   * Text that provides information on the version number of your product.
    */
-  content: PropTypes.node.isRequired,
+  versionNumber: PropTypes.node.isRequired,
 
   /**
    * Trademark and copyright information. Displays first year of
@@ -197,7 +195,7 @@ AboutModal.propTypes = {
    * Subhead text providing any relevant product disclaimers including
    * legal information (optional)
    */
-  generalText: PropTypes.node,
+  content: PropTypes.node,
 
   /**
    * An array of Carbon `Link` component if there are additional information
@@ -228,7 +226,10 @@ AboutModal.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * The title of the AboutModal is usually the product or service name.
+   * Header text that provides the product name. The IBM Services logo
+   * consists of two discrete, but required, elements: the iconic
+   * IBM 8-bar logo represented alongside the IBM Services logotype.
+   * Please follow these guidelines to ensure proper execution.
    */
-  title: PropTypes.node.isRequired,
+  productName: PropTypes.node.isRequired,
 };

@@ -25,14 +25,14 @@ const componentName = AboutModal.displayName;
 
 const className = `class-${uuidv4()}`;
 const closeIconDescription = `close ${uuidv4()}`;
-const content = `This is example content: ${uuidv4()}`;
+const versionNumber = `Version 0.0.${uuidv4()}`;
 const copyrightText = `Copyright test text ${uuidv4()}`;
 const dataTestId = uuidv4();
 const logoAltText = `Example product ${uuidv4()} logo`;
 const logo = (
   <img src={ExampleLogo} alt={logoAltText} style={{ maxWidth: '6rem' }} />
 );
-const generalText = `Legal test text ${uuidv4()}`;
+const content = `Legal test text ${uuidv4()}`;
 const linkText = `Carbon (${uuidv4()}) Design System`;
 const linkHref = `https://www.carbondesignsystem.com/${uuidv4()}`;
 const links = [
@@ -43,25 +43,50 @@ const links = [
     IBM Design Language
   </Link>,
 ];
+const additionalInfoLabel = `Powered by (${uuidv4()})`;
+const additionalInfo = [
+  {
+    label: additionalInfoLabel,
+    content: (
+      <>
+        <img
+          src={grafanaLogo}
+          alt="Grafana"
+          className="c4p-about-modal__stories--tech-logo"
+        />
+        <img
+          src={ansibleLogo}
+          alt="Ansible"
+          className="c4p-about-modal__stories--tech-logo"
+        />
+        <img
+          src={jsLogo}
+          alt="JavaScript"
+          className="c4p-about-modal__stories--tech-logo"
+        />
+      </>
+    ),
+  },
+];
 const onCloseReturnsTrue = jest.fn(() => true);
 const onCloseReturnsFalse = jest.fn(() => false);
-const titleText = `Watson ${uuidv4()} Ops`;
-const title = (
+const productNameText = `Watson ${uuidv4()} Ops`;
+const productName = (
   <>
-    IBM <span>{titleText}</span>
+    IBM <span>{productNameText}</span>
   </>
 );
 
-// render an AboutModal with content, logo, title, copyrightText and any other required props
+// render an AboutModal with versionNumber, logo, productName, copyrightText and any other required props
 const renderComponent = ({ ...rest }) =>
   render(
     <main>
       <AboutModal
         {...{
           closeIconDescription,
-          content,
+          versionNumber,
           logo,
-          title,
+          productName,
           copyrightText,
           ...rest,
         }}
@@ -97,12 +122,17 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('renders closeIconDescription, title, logo, and content', () => {
+  it('renders closeIconDescription, productName, logo, and versionNumber', () => {
     renderComponent({ open: true });
     screen.getByRole('button', { name: closeIconDescription });
-    screen.getByText(titleText);
-    screen.getByText(content);
+    screen.getByText(productNameText);
+    screen.getByText(versionNumber);
     screen.getByAltText(logoAltText);
+  });
+
+  it('renders version number', () => {
+    renderComponent({ versionNumber, open: true });
+    screen.getByText(versionNumber);
   });
 
   it('renders with links', () => {
@@ -112,13 +142,19 @@ describe(componentName, () => {
   });
 
   it('renders general text', () => {
-    renderComponent({ generalText, open: true });
-    screen.getByText(generalText);
+    renderComponent({ content, open: true });
+    screen.getByText(content);
   });
 
   it('renders copyright text', () => {
     renderComponent({ copyrightText, open: true });
     screen.getByText(copyrightText);
+  });
+
+  it('renders additional info in footer', () => {
+    renderComponent({
+      additionalInfo: [{ label: additionalInfo.at(0).label, content: additionalInfo.at(0).content }],
+    });
   });
 
   it('is visible when open is true', () => {

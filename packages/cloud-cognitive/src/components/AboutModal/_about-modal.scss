@@ -30,14 +30,14 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
   grid-row: auto;
 }
 
-.#{$block-class} .#{$block-class}__title {
-  @include type.type-style('productive-heading-04');
+.#{$block-class} .#{$block-class}__product-name {
+  @include type.type-style('heading-04');
 
   color: $text-primary;
 }
 
 .#{$block-class} .#{$block-class}__body {
-  @include type.type-style('body-short-02');
+  @include type.type-style('body-compact-02');
 
   min-height: $spacing-10;
   padding: 0 20% 0 $spacing-05;
@@ -54,18 +54,22 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
 }
 
 .#{$block-class} .#{$block-class}__links-container {
-  @include type.type-style('body-short-01');
+  @include type.type-style('body-compact-01');
 
   margin-top: $spacing-06;
 }
 
+.#{$block-class} .#{$block-class}__version-number {
+  color: $text-secondary;
+}
+
 .#{$block-class} .#{$block-class}__links-container a + a {
   padding-left: $spacing-03;
-  border-left: 1px solid $text-primary;
+  border-left: 1px solid $border-strong-01;
   margin-left: $spacing-03;
 }
 
-.#{$block-class} .#{$block-class}__general-text,
+.#{$block-class} .#{$block-class}__content,
 .#{$block-class} .#{$block-class}__copyright-text {
   @include type.type-style('label-01');
 
@@ -78,7 +82,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
   margin-top: $spacing-05;
 }
 
-p.c4p--about-modal__general-text:first-child,
+p.c4p--about-modal__content:first-child,
 p.c4p--about-modal__copyright-text:first-child {
   margin-top: $spacing-07;
 }

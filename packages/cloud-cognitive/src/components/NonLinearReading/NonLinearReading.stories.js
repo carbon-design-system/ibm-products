@@ -130,7 +130,7 @@ const TemplateMultipleLevel = (args) => {
   );
 };
 
-const TemplateWithGradientBG = (args) => {
+const TemplateWithGradientBackground = (args) => {
   return (
     <div className={`${storyClass}__viewport`}>
       <div className="gradient-bg">
@@ -162,9 +162,12 @@ export const MultipleLevel = prepareStory(TemplateMultipleLevel, {
   },
 });
 
-export const WithGradientBG = prepareStory(TemplateWithGradientBG, {
-  args: {
-    ...defaultProps,
-    children: 'engine,',
-  },
-});
+export const WithGradientBackground = prepareStory(
+  TemplateWithGradientBackground,
+  {
+    args: {
+      ...defaultProps,
+      children: 'engine,',
+    },
+  }
+);

@@ -34,7 +34,7 @@
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
     "lint": "run-p -s 'lint:*' spellcheck",
     "lint:es": "yarn lint:es:files 'packages/*/src/**/*.js'",
-    "lint:es:c4p": "yarn lint:es:files 'packages/cloud-cognitive/src/**/*.js' --ignore-pattern '!packages/security/src/**/*.scss' --ignore-pattern '!packages/cdai/src/**/*.scss' --ignore-pattern '!examples/carbon-for-ibm-products/**/*.scss'",
+    "lint:es:c4p": "yarn lint:es:files 'packages/ibm-products/src/**/*.js' --ignore-pattern '!packages/security/src/**/*.scss' --ignore-pattern '!packages/cdai/src/**/*.scss' --ignore-pattern '!examples/carbon-for-ibm-products/**/*.scss'",
     "lint:es:files": "eslint",
     "lint:prettier": "yarn format:prettier --check --loglevel warn",
     "lint:prettier:files": "yarn format:prettier:files --check --loglevel warn",
@@ -153,10 +153,10 @@
     }
   },
   "lint-staged": {
-    "packages/cloud-cognitive/**/*.{js,md,mdx,scss}": "yarn lint:prettier:files",
-    "packages/cloud-cognitive/**/*.js": "yarn lint:es:files",
-    "packages/cloud-cognitive/**/*.scss": "yarn lint:style:files",
-    "packages/cloud-cognitive/**/*": "yarn spellcheck:files"
+    "packages/ibm-products/**/*.{js,md,mdx,scss}": "yarn lint:prettier:files",
+    "packages/ibm-products/**/*.js": "yarn lint:es:files",
+    "packages/ibm-products/**/*.scss": "yarn lint:style:files",
+    "packages/ibm-products/**/*": "yarn spellcheck:files"
   },
   "dependencies": {
     "stylelint-plugin-carbon-tokens": "2.0.0"

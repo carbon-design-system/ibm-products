@@ -137,15 +137,6 @@
       ]
     },
     {
-      "login": "kai-liu",
-      "name": "kai-liu",
-      "avatar_url": "https://avatars.githubusercontent.com/u/105320675?v=4",
-      "profile": "https://github.com/kai-liu",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
       "login": "jagathgj",
       "name": "Jagath Jayakumar",
       "avatar_url": "https://avatars.githubusercontent.com/u/29351394?v=4",
@@ -162,10 +153,36 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "glapadre",
+      "name": "Drew Glapa",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25260547?v=4",
+      "profile": "https://github.com/glapadre",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "lily-peng",
+      "name": "Lily",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3118961?v=4",
+      "profile": "https://linkedin.com/in/mslilypeng/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mgallo25",
+      "name": "Marienella Gallo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23409382?v=4",
+      "profile": "https://github.com/mgallo25",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,
-  "badgeTemplate": "[all-contributors-badge]: https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg",
   "projectName": "ibm-cloud-cognitive",
   "projectOwner": "carbon-design-system",
   "repoType": "github",

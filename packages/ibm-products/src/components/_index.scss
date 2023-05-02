@@ -1,0 +1,52 @@
+//
+// Copyright IBM Corp. 2021, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Package all scss files here for those that want them all bundled up.
+
+@use './_Canary/canary';
+
+@use './APIKeyModal';
+@use './AboutModal';
+@use './ActionSet';
+@use './ButtonMenu';
+@use './Cascade';
+@use './ComboButton';
+@use './CreateFullPage';
+@use './CreateModal';
+@use './CreateSidePanel';
+@use './CreateTearsheet';
+@use './CreateTearsheetNarrow';
+@use './EmptyStates';
+@use './ExportModal';
+@use './ExpressiveCard';
+@use './FilterSummary/index';
+@use './HTTPErrors';
+@use './ImportModal';
+@use './ModifiedTabs';
+@use './MultiAddSelect';
+@use './NotificationsPanel';
+@use './PageHeader';
+@use './ProductiveCard';
+@use './RemoveModal';
+@use './Saving';
+@use './SidePanel';
+@use './SingleAddSelect';
+@use './StatusIcon';
+@use './TagSet';
+@use './Tearsheet';
+@use './Toolbar';
+@use './WebTerminal';
+@use './UserProfileImage';
+@use './EditSidePanel';
+@use './OptionsTile';
+@use './EditInPlace';
+@use './DataSpreadsheet';
+@use './Datagrid';
+@use './EditTearsheet';
+@use './EditTearsheetNarrow';
+@use './EditFullPage';
+@use './EditUpdateCards';

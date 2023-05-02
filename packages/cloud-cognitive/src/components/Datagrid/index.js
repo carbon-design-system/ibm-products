@@ -23,5 +23,6 @@ export { default as useSelectAllWithToggle } from './useSelectAllToggle';
 export { default as useColumnCenterAlign } from './useColumnCenterAlign';
 export { default as useColumnOrder } from './useColumnOrder';
 export { default as useInlineEdit } from './useInlineEdit';
+export { default as useEditableCell } from './useEditableCell';
 export { default as useFiltering } from './useFiltering';
 export { getAutoSizedColumnWidth } from './utils/getAutoSizedColumnWidth';

@@ -7,7 +7,7 @@
  */
 
 import React, { useState } from 'react';
-import { Add16 } from '@carbon/icons-react';
+import { Add } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
@@ -34,33 +34,33 @@ const getBatchActions = () => {
   return [
     {
       label: 'Duplicate',
-      renderIcon: Add16,
+      renderIcon: () => <Add size={16} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Add',
-      renderIcon: Add16,
+      renderIcon: () => <Add size={16} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Select all',
-      renderIcon: Add16,
+      renderIcon: () => <Add size={16} />,
       onClick: action('Clicked batch action button'),
       type: 'select_all',
     },
     {
       label: 'Publish to catalog',
-      renderIcon: Add16,
+      renderIcon: () => <Add size={16} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Download',
-      renderIcon: Add16,
+      renderIcon: () => <Add size={16} />,
       onClick: action('Clicked batch action button'),
     },
     {
       label: 'Delete',
-      renderIcon: Add16,
+      renderIcon: () => <Add size={16} />,
       onClick: action('Clicked batch action button'),
       hasDivider: true,
       kind: 'danger',

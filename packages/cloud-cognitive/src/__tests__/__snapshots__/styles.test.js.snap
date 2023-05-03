@@ -2340,6 +2340,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--inline-edit-v2 {
+  --c4p--inline-edit-v2--size: var(--cds-spacing-07, 2rem);
   display: flex;
   align-items: center;
   background: transparent;
@@ -2348,14 +2349,27 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit-v2-readonly {
   cursor: not-allowed;
 }
+.c4p--inline-edit-v2--sm {
+  --c4p--inline-edit-v2--size: var(--cds-spacing-07, 2rem);
+}
+.c4p--inline-edit-v2--md {
+  --c4p--inline-edit-v2--size: var(--cds-spacing-08, 2.5rem);
+}
+.c4p--inline-edit-v2--lg {
+  --c4p--inline-edit-v2--size: var(--cds-spacing-09, 3rem);
+}
 .c4p--inline-edit-v2:hover {
   background: var(--cds-field-01, #f4f4f4);
 }
-.c4p--inline-edit-v2:hover .c4p--inline-edit-v2__btn-edit {
+.c4p--inline-edit-v2:hover .c4p--inline-edit-v2__btn-edit,
+.c4p--inline-edit-v2 .c4p--inline-edit-v2__btn-edit.c4p--inline-edit-v2__btn-edit--always-visible {
   visibility: visible;
 }
 .c4p--inline-edit-v2__btn-edit {
   visibility: hidden;
+}
+.c4p--inline-edit-v2--invalid {
+  outline: 2px solid var(--cds-support-01, #da1e28);
 }
 .c4p--inline-edit-v2--focused {
   background: var(--cds-field-01, #f4f4f4);
@@ -2364,11 +2378,27 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--inline-edit-v2__text-input {
   flex: 1;
 }
+.c4p--inline-edit-v2--inherit-type .c4p--inline-edit-v2__text-input {
+  /* match font of container */
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+.c4p--inline-edit-v2__ellipsis {
+  position: relative;
+  margin-left: calc(-1 * var(--cds-spacing-05, 1rem));
+  opacity: 0;
+}
+.c4p--inline-edit-v2--overflows:not(.c4p--inline-edit-v2--focused) .c4p--inline-edit-v2__ellipsis {
+  opacity: 1;
+}
 .c4p--inline-edit-v2__text-input-label {
   display: none;
 }
 .c4p--inline-edit-v2__warning-icon {
-  margin: var(--cds-spacing-03, 0.5rem);
+  width: var(--cds-spacing-05, 1rem);
+  margin: auto var(--cds-spacing-03, 0.5rem) auto auto;
   color: var(--cds-support-01, #da1e28);
 }
 .c4p--inline-edit-v2__warning-text {
@@ -2387,27 +2417,24 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   outline: none;
 }
 
-.c4p--inline-edit-v2-readonly .c4p--inline-edit-v2__text-input.bx--text-input,
-.c4p--inline-edit-v2-readonly .bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
-  cursor: not-allowed;
-}
-
 .c4p--inline-edit-v2__text-input.bx--text-input:focus,
 .c4p--inline-edit-v2__text-input.bx--text-input:active {
   outline: none;
 }
 
 .c4p--inline-edit-v2__toolbar {
-  --toolbar-width: var(--cds-spacing-07, 2rem);
-  --toolbar-width-focussed: var(--cds-spacing-10, 4rem);
+  --toolbar-width: var(--c4p--inline-edit-v2--size);
+  --toolbar-width-focussed: calc(2 * var(--c4p--inline-edit-v2--size));
   display: inline-flex;
   overflow: hidden;
   width: var(--toolbar-width);
 }
 
 .c4p--inline-edit-v2--invalid .c4p--inline-edit-v2__toolbar {
-  --toolbar-width: var(--cds-spacing-07, 2rem);
-  --toolbar-width-focussed: var(--cds-spacing-12, 6rem);
+  --toolbar-width: calc(var(--c4p--inline-edit-v2--size) + var(--cds-spacing-07, 2rem));
+  --toolbar-width-focussed: calc(
+    2 * var(--c4p--inline-edit-v2--size) + var(--cds-spacing-07, 2rem)
+  );
 }
 
 @keyframes slide-in {

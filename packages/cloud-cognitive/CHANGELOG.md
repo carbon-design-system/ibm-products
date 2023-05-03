@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.51.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.50.0...@carbon/ibm-products@1.51.0) (2023-05-02)
+
+
+### Features
+
+* add ellipsis to inline-edit v2 pkg v1 ([#2931](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2931)) ([9f60ac9](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/9f60ac97b31245ba3e51230d567c947ae52183fc))
+* **Datagrid:** add keyboard support for clickable rows ([#2914](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2914)) ([cbdecd8](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/cbdecd8e23ef37c9f679ea93c4e69121399d36e3))
+* **Datagrid:** adds FilterPanel stories ([#2942](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2942)) ([0eb800a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/0eb800a620d9a8de199e3caed73a5a480c3dd69a))
+* **datagrid:** adds initial filters support ([#2934](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2934)) ([d1f7d2e](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/d1f7d2ec3880e13e16260a98b6de50a747a325e6))
+* Rename inline edit (V1) ([#2881](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2881)) ([cff465d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/cff465d845d0bdf5835a4dfe2fa87aa75e658578))
+* update InlineEditV2 ([#2918](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2918)) ([121dbf1](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/121dbf1123462f2bfd618a6ac75a3ac30127bff6))
+
+
+
+
+
 # [1.50.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.49.0...@carbon/ibm-products@1.50.0) (2023-04-25)
 
 

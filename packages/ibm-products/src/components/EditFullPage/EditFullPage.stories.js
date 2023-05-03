@@ -339,7 +339,9 @@ const TemplateWithSections = ({ ...args }) => {
           <span className={`${blockClass}__section-divider`} />
           <Grid>
             <Column xlg={5} lg={5} md={4} sm={4}>
-              <h5 className={`${blockClass}__step-title`}>Core configuration</h5>
+              <h5 className={`${blockClass}__step-title`}>
+                Core configuration
+              </h5>
               <h6 className={`${blockClass}__step-subtitle`}>
                 This is how long messages are retained before they are deleted.
               </h6>

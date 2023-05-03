@@ -107,13 +107,14 @@ export let AddSelectFilter = ({
           />
         )}
         {open && (
-          <div className={blockClass}>
-            <div className={`${blockClass}-content`}>
-              <p>{filtersLabel}</p>
-              <div className={`${blockClass}-opts`}>
-                {filterOpts.map((filterOpts) => (
-                  <Layer key={filterOpts.id}>
+          <Layer>
+            <div className={blockClass}>
+              <div className={`${blockClass}-content`}>
+                <p>{filtersLabel}</p>
+                <div className={`${blockClass}-opts`}>
+                  {filterOpts.map((filterOpts) => (
                     <Dropdown
+                      key={filterOpts.id}
                       id={filterOpts.id}
                       titleText={filterOpts.label}
                       items={filterOpts.opts}
@@ -123,29 +124,29 @@ export let AddSelectFilter = ({
                       selectedItem={getSelectedItem(filterOpts.id)}
                       label={placeholder}
                     />
-                  </Layer>
-                ))}
+                  ))}
+                </div>
               </div>
+              <ButtonSet className={`${blockClass}-button-set`}>
+                <Button
+                  kind="secondary"
+                  onClick={resetFilters}
+                  className={`${blockClass}-button`}
+                  disabled={!dirtyInput}
+                >
+                  {secondaryButtonText}
+                </Button>
+                <Button
+                  kind="primary"
+                  onClick={applyFilters}
+                  className={`${blockClass}-button`}
+                  disabled={!dirtyInput && !hasFiltersApplied}
+                >
+                  {primaryButtonText}
+                </Button>
+              </ButtonSet>
             </div>
-            <ButtonSet className={`${blockClass}-button-set`}>
-              <Button
-                kind="secondary"
-                onClick={resetFilters}
-                className={`${blockClass}-button`}
-                disabled={!dirtyInput}
-              >
-                {secondaryButtonText}
-              </Button>
-              <Button
-                kind="primary"
-                onClick={applyFilters}
-                className={`${blockClass}-button`}
-                disabled={!dirtyInput && !hasFiltersApplied}
-              >
-                {primaryButtonText}
-              </Button>
-            </ButtonSet>
-          </div>
+          </Layer>
         )}
       </div>
       {hasFiltersApplied && (

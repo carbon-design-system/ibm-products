@@ -1,1 +1,0 @@
-export { ModifiedTabs } from './ModifiedTabs';

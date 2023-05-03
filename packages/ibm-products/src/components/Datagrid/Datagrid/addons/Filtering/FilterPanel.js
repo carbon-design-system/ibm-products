@@ -50,7 +50,11 @@ const FilterPanel = ({
   secondaryActionLabel = 'Cancel',
   searchLabelText = 'Filter search',
   searchPlaceholder = 'Find filters',
+  initialFilters = [],
 }) => {
+  //  Save the initial filters we only need the filters once
+  const initialFiltersRef = useRef(initialFilters);
+
   /** State */
   const [showDividerLine, setShowDividerLine] = useState(false);
 
@@ -67,6 +71,7 @@ const FilterPanel = ({
     filters: filterSections,
     setAllFilters,
     variation: PANEL,
+    initialFilters: initialFiltersRef.current,
   });
 
   /** Refs */
@@ -235,9 +240,9 @@ const FilterPanel = ({
           onScroll={onInnerContainerScroll}
         >
           {filterSections.map(
-            ({ categoryTitle = null, filters = [], hasAccordion }) => {
+            ({ categoryTitle = null, filters = [], hasAccordion }, index) => {
               return (
-                <div className={`${componentClass}__category`}>
+                <div key={index} className={`${componentClass}__category`}>
                   {categoryTitle && (
                     <div className={`${componentClass}__category-title`}>
                       {categoryTitle}
@@ -272,6 +277,16 @@ FilterPanel.propTypes = {
   closeIconDescription: PropTypes.string,
   filterPanelMinHeight: PropTypes.number,
   filterSections: PropTypes.array,
+  /**
+   * Filters that should be applied on load
+   */
+  initialFilters: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      value: PropTypes.any.isRequired,
+    })
+  ),
   onApply: PropTypes.func,
   onCancel: PropTypes.func,
   onPanelClose: PropTypes.func,

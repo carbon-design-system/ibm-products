@@ -209,6 +209,11 @@ Tearsheet.propTypes = {
   portalTarget: PropTypes.node,
 
   /**
+   * Specify a CSS selector that matches the DOM element that should be focused when the Modal opens
+   */
+  selectorPrimaryFocus: PropTypes.string,
+
+  /**
    * The main title of the tearsheet, displayed in the header area.
    */
   title: PropTypes.node,

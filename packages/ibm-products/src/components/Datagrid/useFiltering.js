@@ -59,13 +59,16 @@ const useFiltering = (hooks) => {
   );
 
   hooks.useInstance.push((instance) => {
-    const { filterProps, setAllFilters, setFilter, headers, data } = instance;
+    const { filterProps, setAllFilters, setFilter, headers, data, state } =
+      instance;
 
     const defaultProps = {
       variation: 'flyout',
       updateMethod: BATCH,
       panelIconDescription: 'Open filter panel',
+      initialFilters: state.filters,
     };
+
     const getFilterFlyoutProps = () => ({
       ...defaultProps,
       ...filterProps,

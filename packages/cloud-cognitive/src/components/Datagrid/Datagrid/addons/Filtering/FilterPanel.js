@@ -50,7 +50,15 @@ const FilterPanel = ({
   onPanelClose = () => {},
   showFilterSearch = false,
   filterPanelMinHeight = 600,
+  primaryActionLabel = 'Apply',
+  secondaryActionLabel = 'Cancel',
+  searchLabelText = 'Filter search',
+  searchPlaceholder = 'Find filters',
+  initialFilters = [],
 }) => {
+  //  Save the initial filters we only need the filters once
+  const initialFiltersRef = useRef(initialFilters);
+
   /** State */
   const [showDividerLine, setShowDividerLine] = useState(false);
 
@@ -67,6 +75,7 @@ const FilterPanel = ({
     filters: filterSections,
     setAllFilters,
     variation: PANEL,
+    initialFilters: initialFiltersRef.current,
   });
 
   /** Refs */
@@ -122,14 +131,14 @@ const FilterPanel = ({
             {
               key: 1,
               kind: 'primary',
-              label: 'Apply',
+              label: primaryActionLabel,
               onClick: apply,
               disabled: shouldDisableButtons,
             },
             {
               key: 2,
               kind: 'secondary',
-              label: 'Cancel',
+              label: secondaryActionLabel,
               onClick: cancel,
               disabled: shouldDisableButtons,
             },
@@ -221,8 +230,8 @@ const FilterPanel = ({
           {showFilterSearch && (
             <div ref={filterSearchRef} className={`${componentClass}__search`}>
               <Search
-                labelText="Filter search"
-                placeHolderText="Find filters"
+                labelText={searchLabelText}
+                placeHolderText={searchPlaceholder}
                 light={true}
                 size="sm"
               />
@@ -238,7 +247,10 @@ const FilterPanel = ({
           {filterSections.map(
             ({ categoryTitle = null, filters = [], hasAccordion }) => {
               return (
-                <div className={`${componentClass}__category`}>
+                <div
+                  key={categoryTitle}
+                  className={`${componentClass}__category`}
+                >
                   {categoryTitle && (
                     <div className={`${componentClass}__category-title`}>
                       {categoryTitle}
@@ -273,11 +285,25 @@ FilterPanel.propTypes = {
   closeIconDescription: PropTypes.string,
   filterPanelMinHeight: PropTypes.number,
   filterSections: PropTypes.array,
+  /**
+   * Filters that should be applied on load
+   */
+  initialFilters: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      value: PropTypes.any.isRequired,
+    })
+  ),
   onApply: PropTypes.func,
   onCancel: PropTypes.func,
   onPanelClose: PropTypes.func,
   onPanelOpen: PropTypes.func,
   open: PropTypes.bool,
+  primaryActionLabel: PropTypes.string,
+  searchLabelText: PropTypes.string,
+  searchPlaceholder: PropTypes.string,
+  secondaryActionLabel: PropTypes.string,
   setAllFilters: PropTypes.func.isRequired,
   showFilterSearch: PropTypes.bool,
   title: PropTypes.string,

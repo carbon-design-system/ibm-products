@@ -33,13 +33,15 @@ const useFilters = ({
   filters = [],
   setAllFilters,
   variation,
+  initialFilters,
 }) => {
   /** State */
   const [filtersState, setFiltersState] = useInitialStateFromFilters(
     filters,
-    variation
+    variation,
+    initialFilters
   );
-  const [filtersObjectArray, setFiltersObjectArray] = useState([]);
+  const [filtersObjectArray, setFiltersObjectArray] = useState(initialFilters);
 
   // When using batch actions we have to store the filters to then apply them later
   const prevFiltersRef = useRef(JSON.stringify(filtersState));
@@ -54,8 +56,15 @@ const useFilters = ({
   };
 
   const reset = () => {
+    // When we reset we want the "initialFilters" to be an empty array
+    const resetFiltersArray = [];
+
     // Get the initial values for the filters
-    const initialFiltersState = getInitialStateFromFilters(filters, variation);
+    const initialFiltersState = getInitialStateFromFilters(
+      filters,
+      variation,
+      resetFiltersArray
+    );
     const initialFiltersObjectArray = [];
 
     // Set the state to the initial values
@@ -124,6 +133,17 @@ const useFilters = ({
         Checks to see if the selected value is 'Any', that means the user wants
         to reset specific filter
       */
+        const index = filtersObjectArrayCopy.findIndex(
+          (filter) => filter.id === column
+        );
+
+        // Remove it from the filters array
+        filtersObjectArrayCopy.splice(index, 1);
+      }
+    } else if (type === NUMBER) {
+      // If the value is empty remove it from the filtersObjectArray
+      if (value === '') {
+        // Find the column that uses number and displays an empty string
         const index = filtersObjectArrayCopy.findIndex(
           (filter) => filter.id === column
         );

@@ -16,7 +16,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const HeaderRow = (datagridState, headRef, headerGroup) => (
   <TableRow
-    {...headerGroup.getHeaderGroupProps()}
+    {...headerGroup.getHeaderGroupProps({ role: false })}
     className={cx(
       `${blockClass}__head`,
       headerGroup.getHeaderGroupProps().className
@@ -32,7 +32,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => (
         }
         return (
           <TableHeader
-            {...header.getHeaderProps()}
+            {...header.getHeaderProps({ role: false })}
             className={cx(
               {
                 [`${blockClass}__resizableColumn`]: header.getResizerProps,

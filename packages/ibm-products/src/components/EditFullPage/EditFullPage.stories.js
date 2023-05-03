@@ -172,7 +172,7 @@ const Template = ({ ...args }) => {
           secondaryLabel="Optional"
         >
           <Grid>
-            <Column lg={{ span: 6, start: 1 }}>
+            <Column xlg={5} lg={5} md={4} sm={4}>
               <TextInput
                 id="test-2"
                 invalidText="A valid value is required"
@@ -181,7 +181,7 @@ const Template = ({ ...args }) => {
                 value={textInput}
               />
             </Column>
-            <Column lg={{ span: 4, start: 1 }}>
+            <Column xlg={5} lg={5} md={4} sm={4}>
               <NumberInput
                 id="test-3"
                 invalidText="Number is not valid"
@@ -203,7 +203,7 @@ const Template = ({ ...args }) => {
                 iconDescription="Number input"
               />
             </Column>
-            <Column lg={{ span: 6, start: 1 }}>
+            <Column xlg={5} lg={5} md={4} sm={4}>
               <TextInput
                 id="test-5"
                 invalidText="A valid value is required"
@@ -220,7 +220,7 @@ const Template = ({ ...args }) => {
           description="The partitions of each topic can be replicated across a configurable number of brokers"
         >
           <Grid>
-            <Column lg={8}>
+            <Column xlg={5} lg={5} md={4} sm={4}>
               <RadioButtonGroup
                 defaultSelected="standard"
                 legend="Group Legend"
@@ -337,12 +337,12 @@ const TemplateWithSections = ({ ...args }) => {
             </Column>
           </Grid>
           <span className={`${blockClass}__section-divider`} />
-          <h5 className={`${blockClass}__step-title`}>Core configuration</h5>
-          <h6 className={`${blockClass}__step-subtitle`}>
-            This is how long messages are retained before they are deleted.
-          </h6>
           <Grid>
-            <Column lg={8}>
+            <Column xlg={5} lg={5} md={4} sm={4}>
+              <h5 className={`${blockClass}__step-title`}>Core configuration</h5>
+              <h6 className={`${blockClass}__step-subtitle`}>
+                This is how long messages are retained before they are deleted.
+              </h6>
               <FormGroup
                 className={`${blockClass}__step-fieldset ${storyClass}__step-fieldset--label`}
                 legendText="Core configuration"
@@ -393,7 +393,7 @@ const TemplateWithSections = ({ ...args }) => {
           description="The partitions of each topic can be replicated across a configurable number of brokers."
         >
           <Grid>
-            <Column lg={8}>
+            <Column xlg={5} lg={5} md={4} sm={4}>
               <RadioButtonGroup
                 defaultSelected="standard"
                 legend="Group Legend"

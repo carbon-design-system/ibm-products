@@ -134,8 +134,8 @@ There should only be two things to remember with storybook implementation.
 ## Conclusion
 
 If you want to see this pattern in use feel free to refer to the
-[Card](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive/src/components/Card),
-[ExpressiveCard](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive/src/components/ExpressiveCard),
+[Card](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/ibm-products/src/components/Card),
+[ExpressiveCard](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/ibm-products/src/components/ExpressiveCard),
 and
-[ProductiveCard](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/master/packages/cloud-cognitive/src/components/ProductiveCard)
+[ProductiveCard](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/ibm-products/src/components/ProductiveCard)
 code.

@@ -162,6 +162,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "lily-peng",
+      "name": "Lily",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3118961?v=4",
+      "profile": "https://linkedin.com/in/mslilypeng/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mgallo25",
+      "name": "Marienella Gallo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23409382?v=4",
+      "profile": "https://github.com/mgallo25",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,

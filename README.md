@@ -37,7 +37,7 @@ npm:
 
 | Package name                                          | Description                                                                                                       |
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| [`@carbon/ibm-products`](./packages/cloud-cognitive)  | A curated set of components and patterns, built on top of Carbon and designed by the Carbon for IBM Products team |
+| [`@carbon/ibm-products`](./packages/ibm-products)     | A curated set of components and patterns, built on top of Carbon and designed by the Carbon for IBM Products team |
 | [`@carbon/ibm-cloud-cognitive-cdai`](./packages/cdai) | Legacy and non-curated design implementations used in application integration                                     |
 | [`@carbon/ibm-security`](./packages/security)         | Legacy and non-curated design implementations used in security                                                    |
 
@@ -106,6 +106,8 @@ Thanks goes to these wonderful people
     <tr>
       <td align="center" valign="top" width="20%"><a href="https://github.com/Laura-Marshall"><img src="https://avatars.githubusercontent.com/u/53219208?v=4?s=100" width="100px;" alt="Laura Marshall"/><br /><sub><b>Laura Marshall</b></sub></a><br /><a href="#design-Laura-Marshall" title="Design">🎨</a></td>
       <td align="center" valign="top" width="20%"><a href="https://github.com/glapadre"><img src="https://avatars.githubusercontent.com/u/25260547?v=4?s=100" width="100px;" alt="Drew Glapa"/><br /><sub><b>Drew Glapa</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=glapadre" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://linkedin.com/in/mslilypeng/"><img src="https://avatars.githubusercontent.com/u/3118961?v=4?s=100" width="100px;" alt="Lily"/><br /><sub><b>Lily</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=lily-peng" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/mgallo25"><img src="https://avatars.githubusercontent.com/u/23409382?v=4?s=100" width="100px;" alt="Marienella Gallo"/><br /><sub><b>Marienella Gallo</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-cloud-cognitive/commits?author=mgallo25" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

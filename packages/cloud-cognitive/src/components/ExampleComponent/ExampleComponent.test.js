@@ -13,7 +13,9 @@ import { pkg, carbon } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
+import { Add16 } from '@carbon/icons-react';
 import { ExampleComponent } from '.';
+import { expectError, expectLogging } from '../../global/js/utils/test-helper';
 
 const blockClass = `${pkg.prefix}--example-component`;
 const componentName = ExampleComponent.displayName;
@@ -118,5 +120,77 @@ describe(componentName, () => {
     const ref = React.createRef();
     renderComponent({ ref });
     expect(ref.current).toEqual(screen.getByRole('main'));
+  });
+
+  it('logs an error when secondaryIcon used and feature flag disabled', () => {
+    pkg.feature['ExampleComponent.secondaryIcon'] = false;
+    expectError(
+      'Carbon for IBM Products (Error): Feature "ExampleComponent.secondaryIcon" not enabled. To enable see the notes on feature flags in the README.',
+      () => {
+        render(
+          <ExampleComponent
+            secondaryIcon={Add16}
+            {...{
+              primaryButtonLabel,
+              secondaryButtonLabel,
+            }}
+          />
+        );
+      }
+    );
+  });
+
+  it('does NOT log an error when secondaryIcon used and feature flag enabled', () => {
+    pkg.feature['ExampleComponent.secondaryIcon'] = true;
+    render(
+      <ExampleComponent
+        {...{
+          primaryButtonLabel,
+          secondaryButtonLabel,
+          secondaryIcon: Add16,
+        }}
+      />
+    );
+  });
+
+  it('logs an error when useExample used and feature flag disabled', () => {
+    pkg.feature['ExampleComponent.useExample'] = false;
+    expectLogging(
+      {
+        errors:
+          'Carbon for IBM Products (Error): Feature "ExampleComponent.useExample" not enabled. To enable see the notes on feature flags in the README.',
+        warnings:
+          'Disabled feature "ExampleComponent.useExample" does not change the initialTime.',
+      },
+      () => {
+        render(
+          <ExampleComponent
+            secondaryIcon={Add16}
+            {...{
+              usesExampleHook: 10,
+              primaryButtonLabel,
+              secondaryButtonLabel: `secondary`,
+            }}
+          />
+        );
+      },
+      true
+      // true
+    );
+  });
+
+  it('does NOT log an error when useExample used and feature flag enabled', () => {
+    pkg.feature['ExampleComponent.useExample'] = true;
+
+    render(
+      <ExampleComponent
+        {...{
+          usesExampleHook: 10,
+          primaryButtonLabel,
+          secondaryButtonLabel,
+          secondaryIcon: Add16,
+        }}
+      />
+    );
   });
 });

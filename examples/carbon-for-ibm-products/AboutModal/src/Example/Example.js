@@ -58,8 +58,8 @@ export const Example = () => {
           },
         ]}
         closeIconDescription="Close"
-        versionNumber={<>Version 0.0.0</>}
-        copyrightText={<>Copyright © 2020 IBM corporation</>}
+        version={'Version 0.0.0'}
+        copyrightText={'Copyright © 2020 IBM corporation'}
         legalText="This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information."
         links={[
           <Link key="link1" href="https://www.carbondesignsystem.com">
@@ -77,7 +77,7 @@ export const Example = () => {
           />
         }
         onClose={handleCloseModal}
-        productName={
+        title={
           <>
             IBM{' '}
             <span

@@ -14,7 +14,7 @@ import cx from 'classnames';
 import { TagSetOverflow } from './TagSetOverflow';
 import { TagSetModal } from './TagSetModal';
 import { Tag } from 'carbon-components-react';
-import { useResizeDetector } from 'react-resize-detector';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { prepareProps, isRequiredIf } from '../../global/js/utils/props-helper';
@@ -221,15 +221,9 @@ export let TagSet = React.forwardRef(
       setShowAllModalOpen(false);
     };
 
-    useResizeDetector({
-      onResize: handleSizerTagsResize,
-      targetRef: sizingContainerRef,
-    });
+    useResizeObserver(sizingContainerRef, { callback: handleSizerTagsResize });
 
-    useResizeDetector({
-      onResize: handleResize,
-      targetRef: tagSetRef,
-    });
+    useResizeObserver(tagSetRef, { callback: handleResize });
 
     return (
       <div

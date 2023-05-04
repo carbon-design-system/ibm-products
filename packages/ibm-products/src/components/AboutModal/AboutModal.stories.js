@@ -41,15 +41,51 @@ export default {
   argTypes: {
     additionalInfo: {
       control: {
+        type: 'select',
         labels: {
-          0: 'none',
-          1: 'powered by logos',
+          0: 'no additional info',
+          1: '1 powered by logo',
+          2: '2 powered by logos',
+          3: '3 powered by logos',
         },
       },
-      options: [0, 1],
+      options: [0, 1, 2, 3],
       mapping: {
         0: null,
         1: [
+          {
+            label: 'Powered by',
+            content: (
+              <>
+                <img
+                  src={grafanaLogo}
+                  alt="Grafana"
+                  className={`${blockClass}__stories--tech-logo`}
+                />
+              </>
+            ),
+          },
+        ],
+        2: [
+          {
+            label: 'Powered by',
+            content: (
+              <>
+                <img
+                  src={grafanaLogo}
+                  alt="Grafana"
+                  className={`${blockClass}__stories--tech-logo`}
+                />
+                <img
+                  src={ansibleLogo}
+                  alt="Ansible"
+                  className={`${blockClass}__stories--tech-logo`}
+                />
+              </>
+            ),
+          },
+        ],
+        3: [
           {
             label: 'Powered by',
             content: (
@@ -109,6 +145,24 @@ export default {
         ],
       },
     },
+    content: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'no content',
+          1: 'short content',
+          2: 'medium content',
+          3: 'long content',
+        },
+      },
+      options: [0, 1, 2, 3],
+      mapping: {
+        0: null,
+        1: 'This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed.',
+        2: "This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled 'Copyright and trademark information' for related information. IBM grants you a non-exclusive, non-transferable, limited permission to access and display the Web pages within this site as a customer or potential customer of IBM provided you comply with these Terms of Use, and all copyright, trademark, and other proprietary notices remain intact.",
+        3: "This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled 'Copyright and trademark information' for related information. IBM grants you a non-exclusive, non-transferable, limited permission to access and display the Web pages within this site as a customer or potential customer of IBM provided you comply with these Terms of Use, and all copyright, trademark, and other proprietary notices remain intact. You may only use a crawler to crawl this Web site as permitted by this Web site's robots.txt protocol, and IBM may block any crawlers in its sole discretion. The use authorized under this agreement is non-commercial in nature (e.g., you may not sell the content you access on or through this Web site.) All other use of this site is prohibited. Except for the limited permission in the preceding paragraph, IBM does not grant you any express or implied rights or licenses under any patents, trademarks, copyrights, or other proprietary or intellectual property rights. You may not mirror any of the content from this site on another Web site or in any other media. Any software and other materials that are made available for downloading, access, or other use from this site with their own license terms will be governed by such terms, conditions, and notices. Your failure to comply with such terms or any of the terms on this site will result in automatic termination of any rights granted to you, without prior notice, and you must immediately destroy all copies of downloaded materials in your possession, custody or control. This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information. IBM grants you a non-exclusive, non-transferable, limited permission to access and display the Web pages within this site as a customer or potential customer of IBM provided you comply with these Terms of Use, and all copyright, trademark, and other proprietary notices remain intact. You may only use a crawler to crawl this Web site as permitted by this Web site’s robots.txt protocol, and IBM may block any crawlers in its sole discretion. The use authorized under this agreement is non-commercial in nature (e.g., you may not sell the content you access on or through this Web site.) All other use of this site is prohibited. Except for the limited permission in the preceding paragraph, IBM does not grant you any express or implied rights or licenses under any patents, trademarks, copyrights, or other proprietary or intellectual property rights. You may not mirror any of the content from this site on another Web site or in any other media. Any software and other materials that are made available for downloading, access, or other use from this site with their own license terms will be governed by such terms, conditions, and notices. Your failure to comply with such terms or any of the terms on this site will result in automatic termination of any rights granted to you, without prior notice, and you must immediately destroy all copies of downloaded materials in your possession, custody or control.",
+      },
+    },
     logo: {
       control: {
         disable: true,
@@ -157,7 +211,7 @@ Template.propTypes = AboutModal.propTypes;
 
 const commonArgs = {
   closeIconDescription: 'Close',
-  productName: (
+  title: (
     <>
       IBM{' '}
       <span
@@ -170,8 +224,8 @@ const commonArgs = {
       </span>
     </>
   ),
-  versionNumber: <>Version 0.0.0</>,
-  copyrightText: <>Copyright &copy; IBM Corp. 2020, 2023</>,
+  version: 'Version 0.0.0',
+  copyrightText: 'Copyright © IBM Corp. 2020, 2023',
 };
 
 const aboutModalStoryName = 'About modal';
@@ -186,45 +240,6 @@ export const aboutModal = prepareStory(
   }
 );
 
-const withAdditionalInfoStoryName = 'About modal with additional info (footer)';
-export const withAdditionalInfo = prepareStory(
-  Template.bind({}, withAdditionalInfoStoryName, true),
-  {
-    storyName: withAdditionalInfoStoryName,
-    args: {
-      additionalInfo: 1,
-      ...commonArgs,
-    },
-  }
-);
-
-const withLinksStoryName = 'About modal with links';
-export const withLinksBody = prepareStory(
-  Template.bind({}, withLinksStoryName, true),
-  {
-    storyName: withLinksStoryName,
-    args: {
-      additionalInfo: 1,
-      links: 2,
-      ...commonArgs,
-    },
-  }
-);
-
-const withLegalStoryName = 'About modal with legal and copyright text';
-export const withLegalBody = prepareStory(
-  Template.bind({}, withLegalStoryName, true),
-  {
-    storyName: withLegalStoryName,
-    args: {
-      additionalInfo: 1,
-      content:
-        'This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information.',
-      ...commonArgs,
-    },
-  }
-);
-
 const fullyLoadedStoryName = 'About modal with all props set';
 export const fullyLoaded = prepareStory(
   Template.bind({}, fullyLoadedStoryName, false),
@@ -232,20 +247,8 @@ export const fullyLoaded = prepareStory(
     storyName: fullyLoadedStoryName,
     args: {
       links: 3,
-      ...withLegalBody.args,
-    },
-  }
-);
-
-const withScrollStoryName = 'About modal with scrolling';
-export const withScroll = prepareStory(
-  Template.bind({}, withScrollStoryName, true),
-  {
-    storyName: withScrollStoryName,
-    args: {
-      additionalInfo: 1,
-      content:
-        'This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information. IBM grants you a non-exclusive, non-transferable, limited permission to access and display the Web pages within this site as a customer or potential customer of IBM provided you comply with these Terms of Use, and all copyright, trademark, and other proprietary notices remain intact. You may only use a crawler to crawl this Web site as permitted by this Web site’s robots.txt protocol, and IBM may block any crawlers in its sole discretion. The use authorized under this agreement is non-commercial in nature (e.g., you may not sell the content you access on or through this Web site.) All other use of this site is prohibited. Except for the limited permission in the preceding paragraph, IBM does not grant you any express or implied rights or licenses under any patents, trademarks, copyrights, or other proprietary or intellectual property rights. You may not mirror any of the content from this site on another Web site or in any other media. Any software and other materials that are made available for downloading, access, or other use from this site with their own license terms will be governed by such terms, conditions, and notices. Your failure to comply with such terms or any of the terms on this site will result in automatic termination of any rights granted to you, without prior notice, and you must immediately destroy all copies of downloaded materials in your possession, custody or control. This Web site contains proprietary notices and copyright information, the terms of which must be observed and followed. Please see the tab entitled “Copyright and trademark information” for related information. IBM grants you a non-exclusive, non-transferable, limited permission to access and display the Web pages within this site as a customer or potential customer of IBM provided you comply with these Terms of Use, and all copyright, trademark, and other proprietary notices remain intact. You may only use a crawler to crawl this Web site as permitted by this Web site’s robots.txt protocol, and IBM may block any crawlers in its sole discretion. The use authorized under this agreement is non-commercial in nature (e.g., you may not sell the content you access on or through this Web site.) All other use of this site is prohibited. Except for the limited permission in the preceding paragraph, IBM does not grant you any express or implied rights or licenses under any patents, trademarks, copyrights, or other proprietary or intellectual property rights. You may not mirror any of the content from this site on another Web site or in any other media. Any software and other materials that are made available for downloading, access, or other use from this site with their own license terms will be governed by such terms, conditions, and notices. Your failure to comply with such terms or any of the terms on this site will result in automatic termination of any rights granted to you, without prior notice, and you must immediately destroy all copies of downloaded materials in your possession, custody or control.',
+      content: 2,
+      additionalInfo: 3,
       ...commonArgs,
     },
   }

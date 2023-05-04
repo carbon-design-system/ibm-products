@@ -52,8 +52,8 @@ export let AboutModal = React.forwardRef(
       modalAriaLabel,
       onClose,
       open,
-      productName,
-      versionNumber,
+      title,
+      version,
       // Collect any other property values passed in.
       ...rest
     },
@@ -102,8 +102,8 @@ export let AboutModal = React.forwardRef(
           className={`${blockClass}__header`}
           closeModal={onClose}
           iconDescription={closeIconDescription}
-          label={productName}
-          labelClassName={`${blockClass}__product-name`}
+          label={title}
+          labelClassName={`${blockClass}__title`}
         />
         <ModalBody
           aria-label={hasScrollingContent ? '' : null}
@@ -116,9 +116,7 @@ export let AboutModal = React.forwardRef(
             ref={contentRef}
             id={contentId}
           >
-            <div className={`${blockClass}__version-number`}>
-              {versionNumber}
-            </div>
+            <div className={`${blockClass}__version`}>{version}</div>
             {links && links.length > 0 && (
               <div className={`${blockClass}__links-container`}>
                 {links.map((link, i) => (
@@ -184,13 +182,13 @@ AboutModal.propTypes = {
    * Subhead text providing any relevant product disclaimers including
    * legal information (optional)
    */
-  content: PropTypes.node,
+  content: PropTypes.string,
 
   /**
    * Trademark and copyright information. Displays first year of
    * product release to current year.
    */
-  copyrightText: PropTypes.node.isRequired,
+  copyrightText: PropTypes.string.isRequired,
 
   /**
    * An array of Carbon `Link` component if there are additional information
@@ -226,10 +224,10 @@ AboutModal.propTypes = {
    * IBM 8-bar logo represented alongside the IBM Services logotype.
    * Please follow these guidelines to ensure proper execution.
    */
-  productName: PropTypes.node.isRequired,
+  title: PropTypes.node.isRequired,
 
   /**
    * Text that provides information on the version number of your product.
    */
-  versionNumber: PropTypes.node.isRequired,
+  version: PropTypes.string.isRequired,
 };

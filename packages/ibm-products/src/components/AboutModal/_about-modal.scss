@@ -30,7 +30,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
   grid-row: auto;
 }
 
-.#{$block-class} .#{$block-class}__product-name {
+.#{$block-class} .#{$block-class}__title {
   @include type.type-style('heading-04');
 
   color: $text-primary;
@@ -59,7 +59,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--about-modal;
   margin-top: $spacing-06;
 }
 
-.#{$block-class} .#{$block-class}__version-number {
+.#{$block-class} .#{$block-class}__version {
   color: $text-secondary;
 }
 

@@ -31,6 +31,7 @@ export let NotificationsEmptyState = React.forwardRef(
 
       action,
       className,
+      illustrationPosition = defaults.position,
       illustrationTheme,
       link,
       size = defaults.size,
@@ -48,7 +49,11 @@ export let NotificationsEmptyState = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(blockClass, className)}
+        className={cx(
+          blockClass,
+          className,
+          `${blockClass}-position--${illustrationPosition}`
+        )}
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
@@ -94,6 +99,11 @@ NotificationsEmptyState.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
+  /**
+   * Designates the position of the illustration relative to the content
+   */
+  illustrationPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
   /**
    * Empty state illustration theme variations.

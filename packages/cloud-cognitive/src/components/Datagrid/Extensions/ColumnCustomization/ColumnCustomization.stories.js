@@ -39,6 +39,13 @@ export default {
     styles,
     docs: { page: mdx },
   },
+  argTypes: {
+    featureFlags: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -199,6 +206,12 @@ const ColumnCustomizationUsage = ({ ...args }) => {
     useColumnOrder
   );
 
+  // Warnings are ordinarily silenced in storybook, add this to test
+  pkg._silenceWarnings(false);
+  // Enable feature flag for `useCustomizeColumns` hook
+  pkg.feature['Datagrid.useCustomizeColumns'] = true;
+  pkg._silenceWarnings(true);
+
   return (
     <>
       <Datagrid datagridState={datagridState} />
@@ -235,6 +248,7 @@ export const ColumnCustomizationUsageStory = prepareStory(
     },
     args: {
       ...columnCustomizationControlProps,
+      featureFlags: ['Datagrid.useCustomizeColumns'],
     },
   }
 );
@@ -262,6 +276,12 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
     []
   );
   const [data] = useState(makeData(10));
+
+  // Warnings are ordinarily silenced in storybook, add this to test
+  pkg._silenceWarnings(false);
+  // Enable feature flag for `useCustomizeColumns` hook
+  pkg.feature['Datagrid.useCustomizeColumns'] = true;
+  pkg._silenceWarnings(true);
 
   const datagridState = useDatagrid(
     {
@@ -337,6 +357,7 @@ export const ColumnCustomizationWithFixedColumnStory = prepareStory(
     },
     args: {
       ...columnCustomizationControlProps,
+      featureFlags: ['Datagrid.useCustomizeColumns'],
     },
   }
 );

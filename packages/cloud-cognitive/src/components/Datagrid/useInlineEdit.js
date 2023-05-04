@@ -15,6 +15,10 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 const useInlineEdit = (hooks, usingEditableCell) => {
   useEffect(() => {
+    pkg.checkReportFeatureEnabled('Datagrid.useInlineEdit');
+  }, []);
+
+  useEffect(() => {
     if (!usingEditableCell) {
       warn(
         `The 'useInlineEdit' hook is being renamed in Carbon for IBM Products v2 to 'useEditableCell'. You can use this newly renamed hook now or upgrade when moving to v2.`

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -81,6 +81,12 @@ const defaults = {
   feature: {
     'a-new-feature': false,
     'default-portal-target-body': true,
+    'Datagrid.useExpandedRow': false,
+    'Datagrid.useNestedRows': false,
+    'Datagrid.useInlineEdit': false,
+    'Datagrid.useActionsColumn': false,
+    'Datagrid.useFiltering': false,
+    'Datagrid.useCustomizeColumns': false,
     'ExampleComponent.secondaryIcon': false,
     'ExampleComponent.useExample': false,
   },
@@ -126,6 +132,11 @@ const feature = new Proxy(
   { ...defaults.feature },
   {
     set(target, property, value) {
+      // If we receive a feature flag that doesn't exist in our defaults we should not log
+      // a warning message and instead just return
+      if (!Object.getOwnPropertyDescriptor(defaults.feature, property)) {
+        return true;
+      }
       if (target[property] !== true && !silent && value) {
         // not already true, not silent, and now true
         console.warn(warningMessageFeature(property));

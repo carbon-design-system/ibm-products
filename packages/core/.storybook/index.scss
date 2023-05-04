@@ -59,7 +59,15 @@
   color: initial;
 }
 
-.preview__notification--feature-flag-action-button {
-  height: $spacing-09;
-  margin-top: $spacing-03;
+.preview__notification--feature-flag {
+  margin: $spacing-05 0;
+  word-break: break-word;
+}
+
+.preview__notification--feature-flag .#{$prefix}--list--unordered {
+  margin-top: $spacing-04;
+}
+
+.preview__notification-button {
+  margin: $spacing-04 0;
 }

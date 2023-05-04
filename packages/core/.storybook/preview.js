@@ -16,7 +16,7 @@ import {
   Button,
   Column,
   Row,
-  InlineNotification,
+  ToastNotification,
   UnorderedList,
   ListItem,
 } from 'carbon-components-react';
@@ -53,40 +53,36 @@ const decorators = [
       <div className="preview-position-fix">
         <Style styles={index}>
           {args.featureFlags ? (
-            <InlineNotification
+            <ToastNotification
               className="preview__notification--feature-flag"
               kind="warning"
+              inline
               lowContrast
-              actions={
-                <Button
-                  className="preview__notification--feature-flag-action-button"
-                  kind="ghost"
-                  onClick={() => {
-                    window.open(
-                      'https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/cloud-cognitive#enabling-canary-components-and-flagged-features'
-                    );
-                  }}
-                >
-                  Learn more
-                </Button>
-              }
-              // actionButtonLabel="Learn more"
               statusIconDescription="describes the close button"
               title="This story uses the following feature flags to enable or disable some functionality."
-              // onActionButtonClick={() => {
-              //   window.open(
-              //     'https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/cloud-cognitive#enabling-canary-components-and-flagged-features'
-              //   );
-              // }}
-            >
-              <UnorderedList>
-                {Object.keys(args.featureFlags).map((flagKey) => (
-                  <ListItem key={flagKey}>
-                    {flagKey}: {`${args.featureFlags[flagKey]}`}
-                  </ListItem>
-                ))}
-              </UnorderedList>
-            </InlineNotification>
+              caption={
+                <>
+                  <UnorderedList>
+                    {Object.keys(args.featureFlags).map((flagKey) => (
+                      <ListItem key={flagKey}>
+                        {flagKey}: {`${args.featureFlags[flagKey]}`}
+                      </ListItem>
+                    ))}
+                  </UnorderedList>
+                  <Button
+                    className="preview__notification-button"
+                    kind="ghost"
+                    onClick={() => {
+                      window.open(
+                        'https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/cloud-cognitive#enabling-canary-components-and-flagged-features'
+                      );
+                    }}
+                  >
+                    Learn more
+                  </Button>
+                </>
+              }
+            />
           ) : null}
           {styles ? <Style styles={styles}>{story}</Style> : story}
         </Style>
@@ -174,4 +170,12 @@ const parameters = {
   },
 };
 
-export { decorators, parameters, Style };
+const argTypes = {
+  featureFlags: {
+    table: {
+      disable: true,
+    },
+  },
+};
+
+export { argTypes, decorators, parameters, Style };

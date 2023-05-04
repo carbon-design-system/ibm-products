@@ -87,6 +87,8 @@ const defaults = {
     'Datagrid.useActionsColumn': false,
     'Datagrid.useFiltering': false,
     'Datagrid.useCustomizeColumns': false,
+    'ExampleComponent.secondaryIcon': false,
+    'ExampleComponent.useExample': false,
   },
 };
 
@@ -113,7 +115,10 @@ const component = new Proxy(
   { ...defaults.component },
   {
     set(target, property, value) {
-      value && !silent && console.warn(warningMessageComponent(property));
+      if (target[property] !== true && !silent && value) {
+        // not already true, not silent, and now true
+        console.warn(warningMessageComponent(property));
+      }
       target[property] = value;
       return true; // value set
     },
@@ -132,7 +137,10 @@ const feature = new Proxy(
       if (!Object.getOwnPropertyDescriptor(defaults.feature, property)) {
         return true;
       }
-      value && !silent && console.warn(warningMessageFeature(property));
+      if (target[property] !== true && !silent && value) {
+        // not already true, not silent, and now true
+        console.warn(warningMessageFeature(property));
+      }
       target[property] = value;
       return true; // value set
     },

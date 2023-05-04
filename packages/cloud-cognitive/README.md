@@ -121,10 +121,9 @@ pkg.component.SidePanel = true;
 // Live dangerously: enable all components!
 pkg.setAllComponents(true);
 
-// Enable a feature flagged examples
+// Enable a feature flagged example
 pkg.feature.nameOfFeature = true;
 pkg.feature['Component.feature'] = true;
-
 // Live dangerously: enable all pre-release features!
 pkg.setAllFeatures(true);
 ```

@@ -56,13 +56,11 @@ export default {
           {
             label: 'Powered by',
             content: (
-              <>
-                <img
-                  src={grafanaLogo}
-                  alt="Grafana"
-                  className={`${blockClass}__stories--tech-logo`}
-                />
-              </>
+              <img
+                src={grafanaLogo}
+                alt="Grafana"
+                className={`${blockClass}__stories--tech-logo`}
+              />
             ),
           },
         ],

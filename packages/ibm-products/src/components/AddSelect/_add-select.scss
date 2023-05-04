@@ -29,10 +29,6 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
 
 /* stylelint-disable max-nesting-depth */
 .#{$block-class}__selections {
-  &.#{$carbon-prefix}--structured-list {
-    margin-bottom: 0;
-  }
-
   &-wrapper {
     display: block;
   }
@@ -64,9 +60,16 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
     justify-content: center;
   }
 
-  &-row--selected.#{$carbon-prefix}--structured-list-row {
-    border-bottom: 1px solid $layer-selected-01;
+  &-dropdown .cds--dropdown {
+    background: transparent;
+  }
+
+  &-row--selected {
     background-color: $layer-selected-01;
+  }
+
+  &-row--active {
+    background-color: $layer-active-01;
   }
 
   &-form-control {
@@ -103,7 +106,9 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
 }
 
 .#{$block-class} .#{$block-class}__selections-row:hover {
-  .#{$block-class}__selections-radio {
+  background: $layer-hover-01;
+
+  .#{$block-class}__selections-cell-title {
     color: $interactive;
   }
 
@@ -126,16 +131,6 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   &-multi {
     padding: 0 $spacing-05;
   }
-}
-
-.#{$block-class} .#{$carbon-prefix}--structured-list-row {
-  border-bottom: 0;
-}
-
-.#{$block-class}
-  .#{$carbon-prefix}--structured-list--selection
-  .#{$carbon-prefix}--structured-list-row:hover:not(.#{$carbon-prefix}--structured-list-row--header-row):not(.#{$carbon-prefix}--structured-list-row--selected) {
-  border-bottom: 0;
 }
 
 // sidebar
@@ -205,7 +200,7 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
     margin-left: $spacing-03;
   }
 
-  .#{$block-class}__selections-row.#{$carbon-prefix}--structured-list-row {
+  .#{$block-class}__selections-row {
     border-left: 0;
   }
 
@@ -214,7 +209,7 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   }
 
   .#{$block-class}__selections-cell-wrapper {
-    height: auto;
+    height: 2rem;
     padding: 0 $spacing-03;
   }
 
@@ -225,10 +220,6 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
 
   .#{$block-class}__selections-wrapper-multi {
     padding: 0;
-  }
-
-  .#{$block-class}__selections.#{$carbon-prefix}--structured-list {
-    border-top: 0;
   }
 }
 
@@ -367,6 +358,13 @@ button.#{$block-class}__global-filter-toggle {
 // the influencer sidebar needs to be even with the buttons
 .#{$block-class}.#{$tearsheet-class} .#{$tearsheet-class}__influencer {
   flex-basis: 22.5rem;
+  background: $layer-01;
+}
+
+.#{$block-class}.#{$tearsheet-class}.#{$tearsheet-class}--wide
+  .#{$tearsheet-class}__content
+  .cds--dropdown {
+  background-color: transparent;
 }
 
 .#{$block-class}.#{$tearsheet-class} .#{$tearsheet-class}__header-description {
@@ -393,13 +391,6 @@ button.#{$block-class}__global-filter-toggle {
   .#{$carbon-prefix}--modal-content
   p {
   padding-right: 0;
-}
-
-// TODO check if we can remove – C10/C11 conflict
-.#{$block-class} .#{$carbon-prefix}--structured-list-td {
-  height: 4rem;
-  padding: $spacing-05;
-  vertical-align: middle;
 }
 
 .#{$block-class} .#{$carbon-prefix}--radio-button__appearance {

@@ -28,6 +28,7 @@ export let AddSelectRow = ({
   multiSelection,
   navIconDescription,
   parentId,
+  parentSelected,
   setAppliedModifiers,
   setDisplayMetaPanel,
   setFocus,
@@ -131,6 +132,7 @@ export let AddSelectRow = ({
       className={cx(`${blockClass}-row`, {
         [`${blockClass}-row--selected`]: isSelected(item.id),
         [`${blockClass}-row-meta--selected`]: isInMetaPanel(item.id),
+        [`${blockClass}-row--active`]: parentSelected === item.id,
       })}
       onKeyDown={onSelectKeyDown}
       tabIndex={tabIndex}
@@ -215,6 +217,7 @@ AddSelectRow.propTypes = {
   multiSelection: PropTypes.array,
   navIconDescription: PropTypes.string,
   parentId: PropTypes.string,
+  parentSelected: PropTypes.string,
   setAppliedModifiers: PropTypes.func,
   setDisplayMetaPanel: PropTypes.func,
   setFocus: PropTypes.func,

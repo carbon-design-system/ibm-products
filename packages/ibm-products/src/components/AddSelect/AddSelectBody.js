@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Tag } from '@carbon/react';
 import { Tearsheet, TearsheetNarrow } from '../../components/Tearsheet';
-import { NoDataEmptyState } from '../../components/EmptyStates/NoDataEmptyState';
+import { NotFoundEmptyState } from '../EmptyStates/NotFoundEmptyState';
 import { AddSelectSidebar } from './AddSelectSidebar';
 import { AddSelectBreadcrumbs } from './AddSelectBreadcrumbs';
 import { AddSelectList } from './AddSelectList';
@@ -143,7 +143,7 @@ export let AddSelectBody = forwardRef(
       if (searchTerm) {
         return true;
       }
-      if (useNormalizedItems) {
+      if (useNormalizedItems && multi) {
         return false;
       }
       return true;
@@ -309,7 +309,7 @@ export let AddSelectBody = forwardRef(
               />
             ) : (
               <div className={`${blockClass}__body`}>
-                <NoDataEmptyState
+                <NotFoundEmptyState
                   subtitle={noResultsDescription}
                   title={noResultsTitle}
                   illustrationTheme={illustrationTheme}

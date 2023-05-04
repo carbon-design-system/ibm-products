@@ -28,7 +28,7 @@ const componentName = AboutModal.displayName;
 
 const className = `class-${uuidv4()}`;
 const closeIconDescription = `close ${uuidv4()}`;
-const versionNumber = `Version 0.0.${uuidv4()}`;
+const version = `Version 0.0.${uuidv4()}`;
 const copyrightText = `Copyright test text ${uuidv4()}`;
 const dataTestId = uuidv4();
 const logoAltText = `Example product ${uuidv4()} logo`;
@@ -73,23 +73,23 @@ const additionalInfo = [
 ];
 const onCloseReturnsTrue = jest.fn(() => true);
 const onCloseReturnsFalse = jest.fn(() => false);
-const productNameText = `Watson ${uuidv4()} Ops`;
-const productName = (
+const titleText = `Watson ${uuidv4()} Ops`;
+const title = (
   <>
-    IBM <span>{productNameText}</span>
+    IBM <span>{titleText}</span>
   </>
 );
 
-// render an AboutModal with versionNumber, logo, productName, copyrightText and any other required props
+// render an AboutModal with version, logo, title, copyrightText and any other required props
 const renderComponent = ({ ...rest }) =>
   render(
     <main>
       <AboutModal
         {...{
           closeIconDescription,
-          versionNumber,
+          version,
           logo,
-          productName,
+          title,
           copyrightText,
           ...rest,
         }}
@@ -125,17 +125,17 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('renders closeIconDescription, productName, logo, and versionNumber', () => {
+  it('renders closeIconDescription, title, logo, and version', () => {
     renderComponent({ open: true });
     screen.getByRole('button', { name: closeIconDescription });
-    screen.getByText(productNameText);
-    screen.getByText(versionNumber);
+    screen.getByText(titleText);
+    screen.getByText(version);
     screen.getByAltText(logoAltText);
   });
 
   it('renders version number', () => {
-    renderComponent({ versionNumber, open: true });
-    screen.getByText(versionNumber);
+    renderComponent({ version, open: true });
+    screen.getByText(version);
   });
 
   it('renders with links', () => {

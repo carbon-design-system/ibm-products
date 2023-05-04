@@ -182,7 +182,7 @@ AboutModal.propTypes = {
    * Subhead text providing any relevant product disclaimers including
    * legal information (optional)
    */
-  content: PropTypes.string,
+  content: PropTypes.node,
 
   /**
    * Trademark and copyright information. Displays first year of

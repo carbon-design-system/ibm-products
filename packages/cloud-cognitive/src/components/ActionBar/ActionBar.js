@@ -12,7 +12,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
-import { useResizeDetector } from 'react-resize-detector';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 // Carbon and package components we use.
 import { Button } from 'carbon-components-react';
@@ -55,6 +55,8 @@ export let ActionBar = React.forwardRef(
     const refDisplayedItems = useRef(null);
     const sizingRef = useRef(null);
     const sizes = useRef({});
+    const backupRef = useRef();
+    const localRef = ref || backupRef;
 
     // create hidden sizing items
     useEffect(() => {
@@ -189,31 +191,16 @@ export let ActionBar = React.forwardRef(
 
     /* istanbul ignore next */ // not sure how to fake window resize
     const handleResize = () => {
-      // width is the space available for all action bar items horizontally
-      // the action bar items are squares so the height should be one item wide
-      /* istanbul ignore next */ // not sure how to fake window resize
-      checkFullyVisibleItems();
-    };
-
-    /* istanbul ignore next */ // not sure how to fake window resize
-    const handleActionBarItemsResize = () => {
       // when the hidden sizing items change size
       /* istanbul ignore next */ // not sure how to fake window resize
       checkFullyVisibleItems();
     };
 
-    useResizeDetector({
-      onResize: handleActionBarItemsResize,
-      targetRef: sizingRef,
-    });
-
-    const { ref: outerRef } = useResizeDetector({
-      onResize: handleResize,
-      targetRef: ref,
-    });
+    useResizeObserver(sizingRef, { callback: handleResize });
+    useResizeObserver(localRef, { callback: handleResize });
 
     return (
-      <div {...rest} className={cx([blockClass, className])} ref={outerRef}>
+      <div {...rest} className={cx([blockClass, className])} ref={localRef}>
         {hiddenSizingItems}
 
         <div

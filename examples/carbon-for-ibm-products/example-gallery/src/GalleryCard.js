@@ -1,11 +1,11 @@
-import React from 'react';
-import cx from 'classnames';
+import React from "react";
+import cx from "classnames";
 
-import './GalleryCard.scss';
+import "./GalleryCard.scss";
 
-import { ClickableTile } from 'carbon-components-react';
+import { ClickableTile } from "@carbon/react";
 
-const baseClass = 'gallery-card';
+const baseClass = "gallery-card";
 
 export const GalleryCard = ({ className, title, url, thumbnail }) => {
   return (
@@ -13,7 +13,7 @@ export const GalleryCard = ({ className, title, url, thumbnail }) => {
       <div
         className={`${baseClass}__thumbnail`}
         style={{
-          backgroundImage: thumbnail,
+          backgroundImage: thumbnail
         }}
       />
       <h1 className={`${baseClass}__title`}>{title}</h1>

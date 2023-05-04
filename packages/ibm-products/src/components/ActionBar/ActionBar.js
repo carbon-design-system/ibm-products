@@ -224,7 +224,7 @@ ActionBar.displayName = componentName;
 ActionBar.propTypes = {
   /**
    * Specifies the action bar items. Each item is specified as an object
-   * with required fields: key for array rendering, renderIcon, iconDescription and
+   * with required fields: key for array rendering, renderIcon and
    * label to provide the icon to display,
    * and optional 'onClick' to receive notifications when the button is clicked.
    * Additional fields in the object will be passed to the
@@ -248,8 +248,6 @@ ActionBar.propTypes = {
       ]),
       // Additional props
       key: PropTypes.string.isRequired,
-      // Redefine as form different  to Button and a key prop used by ActionBarItems
-      iconDescription: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
       renderIcon: Button.propTypes.renderIcon.isRequired,
       // We duplicate onClick here to improve DocGen in Storybook
@@ -271,7 +269,8 @@ ActionBar.propTypes = {
   menuOptionsClass: PropTypes.string,
   /**
    * onItemCountChange - event reporting maxWidth
-   */ onWidthChange: PropTypes.func,
+   */
+  onWidthChange: PropTypes.func,
   /**
    * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
    */

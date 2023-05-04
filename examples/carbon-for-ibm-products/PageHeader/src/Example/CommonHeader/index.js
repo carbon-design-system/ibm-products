@@ -1,1 +1,1 @@
-export { CommonHeader } from './CommonHeader.js';
+export { CommonHeader } from "./CommonHeader";

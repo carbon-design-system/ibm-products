@@ -1,32 +1,38 @@
 {
-  "name": "remove-modal-example",
+  "name": "remove-modal-component-example",
+  "description": "An example showing use of the remove-modal component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "apikeymodal"
+    "remove-modal"
   ],
   "license": "Apache-2.0",
-  "main": "src/index.js",
-  "dependencies": {
-    "@carbon/elements": "^10",
-    "@carbon/ibm-products": "latest",
-    "@carbon/icons-react": "^10",
-    "carbon-components": "^10",
-    "carbon-components-react": "^7",
-    "carbon-icons": "latest",
-    "react": "latest",
-    "react-dom": "latest",
-    "react-scripts": "latest",
-    "sass": "latest"
-  },
-  "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",
-  "resolutions": {
-    "**/request/minimist": "^1.2.6"
-  },
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@carbon/ibm-products": "^2.0.0-rc.28",
+    "@carbon/react": "^1.28.0",
+    "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sass": "^1.62.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "vite": "^4.3.2"
   },
   "browserslist": {
     "production": [

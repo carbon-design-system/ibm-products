@@ -1,4 +1,6 @@
-@import '../carbon';
+@use "@carbon/react/scss/spacing" as *;
+@use "@carbon/react/scss/colors" as *;
+@use "@carbon/react/scss/type" as *;
 
 .main--content {
   width: 100%;
@@ -6,7 +8,7 @@
 }
 
 .main--content .example-terminal {
-  @include carbon--type-style('code-02');
+  @include type-style("code-02");
 
   padding: $spacing-05;
   // stylelint-disable-next-line carbon/theme-token-use
@@ -14,7 +16,7 @@
 }
 
 .main--content .example-terminal p {
-  @include carbon--type-style('body-short-01');
+  @include type-style("body-short-01");
 
   padding-bottom: $spacing-07;
 }

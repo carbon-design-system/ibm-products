@@ -1,4 +1,6 @@
-@import '../carbon';
+@use "@carbon/react/scss/spacing" as *;
+@use "@carbon/react/scss/type" as *;
+@use "@carbon/react/scss/config";
 
 .empty-state-wrapper {
   display: flex;
@@ -6,12 +8,12 @@
   margin-top: $spacing-09;
 }
 
-.#{$prefix}--label {
-  @include carbon--type-style('label-01');
+.#{config.$prefix}--label {
+  @include type-style("label-01");
 
   margin-bottom: $spacing-03;
 }
 
-.#{$prefix}--dropdown__wrapper {
+.#{config.$prefix}--dropdown__wrapper {
   max-width: 400px;
 }

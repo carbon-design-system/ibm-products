@@ -183,6 +183,40 @@ export const expectMultipleWarn = (messages, test) => {
   return result;
 };
 
+const checkLogging = (mock, message) => {
+  if (message) {
+    expect(mock).toBeCalled();
+    expect(mock).toHaveBeenCalledWith(...makeMatcherArray(message));
+  }
+};
+
+/**
+ * A helper function to enable a test to expect a single call to
+ * console.error, for example when intentionally omitting a required prop
+ * or supplying an invalid prop type or value for the purposes of the test.
+ * @param {errors: {string|regex|function|[]}, warnings: {string|regex|function|[]}} messages the expected parameters for the call to
+ * console.error or console.warn, which must be called exactly once. A single string or regex or an
+ * expect matcher can be used to match a single-argument call to console.error (most common),
+ * while an array of strings and/or regex and/or expect matchers can be used to match a
+ * multiple-argument call. Strings can be full or substring matches to the corresponding
+ * argument.
+ * @param {Function} test the test function to call, during which the call to
+ * console.error will be expected.
+ */
+export const expectLogging = ({ errors, warnings }, test) => {
+  const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
+  const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
+
+  const result = test();
+
+  checkLogging(error, errors);
+  checkLogging(warn, warnings);
+
+  error.mockRestore();
+  warn.mockRestore();
+  return result;
+};
+
 /**
  * A helper function to enable a test to expect a single call to
  * console.error, for example when intentionally omitting a required prop
@@ -199,8 +233,9 @@ export const expectMultipleWarn = (messages, test) => {
 export const expectError = (message, test) => {
   const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
   const result = test();
-  expect(error).toBeCalledTimes(1);
-  expect(error).toHaveBeenCalledWith(...makeMatcherArray(message));
+
+  checkLogging(error, message);
+
   error.mockRestore();
   return result;
 };
@@ -223,6 +258,7 @@ export const expectMultipleError = (messages, test) => {
   const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
   const result = test();
   expect(error).toBeCalledTimes(messages.length);
+
   messages.forEach((args, index) =>
     expect(error).toHaveBeenNthCalledWith(index + 1, ...makeMatcherArray(args))
   );

@@ -1850,7 +1850,6 @@ __metadata:
     npm-run-all: ^4.1.5
     react-dnd: ^15.1.2
     react-dnd-html5-backend: ^15.1.3
-    react-resize-detector: ^8.0.3
     react-table: ^7.8.0
     react-window: ^1.8.8
     rimraf: ~3 || > 4.1
@@ -22831,18 +22830,6 @@ __metadata:
   version: 0.11.0
   resolution: "react-refresh@npm:0.11.0"
   checksum: 112178a05b1e0ffeaf5d9fb4e56b4410a34a73adeb04dbf13abdc50d9ac9df2ada83e81485156cca0b3fa296aa3612751b3d6cd13be4464642a43679b819cbc7
-  languageName: node
-  linkType: hard
-
-"react-resize-detector@npm:^8.0.3":
-  version: 8.0.3
-  resolution: "react-resize-detector@npm:8.0.3"
-  dependencies:
-    lodash: ^4.17.21
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
-  checksum: 21d34004c925ee97708501d4484ee1e81411eaaa84772d58ed6be08665a81725508645223be14347ae6dad321386830c72619f8de7046708f0b3b9d900b225aa
   languageName: node
   linkType: hard
 

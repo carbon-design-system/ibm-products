@@ -102,7 +102,7 @@ const App = () => {
 };
 ```
 
-### Enabling Canary components
+### Enabling Canary components and flagged features
 
 Components that have not yet completed the release review process are considered
 to be canary and require the consumer to enable via a feature flag in a
@@ -121,14 +121,19 @@ pkg.component.SidePanel = true;
 // Live dangerously: enable all components!
 pkg.setAllComponents(true);
 
-// Enable all pre-release feature flags that we want to use
-pkg.flags.noneJustYet = true;
-
+// Enable a feature flagged example
+pkg.feature.nameOfFeature = true;
+pkg.feature['Component.feature'] = true;
 // Live dangerously: enable all pre-release features!
 pkg.setAllFeatures(true);
 ```
 
-**Note:** The above settings must happen before a component first renders.
+**Note:** The above settings must happen before a component first renders or a
+feature is first used.
+
+**Note: 2** In the case of features implemented via hooks the feature may
+function without enabling. In all cases features that disabled by default will
+log in the console a warning if enabled via a feature flag or an error if not.
 
 ### Building and running locally
 

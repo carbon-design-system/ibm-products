@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { layout05, baseFontSize } from '@carbon/layout';
 import cx from 'classnames';
-import { useResizeDetector } from 'react-resize-detector';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 import { Grid, Column, Row, Button, Tag } from 'carbon-components-react';
 import { breakpoints } from '@carbon/layout';
@@ -162,7 +162,7 @@ export let PageHeader = React.forwardRef(
     };
 
     /* istanbul ignore next */
-    const handleResizeActionBarColumn = (width) => {
+    const handleResizeActionBarColumn = ({ width }) => {
       /* don't know how to test resize */
       /* istanbul ignore next */
       setActionBarColumnWidth(width);
@@ -447,17 +447,11 @@ export let PageHeader = React.forwardRef(
       }
     }, [collapseHeader, metrics.headerOffset, metrics.headerTopValue]);
 
-    useResizeDetector({
-      onResize: handleResizeActionBarColumn,
-      targetRef: sizingContainerRef,
-      handleWidth: true,
+    useResizeObserver(sizingContainerRef, {
+      callback: handleResizeActionBarColumn,
     });
 
-    useResizeDetector({
-      onResize: handleResize,
-      targetRef: headerRef,
-      handleHeight: true,
-    });
+    useResizeObserver(headerRef, { callback: handleResize });
 
     // Determine what form of title to display in the breadcrumb
     let breadcrumbItemForTitle = utilGetBreadcrumbItemForTitle(

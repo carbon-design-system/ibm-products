@@ -7,7 +7,7 @@
 
 // Import portions of React that are needed.
 import React, { useState, useRef, useEffect } from 'react';
-import { useResizeDetector } from 'react-resize-detector';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -82,7 +82,7 @@ export let AboutModal = React.forwardRef(
     }, [bodyRef]);
 
     // Detect resize of the ModalBody to recalculate whether scrolling is enabled
-    useResizeDetector({ onResize: handleResize, targetRef: bodyRef });
+    useResizeObserver(bodyRef, { callback: handleResize });
 
     return (
       <ComposedModal

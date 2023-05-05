@@ -9,7 +9,7 @@ import React, { useEffect } from 'react';
 import { VariableSizeList } from 'react-window';
 import { DataTable } from 'carbon-components-react';
 import { px } from '@carbon/layout';
-import { useResizeDetector } from 'react-resize-detector';
+import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { pkg } from '../../../settings';
 import DatagridHead from './DatagridHead';
 
@@ -54,7 +54,7 @@ const DatagridVirtualBody = (datagridState) => {
     gridRefElement.style.width = gridRefElement?.clientWidth;
   };
 
-  useResizeDetector({ onResize: handleVirtualGridResize, targetRef: gridRef });
+  useResizeObserver(gridRef, { callback: handleVirtualGridResize });
 
   const syncScroll = (e) => {
     const virtualBody = e.target;

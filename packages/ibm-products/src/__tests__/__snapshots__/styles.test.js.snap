@@ -3211,6 +3211,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--empty-state {
+  display: flex;
   color: var(--cds-text-primary, #161616);
 }
 .c4p--empty-state .c4p--empty-state__header {
@@ -3253,6 +3254,22 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--empty-state__illustration.c4p--empty-state__illustration--sm {
   min-width: 4rem;
   max-width: 4rem;
+}
+
+.c4p--empty-state-position--top {
+  flex-direction: column;
+}
+
+.c4p--empty-state-position--right {
+  flex-direction: row-reverse;
+}
+
+.c4p--empty-state-position--bottom {
+  flex-direction: column-reverse;
+}
+
+.c4p--empty-state-position--left {
+  flex-direction: row;
 }
 
 .c4p--empty-state .c4p--empty-state__action-button {

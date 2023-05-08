@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,13 +20,21 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { StatusIcon } from '../../../StatusIcon';
+import { pkg } from '../../../../settings';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Filtering`,
+  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Filtering/Flyout`,
   component: Datagrid,
   parameters: {
     styles,
     docs: { page: mdx },
+  },
+  argTypes: {
+    featureFlags: {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 
@@ -76,6 +84,7 @@ const FilteringUsage = ({ defaultGridProps }) => {
     filterProps,
     emptyStateTitle,
     emptyStateDescription,
+    initialState,
   } = defaultGridProps;
 
   const headers = [
@@ -152,10 +161,17 @@ const FilteringUsage = ({ defaultGridProps }) => {
   const columns = React.useMemo(() => headers, []);
   const [data] = useState(makeData(20));
 
+  // Warnings are ordinarily silenced in storybook, add this to test
+  pkg._silenceWarnings(false);
+  // Enable feature flag for `useFiltering` hook
+  pkg.feature['Datagrid.useFiltering'] = true;
+  pkg._silenceWarnings(true);
+
   const datagridState = useDatagrid(
     {
       columns,
       data,
+      initialState,
       DatagridActions,
       batchActions: true,
       toolbarBatchActions: getBatchActions(),
@@ -283,8 +299,8 @@ const filters = [
   },
 ];
 
-export const FilteringUsageStory = prepareStory(FilteringTemplateWrapper, {
-  storyName: 'Filter flyout - batch',
+export const FlyoutBatch = prepareStory(FilteringTemplateWrapper, {
+  storyName: 'Filter flyout with batch update',
   argTypes: {
     gridTitle: ARG_TYPES.gridTitle,
     gridDescription: ARG_TYPES.gridDescription,
@@ -308,36 +324,71 @@ export const FilteringUsageStory = prepareStory(FilteringTemplateWrapper, {
       onFlyoutClose: action('onFlyoutClose'),
       filters,
     },
+    featureFlags: ['Datagrid.useFiltering'],
   },
 });
 
-export const FilteringInstantUsageStory = prepareStory(
-  FilteringTemplateWrapper,
-  {
-    storyName: 'Filter flyout - instant',
-    argTypes: {
-      gridTitle: ARG_TYPES.gridTitle,
-      gridDescription: ARG_TYPES.gridDescription,
-      useDenseHeader: ARG_TYPES.useDenseHeader,
-      filterProps: ARG_TYPES.filterProps,
+export const FlyoutInstant = prepareStory(FilteringTemplateWrapper, {
+  storyName: 'Filter flyout with instant update',
+  argTypes: {
+    gridTitle: ARG_TYPES.gridTitle,
+    gridDescription: ARG_TYPES.gridDescription,
+    useDenseHeader: ARG_TYPES.useDenseHeader,
+    filterProps: ARG_TYPES.filterProps,
+  },
+  args: {
+    gridTitle: 'Data table title',
+    gridDescription: 'Additional information if needed',
+    useDenseHeader: false,
+    emptyStateTitle: 'No filters match',
+    emptyStateDescription:
+      'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+    filterProps: {
+      variation: 'flyout',
+      updateMethod: 'instant',
+      primaryActionLabel: 'Apply',
+      secondaryActionLabel: 'Cancel',
+      flyoutIconDescription: 'Open filters',
+      onFlyoutOpen: action('onFlyoutOpen'),
+      onFlyoutClose: action('onFlyoutClose'),
+      filters,
     },
-    args: {
-      gridTitle: 'Data table title',
-      gridDescription: 'Additional information if needed',
-      useDenseHeader: false,
-      emptyStateTitle: 'No filters match',
-      emptyStateDescription:
-        'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
-      filterProps: {
-        variation: 'flyout',
-        updateMethod: 'instant',
-        primaryActionLabel: 'Apply',
-        secondaryActionLabel: 'Cancel',
-        flyoutIconDescription: 'Open filters',
-        onFlyoutOpen: action('onFlyoutOpen'),
-        onFlyoutClose: action('onFlyoutClose'),
-        filters,
-      },
+  },
+});
+
+export const FlyoutWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
+  storyName: 'Filter flyout with initial filters',
+  argTypes: {
+    gridTitle: ARG_TYPES.gridTitle,
+    gridDescription: ARG_TYPES.gridDescription,
+    useDenseHeader: ARG_TYPES.useDenseHeader,
+    filterProps: ARG_TYPES.filterProps,
+  },
+  args: {
+    initialState: {
+      filters: [
+        {
+          id: 'role',
+          type: 'radio',
+          value: 'developer',
+        },
+      ],
     },
-  }
-);
+    gridTitle: 'Data table title',
+    gridDescription: 'Additional information if needed',
+    useDenseHeader: false,
+    emptyStateTitle: 'No filters match',
+    emptyStateDescription:
+      'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+    filterProps: {
+      variation: 'flyout',
+      updateMethod: 'instant',
+      primaryActionLabel: 'Apply',
+      secondaryActionLabel: 'Cancel',
+      flyoutIconDescription: 'Open filters',
+      onFlyoutOpen: action('onFlyoutOpen'),
+      onFlyoutClose: action('onFlyoutClose'),
+      filters,
+    },
+  },
+});

@@ -1,16 +1,20 @@
-// @flow
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2022
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2022, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
-import { useMemo } from 'react';
+
+import { useMemo, useEffect } from 'react';
+import { pkg } from '../../settings';
 import { FilterFlyout } from './Datagrid/addons/Filtering';
 import { BATCH } from './Datagrid/addons/Filtering/constants';
 
 const useFiltering = (hooks) => {
+  useEffect(() => {
+    pkg.checkReportFeatureEnabled('Datagrid.useFiltering');
+  }, []);
+
   const filterTypes = useMemo(
     () => ({
       date: (rows, id, [startDate, endDate]) => {
@@ -60,13 +64,16 @@ const useFiltering = (hooks) => {
   );
 
   hooks.useInstance.push((instance) => {
-    const { filterProps, setAllFilters, setFilter, headers, data } = instance;
+    const { filterProps, setAllFilters, setFilter, headers, data, state } =
+      instance;
 
     const defaultProps = {
       variation: 'flyout',
       updateMethod: BATCH,
       panelIconDescription: 'Open filter panel',
+      initialFilters: state.filters,
     };
+
     const getFilterFlyoutProps = () => ({
       ...defaultProps,
       ...filterProps,

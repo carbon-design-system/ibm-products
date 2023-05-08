@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2022
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -57,4 +57,17 @@
 
 [storybook-carbon-theme='debug'] body {
   color: initial;
+}
+
+.preview__notification--feature-flag {
+  margin: $spacing-05 0;
+  word-break: break-word;
+}
+
+.preview__notification--feature-flag .#{$prefix}--list--unordered {
+  margin-top: $spacing-04;
+}
+
+.preview__notification-button {
+  margin: $spacing-04 0;
 }

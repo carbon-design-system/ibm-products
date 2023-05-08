@@ -9,7 +9,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
-import { useResizeDetector } from 'react-resize-detector';
+import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import { ButtonSet, Button } from 'carbon-components-react';
 import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
 
@@ -125,21 +125,15 @@ export const ButtonSetWithOverflow = ({
     );
   });
 
-  useResizeDetector({
-    onResize: checkFullyVisibleItems,
-    targetRef: sizingContainerRefSet,
+  useResizeObserver(sizingContainerRefSet, {
+    callback: checkFullyVisibleItems,
   });
 
-  useResizeDetector({
-    onResize: checkFullyVisibleItems,
-    targetRef: sizingContainerRefCombo,
+  useResizeObserver(sizingContainerRefCombo, {
+    callback: checkFullyVisibleItems,
   });
 
-  useResizeDetector({
-    onResize: checkFullyVisibleItems,
-    targetRef: spaceAvailableRef,
-    handleWidth: true,
-  });
+  useResizeObserver(spaceAvailableRef, { callback: checkFullyVisibleItems });
 
   return (
     <div

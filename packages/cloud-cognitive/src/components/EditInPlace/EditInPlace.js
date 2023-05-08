@@ -12,15 +12,16 @@ import { InlineEditV1 } from '../InlineEditV1';
 import { InlineEditV2 } from '../InlineEditV2';
 
 /**
- * this is a wrapper component that will allow us to support v1 and v2 versions of InlineEdit
+ * this is a wrapper component that will allow us to support the rename of InlineEdit to EditInPlace
+ *
  * if the user passes in the v2 feature flag the v2 version of the component will be rendered
  * since this is a temporary solution the named export should just remain InlineEdit unlike how
  * Card works as a base layer for Productive and Expressive cards.
  */
 
-const componentName = 'InlineEdit';
+const componentName = 'EditInPlace';
 
-export let InlineEdit = forwardRef(({ v2, ...rest }, ref) => {
+export let EditInPlace = forwardRef(({ v2, ...rest }, ref) => {
   const props = {
     ...rest,
     ref,
@@ -32,14 +33,10 @@ export let InlineEdit = forwardRef(({ v2, ...rest }, ref) => {
   return <InlineEditV1 {...props} />;
 });
 
-InlineEdit.deprecated = {
-  details: `The InlineEdit component is being renamed to EditInPlace in the next major version of @carbon/ibm-products. You can prepare by updating your usage of InlineEdit to EditInPlace.`,
-  level: 'warn',
-};
+EditInPlace = pkg.checkComponentEnabled(EditInPlace, componentName);
 
-InlineEdit.displayName = componentName;
-InlineEdit = pkg.checkComponentEnabled(InlineEdit, componentName);
+EditInPlace.displayName = componentName;
 
-InlineEdit.propTypes = {
+EditInPlace.propTypes = {
   v2: PropTypes.bool,
 };

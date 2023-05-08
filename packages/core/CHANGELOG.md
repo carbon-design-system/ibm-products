@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.42.0...@carbon/ibm-cloud-cognitive-core@0.43.0) (2023-05-04)
+
+
+### Features
+
+* **Datagrid:** add feature flag to select hooks until fully released ([#2937](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2937)) ([387b593](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/387b5938ebd469708dae997d5d4701ebb1215edb))
+* feature flagging in v1 with example ([#2928](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2928)) ([8da8deb](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/8da8deb337772162aa74d686e76fc178e05a2dfc))
+
+
+
+
+
+# [0.42.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.41.0...@carbon/ibm-cloud-cognitive-core@0.42.0) (2023-05-02)
+
+
+### Features
+
+* Rename inline edit (V1) ([#2881](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2881)) ([cff465d](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/cff465d845d0bdf5835a4dfe2fa87aa75e658578))
+
+
+
+
+
 # [0.41.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-cloud-cognitive-core@0.40.5...@carbon/ibm-cloud-cognitive-core@0.41.0) (2023-04-11)
 
 

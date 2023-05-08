@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -24,6 +24,7 @@ const defaults = {
     CreateTearsheet: true,
     CreateTearsheetStep: true,
     CreateTearsheetDivider: true,
+    EditInPlace: true,
     EmptyState: true,
     ErrorEmptyState: true,
     ExportModal: true,
@@ -80,6 +81,14 @@ const defaults = {
   feature: {
     'a-new-feature': false,
     'default-portal-target-body': true,
+    'Datagrid.useExpandedRow': false,
+    'Datagrid.useNestedRows': false,
+    'Datagrid.useInlineEdit': false,
+    'Datagrid.useActionsColumn': false,
+    'Datagrid.useFiltering': false,
+    'Datagrid.useCustomizeColumns': false,
+    'ExampleComponent.secondaryIcon': false,
+    'ExampleComponent.useExample': false,
   },
 };
 
@@ -87,6 +96,8 @@ const warningMessageComponent = (property) =>
   `Carbon for IBM Products (WARNING): Component "${property}" enabled via feature flags. This component has not yet completed its review process.`;
 const warningMessageFeature = (property) =>
   `Carbon for IBM Products (WARNING): Feature "${property}" enabled via feature flags.`;
+const errorMessageFeature = (property) =>
+  `Carbon for IBM Products (Error): Feature "${property}" not enabled. To enable see the notes on feature flags in the README.`;
 const warningMessageAllComponents =
   'Carbon for IBM Products (WARNING): All components enabled through use of setAllComponents. This includes components that have not yet completed their review process.';
 const warningMessageAllFeatures =
@@ -104,7 +115,10 @@ const component = new Proxy(
   { ...defaults.component },
   {
     set(target, property, value) {
-      value && !silent && console.warn(warningMessageComponent(property));
+      if (target[property] !== true && !silent && value) {
+        // not already true, not silent, and now true
+        console.warn(warningMessageComponent(property));
+      }
       target[property] = value;
       return true; // value set
     },
@@ -118,7 +132,15 @@ const feature = new Proxy(
   { ...defaults.feature },
   {
     set(target, property, value) {
-      value && !silent && console.warn(warningMessageFeature(property));
+      // If we receive a feature flag that doesn't exist in our defaults we should not log
+      // a warning message and instead just return
+      if (!Object.getOwnPropertyDescriptor(defaults.feature, property)) {
+        return true;
+      }
+      if (target[property] !== true && !silent && value) {
+        // not already true, not silent, and now true
+        console.warn(warningMessageFeature(property));
+      }
       target[property] = value;
       return true; // value set
     },
@@ -155,6 +177,15 @@ export default {
 
   isFeatureEnabled: (featureName, byDefault = false) => {
     return byDefault ? defaults.feature[featureName] : feature[featureName];
+  },
+
+  checkReportFeatureEnabled(featureName) {
+    if (feature[featureName]) {
+      // NOTE: Warning emitted if feature flag is enabled (see Proxy above)
+      return true;
+    } else {
+      console.error(errorMessageFeature(featureName));
+    }
   },
 
   isFeaturePublic: (featureName, byDefault = false) => {

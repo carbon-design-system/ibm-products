@@ -191,6 +191,7 @@ export let AddSelectColumn = ({
           setMultiSelection={setMultiSelection}
           multiSelection={multiSelection}
           setParentSelected={parentSelectionHandler}
+          parentSelected={parentSelected}
         />
       </div>
       {selectedItem && itemInPath && (

@@ -1,7 +1,11 @@
-.content-area {
-  //color: $text-primary; // remove this when color issue fixed
-  //background-color: $layer-02;
-  flex: 1 1 100%;
+.example {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.content-area.content-area {
+  height: calc(100% - 3rem);
   padding: 0;
+  margin-top: 3rem;
   overflow-y: auto;
 }

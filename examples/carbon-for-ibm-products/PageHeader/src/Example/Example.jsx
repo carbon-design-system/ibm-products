@@ -1,18 +1,17 @@
 import React from "react";
 
 import { CommonHeader } from "./CommonHeader";
-import { Content } from "@carbon/react";
 
 import "./_example.scss";
 import { SamplePage } from "./SamplePage";
 
 export const Example = () => (
-  <>
+  <div className="example">
     <CommonHeader className='header-area' />
-    <Content className='content-area'>
+    <div className='content-area'>
       <SamplePage />
-    </Content>
-  </>
+    </div>
+  </div>
 );
 
 export default Example;

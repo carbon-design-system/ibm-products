@@ -14,6 +14,7 @@
 $block-class: #{c4p-settings.$pkg-prefix}--empty-state;
 
 .#{$block-class} {
+  display: flex;
   color: $text-primary;
 
   .#{$block-class}__header {
@@ -43,20 +44,39 @@ $block-class: #{c4p-settings.$pkg-prefix}--empty-state;
 .#{$block-class}__illustration {
   height: auto;
   margin-bottom: $spacing-05;
+
   &.#{$block-class}__illustration--lg {
     min-width: $spacing-11;
     max-width: $spacing-11;
   }
+
   &.#{$block-class}__illustration--sm {
     min-width: $spacing-10;
     max-width: $spacing-10;
   }
 }
 
+.#{$block-class}-position--top {
+  flex-direction: column;
+}
+
+.#{$block-class}-position--right {
+  flex-direction: row-reverse;
+}
+
+.#{$block-class}-position--bottom {
+  flex-direction: column-reverse;
+}
+
+.#{$block-class}-position--left {
+  flex-direction: row;
+}
+
 .#{$block-class} .#{$block-class}__action-button {
   display: block;
   margin-bottom: $spacing-05;
 }
+
 .#{$block-class} .#{$block-class}__link {
   display: block;
 }

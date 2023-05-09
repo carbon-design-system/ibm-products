@@ -3,7 +3,7 @@ import './App.scss';
 import { GalleryCard } from './GalleryCard';
 
 import config from './gallery-config';
-import { Search } from 'carbon-components-react';
+import { Search } from '@carbon/react';
 import { useState } from 'react';
 
 const App = () => {

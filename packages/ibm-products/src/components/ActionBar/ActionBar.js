@@ -271,7 +271,8 @@ ActionBar.propTypes = {
   menuOptionsClass: PropTypes.string,
   /**
    * onItemCountChange - event reporting maxWidth
-   */ onWidthChange: PropTypes.func,
+   */
+  onWidthChange: PropTypes.func,
   /**
    * overflowAriaLabel label for open close button overflow used for action bar items that do nto fit.
    */

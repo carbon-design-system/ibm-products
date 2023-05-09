@@ -22,7 +22,7 @@ const componentName = 'EmptyStateContent';
 
 export const EmptyStateContent = ({ action, link, size, subtitle, title }) => {
   return (
-    <>
+    <div className={`${blockClass}__content`}>
       <h3
         className={cx(`${blockClass}__header`, {
           [`${blockClass}__header--small`]: size === 'sm',
@@ -56,7 +56,7 @@ export const EmptyStateContent = ({ action, link, size, subtitle, title }) => {
           {link.text}
         </Link>
       )}
-    </>
+    </div>
   );
 };
 

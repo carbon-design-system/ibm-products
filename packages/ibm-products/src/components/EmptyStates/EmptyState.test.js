@@ -123,9 +123,9 @@ describe(name, () => {
 
   it('applies className to the containing node', () => {
     render(<EmptyState {...defaultProps} className={className} />);
-    expect(screen.getByText(/Empty state title/).parentElement).toHaveClass(
-      className
-    );
+    expect(
+      screen.getByText(/Empty state title/).parentElement.parentElement
+    ).toHaveClass(className);
   });
 
   it('renders the small size Empty state', () => {

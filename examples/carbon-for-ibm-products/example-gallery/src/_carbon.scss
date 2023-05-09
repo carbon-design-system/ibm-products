@@ -8,7 +8,7 @@ $css--plex: true; /* true by default if importing global styles v10.41.0 */
 @import '@carbon/type/scss/reset';
 @import 'carbon-components/scss/globals/scss/css--font-face';
 
-$carbon--theme: $carbon--theme--g10;
+$theme: $theme--g10;
 
 // All carbon styles at once
 // @import "carbon-components/scss/globals/scss/styles";
@@ -21,17 +21,17 @@ $carbon--theme: $carbon--theme--g10;
 
 // Theme selector classes for use if switching between themes
 .carbon-theme--white {
-  @include carbon--theme($carbon--theme--white, true);
+  @include theme($theme--white, true);
 }
 
 .carbon-theme--g10 {
-  @include carbon--theme($carbon--theme--g10, true);
+  @include theme($theme--g10, true);
 }
 
 .carbon-theme--g90 {
-  @include carbon--theme($carbon--theme--g90, true);
+  @include theme($theme--g90, true);
 }
 
 .carbon-theme--g100 {
-  @include carbon--theme($carbon--theme--g100, true);
+  @include theme($theme--g100, true);
 }

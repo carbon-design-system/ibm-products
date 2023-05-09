@@ -6,7 +6,7 @@
  */
 
 /**
- * This file compiles a list of codesandbox examples and gallery-config/index.js  in the example-gallery project.
+ * This file compiles a list of TODO change codesandbox examples and gallery-config/index.js  in the example-gallery project.
  * The information written is of the form:
  * [{
  *   label: "Either the folder name or a value read from a config file.",

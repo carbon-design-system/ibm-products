@@ -6,61 +6,66 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--about-modal .c4p--about-modal__logo {
-  margin: 1rem;
+  margin: 1rem 1rem 2rem 1rem;
 }
 
 .c4p--about-modal .c4p--about-modal__header {
-  padding: 0 20% 0.5rem 1rem;
+  padding: 0 20% 0 1rem;
   margin-bottom: 0;
   grid-row: auto;
 }
 
 .c4p--about-modal .c4p--about-modal__title {
-  font-size: var(--cds-productive-heading-04-font-size, 1.75rem);
-  font-weight: var(--cds-productive-heading-04-font-weight, 400);
-  line-height: var(--cds-productive-heading-04-line-height, 1.28572);
-  letter-spacing: var(--cds-productive-heading-04-letter-spacing, 0);
+  font-size: var(--cds-heading-04-font-size, 1.75rem);
+  font-weight: var(--cds-heading-04-font-weight, 400);
+  line-height: var(--cds-heading-04-line-height, 1.28572);
+  letter-spacing: var(--cds-heading-04-letter-spacing, 0);
   color: var(--cds-text-primary, #161616);
 }
 
 .c4p--about-modal .c4p--about-modal__body {
-  font-size: var(--cds-body-short-02-font-size, 1rem);
-  font-weight: var(--cds-body-short-02-font-weight, 400);
-  line-height: var(--cds-body-short-02-line-height, 1.375);
-  letter-spacing: var(--cds-body-short-02-letter-spacing, 0);
+  font-size: var(--cds-body-compact-02-font-size, 1rem);
+  font-weight: var(--cds-body-compact-02-font-weight, 400);
+  line-height: var(--cds-body-compact-02-line-height, 1.375);
+  letter-spacing: var(--cds-body-compact-02-letter-spacing, 0);
   min-height: 4rem;
   padding: 0 20% 0 1rem;
+  margin-bottom: 1.5rem;
   grid-row: auto;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-.c4p--about-modal.c4p--about-modal--with-tabs .c4p--about-modal__body {
-  min-height: calc(4rem + 2.5rem);
-  margin-bottom: calc(3rem + 2.5rem);
-}
-
-.c4p--about-modal.c4p--about-modal--with-tabs .cds--modal-content--overflow-indicator {
-  bottom: calc(3rem + 2.5rem);
-}
-
 .c4p--about-modal .cds--modal-content--overflow-indicator {
+  bottom: 1.5rem;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--cds-layer-01, #f4f4f4));
 }
 
 .c4p--about-modal .c4p--about-modal__links-container {
-  margin-top: 1rem;
+  font-size: var(--cds-body-compact-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-compact-01-font-weight, 400);
+  line-height: var(--cds-body-compact-01-line-height, 1.28572);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing, 0.16px);
+  margin-top: 1.5rem;
+}
+
+.c4p--about-modal .c4p--about-modal__version {
+  color: var(--cds-text-secondary, #525252);
 }
 
 .c4p--about-modal .c4p--about-modal__links-container a + a {
   padding-left: 0.5rem;
-  border-left: 1px solid var(--cds-text-primary, #161616);
+  border-left: 1px solid var(--cds-border-strong-01, #8d8d8d);
   margin-left: 0.5rem;
 }
 
-.c4p--about-modal .c4p--about-modal__legal-text,
+.c4p--about-modal .c4p--about-modal__content,
 .c4p--about-modal .c4p--about-modal__copyright-text {
-  margin-top: 2rem;
+  font-size: var(--cds-label-01-font-size, 0.75rem);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.33333);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+  margin-top: 1.5rem;
   margin-bottom: 0;
   color: var(--cds-text-secondary, #525252);
 }
@@ -69,51 +74,33 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   margin-top: 1rem;
 }
 
+p.c4p--about-modal__content:first-child,
+p.c4p--about-modal__copyright-text:first-child {
+  margin-top: 2rem;
+}
+
 .c4p--about-modal .c4p--about-modal__footer {
   position: relative;
-  height: 4.5rem;
+  height: calc(
+    1rem + 0.25rem + 1.5rem + 2rem
+  );
   flex-direction: column;
   justify-content: center;
-  background-color: var(--cds-background-inverse, #393939);
-  color: var(--cds-text-inverse, #ffffff);
+  background-color: var(--cds-layer-02, #ffffff);
 }
 
-.c4p--about-modal .c4p--about-modal__tab-container {
-  position: absolute;
-  bottom: 0;
+.c4p--about-modal .c4p--about-modal__footer-label {
+  font-size: var(--cds-label-01-font-size, 0.75rem);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.33333);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
+  padding: 1rem 0 0 1rem;
+  margin-bottom: 0.25rem;
+  color: var(--cds-text-secondary, #525252);
 }
 
-.c4p--about-modal .c4p--about-modal__version-label,
-.c4p--about-modal .c4p--about-modal__version-number {
-  font-size: var(--cds-body-short-01-font-size, 0.875rem);
-  font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.28572);
-  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
-  padding-left: 1rem;
-  margin-top: 0;
-  margin-bottom: 0;
-  color: var(--cds-text-inverse, #ffffff);
-}
-
-.c4p--about-modal .c4p--about-modal__version-label {
-  font-weight: 600;
-}
-
-.c4p--about-modal .cds--tabs .cds--tabs__nav-link,
-.c4p--about-modal .cds--tab-content {
-  font-size: var(--cds-body-short-01-font-size, 0.875rem);
-  font-weight: var(--cds-body-short-01-font-weight, 400);
-  line-height: var(--cds-body-short-01-line-height, 1.28572);
-  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
-}
-
-.c4p--about-modal .cds--tab-content {
-  height: 4.5rem;
-}
-
-.c4p--about-modal .cds--tab-content:not([hidden]) {
-  display: flex;
-  align-items: center;
+.c4p--about-modal .c4p--about-modal__footer-content {
+  padding: 0 0 1rem 1rem;
 }
 
 .c4p--apikey-modal .cds--modal-close {
@@ -3211,6 +3198,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 }
 
 .c4p--empty-state {
+  display: flex;
   color: var(--cds-text-primary, #161616);
 }
 .c4p--empty-state .c4p--empty-state__header {
@@ -3253,6 +3241,22 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
 .c4p--empty-state__illustration.c4p--empty-state__illustration--sm {
   min-width: 4rem;
   max-width: 4rem;
+}
+
+.c4p--empty-state-position--top {
+  flex-direction: column;
+}
+
+.c4p--empty-state-position--right {
+  flex-direction: row-reverse;
+}
+
+.c4p--empty-state-position--bottom {
+  flex-direction: column-reverse;
+}
+
+.c4p--empty-state-position--left {
+  flex-direction: row;
 }
 
 .c4p--empty-state .c4p--empty-state__action-button {
@@ -3560,9 +3564,6 @@ c4p--card__icon:active {
 }
 
 /* stylelint-disable max-nesting-depth */
-.c4p--add-select__selections.cds--structured-list {
-  margin-bottom: 0;
-}
 .c4p--add-select__selections-wrapper {
   display: block;
 }
@@ -3591,9 +3592,14 @@ c4p--card__icon:active {
   flex-direction: column;
   justify-content: center;
 }
-.c4p--add-select__selections-row--selected.cds--structured-list-row {
-  border-bottom: 1px solid var(--cds-layer-selected-01, #e0e0e0);
+.c4p--add-select__selections-dropdown .cds--dropdown {
+  background: transparent;
+}
+.c4p--add-select__selections-row--selected {
   background-color: var(--cds-layer-selected-01, #e0e0e0);
+}
+.c4p--add-select__selections-row--active {
+  background-color: var(--cds-layer-active-01, #c6c6c6);
 }
 .c4p--add-select__selections-form-control {
   display: flex;
@@ -3621,7 +3627,10 @@ c4p--card__icon:active {
   background-color: var(--cds-layer-hover-01, #e8e8e8);
 }
 
-.c4p--add-select .c4p--add-select__selections-row:hover .c4p--add-select__selections-radio {
+.c4p--add-select .c4p--add-select__selections-row:hover {
+  background: var(--cds-layer-hover-01, #e8e8e8);
+}
+.c4p--add-select .c4p--add-select__selections-row:hover .c4p--add-select__selections-cell-title {
   color: var(--cds-interactive, #0f62fe);
 }
 .c4p--add-select .c4p--add-select__selections-row:hover .c4p--add-select__selections-view-children svg {
@@ -3638,14 +3647,6 @@ c4p--card__icon:active {
 }
 .c4p--add-select__sub-header-multi {
   padding: 0 1rem;
-}
-
-.c4p--add-select .cds--structured-list-row {
-  border-bottom: 0;
-}
-
-.c4p--add-select .cds--structured-list--selection .cds--structured-list-row:hover:not(.cds--structured-list-row--header-row):not(.cds--structured-list-row--selected) {
-  border-bottom: 0;
 }
 
 .c4p--add-select__sidebar-header {
@@ -3715,14 +3716,14 @@ c4p--card__icon:active {
 .c4p--add-select__columns .c4p--add-select__selections-form-control-label-wrapper {
   margin-left: 0.5rem;
 }
-.c4p--add-select__columns .c4p--add-select__selections-row.cds--structured-list-row {
+.c4p--add-select__columns .c4p--add-select__selections-row {
   border-left: 0;
 }
 .c4p--add-select__columns .c4p--add-select__selections .c4p--add-select__selections-cell {
   padding: 0;
 }
 .c4p--add-select__columns .c4p--add-select__selections-cell-wrapper {
-  height: auto;
+  height: 2rem;
   padding: 0 0.5rem;
 }
 .c4p--add-select__columns .c4p--add-select__tags {
@@ -3731,9 +3732,6 @@ c4p--card__icon:active {
 }
 .c4p--add-select__columns .c4p--add-select__selections-wrapper-multi {
   padding: 0;
-}
-.c4p--add-select__columns .c4p--add-select__selections.cds--structured-list {
-  border-top: 0;
 }
 
 .c4p--add-select__selections-wrapper-multi .c4p--add-select__selections-cell {
@@ -3764,6 +3762,10 @@ c4p--card__icon:active {
   border-bottom: 1px solid var(--cds-border-strong-01, #8d8d8d);
 }
 
+.c4p--add-select-sort_overflow {
+  z-index: 9999;
+}
+
 .c4p--add-select__tags {
   display: flex;
   align-items: center;
@@ -3776,7 +3778,7 @@ c4p--card__icon:active {
 
 .c4p--add-select__global-filter {
   position: absolute;
-  z-index: 6000;
+  z-index: 999999;
   right: 0;
   width: 100%;
   max-width: 40rem;
@@ -3862,6 +3864,11 @@ button.c4p--add-select__global-filter-toggle--open {
 
 .c4p--add-select.c4p--tearsheet .c4p--tearsheet__influencer {
   flex-basis: 22.5rem;
+  background: var(--cds-layer-01, #f4f4f4);
+}
+
+.c4p--add-select.c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__content .cds--dropdown {
+  background-color: transparent;
 }
 
 .c4p--add-select.c4p--tearsheet .c4p--tearsheet__header-description {
@@ -3886,12 +3893,6 @@ button.c4p--add-select__global-filter-toggle--open {
 
 .c4p--add-select .cds--modal-container--sm .cds--modal-content p {
   padding-right: 0;
-}
-
-.c4p--add-select .cds--structured-list-td {
-  height: 4rem;
-  padding: 1rem;
-  vertical-align: middle;
 }
 
 .c4p--add-select .cds--radio-button__appearance {
@@ -3940,8 +3941,8 @@ button.c4p--add-select__global-filter-toggle--open {
   margin-top: 0.5rem;
 }
 
-.c4p--add-select .cds--tooltip,
-.c4p--add-select .cds--overflow-menu-options {
+.c4p--add-select + div .cds--tooltip,
+.c4p--add-select + div .cds--overflow-menu-options {
   z-index: 9000;
 }
 

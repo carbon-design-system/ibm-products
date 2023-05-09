@@ -1,4 +1,4 @@
-@import '../carbon';
+@use '@carbon/react/scss/spacing' as *;
 
 .ccs-theme-dropdown {
   position: fixed;

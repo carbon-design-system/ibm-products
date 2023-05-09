@@ -35,6 +35,7 @@ const actionBarOverflowAriaLabel = 'Show additional action bar items';
 const actionBarItems = [1, 2, 3, 4].map((item) => ({
   key: `a-key-${item}`,
   renderIcon: (props) => <Lightning size={16} {...props} />,
+  iconDescription: `Action ${item}`,
   label: `Action ${item}`,
   onClick: () => {},
 }));

@@ -6,7 +6,7 @@
 //
 
 import React, { useRef, useEffect, useCallback } from 'react';
-import { Button, Dropdown } from '@carbon/react';
+import { Button, Dropdown, Layer } from '@carbon/react';
 import { ChevronRight, View } from '@carbon/react/icons';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -148,18 +148,20 @@ export let AddSelectRow = ({
                 onClick={handleMultiSelection}
               />
               {hasModifiers && (
-                <Dropdown
-                  id={`add-select-modifier-${item.id}`}
-                  type="inline"
-                  items={modifiers.options}
-                  label={modifiers.label}
-                  disabled={!isSelected(item.id)}
-                  className={`${blockClass}-dropdown`}
-                  initialSelectedItem={item[modifiers.id]}
-                  onChange={({ selectedItem }) =>
-                    modifierHandler(item.id, selectedItem)
-                  }
-                />
+                <Layer>
+                  <Dropdown
+                    id={`add-select-modifier-${item.id}`}
+                    type="inline"
+                    items={modifiers.options}
+                    label={modifiers.label}
+                    disabled={!isSelected(item.id)}
+                    className={`${blockClass}-dropdown`}
+                    initialSelectedItem={item[modifiers.id]}
+                    onChange={({ selectedItem }) =>
+                      modifierHandler(item.id, selectedItem)
+                    }
+                  />
+                </Layer>
               )}
             </>
           ) : (

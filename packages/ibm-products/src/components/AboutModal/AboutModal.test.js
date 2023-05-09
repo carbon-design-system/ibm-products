@@ -11,7 +11,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { pkg, carbon } from '../../settings';
+import { pkg } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -26,43 +26,16 @@ import jsLogo from './_story-assets/js-logo.png';
 const blockClass = `${pkg.prefix}--about-modal`;
 const componentName = AboutModal.displayName;
 
-const tabLabel1 = `Version number ${uuidv4()}`;
-const tabLabel2 = `Technologies (${uuidv4()}) used`;
-const additionalInfo = [
-  { label: tabLabel1, content: '1.3.41' },
-  {
-    label: tabLabel2,
-    content: (
-      <>
-        <img
-          src={grafanaLogo}
-          alt="Grafana"
-          className="about-modal-stories--tech-logo"
-        />
-        <img
-          src={ansibleLogo}
-          alt="Ansible"
-          className="about-modal-stories--tech-logo"
-        />
-        <img
-          src={jsLogo}
-          alt="JavaScript"
-          className="about-modal-stories--tech-logo"
-        />
-      </>
-    ),
-  },
-];
 const className = `class-${uuidv4()}`;
 const closeIconDescription = `close ${uuidv4()}`;
-const content = `This is example content: ${uuidv4()}`;
+const version = `Version 0.0.${uuidv4()}`;
 const copyrightText = `Copyright test text ${uuidv4()}`;
 const dataTestId = uuidv4();
 const logoAltText = `Example product ${uuidv4()} logo`;
 const logo = (
   <img src={ExampleLogo} alt={logoAltText} style={{ maxWidth: '6rem' }} />
 );
-const legalText = `Legal test text ${uuidv4()}`;
+const content = `Legal test text ${uuidv4()}`;
 const linkText = `Carbon (${uuidv4()}) Design System`;
 const linkHref = `https://www.carbondesignsystem.com/${uuidv4()}`;
 const links = [
@@ -73,6 +46,31 @@ const links = [
     IBM Design Language
   </Link>,
 ];
+const additionalInfoLabel = `Powered by (${uuidv4()})`;
+const additionalInfo = [
+  {
+    label: additionalInfoLabel,
+    content: (
+      <>
+        <img
+          src={grafanaLogo}
+          alt="Grafana"
+          className="c4p-about-modal__stories--tech-logo"
+        />
+        <img
+          src={ansibleLogo}
+          alt="Ansible"
+          className="c4p-about-modal__stories--tech-logo"
+        />
+        <img
+          src={jsLogo}
+          alt="JavaScript"
+          className="c4p-about-modal__stories--tech-logo"
+        />
+      </>
+    ),
+  },
+];
 const onCloseReturnsTrue = jest.fn(() => true);
 const onCloseReturnsFalse = jest.fn(() => false);
 const titleText = `Watson ${uuidv4()} Ops`;
@@ -81,16 +79,21 @@ const title = (
     IBM <span>{titleText}</span>
   </>
 );
-const versionNumber = `1.3.${uuidv4()}`;
 
-// render an AboutModal with content, logo, title, and any other required props
+// render an AboutModal with version, logo, title, copyrightText and any other required props
 const renderComponent = ({ ...rest }) =>
   render(
     <main>
       <AboutModal
-        {...{ closeIconDescription, content, logo, title, ...rest }}
+        {...{
+          closeIconDescription,
+          version,
+          logo,
+          title,
+          copyrightText,
+          ...rest,
+        }}
         modalAriaLabel="About this product"
-        tabListAriaLabel="Product info"
       />
     </main>
   );
@@ -122,12 +125,17 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('renders closeIconDescription, title, logo, and content', () => {
+  it('renders closeIconDescription, title, logo, and version', () => {
     renderComponent({ open: true });
     screen.getByRole('button', { name: closeIconDescription });
     screen.getByText(titleText);
-    screen.getByText(content);
+    screen.getByText(version);
     screen.getByAltText(logoAltText);
+  });
+
+  it('renders version number', () => {
+    renderComponent({ version, open: true });
+    screen.getByText(version);
   });
 
   it('renders with links', () => {
@@ -136,9 +144,9 @@ describe(componentName, () => {
     expect(link.href).toEqual(linkHref);
   });
 
-  it('renders legal text', () => {
-    renderComponent({ legalText, open: true });
-    screen.getByText(legalText);
+  it('renders general text', () => {
+    renderComponent({ content, open: true });
+    screen.getByText(content);
   });
 
   it('renders copyright text', () => {
@@ -146,20 +154,15 @@ describe(componentName, () => {
     screen.getByText(copyrightText);
   });
 
-  it('renders a clickable carbon tab for additional info', () => {
-    renderComponent({ additionalInfo, open: true });
-    const tabToSelect = screen.getByRole('tab', { name: tabLabel2 });
-    const tabSelected = `${carbon.prefix}--tabs__nav-item--selected`;
-    expect(tabToSelect).not.toHaveClass(tabSelected);
-    userEvent.click(tabToSelect);
-    expect(tabToSelect).toHaveClass(tabSelected);
-  });
-
-  it('renders a version number', () => {
+  it('renders additional info in footer', () => {
     renderComponent({
-      additionalInfo: [{ label: tabLabel1, content: versionNumber }],
+      additionalInfo: [
+        {
+          label: additionalInfo.at(0).label,
+          content: additionalInfo.at(0).content,
+        },
+      ],
     });
-    screen.getByText(versionNumber);
   });
 
   it('is visible when open is true', () => {

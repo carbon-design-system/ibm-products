@@ -1,12 +1,12 @@
-@import "./carbon-settings";
+@import './carbon-settings';
 
 // Feature flags
 $css--font-face: true; /* true by default if importing global styles v10.41.0 */
 $css--plex: true; /* true by default if importing global styles v10.41.0 */
 
 // Global styles
-@import "@carbon/type/scss/reset";
-@import "carbon-components/scss/globals/scss/css--font-face";
+@import '@carbon/type/scss/reset';
+@import 'carbon-components/scss/globals/scss/css--font-face';
 
 $theme: $theme--g10;
 
@@ -14,10 +14,10 @@ $theme: $theme--g10;
 // @import "carbon-components/scss/globals/scss/styles";
 
 // Only required Carbon component styles
-@import "carbon-components/scss/components/form/form";
-@import "carbon-components/scss/components/dropdown/dropdown";
-@import "carbon-components/scss/components/link/link";
-@import "carbon-components/scss/components/ui-shell/ui-shell";
+@import 'carbon-components/scss/components/form/form';
+@import 'carbon-components/scss/components/dropdown/dropdown';
+@import 'carbon-components/scss/components/link/link';
+@import 'carbon-components/scss/components/ui-shell/ui-shell';
 
 // Theme selector classes for use if switching between themes
 .carbon-theme--white {

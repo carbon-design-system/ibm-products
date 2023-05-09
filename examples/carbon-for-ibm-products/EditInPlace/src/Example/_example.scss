@@ -1,8 +1,8 @@
-@use "@carbon/react/scss/type" as *;
+@use '@carbon/react/scss/type' as *;
 
 .container {
   margin: 50px auto;
   max-width: 300px;
 
-  @include type-style("productive-heading-02");
+  @include type-style('productive-heading-02');
 }

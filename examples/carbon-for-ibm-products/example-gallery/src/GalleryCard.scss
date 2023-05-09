@@ -1,9 +1,9 @@
 // imports carbon settings
-@import "./carbon-settings";
+@import './carbon-settings';
 
-@import "carbon-components/scss/components/tile/tile";
+@import 'carbon-components/scss/components/tile/tile';
 
-$baseClass: "gallery-card";
+$baseClass: 'gallery-card';
 
 .#{$baseClass}.#{$baseClass} {
   position: relative;
@@ -19,7 +19,7 @@ $baseClass: "gallery-card";
 }
 
 .#{$baseClass} .#{$baseClass}__title {
-  @include type-style("productive-heading-03");
+  @include type-style('productive-heading-03');
 
   overflow: hidden;
   flex: 1 1 20%;

@@ -1,11 +1,11 @@
-@use "@carbon/react" with (
-  $font-path: "@ibm/plex"
+@use '@carbon/react' with (
+  $font-path: '@ibm/plex'
 );
 
-$pkg-prefix: "tst";
+$pkg-prefix: 'tst';
 // Actually want to do this, but codesandbox does not load SCSS properly just yet
 // @use '@carbon/ibm-products/scss/index';
 //
 // replaced with
 //
-@use "@carbon/ibm-products/scss/components/AboutModal/index";
+@use '@carbon/ibm-products/scss/components/AboutModal/index';

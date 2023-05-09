@@ -23,13 +23,8 @@ import {
   ModalHeader,
   ModalFooter,
   ModalBody,
-  Tabs,
-  TabList,
-  TabPanels,
-  TabPanel,
-  Tab,
+  Theme,
 } from '@carbon/react';
-import { isRequiredIf } from '../../global/js/utils/props-helper';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--about-modal`;
@@ -50,16 +45,15 @@ export let AboutModal = React.forwardRef(
       additionalInfo,
       className,
       closeIconDescription,
-      content,
       copyrightText,
-      legalText,
+      content,
       links,
       logo,
       modalAriaLabel,
       onClose,
       open,
-      tabListAriaLabel,
       title,
+      version,
       // Collect any other property values passed in.
       ...rest
     },
@@ -98,11 +92,7 @@ export let AboutModal = React.forwardRef(
         }
         className={cx(
           blockClass, // Apply the block class to the main HTML element
-          className, // Apply any supplied class names to the main HTML element.
-          {
-            [`${blockClass}--with-tabs`]:
-              additionalInfo && additionalInfo.length > 1,
-          }
+          className // Apply any supplied class names to the main HTML element.
         )}
         aria-label={modalAriaLabel}
         {...{ onClose, open, ref, ...getDevtoolsProps(componentName) }}
@@ -126,51 +116,32 @@ export let AboutModal = React.forwardRef(
             ref={contentRef}
             id={contentId}
           >
-            {content}
-            <div className={`${blockClass}__links-container`}>
-              {links &&
-                links.length > 0 &&
-                links.map((link, i) => (
+            <div className={`${blockClass}__version`}>{version}</div>
+            {links && links.length > 0 && (
+              <div className={`${blockClass}__links-container`}>
+                {links.map((link, i) => (
                   <React.Fragment key={i}>{link}</React.Fragment>
                 ))}
-            </div>
-            {legalText && (
-              <p className={`${blockClass}__legal-text`}>{legalText}</p>
+              </div>
             )}
+            {content && <p className={`${blockClass}__content`}>{content}</p>}
             {copyrightText && (
               <p className={`${blockClass}__copyright-text`}>{copyrightText}</p>
             )}
           </div>
         </ModalBody>
-        <ModalFooter className={`${blockClass}__footer`}>
-          {additionalInfo &&
-            additionalInfo.length > 0 &&
-            (additionalInfo.length === 1 ? (
-              <>
-                <p className={`${blockClass}__version-label`}>
-                  {additionalInfo[0].label}
-                </p>
-                <p className={`${blockClass}__version-number`}>
-                  {additionalInfo[0].content}
-                </p>
-              </>
-            ) : (
-              <div className={`${blockClass}__tab-container`}>
-                <Tabs>
-                  <TabList aria-label={tabListAriaLabel}>
-                    {additionalInfo.map((tab, index) => (
-                      <Tab key={index}>{tab.label}</Tab>
-                    ))}
-                  </TabList>
-                  <TabPanels>
-                    {additionalInfo.map((tab, index) => (
-                      <TabPanel key={index}>{tab.content}</TabPanel>
-                    ))}
-                  </TabPanels>
-                </Tabs>
-              </div>
-            ))}
-        </ModalFooter>
+        {additionalInfo && additionalInfo.length > 0 && (
+          <Theme theme="g100">
+            <ModalFooter className={`${blockClass}__footer`}>
+              <p className={`${blockClass}__footer-label`}>
+                {additionalInfo[0].label}
+              </p>
+              <p className={`${blockClass}__footer-content`}>
+                {additionalInfo[0].content}
+              </p>
+            </ModalFooter>
+          </Theme>
+        )}
       </ComposedModal>
     );
   }
@@ -180,19 +151,15 @@ export let AboutModal = React.forwardRef(
 AboutModal = pkg.checkComponentEnabled(AboutModal, componentName);
 AboutModal.displayName = componentName;
 
-const tabListAriaLabelRequiredProps = (type) =>
-  isRequiredIf(type, ({ additionalInfo }) => additionalInfo?.length);
-
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 AboutModal.propTypes = {
   /**
-   * Additional information to be displayed in the footer. Can be used for
-   * version information and/or a set of tabs with various contents. If only
-   * one set of additional information is provided then no tabs are
-   * displayed and the label and content are just displayed one above the
-   * other in the footer.
+   * If you are legally required to display logos of technologies used
+   * to build your product you can provide this in the additionalInfo.
+   * Additional information will be displayed in the footer. The label
+   * and content are displayed one above the other in the footer (optional)
    */
   additionalInfo: PropTypes.arrayOf(
     PropTypes.shape({
@@ -212,26 +179,21 @@ AboutModal.propTypes = {
   closeIconDescription: PropTypes.string.isRequired,
 
   /**
-   * A summary that appears immediately beneath the title, and might
-   * include information such as: version name, server name,
-   * user name, user role, browser version, browser OS etc.
+   * Subhead text providing any relevant product disclaimers including
+   * legal information (optional)
    */
-  content: PropTypes.node.isRequired,
+  content: PropTypes.node,
 
   /**
-   * Trademark and copyright information. Suggested format for copyright -
-   * "Copyright © 2018 Company".
+   * Trademark and copyright information. Displays first year of
+   * product release to current year.
    */
-  copyrightText: PropTypes.node,
+  copyrightText: PropTypes.string.isRequired,
 
   /**
-   * Text providing legal information.
-   */
-  legalText: PropTypes.node,
-
-  /**
-   * An array of Carbon `Link` components that contain links to additional
-   * information.
+   * An array of Carbon `Link` component if there are additional information
+   * to call out within the card. The about modal should be used to display
+   * the product information and not where users go to find help (optional)
    */
   links: PropTypes.arrayOf(PropTypes.element),
 
@@ -257,12 +219,15 @@ AboutModal.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * Specifies the tab list aria label
-   */
-  tabListAriaLabel: tabListAriaLabelRequiredProps(PropTypes.string),
-
-  /**
-   * The title of the AboutModal is usually the product or service name.
+   * Header text that provides the product name. The IBM Services logo
+   * consists of two discrete, but required, elements: the iconic
+   * IBM 8-bar logo represented alongside the IBM Services logotype.
+   * Please follow these guidelines to ensure proper execution.
    */
   title: PropTypes.node.isRequired,
+
+  /**
+   * Text that provides information on the version number of your product.
+   */
+  version: PropTypes.string.isRequired,
 };

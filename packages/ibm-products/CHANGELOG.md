@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.29](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.28...@carbon/ibm-products@2.0.0-rc.29) (2023-05-09)
+
+
+### Bug Fixes
+
+* dataspreadsheet v11 migration fixes ([#2943](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2943)) ([75f57d5](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/75f57d50ba0f639f53466cc4b39063c9142540c8))
+* include selectorPrimaryFocus prop in tearsheet ([#2950](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2950)) ([b49a5ea](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/b49a5ead4fdfc0d8e0c7b2b119a9c2d77028e65b))
+* warnings in add and select tests ([#2908](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2908)) ([1c8b12b](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1c8b12b8c0c5a6b2180f5b9d9eb094d5d38575ee))
+
+
+### Features
+
+* **AboutModal:** update to match new guidelines v11 ([#2877](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2877)) ([e4aa7b7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/e4aa7b7cd4034d86dc53f95c555b96dd65fc7576))
+* expose scss config file ([#2955](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2955)) ([c647ec7](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/c647ec779721af577f6c8a9946618b127a5cb987))
+
+
+
+
+
 # [2.0.0-rc.28](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@2.0.0-rc.27...@carbon/ibm-products@2.0.0-rc.28) (2023-05-02)
 
 

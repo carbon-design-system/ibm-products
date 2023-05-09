@@ -25,6 +25,7 @@ const componentName = 'EmptyState';
 
 // Default values for props
 export const defaults = {
+  position: 'top',
   size: 'lg',
 };
 
@@ -37,6 +38,7 @@ export let EmptyState = React.forwardRef(
       className,
       illustration,
       illustrationDescription,
+      illustrationPosition = defaults.position,
       link,
       size = defaults.size,
       subtitle,
@@ -47,30 +49,28 @@ export let EmptyState = React.forwardRef(
     },
     ref
   ) => {
-    const renderIllustration = () => {
-      return (
-        <img
-          src={illustration}
-          alt={illustrationDescription}
-          className={cx([
-            `${blockClass}__illustration`,
-            `${blockClass}__illustration--${size}`,
-          ])}
-        />
-      );
-    };
-
     return (
       <div
         {
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(blockClass, className)}
+        className={cx(blockClass, className, {
+          [`${blockClass}-position--${illustrationPosition}`]: !!illustration,
+        })}
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        {illustration && renderIllustration()}
+        {illustration && (
+          <img
+            src={illustration}
+            alt={illustrationDescription}
+            className={cx([
+              `${blockClass}__illustration`,
+              `${blockClass}__illustration--${size}`,
+            ])}
+          />
+        )}
         <EmptyStateContent
           action={action}
           link={link}
@@ -115,6 +115,11 @@ EmptyState.propTypes = {
   illustrationDescription: PropTypes.string.isRequired.if(
     ({ illustration }) => illustration
   ),
+
+  /**
+   * Designates the position of the illustration relative to the content
+   */
+  illustrationPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 
   /**
    * Empty state link object

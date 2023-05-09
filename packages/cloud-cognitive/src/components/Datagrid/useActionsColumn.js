@@ -1,11 +1,11 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2021
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2021, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import cx from 'classnames';
 import {
   IconSkeleton,
@@ -16,6 +16,10 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const useActionsColumn = (hooks) => {
+  useEffect(() => {
+    pkg.checkReportFeatureEnabled('Datagrid.useActionsColumn');
+  }, []);
+
   const useAttachActionsOnInstance = (instance) => {
     const { rowActions, isFetching, selectedFlatRows } = instance;
 
@@ -40,7 +44,20 @@ const useActionsColumn = (hooks) => {
                       style={{ display: 'flex' }}
                     >
                       {rowActions.map((action, index) => {
-                        const { id, itemText, onClick, icon, ...rest } = action;
+                        const {
+                          id,
+                          itemText,
+                          onClick,
+                          icon,
+                          shouldHideMenuItem,
+                          ...rest
+                        } = action;
+                        const hidden =
+                          typeof shouldHideMenuItem === 'function' &&
+                          shouldHideMenuItem(row);
+                        if (hidden) {
+                          return null;
+                        }
                         const selectedRowId = selectedFlatRows?.filter((item) =>
                           item.id === row.id ? item.id : null
                         );

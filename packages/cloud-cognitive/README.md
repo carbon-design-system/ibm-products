@@ -102,7 +102,7 @@ const App = () => {
 };
 ```
 
-### Enabling Canary components
+### Enabling Canary components and flagged features
 
 Components that have not yet completed the release review process are considered
 to be canary and require the consumer to enable via a feature flag in a

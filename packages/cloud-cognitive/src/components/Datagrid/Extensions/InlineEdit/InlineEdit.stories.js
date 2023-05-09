@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,6 +30,13 @@ export default {
   parameters: {
     styles,
     docs: { page: mdx },
+  },
+  argTypes: {
+    featureFlags: {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 
@@ -83,6 +90,11 @@ const sharedDatagridProps = {
 const InlineEditUsage = ({ ...args }) => {
   const [data, setData] = useState(makeData(10));
   const columns = React.useMemo(() => getInlineEditColumns(), []);
+
+  // Warnings are ordinarily silenced in storybook, add this to test.
+  pkg._silenceWarnings(false);
+  pkg.feature['Datagrid.useInlineEdit'] = true;
+  pkg._silenceWarnings(true);
 
   const datagridState = useDatagrid(
     {
@@ -151,5 +163,6 @@ export const InlineEditUsageStory = prepareStory(InlineEditTemplateWrapper, {
   },
   args: {
     ...inlineEditUsageControlProps,
+    featureFlags: ['Datagrid.useInlineEdit'],
   },
 });

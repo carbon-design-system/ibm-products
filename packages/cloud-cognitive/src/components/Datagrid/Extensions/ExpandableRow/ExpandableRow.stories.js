@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,6 +20,7 @@ import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
+import { pkg } from '../../../../settings';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ExpandableRow`,
@@ -27,6 +28,13 @@ export default {
   parameters: {
     styles,
     docs: { page: mdx },
+  },
+  argTypes: {
+    featureFlags: {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 
@@ -198,6 +206,12 @@ const ExpandedRows = ({ ...args }) => {
   const [data] = useState(makeData(10));
   const rows = React.useMemo(() => data, [data]);
 
+  // Warnings are ordinarily silenced in storybook, add this to test.
+  pkg._silenceWarnings(false);
+  // Enable feature flag for `useExpandedRow` hook
+  pkg.feature['Datagrid.useExpandedRow'] = true;
+  pkg._silenceWarnings(true);
+
   const datagridState = useDatagrid(
     {
       columns,
@@ -236,5 +250,6 @@ export const ExpandableRowStory = prepareStory(BasicTemplateWrapper, {
   },
   args: {
     ...expandableRowControlProps,
+    featureFlags: ['Datagrid.useExpandedRow'],
   },
 });

@@ -36,7 +36,20 @@ const useActionsColumn = (hooks) => {
                       style={{ display: 'flex' }}
                     >
                       {rowActions.map((action, index) => {
-                        const { id, itemText, onClick, icon, ...rest } = action;
+                        const {
+                          id,
+                          itemText,
+                          onClick,
+                          icon,
+                          shouldHideMenuItem,
+                          ...rest
+                        } = action;
+                        const hidden =
+                          typeof shouldHideMenuItem === 'function' &&
+                          shouldHideMenuItem(row);
+                        if (hidden) {
+                          return null;
+                        }
                         const selectedRowId = selectedFlatRows?.filter((item) =>
                           item.id === row.id ? item.id : null
                         );

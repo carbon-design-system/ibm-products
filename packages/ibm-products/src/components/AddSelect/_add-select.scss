@@ -256,6 +256,10 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   }
 }
 
+.#{$block-class}-sort_overflow {
+  z-index: 9999;
+}
+
 .#{$block-class}__tags {
   display: flex;
   align-items: center;
@@ -269,7 +273,7 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
 
 .#{$block-class}__global-filter {
   position: absolute;
-  z-index: 6000;
+  z-index: 999999;
   right: 0;
   width: 100%;
   max-width: 40rem;
@@ -452,7 +456,7 @@ button.#{$block-class}__global-filter-toggle {
   margin-top: $spacing-03;
 }
 
-.#{$block-class} .#{$carbon-prefix}--tooltip,
-.#{$block-class} .#{$carbon-prefix}--overflow-menu-options {
+.#{$block-class} + div .#{$carbon-prefix}--tooltip,
+.#{$block-class} + div .#{$carbon-prefix}--overflow-menu-options {
   z-index: 9000;
 }

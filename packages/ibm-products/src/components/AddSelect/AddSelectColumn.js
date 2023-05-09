@@ -31,6 +31,7 @@ export let AddSelectColumn = ({
   path,
   setMultiSelection,
   setPath,
+  sortByLabel,
   ...props
 }) => {
   const carbonPrefix = usePrefix();
@@ -135,6 +136,7 @@ export let AddSelectColumn = ({
               sortAttribute={sortAttribute}
               sortDirection={sortDirection}
               sortBy={sortBy}
+              sortByLabel={sortByLabel}
             />
             {filterByOpts.length > 0 && (
               <OverflowMenu
@@ -142,6 +144,7 @@ export let AddSelectColumn = ({
                 className={`${colClass}-overflow`}
                 flipped
                 ariaLabel={filterByLabel}
+                iconDescription={filterByLabel}
               >
                 {filterByOpts.map((opt) => (
                   <div
@@ -201,6 +204,8 @@ export let AddSelectColumn = ({
           parentId={selectedItem.id}
           setPath={setPath}
           path={path}
+          sortByLabel={sortByLabel}
+          filterByLabel={filterByLabel}
           {...props}
         />
       )}
@@ -218,6 +223,7 @@ AddSelectColumn.propTypes = {
   path: PropTypes.array,
   setMultiSelection: PropTypes.func,
   setPath: PropTypes.func,
+  sortByLabel: PropTypes.string,
 };
 
 AddSelectColumn.displayName = componentName;

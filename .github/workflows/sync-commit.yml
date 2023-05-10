@@ -2,12 +2,12 @@ name: Sync commits across versions
 
 on:
   pull_request:
-    branches: [sync-commit] # TODO: Rename to branch `main` after token issue resolved.
+    branches: [sync-commit] # TODO: Rename to branch `main_v1` after token issue resolved.
     types: [closed]
 
 jobs:
   sync-commit:
-    if: github.event.pull_request.merged == true # Merged PRs to `main`.
+    if: github.event.pull_request.merged == true # Merged PRs to `main_v1`.
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +19,7 @@ jobs:
       # https://git-scm.com/docs/git-cherry-pick#_options
       - name: Cherry pick
 
-        # TODO: Rename to branch `main` after token issue resolved.
+        # TODO: Rename to branch `main_v1` after token issue resolved.
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com

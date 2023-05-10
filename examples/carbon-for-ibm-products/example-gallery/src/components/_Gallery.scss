@@ -1,7 +1,7 @@
-@use "@carbon/react/scss/spacing" as *;
-@use "@carbon/react/scss/theme" as *;
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
 
-$block-class: "gallery";
+$block-class: 'gallery';
 
 .#{$block-class}.#{$block-class} {
   width: 100vw;

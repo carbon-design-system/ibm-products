@@ -1,14 +1,17 @@
 {
   "name": "example-gallery",
-  "version": "0.1.0",
+  "description": "An example showing use of the EmptyStates component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "apikeymodal"
+    "EmptyStates",
+    "empty",
+    "state"
   ],
   "license": "Apache-2.0",
+<<<<<<< Updated upstream
   "main": "src/index.js",
   "dependencies": {
     "@carbon/elements": "^10",
@@ -26,11 +29,32 @@
   "resolutions": {
     "**/request/minimist": "^1.2.6"
   },
+=======
+  "type": "module",
+>>>>>>> Stashed changes
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@carbon/ibm-products": "^2.0.0-rc.28",
+    "@carbon/react": "^1.28.0",
+    "lodash": "^4.17.21",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sass": "^1.62.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^4.0.0",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "vite": "^4.3.2"
   },
   "eslintConfig": {
     "extends": [
@@ -50,7 +74,9 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "web-vitals": "^2.1.4"
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
   }
 }

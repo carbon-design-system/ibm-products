@@ -1,0 +1,27 @@
+@use "@carbon/react/scss/spacing" as *;
+@use "@carbon/react/scss/type" as *;
+
+$baseClass: "gallery-card";
+
+.#{$baseClass}.#{$baseClass} {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.#{$baseClass} .#{$baseClass}__thumbnail {
+  flex: 1 1 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.#{$baseClass} .#{$baseClass}__title {
+  @include type-style("heading-03");
+
+  overflow: hidden;
+  flex: 1 1 20%;
+  margin: $spacing-04 auto 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

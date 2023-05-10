@@ -1,0 +1,50 @@
+@use "@carbon/react/scss/spacing" as *;
+@use "@carbon/react/scss/theme" as *;
+
+$block-class: "gallery";
+
+.#{$block-class}.#{$block-class} {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: $background;
+  color: $text-primary;
+}
+
+.#{$block-class} .#{$block-class}__container {
+  display: flex;
+  width: 100%;
+  max-width: 1024px;
+  min-height: 100%;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.#{$block-class} .#{$block-class}__title {
+  margin-top: $spacing-10;
+}
+
+.#{$block-class} .#{$block-class}__filter {
+  margin-top: $spacing-07;
+}
+
+.#{$block-class} .#{$block-class}__gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: $spacing-07;
+}
+
+$item-width: 320px;
+$item-height: 240px;
+
+.#{$block-class} .#{$block-class}__gallery-item {
+  width: $item-width;
+  height: $item-height;
+  margin-bottom: $spacing-06;
+}
+
+.#{$block-class} .#{$block-class}__gallery-item--dummy {
+  width: $item-width;
+  height: 0;
+  visibility: hidden;
+}

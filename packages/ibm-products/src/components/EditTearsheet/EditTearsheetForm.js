@@ -65,20 +65,18 @@ export let EditTearsheetForm = forwardRef(
             {description && (
               <p className={`${blockClass}--description`}>{description}</p>
             )}
-            </Column>
-            <Column span={100}>
-              {hasFieldset ? (
-                <FormGroup
-                  legendText={fieldsetLegendText}
-                  className={`${blockClass}--fieldset`}
-                >
-                  <Grid>
-                    {children}
-                  </Grid>
-                </FormGroup>
-              ) : (
-                children
-              )}
+          </Column>
+          <Column span={100}>
+            {hasFieldset ? (
+              <FormGroup
+                legendText={fieldsetLegendText}
+                className={`${blockClass}--fieldset`}
+              >
+                <Grid>{children}</Grid>
+              </FormGroup>
+            ) : (
+              children
+            )}
           </Column>
         </Grid>
       </div>

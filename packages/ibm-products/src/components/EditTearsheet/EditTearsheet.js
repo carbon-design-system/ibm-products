@@ -8,12 +8,7 @@
 import React, { forwardRef, useState, useRef, createContext } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import {
-  Form,
-  SideNav,
-  SideNavItems,
-  SideNavMenuItem,
-} from '@carbon/react';
+import { Form, SideNav, SideNavItems, SideNavMenuItem } from '@carbon/react';
 import { pkg } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { TearsheetShell } from '../Tearsheet/TearsheetShell';

@@ -46,31 +46,6 @@ const links = [
     IBM Design Language
   </Link>,
 ];
-const additionalInfoLabel = `Powered by (${uuidv4()})`;
-const additionalInfo = [
-  {
-    label: additionalInfoLabel,
-    content: (
-      <>
-        <img
-          src={grafanaLogo}
-          alt="Grafana"
-          className="c4p-about-modal__stories--tech-logo"
-        />
-        <img
-          src={ansibleLogo}
-          alt="Ansible"
-          className="c4p-about-modal__stories--tech-logo"
-        />
-        <img
-          src={jsLogo}
-          alt="JavaScript"
-          className="c4p-about-modal__stories--tech-logo"
-        />
-      </>
-    ),
-  },
-];
 const onCloseReturnsTrue = jest.fn(() => true);
 const onCloseReturnsFalse = jest.fn(() => false);
 const titleText = `Watson ${uuidv4()} Ops`;
@@ -155,14 +130,30 @@ describe(componentName, () => {
   });
 
   it('renders additional info in footer', () => {
+    const id = uuidv4();
     renderComponent({
-      additionalInfo: [
-        {
-          label: additionalInfo.at(0).label,
-          content: additionalInfo.at(0).content,
-        },
-      ],
+      additionalInfo: (
+        <>
+          <p>{`Powered by (${id})`}</p>
+          <img
+            src={grafanaLogo}
+            alt="Grafana"
+            className="c4p-about-modal__stories--tech-logo"
+          />
+          <img
+            src={ansibleLogo}
+            alt="Ansible"
+            className="c4p-about-modal__stories--tech-logo"
+          />
+          <img
+            src={jsLogo}
+            alt="JavaScript"
+            className="c4p-about-modal__stories--tech-logo"
+          />
+        </>
+      ),
     });
+    screen.getByText(`Powered by (${id})`);
   });
 
   it('is visible when open is true', () => {

@@ -44,17 +44,17 @@ export const Example = () => {
               <>
                 <img
                   alt="Grafana"
-                  className="c4p-about-modal__stories--tech-logo"
+                  className="about-modal__tech-logo"
                   src={grafanaLogo}
                 />
                 <img
                   alt="Ansible"
-                  className="c4p-about-modal__stories--tech-logo"
+                  className="about-modal__tech-logo"
                   src={ansibleLogo}
                 />
                 <img
                   alt="JavaScript"
-                  className="c4p-about-modal__stories--tech-logo"
+                  className="about-modal__tech-logo"
                   src={jsLogo}
                 />
               </>

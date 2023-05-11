@@ -17,6 +17,9 @@ const useInlineEdit = (hooks, usingEditableCell) => {
     if (!usingEditableCell) {
       pkg.checkReportFeatureEnabled('Datagrid.useInlineEdit');
     }
+    if (usingEditableCell) {
+      pkg.checkReportFeatureEnabled('Datagrid.useEditableCell');
+    }
   }, [usingEditableCell]);
 
   const addInlineEdit = (props, { cell, instance }) => {

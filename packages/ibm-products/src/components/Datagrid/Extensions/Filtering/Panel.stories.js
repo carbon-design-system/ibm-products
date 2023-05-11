@@ -20,6 +20,7 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { StatusIcon } from '../../../StatusIcon';
+import { pkg } from '../../../../settings';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Filtering/Panel`,
@@ -27,6 +28,13 @@ export default {
   parameters: {
     styles,
     docs: { page: mdx },
+  },
+  argTypes: {
+    featureFlags: {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 
@@ -171,6 +179,12 @@ const FilteringUsage = ({ defaultGridProps }) => {
     },
     useFiltering
   );
+
+  // Warnings are ordinarily silenced in storybook, add this to test
+  pkg._silenceWarnings(false);
+  // Enable feature flag for `useFiltering` hook
+  pkg.feature['Datagrid.useFiltering'] = true;
+  pkg._silenceWarnings(true);
 
   return <Datagrid datagridState={datagridState} />;
 };
@@ -349,6 +363,7 @@ export const PanelInstant = prepareStory(FilteringTemplateWrapper, {
     filterProps: ARG_TYPES.filterProps,
   },
   args: {
+    featureFlags: ['Datagrid.useFiltering'],
     gridTitle: 'Data table title',
     gridDescription: 'Additional information if needed',
     useDenseHeader: false,
@@ -510,6 +525,7 @@ export const PanelWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
     filterProps: ARG_TYPES.filterProps,
   },
   args: {
+    featureFlags: ['Datagrid.useFiltering'],
     initialState: {
       filters: [
         {
@@ -704,6 +720,7 @@ export const PanelOnlyAccordions = prepareStory(FilteringTemplateWrapper, {
     filterProps: ARG_TYPES.filterProps,
   },
   args: {
+    featureFlags: ['Datagrid.useFiltering'],
     gridTitle: 'Data table title',
     gridDescription: 'Additional information if needed',
     useDenseHeader: false,
@@ -866,6 +883,7 @@ export const PanelNoAccordions = prepareStory(FilteringTemplateWrapper, {
     filterProps: ARG_TYPES.filterProps,
   },
   args: {
+    featureFlags: ['Datagrid.useFiltering'],
     gridTitle: 'Data table title',
     gridDescription: 'Additional information if needed',
     useDenseHeader: false,
@@ -1028,6 +1046,7 @@ export const PanelNoData = prepareStory(FilteringTemplateWrapper, {
     filterProps: ARG_TYPES.filterProps,
   },
   args: {
+    featureFlags: ['Datagrid.useFiltering'],
     data: [],
     gridTitle: 'Data table title',
     gridDescription: 'Additional information if needed',

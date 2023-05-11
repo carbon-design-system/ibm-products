@@ -35,6 +35,13 @@ export default {
   parameters: {
     styles,
     docs: { page: mdx },
+    argTypes: {
+      featureFlags: {
+        table: {
+          disable: true,
+        },
+      },
+    },
   },
 };
 
@@ -99,8 +106,13 @@ const InlineEditUsage = ({ ...args }) => {
       onDataUpdate: setData,
       ...args.defaultGridProps,
     },
-    useInlineEdit
+    useEditableCell
   );
+
+  // Warnings are ordinarily silenced in storybook, add this to test.
+  pkg._silenceWarnings(false);
+  pkg.feature['Datagrid.useEditableCell'] = true;
+  pkg._silenceWarnings(true);
 
   return (
     <div>
@@ -131,8 +143,13 @@ const EditableCellUsage = ({ ...args }) => {
       onDataUpdate: setData,
       ...args.defaultGridProps,
     },
-    useEditableCell
+    useInlineEdit
   );
+
+  // Warnings are ordinarily silenced in storybook, add this to test.
+  pkg._silenceWarnings(false);
+  pkg.feature['Datagrid.useInlineEdit'] = true;
+  pkg._silenceWarnings(true);
 
   return (
     <div>
@@ -169,6 +186,7 @@ export const EditableCellUsageStory = prepareStory(
     },
     args: {
       ...inlineEditUsageControlProps,
+      featureFlags: ['Datagrid.useEditableCell'],
     },
   }
 );

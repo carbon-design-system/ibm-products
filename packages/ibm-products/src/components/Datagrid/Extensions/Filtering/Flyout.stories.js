@@ -20,6 +20,7 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { StatusIcon } from '../../../StatusIcon';
+import { pkg } from '../../../../settings';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Filtering/Flyout`,
@@ -27,6 +28,13 @@ export default {
   parameters: {
     styles,
     docs: { page: mdx },
+  },
+  argTypes: {
+    featureFlags: {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 
@@ -171,6 +179,12 @@ const FilteringUsage = ({ defaultGridProps }) => {
     useFiltering
   );
 
+  // Warnings are ordinarily silenced in storybook, add this to test
+  pkg._silenceWarnings(false);
+  // Enable feature flag for `useFiltering` hook
+  pkg.feature['Datagrid.useFiltering'] = true;
+  pkg._silenceWarnings(true);
+
   return <Datagrid datagridState={datagridState} />;
 };
 
@@ -310,6 +324,7 @@ export const FlyoutBatch = prepareStory(FilteringTemplateWrapper, {
       onFlyoutClose: action('onFlyoutClose'),
       filters,
     },
+    featureFlags: ['Datagrid.useFiltering'],
   },
 });
 
@@ -338,6 +353,7 @@ export const FlyoutInstant = prepareStory(FilteringTemplateWrapper, {
       onFlyoutClose: action('onFlyoutClose'),
       filters,
     },
+    featureFlags: ['Datagrid.useFiltering'],
   },
 });
 
@@ -375,5 +391,6 @@ export const FlyoutWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
       onFlyoutClose: action('onFlyoutClose'),
       filters,
     },
+    featureFlags: ['Datagrid.useFiltering'],
   },
 });

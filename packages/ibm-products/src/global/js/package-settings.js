@@ -77,6 +77,12 @@ const defaults = {
     'default-portal-target-body': true,
     'Datagrid.useInfiniteScroll': false,
     'Datagrid.useInlineEdit': false,
+    'Datagrid.useEditableCell': false,
+    'Datagrid.useExpandedRow': false,
+    'Datagrid.useNestedRows': false,
+    'Datagrid.useActionsColumn': false,
+    'Datagrid.useFiltering': false,
+    'Datagrid.useCustomizeColumns': false,
   },
 };
 
@@ -120,6 +126,11 @@ const feature = new Proxy(
   { ...defaults.feature },
   {
     set(target, property, value) {
+      // If we receive a feature flag that doesn't exist in our defaults we should not log
+      // a warning message and instead just return
+      if (!Object.getOwnPropertyDescriptor(defaults.feature, property)) {
+        return true;
+      }
       if (target[property] !== true && !silent && value) {
         // not already true, not silent, and now true
         console.warn(warningMessageFeature(property));

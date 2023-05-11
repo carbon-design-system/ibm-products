@@ -130,15 +130,10 @@ export let AboutModal = React.forwardRef(
             )}
           </div>
         </ModalBody>
-        {additionalInfo && additionalInfo.length > 0 && (
+        {additionalInfo && (
           <Theme theme="g100">
             <ModalFooter className={`${blockClass}__footer`}>
-              <p className={`${blockClass}__footer-label`}>
-                {additionalInfo[0].label}
-              </p>
-              <p className={`${blockClass}__footer-content`}>
-                {additionalInfo[0].content}
-              </p>
+              {additionalInfo}
             </ModalFooter>
           </Theme>
         )}
@@ -158,15 +153,9 @@ AboutModal.propTypes = {
   /**
    * If you are legally required to display logos of technologies used
    * to build your product you can provide this in the additionalInfo.
-   * Additional information will be displayed in the footer. The label
-   * and content are displayed one above the other in the footer (optional)
+   * Additional information will be displayed in the footer.
    */
-  additionalInfo: PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string,
-      content: PropTypes.node,
-    })
-  ),
+  additionalInfo: PropTypes.node,
 
   /**
    * Provide an optional class to be applied to the modal root node.

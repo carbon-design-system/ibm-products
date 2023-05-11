@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.53.1](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.53.0...@carbon/ibm-products@1.53.1) (2023-05-11)
+
+
+### Bug Fixes
+
+* add missing dependency ([#2954](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2954)) ([1375c1a](https://github.com/carbon-design-system/ibm-cloud-cognitive/commit/1375c1a0e5fc176332ba64875f5e475cf819493c))
+
+
+
+
+
 # [1.53.0](https://github.com/carbon-design-system/ibm-cloud-cognitive/compare/@carbon/ibm-products@1.52.0...@carbon/ibm-products@1.53.0) (2023-05-09)
 
 

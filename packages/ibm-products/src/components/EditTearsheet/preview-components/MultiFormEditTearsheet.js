@@ -166,7 +166,7 @@ export const MultiFormEditTearsheet = ({
           messages across the members of a consumer group."
           fieldsetLegendText="Partition information"
         >
-          <Column xlg={3} lg={3}>
+          <Column xlg={3} lg={3} md={8} sm={4}>
             <NumberInput
               id="carbon-number"
               min={1}

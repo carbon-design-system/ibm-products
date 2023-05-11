@@ -9,12 +9,10 @@ import React, { forwardRef, useState, useRef, createContext } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
-  Grid,
   Form,
   SideNav,
   SideNavItems,
   SideNavMenuItem,
-  Column,
 } from '@carbon/react';
 import { pkg } from '../../settings';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -130,23 +128,19 @@ export let EditTearsheet = forwardRef(
         ref={ref}
       >
         <div className={`${blockClass}__content`} ref={contentRef} role="main">
-          <Grid>
-            <Column xlg={12} lg={12} md={8} sm={4}>
-              <Form>
-                <FormContext.Provider
-                  value={{
-                    currentForm,
-                  }}
-                >
-                  {React.Children.map(children, (child, index) => (
-                    <FormNumberContext.Provider value={index}>
-                      {child}
-                    </FormNumberContext.Provider>
-                  ))}
-                </FormContext.Provider>
-              </Form>
-            </Column>
-          </Grid>
+          <Form>
+            <FormContext.Provider
+              value={{
+                currentForm,
+              }}
+            >
+              {React.Children.map(children, (child, index) => (
+                <FormNumberContext.Provider value={index}>
+                  {child}
+                </FormNumberContext.Provider>
+              ))}
+            </FormContext.Provider>
+          </Form>
         </div>
       </TearsheetShell>
     );

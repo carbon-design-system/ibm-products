@@ -80,7 +80,7 @@ const getExampleDirectoriesConfig = (
       // config url or default
       const url =
         config?.url ??
-        `https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/${dir}`;
+        `https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main_v1/examples/carbon-for-ibm-products/${dir}`;
 
       const output = { label, url };
 

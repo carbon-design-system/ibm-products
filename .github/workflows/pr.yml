@@ -8,7 +8,7 @@ on:
       - synchronize
 
 jobs:
-  main:
+  main_v1:
     name: validate title
     runs-on: ubuntu-latest
     steps:

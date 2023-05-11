@@ -56,8 +56,8 @@ export let EditTearsheetForm = forwardRef(
         })}
         ref={ref}
       >
-        <Grid narrow>
-          <Column xlg={12} lg={12} md={8} sm={8}>
+        <Grid>
+          <Column xlg={12} lg={12} md={8} sm={4}>
             <h4 className={`${blockClass}--title`}>{title}</h4>
             {subtitle && (
               <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
@@ -66,17 +66,19 @@ export let EditTearsheetForm = forwardRef(
               <p className={`${blockClass}--description`}>{description}</p>
             )}
           </Column>
+          <Column span={100}>
+            {hasFieldset ? (
+              <FormGroup
+                legendText={fieldsetLegendText}
+                className={`${blockClass}--fieldset`}
+              >
+                <Grid>{children}</Grid>
+              </FormGroup>
+            ) : (
+              children
+            )}
+          </Column>
         </Grid>
-        {hasFieldset ? (
-          <FormGroup
-            legendText={fieldsetLegendText}
-            className={`${blockClass}--fieldset`}
-          >
-            {children}
-          </FormGroup>
-        ) : (
-          children
-        )}
       </div>
     ) : (
       pconsole.warn(

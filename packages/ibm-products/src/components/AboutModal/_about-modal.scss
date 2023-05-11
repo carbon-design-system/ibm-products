@@ -88,23 +88,8 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .#{$block-class} .#{$block-class}__footer {
-  position: relative;
-  height: calc(
-    #{$spacing-05} + #{$spacing-02} + #{$spacing-06} + #{$spacing-07}
-  );
-  flex-direction: column;
-  justify-content: center;
+  display: block;
+  height: auto;
+  padding: $spacing-05;
   background-color: $layer-02;
-}
-
-.#{$block-class} .#{$block-class}__footer-label {
-  @include type.type-style('label-01');
-
-  padding: $spacing-05 0 0 $spacing-05;
-  margin-bottom: $spacing-02;
-  color: $text-secondary;
-}
-
-.#{$block-class} .#{$block-class}__footer-content {
-  padding: 0 0 $spacing-05 $spacing-05;
 }

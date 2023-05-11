@@ -4,12 +4,12 @@ on:
   pull_request:
     branches:
       - main
-      - carbon-v11
+      - main_v1
 
   push:
     branches:
       - main
-      - carbon-v11
+      - main_v1
 
   schedule:
     - cron: '0 0 * * 0'

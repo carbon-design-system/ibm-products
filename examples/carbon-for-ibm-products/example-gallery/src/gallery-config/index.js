@@ -22,14 +22,6 @@ const config = [
       'url( ' + defaultOrNot(require('./AboutModal--thumbnail.png')) + ')',
   },
   {
-    label: 'Carbon v11 template',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/Carbon-v11-template',
-    thumbnail:
-      'url( ' +
-      defaultOrNot(require('./Carbon-v11-template--thumbnail.png')) +
-      ')',
-  },
-  {
     label: 'Cascade',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/Cascade',
     thumbnail:
@@ -68,16 +60,21 @@ const config = [
       ')',
   },
   {
+    label: 'Datagrid',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/DataGrid',
+    thumbnail:
+      'url( ' + defaultOrNot(require('./DataGrid--thumbnail.png')) + ')',
+  },
+  {
     label: 'DataSpreadsheet',
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/DataSpreadsheet',
     thumbnail:
       'url( ' + defaultOrNot(require('./DataSpreadsheet--thumbnail.png')) + ')',
   },
   {
-    label: 'Datagrid',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/Datagrid',
-    thumbnail:
-      'url( ' + defaultOrNot(require('./Datagrid--thumbnail.png')) + ')',
+    label: 'EditInPlace',
+    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/EditInPlace',
+    thumbnail: 'url( ' + defaultOrNot(require('undefined')) + ')',
   },
   {
     label: 'Empty State',
@@ -182,22 +179,6 @@ const config = [
     url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/WebTerminal',
     thumbnail:
       'url( ' + defaultOrNot(require('./WebTerminal--thumbnail.png')) + ')',
-  },
-  {
-    label: 'React 16 usage',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/ccs-base-react-16',
-    thumbnail:
-      'url( ' +
-      defaultOrNot(require('./ccs-base-react-16--thumbnail.png')) +
-      ')',
-  },
-  {
-    label: 'React 17 usage',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/ccs-base-react-17',
-    thumbnail:
-      'url( ' +
-      defaultOrNot(require('./ccs-base-react-17--thumbnail.png')) +
-      ')',
   },
   {
     label: 'Prefix CSS/JS Example',

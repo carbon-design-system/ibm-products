@@ -1,9 +1,5 @@
-@import '../../carbon-settings';
-
-@import 'carbon-components/scss/globals/scss/feature-flags';
-@import 'carbon-components/scss/globals/scss/functions';
-@import 'carbon-components/scss/globals/scss/mixins';
-@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/grid/mixins';
+@use '@carbon/react/scss/spacing' as *;
+@use '@carbon/react/scss/theme' as *;
 
 .sample-page__dummy-content {
   margin-top: $spacing-05;
@@ -12,7 +8,7 @@
 .sample-page__dummy-content-block {
   height: 120vh;
   background-clip: content-box;
-  background-color: $ui-01;
+  background-color: $layer-01;
 }
 
 .sample-page__dummy-content-text {
@@ -20,6 +16,6 @@
 }
 
 .sample-page__status-icon {
-  fill: $support-02;
+  fill: $support-success;
   vertical-align: middle;
 }

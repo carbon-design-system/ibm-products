@@ -3,7 +3,7 @@ import cx from 'classnames';
 
 import './GalleryCard.scss';
 
-import { ClickableTile } from 'carbon-components-react';
+import { ClickableTile } from '@carbon/react';
 
 const baseClass = 'gallery-card';
 

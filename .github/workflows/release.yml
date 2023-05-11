@@ -42,7 +42,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
         run:
           yarn lerna publish --dist-tag v1-latest --no-verify-access
-          --create-release github
+          --create-release --yes github
 
       - name: Rename to ibm-cloud-cognitive for legacy publish
         run:

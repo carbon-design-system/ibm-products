@@ -19,7 +19,7 @@ $baseClass: 'gallery-card';
 }
 
 .#{$baseClass} .#{$baseClass}__title {
-  @include carbon--type-style('productive-heading-03');
+  @include type-style('productive-heading-03');
 
   overflow: hidden;
   flex: 1 1 20%;

@@ -44,40 +44,13 @@ export default {
         type: 'select',
         labels: {
           0: 'no additional info',
-          1: '1 powered by logo',
-          2: '2 powered by logos',
-          3: '3 powered by logos',
+          1: 'powered by logos',
         },
       },
-      options: [0, 1, 2, 3],
+      options: [0, 1],
       mapping: {
         0: null,
         1: (
-          <>
-            <p className={`${blockClass}__footer-label`}>Powered by</p>
-            <img
-              src={grafanaLogo}
-              alt="Grafana"
-              className={`${blockClass}__stories--tech-logo`}
-            />
-          </>
-        ),
-        2: (
-          <>
-            <p className={`${blockClass}__footer-label`}>Powered by</p>
-            <img
-              src={grafanaLogo}
-              alt="Grafana"
-              className={`${blockClass}__stories--tech-logo`}
-            />
-            <img
-              src={ansibleLogo}
-              alt="Ansible"
-              className={`${blockClass}__stories--tech-logo`}
-            />
-          </>
-        ),
-        3: (
           <>
             <p className={`${blockClass}__footer-label`}>Powered by</p>
             <img
@@ -236,7 +209,7 @@ export const fullyLoaded = prepareStory(
     args: {
       links: 3,
       content: 2,
-      additionalInfo: 3,
+      additionalInfo: 1,
       ...commonArgs,
     },
   }

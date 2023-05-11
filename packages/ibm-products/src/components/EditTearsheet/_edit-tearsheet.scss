@@ -70,15 +70,17 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__form--fi
 
 .#{$block-class} .#{$block-class}__content {
   height: 100%;
-  padding: $spacing-06;
+  padding-top: $spacing-06;
+  padding-bottom: $spacing-06;
   overflow-x: hidden;
 }
 
 .#{$block-class}
   .#{$block-class}__content
-  .#{c4p-settings.$carbon-prefix}--grid {
-  padding: 0;
-  margin: 0;
+  .#{c4p-settings.$carbon-prefix}--css-grid {
+  padding-right: $spacing-03;
+  padding-left: $spacing-03;
+  margin-left: 0;
 }
 
 .#{$block-class} .#{$block-class}__form--heading {

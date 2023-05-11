@@ -58,8 +58,8 @@
 
       width: $status-icon__icon--color__sizing__dimensions;
       height: $status-icon__icon--color__sizing__dimensions;
-      background-color: $icon-02;
       border-radius: 50%;
+      background-color: $icon-02;
 
       @each $status-icon__icon__type,
         $status-icon__icon__color in $status-icon__icon__types

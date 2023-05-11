@@ -44,8 +44,8 @@ $tooltip__arrow__sizing__border: carbon--mini-units(
   display: flex;
   align-items: center;
   padding: $carbon--spacing-01 $carbon--spacing-05;
-  background-color: $tooltip__color__background;
   border-radius: carbon--mini-units($count: 0.25);
+  background-color: $tooltip__color__background;
   color: $inverse-01;
   opacity: 0;
   pointer-events: none;

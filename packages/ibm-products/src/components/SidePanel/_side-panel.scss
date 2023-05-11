@@ -443,11 +443,8 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
   // Need to disable stylelint until dart sass namespace support is added
   /* stylelint-disable-next-line function-no-unknown */
   z-index: utilities.z('overlay');
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background-color: $overlay;
+  inset: 0;
 }

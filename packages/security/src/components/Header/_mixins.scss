@@ -180,8 +180,8 @@ $header__transition__timing-function: $timing-function;
       display: inline-block;
       width: $header__button__marker__sizing__dimensions;
       height: $header__button__marker__sizing__dimensions;
-      background-color: $support-01;
       border-radius: 50%;
+      background-color: $support-01;
       content: '';
     }
   }

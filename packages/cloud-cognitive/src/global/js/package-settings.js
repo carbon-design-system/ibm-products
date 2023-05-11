@@ -74,6 +74,8 @@ const defaults = {
 
     // Novice to pro components not yet reviewed and released:
     NonLinearReading: false,
+    Guidebanner: false,
+    Carousel: false,
     /* new component flags here - comment used by generate CLI */
   },
 

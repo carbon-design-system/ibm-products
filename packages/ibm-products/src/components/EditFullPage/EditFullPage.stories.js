@@ -173,44 +173,48 @@ const Template = ({ ...args }) => {
         >
           <Grid>
             <Column xlg={5} lg={5} md={4} sm={4}>
-              <TextInput
-                id="test-2"
-                invalidText="A valid value is required"
-                labelText="Topic name (optional)"
-                placeholder="Enter topic name"
-                value={textInput}
-              />
-            </Column>
-            <Column xlg={5} lg={5} md={4} sm={4}>
-              <NumberInput
-                id="test-3"
-                invalidText="Number is not valid"
-                label="Label (optional)"
-                max={100}
-                min={0}
-                step={10}
-                value={0}
-                iconDescription="Number input"
-              />
-              <NumberInput
-                id="test-4"
-                invalidText="Number is not valid"
-                label="Label (optional)"
-                max={100}
-                min={0}
-                step={10}
-                value={0}
-                iconDescription="Number input"
-              />
-            </Column>
-            <Column xlg={5} lg={5} md={4} sm={4}>
-              <TextInput
-                id="test-5"
-                invalidText="A valid value is required"
-                labelText="Minimum in-sync replicas (optional)"
-                placeholder="Enter topic name"
-                value={textInput}
-              />
+              <Grid>
+                <Column xlg={5} lg={5} md={4} sm={4}>
+                  <TextInput
+                    id="test-2"
+                    invalidText="A valid value is required"
+                    labelText="Topic name (optional)"
+                    placeholder="Enter topic name"
+                    value={textInput}
+                  />
+                </Column>
+                <Column xlg={5} lg={5} md={4} sm={4}>
+                  <NumberInput
+                    id="test-3"
+                    invalidText="Number is not valid"
+                    label="Label (optional)"
+                    max={100}
+                    min={0}
+                    step={10}
+                    value={0}
+                    iconDescription="Number input"
+                  />
+                  <NumberInput
+                    id="test-4"
+                    invalidText="Number is not valid"
+                    label="Label (optional)"
+                    max={100}
+                    min={0}
+                    step={10}
+                    value={0}
+                    iconDescription="Number input"
+                  />
+                </Column>
+                <Column xlg={5} lg={5} md={4} sm={4}>
+                  <TextInput
+                    id="test-5"
+                    invalidText="A valid value is required"
+                    labelText="Minimum in-sync replicas (optional)"
+                    placeholder="Enter topic name"
+                    value={textInput}
+                  />
+                </Column>
+              </Grid>
             </Column>
           </Grid>
         </CreateFullPageStep>

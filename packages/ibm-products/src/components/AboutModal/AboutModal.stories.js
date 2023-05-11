@@ -22,7 +22,9 @@ import { Button, Link } from '@carbon/react';
 import mdx from './AboutModal.mdx';
 
 import ExampleLogo from './_story-assets/example-logo.svg';
+import ansibleLogo from './_story-assets/ansible-logo.png';
 import grafanaLogo from './_story-assets/grafana-logo.png';
+import jsLogo from './_story-assets/js-logo.png';
 
 import styles from './_storybook-styles.scss';
 
@@ -37,6 +39,66 @@ export default {
     controls: { sort: 'requiredFirst' },
   },
   argTypes: {
+    additionalInfo: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'no additional info',
+          1: '1 powered by logo',
+          2: '2 powered by logos',
+          3: '3 powered by logos',
+        },
+      },
+      options: [0, 1, 2, 3],
+      mapping: {
+        0: null,
+        1: (
+          <>
+            <p className={`${blockClass}__footer-label`}>Powered by</p>
+            <img
+              src={grafanaLogo}
+              alt="Grafana"
+              className={`${blockClass}__stories--tech-logo`}
+            />
+          </>
+        ),
+        2: (
+          <>
+            <p className={`${blockClass}__footer-label`}>Powered by</p>
+            <img
+              src={grafanaLogo}
+              alt="Grafana"
+              className={`${blockClass}__stories--tech-logo`}
+            />
+            <img
+              src={ansibleLogo}
+              alt="Ansible"
+              className={`${blockClass}__stories--tech-logo`}
+            />
+          </>
+        ),
+        3: (
+          <>
+            <p className={`${blockClass}__footer-label`}>Powered by</p>
+            <img
+              src={grafanaLogo}
+              alt="Grafana"
+              className={`${blockClass}__stories--tech-logo`}
+            />
+            <img
+              src={ansibleLogo}
+              alt="Ansible"
+              className={`${blockClass}__stories--tech-logo`}
+            />
+            <img
+              src={jsLogo}
+              alt="JavaScript"
+              className={`${blockClass}__stories--tech-logo`}
+            />
+          </>
+        ),
+      },
+    },
     links: {
       control: {
         type: 'select',
@@ -160,16 +222,7 @@ export const aboutModal = prepareStory(
   {
     storyName: aboutModalStoryName,
     args: {
-      additionalInfo: (
-        <div>
-          <p className={`${blockClass}__footer-label`}>Powered by</p>
-          <img
-            src={grafanaLogo}
-            alt="Grafana"
-            className={`${blockClass}__stories--tech-logo`}
-          />
-        </div>
-      ),
+      additionalInfo: 0,
       ...commonArgs,
     },
   }

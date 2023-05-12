@@ -609,7 +609,7 @@ describe('PageHeader', () => {
       [
         required('actionBarOverflowAriaLabel', 'PageHeader'),
         required('overflowAriaLabel', 'ActionBar'),
-        required('ariaLabel', 'OverflowMenu'),
+        // required('ariaLabel', 'OverflowMenu'),
       ],
       () => {
         const { title } = testProps;

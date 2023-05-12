@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - main
-      - carbon-v11
+      - main_v1
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -52,7 +52,7 @@ jobs:
         run: yarn ci-check:lint
 
   test-cdai:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main_v1'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -93,7 +93,7 @@ jobs:
         run: yarn ci-check:test:c4p
 
   test-security:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main_v1'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

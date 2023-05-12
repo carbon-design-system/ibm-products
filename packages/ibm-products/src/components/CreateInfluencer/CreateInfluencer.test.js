@@ -11,7 +11,8 @@ import { CreateInfluencer } from '.';
 import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--create-influencer`;
 
-const renderComponent = ({ ...rest }) => render(<CreateInfluencer {...rest} />);
+const renderComponent = ({ ...rest } = {}) =>
+  render(<CreateInfluencer {...rest} />);
 describe(CreateInfluencer.displayName, () => {
   beforeEach(() => {
     jest.useFakeTimers();

@@ -57,7 +57,7 @@ const title = (
 );
 
 // render an AboutModal with version, logo, title, copyrightText and any other required props
-const renderComponent = ({ ...rest }) =>
+const renderComponent = ({ ...rest } = {}) =>
   render(
     <main>
       <AboutModal

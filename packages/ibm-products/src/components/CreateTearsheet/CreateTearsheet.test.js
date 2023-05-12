@@ -106,14 +106,14 @@ const renderCreateTearsheet = ({
     </CreateTearsheet>
   );
 
-const renderEmptyCreateTearsheet = ({ ...rest }) =>
+const renderEmptyCreateTearsheet = ({ ...rest } = {}) =>
   render(
     <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
       <p>Child element that persists across all steps</p>
     </CreateTearsheet>
   );
 
-const renderSingleStepCreateTearsheet = ({ ...rest }) =>
+const renderSingleStepCreateTearsheet = ({ ...rest } = {}) =>
   render(
     <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
       <CreateTearsheetStep title={step1Title} fieldsetLegendText={step1Title}>
@@ -122,7 +122,7 @@ const renderSingleStepCreateTearsheet = ({ ...rest }) =>
     </CreateTearsheet>
   );
 
-const renderInvalidCreateTearsheet = ({ ...rest }) =>
+const renderInvalidCreateTearsheet = ({ ...rest } = {}) =>
   render(
     <>
       <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>

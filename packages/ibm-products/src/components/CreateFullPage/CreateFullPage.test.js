@@ -74,7 +74,7 @@ const stepFormField = (
   />
 );
 
-const renderComponent = ({ ...rest }) =>
+const renderComponent = ({ ...rest } = {}) =>
   render(
     <CreateFullPage
       {...rest}
@@ -131,7 +131,7 @@ const renderCreateFullPage = ({
     </CreateFullPage>
   );
 
-const renderEmptyCreateFullPage = ({ ...rest }) =>
+const renderEmptyCreateFullPage = ({ ...rest } = {}) =>
   render(
     <CreateFullPage
       {...rest}
@@ -142,7 +142,7 @@ const renderEmptyCreateFullPage = ({ ...rest }) =>
     </CreateFullPage>
   );
 
-const renderOneStepCreateFullPage = ({ ...rest }) =>
+const renderOneStepCreateFullPage = ({ ...rest } = {}) =>
   render(
     <CreateFullPage
       {...rest}
@@ -153,7 +153,7 @@ const renderOneStepCreateFullPage = ({ ...rest }) =>
     </CreateFullPage>
   );
 
-const renderFullPageWithStepChildrenOutside = ({ ...rest }) =>
+const renderFullPageWithStepChildrenOutside = ({ ...rest } = {}) =>
   render(
     <>
       <CreateFullPage

@@ -102,7 +102,6 @@ describe(ActionBar.displayName, () => {
 
   afterEach(() => {
     mockElement.mockRestore();
-    jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
   });
 

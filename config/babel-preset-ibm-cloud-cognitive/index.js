@@ -31,5 +31,7 @@ module.exports = () => ({
         regenerator: true,
       },
     ],
+    '@babel/plugin-proposal-private-methods',
+    '@babel/plugin-proposal-private-property-in-object',
   ],
 });

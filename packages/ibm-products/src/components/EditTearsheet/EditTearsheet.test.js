@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -46,7 +46,7 @@ const defaultProps = {
   ref,
 };
 
-const renderEditTearsheet = ({ ...rest }) =>
+const renderEditTearsheet = ({ ...rest } = {}) =>
   render(
     <EditTearsheet {...rest}>
       <EditTearsheetForm
@@ -73,7 +73,7 @@ const renderEditTearsheet = ({ ...rest }) =>
     </EditTearsheet>
   );
 
-const renderEmptyEditTearsheet = ({ ...rest }) =>
+const renderEmptyEditTearsheet = ({ ...rest } = {}) =>
   render(
     <EditTearsheet {...rest}>
       <p>Child element that persists across all forms</p>
@@ -118,7 +118,6 @@ describe(componentName, () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
     jest.useRealTimers();
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;

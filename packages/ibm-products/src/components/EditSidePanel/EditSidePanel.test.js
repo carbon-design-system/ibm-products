@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,7 +31,7 @@ const secondaryButtonText = 'Cancel';
 const onRequestSubmitFn = jest.fn();
 const onRequestCloseFn = jest.fn();
 
-const renderEditPanel = ({ ...rest }, children = childrenContent) =>
+const renderEditPanel = ({ ...rest } = {}, children = childrenContent) =>
   render(
     <EditSidePanel
       open
@@ -64,7 +64,6 @@ describe(componentName, () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
   });
 

@@ -42,7 +42,7 @@ const iconTypes = [
 
 const iconThemes = ['light', 'dark'];
 
-const renderComponent = ({ ...rest }) =>
+const renderComponent = ({ ...rest } = {}) =>
   render(
     <StatusIcon
       {...rest}

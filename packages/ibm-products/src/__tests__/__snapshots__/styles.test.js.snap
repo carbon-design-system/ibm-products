@@ -1697,7 +1697,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 @media (prefers-reduced-motion: no-preference) {
   .c4p--cascade__element,
-.c4p--cascade__col {
+  .c4p--cascade__col {
     /* stylelint-disable-next-line carbon/motion-duration-use, carbon/motion-easing-use -- Carbon animation duration defined above in $animationProps */
     animation: 240ms cubic-bezier(0.2, 0, 0.38, 0.9) 0s 1 fade;
     animation-fill-mode: forwards;
@@ -1873,9 +1873,9 @@ p.c4p--about-modal__copyright-text:first-child {
 
 @media (prefers-reduced-motion) {
   .c4p--create-influencer__side-nav-opening,
-.c4p--create-influencer__progress-indicator-opening,
-.c4p--create-influencer__side-nav-closing,
-.c4p--create-influencer__progress-indicator-closing {
+  .c4p--create-influencer__progress-indicator-opening,
+  .c4p--create-influencer__side-nav-closing,
+  .c4p--create-influencer__progress-indicator-closing {
     animation: none;
     opacity: 1;
   }
@@ -2524,13 +2524,10 @@ p.c4p--about-modal__copyright-text:first-child {
   position: fixed;
   /* stylelint-disable-next-line function-no-unknown */
   z-index: 6000;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background-color: var(--cds-overlay, rgba(22, 22, 22, 0.5));
+  inset: 0;
 }
 
 .c4p--create-side-panel.c4p--side-panel__container .c4p--create-side-panel__content-text {
@@ -4306,7 +4303,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-layer-accent-active: var(--cds-layer-accent-active-01, #a8a8a8);
   --cds-field: var(--cds-field-01, #f4f4f4);
   --cds-field-hover: var(--cds-field-hover-01, #e8e8e8);
-  --cds-border-subtle: var(--cds-border-subtle-01, #c6c6c6);
+  --cds-border-subtle: var(--cds-border-subtle-00, #e0e0e0);
   --cds-border-subtle-selected: var(--cds-border-subtle-selected-01, #c6c6c6);
   --cds-border-strong: var(--cds-border-strong-01, #8d8d8d);
   --cds-border-tile: var(--cds-border-tile-01, #c6c6c6);
@@ -4467,7 +4464,7 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion: reduce) {
   .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-more-button .cds--btn__icon,
-.c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button .cds--btn__icon {
+  .c4p--notifications-panel__container .c4p--notifications-panel__notification .c4p--notifications-panel__notification-content .c4p--notifications-panel__notification-read-less-button .cds--btn__icon {
     transition: none;
   }
 }
@@ -4916,13 +4913,13 @@ button.c4p--add-select__global-filter-toggle--open {
 
 @media (min-width: 42rem) {
   .cds--col,
-.cds--col-md {
+  .cds--col-md {
     max-width: 100%;
     flex-basis: 0;
     flex-grow: 1;
   }
   .cds--col--auto,
-.cds--col-md--auto {
+  .cds--col-md--auto {
     width: auto;
     max-width: 100%;
     flex: 1 0 0%;
@@ -5254,13 +5251,13 @@ button.c4p--add-select__global-filter-toggle--open {
 
 @media (min-width: 66rem) {
   .cds--col,
-.cds--col-lg {
+  .cds--col-lg {
     max-width: 100%;
     flex-basis: 0;
     flex-grow: 1;
   }
   .cds--col--auto,
-.cds--col-lg--auto {
+  .cds--col-lg--auto {
     width: auto;
     max-width: 100%;
     flex: 1 0 0%;
@@ -5656,13 +5653,13 @@ button.c4p--add-select__global-filter-toggle--open {
 
 @media (min-width: 82rem) {
   .cds--col,
-.cds--col-xlg {
+  .cds--col-xlg {
     max-width: 100%;
     flex-basis: 0;
     flex-grow: 1;
   }
   .cds--col--auto,
-.cds--col-xlg--auto {
+  .cds--col-xlg--auto {
     width: auto;
     max-width: 100%;
     flex: 1 0 0%;
@@ -6058,13 +6055,13 @@ button.c4p--add-select__global-filter-toggle--open {
 
 @media (min-width: 99rem) {
   .cds--col,
-.cds--col-max {
+  .cds--col-max {
     max-width: 100%;
     flex-basis: 0;
     flex-grow: 1;
   }
   .cds--col--auto,
-.cds--col-max--auto {
+  .cds--col-max--auto {
     width: auto;
     max-width: 100%;
     flex: 1 0 0%;
@@ -6300,7 +6297,7 @@ button.c4p--add-select__global-filter-toggle--open {
     display: none;
   }
   .c4p--breadcrumb-with-overflow .c4p--breadcrumb-with-overflow__breadcrumb-back,
-.c4p--breadcrumb-with-overflow .cds--breadcrumb-item:last-child {
+  .c4p--breadcrumb-with-overflow .cds--breadcrumb-item:last-child {
     display: inline-flex;
     vertical-align: middle;
   }
@@ -6442,9 +6439,9 @@ button.c4p--add-select__global-filter-toggle--open {
   min-width: initial;
   min-height: initial;
   padding: 0;
+  border-radius: 0;
   margin: 0;
   background-color: inherit;
-  border-radius: 0;
   color: inherit;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -7148,8 +7145,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-fatal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7161,8 +7158,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-fatal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7174,8 +7171,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-critical .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7187,8 +7184,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-critical .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7200,8 +7197,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-major-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7213,8 +7210,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-major-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7226,8 +7223,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-minor-warning .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7239,8 +7236,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-minor-warning .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7252,8 +7249,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-undefined .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7265,8 +7262,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-undefined .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7278,8 +7275,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-unknown .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7291,8 +7288,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-unknown .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7304,8 +7301,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-normal .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7317,8 +7314,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-normal .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7330,8 +7327,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-info .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7343,8 +7340,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-info .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7357,8 +7354,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion: reduce) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7371,8 +7368,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion: reduce) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7398,8 +7395,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress,
-.c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--light-pending .c4p--status-icon--light.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7411,8 +7408,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--light.c4p--status-icon--dark-pending .c4p--status-icon--light.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7424,8 +7421,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-fatal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7437,8 +7434,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-fatal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7450,8 +7447,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-critical .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7463,8 +7460,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-critical .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7476,8 +7473,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-major-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7489,8 +7486,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-major-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7502,8 +7499,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-minor-warning .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7515,8 +7512,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-minor-warning .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7528,8 +7525,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-undefined .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7541,8 +7538,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-undefined .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7554,8 +7551,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-unknown .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7567,8 +7564,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-unknown .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7580,8 +7577,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-normal .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7593,8 +7590,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-normal .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7606,8 +7603,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-info .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7619,8 +7616,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-info .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7633,8 +7630,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion: reduce) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7647,8 +7644,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion: reduce) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -7674,8 +7671,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--light-pending .c4p--status-icon--dark.c4p--status-icon--light-in-progress {
     animation: none;
   }
 }
@@ -7687,8 +7684,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 @media (prefers-reduced-motion) {
   .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
-.c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
+  .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress,
+  .c4p--status-icon--dark.c4p--status-icon--dark-pending .c4p--status-icon--dark.c4p--status-icon--dark-in-progress {
     animation: none;
   }
 }
@@ -8297,7 +8294,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-layer-accent-active: var(--cds-layer-accent-active-01, #a8a8a8);
   --cds-field: var(--cds-field-01, #f4f4f4);
   --cds-field-hover: var(--cds-field-hover-01, #e8e8e8);
-  --cds-border-subtle: var(--cds-border-subtle-01, #c6c6c6);
+  --cds-border-subtle: var(--cds-border-subtle-00, #e0e0e0);
   --cds-border-subtle-selected: var(--cds-border-subtle-selected-01, #c6c6c6);
   --cds-border-strong: var(--cds-border-strong-01, #8d8d8d);
   --cds-border-tile: var(--cds-border-tile-01, #c6c6c6);
@@ -8682,7 +8679,7 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-layer-accent-active: var(--cds-layer-accent-active-01, #a8a8a8);
   --cds-field: var(--cds-field-01, #f4f4f4);
   --cds-field-hover: var(--cds-field-hover-01, #e8e8e8);
-  --cds-border-subtle: var(--cds-border-subtle-01, #c6c6c6);
+  --cds-border-subtle: var(--cds-border-subtle-00, #e0e0e0);
   --cds-border-subtle-selected: var(--cds-border-subtle-selected-01, #c6c6c6);
   --cds-border-strong: var(--cds-border-strong-01, #8d8d8d);
   --cds-border-tile: var(--cds-border-tile-01, #c6c6c6);

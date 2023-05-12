@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,49 +11,49 @@ const defaultOrNot = (item) => item.default || item;
 const config = [
   {
     label: 'API Key Modal',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/APIKeyModal',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/APIKeyModal?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./APIKeyModal--thumbnail.png')) + ')',
   },
   {
     label: 'About Modal',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/AboutModal',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/AboutModal?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./AboutModal--thumbnail.png')) + ')',
   },
   {
     label: 'Cascade',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/Cascade',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/Cascade?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./Cascade--thumbnail.png')) + ')',
   },
   {
     label: 'Create Full Page',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/CreateFullPage',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/CreateFullPage?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./CreateFullPage--thumbnail.png')) + ')',
   },
   {
     label: 'Create Modal',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/CreateModal',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/CreateModal?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./CreateModal--thumbnail.png')) + ')',
   },
   {
     label: 'Create Side Panel',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/CreateSidePanel',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/CreateSidePanel?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./CreateSidePanel--thumbnail.png')) + ')',
   },
   {
     label: 'Tearsheet',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/CreateTearsheet',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/CreateTearsheet?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./CreateTearsheet--thumbnail.png')) + ')',
   },
   {
     label: 'Tearsheet Narrow',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/CreateTearsheetNarrow',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/CreateTearsheetNarrow?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' +
       defaultOrNot(require('./CreateTearsheetNarrow--thumbnail.png')) +
@@ -61,54 +61,54 @@ const config = [
   },
   {
     label: 'Datagrid',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/DataGrid',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/DataGrid?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./DataGrid--thumbnail.png')) + ')',
   },
   {
     label: 'DataSpreadsheet',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/DataSpreadsheet',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/DataSpreadsheet?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./DataSpreadsheet--thumbnail.png')) + ')',
   },
   {
     label: 'EditInPlace',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/EditInPlace',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/EditInPlace?file=src%2FExample%2FExample.jsx',
     thumbnail: 'url( ' + defaultOrNot(require('undefined')) + ')',
   },
   {
     label: 'Empty State',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/EmptyStates',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/EmptyStates?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./EmptyStates--thumbnail.png')) + ')',
   },
   {
     label: 'Export Modal',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/ExportModal',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/ExportModal?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./ExportModal--thumbnail.png')) + ')',
   },
   {
     label: 'Expressive Card',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/ExpressiveCard',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/ExpressiveCard?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./ExpressiveCard--thumbnail.png')) + ')',
   },
   {
     label: 'HTTP Error',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/HTTPErrors',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/HTTPErrors?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./HTTPErrors--thumbnail.png')) + ')',
   },
   {
     label: 'Import Modal',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/ImportModal',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/ImportModal?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./ImportModal--thumbnail.png')) + ')',
   },
   {
     label: 'Notifications Panel',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/NotificationsPanel',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/NotificationsPanel?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' +
       defaultOrNot(require('./NotificationsPanel--thumbnail.png')) +
@@ -116,59 +116,59 @@ const config = [
   },
   {
     label: 'OptionsTile',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/OptionsTile',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/OptionsTile?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./OptionsTile--thumbnail.png')) + ')',
   },
   {
     label: 'Page Header Example',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/PageHeader',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/PageHeader?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./PageHeader--thumbnail.png')) + ')',
   },
   {
     label: 'ProductiveCard',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/ProductiveCard',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/ProductiveCard?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./ProductiveCard--thumbnail.png')) + ')',
   },
   {
     label: 'RemoveModal',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/RemoveModal',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/RemoveModal?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./RemoveModal--thumbnail.png')) + ')',
   },
   {
     label: 'Saving',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/Saving',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/Saving?file=src%2FExample%2FExample.jsx',
     thumbnail: 'url( ' + defaultOrNot(require('./Saving--thumbnail.png')) + ')',
   },
   {
     label: 'SidePanel',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/SidePanel',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/SidePanel?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./SidePanel--thumbnail.png')) + ')',
   },
   {
     label: 'StatusIcon',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/StatusIcon',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/StatusIcon?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./StatusIcon--thumbnail.png')) + ')',
   },
   {
     label: 'TagSet',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/TagSet',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/TagSet?file=src%2FExample%2FExample.jsx',
     thumbnail: 'url( ' + defaultOrNot(require('./TagSet--thumbnail.png')) + ')',
   },
   {
     label: 'Tearsheet',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/Tearsheet',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/Tearsheet?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./Tearsheet--thumbnail.png')) + ')',
   },
   {
     label: 'UserProfileImage',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/UserProfileImage',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/UserProfileImage?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' +
       defaultOrNot(require('./UserProfileImage--thumbnail.png')) +
@@ -176,15 +176,25 @@ const config = [
   },
   {
     label: 'WebTerminal',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/WebTerminal',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/WebTerminal?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./WebTerminal--thumbnail.png')) + ')',
   },
   {
     label: 'Prefix CSS/JS Example',
-    url: 'https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/prefix-example',
+    url: 'https://stackblitz.com/github/github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products/prefix-example?file=src%2FExample%2FExample.jsx',
     thumbnail:
       'url( ' + defaultOrNot(require('./prefix-example--thumbnail.png')) + ')',
   },
 ];
-export default config;
+
+const getConfig = async function () {
+  for (let item of config) {
+    const path = await import(item.thumbnailPath);
+    item.thumbnail = 'url( ' + path.default + ' )';
+  }
+
+  return config;
+};
+
+export default getConfig;

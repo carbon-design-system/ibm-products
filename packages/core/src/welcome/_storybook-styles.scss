@@ -1,0 +1,45 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../../ibm-products/src/global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type';
+
+.welcome__container {
+  position: fixed;
+  width: 100vw;
+  min-height: 100vh;
+  padding: $spacing-09;
+  background-attachment: fixed;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  background-color: colors.$purple-10;
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.welcome__header {
+  margin-bottom: $spacing-09;
+}
+
+.welcome__heading {
+  @include type.type-style('heading-07');
+}
+
+.welcome__subtitle {
+  @include type.type-style('heading-05');
+}
+
+.welcome__tag--xl.#{c4p-settings.$carbon-prefix}--tag {
+  @include type.type-style('heading-03');
+
+  padding-right: $spacing-04;
+  padding-left: $spacing-04;
+  border-radius: $spacing-06;
+  margin-top: $spacing-06;
+}

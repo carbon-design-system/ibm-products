@@ -31,7 +31,8 @@ export const scrollableAncestor = (target) => {
 
   // based on https://stackoverflow.com/questions/35939886/find-first-scrollable-parent
   const style = window.getComputedStyle(target);
-  if (!target || style.position === 'fixed') {
+
+  if (!target || !style || style.position === 'fixed') {
     return document.scrollingElement;
   }
   return scrollableAncestorInner(target);

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -60,7 +60,6 @@ describe(ButtonSetWithOverflow.displayName, () => {
 
   afterEach(() => {
     mockElement.mockRestore();
-    jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
   });
 
@@ -109,7 +108,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
     expect(action1).toBeNull();
 
     const comboButton = screen.getByText(/button menu label/, {
-      selector: `.${blockClass}__button-container--hidden+ .${carbon.prefix}--overflow-menu .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container--hidden .${carbon.prefix}--overflow-menu .${carbon.prefix}--btn`,
     });
     userEvent.click(comboButton);
 

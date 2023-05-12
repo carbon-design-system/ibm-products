@@ -31,6 +31,7 @@ const overflowAriaLabel = 'overflow-label';
 // eslint-disable-next-line react/prop-types
 const TestActionBar = ({ width, children = null, ...rest }) => {
   return (
+    // eslint-disable-next-line react/forbid-dom-props
     <div style={{ width, height: 40 }} className="test-container">
       <ActionBar {...rest}>{children}</ActionBar>
     </div>
@@ -102,7 +103,6 @@ describe(ActionBar.displayName, () => {
 
   afterEach(() => {
     mockElement.mockRestore();
-    jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
   });
 

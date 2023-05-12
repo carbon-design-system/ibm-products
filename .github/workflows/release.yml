@@ -35,11 +35,12 @@ jobs:
       - name: Continuous integration check (includes build)
         run: yarn ci-check:v2
 
-      # Dry run - `yarn lerna version --no-git-tag-version --no-push`
+      # Dry run - `yarn lerna publish --dist-tag next --no-verify-access --create-release --no-git-tag-version --no-push github --ignore-changes 'packages/security/**/*' 'packages/cdai/**/*' --yes --no-git-tag-version --no-push`
       - name: Publish
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
         run:
           yarn lerna publish --dist-tag next --no-verify-access --create-release
-          --yes github
+          --no-git-tag-version --no-push github --ignore-changes
+          'packages/security/**/*' 'packages/cdai/**/*' --yes

@@ -83,6 +83,8 @@ const defaults = {
     'Datagrid.useActionsColumn': false,
     'Datagrid.useFiltering': false,
     'Datagrid.useCustomizeColumns': false,
+    'ExampleComponent.secondaryIcon': false,
+    'ExampleComponent.useExample': false,
   },
 };
 

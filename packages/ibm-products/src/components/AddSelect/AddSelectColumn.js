@@ -143,7 +143,7 @@ export let AddSelectColumn = ({
                 renderIcon={(props) => <Filter size={32} {...props} />}
                 className={`${colClass}-overflow`}
                 flipped
-                ariaLabel={filterByLabel}
+                aria-label={filterByLabel}
                 iconDescription={filterByLabel}
               >
                 {filterByOpts.map((opt) => (

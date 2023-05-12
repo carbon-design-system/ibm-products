@@ -130,7 +130,7 @@ export let WebTerminal = React.forwardRef(
               <OverflowMenu
                 renderIcon={(props) => <Help size={16} {...props} />}
                 iconDescription={documentationLinksIconDescription}
-                ariaLabel={documentationLinksIconDescription}
+                aria-label={documentationLinksIconDescription}
                 menuOptionsClass={`${blockClass}__documentation-overflow`}
                 size="lg"
               >

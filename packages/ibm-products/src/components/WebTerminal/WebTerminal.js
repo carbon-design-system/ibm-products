@@ -83,7 +83,7 @@ export let WebTerminal = React.forwardRef(
       }
     }, []); // eslint-disable-line
 
-    /** 
+    /**
       When the web terminal slide in animation is complete, sets render to false.
     */
     const onAnimationEnd = () => {
@@ -93,7 +93,7 @@ export let WebTerminal = React.forwardRef(
     };
 
     const handleCloseTerminal = () => {
-      /** 
+      /**
         If the user prefers reduced motion, we have to manually set render to false
         because onAnimationEnd will never be called.
       */

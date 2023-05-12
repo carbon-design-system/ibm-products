@@ -33,7 +33,6 @@ const copyrightText = `Copyright test text ${uuidv4()}`;
 const dataTestId = uuidv4();
 const logoAltText = `Example product ${uuidv4()} logo`;
 const logo = (
-  // eslint-disable-next-line react/forbid-dom-props
   <img src={ExampleLogo} alt={logoAltText} style={{ maxWidth: '6rem' }} />
 );
 const content = `Legal test text ${uuidv4()}`;

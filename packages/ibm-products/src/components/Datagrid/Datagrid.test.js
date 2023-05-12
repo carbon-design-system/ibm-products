@@ -1,4 +1,3 @@
-/* eslint-disable react/forbid-dom-props */ // remove after refactor
 /**
  * Copyright IBM Corp. 2022, 2023
  *

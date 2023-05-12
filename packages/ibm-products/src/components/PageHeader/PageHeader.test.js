@@ -337,7 +337,6 @@ describe('PageHeader', () => {
     const testStyle = { name: '--test-this', value: 'test-value' };
     const styles = { [`${testStyle.name}`]: testStyle.value };
 
-    // eslint-disable-next-line react/forbid-component-props
     render(<PageHeader data-testid={dataTestId} style={styles} />);
     const header = screen.getByTestId(dataTestId);
 

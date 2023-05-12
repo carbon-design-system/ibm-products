@@ -41,7 +41,6 @@ const isBreadCrumbItem = function () {
 // eslint-disable-next-line react/prop-types
 const TestBreadcrumbWithOverflow = ({ width, ...rest }) => {
   return (
-    // eslint-disable-next-line react/forbid-dom-props
     <div style={{ width, height: 40 }}>
       <BreadcrumbWithOverflow className="fish" {...rest} />
     </div>

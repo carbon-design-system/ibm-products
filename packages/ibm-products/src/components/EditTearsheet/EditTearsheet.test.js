@@ -46,7 +46,7 @@ const defaultProps = {
   ref,
 };
 
-const renderEditTearsheet = ({ ...rest }) =>
+const renderEditTearsheet = ({ ...rest } = {}) =>
   render(
     <EditTearsheet {...rest}>
       <EditTearsheetForm
@@ -73,7 +73,7 @@ const renderEditTearsheet = ({ ...rest }) =>
     </EditTearsheet>
   );
 
-const renderEmptyEditTearsheet = ({ ...rest }) =>
+const renderEmptyEditTearsheet = ({ ...rest } = {}) =>
   render(
     <EditTearsheet {...rest}>
       <p>Child element that persists across all forms</p>

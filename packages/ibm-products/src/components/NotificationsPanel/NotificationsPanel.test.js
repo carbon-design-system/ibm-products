@@ -34,7 +34,7 @@ const testData = [
 ];
 
 const onClickOutside = jest.fn();
-const renderNotifications = ({ ...rest }) =>
+const renderNotifications = ({ ...rest } = {}) =>
   render(
     <NotificationsPanel
       {...{

@@ -142,7 +142,7 @@ const DatagridBatchActions = (datagridState) => {
   );
 };
 
-const BasicUsage = ({ ...rest }) => {
+const BasicUsage = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid({
@@ -251,7 +251,7 @@ const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
   );
 };
 
-const EmptyUsage = ({ ...rest }) => {
+const EmptyUsage = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(0));
   const emptyStateTitle = 'Empty State Title';
@@ -275,7 +275,7 @@ const EmptyUsage = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...dataGridState }} {...rest}></Datagrid>;
 };
 
-const TenThousandEntriesWithoutFeatureFlag = ({ ...rest }) => {
+const TenThousandEntriesWithoutFeatureFlag = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10000));
   pkg.feature['Datagrid.useInfiniteScroll'] = false;
@@ -290,7 +290,7 @@ const TenThousandEntriesWithoutFeatureFlag = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
-const TenThousandEntries = ({ ...rest }) => {
+const TenThousandEntries = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10000));
   pkg.feature['Datagrid.useInfiniteScroll'] = true;
@@ -336,7 +336,7 @@ const IsHoverOnRow = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-const DisableSelectRow = ({ ...rest }) => {
+const DisableSelectRow = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
@@ -355,7 +355,7 @@ const DisableSelectRow = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
-const ExpandedRow = ({ ...rest }) => {
+const ExpandedRow = ({ ...rest } = {}) => {
   const expansionRenderer = ({ row }) => <div>Content for {row.id}</div>;
 
   const columns = React.useMemo(() => defaultHeader, []);
@@ -373,7 +373,7 @@ const ExpandedRow = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
-const SelectItemsInAllPages = ({ ...rest }) => {
+const SelectItemsInAllPages = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(100));
   const [areAllSelected, setAreAllSelected] = useState(false);
@@ -408,7 +408,7 @@ const SelectItemsInAllPages = ({ ...rest }) => {
   );
 };
 
-const HideSelectAll = ({ ...rest }) => {
+const HideSelectAll = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
@@ -446,7 +446,7 @@ const Wrapper = ({ children }) => (
   </div>
 );
 
-const RowSizeDropdown = ({ ...rest }) => {
+const RowSizeDropdown = ({ ...rest } = {}) => {
   const columns = React.useMemo(
     () => [
       ...defaultHeader.slice(0, 3),
@@ -497,7 +497,7 @@ const RowSizeDropdown = ({ ...rest }) => {
   );
 };
 
-const CustomizingColumns = ({ ...rest }) => {
+const CustomizingColumns = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
@@ -533,7 +533,7 @@ const CustomizingColumns = ({ ...rest }) => {
   );
 };
 
-const NestedRows = ({ ...rest }) => {
+const NestedRows = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10, 5, 2, 2));
   const datagridState = useDatagrid(
@@ -547,7 +547,7 @@ const NestedRows = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
-const NestedTable = ({ ...rest }) => {
+const NestedTable = ({ ...rest } = {}) => {
   const [data] = useState(makeData(20));
   const nestedColumns = React.useMemo(() => [...defaultHeader], []);
   nestedColumns[0] = {
@@ -582,7 +582,7 @@ const NestedTable = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
-const RadioSelect = ({ ...rest }) => {
+const RadioSelect = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
@@ -603,7 +603,7 @@ const RadioSelect = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
-const SelectableRow = ({ ...rest }) => {
+const SelectableRow = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
@@ -617,7 +617,7 @@ const SelectableRow = ({ ...rest }) => {
   return <Datagrid datagridState={{ ...datagridState }} {...rest} />;
 };
 
-const SortableColumns = ({ ...rest }) => {
+const SortableColumns = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
@@ -680,7 +680,7 @@ const TopAlignment = forwardRef(({ ...rest }, ref) => {
   return <Datagrid ref={ref} datagridState={{ ...datagridState }} {...rest} />;
 });
 
-const ClickableRow = ({ ...rest }) => {
+const ClickableRow = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(10));
   const datagridState = useDatagrid(
@@ -760,7 +760,7 @@ const InitialLoad = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-const WithPagination = ({ ...rest }) => {
+const WithPagination = ({ ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(100));
   const datagridState = useDatagrid({
@@ -792,7 +792,7 @@ const BatchActions = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-const StickyActionsColumn = ({ ...rest }) => {
+const StickyActionsColumn = ({ ...rest } = {}) => {
   const columns = React.useMemo(
     () => [
       ...defaultHeader,

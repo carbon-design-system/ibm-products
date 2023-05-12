@@ -374,7 +374,6 @@ describe('PageHeader', () => {
       name: testProps.collapseHeaderIconDescription,
     });
 
-    window.scrollTo.mockReset();
     expect(window.scrollTo).not.toHaveBeenCalled();
     userEvent.click(collapseButton);
     // Determine how to test this (jest dom does not do scroll events)

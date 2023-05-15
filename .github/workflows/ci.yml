@@ -3,7 +3,7 @@ name: CI # Run CI Checks
 on:
   pull_request:
     branches:
-      - main
+      - main_v1
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

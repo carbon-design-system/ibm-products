@@ -20,7 +20,7 @@
  * By default the following mapping is made
  * {
  *   label: folder name,
- *   url: baseUrl + folder name, // baseUrl is `https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/`
+ *   url: baseUrl + folder name, // baseUrl is `https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main_v1/examples/carbon-for-ibm-products/`
  *   thumbnail: folder name + '/thumbnail.png'
  * }
  *
@@ -28,7 +28,7 @@
  * NOTE2: A local config file allows examples not in this repo to  be added
  *
  * The resulting Carbon for IBM Products example gallery can be seen here
- * https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/example-gallery
+ * https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main_v1/examples/carbon-for-ibm-products/example-gallery
  */
 
 const path = require('path');

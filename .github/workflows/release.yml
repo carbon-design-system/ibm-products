@@ -1,4 +1,4 @@
-name: Release # Builds and releases updated packages every Tuesday
+name: Releases @carbon/ibm-products with v10 support # Builds and releases @carbon/v10 supported version of @carbon/ibm-products
 
 on:
   workflow_dispatch:
@@ -6,15 +6,16 @@ on:
     - cron: '30 4 * * TUE' # Release every Tuesday at 4:30am EST
 
 jobs:
-  Release:
+  Release_v1:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2 # https://github.com/actions/checkout
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0 # https://github.com/actions/checkout/issues/217
           token: ${{ secrets.GH_TOKEN_LERNA }} # https://github.com/lerna/lerna/issues/1957
+          ref: 'main_v1'
 
       # https://github.com/actions/checkout#push-a-commit-using-the-built-in-token
       - run: |
@@ -39,17 +40,21 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
-        run: yarn lerna publish --no-verify-access --create-release github --yes
+        run:
+          yarn lerna publish --dist-tag latest-v1 --no-verify-access
+          --create-release github --yes
 
       - name: Rename to ibm-cloud-cognitive for legacy publish
-        run: yarn json -I -f packages/cloud-cognitive/package.json -e 'this.name="@carbon/ibm-cloud-cognitive"'
+        run:
+          yarn json -I -f packages/cloud-cognitive/package.json -e
+          'this.name="@carbon/ibm-cloud-cognitive"'
 
       # Run yarn again after renaming package, required after move to yarn berry
       - name: Install after rename
         run: yarn
         env:
           YARN_ENABLE_IMMUTABLE_INSTALLS: false
-      
+
       - name: Commit for legacy package
         run: |
           git add .

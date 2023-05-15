@@ -32,6 +32,14 @@ const Welcome = () => {
       </hgroup>
       <div className="welcome__links">
         <Link
+          href="https://github.com/carbon-design-system/ibm-products/blob/main/docs/guides/v2.md"
+          className="welcome__link"
+          renderIcon={ArrowRight}
+          size="lg"
+        >
+          Migration guide
+        </Link>
+        <Link
           href="https://v1-ibm-products.carbondesignsystem.com/"
           className="welcome__link"
           renderIcon={ArrowRight}

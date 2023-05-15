@@ -20,7 +20,7 @@
   background-attachment: fixed;
   /* stylelint-disable-next-line carbon/theme-token-use */
   background-color: colors.$purple-10;
-  background-position: center right;
+  background-position: center left;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -44,4 +44,14 @@
   padding-left: $spacing-04;
   border-radius: $spacing-06;
   margin-top: $spacing-06;
+}
+
+.welcome__links {
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome__link.#{c4p-settings.$carbon-prefix}--link {
+  margin-right: auto;
+  margin-bottom: $spacing-03;
 }

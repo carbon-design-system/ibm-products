@@ -3,8 +3,6 @@ import { ThemeProvider } from './ThemeSelector/ThemeContext';
 import { ThemeDropdown } from './ThemeSelector/ThemeDropdown';
 import Gallery from './components/Gallery';
 
-import './_App.scss';
-
 function App() {
   return (
     <div>

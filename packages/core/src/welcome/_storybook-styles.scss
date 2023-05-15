@@ -12,6 +12,8 @@
 
 .welcome__container {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
   min-height: 100vh;
   padding: $spacing-09;
@@ -20,7 +22,7 @@
   background-color: colors.$purple-10;
   background-position: center right;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
 }
 
 .welcome__header {

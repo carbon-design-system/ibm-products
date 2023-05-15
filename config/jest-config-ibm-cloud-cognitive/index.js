@@ -75,7 +75,6 @@ module.exports = {
     '/lib/',
     '/build/',
     'e2e',
-    'examples',
     'templates',
     '/umd/',
   ],

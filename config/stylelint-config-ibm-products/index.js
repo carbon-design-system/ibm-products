@@ -53,6 +53,7 @@ module.exports = {
     'scss/double-slash-comment-inline': null,
     'scss/comment-no-empty': null,
     'function-no-unknown': [true, { ignoreFunctions }],
+    'import-notation': 'string',
 
     // the following rule can be reinstated once we migrate
     // to scss modules and no longer support old sass versions

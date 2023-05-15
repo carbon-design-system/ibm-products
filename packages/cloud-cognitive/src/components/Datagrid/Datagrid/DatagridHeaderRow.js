@@ -28,6 +28,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
 
   // Below is to handle multiple column resize and `double click` column to fit content.
   const handleMultiColumSelect = (header, e) => {
+    
     document.getSelection().removeAllRanges();
 
     setDragStopped(false);
@@ -91,9 +92,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
     document.getSelection().removeAllRanges();
     const colWidths = columnResizing.columnWidths;
     const resizingCol = columnResizing.isResizingColumn;
-    const colDefaultWidth = datagridState.allColumns.filter(
-      (column) => column.id === resizingCol
-    );
+    
     if (resizingCol !== null && selectedHeader.length > 0) {
       setIsResizing(resizingCol);
       selectedHeader.map((col, idx) => {
@@ -103,9 +102,13 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
             // check resize 'forward' or 'backward'
             const resizeDiff =
               columnResizing.columnWidth - colWidths[resizingCol]; // actual resized value of current resizing column
-            colWidths[col.id] = isNaN(resizeDiff)
-              ? initialColWidth
-              : initialColWidth - resizeDiff; // add actual resized value to the other selected column widths
+            if(colWidths[col.id] > 50){
+              colWidths[col.id] = isNaN(resizeDiff)
+                ? initialColWidth
+                : initialColWidth - resizeDiff; // add actual resized value to the other selected column widths
+            }else{
+              colWidths[col.id] = 50;
+            }
           } else {
             const resizeDiff =
               colWidths[resizingCol] - columnResizing.columnWidth;
@@ -113,20 +116,27 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
               ? initialColWidth
               : initialColWidth + resizeDiff;
           }
+        }else{
+          if(colWidths[datagridState.state.columnResizing.isResizingColumn] < 50){
+            colWidths[datagridState.state.columnResizing.isResizingColumn] = 50;
+          }
         }
       });
     } else {
       if (
-        colWidths &&
+        selectedHeader.length > 1 && columnResizing. isResizingColumn === null &&
         (colWidths[isResizing] < columnResizing.columnWidth ||
           colWidths[isResizing] > columnResizing.columnWidth)
       ) {
         // Check resize ended, 'columnResizing' firing even if we clicked on resizer.
         setDragStopped(true);
-        columnResizing.columnWidth = isNaN(resizingCol)
-          ? colDefaultWidth[0]?.width
-          : colWidths[resizingCol];
       }
+
+      if(colWidths[datagridState.state.columnResizing.isResizingColumn] < 50){
+        colWidths[datagridState.state.columnResizing.isResizingColumn] = 50;
+        datagridState.state.columnResizing.columnWidth = 50;
+      }
+
     }
     if (isDblClick) {
       columnResizing.isResizingColumn = colExpandId;
@@ -143,8 +153,6 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
     colExpandId,
     datagridState,
   ]);
-
-  // console.log(columnResizing.columnWidths);
 
   return (
     <TableRow

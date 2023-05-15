@@ -18,7 +18,6 @@ import { Example as CreateSidePanelExample } from './CreateSidePanel/src/Example
 import { Example as CreateTearsheetExample } from './CreateTearsheet/src/Example/Example';
 import { Example as CreateTearsheetNarrowExample } from './CreateTearsheetNarrow/src/Example/Example';
 import { Example as DataSpreadsheetExample } from './DataSpreadsheet/src/Example/Example';
-// import { Example as DatagridExample } from './Datagrid/src/Example/Example';
 import { Example as EditInPlaceExample } from './EditInPlace/src/Example/Example';
 import { Example as EmptyStatesExample } from './EmptyStates/src/Example/Example';
 import { Example as ExportModalExample } from './ExportModal/src/Example/Example';
@@ -95,12 +94,6 @@ describe('All examples', () => {
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
-
-  // it('Datagrid renders', () => {
-  //   render(<DatagridExample />);
-  //   // expect no errors int the console
-  //   expect(console.error).not.toHaveBeenCalled();
-  // });
 
   it('EditInPlace renders', () => {
     render(<EditInPlaceExample />);

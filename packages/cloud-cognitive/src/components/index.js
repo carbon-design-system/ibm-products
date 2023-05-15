@@ -85,3 +85,5 @@ export { EditUpdateCards } from './EditUpdateCards';
 export { InlineEdit } from './InlineEdit';
 export { EditInPlace } from './EditInPlace';
 export { NonLinearReading } from './NonLinearReading';
+export { Guidebanner } from './Guidebanner';
+export { Carousel } from './Carousel';

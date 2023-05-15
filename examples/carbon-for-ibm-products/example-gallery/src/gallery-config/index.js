@@ -84,11 +84,6 @@ const config = [
     thumbnail: `url(${imageDataSpreadsheet}`,
   },
   {
-    label: 'Datagrid',
-    url: 'https://stackblitz.com/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/Datagrid?file=src%2FExample%2FExample.jsx',
-    thumbnail: `url(${imageDatagrid}`,
-  },
-  {
     label: 'EditInPlace',
     url: 'https://stackblitz.com/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/EditInPlace?file=src%2FExample%2FExample.jsx',
     thumbnail: `url(${imageEditInPlace}`,

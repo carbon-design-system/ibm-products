@@ -37,7 +37,7 @@ const Welcome = () => {
           renderIcon={ArrowRight}
           size="lg"
         >
-          v1 Storybook
+          Carbon 10 (v1) Storybook
         </Link>
       </div>
     </div>

@@ -1,7 +1,7 @@
 @use '@carbon/react' with (
   $font-path: '@ibm/plex'
 );
-@use '@carbon/ibm-products/css/index.css';
+// @use '@carbon/ibm-products/css/index.css';
 @use './components/_Gallery';
 @use './components/_GalleryCard';
 @use './ThemeSelector/_theme-dropdown';

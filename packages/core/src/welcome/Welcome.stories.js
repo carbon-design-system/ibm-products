@@ -16,6 +16,9 @@ export default {
   parameters: {
     styles,
     layout: 'fullscreen',
+    options: {
+      showPanel: false,
+    },
   },
 };
 

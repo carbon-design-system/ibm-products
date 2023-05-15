@@ -17,6 +17,7 @@ import imageCreateSidePanel from './CreateSidePanel--thumbnail.png';
 import imageCreateTearsheet from './CreateTearsheet--thumbnail.png';
 import imageCreateTearsheetNarrow from './CreateTearsheetNarrow--thumbnail.png';
 import imageDataSpreadsheet from './DataSpreadsheet--thumbnail.png';
+import imageDatagrid from './Datagrid--thumbnail.png';
 import imageEditInPlace from './EditInPlace--thumbnail.png';
 import imageEmptyStates from './EmptyStates--thumbnail.png';
 import imageExportModal from './ExportModal--thumbnail.png';
@@ -81,6 +82,11 @@ const config = [
     label: 'DataSpreadsheet',
     url: 'https://stackblitz.com/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/DataSpreadsheet?file=src%2FExample%2FExample.jsx',
     thumbnail: `url(${imageDataSpreadsheet}`,
+  },
+  {
+    label: 'Datagrid',
+    url: 'https://stackblitz.com/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/Datagrid?file=src%2FExample%2FExample.jsx',
+    thumbnail: `url(${imageDatagrid}`,
   },
   {
     label: 'EditInPlace',

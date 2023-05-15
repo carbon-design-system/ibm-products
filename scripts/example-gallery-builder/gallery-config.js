@@ -79,7 +79,7 @@ const getExampleDirectoriesConfig = (
 
       // config url or default
       const packagePath =
-        'github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products';
+        'github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products';
       const stackblitz = `https://stackblitz.com/github/${packagePath}/${dir}?file=src%2FExample%2FExample.jsx`;
       // const codesandbox = `https://codesandbox.io/p/sandbox/${packagePath}/${dir}?file=%2Fsrc%2FExample%2FExample.jsx`;
       // TODO provide option of using both target URLs (codesandbox seems much quicker)
@@ -170,7 +170,7 @@ const writeGalleryTests = (testPath, directories) => {
     // 'Test fails': { /* <-- directory name */
     //   skipTest: true, reason: 'Test currently fails due to XYZ.'
     //  },
-    'Carbon-v11-template': {
+    'main-template': {
       skipImport: true,
       reason: 'Carbon v11 not supported in v1 repo.',
     },

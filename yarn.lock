@@ -2474,8 +2474,8 @@ __metadata:
   peerDependencies:
     "@carbon/grid": ^10.43.1
     "@carbon/icons-react": ^10.49.0
-    carbon-components: ^10.58.0
-    carbon-components-react: ^7.59.0
+    carbon-components: ^10.58.6
+    carbon-components-react: ^7.59.6
     prop-types: ^15.8.1
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
@@ -2511,8 +2511,8 @@ __metadata:
     "@carbon/grid": ^11.13.0
     "@carbon/layout": ^11.13.0
     "@carbon/motion": ^11.10.0
-    "@carbon/react": ~1.28.0
-    "@carbon/storybook-addon-theme": ^0.22.32
+    "@carbon/react": ~1.29.1
+    "@carbon/storybook-addon-theme": ^0.22.37
     "@carbon/themes": ^11.18.0
     "@carbon/type": ^11.17.0
     "@storybook/addon-actions": ^6.5.16
@@ -2587,7 +2587,7 @@ __metadata:
     "@carbon/grid": ^11.13.0
     "@carbon/layout": ^11.13.0
     "@carbon/motion": ^11.10.0
-    "@carbon/react": ~1.28.0
+    "@carbon/react": ~1.29.1
     "@carbon/themes": ^11.18.0
     "@carbon/type": ^11.17.0
     react: ^16.8.6 || ^17.0.1
@@ -2723,15 +2723,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:~1.28.0":
-  version: 1.28.0
-  resolution: "@carbon/react@npm:1.28.0"
+"@carbon/react@npm:~1.29.1":
+  version: 1.29.1
+  resolution: "@carbon/react@npm:1.29.1"
   dependencies:
     "@babel/runtime": ^7.18.3
     "@carbon/feature-flags": ^0.13.0
     "@carbon/icons-react": ^11.19.0
     "@carbon/layout": ^11.13.0
-    "@carbon/styles": ^1.28.0
+    "@carbon/styles": ^1.29.0
     "@carbon/telemetry": 0.1.0
     classnames: 2.3.2
     copy-to-clipboard: ^3.3.1
@@ -2752,13 +2752,13 @@ __metadata:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
     sass: ^1.33.0
-  checksum: eb87972220a768c29b26427706ffe9fc3fc261fa5e65bde5f0de66442a4588916dd88e8ae1c420c31528138ce032e8ea0ec1768d61b9a0f50c43dfbe3b4419d9
+  checksum: 840e5758e2f790ebeba72c6a01924535f6eb1afa17d4c38e01b2238e84ae87022bed34d7e8a80cfb18dbe1714c7cfd8ea2860d59cf9a1925400ad692800097ba
   languageName: node
   linkType: hard
 
-"@carbon/storybook-addon-theme@npm:^0.22.32":
-  version: 0.22.32
-  resolution: "@carbon/storybook-addon-theme@npm:0.22.32"
+"@carbon/storybook-addon-theme@npm:^0.22.37":
+  version: 0.22.37
+  resolution: "@carbon/storybook-addon-theme@npm:0.22.37"
   dependencies:
     "@storybook/addons": 6.5.16
     "@storybook/api": 6.5.16
@@ -2772,7 +2772,7 @@ __metadata:
   peerDependencies:
     react: "*"
     vue: "*"
-  checksum: 0dbbae0c4d282a34f49b01dd642d362118168683fe65f4414510b2a81e78b263ed3d550c1b1dee5e01f5be38ca84236720984b1f442467f5e871329e951c9e07
+  checksum: 24727a224f87e099283a4f151de563a74a4d6a7b495abdbdc48a68d0874ff2c625f58d53ee97130059a4c161629a29c282e5d34a5cc190dfe51b4091b5730264
   languageName: node
   linkType: hard
 
@@ -2801,7 +2801,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:^1.28.0":
+"@carbon/styles@npm:^1.29.0":
   version: 1.29.0
   resolution: "@carbon/styles@npm:1.29.0"
   dependencies:

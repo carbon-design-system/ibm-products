@@ -11,10 +11,18 @@ module.exports = {
       },
     ],
     'no-descending-specificity': [true, { severity: 'warning' }],
+    'declaration-block-no-redundant-longhand-properties': [
+      true,
+      {
+        ignoreShorthands: ['inset']
+      },
+    ],
     'declaration-property-value-disallowed-list': [
       { '/.*/': ['unset'] },
       { severity: 'warning' },
     ],
+    'import-notation': 'string',
+    'media-feature-range-notation': 'prefix',
     // ADDED TO TEST CARBON USE
     'carbon/layout-token-use': [
       true,

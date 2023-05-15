@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -106,14 +106,14 @@ const renderCreateTearsheet = ({
     </CreateTearsheet>
   );
 
-const renderEmptyCreateTearsheet = ({ ...rest }) =>
+const renderEmptyCreateTearsheet = ({ ...rest } = {}) =>
   render(
     <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
       <p>Child element that persists across all steps</p>
     </CreateTearsheet>
   );
 
-const renderSingleStepCreateTearsheet = ({ ...rest }) =>
+const renderSingleStepCreateTearsheet = ({ ...rest } = {}) =>
   render(
     <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
       <CreateTearsheetStep title={step1Title} fieldsetLegendText={step1Title}>
@@ -122,7 +122,7 @@ const renderSingleStepCreateTearsheet = ({ ...rest }) =>
     </CreateTearsheet>
   );
 
-const renderInvalidCreateTearsheet = ({ ...rest }) =>
+const renderInvalidCreateTearsheet = ({ ...rest } = {}) =>
   render(
     <>
       <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
@@ -167,7 +167,6 @@ describe(CreateTearsheet.displayName, () => {
   });
 
   afterEach(() => {
-    jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
     jest.useRealTimers();
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;

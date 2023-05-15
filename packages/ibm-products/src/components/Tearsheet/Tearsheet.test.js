@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -307,7 +307,6 @@ describe(componentName, () => {
   });
 
   afterAll(() => {
-    jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
@@ -375,7 +374,6 @@ describe(componentNameNarrow, () => {
   });
 
   afterAll(() => {
-    jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
@@ -396,7 +394,6 @@ describe(componentNameCreateNarrow, () => {
   });
 
   afterAll(() => {
-    jest.restoreAllMocks();
     window.ResizeObserver = ResizeObserver;
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });

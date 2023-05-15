@@ -9,6 +9,12 @@ module.exports = {
   extends: ['stylelint-config-ibm-products'],
   ignoreFiles: ['**/css-gridish/**'],
   rules: {
+    'declaration-block-no-redundant-longhand-properties': [
+      true,
+      {
+        ignoreShorthands: ['inset']
+      },
+    ],
     'declaration-property-value-disallowed-list': null,
     'property-no-unknown': [
       true,
@@ -35,6 +41,8 @@ module.exports = {
         ],
       },
     ],
+    'import-notation': 'string',
+    'media-feature-range-notation': 'prefix',
     'carbon/layout-token-use': [
       true,
       { severity: 'error', acceptUndefinedVariables: true, carbonPath: 'packages/security/node_modules/@carbon' },

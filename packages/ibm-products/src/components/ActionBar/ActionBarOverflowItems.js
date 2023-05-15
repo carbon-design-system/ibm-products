@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -30,7 +30,7 @@ export const ActionBarOverflowItems = ({
   const internalId = useRef(uuidv4());
   return (
     <OverflowMenu
-      ariaLabel={overflowAriaLabel}
+      aria-label={overflowAriaLabel}
       className={cx(blockClass, className)}
       direction="bottom"
       flipped

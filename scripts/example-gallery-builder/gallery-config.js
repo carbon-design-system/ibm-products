@@ -80,7 +80,7 @@ const getExampleDirectoriesConfig = (
       // config url or default
       const packagePath =
         'github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products';
-      const stackblitz = `https://stackblitz.com/github/${packagePath}/${dir}?file=src%2FExample%2FExample.jsx`;
+      const stackblitz = `https://stackblitz.com/${packagePath}/${dir}?file=src%2FExample%2FExample.jsx`;
       // const codesandbox = `https://codesandbox.io/p/sandbox/${packagePath}/${dir}?file=%2Fsrc%2FExample%2FExample.jsx`;
       // TODO provide option of using both target URLs (codesandbox seems much quicker)
       const url = stackblitz;
@@ -133,13 +133,9 @@ const writeGalleryConfig = (galleryConfigPath, config) => {
     'const defaultOrNot = item => item.default || item; const config = ['
   );
   config.forEach((item) => {
-    const thumbnail =
-      item.thumbnail && item.thumbnail.startsWith('url(')
-        ? `'${item.thumbnail}'`
-        : "'url( ' + defaultOrNot(require('" + item.thumbnail + "')) + ')'";
     fs.appendFileSync(
       galleryConfigPath,
-      `{ label: '${item.label}', url: '${item.url}', thumbnail: ${thumbnail} },`
+      `{ label: '${item.label}', url: '${item.url}', thumbnailPath: '${item.thumbnail}' },`
     );
   });
   fs.appendFileSync(

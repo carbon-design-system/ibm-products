@@ -66,8 +66,8 @@
     "upgrade:manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.12",
-    "@babel/eslint-parser": "^7.19.1",
+    "@babel/core": "^7.21.8",
+    "@babel/eslint-parser": "^7.21.8",
     "@carbon/component-usage-report": "*",
     "@commitlint/cli": "^17.6.3",
     "@commitlint/config-conventional": "^17.6.3",
@@ -81,9 +81,9 @@
     "eslint": "^8.40.0",
     "eslint-config-carbon": "^2.20.0",
     "husky": "^8.0.3",
-    "jest": "^29.4.2",
+    "jest": "^29.5.0",
     "json": "^11.0.0",
-    "lerna": "^6.5.1",
+    "lerna": "^6.6.2",
     "lint-staged": "^13.2.2",
     "npm-check-updates": "^16.10.12",
     "npm-run-all": "^4.1.5",
@@ -96,7 +96,7 @@
     "rimraf": "^5.0.0",
     "stylelint": "^15.6.1",
     "stylelint-config-ibm-products": "*",
-    "webpack": "^5.75.0"
+    "webpack": "^5.82.1"
   },
   "//resolutions:http-signature": "package 'request' deprecated but still used, asks for http-signature ~1.2.0 which indirectly has vulnerabilities",
   "//resolutions:minimist": "https://security.snyk.io/vuln/SNYK-JS-MINIMIST-2429795 (version <=1.2.5)",

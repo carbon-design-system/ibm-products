@@ -97,4 +97,5 @@ all public components and their props.\
 `- [ ]` There is a story for each design scenario. The stories expose all relevant
 props and actions, and additional usage documentation and code samples are available
 on the 'Docs' tab along with the props table.\
-`- [ ]` There is an online example (or multiple examples if appropriate) e.g. CodeSandbox/Stackblitz for the components.
+`- [ ]` There is an online example (or multiple examples if appropriate) e.g.
+CodeSandbox/Stackblitz for the components.

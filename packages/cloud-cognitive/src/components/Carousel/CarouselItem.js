@@ -46,7 +46,6 @@ const CarouselItem = ({ children, className, ...rest }) => {
       {...rest}
       className={cx(blockClass, className)}
       ref={itemRef}
-      role="main"
       {...getDevtoolsProps(componentName)}
     >
       {children}

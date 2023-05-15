@@ -40,7 +40,6 @@ const GuidebannerElement = ({
     <div
       {...rest}
       className={cx(blockClass, className)}
-      role="main"
       {...getDevtoolsProps(componentName)}
     >
       {title && <h2 className={`${blockClass}-title`}>{title}</h2>}

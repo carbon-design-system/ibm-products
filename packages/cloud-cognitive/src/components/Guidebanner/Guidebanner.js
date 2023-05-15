@@ -67,7 +67,7 @@ export let Guidebanner = React.forwardRef(
   ) => {
     const scrollRef = useRef();
     const toggleRef = useRef();
-    const [scrollPosition, setScrollPostion] = useState(0);
+    const [scrollPosition, setScrollPosition] = useState(0);
     const [showNavigation, setShowNavigation] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(collapsable ? true : false);
 
@@ -76,7 +76,7 @@ export let Guidebanner = React.forwardRef(
     };
 
     const handleClickToggle = () => {
-      setScrollPostion(0);
+      setScrollPosition(0);
       scrollRef.current.scrollToView(0);
       setIsCollapsed((prevState) => !prevState);
     };
@@ -138,7 +138,7 @@ export let Guidebanner = React.forwardRef(
                   scrollRef.current
                     .scrollPrev()
                     .then((scrollPercentage) =>
-                      setScrollPostion(scrollPercentage)
+                      setScrollPosition(scrollPercentage)
                     );
                 }}
               ></Button>
@@ -160,7 +160,7 @@ export let Guidebanner = React.forwardRef(
                   scrollRef.current
                     .scrollNext()
                     .then((scrollPercentage) =>
-                      setScrollPostion(scrollPercentage)
+                      setScrollPosition(scrollPercentage)
                     );
                 }}
               ></Button>

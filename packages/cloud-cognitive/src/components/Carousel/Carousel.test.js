@@ -22,6 +22,14 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
 describe(componentName, () => {
+  // The Carousel component uses IntersectionObserver.
+  beforeEach(() => {
+    window.IntersectionObserver = jest.fn().mockImplementation(() => ({
+      observe: () => null,
+      unobserve: () => null,
+    }));
+  });
+
   it('renders a component Carousel', () => {
     render(<Carousel> </Carousel>);
     expect(screen.getByRole('main')).toHaveClass(blockClass);
@@ -48,10 +56,13 @@ describe(componentName, () => {
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  // We are using https://react.dev/reference/react/useImperativeHandle
+  // to return only methods specific to the Carousel's functionality:
+  // scrollNext, scrollPrev, scrollToView, and maxScroll.
+  it('forwards a ref to specific callback functions only', () => {
     const ref = React.createRef();
     render(<Carousel ref={ref}> </Carousel>);
-    expect(ref.current).toHaveClass(blockClass);
+    expect(ref.current.scrollNext).toBeDefined();
   });
 
   it('adds the Devtools attribute to the containing node', () => {

@@ -7,12 +7,12 @@
 
 /**
  * The Guidebanner specifically is theme-agnostic, and so we have to 
- * use color tokens to keep the colours static instead of theme tokens 
+ * use color tokens to keep the colors static instead of theme tokens 
  * that will change depending on the selected theme.
  * 
  * Because of this, we are triggering a *large* amount of linting errors.
- * So, we're adding 4 "disable" rules for the file instead of 50 "disable"
- * rules, one per infraction.
+ * So, we're adding 4 "disable" rules for the file instead of 50 
+ * individual rules.
  */
 
 /* stylelint-disable carbon/layout-token-use */

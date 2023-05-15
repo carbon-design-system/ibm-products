@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 
 // Other standard imports.
 import debounce from 'lodash.debounce';
@@ -53,43 +59,51 @@ export let Carousel = React.forwardRef(
     const totalViews = React.Children.count(children) || 1;
     const leftFadedEdgeColor = fadedEdgeColor?.left || fadedEdgeColor;
     const rightFadedEdgeColor = fadedEdgeColor?.right || fadedEdgeColor;
+    const [currentViewID, _setCurrentViewID] = useState(0);
+    const currentViewIDRef = useRef(currentViewID);
+    const scrollRef = useRef();
+    const carouselRef = useRef();
+    const isScrollable = useIsOverflow(scrollRef);
     // Scrolling has no complete callback, nor does it return a promise.
     // Since there is no way to tell when a scroll is finished we can set a timeout.
     // Chrome appears to be the slowest implementation.
     // Here is the spec: https://drafts.csswg.org/cssom-view/#concept-smooth-scroll
     // found issue: https://github.com/w3c/csswg-drafts/issues/3744
 
-    const scrollNext = () => {
+    const scrollNext = useCallback(() => {
       return scrollToView(currentViewID + 1);
-    };
+    }, [currentViewID, scrollToView]);
 
-    const scrollPrev = () => {
+    const scrollPrev = useCallback(() => {
       return scrollToView(currentViewID - 1);
-    };
+    }, [currentViewID, scrollToView]);
 
-    const scrollToView = (viewID) => {
-      if (!isScrolling) {
-        const targetViewID = clamp(viewID, 0, totalViews - 1);
-        setCurrentViewID(targetViewID);
-        setIsScrolling(true);
-        scrollRef.current.scrollLeft =
-          scrollRef.current?.offsetWidth * targetViewID + scrollTune;
-        return scrollPromise();
-      }
-      return new Promise((resolve) => resolveScroll(resolve));
-    };
+    const scrollToView = useCallback(
+      (viewID) => {
+        if (!isScrolling) {
+          const targetViewID = clamp(viewID, 0, totalViews - 1);
+          setCurrentViewID(targetViewID);
+          setIsScrolling(true);
+          scrollRef.current.scrollLeft =
+            scrollRef.current?.offsetWidth * targetViewID + scrollTune;
+          return scrollPromise();
+        }
+        return new Promise((resolve) => resolveScroll(resolve));
+      },
+      [isScrolling, resolveScroll, scrollPromise, scrollTune, totalViews]
+    );
 
-    const scrollPromise = () => {
+    const scrollPromise = useCallback(() => {
       return new Promise((resolve) => {
         setTimeout(() => resolveScroll(resolve), carouselScrollPromiseDelay);
       });
-    };
+    }, [resolveScroll]);
 
-    const resolveScroll = (resolve) => {
+    const resolveScroll = useCallback((resolve) => {
       setIsScrolling(false);
       const percentage = scrollPosition() / maxScroll();
       return resolve(parseFloat(percentage.toFixed(2)));
-    };
+    }, []);
 
     const scrollPosition = () => {
       return scrollRef.current?.scrollLeft;
@@ -102,19 +116,12 @@ export let Carousel = React.forwardRef(
       scrollToView(currentViewIDRef.current);
     }, 200);
 
-    const [currentViewID, _setCurrentViewID] = useState(0);
-
     const setCurrentViewID = (val) => {
       currentViewIDRef.current = val;
       _setCurrentViewID(val);
     };
     const [isScrolling, setIsScrolling] = useState(false);
 
-    // REFS
-    const currentViewIDRef = useRef(currentViewID);
-    const scrollRef = useRef();
-    const carouselRef = useRef();
-    const isScrollable = useIsOverflow(scrollRef);
     // EFFECTS
     useWindowEvent('resize', handleResize);
 
@@ -164,12 +171,16 @@ export let Carousel = React.forwardRef(
       }
     }, [disableArrowScroll]);
 
-    useImperativeHandle(ref, () => ({
-      scrollNext,
-      scrollPrev,
-      scrollToView,
-      maxScroll,
-    }));
+    useImperativeHandle(
+      ref,
+      () => ({
+        scrollNext,
+        scrollPrev,
+        scrollToView,
+        maxScroll,
+      }),
+      [scrollNext, scrollPrev, scrollToView]
+    );
 
     const isScrolled = scrollPosition() > 0;
     const isScrollMax = maxScroll() === scrollPosition();
@@ -177,10 +188,10 @@ export let Carousel = React.forwardRef(
     return (
       <div
         {...rest}
-        role="tablist"
         tabIndex={-1}
         className={cx(blockClass, className, `${blockClass}__${theme}`)}
         ref={carouselRef}
+        role="main"
         {...getDevtoolsProps(componentName)}
       >
         <div className={cx(`${blockClass}__elements-container`)}>

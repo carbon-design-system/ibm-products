@@ -6,9 +6,9 @@
  */
 
 import React from 'react';
-// import { getPathForComponent } from '../../../../packages/core/story-structure';
+import { getPathForComponent } from '../../../../packages/core/story-structure.js';
 
-import App from './App';
+import App from './App.jsx';
 
 import styles from './_storybook-styles.scss';
 

@@ -3,6 +3,10 @@
 
 $block-class: 'gallery';
 
+body {
+  overflow-x: hidden;
+}
+
 .#{$block-class}.#{$block-class} {
   width: 100vw;
   min-height: 100vh;

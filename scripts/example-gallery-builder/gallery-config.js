@@ -8,6 +8,11 @@
 const path = require('path');
 const fs = require('fs');
 
+const getSanitizedDir = (dir) =>
+  dir
+    .replace(/(-|_)\w/g, (m) => m[1].toUpperCase())
+    .replace(/./, (m) => m.toUpperCase());
+
 const getMergedConfig = (config) => {
   let mergedConfig;
   // appends any local config to the passed in config
@@ -97,6 +102,7 @@ const getExampleDirectoriesConfig = (
           path.join(galleryConfigDir, newThumbnailName)
         );
         output.thumbnail = `./${newThumbnailName}`;
+        output.key = getSanitizedDir(dir);
       }
 
       newConfig.push(output);
@@ -130,28 +136,33 @@ const writeGalleryConfig = (galleryConfigPath, config) => {
   fs.writeFileSync(galleryConfigPath, header);
   fs.appendFileSync(
     galleryConfigPath,
-    'const defaultOrNot = item => item.default || item; const config = ['
+    'const defaultOrNot = item => item.default || item;'
   );
+
+  fs.appendFileSync(galleryConfigPath, '/* --- import Thumbnails */');
+
+  config.forEach(({ key, thumbnail }) => {
+    fs.appendFileSync(
+      galleryConfigPath,
+      `import image${key} from '${thumbnail}';`
+    );
+  });
+
+  fs.appendFileSync(galleryConfigPath, 'const config = [');
+
   config.forEach((item) => {
     fs.appendFileSync(
       galleryConfigPath,
-      `{ label: '${item.label}', url: '${item.url}', thumbnailPath: '${item.thumbnail}' },`
+      `{ label: '${item.label}', url: '${item.url}', thumbnail: \`url(\${image${item.key}}\` },`
     );
   });
+
   fs.appendFileSync(
     galleryConfigPath,
     `];
 
-  const getConfig = async function () {
-  for (let item of config) {
-    const path = await import(item.thumbnailPath);
-    item.thumbnail = "url( \" + path.default + \" )";
-  }
 
-  return config;
-};
-
-export default getConfig;
+export default config;
 `
   );
 };
@@ -193,9 +204,7 @@ import { init } from './test-common';
     const skipTest = skipImport || dontTest[dir]?.skipTest;
     const skipReason = dontTest[dir]?.reason;
 
-    const sanitizedDir = dir
-      .replace(/(-|_)\w/g, (m) => m[1].toUpperCase())
-      .replace(/./, (m) => m.toUpperCase());
+    const sanitizedDir = getSanitizedDir(dir);
 
     if (skipImport) {
       exampleImports.push(`/* ** SKIP IMPORT **, reason:  '${skipReason}' `);

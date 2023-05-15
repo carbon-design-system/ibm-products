@@ -16,7 +16,7 @@ import imageCreateModal from './CreateModal--thumbnail.png';
 import imageCreateSidePanel from './CreateSidePanel--thumbnail.png';
 import imageCreateTearsheet from './CreateTearsheet--thumbnail.png';
 import imageCreateTearsheetNarrow from './CreateTearsheetNarrow--thumbnail.png';
-import imageDataGrid from './DataGrid--thumbnail.png';
+import imageDataGrid from './Datagrid--thumbnail.png';
 import imageDataSpreadsheet from './DataSpreadsheet--thumbnail.png';
 import imageEditInPlace from './EditInPlace--thumbnail.png';
 import imageEmptyStates from './EmptyStates--thumbnail.png';

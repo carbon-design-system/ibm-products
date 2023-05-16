@@ -29,7 +29,7 @@ assignees: ''
 
 > What browser are you working in?
 
-> What version of the @carbon/ibm-products (or @carbon/ibm-products) package are
+> What version of the @carbon/ibm-products (or @carbon/ibm-cloud-cognitive) package are
 > you using?
 
 > What offering/product do you work on? Any pressing ship or release dates we

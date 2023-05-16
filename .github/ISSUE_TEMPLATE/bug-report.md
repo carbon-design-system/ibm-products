@@ -44,7 +44,7 @@ assignees: ''
 
 > Please create a reduced test case in CodeSandbox
 >
-> https://codesandbox.io/s/github/carbon-design-system/ibm-products/tree/main/examples/cloud-cognitive/codesandbox
+> https://codesandbox.io/s/github/carbon-design-system/ibm-products/tree/main/examples/ibm-products/codesandbox
 
 ## Additional information
 

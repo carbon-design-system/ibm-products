@@ -7,11 +7,11 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { carbon } from '../../../../../cloud-cognitive/src/settings';
+import { carbon } from '../../../../../ibm-products/src/settings';
 
-import { ProductiveCard as CCProductiveCard } from '../../../../../cloud-cognitive/src';
+import { ProductiveCard as CCProductiveCard } from '../../../../../ibm-products/src';
 import { TrashCan16, Edit16 } from '@carbon/icons-react';
-import { StatusIcon } from '../../../../../cloud-cognitive/src';
+import { StatusIcon } from '../../../../../ibm-products/src';
 
 const ProductiveCard = (props) => {
   const kinds = [

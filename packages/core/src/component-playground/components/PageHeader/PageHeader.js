@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { PageHeader as CCPageHeader } from '../../../../../cloud-cognitive/src';
+import { PageHeader as CCPageHeader } from '../../../../../ibm-products/src';
 import { Lightning16, Bee24 } from '@carbon/icons-react';
 
 const PageHeader = (props) => {

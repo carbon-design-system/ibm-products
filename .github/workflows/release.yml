@@ -46,7 +46,7 @@ jobs:
 
       - name: Rename to ibm-cloud-cognitive for legacy publish
         run:
-          yarn json -I -f packages/cloud-cognitive/package.json -e
+          yarn json -I -f packages/ibm-products/package.json -e
           'this.name="@carbon/ibm-cloud-cognitive"'
 
       # Run yarn again after renaming package, required after move to yarn berry

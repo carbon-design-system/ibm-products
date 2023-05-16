@@ -9,12 +9,8 @@
 @use '@carbon/styles/scss/colors';
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/themes/scss/themes';
-@use '@carbon/themes/scss/theme';
 
 .welcome__container {
-  @include theme.theme(themes.$g10);
-
   position: fixed;
   top: 0;
   left: 0;
@@ -60,4 +56,6 @@
 .welcome__link.#{c4p-settings.$carbon-prefix}--link {
   margin-right: auto;
   margin-bottom: $spacing-03;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  color: colors.$blue-60;
 }

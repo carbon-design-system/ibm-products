@@ -18,7 +18,7 @@
 ## 🚀 Getting started
 
 If you’re just getting started and looking to browse our React components, take
-a look at [our Storybook](https://carbon-for-ibm-products.netlify.app).
+a look at [our Storybook](https://ibm-products.carbondesignsystem.com).
 
 All of our source code and documentation, including this readme, can be found on
 [our GitHub repo](https://github.com/carbon-design-system/ibm-products), which

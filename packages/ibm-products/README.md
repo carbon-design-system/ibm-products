@@ -79,16 +79,18 @@ packages.
 
 ## Examples
 
-### CodeSandbox
+### Online examples
 
 Examples for each released component, and some that are still not quite ready,
 can be found here on
-[CodeSandbox](https://codesandbox.io/examples/package/@carbon/ibm-products).
+
+[CodeSandbox](https://codesandbox.io/p/sandbox/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/example-gallery?file=%2Fsrc%2Fcomponents%2FGallery.jsx%3A7%2C26)
+[Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/example-gallery?file=src%2Fcomponents%2FGallery.jsx)
 
 ### Packages
 
 You can find example projects using the components in the
-[examples folder](../../packages/examples/carbon-for-ibm-products).
+[examples folder](../../examples/carbon-for-ibm-products).
 
 ## Usage
 

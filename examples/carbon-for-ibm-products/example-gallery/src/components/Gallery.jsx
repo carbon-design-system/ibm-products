@@ -9,7 +9,7 @@ import './_Gallery.scss';
 const blockClass = `gallery`;
 
 const packagePath =
-  'github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products';
+  'github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products';
 
 export const Gallery = ({site}) => {
   const [filteredConfig, setFilteredConfig] = useState([]);

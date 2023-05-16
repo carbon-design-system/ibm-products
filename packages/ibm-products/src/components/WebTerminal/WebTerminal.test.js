@@ -54,9 +54,9 @@ describe(name, () => {
   });
 
   /**
-    We are skipping the a11y test for now since the only a11y violation 
+    We are skipping the a11y test for now since the only a11y violation
     is a potential violation. We can remove the skip once we fix our accessibility-checker
-    issue. https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/2154
+    issue. https://github.com/carbon-design-system/ibm-products/issues/2154
   */
   it.skip('has no accessibility violations', async () => {
     const { container } = render(
@@ -82,7 +82,7 @@ describe(name, () => {
   });
 
   it('custom hook should toggle web terminal', () => {
-    /**  Utilizing renderHook so jest knows about the custom hook and passing 
+    /**  Utilizing renderHook so jest knows about the custom hook and passing
          in the WebTerminalProvider so that the hook can consume the value  */
     const { result } = renderHook(() => useWebTerminal(), {
       wrapper: WebTerminalProvider,
@@ -106,7 +106,7 @@ describe(name, () => {
   });
 
   it('custom hook should open and close web terminal', () => {
-    /**  Utilizing renderHook so jest knows about the custom hook and passing 
+    /**  Utilizing renderHook so jest knows about the custom hook and passing
          in the WebTerminalProvider so that the hook can consume the value  */
     const { result } = renderHook(() => useWebTerminal(), {
       wrapper: WebTerminalProvider,
@@ -163,7 +163,7 @@ describe(name, () => {
     const ref = React.createRef(null);
     render(<MockWebTerminal ref={ref}>Body content</MockWebTerminal>);
 
-    /** 
+    /**
       This await is necessary so that the document loads completely and the ref isn't null */
     await screen.findByText('Body content');
 

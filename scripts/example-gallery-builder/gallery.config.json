@@ -3,7 +3,7 @@
   "examples-disabled": [
     {
       "label": "PageHeader example",
-      "url": "https://codesandbox.io/s/pageheaderexample-rs5ie",
+      "directory": "PageHeader",
       "thumbnail": "url(\"https://screenshots.codesandbox.io/rs5ie/210.png\")"
     }
   ]

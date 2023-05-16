@@ -5,7 +5,7 @@
 > These PAL designs build on the foundation of IBM’s open source Carbon Design
 > System and React implementation to offer components and patterns beyond the
 > typical component library. Carbon for IBM Products was previously known as
-> Carbon for IBM Cloud and Cognitive (@carbon/ibm-products), and this name can
+> Carbon for IBM Cloud and Cognitive (@carbon/ibm-cloud-cognitive), and this name can
 > still be encountered in various places and historical logs.
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)

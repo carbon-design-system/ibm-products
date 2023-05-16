@@ -1,0 +1,80 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+// Other Carbon settings.
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+
+// Carousel uses the following Carbon components:
+// TODO: @import(s) of Carbon component styles used by Carousel
+
+// Carousel uses the following Carbon for IBM Products components:
+// TODO: @import(s) of IBM Products component styles used by Carousel
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin carousel {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--carousel;
+
+  .#{$block-class} {
+    position: relative;
+
+    &:focus {
+      outline: none;
+    }
+
+    &__elements-container {
+      overflow-x: hidden;
+
+      &--scrolled,
+      &--scroll-max {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        bottom: 0;
+        width: $spacing-12;
+        pointer-events: none;
+      }
+
+      &--scrolled {
+        left: 0;
+      }
+
+      &--scroll-max {
+        right: 0;
+      }
+    }
+
+    &__elements {
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      display: flex;
+      -ms-overflow-style: none;
+      overflow-x: scroll;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  }
+}
+
+@include exports('carousel') {
+  @include carousel;
+}

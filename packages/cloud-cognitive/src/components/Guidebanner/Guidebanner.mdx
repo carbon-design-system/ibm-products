@@ -1,0 +1,60 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { Guidebanner } from '.';
+
+# Guidebanner
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+[Guide banners](https://pages.github.ibm.com/cdai-design/pal/novice-to-pro/components/guide-banner/usage/)
+are used to give a bird’s eye view of information users need to know before
+diving into the page’s workflow. Guide banners sit at the top of a page or
+larger section of content to orient users on their first time accessing a page
+or after significant page updates and to introduce related foundational
+concepts.
+
+_[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
+is a continuous learning methodology + framework aimed to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users._
+
+## Example usage
+
+### Collapsable
+
+This is the typical use-case. The guide banner is minimized until the user opts
+to expand it by clicking the "Read more" button.
+
+Set the Guidebanner's `collapsable` prop to true.
+
+<!-- TODO: One example per designed use case. -->
+
+<Canvas>
+  <Story id={getStoryId(Guidebanner.displayName, 'collapsable')} />
+</Canvas>
+
+### Expanded
+
+Alternate use-case. The guide banner is always expanded.
+
+<!-- TODO: One example per designed use case. -->
+
+<Canvas>
+  <Story id={getStoryId(Guidebanner.displayName, 'many-items')} />
+</Canvas>
+
+## Code sample
+
+<!-- <CodesandboxLink exampleDirectory="Guidebanner" /> -->
+
+## Component API
+
+<ArgsTable />

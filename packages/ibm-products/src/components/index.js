@@ -84,4 +84,5 @@ export { EditUpdateCards } from './EditUpdateCards';
 
 export { InlineEdit } from './InlineEdit';
 export { EditInPlace } from './EditInPlace';
+export { Carousel } from './Carousel';
 export { NonLinearReading } from './NonLinearReading';

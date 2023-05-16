@@ -6,7 +6,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "url": "https://github.com/carbon-design-system/ibm-products.git",
     "directory": "config/stylelint-config-ibm-products"
   },
   "bugs": "https://github.com/carbon-design-system/ibm-products/issues",

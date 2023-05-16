@@ -20,7 +20,7 @@
 ## 🚀 Getting started
 
 If you’re just getting started and looking to browse our React components, take
-a look at [our Storybook](https://carbon-for-ibm-products.netlify.app).
+a look at [our Storybook](https://ibm-products.carbondesignsystem.com).
 
 ### 📦 Installing Carbon for IBM Products
 

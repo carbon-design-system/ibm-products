@@ -16872,9 +16872,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ibm-cloud-cognitive@workspace:.":
+"ibm-products@workspace:.":
   version: 0.0.0-use.local
-  resolution: "ibm-cloud-cognitive@workspace:."
+  resolution: "ibm-products@workspace:."
   dependencies:
     "@babel/core": ^7.20.12
     "@babel/eslint-parser": ^7.19.1

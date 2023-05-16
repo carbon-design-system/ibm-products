@@ -84,7 +84,7 @@ const getExampleDirectoriesConfig = (
 
       // config url or default
       const packagePath =
-        'github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products';
+        'github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products';
       const stackblitz = `https://stackblitz.com/${packagePath}/${dir}?file=src%2FExample%2FExample.jsx`;
       // const codesandbox = `https://codesandbox.io/p/sandbox/${packagePath}/${dir}?file=%2Fsrc%2FExample%2FExample.jsx`;
       // TODO provide option of using both target URLs (codesandbox seems much quicker)

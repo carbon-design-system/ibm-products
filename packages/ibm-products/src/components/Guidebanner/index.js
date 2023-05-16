@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { Guidebanner } from "./Guidebanner";
-export { GuidebannerElement } from "./GuidebannerElement";
-export { GuidebannerElementButton } from "./GuidebannerElementButton";
-export { GuidebannerElementLink } from "./GuidebannerElementLink";
+export { Guidebanner } from './Guidebanner';
+export { GuidebannerElement } from './GuidebannerElement';
+export { GuidebannerElementButton } from './GuidebannerElementButton';
+export { GuidebannerElementLink } from './GuidebannerElementLink';

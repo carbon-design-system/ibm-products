@@ -65,7 +65,7 @@ const config = [
     thumbnail: `url(${imageCreateSidePanel}`,
   },
   {
-    label: 'Tearsheet',
+    label: 'Create Tearsheet',
     directory: 'CreateTearsheet',
     thumbnail: `url(${imageCreateTearsheet}`,
   },

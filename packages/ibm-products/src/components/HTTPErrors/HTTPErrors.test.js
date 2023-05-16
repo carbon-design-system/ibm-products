@@ -37,7 +37,7 @@ const defaultProps = {
     },
     {
       text: 'Carbon for IBM Products component library',
-      href: 'https://github.com/carbon-design-system/ibm-cloud-cognitive',
+      href: 'https://github.com/carbon-design-system/ibm-products',
     },
   ],
   ref,

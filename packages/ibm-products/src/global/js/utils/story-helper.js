@@ -69,7 +69,7 @@ export const prepareStory = (template, options) => {
  * The link URL is based on the example directory name and the standard codesandbox URL for package examples.
  */
 const packagePath =
-  'github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products';
+  'github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products';
 
 export const CodesandboxLink = ({ exampleDirectory }) => {
   // const stackblitz = `https://stackblitz.com/${packagePath}/${dir}?file=src%2FExample%2FExample.jsx`;

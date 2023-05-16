@@ -17,8 +17,8 @@ import { export1 } from '@carbon/ibm-products/lib';
 import { export1 as alias1 } from "@carbon/ibm-products";
 import { export1 , export2 } from '@carbon/ibm-cloud-cognitive';
 import { export1 , export2 as alias2 } from "@carbon/ibm-cloud-cognitive";
-import { export1 , export2 as alias2 } from "@carbon/ibm-cloud-cognitive/lib";
-import { export1 , export2 as alias2 } from "@carbon/ibm-cloud-cognitive/es";
+import { export1 , export2 as alias2 } from "@carbon/ibm-products/lib";
+import { export1 , export2 as alias2 } from "@carbon/ibm-products/es";
 import defaultExport, { export1 } from '@carbon/ibm-cloud-cognitive';
 import defaultExport, * as name from "@carbon/ibm-cloud-cognitive";
 */

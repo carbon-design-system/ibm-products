@@ -14,22 +14,22 @@ line of code.
 
 - Have a question? Visit our
   [Slack channel](https://ibm-casdesign.slack.com/archives/C013ZTX0N6B) and/or
-  [ask a question on GitHub](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=type%3A+question+%E2%9D%93&template=question.md&title=)
+  [ask a question on GitHub](https://github.com/carbon-design-system/ibm-products/issues/new?assignees=&labels=type%3A+question+%E2%9D%93&template=question.md&title=)
 - Have an issue you’d like resolved, then
-  [raise an issue](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=type%3A+bug&template=bug-report.md&title=)
+  [raise an issue](https://github.com/carbon-design-system/ibm-products/issues/new?assignees=&labels=type%3A+bug&template=bug-report.md&title=)
 - Have a new component, pattern, or enhancement request, then
-  [tell us about it](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&template=component-or-pattern.md)
+  [tell us about it](https://github.com/carbon-design-system/ibm-products/issues/new?assignees=&labels=&template=component-or-pattern.md)
 
 ## Code
 
 There’s only so many hours in a day, so we welcome contributions of code.
-[Find an issue or raise one](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues),
+[Find an issue or raise one](https://github.com/carbon-design-system/ibm-products/issues),
 and follow the guide below.
 
 ### 1. Fork the repo
 
 Go to the
-[Carbon for IBM Products repository on GitHub](https://github.com/carbon-design-system/ibm-cloud-cognitive)
+[Carbon for IBM Products repository on GitHub](https://github.com/carbon-design-system/ibm-products)
 and [fork the repo](https://help.github.com/articles/fork-a-repo/),
 [syncing with the original repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced).
 
@@ -76,7 +76,7 @@ See example component enabled via feature flags on
 [CodeSandbox](https://codesandbox.io/s/example-component-canary-olif5).
 
 For more information on how this affects components see
-[CANARY_STRUCTURE.md](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/docs/guides/CANARY_STRUCTURE.md).
+[CANARY_STRUCTURE.md](https://github.com/carbon-design-system/ibm-products/blob/master/docs/guides/CANARY_STRUCTURE.md).
 
 ### 4. Test your JavaScript code
 
@@ -92,7 +92,7 @@ compatibility, and follow the
 ### 5. Make a pull request
 
 **Note:** Before you make a pull request,
-[search the issues](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues)
+[search the issues](https://github.com/carbon-design-system/ibm-products/issues)
 to see if a similar issue has already been submitted. If a similar issue has
 been submitted, assign yourself or ask to be assigned to the issue by posting a
 comment. If the issue does not exist, please make a new issue.
@@ -151,7 +151,7 @@ additional work to do.
 ### 8. New component or pattern
 
 If you create a new component or pattern, it should first be contributed as
-[`canary`](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/docs/guides/CANARY_STRUCTURE.md).
+[`canary`](https://github.com/carbon-design-system/ibm-products/blob/master/docs/guides/CANARY_STRUCTURE.md).
 
 Due to the nature of the monorepo, when you add a new component or pattern, be
 sure to add it in `packages/core/story-structure`. This step will surface the
@@ -161,11 +161,11 @@ To move a component from `canary` to the released state, there are two
 additional tasks that must be completed.
 
 - [ ] See our
-      [design review guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/docs/reviews/DESIGN_REVIEW_GUIDELINES.md)
+      [design review guidelines](https://github.com/carbon-design-system/ibm-products/blob/main/docs/reviews/DESIGN_REVIEW_GUIDELINES.md)
       and then create a new issue based on the
-      [`design-review` template](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&design-review.md)
+      [`design-review` template](https://github.com/carbon-design-system/ibm-products/issues/new?assignees=&labels=&design-review.md)
       and complete the steps suggested.
 - [ ] See our
-      [release guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/docs/reviews/RELEASE_REVIEW_GUIDELINES.md)
+      [release guidelines](https://github.com/carbon-design-system/ibm-products/blob/main/docs/reviews/RELEASE_REVIEW_GUIDELINES.md)
       and then create a new issue based on the
-      [`release-review` template](https://github.com/carbon-design-system/ibm-cloud-cognitive/issues/new?assignees=&labels=&release-review.md).
+      [`release-review` template](https://github.com/carbon-design-system/ibm-products/issues/new?assignees=&labels=&release-review.md).

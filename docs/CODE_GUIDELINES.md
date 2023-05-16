@@ -151,7 +151,7 @@ unclear.
 - Ensure all code is neatly formatted (use `yarn format` and/or a prettier
   plugin for an editor to follow the prettier rules set up in the project), and
   that code is clear, maintainable and follows standard React practices and the
-  [contributing guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md).
+  [contributing guidelines](https://github.com/carbon-design-system/ibm-products/blob/master/.github/CONTRIBUTING.md).
 
 ## Component SCSS code
 

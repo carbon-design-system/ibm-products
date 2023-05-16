@@ -74,7 +74,7 @@ const decorators = [
                     kind="ghost"
                     onClick={() => {
                       window.open(
-                        'https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/cloud-cognitive#enabling-canary-components-and-flagged-features'
+                        'https://github.com/carbon-design-system/ibm-products/tree/main/packages/cloud-cognitive#enabling-canary-components-and-flagged-features'
                       );
                     }}
                   >

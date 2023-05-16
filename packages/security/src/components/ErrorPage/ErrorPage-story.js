@@ -41,7 +41,7 @@ disableCenteredStories(storiesOf(patterns('ErrorPage#legacy'), module))
         className="page-layouts__banner"
         actions={
           <NotificationActionButton
-            href="https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-patterns-http-errors-httperror403--with-all-props-set"
+            href="https://v1-ibm-products.carbondesignsystem.com/?path=/story/ibm-products-patterns-http-errors-httperror403--with-all-props-set"
             rel="noopener noreferrer"
             target="_blank"
           >

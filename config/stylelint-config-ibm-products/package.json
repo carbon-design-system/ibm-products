@@ -9,7 +9,7 @@
     "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
     "directory": "config/stylelint-config-ibm-products"
   },
-  "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
+  "bugs": "https://github.com/carbon-design-system/ibm-products/issues",
   "scripts": {
     "//upgrade-dependencies": "# don't upgrade carbon (done globally)",
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon$)/'"

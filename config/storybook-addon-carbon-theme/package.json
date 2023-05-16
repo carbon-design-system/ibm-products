@@ -9,7 +9,7 @@
     "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
     "directory": "packages/storybook-addon-carbon-theme"
   },
-  "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
+  "bugs": "https://github.com/carbon-design-system/ibm-products/issues",
   "homepage": "https://github.com/storybookjs/storybook#readme",
   "files": [
     "dist/**/*",

@@ -51,7 +51,7 @@ the following should be done:
   version of @carbon/ibm-products.
 
   To do this, share the initial part of the release summary from the
-  [releases page on GitHub](https://github.com/carbon-design-system/ibm-cloud-cognitive/releases)
+  [releases page on GitHub](https://github.com/carbon-design-system/ibm-products/releases)
   that shows the package name, version number, and any features and bug fixes
   but stopping before the assets (there is no need to post those into the Slack
   message).

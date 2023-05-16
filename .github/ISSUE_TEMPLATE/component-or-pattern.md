@@ -31,7 +31,7 @@ Before starting work on this epic, please review and complete the following.
 ### Working in Carbon for IBM Products package
 
 - [ ] Have you reviewed our
-      [contribution guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/.github/CONTRIBUTING.md)?
+      [contribution guidelines](https://github.com/carbon-design-system/ibm-products/blob/master/.github/CONTRIBUTING.md)?
 - [ ] Have you noted our
-      [code guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/docs/CODE_GUIDELINES.md)?
+      [code guidelines](https://github.com/carbon-design-system/ibm-products/blob/master/docs/CODE_GUIDELINES.md)?
 - [ ] Did you use the CLI to scaffold your new component?

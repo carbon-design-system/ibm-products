@@ -4,7 +4,7 @@
 
 Pull requests are automatically assigned to the IBM Cloud & Cognitive
 Development team. (Pull requests related to the
-[`security` package](https://github.com/carbon-design-system/ibm-cloud-cognitive/tree/main/packages/security)
+[`security` package](https://github.com/carbon-design-system/ibm-products/tree/main/packages/security)
 are assigned the individual maintainers of that package.)
 
 ## Reviewing code
@@ -12,7 +12,7 @@ are assigned the individual maintainers of that package.)
 Pull requests should be reviewed in a timely manner.
 
 Code review should follow the process and standards documented in our
-[PR review guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/docs/reviews/PR_REVIEW_GUIDELINES.md).
+[PR review guidelines](https://github.com/carbon-design-system/ibm-products/blob/main/docs/reviews/PR_REVIEW_GUIDELINES.md).
 
 Once a PR is approved, you can add the label **`status: ready to merge`**, to
 allow Kodiak to handle automatic updates and merging. PRs can be merged by their
@@ -22,7 +22,7 @@ team, you may also merge and delete the branches on their behalf.
 ## Performing release reviews
 
 As described in the
-[release review guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/docs/reviews/RELEASE_REVIEW_GUIDELINES.md),
+[release review guidelines](https://github.com/carbon-design-system/ibm-products/blob/main/docs/reviews/RELEASE_REVIEW_GUIDELINES.md),
 the core contribution team is responsible for performing release reviews.
 
 In most cases, a new maintainer will partner with an experienced contributor for
@@ -48,4 +48,4 @@ After each release, our contributors should announce the latest version of
 `@carbon/ibm-products` in the `ibmproducts-pal-dev` Slack channel.
 
 For more detail on publishing releases, please see our guidelines on
-[publishing releases](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/main/docs/PUBLISHING_RELEASES.md)
+[publishing releases](https://github.com/carbon-design-system/ibm-products/blob/main/docs/PUBLISHING_RELEASES.md)

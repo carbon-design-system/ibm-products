@@ -33,7 +33,7 @@ export const Example = () => {
         copyrightText={<>Copyright &copy; 2020 IBM corporation</>}
         links={[
           <Link
-            href="https://carbon-for-ibm-products.netlify.app/"
+            href="https://ibm-products.carbondesignsystem.com/"
             key="View storybook"
           >
             View the components

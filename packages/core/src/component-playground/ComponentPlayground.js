@@ -7,7 +7,7 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { Cascade } from '../../../cloud-cognitive/src';
+import { Cascade } from '../../../ibm-products/src';
 import {
   ProductiveCard,
   GlobalHeader,
@@ -17,7 +17,7 @@ import {
   TearsheetNarrow,
   TearsheetWide,
 } from './components';
-import { carbon } from '../../../cloud-cognitive/src/settings';
+import { carbon } from '../../../ibm-products/src/settings';
 //import { CardData } from './data';
 
 const App = () => {

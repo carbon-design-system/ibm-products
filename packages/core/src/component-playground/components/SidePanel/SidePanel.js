@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import {
   SidePanel as CCSidePanel,
   UserProfileImage,
-} from '../../../../../cloud-cognitive/src';
+} from '../../../../../ibm-products/src';
 import {
   Column,
   NumberInput,
@@ -21,7 +21,7 @@ import {
   TextInput,
   FormGroup,
 } from 'carbon-components-react';
-import { pkg, carbon } from '../../../../../cloud-cognitive/src/settings';
+import { pkg, carbon } from '../../../../../ibm-products/src/settings';
 
 import costaPic from '../../_story-assets/costa.jpeg';
 

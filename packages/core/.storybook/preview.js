@@ -22,7 +22,7 @@ import {
 } from 'carbon-components-react';
 import React, { useEffect } from 'react';
 
-import { pkg } from '../../cloud-cognitive/src/settings';
+import { pkg } from '../../ibm-products/src/settings';
 
 import index from './index.scss';
 import { getSectionSequence } from '../story-structure';
@@ -74,7 +74,7 @@ const decorators = [
                     kind="ghost"
                     onClick={() => {
                       window.open(
-                        'https://github.com/carbon-design-system/ibm-products/tree/main/packages/cloud-cognitive#enabling-canary-components-and-flagged-features'
+                        'https://github.com/carbon-design-system/ibm-products/tree/main/packages/ibm-products#enabling-canary-components-and-flagged-features'
                       );
                     }}
                   >

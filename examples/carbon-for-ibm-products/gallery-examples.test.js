@@ -17,8 +17,8 @@ import { Example as CreateModalExample } from './CreateModal/src/Example/Example
 import { Example as CreateSidePanelExample } from './CreateSidePanel/src/Example/Example';
 import { Example as CreateTearsheetExample } from './CreateTearsheet/src/Example/Example';
 import { Example as CreateTearsheetNarrowExample } from './CreateTearsheetNarrow/src/Example/Example';
-import { Example as DataGridExample } from './DataGrid/src/Example/Example';
 import { Example as DataSpreadsheetExample } from './DataSpreadsheet/src/Example/Example';
+import { Example as DatagridExample } from './Datagrid/src/Example/Example';
 import { Example as EditInPlaceExample } from './EditInPlace/src/Example/Example';
 import { Example as EmptyStatesExample } from './EmptyStates/src/Example/Example';
 import { Example as ExportModalExample } from './ExportModal/src/Example/Example';
@@ -90,14 +90,14 @@ describe('All examples', () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('DataGrid renders', () => {
-    render(<DataGridExample />);
+  it('DataSpreadsheet renders', () => {
+    render(<DataSpreadsheetExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('DataSpreadsheet renders', () => {
-    render(<DataSpreadsheetExample />);
+  it('Datagrid renders', () => {
+    render(<DatagridExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

@@ -2,27 +2,18 @@ import React, { useState, useEffect } from 'react';
 
 import { GalleryCard } from './GalleryCard';
 import { Search } from '@carbon/react';
-import getConfig from '../gallery-config';
+import config from '../gallery-config';
 
 import './_Gallery.scss';
 
 const blockClass = `gallery`;
 
 export const Gallery = () => {
-  const [config, setConfig] = useState(null);
   const [filteredConfig, setFilteredConfig] = useState([]);
 
   useEffect(() => {
-    getConfig().then(result => {
-        setConfig(result);
-    });
+    setFilteredConfig(config);
   }, [])
-
-  useEffect(() => {
-    if (config) {
-        setFilteredConfig(config);
-    }
-  }, [config])
 
   const handleSearch = (ev) => {
     if (!ev.target.value) {

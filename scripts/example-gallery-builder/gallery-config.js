@@ -8,6 +8,11 @@
 const path = require('path');
 const fs = require('fs');
 
+const getSanitizedDir = (dir) =>
+  dir
+    .replace(/(-|_)\w/g, (m) => m[1].toUpperCase())
+    .replace(/./, (m) => m.toUpperCase());
+
 const getMergedConfig = (config) => {
   let mergedConfig;
   // appends any local config to the passed in config
@@ -79,8 +84,8 @@ const getExampleDirectoriesConfig = (
 
       // config url or default
       const packagePath =
-        'github/carbon-design-system/ibm-cloud-cognitive/tree/carbon-v11/examples/carbon-for-ibm-products';
-      const stackblitz = `https://stackblitz.com/github/${packagePath}/${dir}?file=src%2FExample%2FExample.jsx`;
+        'github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products';
+      const stackblitz = `https://stackblitz.com/${packagePath}/${dir}?file=src%2FExample%2FExample.jsx`;
       // const codesandbox = `https://codesandbox.io/p/sandbox/${packagePath}/${dir}?file=%2Fsrc%2FExample%2FExample.jsx`;
       // TODO provide option of using both target URLs (codesandbox seems much quicker)
       const url = stackblitz;
@@ -97,6 +102,7 @@ const getExampleDirectoriesConfig = (
           path.join(galleryConfigDir, newThumbnailName)
         );
         output.thumbnail = `./${newThumbnailName}`;
+        output.key = getSanitizedDir(dir);
       }
 
       newConfig.push(output);
@@ -130,32 +136,33 @@ const writeGalleryConfig = (galleryConfigPath, config) => {
   fs.writeFileSync(galleryConfigPath, header);
   fs.appendFileSync(
     galleryConfigPath,
-    'const defaultOrNot = item => item.default || item; const config = ['
+    'const defaultOrNot = item => item.default || item;'
   );
-  config.forEach((item) => {
-    const thumbnail =
-      item.thumbnail && item.thumbnail.startsWith('url(')
-        ? `'${item.thumbnail}'`
-        : "'url( ' + defaultOrNot(require('" + item.thumbnail + "')) + ')'";
+
+  fs.appendFileSync(galleryConfigPath, '/* --- import Thumbnails */');
+
+  config.forEach(({ key, thumbnail }) => {
     fs.appendFileSync(
       galleryConfigPath,
-      `{ label: '${item.label}', url: '${item.url}', thumbnail: ${thumbnail} },`
+      `import image${key} from '${thumbnail}';`
     );
   });
+
+  fs.appendFileSync(galleryConfigPath, 'const config = [');
+
+  config.forEach((item) => {
+    fs.appendFileSync(
+      galleryConfigPath,
+      `{ label: '${item.label}', url: '${item.url}', thumbnail: \`url(\${image${item.key}}\` },`
+    );
+  });
+
   fs.appendFileSync(
     galleryConfigPath,
     `];
 
-  const getConfig = async function () {
-  for (let item of config) {
-    const path = await import(item.thumbnailPath);
-    item.thumbnail = "url( \" + path.default + \" )";
-  }
 
-  return config;
-};
-
-export default getConfig;
+export default config;
 `
   );
 };
@@ -170,7 +177,7 @@ const writeGalleryTests = (testPath, directories) => {
     // 'Test fails': { /* <-- directory name */
     //   skipTest: true, reason: 'Test currently fails due to XYZ.'
     //  },
-    'Carbon-v11-template': {
+    'main-template': {
       skipImport: true,
       reason: 'Carbon v11 not supported in v1 repo.',
     },
@@ -197,9 +204,7 @@ import { init } from './test-common';
     const skipTest = skipImport || dontTest[dir]?.skipTest;
     const skipReason = dontTest[dir]?.reason;
 
-    const sanitizedDir = dir
-      .replace(/(-|_)\w/g, (m) => m[1].toUpperCase())
-      .replace(/./, (m) => m.toUpperCase());
+    const sanitizedDir = getSanitizedDir(dir);
 
     if (skipImport) {
       exampleImports.push(`/* ** SKIP IMPORT **, reason:  '${skipReason}' `);

@@ -3,11 +3,11 @@ import { ThemeProvider } from './ThemeSelector/ThemeContext';
 import { ThemeDropdown } from './ThemeSelector/ThemeDropdown';
 import Gallery from './components/Gallery';
 
-function App() {
+function App({site = 'codesandbox'}) {
   return (
     <div>
       <ThemeProvider>
-        <Gallery />
+        <Gallery site={site} />
         <ThemeDropdown />
       </ThemeProvider>
     </div>

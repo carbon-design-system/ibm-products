@@ -10,8 +10,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 
-const REPO_URL_BASE =
-  'https://github.com/carbon-design-system/ibm-cloud-cognitive';
+const REPO_URL_BASE = 'https://github.com/carbon-design-system/ibm-products';
 
 // Default set of keywords to include in each `package.json`.
 const DEFAULT_KEYWORDS = [

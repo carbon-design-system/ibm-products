@@ -82,15 +82,7 @@ const getExampleDirectoriesConfig = (
         return fs.existsSync(filePath);
       });
 
-      // config url or default
-      const packagePath =
-        'github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products';
-      const stackblitz = `https://stackblitz.com/${packagePath}/${dir}?file=src%2FExample%2FExample.jsx`;
-      // const codesandbox = `https://codesandbox.io/p/sandbox/${packagePath}/${dir}?file=%2Fsrc%2FExample%2FExample.jsx`;
-      // TODO provide option of using both target URLs (codesandbox seems much quicker)
-      const url = stackblitz;
-
-      const output = { label, url };
+      const output = { label, directory: dir };
 
       // have a thumbnail so add it to th config
       if (thumbnail) {
@@ -153,7 +145,7 @@ const writeGalleryConfig = (galleryConfigPath, config) => {
   config.forEach((item) => {
     fs.appendFileSync(
       galleryConfigPath,
-      `{ label: '${item.label}', url: '${item.url}', thumbnail: \`url(\${image${item.key}}\` },`
+      `{ label: '${item.label}', directory: '${item.directory}', thumbnail: \`url(\${image${item.key}}\` },`
     );
   });
 

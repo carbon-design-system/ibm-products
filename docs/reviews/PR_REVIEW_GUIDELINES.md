@@ -1,9 +1,9 @@
 # PR reviews
 
 When reviewing a PR, check that our
-[code guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/docs/CODE_GUIDELINES.md)
+[code guidelines](https://github.com/carbon-design-system/ibm-products/blob/master/docs/CODE_GUIDELINES.md)
 are followed, and keep an eye on the
-[release review guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/docs/reviews/RELEASE_REVIEW_GUIDELINES.md).
+[release review guidelines](https://github.com/carbon-design-system/ibm-products/blob/master/docs/reviews/RELEASE_REVIEW_GUIDELINES.md).
 
 Each PR should be reviewed based on these criteria where applicable.
 

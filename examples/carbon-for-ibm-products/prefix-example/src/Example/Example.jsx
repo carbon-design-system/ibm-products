@@ -40,34 +40,25 @@ export const Example = () => {
       <AboutModal
         tabListAriaLabel="an aria label"
         open={isOpen}
-        additionalInfo={[
-          {
-            content: '1.3.41',
-            label: 'Version number',
-          },
-          {
-            content: (
-              <>
-                <img
-                  alt="Grafana"
-                  className="about-modal-stories--tech-logo"
-                  src={grafanaLogo}
-                />
-                <img
-                  alt="Ansible"
-                  className="about-modal-stories--tech-logo"
-                  src={ansibleLogo}
-                />
-                <img
-                  alt="JavaScript"
-                  className="about-modal-stories--tech-logo"
-                  src={jsLogo}
-                />
-              </>
-            ),
-            label: 'Technologies used',
-          },
-        ]}
+        additionalInfo={
+        <>
+            <img
+              alt="Grafana"
+              className="about-modal__tech-logo"
+              src={grafanaLogo}
+            />
+            <img
+              alt="Ansible"
+              className="about-modal__tech-logo"
+              src={ansibleLogo}
+            />
+            <img
+              alt="JavaScript"
+              className="about-modal__tech-logo"
+              src={jsLogo}
+            />
+          </>
+        }
         closeIconDescription="Close"
         content={
           <>This is example content for an About Modal with all props set.</>

@@ -8,11 +8,11 @@
 > Carbon for IBM Cloud and Cognitive, and this name can still be encountered in
 > various places and historical logs.
 
-[![All Contributors](https://img.shields.io/github/all-contributors/carbon-design-system/ibm-cloud-cognitive?color=ee8449)](#contributors-)
+[![All Contributors](https://img.shields.io/github/all-contributors/carbon-design-system/ibm-products?color=ee8449)](#contributors-)
 [![Licensed under the Apache License, Version 2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/carbon-design-system/ibm-products/blob/master/LICENSE)
 [![Build status](https://github.com/carbon-design-system/ibm-products/actions/workflows/ci.yml/badge.svg)](https://github.com/carbon-design-system/ibm-products/actions/workflows/ci.yml)
 [![Netlify status](https://img.shields.io/netlify/f850c678-e8be-43c0-aa95-b2b9cca8ac21)](https://app.netlify.com/sites/carbon-for-ibm-products/deploys)
-[![GitHub Lerna version](https://img.shields.io/github/lerna-json/v/carbon-design-system/ibm-cloud-cognitive)](https://lerna.js.org)
+[![GitHub Lerna version](https://img.shields.io/github/lerna-json/v/carbon-design-system/ibm-products)](https://lerna.js.org)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/carbon-design-system/ibm-products/blob/master/.github/CONTRIBUTING.md)
 
 ## 🚀 Getting started
@@ -21,8 +21,8 @@ If you’re just getting started and looking to browse our React components, tak
 a look at [our Storybook](https://carbon-for-ibm-products.netlify.app).
 
 All of our source code and documentation, including this readme, can be found on
-[our GitHub repo](https://github.com/carbon-design-system/ibm-cloud-cognitive),
-which is also the place to
+[our GitHub repo](https://github.com/carbon-design-system/ibm-products), which
+is also the place to
 [open issues](https://github.com/carbon-design-system/ibm-products/issues/new/choose)
 if you have a problem or find a defect or would like to request a new feature or
 change something.

@@ -10,8 +10,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 
-const REPO_URL_BASE =
-  'https://github.com/carbon-design-system/ibm-cloud-cognitive';
+const REPO_URL_BASE = 'https://github.com/carbon-design-system/ibm-products';
 
 function monorepo() {
   async function transformer(tree, file) {

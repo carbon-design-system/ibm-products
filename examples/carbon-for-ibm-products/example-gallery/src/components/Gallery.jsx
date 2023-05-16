@@ -8,12 +8,28 @@ import './_Gallery.scss';
 
 const blockClass = `gallery`;
 
-export const Gallery = () => {
+const packagePath =
+  'github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products';
+
+export const Gallery = ({site}) => {
   const [filteredConfig, setFilteredConfig] = useState([]);
 
+  const getLink = (dir) => {
+    switch (site) {
+      case 'stackblitz':
+        return `https://stackblitz.com/${packagePath}/${dir}?file=src%2FExample%2FExample.jsx`;
+      default:
+        // codesandbox
+        return `https://codesandbox.io/p/sandbox/${packagePath}/${dir}?file=%2Fsrc%2FExample%2FExample.jsx`;
+    }
+  };
+
   useEffect(() => {
+    config.forEach(item => {
+      item.url = getLink(item.directory, site)
+    })
     setFilteredConfig(config);
-  }, [])
+  }, [config, site])
 
   const handleSearch = (ev) => {
     if (!ev.target.value) {
@@ -23,6 +39,7 @@ export const Gallery = () => {
       setFilteredConfig(config.filter((item) => filter.test(item.label)));
     }
   };
+
 
   return (
     <div className={blockClass}>
@@ -42,6 +59,7 @@ export const Gallery = () => {
               className={`${blockClass}__gallery-item`}
               key={index}
               title={item.label}
+              // url={item.url}
               url={item.url}
               target="_blank" // NOTE: _top and _parent do not seem to work in codesandbox
               thumbnail={item.thumbnail}

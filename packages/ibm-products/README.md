@@ -5,14 +5,14 @@
 > These PAL designs build on the foundation of IBM’s open source Carbon Design
 > System and React implementation to offer components and patterns beyond the
 > typical component library. Carbon for IBM Products was previously known as
-> Carbon for IBM Cloud and Cognitive (@carbon/ibm-cloud-cognitive), and this
-> name can still be encountered in various places and historical logs.
+> Carbon for IBM Cloud and Cognitive (@carbon/ibm-products), and this name can
+> still be encountered in various places and historical logs.
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 [![Licensed under the Apache License, Version 2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://github.com/carbon-design-system/ibm-products/blob/master/LICENSE)
 [![Build status](https://github.com/carbon-design-system/ibm-products/actions/workflows/ci.yml/badge.svg)](https://github.com/carbon-design-system/ibm-products/actions/workflows/ci.yml)
 [![Netlify status](https://img.shields.io/netlify/e8cd9972-0fc8-4c51-a911-e9a930ca6605)](https://app.netlify.com/sites/v11-carbon-for-ibm-products/deploys)
-[![GitHub Lerna version](https://img.shields.io/github/lerna-json/v/carbon-design-system/ibm-cloud-cognitive)](https://lerna.js.org)
+[![GitHub Lerna version](https://img.shields.io/github/lerna-json/v/carbon-design-system/ibm-products)](https://lerna.js.org)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](https://github.com/carbon-design-system/ibm-products/blob/master/.github/CONTRIBUTING.md)
 
 > Carbon for IBM Products common UI components
@@ -74,7 +74,7 @@ dependencies which need to be installed.
 
 **Note:** `@carbon/elements` rolls up a number of Carbon packages that could be
 installed independently. As this list of dependencies could change, we leave you
-to view `package.json` in ibm-cloud-cognitive if you wish to install individual
+to view `package.json` in ibm-products if you wish to install individual
 packages.
 
 ## Examples
@@ -83,7 +83,7 @@ packages.
 
 Examples for each released component, and some that are still not quite ready,
 can be found here on
-[CodeSandbox](https://codesandbox.io/examples/package/@carbon/ibm-cloud-cognitive).
+[CodeSandbox](https://codesandbox.io/examples/package/@carbon/ibm-products).
 
 ### Packages
 

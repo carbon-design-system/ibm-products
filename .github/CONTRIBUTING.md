@@ -29,7 +29,7 @@ and follow the guide below.
 ### 1. Fork the repo
 
 Go to the
-[Carbon for IBM Products repository on GitHub](https://github.com/carbon-design-system/ibm-cloud-cognitive)
+[Carbon for IBM Products repository on GitHub](https://github.com/carbon-design-system/ibm-products)
 and [fork the repo](https://help.github.com/articles/fork-a-repo/),
 [syncing with the original repo](https://docs.github.com/en/github/getting-started-with-github/fork-a-repo#keep-your-fork-synced).
 

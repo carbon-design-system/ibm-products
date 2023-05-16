@@ -6,7 +6,7 @@
   "main": "dist/react.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "url": "https://github.com/carbon-design-system/ibm-products.git",
     "directory": "packages/storybook-addon-carbon-theme"
   },
   "bugs": "https://github.com/carbon-design-system/ibm-products/issues",

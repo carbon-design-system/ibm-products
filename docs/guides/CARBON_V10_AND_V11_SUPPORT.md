@@ -35,9 +35,9 @@ following command:
 ```sh
 $ mkdir ibm-cloud-cognitive-v11
 $ cd ibm-cloud-cognitive-v11
-$ git clone --branch carbon-v11 git@github.com:carbon-design-system/ibm-cloud-cognitive.git . // will clone from `carbon-v11` inside of the new v11 project directory that was just created
+$ git clone --branch carbon-v11 git@github.com:carbon-design-system/ibm-products.git . // will clone from `carbon-v11` inside of the new v11 project directory that was just created
 $ git remote set-url origin <ADD YOUR ORIGIN URL>
-$ git remote add upstream git@github.com:carbon-design-system/ibm-cloud-cognitive.git
+$ git remote add upstream git@github.com:carbon-design-system/ibm-products.git
 ```
 
 Afterwards, confirm that your remote urls are properly configured.

@@ -6,7 +6,7 @@
   "main": "scripts/build.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "url": "https://github.com/carbon-design-system/ibm-products.git",
     "directory": "packages/core"
   },
   "bugs": "https://github.com/carbon-design-system/ibm-products/issues",

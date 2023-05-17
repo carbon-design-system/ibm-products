@@ -28,6 +28,9 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
 
   // Below is to handle multiple column resize and `double click` column to fit content.
   const handleMultiColumSelect = (header, e) => {
+    
+    document.getSelection().removeAllRanges();
+
     setDragStopped(false);
     if (e.shiftKey && !selectedHeader.some((item) => item.id === header.id)) {
       const headerId = header.id;
@@ -36,7 +39,6 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
         ...current,
         { [headerId]: header.width },
       ]);
-      document.getSelection().removeAllRanges();
     }
     if (!e.shiftKey) {
       setSelectedHeader([]); // Remove selection if `Shift` not pressed while clicking on resizer
@@ -51,11 +53,20 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
           `.row_${row.id}__column__${header.id}`
         );
         const colHeader = document.querySelector(`.column__${header.id}`);
-        if (cell.firstChild.scrollWidth) {
-          cellWidths.push(cell.firstChild.scrollWidth, colHeader.scrollWidth);
+        const headerLabel = colHeader.querySelector(
+          `.${blockClass}__defaultStringRenderer`
+        );
+        if (
+          cell.firstChild.scrollWidth > cell.firstChild.offsetWidth ||
+          headerLabel.scrollWidth > headerLabel.offsetWidth
+        ) {
+          cellWidths.push(
+            cell.firstChild.scrollWidth,
+            colHeader.firstChild.firstChild.scrollWidth
+          );
           setTimeout(() => {
             const largest = Math.max.apply(0, cellWidths);
-            const newColWidth = largest + 32;
+            const newColWidth = largest + 33;
             setColExpandWidth(newColWidth);
             setColExpandId(header.id);
             cell.style.width = px(newColWidth);
@@ -78,8 +89,10 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
   }, [dragStopped]);
 
   useEffect(() => {
+    document.getSelection().removeAllRanges();
     const colWidths = columnResizing.columnWidths;
     const resizingCol = columnResizing.isResizingColumn;
+    
     if (resizingCol !== null && selectedHeader.length > 0) {
       setIsResizing(resizingCol);
       selectedHeader.map((col, idx) => {
@@ -89,9 +102,13 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
             // check resize 'forward' or 'backward'
             const resizeDiff =
               columnResizing.columnWidth - colWidths[resizingCol]; // actual resized value of current resizing column
-            colWidths[col.id] = isNaN(resizeDiff)
-              ? initialColWidth
-              : initialColWidth - resizeDiff; // add actual resized value to the other selected column widths
+            if(colWidths[col.id] > 50){
+              colWidths[col.id] = isNaN(resizeDiff)
+                ? initialColWidth
+                : initialColWidth - resizeDiff; // add actual resized value to the other selected column widths
+            }else{
+              colWidths[col.id] = 50;
+            }
           } else {
             const resizeDiff =
               colWidths[resizingCol] - columnResizing.columnWidth;
@@ -99,18 +116,27 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
               ? initialColWidth
               : initialColWidth + resizeDiff;
           }
+        }else{
+          if(colWidths[datagridState.state.columnResizing.isResizingColumn] < 50){
+            colWidths[datagridState.state.columnResizing.isResizingColumn] = 50;
+          }
         }
       });
     } else {
       if (
-        colWidths &&
+        selectedHeader.length > 1 && columnResizing. isResizingColumn === null &&
         (colWidths[isResizing] < columnResizing.columnWidth ||
           colWidths[isResizing] > columnResizing.columnWidth)
       ) {
         // Check resize ended, 'columnResizing' firing even if we clicked on resizer.
         setDragStopped(true);
-        columnResizing.columnWidth = colWidths[resizingCol];
       }
+
+      if(colWidths[datagridState.state.columnResizing.isResizingColumn] < 50){
+        colWidths[datagridState.state.columnResizing.isResizingColumn] = 50;
+        datagridState.state.columnResizing.columnWidth = 50;
+      }
+
     }
     if (isDblClick) {
       columnResizing.isResizingColumn = colExpandId;
@@ -125,11 +151,12 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
     isDblClick,
     colExpandWidth,
     colExpandId,
+    datagridState,
   ]);
 
   return (
     <TableRow
-      {...headerGroup.getHeaderGroupProps({ role: false })}
+      {...headerGroup.getHeaderGroupProps({role:false})}
       className={cx(
         `${blockClass}__head`,
         headerGroup.getHeaderGroupProps().className
@@ -152,7 +179,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
 
           return (
             <TableHeader
-              {...header.getHeaderProps({ role: false })}
+              {...header.getHeaderProps({role:false})}
               className={cx(
                 {
                   [`${blockClass}__resizableColumn`]: header.getResizerProps,

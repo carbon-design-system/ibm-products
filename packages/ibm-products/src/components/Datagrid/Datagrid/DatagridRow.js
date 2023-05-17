@@ -131,10 +131,14 @@ const DatagridRow = (datagridState) => {
         }
         return (
           <TableCell
-            className={cx(`${blockClass}__cell`,`row_${cell.row.id}__column__${cell.column.id}`, {
-              [`${blockClass}__expandable-row-cell`]:
-                row.canExpand && index === 0,
-            })}
+            className={cx(
+              `${blockClass}__cell`,
+              `row_${cell.row.id}__column__${cell.column.id}`,
+              {
+                [`${blockClass}__expandable-row-cell`]:
+                  row.canExpand && index === 0,
+              }
+            )}
             {...restProps}
             key={cell.column.id}
           >

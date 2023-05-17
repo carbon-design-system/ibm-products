@@ -3,6 +3,186 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.44.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.44.0...@carbon/ibm-cloud-cognitive-core@0.44.1) (2023-05-17)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+# [0.44.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.37.0...@carbon/ibm-cloud-cognitive-core@0.44.0) (2023-05-17)
+
+
+### Bug Fixes
+
+* example gallery v2 fix ([#2999](https://github.com/carbon-design-system/ibm-products/issues/2999)) ([745e732](https://github.com/carbon-design-system/ibm-products/commit/745e7323146775da5dabf1237daf85d8ca656777))
+* release yml incorrect ([#3019](https://github.com/carbon-design-system/ibm-products/issues/3019)) ([0b19df6](https://github.com/carbon-design-system/ibm-products/commit/0b19df600601829ad531088dd92997c6dd9a1707))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* use latest Carbon react to fix selectorsFloatingMenus prop type issue on v11 branch ([#2152](https://github.com/carbon-design-system/ibm-products/issues/2152)) ([dc99419](https://github.com/carbon-design-system/ibm-products/commit/dc9941935d68c595c99b81b92f46bb9fa1acc210))
+
+
+### Features
+
+* **Datagrid:** adds FilterFlyout and FilterSummary v11 ([#2525](https://github.com/carbon-design-system/ibm-products/issues/2525)) ([189489c](https://github.com/carbon-design-system/ibm-products/commit/189489c4a2021ce380a5fe63b6cf9caead52b332))
+* **Datagrid:** rename useInlineEdit to useEditableCell v11 ([54c7dd5](https://github.com/carbon-design-system/ibm-products/commit/54c7dd569d12bb79d3f4ef894d23328cd488878e))
+* **EditUpdateCards:** Edit and update cards - v11 ([#2374](https://github.com/carbon-design-system/ibm-products/issues/2374)) ([e233609](https://github.com/carbon-design-system/ibm-products/commit/e2336097fdbf4178c885d5960df726cc83c2dd99))
+* inline edit v2 for v11 ([#2461](https://github.com/carbon-design-system/ibm-products/issues/2461)) ([3ea4363](https://github.com/carbon-design-system/ibm-products/commit/3ea43633fddb8e37f3a4d9df1cb79f02c4d1e849))
+* possible feature flag usage ([#2748](https://github.com/carbon-design-system/ibm-products/issues/2748)) ([3d21f47](https://github.com/carbon-design-system/ibm-products/commit/3d21f4711d3bfe419ab8269c0ccbdb48d4ddb34a))
+* Rename inline edit to EditInPlace ([#2936](https://github.com/carbon-design-system/ibm-products/issues/2936)) ([20e2f78](https://github.com/carbon-design-system/ibm-products/commit/20e2f789f43af6aa9d8ece54d64a4e31dade791a))
+* upgrade Carbon dependencies to latest compatible versions ([#2731](https://github.com/carbon-design-system/ibm-products/issues/2731)) ([d40545e](https://github.com/carbon-design-system/ibm-products/commit/d40545e16d81760334e9b0e1c33ae69f142addb1))
+
+
+
+
+
+# [0.43.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.37.0...@carbon/ibm-cloud-cognitive-core@0.43.0) (2023-05-17)
+
+
+### Bug Fixes
+
+* example gallery v2 fix ([#2999](https://github.com/carbon-design-system/ibm-products/issues/2999)) ([745e732](https://github.com/carbon-design-system/ibm-products/commit/745e7323146775da5dabf1237daf85d8ca656777))
+* get publish working ([eebfb2f](https://github.com/carbon-design-system/ibm-products/commit/eebfb2f048d3af058cbcfb9a23789dfbaaf69e48))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* use latest Carbon react to fix selectorsFloatingMenus prop type issue on v11 branch ([#2152](https://github.com/carbon-design-system/ibm-products/issues/2152)) ([dc99419](https://github.com/carbon-design-system/ibm-products/commit/dc9941935d68c595c99b81b92f46bb9fa1acc210))
+
+
+### Features
+
+* **Datagrid:** adds FilterFlyout and FilterSummary v11 ([#2525](https://github.com/carbon-design-system/ibm-products/issues/2525)) ([189489c](https://github.com/carbon-design-system/ibm-products/commit/189489c4a2021ce380a5fe63b6cf9caead52b332))
+* **Datagrid:** rename useInlineEdit to useEditableCell v11 ([54c7dd5](https://github.com/carbon-design-system/ibm-products/commit/54c7dd569d12bb79d3f4ef894d23328cd488878e))
+* **EditUpdateCards:** Edit and update cards - v11 ([#2374](https://github.com/carbon-design-system/ibm-products/issues/2374)) ([e233609](https://github.com/carbon-design-system/ibm-products/commit/e2336097fdbf4178c885d5960df726cc83c2dd99))
+* inline edit v2 for v11 ([#2461](https://github.com/carbon-design-system/ibm-products/issues/2461)) ([3ea4363](https://github.com/carbon-design-system/ibm-products/commit/3ea43633fddb8e37f3a4d9df1cb79f02c4d1e849))
+* possible feature flag usage ([#2748](https://github.com/carbon-design-system/ibm-products/issues/2748)) ([3d21f47](https://github.com/carbon-design-system/ibm-products/commit/3d21f4711d3bfe419ab8269c0ccbdb48d4ddb34a))
+* Rename inline edit to EditInPlace ([#2936](https://github.com/carbon-design-system/ibm-products/issues/2936)) ([20e2f78](https://github.com/carbon-design-system/ibm-products/commit/20e2f789f43af6aa9d8ece54d64a4e31dade791a))
+* upgrade Carbon dependencies to latest compatible versions ([#2731](https://github.com/carbon-design-system/ibm-products/issues/2731)) ([d40545e](https://github.com/carbon-design-system/ibm-products/commit/d40545e16d81760334e9b0e1c33ae69f142addb1))
+
+
+
+
+
+# [0.42.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.37.0...@carbon/ibm-cloud-cognitive-core@0.42.0) (2023-05-17)
+
+
+### Bug Fixes
+
+* example gallery v2 fix ([#2999](https://github.com/carbon-design-system/ibm-products/issues/2999)) ([745e732](https://github.com/carbon-design-system/ibm-products/commit/745e7323146775da5dabf1237daf85d8ca656777))
+* get publish working ([eebfb2f](https://github.com/carbon-design-system/ibm-products/commit/eebfb2f048d3af058cbcfb9a23789dfbaaf69e48))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* use latest Carbon react to fix selectorsFloatingMenus prop type issue on v11 branch ([#2152](https://github.com/carbon-design-system/ibm-products/issues/2152)) ([dc99419](https://github.com/carbon-design-system/ibm-products/commit/dc9941935d68c595c99b81b92f46bb9fa1acc210))
+
+
+### Features
+
+* **Datagrid:** adds FilterFlyout and FilterSummary v11 ([#2525](https://github.com/carbon-design-system/ibm-products/issues/2525)) ([189489c](https://github.com/carbon-design-system/ibm-products/commit/189489c4a2021ce380a5fe63b6cf9caead52b332))
+* **Datagrid:** rename useInlineEdit to useEditableCell v11 ([54c7dd5](https://github.com/carbon-design-system/ibm-products/commit/54c7dd569d12bb79d3f4ef894d23328cd488878e))
+* **EditUpdateCards:** Edit and update cards - v11 ([#2374](https://github.com/carbon-design-system/ibm-products/issues/2374)) ([e233609](https://github.com/carbon-design-system/ibm-products/commit/e2336097fdbf4178c885d5960df726cc83c2dd99))
+* inline edit v2 for v11 ([#2461](https://github.com/carbon-design-system/ibm-products/issues/2461)) ([3ea4363](https://github.com/carbon-design-system/ibm-products/commit/3ea43633fddb8e37f3a4d9df1cb79f02c4d1e849))
+* possible feature flag usage ([#2748](https://github.com/carbon-design-system/ibm-products/issues/2748)) ([3d21f47](https://github.com/carbon-design-system/ibm-products/commit/3d21f4711d3bfe419ab8269c0ccbdb48d4ddb34a))
+* Rename inline edit to EditInPlace ([#2936](https://github.com/carbon-design-system/ibm-products/issues/2936)) ([20e2f78](https://github.com/carbon-design-system/ibm-products/commit/20e2f789f43af6aa9d8ece54d64a4e31dade791a))
+* upgrade Carbon dependencies to latest compatible versions ([#2731](https://github.com/carbon-design-system/ibm-products/issues/2731)) ([d40545e](https://github.com/carbon-design-system/ibm-products/commit/d40545e16d81760334e9b0e1c33ae69f142addb1))
+
+
+
+
+
+# [0.41.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.37.0...@carbon/ibm-cloud-cognitive-core@0.41.0) (2023-05-17)
+
+
+### Bug Fixes
+
+* example gallery v2 fix ([#2999](https://github.com/carbon-design-system/ibm-products/issues/2999)) ([745e732](https://github.com/carbon-design-system/ibm-products/commit/745e7323146775da5dabf1237daf85d8ca656777))
+* get publish working ([eebfb2f](https://github.com/carbon-design-system/ibm-products/commit/eebfb2f048d3af058cbcfb9a23789dfbaaf69e48))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* use latest Carbon react to fix selectorsFloatingMenus prop type issue on v11 branch ([#2152](https://github.com/carbon-design-system/ibm-products/issues/2152)) ([dc99419](https://github.com/carbon-design-system/ibm-products/commit/dc9941935d68c595c99b81b92f46bb9fa1acc210))
+
+
+### Features
+
+* **Datagrid:** adds FilterFlyout and FilterSummary v11 ([#2525](https://github.com/carbon-design-system/ibm-products/issues/2525)) ([189489c](https://github.com/carbon-design-system/ibm-products/commit/189489c4a2021ce380a5fe63b6cf9caead52b332))
+* **Datagrid:** rename useInlineEdit to useEditableCell v11 ([54c7dd5](https://github.com/carbon-design-system/ibm-products/commit/54c7dd569d12bb79d3f4ef894d23328cd488878e))
+* **EditUpdateCards:** Edit and update cards - v11 ([#2374](https://github.com/carbon-design-system/ibm-products/issues/2374)) ([e233609](https://github.com/carbon-design-system/ibm-products/commit/e2336097fdbf4178c885d5960df726cc83c2dd99))
+* inline edit v2 for v11 ([#2461](https://github.com/carbon-design-system/ibm-products/issues/2461)) ([3ea4363](https://github.com/carbon-design-system/ibm-products/commit/3ea43633fddb8e37f3a4d9df1cb79f02c4d1e849))
+* possible feature flag usage ([#2748](https://github.com/carbon-design-system/ibm-products/issues/2748)) ([3d21f47](https://github.com/carbon-design-system/ibm-products/commit/3d21f4711d3bfe419ab8269c0ccbdb48d4ddb34a))
+* Rename inline edit to EditInPlace ([#2936](https://github.com/carbon-design-system/ibm-products/issues/2936)) ([20e2f78](https://github.com/carbon-design-system/ibm-products/commit/20e2f789f43af6aa9d8ece54d64a4e31dade791a))
+* upgrade Carbon dependencies to latest compatible versions ([#2731](https://github.com/carbon-design-system/ibm-products/issues/2731)) ([d40545e](https://github.com/carbon-design-system/ibm-products/commit/d40545e16d81760334e9b0e1c33ae69f142addb1))
+
+
+
+
+
+# [0.40.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.37.0...@carbon/ibm-cloud-cognitive-core@0.40.0) (2023-05-17)
+
+
+### Bug Fixes
+
+* example gallery v2 fix ([#2999](https://github.com/carbon-design-system/ibm-products/issues/2999)) ([745e732](https://github.com/carbon-design-system/ibm-products/commit/745e7323146775da5dabf1237daf85d8ca656777))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* use latest Carbon react to fix selectorsFloatingMenus prop type issue on v11 branch ([#2152](https://github.com/carbon-design-system/ibm-products/issues/2152)) ([dc99419](https://github.com/carbon-design-system/ibm-products/commit/dc9941935d68c595c99b81b92f46bb9fa1acc210))
+
+
+### Features
+
+* **Datagrid:** adds FilterFlyout and FilterSummary v11 ([#2525](https://github.com/carbon-design-system/ibm-products/issues/2525)) ([189489c](https://github.com/carbon-design-system/ibm-products/commit/189489c4a2021ce380a5fe63b6cf9caead52b332))
+* **Datagrid:** rename useInlineEdit to useEditableCell v11 ([54c7dd5](https://github.com/carbon-design-system/ibm-products/commit/54c7dd569d12bb79d3f4ef894d23328cd488878e))
+* **EditUpdateCards:** Edit and update cards - v11 ([#2374](https://github.com/carbon-design-system/ibm-products/issues/2374)) ([e233609](https://github.com/carbon-design-system/ibm-products/commit/e2336097fdbf4178c885d5960df726cc83c2dd99))
+* inline edit v2 for v11 ([#2461](https://github.com/carbon-design-system/ibm-products/issues/2461)) ([3ea4363](https://github.com/carbon-design-system/ibm-products/commit/3ea43633fddb8e37f3a4d9df1cb79f02c4d1e849))
+* possible feature flag usage ([#2748](https://github.com/carbon-design-system/ibm-products/issues/2748)) ([3d21f47](https://github.com/carbon-design-system/ibm-products/commit/3d21f4711d3bfe419ab8269c0ccbdb48d4ddb34a))
+* Rename inline edit to EditInPlace ([#2936](https://github.com/carbon-design-system/ibm-products/issues/2936)) ([20e2f78](https://github.com/carbon-design-system/ibm-products/commit/20e2f789f43af6aa9d8ece54d64a4e31dade791a))
+* upgrade Carbon dependencies to latest compatible versions ([#2731](https://github.com/carbon-design-system/ibm-products/issues/2731)) ([d40545e](https://github.com/carbon-design-system/ibm-products/commit/d40545e16d81760334e9b0e1c33ae69f142addb1))
+
+
+
+
+
+# [0.39.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.37.0...@carbon/ibm-cloud-cognitive-core@0.39.0) (2023-05-17)
+
+
+### Bug Fixes
+
+* example gallery v2 fix ([#2999](https://github.com/carbon-design-system/ibm-products/issues/2999)) ([745e732](https://github.com/carbon-design-system/ibm-products/commit/745e7323146775da5dabf1237daf85d8ca656777))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* use latest Carbon react to fix selectorsFloatingMenus prop type issue on v11 branch ([#2152](https://github.com/carbon-design-system/ibm-products/issues/2152)) ([dc99419](https://github.com/carbon-design-system/ibm-products/commit/dc9941935d68c595c99b81b92f46bb9fa1acc210))
+
+
+### Features
+
+* **Datagrid:** adds FilterFlyout and FilterSummary v11 ([#2525](https://github.com/carbon-design-system/ibm-products/issues/2525)) ([189489c](https://github.com/carbon-design-system/ibm-products/commit/189489c4a2021ce380a5fe63b6cf9caead52b332))
+* **Datagrid:** rename useInlineEdit to useEditableCell v11 ([54c7dd5](https://github.com/carbon-design-system/ibm-products/commit/54c7dd569d12bb79d3f4ef894d23328cd488878e))
+* **EditUpdateCards:** Edit and update cards - v11 ([#2374](https://github.com/carbon-design-system/ibm-products/issues/2374)) ([e233609](https://github.com/carbon-design-system/ibm-products/commit/e2336097fdbf4178c885d5960df726cc83c2dd99))
+* inline edit v2 for v11 ([#2461](https://github.com/carbon-design-system/ibm-products/issues/2461)) ([3ea4363](https://github.com/carbon-design-system/ibm-products/commit/3ea43633fddb8e37f3a4d9df1cb79f02c4d1e849))
+* possible feature flag usage ([#2748](https://github.com/carbon-design-system/ibm-products/issues/2748)) ([3d21f47](https://github.com/carbon-design-system/ibm-products/commit/3d21f4711d3bfe419ab8269c0ccbdb48d4ddb34a))
+* Rename inline edit to EditInPlace ([#2936](https://github.com/carbon-design-system/ibm-products/issues/2936)) ([20e2f78](https://github.com/carbon-design-system/ibm-products/commit/20e2f789f43af6aa9d8ece54d64a4e31dade791a))
+* upgrade Carbon dependencies to latest compatible versions ([#2731](https://github.com/carbon-design-system/ibm-products/issues/2731)) ([d40545e](https://github.com/carbon-design-system/ibm-products/commit/d40545e16d81760334e9b0e1c33ae69f142addb1))
+
+
+
+
+
+# [0.38.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.37.0...@carbon/ibm-cloud-cognitive-core@0.38.0) (2023-05-17)
+
+
+### Bug Fixes
+
+* example gallery v2 fix ([#2999](https://github.com/carbon-design-system/ibm-products/issues/2999)) ([745e732](https://github.com/carbon-design-system/ibm-products/commit/745e7323146775da5dabf1237daf85d8ca656777))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* use latest Carbon react to fix selectorsFloatingMenus prop type issue on v11 branch ([#2152](https://github.com/carbon-design-system/ibm-products/issues/2152)) ([dc99419](https://github.com/carbon-design-system/ibm-products/commit/dc9941935d68c595c99b81b92f46bb9fa1acc210))
+
+
+### Features
+
+* **Datagrid:** adds FilterFlyout and FilterSummary v11 ([#2525](https://github.com/carbon-design-system/ibm-products/issues/2525)) ([189489c](https://github.com/carbon-design-system/ibm-products/commit/189489c4a2021ce380a5fe63b6cf9caead52b332))
+* **Datagrid:** rename useInlineEdit to useEditableCell v11 ([54c7dd5](https://github.com/carbon-design-system/ibm-products/commit/54c7dd569d12bb79d3f4ef894d23328cd488878e))
+* **EditUpdateCards:** Edit and update cards - v11 ([#2374](https://github.com/carbon-design-system/ibm-products/issues/2374)) ([e233609](https://github.com/carbon-design-system/ibm-products/commit/e2336097fdbf4178c885d5960df726cc83c2dd99))
+* inline edit v2 for v11 ([#2461](https://github.com/carbon-design-system/ibm-products/issues/2461)) ([3ea4363](https://github.com/carbon-design-system/ibm-products/commit/3ea43633fddb8e37f3a4d9df1cb79f02c4d1e849))
+* possible feature flag usage ([#2748](https://github.com/carbon-design-system/ibm-products/issues/2748)) ([3d21f47](https://github.com/carbon-design-system/ibm-products/commit/3d21f4711d3bfe419ab8269c0ccbdb48d4ddb34a))
+* Rename inline edit to EditInPlace ([#2936](https://github.com/carbon-design-system/ibm-products/issues/2936)) ([20e2f78](https://github.com/carbon-design-system/ibm-products/commit/20e2f789f43af6aa9d8ece54d64a4e31dade791a))
+* upgrade Carbon dependencies to latest compatible versions ([#2731](https://github.com/carbon-design-system/ibm-products/issues/2731)) ([d40545e](https://github.com/carbon-design-system/ibm-products/commit/d40545e16d81760334e9b0e1c33ae69f142addb1))
+
+
+
+
+
 ## [0.37.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.37.1...@carbon/ibm-cloud-cognitive-core@0.37.2) (2022-09-06)
 
 

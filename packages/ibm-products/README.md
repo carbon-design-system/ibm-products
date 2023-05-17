@@ -1,7 +1,7 @@
 # @carbon/ibm-products
 
 > Carbon for IBM Products is an open source implementation of the closed source
-> [Carbon for Cloud & Cognitive pattern asset library (PAL)](https://pages.github.ibm.com/cdai-design/pal/).
+> [pattern asset library (PAL)](https://pages.github.ibm.com/cdai-design/pal/).
 > These PAL designs build on the foundation of IBM’s open source Carbon Design
 > System and React implementation to offer components and patterns beyond the
 > typical component library. Carbon for IBM Products was previously known as
@@ -20,7 +20,7 @@
 ## 🚀 Getting started
 
 If you’re just getting started and looking to browse our React components, take
-a look at [our Storybook](https://carbon-for-ibm-products.netlify.app).
+a look at [our Storybook](https://ibm-products.carbondesignsystem.com).
 
 ### 📦 Installing Carbon for IBM Products
 
@@ -79,16 +79,18 @@ packages.
 
 ## Examples
 
-### CodeSandbox
+### Online examples
 
 Examples for each released component, and some that are still not quite ready,
 can be found here on
-[CodeSandbox](https://codesandbox.io/examples/package/@carbon/ibm-products).
+
+[CodeSandbox](https://codesandbox.io/p/sandbox/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/example-gallery?file=%2Fsrc%2Fcomponents%2FGallery.jsx%3A7%2C26)
+[Stackblitz](https://stackblitz.com/github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products/example-gallery?file=src%2Fcomponents%2FGallery.jsx)
 
 ### Packages
 
 You can find example projects using the components in the
-[examples folder](../../packages/examples/carbon-for-ibm-products).
+[examples folder](../../examples/carbon-for-ibm-products).
 
 ## Usage
 

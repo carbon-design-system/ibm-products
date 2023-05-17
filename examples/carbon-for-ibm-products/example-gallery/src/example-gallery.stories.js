@@ -19,6 +19,10 @@ export default {
   },
 };
 
-export const c4pGallery = () => <App />;
-c4pGallery.storyName = 'on CodeSandbox';
-c4pGallery.parameters = { options: { showPanel: false } };
+export const c4pGalleryCodeSandbox = () => <App site="codesandbox" />;
+c4pGalleryCodeSandbox.storyName = 'on CodeSandbox';
+c4pGalleryCodeSandbox.parameters = { options: { showPanel: false } };
+
+export const c4pGalleryStackblitz = () => <App site="stackblitz" />;
+c4pGalleryStackblitz.storyName = 'on Stackblitz';
+c4pGalleryStackblitz.parameters = { options: { showPanel: false } };

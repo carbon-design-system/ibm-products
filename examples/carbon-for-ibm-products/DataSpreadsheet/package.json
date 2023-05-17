@@ -19,7 +19,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/ibm-products": "^2.0.0-rc.28",
+    "@carbon/ibm-products": "^2.0.1",
     "@carbon/react": "^1.28.0",
     "lodash": "^4.17.21",
     "namor": "^1.1.2",

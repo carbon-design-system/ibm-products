@@ -54,11 +54,8 @@ const FilterPanel = ({
   secondaryActionLabel = 'Cancel',
   searchLabelText = 'Filter search',
   searchPlaceholder = 'Find filters',
-  initialFilters = [],
+  reactTableFiltersState = [],
 }) => {
-  //  Save the initial filters we only need the filters once
-  const initialFiltersRef = useRef(initialFilters);
-
   /** State */
   const [showDividerLine, setShowDividerLine] = useState(false);
 
@@ -70,12 +67,13 @@ const FilterPanel = ({
     reset,
     renderFilter,
     filtersObjectArray,
+    lastAppliedFilters,
   } = useFilters({
     updateMethod,
     filters: filterSections,
     setAllFilters,
     variation: PANEL,
-    initialFilters: initialFiltersRef.current,
+    reactTableFiltersState,
   });
 
   /** Refs */
@@ -99,7 +97,10 @@ const FilterPanel = ({
   const { panelOpen, setPanelOpen } = useContext(FilterContext);
 
   /** Methods */
-  const closePanel = () => setPanelOpen(false);
+  const closePanel = () => {
+    cancel();
+    setPanelOpen(false);
+  };
 
   const cancel = () => {
     // Reverting to previous filters only applies when using batch actions
@@ -121,6 +122,9 @@ const FilterPanel = ({
     // updates the ref so next time the flyout opens we have records of the previous filters
     prevFiltersRef.current = JSON.stringify(filtersState);
     prevFiltersObjectArrayRef.current = JSON.stringify(filtersObjectArray);
+
+    // Update the last applied filters
+    lastAppliedFilters.current = JSON.stringify(filtersObjectArray);
   };
 
   const renderActionSet = () => {
@@ -245,12 +249,9 @@ const FilterPanel = ({
           onScroll={onInnerContainerScroll}
         >
           {filterSections.map(
-            ({ categoryTitle = null, filters = [], hasAccordion }) => {
+            ({ categoryTitle = null, filters = [], hasAccordion }, index) => {
               return (
-                <div
-                  key={categoryTitle}
-                  className={`${componentClass}__category`}
-                >
+                <div key={index} className={`${componentClass}__category`}>
                   {categoryTitle && (
                     <div className={`${componentClass}__category-title`}>
                       {categoryTitle}
@@ -285,22 +286,22 @@ FilterPanel.propTypes = {
   closeIconDescription: PropTypes.string,
   filterPanelMinHeight: PropTypes.number,
   filterSections: PropTypes.array,
-  /**
-   * Filters that should be applied on load
-   */
-  initialFilters: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      value: PropTypes.any.isRequired,
-    })
-  ),
   onApply: PropTypes.func,
   onCancel: PropTypes.func,
   onPanelClose: PropTypes.func,
   onPanelOpen: PropTypes.func,
   open: PropTypes.bool,
   primaryActionLabel: PropTypes.string,
+  /**
+   * Filters from react table's state
+   */
+  reactTableFiltersState: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      value: PropTypes.any.isRequired,
+    })
+  ),
   searchLabelText: PropTypes.string,
   searchPlaceholder: PropTypes.string,
   secondaryActionLabel: PropTypes.string,

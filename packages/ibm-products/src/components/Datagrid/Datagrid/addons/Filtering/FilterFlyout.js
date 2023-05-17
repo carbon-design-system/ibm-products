@@ -10,7 +10,7 @@ import { Filter16 } from '@carbon/icons-react';
 import { Button } from 'carbon-components-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useClickOutside } from '../../../../../global/js/hooks';
 import { pkg } from '../../../../../settings';
 import { ActionSet } from '../../../../ActionSet';
@@ -37,11 +37,8 @@ const FilterFlyout = ({
   secondaryActionLabel = 'Cancel',
   setAllFilters,
   data = [],
-  initialFilters = [],
+  reactTableFiltersState = [],
 }) => {
-  //  Save the initial filters we only need the filters once when it loads
-  const initialFiltersRef = useRef(initialFilters);
-
   /** State */
   const [open, setOpen] = useState(false);
 
@@ -53,12 +50,13 @@ const FilterFlyout = ({
     reset,
     renderFilter,
     filtersObjectArray,
+    lastAppliedFilters,
   } = useFilters({
     updateMethod,
     filters,
     setAllFilters,
     variation: FLYOUT,
-    initialFilters: initialFiltersRef.current,
+    reactTableFiltersState,
   });
 
   /** Refs */
@@ -79,6 +77,7 @@ const FilterFlyout = ({
     setOpen(true);
     onFlyoutOpen();
   };
+
   const closeFlyout = () => {
     setOpen(false);
     onFlyoutClose();
@@ -96,6 +95,9 @@ const FilterFlyout = ({
     // updates the ref so next time the flyout opens we have records of the previous filters
     prevFiltersRef.current = JSON.stringify(filtersState);
     prevFiltersObjectArrayRef.current = JSON.stringify(filtersObjectArray);
+
+    // Update the last applied filters
+    lastAppliedFilters.current = JSON.stringify(filtersObjectArray);
   };
 
   const cancel = () => {
@@ -104,23 +106,7 @@ const FilterFlyout = ({
       revertToPreviousFilters();
       onCancel();
     }
-    closeFlyout();
   };
-
-  /** Effects */
-  useClickOutside(filterFlyoutRef, (target) => {
-    const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
-    const hasClickedOnDropdown =
-      target.className === 'bx--list-box__menu-item__option';
-
-    if (!open || hasClickedOnDatePicker || hasClickedOnDropdown) {
-      return;
-    }
-
-    cancel();
-  });
-
-  useSubscribeToEventEmitter(CLEAR_FILTERS, reset);
 
   /** Renders all filters */
   const renderFilters = () => filters.map(renderFilter);
@@ -153,6 +139,29 @@ const FilterFlyout = ({
       )
     );
   };
+
+  /** Effects */
+  useClickOutside(filterFlyoutRef, (target) => {
+    const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
+    const hasClickedOnDropdown =
+      target.className === 'bx--list-box__menu-item__option';
+
+    if (!open || hasClickedOnDatePicker || hasClickedOnDropdown) {
+      return;
+    }
+
+    closeFlyout();
+    cancel();
+  });
+
+  useSubscribeToEventEmitter(CLEAR_FILTERS, reset);
+
+  useEffect(
+    function reflectLastAppliedFiltersWhenReactTableUpdates() {
+      lastAppliedFilters.current = JSON.stringify(reactTableFiltersState);
+    },
+    [reactTableFiltersState, lastAppliedFilters]
+  );
 
   return (
     <div className={`${componentClass}__container`}>
@@ -209,17 +218,6 @@ FilterFlyout.propTypes = {
   flyoutIconDescription: PropTypes.string,
 
   /**
-   * Filters that should be applied on load
-   */
-  initialFilters: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      value: PropTypes.any.isRequired,
-    })
-  ),
-
-  /**
    * Callback when the apply button is clicked
    */
   onApply: PropTypes.func,
@@ -243,6 +241,17 @@ FilterFlyout.propTypes = {
    * Label text of the primary action in the flyout
    */
   primaryActionLabel: PropTypes.string,
+
+  /**
+   * Filters from react table's state
+   */
+  reactTableFiltersState: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      value: PropTypes.any.isRequired,
+    })
+  ),
 
   /**
    * Label text of the secondary action in the flyout

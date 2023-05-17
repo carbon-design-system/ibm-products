@@ -172,7 +172,11 @@ const FilteringUsage = ({ defaultGridProps }) => {
     useFiltering
   );
 
-  return <Datagrid datagridState={datagridState} />;
+  return (
+    <div>
+      <Datagrid datagridState={datagridState} />
+    </div>
+  );
 };
 
 const FilteringTemplateWrapper = ({ ...args }) => {

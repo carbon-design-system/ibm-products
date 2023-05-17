@@ -2392,16 +2392,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/component-usage-report@*, @carbon/component-usage-report@workspace:packages/component-usage-report":
-  version: 0.0.0-use.local
-  resolution: "@carbon/component-usage-report@workspace:packages/component-usage-report"
-  dependencies:
-    esm: ^3.2.25
-  bin:
-    component-usage-report: bin/component-usage-report
-  languageName: unknown
-  linkType: soft
-
 "@carbon/feature-flags@npm:^0.13.0":
   version: 0.13.0
   resolution: "@carbon/feature-flags@npm:0.13.0"
@@ -2756,27 +2746,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/storybook-addon-theme@npm:^0.22.35":
-  version: 0.22.37
-  resolution: "@carbon/storybook-addon-theme@npm:0.22.37"
-  dependencies:
-    "@storybook/addons": 6.5.16
-    "@storybook/api": 6.5.16
-    "@storybook/client-api": 6.5.16
-    "@storybook/client-logger": 6.5.16
-    "@storybook/components": 6.5.16
-    "@storybook/core-events": 6.5.16
-    "@storybook/theming": 6.5.16
-    core-js: ^3.28.0
-    global: ^4.4.0
-  peerDependencies:
-    react: "*"
-    vue: "*"
-  checksum: 24727a224f87e099283a4f151de563a74a4d6a7b495abdbdc48a68d0874ff2c625f58d53ee97130059a4c161629a29c282e5d34a5cc190dfe51b4091b5730264
-  languageName: node
-  linkType: hard
-
-"@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
+"@carbon/storybook-addon-theme@^0.22.35, @carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
   version: 0.0.0-use.local
   resolution: "@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme"
   dependencies:
@@ -14213,13 +14183,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esm@npm:^3.2.25":
-  version: 3.2.25
-  resolution: "esm@npm:3.2.25"
-  checksum: 978aabe2de83541c105605a6d60a26ed8e627ef6bb0a7605fe15a95bbdea6b8348bd045255cb22219c054dd09a81a94823df00843d9e97f42419c92015ce3a64
-  languageName: node
-  linkType: hard
-
 "espree@npm:^9.5.2":
   version: 9.5.2
   resolution: "espree@npm:9.5.2"
@@ -16898,7 +16861,6 @@ __metadata:
   dependencies:
     "@babel/core": ^7.20.12
     "@babel/eslint-parser": ^7.19.1
-    "@carbon/component-usage-report": "*"
     "@commitlint/cli": ^17.6.3
     "@commitlint/config-conventional": ^17.6.3
     "@testing-library/dom": ^8.11.4

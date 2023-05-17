@@ -2560,7 +2560,7 @@ __metadata:
     "@babel/core": ^7.20.12
     "@babel/runtime": ^7.20.13
     "@carbon/telemetry": ^0.1.0
-    babel-preset-ibm-cloud-cognitive: ^0.14.30
+    babel-preset-ibm-cloud-cognitive: ^0.14.19
     chalk: ^4.1.2
     change-case: ^4.1.2
     copyfiles: ^2.4.1
@@ -2570,7 +2570,7 @@ __metadata:
     glob: ^10.2.3
     immutability-helper: ^3.1.1
     jest: ^29.4.2
-    jest-config-ibm-cloud-cognitive: ^0.24.17
+    jest-config-ibm-cloud-cognitive: ^0.24.5
     jest-environment-jsdom: ^29.4.2
     lodash: ^4.17.21
     namor: ^1.1.2
@@ -2756,7 +2756,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/storybook-addon-theme@^0.22.35, @carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
+"@carbon/storybook-addon-theme@npm:^0.22.35":
+  version: 0.22.37
+  resolution: "@carbon/storybook-addon-theme@npm:0.22.37"
+  dependencies:
+    "@storybook/addons": 6.5.16
+    "@storybook/api": 6.5.16
+    "@storybook/client-api": 6.5.16
+    "@storybook/client-logger": 6.5.16
+    "@storybook/components": 6.5.16
+    "@storybook/core-events": 6.5.16
+    "@storybook/theming": 6.5.16
+    core-js: ^3.28.0
+    global: ^4.4.0
+  peerDependencies:
+    react: "*"
+    vue: "*"
+  checksum: 24727a224f87e099283a4f151de563a74a4d6a7b495abdbdc48a68d0874ff2c625f58d53ee97130059a4c161629a29c282e5d34a5cc190dfe51b4091b5730264
+  languageName: node
+  linkType: hard
+
+"@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
   version: 0.0.0-use.local
   resolution: "@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme"
   dependencies:
@@ -9528,7 +9548,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-ibm-cloud-cognitive@^0.14.30, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
+"babel-preset-ibm-cloud-cognitive@^0.14.19, babel-preset-ibm-cloud-cognitive@^0.14.30, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive"
   dependencies:
@@ -18332,7 +18352,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-config-ibm-cloud-cognitive@^0.24.17, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
+"jest-config-ibm-cloud-cognitive@^0.24.17, jest-config-ibm-cloud-cognitive@^0.24.5, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive"
   dependencies:

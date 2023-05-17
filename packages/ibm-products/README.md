@@ -1,7 +1,7 @@
 # @carbon/ibm-products
 
 > Carbon for IBM Products is an open source implementation of the closed source
-> [Carbon for Cloud & Cognitive pattern asset library (PAL)](https://pages.github.ibm.com/cdai-design/pal/).
+> [pattern asset library (PAL)](https://pages.github.ibm.com/cdai-design/pal/).
 > These PAL designs build on the foundation of IBM’s open source Carbon Design
 > System and React implementation to offer components and patterns beyond the
 > typical component library. Carbon for IBM Products was previously known as

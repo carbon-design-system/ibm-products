@@ -3,6 +3,183 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.38](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.0.0-rc.29...@carbon/ibm-products@2.0.0-rc.38) (2023-05-17)
+
+
+### Bug Fixes
+
+* about modal node for footer ([#2982](https://github.com/carbon-design-system/ibm-products/issues/2982)) ([11c2000](https://github.com/carbon-design-system/ibm-products/commit/11c200099eea07c23e69bdef2439d140dd61d37a))
+* add columns in edit tearsheet grid ([#2929](https://github.com/carbon-design-system/ibm-products/issues/2929)) ([5b42621](https://github.com/carbon-design-system/ibm-products/commit/5b42621745698c3f2077bf3f0dffa88b774944d5))
+* add lodash dependency ([51b8838](https://github.com/carbon-design-system/ibm-products/commit/51b883888829bb516dc8ecffec672095636c24d4))
+* carbon v11 examples ([#2973](https://github.com/carbon-design-system/ibm-products/issues/2973)) ([836e68c](https://github.com/carbon-design-system/ibm-products/commit/836e68c5c9e806d4a5f7920f8787b6dd4c7ffa60))
+* example gallery v2 fix ([#2999](https://github.com/carbon-design-system/ibm-products/issues/2999)) ([745e732](https://github.com/carbon-design-system/ibm-products/commit/745e7323146775da5dabf1237daf85d8ca656777))
+* get publish working ([eebfb2f](https://github.com/carbon-design-system/ibm-products/commit/eebfb2f048d3af058cbcfb9a23789dfbaaf69e48))
+* give empty state illustration position ([#2964](https://github.com/carbon-design-system/ibm-products/issues/2964)) ([0b48d07](https://github.com/carbon-design-system/ibm-products/commit/0b48d076e34f5a9761b988a15ad1ae08a19d5055))
+* icon v11 imports ([fa3ed7d](https://github.com/carbon-design-system/ibm-products/commit/fa3ed7dd2ad717ce6ac0fce6751ec7795b97d8ab))
+* removes overflow hidden ([eaed7ae](https://github.com/carbon-design-system/ibm-products/commit/eaed7ae11925ae085bcfefed6c5b2a787ef4740a))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* snapshot ([830decf](https://github.com/carbon-design-system/ibm-products/commit/830decf5ec4c1fec319a6a1f830ed81e6eb41483))
+* various add select migration style fixes ([b372fd1](https://github.com/carbon-design-system/ibm-products/commit/b372fd159f3ec86c8b0bcae2f544687fa592cfe8))
+
+
+### Features
+
+* add second gallery ([#3010](https://github.com/carbon-design-system/ibm-products/issues/3010)) ([8dee2d6](https://github.com/carbon-design-system/ibm-products/commit/8dee2d64f8f11a24590c31d2d3dfe099fabb4fc4))
+* **datagrid:** adds new stories to filter panel ([8b7d036](https://github.com/carbon-design-system/ibm-products/commit/8b7d03646e9c6ca659d19236dd978deab699f43d))
+* **datagrid:** adds table of contents ([#2971](https://github.com/carbon-design-system/ibm-products/issues/2971)) ([408eff1](https://github.com/carbon-design-system/ibm-products/commit/408eff1fd2324d86bc5d3343fc868f3d58b6053c))
+* **datagrid:** starting to move story files ([99d27d1](https://github.com/carbon-design-system/ibm-products/commit/99d27d176e99d3c3f8c947cbb4e06c3d54795927))
+
+
+
+
+
+# [2.0.0-rc.36](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.0.0-rc.29...@carbon/ibm-products@2.0.0-rc.36) (2023-05-17)
+
+
+### Bug Fixes
+
+* about modal node for footer ([#2982](https://github.com/carbon-design-system/ibm-products/issues/2982)) ([11c2000](https://github.com/carbon-design-system/ibm-products/commit/11c200099eea07c23e69bdef2439d140dd61d37a))
+* add columns in edit tearsheet grid ([#2929](https://github.com/carbon-design-system/ibm-products/issues/2929)) ([5b42621](https://github.com/carbon-design-system/ibm-products/commit/5b42621745698c3f2077bf3f0dffa88b774944d5))
+* add lodash dependency ([51b8838](https://github.com/carbon-design-system/ibm-products/commit/51b883888829bb516dc8ecffec672095636c24d4))
+* carbon v11 examples ([#2973](https://github.com/carbon-design-system/ibm-products/issues/2973)) ([836e68c](https://github.com/carbon-design-system/ibm-products/commit/836e68c5c9e806d4a5f7920f8787b6dd4c7ffa60))
+* example gallery v2 fix ([#2999](https://github.com/carbon-design-system/ibm-products/issues/2999)) ([745e732](https://github.com/carbon-design-system/ibm-products/commit/745e7323146775da5dabf1237daf85d8ca656777))
+* get publish working ([eebfb2f](https://github.com/carbon-design-system/ibm-products/commit/eebfb2f048d3af058cbcfb9a23789dfbaaf69e48))
+* give empty state illustration position ([#2964](https://github.com/carbon-design-system/ibm-products/issues/2964)) ([0b48d07](https://github.com/carbon-design-system/ibm-products/commit/0b48d076e34f5a9761b988a15ad1ae08a19d5055))
+* icon v11 imports ([fa3ed7d](https://github.com/carbon-design-system/ibm-products/commit/fa3ed7dd2ad717ce6ac0fce6751ec7795b97d8ab))
+* removes overflow hidden ([eaed7ae](https://github.com/carbon-design-system/ibm-products/commit/eaed7ae11925ae085bcfefed6c5b2a787ef4740a))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* snapshot ([830decf](https://github.com/carbon-design-system/ibm-products/commit/830decf5ec4c1fec319a6a1f830ed81e6eb41483))
+* various add select migration style fixes ([b372fd1](https://github.com/carbon-design-system/ibm-products/commit/b372fd159f3ec86c8b0bcae2f544687fa592cfe8))
+
+
+### Features
+
+* add second gallery ([#3010](https://github.com/carbon-design-system/ibm-products/issues/3010)) ([8dee2d6](https://github.com/carbon-design-system/ibm-products/commit/8dee2d64f8f11a24590c31d2d3dfe099fabb4fc4))
+* **datagrid:** adds new stories to filter panel ([8b7d036](https://github.com/carbon-design-system/ibm-products/commit/8b7d03646e9c6ca659d19236dd978deab699f43d))
+* **datagrid:** adds table of contents ([#2971](https://github.com/carbon-design-system/ibm-products/issues/2971)) ([408eff1](https://github.com/carbon-design-system/ibm-products/commit/408eff1fd2324d86bc5d3343fc868f3d58b6053c))
+* **datagrid:** starting to move story files ([99d27d1](https://github.com/carbon-design-system/ibm-products/commit/99d27d176e99d3c3f8c947cbb4e06c3d54795927))
+
+
+
+
+
+# [2.0.0-rc.35](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.0.0-rc.29...@carbon/ibm-products@2.0.0-rc.35) (2023-05-17)
+
+
+### Bug Fixes
+
+* about modal node for footer ([#2982](https://github.com/carbon-design-system/ibm-products/issues/2982)) ([11c2000](https://github.com/carbon-design-system/ibm-products/commit/11c200099eea07c23e69bdef2439d140dd61d37a))
+* add columns in edit tearsheet grid ([#2929](https://github.com/carbon-design-system/ibm-products/issues/2929)) ([5b42621](https://github.com/carbon-design-system/ibm-products/commit/5b42621745698c3f2077bf3f0dffa88b774944d5))
+* add lodash dependency ([51b8838](https://github.com/carbon-design-system/ibm-products/commit/51b883888829bb516dc8ecffec672095636c24d4))
+* carbon v11 examples ([#2973](https://github.com/carbon-design-system/ibm-products/issues/2973)) ([836e68c](https://github.com/carbon-design-system/ibm-products/commit/836e68c5c9e806d4a5f7920f8787b6dd4c7ffa60))
+* example gallery v2 fix ([#2999](https://github.com/carbon-design-system/ibm-products/issues/2999)) ([745e732](https://github.com/carbon-design-system/ibm-products/commit/745e7323146775da5dabf1237daf85d8ca656777))
+* get publish working ([eebfb2f](https://github.com/carbon-design-system/ibm-products/commit/eebfb2f048d3af058cbcfb9a23789dfbaaf69e48))
+* give empty state illustration position ([#2964](https://github.com/carbon-design-system/ibm-products/issues/2964)) ([0b48d07](https://github.com/carbon-design-system/ibm-products/commit/0b48d076e34f5a9761b988a15ad1ae08a19d5055))
+* icon v11 imports ([fa3ed7d](https://github.com/carbon-design-system/ibm-products/commit/fa3ed7dd2ad717ce6ac0fce6751ec7795b97d8ab))
+* removes overflow hidden ([eaed7ae](https://github.com/carbon-design-system/ibm-products/commit/eaed7ae11925ae085bcfefed6c5b2a787ef4740a))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* snapshot ([830decf](https://github.com/carbon-design-system/ibm-products/commit/830decf5ec4c1fec319a6a1f830ed81e6eb41483))
+* various add select migration style fixes ([b372fd1](https://github.com/carbon-design-system/ibm-products/commit/b372fd159f3ec86c8b0bcae2f544687fa592cfe8))
+
+
+### Features
+
+* add second gallery ([#3010](https://github.com/carbon-design-system/ibm-products/issues/3010)) ([8dee2d6](https://github.com/carbon-design-system/ibm-products/commit/8dee2d64f8f11a24590c31d2d3dfe099fabb4fc4))
+* **datagrid:** adds new stories to filter panel ([8b7d036](https://github.com/carbon-design-system/ibm-products/commit/8b7d03646e9c6ca659d19236dd978deab699f43d))
+* **datagrid:** adds table of contents ([#2971](https://github.com/carbon-design-system/ibm-products/issues/2971)) ([408eff1](https://github.com/carbon-design-system/ibm-products/commit/408eff1fd2324d86bc5d3343fc868f3d58b6053c))
+* **datagrid:** starting to move story files ([99d27d1](https://github.com/carbon-design-system/ibm-products/commit/99d27d176e99d3c3f8c947cbb4e06c3d54795927))
+
+
+
+
+
+# [2.0.0-rc.32](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.0.0-rc.29...@carbon/ibm-products@2.0.0-rc.32) (2023-05-17)
+
+
+### Bug Fixes
+
+* about modal node for footer ([#2982](https://github.com/carbon-design-system/ibm-products/issues/2982)) ([11c2000](https://github.com/carbon-design-system/ibm-products/commit/11c200099eea07c23e69bdef2439d140dd61d37a))
+* add columns in edit tearsheet grid ([#2929](https://github.com/carbon-design-system/ibm-products/issues/2929)) ([5b42621](https://github.com/carbon-design-system/ibm-products/commit/5b42621745698c3f2077bf3f0dffa88b774944d5))
+* add lodash dependency ([51b8838](https://github.com/carbon-design-system/ibm-products/commit/51b883888829bb516dc8ecffec672095636c24d4))
+* carbon v11 examples ([#2973](https://github.com/carbon-design-system/ibm-products/issues/2973)) ([836e68c](https://github.com/carbon-design-system/ibm-products/commit/836e68c5c9e806d4a5f7920f8787b6dd4c7ffa60))
+* example gallery v2 fix ([#2999](https://github.com/carbon-design-system/ibm-products/issues/2999)) ([745e732](https://github.com/carbon-design-system/ibm-products/commit/745e7323146775da5dabf1237daf85d8ca656777))
+* give empty state illustration position ([#2964](https://github.com/carbon-design-system/ibm-products/issues/2964)) ([0b48d07](https://github.com/carbon-design-system/ibm-products/commit/0b48d076e34f5a9761b988a15ad1ae08a19d5055))
+* icon v11 imports ([fa3ed7d](https://github.com/carbon-design-system/ibm-products/commit/fa3ed7dd2ad717ce6ac0fce6751ec7795b97d8ab))
+* removes overflow hidden ([eaed7ae](https://github.com/carbon-design-system/ibm-products/commit/eaed7ae11925ae085bcfefed6c5b2a787ef4740a))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* snapshot ([830decf](https://github.com/carbon-design-system/ibm-products/commit/830decf5ec4c1fec319a6a1f830ed81e6eb41483))
+* various add select migration style fixes ([b372fd1](https://github.com/carbon-design-system/ibm-products/commit/b372fd159f3ec86c8b0bcae2f544687fa592cfe8))
+
+
+### Features
+
+* add second gallery ([#3010](https://github.com/carbon-design-system/ibm-products/issues/3010)) ([8dee2d6](https://github.com/carbon-design-system/ibm-products/commit/8dee2d64f8f11a24590c31d2d3dfe099fabb4fc4))
+* **datagrid:** adds new stories to filter panel ([8b7d036](https://github.com/carbon-design-system/ibm-products/commit/8b7d03646e9c6ca659d19236dd978deab699f43d))
+* **datagrid:** adds table of contents ([#2971](https://github.com/carbon-design-system/ibm-products/issues/2971)) ([408eff1](https://github.com/carbon-design-system/ibm-products/commit/408eff1fd2324d86bc5d3343fc868f3d58b6053c))
+* **datagrid:** starting to move story files ([99d27d1](https://github.com/carbon-design-system/ibm-products/commit/99d27d176e99d3c3f8c947cbb4e06c3d54795927))
+
+
+
+
+
+# [2.0.0-rc.31](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.0.0-rc.29...@carbon/ibm-products@2.0.0-rc.31) (2023-05-17)
+
+
+### Bug Fixes
+
+* about modal node for footer ([#2982](https://github.com/carbon-design-system/ibm-products/issues/2982)) ([11c2000](https://github.com/carbon-design-system/ibm-products/commit/11c200099eea07c23e69bdef2439d140dd61d37a))
+* add columns in edit tearsheet grid ([#2929](https://github.com/carbon-design-system/ibm-products/issues/2929)) ([5b42621](https://github.com/carbon-design-system/ibm-products/commit/5b42621745698c3f2077bf3f0dffa88b774944d5))
+* add lodash dependency ([51b8838](https://github.com/carbon-design-system/ibm-products/commit/51b883888829bb516dc8ecffec672095636c24d4))
+* carbon v11 examples ([#2973](https://github.com/carbon-design-system/ibm-products/issues/2973)) ([836e68c](https://github.com/carbon-design-system/ibm-products/commit/836e68c5c9e806d4a5f7920f8787b6dd4c7ffa60))
+* example gallery v2 fix ([#2999](https://github.com/carbon-design-system/ibm-products/issues/2999)) ([745e732](https://github.com/carbon-design-system/ibm-products/commit/745e7323146775da5dabf1237daf85d8ca656777))
+* give empty state illustration position ([#2964](https://github.com/carbon-design-system/ibm-products/issues/2964)) ([0b48d07](https://github.com/carbon-design-system/ibm-products/commit/0b48d076e34f5a9761b988a15ad1ae08a19d5055))
+* icon v11 imports ([fa3ed7d](https://github.com/carbon-design-system/ibm-products/commit/fa3ed7dd2ad717ce6ac0fce6751ec7795b97d8ab))
+* removes overflow hidden ([eaed7ae](https://github.com/carbon-design-system/ibm-products/commit/eaed7ae11925ae085bcfefed6c5b2a787ef4740a))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* snapshot ([830decf](https://github.com/carbon-design-system/ibm-products/commit/830decf5ec4c1fec319a6a1f830ed81e6eb41483))
+* various add select migration style fixes ([b372fd1](https://github.com/carbon-design-system/ibm-products/commit/b372fd159f3ec86c8b0bcae2f544687fa592cfe8))
+
+
+### Features
+
+* add second gallery ([#3010](https://github.com/carbon-design-system/ibm-products/issues/3010)) ([8dee2d6](https://github.com/carbon-design-system/ibm-products/commit/8dee2d64f8f11a24590c31d2d3dfe099fabb4fc4))
+* **datagrid:** adds new stories to filter panel ([8b7d036](https://github.com/carbon-design-system/ibm-products/commit/8b7d03646e9c6ca659d19236dd978deab699f43d))
+* **datagrid:** adds table of contents ([#2971](https://github.com/carbon-design-system/ibm-products/issues/2971)) ([408eff1](https://github.com/carbon-design-system/ibm-products/commit/408eff1fd2324d86bc5d3343fc868f3d58b6053c))
+* **datagrid:** starting to move story files ([99d27d1](https://github.com/carbon-design-system/ibm-products/commit/99d27d176e99d3c3f8c947cbb4e06c3d54795927))
+
+
+
+
+
+# [2.0.0-rc.30](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.0.0-rc.29...@carbon/ibm-products@2.0.0-rc.30) (2023-05-17)
+
+
+### Bug Fixes
+
+* about modal node for footer ([#2982](https://github.com/carbon-design-system/ibm-products/issues/2982)) ([11c2000](https://github.com/carbon-design-system/ibm-products/commit/11c200099eea07c23e69bdef2439d140dd61d37a))
+* add columns in edit tearsheet grid ([#2929](https://github.com/carbon-design-system/ibm-products/issues/2929)) ([5b42621](https://github.com/carbon-design-system/ibm-products/commit/5b42621745698c3f2077bf3f0dffa88b774944d5))
+* add lodash dependency ([51b8838](https://github.com/carbon-design-system/ibm-products/commit/51b883888829bb516dc8ecffec672095636c24d4))
+* carbon v11 examples ([#2973](https://github.com/carbon-design-system/ibm-products/issues/2973)) ([836e68c](https://github.com/carbon-design-system/ibm-products/commit/836e68c5c9e806d4a5f7920f8787b6dd4c7ffa60))
+* example gallery v2 fix ([#2999](https://github.com/carbon-design-system/ibm-products/issues/2999)) ([745e732](https://github.com/carbon-design-system/ibm-products/commit/745e7323146775da5dabf1237daf85d8ca656777))
+* give empty state illustration position ([#2964](https://github.com/carbon-design-system/ibm-products/issues/2964)) ([0b48d07](https://github.com/carbon-design-system/ibm-products/commit/0b48d076e34f5a9761b988a15ad1ae08a19d5055))
+* icon v11 imports ([fa3ed7d](https://github.com/carbon-design-system/ibm-products/commit/fa3ed7dd2ad717ce6ac0fce6751ec7795b97d8ab))
+* removes overflow hidden ([eaed7ae](https://github.com/carbon-design-system/ibm-products/commit/eaed7ae11925ae085bcfefed6c5b2a787ef4740a))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* snapshot ([830decf](https://github.com/carbon-design-system/ibm-products/commit/830decf5ec4c1fec319a6a1f830ed81e6eb41483))
+* various add select migration style fixes ([b372fd1](https://github.com/carbon-design-system/ibm-products/commit/b372fd159f3ec86c8b0bcae2f544687fa592cfe8))
+
+
+### Features
+
+* add second gallery ([#3010](https://github.com/carbon-design-system/ibm-products/issues/3010)) ([8dee2d6](https://github.com/carbon-design-system/ibm-products/commit/8dee2d64f8f11a24590c31d2d3dfe099fabb4fc4))
+* **datagrid:** adds new stories to filter panel ([8b7d036](https://github.com/carbon-design-system/ibm-products/commit/8b7d03646e9c6ca659d19236dd978deab699f43d))
+* **datagrid:** adds table of contents ([#2971](https://github.com/carbon-design-system/ibm-products/issues/2971)) ([408eff1](https://github.com/carbon-design-system/ibm-products/commit/408eff1fd2324d86bc5d3343fc868f3d58b6053c))
+* **datagrid:** starting to move story files ([99d27d1](https://github.com/carbon-design-system/ibm-products/commit/99d27d176e99d3c3f8c947cbb4e06c3d54795927))
+
+
+
+
+
 # [2.0.0-rc.29](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.0.0-rc.28...@carbon/ibm-products@2.0.0-rc.29) (2023-05-09)
 
 

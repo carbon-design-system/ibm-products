@@ -3,6 +3,81 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.33](https://github.com/carbon-design-system/ibm-products/compare/babel-preset-ibm-cloud-cognitive@0.14.18...babel-preset-ibm-cloud-cognitive@0.14.33) (2023-05-17)
+
+
+### Bug Fixes
+
+* bring config & version numbers up to those in v1 ([#2993](https://github.com/carbon-design-system/ibm-products/issues/2993)) ([d1803de](https://github.com/carbon-design-system/ibm-products/commit/d1803dea3d463daacaedf168e0630d2958d89ce1))
+* get publish working ([eebfb2f](https://github.com/carbon-design-system/ibm-products/commit/eebfb2f048d3af058cbcfb9a23789dfbaaf69e48))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
+## [0.14.32](https://github.com/carbon-design-system/ibm-products/compare/babel-preset-ibm-cloud-cognitive@0.14.18...babel-preset-ibm-cloud-cognitive@0.14.32) (2023-05-17)
+
+
+### Bug Fixes
+
+* bring config & version numbers up to those in v1 ([#2993](https://github.com/carbon-design-system/ibm-products/issues/2993)) ([d1803de](https://github.com/carbon-design-system/ibm-products/commit/d1803dea3d463daacaedf168e0630d2958d89ce1))
+* get publish working ([eebfb2f](https://github.com/carbon-design-system/ibm-products/commit/eebfb2f048d3af058cbcfb9a23789dfbaaf69e48))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
+## [0.14.31](https://github.com/carbon-design-system/ibm-products/compare/babel-preset-ibm-cloud-cognitive@0.14.18...babel-preset-ibm-cloud-cognitive@0.14.31) (2023-05-17)
+
+
+### Bug Fixes
+
+* bring config & version numbers up to those in v1 ([#2993](https://github.com/carbon-design-system/ibm-products/issues/2993)) ([d1803de](https://github.com/carbon-design-system/ibm-products/commit/d1803dea3d463daacaedf168e0630d2958d89ce1))
+* get publish working ([eebfb2f](https://github.com/carbon-design-system/ibm-products/commit/eebfb2f048d3af058cbcfb9a23789dfbaaf69e48))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
+## [0.14.30](https://github.com/carbon-design-system/ibm-products/compare/babel-preset-ibm-cloud-cognitive@0.14.18...babel-preset-ibm-cloud-cognitive@0.14.30) (2023-05-17)
+
+
+### Bug Fixes
+
+* bring config & version numbers up to those in v1 ([#2993](https://github.com/carbon-design-system/ibm-products/issues/2993)) ([d1803de](https://github.com/carbon-design-system/ibm-products/commit/d1803dea3d463daacaedf168e0630d2958d89ce1))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
+## [0.14.29](https://github.com/carbon-design-system/ibm-products/compare/babel-preset-ibm-cloud-cognitive@0.14.18...babel-preset-ibm-cloud-cognitive@0.14.29) (2023-05-17)
+
+
+### Bug Fixes
+
+* bring config & version numbers up to those in v1 ([#2993](https://github.com/carbon-design-system/ibm-products/issues/2993)) ([d1803de](https://github.com/carbon-design-system/ibm-products/commit/d1803dea3d463daacaedf168e0630d2958d89ce1))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
+## [0.14.28](https://github.com/carbon-design-system/ibm-products/compare/babel-preset-ibm-cloud-cognitive@0.14.18...babel-preset-ibm-cloud-cognitive@0.14.28) (2023-05-17)
+
+
+### Bug Fixes
+
+* bring config & version numbers up to those in v1 ([#2993](https://github.com/carbon-design-system/ibm-products/issues/2993)) ([d1803de](https://github.com/carbon-design-system/ibm-products/commit/d1803dea3d463daacaedf168e0630d2958d89ce1))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
 ## [0.14.27](https://github.com/carbon-design-system/ibm-products/compare/babel-preset-ibm-cloud-cognitive@0.14.26...babel-preset-ibm-cloud-cognitive@0.14.27) (2023-03-07)
 
 **Note:** Version bump only for package babel-preset-ibm-cloud-cognitive

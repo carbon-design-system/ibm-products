@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.24.21](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@0.24.3...jest-config-ibm-cloud-cognitive@0.24.21) (2023-05-17)
+
+
+### Bug Fixes
+
+* bring config & version numbers up to those in v1 ([#2993](https://github.com/carbon-design-system/ibm-products/issues/2993)) ([d1803de](https://github.com/carbon-design-system/ibm-products/commit/d1803dea3d463daacaedf168e0630d2958d89ce1))
+* release yml incorrect ([#3019](https://github.com/carbon-design-system/ibm-products/issues/3019)) ([0b19df6](https://github.com/carbon-design-system/ibm-products/commit/0b19df600601829ad531088dd92997c6dd9a1707))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* **SidePanel:** motion refactor using framer motion (v11) ([#2314](https://github.com/carbon-design-system/ibm-products/issues/2314)) ([7bad2f2](https://github.com/carbon-design-system/ibm-products/commit/7bad2f271ec71cf8979b71a67cde0f212d0d5d6c))
+* update jest setup to get tests running again ([7ca4229](https://github.com/carbon-design-system/ibm-products/commit/7ca42298434f8bea82a08e2923ab8c043b7afd28))
+
+
+
+
+
 ## [0.24.20](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@0.24.3...jest-config-ibm-cloud-cognitive@0.24.20) (2023-05-17)
 
 

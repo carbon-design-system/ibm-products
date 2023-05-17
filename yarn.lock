@@ -2452,7 +2452,7 @@ __metadata:
     "@storybook/react": ^6.5.16
     "@storybook/theming": ^6.5.16
     babel-loader: ^9.1.2
-    babel-preset-ibm-cloud-cognitive: ^0.14.33
+    babel-preset-ibm-cloud-cognitive: ^0.14.34
     css-loader: ^6.7.3
     dotenv-webpack: 6.0.4
     npm-check-updates: ^16.10.12
@@ -2479,7 +2479,7 @@ __metadata:
     "@babel/core": ^7.20.12
     "@babel/runtime": ^7.20.13
     "@carbon/telemetry": ^0.1.0
-    babel-preset-ibm-cloud-cognitive: ^0.14.19
+    babel-preset-ibm-cloud-cognitive: ^0.14.34
     chalk: ^4.1.2
     change-case: ^4.1.2
     copyfiles: ^2.4.1
@@ -2489,7 +2489,7 @@ __metadata:
     glob: ^10.2.3
     immutability-helper: ^3.1.1
     jest: ^29.4.2
-    jest-config-ibm-cloud-cognitive: ^0.24.5
+    jest-config-ibm-cloud-cognitive: ^0.24.21
     jest-environment-jsdom: ^29.4.2
     lodash: ^4.17.21
     namor: ^1.1.2
@@ -9091,7 +9091,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-ibm-cloud-cognitive@^0.14.19, babel-preset-ibm-cloud-cognitive@^0.14.33, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
+"babel-preset-ibm-cloud-cognitive@^0.14.34, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive"
   dependencies:
@@ -17366,7 +17366,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-config-ibm-cloud-cognitive@^0.24.5, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
+"jest-config-ibm-cloud-cognitive@^0.24.21, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive"
   dependencies:
@@ -17376,7 +17376,7 @@ __metadata:
     accessibility-checker: ^3.1.47
     axe-core: ^4.6.3
     babel-jest: ^29.4.2
-    babel-preset-ibm-cloud-cognitive: ^0.14.33
+    babel-preset-ibm-cloud-cognitive: ^0.14.34
     chalk: ^4.1.2
     enzyme: ^3.11.0
     enzyme-to-json: ^3.6.2

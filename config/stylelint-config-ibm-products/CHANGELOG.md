@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.36](https://github.com/carbon-design-system/ibm-products/compare/stylelint-config-ibm-products@0.0.17...stylelint-config-ibm-products@0.0.36) (2023-05-17)
+
+
+### Bug Fixes
+
+* bring config & version numbers up to those in v1 ([#2993](https://github.com/carbon-design-system/ibm-products/issues/2993)) ([d1803de](https://github.com/carbon-design-system/ibm-products/commit/d1803dea3d463daacaedf168e0630d2958d89ce1))
+* release yml incorrect ([#3019](https://github.com/carbon-design-system/ibm-products/issues/3019)) ([0b19df6](https://github.com/carbon-design-system/ibm-products/commit/0b19df600601829ad531088dd92997c6dd9a1707))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
 ## [0.0.35](https://github.com/carbon-design-system/ibm-products/compare/stylelint-config-ibm-products@0.0.17...stylelint-config-ibm-products@0.0.35) (2023-05-17)
 
 

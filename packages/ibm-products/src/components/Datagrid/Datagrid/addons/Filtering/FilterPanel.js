@@ -63,7 +63,7 @@ const FilterPanel = ({
     filtersState,
     prevFiltersObjectArrayRef,
     prevFiltersRef,
-    revertToPreviousFilters,
+    cancel,
     reset,
     renderFilter,
     filtersObjectArray,
@@ -74,6 +74,7 @@ const FilterPanel = ({
     setAllFilters,
     variation: PANEL,
     reactTableFiltersState,
+    onCancel,
   });
 
   /** Refs */
@@ -100,14 +101,6 @@ const FilterPanel = ({
   const closePanel = () => {
     cancel();
     setPanelOpen(false);
-  };
-
-  const cancel = () => {
-    // Reverting to previous filters only applies when using batch actions
-    if (updateMethod === BATCH) {
-      revertToPreviousFilters();
-      onCancel();
-    }
   };
 
   const apply = () => {

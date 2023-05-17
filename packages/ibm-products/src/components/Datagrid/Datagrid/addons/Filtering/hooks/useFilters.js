@@ -18,6 +18,7 @@ import {
 } from 'carbon-components-react';
 import {
   INSTANT,
+  BATCH,
   DATE,
   CHECKBOX,
   NUMBER,
@@ -33,6 +34,7 @@ const useFilters = ({
   setAllFilters,
   variation,
   reactTableFiltersState,
+  onCancel = () => {},
 }) => {
   /** State */
   const [filtersState, setFiltersState] = useState(
@@ -326,6 +328,14 @@ const useFilters = ({
     return <React.Fragment key={column}>{filter}</React.Fragment>;
   };
 
+  const cancel = () => {
+    // Reverting to previous filters only applies when using batch actions
+    if (updateMethod === BATCH) {
+      revertToPreviousFilters();
+      onCancel();
+    }
+  };
+
   /** The purpose of this function is to sync any changes in react-tables state.filters array and reflect
       those new filter changes in the panel/flyout state. The external change is triggered if setAllFilters is called outside of the Datagrid */
   useEffect(
@@ -356,6 +366,7 @@ const useFilters = ({
     renderFilter,
     filtersObjectArray,
     lastAppliedFilters,
+    cancel,
   };
 };
 

@@ -46,7 +46,7 @@ const FilterFlyout = ({
     filtersState,
     prevFiltersObjectArrayRef,
     prevFiltersRef,
-    revertToPreviousFilters,
+    cancel,
     reset,
     renderFilter,
     filtersObjectArray,
@@ -57,6 +57,7 @@ const FilterFlyout = ({
     setAllFilters,
     variation: FLYOUT,
     reactTableFiltersState,
+    onCancel,
   });
 
   /** Refs */
@@ -98,14 +99,6 @@ const FilterFlyout = ({
 
     // Update the last applied filters
     lastAppliedFilters.current = JSON.stringify(filtersObjectArray);
-  };
-
-  const cancel = () => {
-    // Reverting to previous filters only applies when using batch actions
-    if (updateMethod === BATCH) {
-      revertToPreviousFilters();
-      onCancel();
-    }
   };
 
   /** Renders all filters */

@@ -64,4 +64,6 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
-        run: yarn lerna publish from-package --no-verify-access --yes
+        run:
+          yarn lerna publish from-package --dist-tag latest-v1
+          --no-verify-access --yes

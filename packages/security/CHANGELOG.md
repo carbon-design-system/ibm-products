@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.7](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-security@2.13.0...@carbon/ibm-security@2.13.7) (2023-05-17)
+
+
+### Bug Fixes
+
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* use new carbon react import in add select body ([6978a2b](https://github.com/carbon-design-system/ibm-products/commit/6978a2b4ea0375cd41620a5ce1231f3f113936d0))
+
+
+
+
+
+## [2.13.6](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-security@2.13.0...@carbon/ibm-security@2.13.6) (2023-05-17)
+
+
+### Bug Fixes
+
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* use new carbon react import in add select body ([6978a2b](https://github.com/carbon-design-system/ibm-products/commit/6978a2b4ea0375cd41620a5ce1231f3f113936d0))
+
+
+
+
+
+## [2.13.5](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-security@2.13.0...@carbon/ibm-security@2.13.5) (2023-05-17)
+
+
+### Bug Fixes
+
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+* use new carbon react import in add select body ([6978a2b](https://github.com/carbon-design-system/ibm-products/commit/6978a2b4ea0375cd41620a5ce1231f3f113936d0))
+
+
+
+
+
 ## [2.13.4](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-security@2.13.3...@carbon/ibm-security@2.13.4) (2022-09-06)
 
 

@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.22.22](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-cdai@1.22.16...@carbon/ibm-cloud-cognitive-cdai@1.22.22) (2023-05-17)
+
+
+### Bug Fixes
+
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
+## [1.22.21](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-cdai@1.22.16...@carbon/ibm-cloud-cognitive-cdai@1.22.21) (2023-05-17)
+
+
+### Bug Fixes
+
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
+## [1.22.20](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-cdai@1.22.16...@carbon/ibm-cloud-cognitive-cdai@1.22.20) (2023-05-17)
+
+
+### Bug Fixes
+
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
 ## [1.22.19](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-cdai@1.22.18...@carbon/ibm-cloud-cognitive-cdai@1.22.19) (2022-09-06)
 
 

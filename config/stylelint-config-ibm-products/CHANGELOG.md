@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.32](https://github.com/carbon-design-system/ibm-products/compare/stylelint-config-ibm-products@0.0.17...stylelint-config-ibm-products@0.0.32) (2023-05-17)
+
+
+### Bug Fixes
+
+* bring config & version numbers up to those in v1 ([#2993](https://github.com/carbon-design-system/ibm-products/issues/2993)) ([d1803de](https://github.com/carbon-design-system/ibm-products/commit/d1803dea3d463daacaedf168e0630d2958d89ce1))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
+## [0.0.31](https://github.com/carbon-design-system/ibm-products/compare/stylelint-config-ibm-products@0.0.17...stylelint-config-ibm-products@0.0.31) (2023-05-17)
+
+
+### Bug Fixes
+
+* bring config & version numbers up to those in v1 ([#2993](https://github.com/carbon-design-system/ibm-products/issues/2993)) ([d1803de](https://github.com/carbon-design-system/ibm-products/commit/d1803dea3d463daacaedf168e0630d2958d89ce1))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
+## [0.0.30](https://github.com/carbon-design-system/ibm-products/compare/stylelint-config-ibm-products@0.0.17...stylelint-config-ibm-products@0.0.30) (2023-05-17)
+
+
+### Bug Fixes
+
+* bring config & version numbers up to those in v1 ([#2993](https://github.com/carbon-design-system/ibm-products/issues/2993)) ([d1803de](https://github.com/carbon-design-system/ibm-products/commit/d1803dea3d463daacaedf168e0630d2958d89ce1))
+* repository links following rename ([#3004](https://github.com/carbon-design-system/ibm-products/issues/3004)) ([7940275](https://github.com/carbon-design-system/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
 ## [0.0.29](https://github.com/carbon-design-system/ibm-products/compare/stylelint-config-ibm-products@0.0.28...stylelint-config-ibm-products@0.0.29) (2023-03-28)
 
 

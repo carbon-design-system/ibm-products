@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.4](https://github.com/lee-chase/ibm-products/compare/@carbon/component-usage-report@0.2.1...@carbon/component-usage-report@0.2.4) (2023-05-17)
+
+
+### Bug Fixes
+
+* bring config & version numbers up to those in v1 ([#2993](https://github.com/lee-chase/ibm-products/issues/2993)) ([d1803de](https://github.com/lee-chase/ibm-products/commit/d1803dea3d463daacaedf168e0630d2958d89ce1))
+* repository links following rename ([#3004](https://github.com/lee-chase/ibm-products/issues/3004)) ([7940275](https://github.com/lee-chase/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
+## [0.2.3](https://github.com/lee-chase/ibm-products/compare/@carbon/component-usage-report@0.2.1...@carbon/component-usage-report@0.2.3) (2023-05-17)
+
+
+### Bug Fixes
+
+* bring config & version numbers up to those in v1 ([#2993](https://github.com/lee-chase/ibm-products/issues/2993)) ([d1803de](https://github.com/lee-chase/ibm-products/commit/d1803dea3d463daacaedf168e0630d2958d89ce1))
+* repository links following rename ([#3004](https://github.com/lee-chase/ibm-products/issues/3004)) ([7940275](https://github.com/lee-chase/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
+## [0.2.2](https://github.com/lee-chase/ibm-products/compare/@carbon/component-usage-report@0.2.1...@carbon/component-usage-report@0.2.2) (2023-05-17)
+
+
+### Bug Fixes
+
+* bring config & version numbers up to those in v1 ([#2993](https://github.com/lee-chase/ibm-products/issues/2993)) ([d1803de](https://github.com/lee-chase/ibm-products/commit/d1803dea3d463daacaedf168e0630d2958d89ce1))
+* repository links following rename ([#3004](https://github.com/lee-chase/ibm-products/issues/3004)) ([7940275](https://github.com/lee-chase/ibm-products/commit/79402756abb225f27312488d87c74ba1ba2fc72c))
+
+
+
+
+
 ## [0.2.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/component-usage-report@0.2.0...@carbon/component-usage-report@0.2.1) (2022-03-22)
 
 

@@ -68,19 +68,44 @@ export const prepareStory = (template, options) => {
  * A helper component that returns a codesandbox link to an example codesandbox for the component.
  * The link URL is based on the example directory name and the standard codesandbox URL for package examples.
  */
-export const CodesandboxLink = ({ exampleDirectory }) => (
-  <a
-    href={`https://codesandbox.io/s/github/carbon-design-system/ibm-cloud-cognitive/tree/main/examples/carbon-for-ibm-products/${exampleDirectory}`}
-  >
-    <img
-      alt="Edit on CodeSandbox"
-      src="https://codesandbox.io/static/img/play-codesandbox.svg"
-    />
-  </a>
-);
+const packagePath =
+  'github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products';
+
+export const CodesandboxLink = ({ exampleDirectory }) => {
+  // const stackblitz = `https://stackblitz.com/${packagePath}/${dir}?file=src%2FExample%2FExample.jsx`;
+  const codesandbox = `https://codesandbox.io/p/sandbox/${packagePath}/${exampleDirectory}?file=%2Fsrc%2FExample%2FExample.jsx`;
+
+  return (
+    <a href={codesandbox}>
+      <img
+        alt="Edit on CodeSandbox"
+        src="https://codesandbox.io/static/img/play-codesandbox.svg"
+      />
+    </a>
+  );
+};
 CodesandboxLink.propTypes = {
   /**
-   * directory withing examples codesandbox will be found
+   * directory within examples codesandbox will be found
+   */
+  exampleDirectory: PropTypes.string,
+};
+
+export const StackblitzLink = ({ exampleDirectory }) => {
+  const stackblitz = `https://stackblitz.com/${packagePath}/${exampleDirectory}?file=src%2FExample%2FExample.jsx`;
+
+  return (
+    <a href={stackblitz}>
+      <img
+        alt="Edit on Stackblitz"
+        src="https://c.staticblitz.com/assets/favicon_sb-861fe1b85c0dc928750c62de15fed96fc75e57ee366bd937bad17a3938917b3f.svg"
+      />
+    </a>
+  );
+};
+StackblitzLink.propTypes = {
+  /**
+   * directory within examples stackblitz will be found
    */
   exampleDirectory: PropTypes.string,
 };

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -101,7 +101,7 @@ export let Card = forwardRef(
               size={size}
               direction={pos}
               flipped
-              ariaLabel={overflowAriaLabel}
+              aria-label={overflowAriaLabel}
             >
               {overflowActions.map(({ id, ...rest }) => (
                 <OverflowMenuItem key={id} {...rest} />

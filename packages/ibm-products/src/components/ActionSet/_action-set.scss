@@ -68,7 +68,9 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 // or row-double in medium or large,
 // buttons are 50% width
 .#{$action-set-block-class}.#{$action-set-block-class}--row-single.#{$action-set-block-class}--lg
-  .#{$action-set-block-class}__action-button:not(.#{$action-set-block-class}__action-button--ghost),
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ),
 .#{$action-set-block-class}.#{$action-set-block-class}--row-double.#{$action-set-block-class}--md
   .#{$action-set-block-class}__action-button,
 .#{$action-set-block-class}.#{$action-set-block-class}--row-double.#{$action-set-block-class}--lg
@@ -90,13 +92,21 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 // or row-quadruple (non-ghost),
 // buttons are 25% width with a 2xl of 232px
 .#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--row-triple.#{$action-set-block-class}--lg
-  .#{$action-set-block-class}__action-button:not(.#{$action-set-block-class}__action-button--ghost),
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ),
 .#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--xl
-  .#{$action-set-block-class}__action-button:not(.#{$action-set-block-class}__action-button--ghost),
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ),
 .#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--2xl
-  .#{$action-set-block-class}__action-button:not(.#{$action-set-block-class}__action-button--ghost),
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ),
 .#{$action-set-block-class}.#{c4p-settings.$carbon-prefix}--btn-set.#{$action-set-block-class}--row-quadruple
-  .#{$action-set-block-class}__action-button:not(.#{$action-set-block-class}__action-button--ghost) {
+  .#{$action-set-block-class}__action-button:not(
+    .#{$action-set-block-class}__action-button--ghost
+  ) {
   max-width: rem(232px);
   flex: 0 1 25%;
 }

@@ -17,7 +17,7 @@ module.exports = () => ({
         ...(BABEL_ENV && { modules: BABEL_ENV === 'cjs' && 'commonjs' }),
         targets: {
           browsers: ['extends browserslist-config-carbon'],
-          node: '12',
+          node: '16',
         },
       },
     ],
@@ -31,5 +31,7 @@ module.exports = () => ({
         regenerator: true,
       },
     ],
+    '@babel/plugin-proposal-private-methods',
+    '@babel/plugin-proposal-private-property-in-object',
   ],
 });

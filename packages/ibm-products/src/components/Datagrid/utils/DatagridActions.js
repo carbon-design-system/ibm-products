@@ -123,7 +123,7 @@ export const DatagridActions = (datagridState) => {
             </div>
           </>
         ) : (
-          <OverflowMenu ariaLabel="Tools" size="md" flipped>
+          <OverflowMenu aria-label="Tools" size="md" flipped>
             <OverflowMenuItem
               itemText="Filter"
               hasDivider
@@ -205,7 +205,7 @@ export const DatagridActions = (datagridState) => {
         />
         {renderFilterFlyout()}
         <OverflowMenu
-          ariaLabel="Tools"
+          aria-label="Tools"
           size="lg"
           flipped
           renderIcon={ChevronDown}

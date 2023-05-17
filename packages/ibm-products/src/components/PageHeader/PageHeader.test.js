@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -234,7 +234,6 @@ describe('PageHeader', () => {
       mock.mock.mockRestore();
     });
     mockElement.mockRestore();
-    jest.restoreAllMocks();
     window.scrollTo = scrollTo;
     window.ResizeObserver = ResizeObserver;
   });
@@ -375,7 +374,6 @@ describe('PageHeader', () => {
       name: testProps.collapseHeaderIconDescription,
     });
 
-    window.scrollTo.mockReset();
     expect(window.scrollTo).not.toHaveBeenCalled();
     userEvent.click(collapseButton);
     // Determine how to test this (jest dom does not do scroll events)
@@ -610,7 +608,7 @@ describe('PageHeader', () => {
       [
         required('actionBarOverflowAriaLabel', 'PageHeader'),
         required('overflowAriaLabel', 'ActionBar'),
-        required('ariaLabel', 'OverflowMenu'),
+        // required('ariaLabel', 'OverflowMenu'),
       ],
       () => {
         const { title } = testProps;

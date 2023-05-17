@@ -52,7 +52,7 @@ responds to the currently set Carbon theme.\
 `- [ ]` Components are functional components using hooks.\
 `- [ ]` Public components which produce DOM structures support className.\
 `- [ ]` Public components support a ref (via React.forwardRef).\
-`- [ ]` Public component supports a [Devtools attribute](https://github.com/carbon-design-system/ibm-cloud-cognitive/search?l=JavaScript&q=devtools&type=)
+`- [ ]` Public component supports a [Devtools attribute](https://github.com/carbon-design-system/ibm-products/search?l=JavaScript&q=devtools&type=)
 \
 `- [ ]` All significant DOM elements have meaningful classes.\
 `- [ ]` Additional attributes that are not identified as props (such as title, aria-\*,
@@ -75,7 +75,7 @@ accessibility purposes -
 [read more here](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion).\
 `- [ ]` Code is formatted according to prettier rules (no use of //prettier-ignore).\
 `- [ ]` Code is clear, maintainable and follows standard React practices and the
-[code guidelines](https://github.com/carbon-design-system/ibm-cloud-cognitive/blob/master/docs/CODE_GUIDELINES.md).\
+[code guidelines](https://github.com/carbon-design-system/ibm-products/blob/master/docs/CODE_GUIDELINES.md).\
 `- [ ]` Copyright header in every source file (js, css, scss etc.) with the appropriate
 years.
 
@@ -97,5 +97,5 @@ all public components and their props.\
 `- [ ]` There is a story for each design scenario. The stories expose all relevant
 props and actions, and additional usage documentation and code samples are available
 on the 'Docs' tab along with the props table.\
-`- [ ]` There is a sandbox (or multiple sandboxes if appropriate) on CodeSandbox
-for the components.
+`- [ ]` There is an online example (or multiple examples if appropriate) e.g.
+CodeSandbox/Stackblitz for the components.

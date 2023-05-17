@@ -84,7 +84,7 @@ const SelectAllWithToggle = ({
       <OverflowMenu
         renderIcon={(props) => <CaretDown size={16} {...props} />}
         size="sm"
-        ariaLabel={allRowsLabel}
+        aria-label={allRowsLabel}
         menuOptionsClass={`${blockClass}__select-all-toggle-overflow`}
       >
         <OverflowMenuItem

@@ -2,17 +2,17 @@
   "name": "@carbon/ibm-cloud-cognitive-cli",
   "private": true,
   "description": "A CLI for building, maintaining, and releasing packages for Carbon",
-  "version": "0.18.26",
+  "version": "0.18.35",
   "license": "Apache-2.0",
   "bin": {
     "carbon-cli": "./bin/carbon-cli.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/carbon-design-system/ibm-cloud-cognitive.git",
+    "url": "https://github.com/carbon-design-system/ibm-products.git",
     "directory": "packages/cli"
   },
-  "bugs": "https://github.com/carbon-design-system/ibm-cloud-cognitive/issues",
+  "bugs": "https://github.com/carbon-design-system/ibm-products/issues",
   "keywords": [
     "carbon",
     "carbon design system",
@@ -25,17 +25,17 @@
     "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon)/'"
   },
   "devDependencies": {
-    "@commitlint/parse": "^17.0.0",
-    "chalk": "^5.0.1",
-    "execa": "^6.1.0",
-    "fast-glob": "^3.2.11",
-    "fs-extra": "^10.1.0",
-    "inquirer": "^9.1.1",
-    "npm-check-updates": "^16.0.6",
-    "prettier": "^2.7.1",
-    "prettier-config-carbon": "^0.7.0",
+    "@commitlint/parse": "^17.4.4",
+    "chalk": "^5.2.0",
+    "execa": "^7.1.1",
+    "fast-glob": "^3.2.12",
+    "fs-extra": "^11.1.1",
+    "inquirer": "^9.1.4",
+    "npm-check-updates": "^16.10.12",
+    "prettier": "^2.8.8",
+    "prettier-config-carbon": "^0.9.0",
     "remark": "^14.0.2",
-    "semver": "^7.3.7",
-    "yargs": "^17.5.1"
+    "semver": "^7.5.0",
+    "yargs": "^17.7.2"
   }
 }

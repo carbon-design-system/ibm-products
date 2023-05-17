@@ -116,7 +116,9 @@ $row-heights: (
     justify-content: flex-start;
   }
   // Always show renderIcon if inline edit columns are less than half of total columns
-  &:not(.#{variables.$block-class}__inline-edit-button--edit-less-than-half-of-total-cols) {
+  &:not(
+      .#{variables.$block-class}__inline-edit-button--edit-less-than-half-of-total-cols
+    ) {
     .#{variables.$block-class}__inline-edit-button-icon {
       display: none;
     }
@@ -131,7 +133,9 @@ $row-heights: (
 }
 
 .#{variables.$block-class}__inline-edit--outer-cell-button
-  .#{variables.$block-class}__inline-edit-button:not([data-disabled='true']):hover {
+  .#{variables.$block-class}__inline-edit-button:not(
+    [data-disabled='true']
+  ):hover {
   background-color: $layer-active;
   color: $text-primary;
   .#{variables.$block-class}__inline-edit-button-icon {
@@ -140,7 +144,9 @@ $row-heights: (
 }
 
 .#{variables.$block-class}__inline-edit--outer-cell-button
-  .#{variables.$block-class}__inline-edit-button.#{variables.$block-class}__inline-edit-button--active:not([data-disabled='true']) {
+  .#{variables.$block-class}__inline-edit-button.#{variables.$block-class}__inline-edit-button--active:not(
+    [data-disabled='true']
+  ) {
   background-color: $layer-active;
   color: $text-primary;
   cursor: text;
@@ -152,7 +158,9 @@ $row-heights: (
 }
 
 .#{variables.$block-class}__inline-edit--outer-cell-button
-  .#{variables.$block-class}__inline-edit-button--disabled:not(.#{variables.$block-class}__inline-edit-button--edit-less-than-half-of-total-cols) {
+  .#{variables.$block-class}__inline-edit-button--disabled:not(
+    .#{variables.$block-class}__inline-edit-button--edit-less-than-half-of-total-cols
+  ) {
   color: $button-disabled;
   cursor: not-allowed;
 }

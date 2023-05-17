@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2021
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -66,7 +66,7 @@ export let ButtonMenu = React.forwardRef(
           blockClass, // Apply the block class to the main HTML element
           className // Apply any supplied class names to the main HTML element.
         )}
-        ariaLabel={menuAriaLabel}
+        aria-label={menuAriaLabel}
         menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
         size={size}
         renderIcon={() => (

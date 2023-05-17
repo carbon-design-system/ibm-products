@@ -46,6 +46,10 @@ module.exports = {
     },
   },
   moduleFileExtensions: ['js', 'json', 'node'],
+  modulePathIgnorePatterns: [
+    '<rootDir>/examples',
+    '<rootDir>/packages/security',
+  ],
   resolver: require.resolve('./setup/resolver.js'),
   reporters: ['default'],
   setupFiles: [require.resolve('./setup/setupFiles')],
@@ -53,7 +57,7 @@ module.exports = {
   snapshotSerializers: ['enzyme-to-json/serializer'],
   testEnvironment: 'jsdom',
   testMatch: [
-    '<rootDir>/**/__tests__/**/*.js?(x)',
+    // '<rootDir>/**/__tests__/**/*.js?(x)',
     '<rootDir>/**/*.(spec|test).js?(x)',
     '<rootDir>/**/*-(spec|test).js?(x)',
   ],
@@ -71,11 +75,13 @@ module.exports = {
     '/lib/',
     '/build/',
     'e2e',
-    'examples',
     'templates',
     '/umd/',
   ],
-  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
+  transformIgnorePatterns: [
+    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$',
+    'ace-node\\.js',
+  ],
   watchPathIgnorePatterns: [
     '/cjs/',
     '/dist/',

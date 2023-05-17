@@ -44,6 +44,13 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    featureFlags: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 const getColumns = (rows) => {

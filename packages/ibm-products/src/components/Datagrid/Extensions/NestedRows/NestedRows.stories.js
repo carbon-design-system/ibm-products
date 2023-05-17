@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,6 +19,7 @@ import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
+import { pkg } from '../../../../settings';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/NestedRows`,
@@ -26,6 +27,13 @@ export default {
   parameters: {
     styles,
     docs: { page: mdx },
+  },
+  argTypes: {
+    featureFlags: {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 
@@ -156,6 +164,12 @@ const NestedRows = ({ ...args }) => {
     useNestedRows
   );
 
+  // Warnings are ordinarily silenced in storybook, add this to test
+  pkg._silenceWarnings(false);
+  // Enable feature flag for `useNestedRows` hook
+  pkg.feature['Datagrid.useNestedRows'] = true;
+  pkg._silenceWarnings(true);
+
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
@@ -184,5 +198,6 @@ export const NestedRowsUsageStory = prepareStory(BasicTemplateWrapper, {
   },
   args: {
     ...nestedRowsControlProps,
+    featureFlags: ['Datagrid.useNestedRows'],
   },
 });

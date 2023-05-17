@@ -1,10 +1,11 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2020
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2020, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
+
+import { useEffect } from 'react';
 import { pkg } from '../../settings';
 import cx from 'classnames';
 import useNestedRowExpander from './useNestedRowExpander';
@@ -12,6 +13,10 @@ import useNestedRowExpander from './useNestedRowExpander';
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const useNestedRows = (hooks) => {
+  useEffect(() => {
+    pkg.checkReportFeatureEnabled('Datagrid.useNestedRows');
+  }, []);
+
   useNestedRowExpander(hooks);
   const marginLeft = 24;
 

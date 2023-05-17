@@ -43,6 +43,4 @@ jobs:
         run:
           yarn lerna publish --dist-tag next --no-verify-access --create-release
           github --ignore-changes 'packages/security/**/*' 'packages/cdai/**/*'
-          --yes yarn lerna publish --dist-tag next --no-verify-access
-          --create-release github --ignore-changes 'packages/security/**/*'
-          'packages/cdai/**/*' --yes
+          --yes

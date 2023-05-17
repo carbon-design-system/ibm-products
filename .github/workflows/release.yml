@@ -41,5 +41,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
         run:
-          yarn lerna publish from-package --no-verify-access --create-release
+          yarn lerna publish --no-verify-access --create-release
           github --yes

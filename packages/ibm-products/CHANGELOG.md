@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-rc.39](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.0.0-rc.35...@carbon/ibm-products@2.0.0-rc.39) (2023-05-17)
+
+
+### Bug Fixes
+
+* correct release package versions ([#3021](https://github.com/carbon-design-system/ibm-products/issues/3021)) ([b6a6e26](https://github.com/carbon-design-system/ibm-products/commit/b6a6e262dfdeac6c8c8497609058298d818223c0))
+
+
+
+
+
 # [2.0.0-rc.35](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.0.0-rc.29...@carbon/ibm-products@2.0.0-rc.35) (2023-05-17)
 
 

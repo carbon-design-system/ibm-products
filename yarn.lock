@@ -2431,7 +2431,7 @@ __metadata:
     "@carbon/layout": ^11.13.0
     "@carbon/motion": ^11.10.0
     "@carbon/react": ~1.28.0
-    "@carbon/storybook-addon-theme": ^0.22.35
+    "@carbon/storybook-addon-theme": ^0.22.38
     "@carbon/themes": ^11.18.0
     "@carbon/type": ^11.17.0
     "@storybook/addon-actions": ^6.5.16
@@ -2452,7 +2452,7 @@ __metadata:
     "@storybook/react": ^6.5.16
     "@storybook/theming": ^6.5.16
     babel-loader: ^9.1.2
-    babel-preset-ibm-cloud-cognitive: ^0.14.30
+    babel-preset-ibm-cloud-cognitive: ^0.14.33
     css-loader: ^6.7.3
     dotenv-webpack: 6.0.4
     npm-check-updates: ^16.10.12
@@ -2581,7 +2581,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/storybook-addon-theme@^0.22.35, @carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
+"@carbon/storybook-addon-theme@npm:^0.22.38":
+  version: 0.22.38
+  resolution: "@carbon/storybook-addon-theme@npm:0.22.38"
+  dependencies:
+    "@storybook/addons": 6.5.16
+    "@storybook/api": 6.5.16
+    "@storybook/client-api": 6.5.16
+    "@storybook/client-logger": 6.5.16
+    "@storybook/components": 6.5.16
+    "@storybook/core-events": 6.5.16
+    "@storybook/theming": 6.5.16
+    core-js: ^3.28.0
+    global: ^4.4.0
+  peerDependencies:
+    react: "*"
+    vue: "*"
+  checksum: cd0d39e5acbd7fca0cf63cec5f75e5fea2d9d895037bb6e1bc04525585a608bf584be5d4d29e9e9c924c5be77bbc885f8516836700e36ba48ffeffd59e597c68
+  languageName: node
+  linkType: hard
+
+"@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
   version: 0.0.0-use.local
   resolution: "@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme"
   dependencies:
@@ -9071,7 +9091,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-ibm-cloud-cognitive@^0.14.19, babel-preset-ibm-cloud-cognitive@^0.14.30, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
+"babel-preset-ibm-cloud-cognitive@^0.14.19, babel-preset-ibm-cloud-cognitive@^0.14.33, babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "babel-preset-ibm-cloud-cognitive@workspace:config/babel-preset-ibm-cloud-cognitive"
   dependencies:
@@ -17356,7 +17376,7 @@ __metadata:
     accessibility-checker: ^3.1.47
     axe-core: ^4.6.3
     babel-jest: ^29.4.2
-    babel-preset-ibm-cloud-cognitive: ^0.14.30
+    babel-preset-ibm-cloud-cognitive: ^0.14.33
     chalk: ^4.1.2
     enzyme: ^3.11.0
     enzyme-to-json: ^3.6.2

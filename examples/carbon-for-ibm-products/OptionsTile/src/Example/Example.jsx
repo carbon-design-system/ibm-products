@@ -54,7 +54,7 @@ export const Example = () => {
   return (
     <div className='container'>
       <OptionsTile
-        heading='Auto recovery'
+        title='Auto recovery'
         summary={summary}
         enabled={enabled}
         onToggle={setEnabled}

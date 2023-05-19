@@ -131,12 +131,8 @@ export const ButtonSetWithOverflow = ({
     );
   });
 
-  useResizeObserver(sizingContainerRefSet, {
-    callback: checkFullyVisibleItems,
-  });
-  useResizeObserver(sizingContainerRefCombo, {
-    callback: checkFullyVisibleItems,
-  });
+  useResizeObserver(sizingContainerRefSet, checkFullyVisibleItems);
+  useResizeObserver(sizingContainerRefCombo, checkFullyVisibleItems);
   useResizeObserver(spaceAvailableRef, checkFullyVisibleItems);
 
   return (

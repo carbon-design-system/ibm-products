@@ -221,9 +221,9 @@ export let TagSet = React.forwardRef(
       setShowAllModalOpen(false);
     };
 
-    useResizeObserver(sizingContainerRef, { callback: handleSizerTagsResize });
+    useResizeObserver(sizingContainerRef, handleSizerTagsResize);
 
-    useResizeObserver(tagSetRef, { callback: handleResize });
+    useResizeObserver(tagSetRef, handleResize);
 
     return (
       <div

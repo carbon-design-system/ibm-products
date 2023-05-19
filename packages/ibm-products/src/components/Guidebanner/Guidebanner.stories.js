@@ -54,7 +54,7 @@ export default {
 
 const defaultProps = {
   onClose: () => alert('Clicked the button.'),
-  title: 'Page-related heading that can stand on it own',
+  title: 'Page-related heading that can stand on its own',
 };
 
 const DefaultButtonLarge = () => (

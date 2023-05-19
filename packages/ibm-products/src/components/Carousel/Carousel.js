@@ -14,10 +14,10 @@ import React, {
 } from 'react';
 
 // Other standard imports.
-import debounce from 'lodash.debounce';
+import { clamp, debounce } from 'lodash';
 import PropTypes from 'prop-types';
 import { CarouselItem } from './CarouselItem';
-import { clamp, useIsOverflow, useWindowEvent } from './utils';
+import { useIsOverflow, useWindowEvent } from './utils';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -182,9 +182,6 @@ export let Carousel = React.forwardRef(
       [scrollNext, scrollPrev, scrollToView]
     );
 
-    const isScrolled = scrollPosition() > 0;
-    const isScrollMax = maxScroll() === scrollPosition();
-
     return (
       <div
         {...rest}
@@ -201,7 +198,7 @@ export let Carousel = React.forwardRef(
             })}
           </div>
 
-          {leftFadedEdgeColor && isScrolled && (
+          {leftFadedEdgeColor && (
             <div
               className={`${blockClass}__elements-container--scrolled`}
               style={{
@@ -210,7 +207,7 @@ export let Carousel = React.forwardRef(
             ></div>
           )}
 
-          {rightFadedEdgeColor && !isScrollMax && (
+          {rightFadedEdgeColor && (
             <div
               className={`${blockClass}__elements-container--scroll-max`}
               style={{

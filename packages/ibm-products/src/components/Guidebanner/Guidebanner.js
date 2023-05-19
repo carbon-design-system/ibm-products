@@ -11,6 +11,7 @@ import React, { useRef, useState } from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+import { blue90, purple70 } from '@carbon/colors';
 import {
   CaretLeft16,
   CaretRight16,
@@ -98,7 +99,9 @@ export let Guidebanner = React.forwardRef(
         <div className={`${blockClass}__title`}>{title}</div>
         <Carousel
           className={`${blockClass}__carousel`}
-          fadedEdgeColor={{ left: '#041d6f', right: `#6529c0` }}
+          // These colors are to match the Carousel's faded edges
+          // against the Guidebanner's gradient background.
+          fadedEdgeColor={{ left: blue90, right: purple70 }}
           ref={scrollRef}
           scrollableChange={handleScrollableChange}
           scrollTune={-450}

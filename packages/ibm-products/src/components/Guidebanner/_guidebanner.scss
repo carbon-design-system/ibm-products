@@ -103,17 +103,11 @@
 
     // Specify Carousel look and feel.
     &__carousel {
-      margin: 0 $horizontal-margin $spacing-06 $horizontal-margin;
+      margin: 0 0 $spacing-06 0;
       color: $gray-10;
 
       @include when-collapsed() {
         margin-bottom: 0;
-
-        // Hide the carousel's faded edges
-        [class*='--scrolled'],
-        [class*='--scroll-max'] {
-          opacity: 0;
-        }
       }
 
       // Each GuidebannerElement is wrapped in a CarouselItem.
@@ -124,7 +118,8 @@
           max-height: carbon--mini-units(64);
           flex-flow: column;
           flex-shrink: 0;
-          margin: $spacing-05 $spacing-07 0 0;
+          padding-left: $horizontal-margin;
+          margin: $spacing-05 0 0 0;
           opacity: 1;
           scroll-snap-align: start;
           transition: max-height 50ms carbon--motion(exit, productive),
@@ -192,11 +187,10 @@
           }
         }
 
-        // We need the guidebanner element of the
-        // last carousel item to have no margin.
         &:last-child {
           .#{$block-class}__element {
-            margin-right: 0;
+            width: carbon--mini-units(56);
+            padding-right: $horizontal-margin;
           }
         }
       }

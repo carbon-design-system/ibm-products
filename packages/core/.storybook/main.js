@@ -7,12 +7,7 @@
 
 const { resolve } = require('path');
 const { merge } = require('webpack-merge');
-
 module.exports = {
-  core: {
-    builder: 'webpack5',
-  },
-
   addons: [
     '@storybook/addon-actions',
     '@storybook/addon-docs',
@@ -27,18 +22,24 @@ module.exports = {
       },
     },
     '@storybook/addon-viewport',
+    '@storybook/addon-mdx-gfm',
   ],
-  framework: '@storybook/react',
-
-  reactOptions: {
-    fastRefresh: true, // THIS SEEMS TO BE FIXED -- this option would be nice, but seems to cause errors, see https://github.com/storybookjs/storybook/issues/13745
-    strictMode: true,
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {
+      fastRefresh: true,
+      strictMode: true,
+    },
+  },
+  features: {
+    legacyMdx1: true, // 👈 Enables MDX v1 support
   },
   stories: [
     '../../ibm-products/+(docs|src)/**/*+(-story|.stories).*',
     '../+(docs|src)/**/*+(-story|.stories).*',
     '../../../examples/**/*+(-story|.stories).*',
-  ], // v11 will only show stories for C4P components (or at least until CDAI/Security move from v10 to v11)
+  ],
+  // v11 will only show stories for C4P components (or at least until CDAI/Security move from v10 to v11)
   webpackFinal: async (configuration) =>
     merge(configuration, {
       cache: {
@@ -81,4 +82,7 @@ module.exports = {
         ],
       },
     }),
+  docs: {
+    autodocs: true,
+  },
 };

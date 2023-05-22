@@ -11,7 +11,7 @@ import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
 import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
 import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
-import mdx from './CreateTearsheet.mdx';
+// import mdx from './CreateTearsheet.mdx';
 
 export default {
   title: 'IBM Products/Patterns/CreateTearsheet',
@@ -29,7 +29,7 @@ export default {
   },
   parameters: {
     styles,
-    docs: { page: mdx },
+    // docs: { page: mdx },
   },
 };
 

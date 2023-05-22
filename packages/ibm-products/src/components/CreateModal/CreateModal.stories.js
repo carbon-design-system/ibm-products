@@ -23,7 +23,7 @@ import {
 import { pkg } from '../../settings';
 import { prepareStory } from '../../global/js/utils/story-helper';
 import { CreateModal } from '.';
-import mdx from './CreateModal.mdx';
+// import mdx from './CreateModal.mdx';
 
 import styles from './_storybook-styles.scss';
 
@@ -32,7 +32,7 @@ export default {
   component: CreateModal,
   parameters: {
     styles,
-    docs: { page: mdx },
+    // docs: { page: mdx },
     controls: { sort: 'requiredFirst' },
   },
   argTypes: {

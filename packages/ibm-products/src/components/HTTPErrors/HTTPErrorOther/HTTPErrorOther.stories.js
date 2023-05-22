@@ -9,16 +9,16 @@ import React from 'react';
 import { HTTPErrorOther } from '.';
 import { prepareStory } from '../../../global/js/utils/story-helper';
 
-import page from './HTTPErrorOther.mdx';
+// import page from './HTTPErrorOther.mdx';
 // import styles from '../_storybook-styles.scss';
 
 export default {
   title: 'IBM Products/Patterns/HTTPErrorOther',
   component: HTTPErrorOther,
   parameters: {
-    docs: {
-      page,
-    },
+    // docs: {
+    //   page,
+    // },
     // styles,
   },
 };

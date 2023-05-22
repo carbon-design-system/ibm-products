@@ -12,7 +12,7 @@ import { action } from '@storybook/addon-actions';
 import { prepareStory } from '../../../../global/js/utils/story-helper';
 import { Datagrid, useDatagrid, useFiltering } from '../../index';
 import styles from '../../_storybook-styles.scss';
-import mdx from '../../Datagrid.mdx';
+// import mdx from '../../Datagrid.mdx';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { DatagridActions } from '../../utils/DatagridActions';
@@ -24,7 +24,7 @@ export default {
   component: Datagrid,
   parameters: {
     styles,
-    docs: { page: mdx },
+    // docs: { page: mdx },
   },
   argTypes: {
     featureFlags: {

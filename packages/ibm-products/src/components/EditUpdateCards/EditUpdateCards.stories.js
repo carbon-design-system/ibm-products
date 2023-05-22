@@ -12,7 +12,7 @@ import React, { useState } from 'react';
 import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { EditUpdateCards } from '.';
-import mdx from './EditUpdateCards.mdx';
+// import mdx from './EditUpdateCards.mdx';
 
 import styles from './_storybook-styles.scss';
 import {
@@ -43,9 +43,11 @@ export default {
   // },
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

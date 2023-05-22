@@ -10,7 +10,7 @@ import { prepareStory } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { EditInPlace } from '.';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
-import mdx from './EditInPlace.mdx';
+// import mdx from './EditInPlace.mdx';
 import styles from './_storybook-styles.scss';
 
 const storyClass = 'edit-in-place-example';
@@ -52,9 +52,11 @@ export default {
   },
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
   decorators: [
     (story) => (

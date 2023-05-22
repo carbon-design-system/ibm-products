@@ -23,7 +23,7 @@ import { pkg } from '../../settings';
 import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { CreateSidePanel } from './CreateSidePanel';
-import mdx from './CreateSidePanel.mdx';
+// import mdx from './CreateSidePanel.mdx';
 
 import styles from './_storybook-styles.scss';
 
@@ -34,9 +34,11 @@ export default {
   component: CreateSidePanel,
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

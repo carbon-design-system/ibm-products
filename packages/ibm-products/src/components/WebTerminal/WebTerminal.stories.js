@@ -15,7 +15,7 @@ import { Navigation } from './preview-components';
 import { prepareStory } from '../../global/js/utils/story-helper';
 import { WebTerminal } from '.';
 import { WebTerminalContentWrapper } from './WebTerminalContentWrapper';
-import mdx from './WebTerminal.mdx';
+// import mdx from './WebTerminal.mdx';
 import { documentationLinks } from './preview-components/documentationLinks';
 import { WebTerminalProvider } from './hooks';
 
@@ -87,8 +87,10 @@ export default {
   title: 'IBM Products/Patterns/WebTerminal',
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };

@@ -36,7 +36,7 @@ import { Dropdown, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 import React, { useState } from 'react';
 
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
-import mdx from './Toolbar.mdx';
+// import mdx from './Toolbar.mdx';
 
 export default {
   title: 'IBM Products/Patterns/Toolbar',
@@ -45,9 +45,11 @@ export default {
   subcomponents: { ToolbarGroup, ToolbarButton },
 
   parameters: {
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

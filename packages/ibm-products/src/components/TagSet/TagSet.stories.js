@@ -12,7 +12,7 @@ import { pkg } from '../../settings';
 import { prepareStory } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagSet } from '.';
-import mdx from './TagSet.mdx';
+// import mdx from './TagSet.mdx';
 import styles from './_storybook-styles.scss';
 
 const blockClass = `${pkg.prefix}--tag-set`;
@@ -133,7 +133,7 @@ export default {
   title: 'IBM Products/Components/TagSet',
   component: TagSet,
   parameters: {
-    docs: { page: mdx },
+    // docs: { page: mdx },
     styles,
   },
   argTypes: {

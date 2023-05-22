@@ -11,7 +11,7 @@ import { Add } from '@carbon/icons-react';
 import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { ExampleComponent } from '.';
-import mdx from './ExampleComponent.mdx';
+// import mdx from './ExampleComponent.mdx';
 import { pkg } from '../../settings';
 
 // import styles from './_storybook-styles.scss';
@@ -24,9 +24,11 @@ export default {
   },
   parameters: {
     // styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

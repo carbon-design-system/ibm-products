@@ -17,7 +17,7 @@ import {
   useColumnCenterAlign,
 } from '../../index';
 import styles from '../../_storybook-styles.scss';
-import mdx from '../../Datagrid.mdx';
+// import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
@@ -29,7 +29,7 @@ export default {
   component: Datagrid,
   parameters: {
     styles,
-    docs: { page: mdx },
+    // docs: { page: mdx },
   },
 };
 

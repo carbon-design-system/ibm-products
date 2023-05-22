@@ -12,12 +12,15 @@ import { prepareStory } from '../../global/js/utils/story-helper';
 import { TearsheetShell, deprecatedProps } from './TearsheetShell';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
-import mdx from './TearsheetShell.mdx';
+// import mdx from './TearsheetShell.mdx';
 
 export default {
   title: 'IBM Products/Components/TearsheetShell',
   component: TearsheetShell,
-  parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
+  parameters: {
+    controls: { expanded: true },
+    styles /* docs: { page: mdx } */,
+  },
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),
     portalTarget: { control: { disable: true } },

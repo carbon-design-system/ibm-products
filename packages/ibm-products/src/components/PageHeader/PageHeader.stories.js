@@ -49,7 +49,7 @@ import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
 import styles from './_storybook-styles.scss';
 
-import mdx from './PageHeader.mdx';
+// import mdx from './PageHeader.mdx';
 
 const storyClass = 'page-header-stories';
 
@@ -396,7 +396,7 @@ export default {
   title: 'IBM Products/Components/PageHeader',
   component: PageHeader,
   subcomponents: { ActionBarItem },
-  parameters: { styles, layout: 'fullscreen', docs: { page: mdx } },
+  parameters: { styles, layout: 'fullscreen' /* docs: { page: mdx } */ },
   decorators: [
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],

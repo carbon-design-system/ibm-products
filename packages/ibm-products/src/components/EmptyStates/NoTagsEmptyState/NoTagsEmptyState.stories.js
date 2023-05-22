@@ -8,7 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
-import mdx from './NoTagsEmptyState.mdx';
+// import mdx from './NoTagsEmptyState.mdx';
 import { prepareStory } from '../../../global/js/utils/story-helper';
 
 import { NoTagsEmptyState } from '.';
@@ -20,9 +20,11 @@ export default {
   component: NoTagsEmptyState,
   parameters: {
     // styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

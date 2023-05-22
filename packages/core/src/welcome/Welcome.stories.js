@@ -12,6 +12,7 @@ import styles from './_storybook-styles.scss';
 import Welcome from './Welcome';
 
 export default {
+  autodocs: false,
   title: getPathForComponent('o', 'Welcome'),
   parameters: {
     styles,

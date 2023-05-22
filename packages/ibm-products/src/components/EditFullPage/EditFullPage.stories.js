@@ -12,7 +12,7 @@ import { CreateFullPage } from '../CreateFullPage';
 import { CreateFullPageStep } from '../CreateFullPage/CreateFullPageStep';
 import { pkg } from '../../settings';
 
-import mdx from './EditFullPage.mdx';
+// import mdx from './EditFullPage.mdx';
 
 import styles from '../CreateFullPage/_storybook-styles.scss';
 
@@ -40,7 +40,7 @@ export default {
   parameters: {
     styles,
     layout: 'fullscreen',
-    docs: { page: mdx },
+    // docs: { page: mdx },
     controls: { sort: 'requiredFirst' },
   },
   decorators: [

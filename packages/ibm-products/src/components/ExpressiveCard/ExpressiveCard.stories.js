@@ -11,7 +11,7 @@ import { ArrowRight, Cloud, Add } from '@carbon/react/icons';
 import { AspectRatio, Column, Grid, usePrefix } from '@carbon/react';
 import { prepareStory } from '../../global/js/utils/story-helper';
 import { ExpressiveCard } from '.';
-import mdx from './ExpressiveCard.mdx';
+// import mdx from './ExpressiveCard.mdx';
 import { action } from '@storybook/addon-actions';
 
 export default {
@@ -19,9 +19,11 @@ export default {
   component: ExpressiveCard,
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
   argTypes: {
     columnSizeSm: {

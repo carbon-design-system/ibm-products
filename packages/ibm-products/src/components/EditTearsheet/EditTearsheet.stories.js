@@ -10,7 +10,7 @@ import styles from './_storybook-styles.scss';
 import { EditTearsheet } from './EditTearsheet';
 import { EditTearsheetForm } from './EditTearsheetForm';
 import { MultiFormEditTearsheet } from './preview-components/MultiFormEditTearsheet';
-import mdx from './EditTearsheet.mdx';
+// import mdx from './EditTearsheet.mdx';
 
 export default {
   title: 'IBM Products/Patterns/EditTearsheet',
@@ -26,7 +26,7 @@ export default {
     onClose: { control: { disable: true } },
     open: { control: { disable: true } },
   },
-  parameters: { styles, docs: { page: mdx } },
+  parameters: { styles /* docs: { page: mdx } */ },
 };
 
 const editTearsheetProps = {

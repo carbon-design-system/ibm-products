@@ -9,16 +9,16 @@ import React from 'react';
 import { HTTPError403 } from '.';
 import { prepareStory } from '../../../global/js/utils/story-helper';
 
-import page from './HTTPError403.mdx';
+// import page from './HTTPError403.mdx';
 // import styles from '../_storybook-styles.scss';
 
 export default {
   title: 'IBM Products/Patterns/HTTPError403',
   component: HTTPError403,
   parameters: {
-    docs: {
-      page,
-    },
+    // docs: {
+    //   page,
+    // },
     // styles,
   },
 };

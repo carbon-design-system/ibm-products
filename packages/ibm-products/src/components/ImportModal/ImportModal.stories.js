@@ -11,16 +11,18 @@ import { action } from '@storybook/addon-actions';
 // import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { prepareStory } from '../../global/js/utils/story-helper';
 import { ImportModal } from '.';
-import mdx from './ImportModal.mdx';
+// import mdx from './ImportModal.mdx';
 
 export default {
   title: 'IBM Products/Patterns/ImportModal',
   component: ImportModal,
   parameters: {
     // styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

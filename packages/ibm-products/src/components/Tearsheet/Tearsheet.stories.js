@@ -36,13 +36,13 @@ import { prepareStory } from '../../global/js/utils/story-helper';
 
 import styles from './_storybook-styles.scss';
 
-import mdx from './Tearsheet.mdx';
+// import mdx from './Tearsheet.mdx';
 
 export default {
   title: 'IBM Products/Components/Tearsheet',
   component: Tearsheet,
   subcomponents: { TearsheetNarrow },
-  parameters: { styles, docs: { page: mdx } },
+  parameters: { styles /* docs: { page: mdx } */ },
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),
     actions: {

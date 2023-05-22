@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 // import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { prepareStory } from '../../global/js/utils/story-helper';
 import { MultiAddSelect } from '.';
-import mdx from './MultiAddSelect.mdx';
+// import mdx from './MultiAddSelect.mdx';
 import { Button } from '@carbon/react';
 // import { action } from '@storybook/addon-actions';
 import image from '../UserProfileImage/headshot.jpg'; // cspell:disable-line
@@ -23,9 +23,11 @@ export default {
   component: MultiAddSelect,
   parameters: {
     // styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

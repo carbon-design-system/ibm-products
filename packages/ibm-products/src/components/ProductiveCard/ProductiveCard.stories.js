@@ -11,7 +11,7 @@ import { TrashCan, Edit } from '@carbon/react/icons';
 import { Grid, Column, usePrefix } from '@carbon/react';
 import { prepareStory } from '../../global/js/utils/story-helper';
 import { ProductiveCard } from '.';
-import mdx from './ProductiveCard.mdx';
+// import mdx from './ProductiveCard.mdx';
 import { action } from '@storybook/addon-actions';
 
 export default {
@@ -19,9 +19,11 @@ export default {
   component: ProductiveCard,
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
   argTypes: {
     columnSizeSm: {

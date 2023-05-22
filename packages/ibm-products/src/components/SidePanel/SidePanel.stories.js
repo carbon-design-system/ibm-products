@@ -29,16 +29,18 @@ import {
 import { Copy, TrashCan, Settings } from '@carbon/react/icons';
 import { prepareStory } from '../../global/js/utils/story-helper';
 import { SidePanel } from './SidePanel';
-import mdx from './SidePanel.mdx';
+// import mdx from './SidePanel.mdx';
 
 export default {
   title: 'IBM Products/Components/SidePanel',
   component: SidePanel,
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
   argTypes: {
     actions: {

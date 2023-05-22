@@ -8,7 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
-import mdx from './UnauthorizedEmptyState.mdx';
+// import mdx from './UnauthorizedEmptyState.mdx';
 import { prepareStory } from '../../../global/js/utils/story-helper';
 import { UnauthorizedEmptyState } from '.';
 
@@ -19,9 +19,11 @@ export default {
   component: UnauthorizedEmptyState,
   parameters: {
     // styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

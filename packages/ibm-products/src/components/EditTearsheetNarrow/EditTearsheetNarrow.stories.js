@@ -19,7 +19,7 @@ import { pkg } from '../../settings';
 import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
-import mdx from './EditTearsheetNarrow.mdx';
+// import mdx from './EditTearsheetNarrow.mdx';
 
 import styles from '../CreateTearsheetNarrow/_storybook-styles.scss';
 
@@ -28,9 +28,11 @@ export default {
   component: CreateTearsheetNarrow,
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

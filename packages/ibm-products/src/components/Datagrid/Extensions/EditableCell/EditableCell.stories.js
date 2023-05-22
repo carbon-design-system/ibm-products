@@ -18,7 +18,7 @@ import {
 } from '../../index';
 import { pkg } from '../../../../settings';
 import styles from '../../_storybook-styles.scss';
-import mdx from '../../Datagrid.mdx';
+// import mdx from '../../Datagrid.mdx';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { getInlineEditColumns } from '../../utils/getInlineEditColumns';
@@ -31,7 +31,7 @@ export default {
   component: Datagrid,
   parameters: {
     styles,
-    docs: { page: mdx },
+    // docs: { page: mdx },
     argTypes: {
       featureFlags: {
         table: {

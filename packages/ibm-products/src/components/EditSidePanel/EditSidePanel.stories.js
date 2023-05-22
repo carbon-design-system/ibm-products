@@ -24,7 +24,7 @@ import { Copy, TrashCan, Settings } from '@carbon/react/icons';
 import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { EditSidePanel } from '.';
-import mdx from './EditSidePanel.mdx';
+// import mdx from './EditSidePanel.mdx';
 
 import styles from './_storybook-styles.scss';
 
@@ -41,9 +41,11 @@ export default {
   },
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

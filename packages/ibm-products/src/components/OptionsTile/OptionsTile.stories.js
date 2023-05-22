@@ -14,7 +14,7 @@ import { prepareStory } from '../../global/js/utils/story-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { OptionsTile } from '.';
-import mdx from './OptionsTile.mdx';
+// import mdx from './OptionsTile.mdx';
 
 import styles from './_storybook-styles.scss';
 
@@ -23,9 +23,11 @@ export default {
   component: OptionsTile,
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

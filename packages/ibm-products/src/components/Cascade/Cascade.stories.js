@@ -8,7 +8,7 @@
 import React from 'react';
 import { prepareStory } from '../../global/js/utils/story-helper';
 import { Cascade } from '.';
-import mdx from './Cascade.mdx';
+// import mdx from './Cascade.mdx';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { Column } from '@carbon/react';
 
@@ -17,9 +17,11 @@ export default {
   component: Cascade,
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

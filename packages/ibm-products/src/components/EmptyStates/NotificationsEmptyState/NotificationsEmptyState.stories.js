@@ -8,7 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
-import mdx from './NotificationsEmptyState.mdx';
+// import mdx from './NotificationsEmptyState.mdx';
 import { prepareStory } from '../../../global/js/utils/story-helper';
 import { NotificationsEmptyState } from '.';
 
@@ -19,9 +19,11 @@ export default {
   component: NotificationsEmptyState,
   parameters: {
     // styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

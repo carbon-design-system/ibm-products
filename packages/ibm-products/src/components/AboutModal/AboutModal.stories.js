@@ -16,7 +16,7 @@ import { AboutModal } from '.';
 
 import { Button, Link } from '@carbon/react';
 
-import mdx from './AboutModal.mdx';
+// import mdx from './AboutModal.mdx';
 
 import ExampleLogo from './_story-assets/example-logo.svg';
 import ansibleLogo from './_story-assets/ansible-logo.png';
@@ -32,7 +32,7 @@ export default {
   component: AboutModal,
   parameters: {
     styles,
-    docs: { page: mdx },
+    // docs: { page: mdx },
     controls: { sort: 'requiredFirst' },
   },
   argTypes: {

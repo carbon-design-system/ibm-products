@@ -12,7 +12,7 @@ import { action } from '@storybook/addon-actions';
 import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
-import mdx from './ButtonMenu.mdx';
+// import mdx from './ButtonMenu.mdx';
 
 // import styles from './_storybook-styles.scss';
 
@@ -27,9 +27,11 @@ export default {
   // },
   parameters: {
     // styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

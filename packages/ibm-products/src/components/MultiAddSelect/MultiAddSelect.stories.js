@@ -7,10 +7,7 @@
 
 import React, { useState } from 'react';
 // import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { MultiAddSelect } from '.';
 import mdx from './MultiAddSelect.mdx';
 import { Button } from '@carbon/react';
@@ -22,7 +19,7 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--add-select__meta-panel`;
 
 export default {
-  title: getStoryTitle(MultiAddSelect.displayName),
+  title: 'IBM Products/Patterns/MultiAddSelect',
   component: MultiAddSelect,
   parameters: {
     // styles,

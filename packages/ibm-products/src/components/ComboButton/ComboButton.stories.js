@@ -8,17 +8,14 @@
 import { CloudApp } from '@carbon/react/icons';
 import React from 'react';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { ComboButton, ComboButtonItem } from '..';
 
 // import styles from './_combo-button.scss';
 
 export default {
-  title: getStoryTitle(ComboButton.displayName),
+  title: 'IBM Products/Internal/ComboButton',
   component: ComboButton,
   subcomponents: {
     ComboButtonItem,

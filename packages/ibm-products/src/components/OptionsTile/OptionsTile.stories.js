@@ -10,10 +10,7 @@ import { action } from '@storybook/addon-actions';
 
 import { Dropdown, FormGroup } from '@carbon/react';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { OptionsTile } from '.';
@@ -22,7 +19,7 @@ import mdx from './OptionsTile.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(OptionsTile.displayName),
+  title: 'IBM Products/Components/OptionsTile',
   component: OptionsTile,
   parameters: {
     styles,

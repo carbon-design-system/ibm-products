@@ -8,16 +8,13 @@
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 // import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { ExportModal } from '.';
 import mdx from './ExportModal.mdx';
 import wait from '../../global/js/utils/wait';
 
 export default {
-  title: getStoryTitle(ExportModal.displayName),
+  title: 'IBM Products/Patterns/ExportModal',
   component: ExportModal,
   parameters: {
     // styles,

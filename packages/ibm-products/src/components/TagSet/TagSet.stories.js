@@ -9,10 +9,7 @@ import React, { useRef } from 'react';
 
 import { TYPES as tagTypes } from '../TagSet/constants';
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagSet } from '.';
 import mdx from './TagSet.mdx';
@@ -133,7 +130,7 @@ const overflowAndModalStrings = {
 };
 
 export default {
-  title: getStoryTitle(TagSet.displayName),
+  title: 'IBM Products/Components/TagSet',
   component: TagSet,
   parameters: {
     docs: { page: mdx },

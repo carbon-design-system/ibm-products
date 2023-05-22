@@ -7,10 +7,7 @@
 
 import React, { useMemo, useState } from 'react';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { DataSpreadsheet } from '.';
 import { generateData } from './utils/generateData';
@@ -19,7 +16,7 @@ import mdx from './DataSpreadsheet.mdx';
 // import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(DataSpreadsheet.displayName),
+  title: 'IBM Products/Components/DataSpreadsheet',
   component: DataSpreadsheet,
   argTypes: {
     onActiveCellChange: {

@@ -9,17 +9,14 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
 import mdx from './NoTagsEmptyState.mdx';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../global/js/utils/story-helper';
 
 import { NoTagsEmptyState } from '.';
 
 // import styles from '../_index.scss';
 
 export default {
-  title: getStoryTitle(NoTagsEmptyState.displayName),
+  title: 'IBM Products/Patterns/NoTagsEmptyState',
   component: NoTagsEmptyState,
   parameters: {
     // styles,

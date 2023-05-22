@@ -9,10 +9,7 @@
 import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -28,7 +25,7 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { StatusIcon } from '../../../StatusIcon';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ColumnAlignment`,
+  title: 'IBM Products/Components/Datagrid/Extensions/ColumnAlignment',
   component: Datagrid,
   parameters: {
     styles,

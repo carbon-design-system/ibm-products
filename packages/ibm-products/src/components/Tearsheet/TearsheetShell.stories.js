@@ -8,17 +8,14 @@
 import React, { useRef } from 'react';
 
 import styles from './_storybook-styles.scss';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { TearsheetShell, deprecatedProps } from './TearsheetShell';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
 import mdx from './TearsheetShell.mdx';
 
 export default {
-  title: getStoryTitle(TearsheetShell.displayName),
+  title: 'IBM Products/Components/TearsheetShell',
   component: TearsheetShell,
   parameters: { controls: { expanded: true }, styles, docs: { page: mdx } },
   argTypes: {

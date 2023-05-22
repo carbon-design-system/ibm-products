@@ -9,17 +9,14 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
 import mdx from './ErrorEmptyState.mdx';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../global/js/utils/story-helper';
 
 import { ErrorEmptyState } from '.';
 
 // import styles from '../_index.scss';
 
 export default {
-  title: getStoryTitle(ErrorEmptyState.displayName),
+  title: 'IBM Products/Patterns/ErrorEmptyState',
   component: ErrorEmptyState,
   parameters: {
     // styles,

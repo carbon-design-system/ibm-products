@@ -9,10 +9,7 @@ import React, { useState } from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { EditUpdateCards } from '.';
 import mdx from './EditUpdateCards.mdx';
@@ -38,7 +35,7 @@ import {
 import { pkg /*, carbon */ } from '../../settings';
 
 export default {
-  title: getStoryTitle(EditUpdateCards.displayName),
+  title: 'IBM Products/Patterns/EditUpdateCards',
   component: EditUpdateCards,
   // TODO: Define argTypes for props not represented by standard JS types.
   // argTypes: {

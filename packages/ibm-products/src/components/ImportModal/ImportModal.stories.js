@@ -9,15 +9,12 @@ import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 import { action } from '@storybook/addon-actions';
 // import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { ImportModal } from '.';
 import mdx from './ImportModal.mdx';
 
 export default {
-  title: getStoryTitle(ImportModal.displayName),
+  title: 'IBM Products/Patterns/ImportModal',
   component: ImportModal,
   parameters: {
     // styles,

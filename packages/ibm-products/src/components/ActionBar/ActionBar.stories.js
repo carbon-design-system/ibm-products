@@ -10,10 +10,7 @@ import { action } from '@storybook/addon-actions';
 
 import { Bee, Lightning } from '@carbon/react/icons';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 
 import { ActionBar } from './ActionBar';
@@ -33,7 +30,7 @@ const getActions = (num) =>
   }));
 
 export default {
-  title: getStoryTitle(ActionBar.displayName),
+  title: 'IBM Products/Internal/ActionBar',
   component: ActionBar,
   argTypes: {
     actions: {

@@ -5,10 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import styles from './_storybook-styles.scss';
 import { EditTearsheet } from './EditTearsheet';
 import { EditTearsheetForm } from './EditTearsheetForm';
@@ -16,7 +13,7 @@ import { MultiFormEditTearsheet } from './preview-components/MultiFormEditTearsh
 import mdx from './EditTearsheet.mdx';
 
 export default {
-  title: getStoryTitle(EditTearsheet.displayName),
+  title: 'IBM Products/Patterns/EditTearsheet',
   component: EditTearsheet,
   subcomponents: {
     EditTearsheetForm,

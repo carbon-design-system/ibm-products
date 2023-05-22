@@ -9,10 +9,7 @@
 import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -30,7 +27,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const storybookBlockClass = `storybook-${blockClass}__validation-code-snippet`;
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/EditableCell`,
+  title: 'IBM Products/Components/Datagrid/Extensions/EditableCell',
   component: Datagrid,
   parameters: {
     styles,

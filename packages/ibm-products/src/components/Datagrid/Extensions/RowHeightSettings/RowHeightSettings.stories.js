@@ -9,10 +9,7 @@
 import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../../global/js/utils/story-helper';
 import { Datagrid, useDatagrid } from '../../index';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
@@ -22,7 +19,7 @@ import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/RowHeightSettings`,
+  title: 'IBM Products/Components/Datagrid/Extensions/RowHeightSettings',
   component: Datagrid,
   parameters: {
     styles,

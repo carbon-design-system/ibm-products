@@ -32,17 +32,14 @@ import {
 } from '../ActionSet/actions.js';
 
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import styles from './_storybook-styles.scss';
 
 import mdx from './Tearsheet.mdx';
 
 export default {
-  title: getStoryTitle(Tearsheet.displayName),
+  title: 'IBM Products/Components/Tearsheet',
   component: Tearsheet,
   subcomponents: { TearsheetNarrow },
   parameters: { styles, docs: { page: mdx } },

@@ -8,7 +8,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { range, makeData, newPersonWithTwoLines } from './utils/makeData';
-import { getStoryTitle } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { Activity, Add } from '@carbon/react/icons';
 import { TableBatchAction, TableBatchActions } from '@carbon/react';
@@ -36,7 +35,7 @@ import { Wrapper } from './utils/Wrapper';
 import { pkg } from '../../settings';
 
 export default {
-  title: getStoryTitle(Datagrid.displayName),
+  title: 'IBM Products/Components/Datagrid',
   component: Datagrid,
   parameters: {
     styles,

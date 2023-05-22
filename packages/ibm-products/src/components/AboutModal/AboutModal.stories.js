@@ -10,10 +10,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { AboutModal } from '.';
 
@@ -31,7 +28,7 @@ import styles from './_storybook-styles.scss';
 const blockClass = `${pkg.prefix}--about-modal`;
 
 export default {
-  title: getStoryTitle(AboutModal.displayName),
+  title: 'IBM Products/Patterns/AboutModal',
   component: AboutModal,
   parameters: {
     styles,

@@ -12,10 +12,7 @@ import React from 'react';
 import { Code, Copy } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import { Navigation } from './preview-components';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { WebTerminal } from '.';
 import { WebTerminalContentWrapper } from './WebTerminalContentWrapper';
 import mdx from './WebTerminal.mdx';
@@ -87,7 +84,7 @@ export const WithActions = prepareStory(Template, {
 });
 
 export default {
-  title: getStoryTitle(WebTerminal.displayName),
+  title: 'IBM Products/Patterns/WebTerminal',
   parameters: {
     styles,
     docs: {

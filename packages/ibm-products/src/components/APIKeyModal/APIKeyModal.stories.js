@@ -18,17 +18,14 @@ import {
 } from '@carbon/react';
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { APIKeyModal } from '.';
 import mdx from './APIKeyModal.mdx';
 import wait from '../../global/js/utils/wait';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 export default {
-  title: getStoryTitle(APIKeyModal.displayName),
+  title: 'IBM Products/Patterns/APIKeyModal',
   component: APIKeyModal,
   parameters: {
     styles,

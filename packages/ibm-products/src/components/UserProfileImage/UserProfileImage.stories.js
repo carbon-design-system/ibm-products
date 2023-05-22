@@ -7,10 +7,7 @@
 
 import React from 'react';
 import { UserProfileImage } from '.';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import mdx from './UserProfileImage.mdx';
 import image from './headshot.jpg'; // cspell:disable-line
 // import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
@@ -22,7 +19,7 @@ const defaultArgs = {
 };
 
 export default {
-  title: getStoryTitle(UserProfileImage.displayName),
+  title: 'IBM Products/Patterns/UserProfileImage',
   component: UserProfileImage,
   argTypes: {
     backgroundColor: {

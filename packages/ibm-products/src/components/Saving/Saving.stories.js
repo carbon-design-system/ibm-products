@@ -7,17 +7,14 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { Saving } from '.';
 import mdx from './Saving.mdx';
 import wait from '../../global/js/utils/wait';
 import { TextArea } from '@carbon/react';
 
 export default {
-  title: getStoryTitle(Saving.displayName),
+  title: 'IBM Products/Patterns/Saving',
   component: Saving,
   parameters: {
     styles,

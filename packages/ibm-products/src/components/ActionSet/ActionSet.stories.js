@@ -10,10 +10,7 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 
 import { ActionSet } from '.';
@@ -24,7 +21,7 @@ import styles from './_storybook-styles.scss';
 const blockClass = `${pkg.prefix}--action-set`;
 
 export default {
-  title: getStoryTitle(ActionSet.displayName),
+  title: 'IBM Products/Internal/ActionSet',
   component: ActionSet,
   parameters: {
     styles,

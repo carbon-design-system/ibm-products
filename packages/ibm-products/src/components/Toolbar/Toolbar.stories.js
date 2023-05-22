@@ -35,13 +35,11 @@ import { Dropdown, OverflowMenu, OverflowMenuItem } from '@carbon/react';
 
 import React, { useState } from 'react';
 
-import { getStoryTitle } from '../../global/js/utils/story-helper';
-
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
 import mdx from './Toolbar.mdx';
 
 export default {
-  title: getStoryTitle(Toolbar.displayName),
+  title: 'IBM Products/Patterns/Toolbar',
   component: Toolbar,
 
   subcomponents: { ToolbarGroup, ToolbarButton },

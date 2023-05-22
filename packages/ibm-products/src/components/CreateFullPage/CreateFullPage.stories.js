@@ -5,10 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React, { useState } from 'react';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { usePrefix } from '@carbon/react';
 import { CreateFullPage } from '.';
@@ -36,7 +33,7 @@ import {
 } from '@carbon/react';
 
 export default {
-  title: getStoryTitle(CreateFullPage.displayName),
+  title: 'IBM Products/Patterns/CreateFullPage',
   component: CreateFullPage,
   subcomponents: { CreateFullPageStep },
   parameters: {

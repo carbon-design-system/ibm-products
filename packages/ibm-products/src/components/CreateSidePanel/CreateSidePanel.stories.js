@@ -20,10 +20,7 @@ import {
 } from '@carbon/react';
 
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { CreateSidePanel } from './CreateSidePanel';
 import mdx from './CreateSidePanel.mdx';
@@ -33,7 +30,7 @@ import styles from './_storybook-styles.scss';
 const blockClass = `${pkg.prefix}--create-side-panel`;
 
 export default {
-  title: getStoryTitle(CreateSidePanel.displayName),
+  title: 'IBM Products/Patterns/CreateSidePanel',
   component: CreateSidePanel,
   parameters: {
     styles,

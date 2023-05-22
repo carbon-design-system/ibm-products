@@ -6,10 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { EditInPlace } from '.';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
@@ -36,7 +33,7 @@ const tooltipAlignmentOptions = {
 };
 
 export default {
-  title: getStoryTitle(EditInPlace.displayName),
+  title: 'IBM Products/Patterns/EditInPlace',
   component: EditInPlace,
   argTypes: {
     containerWidth: {

@@ -16,10 +16,7 @@ import {
   FormGroup,
 } from '@carbon/react';
 import { pkg } from '../../settings';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { CreateTearsheetNarrow } from '.';
 import mdx from './CreateTearsheetNarrow.mdx';
@@ -27,7 +24,7 @@ import mdx from './CreateTearsheetNarrow.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(CreateTearsheetNarrow.displayName),
+  title: 'IBM Products/Patterns/CreateTearsheetNarrow',
   component: CreateTearsheetNarrow,
   parameters: {
     styles,

@@ -7,16 +7,13 @@
 
 import React from 'react';
 import { HTTPError404 } from '.';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../global/js/utils/story-helper';
 
 import page from './HTTPError404.mdx';
 // import styles from '../_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(HTTPError404.displayName),
+  title: 'IBM Products/Patterns/HTTPError404',
   component: HTTPError404,
   parameters: {
     docs: {

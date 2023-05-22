@@ -7,16 +7,13 @@
 
 import React from 'react';
 import { HTTPErrorOther } from '.';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../global/js/utils/story-helper';
 
 import page from './HTTPErrorOther.mdx';
 // import styles from '../_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(HTTPErrorOther.displayName),
+  title: 'IBM Products/Patterns/HTTPErrorOther',
   component: HTTPErrorOther,
   parameters: {
     docs: {

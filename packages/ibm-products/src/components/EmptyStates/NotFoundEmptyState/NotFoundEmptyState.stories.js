@@ -9,16 +9,13 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
 import mdx from './NotFoundEmptyState.mdx';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../../global/js/utils/story-helper';
+import { prepareStory } from '../../../global/js/utils/story-helper';
 import { NotFoundEmptyState } from '.';
 
 // import styles from '../_index.scss';
 
 export default {
-  title: getStoryTitle(NotFoundEmptyState.displayName),
+  title: 'IBM Products/Patterns/NotFoundEmptyState',
   component: NotFoundEmptyState,
   parameters: {
     // styles,

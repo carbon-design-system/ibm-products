@@ -9,15 +9,12 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { BreadcrumbWithOverflow } from '.';
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(BreadcrumbWithOverflow.displayName),
+  title: 'IBM Products/Internal/BreadcrumbWithOverflow',
   component: BreadcrumbWithOverflow,
   argTypes: {
     containerWidth: {

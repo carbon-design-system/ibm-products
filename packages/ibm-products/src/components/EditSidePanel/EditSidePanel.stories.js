@@ -21,10 +21,7 @@ import {
 } from '@carbon/react';
 import { Copy, TrashCan, Settings } from '@carbon/react/icons';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import { EditSidePanel } from '.';
 import mdx from './EditSidePanel.mdx';
@@ -32,7 +29,7 @@ import mdx from './EditSidePanel.mdx';
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(EditSidePanel.displayName),
+  title: 'IBM Products/Patterns/EditSidePanel',
   component: EditSidePanel,
   // TODO: Define argTypes for props not represented by standard JS types.
   argTypes: {

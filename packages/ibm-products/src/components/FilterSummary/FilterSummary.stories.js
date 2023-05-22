@@ -6,13 +6,12 @@
  */
 
 import React, { useState } from 'react';
-import { getStoryTitle } from '../../global/js/utils/story-helper';
 import { FilterSummary } from '.';
 
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: getStoryTitle(FilterSummary.displayName),
+  title: 'IBM Products/Internal/FilterSummary',
   component: FilterSummary,
   parameters: {
     styles,

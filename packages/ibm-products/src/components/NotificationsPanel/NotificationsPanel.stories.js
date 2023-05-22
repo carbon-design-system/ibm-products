@@ -24,10 +24,7 @@ import { pkg } from '../../settings';
 
 import { NotificationsPanel } from '.';
 
-import {
-  getStoryTitle,
-  prepareStory,
-} from '../../global/js/utils/story-helper';
+import { prepareStory } from '../../global/js/utils/story-helper';
 
 import mdx from './NotificationsPanel.mdx';
 import data from './NotificationsPanel_data';
@@ -35,7 +32,7 @@ import data from './NotificationsPanel_data';
 const storyBlockClass = `${pkg.prefix}--notifications-panel__story`;
 
 export default {
-  title: getStoryTitle(NotificationsPanel.displayName),
+  title: 'IBM Products/Patterns/NotificationsPanel',
   component: NotificationsPanel,
   parameters: {
     styles,

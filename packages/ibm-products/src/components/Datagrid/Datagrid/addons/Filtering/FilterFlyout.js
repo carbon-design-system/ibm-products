@@ -20,6 +20,7 @@ import {
   useFilters,
   useShouldDisableButtons,
 } from './hooks';
+import { carbon } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentClass = `${blockClass}-filter-flyout`;
@@ -137,7 +138,7 @@ const FilterFlyout = ({
   useClickOutside(filterFlyoutRef, (target) => {
     const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
     const hasClickedOnDropdown =
-      target.className === 'bx--list-box__menu-item__option';
+      target.className === `${carbon.prefix}--list-box__menu-item__option`;
 
     if (!open || hasClickedOnDatePicker || hasClickedOnDropdown) {
       return;

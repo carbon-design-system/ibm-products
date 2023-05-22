@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { default as useInitialStateFromFilters } from './useInitialStateFromFilters';
 export { default as useSubscribeToEventEmitter } from './useSubscribeToEventEmitter';
 export { default as useShouldDisableButtons } from './useShouldDisableButtons';
 export { default as useFilters } from './useFilters';

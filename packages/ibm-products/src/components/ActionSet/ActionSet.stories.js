@@ -23,6 +23,7 @@ const blockClass = `${pkg.prefix}--action-set`;
 export default {
   title: 'IBM Products/Internal/ActionSet',
   component: ActionSet,
+  tags: ['autodocs'],
   parameters: {
     styles,
   },

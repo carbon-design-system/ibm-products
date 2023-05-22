@@ -17,6 +17,7 @@ import { NotFoundEmptyState } from '.';
 export default {
   title: 'IBM Products/Patterns/NotFoundEmptyState',
   component: NotFoundEmptyState,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     /*

@@ -21,6 +21,7 @@ import { Add } from '@carbon/react/icons';
 export default {
   title: 'IBM Products/Internal/ButtonMenu',
   component: ButtonMenu,
+  tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
   // argTypes: {
   //   egProp: { control: 'color' },

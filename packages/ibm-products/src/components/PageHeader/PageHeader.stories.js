@@ -395,6 +395,7 @@ const fullWidthGrid = {
 export default {
   title: 'IBM Products/Components/PageHeader',
   component: PageHeader,
+  tags: ['autodocs'],
   subcomponents: { ActionBarItem },
   parameters: { styles, layout: 'fullscreen' /* docs: { page: mdx } */ },
   decorators: [

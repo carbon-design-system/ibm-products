@@ -32,6 +32,7 @@ const blockClass = `${pkg.prefix}--create-side-panel`;
 export default {
   title: 'IBM Products/Patterns/CreateSidePanel',
   component: CreateSidePanel,
+  tags: ['autodocs'],
   parameters: {
     styles,
     /*

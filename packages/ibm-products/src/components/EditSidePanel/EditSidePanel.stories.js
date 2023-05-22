@@ -31,6 +31,7 @@ import styles from './_storybook-styles.scss';
 export default {
   title: 'IBM Products/Patterns/EditSidePanel',
   component: EditSidePanel,
+  tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
   argTypes: {
     title: { control: { type: 'text' } },

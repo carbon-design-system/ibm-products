@@ -29,6 +29,7 @@ const storybookBlockClass = `storybook-${blockClass}__validation-code-snippet`;
 export default {
   title: 'IBM Products/Components/Datagrid/Extensions/EditableCell',
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
     // docs: { page: mdx },

@@ -18,6 +18,7 @@ import { ErrorEmptyState } from '.';
 export default {
   title: 'IBM Products/Patterns/ErrorEmptyState',
   component: ErrorEmptyState,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     /*

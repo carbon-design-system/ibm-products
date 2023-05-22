@@ -17,6 +17,7 @@ import { NotificationsEmptyState } from '.';
 export default {
   title: 'IBM Products/Patterns/NotificationsEmptyState',
   component: NotificationsEmptyState,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     /*

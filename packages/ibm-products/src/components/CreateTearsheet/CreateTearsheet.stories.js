@@ -16,6 +16,7 @@ import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
 export default {
   title: 'IBM Products/Patterns/CreateTearsheet',
   component: CreateTearsheet,
+  tags: ['autodocs'],
   subcomponents: {
     CreateTearsheetStep,
   },

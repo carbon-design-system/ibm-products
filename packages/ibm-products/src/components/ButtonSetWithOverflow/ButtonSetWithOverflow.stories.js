@@ -19,6 +19,7 @@ import styles from './_storybook-styles.scss';
 export default {
   title: 'IBM Products/Internal/ButtonSetWithOverflow',
   component: ButtonSetWithOverflow,
+  tags: ['autodocs'],
   argTypes: {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },

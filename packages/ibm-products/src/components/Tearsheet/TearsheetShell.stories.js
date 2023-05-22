@@ -17,6 +17,7 @@ import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 export default {
   title: 'IBM Products/Components/TearsheetShell',
   component: TearsheetShell,
+  tags: ['autodocs'],
   parameters: {
     controls: { expanded: true },
     styles /* docs: { page: mdx } */,

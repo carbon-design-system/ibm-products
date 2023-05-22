@@ -13,6 +13,7 @@ import styles from './_storybook-styles.scss';
 export default {
   title: 'IBM Products/Internal/FilterSummary',
   component: FilterSummary,
+  tags: ['autodocs'],
   parameters: {
     styles,
   },

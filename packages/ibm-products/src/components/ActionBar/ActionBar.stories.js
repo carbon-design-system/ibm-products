@@ -32,6 +32,7 @@ const getActions = (num) =>
 export default {
   title: 'IBM Products/Internal/ActionBar',
   component: ActionBar,
+  tags: ['autodocs'],
   argTypes: {
     actions: {
       control: {

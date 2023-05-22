@@ -27,6 +27,7 @@ import {
 export default {
   title: 'IBM Products/Patterns/EmptyState',
   component: EmptyState,
+  tags: ['autodocs'],
   subcomponents: {
     ErrorEmptyState,
     NoDataEmptyState,

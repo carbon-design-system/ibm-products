@@ -18,6 +18,7 @@ import { NoTagsEmptyState } from '.';
 export default {
   title: 'IBM Products/Patterns/NoTagsEmptyState',
   component: NoTagsEmptyState,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     /*

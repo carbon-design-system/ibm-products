@@ -30,6 +30,7 @@ import { pkg } from '../../../../settings';
 export default {
   title: 'IBM Products/Components/DataGrid/Extensions/ColumnCustomization',
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
     // docs: { page: mdx },

@@ -21,6 +21,7 @@ import styles from './_storybook-styles.scss';
 export default {
   title: 'IBM Products/Components/OptionsTile',
   component: OptionsTile,
+  tags: ['autodocs'],
   parameters: {
     styles,
     /*

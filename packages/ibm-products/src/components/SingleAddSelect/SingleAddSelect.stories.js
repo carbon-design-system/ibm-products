@@ -16,6 +16,7 @@ import { Button } from '@carbon/react';
 export default {
   title: 'IBM Products/Patterns/SingleAddSelect',
   component: SingleAddSelect,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     /*

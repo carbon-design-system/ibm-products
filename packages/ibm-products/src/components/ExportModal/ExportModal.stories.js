@@ -16,6 +16,7 @@ import wait from '../../global/js/utils/wait';
 export default {
   title: 'IBM Products/Patterns/ExportModal',
   component: ExportModal,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     /*

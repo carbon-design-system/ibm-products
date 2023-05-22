@@ -22,6 +22,7 @@ import { pkg } from '../../../../settings';
 export default {
   title: 'IBM Products/Components/Datagrid/Extensions/Filtering/Panel',
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
     // docs: { page: mdx },

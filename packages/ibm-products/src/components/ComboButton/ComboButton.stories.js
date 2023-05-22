@@ -17,6 +17,7 @@ import { ComboButton, ComboButtonItem } from '..';
 export default {
   title: 'IBM Products/Internal/ComboButton',
   component: ComboButton,
+  tags: ['autodocs'],
   subcomponents: {
     ComboButtonItem,
   },

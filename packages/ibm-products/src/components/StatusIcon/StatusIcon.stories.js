@@ -15,6 +15,7 @@ import { prepareStory } from '../../global/js/utils/story-helper';
 export default {
   title: 'IBM Products/Patterns/StatusIcon',
   component: StatusIcon,
+  tags: ['autodocs'],
   argTypes: {
     kind: {
       control: {

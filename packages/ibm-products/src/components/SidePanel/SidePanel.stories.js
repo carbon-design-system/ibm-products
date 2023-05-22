@@ -34,6 +34,7 @@ import { SidePanel } from './SidePanel';
 export default {
   title: 'IBM Products/Components/SidePanel',
   component: SidePanel,
+  tags: ['autodocs'],
   parameters: {
     styles,
     /*

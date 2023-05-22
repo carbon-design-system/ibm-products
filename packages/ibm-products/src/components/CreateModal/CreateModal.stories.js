@@ -30,6 +30,7 @@ import styles from './_storybook-styles.scss';
 export default {
   title: 'IBM Products/Patterns/CreateModal',
   component: CreateModal,
+  tags: ['autodocs'],
   parameters: {
     styles,
     // docs: { page: mdx },

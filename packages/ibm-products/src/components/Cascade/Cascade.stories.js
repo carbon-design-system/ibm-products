@@ -15,6 +15,7 @@ import { Column } from '@carbon/react';
 export default {
   title: 'IBM Products/Patterns/Cascade',
   component: Cascade,
+  tags: ['autodocs'],
   parameters: {
     styles,
     /*

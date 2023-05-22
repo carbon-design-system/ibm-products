@@ -21,6 +21,7 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 export default {
   title: 'IBM Products/Components/Datagrid/Extensions/Header',
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
     // docs: { page: mdx },

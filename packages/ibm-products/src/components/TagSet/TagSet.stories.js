@@ -132,6 +132,7 @@ const overflowAndModalStrings = {
 export default {
   title: 'IBM Products/Components/TagSet',
   component: TagSet,
+  tags: ['autodocs'],
   parameters: {
     // docs: { page: mdx },
     styles,

@@ -15,6 +15,7 @@ import { MultiFormEditTearsheet } from './preview-components/MultiFormEditTearsh
 export default {
   title: 'IBM Products/Patterns/EditTearsheet',
   component: EditTearsheet,
+  tags: ['autodocs'],
   subcomponents: {
     EditTearsheetForm,
   },

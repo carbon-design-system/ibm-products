@@ -17,6 +17,7 @@ import { UnauthorizedEmptyState } from '.';
 export default {
   title: 'IBM Products/Patterns/UnauthorizedEmptyState',
   component: UnauthorizedEmptyState,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     /*

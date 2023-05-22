@@ -16,6 +16,7 @@ import { ImportModal } from '.';
 export default {
   title: 'IBM Products/Patterns/ImportModal',
   component: ImportModal,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     /*

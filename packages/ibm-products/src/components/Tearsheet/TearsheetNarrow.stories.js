@@ -32,6 +32,7 @@ import styles from './_storybook-styles.scss';
 export default {
   title: 'IBM Products/Components/TearsheetNarrow',
   component: TearsheetNarrow,
+  tags: ['autodocs'],
   subcomponents: { Tearsheet },
   parameters: { styles /* docs: { page: mdx } */ },
   argTypes: {

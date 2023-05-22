@@ -37,6 +37,7 @@ import { pkg /*, carbon */ } from '../../settings';
 export default {
   title: 'IBM Products/Patterns/EditUpdateCards',
   component: EditUpdateCards,
+  tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
   // argTypes: {
   //   egProp: { control: 'color' },

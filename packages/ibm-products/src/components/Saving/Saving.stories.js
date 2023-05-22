@@ -16,6 +16,7 @@ import { TextArea } from '@carbon/react';
 export default {
   title: 'IBM Products/Patterns/Saving',
   component: Saving,
+  tags: ['autodocs'],
   parameters: {
     styles,
     /*

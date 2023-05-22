@@ -19,6 +19,7 @@ import { pkg } from '../../settings';
 export default {
   title: 'IBM Products/Internal/ExampleComponent',
   component: ExampleComponent,
+  tags: ['autodocs'],
   argTypes: {
     borderColor: { control: 'color' },
   },

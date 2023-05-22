@@ -18,6 +18,7 @@ import { NoDataEmptyState } from '.';
 export default {
   title: 'IBM Products/Patterns/NoDataEmptyState',
   component: NoDataEmptyState,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     /*

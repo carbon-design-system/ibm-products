@@ -37,6 +37,7 @@ import { pkg } from '../../settings';
 export default {
   title: 'IBM Products/Components/Datagrid',
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
     /*

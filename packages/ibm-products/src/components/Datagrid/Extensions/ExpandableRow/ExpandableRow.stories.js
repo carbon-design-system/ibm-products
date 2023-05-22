@@ -22,6 +22,7 @@ import { pkg } from '../../../../settings';
 export default {
   title: 'IBM Products/Components/Datagrid/Extensions/ExpandableRow',
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
     // docs: { page: mdx },
@@ -170,6 +171,7 @@ const ExpandedRows = ({ ...args }) => {
       DatagridActions,
       DatagridPagination,
       ExpandedRowContentComponent: expansionRenderer,
+      tags: ['autodocs'],
       ...args.defaultGridProps,
     },
     useExpandedRow

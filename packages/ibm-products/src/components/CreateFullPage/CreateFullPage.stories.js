@@ -35,6 +35,7 @@ import {
 export default {
   title: 'IBM Products/Patterns/CreateFullPage',
   component: CreateFullPage,
+  tags: ['autodocs'],
   subcomponents: { CreateFullPageStep },
   parameters: {
     styles,

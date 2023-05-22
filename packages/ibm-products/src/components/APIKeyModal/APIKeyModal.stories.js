@@ -27,6 +27,7 @@ import styles from './_storybook-styles.scss'; // import index in case more file
 export default {
   title: 'IBM Products/Patterns/APIKeyModal',
   component: APIKeyModal,
+  tags: ['autodocs'],
   parameters: {
     styles,
     /*

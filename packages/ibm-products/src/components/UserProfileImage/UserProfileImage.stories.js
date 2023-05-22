@@ -21,6 +21,7 @@ const defaultArgs = {
 export default {
   title: 'IBM Products/Patterns/UserProfileImage',
   component: UserProfileImage,
+  tags: ['autodocs'],
   argTypes: {
     backgroundColor: {
       control: {

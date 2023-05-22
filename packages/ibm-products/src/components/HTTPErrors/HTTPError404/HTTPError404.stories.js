@@ -15,6 +15,7 @@ import { prepareStory } from '../../../global/js/utils/story-helper';
 export default {
   title: 'IBM Products/Patterns/HTTPError404',
   component: HTTPError404,
+  tags: ['autodocs'],
   parameters: {
     // docs: {
     //   page,

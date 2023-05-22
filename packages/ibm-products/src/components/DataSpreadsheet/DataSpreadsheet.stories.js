@@ -18,6 +18,7 @@ import { generateData } from './utils/generateData';
 export default {
   title: 'IBM Products/Components/DataSpreadsheet',
   component: DataSpreadsheet,
+  tags: ['autodocs'],
   argTypes: {
     onActiveCellChange: {
       action: 'active cell change',

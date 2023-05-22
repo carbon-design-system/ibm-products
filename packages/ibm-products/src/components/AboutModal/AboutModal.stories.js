@@ -30,6 +30,7 @@ const blockClass = `${pkg.prefix}--about-modal`;
 export default {
   title: 'IBM Products/Patterns/AboutModal',
   component: AboutModal,
+  tags: ['autodocs'],
   parameters: {
     styles,
     // docs: { page: mdx },

@@ -41,6 +41,7 @@ import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
 export default {
   title: 'IBM Products/Patterns/Toolbar',
   component: Toolbar,
+  tags: ['autodocs'],
 
   subcomponents: { ToolbarGroup, ToolbarButton },
 

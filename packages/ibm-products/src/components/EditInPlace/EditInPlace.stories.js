@@ -35,6 +35,7 @@ const tooltipAlignmentOptions = {
 export default {
   title: 'IBM Products/Patterns/EditInPlace',
   component: EditInPlace,
+  tags: ['autodocs'],
   argTypes: {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },

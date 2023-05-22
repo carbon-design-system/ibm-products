@@ -34,6 +34,7 @@ const storyBlockClass = `${pkg.prefix}--notifications-panel__story`;
 export default {
   title: 'IBM Products/Patterns/NotificationsPanel',
   component: NotificationsPanel,
+  tags: ['autodocs'],
   parameters: {
     styles,
     /*

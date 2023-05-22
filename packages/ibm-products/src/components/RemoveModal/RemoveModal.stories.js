@@ -15,6 +15,7 @@ import { RemoveModal } from '.';
 export default {
   title: 'IBM Products/Patterns/RemoveModal',
   component: RemoveModal,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     /*

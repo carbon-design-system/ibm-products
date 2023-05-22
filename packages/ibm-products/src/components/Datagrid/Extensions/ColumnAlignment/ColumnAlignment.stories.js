@@ -27,6 +27,7 @@ import { StatusIcon } from '../../../StatusIcon';
 export default {
   title: 'IBM Products/Components/Datagrid/Extensions/ColumnAlignment',
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
     // docs: { page: mdx },

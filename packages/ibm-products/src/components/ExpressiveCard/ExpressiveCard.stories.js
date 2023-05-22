@@ -17,6 +17,7 @@ import { action } from '@storybook/addon-actions';
 export default {
   title: 'IBM Products/Components/ExpressiveCard',
   component: ExpressiveCard,
+  tags: ['autodocs'],
   parameters: {
     styles,
     /*

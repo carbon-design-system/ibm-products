@@ -21,6 +21,7 @@ const blockClass = `${pkg.prefix}--add-select__meta-panel`;
 export default {
   title: 'IBM Products/Patterns/MultiAddSelect',
   component: MultiAddSelect,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     /*

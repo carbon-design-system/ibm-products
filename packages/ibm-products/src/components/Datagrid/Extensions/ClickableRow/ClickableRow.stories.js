@@ -31,6 +31,7 @@ import { SidePanel } from '../../../SidePanel';
 export default {
   title: 'IBM Products/Components/Datagrid/Extensions/ClickableRow',
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
     // docs: { page: mdx },

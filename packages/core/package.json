@@ -39,7 +39,6 @@
     "@storybook/addon-actions": "^7.0.12",
     "@storybook/addon-controls": "^7.0.12",
     "@storybook/addon-docs": "^7.0.12",
-    "@storybook/addon-info": "^5.3.21",
     "@storybook/addon-knobs": "^7.0.2",
     "@storybook/addon-links": "^7.0.12",
     "@storybook/addon-mdx-gfm": "^7.0.12",

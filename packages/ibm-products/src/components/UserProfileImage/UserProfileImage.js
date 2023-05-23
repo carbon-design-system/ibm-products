@@ -43,6 +43,7 @@ export let UserProfileImage = React.forwardRef(
       size,
       theme,
       tooltipText,
+      tooltipAlignment,
       // Collect any other property values passed in.
       ...rest
     },
@@ -134,7 +135,6 @@ export let UserProfileImage = React.forwardRef(
         <FillItem />
       </div>
     );
-
     return (
       FillItem &&
       (tooltipText ? (
@@ -142,6 +142,7 @@ export let UserProfileImage = React.forwardRef(
           label={tooltipText}
           className={`${blockClass}__tooltip`}
           kind="ghost"
+          align={tooltipAlignment ? tooltipAlignment : 'bottom'}
         >
           {renderUserProfileImage()}
         </IconButton>
@@ -216,6 +217,20 @@ UserProfileImage.propTypes = {
    * Set theme in which the component will be rendered
    */
   theme: PropTypes.oneOf(['light', 'dark']).isRequired,
+
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  tooltipAlignment: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'right',
+  ]),
 
   /**
    * Pass in the display name to have it shown on hover

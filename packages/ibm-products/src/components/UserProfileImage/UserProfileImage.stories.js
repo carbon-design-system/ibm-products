@@ -49,6 +49,21 @@ export default {
       },
       options: ['xl', 'lg', 'md'],
     },
+    toolTipAlignment: {
+      control: {
+        type: 'select',
+      },
+      options: [
+        'top',
+        'top-left',
+        'top-right',
+        'bottom',
+        'bottom-left',
+        'bottom-right',
+        'left',
+        'right',
+      ],
+    },
   },
   parameters: {
     // styles,
@@ -65,6 +80,7 @@ export const Default = prepareStory(Template, {
     ...defaultArgs,
     kind: 'user',
     tooltipText: 'Thomas Watson',
+    tooltipAlignment: 'bottom',
   },
 });
 
@@ -80,6 +96,7 @@ export const WithInitials = prepareStory(Template, {
     ...defaultArgs,
     initials: 'thomas j. watson',
     tooltipText: 'Thomas Watson',
+    tooltipAlignment: 'bottom',
   },
 });
 
@@ -97,5 +114,6 @@ export const WithImageAndTooltip = prepareStory(Template, {
     image,
     imageDescription: 'image here',
     tooltipText: 'Display Name',
+    tooltipAlignment: 'bottom',
   },
 });

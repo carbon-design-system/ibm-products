@@ -48,7 +48,7 @@ export default {
 
 // Even if not used, `args` must be passed to enable "Show code" in the docs.
 // eslint-disable-next-line no-unused-vars
-const TemplateSingleLevel = () => {
+const TemplateSingleLevel = (args) => {
   const theme = getSelectedCarbonTheme();
 
   return (

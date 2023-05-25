@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.34](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@0.22.33...@carbon/storybook-addon-theme@0.22.34) (2023-05-25)
+
+
+### Bug Fixes
+
+* **releases:** make storybook addon theme package private ([#3048](https://github.com/carbon-design-system/ibm-products/issues/3048)) ([e157c2d](https://github.com/carbon-design-system/ibm-products/commit/e157c2daf5848838430b01292e2815038c330690))
+
+
+
+
+
 ## [0.22.33](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@0.22.32...@carbon/storybook-addon-theme@0.22.33) (2023-05-25)
 
 

@@ -1,14 +1,14 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "1.53.1",
+  "version": "1.54.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/ibm-products.git",
-    "directory": "packages/cloud-cognitive"
+    "directory": "packages/ibm-products"
   },
   "bugs": "https://github.com/carbon-design-system/ibm-products/issues",
   "sideEffects": [
@@ -53,7 +53,7 @@
   "devDependencies": {
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.12",
-    "babel-preset-ibm-cloud-cognitive": "^0.14.27",
+    "babel-preset-ibm-cloud-cognitive": "^0.14.28",
     "chalk": "^4.1.2",
     "change-case": "^4.1.2",
     "copyfiles": "^2.4.1",
@@ -61,7 +61,7 @@
     "fs-extra": "^11.1.0",
     "glob": "^8.1.0",
     "jest": "^29.4.2",
-    "jest-config-ibm-cloud-cognitive": "^0.24.14",
+    "jest-config-ibm-cloud-cognitive": "^0.24.15",
     "jest-environment-jsdom": "^29.4.2",
     "namor": "^1.1.2",
     "npm-check-updates": "^16.7.4",

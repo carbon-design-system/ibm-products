@@ -28,7 +28,7 @@ export default {
           className="page-layouts__banner"
           actions={
             <NotificationActionButton
-              href="https://carbon-for-ibm-products.netlify.app/?path=/story/ibm-products-components-cards-productivecard--default"
+              href="https://v1-ibm-products.carbondesignsystem.com/?path=/story/ibm-products-components-cards-productivecard--default"
               rel="noopener noreferrer"
               target="_blank"
             >

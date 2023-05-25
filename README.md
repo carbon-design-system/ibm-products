@@ -18,7 +18,7 @@
 ## 🚀 Getting started
 
 If you’re just getting started and looking to browse our React components, take
-a look at [our Storybook](https://carbon-for-ibm-products.netlify.app).
+a look at [our Storybook](https://ibm-products.carbondesignsystem.com).
 
 All of our source code and documentation, including this readme, can be found on
 [our GitHub repo](https://github.com/carbon-design-system/ibm-products), which
@@ -37,7 +37,7 @@ npm:
 
 | Package name                                          | Description                                                                                                       |
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| [`@carbon/ibm-products`](./packages/cloud-cognitive)  | A curated set of components and patterns, built on top of Carbon and designed by the Carbon for IBM Products team |
+| [`@carbon/ibm-products`](./packages/ibm-products)     | A curated set of components and patterns, built on top of Carbon and designed by the Carbon for IBM Products team |
 | [`@carbon/ibm-cloud-cognitive-cdai`](./packages/cdai) | Legacy and non-curated design implementations used in application integration                                     |
 | [`@carbon/ibm-security`](./packages/security)         | Legacy and non-curated design implementations used in security                                                    |
 
@@ -84,7 +84,7 @@ Thanks goes to these wonderful people
   <tbody>
     <tr>
       <td align="center" valign="top" width="20%"><a href="http://simonfinney.dev"><img src="https://avatars2.githubusercontent.com/u/3846874?v=4?s=100" width="100px;" alt="Simon Finney"/><br /><sub><b>Simon Finney</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=SimonFinney" title="Code">💻</a></td>
-      <td align="center" valign="top" width="20%"><a href="https://github.com/lee-chase"><img src="https://avatars0.githubusercontent.com/u/15086604?v=4?s=100" width="100px;" alt="Lee Chase"/><br /><sub><b>Lee Chase</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=lee-chase" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/lee-chase"><img src="https://avatars0.githubusercontent.com/u/15086604?v=4?s=100" width="100px;" alt="Lee Chase"/><br /><sub><b>Lee Chase</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=lee-chase" title="Code">💻</a> <a href="#example-lee-chase" title="Examples">💡</a> <a href="https://github.com/carbon-design-system/ibm-products/pulls?q=is%3Apr+reviewed-by%3Alee-chase" title="Reviewed Pull Requests">👀</a> <a href="#infra-lee-chase" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
       <td align="center" valign="top" width="20%"><a href="https://github.com/moores2"><img src="https://avatars2.githubusercontent.com/u/6977424?v=4?s=100" width="100px;" alt="Simon Moore"/><br /><sub><b>Simon Moore</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=moores2" title="Code">💻</a></td>
       <td align="center" valign="top" width="20%"><a href="https://github.com/joshblack"><img src="https://avatars1.githubusercontent.com/u/3901764?v=4?s=100" width="100px;" alt="Josh Black"/><br /><sub><b>Josh Black</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=joshblack" title="Code">💻</a></td>
       <td align="center" valign="top" width="20%"><a href="http://davidmenendez.net"><img src="https://avatars1.githubusercontent.com/u/6370760?v=4?s=100" width="100px;" alt="David Menendez"/><br /><sub><b>David Menendez</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=davidmenendez" title="Code">💻</a> <a href="https://github.com/carbon-design-system/ibm-products/pulls?q=is%3Apr+reviewed-by%3Adavidmenendez" title="Reviewed Pull Requests">👀</a></td>

@@ -63,10 +63,10 @@ const renderDocLink = () => {
   const docLinkObj = {
     href:
       chance > 0.66
-        ? 'http://carbondesignsystem.com/'
+        ? 'https://carbondesignsystem.com/'
         : chance > 0.33
         ? 'https://pages.github.ibm.com/cdai-design/pal/'
-        : 'http://carbon-for-ibm-products.netlify.app/',
+        : 'https://ibm-products.carbondesignsystem.com/',
     text:
       chance > 0.66
         ? 'Carbon Design System'

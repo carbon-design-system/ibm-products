@@ -36,7 +36,7 @@ To check for component test coverage for a given component, for example in the
 yarn test:c4p /ComponentName/ --coverage
 ```
 
-This will generate a coverage report in `packages/cloud-cognitive/coverage`.
+This will generate a coverage report in `packages/ibm-products/coverage`.
 
 ## Publishing releases
 

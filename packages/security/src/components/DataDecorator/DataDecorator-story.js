@@ -67,7 +67,7 @@ storiesOf(patterns('DataDecorator#legacy'), module)
         className="page-layouts__banner"
         actions={
           <NotificationActionButton
-            href="https://carbon-for-ibm-products.netlify.app/?path=/story/security-components-decorator--default&knob-Delimiter%20(delimiter)=,%20&knob-Items%20(items)=Item%201,Item%202,Item%203,Item%204,Item%205,Item%206,Item%207,Item%208,Item%209,Item%2010&knob-Lines%20(`lines`)=1&knob-Score%20(`score`)=3&knob-Title%20(`title`)=10.0.0.0&knob-Truncate%20(`truncate`)=true&knob-Truncate%20(truncate)=true&knob-Type%20(`type`)=IP&knob-Value%20(`value`)=10.0.0.0.563409u53250u&knob-Width%20(`width`)=100px&knob-type=IP&knob-value=127.0.0.1"
+            href="https://v1-ibm-products.carbondesignsystem.com/?path=/story/security-components-decorator--default&knob-Delimiter%20(delimiter)=,%20&knob-Items%20(items)=Item%201,Item%202,Item%203,Item%204,Item%205,Item%206,Item%207,Item%208,Item%209,Item%2010&knob-Lines%20(`lines`)=1&knob-Score%20(`score`)=3&knob-Title%20(`title`)=10.0.0.0&knob-Truncate%20(`truncate`)=true&knob-Truncate%20(truncate)=true&knob-Type%20(`type`)=IP&knob-Value%20(`value`)=10.0.0.0.563409u53250u&knob-Width%20(`width`)=100px&knob-type=IP&knob-value=127.0.0.1"
             rel="noopener noreferrer"
             target="_blank"
           >

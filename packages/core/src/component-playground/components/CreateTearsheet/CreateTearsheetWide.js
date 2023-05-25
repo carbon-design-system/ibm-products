@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 import {
   CreateTearsheet,
   CreateTearsheetStep,
-} from '../../../../../cloud-cognitive/src';
+} from '../../../../../ibm-products/src';
 import {
   Column,
   //Dropdown,

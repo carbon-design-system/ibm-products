@@ -5,7 +5,7 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Checkbox,
   DatePicker,
@@ -18,6 +18,7 @@ import {
 } from 'carbon-components-react';
 import {
   INSTANT,
+  BATCH,
   DATE,
   CHECKBOX,
   NUMBER,
@@ -25,7 +26,6 @@ import {
   DROPDOWN,
   PANEL,
 } from '../constants';
-import useInitialStateFromFilters from './useInitialStateFromFilters';
 import { getInitialStateFromFilters } from '../utils';
 
 const useFilters = ({
@@ -33,18 +33,21 @@ const useFilters = ({
   filters = [],
   setAllFilters,
   variation,
-  initialFilters,
+  reactTableFiltersState,
+  onCancel = () => {},
 }) => {
   /** State */
-  const [filtersState, setFiltersState] = useInitialStateFromFilters(
-    filters,
-    variation,
-    initialFilters
+  const [filtersState, setFiltersState] = useState(
+    getInitialStateFromFilters(filters, variation, reactTableFiltersState)
   );
-  const [filtersObjectArray, setFiltersObjectArray] = useState(initialFilters);
+
+  const [filtersObjectArray, setFiltersObjectArray] = useState(
+    reactTableFiltersState
+  );
 
   // When using batch actions we have to store the filters to then apply them later
   const prevFiltersRef = useRef(JSON.stringify(filtersState));
+  const lastAppliedFilters = useRef(JSON.stringify(reactTableFiltersState));
   const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
 
   /** Methods */
@@ -53,6 +56,7 @@ const useFilters = ({
   const revertToPreviousFilters = () => {
     setFiltersState(JSON.parse(prevFiltersRef.current));
     setFiltersObjectArray(JSON.parse(prevFiltersObjectArrayRef.current));
+    setAllFilters(JSON.parse(lastAppliedFilters.current));
   };
 
   const reset = () => {
@@ -162,11 +166,18 @@ const useFilters = ({
   };
   /** Render the individual filter component */
   const renderFilter = ({ type, column, props: components }) => {
+    let filter;
     const isPanel = variation === PANEL;
+
+    if (!type) {
+      return console.error(
+        `type: ${type}; does not exist as a type of filter.`
+      );
+    }
 
     switch (type) {
       case DATE:
-        return (
+        filter = (
           <DatePicker
             {...components.DatePicker}
             onChange={(value) => {
@@ -190,8 +201,9 @@ const useFilters = ({
             />
           </DatePicker>
         );
+        break;
       case NUMBER:
-        return (
+        filter = (
           <NumberInput
             step={1}
             allowEmpty
@@ -212,8 +224,9 @@ const useFilters = ({
             light={isPanel}
           />
         );
+        break;
       case CHECKBOX:
-        return (
+        filter = (
           <FormGroup {...components.FormGroup}>
             {filtersState[column].value.map((option) => (
               <Checkbox
@@ -244,8 +257,9 @@ const useFilters = ({
             ))}
           </FormGroup>
         );
+        break;
       case RADIO:
-        return (
+        filter = (
           <FormGroup {...components.FormGroup}>
             <RadioButtonGroup
               {...components.RadioButtonGroup}
@@ -280,8 +294,9 @@ const useFilters = ({
             </RadioButtonGroup>
           </FormGroup>
         );
+        break;
       case DROPDOWN:
-        return (
+        filter = (
           <Dropdown
             {...components.Dropdown}
             items={['Any', ...components.Dropdown.items]}
@@ -309,7 +324,37 @@ const useFilters = ({
           />
         );
     }
+
+    return <React.Fragment key={column}>{filter}</React.Fragment>;
   };
+
+  const cancel = () => {
+    // Reverting to previous filters only applies when using batch actions
+    if (updateMethod === BATCH) {
+      revertToPreviousFilters();
+      onCancel();
+    }
+  };
+
+  /** The purpose of this function is to sync any changes in react-tables state.filters array and reflect
+      those new filter changes in the panel/flyout state. The external change is triggered if setAllFilters is called outside of the Datagrid */
+  useEffect(
+    function updateStateAndFiltersToReflectExternalFilterChanges() {
+      const newFiltersState = getInitialStateFromFilters(
+        filters,
+        variation,
+        reactTableFiltersState
+      );
+      setFiltersState(newFiltersState);
+      prevFiltersRef.current = JSON.stringify(newFiltersState);
+      prevFiltersObjectArrayRef.current = JSON.stringify(
+        reactTableFiltersState
+      );
+
+      setFiltersObjectArray(reactTableFiltersState);
+    },
+    [filters, reactTableFiltersState, variation]
+  );
 
   return {
     filtersState,
@@ -320,6 +365,8 @@ const useFilters = ({
     reset,
     renderFilter,
     filtersObjectArray,
+    lastAppliedFilters,
+    cancel,
   };
 };
 

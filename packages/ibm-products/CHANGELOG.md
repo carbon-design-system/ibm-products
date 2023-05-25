@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.54.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.53.1...@carbon/ibm-products@1.54.0) (2023-05-25)
+
+
+### Features
+
+* **datagrid:** setAllFilters can now be used externally ([#3024](https://github.com/carbon-design-system/ibm-products/issues/3024)) ([1da697d](https://github.com/carbon-design-system/ibm-products/commit/1da697d85fba4fa5e602d57f8d15a18490df71cd))
+
+
+
+
+
 ## [1.53.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.53.0...@carbon/ibm-products@1.53.1) (2023-05-11)
 
 

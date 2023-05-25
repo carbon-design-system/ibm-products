@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/component-usage-report@0.2.1...@carbon/component-usage-report@0.2.2) (2023-05-25)
+
+
+### Bug Fixes
+
+* repository links following rename v1 ([#3005](https://github.com/carbon-design-system/ibm-products/issues/3005)) ([1726bc8](https://github.com/carbon-design-system/ibm-products/commit/1726bc862254950fcb0ad3175a463de48dc9f3fd))
+
+
+
+
+
 ## [0.2.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/component-usage-report@0.2.0...@carbon/component-usage-report@0.2.1) (2022-03-22)
 
 

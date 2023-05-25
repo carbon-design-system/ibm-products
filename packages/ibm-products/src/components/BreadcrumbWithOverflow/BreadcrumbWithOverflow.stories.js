@@ -13,6 +13,12 @@ import { prepareStory } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import styles from './_storybook-styles.scss';
 
+const lastBreadcrumbs = [
+  'A short title',
+  'A slightly longer length title',
+  'Breadcrumb 5 is a longer breadcrumb it could go on for much longer than expected',
+];
+
 export default {
   title: 'IBM Products/Internal/BreadcrumbWithOverflow',
   component: BreadcrumbWithOverflow,
@@ -24,13 +30,8 @@ export default {
     lastBreadcrumb: {
       control: {
         type: 'select',
-        options: [
-          'A short title',
-          'A slightly longer length title',
-          'Breadcrumb 5 is a longer breadcrumb it could go on for much longer than expected',
-        ],
       },
-      defaultValue: 'A short title',
+      options: lastBreadcrumbs,
     },
     lastBreadcrumbIsCurrent: { control: { type: 'boolean' } },
   },
@@ -102,7 +103,7 @@ const Template = (argsIn) => {
     href: isCurrentPage ? null : '/#',
     isCurrentPage: isCurrentPage,
     label: lastBreadcrumb, // wrapping this with a span causes error - "Cannot convert a symbol value to a string" - perhaps ? https://github.com/storybookjs/storybook/issues/11554
-    title: lastBreadcrumb,
+    title: 'Select breadcrumb',
   });
 
   return (
@@ -117,5 +118,6 @@ export const Default = prepareStory(Template, {
     breadcrumbs: breadcrumbItems,
     containerWidth: 500,
     overflowAriaLabel: 'Open and close additional breadcrumb item list.',
+    lastBreadcrumb: lastBreadcrumbs[0],
   },
 });

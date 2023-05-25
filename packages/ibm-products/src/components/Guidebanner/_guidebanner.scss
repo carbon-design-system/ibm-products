@@ -133,19 +133,15 @@
           }
 
           &-title {
-            @include carbon--type-style('productive-heading-02');
+            @include carbon--type-style('productive-heading-01');
 
-            margin: $spacing-05 0 $spacing-03 0;
+            margin: $spacing-05 0 0 0;
           }
 
           &-content {
             @include carbon--type-style('body-long-01');
 
             margin-bottom: $spacing-05;
-
-            &:last-of-type {
-              margin-bottom: 2rem;
-            }
           }
 
           &-buttons {

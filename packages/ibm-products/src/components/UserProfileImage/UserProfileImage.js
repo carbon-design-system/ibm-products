@@ -146,7 +146,7 @@ export let UserProfileImage = React.forwardRef(
           label={tooltipText}
           className={`${blockClass}__tooltip`}
           kind="ghost"
-          align={tooltipAlignment ? tooltipAlignment : 'bottom'}
+          align={tooltipAlignment}
         >
           {renderUserProfileImage()}
         </IconButton>

@@ -27,6 +27,10 @@ const componentName = 'UserProfileImage';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+// Default values for props
+const defaults = {
+  tooltipAlignment: 'bottom',
+};
 /**
  * This is a user profile image component which displays an image, or initials or icon for a user.
  */
@@ -43,7 +47,7 @@ export let UserProfileImage = React.forwardRef(
       size,
       theme,
       tooltipText,
-      tooltipAlignment,
+      tooltipAlignment = defaults.tooltipAlignment,
       // Collect any other property values passed in.
       ...rest
     },

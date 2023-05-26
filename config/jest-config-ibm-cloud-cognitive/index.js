@@ -48,7 +48,7 @@ module.exports = {
   moduleFileExtensions: ['js', 'json', 'node'],
   resolver: require.resolve('./setup/resolver.js'),
   reporters: ['default'],
-  setupFiles: [require.resolve('./setup/setupFiles')],
+  setupFiles: [require.resolve('./setup/setupFiles'), 'jest-canvas-mock'],
   setupFilesAfterEnv: [require.resolve('./setup/setupFilesAfterEnv')],
   snapshotSerializers: [],
   testEnvironment: 'jsdom',

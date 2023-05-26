@@ -74,6 +74,7 @@ const defaults = {
 
     // Novice to pro components not yet reviewed and released:
     NonLinearReading: false,
+    SteppedAnimatedMedia: false,
     /* new component flags here - comment used by generate CLI */
   },
 

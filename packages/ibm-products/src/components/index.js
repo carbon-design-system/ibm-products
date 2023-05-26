@@ -85,3 +85,4 @@ export { EditUpdateCards } from './EditUpdateCards';
 export { InlineEdit } from './InlineEdit';
 export { EditInPlace } from './EditInPlace';
 export { NonLinearReading } from './NonLinearReading';
+export { SteppedAnimatedMedia } from './SteppedAnimatedMedia';

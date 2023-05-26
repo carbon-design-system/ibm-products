@@ -1,10 +1,13 @@
-<!-- Copyright IBM Corp. 2020, 2020
+{/* Copyright IBM Corp. 2020, 2020
 
 This source code is licensed under the Apache-2.0 license found in the
-LICENSE file in the root directory of this source tree. -->
+LICENSE file in the root directory of this source tree. */}
 
-import readme from '../../../README.md';
+import { Meta, Markdown } from '@storybook/blocks';
 
-<Meta title="Overview/Getting started" />
+import ReadMe from '../../../README.md';
 
-<Description markdown={readme} />
+<Meta title="Overview/Getting started"/>
+
+<Markdown>{ReadMe}</Markdown>
+

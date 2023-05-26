@@ -32,7 +32,6 @@ module.exports = {
     },
   },
   features: {
-    legacyMdx1: true, // 👈 Enables MDX v1 support
     // setting storyStoryV7 to false allows the storybook to build
     storyStoreV7: false, // 👈 Opt out of on-demand story loading
   },

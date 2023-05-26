@@ -85,6 +85,7 @@ export const WithActions = prepareStory(Template, {
 
 export default {
   title: 'IBM Products/Patterns/WebTerminal',
+  tags: ['autodocs'],
   parameters: {
     styles,
     /*

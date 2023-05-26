@@ -30,6 +30,19 @@ export const useCreateComponentStepChange = ({
   setCreateComponentActions,
   setModalIsOpen,
 }) => {
+  const continueToNextStep = useCallback(() => {
+    setIsSubmitting(false);
+    setCurrentStep((prev) => {
+      // Find next included step to render
+      // There will always be a next step otherwise we will
+      // have reach the onSubmit
+      do {
+        prev++;
+      } while (!stepData[prev - 1]?.shouldIncludeStep);
+      return prev;
+    });
+  }, [setCurrentStep, setIsSubmitting, stepData]);
+
   // useEffect to handle multi step logic
   useEffect(() => {
     const onUnmount = () => {
@@ -151,17 +164,4 @@ export const useCreateComponentStepChange = ({
     setShouldViewAll,
     setModalIsOpen,
   ]);
-
-  const continueToNextStep = useCallback(() => {
-    setIsSubmitting(false);
-    setCurrentStep((prev) => {
-      // Find next included step to render
-      // There will always be a next step otherwise we will
-      // have reach the onSubmit
-      do {
-        prev++;
-      } while (!stepData[prev - 1]?.shouldIncludeStep);
-      return prev;
-    });
-  }, [setCurrentStep, setIsSubmitting, stepData]);
 };

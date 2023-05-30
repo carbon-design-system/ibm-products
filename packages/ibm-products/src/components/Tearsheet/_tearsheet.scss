@@ -148,12 +148,14 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--wide .#{$block-class}__header {
+    background-color: $layer;
     padding: $spacing-06 $spacing-07;
     border-bottom: 1px solid $border-subtle-01;
     margin: 0;
   }
 
   &.#{$block-class}--narrow .#{$block-class}__header {
+    background-color: $layer;
     padding: $spacing-05;
     border-bottom: 1px solid $border-subtle-01;
     margin: 0;
@@ -270,7 +272,7 @@ $motion-duration: $duration-moderate-02;
   .#{$block-class}__main {
     display: flex;
     flex-direction: row;
-    background-color: $layer;
+    background-color: $background;
     grid-column: 1 / -1;
     grid-row: 1 / -1;
   }

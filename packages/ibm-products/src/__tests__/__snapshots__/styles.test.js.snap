@@ -2741,11 +2741,13 @@ p.c4p--about-modal__copyright-text:first-child {
   padding: 1.5rem 2rem;
   border-bottom: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   margin: 0;
+  background-color: var(--cds-layer);
 }
 .c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__header {
   padding: 1rem;
   border-bottom: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   margin: 0;
+  background-color: var(--cds-layer);
 }
 .c4p--tearsheet .c4p--tearsheet__header-content {
   display: flex;
@@ -2836,7 +2838,7 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--tearsheet .c4p--tearsheet__main {
   display: flex;
   flex-direction: row;
-  background-color: var(--cds-layer);
+  background-color: var(--cds-background, #ffffff);
   grid-column: 1/-1;
   grid-row: 1/-1;
 }

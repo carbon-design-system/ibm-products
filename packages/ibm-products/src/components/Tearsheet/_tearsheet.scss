@@ -148,17 +148,17 @@ $motion-duration: $duration-moderate-02;
   }
 
   &.#{$block-class}--wide .#{$block-class}__header {
-    background-color: $layer;
     padding: $spacing-06 $spacing-07;
     border-bottom: 1px solid $border-subtle-01;
     margin: 0;
+    background-color: $layer;
   }
 
   &.#{$block-class}--narrow .#{$block-class}__header {
-    background-color: $layer;
     padding: $spacing-05;
     border-bottom: 1px solid $border-subtle-01;
     margin: 0;
+    background-color: $layer;
   }
 
   .#{$block-class}__header-content {

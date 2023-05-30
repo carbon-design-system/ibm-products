@@ -68,7 +68,12 @@ export let AddSelectFormControl = ({ item, onClick, selected, type }) => {
           <div className={`${blockClass}-cell-icon`}>{getItemIcon(item)}</div>
         )}
         <div className={`${blockClass}-form-control-label-text`}>
-          <span className={`${blockClass}-cell-title`} id={`control-label-${item.id}`}>{item.title}</span>
+          <span
+            className={`${blockClass}-cell-title`}
+            id={`control-label-${item.id}`}
+          >
+            {item.title}
+          </span>
           {item.subtitle && (
             <span className={`${blockClass}-cell-subtitle`}>
               {item.subtitle}

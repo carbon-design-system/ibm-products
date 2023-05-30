@@ -33,18 +33,18 @@ body {
   @include styles.theme(styles.$white);
 }
 
-:root[storybook-carbon-theme='g10'],
+[storybook-carbon-theme='g10'],
 .sb--use-carbon-theme-g10 {
   @include styles.theme(styles.$g10);
 }
 
-:root[storybook-carbon-theme='g90'],
+[storybook-carbon-theme='g90'],
 .sb--use-carbon-theme-g90 {
   @include styles.theme(styles.$g90);
 }
 
 [storybook-carbon-theme='debug'],
-:root[storybook-carbon-theme='g100'],
+[storybook-carbon-theme='g100'],
 .sb--use-carbon-theme-g100 {
   @include styles.theme(styles.$g100);
 }

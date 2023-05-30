@@ -10,6 +10,8 @@
 import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs';
 import LinkTo from '@storybook/addon-links/react';
 import { themes } from '@storybook/theming';
+import { withCarbonTheme } from '../my-addon/src/decorators/withCarbonTheme';
+import { PARAM_KEY as CARBON_THEME_PARAM_KEY } from '../my-addon/src/constants';
 
 import {
   Column,
@@ -79,6 +81,7 @@ const decorators = [
       </div>
     );
   },
+  withCarbonTheme,
 ];
 
 const makeViewport = (name, width, shadow) => ({
@@ -147,11 +150,6 @@ const parameters = {
     },
   },
 
-  // Optional default Carbon theme.
-  carbonTheme: {
-    theme: 'g10',
-  },
-
   // viewport sizes based on Carbon breakpoints
   viewport: {
     viewports: carbonViewports,
@@ -167,4 +165,8 @@ const argTypes = {
   },
 };
 
-export { argTypes, decorators, parameters, Style };
+const globals = {
+  [CARBON_THEME_PARAM_KEY]: 'g10',
+};
+
+export { argTypes, decorators, globals, parameters, Style };

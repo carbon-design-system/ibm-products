@@ -1783,7 +1783,7 @@ __metadata:
     "@carbon/import-once": 10.7.0
     "@carbon/layout": 10.37.1
     "@carbon/motion": 10.29.0
-    "@carbon/storybook-addon-theme": ^0.22.34
+    "@carbon/storybook-addon-theme": ^0.22.40
     "@carbon/themes": 10.55.1
     "@carbon/type": 10.45.1
     "@storybook/addon-actions": ^6.5.16
@@ -1972,13 +1972,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/storybook-addon-theme@^0.22.34, @carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
-  version: 0.0.0-use.local
-  resolution: "@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme"
+"@carbon/storybook-addon-theme@npm:^0.22.40":
+  version: 0.22.40
+  resolution: "@carbon/storybook-addon-theme@npm:0.22.40"
   dependencies:
-    "@babel/cli": ^7.20.7
-    "@babel/core": ^7.20.12
-    "@babel/preset-react": ^7.18.6
     "@storybook/addons": 6.5.16
     "@storybook/api": 6.5.16
     "@storybook/client-api": 6.5.16
@@ -1988,14 +1985,12 @@ __metadata:
     "@storybook/theming": 6.5.16
     core-js: ^3.28.0
     global: ^4.4.0
-    npm-check-updates: ^16.7.4
-    npm-run-all: ^4.1.5
-    rimraf: ~3 || > 4.1
   peerDependencies:
     react: "*"
     vue: "*"
-  languageName: unknown
-  linkType: soft
+  checksum: d5df609c508a1c10c767ae133fadbf017e6a1f81a965bfb855c8e4f1b39ba8663016c2a9e3c32308b428d8f142237f6b8ac6f2847df2c55dd84d2ceaa9977d56
+  languageName: node
+  linkType: hard
 
 "@carbon/telemetry@npm:0.1.0, @carbon/telemetry@npm:^0.1.0":
   version: 0.1.0

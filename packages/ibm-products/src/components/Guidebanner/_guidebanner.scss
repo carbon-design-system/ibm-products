@@ -1,0 +1,257 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/**
+ * The Guidebanner specifically is theme-agnostic, and so we have to 
+ * use color tokens to keep the colors static instead of theme tokens 
+ * that will change depending on the selected theme.
+ * 
+ * Because of this, we are triggering a *large* amount of linting errors.
+ * So, we're adding 4 "disable" rules for the file instead of 50 
+ * individual rules.
+ */
+
+/* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable carbon/motion-duration-use */
+/* stylelint-disable carbon/theme-token-use */
+/* stylelint-disable declaration-no-important */
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+// Other Carbon settings.
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+
+// Guidebanner uses the following Carbon components:
+// Button, Link
+
+// Guidebanner uses the following Carbon for IBM Products components:
+// TODO: @import(s) of IBM Products component styles used by Guidebanner
+
+@mixin when-collapsed($selector: '&') {
+  .#{$pkg-prefix}--guidebanner__collapsable-collapsed #{$selector} {
+    @content;
+  }
+}
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin guidebanner {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--guidebanner;
+
+  // Each GuidebannerElement is contained in a CarouselItem.
+  $carousel-item: #{$pkg-prefix}--carousel__item;
+
+  .#{$block-class} {
+    $horizontal-margin: rem(52px);
+    $purple-1: #9b63ff;
+    $purple-2: #7f3ae7;
+    $purple-3: #7433e3;
+
+    position: relative;
+    background: linear-gradient(90deg, $blue-90 0%, $purple-70 100%);
+    background-color: $blue-90;
+
+    &__icon-idea {
+      position: absolute;
+      top: $spacing-05;
+      left: $spacing-05;
+
+      path {
+        fill: $gray-10;
+      }
+    }
+
+    &__title {
+      @include carbon--type-style('productive-heading-02');
+
+      padding: $spacing-05 rem(175px) 0 $horizontal-margin;
+      color: $gray-10;
+    }
+
+    // Carbon Button "icon-only" overrides
+    &__close-button {
+      // Force dark theme (i.e. white tooltips)
+      @include carbon--theme($carbon--theme--g100, true);
+
+      position: absolute !important;
+      top: 0;
+      right: 0;
+      width: $spacing-07;
+      height: $spacing-07;
+      min-height: $spacing-07 !important;
+
+      &:active,
+      &:hover {
+        background-color: $purple-3 !important;
+      }
+
+      svg {
+        margin-left: rem(-4px) !important;
+
+        path {
+          fill: $white-0 !important;
+        }
+      }
+    }
+
+    // Specify Carousel look and feel.
+    &__carousel {
+      margin: 0 0 $spacing-05 0;
+      color: $gray-10;
+
+      @include when-collapsed() {
+        margin-bottom: 0;
+      }
+
+      // Each GuidebannerElement is wrapped in a CarouselItem.
+      .#{$carousel-item} {
+        .#{$block-class}__element {
+          display: flex;
+          width: carbon--mini-units(50);
+          max-height: carbon--mini-units(64);
+          flex-flow: column;
+          flex-shrink: 0;
+          padding-left: $horizontal-margin;
+          margin: $spacing-05 0 0 0;
+          opacity: 1;
+          scroll-snap-align: start;
+          transition: max-height 50ms carbon--motion(exit, productive),
+            margin-top 50ms carbon--motion(exit, productive),
+            opacity 300ms carbon--motion(exit, productive);
+
+          @include when-collapsed() {
+            max-height: $spacing-03;
+            margin-top: 0;
+            opacity: 0;
+          }
+
+          &-title {
+            @include carbon--type-style('productive-heading-01');
+
+            margin: $spacing-05 0 0 0;
+          }
+
+          &-content {
+            @include carbon--type-style('body-long-01');
+
+            margin-bottom: $spacing-05;
+          }
+
+          &-buttons {
+            .bx--btn--tertiary {
+              border-color: $white-0;
+              color: $white-0;
+
+              &:active,
+              &:hover {
+                border-color: $white-0;
+                background-color: $white-0;
+                color: $gray-100;
+              }
+            }
+
+            .bx--btn:not(.bx--btn--tertiary) {
+              margin-left: calc(-1 * $spacing-05);
+              color: $blue-30;
+
+              &:active,
+              &:hover {
+                background-color: $purple-2;
+                color: $gray-10;
+              }
+            }
+
+            .#{$block-class}__element-link {
+              color: $blue-30;
+
+              &:visited {
+                color: $blue-30;
+              }
+
+              &:active,
+              &:hover {
+                color: $blue-20;
+              }
+            }
+          }
+        }
+
+        &:last-child {
+          .#{$block-class}__element {
+            width: carbon--mini-units(56);
+            padding-right: $horizontal-margin;
+          }
+        }
+      }
+    }
+
+    &__navigation {
+      display: flex;
+      border-top: rem(1px) solid $purple-60;
+
+      @include when-collapsed() {
+        border-top: none;
+      }
+
+      .#{$block-class}__toggle-button {
+        margin-left: calc($horizontal-margin - rem(18px));
+        color: $blue-30;
+
+        &:active,
+        &:hover {
+          background-color: $purple-3;
+          color: $gray-10;
+        }
+      }
+
+      // Push back and next buttons to the right
+      .#{$block-class}__back-button {
+        margin-left: auto;
+      }
+
+      // Carbon Button (icon-only) overrides
+      .#{$block-class}__back-button,
+      .#{$block-class}__next-button {
+        // Force dark theme (i.e. white tooltips)
+        @include carbon--theme($carbon--theme--g100, true);
+        @include when-collapsed() {
+          display: none !important;
+        }
+
+        &:active,
+        &:hover {
+          background-color: $purple-3;
+        }
+
+        svg path {
+          fill: $white-0 !important;
+        }
+
+        &--disabled svg path {
+          fill: $purple-1 !important;
+        }
+      }
+    }
+
+    // Carbon Button tooltip overrides
+    &__close-button,
+    &__back-button,
+    &__next-button {
+      &::before {
+        // Force tooltip's caret to look like it's connected to its label.
+        z-index: 6001 !important;
+      }
+    }
+  }
+}
+
+@include exports('guidebanner') {
+  @include guidebanner;
+}

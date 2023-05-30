@@ -16,9 +16,6 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
-// Carbon and package components we use.
-/* TODO: @import(s) of carbon components and other package components. */
-
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--stepped-animated-media`;
 const componentName = 'SteppedAnimatedMedia';
@@ -71,8 +68,6 @@ export let SteppedAnimatedMedia = React.forwardRef(
           const jsonResponse = rawResponse.map((el) => el.json());
           const fileData = await Promise.all(jsonResponse);
           setJsonData(fileData);
-        } else {
-          throw new Error(`Lottie files must be json formatted`);
         }
       }
       loadArtifact();
@@ -101,6 +96,10 @@ export let SteppedAnimatedMedia = React.forwardRef(
 
       return () => animRef.current?.destroy();
     }, [jsonData, localRef, playStep]);
+
+    if (!jsonData) {
+      return null;
+    }
 
     return (
       <div

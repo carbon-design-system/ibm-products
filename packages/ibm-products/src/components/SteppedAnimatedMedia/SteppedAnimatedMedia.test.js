@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
-
+import { setupJestCanvasMock } from 'jest-canvas-mock';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
@@ -107,7 +107,12 @@ global.fetch = jest.fn(() =>
   })
 );
 
-describe.skip(componentName, () => {
+describe(componentName, () => {
+  beforeEach(() => {
+    fetch.mockClear();
+    setupJestCanvasMock();
+  });
+
   it('renders a component SteppedAnimatedMedia', async () => {
     render(
       <SteppedAnimatedMedia filePaths={['./assets/illustrations/test.json']} />

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.4](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.43.3...@carbon/ibm-cloud-cognitive-core@0.43.4) (2023-05-30)
+
+
+### Bug Fixes
+
+* remove storybook-addon-theme from `main_v1` to address failing v1 release action ([#3052](https://github.com/carbon-design-system/ibm-products/issues/3052)) ([32d621a](https://github.com/carbon-design-system/ibm-products/commit/32d621ad808a7f3552dbe00ff29b5ec3675560c0))
+
+
+
+
+
 ## [0.43.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.43.2...@carbon/ibm-cloud-cognitive-core@0.43.3) (2023-05-30)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

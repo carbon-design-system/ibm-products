@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "0.44.2",
+  "version": "0.44.3",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -33,7 +33,7 @@
     "@carbon/layout": "^11.13.0",
     "@carbon/motion": "^11.10.0",
     "@carbon/react": "~1.28.0",
-    "@carbon/storybook-addon-theme": "^0.22.39",
+    "@carbon/storybook-addon-theme": "^0.22.40",
     "@carbon/themes": "^11.18.0",
     "@carbon/type": "^11.17.0",
     "@storybook/addon-actions": "^6.5.16",

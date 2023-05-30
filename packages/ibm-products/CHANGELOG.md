@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.0.1...@carbon/ibm-products@2.1.0) (2023-05-30)
+
+
+### Bug Fixes
+
+* **NotificationPanel:** improve responsiveness ([#3041](https://github.com/carbon-design-system/ibm-products/issues/3041)) ([5b3051b](https://github.com/carbon-design-system/ibm-products/commit/5b3051ba45fe0166ea02f7973b92574f55017f43))
+* **UserProfileImage:** tooltip position ([#3044](https://github.com/carbon-design-system/ibm-products/issues/3044)) ([e1476c6](https://github.com/carbon-design-system/ibm-products/commit/e1476c63900c28db685e0df9b7ee53c072a7bf6f))
+
+
+### Features
+
+* **datagrid:** setAllFilters can now be used externally ([#3024](https://github.com/carbon-design-system/ibm-products/issues/3024)) ([#3042](https://github.com/carbon-design-system/ibm-products/issues/3042)) ([fc9af2a](https://github.com/carbon-design-system/ibm-products/commit/fc9af2a67b1de33f8e941bea6353a67542c35af6))
+
+
+
+
+
 ## [2.0.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.0.0-rc.39...@carbon/ibm-products@2.0.1) (2023-05-17)
 
 **Note:** Version bump only for package @carbon/ibm-products

@@ -127,13 +127,14 @@ export let AddSelectRow = ({
   const hasModifiers = modifiers?.options?.length > 0;
   const tabIndex = getTabIndex();
   const selected = isSelected();
+  const expanded = parentSelected === item.id;
 
   return (
     <div
       className={cx(`${blockClass}-row`, {
         [`${blockClass}-row--selected`]: isSelected(),
         [`${blockClass}-row-meta--selected`]: isInMetaPanel(item.id),
-        [`${blockClass}-row--active`]: parentSelected === item.id,
+        [`${blockClass}-row--active`]: expanded,
       })}
       onKeyDown={onSelectKeyDown}
       tabIndex={tabIndex}
@@ -142,6 +143,7 @@ export let AddSelectRow = ({
       aria-selected={selected}
       aria-posinset={index}
       aria-setsize={setSize}
+      aria-expanded={expanded}
     >
       <div className={`${blockClass}-cell`} role="gridcell">
         <div className={`${blockClass}-cell-wrapper`}>

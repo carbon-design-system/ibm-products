@@ -35,6 +35,7 @@ export let AddSelectRow = ({
   setMultiSelection,
   setParentSelected,
   setSingleSelection,
+  setSize,
   singleSelection,
 }) => {
   const ref = useRef(null);
@@ -130,7 +131,7 @@ export let AddSelectRow = ({
   return (
     <div
       className={cx(`${blockClass}-row`, {
-        [`${blockClass}-row--selected`]: isSelected(item.id),
+        [`${blockClass}-row--selected`]: isSelected(),
         [`${blockClass}-row-meta--selected`]: isInMetaPanel(item.id),
         [`${blockClass}-row--active`]: parentSelected === item.id,
       })}
@@ -138,8 +139,11 @@ export let AddSelectRow = ({
       tabIndex={tabIndex}
       ref={ref}
       role="row"
+      aria-selected={selected}
+      aria-posinset={index}
+      aria-setsize={setSize}
     >
-      <div className={`${blockClass}-cell`}>
+      <div className={`${blockClass}-cell`} role="cell">
         <div className={`${blockClass}-cell-wrapper`}>
           {multi ? (
             <>
@@ -156,7 +160,7 @@ export let AddSelectRow = ({
                     type="inline"
                     items={modifiers.options}
                     label={modifiers.label}
-                    disabled={!isSelected(item.id)}
+                    disabled={!isSelected()}
                     className={`${blockClass}-dropdown`}
                     initialSelectedItem={item[modifiers.id]}
                     onChange={({ selectedItem }) =>
@@ -185,6 +189,8 @@ export let AddSelectRow = ({
               onClick={onNavigateItem}
               kind="ghost"
               size="sm"
+              tabIndex={-1}
+              aria-hidden={true}
             />
           )}
           {item.meta && (
@@ -226,6 +232,7 @@ AddSelectRow.propTypes = {
   setMultiSelection: PropTypes.func,
   setParentSelected: PropTypes.func,
   setSingleSelection: PropTypes.func,
+  setSize: PropTypes.number,
   singleSelection: PropTypes.string,
 };
 

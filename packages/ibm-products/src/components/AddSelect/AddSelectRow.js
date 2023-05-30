@@ -143,7 +143,7 @@ export let AddSelectRow = ({
       aria-posinset={index}
       aria-setsize={setSize}
     >
-      <div className={`${blockClass}-cell`} role="cell">
+      <div className={`${blockClass}-cell`} role="gridcell">
         <div className={`${blockClass}-cell-wrapper`}>
           {multi ? (
             <>

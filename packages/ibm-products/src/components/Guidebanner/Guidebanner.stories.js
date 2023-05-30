@@ -20,7 +20,6 @@ import {
   GuidebannerElementButton,
   GuidebannerElementLink,
 } from '.';
-import { Button } from 'carbon-components-react';
 
 import mdx from './Guidebanner.mdx';
 
@@ -58,15 +57,14 @@ const defaultProps = {
 };
 
 const DefaultButtonLarge = () => (
-  <Button
-    kind="tertiary"
-    size="md"
+  <GuidebannerElementButton
+    type="crossroads"
     onClick={() => {
       alert('Clicked the button');
     }}
   >
-    Click Me
-  </Button>
+    Show Me
+  </GuidebannerElementButton>
 );
 
 const DefaultButtonSmall = () => (
@@ -75,7 +73,7 @@ const DefaultButtonSmall = () => (
       alert('Clicked the button');
     }}
   >
-    Show me
+    Click me
   </GuidebannerElementButton>
 );
 
@@ -180,7 +178,7 @@ export const fewItems = prepareStory(Template, {
         <GuidebannerElement
           title="Use-case specific heading"
           description="Use-case specific content related to the heading that explains the concept or adds context. Use-case specific content related to the heading that explains the concept or adds context."
-          button={<DefaultButtonSmall />}
+          button={<DefaultButtonLarge />}
         />
         <GuidebannerElement
           title="Use-case specific heading"

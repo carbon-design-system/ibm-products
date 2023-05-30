@@ -1780,7 +1780,7 @@ __metadata:
     "@carbon/import-once": 10.7.0
     "@carbon/layout": 10.37.1
     "@carbon/motion": 10.29.0
-    "@carbon/storybook-addon-theme": ^0.22.34
+    "@carbon/storybook-addon-theme": ^0.22.35
     "@carbon/themes": 10.55.1
     "@carbon/type": 10.45.1
     "@storybook/addon-actions": ^6.5.16
@@ -1969,7 +1969,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/storybook-addon-theme@^0.22.34, @carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
+"@carbon/storybook-addon-theme@^0.22.35, @carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
   version: 0.0.0-use.local
   resolution: "@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme"
   dependencies:

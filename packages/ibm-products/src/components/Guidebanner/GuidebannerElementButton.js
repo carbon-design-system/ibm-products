@@ -12,6 +12,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Button } from 'carbon-components-react';
+import { Crossroads16 } from '@carbon/icons-react';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
@@ -24,16 +25,32 @@ const blockClass = `${pkg.prefix}--guidebanner__element-button`;
 const componentName = 'GuidebannerElementButton';
 
 /**
- * A small button styled specifically for the GuidebannerElement.
+ * One of two buttons styled specifically for the GuidebannerElement.
  */
-const GuidebannerElementButton = ({ children, className, ...rest }) => {
+const GuidebannerElementButton = ({ children, className, type, ...rest }) => {
+  if (type === 'crossroads') {
+    return (
+      <Button
+        className={cx(blockClass, className)}
+        iconDescription={'Crossroads'}
+        kind="tertiary"
+        renderIcon={Crossroads16}
+        role="button"
+        size="md"
+        {...getDevtoolsProps(componentName)}
+      >
+        {children}
+      </Button>
+    );
+  }
+
   return (
     <Button
       {...rest}
       className={cx(blockClass, className)}
       kind="ghost"
       role="button"
-      size="sm"
+      size="md"
       {...getDevtoolsProps(componentName)}
     >
       {children}
@@ -54,6 +71,13 @@ GuidebannerElementButton.propTypes = {
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+
+  /**
+   * If type is "crossroads", return a button with the "crossroads" icon.
+   *
+   * The "crossroads" button should only be used with the first carousel item.
+   */
+  type: PropTypes.string,
 
   /* TODO: add types and DocGen for all props. */
 };

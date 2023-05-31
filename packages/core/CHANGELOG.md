@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.43.4](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.43.3...@carbon/ibm-cloud-cognitive-core@0.43.4) (2023-05-30)
+
+
+### Bug Fixes
+
+* remove storybook-addon-theme from `main_v1` to address failing v1 release action ([#3052](https://github.com/carbon-design-system/ibm-products/issues/3052)) ([32d621a](https://github.com/carbon-design-system/ibm-products/commit/32d621ad808a7f3552dbe00ff29b5ec3675560c0))
+
+
+
+
+
+## [0.43.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.43.2...@carbon/ibm-cloud-cognitive-core@0.43.3) (2023-05-30)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+## [0.43.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.43.1...@carbon/ibm-cloud-cognitive-core@0.43.2) (2023-05-25)
+
+**Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core
+
+
+
+
+
+## [0.43.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.43.0...@carbon/ibm-cloud-cognitive-core@0.43.1) (2023-05-25)
+
+
+### Bug Fixes
+
+* repository links following rename v1 ([#3005](https://github.com/carbon-design-system/ibm-products/issues/3005)) ([1726bc8](https://github.com/carbon-design-system/ibm-products/commit/1726bc862254950fcb0ad3175a463de48dc9f3fd))
+
+
+
+
+
 # [0.43.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.42.0...@carbon/ibm-cloud-cognitive-core@0.43.0) (2023-05-04)
 
 

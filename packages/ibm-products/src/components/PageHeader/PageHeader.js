@@ -447,11 +447,8 @@ export let PageHeader = React.forwardRef(
       }
     }, [collapseHeader, metrics.headerOffset, metrics.headerTopValue]);
 
-    useResizeObserver(sizingContainerRef, {
-      callback: handleResizeActionBarColumn,
-    });
-
-    useResizeObserver(headerRef, { callback: handleResize });
+    useResizeObserver(sizingContainerRef, handleResizeActionBarColumn);
+    useResizeObserver(headerRef, handleResize);
 
     // Determine what form of title to display in the breadcrumb
     let breadcrumbItemForTitle = utilGetBreadcrumbItemForTitle(

@@ -686,7 +686,7 @@ export let SidePanel = React.forwardRef(
 
     const contentRef = ref || sidePanelRef;
 
-    useResizeObserver(contentRef, { callback: handleResize });
+    useResizeObserver(contentRef, handleResize);
 
     return (
       <AnimatePresence>

@@ -196,8 +196,9 @@ export let ActionBar = React.forwardRef(
       checkFullyVisibleItems();
     };
 
-    useResizeObserver(sizingRef, { callback: handleResize });
-    useResizeObserver(localRef, { callback: handleResize });
+    // // resize of the items
+    useResizeObserver(sizingRef, handleResize);
+    useResizeObserver(localRef, handleResize);
 
     return (
       <div {...rest} className={cx([blockClass, className])} ref={localRef}>

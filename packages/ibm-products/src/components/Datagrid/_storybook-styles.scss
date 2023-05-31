@@ -114,3 +114,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   margin-right: $spacing-03;
   background-color: $field-01;
 }
+
+.#{c4p-settings.$carbon-prefix}--body--with-modal-open {
+  .#{$block-class}__mobile-toolbar-modal.cds--modal {
+    top: -$spacing-07;
+    left: -$spacing-07;
+    width: 100vw;
+  }
+}

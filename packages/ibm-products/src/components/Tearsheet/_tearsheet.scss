@@ -277,6 +277,10 @@ $motion-duration: $duration-moderate-02;
     grid-row: 1 / -1;
   }
 
+  .#{$block-class}--narrow .#{$block-class}__main {
+    background-color: $layer;
+  }
+
   .#{$block-class}__main .#{$block-class}__influencer {
     border-right: none;
     border-left: 1px solid $border-subtle-01;

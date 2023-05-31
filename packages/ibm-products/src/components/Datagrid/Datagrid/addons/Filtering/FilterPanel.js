@@ -50,11 +50,8 @@ const FilterPanel = ({
   secondaryActionLabel = 'Cancel',
   searchLabelText = 'Filter search',
   searchPlaceholder = 'Find filters',
-  initialFilters = [],
+  reactTableFiltersState = [],
 }) => {
-  //  Save the initial filters we only need the filters once
-  const initialFiltersRef = useRef(initialFilters);
-
   /** State */
   const [showDividerLine, setShowDividerLine] = useState(false);
 
@@ -62,16 +59,18 @@ const FilterPanel = ({
     filtersState,
     prevFiltersObjectArrayRef,
     prevFiltersRef,
-    revertToPreviousFilters,
+    cancel,
     reset,
     renderFilter,
     filtersObjectArray,
+    lastAppliedFilters,
   } = useFilters({
     updateMethod,
     filters: filterSections,
     setAllFilters,
     variation: PANEL,
-    initialFilters: initialFiltersRef.current,
+    reactTableFiltersState,
+    onCancel,
   });
 
   /** Refs */
@@ -95,14 +94,9 @@ const FilterPanel = ({
   const { panelOpen, setPanelOpen } = useContext(FilterContext);
 
   /** Methods */
-  const closePanel = () => setPanelOpen(false);
-
-  const cancel = () => {
-    // Reverting to previous filters only applies when using batch actions
-    if (updateMethod === BATCH) {
-      revertToPreviousFilters();
-      onCancel();
-    }
+  const closePanel = () => {
+    cancel();
+    setPanelOpen(false);
   };
 
   const apply = () => {
@@ -115,6 +109,9 @@ const FilterPanel = ({
     // updates the ref so next time the flyout opens we have records of the previous filters
     prevFiltersRef.current = JSON.stringify(filtersState);
     prevFiltersObjectArrayRef.current = JSON.stringify(filtersObjectArray);
+
+    // Update the last applied filters
+    lastAppliedFilters.current = JSON.stringify(filtersObjectArray);
   };
 
   const renderActionSet = () => {
@@ -277,22 +274,22 @@ FilterPanel.propTypes = {
   closeIconDescription: PropTypes.string,
   filterPanelMinHeight: PropTypes.number,
   filterSections: PropTypes.array,
-  /**
-   * Filters that should be applied on load
-   */
-  initialFilters: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      value: PropTypes.any.isRequired,
-    })
-  ),
   onApply: PropTypes.func,
   onCancel: PropTypes.func,
   onPanelClose: PropTypes.func,
   onPanelOpen: PropTypes.func,
   open: PropTypes.bool,
   primaryActionLabel: PropTypes.string,
+  /**
+   * Filters from react table's state
+   */
+  reactTableFiltersState: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      value: PropTypes.any.isRequired,
+    })
+  ),
   searchLabelText: PropTypes.string,
   searchPlaceholder: PropTypes.string,
   secondaryActionLabel: PropTypes.string,

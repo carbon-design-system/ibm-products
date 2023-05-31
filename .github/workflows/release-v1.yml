@@ -1,4 +1,4 @@
-name: Releases @carbon/ibm-products with v10 support # Builds and releases @carbon/v10 supported version of @carbon/ibm-products
+name: v1 release # Builds and releases @carbon/v10 supported version of @carbon/ibm-products
 
 on:
   workflow_dispatch:
@@ -41,12 +41,12 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
         run:
-          yarn lerna publish --dist-tag v1-latest --no-verify-access
-          --create-release --yes github
+          yarn lerna publish --dist-tag v1-latest --conventional-commits
+          --create-release github --yes
 
       - name: Rename to ibm-cloud-cognitive for legacy publish
         run:
-          yarn json -I -f packages/cloud-cognitive/package.json -e
+          yarn json -I -f packages/ibm-products/package.json -e
           'this.name="@carbon/ibm-cloud-cognitive"'
 
       # Run yarn again after renaming package, required after move to yarn berry
@@ -65,5 +65,5 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
         run:
-          yarn lerna publish from-package --dist-tag latest-v1
-          --no-verify-access --yes
+          yarn lerna publish from-package --dist-tag v1-latest
+          --yes

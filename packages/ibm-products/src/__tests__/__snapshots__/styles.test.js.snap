@@ -4312,7 +4312,7 @@ button.c4p--add-select__global-filter-toggle--open {
   top: 3rem;
   right: 0;
   overflow: auto;
-  min-width: 22.75rem;
+  min-width: 20rem;
   max-width: 22.75rem;
   min-height: 38.5rem;
   max-height: 38.5rem;

@@ -49,6 +49,21 @@ export default {
       },
       options: ['xl', 'lg', 'md'],
     },
+    tooltipAlignment: {
+      control: {
+        type: 'select',
+      },
+      options: [
+        'top',
+        'top-left',
+        'top-right',
+        'bottom',
+        'bottom-left',
+        'bottom-right',
+        'left',
+        'right',
+      ],
+    },
   },
   parameters: {
     // styles,

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.54.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.54.0...@carbon/ibm-products@1.54.1) (2023-05-31)
+
+
+### Bug Fixes
+
+* resize observer loops v1 ([#3036](https://github.com/carbon-design-system/ibm-products/issues/3036)) ([c7d72fd](https://github.com/carbon-design-system/ibm-products/commit/c7d72fd44cfc6804e5272cf78c42f83866fe6fa7))
+
+
+
+
+
 # [1.54.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.53.1...@carbon/ibm-products@1.54.0) (2023-05-25)
 
 

@@ -2842,6 +2842,9 @@ p.c4p--about-modal__copyright-text:first-child {
   grid-column: 1/-1;
   grid-row: 1/-1;
 }
+.c4p--tearsheet.c4p--tearsheet--narrow .c4p--tearsheet__main {
+  background-color: var(--cds-layer);
+}
 .c4p--tearsheet .c4p--tearsheet__main .c4p--tearsheet__influencer {
   border-right: none;
   border-left: 1px solid var(--cds-border-subtle-01, #c6c6c6);

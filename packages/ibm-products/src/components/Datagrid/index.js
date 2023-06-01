@@ -26,3 +26,4 @@ export { default as useInlineEdit } from './useInlineEdit';
 export { default as useEditableCell } from './useEditableCell';
 export { default as useFiltering } from './useFiltering';
 export { getAutoSizedColumnWidth } from './utils/getAutoSizedColumnWidth';
+export { FilterContext } from './Datagrid/addons/Filtering/FilterProvider';

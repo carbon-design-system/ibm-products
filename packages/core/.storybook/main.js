@@ -34,7 +34,7 @@ module.exports = {
   },
   features: {
     // setting storyStoryV7 to false allows the storybook to build
-    storyStoreV7: false, // 👈 Opt out of on-demand story loading
+    storyStoreV7: false, // 👈 Opt out of on-demand story loading - problems https://github.com/storybookjs/storybook/issues/21696
   },
   stories: [
     '../../ibm-products/+(docs|src)/**/*+(-story|.stories).*',

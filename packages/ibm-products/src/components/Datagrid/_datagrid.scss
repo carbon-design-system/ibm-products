@@ -35,7 +35,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   }
 
   .#{c4p-settings.$carbon-prefix}--overflow-menu-options
-    > .c4p--datagrid__row-size-dropdown {
+    > .#{c4p-settings.$pkg-prefix}--datagrid__row-size-dropdown {
     left: $spacing-01;
     width: 112px;
   }

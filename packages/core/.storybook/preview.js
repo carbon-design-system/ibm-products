@@ -10,11 +10,11 @@
 import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs';
 import LinkTo from '@storybook/addon-links/react';
 import { themes } from '@storybook/theming';
-import { withCarbonTheme } from '../../../config/storybook-addon-carbon-theme/withCarbonTheme';
+import { withCarbonTheme } from '@carbon/storybook-addon-theme/withCarbonTheme';
 import {
   PARAM_KEY as CARBON_THEME_PARAM_KEY,
   CARBON_THEMES,
-} from '../../../config/storybook-addon-carbon-theme/constants';
+} from '@carbon/storybook-addon-theme/constants';
 
 import {
   Column,

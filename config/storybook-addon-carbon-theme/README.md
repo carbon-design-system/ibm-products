@@ -44,8 +44,8 @@ module.exports = {
 `.storybook/preview.js`:
 
 ```js
-import { withCarbonTheme } from '../../../config/storybook-addon-carbon-theme/withCarbonTheme';
-import { PARAM_KEY as CARBON_THEME_PARAM_KEY, CARBON_THEMES } from '../../../config/storybook-addon-carbon-theme/constants';
+import { withCarbonTheme } from '@carbon/storybook-addon-theme/withCarbonTheme';
+import { PARAM_KEY as CARBON_THEME_PARAM_KEY, CARBON_THEMES } from '@carbon/storybook-addon-theme/constants';
 
 const decorators [
   withCarbonTheme;

@@ -27,6 +27,10 @@ const componentName = 'UserProfileImage';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
+// Default values for props
+const defaults = {
+  tooltipAlignment: 'bottom',
+};
 /**
  * This is a user profile image component which displays an image, or initials or icon for a user.
  */
@@ -43,6 +47,7 @@ export let UserProfileImage = React.forwardRef(
       size,
       theme,
       tooltipText,
+      tooltipAlignment = defaults.tooltipAlignment,
       // Collect any other property values passed in.
       ...rest
     },
@@ -134,7 +139,6 @@ export let UserProfileImage = React.forwardRef(
         <FillItem />
       </div>
     );
-
     return (
       FillItem &&
       (tooltipText ? (
@@ -142,6 +146,7 @@ export let UserProfileImage = React.forwardRef(
           label={tooltipText}
           className={`${blockClass}__tooltip`}
           kind="ghost"
+          align={tooltipAlignment}
         >
           {renderUserProfileImage()}
         </IconButton>
@@ -216,6 +221,20 @@ UserProfileImage.propTypes = {
    * Set theme in which the component will be rendered
    */
   theme: PropTypes.oneOf(['light', 'dark']).isRequired,
+
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  tooltipAlignment: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'right',
+  ]),
 
   /**
    * Pass in the display name to have it shown on hover

@@ -88,5 +88,4 @@ export { decorators, globals }
 .sb--use-carbon-theme-g100 {
   @include styles.theme(styles.$g100);
 }
-
 ```

@@ -65,6 +65,7 @@ export let ButtonMenu = React.forwardRef(
         className={cx(
           blockClass, // Apply the block class to the main HTML element
           className, // Apply any supplied class names to the main HTML element.
+          `${carbonPrefix}--btn--${size}`,
           {
             [`${blockClass}__wrapper--${kind}`]: kind,
           }

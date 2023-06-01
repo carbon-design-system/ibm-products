@@ -43,13 +43,13 @@
     "vue": "*"
   },
   "dependencies": {
-    "@storybook/addons": "^7.0.12",
-    "@storybook/api": "^7.0.12",
-    "@storybook/client-api": "^7.0.12",
-    "@storybook/client-logger": "^7.0.12",
-    "@storybook/components": "^7.0.12",
-    "@storybook/core-events": "^7.0.12",
-    "@storybook/theming": "^7.0.12",
+    "@storybook/addons": "^7.0.18",
+    "@storybook/api": "^7.0.18",
+    "@storybook/client-api": "^7.0.18",
+    "@storybook/client-logger": "^7.0.18",
+    "@storybook/components": "^7.0.18",
+    "@storybook/core-events": "^7.0.18",
+    "@storybook/theming": "^7.0.18",
     "core-js": "^3.28.0",
     "global": "^4.4.0"
   },

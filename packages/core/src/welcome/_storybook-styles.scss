@@ -1,0 +1,62 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../../ibm-products/src/global/styles/project-settings';
+@import '@carbon/layout/scss/layout';
+@import '@carbon/colors/scss/colors';
+
+.welcome__container {
+  @include carbon--theme($carbon--theme--g10, true);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+  padding: $spacing-09;
+  background-attachment: fixed;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  background-color: $blue-10;
+  background-position: center left;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  color: $black-100;
+}
+
+.welcome__header {
+  margin-bottom: $spacing-09;
+}
+
+.welcome__heading {
+  @include carbon--type-style('productive-heading-07');
+}
+
+.welcome__subtitle {
+  @include carbon--type-style('productive-heading-05');
+}
+
+.welcome__tag--xl.#{$carbon-prefix}--tag {
+  @include carbon--type-style('productive-heading-03');
+
+  padding-right: $spacing-04;
+  padding-left: $spacing-04;
+  border-radius: $spacing-06;
+  margin-top: $spacing-06;
+}
+
+.welcome__links {
+  display: flex;
+  flex-direction: column;
+}
+
+.welcome__link.#{$carbon-prefix}--link {
+  margin-right: auto;
+  margin-bottom: $spacing-03;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  color: $blue-60;
+}

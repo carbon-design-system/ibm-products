@@ -64,20 +64,16 @@ export let ButtonMenu = React.forwardRef(
         }
         className={cx(
           blockClass, // Apply the block class to the main HTML element
-          className // Apply any supplied class names to the main HTML element.
+          className, // Apply any supplied class names to the main HTML element.
+          {
+            [`${blockClass}__wrapper--${kind}`]: kind,
+          }
         )}
         aria-label={menuAriaLabel}
         menuOptionsClass={cx(`${blockClass}__options`, menuOptionsClass)}
         size={size}
         renderIcon={() => (
-          <div
-            className={cx([
-              `${blockClass}__trigger`,
-              `${carbonPrefix}--btn`,
-              `${carbonPrefix}--btn--${kind}`,
-              `${carbonPrefix}--btn--${size}`,
-            ])}
-          >
+          <div className={cx(`${blockClass}__trigger`)}>
             {label}
             {Icon && (
               <Icon

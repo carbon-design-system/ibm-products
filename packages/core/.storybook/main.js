@@ -23,7 +23,7 @@ module.exports = {
     },
     '@storybook/addon-viewport',
     '@storybook/addon-mdx-gfm',
-    '../my-addon/src/preset.js',
+    '../../../config/storybook-addon-carbon-theme/preset.js',
   ],
   framework: {
     name: '@storybook/react-webpack5',

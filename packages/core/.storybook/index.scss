@@ -28,9 +28,12 @@ body {
   background-color: $background;
 }
 
-:root,
-.sb--use-carbon-theme-white {
+[storybook-carbon-theme] {
   @include styles.theme(styles.$white);
+
+  /* make sure background and color are set if theme in use */
+  background-color: $background;
+  color: $text-primary;
 }
 
 [storybook-carbon-theme='g10'],

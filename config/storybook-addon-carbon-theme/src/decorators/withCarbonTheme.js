@@ -1,3 +1,9 @@
+/**
+ * Copyright IBM Corp. 2023, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import { useEffect } from '@storybook/preview-api';
 import { PARAM_KEY } from '../constants';
 
@@ -16,8 +22,6 @@ export const withCarbonTheme = (StoryFn, context) => {
 
     const rootElements = document.querySelectorAll(selector);
     rootElements.forEach((rootElement) => {
-      console.log('xxxxx 1', globalCarbonTheme, storyCarbonTheme);
-      console.log(`Setting theme to ${globalCarbonTheme ?? storyCarbonTheme}`);
       rootElement.setAttribute(
         'storybook-carbon-theme',
         globalCarbonTheme ?? storyCarbonTheme

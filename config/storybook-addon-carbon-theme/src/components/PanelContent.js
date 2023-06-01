@@ -1,17 +1,19 @@
+/**
+ * Copyright IBM Corp. 2023, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 import React from 'react';
 import { Form } from '@storybook/components';
 import PropTypes from 'prop-types';
+import { CARBON_THEMES } from '../constants';
 
-/**
- * Checkout https://github.com/storybookjs/storybook/blob/next/code/addons/jest/src/components/Panel.tsx
- * for a real world example
- */
 export const PanelContent = ({ theme, onChange }) => {
-  const themes = ['white', 'g10', 'g90', 'g100'];
+  const themes = Object.values(CARBON_THEMES);
 
   return (
     <div>
-      Hi {theme}
       <Form>
         <Form.Field label="Select Carbon theme:">
           <Form.Select

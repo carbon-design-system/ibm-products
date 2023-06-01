@@ -116,7 +116,7 @@ StackblitzLink.propTypes = {
  */
 export const getSelectedCarbonTheme = () => {
   const themeId = document
-    .querySelector('html')
+    .querySelector('[storybook-carbon-theme]')
     .getAttribute('storybook-carbon-theme');
   return themeId === 'g90' || themeId === 'g100' ? 'dark' : 'light';
 };

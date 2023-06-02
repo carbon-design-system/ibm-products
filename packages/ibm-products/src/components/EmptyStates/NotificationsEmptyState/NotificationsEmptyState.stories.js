@@ -9,13 +9,16 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
 // import mdx from './NotificationsEmptyState.mdx';
-import { prepareStory } from '../../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../../global/js/utils/story-helper';
 import { NotificationsEmptyState } from '.';
 
 // import styles from '../_index.scss';
 
 export default {
-  title: 'IBM Products/Patterns/NotificationsEmptyState',
+  title: getStoryTitle(NotificationsEmptyState.displayName),
   component: NotificationsEmptyState,
   tags: ['autodocs'],
   parameters: {

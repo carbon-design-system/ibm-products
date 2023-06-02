@@ -9,7 +9,10 @@
 import React, { useState } from 'react';
 import { Add } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import { prepareStory } from '../../../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../../../global/js/utils/story-helper';
 import { Datagrid, useDatagrid, useFiltering } from '../../index';
 import styles from '../../_storybook-styles.scss';
 // import mdx from '../../Datagrid.mdx';
@@ -20,7 +23,7 @@ import { StatusIcon } from '../../../StatusIcon';
 import { pkg } from '../../../../settings';
 
 export default {
-  title: 'IBM Products/Components/Datagrid/Extensions/Filtering/Flyout',
+  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Flyout`,
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

@@ -9,7 +9,10 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
 import CustomIllustration from './story_assets/empty-state-bright-magnifying-glass.svg';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 // import mdx from './EmptyState.mdx';
 
 import {
@@ -25,7 +28,7 @@ import {
 // import styles from './_storybook-styles.scss';
 
 export default {
-  title: 'IBM Products/Patterns/EmptyState',
+  title: getStoryTitle(EmptyState.displayName),
   component: EmptyState,
   tags: ['autodocs'],
   subcomponents: {

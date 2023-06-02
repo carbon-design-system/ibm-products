@@ -9,7 +9,10 @@
 import React, { useState } from 'react';
 import { Add, Edit, TrashCan, Checkmark } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import { prepareStory } from '../../../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -27,7 +30,7 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { pkg } from '../../../../settings';
 
 export default {
-  title: 'IBM Products/Components/Datagrid/Extensions/RowActionButtons',
+  title: getStoryTitle(RowActionButtons.displayName),
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

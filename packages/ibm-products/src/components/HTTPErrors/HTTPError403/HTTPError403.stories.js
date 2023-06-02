@@ -7,13 +7,16 @@
 
 import React from 'react';
 import { HTTPError403 } from '.';
-import { prepareStory } from '../../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../../global/js/utils/story-helper';
 
 // import page from './HTTPError403.mdx';
 // import styles from '../_storybook-styles.scss';
 
 export default {
-  title: 'IBM Products/Patterns/HTTPError403',
+  title: getStoryTitle(HTTPError403.displayName),
   component: HTTPError403,
   tags: ['autodocs'],
   parameters: {

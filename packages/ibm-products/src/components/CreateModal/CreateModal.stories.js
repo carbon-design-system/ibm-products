@@ -21,14 +21,17 @@ import {
 } from '@carbon/react';
 
 import { pkg } from '../../settings';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { CreateModal } from '.';
 // import mdx from './CreateModal.mdx';
 
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: 'IBM Products/Patterns/CreateModal',
+  title: getStoryTitle(CreateModal.displayName),
   component: CreateModal,
   tags: ['autodocs'],
   parameters: {

@@ -9,7 +9,10 @@ import React from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
 // import mdx from './ButtonMenu.mdx';
@@ -19,7 +22,7 @@ import { ButtonMenu, ButtonMenuItem } from '.';
 import { Add } from '@carbon/react/icons';
 
 export default {
-  title: 'IBM Products/Internal/ButtonMenu',
+  title: getStoryTitle(ButtonMenu.displayName),
   component: ButtonMenu,
   tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.

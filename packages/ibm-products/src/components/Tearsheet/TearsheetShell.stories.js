@@ -8,14 +8,17 @@
 import React, { useRef } from 'react';
 
 import styles from './_storybook-styles.scss';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { TearsheetShell, deprecatedProps } from './TearsheetShell';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
 
 // import mdx from './TearsheetShell.mdx';
 
 export default {
-  title: 'IBM Products/Components/TearsheetShell',
+  title: getStoryTitle(TearsheetShell.displayName),
   component: TearsheetShell,
   tags: ['autodocs'],
   parameters: {

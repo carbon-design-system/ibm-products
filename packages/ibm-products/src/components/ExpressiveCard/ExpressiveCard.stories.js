@@ -9,13 +9,16 @@ import React from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { ArrowRight, Cloud, Add } from '@carbon/react/icons';
 import { AspectRatio, Column, Grid, usePrefix } from '@carbon/react';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { ExpressiveCard } from '.';
 // import mdx from './ExpressiveCard.mdx';
 import { action } from '@storybook/addon-actions';
 
 export default {
-  title: 'IBM Products/Components/ExpressiveCard',
+  title: getStoryTitle(ExpressiveCard.displayName),
   component: ExpressiveCard,
   tags: ['autodocs'],
   parameters: {

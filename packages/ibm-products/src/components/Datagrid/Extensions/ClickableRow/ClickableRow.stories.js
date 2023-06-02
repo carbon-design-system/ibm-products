@@ -9,7 +9,10 @@
 import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import { prepareStory } from '../../../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -29,7 +32,7 @@ import cx from 'classnames';
 import { SidePanel } from '../../../SidePanel';
 
 export default {
-  title: 'IBM Products/Components/Datagrid/Extensions/ClickableRow',
+  title: getStoryTitle(ClickableRow.displayName),
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

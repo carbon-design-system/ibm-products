@@ -8,12 +8,15 @@
 import React, { useState } from 'react';
 import { Button } from '@carbon/react';
 // import styles from './_storybook-styles.scss'; // import index in case more files are added later.
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { RemoveModal } from '.';
 // import mdx from './RemoveModal.mdx';
 
 export default {
-  title: 'IBM Products/Patterns/RemoveModal',
+  title: getStoryTitle(RemoveModal.displayName),
   component: RemoveModal,
   tags: ['autodocs'],
   parameters: {

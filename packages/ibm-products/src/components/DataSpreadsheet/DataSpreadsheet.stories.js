@@ -7,7 +7,10 @@
 
 import React, { useMemo, useState } from 'react';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import { DataSpreadsheet } from '.';
 import { generateData } from './utils/generateData';
@@ -16,7 +19,7 @@ import { generateData } from './utils/generateData';
 // import styles from './_storybook-styles.scss';
 
 export default {
-  title: 'IBM Products/Components/DataSpreadsheet',
+  title: getStoryTitle(DataSpreadsheet.displayName),
   component: DataSpreadsheet,
   tags: ['autodocs'],
   argTypes: {

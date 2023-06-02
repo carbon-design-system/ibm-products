@@ -6,12 +6,16 @@
  */
 import React, { useState } from 'react';
 import { carbon } from '../../settings';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { CreateFullPage } from '../CreateFullPage';
 import { CreateFullPageStep } from '../CreateFullPage/CreateFullPageStep';
 import { pkg } from '../../settings';
 
+import { EditFullPage } from '.';
 // import mdx from './EditFullPage.mdx';
 
 import styles from '../CreateFullPage/_storybook-styles.scss';
@@ -34,7 +38,7 @@ import {
 } from '@carbon/react';
 
 export default {
-  title: 'IBM Products/Patterns/EditFullPage',
+  title: getStoryTitle(EditFullPage.displayName),
   component: CreateFullPage,
   tags: ['autodocs'],
   subcomponents: { CreateFullPageStep },

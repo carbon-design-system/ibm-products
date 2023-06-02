@@ -9,7 +9,10 @@
 import React, { useState } from 'react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import { prepareStory } from '../../../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../../../global/js/utils/story-helper';
 import { Datagrid, useDatagrid, useNestedRows } from '../../index';
 import styles from '../../_storybook-styles.scss';
 // import mdx from '../../Datagrid.mdx';
@@ -19,7 +22,7 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { pkg } from '../../../../settings';
 
 export default {
-  title: 'IBM Products/Components/Datagrid/Extensions/NestedRows',
+  title: getStoryTitle(NestedRows.displayName),
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

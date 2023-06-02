@@ -27,12 +27,15 @@ import {
   HeaderName,
 } from '@carbon/react';
 import { Copy, TrashCan, Settings } from '@carbon/react/icons';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { SidePanel } from './SidePanel';
 // import mdx from './SidePanel.mdx';
 
 export default {
-  title: 'IBM Products/Components/SidePanel',
+  title: getStoryTitle(SidePanel.displayName),
   component: SidePanel,
   tags: ['autodocs'],
   parameters: {

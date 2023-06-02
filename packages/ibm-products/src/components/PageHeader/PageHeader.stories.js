@@ -43,7 +43,10 @@ import cx from 'classnames';
 import { ActionBarItem } from '../ActionBar';
 import { PageHeader } from './PageHeader';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
@@ -393,7 +396,7 @@ const fullWidthGrid = {
 };
 
 export default {
-  title: 'IBM Products/Components/PageHeader',
+  title: getStoryTitle(PageHeader.displayName),
   component: PageHeader,
   tags: ['autodocs'],
   subcomponents: { ActionBarItem },

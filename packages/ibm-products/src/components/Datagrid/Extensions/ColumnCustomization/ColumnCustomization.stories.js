@@ -9,7 +9,10 @@
 import React, { useState } from 'react';
 import { Checkmark, Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
-import { prepareStory } from '../../../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../../../global/js/utils/story-helper';
 import {
   Datagrid,
   useDatagrid,
@@ -28,7 +31,9 @@ import { CodeSnippet } from '@carbon/react';
 import { pkg } from '../../../../settings';
 
 export default {
-  title: 'IBM Products/Components/DataGrid/Extensions/ColumnCustomization',
+  title: `${getStoryTitle(
+    Datagrid.displayName
+  )}/Extensions/ColumnCustomization`,
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

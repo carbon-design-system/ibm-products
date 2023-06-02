@@ -7,13 +7,16 @@
 
 import React from 'react';
 import { HTTPErrorOther } from '.';
-import { prepareStory } from '../../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../../global/js/utils/story-helper';
 
 // import page from './HTTPErrorOther.mdx';
 // import styles from '../_storybook-styles.scss';
 
 export default {
-  title: 'IBM Products/Patterns/HTTPErrorOther',
+  title: getStoryTitle(HTTPErrorOther.displayName),
   component: HTTPErrorOther,
   tags: ['autodocs'],
   parameters: {

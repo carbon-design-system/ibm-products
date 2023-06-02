@@ -9,7 +9,10 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 
 import { BreadcrumbWithOverflow } from '.';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import styles from './_storybook-styles.scss';
 
@@ -20,7 +23,7 @@ const lastBreadcrumbs = [
 ];
 
 export default {
-  title: 'IBM Products/Internal/BreadcrumbWithOverflow',
+  title: getStoryTitle(BreadcrumbWithOverflow.displayName),
   component: BreadcrumbWithOverflow,
   tags: ['autodocs'],
   argTypes: {

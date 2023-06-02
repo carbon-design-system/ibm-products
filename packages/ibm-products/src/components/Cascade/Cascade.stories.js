@@ -6,14 +6,17 @@
 //
 
 import React from 'react';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { Cascade } from '.';
 // import mdx from './Cascade.mdx';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { Column } from '@carbon/react';
 
 export default {
-  title: 'IBM Products/Patterns/Cascade',
+  title: getStoryTitle(Cascade.displayName),
   component: Cascade,
   tags: ['autodocs'],
   parameters: {

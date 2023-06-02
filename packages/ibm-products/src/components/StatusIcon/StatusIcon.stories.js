@@ -10,10 +10,13 @@ import React from 'react';
 import { StatusIcon } from '.';
 // import mdx from './StatusIcon.mdx';
 // import styles from './_storybook-styles.scss'; // import storybook which includes component and additional storybook styles
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 export default {
-  title: 'IBM Products/Patterns/StatusIcon',
+  title: getStoryTitle(StatusIcon.displayName),
   component: StatusIcon,
   tags: ['autodocs'],
   argTypes: {

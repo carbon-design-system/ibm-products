@@ -7,7 +7,10 @@
 
 import React from 'react';
 import { UserProfileImage } from '.';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 // import mdx from './UserProfileImage.mdx';
 import image from './headshot.jpg'; // cspell:disable-line
 // import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
@@ -19,7 +22,7 @@ const defaultArgs = {
 };
 
 export default {
-  title: 'IBM Products/Patterns/UserProfileImage',
+  title: getStoryTitle(UserProfileImage.displayName),
   component: UserProfileImage,
   tags: ['autodocs'],
   argTypes: {

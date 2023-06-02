@@ -6,7 +6,10 @@
  */
 
 import React, { useState } from 'react';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { EditInPlace } from '.';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
@@ -33,7 +36,7 @@ const tooltipAlignmentOptions = {
 };
 
 export default {
-  title: 'IBM Products/Patterns/EditInPlace',
+  title: getStoryTitle(EditInPlace.displayName),
   component: EditInPlace,
   tags: ['autodocs'],
   argTypes: {

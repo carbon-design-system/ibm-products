@@ -6,12 +6,13 @@
  */
 
 import React, { useState } from 'react';
+import { getStoryTitle } from '../../global/js/utils/story-helper';
 import { FilterSummary } from '.';
 
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: 'IBM Products/Internal/FilterSummary',
+  title: getStoryTitle(FilterSummary.displayName),
   component: FilterSummary,
   tags: ['autodocs'],
   parameters: {

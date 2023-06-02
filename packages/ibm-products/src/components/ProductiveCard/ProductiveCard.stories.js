@@ -9,13 +9,16 @@ import React from 'react';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { TrashCan, Edit } from '@carbon/react/icons';
 import { Grid, Column, usePrefix } from '@carbon/react';
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { ProductiveCard } from '.';
 // import mdx from './ProductiveCard.mdx';
 import { action } from '@storybook/addon-actions';
 
 export default {
-  title: 'IBM Products/Components/ProductiveCard',
+  title: getStoryTitle(ProductiveCard.displayName),
   component: ProductiveCard,
   tags: ['autodocs'],
   parameters: {

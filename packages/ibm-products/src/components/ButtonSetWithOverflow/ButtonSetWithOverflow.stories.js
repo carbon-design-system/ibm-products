@@ -9,7 +9,10 @@ import React from 'react';
 
 import { action } from '@storybook/addon-actions';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { ButtonSetWithOverflow } from '.';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import styles from './_storybook-styles.scss';
@@ -17,7 +20,7 @@ import styles from './_storybook-styles.scss';
 // Carbon and package components we use.
 
 export default {
-  title: 'IBM Products/Internal/ButtonSetWithOverflow',
+  title: getStoryTitle(ButtonSetWithOverflow.displayName),
   component: ButtonSetWithOverflow,
   tags: ['autodocs'],
   argTypes: {

@@ -8,7 +8,10 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/icons-react';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 import { ExampleComponent } from '.';
 // import mdx from './ExampleComponent.mdx';
@@ -17,7 +20,7 @@ import { pkg } from '../../settings';
 // import styles from './_storybook-styles.scss';
 
 export default {
-  title: 'IBM Products/Internal/ExampleComponent',
+  title: getStoryTitle(ExampleComponent.displayName),
   component: ExampleComponent,
   tags: ['autodocs'],
   argTypes: {

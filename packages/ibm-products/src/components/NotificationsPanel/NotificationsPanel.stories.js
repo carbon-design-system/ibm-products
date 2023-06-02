@@ -24,7 +24,10 @@ import { pkg } from '../../settings';
 
 import { NotificationsPanel } from '.';
 
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 
 // import mdx from './NotificationsPanel.mdx';
 import data from './NotificationsPanel_data';
@@ -32,7 +35,7 @@ import data from './NotificationsPanel_data';
 const storyBlockClass = `${pkg.prefix}--notifications-panel__story`;
 
 export default {
-  title: 'IBM Products/Patterns/NotificationsPanel',
+  title: getStoryTitle(NotificationsPanel.displayName),
   component: NotificationsPanel,
   tags: ['autodocs'],
   parameters: {

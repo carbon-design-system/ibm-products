@@ -5,7 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { prepareStory } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import styles from './_storybook-styles.scss';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
@@ -14,7 +17,7 @@ import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
 // import mdx from './CreateTearsheet.mdx';
 
 export default {
-  title: 'IBM Products/Patterns/CreateTearsheet',
+  title: getStoryTitle(CreateTearsheet.displayName),
   component: CreateTearsheet,
   tags: ['autodocs'],
   subcomponents: {

@@ -9,13 +9,16 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
 // import mdx from './UnauthorizedEmptyState.mdx';
-import { prepareStory } from '../../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../../global/js/utils/story-helper';
 import { UnauthorizedEmptyState } from '.';
 
 // import styles from '../_index.scss';
 
 export default {
-  title: 'IBM Products/Patterns/UnauthorizedEmptyState',
+  title: getStoryTitle(UnauthorizedEmptyState.displayName),
   component: UnauthorizedEmptyState,
   tags: ['autodocs'],
   parameters: {

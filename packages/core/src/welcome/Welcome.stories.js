@@ -6,14 +6,13 @@
  */
 
 import React from 'react';
-import { getPathForComponent } from '../../story-structure';
 import styles from './_storybook-styles.scss';
 
 import Welcome from './Welcome';
 
 export default {
   autodocs: false,
-  title: getPathForComponent('o', 'Welcome'),
+  title: 'Overview/Welcome',
   parameters: {
     styles,
     layout: 'fullscreen',

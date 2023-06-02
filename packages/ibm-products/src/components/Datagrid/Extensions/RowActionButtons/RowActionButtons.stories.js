@@ -30,7 +30,7 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { pkg } from '../../../../settings';
 
 export default {
-  title: getStoryTitle(RowActionButtons.displayName),
+  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/RowActionButtons`,
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

@@ -28,7 +28,7 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { StatusIcon } from '../../../StatusIcon';
 
 export default {
-  title: getStoryTitle(ColumnAlignment.displayName),
+  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ColumnAlignment`,
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

@@ -32,7 +32,7 @@ import cx from 'classnames';
 import { SidePanel } from '../../../SidePanel';
 
 export default {
-  title: getStoryTitle(ClickableRow.displayName),
+  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ClickableRow`,
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

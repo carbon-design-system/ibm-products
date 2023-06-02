@@ -22,7 +22,7 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 import { pkg } from '../../../../settings';
 
 export default {
-  title: getStoryTitle(NestedRows.displayName),
+  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/NestedRows`,
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {

@@ -4067,6 +4067,14 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-fluid-spacing-02: 2vw;
   --cds-fluid-spacing-03: 5vw;
   --cds-fluid-spacing-04: 10vw;
+  --cds-caption-01-font-size: 0.75rem;
+  --cds-caption-01-font-weight: 400;
+  --cds-caption-01-line-height: 1.33333;
+  --cds-caption-01-letter-spacing: 0.32px;
+  --cds-caption-02-font-size: 0.875rem;
+  --cds-caption-02-font-weight: 400;
+  --cds-caption-02-line-height: 1.28572;
+  --cds-caption-02-letter-spacing: 0.32px;
   --cds-label-01-font-size: 0.75rem;
   --cds-label-01-font-weight: 400;
   --cds-label-01-line-height: 1.33333;
@@ -4315,7 +4323,7 @@ button.c4p--add-select__global-filter-toggle--open {
   top: 3rem;
   right: 0;
   overflow: auto;
-  min-width: 22.75rem;
+  min-width: 20rem;
   max-width: 22.75rem;
   min-height: 38.5rem;
   max-height: 38.5rem;
@@ -6466,8 +6474,33 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--button-menu {
   min-width: 160px;
 }
+.c4p--button-menu.c4p--button-menu__wrapper--primary, .c4p--button-menu.c4p--button-menu__wrapper--primary.cds--overflow-menu.cds--overflow-menu--open {
+  background-color: var(--cds-button-primary, #0f62fe);
+}
+.c4p--button-menu.cds--overflow-menu.c4p--button-menu__wrapper--primary:hover {
+  background-color: var(--cds-button-primary-hover, #0050e6);
+}
+.c4p--button-menu.c4p--button-menu__wrapper--tertiary, .c4p--button-menu.c4p--button-menu__wrapper--tertiary.cds--overflow-menu.cds--overflow-menu--open {
+  background-color: var(--cds-button-tertiary, #0f62fe);
+}
+.c4p--button-menu.cds--overflow-menu.c4p--button-menu__wrapper--tertiary:hover {
+  background-color: var(--cds-button-tertiary-hover, #0050e6);
+}
+.c4p--button-menu.c4p--button-menu__wrapper--ghost, .c4p--button-menu.c4p--button-menu__wrapper--ghost.cds--overflow-menu.cds--overflow-menu--open {
+  background-color: transparent;
+}
+.c4p--button-menu.cds--overflow-menu.c4p--button-menu__wrapper--ghost:hover {
+  background-color: var(--cds-layer-hover);
+}
 .c4p--button-menu .c4p--button-menu__trigger {
+  font-size: var(--cds-body-compact-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-compact-01-font-weight, 400);
+  line-height: var(--cds-body-compact-01-line-height, 1.28572);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing, 0.16px);
+  display: flex;
   width: 100%;
+  align-items: center;
+  justify-content: space-between;
   padding: 0 1rem;
 }
 
@@ -8058,6 +8091,14 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-fluid-spacing-02: 2vw;
   --cds-fluid-spacing-03: 5vw;
   --cds-fluid-spacing-04: 10vw;
+  --cds-caption-01-font-size: 0.75rem;
+  --cds-caption-01-font-weight: 400;
+  --cds-caption-01-line-height: 1.33333;
+  --cds-caption-01-letter-spacing: 0.32px;
+  --cds-caption-02-font-size: 0.875rem;
+  --cds-caption-02-font-weight: 400;
+  --cds-caption-02-line-height: 1.28572;
+  --cds-caption-02-letter-spacing: 0.32px;
   --cds-label-01-font-size: 0.75rem;
   --cds-label-01-font-weight: 400;
   --cds-label-01-line-height: 1.33333;
@@ -8443,6 +8484,14 @@ button.c4p--add-select__global-filter-toggle--open {
   --cds-fluid-spacing-02: 2vw;
   --cds-fluid-spacing-03: 5vw;
   --cds-fluid-spacing-04: 10vw;
+  --cds-caption-01-font-size: 0.75rem;
+  --cds-caption-01-font-weight: 400;
+  --cds-caption-01-line-height: 1.33333;
+  --cds-caption-01-letter-spacing: 0.32px;
+  --cds-caption-02-font-size: 0.875rem;
+  --cds-caption-02-font-weight: 400;
+  --cds-caption-02-line-height: 1.28572;
+  --cds-caption-02-letter-spacing: 0.32px;
   --cds-label-01-font-size: 0.75rem;
   --cds-label-01-font-weight: 400;
   --cds-label-01-line-height: 1.33333;

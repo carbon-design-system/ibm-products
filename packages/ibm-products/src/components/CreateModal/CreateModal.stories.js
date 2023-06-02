@@ -48,9 +48,14 @@ export default {
   },
 };
 
-const Template = ({ storyInitiallyOpen = true, story, children, ...args }) => {
+const Template = (
+  { storyInitiallyOpen = true, story, children, ...args },
+  context
+) => {
   const carbonPrefix = usePrefix();
-  const [open, setOpen] = useState(storyInitiallyOpen);
+  const [open, setOpen] = useState(
+    context.viewMode !== 'docs' && storyInitiallyOpen
+  );
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open {story?.storyName}</Button>

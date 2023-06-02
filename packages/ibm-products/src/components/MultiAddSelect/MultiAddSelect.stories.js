@@ -104,8 +104,8 @@ const defaultProps = {
   filterByLabel: 'Filter',
 };
 
-const Template = (args) => {
-  const [open, setOpen] = useState(true);
+const Template = (args, context) => {
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   return (
     <>
       <MultiAddSelect {...args} open={open} onClose={() => setOpen(false)} />

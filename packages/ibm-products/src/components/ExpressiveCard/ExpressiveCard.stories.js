@@ -173,7 +173,6 @@ export const WithSecondaryAction = prepareStory(Template, {
     ...defaultProps,
     secondaryButtonText: 'Secondary',
     secondaryButtonKind: 'ghost',
-    columnSize: 8,
     mediaRatio: null,
   },
 });

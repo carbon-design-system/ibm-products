@@ -178,7 +178,7 @@ const StackedTemplate = ({ actions, ...args }) => {
       <div
         style={{
           display: 'flex',
-          position: 'fixed',
+          position: 'absolute',
           top: 0,
           left: 0,
           zIndex: 10000,

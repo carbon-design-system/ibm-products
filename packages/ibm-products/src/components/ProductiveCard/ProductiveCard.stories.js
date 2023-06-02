@@ -187,7 +187,6 @@ export const WithButtonHref = prepareStory(Template, {
 export const WithActionGhostButton = prepareStory(Template, {
   args: {
     ...defaultProps,
-    columnSize: 8,
     primaryButtonPlacement: 'top',
     primaryButtonText: 'Ghost button',
     primaryButtonIcon: (props) => <TrashCan size={16} {...props} />,

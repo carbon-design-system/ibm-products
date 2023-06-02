@@ -49,8 +49,8 @@ const defaultProps = {
   preventCloseOnClickOutside: true,
 };
 
-const Template = (args) => {
-  return <RemoveModal {...args} />;
+const Template = ({ open, ...args }, context) => {
+  return <RemoveModal {...args} open={context.viewMode !== 'docs' && open} />;
 };
 
 const TemplateWithState = (args) => {

@@ -42,8 +42,8 @@ const defaultProps = {
   inputType: 'text',
 };
 
-const Template = (args) => {
-  return <ExportModal {...args} />;
+const Template = ({ open, ...args }, context) => {
+  return <ExportModal {...args} open={context.viewMode !== 'docs' && open} />;
 };
 
 const TemplateWithState = (args) => {

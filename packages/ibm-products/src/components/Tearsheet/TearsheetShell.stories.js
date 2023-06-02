@@ -50,12 +50,16 @@ const dummyContent = (
 );
 
 // Template.
-const Template = (args) => {
+const Template = ({ open, ...args }, context) => {
   const ref = useRef();
 
   return (
     <div ref={ref}>
-      <TearsheetShell className={className} {...args}>
+      <TearsheetShell
+        className={className}
+        {...args}
+        open={context.viewMode !== 'docs' && open}
+      >
         {dummyContent}
       </TearsheetShell>
     </div>

@@ -3585,6 +3585,9 @@ c4p--card__icon:active {
   display: flex;
   align-items: center;
 }
+.c4p--add-select__selections-form-control-wrapper--radio {
+  cursor: pointer;
+}
 .c4p--add-select__selections-form-control-label-wrapper {
   display: flex;
   margin-left: 1rem;

@@ -82,7 +82,7 @@ export let AboutModal = React.forwardRef(
     }, [bodyRef]);
 
     // Detect resize of the ModalBody to recalculate whether scrolling is enabled
-    useResizeObserver(bodyRef, { callback: handleResize });
+    useResizeObserver(bodyRef, handleResize);
 
     return (
       <ComposedModal

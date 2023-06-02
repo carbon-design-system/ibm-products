@@ -71,7 +71,7 @@ const useFiltering = (hooks) => {
       variation: 'flyout',
       updateMethod: BATCH,
       panelIconDescription: 'Open filter panel',
-      initialFilters: state.filters,
+      reactTableFiltersState: state.filters,
     };
 
     const getFilterFlyoutProps = () => ({

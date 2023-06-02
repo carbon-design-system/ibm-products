@@ -116,7 +116,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 }
 
 .#{c4p-settings.$carbon-prefix}--body--with-modal-open {
-  .#{$block-class}__mobile-toolbar-modal.cds--modal {
+  .#{$block-class}__mobile-toolbar-modal.#{c4p-settings.$carbon-prefix}--modal {
     top: -$spacing-07;
     left: -$spacing-07;
     width: 100vw;

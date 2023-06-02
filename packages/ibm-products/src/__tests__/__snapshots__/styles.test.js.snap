@@ -6471,8 +6471,33 @@ button.c4p--add-select__global-filter-toggle--open {
 .c4p--button-menu {
   min-width: 160px;
 }
+.c4p--button-menu.c4p--button-menu__wrapper--primary, .c4p--button-menu.c4p--button-menu__wrapper--primary.cds--overflow-menu.cds--overflow-menu--open {
+  background-color: var(--cds-button-primary, #0f62fe);
+}
+.c4p--button-menu.cds--overflow-menu.c4p--button-menu__wrapper--primary:hover {
+  background-color: var(--cds-button-primary-hover, #0050e6);
+}
+.c4p--button-menu.c4p--button-menu__wrapper--tertiary, .c4p--button-menu.c4p--button-menu__wrapper--tertiary.cds--overflow-menu.cds--overflow-menu--open {
+  background-color: var(--cds-button-tertiary, #0f62fe);
+}
+.c4p--button-menu.cds--overflow-menu.c4p--button-menu__wrapper--tertiary:hover {
+  background-color: var(--cds-button-tertiary-hover, #0050e6);
+}
+.c4p--button-menu.c4p--button-menu__wrapper--ghost, .c4p--button-menu.c4p--button-menu__wrapper--ghost.cds--overflow-menu.cds--overflow-menu--open {
+  background-color: transparent;
+}
+.c4p--button-menu.cds--overflow-menu.c4p--button-menu__wrapper--ghost:hover {
+  background-color: var(--cds-layer-hover);
+}
 .c4p--button-menu .c4p--button-menu__trigger {
+  font-size: var(--cds-body-compact-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-compact-01-font-weight, 400);
+  line-height: var(--cds-body-compact-01-line-height, 1.28572);
+  letter-spacing: var(--cds-body-compact-01-letter-spacing, 0.16px);
+  display: flex;
   width: 100%;
+  align-items: center;
+  justify-content: space-between;
   padding: 0 1rem;
 }
 

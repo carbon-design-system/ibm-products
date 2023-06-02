@@ -137,8 +137,8 @@ $block-class: #{$pkg-prefix}--datagrid;
 
 .#{$carbon-prefix}--body--with-modal-open {
   .#{$block-class}__mobile-toolbar-modal.#{$carbon-prefix}--modal {
-    top: -2rem;
-    left: -2rem;
+    top: calc($spacing-07 * -1);
+    left: calc($spacing-07 * -1);
     width: 100vw;
   }
 }

@@ -134,3 +134,11 @@ $block-class: #{$pkg-prefix}--datagrid;
   flex: 0 1 calc($spacing-05 * 30);
   margin-right: $spacing-07;
 }
+
+.#{$carbon-prefix}--body--with-modal-open {
+  .#{$block-class}__mobile-toolbar-modal.#{$carbon-prefix}--modal {
+    top: calc($spacing-07 * -1);
+    left: calc($spacing-07 * -1);
+    width: 100vw;
+  }
+}

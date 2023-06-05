@@ -15,15 +15,6 @@
 
 $story-class: 'page-header-stories';
 
-// cspell:disable-next-line
-.sbdocs .#{$story-class}__viewport {
-  max-height: 500px;
-  background-color: $background;
-  box-shadow: 0 0 4px 1px $layer-accent-01;
-  color: $text-primary;
-  overflow-y: auto;
-}
-
 .#{$story-class}__content-switcher {
   justify-content: flex-start;
 }
@@ -66,15 +57,52 @@ $story-class: 'page-header-stories';
   flex-direction: column;
 }
 
-.#{$story-class}__app--whole-page-scroll {
+$story-anchor: 'page-header';
+div[id*='#{$story-anchor}'] .docs-story {
+  --story-height: 50vh;
+
+  min-height: var(--story-height);
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  transform: translateZ(0);
+}
+
+div[id*='#{$story-anchor}'] .docs-story > div:first-child {
   overflow: hidden;
+  width: 100%;
 }
 
-.#{$story-class}__content-container {
-  height: 100%;
-  padding: 0;
+div[id*='#{$story-anchor}'] .docs-story .preview-position-fix {
+  min-height: 50vh;
 }
 
-.#{$story-class}__app--whole-page-scroll .#{$story-class}__content-container {
+.#{$story-class}__viewport {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.#{$story-class}__viewport--scroll {
   overflow-y: auto;
+}
+
+.#{$story-class}__viewport .#{$story-class}__content-container {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.#{$story-class}__viewport
+  .#{$story-class}__content-container--with-global-header {
+  height: calc(100% - #{$spacing-09});
+  margin-top: $spacing-09;
+}
+
+.#{$story-class}__viewport--scroll .#{$story-class}__content-container {
+  overflow-y: initial;
+}
+
+// cspell:disable-next-line
+.sbdocs .#{$story-class}__viewport {
+  max-height: 50vh;
+  background-color: $background;
+  box-shadow: 0 0 4px 1px $layer-accent-01;
+  color: $text-primary;
 }

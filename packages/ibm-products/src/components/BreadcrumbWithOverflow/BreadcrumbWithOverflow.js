@@ -275,9 +275,9 @@ export let BreadcrumbWithOverflow = ({
   }
 
   // container resize
-  useResizeObserver(sizingContainerRef, { callback: handleResize });
+  useResizeObserver(sizingContainerRef, handleResize);
   // item resize
-  useResizeObserver(breadcrumbItemWithOverflow, { callback: handleResize });
+  useResizeObserver(breadcrumbItemWithOverflow, handleResize);
 
   return (
     <div

@@ -77,6 +77,10 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
     align-items: center;
   }
 
+  &-form-control-wrapper--radio {
+    cursor: pointer;
+  }
+
   &-form-control-label-wrapper {
     display: flex;
     margin-left: $spacing-05;

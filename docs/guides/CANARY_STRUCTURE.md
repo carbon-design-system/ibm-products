@@ -29,6 +29,7 @@ As part of these changes, the following also happened.
   building the story slug simpler in `.mdx` files.
 - `getStoryTitle` was added to `../../global/js/utils/story-helper.js` to make
   building your story path simpler in story files.
+
 ## Canary structure
 
 The following changes were made to each component to create component feature

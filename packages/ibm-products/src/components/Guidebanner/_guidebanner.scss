@@ -103,7 +103,7 @@
 
     // Specify Carousel look and feel.
     &__carousel {
-      margin: 0 0 $spacing-05 0;
+      padding: 0 0 $spacing-05 0;
       color: $gray-10;
 
       @include when-collapsed() {

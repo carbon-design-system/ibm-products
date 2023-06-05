@@ -109,7 +109,11 @@ export let Guidebanner = React.forwardRef(
         >
           {children}
         </Carousel>
-        <div className={`${blockClass}__navigation`}>
+        <div
+          className={cx([
+            collapsable || showNavigation ? `${blockClass}__navigation` : null,
+          ])}
+        >
           {collapsable && (
             <Button
               kind="ghost"

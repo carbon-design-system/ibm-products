@@ -103,12 +103,12 @@ describe(ButtonSetWithOverflow.displayName, () => {
     );
 
     const action1 = screen.queryByText(/Action 1/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${pkg.prefix}--button-menu__trigger`,
     });
     expect(action1).toBeNull();
 
     const comboButton = screen.getByText(/button menu label/, {
-      selector: `.${blockClass}__button-container--hidden .${carbon.prefix}--overflow-menu .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container--hidden .${carbon.prefix}--overflow-menu .${pkg.prefix}--button-menu__trigger`,
     });
     userEvent.click(comboButton);
 

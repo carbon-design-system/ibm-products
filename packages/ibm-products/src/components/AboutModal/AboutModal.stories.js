@@ -147,7 +147,6 @@ const logo = (
 );
 
 const Template = (storyName, storyInitiallyOpen, props, context) => {
-  console.log(context);
   const [open, setOpen] = useState(
     context.viewMode !== 'docs' && storyInitiallyOpen
   );

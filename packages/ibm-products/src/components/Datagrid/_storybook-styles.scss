@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022, 2022
+// Copyright IBM Corp. 2022, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -113,4 +113,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   border-radius: $spacing-02;
   margin-right: $spacing-03;
   background-color: $field-01;
+}
+
+$story-anchor: 'datagrid';
+div[id*='#{$story-anchor}'] .docs-story > div:first-child > div:first-child {
+  overflow: auto;
+  width: 100%;
 }

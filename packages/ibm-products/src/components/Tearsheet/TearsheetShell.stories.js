@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './_storybook-styles.scss';
 import {
@@ -14,6 +14,7 @@ import {
 } from '../../global/js/utils/story-helper';
 import { TearsheetShell, deprecatedProps } from './TearsheetShell';
 import { getDeprecatedArgTypes } from '../../global/js/utils/props-helper';
+import { Button } from '@carbon/react';
 
 // import mdx from './TearsheetShell.mdx';
 
@@ -50,16 +51,18 @@ const dummyContent = (
 );
 
 // Template.
-const Template = ({ open, ...args }, context) => {
+const Template = ({ open: _open, ...args }, context) => {
   const ref = useRef();
+  const [open, setOpen] = useState(context.viewMode !== 'docs' && _open);
+  const [beenOpen, setBeenOpen] = useState(false);
+  useEffect(() => setBeenOpen(beenOpen || open), [open, beenOpen]);
 
   return (
     <div ref={ref}>
-      <TearsheetShell
-        className={className}
-        {...args}
-        open={context.viewMode !== 'docs' && open}
-      >
+      <Button onClick={() => setOpen(true)}>
+        {beenOpen ? 'Reopen the' : 'Open the'} context.component.componentName
+      </Button>{' '}
+      <TearsheetShell className={className} {...args} open={open}>
         {dummyContent}
       </TearsheetShell>
     </div>

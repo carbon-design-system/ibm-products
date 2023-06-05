@@ -60,6 +60,29 @@ export const InlineEditCell = ({
   const datePickerRef = useRef();
   const outerButtonElement = useRef();
 
+  const { rowSize, onDataUpdate } = instance;
+
+  // Saves the new cell data, onDataUpdate is a required function to be
+  // passed to useDatagrid when using useInlineEdit
+  const saveCellData = useCallback(
+    (newValue) => {
+      const columnId = cell.column.id;
+      const rowIndex = cell.row.index;
+      onDataUpdate((prev) =>
+        prev.map((row, index) => {
+          if (index === rowIndex) {
+            return {
+              ...prev[rowIndex],
+              [columnId]: newValue,
+            };
+          }
+          return row;
+        })
+      );
+    },
+    [cell, onDataUpdate]
+  );
+
   useEffect(() => {
     setInitialValue(value);
     const columnId = cell.column.id;
@@ -156,8 +179,6 @@ export const InlineEditCell = ({
     }
   };
 
-  const { rowSize, onDataUpdate } = instance;
-
   // Auto focus text input when entering edit mode
   useEffect(() => {
     if (inEditMode) {
@@ -174,27 +195,6 @@ export const InlineEditCell = ({
   useEffect(() => {
     setCellValue(value);
   }, [value]);
-
-  // Saves the new cell data, onDataUpdate is a required function to be
-  // passed to useDatagrid when using useInlineEdit
-  const saveCellData = useCallback(
-    (newValue) => {
-      const columnId = cell.column.id;
-      const rowIndex = cell.row.index;
-      onDataUpdate((prev) =>
-        prev.map((row, index) => {
-          if (index === rowIndex) {
-            return {
-              ...prev[rowIndex],
-              [columnId]: newValue,
-            };
-          }
-          return row;
-        })
-      );
-    },
-    [cell, onDataUpdate]
-  );
 
   const sendFocusBackToGrid = () => {
     // Allows the onKeyDown listener to go back to the entire grid area

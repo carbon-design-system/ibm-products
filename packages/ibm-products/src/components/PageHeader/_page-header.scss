@@ -29,7 +29,6 @@ $block-class: #{$pkg-prefix}--page-header;
 $breadcrumb-block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
 
 $raised-z-index: 99;
-/* stylelint-disable-next-line function-no-unknown */
 $z-index-header-minus: utilities.z('header') - 1;
 
 $left-section-std-width: 60%;

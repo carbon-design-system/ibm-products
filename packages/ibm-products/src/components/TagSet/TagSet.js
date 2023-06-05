@@ -166,7 +166,7 @@ export let TagSet = React.forwardRef(
         let spaceAvailable = tagSetRef.current.offsetWidth;
 
         for (let i in sizingTags) {
-          const tagWidth = sizingTags[i].offsetWidth;
+          const tagWidth = sizingTags[i]?.offsetWidth || 0;
 
           if (spaceAvailable >= tagWidth) {
             spaceAvailable -= tagWidth;

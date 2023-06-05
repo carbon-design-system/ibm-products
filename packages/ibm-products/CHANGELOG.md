@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.1.0...@carbon/ibm-products@2.1.1) (2023-06-05)
+
+
+### Bug Fixes
+
+* Add select aria updates ([#3054](https://github.com/carbon-design-system/ibm-products/issues/3054)) ([9b11343](https://github.com/carbon-design-system/ibm-products/commit/9b1134326b8ac165a36be5b80c8b7c0ee88cfc8f))
+* check for window before accessing ([#3059](https://github.com/carbon-design-system/ibm-products/issues/3059)) ([1d64ff4](https://github.com/carbon-design-system/ibm-products/commit/1d64ff45d8aa0b5bf7e31cf7986e6d1ce9008231))
+* **Datagrid:** address `ButtonMenu` style issues in batch action toolbar ([#3066](https://github.com/carbon-design-system/ibm-products/issues/3066)) ([d5ff3dd](https://github.com/carbon-design-system/ibm-products/commit/d5ff3dd931a811617872ada68220d41ae93d83c7))
+* **DataGrid:** header misalignment when modal open ([#3056](https://github.com/carbon-design-system/ibm-products/issues/3056)) ([07b0140](https://github.com/carbon-design-system/ibm-products/commit/07b01409c98dbe03d3c6ed67653641d2ad0542c0))
+* resize observer loops ([#3034](https://github.com/carbon-design-system/ibm-products/issues/3034)) ([59ad83b](https://github.com/carbon-design-system/ibm-products/commit/59ad83b5069c6862787c8785327cee39aeb0d86b))
+* update to Carbon 11 compatible versions to latest ([#3062](https://github.com/carbon-design-system/ibm-products/issues/3062)) ([b93b07d](https://github.com/carbon-design-system/ibm-products/commit/b93b07da828f7a8e95559572090c886488badce0))
+
+
+
+
+
 # [2.1.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.0.1...@carbon/ibm-products@2.1.0) (2023-05-30)
 
 

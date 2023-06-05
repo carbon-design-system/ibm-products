@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "0.44.3",
+  "version": "0.44.4",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -52,7 +52,7 @@
     "@storybook/react-webpack5": "^7.0.18",
     "@storybook/theming": "^7.0.18",
     "babel-loader": "^9.1.2",
-    "babel-preset-ibm-cloud-cognitive": "^0.14.34",
+    "babel-preset-ibm-cloud-cognitive": "^0.14.35",
     "css-loader": "^6.8.1",
     "dotenv-webpack": "8.0.1",
     "npm-check-updates": "^16.10.12",

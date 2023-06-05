@@ -115,6 +115,14 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   background-color: $field-01;
 }
 
+.#{c4p-settings.$carbon-prefix}--body--with-modal-open {
+  .#{$block-class}__mobile-toolbar-modal.#{c4p-settings.$carbon-prefix}--modal {
+    top: -$spacing-07;
+    left: -$spacing-07;
+    width: 100vw;
+  }
+}
+
 $story-anchor: 'datagrid';
 div[id*='#{$story-anchor}'] .docs-story > div:first-child > div:first-child {
   overflow: auto;

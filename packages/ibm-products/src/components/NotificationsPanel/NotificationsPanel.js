@@ -408,17 +408,19 @@ export let NotificationsPanel = React.forwardRef(
               {dismissAllLabel}
             </Button>
           </div>
-          <Toggle
-            size="sm"
-            className={`${blockClass}__do-not-disturb-toggle`}
-            id={`${blockClass}__do-not-disturb-toggle-component`}
-            labelA={doNotDisturbLabel}
-            labelB={doNotDisturbLabel}
-            onToggle={(event) => onDoNotDisturbChange(event)}
-            defaultToggled={doNotDisturbDefaultToggled}
-            aria-label={doNotDisturbLabel}
-            labelText={doNotDisturbLabel}
-          />
+          {onDoNotDisturbChange && (
+            <Toggle
+              size="sm"
+              className={`${blockClass}__do-not-disturb-toggle`}
+              id={`${blockClass}__do-not-disturb-toggle-component`}
+              labelA={doNotDisturbLabel}
+              labelB={doNotDisturbLabel}
+              onToggle={(event) => onDoNotDisturbChange(event)}
+              defaultToggled={doNotDisturbDefaultToggled}
+              aria-label={doNotDisturbLabel}
+              labelText={doNotDisturbLabel}
+            />
+          )}
         </div>
         <div className={mainSectionClassName}>
           {withinLastDayNotifications && withinLastDayNotifications.length ? (

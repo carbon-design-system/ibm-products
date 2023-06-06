@@ -17,7 +17,7 @@ const level = argv[1];
 let auditLevel;
 
 async function audit() {
-  auditLevel = level ? ' --level ' + level : '';
+  auditLevel = level ? ' --severity ' + level : '';
   const auditCommand = 'yarn npm audit ' + group + auditLevel;
   console.log('Running audit using:', auditCommand);
   await exec(auditCommand);

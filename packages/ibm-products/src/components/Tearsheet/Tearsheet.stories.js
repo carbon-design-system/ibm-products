@@ -134,8 +134,7 @@ const mainContent = (
         />
         <TextInput
           id="tss-ft2"
-          light
-          labelText="Here is a light entry field:"
+          labelText="Here is an entry field:"
           style={
             // stylelint-disable-next-line carbon/layout-token-use
             { marginBottom: '1em' }

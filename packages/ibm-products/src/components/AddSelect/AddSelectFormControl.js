@@ -15,10 +15,9 @@ const blockClass = `${pkg.prefix}--add-select__selections`;
 export let AddSelectFormControl = ({ item, onClick, selected, type }) => {
   const controlProps = {
     onClick,
-    id: item.id,
-    className: `${blockClass}-form-control-wrapper`,
-    [`aria-label`]: item.title,
+    className: `${blockClass}-form-control-wrapper ${blockClass}-form-control-wrapper--${type}`,
     size: 20,
+    [`aria-labelledby`]: `control-label-${item.id}`,
   };
 
   const getCheckbox = () => {
@@ -69,7 +68,12 @@ export let AddSelectFormControl = ({ item, onClick, selected, type }) => {
           <div className={`${blockClass}-cell-icon`}>{getItemIcon(item)}</div>
         )}
         <div className={`${blockClass}-form-control-label-text`}>
-          <span className={`${blockClass}-cell-title`}>{item.title}</span>
+          <span
+            className={`${blockClass}-cell-title`}
+            id={`control-label-${item.id}`}
+          >
+            {item.title}
+          </span>
           {item.subtitle && (
             <span className={`${blockClass}-cell-subtitle`}>
               {item.subtitle}

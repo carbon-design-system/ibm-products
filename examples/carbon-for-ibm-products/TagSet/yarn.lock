@@ -176,10 +176,17 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.19.0"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.18.3", "@babel/runtime@^7.18.9", "@babel/runtime@^7.9.1", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.18.3", "@babel/runtime@^7.9.1", "@babel/runtime@^7.9.2":
   version "7.21.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.21.5.tgz#8492dddda9644ae3bda3b45eabe87382caee7200"
   integrity sha512-8jI69toZqqcsnqGGqwGS4Qb1VwLOEp4hz+CXPywcvjs60u3B4Pom/U/7rm4W8tMOYEB+E9wgD0mW1l3r8qlI9Q==
+  dependencies:
+    regenerator-runtime "^0.13.11"
+
+"@babel/runtime@^7.22.3":
+  version "7.22.3"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.3.tgz#0a7fce51d43adbf0f7b517a71f4c3aaca92ebcbb"
+  integrity sha512-XsDuspWKLUsxwCp6r7EhsExHtYfbe5oAGQ19kqngTdCPUoPQzOPdUbD/pB9PJiwb2ptYKQDjSJT3R6dC+EPqfQ==
   dependencies:
     regenerator-runtime "^0.13.11"
 
@@ -234,19 +241,20 @@
   dependencies:
     "@carbon/layout" "^11.13.0"
 
-"@carbon/ibm-products@^2.0.0-rc.28":
-  version "2.0.0-rc.28"
-  resolved "https://registry.yarnpkg.com/@carbon/ibm-products/-/ibm-products-2.0.0-rc.28.tgz#47b32e334cf8cd2e764489f6d276236cb8e94ebc"
-  integrity sha512-Jx+HtjkaVF/QoZokNlb74OecHZ0KgdFUblcCGzlugzvNnftI2YhXaHD+qxAMhMgWllA6hxdbD19IJm4sAc40rw==
+"@carbon/ibm-products@^2.0.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@carbon/ibm-products/-/ibm-products-2.1.1.tgz#1bdc1bcd59a07faf620c6ea654ca9eac95c5c89a"
+  integrity sha512-cgY0cDCjqnNRYkYjSJizhngklPBV/5QCtG1dZ4+7Z1u3/GPsAoQtG+roO7D+9wBkifbX3sEqyBaPxCMWluTvGA==
   dependencies:
-    "@babel/runtime" "^7.18.9"
+    "@babel/runtime" "^7.22.3"
     "@carbon/telemetry" "^0.1.0"
-    framer-motion "^6.5.1"
+    framer-motion "^6.5.1 < 7"
     immutability-helper "^3.1.1"
+    lodash "^4.17.21"
     react-dnd "^15.1.2"
     react-dnd-html5-backend "^15.1.3"
     react-table "^7.8.0"
-    react-window "^1.8.7"
+    react-window "^1.8.9"
 
 "@carbon/icon-helpers@^10.39.0":
   version "10.39.0"
@@ -1297,7 +1305,7 @@ for-each@^0.3.3:
   dependencies:
     is-callable "^1.1.3"
 
-framer-motion@^6.5.1:
+"framer-motion@^6.5.1 < 7":
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-6.5.1.tgz#802448a16a6eb764124bf36d8cbdfa6dd6b931a7"
   integrity sha512-o1BGqqposwi7cgDrtg0dNONhkmPsUFDaLcKXigzuTFC5x58mE8iyTazxSudFzmT6MEyJKfjjU8ItoMe3W+3fiw==
@@ -2049,7 +2057,7 @@ react-table@^7.8.0:
   resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.8.0.tgz#07858c01c1718c09f7f1aed7034fcfd7bda907d2"
   integrity sha512-hNaz4ygkZO4bESeFfnfOft73iBUj8K5oKi1EcSHPAibEydfsX2MyU6Z8KCr3mv3C9Kqqh71U+DhZkFvibbnPbA==
 
-react-window@^1.8.7:
+react-window@^1.8.9:
   version "1.8.9"
   resolved "https://registry.yarnpkg.com/react-window/-/react-window-1.8.9.tgz#24bc346be73d0468cdf91998aac94e32bc7fa6a8"
   integrity sha512-+Eqx/fj1Aa5WnhRfj9dJg4VYATGwIUP2ItwItiJ6zboKWA6EX3lYDAXfGF2hyNqplEprhbtjbipiADEcwQ823Q==
@@ -2362,10 +2370,10 @@ use-resize-observer@^6.0.0:
   dependencies:
     resize-observer-polyfill "^1.5.1"
 
-vite@^4.3.2:
-  version "4.3.4"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-4.3.4.tgz#1c518d763d5a700d890c3a19ab59220f06e7a7d5"
-  integrity sha512-f90aqGBoxSFxWph2b39ae2uHAxm5jFBBdnfueNxZAT1FTpM13ccFQExCaKbR2xFW5atowjleRniQ7onjJ22QEg==
+vite@^4.3.9:
+  version "4.3.9"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-4.3.9.tgz#db896200c0b1aa13b37cdc35c9e99ee2fdd5f96d"
+  integrity sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==
   dependencies:
     esbuild "^0.17.5"
     postcss "^8.4.23"

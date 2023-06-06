@@ -295,15 +295,10 @@ export const TearsheetShell = React.forwardRef(
               {influencer}
             </Wrap>
             <Wrap className={`${bc}__right`}>
-              <Wrap
-                className={`${bc}__main`}
-                alwaysRender={includeActions}
-                // element={wide ? Layer : undefined}
-              >
+              <Wrap className={`${bc}__main`} alwaysRender={includeActions}>
                 <Wrap
                   className={`${bc}__content`}
                   alwaysRender={influencer && influencerPosition === 'right'}
-                  // element={wide ? Layer : undefined}
                 >
                   {children}
                 </Wrap>

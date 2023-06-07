@@ -17,7 +17,7 @@ export const withCarbonTheme = (StoryFn, context) => {
   useEffect(() => {
     const selector =
       context.viewMode === 'docs'
-        ? `#anchor--${context.id} .docs-story`
+        ? `.sbdocs-preview .docs-story`
         : '.sb-show-main';
 
     const rootElements = document.querySelectorAll(selector);

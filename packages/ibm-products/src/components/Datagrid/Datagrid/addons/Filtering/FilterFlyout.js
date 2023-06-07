@@ -7,7 +7,7 @@
  */
 
 import { Filter } from '@carbon/react/icons';
-import { Button, usePrefix } from '@carbon/react';
+import { IconButton, usePrefix } from '@carbon/react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef, useState, useEffect } from 'react';
@@ -159,18 +159,18 @@ const FilterFlyout = ({
 
   return (
     <div className={`${componentClass}__container`}>
-      <Button
+      <IconButton
+        label={flyoutIconDescription}
         kind="ghost"
-        hasIconOnly
-        tooltipPosition="bottom"
-        renderIcon={() => <Filter size={16} />}
-        iconDescription={flyoutIconDescription}
+        align="bottom"
         onClick={open ? closeFlyout : openFlyout}
         className={cx(`${componentClass}__trigger`, {
           [`${componentClass}__trigger--open`]: open,
         })}
         disabled={data.length === 0}
-      />
+      >
+        <Filter />
+      </IconButton>
       <div
         ref={filterFlyoutRef}
         className={cx(componentClass, {

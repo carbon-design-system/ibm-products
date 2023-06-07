@@ -172,7 +172,9 @@ export let ImportModal = forwardRef(
     const onCloseHandler = () => {
       setFiles([]);
       setImportUrl('');
-      onClose();
+      if (onClose) {
+        onClose();
+      }
     };
 
     const numberOfFiles = files.length;
@@ -369,11 +371,11 @@ ImportModal.propTypes = {
   /**
    * Specify a handler for "submitting" modal. Access the imported file via `file => {}`
    */
-  onRequestSubmit: PropTypes.func,
+  onRequestSubmit: PropTypes.func.isRequired,
   /**
    * Specify whether the Modal is currently open
    */
-  open: PropTypes.bool,
+  open: PropTypes.bool.isRequired,
   /**
    * Specify the text for the primary button
    */

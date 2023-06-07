@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.54.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.54.1...@carbon/ibm-products@1.54.2) (2023-06-06)
+
+
+### Bug Fixes
+
+* check for window before accessing ([#3058](https://github.com/carbon-design-system/ibm-products/issues/3058)) ([59f7bd1](https://github.com/carbon-design-system/ibm-products/commit/59f7bd18205c9011398ebf21cb20231c1832a2e1))
+* **DataGrid:** header misalignment when modal open - v1 ([#3069](https://github.com/carbon-design-system/ibm-products/issues/3069)) ([430f0e3](https://github.com/carbon-design-system/ibm-products/commit/430f0e32ca1870096566869ff558d929df1c349a))
+* stories and docs ([#3064](https://github.com/carbon-design-system/ibm-products/issues/3064)) ([411b106](https://github.com/carbon-design-system/ibm-products/commit/411b10673069fc195f731a94865c5c66f86efd40))
+
+
+
+
+
 ## [1.54.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.54.0...@carbon/ibm-products@1.54.1) (2023-05-31)
 
 

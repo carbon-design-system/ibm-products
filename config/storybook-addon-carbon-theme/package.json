@@ -1,6 +1,5 @@
 {
   "name": "@carbon/storybook-addon-theme",
-  "private": true,
   "description": "Carbon theme switcher for Storybook",
   "version": "2.0.0-rc.0",
   "license": "Apache-2.0",

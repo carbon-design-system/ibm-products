@@ -31,6 +31,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--edit-update-cards;
     .#{c4p-settings.$pkg-prefix}--card__header,
     .#{c4p-settings.$pkg-prefix}--card__footer {
       button {
+        color: $white-0;
         &:hover {
           // stylelint-disable-next-line carbon/theme-token-use
           background-color: $blue-60-hover;
@@ -70,6 +71,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--edit-update-cards;
       &:hover {
         background-color: transparent;
       }
+    }
+
+    .#{c4p-settings.$pkg-prefix}--card__header-container{
+      align-items: center;
     }
   }
   &:not(.#{$block-class}__actions-bottom) {

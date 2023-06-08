@@ -25,14 +25,11 @@ export let ProductiveCard = forwardRef(
     const validProps = prepareProps(rest, [
       'media',
       'mediaPosition',
-      'onSecondaryButtonClick',
       'pictogram',
       'primaryButtonClick',
       'productive',
       'secondaryButtonKind',
-      'secondaryButtonText',
     ]);
-
     return (
       <Card
         {...{ ...validProps, actionsPlacement, ref }}
@@ -101,6 +98,10 @@ ProductiveCard.propTypes = {
    */
   onPrimaryButtonClick: PropTypes.func,
   /**
+   * Function that's called from the secondary button or action icon
+   */
+  onSecondaryButtonClick: PropTypes.func,
+  /**
    * Use an overflow menu instead of action icons. Refer to design documentation for implementation guidelines
    */
   overflowActions: PropTypes.arrayOf(
@@ -131,6 +132,22 @@ ProductiveCard.propTypes = {
    * The text that's displayed in the primary button
    */
   primaryButtonText: PropTypes.node,
+  /**
+   * Optionally specify an href for your Button to become an <a> element
+   */
+  secondaryButtonHref: PropTypes.string,
+  /**
+   * Optional prop to allow overriding the icon rendering. Can be a React component class
+   */
+  secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  /**
+   * Determines if the secondary button is on the top or bottom of the card
+   */
+  secondaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
+  /**
+   * The text that's displayed in the secondary button
+   */
+  secondaryButtonText: PropTypes.node,
   /**
    * Title that's displayed at the top of the card
    */

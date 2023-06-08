@@ -73,12 +73,31 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
 
     /* stylelint-disable-next-line max-nesting-depth */
     &:hover {
+
       /* stylelint-disable-next-line max-nesting-depth */
       &::before {
         opacity: 0;
       }
+
+      /* stylelint-disable-next-line max-nesting-depth */
+      & + .#{$block-class}__actions-header-ghost-button {
+
+        /* stylelint-disable-next-line max-nesting-depth */
+        &::before {
+          opacity: 0;
+        }
+      }
     }
-  }
+
+    /* stylelint-disable-next-line max-nesting-depth */
+    &:first-child:not(:last-child) {
+
+      /* stylelint-disable-next-line max-nesting-depth */
+      &::before {
+        display: none;
+      }
+    }
+  }      
 
   .#{$block-class}__title-lg .#{$block-class}__actions-header,
   .#{$block-class}__header-has-label .#{$block-class}__actions-header {

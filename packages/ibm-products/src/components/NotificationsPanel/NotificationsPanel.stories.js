@@ -16,7 +16,6 @@ import {
   HeaderGlobalAction,
 } from '@carbon/react';
 import { User, Notification } from '@carbon/react/icons';
-import { white } from '@carbon/colors';
 import styles from './_storybook-styles.scss';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { UnreadNotificationBell } from './preview-components/UnreadNotificationBell';
@@ -67,23 +66,11 @@ const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
             {hasUnreadNotifications ? (
               <UnreadNotificationBell />
             ) : (
-              <Notification
-                size={20}
-                style={{
-                  /* stylelint-disable-next-line */
-                  fill: white,
-                }}
-              />
+              <Notification size={20} />
             )}
           </HeaderGlobalAction>
           <HeaderGlobalAction aria-label="App switcher">
-            <User
-              size={20}
-              style={{
-                /* stylelint-disable-next-line */
-                fill: white,
-              }}
-            />
+            <User size={20} />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
       </Header>

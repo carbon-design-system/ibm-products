@@ -220,6 +220,9 @@ export let Carousel = React.forwardRef(
   }
 );
 
+// Return a placeholder if not released and not enabled by feature flag
+Carousel = pkg.checkComponentEnabled(Carousel, componentName);
+
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
 Carousel.displayName = componentName;

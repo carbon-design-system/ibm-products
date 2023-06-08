@@ -102,8 +102,6 @@ export let Guidebanner = React.forwardRef(
           ref={scrollRef}
           scrollableChange={handleScrollableChange}
           scrollTune={-450}
-          // if not showing footer, override default 1rem with 2rem
-          style={{ paddingBottom: !showNavigation ? '2rem' : null }}
         >
           {children}
         </Carousel>

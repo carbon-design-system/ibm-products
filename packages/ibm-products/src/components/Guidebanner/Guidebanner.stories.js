@@ -58,7 +58,7 @@ const defaultProps = {
 
 const DefaultButtonLarge = () => (
   <GuidebannerElementButton
-    type="crossroads"
+    renderIcon="crossroads"
     onClick={() => {
       alert('Clicked the button');
     }}
@@ -99,10 +99,10 @@ const Template = ({ children, ...rest }) => {
   );
 };
 
-export const collapsable = prepareStory(Template, {
+export const collapsible = prepareStory(Template, {
   args: {
     ...defaultProps,
-    collapsable: true,
+    collapsible: true,
     children: (
       <React.Fragment>
         <GuidebannerElement
@@ -135,7 +135,7 @@ export const collapsable = prepareStory(Template, {
   },
 });
 
-export const manyItems = prepareStory(Template, {
+export const manyInsights = prepareStory(Template, {
   args: {
     ...defaultProps,
     children: (
@@ -170,7 +170,7 @@ export const manyItems = prepareStory(Template, {
   },
 });
 
-export const fewItems = prepareStory(Template, {
+export const fewInsights = prepareStory(Template, {
   args: {
     ...defaultProps,
     children: (

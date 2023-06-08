@@ -25,9 +25,6 @@ const componentName = 'GuidebannerElement';
 /**
  * The GuidebannerElement is a required child component of the Guidebanner,
  * and acts as a container for a CarouselItem.
- *
- * Note: all child components of GuidebannerElements must specify
- * a 'dark' theme where applicable.
  */
 const GuidebannerElement = ({
   button,

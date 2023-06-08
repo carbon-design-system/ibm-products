@@ -73,7 +73,6 @@ const defaults = {
     ButtonMenu: false,
 
     // Novice to pro components not yet reviewed and released:
-    Carousel: false,
     Guidebanner: false,
     NonLinearReading: false,
     /* new component flags here - comment used by generate CLI */

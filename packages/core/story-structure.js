@@ -136,6 +136,7 @@ const s = [
           'c/BreadcrumbWithOverflow',
           'c/ButtonSetWithOverflow',
           'c/CancelableTextEdit',
+          'c/Carousel',
           'c/ComboButton',
           'c/ExampleComponent',
           'c/FilterSummary',

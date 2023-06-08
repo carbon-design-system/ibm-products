@@ -54,6 +54,11 @@ const Template = (args) => {
 export const carousel = prepareStory(Template, {
   args: {
     // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#Carousel-args
-    children: 'hello, world',
+    children: (
+      <>
+        Carousel is a <em>Novice to Pro</em> internal component and is not
+        intended for general use.
+      </>
+    ),
   },
 });

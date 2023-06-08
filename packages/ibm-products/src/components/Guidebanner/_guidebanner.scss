@@ -34,7 +34,7 @@
 // TODO: @import(s) of IBM Products component styles used by Guidebanner
 
 @mixin when-collapsed($selector: '&') {
-  .#{$pkg-prefix}--guidebanner__collapsable-collapsed #{$selector} {
+  .#{$pkg-prefix}--guidebanner__collapsible-collapsed #{$selector} {
     @content;
   }
 }

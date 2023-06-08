@@ -32,35 +32,32 @@ const blockClass = `${pkg.prefix}--guidebanner`;
 const componentName = 'Guidebanner';
 
 const defaults = {
-  collapsable: false,
+  collapsible: false,
   // Labels
-  backIconDescription: 'Back',
   closeIconDescription: 'Close',
   collapseButtonLabel: 'Read less',
   expandButtonLabel: 'Read more',
   nextIconDescription: 'Next',
+  previousIconDescription: 'Back',
 };
 
 /**
- * The guide banner sit at the top of a page, or page-level tab,
+ * The guide banner sits at the top of a page, or page-level tab,
  * to introduce foundational concepts related to the page's content.
- *
- * Note: all child components of GuidebannerElements must specify
- * a 'dark' theme where applicable.
  */
 export let Guidebanner = React.forwardRef(
   (
     {
       children,
       className,
-      collapsable = defaults.collapsable,
+      collapsible = defaults.collapsible,
       onClose,
       // Labels
-      backIconDescription = defaults.backIconDescription,
       closeIconDescription = defaults.closeIconDescription,
       collapseButtonLabel = defaults.collapseButtonLabel,
       expandButtonLabel = defaults.expandButtonLabel,
       nextIconDescription = defaults.nextIconDescription,
+      previousIconDescription = defaults.previousIconDescription,
       title,
       ...rest
     },
@@ -70,7 +67,7 @@ export let Guidebanner = React.forwardRef(
     const toggleRef = useRef();
     const [scrollPosition, setScrollPosition] = useState(0);
     const [showNavigation, setShowNavigation] = useState(false);
-    const [isCollapsed, setIsCollapsed] = useState(collapsable ? true : false);
+    const [isCollapsed, setIsCollapsed] = useState(collapsible ? true : false);
 
     const handleScrollableChange = (value) => {
       setShowNavigation(value);
@@ -89,8 +86,8 @@ export let Guidebanner = React.forwardRef(
         className={cx(
           blockClass,
           className,
-          [collapsable ? `${blockClass}__collapsable` : null],
-          [isCollapsed ? `${blockClass}__collapsable-collapsed` : null]
+          [collapsible ? `${blockClass}__collapsible` : null],
+          [isCollapsed ? `${blockClass}__collapsible-collapsed` : null]
         )}
         ref={ref}
         {...getDevtoolsProps(componentName)}
@@ -105,16 +102,17 @@ export let Guidebanner = React.forwardRef(
           ref={scrollRef}
           scrollableChange={handleScrollableChange}
           scrollTune={-450}
-          theme="dark"
+          // if not showing footer, override default 1rem with 2rem
+          style={{ paddingBottom: !showNavigation ? '2rem' : null }}
         >
           {children}
         </Carousel>
         <div
           className={cx([
-            collapsable || showNavigation ? `${blockClass}__navigation` : null,
+            collapsible || showNavigation ? `${blockClass}__navigation` : null,
           ])}
         >
-          {collapsable && (
+          {collapsible && (
             <Button
               kind="ghost"
               size="md"
@@ -140,7 +138,7 @@ export let Guidebanner = React.forwardRef(
                     : null,
                 ])}
                 tooltipPosition="top"
-                iconDescription={backIconDescription}
+                iconDescription={previousIconDescription}
                 onClick={() => {
                   scrollRef.current
                     .scrollPrev()
@@ -174,6 +172,7 @@ export let Guidebanner = React.forwardRef(
             </>
           )}
         </div>
+
         {onClose && (
           <Button
             className={`${blockClass}__close-button`}
@@ -203,11 +202,6 @@ Guidebanner.displayName = componentName;
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 Guidebanner.propTypes = {
-  /**
-   * Tooltip text and aria label for the Back button icon.
-   */
-  backIconDescription: PropTypes.string,
-
   /**
    * Provide the contents of the Guidebanner.
    * One or more GuidebannerElement components are required.
@@ -246,17 +240,17 @@ Guidebanner.propTypes = {
   closeIconDescription: PropTypes.string,
 
   /**
+   * Text label for the Collapse button.
+   */
+  collapseButtonLabel: PropTypes.string,
+
+  /**
    * When true, the Guidebanner will initialize in a collapsed state,
    * showing the title and the Expand button.
    *
    * When expanded, it will show the GuidebannerElement child components and the Collapse button.
    */
-  collapsable: PropTypes.bool,
-
-  /**
-   * Text label for the Collapse button.
-   */
-  collapseButtonLabel: PropTypes.string,
+  collapsible: PropTypes.bool,
 
   /**
    * Text label for the Expand button.
@@ -273,6 +267,11 @@ Guidebanner.propTypes = {
    * callback function will be triggered when button is clicked.
    */
   onClose: PropTypes.func,
+
+  /**
+   * Tooltip text and aria label for the Back button icon.
+   */
+  previousIconDescription: PropTypes.string,
 
   /**
    * Title text.

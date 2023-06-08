@@ -27,8 +27,13 @@ const componentName = 'GuidebannerElementButton';
 /**
  * One of two buttons styled specifically for the GuidebannerElement.
  */
-const GuidebannerElementButton = ({ children, className, type, ...rest }) => {
-  if (type === 'crossroads') {
+const GuidebannerElementButton = ({
+  children,
+  className,
+  renderIcon,
+  ...rest
+}) => {
+  if (renderIcon === 'crossroads') {
     return (
       <Button
         {...rest}
@@ -74,11 +79,9 @@ GuidebannerElementButton.propTypes = {
   className: PropTypes.string,
 
   /**
-   * If type is "crossroads", return a button with the "crossroads" icon.
-   *
-   * The "crossroads" button should only be used with the first carousel item.
+   * If renderIcon is "crossroads", return a button with the "crossroads" icon.
    */
-  type: PropTypes.string,
+  renderIcon: PropTypes.string,
 
   /* TODO: add types and DocGen for all props. */
 };

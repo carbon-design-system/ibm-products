@@ -34,12 +34,12 @@ const componentName = 'Carousel';
 const defaults = {
   disableArrowScroll: false,
   scrollTune: 0,
-  theme: 'light',
 };
 
 /**
- * DO NOT USE. This component is for the exclusive use
- * of other Novice to Pro components.
+ * The Carousel acts as a scaffold for other Novice to Pro content.
+ *
+ * This component is not intended for general use.
  */
 export let Carousel = React.forwardRef(
   (
@@ -50,7 +50,6 @@ export let Carousel = React.forwardRef(
       fadedEdgeColor,
       scrollableChange,
       scrollTune = defaults.scrollTune,
-      theme = defaults.theme,
       ...rest
     },
     ref
@@ -186,7 +185,7 @@ export let Carousel = React.forwardRef(
       <div
         {...rest}
         tabIndex={-1}
-        className={cx(blockClass, className, `${blockClass}__${theme}`)}
+        className={cx(blockClass, className)}
         ref={carouselRef}
         role="main"
         {...getDevtoolsProps(componentName)}
@@ -267,8 +266,4 @@ Carousel.propTypes = {
    * when the carousel has completed scrolling a single item.
    */
   scrollableChange: PropTypes.func,
-  /**
-   * Determines the theme of the component.
-   */
-  theme: PropTypes.oneOf(['light', 'dark']),
 };

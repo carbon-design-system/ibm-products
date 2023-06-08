@@ -26,19 +26,26 @@ _[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-acr
 is a continuous learning methodology + framework aimed to orient, onboard,
 explain, educate, and cultivate novice users into high-functioning power users._
 
+## Note on theming
+
+The Guidebanner is theme-agnostic; it is always white text on a graduated
+background. If you intend on using a theme-enabled component as part of the
+content such as a link or button, be sure to specify `theme='dark'` with your
+component so that it shows up correctly against the dark background.
+
 ## Example usage
 
-### Collapsable
+### Collapsible
 
 This is the typical use-case. The guide banner is minimized until the user opts
 to expand it by clicking the "Read more" button.
 
-Set the Guidebanner's `collapsable` prop to true.
+Set the Guidebanner's `collapsible` prop to true.
 
 <!-- TODO: One example per designed use case. -->
 
 <Canvas>
-  <Story id={getStoryId(Guidebanner.displayName, 'collapsable')} />
+  <Story id={getStoryId(Guidebanner.displayName, 'collapsible')} />
 </Canvas>
 
 ### Expanded
@@ -48,12 +55,8 @@ Alternate use-case. The guide banner is always expanded.
 <!-- TODO: One example per designed use case. -->
 
 <Canvas>
-  <Story id={getStoryId(Guidebanner.displayName, 'many-items')} />
+  <Story id={getStoryId(Guidebanner.displayName, 'many-insights')} />
 </Canvas>
-
-## Code sample
-
-<!-- <CodesandboxLink exampleDirectory="Guidebanner" /> -->
 
 ## Component API
 

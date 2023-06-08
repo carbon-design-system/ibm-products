@@ -7063,7 +7063,6 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--card__productive .c4p--card__actions-header-ghost-button:hover {
   /* stylelint-disable-next-line max-nesting-depth */
-  /* stylelint-disable-next-line max-nesting-depth */
 }
 .c4p--card__productive .c4p--card__actions-header-ghost-button:hover::before {
   opacity: 0;

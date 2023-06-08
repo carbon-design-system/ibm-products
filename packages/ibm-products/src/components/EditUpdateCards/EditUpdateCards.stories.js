@@ -31,7 +31,6 @@ import {
 import {
   Edit,
   Save,
-  Close,
   ProgressBarRound,
   CheckmarkFilled,
 } from '@carbon/react/icons';
@@ -74,7 +73,7 @@ const Template = (args) => {
     { value: '150', text: '150MBps' },
     { value: '200', text: '200MBps' },
   ];
-  
+
   const options = speedOptions.map((option) => {
     return (
       <SelectItem
@@ -85,7 +84,6 @@ const Template = (args) => {
       />
     );
   });
-  
 
   const onSave = (event) => {
     event.preventDefault();
@@ -179,9 +177,7 @@ const Template = (args) => {
             labelText="Name"
             defaultValue={name}
             id={name}
-            onChange={(event) =>
-              setName(event.target.value)
-            }
+            onChange={(event) => setName(event.target.value)}
           />
         </Column>
         <Column sm={4} className={pkg.prefix + `--edit-update-cards--items`}>
@@ -214,9 +210,7 @@ const Template = (args) => {
             name="speed"
             id={'speed'}
             defaultValue={speedValue}
-            onChange={(event) =>
-              setSpeedValue(event.target.value)
-            }
+            onChange={(event) => setSpeedValue(event.target.value)}
           >
             {options}
           </Select>
@@ -231,9 +225,7 @@ const Template = (args) => {
             labelText="Other details"
             rows={2}
             defaultValue={bodyCopy}
-            onChange={(event) =>
-              setBodyCopy(event.target.value)
-            }
+            onChange={(event) => setBodyCopy(event.target.value)}
           />
         </Column>
       </Grid>
@@ -257,11 +249,11 @@ const Template = (args) => {
           editMode={editMode}
           {...args}
           onPrimaryButtonClick={onSave}
-          onSecondaryButtonClick={()=>setEditMode(false)}
+          onSecondaryButtonClick={() => setEditMode(false)}
           primaryButtonIcon={Save}
-          primaryButtonText={editMode && !loading ? "Save" : null}
+          primaryButtonText={editMode && !loading ? 'Save' : null}
           secondaryButtonIcon={null}
-          secondaryButtonText={editMode && !loading ? "Cancel" : null}
+          secondaryButtonText={editMode && !loading ? 'Cancel' : null}
           id={`${
             editMode ? pkg.prefix + '--edit-update-cards--edit' : ''
           }`} /*Used id for overriding the SVG(icon) path fill*/

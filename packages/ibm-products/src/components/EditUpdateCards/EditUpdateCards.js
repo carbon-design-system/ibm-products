@@ -76,15 +76,14 @@ export let EditUpdateCards = React.forwardRef(
       onPrimaryButtonClick: onPrimaryButtonClick,
       onSecondaryButtonClick: onSecondaryButtonClick,
       primaryButtonIcon: primaryButtonIcon,
-      primaryButtonKind: "ghost",
-      primaryButtonPlacement: "top",
+      primaryButtonKind: 'ghost',
+      primaryButtonPlacement: 'top',
       primaryButtonText: primaryButtonText,
       secondaryButtonIcon: secondaryButtonIcon,
-      secondaryButtonKind: "ghost",
-      secondaryButtonPlacement: "top",
+      secondaryButtonKind: 'ghost',
+      secondaryButtonPlacement: 'top',
       secondaryButtonText: secondaryButtonText,
     };
-
 
     return (
       <div

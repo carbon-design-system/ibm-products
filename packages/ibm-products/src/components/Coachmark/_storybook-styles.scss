@@ -1,0 +1,24 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/project-settings';
+
+// TODO: add any additional styles used by Coachmark.stories.js
+
+.coachmarkExample {
+  > .docs-story {
+    height: 100px;
+    .CoachmarkBaseExampleUsage {
+      height: 100px;
+      position: relative;
+      box-sizing: border-box;
+      margin: auto;
+      padding: 1rem;
+      max-height: 100%;
+    }
+  }
+}

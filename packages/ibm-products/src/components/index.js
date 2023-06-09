@@ -85,3 +85,13 @@ export { EditUpdateCards } from './EditUpdateCards';
 export { InlineEdit } from './InlineEdit';
 export { EditInPlace } from './EditInPlace';
 export { NonLinearReading } from './NonLinearReading';
+
+export {
+  Coachmark,
+  CoachmarkBeacon,
+  CoachmarkButton,
+  CoachmarkFixed,
+  CoachmarkOverlayElement,
+  CoachmarkOverlayElements,
+  CoachmarkStack,
+} from './Coachmark';

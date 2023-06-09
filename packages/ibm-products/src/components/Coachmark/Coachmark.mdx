@@ -1,0 +1,50 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { Coachmark } from '.';
+
+# Coachmark
+
+## Table of Contents
+
+- [Overview](#overview)
+<!-- - [Example usage](#example-usage) -->
+- [Code Sample](#code-sample)
+- [Component API](#component-api)
+
+## Overview
+
+<!-- TODO: Overview. -->
+<!--
+## Example usage
+-->
+<!-- TODO: One example per designed use case. -->
+
+<Canvas className="coachmarkExample">
+  <div className="CoachmarkBaseExampleUsage">
+    <Story id={getStoryId(Coachmark.displayName, 'coachmark')} />
+  </div>
+</Canvas>
+
+## Code sample
+
+```jsx
+<Coachmark
+  theme={'light'}
+  align={'top'}
+  positionTune={{ x: 15, y: 10 }}
+  target={<CoachmarkBeacon label='Show information' kind={'default} />}>
+  <CoachmarkOverlayElements closeButtonLabel='Done'>
+    <CoachmarkOverlayElement title='Hello World' description='this is a description test' />
+  </CoachmarkOverlayElements>
+</Coachmark>
+
+```
+
+<!-- <CodesandboxLink exampleDirectory="Coachmark" /> -->
+
+## Component API
+
+<ArgsTable />

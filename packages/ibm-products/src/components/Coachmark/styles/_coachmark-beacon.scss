@@ -1,0 +1,139 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../../global/styles/project-settings';
+@import '../../../global/styles/mixins';
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin coachmark-beacon {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--coachmark-beacon;
+  $beaconAnimationTime: 2s;
+  .#{$block-class} {
+    position: relative;
+    &-default {
+      .#{$block-class}__target {
+        // the blue dot
+        &:after {
+          background-color: $blue-50;
+          border-radius: 50%;
+          content: '';
+          height: $spacing-04;
+          position: absolute;
+          width: $spacing-04;
+          top: calc($spacing-01 + $spacing-03);
+          left: calc($spacing-01 + $spacing-03);
+        }
+      }
+    }
+    &-ring {
+      .#{$block-class}__center {
+        -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' width='80px' height='80px' viewBox='0 0 80 80'%3E%3Cpath fill='white' stroke='none' d='M 0, 0 m 37 -2 a 40 40 0 1 0 1 0 Z m 1 28 a 12 12 0 1 1 -1 0 Z' /%3E%3C/svg%3E");
+        mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' width='80px' height='80px' viewBox='0 0 80 80'%3E%3Cpath fill='white' stroke='none' d='M 0, 0 m 37 -2 a 40 40 0 1 0 1 0 Z m 1 28 a 12 12 0 1 1 -1 0 Z' /%3E%3C/svg%3E");
+        circle {
+          animation: ringRipple $beaconAnimationTime infinite;
+        }
+      }
+    }
+
+    .#{$block-class}__target {
+      // the hit area
+      background-color: transparent;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      height: $spacing-07;
+      left: calc(-1 * $spacing-05);
+      padding: 0;
+      position: absolute;
+      top: calc(-1 * $spacing-05);
+      width: $spacing-07;
+
+      &[aria-expanded='true'] {
+        circle {
+          animation: none;
+        }
+      }
+    }
+
+    &__center {
+      position: absolute;
+      z-index: 6900;
+      left: calc(($spacing-06 - $spacing-01) * -1);
+      top: calc(($spacing-06 - $spacing-01) * -1);
+      pointer-events: none;
+      width: $spacing-11;
+      height: $spacing-11;
+      circle {
+        stroke: $support-04;
+        stroke-width: 1px;
+        stroke-opacity: 0;
+        fill-opacity: 0;
+        fill: $support-04;
+        transition-timing-function: carbon--motion(exit, productive);
+        animation: ripple $beaconAnimationTime infinite;
+        -webkit-mask-image: none;
+        mask-image: none;
+        @media (prefers-reduced-motion) {
+          animation: none;
+        }
+      }
+    }
+  }
+
+  @keyframes ripple {
+    0% {
+      stroke-opacity: 0;
+      fill-opacity: 0;
+      r: 1px;
+      transition-timing-function: carbon--motion(entrance, productive);
+    }
+    31% {
+      stroke-opacity: 1;
+      fill-opacity: 0.2;
+    }
+    62% {
+      stroke-opacity: 0;
+      fill-opacity: 0;
+      r: 32px;
+    }
+    100% {
+      stroke-opacity: 0;
+      fill-opacity: 0;
+      r: 32px;
+    }
+  }
+
+  @keyframes ringRipple {
+    0% {
+      stroke-opacity: 0;
+      fill-opacity: 0;
+      r: 12px;
+      transition-timing-function: carbon--motion(entrance, productive);
+    }
+    31% {
+      stroke-opacity: 1;
+      fill-opacity: 0.2;
+    }
+    62% {
+      stroke-opacity: 0;
+      fill-opacity: 0;
+      r: 32px;
+    }
+    100% {
+      stroke-opacity: 0;
+      fill-opacity: 0;
+      r: 32px;
+    }
+  }
+}
+
+@include exports('coachmark-beacon') {
+  @include coachmark-beacon;
+}

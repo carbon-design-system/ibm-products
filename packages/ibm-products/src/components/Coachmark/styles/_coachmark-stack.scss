@@ -1,0 +1,82 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../../global/styles/project-settings';
+@import '../../../global/styles/mixins';
+
+// Other Carbon settings.
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+
+// CoachmarkStack uses the following Carbon components:
+// TODO: @import(s) of Carbon component styles used by CoachmarkStack
+
+// CoachmarkStack uses the following Carbon for IBM Products components:
+// TODO: @import(s) of IBM Products component styles used by CoachmarkStack
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin coachmark-stack {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+
+  $block-class: #{$pkg-prefix}--coachmark-stack;
+  $home-class: #{$block-class}-home;
+  $overlay-class: #{$prefix}--coachmark-overlay;
+
+  // FIRST ITEM IS THE "PARENT" STACK ITEM
+  .#{$home-class}__nav-links {
+    margin-top: $spacing-04;
+    margin-left: calc(-1 * $spacing-05);
+  }
+
+  .#{$block-class} {
+    $block: &;
+    bottom: 0;
+    position: fixed;
+    right: $spacing-05;
+    transform: translateY(100%);
+    transition: 240ms carbon--motion(exit, productive);
+    z-index: 5901;
+
+    &--is-visible {
+      transform: translateY(0);
+    }
+
+    // Stack the level-one item behind the level-two item.
+    &--is-stacked {
+      overflow: hidden;
+      bottom: 0;
+      pointer-events: none;
+      transform: perspective(carbon--mini-units(18))
+        translate3d(0, calc($spacing-09 * -1), calc($spacing-05 * -1));
+      transform-origin: top center;
+
+      &__light {
+        background-color: $gray-90;
+      }
+      &__dark {
+        background-color: $active-tertiary;
+      }
+    }
+  }
+
+  // ALL SUBSEQUENT ITEMS ARE THE "CHILD" STACK ITEMS
+  .#{$block-class} ~ .#{$block-class} {
+    opacity: 0;
+    transform: translateY(100%);
+    z-index: 5902;
+
+    &--is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@include exports('coachmark-stack') {
+  @include coachmark-stack;
+}

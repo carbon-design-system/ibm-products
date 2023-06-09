@@ -64,7 +64,9 @@
   "words": [
     "apikey",
     "buildhome",
+    "callout",
     "checkmark",
+    "coachmark",
     "colindex",
     "columnheader",
     "dasharray",
@@ -73,6 +75,7 @@
     "Datagrid",
     "draggable",
     "gridcell",
+    "guidebanner",
     "homescreen",
     "listbox",
     "loglevel",

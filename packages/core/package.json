@@ -33,7 +33,7 @@
     "@carbon/layout": "^11.14.0",
     "@carbon/motion": "^11.11.0",
     "@carbon/react": "~1.30.0",
-    "@carbon/storybook-addon-theme": "^0.22.41",
+    "@carbon/storybook-addon-theme": "^1.0.0",
     "@carbon/themes": "^11.19.0",
     "@carbon/type": "^11.18.0",
     "@storybook/addon-actions": "^6.5.16",

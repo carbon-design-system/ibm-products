@@ -13,7 +13,12 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
-import { Datagrid, useDatagrid, useExpandedRow, useRowExpandListener } from '../../index';
+import {
+  Datagrid,
+  useDatagrid,
+  useExpandedRow,
+  useRowExpandListener,
+} from '../../index';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';

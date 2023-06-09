@@ -75,6 +75,13 @@ $action-set-height: rem(64px);
 }
 
 // Carbon overrides
+.#{variables.$block-class}-filter-flyout__trigger.#{c4p-settings.$carbon-prefix}--btn {
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  justify-content: center;
+}
+
 .#{variables.$block-class}-filter-flyout__trigger--open.#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$carbon-prefix}--btn--icon-only {
   position: relative;
   background-color: $layer-02;

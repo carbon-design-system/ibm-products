@@ -58,7 +58,7 @@ const defaultProps = {
 
 const DefaultButtonLarge = () => (
   <GuidebannerElementButton
-    renderIcon="crossroads"
+    type="primary"
     onClick={() => {
       alert('Clicked the button');
     }}

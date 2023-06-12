@@ -23,18 +23,21 @@ import {
 
 import { EditTearsheetNarrow } from '.';
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
-import mdx from './EditTearsheetNarrow.mdx';
+// import mdx from './EditTearsheetNarrow.mdx';
 
 import styles from '../CreateTearsheetNarrow/_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(EditTearsheetNarrow.displayName),
   component: CreateTearsheetNarrow,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

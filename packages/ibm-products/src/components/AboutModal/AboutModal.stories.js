@@ -19,7 +19,7 @@ import { AboutModal } from '.';
 
 import { Button, Link } from '@carbon/react';
 
-import mdx from './AboutModal.mdx';
+// import mdx from './AboutModal.mdx';
 
 import ExampleLogo from './_story-assets/example-logo.svg';
 import ansibleLogo from './_story-assets/ansible-logo.png';
@@ -33,9 +33,10 @@ const blockClass = `${pkg.prefix}--about-modal`;
 export default {
   title: getStoryTitle(AboutModal.displayName),
   component: AboutModal,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: { page: mdx },
+    // docs: { page: mdx },
     controls: { sort: 'requiredFirst' },
   },
   argTypes: {
@@ -145,8 +146,10 @@ const logo = (
   />
 );
 
-const Template = (storyName, storyInitiallyOpen, props) => {
-  const [open, setOpen] = useState(storyInitiallyOpen);
+const Template = (storyName, storyInitiallyOpen, props, context) => {
+  const [open, setOpen] = useState(
+    context.viewMode !== 'docs' && storyInitiallyOpen
+  );
   const [beenOpen, setBeenOpen] = useState(false);
   useEffect(() => setBeenOpen(beenOpen || open), [open, beenOpen]);
 

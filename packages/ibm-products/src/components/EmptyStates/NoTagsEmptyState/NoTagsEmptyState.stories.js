@@ -8,7 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
-import mdx from './NoTagsEmptyState.mdx';
+// import mdx from './NoTagsEmptyState.mdx';
 import {
   getStoryTitle,
   prepareStory,
@@ -21,11 +21,14 @@ import { NoTagsEmptyState } from '.';
 export default {
   title: getStoryTitle(NoTagsEmptyState.displayName),
   component: NoTagsEmptyState,
+  tags: ['autodocs'],
   parameters: {
     // styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

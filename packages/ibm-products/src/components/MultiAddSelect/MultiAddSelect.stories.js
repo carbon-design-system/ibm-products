@@ -12,7 +12,7 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { MultiAddSelect } from '.';
-import mdx from './MultiAddSelect.mdx';
+// import mdx from './MultiAddSelect.mdx';
 import { Button } from '@carbon/react';
 // import { action } from '@storybook/addon-actions';
 import image from '../UserProfileImage/headshot.jpg'; // cspell:disable-line
@@ -24,11 +24,14 @@ const blockClass = `${pkg.prefix}--add-select__meta-panel`;
 export default {
   title: getStoryTitle(MultiAddSelect.displayName),
   component: MultiAddSelect,
+  tags: ['autodocs'],
   parameters: {
     // styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 
@@ -101,8 +104,8 @@ const defaultProps = {
   filterByLabel: 'Filter',
 };
 
-const Template = (args) => {
-  const [open, setOpen] = useState(true);
+const Template = (args, context) => {
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
   return (
     <>
       <MultiAddSelect {...args} open={open} onClose={() => setOpen(false)} />

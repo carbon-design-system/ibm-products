@@ -16,7 +16,7 @@ import { CreateFullPageStep } from '../CreateFullPage/CreateFullPageStep';
 import { pkg } from '../../settings';
 
 import { EditFullPage } from '.';
-import mdx from './EditFullPage.mdx';
+// import mdx from './EditFullPage.mdx';
 
 import styles from '../CreateFullPage/_storybook-styles.scss';
 
@@ -40,11 +40,12 @@ import {
 export default {
   title: getStoryTitle(EditFullPage.displayName),
   component: CreateFullPage,
+  tags: ['autodocs'],
   subcomponents: { CreateFullPageStep },
   parameters: {
     styles,
     layout: 'fullscreen',
-    docs: { page: mdx },
+    // docs: { page: mdx },
     controls: { sort: 'requiredFirst' },
   },
   decorators: [

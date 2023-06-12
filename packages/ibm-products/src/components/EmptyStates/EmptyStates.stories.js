@@ -13,7 +13,7 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-import mdx from './EmptyState.mdx';
+// import mdx from './EmptyState.mdx';
 
 import {
   EmptyState,
@@ -30,6 +30,7 @@ import {
 export default {
   title: getStoryTitle(EmptyState.displayName),
   component: EmptyState,
+  tags: ['autodocs'],
   subcomponents: {
     ErrorEmptyState,
     NoDataEmptyState,
@@ -40,9 +41,11 @@ export default {
   },
   parameters: {
     // styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

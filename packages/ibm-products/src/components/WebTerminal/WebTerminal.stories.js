@@ -18,7 +18,7 @@ import {
 } from '../../global/js/utils/story-helper';
 import { WebTerminal } from '.';
 import { WebTerminalContentWrapper } from './WebTerminalContentWrapper';
-import mdx from './WebTerminal.mdx';
+// import mdx from './WebTerminal.mdx';
 import { documentationLinks } from './preview-components/documentationLinks';
 import { WebTerminalProvider } from './hooks';
 
@@ -88,10 +88,13 @@ export const WithActions = prepareStory(Template, {
 
 export default {
   title: getStoryTitle(WebTerminal.displayName),
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };

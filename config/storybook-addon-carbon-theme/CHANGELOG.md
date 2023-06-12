@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.0-rc.0] Storybook 7 supoort
+
+### Breaking change
+
+- Rewrite to support Storybook 7, no longer supports storybook 6. Use V1 for storybook 6 support.
+
 ## [1.0.0]
 
  Update version to v1 as the Storybook 6 support version.

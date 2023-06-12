@@ -1,6 +1,20 @@
-//
-// Copyright IBM Corp. 2021, 2021
+// Copyright IBM Corp. 2023, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
+$story-anchor: 'http-errors';
+div[id*='#{$story-anchor}'] .docs-story {
+  min-height: 50vh;
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  transform: translateZ(0);
+}
+
+div[id*='#{$story-anchor}'] .docs-story > div:first-child {
+  overflow: auto;
+  width: 100%;
+}
+
+div[id*='#{$story-anchor}'] .docs-story .preview-position-fix {
+  min-height: 50vh;
+}

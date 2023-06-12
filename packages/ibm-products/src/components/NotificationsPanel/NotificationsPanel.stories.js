@@ -28,7 +28,7 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 
-import mdx from './NotificationsPanel.mdx';
+// import mdx from './NotificationsPanel.mdx';
 import data from './NotificationsPanel_data';
 
 const storyBlockClass = `${pkg.prefix}--notifications-panel__story`;
@@ -36,11 +36,14 @@ const storyBlockClass = `${pkg.prefix}--notifications-panel__story`;
 export default {
   title: getStoryTitle(NotificationsPanel.displayName),
   component: NotificationsPanel,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

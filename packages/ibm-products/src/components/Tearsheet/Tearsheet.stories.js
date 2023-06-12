@@ -39,13 +39,14 @@ import {
 
 import styles from './_storybook-styles.scss';
 
-import mdx from './Tearsheet.mdx';
+// import mdx from './Tearsheet.mdx';
 
 export default {
   title: getStoryTitle(Tearsheet.displayName),
   component: Tearsheet,
+  tags: ['autodocs'],
   subcomponents: { TearsheetNarrow },
-  parameters: { styles, docs: { page: mdx } },
+  parameters: { styles /* docs: { page: mdx } */ },
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),
     actions: {

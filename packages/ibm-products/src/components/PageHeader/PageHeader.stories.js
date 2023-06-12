@@ -52,7 +52,7 @@ import { demoTableHeaders, demoTableData } from './PageHeaderDemo.data';
 
 import styles from './_storybook-styles.scss';
 
-import mdx from './PageHeader.mdx';
+// import mdx from './PageHeader.mdx';
 
 const storyClass = 'page-header-stories';
 
@@ -398,10 +398,21 @@ const fullWidthGrid = {
 export default {
   title: getStoryTitle(PageHeader.displayName),
   component: PageHeader,
+  tags: ['autodocs'],
   subcomponents: { ActionBarItem },
-  parameters: { styles, layout: 'fullscreen', docs: { page: mdx } },
+  parameters: { styles, layout: 'fullscreen' /* docs: { page: mdx } */ },
   decorators: [
-    (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
+    (story, { args }) => (
+      <div
+        className={cx(`${storyClass}__viewport`, {
+          [`${storyClass}__viewport--scroll`]:
+            args?.storyOptionWholePageScroll ?? false,
+        })}
+        key={args?.storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}
+      >
+        {story()}
+      </div>
+    ),
   ],
   argTypes: {
     actionBarItems: {
@@ -443,6 +454,11 @@ export default {
       },
       options: Object.values(pageActions).map((_k, i) => i),
       mapping: Object.values(pageActions),
+    },
+    storyOptionWholePageScroll: {
+      control: {
+        type: 'boolean',
+      },
     },
     tags: {
       control: {
@@ -559,7 +575,13 @@ const actionTitleSave = action('title onSave');
 const actionTitleCancel = action('title change cancelled');
 // Template.
 // eslint-disable-next-line react/prop-types
-const Template = ({ children, title, ...props }) => {
+const Template = ({
+  children,
+  // eslint-disable-next-line no-unused-vars
+  storyOptionWholePageScroll,
+  title,
+  ...props
+}) => {
   const carbonPrefix = usePrefix();
   // eslint-disable-next-line react/prop-types
   const [titleText, setTitleText] = useState(title?.text ?? title);
@@ -612,23 +634,25 @@ const Template = ({ children, title, ...props }) => {
   return (
     <>
       <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
-      <PageHeader
-        {...props}
-        title={
-          title?.onSave
-            ? {
-                ...title,
-                text: titleText,
-                onChange: handleTitleChange,
-                onSave: handleTitleSave,
-                onCancel: handleTitleCancel,
-              }
-            : title
-        }
-      >
-        {children}
-      </PageHeader>
-      {dummyPageContent}
+      <div className={`${storyClass}__content-container`}>
+        <PageHeader
+          {...props}
+          title={
+            title?.onSave
+              ? {
+                  ...title,
+                  text: titleText,
+                  onChange: handleTitleChange,
+                  onSave: handleTitleSave,
+                  onCancel: handleTitleCancel,
+                }
+              : title
+          }
+        >
+          {children}
+        </PageHeader>
+        {dummyPageContent}
+      </div>
     </>
   );
 };
@@ -784,54 +808,45 @@ export const fullyLoadedAndSome = prepareStory(Template, {
 
 // Template for demo.
 // eslint-disable-next-line react/prop-types
-const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
+const TemplateDemo = ({
+  children,
+  // eslint-disable-next-line no-unused-vars
+  storyOptionWholePageScroll,
+  ...props
+}) => {
   const carbonPrefix = usePrefix();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
 
   return (
     <>
       <style>{`.${carbonPrefix}--modal { opacity: 0; }`};</style>
-      <div
-        className={cx(`${storyClass}__app`, {
-          [`${storyClass}__app--whole-page-scroll`]:
-            !storyOptionWholePageScroll,
-        })}
-        key={storyOptionWholePageScroll ? 'keyYes' : 'keyNo'}
-      >
-        <Header aria-label="IBM Platform Name">
-          <HeaderMenuButton
-            aria-label="Open menu"
-            isCollapsible
-            onClick={() => {
-              setIsSideNavExpanded((prev) => !prev);
-            }}
-            isActive={isSideNavExpanded}
-          />
-          <HeaderName href="#" prefix="IBM">
-            Products application
-          </HeaderName>
-          <SideNav
-            aria-label="Side navigation"
-            expanded={isSideNavExpanded}
-            isFixedNav
-          >
-            <SideNavItems>
-              <SideNavLink href="javascript:void(0)">
-                Sample side bar
-              </SideNavLink>
-            </SideNavItems>
-          </SideNav>
-        </Header>
-        <div
-          className={`${storyClass}__content-container`}
-          style={{
-            // stylelint-disable-next-line carbon/layout-token-use
-            marginTop: '48px',
+      <Header aria-label="IBM Platform Name">
+        <HeaderMenuButton
+          aria-label="Open menu"
+          isCollapsible
+          onClick={() => {
+            setIsSideNavExpanded((prev) => !prev);
           }}
+          isActive={isSideNavExpanded}
+        />
+        <HeaderName href="#" prefix="IBM">
+          Products application
+        </HeaderName>
+        <SideNav
+          aria-label="Side navigation"
+          expanded={isSideNavExpanded}
+          isFixedNav
         >
-          <PageHeader {...props}>{children}</PageHeader>
-          {demoDummyPageContent}
-        </div>
+          <SideNavItems>
+            <SideNavLink href="javascript:void(0)">Sample side bar</SideNavLink>
+          </SideNavItems>
+        </SideNav>
+      </Header>
+      <div
+        className={`${storyClass}__content-container ${storyClass}__content-container--with-global-header`}
+      >
+        <PageHeader {...props}>{children}</PageHeader>
+        {demoDummyPageContent}
       </div>
     </>
   );
@@ -840,7 +855,6 @@ const TemplateDemo = ({ children, storyOptionWholePageScroll, ...props }) => {
 export const demo = prepareStory(TemplateDemo, {
   storyName: 'Page header in context',
   args: {
-    storyOptionWholePageScroll: false,
     title: 5,
     subtitle: demoSubtitle,
     breadcrumbs: 4,

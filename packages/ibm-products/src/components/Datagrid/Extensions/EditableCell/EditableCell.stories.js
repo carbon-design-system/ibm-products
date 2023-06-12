@@ -21,7 +21,7 @@ import {
 } from '../../index';
 import { pkg } from '../../../../settings';
 import styles from '../../_storybook-styles.scss';
-import mdx from '../../Datagrid.mdx';
+// import mdx from '../../Datagrid.mdx';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { getInlineEditColumns } from '../../utils/getInlineEditColumns';
@@ -32,9 +32,10 @@ const storybookBlockClass = `storybook-${blockClass}__validation-code-snippet`;
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/EditableCell`,
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: { page: mdx },
+    // docs: { page: mdx },
     argTypes: {
       featureFlags: {
         table: {

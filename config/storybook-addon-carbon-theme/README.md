@@ -8,7 +8,8 @@ Components!
 - React
 - Vue
 
-No reason to suspect others are not supported, but have not been tested. If you use with another framework then please post an update to the README.md.
+No reason to suspect others are not supported, but have not been tested. If you
+use with another framework then please post an update to the README.md.
 
 ## Install
 
@@ -49,11 +50,14 @@ module.exports = {
 
 ```js
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/withCarbonTheme';
-import { PARAM_KEY as CARBON_THEME_PARAM_KEY, CARBON_THEMES } from '@carbon/storybook-addon-theme/constants';
+import {
+  PARAM_KEY as CARBON_THEME_PARAM_KEY,
+  CARBON_THEMES,
+} from '@carbon/storybook-addon-theme/constants';
 
 const decorators = [
   /// other decorators...
-  withCarbonTheme
+  withCarbonTheme,
 ];
 
 const globals = {
@@ -62,7 +66,7 @@ const globals = {
   [CARBON_THEME_PARAM_KEY]: CARBON_THEMES.g10,
 };
 
-export { decorators, globals }
+export { decorators, globals };
 ```
 
 ## SCSS

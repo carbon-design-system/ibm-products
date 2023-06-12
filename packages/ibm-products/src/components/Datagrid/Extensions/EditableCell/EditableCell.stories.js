@@ -93,7 +93,7 @@ const sharedDatagridProps = {
   ],
 };
 
-const InlineEditUsage = ({ ...args }) => {
+const EditableCellUsage = ({ ...args }) => {
   const [data, setData] = useState(makeData(10));
   const columns = React.useMemo(() => getInlineEditColumns(), []);
   pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
@@ -129,13 +129,18 @@ const InlineEditUsage = ({ ...args }) => {
   );
 };
 
-const InlineEditTemplateWrapper = ({ ...args }) => {
-  return <InlineEditUsage defaultGridProps={{ ...args }} />;
+const EditableCellTemplateWrapper = ({ ...args }) => {
+  return <EditableCellUsage defaultGridProps={{ ...args }} />;
 };
 
-const EditableCellUsage = ({ ...args }) => {
+const InlineEditUsage = ({ ...args }) => {
   const [data, setData] = useState(makeData(10));
   const columns = React.useMemo(() => getInlineEditColumns(), []);
+
+  // Warnings are ordinarily silenced in storybook, add this to test.
+  pkg._silenceWarnings(false);
+  pkg.feature['Datagrid.useInlineEdit'] = true;
+  pkg._silenceWarnings(true);
 
   const datagridState = useDatagrid(
     {
@@ -146,11 +151,6 @@ const EditableCellUsage = ({ ...args }) => {
     },
     useInlineEdit
   );
-
-  // Warnings are ordinarily silenced in storybook, add this to test.
-  pkg._silenceWarnings(false);
-  pkg.feature['Datagrid.useInlineEdit'] = true;
-  pkg._silenceWarnings(true);
 
   return (
     <div>
@@ -166,8 +166,8 @@ const EditableCellUsage = ({ ...args }) => {
   );
 };
 
-const EditableCellTemplateWrapper = ({ ...args }) => {
-  return <EditableCellUsage defaultGridProps={{ ...args }} />;
+const InlineEditTemplateWrapper = ({ ...args }) => {
+  return <InlineEditUsage defaultGridProps={{ ...args }} />;
 };
 
 const inlineEditUsageControlProps = {

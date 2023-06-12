@@ -8,10 +8,13 @@ Components!
 - React
 - Vue
 
+No reason to suspect others are not supported, but have not been tested. If you use with another framework then please post an update to the README.md.
+
 ## Install
 
 ```sh
-npm install @carbon/storybook-addon-theme
+npm install --save-dev @carbon/storybook-addon-theme
+yarn instsall --dev @carbon/storybook-addon-theme
 ```
 
 ## Requirements
@@ -35,6 +38,7 @@ and
 
 ```js
 module.exports = {
+  // other addons...
   addons: ['@carbon/storybook-addon-theme/preset.js'],
 };
 ```
@@ -47,11 +51,14 @@ module.exports = {
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/withCarbonTheme';
 import { PARAM_KEY as CARBON_THEME_PARAM_KEY, CARBON_THEMES } from '@carbon/storybook-addon-theme/constants';
 
-const decorators [
-  withCarbonTheme;
+const decorators = [
+  /// other decorators...
+  withCarbonTheme
 ];
 
 const globals = {
+  // other globals...
+  // default value of the theme selector
   [CARBON_THEME_PARAM_KEY]: CARBON_THEMES.g10,
 };
 
@@ -61,6 +68,8 @@ export { decorators, globals }
 ## SCSS
 
 `.storybook/index.scss`
+
+### Carbon 11
 
 ```scss
 @use '@carbon/styles' as styles;
@@ -87,5 +96,51 @@ export { decorators, globals }
 [storybook-carbon-theme='g100'],
 .sb--use-carbon-theme-g100 {
   @include styles.theme(styles.$g100);
+}
+```
+
+### Carbon 10
+
+```SCSS
+// Must happen before styles are loaded
+$feature-flags: (
+  ui-shell: true,
+  grid-columns-16: true,
+  enable-css-custom-properties: true
+);
+
+@import "carbon-components/scss/globals/scss/styles";
+@import "@carbon/themes/scss/themes";
+
+[storybook-carbon-theme] {
+  background: $ui-background;
+  color: $ui-01;
+
+  @include carbon--theme(
+    $theme: $carbon--theme--white,
+    $emit-custom-properties: true
+  );
+}
+
+[storybook-carbon-theme="g10"] {
+  @include carbon--theme(
+    $theme: $carbon--theme--g10,
+    $emit-custom-properties: true
+  );
+}
+
+[storybook-carbon-theme="g90"] {
+  z-index: 90;
+  @include carbon--theme(
+    $theme: $carbon--theme--g90,
+    $emit-custom-properties: true
+  );
+}
+
+[storybook-carbon-theme="g100"] {
+  @include carbon--theme(
+    $theme: $carbon--theme--g100,
+    $emit-custom-properties: true
+  );
 }
 ```

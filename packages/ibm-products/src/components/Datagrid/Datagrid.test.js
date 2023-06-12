@@ -365,7 +365,6 @@ const ExpandedRow = ({ ...rest } = {}) => {
       columns,
       data,
       ExpandedRowContentComponent: expansionRenderer,
-      tags: ['autodocs'],
       expandedContentHeight: 95,
     },
     useExpandedRow
@@ -575,7 +574,6 @@ const NestedTable = ({ ...rest } = {}) => {
       columns,
       data,
       ExpandedRowContentComponent: expansionRenderer,
-      tags: ['autodocs'],
       expandedContentHeight: (nestedDatagridState.state.pageSize + 2) * 48 + 1, // +2 for header and pagination
     },
     useExpandedRow

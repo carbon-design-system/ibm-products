@@ -33,7 +33,7 @@ const getActions = (num) =>
   }));
 
 export default {
-  title: getStoryTitle('ActionBar'),
+  title: getStoryTitle(ActionBar.displayName),
   component: ActionBar,
   tags: ['autodocs'],
   argTypes: {

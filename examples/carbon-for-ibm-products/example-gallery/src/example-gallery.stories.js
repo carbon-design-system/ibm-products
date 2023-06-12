@@ -6,13 +6,14 @@
  */
 
 import React from 'react';
+import { getPathForComponent } from '../../../../packages/core/story-structure.js';
 
 import App from './App.jsx';
 
 import styles from './_storybook-styles.scss';
 
 export default {
-  title: 'Overview/Examples',
+  title: getPathForComponent('o', 'Examples'),
   parameters: {
     styles,
   },

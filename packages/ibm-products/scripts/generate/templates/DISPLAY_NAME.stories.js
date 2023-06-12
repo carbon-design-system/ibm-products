@@ -52,7 +52,7 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
-export const CAMEL_NAME = prepareStory(Template, DISPLAY_NAME, {
+export const CAMEL_NAME = prepareStory(Template, {
   args: {
     // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#DISPLAY_NAME-args
     children: 'hello, world',

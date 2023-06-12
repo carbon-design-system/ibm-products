@@ -257,7 +257,7 @@ const StackedTemplate = ({ actions, ...args }) => {
       <ButtonSet
         style={{
           display: 'flex',
-          position: 'absolute',
+          position: 'fixed',
           top: 0,
           left: 0,
           zIndex: 10000,

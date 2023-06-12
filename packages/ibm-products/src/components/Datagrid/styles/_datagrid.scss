@@ -575,11 +575,6 @@
   width: 100%;
 }
 
-.#{$carbon-prefix}--body--with-modal-open .#{$block-class}__grid-container {
-  overflow: hidden;
-  height: 100vh;
-}
-
 .#{$carbon-prefix}--overflow-menu.#{$block-class}__toolbar-menu__trigger {
   flex-shrink: 0;
   background-color: $interactive-01;

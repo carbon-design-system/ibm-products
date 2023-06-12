@@ -2148,7 +2148,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/storybook-addon-theme@2.0.0-rc.0, @carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
+"@carbon/storybook-addon-theme@npm:2.0.0-rc.0":
+  version: 2.0.0-rc.0
+  resolution: "@carbon/storybook-addon-theme@npm:2.0.0-rc.0"
+  dependencies:
+    "@storybook/addons": ^7.0.18
+    "@storybook/api": ^7.0.18
+    "@storybook/client-api": ^7.0.18
+    "@storybook/client-logger": ^7.0.18
+    "@storybook/components": ^7.0.18
+    "@storybook/core-events": ^7.0.18
+    "@storybook/theming": ^7.0.18
+    core-js: ^3.28.0
+    global: ^4.4.0
+  peerDependencies:
+    react: "*"
+    vue: "*"
+  checksum: 45c6af5e837bb6d6d0e2ef600d4fb5be5b17a2107dd1b1131f6e0b8731a2fb45b6c5ffa780909dfe86442e62af29d702cb3d326ad2995e2835854428cf6fdd94
+  languageName: node
+  linkType: hard
+
+"@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
   version: 0.0.0-use.local
   resolution: "@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme"
   dependencies:

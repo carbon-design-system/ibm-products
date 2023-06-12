@@ -15,7 +15,7 @@ use with another framework then please post an update to the README.md.
 
 ```sh
 npm install --save-dev @carbon/storybook-addon-theme
-yarn instsall --dev @carbon/storybook-addon-theme
+yarn install --dev @carbon/storybook-addon-theme
 ```
 
 ## Requirements

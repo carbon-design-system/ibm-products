@@ -11,9 +11,11 @@ about: Review process before release of a new component or pattern from Canary
       useful unit of functionality to publish.
 - [ ] A functioning component or components delivering those scenarios have been
       delivered and merged to `main`.
-- [ ] The component or components have completed an [accessibility review](https://github.com/carbon-design-system/ibm-products/blob/main/.github/ISSUE_TEMPLATE/accessibilty-review.md).
+- [ ] The component or components have completed an
+      [accessibility review](https://github.com/carbon-design-system/ibm-products/blob/main/.github/ISSUE_TEMPLATE/accessibilty-review.md).
 - [ ] One or more design maintainers have approved the implementation for those
-      scenarios, preferably via [design review](https://github.com/carbon-design-system/ibm-products/blob/main/.github/ISSUE_TEMPLATE/design-review.md).
+      scenarios, preferably via
+      [design review](https://github.com/carbon-design-system/ibm-products/blob/main/.github/ISSUE_TEMPLATE/design-review.md).
 
 ### Engineering review
 
@@ -35,8 +37,8 @@ about: Review process before release of a new component or pattern from Canary
 - [ ] Public components which produce DOM structures support `className`.
 - [ ] Public components support a ref (via `React.forwardRef`).
 - [ ] Public component supports a Devtools attribute
-- [ ] All significant DOM elements have meaningful classes[^2] and include
-      the package or Carbon prefix (no hardcoded prefixes).
+- [ ] All significant DOM elements have meaningful classes[^2] and include the
+      package or Carbon prefix (no hardcoded prefixes).
 - [ ] Additional attributes that are not identified as props (such as `title`,
       `aria-*`, etc) are passed through to an appropriate DOM node of the
       component as HTML attributes.
@@ -84,4 +86,8 @@ about: Review process before release of a new component or pattern from Canary
       and Stackblitz for the components.
 
 [^1]: Any labels, text, or other strings within a component should use a prop.
-[^2]: See Carbon’s [Developer Handbook](https://github.com/carbon-design-system/carbon/blob/main/.github/CONTRIBUTING.md) for guidance on [class names](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#class-names).
+[^2]:
+    See Carbon’s
+    [Developer Handbook](https://github.com/carbon-design-system/carbon/blob/main/.github/CONTRIBUTING.md)
+    for guidance on
+    [class names](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#class-names).

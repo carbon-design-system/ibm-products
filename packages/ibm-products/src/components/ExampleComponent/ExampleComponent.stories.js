@@ -14,8 +14,8 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { ExampleComponent } from '.';
-// import mdx from './ExampleComponent.mdx';
 import { pkg } from '../../settings';
+import docsPage from './ExampleComponent.docs-page';
 
 // import styles from './_storybook-styles.scss';
 
@@ -28,11 +28,9 @@ export default {
   },
   parameters: {
     // styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: docsPage,
     },
-*/
   },
 };
 
@@ -60,11 +58,11 @@ export const exampleComponent = prepareStory(Template, {
   args: {},
 });
 
-export const boxedSet = prepareStory(Template, {
+export const borderedSet = prepareStory(Template, {
   args: {
     ...exampleComponent.args,
     borderColor: '#141414',
-    boxedBorder: true,
+    borderType: 'box',
   },
 });
 

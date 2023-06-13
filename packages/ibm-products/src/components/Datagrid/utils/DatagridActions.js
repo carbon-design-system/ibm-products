@@ -14,11 +14,9 @@ import {
 } from '@carbon/react/icons';
 import {
   Button,
-  IconButton,
-  OverflowMenu,
-  OverflowMenuItem,
   ComposedModal,
   Dropdown,
+  IconButton,
   ModalBody,
   ModalFooter,
   ModalHeader,

@@ -7,7 +7,14 @@
 
 // cspell:words unuse
 
-import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs';
+import { ArgsTable, Canvas, Story, Source, useOf } from '@storybook/addon-docs';
+import {
+  Title,
+  Subtitle,
+  Description,
+  Controls,
+  Stories,
+} from '@storybook/blocks';
 import LinkTo from '@storybook/addon-links/react';
 import { themes } from '@storybook/theming';
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/withCarbonTheme';
@@ -117,23 +124,6 @@ const carbonViewports = {
 
 const parameters = {
   controls: { expanded: true, hideNoControlsWarning: true },
-  docs: {
-    components: {
-      ArgsTable,
-      Canvas,
-      Column,
-      LinkTo: (props) => (
-        <LinkTo
-          className="storybook__link-to"
-          style={{ color: themes.normal.colorSecondary }}
-          {...props}
-        />
-      ),
-      Row,
-      Source,
-      Story,
-    },
-  },
   layout: 'centered',
   options: {
     showPanel: true,
@@ -157,6 +147,29 @@ const parameters = {
   viewport: {
     viewports: carbonViewports,
     defaultViewport: 'basic',
+  },
+  docs: {
+    page: () => {
+      const { csfFile } = useOf('meta', ['meta']);
+
+      let storyHelperClass = '';
+      if (csfFile?.meta?.tags?.includes('c4p--sb-encase-docs-page-story')) {
+        // needs to match encaseDocsPageStoryTag in story-helper.js
+        storyHelperClass = 'c4p--sb-encase-docs-page-story';
+      }
+
+      return (
+        <>
+          <Title />
+          <Description />
+          <div className={storyHelperClass}>
+            <Stories />
+          </div>
+          <Subtitle>Component API</Subtitle>
+          <Controls />
+        </>
+      );
+    },
   },
 };
 

@@ -71,12 +71,14 @@ export const prepareStory = (template, options) => {
 const packagePath =
   'github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products';
 
+export const codeSandboxHref = (exampleDirectory) =>
+  `https://codesandbox.io/p/sandbox/${packagePath}/${exampleDirectory}?file=%2Fsrc%2FExample%2FExample.jsx`;
+
 export const CodesandboxLink = ({ exampleDirectory }) => {
-  // const stackblitz = `https://stackblitz.com/${packagePath}/${dir}?file=src%2FExample%2FExample.jsx`;
-  const codesandbox = `https://codesandbox.io/p/sandbox/${packagePath}/${exampleDirectory}?file=%2Fsrc%2FExample%2FExample.jsx`;
+  const href = codeSandboxHref(exampleDirectory);
 
   return (
-    <a href={codesandbox}>
+    <a href={href}>
       <img
         alt="Edit on CodeSandbox"
         src="https://codesandbox.io/static/img/play-codesandbox.svg"
@@ -91,11 +93,14 @@ CodesandboxLink.propTypes = {
   exampleDirectory: PropTypes.string,
 };
 
+export const stackblitzHref = (exampleDirectory) =>
+  `https://stackblitz.com/${packagePath}/${exampleDirectory}?file=src%2FExample%2FExample.jsx`;
+
 export const StackblitzLink = ({ exampleDirectory }) => {
-  const stackblitz = `https://stackblitz.com/${packagePath}/${exampleDirectory}?file=src%2FExample%2FExample.jsx`;
+  const href = stackblitzHref(exampleDirectory);
 
   return (
-    <a href={stackblitz}>
+    <a href={href}>
       <img
         alt="Edit on Stackblitz"
         src="https://c.staticblitz.com/assets/favicon_sb-861fe1b85c0dc928750c62de15fed96fc75e57ee366bd937bad17a3938917b3f.svg"
@@ -120,3 +125,6 @@ export const getSelectedCarbonTheme = () => {
     .getAttribute('storybook-carbon-theme');
   return themeId === 'g90' || themeId === 'g100' ? 'dark' : 'light';
 };
+
+// Used to limit full page stories on the docs page to a story window
+export const encaseDocsPageStoryTag = 'c4p--sb-encase-docs-page-story';

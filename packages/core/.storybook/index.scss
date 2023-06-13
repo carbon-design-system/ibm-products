@@ -63,3 +63,14 @@ body {
 .preview__notification--feature-flag .#{config.$prefix}--list--unordered {
   margin-top: $spacing-04;
 }
+
+.c4p--sb-encase-docs-page-story .docs-story {
+  min-height: 50vh;
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  transform: translateZ(0);
+}
+
+.c4p--sb-encase-docs-page-story > div:first-child {
+  overflow: hidden;
+  width: 100%;
+}

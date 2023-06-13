@@ -136,6 +136,7 @@ const s = [
           'c/BreadcrumbWithOverflow',
           'c/ButtonSetWithOverflow',
           'c/CancelableTextEdit',
+          'c/Carousel',
           'c/ComboButton',
           'c/ExampleComponent',
           'c/FilterSummary',
@@ -144,7 +145,7 @@ const s = [
       },
       {
         n: 'Novice to pro',
-        s: ['c/NonLinearReading'],
+        s: ['c/NonLinearReading', 'c/Guidebanner'],
       },
     ],
   },

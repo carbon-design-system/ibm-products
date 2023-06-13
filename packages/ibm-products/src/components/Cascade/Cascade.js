@@ -95,7 +95,7 @@ Cascade.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Specifies whether or not to wrap the child content in a <Grid />.
+   * Specifies whether or not to wrap the child content in a `<Grid />`.
    * If this is set to true it's important that the children are being wrapped in rows in columns.
    * Check the documentation for additional clarification.
    */

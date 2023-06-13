@@ -28,23 +28,26 @@ body {
   background-color: $background;
 }
 
-:root,
-.sb--use-carbon-theme-white {
+[storybook-carbon-theme] {
   @include styles.theme(styles.$white);
+
+  /* make sure background and color are set if theme in use */
+  background-color: $background;
+  color: $text-primary;
 }
 
-:root[storybook-carbon-theme='g10'],
+[storybook-carbon-theme='g10'],
 .sb--use-carbon-theme-g10 {
   @include styles.theme(styles.$g10);
 }
 
-:root[storybook-carbon-theme='g90'],
+[storybook-carbon-theme='g90'],
 .sb--use-carbon-theme-g90 {
   @include styles.theme(styles.$g90);
 }
 
 [storybook-carbon-theme='debug'],
-:root[storybook-carbon-theme='g100'],
+[storybook-carbon-theme='g100'],
 .sb--use-carbon-theme-g100 {
   @include styles.theme(styles.$g100);
 }

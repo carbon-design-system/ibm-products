@@ -4,6 +4,7 @@ import {
   CodesandboxLink,
 } from '../../global/js/utils/story-helper';
 import { Datagrid } from '.';
+import datagridActionsExample from './storybook-assets/datagrid-actions-example.png';
 
 # Datagrid
 
@@ -175,6 +176,17 @@ const columns = [
 ];
 ```
 
+## Rendering the table toolbar
+
+<img src={datagridActionsExample} />
+
+In some of the examples you will see a component named `DatagridActions` passed
+to the `useDatagrid` hook. This component will render the table toolbar and is
+something that you will need to create on your own and then provide it to the
+`useDatagrid` hook. You can reference the `DatagridActions` that we have
+[created for our stories](https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products/src/components/Datagrid/utils/DatagridActions.js)
+when building your own.
+
 ## Empty
 
 The `Datagrid` supports empty states, when the data prop passed to the
@@ -218,6 +230,7 @@ const App = () => {
       columns,
       data,
       ExpandedRowContentComponent: expansionRenderer,
+      tags: ['autodocs'],
     },
     useExpandedRow
   );
@@ -822,8 +835,8 @@ filterProps: {
   <Story
     id={getStoryId(
       Datagrid.displayName,
-      'filtering-usage-story',
-      '/Extensions/Filtering'
+      'flyout-batch',
+      '/Extensions/Filtering/Flyout'
     )}
   />
 </Canvas>

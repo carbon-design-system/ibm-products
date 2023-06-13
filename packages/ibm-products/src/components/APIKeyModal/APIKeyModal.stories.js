@@ -23,18 +23,21 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { APIKeyModal } from '.';
-import mdx from './APIKeyModal.mdx';
+// import mdx from './APIKeyModal.mdx';
 import wait from '../../global/js/utils/wait';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 
 export default {
   title: getStoryTitle(APIKeyModal.displayName),
   component: APIKeyModal,
+  tags: ['autodocs'],
   parameters: {
     styles,
+    /*
     docs: {
       page: mdx,
     },
+  */
   },
 };
 

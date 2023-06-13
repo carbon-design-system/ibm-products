@@ -42,6 +42,7 @@ const PageHeader = (props) => {
         ? (props) => <Lightning size={16} {...props} />
         : (props) => <Bee size={16} {...props} />,
     iconDescription: `Action ${item}`,
+    label: `Action ${item}`,
     onClick: () => {},
   }));
 

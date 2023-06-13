@@ -7,10 +7,14 @@
 
 // cspell:words unuse
 
-import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
 import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs';
 import LinkTo from '@storybook/addon-links/react';
 import { themes } from '@storybook/theming';
+import { withCarbonTheme } from '@carbon/storybook-addon-theme/withCarbonTheme';
+import {
+  PARAM_KEY as CARBON_THEME_PARAM_KEY,
+  CARBON_THEMES,
+} from '@carbon/storybook-addon-theme/constants';
 
 import {
   Column,
@@ -149,11 +153,6 @@ const parameters = {
     },
   },
 
-  // Optional default Carbon theme.
-  carbonTheme: {
-    theme: 'g10',
-  },
-
   // viewport sizes based on Carbon breakpoints
   viewport: {
     viewports: carbonViewports,
@@ -169,4 +168,8 @@ const argTypes = {
   },
 };
 
-export { argTypes, decorators, parameters, Style };
+const globals = {
+  [CARBON_THEME_PARAM_KEY]: CARBON_THEMES.g10,
+};
+
+export { argTypes, decorators, globals, parameters, Style };

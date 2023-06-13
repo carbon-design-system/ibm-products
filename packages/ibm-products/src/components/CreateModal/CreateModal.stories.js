@@ -26,16 +26,17 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { CreateModal } from '.';
-import mdx from './CreateModal.mdx';
+// import mdx from './CreateModal.mdx';
 
 import styles from './_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(CreateModal.displayName),
   component: CreateModal,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: { page: mdx },
+    // docs: { page: mdx },
     controls: { sort: 'requiredFirst' },
   },
   argTypes: {
@@ -47,9 +48,14 @@ export default {
   },
 };
 
-const Template = ({ storyInitiallyOpen = true, story, children, ...args }) => {
+const Template = (
+  { storyInitiallyOpen = true, story, children, ...args },
+  context
+) => {
   const carbonPrefix = usePrefix();
-  const [open, setOpen] = useState(storyInitiallyOpen);
+  const [open, setOpen] = useState(
+    context.viewMode !== 'docs' && storyInitiallyOpen
+  );
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open {story?.storyName}</Button>

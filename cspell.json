@@ -67,6 +67,7 @@
   ],
   "words": [
     "aboutmodal",
+    "autodocs", // storybook
     "actionbar",
     "apikey",
     "buildhome",
@@ -106,6 +107,7 @@
     "rowgroup",
     "rowheader",
     "rowindex",
+    "sbdocs",
     "semibold",
     "serializers",
     "setsize",

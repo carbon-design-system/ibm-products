@@ -14,7 +14,7 @@ import { usePrefix } from '@carbon/react';
 import { CreateFullPage } from '.';
 import { CreateFullPageStep } from './CreateFullPageStep';
 import { pkg } from '../../settings';
-import mdx from './CreateFullPage.mdx';
+// import mdx from './CreateFullPage.mdx';
 
 import styles from './_storybook-styles.scss';
 
@@ -38,11 +38,12 @@ import {
 export default {
   title: getStoryTitle(CreateFullPage.displayName),
   component: CreateFullPage,
+  tags: ['autodocs'],
   subcomponents: { CreateFullPageStep },
   parameters: {
     styles,
     layout: 'fullscreen',
-    docs: { page: mdx },
+    // docs: { page: mdx },
     controls: { sort: 'requiredFirst' },
   },
   decorators: [

@@ -15,7 +15,7 @@ import {
 } from '../../../../global/js/utils/story-helper';
 import { Datagrid, useDatagrid, useNestedRows } from '../../index';
 import styles from '../../_storybook-styles.scss';
-import mdx from '../../Datagrid.mdx';
+// import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
@@ -24,9 +24,10 @@ import { pkg } from '../../../../settings';
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/NestedRows`,
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: { page: mdx },
+    // docs: { page: mdx },
   },
   argTypes: {
     featureFlags: {

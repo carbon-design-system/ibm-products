@@ -13,17 +13,20 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { ExportModal } from '.';
-import mdx from './ExportModal.mdx';
+// import mdx from './ExportModal.mdx';
 import wait from '../../global/js/utils/wait';
 
 export default {
   title: getStoryTitle(ExportModal.displayName),
   component: ExportModal,
+  tags: ['autodocs'],
   parameters: {
     // styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 
@@ -39,8 +42,8 @@ const defaultProps = {
   inputType: 'text',
 };
 
-const Template = (args) => {
-  return <ExportModal {...args} />;
+const Template = ({ open, ...args }, context) => {
+  return <ExportModal {...args} open={context.viewMode !== 'docs' && open} />;
 };
 
 const TemplateWithState = (args) => {

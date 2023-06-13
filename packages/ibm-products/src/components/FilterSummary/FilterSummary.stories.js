@@ -14,6 +14,7 @@ import styles from './_storybook-styles.scss';
 export default {
   title: getStoryTitle(FilterSummary.displayName),
   component: FilterSummary,
+  tags: ['autodocs'],
   parameters: {
     styles,
   },

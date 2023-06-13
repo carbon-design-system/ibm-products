@@ -12,17 +12,18 @@ import {
   prepareStory,
 } from '../../../global/js/utils/story-helper';
 
-import page from './HTTPError404.mdx';
-// import styles from '../_storybook-styles.scss';
+// import page from './HTTPError404.mdx';
+import styles from '../_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(HTTPError404.displayName),
   component: HTTPError404,
+  tags: ['autodocs'],
   parameters: {
-    docs: {
-      page,
-    },
-    // styles,
+    // docs: {
+    //   page,
+    // },
+    styles,
   },
 };
 

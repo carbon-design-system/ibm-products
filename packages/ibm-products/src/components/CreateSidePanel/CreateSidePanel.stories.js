@@ -26,7 +26,7 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { CreateSidePanel } from './CreateSidePanel';
-import mdx from './CreateSidePanel.mdx';
+// import mdx from './CreateSidePanel.mdx';
 
 import styles from './_storybook-styles.scss';
 
@@ -35,11 +35,14 @@ const blockClass = `${pkg.prefix}--create-side-panel`;
 export default {
   title: getStoryTitle(CreateSidePanel.displayName),
   component: CreateSidePanel,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

@@ -8,7 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
-import mdx from './NotificationsEmptyState.mdx';
+// import mdx from './NotificationsEmptyState.mdx';
 import {
   getStoryTitle,
   prepareStory,
@@ -20,11 +20,14 @@ import { NotificationsEmptyState } from '.';
 export default {
   title: getStoryTitle(NotificationsEmptyState.displayName),
   component: NotificationsEmptyState,
+  tags: ['autodocs'],
   parameters: {
     // styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

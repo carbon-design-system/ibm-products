@@ -1,12 +1,10 @@
 import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
-import { UserProfileImage } from '.';
 import * as stories from './UserProfileImage.stories';
 
 const docsPage = () => (
   <StoryDocsPage
-    componentName={UserProfileImage.displayName}
-    guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile/usage"
+    guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/usage"
     hasCodedExample={true}
     blocks={[
       {

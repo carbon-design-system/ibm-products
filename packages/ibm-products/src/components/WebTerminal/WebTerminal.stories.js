@@ -88,7 +88,7 @@ export const WithActions = prepareStory(Template, {
 
 export default {
   title: getStoryTitle(WebTerminal.displayName),
-  tags: ['autodocs', 'c4p--sb-encase-docs-page-story'],
+  tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
     styles,

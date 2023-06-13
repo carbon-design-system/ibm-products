@@ -1,12 +1,10 @@
 import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
-import { Cascade } from '.';
 import * as stories from './Cascade.stories';
 
 const docsPage = () => (
   <StoryDocsPage
-    componentName={Cascade.displayName}
     guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/cascade/usage"
     hasCodedExample={true}
     blocks={[

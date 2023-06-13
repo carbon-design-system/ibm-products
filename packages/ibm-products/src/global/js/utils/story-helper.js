@@ -125,6 +125,3 @@ export const getSelectedCarbonTheme = () => {
     .getAttribute('storybook-carbon-theme');
   return themeId === 'g90' || themeId === 'g100' ? 'dark' : 'light';
 };
-
-// Used to limit full page stories on the docs page to a story window
-export const encaseDocsPageStoryTag = 'c4p--sb-encase-docs-page-story';

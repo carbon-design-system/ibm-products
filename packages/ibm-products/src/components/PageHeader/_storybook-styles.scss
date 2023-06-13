@@ -57,24 +57,6 @@ $story-class: 'page-header-stories';
   flex-direction: column;
 }
 
-$story-anchor: 'page-header';
-div[id*='#{$story-anchor}'] .docs-story {
-  --story-height: 50vh;
-
-  min-height: var(--story-height);
-  /* stylelint-disable-next-line carbon/layout-token-use */
-  transform: translateZ(0);
-}
-
-div[id*='#{$story-anchor}'] .docs-story > div:first-child {
-  overflow: hidden;
-  width: 100%;
-}
-
-div[id*='#{$story-anchor}'] .docs-story .preview-position-fix {
-  min-height: 50vh;
-}
-
 .#{$story-class}__viewport {
   overflow: hidden;
   height: 100vh;

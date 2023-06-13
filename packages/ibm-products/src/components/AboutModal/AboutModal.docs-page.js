@@ -1,12 +1,10 @@
 import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
-import { AboutModal } from '.';
 import * as stories from './AboutModal.stories';
 
 const docsPage = () => (
   <StoryDocsPage
-    componentName={AboutModal.displayName}
     guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/about-modal/usage"
     hasCodedExample={true}
     blocks={[

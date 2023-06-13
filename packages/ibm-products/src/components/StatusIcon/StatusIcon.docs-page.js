@@ -1,11 +1,9 @@
 import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
-import { StatusIcon } from '.';
 import * as stories from './StatusIcon.stories';
 
 const docsPage = () => (
   <StoryDocsPage
-    componentName={StatusIcon.displayName}
     guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/status-icons/usage"
     hasCodedExample={true}
     blocks={[

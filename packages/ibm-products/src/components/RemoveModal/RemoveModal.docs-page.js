@@ -4,7 +4,6 @@ import { RemoveModal } from './RemoveModal';
 
 const docsPage = () => (
   <StoryDocsPage
-    componentName={RemoveModal.displayName}
     guidelinesHref={[
       {
         href: 'https://www.carbondesignsystem.com/community/patterns/remove-pattern/',

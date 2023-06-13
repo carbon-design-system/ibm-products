@@ -20,11 +20,7 @@ import {
 } from '@storybook/blocks';
 const { paramCase } = require('change-case');
 
-import {
-  codeSandboxHref,
-  encaseDocsPageStoryTag,
-  stackblitzHref,
-} from './story-helper';
+import { codeSandboxHref, stackblitzHref } from './story-helper';
 
 export const CustomBlocks = ({ blocks }) => {
   return blocks.map((block, index) => {
@@ -84,7 +80,6 @@ export const StoryDocsPage = ({
   blocks,
   altTitle,
   altDescription,
-  componentName,
   guidelinesHref,
   hasCodedExample,
   includeAllStories,
@@ -92,11 +87,15 @@ export const StoryDocsPage = ({
   const storyCount = blocks?.filter((block) => !!block.story).length ?? 0;
   const { csfFile } = useOf('meta', ['meta']);
 
-  let storyHelperClass = '';
-  if (csfFile?.meta?.tags?.includes(encaseDocsPageStoryTag)) {
-    storyHelperClass = encaseDocsPageStoryTag;
-  }
+  // console.log('csfFile contents', csfFile);
 
+  const processedTitle = /([^/#]+)(#[^/#]+)?$/.exec(csfFile?.meta?.title)[1];
+
+  const isFullScreen =
+    csfFile?.meta?.parameters?.layout === 'fullscreen' || false;
+  const storyHelperClass = isFullScreen
+    ? 'c4p--story-docs-page--fullscreen'
+    : '';
   const processedBlocks = processBlocks(
     blocks,
     csfFile.stories,
@@ -105,7 +104,7 @@ export const StoryDocsPage = ({
 
   return (
     <>
-      <Title>{altTitle ?? componentName}</Title>
+      <Title>{altTitle ?? processedTitle}</Title>
 
       {guidelinesHref && Array.isArray(guidelinesHref) ? (
         guidelinesHref.map(({ href, label }, index) => (
@@ -118,7 +117,7 @@ export const StoryDocsPage = ({
         ))
       ) : (
         <AnchorMdx href={guidelinesHref}>
-          {componentName} usage guidelines
+          {altTitle ?? processedTitle} usage guidelines
         </AnchorMdx>
       )}
 
@@ -160,7 +159,7 @@ export const StoryDocsPage = ({
           </p>
           <ul>
             <li key="codesandbox">
-              <AnchorMdx href={codeSandboxHref(componentName)}>
+              <AnchorMdx href={codeSandboxHref(processedTitle)}>
                 <svg
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -184,7 +183,7 @@ export const StoryDocsPage = ({
               </AnchorMdx>
             </li>
             <li key="stackblitz">
-              <AnchorMdx href={stackblitzHref(componentName)}>
+              <AnchorMdx href={stackblitzHref(processedTitle)}>
                 <img
                   src="https://c.staticblitz.com/assets/favicon_sb-861fe1b85c0dc928750c62de15fed96fc75e57ee366bd937bad17a3938917b3f.svg"
                   alt="Stackblitz logo"
@@ -263,7 +262,6 @@ StoryDocsPage.propTypes = {
       }),
     })
   ),
-  componentName: PropTypes.string,
   /**
    * location if any of guidelines on the PAL site.
    */

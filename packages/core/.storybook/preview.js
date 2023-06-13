@@ -7,29 +7,21 @@
 
 // cspell:words unuse
 
-import { ArgsTable, Canvas, Story, Source, useOf } from '@storybook/addon-docs';
 import {
   Title,
   Subtitle,
   Description,
   Controls,
   Stories,
+  useOf,
 } from '@storybook/blocks';
-import LinkTo from '@storybook/addon-links/react';
-import { themes } from '@storybook/theming';
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/withCarbonTheme';
 import {
   PARAM_KEY as CARBON_THEME_PARAM_KEY,
   CARBON_THEMES,
 } from '@carbon/storybook-addon-theme/constants';
 
-import {
-  Column,
-  Row,
-  ActionableNotification,
-  UnorderedList,
-  ListItem,
-} from '@carbon/react';
+import { ActionableNotification, UnorderedList, ListItem } from '@carbon/react';
 import React, { useEffect } from 'react';
 
 import { pkg } from '../../ibm-products/src/settings';
@@ -152,11 +144,11 @@ const parameters = {
     page: () => {
       const { csfFile } = useOf('meta', ['meta']);
 
-      let storyHelperClass = '';
-      if (csfFile?.meta?.tags?.includes('c4p--sb-encase-docs-page-story')) {
-        // needs to match encaseDocsPageStoryTag in story-helper.js
-        storyHelperClass = 'c4p--sb-encase-docs-page-story';
-      }
+      const isFullScreen =
+        csfFile?.meta?.parameters?.layout === 'fullscreen' || false;
+      const storyHelperClass = isFullScreen
+        ? 'c4p--story-docs-page--fullscreen'
+        : '';
 
       return (
         <>

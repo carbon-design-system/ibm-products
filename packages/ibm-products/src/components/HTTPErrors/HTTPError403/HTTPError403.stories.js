@@ -13,7 +13,6 @@ import {
 } from '../../../global/js/utils/story-helper';
 
 // import page from './HTTPError403.mdx';
-import styles from '../_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(HTTPError403.displayName),
@@ -23,7 +22,7 @@ export default {
     // docs: {
     //   page,
     // },
-    styles,
+    layout: 'fullscreen',
   },
 };
 

@@ -64,13 +64,13 @@ body {
   margin-top: $spacing-04;
 }
 
-.c4p--sb-encase-docs-page-story .docs-story {
+.c4p--story-docs-page--fullscreen .docs-story {
   min-height: 50vh;
   /* stylelint-disable-next-line carbon/layout-token-use */
   transform: translateZ(0);
 }
 
-.c4p--sb-encase-docs-page-story > div:first-child {
+.c4p--story-docs-page--fullscreen > div:first-child {
   overflow: hidden;
   width: 100%;
 }

@@ -1,11 +1,9 @@
 import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
-import { WebTerminal } from '.';
 import * as stories from './WebTerminal.stories';
 
 const docsPage = () => (
   <StoryDocsPage
-    componentName={WebTerminal.displayName}
     guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/web-terminal/usage"
     hasCodedExample={true}
     blocks={[

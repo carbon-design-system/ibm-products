@@ -27,13 +27,14 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { EditSidePanel } from '.';
-import mdx from './EditSidePanel.mdx';
+// import mdx from './EditSidePanel.mdx';
 
 import styles from './_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(EditSidePanel.displayName),
   component: EditSidePanel,
+  tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
   argTypes: {
     title: { control: { type: 'text' } },
@@ -44,9 +45,11 @@ export default {
   },
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

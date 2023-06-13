@@ -14,13 +14,14 @@ import {
 
 import { DataSpreadsheet } from '.';
 import { generateData } from './utils/generateData';
-import mdx from './DataSpreadsheet.mdx';
+// import mdx from './DataSpreadsheet.mdx';
 
-// import styles from './_storybook-styles.scss';
+import styles from './_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(DataSpreadsheet.displayName),
   component: DataSpreadsheet,
+  tags: ['autodocs'],
   argTypes: {
     onActiveCellChange: {
       action: 'active cell change',
@@ -30,10 +31,12 @@ export default {
     },
   },
   parameters: {
-    // styles,
-    docs: {
+    styles,
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

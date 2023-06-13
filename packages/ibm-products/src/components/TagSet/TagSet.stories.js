@@ -15,7 +15,7 @@ import {
 } from '../../global/js/utils/story-helper';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import { TagSet } from '.';
-import mdx from './TagSet.mdx';
+// import mdx from './TagSet.mdx';
 import styles from './_storybook-styles.scss';
 
 const blockClass = `${pkg.prefix}--tag-set`;
@@ -135,8 +135,9 @@ const overflowAndModalStrings = {
 export default {
   title: getStoryTitle(TagSet.displayName),
   component: TagSet,
+  tags: ['autodocs'],
   parameters: {
-    docs: { page: mdx },
+    // docs: { page: mdx },
     styles,
   },
   argTypes: {

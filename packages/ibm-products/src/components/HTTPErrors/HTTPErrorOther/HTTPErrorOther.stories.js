@@ -12,17 +12,18 @@ import {
   prepareStory,
 } from '../../../global/js/utils/story-helper';
 
-import page from './HTTPErrorOther.mdx';
-// import styles from '../_storybook-styles.scss';
+// import page from './HTTPErrorOther.mdx';
+import styles from '../_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(HTTPErrorOther.displayName),
   component: HTTPErrorOther,
+  tags: ['autodocs'],
   parameters: {
-    docs: {
-      page,
-    },
-    // styles,
+    // docs: {
+    //   page,
+    // },
+    styles,
   },
 };
 

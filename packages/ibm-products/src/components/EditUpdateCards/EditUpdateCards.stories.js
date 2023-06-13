@@ -15,7 +15,7 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { EditUpdateCards } from '.';
-import mdx from './EditUpdateCards.mdx';
+// import mdx from './EditUpdateCards.mdx';
 
 import styles from './_storybook-styles.scss';
 import {
@@ -40,15 +40,18 @@ import { pkg /*, carbon */ } from '../../settings';
 export default {
   title: getStoryTitle(EditUpdateCards.displayName),
   component: EditUpdateCards,
+  tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
   // argTypes: {
   //   egProp: { control: 'color' },
   // },
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

@@ -166,7 +166,7 @@ export let TagSet = React.forwardRef(
         let spaceAvailable = tagSetRef.current.offsetWidth;
 
         for (let i in sizingTags) {
-          const tagWidth = sizingTags[i].offsetWidth;
+          const tagWidth = sizingTags[i]?.offsetWidth || 0;
 
           if (spaceAvailable >= tagWidth) {
             spaceAvailable -= tagWidth;
@@ -217,9 +217,9 @@ export let TagSet = React.forwardRef(
       setShowAllModalOpen(false);
     };
 
-    useResizeObserver(sizingContainerRef, { callback: handleSizerTagsResize });
+    useResizeObserver(sizingContainerRef, handleSizerTagsResize);
 
-    useResizeObserver(tagSetRef, { callback: handleResize });
+    useResizeObserver(tagSetRef, handleResize);
 
     return (
       <div

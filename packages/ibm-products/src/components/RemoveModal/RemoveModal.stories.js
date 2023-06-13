@@ -13,16 +13,19 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { RemoveModal } from '.';
-import mdx from './RemoveModal.mdx';
+// import mdx from './RemoveModal.mdx';
 
 export default {
   title: getStoryTitle(RemoveModal.displayName),
   component: RemoveModal,
+  tags: ['autodocs'],
   parameters: {
     // styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 
@@ -46,8 +49,8 @@ const defaultProps = {
   preventCloseOnClickOutside: true,
 };
 
-const Template = (args) => {
-  return <RemoveModal {...args} />;
+const Template = ({ open, ...args }, context) => {
+  return <RemoveModal {...args} open={context.viewMode !== 'docs' && open} />;
 };
 
 const TemplateWithState = (args) => {

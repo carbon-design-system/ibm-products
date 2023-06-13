@@ -9,7 +9,3 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 
 $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
-
-.#{$storybook-block-class}--header {
-  @include theme(themes.$g100);
-}

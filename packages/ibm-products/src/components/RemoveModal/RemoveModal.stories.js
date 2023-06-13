@@ -13,7 +13,7 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { RemoveModal } from '.';
-// import mdx from './RemoveModal.mdx';
+import docsPage from './RemoveModal.docs-page';
 
 export default {
   title: getStoryTitle(RemoveModal.displayName),
@@ -21,11 +21,9 @@ export default {
   tags: ['autodocs'],
   parameters: {
     // styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: docsPage,
     },
-*/
   },
 };
 

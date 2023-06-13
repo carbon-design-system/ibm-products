@@ -24,6 +24,11 @@ import { usePreviousValue } from '../../global/js/hooks';
 
 const componentName = 'RemoveModal';
 
+/**
+The `RemoveModal` component is simply a wrapper of the Carbon `Modal` component.
+For additional usage guidelines and documentation please refer to the links
+above.
+ */
 export let RemoveModal = forwardRef(
   (
     {

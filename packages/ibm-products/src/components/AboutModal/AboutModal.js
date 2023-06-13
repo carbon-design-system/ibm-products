@@ -33,7 +33,7 @@ const componentName = 'AboutModal';
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 /**
- * The AboutModal component provides a way to communicate product information
+ * The `AboutModal` component provides a way to communicate product information
  * to users. It is triggered by a user’s action, appears on top of the main
  * page content, and is persistent until dismissed. The purpose of this modal
  * should be immediately apparent to the user, with a clear and obvious path

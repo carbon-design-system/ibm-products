@@ -38,6 +38,8 @@ const App = () => {
 2. \`openWebTerminal\` sets the \`open\` state to true
 3. \`closeWebTerminal\` sets the \`open\` state to false
 4. \`toggleWebTerminal\` toggles between true and false
+
+Example:
 `,
         source: {
           code: `const MyComponent = () => {

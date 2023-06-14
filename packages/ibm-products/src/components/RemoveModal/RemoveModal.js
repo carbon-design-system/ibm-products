@@ -25,9 +25,9 @@ import { usePreviousValue } from '../../global/js/hooks';
 const componentName = 'RemoveModal';
 
 /**
-The `RemoveModal` component is simply a wrapper of the Carbon `Modal` component.
-For additional usage guidelines and documentation please refer to the links
-above.
+The `RemoveModal` covers what is known as high impact and medium impact deleting.
+Enabling `textConfirmation` enables what would be considered the high impact state of the modal.
+For additional information on differentiating between delete / remove and low / medium / high impact please refer to the usage guidelines.
  */
 export let RemoveModal = forwardRef(
   (

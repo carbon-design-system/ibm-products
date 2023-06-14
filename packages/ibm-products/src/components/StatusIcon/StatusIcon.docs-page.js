@@ -4,7 +4,6 @@ import * as stories from './StatusIcon.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
-    guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/status-icons/usage"
     blocks={[
       {
         story: stories.Default,

@@ -4,7 +4,6 @@ import * as stories from './UserProfileImage.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
-    guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/usage"
     blocks={[
       {
         story: stories.Default,

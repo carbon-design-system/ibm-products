@@ -1,20 +1,16 @@
 import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
-import { useOf } from '@storybook/blocks';
 import * as stories from './Cascade.stories';
-import { storyDocsPageInfo } from '../../global/js/utils/story-helper';
+import { useOf } from '@storybook/blocks';
+import { storyDocsGuidelines } from '../../global/js/utils/story-helper';
 
 const DocsPage = () => {
   const { csfFile } = useOf('meta', ['meta']);
-  const storyInfo = storyDocsPageInfo(csfFile);
 
   return (
     <StoryDocsPage
       altGuidelinesHref={[
-        {
-          href: storyInfo.guidelinesHref,
-          label: storyInfo.guidelinesLinkLabel,
-        },
+        storyDocsGuidelines(csfFile),
         {
           href: 'https://www.carbondesignsystem.com/guidelines/motion/overview/',
           label: 'Carbon motion guidelines',

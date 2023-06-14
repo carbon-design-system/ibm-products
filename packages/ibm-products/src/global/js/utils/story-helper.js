@@ -205,6 +205,15 @@ export const storyDocsPageInfo = (csfFile) => {
   return result;
 };
 
+export const storyDocsGuidelines = (csfFile) => {
+  const storyInfo = storyDocsPageInfo(csfFile);
+
+  return {
+    href: storyInfo.guidelinesHref,
+    label: storyInfo.guidelinesLinkLabel,
+  };
+};
+
 /**
  * A helper function that finds the designated theme on the Storybook canvas.
  * @returns "dark" or "light"

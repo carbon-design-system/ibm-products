@@ -4,7 +4,6 @@ import * as stories from './WebTerminal.stories';
 
 const DocsPage = () => (
   <StoryDocsPage
-    guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/web-terminal/usage"
     blocks={[
       {
         description: `To get started using the WebTerminal, you have to first wrap your

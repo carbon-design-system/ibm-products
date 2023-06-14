@@ -93,10 +93,12 @@ export const StoryDocsPage = ({
   blocks,
   omitCodedExample,
   omitUnreferencedStories,
+  ...rest
 }) => {
   const { csfFile } = useOf('meta', ['meta']);
 
   const storyInfo = storyDocsPageInfo(csfFile);
+  console.log('hello', altGuidelinesHref, rest);
   const guidelinesHref = altGuidelinesHref ?? storyInfo.guidelinesHref;
 
   const isFullScreen =

@@ -6,7 +6,10 @@
  */
 
 import React, { useState } from 'react';
-import { getStoryTitle } from '../../global/js/utils/story-helper';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import { FilterSummary } from '.';
 
 import styles from './_storybook-styles.scss';
@@ -20,22 +23,13 @@ export default {
   },
 };
 
-// eslint-disable-next-line react/prop-types
-export const Default = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [filters, setFilters] = useState([
-    { key: 'name', value: 'Thor' },
-    { key: 'location', value: 'Asgard' },
-    //cspell: disable
-    { key: 'weapon', value: 'Mjölnir' },
-    //cspell: enable
-  ]);
-
+const Template = (args) => {
+  const [filters, setFilters] = useState(args.initialFilters);
   const clearFilters = () => setFilters([]);
 
   return (
     <FilterSummary
-      clearFiltersText="Clear filters"
+      clearFiltersText={args.clearFiltersText}
       filters={filters}
       clearFilters={clearFilters}
     />
@@ -43,26 +37,31 @@ export const Default = () => {
 };
 
 // eslint-disable-next-line react/prop-types
-export const WithManyTags = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+export const Default = prepareStory(Template, {
+  args: {
+    clearFiltersText: 'Clear filters',
+    filters: [
+      { key: 'name', value: 'Thor' },
+      { key: 'location', value: 'Asgard' },
+      //cspell: disable
+      { key: 'weapon', value: 'Mjölnir' },
+      //cspell: enable
+    ],
+  },
+});
 
-  const [filters, setFilters] = useState([
-    //cspell: disable
-    { key: 'project', value: 'Goldmember' },
-    //cspell: enable
-    { key: 'owner', value: 'Austin Powers' },
-    { key: 'middle name', value: 'Danger' },
-    { key: 'spy', value: true },
-    { key: 'title', value: 'International man of mystery' },
-  ]);
-
-  const clearFilters = () => setFilters([]);
-
-  return (
-    <FilterSummary
-      clearFiltersText="Clear filters"
-      filters={filters}
-      clearFilters={clearFilters}
-    />
-  );
-};
+// eslint-disable-next-line react/prop-types
+export const WithManyTags = prepareStory(Template, {
+  args: {
+    clearFiltersText: 'Clear filters',
+    filters: [
+      //cspell: disable
+      { key: 'project', value: 'Goldmember' },
+      //cspell: enable
+      { key: 'owner', value: 'Austin Powers' },
+      { key: 'middle name', value: 'Danger' },
+      { key: 'spy', value: true },
+      { key: 'title', value: 'International man of mystery' },
+    ],
+  },
+});

@@ -6,7 +6,6 @@ import * as stories from './Cascade.stories';
 const docsPage = () => (
   <StoryDocsPage
     guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/cascade/usage"
-    hasCodedExample={true}
     blocks={[
       {
         story: stories.WithoutGrid,

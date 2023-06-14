@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { sanitize } from '@storybook/csf';
 import pkg from '../package-settings';
 import { getPathForComponent } from '../../../../../core/story-structure';
+import { paramCase } from 'change-case';
 
 /**
  * A helper function to return the structured story title for a component.
@@ -113,6 +114,45 @@ StackblitzLink.propTypes = {
    * directory within examples stackblitz will be found
    */
   exampleDirectory: PropTypes.string,
+};
+
+export const palUsageHref = (csfFile) => {
+  const title = csfFile?.meta?.title;
+  const [_pkg, kind, section] = title.split('/');
+
+  if (/components|patterns/i.test(kind) && name) {
+    return `https://pages.github.ibm.com/cdai-design/pal/${kind}s/${paramCase(
+      section
+    )}/usage`;
+  }
+};
+
+export const storyDocsPageTitle = (csfFile) => {
+  const title = csfFile?.meta?.title;
+  const [_pkg, kind, a, b, ...rest] = title.split('/');
+
+  let component;
+
+  if (/components|patterns/i.test(kind)) {
+    // components and patterns have an additional level
+    component = b;
+  } else {
+    component = a;
+  }
+
+  const name = component.split('#')[0]; // canary always written as Example#canary};
+
+  if (name) {
+    if (rest.length > 0) {
+      return `${name} (${rest.join(' ')})`;
+    } else {
+      return name;
+    }
+  }
+
+  console.error('Error: unable to parse title from metadata.');
+
+  return title;
 };
 
 /**

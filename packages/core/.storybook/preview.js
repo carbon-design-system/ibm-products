@@ -7,14 +7,6 @@
 
 // cspell:words unuse
 
-import {
-  Title,
-  Subtitle,
-  Description,
-  Controls,
-  Stories,
-  useOf,
-} from '@storybook/blocks';
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/withCarbonTheme';
 import {
   PARAM_KEY as CARBON_THEME_PARAM_KEY,
@@ -28,6 +20,7 @@ import { pkg } from '../../ibm-products/src/settings';
 
 import index from './index.scss';
 import { getSectionSequence } from '../story-structure';
+import { StoryDocsPage } from '../../ibm-products/src/global/js/utils/StoryDocsPage';
 
 // Enable all components, whether released or not, for storybook purposes
 pkg._silenceWarnings(true);
@@ -141,27 +134,7 @@ const parameters = {
     defaultViewport: 'basic',
   },
   docs: {
-    page: () => {
-      const { csfFile } = useOf('meta', ['meta']);
-
-      const isFullScreen =
-        csfFile?.meta?.parameters?.layout === 'fullscreen' || false;
-      const storyHelperClass = isFullScreen
-        ? 'c4p--story-docs-page--fullscreen'
-        : '';
-
-      return (
-        <>
-          <Title />
-          <Description />
-          <div className={storyHelperClass}>
-            <Stories />
-          </div>
-          <Subtitle>Component API</Subtitle>
-          <Controls />
-        </>
-      );
-    },
+    page: () => <StoryDocsPage />,
   },
 };
 

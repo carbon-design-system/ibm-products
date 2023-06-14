@@ -5,7 +5,6 @@ import * as stories from './UserProfileImage.stories';
 const docsPage = () => (
   <StoryDocsPage
     guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/user-profile-images/usage"
-    hasCodedExample={true}
     blocks={[
       {
         story: stories.Default,
@@ -19,7 +18,6 @@ const docsPage = () => (
         description: `When passing a display name to the component, the display name will be distilled down to the first and last initials of the display name. \`Thomas Watson\` and \`Thomas J. Watson\` will both display \`TW\` as the initials.`,
       },
     ]}
-    includeAllStories={true}
   />
 );
 

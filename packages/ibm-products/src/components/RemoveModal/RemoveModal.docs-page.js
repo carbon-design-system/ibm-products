@@ -18,7 +18,6 @@ const docsPage = () => (
         label: 'Carbon Modal documentation',
       },
     ]}
-    hasCodedExample={true}
   />
 );
 

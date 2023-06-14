@@ -18,9 +18,14 @@ import {
   AnchorMdx,
   useOf,
 } from '@storybook/blocks';
-const { paramCase } = require('change-case');
+import { paramCase } from 'change-case';
 
-import { codeSandboxHref, stackblitzHref } from './story-helper';
+import {
+  codeSandboxHref,
+  palUsageHref,
+  stackblitzHref,
+  storyDocsPageTitle,
+} from './story-helper';
 
 export const CustomBlocks = ({ blocks }) => {
   return blocks.map((block, index) => {
@@ -47,9 +52,9 @@ export const CustomBlocks = ({ blocks }) => {
 /**
  * This function checks blocks against stories and then
  * - Adds title if no alternative is supplied
- * - Adds blocks for unreferenced stories if includeAllStories is true
+ * - Adds blocks for unreferenced stories if omitUnreferencedStories is false
  */
-const processBlocks = (blocks, stories, includeAllStories) => {
+const processBlocks = (blocks, stories, omitUnreferencedStories) => {
   const blocksWithStoryTitles = blocks ? [...blocks] : [];
   const restOfStories = [];
 
@@ -64,32 +69,36 @@ const processBlocks = (blocks, stories, includeAllStories) => {
 
     if (matchingBlock) {
       matchingBlock.title = matchingBlock.title ?? storyName;
-    } else if (includeAllStories) {
+    } else if (!omitUnreferencedStories) {
       restOfStories.push({ story, title: storyName });
     }
   });
 
-  if (includeAllStories) {
+  if (!omitUnreferencedStories) {
     return blocksWithStoryTitles.concat(restOfStories);
   }
 
   return blocksWithStoryTitles;
 };
 
+/**
+ * Calling with no parameters will produce the default output.
+ * Customize by providing alternative values and/or blocks defining sections
+ * @param {*} param0
+ * @returns
+ */
 export const StoryDocsPage = ({
-  blocks,
   altTitle,
   altDescription,
-  guidelinesHref,
-  hasCodedExample,
-  includeAllStories,
+  altGuidelinesHref,
+  blocks,
+  omitCodedExample,
+  omitUnreferencedStories,
 }) => {
-  const storyCount = blocks?.filter((block) => !!block.story).length ?? 0;
   const { csfFile } = useOf('meta', ['meta']);
 
-  // console.log('csfFile contents', csfFile);
-
-  const processedTitle = /([^/#]+)(#[^/#]+)?$/.exec(csfFile?.meta?.title)[1];
+  const processedTitle = storyDocsPageTitle(csfFile);
+  const guidelinesHref = altGuidelinesHref ?? palUsageHref(csfFile);
 
   const isFullScreen =
     csfFile?.meta?.parameters?.layout === 'fullscreen' || false;
@@ -99,27 +108,30 @@ export const StoryDocsPage = ({
   const processedBlocks = processBlocks(
     blocks,
     csfFile.stories,
-    includeAllStories
+    omitUnreferencedStories
   );
+  const storyCount =
+    processedBlocks?.filter((block) => !!block.story).length ?? 0;
 
   return (
     <>
       <Title>{altTitle ?? processedTitle}</Title>
-
-      {guidelinesHref && Array.isArray(guidelinesHref) ? (
-        guidelinesHref.map(({ href, label }, index) => (
-          <>
-            {index > 0 && ' | '}
-            <AnchorMdx key={href} href={href}>
-              {label}
-            </AnchorMdx>
-          </>
-        ))
-      ) : (
-        <AnchorMdx href={guidelinesHref}>
-          {altTitle ?? processedTitle} usage guidelines
-        </AnchorMdx>
-      )}
+      {guidelinesHref ? (
+        guidelinesHref && Array.isArray(guidelinesHref) ? (
+          guidelinesHref.map(({ href, label }, index) => (
+            <>
+              {index > 0 && ' | '}
+              <AnchorMdx key={href} href={href}>
+                {label}
+              </AnchorMdx>
+            </>
+          ))
+        ) : (
+          <AnchorMdx href={guidelinesHref}>
+            {altTitle ?? processedTitle} usage guidelines
+          </AnchorMdx>
+        )
+      ) : null}
 
       <h2 style={{ marginTop: guidelinesHref ? '16px' : '' }}>
         Table of contents
@@ -146,11 +158,9 @@ export const StoryDocsPage = ({
           )
         )}
       </ul>
-
       <h2 id="overview">Overview</h2>
       <Description>{altDescription}</Description>
-
-      {hasCodedExample ? (
+      {!omitCodedExample ? (
         <>
           <h2 id="coded-examples">Coded examples</h2>
           <p>
@@ -195,7 +205,6 @@ export const StoryDocsPage = ({
           </ul>
         </>
       ) : null}
-
       <h2 id="example-usage">Example usage</h2>
       <div className={storyHelperClass}>
         {processedBlocks ? (
@@ -204,7 +213,6 @@ export const StoryDocsPage = ({
           <Stories />
         )}
       </div>
-
       <h2 id="component-api">Component API</h2>
       {storyCount > 1 && (
         <p>
@@ -227,6 +235,15 @@ StoryDocsPage.propTypes = {
    * If passed as string treated as markdown.
    */
   altDescription: PropTypes.node,
+  /**
+   * location if any of guidelines on the PAL site, constructed by default
+   */
+  altGuidelinesHref: PropTypes.oneOfType(
+    PropTypes.string,
+    PropTypes.arrayOf(
+      PropTypes.shape({ href: PropTypes.string, label: PropTypes.string })
+    )
+  ),
   /**
    * Uses component name by default
    */
@@ -263,20 +280,11 @@ StoryDocsPage.propTypes = {
     })
   ),
   /**
-   * location if any of guidelines on the PAL site.
+   * Set to true if no published example exists (all components and patterns should have an example)
    */
-  guidelinesHref: PropTypes.oneOfType(
-    PropTypes.string,
-    PropTypes.arrayOf(
-      PropTypes.shape({ href: PropTypes.string, label: PropTypes.string })
-    )
-  ),
+  omitCodedExample: PropTypes.bool,
   /**
-   * Set to true if an example exists in the examples folder (ComponentName) matched
+   * Stories unreferenced in blocks included by default
    */
-  hasCodedExample: PropTypes.bool,
-  /**
-   * show stories not referenced in blocks
-   */
-  includeAllStories: PropTypes.bool,
+  omitUnreferencedStories: PropTypes.bool,
 };

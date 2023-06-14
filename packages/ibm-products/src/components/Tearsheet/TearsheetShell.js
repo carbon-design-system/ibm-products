@@ -58,7 +58,9 @@ export const tearsheetIsPassive = (actions) => !actions || !actions?.length;
 export const tearsheetHasCloseIcon = (actions, hasCloseIcon) =>
   hasCloseIcon ?? tearsheetIsPassive(actions);
 
-// TearSheetShell is used internally by TearSheet and TearSheetNarrow
+/**
+ *  TearSheetShell is used internally by TearSheet and TearSheetNarrow
+ * */
 export const TearsheetShell = React.forwardRef(
   (
     {

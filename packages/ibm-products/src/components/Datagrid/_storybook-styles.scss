@@ -20,7 +20,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   height: 100vh;
 }
 
-.sb-show-main.sb-main-centered #root {
+.sb-show-main.sb-main-centered #storybook-root {
   width: 100%;
   height: 100vh;
   padding: $spacing-07;

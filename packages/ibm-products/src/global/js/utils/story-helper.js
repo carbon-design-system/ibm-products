@@ -155,6 +155,56 @@ export const storyDocsPageTitle = (csfFile) => {
   return title;
 };
 
+export const storyDocsPageInfo = (csfFile) => {
+  const title = csfFile?.meta?.title;
+  const [pkg, kind, a, b, ...rest] = title.split('/');
+
+  let result = {
+    package: pkg,
+    kind,
+    expectCodedExample: false,
+  };
+  let component;
+
+  if (/components|patterns/i.test(kind)) {
+    result.expectCodedExample = true;
+    // components and patterns have an additional level
+    component = b;
+    result.section = a;
+
+    result.guidelinesHref = `https://pages.github.ibm.com/cdai-design/pal/${kind}s/${paramCase(
+      result.section
+    )}/usage`;
+  } else {
+    component = a;
+  }
+
+  const nameSplit = component.split('#'); // canary always written as Example#canary};
+  const name = nameSplit[0];
+
+  if (nameSplit.length > 1 && nameSplit[1] === 'canary') {
+    result.canary = true;
+  }
+
+  if (name) {
+    if (rest.length > 0) {
+      result.component = result.title = `${name} (${rest.join(' ')})`;
+    } else {
+      result.component = name;
+      result.title = name;
+    }
+  } else {
+    console.error('Error: unable to parse title from metadata.');
+    result.title = title;
+  }
+
+  if (result.guidelinesHref) {
+    result.guidelinesLinkLabel = `${result.title} usage guidelines`;
+  }
+
+  return result;
+};
+
 /**
  * A helper function that finds the designated theme on the Storybook canvas.
  * @returns "dark" or "light"

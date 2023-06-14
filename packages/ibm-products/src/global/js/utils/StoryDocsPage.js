@@ -22,9 +22,8 @@ import { paramCase } from 'change-case';
 
 import {
   codeSandboxHref,
-  palUsageHref,
   stackblitzHref,
-  storyDocsPageTitle,
+  storyDocsPageInfo,
 } from './story-helper';
 
 export const CustomBlocks = ({ blocks }) => {
@@ -97,8 +96,8 @@ export const StoryDocsPage = ({
 }) => {
   const { csfFile } = useOf('meta', ['meta']);
 
-  const processedTitle = storyDocsPageTitle(csfFile);
-  const guidelinesHref = altGuidelinesHref ?? palUsageHref(csfFile);
+  const storyInfo = storyDocsPageInfo(csfFile);
+  const guidelinesHref = altGuidelinesHref ?? storyInfo.guidelinesHref;
 
   const isFullScreen =
     csfFile?.meta?.parameters?.layout === 'fullscreen' || false;
@@ -115,7 +114,7 @@ export const StoryDocsPage = ({
 
   return (
     <>
-      <Title>{altTitle ?? processedTitle}</Title>
+      <Title>{altTitle ?? storyInfo.title}</Title>
       {guidelinesHref ? (
         guidelinesHref && Array.isArray(guidelinesHref) ? (
           guidelinesHref.map(({ href, label }, index) => (
@@ -128,7 +127,9 @@ export const StoryDocsPage = ({
           ))
         ) : (
           <AnchorMdx href={guidelinesHref}>
-            {altTitle ?? processedTitle} usage guidelines
+            {altTitle
+              ? `${altTitle} usage guidelines`
+              : storyInfo.guidelinesLinkLabel}
           </AnchorMdx>
         )
       ) : null}
@@ -160,7 +161,7 @@ export const StoryDocsPage = ({
       </ul>
       <h2 id="overview">Overview</h2>
       <Description>{altDescription}</Description>
-      {!omitCodedExample ? (
+      {!omitCodedExample && storyInfo.expectCodedExample ? (
         <>
           <h2 id="coded-examples">Coded examples</h2>
           <p>
@@ -169,7 +170,7 @@ export const StoryDocsPage = ({
           </p>
           <ul>
             <li key="codesandbox">
-              <AnchorMdx href={codeSandboxHref(processedTitle)}>
+              <AnchorMdx href={codeSandboxHref(storyInfo.title)}>
                 <svg
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -193,7 +194,7 @@ export const StoryDocsPage = ({
               </AnchorMdx>
             </li>
             <li key="stackblitz">
-              <AnchorMdx href={stackblitzHref(processedTitle)}>
+              <AnchorMdx href={stackblitzHref(storyInfo.title)}>
                 <img
                   src="https://c.staticblitz.com/assets/favicon_sb-861fe1b85c0dc928750c62de15fed96fc75e57ee366bd937bad17a3938917b3f.svg"
                   alt="Stackblitz logo"

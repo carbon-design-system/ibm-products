@@ -28,7 +28,7 @@ import styles from './_storybook-styles.scss';
 
 const blockClass = `${pkg.prefix}--about-modal`;
 
-import docsPage from './AboutModal.docs-page';
+import DocsPage from './AboutModal.docs-page';
 
 export default {
   title: getStoryTitle(AboutModal.displayName),
@@ -37,7 +37,7 @@ export default {
   parameters: {
     styles,
     docs: {
-      page: docsPage,
+      page: DocsPage,
     },
     controls: { sort: 'requiredFirst' },
   },

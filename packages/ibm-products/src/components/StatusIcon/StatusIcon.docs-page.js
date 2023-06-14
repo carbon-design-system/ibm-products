@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import * as stories from './StatusIcon.stories';
 
-const docsPage = () => (
+const DocsPage = () => (
   <StoryDocsPage
     guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/status-icons/usage"
     blocks={[
@@ -34,4 +34,4 @@ users to quickly assess and identify status and respond accordingly.`,
   />
 );
 
-export default docsPage;
+export default DocsPage;

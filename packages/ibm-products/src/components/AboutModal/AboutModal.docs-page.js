@@ -3,7 +3,7 @@ import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 import * as stories from './AboutModal.stories';
 
-const docsPage = () => (
+const DocsPage = () => (
   <StoryDocsPage
     guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/about-modal/usage"
     blocks={[
@@ -30,4 +30,4 @@ const docsPage = () => (
   />
 );
 
-export default docsPage;
+export default DocsPage;

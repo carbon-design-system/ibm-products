@@ -22,7 +22,7 @@ import { documentationLinks } from './preview-components/documentationLinks';
 import { WebTerminalProvider } from './hooks';
 
 import styles from './_storybook-styles.scss';
-import docsPage from './WebTerminal.docs-page';
+import DocsPage from './WebTerminal.docs-page';
 
 const actions = [
   {
@@ -94,7 +94,7 @@ export default {
     styles,
 
     docs: {
-      page: docsPage,
+      page: DocsPage,
     },
   },
   component: WebTerminal, // Required to pick up WebTerminal doc block

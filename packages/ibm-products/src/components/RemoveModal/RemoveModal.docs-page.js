@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import { RemoveModal } from './RemoveModal';
 
-const docsPage = () => (
+const DocsPage = () => (
   <StoryDocsPage
     guidelinesHref={[
       {
@@ -21,4 +21,4 @@ const docsPage = () => (
   />
 );
 
-export default docsPage;
+export default DocsPage;

@@ -24,7 +24,7 @@ export default {
 };
 
 const Template = (args) => {
-  const [filters, setFilters] = useState(args.initialFilters);
+  const [filters, setFilters] = useState(args.filters);
   const clearFilters = () => setFilters([]);
 
   return (

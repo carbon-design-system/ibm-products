@@ -13,7 +13,7 @@ import {
 import { Cascade } from '.';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { Column } from '@carbon/react';
-import docsPage from './Cascade.docs-page';
+import DocsPage from './Cascade.docs-page';
 
 export default {
   title: getStoryTitle(Cascade.displayName),
@@ -23,7 +23,7 @@ export default {
     layout: 'fullscreen',
     styles,
     docs: {
-      page: docsPage,
+      page: DocsPage,
     },
   },
 };

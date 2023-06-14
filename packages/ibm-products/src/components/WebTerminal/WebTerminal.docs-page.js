@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import * as stories from './WebTerminal.stories';
 
-const docsPage = () => (
+const DocsPage = () => (
   <StoryDocsPage
     guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/web-terminal/usage"
     blocks={[
@@ -147,4 +147,4 @@ you need to pass in an array of actions with objects for each object.`,
   />
 );
 
-export default docsPage;
+export default DocsPage;

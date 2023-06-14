@@ -2,7 +2,7 @@ import React from 'react';
 import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 import * as stories from './Toolbar.stories';
 
-const docsPage = () => (
+const DocsPage = () => (
   <StoryDocsPage
     guidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/toolbars/usage"
     blocks={[
@@ -17,4 +17,4 @@ const docsPage = () => (
   />
 );
 
-export default docsPage;
+export default DocsPage;

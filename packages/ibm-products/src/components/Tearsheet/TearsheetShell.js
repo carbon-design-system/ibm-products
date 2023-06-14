@@ -60,6 +60,10 @@ export const tearsheetHasCloseIcon = (actions, hasCloseIcon) =>
 
 /**
  *  TearSheetShell is used internally by TearSheet and TearSheetNarrow
+ *
+ * The component is not public.
+ *
+ * See the canvas tab for the component API details.
  * */
 export const TearsheetShell = React.forwardRef(
   (

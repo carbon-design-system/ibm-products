@@ -15,7 +15,7 @@ import {
 
 import { ExampleComponent } from '.';
 import { pkg } from '../../settings';
-import docsPage from './ExampleComponent.docs-page';
+// import DocsPage from './ExampleComponent.docs-page';
 
 // import styles from './_storybook-styles.scss';
 
@@ -29,7 +29,7 @@ export default {
   parameters: {
     // styles,
     docs: {
-      page: docsPage,
+      // page:  DocsPage, // OPTIONAL: required only to customize default docs page
     },
   },
 };

@@ -12,7 +12,7 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import image from './headshot.jpg'; // cspell:disable-line
-import docsPage from './UserProfileImage.docs-page';
+import DocsPage from './UserProfileImage.docs-page';
 
 // import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
@@ -70,7 +70,7 @@ export default {
   parameters: {
     // styles,
     docs: {
-      page: docsPage,
+      page: DocsPage,
     },
   },
 };

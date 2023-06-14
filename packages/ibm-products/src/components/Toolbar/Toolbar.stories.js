@@ -38,7 +38,7 @@ import React, { useState } from 'react';
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
-import docsPage from './Toolbar.docs-page';
+import DocsPage from './Toolbar.docs-page';
 
 export default {
   title: getStoryTitle(Toolbar.displayName),
@@ -49,7 +49,7 @@ export default {
 
   parameters: {
     docs: {
-      page: docsPage,
+      page: DocsPage,
     },
   },
 };

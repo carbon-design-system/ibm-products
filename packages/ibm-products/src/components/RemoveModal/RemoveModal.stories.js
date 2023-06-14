@@ -13,7 +13,7 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { RemoveModal } from '.';
-import docsPage from './RemoveModal.docs-page';
+import DocsPage from './RemoveModal.docs-page';
 
 export default {
   title: getStoryTitle(RemoveModal.displayName),
@@ -22,7 +22,7 @@ export default {
   parameters: {
     // styles,
     docs: {
-      page: docsPage,
+      page: DocsPage,
     },
   },
 };

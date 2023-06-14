@@ -93,12 +93,10 @@ export const StoryDocsPage = ({
   blocks,
   omitCodedExample,
   omitUnreferencedStories,
-  ...rest
 }) => {
   const { csfFile } = useOf('meta', ['meta']);
 
   const storyInfo = storyDocsPageInfo(csfFile);
-  console.log('hello', altGuidelinesHref, rest);
   const guidelinesHref = altGuidelinesHref ?? storyInfo.guidelinesHref;
 
   const isFullScreen =
@@ -111,6 +109,9 @@ export const StoryDocsPage = ({
     csfFile.stories,
     omitUnreferencedStories
   );
+
+  console.log(processBlocks);
+
   const storyCount =
     processedBlocks?.filter((block) => !!block.story).length ?? 0;
 
@@ -144,7 +145,7 @@ export const StoryDocsPage = ({
           (item) => (
             <li key={item}>
               <AnchorMdx href={`#${paramCase(item)}`}>{item}</AnchorMdx>
-              {blocks && item === 'Example usage' ? (
+              {processedBlocks && item === 'Example usage' ? (
                 <ul>
                   {processedBlocks.map((block) => {
                     return block?.title ? (

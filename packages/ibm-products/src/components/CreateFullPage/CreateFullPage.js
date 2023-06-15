@@ -46,6 +46,18 @@ export const StepsContext = createContext(null);
 // to let it know what number it is in the sequence of steps
 export const StepNumberContext = createContext(-1);
 
+/**
+ * Use with creations that must be completed in order for a service to be usable.
+ *
+ * ### Grid
+ *
+ * The `CreateFullPage` component utilizes Carbons' grid system in the inner
+content of the main section inside of the component. You can read more guidance
+on the Carbon's grid system
+[here](https://www.carbondesignsystem.com/guidelines/2x-grid/overview). You can
+include `<Row>` and `<Column>` components inside of each `CreateFullPageStep`
+component to get the desired affect.
+ */
 export let CreateFullPage = React.forwardRef(
   (
     {

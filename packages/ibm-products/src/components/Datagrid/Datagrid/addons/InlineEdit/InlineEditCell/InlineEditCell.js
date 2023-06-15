@@ -173,7 +173,7 @@ export const InlineEditCell = ({
 
   // Saves the new cell data, onDataUpdate is a required function to be
   // passed to useDatagrid when using useInlineEdit
-  saveCellData = saveCellData = useCallback(
+  saveCellData = useCallback(
     (newValue) => {
       const columnId = cell.column.id;
       const rowIndex = cell.row.index;

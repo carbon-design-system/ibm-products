@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -36,7 +36,7 @@ export const InlineEditCell = ({
   placeholder = '',
   tabIndex,
   value,
-  nonEditCell,
+  nonEditCell = false,
   totalInlineEditColumns,
   type,
 }) => {
@@ -61,27 +61,7 @@ export const InlineEditCell = ({
   const outerButtonElement = useRef();
 
   const { rowSize, onDataUpdate } = instance;
-
-  // Saves the new cell data, onDataUpdate is a required function to be
-  // passed to useDatagrid when using useInlineEdit
-  const saveCellData = useCallback(
-    (newValue) => {
-      const columnId = cell.column.id;
-      const rowIndex = cell.row.index;
-      onDataUpdate((prev) =>
-        prev.map((row, index) => {
-          if (index === rowIndex) {
-            return {
-              ...prev[rowIndex],
-              [columnId]: newValue,
-            };
-          }
-          return row;
-        })
-      );
-    },
-    [cell, onDataUpdate]
-  );
+  let saveCellData;
 
   useEffect(() => {
     setInitialValue(value);
@@ -190,6 +170,27 @@ export const InlineEditCell = ({
       }
     }
   }, [inEditMode, type]);
+
+  // Saves the new cell data, onDataUpdate is a required function to be
+  // passed to useDatagrid when using useInlineEdit
+  saveCellData = saveCellData = useCallback(
+    (newValue) => {
+      const columnId = cell.column.id;
+      const rowIndex = cell.row.index;
+      onDataUpdate((prev) =>
+        prev.map((row, index) => {
+          if (index === rowIndex) {
+            return {
+              ...prev[rowIndex],
+              [columnId]: newValue,
+            };
+          }
+          return row;
+        })
+      );
+    },
+    [cell, onDataUpdate]
+  );
 
   // Initialize cellValue from value prop
   useEffect(() => {

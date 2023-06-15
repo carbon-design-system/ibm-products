@@ -27,9 +27,9 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { EditSidePanel } from '.';
-// import mdx from './EditSidePanel.mdx';
 
 import styles from './_storybook-styles.scss';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 export default {
   title: getStoryTitle(EditSidePanel.displayName),
@@ -45,11 +45,11 @@ export default {
   },
   parameters: {
     styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: () => (
+        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#side-panel-edit" />
+      ),
     },
-*/
   },
 };
 

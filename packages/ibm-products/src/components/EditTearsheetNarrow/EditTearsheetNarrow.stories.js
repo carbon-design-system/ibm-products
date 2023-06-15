@@ -23,9 +23,9 @@ import {
 
 import { EditTearsheetNarrow } from '.';
 import { CreateTearsheetNarrow } from '../CreateTearsheetNarrow';
-// import mdx from './EditTearsheetNarrow.mdx';
 
 import styles from '../CreateTearsheetNarrow/_storybook-styles.scss';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 export default {
   title: getStoryTitle(EditTearsheetNarrow.displayName),
@@ -33,11 +33,11 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: () => (
+        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#tearsheet-edit" />
+      ),
     },
-*/
   },
 };
 

@@ -26,12 +26,12 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   const [initialListWidth, setInitialListWidth] = useState(null);
   const [receivedInitialWidth, setReceivedInitialWidth] = useState(false);
   const {
-    selectedFlatRows,
+    state: { selectedRowIds },
     toggleAllRowsSelected,
     toolbarBatchActions,
     setGlobalFilter,
   } = datagridState;
-  const totalSelected = selectedFlatRows && selectedFlatRows.length;
+  const totalSelected = Object.keys(selectedRowIds || {})?.length;
 
   // Get initial width of batch actions container,
   // used to measure when all items are put inside

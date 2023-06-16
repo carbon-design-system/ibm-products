@@ -54,7 +54,7 @@ const DatagridVirtualBody = (datagridState) => {
     gridRefElement.style.width = gridRefElement?.clientWidth;
   };
 
-  useResizeObserver(gridRef, { callback: handleVirtualGridResize });
+  useResizeObserver(gridRef, handleVirtualGridResize);
 
   const syncScroll = (e) => {
     const virtualBody = e.target;

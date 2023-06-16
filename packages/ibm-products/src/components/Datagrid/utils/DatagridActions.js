@@ -5,18 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useLayoutEffect, useMemo, useContext, useState } from 'react';
-import {
-  Button,
-  DataTable,
-  OverflowMenu,
-  OverflowMenuItem,
-  ComposedModal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  Dropdown,
-} from 'carbon-components-react';
 import {
   Add16,
   ChevronDown16,
@@ -24,16 +12,28 @@ import {
   Filter16,
   Restart16,
 } from '@carbon/icons-react';
+import {
+  Button,
+  ComposedModal,
+  DataTable,
+  Dropdown,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  OverflowMenu,
+  OverflowMenuItem,
+} from 'carbon-components-react';
+import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
+import React, { useLayoutEffect, useMemo, useState } from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
-import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
-
-import { FilterContext } from '../Datagrid/addons/Filtering';
+import { useFilterContext } from '../Datagrid/addons/Filtering/hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 export const DatagridActions = (datagridState) => {
-  const { setPanelOpen } = useContext(FilterContext);
+  const { setPanelOpen } = useFilterContext();
   const {
     selectedFlatRows,
     setGlobalFilter,

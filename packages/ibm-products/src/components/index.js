@@ -76,6 +76,7 @@ export {
   useEditableCell,
   useFiltering,
   getAutoSizedColumnWidth,
+  useFilterContext,
 } from './Datagrid';
 export { EditTearsheet } from './EditTearsheet';
 export { EditTearsheetNarrow } from './EditTearsheetNarrow';
@@ -84,5 +85,6 @@ export { EditUpdateCards } from './EditUpdateCards';
 
 export { InlineEdit } from './InlineEdit';
 export { EditInPlace } from './EditInPlace';
+export { Guidebanner } from './Guidebanner';
 export { NonLinearReading } from './NonLinearReading';
 export { SteppedAnimatedMedia } from './SteppedAnimatedMedia';

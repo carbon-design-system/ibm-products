@@ -36,16 +36,11 @@ $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
 }
 
 $story-anchor: 'web-terminal';
-div[id*='#{$story-anchor}'] .docs-story {
-  min-height: 50vh;
-  transform: translateZ(0);
-}
-
-div[id*='#{$story-anchor}'] .docs-story > div:first-child {
-  width: 100%;
-  overflow: hidden;
-}
-
-div[id*='#{$story-anchor}'] .docs-story .preview-position-fix {
-  min-height: 50vh;
+#storybook-docs {
+  ul {
+    list-style: initial;
+  }
+  ol {
+    list-style: decimal;
+  }
 }

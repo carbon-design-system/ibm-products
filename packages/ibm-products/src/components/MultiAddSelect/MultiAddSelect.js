@@ -13,6 +13,9 @@ import { pkg } from '../../settings';
 
 const componentName = 'MultiAddSelect';
 
+/**
+ * Used to add or select multiple or more items from larger lists or hierarchies.
+ */
 export let MultiAddSelect = forwardRef((props, ref) => {
   return (
     <AddSelect

@@ -26,6 +26,7 @@
 // will set the carbon theme used within that element.
 body {
   background-color: $background;
+  --doc-story-height: initial;
 }
 
 [storybook-carbon-theme] {
@@ -62,4 +63,17 @@ body {
 
 .preview__notification--feature-flag .#{config.$prefix}--list--unordered {
   margin-top: $spacing-04;
+}
+
+.c4p--story-docs-page--fullscreen .docs-story {
+  --doc-story-height: 50vh;
+
+  min-height: var(--doc-story-height);
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  transform: translateZ(0);
+}
+
+.c4p--story-docs-page--fullscreen > div:first-child {
+  overflow: hidden;
+  width: 100%;
 }

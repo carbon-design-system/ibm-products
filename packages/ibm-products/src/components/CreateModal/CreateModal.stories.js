@@ -26,9 +26,9 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { CreateModal } from '.';
-// import mdx from './CreateModal.mdx';
 
 import styles from './_storybook-styles.scss';
+import DocsPage from './CreateModal.docs-page';
 
 export default {
   title: getStoryTitle(CreateModal.displayName),
@@ -36,7 +36,7 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    // docs: { page: mdx },
+    docs: { page: DocsPage },
     controls: { sort: 'requiredFirst' },
   },
   argTypes: {

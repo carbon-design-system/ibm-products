@@ -9,3 +9,15 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 
 $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
+
+.#{$storybook-block-class}--full-height {
+  height: 100vh;
+  max-height: var(--doc-story-height); // set in core if needed;
+}
+
+.#{$storybook-block-class}__add {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}

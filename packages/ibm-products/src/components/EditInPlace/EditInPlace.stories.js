@@ -15,6 +15,7 @@ import { EditInPlace } from '.';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 // import mdx from './EditInPlace.mdx';
 import styles from './_storybook-styles.scss';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 const storyClass = 'edit-in-place-example';
 
@@ -56,11 +57,11 @@ export default {
   },
   parameters: {
     styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: () => (
+        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#inline-edit" />
+      ),
     },
-*/
   },
   decorators: [
     (story) => (

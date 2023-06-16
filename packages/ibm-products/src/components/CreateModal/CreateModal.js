@@ -39,6 +39,12 @@ const isValidChildren =
     return;
   };
 
+/**
+ * The `CreateModal` component provides a way for a user to quickly generate a new
+resource. It is triggered by a user’s action, appears on top of the main page
+content, and is persistent until dismissed. The purpose of this modal should be
+immediately apparent to the user, with a clear and obvious path to completion.
+ */
 export let CreateModal = React.forwardRef(
   (
     {

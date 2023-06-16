@@ -19,6 +19,15 @@ const defaults = {
   grid: false,
 };
 
+/**
+
+This pattern is intended for use with cards, tiles, or similarly styled
+components. Use this patterns in areas that are the primary focus on the page to
+help the user along their journey or locate the most important information on
+the page. It should not be used on a page if it is the secondary focus of the
+page as that will distract the user.
+
+*/
 export let Cascade = forwardRef(
   (
     {
@@ -86,7 +95,7 @@ Cascade.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Specifies whether or not to wrap the child content in a <Grid />.
+   * Specifies whether or not to wrap the child content in a `<Grid />`.
    * If this is set to true it's important that the children are being wrapped in rows in columns.
    * Check the documentation for additional clarification.
    */

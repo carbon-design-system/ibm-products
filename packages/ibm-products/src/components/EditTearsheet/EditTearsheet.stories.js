@@ -11,9 +11,9 @@ import {
 } from '../../global/js/utils/story-helper';
 import styles from './_storybook-styles.scss';
 import { EditTearsheet } from './EditTearsheet';
+import DocsPage from './EditTearsheet.docs-page';
 import { EditTearsheetForm } from './EditTearsheetForm';
 import { MultiFormEditTearsheet } from './preview-components/MultiFormEditTearsheet';
-// import mdx from './EditTearsheet.mdx';
 
 export default {
   title: getStoryTitle(EditTearsheet.displayName),
@@ -30,7 +30,7 @@ export default {
     onClose: { control: { disable: true } },
     open: { control: { disable: true } },
   },
-  parameters: { styles /* docs: { page: mdx } */ },
+  parameters: { styles, docs: { page: DocsPage } },
 };
 
 const editTearsheetProps = {

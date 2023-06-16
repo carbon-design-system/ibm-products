@@ -1962,13 +1962,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/feature-flags@npm:^0.14.0":
-  version: 0.14.0
-  resolution: "@carbon/feature-flags@npm:0.14.0"
-  checksum: 6949630de92ca373d83164bc2e3f90ae43777f134e74dfc6780c6bda8c2bce666ed037ccdb8a91650d7dc2e9960a3ab21f291c704cb0a8f2dbde1851645d5f56
-  languageName: node
-  linkType: hard
-
 "@carbon/feature-flags@npm:^0.15.0":
   version: 0.15.0
   resolution: "@carbon/feature-flags@npm:0.15.0"
@@ -1976,7 +1969,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/grid@npm:^11.14.0, @carbon/grid@npm:^11.15.0":
+"@carbon/grid@npm:^11.15.0":
   version: 11.15.0
   resolution: "@carbon/grid@npm:11.15.0"
   dependencies:
@@ -1997,7 +1990,7 @@ __metadata:
     inquirer: ^9.2.7
     npm-check-updates: ^16.10.12
     prettier: ^2.8.8
-    prettier-config-carbon: ^0.10.0
+    prettier-config-carbon: ^0.11.0
     remark: ^14.0.3
     semver: ^7.5.1
     yargs: ^17.7.2
@@ -2011,13 +2004,13 @@ __metadata:
   resolution: "@carbon/ibm-cloud-cognitive-core@workspace:packages/core"
   dependencies:
     "@babel/core": ^7.22.5
-    "@carbon/grid": ^11.14.0
-    "@carbon/layout": ^11.14.0
-    "@carbon/motion": ^11.11.0
-    "@carbon/react": ~1.30.0
-    "@carbon/storybook-addon-theme": 2.0.0-rc.0
-    "@carbon/themes": ^11.19.0
-    "@carbon/type": ^11.18.0
+    "@carbon/grid": ^11.15.0
+    "@carbon/layout": ^11.15.0
+    "@carbon/motion": ^11.12.0
+    "@carbon/react": ~1.31.3
+    "@carbon/storybook-addon-theme": 2.0.1
+    "@carbon/themes": ^11.20.0
+    "@carbon/type": ^11.19.0
     "@storybook/addon-actions": ^7.0.20
     "@storybook/addon-controls": ^7.0.20
     "@storybook/addon-docs": ^7.0.20
@@ -2086,12 +2079,12 @@ __metadata:
     sass: ^1.63.4
     yargs: ^17.7.2
   peerDependencies:
-    "@carbon/grid": ^11.14.0
-    "@carbon/layout": ^11.14.0
-    "@carbon/motion": ^11.11.0
-    "@carbon/react": ~1.30.0
-    "@carbon/themes": ^11.19.0
-    "@carbon/type": ^11.18.0
+    "@carbon/grid": ^11.15.0
+    "@carbon/layout": ^11.15.0
+    "@carbon/motion": ^11.12.0
+    "@carbon/react": ~1.31.3
+    "@carbon/themes": ^11.20.0
+    "@carbon/type": ^11.19.0
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
   languageName: unknown
@@ -2104,7 +2097,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/icons-react@npm:^11.20.0":
+"@carbon/icons-react@npm:^11.21.0":
   version: 11.21.0
   resolution: "@carbon/icons-react@npm:11.21.0"
   dependencies:
@@ -2117,29 +2110,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/layout@npm:^11.14.0, @carbon/layout@npm:^11.15.0":
+"@carbon/layout@npm:^11.15.0":
   version: 11.15.0
   resolution: "@carbon/layout@npm:11.15.0"
   checksum: a2aeb6710820a2a4a7ede670259ae1532921e169f9fe17db25e983c14610333d59bd35b7acdf44d65d6e30e750da067a45f79997dcc5feedb909f5cfc0f33bb3
   languageName: node
   linkType: hard
 
-"@carbon/motion@npm:^11.11.0, @carbon/motion@npm:^11.12.0":
+"@carbon/motion@npm:^11.12.0":
   version: 11.12.0
   resolution: "@carbon/motion@npm:11.12.0"
   checksum: 6cda794f6da51d21a89ac7083df04bcbaa9e623155fdda934aa3df908dd290adc65f02ee0808e6943eace4eafe204bd65a6decbcf1958c0c6a3735f53be97723
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:~1.30.0":
-  version: 1.30.0
-  resolution: "@carbon/react@npm:1.30.0"
+"@carbon/react@npm:~1.31.3":
+  version: 1.31.3
+  resolution: "@carbon/react@npm:1.31.3"
   dependencies:
     "@babel/runtime": ^7.18.3
-    "@carbon/feature-flags": ^0.14.0
-    "@carbon/icons-react": ^11.20.0
-    "@carbon/layout": ^11.14.0
-    "@carbon/styles": ^1.30.0
+    "@carbon/feature-flags": ^0.15.0
+    "@carbon/icons-react": ^11.21.0
+    "@carbon/layout": ^11.15.0
+    "@carbon/styles": ^1.31.2
     "@carbon/telemetry": 0.1.0
     classnames: 2.3.2
     copy-to-clipboard: ^3.3.1
@@ -2160,31 +2153,11 @@ __metadata:
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
     sass: ^1.33.0
-  checksum: 197f7aa0f2cb16b34a5230bddf3a81c348413265f606e76dc06e709f94953935f7937a6c23421db5888f435f036d56616e25c8e141d29ff0d148ff687af9f1a6
+  checksum: 917de14346c7710ac31e46a093d4286df5e760c024e2a5f8eea251666b848e67a186370b31676cbbfc8b6632396b842f6b916a93fd3097004faee971216a9e29
   languageName: node
   linkType: hard
 
-"@carbon/storybook-addon-theme@npm:2.0.0-rc.0":
-  version: 2.0.0-rc.0
-  resolution: "@carbon/storybook-addon-theme@npm:2.0.0-rc.0"
-  dependencies:
-    "@storybook/addons": ^7.0.18
-    "@storybook/api": ^7.0.18
-    "@storybook/client-api": ^7.0.18
-    "@storybook/client-logger": ^7.0.18
-    "@storybook/components": ^7.0.18
-    "@storybook/core-events": ^7.0.18
-    "@storybook/theming": ^7.0.18
-    core-js: ^3.28.0
-    global: ^4.4.0
-  peerDependencies:
-    react: "*"
-    vue: "*"
-  checksum: 45c6af5e837bb6d6d0e2ef600d4fb5be5b17a2107dd1b1131f6e0b8731a2fb45b6c5ffa780909dfe86442e62af29d702cb3d326ad2995e2835854428cf6fdd94
-  languageName: node
-  linkType: hard
-
-"@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
+"@carbon/storybook-addon-theme@2.0.1, @carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme":
   version: 0.0.0-use.local
   resolution: "@carbon/storybook-addon-theme@workspace:config/storybook-addon-carbon-theme"
   dependencies:
@@ -2209,7 +2182,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:^1.30.0":
+"@carbon/styles@npm:^1.31.2":
   version: 1.31.2
   resolution: "@carbon/styles@npm:1.31.2"
   dependencies:
@@ -2236,7 +2209,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes@npm:^11.19.0, @carbon/themes@npm:^11.20.0":
+"@carbon/themes@npm:^11.20.0":
   version: 11.20.0
   resolution: "@carbon/themes@npm:11.20.0"
   dependencies:
@@ -2248,7 +2221,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/type@npm:^11.18.0, @carbon/type@npm:^11.19.0":
+"@carbon/type@npm:^11.19.0":
   version: 11.19.0
   resolution: "@carbon/type@npm:11.19.0"
   dependencies:
@@ -4449,7 +4422,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addons@npm:7.0.20, @storybook/addons@npm:^7.0.18, @storybook/addons@npm:^7.0.20":
+"@storybook/addons@npm:7.0.20, @storybook/addons@npm:^7.0.20":
   version: 7.0.20
   resolution: "@storybook/addons@npm:7.0.20"
   dependencies:
@@ -4463,7 +4436,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/api@npm:7.0.20, @storybook/api@npm:^7.0.18, @storybook/api@npm:^7.0.20":
+"@storybook/api@npm:7.0.20, @storybook/api@npm:^7.0.20":
   version: 7.0.20
   resolution: "@storybook/api@npm:7.0.20"
   dependencies:
@@ -4678,7 +4651,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/client-api@npm:7.0.20, @storybook/client-api@npm:^7.0.18, @storybook/client-api@npm:^7.0.20":
+"@storybook/client-api@npm:7.0.20, @storybook/client-api@npm:^7.0.20":
   version: 7.0.20
   resolution: "@storybook/client-api@npm:7.0.20"
   dependencies:
@@ -4688,7 +4661,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/client-logger@npm:7.0.20, @storybook/client-logger@npm:^7.0.18, @storybook/client-logger@npm:^7.0.20":
+"@storybook/client-logger@npm:7.0.20, @storybook/client-logger@npm:^7.0.20":
   version: 7.0.20
   resolution: "@storybook/client-logger@npm:7.0.20"
   dependencies:
@@ -4718,7 +4691,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/components@npm:7.0.20, @storybook/components@npm:^7.0.18, @storybook/components@npm:^7.0.20":
+"@storybook/components@npm:7.0.20, @storybook/components@npm:^7.0.20":
   version: 7.0.20
   resolution: "@storybook/components@npm:7.0.20"
   dependencies:
@@ -4774,7 +4747,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/core-events@npm:7.0.20, @storybook/core-events@npm:^7.0.18, @storybook/core-events@npm:^7.0.20":
+"@storybook/core-events@npm:7.0.20, @storybook/core-events@npm:^7.0.20":
   version: 7.0.20
   resolution: "@storybook/core-events@npm:7.0.20"
   checksum: 0f293a9d4e60d60fe892a90ffedba14839c4f6dbb71bed2143905d8ff6e4c0b7993b459aea61acaa08f5723a28fb671c3a2fdf154885dc038d685eb2503034dd
@@ -5181,7 +5154,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/theming@npm:7.0.20, @storybook/theming@npm:^7.0.18, @storybook/theming@npm:^7.0.20":
+"@storybook/theming@npm:7.0.20, @storybook/theming@npm:^7.0.20":
   version: 7.0.20
   resolution: "@storybook/theming@npm:7.0.20"
   dependencies:
@@ -8802,7 +8775,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.28.0, core-js@npm:^3.31.0":
+"core-js@npm:^3.31.0":
   version: 3.31.0
   resolution: "core-js@npm:3.31.0"
   checksum: f7cf9b3010f7ca99c026d95b61743baca1a85512742ed2b67e8f65a72ac4f4fe0b90b00057783e886bdd39d3a295f42f845d33e7cba3973ed263df978343ab79
@@ -12647,7 +12620,7 @@ __metadata:
     npm-upgrade: ^3.1.0
     postcss: ^8.4.24
     prettier: ^2.8.8
-    prettier-config-carbon: ^0.10.0
+    prettier-config-carbon: ^0.11.0
     react: ^16.14.0
     react-dom: ^16.14.0
     rimraf: ^5.0.1
@@ -18173,12 +18146,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-config-carbon@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "prettier-config-carbon@npm:0.10.0"
+"prettier-config-carbon@npm:^0.11.0":
+  version: 0.11.0
+  resolution: "prettier-config-carbon@npm:0.11.0"
   peerDependencies:
     prettier: 2.x
-  checksum: 304eda27217174bc9e8fd471b9624e855845ca89258232f4f5d25be96ff132fe7465a4b94af0ef4a57b0ff9028a7fc2eb9cf10abcae173fc49514b3b3aa6328b
+  checksum: c654b17c99ebac6b01b48f900d486cbea304ff6e7ce6532c83e858c6f261b30ebc64b527b21445146014d13bf68753aa0c2f16cfaa44cf2b190b870ae016ca79
   languageName: node
   linkType: hard
 
@@ -20686,7 +20659,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-carbon@npm:^1.13.0":
+"stylelint-config-carbon@npm:^1.14.0":
   version: 1.14.0
   resolution: "stylelint-config-carbon@npm:1.14.0"
   dependencies:
@@ -20709,7 +20682,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "stylelint-config-ibm-products@workspace:config/stylelint-config-ibm-products"
   dependencies:
-    stylelint-config-carbon: ^1.13.0
+    stylelint-config-carbon: ^1.14.0
     stylelint-config-idiomatic-order: ^9.0.0
     stylelint-config-standard: ^33.0.0
     stylelint-config-standard-scss: ^9.0.0

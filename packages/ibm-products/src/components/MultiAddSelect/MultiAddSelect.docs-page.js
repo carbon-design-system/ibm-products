@@ -1,29 +1,19 @@
-<!-- `position:fixed` cause rendering issues, so do not render the modal -->
+import React from 'react';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
-import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
-import { MultiAddSelect } from '.';
-import {
-  getStoryId,
-  CodesandboxLink,
-} from '../../global/js/utils/story-helper';
-
-# MultiAddSelect
-
-todo
-
-## Overview
-
-todo
-
-## Structuring items
-
-The `items` object has a lot of customization potential and can greatly effect
+const DocsPage = () => {
+  return (
+    <StoryDocsPage
+      altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/add-and-select/usage"
+      blocks={[
+        {
+          title: 'Structuring items',
+          description: `The \`items\` object has a lot of customization potential and can greatly effect
 the way the component is displayed and how you interact with it.
 
-Let's walk through an example.
-
-```
-items: {
+Let's walk through an example.`,
+          source: {
+            code: `items: {
   modifiers: { // adds a modifier dropdown inside the items
     label: PropTypes.string, // label for the dropdown
     options: PropTypes.array, // list of options / values for the dropdown
@@ -45,7 +35,7 @@ items: {
             title: 'file1.pdf',
             fileType: 'pdf',
             size: '100',
-            icon: Document, // designates if an icon should be displayed. While similar to avatar icon, both have different displays.
+            icon: Document16, // designates if an icon should be displayed. While similar to avatar icon, both have different displays.
             tag: 'business',
             avatar: { // designates if an avatar should be displayed
               alt: 'alt text',
@@ -57,22 +47,18 @@ items: {
       },
     },
   ],
-}
-```
-
-The properties that have been commented on like `id`, `value`, and `icon` have
+}`,
+          },
+        },
+        {
+          description: `The properties that have been commented on like \`id\`, \`value\`, and \`icon\` have
 specific use within the component and are generally required. Other properties
-like `fileType` and `size` do not and will simply show up as details in the
-sidebar when selected.
+like \`fileType\` and \`size\` do not and will simply show up as details in the
+sidebar when selected.`,
+        },
+      ]}
+    />
+  );
+};
 
-<Canvas>
-  <Story id={getStoryId(MultiAddSelect.displayName, 'default')} />
-</Canvas>
-
-## Code sample
-
-todo
-
-## Component API
-
-<ArgsTable />
+export default DocsPage;

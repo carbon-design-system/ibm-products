@@ -39,6 +39,7 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
+    layout: 'fullscreen',
     /*
 docs: {
       page: mdx,
@@ -128,9 +129,11 @@ const Template = (args) => {
   }, [open, notificationsData, hasUnreadNotifications]);
 
   return (
-    <>
+    <div className={`${storyBlockClass}--full-height`}>
       {renderUIShellHeader(open, setOpen, hasUnreadNotifications)}
-      <Button onClick={addNewNotification}>Add new notification</Button>
+      <div className={`${storyBlockClass}__add`}>
+        <Button onClick={addNewNotification}>Add new notification</Button>
+      </div>
       <NotificationsPanel
         {...args}
         data={notificationsData}
@@ -143,7 +146,7 @@ const Template = (args) => {
           setNotificationsData(tempData);
         }}
       />
-    </>
+    </div>
   );
 };
 

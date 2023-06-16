@@ -39,7 +39,7 @@ const componentName = 'EditTearsheetNarrow';
 // };
 
 /**
- * TODO: A description of the component.
+ * Use a narrow tearsheet as an alternative to a modal when there is scrolling. See usage guidance for further information.
  */
 export let EditTearsheetNarrow = React.forwardRef(
   (

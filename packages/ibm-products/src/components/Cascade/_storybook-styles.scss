@@ -8,8 +8,9 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing' as *;
 
-#root {
-  width: 100%;
+#storybook-docs .docs-story {
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  padding: 30px 0;
 }
 
 .box {

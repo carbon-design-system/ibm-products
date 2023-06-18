@@ -141,7 +141,7 @@ export const DatagridActions = (datagridState) => {
       <TableToolbarContent>
         {renderFilterPanelButton()}
         <TableToolbarSearch
-          size="xl"
+          size="lg"
           id="columnSearch"
           persistent
           placeHolderText={searchForAColumn}

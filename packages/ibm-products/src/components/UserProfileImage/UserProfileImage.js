@@ -32,7 +32,7 @@ const defaults = {
   tooltipAlignment: 'bottom',
 };
 /**
- * This is a user profile image component which displays an image, or initials or icon for a user.
+ * The user profile avatar allows for an image of the user to be displayed by passing in the image prop. By default the component will display a user icon on a blue background.
  */
 export let UserProfileImage = React.forwardRef(
   (

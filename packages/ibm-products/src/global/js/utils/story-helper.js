@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { sanitize } from '@storybook/csf';
 import pkg from '../package-settings';
 import { getPathForComponent } from '../../../../../core/story-structure';
+import { paramCase } from 'change-case';
 
 /**
  * A helper function to return the structured story title for a component.
@@ -71,12 +72,14 @@ export const prepareStory = (template, options) => {
 const packagePath =
   'github/carbon-design-system/ibm-products/tree/main/examples/carbon-for-ibm-products';
 
+export const codeSandboxHref = (exampleDirectory) =>
+  `https://codesandbox.io/p/sandbox/${packagePath}/${exampleDirectory}?file=%2Fsrc%2FExample%2FExample.jsx`;
+
 export const CodesandboxLink = ({ exampleDirectory }) => {
-  // const stackblitz = `https://stackblitz.com/${packagePath}/${dir}?file=src%2FExample%2FExample.jsx`;
-  const codesandbox = `https://codesandbox.io/p/sandbox/${packagePath}/${exampleDirectory}?file=%2Fsrc%2FExample%2FExample.jsx`;
+  const href = codeSandboxHref(exampleDirectory);
 
   return (
-    <a href={codesandbox}>
+    <a href={href}>
       <img
         alt="Edit on CodeSandbox"
         src="https://codesandbox.io/static/img/play-codesandbox.svg"
@@ -91,11 +94,14 @@ CodesandboxLink.propTypes = {
   exampleDirectory: PropTypes.string,
 };
 
+export const stackblitzHref = (exampleDirectory) =>
+  `https://stackblitz.com/${packagePath}/${exampleDirectory}?file=src%2FExample%2FExample.jsx`;
+
 export const StackblitzLink = ({ exampleDirectory }) => {
-  const stackblitz = `https://stackblitz.com/${packagePath}/${exampleDirectory}?file=src%2FExample%2FExample.jsx`;
+  const href = stackblitzHref(exampleDirectory);
 
   return (
-    <a href={stackblitz}>
+    <a href={href}>
       <img
         alt="Edit on Stackblitz"
         src="https://c.staticblitz.com/assets/favicon_sb-861fe1b85c0dc928750c62de15fed96fc75e57ee366bd937bad17a3938917b3f.svg"
@@ -110,13 +116,111 @@ StackblitzLink.propTypes = {
   exampleDirectory: PropTypes.string,
 };
 
+export const palUsageHref = (csfFile) => {
+  const title = csfFile?.meta?.title;
+  const [_pkg, kind, section] = title.split('/');
+
+  if (/components|patterns/i.test(kind) && name) {
+    return `https://pages.github.ibm.com/cdai-design/pal/${kind}s/${paramCase(
+      section
+    )}/usage`;
+  }
+};
+
+export const storyDocsPageTitle = (csfFile) => {
+  const title = csfFile?.meta?.title;
+  const [_pkg, kind, a, b, ...rest] = title.split('/');
+
+  let component;
+
+  if (/components|patterns/i.test(kind)) {
+    // components and patterns have an additional level
+    component = b;
+  } else {
+    component = a;
+  }
+
+  const name = component.split('#')[0]; // canary always written as Example#canary};
+
+  if (name) {
+    if (rest.length > 0) {
+      return `${name} (${rest.join(' ')})`;
+    } else {
+      return name;
+    }
+  }
+
+  console.error('Error: unable to parse title from metadata.');
+
+  return title;
+};
+
+export const storyDocsPageInfo = (csfFile) => {
+  const title = csfFile?.meta?.title;
+  const [pkg, kind, a, b, ...rest] = title.split('/');
+
+  let result = {
+    package: pkg,
+    kind,
+    expectCodedExample: false,
+  };
+  let component;
+
+  if (/components|patterns/i.test(kind)) {
+    result.expectCodedExample = true;
+    // components and patterns have an additional level
+    component = b;
+    result.section = a;
+
+    result.guidelinesHref = `https://pages.github.ibm.com/cdai-design/pal/${kind}s/${paramCase(
+      result.section
+    )}/usage`;
+  } else {
+    component = a;
+  }
+
+  const nameSplit = component.split('#'); // canary always written as Example#canary};
+  const name = nameSplit[0];
+
+  if (nameSplit.length > 1 && nameSplit[1] === 'canary') {
+    result.canary = true;
+  }
+
+  if (name) {
+    if (rest.length > 0) {
+      result.component = result.title = `${name} (${rest.join(' ')})`;
+    } else {
+      result.component = name;
+      result.title = name;
+    }
+  } else {
+    console.error('Error: unable to parse title from metadata.');
+    result.title = title;
+  }
+
+  if (result.guidelinesHref) {
+    result.guidelinesLinkLabel = `${result.title} usage guidelines`;
+  }
+
+  return result;
+};
+
+export const storyDocsGuidelines = (csfFile) => {
+  const storyInfo = storyDocsPageInfo(csfFile);
+
+  return {
+    href: storyInfo.guidelinesHref,
+    label: storyInfo.guidelinesLinkLabel,
+  };
+};
+
 /**
  * A helper function that finds the designated theme on the Storybook canvas.
  * @returns "dark" or "light"
  */
 export const getSelectedCarbonTheme = () => {
   const themeId = document
-    .querySelector('html')
+    .querySelector('[storybook-carbon-theme]')
     .getAttribute('storybook-carbon-theme');
   return themeId === 'g90' || themeId === 'g100' ? 'dark' : 'light';
 };

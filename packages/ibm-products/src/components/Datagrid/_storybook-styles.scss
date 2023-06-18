@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022, 2022
+// Copyright IBM Corp. 2022, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -20,7 +20,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   height: 100vh;
 }
 
-.sb-show-main.sb-main-centered #root {
+.sb-show-main.sb-main-centered #storybook-root {
   width: 100%;
   height: 100vh;
   padding: $spacing-07;
@@ -121,4 +121,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
     left: -$spacing-07;
     width: 100vw;
   }
+}
+
+$story-anchor: 'datagrid';
+div[id*='#{$story-anchor}'] .docs-story > div:first-child > div:first-child {
+  overflow: auto;
+  width: 100%;
 }

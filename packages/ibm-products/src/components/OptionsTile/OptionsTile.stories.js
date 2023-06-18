@@ -17,18 +17,21 @@ import {
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { OptionsTile } from '.';
-import mdx from './OptionsTile.mdx';
+// import mdx from './OptionsTile.mdx';
 
 import styles from './_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(OptionsTile.displayName),
   component: OptionsTile,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

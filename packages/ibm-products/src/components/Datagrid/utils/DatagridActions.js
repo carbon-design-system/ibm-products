@@ -10,6 +10,7 @@ import {
   TableToolbarContent,
   TableToolbarSearch,
   Button,
+  IconButton,
   OverflowMenu,
   OverflowMenuItem,
   ComposedModal,
@@ -67,17 +68,16 @@ export const DatagridActions = (datagridState) => {
 
   const renderFilterPanelButton = () =>
     filterProps?.variation === 'panel' && (
-      <Button
+      <IconButton
         kind="ghost"
-        hasIconOnly
-        tooltipPosition="bottom"
-        renderIcon={(props) => <Filter size={16} {...props} />}
-        iconDescription={filterProps.panelIconDescription}
+        align="bottom"
+        label={filterProps.panelIconDescription}
         className={`${blockClass}-filter-panel-open-button`}
         onClick={() => setPanelOpen((open) => !open)}
         disabled={data.length === 0}
-        tooltipAlignment="start"
-      />
+      >
+        <Filter />
+      </IconButton>
     );
 
   const [modalOpen, setModalOpen] = useState(false);

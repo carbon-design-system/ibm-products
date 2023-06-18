@@ -8,22 +8,37 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
-import mdx from './NotificationsEmptyState.mdx';
+// import mdx from './NotificationsEmptyState.mdx';
 import {
   getStoryTitle,
   prepareStory,
 } from '../../../global/js/utils/story-helper';
 import { NotificationsEmptyState } from '.';
+import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
 
 // import styles from '../_index.scss';
 
 export default {
   title: getStoryTitle(NotificationsEmptyState.displayName),
   component: NotificationsEmptyState,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     docs: {
-      page: mdx,
+      page: () => (
+        <StoryDocsPage
+          altGuidelinesHref={[
+            {
+              href: 'https://pages.github.ibm.com/cdai-design/pal/patterns/empty-state/usage',
+              label: 'Error pattern usage guidelines',
+            },
+            {
+              href: 'https://www.carbondesignsystem.com/patterns/empty-states-pattern/',
+              label: 'Carbon empty pattern usage guidelines',
+            },
+          ]}
+        />
+      ),
     },
   },
 };

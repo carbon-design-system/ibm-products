@@ -39,13 +39,14 @@ import {
 
 import styles from './_storybook-styles.scss';
 
-import mdx from './Tearsheet.mdx';
+// import mdx from './Tearsheet.mdx';
 
 export default {
   title: getStoryTitle(Tearsheet.displayName),
   component: Tearsheet,
+  tags: ['autodocs'],
   subcomponents: { TearsheetNarrow },
-  parameters: { styles, docs: { page: mdx } },
+  parameters: { styles /* docs: { page: mdx } */, layout: 'fullscreen' },
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),
     actions: {
@@ -134,8 +135,7 @@ const mainContent = (
         />
         <TextInput
           id="tss-ft2"
-          light
-          labelText="Here is a light entry field:"
+          labelText="Here is an entry field:"
           style={
             // stylelint-disable-next-line carbon/layout-token-use
             { marginBottom: '1em' }

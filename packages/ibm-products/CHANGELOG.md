@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.1.1...@carbon/ibm-products@2.1.2) (2023-06-13)
+
+
+### Bug Fixes
+
+* reset import modal state on close ([#3108](https://github.com/carbon-design-system/ibm-products/issues/3108)) ([4172dbc](https://github.com/carbon-design-system/ibm-products/commit/4172dbc6c2cc4ee42a4159789412d342f1516709))
+* **tearsheet:** layer removed from body ([#3051](https://github.com/carbon-design-system/ibm-products/issues/3051)) ([db975f4](https://github.com/carbon-design-system/ibm-products/commit/db975f458e9b7221eee006ad5530c88216000b7e))
+
+
+
+
+
 ## [2.1.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.1.0...@carbon/ibm-products@2.1.1) (2023-06-05)
 
 

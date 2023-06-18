@@ -27,7 +27,7 @@ import {
 } from '.';
 
 import { SelectAllWithToggle } from './Datagrid.stories/index';
-import mdx from './Datagrid.mdx';
+// import mdx from './Datagrid.mdx';
 
 import styles from './_storybook-styles.scss';
 import { DatagridActions } from './utils/DatagridActions';
@@ -38,11 +38,14 @@ import { pkg } from '../../settings';
 export default {
   title: getStoryTitle(Datagrid.displayName),
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
   argTypes: {
     featureFlags: {
@@ -441,7 +444,8 @@ export const SelectItemsInAllPages = () => {
       },
       DatagridPagination,
       DatagridActions,
-      DatagridBatchActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
     },
     useSelectRows,
     useSelectAllWithToggle

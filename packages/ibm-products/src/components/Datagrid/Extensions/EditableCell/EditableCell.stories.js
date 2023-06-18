@@ -21,7 +21,7 @@ import {
 } from '../../index';
 import { pkg } from '../../../../settings';
 import styles from '../../_storybook-styles.scss';
-import mdx from '../../Datagrid.mdx';
+// import mdx from '../../Datagrid.mdx';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { getInlineEditColumns } from '../../utils/getInlineEditColumns';
@@ -32,9 +32,10 @@ const storybookBlockClass = `storybook-${blockClass}__validation-code-snippet`;
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/EditableCell`,
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: { page: mdx },
+    // docs: { page: mdx },
     argTypes: {
       featureFlags: {
         table: {
@@ -92,7 +93,7 @@ const sharedDatagridProps = {
   ],
 };
 
-const InlineEditUsage = ({ ...args }) => {
+const EditableCellUsage = ({ ...args }) => {
   const [data, setData] = useState(makeData(10));
   const columns = React.useMemo(() => getInlineEditColumns(), []);
   pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
@@ -128,13 +129,18 @@ const InlineEditUsage = ({ ...args }) => {
   );
 };
 
-const InlineEditTemplateWrapper = ({ ...args }) => {
-  return <InlineEditUsage defaultGridProps={{ ...args }} />;
+const EditableCellTemplateWrapper = ({ ...args }) => {
+  return <EditableCellUsage defaultGridProps={{ ...args }} />;
 };
 
-const EditableCellUsage = ({ ...args }) => {
+const InlineEditUsage = ({ ...args }) => {
   const [data, setData] = useState(makeData(10));
   const columns = React.useMemo(() => getInlineEditColumns(), []);
+
+  // Warnings are ordinarily silenced in storybook, add this to test.
+  pkg._silenceWarnings(false);
+  pkg.feature['Datagrid.useInlineEdit'] = true;
+  pkg._silenceWarnings(true);
 
   const datagridState = useDatagrid(
     {
@@ -145,11 +151,6 @@ const EditableCellUsage = ({ ...args }) => {
     },
     useInlineEdit
   );
-
-  // Warnings are ordinarily silenced in storybook, add this to test.
-  pkg._silenceWarnings(false);
-  pkg.feature['Datagrid.useInlineEdit'] = true;
-  pkg._silenceWarnings(true);
 
   return (
     <div>
@@ -165,8 +166,8 @@ const EditableCellUsage = ({ ...args }) => {
   );
 };
 
-const EditableCellTemplateWrapper = ({ ...args }) => {
-  return <EditableCellUsage defaultGridProps={{ ...args }} />;
+const InlineEditTemplateWrapper = ({ ...args }) => {
+  return <InlineEditUsage defaultGridProps={{ ...args }} />;
 };
 
 const inlineEditUsageControlProps = {

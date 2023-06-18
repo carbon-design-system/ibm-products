@@ -11,14 +11,15 @@ import {
 } from '../../global/js/utils/story-helper';
 import styles from './_storybook-styles.scss';
 import { CreateTearsheet } from './CreateTearsheet';
+import DocsPage from './CreateTearsheet.docs-page';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
 import { MultiStepTearsheet } from './preview-components/MultiStepTearsheet';
 import { MultiStepWithIntro } from './preview-components/MultiStepWithIntro';
-import mdx from './CreateTearsheet.mdx';
 
 export default {
   title: getStoryTitle(CreateTearsheet.displayName),
   component: CreateTearsheet,
+  tags: ['autodocs'],
   subcomponents: {
     CreateTearsheetStep,
   },
@@ -32,7 +33,7 @@ export default {
   },
   parameters: {
     styles,
-    docs: { page: mdx },
+    docs: { page: DocsPage },
   },
 };
 

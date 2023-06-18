@@ -169,6 +169,14 @@ export let ImportModal = forwardRef(
       setImportUrl(evt.target.value);
     };
 
+    const onCloseHandler = () => {
+      setFiles([]);
+      setImportUrl('');
+      if (onClose) {
+        onClose();
+      }
+    };
+
     const numberOfFiles = files.length;
     const numberOfValidFiles = files.filter((f) => !f.invalid).length;
     const hasFiles = numberOfFiles > 0;
@@ -180,11 +188,12 @@ export let ImportModal = forwardRef(
     return (
       <ComposedModal
         {...rest}
-        {...{ open, ref, onClose, ...getDevtoolsProps(componentName) }}
+        {...{ open, ref, ...getDevtoolsProps(componentName) }}
         aria-label={title}
         className={cx(blockClass, className)}
         size="sm"
         preventCloseOnClickOutside
+        onClose={onCloseHandler}
       >
         <ModalHeader className={`${blockClass}__header`} title={title} />
         <ModalBody className={`${blockClass}__body-container`}>
@@ -250,7 +259,7 @@ export let ImportModal = forwardRef(
           </div>
         </ModalBody>
         <ModalFooter className={`${blockClass}__footer`}>
-          <Button type="button" kind="secondary" onClick={onClose}>
+          <Button type="button" kind="secondary" onClick={onCloseHandler}>
             {secondaryButtonText}
           </Button>
           <Button
@@ -362,11 +371,11 @@ ImportModal.propTypes = {
   /**
    * Specify a handler for "submitting" modal. Access the imported file via `file => {}`
    */
-  onRequestSubmit: PropTypes.func,
+  onRequestSubmit: PropTypes.func.isRequired,
   /**
    * Specify whether the Modal is currently open
    */
-  open: PropTypes.bool,
+  open: PropTypes.bool.isRequired,
   /**
    * Specify the text for the primary button
    */

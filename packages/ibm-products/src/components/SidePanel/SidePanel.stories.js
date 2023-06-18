@@ -32,16 +32,19 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { SidePanel } from './SidePanel';
-import mdx from './SidePanel.mdx';
+// import mdx from './SidePanel.mdx';
 
 export default {
   title: getStoryTitle(SidePanel.displayName),
   component: SidePanel,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
   argTypes: {
     actions: {

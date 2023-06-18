@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2021, 2022
+// Copyright IBM Corp. 2021, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -32,5 +32,15 @@ $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
   p {
     padding-bottom: $spacing-07;
     font-size: 14px;
+  }
+}
+
+$story-anchor: 'web-terminal';
+#storybook-docs {
+  ul {
+    list-style: initial;
+  }
+  ol {
+    list-style: decimal;
   }
 }

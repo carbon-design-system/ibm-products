@@ -12,17 +12,18 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { SingleAddSelect } from '.';
-import mdx from './SingleAddSelect.mdx';
 import { Button } from '@carbon/react';
+import DocsPage from './SingleAddSelect.docs-page';
 // import { action } from '@storybook/addon-actions';
 
 export default {
   title: getStoryTitle(SingleAddSelect.displayName),
   component: SingleAddSelect,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     docs: {
-      page: mdx,
+      page: DocsPage,
     },
   },
 };
@@ -63,8 +64,9 @@ const defaultProps = {
   title: 'Select category',
 };
 
-const Template = (args) => {
-  const [open, setOpen] = useState(true);
+const Template = (args, context) => {
+  const [open, setOpen] = useState(context?.viewMode !== 'docs');
+
   return (
     <>
       <SingleAddSelect {...args} open={open} onClose={() => setOpen(false)} />

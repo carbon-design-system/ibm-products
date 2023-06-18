@@ -7,24 +7,20 @@
 
 // cspell:words unuse
 
-import { withCarbonTheme } from '@carbon/storybook-addon-theme/react';
-import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs';
-import LinkTo from '@storybook/addon-links/react';
-import { themes } from '@storybook/theming';
-
+import { withCarbonTheme } from '@carbon/storybook-addon-theme/withCarbonTheme';
 import {
-  Column,
-  Row,
-  ActionableNotification,
-  UnorderedList,
-  ListItem,
-} from '@carbon/react';
+  PARAM_KEY as CARBON_THEME_PARAM_KEY,
+  CARBON_THEMES,
+} from '@carbon/storybook-addon-theme/constants';
+
+import { ActionableNotification, UnorderedList, ListItem } from '@carbon/react';
 import React, { useEffect } from 'react';
 
 import { pkg } from '../../ibm-products/src/settings';
 
 import index from './index.scss';
 import { getSectionSequence } from '../story-structure';
+import { StoryDocsPage } from '../../ibm-products/src/global/js/utils/StoryDocsPage';
 
 // Enable all components, whether released or not, for storybook purposes
 pkg._silenceWarnings(true);
@@ -113,23 +109,6 @@ const carbonViewports = {
 
 const parameters = {
   controls: { expanded: true, hideNoControlsWarning: true },
-  docs: {
-    components: {
-      ArgsTable,
-      Canvas,
-      Column,
-      LinkTo: (props) => (
-        <LinkTo
-          className="storybook__link-to"
-          style={{ color: themes.normal.colorSecondary }}
-          {...props}
-        />
-      ),
-      Row,
-      Source,
-      Story,
-    },
-  },
   layout: 'centered',
   options: {
     showPanel: true,
@@ -149,15 +128,13 @@ const parameters = {
     },
   },
 
-  // Optional default Carbon theme.
-  carbonTheme: {
-    theme: 'g10',
-  },
-
   // viewport sizes based on Carbon breakpoints
   viewport: {
     viewports: carbonViewports,
     defaultViewport: 'basic',
+  },
+  docs: {
+    page: () => <StoryDocsPage />,
   },
 };
 
@@ -169,4 +146,8 @@ const argTypes = {
   },
 };
 
-export { argTypes, decorators, parameters, Style };
+const globals = {
+  [CARBON_THEME_PARAM_KEY]: CARBON_THEMES.g10,
+};
+
+export { argTypes, decorators, globals, parameters, Style };

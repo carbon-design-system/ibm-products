@@ -33,7 +33,7 @@ const defaults = {
 };
 
 /**
- * TODO: A description of the component.
+ * Use with medium complexity edits if the user needs page context.
  */
 export let EditSidePanel = React.forwardRef(
   (

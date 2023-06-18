@@ -950,18 +950,11 @@ describe(componentName, () => {
       document.getElementsByClassName(`${carbon.prefix}--search-input`)[0]
     ).toBeDefined();
 
-    // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
-    const leftPanelButton =
-      screen.getByText('Left panel').parentElement.previousSibling;
-    fireEvent.click(leftPanelButton);
+    const filterButton = screen.getByLabelText('Left panel');
+    fireEvent.click(filterButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    const rowHeightButton = screen.getByText((content, element) => {
-      return (
-        element.tagName.toLowerCase() === 'span' &&
-        content.startsWith('Row height')
-      );
-    }).parentElement.previousSibling;
+    const rowHeightButton = screen.getByRole('button', { name: /Row height/i });
     fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
@@ -990,13 +983,11 @@ describe(componentName, () => {
       ).toEqual(rowSizeDropDown[k]);
     }
 
-    const refreshButton =
-      screen.getByText('Refresh').parentElement.previousSibling;
+    const refreshButton = screen.getByLabelText('Refresh');
     fireEvent.click(refreshButton);
     expect(alertMock).toHaveBeenCalledTimes(2);
 
-    const downloadButton =
-      screen.getByText('Download CSV').parentElement.previousSibling;
+    const downloadButton = screen.getByLabelText('Download CSV');
     fireEvent.click(downloadButton);
     expect(alertMock).toHaveBeenCalledTimes(3);
 
@@ -1283,18 +1274,11 @@ describe(componentName, () => {
       document.getElementsByClassName(`${carbon.prefix}--search-input`)[0]
     ).toBeDefined();
 
-    // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
-    const leftPanelButton =
-      screen.getByText('Left panel').parentElement.previousSibling;
-    fireEvent.click(leftPanelButton);
+    const filterButton = screen.getByLabelText('Left panel');
+    fireEvent.click(filterButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    const rowHeightButton = screen.getByText((content, element) => {
-      return (
-        element.tagName.toLowerCase() === 'span' &&
-        content.startsWith('Row height')
-      );
-    }).parentElement.previousSibling;
+    const rowHeightButton = screen.getByRole('button', { name: /Row height/i });
     fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
@@ -1323,15 +1307,11 @@ describe(componentName, () => {
       ).toEqual(rowSizeDropDown[k]);
     }
 
-    const refreshButtonElement = screen.getByText('Refresh', {
-      selector: 'span',
-    }).parentElement.previousSibling;
+    const refreshButtonElement = screen.getByLabelText('Refresh');
     fireEvent.click(refreshButtonElement);
     expect(alertMock).toHaveBeenCalledTimes(2);
 
-    const downloadButtonElement = screen.getByText('Download CSV', {
-      selector: 'span',
-    }).parentElement.previousSibling;
+    const downloadButtonElement = screen.getByLabelText('Download CSV');
     fireEvent.click(downloadButtonElement);
     expect(alertMock).toHaveBeenCalledTimes(3);
 
@@ -1674,18 +1654,11 @@ describe(componentName, () => {
       document.getElementsByClassName('c4p--datagrid__table-toolbar').length
     ).toBe(1);
 
-    // Find and click Download button (getByText gets the popover element, so we need to find the button from there)
-    const leftPanelButton =
-      screen.getByText('Left panel').parentElement.previousSibling;
-    fireEvent.click(leftPanelButton);
+    const filterButton = screen.getByLabelText('Left panel');
+    fireEvent.click(filterButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    const rowHeightButton = screen.getByText((content, element) => {
-      return (
-        element.tagName.toLowerCase() === 'span' &&
-        content.startsWith('Row height')
-      );
-    }).parentElement.previousSibling;
+    const rowHeightButton = screen.getByRole('button', { name: /Row height/i });
     fireEvent.click(rowHeightButton);
 
     expect(
@@ -1796,13 +1769,11 @@ describe(componentName, () => {
         .getElementsByTagName('button')[1]
     );
 
-    const refreshButton =
-      screen.getByText('Refresh').parentElement.previousSibling;
+    const refreshButton = screen.getByLabelText('Refresh');
     fireEvent.click(refreshButton);
     expect(alertMock).toHaveBeenCalledTimes(3);
 
-    const downloadButton =
-      screen.getByText('Download CSV').parentElement.previousSibling;
+    const downloadButton = screen.getByLabelText('Download CSV');
     fireEvent.click(downloadButton);
     expect(alertMock).toHaveBeenCalledTimes(4);
   });
@@ -1910,9 +1881,9 @@ describe(componentName, () => {
     fireEvent.click(actionButton);
     expect(alertMock).toHaveBeenCalled();
 
-    // Find and click Download button
-    const downloadButton = screen.getByText('Cancel');
-    fireEvent.click(downloadButton);
+    // Find and click cancel button
+    const cancelButton = screen.getByText('Cancel');
+    fireEvent.click(cancelButton);
     expect(alertMock).toHaveBeenCalled();
   });
 
@@ -2069,12 +2040,7 @@ describe(componentName, () => {
       `${carbon.prefix}--tooltip-content`
     );
 
-    const rowHeightButton = screen.getByText((content, element) => {
-      return (
-        element.tagName.toLowerCase() === 'span' &&
-        content.startsWith('Row height')
-      );
-    }).parentElement.previousSibling;
+    const rowHeightButton = screen.getByRole('button', { name: /Row height/i });
     fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [

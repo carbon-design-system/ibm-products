@@ -19,8 +19,6 @@ import { AboutModal } from '.';
 
 import { Button, Link } from '@carbon/react';
 
-// import mdx from './AboutModal.mdx';
-
 import ExampleLogo from './_story-assets/example-logo.svg';
 import ansibleLogo from './_story-assets/ansible-logo.png';
 import grafanaLogo from './_story-assets/grafana-logo.png';
@@ -30,13 +28,17 @@ import styles from './_storybook-styles.scss';
 
 const blockClass = `${pkg.prefix}--about-modal`;
 
+import DocsPage from './AboutModal.docs-page';
+
 export default {
   title: getStoryTitle(AboutModal.displayName),
   component: AboutModal,
   tags: ['autodocs'],
   parameters: {
     styles,
-    // docs: { page: mdx },
+    docs: {
+      page: DocsPage,
+    },
     controls: { sort: 'requiredFirst' },
   },
   argTypes: {

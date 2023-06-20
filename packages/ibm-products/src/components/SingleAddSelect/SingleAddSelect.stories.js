@@ -12,8 +12,8 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { SingleAddSelect } from '.';
-// import mdx from './SingleAddSelect.mdx';
 import { Button } from '@carbon/react';
+import DocsPage from './SingleAddSelect.docs-page';
 // import { action } from '@storybook/addon-actions';
 
 export default {
@@ -22,11 +22,9 @@ export default {
   tags: ['autodocs'],
   parameters: {
     // styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: DocsPage,
     },
-*/
   },
 };
 

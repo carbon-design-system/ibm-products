@@ -26,7 +26,7 @@ const componentName = 'CreateSidePanel';
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 /**
- * This is an example component to show relevant conventions and usage.
+ * Use with medium complexity creations if the user needs page context. On-page content can be seen and interacted with.
  */
 export let CreateSidePanel = React.forwardRef(
   (

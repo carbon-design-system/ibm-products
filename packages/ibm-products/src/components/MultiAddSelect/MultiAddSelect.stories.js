@@ -12,13 +12,13 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { MultiAddSelect } from '.';
-// import mdx from './MultiAddSelect.mdx';
 import { Button } from '@carbon/react';
 // import { action } from '@storybook/addon-actions';
 import image from '../UserProfileImage/headshot.jpg'; // cspell:disable-line
 import { Group, Document } from '@carbon/react/icons';
 
 import { pkg } from '../../settings';
+import DocsPage from './MultiAddSelect.docs-page';
 const blockClass = `${pkg.prefix}--add-select__meta-panel`;
 
 export default {
@@ -27,11 +27,9 @@ export default {
   tags: ['autodocs'],
   parameters: {
     // styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: DocsPage,
     },
-*/
   },
 };
 

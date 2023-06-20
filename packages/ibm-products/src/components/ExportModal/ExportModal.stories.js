@@ -15,6 +15,7 @@ import {
 import { ExportModal } from '.';
 // import mdx from './ExportModal.mdx';
 import wait from '../../global/js/utils/wait';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 export default {
   title: getStoryTitle(ExportModal.displayName),
@@ -22,11 +23,26 @@ export default {
   tags: ['autodocs'],
   parameters: {
     // styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: () => (
+        <StoryDocsPage
+          altGuidelinesHref={[
+            {
+              href: 'https://pages.github.ibm.com/cdai-design/pal/patterns/exporting/usage',
+              label: 'Export guidelines',
+            },
+            {
+              href: 'https://www.carbondesignsystem.com/components/modal/usage',
+              label: 'Carbon Modal usage guidelines',
+            },
+            {
+              href: 'https://react.carbondesignsystem.com/?path=/docs/modal--default',
+              label: 'Carbon Modal documentation',
+            },
+          ]}
+        />
+      ),
     },
-*/
   },
 };
 

@@ -14,6 +14,9 @@ import { prepareProps } from '../../global/js/utils/props-helper';
 
 const componentName = 'SingleAddSelect';
 
+/**
+ * Used to add or select one or more items from larger lists or hierarchies.
+ */
 export let SingleAddSelect = forwardRef((props, ref) => {
   // remove multi add select specific props
   const validProps = prepareProps(props, [

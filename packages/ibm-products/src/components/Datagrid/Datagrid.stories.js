@@ -444,7 +444,8 @@ export const SelectItemsInAllPages = () => {
       },
       DatagridPagination,
       DatagridActions,
-      DatagridBatchActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
     },
     useSelectRows,
     useSelectAllWithToggle

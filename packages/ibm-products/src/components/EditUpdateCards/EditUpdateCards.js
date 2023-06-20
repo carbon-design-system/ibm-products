@@ -41,9 +41,10 @@ const componentName = 'EditUpdateCards';
 // };
 
 /**
- * TODO: A description of the component.
+ Editable cards allow a user to view, modify, and save the content contained within the card.
+ These cards are generally used in instances where a user needs to make changes to a resource instances
+ (ex. configuration details), account plan, etc. Editable cards allow a user to edit something within context.
  */
-
 export let EditUpdateCards = React.forwardRef(
   (
     {

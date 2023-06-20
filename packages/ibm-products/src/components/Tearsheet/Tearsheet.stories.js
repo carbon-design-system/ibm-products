@@ -46,7 +46,7 @@ export default {
   component: Tearsheet,
   tags: ['autodocs'],
   subcomponents: { TearsheetNarrow },
-  parameters: { styles /* docs: { page: mdx } */ },
+  parameters: { styles /* docs: { page: mdx } */, layout: 'fullscreen' },
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),
     actions: {

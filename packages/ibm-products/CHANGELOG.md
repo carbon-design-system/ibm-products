@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.1.2...@carbon/ibm-products@2.1.3) (2023-06-20)
+
+
+### Bug Fixes
+
+* **Datagrid:** address `saveCellData` loop, crashes Datagrid editable cell stories ([#3136](https://github.com/carbon-design-system/ibm-products/issues/3136)) ([485d07b](https://github.com/carbon-design-system/ibm-products/commit/485d07b4f4f700ff588b82b2957f952e6c089609))
+* **Datagrid:** use `selectedRowIds` to set selected rows ([#3123](https://github.com/carbon-design-system/ibm-products/issues/3123)) ([426b8b4](https://github.com/carbon-design-system/ibm-products/commit/426b8b4764e21e822d62c51fe1028cbec40df3d1))
+* update to Carbon 11 compatible versions to latest ([#3137](https://github.com/carbon-design-system/ibm-products/issues/3137)) ([1709fc5](https://github.com/carbon-design-system/ibm-products/commit/1709fc5455ab9ccf84345004ac8de075b1ff29b5))
+
+
+
+
+
 ## [2.1.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.1.1...@carbon/ibm-products@2.1.2) (2023-06-13)
 
 

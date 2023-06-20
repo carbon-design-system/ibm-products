@@ -33,6 +33,9 @@ const defaults = {
   isInitiallyOpen: false,
 };
 
+/**
+ * The `WebTerminal` is prompted by the user and is persistent until dismissed. The purpose of a web terminal is to provide users with the ability to type commands manually instead of using the GUI.
+ */
 export let WebTerminal = React.forwardRef(
   (
     {

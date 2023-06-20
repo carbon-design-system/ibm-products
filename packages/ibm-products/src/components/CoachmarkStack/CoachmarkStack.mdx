@@ -1,0 +1,51 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { CoachmarkStack } from '.';
+
+# CoachmarkStack
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+<!-- TODO: Overview. -->
+
+[CoachmarkStacked](https://pages.github.ibm.com/cdai-design/pal/novice-to-pro/components/coachmark/usage/#stacked)
+appears fixed at the bottom right corner of the browser window with page load.
+It starts in a minimized state to cover as little of the UI as possible (in
+tests, when shown expanded by default, users immediately closed them without
+reading to get them out of their way). It can include ghost buttons to trigger
+another layer to slide up to stack on top of it, much like the
+[Stacked Tearsheet](https://pages.github.ibm.com/cdai-design/pal/components/tearsheet/usage/#navigation).
+When dismissed, the stacked layer exits by sliding back down, revealing the main
+layer. When the main layer is dismissed, it slides down off the page. Only one
+layer can be stacked on the main layer.
+
+_[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
+is a continuous learning methodology + framework aimed to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users._
+
+## Note on theming
+
+The CoachmarkStacked utilizes the theme prop (E.g. `theme='dark'`) to set the
+appropriate background and font colors for the child Coachmark elements. Specify
+a value ('light' or 'dark') to display properly within your usage.
+
+## Example usage
+
+_(See bottom right)_
+
+<Canvas>
+  <Story id={getStoryId(CoachmarkStack.displayName, 'coachmark-stack')} />
+</Canvas>
+
+## Component API
+
+<ArgsTable />

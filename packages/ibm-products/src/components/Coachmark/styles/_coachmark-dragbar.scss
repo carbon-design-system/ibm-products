@@ -37,7 +37,7 @@
         fill: $inverse-01 !important;
       }
       &:hover {
-        background-color: $inverse-hover-ui;
+        background-color: $inverse-hover-ui !important;
       }
     }
     &__light {

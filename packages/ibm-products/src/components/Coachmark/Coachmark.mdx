@@ -1,46 +1,100 @@
-import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import { Story, ArgsTable, Source, Canvas, Meta } from '@storybook/addon-docs';
 import {
   getStoryId,
   CodesandboxLink,
 } from '../../global/js/utils/story-helper';
-import { Coachmark } from '.';
+import { Coachmark, CoachmarkFixed } from '..';
+
+<Meta title="Coachmark" component={Coachmark} />
 
 # Coachmark
 
 ## Table of Contents
 
 - [Overview](#overview)
-<!-- - [Example usage](#example-usage) -->
-- [Code Sample](#code-sample)
+- [Tooltip example usage](#tooltip-example-usage)
+- [Tooltip code sample](#tooltip-code-sample)
+- [Floating example usage](#floating-example-usage)
+- [Floating code sample](#floating-code-sample)
 - [Component API](#component-api)
 
 ## Overview
 
-<!-- TODO: Overview. -->
-<!--
-## Example usage
--->
-<!-- TODO: One example per designed use case. -->
+[Coachmarks](https://pages.github.ibm.com/cdai-design/pal/novice-to-pro/components/coachmark/usage)
+are just-in-time messages used to draw a user’s attention and explain new
+functionality or concepts they might not otherwise notice or understand.
+
+**Note:**
+
+- The target prop should always be either a CoachmarkBeacon or a
+  CoachmarkButton.
+- BEACON_KIND, COACHMARK_OVERLAY_KIND, COACHMARK_ALIGNMENT are enums exported as
+  a convenience from Coachmark.
+
+_[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
+is a continuous learning methodology + framework aimed to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users._
+
+## Note on theming
+
+The Coachmark utilizes the theme prop (E.g. `theme='dark'`) to set the
+appropriate background and font colors for the overlay. Specify a value ('light'
+or 'dark') to display properly within your usage.
+
+## Tooltip example usage
 
 <Canvas className="coachmarkExample">
   <div className="CoachmarkBaseExampleUsage">
-    <Story id={getStoryId(Coachmark.displayName, 'coachmark')} />
+    <Story id={getStoryId(Coachmark.displayName, 'tooltip')} />
   </div>
 </Canvas>
 
-## Code sample
+## Tooltip code sample
 
 ```jsx
 <Coachmark
-  theme={'light'}
-  align={'top'}
+  theme={'dark'}
+  align={'bottom'}
   positionTune={{ x: 15, y: 10 }}
-  target={<CoachmarkBeacon label='Show information' kind={'default} />}>
-  <CoachmarkOverlayElements closeButtonLabel='Done'>
-    <CoachmarkOverlayElement title='Hello World' description='this is a description test' />
+  target={<CoachmarkBeacon label="Show information" kind={'tooltip'} />}
+>
+  <CoachmarkOverlayElements closeButtonLabel="Done">
+    <CoachmarkOverlayElement
+      title="Hello World"
+      description="this is a description test"
+    />
   </CoachmarkOverlayElements>
 </Coachmark>
+```
 
+## Floating example usage
+
+<Canvas className="coachmarkExample">
+  <div className="CoachmarkBaseExampleUsage">
+    <Story id={getStoryId(Coachmark.displayName, 'floating')} />
+  </div>
+</Canvas>
+
+## Floating code sample
+
+```jsx
+<Coachmark
+  theme={'dark'}
+  align={'bottom'}
+  overlayKind={'floating'}
+  target={
+    <CoachmarkButton kind="tertiary" size="md" renderIcon={Launch16}>
+      Click Me
+    </CoachmarkButton>
+  }
+>
+  <CoachmarkOverlayElements closeButtonLabel="Done">
+    <CoachmarkOverlayElement
+      title="Hello World"
+      description="this is a description test"
+    />
+  </CoachmarkOverlayElements>
+</Coachmark>
 ```
 
 <!-- <CodesandboxLink exampleDirectory="Coachmark" /> -->

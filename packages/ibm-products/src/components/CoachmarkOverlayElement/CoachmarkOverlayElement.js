@@ -11,24 +11,34 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Button } from 'carbon-components-react';
-import { useCoachmark } from './utils/context';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--coachmark-button`;
-const componentName = 'CoachmarkButton';
+const blockClass = `${pkg.prefix}--coachmark-overlay-element`;
+const componentName = 'CoachmarkOverlayElement';
 
 /**
- * Use CoachmarkButton for the target prop of a Coachmark component.
+ * Component to be displayed within a CoachmarkOverlayElements container.
+ * Can be used 1 to N number, to display content in a Coachmark's overlay
+ * in a carousel fashion.
  */
-export let CoachmarkButton = React.forwardRef(
-  ({ children, className, ...rest }, ref) => {
-    const coachmark = useCoachmark();
+export let CoachmarkOverlayElement = React.forwardRef(
+  (
+    {
+      button,
+      className,
+      description,
+      title,
+
+      // Collect any other property values passed in.
+      ...rest
+    },
+    ref
+  ) => {
     return (
-      <Button
+      <div
         {
           // Pass through any other property values as HTML attributes.
           ...rest
@@ -45,32 +55,48 @@ export let CoachmarkButton = React.forwardRef(
         ref={ref}
         role="main"
         {...getDevtoolsProps(componentName)}
-        {...coachmark.buttonProps}
       >
-        {children}
-      </Button>
+        <div className={`${blockClass}__content`}>
+          {title && <h2 className={`${blockClass}__title`}>{title}</h2>}
+          {description && (
+            <p className={`${blockClass}__body`}>{description}</p>
+          )}
+        </div>
+        {button && <div className={`${blockClass}__button`}>{button}</div>}
+      </div>
     );
   }
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-CoachmarkButton = pkg.checkComponentEnabled(CoachmarkButton, componentName);
+CoachmarkOverlayElement = pkg.checkComponentEnabled(
+  CoachmarkOverlayElement,
+  componentName
+);
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
-CoachmarkButton.displayName = componentName;
+CoachmarkOverlayElement.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
-CoachmarkButton.propTypes = {
+CoachmarkOverlayElement.propTypes = {
   /**
-   * Provide the contents of the CoachmarkButton.
+   * An optional button can be rendered below the description.
+   * This can be a link, button, Coachmark button, etc.
    */
-  children: PropTypes.node.isRequired,
-
+  button: PropTypes.node,
   /**
-   * Provide an optional class to be applied to the containing node.
+   * Optional class name for this component.
    */
   className: PropTypes.string,
+  /**
+   * The description of the Coachmark.
+   */
+  description: PropTypes.node.isRequired,
+  /**
+   * The title of the Coachmark.
+   */
+  title: PropTypes.string.isRequired,
 };

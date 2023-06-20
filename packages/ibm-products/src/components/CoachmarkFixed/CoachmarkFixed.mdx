@@ -1,0 +1,47 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { CoachmarkFixed } from '.';
+
+# CoachmarkFixed
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+[CoachmarkFixed](https://pages.github.ibm.com/cdai-design/pal/novice-to-pro/components/coachmark/usage/#fixed)
+appears fixed at the bottom right corner of the browser window with page load.
+It starts in a minimized state to cover as little of the UI as possible (in
+tests, when shown expanded by default, users immediately closed them without
+reading to get them out of their way). When dismissed, it slides down off the
+page.
+
+_[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
+is a continuous learning methodology + framework aimed to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users._
+
+## Note on theming
+
+The CoachmarkFixed utilizes the theme prop (E.g. `theme='dark'`) to set the
+appropriate background and font colors for the overlay. Specify a value ('light'
+or 'dark') to display properly within your usage.
+
+## Example usage
+
+_(See bottom right)_
+
+<!-- TODO: One example per designed use case. -->
+
+<Canvas>
+  <Story id={getStoryId(CoachmarkFixed.displayName, 'coachmark-fixed')} />
+</Canvas>
+
+## Component API
+
+<ArgsTable />

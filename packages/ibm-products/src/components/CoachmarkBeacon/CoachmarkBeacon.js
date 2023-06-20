@@ -11,8 +11,7 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { useCoachmark } from './utils/context';
-import { BEACON_KIND } from './utils/enums';
+import { useCoachmark } from '../Coachmark';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
@@ -22,7 +21,7 @@ const blockClass = `${pkg.prefix}--coachmark-beacon`;
 const componentName = 'CoachmarkBeacon';
 
 const defaults = {
-  kind: BEACON_KIND.DEFAULT,
+  kind: 'default',
 };
 
 /**
@@ -81,9 +80,10 @@ CoachmarkBeacon.propTypes = {
   className: PropTypes.string,
   /**
    * What style of beacon.
+   * BEACON_KIND is an exported enum from the Coachmark and can be used for this value.
    * @see {@link BEACON_KIND}
    */
-  kind: PropTypes.oneOf(Object.values(BEACON_KIND)),
+  kind: PropTypes.oneOf(['default']),
   /**
    * The aria label.
    */

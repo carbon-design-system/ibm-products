@@ -12,10 +12,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { createPortal } from 'react-dom';
-import { CoachmarkOverlay } from './CoachmarkOverlay';
-import { CoachmarkTagline } from './CoachmarkTagline';
-import { CoachmarkContext } from './utils/context';
-import { COACHMARK_OVERLAY_KIND } from './utils/enums';
+import { CoachmarkOverlay } from '../Coachmark/CoachmarkOverlay';
+import { CoachmarkTagline } from '../Coachmark/CoachmarkTagline';
+import { CoachmarkContext } from '../Coachmark/utils/context';
+import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
@@ -26,6 +26,7 @@ const componentName = 'CoachmarkFixed';
 const defaults = {
   onClose: () => {},
   theme: 'light',
+  tagline: '',
 };
 
 /**
@@ -174,7 +175,7 @@ CoachmarkFixed.displayName = componentName;
 CoachmarkFixed.propTypes = {
   // TODO: Add this to MDX as will be done with Coachmark
   /**
-   * Coachmark will accept only one CoachmarkOverlayElements as a child component.
+   * CoachmarkFixed should use a single CoachmarkOverlayElements component as a child.
    */
   children: PropTypes.node.isRequired,
   /**

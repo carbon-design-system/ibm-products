@@ -196,6 +196,9 @@
 
       .bx--btn--ghost {
         color: $inverse-link;
+        &:hover {
+          color: $inverse-link;
+        }
       }
 
       // CAROUSEL ELEMENTS

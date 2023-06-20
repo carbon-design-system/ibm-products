@@ -23,9 +23,9 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
 import { CoachmarkStackHome } from './CoachmarkStackHome';
-import { CoachmarkTagline } from './CoachmarkTagline';
-import { CoachmarkContext } from './utils/context';
-import { COACHMARK_OVERLAY_KIND } from './utils/enums';
+import { CoachmarkTagline } from '../Coachmark/CoachmarkTagline';
+import { CoachmarkContext } from '../Coachmark/utils/context';
+import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-stack`;
@@ -124,15 +124,17 @@ export let CoachmarkStack = React.forwardRef(
       isOpen: isOpen,
     };
 
-    useLayoutEffect(() => {
-      setParentHeight(stackHomeRef.current.clientHeight);
+    useEffect(() => {
+      setTimeout(() => {
+        setParentHeight(stackHomeRef.current.clientHeight);
+      }, 0);
     }, []);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
       const targetSelectedItem = selectedItemNumber - 1;
       stackHomeRef.current.style.height = `${parentHeight}px`;
       if (!isOpen || targetSelectedItem < 0) {
-        return null;
+        return;
       }
       const targetHomeHeight =
         stackedCoachmarkRefs.current[targetSelectedItem].clientHeight;
@@ -144,8 +146,10 @@ export let CoachmarkStack = React.forwardRef(
       // Clone each child Coachmark and override specific props
       return cloneElement(child, {
         className: cx(blockClass, child.props.className),
-        overlayClassName:
-          idx === selectedItemNumber - 1 ? `${blockClass}--is-visible` : '',
+        overlayClassName: cx(
+          blockClass,
+          idx === selectedItemNumber - 1 && `${blockClass}--is-visible`
+        ),
         onClose: handleClose,
         overlayKind: COACHMARK_OVERLAY_KIND.STACKED,
         portalSelector: portalSelector,
@@ -214,7 +218,7 @@ CoachmarkStack.propTypes = {
   // `CoachmarkStack` only accepts children of type `Coachmark`
 
   /**
-   * Provide the contents of the CoachmarkStack.
+   * The CoachmarkStack should use one or many Coachmark components as children.
    */
   children: PropTypes.node.isRequired,
 

@@ -28,7 +28,7 @@ const componentName = 'CoachmarkOverlay';
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 const defaults = {
-  kind: COACHMARK_OVERLAY_KIND.DRAGGABLE,
+  kind: COACHMARK_OVERLAY_KIND.FLOATING,
   theme: 'light',
 };
 
@@ -51,8 +51,8 @@ export let CoachmarkOverlay = forwardRef(
   ) => {
     const overlayRef = useRef();
     const coachmark = useCoachmark();
-    const isBeacon = kind === COACHMARK_OVERLAY_KIND.BEACON;
-    const isDraggable = kind === COACHMARK_OVERLAY_KIND.DRAGGABLE;
+    const isBeacon = kind === COACHMARK_OVERLAY_KIND.TOOLTIP;
+    const isDraggable = kind === COACHMARK_OVERLAY_KIND.FLOATING;
     let styledTune = {};
     // TODO: check this... this feels like it should be in a hook with no dep array.
     if (isBeacon || isDraggable) {

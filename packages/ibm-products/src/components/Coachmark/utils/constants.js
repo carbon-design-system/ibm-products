@@ -22,7 +22,7 @@ export const getOffsetTune = (coachmark, kind) => {
   let top = 0;
   let left = 0;
 
-  if (kind !== COACHMARK_OVERLAY_KIND.BEACON) {
+  if (kind !== COACHMARK_OVERLAY_KIND.TOOLTIP) {
     switch (coachmark.align) {
       case COACHMARK_ALIGNMENT.TOP:
         left = width / 2;

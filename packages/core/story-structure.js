@@ -145,7 +145,27 @@ const s = [
       },
       {
         n: 'Novice to pro',
-        s: ['c/NonLinearReading', 'c/Guidebanner', 'c/Coachmark'],
+        s: [
+          'c/NonLinearReading',
+          'c/Guidebanner',
+          {
+            n: 'Coachmark',
+            s: [
+              'c/Coachmark',
+              'c/CoachmarkFixed',
+              'c/CoachmarkStack',
+              {
+                n: 'Coachmark Elements',
+                s: [
+                  'c/CoachmarkBeacon',
+                  'c/CoachmarkButton',
+                  'c/CoachmarkOverlayElement',
+                  'c/CoachmarkOverlayElements',
+                ],
+              },
+            ],
+          },
+        ],
       },
     ],
   },

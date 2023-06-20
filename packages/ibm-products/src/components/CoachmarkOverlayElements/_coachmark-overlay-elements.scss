@@ -1,0 +1,40 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin coachmark-overlay-elements {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--coachmark-overlay-elements;
+
+  .#{$block-class} {
+    &__element-stepped-media {
+      height: rem(128px);
+      margin-bottom: $spacing-05;
+    }
+
+    &__footer {
+      align-items: center;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    &--controls-progress {
+      justify-self: flex-start;
+      margin-right: auto;
+      @include carbon--type-style('helper-text-01');
+    }
+  }
+}
+
+@include exports('coachmark-overlay-elements') {
+  @include coachmark-overlay-elements;
+}

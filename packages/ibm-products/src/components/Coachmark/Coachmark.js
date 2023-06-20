@@ -12,10 +12,10 @@ import { createPortal } from 'react-dom';
 import { CoachmarkOverlay } from './CoachmarkOverlay';
 import { CoachmarkContext } from './utils/context';
 import { COACHMARK_OVERLAY_KIND } from './utils/enums';
-
+import { useClickOutsideElement, useWindowEvent } from './utils/hooks';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
-
+import { throttle } from 'lodash';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark`;
 const componentName = 'Coachmark';
@@ -23,7 +23,7 @@ const componentName = 'Coachmark';
 const defaults = {
   align: 'bottom',
   onClose: () => {},
-  overlayKind: 'beacon',
+  overlayKind: 'tooltip',
   theme: 'light',
 };
 
@@ -52,7 +52,7 @@ export let Coachmark = forwardRef(
     },
     ref
   ) => {
-    const isBeacon = overlayKind === COACHMARK_OVERLAY_KIND.BEACON;
+    const isBeacon = overlayKind === COACHMARK_OVERLAY_KIND.TOOLTIP;
     const isStacked = overlayKind === COACHMARK_OVERLAY_KIND.STACKED;
     const portalNode = portalSelector
       ? document.querySelector(portalSelector) ?? document.body
@@ -62,6 +62,13 @@ export let Coachmark = forwardRef(
     const [targetRect, setTargetRect] = useState();
     const [targetOffset, setTargetOffset] = useState({ x: 0, y: 0 });
     const coachmarkRef = useRef();
+    const backupRef = useRef();
+    const overlayRef = ref || backupRef;
+
+    const closeOverlay = () => {
+      setIsOpen(false);
+    };
+
     const handleClose = () => {
       if (isStacked) {
         // If stacked, do not unmount,
@@ -79,7 +86,7 @@ export let Coachmark = forwardRef(
 
       if (isBeacon) {
         // toggle open/closed for beacons
-        setIsOpen(!isOpen);
+        setIsOpen((prevIsOpen) => !prevIsOpen);
       } else {
         // reset position for all other kinds
         setIsOpen(false);
@@ -103,6 +110,9 @@ export let Coachmark = forwardRef(
       align: align,
       positionTune: positionTune,
     };
+    const handleResize = throttle(() => {
+      closeOverlay();
+    }, 2000);
 
     // instead of toggling on/off,
     // keep open and reset to original position
@@ -124,6 +134,8 @@ export let Coachmark = forwardRef(
       return () => setIsOpen(false);
     }, []);
 
+    useClickOutsideElement(coachmarkRef, overlayRef, overlayKind, closeOverlay);
+    useWindowEvent('resize', handleResize);
     return (
       <CoachmarkContext.Provider value={contextValue}>
         <div
@@ -140,7 +152,7 @@ export let Coachmark = forwardRef(
           {isOpen &&
             createPortal(
               <CoachmarkOverlay
-                ref={ref}
+                ref={overlayRef}
                 fixedIsVisible={false}
                 kind={overlayKind}
                 onClose={handleClose}
@@ -170,7 +182,7 @@ Coachmark.displayName = componentName;
 Coachmark.propTypes = {
   /**
    * Where to render the Coachmark relative to its target.
-   * Applies only to Draggable and Beacon Coachmarks.
+   * Applies only to Floating and Tooltip Coachmarks.
    * @see COACHMARK_ALIGNMENT
    */
   align: PropTypes.oneOf([
@@ -189,7 +201,8 @@ Coachmark.propTypes = {
   ]),
   // TODO: UPDATE COMMENT HERE - UPDATE MDX TO HAVE DIRECTION TO USE ONLY OVERLAY ELEMENTS>...
   /**
-   * Coachmark will accept only one CoachmarkOverlayElements as a child component.
+   * Coachmark should use a single CoachmarkOverlayElements component as a child.
+   * @see CoachmarkOverlayElements
    */
   children: PropTypes.node.isRequired,
   /**
@@ -209,7 +222,7 @@ Coachmark.propTypes = {
   /**
    * What kind or style of Coachmark to render.
    */
-  overlayKind: PropTypes.oneOf(['beacon', 'draggable', 'stacked']),
+  overlayKind: PropTypes.oneOf(['tooltip', 'floating', 'stacked']),
   /**
    * By default, the Coachmark will be appended to the end of `document.body`.
    * The Coachmark will remain persistent as the user navigates the app until

@@ -16,8 +16,8 @@ import { Button } from 'carbon-components-react';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 import { createPortal } from 'react-dom';
-import CoachmarkHeader from './CoachmarkHeader';
-import SteppedAnimatedMedia from '../SteppedAnimatedMedia';
+import { CoachmarkHeader } from '../Coachmark/CoachmarkHeader';
+import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */

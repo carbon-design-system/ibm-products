@@ -10,20 +10,20 @@ export const BEACON_KIND = {
 
 /**
  * Describes the style and behavior of a Coachmark.
- * @param BEACON includes a caret pointing to the animated beacon.
- * @param DRAGGABLE includes a drag handle across the top.
+ * @param TOOLTIP includes a caret pointing to the animated beacon.
+ * @param FLOATING includes a drag handle across the top.
  * @param FIXED is fixed to the bottom-right of the viewport.
  * @param STACKED is fixed to the bottom-right of the viewport, includes links to show more, stackable Coachmarks if included.
  */
 export const COACHMARK_OVERLAY_KIND = {
-  BEACON: 'beacon',
-  DRAGGABLE: 'draggable',
+  TOOLTIP: 'tooltip',
+  FLOATING: 'floating',
   FIXED: 'fixed',
   STACKED: 'stacked',
 };
 /**
  * Where to render the Coachmark relative to its target.
- * Applies only to Draggable and Beacon Coachmarks.
+ * Applies only to Floating and Tooltip Coachmarks.
  */
 export const COACHMARK_ALIGNMENT = {
   BOTTOM: 'bottom',

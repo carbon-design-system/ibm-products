@@ -66,13 +66,13 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 }
 
 .#{$block-class}__side-panel-value {
-  @include type.type-style('body-short-01');
+  @include type.type-style('body-compact-01');
 
   padding-left: $spacing-03;
 }
 
 .#{$block-class}__side-panel-section-header {
-  @include type.type-style('productive-heading-01');
+  @include type.type-style('heading-compact-01');
 
   padding-bottom: $spacing-02;
 }

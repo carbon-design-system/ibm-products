@@ -5,21 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+/* stylelint-disable carbon/theme-token-use */
+
 // Standard imports.
 @import '../../global/styles/project-settings';
 @import '../../global/styles/mixins';
 
-// Other Carbon settings.
-// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
-
-// CoachmarkStack uses the following Carbon components:
-// TODO: @import(s) of Carbon component styles used by CoachmarkStack
-
-// CoachmarkStack uses the following Carbon for IBM Products components:
-// TODO: @import(s) of IBM Products component styles used by CoachmarkStack
-
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
 @mixin coachmark-stack {
   // The block part of our conventional BEM class names (blockClass__E--M).
 
@@ -29,12 +20,14 @@
 
   .#{$block-class} {
     $block: &;
-    bottom: 0;
+
     position: fixed;
-    right: $spacing-05;
-    transform: translateY(100%);
-    transition: 240ms carbon--motion(exit, productive);
     z-index: 5901;
+    right: $spacing-05;
+    bottom: 0;
+    transform: translateY(100%);
+    /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
+    transition: 240ms carbon--motion(exit, productive);
 
     &--is-visible {
       transform: translateY(0);
@@ -42,8 +35,8 @@
 
     // Stack the level-one item behind the level-two item.
     &--is-stacked {
-      overflow: hidden;
       bottom: 0;
+      overflow: hidden;
       pointer-events: none;
       transform: perspective(carbon--mini-units(18))
         translate3d(0, calc($spacing-09 * -1), calc($spacing-05 * -1));
@@ -52,6 +45,7 @@
       &__light {
         background-color: $gray-90;
       }
+
       &__dark {
         background-color: $active-tertiary;
       }
@@ -60,9 +54,9 @@
 
   // ALL SUBSEQUENT ITEMS ARE THE "CHILD" STACK ITEMS
   .#{$block-class} ~ .#{$block-class} {
+    z-index: 5902;
     opacity: 0;
     transform: translateY(100%);
-    z-index: 5902;
 
     &--is-visible {
       opacity: 1;
@@ -76,6 +70,7 @@
       margin-top: $spacing-04;
       margin-left: calc(-1 * $spacing-05);
     }
+
     &__icon-idea {
       margin-bottom: $spacing-03;
     }

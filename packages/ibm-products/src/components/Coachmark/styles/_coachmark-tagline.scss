@@ -5,6 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+/* stylelint-disable carbon/theme-token-use */
+/* stylelint-disable declaration-no-important */
+
 // Standard imports.
 @import '../../../global/styles/project-settings';
 @import '../../../global/styles/mixins';
@@ -16,33 +19,38 @@
   $block-class: #{$pkg-prefix}--coachmark-tagline;
 
   .#{$block-class} {
-    display: grid;
-    width: carbon--mini-units(36);
-    grid-template-columns: [ctacol] auto [closebtncol] $spacing-08;
-    background: $purple-70;
-    background-image: linear-gradient(90deg, $blue-90 0%, $purple-70 100%);
     position: fixed;
+    z-index: 1;
     right: $spacing-05;
     bottom: 0;
+    display: grid;
+    overflow: hidden;
+    width: carbon--mini-units(36);
     border-radius: $spacing-01 $spacing-01 0 0;
-    z-index: 1;
+    background: $purple-70;
+    background-image: linear-gradient(90deg, $blue-90 0%, $purple-70 100%);
+    color: $white-0;
+    grid-template-columns: [ctacol] auto [closebtncol] $spacing-08;
     opacity: 1;
+    // stylelint-disable-next-line carbon/motion-duration-use
     transition: opacity 240ms carbon--motion(exit, productive) 300ms;
     transition-delay: 240ms;
-    overflow: hidden;
-    color: $white-0;
 
     &::before {
       position: absolute;
-      content: '';
+      z-index: -1;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
-      z-index: -1;
-      transition: opacity 240ms carbon--motion(exit, productive);
-      opacity: 0;
       background: linear-gradient(90deg, $blue-70 0%, $purple-70 100%);
+      content: '';
+      opacity: 0;
+      /* stylelint-disable-next-line carbon/motion-duration-use */
+      transition: opacity 240ms carbon--motion(exit, productive);
+      @media (prefers-reduced-motion) {
+        transition: none;
+      }
     }
 
     &:hover::before {
@@ -50,24 +58,27 @@
     }
 
     &--is-open {
+      background: $white-0;
+      opacity: 0;
       #{$block-class}__cta {
         opacity: 0;
       }
+
       #{$block-class}--close-btn {
         display: none;
       }
+
       &::before {
         background: $white-0;
       }
-      background: $white-0;
-      opacity: 0;
     }
 
     &__cta {
       display: grid;
-      grid-template-columns: [iconcol] $spacing-07 [bodycol] auto;
       padding: $spacing-03 0;
+      grid-template-columns: [iconcol] $spacing-07 [bodycol] auto;
       @include carbon--type-style('body-short-01');
+
       &:hover {
         cursor: pointer !important;
       }
@@ -82,6 +93,7 @@
       height: $spacing-07;
       margin-left: auto !important;
       color: $white-0;
+
       svg > path {
         margin: 0;
         fill: $white-0 !important;

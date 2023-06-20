@@ -5,55 +5,74 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+/**
+ * The CoachmarkBeacon specifically is theme-agnostic, and so we have to
+ * use color tokens to keep the colors static instead of theme tokens
+ * that will change depending on the selected theme.
+ *
+ * Because of this, we are triggering a *large* amount of linting errors.
+ * So, we're adding 4 "disable" rules for the file instead of 50
+ * individual rules.
+ */
+
+/* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable carbon/motion-duration-use */
+/* stylelint-disable carbon/theme-token-use */
+
 // Standard imports.
 @import '../../global/styles/project-settings';
 @import '../../global/styles/mixins';
 
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
 @mixin coachmark-beacon {
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--coachmark-beacon;
   $beaconAnimationTime: 2s;
   .#{$block-class} {
     position: relative;
+
     &-default {
       .#{$block-class}__target {
         // the blue dot
-        &:after {
-          background-color: $blue-50;
-          border-radius: 50%;
-          content: '';
-          height: $spacing-04;
+        &::after {
           position: absolute;
-          width: $spacing-04;
           top: calc($spacing-01 + $spacing-03);
           left: calc($spacing-01 + $spacing-03);
+          width: $spacing-04;
+          height: $spacing-04;
+          border-radius: 50%;
+          background-color: $blue-50;
+          content: '';
         }
       }
     }
+
     &-ring {
       .#{$block-class}__center {
         -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' width='80px' height='80px' viewBox='0 0 80 80'%3E%3Cpath fill='white' stroke='none' d='M 0, 0 m 37 -2 a 40 40 0 1 0 1 0 Z m 1 28 a 12 12 0 1 1 -1 0 Z' /%3E%3C/svg%3E");
         mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' width='80px' height='80px' viewBox='0 0 80 80'%3E%3Cpath fill='white' stroke='none' d='M 0, 0 m 37 -2 a 40 40 0 1 0 1 0 Z m 1 28 a 12 12 0 1 1 -1 0 Z' /%3E%3C/svg%3E");
+
         circle {
-          animation: ringRipple $beaconAnimationTime infinite;
+          /* stylelint-disable-next-line carbon/motion-easing-use */
+          animation: ring-ripple $beaconAnimationTime infinite;
+          @media (prefers-reduced-motion) {
+            animation: none;
+          }
         }
       }
     }
 
     .#{$block-class}__target {
       // the hit area
-      background-color: transparent;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      height: $spacing-07;
-      left: calc(-1 * $spacing-05);
-      padding: 0;
       position: absolute;
       top: calc(-1 * $spacing-05);
+      left: calc(-1 * $spacing-05);
       width: $spacing-07;
+      height: $spacing-07;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background-color: transparent;
+      cursor: pointer;
 
       &[aria-expanded='true'] {
         circle {
@@ -65,21 +84,23 @@
     &__center {
       position: absolute;
       z-index: 6900;
-      left: calc(($spacing-06 - $spacing-01) * -1);
       top: calc(($spacing-06 - $spacing-01) * -1);
-      pointer-events: none;
+      left: calc(($spacing-06 - $spacing-01) * -1);
       width: $spacing-11;
       height: $spacing-11;
+      pointer-events: none;
+
       circle {
-        stroke: $support-04;
-        stroke-width: 1px;
-        stroke-opacity: 0;
-        fill-opacity: 0;
-        fill: $support-04;
-        transition-timing-function: carbon--motion(exit, productive);
+        /* stylelint-disable-next-line carbon/motion-easing-use */
         animation: ripple $beaconAnimationTime infinite;
+        fill: $support-04;
+        fill-opacity: 0;
         -webkit-mask-image: none;
         mask-image: none;
+        stroke: $support-04;
+        stroke-opacity: 0;
+        stroke-width: 1px;
+        transition-timing-function: carbon--motion(exit, productive);
         @media (prefers-reduced-motion) {
           animation: none;
         }
@@ -89,47 +110,53 @@
 
   @keyframes ripple {
     0% {
-      stroke-opacity: 0;
       fill-opacity: 0;
       r: 1px;
+      stroke-opacity: 0;
       transition-timing-function: carbon--motion(entrance, productive);
     }
+
     31% {
-      stroke-opacity: 1;
       fill-opacity: 0.2;
+      stroke-opacity: 1;
     }
+
     62% {
-      stroke-opacity: 0;
       fill-opacity: 0;
       r: 32px;
+      stroke-opacity: 0;
     }
+
     100% {
-      stroke-opacity: 0;
       fill-opacity: 0;
       r: 32px;
+      stroke-opacity: 0;
     }
   }
 
-  @keyframes ringRipple {
+  @keyframes ring-ripple {
     0% {
-      stroke-opacity: 0;
       fill-opacity: 0;
       r: 12px;
+      stroke-opacity: 0;
       transition-timing-function: carbon--motion(entrance, productive);
     }
+
     31% {
-      stroke-opacity: 1;
       fill-opacity: 0.2;
+      stroke-opacity: 1;
     }
+
     62% {
-      stroke-opacity: 0;
       fill-opacity: 0;
       r: 32px;
+      stroke-opacity: 0;
     }
+
     100% {
-      stroke-opacity: 0;
       fill-opacity: 0;
       r: 32px;
+      stroke-opacity: 0;
     }
   }
 }

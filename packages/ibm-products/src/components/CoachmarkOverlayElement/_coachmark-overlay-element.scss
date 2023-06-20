@@ -20,13 +20,17 @@
     &__content {
       padding-bottom: $spacing-05;
     }
+
     &__title {
       @include carbon--type-style('productive-heading-02');
+
       margin: 0 0 $spacing-03;
     }
+
     &__body {
       @include carbon--type-style('body-long-01');
     }
+
     &__button {
       margin-bottom: 0;
     }

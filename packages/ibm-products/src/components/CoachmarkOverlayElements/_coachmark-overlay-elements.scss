@@ -22,14 +22,14 @@
     }
 
     &__footer {
-      align-items: center;
       display: flex;
+      align-items: center;
       justify-content: flex-end;
     }
 
     &--controls-progress {
-      justify-self: flex-start;
       margin-right: auto;
+      justify-self: flex-start;
       @include carbon--type-style('helper-text-01');
     }
   }

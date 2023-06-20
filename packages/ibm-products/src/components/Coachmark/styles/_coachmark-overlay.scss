@@ -5,6 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+/* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable carbon/theme-token-use */
+/* stylelint-disable declaration-no-important */
+
 // Standard imports.
 @import '../../../global/styles/project-settings';
 @import '../../../global/styles/mixins';
@@ -17,27 +21,30 @@
   $carousel-class: #{$pkg-prefix}--carousel;
 
   .#{$block-class} {
-    color: $inverse-01;
+    position: absolute;
+    z-index: 5901;
+    width: carbon--mini-units(36);
+    border-radius: $spacing-01;
     background-color: $inverse-02;
-
+    color: $inverse-01;
     $caret-height: calc(
       $spacing-03 - $spacing-01
     ); // from the "peak" of the pyramid to its "base"
     $caret-center: $caret-height; // use "center" for left-right calculations, and "height" for top-bottom calculations
     $distance-offset: $spacing-06; // see also ./utils/constants.js > distanceOffset
 
-    width: carbon--mini-units(36);
-    position: absolute;
-    border-radius: $spacing-01;
-    z-index: 5901;
-
     &--fixed {
-      bottom: 0;
       position: fixed;
       right: $spacing-05;
+      bottom: 0;
       transform: translateY(100%);
+      /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
       transition: 240ms carbon--motion(exit, productive);
+      @media (prefers-reduced-motion) {
+        transition: none;
+      }
     }
+
     &--is-visible {
       transform: translateY(0);
     }
@@ -47,15 +54,12 @@
       // background-color: this property is set in _coachmark-overlay-theme.scss
       position: absolute;
       z-index: 5902;
-
-      // border-bottom-color: this property is set in _coachmark-overlay-theme.scss
-      border-bottom-style: solid;
-      border-bottom-width: $caret-center;
-      border-left: $caret-center solid transparent;
-      border-right: $caret-center solid transparent;
-      height: 0;
       width: 0;
-      border-bottom-color: $inverse-02;
+      height: 0;
+      // border-bottom-color: this property is set in _coachmark-overlay-theme.scss
+      border-right: $caret-center solid transparent;
+      border-bottom: solid $caret-center $inverse-02;
+      border-left: $caret-center solid transparent;
     }
 
     // OVERLAY AND CARET POSITIONING
@@ -64,6 +68,7 @@
       $translate-y: calc(-1 * (100% + $distance-offset + $caret-height));
 
       transform: translate(-50%, $translate-y);
+
       .#{$block-class}__caret {
         left: calc(50% - $caret-center);
         transform: rotate(180deg);
@@ -76,6 +81,7 @@
           transform: rotate(180deg);
         }
       }
+
       &-right {
         transform: translate(
           calc(-1 * (100% - $distance-offset)),
@@ -95,25 +101,27 @@
 
       transform: translate(-50%, $translate-y);
       .#{$block-class}__caret {
-        left: calc(50% - $caret-center);
         top: $top;
+        left: calc(50% - $caret-center);
       }
 
       &-left {
         transform: translate(calc(-1 * $distance-offset), $translate-y);
         .#{$block-class}__caret {
-          left: $horizontal-push;
           top: $top;
+          left: $horizontal-push;
         }
       }
+
       &-right {
         transform: translate(
           calc(-1 * (100% - $distance-offset)),
           $translate-y
         );
+
         .#{$block-class}__caret {
-          right: $horizontal-push;
           top: $top;
+          right: $horizontal-push;
         }
       }
     }
@@ -125,27 +133,28 @@
 
       transform: translate($translate-x, -50%);
       .#{$block-class}__caret {
-        right: $right;
         top: calc(50% - ($caret-height * 0.5));
+        right: $right;
         transform: rotate(90deg);
       }
 
       &-top {
         transform: translate($translate-x, calc(-1 * $distance-offset));
         .#{$block-class}__caret {
-          right: $right;
           top: $vertical-push;
+          right: $right;
           transform: rotate(90deg);
         }
       }
+
       &-bottom {
         transform: translate(
           $translate-x,
           calc(-1 * (100% - $distance-offset))
         );
         .#{$block-class}__caret {
-          bottom: $vertical-push;
           right: $right;
+          bottom: $vertical-push;
           transform: rotate(90deg);
         }
       }
@@ -158,19 +167,20 @@
 
       transform: translate($translate-x, -50%);
       .#{$block-class}__caret {
-        left: $left;
         top: calc(50% - ($caret-height * 0.5));
+        left: $left;
         transform: rotate(-90deg);
       }
 
       &-top {
         transform: translate($translate-x, calc(-1 * $distance-offset));
         .#{$block-class}__caret {
-          left: $left;
           top: $vertical-push;
+          left: $left;
           transform: rotate(-90deg);
         }
       }
+
       &-bottom {
         transform: translate(
           $translate-x,
@@ -196,6 +206,7 @@
 
       .bx--btn--ghost {
         color: $inverse-link;
+
         &:hover {
           color: $inverse-link;
         }
@@ -213,8 +224,10 @@
 
         #{$block-class}-element__title > div {
           margin: 0 0 $spacing-03;
+
           > h2 {
             @include carbon--type-style('productive-heading-02');
+
             order: 1;
           }
         }
@@ -223,8 +236,8 @@
 
     // FOOTER
     &__footer {
-      align-items: center;
       display: flex;
+      align-items: center;
       justify-content: flex-end;
     }
     /* ------------------ */
@@ -238,9 +251,11 @@
           &:hover {
             color: #a6c8ff;
           }
+
           &:active {
             color: $text-04;
           }
+
           &:focus {
             outline-color: $text-04;
           }
@@ -250,12 +265,14 @@
           &:hover {
             background-color: $inverse-hover-ui;
           }
+
           &:active {
             background-color: $active-secondary;
           }
         }
       }
     }
+
     &__dark {
       .#{$block-class}__body {
         .bx--link {
@@ -264,9 +281,11 @@
           &:hover {
             color: #0043ce;
           }
+
           &:active {
             color: $link-02;
           }
+
           &:focus {
             color: $inverse-01;
             outline-color: $inverse-01;
@@ -285,9 +304,11 @@
           &:hover {
             background-color: $inverse-hover-ui;
           }
+
           &:active {
             background-color: $button-tertiary-active;
           }
+
           &:focus {
             box-shadow: inset 0 0 0 $spacing-01 $interactive-01,
               inset 0 0 0 rem(3px) $interactive-03;

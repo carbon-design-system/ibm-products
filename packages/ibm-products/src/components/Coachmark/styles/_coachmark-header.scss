@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+/* stylelint-disable declaration-no-important */
+
 // Standard imports.
 @import '../../../global/styles/project-settings';
 @import '../../../global/styles/mixins';
@@ -17,6 +19,7 @@
 
   .#{$block-class} {
     display: flex;
+
     &--close-btn {
       width: $spacing-07;
       height: $spacing-07;
@@ -26,10 +29,12 @@
         margin: 0;
         fill: $inverse-01 !important;
       }
+
       &:hover {
         background-color: $inverse-hover-ui !important;
       }
     }
+
     &__light {
       #{$block-class}--close-btn {
         &:active {

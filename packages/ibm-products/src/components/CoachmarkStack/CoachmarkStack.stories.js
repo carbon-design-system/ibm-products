@@ -125,7 +125,7 @@ const Template = (args) => {
                 one
                 <br />
                 <br />
-                reeeeeeeally
+                really
                 <br />
                 <br />
                 tall.

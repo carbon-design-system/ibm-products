@@ -28,7 +28,9 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<CoachmarkOverlayElement> </CoachmarkOverlayElement>);
+    const { container } = render(
+      <CoachmarkOverlayElement> </CoachmarkOverlayElement>
+    );
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
@@ -39,12 +41,18 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', () => {
-    render(<CoachmarkOverlayElement className={className}> </CoachmarkOverlayElement>);
+    render(
+      <CoachmarkOverlayElement className={className}> </CoachmarkOverlayElement>
+    );
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {
-    render(<CoachmarkOverlayElement data-testid={dataTestId}> </CoachmarkOverlayElement>);
+    render(
+      <CoachmarkOverlayElement data-testid={dataTestId}>
+        {' '}
+      </CoachmarkOverlayElement>
+    );
     screen.getByTestId(dataTestId);
   });
 
@@ -55,7 +63,11 @@ describe(componentName, () => {
   });
 
   it('adds the Devtools attribute to the containing node', () => {
-    render(<CoachmarkOverlayElement data-testid={dataTestId}> </CoachmarkOverlayElement>);
+    render(
+      <CoachmarkOverlayElement data-testid={dataTestId}>
+        {' '}
+      </CoachmarkOverlayElement>
+    );
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

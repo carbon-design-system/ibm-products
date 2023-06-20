@@ -41,13 +41,13 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
 }
 
 .#{$block-class} .#{$block-class}__step-subtitle {
-  @include type.type-style('productive-heading-01');
+  @include type.type-style('heading-compact-01');
 
   margin-bottom: $spacing-03;
 }
 
 .#{$block-class} .#{$block-class}__step-description {
-  @include type.type-style('body-long-01');
+  @include type.type-style('body-01');
 
   margin-bottom: $spacing-06;
 }
@@ -139,7 +139,7 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
 }
 
 .#{$block-class} .#{$block-class}__step-title {
-  @include type.type-style('productive-heading-04');
+  @include type.type-style('heading-04');
 
   margin-bottom: $spacing-05;
 }

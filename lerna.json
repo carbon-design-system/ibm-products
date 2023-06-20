@@ -7,7 +7,6 @@
       "message": "chore(release): publish [skip ci]"
     }
   },
-  "useWorkspaces": true,
   "ignoreChanges": [
     "**/__fixtures__/**",
     "**/__tests__/**",

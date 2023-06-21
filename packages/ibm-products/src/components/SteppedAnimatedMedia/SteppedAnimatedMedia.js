@@ -37,8 +37,7 @@ const defaults = {
 };
 
 /**
- * DO NOT USE. This component is for the exclusive use
- * of other Novice to Pro components.
+ * The SteppedAnimatedMedia is a Novice to Pro internal component and is not intended for general use.
  */
 export let SteppedAnimatedMedia = React.forwardRef(
   (
@@ -117,17 +116,10 @@ export let SteppedAnimatedMedia = React.forwardRef(
           }
         )}
         ref={localRef}
-        role="main"
         {...getDevtoolsProps(componentName)}
       />
     );
   }
-);
-
-// Return a placeholder if not released and not enabled by feature flag
-SteppedAnimatedMedia = pkg.checkComponentEnabled(
-  SteppedAnimatedMedia,
-  componentName
 );
 
 // The display name of the component, used by React. Note that displayName

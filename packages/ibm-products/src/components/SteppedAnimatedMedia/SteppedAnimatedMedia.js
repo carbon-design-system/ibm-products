@@ -115,6 +115,7 @@ export let SteppedAnimatedMedia = React.forwardRef(
             // example: [`${blockClass}__here-if-small`]: size === 'sm',
           }
         )}
+        role="img"
         ref={localRef}
         {...getDevtoolsProps(componentName)}
       />

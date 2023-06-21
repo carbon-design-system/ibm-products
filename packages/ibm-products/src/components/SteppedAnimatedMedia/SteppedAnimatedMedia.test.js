@@ -115,16 +115,22 @@ describe(componentName, () => {
 
   it('renders a component SteppedAnimatedMedia', async () => {
     render(
-      <SteppedAnimatedMedia filePaths={['./assets/illustrations/test.json']} />
+      <SteppedAnimatedMedia
+        aria-label="Animated SVG for display"
+        filePaths={['./assets/illustrations/test.json']}
+      />
     );
     await waitFor(() => {
-      expect(screen.getByRole('main')).toHaveClass(blockClass);
+      expect(screen.getByRole('img')).toHaveClass(blockClass);
     });
   });
 
   it('renders a lottie file', async () => {
     render(
-      <SteppedAnimatedMedia filePaths={['./assets/illustrations/test.json']} />
+      <SteppedAnimatedMedia
+        aria-label="Animated SVG for display"
+        filePaths={['./assets/illustrations/test.json']}
+      />
     );
 
     await waitFor(() => {
@@ -134,7 +140,10 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = render(
-      <SteppedAnimatedMedia filePaths={['./assets/illustrations/test.json']} />
+      <SteppedAnimatedMedia
+        aria-label="Animated SVG for display"
+        filePaths={['./assets/illustrations/test.json']}
+      />
     );
     await waitFor(() => {
       expect(container).toBeAccessible(componentName);
@@ -145,6 +154,7 @@ describe(componentName, () => {
   it('applies className to the containing node', async () => {
     render(
       <SteppedAnimatedMedia
+        aria-label="Animated SVG for display"
         className={className}
         filePaths={[
           './assets/illustrations/test.json',
@@ -154,7 +164,7 @@ describe(componentName, () => {
       />
     );
     await waitFor(() => {
-      expect(screen.getByRole('main')).toHaveClass(className);
+      expect(screen.getByRole('img')).toHaveClass(className);
     });
   });
 
@@ -162,6 +172,7 @@ describe(componentName, () => {
     render(
       <SteppedAnimatedMedia
         data-testid={dataTestId}
+        aria-label="Animated SVG for display"
         filePaths={['./assets/illustrations/test.json']}
       />
     );
@@ -175,6 +186,7 @@ describe(componentName, () => {
     render(
       <SteppedAnimatedMedia
         ref={ref}
+        aria-label="Animated SVG for display"
         filePaths={['./assets/illustrations/test.json']}
       />
     );
@@ -187,6 +199,7 @@ describe(componentName, () => {
     render(
       <SteppedAnimatedMedia
         data-testid={dataTestId}
+        aria-label="Animated SVG for display"
         filePaths={['./assets/illustrations/test.json']}
       />
     );

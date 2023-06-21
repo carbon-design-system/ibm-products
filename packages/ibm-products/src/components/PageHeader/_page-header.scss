@@ -431,7 +431,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__title {
-    @include type.type-style('productive-heading-04');
+    @include type.type-style('heading-04');
 
     min-height: $spacing-08;
     overflow-x: hidden;
@@ -538,11 +538,11 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__subtitle {
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
   }
 
   .#{$block-class}__available-row {
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
 
     margin-top: $spacing-03;
 
@@ -557,7 +557,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   .#{$block-class}__available-row * {
     // default content of available row to body-long-01
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
   }
 
   .#{$block-class}__navigation-row {

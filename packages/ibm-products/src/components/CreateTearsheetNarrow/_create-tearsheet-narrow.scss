@@ -51,11 +51,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--create-tearsheet-narrow;
 }
 
 .#{$block-class} .#{$block-class}__form-title-text {
-  @include type.type-style('productive-heading-02');
+  @include type.type-style('heading-compact-02');
 
   padding-bottom: $spacing-03;
 }
 
 .#{$block-class} .#{$block-class}__form-description-text {
-  @include type.type-style('body-long-01');
+  @include type.type-style('body-01');
 }

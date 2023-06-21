@@ -183,7 +183,7 @@ $motion-duration: $duration-moderate-02;
 
   &.#{$block-class}--wide
     .#{$carbon-prefix}--modal-header__heading.#{$block-class}__heading {
-    @include type.type-style('productive-heading-04');
+    @include type.type-style('heading-04');
   }
 
   .#{$block-class}__header-description {
@@ -191,7 +191,7 @@ $motion-duration: $duration-moderate-02;
     overflow: hidden;
     max-width: 100%;
     margin-top: $spacing-05;
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
 
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;

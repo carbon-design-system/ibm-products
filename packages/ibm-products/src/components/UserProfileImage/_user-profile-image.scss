@@ -128,12 +128,12 @@ $theme-keys: map-keys($themes);
 
 .#{$block-class}--xl {
   @include size('xl');
-  @include type.type-style('productive-heading-04');
+  @include type.type-style('heading-04');
 }
 
 .#{$block-class}--lg {
   @include size('lg');
-  @include type.type-style('body-short-01');
+  @include type.type-style('body-compact-01');
 }
 
 .#{$block-class}--md {

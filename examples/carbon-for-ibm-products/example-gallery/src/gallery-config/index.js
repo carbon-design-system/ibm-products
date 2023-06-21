@@ -37,6 +37,8 @@ import imageTearsheet from './Tearsheet--thumbnail.png';
 import imageUserProfileImage from './UserProfileImage--thumbnail.png';
 import imageWebTerminal from './WebTerminal--thumbnail.png';
 import imagePrefixExample from './prefix-example--thumbnail.png';
+import imageReact16Example from './react-16-example--thumbnail.png';
+import imageReact17Example from './react-17-example--thumbnail.png';
 const config = [
   {
     label: 'API Key Modal',
@@ -170,6 +172,16 @@ const config = [
     label: 'Prefix CSS/JS Example',
     directory: 'prefix-example',
     thumbnail: `url(${imagePrefixExample}`,
+  },
+  {
+    label: 'About Modal',
+    directory: 'react-16-example',
+    thumbnail: `url(${imageReact16Example}`,
+  },
+  {
+    label: 'About Modal',
+    directory: 'react-17-example',
+    thumbnail: `url(${imageReact17Example}`,
   },
 ];
 

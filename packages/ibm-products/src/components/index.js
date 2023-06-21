@@ -75,6 +75,7 @@ export {
   useInlineEdit,
   useFiltering,
   getAutoSizedColumnWidth,
+  useFilterContext,
 } from './Datagrid';
 export { EditTearsheet } from './EditTearsheet';
 export { EditTearsheetNarrow } from './EditTearsheetNarrow';

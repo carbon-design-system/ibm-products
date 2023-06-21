@@ -11,19 +11,19 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../../global/js/utils/story-helper';
-
-// import page from './HTTPErrorOther.mdx';
-import styles from '../_storybook-styles.scss';
+import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
 
 export default {
   title: getStoryTitle(HTTPErrorOther.displayName),
   component: HTTPErrorOther,
   tags: ['autodocs'],
   parameters: {
-    // docs: {
-    //   page,
-    // },
-    styles,
+    docs: {
+      page: () => (
+        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/http-errors/usage#other-errors" />
+      ),
+    },
+    layout: 'fullscreen',
   },
 };
 

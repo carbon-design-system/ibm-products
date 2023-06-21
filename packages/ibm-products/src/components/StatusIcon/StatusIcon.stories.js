@@ -8,12 +8,13 @@
 import React from 'react';
 
 import { StatusIcon } from '.';
-// import mdx from './StatusIcon.mdx';
+
 // import styles from './_storybook-styles.scss'; // import storybook which includes component and additional storybook styles
 import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
+import DocsPage from './StatusIcon.docs-page';
 
 export default {
   title: getStoryTitle(StatusIcon.displayName),
@@ -53,11 +54,9 @@ export default {
   },
   parameters: {
     // styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: DocsPage,
     },
-*/
   },
 };
 

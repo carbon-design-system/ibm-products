@@ -11,8 +11,9 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-// import mdx from './UserProfileImage.mdx';
 import image from './headshot.jpg'; // cspell:disable-line
+import DocsPage from './UserProfileImage.docs-page';
+
 // import styles from './_storybook.scss'; // import storybook which includes component and additional storybook styles
 
 const defaultArgs = {
@@ -68,7 +69,9 @@ export default {
   },
   parameters: {
     // styles,
-    // docs: { page: mdx },
+    docs: {
+      page: DocsPage,
+    },
   },
 };
 

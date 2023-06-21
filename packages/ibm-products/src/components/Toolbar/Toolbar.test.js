@@ -221,7 +221,7 @@ describe(toolbarButtonComponentName, () => {
     );
 
     const className = `${carbon.prefix}--popover--right`;
-    expect(getByTestId(dataTestId).parentElement).not.toHaveClass(
+    expect(getByTestId(dataTestId).parentElement.parentElement).not.toHaveClass(
       className,
       {
         exact: false,
@@ -233,7 +233,7 @@ describe(toolbarButtonComponentName, () => {
         <ToolbarButton data-testid={dataTestId} />
       </Toolbar>
     );
-    expect(getByTestId(dataTestId).parentElement).toHaveClass(
+    expect(getByTestId(dataTestId).parentElement.parentElement).toHaveClass(
       className,
       {
         exact: false,

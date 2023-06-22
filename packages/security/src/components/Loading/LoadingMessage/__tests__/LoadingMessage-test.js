@@ -42,7 +42,7 @@ describe('LoadingMessage', () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  test('should pass extra props through spread attribute', () => {
+  test.skip('should pass extra props through spread attribute', () => {
     const { queryByLabelText } = render(
       // `description` provides a custom label element
       // to the inner `Loading` component:

@@ -87,4 +87,3 @@ export { InlineEdit } from './InlineEdit';
 export { EditInPlace } from './EditInPlace';
 export { Guidebanner } from './Guidebanner';
 export { NonLinearReading } from './NonLinearReading';
-export { SteppedAnimatedMedia } from './SteppedAnimatedMedia';

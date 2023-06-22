@@ -51,7 +51,6 @@ module.exports = {
   reporters: ['default'],
   setupFiles: [require.resolve('./setup/setupFiles')],
   setupFilesAfterEnv: [require.resolve('./setup/setupFilesAfterEnv')],
-  snapshotSerializers: ['enzyme-to-json/serializer'],
   testEnvironment: 'jsdom',
   testMatch: [
     // '<rootDir>/**/__tests__/**/*.js?(x)',
@@ -74,11 +73,9 @@ module.exports = {
     'e2e',
     'templates',
     '/umd/',
+    '/react-dnd/',
   ],
-  transformIgnorePatterns: [
-    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$',
-    'ace-node\\.js',
-  ],
+  transformIgnorePatterns: [`/node_modules/(?!react-dnd|dnd-core|@react-dnd)`],
   watchPathIgnorePatterns: [
     '/cjs/',
     '/dist/',

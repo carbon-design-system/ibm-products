@@ -6,9 +6,8 @@
  */
 
 import React from 'react';
-
+import { render } from '@testing-library/react';
 import { pkg, carbon } from '../settings';
-import { shallow } from 'enzyme';
 
 const name = 'settings';
 
@@ -23,7 +22,7 @@ describe(name, () => {
 
     // dynamic import so we can modify the import on the component before using it
     const { StatusIcon } = await import('../components/StatusIcon');
-    const wrapper = shallow(
+    const { container } = render(
       <StatusIcon
         kind="fatal"
         size="sm"
@@ -31,7 +30,10 @@ describe(name, () => {
         iconDescription="Fatal"
       />
     );
-    expect(wrapper.hasClass(`${prefix}--status-icon`)).toEqual(true);
+
+    expect(
+      container.querySelector(`.${prefix}--status-icon`)
+    ).toBeInTheDocument();
   });
 
   it('Supplies carbon theme token values', () => {

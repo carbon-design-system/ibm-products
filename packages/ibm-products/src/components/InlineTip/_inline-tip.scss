@@ -37,9 +37,12 @@
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--inline-tip;
 
+  // Images and animation are the same, fixed size
+  $media-height: rem(118px);
+  $media-width: calc(#{$media-height} * 2);
+
   .#{$block-class} {
-    $purple-1: #7f3ae7;
-    $purple-2: #7433e3;
+    $purple: #7f3ae7;
 
     position: relative;
     display: flex;
@@ -62,7 +65,12 @@
 
           img {
             display: block;
-            height: 118px;
+            height: $media-height;
+          }
+
+          svg {
+            width: $media-width !important;
+            height: $media-height !important;
           }
         }
       }
@@ -77,10 +85,13 @@
       // layout: narrow, with image
       &.#{$block-class}__has-media {
         padding: $spacing-07 $spacing-07 $spacing-05 $spacing-05;
+      }
+
+      .#{$block-class}__media {
+        padding-bottom: $spacing-05;
 
         img {
           width: 100%;
-          padding-bottom: $spacing-05;
         }
       }
 
@@ -136,7 +147,7 @@
 
           &:active,
           &:hover {
-            background-color: $purple-1;
+            background-color: $purple;
             color: $gray-10;
           }
         }
@@ -180,7 +191,7 @@
 
       &:active,
       &:hover {
-        background-color: $purple-2 !important;
+        background-color: $purple !important;
         color: $text-01 !important;
       }
 

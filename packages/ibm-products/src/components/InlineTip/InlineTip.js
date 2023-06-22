@@ -14,7 +14,7 @@ import { Button } from 'carbon-components-react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { getComponentText } from './utils';
-// import SteppedAnimatedMedia from '../SteppedAnimatedMedia';
+import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
@@ -171,16 +171,15 @@ export let InlineTip = React.forwardRef(
             </footer>
           )}
         </div>
-        {
-          media &&
-            (media.render ? (
-              <div className={`${blockClass}__media`}>{media.render()}</div>
-            ) : null)
-          // <SteppedAnimatedMedia
-          //   className={`${blockClass}__media`}
-          //   filePaths={media.filePath}
-          // />
-        }{' '}
+        {media &&
+          (media.render ? (
+            <div className={`${blockClass}__media`}>{media.render()}</div>
+          ) : (
+            <SteppedAnimatedMedia
+              className={`${blockClass}__media`}
+              filePaths={media.filePaths}
+            />
+          ))}
       </div>
     );
   }
@@ -243,7 +242,7 @@ InlineTip.propTypes = {
       render: PropTypes.func,
     }),
     PropTypes.shape({
-      filePath: PropTypes.string,
+      filePaths: PropTypes.string,
     }),
   ]),
   /**

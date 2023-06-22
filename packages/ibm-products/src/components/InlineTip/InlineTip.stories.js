@@ -21,6 +21,10 @@ import mdx from './InlineTip.mdx';
 
 import styles from './_storybook-styles.scss';
 import InlineTipImage from './assets/inline-tip-image.png';
+const InlineTipAnimation = new URL(
+  './assets/inline-tip-animation',
+  import.meta.url
+).pathname;
 
 export default {
   title: getStoryTitle(InlineTip.displayName),
@@ -34,7 +38,7 @@ export default {
   },
   argTypes: {
     media: {
-      options: ['None', 'Render an image'],
+      options: ['None', 'Render a static image', 'Render an animation'],
       control: { type: 'radio' },
     },
     secondaryButton: {
@@ -64,11 +68,18 @@ const defaultProps = {
 const Template = (args) => {
   const { media, narrow, secondaryButton } = args;
 
-  const selectedMedia =
-    media === 'Render an image'
-      ? { render: () => <img alt="img" src={InlineTipImage} /> }
-      : null;
-
+  const selectedMedia = (function () {
+    switch (media) {
+      case 'Render a static image':
+        return { render: () => <img alt="img" src={InlineTipImage} /> };
+      case 'Render an animation':
+        return {
+          filePaths: [InlineTipAnimation],
+        };
+      default:
+        return null;
+    }
+  })();
   const selectedSecondaryButton = (function () {
     switch (secondaryButton) {
       case '<InlineTipButton>':
@@ -87,8 +98,6 @@ const Template = (args) => {
         return null;
     }
   })();
-
-  console.log('secondaryButton', secondaryButton);
 
   return (
     <div className={cx([narrow ? 'inline-tip-narrow' : 'inline-tip-wide'])}>

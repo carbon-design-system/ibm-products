@@ -39,7 +39,7 @@ const defaults = {
 /**
  * The SteppedAnimatedMedia is a Novice to Pro internal component and is not intended for general use.
  */
-export let SteppedAnimatedMedia = React.forwardRef(
+export const SteppedAnimatedMedia = React.forwardRef(
   (
     {
       // The component props, in alphabetical order (for consistency).

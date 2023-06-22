@@ -1743,8 +1743,8 @@ __metadata:
   peerDependencies:
     "@carbon/grid": ^10.43.1
     "@carbon/icons-react": ^10.49.0
-    carbon-components: ^10.58.6
-    carbon-components-react: ^7.59.6
+    carbon-components: ^10.58.7
+    carbon-components-react: ^7.59.8
     prop-types: ^15.8.1
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
@@ -1763,7 +1763,7 @@ __metadata:
     inquirer: ^9.1.4
     npm-check-updates: ^16.7.4
     prettier: ^2.8.4
-    prettier-config-carbon: ^0.9.0
+    prettier-config-carbon: ^0.11.0
     remark: ^14.0.2
     semver: ^7.3.8
     yargs: ^17.6.2
@@ -1783,7 +1783,7 @@ __metadata:
     "@carbon/import-once": 10.7.0
     "@carbon/layout": 10.37.1
     "@carbon/motion": 10.29.0
-    "@carbon/storybook-addon-theme": ^0.22.40
+    "@carbon/storybook-addon-theme": ^0.22.41
     "@carbon/themes": 10.55.1
     "@carbon/type": 10.45.1
     "@storybook/addon-actions": ^6.5.16
@@ -1805,8 +1805,8 @@ __metadata:
     "@storybook/theming": ^6.5.16
     babel-loader: ^9.1.2
     babel-preset-ibm-cloud-cognitive: ^0.14.28
-    carbon-components: ^10.58.6
-    carbon-components-react: ^7.59.6
+    carbon-components: ^10.58.7
+    carbon-components-react: ^7.59.8
     carbon-icons: ^7.0.7
     css-loader: ^6.7.3
     fast-sass-loader: ^2.0.1
@@ -1864,8 +1864,8 @@ __metadata:
     "@carbon/motion": ^10.29.0
     "@carbon/themes": ^10.55.1
     "@carbon/type": ^10.45.1
-    carbon-components: ^10.58.6
-    carbon-components-react: ^7.59.6
+    carbon-components: ^10.58.7
+    carbon-components-react: ^7.59.8
     carbon-icons: ^7.0.7
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
@@ -1889,8 +1889,8 @@ __metadata:
     "@carbon/type": 10.45.1
     babel-plugin-macros: ^3.1.0
     babel-preset-ibm-cloud-cognitive: ^0.14.28
-    carbon-components: 10.58.6
-    carbon-components-react: 7.59.6
+    carbon-components: 10.58.7
+    carbon-components-react: 7.59.8
     carbon-icons: 7.0.7
     classnames: ^2.3.2
     clean-css-cli: ^5.6.2
@@ -1972,9 +1972,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/storybook-addon-theme@npm:^0.22.40":
-  version: 0.22.40
-  resolution: "@carbon/storybook-addon-theme@npm:0.22.40"
+"@carbon/storybook-addon-theme@npm:^0.22.41":
+  version: 0.22.41
+  resolution: "@carbon/storybook-addon-theme@npm:0.22.41"
   dependencies:
     "@storybook/addons": 6.5.16
     "@storybook/api": 6.5.16
@@ -1983,12 +1983,12 @@ __metadata:
     "@storybook/components": 6.5.16
     "@storybook/core-events": 6.5.16
     "@storybook/theming": 6.5.16
-    core-js: ^3.28.0
+    core-js: ^3.30.2
     global: ^4.4.0
   peerDependencies:
     react: "*"
     vue: "*"
-  checksum: d5df609c508a1c10c767ae133fadbf017e6a1f81a965bfb855c8e4f1b39ba8663016c2a9e3c32308b428d8f142237f6b8ac6f2847df2c55dd84d2ceaa9977d56
+  checksum: e79e9fca8dc8c338d4aebfb3ced39a31ec43b7f88c7fc8a593d90b829662e46ffb7bfa28162df89d2c4ed2a24e754c234da3bdc905138db8fc2e7e25d464caa8
   languageName: node
   linkType: hard
 
@@ -9036,9 +9036,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components-react@npm:7.59.6, carbon-components-react@npm:^7.59.6":
-  version: 7.59.6
-  resolution: "carbon-components-react@npm:7.59.6"
+"carbon-components-react@npm:7.59.8, carbon-components-react@npm:^7.59.8":
+  version: 7.59.8
+  resolution: "carbon-components-react@npm:7.59.8"
   dependencies:
     "@babel/runtime": ^7.16.7
     "@carbon/feature-flags": ^0.7.0
@@ -9065,19 +9065,19 @@ __metadata:
     carbon-icons: ^7.0.7
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
-  checksum: 75991fb578bf34ce7687bd92602229af0afaf8b860183b70c922397755ab3a6660b46f6847a689c5c0afaa062d91ef84664d2f2774e8cef515002567d0f14a02
+  checksum: 51d43a907e20588e0788d6c75f755bbc1e92b511d604f68aa8faa3c4b599789cb6fef05a2fad5381dc209b7a4bbaba4e047474fc86739ffba19c53b09e339eaf
   languageName: node
   linkType: hard
 
-"carbon-components@npm:10.58.6, carbon-components@npm:^10.58.6":
-  version: 10.58.6
-  resolution: "carbon-components@npm:10.58.6"
+"carbon-components@npm:10.58.7, carbon-components@npm:^10.58.7":
+  version: 10.58.7
+  resolution: "carbon-components@npm:10.58.7"
   dependencies:
     "@carbon/telemetry": 0.1.0
     flatpickr: 4.6.1
     lodash.debounce: ^4.0.8
     warning: ^3.0.0
-  checksum: 9af81c7974884fedb224a295ee41b0d98611888a3c0e7a1da9e60266faf225586502fb1594c232823152de0be36e1d45cb43cfdeec08d451141262cbdb49b701
+  checksum: 80d27e9caa0913fce9a90d48e0982bdd7332976cd5ff0faa5c97195c0e16373419fc3be6faf0218bfa0f2d7518e4d14aabfb0be4727f774e0ea2388e3afa9fd0
   languageName: node
   linkType: hard
 
@@ -10336,10 +10336,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.0.1, core-js@npm:^3.0.4, core-js@npm:^3.28.0, core-js@npm:^3.6.5, core-js@npm:^3.8.2":
+"core-js@npm:^3.0.1, core-js@npm:^3.0.4, core-js@npm:^3.6.5, core-js@npm:^3.8.2":
   version: 3.28.0
   resolution: "core-js@npm:3.28.0"
   checksum: 3155fd0ec16d0089106b145e9595280a4ea4bde0d7ff26aa14364cd4f1c203baf6620c3025acd284f363d08b9f21104101692766ca9a36ffeee7307bdf3e1881
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^3.30.2":
+  version: 3.31.0
+  resolution: "core-js@npm:3.31.0"
+  checksum: f7cf9b3010f7ca99c026d95b61743baca1a85512742ed2b67e8f65a72ac4f4fe0b90b00057783e886bdd39d3a295f42f845d33e7cba3973ed263df978343ab79
   languageName: node
   linkType: hard
 
@@ -15161,13 +15168,13 @@ __metadata:
     npm-upgrade: ^3.1.0
     postcss: ^8.4.21
     prettier: ^2.8.4
-    prettier-config-carbon: ^0.9.0
+    prettier-config-carbon: ^0.11.0
     react: ^16.14.0
     react-dom: ^16.14.0
     rimraf: ~3 || > 4.1
     stylelint: ^15.1.0
     stylelint-config-ibm-products: "*"
-    stylelint-plugin-carbon-tokens: 2.2.0
+    stylelint-plugin-carbon-tokens: 2.3.0
     webpack: ^5.75.0
   languageName: unknown
   linkType: soft
@@ -21924,12 +21931,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier-config-carbon@npm:^0.9.0":
-  version: 0.9.0
-  resolution: "prettier-config-carbon@npm:0.9.0"
+"prettier-config-carbon@npm:^0.11.0":
+  version: 0.11.0
+  resolution: "prettier-config-carbon@npm:0.11.0"
   peerDependencies:
-    prettier: ^2.1.0
-  checksum: fbf6c6a5bbcbe5936784294605f38dd0ea42e728f53e002ec7984f6f6e253755e429748fdfb665b7b808d5d4d5cd6436d5c83a64311ff9355461af3144851035
+    prettier: 2.x
+  checksum: c654b17c99ebac6b01b48f900d486cbea304ff6e7ce6532c83e858c6f261b30ebc64b527b21445146014d13bf68753aa0c2f16cfaa44cf2b190b870ae016ca79
   languageName: node
   linkType: hard
 
@@ -25326,9 +25333,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-config-carbon@npm:^1.12.0":
-  version: 1.12.0
-  resolution: "stylelint-config-carbon@npm:1.12.0"
+"stylelint-config-carbon@npm:^1.14.0":
+  version: 1.14.0
+  resolution: "stylelint-config-carbon@npm:1.14.0"
   dependencies:
     stylelint-a11y: ^1.2.3
     stylelint-config-idiomatic-order: ^8.1.0
@@ -25341,7 +25348,7 @@ __metadata:
     stylelint-scss: ^4.1.0
   peerDependencies:
     stylelint: ^14.3.0
-  checksum: ee07e853997252945ed7fa7165ec5380a54b5bb8a0c6f6514957312c95da629f7930d472a765ce94fabcf9640bab7c0a03d8ae23e9fa3e39315d62c7cacb3761
+  checksum: e367e51a486011baf54d00633fc2ec86a94c05f4c744b95132f8522b2445ab62f7a40d20043a49591f58a85ebc37582faf06974890418d8a49d939630cc2fffa
   languageName: node
   linkType: hard
 
@@ -25349,12 +25356,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "stylelint-config-ibm-products@workspace:config/stylelint-config-ibm-products"
   dependencies:
-    stylelint-config-carbon: ^1.12.0
+    stylelint-config-carbon: ^1.14.0
     stylelint-config-idiomatic-order: ^9.0.0
     stylelint-config-standard: ^30.0.1
     stylelint-config-standard-scss: ^7.0.1
     stylelint-no-unsupported-browser-features: ^6.1.0
-    stylelint-plugin-carbon-tokens: 2.2.0
+    stylelint-plugin-carbon-tokens: 2.3.0
   peerDependencies:
     stylelint: ^15.1.0
   languageName: unknown
@@ -25543,9 +25550,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint-plugin-carbon-tokens@npm:2.2.0":
-  version: 2.2.0
-  resolution: "stylelint-plugin-carbon-tokens@npm:2.2.0"
+"stylelint-plugin-carbon-tokens@npm:2.3.0":
+  version: 2.3.0
+  resolution: "stylelint-plugin-carbon-tokens@npm:2.3.0"
   dependencies:
     lodash: ^4.17.21
     postcss: ^8.4.16
@@ -25557,7 +25564,7 @@ __metadata:
     "@carbon/motion": ">=10 <= 11"
     "@carbon/themes": ">=10 <= 11"
     "@carbon/type": ">=10 <= 11"
-  checksum: f9f5829f3d614fda177b2df33fbe618316e9934fcbedd39c16cf77a38629e757078ee738a12d2cf843e2afc96f1031e88d4756ae6fb4f0d734258bb2c20ec455
+  checksum: bfe96198f3d0e6720b7eb4eb031723f1255d0c7b2af2100d02c171b0dc185360ba691b5e9d4ddc0c5a7208e4a166cb675188f0dda9f329cdfeec94bdda73bc04
   languageName: node
   linkType: hard
 

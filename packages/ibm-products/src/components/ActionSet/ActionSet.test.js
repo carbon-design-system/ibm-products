@@ -16,6 +16,7 @@ import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { ActionSet } from '.';
+import { act } from 'react-dom/test-utils';
 
 const blockClass = `${pkg.prefix}--action-set`;
 const componentName = ActionSet.displayName;
@@ -102,7 +103,7 @@ describe(componentName, () => {
         'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than three actions',
         'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
       ],
-      () => {
+      () =>
         render(
           <ActionSet
             actions={[
@@ -113,8 +114,7 @@ describe(componentName, () => {
               { kind: 'danger--tertiary' },
             ]}
           />
-        );
-      }
+        )
     ));
 
   it('applies className to an action button', () => {
@@ -131,11 +131,15 @@ describe(componentName, () => {
     );
   });
 
-  it('reports clicks on an action button', () => {
+  it('reports clicks on an action button', async () => {
     const onClick = jest.fn();
     render(<ActionSet actions={[{ ...actionS, onClick }]} />);
     expect(onClick).toBeCalledTimes(0);
-    userEvent.click(getByRoleAndLabel('button', labelS));
+
+    await act(
+      async () => await userEvent.click(getByRoleAndLabel('button', labelS))
+    );
+
     expect(onClick).toBeCalledTimes(1);
   });
 

@@ -140,6 +140,7 @@ const s = [
           'c/ComboButton',
           'c/ExampleComponent',
           'c/FilterSummary',
+          'c/SteppedAnimatedMedia',
           'c/TearsheetShell',
         ],
       },

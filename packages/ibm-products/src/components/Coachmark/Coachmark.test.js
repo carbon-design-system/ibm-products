@@ -7,56 +7,98 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
-
+import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { Coachmark } from '.';
-
+import {
+  CoachmarkBeacon,
+  CoachmarkOverlayElement,
+  CoachmarkOverlayElements,
+} from '..'; // CoachmarkButton
+import { BEACON_KIND } from './utils/enums'; //COACHMARK_OVERLAY_KIND
 const blockClass = `${pkg.prefix}--coachmark`;
 const componentName = Coachmark.displayName;
 
-// values to use
-const children = `hello, world (${uuidv4()})`;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
+const childDataTestId = `child-element-${uuidv4()}`;
+
+// values to use
+
+const childrenContent = (
+  <CoachmarkOverlayElements
+    data-testid={childDataTestId}
+    closeButtonLabel="Done"
+  >
+    <CoachmarkOverlayElement
+      title="Hello World"
+      description="this is a description test"
+    />
+  </CoachmarkOverlayElements>
+);
+
+const renderCoachmark = ({ ...rest } = {}, children = childrenContent) =>
+  render(
+    <Coachmark
+      theme={'dark'}
+      align={'bottom'}
+      positionTune={{ x: 0, y: 0 }}
+      target={
+        <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
+      }
+      {...rest}
+    >
+      {children}
+    </Coachmark>
+  );
 
 describe(componentName, () => {
   it('renders a component Coachmark', () => {
-    render(<Coachmark> </Coachmark>);
+    renderCoachmark();
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<Coachmark> </Coachmark>);
+    const { container } = renderCoachmark();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders children`, () => {
-    render(<Coachmark>{children}</Coachmark>);
-    screen.getByText(children);
+    renderCoachmark({ children: childrenContent });
+    const beaconOrButton = screen.getByRole('button', {
+      name: 'Show information',
+    });
+    userEvent.click(beaconOrButton);
+    screen.getByTestId(childDataTestId);
   });
 
   it('applies className to the containing node', () => {
-    render(<Coachmark className={className}> </Coachmark>);
+    renderCoachmark({
+      className,
+    });
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {
-    render(<Coachmark data-testid={dataTestId}> </Coachmark>);
+    renderCoachmark({
+      'data-testid': dataTestId,
+    });
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(<Coachmark ref={ref}> </Coachmark>);
+    renderCoachmark({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', () => {
-    render(<Coachmark data-testid={dataTestId}> </Coachmark>);
-
+    renderCoachmark({
+      'data-testid': dataTestId,
+    });
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );

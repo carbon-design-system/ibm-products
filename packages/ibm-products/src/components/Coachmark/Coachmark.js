@@ -61,10 +61,11 @@ export let Coachmark = forwardRef(
     const [shouldResetPosition, setShouldResetPosition] = useState(false);
     const [targetRect, setTargetRect] = useState();
     const [targetOffset, setTargetOffset] = useState({ x: 0, y: 0 });
-    const coachmarkRef = useRef();
+    //const coachmarkRef = useRef();
+    const overlayRef = useRef();
     const backupRef = useRef();
-    const overlayRef = ref || backupRef;
-
+    //const overlayRef = ref || backupRef;
+    const coachmarkRef = ref || backupRef;
     const closeOverlay = () => {
       setIsOpen(false);
     };

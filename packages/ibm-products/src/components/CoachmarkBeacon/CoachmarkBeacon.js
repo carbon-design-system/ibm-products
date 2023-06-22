@@ -43,7 +43,6 @@ export let CoachmarkBeacon = React.forwardRef(
         }
         className={cx(blockClass, `${blockClass}-${kind}`, className)}
         ref={ref}
-        role="main"
         style={overlayPositionStyle}
         {...getDevtoolsProps(componentName)}
       >

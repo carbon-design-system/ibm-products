@@ -43,7 +43,7 @@ export let CoachmarkButton = React.forwardRef(
           }
         )}
         ref={ref}
-        role="main"
+        role="button"
         {...getDevtoolsProps(componentName)}
         {...coachmark.buttonProps}
       >

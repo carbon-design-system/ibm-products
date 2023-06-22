@@ -108,6 +108,7 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="20%"><a href="https://github.com/glapadre"><img src="https://avatars.githubusercontent.com/u/25260547?v=4?s=100" width="100px;" alt="Drew Glapa"/><br /><sub><b>Drew Glapa</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=glapadre" title="Code">💻</a></td>
       <td align="center" valign="top" width="20%"><a href="https://linkedin.com/in/mslilypeng/"><img src="https://avatars.githubusercontent.com/u/3118961?v=4?s=100" width="100px;" alt="Lily"/><br /><sub><b>Lily</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=lily-peng" title="Code">💻</a></td>
       <td align="center" valign="top" width="20%"><a href="https://github.com/mgallo25"><img src="https://avatars.githubusercontent.com/u/23409382?v=4?s=100" width="100px;" alt="Marienella Gallo"/><br /><sub><b>Marienella Gallo</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=mgallo25" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/thefirstartist"><img src="https://avatars.githubusercontent.com/u/40870771?v=4?s=100" width="100px;" alt="Sam Ting"/><br /><sub><b>Sam Ting</b></sub></a><br /><a href="#a11y-thefirstartist" title="Accessibility">️️️️♿️</a> <a href="#design-thefirstartist" title="Design">🎨</a></td>
     </tr>
   </tbody>
 </table>

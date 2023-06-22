@@ -183,6 +183,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "thefirstartist",
+      "name": "Sam Ting",
+      "avatar_url": "https://avatars.githubusercontent.com/u/40870771?v=4",
+      "profile": "https://github.com/thefirstartist",
+      "contributions": [
+        "a11y",
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 5,
@@ -191,5 +201,6 @@
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true,
-  "commitConvention": "angular"
+  "commitConvention": "angular",
+  "commitType": "docs"
 }

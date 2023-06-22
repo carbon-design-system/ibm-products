@@ -55,7 +55,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--import-modal;
 .#{$block-class} .#{$block-class}__file-drop-header,
 .#{$block-class} .#{$block-class}__label {
   margin-bottom: $spacing-03;
-  @include type.type-style('productive-heading-01');
+  @include type.type-style('heading-compact-01');
 }
 
 .#{$block-class}__helper-text {

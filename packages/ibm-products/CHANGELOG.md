@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.1.3...@carbon/ibm-products@2.2.0) (2023-06-22)
+
+
+### Bug Fixes
+
+* **Datagrid:** editable cell icon rerender fix ([#3141](https://github.com/carbon-design-system/ibm-products/issues/3141)) ([f2da565](https://github.com/carbon-design-system/ibm-products/commit/f2da565a93475cab563bd4f4f7a4e6b98068f623))
+* update type and theme tokens ([#3144](https://github.com/carbon-design-system/ibm-products/issues/3144)) ([36a0615](https://github.com/carbon-design-system/ibm-products/commit/36a061543213748633227ce75ea1441e1edaca7d))
+
+
+### Features
+
+* **datagrid:** exports FilterContext ([#3067](https://github.com/carbon-design-system/ibm-products/issues/3067)) ([31d0989](https://github.com/carbon-design-system/ibm-products/commit/31d0989311308f743f097e1e853452582bd1a1b1))
+
+
+
+
+
 ## [2.1.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.1.2...@carbon/ibm-products@2.1.3) (2023-06-20)
 
 

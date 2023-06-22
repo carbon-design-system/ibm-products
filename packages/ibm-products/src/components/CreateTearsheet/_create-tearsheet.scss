@@ -133,7 +133,7 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--
   .#{$create-tearsheet-block-class}__section--subtitle,
 .#{$create-tearsheet-block-class}
   .#{$create-tearsheet-block-class}__step--subtitle {
-  @include type.type-style('productive-heading-01');
+  @include type.type-style('heading-compact-01');
 
   margin-bottom: $spacing-03;
 }
@@ -142,7 +142,7 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-create__step--
   .#{$create-tearsheet-block-class}__section--description,
 .#{$create-tearsheet-block-class}
   .#{$create-tearsheet-block-class}__step--description {
-  @include type.type-style('body-long-01');
+  @include type.type-style('body-01');
 
   margin-bottom: $spacing-06;
 }

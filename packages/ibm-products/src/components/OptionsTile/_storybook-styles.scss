@@ -18,7 +18,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--options-tile;
 }
 
 .#{$block-class}__content p {
-  @include type.type-style('body-long-01');
+  @include type.type-style('body-01');
 
   margin-bottom: $spacing-06;
 }

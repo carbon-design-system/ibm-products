@@ -46,20 +46,20 @@
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal__title {
-  @include type.type-style('productive-heading-03');
+  @include type.type-style('heading-03');
 
   margin-bottom: $spacing-02;
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal__subtitle {
-  @include type.type-style('body-short-01');
+  @include type.type-style('body-compact-01');
 
   margin-bottom: $spacing-03;
   color: $text-secondary;
 }
 
 .#{c4p-settings.$pkg-prefix}--create-modal__description {
-  @include type.type-style('body-long-01');
+  @include type.type-style('body-01');
 
   padding-right: calc(20% - #{$spacing-05});
   margin: $spacing-03 0 $spacing-05 0;

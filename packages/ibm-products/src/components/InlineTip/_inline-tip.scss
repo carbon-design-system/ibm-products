@@ -84,7 +84,7 @@
 
       // layout: narrow, with image
       &.#{$block-class}__has-media {
-        padding: $spacing-07 $spacing-07 $spacing-05 $spacing-05;
+        padding: $spacing-07 $spacing-05 $spacing-05 $spacing-05;
       }
 
       .#{$block-class}__media {
@@ -93,6 +93,10 @@
         img {
           width: 100%;
         }
+      }
+
+      .#{$block-class}__content {
+        padding-right: $spacing-05;
       }
 
       .#{$block-class}__footer {

@@ -41,7 +41,7 @@ export default {
       options: ['None', 'Render a static image', 'Render an animation'],
       control: { type: 'radio' },
     },
-    secondaryButton: {
+    contentCTA: {
       options: ['None', '<InlineTipButton>', '<InlineTipLink>'],
       control: { type: 'radio' },
     },
@@ -55,10 +55,12 @@ const defaultProps = {
   closeIconDescription: 'Close',
   collapseButtonLabel: 'Read less',
   collapsible: false,
+  contentCTA: 'None',
   expandButtonLabel: 'Read more',
   media: 'None',
   narrow: false,
-  secondaryButton: 'None',
+  onClick: action(`Clicked the tertiary button`),
+  onClose: action(`Clicked the close button`),
   title: 'Use case-specific heading',
 };
 
@@ -66,7 +68,7 @@ const defaultProps = {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
-  const { media, narrow, secondaryButton } = args;
+  const { media, narrow, contentCTA } = args;
 
   const selectedMedia = (function () {
     switch (media) {
@@ -80,8 +82,8 @@ const Template = (args) => {
         return null;
     }
   })();
-  const selectedSecondaryButton = (function () {
-    switch (secondaryButton) {
+  const selectedContentCTA = (function () {
+    switch (contentCTA) {
       case '<InlineTipButton>':
         return (
           <InlineTipButton onClick={action(`Clicked the ghost button`)}>
@@ -106,7 +108,7 @@ const Template = (args) => {
         // onTodo={action('onTodo log action')}
         {...args}
         media={selectedMedia}
-        secondaryButton={selectedSecondaryButton}
+        contentCTA={selectedContentCTA}
       />
     </div>
   );
@@ -119,13 +121,5 @@ const Template = (args) => {
 export const inlineTip = prepareStory(Template, {
   args: {
     ...defaultProps,
-  },
-});
-
-export const withCloseButtons = prepareStory(Template, {
-  args: {
-    ...defaultProps,
-    closeButtonLabel: 'Show me',
-    onClose: action(`Clicked a close button`),
   },
 });

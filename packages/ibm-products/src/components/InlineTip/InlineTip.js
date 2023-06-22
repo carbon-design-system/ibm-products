@@ -44,6 +44,8 @@ const defaults = {
   collapseButtonLabel: 'Read less',
   expandButtonLabel: 'Read more',
   narrow: false,
+  onClick: () => {},
+  onClose: () => {},
 };
 
 /**
@@ -63,9 +65,10 @@ export let InlineTip = React.forwardRef(
       collapseButtonLabel = defaults.collapseButtonLabel,
       expandButtonLabel = defaults.expandButtonLabel,
       narrow = defaults.narrow,
+      onClick,
       onClose,
-      closeButtonLabel,
-      secondaryButton,
+      tertiaryButtonLabel,
+      contentCTA,
       title = defaults.title,
       media,
 
@@ -111,17 +114,15 @@ export let InlineTip = React.forwardRef(
         role="main"
         {...getDevtoolsProps(componentName)}
       >
-        {onClose && (
-          <Button
-            kind="ghost"
-            size="lg"
-            renderIcon={Close16}
-            iconDescription={closeIconDescription}
-            hasIconOnly
-            className={`${blockClass}__close-icon`}
-            onClick={onClose}
-          />
-        )}
+        <Button
+          kind="ghost"
+          size="lg"
+          renderIcon={Close16}
+          iconDescription={closeIconDescription}
+          hasIconOnly
+          className={`${blockClass}__close-icon`}
+          onClick={onClose}
+        />
         {/* Hide the idea icon if is narrow and showing an image */}
         {((!media && narrow) || !narrow) && (
           <div className={`${blockClass}__icon-idea`} tabIndex={-1}>
@@ -134,15 +135,12 @@ export let InlineTip = React.forwardRef(
           <section className={`${blockClass}__body`}>
             {childrenToRender}
             {/* Only show the secondary button when body is showing non-collapsed content */}
-            {secondaryButton &&
-              (!collapsible || (collapsible && !isCollapsed)) && (
-                <div className={`${blockClass}__secondary-btn`}>
-                  {secondaryButton}
-                </div>
-              )}
+            {contentCTA && (!collapsible || (collapsible && !isCollapsed)) && (
+              <div className={`${blockClass}__secondary-btn`}>{contentCTA}</div>
+            )}
           </section>
 
-          {(collapsible || closeButtonLabel) && (
+          {(collapsible || tertiaryButtonLabel) && (
             <footer className={`${blockClass}__footer`}>
               {/* Disable the collapsible feature if an image is visible */}
               {collapsible && !media && (
@@ -157,15 +155,15 @@ export let InlineTip = React.forwardRef(
                   {isCollapsed ? expandButtonLabel : collapseButtonLabel}
                 </Button>
               )}
-              {closeButtonLabel && (
+              {tertiaryButtonLabel && (
                 <Button
                   className={`${blockClass}__close-btn`}
                   size="md"
-                  onClick={onClose}
+                  onClick={onClick}
                   kind="tertiary"
                   renderIcon={Crossroads16}
                 >
-                  {closeButtonLabel}
+                  {tertiaryButtonLabel}
                 </Button>
               )}
             </footer>
@@ -205,11 +203,6 @@ InlineTip.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Defining the label will show a the tertiary button with the crossroads icon.
-   * You will still need to define the `onClose` method to trigger a callback.
-   */
-  closeButtonLabel: PropTypes.string,
-  /**
    * Tooltip text and aria label for the Close button icon.
    */
   closeIconDescription: PropTypes.string,
@@ -225,6 +218,12 @@ InlineTip.propTypes = {
    * This feature is disabled if `media` is specified.
    */
   collapsible: PropTypes.bool,
+  /**
+   * Optional "call to action" ghost button or link that can appear
+   * directly below the content. This component comes with pre-styled
+   * elements available to use: `InlineTipLink` and `InlineTipButton`.
+   */
+  contentCTA: PropTypes.node,
   /**
    * The label for the expand button.
    * This button is not visible if `media` is specified.
@@ -251,18 +250,18 @@ InlineTip.propTypes = {
    */
   narrow: PropTypes.bool,
   /**
-   * Function to call when the InlineTip closes.
-   *
-   * Defining the `onClose` prop will show the "X" close button
-   * in the top-right corner of the component.
+   * Function to call when the tertiary button is clicked.
+   */
+  onClick: PropTypes.func,
+  /**
+   * Function to call when the InlineTip is closed via the "X" button.
    */
   onClose: PropTypes.func,
   /**
-   * Optional button or link that can appear below the body text.
-   * This component comes with pre-styled elements to use:
-   * `InlineTipLink` and `InlineTipButton`.
+   * Defining the label will show a the tertiary button with the crossroads icon.
+   * You will still need to define the `onClose` method to trigger a callback.
    */
-  secondaryButton: PropTypes.node,
+  tertiaryButtonLabel: PropTypes.string,
   /**
    * The title of the InlineTip.
    */

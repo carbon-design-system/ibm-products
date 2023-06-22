@@ -255,9 +255,9 @@ export const expectError = (message, test) => {
  * @param {Function} test the test function to call, during which the calls to
  * console.error will be expected.
  */
-export const expectMultipleError = (messages, test) => {
+export const expectMultipleError = async (messages, test) => {
   const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
-  const result = test();
+  const result = await test();
   expect(error).toBeCalledTimes(messages.length);
 
   messages.forEach((args, index) =>

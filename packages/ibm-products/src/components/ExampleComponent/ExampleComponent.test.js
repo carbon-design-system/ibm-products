@@ -42,7 +42,7 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = renderComponent();
-    await expect(container).toBeAccessible(componentName, 'scan_label');
+    await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
@@ -74,14 +74,17 @@ describe(componentName, () => {
       .forEach((button) => expect(button).toHaveProperty('disabled', true));
   });
 
-  it('notifies a click on each button', () => {
+  it('notifies a click on each button', async () => {
     const primaryHandler = jest.fn();
     const secondaryHandler = jest.fn();
-    renderComponent({
+    await renderComponent({
       onPrimaryClick: primaryHandler,
       onSecondaryClick: secondaryHandler,
     });
-    screen.getAllByRole('button').forEach(userEvent.click);
+
+    const buttons = screen.getAllByRole('button');
+    await Promise.all(buttons.map((button) => userEvent.click(button)));
+
     expect(primaryHandler).toBeCalledTimes(1);
     expect(secondaryHandler).toBeCalledTimes(1);
   });

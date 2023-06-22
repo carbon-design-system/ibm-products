@@ -171,7 +171,7 @@ const renderFullPageWithStepChildrenOutside = ({ ...rest } = {}) =>
 describe(componentName, () => {
   it.skip('has no accessibility violations', async () => {
     const { container } = renderComponent({ ...defaultFullPageProps });
-    await expect(container).toBeAccessible(componentName, 'scan_label');
+    await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 

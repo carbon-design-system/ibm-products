@@ -12,6 +12,7 @@ import { Lightning, Bee } from '@carbon/react/icons';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
 import { pkg, carbon } from '../../settings';
+import { act } from 'react-dom/test-utils';
 const blockClass = `${pkg.prefix}--action-bar`;
 
 const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
@@ -122,7 +123,7 @@ describe(ActionBar.displayName, () => {
     });
   });
 
-  it('Renders an action bar with overflow items', () => {
+  it('Renders an action bar with overflow items', async () => {
     // not enough room so should see an overflow.
     render(
       <TestActionBar
@@ -147,7 +148,7 @@ describe(ActionBar.displayName, () => {
     const ofBtn = screen.getByLabelText(overflowAriaLabel, {
       selector: `.${blockClass}-overflow-items`,
     });
-    userEvent.click(ofBtn);
+    await act(async () => userEvent.click(ofBtn));
 
     // <ul role='menu' /> but default <ul> role of list used for query
     // see https://testing-library.com/docs/queries/byrole/#api

@@ -22,6 +22,7 @@ import ExampleLogo from './_story-assets/example-logo.svg';
 import ansibleLogo from './_story-assets/ansible-logo.png';
 import grafanaLogo from './_story-assets/grafana-logo.png';
 import jsLogo from './_story-assets/js-logo.png';
+import { act } from 'react-dom/test-utils';
 
 const blockClass = `${pkg.prefix}--about-modal`;
 const componentName = AboutModal.displayName;
@@ -56,8 +57,8 @@ const title = (
 );
 
 // render an AboutModal with version, logo, title, copyrightText and any other required props
-const renderComponent = ({ ...rest } = {}) =>
-  render(
+const renderComponent = async ({ ...rest } = {}) =>
+  await render(
     <main>
       <AboutModal
         {...{
@@ -160,8 +161,9 @@ describe(componentName, () => {
     expect(screen.getByRole('presentation')).toHaveClass('is-visible');
   });
 
-  it('is not visible when open is not true', () => {
-    const { container } = renderComponent({ open: false });
+  it('is not visible when open is not true', async () => {
+    const { container } = await renderComponent({ open: false });
+
     expect(container.firstChild).not.toHaveClass('is-visible');
   });
 
@@ -170,19 +172,24 @@ describe(componentName, () => {
     expect(screen.getByRole('presentation')).toHaveClass(className);
   });
 
-  it('calls onClose() when modal is closed', () => {
-    renderComponent({ open: true, onClose: onCloseReturnsTrue });
+  it('calls onClose() when modal is closed', async () => {
+    await renderComponent({ open: true, onClose: onCloseReturnsTrue });
     const aboutModal = screen.getByRole('presentation');
     const closeButton = screen.getByRole('button', {
       name: closeIconDescription,
     });
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
-    userEvent.click(closeButton);
+
+    await act(async () => {
+      await userEvent.click(closeButton);
+    });
+
+    expect(aboutModal).not.toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
   });
 
-  it('allows veto when modal is closed', () => {
+  it('allows veto when modal is closed', async () => {
     renderComponent({ open: true, onClose: onCloseReturnsFalse });
     const aboutModal = screen.getByRole('presentation');
     const closeButton = screen.getByRole('button', {
@@ -190,7 +197,9 @@ describe(componentName, () => {
     });
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
-    userEvent.click(closeButton);
+    await act(async () => {
+      await userEvent.click(closeButton);
+    });
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsFalse).toHaveBeenCalledTimes(1);
   });

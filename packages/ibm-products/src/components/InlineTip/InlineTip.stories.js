@@ -45,6 +45,9 @@ export default {
       options: ['None', 'Render a static image', 'Render an animation'],
       control: { type: 'radio' },
     },
+    narrow: {
+      control: { type: null },
+    },
   },
 };
 

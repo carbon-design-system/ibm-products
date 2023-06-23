@@ -31,12 +31,14 @@ const dataTestId = uuidv4();
 
 describe(componentName, () => {
   it('renders a component InlineTip', () => {
-    render(<InlineTip title={title}> </InlineTip>);
+    render(<InlineTip title={title}>{children}</InlineTip>);
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
   it.skip('has no accessibility violations', async () => {
-    const { container } = render(<InlineTip title={title}> </InlineTip>);
+    const { container } = render(
+      <InlineTip title={title}>{children}</InlineTip>
+    );
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });

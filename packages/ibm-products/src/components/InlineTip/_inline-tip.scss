@@ -54,14 +54,10 @@
 
       // layout: wide, with image
       &.#{$block-class}__has-media {
-        padding: 0;
-
-        .#{$block-class}__content {
-          padding: $spacing-05 $spacing-10 $spacing-05 $spacing-09;
-        }
+        padding-right: $spacing-09;
 
         .#{$block-class}__media {
-          padding: $spacing-03 $spacing-07 $spacing-03 0;
+          padding-left: $spacing-10;
 
           img {
             display: block;
@@ -84,7 +80,8 @@
 
       // layout: narrow, with image
       &.#{$block-class}__has-media {
-        padding: $spacing-07 $spacing-05 $spacing-05 $spacing-05;
+        padding-top: $spacing-07;
+        padding-right: $spacing-05;
       }
 
       .#{$block-class}__media {

@@ -72,7 +72,6 @@ export let InlineTipButton = React.forwardRef(
           }
         )}
         ref={ref}
-        role="main"
         {...getDevtoolsProps(componentName)}
         size="md"
         kind="ghost"

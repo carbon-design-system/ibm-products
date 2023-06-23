@@ -73,7 +73,6 @@ export let InlineTipLink = React.forwardRef(
           }
         )}
         ref={ref}
-        role="main"
         {...getDevtoolsProps(componentName)}
         renderIcon={Launch16}
       >

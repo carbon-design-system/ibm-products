@@ -37,12 +37,12 @@ export default {
     },
   },
   argTypes: {
-    media: {
-      options: ['None', 'Render a static image', 'Render an animation'],
-      control: { type: 'radio' },
-    },
     contentCTA: {
       options: ['None', '<InlineTipButton>', '<InlineTipLink>'],
+      control: { type: 'radio' },
+    },
+    media: {
+      options: ['None', 'Render a static image', 'Render an animation'],
       control: { type: 'radio' },
     },
   },
@@ -58,7 +58,6 @@ const defaultProps = {
   contentCTA: 'None',
   expandButtonLabel: 'Read more',
   media: 'None',
-  narrow: false,
   onClick: action(`Clicked the tertiary button`),
   onClose: action(`Clicked the close button`),
   title: 'Use case-specific heading',
@@ -102,7 +101,11 @@ const Template = (args) => {
   })();
 
   return (
-    <div className={cx([narrow ? 'inline-tip-narrow' : 'inline-tip-wide'])}>
+    <div
+      className={cx([
+        narrow ? 'storybook--inline-tip-narrow' : 'storybook--inline-tip-wide',
+      ])}
+    >
       <InlineTip
         // TODO: handle events with action or local handler.
         // onTodo={action('onTodo log action')}
@@ -120,6 +123,14 @@ const Template = (args) => {
  */
 export const inlineTip = prepareStory(Template, {
   args: {
+    narrow: false,
+    ...defaultProps,
+  },
+});
+
+export const inlineTipNarrow = prepareStory(Template, {
+  args: {
+    narrow: true,
     ...defaultProps,
   },
 });

@@ -56,9 +56,9 @@ const Template = (args) => {
 
       <Coachmark theme={theme}>
         <CoachmarkOverlayElements
-          closeButtonLabel="THIS IS IT"
-          nextButtonLabel="Next THIS ONE"
-          previousButtonLabel="Back THIS ONE"
+          closeButtonLabel="Close"
+          nextButtonLabel="Next"
+          previousButtonLabel="Back"
         >
           <CoachmarkOverlayElement
             title="Mid-height Coachmark"

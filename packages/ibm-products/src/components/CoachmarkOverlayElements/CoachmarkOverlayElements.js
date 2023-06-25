@@ -53,6 +53,7 @@ export let CoachmarkOverlayElements = React.forwardRef(
     const [scrollPosition, setScrollPosition] = useState(0);
     const [currentProgStep, setCurrentProgStep] = useState(0);
     const coachmark = useCoachmark();
+
     const numProgSteps = Children.count(children);
     const progStepFloor = 0;
     const progStepCeil = numProgSteps - 1;
@@ -65,7 +66,15 @@ export let CoachmarkOverlayElements = React.forwardRef(
         buttonFocusRef.current.focus();
       }
     }, []);
-
+    if (!coachmark) {
+      return (
+        <div>
+          The CoachmarkOverlayElements is a composable container element which
+          should be used only within the scope of a Coachmark or a
+          CoachmarkFixed component.
+        </div>
+      );
+    }
     return (
       <section
         {
@@ -82,7 +91,7 @@ export let CoachmarkOverlayElements = React.forwardRef(
           }
         )}
         ref={ref}
-        role="main"
+        // role="main"
         {...getDevtoolsProps(componentName)}
       >
         {media &&

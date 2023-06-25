@@ -53,9 +53,7 @@ or 'dark') to display properly within your usage.
 
 ```jsx
 <Coachmark
-  theme={'dark'}
-  align={'bottom'}
-  positionTune={{ x: 15, y: 10 }}
+  theme={'light'}
   target={<CoachmarkBeacon label="Show information" kind={'tooltip'} />}
 >
   <CoachmarkOverlayElements closeButtonLabel="Done">
@@ -83,7 +81,12 @@ or 'dark') to display properly within your usage.
   align={'bottom'}
   overlayKind={'floating'}
   target={
-    <CoachmarkButton kind="tertiary" size="md" renderIcon={Launch16}>
+    <CoachmarkButton
+      kind="tertiary"
+      size="md"
+      renderIcon={Launch16}
+      label="Show Information"
+    >
       Click Me
     </CoachmarkButton>
   }

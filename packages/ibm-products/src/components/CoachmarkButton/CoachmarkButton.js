@@ -25,8 +25,16 @@ const componentName = 'CoachmarkButton';
  * Use CoachmarkButton for the target prop of a Coachmark component.
  */
 export let CoachmarkButton = React.forwardRef(
-  ({ children, className, ...rest }, ref) => {
+  ({ className, label, ...rest }, ref) => {
     const coachmark = useCoachmark();
+    if (!coachmark) {
+      return (
+        <div>
+          CoachmarkButton is to be use exclusively within the target prop of
+          Coachmark
+        </div>
+      );
+    }
     return (
       <Button
         {
@@ -44,10 +52,11 @@ export let CoachmarkButton = React.forwardRef(
         )}
         ref={ref}
         role="button"
+        aria-label={label}
         {...getDevtoolsProps(componentName)}
         {...coachmark.buttonProps}
       >
-        {children}
+        {label}
       </Button>
     );
   }
@@ -65,12 +74,11 @@ CoachmarkButton.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 CoachmarkButton.propTypes = {
   /**
-   * Provide the contents of the CoachmarkButton.
-   */
-  children: PropTypes.node.isRequired,
-
-  /**
    * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
+  /**
+   * The aria label.
+   */
+  label: PropTypes.string.isRequired,
 };

@@ -16,8 +16,8 @@ import {
   CoachmarkBeacon,
   CoachmarkOverlayElement,
   CoachmarkOverlayElements,
-} from '..'; // CoachmarkButton
-import { BEACON_KIND } from './utils/enums'; //COACHMARK_OVERLAY_KIND
+} from '..';
+import { BEACON_KIND } from './utils/enums';
 const blockClass = `${pkg.prefix}--coachmark`;
 const componentName = Coachmark.displayName;
 
@@ -56,8 +56,8 @@ const renderCoachmark = ({ ...rest } = {}, children = childrenContent) =>
 
 describe(componentName, () => {
   it('renders a component Coachmark', () => {
-    renderCoachmark();
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+    renderCoachmark({ 'data-testid': dataTestId });
+    expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
@@ -78,8 +78,9 @@ describe(componentName, () => {
   it('applies className to the containing node', () => {
     renderCoachmark({
       className,
+      'data-testid': dataTestId,
     });
-    expect(screen.getByRole('main')).toHaveClass(className);
+    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {

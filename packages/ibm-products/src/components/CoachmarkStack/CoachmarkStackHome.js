@@ -47,6 +47,15 @@ export let CoachmarkStackHome = forwardRef(
     },
     ref
   ) => {
+    if (!navLinkLabels) {
+      return (
+        <div>
+          CoachmarkStackHome is a Novice to Pro internal component and is not
+          intended for general use.
+        </div>
+      );
+    }
+
     const portalNode = portalSelector
       ? document.querySelector(portalSelector)
       : document.body;

@@ -51,6 +51,7 @@ const Template = (args) => {
       target={
         <CoachmarkButton
           kind="tertiary"
+          label="Show Information"
           size="md"
           renderIcon={Launch16}
           {...args}
@@ -74,7 +75,7 @@ const Template = (args) => {
  */
 export const coachmarkButton = prepareStory(Template, {
   args: {
-    children: 'Click Me',
+    label: 'Click Me',
     className: 'myButton',
   },
 });

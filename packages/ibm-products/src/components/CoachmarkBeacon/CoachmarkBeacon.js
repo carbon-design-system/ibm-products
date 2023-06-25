@@ -30,7 +30,14 @@ const defaults = {
 export let CoachmarkBeacon = React.forwardRef(
   ({ label, className, kind = defaults.kind, ...rest }, ref) => {
     const coachmark = useCoachmark();
-
+    if (!coachmark) {
+      return (
+        <div>
+          CoachmarkBeacon is to be use exclusively within the target prop of
+          Coachmark
+        </div>
+      );
+    }
     const overlayPositionStyle = {
       top: coachmark.positionTune?.y ?? 0,
       left: coachmark.positionTune?.x ?? 0,

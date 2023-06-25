@@ -43,6 +43,7 @@ export let CoachmarkTagline = React.forwardRef(
     ref
   ) => {
     const coachmark = useCoachmark();
+
     return (
       <div
         {
@@ -55,12 +56,12 @@ export let CoachmarkTagline = React.forwardRef(
           coachmark.isOpen && `${blockClass}--is-open`
         )}
         ref={ref}
-        role="main"
         {...getDevtoolsProps(componentName)}
       >
         <div
           {...rest}
           className={`${blockClass}__cta`}
+          role="button"
           {...coachmark.buttonProps}
         >
           <div className={`${blockClass}__idea`}>

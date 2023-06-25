@@ -34,7 +34,7 @@ one of two states, animated or active.
 
 ## Example usage
 
-<Canvas className="coachmarkExample">
+<Canvas className="coachmarkExample" withSource="none">
   <div className="CoachmarkBaseExampleUsage">
     <Story id={getStoryId(CoachmarkBeacon.displayName, 'coachmark-beacon')} />
   </div>
@@ -44,11 +44,16 @@ one of two states, animated or active.
 
 ```jsx
 <Coachmark
-  ...
-  target={<CoachmarkBeacon label='Show information' kind={'default} />}>
-  ...
+  theme={'light'}
+  target={<CoachmarkBeacon label="Show information" kind={'tooltip'} />}
+>
+  <CoachmarkOverlayElements closeButtonLabel="Done">
+    <CoachmarkOverlayElement
+      title="Hello World"
+      description="this is a description test"
+    />
+  </CoachmarkOverlayElements>
 </Coachmark>
-
 ```
 
 ## Component API

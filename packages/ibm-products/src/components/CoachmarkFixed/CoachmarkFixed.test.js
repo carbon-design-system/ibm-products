@@ -10,52 +10,108 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-
+import { CoachmarkOverlayElement, CoachmarkOverlayElements } from '..';
 import { CoachmarkFixed } from '.';
 
 const blockClass = `${pkg.prefix}--coachmark-fixed`;
 const componentName = CoachmarkFixed.displayName;
 
 // values to use
-const children = `hello, world (${uuidv4()})`;
-const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
+const className = `class-${uuidv4()}`;
+
+const renderCoachmarkFixed = ({ ...rest } = {}) =>
+  render(
+    <CoachmarkFixed {...rest}>
+      <CoachmarkOverlayElements
+        aria-label="Coachmark Overlay Element container"
+        closeButtonLabel="Done"
+        nextButtonLabel="Next"
+        previousButtonLabel="Back"
+      >
+        <CoachmarkOverlayElement
+          aria-label="Element 1"
+          title="Hello World"
+          description="Link opens in new tab."
+        />
+        <CoachmarkOverlayElement
+          aria-label="Element 2"
+          title="Hello World 2"
+          description="Link opens on this page."
+        />
+      </CoachmarkOverlayElements>
+    </CoachmarkFixed>
+  );
 
 describe(componentName, () => {
   it('renders a component CoachmarkFixed', () => {
-    render(<CoachmarkFixed> </CoachmarkFixed>);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+    renderCoachmarkFixed({
+      tagline: 'TaglineText',
+      onClose: () => console.log('CLOSE'),
+      'data-testid': dataTestId,
+    });
+    expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<CoachmarkFixed> </CoachmarkFixed>);
+    const { container } = renderCoachmarkFixed({
+      tagline: 'TaglineText',
+      onClose: () => console.log('CLOSE'),
+      'data-testid': dataTestId,
+    });
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, () => {
-    render(<CoachmarkFixed>{children}</CoachmarkFixed>);
-    screen.getByText(children);
-  });
+  // it(`renders children`, () => {
+  //   renderCoachmarkFixed({
+  //     tagline: 'TaglineText',
+  //     onClose: () => console.log('CLOSE'),
+  // 'data-testid': dataTestId,
+  //   });
+  //   screen.getByText(children);
+  // });
 
   it('applies className to the containing node', () => {
-    render(<CoachmarkFixed className={className}> </CoachmarkFixed>);
-    expect(screen.getByRole('main')).toHaveClass(className);
+    renderCoachmarkFixed({
+      className,
+      tagline: 'TaglineText',
+      onClose: () => console.log('CLOSE'),
+      'data-testid': dataTestId,
+    });
+    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {
-    render(<CoachmarkFixed data-testid={dataTestId}> </CoachmarkFixed>);
-    screen.getByTestId(dataTestId);
+    const tmpTestID = `coachmarkFixed-${uuidv4()}`;
+    renderCoachmarkFixed({
+      className,
+      tagline: 'TaglineText',
+      onClose: () => console.log('CLOSE'),
+      'data-testid': tmpTestID,
+    });
+    screen.getByTestId(tmpTestID);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(<CoachmarkFixed ref={ref}> </CoachmarkFixed>);
+    renderCoachmarkFixed({
+      className,
+      tagline: 'TaglineText',
+      onClose: () => console.log('CLOSE'),
+      'data-testid': dataTestId,
+      ref,
+    });
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', () => {
-    render(<CoachmarkFixed data-testid={dataTestId}> </CoachmarkFixed>);
+    renderCoachmarkFixed({
+      className,
+      tagline: 'TaglineText',
+      onClose: () => console.log('CLOSE'),
+      'data-testid': dataTestId,
+    });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

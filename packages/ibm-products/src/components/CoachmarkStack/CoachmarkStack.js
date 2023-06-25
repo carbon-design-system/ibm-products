@@ -10,7 +10,6 @@ import React, {
   Children,
   cloneElement,
   useEffect,
-  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
@@ -29,6 +28,7 @@ import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-stack`;
+const elementBlockClass = `${pkg.prefix}--coachmark-stack-element`;
 const componentName = 'CoachmarkStack';
 
 const defaults = {
@@ -126,16 +126,19 @@ export let CoachmarkStack = React.forwardRef(
 
     useEffect(() => {
       setTimeout(() => {
-        setParentHeight(stackHomeRef.current.clientHeight);
+        if (stackHomeRef.current) {
+          setParentHeight(stackHomeRef.current.clientHeight);
+        }
       }, 0);
-    }, []);
+    }, [stackHomeRef]);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
       const targetSelectedItem = selectedItemNumber - 1;
-      stackHomeRef.current.style.height = `${parentHeight}px`;
-      if (!isOpen || targetSelectedItem < 0) {
+
+      if (!isOpen || targetSelectedItem < 0 || !stackHomeRef.current) {
         return;
       }
+      stackHomeRef.current.style.height = `${parentHeight}px`;
       const targetHomeHeight =
         stackedCoachmarkRefs.current[targetSelectedItem].clientHeight;
 
@@ -145,15 +148,15 @@ export let CoachmarkStack = React.forwardRef(
     const clonedChildren = Children.map(childArray, (child, idx) => {
       // Clone each child Coachmark and override specific props
       return cloneElement(child, {
-        className: cx(blockClass, child.props.className),
-        overlayClassName: cx(
-          blockClass,
-          idx === selectedItemNumber - 1 && `${blockClass}--is-visible`
-        ),
+        className: cx(elementBlockClass, child.props.className),
         onClose: handleClose,
+        overlayClassName: cx(
+          elementBlockClass,
+          idx === selectedItemNumber - 1 && `${elementBlockClass}--is-visible`
+        ),
         overlayKind: COACHMARK_OVERLAY_KIND.STACKED,
+        overlayRef: (ref) => (stackedCoachmarkRefs.current[idx] = ref),
         portalSelector: portalSelector,
-        ref: (ref) => (stackedCoachmarkRefs.current[idx] = ref),
       });
     });
 
@@ -163,9 +166,12 @@ export let CoachmarkStack = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(`${pkg.prefix}--coachmark-overlay--stack`, className)}
+        className={cx(
+          blockClass,
+          `${pkg.prefix}--coachmark-overlay--stack`,
+          className
+        )}
         ref={ref}
-        role="main"
         {...getDevtoolsProps(componentName)}
       >
         <CoachmarkContext.Provider value={contextValue}>
@@ -179,10 +185,11 @@ export let CoachmarkStack = React.forwardRef(
             // These class names match the default "coachmark" class names
             `${pkg.prefix}--coachmark-overlay`,
             `${pkg.prefix}--coachmark-overlay__${theme}`,
-            blockClass,
-            selectedItemNumber > 0 && `${blockClass}--is-stacked`,
-            selectedItemNumber > 0 && `${blockClass}--is-stacked__${theme}`,
-            isOpen && `${blockClass}--is-visible`
+            elementBlockClass,
+            selectedItemNumber > 0 && `${elementBlockClass}--is-stacked`,
+            selectedItemNumber > 0 &&
+              `${elementBlockClass}--is-stacked__${theme}`,
+            isOpen && `${elementBlockClass}--is-visible`
           )}
           description={description}
           media={media}

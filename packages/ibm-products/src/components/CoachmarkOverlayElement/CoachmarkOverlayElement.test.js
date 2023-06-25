@@ -7,68 +7,115 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
-
+import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-
+import { Coachmark, CoachmarkBeacon, CoachmarkOverlayElements } from '..';
 import { CoachmarkOverlayElement } from '.';
+import { BEACON_KIND } from '../Coachmark/utils/enums';
 
 const blockClass = `${pkg.prefix}--coachmark-overlay-element`;
 const componentName = CoachmarkOverlayElement.displayName;
 
 // values to use
-const children = `hello, world (${uuidv4()})`;
-const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
+const className = `class-${uuidv4()}`;
+
+const renderCoachmarkWithOverlayElement = ({ ...rest } = {}) =>
+  render(
+    <Coachmark
+      theme={'dark'}
+      align={'bottom'}
+      positionTune={{ x: 0, y: 0 }}
+      target={
+        <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
+      }
+    >
+      <CoachmarkOverlayElements closeButtonLabel="Done">
+        <CoachmarkOverlayElement {...rest} />
+      </CoachmarkOverlayElements>
+    </Coachmark>
+  );
 
 describe(componentName, () => {
   it('renders a component CoachmarkOverlayElement', () => {
-    render(<CoachmarkOverlayElement> </CoachmarkOverlayElement>);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+    renderCoachmarkWithOverlayElement({
+      title: 'Test title',
+      description: 'This is a test description.',
+      'data-testid': dataTestId,
+    });
+    const beaconOrButton = screen.getByRole('button', {
+      name: 'Show information',
+    });
+    userEvent.click(beaconOrButton);
+    expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(
-      <CoachmarkOverlayElement> </CoachmarkOverlayElement>
-    );
+    const { container } = renderCoachmarkWithOverlayElement({
+      title: 'Test title',
+      description: 'This is a test description.',
+    });
+    const beaconOrButton = screen.getByRole('button', {
+      name: 'Show information',
+    });
+    userEvent.click(beaconOrButton);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, () => {
-    render(<CoachmarkOverlayElement>{children}</CoachmarkOverlayElement>);
-    screen.getByText(children);
-  });
-
   it('applies className to the containing node', () => {
-    render(
-      <CoachmarkOverlayElement className={className}> </CoachmarkOverlayElement>
-    );
-    expect(screen.getByRole('main')).toHaveClass(className);
+    renderCoachmarkWithOverlayElement({
+      title: 'Test title',
+      description: 'This is a test description.',
+      'data-testid': dataTestId,
+      className,
+    });
+    const beaconOrButton = screen.getByRole('button', {
+      name: 'Show information',
+    });
+    userEvent.click(beaconOrButton);
+    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {
-    render(
-      <CoachmarkOverlayElement data-testid={dataTestId}>
-        {' '}
-      </CoachmarkOverlayElement>
-    );
-    screen.getByTestId(dataTestId);
+    const tmpTestID = `coachmarkOverlayElement-${uuidv4()}`;
+    renderCoachmarkWithOverlayElement({
+      title: 'Test title',
+      description: 'This is a test description.',
+      'data-testid': tmpTestID,
+    });
+    const beaconOrButton = screen.getByRole('button', {
+      name: 'Show information',
+    });
+    userEvent.click(beaconOrButton);
+    screen.getByTestId(tmpTestID);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(<CoachmarkOverlayElement ref={ref}> </CoachmarkOverlayElement>);
+    renderCoachmarkWithOverlayElement({
+      title: 'Test title',
+      description: 'This is a test description.',
+      ref,
+    });
+    const beaconOrButton = screen.getByRole('button', {
+      name: 'Show information',
+    });
+    userEvent.click(beaconOrButton);
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', () => {
-    render(
-      <CoachmarkOverlayElement data-testid={dataTestId}>
-        {' '}
-      </CoachmarkOverlayElement>
-    );
-
+    renderCoachmarkWithOverlayElement({
+      title: 'Test title',
+      description: 'This is a test description.',
+      'data-testid': dataTestId,
+    });
+    const beaconOrButton = screen.getByRole('button', {
+      name: 'Show information',
+    });
+    userEvent.click(beaconOrButton);
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );

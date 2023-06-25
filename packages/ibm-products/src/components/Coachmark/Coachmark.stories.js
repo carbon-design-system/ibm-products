@@ -115,7 +115,12 @@ export const floating = prepareStory(Template, {
     align: 'bottom',
     overlayKind: COACHMARK_OVERLAY_KIND.FLOATING,
     target: (
-      <CoachmarkButton kind="tertiary" size="md" renderIcon={Launch16}>
+      <CoachmarkButton
+        kind="tertiary"
+        size="md"
+        renderIcon={Launch16}
+        label="Show Information"
+      >
         Click Me
       </CoachmarkButton>
     ),

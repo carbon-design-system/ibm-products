@@ -7,7 +7,7 @@
 
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
-import PropTypes from 'prop-types';
+import PropTypes, { Component } from 'prop-types';
 import { createPortal } from 'react-dom';
 import { CoachmarkOverlay } from './CoachmarkOverlay';
 import { CoachmarkContext } from './utils/context';
@@ -42,6 +42,7 @@ export let Coachmark = forwardRef(
       onClose = defaults.onClose,
       overlayClassName,
       overlayKind = defaults.overlayKind,
+      overlayRef,
       portalSelector,
       positionTune,
       target,
@@ -61,11 +62,10 @@ export let Coachmark = forwardRef(
     const [shouldResetPosition, setShouldResetPosition] = useState(false);
     const [targetRect, setTargetRect] = useState();
     const [targetOffset, setTargetOffset] = useState({ x: 0, y: 0 });
-    //const coachmarkRef = useRef();
-    const overlayRef = useRef();
+    const overlayBackupRef = useRef();
     const backupRef = useRef();
-    //const overlayRef = ref || backupRef;
-    const coachmarkRef = ref || backupRef;
+    const _coachmarkRef = ref || backupRef;
+    const _overlayRef = overlayRef || overlayBackupRef;
     const closeOverlay = () => {
       setIsOpen(false);
     };
@@ -135,25 +135,29 @@ export let Coachmark = forwardRef(
       return () => setIsOpen(false);
     }, []);
 
-    useClickOutsideElement(coachmarkRef, overlayRef, overlayKind, closeOverlay);
+    useClickOutsideElement(
+      _coachmarkRef,
+      _overlayRef,
+      overlayKind,
+      closeOverlay
+    );
     useWindowEvent('resize', handleResize);
     return (
       <CoachmarkContext.Provider value={contextValue}>
         <div
           className={cx(blockClass, `${blockClass}__${theme}`, className)}
-          ref={coachmarkRef}
+          ref={_coachmarkRef}
           {
             // Pass through any other property values as HTML attributes.
             ...rest
           }
-          role="main"
           {...getDevtoolsProps(componentName)}
         >
           {target}
           {isOpen &&
             createPortal(
               <CoachmarkOverlay
-                ref={overlayRef}
+                ref={_overlayRef}
                 fixedIsVisible={false}
                 kind={overlayKind}
                 onClose={handleClose}
@@ -224,6 +228,14 @@ Coachmark.propTypes = {
    * What kind or style of Coachmark to render.
    */
   overlayKind: PropTypes.oneOf(['tooltip', 'floating', 'stacked']),
+
+  overlayRef: PropTypes.oneOfType([
+    // Either a function
+    PropTypes.func,
+    // Or the instance of a DOM native element (see the note about SSR)
+    PropTypes.shape({ current: PropTypes.instanceOf(Component) }),
+  ]),
+
   /**
    * By default, the Coachmark will be appended to the end of `document.body`.
    * The Coachmark will remain persistent as the user navigates the app until

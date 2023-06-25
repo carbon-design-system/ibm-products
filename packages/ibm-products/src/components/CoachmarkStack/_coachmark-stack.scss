@@ -15,10 +15,11 @@
   // The block part of our conventional BEM class names (blockClass__E--M).
 
   $block-class: #{$pkg-prefix}--coachmark-stack;
+  $elements-block-class: #{$pkg-prefix}--coachmark-stack-element;
   $overlay-class: #{$prefix}--coachmark-overlay;
   $stack-home-class: #{$pkg-prefix}--coachmark-stacked-home;
 
-  .#{$block-class} {
+  .#{$elements-block-class} {
     $block: &;
 
     position: fixed;

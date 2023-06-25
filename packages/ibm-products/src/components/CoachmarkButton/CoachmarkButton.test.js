@@ -10,54 +10,83 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-
+import {
+  Coachmark,
+  CoachmarkOverlayElement,
+  CoachmarkOverlayElements,
+} from '..';
 import { CoachmarkButton } from '.';
 
 const blockClass = `${pkg.prefix}--coachmark-button`;
 const componentName = CoachmarkButton.displayName;
 
 // values to use
-const children = `hello, world (${uuidv4()})`;
+const buttonChildren = `hello, world (${uuidv4()})`;
+const childDataTestId = `button-${uuidv4()}`;
 const className = `class-${uuidv4()}`;
-const dataTestId = uuidv4();
+
+const renderCoachmarkWithButton = ({ ...rest } = {}) =>
+  render(
+    <Coachmark
+      theme={'dark'}
+      align={'bottom'}
+      positionTune={{ x: 0, y: 0 }}
+      target={
+        <CoachmarkButton
+          data-testid={childDataTestId}
+          kind="tertiary"
+          label="Show Information"
+          size="md"
+          {...rest}
+        />
+      }
+    >
+      <CoachmarkOverlayElements closeButtonLabel="Done">
+        <CoachmarkOverlayElement
+          title="Hello World"
+          description="this is a description test"
+        />
+      </CoachmarkOverlayElements>
+    </Coachmark>
+  );
 
 describe(componentName, () => {
   it('renders a component CoachmarkButton', () => {
-    render(<CoachmarkButton> </CoachmarkButton>);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+    renderCoachmarkWithButton({ children: buttonChildren });
+    expect(screen.getByTestId(childDataTestId)).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<CoachmarkButton> </CoachmarkButton>);
+    const { container } = renderCoachmarkWithButton({
+      children: buttonChildren,
+    });
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, () => {
-    render(<CoachmarkButton>{children}</CoachmarkButton>);
-    screen.getByText(children);
-  });
-
   it('applies className to the containing node', () => {
-    render(<CoachmarkButton className={className}> </CoachmarkButton>);
-    expect(screen.getByRole('main')).toHaveClass(className);
+    renderCoachmarkWithButton({ className, children: buttonChildren });
+    expect(screen.getByTestId(childDataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {
-    render(<CoachmarkButton data-testid={dataTestId}> </CoachmarkButton>);
-    screen.getByTestId(dataTestId);
+    const tmpTestID = `buttonTesting-${uuidv4()}`;
+    renderCoachmarkWithButton({
+      'data-testid': tmpTestID,
+      children: buttonChildren,
+    });
+    screen.getByTestId(tmpTestID);
   });
 
   it('forwards a ref to an appropriate node', () => {
-    const ref = React.createRef();
-    render(<CoachmarkButton ref={ref}> </CoachmarkButton>);
-    expect(ref.current).toHaveClass(blockClass);
+    const testRef = React.createRef();
+    renderCoachmarkWithButton({ ref: testRef, children: buttonChildren });
+    expect(testRef.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', () => {
-    render(<CoachmarkButton data-testid={dataTestId}> </CoachmarkButton>);
-
-    expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
+    renderCoachmarkWithButton({ children: buttonChildren });
+    expect(screen.getByTestId(childDataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
   });

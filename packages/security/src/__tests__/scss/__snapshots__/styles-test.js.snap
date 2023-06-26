@@ -27106,8 +27106,13 @@ optgroup.bx--select-optgroup:disabled,
 .bx--modal .bx--dropdown-list,
 .bx--modal .bx--number input[type=number],
 .bx--modal .bx--date-picker__input,
-.bx--modal .bx--multi-select {
+.bx--modal .bx--multi-select,
+.bx--modal .bx--number__control-btn::before,
+.bx--modal .bx--number__control-btn::after {
   background-color: var(--cds-field-02, #393939);
+}
+.bx--modal .bx--number__rule-divider {
+  background-color: var(--cds-decorative-01, #525252);
 }
 
 .bx--modal.is-visible .bx--modal-container {

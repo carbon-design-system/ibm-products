@@ -14,19 +14,20 @@
 .welcome-container--outer {
   width: 100%;
   height: 100vh;
+  /* stylelint-disable-next-line carbon/theme-token-use */
   background-color: colors.$purple-10;
 }
 
 .welcome__container--inner {
+  display: flex;
+  max-width: 1586px;
   /* stylelint-disable-next-line carbon/theme-token-use */
   color: colors.$black;
-  display: flex;  
-  max-width: 1586px;
 }
 
 .welcome__col--left {
-  padding: $spacing-09;
   width: 40%;
+  padding: $spacing-09;
 }
 
 .welcome__col--right {
@@ -47,6 +48,7 @@
 
 .welcome__tag--xl.#{c4p-settings.$carbon-prefix}--tag {
   @include type.type-style('heading-03');
+
   padding-right: $spacing-04;
   padding-left: $spacing-04;
   border-radius: $spacing-06;
@@ -65,49 +67,41 @@
   color: colors.$blue-60;
 }
 
-
-/* large */
- @media (max-width: 1312px) {
+@media (width <= 1312px) {
   .welcome__col--left {
     width: 40%;
-    min-width: 450px;
+    min-width: 460px;
   }
 
   .welcome__col--right {
     width: 60%;
-  } 
+  }
 }
 
- /* medium */
-  @media (max-width: 1056px) {
-    .page-container {
-      overflow: hidden;
-    }
+@media (width <= 1056px) {
+  .page-container {
+    overflow: hidden;
+  }
 
-    .welcome__col--left {
-      width: 50%;
-    }
+  .welcome__col--left {
+    width: 50%;
+  }
 
-    .lottie {
-      width: 600px;
-    }
-  } 
+  .lottie {
+    width: 600px;
+  }
+}
 
+@media (width <= 400px) {
+  .welcome__heading {
+    @include type.type-style('heading-04');
+  }
 
-  /* tablet or smaller */
- @media (max-width: 400px) {
-   .welcome__heading {
-        @include type.type-style('heading-04');
-      }
+  .welcome__subtitle {
+    @include type.type-style('heading-03');
+  }
 
-    .welcome__subtitle {
-       @include type.type-style('heading-03');
-    } 
-
-    .welcome__tag--xl.#{c4p-settings.$carbon-prefix}--tag {
-      @include type.type-style('heading-01');
-    }
-} 
-
-
-
+  .welcome__tag--xl.#{c4p-settings.$carbon-prefix}--tag {
+    @include type.type-style('heading-01');
+  }
+}

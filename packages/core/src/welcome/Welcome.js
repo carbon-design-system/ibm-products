@@ -16,24 +16,20 @@ import { ArrowRight } from '@carbon/icons-react';
 
 const Welcome = () => {
 
-  const LottieOptions = {
-    animationData: lottie,
-    loop: true
-  };
 
-
-  const Example = () => {
+  const WelcomeAnimation = () => {
     return <Lottie className="lottie" animationData={lottie} />;
   };
 
 
+
   return (
-    <div class="welcome-container--outer">
+    <div className="welcome-container--outer">
       <div
         className="welcome__container--inner "
-        // style={{
-        //   backgroundImage: `url(${bg})`,
-        // }}
+        style={{
+          backgroundImage: `url(${bg})`,
+        }}
       >
       <div className="welcome__col--left">
         <hgroup className="welcome__header">
@@ -67,8 +63,8 @@ const Welcome = () => {
         </div>
       </div>
 
-      <div className="welcome__col--right">
-        <Example />
+<div className="welcome__col--right">
+        <WelcomeAnimation />
       </div>
     </div>
   </div>

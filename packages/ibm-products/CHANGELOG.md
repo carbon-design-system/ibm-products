@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.2.0...@carbon/ibm-products@2.3.0) (2023-06-27)
+
+
+### Features
+
+* **Datagrid:** supply full row data in batch actions onClick callback ([#3147](https://github.com/carbon-design-system/ibm-products/issues/3147)) ([e3ec063](https://github.com/carbon-design-system/ibm-products/commit/e3ec063b42c64805f3c8ea1070fe32dcc9e25f3c))
+
+
+
+
+
 # [2.2.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.1.3...@carbon/ibm-products@2.2.0) (2023-06-22)
 
 

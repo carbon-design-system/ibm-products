@@ -20,12 +20,13 @@ let FilterSummary = React.forwardRef(
       clearFiltersText = 'Clear filters',
       clearFilters = () => {},
       filters = [],
+      renderLabel = null,
     },
     ref
   ) => {
     const tagFilters = filters.map(({ key, value }) => ({
       type: 'gray',
-      label: `${key}: ${value}`,
+      label: renderLabel?.(key, value) ?? `${key}: ${value}`,
     }));
 
     return (

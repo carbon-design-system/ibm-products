@@ -68,7 +68,7 @@ export let InlineTip = React.forwardRef(
       onClick,
       onClose,
       tertiaryButtonLabel,
-      contentCTA,
+      action,
       title = defaults.title,
       media,
 
@@ -111,7 +111,7 @@ export let InlineTip = React.forwardRef(
           [media ? `${blockClass}__has-media` : null]
         )}
         ref={ref}
-        role="main"
+        role="complementary"
         {...getDevtoolsProps(componentName)}
       >
         <Button
@@ -135,8 +135,8 @@ export let InlineTip = React.forwardRef(
           <section className={`${blockClass}__body`}>
             {childrenToRender}
             {/* Only show the secondary button when body is showing non-collapsed content */}
-            {contentCTA && (!collapsible || (collapsible && !isCollapsed)) && (
-              <div className={`${blockClass}__secondary-btn`}>{contentCTA}</div>
+            {action && (!collapsible || (collapsible && !isCollapsed)) && (
+              <div className={`${blockClass}__secondary-btn`}>{action}</div>
             )}
           </section>
 
@@ -195,6 +195,12 @@ InlineTip.displayName = componentName;
 // See https://www.npmjs.com/package/prop-types#usage.
 InlineTip.propTypes = {
   /**
+   * Optional "call to action" ghost button or link that can appear
+   * directly below the content. This component comes with pre-styled
+   * elements available to use: `InlineTipLink` and `InlineTipButton`.
+   */
+  action: PropTypes.node,
+  /**
    * Provide the contents of the InlineTip.
    */
   children: PropTypes.node.isRequired,
@@ -218,12 +224,6 @@ InlineTip.propTypes = {
    * This feature is disabled if `media` is specified.
    */
   collapsible: PropTypes.bool,
-  /**
-   * Optional "call to action" ghost button or link that can appear
-   * directly below the content. This component comes with pre-styled
-   * elements available to use: `InlineTipLink` and `InlineTipButton`.
-   */
-  contentCTA: PropTypes.node,
   /**
    * The label for the expand button.
    * This button is not visible if `media` is specified.

@@ -32,7 +32,7 @@ const dataTestId = uuidv4();
 describe(componentName, () => {
   it('renders a component InlineTip', () => {
     render(<InlineTip title={title}>{children}</InlineTip>);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+    expect(screen.getByRole('complementary')).toHaveClass(blockClass);
   });
 
   it.skip('has no accessibility violations', async () => {
@@ -52,7 +52,7 @@ describe(componentName, () => {
     render(
       <InlineTip
         title={title}
-        contentCTA={
+        action={
           <InlineTipButton onClick={() => {}}>{buttonLabel}</InlineTipButton>
         }
       >
@@ -66,7 +66,7 @@ describe(componentName, () => {
     render(
       <InlineTip
         title={title}
-        contentCTA={
+        action={
           <InlineTipLink href="https://www.ibm.com" target="_blank">
             {linkLabel}
           </InlineTipLink>
@@ -84,9 +84,7 @@ describe(componentName, () => {
         {children}
       </InlineTip>
     );
-    expect(
-      document.querySelector('.c4p--inline-tip__close-icon')
-    ).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /close/i })).toBeInTheDocument();
   });
 
   it(`renders tertiary button with 'crossroads' icon`, () => {
@@ -145,9 +143,7 @@ describe(componentName, () => {
         {children}
       </InlineTip>
     );
-    expect(
-      document.querySelector('.c4p--inline-tip__narrow')
-    ).toBeInTheDocument();
+    expect(screen.getByRole('complementary')).toHaveClass(blockClass);
   });
 
   it('applies className to the containing node', () => {
@@ -156,7 +152,7 @@ describe(componentName, () => {
         {children}
       </InlineTip>
     );
-    expect(screen.getByRole('main')).toHaveClass(className);
+    expect(screen.getByRole('complementary')).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {

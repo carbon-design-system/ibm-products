@@ -7,7 +7,7 @@
 
 import React from 'react';
 // TODO: import action to handle events if required.
-import { action } from '@storybook/addon-actions';
+// import { action } from '@storybook/addon-actions';
 
 import cx from 'classnames';
 
@@ -37,7 +37,7 @@ export default {
     },
   },
   argTypes: {
-    contentCTA: {
+    action: {
       options: ['None', '<InlineTipButton>', '<InlineTipLink>'],
       control: { type: 'radio' },
     },
@@ -58,11 +58,15 @@ const defaultProps = {
   closeIconDescription: 'Close',
   collapseButtonLabel: 'Read less',
   collapsible: false,
-  contentCTA: 'None',
+  action: 'None',
   expandButtonLabel: 'Read more',
   media: 'None',
-  onClick: action(`Clicked the tertiary button`),
-  onClose: action(`Clicked the close button`),
+  onClick: () => {
+    alert(`Clicked the tertiary button`);
+  },
+  onClose: () => {
+    alert(`Clicked the close button`);
+  },
   title: 'Use case-specific heading',
 };
 
@@ -70,7 +74,7 @@ const defaultProps = {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
-  const { media, narrow, contentCTA } = args;
+  const { media, narrow, action } = args;
 
   const selectedMedia = (function () {
     switch (media) {
@@ -84,11 +88,15 @@ const Template = (args) => {
         return null;
     }
   })();
-  const selectedContentCTA = (function () {
-    switch (contentCTA) {
+  const selectedAction = (function () {
+    switch (action) {
       case '<InlineTipButton>':
         return (
-          <InlineTipButton onClick={action(`Clicked the ghost button`)}>
+          <InlineTipButton
+            onClick={() => {
+              alert(`Clicked the action button`);
+            }}
+          >
             Click me
           </InlineTipButton>
         );
@@ -114,7 +122,7 @@ const Template = (args) => {
         // onTodo={action('onTodo log action')}
         {...args}
         media={selectedMedia}
-        contentCTA={selectedContentCTA}
+        action={selectedAction}
       />
     </div>
   );

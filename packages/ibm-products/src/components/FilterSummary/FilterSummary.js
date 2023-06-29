@@ -54,6 +54,7 @@ FilterSummary.propTypes = {
   clearFilters: PropTypes.func.isRequired,
   clearFiltersText: PropTypes.string,
   filters: PropTypes.arrayOf(PropTypes.object).isRequired,
+  renderLabel: PropTypes.func,
 };
 
 export default FilterSummary;

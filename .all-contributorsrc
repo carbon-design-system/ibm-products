@@ -202,6 +202,15 @@
         "a11y",
         "design"
       ]
+    },
+    {
+      "login": "jlongshore",
+      "name": "Jeff Longshore",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25206522?v=4",
+      "profile": "https://github.com/jlongshore",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,

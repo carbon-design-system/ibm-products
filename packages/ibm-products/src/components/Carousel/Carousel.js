@@ -62,6 +62,7 @@ export let Carousel = React.forwardRef(
     const currentViewIDRef = useRef(currentViewID);
     const scrollRef = useRef();
     const carouselRef = useRef();
+    const mountedRef = useRef(true);
     const isScrollable = useIsOverflow(scrollRef);
     // Scrolling has no complete callback, nor does it return a promise.
     // Since there is no way to tell when a scroll is finished we can set a timeout.
@@ -79,7 +80,7 @@ export let Carousel = React.forwardRef(
 
     const scrollToView = useCallback(
       (viewID) => {
-        if (!isScrolling) {
+        if (!isScrolling && scrollRef.current && mountedRef.current) {
           const targetViewID = clamp(viewID, 0, totalViews - 1);
           setCurrentViewID(targetViewID);
           setIsScrolling(true);
@@ -99,9 +100,11 @@ export let Carousel = React.forwardRef(
     }, [resolveScroll]);
 
     const resolveScroll = useCallback((resolve) => {
-      setIsScrolling(false);
-      const percentage = scrollPosition() / maxScroll();
-      return resolve(parseFloat(percentage.toFixed(2)));
+      if (mountedRef.current) {
+        setIsScrolling(false);
+        const percentage = scrollPosition() / maxScroll();
+        return resolve(parseFloat(percentage.toFixed(2)));
+      }
     }, []);
 
     const scrollPosition = () => {
@@ -123,9 +126,10 @@ export let Carousel = React.forwardRef(
 
     // EFFECTS
     useWindowEvent('resize', handleResize);
+    // SAVE POINT
 
     useEffect(() => {
-      if (scrollableChange) {
+      if (scrollableChange && mountedRef.current) {
         scrollableChange(isScrollable);
       }
     }, [isScrollable, scrollableChange]);
@@ -164,11 +168,16 @@ export let Carousel = React.forwardRef(
         }
       }
       const outerDiv = carouselRef.current;
-      if (outerDiv) {
-        outerDiv.addEventListener('keydown', keypress);
-        return () => outerDiv.removeEventListener('keydown', keypress);
-      }
+      //if (outerDiv) {
+      outerDiv.addEventListener('keydown', keypress);
+      return () => outerDiv.removeEventListener('keydown', keypress);
+      // }
     }, [disableArrowScroll]);
+    useEffect(() => {
+      return () => {
+        mountedRef.current = false;
+      };
+    }, []);
 
     useImperativeHandle(
       ref,

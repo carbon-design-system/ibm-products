@@ -21,13 +21,13 @@ are to be used when utilizing the "floating" variant of the Coachmark. These are
 with the React context wrapped to to communicate with the CoachmarkOverlay
 (referred to as the tooltip or floating variant of the Coachmark). As such, the
 props outlined below are only the props for this component, but will accept any
-of the Carbon button props. Coachmark buttons are always used within the target
-prop of the Coachmark component. The target prop of the Coachmark should always
-be either a CoachmarkBeacon or a CoachmarkButton.
+of the Carbon button props. **Coachmark buttons are always used within the
+target prop of the Coachmark component.** The target prop of the Coachmark
+should always be either a CoachmarkBeacon or a CoachmarkButton.
 
 ## Example usage
 
-<Canvas className="coachmarkExample">
+<Canvas className="coachmarkExample" withSource="none">
   <div className="CoachmarkBaseExampleUsage">
     <Story id={getStoryId(CoachmarkButton.displayName, 'coachmark-button')} />
   </div>

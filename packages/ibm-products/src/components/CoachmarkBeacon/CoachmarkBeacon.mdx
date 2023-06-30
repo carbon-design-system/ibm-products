@@ -19,9 +19,9 @@ import { CoachmarkBeacon } from '.';
 [Pulsing Beacons](https://pages.github.ibm.com/cdai-design/pal/novice-to-pro/components/coachmark/usage/#tooltip)
 are used to call a user’s attention to a specific area in the UI - with the
 context wrapped to to communicate with the CoachmarkOverlay (referred to as the
-tooltip or floating variant of the Coachmark). These are always used within the
-target prop of the Coachmark component. The target prop of the Coachmark should
-always be either a CoachmarkBeacon or a CoachmarkButton.
+tooltip or floating variant of the Coachmark). **These are always used within
+the target prop of the Coachmark component.** The target prop of the Coachmark
+should always be either a CoachmarkBeacon or a CoachmarkButton.
 
 _[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
 is a continuous learning methodology + framework aimed to orient, onboard,
@@ -47,12 +47,7 @@ one of two states, animated or active.
   theme={'light'}
   target={<CoachmarkBeacon label="Show information" kind={'tooltip'} />}
 >
-  <CoachmarkOverlayElements closeButtonLabel="Done">
-    <CoachmarkOverlayElement
-      title="Hello World"
-      description="this is a description test"
-    />
-  </CoachmarkOverlayElements>
+  ...
 </Coachmark>
 ```
 

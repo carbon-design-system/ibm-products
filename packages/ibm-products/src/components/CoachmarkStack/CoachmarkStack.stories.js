@@ -13,11 +13,7 @@ import {
   getSelectedCarbonTheme,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-import {
-  Coachmark,
-  CoachmarkOverlayElement,
-  CoachmarkOverlayElements,
-} from '..';
+import { CoachmarkOverlayElement, CoachmarkOverlayElements } from '..';
 import { CoachmarkStack } from '.';
 import mdx from './CoachmarkStack.mdx';
 
@@ -45,103 +41,97 @@ const Template = (args) => {
   const theme = getSelectedCarbonTheme();
   return (
     <CoachmarkStack {...args} theme={theme}>
-      <Coachmark theme={theme}>
-        <CoachmarkOverlayElements closeButtonLabel={'Got it'}>
-          <CoachmarkOverlayElement
-            title="Short Coachmark"
-            description="As small as it gets."
-          />
-        </CoachmarkOverlayElements>
-      </Coachmark>
+      <CoachmarkOverlayElements closeButtonLabel={'Got it'}>
+        <CoachmarkOverlayElement
+          title="Short Coachmark"
+          description="As small as it gets."
+        />
+      </CoachmarkOverlayElements>
 
-      <Coachmark theme={theme}>
-        <CoachmarkOverlayElements
-          closeButtonLabel="Close"
-          nextButtonLabel="Next"
-          previousButtonLabel="Back"
-        >
-          <CoachmarkOverlayElement
-            title="Mid-height Coachmark"
-            description={
-              <>
-                This should be about the same height as the base stack item.
-                <br />
-                <br />
-                This is known as the enrichment phase. Enrichment supports you
-                by emulating how an analyst would evaluate a finding—for
-                example, by adding context, such as whether a certain piece of
-                data is known to be malicious, or is linked...
-              </>
-            }
-            button={
-              <CarbonLink href="https://www.ibm.com">Learn more</CarbonLink>
-            }
-          />
-          <CoachmarkOverlayElement
-            title="Hello World"
-            description="Link opens in new tab."
-            button={
-              <CarbonLink href="https://www.ibm.com" target="_blank">
-                Learn more
-              </CarbonLink>
-            }
-          />
-        </CoachmarkOverlayElements>
-      </Coachmark>
+      <CoachmarkOverlayElements
+        closeButtonLabel="Close"
+        nextButtonLabel="Next"
+        previousButtonLabel="Back"
+      >
+        <CoachmarkOverlayElement
+          title="Mid-height Coachmark"
+          description={
+            <>
+              This should be about the same height as the base stack item.
+              <br />
+              <br />
+              This is known as the enrichment phase. Enrichment supports you by
+              emulating how an analyst would evaluate a finding—for example, by
+              adding context, such as whether a certain piece of data is known
+              to be malicious, or is linked...
+            </>
+          }
+          button={
+            <CarbonLink href="https://www.ibm.com">Learn more</CarbonLink>
+          }
+        />
+        <CoachmarkOverlayElement
+          title="Hello World"
+          description="Link opens in new tab."
+          button={
+            <CarbonLink href="https://www.ibm.com" target="_blank">
+              Learn more
+            </CarbonLink>
+          }
+        />
+      </CoachmarkOverlayElements>
 
-      <Coachmark theme={theme}>
-        <CoachmarkOverlayElements
-          closeButtonLabel="Done"
-          nextButtonLabel="Next"
-          previousButtonLabel="Back"
-        >
-          <CoachmarkOverlayElement
-            title="Tall Coachmark"
-            description="These alerts contain data gathered from your connected security systems."
-          />
-          <CoachmarkOverlayElement
-            title="Alerts contain evidence, known as artifacts"
-            description="These help to determine whether the alert is good or bad. And as alerts are added to a case, they become findings."
-          />
-          <CoachmarkOverlayElement
-            title="Findings are enriched with more information and context"
-            description={
-              <>
-                This is known as the enrichment phase. Enrichment supports you
-                by emulating how an analyst would evaluate a finding—for
-                example, by adding context, such as whether a certain piece of
-                data is known to be malicious, or is linked to a known threat.
-                <br />
-                <br />
-                Lets
-                <br />
-                <br />
-                make
-                <br />
-                <br />
-                this
-                <br />
-                <br />
-                one
-                <br />
-                <br />
-                really
-                <br />
-                <br />
-                tall.
-              </>
-            }
-          />
-          <CoachmarkOverlayElement
-            title="Next, the correlation process takes place"
-            description="Based on the results of the enrichment process, findings that are potentially related are grouped together, and then evaluated."
-          />
-          <CoachmarkOverlayElement
-            title="Between enrichment and correlation, the severity of a case is determined"
-            description="And once you know the severity, you can easily choose which case to pick up next."
-          />
-        </CoachmarkOverlayElements>
-      </Coachmark>
+      <CoachmarkOverlayElements
+        closeButtonLabel="Done"
+        nextButtonLabel="Next"
+        previousButtonLabel="Back"
+      >
+        <CoachmarkOverlayElement
+          title="Tall Coachmark"
+          description="These alerts contain data gathered from your connected security systems."
+        />
+        <CoachmarkOverlayElement
+          title="Alerts contain evidence, known as artifacts"
+          description="These help to determine whether the alert is good or bad. And as alerts are added to a case, they become findings."
+        />
+        <CoachmarkOverlayElement
+          title="Findings are enriched with more information and context"
+          description={
+            <>
+              This is known as the enrichment phase. Enrichment supports you by
+              emulating how an analyst would evaluate a finding—for example, by
+              adding context, such as whether a certain piece of data is known
+              to be malicious, or is linked to a known threat.
+              <br />
+              <br />
+              Lets
+              <br />
+              <br />
+              make
+              <br />
+              <br />
+              this
+              <br />
+              <br />
+              one
+              <br />
+              <br />
+              really
+              <br />
+              <br />
+              tall.
+            </>
+          }
+        />
+        <CoachmarkOverlayElement
+          title="Next, the correlation process takes place"
+          description="Based on the results of the enrichment process, findings that are potentially related are grouped together, and then evaluated."
+        />
+        <CoachmarkOverlayElement
+          title="Between enrichment and correlation, the severity of a case is determined"
+          description="And once you know the severity, you can easily choose which case to pick up next."
+        />
+      </CoachmarkOverlayElements>
     </CoachmarkStack>
   );
 };

@@ -7,4 +7,13 @@
 
 @import '../../global/styles/project-settings';
 
-// TODO: add any additional styles used by CoachmarkButton.stories.js
+.CoachmarkBaseExampleUsage {
+  position: relative;
+  display: inline-block;
+  max-height: 100%;
+  box-sizing: border-box;
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  padding: 1rem;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}

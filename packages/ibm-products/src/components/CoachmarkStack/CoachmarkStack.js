@@ -6,14 +6,8 @@
  */
 
 // Import portions of React that are needed.
-import React, {
-  Children,
-  cloneElement,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
-
+import React, { Children, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -21,6 +15,7 @@ import cx from 'classnames';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
+import { CoachmarkOverlay } from '../Coachmark/CoachmarkOverlay';
 import { CoachmarkStackHome } from './CoachmarkStackHome';
 import { CoachmarkTagline } from '../Coachmark/CoachmarkTagline';
 import { CoachmarkContext } from '../Coachmark/utils/context';
@@ -71,6 +66,9 @@ export let CoachmarkStack = React.forwardRef(
     },
     ref
   ) => {
+    const portalNode = portalSelector
+      ? document.querySelector(portalSelector) ?? document.body
+      : document.body;
     const stackHomeRef = useRef();
     const stackedCoachmarkRefs = useRef([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -82,6 +80,7 @@ export let CoachmarkStack = React.forwardRef(
     const [parentHeight, setParentHeight] = useState(null);
     // parent height = child height when stacked behind a child that is shorter
     const childArray = Children.toArray(children);
+
     // same value as CSS animation speed
     const delayMs = 240;
 
@@ -119,7 +118,7 @@ export let CoachmarkStack = React.forwardRef(
         },
       },
       closebuttonProps: {
-        onClick: handleClose,
+        onClick: () => handleClose(false),
       },
       isOpen: isOpen,
     };
@@ -134,77 +133,84 @@ export let CoachmarkStack = React.forwardRef(
 
     useEffect(() => {
       const targetSelectedItem = selectedItemNumber - 1;
-
-      if (!isOpen || targetSelectedItem < 0 || !stackHomeRef.current) {
+      if (!parentHeight) {
         return;
       }
       stackHomeRef.current.style.height = `${parentHeight}px`;
+      if (!isOpen || targetSelectedItem < 0) {
+        return;
+      }
+
       const targetHomeHeight =
         stackedCoachmarkRefs.current[targetSelectedItem].clientHeight;
 
       stackHomeRef.current.style.height = `${targetHomeHeight}px`;
     }, [selectedItemNumber, isOpen, parentHeight]);
 
-    const clonedChildren = Children.map(childArray, (child, idx) => {
-      // Clone each child Coachmark and override specific props
-      return cloneElement(child, {
-        className: cx(elementBlockClass, child.props.className),
-        onClose: handleClose,
-        overlayClassName: cx(
-          elementBlockClass,
-          idx === selectedItemNumber - 1 && `${elementBlockClass}--is-visible`
-        ),
-        overlayKind: COACHMARK_OVERLAY_KIND.STACKED,
-        overlayRef: (ref) => (stackedCoachmarkRefs.current[idx] = ref),
-        portalSelector: portalSelector,
-      });
+    const wrappedChildren = Children.map(childArray, (child, idx) => {
+      return (
+        <CoachmarkOverlay
+          key={idx}
+          ref={(ref) => (stackedCoachmarkRefs.current[idx] = ref)}
+          kind={COACHMARK_OVERLAY_KIND.STACKED}
+          onClose={() => handleClose(false)}
+          theme={theme}
+          fixedIsVisible={false}
+          className={cx(
+            elementBlockClass,
+            idx === selectedItemNumber - 1 && `${elementBlockClass}--is-visible`
+          )}
+        >
+          {child}
+        </CoachmarkOverlay>
+      );
     });
 
     return (
-      <div
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(
-          blockClass,
-          `${pkg.prefix}--coachmark-overlay--stack`,
-          className
-        )}
-        ref={ref}
-        {...getDevtoolsProps(componentName)}
-      >
-        <CoachmarkContext.Provider value={contextValue}>
-          <CoachmarkTagline title={tagline} onClose={onClose} />
-        </CoachmarkContext.Provider>
-
-        <CoachmarkStackHome
-          ref={stackHomeRef}
+      <CoachmarkContext.Provider value={contextValue}>
+        <div
+          {
+            // Pass through any other property values as HTML attributes.
+            ...rest
+          }
           className={cx(
-            // TODO: turn these into constants
-            // These class names match the default "coachmark" class names
-            `${pkg.prefix}--coachmark-overlay`,
-            `${pkg.prefix}--coachmark-overlay__${theme}`,
-            elementBlockClass,
-            selectedItemNumber > 0 && `${elementBlockClass}--is-stacked`,
-            selectedItemNumber > 0 &&
-              `${elementBlockClass}--is-stacked__${theme}`,
-            isOpen && `${elementBlockClass}--is-visible`
+            blockClass,
+            `${pkg.prefix}--coachmark-overlay--stack`,
+            className
           )}
-          description={description}
-          media={media}
-          navLinkLabels={navLinkLabels}
-          onClickNavItem={handleClickNavItem}
-          onClose={() => {
-            handleClose(true);
-          }}
-          portalSelector={portalSelector}
-          closeButtonLabel={closeButtonLabel}
-          title={title}
-        />
+          ref={ref}
+          {...getDevtoolsProps(componentName)}
+        >
+          <CoachmarkTagline title={tagline} onClose={onClose} />
 
-        {clonedChildren}
-      </div>
+          <CoachmarkStackHome
+            ref={stackHomeRef}
+            className={cx(
+              // TODO: turn these into constants
+              // These class names match the default "coachmark" class names
+              `${pkg.prefix}--coachmark-overlay`,
+              `${pkg.prefix}--coachmark-overlay__${theme}`,
+              elementBlockClass,
+              selectedItemNumber > 0 && `${elementBlockClass}--is-stacked`,
+              selectedItemNumber > 0 &&
+                `${elementBlockClass}--is-stacked__${theme}`,
+              isOpen && `${elementBlockClass}--is-visible`
+            )}
+            description={description}
+            media={media}
+            navLinkLabels={navLinkLabels}
+            onClickNavItem={handleClickNavItem}
+            onClose={() => {
+              handleClose(true);
+            }}
+            portalSelector={portalSelector}
+            closeButtonLabel={closeButtonLabel}
+            title={title}
+          />
+          {createPortal(wrappedChildren, portalNode)}
+          {/* {wrappedChildren} */}
+        </div>
+      </CoachmarkContext.Provider>
     );
   }
 );

@@ -47,7 +47,7 @@ const Template = (args) => {
   return (
     <Coachmark
       align={'bottom'}
-      overlayKind={COACHMARK_OVERLAY_KIND.DRAGGABLE}
+      overlayKind={COACHMARK_OVERLAY_KIND.FLOATING}
       target={
         <CoachmarkButton
           kind="tertiary"

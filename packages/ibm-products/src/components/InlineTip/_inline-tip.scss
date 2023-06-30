@@ -1,0 +1,231 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/**
+ * The InlineTip specifically is theme-agnostic, and so we have to 
+ * use color tokens to keep the colors static instead of theme tokens 
+ * that will change depending on the selected theme.
+ * 
+ * We are triggering a *large* amount of linting errors.
+ * So, we're adding 2 "disable" rules for the file instead of 25 
+ * individual rules.
+ */
+
+/* stylelint-disable declaration-no-important */
+/* stylelint-disable carbon/theme-token-use */
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+// Other Carbon settings.
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+
+// InlineTip uses the following Carbon components:
+// TODO: @import(s) of Carbon component styles used by InlineTip
+
+// InlineTip uses the following Carbon for IBM Products components:
+// TODO: @import(s) of IBM Products component styles used by InlineTip
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin inline-tip {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--inline-tip;
+
+  // Images and animation are the same, fixed size
+  $media-height: rem(118px);
+  $media-width: calc(#{$media-height} * 2);
+
+  .#{$block-class} {
+    $purple: #7f3ae7;
+
+    position: relative;
+    display: flex;
+    background: linear-gradient(90deg, $blue-90 0%, $purple-70 100%);
+
+    // layout only: wide
+    &__wide {
+      padding: $spacing-05 $spacing-10 $spacing-05 $spacing-09;
+
+      // layout: wide, with image
+      &.#{$block-class}__has-media {
+        padding-right: $spacing-09;
+
+        .#{$block-class}__media {
+          padding-left: $spacing-10;
+
+          img {
+            display: block;
+            height: $media-height;
+          }
+
+          svg {
+            width: $media-width !important;
+            height: $media-height !important;
+          }
+        }
+      }
+    }
+
+    // layout only: narrow
+    &__narrow {
+      flex-direction: column-reverse;
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      padding: rem(52px) $spacing-07 $spacing-05 $spacing-05;
+
+      // layout: narrow, with image
+      &.#{$block-class}__has-media {
+        padding-top: $spacing-07;
+        padding-right: $spacing-05;
+      }
+
+      .#{$block-class}__media {
+        padding-bottom: $spacing-05;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .#{$block-class}__content {
+        padding-right: $spacing-05;
+      }
+
+      .#{$block-class}__footer {
+        justify-content: space-between;
+
+        .#{$block-class}__close-btn {
+          margin-right: calc(-1 * $spacing-05);
+        }
+      }
+    }
+
+    // All links in use by this component and provided by the user must reflect the 'dark' theme.
+    a {
+      color: $blue-30;
+
+      &:visited,
+      &:hover,
+      &:visited:hover {
+        color: $blue-30;
+      }
+    }
+
+    &__title {
+      @include carbon--type-style('productive-heading-01');
+
+      color: $white-0;
+    }
+
+    &__body {
+      @include carbon--type-style('body-short-01');
+
+      color: $gray-10;
+
+      p {
+        @include carbon--type-style('body-short-01');
+
+        margin-bottom: $spacing-03;
+        font-size: inherit;
+        line-height: inherit;
+
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+
+      .#{$block-class}__secondary-btn {
+        margin-top: $spacing-03;
+
+        .#{$block-class}__button {
+          margin-left: calc(-1 * $spacing-05);
+          color: $blue-30;
+
+          &:active,
+          &:hover {
+            background-color: $purple;
+            color: $gray-10;
+          }
+        }
+      }
+    }
+
+    &__footer {
+      display: flex;
+      padding-top: $spacing-05;
+
+      &:empty {
+        display: none;
+      }
+    }
+
+    // When 'collapsed', a text-only preview with ellipsis is shown.
+    &__preview-text {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+    }
+
+    &__icon-idea {
+      position: absolute;
+      width: rem(20px);
+      color: $white-0;
+      inset: $spacing-05 0 0 $spacing-05;
+    }
+
+    &__close-icon {
+      position: absolute !important;
+      top: 0;
+      right: 0;
+      width: $spacing-07;
+      height: $spacing-07;
+      min-height: $spacing-07 !important;
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      padding: 0 0 0 rem(6px) !important;
+      color: $white-0;
+
+      &:active,
+      &:hover {
+        background-color: $purple !important;
+        color: $text-01 !important;
+      }
+
+      svg > path {
+        margin: 0;
+        fill: $white-0 !important;
+      }
+    }
+
+    &__toggle-btn {
+      border: none;
+      margin: 0 $spacing-05 0 calc(-1 * $spacing-05) !important;
+      color: $blue-30 !important;
+
+      &:hover {
+        background-color: $purple-70-hover !important;
+        color: $gray-10 !important;
+      }
+    }
+
+    &__close-btn {
+      border: rem(1px) solid $white-0 !important;
+      color: $white-0 !important;
+
+      &:active,
+      &:hover {
+        background-color: $gray-10 !important;
+        color: $gray-100 !important;
+      }
+    }
+  }
+}
+
+@include exports('inline-tip') {
+  @include inline-tip;
+}

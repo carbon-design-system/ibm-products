@@ -149,5 +149,7 @@ export const coachmarkStack = prepareStory(Template, {
     navLinkLabels: ['Example 1', 'Example 2', 'Example 3'],
     onClose: () => console.log('CLOSE'),
     tagline: 'Why are there two types of severity scores?',
+    portalSelector: '#root:not([hidden="true"])',
   },
 });
+//

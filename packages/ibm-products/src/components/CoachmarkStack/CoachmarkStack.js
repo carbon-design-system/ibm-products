@@ -67,8 +67,8 @@ export let CoachmarkStack = React.forwardRef(
     ref
   ) => {
     const portalNode = portalSelector
-      ? document.querySelector(portalSelector) ?? document.body
-      : document.body;
+      ? document.querySelector(portalSelector) ?? document.querySelector('body')
+      : document.querySelector('body');
     const stackHomeRef = useRef();
     const stackedCoachmarkRefs = useRef([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -80,7 +80,7 @@ export let CoachmarkStack = React.forwardRef(
     const [parentHeight, setParentHeight] = useState(null);
     // parent height = child height when stacked behind a child that is shorter
     const childArray = Children.toArray(children);
-
+    const mountedRef = useRef();
     // same value as CSS animation speed
     const delayMs = 240;
 
@@ -122,7 +122,12 @@ export let CoachmarkStack = React.forwardRef(
       },
       isOpen: isOpen,
     };
-
+    useEffect(() => {
+      mountedRef.current = true;
+      return () => {
+        mountedRef.current = false;
+      };
+    }, []);
     useEffect(() => {
       setTimeout(() => {
         if (stackHomeRef.current) {
@@ -148,6 +153,9 @@ export let CoachmarkStack = React.forwardRef(
     }, [selectedItemNumber, isOpen, parentHeight]);
 
     const wrappedChildren = Children.map(childArray, (child, idx) => {
+      const mountedClass = mountedRef.current
+        ? `${elementBlockClass}--is-mounted`
+        : '';
       return (
         <CoachmarkOverlay
           key={idx}
@@ -158,7 +166,10 @@ export let CoachmarkStack = React.forwardRef(
           fixedIsVisible={false}
           className={cx(
             elementBlockClass,
-            idx === selectedItemNumber - 1 && `${elementBlockClass}--is-visible`
+            mountedClass,
+            idx === selectedItemNumber - 1 &&
+              `${elementBlockClass}--is-visible`,
+            mountedRef.current && `${elementBlockClass}--is-mounted`
           )}
         >
           {child}
@@ -194,7 +205,8 @@ export let CoachmarkStack = React.forwardRef(
               selectedItemNumber > 0 && `${elementBlockClass}--is-stacked`,
               selectedItemNumber > 0 &&
                 `${elementBlockClass}--is-stacked__${theme}`,
-              isOpen && `${elementBlockClass}--is-visible`
+              isOpen && `${elementBlockClass}--is-visible`,
+              mountedRef.current && `${elementBlockClass}--is-mounted`
             )}
             description={description}
             media={media}
@@ -231,7 +243,7 @@ CoachmarkStack.propTypes = {
   // `CoachmarkStack` only accepts children of type `Coachmark`
 
   /**
-   * The CoachmarkStack should use one or many Coachmark components as children.
+   * CoachmarkStack should use a single CoachmarkOverlayElements component as a child.
    */
   children: PropTypes.node.isRequired,
 

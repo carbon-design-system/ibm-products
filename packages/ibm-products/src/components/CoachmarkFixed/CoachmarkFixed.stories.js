@@ -63,6 +63,6 @@ export const coachmarkFixed = prepareStory(Template, {
   args: {
     tagline: 'Why are there two types of severity scores?',
     onClose: () => console.log('CLOSE'),
-    portalSelector: '#root',
+    portalSelector: '#root:not([hidden="true"])',
   },
 });

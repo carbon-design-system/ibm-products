@@ -57,8 +57,8 @@ export let CoachmarkStackHome = forwardRef(
     }
 
     const portalNode = portalSelector
-      ? document.querySelector(portalSelector)
-      : document.body;
+      ? document.querySelector(portalSelector) ?? document.querySelector('body')
+      : document.querySelector('body');
     return createPortal(
       <div
         {

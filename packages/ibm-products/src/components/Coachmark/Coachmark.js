@@ -56,8 +56,8 @@ export let Coachmark = forwardRef(
     const isBeacon = overlayKind === COACHMARK_OVERLAY_KIND.TOOLTIP;
     const isStacked = overlayKind === COACHMARK_OVERLAY_KIND.STACKED;
     const portalNode = portalSelector
-      ? document.querySelector(portalSelector) ?? document.body
-      : document.body;
+      ? document.querySelector(portalSelector) ?? document.querySelector('body')
+      : document.querySelector('body');
     const [isOpen, setIsOpen] = useState(isStacked);
     const [shouldResetPosition, setShouldResetPosition] = useState(false);
     const [targetRect, setTargetRect] = useState();

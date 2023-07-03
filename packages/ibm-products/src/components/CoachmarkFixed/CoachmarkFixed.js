@@ -53,8 +53,8 @@ export let CoachmarkFixed = React.forwardRef(
   ) => {
     const overlayRef = useRef();
     const portalNode = portalSelector
-      ? document.querySelector(portalSelector) ?? document.body
-      : document.body;
+      ? document.querySelector(portalSelector) ?? document.querySelector('body')
+      : document.querySelector('body');
     const [isOpen, setIsOpen] = useState(false);
     const [shouldResetPosition, setShouldResetPosition] = useState(false);
     const [targetRect, setTargetRect] = useState();

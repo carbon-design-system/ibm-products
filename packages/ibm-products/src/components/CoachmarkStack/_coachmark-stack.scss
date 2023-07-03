@@ -25,12 +25,21 @@
     position: fixed;
     z-index: 5901;
     right: $spacing-05;
-    bottom: 0;
+    bottom: -100%;
+    //opacity: 0;
     transform: translateY(100%);
-    /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
-    transition: 240ms carbon--motion(exit, productive);
+
+    &--is-mounted {
+      bottom: 0;
+      /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
+      transition: 240ms carbon--motion(exit, productive);
+      @media (prefers-reduced-motion) {
+        transition: none;
+      }
+    }
 
     &--is-visible {
+      opacity: 1;
       transform: translateY(0);
     }
 
@@ -54,15 +63,8 @@
   }
 
   // ALL SUBSEQUENT ITEMS ARE THE "CHILD" STACK ITEMS
-  .#{$block-class} ~ .#{$block-class} {
+  .#{$elements-block-class} ~ .#{$elements-block-class} {
     z-index: 5902;
-    opacity: 0;
-    transform: translateY(100%);
-
-    &--is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 
   // SPECIFIC TO THE HOME ELEMENT

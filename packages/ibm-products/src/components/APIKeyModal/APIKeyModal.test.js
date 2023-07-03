@@ -11,6 +11,7 @@ import React from 'react';
 import { carbon } from '../../settings';
 
 import { APIKeyModal } from '.';
+import { act } from 'react-dom/test-utils';
 
 Object.assign(navigator, {
   clipboard: {
@@ -78,7 +79,7 @@ describe(componentName, () => {
     getByText(defaultProps.nameHelperText);
   });
 
-  it('renders with minimal setup', () => {
+  it('renders with minimal setup', async () => {
     const props = {
       ...defaultProps,
       nameRequired: false,
@@ -93,7 +94,7 @@ describe(componentName, () => {
       props.apiKey
     );
     getByText(props.apiKeyLabel);
-    click(container.querySelector(`.${carbon.prefix}--btn--primary`));
+    await click(container.querySelector(`.${carbon.prefix}--btn--primary`));
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(props.apiKey);
     getByLabelText(defaultProps.copyIconDescription);
   });
@@ -115,8 +116,8 @@ describe(componentName, () => {
     const nameInput = container.querySelector(`.${carbon.prefix}--text-input`);
     const createButton = getByText(props.generateButtonText);
 
-    change(nameInput, { target: { value: 'test-key' } });
-    click(createButton);
+    await change(nameInput, { target: { value: 'test-key' } });
+    await click(createButton);
     expect(onRequestGenerate).toHaveBeenCalledWith('test-key');
 
     rerender(<APIKeyModal {...props} loading />);
@@ -127,13 +128,13 @@ describe(componentName, () => {
     expect(container.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
       '444-444-444-444'
     );
-    click(getByText(props.copyButtonText));
+    await click(getByText(props.copyButtonText));
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
       '444-444-444-444'
     );
   });
 
-  it('displays an error message when a create error occurs', () => {
+  it('displays an error message when a create error occurs', async () => {
     const { change } = fireEvent;
     const { click } = userEvent;
     const { fn } = jest;
@@ -151,15 +152,15 @@ describe(componentName, () => {
     const nameInput = container.querySelector(`.${carbon.prefix}--text-input`);
     const createButton = getByText(props.generateButtonText);
 
-    change(nameInput, { target: { value: 'test-key' } });
-    click(createButton);
+    await change(nameInput, { target: { value: 'test-key' } });
+    await click(createButton);
     expect(onRequestGenerate).toHaveBeenCalled();
 
-    rerender(<APIKeyModal {...props} error />);
+    await rerender(<APIKeyModal {...props} error />);
     getByText(props.errorText);
   });
 
-  it('should be able to properly navigate a series of custom steps', () => {
+  it('should be able to properly navigate a series of custom steps', async () => {
     const { click } = userEvent;
     const { fn } = jest;
     const onRequestGenerate = fn();
@@ -188,9 +189,8 @@ describe(componentName, () => {
       customSteps,
       hasDownloadLink: false,
     };
-    const { rerender, getByPlaceholderText, getByText, container } = render(
-      <APIKeyModal {...props} />
-    );
+    const { rerender, getByPlaceholderText, getByText, container } =
+      await render(<APIKeyModal {...props} />);
 
     // step 1
     getByPlaceholderText('input a');
@@ -199,54 +199,54 @@ describe(componentName, () => {
     getByText(props.customSteps[0].title);
 
     // advance to step 2
-    click(getByText(props.nextStepButtonText));
+    await act(async () => await click(getByText(props.nextStepButtonText)));
     getByPlaceholderText('input b');
     getByText(props.nextStepButtonText);
     getByText(props.previousStepButtonText);
     getByText(props.customSteps[1].title);
 
     // go back to step 1
-    click(getByText(props.previousStepButtonText));
+    await act(async () => await click(getByText(props.previousStepButtonText)));
     getByPlaceholderText('input a');
     getByText(props.nextStepButtonText);
     getByText(props.closeButtonText);
     getByText(props.customSteps[0].title);
 
     // advance to step 2
-    click(getByText(props.nextStepButtonText));
+    await act(async () => await click(getByText(props.nextStepButtonText)));
     getByPlaceholderText('input b');
     getByText(props.nextStepButtonText);
     getByText(props.previousStepButtonText);
     getByText(props.customSteps[1].title);
 
     // advance to step 3
-    click(getByText(props.nextStepButtonText));
+    await act(async () => await click(getByText(props.nextStepButtonText)));
     getByPlaceholderText('input c');
     getByText(props.generateButtonText);
     getByText(props.previousStepButtonText);
     getByText(props.customSteps[2].title);
 
     // submit invalid form
-    click(getByText(props.generateButtonText));
+    await act(async () => await click(getByText(props.generateButtonText)));
     expect(onRequestGenerate).not.toHaveBeenCalled();
 
     // submit valid form
     customSteps[2].valid = true;
-    rerender(<APIKeyModal {...props} customSteps={customSteps} />);
-    click(getByText(props.generateButtonText));
+    await rerender(<APIKeyModal {...props} customSteps={customSteps} />);
+    await act(async () => await click(getByText(props.generateButtonText)));
     expect(onRequestGenerate).toHaveBeenCalled();
-    rerender(<APIKeyModal {...props} />);
-    rerender(<APIKeyModal {...props} apiKey="abc-123" />);
+    await rerender(<APIKeyModal {...props} />);
+    await rerender(<APIKeyModal {...props} apiKey="abc-123" />);
     expect(container.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
       'abc-123'
     );
     getByText(props.generateSuccessBody);
     getByText(props.generateSuccessTitle);
-    click(getByText(props.closeButtonText));
+    await act(async () => await click(getByText(props.closeButtonText)));
     expect(onClose).toHaveBeenCalled();
   });
 
-  it('successfully edits', () => {
+  it('successfully edits', async () => {
     const { change } = fireEvent;
     const { click } = userEvent;
     const { fn } = jest;
@@ -266,10 +266,10 @@ describe(componentName, () => {
     const editButton = getByText(props.editButtonText);
     expect(nameInput.value).toBe(props.apiKeyName);
     getByText(props.editButtonText);
-    change(nameInput, { target: { value: 'new-key-name' } });
-    click(editButton);
+    await change(nameInput, { target: { value: 'new-key-name' } });
+    await click(editButton);
     expect(onRequestEdit).toHaveBeenCalledWith(nameInput.value);
-    rerender(<APIKeyModal {...props} editSuccess />);
+    await rerender(<APIKeyModal {...props} editSuccess />);
     getByText(props.editSuccessTitle);
   });
 
@@ -280,7 +280,7 @@ describe(componentName, () => {
     };
     const { mouseOver } = fireEvent;
     const { click } = userEvent;
-    const { getByText, container, rerender } = render(
+    const { getByText, container, rerender } = await render(
       <APIKeyModal {...props} />
     );
     await waitFor(() => getByText(props.downloadLinkText));
@@ -290,14 +290,29 @@ describe(componentName, () => {
     expect(
       container.querySelector(`.${carbon.prefix}--text-input`)
     ).toHaveAttribute('type', 'password');
-    mouseOver(container.querySelector(`.${carbon.prefix}--icon-visibility-on`));
+    await act(
+      async () =>
+        await mouseOver(
+          container.querySelector(`.${carbon.prefix}--icon-visibility-on`)
+        )
+    );
     await waitFor(() => getByText(defaultProps.showAPIKeyLabel));
-    click(container.querySelector(`.${carbon.prefix}--icon-visibility-on`));
-    mouseOver(
-      container.querySelector(`.${carbon.prefix}--icon-visibility-off`)
+    await act(
+      async () =>
+        await click(
+          container.querySelector(`.${carbon.prefix}--icon-visibility-on`)
+        )
+    );
+    await act(
+      async () =>
+        await mouseOver(
+          container.querySelector(`.${carbon.prefix}--icon-visibility-off`)
+        )
     );
     await waitFor(() => getByText(defaultProps.hideAPIKeyLabel));
-    rerender(<APIKeyModal {...props} hasAPIKeyVisibilityToggle={false} />);
+    await rerender(
+      <APIKeyModal {...props} hasAPIKeyVisibilityToggle={false} />
+    );
     await waitFor(() => getByText(props.downloadLinkText));
     expect(
       container.querySelector(`.${carbon.prefix}--text-input`)
@@ -305,7 +320,7 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<APIKeyModal {...defaultProps} />);
+    const { container } = await render(<APIKeyModal {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });

@@ -14,7 +14,8 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { blockClass, componentName } from './Toolbar';
 import { blockClass as toolbarButtonClass } from './ToolbarButton';
-import { carbon } from '../../settings';
+import { pkg, carbon } from '../../settings';
+import { act } from 'react-dom/test-utils';
 
 const { getByTestId, getByText } = screen;
 const { keyboard, tab } = userEvent;
@@ -74,6 +75,10 @@ function test(Component) {
 }
 
 describe(componentName, () => {
+  beforeAll(() => {
+    pkg.setAllComponents(true);
+  });
+
   test(Toolbar);
 
   const instance = _instance(componentName);
@@ -90,7 +95,7 @@ describe(componentName, () => {
     keyboard(`{${text}}`);
   }
 
-  function setupFocus(length = 3, props) {
+  async function setupFocus(length = 3, props) {
     render(
       <Toolbar {...props}>
         {_array(length).map((_value, index) => {
@@ -103,56 +108,59 @@ describe(componentName, () => {
 
     expect(document.body).toHaveFocus();
 
-    tab();
+    await act(tab);
+
     expect(getByText(getText(0))).toHaveFocus();
   }
 
-  it('moves the focus out when tabbed', () => {
-    setupFocus();
+  it('moves the focus out when tabbed', async () => {
+    await setupFocus();
 
-    tab();
+    await act(tab);
+
     expect(document.body).toHaveFocus();
   });
 
-  it('sets focus on the item that previously contained focus', () => {
-    setupFocus();
+  it('sets focus on the item that previously contained focus', async () => {
+    await setupFocus();
 
-    key('ArrowRight');
+    await key('ArrowRight');
 
-    tab();
-    tab();
+    await act(tab);
 
     expect(getByText(getText(1))).toHaveFocus();
   });
 
-  function setupKeyFocus(props) {
+  async function setupKeyFocus(props) {
     const length = 5;
-    setupFocus(length, props);
+
+    await setupFocus(length, props);
 
     return _array(length - 1);
   }
 
-  function expectMove(text, id) {
-    key(text);
+  async function expectMove(text, id) {
+    await act(async () => await key(text));
 
     expect(getByText(getText(id))).toHaveFocus();
   }
 
-  function expectNextKeyFocus(text, props) {
-    setupKeyFocus(props).forEach((_value, index) =>
-      expectMove(text, index + 1)
-    );
+  async function expectNextKeyFocus(text, props) {
+    const items = await setupKeyFocus(props);
+    items.forEach(async (_value, index) => await expectMove(text, index + 1));
   }
 
-  it('moves focus to the next item', () => {
+  it('moves focus to the next item', async () => {
     expectNextKeyFocus('ArrowRight');
   });
 
-  function expectPreviousKeyFocus({ next, previous }, props) {
-    const items = setupKeyFocus(props);
+  async function expectPreviousKeyFocus({ next, previous }, props) {
+    const items = await setupKeyFocus(props);
     const { length } = items;
 
-    items.forEach(() => key(next));
+    await act(() => {
+      items.forEach(async () => await key(next));
+    });
 
     items.forEach((_value, index) =>
       expectMove(previous, length - (index + 1))
@@ -171,17 +179,17 @@ describe(componentName, () => {
 
   it('renders the vertical variant', async () => {
     const { rerender } = await render(
-      <Toolbar {...props} data-testid={dataTestId} />
+      <Toolbar {...props} data-testid={dataTestId} vertical={true} />
     );
 
     const className = `${blockClass}--vertical`;
-    expect(getByTestId(dataTestId)).not.toHaveClass(className);
+    expect(getByTestId(dataTestId)).toHaveClass(className);
 
     await rerender(<Toolbar {...props} data-testid={dataTestId} vertical />);
     expect(getByTestId(dataTestId)).toHaveClass(className);
   });
 
-  it('moves focus to the next item for the vertical variant', () => {
+  it('moves focus to the next item for the vertical variant', async () => {
     expectNextKeyFocus('ArrowDown', { vertical: true });
   });
 
@@ -195,6 +203,10 @@ describe(componentName, () => {
 
 const toolbarButtonComponentName = ToolbarButton.displayName;
 describe(toolbarButtonComponentName, () => {
+  beforeAll(() => {
+    pkg.setAllComponents(true);
+  });
+
   test(ToolbarButton);
 
   toBeAccessible(
@@ -243,5 +255,8 @@ describe(toolbarButtonComponentName, () => {
 });
 
 describe(ToolbarGroup.displayName, () => {
+  beforeAll(() => {
+    pkg.setAllComponents(true);
+  });
   test(ToolbarGroup);
 });

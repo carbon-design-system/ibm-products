@@ -90,9 +90,10 @@ export { NonLinearReading } from './NonLinearReading';
 
 export { Coachmark } from './Coachmark';
 export { CoachmarkFixed } from './CoachmarkFixed';
-
 export { CoachmarkBeacon } from './CoachmarkBeacon';
 export { CoachmarkButton } from './CoachmarkButton';
 export { CoachmarkOverlayElements } from './CoachmarkOverlayElements';
 export { CoachmarkOverlayElement } from './CoachmarkOverlayElement';
 export { CoachmarkStack } from './CoachmarkStack';
+
+export { InlineTip } from './InlineTip';

@@ -147,8 +147,7 @@ const s = [
       {
         n: 'Novice to pro',
         s: [
-          'c/NonLinearReading',
-          'c/Guidebanner',
+          'c/InlineTip', 'c/Guidebanner', 'c/NonLinearReading',
           {
             n: 'Coachmark',
             s: [
@@ -167,6 +166,7 @@ const s = [
             ],
           },
         ],
+
       },
     ],
   },

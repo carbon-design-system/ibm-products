@@ -6,9 +6,12 @@
  */
 
 import React, { useState } from 'react';
-import { getStoryTitle } from '../../global/js/utils/story-helper';
-import { FilterSummary } from '.';
 
+import { FilterSummary } from '.';
+import {
+  getStoryTitle,
+  prepareStory,
+} from '../../global/js/utils/story-helper';
 import styles from './_storybook-styles.scss';
 
 export default {
@@ -20,7 +23,7 @@ export default {
 };
 
 // eslint-disable-next-line react/prop-types
-export const Default = () => {
+export const Template = (args) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [filters, setFilters] = useState([
     { key: 'name', value: 'Thor' },
@@ -33,35 +36,62 @@ export const Default = () => {
   const clearFilters = () => setFilters([]);
 
   return (
-    <FilterSummary
-      clearFiltersText="Clear filters"
-      filters={filters}
-      clearFilters={clearFilters}
-    />
+    <div style={{ width: args.containerWidth }}>
+      <FilterSummary
+        clearFiltersText={args.clearFiltersText}
+        filters={filters}
+        clearFilters={clearFilters}
+        renderLabel={args.renderLabel}
+      />
+    </div>
   );
 };
 
 // eslint-disable-next-line react/prop-types
-export const WithManyTags = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+export const Default = prepareStory(Template, {
+  args: {
+    clearFiltersText: 'Clear filters',
+    filters: [
+      { key: 'name', value: 'Thor' },
+      { key: 'location', value: 'Asgard' },
+      //cspell: disable
+      { key: 'weapon', value: 'Mjölnir' },
+      //cspell: enable
+    ],
+  },
+});
 
-  const [filters, setFilters] = useState([
-    //cspell: disable
-    { key: 'project', value: 'Goldmember' },
-    //cspell: enable
-    { key: 'owner', value: 'Austin Powers' },
-    { key: 'middle name', value: 'Danger' },
-    { key: 'spy', value: true },
-    { key: 'title', value: 'International man of mystery' },
-  ]);
+// eslint-disable-next-line react/prop-types
+export const WithManyTags = prepareStory(Template, {
+  args: {
+    clearFiltersText: 'Clear filters',
+    filters: [
+      //cspell: disable
+      { key: 'project', value: 'Goldmember' },
+      //cspell: enable
+      { key: 'owner', value: 'Austin Powers' },
+      { key: 'middle name', value: 'Danger' },
+      { key: 'spy', value: true },
+      { key: 'title', value: 'International man of mystery' },
+    ],
+  },
+});
 
-  const clearFilters = () => setFilters([]);
-
-  return (
-    <FilterSummary
-      clearFiltersText="Clear filters"
-      filters={filters}
-      clearFilters={clearFilters}
-    />
-  );
-};
+export const WithCustomLabel = prepareStory(Template, {
+  args: {
+    clearFiltersText: 'Clear filters',
+    renderLabel: (key, value) => {
+      // Here in this function you can control how you want the label to be displayed, you can supply your own Sentence or Title case function
+      return `${key.toUpperCase()}: ${String(value).toUpperCase()}`;
+    },
+    filters: [
+      //cspell: disable
+      { key: 'project', value: 'Goldmember' },
+      //cspell: enable
+      { key: 'owner', value: 'Austin Powers' },
+      { key: 'middle name', value: 'Danger' },
+      { key: 'spy', value: true },
+      { key: 'title', value: 'International man of mystery' },
+    ],
+  },
+});

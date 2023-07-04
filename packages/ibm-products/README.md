@@ -104,6 +104,44 @@ const App = () => {
 };
 ```
 
+### Package prefix
+
+The `@carbon/ibm-products` package uses a default prefix of `c4p` for CSS
+selectors and some IDs.
+
+#### Changing the prefix
+
+Before any `@carbon/ibm-products` components are loaded in script or styling
+ensure you have done the following.
+
+```js
+import { pkg } from '@carbon/ibm-products/es/settings';
+
+pkg.prefix = 'tst';
+```
+
+When using multiple components from the library:
+
+```css
+@use '@carbon/ibm-products/scss' with (
+  $pkg-prefix: 'tst'
+);
+```
+
+When using individual components e.g. AboutModal:
+
+```css
+@use '@carbon/ibm-products/scss/config' with (
+  $pkg-prefix: 'tst'
+);
+
+@use '@carbon/ibm-products/scss/components/AboutModal';
+```
+
+See the
+[example gallery](https://ibm-products.carbondesignsystem.com/?path=/story/overview-examples--c-4-p-gallery-code-sandbox)
+for the most up-to-date prefix examples.
+
 ### Enabling Canary components and flagged features
 
 Components that have not yet completed the release review process are considered

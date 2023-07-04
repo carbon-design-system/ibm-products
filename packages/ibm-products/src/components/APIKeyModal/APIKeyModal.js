@@ -59,6 +59,7 @@ export let APIKeyModal = forwardRef(
       editing,
       error,
       errorText,
+      formName,
       generateButtonText,
       generateSuccessBody,
       generateSuccessTitle,
@@ -235,7 +236,7 @@ export let APIKeyModal = forwardRef(
                 />
               )}
               {(editing || (!apiKeyLoaded && nameRequired)) && (
-                <Form onSubmit={submitHandler}>
+                <Form onSubmit={submitHandler} aria-label={formName}>
                   <TextInput
                     helperText={nameHelperText}
                     placeholder={namePlaceholder}
@@ -416,6 +417,10 @@ APIKeyModal.propTypes = {
    * text to display if an error has occurred
    */
   errorText: PropTypes.string,
+  /**
+   * Name for form
+   */
+  formName: PropTypes.string.isRequired,
   /**
    * default primary button text for modal in assumed default mode create or generate.
    * in create mode this is the button text prior to supplying an api key, which then

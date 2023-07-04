@@ -49,6 +49,7 @@ const prefix = 'create-side-panel-stories__';
 const defaultStoryProps = {
   title: 'Create partitions',
   subtitle: "Specify the details of the partitions you're creating",
+  formName: 'Name of form',
   formTitle: 'Core configuration',
   formDescription:
     'We recommend you fill out and evaluate these details at a minimum before deploying your topic.',

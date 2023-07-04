@@ -56,6 +56,7 @@ export default {
 const defaultStoryProps = {
   title: 'Edit platform quotas',
   subtitle: 'Specify the details of the quotas',
+  formName: 'Name of form',
   formTitle: 'Core configuration',
   formDescription:
     'We recommend you fill out and evaluate these details at a minimum before deploying your topic.',

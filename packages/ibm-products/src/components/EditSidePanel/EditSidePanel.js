@@ -43,6 +43,7 @@ export let EditSidePanel = React.forwardRef(
       children,
       className,
       disableSubmit,
+      formName,
       formTitle,
       formDescription,
       onRequestClose,
@@ -116,7 +117,9 @@ export let EditSidePanel = React.forwardRef(
             {formDescription}
           </p>
         )}
-        <Form className={`${blockClass}__form`}>{children}</Form>
+        <Form className={`${blockClass}__form`} aria-label={formName}>
+          {children}
+        </Form>
       </SidePanel>
     );
   }
@@ -156,6 +159,11 @@ EditSidePanel.propTypes = {
    * Specifies an optional field that provides a additional context for a form
    */
   formDescription: PropTypes.node,
+
+  /**
+   * Name for form
+   */
+  formName: PropTypes.string.isRequired,
 
   /**
    * Specifies a required field that provides a title for a form

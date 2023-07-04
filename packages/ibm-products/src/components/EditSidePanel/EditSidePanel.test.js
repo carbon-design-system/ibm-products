@@ -23,6 +23,7 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const title = uuidv4();
 const subtitle = uuidv4();
+const formName = uuidv4();
 const formDescription = uuidv4();
 const formTitle = uuidv4();
 const selectorPrimaryFocus = `.${carbon.prefix}--text-input`;
@@ -38,6 +39,7 @@ const renderEditPanel = ({ ...rest } = {}, children = childrenContent) =>
       {...{
         title,
         subtitle,
+        formName,
         formDescription,
         formTitle,
         selectorPrimaryFocus,

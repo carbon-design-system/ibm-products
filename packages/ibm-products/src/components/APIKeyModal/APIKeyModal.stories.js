@@ -48,7 +48,6 @@ const defaultProps = {
   downloadBodyText:
     'This is your unique API key and is non-recoverable. If you lose this API key, you will have to reset it.',
   downloadLinkText: 'Download as JSON',
-  formName: 'Name of form',
   hasDownloadLink: true,
   downloadFileName: 'apikey',
   downloadFileType: 'json',

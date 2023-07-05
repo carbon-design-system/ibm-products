@@ -33,7 +33,6 @@ const renderComponent = ({ ...rest } = {}, children = <p>test</p>) =>
         {...{
           title,
           subtitle,
-          formName: 'Name of form',
           formDescription,
           formTitle,
           selectorPrimaryFocus,

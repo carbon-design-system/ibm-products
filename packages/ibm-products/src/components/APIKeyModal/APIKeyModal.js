@@ -59,7 +59,6 @@ export let APIKeyModal = forwardRef(
       editing,
       error,
       errorText,
-      formName,
       generateButtonText,
       generateSuccessBody,
       generateSuccessTitle,
@@ -88,6 +87,7 @@ export let APIKeyModal = forwardRef(
     },
     ref
   ) => {
+    const [title, setTitle] = useState(null);
     const [copyError, setCopyError] = useState(false);
     const [name, setName] = useState(apiKeyName);
     const [currentStep, setCurrentStep] = useState(0);
@@ -144,18 +144,27 @@ export let APIKeyModal = forwardRef(
       return closeButtonText;
     };
 
-    const getTitle = () => {
+    useEffect(() => {
       if (editing && editSuccess) {
-        return editSuccessTitle;
+        setTitle(editSuccessTitle);
+      } else if (apiKeyLoaded) {
+        setTitle(generateSuccessTitle);
+      } else if (hasSteps) {
+        setTitle(customSteps[currentStep].title);
+      } else {
+        setTitle(generateTitle);
       }
-      if (apiKeyLoaded) {
-        return generateSuccessTitle;
-      }
-      if (hasSteps) {
-        return customSteps[currentStep].title;
-      }
-      return generateTitle;
-    };
+    }, [
+      apiKeyLoaded,
+      editing,
+      editSuccess,
+      editSuccessTitle,
+      hasSteps,
+      generateSuccessTitle,
+      generateTitle,
+      currentStep,
+      customSteps,
+    ]);
 
     const setNameHandler = (evt) => {
       setName(evt.target.value);
@@ -209,7 +218,7 @@ export let APIKeyModal = forwardRef(
       >
         <ModalHeader
           className={`${blockClass}__header`}
-          title={getTitle()}
+          title={title}
           label={modalLabel}
         />
         <ModalBody className={`${blockClass}__body-container`}>
@@ -236,7 +245,7 @@ export let APIKeyModal = forwardRef(
                 />
               )}
               {(editing || (!apiKeyLoaded && nameRequired)) && (
-                <Form onSubmit={submitHandler} aria-label={formName}>
+                <Form onSubmit={submitHandler} aria-label={title}>
                   <TextInput
                     helperText={nameHelperText}
                     placeholder={namePlaceholder}
@@ -417,10 +426,6 @@ APIKeyModal.propTypes = {
    * text to display if an error has occurred
    */
   errorText: PropTypes.string,
-  /**
-   * Name for form
-   */
-  formName: PropTypes.string.isRequired,
   /**
    * default primary button text for modal in assumed default mode create or generate.
    * in create mode this is the button text prior to supplying an api key, which then

@@ -39,7 +39,6 @@ const defaultProps = {
   editing: false,
   error: false,
   errorText: 'an error occurred',
-  formName: 'Name of form',
   generateButtonText: 'create button',
   generateSuccessBody: 'created successfully body',
   generateSuccessTitle: 'created successfully title',

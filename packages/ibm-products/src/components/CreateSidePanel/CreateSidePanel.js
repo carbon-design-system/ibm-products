@@ -36,7 +36,6 @@ export let CreateSidePanel = React.forwardRef(
       className,
       children,
       disableSubmit,
-      formName,
       formTitle,
       formDescription,
       onRequestClose,
@@ -104,7 +103,7 @@ export let CreateSidePanel = React.forwardRef(
           >
             {formDescription}
           </p>
-          <Form className={`${blockClass}__form`} aria-label={formName}>
+          <Form className={`${blockClass}__form`} aria-labelledby={formTitleId}>
             {children}
           </Form>
         </SidePanel>
@@ -142,11 +141,6 @@ CreateSidePanel.propTypes = {
    * Specifies an optional field that provides a additional context for a form
    */
   formDescription: PropTypes.node,
-
-  /**
-   * Name for form
-   */
-  formName: PropTypes.string.isRequired,
 
   /**
    * Specifies a required field that provides a title for a form

@@ -35,6 +35,9 @@
     // stylelint-disable-next-line carbon/motion-duration-use
     transition: opacity 240ms carbon--motion(exit, productive) 300ms;
     transition-delay: 240ms;
+    @media (prefers-reduced-motion) {
+      transition: none;
+    }
 
     &::before {
       position: absolute;

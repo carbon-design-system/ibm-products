@@ -100,7 +100,7 @@ describe(componentName, () => {
     expect(screen.getByText(/DN/));
   });
 
-  it('should render the IconButton component if the tooltipText prop is passed', () => {
+  it('should render the Tooltip component if the tooltipText prop is passed', () => {
     const { container } = renderComponent({ tooltipText: 'Display name' });
     const tooltipElement = container.querySelector(
       `.${carbon.prefix}--icon-tooltip`

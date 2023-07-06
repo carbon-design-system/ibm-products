@@ -14,12 +14,12 @@ import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import '../../global/js/utils/props-helper';
-import { pkg } from '../../settings';
+import { pkg, carbon } from '../../settings';
 
 // Carbon and package components we use.
 import { User, Group } from '@carbon/react/icons';
 
-import { IconButton } from '@carbon/react';
+import { Button, Tooltip } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--user-profile-image`;
@@ -27,10 +27,6 @@ const componentName = 'UserProfileImage';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
-// Default values for props
-const defaults = {
-  tooltipAlignment: 'bottom',
-};
 /**
  * The user profile avatar allows for an image of the user to be displayed by passing in the image prop. By default the component will display a user icon on a blue background.
  */
@@ -47,7 +43,7 @@ export let UserProfileImage = React.forwardRef(
       size,
       theme,
       tooltipText,
-      tooltipAlignment = defaults.tooltipAlignment,
+      tooltipAlignment,
       // Collect any other property values passed in.
       ...rest
     },
@@ -55,12 +51,14 @@ export let UserProfileImage = React.forwardRef(
   ) => {
     const icons = {
       user: {
-        md: (props) => <User size={20} {...props} />,
+        sm: (props) => <User size={12} {...props} />,
+        md: (props) => <User size={16} {...props} />,
         lg: (props) => <User size={24} {...props} />,
         xl: (props) => <User size={32} {...props} />,
       },
       group: {
-        md: (props) => <Group size={20} {...props} />,
+        sm: (props) => <Group size={12} {...props} />,
+        md: (props) => <Group size={16} {...props} />,
         lg: (props) => <Group size={24} {...props} />,
         xl: (props) => <Group size={32} {...props} />,
       },
@@ -139,17 +137,31 @@ export let UserProfileImage = React.forwardRef(
         <FillItem />
       </div>
     );
+
     return (
       FillItem &&
       (tooltipText ? (
-        <IconButton
-          label={tooltipText}
-          className={`${blockClass}__tooltip`}
-          kind="ghost"
+        <Tooltip
           align={tooltipAlignment}
+          className={cx(
+            `${carbon.prefix}--icon-tooltip`,
+            `${blockClass}__tooltip`
+          )}
+          label={tooltipText}
         >
-          {renderUserProfileImage()}
-        </IconButton>
+          <Button
+            {...rest}
+            kind="ghost"
+            ref={ref}
+            size={size}
+            className={cx(
+              `${carbon.prefix}--btn--icon-only`,
+              `${blockClass}__tooltip-trigger`
+            )}
+          >
+            {renderUserProfileImage()}
+          </Button>
+        </Tooltip>
       ) : (
         renderUserProfileImage()
       ))
@@ -215,7 +227,7 @@ UserProfileImage.propTypes = {
   /**
    * Set the size of the avatar circle
    */
-  size: PropTypes.oneOf(['xl', 'lg', 'md']).isRequired,
+  size: PropTypes.oneOf(['xl', 'lg', 'md', 'sm']).isRequired,
 
   /**
    * Set theme in which the component will be rendered

@@ -17,9 +17,9 @@ $block-class: #{$pkg-prefix}--user-profile-image;
 
 $sizes: (
   xl: $spacing-10,
-  lg: $spacing-07,
-  md: $spacing-06,
-  sm: calc(#{$spacing-05} + #{$spacing-02}),
+  lg: $spacing-09,
+  md: $spacing-07,
+  sm: $spacing-06,
   xs: $spacing-05,
 );
 
@@ -86,19 +86,29 @@ $theme-keys: map-keys($themes);
   text-transform: uppercase;
 }
 
-.#{$block-class}__tooltip.#{$carbon-prefix}--btn--md.#{$carbon-prefix}--btn--icon-only {
+.#{$block-class}__tooltip-trigger.#{$carbon-prefix}--btn--icon-only {
   min-height: auto;
   padding: 0;
-  border-radius: 50%;
+  border-radius: 100%;
 }
 
-.#{$carbon-prefix}--btn--ghost.#{$block-class}__tooltip:focus {
+.#{$block-class}__tooltip-trigger.#{$carbon-prefix}--btn--md.#{$carbon-prefix}--btn--icon-only {
+  width: $spacing-07;
+  height: $spacing-07;
+}
+
+.#{$block-class}__tooltip-trigger.#{$carbon-prefix}--btn--sm.#{$carbon-prefix}--btn--icon-only {
+  width: $spacing-06;
+  height: $spacing-06;
+}
+
+.#{$carbon-prefix}--btn--ghost.#{$block-class}__tooltip-trigger:focus {
   border: 0;
   box-shadow: 0 0 0 $spacing-02 $focus;
 }
 
-.#{$carbon-prefix}--tooltip__trigger .#{$block-class} svg,
-.#{$block-class}__tooltip.#{$carbon-prefix}--btn--ghost:not([disabled]) svg {
+.#{$carbon-prefix}--tooltip-trigger .#{$block-class} svg,
+.#{$block-class}__tooltip .#{$carbon-prefix}--btn--ghost:not([disabled]) svg {
   fill: $layer-01;
 }
 

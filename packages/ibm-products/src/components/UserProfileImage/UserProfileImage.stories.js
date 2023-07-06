@@ -47,13 +47,13 @@ export default {
     },
     size: {
       control: {
-        type: 'radio',
+        type: 'select',
       },
-      options: ['xl', 'lg', 'md'],
+      options: ['xl', 'lg', 'md', 'sm'],
     },
     tooltipAlignment: {
       control: {
-        type: 'select',
+        type: 'radio',
       },
       options: [
         'top',

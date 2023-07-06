@@ -8001,19 +8001,29 @@ button.c4p--add-select__global-filter-toggle--open {
   text-transform: uppercase;
 }
 
-.c4p--user-profile-image__tooltip.cds--btn--md.cds--btn--icon-only {
+.c4p--user-profile-image__tooltip-trigger.cds--btn--icon-only {
   min-height: auto;
   padding: 0;
-  border-radius: 50%;
+  border-radius: 100%;
 }
 
-.cds--btn--ghost.c4p--user-profile-image__tooltip:focus {
+.c4p--user-profile-image__tooltip-trigger.cds--btn--md.cds--btn--icon-only {
+  width: 2rem;
+  height: 2rem;
+}
+
+.c4p--user-profile-image__tooltip-trigger.cds--btn--sm.cds--btn--icon-only {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.cds--btn--ghost.c4p--user-profile-image__tooltip-trigger:focus {
   border: 0;
   box-shadow: 0 0 0 0.25rem var(--cds-focus, #0f62fe);
 }
 
-.cds--tooltip__trigger .c4p--user-profile-image svg,
-.c4p--user-profile-image__tooltip.cds--btn--ghost:not([disabled]) svg {
+.cds--tooltip-trigger .c4p--user-profile-image svg,
+.c4p--user-profile-image__tooltip .cds--btn--ghost:not([disabled]) svg {
   fill: var(--cds-layer-01, #f4f4f4);
 }
 
@@ -8028,18 +8038,18 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 
 .c4p--user-profile-image__photo--lg {
+  width: 3rem;
+  height: 3rem;
+}
+
+.c4p--user-profile-image__photo--md {
   width: 2rem;
   height: 2rem;
 }
 
-.c4p--user-profile-image__photo--md {
+.c4p--user-profile-image__photo--sm {
   width: 1.5rem;
   height: 1.5rem;
-}
-
-.c4p--user-profile-image__photo--sm {
-  width: calc(1rem + 0.25rem);
-  height: calc(1rem + 0.25rem);
 }
 
 .c4p--user-profile-image__photo--xs {
@@ -8057,8 +8067,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 
 .c4p--user-profile-image--lg {
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
   font-size: var(--cds-body-compact-01-font-size, 0.875rem);
   font-weight: var(--cds-body-compact-01-font-weight, 400);
   line-height: var(--cds-body-compact-01-line-height, 1.28572);
@@ -8066,8 +8076,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 
 .c4p--user-profile-image--md {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 2rem;
+  height: 2rem;
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
   line-height: var(--cds-label-01-line-height, 1.33333);
@@ -8076,8 +8086,8 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 
 .c4p--user-profile-image--sm {
-  width: calc(1rem + 0.25rem);
-  height: calc(1rem + 0.25rem);
+  width: 1.5rem;
+  height: 1.5rem;
   font-size: var(--cds-label-01-font-size, 0.75rem);
   font-weight: var(--cds-label-01-font-weight, 400);
   line-height: var(--cds-label-01-line-height, 1.33333);

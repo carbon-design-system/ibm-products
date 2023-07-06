@@ -12,7 +12,7 @@ const DocsPage = () => {
         },
         {
           title: 'Form validation',
-          description: `All forms, including that within the \`CreateModal\` should follow C&CS guidelines
+          description: `All forms, including that within the \`CreateModal\` should follow @carbon/ibm-products guidelines
 for form validation.
 
 This includes the following:

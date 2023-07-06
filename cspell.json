@@ -89,6 +89,7 @@
     "noreply",
     "overridable",
     "overscroll",
+    "pathfill",
     "pconsole",
     "Prefs",
     "preid",

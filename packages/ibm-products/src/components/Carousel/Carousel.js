@@ -168,10 +168,10 @@ export let Carousel = React.forwardRef(
         }
       }
       const outerDiv = carouselRef.current;
-      //if (outerDiv) {
-      outerDiv.addEventListener('keydown', keypress);
-      return () => outerDiv.removeEventListener('keydown', keypress);
-      // }
+      if (outerDiv) {
+        outerDiv.addEventListener('keydown', keypress);
+        return () => outerDiv.removeEventListener('keydown', keypress);
+      }
     }, [disableArrowScroll]);
     useEffect(() => {
       return () => {

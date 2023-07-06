@@ -43,7 +43,7 @@ export let CoachmarkFixed = React.forwardRef(
       children,
       className,
       onClose = defaults.onClose,
-      portalSelector,
+      portalTarget,
       tagline = defaults.tagline,
       theme = defaults.theme,
       // Collect any other property values passed in.
@@ -52,8 +52,8 @@ export let CoachmarkFixed = React.forwardRef(
     ref
   ) => {
     const overlayRef = useRef();
-    const portalNode = portalSelector
-      ? document.querySelector(portalSelector) ?? document.querySelector('body')
+    const portalNode = portalTarget
+      ? document.querySelector(portalTarget) ?? document.querySelector('body')
       : document.querySelector('body');
     const [isOpen, setIsOpen] = useState(false);
     const [shouldResetPosition, setShouldResetPosition] = useState(false);
@@ -88,7 +88,7 @@ export let CoachmarkFixed = React.forwardRef(
         // Only open on double-click.
         onDoubleClick: handleTargetClick,
       },
-      closebuttonProps: {
+      closeButtonProps: {
         onClick: handleClose,
       },
       targetRect: targetRect,
@@ -196,7 +196,7 @@ CoachmarkFixed.propTypes = {
    * remain visible as long as that element remains visible or mounted. When the
    * element is hidden or component is unmounted, the Coachmark will disappear.
    */
-  portalSelector: PropTypes.string,
+  portalTarget: PropTypes.string,
   /**
    * The tagline title which will be fixed to the bottom right of the window and will serve as the display trigger.
    */

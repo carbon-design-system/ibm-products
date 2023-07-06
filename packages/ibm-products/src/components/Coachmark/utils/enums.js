@@ -5,7 +5,6 @@
  */
 export const BEACON_KIND = {
   DEFAULT: 'default',
-  //RING: 'ring',
 };
 
 /**

@@ -40,7 +40,7 @@ export let CoachmarkStackHome = forwardRef(
       navLinkLabels,
       onClickNavItem,
       onClose,
-      portalSelector,
+      portalTarget,
       closeButtonLabel,
       title,
       ...rest
@@ -56,8 +56,8 @@ export let CoachmarkStackHome = forwardRef(
       );
     }
 
-    const portalNode = portalSelector
-      ? document.querySelector(portalSelector) ?? document.querySelector('body')
+    const portalNode = portalTarget
+      ? document.querySelector(portalTarget) ?? document.querySelector('body')
       : document.querySelector('body');
     return createPortal(
       <div
@@ -192,7 +192,7 @@ CoachmarkStackHome.propTypes = {
    * remain visible as long as that element remains visible or mounted. When the
    * element is hidden or component is unmounted, the CoachmarkStackHome will disappear.
    */
-  portalSelector: PropTypes.string,
+  portalTarget: PropTypes.string,
 
   /**
    * The title of the Coachmark.

@@ -61,7 +61,6 @@ export let CoachmarkOverlayElements = React.forwardRef(
     useEffect(() => {
       // On mount, one of the two primary buttons ("next" or "close")
       // will be rendered and must have focus. (a11y)
-      //document.querySelector(`.${blockClass} .bx--btn--primary`).focus();
       if (buttonFocusRef.current) {
         buttonFocusRef.current.focus();
       }
@@ -115,7 +114,7 @@ export let CoachmarkOverlayElements = React.forwardRef(
                   'coachmark-carousel-controls'
                 )}
               >
-                <Button size="sm" {...coachmark.closebuttonProps}>
+                <Button size="sm" {...coachmark.closeButtonProps}>
                   {closeButtonLabel}
                 </Button>
               </div>
@@ -181,7 +180,7 @@ export let CoachmarkOverlayElements = React.forwardRef(
                   <Button
                     size="sm"
                     ref={buttonFocusRef}
-                    {...coachmark.closebuttonProps}
+                    {...coachmark.closeButtonProps}
                   >
                     {closeButtonLabel}
                   </Button>

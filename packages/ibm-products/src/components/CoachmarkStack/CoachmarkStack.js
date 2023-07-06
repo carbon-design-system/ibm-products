@@ -57,7 +57,7 @@ export let CoachmarkStack = React.forwardRef(
       description,
       media,
       navLinkLabels,
-      portalSelector = defaults.portalSelector,
+      portalTarget = defaults.portalTarget,
       closeButtonLabel,
       tagline,
       theme = defaults.theme,
@@ -66,8 +66,8 @@ export let CoachmarkStack = React.forwardRef(
     },
     ref
   ) => {
-    const portalNode = portalSelector
-      ? document.querySelector(portalSelector) ?? document.querySelector('body')
+    const portalNode = portalTarget
+      ? document.querySelector(portalTarget) ?? document.querySelector('body')
       : document.querySelector('body');
     const stackHomeRef = useRef();
     const stackedCoachmarkRefs = useRef([]);
@@ -117,7 +117,7 @@ export let CoachmarkStack = React.forwardRef(
           setIsOpen(true);
         },
       },
-      closebuttonProps: {
+      closeButtonProps: {
         onClick: () => handleClose(false),
       },
       isOpen: isOpen,
@@ -215,7 +215,7 @@ export let CoachmarkStack = React.forwardRef(
             onClose={() => {
               handleClose(true);
             }}
-            portalSelector={portalSelector}
+            portalTarget={portalTarget}
             closeButtonLabel={closeButtonLabel}
             title={title}
           />
@@ -257,7 +257,7 @@ CoachmarkStack.propTypes = {
    */
   closeButtonLabel: PropTypes.string,
 
-  // PASS THROUGH TO COACHMARKSTACKHOME
+  // Pass through to CoachmarkStackHome
   /**
    * The description of the Coachmark.
    */
@@ -295,7 +295,7 @@ CoachmarkStack.propTypes = {
    * Where in the DOM to render the stack.
    * The default is `document.body`.
    */
-  portalSelector: PropTypes.string,
+  portalTarget: PropTypes.string,
 
   /**
    * The tagline title which will be fixed to the bottom right of the window and will serve as the display trigger.

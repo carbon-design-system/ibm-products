@@ -43,7 +43,7 @@ export let Coachmark = forwardRef(
       overlayClassName,
       overlayKind = defaults.overlayKind,
       overlayRef,
-      portalSelector,
+      portalTarget,
       positionTune,
       target,
       theme = defaults.theme,
@@ -55,8 +55,8 @@ export let Coachmark = forwardRef(
   ) => {
     const isBeacon = overlayKind === COACHMARK_OVERLAY_KIND.TOOLTIP;
     const isStacked = overlayKind === COACHMARK_OVERLAY_KIND.STACKED;
-    const portalNode = portalSelector
-      ? document.querySelector(portalSelector) ?? document.querySelector('body')
+    const portalNode = portalTarget
+      ? document.querySelector(portalTarget) ?? document.querySelector('body')
       : document.querySelector('body');
     const [isOpen, setIsOpen] = useState(isStacked);
     const [shouldResetPosition, setShouldResetPosition] = useState(false);
@@ -103,7 +103,7 @@ export let Coachmark = forwardRef(
         // Only open on double-click.
         onDoubleClick: handleTargetClick,
       },
-      closebuttonProps: {
+      closeButtonProps: {
         onClick: handleClose,
       },
       targetRect: targetRect,
@@ -246,7 +246,7 @@ Coachmark.propTypes = {
    * remain visible as long as that element remains visible or mounted. When the
    * element is hidden or component is unmounted, the Coachmark will disappear.
    */
-  portalSelector: PropTypes.string,
+  portalTarget: PropTypes.string,
   /**
    * Fine tune the position of the target in pixels. Applies only to Beacons.
    */

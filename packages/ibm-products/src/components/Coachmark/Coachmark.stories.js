@@ -46,7 +46,7 @@ export default {
     overlayKind: {
       control: { type: null },
     },
-    portalSelector: {
+    portalTarget: {
       control: { type: null },
     },
     overlayClassName: {
@@ -102,7 +102,7 @@ export const tooltip = prepareStory(Template, {
     theme: 'dark',
     align: 'bottom',
     positionTune: { x: 0, y: 0 },
-    //portalSelector: '#CoachmarkExample',
+    //portalTarget: '#CoachmarkExample',
     target: (
       <CoachmarkBeacon label="Show information" kind={BEACON_KIND.DEFAULT} />
     ),

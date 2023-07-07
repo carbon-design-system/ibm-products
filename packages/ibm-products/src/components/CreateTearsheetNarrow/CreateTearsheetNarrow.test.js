@@ -24,6 +24,7 @@ const onRequestCloseFn = jest.fn();
 const onRequestSubmitFn = jest.fn();
 
 const defaultProps = {
+  open: true,
   title: 'Create partition',
   className: 'test-class-name',
   description: 'Select the number of partitions you want to create',
@@ -76,7 +77,14 @@ describe(componentName, () => {
     expect(screen.getByText(defaultProps.primaryButtonText)).toBeVisible();
   });
 
-  it.skip('has no accessibility violations', async () => {
+  it.skip('has no accessibility violations when closed', async () => {
+    // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
+    const { container } = renderComponent({ open: false });
+    await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('has no accessibility violations', async () => {
     const { container } = renderComponent();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();

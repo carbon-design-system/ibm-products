@@ -19,6 +19,7 @@ import { pkg /*, carbon */ } from '../../settings';
 import { Form } from '@carbon/react';
 import { SidePanel } from '../SidePanel';
 import '../../global/js/utils/props-helper';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--edit-side-panel`;
@@ -81,6 +82,8 @@ export let EditSidePanel = React.forwardRef(
       },
     ];
 
+    const formTitleId = uuidv4();
+
     return (
       <SidePanel
         {...rest}
@@ -104,6 +107,7 @@ export let EditSidePanel = React.forwardRef(
       >
         {formTitle && (
           <h3
+            id={formTitleId}
             className={`${blockClass}__form-title-text ${blockClass}__content-text`}
           >
             {formTitle}
@@ -116,7 +120,9 @@ export let EditSidePanel = React.forwardRef(
             {formDescription}
           </p>
         )}
-        <Form className={`${blockClass}__form`}>{children}</Form>
+        <Form className={`${blockClass}__form`} aria-labelledby={formTitleId}>
+          {children}
+        </Form>
       </SidePanel>
     );
   }
@@ -160,7 +166,7 @@ EditSidePanel.propTypes = {
   /**
    * Specifies a required field that provides a title for a form
    */
-  formTitle: PropTypes.node,
+  formTitle: PropTypes.node.isRequired,
 
   /**
    * Specifies an optional handler which is called when the CreateSidePanel

@@ -19,6 +19,7 @@ import React, { useEffect } from 'react';
 import { pkg } from '../../ibm-products/src/settings';
 
 import index from './index.scss';
+import prefixedIndex from './_prefix-index.scss';
 import { getSectionSequence } from '../story-structure';
 import { StoryDocsPage } from '../../ibm-products/src/global/js/utils/StoryDocsPage';
 
@@ -38,6 +39,12 @@ const Style = ({ children, styles }) => {
   return children;
 };
 
+let isDev = CONFIG_TYPE === 'DEVELOPMENT'; //  process.env?.NODE_ENV === 'development';
+if (isDev) {
+  // use a prefix in all development storybook
+  pkg.prefix = `dev-prefix--${pkg.prefix}`;
+}
+
 const decorators = [
   (storyFn, { args, parameters: { styles } }) => {
     const story = storyFn();
@@ -46,7 +53,7 @@ const decorators = [
 
     return (
       <div className="preview-position-fix">
-        <Style styles={index}>
+        <Style styles={isDev ? prefixedIndex : index}>
           {args.featureFlags ? (
             <ActionableNotification
               className="preview__notification--feature-flag"

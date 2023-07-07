@@ -56,13 +56,13 @@ $side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 }
 
 .#{$create-side-panel-block-class}__form-title-text {
-  @include type.type-style('productive-heading-02');
+  @include type.type-style('heading-compact-02');
 
   padding-bottom: $spacing-03;
 }
 
 .#{$create-side-panel-block-class}__form-description-text {
-  @include type.type-style('body-long-01');
+  @include type.type-style('body-01');
 }
 
 .#{$create-side-panel-block-class}.#{$side-panel-block-class}
@@ -71,13 +71,13 @@ $side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
 }
 
 .#{$create-side-panel-block-class}__title {
-  @include type.type-style('productive-heading-03');
+  @include type.type-style('heading-03');
 
   margin-bottom: $spacing-02;
 }
 
 .#{$create-side-panel-block-class}__subtitle {
-  @include type.type-style('body-short-01');
+  @include type.type-style('body-compact-01');
 
   margin-bottom: $spacing-03;
   color: $text-secondary;

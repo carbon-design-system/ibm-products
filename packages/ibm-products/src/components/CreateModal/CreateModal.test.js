@@ -106,7 +106,7 @@ describe(componentName, () => {
     );
   });
 
-  it.skip('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(<RenderComponent />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();

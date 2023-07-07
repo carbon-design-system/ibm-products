@@ -20,7 +20,7 @@
 
 .welcome__container--inner {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   height: 100%;
   /* stylelint-disable-next-line carbon/theme-token-use */
   color: colors.$black;
@@ -94,7 +94,6 @@
 
   .welcome__lottie {
     width: 1420px;
-
   }
 }
 
@@ -102,7 +101,7 @@
   width: 48px;
   height: 48px;
   background-color: colors.$gray-80;
-  opacity: .7;
+  opacity: 0.7;
   position: fixed;
   bottom: 48px;
   right: 32px;
@@ -112,7 +111,7 @@
   align-items: center;
   color: black;
   border: none;
-} 
+}
 
 .welcome__pause-button > svg {
   stroke: #fff;
@@ -145,7 +144,7 @@
 
   .welcome__col--right {
     visibility: hidden;
-    display: none; 
+    display: none;
   }
 }
 
@@ -153,7 +152,7 @@
   width: 48px;
   height: 48px;
   background-color: colors.$gray-80;
-  opacity: .7;
+  opacity: 0.7;
   position: fixed;
   bottom: 48px;
   right: 32px;
@@ -163,7 +162,7 @@
   align-items: center;
   color: black;
   border: none;
-} 
+}
 
 .pause-button > svg {
   stroke: #fff;

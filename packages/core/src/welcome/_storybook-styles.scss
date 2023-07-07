@@ -9,18 +9,19 @@
 @use '@carbon/styles/scss/colors';
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
-@use '@carbon/styles/scss/grid';
 
-.welcome-container--outer {
+.welcome__container--outer {
   width: 100%;
   height: 100vh;
+  overflow: hidden;
   /* stylelint-disable-next-line carbon/theme-token-use */
   background-color: colors.$purple-10;
 }
 
 .welcome__container--inner {
   display: flex;
-  max-width: 1586px;
+  justify-content: space-between; 
+  height: 100%;
   /* stylelint-disable-next-line carbon/theme-token-use */
   color: colors.$black;
 }
@@ -31,7 +32,8 @@
 }
 
 .welcome__col--right {
-  width: 70%;
+  width: 60%;
+  max-width: 1200px;
 }
 
 .welcome__header {
@@ -78,18 +80,50 @@
   }
 }
 
-@media (width <= 1056px) {
-  .page-container {
+@media (width <= 930px) {
+  .welcome__col--left {
+    width: 65%;
+    min-width: 200px;
+  }
+
+  .welcome__col--right {
+    width: 45%;
+    max-width: 300px;
     overflow: hidden;
   }
 
-  .welcome__col--left {
-    width: 50%;
-  }
+  .welcome__lottie {
+    width: 1420px;
 
-  .lottie {
-    width: 600px;
   }
+}
+
+.welcome__pause-button {
+  width: 48px;
+  height: 48px;
+  background-color: colors.$gray-80;
+  opacity: .7;
+  position: fixed;
+  bottom: 48px;
+  right: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  border: none;
+} 
+
+.welcome__pause-button > svg {
+  stroke: #fff;
+}
+
+.welcome__pause-button:focus {
+  outline: 2px solid colors.$blue-60;
+}
+
+.welcome__pause-button:active {
+  opacity: 1;
 }
 
 @media (width <= 400px) {
@@ -104,4 +138,41 @@
   .welcome__tag--xl.#{c4p-settings.$carbon-prefix}--tag {
     @include type.type-style('heading-01');
   }
+
+  .welcome__col--left {
+    width: 100%;
+  }
+
+  .welcome__col--right {
+    visibility: hidden;
+    display: none; 
+  }
+}
+
+.pause-button {
+  width: 48px;
+  height: 48px;
+  background-color: colors.$gray-80;
+  opacity: .7;
+  position: fixed;
+  bottom: 48px;
+  right: 32px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  border: none;
+} 
+
+.pause-button > svg {
+  stroke: #fff;
+}
+
+.pause-button:focus {
+  outline: 2px solid colors.$blue-60;
+}
+
+.pause-button:active {
+  opacity: 1;
 }

@@ -77,7 +77,11 @@ const Welcome = () => {
         </div>
         <div className="welcome__col--right">
           <WelcomeAnimation />
-          <button type="button" className="welcome__pause-button" onClick={toggleAnimation}>
+          <button
+            type="button"
+            className="welcome__pause-button"
+            onClick={toggleAnimation}
+          >
             {isAnimating ? <Pause /> : <Play />}
           </button>
         </div>

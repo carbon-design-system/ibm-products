@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import PackageInfo from '../../../ibm-products/package.json';
 import { Link, Tag } from '@carbon/react';
 import { ArrowRight, Pause, Play } from '@carbon/icons-react';
@@ -77,7 +77,7 @@ const Welcome = () => {
         </div>
         <div className="welcome__col--right">
           <WelcomeAnimation />
-          <button className="welcome__pause-button" onClick={toggleAnimation}>
+          <button type="button" className="welcome__pause-button" onClick={toggleAnimation}>
             {isAnimating ? <Pause /> : <Play />}
           </button>
         </div>

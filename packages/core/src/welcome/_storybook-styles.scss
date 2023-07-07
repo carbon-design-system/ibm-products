@@ -11,17 +11,17 @@
 @use '@carbon/styles/scss/type';
 
 .welcome__container--outer {
+  overflow: hidden;
   width: 100%;
   height: 100vh;
-  overflow: hidden;
   /* stylelint-disable-next-line carbon/theme-token-use */
   background-color: colors.$purple-10;
 }
 
 .welcome__container--inner {
   display: flex;
-  justify-content: space-between;
   height: 100%;
+  justify-content: space-between;
   /* stylelint-disable-next-line carbon/theme-token-use */
   color: colors.$black;
 }
@@ -87,9 +87,9 @@
   }
 
   .welcome__col--right {
+    overflow: hidden;
     width: 45%;
     max-width: 300px;
-    overflow: hidden;
   }
 
   .welcome__lottie {
@@ -98,26 +98,30 @@
 }
 
 .welcome__pause-button {
+  position: fixed;
+  right: $spacing-07;
+  bottom: $spacing-09;
+  display: flex;
   width: 48px;
   height: 48px;
-  background-color: colors.$gray-80;
-  opacity: 0.7;
-  position: fixed;
-  bottom: 48px;
-  right: 32px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  color: black;
+  justify-content: center;
   border: none;
+  border-radius: 50%;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  background-color: colors.$gray-80;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  color: colors.$gray-100;
+  opacity: 0.7;
 }
 
 .welcome__pause-button > svg {
-  stroke: #fff;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  color: colors.$white;
 }
 
 .welcome__pause-button:focus {
+  /* stylelint-disable-next-line carbon/theme-token-use */
   outline: 2px solid colors.$blue-60;
 }
 
@@ -143,35 +147,7 @@
   }
 
   .welcome__col--right {
-    visibility: hidden;
     display: none;
+    visibility: hidden;
   }
-}
-
-.pause-button {
-  width: 48px;
-  height: 48px;
-  background-color: colors.$gray-80;
-  opacity: 0.7;
-  position: fixed;
-  bottom: 48px;
-  right: 32px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: black;
-  border: none;
-}
-
-.pause-button > svg {
-  stroke: #fff;
-}
-
-.pause-button:focus {
-  outline: 2px solid colors.$blue-60;
-}
-
-.pause-button:active {
-  opacity: 1;
 }

@@ -1,4 +1,4 @@
-name: Releases @carbon/ibm-products with v11 support # Builds and releases @carbon/v11 supported version of @carbon/ibm-products
+name: Upgrade example dependencies # Update dependencies in test examples
 
 on:
   workflow_dispatch:

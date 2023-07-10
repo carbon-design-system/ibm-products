@@ -30,6 +30,7 @@ import { Link } from '@carbon/react';
 import { pkg } from '../../../../settings';
 import cx from 'classnames';
 import { SidePanel } from '../../../SidePanel';
+import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ClickableRow`,
@@ -37,7 +38,38 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    // docs: { page: mdx },
+    docs: {
+      page: () => (
+        <StoryDocsPage
+          blocks={[
+            {
+              title: 'Row click',
+              description: `Datagrid supports adding a click event on an entire row with the use of the \`useOnRowClick\` hook.
+- Include the \`useOnRowClick\` hook
+- Add the \`onRowClick\` property, this is a callback function that will be called when a row is clicked. It will give back the row and the click event.
+          `,
+              source: {
+                code: `
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    onRowClick: (row, event) => {
+      ...
+    },
+  },
+  useOnRowClick
+);
+
+return <Datagrid datagridState={datagridState} />;
+            `,
+              },
+            },
+          ]}
+        />
+      ),
+    },
+    layout: 'fullscreen',
   },
 };
 

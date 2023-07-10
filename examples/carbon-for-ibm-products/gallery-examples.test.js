@@ -38,6 +38,8 @@ import { Example as TearsheetExample } from './Tearsheet/src/Example/Example';
 import { Example as UserProfileImageExample } from './UserProfileImage/src/Example/Example';
 import { Example as WebTerminalExample } from './WebTerminal/src/Example/Example';
 import { Example as PrefixExampleExample } from './prefix-example/src/Example/Example';
+import { Example as React16ExampleExample } from './react-16-example/src/Example/Example';
+import { Example as React17ExampleExample } from './react-17-example/src/Example/Example';
 
 describe('All examples', () => {
   init(beforeEach, afterEach);
@@ -212,6 +214,18 @@ describe('All examples', () => {
 
   it('PrefixExample renders', () => {
     render(<PrefixExampleExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('React16Example renders', () => {
+    render(<React16ExampleExample />);
+    // expect no errors int the console
+    expect(console.error).not.toHaveBeenCalled();
+  });
+
+  it('React17Example renders', () => {
+    render(<React17ExampleExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

@@ -9,7 +9,7 @@
 // Carbon styles at the end -- this is to obtain a "worst case" for our own CSS,
 // to ensure we are resilient against different CSS loading orders and our
 // styles have the specificity necessary to override Carbon styles when needed.
-@use '../../ibm-products/src/index-without-carbon' as *;
+@use '../../ibm-products/src/index-without-carbon.scss';
 
 // Load all Carbon styles now
 @use '../css/carbon';

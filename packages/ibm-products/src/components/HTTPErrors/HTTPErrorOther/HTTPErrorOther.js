@@ -21,6 +21,11 @@ import { pkg } from '../../../settings';
 const blockClass = `${pkg.prefix}--http-errors`;
 const componentName = 'HTTPErrorOther';
 
+/**
+ * HTTP errors are used in an attempt to access something that isn’t available or
+the user doesn’t have permission for. This HTTPError component is generic so you
+can use it when you receive an error code that isn't provided.
+ */
 export let HTTPErrorOther = React.forwardRef(
   ({ className, description, errorCodeLabel, links, title, ...rest }, ref) => {
     return (

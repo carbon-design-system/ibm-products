@@ -12,18 +12,21 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { Saving } from '.';
-import mdx from './Saving.mdx';
+// import mdx from './Saving.mdx';
 import wait from '../../global/js/utils/wait';
 import { TextArea } from '@carbon/react';
 
 export default {
   title: getStoryTitle(Saving.displayName),
   component: Saving,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
   argTypes: {
     successful: {

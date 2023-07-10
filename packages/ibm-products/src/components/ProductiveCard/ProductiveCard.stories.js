@@ -14,17 +14,20 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { ProductiveCard } from '.';
-import mdx from './ProductiveCard.mdx';
+// import mdx from './ProductiveCard.mdx';
 import { action } from '@storybook/addon-actions';
 
 export default {
   title: getStoryTitle(ProductiveCard.displayName),
   component: ProductiveCard,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
   argTypes: {
     columnSizeSm: {
@@ -184,7 +187,6 @@ export const WithButtonHref = prepareStory(Template, {
 export const WithActionGhostButton = prepareStory(Template, {
   args: {
     ...defaultProps,
-    columnSize: 8,
     primaryButtonPlacement: 'top',
     primaryButtonText: 'Ghost button',
     primaryButtonIcon: (props) => <TrashCan size={16} {...props} />,

@@ -14,7 +14,6 @@ import { usePrefix } from '@carbon/react';
 import { CreateFullPage } from '.';
 import { CreateFullPageStep } from './CreateFullPageStep';
 import { pkg } from '../../settings';
-import mdx from './CreateFullPage.mdx';
 
 import styles from './_storybook-styles.scss';
 
@@ -34,15 +33,17 @@ import {
   Grid,
   Column,
 } from '@carbon/react';
+import DocsPage from './CreateFullPage.docs-page';
 
 export default {
   title: getStoryTitle(CreateFullPage.displayName),
   component: CreateFullPage,
+  tags: ['autodocs'],
   subcomponents: { CreateFullPageStep },
   parameters: {
     styles,
     layout: 'fullscreen',
-    docs: { page: mdx },
+    docs: { page: DocsPage },
     controls: { sort: 'requiredFirst' },
   },
   decorators: [

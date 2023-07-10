@@ -11,7 +11,7 @@
     ]
   },
   "scripts": {
-    "audit": "node scripts/audit.js dependencies moderate",
+    "audit": "node scripts/audit.js '--environment production' moderate",
     "build": "run-s -s 'build:*' storybook:build:storybook",
     "build:packages": "yarn run-all --include-dependencies build",
     "ci-check": "run-s -s 'ci-check:*' storybook:build",
@@ -84,11 +84,11 @@
     "npm-upgrade": "^3.1.0",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
-    "prettier-config-carbon": "^0.10.0",
+    "prettier-config-carbon": "^0.11.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "rimraf": "^5.0.1",
-    "stylelint": "^15.6.2",
+    "stylelint": "^15.7.0",
     "stylelint-config-ibm-products": "*",
     "webpack": "^5.85.0"
   },

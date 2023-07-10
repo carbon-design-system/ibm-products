@@ -26,7 +26,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--saving;
 }
 
 .#{$block-class}__text {
-  @include type.type-style('body-short-01');
+  @include type.type-style('body-compact-01');
 }
 
 .#{$block-class}__buttons {

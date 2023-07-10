@@ -30,6 +30,7 @@ const SelectAllWithToggle = ({
   columns,
   withStickyColumn,
 }) => {
+  const { onSelectAllRows, labels } = selectAllToggle || {};
   const [selectAllMode, setSelectAllMode] = useState(SELECT_ALL_PAGE_ROWS);
   useEffect(() => {
     if (onSelectAllRows) {
@@ -46,7 +47,6 @@ const SelectAllWithToggle = ({
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
-  const { onSelectAllRows, labels } = selectAllToggle || {};
   if (labels) {
     allPageRowsLabel = labels.allPageRows || allPageRowsLabel;
     allRowsLabel = labels.allRows || allRowsLabel;

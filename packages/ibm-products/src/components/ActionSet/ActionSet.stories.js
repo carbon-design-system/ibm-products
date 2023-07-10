@@ -26,6 +26,7 @@ const blockClass = `${pkg.prefix}--action-set`;
 export default {
   title: getStoryTitle(ActionSet.displayName),
   component: ActionSet,
+  tags: ['autodocs'],
   parameters: {
     styles,
   },

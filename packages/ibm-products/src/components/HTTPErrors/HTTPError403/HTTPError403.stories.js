@@ -11,18 +11,19 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../../global/js/utils/story-helper';
-
-import page from './HTTPError403.mdx';
-// import styles from '../_storybook-styles.scss';
+import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
 
 export default {
   title: getStoryTitle(HTTPError403.displayName),
   component: HTTPError403,
+  tags: ['autodocs'],
   parameters: {
     docs: {
-      page,
+      page: () => (
+        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/http-errors/usage#403-error" />
+      ),
     },
-    // styles,
+    layout: 'fullscreen',
   },
 };
 

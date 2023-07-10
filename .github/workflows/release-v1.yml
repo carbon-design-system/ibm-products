@@ -67,3 +67,4 @@ jobs:
         run:
           yarn lerna publish from-package --dist-tag v1-latest
           --yes
+

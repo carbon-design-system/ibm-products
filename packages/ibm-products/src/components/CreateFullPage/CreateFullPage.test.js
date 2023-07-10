@@ -169,8 +169,11 @@ const renderFullPageWithStepChildrenOutside = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
+  // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
   it.skip('has no accessibility violations', async () => {
-    const { container } = renderComponent({ ...defaultFullPageProps });
+    const { container } = renderComponent({
+      ...defaultFullPageProps,
+    });
     await expect(container).toBeAccessible(componentName, 'scan_label');
     await expect(container).toHaveNoAxeViolations();
   });

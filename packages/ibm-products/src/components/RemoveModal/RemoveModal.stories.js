@@ -13,15 +13,16 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { RemoveModal } from '.';
-import mdx from './RemoveModal.mdx';
+import DocsPage from './RemoveModal.docs-page';
 
 export default {
   title: getStoryTitle(RemoveModal.displayName),
   component: RemoveModal,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     docs: {
-      page: mdx,
+      page: DocsPage,
     },
   },
 };
@@ -46,12 +47,8 @@ const defaultProps = {
   preventCloseOnClickOutside: true,
 };
 
-const Template = (args) => {
-  return <RemoveModal {...args} />;
-};
-
-const TemplateWithState = (args) => {
-  const [open, setOpen] = useState(false);
+const Template = ({ open: initOpen, ...args }, context) => {
+  const [open, setOpen] = useState(context.viewMode !== 'docs' && initOpen);
 
   return (
     <>
@@ -61,7 +58,7 @@ const TemplateWithState = (args) => {
   );
 };
 
-export const Standard = prepareStory(TemplateWithState, {
+export const Standard = prepareStory(Template, {
   args: {
     ...defaultProps,
     body: `Removing ${resourceName} will permanently remove the configuration. This action cannot be undone.`,
@@ -78,10 +75,11 @@ export const RemovePattern = prepareStory(Template, {
     title: 'Confirm removal',
     primaryButtonText: 'Remove',
     label: `Remove ${resourceName}`,
+    open: true,
   },
 });
 
-export const DeletePattern = prepareStory(TemplateWithState, {
+export const DeletePattern = prepareStory(Template, {
   args: {
     ...defaultProps,
     textConfirmation: true,

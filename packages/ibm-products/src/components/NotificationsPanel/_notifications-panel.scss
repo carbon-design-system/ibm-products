@@ -82,7 +82,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
       color: $text-primary;
     }
     .#{$block-class}__header {
-      @include type.type-style('productive-heading-01');
+      @include type.type-style('heading-compact-01');
 
       margin: 0;
     }
@@ -252,7 +252,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--notifications-panel;
     justify-content: center;
     margin-top: $spacing-13;
     .#{c4p-settings.$pkg-prefix}-subtext {
-      @include type.type-style('body-short-01');
+      @include type.type-style('body-compact-01');
     }
   }
   .#{$block-class}__main-section {

@@ -38,17 +38,18 @@ import React, { useState } from 'react';
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 
 import { Toolbar, ToolbarButton, ToolbarGroup } from '../..';
-import mdx from './Toolbar.mdx';
+import DocsPage from './Toolbar.docs-page';
 
 export default {
   title: getStoryTitle(Toolbar.displayName),
   component: Toolbar,
+  tags: ['autodocs'],
 
   subcomponents: { ToolbarGroup, ToolbarButton },
 
   parameters: {
     docs: {
-      page: mdx,
+      page: DocsPage,
     },
   },
 };

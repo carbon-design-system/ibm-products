@@ -32,13 +32,13 @@ $side-panel-block-class: #{c4p-settings.$pkg-prefix}--side-panel;
   }
 
   .#{$block-class}__form-title-text {
-    @include type.type-style('productive-heading-02');
+    @include type.type-style('heading-compact-02');
 
     padding-bottom: $spacing-03;
   }
 
   .#{$block-class}__form-description-text {
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
   }
 
   &.#{$side-panel-block-class}

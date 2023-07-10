@@ -2,10 +2,13 @@
   $font-path: '@ibm/plex'
 );
 
-$pkg-prefix: 'tst';
-// Actually want to do this, but codesandbox does not load SCSS properly just yet
-// @use '@carbon/ibm-products/scss/index';
-//
-// replaced with
-//
-@use '@carbon/ibm-products/scss/components/AboutModal/index';
+// When importing many components from @carbon/ibm-products
+// @use "@carbon/ibm-products/scss" with (
+//   $pkg-prefix: "tst"
+// );
+
+// When using individual components from @carbon/ibm-products
+@use '@carbon/ibm-products/scss/config' with (
+  $pkg-prefix: 'tst'
+);
+@use '@carbon/ibm-products/scss/components/AboutModal';

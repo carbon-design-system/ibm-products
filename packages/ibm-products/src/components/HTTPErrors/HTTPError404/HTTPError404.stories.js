@@ -11,19 +11,19 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../../global/js/utils/story-helper';
-
-// import page from './HTTPError404.mdx';
-import styles from '../_storybook-styles.scss';
+import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
 
 export default {
   title: getStoryTitle(HTTPError404.displayName),
   component: HTTPError404,
   tags: ['autodocs'],
   parameters: {
-    // docs: {
-    //   page,
-    // },
-    styles,
+    docs: {
+      page: () => (
+        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/http-errors/usage#404-error" />
+      ),
+    },
+    layout: 'fullscreen',
   },
 };
 

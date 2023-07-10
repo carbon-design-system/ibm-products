@@ -1,4 +1,4 @@
-name: Update v1 packages # Updates dependencies once a month
+name: Update v1 packages/dependencies # Updates dependencies once a month
 
 on:
   workflow_dispatch:

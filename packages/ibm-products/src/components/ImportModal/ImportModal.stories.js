@@ -14,6 +14,7 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { ImportModal } from '.';
+import DocsPage from './ImportModal.docs-page';
 // import mdx from './ImportModal.mdx';
 
 export default {
@@ -22,11 +23,9 @@ export default {
   tags: ['autodocs'],
   parameters: {
     // styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: DocsPage,
     },
-*/
   },
 };
 

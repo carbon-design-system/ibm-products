@@ -36,6 +36,9 @@ const defaults = {
   validExtensions: Object.freeze([]),
 };
 
+/**
+ * Modal dialog version of the export pattern
+ */
 export let ExportModal = forwardRef(
   (
     {

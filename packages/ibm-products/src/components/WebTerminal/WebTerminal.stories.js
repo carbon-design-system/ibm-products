@@ -18,11 +18,11 @@ import {
 } from '../../global/js/utils/story-helper';
 import { WebTerminal } from '.';
 import { WebTerminalContentWrapper } from './WebTerminalContentWrapper';
-// import mdx from './WebTerminal.mdx';
 import { documentationLinks } from './preview-components/documentationLinks';
 import { WebTerminalProvider } from './hooks';
 
 import styles from './_storybook-styles.scss';
+import DocsPage from './WebTerminal.docs-page';
 
 const actions = [
   {
@@ -90,11 +90,12 @@ export default {
   title: getStoryTitle(WebTerminal.displayName),
   tags: ['autodocs'],
   parameters: {
+    layout: 'fullscreen',
     styles,
-    /*
-docs: {
-      page: mdx,
+
+    docs: {
+      page: DocsPage,
     },
-*/
   },
+  component: WebTerminal, // Required to pick up WebTerminal doc block
 };

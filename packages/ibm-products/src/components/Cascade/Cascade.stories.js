@@ -11,21 +11,20 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { Cascade } from '.';
-// import mdx from './Cascade.mdx';
 import styles from './_storybook-styles.scss'; // import index in case more files are added later.
 import { Column } from '@carbon/react';
+import DocsPage from './Cascade.docs-page';
 
 export default {
   title: getStoryTitle(Cascade.displayName),
   component: Cascade,
   tags: ['autodocs'],
   parameters: {
+    layout: 'fullscreen',
     styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: DocsPage,
     },
-*/
   },
 };
 

@@ -24,6 +24,7 @@ import {
   NotificationsEmptyState,
   UnauthorizedEmptyState,
 } from '.';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 // import styles from './_storybook-styles.scss';
 
@@ -41,11 +42,22 @@ export default {
   },
   parameters: {
     // styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: () => (
+        <StoryDocsPage
+          altGuidelinesHref={[
+            {
+              href: 'https://pages.github.ibm.com/cdai-design/pal/patterns/empty-state/usage',
+              label: 'Error pattern usage guidelines',
+            },
+            {
+              href: 'https://www.carbondesignsystem.com/patterns/empty-states-pattern/',
+              label: 'Carbon empty pattern usage guidelines',
+            },
+          ]}
+        />
+      ),
     },
-*/
   },
 };
 

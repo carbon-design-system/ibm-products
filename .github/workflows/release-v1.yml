@@ -68,13 +68,3 @@ jobs:
           yarn lerna publish from-package --dist-tag v1-latest
           --yes
 
-      - name: Bump versions
-        run: yarn
-
-      - name: Commit lock file
-      - run: |
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git config user.name $GITHUB_ACTOR
-          git add yarn.lock
-          git commit -m "chore: update lockfile"
-          git push origin main_v1

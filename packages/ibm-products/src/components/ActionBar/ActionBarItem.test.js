@@ -22,14 +22,15 @@ const dataTestId = uuidv4();
 const testLabel = 'Test label';
 
 describe(ActionBarItem.displayName, () => {
-  it.skip('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(
       <main>
-        <ActionBarItem label={testLabel}>{content}</ActionBarItem>
+        <ActionBarItem label={testLabel}></ActionBarItem>
       </main>
     );
     userEvent.tab();
-    expect(screen.getByText(content)).toHaveFocus();
+    expect(screen.getByText(testLabel));
+    expect(screen.getByRole('button')).toHaveFocus();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
@@ -39,9 +40,7 @@ describe(ActionBarItem.displayName, () => {
 
     // not enough room so should see an overflow.
     const { container } = render(
-      <ActionBarItem label={testLabel} onClick={myOnClick}>
-        {content}
-      </ActionBarItem>
+      <ActionBarItem label={testLabel} onClick={myOnClick}></ActionBarItem>
     );
 
     const actionBarItemElement = container.querySelector(`.${blockClass}`);

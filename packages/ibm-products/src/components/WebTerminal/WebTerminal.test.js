@@ -21,6 +21,7 @@ import {
   WebTerminalContentWrapper,
   useWebTerminal,
 } from './index';
+import { componentName } from '../Toolbar/Toolbar';
 
 const blockClass = `${pkg.prefix}--web-terminal`;
 const name = WebTerminal.displayName;
@@ -58,12 +59,12 @@ describe(name, () => {
     is a potential violation. We can remove the skip once we fix our accessibility-checker
     issue. https://github.com/carbon-design-system/ibm-products/issues/2154
   */
-  it.skip('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(
       <MockWebTerminal isInitiallyOpen>Body content</MockWebTerminal>
     );
 
-    await expect(container).toBeAccessible();
+    await expect(container).toBeAccessible(componentName);
   });
 
   test('should attach a custom class to the web terminal', () => {

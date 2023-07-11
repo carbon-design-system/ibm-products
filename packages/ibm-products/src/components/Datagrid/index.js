@@ -25,5 +25,4 @@ export { default as useColumnOrder } from './useColumnOrder';
 export { default as useInlineEdit } from './useInlineEdit';
 export { default as useEditableCell } from './useEditableCell';
 export { default as useFiltering } from './useFiltering';
-export { default as useRowExpandListener } from './useRowExpandListener';
 export { getAutoSizedColumnWidth } from './utils/getAutoSizedColumnWidth';

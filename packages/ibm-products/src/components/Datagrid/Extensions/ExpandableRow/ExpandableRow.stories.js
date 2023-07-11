@@ -17,7 +17,6 @@ import {
   Datagrid,
   useDatagrid,
   useExpandedRow,
-  useRowExpandListener,
 } from '../../index';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
@@ -188,7 +187,6 @@ const ExpandedRows = ({ ...args }) => {
       ...args.defaultGridProps,
     },
     useExpandedRow,
-    useRowExpandListener
   );
 
   // Warnings are ordinarily silenced in storybook, add this to test.

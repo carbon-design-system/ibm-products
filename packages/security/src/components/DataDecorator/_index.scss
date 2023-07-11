@@ -13,8 +13,6 @@
 @include security--component($name: decorator) {
   @include decorator;
 
-  //todo have a feature-flag switcher to switch over to new decorator?
-
   // common design(spacing, shape, text color)
   $border: 1px solid $decorative-01;
   $round-border-radius: carbon--mini-units(
@@ -80,10 +78,6 @@
         #{$decoratorBlock}__type {
           border-color: $hovered-border-color;
         }
-
-        #{$decoratorBlock}__value {
-          text-decoration: unset;
-        }
       }
     }
   }
@@ -108,5 +102,13 @@
 
   &--no-border-radius {
     border-radius: unset;
+
+    // remove padding reserved for rounded border
+    &#{$decoratorBlock}__pill,
+    &#{$decoratorBlock}__link,
+    &#{$decoratorBlock}__dual-type-pill,
+    &#{$decoratorBlock}__dual-value-pill {
+      padding: 0;
+    }
   }
 }

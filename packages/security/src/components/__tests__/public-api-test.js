@@ -124,7 +124,6 @@ test('Public API changes with a SemVer change', () => {
 
   const { mockRestore } = spyOn(console, 'warn').mockImplementation();
 
-  // TODO: leave PR note '<FileUploaderButton buttonKind={'ghost-danger'}>' is expected as from packages/security/src/components/Button/Button.js:20 added manually. Not sure why snapshot was not updated at then.
   Object.keys(Components).forEach((name) => {
     const Component = Components[name];
     PublicAPI.set(name, mapComponentToAPI(Component));

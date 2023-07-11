@@ -127,6 +127,7 @@ const Decorator = ({
   // Pill
   if (onClick && !onClickValue) {
     return (
+      // eslint-disable-next-line react/button-has-type
       <button
         data-testid={`${namespace}-pill`}
         className={`${decoratorClasses} ${namespace}__pill`}
@@ -145,12 +146,14 @@ const Decorator = ({
         className={`${namespace}__dual-container`}
         data-testid={`${namespace}-${type}-${value}`}
       >
+        {/* eslint-disable-next-line react/button-has-type */}
         <button
           className={`${decoratorClasses} ${namespace}__dual-type-pill`}
           {...interactiveProps}
         >
           {renderType()}
         </button>
+        {/* eslint-disable-next-line react/button-has-type */}
         <button
           className={`${decoratorClasses} ${namespace}__dual-value-pill`}
           {...interactiveProps}

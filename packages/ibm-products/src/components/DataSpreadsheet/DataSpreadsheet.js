@@ -761,14 +761,6 @@ export let DataSpreadsheet = React.forwardRef(
       cellEditorValue,
     });
 
-    const handleActiveCellMouseEnter = useCallback(() => {
-      handleActiveCellMouseEnterCallback(selectionAreas, clickAndHoldActive);
-    }, [
-      clickAndHoldActive,
-      selectionAreas,
-      handleActiveCellMouseEnterCallback,
-    ]);
-
     // Only update if there are cell selection areas
     // Find point object that matches currentMatcher and remove the second point
     // because hovering over the active cell while clicking and holding should
@@ -808,6 +800,14 @@ export let DataSpreadsheet = React.forwardRef(
       },
       [spreadsheetRef, currentMatcher]
     );
+
+    const handleActiveCellMouseEnter = useCallback(() => {
+      handleActiveCellMouseEnterCallback(selectionAreas, clickAndHoldActive);
+    }, [
+      clickAndHoldActive,
+      selectionAreas,
+      handleActiveCellMouseEnterCallback,
+    ]);
 
     return (
       <div

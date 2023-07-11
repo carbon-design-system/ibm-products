@@ -15,7 +15,6 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { EditUpdateCards } from '.';
-import mdx from './EditUpdateCards.mdx';
 
 import styles from './_storybook-styles.scss';
 import {
@@ -36,10 +35,12 @@ import {
   CheckmarkFilled,
 } from '@carbon/react/icons';
 import { pkg /*, carbon */ } from '../../settings';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 export default {
   title: getStoryTitle(EditUpdateCards.displayName),
   component: EditUpdateCards,
+  tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
   // argTypes: {
   //   egProp: { control: 'color' },
@@ -47,7 +48,9 @@ export default {
   parameters: {
     styles,
     docs: {
-      page: mdx,
+      page: () => (
+        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#other-edit-behaviors" />
+      ),
     },
   },
 };

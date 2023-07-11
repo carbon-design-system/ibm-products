@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2022, 2022
+// Copyright IBM Corp. 2022, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -22,6 +22,7 @@
 
 // Datagrid uses the following Carbon for IBM Products components:
 // TODO: @use(s) of IBM Products component styles used by Datagrid
+@use '../ButtonMenu';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
@@ -33,7 +34,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
     display: none;
   }
 
-  .bx--overflow-menu-options > .c4p--datagrid__row-size-dropdown {
+  .#{c4p-settings.$carbon-prefix}--overflow-menu-options
+    > .#{c4p-settings.$pkg-prefix}--datagrid__row-size-dropdown {
     left: $spacing-01;
     width: 112px;
   }

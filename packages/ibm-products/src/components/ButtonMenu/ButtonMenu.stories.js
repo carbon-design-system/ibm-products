@@ -15,7 +15,7 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
-import mdx from './ButtonMenu.mdx';
+// import mdx from './ButtonMenu.mdx';
 
 // import styles from './_storybook-styles.scss';
 
@@ -24,15 +24,18 @@ import { Add } from '@carbon/react/icons';
 export default {
   title: getStoryTitle(ButtonMenu.displayName),
   component: ButtonMenu,
+  tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
   // argTypes: {
   //   egProp: { control: 'color' },
   // },
   parameters: {
     // styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 

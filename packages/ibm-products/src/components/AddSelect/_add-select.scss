@@ -77,6 +77,10 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
     align-items: center;
   }
 
+  &-form-control-wrapper--radio {
+    cursor: pointer;
+  }
+
   &-form-control-label-wrapper {
     display: flex;
     margin-left: $spacing-05;
@@ -141,7 +145,7 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
   border-bottom: 1px solid $layer-accent-01;
 
   .#{$block-class}__sidebar-title {
-    @include type.type-style('productive-heading-02');
+    @include type.type-style('heading-compact-02');
   }
 }
 
@@ -173,7 +177,7 @@ $tearsheet-class: #{$pkg-prefix}--tearsheet;
 }
 
 .#{$block-class} .#{$block-class}__sidebar-item-body {
-  @include type.type-style('body-long-01');
+  @include type.type-style('body-01');
 
   margin-bottom: $spacing-05;
 }
@@ -338,15 +342,15 @@ button.#{$block-class}__global-filter-toggle {
 }
 
 .#{$block-class}__meta-panel p.#{$block-class}__meta-panel-title {
-  @include type.type-style('productive-heading-03');
+  @include type.type-style('heading-03');
 }
 
 .#{$block-class}__meta-panel p.#{$block-class}__meta-panel-entry-title {
-  @include type.type-style('productive-heading-01');
+  @include type.type-style('heading-compact-01');
 }
 
 .#{$block-class}__meta-panel p.#{$block-class}__meta-panel-entry-body {
-  @include type.type-style('body-short-01');
+  @include type.type-style('body-compact-01');
 }
 
 // overrides
@@ -387,7 +391,7 @@ button.#{$block-class}__global-filter-toggle {
 }
 
 .#{$block-class} .#{$block-class}__items-label {
-  @include type.type-style('productive-heading-01');
+  @include type.type-style('heading-compact-01');
 }
 
 .#{$block-class}

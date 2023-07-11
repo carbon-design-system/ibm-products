@@ -16,9 +16,16 @@ import {
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
 import styles from './_storybook-styles.scss';
 
+const lastBreadcrumbs = [
+  'A short title',
+  'A slightly longer length title',
+  'Breadcrumb 5 is a longer breadcrumb it could go on for much longer than expected',
+];
+
 export default {
   title: getStoryTitle(BreadcrumbWithOverflow.displayName),
   component: BreadcrumbWithOverflow,
+  tags: ['autodocs'],
   argTypes: {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
@@ -26,13 +33,8 @@ export default {
     lastBreadcrumb: {
       control: {
         type: 'select',
-        options: [
-          'A short title',
-          'A slightly longer length title',
-          'Breadcrumb 5 is a longer breadcrumb it could go on for much longer than expected',
-        ],
       },
-      defaultValue: 'A short title',
+      options: lastBreadcrumbs,
     },
     lastBreadcrumbIsCurrent: { control: { type: 'boolean' } },
   },
@@ -119,5 +121,6 @@ export const Default = prepareStory(Template, {
     breadcrumbs: breadcrumbItems,
     containerWidth: 500,
     overflowAriaLabel: 'Open and close additional breadcrumb item list.',
+    lastBreadcrumb: lastBreadcrumbs[0],
   },
 });

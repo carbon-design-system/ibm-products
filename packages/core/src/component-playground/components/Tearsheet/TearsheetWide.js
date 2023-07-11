@@ -41,7 +41,7 @@ const TearsheetWide = (props) => {
       open={props.isOpen}
       title="Title of the tearsheet"
     >
-      <Form>
+      <Form aria-label="Title of the tearsheet">
         <p>Main content</p>
         <FormGroup legendText="">
           <TextInput

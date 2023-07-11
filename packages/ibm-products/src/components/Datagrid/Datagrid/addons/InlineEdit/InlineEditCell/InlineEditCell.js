@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -36,7 +36,7 @@ export const InlineEditCell = ({
   placeholder = '',
   tabIndex,
   value,
-  nonEditCell,
+  nonEditCell = false,
   totalInlineEditColumns,
   type,
 }) => {
@@ -59,6 +59,9 @@ export const InlineEditCell = ({
   const dropdownRef = useRef();
   const datePickerRef = useRef();
   const outerButtonElement = useRef();
+
+  const { rowSize, onDataUpdate } = instance;
+  let saveCellData;
 
   useEffect(() => {
     setInitialValue(value);
@@ -156,8 +159,6 @@ export const InlineEditCell = ({
     }
   };
 
-  const { rowSize, onDataUpdate } = instance;
-
   // Auto focus text input when entering edit mode
   useEffect(() => {
     if (inEditMode) {
@@ -170,14 +171,9 @@ export const InlineEditCell = ({
     }
   }, [inEditMode, type]);
 
-  // Initialize cellValue from value prop
-  useEffect(() => {
-    setCellValue(value);
-  }, [value]);
-
   // Saves the new cell data, onDataUpdate is a required function to be
   // passed to useDatagrid when using useInlineEdit
-  const saveCellData = useCallback(
+  saveCellData = useCallback(
     (newValue) => {
       const columnId = cell.column.id;
       const rowIndex = cell.row.index;
@@ -195,6 +191,11 @@ export const InlineEditCell = ({
     },
     [cell, onDataUpdate]
   );
+
+  // Initialize cellValue from value prop
+  useEffect(() => {
+    setCellValue(value);
+  }, [value]);
 
   const sendFocusBackToGrid = () => {
     // Allows the onKeyDown listener to go back to the entire grid area
@@ -332,16 +333,16 @@ export const InlineEditCell = ({
 
   const setRenderIcon = () => {
     if (type === 'text') {
-      return (props) => <Edit size={16} {...props} />;
+      return Edit;
     }
     if (type === 'number') {
-      return (props) => <CaretSort size={16} {...props} />;
+      return CaretSort;
     }
     if (type === 'selection') {
-      return (props) => <ChevronDown size={16} {...props} />;
+      return ChevronDown;
     }
     if (type === 'date') {
-      return (props) => <Calendar size={16} {...props} />;
+      return Calendar;
     }
   };
 

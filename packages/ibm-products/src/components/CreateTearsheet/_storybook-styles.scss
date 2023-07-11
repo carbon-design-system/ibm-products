@@ -13,7 +13,7 @@
 $preview-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create-multi-step;
 
 .#{$preview-block-class}__description {
-  @include type.type-style('body-short-01');
+  @include type.type-style('body-compact-01');
 
   padding-bottom: $spacing-04;
 }

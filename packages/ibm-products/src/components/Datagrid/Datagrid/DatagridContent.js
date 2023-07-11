@@ -84,7 +84,7 @@ export const DatagridContent = ({ datagridState }) => {
           getTableProps()?.className
         )}
         role={withInlineEdit && 'grid'}
-        tabIndex={withInlineEdit && 0}
+        tabIndex={withInlineEdit ? 0 : -1}
         onKeyDown={
           withInlineEdit
             ? (event) =>

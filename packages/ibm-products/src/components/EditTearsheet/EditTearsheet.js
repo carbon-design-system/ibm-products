@@ -31,6 +31,9 @@ const defaults = {
   influencerWidth: 'narrow',
 };
 
+/**
+ * Use Tearsheet with medium to complex edits. See usage guidance for further information.
+ */
 export let EditTearsheet = forwardRef(
   (
     {

@@ -13,16 +13,35 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { ExportModal } from '.';
-import mdx from './ExportModal.mdx';
+// import mdx from './ExportModal.mdx';
 import wait from '../../global/js/utils/wait';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 export default {
   title: getStoryTitle(ExportModal.displayName),
   component: ExportModal,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     docs: {
-      page: mdx,
+      page: () => (
+        <StoryDocsPage
+          altGuidelinesHref={[
+            {
+              href: 'https://pages.github.ibm.com/cdai-design/pal/patterns/exporting/usage',
+              label: 'Export guidelines',
+            },
+            {
+              href: 'https://www.carbondesignsystem.com/components/modal/usage',
+              label: 'Carbon Modal usage guidelines',
+            },
+            {
+              href: 'https://react.carbondesignsystem.com/?path=/docs/modal--default',
+              label: 'Carbon Modal documentation',
+            },
+          ]}
+        />
+      ),
     },
   },
 };
@@ -39,8 +58,8 @@ const defaultProps = {
   inputType: 'text',
 };
 
-const Template = (args) => {
-  return <ExportModal {...args} />;
+const Template = ({ open, ...args }, context) => {
+  return <ExportModal {...args} open={context.viewMode !== 'docs' && open} />;
 };
 
 const TemplateWithState = (args) => {

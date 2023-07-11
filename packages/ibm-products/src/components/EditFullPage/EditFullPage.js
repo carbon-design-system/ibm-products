@@ -39,7 +39,8 @@ const componentName = 'EditFullPage';
 // };
 
 /**
- * TODO: A description of the component.
+ * Use when settings on a page need to always be shown in edit mode, or when the context of the page is needed to make several changes.
+ * See usage guidance for further details.
  */
 export let EditFullPage = React.forwardRef(
   (

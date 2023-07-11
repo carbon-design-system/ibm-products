@@ -58,7 +58,13 @@ export const tearsheetIsPassive = (actions) => !actions || !actions?.length;
 export const tearsheetHasCloseIcon = (actions, hasCloseIcon) =>
   hasCloseIcon ?? tearsheetIsPassive(actions);
 
-// TearSheetShell is used internally by TearSheet and TearSheetNarrow
+/**
+ *  TearSheetShell is used internally by TearSheet and TearSheetNarrow
+ *
+ * The component is not public.
+ *
+ * See the canvas tab for the component API details.
+ * */
 export const TearsheetShell = React.forwardRef(
   (
     {
@@ -256,7 +262,10 @@ export const TearsheetShell = React.forwardRef(
               closeModal={onClose}
               iconDescription={closeIconDescription}
             >
-              <Wrap className={`${bc}__header-content`}>
+              <Wrap
+                className={`${bc}__header-content`}
+                element={wide ? Layer : undefined}
+              >
                 <Wrap className={`${bc}__header-fields`}>
                   {/* we create the label and title here instead of passing them
                       as modal header props so we can wrap them in layout divs */}
@@ -292,15 +301,10 @@ export const TearsheetShell = React.forwardRef(
               {influencer}
             </Wrap>
             <Wrap className={`${bc}__right`}>
-              <Wrap
-                className={`${bc}__main`}
-                alwaysRender={includeActions}
-                element={wide ? Layer : undefined}
-              >
+              <Wrap className={`${bc}__main`} alwaysRender={includeActions}>
                 <Wrap
                   className={`${bc}__content`}
                   alwaysRender={influencer && influencerPosition === 'right'}
-                  element={wide ? Layer : undefined}
                 >
                   {children}
                 </Wrap>
@@ -321,6 +325,7 @@ export const TearsheetShell = React.forwardRef(
                     buttonSize={wide ? '2xl' : null}
                     className={`${bc}__buttons`}
                     size={wide ? '2xl' : 'lg'}
+                    aria-hidden={!open}
                   />
                 </Wrap>
               )}

@@ -108,6 +108,12 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="20%"><a href="https://github.com/glapadre"><img src="https://avatars.githubusercontent.com/u/25260547?v=4?s=100" width="100px;" alt="Drew Glapa"/><br /><sub><b>Drew Glapa</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=glapadre" title="Code">💻</a></td>
       <td align="center" valign="top" width="20%"><a href="https://linkedin.com/in/mslilypeng/"><img src="https://avatars.githubusercontent.com/u/3118961?v=4?s=100" width="100px;" alt="Lily"/><br /><sub><b>Lily</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=lily-peng" title="Code">💻</a></td>
       <td align="center" valign="top" width="20%"><a href="https://github.com/mgallo25"><img src="https://avatars.githubusercontent.com/u/23409382?v=4?s=100" width="100px;" alt="Marienella Gallo"/><br /><sub><b>Marienella Gallo</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=mgallo25" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/sdignum"><img src="https://avatars.githubusercontent.com/u/10590403?v=4?s=100" width="100px;" alt="Shelley Dignum"/><br /><sub><b>Shelley Dignum</b></sub></a><br /><a href="#design-sdignum" title="Design">🎨</a></td>
+    </tr>
+    <tr>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/thefirstartist"><img src="https://avatars.githubusercontent.com/u/40870771?v=4?s=100" width="100px;" alt="Sam Ting"/><br /><sub><b>Sam Ting</b></sub></a><br /><a href="#a11y-thefirstartist" title="Accessibility">️️️️♿️</a> <a href="#design-thefirstartist" title="Design">🎨</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/paul-balchin-ibm"><img src="https://avatars.githubusercontent.com/u/52505287?v=4?s=100" width="100px;" alt="Paul Balchin"/><br /><sub><b>Paul Balchin</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=paul-balchin-ibm" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://github.com/jlongshore"><img src="https://avatars.githubusercontent.com/u/25206522?v=4?s=100" width="100px;" alt="Jeff Longshore"/><br /><sub><b>Jeff Longshore</b></sub></a><br /><a href="https://github.com/carbon-design-system/ibm-products/commits?author=jlongshore" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

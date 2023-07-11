@@ -27,6 +27,15 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--status-icon`;
 const componentName = 'StatusIcon';
 
+/**
+The `StatusIcon` component follows the Carbon guidelines for status icons with
+some added specifications around illustration usage. For additional usage
+guidelines and documentation please refer to the links above.
+
+_Status icons_ are an important method of communicating severity level
+information to users. The shapes and colors, communicate severity that enable
+users to quickly assess and identify status and respond accordingly.
+ */
 export let StatusIcon = forwardRef(
   ({ kind, theme, size, className, iconDescription, ...rest }, ref) => {
     const icons = {

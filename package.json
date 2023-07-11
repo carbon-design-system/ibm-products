@@ -155,7 +155,7 @@
     "packages/ibm-products/**/*": "yarn spellcheck:files"
   },
   "dependencies": {
-    "stylelint-plugin-carbon-tokens": "2.2.0"
+    "stylelint-plugin-carbon-tokens": "2.3.1"
   },
   "packageManager": "yarn@3.5.1"
 }

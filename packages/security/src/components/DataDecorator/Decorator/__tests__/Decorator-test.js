@@ -246,16 +246,15 @@ Object.keys(icons).forEach((icon) => {
   });
 });
 
-// TODO: merge tests back to other tests above?
-describe('New decorator', () => {
-  it.each([() => undefined, undefined])('render as pill ', (onClickHandler) => {
+describe('accessible Decorator', () => {
+  it('render as a readonly pill without specifying onClick event handler', () => {
     const { getByTestId } = render(
-      <Decorator type="IP" value="10.0.0.0" onClick={onClickHandler} />
+      <Decorator type="IP" value="10.0.0.0" />
     );
     expect(getByTestId(`${namespace}-pill`)).toBeVisible();
   });
 
-  it('"Type" and "Value" are rendered as individual buttons in order when "Value" click event handler is specified', () => {
+  it('"Type" and "Value" are rendered as individual buttons in order when both "onClick" and "onClickValue" event handler are specified', () => {
     const onClick = jest.fn();
     const onClickValue = jest.fn();
     const { getByRole } = render(
@@ -281,7 +280,7 @@ describe('New decorator', () => {
     expect(onClickValue).toHaveBeenCalledTimes(1);
   });
 
-  it('has no-border-radius class when noBorderRadius is set', () => {
+  it('has no-border-radius class when noBorderRadius is specified', () => {
     const { getByRole } = render(
       <Decorator
         noType
@@ -296,34 +295,37 @@ describe('New decorator', () => {
       `${namespace}--no-border-radius`
     );
   });
+});
 
-  describe('can use noType to hide the type part', () => {
-    it('"Type" is not rendered if noType is true', () => {
-      const { queryByRole, getByRole } = render(
-        <Decorator
-          noType
-          type="IP"
-          value="10.0.0.0"
-          onClick={() => {}}
-          onClickValue={() => {}}
-        />
-      );
-      expect(getByRole('button', { name: '10.0.0.0' })).toBeVisible();
-      expect(queryByRole('button', { name: 'IP' })).not.toBeInTheDocument();
-    });
-    it('"Type" is not rendered in pill if noType is true', () => {
-      const { queryByText, getByRole } = render(
-        <Decorator noType type="IP" value="10.0.0.0" onClick={() => {}} />
-      );
-      expect(getByRole('button', { name: '10.0.0.0' })).toBeVisible();
-      expect(queryByText('IP')).not.toBeInTheDocument();
-    });
-    it('"Type" is not rendered in non-interactive pill if noType is true', () => {
-      const { queryByText, getByText } = render(
-        <Decorator noType type="IP" value="10.0.0.0" />
-      );
-      expect(getByText('10.0.0.0')).toBeVisible();
-      expect(queryByText('IP')).not.toBeInTheDocument();
-    });
+describe('Optional "Type" UI part', () => {
+  it('"Type" is not rendered in interactive pill when "noType" is specified', () => {
+    const { queryByText, getByRole } = render(
+      <Decorator noType type="IP" value="10.0.0.0" onClick={() => {}} />
+    );
+    expect(getByRole('button', { name: '10.0.0.0' })).toBeVisible();
+    expect(queryByText('IP')).not.toBeInTheDocument();
+  });
+
+  it('"Type" is not rendered in non-interactive pill when "noType" is specified', () => {
+    const { queryByText, getByText } = render(
+      <Decorator noType type="IP" value="10.0.0.0" />
+    );
+    expect(getByText('10.0.0.0')).toBeVisible();
+    expect(queryByText('IP')).not.toBeInTheDocument();
+  });
+
+  it('"Type" is not rendered in dual interactive pill when "noType" is specified', () => {
+    const { queryByRole, getByRole } = render(
+      <Decorator
+        noType
+        type="IP"
+        value="10.0.0.0"
+        onClick={() => {}}
+        onClickValue={() => {}}
+      />
+    );
+    expect(getByRole('button', { name: '10.0.0.0' })).toBeVisible();
+    expect(queryByRole('button', { name: 'IP' })).not.toBeInTheDocument();
   });
 });
+

@@ -13,11 +13,7 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
-import {
-  Datagrid,
-  useDatagrid,
-  useExpandedRow,
-} from '../../index';
+import { Datagrid, useDatagrid, useExpandedRow } from '../../index';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
@@ -186,7 +182,7 @@ const ExpandedRows = ({ ...args }) => {
       ExpandedRowContentComponent: expansionRenderer,
       ...args.defaultGridProps,
     },
-    useExpandedRow,
+    useExpandedRow
   );
 
   // Warnings are ordinarily silenced in storybook, add this to test.

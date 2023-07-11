@@ -55,8 +55,9 @@
     "upgrade:dependencies:top": "npm-check-updates -u --dep dev,peer,prod --reject '/(carbon|^react$|^react-dom$|^@testing-library)/'",
     "upgrade:dependencies:packages": "yarn run-all --no-sort --concurrency 1 upgrade-dependencies",
     "upgrade:dependencies:yarn": "yarn set version latest",
+    "upgrade:dependencies:examples": "npm-check-updates -u --dep dev,peer,prod --color --target minor --packageFile 'examples/**/package.json'",
     "upgrade:automatic": "run-s -s 'upgrade:dependencies:*'",
-    "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/' --target minor",
+    "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,examples/**,packages/**}/package.json}' --filter '/carbon/' --target minor",
     "upgrade:manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {
@@ -154,7 +155,7 @@
     "packages/ibm-products/**/*": "yarn spellcheck:files"
   },
   "dependencies": {
-    "stylelint-plugin-carbon-tokens": "2.2.0"
+    "stylelint-plugin-carbon-tokens": "2.3.1"
   },
   "packageManager": "yarn@3.6.1"
 }

@@ -17,7 +17,7 @@ const DocsPage = () => {
         },
         {
           title: 'Form validation',
-          description: `All forms, including that within the \`CreateSidePanel\` should follow C&CS
+          description: `All forms, including that within the \`CreateSidePanel\` should follow @carbon/ibm-products
 guidelines for form validation.
 
 This includes the following:

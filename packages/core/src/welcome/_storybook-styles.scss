@@ -27,13 +27,20 @@
 }
 
 .welcome__col--left {
-  width: 40%;
+  width: 35%;
   padding: $spacing-09;
 }
 
 .welcome__col--right {
-  width: 60%;
+  width: 65%;
+}
+
+.welcome__animation {
+  display: flex;
+  overflow: hidden;
   max-width: 1200px;
+  max-height: 100vh;
+  justify-content: flex-end;
 }
 
 .welcome__header {
@@ -69,55 +76,23 @@
   color: colors.$blue-60;
 }
 
-@media (width <= 1312px) {
-  .welcome__col--left {
-    width: 40%;
-    min-width: 460px;
-  }
-
-  .welcome__col--right {
-    width: 60%;
-  }
-}
-
-@media (width <= 930px) {
-  .welcome__col--left {
-    width: 65%;
-    min-width: 200px;
-  }
-
-  .welcome__col--right {
-    overflow: hidden;
-    width: 45%;
-    max-width: 300px;
-  }
-
-  .welcome__lottie {
-    width: 1420px;
-  }
-}
-
 .welcome__pause-button {
-  position: fixed;
-  right: $spacing-07;
-  bottom: $spacing-09;
+  position: absolute;
+  z-index: 3;
   display: flex;
-  width: 48px;
-  height: 48px;
+  width: 32px;
+  height: 32px;
   align-items: center;
+  align-self: flex-end;
   justify-content: center;
   border: none;
   border-radius: 50%;
+  margin: $spacing-05;
   /* stylelint-disable-next-line carbon/theme-token-use */
   background-color: colors.$gray-80;
   /* stylelint-disable-next-line carbon/theme-token-use */
   color: colors.$gray-100;
   opacity: 0.7;
-}
-
-.welcome__pause-button > svg {
-  /* stylelint-disable-next-line carbon/theme-token-use */
-  color: colors.$white;
 }
 
 .welcome__pause-button:focus {
@@ -129,9 +104,54 @@
   opacity: 1;
 }
 
-@media (width <= 400px) {
+.welcome__pause-button > svg {
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  color: colors.$white;
+}
+
+@media (width <= 1312px) {
+  .welcome__col--left {
+    width: 35%;
+    padding: $spacing-07;
+  }
+
+  .welcome__col--right {
+    width: 65%;
+  }
+
   .welcome__heading {
-    @include type.type-style('heading-04');
+    @include type.type-style('heading-06');
+  }
+
+  .welcome__subtitle {
+    @include type.type-style('heading-05');
+  }
+  .welcome__tag--xl.#{c4p-settings.$carbon-prefix}--tag {
+    @include type.type-style('heading-02');
+  }
+}
+
+@media (width <= 930px) {
+  .welcome__col--left {
+    width: 50%;
+    min-width: 200px;
+    padding: $spacing-06;
+  }
+
+  .welcome__col--right {
+    overflow: hidden;
+    width: 50%;
+    min-width: 300px;
+  }
+
+  .welcome__animation {
+    width: 1090px;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  .welcome__heading {
+    @include type.type-style('heading-05');
   }
 
   .welcome__subtitle {
@@ -142,8 +162,18 @@
     @include type.type-style('heading-01');
   }
 
+  .welcome__pause-button {
+    position: fixed;
+    right: 0;
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (width <= 400px) {
   .welcome__col--left {
     width: 100%;
+    padding: $spacing-08;
   }
 
   .welcome__col--right {

@@ -5,40 +5,38 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PackageInfo from '../../../ibm-products/package.json';
 import { Link, Tag } from '@carbon/react';
 import { ArrowRight, Pause, Play } from '@carbon/icons-react';
-import Lottie from 'lottie-react';
+import lottie from 'lottie-web';
 import WelcomeLottie from './welcome-lottie.json';
 
 const Welcome = () => {
-  const lottieRef = useRef();
+  const animationRef = useRef(null);
 
   let prefersReducedMotion = window.matchMedia(
     `(prefers-reduced-motion: reduce)`
   ).matches;
-  let isAnimating = !prefersReducedMotion;
+
+  const [isAnimating, setIsAnimating] = useState(prefersReducedMotion);
+
+  React.useEffect(() => {
+    lottie.loadAnimation({
+      container: animationRef.current,
+      animationData: WelcomeLottie,
+      autoplay: !prefersReducedMotion,
+    });
+  }, [prefersReducedMotion]);
 
   const toggleAnimation = () => {
-    isAnimating = !isAnimating;
-    if (isAnimating) {
-      lottieRef.current.play();
-    } else {
-      lottieRef.current.pause();
-    }
-  };
+    setIsAnimating(!isAnimating);
 
-  const WelcomeAnimation = () => {
-    return (
-      <Lottie
-        className="welcome__lottie"
-        animationData={WelcomeLottie}
-        autoplay={!prefersReducedMotion}
-        loop={true}
-        lottieRef={lottieRef}
-      />
-    );
+    if (isAnimating) {
+      lottie.play();
+    } else {
+      lottie.pause();
+    }
   };
 
   return (
@@ -76,14 +74,15 @@ const Welcome = () => {
           </div>
         </div>
         <div className="welcome__col--right">
-          <WelcomeAnimation />
-          <button
-            type="button"
-            className="welcome__pause-button"
-            onClick={toggleAnimation}
-          >
-            {isAnimating ? <Pause /> : <Play />}
-          </button>
+          <div ref={animationRef} className="welcome__animation">
+            <button
+              type="button"
+              className="welcome__pause-button"
+              onClick={toggleAnimation}
+            >
+              {isAnimating ? <Play /> : <Pause />}
+            </button>
+          </div>
         </div>
       </div>
     </div>

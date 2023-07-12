@@ -9,7 +9,6 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Settings } from '@carbon/react/icons';
 import { IconButton, Layer, Popover, PopoverContent } from '@carbon/react';
-import cx from 'classnames';
 import RowSizeRadioGroup from './RowSizeRadioGroup';
 import { pkg } from '../../../../../settings';
 
@@ -27,14 +26,14 @@ const RowSizeDropdown = ({
       align="bottom-right"
       open={isOpen}
       onRequestClose={() => setIsOpen(false)}
-      className={cx(`${blockClass}__row-size-options-container`)}
+      className={`${blockClass}__row-size-options-container`}
     >
       <IconButton
         align={align}
         kind="ghost"
         onClick={() => setIsOpen((prevOpen) => !prevOpen)}
         label={legendText}
-        className={cx(`${blockClass}__row-size-button`)}
+        className={`${blockClass}__row-size-button`}
       >
         <Settings size={16} />
       </IconButton>

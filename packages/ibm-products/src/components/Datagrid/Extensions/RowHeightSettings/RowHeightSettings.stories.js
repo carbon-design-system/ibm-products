@@ -27,6 +27,7 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
+    layout: 'fullscreen',
     // docs: { page: mdx },
   },
 };

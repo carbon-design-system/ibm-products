@@ -17,11 +17,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/ibm-products": "^2.0.1",
-    "@carbon/react": "^1.28.0",
+    "@carbon/ibm-products": "^2.3.1",
+    "@carbon/react": "^1.33.2",
     "lodash": "^4.17.21",
-    "react": "^17",
-    "react-dom": "^17",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "sass": "^1.62.1"
   },
   "devDependencies": {

@@ -154,7 +154,7 @@
     "packages/ibm-products/**/*": "yarn spellcheck:files"
   },
   "dependencies": {
-    "lottie-react": "^2.4.0",
+    "lottie-web": "^5.12.2",
     "stylelint-plugin-carbon-tokens": "2.2.0"
   },
   "packageManager": "yarn@3.5.1"

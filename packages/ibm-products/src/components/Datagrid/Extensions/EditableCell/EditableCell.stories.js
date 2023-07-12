@@ -21,7 +21,7 @@ import {
 } from '../../index';
 import { pkg } from '../../../../settings';
 import styles from '../../_storybook-styles.scss';
-// import mdx from '../../Datagrid.mdx';
+import { DocsPage } from './EditableCell.docs-page';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { getInlineEditColumns } from '../../utils/getInlineEditColumns';
@@ -35,7 +35,8 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    // docs: { page: mdx },
+    docs: { page: DocsPage },
+    layout: 'fullscreen',
     argTypes: {
       featureFlags: {
         table: {

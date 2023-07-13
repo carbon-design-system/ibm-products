@@ -25,6 +25,8 @@ import grafanaLogo from './_story-assets/grafana-logo.png';
 import jsLogo from './_story-assets/js-logo.png';
 
 import styles from './_storybook-styles.scss';
+import prefixStyles from './_prefix-storybook-styles.scss';
+import { isDev } from '../../../../core/.storybook/preview';
 
 const blockClass = `${pkg.prefix}--about-modal`;
 
@@ -35,7 +37,8 @@ export default {
   component: AboutModal,
   tags: ['autodocs'],
   parameters: {
-    styles,
+    // styles,
+    styles: isDev ? prefixStyles : styles,
     docs: {
       page: DocsPage,
     },

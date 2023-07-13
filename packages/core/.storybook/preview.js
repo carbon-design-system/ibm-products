@@ -39,7 +39,7 @@ const Style = ({ children, styles }) => {
   return children;
 };
 
-const isDev = CONFIG_TYPE === 'DEVELOPMENT'; //  process.env?.NODE_ENV === 'development';
+export const isDev = CONFIG_TYPE === 'DEVELOPMENT'; //  process.env?.NODE_ENV === 'development';
 if (isDev) {
   // use a prefix in all development storybook
   pkg.prefix = `dev-prefix--${pkg.prefix}`;

@@ -27,9 +27,10 @@ import {
 } from '.';
 
 import { SelectAllWithToggle } from './Datagrid.stories/index';
-// import mdx from './Datagrid.mdx';
 
 import styles from './_storybook-styles.scss';
+import prefixStyles from './_prefix-storybook-styles.scss';
+import { isDev } from '../../../../core/.storybook/preview';
 import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
@@ -41,7 +42,7 @@ export default {
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
-    styles,
+    styles: isDev ? prefixStyles : styles,
     docs: {
       page: DocsPage,
     },

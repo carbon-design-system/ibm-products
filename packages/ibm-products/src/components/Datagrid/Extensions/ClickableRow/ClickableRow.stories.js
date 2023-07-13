@@ -21,6 +21,7 @@ import {
   useOnRowClick,
 } from '../../index';
 import styles from '../../_storybook-styles.scss';
+import prefixStyles from '../../_prefix-storybook-styles.scss';
 // import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
@@ -31,13 +32,14 @@ import { pkg } from '../../../../settings';
 import cx from 'classnames';
 import { SidePanel } from '../../../SidePanel';
 import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
+import { isDev } from '../../../../../../core/.storybook/preview';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ClickableRow`,
   component: Datagrid,
   tags: ['autodocs'],
   parameters: {
-    styles,
+    styles: isDev ? prefixStyles : styles,
     docs: {
       page: () => (
         <StoryDocsPage

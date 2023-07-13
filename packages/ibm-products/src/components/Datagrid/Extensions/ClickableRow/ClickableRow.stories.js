@@ -44,17 +44,17 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const storyBlockClass = `${pkg.prefix}--datagrid-story`;
 const defaultHeader = [
   {
-    Header: 'Row Index',
+    Header: 'Row index',
     accessor: (row, i) => i,
     sticky: 'left',
     id: 'rowIndex', // id is required when accessor is a function.
   },
   {
-    Header: 'First Name',
+    Header: 'First name',
     accessor: 'firstName',
   },
   {
-    Header: 'Last Name',
+    Header: 'Last name',
     accessor: 'lastName',
   },
   {
@@ -65,6 +65,7 @@ const defaultHeader = [
         <Link
           className={`${storyBlockClass}__custom-cell-wrapper`}
           href={cell?.value?.href}
+          title={cell?.value?.text}
         >
           {cell?.value?.text}
         </Link>
@@ -76,11 +77,13 @@ const defaultHeader = [
     Header: 'Age',
     accessor: 'age',
     width: 120,
+    rightAlignedColumn: true,
   },
   {
     Header: 'Visits',
     accessor: 'visits',
     width: 120,
+    rightAlignedColumn: true,
   },
   {
     Header: 'Bonus',
@@ -293,7 +296,8 @@ const ClickableRowWithPanel = ({ ...args }) => {
       },
       ...args.defaultGridProps,
     },
-    useOnRowClick
+    useOnRowClick,
+    useColumnRightAlign
   );
   return (
     <div

@@ -76,6 +76,8 @@ const defaults = {
     InlineTip: false,
     Guidebanner: false,
     NonLinearReading: false,
+    InterstitialScreen: false,
+    InterstitialScreenView: false,
     /* new component flags here - comment used by generate CLI */
   },
 

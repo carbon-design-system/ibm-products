@@ -88,3 +88,5 @@ export { EditInPlace } from './EditInPlace';
 export { Guidebanner } from './Guidebanner';
 export { NonLinearReading } from './NonLinearReading';
 export { InlineTip } from './InlineTip';
+export { InterstitialScreen } from './InterstitialScreen';
+export { InterstitialScreenView } from './InterstitialScreenView';

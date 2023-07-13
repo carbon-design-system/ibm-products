@@ -248,9 +248,7 @@ Object.keys(icons).forEach((icon) => {
 
 describe('accessible Decorator', () => {
   it('render as a readonly pill without specifying onClick event handler', () => {
-    const { getByTestId } = render(
-      <Decorator type="IP" value="10.0.0.0" />
-    );
+    const { getByTestId } = render(<Decorator type="IP" value="10.0.0.0" />);
     expect(getByTestId(`${namespace}-pill`)).toBeVisible();
   });
 
@@ -328,4 +326,3 @@ describe('Optional "Type" UI part', () => {
     expect(queryByRole('button', { name: 'IP' })).not.toBeInTheDocument();
   });
 });
-

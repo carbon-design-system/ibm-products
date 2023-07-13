@@ -42,8 +42,8 @@ export default {
       name: 'No icon (`noIcon`)',
     },
     noBorderRadius: {
-      name: 'Square shaped'
-    }
+      name: 'Square shaped',
+    },
   },
   decorators: [
     (Story, { args: { description, ...storyArgs } }) => (

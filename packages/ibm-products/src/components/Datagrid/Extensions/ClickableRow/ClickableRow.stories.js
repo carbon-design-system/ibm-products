@@ -258,6 +258,11 @@ const DataTableSidePanelContent = (selectedRowValues) => {
 
   return (
     <div className={`${blockClass}__side-panel-content`}>
+      <div className={`${blockClass}__side-panel-link`}>
+        <Link href="" id="side-panel-story__view-link">
+          View details
+        </Link>
+      </div>
       <SidePanelSectionContent
         sectionTitle="Section title"
         rowData={rowData && rowData}
@@ -310,6 +315,7 @@ const ClickableRowWithPanel = ({ ...args }) => {
       <Datagrid datagridState={{ ...datagridState }} />
       <SidePanel
         selectorPageContent={true && '.page-content-wrapper'} // Only if SlideIn
+        selectorPrimaryFocus="#side-panel-story__view-link"
         open={openSidePanel}
         onRequestClose={() => setOpenSidePanel(false)}
         size={'sm'}

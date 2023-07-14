@@ -63,6 +63,7 @@ export let CreateFullPage = React.forwardRef(
       onRequestSubmit,
       firstFocusElement,
       submitButtonText,
+      title,
       ...rest
     },
     ref
@@ -140,7 +141,7 @@ export let CreateFullPage = React.forwardRef(
           <div className={`${blockClass}__main`}>
             <div className={`${blockClass}__content`}>
               <Grid>
-                <Form className={`${blockClass}__form`}>
+                <Form className={`${blockClass}__form`} aria-label={title}>
                   <StepsContext.Provider
                     value={{
                       currentStep,

@@ -17,6 +17,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg } from '../../settings';
 
 import { TearsheetNarrow } from '../Tearsheet/TearsheetNarrow';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--create-tearsheet-narrow`;
@@ -65,6 +66,7 @@ export let CreateTearsheetNarrow = React.forwardRef(
     ];
 
     const formTextClass = `${blockClass}__content-text`;
+    const formTitleId = uuidv4();
 
     return (
       <TearsheetNarrow
@@ -88,7 +90,10 @@ export let CreateTearsheetNarrow = React.forwardRef(
         role="presentation"
         {...getDevtoolsProps(componentName)}
       >
-        <h3 className={cx(`${blockClass}__form-title-text`, formTextClass)}>
+        <h3
+          className={cx(`${blockClass}__form-title-text`, formTextClass)}
+          id={formTitleId}
+        >
           {formTitle}
         </h3>
         <p
@@ -96,7 +101,9 @@ export let CreateTearsheetNarrow = React.forwardRef(
         >
           {formDescription}
         </p>
-        <Form className={`${blockClass}__form`}>{children}</Form>
+        <Form className={`${blockClass}__form`} aria-labelledby={formTitleId}>
+          {children}
+        </Form>
       </TearsheetNarrow>
     );
   }

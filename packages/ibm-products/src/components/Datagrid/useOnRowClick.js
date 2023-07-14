@@ -14,7 +14,6 @@ const useOnRowClick = (hooks) => {
       const { id, toggleRowSelected } = row;
       const { withSelectRows } = instance;
       const onClick = (event) => {
-        console.log(event.target);
         if (!isFetching && onRowClick) {
           onRowClick(row, event);
           // We do not want to change the list of selected rows if using the useSelectedRows hook, otherwise clicking on an entire row will mark the row as checked

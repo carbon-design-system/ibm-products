@@ -12,14 +12,19 @@ const useOnRowClick = (hooks) => {
     const getRowProps = (props, datagridState) => {
       const { isFetching, row, instance } = datagridState;
       const { id, toggleRowSelected } = row;
+      const { withSelectRows } = instance;
       const onClick = (event) => {
+        console.log(event.target);
         if (!isFetching && onRowClick) {
           onRowClick(row, event);
-          instance.selectedFlatRows &&
-            instance.selectedFlatRows.map((toggleRow) =>
-              toggleRow.toggleRowSelected(false)
-            );
-          toggleRowSelected(id, true);
+          // We do not want to change the list of selected rows if using the useSelectedRows hook, otherwise clicking on an entire row will mark the row as checked
+          if (!withSelectRows) {
+            instance.selectedFlatRows &&
+              instance.selectedFlatRows.map((toggleRow) =>
+                toggleRow.toggleRowSelected(false)
+              );
+            toggleRowSelected(id, true);
+          }
         }
       };
 

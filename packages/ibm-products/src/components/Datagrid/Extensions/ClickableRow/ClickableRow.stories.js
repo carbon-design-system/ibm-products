@@ -7,7 +7,7 @@
  */
 
 import React, { useState } from 'react';
-import { Edit, TrashCan } from '@carbon/react/icons';
+import { Edit, TrashCan, Add } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
@@ -19,6 +19,7 @@ import {
   useColumnRightAlign,
   useColumnCenterAlign,
   useOnRowClick,
+  useSelectRows,
 } from '../../index';
 import styles from '../../_storybook-styles.scss';
 // import mdx from '../../Datagrid.mdx';
@@ -211,6 +212,44 @@ const sharedDatagridProps = {
   expandedContentHeight: 96,
 };
 
+const getBatchActions = () => {
+  return [
+    {
+      label: 'Duplicate',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Add',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Select all',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: action('Clicked batch action button'),
+      type: 'select_all',
+    },
+    {
+      label: 'Publish to catalog',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Download',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Delete',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: action('Clicked batch action button'),
+      hasDivider: true,
+      kind: 'danger',
+    },
+  ];
+};
+
 const ClickableRow = ({ ...args }) => {
   const columns = React.useMemo(() => [...defaultHeader], []);
   const [data] = useState(makeData(10));
@@ -324,8 +363,12 @@ const ClickableRowWithPanel = ({ ...args }) => {
         setOpenSidePanel(true);
         setRowData(row);
       },
+      DatagridActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
       ...args.defaultGridProps,
     },
+    useSelectRows,
     useOnRowClick
   );
   return (

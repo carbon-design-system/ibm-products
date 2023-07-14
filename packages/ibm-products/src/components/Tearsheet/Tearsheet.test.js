@@ -95,7 +95,6 @@ const commonTests = (Ts, name, props, testActions) => {
     );
   });
 
-
   // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
   it.skip('has no accessibility violations when closed', async () => {
     const { container } = render(
@@ -113,7 +112,7 @@ const commonTests = (Ts, name, props, testActions) => {
         hasCloseIcon
       />
     );
-  
+
     await expect(container).toBeAccessible(name);
     await expect(container).toHaveNoAxeViolations();
   });

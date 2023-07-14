@@ -8,65 +8,41 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Settings } from '@carbon/react/icons';
-import {
-  IconButton,
-  Toggletip,
-  ToggletipContent,
-  ToggletipButton,
-} from '@carbon/react';
-import cx from 'classnames';
+import { IconButton, Layer, Popover, PopoverContent } from '@carbon/react';
 import RowSizeRadioGroup from './RowSizeRadioGroup';
 import { pkg } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const RowSizeDropdown = ({
-  align = 'bottom',
+  align = 'bottom-right',
   legendText = 'Row height',
   ...props
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   return (
-    <>
-      {!isOpen && (
-        <IconButton
-          kind="ghost"
-          align={align}
-          onClick={() => setIsOpen((prevOpen) => !prevOpen)}
-          label={legendText}
-          className={cx(`${blockClass}__row-size-button`)}
-        >
-          <Settings size={16} />
-        </IconButton>
-      )}
-      {isOpen && (
-        <Toggletip
-          defaultOpen={true}
-          className={`${blockClass}__row-size-toggle-tip`}
-        >
-          <ToggletipButton
-            className={cx(
-              `${blockClass}__row-size-toggle-tip-button`,
-              `${blockClass}__row-size-button--open`
-            )}
-            label={legendText}
-          >
-            <Settings size={16} />
-          </ToggletipButton>
-          <ToggletipContent
-            className={`${blockClass}__row-size-toggle-tip-content`}
-          >
-            <RowSizeRadioGroup
-              {...props}
-              legendText={legendText}
-              hideRadioGroup={() => {
-                setIsOpen(false);
-              }}
-            />
-          </ToggletipContent>
-        </Toggletip>
-      )}
-    </>
+    <Popover
+      isTabTip
+      align="bottom-right"
+      open={isOpen}
+      onRequestClose={() => setIsOpen(false)}
+      className={`${blockClass}__row-size-options-container`}
+    >
+      <IconButton
+        align={align}
+        kind="ghost"
+        onClick={() => setIsOpen((prevOpen) => !prevOpen)}
+        label={legendText}
+        className={`${blockClass}__row-size-button`}
+      >
+        <Settings size={16} />
+      </IconButton>
+      <PopoverContent>
+        <Layer>
+          <RowSizeRadioGroup {...props} legendText={legendText} />
+        </Layer>
+      </PopoverContent>
+    </Popover>
   );
 };
 

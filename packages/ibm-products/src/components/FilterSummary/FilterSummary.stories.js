@@ -13,6 +13,7 @@ import {
 import { FilterSummary } from '.';
 
 import styles from './_storybook-styles.scss';
+import { DisplayBox } from '../../global/js/utils/DisplayBox';
 
 export default {
   title: getStoryTitle(FilterSummary.displayName),
@@ -21,6 +22,12 @@ export default {
   parameters: {
     styles,
   },
+  argTypes: {
+    containerWidth: {
+      control: { type: 'range', min: 320, max: 800, step: 10 },
+    },
+  },
+  decorators: [(story) => <DisplayBox>{story()}</DisplayBox>],
 };
 
 const Template = (args) => {
@@ -28,11 +35,14 @@ const Template = (args) => {
   const clearFilters = () => setFilters([]);
 
   return (
-    <FilterSummary
-      clearFiltersText={args.clearFiltersText}
-      filters={filters}
-      clearFilters={clearFilters}
-    />
+    <div style={{ width: args.containerWidth }}>
+      <FilterSummary
+        clearFiltersText={args.clearFiltersText}
+        filters={filters}
+        clearFilters={clearFilters}
+        renderLabel={args.renderLabel}
+      />
+    </div>
   );
 };
 
@@ -47,6 +57,7 @@ export const Default = prepareStory(Template, {
       { key: 'weapon', value: 'Mjölnir' },
       //cspell: enable
     ],
+    containerWidth: 500,
   },
 });
 
@@ -63,5 +74,26 @@ export const WithManyTags = prepareStory(Template, {
       { key: 'spy', value: true },
       { key: 'title', value: 'International man of mystery' },
     ],
+    containerWidth: 500,
+  },
+});
+
+export const WithCustomLabel = prepareStory(Template, {
+  args: {
+    clearFiltersText: 'Clear filters',
+    renderLabel: (key, value) => {
+      // Here in this function you can control how you want the label to be displayed, you can supply your own Sentence or Title case function
+      return `${key.toUpperCase()}: ${String(value).toUpperCase()}`;
+    },
+    filters: [
+      //cspell: disable
+      { key: 'project', value: 'Goldmember' },
+      //cspell: enable
+      { key: 'owner', value: 'Austin Powers' },
+      { key: 'middle name', value: 'Danger' },
+      { key: 'spy', value: true },
+      { key: 'title', value: 'International man of mystery' },
+    ],
+    containerWidth: 500,
   },
 });

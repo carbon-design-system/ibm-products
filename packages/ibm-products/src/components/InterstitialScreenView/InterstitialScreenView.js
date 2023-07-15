@@ -11,7 +11,6 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Column, Grid, Row } from 'carbon-components-react';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
@@ -57,17 +56,8 @@ export let InterstitialScreenView = React.forwardRef(
         role="main"
         {...getDevtoolsProps(componentName)}
       >
-        <Grid>
-          <Row>
-            {/* Because modal and full screen view have different layout rules, the width is being handled via CSS */}
-            <Column>
-              {title && <h1 className={`${blockClass}--heading`}>{title}</h1>}
-              {description && (
-                <p className={`${blockClass}--body`}>{description}</p>
-              )}
-            </Column>
-          </Row>
-        </Grid>
+        {title && <h1 className={`${blockClass}--heading`}>{title}</h1>}
+        {description && <p className={`${blockClass}--body`}>{description}</p>}
       </div>
     );
   }

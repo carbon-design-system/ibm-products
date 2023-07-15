@@ -101,7 +101,6 @@ const TemplateModalMultipleChildren = (args) => {
           description={
             'Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept.'
           }
-          W
           stepTitle="Use case-specific step title"
         />
         <InterstitialScreenView
@@ -109,7 +108,6 @@ const TemplateModalMultipleChildren = (args) => {
           description={
             'Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept.'
           }
-          W
           stepTitle="Use case-specific step title"
         />
         <InterstitialScreenView
@@ -117,7 +115,6 @@ const TemplateModalMultipleChildren = (args) => {
           description={
             'Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept.'
           }
-          W
           stepTitle="Use case-specific step title"
         />
       </InterstitialScreen>
@@ -155,7 +152,6 @@ const TemplateFullScreenMultiples = (args) => {
           description={
             'Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept.'
           }
-          W
           stepTitle="Use case-specific step title"
         />
         <InterstitialScreenView
@@ -203,7 +199,6 @@ const TemplateFullScreen = (args) => {
           description={
             'Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept.'
           }
-          W
           stepTitle="Use case-specific step title"
         />
       </InterstitialScreen>

@@ -31,6 +31,18 @@
     right: 0;
     left: 0;
 
+    #{$block}--auto-height-container {
+      flex: 1;
+    }
+
+    &--progress {
+      margin-bottom: $spacing-10;
+    }
+
+    &--body {
+      display: flex;
+    }
+
     &__carousel {
       .#{$carousel-item} {
         flex: 0 0 100% !important;
@@ -45,45 +57,36 @@
       background-color: $ui-background;
     }
 
+    &--content {
+      padding-right: $spacing-05;
+      margin: $spacing-10 0 carbon--mini-units(24);
+    }
+
+    &--carousel {
+      margin-left: calc($spacing-07 * -1);
+    }
+
     &--media-container {
-      display: grid;
       min-height: 456px;
-      // hide the animation for small screens
-      grid-template-columns: 1fr 0fr;
+    }
 
-      // show the animation only when there's enough space to show at least most of it
-      @include carbon--breakpoint('lg') {
-        grid-template-columns:
-          calc($one-grid-column * 11)
-          calc($one-grid-column * 5);
-      }
+    &--media {
+      height: 100%;
+      margin: 0 calc($spacing-07 * -1) 0 calc($spacing-04 * -1); //calc($spacing-05 * -1)
+    }
 
-      // media (animation) is on the left
-      #{$block}--media {
-        #{$block}--stepped-animated-media {
-          overflow: hidden;
-          height: 100%;
-        }
-      }
-
-      // content is on the right
-      #{$block}--content {
-        margin: $spacing-10 0 $spacing-09;
-
-        #{$block}--progress {
-          margin-bottom: $spacing-10;
-        }
-
-        #{$block}--carousel {
-          margin-left: calc($spacing-07 * -1);
-        }
-      }
+    &--stepped-animated-media {
+      overflow: hidden;
+      height: 100%;
     }
 
     // FOOTER
     &--footer {
       display: flex;
+      width: 100%;
+      flex-direction: row;
       justify-content: flex-end;
+      // padding: 0 $spacing-05 !important;
       border-top: 1px solid $ui-04;
       #{$block}--skip-btn {
         margin-right: auto;
@@ -92,7 +95,13 @@
       #{$block}--next-btn,
       #{$block}--start-btn {
         width: calc($one-grid-column * 3);
+        min-width: carbon--mini-units(29);
+        //width: 100%;
       }
+    }
+
+    &--footer-controls {
+      margin-left: auto;
     }
 
     // MODAL (settings exclusive of "FULL SCREEN")
@@ -118,6 +127,7 @@
         position: relative; // to help position the close icon
         #{$block}--close-icon {
           position: absolute !important;
+          z-index: 1;
           top: 0;
           right: 0;
           padding: 0 $spacing-03;
@@ -136,9 +146,6 @@
         margin: 0;
       }
 
-      #{$block}--media-container {
-        flex: 1;
-      }
       // e.g. "IBM Cloud Pak | Security"
       // ..."IBM Cloud Pak"
       #{$block}--header {
@@ -165,14 +172,3 @@
 @include exports('interstitial-screen') {
   @include interstitial-screen;
 }
-/*
-position: fixed;
-    z-index: 6000;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    background-color: $overlay-01;
-*/

@@ -28,7 +28,9 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<InterstitialScreenView> </InterstitialScreenView>);
+    const { container } = render(
+      <InterstitialScreenView> </InterstitialScreenView>
+    );
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
@@ -39,12 +41,18 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', () => {
-    render(<InterstitialScreenView className={className}> </InterstitialScreenView>);
+    render(
+      <InterstitialScreenView className={className}> </InterstitialScreenView>
+    );
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {
-    render(<InterstitialScreenView data-testid={dataTestId}> </InterstitialScreenView>);
+    render(
+      <InterstitialScreenView data-testid={dataTestId}>
+        {' '}
+      </InterstitialScreenView>
+    );
     screen.getByTestId(dataTestId);
   });
 
@@ -55,7 +63,11 @@ describe(componentName, () => {
   });
 
   it('adds the Devtools attribute to the containing node', () => {
-    render(<InterstitialScreenView data-testid={dataTestId}> </InterstitialScreenView>);
+    render(
+      <InterstitialScreenView data-testid={dataTestId}>
+        {' '}
+      </InterstitialScreenView>
+    );
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

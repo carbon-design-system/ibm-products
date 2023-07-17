@@ -174,72 +174,62 @@ export let InterstitialScreen = React.forwardRef(
               />
             </div>
           )}
-
-          <Grid
-            className={cx(
-              `${blockClass}--auto-height-container`,
-              `${blockClass}--body`
-            )}
-          >
-            <Row className={`${blockClass}--auto-height-container`}>
-              <Column
-                xlg={10}
-                lg={10}
-                md={16}
-                sm={16}
-                className={`${blockClass}--auto-height-container`}
-              >
-                <div className={cx(`${blockClass}--content`)}>
-                  {isMultiStep ? (
-                    <>
-                      <div className={`${blockClass}--progress`}>
-                        <ProgressIndicator
-                          vertical={false}
-                          currentIndex={progStep}
-                          spaceEqually={true}
-                        >
-                          {childArray.map((child, idx) => {
-                            return (
-                              <ProgressStep
-                                key={idx}
-                                label={child.props.stepTitle}
-                              />
-                            );
-                          })}
-                        </ProgressIndicator>
-                      </div>
-                      <div className={`${blockClass}__carousel`}>
-                        <Carousel disableArrowScroll ref={scrollRef}>
-                          {children}
-                        </Carousel>
-                      </div>
-                    </>
-                  ) : (
-                    <div>{childArray[0]}</div>
-                  )}
-                </div>
-              </Column>
-              <Column
-                xlg={6}
-                lg={6}
-                md={0}
-                sm={0}
-                className={`${blockClass}--auto-height-container`}
-              >
-                <div className={`${blockClass}--media`}>
-                  {media.render ? (
-                    media.render()
-                  ) : (
-                    <SteppedAnimatedMedia
-                      className={`${blockClass}--stepped-animated-media`}
-                      filePaths={media.filePaths}
-                      playStep={progStep}
-                    />
-                  )}
-                </div>
-              </Column>
-            </Row>
-          </Grid>
+          <div className={cx(`${blockClass}--body`)}>
+            <Grid>
+              <Row>
+                <Column xlg={10} lg={10} md={16} sm={16}>
+                  <div className={cx(`${blockClass}--content`)}>
+                    {isMultiStep ? (
+                      <>
+                        <div className={`${blockClass}--progress`}>
+                          <ProgressIndicator
+                            vertical={false}
+                            currentIndex={progStep}
+                            spaceEqually={true}
+                          >
+                            {childArray.map((child, idx) => {
+                              return (
+                                <ProgressStep
+                                  key={idx}
+                                  label={child.props.stepTitle}
+                                />
+                              );
+                            })}
+                          </ProgressIndicator>
+                        </div>
+                        <div className={`${blockClass}__carousel`}>
+                          <Carousel disableArrowScroll ref={scrollRef}>
+                            {children}
+                          </Carousel>
+                        </div>
+                      </>
+                    ) : (
+                      <div>{childArray[0]}</div>
+                    )}
+                  </div>
+                </Column>
+                <Column
+                  xlg={6}
+                  lg={6}
+                  md={0}
+                  sm={0}
+                  className={`${blockClass}--auto-height-container`}
+                >
+                  <div className={`${blockClass}--media`}>
+                    {media.render ? (
+                      media.render()
+                    ) : (
+                      <SteppedAnimatedMedia
+                        className={`${blockClass}--stepped-animated-media`}
+                        filePaths={media.filePaths}
+                        playStep={progStep}
+                      />
+                    )}
+                  </div>
+                </Column>
+              </Row>
+            </Grid>
+          </div>
 
           <div className={`${blockClass}--footer`}>
             <div>

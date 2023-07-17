@@ -72,7 +72,12 @@
 
     &--media {
       height: 100%;
-      margin: 0 calc($spacing-07 * -1) 0 calc($spacing-04 * -1); //calc($spacing-05 * -1)
+      @include carbon--breakpoint(lg) {
+        margin-right: calc($spacing-07 * -1);
+      }
+      @include carbon--breakpoint(xlg) {
+        margin-right: calc($spacing-08 * -1);
+      }
     }
 
     &--stepped-animated-media {
@@ -96,7 +101,6 @@
       #{$block}--start-btn {
         width: calc($one-grid-column * 3);
         min-width: carbon--mini-units(29);
-        //width: 100%;
       }
     }
 

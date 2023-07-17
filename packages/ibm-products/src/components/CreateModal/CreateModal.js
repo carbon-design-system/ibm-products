@@ -84,7 +84,9 @@ export let CreateModal = React.forwardRef(
           {description && (
             <p className={`${blockClass}__description`}>{description}</p>
           )}
-          <Form className={`${blockClass}__form`}>{children}</Form>
+          <Form className={`${blockClass}__form`} aria-label={title}>
+            {children}
+          </Form>
         </ModalBody>
         <ModalFooter>
           <Button type="button" kind="secondary" onClick={onRequestClose}>

@@ -172,6 +172,12 @@ describe(CreateTearsheet.displayName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
+  it('has no accessibility violations', async () => {
+    const { container } = renderCreateTearsheet({ ...defaultProps });
+    await expect(() => container.toBeAccessible());
+    await expect(() => container.toHaveNoAxeViolations());
+  });
+
   it('renders the CreateTearsheet component', () => {
     const { container } = renderCreateTearsheet({
       ...defaultProps,

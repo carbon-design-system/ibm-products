@@ -117,7 +117,7 @@ describe(componentName, () => {
     expect(primaryButton).toHaveAttribute('disabled');
   });
 
-  it.skip('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(<RemoveModal {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();

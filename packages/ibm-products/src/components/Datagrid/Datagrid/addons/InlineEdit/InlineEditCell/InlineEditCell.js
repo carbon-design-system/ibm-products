@@ -333,16 +333,16 @@ export const InlineEditCell = ({
 
   const setRenderIcon = () => {
     if (type === 'text') {
-      return (props) => <Edit size={16} {...props} />;
+      return Edit;
     }
     if (type === 'number') {
-      return (props) => <CaretSort size={16} {...props} />;
+      return CaretSort;
     }
     if (type === 'selection') {
-      return (props) => <ChevronDown size={16} {...props} />;
+      return ChevronDown;
     }
     if (type === 'date') {
-      return (props) => <Calendar size={16} {...props} />;
+      return Calendar;
     }
   };
 

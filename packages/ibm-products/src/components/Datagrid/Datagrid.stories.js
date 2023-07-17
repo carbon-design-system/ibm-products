@@ -34,6 +34,7 @@ import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
 import { pkg } from '../../settings';
+import { DocsPage } from './Datagrid.docs-page';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -41,11 +42,10 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: DocsPage,
     },
-*/
+    layout: 'fullscreen',
   },
   argTypes: {
     featureFlags: {

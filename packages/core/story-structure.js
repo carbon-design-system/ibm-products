@@ -56,6 +56,7 @@ const s = [
               'c/Datagrid/Extensions/ClickableRow',
               'c/Datagrid/Extensions/InlineEdit',
               'c/Datagrid/Extensions/ColumnCustomization',
+              'c/Datagrid/Extensions/Skeleton',
             ],
           },
         ],

@@ -175,7 +175,7 @@ export let InterstitialScreen = React.forwardRef(
             </div>
           )}
           <div className={cx(`${blockClass}--body`)}>
-            <Grid>
+            <Grid fullWidth className={cx(`${blockClass}--body-grid`)}>
               <Row>
                 <Column xlg={10} lg={10} md={16} sm={16}>
                   <div className={cx(`${blockClass}--content`)}>

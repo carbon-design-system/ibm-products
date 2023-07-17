@@ -40,7 +40,12 @@
     }
 
     &--body {
+      flex-grow: 1;
+    }
+
+    &--body-grid {
       display: flex;
+      height: 100%;
     }
 
     &__carousel {

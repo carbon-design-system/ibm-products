@@ -654,3 +654,20 @@ export const FrozenColumns = () => {
     </Wrapper>
   );
 };
+
+export const Skeleton = () => {
+  const [data] = useState([]);
+  const columns = React.useMemo(() => [...getColumns(data)], []);
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription = 'Description explaining why the table is empty';
+
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    isFetching: true,
+    emptyStateDescription,
+    emptyStateTitle,
+  });
+
+  return <Datagrid datagridState={datagridState} />;
+};

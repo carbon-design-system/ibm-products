@@ -143,10 +143,10 @@ export let UserProfileImage = React.forwardRef(
       (tooltipText ? (
         <Tooltip
           align={tooltipAlignment}
-          className={cx(
+          className={[
             `${carbon.prefix}--icon-tooltip`,
             `${blockClass}__tooltip`
-          )}
+          ]}
           label={tooltipText}
         >
           <Button
@@ -154,10 +154,9 @@ export let UserProfileImage = React.forwardRef(
             kind="ghost"
             ref={ref}
             size={size}
-            className={cx(
-              `${carbon.prefix}--btn--icon-only`,
+            className={[`${carbon.prefix}--btn--icon-only`,
               `${blockClass}__tooltip-trigger`
-            )}
+            ]}
           >
             {renderUserProfileImage()}
           </Button>

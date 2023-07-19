@@ -10,6 +10,7 @@ import { NonLinearReading } from '.';
 ## Table of Contents
 
 - [Overview](#overview)
+- [About Novice to pro](#about-novice-to-pro)
 - [Example usage](#example-usage)
 - [Component API](#component-api)
 
@@ -17,24 +18,27 @@ import { NonLinearReading } from '.';
 
 The
 [non-linear reading](https://pages.github.ibm.com/cdai-design/pal/novice-to-pro/components/nonlinear-reading/usage/)
-component provides a way to explain concepts more broadly and succinctly while
-allowing users to read more detail as needed without leaving their context.
+component provides a way to explain concepts more broadly and succinctly,
+providing in-context detail to the user without requiring them to redirect to
+another location.
 
-Use non-linear reading when space is limited to share a brief, at-a-glance,
+When space is limited, use non-linear reading to share a brief, at-a-glance
 summary of a concept that may require more explanation for some users. You can
 also use this component when the level of detail or the amount of context needed
 on a topic will vary across users and you don’t want to over-explain to more
-mature users. Non-linear reading is helpful to provide context for the first
-time a user engages with the product as well as for introducing new concepts
-later on as they get more familiar with base-level functionality.
+mature users. Non-linear reading provides helpful context for the user’s initial
+engagement with the product, and enables the introduction of new concepts as the
+user becomes more familiar with base-level functionality later on.
 
-_[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
-is a continuous learning methodology + framework aimed to orient, onboard,
-explain, educate, and cultivate novice users into high-functioning power users._
+## About Novice to pro
+
+[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
 
 ## Example usage
 
-### Single Level
+### Single level
 
 All you need for the basics.
 
@@ -42,16 +46,16 @@ All you need for the basics.
   <Story id={getStoryId(NonLinearReading.displayName, 'single-level')} />
 </Canvas>
 
-### Multiple Level
+### Multiple level
 
-Multiple, embedded non-linear reading components can be used in the same text
+Multiple, embedded, non-linear reading components can be used in the same text
 block.
 
 <Canvas>
   <Story id={getStoryId(NonLinearReading.displayName, 'multiple-level')} />
 </Canvas>
 
-### With Gradient Background
+### With gradient background
 
 Some other Novice to pro components use a gradient background as shown.
 

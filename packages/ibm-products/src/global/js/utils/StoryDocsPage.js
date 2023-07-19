@@ -36,6 +36,7 @@ export const CustomBlocks = ({ blocks }) => {
       <div key={`block-index--${index}`}>
         {block.title && <h3 id={paramCase(block.title)}>{block.title}</h3>}
         {block.subTitle && <h4>{block.subTitle}</h4>}
+        {block.image}
         {block.description && typeof block.description === 'string' ? (
           <Description>{block.description}</Description>
         ) : (
@@ -270,6 +271,10 @@ StoryDocsPage.propTypes = {
        */
       description: PropTypes.node,
       /**
+       * Optional block image
+       */
+      image: PropTypes.node,
+      /**
        * Story imported from story file
        */
       story: PropTypes.func,
@@ -278,7 +283,7 @@ StoryDocsPage.propTypes = {
        * default language `jsx`
        */
       source: PropTypes.shape({
-        language: PropTypes.oneOf('javascript', 'css', 'jsx'),
+        language: PropTypes.oneOf('javascript', 'css', 'jsx', 'json'),
         code: PropTypes.string,
       }),
     })

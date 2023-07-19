@@ -34,6 +34,7 @@ import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
 import { pkg } from '../../settings';
+import { DocsPage } from './Datagrid.docs-page';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -41,11 +42,10 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: DocsPage,
     },
-*/
+    layout: 'fullscreen',
   },
   argTypes: {
     featureFlags: {
@@ -665,4 +665,21 @@ export const FrozenColumns = () => {
       <p>More details documentation check the Notes section below</p>
     </Wrapper>
   );
+};
+
+export const Skeleton = () => {
+  const [data] = useState([]);
+  const columns = React.useMemo(() => [...getColumns(data)], []);
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription = 'Description explaining why the table is empty';
+
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    isFetching: true,
+    emptyStateDescription,
+    emptyStateTitle,
+  });
+
+  return <Datagrid datagridState={datagridState} />;
 };

@@ -202,6 +202,24 @@
         "a11y",
         "design"
       ]
+    },
+    {
+      "login": "paul-balchin-ibm",
+      "name": "Paul Balchin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/52505287?v=4",
+      "profile": "https://github.com/paul-balchin-ibm",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jlongshore",
+      "name": "Jeff Longshore",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25206522?v=4",
+      "profile": "https://github.com/jlongshore",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,

@@ -2870,6 +2870,9 @@ p.c4p--about-modal__copyright-text:first-child {
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__container {
   width: 100%;
 }
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--action-set .c4p--action-set__action-button.c4p--action-set__action-button--expressive {
+  height: 5rem;
+}
 @media (min-width: 42rem) {
   .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__container {
     width: calc(100% - (2 * 4rem));

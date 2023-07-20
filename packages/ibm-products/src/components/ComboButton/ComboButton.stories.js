@@ -20,6 +20,7 @@ import { ComboButton, ComboButtonItem } from '..';
 export default {
   title: getStoryTitle(ComboButton.displayName),
   component: ComboButton,
+  tags: ['autodocs'],
   subcomponents: {
     ComboButtonItem,
   },
@@ -28,7 +29,8 @@ export default {
   },
 };
 
-export const Default = prepareStory(() => (
+// eslint-disable-next-line no-unused-vars -- args not used in this template
+const Template = (args) => (
   <ComboButton>
     <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
     <ComboButtonItem renderIcon={(props) => <CloudApp size={16} {...props} />}>
@@ -36,4 +38,6 @@ export const Default = prepareStory(() => (
     </ComboButtonItem>
     <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
   </ComboButton>
-));
+);
+
+export const Default = prepareStory(Template, {});

@@ -64,7 +64,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 
   position: fixed;
   // Need to disable stylelint until dart sass namespace support is added
-  /* stylelint-disable-next-line function-no-unknown */
   z-index: utilities.z('modal');
   top: $spacing-09;
   height: calc(100% - 3rem);
@@ -165,7 +164,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     );
   }
   .#{$block-class}__title-text {
-    @include type.type-style('productive-heading-03');
+    @include type.type-style('heading-03');
     @include setCommonTitleStyles();
 
     position: inherit;
@@ -185,7 +184,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     white-space: nowrap;
   }
   .#{$block-class}__collapsed-title-text {
-    @include type.type-style('productive-heading-02');
+    @include type.type-style('heading-compact-02');
     @include setCommonTitleStyles();
 
     position: absolute;
@@ -195,7 +194,7 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
     transform: translateY(var(--#{$block-class}--collapsed-title-y-position));
   }
   .#{$block-class}__subtitle-text {
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
 
     overflow: hidden;
     padding: 0 $spacing-09 $spacing-05 $spacing-05;
@@ -441,7 +440,6 @@ $action-set-block-class: #{c4p-settings.$pkg-prefix}--action-set;
 .#{$block-class}__overlay {
   position: fixed;
   // Need to disable stylelint until dart sass namespace support is added
-  /* stylelint-disable-next-line function-no-unknown */
   z-index: utilities.z('overlay');
   width: 100%;
   height: 100%;

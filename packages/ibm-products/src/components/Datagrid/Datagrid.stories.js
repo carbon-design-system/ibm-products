@@ -27,22 +27,25 @@ import {
 } from '.';
 
 import { SelectAllWithToggle } from './Datagrid.stories/index';
-import mdx from './Datagrid.mdx';
+// import mdx from './Datagrid.mdx';
 
 import styles from './_storybook-styles.scss';
 import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
 import { pkg } from '../../settings';
+import { DocsPage } from './Datagrid.docs-page';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
     docs: {
-      page: mdx,
+      page: DocsPage,
     },
+    layout: 'fullscreen',
   },
   argTypes: {
     featureFlags: {
@@ -441,7 +444,8 @@ export const SelectItemsInAllPages = () => {
       },
       DatagridPagination,
       DatagridActions,
-      DatagridBatchActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
     },
     useSelectRows,
     useSelectAllWithToggle
@@ -661,4 +665,21 @@ export const FrozenColumns = () => {
       <p>More details documentation check the Notes section below</p>
     </Wrapper>
   );
+};
+
+export const Skeleton = () => {
+  const [data] = useState([]);
+  const columns = React.useMemo(() => [...getColumns(data)], []);
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription = 'Description explaining why the table is empty';
+
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    isFetching: true,
+    emptyStateDescription,
+    emptyStateTitle,
+  });
+
+  return <Datagrid datagridState={datagridState} />;
 };

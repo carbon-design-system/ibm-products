@@ -15,7 +15,7 @@ import {
 } from '../../../../global/js/utils/story-helper';
 import { Datagrid, useDatagrid, useFiltering } from '../../index';
 import styles from '../../_storybook-styles.scss';
-import mdx from '../../Datagrid.mdx';
+import { DocsPage } from './Filtering.docs-page';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { DatagridActions } from '../../utils/DatagridActions';
@@ -23,11 +23,13 @@ import { StatusIcon } from '../../../StatusIcon';
 import { pkg } from '../../../../settings';
 
 export default {
-  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Filtering/Flyout`,
+  title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Flyout`,
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: { page: mdx },
+    docs: { page: DocsPage },
+    layout: 'fullscreen',
   },
   argTypes: {
     featureFlags: {

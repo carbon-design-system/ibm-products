@@ -35,6 +35,7 @@ const getActions = (num) =>
 export default {
   title: getStoryTitle(ActionBar.displayName),
   component: ActionBar,
+  tags: ['autodocs'],
   argTypes: {
     actions: {
       control: {

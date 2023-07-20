@@ -15,18 +15,48 @@ import {
 } from '../../../../global/js/utils/story-helper';
 import { Datagrid, useDatagrid, useNestedRows } from '../../index';
 import styles from '../../_storybook-styles.scss';
-import mdx from '../../Datagrid.mdx';
+// import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { pkg } from '../../../../settings';
+import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/NestedRows`,
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: { page: mdx },
+    docs: {
+      page: () => (
+        <StoryDocsPage
+          blocks={[
+            {
+              title: 'Nested rows',
+              description: `Nested rows allow disclosing content in data tables progressively by displaying primary data first (parent row) and enabling users to navigate secondary information levels (child rows).
+- Include the \`useNestedRows\` hook
+- Make sure that any row you want to have nested rows in your data has a \`subRows\` property with an array of objects for each nested row. The row expander will be included by default as long as the \`useNestedRows\` hook is provided and it is detected that a row has \`subRows\` within it.
+          `,
+              source: {
+                code: `
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+  },
+  useNestedRows
+);
+
+return <Datagrid datagridState={datagridState} />;
+            `,
+              },
+            },
+          ]}
+        />
+      ),
+    },
+    layout: 'fullscreen',
   },
   argTypes: {
     featureFlags: {

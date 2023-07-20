@@ -14,15 +14,17 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { ImportModal } from '.';
-import mdx from './ImportModal.mdx';
+import DocsPage from './ImportModal.docs-page';
+// import mdx from './ImportModal.mdx';
 
 export default {
   title: getStoryTitle(ImportModal.displayName),
   component: ImportModal,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     docs: {
-      page: mdx,
+      page: DocsPage,
     },
   },
 };

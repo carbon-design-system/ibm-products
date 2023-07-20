@@ -171,6 +171,10 @@ export let BreadcrumbWithOverflow = ({
   }, [breadcrumbs, displayCount]);
 
   const checkFullyVisibleBreadcrumbItems = () => {
+    if (!breadcrumbItemWithOverflow.current) {
+      return;
+    }
+
     const displayItemIndex = (itemCount, index) => {
       // In this data set the overflow measuring item is [0]
       // so the first displayItem in the list is [1]
@@ -275,9 +279,9 @@ export let BreadcrumbWithOverflow = ({
   }
 
   // container resize
-  useResizeObserver(sizingContainerRef, { callback: handleResize });
+  useResizeObserver(sizingContainerRef, handleResize);
   // item resize
-  useResizeObserver(breadcrumbItemWithOverflow, { callback: handleResize });
+  useResizeObserver(breadcrumbItemWithOverflow, handleResize);
 
   return (
     <div

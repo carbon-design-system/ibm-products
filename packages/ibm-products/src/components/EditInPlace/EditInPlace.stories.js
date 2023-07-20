@@ -13,8 +13,9 @@ import {
 import { action } from '@storybook/addon-actions';
 import { EditInPlace } from '.';
 import { DisplayBox } from '../../global/js/utils/DisplayBox';
-import mdx from './EditInPlace.mdx';
+// import mdx from './EditInPlace.mdx';
 import styles from './_storybook-styles.scss';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 const storyClass = 'edit-in-place-example';
 
@@ -38,6 +39,7 @@ const tooltipAlignmentOptions = {
 export default {
   title: getStoryTitle(EditInPlace.displayName),
   component: EditInPlace,
+  tags: ['autodocs'],
   argTypes: {
     containerWidth: {
       control: { type: 'range', min: 20, max: 800, step: 10 },
@@ -56,7 +58,9 @@ export default {
   parameters: {
     styles,
     docs: {
-      page: mdx,
+      page: () => (
+        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#inline-edit" />
+      ),
     },
   },
   decorators: [

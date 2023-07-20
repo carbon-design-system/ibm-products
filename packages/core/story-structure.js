@@ -55,6 +55,7 @@ const s = [
               'c/Datagrid/Extensions/ClickableRow',
               'c/Datagrid/Extensions/EditableCell',
               'c/Datagrid/Extensions/ColumnCustomization',
+              'c/Datagrid/Extensions/Skeleton',
             ],
           },
         ],
@@ -134,49 +135,6 @@ const s = [
   {
     n: 'Carbon',
     s: [],
-  },
-  {
-    n: 'Security',
-    s: [
-      {
-        n: 'Layout modules',
-        s: ['a/Library'],
-      },
-      { n: 'Layouts', s: [] },
-      // cSpell:words Microlayouts
-      { n: 'Microlayouts', s: [] },
-      {
-        n: 'Patterns',
-        s: [],
-      },
-    ],
-  },
-  {
-    n: 'CD&AI legacy',
-    s: [
-      {
-        n: 'Components',
-        s: [
-          'a/ContextHeader:ContextHeader#legacy',
-          'a/IdeAPIKeyGeneration:IdeAPIKeyGeneration#legacy',
-          'a/IdeButton:IdeButton#legacy',
-          'a/IdeCard:IdeCard#legacy',
-          'a/IdeCreate:IdeCreate#legacy',
-          'a/IdeDataTable:IdeDataTable#legacy',
-          'a/IdeEmptyState:IdeEmptyState#legacy',
-          'a/IdeFilter:IdeFilter#legacy',
-          'a/IdeHome:IdeHome#legacy',
-          'a/IdeHTTPErrors:IdeHTTPErrors#legacy',
-          'a/IdeImporting:IdeImporting#legacy',
-          'a/IdeNavigation:IdeNavigation#legacy',
-          'a/IdeRemove:IdeRemove#legacy',
-          'a/IdeSaving:IdeSaving#legacy',
-          'a/IdeSideNavMenu:IdeSideNavMenu#legacy',
-          'a/IdeSlideOverPanel:IdeSlideOverPanel#legacy',
-          'a/IdeTableToolbarSearch:IdeTableToolbarSearch#legacy',
-        ],
-      },
-    ],
   },
 ];
 

@@ -15,19 +15,21 @@ import {
 } from '../../../../global/js/utils/story-helper';
 import { Datagrid, useDatagrid, useExpandedRow } from '../../index';
 import styles from '../../_storybook-styles.scss';
-import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { pkg } from '../../../../settings';
+import { DocsPage } from './ExpandableRow.docs-page';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ExpandableRow`,
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: { page: mdx },
+    docs: { page: DocsPage },
+    layout: 'fullscreen',
     argTypes: {
       featureFlags: {
         table: {
@@ -173,6 +175,7 @@ const ExpandedRows = ({ ...args }) => {
       DatagridActions,
       DatagridPagination,
       ExpandedRowContentComponent: expansionRenderer,
+      tags: ['autodocs'],
       ...args.defaultGridProps,
     },
     useExpandedRow

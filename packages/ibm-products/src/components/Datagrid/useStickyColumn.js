@@ -20,8 +20,12 @@ const OFFSET_SCROLL_CLASS = `${styleClassPrefix}-offset-scroll`;
 const useStickyColumn = (hooks) => {
   const tableBodyRef = useRef();
   const stickyHeaderCellRef = useRef();
+  const [windowSize, setWindowSize] = useState(null);
 
-  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  useEffect(() => {
+    setWindowSize(window.innerWidth);
+  }, []);
+
   useLayoutEffect(() => {
     function updateSize() {
       setWindowSize(window.innerWidth);
@@ -55,9 +59,13 @@ const useStickyColumn = (hooks) => {
         onBodyResize.bind(null, tableBodyElement, headerCellElement),
         250
       );
-      window.addEventListener('resize', boundListener);
+      if (typeof window !== 'undefined') {
+        window.addEventListener('resize', boundListener);
+      }
       return () => {
-        window.removeEventListener('resize', boundListener);
+        if (typeof window !== 'undefined') {
+          window.removeEventListener('resize', boundListener);
+        }
       };
     }, [instance.rows, instance.isFetching]);
     useEffect(() => {

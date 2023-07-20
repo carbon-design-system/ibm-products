@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "2.0.2",
+  "version": "2.0.3",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -52,7 +52,7 @@
     "@storybook/react-webpack5": "^7.0.24",
     "@storybook/theming": "^7.0.24",
     "babel-loader": "^9.1.2",
-    "babel-preset-ibm-cloud-cognitive": "^0.14.36",
+    "babel-preset-ibm-cloud-cognitive": "^0.14.37",
     "css-loader": "^6.8.1",
     "dotenv-webpack": "8.0.1",
     "npm-check-updates": "^16.10.13",
@@ -69,5 +69,8 @@
     "typescript": "^5.1.6",
     "webpack": "^5.88.1",
     "webpack-merge": "^5.9.0"
+  },
+  "dependencies": {
+    "lottie-web": "^5.12.2"
   }
 }

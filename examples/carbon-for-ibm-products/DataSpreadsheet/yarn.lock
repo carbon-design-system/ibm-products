@@ -183,10 +183,10 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
-"@babel/runtime@^7.22.3":
-  version "7.22.3"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.3.tgz#0a7fce51d43adbf0f7b517a71f4c3aaca92ebcbb"
-  integrity sha512-XsDuspWKLUsxwCp6r7EhsExHtYfbe5oAGQ19kqngTdCPUoPQzOPdUbD/pB9PJiwb2ptYKQDjSJT3R6dC+EPqfQ==
+"@babel/runtime@^7.22.5":
+  version "7.22.6"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.22.6.tgz#57d64b9ae3cff1d67eb067ae117dac087f5bd438"
+  integrity sha512-wDb5pWm4WDdF6LFUde3Jl8WzPA+3ZbxYqkC6xAXuD3irdEHN1k0NfTRrJD8ZD378SJ61miMLCqIOXYhd8x+AJQ==
   dependencies:
     regenerator-runtime "^0.13.11"
 
@@ -241,12 +241,12 @@
   dependencies:
     "@carbon/layout" "^11.16.1"
 
-"@carbon/ibm-products@^2.3.1":
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/@carbon/ibm-products/-/ibm-products-2.3.2.tgz#ca8fcb0f494bfdbc952304d5f7d4e0aa5835896c"
-  integrity sha512-NKJ28ooWe6PYCVfVoF63UFreV749gtg8xf/4vcgbzLzNCh/+HkGxiuJei9SENOLocTZGUPg08DZLkbk0I/usXg==
+"@carbon/ibm-products@^2.3.2":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@carbon/ibm-products/-/ibm-products-2.4.0.tgz#c53a722f6f692afc386f742fa42e13024e5df916"
+  integrity sha512-3BoIwYyPnlGZYNWlguFGCUDS60lsKOJoR78dPb+NnpfWrG1vgZxD0t+1HqURbPqtd628k3vBPpX5qfvL45eriQ==
   dependencies:
-    "@babel/runtime" "^7.22.3"
+    "@babel/runtime" "^7.22.5"
     "@carbon/telemetry" "^0.1.0"
     framer-motion "^6.5.1 < 7"
     immutability-helper "^3.1.1"
@@ -2427,9 +2427,9 @@ window-or-global@^1.0.1:
   integrity sha512-tE12J/NenOv4xdVobD+AD3fT06T4KNqnzRhkv5nBIu7K+pvOH2oLCEgYP+i+5mF2jtI6FEADheOdZkA8YWET9w==
 
 word-wrap@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
-  integrity sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.4.tgz#cb4b50ec9aca570abd1f52f33cd45b6c61739a9f"
+  integrity sha512-2V81OA4ugVo5pRo46hAoD2ivUJx8jXmWXfUkY4KFNw0hEptvN0QfH3K4nHiwzGeKl5rFKedV48QVoqYavy4YpA==
 
 wrappy@1:
   version "1.0.2"

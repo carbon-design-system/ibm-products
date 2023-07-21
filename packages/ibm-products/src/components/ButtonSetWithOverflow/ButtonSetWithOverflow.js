@@ -10,8 +10,7 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
-import { ButtonSet, Button, usePrefix } from '@carbon/react';
-import { ButtonMenu, ButtonMenuItem } from '../ButtonMenu';
+import { ButtonSet, Button, usePrefix, MenuButton, MenuItem } from '@carbon/react';
 
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
@@ -91,16 +90,14 @@ export const ButtonSetWithOverflow = ({
   const AButtonSet = React.forwardRef(({ buttons, ...rest }, ref) => {
     return (
       <ButtonSet {...rest} ref={ref}>
-        {buttons.map(({ label, key, kind, ...other }) => {
-          /* istanbul ignore next */
-          const usedKind = kind || 'primary';
+        {buttons.map(({ label, key, ...other }) => {
           return (
             <Button
-              key={key && `button-set-${key}`}
-              kind={usedKind}
               {...other}
+              key={key && `button-set-${key}`}
               size={buttonSize}
               type="button"
+              kind="primary"
             >
               {label}
             </Button>
@@ -111,23 +108,19 @@ export const ButtonSetWithOverflow = ({
   });
   const AButtonMenu = React.forwardRef(({ buttons, ...rest }, ref) => {
     return (
-      <ButtonMenu
+      <MenuButton
         {...rest}
         ref={ref}
         label={buttonSetOverflowLabel}
-        menuAriaLabel={buttonSetOverflowLabel}
       >
         {buttons
-          .map(({ label, key, kind, ...other }) => (
-            <ButtonMenuItem
-              key={key && `button-menu-${key}`}
-              isDelete={kind?.startsWith('danger')}
-              itemText={label}
-              {...prepareProps(other, ['iconDescription', 'renderIcon'])}
-            />
-          ))
+          .map(({ key, ...other }) => <MenuItem
+          {...prepareProps(other, ['iconDescription', 'renderIcon'])}
+            key={key && `button-menu-${key}`}
+            kind="default"
+          />)
           .reverse()}
-      </ButtonMenu>
+      </MenuButton>
     );
   });
 
@@ -161,28 +154,29 @@ export const ButtonSetWithOverflow = ({
         aria-hidden={true}
       >
         <AButtonMenu
-          menuOptionsClass={menuOptionsClass}
+          className={menuOptionsClass}
           ref={sizingContainerRefCombo}
           buttons={buttons}
           size={buttonSize}
         />
       </div>
-
-      {/* The displayed components */}
-      {showAsOverflow ? (
-        <AButtonMenu
-          buttons={buttons}
-          size={buttonSize}
-          menuOptionsClass={menuOptionsClass}
-        />
-      ) : (
-        <AButtonSet
-          className={`${blockClass}__button-container`}
-          size={buttonSize}
-          buttons={buttons}
-        />
-      )}
-    </div>
+      <div className={`${blockClass}__button-container ${blockClass}__button-container--visible`}>
+        {/* The displayed components */}
+        {showAsOverflow ? (
+          <AButtonMenu
+            buttons={buttons}
+            size={buttonSize}
+            className={menuOptionsClass}
+          />
+        ) : (
+          <AButtonSet
+            className={`${blockClass}__button-container`}
+            size={buttonSize}
+            buttons={buttons}
+          />
+        )}
+      </div>
+    </div >
   );
 };
 
@@ -197,15 +191,7 @@ ButtonSetWithOverflow.propTypes = {
    *
    * Carbon Button API https://react.carbondesignsystem.com/?path=/docs/components-button--default#component-api
    */
-  buttons: PropTypes.arrayOf(
-    PropTypes.shape({
-      ...Button.propTypes,
-      key: PropTypes.string.isRequired,
-      kind: Button.propTypes.kind,
-      label: PropTypes.node,
-      onClick: PropTypes.func,
-    })
-  ).isRequired,
+  buttons: PropTypes.array.isRequired,
   /**
    * className
    */

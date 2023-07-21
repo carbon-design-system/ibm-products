@@ -31,6 +31,7 @@ const defaults = {
   primaryButtonPlacement: 'bottom',
   productive: false,
   secondaryButtonKind: 'secondary',
+  secondaryButtonPlacement: 'bottom',
   titleSize: 'default',
 };
 
@@ -63,6 +64,7 @@ export let Card = forwardRef(
       secondaryButtonHref,
       secondaryButtonIcon,
       secondaryButtonKind = defaults.secondaryButtonKind,
+      secondaryButtonPlacement = defaults.secondaryButtonPlacement,
       secondaryButtonText,
       title,
       titleSize = defaults.titleSize,
@@ -199,12 +201,17 @@ export let Card = forwardRef(
         actionIcons.length > 0 && actionsPlacement === 'top' ? false : true,
       actionsPlacement,
       onPrimaryButtonClick,
+      onSecondaryButtonClick,
       primaryButtonIcon,
       primaryButtonPlacement,
       primaryButtonText,
       description,
       hasActions: hasActions,
       label,
+      secondaryButtonHref,
+      secondaryButtonIcon,
+      secondaryButtonPlacement,
+      secondaryButtonText,
       title,
       titleSize,
     });
@@ -237,9 +244,9 @@ export let Card = forwardRef(
       secondaryButtonHref,
       secondaryButtonIcon,
       secondaryButtonKind,
+      secondaryButtonPlacement,
       secondaryButtonText,
     });
-
     return (
       <div {...getCardProps()}>
         {media && <div className={`${blockClass}__media`}>{media}</div>}
@@ -310,6 +317,7 @@ Card.propTypes = {
   secondaryButtonHref: PropTypes.string,
   secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
+  secondaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   secondaryButtonText: PropTypes.string,
   title: PropTypes.oneOfType([
     PropTypes.string,

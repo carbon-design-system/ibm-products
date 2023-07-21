@@ -7236,6 +7236,7 @@ button.c4p--add-select__global-filter-toggle--open {
   padding-left: 0.625rem;
   /* stylelint-disable-next-line max-nesting-depth */
   /* stylelint-disable-next-line max-nesting-depth */
+  /* stylelint-disable-next-line max-nesting-depth */
 }
 .c4p--card__productive .c4p--card__actions-header-ghost-button::before {
   position: absolute;
@@ -7251,6 +7252,18 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--card__productive .c4p--card__actions-header-ghost-button:hover::before {
   opacity: 0;
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button:hover + .c4p--card__actions-header-ghost-button {
+  /* stylelint-disable-next-line max-nesting-depth */
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button:hover + .c4p--card__actions-header-ghost-button::before {
+  opacity: 0;
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button:first-child:not(:last-child) {
+  /* stylelint-disable-next-line max-nesting-depth */
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button:first-child:not(:last-child)::before {
+  display: none;
 }
 .c4p--card__productive .c4p--card__title-lg .c4p--card__actions-header,
 .c4p--card__productive .c4p--card__header-has-label .c4p--card__actions-header {

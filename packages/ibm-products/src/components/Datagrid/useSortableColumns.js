@@ -55,11 +55,6 @@ const useSortableColumns = (hooks) => {
       descendingSortableLabelText,
       defaultSortableLabelText,
     } = instance;
-    console.log({
-      ascendingSortableLabelText,
-      descendingSortableLabelText,
-      defaultSortableLabelText,
-    });
     const onSortClick = (column) => {
       const key = column.id;
       const sortDesc = column.isSortedDesc;

@@ -105,7 +105,6 @@ ComboButton.deprecated = {
   details: `Please replace ${componentName} with Carbon's ComboButton`,
 };
 
-
 ComboButton.propTypes = {
   /** Provide the contents of the `ComboButton` */
   children: node.isRequired,

@@ -10,7 +10,13 @@ import PropTypes from 'prop-types';
 
 import cx from 'classnames';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
-import { ButtonSet, Button, usePrefix, MenuButton, MenuItem } from '@carbon/react';
+import {
+  ButtonSet,
+  Button,
+  usePrefix,
+  MenuButton,
+  MenuItem,
+} from '@carbon/react';
 
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
@@ -108,17 +114,15 @@ export const ButtonSetWithOverflow = ({
   });
   const AButtonMenu = React.forwardRef(({ buttons, ...rest }, ref) => {
     return (
-      <MenuButton
-        {...rest}
-        ref={ref}
-        label={buttonSetOverflowLabel}
-      >
+      <MenuButton {...rest} ref={ref} label={buttonSetOverflowLabel}>
         {buttons
-          .map(({ key, ...other }) => <MenuItem
-          {...prepareProps(other, ['iconDescription', 'renderIcon'])}
-            key={key && `button-menu-${key}`}
-            kind="default"
-          />)
+          .map(({ key, ...other }) => (
+            <MenuItem
+              {...prepareProps(other, ['iconDescription', 'renderIcon'])}
+              key={key && `button-menu-${key}`}
+              kind="default"
+            />
+          ))
           .reverse()}
       </MenuButton>
     );
@@ -160,7 +164,9 @@ export const ButtonSetWithOverflow = ({
           size={buttonSize}
         />
       </div>
-      <div className={`${blockClass}__button-container ${blockClass}__button-container--visible`}>
+      <div
+        className={`${blockClass}__button-container ${blockClass}__button-container--visible`}
+      >
         {/* The displayed components */}
         {showAsOverflow ? (
           <AButtonMenu
@@ -176,7 +182,7 @@ export const ButtonSetWithOverflow = ({
           />
         )}
       </div>
-    </div >
+    </div>
   );
 };
 

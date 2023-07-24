@@ -61,14 +61,14 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     const selectedRowData =
       selectedRowIndexes && selectedRowIndexes.length
         ? selectedRowIndexes.map((rowIndex) => {
-          const filteredRow = rows.filter(
-            (row) => row.index === parseInt(rowIndex)
-          );
-          if (filteredRow.length) {
-            return filteredRow[0];
-          }
-          return [];
-        })
+            const filteredRow = rows.filter(
+              (row) => row.index === parseInt(rowIndex)
+            );
+            if (filteredRow.length) {
+              return filteredRow[0];
+            }
+            return [];
+          })
         : [];
     return selectedRowData;
   };

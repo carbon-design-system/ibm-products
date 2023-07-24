@@ -24,7 +24,7 @@ const buttons = (handleClick) =>
     onClick: () => {
       handleClick(`Action ${num}`);
     },
-    className: 'button-class-test'
+    className: 'button-class-test',
   }));
 
 import { pkg } from '../../settings';

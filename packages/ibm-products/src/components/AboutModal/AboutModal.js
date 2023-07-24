@@ -19,11 +19,11 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 
 // Carbon and package components we use.
 import {
-  ComposedModal,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  Theme,
+ComposedModal,
+ModalHeader,
+ModalFooter,
+ModalBody,
+Theme,
 } from '@carbon/react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -40,106 +40,106 @@ const componentName = 'AboutModal';
  * to completion.
  */
 export let AboutModal = React.forwardRef(
-  (
-    {
-      additionalInfo,
-      className,
-      closeIconDescription,
-      copyrightText,
-      content,
-      links,
-      logo,
-      modalAriaLabel,
-      onClose,
-      open,
-      title,
-      version,
-      // Collect any other property values passed in.
-      ...rest
-    },
-    ref
-  ) => {
-    const [hasScrollingContent, setHasScrollingContent] = useState(true);
-    const bodyRef = useRef();
-    const contentRef = useRef();
-    const contentId = uuidv4();
+(
+{
+additionalInfo,
+className,
+closeIconDescription,
+copyrightText,
+content,
+links,
+logo,
+modalAriaLabel,
+onClose,
+open,
+title,
+version,
+// Collectt any other property values passed in.
+...rest
+},
+ref
+) => {
+const [hasScrollingContent, setHasScrollingContent] = useState(true);
+const bodyRef = useRef();
+const contentRef = useRef();
+const contentId = uuidv4();
 
-    const handleResize = () => {
-      setHasScrollingContent(
-        // if our scroll height exceeds the client height enable scrolling
-        bodyRef.current.clientHeight <
-          (hasScrollingContent
-            ? // Carbon modal adds 32px bottom margin when scrolling content is enabled
-              bodyRef.current.scrollHeight - 32
-            : bodyRef.current.scrollHeight)
-      );
-    };
+const handleResize = () => {
+setHasScrollingContent(
+// if our scroll height exceeds the client height enable scrolling
+bodyRef.current.clientHeight <
+(hasScrollingContent
+? // Carbon modal adds 32px bottom margin when scrolling content is enabled
+bodyRef.current.scrollHeight - 32
+: bodyRef.current.scrollHeight)
+);
+};
 
-    // We can't add a ref directly to the ModalBody, so track it in a ref
-    // as the parent of the current bodyRef element
-    useEffect(() => {
-      bodyRef.current = contentRef.current.parentElement;
-    }, [bodyRef]);
+// We can't add a ref directly to the ModalBody, so track it in a ref
+// as the parent of the current bodyRef element
+useEffect(() => {
+bodyRef.current = contentRef.current.parentElement;
+}, [bodyRef]);
 
-    // Detect resize of the ModalBody to recalculate whether scrolling is enabled
-    useResizeObserver(bodyRef, handleResize);
+// Detect resize of the ModalBody to recalculate whether scrolling is enabled
+useResizeObserver(bodyRef, handleResize);
 
-    return (
-      <ComposedModal
-        {
-          // Pass through any other property values as HTML attributes.
-          ...rest
-        }
-        className={cx(
-          blockClass, // Apply the block class to the main HTML element
-          className // Apply any supplied class names to the main HTML element.
-        )}
-        aria-label={modalAriaLabel}
-        {...{ onClose, open, ref, ...getDevtoolsProps(componentName) }}
-      >
-        <div className={`${blockClass}__logo`}>{logo}</div>
-        <ModalHeader
-          className={`${blockClass}__header`}
-          closeModal={onClose}
-          iconDescription={closeIconDescription}
-          label={title}
-          labelClassName={`${blockClass}__title`}
-        />
-        <ModalBody
-          aria-label={hasScrollingContent ? '' : null}
-          aria-labelledby={hasScrollingContent ? contentId : null}
-          className={`${blockClass}__body`}
-          hasScrollingContent={hasScrollingContent}
-        >
-          <div
-            className={`${blockClass}__body-content`}
-            ref={contentRef}
-            id={contentId}
-          >
-            <div className={`${blockClass}__version`}>{version}</div>
-            {links && links.length > 0 && (
-              <div className={`${blockClass}__links-container`}>
-                {links.map((link, i) => (
-                  <React.Fragment key={i}>{link}</React.Fragment>
-                ))}
-              </div>
-            )}
-            {content && <p className={`${blockClass}__content`}>{content}</p>}
-            {copyrightText && (
-              <p className={`${blockClass}__copyright-text`}>{copyrightText}</p>
-            )}
-          </div>
-        </ModalBody>
-        {additionalInfo && (
-          <Theme theme="g100">
-            <ModalFooter className={`${blockClass}__footer`}>
-              {additionalInfo}
-            </ModalFooter>
-          </Theme>
-        )}
-      </ComposedModal>
-    );
-  }
+return (
+<ComposedModal
+{
+// Pass through any other property values as HTML attributes.
+...rest
+}
+className={cx(
+blockClass, // Apply the block class to the main HTML element
+className // Apply any supplied class names to the main HTML element.
+)}
+aria-label={modalAriaLabel}
+{...{ onClose, open, ref, ...getDevtoolsProps(componentName) }}
+>
+<div className={`${blockClass}__logo`}>{logo}</div>
+<ModalHeader
+className={`${blockClass}__header`}
+closeModal={onClose}
+iconDescription={closeIconDescription}
+label={title}
+labelClassName={`${blockClass}__title`}
+/>
+<ModalBody
+aria-label={hasScrollingContent ? '' : null}
+aria-labelledby={hasScrollingContent ? contentId : null}
+className={`${blockClass}__body`}
+hasScrollingContent={hasScrollingContent}
+>
+<div
+className={`${blockClass}__body-content`}
+ref={contentRef}
+id={contentId}
+>
+<div className={`${blockClass}__version`}>{version}</div>
+{links && links.length > 0 && (
+<div className={`${blockClass}__links-container`}>
+{links.map((link, i) => (
+<React.Fragment key={i}>{link}</React.Fragment>
+))}
+</div>
+)}
+{content && <p className={`${blockClass}__content`}>{content}</p>}
+{copyrightText && (
+<p className={`${blockClass}__copyright-text`}>{copyrightText}</p>
+)}
+</div>
+</ModalBody>
+{additionalInfo && (
+<Theme theme="g100">
+<ModalFooter className={`${blockClass}__footer`}>
+{additionalInfo}
+</ModalFooter>
+</Theme>
+)}
+</ComposedModal>
+);
+}
 );
 
 // Return a placeholder if not released and not enabled by feature flag
@@ -150,73 +150,73 @@ AboutModal.displayName = componentName;
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 AboutModal.propTypes = {
-  /**
-   * If you are legally required to display logos of technologies used
-   * to build your product you can provide this in the additionalInfo.
-   * Additional information will be displayed in the footer.
-   */
-  additionalInfo: PropTypes.node,
+/**
+ * If you are legally required to display logos of technologies used
+ * to build your product you can provide this in the additionalInfo.
+ * Additional information will be displayed in the footer.
+ */
+additionalInfo: PropTypes.node,
 
-  /**
-   * Provide an optional class to be applied to the modal root node.
-   */
-  className: PropTypes.string,
+/**
+ * Provide an optional class to be applied to the modal root node.
+ */
+className: PropTypes.string,
 
-  /**
-   * The accessibility title for the close icon.
-   */
-  closeIconDescription: PropTypes.string.isRequired,
+/**
+ * The accessibility title for the close icon.
+ */
+closeIconDescription: PropTypes.string.isRequired,
 
-  /**
-   * Subhead text providing any relevant product disclaimers including
-   * legal information (optional)
-   */
-  content: PropTypes.node,
+/**
+ * Subhead text providing any relevant product disclaimers including
+ * legal information (optional)
+ */
+content: PropTypes.node,
 
-  /**
-   * Trademark and copyright information. Displays first year of
-   * product release to current year.
-   */
-  copyrightText: PropTypes.string.isRequired,
+/**
+ * Trademark and copyright information. Displays first year of
+ * product release to current year.
+ */
+copyrightText: PropTypes.string.isRequired,
 
-  /**
-   * An array of Carbon `Link` component if there are additional information
-   * to call out within the card. The about modal should be used to display
-   * the product information and not where users go to find help (optional)
-   */
-  links: PropTypes.arrayOf(PropTypes.element),
+/**
+ * An array of Carbon `Link` component if there are additional information
+ * to call out within the card. The about modal should be used to display
+ * the product information and not where users go to find help (optional)
+ */
+links: PropTypes.arrayOf(PropTypes.element),
 
-  /**
-   * A visual symbol used to represent the product.
-   */
-  logo: PropTypes.node.isRequired,
+/**
+ * A visual symbol used to represent the product.
+ */
+logo: PropTypes.node.isRequired,
 
-  /**
-   * Specifies aria label for AboutModal
-   */
-  modalAriaLabel: PropTypes.string,
+/**
+ * Specifies aria label for AboutModal
+ */
+modalAriaLabel: PropTypes.string,
 
-  /**
-   * Specifies an optional handler which is called when the AboutModal
-   * is closed. Returning `false` prevents the AboutModal from closing.
-   */
-  onClose: PropTypes.func,
+/**
+ * Specifies an optional handler which is called when the AboutModal
+ * is closed. Returning `false` prevents the AboutModal from closing.
+ */
+onClose: PropTypes.func,
 
-  /**
-   * Specifies whether the AboutModal is open or not.
-   */
-  open: PropTypes.bool,
+/**
+ * Specifies whether the AboutModal is open or not.
+ */
+open: PropTypes.bool,
 
-  /**
-   * Header text that provides the product name. The IBM Services logo
-   * consists of two discrete, but required, elements: the iconic
-   * IBM 8-bar logo represented alongside the IBM Services logotype.
-   * Please follow these guidelines to ensure proper execution.
-   */
-  title: PropTypes.node.isRequired,
+/**
+ * Header text that provides the product name. The IBM Services logo
+ * consists of two discrete, but required, elements: the iconic
+ * IBM 8-bar logo represented alongside the IBM Services logotype.
+ * Please follow these guidelines to ensure proper execution.
+ */
+title: PropTypes.node.isRequired,
 
-  /**
-   * Text that provides information on the version number of your product.
-   */
-  version: PropTypes.string.isRequired,
+/**
+ * Text that provides information on the version number of your product.
+ */
+version: PropTypes.string.isRequired,
 };

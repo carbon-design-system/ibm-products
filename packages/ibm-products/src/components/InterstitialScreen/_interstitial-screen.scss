@@ -59,7 +59,7 @@
       max-width: 1312px;
       //padding: 0 $one-grid-column;
       margin: calc($spacing-10 * 2) auto; // 8rem
-      background-color: $ui-background;
+      background-color: $ui-01;
     }
 
     &--content {
@@ -163,7 +163,7 @@
         height: $spacing-09; // 3rem
         padding-left: $spacing-05;
         border-bottom: 1px solid $ui-03;
-        background-color: $ui-background;
+        background-color: $ui-01;
         // stylelint-disable-next-line carbon/type-token-use
         font-weight: normal !important; // overrides type style above
         // stylelint-disable-next-line carbon/type-token-use

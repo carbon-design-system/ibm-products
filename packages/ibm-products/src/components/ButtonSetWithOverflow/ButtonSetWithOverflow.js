@@ -103,7 +103,6 @@ export const ButtonSetWithOverflow = ({
               key={key && `button-set-${key}`}
               size={buttonSize}
               type="button"
-              kind="primary"
             >
               {label}
             </Button>
@@ -116,13 +115,18 @@ export const ButtonSetWithOverflow = ({
     return (
       <MenuButton {...rest} ref={ref} label={buttonSetOverflowLabel}>
         {buttons
-          .map(({ key, ...other }) => (
-            <MenuItem
-              {...prepareProps(other, ['iconDescription', 'renderIcon'])}
-              key={key && `button-menu-${key}`}
-              kind="default"
-            />
-          ))
+          .map(({ key, kind, ...other }) => {
+            // menu items only come in default and danger flavors
+            const kindFix = kind === 'danger' ? 'danger' : 'default';
+            return (
+              <MenuItem
+                {...prepareProps(other, ['iconDescription', 'renderIcon'])}
+                key={key && `button-menu-${key}`}
+                kind={kindFix}
+                label="moop"
+              />
+            );
+          })
           .reverse()}
       </MenuButton>
     );

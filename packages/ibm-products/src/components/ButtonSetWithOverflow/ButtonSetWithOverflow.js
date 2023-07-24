@@ -96,13 +96,15 @@ export const ButtonSetWithOverflow = ({
   const AButtonSet = React.forwardRef(({ buttons, ...rest }, ref) => {
     return (
       <ButtonSet {...rest} ref={ref}>
-        {buttons.map(({ label, key, ...other }) => {
+        {buttons.map(({ label, key, kind, ...other }) => {
+          const kindFix = kind === 'default' ? 'primary' : kind;
           return (
             <Button
               {...other}
               key={key && `button-set-${key}`}
               size={buttonSize}
               type="button"
+              kind={kindFix}
             >
               {label}
             </Button>
@@ -123,7 +125,6 @@ export const ButtonSetWithOverflow = ({
                 {...prepareProps(other, ['iconDescription', 'renderIcon'])}
                 key={key && `button-menu-${key}`}
                 kind={kindFix}
-                label="moop"
               />
             );
           })

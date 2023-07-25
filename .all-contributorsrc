@@ -220,6 +220,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "kristastarr",
+      "name": "Krista Starr",
+      "avatar_url": "https://avatars.githubusercontent.com/u/21047571?v=4",
+      "profile": "https://github.com/kristastarr",
+      "contributions": [
+        "a11y",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,

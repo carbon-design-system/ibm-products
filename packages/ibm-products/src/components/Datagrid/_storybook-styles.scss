@@ -54,6 +54,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   padding-bottom: $spacing-06;
 }
 
+.#{$block-class}__side-panel-link {
+  padding-top: $spacing-01;
+  padding-bottom: $spacing-06;
+}
+
 .#{$block-class}__side-panel-section-inner {
   display: flex;
   padding: $spacing-01 0;

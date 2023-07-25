@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.4.0...@carbon/ibm-products@2.4.1) (2023-07-25)
+
+
+### Bug Fixes
+
+* **Datagrid:** clickable row stories ([#3224](https://github.com/carbon-design-system/ibm-products/issues/3224)) ([50dfe36](https://github.com/carbon-design-system/ibm-products/commit/50dfe369afbae0742868ff71b8ed00978b9afdd6))
+* **editable card:** buttons added on CardHeader ([#3110](https://github.com/carbon-design-system/ibm-products/issues/3110)) ([1173f08](https://github.com/carbon-design-system/ibm-products/commit/1173f0853f30cc5c18e418af26d5d90d69fa13fd))
+* **TearSheet:** wide button 2xl size ([#3222](https://github.com/carbon-design-system/ibm-products/issues/3222)) ([c72462f](https://github.com/carbon-design-system/ibm-products/commit/c72462ff35bf4d7b1de308041213924d77731f78))
+
+
+
+
+
+# [2.4.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.3.2...@carbon/ibm-products@2.4.0) (2023-07-18)
+
+
+### Bug Fixes
+
+* **Datagrid:** Invalid prop value was passed through table toolbar search component ([#3142](https://github.com/carbon-design-system/ibm-products/issues/3142)) ([15ab7c4](https://github.com/carbon-design-system/ibm-products/commit/15ab7c4dd06c775641e5baf2145ce23906bc710a))
+* update to Carbon 11 compatible versions to latest ([#3198](https://github.com/carbon-design-system/ibm-products/issues/3198)) ([c18c206](https://github.com/carbon-design-system/ibm-products/commit/c18c206525b22446c4ceb895e6eefabb0c7c2483))
+
+
+### Features
+
+* **FilterSummary:** adds custom label render and DisplayBox ([#3168](https://github.com/carbon-design-system/ibm-products/issues/3168)) ([d973b98](https://github.com/carbon-design-system/ibm-products/commit/d973b9842f54aca25a4933dacfb080e48c05870d))
+
+
+
+
+
 ## [2.3.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.3.1...@carbon/ibm-products@2.3.2) (2023-07-11)
 
 

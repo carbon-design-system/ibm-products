@@ -230,6 +230,15 @@
         "a11y",
         "code"
       ]
+    },
+    {
+      "login": "mikeolasov",
+      "name": "Mike Olasov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/27870459?v=4",
+      "profile": "http://mikeolasov.com",
+      "contributions": [
+        "design"
+      ]
     }
   ],
   "contributorsPerLine": 5,

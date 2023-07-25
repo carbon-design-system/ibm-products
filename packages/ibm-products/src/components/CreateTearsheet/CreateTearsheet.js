@@ -44,7 +44,7 @@ export const StepNumberContext = createContext(-1);
 
 // Default values for props
 const defaults = {
-  verticalPosition: 'normal',
+  verticalPosition: 'lower',
   influencerWidth: 'narrow',
 };
 

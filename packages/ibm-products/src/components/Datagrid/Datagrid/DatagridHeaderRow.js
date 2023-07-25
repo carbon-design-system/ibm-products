@@ -30,6 +30,10 @@ const HeaderRow = (datagridState, headRef, headerGroup) => (
           // render directly without the wrapper TableHeader
           return header.render('Header', { key: header.id });
         }
+        /**
+         * for accessibility reasons th's require a title attribute
+         * if there's no title prop in Header mark it as hidden
+         */
         return (
           <TableHeader
             {...header.getHeaderProps({ role: false })}
@@ -43,6 +47,8 @@ const HeaderRow = (datagridState, headRef, headerGroup) => (
               header.getHeaderProps().className
             )}
             key={header.id}
+            title={header.Header.props?.title}
+            aria-hidden={!header.Header.props?.title}
           >
             {header.render('Header')}
             {header.getResizerProps && (

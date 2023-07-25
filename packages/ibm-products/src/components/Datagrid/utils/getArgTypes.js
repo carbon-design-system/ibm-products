@@ -36,6 +36,7 @@ export const ARG_TYPES = {
   },
   emptyStateSize: { control: 'select', options: ['sm', 'lg'] },
   emptyStateType: { control: 'select', options: ['error', 'noData'] },
+  isFetching: { control: 'radio', options: [true, false] },
   useDenseHeader: {
     control: { type: 'radio' },
     options: [true, false],

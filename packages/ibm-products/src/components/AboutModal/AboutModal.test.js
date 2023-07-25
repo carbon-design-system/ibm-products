@@ -110,8 +110,15 @@ describe(componentName, () => {
     expect(screen.getByRole('presentation')).toHaveClass(blockClass);
   });
 
-  it.skip('has no accessibility violations', async () => {
-    const { container } = renderComponent();
+  // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
+  it.skip('has no accessibility violations when closed', async () => {
+    const { container } = renderComponent({ open: false });
+    await expect(container).toBeAccessible(`${componentName} closed`);
+    await expect(container).toHaveNoAxeViolations();
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = renderComponent({ open: true });
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });

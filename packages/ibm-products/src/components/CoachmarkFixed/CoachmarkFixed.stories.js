@@ -27,6 +27,17 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    children: {
+      control: { type: null },
+    },
+    portalTarget: {
+      control: { type: null },
+    },
+    theme: {
+      control: { type: null },
+    },
+  },
 };
 
 const Template = (args) => {
@@ -64,5 +75,6 @@ export const coachmarkFixed = prepareStory(Template, {
     tagline: 'Why are there two types of severity scores?',
     onClose: () => console.log('CLOSE'),
     portalTarget: '#root:not([hidden="true"])',
+    className: 'myCoachmarkFixed',
   },
 });

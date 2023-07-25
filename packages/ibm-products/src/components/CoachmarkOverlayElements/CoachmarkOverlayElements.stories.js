@@ -24,9 +24,14 @@ export default {
   title: getStoryTitle(CoachmarkOverlayElements.displayName),
   component: CoachmarkOverlayElements,
   // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
+  argTypes: {
+    children: {
+      control: { type: null },
+    },
+    media: {
+      control: { type: null },
+    },
+  },
   parameters: {
     styles,
     docs: {

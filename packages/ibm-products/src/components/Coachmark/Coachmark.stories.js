@@ -46,6 +46,9 @@ export default {
     overlayKind: {
       control: { type: null },
     },
+    overlayRef: {
+      control: { type: null },
+    },
     portalTarget: {
       control: { type: null },
     },

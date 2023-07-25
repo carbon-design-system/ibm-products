@@ -23,9 +23,21 @@ export default {
   title: getStoryTitle(CoachmarkOverlayElement.displayName),
   component: CoachmarkOverlayElement,
   // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
+  argTypes: {
+    button: {
+      control: { type: null },
+    },
+
+    description: {
+      control: { type: null },
+    },
+    nextButtonLabel: {
+      control: { type: null },
+    },
+    previousButtonLabel: {
+      control: { type: null },
+    },
+  },
   parameters: {
     styles,
     docs: {
@@ -56,7 +68,6 @@ const Template = (args) => {
 export const coachmarkOverlayElement = prepareStory(Template, {
   args: {
     closeButtonLabel: 'Done',
-    nextButtonLabel: 'Next',
-    previousButtonLabel: 'Back',
+    className: 'myOverlayElement',
   },
 });

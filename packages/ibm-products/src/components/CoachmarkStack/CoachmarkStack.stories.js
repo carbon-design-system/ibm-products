@@ -22,10 +22,20 @@ import styles from './_storybook-styles.scss';
 export default {
   title: getStoryTitle(CoachmarkStack.displayName),
   component: CoachmarkStack,
-  // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
+  argTypes: {
+    children: {
+      control: { type: null },
+    },
+    media: {
+      control: { type: null },
+    },
+    portalTarget: {
+      control: { type: null },
+    },
+    theme: {
+      control: { type: null },
+    },
+  },
   parameters: {
     styles,
     docs: {

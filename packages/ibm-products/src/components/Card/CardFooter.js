@@ -34,6 +34,7 @@ export let CardFooter = ({
   secondaryButtonHref,
   secondaryButtonIcon,
   secondaryButtonKind = defaults.secondaryButtonKind,
+  secondaryButtonPlacement,
   secondaryButtonText,
 }) => {
   const blockClass = `${pkg.prefix}--card`;
@@ -44,9 +45,9 @@ export let CardFooter = ({
 
   return (
     <div className={footerClasses}>
-      {secondaryButtonText && (
+      {secondaryButtonText && secondaryButtonPlacement === 'bottom' && (
         <Button
-          kind={secondaryButtonKind}
+          kind={productive ? 'ghost' : secondaryButtonKind}
           onClick={onSecondaryButtonClick}
           size="md"
           renderIcon={secondaryButtonIcon}
@@ -86,6 +87,7 @@ CardFooter.propTypes = {
   secondaryButtonHref: PropTypes.string,
   secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
+  secondaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   secondaryButtonText: PropTypes.string,
 };
 

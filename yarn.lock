@@ -6423,11 +6423,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accessibility-checker@npm:^3.1.57":
-  version: 3.1.57
-  resolution: "accessibility-checker@npm:3.1.57"
+"accessibility-checker@npm:^3.1.50":
+  version: 3.1.50
+  resolution: "accessibility-checker@npm:3.1.50"
   dependencies:
-    axios: ^1.4.0
+    axios: ^0.27.2
     chromedriver: "*"
     deep-diff: ^1.0.2
     exceljs: ^4.3.0
@@ -6437,7 +6437,7 @@ __metadata:
     uuid: ^8.3.2
   bin:
     achecker: bin/achecker.js
-  checksum: 1b3379fb38f3d31dca3c9d8d536640c378a4b1f510b3fe3220db394ba5bc925ccdc3819c07f38e2537e1098557ec9d5df2948ef58912e02de931b1ce9dfed40e
+  checksum: cb14814cc5e941da1e25a6f652c9ade5219001df773615d0d985d636793560b400ba7e78213876d7ad3adc804783c354253daaf5b1326d247018e5d8d1cce849
   languageName: node
   linkType: hard
 
@@ -7069,6 +7069,16 @@ __metadata:
   version: 4.7.2
   resolution: "axe-core@npm:4.7.2"
   checksum: 5d86fa0f45213b0e54cbb5d713ce885c4a8fe3a72b92dd915a47aa396d6fd149c4a87fec53aa978511f6d941402256cfeb26f2db35129e370f25a453c688655a
+  languageName: node
+  linkType: hard
+
+"axios@npm:^0.27.2":
+  version: 0.27.2
+  resolution: "axios@npm:0.27.2"
+  dependencies:
+    follow-redirects: ^1.14.9
+    form-data: ^4.0.0
+  checksum: 38cb7540465fe8c4102850c4368053c21683af85c5fdf0ea619f9628abbcb59415d1e22ebc8a6390d2bbc9b58a9806c874f139767389c862ec9b772235f06854
   languageName: node
   linkType: hard
 
@@ -11496,7 +11506,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.15.0":
+"follow-redirects@npm:^1.14.9, follow-redirects@npm:^1.15.0":
   version: 1.15.2
   resolution: "follow-redirects@npm:1.15.2"
   peerDependenciesMeta:
@@ -13945,7 +13955,7 @@ __metadata:
     "@babel/core": ^7.22.9
     "@testing-library/jest-dom": ^5.16.5
     "@wojtekmaj/enzyme-adapter-react-17": ^0.8.0
-    accessibility-checker: ^3.1.57
+    accessibility-checker: ^3.1.50
     axe-core: ^4.7.2
     babel-jest: ^29.6.1
     babel-preset-ibm-cloud-cognitive: ^0.14.37

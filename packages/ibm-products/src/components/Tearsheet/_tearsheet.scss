@@ -127,6 +127,12 @@ $motion-duration: $duration-moderate-02;
     width: 100%;
   }
 
+  &.#{$block-class}--wide
+    .#{$pkg-prefix}--action-set
+    .#{$pkg-prefix}--action-set__action-button.#{$pkg-prefix}--action-set__action-button--expressive {
+    height: $spacing-11;
+  }
+
   @include breakpoint(md) {
     &.#{$block-class}--wide .#{$block-class}__container {
       width: calc(100% - (2 * #{$spacing-10}));

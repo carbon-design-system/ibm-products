@@ -7,7 +7,6 @@
       "message": "chore(release): publish [skip ci]"
     }
   },
-  "useWorkspaces": true,
   "ignoreChanges": [
     "**/__fixtures__/**",
     "**/__tests__/**",
@@ -15,5 +14,6 @@
     "**/e2e/**",
     "**/examples/**",
     "**/*.md"
-  ]
+  ],
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json"
 }

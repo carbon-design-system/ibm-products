@@ -21,12 +21,17 @@ export let CardHeader = ({
   actions,
   noActionIcons,
   onPrimaryButtonClick,
+  onSecondaryButtonClick,
   primaryButtonIcon,
   primaryButtonPlacement,
   primaryButtonText,
   description,
   hasActions = defaults.hasActions,
   label,
+  secondaryButtonHref,
+  secondaryButtonIcon,
+  secondaryButtonPlacement,
+  secondaryButtonText,
   title,
   titleSize = defaults.titleSize,
 }) => {
@@ -57,10 +62,22 @@ export let CardHeader = ({
             className={`${blockClass}__actions ${blockClass}__actions-header`}
           >
             {actions}
+            {secondaryButtonText && secondaryButtonPlacement === 'top' && (
+              <Button
+                kind="ghost"
+                onClick={onSecondaryButtonClick}
+                size="sm"
+                renderIcon={secondaryButtonIcon}
+                href={secondaryButtonHref}
+                className={actionGhostButtonClass}
+              >
+                {secondaryButtonText}
+              </Button>
+            )}
             {primaryButtonText && primaryButtonPlacement === 'top' && (
               <Button
                 kind="ghost"
-                size="small"
+                size="sm"
                 renderIcon={primaryButtonIcon}
                 onClick={onPrimaryButtonClick}
                 className={actionGhostButtonClass}
@@ -86,9 +103,15 @@ CardHeader.propTypes = {
   label: PropTypes.string,
   noActionIcons: PropTypes.bool,
   onPrimaryButtonClick: PropTypes.func,
+  onSecondaryButtonClick: PropTypes.func,
   primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   primaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   primaryButtonText: PropTypes.string,
+  secondaryButtonHref: PropTypes.string,
+  secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
+  secondaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
+  secondaryButtonText: PropTypes.string,
   title: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,

@@ -2110,15 +2110,15 @@ p.c4p--about-modal__copyright-text:first-child {
   --cds-layout-size-height: var(--cds-layout-size-height-context);
 }
 
-.cds--layout-constraint--size\\:default-xs {
+.cds--layout-constraint--size__default-xs {
   --cds-layout-size-height: var(--cds-layout-size-height-context, var(--cds-layout-size-height-xs, 1.5rem));
 }
 
-.cds--layout-constraint--size\\:min-xs {
+.cds--layout-constraint--size__min-xs {
   --cds-layout-size-height-min: var(--cds-layout-size-height-xs, 1.5rem);
 }
 
-.cds--layout-constraint--size\\:max-xs {
+.cds--layout-constraint--size__max-xs {
   --cds-layout-size-height-max: var(--cds-layout-size-height-xs, 1.5rem);
 }
 
@@ -2127,15 +2127,15 @@ p.c4p--about-modal__copyright-text:first-child {
   --cds-layout-size-height: var(--cds-layout-size-height-context);
 }
 
-.cds--layout-constraint--size\\:default-sm {
+.cds--layout-constraint--size__default-sm {
   --cds-layout-size-height: var(--cds-layout-size-height-context, var(--cds-layout-size-height-sm, 2rem));
 }
 
-.cds--layout-constraint--size\\:min-sm {
+.cds--layout-constraint--size__min-sm {
   --cds-layout-size-height-min: var(--cds-layout-size-height-sm, 2rem);
 }
 
-.cds--layout-constraint--size\\:max-sm {
+.cds--layout-constraint--size__max-sm {
   --cds-layout-size-height-max: var(--cds-layout-size-height-sm, 2rem);
 }
 
@@ -2144,15 +2144,15 @@ p.c4p--about-modal__copyright-text:first-child {
   --cds-layout-size-height: var(--cds-layout-size-height-context);
 }
 
-.cds--layout-constraint--size\\:default-md {
+.cds--layout-constraint--size__default-md {
   --cds-layout-size-height: var(--cds-layout-size-height-context, var(--cds-layout-size-height-md, 2.5rem));
 }
 
-.cds--layout-constraint--size\\:min-md {
+.cds--layout-constraint--size__min-md {
   --cds-layout-size-height-min: var(--cds-layout-size-height-md, 2.5rem);
 }
 
-.cds--layout-constraint--size\\:max-md {
+.cds--layout-constraint--size__max-md {
   --cds-layout-size-height-max: var(--cds-layout-size-height-md, 2.5rem);
 }
 
@@ -2161,15 +2161,15 @@ p.c4p--about-modal__copyright-text:first-child {
   --cds-layout-size-height: var(--cds-layout-size-height-context);
 }
 
-.cds--layout-constraint--size\\:default-lg {
+.cds--layout-constraint--size__default-lg {
   --cds-layout-size-height: var(--cds-layout-size-height-context, var(--cds-layout-size-height-lg, 3rem));
 }
 
-.cds--layout-constraint--size\\:min-lg {
+.cds--layout-constraint--size__min-lg {
   --cds-layout-size-height-min: var(--cds-layout-size-height-lg, 3rem);
 }
 
-.cds--layout-constraint--size\\:max-lg {
+.cds--layout-constraint--size__max-lg {
   --cds-layout-size-height-max: var(--cds-layout-size-height-lg, 3rem);
 }
 
@@ -2178,15 +2178,15 @@ p.c4p--about-modal__copyright-text:first-child {
   --cds-layout-size-height: var(--cds-layout-size-height-context);
 }
 
-.cds--layout-constraint--size\\:default-xl {
+.cds--layout-constraint--size__default-xl {
   --cds-layout-size-height: var(--cds-layout-size-height-context, var(--cds-layout-size-height-xl, 4rem));
 }
 
-.cds--layout-constraint--size\\:min-xl {
+.cds--layout-constraint--size__min-xl {
   --cds-layout-size-height-min: var(--cds-layout-size-height-xl, 4rem);
 }
 
-.cds--layout-constraint--size\\:max-xl {
+.cds--layout-constraint--size__max-xl {
   --cds-layout-size-height-max: var(--cds-layout-size-height-xl, 4rem);
 }
 
@@ -2195,15 +2195,15 @@ p.c4p--about-modal__copyright-text:first-child {
   --cds-layout-size-height: var(--cds-layout-size-height-context);
 }
 
-.cds--layout-constraint--size\\:default-2xl {
+.cds--layout-constraint--size__default-2xl {
   --cds-layout-size-height: var(--cds-layout-size-height-context, var(--cds-layout-size-height-2xl, 5rem));
 }
 
-.cds--layout-constraint--size\\:min-2xl {
+.cds--layout-constraint--size__min-2xl {
   --cds-layout-size-height-min: var(--cds-layout-size-height-2xl, 5rem);
 }
 
-.cds--layout-constraint--size\\:max-2xl {
+.cds--layout-constraint--size__max-2xl {
   --cds-layout-size-height-max: var(--cds-layout-size-height-2xl, 5rem);
 }
 
@@ -2212,15 +2212,15 @@ p.c4p--about-modal__copyright-text:first-child {
   --cds-layout-density-padding-inline: var(--cds-layout-density-padding-inline-context);
 }
 
-.cds--layout-constraint--density\\:default-condensed {
+.cds--layout-constraint--density__default-condensed {
   --cds-layout-density-padding-inline: var(--cds-layout-density-padding-inline-context, var(--cds-layout-density-padding-inline-condensed, 0.5rem));
 }
 
-.cds--layout-constraint--density\\:min-condensed {
+.cds--layout-constraint--density__min-condensed {
   --cds-layout-density-padding-inline-min: var(--cds-layout-density-padding-inline-condensed, 0.5rem);
 }
 
-.cds--layout-constraint--density\\:max-condensed {
+.cds--layout-constraint--density__max-condensed {
   --cds-layout-density-padding-inline-max: var(--cds-layout-density-padding-inline-condensed, 0.5rem);
 }
 
@@ -2229,15 +2229,15 @@ p.c4p--about-modal__copyright-text:first-child {
   --cds-layout-density-padding-inline: var(--cds-layout-density-padding-inline-context);
 }
 
-.cds--layout-constraint--density\\:default-normal {
+.cds--layout-constraint--density__default-normal {
   --cds-layout-density-padding-inline: var(--cds-layout-density-padding-inline-context, var(--cds-layout-density-padding-inline-normal, 1rem));
 }
 
-.cds--layout-constraint--density\\:min-normal {
+.cds--layout-constraint--density__min-normal {
   --cds-layout-density-padding-inline-min: var(--cds-layout-density-padding-inline-normal, 1rem);
 }
 
-.cds--layout-constraint--density\\:max-normal {
+.cds--layout-constraint--density__max-normal {
   --cds-layout-density-padding-inline-max: var(--cds-layout-density-padding-inline-normal, 1rem);
 }
 
@@ -2869,6 +2869,9 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__container {
   width: 100%;
+}
+.c4p--tearsheet.c4p--tearsheet--wide .c4p--action-set .c4p--action-set__action-button.c4p--action-set__action-button--expressive {
+  height: 5rem;
 }
 @media (min-width: 42rem) {
   .c4p--tearsheet.c4p--tearsheet--wide .c4p--tearsheet__container {
@@ -7233,6 +7236,7 @@ button.c4p--add-select__global-filter-toggle--open {
   padding-left: 0.625rem;
   /* stylelint-disable-next-line max-nesting-depth */
   /* stylelint-disable-next-line max-nesting-depth */
+  /* stylelint-disable-next-line max-nesting-depth */
 }
 .c4p--card__productive .c4p--card__actions-header-ghost-button::before {
   position: absolute;
@@ -7248,6 +7252,18 @@ button.c4p--add-select__global-filter-toggle--open {
 }
 .c4p--card__productive .c4p--card__actions-header-ghost-button:hover::before {
   opacity: 0;
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button:hover + .c4p--card__actions-header-ghost-button {
+  /* stylelint-disable-next-line max-nesting-depth */
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button:hover + .c4p--card__actions-header-ghost-button::before {
+  opacity: 0;
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button:first-child:not(:last-child) {
+  /* stylelint-disable-next-line max-nesting-depth */
+}
+.c4p--card__productive .c4p--card__actions-header-ghost-button:first-child:not(:last-child)::before {
+  display: none;
 }
 .c4p--card__productive .c4p--card__title-lg .c4p--card__actions-header,
 .c4p--card__productive .c4p--card__header-has-label .c4p--card__actions-header {

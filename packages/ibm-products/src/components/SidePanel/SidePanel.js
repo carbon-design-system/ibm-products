@@ -91,8 +91,6 @@ export let SidePanel = React.forwardRef(
     const sidePanelCloseRef = useRef();
     const previousState = usePreviousValue({ size, open });
 
-    console.log('onRequestClose is: ', onRequestClose);
-
     const reducedMotion =
       typeof window !== 'undefined' && window?.matchMedia
         ? window.matchMedia('(prefers-reduced-motion: reduce)')

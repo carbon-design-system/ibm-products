@@ -12474,6 +12474,7 @@ __metadata:
   dependencies:
     "@babel/core": ^7.22.9
     "@babel/eslint-parser": ^7.22.9
+    "@babel/runtime": ^7.22.6
     "@commitlint/cli": ^17.6.6
     "@commitlint/config-conventional": ^17.6.6
     "@testing-library/dom": ^8.11.4

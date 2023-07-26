@@ -381,6 +381,9 @@ export const SortableColumns = () => {
     {
       columns,
       data,
+      ascendingSortableLabelText: 'ascending',
+      descendingSortableLabelText: 'descending',
+      defaultSortableLabelText: 'none',
     },
     useSortableColumns
   );

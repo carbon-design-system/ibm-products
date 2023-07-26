@@ -37,7 +37,8 @@ const HeaderRow = (datagridState, headRef, headerGroup) => (
               {
                 [`${blockClass}__resizableColumn`]: header.getResizerProps,
                 [`${blockClass}__isResizing`]: header.isResizing,
-                [`${blockClass}__sortableColumn`]: datagridState.isTableSortable,
+                [`${blockClass}__sortableColumn`]:
+                  datagridState.isTableSortable,
                 [`${blockClass}__isSorted`]: header.isSorted,
               },
               header.getHeaderProps().className

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.0.3...@carbon/ibm-cloud-cognitive-core@2.1.0) (2023-07-25)
+
+
+### Features
+
+* add welcome animation ([#3232](https://github.com/carbon-design-system/ibm-products/issues/3232)) ([ce682d4](https://github.com/carbon-design-system/ibm-products/commit/ce682d4f59009c3df8efbac97351a70ebd1d4222))
+
+
+
+
+
 ## [2.0.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.0.2...@carbon/ibm-cloud-cognitive-core@2.0.3) (2023-07-18)
 
 

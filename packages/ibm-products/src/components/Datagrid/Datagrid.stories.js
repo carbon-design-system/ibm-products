@@ -50,6 +50,7 @@ export default {
       },
     },
   },
+  excludeStories: ['getBatchActions'],
 };
 
 const getColumns = (rows) => {
@@ -471,7 +472,7 @@ const DatagridBatchActions = (datagridState) => {
   );
 };
 
-const getBatchActions = () => {
+export const getBatchActions = () => {
   return [
     {
       label: 'Duplicate',

@@ -39,7 +39,8 @@ describe(name, () => {
   it('renders secondary button', () => {
     const props = {
       hasButton: true,
-      secondaryButtonText: 'primary button',
+      secondaryButtonPlacement: 'bottom',
+      secondaryButtonText: 'secondary button',
     };
     const { getByText } = render(<CardFooter {...props} />);
     expect(getByText(props.secondaryButtonText)).toBeVisible();

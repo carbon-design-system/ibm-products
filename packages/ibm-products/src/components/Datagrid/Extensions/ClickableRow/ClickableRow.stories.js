@@ -19,6 +19,7 @@ import {
   useColumnRightAlign,
   useColumnCenterAlign,
   useOnRowClick,
+  useSelectRows,
 } from '../../index';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
@@ -30,6 +31,7 @@ import { Link } from 'carbon-components-react';
 import { pkg } from '../../../../settings';
 import cx from 'classnames';
 import { SidePanel } from '../../../SidePanel';
+import { getBatchActions } from '../../Datagrid.stories';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ClickableRow`,
@@ -299,8 +301,12 @@ const ClickableRowWithPanel = ({ ...args }) => {
         setOpenSidePanel(true);
         setRowData(row);
       },
+      DatagridActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
       ...args.defaultGridProps,
     },
+    useSelectRows,
     useOnRowClick,
     useColumnRightAlign
   );

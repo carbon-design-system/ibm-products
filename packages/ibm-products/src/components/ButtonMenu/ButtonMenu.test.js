@@ -53,7 +53,7 @@ describe(componentName, () => {
     ).toBeInTheDocument();
   });
 
-  xit('has no accessibility violations', async () => {
+  it.skip('has no accessibility violations', async () => {
     const { container } = renderMenu();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();

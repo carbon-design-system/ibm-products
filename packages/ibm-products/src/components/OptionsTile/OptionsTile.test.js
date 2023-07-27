@@ -34,7 +34,7 @@ describe(componentName, () => {
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
-  xit('has no accessibility violations', async () => {
+  it.skip('has no accessibility violations', async () => {
     const { container } = render(
       <main>
         <OptionsTile {...props} />

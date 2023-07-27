@@ -45,7 +45,7 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
-  xit('has no accessibility violations', async () => {
+  it.skip('has no accessibility violations', async () => {
     const { container } = render(
       <main>
         <HTTPError404 {...defaultProps} />

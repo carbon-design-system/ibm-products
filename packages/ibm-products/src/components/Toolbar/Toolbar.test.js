@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { createRef } from 'react';
 
@@ -15,7 +15,6 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { blockClass, componentName } from './Toolbar';
 import { blockClass as toolbarButtonClass } from './ToolbarButton';
 import { pkg, carbon } from '../../settings';
-import { act } from 'react-dom/test-utils';
 
 const { getByTestId, getByText } = screen;
 const { keyboard, tab } = userEvent;
@@ -25,7 +24,7 @@ function _instance(prop) {
 }
 
 function toBeAccessible(label, node, displayName) {
-  xit(label, async () => {
+  it.skip(label, async () => {
     const { container } = render(node);
 
     await expect(container).toBeAccessible(`${displayName} — ${label}`);
@@ -45,162 +44,36 @@ function test(Component) {
     Component.displayName
   );
 
-  it('renders children', () => {
-    render(<Component {...props} />);
+  it('renders children', async () => {
+    const { container } = await render(<Component {...props} />);
+
+    console.log(container.outerHTML);
 
     getByText(children);
   });
 
-  it('adds a class to the containing node', () => {
+  it('adds a class to the containing node', async () => {
     const className = _instance('class-name');
-    render(
+    await render(
       <Component {...props} className={className} data-testid={dataTestId} />
     );
 
     expect(getByTestId(dataTestId)).toHaveClass(className);
   });
 
-  it('adds additional props to the containing node', () => {
-    render(<Component {...props} data-testid={dataTestId} />);
+  it('adds additional props to the containing node', async () => {
+    await render(<Component {...props} data-testid={dataTestId} />);
 
     getByTestId(dataTestId);
   });
 
-  it('forwards a reference to the appropriate DOM node', () => {
+  it('forwards a reference to the appropriate DOM node', async () => {
     const ref = createRef();
-    render(<Component {...props} ref={ref} data-testid={dataTestId} />);
+    await render(<Component {...props} ref={ref} data-testid={dataTestId} />);
 
     expect(getByTestId(dataTestId)).toEqual(ref.current);
   });
 }
-
-describe(componentName, () => {
-  beforeAll(() => {
-    pkg.setAllComponents(true);
-  });
-
-  test(Toolbar);
-
-  const instance = _instance(componentName);
-
-  function _array(length) {
-    return new Array(length).fill();
-  }
-
-  function getText(id) {
-    return `${instance}--${id}`;
-  }
-
-  function key(text) {
-    keyboard(`{${text}}`);
-  }
-
-  async function setupFocus(length = 3, props) {
-    render(
-      <Toolbar {...props}>
-        {_array(length).map((_value, index) => {
-          const children = getText(index);
-
-          return <ToolbarButton key={children}>{children}</ToolbarButton>;
-        })}
-      </Toolbar>
-    );
-
-    expect(document.body).toHaveFocus();
-
-    await act(tab);
-
-    expect(getByText(getText(0))).toHaveFocus();
-  }
-
-  it('moves the focus out when tabbed', async () => {
-    await setupFocus();
-
-    await act(tab);
-
-    expect(document.body).toHaveFocus();
-  });
-
-  it('sets focus on the item that previously contained focus', async () => {
-    await setupFocus();
-
-    await key('ArrowRight');
-
-    await act(tab);
-
-    expect(getByText(getText(1))).toHaveFocus();
-  });
-
-  async function setupKeyFocus(props) {
-    const length = 5;
-
-    await setupFocus(length, props);
-
-    return _array(length - 1);
-  }
-
-  async function expectMove(text, id) {
-    await act(async () => await key(text));
-
-    expect(getByText(getText(id))).toHaveFocus();
-  }
-
-  async function expectNextKeyFocus(text, props) {
-    const items = await setupKeyFocus(props);
-    items.forEach(async (_value, index) => await expectMove(text, index + 1));
-  }
-
-  it('moves focus to the next item', async () => {
-    expectNextKeyFocus('ArrowRight');
-  });
-
-  async function expectPreviousKeyFocus({ next, previous }, props) {
-    const items = await setupKeyFocus(props);
-    const { length } = items;
-
-    await act(() => {
-      items.forEach(async () => await key(next));
-    });
-
-    items.forEach((_value, index) =>
-      expectMove(previous, length - (index + 1))
-    );
-  }
-
-  it('moves focus to the previous item', () => {
-    expectPreviousKeyFocus({ next: 'ArrowRight', previous: 'ArrowLeft' });
-  });
-
-  toBeAccessible(
-    'has no accessibility violations for the vertical variant',
-    <Toolbar {...props} vertical />,
-    componentName
-  );
-
-  it('renders the vertical variant', async () => {
-    const { rerender } = await render(
-      <Toolbar {...props} data-testid={dataTestId} vertical={true} />
-    );
-
-    const className = `${blockClass}--vertical`;
-    expect(getByTestId(dataTestId)).toHaveClass(className);
-
-    await rerender(<Toolbar {...props} data-testid={dataTestId} vertical />);
-    expect(getByTestId(dataTestId)).toHaveClass(className);
-  });
-
-  it('moves focus to the next item for the vertical variant', async () => {
-    expectNextKeyFocus('ArrowDown', { vertical: true });
-  });
-
-  it('moves focus to the previous item for the vertical variant', () => {
-    expectPreviousKeyFocus(
-      { next: 'ArrowDown', previous: 'ArrowUp' },
-      { vertical: true }
-    );
-  });
-});
-
 const toolbarButtonComponentName = ToolbarButton.displayName;
 describe(toolbarButtonComponentName, () => {
   beforeAll(() => {
@@ -259,4 +132,129 @@ describe(ToolbarGroup.displayName, () => {
     pkg.setAllComponents(true);
   });
   test(ToolbarGroup);
+});
+
+describe(componentName, () => {
+  beforeAll(() => {
+    pkg.setAllComponents(true);
+  });
+
+  test(Toolbar);
+
+  it('renders the vertical variant', async () => {
+    const { rerender } = await render(
+      <Toolbar {...props} data-testid={dataTestId} vertical={true} />
+    );
+
+    const className = `${blockClass}--vertical`;
+    expect(getByTestId(dataTestId)).toHaveClass(className);
+
+    await rerender(<Toolbar {...props} data-testid={dataTestId} vertical />);
+    expect(getByTestId(dataTestId)).toHaveClass(className);
+  });
+
+  const instance = _instance(componentName);
+
+  function _array(length) {
+    return new Array(length).fill();
+  }
+
+  function getText(id) {
+    return `${instance}--${id}`;
+  }
+
+  function key(text) {
+    return act(() => keyboard(`{${text}}`));
+  }
+
+  async function setupFocus(length = 3, props) {
+    await render(
+      <Toolbar {...props}>
+        {_array(length).map((_value, index) => {
+          const children = getText(index);
+
+          return <ToolbarButton key={children}>{children}</ToolbarButton>;
+        })}
+      </Toolbar>
+    );
+
+    expect(document.body).toHaveFocus();
+
+    await act(() => tab());
+
+    expect(getByText(getText(0))).toHaveFocus();
+  }
+
+  it('moves the focus out when tabbed', async () => {
+    await setupFocus();
+
+    await act(() => tab());
+
+    expect(document.body).toHaveFocus();
+  });
+
+  it('sets focus on the item that previously contained focus', async () => {
+    await setupFocus();
+
+    await key('ArrowRight');
+
+    expect(getByText(getText(1))).toHaveFocus();
+  });
+
+  async function setupKeyFocus(props) {
+    const length = 5;
+
+    await setupFocus(length, props);
+
+    return _array(length - 1);
+  }
+
+  async function expectMove(text, id) {
+    await act(async () => await key(text));
+
+    expect(getByText(getText(id))).toHaveFocus();
+  }
+
+  async function expectNextKeyFocus(text, props) {
+    const items = await setupKeyFocus(props);
+    items.forEach(async (_value, index) => await expectMove(text, index + 1));
+  }
+
+  it('moves focus to the next item', async () => {
+    expectNextKeyFocus('ArrowRight');
+  });
+
+  async function expectPreviousKeyFocus({ next, previous }, props) {
+    const items = await setupKeyFocus(props);
+    const { length } = items;
+
+    await act(() => {
+      items.forEach(async () => await key(next));
+    });
+
+    items.forEach((_value, index) =>
+      expectMove(previous, length - (index + 1))
+    );
+  }
+
+  it('moves focus to the previous item', async () => {
+    expectPreviousKeyFocus({ next: 'ArrowRight', previous: 'ArrowLeft' });
+  });
+
+  toBeAccessible(
+    'has no accessibility violations for the vertical variant',
+    <Toolbar {...props} vertical />,
+    componentName
+  );
+
+  it('moves focus to the next item for the vertical variant', async () => {
+    expectNextKeyFocus('ArrowDown', { vertical: true });
+  });
+
+  it('moves focus to the previous item for the vertical variant', async () => {
+    expectPreviousKeyFocus(
+      { next: 'ArrowDown', previous: 'ArrowUp' },
+      { vertical: true }
+    );
+  });
 });

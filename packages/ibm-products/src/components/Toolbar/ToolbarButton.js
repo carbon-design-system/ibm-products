@@ -24,6 +24,8 @@ export let ToolbarButton = forwardRef(
   ) => {
     const Icon = renderIcon;
 
+    console.log('wibble', children);
+
     return (
       <IconButton
         align={useContext(ToolbarContext)?.vertical && 'right'}

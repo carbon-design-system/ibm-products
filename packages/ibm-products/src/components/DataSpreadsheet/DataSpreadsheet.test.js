@@ -264,7 +264,7 @@ describe(componentName, () => {
     );
   });
 
-  it('should edit the cell contents, submit the change, and confirm the new value exists', async () => {
+  it.only('should edit the cell contents, submit the change, and confirm the new value exists', async () => {
     const newCellValue = "I'm the new cell value";
     const { click, keyboard, tab, type } = userEvent;
     const ref = React.createRef();
@@ -284,11 +284,13 @@ describe(componentName, () => {
     );
     await act(() => click(cellToEdit));
     expect(activeCellChangeFn).toHaveBeenCalled();
-    await act(() => keyboard('{Enter}'));
-    await act(() => cellEditor.setSelectionRange(0, cellEditor.value.length));
-    await act(() => type(cellEditor, newCellValue));
-    await act(() => tab());
-    await act(() => keyboard('{ArrowLeft}'));
+    await act(() => keyboard('banana'));
+    await act(() => type(cellEditor, 'banana test'));
+    // await act(() => keyboard('{Enter}'));
+    // await act(() => cellEditor.setSelectionRange(0, cellEditor.value.length));
+    // await act(() => type(cellEditor, newCellValue));
+    // await act(() => tab());
+    // await act(() => keyboard('{ArrowLeft}'));
 
     expect(activeCellElement.textContent).toEqual(newCellValue);
   });

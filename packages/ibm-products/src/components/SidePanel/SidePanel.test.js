@@ -201,7 +201,7 @@ describe('SidePanel', () => {
     expect(updatedStyles.marginRight).toBe('0px');
   });
 
-  it('should test overlay exit animation', async () => {
+  it('should test overlay eit.skip animation', async () => {
     const { container, rerender } = await renderSidePanel({
       includeOverlay: true,
     });

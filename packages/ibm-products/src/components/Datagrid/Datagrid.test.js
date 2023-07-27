@@ -1602,7 +1602,7 @@ describe(componentName, () => {
   });
 
   // requires refactor
-  xit('Select Items In All Pages', () => {
+  it.skip('Select Items In All Pages', () => {
     const alertMock = jest.spyOn(window, 'alert');
 
     render(

@@ -22,8 +22,8 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
 describe(componentName, () => {
-  it('renders a component EditTearsheetNarrow', () => {
-    render(<EditTearsheetNarrow> </EditTearsheetNarrow>);
+  it('renders a component EditTearsheetNarrow', async () => {
+   await render(<EditTearsheetNarrow> </EditTearsheetNarrow>);
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
@@ -34,30 +34,30 @@ describe(componentName, () => {
   });
 
   it(`renders children`, () => {
-    render(<EditTearsheetNarrow>{children}</EditTearsheetNarrow>);
+   await render(<EditTearsheetNarrow>{children}</EditTearsheetNarrow>);
     screen.getByText(children);
   });
 
-  it('applies className to the containing node', () => {
-    render(<EditTearsheetNarrow className={className}> </EditTearsheetNarrow>);
+  it('applies className to the containing node', async () => {
+   await render(<EditTearsheetNarrow className={className}> </EditTearsheetNarrow>);
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
-  it('adds additional props to the containing node', () => {
-    render(
+  it('adds additional props to the containing node', async () => {
+   await render(
       <EditTearsheetNarrow data-testid={dataTestId}> </EditTearsheetNarrow>
     );
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    render(<EditTearsheetNarrow ref={ref}> </EditTearsheetNarrow>);
+   await render(<EditTearsheetNarrow ref={ref}> </EditTearsheetNarrow>);
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
-    render(
+  it('adds the Devtools attribute to the containing node', async () => {
+   await render(
       <EditTearsheetNarrow data-testid={dataTestId}> </EditTearsheetNarrow>
     );
 

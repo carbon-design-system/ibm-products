@@ -5,13 +5,18 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import {
+  render,
+  fireEvent,
+  waitFor,
+  screen,
+  act,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { carbon } from '../../settings';
 
 import { APIKeyModal } from '.';
-import { act } from 'react-dom/test-utils';
 
 Object.assign(navigator, {
   clipboard: {
@@ -65,7 +70,7 @@ const defaultProps = {
 URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
 
 describe(componentName, () => {
-  it('renders with standard visible props', () => {
+  it('renders with standard visible props', async () => {
     const { getByText, getByPlaceholderText } = render(
       <APIKeyModal {...defaultProps} />
     );
@@ -120,9 +125,9 @@ describe(componentName, () => {
     await click(createButton);
     expect(onRequestGenerate).toHaveBeenCalledWith('test-key');
 
-    rerender(<APIKeyModal {...props} loading />);
+    await rerender(<APIKeyModal {...props} loading />);
     getByText(props.loadingText, { selector: 'div' });
-    rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
+    await rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
     await waitFor(() => getByText(props.downloadLinkText));
     getByText(props.downloadBodyText);
     expect(container.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
@@ -325,26 +330,26 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     const { container } = render(<APIKeyModal {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'data-testid';
 
-  it('adds additional properties to the containing node', () => {
-    render(<APIKeyModal {...defaultProps} data-testid={dataTestId} />);
+  it('adds additional properties to the containing node', async () => {
+    await render(<APIKeyModal {...defaultProps} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    render(<APIKeyModal {...defaultProps} ref={ref} />);
+    await render(<APIKeyModal {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
-    render(<APIKeyModal {...defaultProps} data-testid={dataTestId} />);
+  it('adds the Devtools attribute to the containing node', async () => {
+    await render(<APIKeyModal {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

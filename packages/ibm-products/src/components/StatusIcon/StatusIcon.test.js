@@ -54,35 +54,35 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  it('renders a component StatusIcon', () => {
-    const { container } = renderComponent();
+  it('renders a component StatusIcon', async () => {
+    const { container } = await renderComponent();
     expect(container).toBeInTheDocument();
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = renderComponent();
+    const { container } = await renderComponent();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('applies className to the root node', () => {
-    const { container } = renderComponent({ className });
+  it('applies className to the root node', async () => {
+    const { container } = await renderComponent({ className });
     expect(container.querySelector(`.${className}`)).toBeInTheDocument();
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    renderComponent({ ref });
+    await renderComponent({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds additional properties to the containing node', () => {
-    renderComponent({ 'data-testid': dataTestId });
+  it('adds additional properties to the containing node', async () => {
+    await renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
-    renderComponent({ 'data-testid': dataTestId });
+  it('adds the Devtools attribute to the containing node', async () => {
+    await renderComponent({ 'data-testid': dataTestId });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

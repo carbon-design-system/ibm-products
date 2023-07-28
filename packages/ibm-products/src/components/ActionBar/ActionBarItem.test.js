@@ -35,7 +35,7 @@ describe(ActionBarItem.displayName, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('Renders a page action item which is a Carbon Button that can be clicked', () => {
+  it('Renders a page action item which is a Carbon Button that can be clicked', async () => {
     const myOnClick = jest.fn();
 
     // not enough room so should see an overflow.
@@ -50,7 +50,7 @@ describe(ActionBarItem.displayName, () => {
     expect(myOnClick).toBeCalled();
   });
 
-  it('adds user classes', () => {
+  it('adds user classes', async () => {
     const { container } = render(
       <ActionBarItem label={testLabel} className={className}>
         {content}
@@ -61,7 +61,7 @@ describe(ActionBarItem.displayName, () => {
     expect(actionBarItemElement).toHaveClass(className);
   });
 
-  it('ignores user size and type settings', () => {
+  it('ignores user size and type settings', async () => {
     const { container } = render(
       <ActionBarItem label={testLabel} size="lg" type="submit">
         {content}
@@ -73,7 +73,7 @@ describe(ActionBarItem.displayName, () => {
     expect(actionBarItemElement).toHaveAttribute('type', 'button');
   });
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     const { container } = render(
       <ActionBarItem label={testLabel} data-testid={dataTestId}>
         {content}
@@ -85,9 +85,9 @@ describe(ActionBarItem.displayName, () => {
     ).toBeInTheDocument();
   });
 
-  it('forwards a ref to the block element', () => {
+  it('forwards a ref to the block element', async () => {
     const ref = React.createRef();
-    render(
+    await render(
       <ActionBarItem label={testLabel} ref={ref}>
         {content}
       </ActionBarItem>

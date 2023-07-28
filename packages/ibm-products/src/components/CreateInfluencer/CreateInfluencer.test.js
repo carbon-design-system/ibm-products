@@ -22,8 +22,8 @@ describe(CreateInfluencer.displayName, () => {
     jest.useRealTimers();
   });
 
-  it('renders the CreateInfluencer component', () => {
-    const { container } = renderComponent({
+  it('renders the CreateInfluencer component', async () => {
+    const { container } = await renderComponent({
       stepData: [
         {
           title: 'Step 1',
@@ -37,12 +37,12 @@ describe(CreateInfluencer.displayName, () => {
     });
     expect(container.firstChild).toHaveClass(blockClass);
   });
-  it('renders nothing inside of the influencer when an intro step is provided', () => {
+  it('renders nothing inside of the influencer when an intro step is provided', async () => {
     const influencerClass = `${blockClass}__left-nav`;
     const step1Title = 'Step 1 title';
     const step2Title = 'Step 2 title';
     const introTitle = 'Intro title';
-    const { container } = renderComponent({
+    const { container } = await renderComponent({
       stepData: [
         {
           introStep: true,
@@ -64,7 +64,7 @@ describe(CreateInfluencer.displayName, () => {
     const influencerElement = container.querySelector(`.${influencerClass}`);
     expect(influencerElement).toBeEmptyDOMElement();
     // Progress indicator should render after the intro step
-    renderComponent({
+    await renderComponent({
       stepData: [
         {
           introStep: true,

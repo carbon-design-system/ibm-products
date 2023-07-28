@@ -14,26 +14,26 @@ const { name } = CardHeader;
 const blockClass = `${pkg.prefix}--card`;
 
 describe(name, () => {
-  it('renders', () => {
-    render(<CardHeader />);
+  it('renders', async () => {
+    await render(<CardHeader />);
   });
 
-  it('renders a description', () => {
+  it('renders a description', async () => {
     const { getByText } = render(<CardHeader description="description" />);
     expect(getByText('description')).toBeVisible();
   });
 
-  it('renders a label', () => {
+  it('renders a label', async () => {
     const { getByText } = render(<CardHeader label="label" />);
     expect(getByText('label')).toBeVisible();
   });
 
-  it('renders a title', () => {
+  it('renders a title', async () => {
     const { getByText } = render(<CardHeader title="title" />);
     expect(getByText('title')).toBeVisible();
   });
 
-  it('renders a large title', () => {
+  it('renders a large title', async () => {
     const props = {
       title: 'large title',
       titleSize: 'large',
@@ -42,7 +42,7 @@ describe(name, () => {
     expect(container.querySelector(`.${blockClass}__title-lg`)).toBeVisible();
   });
 
-  it('renders actions', () => {
+  it('renders actions', async () => {
     const props = {
       hasActions: true,
       actions: <p key={1}>action 1</p>,

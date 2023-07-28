@@ -34,7 +34,7 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('renders', () => {
-    render(<MultiAddSelect {...defaultProps} />);
+  it('renders', async () => {
+    await render(<MultiAddSelect {...defaultProps} />);
   });
 });

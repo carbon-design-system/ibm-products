@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ActionBar } from '.';
 import { Lightning, Bee } from '@carbon/react/icons';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
 import { pkg, carbon } from '../../settings';
-import { act } from 'react-dom/test-utils';
+
 const blockClass = `${pkg.prefix}--action-bar`;
 
 const actions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => ({
@@ -106,8 +106,8 @@ describe(ActionBar.displayName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('Renders an action bar', () => {
-    render(
+  it('Renders an action bar', async () => {
+    await render(
       <TestActionBar
         width={1150}
         actions={actions}
@@ -125,7 +125,7 @@ describe(ActionBar.displayName, () => {
 
   it('Renders an action bar with overflow items', async () => {
     // not enough room so should see an overflow.
-    render(
+    await render(
       <TestActionBar
         width={200}
         overflowAriaLabel={overflowAriaLabel}
@@ -162,7 +162,7 @@ describe(ActionBar.displayName, () => {
     expect(menuItemSeen).not.toBeNull();
   });
 
-  it('Does not duplicate action IDs', () => {
+  it('Does not duplicate action IDs', async () => {
     // not enough room so should see an overflow.
     const { container } = render(
       <TestActionBar
@@ -175,8 +175,8 @@ describe(ActionBar.displayName, () => {
     expect(container.querySelectorAll(`#${actions[0].id}`)).toHaveLength(1);
   });
 
-  it('Renders an action bar with max items set', () => {
-    render(
+  it('Renders an action bar with max items set', async () => {
+    await render(
       <TestActionBar
         width={1150}
         maxVisible={2}

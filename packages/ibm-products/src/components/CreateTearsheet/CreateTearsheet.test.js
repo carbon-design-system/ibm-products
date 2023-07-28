@@ -74,7 +74,7 @@ const renderCreateTearsheet = ({
   rejectOnSubmitNext = false,
   ...rest
 }) =>
-  render(
+ render(
     <CreateTearsheet
       onRequestSubmit={rejectOnSubmit ? onRequestSubmitRejectFn : submitFn}
       {...rest}
@@ -107,14 +107,14 @@ const renderCreateTearsheet = ({
   );
 
 const renderEmptyCreateTearsheet = ({ ...rest } = {}) =>
-  render(
+ render(
     <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
       <p>Child element that persists across all steps</p>
     </CreateTearsheet>
   );
 
 const renderSingleStepCreateTearsheet = ({ ...rest } = {}) =>
-  render(
+ render(
     <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
       <CreateTearsheetStep title={step1Title} fieldsetLegendText={step1Title}>
         step 1 content
@@ -123,7 +123,7 @@ const renderSingleStepCreateTearsheet = ({ ...rest } = {}) =>
   );
 
 const renderInvalidCreateTearsheet = ({ ...rest } = {}) =>
-  render(
+ render(
     <>
       <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
         <CreateTearsheetStep title={step1Title} hasFieldset={false}>
@@ -173,13 +173,13 @@ describe(CreateTearsheet.displayName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = renderCreateTearsheet({ ...defaultProps });
+    const { container } = await renderCreateTearsheet({ ...defaultProps });
     await expect(() => container.toBeAccessible());
     await expect(() => container.toHaveNoAxeViolations());
   });
 
-  it('renders the CreateTearsheet component', () => {
-    const { container } = renderCreateTearsheet({
+  it('renders the CreateTearsheet component', async () => {
+    const { container } = await renderCreateTearsheet({
       ...defaultProps,
       'data-testid': dataTestId,
     });
@@ -196,8 +196,8 @@ describe(CreateTearsheet.displayName, () => {
     expect(ref.current).not.toBeNull();
   });
 
-  it('should render the tearsheet on the specified initialStep prop provided', () => {
-    const { container } = renderCreateTearsheet({
+  it('should render the tearsheet on the specified initialStep prop provided', async () => {
+    const { container } = await renderCreateTearsheet({
       ...defaultProps,
       initialStep: 2,
     });
@@ -211,11 +211,11 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  it('renders the first step if an invalid initialStep value is provided', () =>
+  it('renders the first step if an invalid initialStep value is provided', async () =>
     expectWarn(
       `${CreateTearsheet.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateTearsheet.displayName} has.`,
       () => {
-        const { container } = renderCreateTearsheet({
+        const { container } = await renderCreateTearsheet({
           ...defaultProps,
           // Starting on 0 step is invalid since the steps start with a value of 1
           // This will cause a console warning
@@ -236,7 +236,7 @@ describe(CreateTearsheet.displayName, () => {
 
   it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
     const { click } = userEvent;
-    const { container } = renderCreateTearsheet(defaultProps);
+    const { container } = await renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const cancelButtonElement = screen.getByText(cancelButtonText);
     click(nextButtonElement);
@@ -261,7 +261,7 @@ describe(CreateTearsheet.displayName, () => {
       `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
       async () => {
         const { click } = userEvent;
-        renderCreateTearsheet({
+       await renderCreateTearsheet({
           ...defaultProps,
           rejectOnSubmit: false,
           rejectOnNext: true,
@@ -277,7 +277,7 @@ describe(CreateTearsheet.displayName, () => {
 
   it('renders the next CreateTearsheet step without onNext handler', async () => {
     const { click } = userEvent;
-    const { container, rerender } = renderCreateTearsheet(defaultProps);
+    const { container, rerender } = await renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     click(nextButtonElement);
     await waitFor(() => {
@@ -292,7 +292,7 @@ describe(CreateTearsheet.displayName, () => {
         `.${createTearsheetBlockClass}__step__step--visible-section`
       )
     );
-    rerender(
+   await rerender(
       <CreateTearsheet
         {...defaultProps}
         open={false}
@@ -310,7 +310,7 @@ describe(CreateTearsheet.displayName, () => {
 
   it('should call the onRequestSubmit prop, returning a promise on last step submit button', async () => {
     const { click } = userEvent;
-    renderCreateTearsheet({
+   await renderCreateTearsheet({
       ...defaultProps,
       rejectOnSubmit: false,
       rejectOnNext: false,
@@ -336,7 +336,7 @@ describe(CreateTearsheet.displayName, () => {
 
   it('should call the onRequestSubmit function, without a promise, on last step submit button', async () => {
     const { click } = userEvent;
-    renderCreateTearsheet({
+   await renderCreateTearsheet({
       ...defaultProps,
       rejectOnSubmit: false,
       rejectOnNext: false,
@@ -365,7 +365,7 @@ describe(CreateTearsheet.displayName, () => {
       `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
       async () => {
         const { click } = userEvent;
-        renderCreateTearsheet({
+       await renderCreateTearsheet({
           ...defaultProps,
           rejectOnSubmit: false,
           rejectOnNext: false,
@@ -396,7 +396,7 @@ describe(CreateTearsheet.displayName, () => {
       `CreateTearsheet submit error: ${rejectionErrorMessage}`,
       async () => {
         const { click } = userEvent;
-        renderCreateTearsheet({
+       await renderCreateTearsheet({
           ...defaultProps,
           rejectOnSubmit: true,
         });
@@ -417,8 +417,8 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it('should not render any CreateTearsheet steps when there are no TearsheetStep components included', () => {
-    const { container } = renderEmptyCreateTearsheet(defaultProps);
+  it('should not render any CreateTearsheet steps when there are no TearsheetStep components included', async () => {
+    const { container } = await renderEmptyCreateTearsheet(defaultProps);
     const createTearsheetSteps = container.querySelectorAll(
       `.${createTearsheetBlockClass}__step`
     );
@@ -427,7 +427,7 @@ describe(CreateTearsheet.displayName, () => {
 
   it('should click the back button and add a custom next button label on a single step', async () => {
     const { click } = userEvent;
-    const { container } = renderCreateTearsheet({
+    const { container } = await renderCreateTearsheet({
       ...defaultProps,
       rejectOnSubmit: false,
       rejectOnNext: false,
@@ -449,25 +449,25 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  it('should create a console warning when using CreateTearsheet with only one step', () => {
+  it('should create a console warning when using CreateTearsheet with only one step', async () => {
     jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-    renderSingleStepCreateTearsheet(defaultProps);
+   await renderSingleStepCreateTearsheet(defaultProps);
     jest.spyOn(console, 'warn').mockRestore();
   });
 
-  it('should create a console warning when using CreateTearsheet with only one step', () =>
+  it('should create a console warning when using CreateTearsheet with only one step', async () =>
     expectWarn('CreateTearsheets with one step are not permitted', () => {
-      renderSingleStepCreateTearsheet(defaultProps);
+     await renderSingleStepCreateTearsheet(defaultProps);
     }));
 
-  it('should render an invalid create tearsheet', () =>
+  it('should render an invalid create tearsheet', async () =>
     expectMultipleWarn(
       [
         `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
         `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
       ],
       () => {
-        renderInvalidCreateTearsheet(defaultProps);
+       await renderInvalidCreateTearsheet(defaultProps);
       }
     ));
 });

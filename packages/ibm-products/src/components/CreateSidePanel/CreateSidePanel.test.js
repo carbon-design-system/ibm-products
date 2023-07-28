@@ -6,14 +6,13 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { pkg, carbon } from '../../settings';
 
 import { CreateSidePanel } from '.';
-import { act } from 'react-dom/test-utils';
 
 const componentName = CreateSidePanel.displayName;
 
@@ -124,8 +123,8 @@ describe(componentName, () => {
     expect(isDisabled).toBeTruthy();
   });
 
-  it.skip('has no accessibility violations', async () => {
-    const { container } = renderComponent();
+  it('has no accessibility violations', async () => {
+    const { container } = await renderComponent();
     await act(async () => {
       await expect(container).toBeAccessible(componentName);
       await expect(container).toHaveNoAxeViolations();

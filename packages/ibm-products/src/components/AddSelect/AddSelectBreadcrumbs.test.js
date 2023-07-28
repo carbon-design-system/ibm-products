@@ -37,22 +37,22 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('renders', () => {
-    render(<AddSelectBreadcrumbs {...defaultProps} />);
+  it('renders', async () => {
+    await render(<AddSelectBreadcrumbs {...defaultProps} />);
   });
 
-  it('handles click', () => {
+  it('handles click', async () => {
     const onClick = jest.fn();
     const newProps = {
       ...defaultProps,
       onClick,
     };
-    render(<AddSelectBreadcrumbs {...newProps} />);
+    await render(<AddSelectBreadcrumbs {...newProps} />);
     fireEvent.click(screen.queryByText('default'));
     expect(onClick).toBeCalled();
   });
 
-  it('displays multiple breadcrumbs', () => {
+  it('displays multiple breadcrumbs', async () => {
     const newProps = {
       ...defaultProps,
       path: [
@@ -66,7 +66,7 @@ describe(componentName, () => {
         },
       ],
     };
-    render(<AddSelectBreadcrumbs {...newProps} />);
+    await render(<AddSelectBreadcrumbs {...newProps} />);
     expect(screen.getByText('default'));
     expect(screen.getByText('level 2'));
     expect(

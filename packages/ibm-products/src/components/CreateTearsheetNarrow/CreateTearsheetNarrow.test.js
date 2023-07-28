@@ -39,7 +39,7 @@ const defaultProps = {
 };
 
 const renderComponent = ({ ...rest } = {}) =>
-  render(
+ render(
     <CreateTearsheetNarrow {...defaultProps} {...rest}>
       {children}
     </CreateTearsheetNarrow>
@@ -68,8 +68,8 @@ describe(componentName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it('renders a component CreateTearsheetNarrow', () => {
-    renderComponent();
+  it('renders a component CreateTearsheetNarrow', async () => {
+   await renderComponent();
     expect(screen.getByText(/Create action/)).toBeVisible();
     expect(screen.getByText(defaultProps.formDescription)).toBeVisible();
     expect(screen.getByText(defaultProps.formTitle)).toBeVisible();
@@ -79,49 +79,49 @@ describe(componentName, () => {
 
   it.skip('has no accessibility violations when closed', async () => {
     // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
-    const { container } = renderComponent({ open: false });
+    const { container } = await renderComponent({ open: false });
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = renderComponent();
+    const { container } = await renderComponent();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders children`, () => {
-    renderComponent();
+   await renderComponent();
     screen.getByText(children);
   });
 
-  it('applies className to the containing node', () => {
-    const { container } = renderComponent();
+  it('applies className to the containing node', async () => {
+    const { container } = await renderComponent();
     const outerElement = container.querySelector(`.${blockClass}`);
     expect(outerElement).toHaveClass(defaultProps.className);
   });
 
-  it('adds additional props to the containing node', () => {
-    renderComponent({ 'data-testid': dataTestId });
+  it('adds additional props to the containing node', async () => {
+   await renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    renderComponent({ ref });
+   await renderComponent({ ref });
     expect(ref.current).not.toBeNull();
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
-    renderComponent({ 'data-testid': dataTestId });
+  it('adds the Devtools attribute to the containing node', async () => {
+   await renderComponent({ 'data-testid': dataTestId });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
     );
   });
 
-  it('should disable the primary action button', () => {
-    renderComponent({
+  it('should disable the primary action button', async () => {
+   await renderComponent({
       disableSubmit: true,
     });
     expect(
@@ -129,9 +129,9 @@ describe(componentName, () => {
     ).toBeDisabled();
   });
 
-  it('should click on both action buttons', () => {
+  it('should click on both action buttons', async () => {
     const { click } = userEvent;
-    renderComponent();
+   await renderComponent();
     click(screen.getByText(defaultProps.primaryButtonText));
     click(screen.getByText(defaultProps.secondaryButtonText));
     expect(onRequestCloseFn).toHaveBeenCalledTimes(1);

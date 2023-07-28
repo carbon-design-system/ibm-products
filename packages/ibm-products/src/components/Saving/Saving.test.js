@@ -28,11 +28,11 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
-  it('should render', () => {
-    render(<Saving {...defaultProps} />);
+  it('should render', async () => {
+    await render(<Saving {...defaultProps} />);
   });
 
-  it('renders manual type', () => {
+  it('renders manual type', async () => {
     const { click } = userEvent;
     const onRequestSave = jest.fn();
     const onRequestCancel = jest.fn();
@@ -47,15 +47,15 @@ describe(componentName, () => {
     expect(onRequestSave).toBeCalled();
     click(getByText(props.secondaryButtonText));
     expect(onRequestCancel).not.toBeCalled();
-    rerender(<Saving {...props} status="in-progress" />);
+    await rerender(<Saving {...props} status="in-progress" />);
     expect(getByText(props.inProgressText)).toBeVisible();
     click(getByText(props.secondaryButtonText));
     expect(onRequestCancel).toBeCalled();
-    rerender(<Saving {...props} status="fail" />);
+    await rerender(<Saving {...props} status="fail" />);
     expect(getByText(props.failText)).toBeVisible();
   });
 
-  it('renders auto type', () => {
+  it('renders auto type', async () => {
     const props = {
       ...defaultProps,
       type: 'auto',
@@ -63,15 +63,15 @@ describe(componentName, () => {
 
     const { rerender, getByText } = render(<Saving {...props} />);
     expect(getByText(props.defaultText)).toBeVisible();
-    rerender(<Saving {...props} status="in-progress" />);
+    await rerender(<Saving {...props} status="in-progress" />);
     expect(getByText(props.inProgressText)).toBeVisible();
-    rerender(<Saving {...props} status="success" />);
+    await rerender(<Saving {...props} status="success" />);
     expect(getByText(props.successText)).toBeVisible();
-    rerender(<Saving {...props} status="fail" />);
+    await rerender(<Saving {...props} status="fail" />);
     expect(getByText(props.failText)).toBeVisible();
   });
 
-  it.skip('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(
       <main>
         <Saving {...defaultProps} />
@@ -81,26 +81,26 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     const { container } = render(<Saving {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'data-testid';
 
-  it('adds additional properties to the containing node', () => {
-    render(<Saving {...defaultProps} data-testid={dataTestId} />);
+  it('adds additional properties to the containing node', async () => {
+    await render(<Saving {...defaultProps} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    render(<Saving {...defaultProps} ref={ref} />);
+    await render(<Saving {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
-    render(<Saving {...defaultProps} data-testid={dataTestId} />);
+  it('adds the Devtools attribute to the containing node', async () => {
+    await render(<Saving {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

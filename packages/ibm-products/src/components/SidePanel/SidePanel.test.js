@@ -33,7 +33,7 @@ const onRequestCloseFn = jest.fn();
 const onUnmountFn = jest.fn();
 
 const renderSidePanel = ({ ...rest } = {}, children = <p>test</p>) =>
-  render(
+ render(
     <SidePanel
       {...{
         title,
@@ -304,7 +304,7 @@ describe('SidePanel', () => {
         'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
       ],
       () =>
-        renderSidePanel({
+       await renderSidePanel({
           actions: [
             { kind: 'primary' },
             { kind: 'primary' },

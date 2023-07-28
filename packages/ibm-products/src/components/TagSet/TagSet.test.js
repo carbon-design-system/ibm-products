@@ -91,7 +91,7 @@ describe(TagSet.displayName, () => {
   it('Renders all as visible tags when space available', async () => {
     window.innerWidth = tagWidth * 10 + 1;
 
-    render(<TagSet tags={tags10} />);
+   await render(<TagSet tags={tags10} />);
 
     // first and last should be visible
     screen.getByText(tagLabel(0), {
@@ -107,7 +107,7 @@ describe(TagSet.displayName, () => {
   it('Renders only the overflow when very little space', async () => {
     window.innerWidth = tagWidth / 2;
 
-    render(<TagSet tags={tags10} />);
+   await render(<TagSet tags={tags10} />);
 
     const visible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
@@ -129,7 +129,7 @@ describe(TagSet.displayName, () => {
     const visibleTags = 5;
     window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
-    render(<TagSet tags={tags10} />);
+   await render(<TagSet tags={tags10} />);
 
     // first and last should be visible
     screen.getByText(tagLabel(0), {
@@ -158,7 +158,7 @@ describe(TagSet.displayName, () => {
     window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
     // const { container } =
-    render(<TagSet {...overflowAndModalStrings} tags={tags} />);
+   await render(<TagSet {...overflowAndModalStrings} tags={tags} />);
 
     const overflow = screen.getByText(`+${tags.length - visibleTags}`);
     await act(() => userEvent.click(overflow));
@@ -185,14 +185,14 @@ describe(TagSet.displayName, () => {
         const visibleTags = 5;
         window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
-        render(<TagSet tags={tags} />);
+       await render(<TagSet tags={tags} />);
       }
     ));
 
   it('Obeys max visible', async () => {
     window.innerWidth = tagWidth * 10 + 1;
 
-    render(<TagSet maxVisible={5} tags={tags10} />);
+   await render(<TagSet maxVisible={5} tags={tags10} />);
 
     // first and last should be visible
     screen.getByText(tagLabel(0), {
@@ -217,7 +217,7 @@ describe(TagSet.displayName, () => {
   it('adds additional properties to the containing node', async () => {
     window.innerWidth = tagWidth * 10 + 1;
 
-    render(<TagSet data-testid={dataTestId} tags={tags10} />);
+   await render(<TagSet data-testid={dataTestId} tags={tags10} />);
     screen.getByTestId(dataTestId);
   });
 
@@ -225,13 +225,13 @@ describe(TagSet.displayName, () => {
     const ref = React.createRef();
     window.innerWidth = tagWidth * 10 + 1;
 
-    render(<TagSet ref={ref} tags={tags10} />);
+   await render(<TagSet ref={ref} tags={tags10} />);
 
     expect(ref.current).not.toBeNull();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    render(<TagSet data-testid={dataTestId} />);
+   await render(<TagSet data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       TagSet.displayName
@@ -241,7 +241,7 @@ describe(TagSet.displayName, () => {
   it('copes with no tags', async () => {
     window.innerWidth = tagWidth * 10 + 1;
 
-    render(<TagSet data-testid={dataTestId} />);
+   await render(<TagSet data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
@@ -259,7 +259,7 @@ describe(TagSet.displayName, () => {
     };
 
     it('Renders a modal with all tags and filters on search', async () => {
-      render(<TagSetModal allTags={tags} {...args} open />);
+     await render(<TagSetModal allTags={tags} {...args} open />);
 
       const search = screen.getByRole('searchbox');
       const unfilteredTags = screen.getAllByText(/Tag [0-9]+/);

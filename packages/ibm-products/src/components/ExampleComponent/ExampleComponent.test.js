@@ -28,29 +28,29 @@ const secondaryButtonLabel = `goodbye (${uuidv4()})`;
 
 // render an ExampleComponent with button labels and any other required props
 const renderComponent = ({ ...rest } = {}) =>
-  render(
+ render(
     <ExampleComponent
       {...{ primaryButtonLabel, secondaryButtonLabel, ...rest }}
     />
   );
 
 describe(componentName, () => {
-  it('renders a component ExampleComponent', () => {
-    renderComponent();
+  it('renders a component ExampleComponent', async () => {
+   await renderComponent();
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = renderComponent();
+    const { container } = await renderComponent();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders the borderColor property`, () => {
-    renderComponent({ borderColor });
+   await renderComponent({ borderColor });
     const style = window.getComputedStyle(screen.getByRole('main'));
     // We'd prefer to test the actual border color style, but jsdom does not
-    // render css custom properties (https://github.com/jsdom/jsdom/issues/1895)
+    //await render css custom properties (https://github.com/jsdom/jsdom/issues/1895)
     // so testing the property is the best we can do.
     expect(style.getPropertyValue(`--${blockClass}--border-color`)).toEqual(
       borderColor
@@ -58,17 +58,17 @@ describe(componentName, () => {
   });
 
   it(`renders the boxedBorder property`, () => {
-    renderComponent({ boxedBorder: true });
+   await renderComponent({ boxedBorder: true });
     expect(screen.getByRole('main')).toHaveClass(`${blockClass}--boxed-set`);
   });
 
-  it('applies className to the containing node', () => {
-    renderComponent({ className });
+  it('applies className to the containing node', async () => {
+   await renderComponent({ className });
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
   it(`renders the disabled property`, () => {
-    renderComponent({ disabled: true });
+   await renderComponent({ disabled: true });
     screen
       .getAllByRole('button')
       .forEach((button) => expect(button).toHaveProperty('disabled', true));
@@ -89,14 +89,14 @@ describe(componentName, () => {
     expect(secondaryHandler).toBeCalledTimes(1);
   });
 
-  it('renders the primaryButtonLabel and secondaryButtonLabel properties', () => {
-    renderComponent();
+  it('renders the primaryButtonLabel and secondaryButtonLabel properties', async () => {
+   await renderComponent();
     screen.getByText(primaryButtonLabel);
     screen.getByText(secondaryButtonLabel);
   });
 
-  it('renders the primaryKind and secondaryKind properties', () => {
-    renderComponent({ primaryKind: 'danger', secondaryKind: 'tertiary' });
+  it('renders the primaryKind and secondaryKind properties', async () => {
+   await renderComponent({ primaryKind: 'danger', secondaryKind: 'tertiary' });
     expect(
       screen.getByRole('button', { name: `danger ${primaryButtonLabel}` })
     ).toHaveClass(`${carbon.prefix}--btn--danger`);
@@ -105,8 +105,8 @@ describe(componentName, () => {
     ).toHaveClass(`${carbon.prefix}--btn--tertiary`);
   });
 
-  it('renders the size property', () => {
-    renderComponent({ size: 'sm' });
+  it('renders the size property', async () => {
+   await renderComponent({ size: 'sm' });
     screen
       .getAllByRole('button')
       .forEach((button) =>
@@ -114,23 +114,23 @@ describe(componentName, () => {
       );
   });
 
-  it('adds additional properties to the containing node', () => {
-    renderComponent({ 'data-testid': dataTestId });
+  it('adds additional properties to the containing node', async () => {
+   await renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    renderComponent({ ref });
+   await renderComponent({ ref });
     expect(ref.current).toEqual(screen.getByRole('main'));
   });
 
-  it('logs an error when secondaryIcon used and feature flag disabled', () => {
+  it('logs an error when secondaryIcon used and feature flag disabled', async () => {
     pkg.feature['ExampleComponent.secondaryIcon'] = false;
     expectError(
       'Carbon for IBM Products (Error): Feature "ExampleComponent.secondaryIcon" not enabled. To enable see the notes on feature flags in the README.',
       () => {
-        render(
+       await render(
           <ExampleComponent
             secondaryIcon={Add}
             {...{
@@ -143,9 +143,9 @@ describe(componentName, () => {
     );
   });
 
-  it('does NOT log an error when secondaryIcon used and feature flag enabled', () => {
+  it('does NOT log an error when secondaryIcon used and feature flag enabled', async () => {
     pkg.feature['ExampleComponent.secondaryIcon'] = true;
-    render(
+   await render(
       <ExampleComponent
         {...{
           primaryButtonLabel,
@@ -156,7 +156,7 @@ describe(componentName, () => {
     );
   });
 
-  it('logs an error when useExample used and feature flag disabled', () => {
+  it('logs an error when useExample used and feature flag disabled', async () => {
     pkg.feature['ExampleComponent.useExample'] = false;
     expectLogging(
       {
@@ -166,7 +166,7 @@ describe(componentName, () => {
           'Disabled feature "ExampleComponent.useExample" does not change the initialTime.',
       },
       () => {
-        render(
+       await render(
           <ExampleComponent
             secondaryIcon={Add}
             {...{
@@ -182,10 +182,10 @@ describe(componentName, () => {
     );
   });
 
-  it('does NOT log an error when useExample used and feature flag enabled', () => {
+  it('does NOT log an error when useExample used and feature flag enabled', async () => {
     pkg.feature['ExampleComponent.useExample'] = true;
 
-    render(
+   await render(
       <ExampleComponent
         {...{
           usesExampleHook: 10,

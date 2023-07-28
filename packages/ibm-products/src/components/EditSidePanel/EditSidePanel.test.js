@@ -6,13 +6,12 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { EditSidePanel } from '.';
-import { act } from 'react-dom/test-utils';
 
 const blockClass = `${pkg.prefix}--edit-side-panel`;
 const componentName = EditSidePanel.displayName;
@@ -72,8 +71,8 @@ describe(componentName, () => {
     expect(screen.getByRole('complementary')).toHaveClass(blockClass);
   });
 
-  it.skip('has no accessibility violations', async () => {
-    const { container } = renderEditPanel();
+  it('has no accessibility violations', async () => {
+    const { container } = await renderEditPanel();
     await act(async () => {
       await expect(container).toBeAccessible(componentName);
       await expect(container).toHaveNoAxeViolations();

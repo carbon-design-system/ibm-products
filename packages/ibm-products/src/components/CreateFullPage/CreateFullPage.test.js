@@ -75,7 +75,7 @@ const stepFormField = (
 );
 
 const renderComponent = ({ ...rest } = {}) =>
-  render(
+ render(
     <CreateFullPage
       {...rest}
       onRequestSubmit={onRequestSubmitRejectFn}
@@ -99,7 +99,7 @@ const renderCreateFullPage = ({
   rejectOnSubmitNext = false,
   ...rest
 }) =>
-  render(
+ render(
     <CreateFullPage
       {...rest}
       onRequestSubmit={rejectOnSubmit ? onRequestSubmitRejectFn : submitFn}
@@ -132,7 +132,7 @@ const renderCreateFullPage = ({
   );
 
 const renderEmptyCreateFullPage = ({ ...rest } = {}) =>
-  render(
+ render(
     <CreateFullPage
       {...rest}
       {...defaultFullPageProps}
@@ -143,7 +143,7 @@ const renderEmptyCreateFullPage = ({ ...rest } = {}) =>
   );
 
 const renderOneStepCreateFullPage = ({ ...rest } = {}) =>
-  render(
+ render(
     <CreateFullPage
       {...rest}
       {...defaultFullPageProps}
@@ -154,7 +154,7 @@ const renderOneStepCreateFullPage = ({ ...rest } = {}) =>
   );
 
 const renderFullPageWithStepChildrenOutside = ({ ...rest } = {}) =>
-  render(
+ render(
     <>
       <CreateFullPage
         {...rest}
@@ -169,8 +169,7 @@ const renderFullPageWithStepChildrenOutside = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
-  it.skip('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = await renderComponent({ ...defaultFullPageProps });
 
     await expect(container).toBeAccessible(componentName);
@@ -191,12 +190,12 @@ describe(componentName, () => {
   });
 
   it('renders the CreateFullPage component', async () => {
-    const { container } = renderCreateFullPage({ ...defaultFullPageProps });
+    const { container } = await renderCreateFullPage({ ...defaultFullPageProps });
     expect(container.querySelector(`.${blockClass}`)).toBeTruthy();
   });
 
   it('should not render any CreateFullPage steps when there are no FullPageStep components included', async () => {
-    const { container } = renderEmptyCreateFullPage({
+    const { container } = await renderEmptyCreateFullPage({
       ...defaultFullPageProps,
     });
     const createFullPageSteps = container.querySelectorAll(
@@ -207,9 +206,9 @@ describe(componentName, () => {
 
   it('should create a console warning when using CreateFullPage with only one step', async () =>
     expectWarn('CreateFullPages with one step are not permitted', () => {
-      const { container } = renderOneStepCreateFullPage(defaultFullPageProps);
-      expect(() => {
-        render(...container);
+      const { container } = await renderOneStepCreateFullPage(defaultFullPageProps);
+      expect(async () => {
+       await render(...container);
       }).toThrow();
     }));
 
@@ -221,16 +220,16 @@ describe(componentName, () => {
       ],
       () => {
         const { container } =
-          renderFullPageWithStepChildrenOutside(defaultFullPageProps);
+         await renderFullPageWithStepChildrenOutside(defaultFullPageProps);
         expect(() => {
-          render(...container);
+         await render(...container);
         }).toThrow();
       }
     ));
 
   it('renders the second step if clicking on the next step button with onNext optional function prop', async () => {
     const { click } = userEvent;
-    const { container } = renderCreateFullPage(defaultFullPageProps);
+    const { container } = await renderCreateFullPage(defaultFullPageProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     await act(() => click(nextButtonElement));
     const createFullPageSteps = container.querySelector(
@@ -249,7 +248,7 @@ describe(componentName, () => {
 
   it('renders a modal when cancel button has been clicked and recognizes primary and secondary button clicks in modal', async () => {
     const { click } = userEvent;
-    const { container, rerender } = renderCreateFullPage(defaultFullPageProps);
+    const { container, rerender } = await renderCreateFullPage(defaultFullPageProps);
     const cancelButtonElement = screen.getByText(cancelButtonText);
     await act(() => click(cancelButtonElement));
     const createFullPageModal = container.querySelector(
@@ -261,7 +260,7 @@ describe(componentName, () => {
     await act(() => click(modalCancelButtonElement));
     expect(onCloseFn).toHaveBeenCalled();
 
-    rerender(
+   await rerender(
       <CreateFullPage
         onRequestSubmit={onRequestSubmitRejectFn}
         {...defaultFullPageProps}
@@ -405,7 +404,7 @@ describe(componentName, () => {
 
   it('should disable the submit button when `disableSubmit` prop is passed in FullPageStep', async () => {
     const { click } = userEvent;
-    render(
+   await render(
       <CreateFullPage
         onRequestSubmit={onRequestSubmitRejectFn}
         {...defaultFullPageProps}
@@ -438,7 +437,7 @@ describe(componentName, () => {
 
   it('should click the back button and add a custom next button label on a single step', async () => {
     const { click } = userEvent;
-    const { container } = renderCreateFullPage({
+    const { container } = await renderCreateFullPage({
       ...defaultFullPageProps,
       rejectOnSubmit: false,
       rejectOnNext: false,
@@ -461,7 +460,7 @@ describe(componentName, () => {
   });
 
   it('should render a fieldset element around FullPageStep children when `hasFieldset` prop is provided', async () => {
-    const { container } = renderCreateFullPage({ ...defaultFullPageProps });
+    const { container } = await renderCreateFullPage({ ...defaultFullPageProps });
     const createFullPageSteps = container.querySelector(
       `.${blockClass}__content`
     ).children;

@@ -30,12 +30,12 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
-  it('renders EditInPlace', () => {
-    render(<EditInPlace {...defaultProps} />);
+  it('renders EditInPlace', async () => {
+    await render(<EditInPlace {...defaultProps} />);
   });
 
-  // it('renders in readOnly mode', () => {
-  //   render(<EditInPlace {...defaultProps} readOnly />);
+  // it('renders in readOnly mode',  async() => {
+  //  await render(<EditInPlace {...defaultProps} readOnly />);
   //   const input = screen.getByDisplayValue(defaultProps.value);
   //   expect(input).toHaveAttribute('readOnly');
 
@@ -44,34 +44,34 @@ describe(componentName, () => {
   //   fireEvent.blur(input);
   // });
 
-  it('renders in invalid mode', () => {
-    render(<EditInPlace {...defaultProps} invalid />);
+  it('renders in invalid mode', async () => {
+    await render(<EditInPlace {...defaultProps} invalid />);
     const input = screen.getByDisplayValue(defaultProps.value);
     userEvent.click(input);
     expect(screen.getByText(defaultProps.invalidLabel)).toBeVisible();
   });
 
-  it('focuses the input when the component is clicked', () => {
-    render(<EditInPlace {...defaultProps} />);
+  it('focuses the input when the component is clicked', async () => {
+    await render(<EditInPlace {...defaultProps} />);
     const input = screen.getByDisplayValue(defaultProps.value);
     userEvent.click(input);
     expect(screen.getByLabelText(defaultProps.cancelLabel)).toBeVisible();
   });
 
-  it('focuses the input when the edit button is clicked', () => {
-    render(<EditInPlace {...defaultProps} />);
+  it('focuses the input when the edit button is clicked', async () => {
+    await render(<EditInPlace {...defaultProps} />);
     const editBtn = screen.getByLabelText(defaultProps.editLabel);
     userEvent.click(editBtn);
     expect(screen.getByLabelText(defaultProps.cancelLabel)).toBeVisible();
   });
 
-  it('handles onChange', () => {
+  it('handles onChange', async () => {
     const onChange = jest.fn();
     const props = {
       ...defaultProps,
       onChange,
     };
-    render(<EditInPlace {...props} />);
+    await render(<EditInPlace {...props} />);
     const input = screen.getByDisplayValue(props.value);
     fireEvent.change(input, {
       target: { value: 'new value' },
@@ -91,54 +91,54 @@ describe(componentName, () => {
       onSave,
     };
     const { rerender } = render(<EditInPlace {...props} />);
-    rerender(<EditInPlace {...props} value="new value" />);
+    await rerender(<EditInPlace {...props} value="new value" />);
     userEvent.click(screen.getByLabelText(props.editLabel));
     userEvent.click(screen.getByLabelText(props.saveLabel));
     expect(onSave).toHaveBeenCalled();
   });
 
-  it('handles onCancel', () => {
+  it('handles onCancel', async () => {
     const onCancel = jest.fn();
     const props = {
       ...defaultProps,
       onCancel,
     };
     const { rerender } = render(<EditInPlace {...props} />);
-    rerender(<EditInPlace {...props} value="new value" />);
+    await rerender(<EditInPlace {...props} value="new value" />);
     userEvent.click(screen.getByLabelText(props.editLabel));
     userEvent.click(screen.getByLabelText(props.cancelLabel));
     expect(onCancel).toHaveBeenCalled();
   });
 
-  it('handles blur save', () => {
+  it('handles blur save', async () => {
     const onSave = jest.fn();
     const props = {
       ...defaultProps,
       onSave,
     };
     const { rerender } = render(<EditInPlace {...props} />);
-    rerender(<EditInPlace {...props} value="new value" />);
+    await rerender(<EditInPlace {...props} value="new value" />);
     userEvent.click(screen.getByLabelText(props.editLabel));
     const input = screen.getByDisplayValue('new value');
     fireEvent.blur(input);
     expect(onSave).toHaveBeenCalled();
   });
 
-  it('handles blur cancel', () => {
+  it('handles blur cancel', async () => {
     const onCancel = jest.fn();
     const props = {
       ...defaultProps,
       onCancel,
     };
-    render(<EditInPlace {...props} />);
+    await render(<EditInPlace {...props} />);
     userEvent.click(screen.getByLabelText(props.editLabel));
     const input = screen.getByDisplayValue(props.value);
     fireEvent.blur(input);
     expect(onCancel).toHaveBeenCalled();
   });
 
-  it('handles keydown', () => {
-    render(<EditInPlace {...defaultProps} />);
+  it('handles keydown', async () => {
+    await render(<EditInPlace {...defaultProps} />);
     const input = screen.getByDisplayValue(defaultProps.value);
 
     // for coverage- default switch statement case
@@ -146,7 +146,7 @@ describe(componentName, () => {
     fireEvent.keyDown(input, { key: 'M' });
   });
 
-  it('handles escape key', () => {
+  it('handles escape key', async () => {
     const onCancel = jest.fn();
     const props = {
       ...defaultProps,
@@ -161,13 +161,13 @@ describe(componentName, () => {
     expect(onCancel).toHaveBeenCalled();
 
     // clicks escape with new value
-    rerender(<EditInPlace {...props} value="new value" />);
+    await rerender(<EditInPlace {...props} value="new value" />);
     fireEvent.focus(input);
     fireEvent.keyDown(input, { key: 'Escape' });
     expect(onCancel).toHaveBeenCalled();
   });
 
-  it('handles enter key', () => {
+  it('handles enter key', async () => {
     const onSave = jest.fn();
     const props = {
       ...defaultProps,
@@ -182,13 +182,13 @@ describe(componentName, () => {
     expect(onSave).not.toHaveBeenCalled();
 
     // clicks enter with new value
-    rerender(<EditInPlace {...props} value="new value" />);
+    await rerender(<EditInPlace {...props} value="new value" />);
     fireEvent.focus(input);
     fireEvent.keyDown(input, { key: 'Enter' });
     expect(onSave).toHaveBeenCalled();
   });
 
-  it.skip('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(
       <main>
         <EditInPlace {...defaultProps} />
@@ -198,26 +198,26 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     const { container } = render(<EditInPlace {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'data-testid';
 
-  it('adds additional properties to the containing node', () => {
-    render(<EditInPlace {...defaultProps} data-testid={dataTestId} />);
+  it('adds additional properties to the containing node', async () => {
+    await render(<EditInPlace {...defaultProps} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    render(<EditInPlace {...defaultProps} ref={ref} />);
+    await render(<EditInPlace {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
-    render(<EditInPlace {...defaultProps} data-testid={dataTestId} />);
+  it('adds the Devtools attribute to the containing node', async () => {
+    await render(<EditInPlace {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

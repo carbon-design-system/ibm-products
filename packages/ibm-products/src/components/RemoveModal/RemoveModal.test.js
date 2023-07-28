@@ -32,27 +32,27 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
-  it('renders title', () => {
-    render(<RemoveModal {...defaultProps} />);
+  it('renders title', async () => {
+    await render(<RemoveModal {...defaultProps} />);
     screen.getByText(defaultProps.title);
   });
 
-  it('renders body', () => {
-    render(<RemoveModal {...defaultProps} />);
+  it('renders body', async () => {
+    await render(<RemoveModal {...defaultProps} />);
     screen.getByText(defaultProps.body);
   });
 
-  it('renders label', () => {
-    render(<RemoveModal {...defaultProps} />);
+  it('renders label', async () => {
+    await render(<RemoveModal {...defaultProps} />);
     screen.getByText(defaultProps.label);
   });
 
-  it('renders icon description', () => {
-    render(<RemoveModal {...defaultProps} />);
+  it('renders icon description', async () => {
+    await render(<RemoveModal {...defaultProps} />);
     screen.getByRole('button', { name: defaultProps.iconDescription });
   });
 
-  it('renders text input', () => {
+  it('renders text input', async () => {
     const { container } = render(
       <RemoveModal {...defaultProps} textConfirmation />
     );
@@ -63,7 +63,7 @@ describe(componentName, () => {
     ).toHaveAttribute('placeholder', defaultProps.inputPlaceholderText);
   });
 
-  it('renders without text confirmation functionality', () => {
+  it('renders without text confirmation functionality', async () => {
     const { click } = userEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
@@ -74,7 +74,7 @@ describe(componentName, () => {
       onRequestSubmit,
     };
 
-    render(<RemoveModal {...props} />);
+    await render(<RemoveModal {...props} />);
     click(screen.getByText(props.primaryButtonText));
 
     expect(onRequestSubmit).toBeCalled();
@@ -82,7 +82,7 @@ describe(componentName, () => {
     expect(onClose).toBeCalled();
   });
 
-  it('renders with text confirmation functionality', () => {
+  it('renders with text confirmation functionality', async () => {
     const { change } = fireEvent;
     const { click } = userEvent;
     const { fn } = jest;
@@ -111,8 +111,8 @@ describe(componentName, () => {
     expect(onRequestSubmit).toBeCalled();
   });
 
-  it('disables the primary button when primaryButtonDisabled is used', () => {
-    render(<RemoveModal {...defaultProps} primaryButtonDisabled />);
+  it('disables the primary button when primaryButtonDisabled is used', async () => {
+    await render(<RemoveModal {...defaultProps} primaryButtonDisabled />);
     const primaryButton = screen.getByText(defaultProps.primaryButtonText);
     expect(primaryButton).toHaveAttribute('disabled');
   });
@@ -123,26 +123,26 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     const { container } = render(<RemoveModal {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'data-testid';
 
-  it('adds additional properties to the containing node', () => {
-    render(<RemoveModal {...defaultProps} data-testid={dataTestId} />);
+  it('adds additional properties to the containing node', async () => {
+    await render(<RemoveModal {...defaultProps} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    render(<RemoveModal {...defaultProps} ref={ref} />);
+    await render(<RemoveModal {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
-    render(<RemoveModal {...defaultProps} data-testid={dataTestId} />);
+  it('adds the Devtools attribute to the containing node', async () => {
+    await render(<RemoveModal {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

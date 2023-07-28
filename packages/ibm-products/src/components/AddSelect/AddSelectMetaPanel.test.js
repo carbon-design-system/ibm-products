@@ -35,11 +35,11 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('renders', () => {
-    render(<AddSelectMetaPanel {...defaultProps} />);
+  it('renders', async () => {
+    await render(<AddSelectMetaPanel {...defaultProps} />);
   });
 
-  it('renders without html', () => {
+  it('renders without html', async () => {
     const entry = {
       id: 'test-id',
       title: 'test title',
@@ -49,7 +49,7 @@ describe(componentName, () => {
       ...defaultProps,
       meta: [entry],
     };
-    render(<AddSelectMetaPanel {...newProps} />);
+    await render(<AddSelectMetaPanel {...newProps} />);
     expect(
       document.querySelector(`.${blockClass}-entry-title`).textContent
     ).toBe('test title');
@@ -58,7 +58,7 @@ describe(componentName, () => {
     ).toBe('test value');
   });
 
-  it('renders with html', () => {
+  it('renders with html', async () => {
     const meta = (
       <div className={`${blockClass}-entry`}>
         <p className={`${blockClass}-entry-title`}>html title</p>
@@ -69,7 +69,7 @@ describe(componentName, () => {
       ...defaultProps,
       meta,
     };
-    render(<AddSelectMetaPanel {...newProps} />);
+    await render(<AddSelectMetaPanel {...newProps} />);
     expect(
       document.querySelector(`.${blockClass}-entry-title`).textContent
     ).toBe('html title');
@@ -78,13 +78,13 @@ describe(componentName, () => {
     ).toBe('html value');
   });
 
-  it('triggers the onCloseHandler', () => {
+  it('triggers the onCloseHandler', async () => {
     const setDisplayMetaPanel = jest.fn();
     const newProps = {
       ...defaultProps,
       setDisplayMetaPanel,
     };
-    render(<AddSelectMetaPanel {...newProps} />);
+    await render(<AddSelectMetaPanel {...newProps} />);
     const btn = document.querySelector(`.${blockClass}-close`);
     fireEvent.click(btn);
     expect(setDisplayMetaPanel).toHaveBeenCalled();

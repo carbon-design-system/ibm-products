@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Code, Copy } from '@carbon/react/icons';
 import { act, renderHook } from '@testing-library/react-hooks';
@@ -46,7 +46,7 @@ const MockWebTerminal = React.forwardRef(
 );
 
 describe(name, () => {
-  it('Renders the component `WebTerminal` if flag is enabled', () => {
+  it('Renders the component `WebTerminal` if flag is enabled', async () => {
     const { container } = render(
       <MockWebTerminal>Body content</MockWebTerminal>
     );
@@ -77,12 +77,12 @@ describe(name, () => {
     expect(container.querySelector(`.${testClassName}`)).not.toBeNull();
   });
 
-  it('should render child element content', () => {
-    render(<MockWebTerminal>Body content</MockWebTerminal>);
+  it('should render child element content', async () => {
+    await render(<MockWebTerminal>Body content</MockWebTerminal>);
     expect(screen.getByText(/Body content/i)).toBeInTheDocument();
   });
 
-  it('custom hook should toggle web terminal', () => {
+  it('custom hook should toggle web terminal', async () => {
     /**  Utilizing renderHook so jest knows about the custom hook and passing
          in the WebTerminalProvider so that the hook can consume the value  */
     const { result } = renderHook(() => useWebTerminal(), {
@@ -106,7 +106,7 @@ describe(name, () => {
     expect(result.current.open).toBe(false);
   });
 
-  it('custom hook should open and close web terminal', () => {
+  it('custom hook should open and close web terminal', async () => {
     /**  Utilizing renderHook so jest knows about the custom hook and passing
          in the WebTerminalProvider so that the hook can consume the value  */
     const { result } = renderHook(() => useWebTerminal(), {
@@ -137,9 +137,9 @@ describe(name, () => {
     expect(result.current.open).toBe(false);
   });
 
-  it('should render documentation link text', () => {
+  it('should render documentation link text', async () => {
     const overflowLabel = 'Show documentation links';
-    render(
+    await render(
       <MockWebTerminal documentationLinks={documentationLinks}>
         Body content
       </MockWebTerminal>
@@ -151,7 +151,7 @@ describe(name, () => {
     });
   });
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     const { container } = render(
       <MockWebTerminal data-testid={dataTestId}>Body content</MockWebTerminal>
     );
@@ -162,7 +162,7 @@ describe(name, () => {
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef(null);
-    render(<MockWebTerminal ref={ref}>Body content</MockWebTerminal>);
+    await render(<MockWebTerminal ref={ref}>Body content</MockWebTerminal>);
 
     /**
       This await is necessary so that the document loads completely and the ref isn't null */
@@ -171,7 +171,7 @@ describe(name, () => {
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
   });
 
-  it('should call the animationEnd event', () => {
+  it('should call the animationEnd event', async () => {
     const { container } = render(
       <div data-testid="container-id">
         <MockWebTerminal isInitiallyOpen closeIconDescription="Close terminal">
@@ -190,12 +190,12 @@ describe(name, () => {
     expect(outerElement).toBeNull();
   });
 
-  it('should render action icon buttons', () => {
+  it('should render action icon buttons', async () => {
     const { click } = userEvent;
     const deploymentButtonFn = jest.fn();
     const copyLogsButtonFn = jest.fn();
 
-    render(
+    await render(
       <MockWebTerminal
         actions={[
           {
@@ -221,8 +221,8 @@ describe(name, () => {
     expect(copyLogsButtonFn).toHaveBeenCalledTimes(1);
   });
 
-  it('should render the close icon description prop', () => {
-    render(
+  it('should render the close icon description prop', async () => {
+    await render(
       <MockWebTerminal
         isInitiallyOpen
         closeIconDescription="Close web terminal"
@@ -234,8 +234,8 @@ describe(name, () => {
     expect(screen.getByText(/close web terminal/i)).toBeInTheDocument();
   });
 
-  it('content wrapper should pass children', () => {
-    render(
+  it('content wrapper should pass children', async () => {
+    await render(
       <WebTerminalProvider>
         <WebTerminalContentWrapper>body content</WebTerminalContentWrapper>
       </WebTerminalProvider>
@@ -260,7 +260,7 @@ describe(name, () => {
       </WebTerminalProvider>
     );
 
-    render(<RenderComponent />);
+    await render(<RenderComponent />);
 
     let windowWidth = document.body.getBoundingClientRect().width;
     let contentWrapperWidth = screen
@@ -287,7 +287,7 @@ describe(name, () => {
     );
 
     const dataTestId = uuidv4();
-    render(<RenderComponent isInitiallyOpen dataTestId={dataTestId} />);
+    await render(<RenderComponent isInitiallyOpen dataTestId={dataTestId} />);
 
     let windowWidth = document.body.getBoundingClientRect().width;
     let contentWrapperWidth = screen
@@ -300,7 +300,7 @@ describe(name, () => {
     expect(contentWrapperWidth).toBe(windowWidth - webTerminalWidth);
   });
 
-  it('should reduce motion', () => {
+  it('should reduce motion', async () => {
     let prefersReducedMotion = false;
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
@@ -335,7 +335,7 @@ describe(name, () => {
       })),
     });
 
-    rerender(
+    await rerender(
       <MockWebTerminal
         isInitiallyOpen
         closeIconDescription="close web terminal"

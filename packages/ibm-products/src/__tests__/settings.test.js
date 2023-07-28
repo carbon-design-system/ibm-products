@@ -12,7 +12,7 @@ import { pkg, carbon } from '../settings';
 const name = 'settings';
 
 describe(name, () => {
-  it('uses the default css prefix', () => {
+  it('uses the default css prefix', async () => {
     expect(pkg.prefix).toEqual('c4p');
   });
 
@@ -36,17 +36,17 @@ describe(name, () => {
     ).toBeInTheDocument();
   });
 
-  it('Supplies carbon theme token values', () => {
+  it('Supplies carbon theme token values', async () => {
     expect(carbon.themes.g10.textPrimary).not.toBe(null);
     expect(carbon.themes.g10.textPrimary).toMatch(/#[0-9a-fA-F]+/);
   });
 
-  it('Supplies carbon layout token values', () => {
+  it('Supplies carbon layout token values', async () => {
     expect(carbon.themes.g10.spacing01).not.toBe(null);
     expect(carbon.themes.g10.spacing01).toMatch(/[0-9.]+rem/);
   });
 
-  it('Supplies carbon type', () => {
+  it('Supplies carbon type', async () => {
     expect(carbon.themes.g10.caption01).not.toBe(null);
     expect(carbon.themes.g10.caption01.fontSize).toMatch(/[0-9.]+rem/);
     expect(carbon.themes.g10.caption01.fontWeight).toBeGreaterThan(0);

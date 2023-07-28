@@ -63,12 +63,12 @@ describe(ButtonSetWithOverflow.displayName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('Works with button shape array', () => {
+  it('Works with button shape array', async () => {
     window.innerWidth = buttonWidth * 3.5;
 
     const myOnClick = jest.fn();
 
-    render(
+    await render(
       <ButtonSetWithOverflow
         buttons={buttons(myOnClick)}
         buttonSetOverflowLabel="overflow label"
@@ -89,13 +89,13 @@ describe(ButtonSetWithOverflow.displayName, () => {
     expect(myOnClick).toBeCalled();
   });
 
-  it('Renders as ComboButton when not enough space', () => {
+  it('Renders as ComboButton when not enough space', async () => {
     window.innerWidth = buttonWidth * 2.5;
 
     const myOnClick = jest.fn();
     const buttonMenuLabel = 'button menu label';
 
-    render(
+    await render(
       <ButtonSetWithOverflow
         buttons={buttons(myOnClick)}
         buttonSetOverflowLabel={buttonMenuLabel}
@@ -120,7 +120,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
     expect(myOnClick).toBeCalled();
   });
 
-  it('Applies right align class when requested', () => {
+  it('Applies right align class when requested', async () => {
     window.innerWidth = buttonWidth * 3.5;
     const myOnClick = jest.fn();
 

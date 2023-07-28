@@ -22,8 +22,8 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
 describe(componentName, () => {
-  it('renders a component EditFullPage', () => {
-    render(<EditFullPage> </EditFullPage>);
+  it('renders a component EditFullPage', async () => {
+   await render(<EditFullPage> </EditFullPage>);
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
@@ -34,28 +34,28 @@ describe(componentName, () => {
   });
 
   it(`renders children`, () => {
-    render(<EditFullPage>{children}</EditFullPage>);
+   await render(<EditFullPage>{children}</EditFullPage>);
     screen.getByText(children);
   });
 
-  it('applies className to the containing node', () => {
-    render(<EditFullPage className={className}> </EditFullPage>);
+  it('applies className to the containing node', async () => {
+   await render(<EditFullPage className={className}> </EditFullPage>);
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
-  it('adds additional props to the containing node', () => {
-    render(<EditFullPage data-testid={dataTestId}> </EditFullPage>);
+  it('adds additional props to the containing node', async () => {
+   await render(<EditFullPage data-testid={dataTestId}> </EditFullPage>);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    render(<EditFullPage ref={ref}> </EditFullPage>);
+   await render(<EditFullPage ref={ref}> </EditFullPage>);
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
-    render(<EditFullPage data-testid={dataTestId}> </EditFullPage>);
+  it('adds the Devtools attribute to the containing node', async () => {
+   await render(<EditFullPage data-testid={dataTestId}> </EditFullPage>);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

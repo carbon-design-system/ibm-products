@@ -22,8 +22,8 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
 describe(componentName, () => {
-  it('renders a component EditUpdateCards', () => {
-    render(<EditUpdateCards> </EditUpdateCards>);
+  it('renders a component EditUpdateCards', async () => {
+    await render(<EditUpdateCards> </EditUpdateCards>);
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
@@ -34,28 +34,28 @@ describe(componentName, () => {
   });
 
   // it(`renders children`, () => {
-  //   render(<EditUpdateCards>{children}</EditUpdateCards>);
+  //  await render(<EditUpdateCards>{children}</EditUpdateCards>);
   //   screen.getByText(children);
   // });
 
-  it('applies className to the containing node', () => {
-    render(<EditUpdateCards className={className}> </EditUpdateCards>);
+  it('applies className to the containing node', async () => {
+    await render(<EditUpdateCards className={className}> </EditUpdateCards>);
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
-  it('adds additional props to the containing node', () => {
-    render(<EditUpdateCards data-testid={dataTestId}> </EditUpdateCards>);
+  it('adds additional props to the containing node', async () => {
+    await render(<EditUpdateCards data-testid={dataTestId}> </EditUpdateCards>);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    render(<EditUpdateCards ref={ref}> </EditUpdateCards>);
+    await render(<EditUpdateCards ref={ref}> </EditUpdateCards>);
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
-    render(<EditUpdateCards data-testid={dataTestId}> </EditUpdateCards>);
+  it('adds the Devtools attribute to the containing node', async () => {
+    await render(<EditUpdateCards data-testid={dataTestId}> </EditUpdateCards>);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

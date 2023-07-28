@@ -123,16 +123,16 @@ describe(componentName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it('renders the EditTearsheet component', () => {
-    const { container } = renderEditTearsheet({
+  it('renders the EditTearsheet component', async () => {
+    const { container } = await renderEditTearsheet({
       ...defaultProps,
     });
     expect(container.querySelector(`.${editTearsheetBlockClass}`)).toBeTruthy();
     expect(ref.current).not.toBeNull();
   });
 
-  it('should not render any EditTearsheetForm when there are no EditTearsheetForm components included', () => {
-    const { container } = renderEmptyEditTearsheet(defaultProps);
+  it('should not render any EditTearsheetForm when there are no EditTearsheetForm components included', async () => {
+    const { container } = await renderEmptyEditTearsheet(defaultProps);
     const editTearsheetForms = container.querySelectorAll(
       `.${editTearsheetBlockClass}__form`
     );
@@ -140,24 +140,24 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = renderEditTearsheet({ ...defaultProps });
+    const { container } = await renderEditTearsheet({ ...defaultProps });
     await expect(() => container.toBeAccessible());
     await expect(() => container.toHaveNoAxeViolations());
   });
 
-  it('adds additional props to the containing node', () => {
-    render(<EditTearsheet data-testid={dataTestId}> </EditTearsheet>);
+  it('adds additional props to the containing node', async () => {
+    await render(<EditTearsheet data-testid={dataTestId}> </EditTearsheet>);
     screen.getByTestId(dataTestId);
   });
 
-  it('renders the primaryButtonLabel and secondaryButtonLabel properties', () => {
-    renderEditTearsheet({ ...defaultProps });
+  it('renders the primaryButtonLabel and secondaryButtonLabel properties', async () => {
+    await renderEditTearsheet({ ...defaultProps });
     screen.getByText(defaultProps.submitButtonText);
     screen.getByText(defaultProps.cancelButtonText);
   });
 
-  it('calls onClose() when the tearsheet is closed', () => {
-    render(
+  it('calls onClose() when the tearsheet is closed', async () => {
+    await render(
       <EditTearsheet
         {...{ ...defaultProps }}
         onClose={onCloseReturnsTrue}
@@ -171,8 +171,8 @@ describe(componentName, () => {
     expect(editTearsheet).not.toHaveClass('is-visible');
   });
 
-  it('applies className to the root node', () => {
-    renderEditTearsheet({ className });
+  it('applies className to the root node', async () => {
+    await renderEditTearsheet({ className });
     const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
     expect(editTearsheet).toHaveClass(className);
   });

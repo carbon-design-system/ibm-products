@@ -44,7 +44,7 @@ describe('wrapFocus', () => {
     spyButton2 = jest.spyOn(node.querySelector('#button-2'), 'focus');
   });
 
-  it('runs forward focus-wrap when following outer node is focused on', () => {
+  it('runs forward focus-wrap when following outer node is focused on', async () => {
     wrapFocus({
       bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
@@ -55,7 +55,7 @@ describe('wrapFocus', () => {
     expect(spyButton0).toHaveBeenCalled();
   });
 
-  it('runs forward focus-wrap when following focus sentinel is focused on', () => {
+  it('runs forward focus-wrap when following focus sentinel is focused on', async () => {
     wrapFocus({
       bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
@@ -66,7 +66,7 @@ describe('wrapFocus', () => {
     expect(spyButton0).toHaveBeenCalled();
   });
 
-  it('runs reverse focus-wrap when preceding outer node is focused on', () => {
+  it('runs reverse focus-wrap when preceding outer node is focused on', async () => {
     wrapFocus({
       bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
@@ -77,7 +77,7 @@ describe('wrapFocus', () => {
     expect(spyButton2).toHaveBeenCalled();
   });
 
-  it('runs reverse focus-wrap when preceding focus sentinel is focused on', () => {
+  it('runs reverse focus-wrap when preceding focus sentinel is focused on', async () => {
     wrapFocus({
       bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
@@ -88,7 +88,7 @@ describe('wrapFocus', () => {
     expect(spyButton2).toHaveBeenCalled();
   });
 
-  it('does not run focus-wrap when a floating menu is focused on', () => {
+  it('does not run focus-wrap when a floating menu is focused on', async () => {
     wrapFocus({
       bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
@@ -101,7 +101,7 @@ describe('wrapFocus', () => {
     expect(spyButton2).not.toHaveBeenCalled();
   });
 
-  it('uses inner modal node as a escape hatch for focusing for forward focus-wrap', () => {
+  it('uses inner modal node as a escape hatch for focusing for forward focus-wrap', async () => {
     node.querySelector(
       '#inner-modal'
     ).innerHTML = `<div id="dummy-old-active-node"></div>`;
@@ -115,7 +115,7 @@ describe('wrapFocus', () => {
     expect(spyInnerModal).toHaveBeenCalled();
   });
 
-  it('uses inner modal node as a escape hatch for focusing for reverse focus-wrap', () => {
+  it('uses inner modal node as a escape hatch for focusing for reverse focus-wrap', async () => {
     node.querySelector(
       '#inner-modal'
     ).innerHTML = `<div id="dummy-old-active-node"></div>`;

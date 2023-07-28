@@ -34,7 +34,7 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('renders', () => {
-    render(<SingleAddSelect {...defaultProps} />);
+  it('renders', async () => {
+    await render(<SingleAddSelect {...defaultProps} />);
   });
 });

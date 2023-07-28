@@ -13,11 +13,11 @@ import { carbon } from '../../settings';
 const { name } = CardFooter;
 
 describe(name, () => {
-  it('renders', () => {
-    render(<CardFooter />);
+  it('renders', async () => {
+    await render(<CardFooter />);
   });
 
-  it('renders actions', () => {
+  it('renders actions', async () => {
     const props = {
       hasActions: true,
       actions: <p>action 1</p>,
@@ -26,7 +26,7 @@ describe(name, () => {
     expect(getByText('action 1')).toBeVisible();
   });
 
-  it('renders primary button', () => {
+  it('renders primary button', async () => {
     const props = {
       hasButton: true,
       primaryButtonPlacement: 'bottom',
@@ -36,7 +36,7 @@ describe(name, () => {
     expect(getByText(props.primaryButtonText)).toBeVisible();
   });
 
-  it('renders secondary button', () => {
+  it('renders secondary button', async () => {
     const props = {
       hasButton: true,
       secondaryButtonPlacement: 'bottom',
@@ -46,7 +46,7 @@ describe(name, () => {
     expect(getByText(props.secondaryButtonText)).toBeVisible();
   });
 
-  it('renders productive', () => {
+  it('renders productive', async () => {
     const props = {
       hasButton: true,
       primaryButtonPlacement: 'bottom',

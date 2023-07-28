@@ -133,7 +133,7 @@ const DatagridBatchActions = (datagridState) => {
       onCancel={() => toggleAllRowsSelected(false)}
     >
       <TableBatchAction
-        renderIcon={(props) => <Activity size={16} {...props} />}
+       await renderIcon={(props) => <Activity size={16} {...props} />}
         onClick={onBatchAction}
       >
         {actionName}
@@ -185,7 +185,7 @@ const DatagridActions = (datagridState) => {
           kind="ghost"
           hasIconOnly
           tooltipPosition="bottom"
-          renderIcon={(props) => <Filter size={16} {...props} />}
+         await renderIcon={(props) => <Filter size={16} {...props} />}
           iconDescription={'Left panel'}
           onClick={leftPanelClick}
         />
@@ -203,7 +203,7 @@ const DatagridActions = (datagridState) => {
               kind="ghost"
               hasIconOnly
               tooltipPosition="bottom"
-              renderIcon={(props) => <Restart size={16} {...props} />}
+             await renderIcon={(props) => <Restart size={16} {...props} />}
               iconDescription={'Refresh'}
               onClick={refreshColumns}
             />
@@ -213,7 +213,7 @@ const DatagridActions = (datagridState) => {
               kind="ghost"
               hasIconOnly
               tooltipPosition="bottom"
-              renderIcon={(props) => <Download size={16} {...props} />}
+             await renderIcon={(props) => <Download size={16} {...props} />}
               iconDescription={'Download CSV'}
               onClick={downloadCsv}
             />
@@ -882,8 +882,8 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('renders a basic data grid component with devTools attribute', () => {
-    render(<BasicUsage data-testid={dataTestId} />);
+  it('renders a basic data grid component with devTools attribute', async () => {
+   await render(<BasicUsage data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       Datagrid.displayName
@@ -908,8 +908,8 @@ describe(componentName, () => {
     ).toEqual(10);
   });
 
-  it('renders a Batch Actions Table', () => {
-    render(<BatchActions data-testid={dataTestId}></BatchActions>);
+  it('renders a Batch Actions Table', async () => {
+   await render(<BatchActions data-testid={dataTestId}></BatchActions>);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1048,7 +1048,7 @@ describe(componentName, () => {
     );
   });
 
-  it('renders nothing and logs a warning to console if no datagridState is supplied', () => {
+  it('renders nothing and logs a warning to console if no datagridState is supplied', async () => {
     expectWarn(
       'Datagrid was not passed datagridState which is required to render this component.',
       () => {
@@ -1070,8 +1070,8 @@ describe(componentName, () => {
   });
 
   //Empty State
-  it('renders an empty table', () => {
-    render(<EmptyUsage data-testid={dataTestId}></EmptyUsage>);
+  it('renders an empty table', async () => {
+   await render(<EmptyUsage data-testid={dataTestId}></EmptyUsage>);
     expect(
       screen.getByRole('table').getElementsByTagName('tbody')[0].className
     ).toEqual('c4p--datagrid__empty-state-body');
@@ -1122,8 +1122,8 @@ describe(componentName, () => {
     ).toEqual('Description test explaining why this card is empty.');
   });
 
-  it('Initial Load', () => {
-    render(<InitialLoad data-testid={dataTestId}></InitialLoad>);
+  it('Initial Load', async () => {
+   await render(<InitialLoad data-testid={dataTestId}></InitialLoad>);
     expect(
       screen
         .getByRole('table')
@@ -1133,8 +1133,8 @@ describe(componentName, () => {
     ).toEqual(16);
   });
 
-  it('Infinite Scroll', () => {
-    render(<InfiniteScroll data-testid={dataTestId}></InfiniteScroll>);
+  it('Infinite Scroll', async () => {
+   await render(<InfiniteScroll data-testid={dataTestId}></InfiniteScroll>);
 
     expect(
       screen
@@ -1145,11 +1145,11 @@ describe(componentName, () => {
   });
 
   //Ten Thousand Entries
-  it('render logs an error if infinite scroll not enabled', () => {
+  it('render logs an error if infinite scroll not enabled', async () => {
     expectError(
       'Carbon for IBM Products (Error): Feature "Datagrid.useInfiniteScroll" not enabled. To enable see the notes on feature flags in the README.',
       () => {
-        render(
+       await render(
           <TenThousandEntriesWithoutFeatureFlag data-testid={dataTestId} />
         );
       },
@@ -1157,8 +1157,8 @@ describe(componentName, () => {
     );
   });
 
-  it('renders Ten Thousand table entries', () => {
-    render(<TenThousandEntries data-testid={dataTestId}></TenThousandEntries>);
+  it('renders Ten Thousand table entries', async () => {
+   await render(<TenThousandEntries data-testid={dataTestId}></TenThousandEntries>);
 
     expect(
       parseInt(
@@ -1191,8 +1191,8 @@ describe(componentName, () => {
     ).toEqual(10000);
   });
 
-  it('With Pagination', () => {
-    render(<WithPagination data-testid={dataTestId}></WithPagination>);
+  it('With Pagination', async () => {
+   await render(<WithPagination data-testid={dataTestId}></WithPagination>);
 
     expect(
       document.getElementById(`${carbon.prefix}-pagination-select-4`)
@@ -1202,9 +1202,9 @@ describe(componentName, () => {
     ).toBeDefined();
   });
 
-  it('Clickable Row', () => {
+  it('Clickable Row', async () => {
     const alertMock = jest.spyOn(window, 'alert');
-    render(<ClickableRow data-testid={dataTestId}></ClickableRow>);
+   await render(<ClickableRow data-testid={dataTestId}></ClickableRow>);
 
     fireEvent.click(
       screen
@@ -1257,16 +1257,16 @@ describe(componentName, () => {
     }, 300);
   }
 
-  it('Is Hover On Row', () => {
-    render(<IsHoverOnRow data-testid={dataTestId}></IsHoverOnRow>);
+  it('Is Hover On Row', async () => {
+   await render(<IsHoverOnRow data-testid={dataTestId}></IsHoverOnRow>);
     completeHoverOperation(1);
 
     completeHoverOperation(5);
   });
 
   //Disables Selected Rows
-  it('Renders Disable Select Row', () => {
-    render(<DisableSelectRow data-testid={dataTestId}></DisableSelectRow>);
+  it('Renders Disable Select Row', async () => {
+   await render(<DisableSelectRow data-testid={dataTestId}></DisableSelectRow>);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1440,8 +1440,8 @@ describe(componentName, () => {
     ).toBe(0);
   }
 
-  it('Expanded Row', () => {
-    render(<ExpandedRow data-testid={dataTestId}></ExpandedRow>);
+  it('Expanded Row', async () => {
+   await render(<ExpandedRow data-testid={dataTestId}></ExpandedRow>);
     clickRow(1);
     clickRow(4);
     clickRow(8);
@@ -1465,8 +1465,8 @@ describe(componentName, () => {
     expect(row.classList['0']).toEqual('c4p--datagrid__carbon-row');
   }
 
-  it('Hide Select All', () => {
-    render(<HideSelectAll data-testid={dataTestId}></HideSelectAll>);
+  it('Hide Select All', async () => {
+   await render(<HideSelectAll data-testid={dataTestId}></HideSelectAll>);
 
     hideSelectAll(2);
 
@@ -1475,8 +1475,8 @@ describe(componentName, () => {
     hideSelectAll(8);
   });
 
-  it('Nested Rows', () => {
-    render(<NestedRows data-testid={dataTestId}></NestedRows>);
+  it('Nested Rows', async () => {
+   await render(<NestedRows data-testid={dataTestId}></NestedRows>);
 
     const row = screen
       .getByRole('table')
@@ -1506,8 +1506,8 @@ describe(componentName, () => {
     expect(nestedRow.classList[0]).toEqual('c4p--datagrid__carbon-nested-row');
   });
 
-  it('Nested Table', () => {
-    render(<NestedTable data-testid={dataTestId}></NestedTable>);
+  it('Nested Table', async () => {
+   await render(<NestedTable data-testid={dataTestId}></NestedTable>);
     fireEvent.click(
       screen
         .getAllByRole('table')[0]
@@ -1590,8 +1590,8 @@ describe(componentName, () => {
     }
   }
 
-  it('Radio Select', () => {
-    render(<RadioSelect data-testid={dataTestId}></RadioSelect>);
+  it('Radio Select', async () => {
+   await render(<RadioSelect data-testid={dataTestId}></RadioSelect>);
     radioSelectButton(1, 1);
 
     radioSelectButton(1, 4);
@@ -1605,7 +1605,7 @@ describe(componentName, () => {
   it.skip('Select Items In All Pages', () => {
     const alertMock = jest.spyOn(window, 'alert');
 
-    render(
+   await render(
       <SelectItemsInAllPages data-testid={dataTestId}></SelectItemsInAllPages>
     );
     fireEvent.click(
@@ -1807,8 +1807,8 @@ describe(componentName, () => {
     return <Datagrid datagridState={{ ...datagridState }} />;
   };
 
-  it('Right Aligned Columns', () => {
-    render(
+  it('Right Aligned Columns', async () => {
+   await render(
       <RightAlignedColumns data-testid={dataTestId}></RightAlignedColumns>
     );
     const numRows = screen
@@ -1841,8 +1841,8 @@ describe(componentName, () => {
     }
   });
 
-  it('Row Size Dropdown', () => {
-    render(<RowSizeDropdown data-testid={dataTestId}></RowSizeDropdown>);
+  it('Row Size Dropdown', async () => {
+   await render(<RowSizeDropdown data-testid={dataTestId}></RowSizeDropdown>);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1887,8 +1887,8 @@ describe(componentName, () => {
     expect(alertMock).toHaveBeenCalled();
   });
 
-  it('Selectable Row', () => {
-    render(<SelectableRow data-testid={dataTestId}></SelectableRow>);
+  it('Selectable Row', async () => {
+   await render(<SelectableRow data-testid={dataTestId}></SelectableRow>);
 
     fireEvent.click(
       screen
@@ -1941,8 +1941,8 @@ describe(componentName, () => {
     );
   });
 
-  it('Sortable Columns', () => {
-    render(<SortableColumns data-testid={dataTestId}></SortableColumns>);
+  it('Sortable Columns', async () => {
+   await render(<SortableColumns data-testid={dataTestId}></SortableColumns>);
 
     const headerRow = screen
       .getByRole('table')
@@ -1963,8 +1963,8 @@ describe(componentName, () => {
     }
   });
 
-  it('Customizing Columns', () => {
-    render(<CustomizingColumns data-testid={dataTestId}></CustomizingColumns>);
+  it('Customizing Columns', async () => {
+   await render(<CustomizingColumns data-testid={dataTestId}></CustomizingColumns>);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1985,9 +1985,9 @@ describe(componentName, () => {
     screen.getByRole('heading', { name: /Customize columns/ });
   });
 
-  it('Top Alignment', () => {
+  it('Top Alignment', async () => {
     const ref = React.createRef();
-    render(<TopAlignment ref={ref} data-testid={dataTestId} />);
+   await render(<TopAlignment ref={ref} data-testid={dataTestId} />);
 
     const alertMock = jest.spyOn(window, 'alert');
     expect(screen.getByRole('table').classList[2]).toEqual(
@@ -2083,8 +2083,8 @@ describe(componentName, () => {
     expect(alertMock).toHaveBeenCalledTimes(3);
   });
 
-  it('Sticky Actions Column', () => {
-    render(
+  it('Sticky Actions Column', async () => {
+   await render(
       <StickyActionsColumn data-testid={dataTestId}></StickyActionsColumn>
     );
 

@@ -79,10 +79,6 @@
     &:focus:active {
       box-shadow: none;
       text-decoration: none;
-
-      #{$root}__value {
-        text-decoration: underline;
-      }
     }
   }
 
@@ -162,6 +158,11 @@
   &__value {
     @include text-overflow;
 
+    // wrong mixin is imported:
+    //  node_modules/carbon-components/scss/components/ui-shell/_side-nav.scss
+    // expected mixin to be imported from:
+    //  carbon-components/scss/globals/scss/helper-mixins
+    display: block;
     max-width: 30ch;
     height: auto;
   }

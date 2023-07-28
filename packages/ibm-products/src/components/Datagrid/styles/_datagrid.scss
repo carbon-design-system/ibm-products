@@ -500,7 +500,7 @@
 
 .#{$block-class}
   .#{$carbon-prefix}--data-table--selected:not(.#{$block-class}__active-row)
-  ::before {
+  :first-child:not(.#{$carbon-prefix}--checkbox--inline)::before {
   position: absolute;
   top: 0;
   left: 0;

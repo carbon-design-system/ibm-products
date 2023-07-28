@@ -50,6 +50,7 @@ export default {
       },
     },
   },
+  excludeStories: ['getBatchActions'],
 };
 
 const getColumns = (rows) => {
@@ -380,6 +381,9 @@ export const SortableColumns = () => {
     {
       columns,
       data,
+      ascendingSortableLabelText: 'ascending',
+      descendingSortableLabelText: 'descending',
+      defaultSortableLabelText: 'none',
     },
     useSortableColumns
   );
@@ -471,7 +475,7 @@ const DatagridBatchActions = (datagridState) => {
   );
 };
 
-const getBatchActions = () => {
+export const getBatchActions = () => {
   return [
     {
       label: 'Duplicate',
@@ -653,4 +657,21 @@ export const FrozenColumns = () => {
       <p>More details documentation check the Notes section below</p>
     </Wrapper>
   );
+};
+
+export const Skeleton = () => {
+  const [data] = useState([]);
+  const columns = React.useMemo(() => [...getColumns(data)], []);
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription = 'Description explaining why the table is empty';
+
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    isFetching: true,
+    emptyStateDescription,
+    emptyStateTitle,
+  });
+
+  return <Datagrid datagridState={datagridState} />;
 };

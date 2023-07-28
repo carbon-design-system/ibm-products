@@ -346,6 +346,7 @@ export let NotificationsPanel = React.forwardRef(
                 <Link
                   href={notification.link.url}
                   className={`${blockClass}__notifications-link`}
+                  {...notification.link.optional}
                 >
                   {notification.link.text}
                 </Link>
@@ -518,6 +519,9 @@ NotificationsPanel.propTypes = {
       link: PropTypes.shape({
         url: PropTypes.string,
         text: PropTypes.string,
+        optional: PropTypes.shape({
+          // Add optional props here
+        }),
       }),
       unread: PropTypes.bool,
       onNotificationClick: PropTypes.func,

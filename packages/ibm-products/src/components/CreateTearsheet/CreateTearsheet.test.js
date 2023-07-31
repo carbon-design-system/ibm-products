@@ -18,7 +18,6 @@ import { pkg, carbon } from '../../settings';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import wait from '../../global/js/utils/wait';
 
 const { prefix } = pkg;
 
@@ -27,12 +26,12 @@ const componentName = CreateTearsheet.displayName;
 
 const rejectionErrorMessage = uuidv4();
 const onCloseFn = jest.fn();
-const onRequestSubmitFn = jest.fn();
+const onRequestSubmitFn = jest.fn(() => Promise.resolve());
 const onRequestSubmitNonPromiseFn = jest.fn();
 const onRequestSubmitRejectFn = jest.fn(() =>
   Promise.reject(rejectionErrorMessage)
 );
-const onNextStepFn = () => jest.fn();
+const onNextStepFn = jest.fn(() => Promise.resolve());
 const onNextStepNonPromiseFn = jest.fn();
 const onNextStepRejectionFn = jest.fn(() =>
   Promise.reject(rejectionErrorMessage)
@@ -81,10 +80,7 @@ const renderCreateTearsheet = ({
       {...rest}
     >
       <CreateTearsheetStep
-        onNext={() => {
-          console.log('one');
-          return rejectOnNext ? onNextStepRejectionFn : onNext;
-        }}
+        onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
         title={step1Title}
         fieldsetLegendText={step1Title}
         onMount={onMountFn}
@@ -97,22 +93,13 @@ const renderCreateTearsheet = ({
         </button>
         <input type="text" />
       </CreateTearsheetStep>
-      <CreateTearsheetStep
-        title={step2Title}
-        hasFieldset={false}
-        onNext={() => {
-          console.log('two');
-        }}
-      >
+      <CreateTearsheetStep title={step2Title} hasFieldset={false}>
         step 2 content
       </CreateTearsheetStep>
       <CreateTearsheetStep
         title={step3Title}
         fieldsetLegendText={step3Title}
-        onNext={() => {
-          console.log('three');
-          return rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn;
-        }}
+        onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}
       >
         step 3 content
       </CreateTearsheetStep>
@@ -247,39 +234,27 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it.only('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
+  it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
     const { click } = userEvent;
     const { container } = renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const cancelButtonElement = screen.getByText(cancelButtonText);
-    console.log(
-      'cancel\n',
-      cancelButtonElement.outerHTML,
-      '\n\n',
-      'next\n',
-      nextButtonElement.outerHTML
+    await act(() => click(nextButtonElement));
+    const createTearsheetSteps = container.querySelector(
+      `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
+    ).children;
+    expect(
+      createTearsheetSteps[1].classList.contains(
+        `.${createTearsheetBlockClass}__step__step--visible-section`
+      )
     );
-    const aClick = click(nextButtonElement);
 
-    console.log('act done', aClick);
-    setTimeout(() => {
-      console.log('again', aClick);
-    }, 1000);
-    // const createTearsheetSteps = container.querySelector(
-    //   `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
-    // ).children;
-    // expect(
-    //   createTearsheetSteps[1].classList.contains(
-    //     `.${createTearsheetBlockClass}__step__step--visible-section`
-    //   )
-    // );
-
-    // expect(onNextStepFn).toHaveBeenCalled();
-    // await act(() => click(cancelButtonElement));
-    // expect(onCloseFn).toHaveBeenCalled();
+    expect(onNextStepFn).toHaveBeenCalled();
+    await act(() => click(cancelButtonElement));
+    expect(onCloseFn).toHaveBeenCalled();
   });
 
-  it.skip('renders first step with onNext function prop that rejects', async () =>
+  it('renders first step with onNext function prop that rejects', async () =>
     expectWarnAsync(
       `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
       async () => {
@@ -298,7 +273,7 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it.skip('renders the next CreateTearsheet step without onNext handler', async () => {
+  it('renders the next CreateTearsheet step without onNext handler', async () => {
     const { click } = userEvent;
     const { container, rerender } = renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
@@ -331,7 +306,7 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  it.skip('should call the onRequestSubmit prop, returning a promise on last step submit button', async () => {
+  it('should call the onRequestSubmit prop, returning a promise on last step submit button', async () => {
     const { click } = userEvent;
     renderCreateTearsheet({
       ...defaultProps,
@@ -357,7 +332,7 @@ describe(CreateTearsheet.displayName, () => {
     });
   });
 
-  it.skip('should call the onRequestSubmit function, without a promise, on last step submit button', async () => {
+  it('should call the onRequestSubmit function, without a promise, on last step submit button', async () => {
     const { click } = userEvent;
     renderCreateTearsheet({
       ...defaultProps,
@@ -383,7 +358,7 @@ describe(CreateTearsheet.displayName, () => {
     });
   });
 
-  it.skip('should call the onNext function from the final step and reject the promise', async () =>
+  it('should call the onNext function from the final step and reject the promise', async () =>
     expectWarnAsync(
       `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
       async () => {
@@ -414,7 +389,7 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it.skip('should call the onRequestSubmit prop and reject the promise', async () =>
+  it('should call the onRequestSubmit prop and reject the promise', async () =>
     expectWarnAsync(
       `CreateTearsheet submit error: ${rejectionErrorMessage}`,
       async () => {
@@ -440,7 +415,7 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it.skip('should not render any CreateTearsheet steps when there are no TearsheetStep components included', async () => {
+  it('should not render any CreateTearsheet steps when there are no TearsheetStep components included', async () => {
     const { container } = renderEmptyCreateTearsheet(defaultProps);
     const createTearsheetSteps = container.querySelectorAll(
       `.${createTearsheetBlockClass}__step`
@@ -448,7 +423,7 @@ describe(CreateTearsheet.displayName, () => {
     expect(Array(...createTearsheetSteps)).toStrictEqual([]);
   });
 
-  it.skip('should click the back button and add a custom next button label on a single step', async () => {
+  it('should click the back button and add a custom next button label on a single step', async () => {
     const { click } = userEvent;
     const { container } = renderCreateTearsheet({
       ...defaultProps,
@@ -472,18 +447,18 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  it.skip('should create a console warning when using CreateTearsheet with only one step', async () => {
+  it('should create a console warning when using CreateTearsheet with only one step', async () => {
     jest.spyOn(console, 'warn').mockImplementation(jest.fn());
     renderSingleStepCreateTearsheet(defaultProps);
     jest.spyOn(console, 'warn').mockRestore();
   });
 
-  it.skip('should create a console warning when using CreateTearsheet with only one step', async () =>
+  it('should create a console warning when using CreateTearsheet with only one step', async () =>
     expectWarn('CreateTearsheets with one step are not permitted', async () => {
       renderSingleStepCreateTearsheet(defaultProps);
     }));
 
-  it.skip('should render an invalid create tearsheet', async () =>
+  it('should render an invalid create tearsheet', async () =>
     expectMultipleWarn(
       [
         `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,

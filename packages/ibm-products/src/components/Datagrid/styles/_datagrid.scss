@@ -632,14 +632,6 @@
   padding: 0;
 }
 
-// TODO: Revisit batch action list button and button icon alignment after
-// https: //github.com/carbon-design-system/carbon/issues/14021 is fixed
-.#{$block-class}
-  .#{c4p-settings.$carbon-prefix}--action-list
-  .#{c4p-settings.$carbon-prefix}--btn {
-  align-items: center;
-}
-
 .#{$block-class}
   .#{c4p-settings.$carbon-prefix}--action-list
   .#{c4p-settings.$carbon-prefix}--btn__icon {

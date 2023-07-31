@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { EditInPlace } from '.';
 
@@ -47,21 +47,21 @@ describe(componentName, () => {
   it('renders in invalid mode', async () => {
     await render(<EditInPlace {...defaultProps} invalid />);
     const input = screen.getByDisplayValue(defaultProps.value);
-    userEvent.click(input);
+    await act(() => userEvent.click(input));
     expect(screen.getByText(defaultProps.invalidLabel)).toBeVisible();
   });
 
   it('focuses the input when the component is clicked', async () => {
     await render(<EditInPlace {...defaultProps} />);
     const input = screen.getByDisplayValue(defaultProps.value);
-    userEvent.click(input);
+    await act(() => userEvent.click(input));
     expect(screen.getByLabelText(defaultProps.cancelLabel)).toBeVisible();
   });
 
   it('focuses the input when the edit button is clicked', async () => {
     await render(<EditInPlace {...defaultProps} />);
     const editBtn = screen.getByLabelText(defaultProps.editLabel);
-    userEvent.click(editBtn);
+    await act(() => userEvent.click(editBtn));
     expect(screen.getByLabelText(defaultProps.cancelLabel)).toBeVisible();
   });
 
@@ -90,10 +90,10 @@ describe(componentName, () => {
       ...defaultProps,
       onSave,
     };
-    const { rerender } = render(<EditInPlace {...props} />);
+    const { rerender } = await render(<EditInPlace {...props} />);
     await rerender(<EditInPlace {...props} value="new value" />);
-    userEvent.click(screen.getByLabelText(props.editLabel));
-    userEvent.click(screen.getByLabelText(props.saveLabel));
+    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+    await act(() => userEvent.click(screen.getByLabelText(props.saveLabel)));
     expect(onSave).toHaveBeenCalled();
   });
 
@@ -103,10 +103,10 @@ describe(componentName, () => {
       ...defaultProps,
       onCancel,
     };
-    const { rerender } = render(<EditInPlace {...props} />);
+    const { rerender } = await render(<EditInPlace {...props} />);
     await rerender(<EditInPlace {...props} value="new value" />);
-    userEvent.click(screen.getByLabelText(props.editLabel));
-    userEvent.click(screen.getByLabelText(props.cancelLabel));
+    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
+    await act(() => userEvent.click(screen.getByLabelText(props.cancelLabel)));
     expect(onCancel).toHaveBeenCalled();
   });
 
@@ -116,9 +116,9 @@ describe(componentName, () => {
       ...defaultProps,
       onSave,
     };
-    const { rerender } = render(<EditInPlace {...props} />);
+    const { rerender } = await render(<EditInPlace {...props} />);
     await rerender(<EditInPlace {...props} value="new value" />);
-    userEvent.click(screen.getByLabelText(props.editLabel));
+    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
     const input = screen.getByDisplayValue('new value');
     fireEvent.blur(input);
     expect(onSave).toHaveBeenCalled();
@@ -131,7 +131,7 @@ describe(componentName, () => {
       onCancel,
     };
     await render(<EditInPlace {...props} />);
-    userEvent.click(screen.getByLabelText(props.editLabel));
+    await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
     const input = screen.getByDisplayValue(props.value);
     fireEvent.blur(input);
     expect(onCancel).toHaveBeenCalled();
@@ -152,7 +152,7 @@ describe(componentName, () => {
       ...defaultProps,
       onCancel,
     };
-    const { rerender } = render(<EditInPlace {...props} />);
+    const { rerender } = await render(<EditInPlace {...props} />);
     const input = screen.getByDisplayValue(props.value);
 
     // clicks escape without making changes
@@ -173,7 +173,7 @@ describe(componentName, () => {
       ...defaultProps,
       onSave,
     };
-    const { rerender } = render(<EditInPlace {...props} />);
+    const { rerender } = await render(<EditInPlace {...props} />);
     const input = screen.getByDisplayValue(props.value);
 
     // clicks enter without making changes
@@ -189,7 +189,7 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(
+    const { container } = await render(
       <main>
         <EditInPlace {...defaultProps} />
       </main>
@@ -199,7 +199,7 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(<EditInPlace {...defaultProps} />);
+    const { container } = await render(<EditInPlace {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 

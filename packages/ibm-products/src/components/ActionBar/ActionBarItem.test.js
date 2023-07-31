@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ActionBarItem } from '.';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -23,7 +23,7 @@ const testLabel = 'Test label';
 
 describe(ActionBarItem.displayName, () => {
   it('has no accessibility violations', async () => {
-    const { container } = render(
+    const { container } = await render(
       <main>
         <ActionBarItem label={testLabel}></ActionBarItem>
       </main>
@@ -39,19 +39,19 @@ describe(ActionBarItem.displayName, () => {
     const myOnClick = jest.fn();
 
     // not enough room so should see an overflow.
-    const { container } = render(
+    const { container } = await render(
       <ActionBarItem label={testLabel} onClick={myOnClick}></ActionBarItem>
     );
 
     const actionBarItemElement = container.querySelector(`.${blockClass}`);
     expect(actionBarItemElement).toHaveClass(`${carbon.prefix}--btn`);
 
-    click(actionBarItemElement);
+    await act(() => click(actionBarItemElement));
     expect(myOnClick).toBeCalled();
   });
 
   it('adds user classes', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ActionBarItem label={testLabel} className={className}>
         {content}
       </ActionBarItem>
@@ -62,7 +62,7 @@ describe(ActionBarItem.displayName, () => {
   });
 
   it('ignores user size and type settings', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ActionBarItem label={testLabel} size="lg" type="submit">
         {content}
       </ActionBarItem>
@@ -74,7 +74,7 @@ describe(ActionBarItem.displayName, () => {
   });
 
   it('adds additional properties to the containing node', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ActionBarItem label={testLabel} data-testid={dataTestId}>
         {content}
       </ActionBarItem>

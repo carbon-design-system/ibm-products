@@ -25,7 +25,7 @@ function _instance(prop) {
 
 function toBeAccessible(label, node, displayName) {
   it.skip(label, async () => {
-    const { container } = render(node);
+    const { container } = await render(node);
 
     await expect(container).toBeAccessible(`${displayName} — ${label}`);
     await expect(container).toHaveNoAxeViolations();
@@ -37,7 +37,7 @@ const dataTestId = _instance('dataTestId');
 
 const props = { children };
 
-function test(Component) {
+function it(Component) {
   toBeAccessible(
     'has no accessibility violations',
     <Component {...props} />,
@@ -80,7 +80,7 @@ describe(toolbarButtonComponentName, () => {
     pkg.setAllComponents(true);
   });
 
-  test(ToolbarButton);
+  it(ToolbarButton);
 
   toBeAccessible(
     'has no accessibility violations for the caret variant',
@@ -131,7 +131,7 @@ describe(ToolbarGroup.displayName, () => {
   beforeAll(() => {
     pkg.setAllComponents(true);
   });
-  test(ToolbarGroup);
+  it(ToolbarGroup);
 });
 
 describe(componentName, () => {
@@ -139,7 +139,7 @@ describe(componentName, () => {
     pkg.setAllComponents(true);
   });
 
-  test(Toolbar);
+  it(Toolbar);
 
   it('renders the vertical variant', async () => {
     const { rerender } = await render(

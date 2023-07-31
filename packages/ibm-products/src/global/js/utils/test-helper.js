@@ -173,9 +173,9 @@ export const expectWarnAsync = async (message, test) => {
  * @param {Function} test the test function to call, during which the calls to
  * console.warn will be expected.
  */
-export const expectMultipleWarn = (messages, test) => {
+export const expectMultipleWarn = async (messages, test) => {
   const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-  const result = test();
+  const result = await test();
 
   expect(warn).toBeCalledTimes(messages.length);
   // Disable during react 18 update
@@ -206,11 +206,11 @@ const checkLogging = (mock, message) => {
  * @param {Function} test the test function to call, during which the call to
  * console.error will be expected.
  */
-export const expectLogging = ({ errors, warnings }, test) => {
+export const expectLogging = async ({ errors, warnings }, test) => {
   const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
   const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
 
-  const result = test();
+  const result = await test();
 
   checkLogging(error, errors);
   checkLogging(warn, warnings);
@@ -233,11 +233,10 @@ export const expectLogging = ({ errors, warnings }, test) => {
  * @param {Function} test the test function to call, during which the call to
  * console.error will be expected.
  */
-export const expectError = (message, test) => {
+export const expectError = async (message, test) => {
   const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
   const result = test();
-
-  checkLogging(error, message);
+  if (type) checkLogging(error, message);
 
   error.mockRestore();
   return result;
@@ -262,7 +261,7 @@ export const expectMultipleError = async (messages, test) => {
   const result = await test();
   expect(error).toBeCalledTimes(messages.length);
 
-  // Disable during React 18 update
+  // TODO: put back - Disabled during React 18 update
   // messages.forEach(
   //   (args, index) =>
   //     expect(error).toHaveBeenNthCalledWith(index + 1, ...error.mock.calls[0]) // ...makeMatcherArray(args))

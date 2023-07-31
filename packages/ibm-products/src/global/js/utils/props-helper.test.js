@@ -84,45 +84,45 @@ describe('deprecateProp and deprecatePropUsage', () => {
   };
 
   it('reports prop deprecated when deprecated prop is used', async () =>
-    expectWarn(deprecated('a', 'x', 'Explanation 1.'), () => {
-     await render(<Component a="fish" />);
+    expectWarn(deprecated('a', 'x', 'Explanation 1.'), async () => {
+      await render(<Component a="fish" />);
     }));
 
   it('reports prop deprecated and invalid when deprecated prop is used with invalid value', async () =>
     expectError(
       'Warning: Failed prop type: Invalid prop `a` of type `number` supplied to `x`, expected `string`.\n    in x',
       () =>
-        expectWarn(deprecated('a', 'x', 'Explanation 1.'), () => {
-         await render(<Component a={42} />);
+        expectWarn(deprecated('a', 'x', 'Explanation 1.'), async () => {
+          await render(<Component a={42} />);
         })
     ));
 
   it('does not report prop deprecated when non-deprecated prop is used', async () => {
-   await render(<Component b="fish" />);
+    await render(<Component b="fish" />);
   });
 
   it('reports prop usage deprecated when deprecated usage is used', async () =>
-    expectWarn(deprecatedUsage('c', 'x', 'Explanation 2.'), () => {
-     await render(<Component c={42} />);
+    expectWarn(deprecatedUsage('c', 'x', 'Explanation 2.'), async () => {
+      await render(<Component c={42} />);
     }));
 
   it('does not report prop usage deprecated when non-deprecated usage is used', async () => {
-   await render(<Component c={{ d: 'fish' }} />);
+    await render(<Component c={{ d: 'fish' }} />);
   });
 
   it('does not report prop usage deprecated when incorrect non-deprecated usage is used', async () =>
     expectError(
       'Warning: Failed prop type: Invalid prop `c.d` of type `number` supplied to `x`, expected `string`.\n    in x',
-      () => {
-       await render(<Component c={{ d: 42 }} />);
+      async () => {
+        await render(<Component c={{ d: 42 }} />);
       }
     ));
 
   it('does not report prop usage deprecated when invalid but non-deprecated usage is used', async () =>
     expectError(
       'Warning: Failed prop type: Invalid prop `c` of type `string` supplied to `x`, expected `object`.\n    in x',
-      () => {
-       await render(<Component c="fish" />);
+      async () => {
+        await render(<Component c="fish" />);
       }
     ));
 });
@@ -176,16 +176,16 @@ describe('isRequiredIf', () => {
 
   it('does not report required when condition false', async () => {
     // any console error will cause the test to fail through global check
-   await render(<Component ctl="x" />);
+    await render(<Component ctl="x" />);
   });
 
   it('reports required when condition true', async () =>
-    expectError(required('a', 'Component'), () => {
-     await render(<Component ctl="a" />);
+    expectError(required('a', 'Component'), async () => {
+      await render(<Component ctl="a" />);
     }));
 
   it('reports required when used as a decorator', async () =>
-    expectError(required('b', 'Component'), () => {
-     await render(<Component ctl="b" />);
+    expectError(required('b', 'Component'), async () => {
+      await render(<Component ctl="b" />);
     }));
 });

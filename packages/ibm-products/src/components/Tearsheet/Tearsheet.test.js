@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   expectWarn,
@@ -90,8 +90,8 @@ const title = `Title of the ${uuidv4()} tearsheet`;
 let tooManyButtonsTestedAlready = false;
 let closeIconDescriptionTestedAlready = false;
 const commonTests = (Ts, name, props, testActions) => {
-  it(`renders a component ${name}`, () => {
-   await render(<Ts {...{ ...props, closeIconDescription }} />);
+  it(`renders a component ${name}`, async () => {
+    await render(<Ts {...{ ...props, closeIconDescription }} />);
     expect(document.querySelector(`.${carbon.prefix}--modal`)).toHaveClass(
       blockClass
     );
@@ -99,7 +99,7 @@ const commonTests = (Ts, name, props, testActions) => {
 
   // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
   it.skip('has no accessibility violations when closed', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Ts {...{ ...props, closeIconDescription, label, title }} />
     );
     await expect(container).toBeAccessible(`${name} when closed`);
@@ -107,7 +107,7 @@ const commonTests = (Ts, name, props, testActions) => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Ts
         {...{ ...props, closeIconDescription, label, title }}
         open
@@ -120,7 +120,7 @@ const commonTests = (Ts, name, props, testActions) => {
   });
 
   it('omits main content sections when no props supplied and no close icon requested', async () => {
-   await render(<Ts {...props} hasCloseIcon={false} />);
+    await render(<Ts {...props} hasCloseIcon={false} />);
     expect(document.querySelector(`.${blockClass}__header`)).toBeNull();
     expect(document.querySelector(`.${blockClass}__influencer`)).toBeNull();
 
@@ -136,10 +136,10 @@ const commonTests = (Ts, name, props, testActions) => {
 
   if (testActions) {
     it('renders buttons', async () => {
-     await render(<Ts {...{ ...props, actions }} />);
+      await render(<Ts {...{ ...props, actions }} />);
       expect(document.querySelector(`.${blockClass}__buttons`)).not.toBeNull();
       expect(onClick).toHaveBeenCalledTimes(0);
-      userEvent.click(screen.getByText(createButton));
+      await act(() => userEvent.click(screen.getByText(createButton)));
       expect(onClick).toHaveBeenCalledTimes(1);
     });
 
@@ -157,28 +157,30 @@ const commonTests = (Ts, name, props, testActions) => {
               'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than four actions',
               'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
             ],
-        () => {
+        async () => {
           tooManyButtonsTestedAlready = true;
-         await render(<Ts {...props} actions={badActions} />);
+          await render(<Ts {...props} actions={badActions} />);
         }
       ));
   }
 
   it('renders children', async () => {
-   await render(<Ts {...{ ...props, closeIconDescription }}>{children}</Ts>);
+    await render(<Ts {...{ ...props, closeIconDescription }}>{children}</Ts>);
     expect(document.querySelector(`.${blockClass}__main`)).not.toBeNull();
     screen.getByText(childFragment);
   });
 
   it('applies className to the root node', async () => {
-   await render(<Ts {...{ ...props, className, closeIconDescription }} />);
+    await render(<Ts {...{ ...props, className, closeIconDescription }} />);
     expect(document.querySelector(`.${carbon.prefix}--modal`)).toHaveClass(
       className
     );
   });
 
   it('responds to hasCloseIcon and renders closeIconDescription', async () => {
-   await render(<Ts {...{ ...props, closeIconDescription }} open hasCloseIcon />);
+    await render(
+      <Ts {...{ ...props, closeIconDescription }} open hasCloseIcon />
+    );
     expect(document.querySelector(`.${blockClass}__header`)).not.toBeNull();
     screen.getByRole('button', { name: closeIconDescription });
   });
@@ -194,26 +196,26 @@ const commonTests = (Ts, name, props, testActions) => {
               required('closeIconDescription', name),
               required('closeIconDescription', 'TearsheetShell'),
             ],
-        () => {
-         await render(<Ts {...props} />);
+        async () => {
+          await render(<Ts {...props} />);
           closeIconDescriptionTestedAlready = true;
         }
       ));
   }
 
   it('renders description', async () => {
-   await render(<Ts {...{ ...props, closeIconDescription, description }} />);
+    await render(<Ts {...{ ...props, closeIconDescription, description }} />);
     screen.getByText(descriptionFragment);
   });
 
   it('renders label', async () => {
-   await render(<Ts {...{ ...props, closeIconDescription, label }} />);
+    await render(<Ts {...{ ...props, closeIconDescription, label }} />);
     screen.getByText(label);
   });
 
   if (testActions) {
     it('calls onClose() when the tearsheet is closed', async () => {
-     await render(
+      await render(
         <Ts
           {...{ ...props, closeIconDescription }}
           hasCloseIcon
@@ -227,12 +229,12 @@ const commonTests = (Ts, name, props, testActions) => {
       });
       expect(tearsheet).toHaveClass('is-visible');
       expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
-      userEvent.click(closeButton);
+      await act(() => userEvent.click(closeButton));
       expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
     });
 
     it('allows veto when the tearsheet is closed', async () => {
-     await render(
+      await render(
         <Ts
           {...{ ...props, closeIconDescription }}
           hasCloseIcon
@@ -246,56 +248,56 @@ const commonTests = (Ts, name, props, testActions) => {
       });
       expect(tearsheet).toHaveClass('is-visible');
       expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
-      userEvent.click(closeButton);
+      await act(() => userEvent.click(closeButton));
       expect(tearsheet).toHaveClass('is-visible');
       expect(onCloseReturnsFalse).toHaveBeenCalledTimes(1);
     });
   }
 
   it('is visible when open is true', async () => {
-   await render(<Ts {...props} open />);
+    await render(<Ts {...props} open />);
     expect(document.querySelector(`.${carbon.prefix}--modal`)).toHaveClass(
       'is-visible'
     );
   });
 
   it('renders title', async () => {
-   await render(<Ts {...{ ...props, title }} />);
+    await render(<Ts {...{ ...props, title }} />);
     screen.getByText(title);
   });
 
   it('renders verticalPosition', async () => {
-   await render(<Ts {...props} open verticalPosition="lower" />);
+    await render(<Ts {...props} open verticalPosition="lower" />);
     expect(screen.getByRole('dialog')).toHaveClass(
       `${blockClass}__container--lower`
     );
   });
 
   it('adds additional properties to the containing node', async () => {
-   await render(<Ts {...props} data-testid={dataTestId} />);
+    await render(<Ts {...props} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-   await render(<Ts {...{ ...props, ref }} />);
+    await render(<Ts {...{ ...props, ref }} />);
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-   await render(<Ts {...props} data-testid={dataTestId} />);
+    await render(<Ts {...props} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(name);
   });
 
-  it("doesn't render when stacked more than three deep", () =>
+  it("doesn't render when stacked more than three deep", async () =>
     expectWarn(
       'Tearsheet not rendered: maximum stacking depth exceeded.',
-      () => {
-       await render(<Ts {...props} open />);
-       await render(<Ts {...props} open />);
-       await render(<Ts {...props} open />);
-       await render(<Ts {...props} open />);
+      async () => {
+        await render(<Ts {...props} open />);
+        await render(<Ts {...props} open />);
+        await render(<Ts {...props} open />);
+        await render(<Ts {...props} open />);
         expect(
           document.querySelectorAll(`.${carbon.prefix}--modal.is-visible`)
         ).toHaveLength(3);
@@ -338,12 +340,12 @@ describe(componentName, () => {
   commonTests(Tearsheet, componentName, {}, true);
 
   it('renders headerActions', async () => {
-   await render(<Tearsheet {...{ headerActions }} />);
+    await render(<Tearsheet {...{ headerActions }} />);
     screen.getByText(headerActionButtonLabel);
   });
 
   it('renders influencer', async () => {
-   await render(<Tearsheet {...{ influencer }} />);
+    await render(<Tearsheet {...{ influencer }} />);
     expect(document.querySelector(`.${blockClass}__influencer`)).not.toBeNull();
     const influencerElt = screen.getByText(influencerFragment).parentElement;
     expect(influencerElt).not.toHaveClass(`${blockClass}__influencer--right`);
@@ -351,20 +353,20 @@ describe(componentName, () => {
   });
 
   it('responds to influencerPosition', async () => {
-   await render(<Tearsheet {...{ influencer }} influencerPosition="right" />);
+    await render(<Tearsheet {...{ influencer }} influencerPosition="right" />);
     const influencerElt =
       screen.getByText(influencerFragment).parentElement.parentElement;
     expect(influencerElt).toHaveClass(`${blockClass}__main`);
   });
 
   it('responds to influencerWidth', async () => {
-   await render(<Tearsheet {...{ influencer }} influencerWidth="wide" />);
+    await render(<Tearsheet {...{ influencer }} influencerWidth="wide" />);
     const influencerElt = screen.getByText(influencerFragment).parentElement;
     expect(influencerElt).toHaveClass(`${blockClass}__influencer--wide`);
   });
 
   it('renders navigation', async () => {
-   await render(
+    await render(
       <Tearsheet open {...{ navigation }} closeIconDescription="Close icon" />
     );
     expect(document.querySelectorAll(`.${carbon.prefix}--tabs`)).toHaveLength(

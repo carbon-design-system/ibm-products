@@ -52,14 +52,14 @@ describe(name, () => {
 
       if (!pkg.isComponentEnabled(key)) {
         // We check that exported components are listed in package settings.
-        it(`has a component flag in package settings for "${key}"`, () => {
+        it(`has a component flag in package settings for "${key}"`, async () => {
           expect(pkg.isComponentPublic(key)).toBeTruthy();
         });
 
         // We check that unreleased public components render a Canary.
         // Non-canary components are tested elsewhere.
-        it(`renders a canary by default for "${key}"`, () => {
-          const { container } = render(<TestComponent />);
+        it(`renders a canary by default for "${key}"`, async () => {
+          const { container } = await render(<TestComponent />);
           expect(container.querySelector(`.${canaryClass}`)).not.toBeNull();
         });
       }

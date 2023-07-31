@@ -169,7 +169,7 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(
+    const { container } = await render(
       <AddSelect {...defaultProps} className="test-class" />
     );
     expect(container.firstChild).toHaveClass('test-class');

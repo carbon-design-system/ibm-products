@@ -23,28 +23,32 @@ const dataTestId = uuidv4();
 
 describe(componentName, () => {
   it('renders a component EditTearsheetNarrow', async () => {
-   await render(<EditTearsheetNarrow> </EditTearsheetNarrow>);
+    await render(<EditTearsheetNarrow> </EditTearsheetNarrow>);
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<EditTearsheetNarrow> </EditTearsheetNarrow>);
+    const { container } = await render(
+      <EditTearsheetNarrow> </EditTearsheetNarrow>
+    );
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, () => {
-   await render(<EditTearsheetNarrow>{children}</EditTearsheetNarrow>);
+  it(`renders children`, async () => {
+    await render(<EditTearsheetNarrow>{children}</EditTearsheetNarrow>);
     screen.getByText(children);
   });
 
   it('applies className to the containing node', async () => {
-   await render(<EditTearsheetNarrow className={className}> </EditTearsheetNarrow>);
+    await render(
+      <EditTearsheetNarrow className={className}> </EditTearsheetNarrow>
+    );
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {
-   await render(
+    await render(
       <EditTearsheetNarrow data-testid={dataTestId}> </EditTearsheetNarrow>
     );
     screen.getByTestId(dataTestId);
@@ -52,12 +56,12 @@ describe(componentName, () => {
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-   await render(<EditTearsheetNarrow ref={ref}> </EditTearsheetNarrow>);
+    await render(<EditTearsheetNarrow ref={ref}> </EditTearsheetNarrow>);
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-   await render(
+    await render(
       <EditTearsheetNarrow data-testid={dataTestId}> </EditTearsheetNarrow>
     );
 

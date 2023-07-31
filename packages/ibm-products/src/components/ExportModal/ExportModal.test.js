@@ -68,7 +68,7 @@ describe(componentName, () => {
       invalidInputText: 'File must have valid extension .pdf',
     };
 
-    const { container } = render(<ExportModal {...props} />);
+    const { container } = await render(<ExportModal {...props} />);
     const textInput = container.querySelector(`.${carbon.prefix}--text-input`);
 
     change(textInput, { target: { value: `${props.filename}.pdf` } });
@@ -88,7 +88,7 @@ describe(componentName, () => {
       invalidInputText: 'File must have valid extension .pdf',
     };
 
-    const { container } = render(<ExportModal {...props} />);
+    const { container } = await render(<ExportModal {...props} />);
     const submitBtn = container.querySelector(
       `.${carbon.prefix}--btn--primary`
     );
@@ -109,7 +109,7 @@ describe(componentName, () => {
       invalidInputText: 'File must have valid extension .pdf',
     };
 
-    const { container } = render(<ExportModal {...props} />);
+    const { container } = await render(<ExportModal {...props} />);
     const textInput = container.querySelector(`.${carbon.prefix}--text-input`);
 
     change(textInput, { target: { value: `${props.filename}` } });
@@ -148,7 +148,7 @@ describe(componentName, () => {
       preformattedExtensionsLabel: 'Choose an export format',
     };
 
-    const { getByLabelText } = render(<ExportModal {...props} />);
+    const { getByLabelText } = await render(<ExportModal {...props} />);
 
     screen.getByText(props.preformattedExtensionsLabel);
     await act(() => click(getByLabelText('BAR (best for integration server)')));
@@ -160,7 +160,7 @@ describe(componentName, () => {
   });
 
   it('renders with password field', async () => {
-    const { container } = render(
+    const { container } = await render(
       <ExportModal {...defaultProps} inputType="password" />
     );
     expect(
@@ -170,13 +170,13 @@ describe(componentName, () => {
 
   //@TODO: reinstate this test as soon as https://github.com/carbon-design-system/carbon/issues/10107 is fixed
   it('has no accessibility violations', async () => {
-    const { container } = render(<ExportModal {...defaultProps} />);
+    const { container } = await render(<ExportModal {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(<ExportModal {...defaultProps} />);
+    const { container } = await render(<ExportModal {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 

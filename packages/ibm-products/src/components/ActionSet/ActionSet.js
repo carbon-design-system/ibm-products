@@ -42,6 +42,10 @@ const ActionSetButton = React.forwardRef(
         // Pass through any other property values as HTML attributes.
         ...rest
       }
+      onClick={() => {
+        rest.onClick();
+        console.log('banana', rest.onClick);
+      }}
       isExpressive={isExpressive}
       className={cx(className, [
         `${blockClass}__action-button`,

@@ -90,8 +90,8 @@ describe(componentName, () => {
   });
 
   iconTypes.forEach((kind) => {
-    it(`applies the proper className when kind prop of ${kind} is passed`, () => {
-      const { container } = render(
+    it(`applies the proper className when kind prop of ${kind} is passed`, async () => {
+      const { container } = await render(
         <StatusIcon
           kind={kind}
           iconDescription={kind}
@@ -108,8 +108,8 @@ describe(componentName, () => {
   });
 
   iconTypes.forEach((label) => {
-    it(`applies the proper title element when icon label of ${label} is passed`, () => {
-      const { container } = render(
+    it(`applies the proper title element when icon label of ${label} is passed`, async () => {
+      const { container } = await render(
         <StatusIcon
           kind={label}
           iconDescription={label}
@@ -126,8 +126,8 @@ describe(componentName, () => {
   });
 
   iconThemes.forEach((theme) => {
-    it(`applies the proper className when theme prop of ${theme} is passed`, () => {
-      const { container } = render(
+    it(`applies the proper className when theme prop of ${theme} is passed`, async () => {
+      const { container } = await render(
         <StatusIcon
           kind="fatal"
           iconDescription="fatal"
@@ -144,8 +144,8 @@ describe(componentName, () => {
   });
 
   iconSizes.forEach(({ input, output }) => {
-    it(`changes element size when size prop of ${input} is passed`, () => {
-      const { container } = render(
+    it(`changes element size when size prop of ${input} is passed`, async () => {
+      const { container } = await render(
         <StatusIcon
           kind="fatal"
           iconDescription="fatal"

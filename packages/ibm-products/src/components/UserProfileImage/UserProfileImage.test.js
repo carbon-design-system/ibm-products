@@ -24,24 +24,26 @@ const size = 'xl';
 const theme = 'light';
 
 const renderComponent = ({ ...rest } = {}) =>
- render(<UserProfileImage {...{ kind, size, theme, ...rest }} />);
+  render(<UserProfileImage {...{ kind, size, theme, ...rest }} />);
 
 describe(componentName, () => {
-  test('should return a circle with background color', () => {
-    const { container } = await renderComponent({ backgroundColor: 'light-cyan' });
+  it('should return a circle with background color', async () => {
+    const { container } = await renderComponent({
+      backgroundColor: 'light-cyan',
+    });
     const element = container.querySelector(`.${blockClass}`);
 
     const hasBackgroundColor = element.className.includes('light-cyan');
     expect(hasBackgroundColor).toBeTruthy();
   });
 
-  test('should return an icon for the avatar image', () => {
+  it('should return an icon for the avatar image', async () => {
     const { container } = await renderComponent();
     const renderedSVG = container.querySelector('svg');
     expect(renderedSVG).toBeTruthy();
   });
 
-  test('should render image for the avatar image', () => {
+  it('should render image for the avatar image', async () => {
     const { container } = await renderComponent({
       image: 'path_to_image.jpg',
       imageDescription: 'test alt text',
@@ -50,14 +52,14 @@ describe(componentName, () => {
     expect(typeof imagePath).toBe('string');
   });
 
-  test('should return appropriately size circle based on size prop', () => {
+  it('should return appropriately size circle based on size prop', async () => {
     const { container } = await renderComponent();
     const element = container.querySelector(`.${blockClass}`);
     const hasSizeClass = element.className.includes('xl');
     expect(hasSizeClass).toBeTruthy();
   });
 
-  test('should recognize theme setting', () => {
+  it('should recognize theme setting', async () => {
     const { container } = await renderComponent();
     const element = container.querySelector(`.${blockClass}`);
     const hasThemeClass = element.className.includes('light');
@@ -65,18 +67,18 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to the containing node', async () => {
-   await renderComponent({ 'data-testid': dataTestId });
+    await renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-   await renderComponent({ ref });
+    await renderComponent({ ref });
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-   await renderComponent({ 'data-testid': dataTestId });
+    await renderComponent({ 'data-testid': dataTestId });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       UserProfileImage.displayName
@@ -91,17 +93,19 @@ describe(componentName, () => {
   });
 
   it('should render the initials when passed the initials prop', async () => {
-   await renderComponent({ initials: 'Display name' });
+    await renderComponent({ initials: 'Display name' });
     expect(screen.getByText(/DN/));
   });
 
   it('should render the initials when simply passing two initials to the initials prop', async () => {
-   await renderComponent({ initials: 'DN' });
+    await renderComponent({ initials: 'DN' });
     expect(screen.getByText(/DN/));
   });
 
   it('should render the IconButton component if the tooltipText prop is passed', async () => {
-    const { container } = await renderComponent({ tooltipText: 'Display name' });
+    const { container } = await renderComponent({
+      tooltipText: 'Display name',
+    });
     const tooltipElement = container.querySelector(
       `.${carbon.prefix}--icon-tooltip`
     );
@@ -109,8 +113,8 @@ describe(componentName, () => {
   });
 
   it('should throw a custom prop type validation error when an image is used without an imageDescription prop', async () =>
-    expectError(required('imageDescription', 'UserProfileImage'), () => {
-     await renderComponent({ image: 'path_to_image.jpg' });
+    expectError(required('imageDescription', 'UserProfileImage'), async () => {
+      await renderComponent({ image: 'path_to_image.jpg' });
     }));
 
   it('should display a custom icon if one is provided', async () => {

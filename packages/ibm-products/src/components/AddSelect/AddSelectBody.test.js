@@ -232,7 +232,9 @@ describe(componentName, () => {
   });
 
   it('renders SingleAddSelectBody', async () => {
-    const { container } = render(<AddSelectBody {...singleHierarchyProps} />);
+    const { container } = await render(
+      <AddSelectBody {...singleHierarchyProps} />
+    );
     expect(container.querySelector(`.${blockClass}__single`)).toBeVisible();
   });
 

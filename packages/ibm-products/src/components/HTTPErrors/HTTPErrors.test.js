@@ -46,7 +46,7 @@ const defaultProps = {
 
 describe(componentName, () => {
   it('has no accessibility violations', async () => {
-    const { container } = render(
+    const { container } = await render(
       <main>
         <HTTPError404 {...defaultProps} />
       </main>
@@ -56,7 +56,7 @@ describe(componentName, () => {
   });
 
   it('Renders the component `HTTPErrors` if flag is enabled', async () => {
-    const { container } = render(<HTTPError404 {...defaultProps} />);
+    const { container } = await render(<HTTPError404 {...defaultProps} />);
     expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
     expect(screen.getByText(title));
     const link = screen.getByRole('link', { name: 'Carbon Design System' });
@@ -65,14 +65,14 @@ describe(componentName, () => {
 
   it('adds a class to the containing node', async () => {
     expect(
-     await render(<HTTPError404 {...defaultProps} />).container.querySelector(
+      await render(<HTTPError404 {...defaultProps} />).container.querySelector(
         `.${className}`
       )
     ).toBeInTheDocument();
   });
 
   it('should render the HTTPError404 component', async () => {
-    const { container } = render(<HTTPError404 {...defaultProps} />);
+    const { container } = await render(<HTTPError404 {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
     expect(screen.getByText('Carbon for IBM Products component library'));
@@ -82,8 +82,8 @@ describe(componentName, () => {
     ).toBeInTheDocument();
   });
 
-  it("adds the Devtools attribute to the `HTTPError404`'s containing node", () => {
-   await render(<HTTPError404 {...defaultProps} data-testid={dataTestId} />);
+  it("adds the Devtools attribute to the `HTTPError404`'s containing node", async () => {
+    await render(<HTTPError404 {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
@@ -91,7 +91,7 @@ describe(componentName, () => {
   });
 
   it('should render the HTTPError403 component', async () => {
-    const { container } = render(<HTTPError403 {...defaultProps} />);
+    const { container } = await render(<HTTPError403 {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
     expect(screen.getByText('Carbon for IBM Products component library'));
@@ -101,8 +101,8 @@ describe(componentName, () => {
     ).toBeInTheDocument();
   });
 
-  it("adds the Devtools attribute to the `HTTPError403`'s containing node", () => {
-   await render(<HTTPError403 {...defaultProps} data-testid={dataTestId} />);
+  it("adds the Devtools attribute to the `HTTPError403`'s containing node", async () => {
+    await render(<HTTPError403 {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       HTTPError403.displayName
@@ -110,7 +110,7 @@ describe(componentName, () => {
   });
 
   it('should render the HTTPErrorOther component', async () => {
-    const { container } = render(<HTTPErrorOther {...defaultProps} />);
+    const { container } = await render(<HTTPErrorOther {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
     expect(screen.getByText('Carbon for IBM Products component library'));
@@ -120,8 +120,8 @@ describe(componentName, () => {
     ).toBeInTheDocument();
   });
 
-  it("adds the Devtools attribute to the `HTTPErrorOther`'s containing node", () => {
-   await render(<HTTPErrorOther {...defaultProps} data-testid={dataTestId} />);
+  it("adds the Devtools attribute to the `HTTPErrorOther`'s containing node", async () => {
+    await render(<HTTPErrorOther {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       HTTPErrorOther.displayName

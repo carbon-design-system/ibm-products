@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -28,7 +28,7 @@ describe(componentName, () => {
       onPrimaryButtonClick,
     };
     await render(<Card {...props} />);
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onPrimaryButtonClick).toHaveBeenCalled();
   });
 
@@ -43,9 +43,9 @@ describe(componentName, () => {
       onSecondaryButtonClick,
     };
     await render(<Card {...props} />);
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onPrimaryButtonClick).toHaveBeenCalled();
-    click(screen.getByText(props.secondaryButtonText));
+    await act(() => click(screen.getByText(props.secondaryButtonText)));
     expect(onSecondaryButtonClick).toHaveBeenCalled();
   });
 
@@ -70,7 +70,7 @@ describe(componentName, () => {
       actionIcons,
     };
     await render(<Card {...props} />);
-    click(screen.getByText('withOnClick'));
+    await act(() => click(screen.getByText('withOnClick')));
     expect(onClick).toHaveBeenCalled();
     expect(screen.getByText('withHref').closest('a')).toHaveAttribute(
       'href',
@@ -84,8 +84,8 @@ describe(componentName, () => {
     const props = {
       onClick,
     };
-    const { container } = render(<Card {...props} />);
-    click(container.firstChild);
+    const { container } = await render(<Card {...props} />);
+    await act(() => click(container.firstChild));
     expect(onClick).toHaveBeenCalled();
   });
 
@@ -126,18 +126,18 @@ describe(componentName, () => {
       onPrimaryButtonClick: buttonClick,
       actionsPlacement: 'bottom',
     };
-    const { container, rerender } = render(<Card {...props} />);
+    const { container, rerender } = await render(<Card {...props} />);
     expect(screen.getByText(props.label)).toBeVisible();
     expect(
       container.querySelector(`.${blockClass}__footer .${blockClass}__actions`)
     ).toBeVisible();
-    click(screen.getByText('withOnClick'));
+    await act(() => click(screen.getByText('withOnClick')));
     expect(iconClick).toHaveBeenCalled();
     expect(screen.getByText('withHref').closest('a')).toHaveAttribute(
       'href',
       '#'
     );
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(buttonClick).toHaveBeenCalled();
     await rerender(<Card {...props} actionsPlacement="top" />);
     expect(
@@ -159,12 +159,14 @@ describe(componentName, () => {
       overflowAriaLabel: 'Overflow menu',
       actionsPlacement: 'bottom',
     };
-    const { container, rerender } = render(<Card {...props} />);
+    const { container, rerender } = await render(<Card {...props} />);
     expect(
       container.querySelector(`.${blockClass}__footer .${blockClass}__actions`)
     ).toBeVisible();
-    click(container.querySelector(`.${carbon.prefix}--overflow-menu`));
-    click(screen.getByText('Edit'));
+    await act(() =>
+      click(container.querySelector(`.${carbon.prefix}--overflow-menu`))
+    );
+    await act(() => click(screen.getByText('Edit')));
     expect(onClick).toHaveBeenCalled();
     await rerender(<Card {...props} actionsPlacement="top" />);
     expect(
@@ -185,27 +187,33 @@ describe(componentName, () => {
       actionIcons: [],
       children: <p>body</p>,
     };
-    const { rerender, container } = render(<Card {...props} />);
+    const { rerender, container } = await render(<Card {...props} />);
     expect(screen.getByText(props.title)).toBeVisible();
     expect(screen.getByText(props.description)).toBeVisible();
-    click(container.querySelector(`.${blockClass}__clickable`));
+    await act(() =>
+      click(container.querySelector(`.${blockClass}__clickable`))
+    );
     expect(onClick).toHaveBeenCalled();
     await rerender(<Card {...props} clickZone="two" />);
-    click(container.querySelector(`.${blockClass}__clickable`));
+    await act(() =>
+      click(container.querySelector(`.${blockClass}__clickable`))
+    );
     expect(onClick).toHaveBeenCalled();
     await rerender(<Card {...props} clickZone="three" />);
-    click(container.querySelector(`.${blockClass}__clickable`));
+    await act(() =>
+      click(container.querySelector(`.${blockClass}__clickable`))
+    );
     expect(onClick).toHaveBeenCalled();
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<Card />);
+    const { container } = await render(<Card />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(<Card className="test-class" />);
+    const { container } = await render(<Card className="test-class" />);
     expect(container.firstChild).toHaveClass('test-class');
   });
 

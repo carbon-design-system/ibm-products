@@ -5,7 +5,13 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { fireEvent, render, waitFor, screen } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  waitFor,
+  screen,
+  act,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { carbon } from '../../settings';
@@ -86,7 +92,7 @@ describe(componentName, () => {
   });
 
   it('renders the input with an id', async () => {
-    const { container } = render(<ImportModal {...defaultProps} />);
+    const { container } = await render(<ImportModal {...defaultProps} />);
     container.querySelector(defaultProps.inputId);
   });
 
@@ -99,14 +105,14 @@ describe(componentName, () => {
       ...defaultProps,
       onRequestSubmit,
     };
-    const { getByText, container } = render(<ImportModal {...props} />);
+    const { getByText, container } = await render(<ImportModal {...props} />);
 
     expect(
       getByText(props.inputButtonText).classList.contains(
         `${carbon.prefix}--btn--disabled`
       )
     ).toBe(true);
-    click(getByText(props.primaryButtonText));
+    await act(() => click(getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
@@ -117,12 +123,12 @@ describe(componentName, () => {
         `${carbon.prefix}--btn--disabled`
       )
     ).not.toBe(true);
-    click(getByText(props.inputButtonText));
+    await act(() => click(getByText(props.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(
       screen.getByText(`1 / 1 ${defaultProps.fileUploadLabel}`)
     ).toBeVisible();
-    click(getByText(props.primaryButtonText));
+    await act(() => click(getByText(props.primaryButtonText)));
     expect(onRequestSubmit).toBeCalled();
   });
 
@@ -130,12 +136,14 @@ describe(componentName, () => {
     fetch.mockImplementationOnce(() => Promise.reject('fetch failed'));
     const { change } = fireEvent;
     const { click } = userEvent;
-    const { getByText, container } = render(<ImportModal {...defaultProps} />);
+    const { getByText, container } = await render(
+      <ImportModal {...defaultProps} />
+    );
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.jpeg' },
     });
-    click(getByText(defaultProps.inputButtonText));
+    await act(() => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.fetchErrorBody)).toBeVisible();
     expect(getByText(defaultProps.fetchErrorHeader)).toBeVisible();
@@ -153,12 +161,12 @@ describe(componentName, () => {
       fetchErrorBody: '',
       fetchErrorHeader: '',
     };
-    const { getByText, container } = render(<ImportModal {...props} />);
+    const { getByText, container } = await render(<ImportModal {...props} />);
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.jpeg' },
     });
-    click(getByText(defaultProps.inputButtonText));
+    await act(() => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(props.defaultErrorBody)).toBeVisible();
     expect(getByText(props.defaultErrorHeader)).toBeVisible();
@@ -175,12 +183,14 @@ describe(componentName, () => {
     );
     const { change } = fireEvent;
     const { click } = userEvent;
-    const { getByText, container } = render(<ImportModal {...defaultProps} />);
+    const { getByText, container } = await render(
+      <ImportModal {...defaultProps} />
+    );
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.jpeg' },
     });
-    click(getByText(defaultProps.inputButtonText));
+    await act(() => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.fetchErrorBody)).toBeVisible();
     expect(getByText(defaultProps.fetchErrorHeader)).toBeVisible();
@@ -199,12 +209,14 @@ describe(componentName, () => {
     );
     const { change } = fireEvent;
     const { click } = userEvent;
-    const { getByText, container } = render(<ImportModal {...defaultProps} />);
+    const { getByText, container } = await render(
+      <ImportModal {...defaultProps} />
+    );
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.pdf' },
     });
-    click(getByText(defaultProps.inputButtonText));
+    await act(() => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.invalidFileTypeErrorBody)).toBeVisible();
     expect(getByText(defaultProps.invalidFileTypeErrorHeader)).toBeVisible();
@@ -228,12 +240,12 @@ describe(componentName, () => {
       invalidFileTypeErrorBody: '',
       invalidFileTypeErrorHeader: '',
     };
-    const { getByText, container } = render(<ImportModal {...props} />);
+    const { getByText, container } = await render(<ImportModal {...props} />);
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.pdf' },
     });
-    click(getByText(defaultProps.inputButtonText));
+    await act(() => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(props.defaultErrorBody)).toBeVisible();
     expect(getByText(props.defaultErrorHeader)).toBeVisible();
@@ -245,7 +257,9 @@ describe(componentName, () => {
   it('should successfully use the drag and drop component to upload a file and then remove the file', async () => {
     const { change } = fireEvent;
     const { click } = userEvent;
-    const { getByText, container } = render(<ImportModal {...defaultProps} />);
+    const { getByText, container } = await render(
+      <ImportModal {...defaultProps} />
+    );
     const files = [new File(['foo'], 'foo.jpeg', { type: 'image/jpeg' })];
 
     change(container.querySelector(`.${carbon.prefix}--file-input`), {
@@ -255,7 +269,9 @@ describe(componentName, () => {
     expect(
       screen.getByText(`1 / 1 ${defaultProps.fileUploadLabel}`)
     ).toBeVisible();
-    click(container.querySelector(`.${carbon.prefix}--file-close`));
+    await act(() =>
+      click(container.querySelector(`.${carbon.prefix}--file-close`))
+    );
     expect(
       container.querySelector(`.${carbon.prefix}--file-filename`)
     ).toBeNull();
@@ -268,12 +284,12 @@ describe(componentName, () => {
       ...defaultProps,
       maxFileSize: 1,
     };
-    const { getByText, container } = render(<ImportModal {...props} />);
+    const { getByText, container } = await render(<ImportModal {...props} />);
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.pdf' },
     });
-    click(getByText(defaultProps.inputButtonText));
+    await act(() => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.maxFileSizeErrorBody)).toBeVisible();
     expect(getByText(defaultProps.maxFileSizeErrorHeader)).toBeVisible();
@@ -291,12 +307,12 @@ describe(componentName, () => {
       maxFileSizeErrorHeader: '',
       maxFileSize: 1,
     };
-    const { getByText, container } = render(<ImportModal {...props} />);
+    const { getByText, container } = await render(<ImportModal {...props} />);
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.pdf' },
     });
-    click(getByText(defaultProps.inputButtonText));
+    await act(() => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(props.defaultErrorBody)).toBeVisible();
     expect(getByText(props.defaultErrorHeader)).toBeVisible();
@@ -310,13 +326,13 @@ describe(componentName, () => {
   // https://github.com/carbon-design-system/carbon/issues/8847 this test
   // should be reinstated.
   it('has no accessibility violations', async () => {
-    const { container } = render(<ImportModal {...defaultProps} />);
+    const { container } = await render(<ImportModal {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(<ImportModal {...defaultProps} />);
+    const { container } = await render(<ImportModal {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 

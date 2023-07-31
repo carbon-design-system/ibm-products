@@ -164,7 +164,7 @@ describe(ActionBar.displayName, () => {
 
   it('Does not duplicate action IDs', async () => {
     // not enough room so should see an overflow.
-    const { container } = render(
+    const { container } = await render(
       <TestActionBar
         width={200}
         overflowAriaLabel={overflowAriaLabel}

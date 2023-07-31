@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
@@ -39,7 +39,7 @@ const defaultProps = {
 };
 
 const renderComponent = ({ ...rest } = {}) =>
- render(
+  render(
     <CreateTearsheetNarrow {...defaultProps} {...rest}>
       {children}
     </CreateTearsheetNarrow>
@@ -69,7 +69,7 @@ describe(componentName, () => {
   });
 
   it('renders a component CreateTearsheetNarrow', async () => {
-   await renderComponent();
+    await renderComponent();
     expect(screen.getByText(/Create action/)).toBeVisible();
     expect(screen.getByText(defaultProps.formDescription)).toBeVisible();
     expect(screen.getByText(defaultProps.formTitle)).toBeVisible();
@@ -90,8 +90,8 @@ describe(componentName, () => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, () => {
-   await renderComponent();
+  it(`renders children`, async () => {
+    await renderComponent();
     screen.getByText(children);
   });
 
@@ -102,18 +102,18 @@ describe(componentName, () => {
   });
 
   it('adds additional props to the containing node', async () => {
-   await renderComponent({ 'data-testid': dataTestId });
+    await renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-   await renderComponent({ ref });
+    await renderComponent({ ref });
     expect(ref.current).not.toBeNull();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-   await renderComponent({ 'data-testid': dataTestId });
+    await renderComponent({ 'data-testid': dataTestId });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
@@ -121,7 +121,7 @@ describe(componentName, () => {
   });
 
   it('should disable the primary action button', async () => {
-   await renderComponent({
+    await renderComponent({
       disableSubmit: true,
     });
     expect(
@@ -131,9 +131,9 @@ describe(componentName, () => {
 
   it('should click on both action buttons', async () => {
     const { click } = userEvent;
-   await renderComponent();
-    click(screen.getByText(defaultProps.primaryButtonText));
-    click(screen.getByText(defaultProps.secondaryButtonText));
+    await renderComponent();
+    await act(() => click(screen.getByText(defaultProps.primaryButtonText)));
+    await act(() => click(screen.getByText(defaultProps.secondaryButtonText)));
     expect(onRequestCloseFn).toHaveBeenCalledTimes(1);
     expect(onRequestSubmitFn).toHaveBeenCalledTimes(1);
   });

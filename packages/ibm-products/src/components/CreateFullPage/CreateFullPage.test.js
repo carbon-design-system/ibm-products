@@ -75,7 +75,7 @@ const stepFormField = (
 );
 
 const renderComponent = ({ ...rest } = {}) =>
- render(
+  render(
     <CreateFullPage
       {...rest}
       onRequestSubmit={onRequestSubmitRejectFn}
@@ -99,7 +99,7 @@ const renderCreateFullPage = ({
   rejectOnSubmitNext = false,
   ...rest
 }) =>
- render(
+  render(
     <CreateFullPage
       {...rest}
       onRequestSubmit={rejectOnSubmit ? onRequestSubmitRejectFn : submitFn}
@@ -132,7 +132,7 @@ const renderCreateFullPage = ({
   );
 
 const renderEmptyCreateFullPage = ({ ...rest } = {}) =>
- render(
+  render(
     <CreateFullPage
       {...rest}
       {...defaultFullPageProps}
@@ -143,7 +143,7 @@ const renderEmptyCreateFullPage = ({ ...rest } = {}) =>
   );
 
 const renderOneStepCreateFullPage = ({ ...rest } = {}) =>
- render(
+  render(
     <CreateFullPage
       {...rest}
       {...defaultFullPageProps}
@@ -154,7 +154,7 @@ const renderOneStepCreateFullPage = ({ ...rest } = {}) =>
   );
 
 const renderFullPageWithStepChildrenOutside = ({ ...rest } = {}) =>
- render(
+  render(
     <>
       <CreateFullPage
         {...rest}
@@ -190,7 +190,9 @@ describe(componentName, () => {
   });
 
   it('renders the CreateFullPage component', async () => {
-    const { container } = await renderCreateFullPage({ ...defaultFullPageProps });
+    const { container } = await renderCreateFullPage({
+      ...defaultFullPageProps,
+    });
     expect(container.querySelector(`.${blockClass}`)).toBeTruthy();
   });
 
@@ -205,10 +207,12 @@ describe(componentName, () => {
   });
 
   it('should create a console warning when using CreateFullPage with only one step', async () =>
-    expectWarn('CreateFullPages with one step are not permitted', () => {
-      const { container } = await renderOneStepCreateFullPage(defaultFullPageProps);
+    expectWarn('CreateFullPages with one step are not permitted', async () => {
+      const { container } = await renderOneStepCreateFullPage(
+        defaultFullPageProps
+      );
       expect(async () => {
-       await render(...container);
+        await render(...container);
       }).toThrow();
     }));
 
@@ -218,11 +222,12 @@ describe(componentName, () => {
         `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
         `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
       ],
-      () => {
-        const { container } =
-         await renderFullPageWithStepChildrenOutside(defaultFullPageProps);
-        expect(() => {
-         await render(...container);
+      async () => {
+        const { container } = await renderFullPageWithStepChildrenOutside(
+          defaultFullPageProps
+        );
+        expect(async () => {
+          await render(...container);
         }).toThrow();
       }
     ));
@@ -248,7 +253,9 @@ describe(componentName, () => {
 
   it('renders a modal when cancel button has been clicked and recognizes primary and secondary button clicks in modal', async () => {
     const { click } = userEvent;
-    const { container, rerender } = await renderCreateFullPage(defaultFullPageProps);
+    const { container, rerender } = await renderCreateFullPage(
+      defaultFullPageProps
+    );
     const cancelButtonElement = screen.getByText(cancelButtonText);
     await act(() => click(cancelButtonElement));
     const createFullPageModal = container.querySelector(
@@ -260,7 +267,7 @@ describe(componentName, () => {
     await act(() => click(modalCancelButtonElement));
     expect(onCloseFn).toHaveBeenCalled();
 
-   await rerender(
+    await rerender(
       <CreateFullPage
         onRequestSubmit={onRequestSubmitRejectFn}
         {...defaultFullPageProps}
@@ -404,7 +411,7 @@ describe(componentName, () => {
 
   it('should disable the submit button when `disableSubmit` prop is passed in FullPageStep', async () => {
     const { click } = userEvent;
-   await render(
+    await render(
       <CreateFullPage
         onRequestSubmit={onRequestSubmitRejectFn}
         {...defaultFullPageProps}
@@ -460,7 +467,9 @@ describe(componentName, () => {
   });
 
   it('should render a fieldset element around FullPageStep children when `hasFieldset` prop is provided', async () => {
-    const { container } = await renderCreateFullPage({ ...defaultFullPageProps });
+    const { container } = await renderCreateFullPage({
+      ...defaultFullPageProps,
+    });
     const createFullPageSteps = container.querySelector(
       `.${blockClass}__content`
     ).children;

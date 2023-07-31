@@ -17,14 +17,16 @@ describe(componentName, () => {
     await render(<ExpressiveCard />);
   });
 
-  it.skip('has no accessibility violations', async () => {
-    const { container } = render(<ExpressiveCard />);
+  it('has no accessibility violations', async () => {
+    const { container } = await render(<ExpressiveCard />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(<ExpressiveCard className="test-class" />);
+    const { container } = await render(
+      <ExpressiveCard className="test-class" />
+    );
     expect(container.firstChild).toHaveClass('test-class');
   });
 

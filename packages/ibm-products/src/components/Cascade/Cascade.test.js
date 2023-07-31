@@ -16,7 +16,7 @@ const componentName = Cascade.displayName;
 
 describe(componentName, () => {
   it('renders without grid', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Cascade>
         <div>card 1</div>
         <div>card 2</div>
@@ -31,7 +31,7 @@ describe(componentName, () => {
   });
 
   it('renders with grid', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Cascade grid>
         <div className="row">
           <div>card 1</div>
@@ -52,7 +52,7 @@ describe(componentName, () => {
   });
 
   it('renders with grid but no columns', async () => {
-    const { container } = render(
+    const { container } = await render(
       <Cascade grid>
         <div className="row" />
       </Cascade>
@@ -62,14 +62,14 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<Cascade />);
+    const { container } = await render(<Cascade />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
     const className = 'test-class';
-    const { container } = render(<Cascade className={className} />);
+    const { container } = await render(<Cascade className={className} />);
     expect(container.firstChild).toHaveClass(className);
   });
 

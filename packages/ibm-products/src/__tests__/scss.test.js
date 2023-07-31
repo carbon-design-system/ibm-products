@@ -23,7 +23,7 @@ const scssAll = [
 describe('SCSS entry points', () => {
   // This test will fail for any of our SCSS entry points that does not compile.
   scssAll.forEach((file) =>
-    it(`${file.match(/\/src\/(.*)/)[1]} compiles as valid SCSS`, () => {
+    it(`${file.match(/\/src\/(.*)/)[1]} compiles as valid SCSS`, async () => {
       expect(() => scssCheck(file)).not.toThrow();
     })
   );

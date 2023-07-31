@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { carbon, pkg } from '../../settings';
 import { EditTearsheet } from './EditTearsheet';
@@ -167,7 +167,7 @@ describe(componentName, () => {
     const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
     expect(editTearsheet).toHaveClass('is-visible');
     const closeButton = screen.getByTitle('Close');
-    userEvent.click(closeButton);
+    await act(() => userEvent.click(closeButton));
     expect(editTearsheet).not.toHaveClass('is-visible');
   });
 

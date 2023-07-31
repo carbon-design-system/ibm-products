@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import React from 'react';
@@ -53,7 +53,7 @@ describe('Notifications', () => {
     });
     expect(screen.queryAllByText(/Notifications/i)).toBeTruthy();
     const outerElement = container.querySelector(`.${blockClass}`);
-    userEvent.click(container);
+    await act(() => userEvent.click(container));
     expect(onClickOutside).toHaveBeenCalled();
     animationStart(outerElement);
     await rerender(
@@ -70,7 +70,9 @@ describe('Notifications', () => {
       data: [],
     });
 
-    userEvent.click(screen.getByRole('switch', /Do not disturb/i));
+    await act(() =>
+      userEvent.click(screen.getByRole('switch', /Do not disturb/i))
+    );
     expect(onToggle).toBeCalled();
   });
 
@@ -166,7 +168,7 @@ describe('Notifications', () => {
       ],
     });
     const logLink = screen.getByText(/view logs/i);
-    userEvent.click(logLink);
+    await act(() => userEvent.click(logLink));
     expect(logLink);
   });
 
@@ -220,7 +222,7 @@ describe('Notifications', () => {
     const { container } = await renderNotifications({
       data: [],
     });
-    userEvent.click(container);
+    await act(() => userEvent.click(container));
     expect(onClickOutside).toHaveBeenCalled();
   });
 
@@ -242,7 +244,7 @@ describe('Notifications', () => {
     const readMoreButton = notificationElement.querySelector(
       `.${blockClass}__notification-read-more-button`
     );
-    userEvent.click(readMoreButton);
+    await act(() => userEvent.click(readMoreButton));
     const readLessButton = notificationElement.querySelector(
       `.${readLessClassName}`
     );
@@ -260,7 +262,7 @@ describe('Notifications', () => {
     const dismissIconButtonElement = notificationElement.querySelector(
       `.${dismissSingleNotificationClass}`
     );
-    userEvent.click(dismissIconButtonElement);
+    await act(() => userEvent.click(dismissIconButtonElement));
     expect(onDismissSingleNotificationFn).toBeCalled();
   });
 
@@ -305,7 +307,7 @@ describe('Notifications', () => {
       data,
       onDismissAllNotifications: onDismissAllNotificationsFn,
     });
-    userEvent.click(screen.getByText(/Dismiss all/i));
+    await act(() => userEvent.click(screen.getByText(/Dismiss all/i)));
     expect(onDismissAllNotificationsFn).toBeCalled();
   });
 
@@ -317,8 +319,14 @@ describe('Notifications', () => {
       onViewAllClick: onViewAllFn,
       onSettingsClick: onSettingsClickFn,
     });
-    userEvent.click(screen.getByText(`View all (${data.length})`));
-    userEvent.click(container.querySelector(`.${blockClass}__settings-button`));
+    await act(() =>
+      userEvent.click(screen.getByText(`View all (${data.length})`))
+    );
+    await act(() =>
+      userEvent.click(
+        container.querySelector(`.${blockClass}__settings-button`)
+      )
+    );
     expect(onViewAllFn).toBeCalled();
     expect(onSettingsClickFn).toBeCalled();
   });
@@ -328,13 +336,13 @@ describe('Notifications', () => {
       data: testData,
     });
     const dismissAllButton = screen.getByText(/Dismiss all/i);
-    userEvent.click(dismissAllButton);
+    await act(() => userEvent.click(dismissAllButton));
     const notificationElement = screen.getByText(/Test notification title/i)
       .parentNode.parentNode;
     const dismissSingleNotificationClass = `${blockClass}__dismiss-single-button`;
     const dismissIconButtonElement = notificationElement.querySelector(
       `.${dismissSingleNotificationClass}`
     );
-    userEvent.click(dismissIconButtonElement);
+    await act(() => userEvent.click(dismissIconButtonElement));
   });
 });

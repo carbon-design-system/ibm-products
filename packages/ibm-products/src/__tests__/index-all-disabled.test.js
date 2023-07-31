@@ -42,8 +42,8 @@ describe(name, () => {
         continue;
       }
 
-      it(`Renders a canary for "${key}" if package flags set to disable`, () => {
-        const { container } = render(<TestComponent />);
+      it(`Renders a canary for "${key}" if package flags set to disable`, async () => {
+        const { container } = await render(<TestComponent />);
         expect(container.querySelector(`.${canaryClass}`)).not.toBeNull();
       });
     }

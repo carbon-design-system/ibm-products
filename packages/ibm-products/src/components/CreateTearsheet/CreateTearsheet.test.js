@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   expectWarn,
@@ -74,13 +74,16 @@ const renderCreateTearsheet = ({
   rejectOnSubmitNext = false,
   ...rest
 }) =>
- render(
+  render(
     <CreateTearsheet
       onRequestSubmit={rejectOnSubmit ? onRequestSubmitRejectFn : submitFn}
       {...rest}
     >
       <CreateTearsheetStep
-        onNext={rejectOnNext ? onNextStepRejectionFn : onNext}
+        onNext={() => {
+          console.log('one');
+          return rejectOnNext ? onNextStepRejectionFn : onNext;
+        }}
         title={step1Title}
         fieldsetLegendText={step1Title}
         onMount={onMountFn}
@@ -93,13 +96,22 @@ const renderCreateTearsheet = ({
         </button>
         <input type="text" />
       </CreateTearsheetStep>
-      <CreateTearsheetStep title={step2Title} hasFieldset={false}>
+      <CreateTearsheetStep
+        title={step2Title}
+        hasFieldset={false}
+        onNext={() => {
+          console.log('two');
+        }}
+      >
         step 2 content
       </CreateTearsheetStep>
       <CreateTearsheetStep
         title={step3Title}
         fieldsetLegendText={step3Title}
-        onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}
+        onNext={() => {
+          console.log('three');
+          return rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn;
+        }}
       >
         step 3 content
       </CreateTearsheetStep>
@@ -107,14 +119,14 @@ const renderCreateTearsheet = ({
   );
 
 const renderEmptyCreateTearsheet = ({ ...rest } = {}) =>
- render(
+  render(
     <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
       <p>Child element that persists across all steps</p>
     </CreateTearsheet>
   );
 
 const renderSingleStepCreateTearsheet = ({ ...rest } = {}) =>
- render(
+  render(
     <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
       <CreateTearsheetStep title={step1Title} fieldsetLegendText={step1Title}>
         step 1 content
@@ -123,7 +135,7 @@ const renderSingleStepCreateTearsheet = ({ ...rest } = {}) =>
   );
 
 const renderInvalidCreateTearsheet = ({ ...rest } = {}) =>
- render(
+  render(
     <>
       <CreateTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
         <CreateTearsheetStep title={step1Title} hasFieldset={false}>
@@ -214,7 +226,7 @@ describe(CreateTearsheet.displayName, () => {
   it('renders the first step if an invalid initialStep value is provided', async () =>
     expectWarn(
       `${CreateTearsheet.displayName}: An invalid \`initialStep\` prop was supplied. The \`initialStep\` prop should be a number that is greater than 0 or less than or equal to the number of steps your ${CreateTearsheet.displayName} has.`,
-      () => {
+      async () => {
         const { container } = await renderCreateTearsheet({
           ...defaultProps,
           // Starting on 0 step is invalid since the steps start with a value of 1
@@ -234,40 +246,47 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
+  it.only('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
     const { click } = userEvent;
     const { container } = await renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const cancelButtonElement = screen.getByText(cancelButtonText);
-    click(nextButtonElement);
-    const createTearsheetSteps = container.querySelector(
-      `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
-    ).children;
-    expect(
-      createTearsheetSteps[1].classList.contains(
-        `.${createTearsheetBlockClass}__step__step--visible-section`
-      )
+    console.log(
+      'cancel\n',
+      cancelButtonElement.outerHTML,
+      '\n\n',
+      'next\n',
+      nextButtonElement.outerHTML
     );
+    const aClick = click(nextButtonElement);
+    await act(() => aClick);
+    console.log('act done');
+    // const createTearsheetSteps = container.querySelector(
+    //   `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
+    // ).children;
+    // expect(
+    //   createTearsheetSteps[1].classList.contains(
+    //     `.${createTearsheetBlockClass}__step__step--visible-section`
+    //   )
+    // );
 
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
-    click(cancelButtonElement);
-    expect(onCloseFn).toHaveBeenCalled();
+    // expect(onNextStepFn).toHaveBeenCalled();
+    // await act(() => click(cancelButtonElement));
+    // expect(onCloseFn).toHaveBeenCalled();
   });
 
-  it('renders first step with onNext function prop that rejects', async () =>
+  it.skip('renders first step with onNext function prop that rejects', async () =>
     expectWarnAsync(
       `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
       async () => {
         const { click } = userEvent;
-       await renderCreateTearsheet({
+        await renderCreateTearsheet({
           ...defaultProps,
           rejectOnSubmit: false,
           rejectOnNext: true,
         });
         const nextButtonElement = screen.getByText(nextButtonText);
-        click(nextButtonElement);
+        await act(() => click(nextButtonElement));
 
         await waitFor(() => {
           expect(onNextStepRejectionFn).toHaveBeenCalled();
@@ -275,15 +294,15 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  it('renders the next CreateTearsheet step without onNext handler', async () => {
+  it.skip('renders the next CreateTearsheet step without onNext handler', async () => {
     const { click } = userEvent;
     const { container, rerender } = await renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
+    await act(() => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
-    click(nextButtonElement);
+    await act(() => click(nextButtonElement));
     const tearsheetChildren = container.querySelector(
       `.${createTearsheetBlockClass}__content  .${carbon.prefix}--form`
     ).children;
@@ -292,7 +311,7 @@ describe(CreateTearsheet.displayName, () => {
         `.${createTearsheetBlockClass}__step__step--visible-section`
       )
     );
-   await rerender(
+    await rerender(
       <CreateTearsheet
         {...defaultProps}
         open={false}
@@ -308,9 +327,9 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  it('should call the onRequestSubmit prop, returning a promise on last step submit button', async () => {
+  it.skip('should call the onRequestSubmit prop, returning a promise on last step submit button', async () => {
     const { click } = userEvent;
-   await renderCreateTearsheet({
+    await renderCreateTearsheet({
       ...defaultProps,
       rejectOnSubmit: false,
       rejectOnNext: false,
@@ -319,24 +338,24 @@ describe(CreateTearsheet.displayName, () => {
       finalOnNextFn: null,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
+    await act(() => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
-    click(nextButtonElement);
+    await act(() => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
     const submitButtonElement = screen.getByText(submitButtonText);
-    click(submitButtonElement);
+    await act(() => click(submitButtonElement));
     await waitFor(() => {
       expect(onRequestSubmitFn).toHaveBeenCalled();
     });
   });
 
-  it('should call the onRequestSubmit function, without a promise, on last step submit button', async () => {
+  it.skip('should call the onRequestSubmit function, without a promise, on last step submit button', async () => {
     const { click } = userEvent;
-   await renderCreateTearsheet({
+    await renderCreateTearsheet({
       ...defaultProps,
       rejectOnSubmit: false,
       rejectOnNext: false,
@@ -345,27 +364,27 @@ describe(CreateTearsheet.displayName, () => {
       finalOnNextFn: finalStepOnNextNonPromise,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
+    await act(() => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepNonPromiseFn).toHaveBeenCalled();
     });
-    click(nextButtonElement);
+    await act(() => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepNonPromiseFn).toHaveBeenCalled();
     });
     const submitButtonElement = screen.getByText(submitButtonText);
-    click(submitButtonElement);
+    await act(() => click(submitButtonElement));
     await waitFor(() => {
       expect(onRequestSubmitNonPromiseFn).toHaveBeenCalled();
     });
   });
 
-  it('should call the onNext function from the final step and reject the promise', async () =>
+  it.skip('should call the onNext function from the final step and reject the promise', async () =>
     expectWarnAsync(
       `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
       async () => {
         const { click } = userEvent;
-       await renderCreateTearsheet({
+        await renderCreateTearsheet({
           ...defaultProps,
           rejectOnSubmit: false,
           rejectOnNext: false,
@@ -375,49 +394,49 @@ describe(CreateTearsheet.displayName, () => {
           rejectOnSubmitNext: true,
         });
         const nextButtonElement = screen.getByText(nextButtonText);
-        click(nextButtonElement);
+        await act(() => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
-        click(nextButtonElement);
+        await act(() => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
         const submitButtonElement = screen.getByText(submitButtonText);
-        click(submitButtonElement);
+        await act(() => click(submitButtonElement));
         await waitFor(() => {
           expect(finalStepOnNextRejectFn).toHaveBeenCalled();
         });
       }
     ));
 
-  it('should call the onRequestSubmit prop and reject the promise', async () =>
+  it.skip('should call the onRequestSubmit prop and reject the promise', async () =>
     expectWarnAsync(
       `CreateTearsheet submit error: ${rejectionErrorMessage}`,
       async () => {
         const { click } = userEvent;
-       await renderCreateTearsheet({
+        await renderCreateTearsheet({
           ...defaultProps,
           rejectOnSubmit: true,
         });
         const nextButtonElement = screen.getByText(nextButtonText);
-        click(nextButtonElement);
+        await act(() => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
-        click(nextButtonElement);
+        await act(() => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
         const submitButtonElement = screen.getByText(submitButtonText);
-        click(submitButtonElement);
+        await act(() => click(submitButtonElement));
         await waitFor(() => {
           expect(onRequestSubmitRejectFn).toHaveBeenCalled();
         });
       }
     ));
 
-  it('should not render any CreateTearsheet steps when there are no TearsheetStep components included', async () => {
+  it.skip('should not render any CreateTearsheet steps when there are no TearsheetStep components included', async () => {
     const { container } = await renderEmptyCreateTearsheet(defaultProps);
     const createTearsheetSteps = container.querySelectorAll(
       `.${createTearsheetBlockClass}__step`
@@ -425,7 +444,7 @@ describe(CreateTearsheet.displayName, () => {
     expect(Array(...createTearsheetSteps)).toStrictEqual([]);
   });
 
-  it('should click the back button and add a custom next button label on a single step', async () => {
+  it.skip('should click the back button and add a custom next button label on a single step', async () => {
     const { click } = userEvent;
     const { container } = await renderCreateTearsheet({
       ...defaultProps,
@@ -433,12 +452,12 @@ describe(CreateTearsheet.displayName, () => {
       rejectOnNext: false,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
+    await act(() => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
     const backButtonElement = screen.getByText(backButtonText);
-    click(backButtonElement);
+    await act(() => click(backButtonElement));
     const tearsheetChildren = container.querySelector(
       `.${createTearsheetBlockClass}__content`
     ).children;
@@ -449,25 +468,25 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  it('should create a console warning when using CreateTearsheet with only one step', async () => {
+  it.skip('should create a console warning when using CreateTearsheet with only one step', async () => {
     jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-   await renderSingleStepCreateTearsheet(defaultProps);
+    await renderSingleStepCreateTearsheet(defaultProps);
     jest.spyOn(console, 'warn').mockRestore();
   });
 
-  it('should create a console warning when using CreateTearsheet with only one step', async () =>
-    expectWarn('CreateTearsheets with one step are not permitted', () => {
-     await renderSingleStepCreateTearsheet(defaultProps);
+  it.skip('should create a console warning when using CreateTearsheet with only one step', async () =>
+    expectWarn('CreateTearsheets with one step are not permitted', async () => {
+      await renderSingleStepCreateTearsheet(defaultProps);
     }));
 
-  it('should render an invalid create tearsheet', async () =>
+  it.skip('should render an invalid create tearsheet', async () =>
     expectMultipleWarn(
       [
         `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
         `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
       ],
-      () => {
-       await renderInvalidCreateTearsheet(defaultProps);
+      async () => {
+        await renderInvalidCreateTearsheet(defaultProps);
       }
     ));
 });

@@ -22,7 +22,7 @@ describe(name, () => {
 
     // dynamic import so we can modify the import on the component before using it
     const { StatusIcon } = await import('../components/StatusIcon');
-    const { container } = render(
+    const { container } = await render(
       <StatusIcon
         kind="fatal"
         size="sm"

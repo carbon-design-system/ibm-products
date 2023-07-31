@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import { BreadcrumbWithOverflow } from '.';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
@@ -155,7 +155,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     const overflowBtn = screen.getByLabelText(/Open and close/, {
       selector: `.${blockClass}__overflow-menu`,
     });
-    click(overflowBtn);
+    await act(() => click(overflowBtn));
 
     // <ul role='menu' /> but default <ul> role of list used for query
     // see https://testing-library.com/docs/queries/byrole/#api
@@ -251,7 +251,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
   it('does not duplicate ids', async () => {
     const plentyOfSpace = (breadcrumbItems.length + 1) * sizes.breadcrumbWidth;
 
-    const { container } = render(
+    const { container } = await render(
       <TestBreadcrumbWithOverflow
         width={plentyOfSpace}
         overflowAriaLabel="Open and close additional breadcrumb item list."

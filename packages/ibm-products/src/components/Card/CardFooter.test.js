@@ -22,7 +22,7 @@ describe(name, () => {
       hasActions: true,
       actions: <p>action 1</p>,
     };
-    const { getByText } = render(<CardFooter {...props} />);
+    const { getByText } = await render(<CardFooter {...props} />);
     expect(getByText('action 1')).toBeVisible();
   });
 
@@ -32,7 +32,7 @@ describe(name, () => {
       primaryButtonPlacement: 'bottom',
       primaryButtonText: 'primary button',
     };
-    const { getByText } = render(<CardFooter {...props} />);
+    const { getByText } = await render(<CardFooter {...props} />);
     expect(getByText(props.primaryButtonText)).toBeVisible();
   });
 
@@ -42,7 +42,7 @@ describe(name, () => {
       secondaryButtonPlacement: 'bottom',
       secondaryButtonText: 'secondary button',
     };
-    const { getByText } = render(<CardFooter {...props} />);
+    const { getByText } = await render(<CardFooter {...props} />);
     expect(getByText(props.secondaryButtonText)).toBeVisible();
   });
 
@@ -53,7 +53,7 @@ describe(name, () => {
       primaryButtonText: 'primary button',
       productive: true,
     };
-    const { getByText, container } = render(<CardFooter {...props} />);
+    const { getByText, container } = await render(<CardFooter {...props} />);
     expect(getByText(props.primaryButtonText)).toBeVisible();
     expect(
       container.querySelector(`.${carbon.prefix}--btn--ghost`)

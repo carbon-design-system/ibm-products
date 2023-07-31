@@ -28,12 +28,12 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<EditUpdateCards> </EditUpdateCards>);
+    const { container } = await render(<EditUpdateCards> </EditUpdateCards>);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
-  // it(`renders children`, () => {
+  // it(`renders children`,  async () => {
   //  await render(<EditUpdateCards>{children}</EditUpdateCards>);
   //   screen.getByText(children);
   // });

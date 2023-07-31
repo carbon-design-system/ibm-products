@@ -19,17 +19,19 @@ describe(name, () => {
   });
 
   it('renders a description', async () => {
-    const { getByText } = render(<CardHeader description="description" />);
+    const { getByText } = await render(
+      <CardHeader description="description" />
+    );
     expect(getByText('description')).toBeVisible();
   });
 
   it('renders a label', async () => {
-    const { getByText } = render(<CardHeader label="label" />);
+    const { getByText } = await render(<CardHeader label="label" />);
     expect(getByText('label')).toBeVisible();
   });
 
   it('renders a title', async () => {
-    const { getByText } = render(<CardHeader title="title" />);
+    const { getByText } = await render(<CardHeader title="title" />);
     expect(getByText('title')).toBeVisible();
   });
 
@@ -38,7 +40,7 @@ describe(name, () => {
       title: 'large title',
       titleSize: 'large',
     };
-    const { container } = render(<CardHeader {...props} />);
+    const { container } = await render(<CardHeader {...props} />);
     expect(container.querySelector(`.${blockClass}__title-lg`)).toBeVisible();
   });
 
@@ -47,7 +49,7 @@ describe(name, () => {
       hasActions: true,
       actions: <p key={1}>action 1</p>,
     };
-    const { getByText } = render(<CardHeader {...props} />);
+    const { getByText } = await render(<CardHeader {...props} />);
     expect(getByText('action 1')).toBeVisible();
   });
 });

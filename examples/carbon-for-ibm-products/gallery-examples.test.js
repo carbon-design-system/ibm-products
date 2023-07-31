@@ -44,188 +44,188 @@ import { Example as React17ExampleExample } from './react-17-example/src/Example
 describe('All examples', () => {
   init(beforeEach, afterEach);
 
-  it('APIKeyModal renders', async () => {
-    await render(<APIKeyModalExample />);
+  it('APIKeyModal renders', () => {
+    render(<APIKeyModalExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('AboutModal renders', async () => {
-    await render(<AboutModalExample />);
+  it('AboutModal renders', () => {
+    render(<AboutModalExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('Cascade renders', async () => {
-    await render(<CascadeExample />);
+  it('Cascade renders', () => {
+    render(<CascadeExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('CreateFullPage renders', async () => {
-    await render(<CreateFullPageExample />);
+  it('CreateFullPage renders', () => {
+    render(<CreateFullPageExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('CreateModal renders', async () => {
-    await render(<CreateModalExample />);
+  it('CreateModal renders', () => {
+    render(<CreateModalExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('CreateSidePanel renders', async () => {
-    await render(<CreateSidePanelExample />);
+  it('CreateSidePanel renders', () => {
+    render(<CreateSidePanelExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('CreateTearsheet renders', async () => {
-    await render(<CreateTearsheetExample />);
+  it('CreateTearsheet renders', () => {
+    render(<CreateTearsheetExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('CreateTearsheetNarrow renders', async () => {
-    await render(<CreateTearsheetNarrowExample />);
+  it('CreateTearsheetNarrow renders', () => {
+    render(<CreateTearsheetNarrowExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('DataSpreadsheet renders', async () => {
-    await render(<DataSpreadsheetExample />);
+  it('DataSpreadsheet renders', () => {
+    render(<DataSpreadsheetExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('Datagrid renders', async () => {
-    await render(<DatagridExample />);
+  it('Datagrid renders', () => {
+    render(<DatagridExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('EditInPlace renders', async () => {
-    await render(<EditInPlaceExample />);
+  it('EditInPlace renders', () => {
+    render(<EditInPlaceExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('EmptyStates renders', async () => {
-    await render(<EmptyStatesExample />);
+  it('EmptyStates renders', () => {
+    render(<EmptyStatesExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('ExportModal renders', async () => {
-    await render(<ExportModalExample />);
+  it('ExportModal renders', () => {
+    render(<ExportModalExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('ExpressiveCard renders', async () => {
-    await render(<ExpressiveCardExample />);
+  it('ExpressiveCard renders', () => {
+    render(<ExpressiveCardExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('HTTPErrors renders', async () => {
-    await render(<HTTPErrorsExample />);
+  it('HTTPErrors renders', () => {
+    render(<HTTPErrorsExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('ImportModal renders', async () => {
-    await render(<ImportModalExample />);
+  it('ImportModal renders', () => {
+    render(<ImportModalExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('NotificationsPanel renders', async () => {
-    await render(<NotificationsPanelExample />);
+  it('NotificationsPanel renders', () => {
+    render(<NotificationsPanelExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('OptionsTile renders', async () => {
-    await render(<OptionsTileExample />);
+  it('OptionsTile renders', () => {
+    render(<OptionsTileExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('PageHeader renders', async () => {
-    await render(<PageHeaderExample />);
+  it('PageHeader renders', () => {
+    render(<PageHeaderExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('ProductiveCard renders', async () => {
-    await render(<ProductiveCardExample />);
+  it('ProductiveCard renders', () => {
+    render(<ProductiveCardExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('RemoveModal renders', async () => {
-    await render(<RemoveModalExample />);
+  it('RemoveModal renders', () => {
+    render(<RemoveModalExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('Saving renders', async () => {
-    await render(<SavingExample />);
+  it('Saving renders', () => {
+    render(<SavingExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('SidePanel renders', async () => {
-    await render(<SidePanelExample />);
+  it('SidePanel renders', () => {
+    render(<SidePanelExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('StatusIcon renders', async () => {
-    await render(<StatusIconExample />);
+  it('StatusIcon renders', () => {
+    render(<StatusIconExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('TagSet renders', async () => {
-    await render(<TagSetExample />);
+  it('TagSet renders', () => {
+    render(<TagSetExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('Tearsheet renders', async () => {
-    await render(<TearsheetExample />);
+  it('Tearsheet renders', () => {
+    render(<TearsheetExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('UserProfileImage renders', async () => {
-    await render(<UserProfileImageExample />);
+  it('UserProfileImage renders', () => {
+    render(<UserProfileImageExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('WebTerminal renders', async () => {
-    await render(<WebTerminalExample />);
+  it('WebTerminal renders', () => {
+    render(<WebTerminalExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('PrefixExample renders', async () => {
-    await render(<PrefixExampleExample />);
+  it('PrefixExample renders', () => {
+    render(<PrefixExampleExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('React16Example renders', async () => {
-    await render(<React16ExampleExample />);
+  it('React16Example renders', () => {
+    render(<React16ExampleExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it('React17Example renders', async () => {
-    await render(<React17ExampleExample />);
+  it('React17Example renders', () => {
+    render(<React17ExampleExample />);
     // expect no errors int the console
     expect(console.error).not.toHaveBeenCalled();
   });

@@ -9,7 +9,7 @@ import React from 'react';
 import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Code, Copy } from '@carbon/react/icons';
-import { act, renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react-hooks';
 
 import { pkg } from '../../settings';
 
@@ -47,7 +47,7 @@ const MockWebTerminal = React.forwardRef(
 
 describe(name, () => {
   it('Renders the component `WebTerminal` if flag is enabled', async () => {
-    const { container } = render(
+    const { container } = await render(
       <MockWebTerminal>Body content</MockWebTerminal>
     );
 
@@ -60,16 +60,16 @@ describe(name, () => {
     issue. https://github.com/carbon-design-system/ibm-products/issues/2154
   */
   it('has no accessibility violations', async () => {
-    const { container } = render(
+    const { container } = await render(
       <MockWebTerminal isInitiallyOpen>Body content</MockWebTerminal>
     );
 
     await expect(container).toBeAccessible(componentName);
   });
 
-  test('should attach a custom class to the web terminal', () => {
+  it('should attach a custom class to the web terminal', async () => {
     const testClassName = 'test-class-name';
-    const { container } = render(
+    const { container } = await render(
       <MockWebTerminal isInitiallyOpen className={testClassName}>
         Body content
       </MockWebTerminal>
@@ -145,14 +145,14 @@ describe(name, () => {
       </MockWebTerminal>
     );
     const { click } = userEvent;
-    click(screen.getByRole('button', { name: overflowLabel }));
+    await act(() => click(screen.getByRole('button', { name: overflowLabel })));
     documentationLinks.forEach((link) => {
       screen.getByText(link.itemText);
     });
   });
 
   it('adds additional properties to the containing node', async () => {
-    const { container } = render(
+    const { container } = await render(
       <MockWebTerminal data-testid={dataTestId}>Body content</MockWebTerminal>
     );
     expect(
@@ -172,7 +172,7 @@ describe(name, () => {
   });
 
   it('should call the animationEnd event', async () => {
-    const { container } = render(
+    const { container } = await render(
       <div data-testid="container-id">
         <MockWebTerminal isInitiallyOpen closeIconDescription="Close terminal">
           Body content
@@ -183,7 +183,7 @@ describe(name, () => {
     const closeButton = screen.getByRole('button', {
       name: /close terminal/i,
     });
-    userEvent.click(closeButton);
+    await act(() => userEvent.click(closeButton));
 
     const outerElement = container.querySelector(`.${blockClass}`);
 
@@ -214,10 +214,10 @@ describe(name, () => {
       </MockWebTerminal>
     );
 
-    click(screen.getByLabelText(/Create new deployment/i));
+    await act(() => click(screen.getByLabelText(/Create new deployment/i)));
     expect(deploymentButtonFn).toHaveBeenCalledTimes(1);
 
-    click(screen.getByRole('button', { name: /Copy logs/i }));
+    await act(() => click(screen.getByRole('button', { name: /Copy logs/i })));
     expect(copyLogsButtonFn).toHaveBeenCalledTimes(1);
   });
 
@@ -311,7 +311,7 @@ describe(name, () => {
 
     const dataTestId = uuidv4();
 
-    const { rerender } = render(
+    const { rerender } = await render(
       <MockWebTerminal
         isInitiallyOpen
         closeIconDescription="close web terminal"

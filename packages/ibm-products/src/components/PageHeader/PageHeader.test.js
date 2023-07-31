@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
@@ -248,9 +248,9 @@ describe('PageHeader', () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  test('renders an empty header when no props are set', () => {
+  it('renders an empty header when no props are set', async () => {
     const dataTestId = uuidv4();
-   await render(<PageHeader data-testid={dataTestId} />);
+    await render(<PageHeader data-testid={dataTestId} />);
 
     // console.dir(screen.getByRole('region')); // section should be a region https://fae.disability.illinois.edu/rulesets/ROLE_5/
     const header = screen.getByTestId(dataTestId);
@@ -279,9 +279,9 @@ describe('PageHeader', () => {
     ).toHaveLength(0);
   });
 
-  test('renders all the appropriate content when all props are set', () => {
+  it('renders all the appropriate content when all props are set', async () => {
     const dataTestId = uuidv4();
-   await render(
+    await render(
       <PageHeader {...testProps} data-testid={dataTestId}>
         {children}
       </PageHeader>
@@ -347,7 +347,7 @@ describe('PageHeader', () => {
     const testStyle = { name: '--test-this', value: 'test-value' };
     const styles = { [`${testStyle.name}`]: testStyle.value };
 
-   await render(<PageHeader data-testid={dataTestId} style={styles} />);
+    await render(<PageHeader data-testid={dataTestId} style={styles} />);
     const header = screen.getByTestId(dataTestId);
 
     // style was failing due to pageHeaderStyles not being initialized
@@ -356,21 +356,21 @@ describe('PageHeader', () => {
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-   await render(<PageHeader ref={ref} />);
+    await render(<PageHeader ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-   await render(<PageHeader data-testid={dataTestId} />);
+    await render(<PageHeader data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       PageHeader.displayName
     );
   });
 
-  test('collapse button works', () => {
+  it('collapse button works', async () => {
     const dataTestId = uuidv4();
-   await render(
+    await render(
       <PageHeader
         {...testProps}
         hasCollapseHeaderToggle={true}
@@ -385,17 +385,17 @@ describe('PageHeader', () => {
     });
 
     expect(window.scrollTo).not.toHaveBeenCalled();
-    userEvent.click(collapseButton);
+    await act(() => userEvent.click(collapseButton));
     // Determine how to test this (jest dom does not do scroll events)
     // screen.getByLabelText(testProps.expandHeaderIconDescription);
     expect(window.scrollTo).toHaveBeenCalled();
-    userEvent.click(collapseButton);
+    await act(() => userEvent.click(collapseButton));
     expect(window.scrollTo).toHaveBeenCalledTimes(2);
   });
 
-  test('PageHeader space for collapse button without navigation', () => {
+  it('PageHeader space for collapse button without navigation', async () => {
     const dataTestId = uuidv4();
-   await render(
+    await render(
       <PageHeader
         data-testid={dataTestId}
         {...testProps}
@@ -410,9 +410,9 @@ describe('PageHeader', () => {
     screen.getByTestId(dataTestId);
   });
 
-  test('PageHeader space for collapse button without navigation or tags', () => {
+  it('PageHeader space for collapse button without navigation or tags', async () => {
     const dataTestId = uuidv4();
-   await render(
+    await render(
       <PageHeader
         data-testid={dataTestId}
         {...testProps}
@@ -428,9 +428,9 @@ describe('PageHeader', () => {
     screen.getByTestId(dataTestId);
   });
 
-  test('collapseHeader prop test', () => {
+  it('collapseHeader prop test', async () => {
     const dataTestId = uuidv4();
-   await render(
+    await render(
       <PageHeader {...testProps} collapseHeader={true} data-testid={dataTestId}>
         {children}
       </PageHeader>
@@ -439,16 +439,16 @@ describe('PageHeader', () => {
     expect(window.scrollTo).toHaveBeenCalled();
   });
 
-  test('Navigation row renders when Navigation but no tags', () => {
+  it('Navigation row renders when Navigation but no tags', async () => {
     const { navigation } = testProps;
-   await render(<PageHeader {...{ navigation, withoutBackground: true }} />);
+    await render(<PageHeader {...{ navigation, withoutBackground: true }} />);
 
     expect(document.querySelectorAll(`.${carbon.prefix}--tabs`)).toHaveLength(
       1
     );
   });
 
-  test('Navigation row renders when Tags but no Navigation', () => {
+  it('Navigation row renders when Tags but no Navigation', async () => {
     const {
       tags,
       allTagsModalTitle,
@@ -457,7 +457,7 @@ describe('PageHeader', () => {
       showAllTagsLabel,
     } = testProps;
 
-   await render(
+    await render(
       <PageHeader
         {...{
           tags,
@@ -477,19 +477,19 @@ describe('PageHeader', () => {
     ).toBeGreaterThan(0);
   });
 
-  test('Title row renders when PageActions but no Title', () => {
+  it('Title row renders when PageActions but no Title', async () => {
     const { pageActions, pageActionsOverflowLabel = pageActionsOverflowLabel } =
       testProps;
-   await render(<PageHeader {...{ pageActions, pageActionsOverflowLabel }} />);
+    await render(<PageHeader {...{ pageActions, pageActionsOverflowLabel }} />);
 
     expect(
       document.querySelectorAll(`.${blockClass}__page-actions`)
     ).toHaveLength(1);
   });
 
-  test('Title row renders when Title but no PageActions', () => {
+  it('Title row renders when Title but no PageActions', async () => {
     const { title } = testProps;
-   await render(<PageHeader {...{ title }} />);
+    await render(<PageHeader {...{ title }} />);
 
     expect(
       document.querySelectorAll(
@@ -498,9 +498,9 @@ describe('PageHeader', () => {
     ).toHaveLength(1);
   });
 
-  test('Title row renders when Title with pageActions and navigation but no subtitle or available space', () => {
+  it('Title row renders when Title with pageActions and navigation but no subtitle or available space', async () => {
     const { title } = testProps;
-   await render(
+    await render(
       <PageHeader
         {...{ title, pageActions, pageActionsOverflowLabel, navigation }}
       />
@@ -516,8 +516,8 @@ describe('PageHeader', () => {
     ).toHaveLength(1);
   });
 
-  test('Breadcrumb row renders when breadcrumb but no action bar items', () => {
-   await render(
+  it('Breadcrumb row renders when breadcrumb but no action bar items', async () => {
+    await render(
       <PageHeader
         {...prepareProps(testProps, 'actionBarItems', 'pageActions')}
       />
@@ -531,8 +531,8 @@ describe('PageHeader', () => {
     ).toHaveLength(3);
   });
 
-  test('Breadcrumb row renders when action bar items but no breadcrumb', () => {
-   await render(
+  it('Breadcrumb row renders when action bar items but no breadcrumb', async () => {
+    await render(
       <PageHeader {...prepareProps(testProps, 'breadcrumbs')}>
         {children}
       </PageHeader>
@@ -545,9 +545,9 @@ describe('PageHeader', () => {
     expect(actionBarItems).toHaveLength(1);
   });
 
-  test('enableBreadcrumbScroll works', () => {
+  it('enableBreadcrumbScroll works', async () => {
     const dataTestId = uuidv4();
-   await render(
+    await render(
       <PageHeader
         data-testid={dataTestId}
         {...prepareProps(testProps, 'breadcrumbs')}
@@ -561,14 +561,14 @@ describe('PageHeader', () => {
     screen.getByTestId(dataTestId);
   });
 
-  test('renders title as string', () => {
-   await render(<PageHeader title={testProps.title.text} />);
+  it('renders title as string', async () => {
+    await render(<PageHeader title={testProps.title.text} />);
 
     screen.getByText(testProps.title.text);
   });
 
-  test('renders title when using user defined title', () => {
-   await render(<PageHeader {...testPropsUserDefined} />);
+  it('renders title when using user defined title', async () => {
+    await render(<PageHeader {...testPropsUserDefined} />);
 
     screen.getByText(titleUserDefinedStrings.content);
     screen.getByText(titleUserDefinedStrings.breadcrumbContent, {
@@ -580,11 +580,11 @@ describe('PageHeader', () => {
     expect(allTitle).toHaveLength(3); // breadcrumb sizing, breadcrumb and main title
   });
 
-  test('renders title when using user defined title without a breadcrumbContent', () => {
+  it('renders title when using user defined title without a breadcrumbContent', async () => {
     const noBreadcrumbContent = { ...testPropsUserDefined };
     noBreadcrumbContent.title.breadcrumbContent = undefined;
 
-   await render(<PageHeader {...noBreadcrumbContent} />);
+    await render(<PageHeader {...noBreadcrumbContent} />);
 
     screen.getByText(titleUserDefinedStrings.content, {
       // selector need to ignore sizing items
@@ -595,10 +595,10 @@ describe('PageHeader', () => {
     expect(allTitle).toHaveLength(3); // breadcrumb sizing, breadcrumb and main title
   });
 
-  test('Without background', () => {
+  it('Without background', async () => {
     const { title } = testProps;
 
-   await render(
+    await render(
       <PageHeader
         {...{
           title,
@@ -613,16 +613,16 @@ describe('PageHeader', () => {
     screen.getByRole('region');
   });
 
-  test('ActionBar without overflow aria label', () =>
+  it('ActionBar without overflow aria label', async () =>
     expectMultipleError(
       [
         required('actionBarOverflowAriaLabel', 'PageHeader'),
         required('overflowAriaLabel', 'ActionBar'),
         // required('ariaLabel', 'OverflowMenu'),
       ],
-      () => {
+      async () => {
         const { title } = testProps;
-       await render(
+        await render(
           <PageHeader
             {...{
               title,
@@ -634,8 +634,8 @@ describe('PageHeader', () => {
       }
     ));
 
-  test('Title shows as loading', () => {
-   await render(
+  it('Title shows as loading', async () => {
+    await render(
       <PageHeader
         {...{
           breadcrumbs: testProps.breadcrumbs,
@@ -651,10 +651,10 @@ describe('PageHeader', () => {
     expect(skeletons).toHaveLength(3);
   });
 
-  test('Breadcrumb without overflow aria label', () => {
+  it('Breadcrumb without overflow aria label', async () => {
     const error = jest.spyOn(console, 'error').mockImplementation(() => {});
 
-   await render(
+    await render(
       <PageHeader
         {...{
           breadcrumbs,
@@ -672,9 +672,9 @@ describe('PageHeader', () => {
     jest.spyOn(console, 'error').mockRestore();
   });
 
-  test('Background is not there with withoutBackground is true', () => {
+  it('Background is not there with withoutBackground is true', async () => {
     const dataTestId = uuidv4();
-   await render(
+    await render(
       <PageHeader
         data-testid={dataTestId}
         title={testProps.title}
@@ -691,10 +691,10 @@ describe('PageHeader', () => {
     expect(header.getAttribute('style')).toMatch(regStyle);
   });
 
-  test('Works, for now, with deprecated props', () =>
-    expectWarn(deprecated('hasBackgroundAlways', 'PageHeader'), () => {
+  it('Works, for now, with deprecated props', async () =>
+    expectWarn(deprecated('hasBackgroundAlways', 'PageHeader'), async () => {
       const dataTestId = uuidv4();
-     await render(
+      await render(
         <PageHeader
           data-testid={dataTestId}
           title={testProps.title}
@@ -711,9 +711,9 @@ describe('PageHeader', () => {
       expect(header.getAttribute('style')).toMatch(regStyle);
     }));
 
-  test('PageHeader grid settings narrow and fullWidth', () => {
+  it('PageHeader grid settings narrow and fullWidth', async () => {
     const dataTestId = uuidv4();
-    const { container } = render(
+    const { container } = await render(
       <PageHeader data-testid={dataTestId} narrowGrid fullWidthGrid />
     );
 
@@ -722,13 +722,13 @@ describe('PageHeader', () => {
     expect(grid).toHaveClass(`${carbon.prefix}--grid--full-width`);
   });
 
-  test('PageHeader with custom pageActions', () => {
-   await render(<PageHeader {...testProps} pageActions={pageActionsCustom} />);
+  it('PageHeader with custom pageActions', async () => {
+    await render(<PageHeader {...testProps} pageActions={pageActionsCustom} />);
 
     screen.getAllByText('Custom page action');
   });
 
-  test('Has the same tag types as Carbon Tag', () => {
+  it('Has the same tag types as Carbon Tag', async () => {
     // Same number of tags
     expect(PageHeader.tagTypes.length).toEqual(Object.keys(tagTypes).length);
 

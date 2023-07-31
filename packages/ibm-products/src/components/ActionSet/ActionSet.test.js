@@ -17,7 +17,6 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { ActionSet } from '.';
 
-
 const blockClass = `${pkg.prefix}--action-set`;
 const componentName = ActionSet.displayName;
 
@@ -42,12 +41,12 @@ const getByRoleAndLabel = (role, label) =>
 
 describe(componentName, () => {
   it('renders a component ActionSet', async () => {
-   await render(<ActionSet actions={[]} />);
+    await render(<ActionSet actions={[]} />);
     expect(screen.getByRole('presentation')).toHaveClass(blockClass);
   });
 
   it('renders one action button', async () => {
-   await render(<ActionSet actions={[actionS]} />);
+    await render(<ActionSet actions={[actionS]} />);
     getByRoleAndLabel('button', labelS);
   });
 
@@ -55,14 +54,14 @@ describe(componentName, () => {
     const primaryButton = `${carbon.prefix}--btn--primary`;
     const secondaryButton = `${carbon.prefix}--btn--secondary`;
     const ghostButton = `${carbon.prefix}--btn--ghost`;
-   await render(<ActionSet size="lg" actions={[actionS, actionP, actionG]} />);
+    await render(<ActionSet size="lg" actions={[actionS, actionP, actionG]} />);
     expect(getByRoleAndLabel('button', labelS)).toHaveClass(secondaryButton);
     expect(getByRoleAndLabel('button', labelP)).toHaveClass(primaryButton);
     expect(getByRoleAndLabel('button', labelG)).toHaveClass(ghostButton);
   });
 
   it('renders ghost button first and primary button last', async () => {
-   await render(
+    await render(
       <ActionSet size="2xl" actions={[actionS, actionP, actionG, actionS2]} />
     );
     const buttons = screen.getAllByRole('button');
@@ -73,7 +72,7 @@ describe(componentName, () => {
   });
 
   it('renders danger--ghost button first and danger button last', async () => {
-   await render(
+    await render(
       <ActionSet size="2xl" actions={[actionS, actionD, actionDG, actionS2]} />
     );
     const buttons = screen.getAllByRole('button');
@@ -84,14 +83,14 @@ describe(componentName, () => {
   });
 
   it('renders primary button first when stacking', async () => {
-   await render(<ActionSet size="sm" actions={[actionS, actionP]} />);
+    await render(<ActionSet size="sm" actions={[actionS, actionP]} />);
     const buttons = screen.getAllByRole('button');
     expect(buttons[0].textContent).toEqual(labelP);
     expect(buttons[1].textContent).toEqual(labelS);
   });
 
   it('renders primary button first when stacking whichever way round they are supplied', async () => {
-   await render(<ActionSet size="sm" actions={[actionP, actionS]} />);
+    await render(<ActionSet size="sm" actions={[actionP, actionS]} />);
     const buttons = screen.getAllByRole('button');
     expect(buttons[0].textContent).toEqual(labelP);
     expect(buttons[1].textContent).toEqual(labelS);
@@ -103,8 +102,8 @@ describe(componentName, () => {
         'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than three actions',
         'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
       ],
-      () =>
-       await render(
+      async () =>
+        await render(
           <ActionSet
             actions={[
               actionP,
@@ -118,13 +117,13 @@ describe(componentName, () => {
     ));
 
   it('applies className to an action button', async () => {
-   await render(<ActionSet actions={[{ ...actionS, className }, actionP]} />);
+    await render(<ActionSet actions={[{ ...actionS, className }, actionP]} />);
     expect(getByRoleAndLabel('button', labelS)).toHaveClass(className);
     expect(getByRoleAndLabel('button', labelP)).not.toHaveClass(className);
   });
 
   it('renders a loading button', async () => {
-   await render(<ActionSet actions={[{ ...actionS, loading: true }]} />);
+    await render(<ActionSet actions={[{ ...actionS, loading: true }]} />);
     const loader = 'loading';
     expect(screen.getByRole('button').textContent).toEqual(
       `${labelS}${loader}`
@@ -133,7 +132,7 @@ describe(componentName, () => {
 
   it('reports clicks on an action button', async () => {
     const onClick = jest.fn();
-   await render(<ActionSet actions={[{ ...actionS, onClick }]} />);
+    await render(<ActionSet actions={[{ ...actionS, onClick }]} />);
     expect(onClick).toBeCalledTimes(0);
 
     await act(
@@ -144,29 +143,31 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to an action button', async () => {
-   await render(<ActionSet actions={[{ ...actionS, 'data-testid': dataTestId }]} />);
+    await render(
+      <ActionSet actions={[{ ...actionS, 'data-testid': dataTestId }]} />
+    );
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an action button', async () => {
     const ref = React.createRef();
-   await render(<ActionSet actions={[{ ...actionS, ref }, actionP]} />);
+    await render(<ActionSet actions={[{ ...actionS, ref }, actionP]} />);
     expect(ref.current).toEqual(getByRoleAndLabel('button', labelS));
   });
 
   it('applies className to the containing node', async () => {
-   await render(<ActionSet className={className} />);
+    await render(<ActionSet className={className} />);
     expect(screen.getByRole('presentation')).toHaveClass(className);
   });
 
   it('adds additional properties to the containing node', async () => {
-   await render(<ActionSet data-testid={dataTestId} />);
+    await render(<ActionSet data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-   await render(<ActionSet ref={ref} />);
+    await render(<ActionSet ref={ref} />);
     expect(ref.current).toEqual(screen.getByRole('presentation'));
   });
 });
@@ -275,13 +276,15 @@ describe(`${componentName}.validateActions`, () => {
   });
 
   it('should render both expressive and regular buttons inside of the button set', async () => {
-    const { rerender } = render(<ActionSet actions={[actionG]} />);
+    const { rerender } = await render(<ActionSet actions={[actionG]} />);
     const actionButton = screen.getByText(labelG);
     expect(actionButton).toHaveClass(
       `${carbon.prefix}--btn--expressive`,
       `${blockClass}__action-button--expressive`
     );
-   await rerender(<ActionSet actions={[{ ...actionG, isExpressive: false }]} />);
+    await rerender(
+      <ActionSet actions={[{ ...actionG, isExpressive: false }]} />
+    );
     expect(actionButton).not.toHaveClass(
       `${carbon.prefix}--btn--expressive`,
       `${blockClass}__action-button--expressive`

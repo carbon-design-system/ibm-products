@@ -13,6 +13,7 @@ const blockClass = `${pkg.prefix}--create-influencer`;
 
 const renderComponent = ({ ...rest } = {}) =>
   render(<CreateInfluencer {...rest} />);
+
 describe(CreateInfluencer.displayName, () => {
   beforeEach(() => {
     jest.useFakeTimers();

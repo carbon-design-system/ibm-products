@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
@@ -42,14 +42,14 @@ describe(componentName, () => {
       onRequestCancel,
     };
 
-    const { rerender, getByText } = render(<Saving {...props} />);
-    click(getByText(props.defaultText));
+    const { rerender, getByText } = await render(<Saving {...props} />);
+    await act(() => click(getByText(props.defaultText)));
     expect(onRequestSave).toBeCalled();
-    click(getByText(props.secondaryButtonText));
+    await act(() => click(getByText(props.secondaryButtonText)));
     expect(onRequestCancel).not.toBeCalled();
     await rerender(<Saving {...props} status="in-progress" />);
     expect(getByText(props.inProgressText)).toBeVisible();
-    click(getByText(props.secondaryButtonText));
+    await act(() => click(getByText(props.secondaryButtonText)));
     expect(onRequestCancel).toBeCalled();
     await rerender(<Saving {...props} status="fail" />);
     expect(getByText(props.failText)).toBeVisible();
@@ -61,7 +61,7 @@ describe(componentName, () => {
       type: 'auto',
     };
 
-    const { rerender, getByText } = render(<Saving {...props} />);
+    const { rerender, getByText } = await render(<Saving {...props} />);
     expect(getByText(props.defaultText)).toBeVisible();
     await rerender(<Saving {...props} status="in-progress" />);
     expect(getByText(props.inProgressText)).toBeVisible();
@@ -72,7 +72,7 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(
+    const { container } = await render(
       <main>
         <Saving {...defaultProps} />
       </main>
@@ -82,7 +82,7 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(<Saving {...defaultProps} />);
+    const { container } = await render(<Saving {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 

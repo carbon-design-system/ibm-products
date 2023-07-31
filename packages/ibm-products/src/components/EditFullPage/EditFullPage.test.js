@@ -23,39 +23,39 @@ const dataTestId = uuidv4();
 
 describe(componentName, () => {
   it('renders a component EditFullPage', async () => {
-   await render(<EditFullPage> </EditFullPage>);
+    await render(<EditFullPage> </EditFullPage>);
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<EditFullPage> </EditFullPage>);
+    const { container } = await render(<EditFullPage> </EditFullPage>);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, () => {
-   await render(<EditFullPage>{children}</EditFullPage>);
+  it(`renders children`, async () => {
+    await render(<EditFullPage>{children}</EditFullPage>);
     screen.getByText(children);
   });
 
   it('applies className to the containing node', async () => {
-   await render(<EditFullPage className={className}> </EditFullPage>);
+    await render(<EditFullPage className={className}> </EditFullPage>);
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {
-   await render(<EditFullPage data-testid={dataTestId}> </EditFullPage>);
+    await render(<EditFullPage data-testid={dataTestId}> </EditFullPage>);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-   await render(<EditFullPage ref={ref}> </EditFullPage>);
+    await render(<EditFullPage ref={ref}> </EditFullPage>);
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-   await render(<EditFullPage data-testid={dataTestId}> </EditFullPage>);
+    await render(<EditFullPage data-testid={dataTestId}> </EditFullPage>);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

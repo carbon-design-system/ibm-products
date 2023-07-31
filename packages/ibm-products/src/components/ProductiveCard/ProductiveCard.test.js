@@ -18,13 +18,15 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<ProductiveCard />);
+    const { container } = await render(<ProductiveCard />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(<ProductiveCard className="test-class" />);
+    const { container } = await render(
+      <ProductiveCard className="test-class" />
+    );
     expect(container.firstChild).toHaveClass('test-class');
   });
 

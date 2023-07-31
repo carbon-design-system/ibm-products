@@ -75,7 +75,10 @@ module.exports = {
     '/umd/',
     '/react-dnd/',
   ],
-  transformIgnorePatterns: [`/node_modules/(?!react-dnd|dnd-core|@react-dnd)`],
+  transformIgnorePatterns: [
+    `/node_modules/(?!react-dnd|dnd-core|@react-dnd)`,
+    'ace-node\\.js',
+  ],
   watchPathIgnorePatterns: [
     '/cjs/',
     '/dist/',

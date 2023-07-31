@@ -71,7 +71,7 @@ URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
 
 describe(componentName, () => {
   it('renders with standard visible props', async () => {
-    const { getByText, getByPlaceholderText } = render(
+    const { getByText, getByPlaceholderText } = await render(
       <APIKeyModal {...defaultProps} />
     );
     getByText(defaultProps.body);
@@ -92,7 +92,7 @@ describe(componentName, () => {
       apiKey: '123-456-789',
     };
     const { click } = userEvent;
-    const { getByText, container, getByLabelText } = render(
+    const { getByText, container, getByLabelText } = await render(
       <APIKeyModal {...props} />
     );
     expect(container.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
@@ -114,7 +114,7 @@ describe(componentName, () => {
       onRequestGenerate,
     };
 
-    const { getByText, container, rerender } = render(
+    const { getByText, container, rerender } = await render(
       <APIKeyModal {...props} />
     );
 
@@ -150,7 +150,7 @@ describe(componentName, () => {
       errorText: 'an error occurred',
     };
 
-    const { getByText, container, rerender } = render(
+    const { getByText, container, rerender } = await render(
       <APIKeyModal {...props} />
     );
 
@@ -263,7 +263,7 @@ describe(componentName, () => {
       onRequestEdit,
     };
 
-    const { getByText, container, rerender } = render(
+    const { getByText, container, rerender } = await render(
       <APIKeyModal {...props} />
     );
 
@@ -331,7 +331,7 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(<APIKeyModal {...defaultProps} />);
+    const { container } = await render(<APIKeyModal {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 

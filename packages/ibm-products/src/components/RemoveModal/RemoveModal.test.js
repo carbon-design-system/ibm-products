@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { carbon } from '../../settings';
@@ -53,7 +53,7 @@ describe(componentName, () => {
   });
 
   it('renders text input', async () => {
-    const { container } = render(
+    const { container } = await render(
       <RemoveModal {...defaultProps} textConfirmation />
     );
     screen.getByText(defaultProps.inputLabelText);
@@ -75,10 +75,10 @@ describe(componentName, () => {
     };
 
     await render(<RemoveModal {...props} />);
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
 
     expect(onRequestSubmit).toBeCalled();
-    click(screen.getByText(props.secondaryButtonText));
+    await act(() => click(screen.getByText(props.secondaryButtonText)));
     expect(onClose).toBeCalled();
   });
 
@@ -93,21 +93,21 @@ describe(componentName, () => {
       onRequestSubmit,
     };
 
-    const { container } = render(<RemoveModal {...props} />);
+    const { container } = await render(<RemoveModal {...props} />);
 
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'bx1002' },
     });
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'bx1001' },
     });
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).toBeCalled();
   });
 
@@ -118,13 +118,13 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<RemoveModal {...defaultProps} />);
+    const { container } = await render(<RemoveModal {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(<RemoveModal {...defaultProps} />);
+    const { container } = await render(<RemoveModal {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 

@@ -36,7 +36,7 @@ describe(componentName, () => {
   });
 
   it('renders', async () => {
-    await render(<AddSelectMetaPanel {...defaultProps} />);
+    render(<AddSelectMetaPanel {...defaultProps} />);
   });
 
   it('renders without html', async () => {
@@ -49,7 +49,7 @@ describe(componentName, () => {
       ...defaultProps,
       meta: [entry],
     };
-    await render(<AddSelectMetaPanel {...newProps} />);
+    render(<AddSelectMetaPanel {...newProps} />);
     expect(
       document.querySelector(`.${blockClass}-entry-title`).textContent
     ).toBe('test title');
@@ -69,7 +69,7 @@ describe(componentName, () => {
       ...defaultProps,
       meta,
     };
-    await render(<AddSelectMetaPanel {...newProps} />);
+    render(<AddSelectMetaPanel {...newProps} />);
     expect(
       document.querySelector(`.${blockClass}-entry-title`).textContent
     ).toBe('html title');
@@ -84,7 +84,7 @@ describe(componentName, () => {
       ...defaultProps,
       setDisplayMetaPanel,
     };
-    await render(<AddSelectMetaPanel {...newProps} />);
+    render(<AddSelectMetaPanel {...newProps} />);
     const btn = document.querySelector(`.${blockClass}-close`);
     fireEvent.click(btn);
     expect(setDisplayMetaPanel).toHaveBeenCalled();

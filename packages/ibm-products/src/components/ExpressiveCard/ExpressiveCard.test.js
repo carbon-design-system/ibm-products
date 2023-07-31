@@ -14,37 +14,35 @@ const componentName = ExpressiveCard.displayName;
 
 describe(componentName, () => {
   it('renders', async () => {
-    await render(<ExpressiveCard />);
+    render(<ExpressiveCard />);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await render(<ExpressiveCard />);
+    const { container } = render(<ExpressiveCard />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = await render(
-      <ExpressiveCard className="test-class" />
-    );
+    const { container } = render(<ExpressiveCard className="test-class" />);
     expect(container.firstChild).toHaveClass('test-class');
   });
 
   const dataTestId = 'dataTestId';
 
   it('adds additional properties to the containing node', async () => {
-    await render(<ExpressiveCard data-testid={dataTestId} />);
+    render(<ExpressiveCard data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await render(<ExpressiveCard ref={ref} />);
+    render(<ExpressiveCard ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await render(<ExpressiveCard data-testid={dataTestId} />);
+    render(<ExpressiveCard data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

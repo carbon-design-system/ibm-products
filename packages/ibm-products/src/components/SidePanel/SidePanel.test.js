@@ -97,7 +97,7 @@ describe('SidePanel', () => {
   it('renders the side panel', async () => {
     const subtitle = uuidv4();
     const labelText = uuidv4();
-    await renderSidePanel({
+    renderSidePanel({
       title: 'Test side panel',
       subtitle,
       labelText,
@@ -109,7 +109,7 @@ describe('SidePanel', () => {
 
   it('should render a side panel with an overlay and trigger clickOutside hook when clicked', async () => {
     const onRequestCloseFn = jest.fn();
-    const { container } = await renderSidePanel({
+    const { container } = renderSidePanel({
       includeOverlay: true,
       onRequestClose: onRequestCloseFn,
     });
@@ -120,7 +120,7 @@ describe('SidePanel', () => {
   });
 
   it('should render a side panel from the right', async () => {
-    const { container } = await renderSidePanel({
+    const { container } = renderSidePanel({
       placement: 'right',
     });
     const sidePanelOuter = container.querySelector(
@@ -130,7 +130,7 @@ describe('SidePanel', () => {
   });
 
   it('should render a side panel from the left', async () => {
-    const { container } = await renderSidePanel({
+    const { container } = renderSidePanel({
       placement: 'left',
     });
     const sidePanelOuter = container.querySelector(
@@ -140,9 +140,7 @@ describe('SidePanel', () => {
   });
 
   it('should render a left slide in panel version', async () => {
-    const { container, rerender } = await render(
-      <SlideIn placement="left" open />
-    );
+    const { container, rerender } = render(<SlideIn placement="left" open />);
     const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginLeft).toBe('30rem');
@@ -156,9 +154,7 @@ describe('SidePanel', () => {
   });
 
   it('should render a right slide in panel version with onUnmount prop', async () => {
-    const { container, rerender } = await render(
-      <SlideIn placement="right" open />
-    );
+    const { container, rerender } = render(<SlideIn placement="right" open />);
     const pageContent = container.querySelector(selectorPageContentValue);
     const style = getComputedStyle(pageContent);
     expect(style.marginRight).toBe('30rem');
@@ -176,7 +172,7 @@ describe('SidePanel', () => {
   });
 
   it('should render a right slide in panel version', async () => {
-    const { container, rerender } = await render(
+    const { container, rerender } = render(
       <SlideIn
         animateTitle={false}
         placement="right"
@@ -202,7 +198,7 @@ describe('SidePanel', () => {
   });
 
   it('should test overlay eit.skip animation', async () => {
-    const { container, rerender } = await renderSidePanel({
+    const { container, rerender } = renderSidePanel({
       includeOverlay: true,
     });
     const closeIconButton = container.querySelector(
@@ -226,7 +222,7 @@ describe('SidePanel', () => {
   });
 
   it('should render one primary action button', async () => {
-    const { container } = await renderSidePanel({
+    const { container } = renderSidePanel({
       includeOverlay: true,
       actions: [
         {
@@ -244,7 +240,7 @@ describe('SidePanel', () => {
   });
 
   it('should render two action buttons', async () => {
-    await renderSidePanel({
+    renderSidePanel({
       actions: [
         {
           label: 'Action button',
@@ -263,7 +259,7 @@ describe('SidePanel', () => {
   });
 
   it('should render a single ghost action button', async () => {
-    const { container } = await renderSidePanel({
+    const { container } = renderSidePanel({
       actions: [
         {
           label: 'Ghost action button',
@@ -279,7 +275,7 @@ describe('SidePanel', () => {
   });
 
   it('should render a side panel with condensed actions', async () => {
-    await renderSidePanel({
+    renderSidePanel({
       condensedActions: true,
       actions: [
         {
@@ -304,7 +300,7 @@ describe('SidePanel', () => {
         'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
       ],
       async () =>
-        await renderSidePanel({
+        renderSidePanel({
           actions: [
             { kind: 'primary' },
             { kind: 'primary' },
@@ -316,7 +312,7 @@ describe('SidePanel', () => {
     ));
 
   it('should render navigation button', async () => {
-    const { container } = await renderSidePanel({
+    const { container } = renderSidePanel({
       currentStep: 1,
     });
     const navigationAction = container.querySelector(
@@ -329,7 +325,7 @@ describe('SidePanel', () => {
     const { fn } = jest;
     const { click } = userEvent;
     const onNavigationBackFn = fn();
-    const { container } = await renderSidePanel({
+    const { container } = renderSidePanel({
       currentStep: 1,
       onNavigationBack: onNavigationBackFn,
     });
@@ -343,7 +339,7 @@ describe('SidePanel', () => {
   it('should click the primary action button', async () => {
     const { click } = userEvent;
     const onClick = jest.fn();
-    await renderSidePanel({
+    renderSidePanel({
       actions: [
         {
           label: 'Primary button',
@@ -360,7 +356,7 @@ describe('SidePanel', () => {
     const { click } = userEvent;
     const toolbarButtonFn1 = jest.fn();
     const toolbarButtonFn2 = jest.fn();
-    const { container } = await renderSidePanel({
+    const { container } = renderSidePanel({
       actionToolbarButtons: [
         {
           leading: true,
@@ -384,18 +380,18 @@ describe('SidePanel', () => {
   });
 
   it('adds additional properties to the containing node', async () => {
-    await renderSidePanel({ 'data-testid': dataTestId });
+    renderSidePanel({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await renderSidePanel({ ref });
+    renderSidePanel({ ref });
     expect(ref.current).toEqual(screen.getByRole('complementary'));
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await renderSidePanel({ 'data-testid': dataTestId });
+    renderSidePanel({ 'data-testid': dataTestId });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       SidePanel.displayName
@@ -404,7 +400,7 @@ describe('SidePanel', () => {
 
   it('should call the onRequestClose event handler', async () => {
     const { click } = userEvent;
-    const { container } = await renderSidePanel();
+    const { container } = renderSidePanel();
     const closeIconButton = container.querySelector(
       `.${blockClass}__close-button`
     );
@@ -415,7 +411,7 @@ describe('SidePanel', () => {
   it('should call the onNavigationBack event handler', async () => {
     const onNavigationBackFn = jest.fn();
     const { click } = userEvent;
-    const { container } = await renderSidePanel({
+    const { container } = renderSidePanel({
       onNavigationBack: onNavigationBackFn,
       currentStep: 1,
     });
@@ -428,7 +424,7 @@ describe('SidePanel', () => {
 
   sizes.forEach((size) => {
     it(`should render a ${size} size side panel`, async () => {
-      const { container } = await renderSidePanel({
+      const { container } = renderSidePanel({
         size,
       });
       const sidePanelOuter = container.querySelector(`.${blockClass}`);
@@ -437,7 +433,7 @@ describe('SidePanel', () => {
   });
 
   it('should simulate onAnimationEnd synthetic event and set focus to specified element', async () => {
-    const { container } = await renderSidePanel(
+    const { container } = renderSidePanel(
       {
         open: true,
         selectorPrimaryFocus: '#test-input',
@@ -452,7 +448,7 @@ describe('SidePanel', () => {
   });
 
   it('should default focus to close button when selectorPrimaryFocus prop is not passed', async () => {
-    const { container } = await renderSidePanel(
+    const { container } = renderSidePanel(
       {},
       <TextInput labelText="Input A" id="test-input" placeholder="Test input" />
     );
@@ -465,7 +461,7 @@ describe('SidePanel', () => {
   });
 
   it('should render slide in panel from left', async () => {
-    const { container } = await render(
+    const { container } = render(
       <SlideIn placement="left" open={false}>
         Content
       </SlideIn>

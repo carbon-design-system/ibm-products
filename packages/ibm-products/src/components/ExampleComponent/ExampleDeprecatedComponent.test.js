@@ -18,7 +18,7 @@ describe(componentName, () => {
     expectWarn(
       'Carbon for IBM Products (WARNING): Component "ExampleDeprecatedComponent" is deprecated. This an example component deprecation message used by \'checkComponentEnabled\'.',
       async () => {
-        await render(<ExampleDeprecatedComponent />);
+        render(<ExampleDeprecatedComponent />);
       }
     );
   });

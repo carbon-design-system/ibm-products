@@ -18,16 +18,14 @@ const replacedComponentName = `component-${uuidv4()}`;
 
 describe(componentName, () => {
   // it('has no accessibility violations', async () => {
-  //   const { container } = await render(<Canary component={dummyContent} />);
+  //   const { container } = render(<Canary component={dummyContent} />);
 
   //   await expect(container).toBeAccessible(name);
   //   await expect(container).toHaveNoAxeViolations();
   // });
 
   it('displays the replaced component name', async () => {
-    const container = await render(
-      <Canary componentName={replacedComponentName} />
-    );
+    const container = render(<Canary componentName={replacedComponentName} />);
     expect(container.getByText(replacedComponentName)).toBeInTheDocument();
   });
 });

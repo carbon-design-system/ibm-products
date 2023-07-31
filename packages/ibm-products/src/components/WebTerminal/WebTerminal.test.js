@@ -47,7 +47,7 @@ const MockWebTerminal = React.forwardRef(
 
 describe(name, () => {
   it('Renders the component `WebTerminal` if flag is enabled', async () => {
-    const { container } = await render(
+    const { container } = render(
       <MockWebTerminal>Body content</MockWebTerminal>
     );
 
@@ -60,7 +60,7 @@ describe(name, () => {
     issue. https://github.com/carbon-design-system/ibm-products/issues/2154
   */
   it('has no accessibility violations', async () => {
-    const { container } = await render(
+    const { container } = render(
       <MockWebTerminal isInitiallyOpen>Body content</MockWebTerminal>
     );
 
@@ -69,7 +69,7 @@ describe(name, () => {
 
   it('should attach a custom class to the web terminal', async () => {
     const testClassName = 'test-class-name';
-    const { container } = await render(
+    const { container } = render(
       <MockWebTerminal isInitiallyOpen className={testClassName}>
         Body content
       </MockWebTerminal>
@@ -78,7 +78,7 @@ describe(name, () => {
   });
 
   it('should render child element content', async () => {
-    await render(<MockWebTerminal>Body content</MockWebTerminal>);
+    render(<MockWebTerminal>Body content</MockWebTerminal>);
     expect(screen.getByText(/Body content/i)).toBeInTheDocument();
   });
 
@@ -139,7 +139,7 @@ describe(name, () => {
 
   it('should render documentation link text', async () => {
     const overflowLabel = 'Show documentation links';
-    await render(
+    render(
       <MockWebTerminal documentationLinks={documentationLinks}>
         Body content
       </MockWebTerminal>
@@ -152,7 +152,7 @@ describe(name, () => {
   });
 
   it('adds additional properties to the containing node', async () => {
-    const { container } = await render(
+    const { container } = render(
       <MockWebTerminal data-testid={dataTestId}>Body content</MockWebTerminal>
     );
     expect(
@@ -162,7 +162,7 @@ describe(name, () => {
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef(null);
-    await render(<MockWebTerminal ref={ref}>Body content</MockWebTerminal>);
+    render(<MockWebTerminal ref={ref}>Body content</MockWebTerminal>);
 
     /**
       This await is necessary so that the document loads completely and the ref isn't null */
@@ -172,7 +172,7 @@ describe(name, () => {
   });
 
   it('should call the animationEnd event', async () => {
-    const { container } = await render(
+    const { container } = render(
       <div data-testid="container-id">
         <MockWebTerminal isInitiallyOpen closeIconDescription="Close terminal">
           Body content
@@ -195,7 +195,7 @@ describe(name, () => {
     const deploymentButtonFn = jest.fn();
     const copyLogsButtonFn = jest.fn();
 
-    await render(
+    render(
       <MockWebTerminal
         actions={[
           {
@@ -222,7 +222,7 @@ describe(name, () => {
   });
 
   it('should render the close icon description prop', async () => {
-    await render(
+    render(
       <MockWebTerminal
         isInitiallyOpen
         closeIconDescription="Close web terminal"
@@ -235,7 +235,7 @@ describe(name, () => {
   });
 
   it('content wrapper should pass children', async () => {
-    await render(
+    render(
       <WebTerminalProvider>
         <WebTerminalContentWrapper>body content</WebTerminalContentWrapper>
       </WebTerminalProvider>
@@ -260,7 +260,7 @@ describe(name, () => {
       </WebTerminalProvider>
     );
 
-    await render(<RenderComponent />);
+    render(<RenderComponent />);
 
     let windowWidth = document.body.getBoundingClientRect().width;
     let contentWrapperWidth = screen
@@ -287,7 +287,7 @@ describe(name, () => {
     );
 
     const dataTestId = uuidv4();
-    await render(<RenderComponent isInitiallyOpen dataTestId={dataTestId} />);
+    render(<RenderComponent isInitiallyOpen dataTestId={dataTestId} />);
 
     let windowWidth = document.body.getBoundingClientRect().width;
     let contentWrapperWidth = screen
@@ -311,7 +311,7 @@ describe(name, () => {
 
     const dataTestId = uuidv4();
 
-    const { rerender } = await render(
+    const { rerender } = render(
       <MockWebTerminal
         isInitiallyOpen
         closeIconDescription="close web terminal"

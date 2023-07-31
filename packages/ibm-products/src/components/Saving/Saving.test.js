@@ -29,7 +29,7 @@ const defaultProps = {
 
 describe(componentName, () => {
   it('should render', async () => {
-    await render(<Saving {...defaultProps} />);
+    render(<Saving {...defaultProps} />);
   });
 
   it('renders manual type', async () => {
@@ -42,7 +42,7 @@ describe(componentName, () => {
       onRequestCancel,
     };
 
-    const { rerender, getByText } = await render(<Saving {...props} />);
+    const { rerender, getByText } = render(<Saving {...props} />);
     await act(() => click(getByText(props.defaultText)));
     expect(onRequestSave).toBeCalled();
     await act(() => click(getByText(props.secondaryButtonText)));
@@ -61,7 +61,7 @@ describe(componentName, () => {
       type: 'auto',
     };
 
-    const { rerender, getByText } = await render(<Saving {...props} />);
+    const { rerender, getByText } = render(<Saving {...props} />);
     expect(getByText(props.defaultText)).toBeVisible();
     await rerender(<Saving {...props} status="in-progress" />);
     expect(getByText(props.inProgressText)).toBeVisible();
@@ -72,7 +72,7 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await render(
+    const { container } = render(
       <main>
         <Saving {...defaultProps} />
       </main>
@@ -82,25 +82,25 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = await render(<Saving {...defaultProps} />);
+    const { container } = render(<Saving {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'data-testid';
 
   it('adds additional properties to the containing node', async () => {
-    await render(<Saving {...defaultProps} data-testid={dataTestId} />);
+    render(<Saving {...defaultProps} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await render(<Saving {...defaultProps} ref={ref} />);
+    render(<Saving {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await render(<Saving {...defaultProps} data-testid={dataTestId} />);
+    render(<Saving {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

@@ -63,33 +63,33 @@ describe(componentName, () => {
   });
 
   it('renders the side panel', async () => {
-    await renderComponent();
+    renderComponent();
     expect(screen.getByRole('complementary')).toHaveClass(blockClass);
   });
 
   it('renders a title', async () => {
-    await renderComponent({ title });
+    renderComponent({ title });
     expect(screen.queryAllByText(/{title}/i)).toBeTruthy();
   });
 
   it('renders a subtitle', async () => {
-    await renderComponent({ subtitle });
+    renderComponent({ subtitle });
     expect(screen.queryAllByText(/{subtitle}/i)).toBeTruthy();
   });
 
   it('renders a forms title', async () => {
-    await renderComponent({ formTitle });
+    renderComponent({ formTitle });
     expect(screen.queryAllByText(/{formTitle}/i)).toBeTruthy();
   });
 
   it('renders a forms description', async () => {
-    await renderComponent({ formDescription });
+    renderComponent({ formDescription });
     expect(screen.queryAllByText(/{formDescription}/i)).toBeTruthy();
   });
 
   it('calls onRequestSubmit() when primary button is clicked', async () => {
     const primaryHandler = jest.fn();
-    await renderComponent({
+    renderComponent({
       onRequestSubmit: primaryHandler,
     });
     await act(() =>
@@ -100,7 +100,7 @@ describe(componentName, () => {
 
   it('calls onRequestClose() when secondary button is clicked', async () => {
     const secondaryHandler = jest.fn();
-    await renderComponent({
+    renderComponent({
       onRequestClose: secondaryHandler,
     });
     await act(() =>
@@ -110,21 +110,21 @@ describe(componentName, () => {
   });
 
   it('disables primary focus button when `disableSubmit` prop is provided', async () => {
-    await renderComponent({ disableSubmit: true, primaryButtonText: 'Create' });
+    renderComponent({ disableSubmit: true, primaryButtonText: 'Create' });
     const submitButton = screen.getByRole('button', { name: 'Create' });
     const isDisabled = submitButton.className.includes('disabled');
     expect(isDisabled).toBeTruthy();
   });
 
   it('disables primary focus button when `disableSubmit` prop is provided', async () => {
-    await renderComponent({ disableSubmit: true, primaryButtonText: 'Create' });
+    renderComponent({ disableSubmit: true, primaryButtonText: 'Create' });
     const submitButton = screen.getByRole('button', { name: 'Create' });
     const isDisabled = submitButton.className.includes('disabled');
     expect(isDisabled).toBeTruthy();
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await renderComponent();
+    const { container } = renderComponent();
     await act(async () => {
       await expect(container).toBeAccessible(componentName);
       await expect(container).toHaveNoAxeViolations();
@@ -133,25 +133,25 @@ describe(componentName, () => {
 
   it('applies className to the containing node', async () => {
     const className = `class-${uuidv4()}`;
-    await renderComponent({ className: className });
+    renderComponent({ className: className });
     expect(screen.getByRole('complementary')).toHaveClass(className);
   });
 
   const dataTestId = uuidv4();
 
   it('adds additional properties to the containing node', async () => {
-    await renderComponent({ 'data-testid': dataTestId });
+    renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await renderComponent({ ref: ref });
+    renderComponent({ ref: ref });
     expect(ref.current).toEqual(screen.getByRole('complementary'));
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await renderComponent({ 'data-testid': dataTestId });
+    renderComponent({ 'data-testid': dataTestId });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

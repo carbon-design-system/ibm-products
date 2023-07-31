@@ -107,7 +107,7 @@ describe(ActionBar.displayName, () => {
   });
 
   it('Renders an action bar', async () => {
-    await render(
+    render(
       <TestActionBar
         width={1150}
         actions={actions}
@@ -125,7 +125,7 @@ describe(ActionBar.displayName, () => {
 
   it('Renders an action bar with overflow items', async () => {
     // not enough room so should see an overflow.
-    await render(
+    render(
       <TestActionBar
         width={200}
         overflowAriaLabel={overflowAriaLabel}
@@ -164,7 +164,7 @@ describe(ActionBar.displayName, () => {
 
   it('Does not duplicate action IDs', async () => {
     // not enough room so should see an overflow.
-    const { container } = await render(
+    const { container } = render(
       <TestActionBar
         width={200}
         overflowAriaLabel={overflowAriaLabel}
@@ -176,7 +176,7 @@ describe(ActionBar.displayName, () => {
   });
 
   it('Renders an action bar with max items set', async () => {
-    await render(
+    render(
       <TestActionBar
         width={1150}
         maxVisible={2}

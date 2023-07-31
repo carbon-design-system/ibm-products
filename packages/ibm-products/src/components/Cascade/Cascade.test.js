@@ -16,7 +16,7 @@ const componentName = Cascade.displayName;
 
 describe(componentName, () => {
   it('renders without grid', async () => {
-    const { container } = await render(
+    const { container } = render(
       <Cascade>
         <div>card 1</div>
         <div>card 2</div>
@@ -31,7 +31,7 @@ describe(componentName, () => {
   });
 
   it('renders with grid', async () => {
-    const { container } = await render(
+    const { container } = render(
       <Cascade grid>
         <div className="row">
           <div>card 1</div>
@@ -52,7 +52,7 @@ describe(componentName, () => {
   });
 
   it('renders with grid but no columns', async () => {
-    const { container } = await render(
+    const { container } = render(
       <Cascade grid>
         <div className="row" />
       </Cascade>
@@ -62,32 +62,32 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await render(<Cascade />);
+    const { container } = render(<Cascade />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
     const className = 'test-class';
-    const { container } = await render(<Cascade className={className} />);
+    const { container } = render(<Cascade className={className} />);
     expect(container.firstChild).toHaveClass(className);
   });
 
   const dataTestId = 'dataTestId';
 
   it('adds additional properties to the containing node', async () => {
-    await render(<Cascade data-testid={dataTestId} />);
+    render(<Cascade data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await render(<Cascade ref={ref} />);
+    render(<Cascade ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await render(<Cascade data-testid={dataTestId} />);
+    render(<Cascade data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

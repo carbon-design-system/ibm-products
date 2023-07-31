@@ -22,7 +22,7 @@ URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
 
 describe(name, () => {
   it('has json file download', async () => {
-    const { getByText } = await render(<APIKeyDownloader {...defaultProps} />);
+    const { getByText } = render(<APIKeyDownloader {...defaultProps} />);
     const link = getByText(defaultProps.linkText);
     await waitFor(() => {
       expect(link).toHaveProperty('download');
@@ -37,7 +37,7 @@ describe(name, () => {
       ...defaultProps,
       fileType: 'txt',
     };
-    const { getByText } = await render(<APIKeyDownloader {...props} />);
+    const { getByText } = render(<APIKeyDownloader {...props} />);
     const link = getByText(props.linkText);
 
     await waitFor(() => {
@@ -57,7 +57,7 @@ describe(name, () => {
       ...defaultProps,
       fileName: '',
     };
-    const { getByText } = await render(<APIKeyDownloader {...props} />);
+    const { getByText } = render(<APIKeyDownloader {...props} />);
     const link = getByText('download');
 
     await waitFor(() => {
@@ -68,7 +68,7 @@ describe(name, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { getByText, container } = await render(
+    const { getByText, container } = render(
       <APIKeyDownloader {...defaultProps} />
     );
     await waitFor(() => getByText('download'));

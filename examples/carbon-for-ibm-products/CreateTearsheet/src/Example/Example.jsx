@@ -64,13 +64,16 @@ export const Example = () => {
         title="Create topic"
         open={open}
         onClose={clearCreateData}
-        onRequestSubmit={() =>
-          new Promise((resolve) => {
+        onRequestSubmit={() => {
+          console.log('onrequest submit');
+          return new Promise((resolve) => {
             setTimeout(() => {
+              console.log('on request done');
               clearCreateData();
               resolve();
             }, simulatedDelay);
           })
+        }
         }
       >
         <CreateTearsheetStep

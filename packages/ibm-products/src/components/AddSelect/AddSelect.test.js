@@ -61,7 +61,7 @@ describe(componentName, () => {
   });
 
   it('renders single without hierarchy', async () => {
-    await render(<AddSelect {...defaultProps} />);
+    render(<AddSelect {...defaultProps} />);
     expect(screen.getByText('test entry 1 title')).toBeVisible();
   });
 
@@ -88,7 +88,7 @@ describe(componentName, () => {
       },
       navIconDescription: 'view children',
     };
-    await render(<AddSelect {...newProps} />);
+    render(<AddSelect {...newProps} />);
     expect(screen.getByText('test entry 1 title')).toBeVisible();
     expect(screen.getByText('view children')).toBeInTheDocument();
   });
@@ -131,7 +131,7 @@ describe(componentName, () => {
         ],
       },
     };
-    await render(<AddSelect {...newProps} />);
+    render(<AddSelect {...newProps} />);
     expect(
       screen.getByLabelText('filter icon description')
     ).toBeInTheDocument();
@@ -158,31 +158,31 @@ describe(componentName, () => {
         ],
       },
     };
-    await render(<AddSelect {...newProps} />);
+    render(<AddSelect {...newProps} />);
     expect(screen.getByTitle('editor')).toBeInTheDocument();
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await render(<AddSelect {...defaultProps} />);
+    const { container } = render(<AddSelect {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = await render(
+    const { container } = render(
       <AddSelect {...defaultProps} className="test-class" />
     );
     expect(container.firstChild).toHaveClass('test-class');
   });
 
   it('adds additional properties to the containing node', async () => {
-    await render(<AddSelect {...defaultProps} data-testid="test-id" />);
+    render(<AddSelect {...defaultProps} data-testid="test-id" />);
     screen.getByTestId('test-id');
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await render(<AddSelect {...defaultProps} ref={ref} />);
+    render(<AddSelect {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 });

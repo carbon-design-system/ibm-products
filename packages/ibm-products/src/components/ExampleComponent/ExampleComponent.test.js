@@ -36,21 +36,21 @@ const renderComponent = ({ ...rest } = {}) =>
 
 describe(componentName, () => {
   it('renders a component ExampleComponent', async () => {
-    await renderComponent();
+    renderComponent();
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await renderComponent();
+    const { container } = renderComponent();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders the borderColor property`, async () => {
-    await renderComponent({ borderColor });
+    renderComponent({ borderColor });
     const style = window.getComputedStyle(screen.getByRole('main'));
     // We'd prefer to test the actual border color style, but jsdom does not
-    //await render css custom properties (https://github.com/jsdom/jsdom/issues/1895)
+    //render css custom properties (https://github.com/jsdom/jsdom/issues/1895)
     // so testing the property is the best we can do.
     expect(style.getPropertyValue(`--${blockClass}--border-color`)).toEqual(
       borderColor
@@ -58,17 +58,17 @@ describe(componentName, () => {
   });
 
   it(`renders the boxedBorder property`, async () => {
-    await renderComponent({ boxedBorder: true });
+    renderComponent({ boxedBorder: true });
     expect(screen.getByRole('main')).toHaveClass(`${blockClass}--boxed-set`);
   });
 
   it('applies className to the containing node', async () => {
-    await renderComponent({ className });
+    renderComponent({ className });
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
   it(`renders the disabled property`, async () => {
-    await renderComponent({ disabled: true });
+    renderComponent({ disabled: true });
     screen
       .getAllByRole('button')
       .forEach((button) => expect(button).toHaveProperty('disabled', true));
@@ -77,7 +77,7 @@ describe(componentName, () => {
   it('notifies a click on each button', async () => {
     const primaryHandler = jest.fn();
     const secondaryHandler = jest.fn();
-    await renderComponent({
+    renderComponent({
       onPrimaryClick: primaryHandler,
       onSecondaryClick: secondaryHandler,
     });
@@ -90,13 +90,13 @@ describe(componentName, () => {
   });
 
   it('renders the primaryButtonLabel and secondaryButtonLabel properties', async () => {
-    await renderComponent();
+    renderComponent();
     screen.getByText(primaryButtonLabel);
     screen.getByText(secondaryButtonLabel);
   });
 
   it('renders the primaryKind and secondaryKind properties', async () => {
-    await renderComponent({ primaryKind: 'danger', secondaryKind: 'tertiary' });
+    renderComponent({ primaryKind: 'danger', secondaryKind: 'tertiary' });
     expect(
       screen.getByRole('button', { name: `danger ${primaryButtonLabel}` })
     ).toHaveClass(`${carbon.prefix}--btn--danger`);
@@ -106,7 +106,7 @@ describe(componentName, () => {
   });
 
   it('renders the size property', async () => {
-    await renderComponent({ size: 'sm' });
+    renderComponent({ size: 'sm' });
     screen
       .getAllByRole('button')
       .forEach((button) =>
@@ -115,13 +115,13 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to the containing node', async () => {
-    await renderComponent({ 'data-testid': dataTestId });
+    renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await renderComponent({ ref });
+    renderComponent({ ref });
     expect(ref.current).toEqual(screen.getByRole('main'));
   });
 
@@ -130,7 +130,7 @@ describe(componentName, () => {
     expectError(
       'Carbon for IBM Products (Error): Feature "ExampleComponent.secondaryIcon" not enabled. To enable see the notes on feature flags in the README.',
       async () => {
-        await render(
+        render(
           <ExampleComponent
             secondaryIcon={Add}
             {...{
@@ -145,7 +145,7 @@ describe(componentName, () => {
 
   it('does NOT log an error when secondaryIcon used and feature flag enabled', async () => {
     pkg.feature['ExampleComponent.secondaryIcon'] = true;
-    await render(
+    render(
       <ExampleComponent
         {...{
           primaryButtonLabel,
@@ -166,7 +166,7 @@ describe(componentName, () => {
           'Disabled feature "ExampleComponent.useExample" does not change the initialTime.',
       },
       async () => {
-        await render(
+        render(
           <ExampleComponent
             secondaryIcon={Add}
             {...{
@@ -185,7 +185,7 @@ describe(componentName, () => {
   it('does NOT log an error when useExample used and feature flag enabled', async () => {
     pkg.feature['ExampleComponent.useExample'] = true;
 
-    await render(
+    render(
       <ExampleComponent
         {...{
           usesExampleHook: 10,

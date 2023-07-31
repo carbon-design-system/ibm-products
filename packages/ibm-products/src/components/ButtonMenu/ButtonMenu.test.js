@@ -30,7 +30,7 @@ const label = `Button ${uuidv4()}`;
 const menuAriaLabel = `aria ${label} label`;
 
 const renderMenu = async (menuProps = {}, itemProps = {}) => {
-  const container = await render(
+  const container = render(
     <main>
       <ButtonMenu {...{ menuAriaLabel, label }} {...menuProps}>
         <ButtonMenuItem itemText="Option 1" />
@@ -45,7 +45,7 @@ const renderMenu = async (menuProps = {}, itemProps = {}) => {
 
 describe(componentName, () => {
   it('renders a component ButtonMenu', async () => {
-    await renderMenu();
+    renderMenu();
     expect(
       screen.getByText(label, {
         selector: `.${blockClass} .${blockClass}__trigger`,
@@ -54,46 +54,46 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await renderMenu();
+    const { container } = renderMenu();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders children`, async () => {
-    await renderMenu();
+    renderMenu();
     screen.getByText(itemText);
   });
 
   it('applies className to the containing node', async () => {
-    await renderMenu({ className });
+    renderMenu({ className });
     expect(screen.getByText(label).closest('button')).toHaveClass(className);
   });
 
   it('renders icon and description', async () => {
-    await renderMenu({ iconDescription, renderIcon: icon });
+    renderMenu({ iconDescription, renderIcon: icon });
     const svg = screen.getByText(label).closest('button').querySelector('svg');
     expect(svg).toHaveClass(`${carbon.prefix}--btn__icon`);
   });
 
   it('renders label prop', async () => {
-    await renderMenu({ label });
+    renderMenu({ label });
     screen.getByText(label);
   });
 
   it('renders size prop', async () => {
     const ref = React.createRef();
-    await renderMenu({ ref, size: 'lg' });
+    renderMenu({ ref, size: 'lg' });
     expect(ref.current).toHaveClass(`${carbon.prefix}--btn--lg`);
   });
 
   it('adds additional props to the containing node', async () => {
-    await renderMenu({ 'data-testid': dataTestId });
+    renderMenu({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await renderMenu({ ref });
+    renderMenu({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 });

@@ -35,6 +35,6 @@ describe(componentName, () => {
   });
 
   it('renders', async () => {
-    await render(<SingleAddSelect {...defaultProps} />);
+    render(<SingleAddSelect {...defaultProps} />);
   });
 });

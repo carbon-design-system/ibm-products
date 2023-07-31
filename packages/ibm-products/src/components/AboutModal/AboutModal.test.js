@@ -57,7 +57,7 @@ const title = (
 
 // render an AboutModal with version, logo, title, copyrightText and any other required props
 const renderComponent = async ({ ...rest } = {}) =>
-  await render(
+  render(
     <main>
       <AboutModal
         {...{
@@ -89,25 +89,25 @@ describe(componentName, () => {
   });
 
   it('renders a component AboutModal', async () => {
-    await renderComponent({ open: true });
+    renderComponent({ open: true });
     expect(screen.getByRole('presentation')).toHaveClass(blockClass);
   });
 
   // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
   it.skip('has no accessibility violations when closed', async () => {
-    const { container } = await renderComponent({ open: false });
+    const { container } = renderComponent({ open: false });
     await expect(container).toBeAccessible(`${componentName} closed`);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await renderComponent({ open: true });
+    const { container } = renderComponent({ open: true });
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('renders closeIconDescription, title, logo, and version', async () => {
-    await renderComponent({ open: true });
+    renderComponent({ open: true });
     screen.getByRole('button', { name: closeIconDescription });
     screen.getByText(titleText);
     screen.getByText(version);
@@ -115,29 +115,29 @@ describe(componentName, () => {
   });
 
   it('renders version number', async () => {
-    await renderComponent({ version, open: true });
+    renderComponent({ version, open: true });
     screen.getByText(version);
   });
 
   it('renders with links', async () => {
-    await renderComponent({ links, open: true });
+    renderComponent({ links, open: true });
     const link = screen.getByRole('link', { name: linkText });
     expect(link.href).toEqual(linkHref);
   });
 
   it('renders general text', async () => {
-    await renderComponent({ content, open: true });
+    renderComponent({ content, open: true });
     screen.getByText(content);
   });
 
   it('renders copyright text', async () => {
-    await renderComponent({ copyrightText, open: true });
+    renderComponent({ copyrightText, open: true });
     screen.getByText(copyrightText);
   });
 
   it('renders additional info in footer', async () => {
     const id = uuidv4();
-    await renderComponent({
+    renderComponent({
       additionalInfo: (
         <>
           <p>{`Powered by (${id})`}</p>
@@ -163,23 +163,23 @@ describe(componentName, () => {
   });
 
   it('is visible when open is true', async () => {
-    await renderComponent({ open: true });
+    renderComponent({ open: true });
     expect(screen.getByRole('presentation')).toHaveClass('is-visible');
   });
 
   it('is not visible when open is not true', async () => {
-    const { container } = await renderComponent({ open: false });
+    const { container } = renderComponent({ open: false });
 
     expect(container.firstChild).not.toHaveClass('is-visible');
   });
 
   it('applies className to the root node', async () => {
-    await renderComponent({ className, open: true });
+    renderComponent({ className, open: true });
     expect(screen.getByRole('presentation')).toHaveClass(className);
   });
 
   it('calls onClose() when modal is closed', async () => {
-    await renderComponent({ open: true, onClose: onCloseReturnsTrue });
+    renderComponent({ open: true, onClose: onCloseReturnsTrue });
     const aboutModal = screen.getByRole('presentation');
     const closeButton = screen.getByRole('button', {
       name: closeIconDescription,
@@ -196,7 +196,7 @@ describe(componentName, () => {
   });
 
   it('allows veto when modal is closed', async () => {
-    await renderComponent({ open: true, onClose: onCloseReturnsFalse });
+    renderComponent({ open: true, onClose: onCloseReturnsFalse });
     const aboutModal = screen.getByRole('presentation');
     const closeButton = screen.getByRole('button', {
       name: closeIconDescription,
@@ -211,18 +211,18 @@ describe(componentName, () => {
   });
 
   it('adds additional properties to the containing node', async () => {
-    await renderComponent({ 'data-testid': dataTestId });
+    renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await renderComponent({ ref });
+    renderComponent({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await renderComponent({ 'data-testid': dataTestId });
+    renderComponent({ 'data-testid': dataTestId });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

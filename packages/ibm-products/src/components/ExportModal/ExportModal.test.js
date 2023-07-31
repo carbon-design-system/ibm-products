@@ -32,27 +32,27 @@ const defaultProps = {
 
 describe(componentName, () => {
   it('renders body', async () => {
-    await render(<ExportModal {...defaultProps} />);
+    render(<ExportModal {...defaultProps} />);
     screen.getByText(defaultProps.body);
   });
 
   it('renders title', async () => {
-    await render(<ExportModal {...defaultProps} />);
+    render(<ExportModal {...defaultProps} />);
     screen.getByText(defaultProps.title);
   });
 
   it('renders the loading message', async () => {
-    await render(<ExportModal {...defaultProps} loading />);
+    render(<ExportModal {...defaultProps} loading />);
     screen.getByText(defaultProps.loadingMessage);
   });
 
   it('renders the error message', async () => {
-    await render(<ExportModal {...defaultProps} error />);
+    render(<ExportModal {...defaultProps} error />);
     screen.getByText(defaultProps.errorMessage);
   });
 
   it('renders the success message', async () => {
-    await render(<ExportModal {...defaultProps} successful />);
+    render(<ExportModal {...defaultProps} successful />);
     screen.getByText(defaultProps.successMessage);
   });
 
@@ -68,7 +68,7 @@ describe(componentName, () => {
       invalidInputText: 'File must have valid extension .pdf',
     };
 
-    const { container } = await render(<ExportModal {...props} />);
+    const { container } = render(<ExportModal {...props} />);
     const textInput = container.querySelector(`.${carbon.prefix}--text-input`);
 
     change(textInput, { target: { value: `${props.filename}.pdf` } });
@@ -88,7 +88,7 @@ describe(componentName, () => {
       invalidInputText: 'File must have valid extension .pdf',
     };
 
-    const { container } = await render(<ExportModal {...props} />);
+    const { container } = render(<ExportModal {...props} />);
     const submitBtn = container.querySelector(
       `.${carbon.prefix}--btn--primary`
     );
@@ -109,7 +109,7 @@ describe(componentName, () => {
       invalidInputText: 'File must have valid extension .pdf',
     };
 
-    const { container } = await render(<ExportModal {...props} />);
+    const { container } = render(<ExportModal {...props} />);
     const textInput = container.querySelector(`.${carbon.prefix}--text-input`);
 
     change(textInput, { target: { value: `${props.filename}` } });
@@ -148,7 +148,7 @@ describe(componentName, () => {
       preformattedExtensionsLabel: 'Choose an export format',
     };
 
-    const { getByLabelText } = await render(<ExportModal {...props} />);
+    const { getByLabelText } = render(<ExportModal {...props} />);
 
     screen.getByText(props.preformattedExtensionsLabel);
     await act(() => click(getByLabelText('BAR (best for integration server)')));
@@ -160,7 +160,7 @@ describe(componentName, () => {
   });
 
   it('renders with password field', async () => {
-    const { container } = await render(
+    const { container } = render(
       <ExportModal {...defaultProps} inputType="password" />
     );
     expect(
@@ -170,31 +170,31 @@ describe(componentName, () => {
 
   //@TODO: reinstate this test as soon as https://github.com/carbon-design-system/carbon/issues/10107 is fixed
   it('has no accessibility violations', async () => {
-    const { container } = await render(<ExportModal {...defaultProps} />);
+    const { container } = render(<ExportModal {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = await render(<ExportModal {...defaultProps} />);
+    const { container } = render(<ExportModal {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'dataTestId';
 
   it('adds additional properties to the containing node', async () => {
-    await render(<ExportModal {...defaultProps} data-testid={dataTestId} />);
+    render(<ExportModal {...defaultProps} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await render(<ExportModal {...defaultProps} ref={ref} />);
+    render(<ExportModal {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await render(<ExportModal {...defaultProps} data-testid={dataTestId} />);
+    render(<ExportModal {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

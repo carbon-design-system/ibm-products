@@ -24,7 +24,7 @@ describe(CreateInfluencer.displayName, () => {
   });
 
   it('renders the CreateInfluencer component', async () => {
-    const { container } = await renderComponent({
+    const { container } = renderComponent({
       stepData: [
         {
           title: 'Step 1',
@@ -43,7 +43,7 @@ describe(CreateInfluencer.displayName, () => {
     const step1Title = 'Step 1 title';
     const step2Title = 'Step 2 title';
     const introTitle = 'Intro title';
-    const { container } = await renderComponent({
+    const { container } = renderComponent({
       stepData: [
         {
           introStep: true,
@@ -65,7 +65,7 @@ describe(CreateInfluencer.displayName, () => {
     const influencerElement = container.querySelector(`.${influencerClass}`);
     expect(influencerElement).toBeEmptyDOMElement();
     // Progress indicator should render after the intro step
-    await renderComponent({
+    renderComponent({
       stepData: [
         {
           introStep: true,

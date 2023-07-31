@@ -124,7 +124,7 @@ describe(componentName, () => {
   });
 
   it('renders the EditTearsheet component', async () => {
-    const { container } = await renderEditTearsheet({
+    const { container } = renderEditTearsheet({
       ...defaultProps,
     });
     expect(container.querySelector(`.${editTearsheetBlockClass}`)).toBeTruthy();
@@ -132,7 +132,7 @@ describe(componentName, () => {
   });
 
   it('should not render any EditTearsheetForm when there are no EditTearsheetForm components included', async () => {
-    const { container } = await renderEmptyEditTearsheet(defaultProps);
+    const { container } = renderEmptyEditTearsheet(defaultProps);
     const editTearsheetForms = container.querySelectorAll(
       `.${editTearsheetBlockClass}__form`
     );
@@ -140,24 +140,24 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await renderEditTearsheet({ ...defaultProps });
+    const { container } = renderEditTearsheet({ ...defaultProps });
     await expect(() => container.toBeAccessible());
     await expect(() => container.toHaveNoAxeViolations());
   });
 
   it('adds additional props to the containing node', async () => {
-    await render(<EditTearsheet data-testid={dataTestId}> </EditTearsheet>);
+    render(<EditTearsheet data-testid={dataTestId}> </EditTearsheet>);
     screen.getByTestId(dataTestId);
   });
 
   it('renders the primaryButtonLabel and secondaryButtonLabel properties', async () => {
-    await renderEditTearsheet({ ...defaultProps });
+    renderEditTearsheet({ ...defaultProps });
     screen.getByText(defaultProps.submitButtonText);
     screen.getByText(defaultProps.cancelButtonText);
   });
 
   it('calls onClose() when the tearsheet is closed', async () => {
-    await render(
+    render(
       <EditTearsheet
         {...{ ...defaultProps }}
         onClose={onCloseReturnsTrue}
@@ -172,7 +172,7 @@ describe(componentName, () => {
   });
 
   it('applies className to the root node', async () => {
-    await renderEditTearsheet({ className });
+    renderEditTearsheet({ className });
     const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
     expect(editTearsheet).toHaveClass(className);
   });

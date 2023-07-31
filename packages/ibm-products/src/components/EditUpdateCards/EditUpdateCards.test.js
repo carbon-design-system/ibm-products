@@ -23,39 +23,39 @@ const dataTestId = uuidv4();
 
 describe(componentName, () => {
   it('renders a component EditUpdateCards', async () => {
-    await render(<EditUpdateCards> </EditUpdateCards>);
+    render(<EditUpdateCards> </EditUpdateCards>);
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await render(<EditUpdateCards> </EditUpdateCards>);
+    const { container } = render(<EditUpdateCards> </EditUpdateCards>);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   // it(`renders children`,  async () => {
-  //  await render(<EditUpdateCards>{children}</EditUpdateCards>);
+  //  render(<EditUpdateCards>{children}</EditUpdateCards>);
   //   screen.getByText(children);
   // });
 
   it('applies className to the containing node', async () => {
-    await render(<EditUpdateCards className={className}> </EditUpdateCards>);
+    render(<EditUpdateCards className={className}> </EditUpdateCards>);
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {
-    await render(<EditUpdateCards data-testid={dataTestId}> </EditUpdateCards>);
+    render(<EditUpdateCards data-testid={dataTestId}> </EditUpdateCards>);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await render(<EditUpdateCards ref={ref}> </EditUpdateCards>);
+    render(<EditUpdateCards ref={ref}> </EditUpdateCards>);
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await render(<EditUpdateCards data-testid={dataTestId}> </EditUpdateCards>);
+    render(<EditUpdateCards data-testid={dataTestId}> </EditUpdateCards>);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

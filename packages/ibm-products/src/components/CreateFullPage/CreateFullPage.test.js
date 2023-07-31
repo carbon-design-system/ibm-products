@@ -170,19 +170,19 @@ const renderFullPageWithStepChildrenOutside = ({ ...rest } = {}) =>
 
 describe(componentName, () => {
   it('has no accessibility violations', async () => {
-    const { container } = await renderComponent({ ...defaultFullPageProps });
+    const { container } = renderComponent({ ...defaultFullPageProps });
 
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('adds additional properties to the containing node', async () => {
-    await renderCreateFullPage({ 'data-testid': dataTestId });
+    renderCreateFullPage({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await renderCreateFullPage({ 'data-testid': dataTestId });
+    renderCreateFullPage({ 'data-testid': dataTestId });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
@@ -190,14 +190,14 @@ describe(componentName, () => {
   });
 
   it('renders the CreateFullPage component', async () => {
-    const { container } = await renderCreateFullPage({
+    const { container } = renderCreateFullPage({
       ...defaultFullPageProps,
     });
     expect(container.querySelector(`.${blockClass}`)).toBeTruthy();
   });
 
   it('should not render any CreateFullPage steps when there are no FullPageStep components included', async () => {
-    const { container } = await renderEmptyCreateFullPage({
+    const { container } = renderEmptyCreateFullPage({
       ...defaultFullPageProps,
     });
     const createFullPageSteps = container.querySelectorAll(
@@ -208,11 +208,9 @@ describe(componentName, () => {
 
   it('should create a console warning when using CreateFullPage with only one step', async () =>
     expectWarn('CreateFullPages with one step are not permitted', async () => {
-      const { container } = await renderOneStepCreateFullPage(
-        defaultFullPageProps
-      );
+      const { container } = renderOneStepCreateFullPage(defaultFullPageProps);
       expect(async () => {
-        await render(...container);
+        render(...container);
       }).toThrow();
     }));
 
@@ -223,18 +221,17 @@ describe(componentName, () => {
         `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
       ],
       async () => {
-        const { container } = await renderFullPageWithStepChildrenOutside(
-          defaultFullPageProps
-        );
+        const { container } =
+          renderFullPageWithStepChildrenOutside(defaultFullPageProps);
         expect(async () => {
-          await render(...container);
+          render(...container);
         }).toThrow();
       }
     ));
 
   it('renders the second step if clicking on the next step button with onNext optional function prop', async () => {
     const { click } = userEvent;
-    const { container } = await renderCreateFullPage(defaultFullPageProps);
+    const { container } = renderCreateFullPage(defaultFullPageProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     await act(() => click(nextButtonElement));
     const createFullPageSteps = container.querySelector(
@@ -253,9 +250,7 @@ describe(componentName, () => {
 
   it('renders a modal when cancel button has been clicked and recognizes primary and secondary button clicks in modal', async () => {
     const { click } = userEvent;
-    const { container, rerender } = await renderCreateFullPage(
-      defaultFullPageProps
-    );
+    const { container, rerender } = renderCreateFullPage(defaultFullPageProps);
     const cancelButtonElement = screen.getByText(cancelButtonText);
     await act(() => click(cancelButtonElement));
     const createFullPageModal = container.querySelector(
@@ -302,7 +297,7 @@ describe(componentName, () => {
 
   it('should call the onRequestSubmit prop, returning a promise on last step submit button', async () => {
     const { click } = userEvent;
-    await renderCreateFullPage({
+    renderCreateFullPage({
       ...defaultFullPageProps,
       rejectOnSubmit: false,
       rejectOnNext: false,
@@ -328,7 +323,7 @@ describe(componentName, () => {
 
   it('should call the onRequestSubmit function, without a promise, on last step submit button', async () => {
     const { click } = userEvent;
-    await renderCreateFullPage({
+    renderCreateFullPage({
       ...defaultFullPageProps,
       rejectOnSubmit: false,
       rejectOnNext: false,
@@ -357,7 +352,7 @@ describe(componentName, () => {
       `CreateFullPage onNext error: ${rejectionErrorMessage}`,
       async () => {
         const { click } = userEvent;
-        await renderCreateFullPage({
+        renderCreateFullPage({
           ...defaultFullPageProps,
           rejectOnSubmit: false,
           rejectOnNext: false,
@@ -388,7 +383,7 @@ describe(componentName, () => {
       `CreateFullPage submit error: ${rejectionErrorMessage}`,
       async () => {
         const { click } = userEvent;
-        await renderCreateFullPage({
+        renderCreateFullPage({
           ...defaultFullPageProps,
           rejectOnSubmit: true,
         });
@@ -411,7 +406,7 @@ describe(componentName, () => {
 
   it('should disable the submit button when `disableSubmit` prop is passed in FullPageStep', async () => {
     const { click } = userEvent;
-    await render(
+    render(
       <CreateFullPage
         onRequestSubmit={onRequestSubmitRejectFn}
         {...defaultFullPageProps}
@@ -444,7 +439,7 @@ describe(componentName, () => {
 
   it('should click the back button and add a custom next button label on a single step', async () => {
     const { click } = userEvent;
-    const { container } = await renderCreateFullPage({
+    const { container } = renderCreateFullPage({
       ...defaultFullPageProps,
       rejectOnSubmit: false,
       rejectOnNext: false,
@@ -467,7 +462,7 @@ describe(componentName, () => {
   });
 
   it('should render a fieldset element around FullPageStep children when `hasFieldset` prop is provided', async () => {
-    const { container } = await renderCreateFullPage({
+    const { container } = renderCreateFullPage({
       ...defaultFullPageProps,
     });
     const createFullPageSteps = container.querySelector(

@@ -38,7 +38,7 @@ describe(componentName, () => {
   });
 
   it('renders', async () => {
-    await render(<AddSelectBreadcrumbs {...defaultProps} />);
+    render(<AddSelectBreadcrumbs {...defaultProps} />);
   });
 
   it('handles click', async () => {
@@ -47,7 +47,7 @@ describe(componentName, () => {
       ...defaultProps,
       onClick,
     };
-    await render(<AddSelectBreadcrumbs {...newProps} />);
+    render(<AddSelectBreadcrumbs {...newProps} />);
     fireEvent.click(screen.queryByText('default'));
     expect(onClick).toBeCalled();
   });
@@ -66,7 +66,7 @@ describe(componentName, () => {
         },
       ],
     };
-    await render(<AddSelectBreadcrumbs {...newProps} />);
+    render(<AddSelectBreadcrumbs {...newProps} />);
     expect(screen.getByText('default'));
     expect(screen.getByText('level 2'));
     expect(

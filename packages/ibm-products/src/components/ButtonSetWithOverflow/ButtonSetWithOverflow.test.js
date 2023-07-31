@@ -68,7 +68,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
 
     const myOnClick = jest.fn();
 
-    await render(
+    render(
       <ButtonSetWithOverflow
         buttons={buttons(myOnClick)}
         buttonSetOverflowLabel="overflow label"
@@ -95,7 +95,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
     const myOnClick = jest.fn();
     const buttonMenuLabel = 'button menu label';
 
-    await render(
+    render(
       <ButtonSetWithOverflow
         buttons={buttons(myOnClick)}
         buttonSetOverflowLabel={buttonMenuLabel}
@@ -124,7 +124,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
     window.innerWidth = buttonWidth * 3.5;
     const myOnClick = jest.fn();
 
-    const { container } = await render(
+    const { container } = render(
       <ButtonSetWithOverflow
         buttons={buttons(myOnClick)}
         rightAlign={true}

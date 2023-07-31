@@ -67,12 +67,12 @@ describe(componentName, () => {
   });
 
   it('renders a component EditSidePanel', async () => {
-    await renderEditPanel();
+    renderEditPanel();
     expect(screen.getByRole('complementary')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await renderEditPanel();
+    const { container } = renderEditPanel();
     await act(async () => {
       await expect(container).toBeAccessible(componentName);
       await expect(container).toHaveNoAxeViolations();
@@ -80,19 +80,19 @@ describe(componentName, () => {
   });
 
   it('renders children', async () => {
-    await renderEditPanel();
+    renderEditPanel();
     screen.getByText(childrenContent);
   });
 
   it('applies className to the containing node', async () => {
-    await renderEditPanel({
+    renderEditPanel({
       className,
     });
     expect(screen.getByRole('complementary')).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {
-    await renderEditPanel({
+    renderEditPanel({
       'data-testid': dataTestId,
     });
     screen.getByTestId(dataTestId);
@@ -100,12 +100,12 @@ describe(componentName, () => {
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await renderEditPanel({ ref });
+    renderEditPanel({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await renderEditPanel({
+    renderEditPanel({
       'data-testid': dataTestId,
     });
 
@@ -116,7 +116,7 @@ describe(componentName, () => {
 
   it('clicks on the primary action button', async () => {
     const { click } = userEvent;
-    await renderEditPanel();
+    renderEditPanel();
     const primaryActionButton = screen.getByText(primaryButtonText);
     await act(() => click(primaryActionButton));
     expect(onRequestSubmitFn).toHaveBeenCalledTimes(1);

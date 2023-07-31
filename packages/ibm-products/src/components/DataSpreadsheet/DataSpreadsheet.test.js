@@ -63,32 +63,28 @@ describe(componentName, () => {
     jest.clearAllMocks();
   });
   it('renders a component DataSpreadsheet', async () => {
-    await render(<DataSpreadsheet {...defaultProps} />);
+    render(<DataSpreadsheet {...defaultProps} />);
     expect(screen.getByRole('grid')).toHaveClass(blockClass);
   });
 
   it('applies className to the containing node', async () => {
-    await render(<DataSpreadsheet className={className} {...defaultProps} />);
+    render(<DataSpreadsheet className={className} {...defaultProps} />);
     expect(screen.getByRole('grid')).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', async () => {
-    await render(
-      <DataSpreadsheet data-testid={dataTestId} {...defaultProps} />
-    );
+    render(<DataSpreadsheet data-testid={dataTestId} {...defaultProps} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await render(<DataSpreadsheet ref={ref} {...defaultProps} />);
+    render(<DataSpreadsheet ref={ref} {...defaultProps} />);
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await render(
-      <DataSpreadsheet data-testid={dataTestId} {...defaultProps} />
-    );
+    render(<DataSpreadsheet data-testid={dataTestId} {...defaultProps} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
@@ -99,7 +95,7 @@ describe(componentName, () => {
     const ref = React.createRef();
     const activeCellChangeFn = jest.fn();
     const { click } = userEvent;
-    await await render(
+    await render(
       <DataSpreadsheet
         {...defaultProps}
         ref={ref}
@@ -129,7 +125,7 @@ describe(componentName, () => {
     const ref = React.createRef();
     const { click } = userEvent;
     const activeCellChangeFn = jest.fn();
-    await render(
+    render(
       <DataSpreadsheet
         {...defaultProps}
         ref={ref}
@@ -152,7 +148,7 @@ describe(componentName, () => {
     const { mouseMove, mouseDown, mouseUp } = fireEvent;
     const activeCellChangeFn = jest.fn();
     const onSelectionAreaChangeFn = jest.fn();
-    await render(
+    render(
       <DataSpreadsheet
         {...defaultProps}
         ref={ref}
@@ -198,7 +194,7 @@ describe(componentName, () => {
     const { click } = userEvent;
     const activeCellChangeFn = jest.fn();
     const onSelectionAreaChangeFn = jest.fn();
-    await render(
+    render(
       <DataSpreadsheet
         {...defaultProps}
         ref={ref}
@@ -242,7 +238,7 @@ describe(componentName, () => {
   it('should render an empty spreadsheet with 32 rows', async () => {
     const ref = React.createRef();
     const defaultEmptyRowCount = 32;
-    await render(
+    render(
       <EmptySpreadsheet ref={ref} defaultEmptyRowCount={defaultEmptyRowCount} />
     );
     const ariaRowCountValue = ref?.current.getAttribute('aria-rowcount');
@@ -268,7 +264,7 @@ describe(componentName, () => {
     const newCellValue = "I'm the new cell value";
     const { click, keyboard, tab, type } = userEvent;
     const ref = React.createRef();
-    await render(
+    render(
       <EditableSpreadsheet
         ref={ref}
         onActiveCellChange={activeCellChangeFn}
@@ -299,7 +295,7 @@ describe(componentName, () => {
     const newCellValue = "I'm the new cell value";
     const { click, keyboard, type } = userEvent;
     const ref = React.createRef();
-    await render(
+    render(
       <EditableSpreadsheet
         ref={ref}
         onActiveCellChange={activeCellChangeFn}
@@ -326,7 +322,7 @@ describe(componentName, () => {
   it('should set initial placement of active cell on the select all button', async () => {
     const ref = React.createRef();
     const { keyboard } = userEvent;
-    const { container } = await render(
+    const { container } = render(
       <DataSpreadsheet
         {...defaultProps}
         ref={ref}
@@ -352,7 +348,7 @@ describe(componentName, () => {
   it('should move the active cell with arrow keys as expected', async () => {
     const { click, keyboard } = userEvent;
     const ref = React.createRef();
-    await render(
+    render(
       <EditableSpreadsheet
         ref={ref}
         onActiveCellChange={activeCellChangeFn}
@@ -401,7 +397,7 @@ describe(componentName, () => {
   it('should empty the contents of a cell with the delete key', async () => {
     const { click, keyboard } = userEvent;
     const ref = React.createRef();
-    await render(
+    render(
       <EditableSpreadsheet
         ref={ref}
         onActiveCellChange={activeCellChangeFn}
@@ -444,7 +440,7 @@ describe(componentName, () => {
   it('should remove spreadsheet focus using tab key', async () => {
     const ref = React.createRef();
     const { tab } = userEvent;
-    const { container } = await render(
+    const { container } = render(
       <DataSpreadsheet
         {...defaultProps}
         ref={ref}
@@ -462,7 +458,7 @@ describe(componentName, () => {
   it('should navigate the active cell inside cell headers as expected', async () => {
     const ref = React.createRef();
     const { keyboard } = userEvent;
-    const { container } = await render(
+    const { container } = render(
       <DataSpreadsheet
         {...defaultProps}
         ref={ref}
@@ -553,7 +549,7 @@ describe(componentName, () => {
   it('should go into edit mode with double click on a cell', async () => {
     const ref = React.createRef();
     const { keyboard, dblClick } = userEvent;
-    const { container } = await render(
+    const { container } = render(
       <DataSpreadsheet
         {...defaultProps}
         ref={ref}
@@ -578,7 +574,7 @@ describe(componentName, () => {
 
   it('should use default values for columns and data if none are provided', async () => {
     const ref = React.createRef();
-    await render(
+    render(
       <DataSpreadsheet
         ref={ref}
         onSelectionAreaChange={onSelectionAreaChangeFn}
@@ -593,7 +589,7 @@ describe(componentName, () => {
   it('should do nothing on meta key usage and prevent default tab key behavior during edit', async () => {
     const ref = React.createRef();
     const { keyboard, dblClick } = userEvent;
-    await render(
+    render(
       <EditableSpreadsheet
         ref={ref}
         onActiveCellChange={activeCellChangeFn}

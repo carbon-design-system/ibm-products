@@ -232,9 +232,7 @@ describe(componentName, () => {
   });
 
   it('renders SingleAddSelectBody', async () => {
-    const { container } = await render(
-      <AddSelectBody {...singleHierarchyProps} />
-    );
+    const { container } = render(<AddSelectBody {...singleHierarchyProps} />);
     expect(container.querySelector(`.${blockClass}__single`)).toBeVisible();
   });
 
@@ -244,7 +242,7 @@ describe(componentName, () => {
       ...singleProps,
       onSubmit,
     };
-    await render(<AddSelectBody {...newProps} />);
+    render(<AddSelectBody {...newProps} />);
     const submitBtn = screen.getByText('submit selections');
     const radio = screen.getByLabelText('Kansas');
     fireEvent.click(radio);
@@ -253,7 +251,7 @@ describe(componentName, () => {
   });
 
   it('filters the items', async () => {
-    await render(<AddSelectBody {...singleHierarchyProps} />);
+    render(<AddSelectBody {...singleHierarchyProps} />);
     const input = screen.getByPlaceholderText('Find categories');
     expect(screen.getByText('Categories'));
     expect(screen.getByText('Florida'));
@@ -265,14 +263,14 @@ describe(componentName, () => {
   });
 
   it('displays no results', async () => {
-    await render(<AddSelectBody {...singleProps} />);
+    render(<AddSelectBody {...singleProps} />);
     const input = screen.getByPlaceholderText('Find categories');
     fireEvent.change(input, { target: { value: 'aaa' } });
     expect(screen.getByText(singleProps.noResultsTitle));
   });
 
   it('displays child items', async () => {
-    await render(<AddSelectBody {...singleHierarchyProps} />);
+    render(<AddSelectBody {...singleHierarchyProps} />);
     const childrenButton = document.querySelector(
       `.${blockClass}__selections-view-children`
     );
@@ -289,7 +287,7 @@ describe(componentName, () => {
       useNormalizedItems: true,
       normalizedItems,
     };
-    await render(<AddSelectBody {...newProps} />);
+    render(<AddSelectBody {...newProps} />);
     const childrenBtn = document.querySelectorAll(
       `.${blockClass}__selections-view-children`
     );
@@ -322,7 +320,7 @@ describe(componentName, () => {
       ...multiProps,
       onSubmit,
     };
-    await render(<AddSelectBody {...newProps} />);
+    render(<AddSelectBody {...newProps} />);
     const submitBtn = screen.getByText('Add');
     const opt1 = screen.getByLabelText('Kansas');
     const opt2 = screen.getByLabelText('Texas');
@@ -339,7 +337,7 @@ describe(componentName, () => {
       ...propsWithModifiers,
       onSubmit,
     };
-    await render(<AddSelectBody {...newProps} />);
+    render(<AddSelectBody {...newProps} />);
     const submitBtn = screen.getByText('Add');
     const opt1 = screen.getByLabelText('Kansas');
     fireEvent.click(opt1);
@@ -363,7 +361,7 @@ describe(componentName, () => {
       ...multiProps,
       items: itemsWithMeta,
     };
-    await render(<AddSelectBody {...newProps} />);
+    render(<AddSelectBody {...newProps} />);
     const metaBtn = document.querySelectorAll(
       `.${blockClass}__selections-view-meta`
     )[0];
@@ -377,7 +375,7 @@ describe(componentName, () => {
       ...multiProps,
       items: itemWithIcon,
     };
-    await render(<AddSelectBody {...newProps} />);
+    render(<AddSelectBody {...newProps} />);
     expect(document.querySelector(`${blockClass}__selections-cell-icon`));
   });
 
@@ -386,7 +384,7 @@ describe(componentName, () => {
       ...multiProps,
       items: itemWithAvatar,
     };
-    await render(<AddSelectBody {...newProps} />);
+    render(<AddSelectBody {...newProps} />);
     expect(document.querySelector(`${blockClass}-cell-avatar`));
   });
 
@@ -403,7 +401,7 @@ describe(componentName, () => {
       globalFiltersSecondaryButtonText: 'Reset',
       globalFilterOpts: getGlobalFilterValues(globalFilters, normalizedItems),
     };
-    await render(<AddSelectBody {...newProps} />);
+    render(<AddSelectBody {...newProps} />);
     fireEvent.click(screen.getByLabelText('Filter'));
     fireEvent.click(screen.getByTitle('Choose an option'));
     fireEvent.click(screen.getByText('default'));
@@ -432,7 +430,7 @@ describe(componentName, () => {
       useNormalizedItems: true,
       normalizedItems,
     };
-    await render(<AddSelectBody {...newProps} />);
+    render(<AddSelectBody {...newProps} />);
     const input = screen.getByPlaceholderText('Find');
     fireEvent.change(input, { target: { value: 'florida' } });
     expect(screen.findByText('florida'));

@@ -33,27 +33,27 @@ const defaultProps = {
 
 describe(componentName, () => {
   it('renders title', async () => {
-    await render(<RemoveModal {...defaultProps} />);
+    render(<RemoveModal {...defaultProps} />);
     screen.getByText(defaultProps.title);
   });
 
   it('renders body', async () => {
-    await render(<RemoveModal {...defaultProps} />);
+    render(<RemoveModal {...defaultProps} />);
     screen.getByText(defaultProps.body);
   });
 
   it('renders label', async () => {
-    await render(<RemoveModal {...defaultProps} />);
+    render(<RemoveModal {...defaultProps} />);
     screen.getByText(defaultProps.label);
   });
 
   it('renders icon description', async () => {
-    await render(<RemoveModal {...defaultProps} />);
+    render(<RemoveModal {...defaultProps} />);
     screen.getByRole('button', { name: defaultProps.iconDescription });
   });
 
   it('renders text input', async () => {
-    const { container } = await render(
+    const { container } = render(
       <RemoveModal {...defaultProps} textConfirmation />
     );
     screen.getByText(defaultProps.inputLabelText);
@@ -74,7 +74,7 @@ describe(componentName, () => {
       onRequestSubmit,
     };
 
-    await render(<RemoveModal {...props} />);
+    render(<RemoveModal {...props} />);
     await act(() => click(screen.getByText(props.primaryButtonText)));
 
     expect(onRequestSubmit).toBeCalled();
@@ -93,7 +93,7 @@ describe(componentName, () => {
       onRequestSubmit,
     };
 
-    const { container } = await render(<RemoveModal {...props} />);
+    const { container } = render(<RemoveModal {...props} />);
 
     await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
@@ -112,37 +112,37 @@ describe(componentName, () => {
   });
 
   it('disables the primary button when primaryButtonDisabled is used', async () => {
-    await render(<RemoveModal {...defaultProps} primaryButtonDisabled />);
+    render(<RemoveModal {...defaultProps} primaryButtonDisabled />);
     const primaryButton = screen.getByText(defaultProps.primaryButtonText);
     expect(primaryButton).toHaveAttribute('disabled');
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await render(<RemoveModal {...defaultProps} />);
+    const { container } = render(<RemoveModal {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = await render(<RemoveModal {...defaultProps} />);
+    const { container } = render(<RemoveModal {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'data-testid';
 
   it('adds additional properties to the containing node', async () => {
-    await render(<RemoveModal {...defaultProps} data-testid={dataTestId} />);
+    render(<RemoveModal {...defaultProps} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await render(<RemoveModal {...defaultProps} ref={ref} />);
+    render(<RemoveModal {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await render(<RemoveModal {...defaultProps} data-testid={dataTestId} />);
+    render(<RemoveModal {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

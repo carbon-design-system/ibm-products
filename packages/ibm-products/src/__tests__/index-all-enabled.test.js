@@ -62,14 +62,14 @@ describe(name, () => {
         /** Wraps the test component with the web terminal provider if the test component
             starts with 'WebTerminal' */
         if (key.startsWith('WebTerminal')) {
-          const { container } = await render(
+          const { container } = render(
             <WebTerminalProvider>
               <TestComponent />
             </WebTerminalProvider>
           );
           elementContainer = container;
         } else {
-          const { container } = await render(<TestComponent />);
+          const { container } = render(<TestComponent />);
           elementContainer = container;
         }
 

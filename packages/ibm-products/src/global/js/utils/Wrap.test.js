@@ -22,25 +22,25 @@ const dataTestId = uuidv4();
 describe(componentName, () => {
   it('renders non-empty content and passes through a ref', async () => {
     const ref = React.createRef();
-    await render(<Wrap {...{ className, ref }}>{nonemptyContent}</Wrap>);
+    render(<Wrap {...{ className, ref }}>{nonemptyContent}</Wrap>);
     screen.getByText(nonemptyContent);
     expect(ref.current).toHaveClass(className);
   });
 
   it('adds additional properties to the containing node', async () => {
-    await render(<Wrap data-testid={dataTestId}>{nonemptyContent}</Wrap>);
+    render(<Wrap data-testid={dataTestId}>{nonemptyContent}</Wrap>);
     screen.getByTestId(dataTestId);
   });
 
   it("doesn't render empty content", async () => {
     const ref = React.createRef();
-    await render(<Wrap ref={ref}>{emptyContent}</Wrap>);
+    render(<Wrap ref={ref}>{emptyContent}</Wrap>);
     expect(ref.current).toBeNull();
   });
 
   it('renders recursive non-empty content', async () => {
     const ref = React.createRef();
-    await render(
+    render(
       <Wrap ref={ref}>
         <Wrap>{nonemptyContent}</Wrap>
       </Wrap>
@@ -51,7 +51,7 @@ describe(componentName, () => {
 
   it("doesn't render recursive empty content", async () => {
     const ref = React.createRef();
-    await render(
+    render(
       <Wrap ref={ref}>
         <Wrap>{emptyContent}</Wrap>
       </Wrap>
@@ -61,7 +61,7 @@ describe(componentName, () => {
 
   const renderHierarchy = async (props, results) => {
     const refs = results.map(() => React.createRef());
-    await render(
+    render(
       <Wrap {...props} ref={refs[0]}>
         <Wrap {...props} ref={refs[1]}>
           <Wrap {...props} ref={refs[2]}>
@@ -94,7 +94,7 @@ describe(componentName, () => {
   };
 
   it('render recursive content only where non-empty', async () => {
-    await renderHierarchy({}, [
+    renderHierarchy({}, [
       true,
       true,
       false,
@@ -108,7 +108,7 @@ describe(componentName, () => {
   });
 
   it('responds to alwaysRender', async () => {
-    await renderHierarchy({ alwaysRender: true }, [
+    renderHierarchy({ alwaysRender: true }, [
       true,
       true,
       true,
@@ -121,7 +121,7 @@ describe(componentName, () => {
     ]);
   });
   it('responds to neverRender', async () => {
-    await renderHierarchy({ neverRender: true }, [
+    renderHierarchy({ neverRender: true }, [
       false,
       false,
       false,

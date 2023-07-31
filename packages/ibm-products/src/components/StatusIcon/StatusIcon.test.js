@@ -55,34 +55,34 @@ const renderComponent = ({ ...rest } = {}) =>
 
 describe(componentName, () => {
   it('renders a component StatusIcon', async () => {
-    const { container } = await renderComponent();
+    const { container } = renderComponent();
     expect(container).toBeInTheDocument();
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await renderComponent();
+    const { container } = renderComponent();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the root node', async () => {
-    const { container } = await renderComponent({ className });
+    const { container } = renderComponent({ className });
     expect(container.querySelector(`.${className}`)).toBeInTheDocument();
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await renderComponent({ ref });
+    renderComponent({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds additional properties to the containing node', async () => {
-    await renderComponent({ 'data-testid': dataTestId });
+    renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await renderComponent({ 'data-testid': dataTestId });
+    renderComponent({ 'data-testid': dataTestId });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName
@@ -91,7 +91,7 @@ describe(componentName, () => {
 
   iconTypes.forEach((kind) => {
     it(`applies the proper className when kind prop of ${kind} is passed`, async () => {
-      const { container } = await render(
+      const { container } = render(
         <StatusIcon
           kind={kind}
           iconDescription={kind}
@@ -109,7 +109,7 @@ describe(componentName, () => {
 
   iconTypes.forEach((label) => {
     it(`applies the proper title element when icon label of ${label} is passed`, async () => {
-      const { container } = await render(
+      const { container } = render(
         <StatusIcon
           kind={label}
           iconDescription={label}
@@ -127,7 +127,7 @@ describe(componentName, () => {
 
   iconThemes.forEach((theme) => {
     it(`applies the proper className when theme prop of ${theme} is passed`, async () => {
-      const { container } = await render(
+      const { container } = render(
         <StatusIcon
           kind="fatal"
           iconDescription="fatal"
@@ -145,7 +145,7 @@ describe(componentName, () => {
 
   iconSizes.forEach(({ input, output }) => {
     it(`changes element size when size prop of ${input} is passed`, async () => {
-      const { container } = await render(
+      const { container } = render(
         <StatusIcon
           kind="fatal"
           iconDescription="fatal"

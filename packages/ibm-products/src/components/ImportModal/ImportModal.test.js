@@ -62,37 +62,37 @@ describe(componentName, () => {
   });
 
   it('renders body', async () => {
-    await render(<ImportModal {...defaultProps} />);
+    render(<ImportModal {...defaultProps} />);
     screen.getByText(defaultProps.description);
   });
 
   it('renders title', async () => {
-    await render(<ImportModal {...defaultProps} />);
+    render(<ImportModal {...defaultProps} />);
     screen.getByText(defaultProps.title);
   });
 
   it('renders fileDropHeader', async () => {
-    await render(<ImportModal {...defaultProps} />);
+    render(<ImportModal {...defaultProps} />);
     screen.getByText(defaultProps.fileDropHeader);
   });
 
   it('renders fileDropLabel', async () => {
-    await render(<ImportModal {...defaultProps} />);
+    render(<ImportModal {...defaultProps} />);
     screen.getByRole('button', { name: defaultProps.fileDropLabel });
   });
 
   it('renders inputButtonText', async () => {
-    await render(<ImportModal {...defaultProps} />);
+    render(<ImportModal {...defaultProps} />);
     screen.getByText(defaultProps.inputButtonText);
   });
 
   it('renders inputLabel', async () => {
-    await render(<ImportModal {...defaultProps} />);
+    render(<ImportModal {...defaultProps} />);
     screen.getByText(defaultProps.inputLabel);
   });
 
   it('renders the input with an id', async () => {
-    const { container } = await render(<ImportModal {...defaultProps} />);
+    const { container } = render(<ImportModal {...defaultProps} />);
     container.querySelector(defaultProps.inputId);
   });
 
@@ -105,7 +105,7 @@ describe(componentName, () => {
       ...defaultProps,
       onRequestSubmit,
     };
-    const { getByText, container } = await render(<ImportModal {...props} />);
+    const { getByText, container } = render(<ImportModal {...props} />);
 
     expect(
       getByText(props.inputButtonText).classList.contains(
@@ -136,9 +136,7 @@ describe(componentName, () => {
     fetch.mockImplementationOnce(() => Promise.reject('fetch failed'));
     const { change } = fireEvent;
     const { click } = userEvent;
-    const { getByText, container } = await render(
-      <ImportModal {...defaultProps} />
-    );
+    const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.jpeg' },
@@ -161,7 +159,7 @@ describe(componentName, () => {
       fetchErrorBody: '',
       fetchErrorHeader: '',
     };
-    const { getByText, container } = await render(<ImportModal {...props} />);
+    const { getByText, container } = render(<ImportModal {...props} />);
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.jpeg' },
@@ -183,9 +181,7 @@ describe(componentName, () => {
     );
     const { change } = fireEvent;
     const { click } = userEvent;
-    const { getByText, container } = await render(
-      <ImportModal {...defaultProps} />
-    );
+    const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.jpeg' },
@@ -209,9 +205,7 @@ describe(componentName, () => {
     );
     const { change } = fireEvent;
     const { click } = userEvent;
-    const { getByText, container } = await render(
-      <ImportModal {...defaultProps} />
-    );
+    const { getByText, container } = render(<ImportModal {...defaultProps} />);
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.pdf' },
@@ -240,7 +234,7 @@ describe(componentName, () => {
       invalidFileTypeErrorBody: '',
       invalidFileTypeErrorHeader: '',
     };
-    const { getByText, container } = await render(<ImportModal {...props} />);
+    const { getByText, container } = render(<ImportModal {...props} />);
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.pdf' },
@@ -257,9 +251,7 @@ describe(componentName, () => {
   it('should successfully use the drag and drop component to upload a file and then remove the file', async () => {
     const { change } = fireEvent;
     const { click } = userEvent;
-    const { getByText, container } = await render(
-      <ImportModal {...defaultProps} />
-    );
+    const { getByText, container } = render(<ImportModal {...defaultProps} />);
     const files = [new File(['foo'], 'foo.jpeg', { type: 'image/jpeg' })];
 
     change(container.querySelector(`.${carbon.prefix}--file-input`), {
@@ -284,7 +276,7 @@ describe(componentName, () => {
       ...defaultProps,
       maxFileSize: 1,
     };
-    const { getByText, container } = await render(<ImportModal {...props} />);
+    const { getByText, container } = render(<ImportModal {...props} />);
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.pdf' },
@@ -307,7 +299,7 @@ describe(componentName, () => {
       maxFileSizeErrorHeader: '',
       maxFileSize: 1,
     };
-    const { getByText, container } = await render(<ImportModal {...props} />);
+    const { getByText, container } = render(<ImportModal {...props} />);
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.pdf' },
@@ -326,31 +318,31 @@ describe(componentName, () => {
   // https://github.com/carbon-design-system/carbon/issues/8847 this test
   // should be reinstated.
   it('has no accessibility violations', async () => {
-    const { container } = await render(<ImportModal {...defaultProps} />);
+    const { container } = render(<ImportModal {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = await render(<ImportModal {...defaultProps} />);
+    const { container } = render(<ImportModal {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'data-testid';
 
   it('adds additional properties to the containing node', async () => {
-    await render(<ImportModal {...defaultProps} data-testid={dataTestId} />);
+    render(<ImportModal {...defaultProps} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await render(<ImportModal {...defaultProps} ref={ref} />);
+    render(<ImportModal {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await render(<ImportModal {...defaultProps} data-testid={dataTestId} />);
+    render(<ImportModal {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

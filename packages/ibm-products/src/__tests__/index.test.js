@@ -59,7 +59,7 @@ describe(name, () => {
         // We check that unreleased public components render a Canary.
         // Non-canary components are tested elsewhere.
         it(`renders a canary by default for "${key}"`, async () => {
-          const { container } = await render(<TestComponent />);
+          const { container } = render(<TestComponent />);
           expect(container.querySelector(`.${canaryClass}`)).not.toBeNull();
         });
       }

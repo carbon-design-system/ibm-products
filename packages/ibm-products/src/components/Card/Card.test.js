@@ -17,7 +17,7 @@ const blockClass = `${pkg.prefix}--card`;
 
 describe(componentName, () => {
   it('renders', async () => {
-    await render(<Card />);
+    render(<Card />);
   });
 
   it('renders expressive with primary button', async () => {
@@ -27,7 +27,7 @@ describe(componentName, () => {
       primaryButtonText: 'Primary',
       onPrimaryButtonClick,
     };
-    await render(<Card {...props} />);
+    render(<Card {...props} />);
     await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onPrimaryButtonClick).toHaveBeenCalled();
   });
@@ -42,7 +42,7 @@ describe(componentName, () => {
       onPrimaryButtonClick,
       onSecondaryButtonClick,
     };
-    await render(<Card {...props} />);
+    render(<Card {...props} />);
     await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onPrimaryButtonClick).toHaveBeenCalled();
     await act(() => click(screen.getByText(props.secondaryButtonText)));
@@ -69,7 +69,7 @@ describe(componentName, () => {
     const props = {
       actionIcons,
     };
-    await render(<Card {...props} />);
+    render(<Card {...props} />);
     await act(() => click(screen.getByText('withOnClick')));
     expect(onClick).toHaveBeenCalled();
     expect(screen.getByText('withHref').closest('a')).toHaveAttribute(
@@ -84,7 +84,7 @@ describe(componentName, () => {
     const props = {
       onClick,
     };
-    const { container } = await render(<Card {...props} />);
+    const { container } = render(<Card {...props} />);
     await act(() => click(container.firstChild));
     expect(onClick).toHaveBeenCalled();
   });
@@ -96,7 +96,7 @@ describe(componentName, () => {
       media: <p>{mediaContent}</p>,
       pictogram: () => <p>{pictogramContent}</p>,
     };
-    await render(<Card {...props} />);
+    render(<Card {...props} />);
     expect(screen.getByText(mediaContent)).toBeVisible();
     expect(screen.getByText(pictogramContent)).toBeVisible();
   });
@@ -126,7 +126,7 @@ describe(componentName, () => {
       onPrimaryButtonClick: buttonClick,
       actionsPlacement: 'bottom',
     };
-    const { container, rerender } = await render(<Card {...props} />);
+    const { container, rerender } = render(<Card {...props} />);
     expect(screen.getByText(props.label)).toBeVisible();
     expect(
       container.querySelector(`.${blockClass}__footer .${blockClass}__actions`)
@@ -159,7 +159,7 @@ describe(componentName, () => {
       overflowAriaLabel: 'Overflow menu',
       actionsPlacement: 'bottom',
     };
-    const { container, rerender } = await render(<Card {...props} />);
+    const { container, rerender } = render(<Card {...props} />);
     expect(
       container.querySelector(`.${blockClass}__footer .${blockClass}__actions`)
     ).toBeVisible();
@@ -187,7 +187,7 @@ describe(componentName, () => {
       actionIcons: [],
       children: <p>body</p>,
     };
-    const { rerender, container } = await render(<Card {...props} />);
+    const { rerender, container } = render(<Card {...props} />);
     expect(screen.getByText(props.title)).toBeVisible();
     expect(screen.getByText(props.description)).toBeVisible();
     await act(() =>
@@ -207,24 +207,24 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await render(<Card />);
+    const { container } = render(<Card />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = await render(<Card className="test-class" />);
+    const { container } = render(<Card className="test-class" />);
     expect(container.firstChild).toHaveClass('test-class');
   });
 
   it('adds additional properties to the containing node', async () => {
-    await render(<Card data-testid="test-id" />);
+    render(<Card data-testid="test-id" />);
     screen.getByTestId('test-id');
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await render(<Card ref={ref} />);
+    render(<Card ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 });

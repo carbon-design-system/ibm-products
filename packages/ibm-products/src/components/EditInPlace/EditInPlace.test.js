@@ -31,11 +31,11 @@ const defaultProps = {
 
 describe(componentName, () => {
   it('renders EditInPlace', async () => {
-    await render(<EditInPlace {...defaultProps} />);
+    render(<EditInPlace {...defaultProps} />);
   });
 
   // it('renders in readOnly mode',  async() => {
-  //  await render(<EditInPlace {...defaultProps} readOnly />);
+  //  render(<EditInPlace {...defaultProps} readOnly />);
   //   const input = screen.getByDisplayValue(defaultProps.value);
   //   expect(input).toHaveAttribute('readOnly');
 
@@ -45,21 +45,21 @@ describe(componentName, () => {
   // });
 
   it('renders in invalid mode', async () => {
-    await render(<EditInPlace {...defaultProps} invalid />);
+    render(<EditInPlace {...defaultProps} invalid />);
     const input = screen.getByDisplayValue(defaultProps.value);
     await act(() => userEvent.click(input));
     expect(screen.getByText(defaultProps.invalidLabel)).toBeVisible();
   });
 
   it('focuses the input when the component is clicked', async () => {
-    await render(<EditInPlace {...defaultProps} />);
+    render(<EditInPlace {...defaultProps} />);
     const input = screen.getByDisplayValue(defaultProps.value);
     await act(() => userEvent.click(input));
     expect(screen.getByLabelText(defaultProps.cancelLabel)).toBeVisible();
   });
 
   it('focuses the input when the edit button is clicked', async () => {
-    await render(<EditInPlace {...defaultProps} />);
+    render(<EditInPlace {...defaultProps} />);
     const editBtn = screen.getByLabelText(defaultProps.editLabel);
     await act(() => userEvent.click(editBtn));
     expect(screen.getByLabelText(defaultProps.cancelLabel)).toBeVisible();
@@ -71,7 +71,7 @@ describe(componentName, () => {
       ...defaultProps,
       onChange,
     };
-    await render(<EditInPlace {...props} />);
+    render(<EditInPlace {...props} />);
     const input = screen.getByDisplayValue(props.value);
     fireEvent.change(input, {
       target: { value: 'new value' },
@@ -90,7 +90,7 @@ describe(componentName, () => {
       ...defaultProps,
       onSave,
     };
-    const { rerender } = await render(<EditInPlace {...props} />);
+    const { rerender } = render(<EditInPlace {...props} />);
     await rerender(<EditInPlace {...props} value="new value" />);
     await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
     await act(() => userEvent.click(screen.getByLabelText(props.saveLabel)));
@@ -103,7 +103,7 @@ describe(componentName, () => {
       ...defaultProps,
       onCancel,
     };
-    const { rerender } = await render(<EditInPlace {...props} />);
+    const { rerender } = render(<EditInPlace {...props} />);
     await rerender(<EditInPlace {...props} value="new value" />);
     await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
     await act(() => userEvent.click(screen.getByLabelText(props.cancelLabel)));
@@ -116,7 +116,7 @@ describe(componentName, () => {
       ...defaultProps,
       onSave,
     };
-    const { rerender } = await render(<EditInPlace {...props} />);
+    const { rerender } = render(<EditInPlace {...props} />);
     await rerender(<EditInPlace {...props} value="new value" />);
     await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
     const input = screen.getByDisplayValue('new value');
@@ -130,7 +130,7 @@ describe(componentName, () => {
       ...defaultProps,
       onCancel,
     };
-    await render(<EditInPlace {...props} />);
+    render(<EditInPlace {...props} />);
     await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
     const input = screen.getByDisplayValue(props.value);
     fireEvent.blur(input);
@@ -138,7 +138,7 @@ describe(componentName, () => {
   });
 
   it('handles keydown', async () => {
-    await render(<EditInPlace {...defaultProps} />);
+    render(<EditInPlace {...defaultProps} />);
     const input = screen.getByDisplayValue(defaultProps.value);
 
     // for coverage- default switch statement case
@@ -152,7 +152,7 @@ describe(componentName, () => {
       ...defaultProps,
       onCancel,
     };
-    const { rerender } = await render(<EditInPlace {...props} />);
+    const { rerender } = render(<EditInPlace {...props} />);
     const input = screen.getByDisplayValue(props.value);
 
     // clicks escape without making changes
@@ -173,7 +173,7 @@ describe(componentName, () => {
       ...defaultProps,
       onSave,
     };
-    const { rerender } = await render(<EditInPlace {...props} />);
+    const { rerender } = render(<EditInPlace {...props} />);
     const input = screen.getByDisplayValue(props.value);
 
     // clicks enter without making changes
@@ -189,7 +189,7 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await render(
+    const { container } = render(
       <main>
         <EditInPlace {...defaultProps} />
       </main>
@@ -199,25 +199,25 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = await render(<EditInPlace {...defaultProps} />);
+    const { container } = render(<EditInPlace {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'data-testid';
 
   it('adds additional properties to the containing node', async () => {
-    await render(<EditInPlace {...defaultProps} data-testid={dataTestId} />);
+    render(<EditInPlace {...defaultProps} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await render(<EditInPlace {...defaultProps} ref={ref} />);
+    render(<EditInPlace {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await render(<EditInPlace {...defaultProps} data-testid={dataTestId} />);
+    render(<EditInPlace {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

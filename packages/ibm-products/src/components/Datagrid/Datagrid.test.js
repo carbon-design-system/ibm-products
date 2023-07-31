@@ -883,7 +883,7 @@ describe(componentName, () => {
   });
 
   it('renders a basic data grid component with devTools attribute', async () => {
-    await render(<BasicUsage data-testid={dataTestId} />);
+    render(<BasicUsage data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       Datagrid.displayName
@@ -909,7 +909,7 @@ describe(componentName, () => {
   });
 
   it('renders a Batch Actions Table', async () => {
-    await render(<BatchActions data-testid={dataTestId}></BatchActions>);
+    render(<BatchActions data-testid={dataTestId}></BatchActions>);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1055,7 +1055,7 @@ describe(componentName, () => {
         const errorMock = jest
           .spyOn(console, 'error')
           .mockImplementation(() => {});
-        const { container } = await render(
+        const { container } = render(
           <BasicUsage data-testid={dataTestId} datagridState={null} />
         );
         expect(errorMock).toBeCalledWith(
@@ -1071,7 +1071,7 @@ describe(componentName, () => {
 
   //Empty State
   it('renders an empty table', async () => {
-    await render(<EmptyUsage data-testid={dataTestId}></EmptyUsage>);
+    render(<EmptyUsage data-testid={dataTestId}></EmptyUsage>);
     expect(
       screen.getByRole('table').getElementsByTagName('tbody')[0].className
     ).toEqual('c4p--datagrid__empty-state-body');
@@ -1123,7 +1123,7 @@ describe(componentName, () => {
   });
 
   it('Initial Load', async () => {
-    await render(<InitialLoad data-testid={dataTestId}></InitialLoad>);
+    render(<InitialLoad data-testid={dataTestId}></InitialLoad>);
     expect(
       screen
         .getByRole('table')
@@ -1134,7 +1134,7 @@ describe(componentName, () => {
   });
 
   it('Infinite Scroll', async () => {
-    await render(<InfiniteScroll data-testid={dataTestId}></InfiniteScroll>);
+    render(<InfiniteScroll data-testid={dataTestId}></InfiniteScroll>);
 
     expect(
       screen
@@ -1149,7 +1149,7 @@ describe(componentName, () => {
     expectError(
       'Carbon for IBM Products (Error): Feature "Datagrid.useInfiniteScroll" not enabled. To enable see the notes on feature flags in the README.',
       async () => {
-        await render(
+        render(
           <TenThousandEntriesWithoutFeatureFlag data-testid={dataTestId} />
         );
       },
@@ -1158,9 +1158,7 @@ describe(componentName, () => {
   });
 
   it('renders Ten Thousand table entries', async () => {
-    await render(
-      <TenThousandEntries data-testid={dataTestId}></TenThousandEntries>
-    );
+    render(<TenThousandEntries data-testid={dataTestId}></TenThousandEntries>);
 
     expect(
       parseInt(
@@ -1194,7 +1192,7 @@ describe(componentName, () => {
   });
 
   it('With Pagination', async () => {
-    await render(<WithPagination data-testid={dataTestId}></WithPagination>);
+    render(<WithPagination data-testid={dataTestId}></WithPagination>);
 
     expect(
       document.getElementById(`${carbon.prefix}-pagination-select-4`)
@@ -1206,7 +1204,7 @@ describe(componentName, () => {
 
   it('Clickable Row', async () => {
     const alertMock = jest.spyOn(window, 'alert');
-    await render(<ClickableRow data-testid={dataTestId}></ClickableRow>);
+    render(<ClickableRow data-testid={dataTestId}></ClickableRow>);
 
     fireEvent.click(
       screen
@@ -1260,7 +1258,7 @@ describe(componentName, () => {
   }
 
   it('Is Hover On Row', async () => {
-    await render(<IsHoverOnRow data-testid={dataTestId}></IsHoverOnRow>);
+    render(<IsHoverOnRow data-testid={dataTestId}></IsHoverOnRow>);
     completeHoverOperation(1);
 
     completeHoverOperation(5);
@@ -1268,9 +1266,7 @@ describe(componentName, () => {
 
   //Disables Selected Rows
   it('Renders Disable Select Row', async () => {
-    await render(
-      <DisableSelectRow data-testid={dataTestId}></DisableSelectRow>
-    );
+    render(<DisableSelectRow data-testid={dataTestId}></DisableSelectRow>);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1445,7 +1441,7 @@ describe(componentName, () => {
   }
 
   it('Expanded Row', async () => {
-    await render(<ExpandedRow data-testid={dataTestId}></ExpandedRow>);
+    render(<ExpandedRow data-testid={dataTestId}></ExpandedRow>);
     clickRow(1);
     clickRow(4);
     clickRow(8);
@@ -1470,7 +1466,7 @@ describe(componentName, () => {
   }
 
   it('Hide Select All', async () => {
-    await render(<HideSelectAll data-testid={dataTestId}></HideSelectAll>);
+    render(<HideSelectAll data-testid={dataTestId}></HideSelectAll>);
 
     hideSelectAll(2);
 
@@ -1480,7 +1476,7 @@ describe(componentName, () => {
   });
 
   it('Nested Rows', async () => {
-    await render(<NestedRows data-testid={dataTestId}></NestedRows>);
+    render(<NestedRows data-testid={dataTestId}></NestedRows>);
 
     const row = screen
       .getByRole('table')
@@ -1511,7 +1507,7 @@ describe(componentName, () => {
   });
 
   it('Nested Table', async () => {
-    await render(<NestedTable data-testid={dataTestId}></NestedTable>);
+    render(<NestedTable data-testid={dataTestId}></NestedTable>);
     fireEvent.click(
       screen
         .getAllByRole('table')[0]
@@ -1595,7 +1591,7 @@ describe(componentName, () => {
   }
 
   it('Radio Select', async () => {
-    await render(<RadioSelect data-testid={dataTestId}></RadioSelect>);
+    render(<RadioSelect data-testid={dataTestId}></RadioSelect>);
     radioSelectButton(1, 1);
 
     radioSelectButton(1, 4);
@@ -1609,7 +1605,7 @@ describe(componentName, () => {
   it.skip('Select Items In All Pages', async () => {
     const alertMock = jest.spyOn(window, 'alert');
 
-    await render(
+    render(
       <SelectItemsInAllPages data-testid={dataTestId}></SelectItemsInAllPages>
     );
     fireEvent.click(
@@ -1812,7 +1808,7 @@ describe(componentName, () => {
   };
 
   it('Right Aligned Columns', async () => {
-    await render(
+    render(
       <RightAlignedColumns data-testid={dataTestId}></RightAlignedColumns>
     );
     const numRows = screen
@@ -1846,7 +1842,7 @@ describe(componentName, () => {
   });
 
   it('Row Size Dropdown', async () => {
-    await render(<RowSizeDropdown data-testid={dataTestId}></RowSizeDropdown>);
+    render(<RowSizeDropdown data-testid={dataTestId}></RowSizeDropdown>);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1892,7 +1888,7 @@ describe(componentName, () => {
   });
 
   it('Selectable Row', async () => {
-    await render(<SelectableRow data-testid={dataTestId}></SelectableRow>);
+    render(<SelectableRow data-testid={dataTestId}></SelectableRow>);
 
     fireEvent.click(
       screen
@@ -1946,7 +1942,7 @@ describe(componentName, () => {
   });
 
   it('Sortable Columns', async () => {
-    await render(<SortableColumns data-testid={dataTestId}></SortableColumns>);
+    render(<SortableColumns data-testid={dataTestId}></SortableColumns>);
 
     const headerRow = screen
       .getByRole('table')
@@ -1968,9 +1964,7 @@ describe(componentName, () => {
   });
 
   it('Customizing Columns', async () => {
-    await render(
-      <CustomizingColumns data-testid={dataTestId}></CustomizingColumns>
-    );
+    render(<CustomizingColumns data-testid={dataTestId}></CustomizingColumns>);
 
     const alertMock = jest.spyOn(window, 'alert');
 
@@ -1993,7 +1987,7 @@ describe(componentName, () => {
 
   it('Top Alignment', async () => {
     const ref = React.createRef();
-    await render(<TopAlignment ref={ref} data-testid={dataTestId} />);
+    render(<TopAlignment ref={ref} data-testid={dataTestId} />);
 
     const alertMock = jest.spyOn(window, 'alert');
     expect(screen.getByRole('table').classList[2]).toEqual(
@@ -2090,7 +2084,7 @@ describe(componentName, () => {
   });
 
   it('Sticky Actions Column', async () => {
-    await render(
+    render(
       <StickyActionsColumn data-testid={dataTestId}></StickyActionsColumn>
     );
 

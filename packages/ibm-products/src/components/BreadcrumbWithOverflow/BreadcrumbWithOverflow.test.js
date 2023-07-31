@@ -105,7 +105,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
   it('Renders all as visible breadcrumbs when space available', async () => {
     const plentyOfSpace = (breadcrumbItems.length + 1) * sizes.breadcrumbWidth;
 
-    await render(
+    render(
       <TestBreadcrumbWithOverflow
         width={plentyOfSpace}
         overflowAriaLabel="Open and close additional breadcrumb item list."
@@ -128,7 +128,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
       (breadcrumbItems.length - reduceSpaceBy) * sizes.breadcrumbWidth;
     const overflowItemsExpected = reduceSpaceBy + 1; // + 1 as space for overflow button needed also
 
-    await render(
+    render(
       <TestBreadcrumbWithOverflow
         width={notEnoughSpace}
         overflowAriaLabel="Open and close additional breadcrumb item list."
@@ -172,7 +172,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
   it('Renders just the breadcrumb and last item when very little space', async () => {
     const notEnoughSpace = 1.1 * sizes.breadcrumbWidth;
 
-    await render(
+    render(
       <TestBreadcrumbWithOverflow
         width={notEnoughSpace}
         overflowAriaLabel="Open and close additional breadcrumb item list."
@@ -197,7 +197,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
   });
 
   it('Renders just the breadcrumb obeying maxVisible', async () => {
-    await render(
+    render(
       <TestBreadcrumbWithOverflow
         width={1200}
         maxVisible={3}
@@ -223,7 +223,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
   });
 
   it('Renders just the breadcrumb overflow and title using maxVisible 0', async () => {
-    await render(
+    render(
       <TestBreadcrumbWithOverflow
         width={1200}
         maxVisible={0}
@@ -251,7 +251,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
   it('does not duplicate ids', async () => {
     const plentyOfSpace = (breadcrumbItems.length + 1) * sizes.breadcrumbWidth;
 
-    const { container } = await render(
+    const { container } = render(
       <TestBreadcrumbWithOverflow
         width={plentyOfSpace}
         overflowAriaLabel="Open and close additional breadcrumb item list."
@@ -264,7 +264,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
   });
 
   it('adds additional properties to an breadcrumb with overflow', async () => {
-    await render(
+    render(
       <TestBreadcrumbWithOverflow
         data-testid={dataTestId}
         width={1200}

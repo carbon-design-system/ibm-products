@@ -30,7 +30,7 @@ describe(componentName, () => {
   });
 
   it('renders', async () => {
-    await render(<AddSelectSort sortByLabel="test sort title" />);
+    render(<AddSelectSort sortByLabel="test sort title" />);
   });
 
   it('renders with options', async () => {
@@ -38,7 +38,7 @@ describe(componentName, () => {
       sortBy: ['title'],
       sortByLabel: 'test sort title',
     };
-    await render(<AddSelectSort {...props} />);
+    render(<AddSelectSort {...props} />);
   });
 
   it('sorts on click', async () => {
@@ -50,7 +50,7 @@ describe(componentName, () => {
       sortBy: ['title'],
       sortByLabel: 'test sort title',
     };
-    await render(<AddSelectSort {...props} />);
+    render(<AddSelectSort {...props} />);
     const menu = document.querySelector(`.${blockClass}_overflow`);
     fireEvent.click(menu);
     const menuItem = document.querySelector(`.${blockClass}_overflow-item`);

@@ -71,7 +71,7 @@ URL.createObjectURL = jest.fn(() => Promise.resolve('download-link'));
 
 describe(componentName, () => {
   it('renders with standard visible props', async () => {
-    const { getByText, getByPlaceholderText } = await render(
+    const { getByText, getByPlaceholderText } = render(
       <APIKeyModal {...defaultProps} />
     );
     getByText(defaultProps.body);
@@ -92,7 +92,7 @@ describe(componentName, () => {
       apiKey: '123-456-789',
     };
     const { click } = userEvent;
-    const { getByText, container, getByLabelText } = await render(
+    const { getByText, container, getByLabelText } = render(
       <APIKeyModal {...props} />
     );
     expect(container.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
@@ -114,7 +114,7 @@ describe(componentName, () => {
       onRequestGenerate,
     };
 
-    const { getByText, container, rerender } = await render(
+    const { getByText, container, rerender } = render(
       <APIKeyModal {...props} />
     );
 
@@ -150,7 +150,7 @@ describe(componentName, () => {
       errorText: 'an error occurred',
     };
 
-    const { getByText, container, rerender } = await render(
+    const { getByText, container, rerender } = render(
       <APIKeyModal {...props} />
     );
 
@@ -194,8 +194,9 @@ describe(componentName, () => {
       customSteps,
       hasDownloadLink: false,
     };
-    const { rerender, getByPlaceholderText, getByText, container } =
-      await render(<APIKeyModal {...props} />);
+    const { rerender, getByPlaceholderText, getByText, container } = render(
+      <APIKeyModal {...props} />
+    );
 
     // step 1
     getByPlaceholderText('input a');
@@ -263,7 +264,7 @@ describe(componentName, () => {
       onRequestEdit,
     };
 
-    const { getByText, container, rerender } = await render(
+    const { getByText, container, rerender } = render(
       <APIKeyModal {...props} />
     );
 
@@ -285,7 +286,7 @@ describe(componentName, () => {
     };
     const { mouseOver } = fireEvent;
     const { click } = userEvent;
-    const { getByText, container, rerender } = await render(
+    const { getByText, container, rerender } = render(
       <APIKeyModal {...props} />
     );
     await waitFor(() => getByText(props.downloadLinkText));
@@ -325,31 +326,31 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = await render(<APIKeyModal {...defaultProps} />);
+    const { container } = render(<APIKeyModal {...defaultProps} />);
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = await render(<APIKeyModal {...defaultProps} />);
+    const { container } = render(<APIKeyModal {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'data-testid';
 
   it('adds additional properties to the containing node', async () => {
-    await render(<APIKeyModal {...defaultProps} data-testid={dataTestId} />);
+    render(<APIKeyModal {...defaultProps} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await render(<APIKeyModal {...defaultProps} ref={ref} />);
+    render(<APIKeyModal {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await render(<APIKeyModal {...defaultProps} data-testid={dataTestId} />);
+    render(<APIKeyModal {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

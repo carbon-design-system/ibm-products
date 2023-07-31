@@ -25,7 +25,7 @@ function _instance(prop) {
 
 function toBeAccessible(label, node, displayName) {
   it.skip(label, async () => {
-    const { container } = await render(node);
+    const { container } = render(node);
 
     await expect(container).toBeAccessible(`${displayName} — ${label}`);
     await expect(container).toHaveNoAxeViolations();
@@ -45,7 +45,7 @@ function it(Component) {
   );
 
   it('renders children', async () => {
-    const { container } = await render(<Component {...props} />);
+    const { container } = render(<Component {...props} />);
 
     console.log(container.outerHTML);
 
@@ -54,7 +54,7 @@ function it(Component) {
 
   it('adds a class to the containing node', async () => {
     const className = _instance('class-name');
-    await render(
+    render(
       <Component {...props} className={className} data-testid={dataTestId} />
     );
 
@@ -62,14 +62,14 @@ function it(Component) {
   });
 
   it('adds additional props to the containing node', async () => {
-    await render(<Component {...props} data-testid={dataTestId} />);
+    render(<Component {...props} data-testid={dataTestId} />);
 
     getByTestId(dataTestId);
   });
 
   it('forwards a reference to the appropriate DOM node', async () => {
     const ref = createRef();
-    await render(<Component {...props} ref={ref} data-testid={dataTestId} />);
+    render(<Component {...props} ref={ref} data-testid={dataTestId} />);
 
     expect(getByTestId(dataTestId)).toEqual(ref.current);
   });
@@ -89,9 +89,7 @@ describe(toolbarButtonComponentName, () => {
   );
 
   it('renders the caret variant', async () => {
-    const { rerender } = await render(
-      <ToolbarButton data-testid={dataTestId} />
-    );
+    const { rerender } = render(<ToolbarButton data-testid={dataTestId} />);
 
     const className = `${toolbarButtonClass}--caret`;
     expect(getByTestId(dataTestId)).not.toHaveClass(className);
@@ -101,9 +99,7 @@ describe(toolbarButtonComponentName, () => {
   });
 
   it("renders the 'right' tooltip position for the vertical variant by default", async () => {
-    const { rerender } = await render(
-      <ToolbarButton data-testid={dataTestId} />
-    );
+    const { rerender } = render(<ToolbarButton data-testid={dataTestId} />);
 
     const className = `${carbon.prefix}--popover--right`;
     expect(getByTestId(dataTestId).parentElement.parentElement).not.toHaveClass(
@@ -142,7 +138,7 @@ describe(componentName, () => {
   it(Toolbar);
 
   it('renders the vertical variant', async () => {
-    const { rerender } = await render(
+    const { rerender } = render(
       <Toolbar {...props} data-testid={dataTestId} vertical={true} />
     );
 
@@ -168,7 +164,7 @@ describe(componentName, () => {
   }
 
   async function setupFocus(length = 3, props) {
-    await render(
+    render(
       <Toolbar {...props}>
         {_array(length).map((_value, index) => {
           const children = getText(index);

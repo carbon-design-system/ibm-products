@@ -48,7 +48,7 @@ const renderNotifications = ({ ...rest } = {}) =>
 describe('Notifications', () => {
   it('renders the notification panel', async () => {
     const { animationStart, animationEnd } = fireEvent;
-    const { container, rerender } = await renderNotifications({
+    const { container, rerender } = renderNotifications({
       data: [],
     });
     expect(screen.queryAllByText(/Notifications/i)).toBeTruthy();
@@ -65,7 +65,7 @@ describe('Notifications', () => {
   it('should toggle do not disturb switch', async () => {
     const { fn } = jest;
     const onToggle = fn();
-    await renderNotifications({
+    renderNotifications({
       onDoNotDisturbChange: onToggle,
       data: [],
     });
@@ -77,14 +77,14 @@ describe('Notifications', () => {
   });
 
   it('should render notifications empty state', async () => {
-    await renderNotifications({
+    renderNotifications({
       data: [],
     });
     expect(screen.getByText(/you do not have any notifications/i));
   });
 
   it('should render notification with error state svg', async () => {
-    const { container } = await renderNotifications({
+    const { container } = renderNotifications({
       data: [
         {
           id: 0,
@@ -101,7 +101,7 @@ describe('Notifications', () => {
   });
 
   it('should render notification with warning state svg', async () => {
-    const { container } = await renderNotifications({
+    const { container } = renderNotifications({
       data: [
         {
           id: 0,
@@ -118,7 +118,7 @@ describe('Notifications', () => {
   });
 
   it('should render notification with success state svg', async () => {
-    const { container } = await renderNotifications({
+    const { container } = renderNotifications({
       data: [
         {
           id: 0,
@@ -135,7 +135,7 @@ describe('Notifications', () => {
   });
 
   it('should render notification with informational state svg', async () => {
-    const { container } = await renderNotifications({
+    const { container } = renderNotifications({
       data: [
         {
           id: 0,
@@ -152,7 +152,7 @@ describe('Notifications', () => {
   });
 
   it('should render link in notification', async () => {
-    await renderNotifications({
+    renderNotifications({
       data: [
         {
           id: 0,
@@ -173,7 +173,7 @@ describe('Notifications', () => {
   });
 
   it('should render Read more button', async () => {
-    await renderNotifications({
+    renderNotifications({
       data: [
         {
           id: 0,
@@ -189,7 +189,7 @@ describe('Notifications', () => {
   });
 
   it('adds additional properties to the containing node', async () => {
-    const { container } = await renderNotifications({
+    const { container } = renderNotifications({
       data: [],
       'data-testid': dataTestId,
     });
@@ -200,7 +200,7 @@ describe('Notifications', () => {
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    await renderNotifications({
+    renderNotifications({
       ref,
       data: [],
     });
@@ -208,7 +208,7 @@ describe('Notifications', () => {
   });
 
   it('adds the Devtools attribute to the containing node', async () => {
-    await renderNotifications({
+    renderNotifications({
       data: [],
       'data-testid': dataTestId,
     });
@@ -219,7 +219,7 @@ describe('Notifications', () => {
   });
 
   it('should close the notifications panel when click is detected outside', async () => {
-    const { container } = await renderNotifications({
+    const { container } = renderNotifications({
       data: [],
     });
     await act(() => userEvent.click(container));
@@ -227,7 +227,7 @@ describe('Notifications', () => {
   });
 
   it('should not render a notifications panel when open is false', async () => {
-    const { container } = await renderNotifications({
+    const { container } = renderNotifications({
       data: [],
       open: false,
     });
@@ -235,7 +235,7 @@ describe('Notifications', () => {
   });
 
   it('should click the read more label on a notification with a long description, then render `Read less` button', async () => {
-    await renderNotifications({
+    renderNotifications({
       data: testData,
     });
     const readLessClassName = `${blockClass}__notification-read-less-button`;
@@ -252,7 +252,7 @@ describe('Notifications', () => {
   });
 
   it('should dismiss a single notification', async () => {
-    await renderNotifications({
+    renderNotifications({
       data: testData,
       onDismissSingleNotification: onDismissSingleNotificationFn,
     });
@@ -267,7 +267,7 @@ describe('Notifications', () => {
   });
 
   it('should simulate a keydown event on a single notification', async () => {
-    await renderNotifications({
+    renderNotifications({
       data: testData,
     });
     const notificationElement = screen.getByText(/Test notification title/i)
@@ -282,7 +282,7 @@ describe('Notifications', () => {
   });
 
   it('should stop propagation of notification event if key event is fired upon dismiss single notification icon button', async () => {
-    await renderNotifications({
+    renderNotifications({
       data: testData,
       onDismissSingleNotification: onDismissSingleNotificationFn,
     });
@@ -303,7 +303,7 @@ describe('Notifications', () => {
 
   it('should call the dismiss all notifications event handler', async () => {
     const onDismissAllNotificationsFn = jest.fn();
-    await renderNotifications({
+    renderNotifications({
       data,
       onDismissAllNotifications: onDismissAllNotificationsFn,
     });
@@ -314,7 +314,7 @@ describe('Notifications', () => {
   it('should call the onViewAll event handler', async () => {
     const onViewAllFn = jest.fn();
     const onSettingsClickFn = jest.fn();
-    const { container } = await renderNotifications({
+    const { container } = renderNotifications({
       data,
       onViewAllClick: onViewAllFn,
       onSettingsClick: onSettingsClickFn,
@@ -332,7 +332,7 @@ describe('Notifications', () => {
   });
 
   it('should click onDismissAllNotification and onDismissSingleNotifications buttons to test default props', async () => {
-    await renderNotifications({
+    renderNotifications({
       data: testData,
     });
     const dismissAllButton = screen.getByText(/Dismiss all/i);

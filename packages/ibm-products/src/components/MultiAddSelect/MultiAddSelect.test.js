@@ -35,6 +35,6 @@ describe(componentName, () => {
   });
 
   it('renders', async () => {
-    await render(<MultiAddSelect {...defaultProps} />);
+    render(<MultiAddSelect {...defaultProps} />);
   });
 });

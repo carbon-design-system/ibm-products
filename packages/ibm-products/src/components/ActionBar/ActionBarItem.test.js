@@ -23,7 +23,7 @@ const testLabel = 'Test label';
 
 describe(ActionBarItem.displayName, () => {
   it('has no accessibility violations', async () => {
-    const { container } = await render(
+    const { container } = render(
       <main>
         <ActionBarItem label={testLabel}></ActionBarItem>
       </main>
@@ -39,7 +39,7 @@ describe(ActionBarItem.displayName, () => {
     const myOnClick = jest.fn();
 
     // not enough room so should see an overflow.
-    const { container } = await render(
+    const { container } = render(
       <ActionBarItem label={testLabel} onClick={myOnClick}></ActionBarItem>
     );
 
@@ -51,7 +51,7 @@ describe(ActionBarItem.displayName, () => {
   });
 
   it('adds user classes', async () => {
-    const { container } = await render(
+    const { container } = render(
       <ActionBarItem label={testLabel} className={className}>
         {content}
       </ActionBarItem>
@@ -62,7 +62,7 @@ describe(ActionBarItem.displayName, () => {
   });
 
   it('ignores user size and type settings', async () => {
-    const { container } = await render(
+    const { container } = render(
       <ActionBarItem label={testLabel} size="lg" type="submit">
         {content}
       </ActionBarItem>
@@ -74,7 +74,7 @@ describe(ActionBarItem.displayName, () => {
   });
 
   it('adds additional properties to the containing node', async () => {
-    const { container } = await render(
+    const { container } = render(
       <ActionBarItem label={testLabel} data-testid={dataTestId}>
         {content}
       </ActionBarItem>
@@ -87,7 +87,7 @@ describe(ActionBarItem.displayName, () => {
 
   it('forwards a ref to the block element', async () => {
     const ref = React.createRef();
-    await render(
+    render(
       <ActionBarItem label={testLabel} ref={ref}>
         {content}
       </ActionBarItem>

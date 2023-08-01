@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.4.1...@carbon/ibm-products@2.5.0) (2023-08-01)
+
+
+### Bug Fixes
+
+* **Datagrid:** add batch actions to clickable row with panel story ([#3228](https://github.com/carbon-design-system/ibm-products/issues/3228)) ([3536400](https://github.com/carbon-design-system/ibm-products/commit/3536400fa04eeaa575e3d64ee91edde7212ef5d5))
+* **Datagrid:** address row action disable state logic ([#3335](https://github.com/carbon-design-system/ibm-products/issues/3335)) ([435ada8](https://github.com/carbon-design-system/ibm-products/commit/435ada8d54fca0f32e2f3b765e7ce459b4c6c530))
+* **Datagrid:** remove sort styles hook not in use ([#3322](https://github.com/carbon-design-system/ibm-products/issues/3322)) ([59c9541](https://github.com/carbon-design-system/ibm-products/commit/59c9541dbf56e64383e53000049eb38f0d26d8ce))
+
+
+### Features
+
+* **NotificationsPanel:** include target attribute inside the link ([#3326](https://github.com/carbon-design-system/ibm-products/issues/3326)) ([bbade1b](https://github.com/carbon-design-system/ibm-products/commit/bbade1b293eda7582b8ff47fe8ef03532f733561))
+
+
+
+
+
 ## [2.4.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.4.0...@carbon/ibm-products@2.4.1) (2023-07-25)
 
 

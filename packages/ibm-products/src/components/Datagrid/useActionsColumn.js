@@ -21,7 +21,21 @@ const useActionsColumn = (hooks) => {
   }, []);
 
   const useAttachActionsOnInstance = (instance) => {
-    const { rowActions, isFetching, selectedFlatRows } = instance;
+    const {
+      rowActions,
+      isFetching,
+      state: { selectedRowIds },
+    } = instance;
+
+    const getDisabledState = (rowIndex) => {
+      const selectedRowIndexes = Object.keys(selectedRowIds).map((n) =>
+        Number(n)
+      );
+      if (selectedRowIndexes.includes(rowIndex)) {
+        return true;
+      }
+      return false;
+    };
 
     if (rowActions && Array.isArray(rowActions)) {
       const addActionsMenu = (props, cellData) => {
@@ -58,19 +72,13 @@ const useActionsColumn = (hooks) => {
                         if (hidden) {
                           return null;
                         }
-                        const selectedRowId = selectedFlatRows?.filter((item) =>
-                          item.id === row.id ? item.id : null
-                        );
                         return (
                           <div
                             className={cx(
                               `${blockClass}__actions-column-button`,
                               {
                                 [`${blockClass}__disabled-row-action-button`]:
-                                  selectedFlatRows &&
-                                  selectedFlatRows.length &&
-                                  selectedRowId &&
-                                  selectedRowId.length,
+                                  getDisabledState(row.index),
                               }
                             )}
                             key={`${itemText}__${index}`}
@@ -84,25 +92,17 @@ const useActionsColumn = (hooks) => {
                               kind="ghost"
                               className={cx({
                                 [`${blockClass}__disabled-row-action`]:
-                                  selectedFlatRows &&
-                                  selectedFlatRows.length &&
-                                  selectedRowId &&
-                                  selectedRowId.length,
+                                  getDisabledState(row.index),
                               })}
                               onClick={(e) => {
-                                if (
-                                  selectedFlatRows &&
-                                  selectedFlatRows.length &&
-                                  selectedRowId &&
-                                  selectedRowId.length
-                                ) {
+                                if (getDisabledState(row.index)) {
                                   // Row actions should be disabled if row is selected and batchActions toolbar is active
                                   return;
                                 }
                                 e.stopPropagation();
                                 onClick(id, row, e);
                               }}
-                            ></OverflowMenu>
+                            />
                           </div>
                         );
                       })}

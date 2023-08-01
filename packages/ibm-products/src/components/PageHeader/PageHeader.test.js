@@ -620,7 +620,7 @@ describe('PageHeader', () => {
         required('overflowAriaLabel', 'ActionBar'),
         // required('ariaLabel', 'OverflowMenu'),
       ],
-      async () => {
+      () => {
         const { title } = testProps;
         render(
           <PageHeader

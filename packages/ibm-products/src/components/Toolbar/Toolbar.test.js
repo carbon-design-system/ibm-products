@@ -37,7 +37,7 @@ const dataTestId = _instance('dataTestId');
 
 const props = { children };
 
-function it(Component) {
+function componentTest(Component) {
   toBeAccessible(
     'has no accessibility violations',
     <Component {...props} />,
@@ -80,7 +80,7 @@ describe(toolbarButtonComponentName, () => {
     pkg.setAllComponents(true);
   });
 
-  it(ToolbarButton);
+  componentTest(ToolbarButton);
 
   toBeAccessible(
     'has no accessibility violations for the caret variant',
@@ -127,7 +127,7 @@ describe(ToolbarGroup.displayName, () => {
   beforeAll(() => {
     pkg.setAllComponents(true);
   });
-  it(ToolbarGroup);
+  componentTest(ToolbarGroup);
 });
 
 describe(componentName, () => {
@@ -135,7 +135,7 @@ describe(componentName, () => {
     pkg.setAllComponents(true);
   });
 
-  it(Toolbar);
+  componentTest(Toolbar);
 
   it('renders the vertical variant', async () => {
     const { rerender } = render(

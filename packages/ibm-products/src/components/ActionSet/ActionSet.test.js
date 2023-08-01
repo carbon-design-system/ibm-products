@@ -102,7 +102,7 @@ describe(componentName, () => {
         'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than three actions',
         'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
       ],
-      async () =>
+      () =>
         render(
           <ActionSet
             actions={[

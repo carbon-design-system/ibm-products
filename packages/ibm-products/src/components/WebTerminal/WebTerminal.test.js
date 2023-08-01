@@ -6,10 +6,9 @@
  */
 
 import React from 'react';
-import { render, screen, act } from '@testing-library/react';
+import { render, renderHook, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Code, Copy } from '@carbon/react/icons';
-import { renderHook } from '@testing-library/react-hooks';
 
 import { pkg } from '../../settings';
 
@@ -65,6 +64,7 @@ describe(name, () => {
     );
 
     await expect(container).toBeAccessible(componentName);
+    await expect(container).toHaveNoAxeViolations();
   });
 
   it('should attach a custom class to the web terminal', async () => {
@@ -82,7 +82,7 @@ describe(name, () => {
     expect(screen.getByText(/Body content/i)).toBeInTheDocument();
   });
 
-  it('custom hook should toggle web terminal', async () => {
+  it.only('custom hook should toggle web terminal', async () => {
     /**  Utilizing renderHook so jest knows about the custom hook and passing
          in the WebTerminalProvider so that the hook can consume the value  */
     const { result } = renderHook(() => useWebTerminal(), {

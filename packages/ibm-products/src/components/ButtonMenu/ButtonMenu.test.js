@@ -45,7 +45,7 @@ const renderMenu = async (menuProps = {}, itemProps = {}) => {
 
 describe(componentName, () => {
   it('renders a component ButtonMenu', async () => {
-    renderMenu();
+    await renderMenu();
     expect(
       screen.getByText(label, {
         selector: `.${blockClass} .${blockClass}__trigger`,
@@ -54,46 +54,46 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = renderMenu();
+    const { container } = await renderMenu();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders children`, async () => {
-    renderMenu();
+    await renderMenu();
     screen.getByText(itemText);
   });
 
   it('applies className to the containing node', async () => {
-    renderMenu({ className });
+    await renderMenu({ className });
     expect(screen.getByText(label).closest('button')).toHaveClass(className);
   });
 
   it('renders icon and description', async () => {
-    renderMenu({ iconDescription, renderIcon: icon });
+    await renderMenu({ iconDescription, renderIcon: icon });
     const svg = screen.getByText(label).closest('button').querySelector('svg');
     expect(svg).toHaveClass(`${carbon.prefix}--btn__icon`);
   });
 
   it('renders label prop', async () => {
-    renderMenu({ label });
+    await renderMenu({ label });
     screen.getByText(label);
   });
 
   it('renders size prop', async () => {
     const ref = React.createRef();
-    renderMenu({ ref, size: 'lg' });
+    await renderMenu({ ref, size: 'lg' });
     expect(ref.current).toHaveClass(`${carbon.prefix}--btn--lg`);
   });
 
   it('adds additional props to the containing node', async () => {
-    renderMenu({ 'data-testid': dataTestId });
+    await renderMenu({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
-    renderMenu({ ref });
+    await renderMenu({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 });

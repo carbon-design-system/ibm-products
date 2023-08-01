@@ -28,7 +28,7 @@ describe(ActionBarItem.displayName, () => {
         <ActionBarItem label={testLabel}></ActionBarItem>
       </main>
     );
-    userEvent.tab();
+    await act(() => userEvent.tab());
     expect(screen.getByText(testLabel));
     expect(screen.getByRole('button')).toHaveFocus();
     await expect(container).toBeAccessible(componentName);

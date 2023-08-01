@@ -179,9 +179,9 @@ export const expectMultipleWarn = async (messages, test) => {
 
   expect(warn).toBeCalledTimes(messages.length);
   // Disable during react 18 update
-  // messages.forEach((args, index) =>
-  //   expect(warn).toHaveBeenNthCalledWith(index + 1, ...makeMatcherArray(args))
-  // );
+  messages.forEach((args, index) =>
+    expect(warn).toHaveBeenNthCalledWith(index + 1, ...makeMatcherArray(args))
+  );
   warn.mockRestore();
   return result;
 };
@@ -262,10 +262,10 @@ export const expectMultipleError = async (messages, test) => {
   expect(error).toBeCalledTimes(messages.length);
 
   // TODO: put back - Disabled during React 18 update
-  // messages.forEach(
-  //   (args, index) =>
-  //     expect(error).toHaveBeenNthCalledWith(index + 1, ...error.mock.calls[0]) // ...makeMatcherArray(args))
-  // );
+  messages.forEach(
+    (args, index) =>
+      expect(error).toHaveBeenNthCalledWith(index + 1, ...error.mock.calls[0]) // ...makeMatcherArray(args))
+  );
   error.mockRestore();
   return result;
 };

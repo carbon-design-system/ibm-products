@@ -94,7 +94,7 @@ describe(componentName, () => {
   };
 
   it('render recursive content only where non-empty', async () => {
-    renderHierarchy({}, [
+    await renderHierarchy({}, [
       true,
       true,
       false,
@@ -108,7 +108,7 @@ describe(componentName, () => {
   });
 
   it('responds to alwaysRender', async () => {
-    renderHierarchy({ alwaysRender: true }, [
+    await renderHierarchy({ alwaysRender: true }, [
       true,
       true,
       true,
@@ -121,7 +121,7 @@ describe(componentName, () => {
     ]);
   });
   it('responds to neverRender', async () => {
-    renderHierarchy({ neverRender: true }, [
+    await renderHierarchy({ neverRender: true }, [
       false,
       false,
       false,

@@ -1,0 +1,36 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+// stylelint-disable carbon/layout-token-use
+
+// Other Carbon settings.
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+
+// InterstitialScreenViewModule uses the following Carbon components:
+// TODO: @import(s) of Carbon component styles used by InterstitialScreenViewModule
+
+// InterstitialScreenViewModule uses the following Carbon for IBM Products components:
+// TODO: @import(s) of IBM Products component styles used by InterstitialScreenViewModule
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin interstitial-screen-view-module {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--interstitial-screen-view-module;
+
+  .#{$block-class} {
+    // TODO: Styles.
+    margin: $spacing-10 0 carbon--mini-units(24);
+  }
+}
+
+@include exports('interstitial-screen-view-module') {
+  @include interstitial-screen-view-module;
+}

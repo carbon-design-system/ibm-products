@@ -78,6 +78,7 @@ const defaults = {
     NonLinearReading: false,
     InterstitialScreen: false,
     InterstitialScreenView: false,
+    InterstitialScreenViewModule: false,
     /* new component flags here - comment used by generate CLI */
   },
 

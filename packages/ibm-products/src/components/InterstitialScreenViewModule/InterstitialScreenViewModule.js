@@ -11,6 +11,7 @@ import React from 'react';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
@@ -18,18 +19,36 @@ import { pkg /*, carbon */ } from '../../settings';
 /* TODO: @import(s) of carbon components and other package components. */
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--interstitial-screen-view`;
-const componentName = 'InterstitialScreenView';
+const blockClass = `${pkg.prefix}--interstitial-screen-view-module`;
+const componentName = 'InterstitialScreenViewModule';
+
+// NOTE: the component SCSS is not imported here: it is rolled up separately.
+
+// Default values can be included here and then assigned to the prop params,
+// e.g. prop = defaults.prop,
+// This gathers default values together neatly and ensures non-primitive
+// values are initialized early to avoid react making unnecessary re-renders.
+// Note that default values are not required for props that are 'required',
+// nor for props where the component can apply undefined values reasonably.
+// Default values should be provided when the component needs to make a choice
+// or assumption when a prop is not supplied.
+
+// Default values for props
+// const defaults = {
+//   /* TODO: add defaults for relevant props if needed */
+// };
 
 /**
- * A Novice to Pro component intended to be used as the child elements of the InterstitialScreen component.
+ * TODO: A description of the component.
  */
-export let InterstitialScreenView = React.forwardRef(
+export let InterstitialScreenViewModule = React.forwardRef(
   (
     {
-      children,
+      // The component props, in alphabetical order (for consistency).
+
       className,
-      stepTitle,
+      title,
+      description,
       // Collect any other property values passed in.
       ...rest
     },
@@ -37,7 +56,6 @@ export let InterstitialScreenView = React.forwardRef(
   ) => {
     return (
       <div
-        aria-label={stepTitle}
         {
           // Pass through any other property values as HTML attributes.
           ...rest
@@ -52,41 +70,41 @@ export let InterstitialScreenView = React.forwardRef(
           }
         )}
         ref={ref}
-        role="main"
+        role="heading"
+        aria-level={2}
         {...getDevtoolsProps(componentName)}
       >
-        {children}
+        <h1 className={`${blockClass}--heading`}>{title}</h1>
+        <p className={`${blockClass}--body`}>{description}</p>
       </div>
     );
   }
 );
 
 // Return a placeholder if not released and not enabled by feature flag
-InterstitialScreenView = pkg.checkComponentEnabled(
-  InterstitialScreenView,
+InterstitialScreenViewModule = pkg.checkComponentEnabled(
+  InterstitialScreenViewModule,
   componentName
 );
 
 // The display name of the component, used by React. Note that displayName
 // is used in preference to relying on function.name.
-InterstitialScreenView.displayName = componentName;
+InterstitialScreenViewModule.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
-InterstitialScreenView.propTypes = {
+InterstitialScreenViewModule.propTypes = {
   /**
-   * Provide the contents of the InterstitialScreenView.
-   */
-  children: PropTypes.node,
-
-  /**
-   * Optional class name for this component.
+   * Provide an optional class to be applied to the containing node.
    */
   className: PropTypes.string,
-
   /**
-   * The label to pass to the ProgressStep component.
+   * The description of this component.
    */
-  stepTitle: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  /**
+   * The title of this component.
+   */
+  title: PropTypes.string.isRequired,
 };

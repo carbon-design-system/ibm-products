@@ -10,6 +10,7 @@ import React, { useState } from 'react';
 // import { action } from '@storybook/addon-actions';
 import { Button } from 'carbon-components-react';
 import { InterstitialScreenView } from '..';
+import { InterstitialScreenViewModule } from '..';
 import {
   getStoryTitle,
   prepareStory,
@@ -64,11 +65,12 @@ const TemplateModal = (args) => {
         // onTodo={action('onTodo log action')}
         {...args}
       >
-        <InterstitialScreenView
-          title="Use case-specific heading"
-          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-          stepTitle="Use case-specific step title"
-        />
+        <InterstitialScreenView stepTitle="Use case-specific step title">
+          <InterstitialScreenViewModule
+            title="Use case-specific heading"
+            description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+          />
+        </InterstitialScreenView>
       </InterstitialScreen>
     </>
   );
@@ -96,27 +98,30 @@ const TemplateModalMultipleChildren = (args) => {
         // onTodo={action('onTodo log action')}
         {...args}
       >
-        <InterstitialScreenView
-          title="Use case-specific heading"
-          description={
-            'Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept.'
-          }
-          stepTitle="Use case-specific step title"
-        />
-        <InterstitialScreenView
-          title="Use case-specific heading"
-          description={
-            'Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept.'
-          }
-          stepTitle="Use case-specific step title"
-        />
-        <InterstitialScreenView
-          title="Use case-specific heading"
-          description={
-            'Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept.'
-          }
-          stepTitle="Use case-specific step title"
-        />
+        <InterstitialScreenView stepTitle="Use case-specific step title">
+          <InterstitialScreenViewModule
+            title="Use case-specific heading"
+            description={
+              'Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept.'
+            }
+          />
+        </InterstitialScreenView>
+        <InterstitialScreenView stepTitle="Use case-specific step title">
+          <InterstitialScreenViewModule
+            title="Use case-specific heading"
+            description={
+              'Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept.'
+            }
+          />
+        </InterstitialScreenView>
+        <InterstitialScreenView stepTitle="Use case-specific step title">
+          <InterstitialScreenViewModule
+            title="Use case-specific heading"
+            description={
+              'Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept.'
+            }
+          />
+        </InterstitialScreenView>
       </InterstitialScreen>
     </>
   );
@@ -147,23 +152,30 @@ const TemplateFullScreenMultiples = (args) => {
         // onTodo={action('onTodo log action')}
         {...args}
       >
-        <InterstitialScreenView
-          title="Use case-specific heading"
-          description={
-            'Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept.'
-          }
-          stepTitle="Use case-specific step title"
-        />
-        <InterstitialScreenView
-          title="Use case-specific heading"
-          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-          stepTitle="Use case-specific step title"
-        />
-        <InterstitialScreenView
-          title="Use case-specific heading"
-          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-          stepTitle="Use case-specific step title"
-        />
+        <InterstitialScreenView stepTitle="Use case-specific step title">
+          <InterstitialScreenViewModule
+            title="Use case-specific heading"
+            description={
+              'Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept.'
+            }
+          />
+        </InterstitialScreenView>
+        <InterstitialScreenView stepTitle="Use case-specific step title">
+          <InterstitialScreenViewModule
+            title="Use case-specific heading"
+            description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+          />
+        </InterstitialScreenView>
+        <InterstitialScreenView stepTitle="Use case-specific step title">
+          <InterstitialScreenViewModule
+            title="Use case-specific heading"
+            description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+          />
+        </InterstitialScreenView>
+        <div>
+          <h3>Hello</h3>
+          <p>Some text goes here...</p>
+        </div>
       </InterstitialScreen>
     </>
   );

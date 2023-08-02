@@ -61,7 +61,6 @@ const defaultHeader = [
   {
     Header: 'First Name',
     accessor: 'firstName',
-    centerAlignedColumn: true,
   },
   {
     Header: 'Last Name',

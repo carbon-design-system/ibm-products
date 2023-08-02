@@ -30,7 +30,7 @@ const getAriaSortValue = (
   if (!col) {
     return;
   }
-  const { isSorted, isSortedDesc } = col;
+  const { isSorted, isSortedDesc } = col || {};
   if (!isSorted) {
     return defaultSortableLabelText || 'none';
   }
@@ -46,7 +46,7 @@ const getAriaPressedValue = (col) => {
   if (!col) {
     return;
   }
-  const { isSorted } = col;
+  const { isSorted } = col || {};
   if (isSorted) {
     return 'true';
   }

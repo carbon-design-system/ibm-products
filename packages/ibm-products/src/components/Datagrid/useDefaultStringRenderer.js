@@ -28,7 +28,7 @@ const useDefaultStringRenderer = (hooks) => {
     <div
       className={`${blockClass}__defaultStringRenderer`}
       title={typeof header === 'string' ? header : ''}
-      key={header}
+      key={typeof header === 'string' ? header : ''}
     >
       {header}
     </div>

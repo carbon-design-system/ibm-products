@@ -261,13 +261,11 @@ export let OptionsTile = React.forwardRef(
               id={`${id}-toggle`}
               className={`${blockClass}__toggle`}
               toggled={enabled}
-              labelA=""
-              labelB=""
               aria-labelledby={titleId}
+              hideLabel
               onToggle={onToggle}
               size="sm"
               disabled={isLocked}
-              labelText={title}
             />
           </div>
         )}

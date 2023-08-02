@@ -268,10 +268,21 @@ export const expectMultipleError = async (messages, test) => {
   const result = await test();
   expect(error).toBeCalledTimes(messages.length);
 
+  // sanitize error calls - TODO: review
+  // for some reason getting printf style string
+  // error.mock.calls = error.mock.calls.map((call) => {
+  //   if (Array.isArray(call)) {
+  //     return call.reduce(
+  //       (acc, val) => (acc === '' ? val : acc.replace('%s', val)),
+  //       ''
+  //     );
+  //   }
+  //   return call;
+  // });
+
   // TODO: Maybe disable during react 18 update
-  messages.forEach(
-    (args, index) =>
-      expect(error).toHaveBeenNthCalledWith(index + 1, ...error.mock.calls[0]) // ...makeMatcherArray(args))
+  messages.forEach((args, index) =>
+    expect(error).toHaveBeenNthCalledWith(index + 1, ...makeMatcherArray(args))
   );
   error.mockRestore();
   return result;

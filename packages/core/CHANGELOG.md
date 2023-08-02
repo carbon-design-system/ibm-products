@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.43.5...@carbon/ibm-cloud-cognitive-core@1.2.0) (2023-08-02)
+
+
+### Bug Fixes
+
+* improve a11y tests ([#3233](https://github.com/carbon-design-system/ibm-products/issues/3233)) ([e5b5821](https://github.com/carbon-design-system/ibm-products/commit/e5b582120adad8dda4105f4c59b98d9068045b28))
+* update to Carbon 10 compatible versions to latest ([#3148](https://github.com/carbon-design-system/ibm-products/issues/3148)) ([b2ac3c7](https://github.com/carbon-design-system/ibm-products/commit/b2ac3c7f2bee0c65c3d2e679bec3d1ed1ee2733b))
+
+
+### Features
+
+* add new Guidebanner and Carousel components ([#3053](https://github.com/carbon-design-system/ibm-products/issues/3053)) ([94220b0](https://github.com/carbon-design-system/ibm-products/commit/94220b056b020769ac40fa9aa01f9ff31fea5b95))
+* **InlineTip:** add InlineTip component ([#3145](https://github.com/carbon-design-system/ibm-products/issues/3145)) ([f238fc0](https://github.com/carbon-design-system/ibm-products/commit/f238fc0dfad568b40a2507c9525f126c4a67aaff))
+* **SteppedAnimatedMedia:** Novice to Pro internal component ([#3055](https://github.com/carbon-design-system/ibm-products/issues/3055)) ([0499fea](https://github.com/carbon-design-system/ibm-products/commit/0499fea09c8d676fe8c0dec7411edef72b3dc7e0))
+
+
+
+
+
 ## [0.43.5](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@0.43.4...@carbon/ibm-cloud-cognitive-core@0.43.5) (2023-05-31)
 
 **Note:** Version bump only for package @carbon/ibm-cloud-cognitive-core

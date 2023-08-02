@@ -185,13 +185,18 @@ export const MultiStepTearsheet = ({
               <Checkbox
                 labelText={`Include additional step`}
                 id="include-additional-step-checkbox"
-                onChange={(value) => setShouldIncludeAdditionalStep(value)}
+                onChange={(event, { checked }) =>
+                  setShouldIncludeAdditionalStep(checked)
+                }
                 checked={shouldIncludeAdditionalStep}
               />
             </Column>
           </Grid>
         </CreateTearsheetStep>
         <CreateTearsheetStep
+          onPrevious={() => {
+            console.log('custom onPrevious handler');
+          }}
           title="Dynamic step"
           subtitle="Dynamic step subtitle"
           description="This is an example showing how to include a dynamic step into the CreateTearsheet"

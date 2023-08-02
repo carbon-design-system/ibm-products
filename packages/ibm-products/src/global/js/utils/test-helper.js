@@ -138,9 +138,9 @@ const makeMatcherArray = (args) =>
  * @param {Function} test the test function to call, during which the call to
  * console.warn will be expected.
  */
-export const expectWarn = (message, test) => {
+export const expectWarn = async (message, test) => {
   const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-  const result = test();
+  const result = await test();
   expect(warn).toBeCalledTimes(1);
   expect(warn).toHaveBeenCalledWith(...makeMatcherArray(message));
   warn.mockRestore();
@@ -235,7 +235,7 @@ export const expectLogging = async ({ errors, warnings }, test) => {
  */
 export const expectError = async (message, test) => {
   const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
-  const result = test();
+  const result = await test();
   if (type) checkLogging(error, message);
 
   error.mockRestore();
@@ -257,7 +257,14 @@ export const expectError = async (message, test) => {
  * console.error will be expected.
  */
 export const expectMultipleError = async (messages, test) => {
-  const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
+  // const jestFn = jest.fn();
+  const error = jest
+    .spyOn(global.console, 'error')
+    .mockImplementation(jest.fn());
+  // const error = jest.spyOn(console, 'error').mockImplementation((...args) => {
+  //   console.log(args);
+  //   return jestFn();
+  // });
   const result = await test();
   expect(error).toBeCalledTimes(messages.length);
 

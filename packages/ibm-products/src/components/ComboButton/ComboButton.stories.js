@@ -7,6 +7,7 @@
 
 import { CloudApp } from '@carbon/react/icons';
 import React from 'react';
+import { InlineNotification } from '@carbon/react';
 
 import {
   getStoryTitle,
@@ -31,13 +32,24 @@ export default {
 
 // eslint-disable-next-line no-unused-vars -- args not used in this template
 const Template = (args) => (
-  <ComboButton>
-    <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
-    <ComboButtonItem renderIcon={(props) => <CloudApp size={16} {...props} />}>
-      ComboButtonItem 2
-    </ComboButtonItem>
-    <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
-  </ComboButton>
+  <>
+    <InlineNotification
+      title="Deprecation notice"
+      kind="warning"
+      subtitle="Component no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement. Please refer to Carbon's ComboButton component."
+      hideCloseButton
+      style={{ marginBottom: '1rem' }}
+    />
+    <ComboButton>
+      <ComboButtonItem>ComboButtonItem 1</ComboButtonItem>
+      <ComboButtonItem
+        renderIcon={(props) => <CloudApp size={16} {...props} />}
+      >
+        ComboButtonItem 2
+      </ComboButtonItem>
+      <ComboButtonItem>ComboButtonItem 3</ComboButtonItem>
+    </ComboButton>
+  </>
 );
 
 export const Default = prepareStory(Template, {});

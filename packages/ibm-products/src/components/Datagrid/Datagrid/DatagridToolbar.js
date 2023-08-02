@@ -112,7 +112,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
             return (
               <MenuItem
                 key={`${batchAction.label}-${index}`}
-                itemText={batchAction.label}
+                label={batchAction.label}
                 onClick={(event) => {
                   batchAction.onClick(getSelectedRowData(), event);
                   if (batchAction.type === 'select_all') {

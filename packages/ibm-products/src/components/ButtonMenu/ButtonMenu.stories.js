@@ -13,6 +13,7 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
+import { InlineNotification } from '@carbon/react';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
 // import mdx from './ButtonMenu.mdx';
@@ -41,30 +42,39 @@ docs: {
 
 const Template = (args) => {
   return (
-    <ButtonMenu
-      label="Primary button"
-      menuAriaLabel="Primary button"
-      renderIcon={(props) => <Add size={16} {...props} />}
-      {...args}
-    >
-      <ButtonMenuItem
-        itemText="Option 1a"
-        onClick={action(`Click on Option 1`)}
+    <>
+      <InlineNotification
+        title="Deprecation notice"
+        kind="warning"
+        subtitle="Component no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement. Please refer to Carbon's MenuButton component."
+        hideCloseButton
+        style={{ marginBottom: '1rem' }}
       />
-      <ButtonMenuItem
-        itemText="Option 2"
-        onClick={action(`Click on Option 2`)}
-      />
-      <ButtonMenuItem
-        itemText="Option 3"
-        onClick={action(`Click on Option 3`)}
-      />
-      <ButtonMenuItem
-        itemText="Option 4"
-        onClick={action(`Click on Option 4`)}
-        hasDivider
-      />
-    </ButtonMenu>
+      <ButtonMenu
+        label="Primary button"
+        menuAriaLabel="Primary button"
+        renderIcon={(props) => <Add size={16} {...props} />}
+        {...args}
+      >
+        <ButtonMenuItem
+          itemText="Option 1a"
+          onClick={action(`Click on Option 1`)}
+        />
+        <ButtonMenuItem
+          itemText="Option 2"
+          onClick={action(`Click on Option 2`)}
+        />
+        <ButtonMenuItem
+          itemText="Option 3"
+          onClick={action(`Click on Option 3`)}
+        />
+        <ButtonMenuItem
+          itemText="Option 4"
+          onClick={action(`Click on Option 4`)}
+          hasDivider
+        />
+      </ButtonMenu>
+    </>
   );
 };
 

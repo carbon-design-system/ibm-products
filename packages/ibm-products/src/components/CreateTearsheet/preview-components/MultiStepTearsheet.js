@@ -185,7 +185,9 @@ export const MultiStepTearsheet = ({
               <Checkbox
                 labelText={`Include additional step`}
                 id="include-additional-step-checkbox"
-                onChange={(value) => setShouldIncludeAdditionalStep(value)}
+                onChange={(event, { checked }) =>
+                  setShouldIncludeAdditionalStep(checked)
+                }
                 checked={shouldIncludeAdditionalStep}
               />
             </Column>

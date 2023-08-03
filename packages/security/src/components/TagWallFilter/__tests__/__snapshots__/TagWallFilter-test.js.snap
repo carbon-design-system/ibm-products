@@ -146,7 +146,6 @@ exports[`TagWallFilter renders 1`] = `
           >
             
             <div
-              aria-label=" TagWallFilter 1"
               class="bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray"
               id="1"
             >

@@ -3711,6 +3711,9 @@ Map {
       "invalid": {
         "type": "bool",
       },
+      "name": {
+        "type": "string",
+      },
       "status": {
         "args": [
           [
@@ -14554,7 +14557,6 @@ Map {
       "multiple": false,
       "onAddFiles": [Function],
       "pattern": ".[0-9a-z]+$",
-      "tabIndex": 0,
     },
     "propTypes": {
       "accept": {
@@ -14587,15 +14589,14 @@ Map {
       "onAddFiles": {
         "type": "func",
       },
+      "onClick": {
+        "type": "func",
+      },
       "pattern": {
         "type": "string",
       },
-      "role": {
-        "type": "string",
-      },
-      "tabIndex": {
-        "type": "number",
-      },
+      "role": [Function],
+      "tabIndex": [Function],
     },
   },
   "FileUploaderItem" => {

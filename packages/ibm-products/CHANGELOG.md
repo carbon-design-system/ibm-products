@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.55.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.55.0...@carbon/ibm-products@1.55.1) (2023-08-03)
+
+
+### Bug Fixes
+
+* move lottie-web to ibm-products package.json ([#3354](https://github.com/carbon-design-system/ibm-products/issues/3354)) ([82c4fad](https://github.com/carbon-design-system/ibm-products/commit/82c4fad048d3747bdb144ee51f32e0073cfaca58))
+
+
+
+
+
 # [1.55.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.54.2...@carbon/ibm-products@1.55.0) (2023-08-02)
 
 

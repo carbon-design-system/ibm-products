@@ -31,7 +31,7 @@ export default {
     description: {
       control: { type: null },
     },
-    nextButtonLabel: {
+    nextButtonText: {
       control: { type: null },
     },
     previousButtonLabel: {

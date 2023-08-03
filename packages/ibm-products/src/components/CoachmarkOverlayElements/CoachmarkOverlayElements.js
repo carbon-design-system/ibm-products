@@ -11,7 +11,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { useCoachmark } from '../Coachmark';
 import { clamp } from 'lodash';
-
+import pconsole from '../../global/js/utils/pconsole';
 //TODO THIS PATH WILL NEED TO BE UPDATED ONCE IN IBM PRODUCTS
 import { Carousel } from '../Carousel';
 //TODO THIS PATH WILL NEED TO BE UPDATED ONCE IN IBM PRODUCTS
@@ -25,7 +25,7 @@ const blockClass = `${pkg.prefix}--coachmark-overlay-elements`;
 const componentName = 'CoachmarkOverlayElements';
 
 const defaults = {
-  nextButtonLabel: 'Next',
+  nextButtonText: 'Next',
   previousButtonLabel: 'Back',
   closeButtonLabel: 'Got it',
 };
@@ -40,7 +40,7 @@ export let CoachmarkOverlayElements = React.forwardRef(
       className,
       children,
       media,
-      nextButtonLabel = defaults.nextButtonLabel,
+      nextButtonText = defaults.nextButtonText,
       previousButtonLabel = defaults.previousButtonLabel,
       closeButtonLabel = defaults.closeButtonLabel,
       // Collect any other property values passed in.
@@ -66,12 +66,8 @@ export let CoachmarkOverlayElements = React.forwardRef(
       }
     }, []);
     if (!coachmark) {
-      return (
-        <div>
-          The CoachmarkOverlayElements is a composable container element which
-          should be used only within the scope of a Coachmark or a
-          CoachmarkFixed component.
-        </div>
+      return pconsole.warn(
+        `The ${componentName} is a composable container element which should be used only within the scope of a Coachmark or a CoachmarkFixed component.`
       );
     }
     return (
@@ -157,7 +153,7 @@ export let CoachmarkOverlayElements = React.forwardRef(
                 <Button
                   size="sm"
                   ref={buttonFocusRef}
-                  title={nextButtonLabel}
+                  title={nextButtonText}
                   disabled={scrollPosition === 1}
                   onClick={() => {
                     const targetStep = clamp(
@@ -173,7 +169,7 @@ export let CoachmarkOverlayElements = React.forwardRef(
                     setCurrentProgStep(targetStep);
                   }}
                 >
-                  {nextButtonLabel}
+                  {nextButtonText}
                 </Button>
               ) : (
                 closeButtonLabel && (
@@ -239,7 +235,7 @@ CoachmarkOverlayElements.propTypes = {
   /**
    * The label for the Next button.
    */
-  nextButtonLabel: PropTypes.string,
+  nextButtonText: PropTypes.string,
   /**
    * The label for the Previous button.
    */

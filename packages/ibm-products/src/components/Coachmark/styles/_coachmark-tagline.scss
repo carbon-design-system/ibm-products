@@ -29,7 +29,7 @@
     border-radius: $spacing-01 $spacing-01 0 0;
     background: $purple-70;
     background-image: linear-gradient(90deg, $blue-90 0%, $purple-70 100%);
-    color: $white-0;
+    color: $white-0 !important;
     grid-template-columns: [ctacol] auto [closebtncol] $spacing-08;
     opacity: 1;
     // stylelint-disable-next-line carbon/motion-duration-use
@@ -79,7 +79,11 @@
     &__cta {
       display: grid;
       padding: $spacing-03 0;
+      border: none;
+      background: transparent;
+      color: $white-0 !important;
       grid-template-columns: [iconcol] $spacing-07 [bodycol] auto;
+      text-align: left;
       @include carbon--type-style('body-short-01');
 
       &:hover {

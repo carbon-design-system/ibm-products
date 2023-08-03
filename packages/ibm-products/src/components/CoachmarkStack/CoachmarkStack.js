@@ -5,15 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
 import React, { Children, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-// Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
+import { pkg } from '../../settings';
 
 import { CoachmarkOverlay } from '../Coachmark/CoachmarkOverlay';
 import { CoachmarkStackHome } from './CoachmarkStackHome';
@@ -21,7 +19,6 @@ import { CoachmarkTagline } from '../Coachmark/CoachmarkTagline';
 import { CoachmarkContext } from '../Coachmark/utils/context';
 import { COACHMARK_OVERLAY_KIND } from '../Coachmark/utils/enums';
 
-// The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark-stack`;
 const elementBlockClass = `${pkg.prefix}--coachmark-stack-element`;
 const componentName = 'CoachmarkStack';
@@ -48,8 +45,6 @@ const defaults = {
 export let CoachmarkStack = React.forwardRef(
   (
     {
-      // The component props, in alphabetical order (for consistency).
-
       children,
       className,
       onClose = defaults.onClose,
@@ -197,8 +192,6 @@ export let CoachmarkStack = React.forwardRef(
           <CoachmarkStackHome
             ref={stackHomeRef}
             className={cx(
-              // TODO: turn these into constants
-              // These class names match the default "coachmark" class names
               `${pkg.prefix}--coachmark-overlay`,
               `${pkg.prefix}--coachmark-overlay__${theme}`,
               elementBlockClass,
@@ -220,7 +213,6 @@ export let CoachmarkStack = React.forwardRef(
             title={title}
           />
           {createPortal(wrappedChildren, portalNode)}
-          {/* {wrappedChildren} */}
         </div>
       </CoachmarkContext.Provider>
     );
@@ -238,10 +230,6 @@ CoachmarkStack.displayName = componentName;
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
 CoachmarkStack.propTypes = {
-  // TODO: UPDATE COMMENT HERE - UPDATE MDX TO HAVE DIRECTION TO USE ONLY OVERLAY ELEMENTS>
-  // CoachmarkStack` requires two or more children of type `Coachmark`
-  // `CoachmarkStack` only accepts children of type `Coachmark`
-
   /**
    * CoachmarkStack should use a single CoachmarkOverlayElements component as a child.
    */

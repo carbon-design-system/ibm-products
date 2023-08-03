@@ -10,11 +10,7 @@ import { render, screen } from '@testing-library/react'; // https://testing-libr
 
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
-import {
-  Coachmark,
-  CoachmarkOverlayElement,
-  CoachmarkOverlayElements,
-} from '..';
+import { CoachmarkOverlayElement, CoachmarkOverlayElements } from '..';
 import { CoachmarkStack } from '.';
 import { act } from 'react-dom/test-utils';
 
@@ -26,30 +22,30 @@ const childDataTestId = `coachmark_${uuidv4()}`;
 
 // values to use
 const childrenContent = [
-  <Coachmark key="1">
-    <CoachmarkOverlayElements closeButtonLabel={'Close 1'}>
-      <CoachmarkOverlayElement
-        title="First Title"
-        description="First element description"
-      />
-    </CoachmarkOverlayElements>
-  </Coachmark>,
-  <Coachmark data-testid={childDataTestId} key="2">
-    <CoachmarkOverlayElements closeButtonLabel={'Close 2'}>
-      <CoachmarkOverlayElement
-        title="Second Title"
-        description="Second element description"
-      />
-    </CoachmarkOverlayElements>
-  </Coachmark>,
-  <Coachmark key="3">
-    <CoachmarkOverlayElements closeButtonLabel={'Close 3'}>
-      <CoachmarkOverlayElement
-        title="Third Title"
-        description="Third element description"
-      />
-    </CoachmarkOverlayElements>
-  </Coachmark>,
+  <CoachmarkOverlayElements closeButtonLabel={'Close 1'} key="1">
+    <CoachmarkOverlayElement
+      title="Test Element 1"
+      description="Description goes here"
+    />
+  </CoachmarkOverlayElements>,
+
+  <CoachmarkOverlayElements
+    data-testid={childDataTestId}
+    closeButtonLabel={'Close 2'}
+    key="2"
+  >
+    <CoachmarkOverlayElement
+      title="Test Element 1"
+      description="Description goes here"
+    />
+  </CoachmarkOverlayElements>,
+
+  <CoachmarkOverlayElements closeButtonLabel={'Close 3'} key="3">
+    <CoachmarkOverlayElement
+      title="Test Element 1"
+      description="Description goes here"
+    />
+  </CoachmarkOverlayElements>,
 ];
 const className = `class-${uuidv4()}`;
 

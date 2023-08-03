@@ -58,17 +58,17 @@ export let CoachmarkTagline = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <div
-          {...rest}
+        <button
+          // {...rest}
           className={`${blockClass}__cta`}
-          role="button"
+          type="button"
           {...coachmark.buttonProps}
         >
           <div className={`${blockClass}__idea`}>
             <Idea16 />
           </div>
           <div>{title}</div>
-        </div>
+        </button>
         <Button
           kind="ghost"
           size="sm"

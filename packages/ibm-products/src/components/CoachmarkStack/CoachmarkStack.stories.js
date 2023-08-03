@@ -60,7 +60,7 @@ const Template = (args) => {
 
       <CoachmarkOverlayElements
         closeButtonLabel="Close"
-        nextButtonLabel="Next"
+        nextButtonText="Next"
         previousButtonLabel="Back"
       >
         <CoachmarkOverlayElement
@@ -93,7 +93,7 @@ const Template = (args) => {
 
       <CoachmarkOverlayElements
         closeButtonLabel="Done"
-        nextButtonLabel="Next"
+        nextButtonText="Next"
         previousButtonLabel="Back"
       >
         <CoachmarkOverlayElement

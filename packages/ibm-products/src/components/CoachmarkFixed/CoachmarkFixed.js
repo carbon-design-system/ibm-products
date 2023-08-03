@@ -130,15 +130,9 @@ export let CoachmarkFixed = React.forwardRef(
           className={cx(
             blockClass, // Apply the block class to the main HTML element
             `${blockClass}__${theme}`,
-            className, // Apply any supplied class names to the main HTML element.
-            // example: `${blockClass}__template-string-class-${kind}-n-${size}`,
-            {
-              // switched classes dependant on props or state
-              // example: [`${blockClass}__here-if-small`]: size === 'sm',
-            }
+            className // Apply any supplied class names to the main HTML element.
           )}
           ref={ref}
-          role="main"
           {...getDevtoolsProps(componentName)}
         >
           <CoachmarkTagline title={tagline} onClose={onClose} />

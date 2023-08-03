@@ -69,7 +69,7 @@ const Template = (args) => {
 export const coachmarkOverlayElements = prepareStory(Template, {
   args: {
     closeButtonLabel: 'Done',
-    nextButtonLabel: 'Next',
+    nextButtonText: 'Next',
     previousButtonLabel: 'Back',
     className: 'myOverlayElements',
     media: { filePaths: [Anim1, Anim2] },

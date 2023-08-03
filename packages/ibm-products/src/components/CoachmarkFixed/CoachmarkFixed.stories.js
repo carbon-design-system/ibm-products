@@ -46,7 +46,7 @@ const Template = (args) => {
     <CoachmarkFixed {...args} theme={theme}>
       <CoachmarkOverlayElements
         closeButtonLabel="Done"
-        nextButtonLabel="Next"
+        nextButtonText="Next"
         previousButtonLabel="Back"
       >
         <CoachmarkOverlayElement

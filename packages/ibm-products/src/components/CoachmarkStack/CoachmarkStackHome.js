@@ -5,10 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// Import portions of React that are needed.
 import React, { forwardRef } from 'react';
-
-// Other standard imports.
+import pconsole from '../../global/js/utils/pconsole';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Idea20 } from '@carbon/icons-react';
@@ -48,11 +46,8 @@ export let CoachmarkStackHome = forwardRef(
     ref
   ) => {
     if (!navLinkLabels) {
-      return (
-        <div>
-          CoachmarkStackHome is a Novice to Pro internal component and is not
-          intended for general use.
-        </div>
+      return pconsole.warn(
+        `${componentName} is a Novice to Pro internal component and is not intended for general use.`
       );
     }
 

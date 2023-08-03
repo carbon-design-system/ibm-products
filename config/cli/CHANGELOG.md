@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.37](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-cli@0.18.36...@carbon/ibm-cloud-cognitive-cli@0.18.37) (2023-08-02)
+
+
+### Bug Fixes
+
+* update to Carbon 10 compatible versions to latest ([#3148](https://github.com/carbon-design-system/ibm-products/issues/3148)) ([b2ac3c7](https://github.com/carbon-design-system/ibm-products/commit/b2ac3c7f2bee0c65c3d2e679bec3d1ed1ee2733b))
+
+
+
+
+
 ## [0.18.36](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-cli@0.18.35...@carbon/ibm-cloud-cognitive-cli@0.18.36) (2023-05-25)
 
 

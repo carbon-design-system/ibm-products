@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useContext, useEffect, useState } from 'react';
+import React, {
+  forwardRef,
+  useContext,
+  useEffect,
+  useState,
+  isValidElement,
+} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Column, FormGroup, Grid } from '@carbon/react';
@@ -88,6 +94,20 @@ export let CreateTearsheetStep = forwardRef(
       }
     }, [stepsContext, stepNumber, disableSubmit, onNext]);
 
+    const renderDescription = () => {
+      if (description) {
+        if (typeof description === 'string') {
+          return <p className={`${blockClass}--description`}>{description}</p>;
+        }
+        if (isValidElement(description)) {
+          return (
+            <div className={`${blockClass}--description`}>{description}</div>
+          );
+        }
+      }
+      return null;
+    };
+
     return stepsContext ? (
       <Grid
         {
@@ -109,9 +129,7 @@ export let CreateTearsheetStep = forwardRef(
             <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
           )}
 
-          {description && (
-            <p className={`${blockClass}--description`}>{description}</p>
-          )}
+          {renderDescription()}
         </Column>
 
         <Column span={100}>
@@ -155,7 +173,7 @@ CreateTearsheetStep.propTypes = {
   /**
    * Sets an optional description on the step component
    */
-  description: PropTypes.string,
+  description: PropTypes.node,
 
   /**
    * This will conditionally disable the submit button in the multi step Tearsheet

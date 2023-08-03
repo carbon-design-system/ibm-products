@@ -152,6 +152,10 @@ describe('Notifications', () => {
   });
 
   it('should render link in notification', async () => {
+    const link = {
+      text: 'View logs',
+      url: 'https://www.carbondesignsystem.com/',
+    };
     renderNotifications({
       data: [
         {
@@ -159,17 +163,16 @@ describe('Notifications', () => {
           type: 'informational',
           title: 'LogRhythm connection failure',
           timestamp: new Date(),
-          link: {
-            text: 'View logs',
-            url: 'https://www.carbondesignsystem.com/',
-          },
+          link,
           onNotificationClick: () => {},
         },
       ],
     });
-    const logLink = screen.getByText(/view logs/i);
-    await act(() => userEvent.click(logLink));
-    expect(logLink);
+    const logLink = screen.getByRole('link');
+    expect(logLink).toHaveTextContent(link.text);
+    expect(logLink).toHaveAttribute('href', link.url);
+    // REACT 18: We were testing clicking of a link, which caused an error to be logged
+    // Error: Not implemented: navigation (except hash changes)
   });
 
   it('should render Read more button', async () => {

@@ -210,7 +210,7 @@ describe(componentName, () => {
   it('should create a console warning when using CreateFullPage with only one step', async () =>
     expectWarn('CreateFullPages with one step are not permitted', async () => {
       const { container } = renderOneStepCreateFullPage(defaultFullPageProps);
-      expect(async () => {
+      expect(() => {
         render(...container);
       }).toThrow();
     }));
@@ -221,10 +221,10 @@ describe(componentName, () => {
         `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
         `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
       ],
-      async () => {
+      () => {
         const { container } =
           renderFullPageWithStepChildrenOutside(defaultFullPageProps);
-        expect(async () => {
+        expect(() => {
           render(...container);
         }).toThrow();
       }

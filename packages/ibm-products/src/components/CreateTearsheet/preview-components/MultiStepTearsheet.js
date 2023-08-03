@@ -136,7 +136,7 @@ export const MultiStepTearsheet = ({
             <div>
               It will also be used by your producers and consumers as part of
               the connection information, so make it something easy to
-              recognize. <Link>Learn more.</Link>
+              recognize. <Link href="#">Learn more.</Link>
             </div>
           }
         >

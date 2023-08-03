@@ -150,9 +150,7 @@ describe(name, () => {
       <NoDataEmptyState {...defaultProps} />
     );
     expect(container.querySelector('svg')).toBeTruthy();
-    await rerender(
-      <NoDataEmptyState {...defaultProps} illustrationTheme="dark" />
-    );
+    rerender(<NoDataEmptyState {...defaultProps} illustrationTheme="dark" />);
     expect(container.querySelector('svg')).toBeTruthy();
   });
 
@@ -169,9 +167,7 @@ describe(name, () => {
       <ErrorEmptyState {...defaultProps} />
     );
     expect(container.querySelector('svg')).toBeTruthy();
-    await rerender(
-      <ErrorEmptyState {...defaultProps} illustrationTheme="dark" />
-    );
+    rerender(<ErrorEmptyState {...defaultProps} illustrationTheme="dark" />);
     expect(container.querySelector('svg')).toBeTruthy();
   });
 
@@ -188,9 +184,7 @@ describe(name, () => {
       <NoTagsEmptyState {...defaultProps} />
     );
     expect(container.querySelector('svg')).toBeTruthy();
-    await rerender(
-      <NoTagsEmptyState {...defaultProps} illustrationTheme="dark" />
-    );
+    rerender(<NoTagsEmptyState {...defaultProps} illustrationTheme="dark" />);
     expect(container.querySelector('svg')).toBeTruthy();
   });
 
@@ -207,9 +201,7 @@ describe(name, () => {
       <NotFoundEmptyState {...defaultProps} />
     );
     expect(container.querySelector('svg')).toBeTruthy();
-    await rerender(
-      <NotFoundEmptyState {...defaultProps} illustrationTheme="dark" />
-    );
+    rerender(<NotFoundEmptyState {...defaultProps} illustrationTheme="dark" />);
     expect(container.querySelector('svg')).toBeTruthy();
   });
 
@@ -226,7 +218,7 @@ describe(name, () => {
       <NotificationsEmptyState {...defaultProps} />
     );
     expect(container.querySelector('svg')).toBeTruthy();
-    await rerender(
+    rerender(
       <NotificationsEmptyState {...defaultProps} illustrationTheme="dark" />
     );
     expect(container.querySelector('svg')).toBeTruthy();
@@ -247,7 +239,7 @@ describe(name, () => {
       <UnauthorizedEmptyState {...defaultProps} />
     );
     expect(container.querySelector('svg')).toBeTruthy();
-    await rerender(
+    rerender(
       <UnauthorizedEmptyState {...defaultProps} illustrationTheme="dark" />
     );
     expect(container.querySelector('svg')).toBeTruthy();

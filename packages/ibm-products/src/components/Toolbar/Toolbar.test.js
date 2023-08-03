@@ -47,8 +47,6 @@ function componentTest(Component) {
   it('renders children', async () => {
     const { container } = render(<Component {...props} />);
 
-    console.log(container.outerHTML);
-
     getByText(children);
   });
 
@@ -94,7 +92,7 @@ describe(toolbarButtonComponentName, () => {
     const className = `${toolbarButtonClass}--caret`;
     expect(getByTestId(dataTestId)).not.toHaveClass(className);
 
-    await rerender(<ToolbarButton data-testid={dataTestId} caret />);
+    rerender(<ToolbarButton data-testid={dataTestId} caret />);
     expect(getByTestId(dataTestId)).toHaveClass(className);
   });
 
@@ -109,7 +107,7 @@ describe(toolbarButtonComponentName, () => {
       }
     );
 
-    await rerender(
+    rerender(
       <Toolbar vertical>
         <ToolbarButton data-testid={dataTestId} />
       </Toolbar>
@@ -145,7 +143,7 @@ describe(componentName, () => {
     const className = `${blockClass}--vertical`;
     expect(getByTestId(dataTestId)).toHaveClass(className);
 
-    await rerender(<Toolbar {...props} data-testid={dataTestId} vertical />);
+    rerender(<Toolbar {...props} data-testid={dataTestId} vertical />);
     expect(getByTestId(dataTestId)).toHaveClass(className);
   });
 

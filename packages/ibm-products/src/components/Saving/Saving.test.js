@@ -47,11 +47,11 @@ describe(componentName, () => {
     expect(onRequestSave).toBeCalled();
     await act(() => click(getByText(props.secondaryButtonText)));
     expect(onRequestCancel).not.toBeCalled();
-    await rerender(<Saving {...props} status="in-progress" />);
+    rerender(<Saving {...props} status="in-progress" />);
     expect(getByText(props.inProgressText)).toBeVisible();
     await act(() => click(getByText(props.secondaryButtonText)));
     expect(onRequestCancel).toBeCalled();
-    await rerender(<Saving {...props} status="fail" />);
+    rerender(<Saving {...props} status="fail" />);
     expect(getByText(props.failText)).toBeVisible();
   });
 
@@ -63,11 +63,11 @@ describe(componentName, () => {
 
     const { rerender, getByText } = render(<Saving {...props} />);
     expect(getByText(props.defaultText)).toBeVisible();
-    await rerender(<Saving {...props} status="in-progress" />);
+    rerender(<Saving {...props} status="in-progress" />);
     expect(getByText(props.inProgressText)).toBeVisible();
-    await rerender(<Saving {...props} status="success" />);
+    rerender(<Saving {...props} status="success" />);
     expect(getByText(props.successText)).toBeVisible();
-    await rerender(<Saving {...props} status="fail" />);
+    rerender(<Saving {...props} status="fail" />);
     expect(getByText(props.failText)).toBeVisible();
   });
 

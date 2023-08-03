@@ -11,7 +11,11 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
 import { makeData } from './utils/makeData';
 
-import { expectError, expectWarn } from '../../global/js/utils/test-helper';
+import {
+  checkLogging,
+  expectError,
+  expectWarn,
+} from '../../global/js/utils/test-helper';
 import { Datagrid } from '.';
 import { pkg } from '../../settings';
 
@@ -1058,10 +1062,9 @@ describe(componentName, () => {
         const { container } = render(
           <BasicUsage data-testid={dataTestId} datagridState={null} />
         );
-        expect(errorMock).toBeCalledWith(
-          expect.stringMatching(
-            /^Warning: Failed prop type: The prop `datagridState` is marked as required in `Datagrid`, but its value is `null`./
-          )
+        checkLogging(
+          errorMock,
+          /^Warning: Failed prop type: The prop `datagridState` is marked as required in `Datagrid`, but its value is `null`./
         );
         expect(container.children.length).toEqual(0);
         jest.spyOn(console, 'error').mockRestore();

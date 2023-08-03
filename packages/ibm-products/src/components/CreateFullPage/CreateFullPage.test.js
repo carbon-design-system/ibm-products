@@ -263,7 +263,7 @@ describe(componentName, () => {
     await act(() => click(modalCancelButtonElement));
     expect(onCloseFn).toHaveBeenCalled();
 
-    await rerender(
+    rerender(
       <CreateFullPage
         onRequestSubmit={onRequestSubmitRejectFn}
         {...defaultFullPageProps}

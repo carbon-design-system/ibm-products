@@ -56,7 +56,7 @@ describe('Notifications', () => {
     await act(() => userEvent.click(container));
     expect(onClickOutside).toHaveBeenCalled();
     animationStart(outerElement);
-    await rerender(
+    rerender(
       <NotificationsPanel open={false} onClickOutside={jest.fn()} data={[]} />
     );
     animationEnd(outerElement);

@@ -201,7 +201,7 @@ export const expectMultipleWarn = async (messages, test) => {
   return result;
 };
 
-const checkLogging = (mockedThing, message) => {
+export const checkLogging = (mockedThing, message) => {
   if (message) {
     expect(mockedThing).toBeCalled();
     // TODO: React 18 update - console messages appear to be failing with calls that look like printf props

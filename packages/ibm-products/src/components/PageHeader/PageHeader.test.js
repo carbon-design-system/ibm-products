@@ -21,6 +21,7 @@ import {
   expectWarn,
   deprecated,
   required,
+  checkLogging,
 } from '../../global/js/utils/test-helper';
 
 import { TYPES as tagTypes } from '../TagSet/constants';
@@ -663,10 +664,9 @@ describe('PageHeader', () => {
       />
     );
 
-    expect(error).toBeCalledWith(
-      expect.stringMatching(
-        /^Warning: Failed prop type: The prop `overflowAriaLabel` is marked as required in `BreadcrumbWithOverflow`/
-      )
+    checkLogging(
+      error,
+      /^Warning: Failed prop type: The prop `overflowAriaLabel` is marked as required in `BreadcrumbWithOverflow`/
     );
 
     jest.spyOn(console, 'error').mockRestore();

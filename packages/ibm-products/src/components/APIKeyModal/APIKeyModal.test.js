@@ -122,12 +122,12 @@ describe(componentName, () => {
     const createButton = getByText(props.generateButtonText);
 
     await change(nameInput, { target: { value: 'test-key' } });
-    await click(createButton);
+    await act(() => click(createButton));
     expect(onRequestGenerate).toHaveBeenCalledWith('test-key');
 
-    await rerender(<APIKeyModal {...props} loading />);
+    rerender(<APIKeyModal {...props} loading />);
     getByText(props.loadingText, { selector: 'div' });
-    await rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
+    rerender(<APIKeyModal {...props} apiKey="444-444-444-444" />);
     await waitFor(() => getByText(props.downloadLinkText));
     getByText(props.downloadBodyText);
     expect(container.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
@@ -161,7 +161,7 @@ describe(componentName, () => {
     await click(createButton);
     expect(onRequestGenerate).toHaveBeenCalled();
 
-    await rerender(<APIKeyModal {...props} error />);
+    rerender(<APIKeyModal {...props} error />);
     getByText(props.errorText);
   });
 
@@ -238,11 +238,11 @@ describe(componentName, () => {
 
     // submit valid form
     customSteps[2].valid = true;
-    await rerender(<APIKeyModal {...props} customSteps={customSteps} />);
+    rerender(<APIKeyModal {...props} customSteps={customSteps} />);
     await act(async () => await click(getByText(props.generateButtonText)));
     expect(onRequestGenerate).toHaveBeenCalled();
-    await rerender(<APIKeyModal {...props} />);
-    await rerender(<APIKeyModal {...props} apiKey="abc-123" />);
+    rerender(<APIKeyModal {...props} />);
+    rerender(<APIKeyModal {...props} apiKey="abc-123" />);
     expect(container.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
       'abc-123'
     );
@@ -275,7 +275,7 @@ describe(componentName, () => {
     await change(nameInput, { target: { value: 'new-key-name' } });
     await click(editButton);
     expect(onRequestEdit).toHaveBeenCalledWith(nameInput.value);
-    await rerender(<APIKeyModal {...props} editSuccess />);
+    rerender(<APIKeyModal {...props} editSuccess />);
     getByText(props.editSuccessTitle);
   });
 
@@ -316,9 +316,7 @@ describe(componentName, () => {
         )
     );
     await waitFor(() => getByText(defaultProps.hideAPIKeyLabel));
-    await rerender(
-      <APIKeyModal {...props} hasAPIKeyVisibilityToggle={false} />
-    );
+    rerender(<APIKeyModal {...props} hasAPIKeyVisibilityToggle={false} />);
     await waitFor(() => getByText(props.downloadLinkText));
     expect(
       container.querySelector(`.${carbon.prefix}--text-input`)

@@ -335,7 +335,7 @@ describe(name, () => {
       })),
     });
 
-    await rerender(
+    rerender(
       <MockWebTerminal
         isInitiallyOpen
         closeIconDescription="close web terminal"

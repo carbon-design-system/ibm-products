@@ -162,10 +162,10 @@ describe(componentName, () => {
     );
     expect(container.querySelector('details').open).toBe(false);
 
-    await rerender(<OptionsTile {...props} open={true} />);
+    rerender(<OptionsTile {...props} open={true} />);
     expect(container.querySelector('details').open).toBe(true);
 
-    await rerender(<OptionsTile {...props} open={false} />);
+    rerender(<OptionsTile {...props} open={false} />);
     expect(container.querySelector('details').open).toBe(false);
   });
 

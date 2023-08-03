@@ -139,7 +139,7 @@ describe(componentName, () => {
     );
     await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(buttonClick).toHaveBeenCalled();
-    await rerender(<Card {...props} actionsPlacement="top" />);
+    rerender(<Card {...props} actionsPlacement="top" />);
     expect(
       container.querySelector(`.${blockClass}__header .${blockClass}__actions`)
     ).toBeVisible();
@@ -168,7 +168,7 @@ describe(componentName, () => {
     );
     await act(() => click(screen.getByText('Edit')));
     expect(onClick).toHaveBeenCalled();
-    await rerender(<Card {...props} actionsPlacement="top" />);
+    rerender(<Card {...props} actionsPlacement="top" />);
     expect(
       container.querySelector(`.${blockClass}__header .${blockClass}__actions`)
     ).toBeVisible();
@@ -194,12 +194,12 @@ describe(componentName, () => {
       click(container.querySelector(`.${blockClass}__clickable`))
     );
     expect(onClick).toHaveBeenCalled();
-    await rerender(<Card {...props} clickZone="two" />);
+    rerender(<Card {...props} clickZone="two" />);
     await act(() =>
       click(container.querySelector(`.${blockClass}__clickable`))
     );
     expect(onClick).toHaveBeenCalled();
-    await rerender(<Card {...props} clickZone="three" />);
+    rerender(<Card {...props} clickZone="three" />);
     await act(() =>
       click(container.querySelector(`.${blockClass}__clickable`))
     );

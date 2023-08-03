@@ -91,7 +91,7 @@ describe(componentName, () => {
       onSave,
     };
     const { rerender } = render(<EditInPlace {...props} />);
-    await rerender(<EditInPlace {...props} value="new value" />);
+    rerender(<EditInPlace {...props} value="new value" />);
     await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
     await act(() => userEvent.click(screen.getByLabelText(props.saveLabel)));
     expect(onSave).toHaveBeenCalled();
@@ -104,7 +104,7 @@ describe(componentName, () => {
       onCancel,
     };
     const { rerender } = render(<EditInPlace {...props} />);
-    await rerender(<EditInPlace {...props} value="new value" />);
+    rerender(<EditInPlace {...props} value="new value" />);
     await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
     await act(() => userEvent.click(screen.getByLabelText(props.cancelLabel)));
     expect(onCancel).toHaveBeenCalled();
@@ -117,7 +117,7 @@ describe(componentName, () => {
       onSave,
     };
     const { rerender } = render(<EditInPlace {...props} />);
-    await rerender(<EditInPlace {...props} value="new value" />);
+    rerender(<EditInPlace {...props} value="new value" />);
     await act(() => userEvent.click(screen.getByLabelText(props.editLabel)));
     const input = screen.getByDisplayValue('new value');
     fireEvent.blur(input);
@@ -161,7 +161,7 @@ describe(componentName, () => {
     expect(onCancel).toHaveBeenCalled();
 
     // clicks escape with new value
-    await rerender(<EditInPlace {...props} value="new value" />);
+    rerender(<EditInPlace {...props} value="new value" />);
     fireEvent.focus(input);
     fireEvent.keyDown(input, { key: 'Escape' });
     expect(onCancel).toHaveBeenCalled();
@@ -182,7 +182,7 @@ describe(componentName, () => {
     expect(onSave).not.toHaveBeenCalled();
 
     // clicks enter with new value
-    await rerender(<EditInPlace {...props} value="new value" />);
+    rerender(<EditInPlace {...props} value="new value" />);
     fireEvent.focus(input);
     fireEvent.keyDown(input, { key: 'Enter' });
     expect(onSave).toHaveBeenCalled();

@@ -12,7 +12,7 @@ import { makeData, newPersonWithTwoLines, range } from './utils/makeData';
 import { getStoryTitle } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 
-import { Activity16, Add16 } from '@carbon/icons-react';
+import { Activity16, Add16, Edit16, TrashCan16 } from '@carbon/icons-react';
 import { DataTable } from 'carbon-components-react';
 import {
   Datagrid,
@@ -50,6 +50,7 @@ export default {
       },
     },
   },
+  excludeStories: ['getBatchActions'],
 };
 
 const getColumns = (rows) => {
@@ -380,6 +381,9 @@ export const SortableColumns = () => {
     {
       columns,
       data,
+      ascendingSortableLabelText: 'ascending',
+      descendingSortableLabelText: 'descending',
+      defaultSortableLabelText: 'none',
     },
     useSortableColumns
   );
@@ -471,7 +475,7 @@ const DatagridBatchActions = (datagridState) => {
   );
 };
 
-const getBatchActions = () => {
+export const getBatchActions = () => {
   return [
     {
       label: 'Duplicate',
@@ -511,7 +515,37 @@ const getBatchActions = () => {
 
 export const BatchActions = () => {
   const [data] = useState(makeData(10));
-  const columns = React.useMemo(() => getColumns(data), []);
+  const columns = React.useMemo(
+    () => [
+      ...getColumns(data),
+      {
+        Header: '',
+        accessor: 'actions',
+        sticky: 'right',
+        isAction: true,
+      },
+    ],
+    []
+  );
+
+  const getRowActions = () => {
+    return [
+      {
+        id: 'edit',
+        itemText: 'Edit',
+        icon: Edit16,
+        onClick: action('Clicked row action: edit'),
+      },
+
+      {
+        id: 'delete',
+        itemText: 'Delete',
+        icon: TrashCan16,
+        isDelete: true,
+        onClick: action('Clicked row action: delete'),
+      },
+    ];
+  };
   const datagridState = useDatagrid(
     {
       columns,
@@ -520,9 +554,12 @@ export const BatchActions = () => {
       toolbarBatchActions: getBatchActions(),
       DatagridActions,
       DatagridBatchActions,
+      rowActions: getRowActions(),
     },
     useSelectRows,
-    useSelectAllWithToggle
+    useSelectAllWithToggle,
+    useActionsColumn,
+    useStickyColumn
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;

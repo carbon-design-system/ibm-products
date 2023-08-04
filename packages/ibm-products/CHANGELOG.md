@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.55.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.55.0...@carbon/ibm-products@1.55.1) (2023-08-03)
+
+
+### Bug Fixes
+
+* move lottie-web to ibm-products package.json ([#3354](https://github.com/carbon-design-system/ibm-products/issues/3354)) ([82c4fad](https://github.com/carbon-design-system/ibm-products/commit/82c4fad048d3747bdb144ee51f32e0073cfaca58))
+
+
+
+
+
+# [1.55.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.54.2...@carbon/ibm-products@1.55.0) (2023-08-02)
+
+
+### Bug Fixes
+
+* **Datagrid:** address row action disable state logic ([#3336](https://github.com/carbon-design-system/ibm-products/issues/3336)) ([b3cc878](https://github.com/carbon-design-system/ibm-products/commit/b3cc87859edc474696fc1d4f8b5f6838946b0df7))
+* **Datagrid:** clickable row stories ([#3225](https://github.com/carbon-design-system/ibm-products/issues/3225)) ([27976df](https://github.com/carbon-design-system/ibm-products/commit/27976df7307b5378c66f98db140dedc4ec54cd5c))
+* **Datagrid:** remove sort styles hook not in use v1 ([#3321](https://github.com/carbon-design-system/ibm-products/issues/3321)) ([a0e7ee1](https://github.com/carbon-design-system/ibm-products/commit/a0e7ee188b8dbfc049aa8e31058d078fec24b71c))
+* **Datagrid:** use selected row ids for selected items ([#3125](https://github.com/carbon-design-system/ibm-products/issues/3125)) ([6e1fc27](https://github.com/carbon-design-system/ibm-products/commit/6e1fc27b1510742e405a25fbd9e4c2da3f308216))
+* improve a11y tests ([#3233](https://github.com/carbon-design-system/ibm-products/issues/3233)) ([e5b5821](https://github.com/carbon-design-system/ibm-products/commit/e5b582120adad8dda4105f4c59b98d9068045b28))
+* infinite perspective issue ([#3181](https://github.com/carbon-design-system/ibm-products/issues/3181)) ([fe6e5cf](https://github.com/carbon-design-system/ibm-products/commit/fe6e5cf4139331dab83fee62729f35592d1dcb61))
+* update doc after review ([#3252](https://github.com/carbon-design-system/ibm-products/issues/3252)) ([48c9149](https://github.com/carbon-design-system/ibm-products/commit/48c9149bf6767b4a8e87b0138b87e5e5c86a004e))
+* update to Carbon 10 compatible versions to latest ([#3148](https://github.com/carbon-design-system/ibm-products/issues/3148)) ([b2ac3c7](https://github.com/carbon-design-system/ibm-products/commit/b2ac3c7f2bee0c65c3d2e679bec3d1ed1ee2733b))
+
+
+### Features
+
+* add new Guidebanner and Carousel components ([#3053](https://github.com/carbon-design-system/ibm-products/issues/3053)) ([94220b0](https://github.com/carbon-design-system/ibm-products/commit/94220b056b020769ac40fa9aa01f9ff31fea5b95))
+* **datagrid:** exports FilterContext (v1) ([#3068](https://github.com/carbon-design-system/ibm-products/issues/3068)) ([30284d0](https://github.com/carbon-design-system/ibm-products/commit/30284d0a9bc4832d7775908afc9f96e2774f8c5e))
+* **FilterSummary:** adds custom label render (v1) ([#3171](https://github.com/carbon-design-system/ibm-products/issues/3171)) ([bb86875](https://github.com/carbon-design-system/ibm-products/commit/bb8687522e3fa20d193ea1d854e85a48dfbac4e3))
+* **InlineTip:** add InlineTip component ([#3145](https://github.com/carbon-design-system/ibm-products/issues/3145)) ([f238fc0](https://github.com/carbon-design-system/ibm-products/commit/f238fc0dfad568b40a2507c9525f126c4a67aaff))
+* **SteppedAnimatedMedia:** Novice to Pro internal component ([#3055](https://github.com/carbon-design-system/ibm-products/issues/3055)) ([0499fea](https://github.com/carbon-design-system/ibm-products/commit/0499fea09c8d676fe8c0dec7411edef72b3dc7e0))
+
+
+
+
+
 ## [1.54.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.54.1...@carbon/ibm-products@1.54.2) (2023-06-06)
 
 

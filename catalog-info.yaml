@@ -1,0 +1,41 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: carbon-ibm-products
+  description: A Carbon-powered React component library for IBM Products
+  tags:
+    - carbon
+    - react
+  annotations:
+    github.com/project-slug: carbon-design-system/ibm-products
+    backstage.io/techdocs-ref: dir:.
+  links:
+    - url: https://carbon-for-ibm-products.netlify.app
+      title: Storybook
+    - url: https://ibm-casdesign.slack.com/archives/C013ZTX0N6B
+      title: Slack channel
+spec:
+  type: library
+  lifecycle: production
+  owner: carbon-ibm-products
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: carbon-ibm-security
+  description: Carbon for IBM Products - Security UI components
+  tags:
+    - carbon
+    - react
+    - security
+  links:
+    - url: https://v1-carbon-for-ibm-products.netlify.app
+      title: Storybook
+spec:
+  type: library
+  lifecycle: production
+  subcomponentOf: carbon-ibm-products
+  owner: carbon-ibm-security
+---
+

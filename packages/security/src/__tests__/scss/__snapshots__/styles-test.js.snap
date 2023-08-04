@@ -9356,7 +9356,7 @@ input[data-invalid]:not(:focus),
 .bx--text-input__field-wrapper[data-invalid] > .bx--text-input--invalid:not(:focus),
 .bx--text-area__wrapper[data-invalid] > .bx--text-area--invalid:not(:focus),
 .bx--select-input__wrapper[data-invalid] .bx--select-input:not(:focus),
-.bx--list-box[data-invalid]:not(:focus),
+.bx--list-box[data-invalid]:not(.bx--multi-select--invalid--focused),
 .bx--combo-box[data-invalid] .bx--text-input:not(:focus) {
   outline: 2px solid var(--cds-support-01, #fa4d56);
   outline-offset: -2px;
@@ -9367,7 +9367,7 @@ input[data-invalid]:not(:focus),
   .bx--text-input__field-wrapper[data-invalid] > .bx--text-input--invalid:not(:focus),
   .bx--text-area__wrapper[data-invalid] > .bx--text-area--invalid:not(:focus),
   .bx--select-input__wrapper[data-invalid] .bx--select-input:not(:focus),
-  .bx--list-box[data-invalid]:not(:focus),
+  .bx--list-box[data-invalid]:not(.bx--multi-select--invalid--focused),
   .bx--combo-box[data-invalid] .bx--text-input:not(:focus) {
     outline-style: dotted;
   }
@@ -19649,9 +19649,21 @@ li.bx--accordion__item--disabled:last-of-type {
   height: 100%;
 }
 
+.bx--multi-select .bx--list-box__field--wrapper {
+  display: inline-flex;
+  width: 100%;
+  height: calc(100% + 1px);
+  align-items: center;
+}
+
+.bx--multi-select .bx--list-box__field:focus {
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+}
+
 .bx--multi-select .bx--tag {
   min-width: auto;
-  margin: 0 0.5rem 0 0;
+  margin: 0 var(--cds-spacing-03, 0.5rem) 0 var(--cds-spacing-05, 1rem);
 }
 
 .bx--multi-select--filterable .bx--tag {
@@ -19697,17 +19709,20 @@ li.bx--accordion__item--disabled:last-of-type {
   outline: none;
 }
 
-.bx--multi-select--filterable--input-focused {
+.bx--multi-select--filterable--input-focused,
+.bx--multi-select .bx--list-box__field--wrapper--input-focused {
   outline: 2px solid var(--cds-focus, #ffffff);
   outline-offset: -2px;
 }
 @media screen and (prefers-contrast) {
-  .bx--multi-select--filterable--input-focused {
+  .bx--multi-select--filterable--input-focused,
+  .bx--multi-select .bx--list-box__field--wrapper--input-focused {
     outline-style: dotted;
   }
 }
 
-.bx--multi-select--filterable.bx--multi-select--selected .bx--text-input {
+.bx--multi-select--filterable.bx--multi-select--selected .bx--text-input,
+.bx--multi-select.bx--multi-select--selected .bx--list-box__field {
   padding-left: 0;
 }
 
@@ -24992,6 +25007,16 @@ optgroup.bx--select-optgroup:disabled,
   overflow-y: auto;
   transition: max-height 150ms cubic-bezier(0.2, 0, 0.38, 0.9);
 }
+.bx--snippet--multi .bx--snippet-container:focus {
+  outline: 2px solid var(--cds-focus, #ffffff);
+  outline-offset: -2px;
+  outline-offset: 0;
+}
+@media screen and (prefers-contrast) {
+  .bx--snippet--multi .bx--snippet-container:focus {
+    outline-style: dotted;
+  }
+}
 
 .bx--snippet--multi.bx--snippet--expand .bx--snippet-container {
   padding-bottom: var(--cds-spacing-05, 1rem);
@@ -26915,7 +26940,6 @@ optgroup.bx--select-optgroup:disabled,
 }
 
 .bx--file__state-container .bx--file-complete {
-  cursor: pointer;
   fill: var(--cds-interactive-04, #4589ff);
 }
 .bx--file__state-container .bx--file-complete:focus {
@@ -26968,6 +26992,24 @@ optgroup.bx--select-optgroup:disabled,
 }
 
 .bx--file__drop-container {
+  box-sizing: border-box;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  appearance: none;
+  background: none;
+  cursor: pointer;
+  width: 100%;
+  font-size: var(--cds-body-short-01-font-size, 0.875rem);
+  font-weight: var(--cds-body-short-01-font-weight, 400);
+  line-height: var(--cds-body-short-01-line-height, 1.28572);
+  letter-spacing: var(--cds-body-short-01-letter-spacing, 0.16px);
   display: flex;
   overflow: hidden;
   height: 6rem;
@@ -26975,6 +27017,14 @@ optgroup.bx--select-optgroup:disabled,
   justify-content: space-between;
   padding: 1rem;
   border: 1px dashed var(--cds-ui-04, #6f6f6f);
+}
+.bx--file__drop-container *,
+.bx--file__drop-container *::before,
+.bx--file__drop-container *::after {
+  box-sizing: inherit;
+}
+.bx--file__drop-container::-moz-focus-inner {
+  border: 0;
 }
 
 .bx--file__drop-container--drag-over {

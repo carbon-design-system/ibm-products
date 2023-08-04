@@ -15,6 +15,8 @@ import { getComponentNamespace } from '../../globals/namespace';
 
 export const navNamespace = getComponentNamespace('nav');
 
+const { name } = NavList;
+
 export default class Nav extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +25,7 @@ export default class Nav extends Component {
     if (!activeHref && window.location) {
       const { hash, pathname } = window.location;
 
-      activeHref = hash || pathname;
+      activeHref = pathname + hash;
     }
 
     this.state = { activeHref };

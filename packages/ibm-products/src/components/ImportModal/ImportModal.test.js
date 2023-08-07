@@ -72,7 +72,7 @@ describe(componentName, () => {
 
   it('renders fileDropLabel', () => {
     render(<ImportModal {...defaultProps} />);
-    screen.getByText(defaultProps.fileDropLabel);
+    screen.getByRole('button', { name: defaultProps.fileDropLabel });
   });
 
   it('renders inputButtonText', () => {

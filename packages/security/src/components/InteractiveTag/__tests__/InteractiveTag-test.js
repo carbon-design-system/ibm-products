@@ -23,12 +23,12 @@ describe('InteractiveTag', () => {
   });
 
   test('should add close button with `aria-label` when `removable` is `true`', () => {
-    const { queryByLabelText } = render(
+    const { queryByRole } = render(
       <InteractiveTag removeBtnLabel="test label" removable>
         test tag
       </InteractiveTag>
     );
-    expect(queryByLabelText(/test label/i)).toBeVisible();
+    expect(queryByRole('button', /test label/i)).toBeVisible();
   });
 
   test('should add children as tag content', () => {

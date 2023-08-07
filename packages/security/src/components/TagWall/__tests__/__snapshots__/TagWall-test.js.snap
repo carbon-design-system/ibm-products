@@ -27,7 +27,6 @@ LoadedCheerio {
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": Node {
           "attribs": {
-            "aria-label": " Tag 1",
             "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "0",
@@ -266,7 +265,6 @@ LoadedCheerio {
           "namespace": "http://www.w3.org/1999/xhtml",
           "next": Node {
             "attribs": {
-              "aria-label": " Tag 2",
               "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
               "example-attribute": "example-value",
               "id": "1",
@@ -505,7 +503,6 @@ LoadedCheerio {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": Node {
               "attribs": {
-                "aria-label": " Tag 3",
                 "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                 "example-attribute": "example-value",
                 "id": "2",
@@ -744,7 +741,6 @@ LoadedCheerio {
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Node {
                 "attribs": {
-                  "aria-label": " Tag 4",
                   "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                   "example-attribute": "example-value",
                   "id": "3",
@@ -983,7 +979,6 @@ LoadedCheerio {
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": Node {
                   "attribs": {
-                    "aria-label": " Tag 5",
                     "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                     "example-attribute": "example-value",
                     "id": "4",
@@ -1222,7 +1217,6 @@ LoadedCheerio {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Node {
                     "attribs": {
-                      "aria-label": " Tag 6",
                       "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                       "example-attribute": "example-value",
                       "id": "5",
@@ -1461,7 +1455,6 @@ LoadedCheerio {
                     "namespace": "http://www.w3.org/1999/xhtml",
                     "next": Node {
                       "attribs": {
-                        "aria-label": " Tag 7",
                         "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                         "example-attribute": "example-value",
                         "id": "6",
@@ -1700,7 +1693,6 @@ LoadedCheerio {
                       "namespace": "http://www.w3.org/1999/xhtml",
                       "next": Node {
                         "attribs": {
-                          "aria-label": " Tag 8",
                           "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                           "example-attribute": "example-value",
                           "id": "7",
@@ -1973,13 +1965,11 @@ LoadedCheerio {
                         "prev": [Circular],
                         "type": "tag",
                         "x-attribsNamespace": {
-                          "aria-label": undefined,
                           "class": undefined,
                           "example-attribute": undefined,
                           "id": undefined,
                         },
                         "x-attribsPrefix": {
-                          "aria-label": undefined,
                           "class": undefined,
                           "example-attribute": undefined,
                           "id": undefined,
@@ -1989,13 +1979,11 @@ LoadedCheerio {
                       "prev": [Circular],
                       "type": "tag",
                       "x-attribsNamespace": {
-                        "aria-label": undefined,
                         "class": undefined,
                         "example-attribute": undefined,
                         "id": undefined,
                       },
                       "x-attribsPrefix": {
-                        "aria-label": undefined,
                         "class": undefined,
                         "example-attribute": undefined,
                         "id": undefined,
@@ -2005,13 +1993,11 @@ LoadedCheerio {
                     "prev": [Circular],
                     "type": "tag",
                     "x-attribsNamespace": {
-                      "aria-label": undefined,
                       "class": undefined,
                       "example-attribute": undefined,
                       "id": undefined,
                     },
                     "x-attribsPrefix": {
-                      "aria-label": undefined,
                       "class": undefined,
                       "example-attribute": undefined,
                       "id": undefined,
@@ -2021,13 +2007,11 @@ LoadedCheerio {
                   "prev": [Circular],
                   "type": "tag",
                   "x-attribsNamespace": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
                   },
                   "x-attribsPrefix": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
@@ -2037,13 +2021,11 @@ LoadedCheerio {
                 "prev": [Circular],
                 "type": "tag",
                 "x-attribsNamespace": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
                 },
                 "x-attribsPrefix": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
@@ -2053,13 +2035,11 @@ LoadedCheerio {
               "prev": [Circular],
               "type": "tag",
               "x-attribsNamespace": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
               },
               "x-attribsPrefix": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
@@ -2069,13 +2049,11 @@ LoadedCheerio {
             "prev": [Circular],
             "type": "tag",
             "x-attribsNamespace": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
             },
             "x-attribsPrefix": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
@@ -2085,13 +2063,11 @@ LoadedCheerio {
           "prev": [Circular],
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -2109,7 +2085,6 @@ LoadedCheerio {
       },
       Node {
         "attribs": {
-          "aria-label": " Tag 1",
           "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
           "example-attribute": "example-value",
           "id": "0",
@@ -2348,7 +2323,6 @@ LoadedCheerio {
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": Node {
           "attribs": {
-            "aria-label": " Tag 2",
             "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "1",
@@ -2587,7 +2561,6 @@ LoadedCheerio {
           "namespace": "http://www.w3.org/1999/xhtml",
           "next": Node {
             "attribs": {
-              "aria-label": " Tag 3",
               "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
               "example-attribute": "example-value",
               "id": "2",
@@ -2826,7 +2799,6 @@ LoadedCheerio {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": Node {
               "attribs": {
-                "aria-label": " Tag 4",
                 "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                 "example-attribute": "example-value",
                 "id": "3",
@@ -3065,7 +3037,6 @@ LoadedCheerio {
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Node {
                 "attribs": {
-                  "aria-label": " Tag 5",
                   "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                   "example-attribute": "example-value",
                   "id": "4",
@@ -3304,7 +3275,6 @@ LoadedCheerio {
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": Node {
                   "attribs": {
-                    "aria-label": " Tag 6",
                     "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                     "example-attribute": "example-value",
                     "id": "5",
@@ -3543,7 +3513,6 @@ LoadedCheerio {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Node {
                     "attribs": {
-                      "aria-label": " Tag 7",
                       "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                       "example-attribute": "example-value",
                       "id": "6",
@@ -3782,7 +3751,6 @@ LoadedCheerio {
                     "namespace": "http://www.w3.org/1999/xhtml",
                     "next": Node {
                       "attribs": {
-                        "aria-label": " Tag 8",
                         "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                         "example-attribute": "example-value",
                         "id": "7",
@@ -4055,13 +4023,11 @@ LoadedCheerio {
                       "prev": [Circular],
                       "type": "tag",
                       "x-attribsNamespace": {
-                        "aria-label": undefined,
                         "class": undefined,
                         "example-attribute": undefined,
                         "id": undefined,
                       },
                       "x-attribsPrefix": {
-                        "aria-label": undefined,
                         "class": undefined,
                         "example-attribute": undefined,
                         "id": undefined,
@@ -4071,13 +4037,11 @@ LoadedCheerio {
                     "prev": [Circular],
                     "type": "tag",
                     "x-attribsNamespace": {
-                      "aria-label": undefined,
                       "class": undefined,
                       "example-attribute": undefined,
                       "id": undefined,
                     },
                     "x-attribsPrefix": {
-                      "aria-label": undefined,
                       "class": undefined,
                       "example-attribute": undefined,
                       "id": undefined,
@@ -4087,13 +4051,11 @@ LoadedCheerio {
                   "prev": [Circular],
                   "type": "tag",
                   "x-attribsNamespace": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
                   },
                   "x-attribsPrefix": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
@@ -4103,13 +4065,11 @@ LoadedCheerio {
                 "prev": [Circular],
                 "type": "tag",
                 "x-attribsNamespace": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
                 },
                 "x-attribsPrefix": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
@@ -4119,13 +4079,11 @@ LoadedCheerio {
               "prev": [Circular],
               "type": "tag",
               "x-attribsNamespace": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
               },
               "x-attribsPrefix": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
@@ -4135,13 +4093,11 @@ LoadedCheerio {
             "prev": [Circular],
             "type": "tag",
             "x-attribsNamespace": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
             },
             "x-attribsPrefix": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
@@ -4151,13 +4107,11 @@ LoadedCheerio {
           "prev": [Circular],
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -4192,13 +4146,11 @@ LoadedCheerio {
         },
         "type": "tag",
         "x-attribsNamespace": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
         },
         "x-attribsPrefix": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
@@ -4206,7 +4158,6 @@ LoadedCheerio {
       },
       Node {
         "attribs": {
-          "aria-label": " Tag 2",
           "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
           "example-attribute": "example-value",
           "id": "1",
@@ -4445,7 +4396,6 @@ LoadedCheerio {
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": Node {
           "attribs": {
-            "aria-label": " Tag 3",
             "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "2",
@@ -4684,7 +4634,6 @@ LoadedCheerio {
           "namespace": "http://www.w3.org/1999/xhtml",
           "next": Node {
             "attribs": {
-              "aria-label": " Tag 4",
               "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
               "example-attribute": "example-value",
               "id": "3",
@@ -4923,7 +4872,6 @@ LoadedCheerio {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": Node {
               "attribs": {
-                "aria-label": " Tag 5",
                 "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                 "example-attribute": "example-value",
                 "id": "4",
@@ -5162,7 +5110,6 @@ LoadedCheerio {
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Node {
                 "attribs": {
-                  "aria-label": " Tag 6",
                   "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                   "example-attribute": "example-value",
                   "id": "5",
@@ -5401,7 +5348,6 @@ LoadedCheerio {
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": Node {
                   "attribs": {
-                    "aria-label": " Tag 7",
                     "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                     "example-attribute": "example-value",
                     "id": "6",
@@ -5640,7 +5586,6 @@ LoadedCheerio {
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Node {
                     "attribs": {
-                      "aria-label": " Tag 8",
                       "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                       "example-attribute": "example-value",
                       "id": "7",
@@ -5913,13 +5858,11 @@ LoadedCheerio {
                     "prev": [Circular],
                     "type": "tag",
                     "x-attribsNamespace": {
-                      "aria-label": undefined,
                       "class": undefined,
                       "example-attribute": undefined,
                       "id": undefined,
                     },
                     "x-attribsPrefix": {
-                      "aria-label": undefined,
                       "class": undefined,
                       "example-attribute": undefined,
                       "id": undefined,
@@ -5929,13 +5872,11 @@ LoadedCheerio {
                   "prev": [Circular],
                   "type": "tag",
                   "x-attribsNamespace": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
                   },
                   "x-attribsPrefix": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
@@ -5945,13 +5886,11 @@ LoadedCheerio {
                 "prev": [Circular],
                 "type": "tag",
                 "x-attribsNamespace": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
                 },
                 "x-attribsPrefix": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
@@ -5961,13 +5900,11 @@ LoadedCheerio {
               "prev": [Circular],
               "type": "tag",
               "x-attribsNamespace": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
               },
               "x-attribsPrefix": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
@@ -5977,13 +5914,11 @@ LoadedCheerio {
             "prev": [Circular],
             "type": "tag",
             "x-attribsNamespace": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
             },
             "x-attribsPrefix": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
@@ -5993,13 +5928,11 @@ LoadedCheerio {
           "prev": [Circular],
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -6008,7 +5941,6 @@ LoadedCheerio {
         "parent": [Circular],
         "prev": Node {
           "attribs": {
-            "aria-label": " Tag 1",
             "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "0",
@@ -6275,13 +6207,11 @@ LoadedCheerio {
           },
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -6289,13 +6219,11 @@ LoadedCheerio {
         },
         "type": "tag",
         "x-attribsNamespace": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
         },
         "x-attribsPrefix": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
@@ -6303,7 +6231,6 @@ LoadedCheerio {
       },
       Node {
         "attribs": {
-          "aria-label": " Tag 3",
           "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
           "example-attribute": "example-value",
           "id": "2",
@@ -6542,7 +6469,6 @@ LoadedCheerio {
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": Node {
           "attribs": {
-            "aria-label": " Tag 4",
             "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "3",
@@ -6781,7 +6707,6 @@ LoadedCheerio {
           "namespace": "http://www.w3.org/1999/xhtml",
           "next": Node {
             "attribs": {
-              "aria-label": " Tag 5",
               "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
               "example-attribute": "example-value",
               "id": "4",
@@ -7020,7 +6945,6 @@ LoadedCheerio {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": Node {
               "attribs": {
-                "aria-label": " Tag 6",
                 "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                 "example-attribute": "example-value",
                 "id": "5",
@@ -7259,7 +7183,6 @@ LoadedCheerio {
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Node {
                 "attribs": {
-                  "aria-label": " Tag 7",
                   "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                   "example-attribute": "example-value",
                   "id": "6",
@@ -7498,7 +7421,6 @@ LoadedCheerio {
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": Node {
                   "attribs": {
-                    "aria-label": " Tag 8",
                     "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                     "example-attribute": "example-value",
                     "id": "7",
@@ -7771,13 +7693,11 @@ LoadedCheerio {
                   "prev": [Circular],
                   "type": "tag",
                   "x-attribsNamespace": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
                   },
                   "x-attribsPrefix": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
@@ -7787,13 +7707,11 @@ LoadedCheerio {
                 "prev": [Circular],
                 "type": "tag",
                 "x-attribsNamespace": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
                 },
                 "x-attribsPrefix": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
@@ -7803,13 +7721,11 @@ LoadedCheerio {
               "prev": [Circular],
               "type": "tag",
               "x-attribsNamespace": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
               },
               "x-attribsPrefix": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
@@ -7819,13 +7735,11 @@ LoadedCheerio {
             "prev": [Circular],
             "type": "tag",
             "x-attribsNamespace": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
             },
             "x-attribsPrefix": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
@@ -7835,13 +7749,11 @@ LoadedCheerio {
           "prev": [Circular],
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -7850,7 +7762,6 @@ LoadedCheerio {
         "parent": [Circular],
         "prev": Node {
           "attribs": {
-            "aria-label": " Tag 2",
             "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "1",
@@ -8091,7 +8002,6 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": Node {
             "attribs": {
-              "aria-label": " Tag 1",
               "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
               "example-attribute": "example-value",
               "id": "0",
@@ -8358,13 +8268,11 @@ LoadedCheerio {
             },
             "type": "tag",
             "x-attribsNamespace": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
             },
             "x-attribsPrefix": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
@@ -8372,13 +8280,11 @@ LoadedCheerio {
           },
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -8386,13 +8292,11 @@ LoadedCheerio {
         },
         "type": "tag",
         "x-attribsNamespace": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
         },
         "x-attribsPrefix": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
@@ -8400,7 +8304,6 @@ LoadedCheerio {
       },
       Node {
         "attribs": {
-          "aria-label": " Tag 4",
           "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
           "example-attribute": "example-value",
           "id": "3",
@@ -8639,7 +8542,6 @@ LoadedCheerio {
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": Node {
           "attribs": {
-            "aria-label": " Tag 5",
             "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "4",
@@ -8878,7 +8780,6 @@ LoadedCheerio {
           "namespace": "http://www.w3.org/1999/xhtml",
           "next": Node {
             "attribs": {
-              "aria-label": " Tag 6",
               "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
               "example-attribute": "example-value",
               "id": "5",
@@ -9117,7 +9018,6 @@ LoadedCheerio {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": Node {
               "attribs": {
-                "aria-label": " Tag 7",
                 "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                 "example-attribute": "example-value",
                 "id": "6",
@@ -9356,7 +9256,6 @@ LoadedCheerio {
               "namespace": "http://www.w3.org/1999/xhtml",
               "next": Node {
                 "attribs": {
-                  "aria-label": " Tag 8",
                   "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                   "example-attribute": "example-value",
                   "id": "7",
@@ -9629,13 +9528,11 @@ LoadedCheerio {
                 "prev": [Circular],
                 "type": "tag",
                 "x-attribsNamespace": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
                 },
                 "x-attribsPrefix": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
@@ -9645,13 +9542,11 @@ LoadedCheerio {
               "prev": [Circular],
               "type": "tag",
               "x-attribsNamespace": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
               },
               "x-attribsPrefix": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
@@ -9661,13 +9556,11 @@ LoadedCheerio {
             "prev": [Circular],
             "type": "tag",
             "x-attribsNamespace": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
             },
             "x-attribsPrefix": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
@@ -9677,13 +9570,11 @@ LoadedCheerio {
           "prev": [Circular],
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -9692,7 +9583,6 @@ LoadedCheerio {
         "parent": [Circular],
         "prev": Node {
           "attribs": {
-            "aria-label": " Tag 3",
             "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "2",
@@ -9933,7 +9823,6 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": Node {
             "attribs": {
-              "aria-label": " Tag 2",
               "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
               "example-attribute": "example-value",
               "id": "1",
@@ -10174,7 +10063,6 @@ LoadedCheerio {
             "parent": [Circular],
             "prev": Node {
               "attribs": {
-                "aria-label": " Tag 1",
                 "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                 "example-attribute": "example-value",
                 "id": "0",
@@ -10441,13 +10329,11 @@ LoadedCheerio {
               },
               "type": "tag",
               "x-attribsNamespace": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
               },
               "x-attribsPrefix": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
@@ -10455,13 +10341,11 @@ LoadedCheerio {
             },
             "type": "tag",
             "x-attribsNamespace": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
             },
             "x-attribsPrefix": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
@@ -10469,13 +10353,11 @@ LoadedCheerio {
           },
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -10483,13 +10365,11 @@ LoadedCheerio {
         },
         "type": "tag",
         "x-attribsNamespace": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
         },
         "x-attribsPrefix": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
@@ -10497,7 +10377,6 @@ LoadedCheerio {
       },
       Node {
         "attribs": {
-          "aria-label": " Tag 5",
           "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
           "example-attribute": "example-value",
           "id": "4",
@@ -10736,7 +10615,6 @@ LoadedCheerio {
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": Node {
           "attribs": {
-            "aria-label": " Tag 6",
             "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "5",
@@ -10975,7 +10853,6 @@ LoadedCheerio {
           "namespace": "http://www.w3.org/1999/xhtml",
           "next": Node {
             "attribs": {
-              "aria-label": " Tag 7",
               "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
               "example-attribute": "example-value",
               "id": "6",
@@ -11214,7 +11091,6 @@ LoadedCheerio {
             "namespace": "http://www.w3.org/1999/xhtml",
             "next": Node {
               "attribs": {
-                "aria-label": " Tag 8",
                 "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                 "example-attribute": "example-value",
                 "id": "7",
@@ -11487,13 +11363,11 @@ LoadedCheerio {
               "prev": [Circular],
               "type": "tag",
               "x-attribsNamespace": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
               },
               "x-attribsPrefix": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
@@ -11503,13 +11377,11 @@ LoadedCheerio {
             "prev": [Circular],
             "type": "tag",
             "x-attribsNamespace": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
             },
             "x-attribsPrefix": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
@@ -11519,13 +11391,11 @@ LoadedCheerio {
           "prev": [Circular],
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -11534,7 +11404,6 @@ LoadedCheerio {
         "parent": [Circular],
         "prev": Node {
           "attribs": {
-            "aria-label": " Tag 4",
             "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "3",
@@ -11775,7 +11644,6 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": Node {
             "attribs": {
-              "aria-label": " Tag 3",
               "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
               "example-attribute": "example-value",
               "id": "2",
@@ -12016,7 +11884,6 @@ LoadedCheerio {
             "parent": [Circular],
             "prev": Node {
               "attribs": {
-                "aria-label": " Tag 2",
                 "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                 "example-attribute": "example-value",
                 "id": "1",
@@ -12257,7 +12124,6 @@ LoadedCheerio {
               "parent": [Circular],
               "prev": Node {
                 "attribs": {
-                  "aria-label": " Tag 1",
                   "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                   "example-attribute": "example-value",
                   "id": "0",
@@ -12524,13 +12390,11 @@ LoadedCheerio {
                 },
                 "type": "tag",
                 "x-attribsNamespace": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
                 },
                 "x-attribsPrefix": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
@@ -12538,13 +12402,11 @@ LoadedCheerio {
               },
               "type": "tag",
               "x-attribsNamespace": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
               },
               "x-attribsPrefix": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
@@ -12552,13 +12414,11 @@ LoadedCheerio {
             },
             "type": "tag",
             "x-attribsNamespace": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
             },
             "x-attribsPrefix": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
@@ -12566,13 +12426,11 @@ LoadedCheerio {
           },
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -12580,13 +12438,11 @@ LoadedCheerio {
         },
         "type": "tag",
         "x-attribsNamespace": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
         },
         "x-attribsPrefix": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
@@ -12594,7 +12450,6 @@ LoadedCheerio {
       },
       Node {
         "attribs": {
-          "aria-label": " Tag 6",
           "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
           "example-attribute": "example-value",
           "id": "5",
@@ -12833,7 +12688,6 @@ LoadedCheerio {
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": Node {
           "attribs": {
-            "aria-label": " Tag 7",
             "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "6",
@@ -13072,7 +12926,6 @@ LoadedCheerio {
           "namespace": "http://www.w3.org/1999/xhtml",
           "next": Node {
             "attribs": {
-              "aria-label": " Tag 8",
               "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
               "example-attribute": "example-value",
               "id": "7",
@@ -13345,13 +13198,11 @@ LoadedCheerio {
             "prev": [Circular],
             "type": "tag",
             "x-attribsNamespace": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
             },
             "x-attribsPrefix": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
@@ -13361,13 +13212,11 @@ LoadedCheerio {
           "prev": [Circular],
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -13376,7 +13225,6 @@ LoadedCheerio {
         "parent": [Circular],
         "prev": Node {
           "attribs": {
-            "aria-label": " Tag 5",
             "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "4",
@@ -13617,7 +13465,6 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": Node {
             "attribs": {
-              "aria-label": " Tag 4",
               "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
               "example-attribute": "example-value",
               "id": "3",
@@ -13858,7 +13705,6 @@ LoadedCheerio {
             "parent": [Circular],
             "prev": Node {
               "attribs": {
-                "aria-label": " Tag 3",
                 "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                 "example-attribute": "example-value",
                 "id": "2",
@@ -14099,7 +13945,6 @@ LoadedCheerio {
               "parent": [Circular],
               "prev": Node {
                 "attribs": {
-                  "aria-label": " Tag 2",
                   "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                   "example-attribute": "example-value",
                   "id": "1",
@@ -14340,7 +14185,6 @@ LoadedCheerio {
                 "parent": [Circular],
                 "prev": Node {
                   "attribs": {
-                    "aria-label": " Tag 1",
                     "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                     "example-attribute": "example-value",
                     "id": "0",
@@ -14607,13 +14451,11 @@ LoadedCheerio {
                   },
                   "type": "tag",
                   "x-attribsNamespace": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
                   },
                   "x-attribsPrefix": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
@@ -14621,13 +14463,11 @@ LoadedCheerio {
                 },
                 "type": "tag",
                 "x-attribsNamespace": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
                 },
                 "x-attribsPrefix": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
@@ -14635,13 +14475,11 @@ LoadedCheerio {
               },
               "type": "tag",
               "x-attribsNamespace": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
               },
               "x-attribsPrefix": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
@@ -14649,13 +14487,11 @@ LoadedCheerio {
             },
             "type": "tag",
             "x-attribsNamespace": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
             },
             "x-attribsPrefix": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
@@ -14663,13 +14499,11 @@ LoadedCheerio {
           },
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -14677,13 +14511,11 @@ LoadedCheerio {
         },
         "type": "tag",
         "x-attribsNamespace": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
         },
         "x-attribsPrefix": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
@@ -14691,7 +14523,6 @@ LoadedCheerio {
       },
       Node {
         "attribs": {
-          "aria-label": " Tag 7",
           "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
           "example-attribute": "example-value",
           "id": "6",
@@ -14930,7 +14761,6 @@ LoadedCheerio {
         "namespace": "http://www.w3.org/1999/xhtml",
         "next": Node {
           "attribs": {
-            "aria-label": " Tag 8",
             "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "7",
@@ -15203,13 +15033,11 @@ LoadedCheerio {
           "prev": [Circular],
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -15218,7 +15046,6 @@ LoadedCheerio {
         "parent": [Circular],
         "prev": Node {
           "attribs": {
-            "aria-label": " Tag 6",
             "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "5",
@@ -15459,7 +15286,6 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": Node {
             "attribs": {
-              "aria-label": " Tag 5",
               "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
               "example-attribute": "example-value",
               "id": "4",
@@ -15700,7 +15526,6 @@ LoadedCheerio {
             "parent": [Circular],
             "prev": Node {
               "attribs": {
-                "aria-label": " Tag 4",
                 "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                 "example-attribute": "example-value",
                 "id": "3",
@@ -15941,7 +15766,6 @@ LoadedCheerio {
               "parent": [Circular],
               "prev": Node {
                 "attribs": {
-                  "aria-label": " Tag 3",
                   "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                   "example-attribute": "example-value",
                   "id": "2",
@@ -16182,7 +16006,6 @@ LoadedCheerio {
                 "parent": [Circular],
                 "prev": Node {
                   "attribs": {
-                    "aria-label": " Tag 2",
                     "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                     "example-attribute": "example-value",
                     "id": "1",
@@ -16423,7 +16246,6 @@ LoadedCheerio {
                   "parent": [Circular],
                   "prev": Node {
                     "attribs": {
-                      "aria-label": " Tag 1",
                       "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                       "example-attribute": "example-value",
                       "id": "0",
@@ -16690,13 +16512,11 @@ LoadedCheerio {
                     },
                     "type": "tag",
                     "x-attribsNamespace": {
-                      "aria-label": undefined,
                       "class": undefined,
                       "example-attribute": undefined,
                       "id": undefined,
                     },
                     "x-attribsPrefix": {
-                      "aria-label": undefined,
                       "class": undefined,
                       "example-attribute": undefined,
                       "id": undefined,
@@ -16704,13 +16524,11 @@ LoadedCheerio {
                   },
                   "type": "tag",
                   "x-attribsNamespace": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
                   },
                   "x-attribsPrefix": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
@@ -16718,13 +16536,11 @@ LoadedCheerio {
                 },
                 "type": "tag",
                 "x-attribsNamespace": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
                 },
                 "x-attribsPrefix": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
@@ -16732,13 +16548,11 @@ LoadedCheerio {
               },
               "type": "tag",
               "x-attribsNamespace": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
               },
               "x-attribsPrefix": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
@@ -16746,13 +16560,11 @@ LoadedCheerio {
             },
             "type": "tag",
             "x-attribsNamespace": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
             },
             "x-attribsPrefix": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
@@ -16760,13 +16572,11 @@ LoadedCheerio {
           },
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -16774,13 +16584,11 @@ LoadedCheerio {
         },
         "type": "tag",
         "x-attribsNamespace": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
         },
         "x-attribsPrefix": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
@@ -16788,7 +16596,6 @@ LoadedCheerio {
       },
       Node {
         "attribs": {
-          "aria-label": " Tag 8",
           "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
           "example-attribute": "example-value",
           "id": "7",
@@ -17060,7 +16867,6 @@ LoadedCheerio {
         "parent": [Circular],
         "prev": Node {
           "attribs": {
-            "aria-label": " Tag 7",
             "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "6",
@@ -17301,7 +17107,6 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": Node {
             "attribs": {
-              "aria-label": " Tag 6",
               "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
               "example-attribute": "example-value",
               "id": "5",
@@ -17542,7 +17347,6 @@ LoadedCheerio {
             "parent": [Circular],
             "prev": Node {
               "attribs": {
-                "aria-label": " Tag 5",
                 "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                 "example-attribute": "example-value",
                 "id": "4",
@@ -17783,7 +17587,6 @@ LoadedCheerio {
               "parent": [Circular],
               "prev": Node {
                 "attribs": {
-                  "aria-label": " Tag 4",
                   "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                   "example-attribute": "example-value",
                   "id": "3",
@@ -18024,7 +17827,6 @@ LoadedCheerio {
                 "parent": [Circular],
                 "prev": Node {
                   "attribs": {
-                    "aria-label": " Tag 3",
                     "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                     "example-attribute": "example-value",
                     "id": "2",
@@ -18265,7 +18067,6 @@ LoadedCheerio {
                   "parent": [Circular],
                   "prev": Node {
                     "attribs": {
-                      "aria-label": " Tag 2",
                       "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                       "example-attribute": "example-value",
                       "id": "1",
@@ -18506,7 +18307,6 @@ LoadedCheerio {
                     "parent": [Circular],
                     "prev": Node {
                       "attribs": {
-                        "aria-label": " Tag 1",
                         "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                         "example-attribute": "example-value",
                         "id": "0",
@@ -18773,13 +18573,11 @@ LoadedCheerio {
                       },
                       "type": "tag",
                       "x-attribsNamespace": {
-                        "aria-label": undefined,
                         "class": undefined,
                         "example-attribute": undefined,
                         "id": undefined,
                       },
                       "x-attribsPrefix": {
-                        "aria-label": undefined,
                         "class": undefined,
                         "example-attribute": undefined,
                         "id": undefined,
@@ -18787,13 +18585,11 @@ LoadedCheerio {
                     },
                     "type": "tag",
                     "x-attribsNamespace": {
-                      "aria-label": undefined,
                       "class": undefined,
                       "example-attribute": undefined,
                       "id": undefined,
                     },
                     "x-attribsPrefix": {
-                      "aria-label": undefined,
                       "class": undefined,
                       "example-attribute": undefined,
                       "id": undefined,
@@ -18801,13 +18597,11 @@ LoadedCheerio {
                   },
                   "type": "tag",
                   "x-attribsNamespace": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
                   },
                   "x-attribsPrefix": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
@@ -18815,13 +18609,11 @@ LoadedCheerio {
                 },
                 "type": "tag",
                 "x-attribsNamespace": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
                 },
                 "x-attribsPrefix": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
@@ -18829,13 +18621,11 @@ LoadedCheerio {
               },
               "type": "tag",
               "x-attribsNamespace": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
               },
               "x-attribsPrefix": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
@@ -18843,13 +18633,11 @@ LoadedCheerio {
             },
             "type": "tag",
             "x-attribsNamespace": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
             },
             "x-attribsPrefix": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
@@ -18857,13 +18645,11 @@ LoadedCheerio {
           },
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
@@ -18871,13 +18657,11 @@ LoadedCheerio {
         },
         "type": "tag",
         "x-attribsNamespace": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
         },
         "x-attribsPrefix": {
-          "aria-label": undefined,
           "class": undefined,
           "example-attribute": undefined,
           "id": undefined,
@@ -18904,7 +18688,6 @@ LoadedCheerio {
         "parent": [Circular],
         "prev": Node {
           "attribs": {
-            "aria-label": " Tag 8",
             "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
             "example-attribute": "example-value",
             "id": "7",
@@ -19145,7 +18928,6 @@ LoadedCheerio {
           "parent": [Circular],
           "prev": Node {
             "attribs": {
-              "aria-label": " Tag 7",
               "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
               "example-attribute": "example-value",
               "id": "6",
@@ -19386,7 +19168,6 @@ LoadedCheerio {
             "parent": [Circular],
             "prev": Node {
               "attribs": {
-                "aria-label": " Tag 6",
                 "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                 "example-attribute": "example-value",
                 "id": "5",
@@ -19627,7 +19408,6 @@ LoadedCheerio {
               "parent": [Circular],
               "prev": Node {
                 "attribs": {
-                  "aria-label": " Tag 5",
                   "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                   "example-attribute": "example-value",
                   "id": "4",
@@ -19868,7 +19648,6 @@ LoadedCheerio {
                 "parent": [Circular],
                 "prev": Node {
                   "attribs": {
-                    "aria-label": " Tag 4",
                     "class": "bx--tag security--tag--interactive security--tag--interactive--default bx--tag--filter bx--tag--gray",
                     "example-attribute": "example-value",
                     "id": "3",
@@ -20109,7 +19888,6 @@ LoadedCheerio {
                   "parent": [Circular],
                   "prev": Node {
                     "attribs": {
-                      "aria-label": " Tag 3",
                       "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                       "example-attribute": "example-value",
                       "id": "2",
@@ -20350,7 +20128,6 @@ LoadedCheerio {
                     "parent": [Circular],
                     "prev": Node {
                       "attribs": {
-                        "aria-label": " Tag 2",
                         "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                         "example-attribute": "example-value",
                         "id": "1",
@@ -20591,7 +20368,6 @@ LoadedCheerio {
                       "parent": [Circular],
                       "prev": Node {
                         "attribs": {
-                          "aria-label": " Tag 1",
                           "class": "bx--tag security--tag--interactive security--tag--interactive--selected bx--tag--filter bx--tag--gray",
                           "example-attribute": "example-value",
                           "id": "0",
@@ -20858,13 +20634,11 @@ LoadedCheerio {
                         },
                         "type": "tag",
                         "x-attribsNamespace": {
-                          "aria-label": undefined,
                           "class": undefined,
                           "example-attribute": undefined,
                           "id": undefined,
                         },
                         "x-attribsPrefix": {
-                          "aria-label": undefined,
                           "class": undefined,
                           "example-attribute": undefined,
                           "id": undefined,
@@ -20872,13 +20646,11 @@ LoadedCheerio {
                       },
                       "type": "tag",
                       "x-attribsNamespace": {
-                        "aria-label": undefined,
                         "class": undefined,
                         "example-attribute": undefined,
                         "id": undefined,
                       },
                       "x-attribsPrefix": {
-                        "aria-label": undefined,
                         "class": undefined,
                         "example-attribute": undefined,
                         "id": undefined,
@@ -20886,13 +20658,11 @@ LoadedCheerio {
                     },
                     "type": "tag",
                     "x-attribsNamespace": {
-                      "aria-label": undefined,
                       "class": undefined,
                       "example-attribute": undefined,
                       "id": undefined,
                     },
                     "x-attribsPrefix": {
-                      "aria-label": undefined,
                       "class": undefined,
                       "example-attribute": undefined,
                       "id": undefined,
@@ -20900,13 +20670,11 @@ LoadedCheerio {
                   },
                   "type": "tag",
                   "x-attribsNamespace": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
                   },
                   "x-attribsPrefix": {
-                    "aria-label": undefined,
                     "class": undefined,
                     "example-attribute": undefined,
                     "id": undefined,
@@ -20914,13 +20682,11 @@ LoadedCheerio {
                 },
                 "type": "tag",
                 "x-attribsNamespace": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
                 },
                 "x-attribsPrefix": {
-                  "aria-label": undefined,
                   "class": undefined,
                   "example-attribute": undefined,
                   "id": undefined,
@@ -20928,13 +20694,11 @@ LoadedCheerio {
               },
               "type": "tag",
               "x-attribsNamespace": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
               },
               "x-attribsPrefix": {
-                "aria-label": undefined,
                 "class": undefined,
                 "example-attribute": undefined,
                 "id": undefined,
@@ -20942,13 +20706,11 @@ LoadedCheerio {
             },
             "type": "tag",
             "x-attribsNamespace": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
             },
             "x-attribsPrefix": {
-              "aria-label": undefined,
               "class": undefined,
               "example-attribute": undefined,
               "id": undefined,
@@ -20956,13 +20718,11 @@ LoadedCheerio {
           },
           "type": "tag",
           "x-attribsNamespace": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,
           },
           "x-attribsPrefix": {
-            "aria-label": undefined,
             "class": undefined,
             "example-attribute": undefined,
             "id": undefined,

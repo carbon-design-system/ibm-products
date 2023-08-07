@@ -65,10 +65,8 @@ export const Example = () => {
         open={open}
         onClose={clearCreateData}
         onRequestSubmit={() => {
-          console.log('onrequest submit');
           return new Promise((resolve) => {
             setTimeout(() => {
-              console.log('on request done');
               clearCreateData();
               resolve();
             }, simulatedDelay);

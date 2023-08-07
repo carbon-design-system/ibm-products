@@ -135,9 +135,7 @@ describe(componentName, () => {
     render(<ActionSet actions={[{ ...actionS, onClick }]} />);
     expect(onClick).toBeCalledTimes(0);
 
-    await act(
-      async () => await userEvent.click(getByRoleAndLabel('button', labelS))
-    );
+    await act(() => userEvent.click(getByRoleAndLabel('button', labelS)));
 
     expect(onClick).toBeCalledTimes(1);
   });

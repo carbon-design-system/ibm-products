@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 
 import { pkg, carbon } from '../../settings';
@@ -83,7 +83,9 @@ describe(componentName, () => {
     });
 
     const buttons = screen.getAllByRole('button');
-    await Promise.all(buttons.map((button) => userEvent.click(button)));
+    await act(() =>
+      Promise.all(buttons.map((button) => userEvent.click(button)))
+    );
 
     expect(primaryHandler).toBeCalledTimes(1);
     expect(secondaryHandler).toBeCalledTimes(1);

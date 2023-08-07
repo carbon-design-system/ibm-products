@@ -99,7 +99,9 @@ describe(componentName, () => {
       props.apiKey
     );
     getByText(props.apiKeyLabel);
-    await click(container.querySelector(`.${carbon.prefix}--btn--primary`));
+    await act(async () =>
+      click(container.querySelector(`.${carbon.prefix}--btn--primary`))
+    );
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(props.apiKey);
     getByLabelText(defaultProps.copyIconDescription);
   });
@@ -133,7 +135,7 @@ describe(componentName, () => {
     expect(container.querySelector(`.${carbon.prefix}--text-input`).value).toBe(
       '444-444-444-444'
     );
-    await click(getByText(props.copyButtonText));
+    await act(() => click(getByText(props.copyButtonText)));
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
       '444-444-444-444'
     );
@@ -158,7 +160,7 @@ describe(componentName, () => {
     const createButton = getByText(props.generateButtonText);
 
     await change(nameInput, { target: { value: 'test-key' } });
-    await click(createButton);
+    await act(() => click(createButton));
     expect(onRequestGenerate).toHaveBeenCalled();
 
     rerender(<APIKeyModal {...props} error />);
@@ -205,41 +207,41 @@ describe(componentName, () => {
     getByText(props.customSteps[0].title);
 
     // advance to step 2
-    await act(async () => await click(getByText(props.nextStepButtonText)));
+    await act(() => click(getByText(props.nextStepButtonText)));
     getByPlaceholderText('input b');
     getByText(props.nextStepButtonText);
     getByText(props.previousStepButtonText);
     getByText(props.customSteps[1].title);
 
     // go back to step 1
-    await act(async () => await click(getByText(props.previousStepButtonText)));
+    await act(() => click(getByText(props.previousStepButtonText)));
     getByPlaceholderText('input a');
     getByText(props.nextStepButtonText);
     getByText(props.closeButtonText);
     getByText(props.customSteps[0].title);
 
     // advance to step 2
-    await act(async () => await click(getByText(props.nextStepButtonText)));
+    await act(() => click(getByText(props.nextStepButtonText)));
     getByPlaceholderText('input b');
     getByText(props.nextStepButtonText);
     getByText(props.previousStepButtonText);
     getByText(props.customSteps[1].title);
 
     // advance to step 3
-    await act(async () => await click(getByText(props.nextStepButtonText)));
+    await act(() => click(getByText(props.nextStepButtonText)));
     getByPlaceholderText('input c');
     getByText(props.generateButtonText);
     getByText(props.previousStepButtonText);
     getByText(props.customSteps[2].title);
 
     // submit invalid form
-    await act(async () => await click(getByText(props.generateButtonText)));
+    await act(() => click(getByText(props.generateButtonText)));
     expect(onRequestGenerate).not.toHaveBeenCalled();
 
     // submit valid form
     customSteps[2].valid = true;
     rerender(<APIKeyModal {...props} customSteps={customSteps} />);
-    await act(async () => await click(getByText(props.generateButtonText)));
+    await act(() => click(getByText(props.generateButtonText)));
     expect(onRequestGenerate).toHaveBeenCalled();
     rerender(<APIKeyModal {...props} />);
     rerender(<APIKeyModal {...props} apiKey="abc-123" />);
@@ -248,7 +250,7 @@ describe(componentName, () => {
     );
     getByText(props.generateSuccessBody);
     getByText(props.generateSuccessTitle);
-    await act(async () => await click(getByText(props.closeButtonText)));
+    await act(() => click(getByText(props.closeButtonText)));
     expect(onClose).toHaveBeenCalled();
   });
 
@@ -273,7 +275,7 @@ describe(componentName, () => {
     expect(nameInput.value).toBe(props.apiKeyName);
     getByText(props.editButtonText);
     await change(nameInput, { target: { value: 'new-key-name' } });
-    await click(editButton);
+    await act(() => click(editButton));
     expect(onRequestEdit).toHaveBeenCalledWith(nameInput.value);
     rerender(<APIKeyModal {...props} editSuccess />);
     getByText(props.editSuccessTitle);
@@ -296,24 +298,19 @@ describe(componentName, () => {
     expect(
       container.querySelector(`.${carbon.prefix}--text-input`)
     ).toHaveAttribute('type', 'password');
-    await act(
-      async () =>
-        await mouseOver(
-          container.querySelector(`.${carbon.prefix}--icon-visibility-on`)
-        )
+    await act(() =>
+      mouseOver(
+        container.querySelector(`.${carbon.prefix}--icon-visibility-on`)
+      )
     );
     await waitFor(() => getByText(defaultProps.showAPIKeyLabel));
-    await act(
-      async () =>
-        await click(
-          container.querySelector(`.${carbon.prefix}--icon-visibility-on`)
-        )
+    await act(() =>
+      click(container.querySelector(`.${carbon.prefix}--icon-visibility-on`))
     );
-    await act(
-      async () =>
-        await mouseOver(
-          container.querySelector(`.${carbon.prefix}--icon-visibility-off`)
-        )
+    await act(() =>
+      mouseOver(
+        container.querySelector(`.${carbon.prefix}--icon-visibility-off`)
+      )
     );
     await waitFor(() => getByText(defaultProps.hideAPIKeyLabel));
     rerender(<APIKeyModal {...props} hasAPIKeyVisibilityToggle={false} />);

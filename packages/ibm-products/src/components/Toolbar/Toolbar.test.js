@@ -204,7 +204,7 @@ describe(componentName, () => {
   }
 
   async function expectMove(text, id) {
-    await act(async () => await key(text));
+    await act(() => key(text));
 
     expect(getByText(getText(id))).toHaveFocus();
   }

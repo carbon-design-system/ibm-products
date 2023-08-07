@@ -30,6 +30,7 @@ const dataTestId = uuidv4();
 // render a CreateModal with title, subtitle, description, and any other required props
 // eslint-disable-next-line react/prop-types
 const RenderComponent = forwardRef(({ children, ...rest }, ref) => {
+  console.log('rest', typeof rest, rest);
   const carbonPrefix = usePrefix();
   return (
     <CreateModal
@@ -176,7 +177,7 @@ describe(componentName, () => {
   it('throws an error if there are more than 4 child nodes inside of the modal', async () =>
     expectError(
       'The `CreateModal` component does not take more than 4 nodes as children',
-      async () => {
+      () => {
         const { container } = render(
           <RenderComponent>
             <TextInput
@@ -216,7 +217,7 @@ describe(componentName, () => {
             />
           </RenderComponent>
         );
-        expect(async () => {
+        expect(() => {
           render(...container);
         }).toThrow();
       }

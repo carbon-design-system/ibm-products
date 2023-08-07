@@ -6218,8 +6218,8 @@ __metadata:
   linkType: hard
 
 "accessibility-checker@npm:^3.1.50":
-  version: 3.1.57
-  resolution: "accessibility-checker@npm:3.1.57"
+  version: 3.1.58
+  resolution: "accessibility-checker@npm:3.1.58"
   dependencies:
     axios: ^1.4.0
     chromedriver: "*"
@@ -6231,7 +6231,7 @@ __metadata:
     uuid: ^8.3.2
   bin:
     achecker: bin/achecker.js
-  checksum: 1b3379fb38f3d31dca3c9d8d536640c378a4b1f510b3fe3220db394ba5bc925ccdc3819c07f38e2537e1098557ec9d5df2948ef58912e02de931b1ce9dfed40e
+  checksum: 15d0923f9c89edc59d4ad45e20a9f6a1c5d68db38297a3833e21544b838a19397590d834fc438801fdea1ea668c9f5fb51c81b0a2975a96350a67930b5452418
   languageName: node
   linkType: hard
 

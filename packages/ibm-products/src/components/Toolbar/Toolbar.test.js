@@ -45,7 +45,7 @@ function componentTest(Component) {
   );
 
   it('renders children', async () => {
-    const { container } = render(<Component {...props} />);
+    render(<Component {...props} />);
 
     getByText(children);
   });

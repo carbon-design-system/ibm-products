@@ -82,7 +82,7 @@ describe(name, () => {
     expect(screen.getByText(/Body content/i)).toBeInTheDocument();
   });
 
-  it.only('custom hook should toggle web terminal', async () => {
+  it('custom hook should toggle web terminal', async () => {
     /**  Utilizing renderHook so jest knows about the custom hook and passing
          in the WebTerminalProvider so that the hook can consume the value  */
     const { result } = renderHook(() => useWebTerminal(), {

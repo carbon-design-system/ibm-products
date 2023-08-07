@@ -125,21 +125,6 @@ const makeMatcherArray = (args) =>
     ? args.map((arg) => makeMatcher(arg))
     : [makeMatcher(args)];
 
-const sanitizeMockParams = (mock) => {
-  // sanitize log mock calls - TODO: review
-  // for some reason getting printf style string
-  return mock.calls.map((call) => {
-    if (Array.isArray(call)) {
-      return call.reduce(
-        (acc, val) => (acc === '' ? val : acc.replace('%s', val)),
-        ''
-      );
-    } else {
-      return call;
-    }
-  });
-};
-
 /**
  * A helper function to enable a test to expect a single call to
  * console.warn, for example when intentionally using a deprecated prop
@@ -153,9 +138,9 @@ const sanitizeMockParams = (mock) => {
  * @param {Function} test the test function to call, during which the call to
  * console.warn will be expected.
  */
-export const expectWarn = async (message, test) => {
+export const expectWarn = (message, test) => {
   const warn = jest.spyOn(console, 'warn').mockImplementation(jest.fn());
-  const result = await test();
+  const result = test();
   expect(warn).toBeCalledTimes(1);
   // expect(warn).toHaveBeenCalledWith(...makeMatcherArray(message));
   warn.mockRestore();

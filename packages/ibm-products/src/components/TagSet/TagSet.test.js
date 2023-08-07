@@ -173,7 +173,7 @@ describe(TagSet.displayName, () => {
     expect(modal).not.toHaveClass('is-visible');
   });
 
-  it.only('it requires strings for overflow and modal when more than ten tags supplied.', async () =>
+  it('it requires strings for overflow and modal when more than ten tags supplied.', async () =>
     expectMultipleError(
       [
         required('allTagsModalSearchLabel', 'TagSet'),
@@ -181,7 +181,7 @@ describe(TagSet.displayName, () => {
         required('allTagsModalTitle', 'TagSet'),
         required('showAllTagsLabel', 'TagSet'),
       ],
-      async () => {
+      () => {
         const visibleTags = 5;
         window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 

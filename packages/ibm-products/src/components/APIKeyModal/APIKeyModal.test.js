@@ -123,7 +123,7 @@ describe(componentName, () => {
     const nameInput = container.querySelector(`.${carbon.prefix}--text-input`);
     const createButton = getByText(props.generateButtonText);
 
-    await change(nameInput, { target: { value: 'test-key' } });
+    change(nameInput, { target: { value: 'test-key' } });
     await act(() => click(createButton));
     expect(onRequestGenerate).toHaveBeenCalledWith('test-key');
 
@@ -159,7 +159,7 @@ describe(componentName, () => {
     const nameInput = container.querySelector(`.${carbon.prefix}--text-input`);
     const createButton = getByText(props.generateButtonText);
 
-    await change(nameInput, { target: { value: 'test-key' } });
+    change(nameInput, { target: { value: 'test-key' } });
     await act(() => click(createButton));
     expect(onRequestGenerate).toHaveBeenCalled();
 
@@ -274,7 +274,7 @@ describe(componentName, () => {
     const editButton = getByText(props.editButtonText);
     expect(nameInput.value).toBe(props.apiKeyName);
     getByText(props.editButtonText);
-    await change(nameInput, { target: { value: 'new-key-name' } });
+    change(nameInput, { target: { value: 'new-key-name' } });
     await act(() => click(editButton));
     expect(onRequestEdit).toHaveBeenCalledWith(nameInput.value);
     rerender(<APIKeyModal {...props} editSuccess />);
@@ -298,19 +298,13 @@ describe(componentName, () => {
     expect(
       container.querySelector(`.${carbon.prefix}--text-input`)
     ).toHaveAttribute('type', 'password');
-    await act(() =>
-      mouseOver(
-        container.querySelector(`.${carbon.prefix}--icon-visibility-on`)
-      )
-    );
+    mouseOver(container.querySelector(`.${carbon.prefix}--icon-visibility-on`));
     await waitFor(() => getByText(defaultProps.showAPIKeyLabel));
     await act(() =>
       click(container.querySelector(`.${carbon.prefix}--icon-visibility-on`))
     );
-    await act(() =>
-      mouseOver(
-        container.querySelector(`.${carbon.prefix}--icon-visibility-off`)
-      )
+    mouseOver(
+      container.querySelector(`.${carbon.prefix}--icon-visibility-off`)
     );
     await waitFor(() => getByText(defaultProps.hideAPIKeyLabel));
     rerender(<APIKeyModal {...props} hasAPIKeyVisibilityToggle={false} />);

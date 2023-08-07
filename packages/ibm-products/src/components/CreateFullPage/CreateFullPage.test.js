@@ -169,7 +169,7 @@ const renderFullPageWithStepChildrenOutside = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  // TODO: raise a11y issue in Carbon for IBM Products
+  // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
   it.skip('has no accessibility violations', async () => {
     const { container } = renderComponent({ ...defaultFullPageProps });
 
@@ -208,7 +208,7 @@ describe(componentName, () => {
   });
 
   it('should create a console warning when using CreateFullPage with only one step', async () =>
-    expectWarn('CreateFullPages with one step are not permitted', async () => {
+    expectWarn('CreateFullPages with one step are not permitted', () => {
       const { container } = renderOneStepCreateFullPage(defaultFullPageProps);
       expect(() => {
         render(...container);

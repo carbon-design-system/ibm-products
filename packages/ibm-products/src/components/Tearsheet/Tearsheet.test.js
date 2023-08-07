@@ -157,7 +157,7 @@ const commonTests = (Ts, name, props, testActions) => {
               'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than four actions',
               'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
             ],
-        async () => {
+        () => {
           tooManyButtonsTestedAlready = true;
           render(<Ts {...props} actions={badActions} />);
         }
@@ -194,7 +194,7 @@ const commonTests = (Ts, name, props, testActions) => {
               required('closeIconDescription', name),
               required('closeIconDescription', 'TearsheetShell'),
             ],
-        async () => {
+        () => {
           render(<Ts {...props} />);
           closeIconDescriptionTestedAlready = true;
         }
@@ -291,7 +291,7 @@ const commonTests = (Ts, name, props, testActions) => {
   it("doesn't render when stacked more than three deep", async () =>
     expectWarn(
       'Tearsheet not rendered: maximum stacking depth exceeded.',
-      async () => {
+      () => {
         render(<Ts {...props} open />);
         render(<Ts {...props} open />);
         render(<Ts {...props} open />);

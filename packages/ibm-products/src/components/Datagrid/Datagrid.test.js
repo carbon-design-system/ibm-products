@@ -1055,7 +1055,7 @@ describe(componentName, () => {
   it('renders nothing and logs a warning to console if no datagridState is supplied', async () => {
     expectWarn(
       'Datagrid was not passed datagridState which is required to render this component.',
-      async () => {
+      () => {
         const errorMock = jest
           .spyOn(console, 'error')
           .mockImplementation(() => {});
@@ -1151,7 +1151,7 @@ describe(componentName, () => {
   it('render logs an error if infinite scroll not enabled', async () => {
     expectError(
       'Carbon for IBM Products (Error): Feature "Datagrid.useInfiniteScroll" not enabled. To enable see the notes on feature flags in the README.',
-      async () => {
+      () => {
         render(
           <TenThousandEntriesWithoutFeatureFlag data-testid={dataTestId} />
         );

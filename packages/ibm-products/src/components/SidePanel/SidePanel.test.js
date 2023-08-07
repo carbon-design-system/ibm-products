@@ -297,7 +297,7 @@ describe('SidePanel', () => {
         'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than three actions',
         'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
       ],
-      async () =>
+      () =>
         renderSidePanel({
           actions: [
             { kind: 'primary' },

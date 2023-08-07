@@ -309,7 +309,7 @@ describe(CreateTearsheet.displayName, () => {
   // React 18 this times out on the click
   it.skip('should call the onRequestSubmit prop, returning a promise on last step submit button', async () => {
     const { click } = userEvent;
-    const { container } = renderCreateTearsheet({
+    renderCreateTearsheet({
       ...defaultProps,
       rejectOnSubmit: false,
       rejectOnNext: false,
@@ -334,6 +334,7 @@ describe(CreateTearsheet.displayName, () => {
     });
   });
 
+  // React 18 this times out on the click
   it.skip('should call the onRequestSubmit function, without a promise, on last step submit button', async () => {
     const { click } = userEvent;
     renderCreateTearsheet({
@@ -360,6 +361,7 @@ describe(CreateTearsheet.displayName, () => {
     });
   });
 
+  // React 18 this times out on the click
   it.skip('should call the onNext function from the final step and reject the promise', async () =>
     expectWarnAsync(
       `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
@@ -391,6 +393,7 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
+  // React 18 this times out on the click
   it.skip('should call the onRequestSubmit prop and reject the promise', async () =>
     expectWarnAsync(
       `CreateTearsheet submit error: ${rejectionErrorMessage}`,
@@ -425,6 +428,7 @@ describe(CreateTearsheet.displayName, () => {
     expect(Array(...createTearsheetSteps)).toStrictEqual([]);
   });
 
+  // React 18 this times out on the click
   it.skip('should click the back button and add a custom next button label on a single step', async () => {
     const { click } = userEvent;
     const { container } = renderCreateTearsheet({
@@ -454,13 +458,13 @@ describe(CreateTearsheet.displayName, () => {
   });
 
   // React 18 - no errors called
-  it.skip('should create a console warning when using CreateTearsheet with only one step', async () =>
+  it('should create a console warning when using CreateTearsheet with only one step', async () =>
     expectWarn('CreateTearsheets with one step are not permitted', () => {
       renderSingleStepCreateTearsheet(defaultProps);
     }));
 
   // React 18 - no errors called
-  it.skip('should render an invalid create tearsheet', async () =>
+  it('should render an invalid create tearsheet', async () =>
     expectMultipleWarn(
       [
         `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,

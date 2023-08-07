@@ -692,7 +692,7 @@ describe('PageHeader', () => {
   });
 
   it('Works, for now, with deprecated props', async () =>
-    expectWarn(deprecated('hasBackgroundAlways', 'PageHeader'), async () => {
+    expectWarn(deprecated('hasBackgroundAlways', 'PageHeader'), () => {
       const dataTestId = uuidv4();
       render(
         <PageHeader

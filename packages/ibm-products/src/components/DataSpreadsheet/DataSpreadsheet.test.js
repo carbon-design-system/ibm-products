@@ -95,7 +95,7 @@ describe(componentName, () => {
     const ref = React.createRef();
     const activeCellChangeFn = jest.fn();
     const { click } = userEvent;
-    await render(
+    render(
       <DataSpreadsheet
         {...defaultProps}
         ref={ref}
@@ -271,9 +271,6 @@ describe(componentName, () => {
         onSelectionAreaChange={onSelectionAreaChangeFn}
       />
     );
-    const activeCellElement = ref?.current.querySelector(
-      `.${blockClass}__active-cell--highlight`
-    );
     const cellToEdit = ref?.current.querySelector(`#${blockClass}__cell--0--1`);
     const cellEditor = ref?.current.querySelector(
       `#${blockClass}__cell-editor-text-area`
@@ -287,6 +284,9 @@ describe(componentName, () => {
     await act(() => keyboard('{ArrowLeft}'));
 
     // TODO: Review - React 18 not working
+    // const activeCellElement = ref?.current.querySelector(
+    //   `.${blockClass}__active-cell--highlight`
+    // );
     // expect(activeCellElement.textContent).toEqual(newCellValue);
   });
 
@@ -312,10 +312,11 @@ describe(componentName, () => {
     await act(() => type(cellEditor, newCellValue));
     const nextCell = ref?.current.querySelector(`#${blockClass}__cell--0--3`);
     await act(() => click(nextCell));
-    const updatedCell = ref?.current.querySelector(
-      `#${blockClass}__cell--0--1`
-    );
+
     // TODO: Review - React 18 not working
+    // const updatedCell = ref?.current.querySelector(
+    //   `#${blockClass}__cell--0--1`
+    // );
     // expect(updatedCell.textContent).toEqual(newCellValue);
   });
 
@@ -330,13 +331,15 @@ describe(componentName, () => {
         onSelectionAreaChange={onSelectionAreaChangeFn}
       />
     );
-    const activeCellElement = ref?.current.querySelector(
-      `.${blockClass}__active-cell--highlight`
-    );
     await act(() => {
       container.firstChild.focus();
       keyboard('{ArrowDown}');
     });
+
+    // TODO: Review - React 18 not working
+    // const activeCellElement = ref?.current.querySelector(
+    //   `.${blockClass}__active-cell--highlight`
+    // );
     // expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
     //   'header'
     // );
@@ -355,21 +358,22 @@ describe(componentName, () => {
         onSelectionAreaChange={onSelectionAreaChangeFn}
       />
     );
-    const activeCellElement = ref?.current.querySelector(
-      `.${blockClass}__active-cell--highlight`
-    );
     const cellToEdit = ref?.current.querySelector(`#${blockClass}__cell--0--1`);
     await act(() => {
       click(cellToEdit);
       keyboard('{ArrowRight}');
     });
-    const activeCellRowIndex = activeCellElement.getAttribute(
-      'data-active-row-index'
-    );
-    const activeCellColumnIndex = activeCellElement.getAttribute(
-      'data-active-column-index'
-    );
+
     // TODO: Review - React 18 not working
+    // const activeCellElement = ref?.current.querySelector(
+    //   `.${blockClass}__active-cell--highlight`
+    // );
+    // const activeCellRowIndex = activeCellElement.getAttribute(
+    //   'data-active-row-index'
+    // );
+    // const activeCellColumnIndex = activeCellElement.getAttribute(
+    //   'data-active-column-index'
+    // );
     // expect(parseInt(activeCellRowIndex)).toEqual(0);
     // expect(parseInt(activeCellColumnIndex)).toEqual(2);
     await act(() => keyboard('{ArrowUp}'));
@@ -470,14 +474,15 @@ describe(componentName, () => {
         onSelectionAreaChange={onSelectionAreaChangeFn}
       />
     );
-    const activeCellElement = ref?.current.querySelector(
-      `.${blockClass}__active-cell--highlight`
-    );
     await act(() => {
       container.firstChild.focus();
       keyboard('{ArrowDown}');
     });
+
     // TODO: Review - React 18 not working
+    // const activeCellElement = ref?.current.querySelector(
+    //   `.${blockClass}__active-cell--highlight`
+    // );
     // expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
     //   'header'
     // );
@@ -578,10 +583,10 @@ describe(componentName, () => {
       keyboard('{ArrowRight}');
       dblClick(activeCellElement);
     });
-    const cellEditor = ref?.current.querySelector(
-      `#${blockClass}__cell-editor-text-area`
-    );
     // TODO: Review - React 18 not working
+    // const cellEditor = ref?.current.querySelector(
+    //   `#${blockClass}__cell-editor-text-area`
+    // );
     // expect(cellEditor).toHaveClass(`${blockClass}__cell-editor--active`);
   });
 

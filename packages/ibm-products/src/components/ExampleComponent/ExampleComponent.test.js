@@ -131,7 +131,7 @@ describe(componentName, () => {
     pkg.feature['ExampleComponent.secondaryIcon'] = false;
     expectError(
       'Carbon for IBM Products (Error): Feature "ExampleComponent.secondaryIcon" not enabled. To enable see the notes on feature flags in the README.',
-      async () => {
+      () => {
         render(
           <ExampleComponent
             secondaryIcon={Add}
@@ -167,7 +167,7 @@ describe(componentName, () => {
         warnings:
           'Disabled feature "ExampleComponent.useExample" does not change the initialTime.',
       },
-      async () => {
+      () => {
         render(
           <ExampleComponent
             secondaryIcon={Add}

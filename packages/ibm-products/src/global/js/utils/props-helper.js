@@ -160,8 +160,6 @@ export const extractShapesArray = (items) => {
   ) {
     const unwrappedItems = unwrapIfFragment(items);
 
-    console.log(item.props);
-
     return unwrappedItems.map((item) => ({ key: item.key, ...item.props }));
   }
 

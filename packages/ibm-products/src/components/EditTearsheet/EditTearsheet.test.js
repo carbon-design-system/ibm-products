@@ -7,8 +7,8 @@
  */
 
 import React from 'react';
-import { render, screen, act } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen /*, act */ } from '@testing-library/react';
+// import userEvent from '@testing-library/user-event';
 import { carbon, pkg } from '../../settings';
 import { EditTearsheet } from './EditTearsheet';
 import { EditTearsheetForm } from './EditTearsheetForm';
@@ -156,7 +156,7 @@ describe(componentName, () => {
     screen.getByText(defaultProps.cancelButtonText);
   });
 
-  it.only('calls onClose() when the tearsheet is closed', async () => {
+  it('calls onClose() when the tearsheet is closed', async () => {
     render(
       <EditTearsheet
         {...{ ...defaultProps }}
@@ -166,8 +166,9 @@ describe(componentName, () => {
     );
     const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
     expect(editTearsheet).toHaveClass('is-visible');
-    const closeButton = screen.getByTitle('Close');
     // React 18 this click times out
+    // const closeButton =
+    screen.getByTitle('Close');
     // await act(() => userEvent.click(closeButton));
     // expect(editTearsheet).not.toHaveClass('is-visible');
   });

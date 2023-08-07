@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,8 +16,8 @@ export const useCreateComponentStepChange = ({
   isSubmitDisabled,
   setCurrentStep,
   setIsSubmitting,
-  setLoadingPrevious,
-  loadingPrevious,
+  setLoadingPrevious = null,
+  loadingPrevious = false,
   onClose,
   onRequestSubmit,
   componentName,
@@ -45,7 +45,9 @@ export const useCreateComponentStepChange = ({
   }, [setCurrentStep, setIsSubmitting, stepData]);
 
   const moveToPreviousStep = useCallback(() => {
-    setLoadingPrevious(false);
+    if (componentName !== 'CreateFullPage') {
+      setLoadingPrevious(false);
+    }
     setCurrentStep((prev) => {
       // Find previous included step to render
       // There will always be a previous step otherwise we will
@@ -55,7 +57,7 @@ export const useCreateComponentStepChange = ({
       } while (!stepData[prev - 1]?.shouldIncludeStep);
       return prev;
     });
-  }, [setCurrentStep, stepData, setLoadingPrevious]);
+  }, [setCurrentStep, stepData, setLoadingPrevious, componentName]);
 
   // useEffect to handle multi step logic
   useEffect(() => {
@@ -77,6 +79,9 @@ export const useCreateComponentStepChange = ({
       }
     };
     const handlePrevious = async () => {
+      if (componentName === 'CreateFullPage') {
+        return;
+      }
       setLoadingPrevious(true);
       if (typeof onPrevious === 'function') {
         try {

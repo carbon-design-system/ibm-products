@@ -30,7 +30,6 @@ const dataTestId = uuidv4();
 // render a CreateModal with title, subtitle, description, and any other required props
 // eslint-disable-next-line react/prop-types
 const RenderComponent = forwardRef(({ children, ...rest }, ref) => {
-  console.log('rest', typeof rest, rest);
   const carbonPrefix = usePrefix();
   return (
     <CreateModal

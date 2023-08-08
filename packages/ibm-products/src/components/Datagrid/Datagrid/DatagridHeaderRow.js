@@ -34,6 +34,22 @@ const HeaderRow = (datagridState, headRef, headerGroup) => (
          * for accessibility reasons th's require a title attribute
          * if there's no title prop in Header mark it as hidden
          */
+        const setAccessibilityProps = () => {
+          const props = {};
+          let headerTitle;
+          if (header.Header.props) {
+            headerTitle = header.Header.props.title;
+          }
+          if (typeof header.Header === 'function') {
+            headerTitle = header.Header()?.props?.children?.props?.title;
+          }
+          if (headerTitle) {
+            props.title = headerTitle;
+          } else {
+            props['aria-hidden'] = true;
+          }
+          return props;
+        };
         return (
           <TableHeader
             {...header.getHeaderProps({ role: false })}
@@ -48,8 +64,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => (
               header.getHeaderProps().className
             )}
             key={header.id}
-            title={header.Header.props?.title}
-            aria-hidden={!header.Header.props?.title}
+            {...setAccessibilityProps()}
           >
             {header.render('Header')}
             {header.getResizerProps && (

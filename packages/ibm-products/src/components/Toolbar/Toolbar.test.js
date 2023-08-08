@@ -23,19 +23,31 @@ function _instance(prop) {
   return `${uuidv4()}--${prop}`;
 }
 
-function toBeAccessible(label, node, displayName) {
-  it.skip(label, async () => {
+function toBeAccessible(label, node, displayName, skip = false) {
+  const test = async () => {
     const { container } = render(node);
 
     await expect(container).toBeAccessible(`${displayName} — ${label}`);
     await expect(container).toHaveNoAxeViolations();
-  });
+  };
+
+  return (skip ? it.skip : it)(label, test);
 }
+// Allow this to be skipped
+toBeAccessible.skip = (label, node, displayName) =>
+  toBeAccessible(label, node, displayName, true);
 
 const children = _instance('children');
 const dataTestId = _instance('dataTestId');
 
 const props = { children };
+
+// Moved up here as it works (order seems to matter)
+toBeAccessible(
+  'has no accessibility violations for the vertical variant',
+  <Toolbar {...props} vertical />,
+  componentName
+);
 
 function componentTest(Component) {
   toBeAccessible(
@@ -204,7 +216,7 @@ describe(componentName, () => {
   }
 
   async function expectMove(text, id) {
-    await act(() => key(text));
+    await key(text);
 
     expect(getByText(getText(id))).toHaveFocus();
   }
@@ -222,9 +234,7 @@ describe(componentName, () => {
     const items = await setupKeyFocus(props);
     const { length } = items;
 
-    await act(() => {
-      items.forEach(async () => await key(next));
-    });
+    Promise.all(items.map(() => key(next)));
 
     items.forEach((_value, index) =>
       expectMove(previous, length - (index + 1))
@@ -234,12 +244,6 @@ describe(componentName, () => {
   it('moves focus to the previous item', async () => {
     expectPreviousKeyFocus({ next: 'ArrowRight', previous: 'ArrowLeft' });
   });
-
-  toBeAccessible(
-    'has no accessibility violations for the vertical variant',
-    <Toolbar {...props} vertical />,
-    componentName
-  );
 
   it('moves focus to the next item for the vertical variant', async () => {
     expectNextKeyFocus('ArrowDown', { vertical: true });

@@ -59,7 +59,7 @@ describe(componentName, () => {
     expect(ref.current).toBeNull();
   });
 
-  const renderHierarchy = async (props, results) => {
+  const renderHierarchy = (props, results) => {
     const refs = results.map(() => React.createRef());
     render(
       <Wrap {...props} ref={refs[0]}>
@@ -94,7 +94,7 @@ describe(componentName, () => {
   };
 
   it('render recursive content only where non-empty', async () => {
-    await renderHierarchy({}, [
+    renderHierarchy({}, [
       true,
       true,
       false,
@@ -108,7 +108,7 @@ describe(componentName, () => {
   });
 
   it('responds to alwaysRender', async () => {
-    await renderHierarchy({ alwaysRender: true }, [
+    renderHierarchy({ alwaysRender: true }, [
       true,
       true,
       true,
@@ -121,7 +121,7 @@ describe(componentName, () => {
     ]);
   });
   it('responds to neverRender', async () => {
-    await renderHierarchy({ neverRender: true }, [
+    renderHierarchy({ neverRender: true }, [
       false,
       false,
       false,

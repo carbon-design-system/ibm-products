@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.5.0...@carbon/ibm-products@2.6.0) (2023-08-08)
+
+
+### Bug Fixes
+
+* **CreateTearsheet:** use new onChange callback signature in v11 ([#3339](https://github.com/carbon-design-system/ibm-products/issues/3339)) ([f90a201](https://github.com/carbon-design-system/ibm-products/commit/f90a20107f653a3f5af4dc67977252e4ac36793a))
+
+
+### Features
+
+* **CreateTearsheet:** allow node to be passed to description prop ([#3349](https://github.com/carbon-design-system/ibm-products/issues/3349)) ([f72e3f2](https://github.com/carbon-design-system/ibm-products/commit/f72e3f24128517316811bebb1cb502c87196b058))
+
+
+
+
+
 # [2.5.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.4.1...@carbon/ibm-products@2.5.0) (2023-08-01)
 
 

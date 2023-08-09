@@ -14,6 +14,20 @@ import { pkg } from '../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
+const getAccessibilityProps = (header) => {
+  const props = {};
+  const title =
+    typeof header.Header === 'function'
+      ? header?.Header()?.props?.children?.props?.title
+      : header?.Header?.props?.title;
+  if (title) {
+    props.title = title;
+  } else {
+    props['aria-hidden'] = true;
+  }
+  return props;
+};
+
 const HeaderRow = (datagridState, headRef, headerGroup) => (
   <TableRow
     {...headerGroup.getHeaderGroupProps({ role: false })}
@@ -44,6 +58,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => (
               header.getHeaderProps().className
             )}
             key={header.id}
+            {...getAccessibilityProps(header)}
           >
             {header.render('Header')}
             {header.getResizerProps && (

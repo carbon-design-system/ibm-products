@@ -542,12 +542,12 @@ NotificationsPanel.propTypes = {
   dismissSingleNotificationIconDescription: PropTypes.string,
 
   /**
-   * Determines if the `Do not disturb` toggle is on or off when the component is rendered
+   * Optional: Determines if the `Do not disturb` toggle is on or off when the component is rendered
    */
   doNotDisturbDefaultToggled: PropTypes.bool,
 
   /**
-   * Label for Do not disturb toggle
+   * Optional: Label for Do not disturb toggle
    */
   doNotDisturbLabel: PropTypes.string,
 
@@ -607,7 +607,7 @@ NotificationsPanel.propTypes = {
   onDismissSingleNotification: PropTypes.func,
 
   /**
-   * Function that returns the current selected value of the disable notification toggle
+   * Optional: function that returns the current selected value of the disable notification toggle
    */
   onDoNotDisturbChange: PropTypes.func,
 

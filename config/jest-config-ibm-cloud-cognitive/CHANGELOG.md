@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.25.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@0.24.15...jest-config-ibm-cloud-cognitive@0.25.0) (2023-08-02)
+
+
+### Features
+
+* **SteppedAnimatedMedia:** Novice to Pro internal component ([#3055](https://github.com/carbon-design-system/ibm-products/issues/3055)) ([0499fea](https://github.com/carbon-design-system/ibm-products/commit/0499fea09c8d676fe8c0dec7411edef72b3dc7e0))
+
+
+
+
+
 ## [0.24.15](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@0.24.14...jest-config-ibm-cloud-cognitive@0.24.15) (2023-05-25)
 
 

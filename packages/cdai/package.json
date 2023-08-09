@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-cdai",
   "description": "Carbon for Cloud & Cognitive CD&AI UI components",
-  "version": "1.24.5",
+  "version": "1.24.6",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -36,9 +36,9 @@
   },
   "peerDependencies": {
     "@carbon/grid": "^10.43.1",
-    "@carbon/icons-react": "^10.49.0",
-    "carbon-components": "^10.58.7",
-    "carbon-components-react": "^7.59.8",
+    "@carbon/icons-react": "^10.49.1",
+    "carbon-components": "^10.58.8",
+    "carbon-components-react": "^7.59.9",
     "prop-types": "^15.8.1",
     "react": "^16.8.6 || ^17.0.1",
     "react-dom": "^16.8.6 || ^17.0.1"
@@ -62,7 +62,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.7",
     "jest": "^29.4.2",
-    "jest-config-ibm-cloud-cognitive": "^0.24.15",
+    "jest-config-ibm-cloud-cognitive": "^0.25.0",
     "jest-environment-jsdom": "^29.4.2",
     "node-sass": "^8.0.0",
     "npm-check-updates": "^16.7.4",

@@ -12,4 +12,104 @@
 
 @include security--component($name: decorator) {
   @include decorator;
+
+  // common design(spacing, shape, text color)
+  $border: 1px solid $decorative-01;
+  $round-border-radius: carbon--mini-units(
+    $count: 12.5,
+  );
+
+  $decoratorBlock: &;
+
+  &__dual {
+    &-container {
+      // flex content is no-wrap by default, so type/value parts do not wrap at narrower width
+      display: inline-flex;
+      max-width: 100%;
+    }
+
+    &-type-pill {
+      padding-left: $spacing-03;
+      border: $border;
+      border-bottom-left-radius: $round-border-radius;
+      border-top-left-radius: $round-border-radius;
+
+      #{$decoratorBlock}__type {
+        // remove redundant spacing
+        border-right: 0;
+      }
+    }
+
+    &-value-pill {
+      min-width: 0;
+      padding-right: $spacing-03;
+      border: $border;
+      // remove redundant spacing
+      border-left: 0;
+      border-bottom-right-radius: $round-border-radius;
+      border-top-right-radius: $round-border-radius;
+    }
+  }
+
+  &__pill,
+  &__link {
+    padding: 0 $carbon--spacing-03;
+    border: $border;
+    border-radius: $round-border-radius;
+
+    #{$decoratorBlock}__type {
+      border-right: $border;
+    }
+
+    // override blue text
+    #{$decoratorBlock}__value {
+      color: $text-01;
+    }
+
+    // interactive hover
+    &[class*='interactive'] {
+      &:hover,
+      &:focus {
+        $hovered-border-color: $ui-04;
+
+        border-color: $hovered-border-color;
+        cursor: pointer;
+
+        #{$decoratorBlock}__type {
+          border-color: $hovered-border-color;
+        }
+      }
+    }
+  }
+
+  // show value link UI cue on hover on decorator with href
+  &__link[class*='interactive']:hover {
+    #{$decoratorBlock}__value {
+      text-decoration: underline;
+    }
+  }
+
+  &--active {
+    #{$decoratorBlock}__value {
+      color: $active-ui;
+    }
+  }
+
+  // remove value width limitation
+  &__value--fit-value {
+    max-width: unset;
+  }
+
+  // revert back to legacy square-shaped decorator
+  &--no-border-radius {
+    border-radius: unset;
+
+    // remove padding reserved for rounded border
+    &#{$decoratorBlock}__pill,
+    &#{$decoratorBlock}__link,
+    &#{$decoratorBlock}__dual-type-pill,
+    &#{$decoratorBlock}__dual-value-pill {
+      padding: 0;
+    }
+  }
 }

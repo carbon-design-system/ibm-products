@@ -12,6 +12,7 @@ import { getStoryTitle } from '../../global/js/utils/story-helper';
 import { action } from '@storybook/addon-actions';
 import { Activity, Add } from '@carbon/react/icons';
 import { TableBatchAction, TableBatchActions } from '@carbon/react';
+import { Edit, TrashCan } from '@carbon/react/icons';
 import {
   Datagrid,
   useDatagrid,
@@ -34,6 +35,7 @@ import { DatagridActions } from './utils/DatagridActions';
 import { DatagridPagination } from './utils/DatagridPagination';
 import { Wrapper } from './utils/Wrapper';
 import { pkg } from '../../settings';
+import { DocsPage } from './Datagrid.docs-page';
 
 export default {
   title: getStoryTitle(Datagrid.displayName),
@@ -41,11 +43,10 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: DocsPage,
     },
-*/
+    layout: 'fullscreen',
   },
   argTypes: {
     featureFlags: {
@@ -389,6 +390,9 @@ export const SortableColumns = () => {
     {
       columns,
       data,
+      ascendingSortableLabelText: 'ascending',
+      descendingSortableLabelText: 'descending',
+      defaultSortableLabelText: 'none',
     },
     useSortableColumns
   );
@@ -444,7 +448,8 @@ export const SelectItemsInAllPages = () => {
       },
       DatagridPagination,
       DatagridActions,
-      DatagridBatchActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
     },
     useSelectRows,
     useSelectAllWithToggle
@@ -522,7 +527,38 @@ const getBatchActions = () => {
 
 export const BatchActions = () => {
   const [data] = useState(makeData(10));
-  const columns = React.useMemo(() => getColumns(data), []);
+  const columns = React.useMemo(
+    () => [
+      ...getColumns(data),
+      {
+        Header: '',
+        accessor: 'actions',
+        sticky: 'right',
+        isAction: true,
+      },
+    ],
+    []
+  );
+
+  const getRowActions = () => {
+    return [
+      {
+        id: 'edit',
+        itemText: 'Edit',
+        icon: Edit,
+        onClick: action('Clicked row action: edit'),
+      },
+
+      {
+        id: 'delete',
+        itemText: 'Delete',
+        icon: TrashCan,
+        isDelete: true,
+        onClick: action('Clicked row action: delete'),
+      },
+    ];
+  };
+
   const datagridState = useDatagrid(
     {
       columns,
@@ -531,9 +567,12 @@ export const BatchActions = () => {
       toolbarBatchActions: getBatchActions(),
       DatagridActions,
       DatagridBatchActions,
+      rowActions: getRowActions(),
     },
     useSelectRows,
-    useSelectAllWithToggle
+    useSelectAllWithToggle,
+    useActionsColumn,
+    useStickyColumn
   );
 
   return <Datagrid datagridState={{ ...datagridState }} />;
@@ -664,4 +703,21 @@ export const FrozenColumns = () => {
       <p>More details documentation check the Notes section below</p>
     </Wrapper>
   );
+};
+
+export const Skeleton = () => {
+  const [data] = useState([]);
+  const columns = React.useMemo(() => [...getColumns(data)], []);
+  const emptyStateTitle = 'Empty state title';
+  const emptyStateDescription = 'Description explaining why the table is empty';
+
+  const datagridState = useDatagrid({
+    columns,
+    data,
+    isFetching: true,
+    emptyStateDescription,
+    emptyStateTitle,
+  });
+
+  return <Datagrid datagridState={datagridState} />;
 };

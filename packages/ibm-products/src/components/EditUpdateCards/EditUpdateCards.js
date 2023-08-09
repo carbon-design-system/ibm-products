@@ -41,9 +41,10 @@ const componentName = 'EditUpdateCards';
 // };
 
 /**
- * TODO: A description of the component.
+ Editable cards allow a user to view, modify, and save the content contained within the card.
+ These cards are generally used in instances where a user needs to make changes to a resource instances
+ (ex. configuration details), account plan, etc. Editable cards allow a user to edit something within context.
  */
-
 export let EditUpdateCards = React.forwardRef(
   (
     {
@@ -55,15 +56,35 @@ export let EditUpdateCards = React.forwardRef(
       editChildren,
       editMode,
       label,
+      onPrimaryButtonClick,
+      onSecondaryButtonClick,
       previewChildren,
       title,
       titleSize,
+      primaryButtonIcon,
+      primaryButtonText,
+      secondaryButtonIcon,
+      secondaryButtonText,
+
       // Collect any other property values passed in.
       ...rest
     },
     ref
   ) => {
-    // const [editMode, setEditMode] = useState(false);
+    // const [editCardMode, setEditCardMode] = useState(editMode);
+
+    const conditionalProps = {
+      onPrimaryButtonClick: onPrimaryButtonClick,
+      onSecondaryButtonClick: onSecondaryButtonClick,
+      primaryButtonIcon: primaryButtonIcon,
+      primaryButtonKind: 'ghost',
+      primaryButtonPlacement: 'top',
+      primaryButtonText: primaryButtonText,
+      secondaryButtonIcon: secondaryButtonIcon,
+      secondaryButtonKind: 'ghost',
+      secondaryButtonPlacement: 'top',
+      secondaryButtonText: secondaryButtonText,
+    };
 
     return (
       <div
@@ -93,6 +114,7 @@ export let EditUpdateCards = React.forwardRef(
           label={label}
           title={title}
           titleSize={titleSize}
+          {...(editMode && conditionalProps)}
         >
           {editMode === false && <div>{previewChildren}</div>}
           {editMode && <div>{editChildren}</div>}
@@ -151,9 +173,53 @@ EditUpdateCards.propTypes = {
    */
   label: PropTypes.string,
   /**
+   * Function that's called from the primary button or action icon
+   */
+  onPrimaryButtonClick: PropTypes.func,
+  /**
+   * Function that's called from the secondary button or action icon
+   */
+  onSecondaryButtonClick: PropTypes.func,
+  /**
    * Preview mode children
    */
   previewChildren: PropTypes.node,
+  /**
+   * Optional prop to allow overriding the icon rendering. Can be a React component class
+   */
+  primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  /**
+   * Establishes the kind of button displayed for the primary button
+   */
+  primaryButtonKind: PropTypes.oneOf(['primary', 'ghost']),
+  /**
+   * Determines if the primary button is on the top or bottom of the card
+   */
+  primaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
+  /**
+   * The text that's displayed in the primary button
+   */
+  primaryButtonText: PropTypes.string,
+  /**
+   * Optionally specify an href for your Button to become an <a> element
+   */
+  secondaryButtonHref: PropTypes.string,
+  /**
+   * Optional prop to allow overriding the icon rendering. Can be a React component class
+   */
+  secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+  /**
+   * Establishes the kind of button displayed for the secondary button
+   */
+  secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),
+  /**
+   * Determines if the secondary button is on the top or bottom of the card
+   */
+  secondaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
+  /**
+   * The text that's displayed in the secondary button
+   */
+  secondaryButtonText: PropTypes.string,
   /**
    * Title that's displayed at the top of the card
    */

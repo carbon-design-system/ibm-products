@@ -20,7 +20,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   height: 100vh;
 }
 
-.sb-show-main.sb-main-centered #root {
+.sb-show-main.sb-main-centered #storybook-root {
   width: 100%;
   height: 100vh;
   padding: $spacing-07;
@@ -54,6 +54,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   padding-bottom: $spacing-06;
 }
 
+.#{$block-class}__side-panel-link {
+  padding-top: $spacing-01;
+  padding-bottom: $spacing-06;
+}
+
 .#{$block-class}__side-panel-section-inner {
   display: flex;
   padding: $spacing-01 0;
@@ -66,13 +71,13 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 }
 
 .#{$block-class}__side-panel-value {
-  @include type.type-style('body-short-01');
+  @include type.type-style('body-compact-01');
 
   padding-left: $spacing-03;
 }
 
 .#{$block-class}__side-panel-section-header {
-  @include type.type-style('productive-heading-01');
+  @include type.type-style('heading-compact-01');
 
   padding-bottom: $spacing-02;
 }

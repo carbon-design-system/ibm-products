@@ -15,7 +15,6 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { EditUpdateCards } from '.';
-// import mdx from './EditUpdateCards.mdx';
 
 import styles from './_storybook-styles.scss';
 import {
@@ -31,11 +30,11 @@ import {
 import {
   Edit,
   Save,
-  Close,
   ProgressBarRound,
   CheckmarkFilled,
 } from '@carbon/react/icons';
 import { pkg /*, carbon */ } from '../../settings';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 export default {
   title: getStoryTitle(EditUpdateCards.displayName),
@@ -47,11 +46,11 @@ export default {
   // },
   parameters: {
     styles,
-    /*
-docs: {
-      page: mdx,
+    docs: {
+      page: () => (
+        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#other-edit-behaviors" />
+      ),
     },
-*/
   },
 };
 
@@ -67,6 +66,9 @@ const Template = (args) => {
     'Editable card body content block. description inviting the user to take action on the card.'
   );
   const [name, setName] = useState('austin-server-123ABC');
+  const [speedValue, setSpeedValue] = useState('120');
+  const [editMode, setEditMode] = useState(false);
+  const [loading, setLoading] = useState(false);
   const speedOptions = [
     { value: '0', text: 'Choose speed' },
     { value: '100', text: '100MBps' },
@@ -74,7 +76,7 @@ const Template = (args) => {
     { value: '150', text: '150MBps' },
     { value: '200', text: '200MBps' },
   ];
-  const [speedValue, setSpeedValue] = useState('120');
+
   const options = speedOptions.map((option) => {
     return (
       <SelectItem
@@ -85,18 +87,15 @@ const Template = (args) => {
       />
     );
   });
-  const [editMode, setEditMode] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const onSave = (event) => {
     event.preventDefault();
     event.persist();
     setLoading(true);
-
     setTimeout(() => {
-      setBodyCopy(event.target.bodyCopy.value);
-      setName(event.target.name.value);
-      setSpeedValue(event.target.speed.value);
+      setBodyCopy(bodyCopy);
+      setName(name);
+      setSpeedValue(speedValue);
       setEditMode(false);
       setLoading(false);
     }, 1000);
@@ -110,24 +109,6 @@ const Template = (args) => {
         setEditMode(true);
       },
       iconDescription: 'Edit',
-    },
-  ];
-
-  const actionIconsEditMode = [
-    {
-      id: '2',
-      icon: Close,
-      onClick: () => {
-        setEditMode(false);
-      },
-      iconDescription: 'Cancel',
-    },
-    {
-      id: '3',
-      icon: Save,
-      iconDescription: 'Save',
-      type: 'submit',
-      form: 'editForm',
     },
   ];
 
@@ -191,7 +172,7 @@ const Template = (args) => {
   );
 
   const edit = (
-    <Form onSubmit={onSave} id="editForm">
+    <Form id="editForm">
       <Grid>
         <Column sm={4} className={pkg.prefix + `--edit-update-cards--items`}>
           <TextInput
@@ -199,6 +180,7 @@ const Template = (args) => {
             labelText="Name"
             defaultValue={name}
             id={name}
+            onChange={(event) => setName(event.target.value)}
           />
         </Column>
         <Column sm={4} className={pkg.prefix + `--edit-update-cards--items`}>
@@ -231,6 +213,7 @@ const Template = (args) => {
             name="speed"
             id={'speed'}
             defaultValue={speedValue}
+            onChange={(event) => setSpeedValue(event.target.value)}
           >
             {options}
           </Select>
@@ -245,6 +228,7 @@ const Template = (args) => {
             labelText="Other details"
             rows={2}
             defaultValue={bodyCopy}
+            onChange={(event) => setBodyCopy(event.target.value)}
           />
         </Column>
       </Grid>
@@ -258,7 +242,7 @@ const Template = (args) => {
           // onTodo={action('onTodo log action')}
           actionIcons={
             editMode && !loading
-              ? actionIconsEditMode
+              ? null
               : editMode && loading
               ? actionIconsLoading
               : actionIcons
@@ -267,6 +251,12 @@ const Template = (args) => {
           editChildren={edit}
           editMode={editMode}
           {...args}
+          onPrimaryButtonClick={onSave}
+          onSecondaryButtonClick={() => setEditMode(false)}
+          primaryButtonIcon={Save}
+          primaryButtonText={editMode && !loading ? 'Save' : null}
+          secondaryButtonIcon={null}
+          secondaryButtonText={editMode && !loading ? 'Cancel' : null}
           id={`${
             editMode ? pkg.prefix + '--edit-update-cards--edit' : ''
           }`} /*Used id for overriding the SVG(icon) path fill*/

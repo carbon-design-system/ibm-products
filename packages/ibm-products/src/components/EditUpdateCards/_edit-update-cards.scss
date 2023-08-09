@@ -31,6 +31,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--edit-update-cards;
     .#{c4p-settings.$pkg-prefix}--card__header,
     .#{c4p-settings.$pkg-prefix}--card__footer {
       button {
+        // stylelint-disable-next-line carbon/theme-token-use
+        color: $white-0;
+
         &:hover {
           // stylelint-disable-next-line carbon/theme-token-use
           background-color: $blue-60-hover;
@@ -54,12 +57,14 @@ $block-class: #{c4p-settings.$pkg-prefix}--edit-update-cards;
         }
       }
     }
+
     .#{c4p-settings.$pkg-prefix}--card__footer {
       // stylelint-disable-next-line carbon/theme-token-use
       background-color: $blue-60;
       // stylelint-disable-next-line carbon/theme-token-use
       color: $white-0;
     }
+
     .#{c4p-settings.$pkg-prefix}--loading {
       animation-duration: $duration-slow-02;
       animation-fill-mode: forwards;
@@ -71,7 +76,12 @@ $block-class: #{c4p-settings.$pkg-prefix}--edit-update-cards;
         background-color: transparent;
       }
     }
+
+    .#{c4p-settings.$pkg-prefix}--card__header-container {
+      align-items: center;
+    }
   }
+
   &:not(.#{$block-class}__actions-bottom) {
     &##{$block-class}--edit {
       .#{c4p-settings.$pkg-prefix}--card__header {

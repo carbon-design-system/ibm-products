@@ -631,3 +631,9 @@
   .#{c4p-settings.$carbon-prefix}--btn.#{c4p-settings.$pkg-prefix}--button-menu {
   padding: 0;
 }
+
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--action-list
+  .#{c4p-settings.$carbon-prefix}--btn__icon {
+  margin-top: 0;
+}

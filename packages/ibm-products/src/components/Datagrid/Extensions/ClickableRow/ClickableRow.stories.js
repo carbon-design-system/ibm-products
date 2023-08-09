@@ -7,7 +7,7 @@
  */
 
 import React, { useState } from 'react';
-import { Edit, TrashCan } from '@carbon/react/icons';
+import { Edit, TrashCan, Add } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
@@ -19,6 +19,7 @@ import {
   useColumnRightAlign,
   useColumnCenterAlign,
   useOnRowClick,
+  useSelectRows,
 } from '../../index';
 import styles from '../../_storybook-styles.scss';
 // import mdx from '../../Datagrid.mdx';
@@ -30,6 +31,7 @@ import { Link } from '@carbon/react';
 import { pkg } from '../../../../settings';
 import cx from 'classnames';
 import { SidePanel } from '../../../SidePanel';
+import { StoryDocsPage } from '../../../../global/js/utils/StoryDocsPage';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ClickableRow`,
@@ -37,7 +39,38 @@ export default {
   tags: ['autodocs'],
   parameters: {
     styles,
-    // docs: { page: mdx },
+    docs: {
+      page: () => (
+        <StoryDocsPage
+          blocks={[
+            {
+              title: 'Row click',
+              description: `Datagrid supports adding a click event on an entire row with the use of the \`useOnRowClick\` hook.
+- Include the \`useOnRowClick\` hook
+- Add the \`onRowClick\` property, this is a callback function that will be called when a row is clicked. It will give back the row and the click event.
+          `,
+              source: {
+                code: `
+const datagridState = useDatagrid(
+  {
+    columns,
+    data,
+    onRowClick: (row, event) => {
+      ...
+    },
+  },
+  useOnRowClick
+);
+
+return <Datagrid datagridState={datagridState} />;
+            `,
+              },
+            },
+          ]}
+        />
+      ),
+    },
+    layout: 'fullscreen',
   },
 };
 
@@ -45,17 +78,17 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const storyBlockClass = `${pkg.prefix}--datagrid-story`;
 const defaultHeader = [
   {
-    Header: 'Row Index',
+    Header: 'Row index',
     accessor: (row, i) => i,
     sticky: 'left',
     id: 'rowIndex', // id is required when accessor is a function.
   },
   {
-    Header: 'First Name',
+    Header: 'First name',
     accessor: 'firstName',
   },
   {
-    Header: 'Last Name',
+    Header: 'Last name',
     accessor: 'lastName',
   },
   {
@@ -66,6 +99,7 @@ const defaultHeader = [
         <Link
           className={`${storyBlockClass}__custom-cell-wrapper`}
           href={cell?.value?.href}
+          title={cell?.value?.text}
         >
           {cell?.value?.text}
         </Link>
@@ -77,11 +111,13 @@ const defaultHeader = [
     Header: 'Age',
     accessor: 'age',
     width: 120,
+    rightAlignedColumn: true,
   },
   {
     Header: 'Visits',
     accessor: 'visits',
     width: 120,
+    rightAlignedColumn: true,
   },
   {
     Header: 'Bonus',
@@ -179,6 +215,44 @@ const sharedDatagridProps = {
   expandedContentHeight: 96,
 };
 
+const getBatchActions = () => {
+  return [
+    {
+      label: 'Duplicate',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Add',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Select all',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: action('Clicked batch action button'),
+      type: 'select_all',
+    },
+    {
+      label: 'Publish to catalog',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Download',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: action('Clicked batch action button'),
+    },
+    {
+      label: 'Delete',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: action('Clicked batch action button'),
+      hasDivider: true,
+      kind: 'danger',
+    },
+  ];
+};
+
 const ClickableRow = ({ ...args }) => {
   const columns = React.useMemo(() => [...defaultHeader], []);
   const [data] = useState(makeData(10));
@@ -256,6 +330,11 @@ const DataTableSidePanelContent = (selectedRowValues) => {
 
   return (
     <div className={`${blockClass}__side-panel-content`}>
+      <div className={`${blockClass}__side-panel-link`}>
+        <Link href="" id="side-panel-story__view-link">
+          View details
+        </Link>
+      </div>
       <SidePanelSectionContent
         sectionTitle="Section title"
         rowData={rowData && rowData}
@@ -292,9 +371,14 @@ const ClickableRowWithPanel = ({ ...args }) => {
         setOpenSidePanel(true);
         setRowData(row);
       },
+      DatagridActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
       ...args.defaultGridProps,
     },
-    useOnRowClick
+    useSelectRows,
+    useOnRowClick,
+    useColumnRightAlign
   );
   return (
     <div
@@ -307,6 +391,7 @@ const ClickableRowWithPanel = ({ ...args }) => {
       <Datagrid datagridState={{ ...datagridState }} />
       <SidePanel
         selectorPageContent={true && '.page-content-wrapper'} // Only if SlideIn
+        selectorPrimaryFocus="#side-panel-story__view-link"
         open={openSidePanel}
         onRequestClose={() => setOpenSidePanel(false)}
         size={'sm'}

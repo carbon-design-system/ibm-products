@@ -7,28 +7,21 @@
 
 // cspell:words unuse
 
-import { ArgsTable, Canvas, Story, Source } from '@storybook/addon-docs';
-import LinkTo from '@storybook/addon-links/react';
-import { themes } from '@storybook/theming';
 import { withCarbonTheme } from '@carbon/storybook-addon-theme/withCarbonTheme';
 import {
   PARAM_KEY as CARBON_THEME_PARAM_KEY,
   CARBON_THEMES,
 } from '@carbon/storybook-addon-theme/constants';
 
-import {
-  Column,
-  Row,
-  ActionableNotification,
-  UnorderedList,
-  ListItem,
-} from '@carbon/react';
+import { ActionableNotification, UnorderedList, ListItem } from '@carbon/react';
 import React, { useEffect } from 'react';
 
 import { pkg } from '../../ibm-products/src/settings';
 
 import index from './index.scss';
+import prefixedIndex from './_prefix-index.scss';
 import { getSectionSequence } from '../story-structure';
+import { StoryDocsPage } from '../../ibm-products/src/global/js/utils/StoryDocsPage';
 
 // Enable all components, whether released or not, for storybook purposes
 pkg._silenceWarnings(true);
@@ -46,6 +39,12 @@ const Style = ({ children, styles }) => {
   return children;
 };
 
+const isDev = CONFIG_TYPE === 'DEVELOPMENT'; //  process.env?.NODE_ENV === 'development';
+if (isDev) {
+  // use a prefix in all development storybook
+  pkg.prefix = `dev-prefix--${pkg.prefix}`;
+}
+
 const decorators = [
   (storyFn, { args, parameters: { styles } }) => {
     const story = storyFn();
@@ -54,7 +53,7 @@ const decorators = [
 
     return (
       <div className="preview-position-fix">
-        <Style styles={index}>
+        <Style styles={isDev ? prefixedIndex : index}>
           {args.featureFlags ? (
             <ActionableNotification
               className="preview__notification--feature-flag"
@@ -117,23 +116,6 @@ const carbonViewports = {
 
 const parameters = {
   controls: { expanded: true, hideNoControlsWarning: true },
-  docs: {
-    components: {
-      ArgsTable,
-      Canvas,
-      Column,
-      LinkTo: (props) => (
-        <LinkTo
-          className="storybook__link-to"
-          style={{ color: themes.normal.colorSecondary }}
-          {...props}
-        />
-      ),
-      Row,
-      Source,
-      Story,
-    },
-  },
   layout: 'centered',
   options: {
     showPanel: true,
@@ -157,6 +139,9 @@ const parameters = {
   viewport: {
     viewports: carbonViewports,
     defaultViewport: 'basic',
+  },
+  docs: {
+    page: () => <StoryDocsPage />,
   },
 };
 

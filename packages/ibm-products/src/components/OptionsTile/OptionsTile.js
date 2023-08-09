@@ -273,10 +273,17 @@ export let OptionsTile = React.forwardRef(
         )}
         {isExpandable ? (
           <details open={isOpen} ref={detailsRef}>
-            <summary className={`${blockClass}__header`} onClick={toggle}>
-              <ChevronDown size={16} className={`${blockClass}__chevron`} />
-              {renderTitle()}
-            </summary>
+            {
+              /* summary should not be considered non-interactive
+               * https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/656
+               * https://github.com/A11yance/axobject-query/issues/319
+               */
+              /* eslint-disable jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */
+              <summary className={`${blockClass}__header`} onClick={toggle}>
+                <ChevronDown size={16} className={`${blockClass}__chevron`} />
+                {renderTitle()}
+              </summary>
+            }
 
             <div className={`${blockClass}__content`} ref={contentRef}>
               <Layer>

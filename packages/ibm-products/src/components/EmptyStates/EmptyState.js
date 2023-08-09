@@ -29,6 +29,9 @@ export const defaults = {
   size: 'lg',
 };
 
+/**
+ * The `EmptyState` component follows the Carbon guidelines for empty states with some added specifications around illustration usage. For additional usage guidelines and documentation please refer to the links above.
+ */
 export let EmptyState = React.forwardRef(
   (
     {

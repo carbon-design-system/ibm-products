@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@2.0.2...@carbon/storybook-addon-theme@2.0.3) (2023-08-01)
+
+**Note:** Version bump only for package @carbon/storybook-addon-theme
+
+
+
+
+
+## [2.0.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@2.0.1...@carbon/storybook-addon-theme@2.0.2) (2023-07-18)
+
+**Note:** Version bump only for package @carbon/storybook-addon-theme
+
+
+
+
+
+## [2.0.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/storybook-addon-theme@0.22.41...@carbon/storybook-addon-theme@2.0.1) (2023-06-13)
+
+
+### Bug Fixes
+
+* storybook addon change log ([#3116](https://github.com/carbon-design-system/ibm-products/issues/3116)) ([f4e09b2](https://github.com/carbon-design-system/ibm-products/commit/f4e09b27669c23ff105e268c82313687981540c5))
+
+
+
+
+
 ## [2.0.0-rc.0] Storybook 7 supoort
 
 ### Breaking change

@@ -55,7 +55,7 @@ export const useResizeObserver = (ref, callback) => {
       observer = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ref]);
+  }, [ref.current]);
 
   return { width, height };
 };

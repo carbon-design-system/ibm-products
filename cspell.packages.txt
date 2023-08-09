@@ -7,6 +7,7 @@ commitlint
 docgen
 dsag
 flatpickr
+ibmproducts
 kube
 kubernetes
 markdownlint

@@ -25,7 +25,7 @@ const getColTitle = (col) => {
   };
   return typeof col?.Header === 'function'
     ? checkTitle()
-    : col.Header.props.title;
+    : col?.Header?.props?.title;
 };
 
 export default getColTitle;

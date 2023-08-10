@@ -234,9 +234,9 @@ export const expectLogging = async ({ errors, warnings }, test) => {
  * @param {Function} test the test function to call, during which the call to
  * console.error will be expected.
  */
-export const expectError = async (message, test) => {
+export const expectError = (message, test) => {
   const error = jest.spyOn(console, 'error').mockImplementation(jest.fn());
-  const result = await test();
+  const result = test();
   checkLogging(error, message);
 
   error.mockRestore();

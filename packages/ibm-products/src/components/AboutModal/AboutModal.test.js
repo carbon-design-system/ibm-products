@@ -186,9 +186,7 @@ describe(componentName, () => {
     });
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
-
     await act(() => userEvent.click(closeButton));
-
     expect(aboutModal).not.toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
   });

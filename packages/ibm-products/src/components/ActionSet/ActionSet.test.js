@@ -134,9 +134,7 @@ describe(componentName, () => {
     const onClick = jest.fn();
     render(<ActionSet actions={[{ ...actionS, onClick }]} />);
     expect(onClick).toBeCalledTimes(0);
-
     await act(() => userEvent.click(getByRoleAndLabel('button', labelS)));
-
     expect(onClick).toBeCalledTimes(1);
   });
 

@@ -113,7 +113,7 @@ describe(componentName, () => {
   });
 
   it('should throw a custom prop type validation error when an image is used without an imageDescription prop', async () =>
-    expectError(required('imageDescription', 'UserProfileImage'), async () => {
+    expectError(required('imageDescription', 'UserProfileImage'), () => {
       renderComponent({ image: 'path_to_image.jpg' });
     }));
 

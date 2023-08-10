@@ -108,7 +108,7 @@ TagWall.propTypes = {
   /** @type {Function} Function that converts object to string. */
   itemToString: func,
 
-  /** @type {Array.<object.<string, boolean>>} List of tags to be consumed. */
+  /** @type {Array.<Record<string, boolean>>} List of tags to be consumed. */
   items: arrayOf(
     shape({
       id: string.isRequired,
@@ -121,7 +121,7 @@ TagWall.propTypes = {
   /** @type {string} Description label. */
   label: string,
 
-  /** @type {object.<string, *>} Default translation labels object. */
+  /** @type {Record<string, any>} Default translation labels object. */
   labels: defaultLabels.propType,
 
   /** @type {Function} Handles `onClick` for the 'add' button. */

@@ -14,7 +14,7 @@ const namespace = appendComponentNamespace(headerNamespace, 'popover__header');
 
 /**
  * Header popover header component.
- * @param {object.<string, *>} props Header popover header props.
+ * @param {Record<string, any>} props Header popover header props.
  * @returns {HeaderPopoverHeader} Header popover header instance.
  */
 const HeaderPopoverHeader = ({ children, className, id, title }) => (

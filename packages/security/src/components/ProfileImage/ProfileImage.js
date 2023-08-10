@@ -13,7 +13,7 @@ export const namespace = getComponentNamespace('profile-image');
 
 /**
  * Profile image component.
- * @param {object.<string, *>} props Profile image props.
+ * @param {Record<string, any>} props Profile image props.
  * @returns {ProfileImage} Profile image instance.
  */
 const ProfileImage = ({ className, large, profile, ...other }) => {
@@ -47,12 +47,12 @@ ProfileImage.propTypes = {
   /** @type {boolean} Determines whether the profile image is large or not. */
   large: PropTypes.bool,
 
-  /** @type {object.<string, *>} An object list of profile information. */
+  /** @type {Record<string, any>} An object list of profile information. */
   profile: PropTypes.shape({
     /** @type {string} Profile image URL. */
     image_url: PropTypes.string,
 
-    /** @type {object.<string, string>} An object list of profile name information. */
+    /** @type {Record<string, string>} An object list of profile name information. */
     name: PropTypes.shape({
       /** @type {string} First name. */
       first_name: PropTypes.string.isRequired,

@@ -31,7 +31,7 @@ export const namespace = getComponentNamespace('toolbar');
 
 /**
  * Toolbar component.
- * @param {object.<string, *>} htmlContent Toolbar props.
+ * @param {Record<string, any>} htmlContent Toolbar props.
  * @returns {Toolbar} Toolbar instance.
  */
 export default class Toolbar extends Component {
@@ -349,18 +349,18 @@ const navigation = {
 const panel = () =>
   /** @type {Array<Object.*>} An array list of navigation lists and sub-navigation. */
   PropTypes.arrayOf(
-    /** @type {object<object.Object>} An object list of navigation. */
+    /** @type {Record<object, object>} An object list of navigation. */
     PropTypes.shape({
       ...navigation,
 
       /** @type {Array<Object.*>} An array list of navigation items. */
       navigation: PropTypes.arrayOf(
-        /** @type {object<object.Object>} An object list of navigation. */
+        /** @type {Record<object, object>} An object list of navigation. */
         PropTypes.shape(
           Object.assign({}, navigation, {
             /** @type {Array<Object.*>} An array list of sub-navigation items. */
             children: PropTypes.arrayOf(
-              /** @type {object<object.Object>} An object list of sub-navigation. */
+              /** @type {Record<object, object>} An object list of sub-navigation. */
               PropTypes.shape(Object.assign({}, navigation, href))
             ),
             href,
@@ -374,15 +374,15 @@ Toolbar.propTypes = {
   /** @type {string} Extra classes to add. */
   className: PropTypes.string,
 
-  /** @type {object<object.Object>} An object list of labels. */
+  /** @type {Record<object, object>} An object list of labels. */
   labels: PropTypes.shape({
-    /** @type {object.<string, string>} An object list of navigation labels for the top level navigation item. */
+    /** @type {Record<string, string>} An object list of navigation labels for the top level navigation item. */
     mainNavigation: PropTypes.shape({
       /** Specify the `aria-label` for the primary navigation */
       ariaLabel: PropTypes.string.isRequired,
     }).isRequired,
 
-    /** @type {object.<string, string>} An object list of menu labels. */
+    /** @type {Record<string, string>} An object list of menu labels. */
     menu: PropTypes.shape({
       /** @type {string} The button label. */
       button: PropTypes.string.isRequired,
@@ -391,7 +391,7 @@ Toolbar.propTypes = {
       tooltip: PropTypes.string,
     }).isRequired,
 
-    /** @type {object.<string, string>} An object list of settings labels. */
+    /** @type {Record<string, string>} An object list of settings labels. */
     settings: PropTypes.shape({
       /** @type {string} The button label. */
       button: PropTypes.string.isRequired,
@@ -400,7 +400,7 @@ Toolbar.propTypes = {
       tooltip: PropTypes.string,
     }),
 
-    /** @type {object.<string, string>} An object list of support labels. */
+    /** @type {Record<string, string>} An object list of support labels. */
     support: PropTypes.shape({
       /** @type {string} The button label. */
       button: PropTypes.string.isRequired,

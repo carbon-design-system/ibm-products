@@ -285,7 +285,7 @@ Tearsheet.propTypes = {
   /** @type {string} The main view title. */
   mainTitle: PropTypes.string,
 
-  /** @type {object<object>} An object list of primary button props. */
+  /** @type {Record<object, object>} An object list of primary button props. */
   primaryButton: PropTypes.shape(buttonPropTypeMap).isRequired,
 
   /** @type {func} The function to render the main content. */
@@ -298,7 +298,7 @@ Tearsheet.propTypes = {
   rootNode:
     typeof Node !== 'undefined' ? PropTypes.instanceOf(Node) : PropTypes.any,
 
-  /** @type {object<object>} An object list of secondary button props. */
+  /** @type {Record<object, object>} An object list of secondary button props. */
   secondaryButton: PropTypes.shape(buttonPropTypeMap).isRequired,
 
   /** @type {string|func} The html element to have the inital focus in the tearsheet. */
@@ -316,7 +316,7 @@ Tearsheet.propTypes = {
   /** @type {Array} Array of event types to stop propagation. */
   stopPropagationEvents: PropTypes.arrayOf(PropTypes.oneOf(PORTAL_EVENTS)),
 
-  /** @type {object<object>} An object list of tertiary ghost button props. */
+  /** @type {Record<object, object>} An object list of tertiary ghost button props. */
   tertiaryButton: PropTypes.shape({
     isDisabled: buttonPropTypeMap.isDisabled,
     onClick: buttonPropTypeMap.onClick,

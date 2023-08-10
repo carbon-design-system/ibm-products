@@ -31,8 +31,8 @@ describe(ActionBarItem.displayName, () => {
     await act(() => userEvent.tab());
     expect(screen.getByText(testLabel));
     expect(screen.getByRole('button')).toHaveFocus();
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it('Renders a page action item which is a Carbon Button that can be clicked', async () => {

@@ -173,8 +173,8 @@ describe(componentName, () => {
   it.skip('has no accessibility violations', async () => {
     const { container } = renderComponent({ ...defaultFullPageProps });
 
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it('adds additional properties to the containing node', async () => {

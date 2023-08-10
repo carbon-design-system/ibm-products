@@ -174,8 +174,8 @@ describe(CreateTearsheet.displayName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = renderCreateTearsheet({ ...defaultProps });
-    await expect(() => container.toBeAccessible());
-    await expect(() => container.toHaveNoAxeViolations());
+    expect(() => container.toBeAccessible());
+    expect(() => container.toHaveNoAxeViolations());
   });
 
   it('renders the CreateTearsheet component', async () => {

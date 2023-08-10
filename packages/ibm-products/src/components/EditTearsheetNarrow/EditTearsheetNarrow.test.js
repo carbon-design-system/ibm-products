@@ -29,8 +29,8 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = render(<EditTearsheetNarrow> </EditTearsheetNarrow>);
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders children`, async () => {

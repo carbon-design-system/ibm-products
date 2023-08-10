@@ -164,8 +164,8 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = render(<AddSelect {...defaultProps} />);
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {

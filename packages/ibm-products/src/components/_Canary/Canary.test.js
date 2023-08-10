@@ -20,8 +20,8 @@ describe(componentName, () => {
   // it('has no accessibility violations', async () => {
   //   const { container } = render(<Canary component={dummyContent} />);
 
-  //   await expect(container).toBeAccessible(name);
-  //   await expect(container).toHaveNoAxeViolations();
+  //   expect(container).toBeAccessible(name);
+  //   expect(container).toHaveNoAxeViolations();
   // });
 
   it('displays the replaced component name', async () => {

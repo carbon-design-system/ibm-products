@@ -96,14 +96,14 @@ describe(componentName, () => {
   // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
   it.skip('has no accessibility violations when closed', async () => {
     const { container } = renderComponent({ open: false });
-    await expect(container).toBeAccessible(`${componentName} closed`);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(`${componentName} closed`);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it('has no accessibility violations', async () => {
     const { container } = renderComponent({ open: true });
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it('renders closeIconDescription, title, logo, and version', async () => {
@@ -187,9 +187,7 @@ describe(componentName, () => {
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
 
-    await act(async () => {
-      await userEvent.click(closeButton);
-    });
+    await act(() => userEvent.click(closeButton));
 
     expect(aboutModal).not.toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
@@ -203,9 +201,7 @@ describe(componentName, () => {
     });
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
-    await act(async () => {
-      await userEvent.click(closeButton);
-    });
+    await act(() => userEvent.click(closeButton));
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsFalse).toHaveBeenCalledTimes(1);
   });

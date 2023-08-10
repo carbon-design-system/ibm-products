@@ -141,8 +141,8 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = renderEditTearsheet({ ...defaultProps });
-    await expect(() => container.toBeAccessible());
-    await expect(() => container.toHaveNoAxeViolations());
+    expect(() => container.toBeAccessible());
+    expect(() => container.toHaveNoAxeViolations());
   });
 
   it('adds additional props to the containing node', async () => {

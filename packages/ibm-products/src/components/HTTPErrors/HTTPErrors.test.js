@@ -51,8 +51,8 @@ describe(componentName, () => {
         <HTTPError404 {...defaultProps} />
       </main>
     );
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it('Renders the component `HTTPErrors` if flag is enabled', async () => {

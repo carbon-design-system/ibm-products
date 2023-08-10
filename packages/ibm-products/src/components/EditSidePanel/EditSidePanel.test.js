@@ -73,10 +73,8 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = renderEditPanel();
-    await act(async () => {
-      await expect(container).toBeAccessible(componentName);
-      await expect(container).toHaveNoAxeViolations();
-    });
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it('renders children', async () => {

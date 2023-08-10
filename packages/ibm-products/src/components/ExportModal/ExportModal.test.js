@@ -171,8 +171,8 @@ describe(componentName, () => {
   //@TODO: reinstate this test as soon as https://github.com/carbon-design-system/carbon/issues/10107 is fixed
   it.skip('has no accessibility violations', async () => {
     const { container } = render(<ExportModal {...defaultProps} />);
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {

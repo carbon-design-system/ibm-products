@@ -63,8 +63,8 @@ describe(name, () => {
       <MockWebTerminal isInitiallyOpen>Body content</MockWebTerminal>
     );
 
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it('should attach a custom class to the web terminal', async () => {

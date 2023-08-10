@@ -108,8 +108,8 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = render(<RenderComponent />);
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it('calls onRequestSubmit() when primary button is clicked', async () => {

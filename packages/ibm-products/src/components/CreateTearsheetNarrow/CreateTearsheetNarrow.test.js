@@ -80,14 +80,14 @@ describe(componentName, () => {
   it.skip('has no accessibility violations when closed', async () => {
     // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
     const { container } = renderComponent({ open: false });
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it('has no accessibility violations', async () => {
     const { container } = renderComponent();
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders children`, async () => {

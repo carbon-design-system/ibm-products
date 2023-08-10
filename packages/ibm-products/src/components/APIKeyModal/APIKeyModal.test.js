@@ -99,7 +99,7 @@ describe(componentName, () => {
       props.apiKey
     );
     getByText(props.apiKeyLabel);
-    await act(async () =>
+    await act(() =>
       click(container.querySelector(`.${carbon.prefix}--btn--primary`))
     );
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(props.apiKey);
@@ -316,8 +316,8 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = render(<APIKeyModal {...defaultProps} />);
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {

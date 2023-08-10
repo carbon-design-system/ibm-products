@@ -40,8 +40,8 @@ describe(componentName, () => {
         <OptionsTile {...props} />
       </main>
     );
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it(`renders children`, async () => {

@@ -11,15 +11,13 @@ import cx from 'classnames';
 import { TableHeader, TableRow } from '@carbon/react';
 import { selectionColumnId } from '../common-column-ids';
 import { pkg } from '../../../settings';
+import getColTitle from '../utils/getColTitle';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const getAccessibilityProps = (header) => {
   const props = {};
-  const title =
-    typeof header.Header === 'function'
-      ? header?.Header()?.props?.children?.props?.title
-      : header?.Header?.props?.title;
+  const title = getColTitle(header);
   if (title) {
     props.title = title;
   } else {

@@ -6,12 +6,12 @@
  */
 
 import React, { useState, useEffect, forwardRef } from 'react';
-import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { act, render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
 import { makeData } from './utils/makeData';
 
-import { expectError, expectWarn } from '../../global/js/utils/test-helper';
+import { expectError, expectWarn, mockHTMLElement } from '../../global/js/utils/test-helper';
 import { Datagrid } from '.';
 import { pkg } from '../../settings';
 
@@ -40,7 +40,7 @@ import {
   TableBatchActions,
   TableBatchAction,
 } from '@carbon/react';
-import { Download, Restart, Filter, Activity } from '@carbon/react/icons';
+import { Download, Restart, Filter, Activity, Add } from '@carbon/react/icons';
 import { carbon } from '../../settings';
 
 // import { DatagridActions, DatagridBatchActions, DatagridPagination, } from './Datagrid.stories';
@@ -865,12 +865,35 @@ beforeAll(() => {
 });
 
 describe(componentName, () => {
+  window.innerWidth = 2000;
+  window.innerHeight = 1080;
+
+  let mockElement;
+
+  const isTableToolbar = function () {
+    return this.classList?.contains(`c4p--datagrid__table-toolbar`) || false;
+  }
+
   beforeEach(() => {
     jest.spyOn(global.console, 'error').mockImplementation(() => {});
     //This will suppress the warning about Arrows16 Component (will be removed in the next major version of @carbon/icons-react).
     jest.spyOn(global.console, 'warn').mockImplementation(() => {});
     jest.useFakeTimers();
     jest.spyOn(global, 'setTimeout');
+    mockElement = mockHTMLElement({
+      offsetWidth: {
+        get: function () {
+          let width = 1000;
+          if (isTableToolbar.bind(this)()) {
+            width = 1000;
+          } else {
+            width = window.innerWidth;
+          }
+
+          return width;
+        }
+      }
+    });
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
       observe: jest.fn(),
       unobserve: jest.fn(),
@@ -879,8 +902,94 @@ describe(componentName, () => {
   });
 
   afterEach(() => {
+    mockElement.mockRestore();
+    jest.useRealTimers();
     window.ResizeObserver = ResizeObserver;
   });
+
+  const getBatchActions = () => {
+    return [
+      {
+        label: 'Duplicate',
+        renderIcon: (props) => <Add size={16} {...props} />,
+        onClick: () => {},
+      },
+      {
+        label: 'Add',
+        renderIcon: (props) => <Add size={16} {...props} />,
+        onClick: () => {},
+      },
+      {
+        label: 'Select all',
+        renderIcon: (props) => <Add size={16} {...props} />,
+        onClick: () => {},
+        type: 'select_all',
+      },
+      {
+        label: 'Publish to catalog',
+        renderIcon: (props) => <Add size={16} {...props} />,
+        onClick: () => {},
+      },
+      {
+        label: 'Download',
+        renderIcon: (props) => <Add size={16} {...props} />,
+        onClick: () => {},
+      },
+      {
+        label: 'Delete',
+        renderIcon: (props) => <Add size={16} {...props} />,
+        onClick: () => {},
+        hasDivider: true,
+        kind: 'danger',
+      },
+    ];
+  };
+
+  const TestBatch = () => {
+    const columns = React.useMemo(() => defaultHeader, []);
+    const [data] = useState(makeData(2));
+    const datagridState = useDatagrid(
+      {
+        columns,
+        data,
+        batchActions: true,
+        toolbarBatchActions: getBatchActions(),
+        DatagridActions,
+      },
+      useSelectRows,
+      useSelectAllWithToggle,
+      useStickyColumn
+    );
+  
+    return <Datagrid datagridState={datagridState} />;
+  }
+
+  it.only('renders batch action', async () => {
+    window.innerWidth = 1000;
+    const { container } = render(<TestBatch />);
+    const { click } = userEvent;
+    const firstCheckbox = screen.getByLabelText(/datagrid-table-id1-row-0/);
+    act(() => click(firstCheckbox));
+
+    // Problem here is that the width returned from useResizeObserver is always 0
+    // This causes all of the batch actions to render inside of the overflow button menu
+    // rather than being displayed by default (given that there is space available to render them)
+
+    // Thinking this might be another await scenario because when I look in the browser
+    // the width returned from the `useResizeObserver` hook is initially 0 as well and then
+    // it receives a value.
+
+    // You can see the width value here:
+    // https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products/src/components/Datagrid/Datagrid/DatagridToolbar.js#L178
+
+    // is what is being used to determine if there is enough space, and since in the test environment
+    // it is always 0, the overflow button menu always shows even when mocking offset widths.
+    
+    // screen.debug(undefined, Infinity);
+    expect(container.querySelector(`.cds--batch-actions.cds--batch-actions--active`)).toBeInTheDocument();
+    console.log('table toolbar width', container.querySelector('.c4p--datagrid__table-toolbar').offsetWidth);
+  });
+
 
   it('renders a basic data grid component with devTools attribute', () => {
     render(<BasicUsage data-testid={dataTestId} />);

@@ -19,48 +19,63 @@ export const DraggableItemsList = ({
   filterString,
   focusIndex,
   getNextIndex,
-  isTableSortable,
   moveElement,
   onSelectColumn,
   setAriaRegionText,
   setColumnsObject,
   setFocusIndex,
 }) => {
+  // This function recursively looks for the nested header element until we can find the key which contains the title.
+  // This can happen if multiple hooks are used together that manipulate the rendering of the column
+  // header, such as `useColumnCenterAlign` and `useSortableColumns`.
+  const getNestedTitle = (component) => {
+    if (component && !component.key) {
+      return getNestedTitle(component.children);
+    }
+    if (component && component.key && typeof component.key === 'string') {
+      return component.key;
+    }
+  };
+
+  const getColTitle = (col) => {
+    if (!col) {
+      return;
+    }
+    const checkTitle = () => {
+      if (
+        col.Header().props.children.props &&
+        col.Header().props.children.props.title
+      ) {
+        return col.Header().props.children.props.title;
+      }
+      return getNestedTitle(col.Header().props.children.props);
+    };
+    return typeof col?.Header === 'function'
+      ? checkTitle()
+      : col.Header.props.title;
+  };
+
   return (
     <>
       {columns
         // hide the columns without Header, e.g the sticky actions, spacer
         .filter((colDef) => {
-          const sortableTitle =
-            isTableSortable && colDef.Header().props.children.props?.title;
-          return (
-            (!!colDef.Header.props && !!colDef.Header.props?.title) ||
-            (isTableSortable && !!sortableTitle)
-          );
+          return !!getColTitle(colDef);
         })
+        .filter(Boolean)
         .filter((colDef) => !colDef.isAction)
         .filter((colDef) => {
-          const sortableTitle =
-            isTableSortable && colDef.Header().props.children.props?.title;
           return (
             filterString.length === 0 ||
-            ((isTableSortable
-              ? sortableTitle?.toLowerCase().includes(filterString)
-              : colDef.Header.props?.title
-                  ?.toLowerCase()
-                  .includes(filterString)) &&
+            (getColTitle(colDef)?.toLowerCase().includes(filterString) &&
               colDef.id !== 'spacer')
           );
         })
         .map((colDef, i) => {
-          const isSortableColumn = !!colDef.canSort && !!isTableSortable;
-          const sortableTitle =
-            isTableSortable && colDef.Header().props.children.props?.title;
+          const colHeaderTitle = getColTitle(colDef);
           const searchString = new RegExp('(' + filterString + ')');
           const res = filterString.length
-            ? isSortableColumn
-              ? sortableTitle.toLowerCase().split(searchString)
-              : colDef.Header.props.title.toLowerCase().split(searchString)
+            ? colHeaderTitle.toLowerCase().split(searchString)
             : null;
           const firstWord =
             res !== null
@@ -73,9 +88,7 @@ export const DraggableItemsList = ({
               ? res[0] === ''
                 ? `<strong>${firstWord}</strong>` + res[2]
                 : firstWord + `<strong>${res[1]}</strong>` + res[2]
-              : isSortableColumn
-              ? sortableTitle
-              : colDef.Header.props?.title;
+              : colHeaderTitle;
           const isFrozenColumn = !!colDef.sticky;
           const listContents = (
             <>
@@ -85,12 +98,8 @@ export const DraggableItemsList = ({
                 disabled={isFrozenColumn}
                 onChange={(_, { checked }) => onSelectColumn(colDef, checked)}
                 id={`${blockClass}__customization-column-${colDef.id}`}
-                labelText={
-                  isSortableColumn ? sortableTitle : colDef.Header.props?.title
-                }
-                title={
-                  isSortableColumn ? sortableTitle : colDef.Header.props?.title
-                }
+                labelText={colHeaderTitle}
+                title={colHeaderTitle}
                 className={`${blockClass}__customize-columns-checkbox`}
                 hideLabel
               />
@@ -112,9 +121,7 @@ export const DraggableItemsList = ({
               id={`dnd-datagrid-columns-${colDef.id}`}
               type="column-customization"
               disabled={filterString.length > 0 || isFrozenColumn}
-              ariaLabel={
-                isSortableColumn ? sortableTitle : colDef.Header.props?.title
-              }
+              ariaLabel={colHeaderTitle}
               onGrab={setAriaRegionText}
               isFocused={focusIndex === i}
               moveElement={moveElement}
@@ -149,7 +156,6 @@ DraggableItemsList.propTypes = {
   filterString: PropTypes.string.isRequired,
   focusIndex: PropTypes.number.isRequired,
   getNextIndex: PropTypes.func.isRequired,
-  isTableSortable: PropTypes.bool,
   moveElement: PropTypes.func.isRequired,
   onSelectColumn: PropTypes.func.isRequired,
   setAriaRegionText: PropTypes.func.isRequired,

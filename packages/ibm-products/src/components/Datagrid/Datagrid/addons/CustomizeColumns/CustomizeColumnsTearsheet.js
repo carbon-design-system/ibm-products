@@ -31,7 +31,6 @@ const CustomizeColumnsTearsheet = ({
   assistiveTextInstructionsLabel = 'Press space bar to toggle drag drop mode, use arrow keys to move selected elements.',
   assistiveTextDisabledInstructionsLabel = 'Reordering columns are disabled because they are filtered currently.',
   selectAllLabel = 'Column name',
-  isTableSortable,
 }) => {
   const [visibleColumnsCount, setVisibleColumnsCount] = useState('');
   const [totalColumns, setTotalColumns] = useState('');
@@ -145,7 +144,6 @@ const CustomizeColumnsTearsheet = ({
             setDirty();
           }}
           selectAllLabel={selectAllLabel}
-          isTableSortable={isTableSortable}
         />
       )}
     </TearsheetNarrow>
@@ -160,7 +158,6 @@ CustomizeColumnsTearsheet.propTypes = {
   findColumnPlaceholderLabel: PropTypes.string,
   instructionsLabel: PropTypes.string,
   isOpen: PropTypes.bool.isRequired,
-  isTableSortable: PropTypes.bool.isRequired,
   onSaveColumnPrefs: PropTypes.func.isRequired,
   originalColumnDefinitions: PropTypes.array.isRequired,
   primaryButtonTextLabel: PropTypes.string,

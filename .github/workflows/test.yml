@@ -9,4 +9,6 @@ jobs:
 
     steps:
       - name: test npm access
-        run: bash echo pwd
+        run: |
+          sh ./test.sh
+        shell: bash

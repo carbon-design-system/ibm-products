@@ -1,0 +1,13 @@
+name: test npm query
+
+on:
+  workflow_dispatch:
+
+jobs:
+  NPM_dist_tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: test npm access
+        run: bash .github/workflows/test.sh
+

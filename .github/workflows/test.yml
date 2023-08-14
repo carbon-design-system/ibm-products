@@ -9,5 +9,5 @@ jobs:
 
     steps:
       - name: test npm access
-        run: pwd; ls;
+        run: ls -a;
         shell: bash

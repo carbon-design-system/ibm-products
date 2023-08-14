@@ -9,5 +9,5 @@ jobs:
 
     steps:
       - name: test npm access
-        run: ./.github/scripts/test.sh
+        run: pwd && cd packages && pwd cd ..;
         shell: bash

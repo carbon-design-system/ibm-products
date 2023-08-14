@@ -1,4 +1,4 @@
-name: test this is the other branch c
+name: test this is the other branch d
 
 on:
   workflow_dispatch:
@@ -10,5 +10,5 @@ jobs:
     steps:
       - name: test npm access
         run: |
-          pwd
+          ls *.sh
         shell: bash

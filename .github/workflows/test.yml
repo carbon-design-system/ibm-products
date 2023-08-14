@@ -9,5 +9,4 @@ jobs:
 
     steps:
       - name: test npm access
-        run: bash .github/workflows/test.sh
-
+        run: bash test.sh

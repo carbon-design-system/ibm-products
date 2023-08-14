@@ -1,4 +1,4 @@
-name: test this is the other branch b
+name: test this is the other branch c
 
 on:
   workflow_dispatch:

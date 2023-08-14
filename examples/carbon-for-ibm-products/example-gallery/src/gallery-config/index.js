@@ -174,12 +174,12 @@ const config = [
     thumbnail: `url(${imagePrefixExample}`,
   },
   {
-    label: 'About Modal',
+    label: 'React 16 example',
     directory: 'react-16-example',
     thumbnail: `url(${imageReact16Example}`,
   },
   {
-    label: 'About Modal',
+    label: 'React 17 example',
     directory: 'react-17-example',
     thumbnail: `url(${imageReact17Example}`,
   },

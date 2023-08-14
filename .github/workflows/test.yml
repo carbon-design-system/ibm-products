@@ -1,4 +1,4 @@
-name: test npm query
+name: test this is the other branch
 
 on:
   workflow_dispatch:

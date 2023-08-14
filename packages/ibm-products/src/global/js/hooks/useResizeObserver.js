@@ -13,11 +13,28 @@ export const useResizeObserver = (ref, callback) => {
   const cb = useRef(callback);
 
   useEffect(() => {
-    // ref for callback removes it as dependency fro useLayoutEffect
+    // ref for callback removes it as dependency from useLayoutEffect
     // This significantly reduces repeated calls if a function is redefined on every
     // render
     cb.current = callback;
   }, [callback]);
+
+  useEffect(() => {
+    const getInitialSize = () => {
+      if (ref.current) {
+        const refComputedStyle = window.getComputedStyle(ref.current);
+        const initialWidth =
+          (ref.current?.offsetWidth || 0) -
+          (parseFloat(refComputedStyle.paddingLeft),
+          parseFloat(refComputedStyle.paddingRight));
+        setWidth(initialWidth);
+      }
+    };
+    if (!ref?.current && width !== 0) {
+      return;
+    }
+    getInitialSize();
+  }, [width, ref]);
 
   useLayoutEffect(() => {
     if (!ref?.current) {
@@ -56,6 +73,5 @@ export const useResizeObserver = (ref, callback) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref.current]);
-
   return { width, height };
 };

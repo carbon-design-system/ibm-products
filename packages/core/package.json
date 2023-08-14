@@ -72,11 +72,5 @@
   },
   "dependencies": {
     "lottie-web": "^5.12.2"
-  },
-  "resolutions": {
-    "sass": "1.64.2"
-  },
-  "overrides": {
-    "sass": "$sass"
   }
 }

@@ -17,6 +17,7 @@ FOLDER=$1;
 PACKAGE=$2;
 
 pwd
+ls
 
 cd $FOLDER;
 VERSION=$(npm pkg get version --workspaces=false | tr -d \");

@@ -80,6 +80,8 @@ export let CreateTearsheet = forwardRef(
     const [currentStep, setCurrentStep] = useState(0);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
+    const [loadingPrevious, setLoadingPrevious] = useState(false);
+    const [onPrevious, setOnPrevious] = useState();
     const [onNext, setOnNext] = useState();
     const [onMount, setOnMount] = useState();
     const [stepData, setStepData] = useState([]);
@@ -130,11 +132,14 @@ export let CreateTearsheet = forwardRef(
       firstIncludedStep,
       lastIncludedStep,
       stepData,
+      onPrevious,
       onNext,
       isSubmitDisabled: isDisabled,
       setCurrentStep,
       setIsSubmitting,
       setShouldViewAll,
+      setLoadingPrevious,
+      loadingPrevious,
       onClose,
       onRequestSubmit,
       componentName,
@@ -198,6 +203,7 @@ export let CreateTearsheet = forwardRef(
               value={{
                 currentStep,
                 setIsDisabled,
+                setOnPrevious: (fn) => setOnPrevious(() => fn),
                 setOnNext: (fn) => setOnNext(() => fn),
                 setOnMount: (fn) => setOnMount(() => fn),
                 setStepData,

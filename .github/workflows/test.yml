@@ -1,0 +1,12 @@
+name: test run in another branch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  NPM_dist_tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: test npm access
+        run: bash test.sh

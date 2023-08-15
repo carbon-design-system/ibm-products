@@ -171,8 +171,8 @@ class DataTablePagination extends Component {
 
   /**
    * Slice the data to only show between the range.
-   * @param {Array.<object.<string, *>>} rows The rows to update.
-   * @returns {Array.<object.<string, *>>} The data between the range values.
+   * @param {Array.<Record<string, any>>} rows The rows to update.
+   * @returns {Array.<Record<string, any>>} The data between the range values.
    */
   paginateRows(rows) {
     const start = this.state.pageSize * (this.state.page - 1);

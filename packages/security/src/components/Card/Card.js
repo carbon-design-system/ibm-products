@@ -104,7 +104,7 @@ Card.defaultProps = {
 };
 
 Card.propTypes = {
-  /** @type {object.<object, *>} An object list of body props. */
+  /** @type {Record<string, any>} An object list of body props. */
   body: shape({
     children,
 
@@ -117,12 +117,12 @@ Card.propTypes = {
   /** @type {string} The class. */
   className: string,
 
-  /** @type {object.<object, *>} An object list of footer props. */
+  /** @type {Record<string, any>} An object list of footer props. */
   footer: shape({
     children,
   }),
 
-  /** @type {object.<object, *>} An object list of header props. */
+  /** @type {Record<string, any>} An object list of header props. */
   header: shape({
     /** @type {string} The image of the header. */
     image: string,

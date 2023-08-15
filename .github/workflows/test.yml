@@ -28,6 +28,5 @@ jobs:
           cache: yarn
 
       - name: test npm access
-        run: ls -a .github
-        # run: bash ./.github/scripts/test.sh
+        run: bash .github/scripts/test.sh
         shell: bash

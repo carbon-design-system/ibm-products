@@ -160,7 +160,7 @@ class Wizard extends Component {
   /**
    * Keeps the state in sync with the current props.
    * @param {Props} nextProps The current props passed to the component.
-   * @returns {object.<object, *>} The updated state for the component.
+   * @returns {Record<object, any>} The updated state for the component.
    * @static
    */
 

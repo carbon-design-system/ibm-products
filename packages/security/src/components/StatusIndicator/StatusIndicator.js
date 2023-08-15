@@ -37,7 +37,7 @@ class StatusIndicator extends Component {
     /** @type {number} The index of the current step. */
     currentIndex: number,
 
-    /** @type {object.<object, *>} An object list of retry button props. */
+    /** @type {Record<object, any>} An object list of retry button props. */
     retry: shape({
       /** @type {func} An action to be re-run in the event of failure. */
       action: func,

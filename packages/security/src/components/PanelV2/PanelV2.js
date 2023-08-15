@@ -29,7 +29,7 @@ const getInstanceId = setupGetInstanceId();
 
 /**
  * Panel v2 container component.
- * @param {object.<string, *>} props Panel v2 container props.
+ * @param {Record<string, any>} props Panel v2 container props.
  * @returns {PanelV2} Panel v2 container instance.
  */
 function PanelV2({
@@ -251,7 +251,7 @@ PanelV2.propTypes = {
   /** @type {string} Class name. */
   className: PropTypes.string,
 
-  /** @type {object<object>} An object list of close button props. */
+  /** @type {Record<object, any>} An object list of close button props. */
   closeButton: PropTypes.shape({
     id: PropTypes.string,
     onClick: PropTypes.func,
@@ -284,7 +284,7 @@ PanelV2.propTypes = {
    */
   onClose: PropTypes.func,
 
-  /** @type {object<object>} An object list of primary button props. */
+  /** @type {Record<string, any>} An object list of primary button props. */
   primaryButton: deprecate(
     buttonType,
     `\nThe prop \`primaryButton\` for PanelV2 has been deprecated in favor of \`renderFooter\`.`
@@ -296,7 +296,7 @@ PanelV2.propTypes = {
   /** @type {ReactNode|any} The root node for rendering the panel */
   rootNode: isNode() ? PropTypes.instanceOf(Node) : PropTypes.any,
 
-  /** @type {object<object>} An object list of secondary button props. */
+  /** @type {Record<string, any>} An object list of secondary button props. */
   secondaryButton: deprecate(
     buttonType,
     `\nThe prop \`secondaryButton\` for PanelV2 has been deprecated in favor of \`renderFooter\`.`

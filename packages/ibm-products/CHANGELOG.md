@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.55.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.55.1...@carbon/ibm-products@1.55.2) (2023-08-15)
+
+
+### Bug Fixes
+
+* **Datagrid:** allow customize columns with other hooks ([#3348](https://github.com/carbon-design-system/ibm-products/issues/3348)) ([6ea71af](https://github.com/carbon-design-system/ibm-products/commit/6ea71af67ad666b8fa26841c78a16bb59c7b0dc4))
+* update to Carbon 10 compatible versions to latest ([#3287](https://github.com/carbon-design-system/ibm-products/issues/3287)) ([3e86b35](https://github.com/carbon-design-system/ibm-products/commit/3e86b3551e63a33b09c8996b05247fc8f234ad4c))
+
+
+
+
+
 ## [1.55.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.55.0...@carbon/ibm-products@1.55.1) (2023-08-03)
 
 

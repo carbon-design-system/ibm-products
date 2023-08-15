@@ -19,18 +19,18 @@ PACKAGE=$2;
 cd $FOLDER;
 VERSION=$(npm pkg get version --workspaces=false | tr -d \");
 cd ../..
-NPN_LATEST=$(npm dist-tag ls $PACKAGE@latest | grep ^latest | cut -d " " -f2);
-NPN_V1_LATEST=$(npm dist-tag ls $PACKAGE@latest | grep ^v1-latest | cut -d " " -f2);
+NPM_LATEST=$(npm dist-tag ls $PACKAGE@latest | grep ^latest | cut -d " " -f2);
+NPM_V1_LATEST=$(npm dist-tag ls $PACKAGE@latest | grep ^v1-latest | cut -d " " -f2);
 
-if [ "$VERSION" == "$NPN_LATEST" ]; then
+if [ "$VERSION" == "$NPM_LATEST" ]; then
   echo "No dist-tag update needed, \"$PACKAGE\" published as \"latest\""
-elif [ "$VERSION" == "$NPN_V1_LATEST" ]; then
-  echo "Correcting dist tags" $PACKAGE@$NPN_V1_LATEST latest;
+elif [ "$VERSION" == "$NPM_V1_LATEST" ]; then
+  echo "Correcting dist tags" $PACKAGE@$NPM_V1_LATEST latest;
   # npm dist-tag rm $PACKAGE v1-latest; No need to remove this
-  npm dist-tag add $PACKAGE@$NPN_V1_LATEST latest;
+  npm dist-tag add $PACKAGE@$NPM_V1_LATEST latest;
 else
   echo "Not sure what's happening. Here are the versions of \"$2\""
   echo "package version =" $VERSION
-  echo "npm latest =" $NPN_LATEST
-  echo "npm v1-latest =" $NPN_V1_LATEST
+  echo "npm latest =" $NPM_LATEST
+  echo "npm v1-latest =" $NPM_V1_LATEST
 fi

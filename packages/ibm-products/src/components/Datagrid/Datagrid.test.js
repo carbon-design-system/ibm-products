@@ -2277,11 +2277,10 @@ describe('batch action testing', () => {
       window.ResizeObserver = ResizeObserver;
     });
 
-    it('renders batch action and checks for the appropriate rendering based on the current mocked widths', async () => {
+    it.only('renders batch action and checks for the appropriate rendering based on the current mocked widths', async () => {
       const { container } = render(<TestBatch />);
       const { click } = userEvent;
       const firstCheckbox = screen.getAllByLabelText(/datagrid-table-id/)[0];
-      screen.debug(undefined, Infinity);
       click(firstCheckbox);
       expect(
         container.querySelector(

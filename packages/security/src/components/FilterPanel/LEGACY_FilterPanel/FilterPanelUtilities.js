@@ -58,9 +58,9 @@ export const filterFiltersPropTypes = PropTypes.shape({
 /**
  * Filter data object.
  * @typedef {object} FilterData
- * @property {object<string, FilterCategory>} categories Object containing filter category objects.
- * @property {object<string, FilterSubcategory>} subcategories Object containing filter subcategory objects.
- * @property {object<string, Filter>} filters Object containing filters objects.
+ * @property {Record<string, FilterCategory>} categories Object containing filter category objects.
+ * @property {Record<string, FilterSubcategory>} subcategories Object containing filter subcategory objects.
+ * @property {Record<string, Filter>} filters Object containing filters objects.
  */
 /** @type {FilterData} Type defition for filter data */
 export const filterDataPropTypes = PropTypes.shape({

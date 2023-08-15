@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 /**
  * Panel controller component.
- * @param {object.<string, *>} props Panel controller props.
+ * @param {Record<string, any>} props Panel controller props.
  * @returns {PanelController} Panel controller instance.
  */
 const PanelController = (props) => (props.active ? props.children : null);

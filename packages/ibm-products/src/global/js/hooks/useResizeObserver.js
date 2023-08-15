@@ -25,8 +25,8 @@ export const useResizeObserver = (ref, callback) => {
         const refComputedStyle = window.getComputedStyle(ref.current);
         const initialWidth =
           (ref.current?.offsetWidth || 0) -
-          (parseFloat(refComputedStyle.paddingLeft),
-          parseFloat(refComputedStyle.paddingRight));
+          (parseFloat(refComputedStyle?.paddingLeft || 0),
+          parseFloat(refComputedStyle?.paddingRight || 0));
         setWidth(initialWidth);
       }
     };

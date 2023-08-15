@@ -196,7 +196,7 @@ TearsheetSmall.propTypes = {
   /** @type {string} Extra classes to add. */
   className: PropTypes.string,
 
-  /** @type {object<object>} An object list of close button props. */
+  /** @type {Record<object, object>} An object list of close button props. */
   closeButton: buttonType.isRequired,
 
   /** @type {element|Function|string} The element, function, or string for the description. */
@@ -227,13 +227,13 @@ TearsheetSmall.propTypes = {
   /** @type {string} The message to be displayed during loading. */
   loadingMessage: PropTypes.string,
 
-  /** @type {object<object>} An object list of primary button props. */
+  /** @type {Record<object, object>} An object list of primary button props. */
   primaryButton: buttonType.isRequired,
 
   /** @type {Node} The root node for rendering the modal */
   rootNode: isNode() ? PropTypes.instanceOf(Node) : PropTypes.any,
 
-  /** @type {object<object>} An object list of secondary button props. */
+  /** @type {Record<object, object>} An object list of secondary button props. */
   secondaryButton: buttonType.isRequired,
 
   /** @type {boolean} Stop event propagation for events that can bubble. */

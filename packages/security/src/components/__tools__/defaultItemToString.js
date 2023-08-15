@@ -5,7 +5,7 @@
 
 /**
  * Handles converting an item to a string.
- * @param {object<string, *>} item The object containing a label to convert.
+ * @param {Record<string, any>} item The object containing a label to convert.
  * @returns {string} The converted label of the object passed.
  */
 const convertItemToString = (item) =>
@@ -15,7 +15,7 @@ const convertItemToString = (item) =>
 
 /**
  * Handles returning a label for an object.
- * @param {object<string, *>} item The object containing a label.
+ * @param {Record<string, any>} item The object containing a label.
  * @returns {string} The label of the object passed.
  */
 export default (item) =>

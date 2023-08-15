@@ -79,7 +79,7 @@ const deprecate = (actual, expected) =>
 
 /**
  * Returns a standardized component deprecation warning.
- * @param {object.<string, string>} deprecationWarning - An object containing properties that construct the deprecation warning.
+ * @param {Record<string, string>} deprecationWarning - An object containing properties that construct the deprecation warning.
  * @param {string} deprecationWarning.actual - The actual value supplied.
  * @param {string} deprecationWarning.componentName - The component name it was supplied to.
  * @param {string} deprecationWarning.description - The description of the deprecation warning.

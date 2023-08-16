@@ -399,7 +399,7 @@ export let NotificationsPanel = React.forwardRef(
       >
         <div className={`${blockClass}__header-container`}>
           <div className={`${blockClass}__header-flex`}>
-            <h1 className={`${blockClass}__header`}>{title}</h1>
+            <h2 className={`${blockClass}__header`}>{title}</h2>
             <Button
               size="sm"
               kind="ghost"

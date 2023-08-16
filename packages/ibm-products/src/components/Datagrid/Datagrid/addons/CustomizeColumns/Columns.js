@@ -37,7 +37,6 @@ const Columns = ({
   assistiveTextInstructionsLabel,
   assistiveTextDisabledInstructionsLabel,
   selectAllLabel,
-  isTableSortable,
 }) => {
   const [ariaRegionText, setAriaRegionText] = React.useState('');
   const [focusIndex, setFocusIndex] = React.useState(-1);
@@ -120,7 +119,6 @@ const Columns = ({
             filterString={filterString}
             focusIndex={focusIndex}
             getNextIndex={getNextIndex}
-            isTableSortable={isTableSortable}
             moveElement={moveElement}
             onSelectColumn={onSelectColumn}
             setAriaRegionText={setAriaRegionText}
@@ -141,7 +139,6 @@ Columns.propTypes = {
   filterString: PropTypes.string.isRequired,
   getVisibleColumnsCount: PropTypes.func.isRequired,
   instructionsLabel: PropTypes.string,
-  isTableSortable: PropTypes.bool.isRequired,
   onSelectColumn: PropTypes.func.isRequired,
   selectAllLabel: PropTypes.string,
   setColumnStatus: PropTypes.func,

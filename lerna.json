@@ -1,7 +1,6 @@
 {
   "version": "independent",
   "npmClient": "yarn",
-  "npmClientArgs": ["--frozen-lockfile"],
   "command": {
     "version": {
       "conventionalCommits": true,
@@ -16,5 +15,6 @@
     "**/e2e/**",
     "**/examples/**",
     "**/*.md"
-  ]
+  ],
+  "useNx": true
 }

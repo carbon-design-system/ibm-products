@@ -188,7 +188,7 @@ DataDecorator.propTypes = {
   /** @type {string} class name for rendered content. */
   className: PropTypes.string,
 
-  /** @type {object<object>} An object list of close button props. */
+  /** @type {Record<string, any>} An object list of close button props. */
   closeButton: buttonType,
 
   /** @type {boolean} Focus trap. */
@@ -222,7 +222,7 @@ DataDecorator.propTypes = {
   /** @type {Function} The function to call when the DataDecorator Panel opens. */
   onOpen: PropTypes.func,
 
-  /** @type {object<object>} An object list of primary button props. */
+  /** @type {Record<string, any>} An object list of primary button props. */
   primaryButton: deprecate(
     buttonType,
     `\nThe prop \`primaryButton\` for DataDecorator has been deprecated in favor of \`renderFooter\`.`
@@ -254,7 +254,7 @@ DataDecorator.propTypes = {
     return null;
   },
 
-  /** @type {object<object>} An object list of secondary button props. */
+  /** @type {Record<string, any>} An object list of secondary button props. */
   secondaryButton: deprecate(
     buttonType,
     `\nThe prop \`secondaryButton\` for DataDecorator has been deprecated in favor of \`renderFooter\`.`

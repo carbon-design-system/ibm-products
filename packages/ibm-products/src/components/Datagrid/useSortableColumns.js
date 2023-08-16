@@ -18,9 +18,38 @@ const ordering = {
   DESC: 'DESC',
   NONE: 'NONE',
 };
+
+const getAriaSortValue = (
+  col,
+  {
+    ascendingSortableLabelText,
+    descendingSortableLabelText,
+    defaultSortableLabelText,
+  }
+) => {
+  if (!col) {
+    return;
+  }
+  const { isSorted, isSortedDesc } = col || {};
+  if (!isSorted) {
+    return defaultSortableLabelText || 'none';
+  }
+  if (isSorted && !isSortedDesc) {
+    return ascendingSortableLabelText || 'ascending';
+  }
+  if (isSorted && isSortedDesc) {
+    return descendingSortableLabelText || 'descending';
+  }
+};
+
 const useSortableColumns = (hooks) => {
   const sortableVisibleColumns = (visibleColumns, { instance }) => {
-    const { onSort } = instance;
+    const {
+      onSort,
+      ascendingSortableLabelText,
+      descendingSortableLabelText,
+      defaultSortableLabelText,
+    } = instance;
     const onSortClick = (column) => {
       const key = column.id;
       const sortDesc = column.isSortedDesc;
@@ -65,6 +94,11 @@ const useSortableColumns = (hooks) => {
           column.Header
         ) : (
           <Button
+            aria-sort={getAriaSortValue(headerProp?.column, {
+              ascendingSortableLabelText,
+              descendingSortableLabelText,
+              defaultSortableLabelText,
+            })}
             onClick={() => onSortClick(headerProp?.column)}
             kind="ghost"
             renderIcon={icon(headerProp?.column)}

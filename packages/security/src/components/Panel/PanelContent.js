@@ -13,7 +13,7 @@ const namespace = getComponentNamespace('panel');
 
 /**
  * Panel content component.
- * @param {object.<string, *>} props Panel content props.
+ * @param {Record<string, any>} props Panel content props.
  * @returns {PanelContent} Panel content instance.
  */
 const PanelContent = (props) => {

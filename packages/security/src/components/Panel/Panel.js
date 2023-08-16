@@ -8,7 +8,7 @@ import { Component } from 'react';
 
 /**
  * Panel component.
- * @param {object.<string, *>} props Panel props.
+ * @param {Record<string, any>} props Panel props.
  * @returns {Panel} Panel instance.
  */
 export default class Panel extends Component {

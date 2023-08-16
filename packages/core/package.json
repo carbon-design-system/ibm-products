@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-cloud-cognitive-core",
   "private": true,
-  "version": "2.1.1",
+  "version": "2.1.2",
   "license": "Apache-2.0",
   "main": "scripts/build.js",
   "repository": {
@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "run-s build:carbon build:storybook",
-    "build:carbon": "yarn dlx sass --style=expanded --load-path ../ibm-products/node_modules --load-path ../../node_modules --load-path node_modules .storybook/carbon.scss:css/carbon.css",
+    "build:carbon": "sass --style=expanded --load-path ../ibm-products/node_modules --load-path ../../node_modules --load-path node_modules .storybook/carbon.scss:css/carbon.css",
     "build:storybook": "yarn dlx cross-env \"NODE_OPTIONS=--max_old_space_size=8192\" && storybook build -s ./public",
     "clean": "yarn dlx rimraf storybook-static css",
     "start": "run-s build:carbon start:storybook",
@@ -62,7 +62,7 @@
     "react-dom": "^16.14.0",
     "regenerator-runtime": "^0.13.11",
     "rimraf": "^5.0.1",
-    "sass": "^1.63.6",
+    "sass": "1.63.6",
     "sass-loader": "^13.3.2",
     "storybook": "^7.0.27",
     "style-loader": "^3.3.3",

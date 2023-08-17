@@ -360,7 +360,9 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__title-row {
-    margin-top: $spacing-01; /* spacing needed in case of editable title, otherwise top of focus indicator hidden */
+    --title-row-margin-top: #{$spacing-01}; /* spacing needed in case of editable title, otherwise top of focus indicator hidden */
+
+    margin-top: var(--title-row-margin-top);
     margin-bottom: 0;
     transform: translateY(
       $spacing-01
@@ -416,8 +418,10 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   .#{$block-class}__breadcrumb-row--has-breadcrumbs
     + .#{$block-class}__title-row--sticky {
-    // top: 0;
-    top: var(--#{$block-class}--breadcrumb-top); //2
+    // stylelint-disable-next-line carbon/layout-token-use
+    top: calc(
+      var(--#{$block-class}--breadcrumb-top) - var(--title-row-margin-top)
+    );
   }
 
   .#{$block-class}__title-column {

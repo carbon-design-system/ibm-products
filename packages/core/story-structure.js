@@ -127,6 +127,7 @@ const s = [
           'c/ComboButton',
           'c/ExampleComponent',
           'c/FilterSummary',
+          'c/TooltipTrigger',
           'c/TearsheetShell',
         ],
       },

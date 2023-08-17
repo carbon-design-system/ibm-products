@@ -111,8 +111,6 @@ export const StoryDocsPage = ({
     omitUnreferencedStories
   );
 
-  console.log(processBlocks);
-
   const storyCount =
     processedBlocks?.filter((block) => !!block.story).length ?? 0;
 

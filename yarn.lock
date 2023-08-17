@@ -2040,7 +2040,7 @@ __metadata:
     react-dom: ^16.14.0
     regenerator-runtime: ^0.13.11
     rimraf: ^5.0.1
-    sass: ^1.63.6
+    sass: 1.63.6
     sass-loader: ^13.3.2
     storybook: ^7.0.27
     style-loader: ^3.3.3
@@ -2079,7 +2079,7 @@ __metadata:
     react-table: ^7.8.0
     react-window: ^1.8.9
     rimraf: ^5.0.1
-    sass: ^1.63.6
+    sass: 1.63.6
     yargs: ^17.7.2
   peerDependencies:
     "@carbon/grid": ^11.16.1
@@ -19993,7 +19993,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.63.6":
+"sass@npm:1.63.6":
   version: 1.63.6
   resolution: "sass@npm:1.63.6"
   dependencies:

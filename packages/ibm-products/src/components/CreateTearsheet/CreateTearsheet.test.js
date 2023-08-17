@@ -36,6 +36,9 @@ const onNextStepNonPromiseFn = jest.fn();
 const onNextStepRejectionFn = jest.fn(() =>
   Promise.reject(rejectionErrorMessage)
 );
+
+const onPreviousStepFn = jest.fn();
+
 const finalStepOnNext = jest.fn(() => Promise.resolve());
 const finalStepOnNextNonPromise = jest.fn();
 const finalStepOnNextRejectFn = jest.fn(() =>
@@ -70,6 +73,7 @@ const renderCreateTearsheet = ({
   rejectOnNext = false,
   submitFn = onRequestSubmitFn,
   onNext = onNextStepFn,
+  onPrevious = onPreviousStepFn,
   finalOnNextFn = finalStepOnNext,
   rejectOnSubmitNext = false,
   ...rest
@@ -93,7 +97,11 @@ const renderCreateTearsheet = ({
         </button>
         <input type="text" />
       </CreateTearsheetStep>
-      <CreateTearsheetStep title={step2Title} hasFieldset={false}>
+      <CreateTearsheetStep
+        title={step2Title}
+        hasFieldset={false}
+        onPrevious={onPrevious}
+      >
         step 2 content
       </CreateTearsheetStep>
       <CreateTearsheetStep
@@ -249,11 +257,28 @@ describe(CreateTearsheet.displayName, () => {
       )
     );
 
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
+    await waitFor(() => expect(onNextStepFn).toHaveBeenCalled());
     click(cancelButtonElement);
     expect(onCloseFn).toHaveBeenCalled();
+  });
+
+  it('calls the onPrevious function prop as expected', async () => {
+    const { click } = userEvent;
+    const { container } = renderCreateTearsheet(defaultProps);
+    const nextButtonElement = screen.getByText(nextButtonText);
+    const backButtonElement = screen.getByText(backButtonText);
+    const createTearsheetSteps = container.querySelector(
+      `.${createTearsheetBlockClass}__content .${carbon.prefix}--form`
+    ).children;
+    click(nextButtonElement);
+    expect(
+      createTearsheetSteps[1].classList.contains(
+        `.${createTearsheetBlockClass}__step__step--visible-section`
+      )
+    );
+    await waitFor(() => expect(onNextStepFn).toHaveBeenCalledTimes(1));
+    click(backButtonElement);
+    await waitFor(() => expect(onPreviousStepFn).toHaveBeenCalledTimes(1));
   });
 
   it('renders first step with onNext function prop that rejects', async () =>
@@ -434,11 +459,10 @@ describe(CreateTearsheet.displayName, () => {
     });
     const nextButtonElement = screen.getByText(nextButtonText);
     click(nextButtonElement);
-    await waitFor(() => {
-      expect(onNextStepFn).toHaveBeenCalled();
-    });
+    await waitFor(() => expect(onNextStepFn).toHaveBeenCalledTimes(1));
     const backButtonElement = screen.getByText(backButtonText);
     click(backButtonElement);
+    await waitFor(() => expect(onPreviousStepFn).toHaveBeenCalledTimes(1));
     const tearsheetChildren = container.querySelector(
       `.${createTearsheetBlockClass}__content`
     ).children;

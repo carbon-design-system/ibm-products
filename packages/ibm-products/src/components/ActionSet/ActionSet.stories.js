@@ -39,18 +39,17 @@ export default {
       options: actionsOptions,
       mapping: actionsMapping({}, action),
     },
+    containerWidth: {
+      control: { type: 'range', min: 150, max: 800, step: 10 },
+    },
   },
-  decorators: [
-    (story) => (
-      <DisplayBox msg="width available to component">{story()}</DisplayBox>
-    ),
-  ],
+  decorators: [(story) => <DisplayBox>{story()}</DisplayBox>],
 };
 
 // eslint-disable-next-line react/prop-types
-const Template = ({ actions, size = 'md', ...args }) => {
+const Template = ({ actions, size = 'md', containerWidth, ...args }) => {
   const validationError = ActionSet.validateActions()(
-    { actions, size, ...args },
+    { actions, size, containerWidth, ...args },
     'actions',
     ActionSet.displayName,
     'prop'
@@ -61,6 +60,7 @@ const Template = ({ actions, size = 'md', ...args }) => {
       {validationError && <p>Note: {validationError.message.split(':')[1]}</p>}
       <div
         className={`${blockClass}__story-container ${blockClass}__story-container--${size}`}
+        style={{ width: containerWidth }}
       >
         <ActionSet {...{ actions, size, ...args }} />
       </div>
@@ -69,5 +69,5 @@ const Template = ({ actions, size = 'md', ...args }) => {
 };
 
 export const actionSet = prepareStory(Template, {
-  args: { actions: 3 },
+  args: { actions: 3, containerWidth: 300 },
 });

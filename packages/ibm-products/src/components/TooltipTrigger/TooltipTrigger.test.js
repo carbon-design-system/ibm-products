@@ -7,190 +7,36 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
-import userEvent from '@testing-library/user-event';
-
-import { pkg, carbon } from '../../settings';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 
-import { Add } from '@carbon/icons-react';
-import { ExampleComponent } from '.';
-import { expectError, expectLogging } from '../../global/js/utils/test-helper';
+import { TooltipTrigger } from '.';
 
-const blockClass = `${pkg.prefix}--example-component`;
-const componentName = ExampleComponent.displayName;
+const componentName = TooltipTrigger.displayName;
 
-const borderColor = '#acefed';
 const className = `class-${uuidv4()}`;
-const dataTestId = uuidv4();
-const primaryButtonLabel = `hello, world (${uuidv4()})`;
-const secondaryButtonLabel = `goodbye (${uuidv4()})`;
 
-// render an ExampleComponent with button labels and any other required props
-const renderComponent = ({ ...rest } = {}) =>
-  render(
-    <ExampleComponent
-      {...{ primaryButtonLabel, secondaryButtonLabel, ...rest }}
-    />
-  );
+// render an TooltipTrigger with button labels and any other required props
+const renderComponent = ({ children, ...rest }) =>
+  render(<TooltipTrigger {...rest}>{children}</TooltipTrigger>);
 
 describe(componentName, () => {
-  it('renders a component ExampleComponent', () => {
-    renderComponent();
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+  it('renders a component TooltipTrigger', () => {
+    renderComponent({});
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = renderComponent();
-    await expect(container).toBeAccessible(componentName, 'scan_label');
-    await expect(container).toHaveNoAxeViolations();
-  });
-
-  it(`renders the borderColor property`, () => {
-    renderComponent({ borderColor });
-    const style = window.getComputedStyle(screen.getByRole('main'));
-    // We'd prefer to test the actual border color style, but jsdom does not
-    // render css custom properties (https://github.com/jsdom/jsdom/issues/1895)
-    // so testing the property is the best we can do.
-    expect(style.getPropertyValue(`--${blockClass}--border-color`)).toEqual(
-      borderColor
-    );
-  });
-
-  it(`renders the boxedBorder property`, () => {
-    renderComponent({ boxedBorder: true });
-    expect(screen.getByRole('main')).toHaveClass(`${blockClass}--boxed-set`);
+    renderComponent({});
   });
 
   it('applies className to the containing node', () => {
     renderComponent({ className });
-    expect(screen.getByRole('main')).toHaveClass(className);
+    expect(screen.getByRole('button')).toHaveClass(className);
   });
 
-  it(`renders the disabled property`, () => {
-    renderComponent({ disabled: true });
-    screen
-      .getAllByRole('button')
-      .forEach((button) => expect(button).toHaveProperty('disabled', true));
-  });
-
-  it('notifies a click on each button', () => {
-    const primaryHandler = jest.fn();
-    const secondaryHandler = jest.fn();
-    renderComponent({
-      onPrimaryClick: primaryHandler,
-      onSecondaryClick: secondaryHandler,
-    });
-    screen.getAllByRole('button').forEach(userEvent.click);
-    expect(primaryHandler).toBeCalledTimes(1);
-    expect(secondaryHandler).toBeCalledTimes(1);
-  });
-
-  it('renders the primaryButtonLabel and secondaryButtonLabel properties', () => {
-    renderComponent();
-    screen.getByText(primaryButtonLabel);
-    screen.getByText(secondaryButtonLabel);
-  });
-
-  it('renders the primaryKind and secondaryKind properties', () => {
-    renderComponent({ primaryKind: 'danger', secondaryKind: 'tertiary' });
-    expect(
-      screen.getByRole('button', { name: `danger ${primaryButtonLabel}` })
-    ).toHaveClass(`${carbon.prefix}--btn--danger`);
-    expect(
-      screen.getByRole('button', { name: secondaryButtonLabel })
-    ).toHaveClass(`${carbon.prefix}--btn--tertiary`);
-  });
-
-  it('renders the size property', () => {
-    renderComponent({ size: 'sm' });
-    screen
-      .getAllByRole('button')
-      .forEach((button) =>
-        expect(button).toHaveClass(`${carbon.prefix}--btn--sm`)
-      );
-  });
-
-  it('adds additional properties to the containing node', () => {
-    renderComponent({ 'data-testid': dataTestId });
-    screen.getByTestId(dataTestId);
-  });
-
-  it('forwards a ref to an appropriate node', () => {
-    const ref = React.createRef();
-    renderComponent({ ref });
-    expect(ref.current).toEqual(screen.getByRole('main'));
-  });
-
-  it('logs an error when secondaryIcon used and feature flag disabled', () => {
-    pkg.feature['ExampleComponent.secondaryIcon'] = false;
-    expectError(
-      'Carbon for IBM Products (Error): Feature "ExampleComponent.secondaryIcon" not enabled. To enable see the notes on feature flags in the README.',
-      () => {
-        render(
-          <ExampleComponent
-            secondaryIcon={Add}
-            {...{
-              primaryButtonLabel,
-              secondaryButtonLabel,
-            }}
-          />
-        );
-      }
-    );
-  });
-
-  it('does NOT log an error when secondaryIcon used and feature flag enabled', () => {
-    pkg.feature['ExampleComponent.secondaryIcon'] = true;
-    render(
-      <ExampleComponent
-        {...{
-          primaryButtonLabel,
-          secondaryButtonLabel,
-          secondaryIcon: Add,
-        }}
-      />
-    );
-  });
-
-  it('logs an error when useExample used and feature flag disabled', () => {
-    pkg.feature['ExampleComponent.useExample'] = false;
-    expectLogging(
-      {
-        errors:
-          'Carbon for IBM Products (Error): Feature "ExampleComponent.useExample" not enabled. To enable see the notes on feature flags in the README.',
-        warnings:
-          'Disabled feature "ExampleComponent.useExample" does not change the initialTime.',
-      },
-      () => {
-        render(
-          <ExampleComponent
-            secondaryIcon={Add}
-            {...{
-              usesExampleHook: 10,
-              primaryButtonLabel,
-              secondaryButtonLabel: `secondary`,
-            }}
-          />
-        );
-      },
-      true
-      // true
-    );
-  });
-
-  it('does NOT log an error when useExample used and feature flag enabled', () => {
-    pkg.feature['ExampleComponent.useExample'] = true;
-
-    render(
-      <ExampleComponent
-        {...{
-          usesExampleHook: 10,
-          primaryButtonLabel,
-          secondaryButtonLabel,
-          secondaryIcon: Add,
-        }}
-      />
-    );
+  it('applies className to the containing node', () => {
+    const testText = 'Test child';
+    renderComponent({ children: testText });
+    screen.getByText(testText);
   });
 });

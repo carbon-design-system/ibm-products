@@ -200,6 +200,9 @@ export const MultiStepTearsheet = ({
           </Grid>
         </CreateTearsheetStep>
         <CreateTearsheetStep
+          onPrevious={() => {
+            console.log('custom onPrevious handler');
+          }}
           title="Dynamic step"
           subtitle="Dynamic step subtitle"
           description="This is an example showing how to include a dynamic step into the CreateTearsheet"

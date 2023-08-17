@@ -13,7 +13,7 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
-import { InlineNotification } from '@carbon/react';
+import { ActionableNotification } from '@carbon/react';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
 // import mdx from './ButtonMenu.mdx';
@@ -43,11 +43,20 @@ docs: {
 const Template = (args) => {
   return (
     <>
-      <InlineNotification
+      <ActionableNotification
         title="Deprecation notice"
+        subtitle="This component is deprecated and will be removed in the next major version. Please migrate to Carbon’s MenuButton."
+        inline
         kind="warning"
-        subtitle="Component no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement. Please refer to Carbon's MenuButton component."
+        lowContrast
         hideCloseButton
+        actionButtonLabel="See MenuButton"
+        statusIconDescription="deprecation notification"
+        onActionButtonClick={() => {
+          window.open(
+            'https://react.carbondesignsystem.com/?path=/docs/components-menubutton--overview'
+          );
+        }}
         style={{ marginBottom: '1rem' }}
       />
       <ButtonMenu

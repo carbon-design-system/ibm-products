@@ -7,7 +7,7 @@
 
 import { CloudApp } from '@carbon/react/icons';
 import React from 'react';
-import { InlineNotification } from '@carbon/react';
+import { ActionableNotification } from '@carbon/react';
 
 import {
   getStoryTitle,
@@ -33,11 +33,20 @@ export default {
 // eslint-disable-next-line no-unused-vars -- args not used in this template
 const Template = (args) => (
   <>
-    <InlineNotification
+    <ActionableNotification
       title="Deprecation notice"
+      subtitle="This component is deprecated and will be removed in the next major version. Please migrate to Carbon’s ComboButton."
+      inline
       kind="warning"
-      subtitle="Component no longer supported. The pattern will remain available, but plan to migrate to the pattern replacement. Please refer to Carbon's ComboButton component."
+      lowContrast
       hideCloseButton
+      actionButtonLabel="See ComboButton"
+      statusIconDescription="deprecation notification"
+      onActionButtonClick={() => {
+        window.open(
+          'https://react.carbondesignsystem.com/?path=/docs/components-combobutton--overview'
+        );
+      }}
       style={{ marginBottom: '1rem' }}
     />
     <ComboButton>

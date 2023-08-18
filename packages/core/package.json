@@ -62,7 +62,7 @@
     "react-dom": "^16.14.0",
     "regenerator-runtime": "^0.14.0",
     "rimraf": "^5.0.1",
-    "sass": "1.65.1",
+    "sass": "^1.64.2",
     "sass-loader": "^13.3.2",
     "storybook": "^7.2.3",
     "style-loader": "^3.3.3",

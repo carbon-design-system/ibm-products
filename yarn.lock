@@ -1736,7 +1736,7 @@ __metadata:
     react-dom: ^16.14.0
     regenerator-runtime: ^0.14.0
     rimraf: ^5.0.1
-    sass: 1.65.1
+    sass: ^1.64.2
     sass-loader: ^13.3.2
     storybook: ^7.2.3
     style-loader: ^3.3.3
@@ -1775,7 +1775,7 @@ __metadata:
     react-table: ^7.8.0
     react-window: ^1.8.9
     rimraf: ^5.0.1
-    sass: 1.65.1
+    sass: ^1.64.2
     yargs: ^17.7.2
   peerDependencies:
     "@carbon/grid": ^11.18.0
@@ -20447,16 +20447,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass@npm:1.65.1":
-  version: 1.65.1
-  resolution: "sass@npm:1.65.1"
+"sass@npm:^1.64.2":
+  version: 1.66.0
+  resolution: "sass@npm:1.66.0"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 33e325fc80cd07489992e0814cd4929496f87493ffe78c423c2dbafa5746a574e6f3bde20c2a3e4ea47b16ee3d6bc5afcf1d36b405227b829d6c4c9ddcc7f8e2
+  checksum: ae292e6a41a8812c0206c528885969e2f6f35870397e6d5bc33477927fd09faffda196aefe2cfe49e0c57f1448129b522f845bb134f3b6a131b184e3be86cf92
   languageName: node
   linkType: hard
 

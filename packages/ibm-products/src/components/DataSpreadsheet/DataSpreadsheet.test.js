@@ -351,47 +351,44 @@ describe(componentName, () => {
       />
     );
     const cellToEdit = ref?.current.querySelector(`#${blockClass}__cell--0--1`);
-    await act(() => {
-      click(cellToEdit);
-      keyboard('{ArrowRight}');
-    });
+    await act(() => click(cellToEdit));
+    await act(() => keyboard('{ArrowRight}'));
 
-    // TODO: Review - React 18 not working
-    // const activeCellElement = ref?.current.querySelector(
-    //   `.${blockClass}__active-cell--highlight`
-    // );
-    // const activeCellRowIndex = activeCellElement.getAttribute(
-    //   'data-active-row-index'
-    // );
-    // const activeCellColumnIndex = activeCellElement.getAttribute(
-    //   'data-active-column-index'
-    // );
-    // expect(parseInt(activeCellRowIndex)).toEqual(0);
-    // expect(parseInt(activeCellColumnIndex)).toEqual(2);
+    const activeCellElement = ref?.current.querySelector(
+      `.${blockClass}__active-cell--highlight`
+    );
+    const activeCellRowIndex = activeCellElement.getAttribute(
+      'data-active-row-index'
+    );
+    const activeCellColumnIndex = activeCellElement.getAttribute(
+      'data-active-column-index'
+    );
+    expect(parseInt(activeCellRowIndex)).toEqual(0);
+    expect(parseInt(activeCellColumnIndex)).toEqual(2);
+
     await act(() => keyboard('{ArrowUp}'));
-    // TODO: Review - React 18 not working
-    // expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
-    //   'header'
-    // );
-    // expect(
-    //   parseInt(activeCellElement.getAttribute('data-active-column-index'))
-    // ).toEqual(2);
+    expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
+      'header'
+    );
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(2);
+
     await act(() => keyboard('{ArrowDown}'));
-    // TODO: Review - React 18 not working
-    // expect(
-    //   parseInt(activeCellElement.getAttribute('data-active-row-index'))
-    // ).toEqual(0);
-    // expect(
-    //   parseInt(activeCellElement.getAttribute('data-active-column-index'))
-    // ).toEqual(2);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(0);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(2);
+
     await act(() => keyboard('{ArrowDown}'));
-    // TODO: Review - React 18 not working
-    // expect(
-    //   parseInt(activeCellElement.getAttribute('data-active-row-index'))
-    // ).toEqual(1);
-    // expect(
-    //   parseInt(activeCellElement.getAttribute('data-active-column-index'))
-    // ).toEqual(2);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(1);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(2);
   });
 
   it('should empty the contents of a cell with the delete key', async () => {
@@ -411,12 +408,11 @@ describe(componentName, () => {
     expect(activeCellChangeFn).toHaveBeenCalled();
     await act(() => keyboard('{Backspace}'));
     expect(activeCellElement.textContent).toEqual('');
-    await act(() => {
-      keyboard('{ArrowRight}');
-      keyboard('{Delete}');
-    });
-    // TODO: Review - React 18 not working
-    // expect(activeCellElement.textContent).toEqual('');
+
+    await act(() => keyboard('{ArrowRight}'));
+    await act(() => keyboard('{Delete}'));
+
+    expect(activeCellElement.textContent).toEqual('');
 
     // Home button should move active cell to first column in the current row
     await act(() => keyboard('{Home}'));
@@ -447,12 +443,10 @@ describe(componentName, () => {
         onSelectionAreaChange={onSelectionAreaChangeFn}
       />
     );
-    await act(() => {
-      container.firstChild.focus();
-      tab();
-    });
-    // TODO: Review - React 18 not working
-    // expect(ref.current).not.toHaveClass(`${blockClass}__container-has-focus`);
+
+    await act(() => container.firstChild.focus());
+    await act(() => tab());
+    expect(ref.current).not.toHaveClass(`${blockClass}__container-has-focus`);
   });
 
   it('should navigate the active cell inside cell headers as expected', async () => {

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.6.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.6.0...@carbon/ibm-products@2.6.1) (2023-08-15)
+
+
+### Bug Fixes
+
+* **Datagrid:** add support for other extensions with customizable columns (v2) ([#3344](https://github.com/carbon-design-system/ibm-products/issues/3344)) ([09aa0d1](https://github.com/carbon-design-system/ibm-products/commit/09aa0d13e85b158c37628df1f8a86ab27e51b567))
+
+
+
+
+
 # [2.6.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.5.0...@carbon/ibm-products@2.6.0) (2023-08-08)
 
 

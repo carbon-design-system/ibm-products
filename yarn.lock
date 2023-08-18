@@ -1667,7 +1667,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/grid@npm:^11.16.1, @carbon/grid@npm:^11.18.0":
+"@carbon/grid@npm:^11.18.0":
   version: 11.18.0
   resolution: "@carbon/grid@npm:11.18.0"
   dependencies:
@@ -1702,13 +1702,13 @@ __metadata:
   resolution: "@carbon/ibm-cloud-cognitive-core@workspace:packages/core"
   dependencies:
     "@babel/core": ^7.22.10
-    "@carbon/grid": ^11.16.1
-    "@carbon/layout": ^11.16.1
-    "@carbon/motion": ^11.13.1
-    "@carbon/react": ^1.33.2
+    "@carbon/grid": ^11.18.0
+    "@carbon/layout": ^11.18.0
+    "@carbon/motion": ^11.15.0
+    "@carbon/react": ^1.35.0
     "@carbon/storybook-addon-theme": ^2.0.3
-    "@carbon/themes": ^11.21.1
-    "@carbon/type": ^11.20.1
+    "@carbon/themes": ^11.23.0
+    "@carbon/type": ^11.22.0
     "@storybook/addon-actions": ^7.2.3
     "@storybook/addon-controls": ^7.2.3
     "@storybook/addon-docs": ^7.2.3
@@ -1778,12 +1778,12 @@ __metadata:
     sass: 1.65.1
     yargs: ^17.7.2
   peerDependencies:
-    "@carbon/grid": ^11.16.1
-    "@carbon/layout": ^11.16.1
-    "@carbon/motion": ^11.13.1
-    "@carbon/react": ^1.33.2
-    "@carbon/themes": ^11.21.1
-    "@carbon/type": ^11.20.1
+    "@carbon/grid": ^11.18.0
+    "@carbon/layout": ^11.18.0
+    "@carbon/motion": ^11.15.0
+    "@carbon/react": ^1.35.0
+    "@carbon/themes": ^11.23.0
+    "@carbon/type": ^11.22.0
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
   languageName: unknown
@@ -1809,21 +1809,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/layout@npm:^11.16.1, @carbon/layout@npm:^11.18.0":
+"@carbon/layout@npm:^11.18.0":
   version: 11.18.0
   resolution: "@carbon/layout@npm:11.18.0"
   checksum: 8673ba64a8464fd99551ba53e43f719d33e79fcdb8e2bb2fe95069edf9b597c52ef56cbeb5e10849b8b93081bcaaa08023cb41f21c0583b62321299389558eb6
   languageName: node
   linkType: hard
 
-"@carbon/motion@npm:^11.13.1, @carbon/motion@npm:^11.15.0":
+"@carbon/motion@npm:^11.15.0":
   version: 11.15.0
   resolution: "@carbon/motion@npm:11.15.0"
   checksum: 985a559324fb4cb6b1df50ead3d9c1ceefec338f075f5cca4a9d937888cb6b357207a20493807eed47627e41529de215e4b51e0e217eee12970c1b8da2ce1b90
   languageName: node
   linkType: hard
 
-"@carbon/react@npm:^1.33.2":
+"@carbon/react@npm:^1.35.0":
   version: 1.35.0
   resolution: "@carbon/react@npm:1.35.0"
   dependencies:
@@ -1911,7 +1911,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes@npm:^11.21.1, @carbon/themes@npm:^11.23.0":
+"@carbon/themes@npm:^11.23.0":
   version: 11.23.0
   resolution: "@carbon/themes@npm:11.23.0"
   dependencies:
@@ -1923,7 +1923,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/type@npm:^11.20.1, @carbon/type@npm:^11.22.0":
+"@carbon/type@npm:^11.22.0":
   version: 11.22.0
   resolution: "@carbon/type@npm:11.22.0"
   dependencies:

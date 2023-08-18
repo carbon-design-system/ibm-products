@@ -25,7 +25,7 @@ import { CLEAR_FILTERS } from './addons/Filtering/constants';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-export const DatagridContent = ({ datagridState }) => {
+export const DatagridContent = ({ datagridState, title }) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
   const { filterTags, EventEmitter, panelOpen } = useContext(FilterContext);
   const { activeCellId, gridActive, editId } = inlineEditState;
@@ -103,6 +103,7 @@ export const DatagridContent = ({ datagridState }) => {
             ? () => handleGridFocus(inlineEditState, dispatch)
             : null
         }
+        title={title}
       >
         {!withVirtualScroll ? <DatagridHead {...datagridState} /> : null}
         <DatagridBody {...datagridState} rows={rows} />
@@ -240,4 +241,5 @@ DatagridContent.propTypes = {
     getFilterProps: PropTypes.func,
     state: PropTypes.object,
   }),
+  title: PropTypes.string,
 };

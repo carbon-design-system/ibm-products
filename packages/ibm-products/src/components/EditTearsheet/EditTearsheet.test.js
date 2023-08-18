@@ -7,12 +7,17 @@
  */
 
 import React from 'react';
-import { render, screen /*, act */ } from '@testing-library/react';
-// import userEvent from '@testing-library/user-event';
+import { render, screen, act } from '@testing-library/react';
 import { carbon, pkg } from '../../settings';
 import { EditTearsheet } from './EditTearsheet';
 import { EditTearsheetForm } from './EditTearsheetForm';
 import uuidv4 from '../../global/js/utils/uuidv4';
+
+import userEvent from '@testing-library/user-event';
+const { click } = userEvent.setup({
+  // delay: null, // prev version
+  advanceTimers: jest.advanceTimersByTime,
+});
 
 const { prefix } = pkg;
 
@@ -166,11 +171,9 @@ describe(componentName, () => {
     );
     const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
     expect(editTearsheet).toHaveClass('is-visible');
-    // React 18 this click times out
-    // const closeButton =
-    screen.getByTitle('Close');
-    // await act(() => userEvent.click(closeButton));
-    // expect(editTearsheet).not.toHaveClass('is-visible');
+    const closeButton = screen.getByTitle('Close');
+    await act(() => click(closeButton));
+    expect(editTearsheet).not.toHaveClass('is-visible');
   });
 
   it('applies className to the root node', async () => {

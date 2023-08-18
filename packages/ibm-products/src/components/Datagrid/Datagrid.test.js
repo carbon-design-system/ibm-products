@@ -52,12 +52,11 @@ import { carbon } from '../../settings';
 
 import namor from 'namor';
 
-import userEventLib from '@testing-library/user-event';
-// const user = userEvent.setup({ delay: null });
-const userEvent = userEventLib.setup({
+import userEvent from '@testing-library/user-event';
+const { click, hover, unhover } = userEvent.setup({
+  // delay: null, // prev version
   advanceTimers: jest.advanceTimersByTime,
 });
-const { click, hover, unhover } = userEvent;
 
 const dataTestId = uuidv4();
 

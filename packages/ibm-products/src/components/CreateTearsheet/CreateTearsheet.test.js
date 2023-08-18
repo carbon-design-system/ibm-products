@@ -8,7 +8,6 @@
 
 import React from 'react';
 import { render, screen, waitFor, act } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import {
   expectWarn,
   expectWarnAsync,
@@ -18,6 +17,12 @@ import { pkg, carbon } from '../../settings';
 import { CreateTearsheet } from './CreateTearsheet';
 import { CreateTearsheetStep } from './CreateTearsheetStep';
 import uuidv4 from '../../global/js/utils/uuidv4';
+
+import userEvent from '@testing-library/user-event';
+const { click } = userEvent.setup({
+  // delay: null, // prev version
+  advanceTimers: jest.advanceTimersByTime,
+});
 
 const { prefix } = pkg;
 
@@ -242,9 +247,7 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  // React 18 this times out on the click
-  it.skip('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
-    const { click } = userEvent;
+  it('renders the second step if clicking on the next step button with onNext optional function prop and then clicks cancel button', async () => {
     const { container } = renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const cancelButtonElement = screen.getByText(cancelButtonText);
@@ -263,12 +266,10 @@ describe(CreateTearsheet.displayName, () => {
     expect(onCloseFn).toHaveBeenCalled();
   });
 
-  // React 18 this times out on the click
-  it.skip('renders first step with onNext function prop that rejects', async () =>
+  it('renders first step with onNext function prop that rejects', async () =>
     expectWarnAsync(
       `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
       async () => {
-        const { click } = userEvent;
         renderCreateTearsheet({
           ...defaultProps,
           rejectOnSubmit: false,
@@ -282,7 +283,6 @@ describe(CreateTearsheet.displayName, () => {
     ));
 
   it('calls the onPrevious function prop as expected', async () => {
-    const { click } = userEvent;
     const { container } = renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     const backButtonElement = screen.getByText(backButtonText);
@@ -300,8 +300,7 @@ describe(CreateTearsheet.displayName, () => {
     await waitFor(() => expect(onPreviousStepFn).toHaveBeenCalledTimes(1));
   });
 
-  it.skip('renders the next CreateTearsheet step without onNext handler', async () => {
-    const { click } = userEvent;
+  it('renders the next CreateTearsheet step without onNext handler', async () => {
     const { container, rerender } = renderCreateTearsheet(defaultProps);
     const nextButtonElement = screen.getByText(nextButtonText);
     await act(() => click(nextButtonElement));
@@ -333,9 +332,7 @@ describe(CreateTearsheet.displayName, () => {
     );
   });
 
-  // React 18 this times out on the click
-  it.skip('should call the onRequestSubmit prop, returning a promise on last step submit button', async () => {
-    const { click } = userEvent;
+  it('should call the onRequestSubmit prop, returning a promise on last step submit button', async () => {
     renderCreateTearsheet({
       ...defaultProps,
       rejectOnSubmit: false,
@@ -361,9 +358,7 @@ describe(CreateTearsheet.displayName, () => {
     });
   });
 
-  // React 18 this times out on the click
-  it.skip('should call the onRequestSubmit function, without a promise, on last step submit button', async () => {
-    const { click } = userEvent;
+  it('should call the onRequestSubmit function, without a promise, on last step submit button', async () => {
     renderCreateTearsheet({
       ...defaultProps,
       rejectOnSubmit: false,
@@ -388,12 +383,10 @@ describe(CreateTearsheet.displayName, () => {
     });
   });
 
-  // React 18 this times out on the click
-  it.skip('should call the onNext function from the final step and reject the promise', async () =>
+  it('should call the onNext function from the final step and reject the promise', async () =>
     expectWarnAsync(
       `CreateTearsheet onNext error: ${rejectionErrorMessage}`,
       async () => {
-        const { click } = userEvent;
         renderCreateTearsheet({
           ...defaultProps,
           rejectOnSubmit: false,
@@ -420,12 +413,10 @@ describe(CreateTearsheet.displayName, () => {
       }
     ));
 
-  // React 18 this times out on the click
-  it.skip('should call the onRequestSubmit prop and reject the promise', async () =>
+  it('should call the onRequestSubmit prop and reject the promise', async () =>
     expectWarnAsync(
       `CreateTearsheet submit error: ${rejectionErrorMessage}`,
       async () => {
-        const { click } = userEvent;
         renderCreateTearsheet({
           ...defaultProps,
           rejectOnSubmit: true,
@@ -455,9 +446,7 @@ describe(CreateTearsheet.displayName, () => {
     expect(Array(...createTearsheetSteps)).toStrictEqual([]);
   });
 
-  // React 18 this times out on the click
-  it.skip('should click the back button and add a custom next button label on a single step', async () => {
-    const { click } = userEvent;
+  it('should click the back button and add a custom next button label on a single step', async () => {
     const { container } = renderCreateTearsheet({
       ...defaultProps,
       rejectOnSubmit: false,
@@ -467,7 +456,8 @@ describe(CreateTearsheet.displayName, () => {
     await act(() => click(nextButtonElement));
     expect(onNextStepFn).toHaveBeenCalledTimes(1);
     const backButtonElement = screen.getByText(backButtonText);
-    await act(() => click(backButtonElement)).toHaveBeenCalledTimes(1);
+    await act(() => click(backButtonElement));
+    expect(onPreviousStepFn).toHaveBeenCalledTimes(1);
     const tearsheetChildren = container.querySelector(
       `.${createTearsheetBlockClass}__content`
     ).children;
@@ -484,13 +474,11 @@ describe(CreateTearsheet.displayName, () => {
     jest.spyOn(console, 'warn').mockRestore();
   });
 
-  // React 18 - no errors called
   it('should create a console warning when using CreateTearsheet with only one step', async () =>
     expectWarn('CreateTearsheets with one step are not permitted', () => {
       renderSingleStepCreateTearsheet(defaultProps);
     }));
 
-  // React 18 - no errors called
   it('should render an invalid create tearsheet', async () =>
     expectMultipleWarn(
       [

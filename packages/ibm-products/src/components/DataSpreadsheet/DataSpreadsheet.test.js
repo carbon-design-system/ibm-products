@@ -14,6 +14,10 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { DataSpreadsheet } from '.';
 import { generateData } from './utils/generateData';
+const { click, dblClick, keyboard, tab } = userEvent.setup({
+  // delay: null, // prev version
+  advanceTimers: jest.advanceTimersByTime,
+});
 
 // cspell:words rowcount colcount
 
@@ -60,6 +64,7 @@ const defaultProps = {
 
 describe(componentName, () => {
   beforeEach(() => {
+    jest.useFakeTimers();
     jest.clearAllMocks();
   });
   it('renders a component DataSpreadsheet', async () => {
@@ -94,7 +99,6 @@ describe(componentName, () => {
   it('should call the onActiveCellChange event handler and check that the active cell element has the correct data row and data column attributes', async () => {
     const ref = React.createRef();
     const activeCellChangeFn = jest.fn();
-    const { click } = userEvent;
     render(
       <DataSpreadsheet
         {...defaultProps}
@@ -123,7 +127,6 @@ describe(componentName, () => {
 
   it('should select an entire row, adding a selection area', async () => {
     const ref = React.createRef();
-    const { click } = userEvent;
     const activeCellChangeFn = jest.fn();
     render(
       <DataSpreadsheet
@@ -144,7 +147,6 @@ describe(componentName, () => {
 
   it('should select an entire column, adding a selection area, and reorder columns', async () => {
     const ref = React.createRef();
-    const { click } = userEvent;
     const { mouseMove, mouseDown, mouseUp } = fireEvent;
     const activeCellChangeFn = jest.fn();
     const onSelectionAreaChangeFn = jest.fn();
@@ -191,7 +193,6 @@ describe(componentName, () => {
 
   it('should select all cells when clicking on select all cell button', async () => {
     const ref = React.createRef();
-    const { click } = userEvent;
     const activeCellChangeFn = jest.fn();
     const onSelectionAreaChangeFn = jest.fn();
     render(
@@ -262,7 +263,6 @@ describe(componentName, () => {
 
   it('should edit the cell contents, submit the change, and confirm the new value exists', async () => {
     const newCellValue = "I'm the new cell value";
-    const { click, keyboard, tab, type } = userEvent;
     const ref = React.createRef();
     render(
       <EditableSpreadsheet
@@ -279,20 +279,18 @@ describe(componentName, () => {
     expect(activeCellChangeFn).toHaveBeenCalled();
     await act(() => keyboard('{Enter}'));
     await act(() => cellEditor.setSelectionRange(0, cellEditor.value.length));
-    await act(() => type(cellEditor, newCellValue));
+    await act(() => keyboard(newCellValue));
     await act(() => tab());
     await act(() => keyboard('{ArrowLeft}'));
 
-    // TODO: Review - React 18 not working
-    // const activeCellElement = ref?.current.querySelector(
-    //   `.${blockClass}__active-cell--highlight`
-    // );
-    // expect(activeCellElement.textContent).toEqual(newCellValue);
+    const activeCellElement = ref?.current.querySelector(
+      `.${blockClass}__active-cell--highlight`
+    );
+    expect(activeCellElement.textContent).toEqual(newCellValue);
   });
 
   it('should save value after clicking on another cell while in edit mode', async () => {
     const newCellValue = "I'm the new cell value";
-    const { click, keyboard, type } = userEvent;
     const ref = React.createRef();
     render(
       <EditableSpreadsheet
@@ -309,20 +307,18 @@ describe(componentName, () => {
     expect(activeCellChangeFn).toHaveBeenCalled();
     await act(() => keyboard('{Enter}'));
     cellEditor.setSelectionRange(0, cellEditor.value.length);
-    await act(() => type(cellEditor, newCellValue));
+    await act(() => keyboard(newCellValue));
     const nextCell = ref?.current.querySelector(`#${blockClass}__cell--0--3`);
     await act(() => click(nextCell));
 
-    // TODO: Review - React 18 not working
-    // const updatedCell = ref?.current.querySelector(
-    //   `#${blockClass}__cell--0--1`
-    // );
-    // expect(updatedCell.textContent).toEqual(newCellValue);
+    const updatedCell = ref?.current.querySelector(
+      `#${blockClass}__cell--0--1`
+    );
+    expect(updatedCell.textContent).toEqual(newCellValue);
   });
 
   it('should set initial placement of active cell on the select all button', async () => {
     const ref = React.createRef();
-    const { keyboard } = userEvent;
     const { container } = render(
       <DataSpreadsheet
         {...defaultProps}
@@ -331,25 +327,21 @@ describe(componentName, () => {
         onSelectionAreaChange={onSelectionAreaChangeFn}
       />
     );
-    await act(() => {
-      container.firstChild.focus();
-      keyboard('{ArrowDown}');
-    });
+    await act(() => container.firstChild.focus());
+    await act(() => keyboard('{ArrowDown}'));
 
-    // TODO: Review - React 18 not working
-    // const activeCellElement = ref?.current.querySelector(
-    //   `.${blockClass}__active-cell--highlight`
-    // );
-    // expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
-    //   'header'
-    // );
-    // expect(activeCellElement.getAttribute('data-active-column-index')).toEqual(
-    //   'header'
-    // );
+    const activeCellElement = ref?.current.querySelector(
+      `.${blockClass}__active-cell--highlight`
+    );
+    expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
+      'header'
+    );
+    expect(activeCellElement.getAttribute('data-active-column-index')).toEqual(
+      'header'
+    );
   });
 
   it('should move the active cell with arrow keys as expected', async () => {
-    const { click, keyboard } = userEvent;
     const ref = React.createRef();
     render(
       <EditableSpreadsheet
@@ -403,7 +395,6 @@ describe(componentName, () => {
   });
 
   it('should empty the contents of a cell with the delete key', async () => {
-    const { click, keyboard } = userEvent;
     const ref = React.createRef();
     render(
       <EditableSpreadsheet
@@ -448,7 +439,6 @@ describe(componentName, () => {
 
   it('should remove spreadsheet focus using tab key', async () => {
     const ref = React.createRef();
-    const { tab } = userEvent;
     const { container } = render(
       <DataSpreadsheet
         {...defaultProps}
@@ -467,7 +457,6 @@ describe(componentName, () => {
 
   it('should navigate the active cell inside cell headers as expected', async () => {
     const ref = React.createRef();
-    const { keyboard } = userEvent;
     const { container } = render(
       <DataSpreadsheet
         {...defaultProps}
@@ -481,93 +470,79 @@ describe(componentName, () => {
       keyboard('{ArrowDown}');
     });
 
-    // TODO: Review - React 18 not working
-    // const activeCellElement = ref?.current.querySelector(
-    //   `.${blockClass}__active-cell--highlight`
-    // );
-    // expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
-    //   'header'
-    // );
-    // expect(activeCellElement.getAttribute('data-active-column-index')).toEqual(
-    //   'header'
-    // );
+    const activeCellElement = ref?.current.querySelector(
+      `.${blockClass}__active-cell--highlight`
+    );
+    expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
+      'header'
+    );
+    expect(activeCellElement.getAttribute('data-active-column-index')).toEqual(
+      'header'
+    );
 
     await act(() => keyboard('{ArrowRight}'));
-    // TODO: Review - React 18 not working
-    // expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
-    //   'header'
-    // );
-    // expect(
-    //   parseInt(activeCellElement.getAttribute('data-active-column-index'))
-    // ).toEqual(0);
+    expect(activeCellElement.getAttribute('data-active-row-index')).toEqual(
+      'header'
+    );
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(0);
 
     await act(() => keyboard('{ArrowUp}'));
-    // TODO: Review - React 18 not working
+    await act(() => keyboard('{ArrowDown}'));
+    await act(() => keyboard('{ArrowLeft}'));
 
-    await act(() => {
-      keyboard('{ArrowDown}');
-      keyboard('{ArrowLeft}');
-    });
-    // TODO: Review - React 18 not working
-    // expect(
-    //   parseInt(activeCellElement.getAttribute('data-active-row-index'))
-    // ).toEqual(0);
-    // expect(activeCellElement.getAttribute('data-active-column-index')).toEqual(
-    //   'header'
-    // );
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(0);
+    expect(activeCellElement.getAttribute('data-active-column-index')).toEqual(
+      'header'
+    );
 
     await act(() => keyboard('{ArrowLeft}'));
-    // TODO: Review - React 18 not working
-    // expect(
-    //   parseInt(activeCellElement.getAttribute('data-active-row-index'))
-    // ).toEqual(0);
-    // expect(activeCellElement.getAttribute('data-active-column-index')).toEqual(
-    //   'header'
-    // );
-    await act(() => {
-      keyboard('{ArrowRight}');
-      keyboard('{ArrowDown}');
-      keyboard('{ArrowDown}');
-      keyboard('{ArrowUp}');
-    });
-    // TODO: Review - React 18 not working
-    // expect(
-    //   parseInt(activeCellElement.getAttribute('data-active-row-index'))
-    // ).toEqual(1);
-    // expect(
-    //   parseInt(activeCellElement.getAttribute('data-active-column-index'))
-    // ).toEqual(0);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(0);
+    expect(activeCellElement.getAttribute('data-active-column-index')).toEqual(
+      'header'
+    );
+    await act(() => keyboard('{ArrowRight}'));
+    await act(() => keyboard('{ArrowDown}'));
+    await act(() => keyboard('{ArrowDown}'));
+    await act(() => keyboard('{ArrowUp}'));
 
-    await act(() => {
-      keyboard('{ArrowRight}');
-      keyboard('{ArrowRight}');
-      keyboard('{ArrowRight}');
-      keyboard('{ArrowRight}');
-      keyboard('{ArrowRight}');
-    });
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(1);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(0);
 
-    // TODO: Review - React 18 not working
-    // expect(
-    //   parseInt(activeCellElement.getAttribute('data-active-row-index'))
-    // ).toEqual(1);
-    // expect(
-    //   parseInt(activeCellElement.getAttribute('data-active-column-index'))
-    // ).toEqual(5);
+    await act(() => keyboard('{ArrowRight}'));
+    await act(() => keyboard('{ArrowRight}'));
+    await act(() => keyboard('{ArrowRight}'));
+    await act(() => keyboard('{ArrowRight}'));
+    await act(() => keyboard('{ArrowRight}'));
+
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(1);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(5);
 
     // If active cell is positioned in the last column, it shouldn't change position again if right arrow key is pressed
     await act(() => keyboard('{ArrowRight}'));
-    // TODO: Review - React 18 not working
-    // expect(
-    //   parseInt(activeCellElement.getAttribute('data-active-row-index'))
-    // ).toEqual(1);
-    // expect(
-    //   parseInt(activeCellElement.getAttribute('data-active-column-index'))
-    // ).toEqual(5);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-row-index'))
+    ).toEqual(1);
+    expect(
+      parseInt(activeCellElement.getAttribute('data-active-column-index'))
+    ).toEqual(5);
   });
 
   it('should go into edit mode with double click on a cell', async () => {
     const ref = React.createRef();
-    const { keyboard, dblClick } = userEvent;
     const { container } = render(
       <DataSpreadsheet
         {...defaultProps}
@@ -578,18 +553,17 @@ describe(componentName, () => {
     const activeCellElement = ref?.current.querySelector(
       `.${blockClass}__active-cell--highlight`
     );
-    await act(() => {
-      container.firstChild.focus();
-      keyboard('{ArrowDown}');
-      keyboard('{ArrowDown}');
-      keyboard('{ArrowRight}');
-      dblClick(activeCellElement);
-    });
-    // TODO: Review - React 18 not working
-    // const cellEditor = ref?.current.querySelector(
-    //   `#${blockClass}__cell-editor-text-area`
-    // );
-    // expect(cellEditor).toHaveClass(`${blockClass}__cell-editor--active`);
+
+    await act(() => container.firstChild.focus());
+    await act(() => keyboard('{ArrowDown}'));
+    await act(() => keyboard('{ArrowDown}'));
+    await act(() => keyboard('{ArrowRight}'));
+    await act(() => dblClick(activeCellElement));
+
+    const cellEditor = ref?.current.querySelector(
+      `#${blockClass}__cell-editor-text-area`
+    );
+    expect(cellEditor).toHaveClass(`${blockClass}__cell-editor--active`);
   });
 
   it('should use default values for columns and data if none are provided', async () => {
@@ -608,7 +582,6 @@ describe(componentName, () => {
 
   it('should do nothing on meta key usage and prevent default tab key behavior during edit', async () => {
     const ref = React.createRef();
-    const { keyboard, dblClick } = userEvent;
     render(
       <EditableSpreadsheet
         ref={ref}
@@ -619,16 +592,16 @@ describe(componentName, () => {
     const activeCellElement = ref?.current.querySelector(
       `.${blockClass}__active-cell--highlight`
     );
-    await act(() => {
-      ref?.current.focus();
-      keyboard('{ArrowDown}');
-      keyboard('{ArrowDown}');
-      keyboard('{ArrowRight}');
-      keyboard('{Meta}');
-      // Tab key during editing should do nothing
-      dblClick(activeCellElement);
-      keyboard('{Tab}');
-    });
+
+    await act(() => ref?.current.focus());
+    await act(() => keyboard('{ArrowDown}'));
+    await act(() => keyboard('{ArrowDown}'));
+    await act(() => keyboard('{ArrowRight}'));
+    await act(() => keyboard('{Meta}'));
+    // Tab key during editing should do nothing
+    await act(() => dblClick(activeCellElement));
+    await act(() => keyboard('{Tab}'));
+
     expect(ref.current).toHaveClass(`${blockClass}__container-has-focus`);
   });
 });

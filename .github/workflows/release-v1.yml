@@ -44,6 +44,16 @@ jobs:
           yarn lerna publish --dist-tag v1-latest --conventional-commits
           --create-release github --yes
 
+      - name: Correct security dist-tag
+        run:
+          bash .github/scripts/release-disttag-update.sh packages/security
+          @carbon/ibm-security
+
+      - name: Correct CDAI dist-tag
+        run:
+          bash .github/scripts/release-disttag-update.sh packages/cdai
+          @carbon/ibm-cloud-cognitive-cdai
+
       - name: Rename to ibm-cloud-cognitive for legacy publish
         run:
           yarn json -I -f packages/ibm-products/package.json -e
@@ -64,7 +74,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN_LERNA }}
           NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
-        run:
-          yarn lerna publish from-package --dist-tag v1-latest
-          --yes
-
+        run: yarn lerna publish from-package --dist-tag v1-latest --yes

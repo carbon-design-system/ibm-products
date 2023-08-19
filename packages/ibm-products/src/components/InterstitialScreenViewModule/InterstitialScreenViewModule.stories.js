@@ -23,9 +23,19 @@ export default {
   title: getStoryTitle(InterstitialScreenViewModule.displayName),
   component: InterstitialScreenViewModule,
   // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
+  argTypes: {
+    //   egProp: { control: 'color' },
+    //
+    title: {
+      control: { type: 'text' },
+    },
+    description: {
+      control: { type: 'text' },
+    },
+    className: {
+      control: { type: 'text' },
+    },
+  },
   parameters: {
     styles,
     docs: {
@@ -54,6 +64,8 @@ const Template = (args) => {
 export const interstitialScreenViewModule = prepareStory(Template, {
   args: {
     // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#InterstitialScreenViewModule-args
-    children: 'hello, world',
+    className: 'MyInterstitialScreenViewModule',
+    title: 'Example title',
+    description: 'This is an example of a description',
   },
 });

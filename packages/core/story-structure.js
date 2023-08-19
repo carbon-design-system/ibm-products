@@ -152,7 +152,11 @@ const s = [
           'c/NonLinearReading',
           {
             n: 'Interstitial Screen',
-            s: ['c/InterstitialScreen', 'c/InterstitialScreenView'],
+            s: [
+              'c/InterstitialScreen',
+              'c/InterstitialScreenView',
+              'c/InterstitialScreenViewModule',
+            ],
           },
         ],
       },

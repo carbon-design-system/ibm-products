@@ -52,9 +52,12 @@ const componentName = 'InterstitialScreen';
 // Default values for props
 const defaults = {
   closeIconDescription: 'Close',
+  domainName: '',
+  hideProgressIndicator: false,
   isFullScreen: false,
   isOpen: false,
   onClose: () => {},
+  productName: '',
   skipButtonLabel: '',
 };
 
@@ -67,14 +70,15 @@ export let InterstitialScreen = React.forwardRef(
       children,
       className,
       closeIconDescription = defaults.closeIconDescription,
-      domainName,
+      domainName = defaults.domainName,
+      hideProgressIndicator = defaults.hideProgressIndicator,
       isFullScreen = defaults.isFullScreen,
       isOpen = defaults.isOpen,
       media,
       nextButtonLabel,
       onClose = defaults.onClose,
       previousButtonLabel,
-      productName,
+      productName = defaults.productName,
       startButtonLabel,
       skipButtonLabel = defaults.skipButtonLabel,
 
@@ -139,7 +143,8 @@ export let InterstitialScreen = React.forwardRef(
     if (!isOpen) {
       return null;
     }
-
+    const domainProductDelimeter =
+      domainName !== '' && productName !== '' ? ' | ' : '';
     return (
       <div
         {
@@ -159,7 +164,9 @@ export let InterstitialScreen = React.forwardRef(
         <div className={containerClass}>
           {isFullScreen ? (
             <div className={`${blockClass}--header`}>
-              {domainName} | <b>{productName}</b>
+              {domainName}
+              {domainProductDelimeter}
+              <b>{productName}</b>
             </div>
           ) : (
             <div className={`${blockClass}--header`}>
@@ -181,22 +188,25 @@ export let InterstitialScreen = React.forwardRef(
                   <div className={cx(`${blockClass}--content`)}>
                     {isMultiStep ? (
                       <>
-                        <div className={`${blockClass}--progress`}>
-                          <ProgressIndicator
-                            vertical={false}
-                            currentIndex={progStep}
-                            spaceEqually={true}
-                          >
-                            {childArray.map((child, idx) => {
-                              return (
-                                <ProgressStep
-                                  key={idx}
-                                  label={child.props.stepTitle}
-                                />
-                              );
-                            })}
-                          </ProgressIndicator>
-                        </div>
+                        {!hideProgressIndicator && (
+                          <div className={`${blockClass}--progress`}>
+                            <ProgressIndicator
+                              vertical={false}
+                              currentIndex={progStep}
+                              spaceEqually={true}
+                            >
+                              {childArray.map((child, idx) => {
+                                return (
+                                  <ProgressStep
+                                    key={idx}
+                                    label={child.props.stepTitle}
+                                  />
+                                );
+                              })}
+                            </ProgressIndicator>
+                          </div>
+                        )}
+
                         <div className={`${blockClass}__carousel`}>
                           <Carousel disableArrowScroll ref={scrollRef}>
                             {children}
@@ -213,7 +223,7 @@ export let InterstitialScreen = React.forwardRef(
                   lg={6}
                   md={0}
                   sm={0}
-                  className={`${blockClass}--auto-height-container`}
+                  className={cx(`${blockClass}--media-container`)}
                 >
                   <div className={`${blockClass}--media`}>
                     {media.render ? (
@@ -332,7 +342,11 @@ InterstitialScreen.propTypes = {
   /**
    * The domain this app belongs to, e.g. "IBM Cloud Pak".
    */
-  domainName: PropTypes.string.isRequired,
+  domainName: PropTypes.string,
+  /**
+   * Optional parameter to hide the progress indicator when multiple steps are used.
+   */
+  hideProgressIndicator: PropTypes.bool,
   /**
    * Specifies whether the component is shown as a full-screen
    * experience, else it is shown as a modal by default.
@@ -374,7 +388,7 @@ InterstitialScreen.propTypes = {
   /**
    * The name of this app, e.g. "QRadar".
    */
-  productName: PropTypes.string.isRequired,
+  productName: PropTypes.string,
   /**
    * The label for the skip button.
    */

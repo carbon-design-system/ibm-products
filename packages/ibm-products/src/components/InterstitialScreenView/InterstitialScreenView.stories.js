@@ -23,9 +23,9 @@ export default {
   title: getStoryTitle(InterstitialScreenView.displayName),
   component: InterstitialScreenView,
   // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
+  argTypes: {
+    children: { control: { disable: true } },
+  },
   parameters: {
     styles,
     docs: {
@@ -43,7 +43,9 @@ const Template = (args) => {
       // TODO: handle events with action or local handler.
       // onTodo={action('onTodo log action')}
       {...args}
-    />
+    >
+      <div>Hello world</div>
+    </InterstitialScreenView>
   );
 };
 
@@ -53,7 +55,6 @@ const Template = (args) => {
  */
 export const interstitialScreenView = prepareStory(Template, {
   args: {
-    title: 'Use case-specific heading',
-    description: 'Use case-specific content that explains the concept.',
+    stepTitle: 'Step 1',
   },
 });

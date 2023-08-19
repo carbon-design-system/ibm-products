@@ -29,9 +29,10 @@ export default {
   title: getStoryTitle(InterstitialScreen.displayName),
   component: InterstitialScreen,
   // TODO: Define argTypes for props not represented by standard JS types.
-  // argTypes: {
-  //   egProp: { control: 'color' },
-  // },
+  argTypes: {
+    media: { control: { disable: true } },
+    children: { control: { disable: true } },
+  },
   parameters: {
     styles,
     docs: {
@@ -65,7 +66,7 @@ const TemplateModal = (args) => {
         // onTodo={action('onTodo log action')}
         {...args}
       >
-        <InterstitialScreenView stepTitle="Use case-specific step title">
+        <InterstitialScreenView stepTitle="Step 1">
           <InterstitialScreenViewModule
             title="Use case-specific heading"
             description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
@@ -90,6 +91,7 @@ const TemplateModalMultipleChildren = (args) => {
       </Button>
 
       <InterstitialScreen
+        hideProgressIndicator
         isOpen={showInterstitialModal}
         onClose={() => {
           setShowInterstitialModal(false);
@@ -98,7 +100,7 @@ const TemplateModalMultipleChildren = (args) => {
         // onTodo={action('onTodo log action')}
         {...args}
       >
-        <InterstitialScreenView stepTitle="Use case-specific step title">
+        <InterstitialScreenView stepTitle="Step 1">
           <InterstitialScreenViewModule
             title="Use case-specific heading"
             description={
@@ -106,7 +108,7 @@ const TemplateModalMultipleChildren = (args) => {
             }
           />
         </InterstitialScreenView>
-        <InterstitialScreenView stepTitle="Use case-specific step title">
+        <InterstitialScreenView stepTitle="Step 2">
           <InterstitialScreenViewModule
             title="Use case-specific heading"
             description={
@@ -114,7 +116,7 @@ const TemplateModalMultipleChildren = (args) => {
             }
           />
         </InterstitialScreenView>
-        <InterstitialScreenView stepTitle="Use case-specific step title">
+        <InterstitialScreenView stepTitle="Step 3">
           <InterstitialScreenViewModule
             title="Use case-specific heading"
             description={
@@ -152,7 +154,7 @@ const TemplateFullScreenMultiples = (args) => {
         // onTodo={action('onTodo log action')}
         {...args}
       >
-        <InterstitialScreenView stepTitle="Use case-specific step title">
+        <InterstitialScreenView stepTitle="Step 1">
           <InterstitialScreenViewModule
             title="Use case-specific heading"
             description={
@@ -160,22 +162,18 @@ const TemplateFullScreenMultiples = (args) => {
             }
           />
         </InterstitialScreenView>
-        <InterstitialScreenView stepTitle="Use case-specific step title">
+        <InterstitialScreenView stepTitle="Step 2">
           <InterstitialScreenViewModule
             title="Use case-specific heading"
             description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
           />
         </InterstitialScreenView>
-        <InterstitialScreenView stepTitle="Use case-specific step title">
+        <InterstitialScreenView stepTitle="Step 3">
           <InterstitialScreenViewModule
             title="Use case-specific heading"
             description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
           />
         </InterstitialScreenView>
-        <div>
-          <h3>Hello</h3>
-          <p>Some text goes here...</p>
-        </div>
       </InterstitialScreen>
     </>
   );
@@ -206,13 +204,12 @@ const TemplateFullScreen = (args) => {
         // onTodo={action('onTodo log action')}
         {...args}
       >
-        <InterstitialScreenView
-          title="Use case-specific heading"
-          description={
-            'Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept.'
-          }
-          stepTitle="Use case-specific step title"
-        />
+        <InterstitialScreenView stepTitle="Step 1">
+          <InterstitialScreenViewModule
+            title="Use case-specific heading"
+            description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+          />
+        </InterstitialScreenView>
       </InterstitialScreen>
     </>
   );

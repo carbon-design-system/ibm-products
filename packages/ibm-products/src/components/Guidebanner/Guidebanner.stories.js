@@ -25,7 +25,7 @@ import mdx from './Guidebanner.mdx';
 
 import styles from './_storybook-styles.scss';
 
-const storyClass = 'non-linear-reading-stories';
+const storyClass = 'guidebanner-stories';
 
 export default {
   title: getStoryTitle(Guidebanner.displayName),

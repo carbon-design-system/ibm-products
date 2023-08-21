@@ -16853,6 +16853,7 @@ __metadata:
     json: ^11.0.0
     lerna: ^6.6.2
     lint-staged: ^13.1.2
+    lottie-web: ^5.12.0
     npm-check-updates: ^16.7.4
     npm-run-all: ^4.1.5
     npm-upgrade: ^3.1.0
@@ -19884,9 +19885,16 @@ __metadata:
   linkType: hard
 
 "lottie-web@npm:^5.11.0":
-  version: 5.11.0
-  resolution: "lottie-web@npm:5.11.0"
-  checksum: 4f9c86c7cf0280ccb4380b826213719122a227f50e27e5d6943dff2f05dfe4e569bd8a358a0cb9c96cbdf62f9d70b883b5cb5ec50ecb7a1eed794c5ce5a1e38a
+  version: 5.12.2
+  resolution: "lottie-web@npm:5.12.2"
+  checksum: af5bc3bc405fd760de8b17a36158d5a8c3e8c586c711d0c63681ddf056b65bc6b54ea36b1fcad782fb02dbe12e696a40e0ba72daf41b8f10ab5b5d1113793636
+  languageName: node
+  linkType: hard
+
+"lottie-web@npm:^5.12.0":
+  version: 5.12.0
+  resolution: "lottie-web@npm:5.12.0"
+  checksum: 77c35be880e484d1a766f21f789ede7c7be59e957579580a18c2dfec08c4812c03e1d652e453166c31fd80556446d6b857fb490d901e34154105532519bc5ef5
   languageName: node
   linkType: hard
 

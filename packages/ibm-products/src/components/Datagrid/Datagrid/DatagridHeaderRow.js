@@ -11,8 +11,20 @@ import cx from 'classnames';
 import { TableHeader, TableRow } from '@carbon/react';
 import { selectionColumnId } from '../common-column-ids';
 import { pkg } from '../../../settings';
+import getColTitle from '../utils/getColTitle';
 
 const blockClass = `${pkg.prefix}--datagrid`;
+
+const getAccessibilityProps = (header) => {
+  const props = {};
+  const title = getColTitle(header);
+  if (title) {
+    props.title = title;
+  } else {
+    props['aria-hidden'] = true;
+  }
+  return props;
+};
 
 const HeaderRow = (datagridState, headRef, headerGroup) => (
   <TableRow
@@ -44,6 +56,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => (
               header.getHeaderProps().className
             )}
             key={header.id}
+            {...getAccessibilityProps(header)}
           >
             {header.render('Header')}
             {header.getResizerProps && (

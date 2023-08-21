@@ -71,6 +71,9 @@
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
+      @media (prefers-reduced-motion) {
+        scroll-behavior: auto;
+      }
     }
   }
 }

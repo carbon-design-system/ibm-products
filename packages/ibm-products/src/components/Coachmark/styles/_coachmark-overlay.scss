@@ -1,0 +1,327 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable carbon/layout-token-use */
+/* stylelint-disable carbon/theme-token-use */
+/* stylelint-disable declaration-no-important */
+
+// Standard imports.
+@import '../../../global/styles/project-settings';
+@import '../../../global/styles/mixins';
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin coachmark-overlay {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--coachmark-overlay;
+  $carousel-class: #{$pkg-prefix}--carousel;
+
+  .#{$block-class} {
+    position: absolute;
+    z-index: 5901;
+    width: carbon--mini-units(36);
+    border-radius: $spacing-01;
+    background-color: $inverse-02;
+    color: $inverse-01;
+    $caret-height: calc(
+      $spacing-03 - $spacing-01
+    ); // from the "peak" of the pyramid to its "base"
+    $caret-center: $caret-height; // use "center" for left-right calculations, and "height" for top-bottom calculations
+    $distance-offset: $spacing-06; // see also ./utils/constants.js > distanceOffset
+
+    &--fixed {
+      position: fixed;
+      right: $spacing-05;
+      bottom: 0;
+      transform: translateY(100%);
+      /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
+      transition: 240ms carbon--motion(exit, productive);
+      @media (prefers-reduced-motion) {
+        transition: none;
+      }
+    }
+
+    &--is-visible {
+      transform: translateY(0);
+    }
+
+    // CARET STYLING
+    &__caret {
+      // background-color: this property is set in _coachmark-overlay-theme.scss
+      position: absolute;
+      z-index: 5902;
+      width: 0;
+      height: 0;
+      // border-bottom-color: this property is set in _coachmark-overlay-theme.scss
+      border-right: $caret-center solid transparent;
+      border-bottom: solid $caret-center $inverse-02;
+      border-left: $caret-center solid transparent;
+    }
+
+    // OVERLAY AND CARET POSITIONING
+    &--top {
+      $horizontal-push: calc($distance-offset - $caret-center);
+      $translate-y: calc(-1 * (100% + $distance-offset + $caret-height));
+
+      transform: translate(-50%, $translate-y);
+
+      .#{$block-class}__caret {
+        left: calc(50% - $caret-center);
+        transform: rotate(180deg);
+      }
+
+      &-left {
+        transform: translate(calc(-1 * $distance-offset), $translate-y);
+        .#{$block-class}__caret {
+          left: $horizontal-push;
+          transform: rotate(180deg);
+        }
+      }
+
+      &-right {
+        transform: translate(
+          calc(-1 * (100% - $distance-offset)),
+          $translate-y
+        );
+        .#{$block-class}__caret {
+          right: $horizontal-push;
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    &--bottom {
+      $horizontal-push: calc($distance-offset - $caret-center);
+      $top: calc(-1 * $caret-height);
+      $translate-y: calc($distance-offset + $caret-height);
+
+      transform: translate(-50%, $translate-y);
+      .#{$block-class}__caret {
+        top: $top;
+        left: calc(50% - $caret-center);
+      }
+
+      &-left {
+        transform: translate(calc(-1 * $distance-offset), $translate-y);
+        .#{$block-class}__caret {
+          top: $top;
+          left: $horizontal-push;
+        }
+      }
+
+      &-right {
+        transform: translate(
+          calc(-1 * (100% - $distance-offset)),
+          $translate-y
+        );
+
+        .#{$block-class}__caret {
+          top: $top;
+          right: $horizontal-push;
+        }
+      }
+    }
+
+    &--left {
+      $right: calc(-1 * $caret-center * 1.5);
+      $translate-x: calc(-1 * (100% + $distance-offset + $caret-center));
+      $vertical-push: calc($distance-offset - ($caret-height * 0.5));
+
+      transform: translate($translate-x, -50%);
+      .#{$block-class}__caret {
+        top: calc(50% - ($caret-height * 0.5));
+        right: $right;
+        transform: rotate(90deg);
+      }
+
+      &-top {
+        transform: translate($translate-x, calc(-1 * $distance-offset));
+        .#{$block-class}__caret {
+          top: $vertical-push;
+          right: $right;
+          transform: rotate(90deg);
+        }
+      }
+
+      &-bottom {
+        transform: translate(
+          $translate-x,
+          calc(-1 * (100% - $distance-offset))
+        );
+        .#{$block-class}__caret {
+          right: $right;
+          bottom: $vertical-push;
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    &--right {
+      $left: calc(-1 * $caret-center * 1.5);
+      $translate-x: calc($distance-offset + $caret-center);
+      $vertical-push: calc($distance-offset - ($caret-height * 0.5));
+
+      transform: translate($translate-x, -50%);
+      .#{$block-class}__caret {
+        top: calc(50% - ($caret-height * 0.5));
+        left: $left;
+        transform: rotate(-90deg);
+      }
+
+      &-top {
+        transform: translate($translate-x, calc(-1 * $distance-offset));
+        .#{$block-class}__caret {
+          top: $vertical-push;
+          left: $left;
+          transform: rotate(-90deg);
+        }
+      }
+
+      &-bottom {
+        transform: translate(
+          $translate-x,
+          calc(-1 * (100% - $distance-offset))
+        );
+        .#{$block-class}__caret {
+          bottom: $vertical-push;
+          left: $left;
+          transform: rotate(-90deg);
+        }
+      }
+    }
+
+    // ANIMATED MEDIA
+    &__element-stepped-media {
+      height: calc($spacing-07 + $spacing-12); // 32 + 96 = 128
+      margin-bottom: $spacing-05;
+    }
+
+    // BODY
+    &__body {
+      padding: $spacing-01 $spacing-05 $spacing-05;
+
+      .#{$carbon-prefix}--btn--ghost {
+        color: $inverse-link;
+
+        &:hover {
+          color: $inverse-link;
+        }
+      }
+
+      // CAROUSEL ELEMENTS
+      #{$block-class}-element {
+        display: block;
+        max-width: 100%;
+        flex: 0 0 100%;
+
+        #{$block-class}-element__content {
+          padding-bottom: $spacing-05;
+        }
+
+        #{$block-class}-element__title > div {
+          margin: 0 0 $spacing-03;
+
+          > h2 {
+            @include carbon--type-style('productive-heading-02');
+
+            order: 1;
+          }
+        }
+      }
+    }
+
+    // FOOTER
+    &__footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    /* ------------------ */
+
+    // THEME
+    &__light {
+      .#{$block-class}__body {
+        .#{$carbon-prefix}--link {
+          color: $inverse-link;
+
+          &:hover {
+            color: #a6c8ff;
+          }
+
+          &:active {
+            color: $text-04;
+          }
+
+          &:focus {
+            outline-color: $text-04;
+          }
+        }
+
+        .#{$carbon-prefix}--btn--ghost {
+          &:hover {
+            background-color: $inverse-hover-ui;
+          }
+
+          &:active {
+            background-color: $active-secondary;
+          }
+        }
+      }
+    }
+
+    &__dark {
+      .#{$block-class}__body {
+        .#{$carbon-prefix}--link {
+          color: #0062fe;
+
+          &:hover {
+            color: #0043ce;
+          }
+
+          &:active {
+            color: $link-02;
+          }
+
+          &:focus {
+            color: $inverse-01;
+            outline-color: $inverse-01;
+          }
+        }
+
+        .#{$carbon-prefix}--btn--primary {
+          &:focus {
+            background-color: $button-primary-active;
+            box-shadow: inset 0 0 0 $spacing-01 $interactive-01,
+              inset 0 0 0 rem(3px) $interactive-03;
+          }
+        }
+
+        .#{$carbon-prefix}--btn--ghost {
+          &:hover {
+            background-color: $inverse-hover-ui;
+          }
+
+          &:active {
+            background-color: $button-tertiary-active;
+          }
+
+          &:focus {
+            box-shadow: inset 0 0 0 $spacing-01 $interactive-01,
+              inset 0 0 0 rem(3px) $interactive-03;
+          }
+        }
+      }
+    }
+    .#{$carousel-class}__item {
+      flex: 0 0 100% !important;
+    }
+  }
+}
+
+@include exports('coachmark-overlay') {
+  @include coachmark-overlay;
+}

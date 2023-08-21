@@ -22,6 +22,12 @@
   $carousel-item: #{$pkg-prefix}--carousel__item;
   $one-grid-column: calc(100% / 16);
 
+  $sm: 320px;
+  $md: 672px;
+  $lg: 1056px;
+  $xlg: 1312px;
+  $max: 1584px;
+
   .#{$block-class} {
     $block: &;
 
@@ -68,6 +74,17 @@
 
     &--content {
       padding-right: $spacing-05;
+      margin-top: $spacing-08;
+
+      @media screen and (min-width: $md) {
+        margin-top: $spacing-10;
+      }
+      @media screen and (min-width: $lg) {
+        margin-top: $spacing-12;
+      }
+      @media screen and (min-width: $xlg) {
+        margin-top: $spacing-13;
+      }
     }
 
     &--carousel {
@@ -137,8 +154,8 @@
         }
       }
       #{$block}--body {
-        padding: 0 $spacing-07 0;
-        margin: $spacing-09 0 $spacing-07;
+        padding: 0 0 0 $spacing-07;
+        margin: $spacing-09 0 0; // $spacing-07
       }
       #{$block}--header {
         position: relative; // to help position the close icon

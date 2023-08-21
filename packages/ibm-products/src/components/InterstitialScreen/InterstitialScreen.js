@@ -176,7 +176,7 @@ export let InterstitialScreen = React.forwardRef(
                 iconDescription={closeIconDescription}
                 kind="ghost"
                 renderIcon={Close16}
-                size="sm"
+                size="lg"
                 onClick={handleClose}
               />
             </div>

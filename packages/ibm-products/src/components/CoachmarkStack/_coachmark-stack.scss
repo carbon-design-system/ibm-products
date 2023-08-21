@@ -1,0 +1,85 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable carbon/theme-token-use */
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+@mixin coachmark-stack {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+
+  $block-class: #{$pkg-prefix}--coachmark-stack;
+  $elements-block-class: #{$pkg-prefix}--coachmark-stack-element;
+  $overlay-class: #{$prefix}--coachmark-overlay;
+  $stack-home-class: #{$pkg-prefix}--coachmark-stacked-home;
+
+  .#{$elements-block-class} {
+    $block: &;
+
+    position: fixed;
+    z-index: 5901;
+    right: $spacing-05;
+    bottom: -100%;
+    //opacity: 0;
+    transform: translateY(100%);
+
+    &--is-mounted {
+      bottom: 0;
+      /* stylelint-disable-next-line carbon/motion-easing-use, carbon/motion-duration-use */
+      transition: 240ms carbon--motion(exit, productive);
+      @media (prefers-reduced-motion) {
+        transition: none;
+      }
+    }
+
+    &--is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    // Stack the level-one item behind the level-two item.
+    &--is-stacked {
+      bottom: 0;
+      overflow: hidden;
+      pointer-events: none;
+      transform: perspective(carbon--mini-units(18))
+        translate3d(0, calc($spacing-09 * -1), calc($spacing-05 * -1));
+      transform-origin: top center;
+
+      &__light {
+        background-color: $gray-90;
+      }
+
+      &__dark {
+        background-color: $active-tertiary;
+      }
+    }
+  }
+
+  // ALL SUBSEQUENT ITEMS ARE THE "CHILD" STACK ITEMS
+  .#{$elements-block-class} ~ .#{$elements-block-class} {
+    z-index: 5902;
+  }
+
+  // SPECIFIC TO THE HOME ELEMENT
+  .#{$stack-home-class} {
+    &__nav-links {
+      margin-top: $spacing-04;
+      margin-left: calc(-1 * $spacing-05);
+    }
+
+    &__icon-idea {
+      margin-bottom: $spacing-03;
+    }
+  }
+}
+
+@include exports('coachmark-stack') {
+  @include coachmark-stack;
+}

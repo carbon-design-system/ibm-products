@@ -143,7 +143,11 @@ export let UserProfileImage = React.forwardRef(
     return (
       FillItem &&
       (tooltipText ? (
-        <Tooltip align={tooltipAlignment} label={tooltipText}>
+        <Tooltip
+          align={tooltipAlignment}
+          label={tooltipText}
+          className={`${blockClass}__tooltip`}
+        >
           <TooltipTrigger>{renderUserProfileImage()}</TooltipTrigger>
         </Tooltip>
       ) : (

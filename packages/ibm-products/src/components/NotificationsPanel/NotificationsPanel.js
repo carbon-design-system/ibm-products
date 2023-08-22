@@ -520,9 +520,6 @@ NotificationsPanel.propTypes = {
       link: PropTypes.shape({
         url: PropTypes.string,
         text: PropTypes.string,
-        optional: PropTypes.shape({
-          // Add optional props here
-        }),
       }),
       unread: PropTypes.bool,
       onNotificationClick: PropTypes.func,

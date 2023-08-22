@@ -13,7 +13,7 @@ import {
 } from './add-select-utils';
 
 describe('add select utils', () => {
-  it('normalizes data', () => {
+  it('normalizes data', async () => {
     const data = {
       entries: [
         {
@@ -39,7 +39,7 @@ describe('add select utils', () => {
     });
   });
 
-  it('gets global filter values', () => {
+  it('gets global filter values', async () => {
     const globalFilters = [{ id: 'fileType' }];
     const items = {
       1: {
@@ -59,7 +59,7 @@ describe('add select utils', () => {
     expect(filters).toStrictEqual([{ id: 'fileType', opts: ['js', 'jsx'] }]);
   });
 
-  it('sorts items ascending', () => {
+  it('sorts items ascending', async () => {
     const sortFnAsc = sortItems('size', 'asc');
     const items = [{ size: '100' }, { size: '200' }, { size: '10' }];
     const ascItems = items.sort(sortFnAsc);
@@ -70,7 +70,7 @@ describe('add select utils', () => {
     ]);
   });
 
-  it('sorts items descending', () => {
+  it('sorts items descending', async () => {
     const sortFnDesc = sortItems('size', 'desc');
     const items = [{ size: '100' }, { size: '200' }, { size: '10' }];
     const descItems = items.sort(sortFnDesc);
@@ -81,7 +81,7 @@ describe('add select utils', () => {
     ]);
   });
 
-  it('filters none hierarchical items', () => {
+  it('filters none hierarchical items', async () => {
     const items = {
       entries: [
         {
@@ -129,7 +129,7 @@ describe('add select utils', () => {
     ]);
   });
 
-  it('filters hierarchical items', () => {
+  it('filters hierarchical items', async () => {
     const items = {
       entries: [
         {

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import { BreadcrumbWithOverflow } from '.';
 import { mockHTMLElement } from '../../global/js/utils/test-helper';
 
@@ -102,7 +102,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
 
   const { click } = fireEvent;
 
-  it('Renders all as visible breadcrumbs when space available', () => {
+  it('Renders all as visible breadcrumbs when space available', async () => {
     const plentyOfSpace = (breadcrumbItems.length + 1) * sizes.breadcrumbWidth;
 
     render(
@@ -122,7 +122,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     });
   });
 
-  it('Renders first and last items when not enough space for all', () => {
+  it('Renders first and last items when not enough space for all', async () => {
     const reduceSpaceBy = 1;
     const notEnoughSpace =
       (breadcrumbItems.length - reduceSpaceBy) * sizes.breadcrumbWidth;
@@ -155,7 +155,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     const overflowBtn = screen.getByLabelText(/Open and close/, {
       selector: `.${blockClass}__overflow-menu`,
     });
-    click(overflowBtn);
+    await act(() => click(overflowBtn));
 
     // <ul role='menu' /> but default <ul> role of list used for query
     // see https://testing-library.com/docs/queries/byrole/#api
@@ -169,7 +169,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     expect(menuItems[1]).toHaveTextContent(breadcrumbContent[2]);
   });
 
-  it('Renders just the breadcrumb and last item when very little space', () => {
+  it('Renders just the breadcrumb and last item when very little space', async () => {
     const notEnoughSpace = 1.1 * sizes.breadcrumbWidth;
 
     render(
@@ -196,7 +196,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     expect(overflowBtn).toBeTruthy();
   });
 
-  it('Renders just the breadcrumb obeying maxVisible', () => {
+  it('Renders just the breadcrumb obeying maxVisible', async () => {
     render(
       <TestBreadcrumbWithOverflow
         width={1200}
@@ -222,7 +222,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     expect(overflowBtn).toBeTruthy();
   });
 
-  it('Renders just the breadcrumb overflow and title using maxVisible 0', () => {
+  it('Renders just the breadcrumb overflow and title using maxVisible 0', async () => {
     render(
       <TestBreadcrumbWithOverflow
         width={1200}
@@ -248,7 +248,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     expect(overflowBtn).toBeTruthy();
   });
 
-  it('does not duplicate ids', () => {
+  it('does not duplicate ids', async () => {
     const plentyOfSpace = (breadcrumbItems.length + 1) * sizes.breadcrumbWidth;
 
     const { container } = render(
@@ -263,7 +263,7 @@ describe(BreadcrumbWithOverflow.displayName, () => {
     ).toHaveLength(1);
   });
 
-  it('adds additional properties to an breadcrumb with overflow', () => {
+  it('adds additional properties to an breadcrumb with overflow', async () => {
     render(
       <TestBreadcrumbWithOverflow
         data-testid={dataTestId}

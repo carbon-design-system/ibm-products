@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.6.1...@carbon/ibm-products@2.7.0) (2023-08-22)
+
+
+### Bug Fixes
+
+* datagrid accessibility updates ([#3362](https://github.com/carbon-design-system/ibm-products/issues/3362)) ([76d77de](https://github.com/carbon-design-system/ibm-products/commit/76d77decf341ba837d75987a10b3df7f5252dd61))
+* **Datagrid:** add initial width value to `useResizeObserver` and add batch actions test (v2) ([#3371](https://github.com/carbon-design-system/ibm-products/issues/3371)) ([a1e3f22](https://github.com/carbon-design-system/ibm-products/commit/a1e3f22cc8da7a3b262724b501e17a909ab37784))
+* **NotificationPanel:** option to remove dnd ([#3102](https://github.com/carbon-design-system/ibm-products/issues/3102)) ([7b9e62e](https://github.com/carbon-design-system/ibm-products/commit/7b9e62e131ea440c11a1895c3e16e123a5832034))
+* **options-tile:** fix toggle implementation ([#3381](https://github.com/carbon-design-system/ibm-products/issues/3381)) ([b1472a2](https://github.com/carbon-design-system/ibm-products/commit/b1472a273208079fa136157f08fb2eef3f3a245e))
+* update to Carbon 11 compatible versions to latest ([#3375](https://github.com/carbon-design-system/ibm-products/issues/3375)) ([0877745](https://github.com/carbon-design-system/ibm-products/commit/08777451564e2bf1e22ef1379be8bdad7364e48f))
+
+
+### Features
+
+* **ActionSet:** Include containerWidth prop inside the story ([#3351](https://github.com/carbon-design-system/ibm-products/issues/3351)) ([c90e85a](https://github.com/carbon-design-system/ibm-products/commit/c90e85a5215cbab005e9378ac546e76727044069))
+* allows users to pass a renderLabel to the Datagrid filter summary ([#3372](https://github.com/carbon-design-system/ibm-products/issues/3372)) ([d0bf1d7](https://github.com/carbon-design-system/ibm-products/commit/d0bf1d7bcd671c1cc47a342db4140f42a955382a))
+* **CreateTearsheet:** add optional `onPrevious` handler to step ([#3350](https://github.com/carbon-design-system/ibm-products/issues/3350)) ([873be57](https://github.com/carbon-design-system/ibm-products/commit/873be579a83893b82c5774e36b353c868e507d1e))
+
+
+
+
+
 ## [2.6.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.6.0...@carbon/ibm-products@2.6.1) (2023-08-15)
 
 

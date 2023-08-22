@@ -1,0 +1,8 @@
+@use '@carbon/react/scss/spacing' as *;
+
+.about-modal__tech-logo {
+  width: 2.25rem;
+  height: 2.25rem;
+  margin-right: $spacing-05;
+  object-fit: contain;
+}

@@ -60,12 +60,12 @@ describe(componentName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it('renders single without hierarchy', () => {
+  it('renders single without hierarchy', async () => {
     render(<AddSelect {...defaultProps} />);
     expect(screen.getByText('test entry 1 title')).toBeVisible();
   });
 
-  it('renders single with hierarchy', () => {
+  it('renders single with hierarchy', async () => {
     const newProps = {
       ...defaultProps,
       items: {
@@ -93,7 +93,7 @@ describe(componentName, () => {
     expect(screen.getByText('view children')).toBeInTheDocument();
   });
 
-  it('renders with global filters', () => {
+  it('renders with global filters', async () => {
     const newProps = {
       ...defaultProps,
       noSelectionTitle: 'no selection title',
@@ -137,7 +137,7 @@ describe(componentName, () => {
     ).toBeInTheDocument();
   });
 
-  it('renders with modifiers', () => {
+  it('renders with modifiers', async () => {
     const newProps = {
       ...defaultProps,
       noSelectionTitle: 'no selection title',
@@ -162,25 +162,25 @@ describe(componentName, () => {
     expect(screen.getByTitle('editor')).toBeInTheDocument();
   });
 
-  xit('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(<AddSelect {...defaultProps} />);
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     const { container } = render(
       <AddSelect {...defaultProps} className="test-class" />
     );
     expect(container.firstChild).toHaveClass('test-class');
   });
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     render(<AddSelect {...defaultProps} data-testid="test-id" />);
     screen.getByTestId('test-id');
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     render(<AddSelect {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();

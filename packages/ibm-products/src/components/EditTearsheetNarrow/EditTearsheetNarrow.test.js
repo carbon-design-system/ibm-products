@@ -22,41 +22,41 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
 describe(componentName, () => {
-  it('renders a component EditTearsheetNarrow', () => {
+  it('renders a component EditTearsheetNarrow', async () => {
     render(<EditTearsheetNarrow> </EditTearsheetNarrow>);
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
     const { container } = render(<EditTearsheetNarrow> </EditTearsheetNarrow>);
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, () => {
+  it(`renders children`, async () => {
     render(<EditTearsheetNarrow>{children}</EditTearsheetNarrow>);
     screen.getByText(children);
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     render(<EditTearsheetNarrow className={className}> </EditTearsheetNarrow>);
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
-  it('adds additional props to the containing node', () => {
+  it('adds additional props to the containing node', async () => {
     render(
       <EditTearsheetNarrow data-testid={dataTestId}> </EditTearsheetNarrow>
     );
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     render(<EditTearsheetNarrow ref={ref}> </EditTearsheetNarrow>);
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     render(
       <EditTearsheetNarrow data-testid={dataTestId}> </EditTearsheetNarrow>
     );

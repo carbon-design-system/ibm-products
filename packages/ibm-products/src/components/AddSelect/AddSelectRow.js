@@ -141,7 +141,7 @@ export let AddSelectRow = ({
       ref={ref}
       role="row"
       aria-selected={selected}
-      aria-posinset={index}
+      aria-posinset={index + 1} // a11y aria-posinset must be >= 1, index is zero based
       aria-setsize={setSize}
       aria-expanded={expanded}
     >

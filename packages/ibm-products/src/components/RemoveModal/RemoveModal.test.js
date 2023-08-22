@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { carbon } from '../../settings';
@@ -32,27 +32,27 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
-  it('renders title', () => {
+  it('renders title', async () => {
     render(<RemoveModal {...defaultProps} />);
     screen.getByText(defaultProps.title);
   });
 
-  it('renders body', () => {
+  it('renders body', async () => {
     render(<RemoveModal {...defaultProps} />);
     screen.getByText(defaultProps.body);
   });
 
-  it('renders label', () => {
+  it('renders label', async () => {
     render(<RemoveModal {...defaultProps} />);
     screen.getByText(defaultProps.label);
   });
 
-  it('renders icon description', () => {
+  it('renders icon description', async () => {
     render(<RemoveModal {...defaultProps} />);
     screen.getByRole('button', { name: defaultProps.iconDescription });
   });
 
-  it('renders text input', () => {
+  it('renders text input', async () => {
     const { container } = render(
       <RemoveModal {...defaultProps} textConfirmation />
     );
@@ -63,7 +63,7 @@ describe(componentName, () => {
     ).toHaveAttribute('placeholder', defaultProps.inputPlaceholderText);
   });
 
-  it('renders without text confirmation functionality', () => {
+  it('renders without text confirmation functionality', async () => {
     const { click } = userEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
@@ -75,14 +75,14 @@ describe(componentName, () => {
     };
 
     render(<RemoveModal {...props} />);
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
 
     expect(onRequestSubmit).toBeCalled();
-    click(screen.getByText(props.secondaryButtonText));
+    await act(() => click(screen.getByText(props.secondaryButtonText)));
     expect(onClose).toBeCalled();
   });
 
-  it('renders with text confirmation functionality', () => {
+  it('renders with text confirmation functionality', async () => {
     const { change } = fireEvent;
     const { click } = userEvent;
     const { fn } = jest;
@@ -95,23 +95,23 @@ describe(componentName, () => {
 
     const { container } = render(<RemoveModal {...props} />);
 
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'bx1002' },
     });
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'bx1001' },
     });
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).toBeCalled();
   });
 
-  it('disables the primary button when primaryButtonDisabled is used', () => {
+  it('disables the primary button when primaryButtonDisabled is used', async () => {
     render(<RemoveModal {...defaultProps} primaryButtonDisabled />);
     const primaryButton = screen.getByText(defaultProps.primaryButtonText);
     expect(primaryButton).toHaveAttribute('disabled');
@@ -119,29 +119,29 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = render(<RemoveModal {...defaultProps} />);
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     const { container } = render(<RemoveModal {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'data-testid';
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     render(<RemoveModal {...defaultProps} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     render(<RemoveModal {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     render(<RemoveModal {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(

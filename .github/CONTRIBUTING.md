@@ -83,10 +83,9 @@ For more information on how this affects components see
 If you’re contributing to our JavaScript code, test your changes by running
 `yarn test`.
 
-New tests are written in
-[React Testing Library](https://testing-library.com/docs/react-testing-library/intro),
-with [Enzyme](https://enzymejs.github.io/enzyme) available for migration
-compatibility, and follow the
+Tests are written in
+[React Testing Library](https://testing-library.com/docs/react-testing-library/intro).
+
 [User Experience Standards Adopter Guide](https://github.ibm.com/IBMPrivateCloud/BedrockServices/blob/master/AdopterGuides/CommonUXStandardsAdoptionGuide.md#testing).
 
 ### 5. Make a pull request

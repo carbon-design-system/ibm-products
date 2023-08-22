@@ -6,7 +6,7 @@
 //
 
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { pkg, carbon } from '../../settings';
 import { TagSet } from '.';
@@ -78,7 +78,7 @@ describe(TagSet.displayName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('Has the same tag types as Carbon Tag', () => {
+  it('Has the same tag types as Carbon Tag', async () => {
     // Same number of tags
     expect(TagSet.types.length).toEqual(Object.keys(tagTypes).length);
 
@@ -88,7 +88,7 @@ describe(TagSet.displayName, () => {
     }
   });
 
-  it('Renders all as visible tags when space available', () => {
+  it('Renders all as visible tags when space available', async () => {
     window.innerWidth = tagWidth * 10 + 1;
 
     render(<TagSet tags={tags10} />);
@@ -104,7 +104,7 @@ describe(TagSet.displayName, () => {
     });
   });
 
-  it('Renders only the overflow when very little space', () => {
+  it('Renders only the overflow when very little space', async () => {
     window.innerWidth = tagWidth / 2;
 
     render(<TagSet tags={tags10} />);
@@ -116,7 +116,7 @@ describe(TagSet.displayName, () => {
     expect(visible.length).toEqual(0);
 
     const overflow = screen.getByText('+10');
-    userEvent.click(overflow);
+    await act(() => userEvent.click(overflow));
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
@@ -125,7 +125,7 @@ describe(TagSet.displayName, () => {
     expect(overflowVisible.length).toEqual(tags10.length);
   });
 
-  it('Renders some as visible when space limited', () => {
+  it('Renders some as visible when space limited', async () => {
     const visibleTags = 5;
     window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
@@ -144,7 +144,7 @@ describe(TagSet.displayName, () => {
     expect(visible.length).toEqual(visibleTags);
 
     const overflow = screen.getByText(`+${tags10.length - visibleTags}`);
-    userEvent.click(overflow);
+    await act(() => userEvent.click(overflow));
 
     const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
       // selector need to ignore sizing items
@@ -153,7 +153,7 @@ describe(TagSet.displayName, () => {
     expect(overflowVisible.length + visible.length).toEqual(tags10.length);
   });
 
-  it('Clicking show more on the overflow displays TagSetModal', () => {
+  it('Clicking show more on the overflow displays TagSetModal', async () => {
     const visibleTags = 5;
     window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow
 
@@ -161,19 +161,19 @@ describe(TagSet.displayName, () => {
     render(<TagSet {...overflowAndModalStrings} tags={tags} />);
 
     const overflow = screen.getByText(`+${tags.length - visibleTags}`);
-    userEvent.click(overflow);
+    await act(() => userEvent.click(overflow));
 
     const viewAll = screen.getByText('View all tags');
-    userEvent.click(viewAll);
+    await act(() => userEvent.click(viewAll));
 
     const modal = screen.getByRole('presentation');
     expect(modal).toHaveClass('is-visible');
     const closeButton = screen.getByTitle('Close');
-    userEvent.click(closeButton);
+    await act(() => userEvent.click(closeButton));
     expect(modal).not.toHaveClass('is-visible');
   });
 
-  it('it requires strings for overflow and modal when more than ten tags supplied.', () =>
+  it('it requires strings for overflow and modal when more than ten tags supplied.', async () =>
     expectMultipleError(
       [
         required('allTagsModalSearchLabel', 'TagSet'),
@@ -189,7 +189,7 @@ describe(TagSet.displayName, () => {
       }
     ));
 
-  it('Obeys max visible', () => {
+  it('Obeys max visible', async () => {
     window.innerWidth = tagWidth * 10 + 1;
 
     render(<TagSet maxVisible={5} tags={tags10} />);
@@ -214,14 +214,14 @@ describe(TagSet.displayName, () => {
 
   const dataTestId = uuidv4();
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     window.innerWidth = tagWidth * 10 + 1;
 
     render(<TagSet data-testid={dataTestId} tags={tags10} />);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     window.innerWidth = tagWidth * 10 + 1;
 
@@ -230,7 +230,7 @@ describe(TagSet.displayName, () => {
     expect(ref.current).not.toBeNull();
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     render(<TagSet data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -238,14 +238,14 @@ describe(TagSet.displayName, () => {
     );
   });
 
-  it('copes with no tags', () => {
+  it('copes with no tags', async () => {
     window.innerWidth = tagWidth * 10 + 1;
 
     render(<TagSet data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
-  it('Does not duplicate tag ids', () => {
+  it('Does not duplicate tag ids', async () => {
     const { container } = render(<TagSet tags={tags10} />);
 
     expect(container.querySelectorAll(`#${tags10[0].id}`)).toHaveLength(1);
@@ -258,7 +258,7 @@ describe(TagSet.displayName, () => {
       searchPlaceholder: 'a search placeholder',
     };
 
-    it('Renders a modal with all tags and filters on search', () => {
+    it('Renders a modal with all tags and filters on search', async () => {
       render(<TagSetModal allTags={tags} {...args} open />);
 
       const search = screen.getByRole('searchbox');

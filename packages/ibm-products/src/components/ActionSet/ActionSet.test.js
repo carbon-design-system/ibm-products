@@ -7,7 +7,7 @@
 // cspell:words Scooby
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expectMultipleError } from '../../global/js/utils/test-helper';
 
@@ -40,17 +40,17 @@ const getByRoleAndLabel = (role, label) =>
   screen.getByRole(role, { name: label });
 
 describe(componentName, () => {
-  it('renders a component ActionSet', () => {
+  it('renders a component ActionSet', async () => {
     render(<ActionSet actions={[]} />);
     expect(screen.getByRole('presentation')).toHaveClass(blockClass);
   });
 
-  it('renders one action button', () => {
+  it('renders one action button', async () => {
     render(<ActionSet actions={[actionS]} />);
     getByRoleAndLabel('button', labelS);
   });
 
-  it('renders three action buttons', () => {
+  it('renders three action buttons', async () => {
     const primaryButton = `${carbon.prefix}--btn--primary`;
     const secondaryButton = `${carbon.prefix}--btn--secondary`;
     const ghostButton = `${carbon.prefix}--btn--ghost`;
@@ -60,7 +60,7 @@ describe(componentName, () => {
     expect(getByRoleAndLabel('button', labelG)).toHaveClass(ghostButton);
   });
 
-  it('renders ghost button first and primary button last', () => {
+  it('renders ghost button first and primary button last', async () => {
     render(
       <ActionSet size="2xl" actions={[actionS, actionP, actionG, actionS2]} />
     );
@@ -71,7 +71,7 @@ describe(componentName, () => {
     expect(buttons[3].textContent).toEqual(labelP);
   });
 
-  it('renders danger--ghost button first and danger button last', () => {
+  it('renders danger--ghost button first and danger button last', async () => {
     render(
       <ActionSet size="2xl" actions={[actionS, actionD, actionDG, actionS2]} />
     );
@@ -82,27 +82,27 @@ describe(componentName, () => {
     expect(buttons[3].textContent).toEqual(labelD);
   });
 
-  it('renders primary button first when stacking', () => {
+  it('renders primary button first when stacking', async () => {
     render(<ActionSet size="sm" actions={[actionS, actionP]} />);
     const buttons = screen.getAllByRole('button');
     expect(buttons[0].textContent).toEqual(labelP);
     expect(buttons[1].textContent).toEqual(labelS);
   });
 
-  it('renders primary button first when stacking whichever way round they are supplied', () => {
+  it('renders primary button first when stacking whichever way round they are supplied', async () => {
     render(<ActionSet size="sm" actions={[actionP, actionS]} />);
     const buttons = screen.getAllByRole('button');
     expect(buttons[0].textContent).toEqual(labelP);
     expect(buttons[1].textContent).toEqual(labelS);
   });
 
-  it('rejects too many buttons using the custom validator', () =>
+  it('rejects too many buttons using the custom validator', async () =>
     expectMultipleError(
       [
         'Invalid prop `actions` supplied to `ActionSet`: you cannot have more than three actions',
         'Invalid prop `kind` of value `danger--tertiary` supplied to `ActionSetButton`',
       ],
-      () => {
+      () =>
         render(
           <ActionSet
             actions={[
@@ -113,17 +113,16 @@ describe(componentName, () => {
               { kind: 'danger--tertiary' },
             ]}
           />
-        );
-      }
+        )
     ));
 
-  it('applies className to an action button', () => {
+  it('applies className to an action button', async () => {
     render(<ActionSet actions={[{ ...actionS, className }, actionP]} />);
     expect(getByRoleAndLabel('button', labelS)).toHaveClass(className);
     expect(getByRoleAndLabel('button', labelP)).not.toHaveClass(className);
   });
 
-  it('renders a loading button', () => {
+  it('renders a loading button', async () => {
     render(<ActionSet actions={[{ ...actionS, loading: true }]} />);
     const loader = 'loading';
     expect(screen.getByRole('button').textContent).toEqual(
@@ -131,36 +130,36 @@ describe(componentName, () => {
     );
   });
 
-  it('reports clicks on an action button', () => {
+  it('reports clicks on an action button', async () => {
     const onClick = jest.fn();
     render(<ActionSet actions={[{ ...actionS, onClick }]} />);
     expect(onClick).toBeCalledTimes(0);
-    userEvent.click(getByRoleAndLabel('button', labelS));
+    await act(() => userEvent.click(getByRoleAndLabel('button', labelS)));
     expect(onClick).toBeCalledTimes(1);
   });
 
-  it('adds additional properties to an action button', () => {
+  it('adds additional properties to an action button', async () => {
     render(<ActionSet actions={[{ ...actionS, 'data-testid': dataTestId }]} />);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an action button', () => {
+  it('forwards a ref to an action button', async () => {
     const ref = React.createRef();
     render(<ActionSet actions={[{ ...actionS, ref }, actionP]} />);
     expect(ref.current).toEqual(getByRoleAndLabel('button', labelS));
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     render(<ActionSet className={className} />);
     expect(screen.getByRole('presentation')).toHaveClass(className);
   });
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     render(<ActionSet data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     render(<ActionSet ref={ref} />);
     expect(ref.current).toEqual(screen.getByRole('presentation'));
@@ -201,21 +200,21 @@ const props = {
 };
 
 describe(`${componentName}.validateActions`, () => {
-  it('rejects more than three actions for a small size', () => {
+  it('rejects more than three actions for a small size', async () => {
     expect(v('sm', props[1], prop, componentName)).toBeNull();
     expect(v('sm', props[2], prop, componentName)).toBeNull();
     expect(v('sm', props[3], prop, componentName)).toBeNull();
     expect(v('sm', props[4], prop, componentName)).toBeInstanceOf(Error);
   });
 
-  it('rejects more than three actions for a medium size', () => {
+  it('rejects more than three actions for a medium size', async () => {
     expect(v('md', props[1], prop, componentName)).toBeNull();
     expect(v('md', props[2], prop, componentName)).toBeNull();
     expect(v('md', props[3], prop, componentName)).toBeNull();
     expect(v('md', props[4], prop, componentName)).toBeInstanceOf(Error);
   });
 
-  it('rejects more than four actions for a large size', () => {
+  it('rejects more than four actions for a large size', async () => {
     expect(v('lg', props[1], prop, componentName)).toBeNull();
     expect(v('lg', props[2], prop, componentName)).toBeNull();
     expect(v('lg', props[3], prop, componentName)).toBeNull();
@@ -223,7 +222,7 @@ describe(`${componentName}.validateActions`, () => {
     expect(v('lg', props[5], prop, componentName)).toBeInstanceOf(Error);
   });
 
-  it('rejects more than four actions for a 2xl size', () => {
+  it('rejects more than four actions for a 2xl size', async () => {
     expect(v('2xl', props[1], prop, componentName)).toBeNull();
     expect(v('2xl', props[2], prop, componentName)).toBeNull();
     expect(v('2xl', props[3], prop, componentName)).toBeNull();
@@ -231,26 +230,26 @@ describe(`${componentName}.validateActions`, () => {
     expect(v('2xl', props[5], prop, componentName)).toBeInstanceOf(Error);
   });
 
-  it('rejects more than one primary kind', () => {
+  it('rejects more than one primary kind', async () => {
     expect(v('md', props.primary, prop, componentName)).toBeNull();
     expect(v('md', props.twoPrimaries, prop, componentName)).toBeInstanceOf(
       Error
     );
   });
 
-  it('rejects more than one ghost kind', () => {
+  it('rejects more than one ghost kind', async () => {
     expect(v('md', props.ghost, prop, componentName)).toBeNull();
     expect(v('md', props.twoGhosts, prop, componentName)).toBeInstanceOf(Error);
   });
 
-  it('rejects ghost kind with other kinds for extra small, small, medium size', () => {
+  it('rejects ghost kind with other kinds for extra small, small, medium size', async () => {
     expect(v('sm', props.psg, prop, componentName)).toBeInstanceOf(Error);
     expect(v('md', props.psg, prop, componentName)).toBeInstanceOf(Error);
     expect(v('lg', props.psg, prop, componentName)).toBeNull();
     expect(v('2xl', props.psg, prop, componentName)).toBeNull();
   });
 
-  it('rejects any kind other than primary, danger, secondary, danger--ghost, ghost', () => {
+  it('rejects any kind other than primary, danger, secondary, danger--ghost, ghost', async () => {
     expect(v('md', props.primary, prop, componentName)).toBeNull();
     expect(v('md', props.danger, prop, componentName)).toBeNull();
     expect(v('md', props.secondary, prop, componentName)).toBeNull();
@@ -270,7 +269,7 @@ describe(`${componentName}.validateActions`, () => {
     expect(v('md', props.twoGhosts, prop, componentName)).toBeInstanceOf(Error);
   });
 
-  it('should render both expressive and regular buttons inside of the button set', () => {
+  it('should render both expressive and regular buttons inside of the button set', async () => {
     const { rerender } = render(<ActionSet actions={[actionG]} />);
     const actionButton = screen.getByText(labelG);
     expect(actionButton).toHaveClass(

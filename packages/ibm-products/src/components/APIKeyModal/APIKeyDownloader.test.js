@@ -72,7 +72,7 @@ describe(name, () => {
       <APIKeyDownloader {...defaultProps} />
     );
     await waitFor(() => getByText('download'));
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 });

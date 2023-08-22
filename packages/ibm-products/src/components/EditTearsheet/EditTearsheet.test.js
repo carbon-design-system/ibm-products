@@ -7,12 +7,17 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen, act } from '@testing-library/react';
 import { carbon, pkg } from '../../settings';
 import { EditTearsheet } from './EditTearsheet';
 import { EditTearsheetForm } from './EditTearsheetForm';
 import uuidv4 from '../../global/js/utils/uuidv4';
+
+import userEvent from '@testing-library/user-event';
+const { click } = userEvent.setup({
+  // delay: null, // prev version
+  advanceTimers: jest.advanceTimersByTime,
+});
 
 const { prefix } = pkg;
 
@@ -123,7 +128,7 @@ describe(componentName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it('renders the EditTearsheet component', () => {
+  it('renders the EditTearsheet component', async () => {
     const { container } = renderEditTearsheet({
       ...defaultProps,
     });
@@ -131,7 +136,7 @@ describe(componentName, () => {
     expect(ref.current).not.toBeNull();
   });
 
-  it('should not render any EditTearsheetForm when there are no EditTearsheetForm components included', () => {
+  it('should not render any EditTearsheetForm when there are no EditTearsheetForm components included', async () => {
     const { container } = renderEmptyEditTearsheet(defaultProps);
     const editTearsheetForms = container.querySelectorAll(
       `.${editTearsheetBlockClass}__form`
@@ -141,22 +146,22 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = renderEditTearsheet({ ...defaultProps });
-    await expect(() => container.toBeAccessible());
-    await expect(() => container.toHaveNoAxeViolations());
+    expect(() => container.toBeAccessible());
+    expect(() => container.toHaveNoAxeViolations());
   });
 
-  it('adds additional props to the containing node', () => {
+  it('adds additional props to the containing node', async () => {
     render(<EditTearsheet data-testid={dataTestId}> </EditTearsheet>);
     screen.getByTestId(dataTestId);
   });
 
-  it('renders the primaryButtonLabel and secondaryButtonLabel properties', () => {
+  it('renders the primaryButtonLabel and secondaryButtonLabel properties', async () => {
     renderEditTearsheet({ ...defaultProps });
     screen.getByText(defaultProps.submitButtonText);
     screen.getByText(defaultProps.cancelButtonText);
   });
 
-  it('calls onClose() when the tearsheet is closed', () => {
+  it('calls onClose() when the tearsheet is closed', async () => {
     render(
       <EditTearsheet
         {...{ ...defaultProps }}
@@ -167,11 +172,11 @@ describe(componentName, () => {
     const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
     expect(editTearsheet).toHaveClass('is-visible');
     const closeButton = screen.getByTitle('Close');
-    userEvent.click(closeButton);
+    await act(() => click(closeButton));
     expect(editTearsheet).not.toHaveClass('is-visible');
   });
 
-  it('applies className to the root node', () => {
+  it('applies className to the root node', async () => {
     renderEditTearsheet({ className });
     const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
     expect(editTearsheet).toHaveClass(className);

@@ -231,12 +231,12 @@ describe(componentName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it('renders SingleAddSelectBody', () => {
+  it('renders SingleAddSelectBody', async () => {
     const { container } = render(<AddSelectBody {...singleHierarchyProps} />);
     expect(container.querySelector(`.${blockClass}__single`)).toBeVisible();
   });
 
-  it('returns the selected values on submit', () => {
+  it('returns the selected values on submit', async () => {
     const onSubmit = jest.fn();
     const newProps = {
       ...singleProps,
@@ -250,7 +250,7 @@ describe(componentName, () => {
     expect(onSubmit).toBeCalledWith('1');
   });
 
-  it('filters the items', () => {
+  it('filters the items', async () => {
     render(<AddSelectBody {...singleHierarchyProps} />);
     const input = screen.getByPlaceholderText('Find categories');
     expect(screen.getByText('Categories'));
@@ -262,14 +262,14 @@ describe(componentName, () => {
     expect(screen.queryByText('Kansas')).toBeNull();
   });
 
-  it('displays no results', () => {
+  it('displays no results', async () => {
     render(<AddSelectBody {...singleProps} />);
     const input = screen.getByPlaceholderText('Find categories');
     fireEvent.change(input, { target: { value: 'aaa' } });
     expect(screen.getByText(singleProps.noResultsTitle));
   });
 
-  it('displays child items', () => {
+  it('displays child items', async () => {
     render(<AddSelectBody {...singleHierarchyProps} />);
     const childrenButton = document.querySelector(
       `.${blockClass}__selections-view-children`
@@ -279,7 +279,7 @@ describe(componentName, () => {
     expect(screen.queryByText('Los Angeles'));
   });
 
-  it('handles breadcrumbs', () => {
+  it('handles breadcrumbs', async () => {
     const normalizedItems = normalize(hierarchyItems);
     const newProps = {
       ...multiProps,
@@ -314,7 +314,7 @@ describe(componentName, () => {
     );
   });
 
-  it('handles multi select submit', () => {
+  it('handles multi select submit', async () => {
     const onSubmit = jest.fn();
     const newProps = {
       ...multiProps,
@@ -330,7 +330,7 @@ describe(componentName, () => {
     expect(onSubmit).toBeCalledWith(['1', '2']);
   });
 
-  it('handles multi select submit with modifiers', () => {
+  it('handles multi select submit with modifiers', async () => {
     const onSubmit = jest.fn();
     const newProps = {
       ...multiProps,
@@ -356,7 +356,7 @@ describe(componentName, () => {
     ]);
   });
 
-  it('handles items with meta data', () => {
+  it('handles items with meta data', async () => {
     const newProps = {
       ...multiProps,
       items: itemsWithMeta,
@@ -370,7 +370,7 @@ describe(componentName, () => {
     expect(screen.getByText(newProps.metaPanelTitle));
   });
 
-  it('handles items with icons', () => {
+  it('handles items with icons', async () => {
     const newProps = {
       ...multiProps,
       items: itemWithIcon,
@@ -379,7 +379,7 @@ describe(componentName, () => {
     expect(document.querySelector(`${blockClass}__selections-cell-icon`));
   });
 
-  it('handles items with avatar', () => {
+  it('handles items with avatar', async () => {
     const newProps = {
       ...multiProps,
       items: itemWithAvatar,
@@ -388,7 +388,7 @@ describe(componentName, () => {
     expect(document.querySelector(`${blockClass}-cell-avatar`));
   });
 
-  it('filters with global filters', () => {
+  it('filters with global filters', async () => {
     const normalizedItems = normalize(hierarchyItems);
     const newProps = {
       ...multiProps,
@@ -422,7 +422,7 @@ describe(componentName, () => {
     expect(screen.queryByText('tag: default')).toBeNull();
   });
 
-  it('filters columns', () => {
+  it('filters columns', async () => {
     const normalizedItems = normalize(hierarchyItems);
     const newProps = {
       ...multiProps,

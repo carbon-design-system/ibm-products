@@ -8,7 +8,7 @@
 import { ComboButton } from '..';
 
 describe(ComboButton.name, () => {
-  test('passes', () => {
+  it('passes', async () => {
     expect(true).toBeTruthy();
   });
 });

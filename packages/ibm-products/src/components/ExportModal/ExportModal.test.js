@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { carbon } from '../../settings';
@@ -31,32 +31,32 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
-  it('renders body', () => {
+  it('renders body', async () => {
     render(<ExportModal {...defaultProps} />);
     screen.getByText(defaultProps.body);
   });
 
-  it('renders title', () => {
+  it('renders title', async () => {
     render(<ExportModal {...defaultProps} />);
     screen.getByText(defaultProps.title);
   });
 
-  it('renders the loading message', () => {
+  it('renders the loading message', async () => {
     render(<ExportModal {...defaultProps} loading />);
     screen.getByText(defaultProps.loadingMessage);
   });
 
-  it('renders the error message', () => {
+  it('renders the error message', async () => {
     render(<ExportModal {...defaultProps} error />);
     screen.getByText(defaultProps.errorMessage);
   });
 
-  it('renders the success message', () => {
+  it('renders the success message', async () => {
     render(<ExportModal {...defaultProps} successful />);
     screen.getByText(defaultProps.successMessage);
   });
 
-  it('submits with valid extension', () => {
+  it('submits with valid extension', async () => {
     const { change, blur } = fireEvent;
     const { click } = userEvent;
     const { fn } = jest;
@@ -73,11 +73,11 @@ describe(componentName, () => {
 
     change(textInput, { target: { value: `${props.filename}.pdf` } });
     blur(textInput);
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).toBeCalled();
   });
 
-  it('does not submit without text input', () => {
+  it('does not submit without text input', async () => {
     const { click } = userEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
@@ -93,11 +93,11 @@ describe(componentName, () => {
       `.${carbon.prefix}--btn--primary`
     );
 
-    click(submitBtn);
+    await act(() => click(submitBtn));
     expect(onRequestSubmit).not.toBeCalled();
   });
 
-  it('does not submit with invalid extension', () => {
+  it('does not submit with invalid extension', async () => {
     const { change, blur } = fireEvent;
     const { click } = userEvent;
     const { fn } = jest;
@@ -114,18 +114,18 @@ describe(componentName, () => {
 
     change(textInput, { target: { value: `${props.filename}` } });
     blur(textInput);
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
     screen.getByText(props.invalidInputText);
 
     change(textInput, { target: { value: `${props.filename}.mp3` } });
     blur(textInput);
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
     screen.getByText(props.invalidInputText);
   });
 
-  it('renders with preformatted extensions', () => {
+  it('renders with preformatted extensions', async () => {
     const { click } = userEvent;
     const { fn } = jest;
     const onRequestSubmit = fn();
@@ -151,15 +151,15 @@ describe(componentName, () => {
     const { getByLabelText } = render(<ExportModal {...props} />);
 
     screen.getByText(props.preformattedExtensionsLabel);
-    click(getByLabelText('BAR (best for integration server)'));
-    click(screen.getByText(props.primaryButtonText));
+    await act(() => click(getByLabelText('BAR (best for integration server)')));
+    await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).toBeCalledWith(`${props.filename}.bar`);
 
-    click(screen.getByText(props.secondaryButtonText));
+    await act(() => click(screen.getByText(props.secondaryButtonText)));
     expect(onClose).toBeCalled();
   });
 
-  it('renders with password field', () => {
+  it('renders with password field', async () => {
     const { container } = render(
       <ExportModal {...defaultProps} inputType="password" />
     );
@@ -169,31 +169,31 @@ describe(componentName, () => {
   });
 
   //@TODO: reinstate this test as soon as https://github.com/carbon-design-system/carbon/issues/10107 is fixed
-  it('has no accessibility violations', async () => {
+  it.skip('has no accessibility violations', async () => {
     const { container } = render(<ExportModal {...defaultProps} />);
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     const { container } = render(<ExportModal {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'dataTestId';
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     render(<ExportModal {...defaultProps} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     render(<ExportModal {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     render(<ExportModal {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(

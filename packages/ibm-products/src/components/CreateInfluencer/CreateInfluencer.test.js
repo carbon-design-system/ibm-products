@@ -13,6 +13,7 @@ const blockClass = `${pkg.prefix}--create-influencer`;
 
 const renderComponent = ({ ...rest } = {}) =>
   render(<CreateInfluencer {...rest} />);
+
 describe(CreateInfluencer.displayName, () => {
   beforeEach(() => {
     jest.useFakeTimers();
@@ -22,7 +23,7 @@ describe(CreateInfluencer.displayName, () => {
     jest.useRealTimers();
   });
 
-  it('renders the CreateInfluencer component', () => {
+  it('renders the CreateInfluencer component', async () => {
     const { container } = renderComponent({
       stepData: [
         {
@@ -37,7 +38,7 @@ describe(CreateInfluencer.displayName, () => {
     });
     expect(container.firstChild).toHaveClass(blockClass);
   });
-  it('renders nothing inside of the influencer when an intro step is provided', () => {
+  it('renders nothing inside of the influencer when an intro step is provided', async () => {
     const influencerClass = `${blockClass}__left-nav`;
     const step1Title = 'Step 1 title';
     const step2Title = 'Step 2 title';

@@ -46,6 +46,10 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
       const hasHorizontalScrollbar =
         tableElement.scrollWidth > tableElement.clientWidth;
       const scrollBuffer = hasHorizontalScrollbar ? 18 : 2;
+      const tableToolbar = gridElement.querySelector(
+        `.${blockClass}__table-toolbar`
+      );
+      const tableToolbarHeight = tableToolbar?.offsetHeight || 0;
       const setCustomValues = ({ rowHeight = 48, gridHeight }) => {
         headerRowElement.style.setProperty(
           `--${blockClass}--row-height`,
@@ -53,7 +57,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
         );
         headerRowElement.style.setProperty(
           `--${blockClass}--grid-height`,
-          px(gridHeight - scrollBuffer)
+          px(gridHeight - scrollBuffer - tableToolbarHeight)
         );
       };
       setCustomValues({

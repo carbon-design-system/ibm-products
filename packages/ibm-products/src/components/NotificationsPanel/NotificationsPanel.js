@@ -16,6 +16,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { useClickOutside } from '../../global/js/hooks';
 import { pkg } from '../../settings';
 import { timeAgo } from './utils';
+import { prepareProps } from '../../global/js/utils/props-helper';
 
 import { NotificationsEmptyState } from '../EmptyStates/NotificationsEmptyState';
 
@@ -346,7 +347,7 @@ export let NotificationsPanel = React.forwardRef(
                 <Link
                   href={notification.link.url}
                   className={`${blockClass}__notifications-link`}
-                  {...notification.link.optional}
+                  {...prepareProps({}, notification.link, ['text', 'url'])}
                 >
                   {notification.link.text}
                 </Link>
@@ -521,9 +522,6 @@ NotificationsPanel.propTypes = {
       link: PropTypes.shape({
         url: PropTypes.string,
         text: PropTypes.string,
-        optional: PropTypes.shape({
-          // Add optional props here
-        }),
       }),
       unread: PropTypes.bool,
       onNotificationClick: PropTypes.func,

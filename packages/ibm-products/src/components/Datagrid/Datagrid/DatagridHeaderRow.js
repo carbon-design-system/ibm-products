@@ -88,6 +88,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
             // render directly without the wrapper TableHeader
             return header.render('Header', { key: header.id });
           }
+          const { minWidth } = header || 90;
           const { visibleColumns, state, dispatch } = datagridState;
           const { columnResizing, isResizing } = state;
           const { columnWidths } = columnResizing;
@@ -153,22 +154,24 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                         const currentColumnWidth =
                           columnWidths[header.id] || originalCol.width;
                         if (key === 'ArrowLeft') {
-                          dispatch({
-                            type: COLUMN_RESIZE_START,
-                            payload: {
-                              newWidth: currentColumnWidth - incrementAmount,
-                              headerId: header.id,
-                              defaultWidth: header.originalWidth,
-                            },
-                          });
-                          dispatch({
-                            type: COLUMN_RESIZING,
-                            payload: {
-                              newWidth: currentColumnWidth - incrementAmount,
-                              headerId: header.id,
-                              defaultWidth: header.originalWidth,
-                            },
-                          });
+                          if (currentColumnWidth - incrementAmount > minWidth) {
+                            dispatch({
+                              type: COLUMN_RESIZE_START,
+                              payload: {
+                                newWidth: currentColumnWidth - incrementAmount,
+                                headerId: header.id,
+                                defaultWidth: header.originalWidth,
+                              },
+                            });
+                            dispatch({
+                              type: COLUMN_RESIZING,
+                              payload: {
+                                newWidth: currentColumnWidth - incrementAmount,
+                                headerId: header.id,
+                                defaultWidth: header.originalWidth,
+                              },
+                            });
+                          }
                         }
                         if (key === 'ArrowRight') {
                           dispatch({

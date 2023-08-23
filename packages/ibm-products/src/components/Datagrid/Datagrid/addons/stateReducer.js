@@ -8,6 +8,41 @@
 export const COLUMN_RESIZE_START = 'columnStartResizing';
 export const COLUMN_RESIZING = 'columnResizing';
 export const COLUMN_RESIZE_END = 'columnDoneResizing';
+
+export const handleColumnResizeStartEvent = (dispatch) => {
+  dispatch({ type: COLUMN_RESIZE_START });
+};
+
+export const handleColumnResizeEndEvent = (dispatch) => {
+  dispatch({ type: COLUMN_RESIZE_END });
+};
+
+export const handleColumnResizingEvent = (
+  dispatch,
+  header,
+  newWidth,
+  isKeyEvent
+) => {
+  if (isKeyEvent) {
+    dispatch({
+      type: COLUMN_RESIZE_START,
+      payload: {
+        newWidth,
+        headerId: header.id,
+        defaultWidth: header.originalWidth,
+      },
+    });
+  }
+  dispatch({
+    type: COLUMN_RESIZING,
+    payload: {
+      newWidth,
+      headerId: header.id,
+      defaultWidth: header.originalWidth,
+    },
+  });
+};
+
 export const stateReducer = (newState, action) => {
   switch (action.type) {
     case COLUMN_RESIZE_START: {

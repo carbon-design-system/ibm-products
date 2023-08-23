@@ -10,7 +10,6 @@
 @use '@carbon/react/scss/components/button/tokens' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
 @use './variables' as *;
-@use '@carbon/styles/scss/utilities';
 
 .#{$block-class}__table-toolbar > section {
   z-index: 2;

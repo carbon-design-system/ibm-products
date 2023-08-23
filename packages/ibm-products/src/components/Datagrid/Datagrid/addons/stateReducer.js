@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export const COLUMN_RESIZE_START = 'columnStartResizing';
-export const COLUMN_RESIZING = 'columnResizing';
-export const COLUMN_RESIZE_END = 'columnDoneResizing';
+const COLUMN_RESIZE_START = 'columnStartResizing';
+const COLUMN_RESIZING = 'columnResizing';
+const COLUMN_RESIZE_END = 'columnDoneResizing';
 
 export const handleColumnResizeStartEvent = (dispatch) => {
   dispatch({ type: COLUMN_RESIZE_START });

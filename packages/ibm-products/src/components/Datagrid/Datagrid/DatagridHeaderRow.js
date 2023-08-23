@@ -152,7 +152,11 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                       const { key } = event;
                       if (key === 'ArrowLeft' || key === 'ArrowRight') {
                         const currentColumnWidth =
-                          columnWidths[header.id] || originalCol.width;
+                          columnWidths[header.id] ||
+                          (datagridState.isTableSortable &&
+                          originalCol.width < 90
+                            ? 90
+                            : originalCol.width);
                         if (key === 'ArrowLeft') {
                           if (currentColumnWidth - incrementAmount > minWidth) {
                             dispatch({

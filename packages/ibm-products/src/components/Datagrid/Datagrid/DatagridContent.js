@@ -5,23 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useContext, useEffect, useRef } from 'react';
-import cx from 'classnames';
-import PropTypes from 'prop-types';
-import { TableContainer, Table } from '@carbon/react';
-import { px } from '@carbon/layout';
-import DatagridHead from './DatagridHead';
-import DatagridBody from './DatagridBody';
-import DatagridToolbar from './DatagridToolbar';
-import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
-import { carbon, pkg } from '../../../settings';
-import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
 import { FilterContext, FilterPanel } from './addons/Filtering';
+import React, { useContext, useEffect, useRef } from 'react';
+import { Table, TableContainer } from '@carbon/react';
+import { carbon, pkg } from '../../../settings';
+
+import { CLEAR_FILTERS } from './addons/Filtering/constants';
+import DatagridBody from './DatagridBody';
+import DatagridHead from './DatagridHead';
+import DatagridToolbar from './DatagridToolbar';
+import { FilterSummary } from '../../FilterSummary';
+import { InlineEditContext } from './addons/InlineEdit/InlineEditContext';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
 import { handleGridFocus } from './addons/InlineEdit/handleGridFocus';
+import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
+import { px } from '@carbon/layout';
 import { useClickOutside } from '../../../global/js/hooks';
 import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
-import { FilterSummary } from '../../FilterSummary';
-import { CLEAR_FILTERS } from './addons/Filtering/constants';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -144,6 +145,7 @@ export const DatagridContent = ({ datagridState, title }) => {
         className={`${blockClass}__filter-summary`}
         filters={filterTags}
         clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
+        renderLabel={filterProps.renderLabel}
       />
     );
 

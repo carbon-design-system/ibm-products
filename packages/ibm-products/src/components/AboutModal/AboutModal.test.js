@@ -8,7 +8,7 @@
 // cspell:words grafana
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
@@ -88,7 +88,7 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('renders a component AboutModal', () => {
+  it('renders a component AboutModal', async () => {
     renderComponent({ open: true });
     expect(screen.getByRole('presentation')).toHaveClass(blockClass);
   });
@@ -96,17 +96,17 @@ describe(componentName, () => {
   // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
   it.skip('has no accessibility violations when closed', async () => {
     const { container } = renderComponent({ open: false });
-    await expect(container).toBeAccessible(`${componentName} closed`);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(`${componentName} closed`);
+    expect(container).toHaveNoAxeViolations();
   });
 
   it('has no accessibility violations', async () => {
     const { container } = renderComponent({ open: true });
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  it('renders closeIconDescription, title, logo, and version', () => {
+  it('renders closeIconDescription, title, logo, and version', async () => {
     renderComponent({ open: true });
     screen.getByRole('button', { name: closeIconDescription });
     screen.getByText(titleText);
@@ -114,28 +114,28 @@ describe(componentName, () => {
     screen.getByAltText(logoAltText);
   });
 
-  it('renders version number', () => {
+  it('renders version number', async () => {
     renderComponent({ version, open: true });
     screen.getByText(version);
   });
 
-  it('renders with links', () => {
+  it('renders with links', async () => {
     renderComponent({ links, open: true });
     const link = screen.getByRole('link', { name: linkText });
     expect(link.href).toEqual(linkHref);
   });
 
-  it('renders general text', () => {
+  it('renders general text', async () => {
     renderComponent({ content, open: true });
     screen.getByText(content);
   });
 
-  it('renders copyright text', () => {
+  it('renders copyright text', async () => {
     renderComponent({ copyrightText, open: true });
     screen.getByText(copyrightText);
   });
 
-  it('renders additional info in footer', () => {
+  it('renders additional info in footer', async () => {
     const id = uuidv4();
     renderComponent({
       additionalInfo: (
@@ -162,22 +162,23 @@ describe(componentName, () => {
     screen.getByText(`Powered by (${id})`);
   });
 
-  it('is visible when open is true', () => {
+  it('is visible when open is true', async () => {
     renderComponent({ open: true });
     expect(screen.getByRole('presentation')).toHaveClass('is-visible');
   });
 
-  it('is not visible when open is not true', () => {
+  it('is not visible when open is not true', async () => {
     const { container } = renderComponent({ open: false });
+
     expect(container.firstChild).not.toHaveClass('is-visible');
   });
 
-  it('applies className to the root node', () => {
+  it('applies className to the root node', async () => {
     renderComponent({ className, open: true });
     expect(screen.getByRole('presentation')).toHaveClass(className);
   });
 
-  it('calls onClose() when modal is closed', () => {
+  it('calls onClose() when modal is closed', async () => {
     renderComponent({ open: true, onClose: onCloseReturnsTrue });
     const aboutModal = screen.getByRole('presentation');
     const closeButton = screen.getByRole('button', {
@@ -185,11 +186,12 @@ describe(componentName, () => {
     });
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
-    userEvent.click(closeButton);
+    await act(() => userEvent.click(closeButton));
+    expect(aboutModal).not.toHaveClass('is-visible');
     expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
   });
 
-  it('allows veto when modal is closed', () => {
+  it('allows veto when modal is closed', async () => {
     renderComponent({ open: true, onClose: onCloseReturnsFalse });
     const aboutModal = screen.getByRole('presentation');
     const closeButton = screen.getByRole('button', {
@@ -197,23 +199,23 @@ describe(componentName, () => {
     });
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
-    userEvent.click(closeButton);
+    await act(() => userEvent.click(closeButton));
     expect(aboutModal).toHaveClass('is-visible');
     expect(onCloseReturnsFalse).toHaveBeenCalledTimes(1);
   });
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     renderComponent({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     renderComponent({ 'data-testid': dataTestId });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(

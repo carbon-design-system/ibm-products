@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { ButtonSetWithOverflow } from '.';
@@ -64,7 +64,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('Works with button shape array', () => {
+  it('Works with button shape array', async () => {
     window.innerWidth = buttonWidth * 3.5;
 
     const myOnClick = jest.fn();
@@ -86,11 +86,11 @@ describe(ButtonSetWithOverflow.displayName, () => {
       selector: `.${blockClass}__button-container--visible .${carbon.prefix}--btn`,
     });
 
-    userEvent.click(action1);
+    await act(() => userEvent.click(action1));
     expect(myOnClick).toBeCalled();
   });
 
-  it('Renders as ComboButton when not enough space', () => {
+  it('Renders as ComboButton when not enough space', async () => {
     window.innerWidth = buttonWidth * 2.5;
 
     const myOnClick = jest.fn();
@@ -111,18 +111,17 @@ describe(ButtonSetWithOverflow.displayName, () => {
     const comboButton = screen.getByText(buttonMenuLabel, {
       selector: `.${pkg.prefix}--button-set-with-overflow__button-container.${pkg.prefix}--button-set-with-overflow__button-container--visible button`,
     });
-
-    userEvent.click(comboButton);
+    await act(() => userEvent.click(comboButton));
 
     const action1a = screen.getByText(/Action 1/, {
       selector: `.button-class-test .${carbon.prefix}--menu-item__label`,
     });
 
-    userEvent.click(action1a);
+    await act(() => userEvent.click(action1a));
     expect(myOnClick).toBeCalled();
   });
 
-  it('Applies right align class when requested', () => {
+  it('Applies right align class when requested', async () => {
     window.innerWidth = buttonWidth * 3.5;
     const myOnClick = jest.fn();
 

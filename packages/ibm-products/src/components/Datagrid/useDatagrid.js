@@ -25,6 +25,7 @@ import useRowSize from './useRowSize';
 import useHeaderRow from './Datagrid/DatagridHeaderRow';
 import useFlexResize from './useFlexResize';
 import useFloatingScroll from './useFloatingScroll';
+import { stateReducer } from './Datagrid/addons/stateReducer';
 
 const useDatagrid = (params, ...plugins) => {
   const defaultPlugins = [
@@ -50,7 +51,7 @@ const useDatagrid = (params, ...plugins) => {
 
   const tableId = useMemo(() => uniqueId('datagrid-table-id'), []);
   const tableState = useTable(
-    { tableId, ...params },
+    { tableId, ...params, stateReducer },
     ...defaultPlugins,
     ...plugins,
     ...defaultEndPlugins,

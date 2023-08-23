@@ -93,6 +93,11 @@ export let ButtonMenu = React.forwardRef(
   }
 );
 
+ButtonMenu.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Carbon's MenuButton`,
+};
+
 // Return a placeholder if not released and not enabled by feature flag
 ButtonMenu = pkg.checkComponentEnabled(ButtonMenu, componentName);
 

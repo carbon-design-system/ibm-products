@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,9 +14,9 @@ import { selectionColumnId } from '../common-column-ids';
 import { pkg } from '../../../settings';
 import getColTitle from '../utils/getColTitle';
 import {
-  COLUMN_RESIZE_END,
-  COLUMN_RESIZE_START,
-  COLUMN_RESIZING,
+  handleColumnResizeEndEvent,
+  handleColumnResizeStartEvent,
+  handleColumnResizingEvent,
 } from './addons/stateReducer';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -100,7 +100,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
             // render directly without the wrapper TableHeader
             return header.render('Header', { key: header.id });
           }
-          const { minWidth } = header || 90;
+          const { minWidth } = header || 50;
           const { visibleColumns, state, dispatch } = datagridState;
           const { columnResizing, isResizing } = state;
           const { columnWidths } = columnResizing;
@@ -128,38 +128,14 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                     {...header.getResizerProps()}
                     onMouseMove={(event) => {
                       if (isResizing) {
-                        dispatch({
-                          type: COLUMN_RESIZING,
-                          payload: {
-                            newWidth: getClientXPosition(event),
-                            headerId: header.id,
-                            defaultWidth: header.originalWidth,
-                          },
-                        });
+                        const newWidth = getClientXPosition(event);
+                        handleColumnResizingEvent(dispatch, header, newWidth);
                       }
                     }}
-                    onMouseDown={() => {
-                      const currentColumnWidth =
-                        columnWidths[header.id] || originalCol.width;
-                      dispatch({
-                        type: COLUMN_RESIZE_START,
-                        payload: {
-                          newWidth: currentColumnWidth,
-                          headerId: header.id,
-                          defaultWidth: header.originalWidth,
-                        },
-                      });
-                    }}
+                    onMouseDown={() => handleColumnResizeStartEvent(dispatch)}
                     onMouseUp={(event) => {
                       event.target.blur();
-                      dispatch({
-                        type: COLUMN_RESIZE_END,
-                        payload: {
-                          newWidth: getClientXPosition(event),
-                          headerId: header.id,
-                          defaultWidth: header.originalWidth,
-                        },
-                      });
+                      handleColumnResizeEndEvent(dispatch);
                     }}
                     onKeyDown={(event) => {
                       const { key } = event;
@@ -171,54 +147,32 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                             ? 90
                             : originalCol.width);
                         if (key === 'ArrowLeft') {
-                          if (currentColumnWidth - incrementAmount > minWidth) {
-                            dispatch({
-                              type: COLUMN_RESIZE_START,
-                              payload: {
-                                newWidth: currentColumnWidth - incrementAmount,
-                                headerId: header.id,
-                                defaultWidth: header.originalWidth,
-                              },
-                            });
-                            dispatch({
-                              type: COLUMN_RESIZING,
-                              payload: {
-                                newWidth: currentColumnWidth - incrementAmount,
-                                headerId: header.id,
-                                defaultWidth: header.originalWidth,
-                              },
-                            });
+                          if (
+                            currentColumnWidth - incrementAmount >
+                            Math.max(minWidth, 50)
+                          ) {
+                            const newWidth =
+                              currentColumnWidth - incrementAmount;
+                            handleColumnResizingEvent(
+                              dispatch,
+                              header,
+                              newWidth,
+                              true
+                            );
                           }
                         }
                         if (key === 'ArrowRight') {
-                          dispatch({
-                            type: COLUMN_RESIZE_START,
-                            payload: {
-                              newWidth: currentColumnWidth + incrementAmount,
-                              headerId: header.id,
-                              defaultWidth: header.originalWidth,
-                            },
-                          });
-                          dispatch({
-                            type: COLUMN_RESIZING,
-                            payload: {
-                              newWidth: currentColumnWidth + incrementAmount,
-                              headerId: header.id,
-                              defaultWidth: header.originalWidth,
-                            },
-                          });
+                          const newWidth = currentColumnWidth + incrementAmount;
+                          handleColumnResizingEvent(
+                            dispatch,
+                            header,
+                            newWidth,
+                            true
+                          );
                         }
                       }
                     }}
-                    onKeyUp={() => {
-                      const currentColumnWidth =
-                        columnWidths[header.id] || originalCol.width;
-                      dispatch({
-                        type: COLUMN_RESIZE_END,
-                        payload: currentColumnWidth,
-                        defaultWidth: header.originalWidth,
-                      });
-                    }}
+                    onKeyUp={() => handleColumnResizeEndEvent(dispatch)}
                     className={cx(`${blockClass}__col-resizer-range`)}
                     type="range"
                     defaultValue={originalCol.width}

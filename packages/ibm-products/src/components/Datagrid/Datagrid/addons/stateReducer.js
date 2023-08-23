@@ -8,6 +8,7 @@
 const COLUMN_RESIZE_START = 'columnStartResizing';
 const COLUMN_RESIZING = 'columnResizing';
 const COLUMN_RESIZE_END = 'columnDoneResizing';
+const INIT = 'init';
 
 export const handleColumnResizeStartEvent = (dispatch) => {
   dispatch({ type: COLUMN_RESIZE_START });
@@ -45,6 +46,12 @@ export const handleColumnResizingEvent = (
 
 export const stateReducer = (newState, action) => {
   switch (action.type) {
+    case INIT: {
+      return {
+        ...newState,
+        isResizing: false,
+      };
+    }
     case COLUMN_RESIZE_START: {
       return {
         ...newState,

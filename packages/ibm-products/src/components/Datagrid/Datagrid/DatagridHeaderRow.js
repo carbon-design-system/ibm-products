@@ -76,6 +76,22 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
     return offsetValue;
   };
 
+  useEffect(() => {
+    const { isResizing } = datagridState.state;
+    if (isResizing) {
+      document.addEventListener('mouseup', () => {
+        handleColumnResizeEndEvent(datagridState.dispatch);
+        document.activeElement.blur();
+      });
+    }
+    return () => {
+      document.removeEventListener('mouseup', () =>
+        handleColumnResizeEndEvent(datagridState.dispatch)
+      );
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [datagridState.state.isResizing]);
+
   return (
     <TableRow
       {...headerGroup.getHeaderGroupProps({ role: false })}
@@ -120,14 +136,13 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                     onMouseMove={(event) => {
                       if (isResizing) {
                         const newWidth = getClientXPosition(event);
-                        handleColumnResizingEvent(dispatch, header, newWidth);
+                        // Sets a min width for resizing so at least one character from the column header is visible
+                        if (newWidth >= 50) {
+                          handleColumnResizingEvent(dispatch, header, newWidth);
+                        }
                       }
                     }}
                     onMouseDown={() => handleColumnResizeStartEvent(dispatch)}
-                    onMouseUp={(event) => {
-                      event.target.blur();
-                      handleColumnResizeEndEvent(dispatch);
-                    }}
                     onKeyDown={(event) => {
                       const { key } = event;
                       if (key === 'ArrowLeft' || key === 'ArrowRight') {

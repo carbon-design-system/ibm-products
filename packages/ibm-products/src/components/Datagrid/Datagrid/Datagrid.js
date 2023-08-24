@@ -19,7 +19,7 @@ import { FilterProvider } from './addons/Filtering/FilterProvider';
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentName = 'Datagrid';
 
-export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
+export let Datagrid = React.forwardRef(({ datagridState, title, ...rest }, ref) => {
   if (!datagridState) {
     pconsole.warn(
       'Datagrid was not passed datagridState which is required to render this component.'
@@ -38,6 +38,11 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
+
+  const props = {
+    title,
+    datagridState,
+  };
 
   return (
     <FilterProvider filters={filters}>
@@ -60,10 +65,10 @@ export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
             <div
               className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
             >
-              <DatagridContent datagridState={datagridState} />
+              <DatagridContent {...props} />
             </div>
           ) : (
-            <DatagridContent datagridState={datagridState} />
+            <DatagridContent {...props} />
           )}
         </div>
       </InlineEditProvider>
@@ -83,4 +88,8 @@ Datagrid.propTypes = {
    * The data grid state, much of it being supplied by the useDatagrid hook
    */
   datagridState: PropTypes.object.isRequired,
+  /**
+   * Table title
+   */
+  title: PropTypes.string,
 };

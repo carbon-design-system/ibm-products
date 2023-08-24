@@ -53,13 +53,17 @@ export const stateReducer = (newState, action) => {
   switch (action.type) {
     case INIT: {
       const localStorageColSizes = getLocalStorageItem(localStorageKey);
-      Object.keys(localStorageColSizes.columnResizing.columnWidths).forEach(
-        (key) => {
-          if (localStorageColSizes.columnResizing.columnWidths[key] === null) {
-            delete localStorageColSizes.columnResizing.columnWidths[key];
+      if (localStorageColSizes?.columnResizing?.columnWidths) {
+        Object.keys(localStorageColSizes.columnResizing.columnWidths).forEach(
+          (key) => {
+            if (
+              localStorageColSizes.columnResizing.columnWidths[key] === null
+            ) {
+              delete localStorageColSizes.columnResizing.columnWidths[key];
+            }
           }
-        }
-      );
+        );
+      }
       return {
         ...newState,
         ...localStorageColSizes,

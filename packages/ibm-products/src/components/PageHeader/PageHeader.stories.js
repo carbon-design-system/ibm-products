@@ -28,7 +28,6 @@ import {
   TableCell,
   usePrefix,
   TabList,
-  Checkbox,
 } from '@carbon/react';
 import {
   CheckmarkFilled,
@@ -817,7 +816,6 @@ const TemplateDemo = ({
 }) => {
   const carbonPrefix = usePrefix();
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
 
   return (
     <>
@@ -848,14 +846,7 @@ const TemplateDemo = ({
         className={`${storyClass}__content-container ${storyClass}__content-container--with-global-header`}
       >
         <PageHeader {...props}>{children}</PageHeader>
-        <div>Is checked: {isChecked ? 'true' : 'false'}</div>
         {demoDummyPageContent}
-        <Checkbox
-          id="checky"
-          checked={isChecked}
-          onChange={(ev) => setIsChecked(ev.target.checked)}
-          labelText="Check me test"
-        />
       </div>
     </>
   );

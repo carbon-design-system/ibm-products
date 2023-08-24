@@ -19,7 +19,7 @@ import { pkg } from '../../settings';
 // Carbon and package components we use.
 import { User, Group } from '@carbon/react/icons';
 
-import { Tooltip } from '@carbon/react';
+import { Tooltip, usePrefix } from '@carbon/react';
 import { TooltipTrigger } from '../TooltipTrigger';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -54,6 +54,7 @@ export let UserProfileImage = React.forwardRef(
     },
     ref
   ) => {
+    const carbonPrefix = usePrefix();
     const icons = {
       user: {
         md: (props) => <User size={20} {...props} />,
@@ -143,7 +144,11 @@ export let UserProfileImage = React.forwardRef(
     return (
       FillItem &&
       (tooltipText ? (
-        <Tooltip align={tooltipAlignment} label={tooltipText}>
+        <Tooltip
+          align={tooltipAlignment}
+          label={tooltipText}
+          className={`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
+        >
           <TooltipTrigger>{renderUserProfileImage()}</TooltipTrigger>
         </Tooltip>
       ) : (

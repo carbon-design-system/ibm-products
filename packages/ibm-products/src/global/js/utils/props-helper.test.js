@@ -30,7 +30,7 @@ describe('prepareProps', () => {
   const overrides = { c: 17, d: 18, g: 19, h: 20, k: 21, l: 22, o: 23, p: 24 };
   const block = ['b', 'd', 'f', 'h', 'n', 'p'];
 
-  it('applies correct defaults and overrides and blocks values', () => {
+  it('applies correct defaults and overrides and blocks values', async () => {
     const result = prepareProps(defaults, props, block, 'j', 'l', overrides);
 
     // defaulted
@@ -83,12 +83,12 @@ describe('deprecateProp and deprecatePropUsage', () => {
     ),
   };
 
-  it('reports prop deprecated when deprecated prop is used', () =>
+  it('reports prop deprecated when deprecated prop is used', async () =>
     expectWarn(deprecated('a', 'x', 'Explanation 1.'), () => {
       render(<Component a="fish" />);
     }));
 
-  it('reports prop deprecated and invalid when deprecated prop is used with invalid value', () =>
+  it('reports prop deprecated and invalid when deprecated prop is used with invalid value', async () =>
     expectError(
       'Warning: Failed prop type: Invalid prop `a` of type `number` supplied to `x`, expected `string`.\n    in x',
       () =>
@@ -101,16 +101,16 @@ describe('deprecateProp and deprecatePropUsage', () => {
     render(<Component b="fish" />);
   });
 
-  it('reports prop usage deprecated when deprecated usage is used', () =>
+  it('reports prop usage deprecated when deprecated usage is used', async () =>
     expectWarn(deprecatedUsage('c', 'x', 'Explanation 2.'), () => {
       render(<Component c={42} />);
     }));
 
-  it('does not report prop usage deprecated when non-deprecated usage is used', () => {
+  it('does not report prop usage deprecated when non-deprecated usage is used', async () => {
     render(<Component c={{ d: 'fish' }} />);
   });
 
-  it('does not report prop usage deprecated when incorrect non-deprecated usage is used', () =>
+  it('does not report prop usage deprecated when incorrect non-deprecated usage is used', async () =>
     expectError(
       'Warning: Failed prop type: Invalid prop `c.d` of type `number` supplied to `x`, expected `string`.\n    in x',
       () => {
@@ -118,7 +118,7 @@ describe('deprecateProp and deprecatePropUsage', () => {
       }
     ));
 
-  it('does not report prop usage deprecated when invalid but non-deprecated usage is used', () =>
+  it('does not report prop usage deprecated when invalid but non-deprecated usage is used', async () =>
     expectError(
       'Warning: Failed prop type: Invalid prop `c` of type `string` supplied to `x`, expected `object`.\n    in x',
       () => {
@@ -142,7 +142,7 @@ describe('allPropTypes', () => {
   const args2 = [props, 'b', 'Component X', 'prop'];
   const args3 = [props, 'c', 'Component X', 'prop'];
 
-  it('returns null only if all supplied type checkers return null', () => {
+  it('returns null only if all supplied type checkers return null', async () => {
     expect(allPropTypes([f, f, f, f])(...args1)).toEqual(e1);
     expect(allPropTypes([p, f, f, f])(...args1)).toEqual(e1);
     expect(allPropTypes([p, p, f, f])(...args1)).toEqual(e1);
@@ -150,7 +150,7 @@ describe('allPropTypes', () => {
     expect(allPropTypes([p, p, p, p])(...args1)).toBeNull();
   });
 
-  it('rejects null or undefined when marked required', () => {
+  it('rejects null or undefined when marked required', async () => {
     expect(allPropTypes([f, f, f, f]).isRequired(...args1)).toEqual(e1);
     expect(allPropTypes([f, f, f, f]).isRequired(...args2)).toEqual(e2);
     expect(allPropTypes([f, f, f, f]).isRequired(...args3)).toEqual(e3);
@@ -174,17 +174,17 @@ describe('isRequiredIf', () => {
     ctl: PropTypes.string,
   };
 
-  it('does not report required when condition false', () => {
+  it('does not report required when condition false', async () => {
     // any console error will cause the test to fail through global check
     render(<Component ctl="x" />);
   });
 
-  it('reports required when condition true', () =>
+  it('reports required when condition true', async () =>
     expectError(required('a', 'Component'), () => {
       render(<Component ctl="a" />);
     }));
 
-  it('reports required when used as a decorator', () =>
+  it('reports required when used as a decorator', async () =>
     expectError(required('b', 'Component'), () => {
       render(<Component ctl="b" />);
     }));

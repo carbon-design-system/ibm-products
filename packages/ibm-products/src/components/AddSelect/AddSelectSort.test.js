@@ -29,11 +29,11 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('renders', () => {
+  it('renders', async () => {
     render(<AddSelectSort sortByLabel="test sort title" />);
   });
 
-  it('renders with options', () => {
+  it('renders with options', async () => {
     const props = {
       sortBy: ['title'],
       sortByLabel: 'test sort title',
@@ -41,7 +41,7 @@ describe(componentName, () => {
     render(<AddSelectSort {...props} />);
   });
 
-  it('sorts on click', () => {
+  it('sorts on click', async () => {
     const attributeHandler = jest.fn();
     const directionHandler = jest.fn();
     const props = {

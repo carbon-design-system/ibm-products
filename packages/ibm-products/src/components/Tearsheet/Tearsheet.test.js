@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   expectWarn,
@@ -90,7 +90,7 @@ const title = `Title of the ${uuidv4()} tearsheet`;
 let tooManyButtonsTestedAlready = false;
 let closeIconDescriptionTestedAlready = false;
 const commonTests = (Ts, name, props, testActions) => {
-  it(`renders a component ${name}`, () => {
+  it(`renders a component ${name}`, async () => {
     render(<Ts {...{ ...props, closeIconDescription }} />);
     expect(document.querySelector(`.${carbon.prefix}--modal`)).toHaveClass(
       blockClass
@@ -119,7 +119,7 @@ const commonTests = (Ts, name, props, testActions) => {
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it('omits main content sections when no props supplied and no close icon requested', () => {
+  it('omits main content sections when no props supplied and no close icon requested', async () => {
     render(<Ts {...props} hasCloseIcon={false} />);
     expect(document.querySelector(`.${blockClass}__header`)).toBeNull();
     expect(document.querySelector(`.${blockClass}__influencer`)).toBeNull();
@@ -135,15 +135,15 @@ const commonTests = (Ts, name, props, testActions) => {
   });
 
   if (testActions) {
-    it('renders buttons', () => {
+    it('renders buttons', async () => {
       render(<Ts {...{ ...props, actions }} />);
       expect(document.querySelector(`.${blockClass}__buttons`)).not.toBeNull();
       expect(onClick).toHaveBeenCalledTimes(0);
-      userEvent.click(screen.getByText(createButton));
+      await act(() => userEvent.click(screen.getByText(createButton)));
       expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    it('rejects too many buttons using the custom validator', () =>
+    it('rejects too many buttons using the custom validator', async () =>
       expectMultipleError(
         // prop-types only reports the first occurrence of each distinct error,
         // which creates an unfortunate dependency between test runs
@@ -164,27 +164,27 @@ const commonTests = (Ts, name, props, testActions) => {
       ));
   }
 
-  it('renders children', () => {
+  it('renders children', async () => {
     render(<Ts {...{ ...props, closeIconDescription }}>{children}</Ts>);
     expect(document.querySelector(`.${blockClass}__main`)).not.toBeNull();
     screen.getByText(childFragment);
   });
 
-  it('applies className to the root node', () => {
+  it('applies className to the root node', async () => {
     render(<Ts {...{ ...props, className, closeIconDescription }} />);
     expect(document.querySelector(`.${carbon.prefix}--modal`)).toHaveClass(
       className
     );
   });
 
-  it('responds to hasCloseIcon and renders closeIconDescription', () => {
+  it('responds to hasCloseIcon and renders closeIconDescription', async () => {
     render(<Ts {...{ ...props, closeIconDescription }} open hasCloseIcon />);
     expect(document.querySelector(`.${blockClass}__header`)).not.toBeNull();
     screen.getByRole('button', { name: closeIconDescription });
   });
 
   if (testActions) {
-    it('requires closeIconDescription when there are no actions', () =>
+    it('requires closeIconDescription when there are no actions', async () =>
       expectMultipleError(
         // prop-types only reports the first occurrence of each distinct error,
         // which creates an unfortunate dependency between test runs
@@ -201,18 +201,18 @@ const commonTests = (Ts, name, props, testActions) => {
       ));
   }
 
-  it('renders description', () => {
+  it('renders description', async () => {
     render(<Ts {...{ ...props, closeIconDescription, description }} />);
     screen.getByText(descriptionFragment);
   });
 
-  it('renders label', () => {
+  it('renders label', async () => {
     render(<Ts {...{ ...props, closeIconDescription, label }} />);
     screen.getByText(label);
   });
 
   if (testActions) {
-    it('calls onClose() when the tearsheet is closed', () => {
+    it('calls onClose() when the tearsheet is closed', async () => {
       render(
         <Ts
           {...{ ...props, closeIconDescription }}
@@ -227,11 +227,11 @@ const commonTests = (Ts, name, props, testActions) => {
       });
       expect(tearsheet).toHaveClass('is-visible');
       expect(onCloseReturnsTrue).toHaveBeenCalledTimes(0);
-      userEvent.click(closeButton);
+      await act(() => userEvent.click(closeButton));
       expect(onCloseReturnsTrue).toHaveBeenCalledTimes(1);
     });
 
-    it('allows veto when the tearsheet is closed', () => {
+    it('allows veto when the tearsheet is closed', async () => {
       render(
         <Ts
           {...{ ...props, closeIconDescription }}
@@ -246,49 +246,49 @@ const commonTests = (Ts, name, props, testActions) => {
       });
       expect(tearsheet).toHaveClass('is-visible');
       expect(onCloseReturnsFalse).toHaveBeenCalledTimes(0);
-      userEvent.click(closeButton);
+      await act(() => userEvent.click(closeButton));
       expect(tearsheet).toHaveClass('is-visible');
       expect(onCloseReturnsFalse).toHaveBeenCalledTimes(1);
     });
   }
 
-  it('is visible when open is true', () => {
+  it('is visible when open is true', async () => {
     render(<Ts {...props} open />);
     expect(document.querySelector(`.${carbon.prefix}--modal`)).toHaveClass(
       'is-visible'
     );
   });
 
-  it('renders title', () => {
+  it('renders title', async () => {
     render(<Ts {...{ ...props, title }} />);
     screen.getByText(title);
   });
 
-  it('renders verticalPosition', () => {
+  it('renders verticalPosition', async () => {
     render(<Ts {...props} open verticalPosition="lower" />);
     expect(screen.getByRole('dialog')).toHaveClass(
       `${blockClass}__container--lower`
     );
   });
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     render(<Ts {...props} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     render(<Ts {...{ ...props, ref }} />);
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     render(<Ts {...props} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(name);
   });
 
-  it("doesn't render when stacked more than three deep", () =>
+  it("doesn't render when stacked more than three deep", async () =>
     expectWarn(
       'Tearsheet not rendered: maximum stacking depth exceeded.',
       () => {
@@ -337,12 +337,12 @@ describe(componentName, () => {
 
   commonTests(Tearsheet, componentName, {}, true);
 
-  it('renders headerActions', () => {
+  it('renders headerActions', async () => {
     render(<Tearsheet {...{ headerActions }} />);
     screen.getByText(headerActionButtonLabel);
   });
 
-  it('renders influencer', () => {
+  it('renders influencer', async () => {
     render(<Tearsheet {...{ influencer }} />);
     expect(document.querySelector(`.${blockClass}__influencer`)).not.toBeNull();
     const influencerElt = screen.getByText(influencerFragment).parentElement;
@@ -350,20 +350,20 @@ describe(componentName, () => {
     expect(influencerElt).not.toHaveClass(`${blockClass}__influencer--wide`);
   });
 
-  it('responds to influencerPosition', () => {
+  it('responds to influencerPosition', async () => {
     render(<Tearsheet {...{ influencer }} influencerPosition="right" />);
     const influencerElt =
       screen.getByText(influencerFragment).parentElement.parentElement;
     expect(influencerElt).toHaveClass(`${blockClass}__main`);
   });
 
-  it('responds to influencerWidth', () => {
+  it('responds to influencerWidth', async () => {
     render(<Tearsheet {...{ influencer }} influencerWidth="wide" />);
     const influencerElt = screen.getByText(influencerFragment).parentElement;
     expect(influencerElt).toHaveClass(`${blockClass}__influencer--wide`);
   });
 
-  it('renders navigation', () => {
+  it('renders navigation', async () => {
     render(
       <Tearsheet open {...{ navigation }} closeIconDescription="Close icon" />
     );

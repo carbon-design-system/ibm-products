@@ -124,10 +124,9 @@ export let Carousel = React.forwardRef(
     };
     const [isScrolling, setIsScrolling] = useState(false);
 
-    // EFFECTS
     useWindowEvent('resize', handleResize);
-    // SAVE POINT
 
+    // EFFECTS
     useEffect(() => {
       if (scrollableChange && mountedRef.current) {
         scrollableChange(isScrollable);
@@ -137,9 +136,17 @@ export let Carousel = React.forwardRef(
     useEffect(() => {
       function updateScrollPosition(event) {
         // update the scroll position
-        event.stopPropagation();
-        event.preventDefault();
-        event.cancelBubble = false;
+        if (
+          event.altKey ||
+          event.ctrlKey ||
+          event.metaKey ||
+          event.shiftKey ||
+          Math.abs(event.deltaX) !== 0
+        ) {
+          event.stopPropagation();
+          event.preventDefault();
+          event.cancelBubble = false;
+        }
       }
       const scrollDiv = scrollRef.current;
       if (scrollDiv) {

@@ -7,4 +7,27 @@
 
 @import '../../global/styles/project-settings';
 
-// TODO: add any additional styles used by InterstitialScreen.stories.js
+.MyInterstitialHeader {
+  // stylelint-disable-next-line max-nesting-depth
+  h2 {
+    // stylelint-disable-next-line carbon/layout-token-use
+    padding: 0 32px 50px;
+  }
+
+  padding: $spacing-07 0;
+  background-color: $ui-02;
+}
+
+.CustomLayout {
+  display: flex;
+  flex-wrap: wrap;
+  padding: $spacing-05 0;
+  gap: $spacing-05;
+}
+
+.storyCardExample {
+  width: 25%;
+  flex-grow: 1;
+  padding: $spacing-06;
+  background-color: $ui-03;
+}

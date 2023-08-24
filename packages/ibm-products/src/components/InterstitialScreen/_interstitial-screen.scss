@@ -22,12 +22,6 @@
   $carousel-item: #{$pkg-prefix}--carousel__item;
   $one-grid-column: calc(100% / 16);
 
-  $sm: 320px;
-  $md: 672px;
-  $lg: 1056px;
-  $xlg: 1312px;
-  $max: 1584px;
-
   .#{$block-class} {
     $block: &;
 
@@ -55,7 +49,7 @@
     }
 
     &--progress {
-      margin-bottom: $spacing-09;
+      margin: 0 $spacing-07;
     }
 
     &__carousel {
@@ -74,17 +68,6 @@
 
     &--content {
       padding-right: $spacing-05;
-      margin-top: $spacing-08;
-
-      @media screen and (min-width: $md) {
-        margin-top: $spacing-10;
-      }
-      @media screen and (min-width: $lg) {
-        margin-top: $spacing-12;
-      }
-      @media screen and (min-width: $xlg) {
-        margin-top: $spacing-13;
-      }
     }
 
     &--carousel {
@@ -166,6 +149,9 @@
           right: 0;
           padding: 0 $spacing-03;
         }
+      }
+      #{$block}--content {
+        margin-top: 0;
       }
     }
 

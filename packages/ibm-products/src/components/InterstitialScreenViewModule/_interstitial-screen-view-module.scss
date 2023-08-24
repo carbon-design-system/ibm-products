@@ -24,10 +24,25 @@
 @mixin interstitial-screen-view-module {
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--interstitial-screen-view-module;
+  $sm: 320px;
+  $md: 672px;
+  $lg: 1056px;
+  $xlg: 1312px;
+  $max: 1584px;
 
   .#{$block-class} {
-    // TODO: Styles.
-    margin: 0 0 $spacing-09;
+    margin: $spacing-09 0;
+    // margin: $spacing-08 0 $spacing-09;
+
+    // @media screen and (min-width: $md) {
+    //   margin-top: $spacing-10;
+    // }
+    // @media screen and (min-width: $lg) {
+    //   margin-top: $spacing-12;
+    // }
+    // @media screen and (min-width: $xlg) {
+    //   margin-top: $spacing-13;
+    // }
   }
 }
 

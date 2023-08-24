@@ -11,4 +11,20 @@ const HowACaseIsCreated3 = new URL(
   import.meta.url
 ).pathname;
 
-export { HowACaseIsCreated1, HowACaseIsCreated2, HowACaseIsCreated3 };
+const InterstitialExampleImgG100 = new URL(
+  './illustrations/interstitial-g100-ph.png',
+  import.meta.url
+).pathname;
+
+const InterstitialExampleImgG10 = new URL(
+  './illustrations/interstitial-g10-ph.png',
+  import.meta.url
+).pathname;
+
+export {
+  HowACaseIsCreated1,
+  HowACaseIsCreated2,
+  HowACaseIsCreated3,
+  InterstitialExampleImgG100,
+  InterstitialExampleImgG10,
+};

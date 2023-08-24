@@ -308,9 +308,9 @@ export let BreadcrumbWithOverflow = ({
                 href={backItem.href}
                 renderIcon={() => (
                   <Tooltip
-                    align="bottom"
+                    align="right"
                     label={backItem.title || backItem.label}
-                    className={`${blockClass}__back__button`}
+                    className={`${blockClass}__back__button ${carbonPrefix}--icon-tooltip`}
                   >
                     <TooltipTrigger>
                       <ArrowLeft size={16} />

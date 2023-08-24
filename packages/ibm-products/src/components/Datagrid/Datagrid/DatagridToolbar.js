@@ -6,14 +6,14 @@
  */
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Add, OverflowMenuVertical } from '@carbon/react/icons';
 import {
   TableToolbar,
   TableBatchActions,
   TableBatchAction,
+  MenuButton,
+  MenuItem,
 } from '@carbon/react';
 import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
-import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
 
@@ -83,27 +83,21 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     }
 
     return (
-      <ButtonMenu
-        label={width > minWidthBeforeOverflowIcon ? 'More' : null}
-        renderIcon={
-          width > minWidthBeforeOverflowIcon ? Add : OverflowMenuVertical
-        }
+      <MenuButton
+        label="More"
         className={cx(`${blockClass}__button-menu`, {
           [`${blockClass}__button-menu--icon-only`]:
             width <= minWidthBeforeOverflowIcon,
         })}
-        menuOptionsClass={`${blockClass}__button-menu-options`}
-        flipped
-        menuAriaLabel={'Batch actions'}
       >
         {toolbarBatchActions &&
           toolbarBatchActions.map((batchAction, index) => {
             if (index < 2) {
               if (displayAllInMenu) {
                 return (
-                  <ButtonMenuItem
+                  <MenuItem
                     key={`${batchAction.label}-${index}`}
-                    itemText={batchAction.label}
+                    label={batchAction.label}
                     onClick={(event) => {
                       batchAction.onClick(getSelectedRowData(), event);
                       if (batchAction.type === 'select_all') {
@@ -116,9 +110,9 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
               return null;
             }
             return (
-              <ButtonMenuItem
+              <MenuItem
                 key={`${batchAction.label}-${index}`}
-                itemText={batchAction.label}
+                label={batchAction.label}
                 onClick={(event) => {
                   batchAction.onClick(getSelectedRowData(), event);
                   if (batchAction.type === 'select_all') {
@@ -128,7 +122,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
               />
             );
           })}
-      </ButtonMenu>
+      </MenuButton>
     );
   };
 

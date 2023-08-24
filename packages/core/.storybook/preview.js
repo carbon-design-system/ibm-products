@@ -19,7 +19,6 @@ import React, { useEffect } from 'react';
 import { pkg } from '../../ibm-products/src/settings';
 
 import index from './index.scss';
-import prefixedIndex from './_prefix-index.scss';
 import { getSectionSequence } from '../story-structure';
 import { StoryDocsPage } from '../../ibm-products/src/global/js/utils/StoryDocsPage';
 
@@ -53,7 +52,7 @@ const decorators = [
 
     return (
       <div className="preview-position-fix">
-        <Style styles={isDev ? prefixedIndex : index}>
+        <Style styles={index}>
           {args.featureFlags ? (
             <ActionableNotification
               className="preview__notification--feature-flag"
@@ -157,4 +156,4 @@ const globals = {
   [CARBON_THEME_PARAM_KEY]: CARBON_THEMES.g10,
 };
 
-export { argTypes, decorators, globals, parameters, Style };
+export default { argTypes, decorators, globals, parameters, Style };

@@ -6940,7 +6940,8 @@ button.c4p--add-select__global-filter-toggle--open {
   white-space: nowrap;
 }
 .c4p--page-header .c4p--page-header__title-row {
-  margin-top: 0.125rem; /* spacing needed in case of editable title, otherwise top of focus indicator hidden */
+  --title-row-margin-top: 0.125rem; /* spacing needed in case of editable title, otherwise top of focus indicator hidden */
+  margin-top: var(--title-row-margin-top);
   margin-bottom: 0;
   transform: translateY(0.125rem);
 }
@@ -6978,7 +6979,7 @@ button.c4p--add-select__global-filter-toggle--open {
   position: sticky;
 }
 .c4p--page-header .c4p--page-header__breadcrumb-row--has-breadcrumbs + .c4p--page-header__title-row--sticky {
-  top: var(--c4p--page-header--breadcrumb-top);
+  top: calc(var(--c4p--page-header--breadcrumb-top) - var(--title-row-margin-top));
 }
 .c4p--page-header .c4p--page-header__title-column {
   min-height: 40px;

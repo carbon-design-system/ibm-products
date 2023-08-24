@@ -55,7 +55,13 @@ pkgSettings.checkComponentEnabled = (component, name) => {
     // Transfer object properties already assigned (eg propTypes, displayName)
     // then merge in the stub forward-ref which checks the component status
     // when first used.
-    return Object.assign({}, component, forward);
+    // NOTE: React 18 = displayName not iterable on render function
+    return Object.assign(
+      {},
+      component,
+      { displayName: component.displayName },
+      forward
+    );
   } else {
     // The component is a direct render fn, so make a stub render fn.
     let render = (props) => {
@@ -74,10 +80,13 @@ pkgSettings.checkComponentEnabled = (component, name) => {
         props
       );
     };
+
     // Transfer object properties already assigned (eg propTypes, displayName)
     // to a function which calls the stub render fn which checks the component
     // status when first used.
-    return Object.assign((props) => render(props), component);
+    return Object.assign((props) => render(props), component, {
+      displayName: component.displayName,
+    });
   }
 };
 

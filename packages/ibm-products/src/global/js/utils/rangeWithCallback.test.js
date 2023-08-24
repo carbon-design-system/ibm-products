@@ -11,7 +11,7 @@ import { rangeWithCallback } from './rangeWithCallback';
 // which iterates between two numbers while calling
 // a callback function for each iteration
 describe('rangeWithCallback', () => {
-  it('calls the callback fn for each iteration', () => {
+  it('calls the callback fn for each iteration', async () => {
     const testFn = jest.fn();
     rangeWithCallback(1, 10, () => {
       testFn();

@@ -13,35 +13,35 @@ import { ProductiveCard } from '.';
 const componentName = ProductiveCard.displayName;
 
 describe(componentName, () => {
-  it('renders', () => {
+  it('renders', async () => {
     render(<ProductiveCard />);
   });
 
   it('has no accessibility violations', async () => {
     const { container } = render(<ProductiveCard />);
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     const { container } = render(<ProductiveCard className="test-class" />);
     expect(container.firstChild).toHaveClass('test-class');
   });
 
   const dataTestId = 'data-testid';
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     render(<ProductiveCard data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     render(<ProductiveCard ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     render(<ProductiveCard data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(

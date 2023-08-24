@@ -7,6 +7,8 @@
 
 const { resolve } = require('path');
 const { merge } = require('webpack-merge');
+const path = require('path');
+
 module.exports = {
   addons: [
     '@storybook/addon-actions',
@@ -42,7 +44,7 @@ module.exports = {
     '../../../examples/**/*+(-story|.stories).*',
   ],
   // v11 will only show stories for C4P components (or at least until CDAI/Security move from v10 to v11)
-  webpackFinal: async (configuration) =>
+  webpackFinal: async (configuration, { configType }) =>
     merge(configuration, {
       cache: {
         type: 'filesystem',
@@ -82,6 +84,15 @@ module.exports = {
             ],
           },
         ],
+      },
+      resolve: {
+        alias: {
+          ALIAS_STORY_STYLE_CONFIG$: path.resolve(
+            configType === 'DEVELOPMENT'
+              ? '../ibm-products/src/config-dev.scss'
+              : '../ibm-products/src/config.scss'
+          ),
+        },
       },
     }),
 };

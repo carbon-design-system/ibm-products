@@ -8,7 +8,7 @@
 @use '@carbon/colors/' as *;
 @use '@carbon/type/' as *;
 @use '@carbon/styles/scss/spacing' as *;
-@use '../../global/styles/project-settings' as c4p-settings;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 
 // make the root full width to get a better idea of how the cards
 // look in a real grid situation

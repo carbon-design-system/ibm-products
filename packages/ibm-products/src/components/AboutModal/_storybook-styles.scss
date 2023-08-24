@@ -9,7 +9,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/components/ui-shell' as *;
-@use '../../global/styles/project-settings' as c4p-settings;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--about-modal;

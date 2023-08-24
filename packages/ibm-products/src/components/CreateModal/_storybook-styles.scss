@@ -15,7 +15,7 @@
 @use '@carbon/react/scss/components/tooltip';
 @use '@carbon/react/scss/components/modal';
 @use '@carbon/styles/scss/spacing';
-@use '../../global/styles/project-settings' as c4p-settings;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 
 .#{c4p-settings.$carbon-prefix}--number {
   min-width: 100%;

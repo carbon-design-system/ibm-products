@@ -99,7 +99,6 @@ const TemplateModalMultipleChildren = (args) => {
       </Button>
 
       <InterstitialScreen
-        hideProgressIndicator
         isOpen={showInterstitialModal}
         onClose={() => {
           setShowInterstitialModal(false);
@@ -328,7 +327,7 @@ const defaultPropsNoMedia = {
 export const interstitialScreenModal = prepareStory(TemplateModal, {
   args: {
     ...defaultPropsImage,
-    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#InterstitialScreen-args
+    hideProgressIndicator: true,
   },
 });
 
@@ -337,6 +336,7 @@ export const interstitialScreenModalMultiples = prepareStory(
   {
     args: {
       ...defaultProps,
+      hideProgressIndicator: false,
     },
   }
 );
@@ -344,6 +344,7 @@ export const interstitialScreenModalMultiples = prepareStory(
 export const interstitialScreenFullScreen = prepareStory(TemplateFullScreen, {
   args: {
     ...defaultPropsImage,
+    hideProgressIndicator: true,
   },
 });
 export const interstitialScreenFullScreenMultiples = prepareStory(
@@ -351,6 +352,7 @@ export const interstitialScreenFullScreenMultiples = prepareStory(
   {
     args: {
       ...defaultProps,
+      hideProgressIndicator: false,
     },
   }
 );
@@ -360,6 +362,7 @@ export const interstitialScreenFullScreenNoMedia = prepareStory(
   {
     args: {
       ...defaultPropsNoMedia,
+      hideProgressIndicator: false,
     },
   }
 );
@@ -371,6 +374,7 @@ export const interstitialScreenFullScreenNoMediaWithHeader = prepareStory(
       ...defaultPropsNoMedia,
       renderHeader: () => <h2>Personalize your experience</h2>,
       headerClassName: 'MyInterstitialHeader',
+      hideProgressIndicator: false,
     },
   }
 );
@@ -382,6 +386,7 @@ export const interstitialScreenFullScreenNoMediaWithCards = prepareStory(
       ...defaultPropsNoMedia,
       renderHeader: () => <h2>Personalize your experience</h2>,
       headerClassName: 'MyInterstitialHeader',
+      hideProgressIndicator: false,
     },
   }
 );

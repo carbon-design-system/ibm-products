@@ -107,7 +107,7 @@ describe(componentName, () => {
       tooltipText: 'Display name',
     });
     const tooltipElement = container.querySelector(
-      `.${carbon.prefix}--icon-tooltip`
+      `.${carbon.prefix}--tooltip`
     );
     expect(tooltipElement).toBeTruthy();
   });

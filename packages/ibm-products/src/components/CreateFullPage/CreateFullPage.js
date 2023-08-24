@@ -146,7 +146,11 @@ export let CreateFullPage = React.forwardRef(
         {...getDevtoolsProps(componentName)}
       >
         <div className={`${blockClass}__influencer`}>
-          <CreateInfluencer stepData={stepData} currentStep={currentStep} title={title}/>
+          <CreateInfluencer
+            stepData={stepData}
+            currentStep={currentStep}
+            title={title}
+          />
         </div>
         <div className={`${blockClass}__body`}>
           <div className={`${blockClass}__main`}>

@@ -8,7 +8,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/motion' as *;
 @use '../../global/styles/project-settings' as c4p-settings;
-@use '@carbon/type/' as *;
+@use '@carbon/styles/scss/type';
 
 $influencer-block-class: #{c4p-settings.$pkg-prefix}--create-influencer;
 $create-tearsheet-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-create;
@@ -52,7 +52,8 @@ $influencerAnimationStart: calc(-1 * #{$spacing-05});
 }
 
 .#{$influencer-block-class}__title {
-  font-size: type-scale(5);
+  @include type.type-style('heading-03');
+
   margin-bottom: $spacing-06;
 }
 

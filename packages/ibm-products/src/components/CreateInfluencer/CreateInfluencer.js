@@ -45,12 +45,10 @@ export let CreateInfluencer = ({ className, currentStep, stepData, title }) => {
 
     const conditionallyRenderInfluencerTitle = () => {
       if (title) {
-        return <h3 className={cx(`${blockClass}__title`)}>{title}</h3>
+        return <h3 className={cx(`${blockClass}__title`)}>{title}</h3>;
       }
-      return null
-    }
-
-      
+      return null;
+    };
 
     return (
       <div className={`${blockClass}__left-nav`}>

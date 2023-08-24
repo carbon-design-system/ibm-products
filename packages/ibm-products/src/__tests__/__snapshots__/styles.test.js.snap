@@ -1849,7 +1849,10 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .c4p--create-influencer__title {
-  font-size: 1.25rem;
+  font-size: var(--cds-heading-03-font-size, 1.25rem);
+  font-weight: var(--cds-heading-03-font-weight, 400);
+  line-height: var(--cds-heading-03-line-height, 1.4);
+  letter-spacing: var(--cds-heading-03-letter-spacing, 0);
   margin-bottom: 1.5rem;
 }
 

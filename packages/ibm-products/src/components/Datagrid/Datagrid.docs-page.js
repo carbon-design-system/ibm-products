@@ -139,7 +139,7 @@ const App = () => {
       },
       {
         description:
-          'There is also an optional resize callback when resizing columns, allowing you to save the widths of columns that have been resized. The resize callback returns the column that was just resized, in addition to all of the columns that have been resized',
+          "There is also an optional resize callback when resizing columns, allowing you to save the widths of columns that have been resized. The resize callback returns the column that was just resized and it's width, in addition to all of the columns that have been resized and their widths.",
         source: {
           language: 'jsx',
           code: `

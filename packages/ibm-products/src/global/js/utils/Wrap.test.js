@@ -20,25 +20,25 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
 describe(componentName, () => {
-  it('renders non-empty content and passes through a ref', () => {
+  it('renders non-empty content and passes through a ref', async () => {
     const ref = React.createRef();
     render(<Wrap {...{ className, ref }}>{nonemptyContent}</Wrap>);
     screen.getByText(nonemptyContent);
     expect(ref.current).toHaveClass(className);
   });
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     render(<Wrap data-testid={dataTestId}>{nonemptyContent}</Wrap>);
     screen.getByTestId(dataTestId);
   });
 
-  it("doesn't render empty content", () => {
+  it("doesn't render empty content", async () => {
     const ref = React.createRef();
     render(<Wrap ref={ref}>{emptyContent}</Wrap>);
     expect(ref.current).toBeNull();
   });
 
-  it('renders recursive non-empty content', () => {
+  it('renders recursive non-empty content', async () => {
     const ref = React.createRef();
     render(
       <Wrap ref={ref}>
@@ -49,7 +49,7 @@ describe(componentName, () => {
     expect(ref.current).not.toBeNull();
   });
 
-  it("doesn't render recursive empty content", () => {
+  it("doesn't render recursive empty content", async () => {
     const ref = React.createRef();
     render(
       <Wrap ref={ref}>
@@ -93,7 +93,7 @@ describe(componentName, () => {
     );
   };
 
-  it('render recursive content only where non-empty', () => {
+  it('render recursive content only where non-empty', async () => {
     renderHierarchy({}, [
       true,
       true,
@@ -107,7 +107,7 @@ describe(componentName, () => {
     ]);
   });
 
-  it('responds to alwaysRender', () => {
+  it('responds to alwaysRender', async () => {
     renderHierarchy({ alwaysRender: true }, [
       true,
       true,
@@ -120,7 +120,7 @@ describe(componentName, () => {
       true,
     ]);
   });
-  it('responds to neverRender', () => {
+  it('responds to neverRender', async () => {
     renderHierarchy({ neverRender: true }, [
       false,
       false,

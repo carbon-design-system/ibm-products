@@ -30,14 +30,11 @@
   "dependencies": {
     "@babel/core": "^7.22.9",
     "@testing-library/jest-dom": "^5.16.5",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "accessibility-checker": "^3.1.50",
     "axe-core": "^4.7.2",
     "babel-jest": "^29.6.1",
     "babel-preset-ibm-cloud-cognitive": "^0.14.38",
     "chalk": "^4.1.2",
-    "enzyme": "^3.11.0",
-    "enzyme-to-json": "^3.6.2",
     "jest-circus": "^29.6.1"
   }
 }

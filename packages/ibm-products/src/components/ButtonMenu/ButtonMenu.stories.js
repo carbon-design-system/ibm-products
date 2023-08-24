@@ -13,6 +13,7 @@ import {
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
+import { ActionableNotification } from '@carbon/react';
 
 import { ButtonMenu, ButtonMenuItem } from '.';
 // import mdx from './ButtonMenu.mdx';
@@ -41,30 +42,48 @@ docs: {
 
 const Template = (args) => {
   return (
-    <ButtonMenu
-      label="Primary button"
-      menuAriaLabel="Primary button"
-      renderIcon={(props) => <Add size={16} {...props} />}
-      {...args}
-    >
-      <ButtonMenuItem
-        itemText="Option 1a"
-        onClick={action(`Click on Option 1`)}
+    <>
+      <ActionableNotification
+        title="Deprecation notice"
+        subtitle="This component is deprecated and will be removed in the next major version. Please migrate to Carbon’s MenuButton."
+        inline
+        kind="warning"
+        lowContrast
+        hideCloseButton
+        actionButtonLabel="See MenuButton"
+        statusIconDescription="deprecation notification"
+        onActionButtonClick={() => {
+          window.open(
+            'https://react.carbondesignsystem.com/?path=/docs/components-menubutton--overview'
+          );
+        }}
+        style={{ marginBottom: '1rem' }}
       />
-      <ButtonMenuItem
-        itemText="Option 2"
-        onClick={action(`Click on Option 2`)}
-      />
-      <ButtonMenuItem
-        itemText="Option 3"
-        onClick={action(`Click on Option 3`)}
-      />
-      <ButtonMenuItem
-        itemText="Option 4"
-        onClick={action(`Click on Option 4`)}
-        hasDivider
-      />
-    </ButtonMenu>
+      <ButtonMenu
+        label="Primary button"
+        menuAriaLabel="Primary button"
+        renderIcon={(props) => <Add size={16} {...props} />}
+        {...args}
+      >
+        <ButtonMenuItem
+          itemText="Option 1a"
+          onClick={action(`Click on Option 1`)}
+        />
+        <ButtonMenuItem
+          itemText="Option 2"
+          onClick={action(`Click on Option 2`)}
+        />
+        <ButtonMenuItem
+          itemText="Option 3"
+          onClick={action(`Click on Option 3`)}
+        />
+        <ButtonMenuItem
+          itemText="Option 4"
+          onClick={action(`Click on Option 4`)}
+          hasDivider
+        />
+      </ButtonMenu>
+    </>
   );
 };
 

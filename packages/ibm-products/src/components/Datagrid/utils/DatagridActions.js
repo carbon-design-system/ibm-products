@@ -24,8 +24,9 @@ import {
   OverflowMenuItem,
   TableToolbarContent,
   TableToolbarSearch,
+  MenuButton,
+  MenuItem,
 } from '@carbon/react';
-import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import React, { useLayoutEffect, useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
@@ -175,24 +176,24 @@ export const DatagridActions = (datagridState) => {
           </div>
         )}
         <RowSizeDropdown {...rowSizeDropdownProps} />
-        <ButtonMenu
+        <MenuButton
           label="Primary button"
           renderIcon={ChevronDown}
-          menuOptionsClass={`${blockClass}__toolbar-options`}
+          className={`${blockClass}__toolbar-options`}
         >
-          <ButtonMenuItem
-            itemText="Option 1"
+          <MenuItem
+            label="Option 1"
             onClick={action(`Click on ButtonMenu Option 1`)}
           />
-          <ButtonMenuItem
-            itemText="Option 2"
+          <MenuItem
+            label="Option 2"
             onClick={action(`Click on ButtonMenu Option 2`)}
           />
-          <ButtonMenuItem
-            itemText="Option 3"
+          <MenuItem
+            label="Option 3"
             onClick={action(`Click on ButtonMenu Option 3`)}
           />
-        </ButtonMenu>
+        </MenuButton>
       </TableToolbarContent>
     ) : (
       <TableToolbarContent>

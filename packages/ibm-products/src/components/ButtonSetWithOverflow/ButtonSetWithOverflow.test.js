@@ -20,10 +20,11 @@ const buttons = (handleClick) =>
     iconDescription: !(num % 3) ? 'Busy bee' : null,
     label: `Action ${num}`,
     key: `key-${num}`,
-    kind: num === 1 ? 'primary' : num === 2 ? 'secondary' : 'danger',
+    kind: 'default',
     onClick: () => {
       handleClick(`Action ${num}`);
     },
+    className: 'button-class-test',
   }));
 
 import { pkg } from '../../settings';
@@ -76,13 +77,13 @@ describe(ButtonSetWithOverflow.displayName, () => {
     );
 
     const action1 = screen.getByText(/Action 1/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container--visible .${carbon.prefix}--btn`,
     });
     screen.getByText(/Action 2/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container--visible .${carbon.prefix}--btn`,
     });
     screen.getByText(/Action 3/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container--visible .${carbon.prefix}--btn`,
     });
 
     await act(() => userEvent.click(action1));
@@ -103,17 +104,17 @@ describe(ButtonSetWithOverflow.displayName, () => {
     );
 
     const action1 = screen.queryByText(/Action 1/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${pkg.prefix}--button-menu__trigger`,
+      selector: `.${blockClass}__button-container--visible .${pkg.prefix}--menu-button__trigger`,
     });
     expect(action1).toBeNull();
 
-    const comboButton = screen.getByText(/button menu label/, {
-      selector: `.${blockClass}__button-container--hidden .${carbon.prefix}--overflow-menu .${pkg.prefix}--button-menu__trigger`,
+    const comboButton = screen.getByText(buttonMenuLabel, {
+      selector: `.${pkg.prefix}--button-set-with-overflow__button-container.${pkg.prefix}--button-set-with-overflow__button-container--visible button`,
     });
     await act(() => userEvent.click(comboButton));
 
     const action1a = screen.getByText(/Action 1/, {
-      selector: `.${carbon.prefix}--overflow-menu-options__option-content`,
+      selector: `.button-class-test .${carbon.prefix}--menu-item__label`,
     });
 
     await act(() => userEvent.click(action1a));

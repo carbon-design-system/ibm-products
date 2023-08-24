@@ -2296,11 +2296,11 @@ describe('batch action testing', () => {
       // in addition to the MenuButton
       screen.getByLabelText(getBatchActions()[0].label);
       screen.getByLabelText(getBatchActions()[1].label);
-      const menuButton = container.querySelector(`.${pkg.prefix}--button-menu`);
+      const menuButton = screen.getByRole('button', { name: /More/i });
       expect(menuButton).toBeInTheDocument();
       await act(() => click(menuButton));
       const options = Array.from(
-        document.querySelector(`.${pkg.prefix}--button-menu__options`).children
+        screen.getByRole('menu', { name: /More/i }).children
       );
       const optionsText = options.map((o) => {
         return o.textContent;

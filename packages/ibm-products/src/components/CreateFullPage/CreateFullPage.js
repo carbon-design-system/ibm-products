@@ -146,7 +146,7 @@ export let CreateFullPage = React.forwardRef(
         {...getDevtoolsProps(componentName)}
       >
         <div className={`${blockClass}__influencer`}>
-          <CreateInfluencer stepData={stepData} currentStep={currentStep} />
+          <CreateInfluencer stepData={stepData} currentStep={currentStep} title={title}/>
         </div>
         <div className={`${blockClass}__body`}>
           <div className={`${blockClass}__main`}>
@@ -298,7 +298,7 @@ CreateFullPage.propTypes = {
   submitButtonText: PropTypes.string.isRequired,
 
   /**
-   * The main title of the full page, displayed in the header area.
+   * The main title of the full page, displayed in the influencer area.
    */
-  title: PropTypes.node,
+  title: PropTypes.string,
 };

@@ -15,8 +15,6 @@ import { getComponentNamespace } from '../../globals/namespace';
 
 export const navNamespace = getComponentNamespace('nav');
 
-const { name } = NavList;
-
 export default class Nav extends Component {
   constructor(props) {
     super(props);

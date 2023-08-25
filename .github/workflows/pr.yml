@@ -6,6 +6,8 @@ on:
       - opened
       - edited
       - synchronize
+  merge_group:
+    types: [checks_requested]
 
 jobs:
   main:

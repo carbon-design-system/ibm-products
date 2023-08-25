@@ -145,7 +145,7 @@ export const BasicUsage = () => {
     multiLineWrapAll: true, // If `multiLineWrap` is required for all columns in data grid
   });
 
-  return <Datagrid datagridState={datagridState} />;
+  return <Datagrid datagridState={datagridState} title="Basic usage" />;
 };
 
 export const EmptyState = () => {

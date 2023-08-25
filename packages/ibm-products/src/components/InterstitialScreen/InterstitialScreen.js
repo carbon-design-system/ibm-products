@@ -180,7 +180,7 @@ export let InterstitialScreen = React.forwardRef(
     if (!isOpen) {
       return null;
     }
-    const domainProductDelimeter =
+    const domainProductDelimiter =
       domainName !== '' && productName !== '' ? ' | ' : '';
     return (
       <div
@@ -201,7 +201,7 @@ export let InterstitialScreen = React.forwardRef(
           {isFullScreen ? (
             <div className={`${blockClass}--header`}>
               {domainName}
-              {domainProductDelimeter}
+              {domainProductDelimiter}
               <b>{productName}</b>
             </div>
           ) : (
@@ -411,7 +411,7 @@ InterstitialScreen.propTypes = {
    *
    * If a stepped animation is required, use `{filePaths}`.
    *
-   * Breakpoints are used to set the media contant column size as well as the remainder for the main content areas column size.
+   * Breakpoints are used to set the media content column size as well as the remainder for the main content areas column size.
    * Medium and small breakpoints will be set to 0 internally to focus on the main content area.
    * @see {@link MEDIA_PROP_TYPE}.
    */

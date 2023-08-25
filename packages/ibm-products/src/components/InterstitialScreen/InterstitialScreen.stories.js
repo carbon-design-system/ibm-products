@@ -8,8 +8,7 @@
 import React, { useState } from 'react';
 // TODO: import action to handle events if required.
 // import { action } from '@storybook/addon-actions';
-import { Button, Grid, Row, Column } from 'carbon-components-react';
-import { ExpressiveCard } from '..';
+import { Button } from 'carbon-components-react';
 import { InterstitialScreenView } from '..';
 import { InterstitialScreenViewModule } from '..';
 import {
@@ -37,6 +36,7 @@ export default {
   },
   parameters: {
     styles,
+    // layout: 'fullscreen',
     docs: {
       page: mdx,
     },

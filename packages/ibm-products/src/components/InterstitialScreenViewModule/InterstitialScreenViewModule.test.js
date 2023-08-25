@@ -20,42 +20,82 @@ const componentName = InterstitialScreenViewModule.displayName;
 const children = `hello, world (${uuidv4()})`;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
+const tmpTitle = `title-${uuidv4()}`;
+const tmpDesc = `description-${uuidv4()}`;
 
 describe(componentName, () => {
   it('renders a component InterstitialScreenViewModule', () => {
-    render(<InterstitialScreenViewModule> </InterstitialScreenViewModule>);
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+    render(
+      <InterstitialScreenViewModule
+        className={className}
+        data-testid={dataTestId}
+        title={tmpTitle}
+        description={tmpDesc}
+      />
+    );
+    expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<InterstitialScreenViewModule> </InterstitialScreenViewModule>);
+    const { container } = render(
+      <InterstitialScreenViewModule
+        className={className}
+        data-testid={dataTestId}
+        title={tmpTitle}
+        description={tmpDesc}
+      />
+    );
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, () => {
-    render(<InterstitialScreenViewModule>{children}</InterstitialScreenViewModule>);
-    screen.getByText(children);
-  });
-
   it('applies className to the containing node', () => {
-    render(<InterstitialScreenViewModule className={className}> </InterstitialScreenViewModule>);
-    expect(screen.getByRole('main')).toHaveClass(className);
+    render(
+      <InterstitialScreenViewModule
+        className={className}
+        data-testid={dataTestId}
+        title={tmpTitle}
+        description={tmpDesc}
+      />
+    );
+    expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {
-    render(<InterstitialScreenViewModule data-testid={dataTestId}> </InterstitialScreenViewModule>);
+    render(
+      <InterstitialScreenViewModule
+        className={className}
+        data-testid={dataTestId}
+        title={tmpTitle}
+        description={tmpDesc}
+      />
+    );
     screen.getByTestId(dataTestId);
   });
 
   it('forwards a ref to an appropriate node', () => {
     const ref = React.createRef();
-    render(<InterstitialScreenViewModule ref={ref}> </InterstitialScreenViewModule>);
+    render(
+      <InterstitialScreenViewModule
+        className={className}
+        data-testid={dataTestId}
+        title={tmpTitle}
+        description={tmpDesc}
+        ref={ref}
+      />
+    );
     expect(ref.current).toHaveClass(blockClass);
   });
 
   it('adds the Devtools attribute to the containing node', () => {
-    render(<InterstitialScreenViewModule data-testid={dataTestId}> </InterstitialScreenViewModule>);
+    render(
+      <InterstitialScreenViewModule
+        className={className}
+        data-testid={dataTestId}
+        title={tmpTitle}
+        description={tmpDesc}
+      />
+    );
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
       componentName

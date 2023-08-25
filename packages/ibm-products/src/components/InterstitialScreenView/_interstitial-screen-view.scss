@@ -47,18 +47,6 @@
       @include carbon--type-style('expressive-heading-05');
 
       margin-bottom: $spacing-07;
-      // /* stylelint-disable-next-line carbon/type-token-use */
-      // font-size: $spacing-09;
-
-      // .#{$prefix}--interstitial-screen.modal & {
-      //   /* stylelint-disable-next-line carbon/type-token-use */
-      //   font-size: calc($spacing-01 + $spacing-08);
-      // }
-
-      // @include carbon--breakpoint('xlg') {
-      //   /* stylelint-disable-next-line carbon/type-token-use */
-      //   font-size: calc($spacing-04 + $spacing-09);
-      // }
     }
 
     &--body {

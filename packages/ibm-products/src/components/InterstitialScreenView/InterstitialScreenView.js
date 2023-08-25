@@ -37,6 +37,7 @@ export let InterstitialScreenView = React.forwardRef(
   ) => {
     return (
       <div
+        role="complementary"
         aria-label={stepTitle}
         {
           // Pass through any other property values as HTML attributes.
@@ -52,7 +53,6 @@ export let InterstitialScreenView = React.forwardRef(
           }
         )}
         ref={ref}
-        role="main"
         {...getDevtoolsProps(componentName)}
       >
         {children}

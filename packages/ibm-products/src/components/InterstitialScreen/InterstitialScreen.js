@@ -56,9 +56,12 @@ const defaults = {
   hideProgressIndicator: false,
   isFullScreen: false,
   isOpen: false,
+  nextButtonLabel: 'Next',
   onClose: () => {},
+  previousButtonLabel: 'Back',
   productName: '',
   skipButtonLabel: '',
+  startButtonLabel: 'Get started',
 };
 
 /**
@@ -75,13 +78,13 @@ export let InterstitialScreen = React.forwardRef(
       isFullScreen = defaults.isFullScreen,
       isOpen = defaults.isOpen,
       media,
-      nextButtonLabel,
+      nextButtonLabel = defaults.nextButtonLabel,
       onClose = defaults.onClose,
-      previousButtonLabel,
+      previousButtonLabel = defaults.previousButtonLabel,
       productName = defaults.productName,
       renderHeader,
       headerClassName,
-      startButtonLabel,
+      startButtonLabel = defaults.startButtonLabel,
       skipButtonLabel = defaults.skipButtonLabel,
 
       // Collect any other property values passed in.
@@ -192,7 +195,6 @@ export let InterstitialScreen = React.forwardRef(
           isVisibleClass
         )}
         ref={ref}
-        role="main"
         {...getDevtoolsProps(componentName)}
       >
         <div className={containerClass}>
@@ -210,6 +212,7 @@ export let InterstitialScreen = React.forwardRef(
                 iconDescription={closeIconDescription}
                 kind="ghost"
                 renderIcon={Close16}
+                type="button"
                 size="lg"
                 onClick={handleClose}
               />
@@ -287,6 +290,7 @@ export let InterstitialScreen = React.forwardRef(
                   kind="ghost"
                   size="lg"
                   title={skipButtonLabel}
+                  type="button"
                   onClick={handleClose}
                 >
                   {skipButtonLabel}
@@ -299,6 +303,7 @@ export let InterstitialScreen = React.forwardRef(
                   className={`${blockClass}--prev-btn`}
                   kind="secondary"
                   size="lg"
+                  type="button"
                   title={previousButtonLabel}
                   onClick={handleClickPrev}
                 >
@@ -312,6 +317,7 @@ export let InterstitialScreen = React.forwardRef(
                   renderIcon={ArrowRight16}
                   ref={nextButtonRef}
                   size="lg"
+                  type="button"
                   title={nextButtonLabel}
                   onClick={handleClickNext}
                 >
@@ -428,7 +434,7 @@ InterstitialScreen.propTypes = {
   /**
    * The label for the Next button.
    */
-  nextButtonLabel: PropTypes.string.isRequired,
+  nextButtonLabel: PropTypes.string,
   /**
    * Function to call when the close button is clicked.
    */
@@ -436,7 +442,7 @@ InterstitialScreen.propTypes = {
   /**
    * The label for the Previous button.
    */
-  previousButtonLabel: PropTypes.string.isRequired,
+  previousButtonLabel: PropTypes.string,
   /**
    * The name of this app, e.g. "QRadar".
    */
@@ -453,5 +459,5 @@ InterstitialScreen.propTypes = {
   /**
    * The label for the start button.
    */
-  startButtonLabel: PropTypes.string.isRequired,
+  startButtonLabel: PropTypes.string,
 };

@@ -177,6 +177,20 @@ const columns = [
 ];
 ```
 
+There is also an optional resize callback when resizing columns, allowing you to
+save the widths of columns that have been resized. The resize callback returns
+the column that was just resized and it's width, in addition to all of the
+columns that have been resized and their widths.
+
+```jsx
+useDatagrid({
+  columns,
+  data,
+  onColResizeEnd: (currentColumn, allColumns) =>
+    console.log(currentColumn, allColumns),
+});
+```
+
 ## Rendering the table toolbar
 
 <img src={datagridActionsExample} />

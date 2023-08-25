@@ -18,6 +18,7 @@ import {
   Toggle,
   NumberInput,
   Checkbox,
+  Link,
 } from '@carbon/react';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
@@ -131,8 +132,13 @@ export const MultiStepTearsheet = ({
           fieldsetLegendText="Topic information"
           disableSubmit={!stepOneTextInputValue}
           subtitle="This is the unique name used to recognize your topic"
-          description="It will also be used by your producers and consumers as part of the
-          connection information, so make it something easy to recognize."
+          description={
+            <div>
+              It will also be used by your producers and consumers as part of
+              the connection information, so make it something easy to
+              recognize. <Link href="#">Learn more.</Link>
+            </div>
+          }
         >
           <Grid>
             <Column xlg={8} lg={8} md={8} sm={4}>
@@ -185,13 +191,18 @@ export const MultiStepTearsheet = ({
               <Checkbox
                 labelText={`Include additional step`}
                 id="include-additional-step-checkbox"
-                onChange={(value) => setShouldIncludeAdditionalStep(value)}
+                onChange={(event, { checked }) =>
+                  setShouldIncludeAdditionalStep(checked)
+                }
                 checked={shouldIncludeAdditionalStep}
               />
             </Column>
           </Grid>
         </CreateTearsheetStep>
         <CreateTearsheetStep
+          onPrevious={() => {
+            console.log('custom onPrevious handler');
+          }}
           title="Dynamic step"
           subtitle="Dynamic step subtitle"
           description="This is an example showing how to include a dynamic step into the CreateTearsheet"

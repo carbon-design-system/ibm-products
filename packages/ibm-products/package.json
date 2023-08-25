@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "2.5.0",
+  "version": "2.7.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -38,7 +38,7 @@
   "scripts": {
     "build": "run-s clean build-first build-all build-css-update-maps",
     "build-all": "run-p 'build:*'",
-    "build-first": "copyfiles 'src/**/*.scss' scss -u 1",
+    "build-first": "copyfiles -e 'src/config-dev.scss' 'src/**/*.scss' scss -u 1",
     "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules scss:css",
     "build:css-min": "sass --style=compressed --load-path node_modules --load-path ../../node_modules scss/index.scss:css/index.min.css scss/index-full-carbon.scss:css/index-full-carbon.min.css scss/index-without-carbon.scss:css/index-without-carbon.min.css scss/index-without-carbon-released-only.scss:css/index-without-carbon-released-only.min.css",
     "build-css-update-maps": "node ../../scripts/updateSourceMaps.js",
@@ -70,7 +70,7 @@
     "npm-check-updates": "^16.10.15",
     "npm-run-all": "^4.1.5",
     "rimraf": "^5.0.1",
-    "sass": "^1.63.6",
+    "sass": "1.63.6",
     "yargs": "^17.7.2"
   },
   "dependencies": {
@@ -79,19 +79,19 @@
     "framer-motion": "^6.5.1 < 7",
     "immutability-helper": "^3.1.1",
     "lodash": "^4.17.21",
-    "react-dnd": "^15.1.2",
-    "react-dnd-html5-backend": "^15.1.3",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-table": "^7.8.0",
     "react-window": "^1.8.9"
   },
   "peerDependencies": {
-    "@carbon/grid": "^11.16.1",
-    "@carbon/layout": "^11.16.1",
-    "@carbon/motion": "^11.13.1",
-    "@carbon/react": "^1.33.2",
-    "@carbon/themes": "^11.21.1",
-    "@carbon/type": "^11.20.1",
-    "react": "^16.8.6 || ^17.0.1",
-    "react-dom": "^16.8.6 || ^17.0.1"
+    "@carbon/grid": "^11.18.0",
+    "@carbon/layout": "^11.18.0",
+    "@carbon/motion": "^11.15.0",
+    "@carbon/react": "^1.35.0",
+    "@carbon/themes": "^11.23.0",
+    "@carbon/type": "^11.22.0",
+    "react": "^16.8.6 || ^17.0.1 || ^18.2.0",
+    "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0"
   }
 }

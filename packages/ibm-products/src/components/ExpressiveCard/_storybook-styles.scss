@@ -7,7 +7,7 @@
 
 // shared card styles can be found in the Card folder
 @use '../Card/storybook-styles' as *;
-@use '../../global/styles/project-settings' as c4p-settings;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 @use '@carbon/styles/scss/theme' as *;
 
 $block-class: #{c4p-settings.$pkg-prefix}--card;

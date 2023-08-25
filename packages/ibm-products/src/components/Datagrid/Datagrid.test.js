@@ -6,12 +6,17 @@
  */
 
 import React, { useState, useEffect, forwardRef } from 'react';
-import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, fireEvent, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
 import { makeData } from './utils/makeData';
 
-import { expectError, expectWarn } from '../../global/js/utils/test-helper';
+import {
+  checkLogging,
+  expectError,
+  expectWarn,
+  mockHTMLElement,
+} from '../../global/js/utils/test-helper';
 import { Datagrid } from '.';
 import { pkg } from '../../settings';
 
@@ -40,7 +45,7 @@ import {
   TableBatchActions,
   TableBatchAction,
 } from '@carbon/react';
-import { Download, Restart, Filter, Activity } from '@carbon/react/icons';
+import { Download, Restart, Filter, Activity, Add } from '@carbon/react/icons';
 import { carbon } from '../../settings';
 
 // import { DatagridActions, DatagridBatchActions, DatagridPagination, } from './Datagrid.stories';
@@ -48,6 +53,10 @@ import { carbon } from '../../settings';
 import namor from 'namor';
 
 import userEvent from '@testing-library/user-event';
+const { click, hover, unhover } = userEvent.setup({
+  // delay: null, // prev version
+  advanceTimers: jest.advanceTimersByTime,
+});
 
 const dataTestId = uuidv4();
 
@@ -191,10 +200,10 @@ const DatagridActions = (datagridState) => {
         />
         <TableToolbarContent>
           <TableToolbarSearch
-            size="xl"
+            size="lg"
             id="columnSearch"
             persistent
-            placeHolderText={searchForAColumn}
+            placeholder={searchForAColumn}
             onChange={(e) => setGlobalFilter(e.target.value)}
           />
           <RowSizeDropdown {...rowSizeDropdownProps} />
@@ -879,10 +888,11 @@ describe(componentName, () => {
   });
 
   afterEach(() => {
+    jest.useRealTimers();
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('renders a basic data grid component with devTools attribute', () => {
+  it('renders a basic data grid component with devTools attribute', async () => {
     render(<BasicUsage data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -908,7 +918,7 @@ describe(componentName, () => {
     ).toEqual(10);
   });
 
-  it('renders a Batch Actions Table', () => {
+  it('renders a Batch Actions Table', async () => {
     render(<BatchActions data-testid={dataTestId}></BatchActions>);
 
     const alertMock = jest.spyOn(window, 'alert');
@@ -1048,7 +1058,7 @@ describe(componentName, () => {
     );
   });
 
-  it('renders nothing and logs a warning to console if no datagridState is supplied', () => {
+  it('renders nothing and logs a warning to console if no datagridState is supplied', async () => {
     expectWarn(
       'Datagrid was not passed datagridState which is required to render this component.',
       () => {
@@ -1058,10 +1068,9 @@ describe(componentName, () => {
         const { container } = render(
           <BasicUsage data-testid={dataTestId} datagridState={null} />
         );
-        expect(errorMock).toBeCalledWith(
-          expect.stringMatching(
-            /^Warning: Failed prop type: The prop `datagridState` is marked as required in `Datagrid`, but its value is `null`./
-          )
+        checkLogging(
+          errorMock,
+          /^Warning: Failed prop type: The prop `datagridState` is marked as required in `Datagrid`, but its value is `null`./
         );
         expect(container.children.length).toEqual(0);
         jest.spyOn(console, 'error').mockRestore();
@@ -1070,7 +1079,7 @@ describe(componentName, () => {
   });
 
   //Empty State
-  it('renders an empty table', () => {
+  it('renders an empty table', async () => {
     render(<EmptyUsage data-testid={dataTestId}></EmptyUsage>);
     expect(
       screen.getByRole('table').getElementsByTagName('tbody')[0].className
@@ -1122,7 +1131,7 @@ describe(componentName, () => {
     ).toEqual('Description test explaining why this card is empty.');
   });
 
-  it('Initial Load', () => {
+  it('Initial Load', async () => {
     render(<InitialLoad data-testid={dataTestId}></InitialLoad>);
     expect(
       screen
@@ -1133,7 +1142,7 @@ describe(componentName, () => {
     ).toEqual(16);
   });
 
-  it('Infinite Scroll', () => {
+  it('Infinite Scroll', async () => {
     render(<InfiniteScroll data-testid={dataTestId}></InfiniteScroll>);
 
     expect(
@@ -1145,7 +1154,7 @@ describe(componentName, () => {
   });
 
   //Ten Thousand Entries
-  it('render logs an error if infinite scroll not enabled', () => {
+  it('render logs an error if infinite scroll not enabled', async () => {
     expectError(
       'Carbon for IBM Products (Error): Feature "Datagrid.useInfiniteScroll" not enabled. To enable see the notes on feature flags in the README.',
       () => {
@@ -1157,7 +1166,7 @@ describe(componentName, () => {
     );
   });
 
-  it('renders Ten Thousand table entries', () => {
+  it('renders Ten Thousand table entries', async () => {
     render(<TenThousandEntries data-testid={dataTestId}></TenThousandEntries>);
 
     expect(
@@ -1191,7 +1200,7 @@ describe(componentName, () => {
     ).toEqual(10000);
   });
 
-  it('With Pagination', () => {
+  it('With Pagination', async () => {
     render(<WithPagination data-testid={dataTestId}></WithPagination>);
 
     expect(
@@ -1202,7 +1211,7 @@ describe(componentName, () => {
     ).toBeDefined();
   });
 
-  it('Clickable Row', () => {
+  it('Clickable Row', async () => {
     const alertMock = jest.spyOn(window, 'alert');
     render(<ClickableRow data-testid={dataTestId}></ClickableRow>);
 
@@ -1219,7 +1228,7 @@ describe(componentName, () => {
   });
 
   function completeHoverOperation(rowNumber) {
-    userEvent.hover(
+    hover(
       screen
         .getByRole('table')
         .getElementsByTagName('tbody')[0]
@@ -1239,7 +1248,7 @@ describe(componentName, () => {
       ).toBe('yes hovering!');
     }, 300);
 
-    userEvent.unhover(
+    unhover(
       screen
         .getByRole('table')
         .getElementsByTagName('tbody')[0]
@@ -1257,7 +1266,7 @@ describe(componentName, () => {
     }, 300);
   }
 
-  it('Is Hover On Row', () => {
+  it('Is Hover On Row', async () => {
     render(<IsHoverOnRow data-testid={dataTestId}></IsHoverOnRow>);
     completeHoverOperation(1);
 
@@ -1265,7 +1274,7 @@ describe(componentName, () => {
   });
 
   //Disables Selected Rows
-  it('Renders Disable Select Row', () => {
+  it('Renders Disable Select Row', async () => {
     render(<DisableSelectRow data-testid={dataTestId}></DisableSelectRow>);
 
     const alertMock = jest.spyOn(window, 'alert');
@@ -1440,7 +1449,7 @@ describe(componentName, () => {
     ).toBe(0);
   }
 
-  it('Expanded Row', () => {
+  it('Expanded Row', async () => {
     render(<ExpandedRow data-testid={dataTestId}></ExpandedRow>);
     clickRow(1);
     clickRow(4);
@@ -1465,7 +1474,7 @@ describe(componentName, () => {
     expect(row.classList['0']).toEqual('c4p--datagrid__carbon-row');
   }
 
-  it('Hide Select All', () => {
+  it('Hide Select All', async () => {
     render(<HideSelectAll data-testid={dataTestId}></HideSelectAll>);
 
     hideSelectAll(2);
@@ -1475,7 +1484,7 @@ describe(componentName, () => {
     hideSelectAll(8);
   });
 
-  it('Nested Rows', () => {
+  it('Nested Rows', async () => {
     render(<NestedRows data-testid={dataTestId}></NestedRows>);
 
     const row = screen
@@ -1506,7 +1515,7 @@ describe(componentName, () => {
     expect(nestedRow.classList[0]).toEqual('c4p--datagrid__carbon-nested-row');
   });
 
-  it('Nested Table', () => {
+  it('Nested Table', async () => {
     render(<NestedTable data-testid={dataTestId}></NestedTable>);
     fireEvent.click(
       screen
@@ -1590,7 +1599,7 @@ describe(componentName, () => {
     }
   }
 
-  it('Radio Select', () => {
+  it('Radio Select', async () => {
     render(<RadioSelect data-testid={dataTestId}></RadioSelect>);
     radioSelectButton(1, 1);
 
@@ -1602,7 +1611,7 @@ describe(componentName, () => {
   });
 
   // requires refactor
-  xit('Select Items In All Pages', () => {
+  it.skip('Select Items In All Pages', async () => {
     const alertMock = jest.spyOn(window, 'alert');
 
     render(
@@ -1807,7 +1816,7 @@ describe(componentName, () => {
     return <Datagrid datagridState={{ ...datagridState }} />;
   };
 
-  it('Right Aligned Columns', () => {
+  it('Right Aligned Columns', async () => {
     render(
       <RightAlignedColumns data-testid={dataTestId}></RightAlignedColumns>
     );
@@ -1841,7 +1850,7 @@ describe(componentName, () => {
     }
   });
 
-  it('Row Size Dropdown', () => {
+  it('Row Size Dropdown', async () => {
     render(<RowSizeDropdown data-testid={dataTestId}></RowSizeDropdown>);
 
     const alertMock = jest.spyOn(window, 'alert');
@@ -1887,7 +1896,7 @@ describe(componentName, () => {
     expect(alertMock).toHaveBeenCalled();
   });
 
-  it('Selectable Row', () => {
+  it('Selectable Row', async () => {
     render(<SelectableRow data-testid={dataTestId}></SelectableRow>);
 
     fireEvent.click(
@@ -1941,7 +1950,7 @@ describe(componentName, () => {
     );
   });
 
-  it('Sortable Columns', () => {
+  it('Sortable Columns', async () => {
     render(<SortableColumns data-testid={dataTestId}></SortableColumns>);
 
     const headerRow = screen
@@ -1963,7 +1972,7 @@ describe(componentName, () => {
     }
   });
 
-  it('Customizing Columns', () => {
+  it('Customizing Columns', async () => {
     render(<CustomizingColumns data-testid={dataTestId}></CustomizingColumns>);
 
     const alertMock = jest.spyOn(window, 'alert');
@@ -1985,7 +1994,7 @@ describe(componentName, () => {
     screen.getByRole('heading', { name: /Customize columns/ });
   });
 
-  it('Top Alignment', () => {
+  it('Top Alignment', async () => {
     const ref = React.createRef();
     render(<TopAlignment ref={ref} data-testid={dataTestId} />);
 
@@ -2083,7 +2092,7 @@ describe(componentName, () => {
     expect(alertMock).toHaveBeenCalledTimes(3);
   });
 
-  it('Sticky Actions Column', () => {
+  it('Sticky Actions Column', async () => {
     render(
       <StickyActionsColumn data-testid={dataTestId}></StickyActionsColumn>
     );
@@ -2161,5 +2170,148 @@ describe(componentName, () => {
     expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
       'Clicked [retire] on row:'
     );
+  });
+});
+
+const getBatchActions = () => {
+  return [
+    {
+      label: 'Duplicate',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: () => {},
+    },
+    {
+      label: 'Add',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: () => {},
+    },
+    {
+      label: 'Select all',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: () => {},
+      type: 'select_all',
+    },
+    {
+      label: 'Publish to catalog',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: () => {},
+    },
+    {
+      label: 'Download',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: () => {},
+    },
+    {
+      label: 'Delete',
+      renderIcon: (props) => <Add size={16} {...props} />,
+      onClick: () => {},
+      hasDivider: true,
+      kind: 'danger',
+    },
+  ];
+};
+
+const TestBatch = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(2));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
+      DatagridActions,
+    },
+    useSelectRows,
+    useSelectAllWithToggle,
+    useStickyColumn
+  );
+
+  return <Datagrid datagridState={datagridState} />;
+};
+
+describe('batch action testing', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+    jest.spyOn(global.console, 'error').mockImplementation(() => {});
+    //This will suppress the warning about Arrows16 Component (will be removed in the next major version of @carbon/icons-react).
+    jest.spyOn(global.console, 'warn').mockImplementation(() => {});
+  });
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+  window.innerWidth = 2000;
+  let mockElement;
+
+  const isTableToolbar = (el) => {
+    return (
+      el.classList?.contains(`${pkg.prefix}--datagrid__table-toolbar`) || false
+    );
+  };
+
+  const setMockWidths = (el, type = 'large') => {
+    let width = type === 'large' ? 2000 : type === 'medium' ? 1000 : 320;
+    if (isTableToolbar(el)) {
+      width = type === 'large' ? 3000 : type === 'medium' ? 1000 : 320;
+    } else {
+      width = type === 'large' ? 500 : type === 'medium' ? 400 : 320;
+    }
+
+    return width;
+  };
+
+  describe('with space for two actions and menu button', () => {
+    beforeEach(() => {
+      mockElement = mockHTMLElement({
+        offsetWidth: {
+          get: function () {
+            return setMockWidths(this);
+          },
+        },
+      });
+      window.ResizeObserver = jest.fn().mockImplementation(() => ({
+        observe: jest.fn(),
+        unobserve: jest.fn(),
+        disconnect: jest.fn(),
+      }));
+    });
+
+    afterEach(() => {
+      mockElement.mockRestore();
+      window.ResizeObserver = ResizeObserver;
+    });
+
+    it('renders batch action and checks for the appropriate rendering based on the current mocked widths', async () => {
+      const { container } = render(<TestBatch />);
+      const firstCheckbox = screen.getAllByLabelText(/datagrid-table-id/)[0];
+      await act(() => click(firstCheckbox));
+
+      expect(
+        container.querySelector(
+          `.${carbon.prefix}--batch-actions.${carbon.prefix}--batch-actions--active`
+        )
+      ).toBeInTheDocument();
+
+      // Given the default offsetWidth mocks, 2 batch actions should be visible
+      // in addition to the MenuButton
+      screen.getByLabelText(getBatchActions()[0].label);
+      screen.getByLabelText(getBatchActions()[1].label);
+      const menuButton = screen.getByRole('button', { name: /More/i });
+      expect(menuButton).toBeInTheDocument();
+      await act(() => click(menuButton));
+      const options = Array.from(
+        screen.getByRole('menu', { name: /More/i }).children
+      );
+      const optionsText = options.map((o) => {
+        return o.textContent;
+      });
+      const remainingBatchActions = [...getBatchActions()].slice(2);
+
+      // Check that the items inside of the MenuButton match the leftover
+      // batch action items
+      remainingBatchActions.forEach((batchAction, index) => {
+        expect(batchAction.label).toEqual(optionsText[index]);
+      });
+    });
   });
 });

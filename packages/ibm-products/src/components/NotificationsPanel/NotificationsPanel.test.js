@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import React from 'react';
@@ -46,14 +46,14 @@ const renderNotifications = ({ ...rest } = {}) =>
   );
 
 describe('Notifications', () => {
-  it('renders the notification panel', () => {
+  it('renders the notification panel', async () => {
     const { animationStart, animationEnd } = fireEvent;
     const { container, rerender } = renderNotifications({
       data: [],
     });
     expect(screen.queryAllByText(/Notifications/i)).toBeTruthy();
     const outerElement = container.querySelector(`.${blockClass}`);
-    userEvent.click(container);
+    await act(() => userEvent.click(container));
     expect(onClickOutside).toHaveBeenCalled();
     animationStart(outerElement);
     rerender(
@@ -62,7 +62,7 @@ describe('Notifications', () => {
     animationEnd(outerElement);
   });
 
-  it('should toggle do not disturb switch', () => {
+  it('should toggle do not disturb switch', async () => {
     const { fn } = jest;
     const onToggle = fn();
     renderNotifications({
@@ -70,18 +70,20 @@ describe('Notifications', () => {
       data: [],
     });
 
-    userEvent.click(screen.getByRole('switch', /Do not disturb/i));
+    await act(() =>
+      userEvent.click(screen.getByRole('switch', /Do not disturb/i))
+    );
     expect(onToggle).toBeCalled();
   });
 
-  it('should render notifications empty state', () => {
+  it('should render notifications empty state', async () => {
     renderNotifications({
       data: [],
     });
     expect(screen.getByText(/you do not have any notifications/i));
   });
 
-  it('should render notification with error state svg', () => {
+  it('should render notification with error state svg', async () => {
     const { container } = renderNotifications({
       data: [
         {
@@ -98,7 +100,7 @@ describe('Notifications', () => {
     expect(renderedEmptyStateSvg[0]).toBeTruthy();
   });
 
-  it('should render notification with warning state svg', () => {
+  it('should render notification with warning state svg', async () => {
     const { container } = renderNotifications({
       data: [
         {
@@ -115,7 +117,7 @@ describe('Notifications', () => {
     expect(renderedEmptyStateSvg[0]).toBeTruthy();
   });
 
-  it('should render notification with success state svg', () => {
+  it('should render notification with success state svg', async () => {
     const { container } = renderNotifications({
       data: [
         {
@@ -132,7 +134,7 @@ describe('Notifications', () => {
     expect(renderedEmptyStateSvg[0]).toBeTruthy();
   });
 
-  it('should render notification with informational state svg', () => {
+  it('should render notification with informational state svg', async () => {
     const { container } = renderNotifications({
       data: [
         {
@@ -149,7 +151,11 @@ describe('Notifications', () => {
     expect(renderedEmptyStateSvg[0]).toBeTruthy();
   });
 
-  it('should render link in notification', () => {
+  it('should render link in notification', async () => {
+    const link = {
+      text: 'View logs',
+      url: 'https://www.carbondesignsystem.com/',
+    };
     renderNotifications({
       data: [
         {
@@ -157,20 +163,19 @@ describe('Notifications', () => {
           type: 'informational',
           title: 'LogRhythm connection failure',
           timestamp: new Date(),
-          link: {
-            text: 'View logs',
-            url: 'https://www.carbondesignsystem.com/',
-          },
+          link,
           onNotificationClick: () => {},
         },
       ],
     });
-    const logLink = screen.getByText(/view logs/i);
-    userEvent.click(logLink);
-    expect(logLink);
+    const logLink = screen.getByRole('link');
+    expect(logLink).toHaveTextContent(link.text);
+    expect(logLink).toHaveAttribute('href', link.url);
+    // REACT 18: We were testing clicking of a link, which caused an error to be logged
+    // Error: Not implemented: navigation (except hash changes)
   });
 
-  it('should render Read more button', () => {
+  it('should render Read more button', async () => {
     renderNotifications({
       data: [
         {
@@ -186,7 +191,7 @@ describe('Notifications', () => {
     expect(screen.getByText(/read more/i)).toBeTruthy();
   });
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     const { container } = renderNotifications({
       data: [],
       'data-testid': dataTestId,
@@ -196,7 +201,7 @@ describe('Notifications', () => {
     ).toBeInTheDocument();
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     renderNotifications({
       ref,
@@ -205,7 +210,7 @@ describe('Notifications', () => {
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     renderNotifications({
       data: [],
       'data-testid': dataTestId,
@@ -216,15 +221,15 @@ describe('Notifications', () => {
     );
   });
 
-  it('should close the notifications panel when click is detected outside', () => {
+  it('should close the notifications panel when click is detected outside', async () => {
     const { container } = renderNotifications({
       data: [],
     });
-    userEvent.click(container);
+    await act(() => userEvent.click(container));
     expect(onClickOutside).toHaveBeenCalled();
   });
 
-  it('should not render a notifications panel when open is false', () => {
+  it('should not render a notifications panel when open is false', async () => {
     const { container } = renderNotifications({
       data: [],
       open: false,
@@ -232,7 +237,7 @@ describe('Notifications', () => {
     expect(container.querySelector(`.${blockClass}`)).not.toBeInTheDocument();
   });
 
-  it('should click the read more label on a notification with a long description, then render `Read less` button', () => {
+  it('should click the read more label on a notification with a long description, then render `Read less` button', async () => {
     renderNotifications({
       data: testData,
     });
@@ -242,14 +247,14 @@ describe('Notifications', () => {
     const readMoreButton = notificationElement.querySelector(
       `.${blockClass}__notification-read-more-button`
     );
-    userEvent.click(readMoreButton);
+    await act(() => userEvent.click(readMoreButton));
     const readLessButton = notificationElement.querySelector(
       `.${readLessClassName}`
     );
     expect(readLessButton).toHaveClass(readLessClassName);
   });
 
-  it('should dismiss a single notification', () => {
+  it('should dismiss a single notification', async () => {
     renderNotifications({
       data: testData,
       onDismissSingleNotification: onDismissSingleNotificationFn,
@@ -260,11 +265,11 @@ describe('Notifications', () => {
     const dismissIconButtonElement = notificationElement.querySelector(
       `.${dismissSingleNotificationClass}`
     );
-    userEvent.click(dismissIconButtonElement);
+    await act(() => userEvent.click(dismissIconButtonElement));
     expect(onDismissSingleNotificationFn).toBeCalled();
   });
 
-  it('should simulate a keydown event on a single notification', () => {
+  it('should simulate a keydown event on a single notification', async () => {
     renderNotifications({
       data: testData,
     });
@@ -279,7 +284,7 @@ describe('Notifications', () => {
     expect(onNotificationClickFn).toBeCalled();
   });
 
-  it('should stop propagation of notification event if key event is fired upon dismiss single notification icon button', () => {
+  it('should stop propagation of notification event if key event is fired upon dismiss single notification icon button', async () => {
     renderNotifications({
       data: testData,
       onDismissSingleNotification: onDismissSingleNotificationFn,
@@ -299,17 +304,17 @@ describe('Notifications', () => {
     expect(onNotificationClickFn).toBeCalledTimes(0);
   });
 
-  it('should call the dismiss all notifications event handler', () => {
+  it('should call the dismiss all notifications event handler', async () => {
     const onDismissAllNotificationsFn = jest.fn();
     renderNotifications({
       data,
       onDismissAllNotifications: onDismissAllNotificationsFn,
     });
-    userEvent.click(screen.getByText(/Dismiss all/i));
+    await act(() => userEvent.click(screen.getByText(/Dismiss all/i)));
     expect(onDismissAllNotificationsFn).toBeCalled();
   });
 
-  it('should call the onViewAll event handler', () => {
+  it('should call the onViewAll event handler', async () => {
     const onViewAllFn = jest.fn();
     const onSettingsClickFn = jest.fn();
     const { container } = renderNotifications({
@@ -317,24 +322,30 @@ describe('Notifications', () => {
       onViewAllClick: onViewAllFn,
       onSettingsClick: onSettingsClickFn,
     });
-    userEvent.click(screen.getByText(`View all (${data.length})`));
-    userEvent.click(container.querySelector(`.${blockClass}__settings-button`));
+    await act(() =>
+      userEvent.click(screen.getByText(`View all (${data.length})`))
+    );
+    await act(() =>
+      userEvent.click(
+        container.querySelector(`.${blockClass}__settings-button`)
+      )
+    );
     expect(onViewAllFn).toBeCalled();
     expect(onSettingsClickFn).toBeCalled();
   });
 
-  it('should click onDismissAllNotification and onDismissSingleNotifications buttons to test default props', () => {
+  it('should click onDismissAllNotification and onDismissSingleNotifications buttons to test default props', async () => {
     renderNotifications({
       data: testData,
     });
     const dismissAllButton = screen.getByText(/Dismiss all/i);
-    userEvent.click(dismissAllButton);
+    await act(() => userEvent.click(dismissAllButton));
     const notificationElement = screen.getByText(/Test notification title/i)
       .parentNode.parentNode;
     const dismissSingleNotificationClass = `${blockClass}__dismiss-single-button`;
     const dismissIconButtonElement = notificationElement.querySelector(
       `.${dismissSingleNotificationClass}`
     );
-    userEvent.click(dismissIconButtonElement);
+    await act(() => userEvent.click(dismissIconButtonElement));
   });
 });

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -76,17 +76,16 @@ export const utilCheckUpdateVerticalSpace = (
     const scrollableContainer = scrollableAncestor(headerRef.current);
 
     /* istanbul ignore next */ const scrollableContainerTop =
-      scrollableContainer
-        ? scrollableContainer.scrollTop -
-          scrollableContainer.getBoundingClientRect().top
+      scrollableContainer ? scrollableContainer.getBoundingClientRect().top : 0;
+
+    /* istanbul ignore next */ const offsetMeasuringTop =
+      offsetTopMeasuringRef.current
+        ? offsetTopMeasuringRef.current.getBoundingClientRect().top
         : 0;
 
     // The header offset calculation is either going to work out at 0 if we have no gap between scrolling container
     // top and the measuring ref top, or the difference between. It does not change on scroll or resize.
-    update.headerOffset =
-      (offsetTopMeasuringRef.current
-        ? offsetTopMeasuringRef.current.getBoundingClientRect().top
-        : 0) + scrollableContainerTop;
+    update.headerOffset = offsetMeasuringTop - scrollableContainerTop;
 
     /* istanbul ignore next */
     update.breadcrumbRowHeight = breadcrumbRowEl
@@ -175,6 +174,10 @@ export const utilCheckUpdateVerticalSpace = (
           update.titleRowSpaceAbove -
           (isNaN(val) ? 0 : val);
       }
+    }
+    if (!hasActionBar && pageActionsEl) {
+      // adjust headerTopValue when there are no page actions or action bar items (margin above title row)
+      update.headerTopValue -= update.titleRowSpaceAbove;
     }
 
     return { ...previous, ...update };

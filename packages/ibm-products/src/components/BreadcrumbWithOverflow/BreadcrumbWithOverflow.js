@@ -17,10 +17,10 @@ import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import {
   Breadcrumb,
   BreadcrumbItem,
-  IconButton,
   Link,
   OverflowMenu,
   OverflowMenuItem,
+  Tooltip,
   usePrefix,
 } from '@carbon/react';
 import { pkg } from '../../settings';
@@ -28,6 +28,7 @@ import { ArrowLeft, OverflowMenuHorizontal } from '@carbon/react/icons';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
 import '../../global/js/utils/props-helper';
+import { TooltipTrigger } from '../TooltipTrigger';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--breadcrumb-with-overflow`;
@@ -306,15 +307,15 @@ export let BreadcrumbWithOverflow = ({
               <Link
                 href={backItem.href}
                 renderIcon={() => (
-                  <IconButton
-                    className={`${blockClass}__back__button`}
+                  <Tooltip
                     align="right"
-                    kind="ghost"
                     label={backItem.title || backItem.label}
-                    size="sm"
+                    className={`${blockClass}__back__button ${carbonPrefix}--icon-tooltip`}
                   >
-                    <ArrowLeft size={16} />
-                  </IconButton>
+                    <TooltipTrigger>
+                      <ArrowLeft size={16} />
+                    </TooltipTrigger>
+                  </Tooltip>
                 )}
               />
             </BreadcrumbItem>

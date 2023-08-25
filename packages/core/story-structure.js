@@ -151,13 +151,14 @@ const s = [
           'c/Guidebanner',
           'c/NonLinearReading',
           {
-
             n: 'Interstitial Screen',
             s: [
               'c/InterstitialScreen',
               'c/InterstitialScreenView',
-              'c/InterstitialScreenViewModule',]
-          },{
+              'c/InterstitialScreenViewModule',
+            ],
+          },
+          {
             n: 'Coachmark',
             s: [
               'c/Coachmark',

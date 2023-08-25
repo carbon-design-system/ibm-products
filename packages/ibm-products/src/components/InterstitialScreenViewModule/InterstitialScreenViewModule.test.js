@@ -17,7 +17,6 @@ const blockClass = `${pkg.prefix}--interstitial-screen-view-module`;
 const componentName = InterstitialScreenViewModule.displayName;
 
 // values to use
-const children = `hello, world (${uuidv4()})`;
 const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const tmpTitle = `title-${uuidv4()}`;

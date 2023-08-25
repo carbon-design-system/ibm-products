@@ -22,7 +22,6 @@ const TearsheetWrapper = ({ instance }) => {
       {...rest}
       {...labels}
       isOpen={isTearsheetOpen}
-      isTableSortable={instance?.isTableSortable}
       setIsTearsheetOpen={setIsTearsheetOpen}
       columnDefinitions={instance.allColumns}
       originalColumnDefinitions={instance.columns}

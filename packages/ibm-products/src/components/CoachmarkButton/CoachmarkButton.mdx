@@ -1,0 +1,56 @@
+import { Story, ArgsTable, Source, Canvas } from '@storybook/addon-docs';
+import {
+  getStoryId,
+  CodesandboxLink,
+} from '../../global/js/utils/story-helper';
+import { CoachmarkButton } from '.';
+
+# CoachmarkButton
+
+## Table of Contents
+
+- [Overview](#overview)
+- [About Novice to pro](#about-novice-to-pro)
+- [Example usage](#example-usage)
+- [Component API](#component-api)
+
+## Overview
+
+[Coachmark Buttons](https://pages.github.ibm.com/cdai-design/pal/novice-to-pro/components/coachmark/usage/#floating)
+are used with the floating variant of the Coachmark. As such, the props outlined
+below are only the props for this component, but will accept any of the
+[Carbon buttons](https://v10.carbondesignsystem.com/components/button/usage/)
+props.
+
+Coachmark buttons are always used within the `target` prop of the Coachmark
+component. The target prop of the Coachmark should always be either a
+CoachmarkBeacon or a CoachmarkButton.
+
+## About Novice to pro
+
+[Novice to pro](https://pages.github.ibm.com/security/security-design/teams-across-security/novice-to-pro/overview/)
+is a continuous learning methodology and framework that aims to orient, onboard,
+explain, educate, and cultivate novice users into high-functioning power users.
+
+## Example usage
+
+<Canvas className="coachmarkExample" withSource="none">
+  <div className="CoachmarkBaseExampleUsage">
+    <Story id={getStoryId(CoachmarkButton.displayName, 'coachmark-button')} />
+  </div>
+</Canvas>
+
+## Code sample
+
+```jsx
+<Coachmark
+  ...
+  target={<CoachmarkButton kind="tertiary" size="md" renderIcon={Launch16} label="Show Information">Click Me</CoachmarkButton>}>
+  ...
+</Coachmark>
+
+```
+
+## Component API
+
+<ArgsTable />

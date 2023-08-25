@@ -96,7 +96,10 @@ export const stateReducer = (newState, action) => {
       const currentColumn = {};
       currentColumn[headerId] = newState.columnResizing.columnWidths[headerId];
       const allChangedColumns = newState.columnResizing.columnWidths;
-      onColResizeEnd?.(currentColumn, allChangedColumns);
+      const { isResizing } = newState;
+      if (isResizing) {
+        onColResizeEnd?.(currentColumn, allChangedColumns);
+      }
       return {
         ...newState,
         isResizing: false,

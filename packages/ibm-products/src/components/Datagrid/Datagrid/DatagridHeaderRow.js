@@ -79,8 +79,13 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
   useEffect(() => {
     const { isResizing } = datagridState.state;
     if (isResizing) {
+      const { onColResizeEnd } = datagridState;
       document.addEventListener('mouseup', () => {
-        handleColumnResizeEndEvent(datagridState.dispatch);
+        handleColumnResizeEndEvent(
+          datagridState.dispatch,
+          onColResizeEnd,
+          isResizing
+        );
         document.activeElement.blur();
       });
     }
@@ -109,7 +114,8 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
             return header.render('Header', { key: header.id });
           }
           const { minWidth } = header || 50;
-          const { visibleColumns, state, dispatch } = datagridState;
+          const { visibleColumns, state, dispatch, onColResizeEnd } =
+            datagridState;
           const { columnResizing, isResizing } = state;
           const { columnWidths } = columnResizing;
           const originalCol = visibleColumns[index];
@@ -142,7 +148,9 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                         }
                       }
                     }}
-                    onMouseDown={() => handleColumnResizeStartEvent(dispatch)}
+                    onMouseDown={() =>
+                      handleColumnResizeStartEvent(dispatch, header.id)
+                    }
                     onKeyDown={(event) => {
                       const { key } = event;
                       if (key === 'ArrowLeft' || key === 'ArrowRight') {
@@ -178,7 +186,13 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                         }
                       }
                     }}
-                    onKeyUp={() => handleColumnResizeEndEvent(dispatch)}
+                    onKeyUp={() =>
+                      handleColumnResizeEndEvent(
+                        dispatch,
+                        onColResizeEnd,
+                        header.id
+                      )
+                    }
                     className={cx(`${blockClass}__col-resizer-range`)}
                     type="range"
                     defaultValue={originalCol.width}

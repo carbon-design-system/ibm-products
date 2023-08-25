@@ -76,7 +76,6 @@ export let Checklist = React.forwardRef(
     },
     ref
   ) => {
-    console.log('chartLabel', chartLabel, typeof chartLabel);
     const [isOpen, setIsOpen] = useState(open);
 
     // Don't use this test: {chartValue && chartLabel && (render...)}.
@@ -119,6 +118,7 @@ export let Checklist = React.forwardRef(
           }
         )}
         ref={ref}
+        role="main"
         {...getDevtoolsProps(componentName)}
       >
         {(title || chartLabelAndValue) && (
@@ -131,15 +131,16 @@ export let Checklist = React.forwardRef(
               {title && <h2 className={`${blockClass}__title`}>{title}</h2>}
 
               {chartLabelAndValue && (
-                <div className={`${blockClass}__chart-label`}>{chartLabel}</div>
+                <h3 className={`${blockClass}__chart-label`}>{chartLabel}</h3>
               )}
             </div>
 
             {showToggle && (
               <Button
                 className={`${blockClass}__toggle`}
-                onClick={handleClickToggle}
                 kind="ghost"
+                onClick={handleClickToggle}
+                role="switch"
                 size="small"
               >
                 <ChevronUp16 className={cx(`${blockClass}__chevron`)} />
@@ -294,7 +295,7 @@ Checklist.propTypes = {
         })
       ).isRequired,
     })
-  ),
+  ).isRequired,
   /**
    * Determines the theme of the component.
    */

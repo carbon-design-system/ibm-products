@@ -64,6 +64,7 @@ export let ChecklistChart = React.forwardRef(
           borderRadius: '50%',
         }}
         ref={ref}
+        role="img"
         {...getDevtoolsProps(componentName)}
       />
     );

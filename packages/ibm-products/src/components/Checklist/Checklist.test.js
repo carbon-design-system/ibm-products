@@ -151,7 +151,7 @@ describe(componentName, () => {
   });
 
   it('renders a "view all" button', () => {
-    renderComponent({ viewAllLabel, title });
+    renderComponent({ viewAllLabel });
     screen.getByText(viewAllLabel);
   });
 

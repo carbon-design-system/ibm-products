@@ -137,6 +137,7 @@ export let Checklist = React.forwardRef(
 
             {showToggle && (
               <Button
+                aria-expanded={isOpen}
                 className={`${blockClass}__toggle`}
                 kind="ghost"
                 onClick={handleClickToggle}

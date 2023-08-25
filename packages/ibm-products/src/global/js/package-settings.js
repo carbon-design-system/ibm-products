@@ -76,6 +76,7 @@ const defaults = {
     InlineTip: false,
     Guidebanner: false,
     NonLinearReading: false,
+    Checklist: false,
     /* new component flags here - comment used by generate CLI */
   },
 

@@ -1,0 +1,242 @@
+/* stylelint-disable carbon/motion-duration-use */
+/* stylelint-disable declaration-no-important */
+
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@import '../../global/styles/project-settings';
+@import '../../global/styles/mixins';
+
+// Other Carbon settings.
+// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
+
+// Checklist uses the following Carbon components:
+// TODO: @import(s) of Carbon component styles used by Checklist
+
+// Checklist uses the following Carbon for IBM Products components:
+// TODO: @import(s) of IBM Products component styles used by Checklist
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+
+@mixin ellipsis-2-lines {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+}
+
+@mixin checklist {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--checklist;
+
+  .#{$block-class} {
+    &__header {
+      display: flex;
+      padding: $spacing-05;
+      border-bottom: 1px solid $ui-03;
+      background-color: $ui-01;
+      gap: $spacing-03;
+    }
+
+    &__chart {
+      // outer donut
+      position: relative;
+      width: $spacing-08;
+      min-width: $spacing-08;
+      height: $spacing-08;
+      align-self: center;
+
+      &::after {
+        // inner donut
+        position: absolute;
+        top: $spacing-02;
+        left: $spacing-02;
+        width: $spacing-07;
+        height: $spacing-07;
+        border-radius: 50%;
+        background-color: $ui-01;
+        content: '';
+      }
+    }
+
+    // Align __title and __chart-label vertically centered in the header.
+    &__titles {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &__title {
+      @include ellipsis-2-lines();
+      @include carbon--type-style('productive-heading-02');
+    }
+
+    &__chart-label {
+      @include carbon--type-style('label-01');
+      @include ellipsis-2-lines();
+
+      color: $text-02;
+    }
+
+    &__title + &__chart-label {
+      margin-top: $spacing-01;
+    }
+
+    // open/close toggle
+    &__toggle {
+      width: 30px;
+      min-width: 30px;
+      height: 30px;
+      min-height: 30px !important;
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      padding: 0 rem(6px) !important;
+      margin-top: calc(-1 * $spacing-03) !important;
+      margin-right: calc(-1 * $spacing-03) !important;
+      margin-left: auto !important;
+    }
+
+    &__chevron {
+      color: $text-01;
+      transform: rotate(0deg);
+      transition: all $duration--fast-02 motion(standard, productive);
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    &__closed &__chevron {
+      transform: rotate(-180deg);
+    }
+
+    // Button to appear more like a link so it aligns better with the list text
+    &__button {
+      max-width: none !important;
+      min-height: auto !important;
+      // override bx--btn to allow two-line ellipsis
+      /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+      flex-shrink: unset !important;
+      padding: 0 !important;
+      border: none;
+      background-color: transparent !important;
+      color: $link-01 !important;
+
+      // The CSS for the Carbon button's label
+      // is incompatible with two-line ellipsis,
+      // but a div inside a Carbon button works.
+      div {
+        @include ellipsis-2-lines();
+      }
+
+      &:hover {
+        background: transparent;
+        color: $link-primary-hover;
+        text-decoration: underline;
+      }
+
+      &:active {
+        background: transparent;
+        color: $text-primary;
+        text-decoration: underline;
+      }
+
+      &--error {
+        color: $text-error !important;
+
+        // TODO: fix error colors for hover and active states
+        // &:hover {
+        //   color: $button-danger-hover !important;
+        // }
+
+        // &:active {
+        //   color: $button-danger-active !important;
+        // }
+      }
+    }
+
+    // container for animated content
+    &__content-outer {
+      overflow: hidden;
+    }
+
+    &__content-inner {
+      height: 100%;
+      background-color: $ui-01;
+      transform: translate(0, 0);
+      transition: all $duration--fast-02 motion(standard, productive);
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+    }
+
+    &__closed &__content-inner {
+      height: 0;
+      transform: translate(0, -100%);
+    }
+
+    &__list-group {
+      padding: $spacing-05;
+      border-bottom: 1px solid $ui-03;
+    }
+
+    &__list-title {
+      @include carbon--type-style('body-short-01');
+      @include ellipsis-2-lines();
+
+      margin-bottom: $spacing-03;
+    }
+
+    &__list-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: $spacing-03;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &__icon {
+      display: inline-flex;
+      margin-right: $spacing-03;
+      color: $link-01;
+
+      &--error {
+        color: $support-error;
+      }
+
+      &--disabled {
+        color: $disabled-03;
+      }
+    }
+
+    &__label {
+      @include carbon--type-style('body-short-01');
+      @include ellipsis-2-lines();
+
+      &--checked,
+      &--disabled,
+      &--error {
+        color: $disabled-03;
+      }
+    }
+
+    &__footer {
+      @include ellipsis-2-lines();
+
+      padding: $spacing-03 $spacing-05;
+    }
+  }
+}
+
+@include exports('checklist') {
+  @include checklist;
+}

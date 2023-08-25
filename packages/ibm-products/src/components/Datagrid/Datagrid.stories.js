@@ -147,7 +147,7 @@ export const BasicUsage = () => {
       console.log(currentColumn, allColumns),
   });
 
-  return <Datagrid datagridState={datagridState} />;
+  return <Datagrid datagridState={datagridState} title="Basic usage" />;
 };
 
 export const EmptyState = () => {

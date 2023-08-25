@@ -17,8 +17,20 @@ import {
   handleColumnResizeStartEvent,
   handleColumnResizingEvent,
 } from './addons/stateReducer';
+import getColTitle from '../utils/getColTitle';
 
 const blockClass = `${pkg.prefix}--datagrid`;
+
+const getAccessibilityProps = (header) => {
+  const props = {};
+  const title = getColTitle(header);
+  if (title) {
+    props.title = title;
+  } else {
+    props['aria-hidden'] = true;
+  }
+  return props;
+};
 
 const HeaderRow = (datagridState, headRef, headerGroup) => {
   // Used to measure the height of the table and uses that value
@@ -133,6 +145,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                 header.getHeaderProps().className
               )}
               key={header.id}
+              {...getAccessibilityProps(header)}
             >
               {header.render('Header')}
               {header.getResizerProps && (

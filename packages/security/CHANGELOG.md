@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-security@2.14.0...@carbon/ibm-security@2.14.1) (2023-08-15)
+
+
+### Bug Fixes
+
+* update to Carbon 10 compatible versions to latest ([#3287](https://github.com/carbon-design-system/ibm-products/issues/3287)) ([3e86b35](https://github.com/carbon-design-system/ibm-products/commit/3e86b3551e63a33b09c8996b05247fc8f234ad4c))
+
+
+
+
+
 # [2.14.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-security@2.13.18...@carbon/ibm-security@2.14.0) (2023-08-02)
 
 

@@ -58,7 +58,7 @@ TableToolbarDownload.propTypes = {
   filename: PropTypes.string,
 
   /**
-   * @type {object.<object, *>}
+   * @type {Record<string, any>}
    * The `headers` prop represents the order in which the headers should
    * appear in the table. We expect an array of objects to be passed in, where
    * `key` is the name of the key in a row object, and `header` is the name of
@@ -75,7 +75,7 @@ TableToolbarDownload.propTypes = {
   label: PropTypes.string,
 
   /**
-   * @type {object.<object, *>}
+   * @type {Record<string, any>}
    * The `rows` prop is where you provide us with a list of all the rows that
    * you want to render in the table. The only hard requirement is that this
    * is an array of objects, and that each object has a unique `id` field

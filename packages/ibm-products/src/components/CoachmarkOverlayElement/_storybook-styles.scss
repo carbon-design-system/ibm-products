@@ -1,0 +1,19 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '../../global/styles/project-settings';
+
+.CoachmarkBaseExampleUsage {
+  position: relative;
+  display: inline-block;
+  max-height: 100%;
+  box-sizing: border-box;
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  padding: 1rem;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}

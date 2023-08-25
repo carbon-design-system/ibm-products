@@ -1,0 +1,74 @@
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable declaration-no-important */
+
+// Standard imports.
+@import '../../../global/styles/project-settings';
+@import '../../../global/styles/mixins';
+
+// Define all component styles in a mixin which is then exported using
+// the Carbon import-once mechanism.
+@mixin coachmark-dragbar {
+  // The block part of our conventional BEM class names (blockClass__E--M).
+  $block-class: #{$pkg-prefix}--coachmark-dragbar;
+
+  .#{$block-class} {
+    display: flex;
+
+    &__handle {
+      flex-grow: 1;
+      padding: $spacing-03 0 0 $spacing-03;
+      border: 0;
+      background-color: transparent;
+      text-align: left;
+
+      &:hover {
+        cursor: move;
+      }
+    }
+
+    &--close-btn {
+      width: $spacing-07;
+      height: $spacing-07;
+      margin-left: auto !important;
+
+      svg > path {
+        margin: 0;
+        fill: $inverse-01 !important;
+      }
+
+      &:hover {
+        background-color: $inverse-hover-ui !important;
+      }
+    }
+
+    &__light {
+      #{$block-class}--close-btn {
+        &:active {
+          background-color: $active-secondary;
+        }
+      }
+    }
+
+    &__dark {
+      #{$block-class}--close-btn {
+        &:active {
+          background-color: $button-tertiary-active;
+        }
+      }
+    }
+
+    svg {
+      color: $inverse-01;
+    }
+  }
+}
+
+@include exports('coachmark-dragbar') {
+  @include coachmark-dragbar;
+}

@@ -17,7 +17,7 @@ const deprecatedProp =
     /**
      * Creates a prop object to validate against.
      * @param {string|PropTypes.<*>} propValue The prop value to add to the object.
-     * @returns {object.<string, *>} The prop object to validate against.
+     * @returns {Record<string, any>} The prop object to validate against.
      */
     const createPropObject = (propValue) => ({
       [`${deprecatedPropName}`]: propValue,

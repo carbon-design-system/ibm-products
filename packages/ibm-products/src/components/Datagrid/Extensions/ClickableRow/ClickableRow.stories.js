@@ -19,6 +19,7 @@ import {
   useColumnRightAlign,
   useColumnCenterAlign,
   useOnRowClick,
+  useSelectRows,
 } from '../../index';
 import styles from '../../_storybook-styles.scss';
 import mdx from '../../Datagrid.mdx';
@@ -30,6 +31,7 @@ import { Link } from 'carbon-components-react';
 import { pkg } from '../../../../settings';
 import cx from 'classnames';
 import { SidePanel } from '../../../SidePanel';
+import { getBatchActions } from '../../Datagrid.stories';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ClickableRow`,
@@ -44,17 +46,17 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const storyBlockClass = `${pkg.prefix}--datagrid-story`;
 const defaultHeader = [
   {
-    Header: 'Row Index',
+    Header: 'Row index',
     accessor: (row, i) => i,
     sticky: 'left',
     id: 'rowIndex', // id is required when accessor is a function.
   },
   {
-    Header: 'First Name',
+    Header: 'First name',
     accessor: 'firstName',
   },
   {
-    Header: 'Last Name',
+    Header: 'Last name',
     accessor: 'lastName',
   },
   {
@@ -65,6 +67,7 @@ const defaultHeader = [
         <Link
           className={`${storyBlockClass}__custom-cell-wrapper`}
           href={cell?.value?.href}
+          title={cell?.value?.text}
         >
           {cell?.value?.text}
         </Link>
@@ -76,11 +79,13 @@ const defaultHeader = [
     Header: 'Age',
     accessor: 'age',
     width: 120,
+    rightAlignedColumn: true,
   },
   {
     Header: 'Visits',
     accessor: 'visits',
     width: 120,
+    rightAlignedColumn: true,
   },
   {
     Header: 'Bonus',
@@ -255,6 +260,11 @@ const DataTableSidePanelContent = (selectedRowValues) => {
 
   return (
     <div className={`${blockClass}__side-panel-content`}>
+      <div className={`${blockClass}__side-panel-link`}>
+        <Link href="" id="side-panel-story__view-link">
+          View details
+        </Link>
+      </div>
       <SidePanelSectionContent
         sectionTitle="Section title"
         rowData={rowData && rowData}
@@ -291,9 +301,14 @@ const ClickableRowWithPanel = ({ ...args }) => {
         setOpenSidePanel(true);
         setRowData(row);
       },
+      DatagridActions,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
       ...args.defaultGridProps,
     },
-    useOnRowClick
+    useSelectRows,
+    useOnRowClick,
+    useColumnRightAlign
   );
   return (
     <div
@@ -306,6 +321,7 @@ const ClickableRowWithPanel = ({ ...args }) => {
       <Datagrid datagridState={{ ...datagridState }} />
       <SidePanel
         selectorPageContent={true && '.page-content-wrapper'} // Only if SlideIn
+        selectorPrimaryFocus="#side-panel-story__view-link"
         open={openSidePanel}
         onRequestClose={() => setOpenSidePanel(false)}
         size={'sm'}

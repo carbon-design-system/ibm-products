@@ -3045,6 +3045,7 @@ Map {
     "defaultProps": {
       "active": false,
       "className": "",
+      "fitValue": false,
       "href": undefined,
       "inline": false,
       "midLineTruncation": {
@@ -3053,8 +3054,11 @@ Map {
         "front": 12,
         "maxLength": 20,
       },
+      "noBorderRadius": false,
       "noIcon": false,
+      "noType": false,
       "onClick": undefined,
+      "onClickValue": undefined,
       "onContextMenu": [Function],
       "score": undefined,
       "scoreDescription": [Function],
@@ -3072,6 +3076,9 @@ Map {
       },
       "className": {
         "type": "string",
+      },
+      "fitValue": {
+        "type": "bool",
       },
       "href": {
         "type": "string",
@@ -3099,10 +3106,19 @@ Map {
         ],
         "type": "shape",
       },
+      "noBorderRadius": {
+        "type": "bool",
+      },
       "noIcon": {
         "type": "bool",
       },
+      "noType": {
+        "type": "bool",
+      },
       "onClick": {
+        "type": "func",
+      },
+      "onClickValue": {
         "type": "func",
       },
       "onContextMenu": {
@@ -3710,6 +3726,9 @@ Map {
       },
       "invalid": {
         "type": "bool",
+      },
+      "name": {
+        "type": "string",
       },
       "status": {
         "args": [
@@ -14554,7 +14573,6 @@ Map {
       "multiple": false,
       "onAddFiles": [Function],
       "pattern": ".[0-9a-z]+$",
-      "tabIndex": 0,
     },
     "propTypes": {
       "accept": {
@@ -14587,15 +14605,14 @@ Map {
       "onAddFiles": {
         "type": "func",
       },
+      "onClick": {
+        "type": "func",
+      },
       "pattern": {
         "type": "string",
       },
-      "role": {
-        "type": "string",
-      },
-      "tabIndex": {
-        "type": "number",
-      },
+      "role": [Function],
+      "tabIndex": [Function],
     },
   },
   "FileUploaderItem" => {

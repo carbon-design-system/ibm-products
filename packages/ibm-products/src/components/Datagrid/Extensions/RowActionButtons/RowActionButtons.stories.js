@@ -7,7 +7,7 @@
  */
 
 import React, { useState } from 'react';
-import { Add16, Edit16, TrashCan16, Checkmark16 } from '@carbon/icons-react';
+import { Edit16, TrashCan16, Checkmark16 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
@@ -28,6 +28,7 @@ import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
 import { ARG_TYPES } from '../../utils/getArgTypes';
 import { pkg } from '../../../../settings';
+import { getBatchActions } from '../../Datagrid.stories';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/RowActionButtons`,
@@ -307,44 +308,6 @@ const RowActionButtonsBatchActions = ({ ...args }) => {
   );
 
   return <Datagrid datagridState={datagridState} />;
-};
-
-const getBatchActions = () => {
-  return [
-    {
-      label: 'Duplicate',
-      renderIcon: Add16,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Add',
-      renderIcon: Add16,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Select all',
-      renderIcon: Add16,
-      onClick: action('Clicked batch action button'),
-      type: 'select_all',
-    },
-    {
-      label: 'Publish to catalog',
-      renderIcon: Add16,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Download',
-      renderIcon: Add16,
-      onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Delete',
-      renderIcon: Add16,
-      onClick: action('Clicked batch action button'),
-      hasDivider: true,
-      kind: 'danger',
-    },
-  ];
 };
 
 const RowActionButtonBatchTemplateWrapper = ({ ...args }) => {

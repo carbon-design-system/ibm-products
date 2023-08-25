@@ -23,9 +23,9 @@ const propTypes = {
   /** @type {string} Extra classes. */
   className: PropTypes.string,
 
-  /** @type {object.<object, *>} An object list of labels. */
+  /** @type {Record<string, any>} An object list of labels. */
   labels: PropTypes.shape({
-    /** @type {object.<string, string>} An object list of brand labels. */
+    /** @type {Record<string, string>} An object list of brand labels. */
     brand: PropTypes.shape({
       /** @type {string} The company. */
       company: PropTypes.string.isRequired,
@@ -37,7 +37,7 @@ const propTypes = {
       product: PropTypes.string.isRequired,
     }).isRequired,
 
-    /** @type {object.<string, string>} An object list of notifications labels. */
+    /** @type {Record<string, string>} An object list of notifications labels. */
     notifications: PropTypes.shape({
       /** @type {string} The notification button label. */
       button: PropTypes.string.isRequired,
@@ -67,7 +67,7 @@ const propTypes = {
       preferences: PropTypes.string,
     }).isRequired,
 
-    /** @type {object.<string, string>} An object list of profile labels. */
+    /** @type {Record<string, string>} An object list of profile labels. */
     profile: PropTypes.shape({
       /** @type {string} The account label. */
       link: PropTypes.string,
@@ -91,7 +91,7 @@ const propTypes = {
 
   /** @type {Array<Object.*>} An array list of accounts. */
   accounts: PropTypes.arrayOf(
-    /** @type {object.<string, string>} An object list of accounts. */
+    /** @type {Record<string, string>} An object list of accounts. */
     PropTypes.shape({
       /** @type {string} The account id. */
       id: PropTypes.string.isRequired,
@@ -106,7 +106,7 @@ const propTypes = {
 
   /** @type {Array<Object.*>} An array list of notifications. */
   notifications: PropTypes.arrayOf(
-    /** @type {object.<string, string>} An object list of notifications. */
+    /** @type {Record<string, string>} An object list of notifications. */
     PropTypes.shape({
       /** @type {string} The notification ID. */
       id: PropTypes.string.isRequired,
@@ -128,7 +128,7 @@ const propTypes = {
     }).isRequired
   ),
 
-  /** @type {object.<string, string>} An object list of URLs. */
+  /** @type {Record<string, string>} An object list of URLs. */
   links: PropTypes.shape({
     /** @type {string} The product URL. */
     product: PropTypes.string.isRequired,
@@ -158,7 +158,7 @@ const propTypes = {
   /** @type {Function} The callback when a notification is cleared. */
   onNotificationClear: PropTypes.func,
 
-  /** @type {object.<object, *>} An object list of profile information. */
+  /** @type {Record<object, any>} An object list of profile information. */
   profile: PropTypes.shape({
     /** @type {string} The profile image URL. */
     image_url: PropTypes.string,
@@ -175,7 +175,7 @@ const propTypes = {
       name: PropTypes.string.isRequired,
     }),
 
-    /** @type {object.<string, string>} An object list of profile names. */
+    /** @type {Record<string, string>} An object list of profile names. */
     name: PropTypes.shape({
       /** @type {string} The profile first name. */
       first_name: PropTypes.string.isRequired,

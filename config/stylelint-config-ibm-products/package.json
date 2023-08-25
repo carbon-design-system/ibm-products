@@ -1,7 +1,7 @@
 {
   "name": "stylelint-config-ibm-products",
   "private": true,
-  "version": "0.0.30",
+  "version": "0.0.32",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -23,6 +23,6 @@
     "stylelint-config-standard": "^30.0.1",
     "stylelint-config-standard-scss": "^7.0.1",
     "stylelint-no-unsupported-browser-features": "^6.1.0",
-    "stylelint-plugin-carbon-tokens": "2.3.0"
+    "stylelint-plugin-carbon-tokens": "2.3.1"
   }
 }

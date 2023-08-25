@@ -7,31 +7,46 @@ import deprecate from 'carbon-components-react/es/prop-types/deprecate';
 
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-
+import React from 'react';
 import { getDecoratorProps, namespace, icons } from './constants';
-
 import Icon from '../../Icon';
 
-class Decorator extends Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
+const Decorator = ({
+  active,
+  className,
+  href,
+  inline,
+  midLineTruncation,
+  fitValue,
+  noBorderRadius,
+  noType,
+  noIcon,
+  onClick,
+  onClickValue,
+  onContextMenu,
+  score,
+  scoreDescription,
+  scoreThresholds,
+  title,
+  type,
+  value,
+}) => {
+  const { path, classes } = getDecoratorProps(score, scoreThresholds, active);
 
   /**
    * Handles when the Decorator has been clicked.
-   * @param {SyntheticEvent} event The event fired when the Decorator has been clicked.
+   * @param {SyntheticEvent} event The event fired when the Decorator has been
+   *   clicked.
    */
-  handleClick = (event) => {
-    this.props.onClick(event, this.props.type, this.props.value);
+  const handleClick = (event) => {
+    onClick(event, type, value);
   };
 
-  handleContextMenuClick = (event) => {
-    this.props.onContextMenu(event, this.props.type, this.props.value);
+  const handleContextMenuClick = (event) => {
+    onContextMenu(event, type, value);
   };
 
-  truncationUtil = (inputText, maxLength, front, back) => {
+  const truncationUtil = (inputText, maxLength, front, back) => {
     let truncationValue = inputText;
     if (inputText.length > maxLength) {
       truncationValue = `${inputText.substring(0, front)}…${inputText.substr(
@@ -41,115 +56,127 @@ class Decorator extends Component {
     return truncationValue;
   };
 
-  renderDecorator = (
-    inline,
-    noIcon,
-    path,
-    score,
-    scoreDescription,
-    scoreThresholds,
-    title,
-    type,
-    value
-  ) => (
-    <>
-      {!noIcon && (
-        <span className={`${namespace}__icon`}>
-          <Icon
-            fillRule="evenodd"
-            path={path}
-            size={inline ? 12 : 16}
-            viewBox="0 0 16 16"
-            title={scoreDescription(score, scoreThresholds)}
-          />
-        </span>
-      )}
-      <span className={`${namespace}__type`}>{type}</span>
-      <span className={`${namespace}__value`} title={title || value}>
-        {this.props.midLineTruncation.enabled
-          ? this.truncationUtil(
-              value,
-              this.props.midLineTruncation.maxLength,
-              this.props.midLineTruncation.front,
-              this.props.midLineTruncation.back
-            )
-          : value}
-      </span>
-    </>
+  const renderType = () => {
+    if (noType) {
+      return null;
+    }
+    return (
+      <>
+        {!noIcon && (
+          <span className={`${namespace}__icon`}>
+            <Icon
+              fillRule="evenodd"
+              path={path}
+              size={inline ? 12 : 16}
+              viewBox="0 0 16 16"
+              title={scoreDescription(score, scoreThresholds)}
+            />
+          </span>
+        )}
+        <span className={`${namespace}__type`}>{type}</span>
+      </>
+    );
+  };
+
+  const renderValue = () => (
+    <span
+      className={classnames(`${namespace}__value`, {
+        [`${namespace}__value--fit-value`]: fitValue,
+      })}
+      title={title || value}
+    >
+      {midLineTruncation.enabled
+        ? truncationUtil(
+            value,
+            midLineTruncation.maxLength,
+            midLineTruncation.front,
+            midLineTruncation.back
+          )
+        : value}
+    </span>
   );
 
-  render() {
-    const {
-      active,
-      className,
-      href,
-      inline,
-      noIcon,
-      onClick,
-      score,
-      scoreDescription,
-      scoreThresholds,
-      title,
-      type,
-      value,
-    } = this.props;
+  const decoratorClasses = classnames(namespace, classes, className, {
+    [`${namespace}--interactive`]: onClick || href,
+    [`${namespace}--active`]: active,
+    [`${namespace}--inline`]: inline,
+    [`${namespace}--no-border-radius`]: noBorderRadius,
+  });
 
-    const { path, classes } = getDecoratorProps(score, scoreThresholds, active);
+  const interactiveProps = {
+    onClick: handleClick,
+    onContextMenu: handleContextMenuClick,
+    type: 'button',
+  };
 
-    const decorator = this.renderDecorator(
-      inline,
-      noIcon,
-      path,
-      score,
-      scoreDescription,
-      scoreThresholds,
-      title,
-      type,
-      value
-    );
-
-    const decoratorClasses = classnames(namespace, classes, className, {
-      [`${namespace}--interactive`]: href || onClick,
-      [`${namespace}--active`]: active,
-      [`${namespace}--inline`]: inline,
-    });
-
-    if (href) {
-      return (
-        <a
-          href={href}
-          className={decoratorClasses}
-          onContextMenu={this.handleContextMenuClick}
-          tabIndex={0}
-        >
-          {decorator}
-        </a>
-      );
-    }
-
-    if (onClick) {
-      return (
-        <button
-          className={decoratorClasses}
-          onClick={this.handleClick}
-          onContextMenu={this.handleContextMenuClick}
-          type="button"
-        >
-          {decorator}
-        </button>
-      );
-    }
-
+  // original security decorator prop
+  if (href) {
     return (
-      <span
-        className={decoratorClasses}
-        onContextMenu={this.handleContextMenuClick}
+      <a
+        href={href}
+        className={`${decoratorClasses} ${namespace}__link`}
+        tabIndex={0}
+        {...interactiveProps}
       >
-        {decorator}
-      </span>
+        {renderType()}
+        {renderValue()}
+      </a>
     );
   }
-}
+
+  // Pill
+  if (onClick && !onClickValue) {
+    return (
+      // eslint-disable-next-line react/button-has-type
+      <button
+        data-testid={`${namespace}-pill`}
+        className={`${decoratorClasses} ${namespace}__pill`}
+        {...interactiveProps}
+      >
+        {renderType()}
+        {renderValue()}
+      </button>
+    );
+  }
+
+  // dual decorator: left type button, right value button
+  if (onClick && onClickValue) {
+    return (
+      <div
+        className={`${namespace}__dual-container`}
+        data-testid={`${namespace}-${type}-${value}`}
+      >
+        {/* eslint-disable-next-line react/button-has-type */}
+        <button
+          className={`${decoratorClasses} ${namespace}__dual-type-pill`}
+          {...interactiveProps}
+        >
+          {renderType()}
+        </button>
+        {/* eslint-disable-next-line react/button-has-type */}
+        <button
+          className={`${decoratorClasses} ${namespace}__dual-value-pill`}
+          {...interactiveProps}
+          onClick={onClickValue}
+        >
+          {renderValue()}
+        </button>
+      </div>
+    );
+  }
+
+  // non-interactive pill
+  return (
+    <span
+      data-testid={`${namespace}-pill`}
+      className={`${decoratorClasses} ${namespace}__pill`}
+      onContextMenu={handleContextMenuClick}
+    >
+      {renderType()}
+      {renderValue()}
+    </span>
+  );
+};
 
 Decorator.propTypes = {
   /** @type {boolean} Whether the Decorator is active */
@@ -158,11 +185,13 @@ Decorator.propTypes = {
   /** @type {string} Additional classes to add. */
   className: PropTypes.string,
 
+  /** @type {boolean} Whether the Decorator stretches to fit value */
+  fitValue: PropTypes.bool,
+
   /** @type {string} The href for the Decorator. */
   href: PropTypes.string,
 
   /** @type {boolean} Whether the Decorator can be interacted with */
-  // eslint-disable-next-line react/no-unused-prop-types, react/require-default-props
   inert: deprecate(
     PropTypes.bool,
     `\nThe prop \`inert\` for Decorator has been deprecated. The Decorator will now be considered "inert" (non-interactive) by default. You can make a Decorator interactive by adding an \`href\` or \`onClick\` prop.`
@@ -179,11 +208,20 @@ Decorator.propTypes = {
     back: PropTypes.number,
   }),
 
+  /** @type {boolean} Whether the Decorator has border radius */
+  noBorderRadius: PropTypes.bool,
+
   /** @type {boolean} Whether the Decorator includes an icon */
   noIcon: PropTypes.bool,
 
+  /** @type {boolean} Whether the Decorator includes the type part (left part) */
+  noType: PropTypes.bool,
+
   /** @type {Function} Click handler of the Decorator. */
   onClick: PropTypes.func,
+
+  /** @type {Function} Click handler of the Decorator value part. */
+  onClickValue: PropTypes.func,
 
   /** @type {Function} Secondary click handler of the Decorator. */
   onContextMenu: PropTypes.func,
@@ -224,8 +262,12 @@ Decorator.defaultProps = {
   href: undefined,
   inline: false,
   onClick: undefined,
+  onClickValue: undefined,
   onContextMenu: () => {},
+  noType: false,
+  noBorderRadius: false,
   noIcon: false,
+  fitValue: false,
   score: undefined,
   scoreThresholds: [0, 4, 7, 10],
   title: '',

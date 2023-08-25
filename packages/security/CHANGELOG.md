@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-security@2.14.0...@carbon/ibm-security@2.14.1) (2023-08-15)
+
+
+### Bug Fixes
+
+* update to Carbon 10 compatible versions to latest ([#3287](https://github.com/carbon-design-system/ibm-products/issues/3287)) ([3e86b35](https://github.com/carbon-design-system/ibm-products/commit/3e86b3551e63a33b09c8996b05247fc8f234ad4c))
+
+
+
+
+
+# [2.14.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-security@2.13.18...@carbon/ibm-security@2.14.0) (2023-08-02)
+
+
+### Bug Fixes
+
+* update to Carbon 10 compatible versions to latest ([#3148](https://github.com/carbon-design-system/ibm-products/issues/3148)) ([b2ac3c7](https://github.com/carbon-design-system/ibm-products/commit/b2ac3c7f2bee0c65c3d2e679bec3d1ed1ee2733b))
+
+
+### Features
+
+* **decorator:** support second button in round-shaped decorator ([#2772](https://github.com/carbon-design-system/ibm-products/issues/2772)) ([9dbce12](https://github.com/carbon-design-system/ibm-products/commit/9dbce12182b99a6b7a3b838dcfb88c80026075f6))
+
+
+
+
+
 ## [2.13.18](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-security@2.13.17...@carbon/ibm-security@2.13.18) (2023-05-25)
 
 

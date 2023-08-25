@@ -77,6 +77,13 @@ const defaults = {
     Guidebanner: false,
     NonLinearReading: false,
     Checklist: false,
+    Coachmark: false,
+    CoachmarkBeacon: false,
+    CoachmarkButton: false,
+    CoachmarkFixed: false,
+    CoachmarkOverlayElement: false,
+    CoachmarkOverlayElements: false,
+    CoachmarkStack: false,
     /* new component flags here - comment used by generate CLI */
   },
 

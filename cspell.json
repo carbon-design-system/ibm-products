@@ -68,6 +68,7 @@
   "words": [
     "aboutmodal",
     "autodocs", // storybook
+    "automerge", // actions
     "actionbar",
     "apikey",
     "buildhome",

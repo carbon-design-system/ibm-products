@@ -5,13 +5,14 @@ on:
     branches:
       - main
       - main_v1
-  merge_group:
-    types: [checks_requested]
 
   push:
     branches:
       - main
       - main_v1
+
+  merge_group:
+    types: [checks_requested]
 
   schedule:
     - cron: '0 0 * * 0'

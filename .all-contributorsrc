@@ -239,6 +239,15 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "punnoosewilson",
+      "name": "PUNNOOSE WILSON",
+      "avatar_url": "https://avatars.githubusercontent.com/u/40118548?v=4",
+      "profile": "https://github.com/punnoosewilson",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 5,

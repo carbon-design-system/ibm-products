@@ -24,33 +24,24 @@
     "clean:finally:files": "rimraf coverage node_modules results",
     "clean:lerna": "lerna clean --yes",
     "clean:packages": "yarn run-all --no-sort clean",
-    "format": "run-s -s 'lint:es --fix' 'format:prettier --write'",
-    "format:c4p": "run-s -s 'lint:es:c4p --fix' 'format:prettier --write'",
-    "format:prettier": "yarn format:prettier:files '**/*.{js,md,mdx,scss,ts}' '!**/{build,es,lib,storybook,ts,umd,coverage}/**'",
-    "format:prettier:files": "prettier",
+    "format": "prettier ./packages/ibm-products/**/*.{js,jsx,md,mdx,scss} --write --ignore-unknown",
     "generate": "lerna run generate --loglevel success --scope \"@carbon/ibm-products\" --",
-    "lint": "run-p -s 'lint:*' spellcheck",
-    "lint:es": "yarn lint:es:files 'packages/*/src/**/*.js'",
-    "lint:es:c4p": "yarn lint:es:files 'packages/ibm-products/src/**/*.js' --ignore-pattern '!examples/carbon-for-ibm-products/**/*.scss'",
-    "lint:es:files": "eslint",
-    "lint:prettier": "yarn format:prettier --check --loglevel warn",
-    "lint:prettier:files": "yarn format:prettier:files --check --loglevel warn",
-    "lint:style": "yarn lint:style:files 'packages/*/src/**/*.scss'",
-    "lint:style:files": "stylelint --report-needless-disables --report-invalid-scope-disables",
+    "lint": "run-p -s 'lint:*'",
+    "lint:js": "eslint ./packages/ibm-products/ --fix --ext .js,.jsx",
+    "lint:styles": "stylelint ./packages/ibm-products/**/*.scss",
     "prepare": "husky install",
     "run-all": "lerna run --stream --prefix --loglevel success",
     "test": "run-p -s 'test:*'",
     "test:c4p": "lerna run --stream --scope @carbon/ibm-products test --",
     "test:c4p:snapshot": "yarn test:c4p styles -u",
-    "spellcheck": "yarn spellcheck:files '**/*' '.github/**/*'",
-    "spellcheck:files": "cspell lint --relative --no-progress --show-context --no-must-find-files --gitignore",
+    "spellcheck": "cspell lint",
     "storybook": "run-s storybook:build:dependencies storybook:start",
     "storybook:build": "run-s -s 'storybook:build:*'",
     "storybook:build:dependencies": "yarn run-all --include-dependencies --scope \"@carbon/storybook-addon-theme\" build",
     "storybook:build:storybook": "cd packages/core && yarn build",
     "storybook:start": "cd packages/core && yarn start",
     "sync": "carbon-cli sync",
-    "update-gallery-config": "node scripts/example-gallery-builder/index.js; yarn format:prettier:files examples/carbon-for-ibm-products/example-gallery/src/gallery-config/index.js --write",
+    "update-gallery-config": "node scripts/example-gallery-builder/index.js; npx prettier examples/carbon-for-ibm-products/example-gallery/src/gallery-config/index.js --write",
     "//upgrade:dependencies:top": "# don't upgrade carbon (done globally), react/react-dom (not tested)",
     "upgrade:dependencies:top": "npm-check-updates -u --dep dev,peer,prod --reject '/(carbon|^react$|^react-dom$|^@testing-library)/'",
     "upgrade:dependencies:packages": "yarn run-all --no-sort --concurrency 1 upgrade-dependencies",
@@ -149,10 +140,16 @@
     }
   },
   "lint-staged": {
-    "packages/ibm-products/**/*.{js,md,mdx,scss}": "yarn lint:prettier:files",
-    "packages/ibm-products/**/*.js": "yarn lint:es:files",
-    "packages/ibm-products/**/*.scss": "yarn lint:style:files",
-    "packages/ibm-products/**/*": "yarn spellcheck:files"
+    "packages/ibm-products/**/*": [
+      "npx prettier --write --ignore-unknown"
+    ],
+    "packages/ibm-products/**/*.{js,jsx}": [
+      "npx eslint --fix",
+      "npx cspell"
+    ],
+    "packages/ibm-products/**/*.scss": [
+      "npx stylelint"
+    ]
   },
   "dependencies": {
     "stylelint-plugin-carbon-tokens": "2.3.1"

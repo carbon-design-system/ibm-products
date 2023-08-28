@@ -10,12 +10,16 @@ const COLUMN_RESIZING = 'columnResizing';
 const COLUMN_RESIZE_END = 'columnDoneResizing';
 const INIT = 'init';
 
-export const handleColumnResizeStartEvent = (dispatch) => {
-  dispatch({ type: COLUMN_RESIZE_START });
+export const handleColumnResizeStartEvent = (dispatch, headerId) => {
+  dispatch({ type: COLUMN_RESIZE_START, payload: { headerId } });
 };
 
-export const handleColumnResizeEndEvent = (dispatch) => {
-  dispatch({ type: COLUMN_RESIZE_END });
+export const handleColumnResizeEndEvent = (
+  dispatch,
+  onColResizeEnd,
+  headerId
+) => {
+  dispatch({ type: COLUMN_RESIZE_END, payload: { onColResizeEnd, headerId } });
 };
 
 export const handleColumnResizingEvent = (
@@ -53,9 +57,10 @@ export const stateReducer = (newState, action) => {
       };
     }
     case COLUMN_RESIZE_START: {
+      const { headerId } = action.payload;
       return {
         ...newState,
-        isResizing: true,
+        isResizing: headerId,
       };
     }
     case COLUMN_RESIZING: {
@@ -67,14 +72,19 @@ export const stateReducer = (newState, action) => {
         };
       }
       newColumnWidth[headerId] = newWidth;
+      const cleanedWidths = Object.fromEntries(
+        Object.entries(newState.columnResizing.columnWidths).filter(
+          ([_, value]) => !isNaN(value)
+        )
+      );
       return {
         ...newState,
-        isResizing: true,
+        isResizing: headerId,
         columnResizing: {
           ...newState.columnResizing,
           columnWidth: defaultWidth,
           columnWidths: {
-            ...newState.columnResizing.columnWidths,
+            ...cleanedWidths,
             ...newColumnWidth,
           },
           headerIdWidths: [headerId, newWidth],
@@ -82,6 +92,14 @@ export const stateReducer = (newState, action) => {
       };
     }
     case COLUMN_RESIZE_END: {
+      const { onColResizeEnd, headerId } = action.payload;
+      const currentColumn = {};
+      currentColumn[headerId] = newState.columnResizing.columnWidths[headerId];
+      const allChangedColumns = newState.columnResizing.columnWidths;
+      const { isResizing } = newState;
+      if (isResizing) {
+        onColResizeEnd?.(currentColumn, allChangedColumns);
+      }
       return {
         ...newState,
         isResizing: false,

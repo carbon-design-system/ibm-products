@@ -7,14 +7,6 @@
 
 @import '../../global/styles/project-settings';
 
-// The layout has been changed from middle/center to top/left, because
-// the component can expand, and it looks weird when expanding vertically
-// from the middle of the page instead of "dropping down" from above.
-// Margin provides spacing from the edge of the viewport.
-.checklist-stories__viewport {
-  margin: $spacing-10; // 64px
-}
-
 .checklist-stories__viewport .c4p--checklist {
   min-width: calc(2 * $spacing-13); // 320px
   max-width: calc(2 * $spacing-13);

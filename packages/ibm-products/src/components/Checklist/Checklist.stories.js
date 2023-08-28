@@ -7,7 +7,7 @@
 
 import React from 'react';
 // TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
+import { action } from '@storybook/addon-actions';
 
 import {
   getSelectedCarbonTheme,
@@ -37,23 +37,14 @@ const taskLists = [
       {
         kind: 'checked',
         label: 'Explore an automated investigation',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
       },
       {
         kind: 'checked',
         label: 'Visualize an attack',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
       },
       {
         kind: 'checked',
         label: 'See recommended responses',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
       },
     ],
   },
@@ -61,18 +52,14 @@ const taskLists = [
     title: 'Explore rapid search',
     tasks: [
       {
-        kind: 'unchecked',
+        kind: 'indeterminate',
         label: 'Search from a case',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
+        onClick: action('task'),
       },
       {
         kind: 'unchecked',
         label: 'Run a KQL query',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
+        onClick: action('task'),
       },
     ],
   },
@@ -82,9 +69,7 @@ const taskLists = [
       {
         kind: 'unchecked',
         label: 'View threat analytics dashboard',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
+        onClick: action('task'),
       },
     ],
   },
@@ -94,42 +79,38 @@ const taskLists = [
       {
         kind: 'unchecked',
         label: 'Monitor data ingestion',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
       },
       {
-        kind: 'unchecked',
+        kind: 'error',
         label: 'Register a data ingestion point',
         onClick: (task) => {
-          console.log('clicked task', task);
+          action('task')(task);
+          window.open(task.url, '_blank').focus();
         },
+        url: 'https://www.ibm.com/',
       },
       {
-        kind: 'unchecked',
+        kind: 'disabled',
         label: 'See data source integrations',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
       },
     ],
   },
 ];
 
-// The flattened list of tasks[] from taskLists
+// The flattened list of all tasks[] from taskLists.
 const allTasks = taskLists.map((obj) => obj.tasks).flat();
-// Total number of tasks
+// Total number of tasks.
 const numTasks = allTasks.length;
-// Count of tasks where checked=true
+// Count of tasks where 'kind'=checked.
 const numTasksCompleted = allTasks.filter(
   (task) => task.kind === 'checked'
 ).length;
+// chartValue as a percentage.
 const chartValue = numTasksCompleted / numTasks;
 
 export default {
   title: getStoryTitle(Checklist.displayName),
   component: Checklist,
-  // TODO: Define argTypes for props not represented by standard JS types.
   argTypes: {
     theme: {
       control: { type: null },
@@ -161,14 +142,82 @@ const Template = (args) => {
  * TODO: Declare one or more stories, generally one per design scenario.
  * NB no need for a 'Playground' because all stories have all controls anyway.
  */
+
 export const checklist = prepareStory(Template, {
   args: {
     // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#Checklist-args
-    onClickViewAll: () => {},
+    onClickViewAll: action('view all'),
+    onToggle: action('toggle'),
     chartValue: chartValue,
     chartLabel: `${parseInt(chartValue * 100)}% complete`,
     taskLists: taskLists,
     title: 'Get started checklist',
     viewAllLabel: `View all (${numTasks})`,
+  },
+});
+
+export const itemStates = prepareStory(Template, {
+  args: {
+    taskLists: [
+      {
+        title: 'Unchecked state',
+        tasks: [
+          {
+            kind: 'unchecked',
+            label:
+              'A task with a callback function will render a clickable label.',
+            onClick: action('task'),
+          },
+          {
+            kind: 'unchecked',
+            label: 'A task without a callback function will render plain text.',
+          },
+        ],
+      },
+      {
+        title: 'Indeterminate',
+        tasks: [
+          {
+            kind: 'indeterminate',
+            label: 'Indeterminate',
+            onClick: action('task'),
+          },
+          { kind: 'indeterminate', label: 'Indeterminate' },
+        ],
+      },
+      {
+        title: 'Checked',
+        tasks: [
+          {
+            kind: 'checked',
+            label: 'Checked',
+            onClick: action('task'),
+          },
+          { kind: 'checked', label: 'Checked' },
+        ],
+      },
+      {
+        title: 'Disabled',
+        tasks: [
+          {
+            kind: 'disabled',
+            label: 'Disabled label',
+            onClick: action('task'),
+          },
+          { kind: 'disabled', label: 'Disabled label' },
+        ],
+      },
+      {
+        title: 'Error',
+        tasks: [
+          {
+            kind: 'error',
+            label: 'Error label',
+            onClick: action('task'),
+          },
+          { kind: 'error', label: 'Error label' },
+        ],
+      },
+    ],
   },
 });

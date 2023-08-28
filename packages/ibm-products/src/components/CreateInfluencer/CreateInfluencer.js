@@ -43,16 +43,9 @@ export let CreateInfluencer = ({ className, currentStep, stepData, title }) => {
       getNumberOfDynamicStepsBeforeCurrentStep(stepData, 'shouldIncludeStep') ||
       0;
 
-    const conditionallyRenderInfluencerTitle = () => {
-      if (title) {
-        return <h3 className={cx(`${blockClass}__title`)}>{title}</h3>;
-      }
-      return null;
-    };
-
     return (
       <div className={`${blockClass}__left-nav`}>
-        {conditionallyRenderInfluencerTitle()}
+        {title && <h3 className={`${blockClass}__title`}>{title}</h3>}
         {currentStep === 1 && stepData[0]?.introStep ? null : (
           <ProgressIndicator
             currentIndex={

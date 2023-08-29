@@ -128,8 +128,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   }
 }
 
-$story-anchor: 'datagrid';
-div[id*='#{$story-anchor}'] .docs-story > div:first-child > div:first-child {
+$story-anchor: 'Datagrid';
+div[data-story-title*='#{$story-anchor}']
+  .docs-story
+  > div:first-child
+  > div:first-child {
   overflow: auto;
   width: 100%;
 }

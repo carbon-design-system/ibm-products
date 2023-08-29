@@ -26,6 +26,8 @@ import {
   storyDocsPageInfo,
 } from './story-helper';
 
+import { pkg } from '../../../settings';
+
 export const CustomBlocks = ({ blocks }) => {
   return blocks.map((block, index) => {
     const source = { ...block?.source };
@@ -102,8 +104,9 @@ export const StoryDocsPage = ({
 
   const isFullScreen =
     csfFile?.meta?.parameters?.layout === 'fullscreen' || false;
+
   const storyHelperClass = isFullScreen
-    ? 'c4p--story-docs-page--fullscreen'
+    ? `${pkg.prefix}--story-docs-page--fullscreen`
     : '';
   const processedBlocks = processBlocks(
     blocks,
@@ -115,7 +118,7 @@ export const StoryDocsPage = ({
     processedBlocks?.filter((block) => !!block.story).length ?? 0;
 
   return (
-    <>
+    <div data-story-title={storyInfo.title}>
       <Title>{altTitle ?? storyInfo.title}</Title>
       {guidelinesHref ? (
         guidelinesHref && Array.isArray(guidelinesHref) ? (
@@ -224,7 +227,7 @@ export const StoryDocsPage = ({
         </p>
       )}
       <Controls />
-    </>
+    </div>
   );
 };
 

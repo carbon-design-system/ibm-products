@@ -254,6 +254,7 @@ const StackedTemplate = ({ actions, ...args }) => {
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
+      <div style={{ height: '3rem' }} data-reserve-space="for toggle buttons" />
       <ButtonSet
         style={{
           display: 'flex',
@@ -263,9 +264,15 @@ const StackedTemplate = ({ actions, ...args }) => {
           zIndex: 10000,
         }}
       >
-        <Button onClick={() => setOpen1(!open1)}>Toggle tearsheet 1</Button>
-        <Button onClick={() => setOpen2(!open2)}>Toggle tearsheet 2</Button>
-        <Button onClick={() => setOpen3(!open3)}>Toggle tearsheet 3</Button>
+        <Button onClick={() => setOpen1(!open1)}>
+          Toggle&nbsp;tearsheet&nbsp;1
+        </Button>
+        <Button onClick={() => setOpen2(!open2)}>
+          Toggle&nbsp;tearsheet&nbsp;2
+        </Button>
+        <Button onClick={() => setOpen3(!open3)}>
+          Toggle&nbsp;tearsheet&nbsp;3
+        </Button>
       </ButtonSet>
       <div ref={ref}>
         <Tearsheet

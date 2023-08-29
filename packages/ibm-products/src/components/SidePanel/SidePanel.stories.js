@@ -32,47 +32,8 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { SidePanel } from './SidePanel';
+import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
 // import mdx from './SidePanel.mdx';
-
-export default {
-  title: getStoryTitle(SidePanel.displayName),
-  component: SidePanel,
-  tags: ['autodocs'],
-  parameters: {
-    styles,
-    /*
-docs: {
-      page: mdx,
-    },
-*/
-  },
-  argTypes: {
-    actions: {
-      control: {
-        type: 'select',
-        labels: {
-          0: 'One button',
-          1: 'One button (ghost)',
-          2: 'One button (danger)',
-          3: 'Two buttons',
-          4: 'Two buttons with ghost',
-          5: 'Two buttons with danger',
-          6: 'Three buttons with ghost',
-          7: 'Three buttons with danger',
-          8: 'Three buttons',
-          9: 'None',
-        },
-        default: 0,
-      },
-      options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    },
-    slideIn: {
-      table: {
-        disable: true,
-      },
-    },
-  },
-};
 
 const prefix = 'side-panel-stories__';
 
@@ -382,14 +343,55 @@ const renderUIShellHeader = () => (
   />
 );
 
+export default {
+  title: getStoryTitle(SidePanel.displayName),
+  component: SidePanel,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'fullscreen',
+    styles,
+    /*
+docs: {
+      page: mdx,
+    },
+*/
+  },
+  argTypes: {
+    actions: {
+      control: {
+        type: 'select',
+        labels: {
+          0: 'One button',
+          1: 'One button (ghost)',
+          2: 'One button (danger)',
+          3: 'Two buttons',
+          4: 'Two buttons with ghost',
+          5: 'Two buttons with danger',
+          6: 'Three buttons with ghost',
+          7: 'Three buttons with danger',
+          8: 'Three buttons',
+          9: 'None',
+        },
+        default: 0,
+      },
+      options: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    },
+    slideIn: {
+      table: {
+        disable: true,
+      },
+    },
+  },
+  decorators: [sidePanelDecorator(renderUIShellHeader, prefix)],
+};
+
 // eslint-disable-next-line react/prop-types
 const SlideOverTemplate = ({ minimalContent, actions, ...args }) => {
   const [open, setOpen] = useState(false);
   const testRef = useRef();
   return (
     <>
-      {renderUIShellHeader()}
-      <Button onClick={() => setOpen(!open)}>
+      <Button onClick={() => setOpen(!open)} className={`${prefix}toggle`}>
         {open ? 'Close side panel' : 'Open side panel'}
       </Button>
       <SidePanel
@@ -411,8 +413,7 @@ const StepTemplate = ({ actions, ...args }) => {
   const [currentStep, setCurrentStep] = useState(0);
   return (
     <>
-      {renderUIShellHeader()}
-      <Button onClick={() => setOpen(!open)}>
+      <Button onClick={() => setOpen(!open)} className={`${prefix}toggle`}>
         {open ? 'Close side panel' : 'Open side panel'}
       </Button>
       <SidePanel
@@ -437,10 +438,9 @@ const SlideInTemplate = ({ actions, ...args }) => {
   const [open, setOpen] = useState(false);
   return (
     <>
-      {renderUIShellHeader()}
-      <Grid id="ibm-products-page-content">
+      <Grid id="ibm-products-page-content" className={`${prefix}grid`}>
         <Column lg={16} md={8} sm={4}>
-          <Button onClick={() => setOpen(!open)}>
+          <Button onClick={() => setOpen(!open)} className={`${prefix}toggle`}>
             {open ? 'Close side panel' : 'Open side panel'}
           </Button>
         </Column>

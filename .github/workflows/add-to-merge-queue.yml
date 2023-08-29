@@ -3,14 +3,13 @@ on:
   pull_request_target:
     types: [labeled, opened, reopened]
 
-permissions:
-  pull-requests: write
-  contents: write
-
 jobs:
   add-to-merge-queue:
     name: Add to queue when automerge label is present
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
     steps:
       - name: Log github event
         env:

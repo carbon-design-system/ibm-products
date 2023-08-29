@@ -45,6 +45,8 @@ jobs:
           --create-release github --yes
 
       - name: Correct security dist-tag
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.CARBON_BOT_NPM_TOKEN }}
         run:
           bash .github/scripts/release-disttag-update.sh packages/security
           @carbon/ibm-security

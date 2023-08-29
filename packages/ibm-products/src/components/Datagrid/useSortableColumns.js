@@ -147,8 +147,7 @@ const useSortableColumns = (hooks) => {
   };
 
   const sortInstanceProps = (instance) => {
-    const { onSort } = instance;
-    Object.assign(instance, { manualSortBy: !!onSort, isTableSortable: true });
+    Object.assign(instance, { isTableSortable: true });
   };
 
   const getNewSortOrder = (sortOrder) => {

@@ -9,6 +9,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/react/scss/components/button/tokens' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/breakpoint';
 @use './variables' as *;
 
 .#{$block-class}__table-toolbar > section {
@@ -162,6 +163,23 @@
   display: block;
   width: 100%;
   padding-top: 0;
+
+  .#{c4p-settings.$carbon-prefix}--data-table-header__description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{c4p-settings.$carbon-prefix}--data-table-header__title {
+    overflow: hidden;
+    max-width: 80ch;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @include breakpoint.breakpoint(md) {
+      max-width: 55ch;
+    }
+  }
 
   .#{c4p-settings.$carbon-prefix}--data-table-content {
     width: 100%;

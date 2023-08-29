@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.57.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.56.0...@carbon/ibm-products@1.57.0) (2023-08-29)
+
+
+### Bug Fixes
+
+* datagrid table accessibility v1 ([#3405](https://github.com/carbon-design-system/ibm-products/issues/3405)) ([491c007](https://github.com/carbon-design-system/ibm-products/commit/491c007f86db2f2949986542f838285d77d489fa))
+
+
+### Features
+
+* **Datagrid:** add keyboard support for col resizing ([#3395](https://github.com/carbon-design-system/ibm-products/issues/3395)) ([c5d5222](https://github.com/carbon-design-system/ibm-products/commit/c5d5222095dab1d8a9cae2c54d26801b8c56cc3f))
+* **Datagrid:** add on resize end callback ([#3407](https://github.com/carbon-design-system/ibm-products/issues/3407)) ([d9b7296](https://github.com/carbon-design-system/ibm-products/commit/d9b7296ef559de4befc7301d9fb02b8664586aa1))
+
+
+
+
+
 # [1.56.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.55.2...@carbon/ibm-products@1.56.0) (2023-08-22)
 
 

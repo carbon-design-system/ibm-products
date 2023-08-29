@@ -97,3 +97,46 @@ export const WithCustomLabel = prepareStory(Template, {
     containerWidth: 500,
   },
 });
+
+const TemplateWithClose = (args) => {
+  const [filters, setFilters] = useState(
+    args.filters.map((filter) => ({
+      ...filter,
+      filter: true,
+      onClose: () => handleFilterClose(filter.key),
+      title: 'Remove filter',
+    }))
+  );
+  const clearFilters = () => setFilters([]);
+
+  const handleFilterClose = (filterKey) => {
+    setFilters((prev) => prev.filter((filter) => filter.key !== filterKey));
+  };
+
+  return (
+    <div style={{ width: args.containerWidth }}>
+      <FilterSummary
+        clearFiltersText={args.clearFiltersText}
+        filters={filters}
+        clearFilters={clearFilters}
+        renderLabel={args.renderLabel}
+      />
+    </div>
+  );
+};
+// eslint-disable-next-line react/prop-types
+export const WithFilterClose = prepareStory(TemplateWithClose, {
+  args: {
+    clearFiltersText: 'Clear filters',
+    filters: [
+      //cspell: disable
+      { key: 'project', value: 'Goldmember' },
+      //cspell: enable
+      { key: 'owner', value: 'Austin Powers' },
+      { key: 'middle name', value: 'Danger' },
+      { key: 'spy', value: true },
+      { key: 'title', value: 'International man of mystery' },
+    ],
+    containerWidth: 500,
+  },
+});

@@ -37,7 +37,7 @@ export default {
   component: TearsheetNarrow,
   tags: ['autodocs'],
   subcomponents: { Tearsheet },
-  parameters: { styles /* docs: { page: mdx } */ },
+  parameters: { layout: 'fullscreen', styles /* docs: { page: mdx } */ },
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),
     actions: {
@@ -175,6 +175,7 @@ const StackedTemplate = ({ actions, ...args }) => {
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
+      <div style={{ height: '3rem' }} data-reserve-space="for toggle buttons" />
       <div
         style={{
           display: 'flex',

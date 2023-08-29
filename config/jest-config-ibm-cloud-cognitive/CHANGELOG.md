@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@0.24.25...jest-config-ibm-cloud-cognitive@1.1.0) (2023-08-29)
+
+
+### Bug Fixes
+
+* **build:** move jest config package to v1 to prevent version clashes ([#3420](https://github.com/carbon-design-system/ibm-products/issues/3420)) ([b484006](https://github.com/carbon-design-system/ibm-products/commit/b484006572bcbc62b7b0ded4083242d136d23384))
+
+
+### Features
+
+* upgrade main package to react 18 ([#3146](https://github.com/carbon-design-system/ibm-products/issues/3146)) ([8dbddd1](https://github.com/carbon-design-system/ibm-products/commit/8dbddd1b38938fa7f00c75f5229088613703a9ca))
+
+
+
+
+
 ## [0.24.25](https://github.com/carbon-design-system/ibm-products/compare/jest-config-ibm-cloud-cognitive@0.24.24...jest-config-ibm-cloud-cognitive@0.24.25) (2023-08-01)
 
 **Note:** Version bump only for package jest-config-ibm-cloud-cognitive

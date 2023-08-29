@@ -1764,7 +1764,7 @@ __metadata:
     glob: ^10.3.3
     immutability-helper: ^3.1.1
     jest: ^29.6.1
-    jest-config-ibm-cloud-cognitive: ^1.0.0
+    jest-config-ibm-cloud-cognitive: ^1.1.0
     jest-environment-jsdom: ^29.6.1
     lodash: ^4.17.21
     namor: ^1.1.2
@@ -14084,7 +14084,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-config-ibm-cloud-cognitive@^1.0.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
+"jest-config-ibm-cloud-cognitive@^1.1.0, jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive":
   version: 0.0.0-use.local
   resolution: "jest-config-ibm-cloud-cognitive@workspace:config/jest-config-ibm-cloud-cognitive"
   dependencies:

@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.1.3...@carbon/ibm-cloud-cognitive-core@2.2.0) (2023-08-29)
+
+
+### Bug Fixes
+
+* page header scroll and incidentals ([#3383](https://github.com/carbon-design-system/ibm-products/issues/3383)) ([b8c7346](https://github.com/carbon-design-system/ibm-products/commit/b8c73462a7fbdd6fc5d3e611b1e8cb61134bb0fe))
+* storybook use of package dev prefix ([#3400](https://github.com/carbon-design-system/ibm-products/issues/3400)) ([f0a63e6](https://github.com/carbon-design-system/ibm-products/commit/f0a63e67a913ca29f189887ba3034671218c5446))
+
+
+### Features
+
+* upgrade main package to react 18 ([#3146](https://github.com/carbon-design-system/ibm-products/issues/3146)) ([8dbddd1](https://github.com/carbon-design-system/ibm-products/commit/8dbddd1b38938fa7f00c75f5229088613703a9ca))
+
+
+
+
+
 ## [2.1.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.1.2...@carbon/ibm-cloud-cognitive-core@2.1.3) (2023-08-22)
 
 

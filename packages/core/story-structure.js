@@ -150,6 +150,23 @@ const s = [
           'c/InlineTip',
           'c/Guidebanner',
           'c/NonLinearReading',
+          {
+            n: 'Coachmark',
+            s: [
+              'c/Coachmark',
+              'c/CoachmarkFixed',
+              'c/CoachmarkStack',
+              {
+                n: 'Coachmark Elements',
+                s: [
+                  'c/CoachmarkBeacon',
+                  'c/CoachmarkButton',
+                  'c/CoachmarkOverlayElement',
+                  'c/CoachmarkOverlayElements',
+                ],
+              },
+            ],
+          },
           'c/Checklist',
         ],
       },

@@ -160,7 +160,10 @@ export let Checklist = React.forwardRef(
                     key={`${list.title}-${index}`}
                   >
                     {list.title && (
-                      <h3 className={`${blockClass}__list-title`}>
+                      <h3
+                        title={list.title}
+                        className={`${blockClass}__list-title`}
+                      >
                         {list.title}
                       </h3>
                     )}
@@ -184,7 +187,7 @@ export let Checklist = React.forwardRef(
                                 }}
                                 size="small"
                               >
-                                <div>{item.label}</div>
+                                <div title={item.label}>{item.label}</div>
                               </Button>
                             ) : (
                               <span
@@ -192,6 +195,7 @@ export let Checklist = React.forwardRef(
                                   `${blockClass}__label`,
                                   `${blockClass}__label--${item.kind}`
                                 )}
+                                title={item.label}
                               >
                                 {item.label}
                               </span>

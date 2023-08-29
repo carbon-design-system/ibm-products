@@ -156,26 +156,28 @@ export const checklist = prepareStory(Template, {
   },
 });
 
-export const itemStates = prepareStory(Template, {
+export const taskStates = prepareStory(Template, {
+  storyName: 'Task states',
   args: {
     taskLists: [
       {
-        title: 'Unchecked state',
+        title: 'Unchecked tasks',
         tasks: [
           {
             kind: 'unchecked',
             label:
-              'A task with a callback function will render a clickable label.',
+              'Any type of task with a callback function will render a clickable label.',
             onClick: action('task'),
           },
           {
             kind: 'unchecked',
-            label: 'A task without a callback function will render plain text.',
+            label:
+              'Tasks *without* a callback function will render plain text.',
           },
         ],
       },
       {
-        title: 'Indeterminate',
+        title: 'Indeterminate state',
         tasks: [
           {
             kind: 'indeterminate',
@@ -186,7 +188,7 @@ export const itemStates = prepareStory(Template, {
         ],
       },
       {
-        title: 'Checked',
+        title: 'Checked state',
         tasks: [
           {
             kind: 'checked',
@@ -197,7 +199,7 @@ export const itemStates = prepareStory(Template, {
         ],
       },
       {
-        title: 'Disabled',
+        title: 'Disabled state',
         tasks: [
           {
             kind: 'disabled',
@@ -208,7 +210,7 @@ export const itemStates = prepareStory(Template, {
         ],
       },
       {
-        title: 'Error',
+        title: 'Error state',
         tasks: [
           {
             kind: 'error',
@@ -216,6 +218,23 @@ export const itemStates = prepareStory(Template, {
             onClick: action('task'),
           },
           { kind: 'error', label: 'Error label' },
+        ],
+      },
+      {
+        title:
+          "A task list's title will be truncated after two lines of text otherwise it will never end. A task list's title will be truncated after two lines of text otherwise it will never end. A task list's title will be truncated after two lines of text otherwise it will never end.",
+        tasks: [
+          {
+            kind: 'unchecked',
+            label:
+              "A task's label will be truncated after two lines of text otherwise it will never end. A task's label will be truncated after two lines of text otherwise it will never end. A task's label will be truncated after two lines of text otherwise it will never end.",
+            onClick: action('task'),
+          },
+          {
+            kind: 'unchecked',
+            label:
+              "A task's label will be truncated after two lines of text otherwise it will never end. A task's label will be truncated after two lines of text otherwise it will never end. A task's label will be truncated after two lines of text otherwise it will never end.",
+          },
         ],
       },
     ],

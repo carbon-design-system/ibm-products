@@ -123,7 +123,7 @@
       /* stylelint-disable-next-line declaration-property-value-disallowed-list */
       flex-shrink: unset !important;
       padding: 0 !important;
-      border: none;
+      border: none !important;
       background-color: transparent !important;
       color: $link-01 !important;
 
@@ -195,7 +195,6 @@
 
     &__list-item {
       display: flex;
-      align-items: center;
       margin-bottom: $spacing-03;
 
       &:last-child {
@@ -204,8 +203,8 @@
     }
 
     &__icon {
-      display: inline-flex;
-      margin-right: $spacing-03;
+      /* stylelint-disable-next-line carbon/layout-token-use */
+      margin: rem(1px) $spacing-03 0 0;
       color: $link-01;
 
       &--error {

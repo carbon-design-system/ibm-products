@@ -73,8 +73,8 @@
     }
 
     &__title {
-      @include ellipsis-2-lines();
       @include carbon--type-style('productive-heading-02');
+      @include ellipsis-2-lines();
     }
 
     &__chart-label {
@@ -148,15 +148,6 @@
 
       &--error {
         color: $text-error !important;
-
-        // TODO: fix error colors for hover and active states
-        // &:hover {
-        //   color: $button-danger-hover !important;
-        // }
-
-        // &:active {
-        //   color: $button-danger-active !important;
-        // }
       }
     }
 
@@ -184,6 +175,10 @@
     &__list-group {
       padding: $spacing-05;
       border-bottom: 1px solid $ui-03;
+
+      &:last-child {
+        border-bottom: none;
+      }
     }
 
     &__list-title {
@@ -231,6 +226,7 @@
       @include ellipsis-2-lines();
 
       padding: $spacing-03 $spacing-05;
+      border-top: 1px solid $ui-03;
     }
   }
 }

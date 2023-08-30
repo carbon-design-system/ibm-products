@@ -431,12 +431,14 @@ export let SidePanel = React.forwardRef(
       if (includeOverlay && open) {
         bodyElement.style.overflow = 'hidden';
       } else if (includeOverlay && !open) {
-        bodyElement.style.overflow = 'initial';
+        bodyElement.style.overflow = '';
       }
       if (includeOverlay && !preventCloseOnClickOutside) {
         document.addEventListener('click', handleOutsideClick);
       }
       return () => {
+        const bodyElement = document.body;
+        bodyElement.style.overflow = '';
         document.removeEventListener('click', handleOutsideClick);
       };
     }, [

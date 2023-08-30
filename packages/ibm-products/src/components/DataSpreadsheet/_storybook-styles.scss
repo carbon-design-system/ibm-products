@@ -5,8 +5,13 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-$story-anchor: 'data-spreadsheet';
-div[id*='#{$story-anchor}'] .docs-story > div:first-child > div:first-child {
+$story-anchor: 'DataSpreadsheet';
+
+$story-anchor: 'DataSpreadsheet';
+div[data-story-title*='#{$story-anchor}']
+  .docs-story
+  > div:first-child
+  > div:first-child {
   overflow: auto;
   width: 100%;
 }

@@ -52,6 +52,7 @@ export default {
 };
 
 const defaultFullPageProps = {
+  title: 'Create topic',
   nextButtonText: 'Next',
   backButtonText: 'Back',
   cancelButtonText: 'Cancel',

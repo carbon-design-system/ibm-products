@@ -86,4 +86,28 @@ describe(CreateInfluencer.displayName, () => {
     });
     screen.getByText(step1Title);
   });
+  it('renders the influencer title if the "title" prop is provided', async () => {
+    const { container } = renderComponent({
+      stepData: [{ title: 'Step 1' }, { title: 'Step 2' }],
+      title: 'Create asset',
+      className: 'some-test-class-name',
+      currentStep: 1,
+    });
+    expect(
+      container.querySelector(`.${blockClass}__title`)
+    ).toBeInTheDocument();
+    expect(container.querySelector(`.${blockClass}__title`)).toHaveTextContent(
+      'Create asset'
+    );
+  });
+  it("doesn't renders the influencer title if the 'title' prop is not provided", async () => {
+    const { container } = renderComponent({
+      stepData: [{ title: 'Step 1' }, { title: 'Step 2' }],
+      className: 'some-test-class-name',
+      currentStep: 1,
+    });
+    expect(
+      container.querySelector(`.${blockClass}__title`)
+    ).not.toBeInTheDocument();
+  });
 });

@@ -39,7 +39,6 @@
     &__header {
       display: flex;
       padding: $spacing-05;
-      border-bottom: 1px solid $ui-03;
       background-color: $ui-01;
       gap: $spacing-03;
     }
@@ -174,11 +173,7 @@
 
     &__list-group {
       padding: $spacing-05;
-      border-bottom: 1px solid $ui-03;
-
-      &:last-child {
-        border-bottom: none;
-      }
+      border-top: 1px solid $ui-03;
     }
 
     &__list-title {

@@ -109,6 +109,7 @@ export let Checklist = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
+        aria-label="checklist"
         className={cx(
           blockClass, // Apply the block class to the main HTML element
           className, // Apply any supplied class names to the main HTML element.
@@ -118,7 +119,6 @@ export let Checklist = React.forwardRef(
           }
         )}
         ref={ref}
-        role="main"
         {...getDevtoolsProps(componentName)}
       >
         {(title || chartLabelAndValue) && (

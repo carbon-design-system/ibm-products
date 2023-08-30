@@ -21,97 +21,35 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 const taskLists = [
   {
+    title: 'List 1 title',
     tasks: [
       {
         kind: 'checked',
-        label: 'Register for Sandbox trial',
+        label: 'Checked task with callback',
+        onClick: () => {},
+      },
+      {
+        kind: 'checked',
+        label: 'Checked task without callback',
       },
     ],
   },
   {
-    title: 'Investigate a threat',
-    tasks: [
-      {
-        kind: 'checked',
-        label: 'Explore an automated investigation',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
-      },
-      {
-        kind: 'checked',
-        label: 'Visualize an attack',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
-      },
-      {
-        kind: 'checked',
-        label: 'See recommended responses',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
-      },
-    ],
-  },
-  {
-    title: 'Explore rapid search',
+    title: 'List 2 title',
     tasks: [
       {
         kind: 'unchecked',
-        label: 'Search from a case',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
+        label: 'Unchecked task with callback',
+        onClick: () => {},
       },
       {
         kind: 'unchecked',
-        label: 'Run a KQL query',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
-      },
-    ],
-  },
-  {
-    title: 'Explore threat analytics',
-    tasks: [
-      {
-        kind: 'unchecked',
-        label: 'View threat analytics dashboard',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
-      },
-    ],
-  },
-  {
-    title: 'Manage data ingestion',
-    tasks: [
-      {
-        kind: 'unchecked',
-        label: 'Monitor data ingestion',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
-      },
-      {
-        kind: 'unchecked',
-        label: 'Register a data ingestion point',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
-      },
-      {
-        kind: 'unchecked',
-        label: 'See data source integrations',
-        onClick: (task) => {
-          console.log('clicked task', task);
-        },
+        label: 'Unchecked task without callback',
       },
     ],
   },
 ];
+
 // calculate some values based on taskLists
 const allTasks = taskLists.map((obj) => obj.tasks).flat();
 const numTasks = allTasks.length;
@@ -130,13 +68,26 @@ const renderComponent = ({ ...rest } = {}) =>
 
 describe(componentName, () => {
   it('renders a component Checklist', () => {
+    // <aside> elements have an *implicit* role, and do not req. an *assigned* role.
     renderComponent();
-    expect(screen.getByRole('main')).toHaveClass(blockClass);
+    expect(document.querySelector('aside')).toHaveClass(blockClass);
   });
 
   it('renders a title', () => {
     renderComponent({ title });
     screen.getByText(title);
+  });
+
+  it('does not render the chart and chart label if `chartLabel` is defined and `chartValue` is not', () => {
+    renderComponent({ chartLabel });
+    expect(screen.queryByRole('img')).toBeNull();
+    expect(screen.queryByText(chartLabel)).toBeNull();
+  });
+
+  it('does not render the chart and chart label if `chartValue` is defined and `chartLabel` is not', () => {
+    renderComponent({ chartValue });
+    expect(screen.queryByRole('img')).toBeNull();
+    expect(screen.queryByText(chartLabel)).toBeNull();
   });
 
   it('renders the chart and chart label if `chartLabel` and `chartValue` are both defined', () => {
@@ -155,15 +106,15 @@ describe(componentName, () => {
     screen.getByText(viewAllLabel);
   });
 
-  it.skip('has no accessibility violations', async () => {
-    const { container } = renderComponent({});
+  it('has no accessibility violations', async () => {
+    const { container } = renderComponent();
     await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', () => {
     renderComponent({ className });
-    expect(screen.getByRole('main')).toHaveClass(className);
+    expect(document.querySelector('aside')).toHaveClass(className);
   });
 
   it('adds additional props to the containing node', () => {

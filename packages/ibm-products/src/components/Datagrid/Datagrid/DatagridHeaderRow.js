@@ -59,6 +59,10 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
           `--${blockClass}--grid-height`,
           px(gridHeight - scrollBuffer - tableToolbarHeight)
         );
+        headerRowElement.style.setProperty(
+          `--${blockClass}--header-height`,
+          px(headerRowElement.offsetHeight)
+        );
       };
       setCustomValues({
         gridHeight: gridElement.offsetHeight,

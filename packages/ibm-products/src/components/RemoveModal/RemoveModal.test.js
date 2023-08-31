@@ -8,7 +8,6 @@
 import { fireEvent, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { carbon } from '../../settings';
 
 import { RemoveModal } from '.';
 
@@ -53,14 +52,13 @@ describe(componentName, () => {
   });
 
   it('renders text input', async () => {
-    const { container } = render(
-      <RemoveModal {...defaultProps} textConfirmation />
-    );
+    render(<RemoveModal {...defaultProps} textConfirmation />);
     screen.getByText(defaultProps.inputLabelText);
-    container.querySelector(`.${carbon.prefix}--text-input`);
-    expect(
-      container.querySelector(`.${carbon.prefix}--text-input`)
-    ).toHaveAttribute('placeholder', defaultProps.inputPlaceholderText);
+    const textInput = screen.getByRole('textbox');
+    expect(textInput).toHaveAttribute(
+      'placeholder',
+      defaultProps.inputPlaceholderText
+    );
   });
 
   it('renders without text confirmation functionality', async () => {
@@ -93,18 +91,19 @@ describe(componentName, () => {
       onRequestSubmit,
     };
 
-    const { container } = render(<RemoveModal {...props} />);
+    render(<RemoveModal {...props} />);
 
     await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    const textInput = screen.getByRole('textbox');
+    change(textInput, {
       target: { value: 'bx1002' },
     });
     await act(() => click(screen.getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
 
-    change(container.querySelector(`.${carbon.prefix}--text-input`), {
+    change(textInput, {
       target: { value: 'bx1001' },
     });
     await act(() => click(screen.getByText(props.primaryButtonText)));
@@ -124,8 +123,11 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(<RemoveModal {...defaultProps} />);
-    expect(container.firstChild).toHaveClass(defaultProps.className);
+    render(<RemoveModal {...defaultProps} />);
+
+    expect(screen.getByRole('presentation')).toHaveClass(
+      defaultProps.className
+    );
   });
 
   const dataTestId = 'data-testid';

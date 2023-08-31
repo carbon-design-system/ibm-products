@@ -6,7 +6,7 @@
 //
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/themes';
-@use '../../global/styles/project-settings' as c4p-settings;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 
 $storybook-block-class: #{c4p-settings.$pkg-prefix}--notifications-panel__story;
 

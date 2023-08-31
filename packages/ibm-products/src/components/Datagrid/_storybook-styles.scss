@@ -9,7 +9,7 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/spacing' as *;
 
-@use '../../global/styles/project-settings' as c4p-settings;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 
 // TODO: add any additional styles used by Datagrid.stories.js
 // helper class for the nested table
@@ -128,8 +128,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   }
 }
 
-$story-anchor: 'datagrid';
-div[id*='#{$story-anchor}'] .docs-story > div:first-child > div:first-child {
+$story-anchor: 'Datagrid';
+div[data-story-title*='#{$story-anchor}']
+  .docs-story
+  > div:first-child
+  > div:first-child {
   overflow: auto;
   width: 100%;
 }

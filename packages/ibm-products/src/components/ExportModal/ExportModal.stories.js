@@ -58,12 +58,10 @@ const defaultProps = {
   inputType: 'text',
 };
 
-const Template = ({ open, ...args }, context) => {
-  return <ExportModal {...args} open={context.viewMode !== 'docs' && open} />;
-};
-
-const TemplateWithState = (args) => {
-  const [open, setOpen] = useState(false);
+const Template = ({ storyInitiallyOpen = false, ...args }, context) => {
+  const [open, setOpen] = useState(
+    context.viewMode !== 'docs' && storyInitiallyOpen
+  );
   const [loading, setLoading] = useState(false);
   const [successful, setSuccessful] = useState(false);
   const [error, setError] = useState(false);
@@ -104,14 +102,14 @@ const TemplateWithState = (args) => {
   );
 };
 
-export const WithSuccessMessage = prepareStory(TemplateWithState, {
+export const WithSuccessMessage = prepareStory(Template, {
   args: {
     ...defaultProps,
     successful: true,
   },
 });
 
-export const WithErrorMessage = prepareStory(TemplateWithState, {
+export const WithErrorMessage = prepareStory(Template, {
   args: {
     ...defaultProps,
     successful: false,
@@ -121,6 +119,7 @@ export const WithErrorMessage = prepareStory(TemplateWithState, {
 export const Standard = prepareStory(Template, {
   args: {
     ...defaultProps,
+    storyInitiallyOpen: true,
   },
 });
 
@@ -131,6 +130,7 @@ export const WithExtensionValidation = prepareStory(Template, {
     filename: '',
     invalidInputText: 'File must have valid extension .pdf',
     body: 'File must be exported in a PDF format.',
+    storyInitiallyOpen: true,
   },
 });
 
@@ -149,5 +149,6 @@ export const WithPreformattedExtensions = prepareStory(Template, {
       },
     ],
     preformattedExtensionsLabel: 'Choose an export format',
+    storyInitiallyOpen: true,
   },
 });

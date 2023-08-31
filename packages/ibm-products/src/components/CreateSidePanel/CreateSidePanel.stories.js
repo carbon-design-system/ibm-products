@@ -29,20 +29,9 @@ import { CreateSidePanel } from './CreateSidePanel';
 
 import styles from './_storybook-styles.scss';
 import DocsPage from './CreateSidePanel.docs-page';
+import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
 
 const blockClass = `${pkg.prefix}--create-side-panel`;
-
-export default {
-  title: getStoryTitle(CreateSidePanel.displayName),
-  component: CreateSidePanel,
-  tags: ['autodocs'],
-  parameters: {
-    styles,
-    docs: {
-      page: DocsPage,
-    },
-  },
-};
 
 const prefix = 'create-side-panel-stories__';
 
@@ -69,6 +58,19 @@ const renderUIShellHeader = () => (
     )}
   />
 );
+
+export default {
+  title: getStoryTitle(CreateSidePanel.displayName),
+  component: CreateSidePanel,
+  tags: ['autodocs'],
+  parameters: {
+    styles,
+    docs: {
+      page: DocsPage,
+    },
+  },
+  decorators: [sidePanelDecorator(renderUIShellHeader, prefix)],
+};
 
 const DefaultTemplate = ({ ...args }) => {
   const carbonPrefix = usePrefix();

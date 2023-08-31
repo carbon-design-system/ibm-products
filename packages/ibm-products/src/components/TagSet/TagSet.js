@@ -17,7 +17,7 @@ import { Tag } from '@carbon/react';
 import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { prepareProps, isRequiredIf } from '../../global/js/utils/props-helper';
+import { isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
 
 const componentName = 'TagSet';
@@ -96,7 +96,6 @@ export let TagSet = React.forwardRef(
                   <Tag
                     {...other} // ensure id is not duplicated
                     data-original-id={id}
-                    filter={false}
                   >
                     {label}
                   </Tag>
@@ -113,7 +112,7 @@ export let TagSet = React.forwardRef(
       let newDisplayedTags =
         tags && tags.length > 0
           ? tags.map(({ label, ...other }, index) => (
-              <Tag {...other} filter={false} key={`displayed-tag-${index}`}>
+              <Tag {...other} key={`displayed-tag-${index}`}>
                 {label}
               </Tag>
             ))
@@ -365,14 +364,12 @@ TagSet.propTypes = {
    * with properties: **label**\* (required) to supply the tag content, and
    * other properties will be passed to the Carbon Tag component, such as
    * **type**, **disabled**, **ref**, **className** , and any other Tag props.
-   * NOTE: **filter** is not supported. Any other fields in the object will be passed through to the HTML element
-   * as HTML attributes.
    *
    * See https://react.carbondesignsystem.com/?path=/docs/components-tag--default
    */
   tags: PropTypes.arrayOf(
     PropTypes.shape({
-      ...prepareProps(Tag.propTypes, 'filter'),
+      ...Tag.propTypes,
       label: PropTypes.string.isRequired,
       // we duplicate this prop to improve the DocGen
       type: PropTypes.oneOf(tagTypes),

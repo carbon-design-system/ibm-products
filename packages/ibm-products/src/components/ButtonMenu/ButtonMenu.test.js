@@ -44,6 +44,9 @@ const renderMenu = async (menuProps = {}, itemProps = {}) => {
 };
 
 describe(componentName, () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+  });
   it('renders a component ButtonMenu', async () => {
     await renderMenu();
     expect(

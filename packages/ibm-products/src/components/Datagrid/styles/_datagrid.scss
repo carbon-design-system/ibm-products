@@ -9,6 +9,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/react/scss/components/button/tokens' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
+@use '@carbon/styles/scss/breakpoint';
 @use './variables' as *;
 
 .#{$block-class}__table-toolbar > section {
@@ -162,6 +163,23 @@
   display: block;
   width: 100%;
   padding-top: 0;
+
+  .#{c4p-settings.$carbon-prefix}--data-table-header__description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{c4p-settings.$carbon-prefix}--data-table-header__title {
+    overflow: hidden;
+    max-width: 80ch;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @include breakpoint.breakpoint(md) {
+      max-width: 55ch;
+    }
+  }
 
   .#{c4p-settings.$carbon-prefix}--data-table-content {
     width: 100%;
@@ -636,4 +654,78 @@
   .#{c4p-settings.$carbon-prefix}--action-list
   .#{c4p-settings.$carbon-prefix}--btn__icon {
   margin-top: 0;
+}
+
+.#{$block-class} .#{$block-class}__col-resizer-range {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: calc(#{$spacing-03} * -1);
+  width: 1rem;
+  height: 100%;
+  margin: 0;
+  -moz-appearance: initial;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+.#{$block-class} .#{$block-class}__col-resizer-range:focus {
+  outline: 0;
+}
+
+.#{$block-class}
+  .#{$block-class}__col-resizer-range:focus
+  + .#{$block-class}__col-resize-indicator::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: var(--#{$block-class}--header-height);
+  background-color: $focus;
+  content: '';
+  transform: translate(-50%, -50%);
+}
+
+.#{$block-class}
+  .#{$block-class}__col-resizer-range:focus
+  + .#{$block-class}__col-resize-indicator {
+  position: absolute;
+  z-index: 2;
+  right: calc(#{$spacing-03} * -1);
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 100%;
+  margin: 0;
+  background-color: $focus;
+  transform: translate(-50%, 0);
+}
+
+.#{$block-class}
+  .#{$block-class}__col-resizer-range:focus
+  + .#{$block-class}__col-resize-indicator::after {
+  position: absolute;
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  top: calc(var(--#{$block-class}--row-height) - 20px);
+  right: $spacing-02;
+  width: 1px;
+  height: calc(
+    var(--#{$block-class}--grid-height) - var(--#{$block-class}--row-height)
+  );
+  background-color: $layer-active-01;
+  content: '';
+}
+
+.#{$block-class} .#{$block-class}__col-resizer-range::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+
+.#{$block-class} .#{$block-class}__col-resizer-range::-moz-range-thumb {
+  visibility: hidden;
 }

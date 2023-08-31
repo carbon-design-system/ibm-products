@@ -1,7 +1,7 @@
 {
   "name": "@carbon/ibm-products",
   "description": "Carbon for IBM Products",
-  "version": "2.7.0",
+  "version": "2.8.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -38,7 +38,7 @@
   "scripts": {
     "build": "run-s clean build-first build-all build-css-update-maps",
     "build-all": "run-p 'build:*'",
-    "build-first": "copyfiles 'src/**/*.scss' scss -u 1",
+    "build-first": "copyfiles -e 'src/config-dev.scss' 'src/**/*.scss' scss -u 1",
     "build:css-dev": "sass --style=expanded --load-path node_modules --load-path ../../node_modules scss:css",
     "build:css-min": "sass --style=compressed --load-path node_modules --load-path ../../node_modules scss/index.scss:css/index.min.css scss/index-full-carbon.scss:css/index-full-carbon.min.css scss/index-without-carbon.scss:css/index-without-carbon.min.css scss/index-without-carbon-released-only.scss:css/index-without-carbon-released-only.min.css",
     "build-css-update-maps": "node ../../scripts/updateSourceMaps.js",
@@ -64,7 +64,7 @@
     "fs-extra": "^11.1.1",
     "glob": "^10.3.3",
     "jest": "^29.6.2",
-    "jest-config-ibm-cloud-cognitive": "^0.24.25",
+    "jest-config-ibm-cloud-cognitive": "^1.1.0",
     "jest-environment-jsdom": "^29.6.2",
     "namor": "^1.1.2",
     "npm-check-updates": "^16.11.1",

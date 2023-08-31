@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.8.0...@carbon/ibm-products@2.8.1) (2023-08-30)
+
+
+### Bug Fixes
+
+* **create-full-page:** add influencer title support ([#3399](https://github.com/carbon-design-system/ibm-products/issues/3399)) ([c2852f9](https://github.com/carbon-design-system/ibm-products/commit/c2852f9fafa295d2c33a82bf29585cd82b57fad4))
+* **Datagrid:** add firefox style fixes ([#3432](https://github.com/carbon-design-system/ibm-products/issues/3432)) ([3b79f8c](https://github.com/carbon-design-system/ibm-products/commit/3b79f8c08de6dff9df304bd5b0a7f433663eb846))
+* **Datagrid:** add text overflow styling to title/desc ([#3426](https://github.com/carbon-design-system/ibm-products/issues/3426)) ([0034e0e](https://github.com/carbon-design-system/ibm-products/commit/0034e0e63edec42e8b3bcf38d47f8a39e5019eea))
+* issue 3402 ([#3421](https://github.com/carbon-design-system/ibm-products/issues/3421)) ([2eb3181](https://github.com/carbon-design-system/ibm-products/commit/2eb3181b1ef6540c46d45e906612053c75d7e4ae))
+* some full screen docs pages ([#3419](https://github.com/carbon-design-system/ibm-products/issues/3419)) ([9a1faf9](https://github.com/carbon-design-system/ibm-products/commit/9a1faf9ea45ac0205a7f5d47e798ad547427a060))
+
+
+
+
+
+# [2.8.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.7.0...@carbon/ibm-products@2.8.0) (2023-08-29)
+
+
+### Bug Fixes
+
+* **build:** move jest config package to v1 to prevent version clashes ([#3420](https://github.com/carbon-design-system/ibm-products/issues/3420)) ([b484006](https://github.com/carbon-design-system/ibm-products/commit/b484006572bcbc62b7b0ded4083242d136d23384))
+* page header scroll and incidentals ([#3383](https://github.com/carbon-design-system/ibm-products/issues/3383)) ([b8c7346](https://github.com/carbon-design-system/ibm-products/commit/b8c73462a7fbdd6fc5d3e611b1e8cb61134bb0fe))
+* replaces and deprecates ButtonMenu and ComboButton ([#3284](https://github.com/carbon-design-system/ibm-products/issues/3284)) ([5b2abbf](https://github.com/carbon-design-system/ibm-products/commit/5b2abbf83f2ab767b48e4e2941bf7d1876e336ca))
+* storybook use of package dev prefix ([#3400](https://github.com/carbon-design-system/ibm-products/issues/3400)) ([f0a63e6](https://github.com/carbon-design-system/ibm-products/commit/f0a63e67a913ca29f189887ba3034671218c5446))
+
+
+### Features
+
+* **Datagrid:** add column resize callback ([#3406](https://github.com/carbon-design-system/ibm-products/issues/3406)) ([bac33c1](https://github.com/carbon-design-system/ibm-products/commit/bac33c16aabe7514578791026541336f50e45419))
+* **Datagrid:** add keyboard support for col resizing ([#3394](https://github.com/carbon-design-system/ibm-products/issues/3394)) ([9abd4ae](https://github.com/carbon-design-system/ibm-products/commit/9abd4ae3c981f470486a3dc2195fbc65f83bdc1b))
+* **NotificationsPanel:** include other attributes inside the link ([#3388](https://github.com/carbon-design-system/ibm-products/issues/3388)) ([ef8a825](https://github.com/carbon-design-system/ibm-products/commit/ef8a825cfc20f80899f79c6102bc186d2ca3ac9a))
+* upgrade main package to react 18 ([#3146](https://github.com/carbon-design-system/ibm-products/issues/3146)) ([8dbddd1](https://github.com/carbon-design-system/ibm-products/commit/8dbddd1b38938fa7f00c75f5229088613703a9ca))
+
+
+
+
+
 # [2.7.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.6.1...@carbon/ibm-products@2.7.0) (2023-08-22)
 
 

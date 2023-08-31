@@ -145,6 +145,8 @@ export const BasicUsage = () => {
     columns,
     data: rows,
     multiLineWrapAll: true, // If `multiLineWrap` is required for all columns in data grid
+    onColResizeEnd: (currentColumn, allColumns) =>
+      console.log(currentColumn, allColumns),
   });
 
   return <Datagrid datagridState={datagridState} title="Basic usage" />;

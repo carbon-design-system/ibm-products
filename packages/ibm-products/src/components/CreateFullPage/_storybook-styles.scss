@@ -9,7 +9,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/components/ui-shell' as *;
-@use '../../global/styles/project-settings' as c4p-settings;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 
 $story-class: 'create-full-page-stories';
 $block-class: #{c4p-settings.$pkg-prefix}--create-full-page;

@@ -7,8 +7,8 @@
 import { useRef, useState, useLayoutEffect, useEffect } from 'react';
 
 export const useResizeObserver = (ref, callback) => {
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
+  const [width, setWidth] = useState(-1);
+  const [height, setHeight] = useState(-1);
   const entriesToHandle = useRef(null);
   const cb = useRef(callback);
 
@@ -27,14 +27,21 @@ export const useResizeObserver = (ref, callback) => {
           (ref.current?.offsetWidth || 0) -
           (parseFloat(refComputedStyle?.paddingLeft || 0),
           parseFloat(refComputedStyle?.paddingRight || 0));
+
+        const initialHeight =
+          (ref.current?.offsetHeight || 0) -
+          (parseFloat(refComputedStyle?.paddingTop || 0),
+          parseFloat(refComputedStyle?.paddingLeft || 0));
+
         setWidth(initialWidth);
+        setHeight(initialHeight);
       }
     };
-    if (!ref?.current && width !== 0) {
+    if (!ref?.current || (width >= 0 && height >= 0)) {
       return;
     }
     getInitialSize();
-  }, [width, ref]);
+  }, [width, height, ref]);
 
   useLayoutEffect(() => {
     if (!ref?.current) {

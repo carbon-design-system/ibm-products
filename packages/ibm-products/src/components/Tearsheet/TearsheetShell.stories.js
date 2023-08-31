@@ -62,7 +62,12 @@ const Template = ({ open: _open, ...args }, context) => {
       <Button onClick={() => setOpen(true)}>
         {beenOpen ? 'Reopen the' : 'Open the'} context.component.componentName
       </Button>{' '}
-      <TearsheetShell className={className} {...args} open={open}>
+      <TearsheetShell
+        className={className}
+        {...args}
+        open={open}
+        onClose={() => setOpen(false)}
+      >
         {dummyContent}
       </TearsheetShell>
     </div>

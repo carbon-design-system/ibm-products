@@ -19,6 +19,7 @@ import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { prepareProps, isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
+import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 
 const componentName = 'TagSet';
 const blockClass = `${pkg.prefix}--tag-set`;
@@ -65,21 +66,11 @@ export let TagSet = React.forwardRef(
     const displayedArea = useRef(null);
     const [sizingTags, setSizingTags] = useState([]);
     const overflowTag = useRef(null);
-    const [allTagsModalTarget, setAllTagsModalTarget] = useState(null);
+    const allTagsModalTarget = usePortalTarget(allTagsModalTargetIn);
 
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);
     };
-
-    useEffect(() => {
-      if (allTagsModalTargetIn) {
-        setAllTagsModalTarget(allTagsModalTargetIn);
-      } else {
-        if (pkg.isFeatureEnabled('default-portal-target-body')) {
-          setAllTagsModalTarget(document.body);
-        }
-      }
-    }, [allTagsModalTargetIn]);
 
     useEffect(() => {
       const newSizingTags = [];

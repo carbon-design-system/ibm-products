@@ -19,6 +19,8 @@ import {
 
 import { pkg } from '../../settings';
 import { prepareProps } from '../../global/js/utils/props-helper';
+import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
+
 const componentName = 'TagSetModal';
 const blockClass = `${pkg.prefix}--tag-set-modal`;
 
@@ -36,6 +38,7 @@ export const TagSetModal = ({
   title,
   onClose,
   open,
+  portalTarget: portalTargetIn,
   searchLabel = defaults.searchLabel,
   searchPlaceholder,
 
@@ -44,6 +47,7 @@ export const TagSetModal = ({
 }) => {
   const [filteredModalTags, setFilteredModalTags] = useState([]);
   const [search, setSearch] = useState('');
+  const renderPortalUse = usePortalTarget(portalTargetIn);
 
   useEffect(() => {
     let newFilteredModalTags = [];
@@ -74,7 +78,7 @@ export const TagSetModal = ({
     setSearch(ev.target.value || '');
   };
 
-  return (
+  return renderPortalUse(
     <ComposedModal
       {
         // Pass through any other property values as HTML attributes.
@@ -121,6 +125,7 @@ TagSetModal.propTypes = {
   className: PropTypes.string,
   onClose: PropTypes.func,
   open: PropTypes.bool,
+  portalTarget: PropTypes.node,
   searchLabel: PropTypes.string,
   searchPlaceholder: PropTypes.string,
   title: PropTypes.string,

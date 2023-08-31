@@ -6,7 +6,6 @@
 //
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 
 import cx from 'classnames';
@@ -19,7 +18,6 @@ import { useResizeObserver } from '../../global/js/hooks/useResizeObserver';
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { prepareProps, isRequiredIf } from '../../global/js/utils/props-helper';
 import { pkg } from '../../settings';
-import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 
 const componentName = 'TagSet';
 const blockClass = `${pkg.prefix}--tag-set`;
@@ -29,7 +27,6 @@ const allTagsModalSearchThreshold = 10;
 // Default values for props
 const defaults = {
   align: 'start',
-  // allTagsModalTarget: document.body,
   overflowAlign: 'bottom',
 };
 
@@ -39,7 +36,7 @@ export let TagSet = React.forwardRef(
       // The component props, in alphabetical order (for consistency).
 
       align = defaults.align,
-      allTagsModalTarget: allTagsModalTargetIn, // = defaults.allTagsModalTarget,
+      allTagsModalTarget,
       className,
       maxVisible,
       multiline,
@@ -66,7 +63,6 @@ export let TagSet = React.forwardRef(
     const displayedArea = useRef(null);
     const [sizingTags, setSizingTags] = useState([]);
     const overflowTag = useRef(null);
-    const allTagsModalTarget = usePortalTarget(allTagsModalTargetIn);
 
     const handleShowAllClick = () => {
       setShowAllModalOpen(true);
@@ -243,18 +239,15 @@ export let TagSet = React.forwardRef(
             {displayedTags}
           </div>
         </div>
-
-        {(allTagsModalTarget ? createPortal : (children) => children)(
-          <TagSetModal
-            allTags={tags}
-            open={showAllModalOpen}
-            title={allTagsModalTitle}
-            onClose={handleModalClose}
-            searchLabel={allTagsModalSearchLabel}
-            searchPlaceholder={allTagsModalSearchPlaceholderText}
-          />,
-          allTagsModalTarget
-        )}
+        <TagSetModal
+          allTags={tags}
+          open={showAllModalOpen}
+          title={allTagsModalTitle}
+          onClose={handleModalClose}
+          searchLabel={allTagsModalSearchLabel}
+          searchPlaceholder={allTagsModalSearchPlaceholderText}
+          portalTarget={allTagsModalTarget}
+        />
       </div>
     );
   }

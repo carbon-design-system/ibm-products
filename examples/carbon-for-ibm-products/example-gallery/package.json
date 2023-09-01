@@ -17,8 +17,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/ibm-products": "^2.6.0",
-    "@carbon/react": "^1.35.0",
+    "@carbon/ibm-products": "^2.8.1",
+    "@carbon/react": "^1.37.0",
     "lodash": "^4.17.21",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",

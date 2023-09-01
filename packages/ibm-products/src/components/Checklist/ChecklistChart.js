@@ -50,7 +50,7 @@ const defaults = {
  * TODO: A description of the component.
  */
 export let ChecklistChart = React.forwardRef(
-  ({ className, value, theme = defaults.theme, ...rest }, ref) => {
+  ({ className, id, value, theme = defaults.theme, ...rest }, ref) => {
     const numDegrees = clamp(value * 360, 0, 360);
     const circleColor = theme === 'light' ? '#c6c6c6' : '#525252'; // $gray-30, $gray-70
     const progressColor = theme === 'light' ? '#6929c4' : '#A56EFF'; // $purple-70, $purple-50
@@ -58,6 +58,7 @@ export let ChecklistChart = React.forwardRef(
     return (
       <div
         {...rest}
+        aria-labelledby={id}
         className={cx(blockClass, className)}
         style={{
           backgroundImage: `conic-gradient(${progressColor} ${numDegrees}deg, ${circleColor} ${numDegrees}deg 360deg)`,
@@ -86,6 +87,10 @@ ChecklistChart.propTypes = {
    * Optional class name for this component.
    */
   className: PropTypes.string,
+  /**
+   * Id of this component for accessibility.
+   */
+  id: PropTypes.string.isRequired,
   /**
    * Determines the theme of the component.
    */

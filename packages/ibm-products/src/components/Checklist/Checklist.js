@@ -13,13 +13,14 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg /*, carbon */ } from '../../settings';
 
 // Carbon and package components we use.
@@ -77,6 +78,8 @@ export let Checklist = React.forwardRef(
     ref
   ) => {
     const [isOpen, setIsOpen] = useState(open);
+    const listContainerId = useMemo(() => uuidv4(), []);
+    const chartLabelId = useMemo(() => uuidv4(), []);
 
     // Don't use this test: {chartValue && chartLabel && (render...)}.
     // If `chartValue` is 0 (zero) - a valid value - then it will render 0 and skip the remaining statement.
@@ -109,7 +112,7 @@ export let Checklist = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        aria-label="checklist"
+        aria-label="Checklist"
         className={cx(
           blockClass, // Apply the block class to the main HTML element
           className, // Apply any supplied class names to the main HTML element.
@@ -124,24 +127,31 @@ export let Checklist = React.forwardRef(
         {(title || chartLabelAndValue) && (
           <header className={`${blockClass}__header`}>
             {chartLabelAndValue && (
-              <ChecklistChart value={chartValue} theme={theme} />
+              <ChecklistChart
+                id={chartLabelId}
+                value={chartValue}
+                theme={theme}
+              />
             )}
 
             <div className={`${blockClass}__titles`}>
               {title && <h2 className={`${blockClass}__title`}>{title}</h2>}
 
               {chartLabelAndValue && (
-                <h3 className={`${blockClass}__chart-label`}>{chartLabel}</h3>
+                <h3 id={chartLabelId} className={`${blockClass}__chart-label`}>
+                  {chartLabel}
+                </h3>
               )}
             </div>
 
             {showToggle && (
               <Button
+                aria-controls={listContainerId}
                 aria-expanded={isOpen}
+                aria-label="Checklist toggle"
                 className={`${blockClass}__toggle`}
                 kind="ghost"
                 onClick={handleClickToggle}
-                role="switch"
                 size="small"
               >
                 <ChevronUp16 className={cx(`${blockClass}__chevron`)} />
@@ -150,7 +160,7 @@ export let Checklist = React.forwardRef(
           </header>
         )}
 
-        <div className={`${blockClass}__content-outer`}>
+        <div id={listContainerId} className={`${blockClass}__content-outer`}>
           <div className={`${blockClass}__content-inner`}>
             <section className={cx(`${blockClass}__body`)}>
               {taskLists.map((list, index) => {

@@ -98,7 +98,7 @@ describe(componentName, () => {
 
   it('renders a toggle', () => {
     renderComponent({ showToggle: true, title });
-    expect(screen.getByRole('switch')).toBeDefined();
+    expect(screen.getByLabelText('Checklist toggle')).toBeDefined();
   });
 
   it('renders a "view all" button', () => {

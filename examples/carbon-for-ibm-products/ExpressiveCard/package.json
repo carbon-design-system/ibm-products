@@ -1,12 +1,14 @@
 {
-  "name": "createtearsheet-component-example",
-  "description": "An example showing use of the createtearsheet component from the @carbon/ibm-products component library.",
+  "name": "ExpressiveCard-component-example",
+  "description": "An example showing use of the ExpressiveCard component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "createtearsheet"
+    "expressivecard",
+		"expressive",
+		"card"
   ],
   "license": "Apache-2.0",
   "type": "module",

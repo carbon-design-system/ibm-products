@@ -1,12 +1,15 @@
 {
-  "name": "userprofileimage-component-example",
-  "description": "An example showing use of the userprofileimage component from the @carbon/ibm-products component library.",
+  "name": "UserProfileImage-component-example",
+  "description": "An example showing use of the UserProfileImage component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "userprofileimage"
+    "userprofileimage",
+		"user",
+		"profile",
+		"image"
   ],
   "license": "Apache-2.0",
   "type": "module",

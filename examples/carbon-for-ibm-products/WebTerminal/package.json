@@ -1,12 +1,14 @@
 {
-  "name": "web-terminal-component-example",
-  "description": "An example showing use of the web-terminal component from the @carbon/ibm-products component library.",
+  "name": "WebTerminal-component-example",
+  "description": "An example showing use of the WebTerminal component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "web-terminal"
+    "webterminal",
+		"web",
+		"terminal"
   ],
   "license": "Apache-2.0",
   "type": "module",

@@ -1,12 +1,14 @@
 {
-  "name": "optionstile-component-example",
-  "description": "An example showing use of the optionstile component from the @carbon/ibm-products component library.",
+  "name": "OptionsTile-component-example",
+  "description": "An example showing use of the OptionsTile component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "optionstile"
+    "optionstile",
+		"options",
+		"tile"
   ],
   "license": "Apache-2.0",
   "type": "module",

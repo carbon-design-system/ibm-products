@@ -1,12 +1,14 @@
 {
-  "name": "statusicon-component-example",
-  "description": "An example showing use of the statusicon component from the @carbon/ibm-products component library.",
+  "name": "StatusIcon-component-example",
+  "description": "An example showing use of the StatusIcon component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "statusicon"
+    "statusicon",
+		"status",
+		"icon"
   ],
   "license": "Apache-2.0",
   "type": "module",

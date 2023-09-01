@@ -1,12 +1,14 @@
 {
-  "name": "productive-card-component-example",
-  "description": "An example showing use of the productive-card from the @carbon/ibm-products component library.",
+  "name": "ProductiveCard-component-example",
+  "description": "An example showing use of the ProductiveCard component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "productive-card"
+    "productivecard",
+		"productive",
+		"card"
   ],
   "license": "Apache-2.0",
   "type": "module",

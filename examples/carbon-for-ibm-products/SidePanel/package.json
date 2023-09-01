@@ -1,12 +1,14 @@
 {
-  "name": "sidepanel-component-example",
-  "description": "An example showing use of the sidepanel component from the @carbon/ibm-products component library.",
+  "name": "SidePanel-component-example",
+  "description": "An example showing use of the SidePanel component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "sidepanel"
+    "sidepanel",
+		"side",
+		"panel"
   ],
   "license": "Apache-2.0",
   "type": "module",

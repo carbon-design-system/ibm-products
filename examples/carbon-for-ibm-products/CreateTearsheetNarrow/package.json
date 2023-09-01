@@ -1,15 +1,15 @@
 {
   "name": "CreateTearsheetNarrow-component-example",
-  "description": "An example showing use of the AboutModal component from the @carbon/ibm-products component library.",
+  "description": "An example showing use of the CreateTearsheetNarrow component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "create",
-    "tearsheet",
-    "cretetearsheet",
-    "cretetearsheetnarrow"
+    "createtearsheetnarrow",
+		"create",
+		"tearsheet",
+		"narrow"
   ],
   "license": "Apache-2.0",
   "type": "module",

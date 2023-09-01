@@ -1,12 +1,14 @@
 {
-  "name": "remove-modal-component-example",
-  "description": "An example showing use of the remove-modal component from the @carbon/ibm-products component library.",
+  "name": "RemoveModal-component-example",
+  "description": "An example showing use of the RemoveModal component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "remove-modal"
+    "removemodal",
+		"remove",
+		"modal"
   ],
   "license": "Apache-2.0",
   "type": "module",

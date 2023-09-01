@@ -1,14 +1,14 @@
 {
-  "name": "createmodal-component-example",
+  "name": "CreateModal-component-example",
   "description": "An example showing use of the CreateModal component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "create",
-    "modal",
-    "createmodal"
+    "createmodal",
+		"create",
+		"modal"
   ],
   "license": "Apache-2.0",
   "type": "module",

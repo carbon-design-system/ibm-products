@@ -1,11 +1,14 @@
 {
-  "name": "export-modal-example",
+  "name": "ExportModal-component-example",
+  "description": "An example showing use of the ExportModal component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "apikeymodal"
+    "exportmodal",
+		"export",
+		"modal"
   ],
   "license": "Apache-2.0",
   "type": "module",

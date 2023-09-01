@@ -6,9 +6,9 @@
     "ibm",
     "ibm-products",
     "component",
-    "EmptyStates",
-    "empty",
-    "state"
+    "emptystates",
+		"empty",
+		"states"
   ],
   "license": "Apache-2.0",
   "type": "module",

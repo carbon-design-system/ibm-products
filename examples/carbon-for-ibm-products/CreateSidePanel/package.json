@@ -6,9 +6,10 @@
     "ibm",
     "ibm-products",
     "component",
-    "Create",
-    "SidePanel",
-    "createsidepanel"
+    "createsidepanel",
+		"create",
+		"side",
+		"panel"
   ],
   "license": "Apache-2.0",
   "type": "module",

@@ -1,12 +1,14 @@
 {
-  "name": "notificationspanel-component-example",
-  "description": "An example showing use of the notificationspanel component from the @carbon/ibm-products component library.",
+  "name": "NotificationsPanel-component-example",
+  "description": "An example showing use of the NotificationsPanel component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "notificationspanel"
+    "notificationspanel",
+		"notifications",
+		"panel"
   ],
   "license": "Apache-2.0",
   "type": "module",

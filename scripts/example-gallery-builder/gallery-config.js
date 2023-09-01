@@ -82,7 +82,7 @@ const getExampleDirectoriesConfig = (
         return fs.existsSync(filePath);
       });
 
-      const output = { label, directory: dir };
+      const output = { ...config, label, directory: dir };
 
       // have a thumbnail so add it to th config
       if (thumbnail) {

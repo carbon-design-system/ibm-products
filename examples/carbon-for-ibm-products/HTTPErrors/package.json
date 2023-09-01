@@ -1,12 +1,14 @@
 {
-  "name": "httperror-403-component-example",
-  "description": "An example showing use of the httperror-403 component from the @carbon/ibm-products component library.",
+  "name": "HttpErrors-component-example",
+  "description": "An example showing use of the HttpErrors component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "httperror-403"
+    "httperrors",
+		"http",
+		"errors"
   ],
   "license": "Apache-2.0",
   "type": "module",

@@ -1,12 +1,14 @@
 {
-  "name": "page-header-component-example",
-  "description": "An example showing use of the page-header component from the @carbon/ibm-products component library.",
+  "name": "PageHeader-component-example",
+  "description": "An example showing use of the PageHeader component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "page-header"
+    "pageheader",
+		"page",
+		"header"
   ],
   "license": "Apache-2.0",
   "type": "module",

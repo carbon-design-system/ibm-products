@@ -1,12 +1,12 @@
 {
-  "name": "apikeymodal-component-example",
-  "description": "An example showing use of the APIKeyModal component from the @carbon/ibm-products component library.",
+  "name": "Cascade-component-example",
+  "description": "An example showing use of the Cascade component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "apikeymodal"
+    "cascade"
   ],
   "license": "Apache-2.0",
   "type": "module",

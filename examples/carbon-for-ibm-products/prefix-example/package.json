@@ -1,12 +1,14 @@
 {
-  "name": "prefix-component-example",
-  "description": "An example showing use of the prefix feature from the @carbon/ibm-products component library.",
+  "name": "PrefixExample-component-example",
+  "description": "An example showing use of the PrefixExample component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "prefix"
+    "prefixexample",
+		"prefix",
+		"example"
   ],
   "license": "Apache-2.0",
   "type": "module",

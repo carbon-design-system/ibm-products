@@ -1,12 +1,15 @@
 {
-  "name": "apikeymodal-component-example",
-  "description": "An example showing use of the APIKeyModal component from the @carbon/ibm-products component library.",
+  "name": "ApiKeyModal-component-example",
+  "description": "An example showing use of the ApiKeyModal component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "apikeymodal"
+    "apikeymodal",
+		"api",
+		"key",
+		"modal"
   ],
   "license": "Apache-2.0",
   "type": "module",

@@ -13,7 +13,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -78,8 +78,8 @@ export let Checklist = React.forwardRef(
     ref
   ) => {
     const [isOpen, setIsOpen] = useState(open);
-    const listContainerId = useMemo(() => uuidv4(), []);
-    const chartLabelId = useMemo(() => uuidv4(), []);
+    const listContainerId = useRef(uuidv4()).current;
+    const chartLabelId = useRef(uuidv4()).current;
 
     // Don't use this test: {chartValue && chartLabel && (render...)}.
     // If `chartValue` is 0 (zero) - a valid value - then it will render 0 and skip the remaining statement.

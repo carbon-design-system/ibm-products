@@ -25,38 +25,7 @@
   $block-class: #{$pkg-prefix}--interstitial-screen-view;
 
   .#{$block-class} {
-    flex: 0 0 100%;
-
-    // for full screen only: change width of the view based on page width
-    @at-root .full-screen #{&} .bx--col {
-      // at narrowest page view, let the content span the entire width
-      padding-right: 0;
-
-      // in-between
-      @include carbon--breakpoint('xlg') {
-        padding-right: 20%;
-      }
-
-      // at widest page view, limit span of content
-      @include carbon--breakpoint('max') {
-        padding-right: 40%;
-      }
-    }
-
-    &--heading {
-      @include carbon--type-style('expressive-heading-05');
-
-      margin-bottom: $spacing-07;
-    }
-
-    &--body {
-      @include carbon--type-style('body-long-01');
-
-      @include carbon--breakpoint('xlg') {
-        /* stylelint-disable-next-line carbon/type-token-use */
-        font-size: $spacing-05;
-      }
-    }
+    height: 100%;
   }
 }
 

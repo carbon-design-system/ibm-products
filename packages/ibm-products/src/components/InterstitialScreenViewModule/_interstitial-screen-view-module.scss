@@ -30,18 +30,17 @@
   $max: 1584px;
 
   .#{$block-class} {
-    margin: $spacing-09 0;
-    // margin: $spacing-08 0 $spacing-09;
+    margin: $spacing-07;
 
-    // @media screen and (min-width: $md) {
-    //   margin-top: $spacing-10;
-    // }
-    // @media screen and (min-width: $lg) {
-    //   margin-top: $spacing-12;
-    // }
-    // @media screen and (min-width: $xlg) {
-    //   margin-top: $spacing-13;
-    // }
+    &--heading {
+      @include carbon--type-style('expressive-heading-05');
+
+      margin-bottom: $spacing-07;
+    }
+
+    &--body {
+      @include carbon--type-style('body-long-01');
+    }
   }
 }
 

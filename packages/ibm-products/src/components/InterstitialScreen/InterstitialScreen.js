@@ -35,6 +35,7 @@ import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--interstitial-screen`;
+const headerBlockClass = `${blockClass}--internal-header`;
 const bcModalClass = `${carbon.prefix}--modal`;
 const componentName = 'InterstitialScreen';
 
@@ -82,8 +83,8 @@ export let InterstitialScreen = React.forwardRef(
       onClose = defaults.onClose,
       previousButtonLabel = defaults.previousButtonLabel,
       productName = defaults.productName,
-      renderHeader,
       headerClassName,
+      headerTitle,
       startButtonLabel = defaults.startButtonLabel,
       skipButtonLabel = defaults.skipButtonLabel,
 
@@ -198,28 +199,21 @@ export let InterstitialScreen = React.forwardRef(
         {...getDevtoolsProps(componentName)}
       >
         <div className={containerClass}>
-          {isFullScreen ? (
+          {isFullScreen && (
             <div className={`${blockClass}--header`}>
               {domainName}
               {domainProductDelimiter}
-              <b>{productName}</b>
-            </div>
-          ) : (
-            <div className={`${blockClass}--header`}>
-              <Button
-                className={`${blockClass}--close-icon`}
-                hasIconOnly
-                iconDescription={closeIconDescription}
-                kind="ghost"
-                renderIcon={Close16}
-                type="button"
-                size="lg"
-                onClick={handleClose}
-              />
+              <strong>{productName}</strong>
             </div>
           )}
-          <header className={cx(headerClassName)}>
-            {renderHeader && renderHeader()}
+          <header
+            className={cx(
+              headerBlockClass,
+              headerTitle && 'has-title',
+              headerClassName
+            )}
+          >
+            {headerTitle && <h2>{headerTitle}</h2>}
             {!hideProgressIndicator && (
               <div className={`${blockClass}--progress`}>
                 <ProgressIndicator vertical={false} currentIndex={progStep}>
@@ -231,55 +225,78 @@ export let InterstitialScreen = React.forwardRef(
                 </ProgressIndicator>
               </div>
             )}
+
+            {!isFullScreen && (
+              <Button
+                className={`${blockClass}--close-icon`}
+                hasIconOnly
+                iconDescription={closeIconDescription}
+                kind="ghost"
+                renderIcon={Close16}
+                type="button"
+                size="lg"
+                onClick={handleClose}
+              />
+            )}
           </header>
           <div className={cx(`${blockClass}--body`)} ref={bodyScrollRef}>
-            <Grid fullWidth className={cx(`${blockClass}--body-grid`)}>
-              <Row>
-                <Column
-                  xlg={contentBreakpoints.xlg}
-                  lg={contentBreakpoints.lg}
-                  md={contentBreakpoints.md}
-                  sm={contentBreakpoints.sm}
-                >
-                  <div className={cx(`${blockClass}--content`)}>
-                    {isMultiStep ? (
-                      <>
-                        {/* hide progress was here */}
-
+            {mediaIsDefined ? (
+              <Grid fullWidth className={cx(`${blockClass}--body-grid`)}>
+                <Row className={cx(`${blockClass}--body-row`)}>
+                  <Column
+                    xlg={contentBreakpoints.xlg}
+                    lg={contentBreakpoints.lg}
+                    md={contentBreakpoints.md}
+                    sm={contentBreakpoints.sm}
+                  >
+                    <div className={cx(`${blockClass}--content`)}>
+                      {isMultiStep ? (
                         <div className={`${blockClass}__carousel`}>
                           <Carousel disableArrowScroll ref={scrollRef}>
                             {children}
                           </Carousel>
                         </div>
-                      </>
-                    ) : (
-                      <div>{childArray[0]}</div>
-                    )}
-                  </div>
-                </Column>
-                {mediaIsDefined && (
-                  <Column
-                    xlg={mediaBreakpoints.xlg}
-                    lg={mediaBreakpoints.lg}
-                    md={mediaBreakpoints.md}
-                    sm={mediaBreakpoints.sm}
-                    className={cx(`${blockClass}--media-container`)}
-                  >
-                    <div className={`${blockClass}--media`}>
-                      {media.render ? (
-                        media.render()
                       ) : (
-                        <SteppedAnimatedMedia
-                          className={`${blockClass}--stepped-animated-media`}
-                          filePaths={media.filePaths}
-                          playStep={progStep}
-                        />
+                        childArray[0]
                       )}
                     </div>
                   </Column>
+                  {mediaIsDefined && (
+                    <Column
+                      xlg={mediaBreakpoints.xlg}
+                      lg={mediaBreakpoints.lg}
+                      md={mediaBreakpoints.md}
+                      sm={mediaBreakpoints.sm}
+                      className={cx(`${blockClass}--media-container`)}
+                    >
+                      <div className={`${blockClass}--media`}>
+                        {media.render ? (
+                          media.render()
+                        ) : (
+                          <SteppedAnimatedMedia
+                            className={`${blockClass}--stepped-animated-media`}
+                            filePaths={media.filePaths}
+                            playStep={progStep}
+                          />
+                        )}
+                      </div>
+                    </Column>
+                  )}
+                </Row>
+              </Grid>
+            ) : (
+              <div className={cx(`${blockClass}--content`)}>
+                {isMultiStep ? (
+                  <div className={`${blockClass}__carousel`}>
+                    <Carousel disableArrowScroll ref={scrollRef}>
+                      {children}
+                    </Carousel>
+                  </div>
+                ) : (
+                  <div>{childArray[0]}</div>
                 )}
-              </Row>
-            </Grid>
+              </div>
+            )}
           </div>
 
           <div className={`${blockClass}--footer`}>
@@ -392,6 +409,10 @@ InterstitialScreen.propTypes = {
    */
   headerClassName: PropTypes.string,
   /**
+   * Provide an optional class to be applied to the <header> element >.
+   */
+  headerTitle: PropTypes.string,
+  /**
    * Optional parameter to hide the progress indicator when multiple steps are used.
    */
   hideProgressIndicator: PropTypes.bool,
@@ -447,10 +468,6 @@ InterstitialScreen.propTypes = {
    * The name of this app, e.g. "QRadar".
    */
   productName: PropTypes.string,
-  /**
-   * Render function to optionally render content above the progress indicator.
-   */
-  renderHeader: PropTypes.func,
 
   /**
    * The label for the skip button.

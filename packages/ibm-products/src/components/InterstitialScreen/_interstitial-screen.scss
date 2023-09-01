@@ -19,11 +19,32 @@
 @mixin interstitial-screen {
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--interstitial-screen;
+  $carousel: #{$pkg-prefix}--carousel;
   $carousel-item: #{$pkg-prefix}--carousel__item;
   $one-grid-column: calc(100% / 16);
 
   .#{$block-class} {
     $block: &;
+
+    .#{$carousel} {
+      display: flex;
+      min-height: 100%;
+      flex-direction: column;
+
+      &__elements-container {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+      }
+
+      &__elements {
+        flex: 1;
+      }
+      // &__elements-container,
+      // &__elements {
+      //   height: 100%;
+      // }
+    }
 
     position: fixed;
     z-index: 6001;
@@ -37,23 +58,30 @@
 
     &--body {
       flex-grow: 1;
-      padding-left: $spacing-07;
+      padding: 0;
+      margin: 0;
       overflow-x: hidden;
       overflow-y: auto;
     }
 
     &--body-grid {
-      display: flex;
+      //display: flex;
       height: 100%;
       padding: 0 !important;
     }
 
+    &--body-row {
+      height: 100%;
+    }
+
     &--progress {
-      margin: 0 $spacing-07;
+      margin: $spacing-07 $spacing-07 $spacing-03;
     }
 
     &__carousel {
+      height: 100%;
       .#{$carousel-item} {
+        // height: 100%;
         flex: 0 0 100% !important;
       }
     }
@@ -67,15 +95,10 @@
     }
 
     &--content {
-      padding-right: $spacing-05;
-    }
-
-    &--carousel {
-      margin-left: calc($spacing-07 * -1);
+      height: 100%;
     }
 
     &--media-container {
-      // min-height: 456px;
       overflow: hidden;
     }
 
@@ -93,6 +116,43 @@
     &--stepped-animated-media {
       overflow: hidden;
       height: 100%;
+    }
+
+    // HEADER
+    &--internal-header {
+      position: relative;
+      min-height: $spacing-09;
+
+      &:empty {
+        min-height: 0;
+      }
+
+      h2 {
+        padding: $spacing-05 $spacing-07 $spacing-06;
+
+        &:empty {
+          padding: 0;
+        }
+      }
+
+      &.has-title {
+        min-height: initial;
+        background: $ui-background;
+
+        #{$block}--progress {
+          margin-top: 0;
+        }
+        #{$block}--internal-header {
+          min-height: $spacing-09;
+        }
+      }
+      > #{$block}--close-icon {
+        position: absolute !important;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        width: $spacing-09;
+      }
     }
 
     // FOOTER
@@ -136,20 +196,7 @@
           transition: none;
         }
       }
-      #{$block}--body {
-        padding: 0 0 0 $spacing-07;
-        margin: $spacing-09 0 0; // $spacing-07
-      }
-      #{$block}--header {
-        position: relative; // to help position the close icon
-        #{$block}--close-icon {
-          position: absolute !important;
-          z-index: 1;
-          top: 0;
-          right: 0;
-          padding: 0 $spacing-03;
-        }
-      }
+
       #{$block}--content {
         margin-top: 0;
       }

@@ -180,7 +180,9 @@ describe(componentName, () => {
     render(<OptionsTile {...props} titleId={titleId} enabled />);
 
     expect(screen.getByRole('heading').id).toBe(titleId);
-    expect(screen.getByRole('switch')).toHaveAccessibleName(props.title);
+    expect(screen.getByRole('switch').getAttribute('aria-labelledby')).toBe(
+      `${titleId}-toggle`
+    );
   });
 
   it('expands and collapses on click', async () => {

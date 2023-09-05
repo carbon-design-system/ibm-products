@@ -331,12 +331,6 @@ const getBatchActions = () => {
       onClick: action('Clicked batch action button'),
     },
     {
-      label: 'Select all',
-      renderIcon: Add,
-      onClick: action('Clicked batch action button'),
-      type: 'select_all',
-    },
-    {
       label: 'Publish to catalog',
       renderIcon: Add,
       onClick: action('Clicked batch action button'),

@@ -303,11 +303,6 @@ const defaultPropsImage = {
   media: 'Render a static image',
 };
 
-const defaultPropsAnimation = {
-  ...defaultProps,
-  media: 'Render an animation',
-};
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* * * * * * * * * * * * * * | STORIES | * * * * * * * * * * * * * * */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -319,9 +314,10 @@ export const interstitialScreenModal = prepareStory(TemplateModal, {
     hideProgressIndicator: true,
     children: (
       <InterstitialScreenView stepTitle="Step 1">
-        <div className="GenericView">
-          <span>Generic view</span>
-        </div>
+        <InterstitialScreenViewModule
+          title="Use case-specific heading"
+          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+        />
       </InterstitialScreenView>
     ),
   },
@@ -337,19 +333,22 @@ export const interstitialScreenModalMultiples = prepareStory(
       children: (
         <>
           <InterstitialScreenView stepTitle="Step 1">
-            <div className="GenericView">
-              <span>Generic view 1</span>
-            </div>
+            <InterstitialScreenViewModule
+              title="Use case-specific heading"
+              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+            />
           </InterstitialScreenView>
           <InterstitialScreenView stepTitle="Step 2">
-            <div className="GenericView">
-              <span>Generic view 2</span>
-            </div>
+            <InterstitialScreenViewModule
+              title="Use case-specific heading"
+              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+            />
           </InterstitialScreenView>
           <InterstitialScreenView stepTitle="Step 3">
-            <div className="GenericView">
-              <span>Generic view 3</span>
-            </div>
+            <InterstitialScreenViewModule
+              title="Use case-specific heading"
+              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+            />
           </InterstitialScreenView>
         </>
       ),
@@ -364,9 +363,11 @@ export const interstitialScreenFullScreen = prepareStory(TemplateFullScreen, {
     hideProgressIndicator: true,
     children: (
       <InterstitialScreenView stepTitle="Step 1">
-        <div className="GenericView">
-          <span>Generic view</span>
-        </div>
+        <InterstitialScreenViewModule
+          className="GenericView"
+          title="Use case-specific heading"
+          description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+        />
       </InterstitialScreenView>
     ),
   },
@@ -384,24 +385,30 @@ export const interstitialScreenFullScreenMultiples = prepareStory(
   {
     storyName: 'Full screen, multi-step',
     args: {
-      ...defaultPropsAnimation,
+      ...defaultPropsImage,
       hideProgressIndicator: false,
       children: (
         <>
           <InterstitialScreenView stepTitle="Step 1">
-            <div className="GenericView">
-              <span>Generic view 1</span>
-            </div>
+            <InterstitialScreenViewModule
+              className="GenericView"
+              title="Use case-specific heading"
+              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+            />
           </InterstitialScreenView>
           <InterstitialScreenView stepTitle="Step 2">
-            <div className="GenericView">
-              <span>Generic view 2</span>
-            </div>
+            <InterstitialScreenViewModule
+              className="GenericView"
+              title="Use case-specific heading"
+              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+            />
           </InterstitialScreenView>
           <InterstitialScreenView stepTitle="Step 3">
-            <div className="GenericView">
-              <span>Generic view 3</span>
-            </div>
+            <InterstitialScreenViewModule
+              className="GenericView"
+              title="Use case-specific heading"
+              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+            />
           </InterstitialScreenView>
         </>
       ),
@@ -421,19 +428,25 @@ export const interstitialScreenFullScreenNoMediaWithHeader = prepareStory(
       children: (
         <>
           <InterstitialScreenView stepTitle="Step 1">
-            <div className="GenericView">
-              <span>Generic view 1</span>
-            </div>
+            <InterstitialScreenViewModule
+              className="GenericView"
+              title="Use case-specific heading"
+              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+            />
           </InterstitialScreenView>
           <InterstitialScreenView stepTitle="Step 2">
-            <div className="GenericView">
-              <span>Generic view 2</span>
-            </div>
+            <InterstitialScreenViewModule
+              className="GenericView"
+              title="Use case-specific heading"
+              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+            />
           </InterstitialScreenView>
           <InterstitialScreenView stepTitle="Step 3">
-            <div className="GenericView">
-              <span>Generic view 3</span>
-            </div>
+            <InterstitialScreenViewModule
+              className="GenericView"
+              title="Use case-specific heading"
+              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+            />
           </InterstitialScreenView>
         </>
       ),
@@ -444,7 +457,7 @@ export const interstitialScreenFullScreenNoMediaWithHeader = prepareStory(
 export const interstitialScreenFullScreenNoMediaWithCards = prepareStory(
   TemplateFullScreenMultipleCardGrids,
   {
-    storyName: 'Full screen, with cards',
+    storyName: 'Full screen, custom layout',
     args: {
       ...defaultProps,
       headerTitle: 'Personalize your experience',
@@ -455,18 +468,18 @@ export const interstitialScreenFullScreenNoMediaWithCards = prepareStory(
           <InterstitialScreenView stepTitle="Step 1">
             <div className="CustomLayout">
               <GenerateExampleObjects
-                total={18}
+                total={8}
                 startValue={1}
-                copyPrefix="Card Element"
+                copyPrefix="Custom Element"
               />
             </div>
           </InterstitialScreenView>
           <InterstitialScreenView stepTitle="Step 2">
             <div className="CustomLayout">
               <GenerateExampleObjects
-                total={18}
-                startValue={19}
-                copyPrefix="Card Element"
+                total={8}
+                startValue={9}
+                copyPrefix="Custom Element"
               />
             </div>
           </InterstitialScreenView>

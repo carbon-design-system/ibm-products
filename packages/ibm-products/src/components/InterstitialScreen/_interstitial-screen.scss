@@ -1,4 +1,3 @@
-//
 // Copyright IBM Corp. 2023, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
@@ -13,6 +12,7 @@
 // stylelint-disable carbon/motion-duration-use
 // stylelint-disable carbon/motion-easing-use
 // stylelint-disable declaration-no-important
+// stylelint-disable carbon/type-token-use
 
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
@@ -40,10 +40,6 @@
       &__elements {
         flex: 1;
       }
-      // &__elements-container,
-      // &__elements {
-      //   height: 100%;
-      // }
     }
 
     position: fixed;
@@ -65,7 +61,6 @@
     }
 
     &--body-grid {
-      //display: flex;
       height: 100%;
       padding: 0 !important;
     }
@@ -81,7 +76,6 @@
     &__carousel {
       height: 100%;
       .#{$carousel-item} {
-        // height: 100%;
         flex: 0 0 100% !important;
       }
     }
@@ -89,8 +83,7 @@
     &--container {
       min-width: carbon--mini-units(94);
       max-width: 1312px;
-      //padding: 0 $one-grid-column;
-      margin: calc($spacing-10 * 2) auto; // 8rem
+      margin: calc($spacing-10 * 2) auto;
       background-color: $ui-01;
     }
 
@@ -128,6 +121,8 @@
       }
 
       h2 {
+        @include carbon--type-style('productive-heading-04');
+
         padding: $spacing-05 $spacing-07 $spacing-06;
 
         &:empty {
@@ -136,14 +131,10 @@
       }
 
       &.has-title {
-        min-height: initial;
-        background: $ui-background;
+        background: $ui-01;
 
         #{$block}--progress {
           margin-top: 0;
-        }
-        #{$block}--internal-header {
-          min-height: $spacing-09;
         }
       }
       > #{$block}--close-icon {
@@ -161,8 +152,8 @@
       width: 100%;
       flex-direction: row;
       justify-content: flex-end;
-      // padding: 0 $spacing-05 !important;
       border-top: 1px solid $ui-04;
+      background: $ui-background;
       #{$block}--skip-btn {
         margin-right: auto;
       }
@@ -200,6 +191,12 @@
       #{$block}--content {
         margin-top: 0;
       }
+
+      #{$block}--internal-header {
+        &:has(> :nth-child(2)) {
+          min-height: initial;
+        }
+      }
     }
 
     // FULL SCREEN (settings exclusive of "MODAL")
@@ -213,23 +210,29 @@
         margin: 0;
       }
 
-      // e.g. "IBM Cloud Pak | Security"
+      // e.g. "IBM Cloud Pak | Product"
       // ..."IBM Cloud Pak"
       #{$block}--header {
         @include carbon--type-style('body-long-01');
 
-        height: $spacing-09; // 3rem
+        height: $spacing-09;
         padding-left: $spacing-05;
         border-bottom: 1px solid $ui-03;
-        background-color: $ui-01;
-        // stylelint-disable-next-line carbon/type-token-use
+        /* stylelint-disable-next-line carbon/theme-token-use */
+        background-color: $gray-100;
+        /* stylelint-disable-next-line carbon/theme-token-use */
+        color: $gray-10;
         font-weight: normal !important; // overrides type style above
-        // stylelint-disable-next-line carbon/type-token-use
         line-height: $spacing-09 !important;
-        // ..."Security"
+
         b {
-          // stylelint-disable-next-line carbon/type-token-use
           font-weight: var(--cds-heading-01-font-weight, 600);
+        }
+      }
+
+      #{$block}--internal-header {
+        &:has(> :nth-child(1)) {
+          min-height: initial;
         }
       }
     }

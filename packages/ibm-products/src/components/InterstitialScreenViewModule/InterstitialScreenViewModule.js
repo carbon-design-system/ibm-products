@@ -55,7 +55,7 @@ export let InterstitialScreenViewModule = React.forwardRef(
     ref
   ) => {
     return (
-      <div
+      <section
         {
           // Pass through any other property values as HTML attributes.
           ...rest
@@ -76,7 +76,7 @@ export let InterstitialScreenViewModule = React.forwardRef(
       >
         <h1 className={`${blockClass}--heading`}>{title}</h1>
         <p className={`${blockClass}--body`}>{description}</p>
-      </div>
+      </section>
     );
   }
 );

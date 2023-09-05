@@ -48,6 +48,8 @@ const componentName = 'Checklist';
 
 // Default values for props
 const defaults = {
+  checklistAriaLabel: 'Checklist',
+  checklistToggleAriaLabel: 'Checklist toggle',
   onClickViewAll: () => {},
   onToggle: () => {},
   open: true,
@@ -62,12 +64,14 @@ const defaults = {
 export let Checklist = React.forwardRef(
   (
     {
+      chartValue,
+      chartLabel,
+      checklistAriaLabel = defaults.checklistAriaLabel,
+      checklistToggleAriaLabel = defaults.checklistToggleAriaLabel,
       className,
       onClickViewAll = defaults.onClickViewAll,
       onToggle = defaults.onToggle,
       open = defaults.open,
-      chartValue,
-      chartLabel,
       showToggle = defaults.showToggle,
       taskLists = defaults.taskLists,
       theme = defaults.theme,
@@ -112,7 +116,7 @@ export let Checklist = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        aria-label="Checklist"
+        aria-label={checklistAriaLabel}
         className={cx(
           blockClass, // Apply the block class to the main HTML element
           className, // Apply any supplied class names to the main HTML element.
@@ -148,7 +152,7 @@ export let Checklist = React.forwardRef(
               <Button
                 aria-controls={listContainerId}
                 aria-expanded={isOpen}
-                aria-label="Checklist toggle"
+                aria-label={checklistToggleAriaLabel}
                 className={`${blockClass}__toggle`}
                 kind="ghost"
                 onClick={handleClickToggle}
@@ -261,6 +265,14 @@ Checklist.propTypes = {
    * Define both `chartLabel` and `chartValue` to show the chart and its label together.
    */
   chartValue: PropTypes.number,
+  /**
+   * Aria-label for the Checklist component.
+   */
+  checklistAriaLabel: PropTypes.string,
+  /**
+   * Aria-label for the Checklist's toggle component.
+   */
+  checklistToggleAriaLabel: PropTypes.string,
   /**
    * Provide an optional class to be applied to the containing node.
    */

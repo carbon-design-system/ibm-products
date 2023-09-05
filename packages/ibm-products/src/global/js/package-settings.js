@@ -76,6 +76,7 @@ const defaults = {
     InlineTip: false,
     Guidebanner: false,
     NonLinearReading: false,
+    Checklist: false,
     Coachmark: false,
     CoachmarkBeacon: false,
     CoachmarkButton: false,

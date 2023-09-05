@@ -23,6 +23,11 @@
   background-color: $ui-03;
 }
 
+.GenericModalView {
+  /* stylelint-disable-next-line declaration-no-important */
+  margin-bottom: $spacing-12 !important;
+}
+
 .GenericView {
   /* stylelint-disable-next-line declaration-no-important */
   margin-top: $spacing-12 !important;

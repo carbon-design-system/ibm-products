@@ -70,8 +70,6 @@ export let InterstitialScreenViewModule = React.forwardRef(
           }
         )}
         ref={ref}
-        role="heading"
-        aria-level={2}
         {...getDevtoolsProps(componentName)}
       >
         <h1 className={`${blockClass}--heading`}>{title}</h1>

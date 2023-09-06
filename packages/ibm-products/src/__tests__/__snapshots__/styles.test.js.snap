@@ -3194,6 +3194,7 @@ p.c4p--about-modal__copyright-text:first-child {
   font-weight: var(--cds-body-01-font-weight, 400);
   line-height: var(--cds-body-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-01-letter-spacing, 0.16px);
+  color: var(--cds-text-secondary, #525252);
   padding-bottom: 1rem;
 }
 .c4p--empty-state .c4p--empty-state__header--small {
@@ -3240,7 +3241,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .c4p--empty-state .c4p--empty-state__action-button {
-  display: block;
+  display: inline-block;
   margin-bottom: 1rem;
 }
 

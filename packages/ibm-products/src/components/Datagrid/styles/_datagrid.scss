@@ -282,16 +282,6 @@
   flex: 1 1 auto;
 }
 
-.#{$block-class}__empty-state {
-  .#{c4p-settings.$pkg-prefix}--empty-state__subtitle {
-    color: $text-secondary;
-  }
-
-  .#{c4p-settings.$pkg-prefix}--empty-state__action-button {
-    display: inline-block;
-  }
-}
-
 .#{$block-class}__resizer {
   position: absolute;
   z-index: 1;

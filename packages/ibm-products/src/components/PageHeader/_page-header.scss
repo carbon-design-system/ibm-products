@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -29,7 +29,6 @@ $block-class: #{$pkg-prefix}--page-header;
 $breadcrumb-block-class: #{$pkg-prefix}--breadcrumb-with-overflow;
 
 $raised-z-index: 99;
-/* stylelint-disable-next-line function-no-unknown */
 $z-index-header-minus: utilities.z('header') - 1;
 
 $left-section-std-width: 60%;
@@ -361,7 +360,9 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__title-row {
-    margin-top: $spacing-01; /* spacing needed in case of editable title, otherwise top of focus indicator hidden */
+    --title-row-margin-top: #{$spacing-01}; /* spacing needed in case of editable title, otherwise top of focus indicator hidden */
+
+    margin-top: var(--title-row-margin-top);
     margin-bottom: 0;
     transform: translateY(
       $spacing-01
@@ -417,8 +418,10 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   .#{$block-class}__breadcrumb-row--has-breadcrumbs
     + .#{$block-class}__title-row--sticky {
-    // top: 0;
-    top: var(--#{$block-class}--breadcrumb-top); //2
+    // stylelint-disable-next-line carbon/layout-token-use
+    top: calc(
+      var(--#{$block-class}--breadcrumb-top) - var(--title-row-margin-top)
+    );
   }
 
   .#{$block-class}__title-column {
@@ -432,7 +435,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__title {
-    @include type.type-style('productive-heading-04');
+    @include type.type-style('heading-04');
 
     min-height: $spacing-08;
     overflow-x: hidden;
@@ -539,11 +542,11 @@ $right-section-alt-width: 100% - $left-section-alt-width;
   }
 
   .#{$block-class}__subtitle {
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
   }
 
   .#{$block-class}__available-row {
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
 
     margin-top: $spacing-03;
 
@@ -558,7 +561,7 @@ $right-section-alt-width: 100% - $left-section-alt-width;
 
   .#{$block-class}__available-row * {
     // default content of available row to body-long-01
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
   }
 
   .#{$block-class}__navigation-row {

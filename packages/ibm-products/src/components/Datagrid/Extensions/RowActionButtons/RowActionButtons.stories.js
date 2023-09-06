@@ -22,7 +22,7 @@ import {
   useSelectAllWithToggle,
 } from '../../index';
 import styles from '../../_storybook-styles.scss';
-import mdx from '../../Datagrid.mdx';
+import { DocsPage } from './RowActionButtons.docs-page';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
@@ -32,9 +32,11 @@ import { pkg } from '../../../../settings';
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/RowActionButtons`,
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: { page: mdx },
+    docs: { page: DocsPage },
+    layout: 'fullscreen',
   },
   argTypes: {
     featureFlags: {
@@ -327,12 +329,6 @@ const getBatchActions = () => {
       label: 'Add',
       renderIcon: Add,
       onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Select all',
-      renderIcon: Add,
-      onClick: action('Clicked batch action button'),
-      type: 'select_all',
     },
     {
       label: 'Publish to catalog',

@@ -124,6 +124,10 @@
 }
 
 .#{c4p-settings.$carbon-prefix}--btn.c4p--datagrid-filter-panel-open-button {
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  justify-content: center;
   border-right: 1px solid $layer-accent-01;
   border-bottom: none;
 }

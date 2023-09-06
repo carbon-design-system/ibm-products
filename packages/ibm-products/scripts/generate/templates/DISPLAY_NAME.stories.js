@@ -22,6 +22,7 @@ import styles from './_storybook-styles.scss';
 export default {
   title: getStoryTitle(DISPLAY_NAME.displayName),
   component: DISPLAY_NAME,
+  tags: ['autodocs'],
   // TODO: Define argTypes for props not represented by standard JS types.
   // argTypes: {
   //   egProp: { control: 'color' },

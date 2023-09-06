@@ -24,6 +24,9 @@ import { defaults } from '../EmptyState';
 const blockClass = `${pkg.prefix}--empty-state`;
 const componentName = 'NotFoundEmptyState';
 
+/**
+ * The `EmptyState` component follows the Carbon guidelines for empty states with some added specifications around illustration usage. For additional usage guidelines and documentation please refer to the links above.
+ */
 export let NotFoundEmptyState = React.forwardRef(
   (
     {

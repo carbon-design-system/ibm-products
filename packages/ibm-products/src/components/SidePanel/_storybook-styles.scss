@@ -9,6 +9,7 @@
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/themes/scss/themes';
 @use '@carbon/styles/scss/type';
+@use '../../global/decorators/side-panel-decorator' as *;
 
 $story-prefix: side-panel-stories__;
 
@@ -43,3 +44,9 @@ $story-prefix: side-panel-stories__;
 .#{$story-prefix}header {
   @include theme(themes.$g100);
 }
+
+.#{$story-prefix}grid {
+  height: 100%;
+}
+
+@include side-panel-decorator($story-prefix);

@@ -22,39 +22,39 @@ const className = `class-${uuidv4()}`;
 const dataTestId = uuidv4();
 
 describe(componentName, () => {
-  it('renders a component EditUpdateCards', () => {
+  it('renders a component EditUpdateCards', async () => {
     render(<EditUpdateCards> </EditUpdateCards>);
     expect(screen.getByRole('main')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
     const { container } = render(<EditUpdateCards> </EditUpdateCards>);
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  // it(`renders children`, () => {
-  //   render(<EditUpdateCards>{children}</EditUpdateCards>);
+  // it(`renders children`,  async () => {
+  //  render(<EditUpdateCards>{children}</EditUpdateCards>);
   //   screen.getByText(children);
   // });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     render(<EditUpdateCards className={className}> </EditUpdateCards>);
     expect(screen.getByRole('main')).toHaveClass(className);
   });
 
-  it('adds additional props to the containing node', () => {
+  it('adds additional props to the containing node', async () => {
     render(<EditUpdateCards data-testid={dataTestId}> </EditUpdateCards>);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     render(<EditUpdateCards ref={ref}> </EditUpdateCards>);
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     render(<EditUpdateCards data-testid={dataTestId}> </EditUpdateCards>);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(

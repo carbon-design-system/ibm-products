@@ -27,28 +27,10 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { EditSidePanel } from '.';
-import mdx from './EditSidePanel.mdx';
 
 import styles from './_storybook-styles.scss';
-
-export default {
-  title: getStoryTitle(EditSidePanel.displayName),
-  component: EditSidePanel,
-  // TODO: Define argTypes for props not represented by standard JS types.
-  argTypes: {
-    title: { control: { type: 'text' } },
-    subtitle: { control: { type: 'text' } },
-    formTitle: { control: { type: 'text' } },
-    formDescription: { control: { type: 'text' } },
-    open: { control: { disable: true } },
-  },
-  parameters: {
-    styles,
-    docs: {
-      page: mdx,
-    },
-  },
-};
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
+import { sidePanelDecorator } from '../../global/decorators/sidePanelDecorator';
 
 const defaultStoryProps = {
   title: 'Edit platform quotas',
@@ -72,11 +54,36 @@ const renderUIShellHeader = () => (
   />
 );
 
+const prefix = 'edit-side-panel-stories__';
+
+export default {
+  title: getStoryTitle(EditSidePanel.displayName),
+  component: EditSidePanel,
+  tags: ['autodocs'],
+  // TODO: Define argTypes for props not represented by standard JS types.
+  argTypes: {
+    title: { control: { type: 'text' } },
+    subtitle: { control: { type: 'text' } },
+    formTitle: { control: { type: 'text' } },
+    formDescription: { control: { type: 'text' } },
+    open: { control: { disable: true } },
+  },
+  parameters: {
+    layout: 'fullscreen',
+    styles,
+    docs: {
+      page: () => (
+        <StoryDocsPage altGuidelinesHref="https://pages.github.ibm.com/cdai-design/pal/patterns/edit/usage#side-panel-edit" />
+      ),
+    },
+  },
+  decorators: [sidePanelDecorator(renderUIShellHeader, prefix)],
+};
+
 /**
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
-  const prefix = 'edit-side-panel-stories__';
   const carbonPrefix = usePrefix();
   const items = ['Day(s)', 'Month(s)', 'Year(s)'];
   const [open, setOpen] = useState(false);
@@ -84,7 +91,7 @@ const Template = (args) => {
   return (
     <>
       {renderUIShellHeader()}
-      <Grid id="ibm-products-page-content">
+      <Grid id="ibm-products-page-content" className="story-content">
         <Column lg={{ span: 2, start: 8 }}>
           <Button onClick={() => setOpen(!open)}>
             {open ? 'Close side panel' : 'Open side panel'}

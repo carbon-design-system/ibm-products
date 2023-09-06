@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ActionBarItem } from '.';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -22,36 +22,35 @@ const dataTestId = uuidv4();
 const testLabel = 'Test label';
 
 describe(ActionBarItem.displayName, () => {
-  it.skip('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(
       <main>
-        <ActionBarItem label={testLabel}>{content}</ActionBarItem>
+        <ActionBarItem label={testLabel}></ActionBarItem>
       </main>
     );
-    userEvent.tab();
-    expect(screen.getByText(content)).toHaveFocus();
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    await act(() => userEvent.tab());
+    expect(screen.getByText(testLabel));
+    expect(screen.getByRole('button')).toHaveFocus();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  it('Renders a page action item which is a Carbon Button that can be clicked', () => {
+  it('Renders a page action item which is a Carbon Button that can be clicked', async () => {
     const myOnClick = jest.fn();
 
     // not enough room so should see an overflow.
     const { container } = render(
-      <ActionBarItem label={testLabel} onClick={myOnClick}>
-        {content}
-      </ActionBarItem>
+      <ActionBarItem label={testLabel} onClick={myOnClick}></ActionBarItem>
     );
 
     const actionBarItemElement = container.querySelector(`.${blockClass}`);
     expect(actionBarItemElement).toHaveClass(`${carbon.prefix}--btn`);
 
-    click(actionBarItemElement);
+    await act(() => click(actionBarItemElement));
     expect(myOnClick).toBeCalled();
   });
 
-  it('adds user classes', () => {
+  it('adds user classes', async () => {
     const { container } = render(
       <ActionBarItem label={testLabel} className={className}>
         {content}
@@ -62,7 +61,7 @@ describe(ActionBarItem.displayName, () => {
     expect(actionBarItemElement).toHaveClass(className);
   });
 
-  it('ignores user size and type settings', () => {
+  it('ignores user size and type settings', async () => {
     const { container } = render(
       <ActionBarItem label={testLabel} size="lg" type="submit">
         {content}
@@ -74,7 +73,7 @@ describe(ActionBarItem.displayName, () => {
     expect(actionBarItemElement).toHaveAttribute('type', 'button');
   });
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     const { container } = render(
       <ActionBarItem label={testLabel} data-testid={dataTestId}>
         {content}
@@ -86,7 +85,7 @@ describe(ActionBarItem.displayName, () => {
     ).toBeInTheDocument();
   });
 
-  it('forwards a ref to the block element', () => {
+  it('forwards a ref to the block element', async () => {
     const ref = React.createRef();
     render(
       <ActionBarItem label={testLabel} ref={ref}>

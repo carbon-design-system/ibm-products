@@ -15,7 +15,7 @@ import {
 } from '../../../../global/js/utils/story-helper';
 import { Datagrid, useDatagrid } from '../../index';
 import styles from '../../_storybook-styles.scss';
-import mdx from '../../Datagrid.mdx';
+// import mdx from '../../Datagrid.mdx';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
@@ -24,9 +24,11 @@ import { ARG_TYPES } from '../../utils/getArgTypes';
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/RowHeightSettings`,
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: { page: mdx },
+    layout: 'fullscreen',
+    // docs: { page: mdx },
   },
 };
 

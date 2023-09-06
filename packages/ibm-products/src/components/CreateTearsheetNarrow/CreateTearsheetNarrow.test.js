@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
@@ -24,6 +24,7 @@ const onRequestCloseFn = jest.fn();
 const onRequestSubmitFn = jest.fn();
 
 const defaultProps = {
+  open: true,
   title: 'Create partition',
   className: 'test-class-name',
   description: 'Select the number of partitions you want to create',
@@ -67,7 +68,7 @@ describe(componentName, () => {
     pkg.feature['default-portal-target-body'] = initialDefaultPortalTargetBody;
   });
 
-  it('renders a component CreateTearsheetNarrow', () => {
+  it('renders a component CreateTearsheetNarrow', async () => {
     renderComponent();
     expect(screen.getByText(/Create action/)).toBeVisible();
     expect(screen.getByText(defaultProps.formDescription)).toBeVisible();
@@ -76,35 +77,42 @@ describe(componentName, () => {
     expect(screen.getByText(defaultProps.primaryButtonText)).toBeVisible();
   });
 
-  it.skip('has no accessibility violations', async () => {
-    const { container } = renderComponent();
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+  it.skip('has no accessibility violations when closed', async () => {
+    // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
+    const { container } = renderComponent({ open: false });
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, () => {
+  it('has no accessibility violations', async () => {
+    const { container } = renderComponent();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
+  });
+
+  it(`renders children`, async () => {
     renderComponent();
     screen.getByText(children);
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     const { container } = renderComponent();
     const outerElement = container.querySelector(`.${blockClass}`);
     expect(outerElement).toHaveClass(defaultProps.className);
   });
 
-  it('adds additional props to the containing node', () => {
+  it('adds additional props to the containing node', async () => {
     renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     renderComponent({ ref });
     expect(ref.current).not.toBeNull();
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     renderComponent({ 'data-testid': dataTestId });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -112,7 +120,7 @@ describe(componentName, () => {
     );
   });
 
-  it('should disable the primary action button', () => {
+  it('should disable the primary action button', async () => {
     renderComponent({
       disableSubmit: true,
     });
@@ -121,11 +129,11 @@ describe(componentName, () => {
     ).toBeDisabled();
   });
 
-  it('should click on both action buttons', () => {
+  it('should click on both action buttons', async () => {
     const { click } = userEvent;
     renderComponent();
-    click(screen.getByText(defaultProps.primaryButtonText));
-    click(screen.getByText(defaultProps.secondaryButtonText));
+    await act(() => click(screen.getByText(defaultProps.primaryButtonText)));
+    await act(() => click(screen.getByText(defaultProps.secondaryButtonText)));
     expect(onRequestCloseFn).toHaveBeenCalledTimes(1);
     expect(onRequestSubmitFn).toHaveBeenCalledTimes(1);
   });

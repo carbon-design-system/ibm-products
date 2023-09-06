@@ -14,7 +14,7 @@ import { expectWarn } from '../../global/js/utils/test-helper';
 const componentName = ExampleDeprecatedComponent.displayName;
 
 describe(componentName, () => {
-  it('Warns when using a deprecated component', () => {
+  it('Warns when using a deprecated component', async () => {
     expectWarn(
       'Carbon for IBM Products (WARNING): Component "ExampleDeprecatedComponent" is deprecated. This an example component deprecation message used by \'checkComponentEnabled\'.',
       () => {

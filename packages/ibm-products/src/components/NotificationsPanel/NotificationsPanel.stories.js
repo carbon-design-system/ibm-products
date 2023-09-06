@@ -16,7 +16,6 @@ import {
   HeaderGlobalAction,
 } from '@carbon/react';
 import { User, Notification } from '@carbon/react/icons';
-import { white } from '@carbon/colors';
 import styles from './_storybook-styles.scss';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import { UnreadNotificationBell } from './preview-components/UnreadNotificationBell';
@@ -29,7 +28,7 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 
-import mdx from './NotificationsPanel.mdx';
+// import mdx from './NotificationsPanel.mdx';
 import data from './NotificationsPanel_data';
 
 const storyBlockClass = `${pkg.prefix}--notifications-panel__story`;
@@ -37,11 +36,15 @@ const storyBlockClass = `${pkg.prefix}--notifications-panel__story`;
 export default {
   title: getStoryTitle(NotificationsPanel.displayName),
   component: NotificationsPanel,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: {
+    layout: 'fullscreen',
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
 };
 
@@ -67,23 +70,11 @@ const renderUIShellHeader = (open, setOpen, hasUnreadNotifications) => (
             {hasUnreadNotifications ? (
               <UnreadNotificationBell />
             ) : (
-              <Notification
-                size={20}
-                style={{
-                  /* stylelint-disable-next-line */
-                  fill: white,
-                }}
-              />
+              <Notification size={20} />
             )}
           </HeaderGlobalAction>
           <HeaderGlobalAction aria-label="App switcher">
-            <User
-              size={20}
-              style={{
-                /* stylelint-disable-next-line */
-                fill: white,
-              }}
-            />
+            <User size={20} />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
       </Header>
@@ -138,9 +129,11 @@ const Template = (args) => {
   }, [open, notificationsData, hasUnreadNotifications]);
 
   return (
-    <>
+    <div className={`${storyBlockClass}--full-height`}>
       {renderUIShellHeader(open, setOpen, hasUnreadNotifications)}
-      <Button onClick={addNewNotification}>Add new notification</Button>
+      <div className={`${storyBlockClass}__add`}>
+        <Button onClick={addNewNotification}>Add new notification</Button>
+      </div>
       <NotificationsPanel
         {...args}
         data={notificationsData}
@@ -153,7 +146,7 @@ const Template = (args) => {
           setNotificationsData(tempData);
         }}
       />
-    </>
+    </div>
   );
 };
 

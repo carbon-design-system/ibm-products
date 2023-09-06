@@ -8,10 +8,14 @@ Components!
 - React
 - Vue
 
+No reason to suspect others are not supported, but have not been tested. If you
+use with another framework then please post an update to the README.md.
+
 ## Install
 
 ```sh
-npm install @carbon/storybook-addon-theme
+npm install --save-dev @carbon/storybook-addon-theme
+yarn install --dev @carbon/storybook-addon-theme
 ```
 
 ## Requirements
@@ -35,24 +39,8 @@ and
 
 ```js
 module.exports = {
-  addons: ['@carbon/storybook-addon-theme/register'],
-};
-```
-
-Use with a feature flag switch is possible if you construct the addons array.
-
-```js
-const addons = [
-  /* other addons */
-];
-
-if (process.env.CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES === 'true') {
-  addons.push('@carbon/storybook-addon-theme/register');
-}
-
-module.exports = {
-  addons,
-  stories: ['../src/**/*-story.js', '../src/**/*.stories.mdx'],
+  // other addons...
+  addons: ['@carbon/storybook-addon-theme/preset.js'],
 };
 ```
 
@@ -61,88 +49,99 @@ module.exports = {
 `.storybook/preview.js`:
 
 ```js
-import { withCarbonTheme } from '@carbon/storybook-addon-theme'; // for React
-// import { withCarbonTheme } from '@carbon/storybook-addon-theme/vue'; // for Vue
-// for Angular (not yet supported)
-// .
-// for all (including story decorators)
-import index from './index.scss';
-// .
-addDecorator(withCarbonTheme);
-// .
-```
+import { withCarbonTheme } from '@carbon/storybook-addon-theme/withCarbonTheme';
+import {
+  PARAM_KEY as CARBON_THEME_PARAM_KEY,
+  CARBON_THEMES,
+} from '@carbon/storybook-addon-theme/constants';
 
-```js
-// Adding the decorator
-const decorators = [withCarbonTheme];
-const parameters = {
-  carbonTheme: {
-    theme: 'g10',
-  },
+const decorators = [
+  /// other decorators...
+  withCarbonTheme,
+];
+
+const globals = {
+  // other globals...
+  // default value of the theme selector
+  [CARBON_THEME_PARAM_KEY]: CARBON_THEMES.g10,
 };
-export { decorators, parameters };
-```
 
-```js
-// Older storybook versions
-addParameters({
-  // optional
-  carbonTheme: {
-    theme: 'g10', // optional default carbon theme
-    themes: ['g10', 'g90'], // optional carbonTheme filter
-  },
-});
-```
-
-### Story decorator
-
-```js
-import { withCarbonTheme } from '@carbon/storybook-addon-theme'; // for React
-// import { withCarbonTheme } from '@carbon/storybook-addon-theme/vue'; // for Vue
-// for Angular
-// .
-// .
-// .
-storiesOf('Component', module)
-  .addDecorator(withCarbonTheme)
-  .add(() => story, {
-    carbonTheme: {
-      // optional
-      theme: 'g10', // optional default carbon theme
-      themes: ['g10', 'g90'], // optional carbonTheme filter (additive to global)
-    },
-  });
+export { decorators, globals };
 ```
 
 ## SCSS
 
 `.storybook/index.scss`
 
-```scss
-@import '@carbon/themes/scss/themes';
+### Carbon 11
 
-:root {
+```scss
+@use '@carbon/styles' as styles;
+@use '@carbon/styles/scss/theme' as *;
+
+[storybook-carbon-theme] {
+  @include styles.theme(styles.$white);
+
+  /* make sure background and color are set if theme in use */
+  background-color: $background;
+  color: $text-primary;
+}
+
+[storybook-carbon-theme='g10'],
+.sb--use-carbon-theme-g10 {
+  @include styles.theme(styles.$g10);
+}
+
+[storybook-carbon-theme='g90'],
+.sb--use-carbon-theme-g90 {
+  @include styles.theme(styles.$g90);
+}
+
+[storybook-carbon-theme='g100'],
+.sb--use-carbon-theme-g100 {
+  @include styles.theme(styles.$g100);
+}
+```
+
+### Carbon 10
+
+```SCSS
+// Must happen before styles are loaded
+$feature-flags: (
+  ui-shell: true,
+  grid-columns-16: true,
+  enable-css-custom-properties: true
+);
+
+@import "carbon-components/scss/globals/scss/styles";
+@import "@carbon/themes/scss/themes";
+
+[storybook-carbon-theme] {
+  background: $ui-background;
+  color: $ui-01;
+
   @include carbon--theme(
     $theme: $carbon--theme--white,
     $emit-custom-properties: true
   );
 }
 
-:root[storybook-carbon-theme='g10'] {
+[storybook-carbon-theme="g10"] {
   @include carbon--theme(
     $theme: $carbon--theme--g10,
     $emit-custom-properties: true
   );
 }
 
-:root[storybook-carbon-theme='g90'] {
+[storybook-carbon-theme="g90"] {
+  z-index: 90;
   @include carbon--theme(
     $theme: $carbon--theme--g90,
     $emit-custom-properties: true
   );
 }
 
-:root[storybook-carbon-theme='g100'] {
+[storybook-carbon-theme="g100"] {
   @include carbon--theme(
     $theme: $carbon--theme--g100,
     $emit-custom-properties: true

@@ -16,6 +16,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import React, { Children, createElement, useRef, useState } from 'react';
 
 const blockClass = 'security--combo-button';
+const componentName = 'ComboButton';
 
 /**
  * The combo button consolidates similar actions, while exposing the most commonly used one.
@@ -97,6 +98,11 @@ const ComboButton = ({
       )}
     </div>
   );
+};
+
+ComboButton.deprecated = {
+  level: 'warn',
+  details: `Please replace ${componentName} with Carbon's ComboButton`,
 };
 
 ComboButton.propTypes = {

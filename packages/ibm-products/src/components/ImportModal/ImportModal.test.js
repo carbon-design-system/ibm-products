@@ -5,7 +5,13 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import { fireEvent, render, waitFor, screen } from '@testing-library/react';
+import {
+  fireEvent,
+  render,
+  waitFor,
+  screen,
+  act,
+} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { carbon } from '../../settings';
@@ -55,37 +61,37 @@ describe(componentName, () => {
     fetch.mockClear();
   });
 
-  it('renders body', () => {
+  it('renders body', async () => {
     render(<ImportModal {...defaultProps} />);
     screen.getByText(defaultProps.description);
   });
 
-  it('renders title', () => {
+  it('renders title', async () => {
     render(<ImportModal {...defaultProps} />);
     screen.getByText(defaultProps.title);
   });
 
-  it('renders fileDropHeader', () => {
+  it('renders fileDropHeader', async () => {
     render(<ImportModal {...defaultProps} />);
     screen.getByText(defaultProps.fileDropHeader);
   });
 
-  it('renders fileDropLabel', () => {
+  it('renders fileDropLabel', async () => {
     render(<ImportModal {...defaultProps} />);
     screen.getByRole('button', { name: defaultProps.fileDropLabel });
   });
 
-  it('renders inputButtonText', () => {
+  it('renders inputButtonText', async () => {
     render(<ImportModal {...defaultProps} />);
     screen.getByText(defaultProps.inputButtonText);
   });
 
-  it('renders inputLabel', () => {
+  it('renders inputLabel', async () => {
     render(<ImportModal {...defaultProps} />);
     screen.getByText(defaultProps.inputLabel);
   });
 
-  it('renders the input with an id', () => {
+  it('renders the input with an id', async () => {
     const { container } = render(<ImportModal {...defaultProps} />);
     container.querySelector(defaultProps.inputId);
   });
@@ -106,7 +112,7 @@ describe(componentName, () => {
         `${carbon.prefix}--btn--disabled`
       )
     ).toBe(true);
-    click(getByText(props.primaryButtonText));
+    await act(() => click(getByText(props.primaryButtonText)));
     expect(onRequestSubmit).not.toBeCalled();
 
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
@@ -117,12 +123,12 @@ describe(componentName, () => {
         `${carbon.prefix}--btn--disabled`
       )
     ).not.toBe(true);
-    click(getByText(props.inputButtonText));
+    await act(() => click(getByText(props.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(
       screen.getByText(`1 / 1 ${defaultProps.fileUploadLabel}`)
     ).toBeVisible();
-    click(getByText(props.primaryButtonText));
+    await act(() => click(getByText(props.primaryButtonText)));
     expect(onRequestSubmit).toBeCalled();
   });
 
@@ -135,7 +141,7 @@ describe(componentName, () => {
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.jpeg' },
     });
-    click(getByText(defaultProps.inputButtonText));
+    await act(() => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.fetchErrorBody)).toBeVisible();
     expect(getByText(defaultProps.fetchErrorHeader)).toBeVisible();
@@ -158,7 +164,7 @@ describe(componentName, () => {
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.jpeg' },
     });
-    click(getByText(defaultProps.inputButtonText));
+    await act(() => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(props.defaultErrorBody)).toBeVisible();
     expect(getByText(props.defaultErrorHeader)).toBeVisible();
@@ -180,7 +186,7 @@ describe(componentName, () => {
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.jpeg' },
     });
-    click(getByText(defaultProps.inputButtonText));
+    await act(() => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.fetchErrorBody)).toBeVisible();
     expect(getByText(defaultProps.fetchErrorHeader)).toBeVisible();
@@ -204,7 +210,7 @@ describe(componentName, () => {
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.pdf' },
     });
-    click(getByText(defaultProps.inputButtonText));
+    await act(() => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.invalidFileTypeErrorBody)).toBeVisible();
     expect(getByText(defaultProps.invalidFileTypeErrorHeader)).toBeVisible();
@@ -233,7 +239,7 @@ describe(componentName, () => {
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.pdf' },
     });
-    click(getByText(defaultProps.inputButtonText));
+    await act(() => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(props.defaultErrorBody)).toBeVisible();
     expect(getByText(props.defaultErrorHeader)).toBeVisible();
@@ -242,7 +248,7 @@ describe(componentName, () => {
     ).toBeVisible();
   });
 
-  it('should successfully use the drag and drop component to upload a file and then remove the file', () => {
+  it('should successfully use the drag and drop component to upload a file and then remove the file', async () => {
     const { change } = fireEvent;
     const { click } = userEvent;
     const { getByText, container } = render(<ImportModal {...defaultProps} />);
@@ -255,7 +261,9 @@ describe(componentName, () => {
     expect(
       screen.getByText(`1 / 1 ${defaultProps.fileUploadLabel}`)
     ).toBeVisible();
-    click(container.querySelector(`.${carbon.prefix}--file-close`));
+    await act(() =>
+      click(container.querySelector(`.${carbon.prefix}--file-close`))
+    );
     expect(
       container.querySelector(`.${carbon.prefix}--file-filename`)
     ).toBeNull();
@@ -273,7 +281,7 @@ describe(componentName, () => {
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.pdf' },
     });
-    click(getByText(defaultProps.inputButtonText));
+    await act(() => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(defaultProps.maxFileSizeErrorBody)).toBeVisible();
     expect(getByText(defaultProps.maxFileSizeErrorHeader)).toBeVisible();
@@ -296,7 +304,7 @@ describe(componentName, () => {
     change(container.querySelector(`.${carbon.prefix}--text-input`), {
       target: { value: 'test.pdf' },
     });
-    click(getByText(defaultProps.inputButtonText));
+    await act(() => click(getByText(defaultProps.inputButtonText)));
     await waitFor(() => expect(global.fetch).toHaveBeenCalled());
     expect(getByText(props.defaultErrorBody)).toBeVisible();
     expect(getByText(props.defaultErrorHeader)).toBeVisible();
@@ -311,29 +319,29 @@ describe(componentName, () => {
   // should be reinstated.
   it.skip('has no accessibility violations', async () => {
     const { container } = render(<ImportModal {...defaultProps} />);
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     const { container } = render(<ImportModal {...defaultProps} />);
     expect(container.firstChild).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'data-testid';
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     render(<ImportModal {...defaultProps} data-testid={dataTestId} />);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     render(<ImportModal {...defaultProps} ref={ref} />);
     expect(ref.current).not.toBeNull();
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     render(<ImportModal {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(

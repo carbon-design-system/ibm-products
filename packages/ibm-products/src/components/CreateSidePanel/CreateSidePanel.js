@@ -18,6 +18,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 // Carbon and package components we use.
 import { Form } from '@carbon/react';
 import { SidePanel } from '../SidePanel';
+import uuidv4 from '../../global/js/utils/uuidv4';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--create-side-panel`;
@@ -26,7 +27,7 @@ const componentName = 'CreateSidePanel';
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
 
 /**
- * This is an example component to show relevant conventions and usage.
+ * Use with medium complexity creations if the user needs page context. On-page content can be seen and interacted with.
  */
 export let CreateSidePanel = React.forwardRef(
   (
@@ -68,6 +69,8 @@ export let CreateSidePanel = React.forwardRef(
       },
     ];
 
+    const formTitleId = uuidv4();
+
     return (
       selectorPageContent && (
         <SidePanel
@@ -91,6 +94,7 @@ export let CreateSidePanel = React.forwardRef(
         >
           <h3
             className={`${blockClass}__form-title-text ${blockClass}__content-text`}
+            id={formTitleId}
           >
             {formTitle}
           </h3>
@@ -99,7 +103,9 @@ export let CreateSidePanel = React.forwardRef(
           >
             {formDescription}
           </p>
-          <Form className={`${blockClass}__form`}>{children}</Form>
+          <Form className={`${blockClass}__form`} aria-labelledby={formTitleId}>
+            {children}
+          </Form>
         </SidePanel>
       )
     );
@@ -135,6 +141,7 @@ CreateSidePanel.propTypes = {
    * Specifies an optional field that provides a additional context for a form
    */
   formDescription: PropTypes.node,
+
   /**
    * Specifies a required field that provides a title for a form
    */

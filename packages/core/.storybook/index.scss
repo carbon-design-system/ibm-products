@@ -9,7 +9,8 @@
 // Carbon styles at the end -- this is to obtain a "worst case" for our own CSS,
 // to ensure we are resilient against different CSS loading orders and our
 // styles have the specificity necessary to override Carbon styles when needed.
-@use '../../ibm-products/src/index-without-carbon' as *;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings; // loads config.css or config-dev.scss from ibm-prodcuts/src (see main.js)
+@use '../../ibm-products/src/index-without-carbon.scss';
 
 // Load all Carbon styles now
 @use '../css/carbon';
@@ -26,25 +27,29 @@
 // will set the carbon theme used within that element.
 body {
   background-color: $background;
+  --doc-story-height: initial;
 }
 
-:root,
-.sb--use-carbon-theme-white {
+[storybook-carbon-theme] {
   @include styles.theme(styles.$white);
+
+  /* make sure background and color are set if theme in use */
+  background-color: $background;
+  color: $text-primary;
 }
 
-:root[storybook-carbon-theme='g10'],
+[storybook-carbon-theme='g10'],
 .sb--use-carbon-theme-g10 {
   @include styles.theme(styles.$g10);
 }
 
-:root[storybook-carbon-theme='g90'],
+[storybook-carbon-theme='g90'],
 .sb--use-carbon-theme-g90 {
   @include styles.theme(styles.$g90);
 }
 
 [storybook-carbon-theme='debug'],
-:root[storybook-carbon-theme='g100'],
+[storybook-carbon-theme='g100'],
 .sb--use-carbon-theme-g100 {
   @include styles.theme(styles.$g100);
 }

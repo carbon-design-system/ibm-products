@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useContext, useEffect, useState } from 'react';
+import React, {
+  forwardRef,
+  useContext,
+  useEffect,
+  useState,
+  isValidElement,
+} from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Column, FormGroup, Grid } from '@carbon/react';
@@ -36,8 +42,9 @@ export let CreateTearsheetStep = forwardRef(
       hasFieldset = defaults.hasFieldset,
       includeStep = defaults.includeStep,
       introStep,
-      onNext,
       onMount,
+      onNext,
+      onPrevious,
       secondaryLabel,
       subtitle,
       title,
@@ -85,8 +92,23 @@ export let CreateTearsheetStep = forwardRef(
       if (stepNumber === stepsContext?.currentStep) {
         stepsContext.setIsDisabled(disableSubmit);
         stepsContext?.setOnNext(onNext); // needs to be updated here otherwise there could be stale state values from only initially setting onNext
+        stepsContext?.setOnPrevious(onPrevious);
       }
-    }, [stepsContext, stepNumber, disableSubmit, onNext]);
+    }, [stepsContext, stepNumber, disableSubmit, onNext, onPrevious]);
+
+    const renderDescription = () => {
+      if (description) {
+        if (typeof description === 'string') {
+          return <p className={`${blockClass}--description`}>{description}</p>;
+        }
+        if (isValidElement(description)) {
+          return (
+            <div className={`${blockClass}--description`}>{description}</div>
+          );
+        }
+      }
+      return null;
+    };
 
     return stepsContext ? (
       <Grid
@@ -109,9 +131,7 @@ export let CreateTearsheetStep = forwardRef(
             <h6 className={`${blockClass}--subtitle`}>{subtitle}</h6>
           )}
 
-          {description && (
-            <p className={`${blockClass}--description`}>{description}</p>
-          )}
+          {renderDescription()}
         </Column>
 
         <Column span={100}>
@@ -155,7 +175,7 @@ CreateTearsheetStep.propTypes = {
   /**
    * Sets an optional description on the step component
    */
-  description: PropTypes.string,
+  description: PropTypes.node,
 
   /**
    * This will conditionally disable the submit button in the multi step Tearsheet
@@ -196,11 +216,16 @@ CreateTearsheetStep.propTypes = {
   onMount: PropTypes.func,
 
   /**
-   * Optional function to be called on a step change.
+   * Optional function to be called when you move to the next step.
    * For example, this can be used to validate input fields before proceeding to the next step.
    * This function can _optionally_ return a promise that is either resolved or rejected and the CreateTearsheet will handle the submitting state of the next button.
    */
   onNext: PropTypes.func,
+
+  /**
+   * Optional function to be called when you move to the previous step.
+   */
+  onPrevious: PropTypes.func,
 
   /**
    * Sets the optional secondary label on the progress step component

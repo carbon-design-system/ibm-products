@@ -19,7 +19,8 @@ import { pkg } from '../../settings';
 // Carbon and package components we use.
 import { User, Group } from '@carbon/react/icons';
 
-import { IconButton } from '@carbon/react';
+import { Tooltip, usePrefix } from '@carbon/react';
+import { TooltipTrigger } from '../TooltipTrigger';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--user-profile-image`;
@@ -32,7 +33,7 @@ const defaults = {
   tooltipAlignment: 'bottom',
 };
 /**
- * This is a user profile image component which displays an image, or initials or icon for a user.
+ * The user profile avatar allows for an image of the user to be displayed by passing in the image prop. By default the component will display a user icon on a blue background.
  */
 export let UserProfileImage = React.forwardRef(
   (
@@ -53,6 +54,7 @@ export let UserProfileImage = React.forwardRef(
     },
     ref
   ) => {
+    const carbonPrefix = usePrefix();
     const icons = {
       user: {
         md: (props) => <User size={20} {...props} />,
@@ -142,14 +144,13 @@ export let UserProfileImage = React.forwardRef(
     return (
       FillItem &&
       (tooltipText ? (
-        <IconButton
-          label={tooltipText}
-          className={`${blockClass}__tooltip`}
-          kind="ghost"
+        <Tooltip
           align={tooltipAlignment}
+          label={tooltipText}
+          className={`${blockClass}__tooltip ${carbonPrefix}--icon-tooltip`}
         >
-          {renderUserProfileImage()}
-        </IconButton>
+          <TooltipTrigger>{renderUserProfileImage()}</TooltipTrigger>
+        </Tooltip>
       ) : (
         renderUserProfileImage()
       ))

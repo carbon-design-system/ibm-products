@@ -1,19 +1,19 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Add, OverflowMenuVertical } from '@carbon/react/icons';
 import {
   TableToolbar,
   TableBatchActions,
   TableBatchAction,
+  MenuButton,
+  MenuItem,
 } from '@carbon/react';
 import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
-import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
 
@@ -24,12 +24,14 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   const [initialListWidth, setInitialListWidth] = useState(null);
   const [receivedInitialWidth, setReceivedInitialWidth] = useState(false);
   const {
-    selectedFlatRows,
+    onSelectAllRows,
+    state: { selectedRowIds },
     toggleAllRowsSelected,
     toolbarBatchActions,
     setGlobalFilter,
+    rows,
   } = datagridState;
-  const totalSelected = selectedFlatRows && selectedFlatRows.length;
+  const totalSelected = Object.keys(selectedRowIds || {})?.length;
 
   // Get initial width of batch actions container,
   // used to measure when all items are put inside
@@ -55,6 +57,23 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     }
   }, [width, ref, initialListWidth]);
 
+  const getSelectedRowData = () => {
+    const selectedRowIndexes = Object.keys(selectedRowIds);
+    const selectedRowData =
+      selectedRowIndexes && selectedRowIndexes.length
+        ? selectedRowIndexes.map((rowIndex) => {
+            const filteredRow = rows.filter(
+              (row) => row.index === parseInt(rowIndex)
+            );
+            if (filteredRow.length) {
+              return filteredRow[0];
+            }
+            return [];
+          })
+        : [];
+    return selectedRowData;
+  };
+
   // Render batch actions in ButtonMenu
   const renderBatchActionOverflow = () => {
     const minWidthBeforeOverflowIcon = 380;
@@ -63,30 +82,25 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     if (toolbarBatchActions?.length <= 3 && !displayAllInMenu) {
       return null;
     }
+
     return (
-      <ButtonMenu
-        label={width > minWidthBeforeOverflowIcon ? 'More' : null}
-        renderIcon={
-          width > minWidthBeforeOverflowIcon ? Add : OverflowMenuVertical
-        }
+      <MenuButton
+        label="More"
         className={cx(`${blockClass}__button-menu`, {
           [`${blockClass}__button-menu--icon-only`]:
             width <= minWidthBeforeOverflowIcon,
         })}
-        menuOptionsClass={`${blockClass}__button-menu-options`}
-        flipped
-        menuAriaLabel={'Batch actions'}
       >
         {toolbarBatchActions &&
           toolbarBatchActions.map((batchAction, index) => {
             if (index < 2) {
               if (displayAllInMenu) {
                 return (
-                  <ButtonMenuItem
+                  <MenuItem
                     key={`${batchAction.label}-${index}`}
-                    itemText={batchAction.label}
-                    onClick={() => {
-                      batchAction.onClick();
+                    label={batchAction.label}
+                    onClick={(event) => {
+                      batchAction.onClick(getSelectedRowData(), event);
                       if (batchAction.type === 'select_all') {
                         toggleAllRowsSelected(true);
                       }
@@ -97,11 +111,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
               return null;
             }
             return (
-              <ButtonMenuItem
+              <MenuItem
                 key={`${batchAction.label}-${index}`}
-                itemText={batchAction.label}
-                onClick={() => {
-                  batchAction.onClick();
+                label={batchAction.label}
+                onClick={(event) => {
+                  batchAction.onClick(getSelectedRowData(), event);
                   if (batchAction.type === 'select_all') {
                     toggleAllRowsSelected(true);
                   }
@@ -109,7 +123,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
               />
             );
           })}
-      </ButtonMenu>
+      </MenuButton>
     );
   };
 
@@ -124,6 +138,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
         toggleAllRowsSelected(false);
         setGlobalFilter(null);
       }}
+      onSelectAll={() => {
+        toggleAllRowsSelected(true);
+        onSelectAllRows?.(true);
+      }}
+      totalCount={rows && rows.length}
     >
       {!displayAllInMenu &&
         toolbarBatchActions &&
@@ -136,8 +155,8 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
               <TableBatchAction
                 key={`${batchAction.label}-${index}`}
                 renderIcon={batchAction.renderIcon}
-                onClick={() => {
-                  batchAction.onClick();
+                onClick={(event) => {
+                  batchAction.onClick(getSelectedRowData(), event);
                   if (batchAction.type === 'select_all') {
                     toggleAllRowsSelected(true);
                   }

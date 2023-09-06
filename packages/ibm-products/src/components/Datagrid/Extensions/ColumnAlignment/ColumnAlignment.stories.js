@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,7 +20,7 @@ import {
   useColumnCenterAlign,
 } from '../../index';
 import styles from '../../_storybook-styles.scss';
-import mdx from '../../Datagrid.mdx';
+import { DocsPage } from './ColumnAlignment.docs-page';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
@@ -30,9 +30,11 @@ import { StatusIcon } from '../../../StatusIcon';
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/ColumnAlignment`,
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: { page: mdx },
+    docs: { page: DocsPage },
+    layout: 'fullscreen',
   },
 };
 

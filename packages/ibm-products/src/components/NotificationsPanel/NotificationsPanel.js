@@ -16,6 +16,7 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { useClickOutside } from '../../global/js/hooks';
 import { pkg } from '../../settings';
 import { timeAgo } from './utils';
+import { prepareProps } from '../../global/js/utils/props-helper';
 
 import { NotificationsEmptyState } from '../EmptyStates/NotificationsEmptyState';
 
@@ -346,6 +347,7 @@ export let NotificationsPanel = React.forwardRef(
                 <Link
                   href={notification.link.url}
                   className={`${blockClass}__notifications-link`}
+                  {...prepareProps({}, notification.link, ['text', 'url'])}
                 >
                   {notification.link.text}
                 </Link>
@@ -398,7 +400,7 @@ export let NotificationsPanel = React.forwardRef(
       >
         <div className={`${blockClass}__header-container`}>
           <div className={`${blockClass}__header-flex`}>
-            <h1 className={`${blockClass}__header`}>{title}</h1>
+            <h2 className={`${blockClass}__header`}>{title}</h2>
             <Button
               size="sm"
               kind="ghost"
@@ -408,17 +410,19 @@ export let NotificationsPanel = React.forwardRef(
               {dismissAllLabel}
             </Button>
           </div>
-          <Toggle
-            size="sm"
-            className={`${blockClass}__do-not-disturb-toggle`}
-            id={`${blockClass}__do-not-disturb-toggle-component`}
-            labelA={doNotDisturbLabel}
-            labelB={doNotDisturbLabel}
-            onToggle={(event) => onDoNotDisturbChange(event)}
-            defaultToggled={doNotDisturbDefaultToggled}
-            aria-label={doNotDisturbLabel}
-            labelText={doNotDisturbLabel}
-          />
+          {onDoNotDisturbChange && (
+            <Toggle
+              size="sm"
+              className={`${blockClass}__do-not-disturb-toggle`}
+              id={`${blockClass}__do-not-disturb-toggle-component`}
+              labelA={doNotDisturbLabel}
+              labelB={doNotDisturbLabel}
+              onToggle={(event) => onDoNotDisturbChange(event)}
+              defaultToggled={doNotDisturbDefaultToggled}
+              aria-label={doNotDisturbLabel}
+              labelText={doNotDisturbLabel}
+            />
+          )}
         </div>
         <div className={mainSectionClassName}>
           {withinLastDayNotifications && withinLastDayNotifications.length ? (
@@ -540,12 +544,12 @@ NotificationsPanel.propTypes = {
   dismissSingleNotificationIconDescription: PropTypes.string,
 
   /**
-   * Determines if the `Do not disturb` toggle is on or off when the component is rendered
+   * Optional: Determines if the `Do not disturb` toggle is on or off when the component is rendered
    */
   doNotDisturbDefaultToggled: PropTypes.bool,
 
   /**
-   * Label for Do not disturb toggle
+   * Optional: Label for Do not disturb toggle
    */
   doNotDisturbLabel: PropTypes.string,
 
@@ -605,7 +609,7 @@ NotificationsPanel.propTypes = {
   onDismissSingleNotification: PropTypes.func,
 
   /**
-   * Function that returns the current selected value of the disable notification toggle
+   * Optional: function that returns the current selected value of the disable notification toggle
    */
   onDoNotDisturbChange: PropTypes.func,
 

@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.8.0...@carbon/ibm-products@2.8.1) (2023-08-30)
+
+
+### Bug Fixes
+
+* **create-full-page:** add influencer title support ([#3399](https://github.com/carbon-design-system/ibm-products/issues/3399)) ([c2852f9](https://github.com/carbon-design-system/ibm-products/commit/c2852f9fafa295d2c33a82bf29585cd82b57fad4))
+* **Datagrid:** add firefox style fixes ([#3432](https://github.com/carbon-design-system/ibm-products/issues/3432)) ([3b79f8c](https://github.com/carbon-design-system/ibm-products/commit/3b79f8c08de6dff9df304bd5b0a7f433663eb846))
+* **Datagrid:** add text overflow styling to title/desc ([#3426](https://github.com/carbon-design-system/ibm-products/issues/3426)) ([0034e0e](https://github.com/carbon-design-system/ibm-products/commit/0034e0e63edec42e8b3bcf38d47f8a39e5019eea))
+* issue 3402 ([#3421](https://github.com/carbon-design-system/ibm-products/issues/3421)) ([2eb3181](https://github.com/carbon-design-system/ibm-products/commit/2eb3181b1ef6540c46d45e906612053c75d7e4ae))
+* some full screen docs pages ([#3419](https://github.com/carbon-design-system/ibm-products/issues/3419)) ([9a1faf9](https://github.com/carbon-design-system/ibm-products/commit/9a1faf9ea45ac0205a7f5d47e798ad547427a060))
+
+
+
+
+
 # [2.8.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.7.0...@carbon/ibm-products@2.8.0) (2023-08-29)
 
 

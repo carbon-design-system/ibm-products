@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { TYPES as tagTypes } from '../TagSet/constants';
 import { pkg } from '../../settings';
@@ -206,6 +206,44 @@ export const MultilineTags = prepareStory(Template, {
 export const HundredsOfTags = prepareStory(Template, {
   args: {
     tags: hundredsOfTags,
+    containerWidth: 500,
+    ...overflowAndModalStrings,
+  },
+});
+
+const TemplateWithClose = (argsIn) => {
+  const { containerWidth, allTagsModalTargetCustomDomNode, tags, ...args } = {
+    ...argsIn,
+  };
+  const [liveTags, setLiveTags] = useState(
+    tags.map((tag) => ({
+      ...tag,
+      filter: true,
+      onClose: () => handleTagClose(tag.label),
+    }))
+  );
+
+  const handleTagClose = (key) => {
+    setLiveTags((prev) => prev.filter((tag) => tag.label !== key));
+  };
+
+  const ref = useRef();
+  return (
+    <div style={{ width: containerWidth }} ref={ref}>
+      <TagSet
+        {...args}
+        tags={liveTags}
+        allTagsModalTarget={
+          allTagsModalTargetCustomDomNode ? ref.current : undefined
+        }
+      />
+    </div>
+  );
+};
+
+export const WithClose = prepareStory(TemplateWithClose, {
+  args: {
+    tags: manyTags,
     containerWidth: 500,
     ...overflowAndModalStrings,
   },

@@ -24,10 +24,13 @@ let FilterSummary = React.forwardRef(
     },
     ref
   ) => {
-    const tagFilters = filters.map(({ key, value }) => ({
-      type: 'gray',
-      label: renderLabel?.(key, value) ?? `${key}: ${value}`,
-    }));
+    const tagFilters = filters.map(({ key, value, ...rest }) => {
+      return {
+        ...rest,
+        type: 'gray',
+        label: renderLabel?.(key, value) ?? `${key}: ${value}`,
+      };
+    });
 
     return (
       <div ref={ref} className={cx([blockClass, className])}>

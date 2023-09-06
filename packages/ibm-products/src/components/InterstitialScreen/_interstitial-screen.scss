@@ -132,6 +132,7 @@
       }
 
       &.has-title {
+        border-bottom: 1px solid $ui-03;
         background: $ui-01;
 
         #{$block}--progress {

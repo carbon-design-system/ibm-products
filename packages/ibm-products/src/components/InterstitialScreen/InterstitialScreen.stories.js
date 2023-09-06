@@ -341,7 +341,7 @@ export const interstitialScreenModalMultiplesHeader = prepareStory(
   {
     storyName: 'Modal, multi-step with title & image',
     args: {
-      ...defaultProps,
+      ...defaultPropsImage,
       hideProgressIndicator: false,
       headerTitle: 'Use case-specific title',
       children: (

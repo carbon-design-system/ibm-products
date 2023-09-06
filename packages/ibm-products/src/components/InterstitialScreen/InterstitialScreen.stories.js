@@ -20,7 +20,7 @@ import {
   HowACaseIsCreated1,
   HowACaseIsCreated2,
   HowACaseIsCreated3,
-  InterstitialExampleImgG10,
+  InterstitialExampleImg,
 } from './assets';
 import styles from './_storybook-styles.scss';
 
@@ -51,7 +51,7 @@ const getSelectedMedia = (media) => {
             style={{
               width: '100%',
               height: '100%',
-              background: `center center / contain no-repeat url(${InterstitialExampleImgG10}) `,
+              background: `center center / contain no-repeat url(${InterstitialExampleImg}) `,
             }}
           />
         ),

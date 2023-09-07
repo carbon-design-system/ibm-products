@@ -115,14 +115,14 @@ $tearsheet-fieldset-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit__form--fi
 
 .#{$block-class} .#{$block-class}__section--subtitle,
 .#{$block-class} .#{$block-class}__form--subtitle {
-  @include type.type-style('productive-heading-01');
+  @include type.type-style('heading-compact-01');
 
   margin-bottom: $spacing-03;
 }
 
 .#{$block-class} .#{$block-class}__section--description,
 .#{$block-class} .#{$block-class}__form--description {
-  @include type.type-style('body-long-01');
+  @include type.type-style('body-01');
 
   margin-bottom: $spacing-06;
 }

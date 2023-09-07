@@ -6,13 +6,12 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 import { pkg, carbon } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 
 import { EditSidePanel } from '.';
-import { act } from 'react-dom/test-utils';
 
 const blockClass = `${pkg.prefix}--edit-side-panel`;
 const componentName = EditSidePanel.displayName;
@@ -67,45 +66,43 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('renders a component EditSidePanel', () => {
+  it('renders a component EditSidePanel', async () => {
     renderEditPanel();
     expect(screen.getByRole('complementary')).toHaveClass(blockClass);
   });
 
   it('has no accessibility violations', async () => {
     const { container } = renderEditPanel();
-    await act(async () => {
-      await expect(container).toBeAccessible(componentName);
-      await expect(container).toHaveNoAxeViolations();
-    });
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, () => {
+  it('renders children', async () => {
     renderEditPanel();
     screen.getByText(childrenContent);
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     renderEditPanel({
       className,
     });
     expect(screen.getByRole('complementary')).toHaveClass(className);
   });
 
-  it('adds additional props to the containing node', () => {
+  it('adds additional props to the containing node', async () => {
     renderEditPanel({
       'data-testid': dataTestId,
     });
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     renderEditPanel({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     renderEditPanel({
       'data-testid': dataTestId,
     });
@@ -115,11 +112,11 @@ describe(componentName, () => {
     );
   });
 
-  it('clicks on the primary action button', () => {
+  it('clicks on the primary action button', async () => {
     const { click } = userEvent;
     renderEditPanel();
     const primaryActionButton = screen.getByText(primaryButtonText);
-    click(primaryActionButton);
+    await act(() => click(primaryActionButton));
     expect(onRequestSubmitFn).toHaveBeenCalledTimes(1);
   });
 });

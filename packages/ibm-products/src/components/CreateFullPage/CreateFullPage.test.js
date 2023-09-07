@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, waitFor, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 import { pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -171,18 +171,20 @@ const renderFullPageWithStepChildrenOutside = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
+  // Currently fails due to https://github.com/carbon-design-system/carbon/issues/14135 regarding focusable button
   it.skip('has no accessibility violations', async () => {
     const { container } = renderComponent({ ...defaultFullPageProps });
-    await expect(container).toBeAccessible(componentName, 'scan_label');
-    await expect(container).toHaveNoAxeViolations();
+
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     renderCreateFullPage({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     renderCreateFullPage({ 'data-testid': dataTestId });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -190,8 +192,10 @@ describe(componentName, () => {
     );
   });
 
-  it('renders the CreateFullPage component', () => {
-    const { container } = renderCreateFullPage({ ...defaultFullPageProps });
+  it('renders the CreateFullPage component', async () => {
+    const { container } = renderCreateFullPage({
+      ...defaultFullPageProps,
+    });
     expect(container.querySelector(`.${blockClass}`)).toBeTruthy();
   });
 
@@ -234,7 +238,7 @@ describe(componentName, () => {
       }
     ));
 
-  it('should not render any CreateFullPage steps when there are no FullPageStep components included', () => {
+  it('should not render any CreateFullPage steps when there are no FullPageStep components included', async () => {
     const { container } = renderEmptyCreateFullPage({
       ...defaultFullPageProps,
     });
@@ -244,7 +248,7 @@ describe(componentName, () => {
     expect(Array(...createFullPageSteps)).toStrictEqual([]);
   });
 
-  it('should create a console warning when using CreateFullPage with only one step', () =>
+  it('should create a console warning when using CreateFullPage with only one step', async () =>
     expectWarn('CreateFullPages with one step are not permitted', () => {
       const { container } = renderOneStepCreateFullPage(defaultFullPageProps);
       expect(() => {
@@ -252,7 +256,7 @@ describe(componentName, () => {
       }).toThrow();
     }));
 
-  it('throws a console warning when FullPageStep is used outside of CreateFullPage', () =>
+  it('throws a console warning when FullPageStep is used outside of CreateFullPage', async () =>
     expectMultipleWarn(
       [
         `You have tried using a ${componentName}Step component outside of a ${componentName}. This is not allowed. ${componentName}Steps should always be children of the ${componentName}`,
@@ -271,7 +275,7 @@ describe(componentName, () => {
     const { click } = userEvent;
     const { container } = renderCreateFullPage(defaultFullPageProps);
     const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
+    await act(() => click(nextButtonElement));
     const createFullPageSteps = container.querySelector(
       `.${blockClass}__content`
     ).children;
@@ -290,14 +294,14 @@ describe(componentName, () => {
     const { click } = userEvent;
     const { container, rerender } = renderCreateFullPage(defaultFullPageProps);
     const cancelButtonElement = screen.getByText(cancelButtonText);
-    click(cancelButtonElement);
+    await act(() => click(cancelButtonElement));
     const createFullPageModal = container.querySelector(
       `.${blockClass}__modal`
     );
     expect(container.classList.contains(createFullPageModal));
     const modalCancelButtonElement = screen.getByText(modalDangerButtonText);
     const modalReturnButtonElement = screen.getByText(modalSecondaryButtonText);
-    click(modalCancelButtonElement);
+    await act(() => click(modalCancelButtonElement));
     expect(onCloseFn).toHaveBeenCalled();
 
     rerender(
@@ -329,7 +333,7 @@ describe(componentName, () => {
         </CreateFullPageStep>
       </CreateFullPage>
     );
-    click(modalReturnButtonElement);
+    await act(() => click(modalReturnButtonElement));
     expect(container.querySelector(`.${blockClass}`)).toBeTruthy();
   });
 
@@ -344,16 +348,16 @@ describe(componentName, () => {
       finalOnNextFn: null,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
+    await act(() => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
-    click(nextButtonElement);
+    await act(() => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
     const submitButtonElement = screen.getByText(submitButtonText);
-    click(submitButtonElement);
+    await act(() => click(submitButtonElement));
     await waitFor(() => {
       expect(onRequestSubmitFn).toHaveBeenCalled();
     });
@@ -370,16 +374,16 @@ describe(componentName, () => {
       finalOnNextFn: finalStepOnNextNonPromise,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
+    await act(() => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepNonPromiseFn).toHaveBeenCalled();
     });
-    click(nextButtonElement);
+    await act(() => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepNonPromiseFn).toHaveBeenCalled();
     });
     const submitButtonElement = screen.getByText(submitButtonText);
-    click(submitButtonElement);
+    await act(() => click(submitButtonElement));
     await waitFor(() => {
       expect(onRequestSubmitNonPromiseFn).toHaveBeenCalled();
     });
@@ -400,16 +404,16 @@ describe(componentName, () => {
           rejectOnSubmitNext: true,
         });
         const nextButtonElement = screen.getByText(nextButtonText);
-        click(nextButtonElement);
+        await act(() => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
-        click(nextButtonElement);
+        await act(() => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
         const submitButtonElement = screen.getByText(submitButtonText);
-        click(submitButtonElement);
+        await act(() => click(submitButtonElement));
         await waitFor(() => {
           expect(finalStepOnNextRejectFn).toHaveBeenCalled();
         });
@@ -426,16 +430,16 @@ describe(componentName, () => {
           rejectOnSubmit: true,
         });
         const nextButtonElement = screen.getByText(nextButtonText);
-        click(nextButtonElement);
+        await act(() => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
-        click(nextButtonElement);
+        await act(() => click(nextButtonElement));
         await waitFor(() => {
           expect(onNextStepFn).toHaveBeenCalled();
         });
         const submitButtonElement = screen.getByText(submitButtonText);
-        click(submitButtonElement);
+        await act(() => click(submitButtonElement));
         await waitFor(() => {
           expect(onRequestSubmitRejectFn).toHaveBeenCalled();
         });
@@ -467,7 +471,7 @@ describe(componentName, () => {
       </CreateFullPage>
     );
     const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
+    await act(() => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
@@ -483,12 +487,12 @@ describe(componentName, () => {
       rejectOnNext: false,
     });
     const nextButtonElement = screen.getByText(nextButtonText);
-    click(nextButtonElement);
+    await act(() => click(nextButtonElement));
     await waitFor(() => {
       expect(onNextStepFn).toHaveBeenCalled();
     });
     const backButtonElement = screen.getByText(backButtonText);
-    click(backButtonElement);
+    await act(() => click(backButtonElement));
     const fullPageChildren = container.querySelector(
       `.${blockClass}__form`
     ).children;
@@ -499,8 +503,10 @@ describe(componentName, () => {
     );
   });
 
-  it('should render a fieldset element around FullPageStep children when `hasFieldset` prop is provided', () => {
-    const { container } = renderCreateFullPage({ ...defaultFullPageProps });
+  it('should render a fieldset element around FullPageStep children when `hasFieldset` prop is provided', async () => {
+    const { container } = renderCreateFullPage({
+      ...defaultFullPageProps,
+    });
     const createFullPageSteps = container.querySelector(
       `.${blockClass}__content`
     ).children;

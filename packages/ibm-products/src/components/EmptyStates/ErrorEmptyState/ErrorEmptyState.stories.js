@@ -8,23 +8,38 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/react/icons';
-import mdx from './ErrorEmptyState.mdx';
+// import mdx from './ErrorEmptyState.mdx';
 import {
   getStoryTitle,
   prepareStory,
 } from '../../../global/js/utils/story-helper';
 
 import { ErrorEmptyState } from '.';
+import { StoryDocsPage } from '../../../global/js/utils/StoryDocsPage';
 
 // import styles from '../_index.scss';
 
 export default {
   title: getStoryTitle(ErrorEmptyState.displayName),
   component: ErrorEmptyState,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     docs: {
-      page: mdx,
+      page: () => (
+        <StoryDocsPage
+          altGuidelinesHref={[
+            {
+              href: 'https://pages.github.ibm.com/cdai-design/pal/patterns/empty-state/usage',
+              label: 'Error pattern usage guidelines',
+            },
+            {
+              href: 'https://www.carbondesignsystem.com/patterns/empty-states-pattern/',
+              label: 'Carbon empty pattern usage guidelines',
+            },
+          ]}
+        />
+      ),
     },
   },
 };

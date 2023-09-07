@@ -1,19 +1,15 @@
-/* eslint-disable react/default-props-match-prop-types */
-// @flow
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2021
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2021, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { RadioButtonGroup, RadioButton } from '@carbon/react';
 import isArray from 'lodash/isArray';
 import { pkg } from '../../../../../settings';
-import { useClickOutside } from '../../../../../global/js/hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -22,7 +18,6 @@ const RowSizeRadioGroup = ({
   selectedOption,
   datagridName,
   onChange,
-  hideRadioGroup,
   legendText,
   rowSizeLabels = {
     xl: 'Extra large',
@@ -32,18 +27,8 @@ const RowSizeRadioGroup = ({
     xs: 'Extra small',
   },
 }) => {
-  const popoverContentRef = useRef();
-
-  useClickOutside(popoverContentRef, (target) => {
-    if (target.closest(`.${blockClass}__row-size-button`)) {
-      return;
-    }
-    hideRadioGroup();
-  });
-
   return (
     <div
-      ref={popoverContentRef}
       className={`${blockClass}__row-size-dropdown`}
       role="presentation"
       onClick={(e) => {
@@ -117,7 +102,6 @@ RowSizeRadioGroup.defaultProps = {
 
 RowSizeRadioGroup.propTypes = {
   datagridName: PropTypes.string,
-  hideRadioGroup: PropTypes.func.isRequired,
   legendText: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   rowSizeLabels: PropTypes.object,

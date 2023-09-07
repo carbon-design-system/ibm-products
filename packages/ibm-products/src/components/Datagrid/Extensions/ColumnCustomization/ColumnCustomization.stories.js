@@ -22,7 +22,7 @@ import {
   useActionsColumn,
 } from '../../index';
 import styles from '../../_storybook-styles.scss';
-import mdx from '../../Datagrid.mdx';
+import { DocsPage } from './ColumnCustomization.docs-page';
 import { DatagridActions } from '../../utils/DatagridActions';
 import { DatagridPagination } from '../../utils/DatagridPagination';
 import { makeData } from '../../utils/makeData';
@@ -35,9 +35,11 @@ export default {
     Datagrid.displayName
   )}/Extensions/ColumnCustomization`,
   component: Datagrid,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: { page: mdx },
+    docs: { page: DocsPage },
+    layout: 'fullscreen',
   },
   argTypes: {
     featureFlags: {

@@ -6,10 +6,9 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, renderHook, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Code, Copy } from '@carbon/react/icons';
-import { act, renderHook } from '@testing-library/react-hooks';
 
 import { pkg } from '../../settings';
 
@@ -21,6 +20,7 @@ import {
   WebTerminalContentWrapper,
   useWebTerminal,
 } from './index';
+import { componentName } from '../Toolbar/Toolbar';
 
 const blockClass = `${pkg.prefix}--web-terminal`;
 const name = WebTerminal.displayName;
@@ -45,7 +45,7 @@ const MockWebTerminal = React.forwardRef(
 );
 
 describe(name, () => {
-  it('Renders the component `WebTerminal` if flag is enabled', () => {
+  it('Renders the component `WebTerminal` if flag is enabled', async () => {
     const { container } = render(
       <MockWebTerminal>Body content</MockWebTerminal>
     );
@@ -58,15 +58,16 @@ describe(name, () => {
     is a potential violation. We can remove the skip once we fix our accessibility-checker
     issue. https://github.com/carbon-design-system/ibm-products/issues/2154
   */
-  it.skip('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(
       <MockWebTerminal isInitiallyOpen>Body content</MockWebTerminal>
     );
 
-    await expect(container).toBeAccessible();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  test('should attach a custom class to the web terminal', () => {
+  it('should attach a custom class to the web terminal', async () => {
     const testClassName = 'test-class-name';
     const { container } = render(
       <MockWebTerminal isInitiallyOpen className={testClassName}>
@@ -76,12 +77,12 @@ describe(name, () => {
     expect(container.querySelector(`.${testClassName}`)).not.toBeNull();
   });
 
-  it('should render child element content', () => {
+  it('should render child element content', async () => {
     render(<MockWebTerminal>Body content</MockWebTerminal>);
     expect(screen.getByText(/Body content/i)).toBeInTheDocument();
   });
 
-  it('custom hook should toggle web terminal', () => {
+  it('custom hook should toggle web terminal', async () => {
     /**  Utilizing renderHook so jest knows about the custom hook and passing
          in the WebTerminalProvider so that the hook can consume the value  */
     const { result } = renderHook(() => useWebTerminal(), {
@@ -105,7 +106,7 @@ describe(name, () => {
     expect(result.current.open).toBe(false);
   });
 
-  it('custom hook should open and close web terminal', () => {
+  it('custom hook should open and close web terminal', async () => {
     /**  Utilizing renderHook so jest knows about the custom hook and passing
          in the WebTerminalProvider so that the hook can consume the value  */
     const { result } = renderHook(() => useWebTerminal(), {
@@ -136,7 +137,7 @@ describe(name, () => {
     expect(result.current.open).toBe(false);
   });
 
-  it('should render documentation link text', () => {
+  it('should render documentation link text', async () => {
     const overflowLabel = 'Show documentation links';
     render(
       <MockWebTerminal documentationLinks={documentationLinks}>
@@ -144,13 +145,13 @@ describe(name, () => {
       </MockWebTerminal>
     );
     const { click } = userEvent;
-    click(screen.getByRole('button', { name: overflowLabel }));
+    await act(() => click(screen.getByRole('button', { name: overflowLabel })));
     documentationLinks.forEach((link) => {
       screen.getByText(link.itemText);
     });
   });
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     const { container } = render(
       <MockWebTerminal data-testid={dataTestId}>Body content</MockWebTerminal>
     );
@@ -170,7 +171,7 @@ describe(name, () => {
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
   });
 
-  it('should call the animationEnd event', () => {
+  it('should call the animationEnd event', async () => {
     const { container } = render(
       <div data-testid="container-id">
         <MockWebTerminal isInitiallyOpen closeIconDescription="Close terminal">
@@ -182,14 +183,14 @@ describe(name, () => {
     const closeButton = screen.getByRole('button', {
       name: /close terminal/i,
     });
-    userEvent.click(closeButton);
+    await act(() => userEvent.click(closeButton));
 
     const outerElement = container.querySelector(`.${blockClass}`);
 
     expect(outerElement).toBeNull();
   });
 
-  it('should render action icon buttons', () => {
+  it('should render action icon buttons', async () => {
     const { click } = userEvent;
     const deploymentButtonFn = jest.fn();
     const copyLogsButtonFn = jest.fn();
@@ -213,14 +214,14 @@ describe(name, () => {
       </MockWebTerminal>
     );
 
-    click(screen.getByLabelText(/Create new deployment/i));
+    await act(() => click(screen.getByLabelText(/Create new deployment/i)));
     expect(deploymentButtonFn).toHaveBeenCalledTimes(1);
 
-    click(screen.getByRole('button', { name: /Copy logs/i }));
+    await act(() => click(screen.getByRole('button', { name: /Copy logs/i })));
     expect(copyLogsButtonFn).toHaveBeenCalledTimes(1);
   });
 
-  it('should render the close icon description prop', () => {
+  it('should render the close icon description prop', async () => {
     render(
       <MockWebTerminal
         isInitiallyOpen
@@ -233,7 +234,7 @@ describe(name, () => {
     expect(screen.getByText(/close web terminal/i)).toBeInTheDocument();
   });
 
-  it('content wrapper should pass children', () => {
+  it('content wrapper should pass children', async () => {
     render(
       <WebTerminalProvider>
         <WebTerminalContentWrapper>body content</WebTerminalContentWrapper>
@@ -299,7 +300,7 @@ describe(name, () => {
     expect(contentWrapperWidth).toBe(windowWidth - webTerminalWidth);
   });
 
-  it('should reduce motion', () => {
+  it('should reduce motion', async () => {
     let prefersReducedMotion = false;
     Object.defineProperty(window, 'matchMedia', {
       writable: true,

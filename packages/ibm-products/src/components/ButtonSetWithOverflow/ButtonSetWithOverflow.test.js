@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { ButtonSetWithOverflow } from '.';
@@ -20,10 +20,11 @@ const buttons = (handleClick) =>
     iconDescription: !(num % 3) ? 'Busy bee' : null,
     label: `Action ${num}`,
     key: `key-${num}`,
-    kind: num === 1 ? 'primary' : num === 2 ? 'secondary' : 'danger',
+    kind: 'default',
     onClick: () => {
       handleClick(`Action ${num}`);
     },
+    className: 'button-class-test',
   }));
 
 import { pkg } from '../../settings';
@@ -63,7 +64,7 @@ describe(ButtonSetWithOverflow.displayName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('Works with button shape array', () => {
+  it('Works with button shape array', async () => {
     window.innerWidth = buttonWidth * 3.5;
 
     const myOnClick = jest.fn();
@@ -76,20 +77,20 @@ describe(ButtonSetWithOverflow.displayName, () => {
     );
 
     const action1 = screen.getByText(/Action 1/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container--visible .${carbon.prefix}--btn`,
     });
     screen.getByText(/Action 2/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container--visible .${carbon.prefix}--btn`,
     });
     screen.getByText(/Action 3/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container--visible .${carbon.prefix}--btn`,
     });
 
-    userEvent.click(action1);
+    await act(() => userEvent.click(action1));
     expect(myOnClick).toBeCalled();
   });
 
-  it('Renders as ComboButton when not enough space', () => {
+  it('Renders as ComboButton when not enough space', async () => {
     window.innerWidth = buttonWidth * 2.5;
 
     const myOnClick = jest.fn();
@@ -103,24 +104,24 @@ describe(ButtonSetWithOverflow.displayName, () => {
     );
 
     const action1 = screen.queryByText(/Action 1/, {
-      selector: `.${blockClass}__button-container:not(.${blockClass}__button-container--hidden) .${carbon.prefix}--btn`,
+      selector: `.${blockClass}__button-container--visible .${pkg.prefix}--menu-button__trigger`,
     });
     expect(action1).toBeNull();
 
-    const comboButton = screen.getByText(/button menu label/, {
-      selector: `.${blockClass}__button-container--hidden .${carbon.prefix}--overflow-menu .${carbon.prefix}--btn`,
+    const comboButton = screen.getByText(buttonMenuLabel, {
+      selector: `.${pkg.prefix}--button-set-with-overflow__button-container.${pkg.prefix}--button-set-with-overflow__button-container--visible button`,
     });
-    userEvent.click(comboButton);
+    await act(() => userEvent.click(comboButton));
 
     const action1a = screen.getByText(/Action 1/, {
-      selector: `.${carbon.prefix}--overflow-menu-options__option-content`,
+      selector: `.button-class-test .${carbon.prefix}--menu-item__label`,
     });
 
-    userEvent.click(action1a);
+    await act(() => userEvent.click(action1a));
     expect(myOnClick).toBeCalled();
   });
 
-  it('Applies right align class when requested', () => {
+  it('Applies right align class when requested', async () => {
     window.innerWidth = buttonWidth * 3.5;
     const myOnClick = jest.fn();
 

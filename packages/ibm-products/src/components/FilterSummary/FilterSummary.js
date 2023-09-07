@@ -20,13 +20,17 @@ let FilterSummary = React.forwardRef(
       clearFiltersText = 'Clear filters',
       clearFilters = () => {},
       filters = [],
+      renderLabel = null,
     },
     ref
   ) => {
-    const tagFilters = filters.map(({ key, value }) => ({
-      type: 'gray',
-      label: `${key}: ${value}`,
-    }));
+    const tagFilters = filters.map(({ key, value, ...rest }) => {
+      return {
+        ...rest,
+        type: 'gray',
+        label: renderLabel?.(key, value) ?? `${key}: ${value}`,
+      };
+    });
 
     return (
       <div ref={ref} className={cx([blockClass, className])}>
@@ -53,6 +57,7 @@ FilterSummary.propTypes = {
   clearFilters: PropTypes.func.isRequired,
   clearFiltersText: PropTypes.string,
   filters: PropTypes.arrayOf(PropTypes.object).isRequired,
+  renderLabel: PropTypes.func,
 };
 
 export default FilterSummary;

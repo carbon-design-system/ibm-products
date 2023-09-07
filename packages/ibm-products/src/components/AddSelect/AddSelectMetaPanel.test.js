@@ -35,11 +35,11 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('renders', () => {
+  it('renders', async () => {
     render(<AddSelectMetaPanel {...defaultProps} />);
   });
 
-  it('renders without html', () => {
+  it('renders without html', async () => {
     const entry = {
       id: 'test-id',
       title: 'test title',
@@ -58,7 +58,7 @@ describe(componentName, () => {
     ).toBe('test value');
   });
 
-  it('renders with html', () => {
+  it('renders with html', async () => {
     const meta = (
       <div className={`${blockClass}-entry`}>
         <p className={`${blockClass}-entry-title`}>html title</p>
@@ -78,7 +78,7 @@ describe(componentName, () => {
     ).toBe('html value');
   });
 
-  it('triggers the onCloseHandler', () => {
+  it('triggers the onCloseHandler', async () => {
     const setDisplayMetaPanel = jest.fn();
     const newProps = {
       ...defaultProps,

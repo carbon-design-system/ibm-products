@@ -18,7 +18,7 @@ import { pkg } from '../../settings';
 const blockClass = `${pkg.prefix}--create-influencer`;
 const componentName = 'CreateInfluencer';
 
-export let CreateInfluencer = ({ className, currentStep, stepData }) => {
+export let CreateInfluencer = ({ className, currentStep, stepData, title }) => {
   const getNumberOfDynamicStepsBeforeCurrentStep = (array, key) => {
     const dynamicSteps = [];
     array.forEach((item, index) => {
@@ -45,6 +45,7 @@ export let CreateInfluencer = ({ className, currentStep, stepData }) => {
 
     return (
       <div className={`${blockClass}__left-nav`}>
+        {title && <h3 className={`${blockClass}__title`}>{title}</h3>}
         {currentStep === 1 && stepData[0]?.introStep ? null : (
           <ProgressIndicator
             currentIndex={
@@ -101,4 +102,9 @@ CreateInfluencer.propTypes = {
       title: PropTypes.node,
     })
   ),
+
+  /**
+   * The main title of the full page, displayed in the influencer area.
+   */
+  title: PropTypes.string,
 };

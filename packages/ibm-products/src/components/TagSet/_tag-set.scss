@@ -145,7 +145,7 @@ $block-class-modal: #{$_block-class}-modal;
 
   .#{$block-class-overflow}__tag-item,
   .#{$block-class-overflow}__tag-item .#{$carbon-prefix}--tag {
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
 
     display: block;
     overflow: hidden;

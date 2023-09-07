@@ -56,7 +56,7 @@ $header-cell-background: $layer-accent-01;
 
   .#{$block-class}__th,
   .#{$block-class}__td {
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
 
     width: 100%;
     height: 100%;
@@ -117,13 +117,13 @@ $header-cell-background: $layer-accent-01;
     text-align: left;
   }
   .#{$block-class}__th {
-    @include type.type-style('productive-heading-01');
+    @include type.type-style('heading-compact-01');
 
     color: $text-primary;
     text-align: left;
   }
   .#{$block-class}__cell-editor {
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
     @include utilities.focus-outline('reset');
 
     position: absolute;
@@ -151,7 +151,7 @@ $header-cell-background: $layer-accent-01;
     }
   }
   .#{$block-class}__cell-editor-ruler {
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
 
     position: absolute;
     overflow: hidden;
@@ -167,7 +167,7 @@ $header-cell-background: $layer-accent-01;
     }
   }
   .#{$block-class}__active-cell--highlight {
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
     @include set-body-borders();
 
     position: absolute;

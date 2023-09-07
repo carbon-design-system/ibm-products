@@ -13,6 +13,7 @@ const blockClass = `${pkg.prefix}--create-influencer`;
 
 const renderComponent = ({ ...rest } = {}) =>
   render(<CreateInfluencer {...rest} />);
+
 describe(CreateInfluencer.displayName, () => {
   beforeEach(() => {
     jest.useFakeTimers();
@@ -22,7 +23,7 @@ describe(CreateInfluencer.displayName, () => {
     jest.useRealTimers();
   });
 
-  it('renders the CreateInfluencer component', () => {
+  it('renders the CreateInfluencer component', async () => {
     const { container } = renderComponent({
       stepData: [
         {
@@ -37,7 +38,7 @@ describe(CreateInfluencer.displayName, () => {
     });
     expect(container.firstChild).toHaveClass(blockClass);
   });
-  it('renders nothing inside of the influencer when an intro step is provided', () => {
+  it('renders nothing inside of the influencer when an intro step is provided', async () => {
     const influencerClass = `${blockClass}__left-nav`;
     const step1Title = 'Step 1 title';
     const step2Title = 'Step 2 title';
@@ -84,5 +85,29 @@ describe(CreateInfluencer.displayName, () => {
       currentStep: 2,
     });
     screen.getByText(step1Title);
+  });
+  it('renders the influencer title if the "title" prop is provided', async () => {
+    const { container } = renderComponent({
+      stepData: [{ title: 'Step 1' }, { title: 'Step 2' }],
+      title: 'Create asset',
+      className: 'some-test-class-name',
+      currentStep: 1,
+    });
+    expect(
+      container.querySelector(`.${blockClass}__title`)
+    ).toBeInTheDocument();
+    expect(container.querySelector(`.${blockClass}__title`)).toHaveTextContent(
+      'Create asset'
+    );
+  });
+  it("doesn't renders the influencer title if the 'title' prop is not provided", async () => {
+    const { container } = renderComponent({
+      stepData: [{ title: 'Step 1' }, { title: 'Step 2' }],
+      className: 'some-test-class-name',
+      currentStep: 1,
+    });
+    expect(
+      container.querySelector(`.${blockClass}__title`)
+    ).not.toBeInTheDocument();
   });
 });

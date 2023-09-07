@@ -5,9 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../../global/styles/project-settings' as c4p-settings;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/spacing';
+@use '../../global/decorators/side-panel-decorator' as *;
 
 $block-class: #{c4p-settings.$pkg-prefix}--create-side-panel;
 $story-prefix: create-side-panel-stories__;
@@ -27,3 +28,5 @@ $story-prefix: create-side-panel-stories__;
 .#{$block-class} .#{c4p-settings.$carbon-prefix}--number__control-btn::after {
   background-color: $field-02;
 }
+
+@include side-panel-decorator($story-prefix);

@@ -39,13 +39,14 @@ import {
 
 import styles from './_storybook-styles.scss';
 
-import mdx from './Tearsheet.mdx';
+// import mdx from './Tearsheet.mdx';
 
 export default {
   title: getStoryTitle(Tearsheet.displayName),
   component: Tearsheet,
+  tags: ['autodocs'],
   subcomponents: { TearsheetNarrow },
-  parameters: { styles, docs: { page: mdx } },
+  parameters: { styles /* docs: { page: mdx } */, layout: 'fullscreen' },
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),
     actions: {
@@ -134,8 +135,7 @@ const mainContent = (
         />
         <TextInput
           id="tss-ft2"
-          light
-          labelText="Here is a light entry field:"
+          labelText="Here is an entry field:"
           style={
             // stylelint-disable-next-line carbon/layout-token-use
             { marginBottom: '1em' }
@@ -254,6 +254,7 @@ const StackedTemplate = ({ actions, ...args }) => {
   return (
     <>
       <style>{`.${pkg.prefix}--tearsheet { opacity: 0 }`};</style>
+      <div style={{ height: '3rem' }} data-reserve-space="for toggle buttons" />
       <ButtonSet
         style={{
           display: 'flex',
@@ -263,9 +264,15 @@ const StackedTemplate = ({ actions, ...args }) => {
           zIndex: 10000,
         }}
       >
-        <Button onClick={() => setOpen1(!open1)}>Toggle tearsheet 1</Button>
-        <Button onClick={() => setOpen2(!open2)}>Toggle tearsheet 2</Button>
-        <Button onClick={() => setOpen3(!open3)}>Toggle tearsheet 3</Button>
+        <Button onClick={() => setOpen1(!open1)}>
+          Toggle&nbsp;tearsheet&nbsp;1
+        </Button>
+        <Button onClick={() => setOpen2(!open2)}>
+          Toggle&nbsp;tearsheet&nbsp;2
+        </Button>
+        <Button onClick={() => setOpen3(!open3)}>
+          Toggle&nbsp;tearsheet&nbsp;3
+        </Button>
       </ButtonSet>
       <div ref={ref}>
         <Tearsheet

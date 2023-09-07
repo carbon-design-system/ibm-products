@@ -16,7 +16,6 @@ import { CreateFullPageStep } from '../CreateFullPage/CreateFullPageStep';
 import { pkg } from '../../settings';
 
 import { EditFullPage } from '.';
-import mdx from './EditFullPage.mdx';
 
 import styles from '../CreateFullPage/_storybook-styles.scss';
 
@@ -36,15 +35,17 @@ import {
   Grid,
   DefinitionTooltip,
 } from '@carbon/react';
+import DocsPage from './EditFullPage.docs-page';
 
 export default {
   title: getStoryTitle(EditFullPage.displayName),
-  component: CreateFullPage,
+  component: EditFullPage,
+  tags: ['autodocs'],
   subcomponents: { CreateFullPageStep },
   parameters: {
     styles,
     layout: 'fullscreen',
-    docs: { page: mdx },
+    docs: { page: DocsPage },
     controls: { sort: 'requiredFirst' },
   },
   decorators: [

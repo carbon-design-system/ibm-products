@@ -9,14 +9,14 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/type/scss/font-family';
 
-@use '../../global/styles/project-settings' as c4p-settings;
+@use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 
 // TODO: add any additional styles used by EditTearsheet.stories.js
 
 $preview-block-class: #{c4p-settings.$pkg-prefix}--tearsheet-edit-multi-form;
 
 .#{$preview-block-class}__description {
-  @include type.type-style('body-short-01');
+  @include type.type-style('body-compact-01');
 
   padding-bottom: $spacing-04;
 }

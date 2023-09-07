@@ -55,7 +55,7 @@ describe(name, () => {
 
   for (const key in components) {
     if (key.charAt(0) === key.charAt(0).toUpperCase()) {
-      it(`Does not render a canary for "${key}" if package flags set to enable`, () => {
+      it(`Does not render a canary for "${key}" if package flags set to enable`, async () => {
         const TestComponent = components[key];
         let elementContainer;
 

@@ -14,21 +14,22 @@ import {
 } from '../../global/js/utils/story-helper';
 
 import { ExampleComponent } from '.';
-import mdx from './ExampleComponent.mdx';
 import { pkg } from '../../settings';
+// import DocsPage from './ExampleComponent.docs-page';
 
 // import styles from './_storybook-styles.scss';
 
 export default {
   title: getStoryTitle(ExampleComponent.displayName),
   component: ExampleComponent,
+  tags: ['autodocs'],
   argTypes: {
     borderColor: { control: 'color' },
   },
   parameters: {
     // styles,
     docs: {
-      page: mdx,
+      // page:  DocsPage, // OPTIONAL: required only to customize default docs page
     },
   },
 };
@@ -57,11 +58,11 @@ export const exampleComponent = prepareStory(Template, {
   args: {},
 });
 
-export const boxedSet = prepareStory(Template, {
+export const borderedSet = prepareStory(Template, {
   args: {
     ...exampleComponent.args,
     borderColor: '#141414',
-    boxedBorder: true,
+    borderType: 'box',
   },
 });
 

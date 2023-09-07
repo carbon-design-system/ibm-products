@@ -54,34 +54,34 @@ const renderComponent = ({ ...rest } = {}) =>
   );
 
 describe(componentName, () => {
-  it('renders a component StatusIcon', () => {
+  it('renders a component StatusIcon', async () => {
     const { container } = renderComponent();
     expect(container).toBeInTheDocument();
   });
 
   it('has no accessibility violations', async () => {
     const { container } = renderComponent();
-    await expect(container).toBeAccessible(componentName, 'scan_label');
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  it('applies className to the root node', () => {
+  it('applies className to the root node', async () => {
     const { container } = renderComponent({ className });
     expect(container.querySelector(`.${className}`)).toBeInTheDocument();
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     renderComponent({ ref });
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     renderComponent({ 'data-testid': dataTestId });
     screen.getByTestId(dataTestId);
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     renderComponent({ 'data-testid': dataTestId });
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -90,7 +90,7 @@ describe(componentName, () => {
   });
 
   iconTypes.forEach((kind) => {
-    it(`applies the proper className when kind prop of ${kind} is passed`, () => {
+    it(`applies the proper className when kind prop of ${kind} is passed`, async () => {
       const { container } = render(
         <StatusIcon
           kind={kind}
@@ -108,7 +108,7 @@ describe(componentName, () => {
   });
 
   iconTypes.forEach((label) => {
-    it(`applies the proper title element when icon label of ${label} is passed`, () => {
+    it(`applies the proper title element when icon label of ${label} is passed`, async () => {
       const { container } = render(
         <StatusIcon
           kind={label}
@@ -126,7 +126,7 @@ describe(componentName, () => {
   });
 
   iconThemes.forEach((theme) => {
-    it(`applies the proper className when theme prop of ${theme} is passed`, () => {
+    it(`applies the proper className when theme prop of ${theme} is passed`, async () => {
       const { container } = render(
         <StatusIcon
           kind="fatal"
@@ -144,7 +144,7 @@ describe(componentName, () => {
   });
 
   iconSizes.forEach(({ input, output }) => {
-    it(`changes element size when size prop of ${input} is passed`, () => {
+    it(`changes element size when size prop of ${input} is passed`, async () => {
       const { container } = render(
         <StatusIcon
           kind="fatal"

@@ -13,16 +13,35 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { ExportModal } from '.';
-import mdx from './ExportModal.mdx';
+// import mdx from './ExportModal.mdx';
 import wait from '../../global/js/utils/wait';
+import { StoryDocsPage } from '../../global/js/utils/StoryDocsPage';
 
 export default {
   title: getStoryTitle(ExportModal.displayName),
   component: ExportModal,
+  tags: ['autodocs'],
   parameters: {
     // styles,
     docs: {
-      page: mdx,
+      page: () => (
+        <StoryDocsPage
+          altGuidelinesHref={[
+            {
+              href: 'https://pages.github.ibm.com/cdai-design/pal/patterns/exporting/usage',
+              label: 'Export guidelines',
+            },
+            {
+              href: 'https://www.carbondesignsystem.com/components/modal/usage',
+              label: 'Carbon Modal usage guidelines',
+            },
+            {
+              href: 'https://react.carbondesignsystem.com/?path=/docs/modal--default',
+              label: 'Carbon Modal documentation',
+            },
+          ]}
+        />
+      ),
     },
   },
 };
@@ -39,12 +58,10 @@ const defaultProps = {
   inputType: 'text',
 };
 
-const Template = (args) => {
-  return <ExportModal {...args} />;
-};
-
-const TemplateWithState = (args) => {
-  const [open, setOpen] = useState(false);
+const Template = ({ storyInitiallyOpen = false, ...args }, context) => {
+  const [open, setOpen] = useState(
+    context.viewMode !== 'docs' && storyInitiallyOpen
+  );
   const [loading, setLoading] = useState(false);
   const [successful, setSuccessful] = useState(false);
   const [error, setError] = useState(false);
@@ -85,14 +102,14 @@ const TemplateWithState = (args) => {
   );
 };
 
-export const WithSuccessMessage = prepareStory(TemplateWithState, {
+export const WithSuccessMessage = prepareStory(Template, {
   args: {
     ...defaultProps,
     successful: true,
   },
 });
 
-export const WithErrorMessage = prepareStory(TemplateWithState, {
+export const WithErrorMessage = prepareStory(Template, {
   args: {
     ...defaultProps,
     successful: false,
@@ -102,6 +119,7 @@ export const WithErrorMessage = prepareStory(TemplateWithState, {
 export const Standard = prepareStory(Template, {
   args: {
     ...defaultProps,
+    storyInitiallyOpen: true,
   },
 });
 
@@ -112,6 +130,7 @@ export const WithExtensionValidation = prepareStory(Template, {
     filename: '',
     invalidInputText: 'File must have valid extension .pdf',
     body: 'File must be exported in a PDF format.',
+    storyInitiallyOpen: true,
   },
 });
 
@@ -130,5 +149,6 @@ export const WithPreformattedExtensions = prepareStory(Template, {
       },
     ],
     preformattedExtensionsLabel: 'Choose an export format',
+    storyInitiallyOpen: true,
   },
 });

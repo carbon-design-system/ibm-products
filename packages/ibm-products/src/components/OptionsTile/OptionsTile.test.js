@@ -29,43 +29,43 @@ const props = {
 };
 
 describe(componentName, () => {
-  it('renders a component OptionsTile', () => {
+  it('renders a component OptionsTile', async () => {
     render(<OptionsTile {...props} />);
     expect(screen.getByTestId(dataTestId)).toHaveClass(blockClass);
   });
 
-  xit('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(
       <main>
         <OptionsTile {...props} />
       </main>
     );
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  it(`renders children`, () => {
+  it(`renders children`, async () => {
     render(<OptionsTile {...props} />);
     screen.getByText(children);
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     render(<OptionsTile {...props} className={className} />);
     expect(screen.getByTestId(dataTestId)).toHaveClass(className);
   });
 
-  it('adds additional props to the containing node', () => {
+  it('adds additional props to the containing node', async () => {
     render(<OptionsTile {...props} />);
     screen.getByTestId(dataTestId);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     render(<OptionsTile {...props} ref={ref} />);
     expect(ref.current).toHaveClass(blockClass);
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     render(<OptionsTile {...props} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -73,26 +73,26 @@ describe(componentName, () => {
     );
   });
 
-  it('renders a summary if provided', () => {
+  it('renders a summary if provided', async () => {
     const summary = uuidv4();
     render(<OptionsTile {...props} summary={summary} />);
 
     expect(screen.getByRole('heading').nextSibling.textContent).toBe(summary);
   });
 
-  it('renders a toggle if props.enabled is set', () => {
+  it('renders a toggle if props.enabled is set', async () => {
     render(<OptionsTile {...props} enabled />);
 
     expect(screen.getByRole('switch'));
   });
 
-  it('renders as static variant if no children are provided', () => {
+  it('renders as static variant if no children are provided', async () => {
     const { container } = render(<OptionsTile title="Static variant" />);
 
     expect(container.querySelector('details')).toBeFalsy();
   });
 
-  it('renders invalid state when passed', () => {
+  it('renders invalid state when passed', async () => {
     const invalidText = 'invalid explanation';
 
     // also pass props.warn and props.locked to verify props.invalid has the highest priority
@@ -106,7 +106,7 @@ describe(componentName, () => {
     expect(summary).toHaveClass(`${blockClass}__summary--invalid`);
   });
 
-  it('renders warning state when passed', () => {
+  it('renders warning state when passed', async () => {
     const warnText = 'warning explanation';
 
     // also pass props.locked to verify props.warn has the higher priority
@@ -118,7 +118,7 @@ describe(componentName, () => {
     expect(summary).toHaveClass(`${blockClass}__summary--warn`);
   });
 
-  it('renders locked state when passed', () => {
+  it('renders locked state when passed', async () => {
     const summaryText = 'summary of content';
     const lockedText = 'locked explanation';
 
@@ -137,7 +137,7 @@ describe(componentName, () => {
     expect(summary).toHaveClass(`${blockClass}__summary--locked`);
   });
 
-  it('renders lockedText when locked and no summary is set', () => {
+  it('renders lockedText when locked and no summary is set', async () => {
     const lockedText = 'locked explanation';
 
     render(<OptionsTile {...props} locked lockedText={lockedText} />);
@@ -147,7 +147,7 @@ describe(componentName, () => {
     expect(summary.textContent).toBe(lockedText);
   });
 
-  it('hides the summary when props.enabled = false', () => {
+  it('hides the summary when props.enabled = false', async () => {
     const summaryText = 'hidden summary';
     render(<OptionsTile {...props} summary={summaryText} enabled={false} />);
 
@@ -156,7 +156,7 @@ describe(componentName, () => {
     expect(summary.getAttribute('aria-hidden')).toBe('true');
   });
 
-  it('can be controlled by setting props.open', () => {
+  it('can be controlled by setting props.open', async () => {
     const { container, rerender } = render(
       <OptionsTile {...props} open={false} />
     );
@@ -169,21 +169,23 @@ describe(componentName, () => {
     expect(container.querySelector('details').open).toBe(false);
   });
 
-  it('supports "lg" size', () => {
+  it('supports "lg" size', async () => {
     render(<OptionsTile {...props} size="lg" />);
     expect(screen.getByTestId(dataTestId)).toHaveClass(`${blockClass}--lg`);
   });
 
-  it('uses props.titleId as the title id and as the aria-labelledby attribute of the toggle', () => {
+  it('uses props.titleId as the title id and as the aria-labelledby attribute of the toggle', async () => {
     const titleId = uuidv4();
 
     render(<OptionsTile {...props} titleId={titleId} enabled />);
 
     expect(screen.getByRole('heading').id).toBe(titleId);
-    expect(screen.getByRole('switch')).toHaveAccessibleName(props.title);
+    expect(screen.getByRole('switch').getAttribute('aria-labelledby')).toBe(
+      `${titleId}-toggle`
+    );
   });
 
-  it('expands and collapses on click', () => {
+  it('expands and collapses on click', async () => {
     const { container } = render(<OptionsTile {...props} />);
 
     expect(container.querySelector('details').open).toBe(false);
@@ -193,7 +195,7 @@ describe(componentName, () => {
     expect(container.querySelector('details').open).toBe(false);
   });
 
-  it('emits onToggle', () => {
+  it('emits onToggle', async () => {
     const onToggle = jest.fn();
     render(<OptionsTile {...props} enabled onToggle={onToggle} />);
 
@@ -202,7 +204,7 @@ describe(componentName, () => {
     expect(onToggle).toBeCalled();
   });
 
-  it('should call the onChange prop if provided when option tile is opened or closed', () => {
+  it('should call the onChange prop if provided when option tile is opened or closed', async () => {
     const onChangeFn = jest.fn();
     const { container } = render(
       <OptionsTile onChange={onChangeFn} {...props} />

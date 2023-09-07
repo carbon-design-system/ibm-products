@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,16 +11,17 @@ export const useCreateComponentStepChange = ({
   firstIncludedStep,
   lastIncludedStep,
   stepData,
+  onPrevious,
   onNext,
   isSubmitDisabled,
   setCurrentStep,
   setIsSubmitting,
-  setShouldViewAll,
+  setLoadingPrevious = null,
+  loadingPrevious = false,
   onClose,
   onRequestSubmit,
   componentName,
   currentStep,
-  shouldViewAll,
   backButtonText,
   cancelButtonText,
   submitButtonText,
@@ -30,6 +31,34 @@ export const useCreateComponentStepChange = ({
   setCreateComponentActions,
   setModalIsOpen,
 }) => {
+  const continueToNextStep = useCallback(() => {
+    setIsSubmitting(false);
+    setCurrentStep((prev) => {
+      // Find next included step to render
+      // There will always be a next step otherwise we will
+      // have reach the onSubmit
+      do {
+        prev++;
+      } while (!stepData[prev - 1]?.shouldIncludeStep);
+      return prev;
+    });
+  }, [setCurrentStep, setIsSubmitting, stepData]);
+
+  const moveToPreviousStep = useCallback(() => {
+    if (componentName !== 'CreateFullPage') {
+      setLoadingPrevious(false);
+    }
+    setCurrentStep((prev) => {
+      // Find previous included step to render
+      // There will always be a previous step otherwise we will
+      // have disabled the back button since we have reached the first visible step
+      do {
+        prev--;
+      } while (!stepData[prev - 1]?.shouldIncludeStep);
+      return prev;
+    });
+  }, [setCurrentStep, stepData, setLoadingPrevious, componentName]);
+
   // useEffect to handle multi step logic
   useEffect(() => {
     const onUnmount = () => {
@@ -37,7 +66,6 @@ export const useCreateComponentStepChange = ({
         setCurrentStep(0);
       }
       setIsSubmitting(false);
-      setShouldViewAll(false);
       onClose();
     };
     const handleOnRequestSubmit = async () => {
@@ -48,6 +76,22 @@ export const useCreateComponentStepChange = ({
       } catch (error) {
         setIsSubmitting(false);
         console.warn(`${componentName} submit error: ${error}`);
+      }
+    };
+    const handlePrevious = async () => {
+      if (componentName === 'CreateFullPage') {
+        return;
+      }
+      setLoadingPrevious(true);
+      if (typeof onPrevious === 'function') {
+        try {
+          await onPrevious();
+          moveToPreviousStep();
+        } catch (error) {
+          console.warn(`${componentName} onBack error: ${error}`);
+        }
+      } else {
+        moveToPreviousStep();
       }
     };
     const handleNext = async () => {
@@ -81,22 +125,14 @@ export const useCreateComponentStepChange = ({
     };
     if (stepData?.length > 0) {
       const buttons = [];
-      if (stepData?.length > 1 && !shouldViewAll) {
+      if (stepData?.length > 1) {
         buttons.push({
           key: 'create-action-button-back',
           label: backButtonText,
-          onClick: () =>
-            setCurrentStep((prev) => {
-              // Find previous included step to render
-              // There will always be a previous step otherwise we will
-              // have disabled the back button since we have reached the first visible step
-              do {
-                prev--;
-              } while (!stepData[prev - 1]?.shouldIncludeStep);
-              return prev;
-            }),
+          onClick: handlePrevious,
           kind: 'secondary',
           disabled: currentStep === firstIncludedStep,
+          loading: loadingPrevious,
         });
       }
       buttons.push({
@@ -110,16 +146,9 @@ export const useCreateComponentStepChange = ({
       });
       buttons.push({
         key: 'create-action-button-submit',
-        label: shouldViewAll
-          ? submitButtonText
-          : currentStep < lastIncludedStep
-          ? nextButtonText
-          : submitButtonText,
-        onClick: shouldViewAll
-          ? handleSubmit
-          : currentStep < lastIncludedStep
-          ? handleNext
-          : handleSubmit,
+        label:
+          currentStep < lastIncludedStep ? nextButtonText : submitButtonText,
+        onClick: currentStep < lastIncludedStep ? handleNext : handleSubmit,
         disabled: isSubmitDisabled,
         kind: 'primary',
         loading: isSubmitting,
@@ -141,27 +170,16 @@ export const useCreateComponentStepChange = ({
     submitButtonText,
     onRequestSubmit,
     isSubmitting,
-    shouldViewAll,
     componentBlockClass,
     componentName,
     continueToNextStep,
     setCurrentStep,
     setCreateComponentActions,
     setIsSubmitting,
-    setShouldViewAll,
     setModalIsOpen,
+    moveToPreviousStep,
+    onPrevious,
+    setLoadingPrevious,
+    loadingPrevious,
   ]);
-
-  const continueToNextStep = useCallback(() => {
-    setIsSubmitting(false);
-    setCurrentStep((prev) => {
-      // Find next included step to render
-      // There will always be a next step otherwise we will
-      // have reach the onSubmit
-      do {
-        prev++;
-      } while (!stepData[prev - 1]?.shouldIncludeStep);
-      return prev;
-    });
-  }, [setCurrentStep, setIsSubmitting, stepData]);
 };

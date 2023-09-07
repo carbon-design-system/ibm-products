@@ -16,14 +16,9 @@ setAllComponents(true);
 
 global.__DEV__ = true;
 
-const enzyme = jest.requireActual('enzyme');
-const Adapter = jest.requireActual('@wojtekmaj/enzyme-adapter-react-17');
-
 global.requestAnimationFrame = (callback) => {
   return setTimeout(callback, 0);
 };
-
-enzyme.configure({ adapter: new Adapter() });
 
 if (global.HTMLElement) {
   HTMLCanvasElement.prototype.getContext = jest.fn();

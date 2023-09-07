@@ -45,17 +45,17 @@ const defaultProps = {
 };
 
 describe(componentName, () => {
-  xit('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(
       <main>
         <HTTPError404 {...defaultProps} />
       </main>
     );
-    await expect(container).toBeAccessible(componentName);
-    await expect(container).toHaveNoAxeViolations();
+    expect(container).toBeAccessible(componentName);
+    expect(container).toHaveNoAxeViolations();
   });
 
-  it('Renders the component `HTTPErrors` if flag is enabled', () => {
+  it('Renders the component `HTTPErrors` if flag is enabled', async () => {
     const { container } = render(<HTTPError404 {...defaultProps} />);
     expect(container.querySelector(`.${blockClass}`)).not.toBeNull();
     expect(screen.getByText(title));
@@ -63,7 +63,7 @@ describe(componentName, () => {
     expect(link.href).toEqual('https://www.carbondesignsystem.com/');
   });
 
-  it('adds a class to the containing node', () => {
+  it('adds a class to the containing node', async () => {
     expect(
       render(<HTTPError404 {...defaultProps} />).container.querySelector(
         `.${className}`
@@ -71,7 +71,7 @@ describe(componentName, () => {
     ).toBeInTheDocument();
   });
 
-  it('should render the HTTPError404 component', () => {
+  it('should render the HTTPError404 component', async () => {
     const { container } = render(<HTTPError404 {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
@@ -82,7 +82,7 @@ describe(componentName, () => {
     ).toBeInTheDocument();
   });
 
-  it("adds the Devtools attribute to the `HTTPError404`'s containing node", () => {
+  it("adds the Devtools attribute to the `HTTPError404`'s containing node", async () => {
     render(<HTTPError404 {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -90,7 +90,7 @@ describe(componentName, () => {
     );
   });
 
-  it('should render the HTTPError403 component', () => {
+  it('should render the HTTPError403 component', async () => {
     const { container } = render(<HTTPError403 {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
@@ -101,7 +101,7 @@ describe(componentName, () => {
     ).toBeInTheDocument();
   });
 
-  it("adds the Devtools attribute to the `HTTPError403`'s containing node", () => {
+  it("adds the Devtools attribute to the `HTTPError403`'s containing node", async () => {
     render(<HTTPError403 {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -109,7 +109,7 @@ describe(componentName, () => {
     );
   });
 
-  it('should render the HTTPErrorOther component', () => {
+  it('should render the HTTPErrorOther component', async () => {
     const { container } = render(<HTTPErrorOther {...defaultProps} />);
     expect(screen.getByText(errorCodeLabel));
     expect(screen.getByText(description));
@@ -120,7 +120,7 @@ describe(componentName, () => {
     ).toBeInTheDocument();
   });
 
-  it("adds the Devtools attribute to the `HTTPErrorOther`'s containing node", () => {
+  it("adds the Devtools attribute to the `HTTPErrorOther`'s containing node", async () => {
     render(<HTTPErrorOther {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(

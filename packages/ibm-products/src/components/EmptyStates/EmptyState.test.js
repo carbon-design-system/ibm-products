@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, act } from '@testing-library/react';
 import React from 'react';
 
 import uuidv4 from '../../global/js/utils/uuidv4';
@@ -31,7 +31,7 @@ const defaultProps = {
 };
 
 describe(name, () => {
-  it('should render empty state header and call the action', () => {
+  it('should render empty state header and call the action', async () => {
     const { click } = fireEvent;
     const { fn } = jest;
     const onActionHandler = fn();
@@ -46,11 +46,11 @@ describe(name, () => {
       />
     );
 
-    click(getByText('Create new'));
+    await act(() => click(getByText('Create new')));
     expect(onActionHandler).toBeCalled();
   });
 
-  it('should render a clickable link and match rendered url to linkUrl prop', () => {
+  it('should render a clickable link and match rendered url to linkUrl prop', async () => {
     render(
       <EmptyState
         link={{
@@ -64,12 +64,12 @@ describe(name, () => {
     expect(link.href).toEqual('https://www.carbondesignsystem.com/');
   });
 
-  it('should render title by passing string', () => {
+  it('should render title by passing string', async () => {
     render(<EmptyState {...defaultProps} />);
     screen.getByText('Empty state title');
   });
 
-  it('should render title by passing node', () => {
+  it('should render title by passing node', async () => {
     render(
       <EmptyState
         title={<span>Custom title</span>}
@@ -79,12 +79,12 @@ describe(name, () => {
     screen.getByText('Custom title');
   });
 
-  it('should render subtitle by passing string', () => {
+  it('should render subtitle by passing string', async () => {
     render(<EmptyState {...defaultProps} />);
     screen.getByText('Empty state subtitle');
   });
 
-  it('should render subtitle by passing node', () => {
+  it('should render subtitle by passing node', async () => {
     render(
       <EmptyState
         title="Empty state header"
@@ -94,7 +94,7 @@ describe(name, () => {
     screen.getByText('This is the subtitle of the empty state');
   });
 
-  it('should render a custom illustration', () => {
+  it('should render a custom illustration', async () => {
     const { container } = render(
       <EmptyState
         {...defaultProps}
@@ -107,13 +107,13 @@ describe(name, () => {
     screen.getByAltText(/Test alt text/);
   });
 
-  it('forwards a ref to an appropriate node', () => {
+  it('forwards a ref to an appropriate node', async () => {
     const ref = React.createRef();
     render(<EmptyState {...defaultProps} ref={ref} />);
     expect(ref.current.classList.contains(blockClass)).toBeTruthy();
   });
 
-  it('adds the Devtools attribute to the containing node', () => {
+  it('adds the Devtools attribute to the containing node', async () => {
     render(<EmptyState {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -121,14 +121,14 @@ describe(name, () => {
     );
   });
 
-  it('applies className to the containing node', () => {
+  it('applies className to the containing node', async () => {
     render(<EmptyState {...defaultProps} className={className} />);
     expect(
       screen.getByText(/Empty state title/).parentElement.parentElement
     ).toHaveClass(className);
   });
 
-  it('renders the small size Empty state', () => {
+  it('renders the small size Empty state', async () => {
     render(<EmptyState {...defaultProps} size="sm" />);
     const smallTitleClassName = `${blockClass}__header--small`;
     expect(screen.getByText(/Empty state title/)).toHaveClass(
@@ -136,7 +136,7 @@ describe(name, () => {
     );
   });
 
-  it('adds additional properties to the containing node', () => {
+  it('adds additional properties to the containing node', async () => {
     const { container } = render(
       <EmptyState {...defaultProps} data-testid={dataTestId} />
     );
@@ -145,7 +145,7 @@ describe(name, () => {
     ).toBeInTheDocument();
   });
 
-  it('should render the NoDataEmptyState', () => {
+  it('should render the NoDataEmptyState', async () => {
     const { container, rerender } = render(
       <NoDataEmptyState {...defaultProps} />
     );
@@ -154,7 +154,7 @@ describe(name, () => {
     expect(container.querySelector('svg')).toBeTruthy();
   });
 
-  it("adds the Devtools attribute to the `NoDataEmptyState`'s containing node", () => {
+  it("adds the Devtools attribute to the `NoDataEmptyState`'s containing node", async () => {
     render(<NoDataEmptyState {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -162,7 +162,7 @@ describe(name, () => {
     );
   });
 
-  it('should render the ErrorEmptyState component', () => {
+  it('should render the ErrorEmptyState component', async () => {
     const { container, rerender } = render(
       <ErrorEmptyState {...defaultProps} />
     );
@@ -171,7 +171,7 @@ describe(name, () => {
     expect(container.querySelector('svg')).toBeTruthy();
   });
 
-  it("adds the Devtools attribute to the `ErrorEmptyState`'s containing node", () => {
+  it("adds the Devtools attribute to the `ErrorEmptyState`'s containing node", async () => {
     render(<ErrorEmptyState {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -179,7 +179,7 @@ describe(name, () => {
     );
   });
 
-  it('should render the NoTagsEmptyState component', () => {
+  it('should render the NoTagsEmptyState component', async () => {
     const { container, rerender } = render(
       <NoTagsEmptyState {...defaultProps} />
     );
@@ -188,7 +188,7 @@ describe(name, () => {
     expect(container.querySelector('svg')).toBeTruthy();
   });
 
-  it("adds the Devtools attribute to the `NoTagsEmptyState`'s containing node", () => {
+  it("adds the Devtools attribute to the `NoTagsEmptyState`'s containing node", async () => {
     render(<NoTagsEmptyState {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -196,7 +196,7 @@ describe(name, () => {
     );
   });
 
-  it('should render the NotFoundEmptyState component', () => {
+  it('should render the NotFoundEmptyState component', async () => {
     const { container, rerender } = render(
       <NotFoundEmptyState {...defaultProps} />
     );
@@ -205,7 +205,7 @@ describe(name, () => {
     expect(container.querySelector('svg')).toBeTruthy();
   });
 
-  it("adds the Devtools attribute to the `NotFoundEmptyState`'s containing node", () => {
+  it("adds the Devtools attribute to the `NotFoundEmptyState`'s containing node", async () => {
     render(<NotFoundEmptyState {...defaultProps} data-testid={dataTestId} />);
 
     expect(screen.getByTestId(dataTestId)).toHaveDevtoolsAttribute(
@@ -213,7 +213,7 @@ describe(name, () => {
     );
   });
 
-  it('should render the NotificationsEmptyState component', () => {
+  it('should render the NotificationsEmptyState component', async () => {
     const { container, rerender } = render(
       <NotificationsEmptyState {...defaultProps} />
     );
@@ -224,7 +224,7 @@ describe(name, () => {
     expect(container.querySelector('svg')).toBeTruthy();
   });
 
-  it("adds the Devtools attribute to the `NotificationsEmptyState`'s containing node", () => {
+  it("adds the Devtools attribute to the `NotificationsEmptyState`'s containing node", async () => {
     render(
       <NotificationsEmptyState {...defaultProps} data-testid={dataTestId} />
     );
@@ -234,7 +234,7 @@ describe(name, () => {
     );
   });
 
-  it('should render the UnauthorizedEmptyState component', () => {
+  it('should render the UnauthorizedEmptyState component', async () => {
     const { container, rerender } = render(
       <UnauthorizedEmptyState {...defaultProps} />
     );
@@ -245,7 +245,7 @@ describe(name, () => {
     expect(container.querySelector('svg')).toBeTruthy();
   });
 
-  it("adds the Devtools attribute to the `UnauthorizedEmptyState`'s containing node", () => {
+  it("adds the Devtools attribute to the `UnauthorizedEmptyState`'s containing node", async () => {
     render(
       <UnauthorizedEmptyState {...defaultProps} data-testid={dataTestId} />
     );
@@ -255,7 +255,7 @@ describe(name, () => {
     );
   });
 
-  it('should throw a custom prop type validation error when an illustration is used without an illustrationDescription prop', () =>
+  it('should throw a custom prop type validation error when an illustration is used without an illustrationDescription prop', async () =>
     expectError(required('illustrationDescription', 'EmptyState'), () => {
       render(
         <EmptyState {...defaultProps} illustration={CustomIllustration} />

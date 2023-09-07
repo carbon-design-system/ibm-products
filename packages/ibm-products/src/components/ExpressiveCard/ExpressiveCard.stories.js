@@ -14,17 +14,20 @@ import {
   prepareStory,
 } from '../../global/js/utils/story-helper';
 import { ExpressiveCard } from '.';
-import mdx from './ExpressiveCard.mdx';
+// import mdx from './ExpressiveCard.mdx';
 import { action } from '@storybook/addon-actions';
 
 export default {
   title: getStoryTitle(ExpressiveCard.displayName),
   component: ExpressiveCard,
+  tags: ['autodocs'],
   parameters: {
     styles,
-    docs: {
+    /*
+docs: {
       page: mdx,
     },
+*/
   },
   argTypes: {
     columnSizeSm: {
@@ -170,7 +173,6 @@ export const WithSecondaryAction = prepareStory(Template, {
     ...defaultProps,
     secondaryButtonText: 'Secondary',
     secondaryButtonKind: 'ghost',
-    columnSize: 8,
     mediaRatio: null,
   },
 });

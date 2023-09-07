@@ -5,34 +5,37 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useLayoutEffect, useState, useContext } from 'react';
 import {
-  TableToolbarContent,
-  TableToolbarSearch,
+  Add,
+  ChevronDown,
+  Download,
+  Filter,
+  Restart,
+} from '@carbon/react/icons';
+import {
   Button,
+  ComposedModal,
+  Dropdown,
+  IconButton,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
   OverflowMenu,
   OverflowMenuItem,
-  ComposedModal,
-  ModalBody,
-  ModalHeader,
-  ModalFooter,
-  Dropdown,
+  TableToolbarContent,
+  TableToolbarSearch,
+  MenuButton,
+  MenuItem,
 } from '@carbon/react';
-import {
-  Download,
-  Add,
-  Restart,
-  ChevronDown,
-  Filter,
-} from '@carbon/react/icons';
+import React, { useLayoutEffect, useState } from 'react';
+
 import { action } from '@storybook/addon-actions';
 import { pkg } from '../../../settings';
-import { ButtonMenu, ButtonMenuItem } from '../../ButtonMenu';
-import { FilterContext } from '../Datagrid/addons/Filtering';
+import { useFilterContext } from '../Datagrid/addons/Filtering/hooks';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 export const DatagridActions = (datagridState) => {
-  const { setPanelOpen } = useContext(FilterContext);
+  const { setPanelOpen } = useFilterContext();
   const {
     selectedFlatRows,
     setGlobalFilter,
@@ -67,17 +70,16 @@ export const DatagridActions = (datagridState) => {
 
   const renderFilterPanelButton = () =>
     filterProps?.variation === 'panel' && (
-      <Button
+      <IconButton
         kind="ghost"
-        hasIconOnly
-        tooltipPosition="bottom"
-        renderIcon={(props) => <Filter size={16} {...props} />}
-        iconDescription={filterProps.panelIconDescription}
+        align="bottom"
+        label={filterProps.panelIconDescription}
         className={`${blockClass}-filter-panel-open-button`}
         onClick={() => setPanelOpen((open) => !open)}
         disabled={data.length === 0}
-        tooltipAlignment="start"
-      />
+      >
+        <Filter />
+      </IconButton>
     );
 
   const [modalOpen, setModalOpen] = useState(false);
@@ -141,7 +143,7 @@ export const DatagridActions = (datagridState) => {
       <TableToolbarContent>
         {renderFilterPanelButton()}
         <TableToolbarSearch
-          size="xl"
+          size="lg"
           id="columnSearch"
           persistent
           placeHolderText={searchForAColumn}
@@ -174,24 +176,24 @@ export const DatagridActions = (datagridState) => {
           </div>
         )}
         <RowSizeDropdown {...rowSizeDropdownProps} />
-        <ButtonMenu
+        <MenuButton
           label="Primary button"
           renderIcon={ChevronDown}
-          menuOptionsClass={`${blockClass}__toolbar-options`}
+          className={`${blockClass}__toolbar-options`}
         >
-          <ButtonMenuItem
-            itemText="Option 1"
+          <MenuItem
+            label="Option 1"
             onClick={action(`Click on ButtonMenu Option 1`)}
           />
-          <ButtonMenuItem
-            itemText="Option 2"
+          <MenuItem
+            label="Option 2"
             onClick={action(`Click on ButtonMenu Option 2`)}
           />
-          <ButtonMenuItem
-            itemText="Option 3"
+          <MenuItem
+            label="Option 3"
             onClick={action(`Click on ButtonMenu Option 3`)}
           />
-        </ButtonMenu>
+        </MenuButton>
       </TableToolbarContent>
     ) : (
       <TableToolbarContent>

@@ -37,11 +37,11 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
-  it('renders', () => {
+  it('renders', async () => {
     render(<AddSelectBreadcrumbs {...defaultProps} />);
   });
 
-  it('handles click', () => {
+  it('handles click', async () => {
     const onClick = jest.fn();
     const newProps = {
       ...defaultProps,
@@ -52,7 +52,7 @@ describe(componentName, () => {
     expect(onClick).toBeCalled();
   });
 
-  it('displays multiple breadcrumbs', () => {
+  it('displays multiple breadcrumbs', async () => {
     const newProps = {
       ...defaultProps,
       path: [

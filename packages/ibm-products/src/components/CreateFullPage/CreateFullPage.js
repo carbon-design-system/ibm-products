@@ -258,7 +258,6 @@ CreateFullPage.propTypes = {
    */
   firstFocusElement: PropTypes.string,
 
-
   /**
    * This can be used to open the component to a step other than the first step.
    * For example, a create flow was previously in progress, data was saved, and

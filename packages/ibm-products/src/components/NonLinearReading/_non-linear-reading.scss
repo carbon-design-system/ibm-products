@@ -151,6 +151,10 @@
         @include keyword-closed();
       }
 
+      &-closed + .#{$block-class}__body {
+        display: none;
+      }
+
       &-open {
         @include keyword-open();
       }

@@ -9,28 +9,28 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { Draggable, Locked } from '@carbon/react/icons';
-import { useDrag, useDrop } from 'react-dnd';
+// import { useDrag, useDrop } from 'react-dnd';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
 
 const { useEffect, useRef, useState } = React;
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const DRAG_TYPE = `${blockClass}__shared-ui-draggable-element`;
+// const DRAG_TYPE = `${blockClass}__shared-ui-draggable-element`;
 
 const DraggableElement = ({
-  id,
+  // id,
   index,
   listData,
   children,
-  type,
+  // type,
   disabled,
   ariaLabel,
   onGrab,
   onArrowKeyDown,
   isFocused,
   isSticky,
-  moveElement,
+  // moveElement,
   selected,
   positionLabel = 'Current position {index} of {total}',
   grabbedLabel = '{itemName} grabbed.',
@@ -38,41 +38,47 @@ const DraggableElement = ({
 }) => {
   const ref = useRef();
 
-  const [{ isOver }, drop] = useDrop({
-    accept: DRAG_TYPE + type,
-    collect: (monitor) => ({
-      isOver: !!monitor.isOver(),
-    }),
-    drop: (item) => {
-      moveElement(item.index, index);
-    },
-    canDrop: () => !disabled,
-    hover(item) {
-      const dragIndex = item.index;
-      const hoverIndex = index;
-      // Don't replace items with themselves
-      if (dragIndex === hoverIndex || disabled) {
-        return;
-      }
-      moveElement(dragIndex, hoverIndex);
-      // Time to actually perform the action
-      // Note: we're mutating the monitor item here!
-      // Generally it's better to avoid mutations,
-      // but it's good here for the sake of performance
-      // to avoid expensive index searches.
-      // eslint-disable-next-line no-param-reassign
-      item.index = hoverIndex;
-    },
-  });
+  // const [{ isOver }, drop] = useDrop({
+  //   accept: DRAG_TYPE + type,
+  //   collect: (monitor) => ({
+  //     isOver: !!monitor.isOver(),
+  //   }),
+  //   drop: (item) => {
+  //     moveElement(item.index, index);
+  //   },
+  //   canDrop: () => !disabled,
+  //   hover(item) {
+  //     const dragIndex = item.index;
+  //     const hoverIndex = index;
+  //     // Don't replace items with themselves
+  //     if (dragIndex === hoverIndex || disabled) {
+  //       return;
+  //     }
+  //     // moveElement(dragIndex, hoverIndex);
+  //     // Time to actually perform the action
+  //     // Note: we're mutating the monitor item here!
+  //     // Generally it's better to avoid mutations,
+  //     // but it's good here for the sake of performance
+  //     // to avoid expensive index searches.
+  //     // eslint-disable-next-line no-param-reassign
+  //     item.index = hoverIndex;
+  //   },
+  // });
 
-  const [{ isDragging }, drag, preview] = useDrag({
-    type: DRAG_TYPE + type,
-    item: { id, index },
-    canDrag: () => !disabled,
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
+  // const [{ isDragging }, drag, preview] = useDrag({
+  //   type: DRAG_TYPE + type,
+  //   item: { id, index },
+  //   canDrag: () => !disabled,
+  //   collect: (monitor) => ({
+  //     isDragging: monitor.isDragging(),
+  //   }),
+  // });
+
+  // Temporarily disable drag support because of commonjs support/issues with react-dnd in latest version
+  const [isDragging] = useState(false);
+  const [isOver] = useState(false);
+  const preview = useRef();
+  const drag = useRef();
 
   useEffect(() => {
     if (isFocused && ref && ref.current) {
@@ -82,7 +88,7 @@ const DraggableElement = ({
 
   const [isGrabbed, setIsGrabbed] = useState(false);
   const [isFocusedOnItem, setIsFocusedOnItem] = useState(isFocused);
-  drop(ref);
+  // drop(ref);
   const content = (
     <>
       <div
@@ -177,7 +183,7 @@ DraggableElement.propTypes = {
   isFocused: PropTypes.bool.isRequired,
   isSticky: PropTypes.bool,
   listData: PropTypes.array.isRequired,
-  moveElement: PropTypes.func.isRequired,
+  // moveElement: PropTypes.func.isRequired,
   onArrowKeyDown: PropTypes.func.isRequired,
   onGrab: PropTypes.func.isRequired,
   positionLabel: PropTypes.string,

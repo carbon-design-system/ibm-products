@@ -3398,12 +3398,12 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .c4p--empty-state .c4p--empty-state__action-button {
-  display: inline-block;
+  display: block;
   margin-bottom: 1rem;
 }
 
 .c4p--empty-state .c4p--empty-state__link {
-  display: block;
+  display: inline-block;
 }
 
 .c4p--export-modal .cds--modal-footer .cds--btn {

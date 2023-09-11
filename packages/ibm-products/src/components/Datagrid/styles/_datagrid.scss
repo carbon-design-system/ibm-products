@@ -164,6 +164,23 @@
   width: 100%;
   padding-top: 0;
 
+  .#{$carbon-prefix}--data-table-header__description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .#{$carbon-prefix}--data-table-header__title {
+    overflow: hidden;
+    max-width: 80ch;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @include carbon--breakpoint(md) {
+      max-width: 55ch;
+    }
+  }
+
   .#{$carbon-prefix}--data-table-content {
     width: 100%;
     height: 100%;
@@ -621,6 +638,7 @@
   width: 1rem;
   height: 100%;
   margin: 0;
+  -moz-appearance: initial;
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
@@ -630,12 +648,14 @@
   outline: 0;
 }
 
-.#{$block-class} .#{$block-class}__col-resizer-range:focus::before {
+.#{$block-class}
+  .#{$block-class}__col-resizer-range:focus
+  + .#{$block-class}__col-resize-indicator::before {
   position: absolute;
   top: 50%;
   left: 50%;
   width: 2px;
-  height: 100%;
+  height: var(--#{$block-class}--header-height);
   background-color: $focus;
   content: '';
   transform: translate(-50%, -50%);
@@ -655,11 +675,13 @@
   transform: translate(-50%, 0);
 }
 
-.#{$block-class} .#{$block-class}__col-resizer-range:focus::after {
+.#{$block-class}
+  .#{$block-class}__col-resizer-range:focus
+  + .#{$block-class}__col-resize-indicator::after {
   position: absolute;
   /* stylelint-disable-next-line carbon/layout-token-use */
-  top: var(--#{$block-class}--row-height);
-  right: $spacing-03;
+  top: calc(var(--#{$block-class}--row-height) - 20px);
+  right: $spacing-02;
   width: 1px;
   height: calc(
     var(--#{$block-class}--grid-height) - var(--#{$block-class}--row-height)
@@ -676,4 +698,8 @@
   -webkit-appearance: none;
   appearance: none;
   background: transparent;
+}
+
+.#{$block-class} .#{$block-class}__col-resizer-range::-moz-range-thumb {
+  visibility: hidden;
 }

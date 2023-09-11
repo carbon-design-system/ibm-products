@@ -79,6 +79,7 @@ const defaults = {
     InterstitialScreen: false,
     InterstitialScreenView: false,
     InterstitialScreenViewModule: false,
+    Checklist: false,
     Coachmark: false,
     CoachmarkBeacon: false,
     CoachmarkButton: false,

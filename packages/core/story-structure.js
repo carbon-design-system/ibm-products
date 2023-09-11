@@ -175,6 +175,7 @@ const s = [
               },
             ],
           },
+          'c/Checklist',
         ],
       },
     ],

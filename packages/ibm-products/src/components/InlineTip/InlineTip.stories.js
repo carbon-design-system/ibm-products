@@ -107,7 +107,6 @@ const Template = (args) => {
             href="https://www.ibm.com"
             onClick={() => {
               action('Clicked the link')();
-              return true;
             }}
             target="_blank"
           >

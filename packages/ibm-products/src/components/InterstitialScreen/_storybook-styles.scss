@@ -1,3 +1,4 @@
+/* stylelint-disable max-nesting-depth */
 //
 // Copyright IBM Corp. 2023, 2023
 //
@@ -31,4 +32,15 @@
 .GenericView {
   /* stylelint-disable-next-line declaration-no-important */
   margin-top: $spacing-12 !important;
+}
+
+.NoImageExample {
+  $one-grid-column: calc(100% / 16);
+  $md: 672px;
+
+  width: calc($one-grid-column * 16);
+
+  @media (min-width: $md) {
+    width: calc($one-grid-column * 12);
+  }
 }

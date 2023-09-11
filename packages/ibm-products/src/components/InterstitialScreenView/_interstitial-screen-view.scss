@@ -9,15 +9,6 @@
 @import '../../global/styles/project-settings';
 @import '../../global/styles/mixins';
 
-// Other Carbon settings.
-// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
-
-// InterstitialScreenView uses the following Carbon components:
-// TODO: @import(s) of Carbon component styles used by InterstitialScreenView
-
-// InterstitialScreenView uses the following Carbon for IBM Products components:
-// TODO: @import(s) of IBM Products component styles used by InterstitialScreenView
-
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin interstitial-screen-view {

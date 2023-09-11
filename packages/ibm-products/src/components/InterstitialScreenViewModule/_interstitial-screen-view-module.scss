@@ -9,25 +9,11 @@
 @import '../../global/styles/project-settings';
 @import '../../global/styles/mixins';
 
-// Other Carbon settings.
-// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
-
-// InterstitialScreenViewModule uses the following Carbon components:
-// TODO: @import(s) of Carbon component styles used by InterstitialScreenViewModule
-
-// InterstitialScreenViewModule uses the following Carbon for IBM Products components:
-// TODO: @import(s) of IBM Products component styles used by InterstitialScreenViewModule
-
 // Define all component styles in a mixin which is then exported using
 // the Carbon import-once mechanism.
 @mixin interstitial-screen-view-module {
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--interstitial-screen-view-module;
-  $sm: 320px;
-  $md: 672px;
-  $lg: 1056px;
-  $xlg: 1312px;
-  $max: 1584px;
 
   .#{$block-class} {
     margin: $spacing-07;

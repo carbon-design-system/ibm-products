@@ -300,20 +300,20 @@ export let InterstitialScreen = React.forwardRef(
           </div>
 
           <div className={`${blockClass}--footer`}>
-            <div>
-              {isMultiStep && skipButtonLabel !== '' && (
-                <Button
-                  className={`${blockClass}--skip-btn`}
-                  kind="ghost"
-                  size="lg"
-                  title={skipButtonLabel}
-                  type="button"
-                  onClick={handleClose}
-                >
-                  {skipButtonLabel}
-                </Button>
-              )}
-            </div>
+            {/* <div> */}
+            {isMultiStep && skipButtonLabel !== '' && (
+              <Button
+                className={`${blockClass}--skip-btn`}
+                kind="ghost"
+                size="lg"
+                title={skipButtonLabel}
+                type="button"
+                onClick={handleClose}
+              >
+                {skipButtonLabel}
+              </Button>
+            )}
+            {/* </div> */}
             <div className={`${blockClass}--footer-controls`}>
               {isMultiStep && progStep > 0 && (
                 <Button

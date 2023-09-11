@@ -153,12 +153,11 @@
       justify-content: flex-end;
       border-top: 1px solid $ui-03;
       background: $ui-background;
-      #{$block}--skip-btn {
-        margin-right: auto;
-      }
+
       #{$block}--prev-btn,
       #{$block}--next-btn,
-      #{$block}--start-btn {
+      #{$block}--start-btn,
+      #{$block}--skip-btn {
         width: calc($one-grid-column * 3);
         min-width: carbon--mini-units(29);
       }
@@ -194,6 +193,12 @@
       #{$block}--internal-header {
         &:has(> :nth-child(2)) {
           min-height: initial;
+        }
+      }
+      #{$block}--footer {
+        #{$block}--skip-btn {
+          max-width: calc($one-grid-column * 7);
+          flex-grow: 1;
         }
       }
     }

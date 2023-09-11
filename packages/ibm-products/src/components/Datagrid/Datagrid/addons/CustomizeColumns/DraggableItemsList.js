@@ -20,7 +20,7 @@ export const DraggableItemsList = ({
   filterString,
   focusIndex,
   getNextIndex,
-  moveElement,
+  // moveElement,
   onSelectColumn,
   setAriaRegionText,
   setColumnsObject,
@@ -95,7 +95,7 @@ export const DraggableItemsList = ({
               ariaLabel={colHeaderTitle}
               onGrab={setAriaRegionText}
               isFocused={focusIndex === i}
-              moveElement={moveElement}
+              // moveElement={moveElement}
               onArrowKeyDown={(e, isGrabbed, currentIndex) => {
                 if (isGrabbed) {
                   const nextIndex = getNextIndex(columns, currentIndex, e.key);
@@ -104,7 +104,7 @@ export const DraggableItemsList = ({
 
                   if (nextIndex >= 0 && !columns[nextIndex]?.sticky) {
                     setFocusIndex(nextIndex);
-                    moveElement(currentIndex, nextIndex);
+                    // moveElement(currentIndex, nextIndex);
                     e.target.scrollIntoView({
                       block: 'center',
                     });
@@ -127,7 +127,7 @@ DraggableItemsList.propTypes = {
   filterString: PropTypes.string.isRequired,
   focusIndex: PropTypes.number.isRequired,
   getNextIndex: PropTypes.func.isRequired,
-  moveElement: PropTypes.func.isRequired,
+  // moveElement: PropTypes.func.isRequired,
   onSelectColumn: PropTypes.func.isRequired,
   setAriaRegionText: PropTypes.func.isRequired,
   setColumnsObject: PropTypes.func.isRequired,

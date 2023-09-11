@@ -51,7 +51,7 @@
     "postinstall": "carbon-telemetry collect --install",
     "test": "jest --colors",
     "//upgrade-dependencies": "# don't upgrade carbon (done globally), react/react-dom (explicit range peer dependency), chalk (issue #1596)",
-    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$|^react-dnd|^namor)/'"
+    "upgrade-dependencies": "npm-check-updates -u --dep dev,peer,prod --color --reject '/(carbon|^react$|^react-dom$|^chalk$|^namor)/'"
   },
   "devDependencies": {
     "@babel/cli": "^7.22.10",
@@ -79,8 +79,6 @@
     "framer-motion": "^6.5.1 < 7",
     "immutability-helper": "^3.1.1",
     "lodash": "^4.17.21",
-    "react-dnd": "^16.0.1",
-    "react-dnd-html5-backend": "^16.0.1",
     "react-table": "^7.8.0",
     "react-window": "^1.8.9"
   },

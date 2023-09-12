@@ -156,10 +156,15 @@
 
       #{$block}--prev-btn,
       #{$block}--next-btn,
-      #{$block}--start-btn,
-      #{$block}--skip-btn {
+      #{$block}--start-btn {
         width: calc($one-grid-column * 3);
         min-width: carbon--mini-units(29);
+      }
+
+      #{$block}--skip-btn {
+        min-width: carbon--mini-units(29);
+        max-width: none;
+        flex-grow: 1;
       }
     }
 
@@ -193,12 +198,6 @@
       #{$block}--internal-header {
         &:has(> :nth-child(2)) {
           min-height: initial;
-        }
-      }
-      #{$block}--footer {
-        #{$block}--skip-btn {
-          max-width: none;
-          flex-grow: 1;
         }
       }
     }

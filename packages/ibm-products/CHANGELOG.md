@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.8.1...@carbon/ibm-products@2.9.0) (2023-09-12)
+
+
+### Bug Fixes
+
+* **build:** temporarily remove drag support in customize cols ([#3458](https://github.com/carbon-design-system/ibm-products/issues/3458)) ([1ea9725](https://github.com/carbon-design-system/ibm-products/commit/1ea97254df8104e1c2421a44d8d7e140fd2158bf))
+
+
+### Features
+
+* **Datagrid:** add new select all approach in batch actions ([#3438](https://github.com/carbon-design-system/ibm-products/issues/3438)) ([b939544](https://github.com/carbon-design-system/ibm-products/commit/b939544b219a37a5e43b9325baea5bd9808196eb))
+
+
+
+
+
 ## [2.8.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.8.0...@carbon/ibm-products@2.8.1) (2023-08-30)
 
 

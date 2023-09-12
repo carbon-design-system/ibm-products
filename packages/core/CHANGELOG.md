@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.2.1...@carbon/ibm-cloud-cognitive-core@2.3.0) (2023-09-12)
+
+
+### Features
+
+* **Datagrid:** add new select all approach in batch actions ([#3438](https://github.com/carbon-design-system/ibm-products/issues/3438)) ([b939544](https://github.com/carbon-design-system/ibm-products/commit/b939544b219a37a5e43b9325baea5bd9808196eb))
+
+
+
+
+
 ## [2.2.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.2.0...@carbon/ibm-cloud-cognitive-core@2.2.1) (2023-08-30)
 
 

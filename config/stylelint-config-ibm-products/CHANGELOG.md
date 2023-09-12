@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.42](https://github.com/carbon-design-system/ibm-products/compare/stylelint-config-ibm-products@0.0.41...stylelint-config-ibm-products@0.0.42) (2023-09-12)
+
+**Note:** Version bump only for package stylelint-config-ibm-products
+
+
+
+
+
 ## [0.0.41](https://github.com/carbon-design-system/ibm-products/compare/stylelint-config-ibm-products@0.0.40...stylelint-config-ibm-products@0.0.41) (2023-08-01)
 
 **Note:** Version bump only for package stylelint-config-ibm-products

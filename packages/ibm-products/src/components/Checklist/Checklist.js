@@ -132,9 +132,9 @@ export let Checklist = React.forwardRef(
           <header className={`${blockClass}__header`}>
             {chartLabelAndValue && (
               <ChecklistChart
-                ariaLabelledById={chartLabelId}
-                value={chartValue}
+                aria-labelledby={chartLabelId}
                 theme={theme}
+                value={chartValue}
               />
             )}
 

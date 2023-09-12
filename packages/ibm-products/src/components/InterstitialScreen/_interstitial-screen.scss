@@ -197,7 +197,7 @@
       }
       #{$block}--footer {
         #{$block}--skip-btn {
-          max-width: calc($one-grid-column * 7);
+          max-width: none;
           flex-grow: 1;
         }
       }

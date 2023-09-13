@@ -8,6 +8,7 @@
 
 /// Border width helper.
 /// @type Length
-$border__sizing__width: carbon--rem(
+/* stylelint-disable-next-line function-no-unknown */ // carbon--rem renamed to to-rem
+$border__sizing__width: to-rem(
   $px: 1px,
 );

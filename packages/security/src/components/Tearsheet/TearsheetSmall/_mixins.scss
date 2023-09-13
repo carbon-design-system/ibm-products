@@ -40,7 +40,7 @@
             map-merge(
               $map1: map-get($map: $carbon--grid-breakpoints, $key: max),
               $map2: (
-                width: carbon--rem($px: 1968px),
+                width: to-rem($px: 1968px),
               )
             ),
         )

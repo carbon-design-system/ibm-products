@@ -273,7 +273,10 @@ export const interstitialScreenModal = prepareStory(TemplateModal, {
     ...defaultProps,
     hideProgressIndicator: true,
     children: (
-      <InterstitialScreenView stepTitle="Step 1" className="NoImageExample">
+      <InterstitialScreenView
+        stepTitle="Step 1"
+        className="NoImageExampleModal"
+      >
         <InterstitialScreenViewModule
           className="GenericModalView"
           title="Use case-specific heading"
@@ -309,21 +312,30 @@ export const interstitialScreenModalMultiples = prepareStory(
       hideProgressIndicator: false,
       children: (
         <>
-          <InterstitialScreenView stepTitle="Step 1" className="NoImageExample">
+          <InterstitialScreenView
+            stepTitle="Step 1"
+            className="NoImageExampleModal"
+          >
             <InterstitialScreenViewModule
               className="GenericModalView"
               title="Use case-specific heading"
               description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
             />
           </InterstitialScreenView>
-          <InterstitialScreenView stepTitle="Step 2" className="NoImageExample">
+          <InterstitialScreenView
+            stepTitle="Step 2"
+            className="NoImageExampleModal"
+          >
             <InterstitialScreenViewModule
               className="GenericModalView"
               title="Use case-specific heading"
               description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
             />
           </InterstitialScreenView>
-          <InterstitialScreenView stepTitle="Step 3" className="NoImageExample">
+          <InterstitialScreenView
+            stepTitle="Step 3"
+            className="NoImageExampleModal"
+          >
             <InterstitialScreenViewModule
               className="GenericModalView"
               title="Use case-specific heading"
@@ -379,7 +391,10 @@ export const interstitialScreenFullScreen = prepareStory(TemplateFullScreen, {
     ...defaultProps,
     hideProgressIndicator: true,
     children: (
-      <InterstitialScreenView stepTitle="Step 1" className="NoImageExample">
+      <InterstitialScreenView
+        stepTitle="Step 1"
+        className="NoImageExampleFullScreen"
+      >
         <InterstitialScreenViewModule
           className="GenericView"
           title="Use case-specific heading"
@@ -419,21 +434,30 @@ export const interstitialScreenFullScreenMultiples = prepareStory(
       hideProgressIndicator: false,
       children: (
         <>
-          <InterstitialScreenView stepTitle="Step 1" className="NoImageExample">
+          <InterstitialScreenView
+            stepTitle="Step 1"
+            className="NoImageExampleFullScreen"
+          >
+            <InterstitialScreenViewModule
+              className="GenericView"
+              title="Use case-specific heading 1"
+              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
+            />
+          </InterstitialScreenView>
+          <InterstitialScreenView
+            stepTitle="Step 2"
+            className="NoImageExampleFullScreen"
+          >
             <InterstitialScreenViewModule
               className="GenericView"
               title="Use case-specific heading"
               description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
             />
           </InterstitialScreenView>
-          <InterstitialScreenView stepTitle="Step 2" className="NoImageExample">
-            <InterstitialScreenViewModule
-              className="GenericView"
-              title="Use case-specific heading"
-              description="Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept. Use case-specific content that explains the concept."
-            />
-          </InterstitialScreenView>
-          <InterstitialScreenView stepTitle="Step 3" className="NoImageExample">
+          <InterstitialScreenView
+            stepTitle="Step 3"
+            className="NoImageExampleFullScreen"
+          >
             <InterstitialScreenViewModule
               className="GenericView"
               title="Use case-specific heading"

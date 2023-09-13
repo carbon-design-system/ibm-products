@@ -34,13 +34,23 @@
   margin-top: $spacing-12 !important;
 }
 
-.NoImageExample {
+.NoImageExampleModal {
+  $one-grid-column: calc(100% / 16);
+  $md: 672px;
+
+  width: calc($one-grid-column * 16);
+
+  @media (min-width: $md) {
+    width: calc($one-grid-column * 12);
+  }
+}
+
+.NoImageExampleFullScreen {
   $one-grid-column: calc(100% / 16);
   $md: 672px;
   $lg: 1056px;
 
   width: calc($one-grid-column * 16);
-
   @media (min-width: $md) {
     width: calc($one-grid-column * 12);
   }

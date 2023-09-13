@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.58.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.57.0...@carbon/ibm-products@1.58.0) (2023-09-12)
+
+
+### Bug Fixes
+
+* **Datagrid:** add firefox style fixes ([#3434](https://github.com/carbon-design-system/ibm-products/issues/3434)) ([8f6d80d](https://github.com/carbon-design-system/ibm-products/commit/8f6d80d769c0760749de7720bbc1a58adb17982f))
+* **Datagrid:** add text overflow styling to title/desc ([#3433](https://github.com/carbon-design-system/ibm-products/issues/3433)) ([5c7a15c](https://github.com/carbon-design-system/ibm-products/commit/5c7a15cfa1b8f8c5d22128992a7bfbc5380da465))
+* **NonLinearReading:** accessibility review changes ([#3450](https://github.com/carbon-design-system/ibm-products/issues/3450)) ([e3fa944](https://github.com/carbon-design-system/ibm-products/commit/e3fa944efcb8c6c4b8edbbb640196912830471f3))
+
+
+### Features
+
+* **Checklist:** add Checklist component ([#3408](https://github.com/carbon-design-system/ibm-products/issues/3408)) ([1370e82](https://github.com/carbon-design-system/ibm-products/commit/1370e821da61156177ef0146f38bf3383046d828))
+
+
+
+
+
+# [1.57.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.56.0...@carbon/ibm-products@1.57.0) (2023-08-29)
+
+
+### Bug Fixes
+
+* datagrid table accessibility v1 ([#3405](https://github.com/carbon-design-system/ibm-products/issues/3405)) ([491c007](https://github.com/carbon-design-system/ibm-products/commit/491c007f86db2f2949986542f838285d77d489fa))
+
+
+### Features
+
+* **Datagrid:** add keyboard support for col resizing ([#3395](https://github.com/carbon-design-system/ibm-products/issues/3395)) ([c5d5222](https://github.com/carbon-design-system/ibm-products/commit/c5d5222095dab1d8a9cae2c54d26801b8c56cc3f))
+* **Datagrid:** add on resize end callback ([#3407](https://github.com/carbon-design-system/ibm-products/issues/3407)) ([d9b7296](https://github.com/carbon-design-system/ibm-products/commit/d9b7296ef559de4befc7301d9fb02b8664586aa1))
+
+
+
+
+
+# [1.56.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.55.2...@carbon/ibm-products@1.56.0) (2023-08-22)
+
+
+### Features
+
+* **Coachmark:** Novice to Pro component ([#3143](https://github.com/carbon-design-system/ibm-products/issues/3143)) ([32584f9](https://github.com/carbon-design-system/ibm-products/commit/32584f94f46ab998f6d47c5b98e716018a454c53))
+* **NotificationsPanel:** include target attribute inside the link - v1 ([#3331](https://github.com/carbon-design-system/ibm-products/issues/3331)) ([e16592f](https://github.com/carbon-design-system/ibm-products/commit/e16592fba53ca620e573256200b84753c638bfd2))
+
+
+
+
+
 ## [1.55.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.55.1...@carbon/ibm-products@1.55.2) (2023-08-15)
 
 

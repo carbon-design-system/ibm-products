@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@1.3.0...@carbon/ibm-cloud-cognitive-core@1.4.0) (2023-09-12)
+
+
+### Features
+
+* **Checklist:** add Checklist component ([#3408](https://github.com/carbon-design-system/ibm-products/issues/3408)) ([1370e82](https://github.com/carbon-design-system/ibm-products/commit/1370e821da61156177ef0146f38bf3383046d828))
+
+
+
+
+
+# [1.3.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@1.2.1...@carbon/ibm-cloud-cognitive-core@1.3.0) (2023-08-22)
+
+
+### Features
+
+* **Coachmark:** Novice to Pro component ([#3143](https://github.com/carbon-design-system/ibm-products/issues/3143)) ([32584f9](https://github.com/carbon-design-system/ibm-products/commit/32584f94f46ab998f6d47c5b98e716018a454c53))
+
+
+
+
+
 ## [1.2.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@1.2.0...@carbon/ibm-cloud-cognitive-core@1.2.1) (2023-08-15)
 
 

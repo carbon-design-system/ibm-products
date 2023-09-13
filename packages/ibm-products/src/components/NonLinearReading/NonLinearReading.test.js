@@ -40,7 +40,7 @@ describe(componentName, () => {
 
   it('has no accessibility violations', async () => {
     const { container } = renderComponent();
-    // await expect(container).toBeAccessible(componentName);
+    await expect(container).toBeAccessible(componentName);
     await expect(container).toHaveNoAxeViolations();
   });
 

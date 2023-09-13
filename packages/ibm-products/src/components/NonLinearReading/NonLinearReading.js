@@ -5,13 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { ChevronDown16 } from '@carbon/icons-react';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -30,18 +31,11 @@ const defaults = {
  */
 export let NonLinearReading = React.forwardRef(
   (
-    {
-      // The component props, in alphabetical order (for consistency).
-      children,
-      className,
-      /* other props for NonLinearReading, with default values if needed */
-      definition,
-      theme = defaults.theme,
-      ...rest
-    },
+    { children, className, definition, theme = defaults.theme, ...rest },
     ref
   ) => {
     const [isOpen, setOpen] = useState(false);
+    const contentId = useRef(uuidv4()).current;
 
     const handleToggle = () => {
       setOpen((prevState) => !prevState);
@@ -58,6 +52,7 @@ export let NonLinearReading = React.forwardRef(
         {' '}
         <button
           type="button"
+          aria-controls={contentId}
           aria-expanded={isOpen}
           className={cx(`${blockClass}__keyword`, [
             isOpen
@@ -69,7 +64,9 @@ export let NonLinearReading = React.forwardRef(
           {children}
           <ChevronDown16 />
         </button>{' '}
-        {isOpen && <span className={`${blockClass}__body`}>{definition}</span>}{' '}
+        <span id={contentId} className={`${blockClass}__body`} hidden={!isOpen}>
+          {isOpen && definition}
+        </span>{' '}
       </span>
     );
   }

@@ -19,57 +19,67 @@ import { FilterProvider } from './addons/Filtering/FilterProvider';
 const blockClass = `${pkg.prefix}--datagrid`;
 const componentName = 'Datagrid';
 
-export let Datagrid = React.forwardRef(({ datagridState, ...rest }, ref) => {
-  if (!datagridState) {
-    pconsole.warn(
-      'Datagrid was not passed datagridState which is required to render this component.'
+export let Datagrid = React.forwardRef(
+  ({ datagridState, title, ...rest }, ref) => {
+    if (!datagridState) {
+      pconsole.warn(
+        'Datagrid was not passed datagridState which is required to render this component.'
+      );
+      return null;
+    }
+
+    const {
+      withVirtualScroll,
+      DatagridPagination,
+      isFetching,
+      tableId,
+      filterProps,
+      className,
+      state: { filters },
+    } = datagridState;
+
+    const rows =
+      (DatagridPagination && datagridState.page) || datagridState.rows;
+
+    const props = {
+      title,
+      datagridState,
+    };
+
+    return (
+      <FilterProvider filters={filters}>
+        <InlineEditProvider>
+          <div
+            {...rest}
+            id={tableId}
+            ref={ref}
+            className={cx(
+              className,
+              blockClass,
+              withVirtualScroll
+                ? `${blockClass}__datagridWrap`
+                : `${blockClass}__datagridWrap-simple`,
+              !isFetching && rows.length === 0
+                ? `${blockClass}__empty-state`
+                : ''
+            )}
+            {...getDevtoolsProps(componentName)}
+          >
+            {filterProps?.variation === 'panel' ? (
+              <div
+                className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
+              >
+                <DatagridContent {...props} />
+              </div>
+            ) : (
+              <DatagridContent {...props} />
+            )}
+          </div>
+        </InlineEditProvider>
+      </FilterProvider>
     );
-    return null;
   }
-
-  const {
-    withVirtualScroll,
-    DatagridPagination,
-    isFetching,
-    tableId,
-    filterProps,
-    className,
-    state: { filters },
-  } = datagridState;
-
-  const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
-
-  return (
-    <FilterProvider filters={filters}>
-      <InlineEditProvider>
-        <div
-          {...rest}
-          id={tableId}
-          ref={ref}
-          className={cx(
-            className,
-            blockClass,
-            withVirtualScroll
-              ? `${blockClass}__datagridWrap`
-              : `${blockClass}__datagridWrap-simple`,
-            !isFetching && rows.length === 0 ? `${blockClass}__empty-state` : ''
-          )}
-          {...getDevtoolsProps(componentName)}
-        >
-          {filterProps?.variation === 'panel' ? (
-            <div
-              className={`${blockClass}__datagridWithPanel ${blockClass}__displayFlex ${blockClass}__leftPanel-position`}
-            >
-              <DatagridContent datagridState={datagridState} />
-            </div>
-          ) : (
-            <DatagridContent datagridState={datagridState} />
-          )}
-        </div>
-      </InlineEditProvider>
-    </FilterProvider>
-  );
-});
+);
 
 // Return a placeholder if not released and not enabled by feature flag
 Datagrid = pkg.checkComponentEnabled(Datagrid, componentName);
@@ -83,4 +93,8 @@ Datagrid.propTypes = {
    * The data grid state, much of it being supplied by the useDatagrid hook
    */
   datagridState: PropTypes.object.isRequired,
+  /**
+   * Table title
+   */
+  title: PropTypes.string,
 };

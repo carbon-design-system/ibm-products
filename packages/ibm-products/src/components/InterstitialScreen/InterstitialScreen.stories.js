@@ -55,12 +55,12 @@ const getSelectedMedia = (media) => {
             }}
           />
         ),
-        breakpoints: { xlg: 6, lg: 6 },
+        breakpoints: { xlg: 8, lg: 8 },
       };
     case 'Render an animation':
       return {
         filePaths: [HowACaseIsCreated1, HowACaseIsCreated2, HowACaseIsCreated3],
-        breakpoints: { xlg: 6, lg: 6 },
+        breakpoints: { xlg: 8, lg: 8 },
       };
     default:
       return null;

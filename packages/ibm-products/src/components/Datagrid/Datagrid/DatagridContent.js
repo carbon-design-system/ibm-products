@@ -56,7 +56,7 @@ export const DatagridContent = ({ datagridState, title }) => {
   const gridAreaRef = useRef();
   const multiKeyTrackingRef = useRef();
 
-  useClickOutside((target) => {
+  useClickOutside(gridAreaRef, (target) => {
     if (!withInlineEdit) {
       return;
     }

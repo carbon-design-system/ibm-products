@@ -358,7 +358,7 @@ describe('<IdeDataTable>', () => {
 
     const { component } = componentUnderTest;
     Object.values(expectedLabels).forEach((label) =>
-      expect(component.find(`*[aria-label="${label}"]`).exists()).toBe(true)
+      expect(component.find({children: label}).exists()).toBe(true)
     );
   });
 

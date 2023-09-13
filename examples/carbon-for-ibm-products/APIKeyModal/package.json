@@ -7,9 +7,9 @@
     "ibm-products",
     "component",
     "apikeymodal",
-		"api",
-		"key",
-		"modal"
+    "api",
+    "key",
+    "modal"
   ],
   "license": "Apache-2.0",
   "type": "module",

@@ -7,8 +7,8 @@
     "ibm-products",
     "component",
     "createmodal",
-		"create",
-		"modal"
+    "create",
+    "modal"
   ],
   "license": "Apache-2.0",
   "type": "module",

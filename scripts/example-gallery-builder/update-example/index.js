@@ -32,7 +32,7 @@ const writeIbmProductsConfig = (path, pkgConfig) => {
   //  *
   //  * This source code is licensed under the Apache-2.0 license found in the
   //  * LICENSE file in the root directory of this source tree.
-  //  */\n`
+  //  */`
   //   );
 
   fs.writeFileSync(path, `import { pkg } from '@carbon/ibm-products';\n\n`);
@@ -75,7 +75,7 @@ const updateExample = (name, config) => {
       substitutions.KEYWORDS = [
         substitutions.DISPLAY_NAME.toLowerCase(), //lower case component name
         ...keywords, // parts of component name
-      ].join('",\n\t\t"');
+      ].join('",\n    "');
     } else {
       substitutions.KEYWORDS = substitutions.STYLE_NAME;
     }

@@ -7,8 +7,8 @@
     "ibm-products",
     "component",
     "optionstile",
-		"options",
-		"tile"
+    "options",
+    "tile"
   ],
   "license": "Apache-2.0",
   "type": "module",

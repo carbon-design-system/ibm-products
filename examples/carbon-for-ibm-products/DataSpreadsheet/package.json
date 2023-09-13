@@ -7,8 +7,8 @@
     "ibm-products",
     "component",
     "dataspreadsheet",
-		"data",
-		"spreadsheet"
+    "data",
+    "spreadsheet"
   ],
   "license": "Apache-2.0",
   "type": "module",

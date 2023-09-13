@@ -7,9 +7,9 @@
     "ibm-products",
     "component",
     "userprofileimage",
-		"user",
-		"profile",
-		"image"
+    "user",
+    "profile",
+    "image"
   ],
   "license": "Apache-2.0",
   "type": "module",

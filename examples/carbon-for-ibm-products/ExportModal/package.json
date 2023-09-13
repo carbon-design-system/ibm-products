@@ -7,8 +7,8 @@
     "ibm-products",
     "component",
     "exportmodal",
-		"export",
-		"modal"
+    "export",
+    "modal"
   ],
   "license": "Apache-2.0",
   "type": "module",

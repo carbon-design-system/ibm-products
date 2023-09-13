@@ -7,8 +7,8 @@
     "ibm-products",
     "component",
     "createtearsheet",
-		"create",
-		"tearsheet"
+    "create",
+    "tearsheet"
   ],
   "license": "Apache-2.0",
   "type": "module",

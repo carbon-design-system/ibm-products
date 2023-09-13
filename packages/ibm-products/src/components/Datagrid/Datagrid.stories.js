@@ -27,7 +27,6 @@ import {
   getAutoSizedColumnWidth,
 } from '.';
 
-import { SelectAllWithToggle } from './Datagrid.stories/index';
 // import mdx from './Datagrid.mdx';
 
 import styles from './_storybook-styles.scss';
@@ -430,43 +429,6 @@ export const ActionsDropdown = () => {
   return <Datagrid datagridState={{ ...datagridState }} />;
 };
 
-export const SelectItemsInAllPages = () => {
-  const [data] = useState(makeData(100));
-  const columns = React.useMemo(() => getColumns(data), []);
-  const [areAllSelected, setAreAllSelected] = useState(false);
-  const datagridState = useDatagrid(
-    {
-      columns,
-      data,
-      initialState: {
-        pageSize: 10,
-        pageSizes: [5, 10, 25, 50],
-      },
-      selectAllToggle: {
-        labels: {
-          allRows: 'Select all',
-        },
-        onSelectAllRows: setAreAllSelected,
-      },
-      DatagridPagination,
-      DatagridActions,
-      batchActions: true,
-      toolbarBatchActions: getBatchActions(),
-    },
-    useSelectRows,
-    useSelectAllWithToggle
-  );
-
-  return (
-    <>
-      <Datagrid datagridState={{ ...datagridState }} />
-      <h3>Doc in Notes...</h3>
-      <p>{`Are all entries selected across all pages? - ${areAllSelected}`}</p>
-    </>
-  );
-};
-SelectItemsInAllPages.story = SelectAllWithToggle;
-
 const DatagridBatchActions = (datagridState) => {
   const { selectedFlatRows, toggleAllRowsSelected } = datagridState;
   const totalSelected = selectedFlatRows && selectedFlatRows.length;
@@ -500,12 +462,6 @@ const getBatchActions = () => {
       label: 'Add',
       renderIcon: (props) => <Add size={16} {...props} />,
       onClick: action('Clicked batch action button'),
-    },
-    {
-      label: 'Select all',
-      renderIcon: (props) => <Add size={16} {...props} />,
-      onClick: action('Clicked batch action button'),
-      type: 'select_all',
     },
     {
       label: 'Publish to catalog',
@@ -570,6 +526,7 @@ export const BatchActions = () => {
       DatagridActions,
       DatagridBatchActions,
       rowActions: getRowActions(),
+      onSelectAllRows: () => console.log('onSelectAll batch action callback'),
     },
     useSelectRows,
     useSelectAllWithToggle,

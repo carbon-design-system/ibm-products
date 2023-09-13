@@ -258,7 +258,7 @@ export let OptionsTile = React.forwardRef(
         {enabled !== undefined && (
           <div className={`${blockClass}__toggle-container`}>
             <Toggle
-              id={`${id}-toggle`}
+              id={`${titleId}-toggle`}
               className={`${blockClass}__toggle`}
               toggled={enabled}
               aria-labelledby={titleId}

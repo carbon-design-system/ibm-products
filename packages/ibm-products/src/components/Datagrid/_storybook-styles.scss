@@ -26,6 +26,11 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
   padding: $spacing-07;
 }
 
+#storybook-root
+  .#{c4p-settings.$carbon-prefix}--actionable-notification__content {
+  white-space: pre-wrap;
+}
+
 .carbon-nested-table {
   border-bottom: 1px solid $border-subtle-01;
 

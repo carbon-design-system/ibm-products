@@ -24,6 +24,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   const [initialListWidth, setInitialListWidth] = useState(null);
   const [receivedInitialWidth, setReceivedInitialWidth] = useState(false);
   const {
+    onSelectAllRows,
     state: { selectedRowIds },
     toggleAllRowsSelected,
     toolbarBatchActions,
@@ -137,6 +138,11 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
         toggleAllRowsSelected(false);
         setGlobalFilter(null);
       }}
+      onSelectAll={() => {
+        toggleAllRowsSelected(true);
+        onSelectAllRows?.(true);
+      }}
+      totalCount={rows && rows.length}
     >
       {!displayAllInMenu &&
         toolbarBatchActions &&

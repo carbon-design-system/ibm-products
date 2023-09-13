@@ -5,11 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
-export const useClickOutside = (callback) => {
-  const ref = useRef();
-
+export const useClickOutside = (ref, callback) => {
   useEffect(() => {
     const handleClick = (event) => {
       if (ref.current && !ref.current.contains(event.target)) {
@@ -22,7 +20,5 @@ export const useClickOutside = (callback) => {
     return () => {
       document.removeEventListener('click', handleClick, true);
     };
-  }, [callback]);
-
-  return ref;
+  }, [ref, callback]);
 };

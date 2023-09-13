@@ -19,3 +19,12 @@ jobs:
       - uses: amannn/action-semantic-pull-request@v3.4.6 # cspell:disable-line
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check gallery
+        run: |
+          yarn update-gallery-config
+          if [[ `git status --porcelain` ]]; then
+            echo "Gallery config is up to date."
+          else
+            core.setFailed("The gallery is out of date, run `yarn upadte-gallery-config`");
+          fi

@@ -135,7 +135,8 @@ const FilterFlyout = ({
   };
 
   /** Effects */
-  useClickOutside(filterFlyoutRef, (target) => {
+  const containerRef = useClickOutside((event) => {
+    const { target } = event;
     const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
     const hasClickedOnDropdown =
       target.className === `${carbonPrefix}--list-box__menu-item__option`;
@@ -158,7 +159,7 @@ const FilterFlyout = ({
   );
 
   return (
-    <div className={`${componentClass}__container`}>
+    <div className={`${componentClass}__container`} ref={containerRef}>
       <IconButton
         label={flyoutIconDescription}
         kind="ghost"

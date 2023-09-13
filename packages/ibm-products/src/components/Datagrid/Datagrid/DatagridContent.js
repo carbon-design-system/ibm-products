@@ -53,10 +53,10 @@ export const DatagridContent = ({ datagridState, title }) => {
   } = datagridState;
 
   const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
-  const gridAreaRef = useRef();
   const multiKeyTrackingRef = useRef();
 
-  useClickOutside(gridAreaRef, (target) => {
+  const gridAreaRef = useClickOutside((event) => {
+    const { target } = event;
     if (!withInlineEdit) {
       return;
     }

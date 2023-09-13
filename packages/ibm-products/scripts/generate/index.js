@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+const fs = require('fs');
 const { green } = require('chalk');
 const { outputFileSync, readFileSync } = require('fs-extra');
 const { sync } = require('glob');
-const { camelCase, paramCase, pascalCase } = require('change-case');
-const { basename, join, resolve } = require('path');
+const { camelCase, paramCase, pascalCase, headerCase } = require('change-case');
+const { join, relative, resolve } = require('path');
 
 // https://www.npmjs.com/package/yargs#usage
 const {
@@ -22,6 +23,7 @@ const substitutions = {
   FULL_YEAR: new Date().getFullYear(),
   CAMEL_NAME: camelCase(name),
   STYLE_NAME: paramCase(name),
+  TITLE_NAME: headerCase(name),
 };
 
 const compile = (template) =>
@@ -31,14 +33,34 @@ const compile = (template) =>
     template
   );
 
+const templatesPath = join(__dirname, 'templates');
 if (name) {
-  sync(resolve(__dirname, 'templates/**/*')).forEach((template) => {
-    const path = join(
-      'src',
-      'components',
-      substitutions.DISPLAY_NAME,
-      compile(basename(template))
-    );
+  sync(resolve(templatesPath, '**/*')).forEach((template) => {
+    if (fs.lstatSync(template).isDirectory()) {
+      return; // do nothing for a folder
+    }
+
+    let relativePath = relative(templatesPath, template);
+    const compiledPath = compile(relativePath);
+    let path;
+
+    if (relativePath.startsWith('gallery-example')) {
+      // relativePath = relative('example-gallery', relativePath);
+
+      path = join(
+        '../../examples/carbon-for-ibm-products',
+        substitutions.DISPLAY_NAME,
+        compiledPath.substr('gallery-example/'.length)
+      );
+    } else {
+      path = join(
+        'src',
+        'components',
+        substitutions.DISPLAY_NAME,
+        compiledPath
+      );
+    }
+
     const data = compile(readFileSync(template, 'utf8'));
 
     outputFileSync(path, data);

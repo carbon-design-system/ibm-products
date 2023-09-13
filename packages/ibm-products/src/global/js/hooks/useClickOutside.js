@@ -11,14 +11,14 @@ export const useClickOutside = (ref, callback) => {
   useEffect(() => {
     const handleClick = (event) => {
       if (ref.current && !ref.current.contains(event.target)) {
-        callback(event);
+        callback(event.target);
       }
     };
 
-    document.addEventListener('click', handleClick, true);
+    document.addEventListener('click', handleClick);
 
     return () => {
-      document.removeEventListener('click', handleClick, true);
+      document.removeEventListener('click', handleClick);
     };
-  }, [ref, callback]);
+  }, [callback, ref]);
 };

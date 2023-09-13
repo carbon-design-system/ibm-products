@@ -135,8 +135,7 @@ const FilterFlyout = ({
   };
 
   /** Effects */
-  useClickOutside(filterFlyoutRef, (event) => {
-    const { target } = event;
+  useClickOutside(filterFlyoutRef, (target) => {
     const hasClickedOnDatePicker = target.closest('.flatpickr-calendar');
     const hasClickedOnDropdown =
       target.className === `${carbonPrefix}--list-box__menu-item__option`;

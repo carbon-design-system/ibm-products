@@ -35,7 +35,7 @@ describe(componentName, () => {
     expect(screen.getByRole('complementary')).toHaveClass(blockClass);
   });
 
-  it.skip('has no accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(
       <InlineTip title={title}>{children}</InlineTip>
     );

@@ -20,18 +20,36 @@ const RowSizeDropdown = ({
   ...props
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const onCloseHandler = () => {
+    setIsOpen(false);
+  };
+  const onKeyHandler = (e) => {
+    if (e.key === 'Escape') {
+      onCloseHandler();
+    }
+  };
+  const onBlurHandler = (e) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      onCloseHandler();
+    }
+  };
+  const onClickHandler = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <Popover
       isTabTip
       align="bottom-right"
       open={isOpen}
-      onRequestClose={() => setIsOpen(false)}
+      onRequestClose={onCloseHandler}
       className={`${blockClass}__row-size-options-container`}
+      onKeyDown={onKeyHandler}
+      onBlur={onBlurHandler}
     >
       <IconButton
         align={align}
         kind="ghost"
-        onClick={() => setIsOpen((prevOpen) => !prevOpen)}
+        onClick={onClickHandler}
         label={legendText}
         className={`${blockClass}__row-size-button`}
       >

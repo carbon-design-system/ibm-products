@@ -203,10 +203,10 @@ export const taskStates = prepareStory(Template, {
         tasks: [
           {
             kind: 'disabled',
-            label: 'Disabled label',
+            label: 'Disabled',
             onClick: action('task'),
           },
-          { kind: 'disabled', label: 'Disabled label' },
+          { kind: 'disabled', label: 'Disabled' },
         ],
       },
       {
@@ -214,26 +214,26 @@ export const taskStates = prepareStory(Template, {
         tasks: [
           {
             kind: 'error',
-            label: 'Error label',
+            label: 'Error',
             onClick: action('task'),
           },
-          { kind: 'error', label: 'Error label' },
+          { kind: 'error', label: 'Error' },
         ],
       },
       {
         title:
-          "A task list's title will be truncated after two lines of text otherwise it will never end. A task list's title will be truncated after two lines of text otherwise it will never end. A task list's title will be truncated after two lines of text otherwise it will never end.",
+          "A list's title will be truncated if too long otherwise it will never end. A list's title will be truncated if too long otherwise it will never end. A list's title will be truncated if too long otherwise it will never end.",
         tasks: [
           {
             kind: 'unchecked',
             label:
-              "A task's label will be truncated after two lines of text otherwise it will never end. A task's label will be truncated after two lines of text otherwise it will never end. A task's label will be truncated after two lines of text otherwise it will never end.",
+              'A label will be truncated if too long otherwise it will never end. A label will be truncated if too long otherwise it will never end. A label will be truncated if too long otherwise it will never end.',
             onClick: action('task'),
           },
           {
             kind: 'unchecked',
             label:
-              "A task's label will be truncated after two lines of text otherwise it will never end. A task's label will be truncated after two lines of text otherwise it will never end. A task's label will be truncated after two lines of text otherwise it will never end.",
+              'A label will be truncated if too long otherwise it will never end. A label will be truncated if too long otherwise it will never end. A label will be truncated if too long otherwise it will never end.',
           },
         ],
       },

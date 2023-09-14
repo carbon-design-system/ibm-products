@@ -256,7 +256,7 @@
   "projectOwner": "carbon-design-system",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "skipCi": true,
+  "skipCi": false,
   "commitConvention": "angular",
   "commitType": "docs"
 }

@@ -28,6 +28,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--empty-state;
     @include type.type-style('body-01');
 
     padding-bottom: $spacing-05;
+    color: $text-secondary;
   }
 
   .#{$block-class}__header--small {
@@ -78,5 +79,5 @@ $block-class: #{c4p-settings.$pkg-prefix}--empty-state;
 }
 
 .#{$block-class} .#{$block-class}__link {
-  display: block;
+  display: inline-block;
 }

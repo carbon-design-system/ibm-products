@@ -50,24 +50,18 @@ const getExampleDirectoriesConfig = (
   galleryConfigDir,
   directories
 ) => {
-  // examines peer directories and adds config for them if they have a package.json
-
+  // examines peer directories and checks/updates for if a gallery.config.json exists
   const newConfig = [];
   // add the config for each dir
   directories.forEach((dir) => {
     const examplePath = path.join(directoryPath, dir);
     const configPath = path.join(examplePath, 'gallery.config.json');
 
-    const hasPackage = fs.existsSync(path.join(examplePath, 'package.json'));
+    const hasGalleryConfig = fs.existsSync(configPath);
 
-    if (hasPackage) {
-      let config;
-      const hasGalleryConfig = fs.existsSync(configPath);
-
-      if (hasGalleryConfig) {
-        const configRaw = fs.readFileSync(configPath);
-        config = JSON.parse(configRaw);
-      }
+    if (hasGalleryConfig) {
+      const configRaw = fs.readFileSync(configPath);
+      const config = JSON.parse(configRaw);
 
       // config can include label and thumbnail for package
       const label = config?.label || dir;

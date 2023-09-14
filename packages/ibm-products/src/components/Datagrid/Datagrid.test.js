@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,8 +11,8 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { useDatagrid } from '.';
 import { makeData } from './utils/makeData';
 
-import { carbon } from '../../settings';
-import { expectWarn } from '../../global/js/utils/test-helper';
+import { carbon, pkg } from '../../settings';
+import { expectWarn, mockHTMLElement } from '../../global/js/utils/test-helper';
 import { Datagrid } from '.';
 
 import {
@@ -44,6 +44,7 @@ import {
   Restart16,
   Filter16,
   Activity16,
+  Add16,
 } from '@carbon/icons-react';
 
 // import { DatagridActions, DatagridBatchActions, DatagridPagination, } from './Datagrid.stories';
@@ -2420,5 +2421,150 @@ describe(componentName, () => {
     expect(document.getElementsByTagName('h3')[0].textContent).toMatch(
       'Clicked [retire] on row:'
     );
+  });
+});
+
+const getBatchActions = () => {
+  return [
+    {
+      label: 'Duplicate',
+      renderIcon: Add16,
+      onClick: () => {},
+    },
+    {
+      label: 'Add',
+      renderIcon: Add16,
+      onClick: () => {},
+    },
+    {
+      label: 'Select all',
+      renderIcon: Add16,
+      onClick: () => {},
+      type: 'select_all',
+    },
+    {
+      label: 'Publish to catalog',
+      renderIcon: Add16,
+      onClick: () => {},
+    },
+    {
+      label: 'Download',
+      renderIcon: Add16,
+      onClick: () => {},
+    },
+    {
+      label: 'Delete',
+      renderIcon: Add16,
+      onClick: () => {},
+      hasDivider: true,
+      kind: 'danger',
+    },
+  ];
+};
+
+const TestBatch = () => {
+  const columns = React.useMemo(() => defaultHeader, []);
+  const [data] = useState(makeData(2));
+  const datagridState = useDatagrid(
+    {
+      columns,
+      data,
+      batchActions: true,
+      toolbarBatchActions: getBatchActions(),
+      DatagridActions,
+    },
+    useSelectRows,
+    useSelectAllWithToggle,
+    useStickyColumn
+  );
+
+  return <Datagrid datagridState={datagridState} />;
+};
+
+describe('batch action testing', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+    jest.spyOn(global.console, 'error').mockImplementation(() => {});
+    //This will suppress the warning about Arrows16 Component (will be removed in the next major version of @carbon/icons-react).
+    jest.spyOn(global.console, 'warn').mockImplementation(() => {});
+  });
+  afterEach(() => {
+    jest.useRealTimers();
+  });
+  window.innerWidth = 2000;
+  let mockElement;
+
+  const isTableToolbar = (el) => {
+    return (
+      el.classList?.contains(`${pkg.prefix}--datagrid__table-toolbar`) || false
+    );
+  };
+
+  const setMockWidths = (el, type = 'large') => {
+    let width = type === 'large' ? 2000 : type === 'medium' ? 1000 : 320;
+    if (isTableToolbar(el)) {
+      width = type === 'large' ? 3000 : type === 'medium' ? 1000 : 320;
+    } else {
+      width = type === 'large' ? 500 : type === 'medium' ? 400 : 320;
+    }
+
+    return width;
+  };
+
+  describe('with space for two actions and menu button', () => {
+    beforeEach(() => {
+      mockElement = mockHTMLElement({
+        offsetWidth: {
+          get: function () {
+            return setMockWidths(this);
+          },
+        },
+      });
+      window.ResizeObserver = jest.fn().mockImplementation(() => ({
+        observe: jest.fn(),
+        unobserve: jest.fn(),
+        disconnect: jest.fn(),
+      }));
+    });
+
+    afterEach(() => {
+      mockElement.mockRestore();
+      window.ResizeObserver = ResizeObserver;
+    });
+
+    // Resize observer or mocked widths not working as expected, changes batch action summary element
+    // width to 0 which prevents the default batch action behavior from occurring
+    it.skip('renders batch action and checks for the appropriate rendering based on the current mocked widths', async () => {
+      const { container } = render(<TestBatch />);
+      const { click } = userEvent;
+      const firstCheckbox = screen.getAllByLabelText(/datagrid-table-id/)[0];
+      click(firstCheckbox);
+      expect(
+        container.querySelector(
+          `.${carbon.prefix}--batch-actions.${carbon.prefix}--batch-actions--active`
+        )
+      ).toBeInTheDocument();
+
+      // Given the default offsetWidth mocks, 2 batch actions should be visible
+      // in addition to the MenuButton
+      screen.getByLabelText(getBatchActions()[0].label);
+      screen.getByLabelText(getBatchActions()[1].label);
+      const menuButton = container.querySelector(`.${pkg.prefix}--button-menu`);
+      expect(menuButton).toBeInTheDocument();
+      click(menuButton);
+      const options = Array.from(
+        document.querySelector(`.${pkg.prefix}--button-menu__options`).children
+      );
+      const optionsText = options.map((o) => {
+        return o.textContent;
+      });
+      const remainingBatchActions = [...getBatchActions()].slice(2);
+
+      // Check that the items inside of the MenuButton match the leftover
+      // batch action items
+      remainingBatchActions.forEach((batchAction, index) => {
+        expect(batchAction.label).toEqual(optionsText[index]);
+      });
+    });
   });
 });

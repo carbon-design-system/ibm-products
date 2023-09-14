@@ -116,6 +116,6 @@ if (name) {
   outputFileSync(
     componentWithCarbonSCSSIndexPath,
     componentWithCarbonSCSSIndexData +
-      `@use './${substitutions.DISPLAY_NAME}/index-with-carbon as *';\n`
+      `@use './${substitutions.DISPLAY_NAME}/index-with-carbon' as *;\n`
   );
 }

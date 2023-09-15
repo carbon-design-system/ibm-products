@@ -8,9 +8,8 @@
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { rem } from '@carbon/layout';
 import { RadioButtonGroup, RadioButton } from 'carbon-components-react';
 import isArray from 'lodash/isArray';
 import { pkg } from '../../../../../settings';
@@ -21,9 +20,7 @@ const RowSizeRadioGroup = ({
   rowSizes,
   selectedOption,
   datagridName,
-  buttonRef,
   onChange,
-  hideRadioGroup,
   legendText,
   rowSizeLabels = {
     xl: 'Extra large',
@@ -33,26 +30,10 @@ const RowSizeRadioGroup = ({
     xs: 'Extra small',
   },
 }) => {
-  const { top, right } = getDropdownPosition(buttonRef.current);
-
-  useEffect(() => {
-    window.addEventListener('click', hideRadioGroup);
-    return () => {
-      window.removeEventListener('click', hideRadioGroup);
-    };
-  }, [hideRadioGroup]);
-
   return (
     <div
       className={`${blockClass}__row-size-dropdown`}
-      style={{
-        top: rem(top),
-        right: rem(right),
-      }}
       role="presentation"
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
     >
       <RadioButtonGroup
         legendText={legendText}
@@ -75,9 +56,8 @@ const RowSizeRadioGroup = ({
                 key={option.value}
                 labelText={labelText}
                 value={option.value}
-                id={`${datagridName || 'datagrid'}--row-density--${
-                  option.value
-                }`}
+                id={`${datagridName || 'datagrid'}--row-density--${option.value
+                  }`}
               />
             );
           })}
@@ -95,20 +75,6 @@ const getBackwardCompatibleRowSize = (rowSize) => {
     // md is a new value
   };
   return rowSizeMap[rowSize] || rowSize;
-};
-
-const getDropdownPosition = (buttonEle) => {
-  const parent = buttonEle.parentElement;
-  if (parent instanceof HTMLElement) {
-    const top = buttonEle.offsetTop + buttonEle.offsetHeight;
-    const right =
-      parent.offsetWidth - (buttonEle.offsetLeft + buttonEle.offsetWidth);
-    return {
-      top,
-      right,
-    };
-  }
-  return { top: 0, right: 0 };
 };
 
 RowSizeRadioGroup.defaultProps = {
@@ -135,7 +101,6 @@ RowSizeRadioGroup.defaultProps = {
 RowSizeRadioGroup.propTypes = {
   buttonRef: PropTypes.any.isRequired,
   datagridName: PropTypes.string,
-  hideRadioGroup: PropTypes.func.isRequired,
   legendText: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   rowSizeLabels: PropTypes.object,

@@ -31,10 +31,7 @@ const RowSizeRadioGroup = ({
   },
 }) => {
   return (
-    <div
-      className={`${blockClass}__row-size-dropdown`}
-      role="presentation"
-    >
+    <div className={`${blockClass}__row-size-dropdown`} role="presentation">
       <RadioButtonGroup
         legendText={legendText}
         name="row-height-group"
@@ -56,8 +53,9 @@ const RowSizeRadioGroup = ({
                 key={option.value}
                 labelText={labelText}
                 value={option.value}
-                id={`${datagridName || 'datagrid'}--row-density--${option.value
-                  }`}
+                id={`${datagridName || 'datagrid'}--row-density--${
+                  option.value
+                }`}
               />
             );
           })}

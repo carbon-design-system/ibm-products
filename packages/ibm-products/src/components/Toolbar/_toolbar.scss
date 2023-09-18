@@ -11,12 +11,14 @@
 @include exports('ibm-products--toolbar') {
   $block-class: #{$pkg-prefix}--toolbar;
 
-  $border: carbon--rem(
+  /* stylelint-disable-next-line function-no-unknown */ // carbon--rem renamed to to-rem
+  $border: to-rem(
       $px: 1px,
     )
     solid $ui-03;
 
-  $toolbar-dimensions: carbon--rem(
+  /* stylelint-disable-next-line function-no-unknown */ // carbon--rem renamed to to-rem
+  $toolbar-dimensions: to-rem(
     $px: 40px,
   );
 
@@ -61,7 +63,8 @@
   }
 
   .#{$block-class}__button__caret {
-    $caret-dimensions: carbon--rem(
+    /* stylelint-disable-next-line function-no-unknown */ // carbon--rem renamed to to-rem
+    $caret-dimensions: to-rem(
       $px: 6px,
     );
 

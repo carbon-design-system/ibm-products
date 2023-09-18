@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 // Other standard imports.
 import { Close16, Crossroads16, Idea20 } from '@carbon/icons-react';
@@ -17,6 +17,7 @@ import { getComponentText } from './utils';
 import { SteppedAnimatedMedia } from '../SteppedAnimatedMedia';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
+import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg /*, carbon */ } from '../../settings';
 
 // Carbon and package components we use.
@@ -78,6 +79,7 @@ export let InlineTip = React.forwardRef(
     ref
   ) => {
     const [isCollapsed, setIsCollapsed] = useState(collapsible);
+    const labelId = useRef(uuidv4()).current;
 
     const previewText = useMemo(
       () => getComponentText(React.Children.toArray(children)),
@@ -102,6 +104,7 @@ export let InlineTip = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
+        aria-labelledby={labelId}
         className={cx(
           blockClass, // Apply the block class to the main HTML element
           className, // Apply any supplied class names to the main HTML element.
@@ -130,7 +133,9 @@ export let InlineTip = React.forwardRef(
           </div>
         )}
         <div className={`${blockClass}__content`}>
-          <h6 className={`${blockClass}__title`}>{title}</h6>
+          <h6 id={labelId} className={`${blockClass}__title`}>
+            {title}
+          </h6>
 
           <section className={`${blockClass}__body`}>
             {childrenToRender}

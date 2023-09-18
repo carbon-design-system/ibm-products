@@ -6,8 +6,7 @@
  */
 
 import React from 'react';
-// TODO: import action to handle events if required.
-// import { action } from '@storybook/addon-actions';
+import { action } from '@storybook/addon-actions';
 
 import cx from 'classnames';
 
@@ -62,10 +61,10 @@ const defaultProps = {
   expandButtonLabel: 'Read more',
   media: 'None',
   onClick: () => {
-    alert(`Clicked the tertiary button`);
+    action(`Clicked the tertiary button`)();
   },
   onClose: () => {
-    alert(`Clicked the close button`);
+    action(`Clicked the close button`)();
   },
   title: 'Use case-specific heading',
 };
@@ -74,12 +73,12 @@ const defaultProps = {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
-  const { media, narrow, action } = args;
+  const { media, narrow, action: componentAction } = args;
 
   const selectedMedia = (function () {
     switch (media) {
       case 'Render a static image':
-        return { render: () => <img alt="img" src={InlineTipImage} /> };
+        return { render: () => <img alt="" src={InlineTipImage} /> };
       case 'Render an animation':
         return {
           filePaths: [InlineTipAnimation],
@@ -89,12 +88,12 @@ const Template = (args) => {
     }
   })();
   const selectedAction = (function () {
-    switch (action) {
+    switch (componentAction) {
       case '<InlineTipButton>':
         return (
           <InlineTipButton
             onClick={() => {
-              alert(`Clicked the action button`);
+              action(`Clicked the action button`)();
             }}
           >
             Click me
@@ -102,7 +101,13 @@ const Template = (args) => {
         );
       case '<InlineTipLink>':
         return (
-          <InlineTipLink href="https://www.ibm.com" target="_blank">
+          <InlineTipLink
+            href="https://www.ibm.com"
+            onClick={() => {
+              action('Clicked the link')();
+            }}
+            target="_blank"
+          >
             Learn more
           </InlineTipLink>
         );

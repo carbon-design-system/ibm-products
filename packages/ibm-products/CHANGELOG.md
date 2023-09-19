@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.59.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.58.0...@carbon/ibm-products@1.59.0) (2023-09-19)
+
+
+### Bug Fixes
+
+* datagrid row size accessibility v1 ([#3479](https://github.com/carbon-design-system/ibm-products/issues/3479)) ([b64787b](https://github.com/carbon-design-system/ibm-products/commit/b64787b6f804700012e6854965757bcc34054d89))
+* **Datagrid:** add initial width value to `useResizeObserver` and add batch actions test (v1) ([#3378](https://github.com/carbon-design-system/ibm-products/issues/3378)) ([dece763](https://github.com/carbon-design-system/ibm-products/commit/dece763b2f916bd7e50d4e3394457b4917e2fd84))
+* update to Carbon 10 compatible versions to latest ([#3387](https://github.com/carbon-design-system/ibm-products/issues/3387)) ([34a6257](https://github.com/carbon-design-system/ibm-products/commit/34a6257288e792160fef634f2675eb7698a756f8))
+
+
+### Features
+
+* **createfullpage:** initialstep added  for v1 ([#3453](https://github.com/carbon-design-system/ibm-products/issues/3453)) ([9f4e30e](https://github.com/carbon-design-system/ibm-products/commit/9f4e30e1af681a485073471d42a12a02a1183d19))
+
+
+
+
+
 # [1.58.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.57.0...@carbon/ibm-products@1.58.0) (2023-09-12)
 
 

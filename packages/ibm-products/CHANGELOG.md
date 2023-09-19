@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.59.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.58.0...@carbon/ibm-products@1.59.0) (2023-09-19)
+
+
+### Bug Fixes
+
+* datagrid row size accessibility v1 ([#3479](https://github.com/carbon-design-system/ibm-products/issues/3479)) ([b64787b](https://github.com/carbon-design-system/ibm-products/commit/b64787b6f804700012e6854965757bcc34054d89))
+* **Datagrid:** add initial width value to `useResizeObserver` and add batch actions test (v1) ([#3378](https://github.com/carbon-design-system/ibm-products/issues/3378)) ([dece763](https://github.com/carbon-design-system/ibm-products/commit/dece763b2f916bd7e50d4e3394457b4917e2fd84))
+* update to Carbon 10 compatible versions to latest ([#3387](https://github.com/carbon-design-system/ibm-products/issues/3387)) ([34a6257](https://github.com/carbon-design-system/ibm-products/commit/34a6257288e792160fef634f2675eb7698a756f8))
+
+
+### Features
+
+* **createfullpage:** initialstep added  for v1 ([#3453](https://github.com/carbon-design-system/ibm-products/issues/3453)) ([9f4e30e](https://github.com/carbon-design-system/ibm-products/commit/9f4e30e1af681a485073471d42a12a02a1183d19))
+
+
+
+
+
+# [1.58.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.57.0...@carbon/ibm-products@1.58.0) (2023-09-12)
+
+
+### Bug Fixes
+
+* **Datagrid:** add firefox style fixes ([#3434](https://github.com/carbon-design-system/ibm-products/issues/3434)) ([8f6d80d](https://github.com/carbon-design-system/ibm-products/commit/8f6d80d769c0760749de7720bbc1a58adb17982f))
+* **Datagrid:** add text overflow styling to title/desc ([#3433](https://github.com/carbon-design-system/ibm-products/issues/3433)) ([5c7a15c](https://github.com/carbon-design-system/ibm-products/commit/5c7a15cfa1b8f8c5d22128992a7bfbc5380da465))
+* **NonLinearReading:** accessibility review changes ([#3450](https://github.com/carbon-design-system/ibm-products/issues/3450)) ([e3fa944](https://github.com/carbon-design-system/ibm-products/commit/e3fa944efcb8c6c4b8edbbb640196912830471f3))
+
+
+### Features
+
+* **Checklist:** add Checklist component ([#3408](https://github.com/carbon-design-system/ibm-products/issues/3408)) ([1370e82](https://github.com/carbon-design-system/ibm-products/commit/1370e821da61156177ef0146f38bf3383046d828))
+
+
+
+
+
 # [1.57.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.56.0...@carbon/ibm-products@1.57.0) (2023-08-29)
 
 

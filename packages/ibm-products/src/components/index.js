@@ -97,3 +97,4 @@ export { CoachmarkOverlayElement } from './CoachmarkOverlayElement';
 export { CoachmarkStack } from './CoachmarkStack';
 
 export { InlineTip } from './InlineTip';
+export { Checklist } from './Checklist';

@@ -45,7 +45,8 @@
 
   & &__overflow-menu {
     width: 3rem;
-    border-left: carbon--rem($px: 1px) solid $ui-03;
+    /* stylelint-disable-next-line function-no-unknown */ // carbon--rem renamed to to-rem
+    border-left: to-rem($px: 1px) solid $ui-03;
     background-color: $interactive-01;
 
     &:hover,

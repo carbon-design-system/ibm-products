@@ -41,7 +41,7 @@ const componentName = 'InlineTipLink';
 // };
 
 /**
- * TODO: A description of the component.
+ * TODO: A standard Carbon link, styled specifically for use inside InlineTip.
  */
 export let InlineTipLink = React.forwardRef(
   (
@@ -81,13 +81,6 @@ export let InlineTipLink = React.forwardRef(
     );
   }
 );
-
-// Return a placeholder if not released and not enabled by feature flag
-InlineTipLink = pkg.checkComponentEnabled(InlineTipLink, componentName);
-
-// The display name of the component, used by React. Note that displayName
-// is used in preference to relying on function.name.
-InlineTipLink.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).

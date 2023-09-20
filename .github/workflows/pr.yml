@@ -26,5 +26,5 @@ jobs:
           if [[ `git status --porcelain` ]]; then
             echo "Gallery config is up to date."
           else
-            core.setFailed("The gallery is out of date, run `yarn upadte-gallery-config`");
+            core.setFailed("The gallery is out of date, run `yarn update-gallery-config`");
           fi

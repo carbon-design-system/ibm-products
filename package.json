@@ -41,14 +41,14 @@
     "storybook:build:storybook": "cd packages/core && yarn build",
     "storybook:start": "cd packages/core && yarn start",
     "sync": "carbon-cli sync",
-    "update-gallery-config": "node scripts/example-gallery-builder/index.js; npx prettier examples/carbon-for-ibm-products/example-gallery/src/gallery-config/index.js --write",
+    "update-gallery-config": "node scripts/example-gallery-builder/index.js; prettier examples/carbon-for-ibm-products/**/src/**/*.{js,jsx,md,mdx,scss,json} --write",
     "//upgrade:dependencies:top": "# don't upgrade carbon (done globally), react/react-dom (not tested)",
     "upgrade:dependencies:top": "npm-check-updates -u --dep dev,peer,prod --reject '/(carbon|^react$|^react-dom$|^@testing-library)/'",
     "upgrade:dependencies:packages": "yarn run-all --no-sort --concurrency 1 upgrade-dependencies",
     "upgrade:dependencies:yarn": "yarn set version latest",
-    "upgrade:dependencies:examples": "npm-check-updates -u --dep dev,peer,prod --color --target minor --packageFile 'examples/**/package.json'",
+    "upgrade:dependencies:examples": "npm-check-updates -u --dep dev,peer,prod --color --target minor --packageFile 'scripts/example-gallery-builder/update-example/**/package.json'",
     "upgrade:automatic": "run-s -s 'upgrade:dependencies:*'",
-    "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,examples/**,packages/**}/package.json}' --filter '/carbon/' --target minor",
+    "upgrade:carbon": "npm-check-updates -u --dep dev,peer,prod --packageFile '{package.json,{config/**,packages/**}/package.json}' --filter '/carbon/' --target minor",
     "upgrade:manual": "sh ./scripts/monorepo-npm-upgrade.sh"
   },
   "devDependencies": {

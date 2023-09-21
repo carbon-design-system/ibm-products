@@ -22,3 +22,7 @@ packages/*/examples/*
 
 # React
 **/storybook-static/**
+
+# Ignore template files
+packages/ibm-products/scripts/generate/templates/**/*.js*
+scripts/example-gallery-builder/update-example/**/*.js*

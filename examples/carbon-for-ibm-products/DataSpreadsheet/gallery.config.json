@@ -1,3 +1,10 @@
 {
-  "label": "DataSpreadsheet"
+  "label": "DataSpreadsheet",
+  "package-config": {
+    "flags": {
+      "component": {
+        "DataSpreadsheet": true
+      }
+    }
+  }
 }

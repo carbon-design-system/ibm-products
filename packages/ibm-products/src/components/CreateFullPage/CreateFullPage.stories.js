@@ -35,6 +35,15 @@ import {
 } from '@carbon/react';
 import DocsPage from './CreateFullPage.docs-page';
 
+const breadcrumbs = {
+  'No breadcrumb': null,
+  'A single breadcrumb': [{ href: '/', key: '0', label: 'Home page' }],
+  'Two breadcrumbs': [
+    { key: '0', href: '/', label: 'Home page' },
+    { key: '1', href: '/', label: 'Application name' },
+  ],
+};
+
 export default {
   title: getStoryTitle(CreateFullPage.displayName),
   component: CreateFullPage,
@@ -49,10 +58,21 @@ export default {
   decorators: [
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
+  argTypes: {
+    breadcrumbs: {
+      control: {
+        type: 'select',
+        labels: Object.keys(breadcrumbs),
+      },
+      options: Object.values(breadcrumbs).map((_k, i) => i),
+      mapping: Object.values(breadcrumbs),
+    },
+  },
 };
 
 const defaultFullPageProps = {
-  title: 'Create topic',
+  title: 'Page title',
+  secondaryTitle: 'Create topic',
   nextButtonText: 'Next',
   backButtonText: 'Back',
   cancelButtonText: 'Cancel',
@@ -64,6 +84,10 @@ const defaultFullPageProps = {
   modalSecondaryButtonText: 'Return to form',
   onRequestSubmit: action('Submit handler called'),
   onClose: action('Close handler called'),
+  breadcrumbs: [
+    { href: '/', key: '0', label: 'Home page' },
+    { href: '/', key: '1', label: 'Application name' },
+  ],
 };
 
 const Template = ({ ...args }) => {

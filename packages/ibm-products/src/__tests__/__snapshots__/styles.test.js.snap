@@ -1895,6 +1895,14 @@ p.c4p--about-modal__copyright-text:first-child {
   margin-left: 0;
 }
 
+.c4p--create-full-page__header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+}
+
 .c4p--create-full-page .c4p--create-full-page__step__step--hidden-step {
   display: none;
 }
@@ -1931,7 +1939,7 @@ p.c4p--about-modal__copyright-text:first-child {
   display: none;
 }
 
-.c4p--create-full-page {
+.c4p--create-full-page__influencer-and-body-container {
   display: flex;
   height: 100vh;
   padding: 0;

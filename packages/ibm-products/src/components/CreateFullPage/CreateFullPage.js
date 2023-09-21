@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useState, createContext } from 'react';
+import React, { useEffect, useState, createContext, useRef } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -33,6 +33,7 @@ import {
   useCreateComponentStepChange,
 } from '../../global/js/hooks';
 import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
+import { BasicHeader } from '../BasicHeader/BasicHeader';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
@@ -61,6 +62,7 @@ component to get the desired affect.
 export let CreateFullPage = React.forwardRef(
   (
     {
+      breadcrumbs,
       backButtonText,
       cancelButtonText,
       children,
@@ -75,6 +77,7 @@ export let CreateFullPage = React.forwardRef(
       firstFocusElement,
       submitButtonText,
       title,
+      secondaryTitle,
       ...rest
     },
     ref
@@ -91,6 +94,9 @@ export let CreateFullPage = React.forwardRef(
     const [stepData, setStepData] = useState([]);
     const [firstIncludedStep, setFirstIncludedStep] = useState(1);
     const [lastIncludedStep, setLastIncludedStep] = useState(null);
+    const [headerHeight, setHeaderHeight] = useState(0);
+
+    const headerRef = useRef(null);
 
     useEffect(() => {
       const firstItem =
@@ -103,6 +109,14 @@ export let CreateFullPage = React.forwardRef(
         setLastIncludedStep(lastItem);
       }
     }, [stepData, firstIncludedStep, lastIncludedStep]);
+
+    useEffect(() => {
+      let headerHeight = 0;
+      if (title || breadcrumbs?.length > 0) {
+        headerHeight = headerRef.current.getBoundingClientRect().height;
+      }
+      setHeaderHeight(headerHeight);
+    }, [title, breadcrumbs]);
 
     useCreateComponentFocus({
       previousState,
@@ -135,7 +149,6 @@ export let CreateFullPage = React.forwardRef(
       setCreateComponentActions: setCreateFullPageActions,
       setModalIsOpen,
     });
-
     // currently, we are not supporting the use of 'view all' toggle state
     /* istanbul ignore next */
     return (
@@ -145,72 +158,88 @@ export let CreateFullPage = React.forwardRef(
         className={cx(blockClass, className)}
         {...getDevtoolsProps(componentName)}
       >
-        <div className={`${blockClass}__influencer`}>
-          <CreateInfluencer
-            stepData={stepData}
-            currentStep={currentStep}
-            title={title}
-          />
-        </div>
-        <div className={`${blockClass}__body`}>
-          <div className={`${blockClass}__main`}>
-            <div className={`${blockClass}__content`}>
-              <Form className={`${blockClass}__form`} aria-label={title}>
-                <StepsContext.Provider
-                  value={{
-                    currentStep,
-                    setIsDisabled,
-                    setOnNext: (fn) => setOnNext(() => fn),
-                    setOnMount: (fn) => setOnMount(() => fn),
-                    setStepData,
-                    stepData,
-                  }}
-                >
-                  {React.Children.map(children, (child, index) => (
-                    <StepNumberContext.Provider value={index + 1}>
-                      {child}
-                    </StepNumberContext.Provider>
-                  ))}
-                </StepsContext.Provider>
-              </Form>
-            </div>
-            <ActionSet
-              className={`${blockClass}__buttons`}
-              actions={createFullPageActions}
-              buttonSize="2xl"
-              size="2xl"
+        {(title || breadcrumbs?.length > 0) && (
+          <div className={`${blockClass}__header`} ref={headerRef}>
+            <BasicHeader
+              title={title}
+              breadcrumbs={breadcrumbs}
+              noTrailingSlash
             />
           </div>
-        </div>
-        <ComposedModal
-          className={`${blockClass}__modal`}
-          size="sm"
-          open={modalIsOpen}
-          aria-label={modalTitle}
-          onClose={() => {
-            setModalIsOpen(false);
+        )}
+        <div
+          className={`${blockClass}__influencer-and-body-container`}
+          style={{
+            height: `calc(100vh - ${headerHeight}px)`,
           }}
         >
-          <ModalHeader title={modalTitle} />
-          <ModalBody>
-            <p>{modalDescription}</p>
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              type="button"
-              kind="secondary"
-              onClick={() => {
-                setModalIsOpen(!modalIsOpen);
-              }}
-              data-modal-primary-focus
-            >
-              {modalSecondaryButtonText}
-            </Button>
-            <Button type="button" kind="danger" onClick={onClose}>
-              {modalDangerButtonText}
-            </Button>
-          </ModalFooter>
-        </ComposedModal>
+          <div className={`${blockClass}__influencer`}>
+            <CreateInfluencer
+              stepData={stepData}
+              currentStep={currentStep}
+              title={secondaryTitle}
+            />
+          </div>
+          <div className={`${blockClass}__body`}>
+            <div className={`${blockClass}__main`}>
+              <div className={`${blockClass}__content`}>
+                <Form className={`${blockClass}__form`} aria-label={title}>
+                  <StepsContext.Provider
+                    value={{
+                      currentStep,
+                      setIsDisabled,
+                      setOnNext: (fn) => setOnNext(() => fn),
+                      setOnMount: (fn) => setOnMount(() => fn),
+                      setStepData,
+                      stepData,
+                    }}
+                  >
+                    {React.Children.map(children, (child, index) => (
+                      <StepNumberContext.Provider value={index + 1}>
+                        {child}
+                      </StepNumberContext.Provider>
+                    ))}
+                  </StepsContext.Provider>
+                </Form>
+              </div>
+              <ActionSet
+                className={`${blockClass}__buttons`}
+                actions={createFullPageActions}
+                buttonSize="2xl"
+                size="2xl"
+              />
+            </div>
+          </div>
+          <ComposedModal
+            className={`${blockClass}__modal`}
+            size="sm"
+            open={modalIsOpen}
+            aria-label={modalTitle}
+            onClose={() => {
+              setModalIsOpen(false);
+            }}
+          >
+            <ModalHeader title={modalTitle} />
+            <ModalBody>
+              <p>{modalDescription}</p>
+            </ModalBody>
+            <ModalFooter>
+              <Button
+                type="button"
+                kind="secondary"
+                onClick={() => {
+                  setModalIsOpen(!modalIsOpen);
+                }}
+                data-modal-primary-focus
+              >
+                {modalSecondaryButtonText}
+              </Button>
+              <Button type="button" kind="danger" onClick={onClose}>
+                {modalDangerButtonText}
+              </Button>
+            </ModalFooter>
+          </ComposedModal>
+        </div>
       </div>
     );
   }
@@ -231,6 +260,18 @@ CreateFullPage.propTypes = {
    * The back button text
    */
   backButtonText: PropTypes.string.isRequired,
+
+  /** The header breadcrumbs */
+  breadcrumbs: PropTypes.arrayOf(
+    PropTypes.shape({
+      /** breadcrumb item key */
+      key: PropTypes.string.isRequired,
+      /** breadcrumb item label */
+      label: PropTypes.string.isRequired,
+      /** breadcrumb item link */
+      link: PropTypes.string,
+    })
+  ),
 
   /**
    * The cancel button text
@@ -291,6 +332,11 @@ CreateFullPage.propTypes = {
   onRequestSubmit: PropTypes.func.isRequired,
 
   /**
+   * A secondary title of the full page, displayed in the influencer area
+   */
+  secondaryTitle: PropTypes.string,
+
+  /**
    * @ignore
    * The aria label to be used for the UI Shell SideNav Carbon component
    */
@@ -302,7 +348,7 @@ CreateFullPage.propTypes = {
   submitButtonText: PropTypes.string.isRequired,
 
   /**
-   * The main title of the full page, displayed in the influencer area.
+   * The main title of the full page, displayed in the header area
    */
   title: PropTypes.string,
 };

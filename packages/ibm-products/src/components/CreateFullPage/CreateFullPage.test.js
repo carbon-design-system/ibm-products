@@ -473,4 +473,35 @@ describe(componentName, () => {
       createFullPageSteps[0].classList.contains(`.${blockClass}__step-fieldset`)
     );
   });
+
+  it('renders a header if title is provided ', () => {
+    const { container } = renderCreateFullPage({
+      ...defaultFullPageProps,
+      title: 'Page title',
+    });
+    const headerSelector = container.querySelector(`.${blockClass}__header`);
+
+    expect(headerSelector).toBeInTheDocument();
+  });
+
+  it('renders a header if breadcrumbs are provided', () => {
+    const { container } = renderCreateFullPage({
+      ...defaultFullPageProps,
+      breadcrumbs: [
+        { key: '0', href: '/', label: 'Home page' },
+        { key: '1', href: '/', label: 'Application name' },
+      ],
+    });
+    const headerSelector = container.querySelector(`.${blockClass}__header`);
+
+    expect(headerSelector).toBeInTheDocument();
+  });
+
+  it("doesn't render a header if title or breadcrumbs are not provided  ", () => {
+    const { container } = renderCreateFullPage({
+      ...defaultFullPageProps,
+    });
+    const headerSelector = container.querySelector(`.${blockClass}__header`);
+    expect(headerSelector).not.toBeInTheDocument();
+  });
 });

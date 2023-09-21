@@ -8,6 +8,7 @@
 
 import React, { useState } from 'react';
 import { Checkmark, Edit, TrashCan } from '@carbon/react/icons';
+import { ActionableNotification } from '@carbon/react';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
@@ -49,6 +50,36 @@ export default {
     },
   },
 };
+
+const CustomizeColRework = () => (
+  <ActionableNotification
+    className="preview__notification--feature-flag"
+    kind="warning"
+    inline
+    lowContrast
+    actionButtonLabel="Learn more"
+    statusIconDescription="Close icon button"
+    title={
+      <>
+        This extension is currently being reworked after{' '}
+        <CodeSnippet type="inline" hideCopyButton>
+          2.8.1
+        </CodeSnippet>
+      </>
+    }
+    onActionButtonClick={() => {
+      window.open(
+        'https://github.com/carbon-design-system/ibm-products/issues/3446'
+      );
+    }}
+  >
+    Support will be added back shortly and can be tracked{' '}
+    <a href="https://github.com/carbon-design-system/ibm-products/issues/3446">
+      here
+    </a>
+    .
+  </ActionableNotification>
+);
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -216,6 +247,7 @@ const ColumnCustomizationUsage = ({ ...args }) => {
 
   return (
     <>
+      <CustomizeColRework />
       <Datagrid datagridState={datagridState} />
       <div className={`${blockClass}-story__hidden-column-id-snippet`}>
         <p>Hidden column ids:</p>
@@ -330,6 +362,7 @@ const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
 
   return (
     <>
+      <CustomizeColRework />
       <Datagrid datagridState={datagridState} />
       <div className={`${blockClass}-story__hidden-column-id-snippet`}>
         <p>Hidden column ids:</p>

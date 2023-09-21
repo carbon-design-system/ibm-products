@@ -11,7 +11,7 @@ import { RadioButtonGroup, RadioButton } from '@carbon/react';
 import isArray from 'lodash/isArray';
 import { pkg } from '../../../../../settings';
 
-const blockClass = `${pkg.prefix}--datagrid`;
+const blockClass = `${pkg.prefix}--datagrid__row-size`;
 
 const RowSizeRadioGroup = ({
   rowSizes,
@@ -28,13 +28,7 @@ const RowSizeRadioGroup = ({
   },
 }) => {
   return (
-    <div
-      className={`${blockClass}__row-size-dropdown`}
-      role="presentation"
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
-    >
+    <div className={`${blockClass}-dropdown`} role="presentation">
       <RadioButtonGroup
         legendText={legendText}
         name="row-height-group"
@@ -53,7 +47,7 @@ const RowSizeRadioGroup = ({
             }
             return (
               <RadioButton
-                className={`${blockClass}__row-size-radio-button`}
+                className={`${blockClass}-radio-button`}
                 key={option.value}
                 labelText={labelText}
                 value={option.value}

@@ -29,11 +29,13 @@ import { ActionSet } from '../ActionSet';
 import {
   usePreviousValue,
   useValidCreateStepCount,
+  useResetCreateComponent,
   useCreateComponentFocus,
   useCreateComponentStepChange,
 } from '../../global/js/hooks';
 import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
 import { BasicHeader } from '../BasicHeader/BasicHeader';
+import { getNumberOfHiddenSteps } from '../../global/js/utils/getNumberOfHiddenSteps';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
@@ -67,6 +69,7 @@ export let CreateFullPage = React.forwardRef(
       cancelButtonText,
       children,
       className,
+      initialStep,
       modalDangerButtonText,
       modalDescription,
       modalSecondaryButtonText,
@@ -108,7 +111,14 @@ export let CreateFullPage = React.forwardRef(
       if (lastItem !== lastIncludedStep) {
         setLastIncludedStep(lastItem);
       }
-    }, [stepData, firstIncludedStep, lastIncludedStep]);
+      if (open && initialStep) {
+        const numberOfHiddenSteps = getNumberOfHiddenSteps(
+          stepData,
+          initialStep
+        );
+        setCurrentStep(Number(initialStep + numberOfHiddenSteps));
+      }
+    }, [stepData, firstIncludedStep, lastIncludedStep, initialStep]);
 
     useEffect(() => {
       let headerHeight = 0;
@@ -126,6 +136,16 @@ export let CreateFullPage = React.forwardRef(
       firstFocusElement,
     });
     useValidCreateStepCount(stepData.length, componentName);
+    useResetCreateComponent({
+      firstIncludedStep,
+      previousState,
+      open,
+      setCurrentStep,
+      stepData,
+      initialStep,
+      totalSteps: stepData?.length,
+      componentName,
+    });
     useCreateComponentStepChange({
       firstIncludedStep,
       lastIncludedStep,
@@ -292,6 +312,13 @@ CreateFullPage.propTypes = {
    * Specifies elements to focus on first on render.
    */
   firstFocusElement: PropTypes.string,
+
+  /**
+   * This can be used to open the component to a step other than the first step.
+   * For example, a create flow was previously in progress, data was saved, and
+   * is now being completed.
+   */
+  initialStep: PropTypes.number,
 
   /**
    * The primary 'danger' button text in the modal

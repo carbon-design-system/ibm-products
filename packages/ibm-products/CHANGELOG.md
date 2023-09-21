@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.9.0...@carbon/ibm-products@2.10.0) (2023-09-20)
+
+
+### Bug Fixes
+
+* datagrid row height click ([#3480](https://github.com/carbon-design-system/ibm-products/issues/3480)) ([be38b68](https://github.com/carbon-design-system/ibm-products/commit/be38b6852ab0e949dad2f51c9c7d7fe58e79c7d1))
+* datagrid toolbar accessibility ([#3460](https://github.com/carbon-design-system/ibm-products/issues/3460)) ([033897d](https://github.com/carbon-design-system/ibm-products/commit/033897dba61d2dc78af2a0d01d62dd5cc57700bc))
+* **datagrid:** empty state fix ([#3389](https://github.com/carbon-design-system/ibm-products/issues/3389)) ([ac5939b](https://github.com/carbon-design-system/ibm-products/commit/ac5939bce71f1deae97071c47b8ac0cdcc97fd58))
+* filter flyout outside click ([#3473](https://github.com/carbon-design-system/ibm-products/issues/3473)) ([e2d05c6](https://github.com/carbon-design-system/ibm-products/commit/e2d05c647c4ebdf21b702da39eddd68f488d0e11))
+
+
+### Features
+
+* **createfullpage:** initialstep added ([#3449](https://github.com/carbon-design-system/ibm-products/issues/3449)) ([7cb13d4](https://github.com/carbon-design-system/ibm-products/commit/7cb13d42cbc89e68f077d8f28bf1a637fffa7c02))
+
+
+
+
+
+# [2.9.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.8.1...@carbon/ibm-products@2.9.0) (2023-09-12)
+
+
+### Bug Fixes
+
+* **build:** temporarily remove drag support in customize cols ([#3458](https://github.com/carbon-design-system/ibm-products/issues/3458)) ([1ea9725](https://github.com/carbon-design-system/ibm-products/commit/1ea97254df8104e1c2421a44d8d7e140fd2158bf))
+
+
+### Features
+
+* **Datagrid:** add new select all approach in batch actions ([#3438](https://github.com/carbon-design-system/ibm-products/issues/3438)) ([b939544](https://github.com/carbon-design-system/ibm-products/commit/b939544b219a37a5e43b9325baea5bd9808196eb))
+
+
+
+
+
 ## [2.8.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.8.0...@carbon/ibm-products@2.8.1) (2023-08-30)
 
 

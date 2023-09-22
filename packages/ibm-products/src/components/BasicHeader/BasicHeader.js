@@ -16,7 +16,7 @@ import pconsole from '../../global/js/utils/pconsole';
 const blockClass = `${pkg.prefix}--basic-header`;
 const componentName = 'BasicHeader';
 /**
- * The BasicHeader is not not public and only used internally by CreateFullPage.
+ * The BasicHeader is not public and only used internally by CreateFullPage.
  *
  * Component varieties:
  * - Header with Breadcrumbs
@@ -40,7 +40,7 @@ const BasicHeader = ({
         `Warning: You have tried using a ${componentName} component without specifying a title nor breadcrumbs props`
       );
     }
-  }, [breadcrumbs?.length, title]);
+  }, [breadcrumbs, title]);
 
   useEffect(() => {
     warnIfNoTitleOrBreadcrumbs();

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Tearsheet } from "@carbon/ibm-products";
-import { Button, Tabs, TabList, Tab } from "@carbon/react";
+import React, { useState } from 'react';
+import { Tearsheet } from '@carbon/ibm-products';
+import { Button, Tabs, TabList, Tab } from '@carbon/react';
 
-import "./_example.scss";
+import './_example.scss';
 
 export const Example = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -19,10 +19,10 @@ export const Example = () => {
       <Button onClick={handleOpenModalClick}>Reopen Tearsheet</Button>
       <Tearsheet
         actions={[
-          { kind: "secondary", label: "Cancel", onClick: handleCloseModal },
-          { kind: "primary", label: "Create", onClick: handleCloseModal }
+          { kind: 'secondary', label: 'Cancel', onClick: handleCloseModal },
+          { kind: 'primary', label: 'Create', onClick: handleCloseModal },
         ]}
-        closeIconDescription='Close the tearsheet'
+        closeIconDescription="Close the tearsheet"
         description={
           // cspell:disable
           <span>
@@ -34,13 +34,13 @@ export const Example = () => {
           // cspell:enable
         }
         influencer={
-          <div className='tearsheet-example__dummy-content-block'>
+          <div className="tearsheet-example__dummy-content-block">
             Influencer
           </div>
         }
-        label='This is the label of the tearsheet'
+        label="This is the label of the tearsheet"
         navigation={
-          <div className='tearsheet-example__tabs'>
+          <div className="tearsheet-example__tabs">
             <Tabs onSelectionChange={() => {}}>
               <TabList aria-label="tab list">
                 <Tab>Tab 1</Tab>
@@ -54,9 +54,9 @@ export const Example = () => {
         onClose={handleCloseModal}
         open={isOpen}
         preventCloseOnClickOutside
-        title='This is the title of the tearsheet'
+        title="This is the title of the tearsheet"
       >
-        <div className='tearsheet-example__dummy-content-block'>
+        <div className="tearsheet-example__dummy-content-block">
           The main content of the Tearsheet should be placed here.
         </div>
       </Tearsheet>

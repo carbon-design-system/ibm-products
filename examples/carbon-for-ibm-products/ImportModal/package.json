@@ -1,12 +1,14 @@
 {
-  "name": "import-modal-component-example",
-  "description": "An example showing use of the import-modal component from the @carbon/ibm-products component library.",
+  "name": "ImportModal-component-example",
+  "description": "An example showing use of the ImportModal component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "import-modal"
+    "importmodal",
+    "import",
+    "modal"
   ],
   "license": "Apache-2.0",
   "type": "module",
@@ -22,17 +24,17 @@
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "sass": "^1.64.2"
+    "sass": "^1.63.6"
   },
   "devDependencies": {
-    "@types/react": "^18.2.20",
+    "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react": "^4.0.4",
-    "eslint": "^8.47.0",
-    "eslint-plugin-react": "^7.33.1",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
-    "vite": "^4.4.9"
+    "vite": "^4.4.4"
   },
   "browserslist": {
     "production": [

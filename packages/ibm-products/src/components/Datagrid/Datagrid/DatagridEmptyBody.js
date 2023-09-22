@@ -44,7 +44,10 @@ const DatagridEmptyBody = (datagridState) => {
       className={`${blockClass}__empty-state-body`}
     >
       <TableRow>
-        <TableCell colSpan={headers.length}>
+        <TableCell
+          colSpan={headers.length}
+          className={`${blockClass}__empty-state-cell`}
+        >
           {emptyStateType === 'error' && (
             <ErrorEmptyState {...emptyStateProps} />
           )}

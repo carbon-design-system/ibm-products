@@ -1,3 +1,10 @@
 {
-  "label": "Datagrid"
+  "label": "Datagrid",
+  "package-config": {
+    "flags": {
+      "component": {
+        "Datagrid": true
+      }
+    }
+  }
 }

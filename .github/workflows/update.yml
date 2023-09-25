@@ -82,6 +82,7 @@ jobs:
           yarn upgrade:automatic
           rm yarn.lock
           yarn
+          yarn update-gallery-config
         env:
           YARN_ENABLE_IMMUTABLE_INSTALLS: false
 

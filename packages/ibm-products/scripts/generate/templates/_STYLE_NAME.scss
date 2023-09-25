@@ -6,7 +6,7 @@
 //
 
 // Standard imports.
-@use '../../global/styles/project-settings';
+@use '../../global/styles/project-settings' as c4p-settings;
 @use '../../global/styles/mixins';
 
 // Other Carbon settings if needed
@@ -18,8 +18,8 @@
 // TODO: @use(s) of IBM Products component styles used by DISPLAY_NAME
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-$block-class: #{$pkg-prefix}--STYLE_NAME;
+$block-class: #{c4p-settings.$pkg-prefix}--STYLE_NAME;
 
-.#{$block-class} {
-  // TODO: Styles.
-}
+// .#{$block-class} {
+//   // TODO: Styles.
+// }

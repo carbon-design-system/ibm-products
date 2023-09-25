@@ -7,10 +7,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { DndProvider } from 'react-dnd';
-// import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Checkbox } from '@carbon/react';
-// import update from 'immutability-helper';
+import update from 'immutability-helper';
 import { pkg } from '../../../../../settings';
 import cx from 'classnames';
 import { DraggableItemsList } from './DraggableItemsList';
@@ -40,36 +38,28 @@ const Columns = ({
 }) => {
   const [ariaRegionText, setAriaRegionText] = React.useState('');
   const [focusIndex, setFocusIndex] = React.useState(-1);
-  // const moveElement = React.useCallback(
-  //   (dragIndex, hoverIndex) => {
-  //     const dragCard = columns[dragIndex];
-  //     setColumnsObject(
-  //       update(columns, {
-  //         $splice: [
-  //           [dragIndex, 1],
-  //           [hoverIndex, 0, dragCard],
-  //         ],
-  //       })
-  //     );
-  //   },
-  //   [columns, setColumnsObject]
-  // );
+  // after a drag/drop action set the columns
+  const moveElement = React.useCallback(
+    (dragIndex, hoverIndex) => {
+      const dragCard = columns[dragIndex];
+      setColumnsObject(
+        update(columns, {
+          $splice: [
+            [dragIndex, 1],
+            [hoverIndex, 0, dragCard],
+          ],
+        })
+      );
+    },
+    [columns, setColumnsObject]
+  );
 
   return (
     <div className={`${blockClass}__customize-columns-column-list`}>
-      {/* <DndProvider backend={HTML5Backend}> */}
       <ol
         className={`${blockClass}__customize-columns-column-list--focus`}
         role="listbox"
         aria-describedby={`${blockClass}__customize-columns--instructions`}
-        onKeyDown={(e) => {
-          const nextIndex = getNextIndex(columns, focusIndex, e.key);
-          if (nextIndex >= 0) {
-            setFocusIndex(nextIndex);
-            e.preventDefault();
-            e.stopPropagation();
-          }
-        }}
         tabIndex={0}
       >
         <span
@@ -116,14 +106,13 @@ const Columns = ({
           filterString={filterString}
           focusIndex={focusIndex}
           getNextIndex={getNextIndex}
-          // moveElement={moveElement}
+          moveElement={moveElement}
           onSelectColumn={onSelectColumn}
           setAriaRegionText={setAriaRegionText}
           setColumnsObject={setColumnsObject}
           setFocusIndex={setFocusIndex}
         />
       </ol>
-      {/* </DndProvider> */}
     </div>
   );
 };

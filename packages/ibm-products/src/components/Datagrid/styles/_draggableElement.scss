@@ -26,7 +26,22 @@
   fill: $icon-on-color-disabled;
 }
 
+.#{variables.$block-class}__draggable-underlay {
+  position: absolute;
+  width: 100%;
+}
+
+.#{variables.$block-class}__draggable-underlay-item {
+  // must match draggable item size
+  width: 100%;
+  height: $spacing-09;
+  border: 2px dashed $focus;
+  /* stylelint-disable-next-line carbon/theme-token-use */
+  background-color: colors.$blue-10; // not good in dark mode
+}
+
 .#{variables.$block-class}__draggable-handleHolder {
+  position: relative; // above underlay
   display: flex;
   height: $spacing-09;
   border-bottom: 1px solid $layer-active;
@@ -37,7 +52,15 @@
   background-color: $layer-hover;
 }
 
+.#{variables.$block-class}--dragging {
+  /* stylelint-disable-next-line declaration-no-important */
+  top: auto !important; /* fixes out of position drag drop in react-beautiful-dnd */
+  /* stylelint-disable-next-line declaration-no-important */
+  left: auto !important; /* fixes out of position drag drop in react-beautiful-dnd */
+}
+
 .#{variables.$block-class}__draggable-handleHolder-selected {
+  position: relative; // pull above underlay
   display: flex;
   height: $spacing-09;
   border-bottom: 1px solid $layer-active;
@@ -46,12 +69,6 @@
 
 .#{variables.$block-class}__draggable-handleHolder-selected:hover {
   background-color: $layer-selected-hover-01;
-}
-
-.#{variables.$block-class}__draggable-handleHolder-isOver {
-  border: 2px dashed $focus;
-  /* stylelint-disable-next-line carbon/theme-token-use */
-  background-color: colors.$blue-10;
 }
 
 .#{variables.$block-class}__draggable-handleHolder-droppable {

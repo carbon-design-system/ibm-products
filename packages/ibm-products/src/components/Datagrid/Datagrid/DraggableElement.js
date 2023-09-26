@@ -44,11 +44,11 @@ const DraggableElement = ({
     <Draggable draggableId={id} index={index}>
       {(provided, snapshot) => (
         <li
-          className={cx({
-            [`${blockClass}__draggable-handleHolder-selected`]: selected,
+          className={cx(`${blockClass}__draggable-handleHolder`, {
+            [`${blockClass}__draggable-handleHolder--selected`]: selected,
             [`${blockClass}__draggable-handleHolder--sticky`]: isSticky,
-            [`${blockClass}__draggable-handleHolder`]: !selected,
-            [`${blockClass}--dragging`]: snapshot.isDragging,
+            [`${blockClass}__draggable-handleHolder--dragging`]:
+              snapshot.isDragging,
           })}
           ref={provided.innerRef}
           {...provided.draggableProps}

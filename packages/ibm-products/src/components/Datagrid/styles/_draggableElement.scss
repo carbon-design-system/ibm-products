@@ -52,18 +52,20 @@
   background-color: $layer-hover;
 }
 
-.#{variables.$block-class}--dragging {
+.#{variables.$block-class}__draggable-handleHolder:focus {
+  box-shadow: inset 0 0 0 1px $focus;
+  outline: none;
+}
+
+.#{variables.$block-class}__draggable-handleHolder--dragging {
   /* stylelint-disable-next-line declaration-no-important */
   top: auto !important; /* fixes out of position drag drop in react-beautiful-dnd */
   /* stylelint-disable-next-line declaration-no-important */
   left: auto !important; /* fixes out of position drag drop in react-beautiful-dnd */
+  outline: none;
 }
 
-.#{variables.$block-class}__draggable-handleHolder-selected {
-  position: relative; // pull above underlay
-  display: flex;
-  height: $spacing-09;
-  border-bottom: 1px solid $layer-active;
+.#{variables.$block-class}__draggable-handleHolder--selected {
   background-color: $layer-selected;
 }
 
@@ -86,7 +88,7 @@
   transition: opacity $duration-moderate-01 motion(entrance, productive);
 }
 
-.#{variables.$block-class}__draggable-handleHolder-grabbed {
+.#{variables.$block-class}__draggable-handleHolder--grabbed {
   background-color: $highlight;
   color: $text-primary;
 }

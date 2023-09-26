@@ -96,6 +96,6 @@ jobs:
           if [[ `git status --porcelain` ]]; then
             echo "Gallery config is up to date."
           else
-            echo "::error file={name},line={line}::The gallery is out of date, run `yarn update-gallery-config`"
+            echo "::error ::The gallery is out of date, run `yarn update-gallery-config`"
             exit 1
           fi

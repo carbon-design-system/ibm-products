@@ -20,11 +20,9 @@ const blockClass = `${pkg.prefix}--datagrid`;
 export const DraggableItemsList = ({
   columns,
   filterString,
-  focusIndex,
   moveElement,
   onSelectColumn,
   setAriaRegionText,
-  setColumnsObject,
 }) => {
   const listId = uuidv4();
 
@@ -60,8 +58,39 @@ export const DraggableItemsList = ({
       );
     });
 
+  const handleDragStart = ({ source, mode, ...rest }) => {
+    console.log(rest);
+
+    if (mode === 'SNAPx') {
+      const grabbedCol = visibleCols[source.index];
+      const colTitle = getColTitle(grabbedCol);
+      setAriaRegionText(
+        `${colTitle} grabbed. Current position ${source.index + 1} of ${
+          visibleCols.length
+        }.`
+      );
+    }
+  };
+
+  const handleDragUpdate = ({ source, mode, destination }) => {
+    if (mode === 'SNAPx') {
+      console.log(destination);
+      const grabbedCol = visibleCols[source.index];
+      const colTitle = getColTitle(grabbedCol);
+      setAriaRegionText(
+        `${colTitle} dropped. Current position ${source.index + 1} of ${
+          visibleCols.length
+        }.`
+      );
+    }
+  };
+
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
+    <DragDropContext
+      onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
+      onDragUpdate={handleDragUpdate}
+    >
       <Droppable droppableId={listId}>
         {(provided) => {
           return (
@@ -124,14 +153,9 @@ export const DraggableItemsList = ({
                   <DraggableElement
                     key={colDef.id}
                     index={i}
-                    listData={columns}
-                    setListData={setColumnsObject}
                     id={`dnd-datagrid-columns-${colDef.id}`}
-                    type="column-customization"
                     disabled={filterString.length > 0 || isFrozenColumn}
                     ariaLabel={colHeaderTitle}
-                    onGrab={setAriaRegionText}
-                    isFocused={focusIndex === i}
                     isSticky={isFrozenColumn}
                     selected={isColumnVisible(colDef)}
                   >
@@ -157,11 +181,7 @@ export const DraggableItemsList = ({
 DraggableItemsList.propTypes = {
   columns: PropTypes.array.isRequired,
   filterString: PropTypes.string.isRequired,
-  focusIndex: PropTypes.number.isRequired,
-  getNextIndex: PropTypes.func.isRequired,
   moveElement: PropTypes.func.isRequired,
   onSelectColumn: PropTypes.func.isRequired,
   setAriaRegionText: PropTypes.func.isRequired,
-  setColumnsObject: PropTypes.func.isRequired,
-  setFocusIndex: PropTypes.func.isRequired,
 };

@@ -15,17 +15,6 @@ import { DraggableItemsList } from './DraggableItemsList';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
-const getNextIndex = (array, currentIndex, key) => {
-  let newIndex = -1;
-  if (key === 'ArrowUp') {
-    newIndex = currentIndex - 1 >= 0 ? currentIndex - 1 : array.length - 1;
-  }
-  if (key === 'ArrowDown') {
-    newIndex = currentIndex + 1 < array.length ? currentIndex + 1 : 0;
-  }
-  return newIndex;
-};
-
 const Columns = ({
   getVisibleColumnsCount,
   filterString,
@@ -37,7 +26,6 @@ const Columns = ({
   selectAllLabel,
 }) => {
   const [ariaRegionText, setAriaRegionText] = React.useState('');
-  const [focusIndex, setFocusIndex] = React.useState(-1);
   // after a drag/drop action set the columns
   const moveElement = React.useCallback(
     (dragIndex, hoverIndex) => {
@@ -104,13 +92,9 @@ const Columns = ({
         <DraggableItemsList
           columns={columns}
           filterString={filterString}
-          focusIndex={focusIndex}
-          getNextIndex={getNextIndex}
           moveElement={moveElement}
-          onSelectColumn={onSelectColumn}
           setAriaRegionText={setAriaRegionText}
-          setColumnsObject={setColumnsObject}
-          setFocusIndex={setFocusIndex}
+          onSelectColumn={onSelectColumn}
         />
       </ol>
     </div>

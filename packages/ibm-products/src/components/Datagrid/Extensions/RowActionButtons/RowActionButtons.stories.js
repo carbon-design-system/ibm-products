@@ -156,6 +156,7 @@ const sharedDatagridProps = {
       icon: TrashCan,
       isDelete: true,
       onClick: action('Clicked row action: delete'),
+      align: 'top-right',
     },
   ],
 };

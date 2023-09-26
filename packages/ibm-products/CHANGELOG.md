@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.10.0...@carbon/ibm-products@2.10.1) (2023-09-26)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
 # [2.10.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.9.0...@carbon/ibm-products@2.10.0) (2023-09-20)
 
 

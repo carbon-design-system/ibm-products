@@ -88,6 +88,8 @@ jobs:
         with:
           path: '**/node_modules'
           key: check-gallery-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+      - name: Install
+        run: yarn
       - name: Check gallery
         run: |
           yarn update-gallery-config

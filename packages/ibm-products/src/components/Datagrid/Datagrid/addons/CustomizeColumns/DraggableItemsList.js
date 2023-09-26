@@ -100,7 +100,6 @@ export const DraggableItemsList = ({
                 const listContents = (
                   <>
                     <Checkbox
-                      // wrapperClassName={`${blockClass}__customize-columns-checkbox-wrapper`}
                       checked={isColumnVisible(colDef)}
                       disabled={isFrozenColumn}
                       onChange={(_, { checked }) =>
@@ -133,7 +132,6 @@ export const DraggableItemsList = ({
                     ariaLabel={colHeaderTitle}
                     onGrab={setAriaRegionText}
                     isFocused={focusIndex === i}
-                    moveElement={moveElement}
                     isSticky={isFrozenColumn}
                     selected={isColumnVisible(colDef)}
                   >

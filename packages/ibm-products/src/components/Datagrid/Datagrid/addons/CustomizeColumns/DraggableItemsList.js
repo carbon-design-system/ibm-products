@@ -13,19 +13,18 @@ import DraggableElement from '../../DraggableElement';
 import { pkg } from '../../../../../settings';
 import getColTitle from '../../../utils/getColTitle';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import uuidv4 from '../../../../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 export const DraggableItemsList = ({
   columns,
   filterString,
+  id,
   moveElement,
   onSelectColumn,
   setAriaRegionText,
 }) => {
-  const listId = uuidv4();
-
+  // let localRefCopy;
   const handleDragEnd = (result) => {
     const { source, destination } = result;
 
@@ -39,8 +38,6 @@ export const DraggableItemsList = ({
     }
 
     moveElement(source.index, destination.index);
-    // console.log(source, destination, draggableId);
-    // will need to call move element
   };
 
   const visibleCols = columns
@@ -58,10 +55,8 @@ export const DraggableItemsList = ({
       );
     });
 
-  const handleDragStart = ({ source, mode, ...rest }) => {
-    console.log(rest);
-
-    if (mode === 'SNAPx') {
+  const handleDragStart = ({ source, mode }) => {
+    if (mode === 'SNAP') {
       const grabbedCol = visibleCols[source.index];
       const colTitle = getColTitle(grabbedCol);
       setAriaRegionText(
@@ -72,9 +67,8 @@ export const DraggableItemsList = ({
     }
   };
 
-  const handleDragUpdate = ({ source, mode, destination }) => {
-    if (mode === 'SNAPx') {
-      console.log(destination);
+  const handleDragUpdate = ({ source, mode }) => {
+    if (mode === 'SNAP') {
       const grabbedCol = visibleCols[source.index];
       const colTitle = getColTitle(grabbedCol);
       setAriaRegionText(
@@ -91,14 +85,22 @@ export const DraggableItemsList = ({
       onDragStart={handleDragStart}
       onDragUpdate={handleDragUpdate}
     >
-      <Droppable droppableId={listId}>
+      <Droppable droppableId={id}>
         {(provided) => {
           return (
-            <div {...provided.droppableProps} ref={provided.innerRef}>
+            <div
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              // not currently needed but informative
+              // ref={(ref) => {
+              //   localRefCopy = ref;
+              //   provided.innerRef(ref);
+              // }}
+            >
               <div
                 className={`${blockClass}__draggable-underlay`}
                 aria-hidden="true"
-                key={`draggable-underlay-${listId}`}
+                key={`draggable-underlay-${id}`}
               >
                 {visibleCols.map((colDef) => (
                   <div
@@ -165,7 +167,7 @@ export const DraggableItemsList = ({
               })}
               <span
                 className="column__dnd-placeholder"
-                key={`placeholder-${listId}`}
+                key={`placeholder-${id}`}
               >
                 {/* Needed by react-beautiful-dnd */}
                 {provided.placeholder}
@@ -181,6 +183,7 @@ export const DraggableItemsList = ({
 DraggableItemsList.propTypes = {
   columns: PropTypes.array.isRequired,
   filterString: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   moveElement: PropTypes.func.isRequired,
   onSelectColumn: PropTypes.func.isRequired,
   setAriaRegionText: PropTypes.func.isRequired,

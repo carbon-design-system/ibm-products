@@ -5,13 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from '@carbon/react';
 import update from 'immutability-helper';
 import { pkg } from '../../../../../settings';
 import cx from 'classnames';
 import { DraggableItemsList } from './DraggableItemsList';
+import uuidv4 from '../../../../../global/js/utils/uuidv4';
+import { useScroll } from '../../../../../global/js/hooks/useWindowScroll';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -25,6 +27,10 @@ const Columns = ({
   assistiveTextDisabledInstructionsLabel,
   selectAllLabel,
 }) => {
+  const listId = useRef(uuidv4()); // keep id between renders
+  const listRef = useRef(null);
+  const [scrollTopCSS, setScrollTopCSS] = useState(0);
+
   const [ariaRegionText, setAriaRegionText] = React.useState('');
   // after a drag/drop action set the columns
   const moveElement = React.useCallback(
@@ -42,8 +48,22 @@ const Columns = ({
     [columns, setColumnsObject]
   );
 
+  useScroll(
+    listRef,
+    () => {
+      if (listRef?.current) {
+        setScrollTopCSS(listRef.current.scrollTop);
+      }
+    },
+    [listRef.current]
+  );
+
   return (
-    <div className={`${blockClass}__customize-columns-column-list`}>
+    <div
+      className={`${blockClass}__customize-columns-column-list`}
+      style={{ '--scroll-top': `${scrollTopCSS}px` }}
+      ref={listRef}
+    >
       <ol
         className={`${blockClass}__customize-columns-column-list--focus`}
         role="listbox"
@@ -90,6 +110,7 @@ const Columns = ({
           />
         </div>
         <DraggableItemsList
+          id={listId.current}
           columns={columns}
           filterString={filterString}
           moveElement={moveElement}

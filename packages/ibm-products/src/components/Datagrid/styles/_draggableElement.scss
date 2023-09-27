@@ -57,16 +57,23 @@
   outline: none;
 }
 
+.#{variables.$block-class}__draggable-handleHolder--selected {
+  background-color: $layer-selected;
+}
+
 .#{variables.$block-class}__draggable-handleHolder--dragging {
   /* stylelint-disable-next-line declaration-no-important */
   top: auto !important; /* fixes out of position drag drop in react-beautiful-dnd */
   /* stylelint-disable-next-line declaration-no-important */
   left: auto !important; /* fixes out of position drag drop in react-beautiful-dnd */
-  outline: none;
-}
+  // stylelint-disable-next-line carbon/layout-token-use
+  margin-top: calc(
+    -1 * var(--scroll-top)
+  ); /* fix for react-beautiful-dnd when in scrolled modal */
 
-.#{variables.$block-class}__draggable-handleHolder--selected {
-  background-color: $layer-selected;
+  background-color: $highlight;
+  color: $text-primary;
+  outline: none;
 }
 
 .#{variables.$block-class}__draggable-handleHolder-selected:hover {
@@ -86,11 +93,6 @@
 .#{variables.$block-class}__draggable-handleHolder-droppable.#{variables.$block-class}__draggable-handleHolder-droppable--origin {
   opacity: 0.5;
   transition: opacity $duration-moderate-01 motion(entrance, productive);
-}
-
-.#{variables.$block-class}__draggable-handleHolder--grabbed {
-  background-color: $highlight;
-  color: $text-primary;
 }
 
 .#{variables.$block-class}__draggable-handleHolder--sticky {

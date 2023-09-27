@@ -74,6 +74,7 @@ export function useWindowScroll(effect, deps, throttleInterval = 0) {
 
 export function useNearestScroll(ref, effect, deps, throttle = 0) {
   let scrollableTarget = scrollableAncestor(ref.current);
+  console.log(scrollableTarget, ref.current);
   if (
     scrollableTarget &&
     (document.body === scrollableTarget ||
@@ -82,4 +83,8 @@ export function useNearestScroll(ref, effect, deps, throttle = 0) {
     scrollableTarget = window;
   }
   return useTargetScroll(scrollableTarget, effect, deps, throttle);
+}
+
+export function useScroll(ref, effect, deps, throttle = 0) {
+  return useTargetScroll(ref?.current ?? null, effect, deps, throttle);
 }

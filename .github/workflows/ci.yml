@@ -91,11 +91,10 @@ jobs:
       - name: Install
         run: yarn
       - name: Check gallery
-        shell: bash
         run: |
           yarn update-gallery-config
-          if [[ `git status --porcelain` ]]; then
-            echo "Gallery config is up to date."
-          else
+          if [[ -z $(git status --porcelain) ]]; then
             core.setFailed('The gallery is out of date, run `yarn update-gallery-config`')
+          else
+            echo "Gallery config is up to date."
           fi

@@ -96,6 +96,7 @@ jobs:
           touch tmp.txt
           if [[ `git status --porcelain` ]]; then
             echo "::error ::The gallery is out of date, run `yarn update-gallery-config`"
+            git status --porcelain
             exit 1
           else
             echo "Gallery is up-to-date"

@@ -1,4 +1,4 @@
-name: test-action # Run a test action
+name: action-playground # A place to test / refine github actions
 
 on:
   workflow_dispatch:

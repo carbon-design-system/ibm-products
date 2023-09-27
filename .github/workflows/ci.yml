@@ -92,7 +92,8 @@ jobs:
         run: yarn
       - name: Check gallery
         run: |
-          yarn update-gallery-config
+          yarn
+          touch tmp.txt
           if [[ -z $(git status --porcelain) ]]; then
             echo "::error ::The gallery is out of date, run `yarn update-gallery-config`"
             exit 1

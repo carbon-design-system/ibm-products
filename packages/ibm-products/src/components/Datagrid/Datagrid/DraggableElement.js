@@ -11,19 +11,28 @@ import PropTypes from 'prop-types';
 import { Draggable as DraggableIcon, Locked } from '@carbon/react/icons';
 import cx from 'classnames';
 import { pkg } from '../../../settings';
-import { Draggable } from 'react-beautiful-dnd';
+import { CSS } from '@dnd-kit/utilities';
+import { useSortable } from '@dnd-kit/sortable';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const DraggableElement = ({
   id,
-  index,
   children,
   disabled,
   ariaLabel,
   isSticky,
   selected,
 }) => {
+  const {
+    attributes,
+    isDragging,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({ id });
+
   const content = (
     <>
       <div
@@ -40,39 +49,41 @@ const DraggableElement = ({
     </>
   );
 
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
   return (
-    <Draggable draggableId={id} index={index}>
-      {(provided, snapshot) => (
-        <li
-          className={cx(`${blockClass}__draggable-handleHolder`, {
-            [`${blockClass}__draggable-handleHolder--selected`]: selected,
-            [`${blockClass}__draggable-handleHolder--sticky`]: isSticky,
-            [`${blockClass}__draggable-handleHolder--dragging`]:
-              snapshot.isDragging,
-          })}
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-          {...provided.dragHandleProps}
-          disabled={disabled}
-          aria-selected={selected}
-          role="option"
-        >
-          <span className={`${blockClass}__shared-ui--assistive-text`}>
-            {ariaLabel}
-          </span>
-          <div
-            className={cx(
-              {
-                [`${blockClass}__draggable-handleStyle`]: !disabled,
-              },
-              [`${blockClass}__draggable-handleHolder-droppable`]
-            )}
-          >
-            {content}
-          </div>
-        </li>
-      )}
-    </Draggable>
+    <li
+      className={cx(`${blockClass}__draggable-handleHolder`, {
+        [`${blockClass}__draggable-handleHolder--selected`]: selected,
+        [`${blockClass}__draggable-handleHolder--sticky`]: isSticky,
+        [`${blockClass}__draggable-handleHolder--dragging`]: isDragging,
+      })}
+      id={id}
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      disabled={disabled}
+      aria-selected={selected}
+      role="option"
+    >
+      <span className={`${blockClass}__shared-ui--assistive-text`}>
+        {ariaLabel}
+      </span>
+      <div
+        className={cx(
+          {
+            [`${blockClass}__draggable-handleStyle`]: !disabled,
+          },
+          [`${blockClass}__draggable-handleHolder-droppable`]
+        )}
+      >
+        {content}
+      </div>
+    </li>
   );
 };
 
@@ -81,7 +92,6 @@ DraggableElement.propTypes = {
   children: PropTypes.element.isRequired,
   disabled: PropTypes.bool,
   id: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
   isSticky: PropTypes.bool,
   selected: PropTypes.bool,
 };

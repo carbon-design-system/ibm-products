@@ -62,14 +62,7 @@
 }
 
 .#{variables.$block-class}__draggable-handleHolder--dragging {
-  /* stylelint-disable-next-line declaration-no-important */
-  top: auto !important; /* fixes out of position drag drop in react-beautiful-dnd */
-  /* stylelint-disable-next-line declaration-no-important */
-  left: auto !important; /* fixes out of position drag drop in react-beautiful-dnd */
-  // stylelint-disable-next-line carbon/layout-token-use
-  margin-top: calc(
-    -1 * var(--scroll-top)
-  ); /* fix for react-beautiful-dnd when in scrolled modal */
+  z-index: 2; // raise above other items in draggable list
 
   background-color: $highlight;
   color: $text-primary;

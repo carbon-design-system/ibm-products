@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from '@carbon/react';
 import update from 'immutability-helper';
@@ -13,7 +13,6 @@ import { pkg } from '../../../../../settings';
 import cx from 'classnames';
 import { DraggableItemsList } from './DraggableItemsList';
 import uuidv4 from '../../../../../global/js/utils/uuidv4';
-import { useScroll } from '../../../../../global/js/hooks/useWindowScroll';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -29,39 +28,28 @@ const Columns = ({
 }) => {
   const listId = useRef(uuidv4()); // keep id between renders
   const listRef = useRef(null);
-  const [scrollTopCSS, setScrollTopCSS] = useState(0);
 
   const [ariaRegionText, setAriaRegionText] = React.useState('');
   // after a drag/drop action set the columns
   const moveElement = React.useCallback(
-    (dragIndex, hoverIndex) => {
-      const dragCard = columns[dragIndex];
+    (from, to) => {
+      const fromCol = columns[from];
+
       setColumnsObject(
         update(columns, {
           $splice: [
-            [dragIndex, 1],
-            [hoverIndex, 0, dragCard],
+            [from, 1],
+            [to, 0, fromCol],
           ],
         })
       );
     },
-    [columns, setColumnsObject]
-  );
-
-  useScroll(
-    listRef,
-    () => {
-      if (listRef?.current) {
-        setScrollTopCSS(listRef.current.scrollTop);
-      }
-    },
-    [listRef.current]
+    [columns, setColumnsObject] // [columns, setColumnsObject]
   );
 
   return (
     <div
       className={`${blockClass}__customize-columns-column-list`}
-      style={{ '--scroll-top': `${scrollTopCSS}px` }}
       ref={listRef}
     >
       <ol

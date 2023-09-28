@@ -12,7 +12,12 @@ import { isColumnVisible } from './common';
 import DraggableElement from '../../DraggableElement';
 import { pkg } from '../../../../../settings';
 import getColTitle from '../../../utils/getColTitle';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -24,22 +29,6 @@ export const DraggableItemsList = ({
   onSelectColumn,
   setAriaRegionText,
 }) => {
-  // let localRefCopy;
-  const handleDragEnd = (result) => {
-    const { source, destination } = result;
-
-    if (
-      !destination ||
-      (source.droppableId === destination.droppableId &&
-        source.index === destination.index)
-    ) {
-      // do nothing if no destination or
-      // source and destination are the same
-    }
-
-    moveElement(source.index, destination.index);
-  };
-
   const visibleCols = columns
     // hide the columns without Header, e.g the sticky actions, spacer
     .filter((colDef) => {
@@ -55,128 +44,134 @@ export const DraggableItemsList = ({
       );
     });
 
-  const handleDragStart = ({ source, mode }) => {
-    if (mode === 'SNAP') {
-      const grabbedCol = visibleCols[source.index];
-      const colTitle = getColTitle(grabbedCol);
-      setAriaRegionText(
-        `${colTitle} grabbed. Current position ${source.index + 1} of ${
-          visibleCols.length
-        }.`
-      );
-    }
+  // let localRefCopy;
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+
+    const fromVisibleIndex = columns.findIndex((col) => col.id === active.id);
+    const toVisibleIndex = columns.findIndex((col) => col.id === over.id);
+    const colTitle = getColTitle(visibleCols[fromVisibleIndex]);
+
+    setAriaRegionText(
+      `${colTitle} dropped. New position ${toVisibleIndex + 1} of ${
+        visibleCols.length
+      }.`
+    );
+
+    const fromIndex = columns.findIndex((col) => col.id === active.id);
+    const toIndex = columns.findIndex((col) => col.id === over.id);
+
+    moveElement(fromIndex, toIndex);
   };
 
-  const handleDragUpdate = ({ source, mode }) => {
-    if (mode === 'SNAP') {
-      const grabbedCol = visibleCols[source.index];
-      const colTitle = getColTitle(grabbedCol);
-      setAriaRegionText(
-        `${colTitle} dropped. Current position ${source.index + 1} of ${
-          visibleCols.length
-        }.`
-      );
-    }
+  const handleDragStart = (event) => {
+    const { active } = event;
+
+    const fromIndex = visibleCols.findIndex((col) => col.id === active.id);
+    const colTitle = getColTitle(visibleCols[fromIndex]);
+
+    setAriaRegionText(
+      `${colTitle} grabbed. Current position ${fromIndex + 1} of ${
+        visibleCols.length
+      }.`
+    );
+  };
+
+  const handleDragUpdate = (event) => {
+    const { active, over } = event;
+
+    const fromIndex = visibleCols.findIndex((col) => col.id === active.id);
+    const toIndex = visibleCols.findIndex((col) => col.id === over.id);
+
+    const colTitle = getColTitle(visibleCols[fromIndex]);
+
+    setAriaRegionText(
+      `${colTitle} grabbed. Original position ${fromIndex + 1}, new position ${
+        toIndex + 1
+      } of ${visibleCols.length}.`
+    );
   };
 
   return (
-    <DragDropContext
+    <DndContext
+      collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
-      onDragUpdate={handleDragUpdate}
+      onDragMove={handleDragUpdate}
     >
-      <Droppable droppableId={id}>
-        {(provided) => {
-          return (
+      <>
+        <div
+          className={`${blockClass}__draggable-underlay`}
+          aria-hidden="true"
+          key={`draggable-underlay-${id}`}
+        >
+          {visibleCols.map((colDef) => (
             <div
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-              // not currently needed but informative
-              // ref={(ref) => {
-              //   localRefCopy = ref;
-              //   provided.innerRef(ref);
-              // }}
-            >
-              <div
-                className={`${blockClass}__draggable-underlay`}
-                aria-hidden="true"
-                key={`draggable-underlay-${id}`}
-              >
-                {visibleCols.map((colDef) => (
+              className={`${blockClass}__draggable-underlay-item`}
+              key={colDef.id}
+            ></div>
+          ))}
+        </div>
+        <SortableContext
+          items={visibleCols}
+          strategy={verticalListSortingStrategy}
+        >
+          {visibleCols.map((colDef) => {
+            const colHeaderTitle = getColTitle(colDef);
+            const searchString = new RegExp('(' + filterString + ')');
+            const res = filterString.length
+              ? colHeaderTitle.toLowerCase().split(searchString)
+              : null;
+            const firstWord =
+              res !== null
+                ? res[0] === ''
+                  ? res[1].charAt(0).toUpperCase() + res[1].substring(1)
+                  : res[0].charAt(0).toUpperCase() + res[0].substring(1)
+                : null;
+            const highlightedText =
+              res !== null
+                ? res[0] === ''
+                  ? `<strong>${firstWord}</strong>` + res[2]
+                  : firstWord + `<strong>${res[1]}</strong>` + res[2]
+                : colHeaderTitle;
+            const isFrozenColumn = !!colDef.sticky;
+            const listContents = (
+              <>
+                <Checkbox
+                  checked={isColumnVisible(colDef)}
+                  disabled={isFrozenColumn}
+                  onChange={(_, { checked }) => onSelectColumn(colDef, checked)}
+                  id={`${blockClass}__customization-column-${colDef.id}`}
+                  labelText={colHeaderTitle}
+                  title={colHeaderTitle}
+                  className={`${blockClass}__customize-columns-checkbox`}
+                  hideLabel
+                />
+                {
                   <div
-                    className={`${blockClass}__draggable-underlay-item`}
-                    key={colDef.id}
+                    dangerouslySetInnerHTML={{ __html: highlightedText }}
+                    className={`${blockClass}__customize-columns-checkbox-visible-label`}
                   ></div>
-                ))}
-              </div>
-              {visibleCols.map((colDef, i) => {
-                const colHeaderTitle = getColTitle(colDef);
-                const searchString = new RegExp('(' + filterString + ')');
-                const res = filterString.length
-                  ? colHeaderTitle.toLowerCase().split(searchString)
-                  : null;
-                const firstWord =
-                  res !== null
-                    ? res[0] === ''
-                      ? res[1].charAt(0).toUpperCase() + res[1].substring(1)
-                      : res[0].charAt(0).toUpperCase() + res[0].substring(1)
-                    : null;
-                const highlightedText =
-                  res !== null
-                    ? res[0] === ''
-                      ? `<strong>${firstWord}</strong>` + res[2]
-                      : firstWord + `<strong>${res[1]}</strong>` + res[2]
-                    : colHeaderTitle;
-                const isFrozenColumn = !!colDef.sticky;
-                const listContents = (
-                  <>
-                    <Checkbox
-                      checked={isColumnVisible(colDef)}
-                      disabled={isFrozenColumn}
-                      onChange={(_, { checked }) =>
-                        onSelectColumn(colDef, checked)
-                      }
-                      id={`${blockClass}__customization-column-${colDef.id}`}
-                      labelText={colHeaderTitle}
-                      title={colHeaderTitle}
-                      className={`${blockClass}__customize-columns-checkbox`}
-                      hideLabel
-                    />
-                    {
-                      <div
-                        dangerouslySetInnerHTML={{ __html: highlightedText }}
-                        className={`${blockClass}__customize-columns-checkbox-visible-label`}
-                      ></div>
-                    }
-                  </>
-                );
+                }
+              </>
+            );
 
-                return (
-                  <DraggableElement
-                    key={colDef.id}
-                    index={i}
-                    id={`dnd-datagrid-columns-${colDef.id}`}
-                    disabled={filterString.length > 0 || isFrozenColumn}
-                    ariaLabel={colHeaderTitle}
-                    isSticky={isFrozenColumn}
-                    selected={isColumnVisible(colDef)}
-                  >
-                    {listContents}
-                  </DraggableElement>
-                );
-              })}
-              <span
-                className="column__dnd-placeholder"
-                key={`placeholder-${id}`}
+            return (
+              <DraggableElement
+                key={colDef.id}
+                id={colDef.id}
+                disabled={filterString.length > 0 || isFrozenColumn}
+                ariaLabel={colHeaderTitle}
+                isSticky={isFrozenColumn}
+                selected={isColumnVisible(colDef)}
               >
-                {/* Needed by react-beautiful-dnd */}
-                {provided.placeholder}
-              </span>
-            </div>
-          );
-        }}
-      </Droppable>
-    </DragDropContext>
+                {listContents}
+              </DraggableElement>
+            );
+          })}
+        </SortableContext>
+      </>
+    </DndContext>
   );
 };
 

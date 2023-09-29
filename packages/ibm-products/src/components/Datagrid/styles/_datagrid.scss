@@ -288,6 +288,7 @@
 }
 
 .#{$block-class}__empty-state .#{$block-class}__table-simple tr:hover td {
+  border-bottom: none;
   background: transparent;
 }
 

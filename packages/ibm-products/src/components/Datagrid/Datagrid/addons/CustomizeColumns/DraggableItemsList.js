@@ -13,7 +13,14 @@ import DraggableElement from '../../DraggableElement';
 import { pkg } from '../../../../../settings';
 import getColTitle from '../../../utils/getColTitle';
 
-import { DndContext, closestCenter } from '@dnd-kit/core';
+import {
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
 import {
   SortableContext,
   verticalListSortingStrategy,
@@ -92,12 +99,23 @@ export const DraggableItemsList = ({
     );
   };
 
+  const pointerSensor = useSensor(PointerSensor, {
+    // Require the mouse to move by 10 pixels before activating
+    activationConstraint: {
+      distance: 4,
+    },
+  });
+  const keyboardSensor = useSensor(KeyboardSensor);
+
+  const sensors = useSensors(pointerSensor, keyboardSensor);
+
   return (
     <DndContext
       collisionDetection={closestCenter}
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
       onDragMove={handleDragUpdate}
+      sensors={sensors}
     >
       <>
         <div

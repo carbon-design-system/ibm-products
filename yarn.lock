@@ -1667,7 +1667,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/grid@npm:^11.18.0, @carbon/grid@npm:^11.19.0":
+"@carbon/grid@npm:^11.19.0":
   version: 11.19.0
   resolution: "@carbon/grid@npm:11.19.0"
   dependencies:
@@ -1702,13 +1702,13 @@ __metadata:
   resolution: "@carbon/ibm-cloud-cognitive-core@workspace:packages/core"
   dependencies:
     "@babel/core": ^7.22.10
-    "@carbon/grid": ^11.18.0
-    "@carbon/layout": ^11.18.0
+    "@carbon/grid": ^11.19.0
+    "@carbon/layout": ^11.19.0
     "@carbon/motion": ^11.15.0
     "@carbon/react": ^1.37.0
     "@carbon/storybook-addon-theme": ^2.0.4
-    "@carbon/themes": ^11.23.0
-    "@carbon/type": ^11.22.0
+    "@carbon/themes": ^11.24.0
+    "@carbon/type": ^11.23.0
     "@storybook/addon-actions": ^7.2.3
     "@storybook/addon-controls": ^7.2.3
     "@storybook/addon-docs": ^7.2.3
@@ -1776,12 +1776,12 @@ __metadata:
     sass: ^1.64.2
     yargs: ^17.7.2
   peerDependencies:
-    "@carbon/grid": ^11.18.0
-    "@carbon/layout": ^11.18.0
+    "@carbon/grid": ^11.19.0
+    "@carbon/layout": ^11.19.0
     "@carbon/motion": ^11.15.0
     "@carbon/react": ^1.37.0
-    "@carbon/themes": ^11.23.0
-    "@carbon/type": ^11.22.0
+    "@carbon/themes": ^11.24.0
+    "@carbon/type": ^11.23.0
     react: ^16.8.6 || ^17.0.1 || ^18.2.0
     react-dom: ^16.8.6 || ^17.0.1 || ^18.2.0
   languageName: unknown
@@ -1807,7 +1807,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/layout@npm:^11.18.0, @carbon/layout@npm:^11.19.0":
+"@carbon/layout@npm:^11.19.0":
   version: 11.19.0
   resolution: "@carbon/layout@npm:11.19.0"
   checksum: 9786a9d13fc81132c33a05019fae1d6ed786739a285e276f76857d30bba7b5a58cb093c700fb7c8b697d7a199459c398f842d6a42351d02c3d67e7961fadd901
@@ -1909,7 +1909,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes@npm:^11.23.0, @carbon/themes@npm:^11.24.0":
+"@carbon/themes@npm:^11.24.0":
   version: 11.24.0
   resolution: "@carbon/themes@npm:11.24.0"
   dependencies:
@@ -1921,7 +1921,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/type@npm:^11.22.0, @carbon/type@npm:^11.23.0":
+"@carbon/type@npm:^11.23.0":
   version: 11.23.0
   resolution: "@carbon/type@npm:11.23.0"
   dependencies:

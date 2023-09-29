@@ -41,7 +41,7 @@
     "storybook:build:storybook": "cd packages/core && yarn build",
     "storybook:start": "cd packages/core && yarn start",
     "sync": "carbon-cli sync",
-    "update-gallery-config": "node scripts/example-gallery-builder/index.js; prettier examples/carbon-for-ibm-products/**/src/**/*.{js,jsx,md,mdx,scss,json} --write",
+    "update-gallery-config": "node scripts/example-gallery-builder/index.js; prettier examples/carbon-for-ibm-products/**/src/**/*.{js,jsx,md,mdx,scss,json} --write --loglevel=silent",
     "//upgrade:dependencies:top": "# don't upgrade carbon (done globally), react/react-dom (not tested)",
     "upgrade:dependencies:top": "npm-check-updates -u --dep dev,peer,prod --reject '/(carbon|^react$|^react-dom$|^@testing-library)/'",
     "upgrade:dependencies:packages": "yarn run-all --no-sort --concurrency 1 upgrade-dependencies",

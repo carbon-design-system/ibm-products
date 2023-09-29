@@ -299,6 +299,10 @@
   flex: 1 1 auto;
 }
 
+.#{$block-class}__empty-state .#{$block-class}__empty-state-cell {
+  border-bottom: none;
+}
+
 .#{$block-class}__resizer {
   position: absolute;
   z-index: 1;

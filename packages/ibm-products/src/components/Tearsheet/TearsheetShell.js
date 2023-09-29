@@ -15,6 +15,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
+import { getNodeTextContent } from '../../global/js/utils/getNodeTextContent';
 
 // Carbon and package components we use.
 import {
@@ -223,7 +224,7 @@ export const TearsheetShell = React.forwardRef(
             // Pass through any other property values.
             ...rest
           }
-          aria-label={title}
+          aria-label={getNodeTextContent(title)}
           className={cx(bc, className, {
             [`${bc}--stacked-${position}-of-${depth}`]:
               // Don't apply this on the initial open of a single tearsheet.

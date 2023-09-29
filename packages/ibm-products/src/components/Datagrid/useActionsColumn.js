@@ -55,6 +55,7 @@ const useActionsColumn = (hooks) => {
                     >
                       {rowActions.map((action, index) => {
                         const {
+                          align,
                           id,
                           itemText,
                           onClick,
@@ -81,8 +82,8 @@ const useActionsColumn = (hooks) => {
                           >
                             <OverflowMenu
                               {...rest}
+                              align={align || 'top'}
                               renderIcon={icon}
-                              hasIconOnly
                               light
                               iconDescription={itemText}
                               kind="ghost"
@@ -107,6 +108,7 @@ const useActionsColumn = (hooks) => {
                   {!isFetching && rowActions.length > 2 && (
                     <div>
                       <OverflowMenu
+                        align="top-right"
                         size="sm"
                         light
                         flipped

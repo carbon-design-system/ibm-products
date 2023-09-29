@@ -18,7 +18,6 @@ export const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
 
   return (
     <Pagination
-      {...state}
       page={state.pageIndex + 1} // react-table is zero-based
       pageSize={state.pageSize}
       pageSizes={state.pageSizes || [10, 20, 30, 40, 50]}

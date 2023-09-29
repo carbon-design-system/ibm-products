@@ -84,7 +84,7 @@ export const DatagridContent = ({ datagridState, title }) => {
           { [`${blockClass}__table-grid-active`]: gridActive },
           getTableProps()?.className
         )}
-        role={withInlineEdit && 'grid'}
+        role={withInlineEdit ? 'grid' : undefined}
         tabIndex={withInlineEdit ? 0 : -1}
         onKeyDown={
           withInlineEdit

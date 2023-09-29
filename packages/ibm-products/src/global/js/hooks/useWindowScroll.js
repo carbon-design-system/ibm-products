@@ -74,7 +74,6 @@ export function useWindowScroll(effect, deps, throttleInterval = 0) {
 
 export function useNearestScroll(ref, effect, deps, throttle = 0) {
   let scrollableTarget = scrollableAncestor(ref.current);
-  console.log(scrollableTarget, ref.current);
   if (
     scrollableTarget &&
     (document.body === scrollableTarget ||

@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.10.1...@carbon/ibm-products@2.10.2) (2023-09-29)
+
+
+### Bug Fixes
+
+* **EditTearsheet:** export edit tearsheet form component ([#3520](https://github.com/carbon-design-system/ibm-products/issues/3520)) ([ee053a7](https://github.com/carbon-design-system/ibm-products/commit/ee053a71587f54f51d0300d3f0ec98060f9e8e78))
+* ensure no td border appears on tr:hover ([#3514](https://github.com/carbon-design-system/ibm-products/issues/3514)) ([db74221](https://github.com/carbon-design-system/ibm-products/commit/db74221d6b8e0eea472da3fbe6adead9967e8856))
+* fixed tooltip alignment ([#3503](https://github.com/carbon-design-system/ibm-products/issues/3503)) ([f8b330c](https://github.com/carbon-design-system/ibm-products/commit/f8b330c69ef9736d9d84a8faa5264303b32f8426))
+* remove td bottom border when state is empty ([#3498](https://github.com/carbon-design-system/ibm-products/issues/3498)) ([cce033e](https://github.com/carbon-design-system/ibm-products/commit/cce033e90d646cb64c9d332b8a6cd487fb91069a))
+* update to Carbon 11 compatible versions to latest ([#3477](https://github.com/carbon-design-system/ibm-products/issues/3477)) ([c58ac80](https://github.com/carbon-design-system/ibm-products/commit/c58ac80c8c5760415b5b54cb96666b6b40a4472f))
+
+
+
+
+
+## [2.10.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.10.0...@carbon/ibm-products@2.10.1) (2023-09-26)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
 # [2.10.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.9.0...@carbon/ibm-products@2.10.0) (2023-09-20)
 
 

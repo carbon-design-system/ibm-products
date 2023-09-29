@@ -1,12 +1,15 @@
 {
-  "name": "apikeymodal-component-example",
-  "description": "An example showing use of the APIKeyModal component from the @carbon/ibm-products component library.",
+  "name": "ApiKeyModal-component-example",
+  "description": "An example showing use of the ApiKeyModal component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "apikeymodal"
+    "apikeymodal",
+    "api",
+    "key",
+    "modal"
   ],
   "license": "Apache-2.0",
   "type": "module",
@@ -17,12 +20,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/ibm-products": "^2.6.0",
-    "@carbon/react": "^1.35.0",
+    "@carbon/ibm-products": "^2.9.0",
+    "@carbon/react": "^1.38.0",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "sass": "^1.64.2"
+    "sass": "^1.67.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.20",

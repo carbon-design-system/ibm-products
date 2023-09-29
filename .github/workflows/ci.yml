@@ -72,3 +72,32 @@ jobs:
         run: yarn
       - name: CI tests for c4p
         run: yarn ci-check:test:c4p
+
+  check_gallery:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3.8.1
+        with:
+          node-version: lts/gallium
+          cache: yarn
+      - name: Cache dependencies
+        uses: actions/cache@v3.3.2
+        with:
+          path: '**/node_modules'
+          key: check-gallery-${{ runner.os }}-${{ hashFiles('yarn.lock') }}
+      - name: Install
+        run: yarn
+      - name: Check gallery
+        run: |
+          yarn update-gallery-config
+          if [[ `git status --porcelain` ]]; then
+            echo "::error ::The gallery is out of date, run yarn update-gallery-config"
+            echo "The following items are out of date."
+            git status --porcelain
+            exit 1
+          else
+            echo "Gallery is up-to-date"
+          fi

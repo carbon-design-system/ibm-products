@@ -65,6 +65,7 @@ const defaults = {
     DataSpreadsheet: false,
     Datagrid: false,
     EditTearsheet: false,
+    EditTearsheetForm: false,
     EditTearsheetNarrow: false,
     EditFullPage: false,
     EditUpdateCards: false,

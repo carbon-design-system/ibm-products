@@ -15,23 +15,24 @@ export const Example = () => {
   const handleRestartClick = () =>
     document.getAnimations().forEach((anim) => anim.play());
 
-  return (<>      
-    <Button kind="secondary" onClick={handleRestartClick}>
-      Restart animations
-    </Button>
+  return (
+    <>
+      <Button kind="secondary" onClick={handleRestartClick}>
+        Restart animations
+      </Button>
 
-    <Cascade style={{ 'max-width': '728px' }}>
-      <div className="box" />
-      <div className="box" />
-      <div className="box" />
-      <div className="box" />
-      <div className="box" />
-      <div className="box" />
-      <div className="box" />
-      <div className="box" />
-    </Cascade>
-    </>  
+      <Cascade style={{ 'max-width': '728px' }}>
+        <div className="box" />
+        <div className="box" />
+        <div className="box" />
+        <div className="box" />
+        <div className="box" />
+        <div className="box" />
+        <div className="box" />
+        <div className="box" />
+      </Cascade>
+    </>
   );
-}
+};
 
 export default Example;

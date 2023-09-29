@@ -39,7 +39,7 @@ export const Example = () => {
         tabListAriaLabel="an aria label"
         open={isOpen}
         additionalInfo={
-        <>
+          <>
             <img
               alt="Grafana"
               className="about-modal__tech-logo"

@@ -83,12 +83,12 @@
     "react-window": "^1.8.9"
   },
   "peerDependencies": {
-    "@carbon/grid": "^11.19.0",
+    "@carbon/grid": "^11.20.0",
     "@carbon/layout": "^11.19.0",
     "@carbon/motion": "^11.15.0",
-    "@carbon/react": "^1.37.0",
-    "@carbon/themes": "^11.24.0",
-    "@carbon/type": "^11.23.0",
+    "@carbon/react": "^1.39.0",
+    "@carbon/themes": "^11.25.0",
+    "@carbon/type": "^11.24.0",
     "react": "^16.8.6 || ^17.0.1 || ^18.2.0",
     "react-dom": "^16.8.6 || ^17.0.1 || ^18.2.0"
   }

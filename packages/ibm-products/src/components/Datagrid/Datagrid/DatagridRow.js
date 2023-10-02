@@ -74,7 +74,7 @@ const DatagridRow = (datagridState) => {
   const renderExpandedRow = () => {
     if (row.isExpanded) {
       prepareRow(row);
-      return row.RowExpansionRenderer({ ...datagridState, row });
+      return row?.RowExpansionRenderer?.({ ...datagridState, row });
     }
     return null;
   };

@@ -27,10 +27,7 @@ const useExpandedRow = (hooks) => {
       canExpand: row.original && !row.original.notExpandable,
       expandedContentHeight:
         expandedRowsHeight[row.index] || expandedContentHeight,
-      RowRenderer: DatagridExpandedRow(
-        row.RowRenderer,
-        ExpandedRowContentComponent
-      ),
+      RowExpansionRenderer: DatagridExpandedRow(ExpandedRowContentComponent),
     }));
     Object.assign(instance, { rows: rowsWithExpand, setExpandedRowHeight });
   };

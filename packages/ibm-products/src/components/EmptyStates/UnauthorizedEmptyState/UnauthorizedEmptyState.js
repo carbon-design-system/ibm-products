@@ -55,7 +55,8 @@ export let UnauthorizedEmptyState = React.forwardRef(
         className={cx(
           blockClass,
           className,
-          `${blockClass}-position--${illustrationPosition}`
+          `${blockClass}-position--${illustrationPosition}`,
+          `${blockClass}-type--unauthorized`
         )}
         ref={ref}
         {...getDevtoolsProps(componentName)}

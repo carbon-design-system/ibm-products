@@ -55,7 +55,8 @@ export let NoTagsEmptyState = React.forwardRef(
         className={cx(
           blockClass,
           className,
-          `${blockClass}-position--${illustrationPosition}`
+          `${blockClass}-position--${illustrationPosition}`,
+          `${blockClass}-type--noTags`
         )}
         ref={ref}
         {...getDevtoolsProps(componentName)}

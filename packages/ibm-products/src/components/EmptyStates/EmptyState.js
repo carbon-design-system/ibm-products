@@ -58,7 +58,7 @@ export let EmptyState = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(blockClass, className, {
+        className={cx(blockClass, `${blockClass}-type--default`, className, {
           [`${blockClass}-position--${illustrationPosition}`]: !!illustration,
         })}
         ref={ref}

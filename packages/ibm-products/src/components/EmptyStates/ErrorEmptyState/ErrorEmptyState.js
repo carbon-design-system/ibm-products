@@ -55,7 +55,8 @@ export let ErrorEmptyState = React.forwardRef(
         className={cx(
           blockClass,
           className,
-          `${blockClass}-position--${illustrationPosition}`
+          `${blockClass}-position--${illustrationPosition}`,
+          `${blockClass}-type--error`
         )}
         ref={ref}
         {...getDevtoolsProps(componentName)}

@@ -12,6 +12,7 @@ import {
   NoDataEmptyState,
   ErrorEmptyState,
   NotFoundEmptyState,
+  EmptyState,
 } from '../../EmptyStates';
 
 const blockClass = `${pkg.prefix}--datagrid`;
@@ -38,6 +39,8 @@ const DatagridEmptyBody = (datagridState) => {
     link: emptyStateLink,
   };
 
+  const validEmptyStates = ['error', 'noData', 'notFound'];
+
   return (
     <TableBody
       {...getTableBodyProps({ role: false })}
@@ -48,14 +51,20 @@ const DatagridEmptyBody = (datagridState) => {
           colSpan={headers.length}
           className={`${blockClass}__empty-state-cell`}
         >
-          {emptyStateType === 'error' && (
-            <ErrorEmptyState {...emptyStateProps} />
-          )}
-          {emptyStateType === 'noData' && (
-            <NoDataEmptyState {...emptyStateProps} />
-          )}
-          {emptyStateType === 'notFound' && (
-            <NotFoundEmptyState {...emptyStateProps} />
+          {validEmptyStates.includes(emptyStateType) ? (
+            <>
+              {emptyStateType === 'error' && (
+                <ErrorEmptyState {...emptyStateProps} />
+              )}
+              {emptyStateType === 'noData' && (
+                <NoDataEmptyState {...emptyStateProps} />
+              )}
+              {emptyStateType === 'notFound' && (
+                <NotFoundEmptyState {...emptyStateProps} />
+              )}
+            </>
+          ) : (
+            <EmptyState {...emptyStateProps} />
           )}
         </TableCell>
       </TableRow>

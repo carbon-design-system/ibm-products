@@ -5,28 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-// import { DndProvider } from 'react-dnd';
-// import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Checkbox } from '@carbon/react';
-// import update from 'immutability-helper';
+import update from 'immutability-helper';
 import { pkg } from '../../../../../settings';
 import cx from 'classnames';
 import { DraggableItemsList } from './DraggableItemsList';
+import uuidv4 from '../../../../../global/js/utils/uuidv4';
 
 const blockClass = `${pkg.prefix}--datagrid`;
-
-const getNextIndex = (array, currentIndex, key) => {
-  let newIndex = -1;
-  if (key === 'ArrowUp') {
-    newIndex = currentIndex - 1 >= 0 ? currentIndex - 1 : array.length - 1;
-  }
-  if (key === 'ArrowDown') {
-    newIndex = currentIndex + 1 < array.length ? currentIndex + 1 : 0;
-  }
-  return newIndex;
-};
 
 const Columns = ({
   getVisibleColumnsCount,
@@ -38,38 +26,36 @@ const Columns = ({
   assistiveTextDisabledInstructionsLabel,
   selectAllLabel,
 }) => {
+  const listId = useRef(uuidv4()); // keep id between renders
+  const listRef = useRef(null);
+
   const [ariaRegionText, setAriaRegionText] = React.useState('');
-  const [focusIndex, setFocusIndex] = React.useState(-1);
-  // const moveElement = React.useCallback(
-  //   (dragIndex, hoverIndex) => {
-  //     const dragCard = columns[dragIndex];
-  //     setColumnsObject(
-  //       update(columns, {
-  //         $splice: [
-  //           [dragIndex, 1],
-  //           [hoverIndex, 0, dragCard],
-  //         ],
-  //       })
-  //     );
-  //   },
-  //   [columns, setColumnsObject]
-  // );
+  // after a drag/drop action set the columns
+  const moveElement = React.useCallback(
+    (from, to) => {
+      const fromCol = columns[from];
+
+      setColumnsObject(
+        update(columns, {
+          $splice: [
+            [from, 1],
+            [to, 0, fromCol],
+          ],
+        })
+      );
+    },
+    [columns, setColumnsObject]
+  );
 
   return (
-    <div className={`${blockClass}__customize-columns-column-list`}>
-      {/* <DndProvider backend={HTML5Backend}> */}
+    <div
+      className={`${blockClass}__customize-columns-column-list`}
+      ref={listRef}
+    >
       <ol
         className={`${blockClass}__customize-columns-column-list--focus`}
         role="listbox"
         aria-describedby={`${blockClass}__customize-columns--instructions`}
-        onKeyDown={(e) => {
-          const nextIndex = getNextIndex(columns, focusIndex, e.key);
-          if (nextIndex >= 0) {
-            setFocusIndex(nextIndex);
-            e.preventDefault();
-            e.stopPropagation();
-          }
-        }}
         tabIndex={0}
       >
         <span
@@ -112,18 +98,14 @@ const Columns = ({
           />
         </div>
         <DraggableItemsList
+          id={listId.current}
           columns={columns}
           filterString={filterString}
-          focusIndex={focusIndex}
-          getNextIndex={getNextIndex}
-          // moveElement={moveElement}
-          onSelectColumn={onSelectColumn}
+          moveElement={moveElement}
           setAriaRegionText={setAriaRegionText}
-          setColumnsObject={setColumnsObject}
-          setFocusIndex={setFocusIndex}
+          onSelectColumn={onSelectColumn}
         />
       </ol>
-      {/* </DndProvider> */}
     </div>
   );
 };

@@ -83,3 +83,7 @@ export function useNearestScroll(ref, effect, deps, throttle = 0) {
   }
   return useTargetScroll(scrollableTarget, effect, deps, throttle);
 }
+
+export function useScroll(ref, effect, deps, throttle = 0) {
+  return useTargetScroll(ref?.current ?? null, effect, deps, throttle);
+}

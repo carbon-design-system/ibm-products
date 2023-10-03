@@ -15,7 +15,6 @@
   display: flex;
   align-items: center;
   margin-right: $spacing-03;
-  cursor: grab;
 }
 
 .#{variables.$block-class}__draggable-handleStyle.disabled {
@@ -46,6 +45,7 @@
   height: $spacing-09;
   border-bottom: 1px solid $layer-active;
   background-color: $layer;
+  cursor: grab;
 }
 
 .#{variables.$block-class}__draggable-handleHolder:hover {
@@ -63,10 +63,14 @@
 
 .#{variables.$block-class}__draggable-handleHolder--dragging {
   z-index: 2; // raise above other items in draggable list
-
   background-color: $highlight;
   color: $text-primary;
   outline: none;
+}
+
+.#{variables.$block-class}__draggable-handleHolder:active,
+.#{variables.$block-class}__draggable-handleHolder--dragging {
+  cursor: grabbing;
 }
 
 .#{variables.$block-class}__draggable-handleHolder-selected:hover {

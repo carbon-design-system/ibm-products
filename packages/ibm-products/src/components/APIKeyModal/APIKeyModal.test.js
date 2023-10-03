@@ -109,7 +109,7 @@ describe(componentName, () => {
     getByLabelText(defaultProps.copyIconDescription);
   });
 
-  it.only('renders with standard setup', async () => {
+  it('renders with standard setup', async () => {
     const { change } = fireEvent;
     const { click } = userEvent;
     const { fn } = jest;

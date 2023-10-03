@@ -55,7 +55,8 @@ export let NotificationsEmptyState = React.forwardRef(
         className={cx(
           blockClass,
           className,
-          `${blockClass}-position--${illustrationPosition}`
+          `${blockClass}-position--${illustrationPosition}`,
+          `${blockClass}-type--notifications`
         )}
         ref={ref}
         {...getDevtoolsProps(componentName)}

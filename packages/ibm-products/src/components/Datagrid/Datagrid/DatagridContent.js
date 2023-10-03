@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -50,9 +50,11 @@ export const DatagridContent = ({ datagridState, title }) => {
     totalColumnsWidth,
     gridRef,
     state,
+    page,
+    rows,
   } = datagridState;
 
-  const rows = (DatagridPagination && datagridState.page) || datagridState.rows;
+  const contentRows = (DatagridPagination && page) || rows;
   const gridAreaRef = useRef();
   const multiKeyTrackingRef = useRef();
 
@@ -106,8 +108,8 @@ export const DatagridContent = ({ datagridState, title }) => {
         }
         title={title}
       >
-        {!withVirtualScroll ? <DatagridHead {...datagridState} /> : null}
-        <DatagridBody {...datagridState} rows={rows} />
+        {!withVirtualScroll && <DatagridHead {...datagridState} />}
+        <DatagridBody {...datagridState} rows={contentRows} />
       </Table>
     );
   };
@@ -201,7 +203,7 @@ export const DatagridContent = ({ datagridState, title }) => {
           </div>
         </div>
       </TableContainer>
-      {rows?.length > 0 && !isFetching && DatagridPagination && (
+      {contentRows?.length > 0 && !isFetching && DatagridPagination && (
         <DatagridPagination {...datagridState} />
       )}
       {CustomizeColumnsTearsheet && (

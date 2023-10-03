@@ -36,6 +36,7 @@ export const DraggableItemsList = ({
   onSelectColumn,
   setAriaRegionText,
 }) => {
+  const draggableClass = `${blockClass}__draggable-item`;
   const visibleCols = columns
     // hide the columns without Header, e.g the sticky actions, spacer
     .filter((colDef) => {
@@ -105,7 +106,33 @@ export const DraggableItemsList = ({
       distance: 4,
     },
   });
-  const keyboardSensor = useSensor(KeyboardSensor);
+
+  const keyboardSensor = useSensor(KeyboardSensor, {
+    coordinateGetter: (event, args) => {
+      const { currentCoordinates } = args;
+
+      let target = event.target;
+
+      while (target && !target.classList.contains(draggableClass)) {
+        target = target.parentNode;
+      }
+
+      const delta = target.offsetHeight;
+
+      switch (event.code) {
+        case 'ArrowRight':
+        case 'ArrowLeft':
+          // ignore right and left
+          return currentCoordinates;
+        case 'ArrowUp':
+          return { ...currentCoordinates, y: currentCoordinates.y - delta };
+        case 'ArrowDown':
+          return { ...currentCoordinates, y: currentCoordinates.y + delta };
+        case 'Space':
+          break;
+      }
+    },
+  });
 
   const sensors = useSensors(pointerSensor, keyboardSensor);
 
@@ -176,6 +203,7 @@ export const DraggableItemsList = ({
 
             return (
               <DraggableElement
+                classList={draggableClass}
                 key={colDef.id}
                 id={colDef.id}
                 disabled={filterString.length > 0 || isFrozenColumn}

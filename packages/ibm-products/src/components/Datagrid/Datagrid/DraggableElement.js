@@ -19,6 +19,7 @@ const blockClass = `${pkg.prefix}--datagrid`;
 const DraggableElement = ({
   id,
   children,
+  classList,
   disabled,
   ariaLabel,
   isSticky,
@@ -56,7 +57,7 @@ const DraggableElement = ({
 
   return (
     <li
-      className={cx(`${blockClass}__draggable-handleHolder`, {
+      className={cx(classList, `${blockClass}__draggable-handleHolder`, {
         [`${blockClass}__draggable-handleHolder--selected`]: selected,
         [`${blockClass}__draggable-handleHolder--sticky`]: isSticky,
         [`${blockClass}__draggable-handleHolder--dragging`]: isDragging,
@@ -90,6 +91,7 @@ const DraggableElement = ({
 DraggableElement.propTypes = {
   ariaLabel: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired,
+  classList: PropTypes.string,
   disabled: PropTypes.bool,
   id: PropTypes.string.isRequired,
   isSticky: PropTypes.bool,

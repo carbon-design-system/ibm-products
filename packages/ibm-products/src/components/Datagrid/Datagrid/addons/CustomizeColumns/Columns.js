@@ -44,7 +44,7 @@ const Columns = ({
         })
       );
     },
-    [columns, setColumnsObject] // [columns, setColumnsObject]
+    [columns, setColumnsObject]
   );
 
   return (

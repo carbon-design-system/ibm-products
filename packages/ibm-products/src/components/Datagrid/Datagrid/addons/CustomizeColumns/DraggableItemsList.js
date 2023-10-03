@@ -27,6 +27,7 @@ import {
 } from '@dnd-kit/sortable';
 
 const blockClass = `${pkg.prefix}--datagrid`;
+const matchedColsById = (col1, col2) => col1 && col2 && col1.id === col2.id;
 
 export const DraggableItemsList = ({
   columns,
@@ -56,8 +57,12 @@ export const DraggableItemsList = ({
   const handleDragEnd = (event) => {
     const { active, over } = event;
 
-    const fromVisibleIndex = columns.findIndex((col) => col.id === active.id);
-    const toVisibleIndex = columns.findIndex((col) => col.id === over.id);
+    const fromVisibleIndex = columns.findIndex((col) =>
+      matchedColsById(col, active)
+    );
+    const toVisibleIndex = columns.findIndex((col) =>
+      matchedColsById(col, over)
+    );
     const colTitle = getColTitle(visibleCols[fromVisibleIndex]);
 
     setAriaRegionText(
@@ -66,8 +71,8 @@ export const DraggableItemsList = ({
       }.`
     );
 
-    const fromIndex = columns.findIndex((col) => col.id === active.id);
-    const toIndex = columns.findIndex((col) => col.id === over.id);
+    const fromIndex = columns.findIndex((col) => matchedColsById(col, active));
+    const toIndex = columns.findIndex((col) => matchedColsById(col, over));
 
     moveElement(fromIndex, toIndex);
   };
@@ -75,7 +80,9 @@ export const DraggableItemsList = ({
   const handleDragStart = (event) => {
     const { active } = event;
 
-    const fromIndex = visibleCols.findIndex((col) => col.id === active.id);
+    const fromIndex = visibleCols.findIndex((col) =>
+      matchedColsById(col, active)
+    );
     const colTitle = getColTitle(visibleCols[fromIndex]);
 
     setAriaRegionText(
@@ -88,8 +95,10 @@ export const DraggableItemsList = ({
   const handleDragUpdate = (event) => {
     const { active, over } = event;
 
-    const fromIndex = visibleCols.findIndex((col) => col.id === active.id);
-    const toIndex = visibleCols.findIndex((col) => col.id === over.id);
+    const fromIndex = visibleCols.findIndex((col) =>
+      matchedColsById(col, active)
+    );
+    const toIndex = visibleCols.findIndex((col) => matchedColsById(col, over));
 
     const colTitle = getColTitle(visibleCols[fromIndex]);
 

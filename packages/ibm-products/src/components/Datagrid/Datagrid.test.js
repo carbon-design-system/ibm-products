@@ -1079,24 +1079,22 @@ describe(componentName, () => {
     const { rerender } = render(<EmptyUsage data-testid={dataTestId} />);
     screen.getByText('Empty State Title');
     screen.getByText('Description test explaining why this card is empty.');
-    expect(
-      document.querySelector(`.${pkg.prefix}--empty-state-type--noData`)
-    ).toBeInTheDocument();
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-noData`
+    );
 
     rerender(<EmptyUsage emptyStateType="error" />);
-    expect(
-      document.querySelector(`.${pkg.prefix}--empty-state-type--error`)
-    ).toBeInTheDocument();
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-error`
+    );
 
     rerender(<EmptyUsage emptyStateType="notFound" />);
-    expect(
-      document.querySelector(`.${pkg.prefix}--empty-state-type--notFound`)
-    ).toBeInTheDocument();
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-notFound`
+    );
 
     rerender(<EmptyUsage emptyStateType="12345" />);
-    expect(
-      document.querySelector(`.${pkg.prefix}--empty-state-type--default`)
-    ).toBeInTheDocument();
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });
 
   it('Initial Load', async () => {

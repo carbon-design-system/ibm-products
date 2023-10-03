@@ -127,6 +127,7 @@
     "tagset",
     "tearsheet",
     "tearsheets",
+    "techdocs", // Backstage
     "textbox",
     "timeframe",
     "toggletip",

@@ -288,6 +288,7 @@
 }
 
 .#{$block-class}__empty-state .#{$block-class}__table-simple tr:hover td {
+  border-bottom: none;
   background: transparent;
 }
 
@@ -297,6 +298,10 @@
 
 .#{$block-class}__empty-state .#{$block-class}__grid-container {
   flex: 1 1 auto;
+}
+
+.#{$block-class}__empty-state .#{$block-class}__empty-state-cell {
+  border-bottom: none;
 }
 
 .#{$block-class}__resizer {

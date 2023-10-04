@@ -35,7 +35,7 @@ import {
 } from '../../global/js/hooks';
 import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
 import { getNumberOfHiddenSteps } from '../../global/js/utils/getNumberOfHiddenSteps';
-import { BasicHeader } from '../BasicHeader/BasicHeader';
+import { SimpleHeader, overview_arialabel_required_if_breadcrumbs_exist } from '../SimpleHeader/SimpleHeader';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
@@ -64,12 +64,14 @@ component to get the desired affect.
 export let CreateFullPage = React.forwardRef(
   (
     {
+      breadcrumbsOverflowAriaLabel,
       breadcrumbs,
       backButtonText,
       cancelButtonText,
       children,
       className,
       initialStep,
+      maxVisibleBreadcrumbs,
       modalDangerButtonText,
       modalDescription,
       modalSecondaryButtonText,
@@ -79,6 +81,7 @@ export let CreateFullPage = React.forwardRef(
       onRequestSubmit,
       firstFocusElement,
       submitButtonText,
+      noTrailingSlash,
       title,
       secondaryTitle,
       ...rest
@@ -180,10 +183,12 @@ export let CreateFullPage = React.forwardRef(
       >
         {(title || breadcrumbs?.length > 0) && (
           <div className={`${blockClass}__header`} ref={headerRef}>
-            <BasicHeader
+            <SimpleHeader
               title={title}
               breadcrumbs={breadcrumbs}
-              noTrailingSlash
+              noTrailingSlash={noTrailingSlash}
+              overflowAriaLabel={breadcrumbsOverflowAriaLabel}
+              maxVisible={maxVisibleBreadcrumbs}
             />
           </div>
         )}
@@ -289,9 +294,18 @@ CreateFullPage.propTypes = {
       /** breadcrumb item label */
       label: PropTypes.string.isRequired,
       /** breadcrumb item link */
-      link: PropTypes.string,
+      href: PropTypes.string,
+      /** breadcrumb item title tooltip */
+      title: PropTypes.string,
+      /** Provide if this breadcrumb item represents the current page */
+      isCurrentPage: PropTypes.bool,
     })
   ),
+
+  /** 
+   * Label for open/close overflow button used for breadcrumb items that do not fit 
+   */
+  breadcrumbsOverflowAriaLabel:  overview_arialabel_required_if_breadcrumbs_exist,
 
   /**
    * The cancel button text
@@ -320,6 +334,9 @@ CreateFullPage.propTypes = {
    */
   initialStep: PropTypes.number,
 
+  /**	Maximum visible breadcrumb-items before overflow is used (values less than 1 are treated as 1) */
+  maxVisibleBreadcrumbs: PropTypes.number,
+
   /**
    * The primary 'danger' button text in the modal
    */
@@ -340,10 +357,17 @@ CreateFullPage.propTypes = {
    */
   modalTitle: PropTypes.string.isRequired,
 
+
   /**
    * The next button text
    */
   nextButtonText: PropTypes.string.isRequired,
+
+
+  /** 
+   * A prop to omit the trailing slash for the breadcrumbs 
+   */
+  noTrailingSlash: PropTypes.bool,
 
   /**
    * An optional handler that is called when the user closes the full page (by

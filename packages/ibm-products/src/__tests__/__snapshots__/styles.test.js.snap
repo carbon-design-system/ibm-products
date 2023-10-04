@@ -1885,22 +1885,30 @@ p.c4p--about-modal__copyright-text:first-child {
     opacity: 1;
   }
 }
-.c4p--basic-header {
+.c4p--simple-header {
   width: 100%;
   padding: 0.75rem 2rem;
   border-bottom: 1px solid var(--cds-border-subtle-01, #c6c6c6);
   background-color: var(--cds-layer-01, #f4f4f4);
 }
 
-.c4p--basic-header__title {
+.c4p--simple-header__title {
   font-size: var(--cds-heading-04-font-size, 1.75rem);
   font-weight: var(--cds-heading-04-font-weight, 400);
   line-height: var(--cds-heading-04-line-height, 1.28572);
   letter-spacing: var(--cds-heading-04-letter-spacing, 0);
 }
 
-.c4p--basic-header__breadcrumbs + .c4p--basic-header__title {
+.c4p--simple-header__breadcrumbs + .c4p--simple-header__title {
   margin-top: 0.25rem;
+}
+
+.c4p--simple-header__breadcrumbs .cds--breadcrumb-item,
+.c4p--simple-header__breadcrumbs .cds--breadcrumb-item .cds--link {
+  font-size: var(--cds-label-01-font-size, 0.75rem);
+  font-weight: var(--cds-label-01-font-weight, 400);
+  line-height: var(--cds-label-01-line-height, 1.33333);
+  letter-spacing: var(--cds-label-01-letter-spacing, 0.32px);
 }
 
 .c4p--create-full-page .c4p--create-full-page {

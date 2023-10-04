@@ -71,7 +71,6 @@ export default {
 };
 
 const defaultFullPageProps = {
-  title: 'Page title',
   secondaryTitle: 'Create topic',
   nextButtonText: 'Next',
   backButtonText: 'Back',
@@ -84,10 +83,6 @@ const defaultFullPageProps = {
   modalSecondaryButtonText: 'Return to form',
   onRequestSubmit: action('Submit handler called'),
   onClose: action('Close handler called'),
-  breadcrumbs: [
-    { href: '/', key: '0', label: 'Home page' },
-    { href: '/', key: '1', label: 'Application name' },
-  ],
 };
 
 const Template = ({ ...args }) => {
@@ -505,5 +500,20 @@ export const createFullPage = prepareStory(Template, {
 export const createFullPageWithSections = prepareStory(TemplateWithSections, {
   args: {
     ...defaultFullPageProps,
+  },
+});
+
+export const createFullPageWithHeader = prepareStory(Template, {
+  args: {
+    ...defaultFullPageProps,
+    title: 'Page title',
+    breadcrumbsOverflowAriaLabel: 'Open and close additional breadcrumb item list.',
+    breadcrumbs: [
+      { key: '0', label: 'Breadcrumb 1', href: '/', title: 'home page' },
+      { key: '1', label: 'Breadcrumb 2', href: '/', },
+      { key: '2', label: 'Breadcrumb 3', href:'/' },
+      { key: '3', label: 'Breadcrumb 4', isCurrentPage: true },
+    ],
+    maxVisibleBreadcrumbs: 3
   },
 });

@@ -5,7 +5,5 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// BasicHeader uses the following Carbon components:
-// Breadcrumb, BreadcrumbItem
-
-@use '@carbon/styles/scss/components/breadcrumb';
+@use './carbon-imports';
+@use './simple-header';

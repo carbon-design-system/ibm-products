@@ -12,10 +12,10 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 
 // CreateFullPage uses the following IBM Products components:
-// ActionSet, CreateInfluencer and BasicHeader
+// ActionSet, CreateInfluencer and SimpleHeader
 @use '../CreateInfluencer/index' as *;
 @use '../ActionSet/action-set' as *;
-@use '../BasicHeader' as *;
+@use '../SimpleHeader' as *;
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--create-full-page;

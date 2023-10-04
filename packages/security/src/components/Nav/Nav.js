@@ -23,7 +23,7 @@ export default class Nav extends Component {
     if (!activeHref && window.location) {
       const { hash, pathname } = window.location;
 
-      activeHref = hash || pathname;
+      activeHref = pathname + hash;
     }
 
     this.state = { activeHref };

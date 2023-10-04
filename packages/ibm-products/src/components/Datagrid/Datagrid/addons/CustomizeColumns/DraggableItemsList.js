@@ -144,6 +144,14 @@ export const DraggableItemsList = ({
   });
 
   const sensors = useSensors(pointerSensor, keyboardSensor);
+  const handleCheckboxKeydown = (event, colDef) => {
+    if (event.code === 'Space') {
+      onSelectColumn(colDef, !isColumnVisible(colDef));
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+    }
+  };
 
   return (
     <DndContext
@@ -200,6 +208,7 @@ export const DraggableItemsList = ({
                   title={colHeaderTitle}
                   className={`${blockClass}__customize-columns-checkbox`}
                   hideLabel
+                  onKeyDown={(event) => handleCheckboxKeydown(event, colDef)}
                 />
                 {
                   <div

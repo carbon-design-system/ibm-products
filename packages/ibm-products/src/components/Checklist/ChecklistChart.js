@@ -52,8 +52,8 @@ const defaults = {
 export let ChecklistChart = React.forwardRef(
   ({ className, value, theme = defaults.theme, ...rest }, ref) => {
     const numDegrees = clamp(value * 360, 0, 360);
-    const circleColor = theme === 'light' ? '#c6c6c6' : '#525252'; // $gray-30, $gray-70
-    const progressColor = theme === 'light' ? '#6929c4' : '#A56EFF'; // $purple-70, $purple-50
+    const circleColor = theme === 'light' ? '#e0e0e0' : '#525252'; // $ui-03 (-ish)
+    const progressColor = theme === 'light' ? '#a56eff' : '#a56eff'; // $purple-50
 
     return (
       <div

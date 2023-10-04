@@ -122,7 +122,7 @@ export const ButtonSetWithOverflow = ({
      *  isHidden - Used to conditionally change id if one is passed to the `AButtonSet` component
      *  in order to avoid duplicate ids between the visible and hidden button set buttons
      */
-    isHidden: PropTypes.node.isRequired,
+    isHidden: PropTypes.bool,
   };
 
   const AButtonMenu = React.forwardRef(({ buttons, ...rest }, ref) => {

@@ -3352,6 +3352,7 @@ p.c4p--about-modal__copyright-text:first-child {
   line-height: var(--cds-body-01-line-height, 1.42857);
   letter-spacing: var(--cds-body-01-letter-spacing, 0.16px);
   padding-bottom: 1rem;
+  color: var(--cds-text-secondary, #525252);
 }
 .c4p--empty-state .c4p--empty-state__header--small {
   font-size: var(--cds-body-compact-02-font-size, 1rem);
@@ -3402,7 +3403,7 @@ p.c4p--about-modal__copyright-text:first-child {
 }
 
 .c4p--empty-state .c4p--empty-state__link {
-  display: block;
+  display: inline-block;
 }
 
 .c4p--export-modal .cds--modal-footer .cds--btn {

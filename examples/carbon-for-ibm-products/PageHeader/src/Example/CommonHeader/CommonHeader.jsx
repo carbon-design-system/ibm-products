@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Header,
   HeaderMenuButton,
   HeaderName,
   HeaderGlobalBar,
   HeaderGlobalAction,
-  SkipToContent
+  SkipToContent,
   // SideNav,
   // SideNavItems,
   // SideNavLink,
   // SideNavMenu,
   // SideNavMenuItem,
-} from "@carbon/react";
-import { Notification, UserAvatar, Switcher } from "@carbon/icons-react";
+} from '@carbon/react';
+import { Notification, UserAvatar, Switcher } from '@carbon/icons-react';
 
 // eslint-disable-next-line react/prop-types
 export const CommonHeader = ({ className }) => {
@@ -23,27 +23,27 @@ export const CommonHeader = ({ className }) => {
   };
 
   return (
-    <Header aria-label='Carbon Tutorial' className={className}>
+    <Header aria-label="Carbon Tutorial" className={className}>
       <SkipToContent />
       <HeaderMenuButton
-        aria-label='Open menu'
+        aria-label="Open menu"
         isCollapsible
         onClick={handleClickSideNavExpand}
         isActive={isSideNavExpanded}
       />
 
-      <HeaderName href='/' prefix='IBM'>
+      <HeaderName href="/" prefix="IBM">
         Cloud PAK Automation Hub
       </HeaderName>
 
       <HeaderGlobalBar>
-        <HeaderGlobalAction aria-label='Notifications'>
+        <HeaderGlobalAction aria-label="Notifications">
           <Notification size={20} />
         </HeaderGlobalAction>
-        <HeaderGlobalAction aria-label='User Avatar'>
+        <HeaderGlobalAction aria-label="User Avatar">
           <UserAvatar size={20} />
         </HeaderGlobalAction>
-        <HeaderGlobalAction aria-label='App Switcher'>
+        <HeaderGlobalAction aria-label="App Switcher">
           <Switcher size={20} />
         </HeaderGlobalAction>
       </HeaderGlobalBar>

@@ -1,3 +1,6 @@
 {
-  "label": "Prefix CSS/JS Example"
+  "label": "Prefix CSS/JS Example",
+  "package-config": {
+    "prefix": "tst"
+  }
 }

@@ -11,7 +11,7 @@ on:
     types: [checks_requested]
 
 jobs:
-  main:
+  validate_title:
     name: validate title
     if: ${{ github.event_name != 'merge_group' }}
     runs-on: ubuntu-latest

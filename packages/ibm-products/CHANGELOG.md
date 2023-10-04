@@ -3,6 +3,64 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.10.1...@carbon/ibm-products@2.10.2) (2023-09-29)
+
+
+### Bug Fixes
+
+* **EditTearsheet:** export edit tearsheet form component ([#3520](https://github.com/carbon-design-system/ibm-products/issues/3520)) ([ee053a7](https://github.com/carbon-design-system/ibm-products/commit/ee053a71587f54f51d0300d3f0ec98060f9e8e78))
+* ensure no td border appears on tr:hover ([#3514](https://github.com/carbon-design-system/ibm-products/issues/3514)) ([db74221](https://github.com/carbon-design-system/ibm-products/commit/db74221d6b8e0eea472da3fbe6adead9967e8856))
+* fixed tooltip alignment ([#3503](https://github.com/carbon-design-system/ibm-products/issues/3503)) ([f8b330c](https://github.com/carbon-design-system/ibm-products/commit/f8b330c69ef9736d9d84a8faa5264303b32f8426))
+* remove td bottom border when state is empty ([#3498](https://github.com/carbon-design-system/ibm-products/issues/3498)) ([cce033e](https://github.com/carbon-design-system/ibm-products/commit/cce033e90d646cb64c9d332b8a6cd487fb91069a))
+* update to Carbon 11 compatible versions to latest ([#3477](https://github.com/carbon-design-system/ibm-products/issues/3477)) ([c58ac80](https://github.com/carbon-design-system/ibm-products/commit/c58ac80c8c5760415b5b54cb96666b6b40a4472f))
+
+
+
+
+
+## [2.10.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.10.0...@carbon/ibm-products@2.10.1) (2023-09-26)
+
+**Note:** Version bump only for package @carbon/ibm-products
+
+
+
+
+
+# [2.10.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.9.0...@carbon/ibm-products@2.10.0) (2023-09-20)
+
+
+### Bug Fixes
+
+* datagrid row height click ([#3480](https://github.com/carbon-design-system/ibm-products/issues/3480)) ([be38b68](https://github.com/carbon-design-system/ibm-products/commit/be38b6852ab0e949dad2f51c9c7d7fe58e79c7d1))
+* datagrid toolbar accessibility ([#3460](https://github.com/carbon-design-system/ibm-products/issues/3460)) ([033897d](https://github.com/carbon-design-system/ibm-products/commit/033897dba61d2dc78af2a0d01d62dd5cc57700bc))
+* **datagrid:** empty state fix ([#3389](https://github.com/carbon-design-system/ibm-products/issues/3389)) ([ac5939b](https://github.com/carbon-design-system/ibm-products/commit/ac5939bce71f1deae97071c47b8ac0cdcc97fd58))
+* filter flyout outside click ([#3473](https://github.com/carbon-design-system/ibm-products/issues/3473)) ([e2d05c6](https://github.com/carbon-design-system/ibm-products/commit/e2d05c647c4ebdf21b702da39eddd68f488d0e11))
+
+
+### Features
+
+* **createfullpage:** initialstep added ([#3449](https://github.com/carbon-design-system/ibm-products/issues/3449)) ([7cb13d4](https://github.com/carbon-design-system/ibm-products/commit/7cb13d42cbc89e68f077d8f28bf1a637fffa7c02))
+
+
+
+
+
+# [2.9.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.8.1...@carbon/ibm-products@2.9.0) (2023-09-12)
+
+
+### Bug Fixes
+
+* **build:** temporarily remove drag support in customize cols ([#3458](https://github.com/carbon-design-system/ibm-products/issues/3458)) ([1ea9725](https://github.com/carbon-design-system/ibm-products/commit/1ea97254df8104e1c2421a44d8d7e140fd2158bf))
+
+
+### Features
+
+* **Datagrid:** add new select all approach in batch actions ([#3438](https://github.com/carbon-design-system/ibm-products/issues/3438)) ([b939544](https://github.com/carbon-design-system/ibm-products/commit/b939544b219a37a5e43b9325baea5bd9808196eb))
+
+
+
+
+
 ## [2.8.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.8.0...@carbon/ibm-products@2.8.1) (2023-08-30)
 
 

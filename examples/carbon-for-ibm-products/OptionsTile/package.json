@@ -1,12 +1,14 @@
 {
-  "name": "optionstile-component-example",
-  "description": "An example showing use of the optionstile component from the @carbon/ibm-products component library.",
+  "name": "OptionsTile-component-example",
+  "description": "An example showing use of the OptionsTile component from the @carbon/ibm-products component library.",
   "keywords": [
     "carbon",
     "ibm",
     "ibm-products",
     "component",
-    "optionstile"
+    "optionstile",
+    "options",
+    "tile"
   ],
   "license": "Apache-2.0",
   "type": "module",
@@ -17,12 +19,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@carbon/ibm-products": "^2.6.0",
-    "@carbon/react": "^1.35.0",
+    "@carbon/ibm-products": "^2.9.0",
+    "@carbon/react": "^1.38.0",
     "lodash": "^4.17.21",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "sass": "^1.64.2"
+    "sass": "^1.67.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.20",

@@ -50,8 +50,7 @@ const getExampleDirectoriesConfig = (
   galleryConfigDir,
   directories
 ) => {
-  // examines peer directories and adds config for them if they have a package.json
-
+  // examines peer directories and checks/updates for if has a thumbnail.pngopen .
   const newConfig = [];
   // add the config for each dir
   directories.forEach((dir) => {
@@ -67,6 +66,14 @@ const getExampleDirectoriesConfig = (
       if (hasGalleryConfig) {
         const configRaw = fs.readFileSync(configPath);
         config = JSON.parse(configRaw);
+      } else {
+        fs.writeFileSync(
+          // This should never happen
+          configPath,
+          `{
+  "label": "${dir} example"
+}`
+        );
       }
 
       // config can include label and thumbnail for package
@@ -82,7 +89,7 @@ const getExampleDirectoriesConfig = (
         return fs.existsSync(filePath);
       });
 
-      const output = { label, directory: dir };
+      const output = { ...config, label, directory: dir };
 
       // have a thumbnail so add it to th config
       if (thumbnail) {

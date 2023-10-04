@@ -12,7 +12,7 @@ import { IconButton, Layer, Popover, PopoverContent } from '@carbon/react';
 import RowSizeRadioGroup from './RowSizeRadioGroup';
 import { pkg } from '../../../../../settings';
 
-const blockClass = `${pkg.prefix}--datagrid`;
+const blockClass = `${pkg.prefix}--datagrid__row-size`;
 
 const RowSizeDropdown = ({
   align = 'bottom-right',
@@ -20,20 +20,44 @@ const RowSizeDropdown = ({
   ...props
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+
+  const onCloseHandler = () => {
+    setIsOpen(false);
+  };
+
+  const onKeyHandler = (e) => {
+    if (e.key === 'Escape') {
+      onCloseHandler();
+    }
+  };
+
+  const onBlurHandler = (e) => {
+    if (!e.currentTarget.contains(e.relatedTarget)) {
+      onCloseHandler();
+    }
+  };
+
+  const onClickHandler = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <Popover
+      tabIndex={-1}
       isTabTip
       align="bottom-right"
       open={isOpen}
-      onRequestClose={() => setIsOpen(false)}
-      className={`${blockClass}__row-size-options-container`}
+      onRequestClose={onCloseHandler}
+      className={`${blockClass}-options-container`}
+      onKeyDown={onKeyHandler}
+      onBlur={onBlurHandler}
     >
       <IconButton
         align={align}
         kind="ghost"
-        onClick={() => setIsOpen((prevOpen) => !prevOpen)}
+        onClick={onClickHandler}
         label={legendText}
-        className={`${blockClass}__row-size-button`}
+        className={`${blockClass}-button`}
       >
         <Settings size={16} />
       </IconButton>

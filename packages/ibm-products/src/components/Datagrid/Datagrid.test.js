@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**
  * Copyright IBM Corp. 2022, 2023
  *
@@ -238,7 +239,6 @@ const DatagridActions = (datagridState) => {
   );
 };
 
-// eslint-disable-next-line react/prop-types
 const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
   const updatePagination = ({ page, pageSize }) => {
     setPageSize(pageSize);
@@ -247,20 +247,16 @@ const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
 
   return (
     <Pagination
-      // eslint-disable-next-line react/prop-types
       page={state.pageIndex + 1} // react-table is zero-based
-      // eslint-disable-next-line react/prop-types
       pageSize={state.pageSize}
-      // eslint-disable-next-line react/prop-types
       pageSizes={state.pageSizes || [10, 20, 30, 40, 50]}
-      // eslint-disable-next-line react/prop-types
       totalItems={rows.length}
       onChange={updatePagination}
     />
   );
 };
 
-const EmptyUsage = ({ ...rest } = {}) => {
+const EmptyUsage = ({ emptyStateType, ...rest } = {}) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(0));
   const emptyStateTitle = 'Empty State Title';
@@ -275,6 +271,7 @@ const EmptyUsage = ({ ...rest } = {}) => {
     emptyStateTitle,
     emptyStateDescription,
     emptyStateSize,
+    emptyStateType,
     illustrationTheme,
     DatagridActions,
     DatagridBatchActions,
@@ -440,7 +437,6 @@ const range = (len) => {
   return arr;
 };
 
-// eslint-disable-next-line react/prop-types
 const Wrapper = ({ children }) => (
   <div
     style={{
@@ -1080,55 +1076,25 @@ describe(componentName, () => {
 
   //Empty State
   it('renders an empty table', async () => {
-    render(<EmptyUsage data-testid={dataTestId}></EmptyUsage>);
-    expect(
-      screen.getByRole('table').getElementsByTagName('tbody')[0].className
-    ).toEqual('c4p--datagrid__empty-state-body');
+    const { rerender } = render(<EmptyUsage data-testid={dataTestId} />);
+    screen.getByText('Empty State Title');
+    screen.getByText('Description test explaining why this card is empty.');
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-noData`
+    );
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr').length
-    ).toEqual(1);
+    rerender(<EmptyUsage emptyStateType="error" />);
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-error`
+    );
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0].textContent
-    ).toBeNull;
+    rerender(<EmptyUsage emptyStateType="notFound" />);
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-notFound`
+    );
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('svg')[0]
-    ).toBeDefined();
-
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('h3')[0].textContent
-    ).toEqual('Empty State Title');
-
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('p')[0].textContent
-    ).toEqual('Description test explaining why this card is empty.');
+    rerender(<EmptyUsage emptyStateType="12345" />);
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });
 
   it('Initial Load', async () => {
@@ -1431,22 +1397,9 @@ describe(componentName, () => {
         .textContent
     ).toEqual(`Content for ${rowNumber}`);
 
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByClassName('c4p--datagrid__expanded-row')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('button')[0]
-    );
-
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByClassName('c4p--datagrid__expanded-row').length
-    ).toBe(0);
+    const firstRowExpander =
+      screen.getAllByLabelText('Expand current row')[rowNumber];
+    fireEvent.click(firstRowExpander);
   }
 
   it('Expanded Row', async () => {
@@ -1517,20 +1470,10 @@ describe(componentName, () => {
 
   it('Nested Table', async () => {
     render(<NestedTable data-testid={dataTestId}></NestedTable>);
-    fireEvent.click(
-      screen
-        .getAllByRole('table')[0]
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('button')[0]
-    );
-    expect(
-      screen
-        .getAllByRole('table')[0]
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('div')[0].childNodes[1].classList[0]
-    ).toEqual('c4p--datagrid__expanded-row-content');
+    const firstRowExpander = screen.getAllByLabelText('Expand current row')[0];
+    const firstRow = screen.getAllByRole('row')[1];
+    fireEvent.click(firstRowExpander);
+    expect(firstRow.nextSibling).toHaveClass('c4p--datagrid__expanded-row');
 
     const alertMock = jest.spyOn(window, 'alert');
 

@@ -1,12 +1,9 @@
-import React, { useState } from "react";
-import {
-  Header,
-  HeaderContainer,
-  HeaderName,Button } from "@carbon/react";
-import ChildrenContent from "./ChildrenContent";
-import { SidePanel } from "@carbon/ibm-products";
+import React, { useState } from 'react';
+import { Header, HeaderContainer, HeaderName, Button } from '@carbon/react';
+import ChildrenContent from './ChildrenContent';
+import { SidePanel } from '@carbon/ibm-products';
 
-import "./_example.scss";
+import './_example.scss';
 
 export const Example = () => {
   const [open, setOpen] = useState(false);
@@ -14,35 +11,35 @@ export const Example = () => {
     <>
       <HeaderContainer
         render={() => (
-          <Header aria-label='IBM [Product]'>
-            <HeaderName href='/' prefix='IBM'>
+          <Header aria-label="IBM [Product]">
+            <HeaderName href="/" prefix="IBM">
               [Product]
             </HeaderName>
           </Header>
         )}
       />
-      <div className='main--content'>
+      <div className="main--content">
         <Button onClick={() => setOpen((prev) => !prev)}>
           Open side panel
         </Button>
         <SidePanel
           includeOverlay
-          className='test'
+          className="test"
           open={open}
           onRequestClose={() => setOpen(false)}
-          title='Incident management'
-          subtitle='Testing subtitle text.'
+          title="Incident management"
+          subtitle="Testing subtitle text."
           actions={[
             {
-              label: "Submit",
+              label: 'Submit',
               onClick: () => setOpen(false),
-              kind: "primary"
+              kind: 'primary',
             },
             {
-              label: "Cancel",
+              label: 'Cancel',
               onClick: () => setOpen(false),
-              kind: "secondary"
-            }
+              kind: 'secondary',
+            },
           ]}
         >
           <ChildrenContent />

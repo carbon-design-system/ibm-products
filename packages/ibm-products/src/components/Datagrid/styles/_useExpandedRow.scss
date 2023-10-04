@@ -52,6 +52,7 @@
   width: $spacing-07;
   height: $spacing-07;
   min-height: $spacing-07;
+  align-items: center;
   justify-content: center;
   padding: 0;
   .#{variables.$block-class}__row-expander--icon {

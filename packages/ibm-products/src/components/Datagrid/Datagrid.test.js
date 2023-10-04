@@ -232,7 +232,6 @@ const DatagridActions = (datagridState) => {
   );
 };
 
-
 const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
   const updatePagination = ({ page, pageSize }) => {
     setPageSize(pageSize);
@@ -241,13 +240,9 @@ const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
 
   return (
     <Pagination
-
       page={state.pageIndex + 1} // react-table is zero-based
-
       pageSize={state.pageSize}
-
       pageSizes={state.pageSizes || [10, 20, 30, 40, 50]}
-
       totalItems={rows.length}
       onChange={updatePagination}
     />
@@ -418,7 +413,6 @@ const range = (len) => {
   }
   return arr;
 };
-
 
 const Wrapper = ({ children }) => (
   <div
@@ -854,9 +848,9 @@ beforeAll(() => {
 
 describe(componentName, () => {
   beforeEach(() => {
-    jest.spyOn(global.console, 'error').mockImplementation(() => { });
+    jest.spyOn(global.console, 'error').mockImplementation(() => {});
     //This will suppress the warning about Arrows16 Component (will be removed in the next major version of @carbon/icons-react).
-    jest.spyOn(global.console, 'warn').mockImplementation(() => { });
+    jest.spyOn(global.console, 'warn').mockImplementation(() => {});
     jest.useFakeTimers();
     jest.spyOn(global, 'setTimeout');
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
@@ -1081,7 +1075,7 @@ describe(componentName, () => {
       () => {
         const errorMock = jest
           .spyOn(console, 'error')
-          .mockImplementation(() => { });
+          .mockImplementation(() => {});
         const { container } = render(
           <BasicUsage data-testid={dataTestId} datagridState={null} />
         );
@@ -1165,14 +1159,14 @@ describe(componentName, () => {
           .getElementsByTagName('div')[0].style.height,
         10
       ) /
-      parseInt(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('div')[0]
-          .getElementsByTagName('div')[0]
-          .getElementsByTagName('div')[0].style.height
-      )
+        parseInt(
+          screen
+            .getByRole('table')
+            .getElementsByTagName('tbody')[0]
+            .getElementsByTagName('div')[0]
+            .getElementsByTagName('div')[0]
+            .getElementsByTagName('div')[0].style.height
+        )
     ).toEqual(10000);
   });
 
@@ -2378,33 +2372,33 @@ const getBatchActions = () => {
     {
       label: 'Duplicate',
       renderIcon: Add16,
-      onClick: () => { },
+      onClick: () => {},
     },
     {
       label: 'Add',
       renderIcon: Add16,
-      onClick: () => { },
+      onClick: () => {},
     },
     {
       label: 'Select all',
       renderIcon: Add16,
-      onClick: () => { },
+      onClick: () => {},
       type: 'select_all',
     },
     {
       label: 'Publish to catalog',
       renderIcon: Add16,
-      onClick: () => { },
+      onClick: () => {},
     },
     {
       label: 'Download',
       renderIcon: Add16,
-      onClick: () => { },
+      onClick: () => {},
     },
     {
       label: 'Delete',
       renderIcon: Add16,
-      onClick: () => { },
+      onClick: () => {},
       hasDivider: true,
       kind: 'danger',
     },
@@ -2433,9 +2427,9 @@ const TestBatch = () => {
 describe('batch action testing', () => {
   beforeEach(() => {
     jest.useFakeTimers();
-    jest.spyOn(global.console, 'error').mockImplementation(() => { });
+    jest.spyOn(global.console, 'error').mockImplementation(() => {});
     //This will suppress the warning about Arrows16 Component (will be removed in the next major version of @carbon/icons-react).
-    jest.spyOn(global.console, 'warn').mockImplementation(() => { });
+    jest.spyOn(global.console, 'warn').mockImplementation(() => {});
   });
   afterEach(() => {
     jest.useRealTimers();

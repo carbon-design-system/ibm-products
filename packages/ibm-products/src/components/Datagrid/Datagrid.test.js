@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**
  * Copyright IBM Corp. 2022, 2023
  *
@@ -231,7 +232,7 @@ const DatagridActions = (datagridState) => {
   );
 };
 
-// eslint-disable-next-line react/prop-types
+
 const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
   const updatePagination = ({ page, pageSize }) => {
     setPageSize(pageSize);
@@ -240,20 +241,20 @@ const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
 
   return (
     <Pagination
-      // eslint-disable-next-line react/prop-types
+
       page={state.pageIndex + 1} // react-table is zero-based
-      // eslint-disable-next-line react/prop-types
+
       pageSize={state.pageSize}
-      // eslint-disable-next-line react/prop-types
+
       pageSizes={state.pageSizes || [10, 20, 30, 40, 50]}
-      // eslint-disable-next-line react/prop-types
+
       totalItems={rows.length}
       onChange={updatePagination}
     />
   );
 };
 
-const EmptyUsage = ({ ...rest }) => {
+const EmptyUsage = ({ emptyStateType, ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(0));
   const emptyStateTitle = 'Empty State Title';
@@ -268,6 +269,7 @@ const EmptyUsage = ({ ...rest }) => {
     emptyStateTitle,
     emptyStateDescription,
     emptyStateSize,
+    emptyStateType,
     illustrationTheme,
     DatagridActions,
     DatagridBatchActions,
@@ -417,7 +419,7 @@ const range = (len) => {
   return arr;
 };
 
-// eslint-disable-next-line react/prop-types
+
 const Wrapper = ({ children }) => (
   <div
     style={{
@@ -852,9 +854,9 @@ beforeAll(() => {
 
 describe(componentName, () => {
   beforeEach(() => {
-    jest.spyOn(global.console, 'error').mockImplementation(() => {});
+    jest.spyOn(global.console, 'error').mockImplementation(() => { });
     //This will suppress the warning about Arrows16 Component (will be removed in the next major version of @carbon/icons-react).
-    jest.spyOn(global.console, 'warn').mockImplementation(() => {});
+    jest.spyOn(global.console, 'warn').mockImplementation(() => { });
     jest.useFakeTimers();
     jest.spyOn(global, 'setTimeout');
     window.ResizeObserver = jest.fn().mockImplementation(() => ({
@@ -1079,7 +1081,7 @@ describe(componentName, () => {
       () => {
         const errorMock = jest
           .spyOn(console, 'error')
-          .mockImplementation(() => {});
+          .mockImplementation(() => { });
         const { container } = render(
           <BasicUsage data-testid={dataTestId} datagridState={null} />
         );
@@ -1096,55 +1098,25 @@ describe(componentName, () => {
 
   //Empty State
   it('renders an empty table', () => {
-    render(<EmptyUsage data-testid={dataTestId}></EmptyUsage>);
-    expect(
-      screen.getByRole('table').getElementsByTagName('tbody')[0].className
-    ).toEqual('c4p--datagrid__empty-state-body');
+    const { rerender } = render(<EmptyUsage data-testid={dataTestId} />);
+    screen.getByText('Empty State Title');
+    screen.getByText('Description test explaining why this card is empty.');
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-noData`
+    );
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr').length
-    ).toEqual(1);
+    rerender(<EmptyUsage emptyStateType="error" />);
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-error`
+    );
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0].textContent
-    ).toBeNull;
+    rerender(<EmptyUsage emptyStateType="notFound" />);
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-notFound`
+    );
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('svg')[0]
-    ).toBeDefined();
-
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('h3')[0].textContent
-    ).toEqual('Empty State Title');
-
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('p')[0].textContent
-    ).toEqual('Description test explaining why this card is empty.');
+    rerender(<EmptyUsage emptyStateType="12345" />);
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });
 
   it('Initial Load', () => {
@@ -1193,14 +1165,14 @@ describe(componentName, () => {
           .getElementsByTagName('div')[0].style.height,
         10
       ) /
-        parseInt(
-          screen
-            .getByRole('table')
-            .getElementsByTagName('tbody')[0]
-            .getElementsByTagName('div')[0]
-            .getElementsByTagName('div')[0]
-            .getElementsByTagName('div')[0].style.height
-        )
+      parseInt(
+        screen
+          .getByRole('table')
+          .getElementsByTagName('tbody')[0]
+          .getElementsByTagName('div')[0]
+          .getElementsByTagName('div')[0]
+          .getElementsByTagName('div')[0].style.height
+      )
     ).toEqual(10000);
   });
 
@@ -2406,33 +2378,33 @@ const getBatchActions = () => {
     {
       label: 'Duplicate',
       renderIcon: Add16,
-      onClick: () => {},
+      onClick: () => { },
     },
     {
       label: 'Add',
       renderIcon: Add16,
-      onClick: () => {},
+      onClick: () => { },
     },
     {
       label: 'Select all',
       renderIcon: Add16,
-      onClick: () => {},
+      onClick: () => { },
       type: 'select_all',
     },
     {
       label: 'Publish to catalog',
       renderIcon: Add16,
-      onClick: () => {},
+      onClick: () => { },
     },
     {
       label: 'Download',
       renderIcon: Add16,
-      onClick: () => {},
+      onClick: () => { },
     },
     {
       label: 'Delete',
       renderIcon: Add16,
-      onClick: () => {},
+      onClick: () => { },
       hasDivider: true,
       kind: 'danger',
     },
@@ -2461,9 +2433,9 @@ const TestBatch = () => {
 describe('batch action testing', () => {
   beforeEach(() => {
     jest.useFakeTimers();
-    jest.spyOn(global.console, 'error').mockImplementation(() => {});
+    jest.spyOn(global.console, 'error').mockImplementation(() => { });
     //This will suppress the warning about Arrows16 Component (will be removed in the next major version of @carbon/icons-react).
-    jest.spyOn(global.console, 'warn').mockImplementation(() => {});
+    jest.spyOn(global.console, 'warn').mockImplementation(() => { });
   });
   afterEach(() => {
     jest.useRealTimers();

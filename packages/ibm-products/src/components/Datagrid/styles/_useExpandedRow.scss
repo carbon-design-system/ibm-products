@@ -58,6 +58,7 @@
   .#{$carbon-prefix}--data-table
   tbody
   tr:hover
-  + .#{$block-class}__expanded-row {
+  + .#{$block-class}__expanded-row,
+.#{$block-class} .#{$block-class}__expanded-row:hover {
   background: $layer-hover;
 }

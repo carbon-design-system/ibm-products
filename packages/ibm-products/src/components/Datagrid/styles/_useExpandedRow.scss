@@ -53,3 +53,11 @@
     fill: $ui-05;
   }
 }
+
+.#{$block-class}
+  .#{$carbon-prefix}--data-table
+  tbody
+  tr:hover
+  + .#{$block-class}__expanded-row {
+  background: $layer-hover;
+}

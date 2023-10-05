@@ -200,7 +200,7 @@ describe(componentName, () => {
       customSteps,
       hasDownloadLink: false,
     };
-    const { rerender, getByPlaceholderText, getByText, getByRole } = render(
+    const { rerender, getByPlaceholderText, getByText } = render(
       <APIKeyModal {...props} />
     );
 
@@ -249,7 +249,7 @@ describe(componentName, () => {
     expect(onRequestGenerate).toHaveBeenCalled();
     rerender(<APIKeyModal {...props} />);
     rerender(<APIKeyModal {...props} apiKey="abc-123" />);
-    expect(getByRole('textbox').value).toBe('abc-123');
+    expect(screen.getByLabelText(props.apiKeyLabel).value).toBe('abc-123');
     getByText(props.generateSuccessBody);
     getByText(props.generateSuccessTitle);
     await act(() => click(getByText(props.closeButtonText)));
@@ -296,8 +296,11 @@ describe(componentName, () => {
     const modal = getByRole('presentation');
 
     await waitFor(() => getByText(props.downloadLinkText));
-    expect(getByRole('textbox').value).toBe(props.apiKey);
-    expect(getByRole('textbox')).toHaveAttribute('type', 'password');
+    expect(screen.getByLabelText(props.apiKeyLabel).value).toBe(props.apiKey);
+    expect(screen.getByLabelText(props.apiKeyLabel)).toHaveAttribute(
+      'type',
+      'password'
+    );
     mouseOver(modal.querySelector(`.${carbon.prefix}--icon-visibility-on`));
     await waitFor(() => getByText(defaultProps.showAPIKeyLabel));
     await act(() =>
@@ -311,14 +314,18 @@ describe(componentName, () => {
   });
 
   it('has no accessibility violations', async () => {
-    const { container } = render(<APIKeyModal {...defaultProps} />);
-    expect(container).toBeAccessible(componentName);
-    expect(container).toHaveNoAxeViolations();
+    render(<APIKeyModal {...defaultProps} />);
+
+    const modal = screen.getByRole('presentation');
+    expect(modal).toBeAccessible(componentName);
+    expect(modal).toHaveNoAxeViolations();
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(<APIKeyModal {...defaultProps} />);
-    expect(container.firstChild).toHaveClass(defaultProps.className);
+    render(<APIKeyModal {...defaultProps} />);
+
+    const modal = screen.getByRole('presentation');
+    expect(modal).toHaveClass(defaultProps.className);
   });
 
   const dataTestId = 'data-testid';

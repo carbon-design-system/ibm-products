@@ -64,6 +64,7 @@
   .#{c4p-settings.$carbon-prefix}--data-table
   tbody
   tr:hover
-  + .#{variables.$block-class}__expanded-row {
+  + .#{variables.$block-class}__expanded-row,
+.#{variables.$block-class} .#{variables.$block-class}__expanded-row:hover {
   background: $layer-hover;
 }

@@ -169,6 +169,13 @@ pkg.feature['Component.feature'] = true;
 pkg.setAllFeatures(true);
 ```
 
+The default values for component and feature flag settings can be found by
+running the following command.
+
+```bash
+node node_modules/@carbon/ibm-products/flags.js
+```
+
 **Note:** The above settings must happen before a component first renders or a
 feature is first used.
 

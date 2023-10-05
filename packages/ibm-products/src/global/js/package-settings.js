@@ -74,7 +74,6 @@ const defaults = {
 
   // feature level flags
   feature: {
-    'a-new-feature': false,
     'default-portal-target-body': true,
     'Datagrid.useInfiniteScroll': false,
     'Datagrid.useInlineEdit': false,

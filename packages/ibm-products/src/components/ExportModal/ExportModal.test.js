@@ -68,8 +68,8 @@ describe(componentName, () => {
       invalidInputText: 'File must have valid extension .pdf',
     };
 
-    const { container } = render(<ExportModal {...props} />);
-    const textInput = container.querySelector(`.${carbon.prefix}--text-input`);
+    render(<ExportModal {...props} />);
+    const textInput = screen.getByRole('textbox');
 
     change(textInput, { target: { value: `${props.filename}.pdf` } });
     blur(textInput);
@@ -109,8 +109,8 @@ describe(componentName, () => {
       invalidInputText: 'File must have valid extension .pdf',
     };
 
-    const { container } = render(<ExportModal {...props} />);
-    const textInput = container.querySelector(`.${carbon.prefix}--text-input`);
+    render(<ExportModal {...props} />);
+    const textInput = screen.getByRole('textbox');
 
     change(textInput, { target: { value: `${props.filename}` } });
     blur(textInput);
@@ -160,11 +160,11 @@ describe(componentName, () => {
   });
 
   it('renders with password field', async () => {
-    const { container } = render(
-      <ExportModal {...defaultProps} inputType="password" />
-    );
+    render(<ExportModal {...defaultProps} inputType="password" />);
+    const modal = screen.getByRole('presentation');
+
     expect(
-      container.querySelector(`.${carbon.prefix}--text-input`)
+      modal.querySelector(`.${carbon.prefix}--text-input`)
     ).toHaveAttribute('type', 'password');
   });
 
@@ -176,8 +176,10 @@ describe(componentName, () => {
   });
 
   it('applies className to the containing node', async () => {
-    const { container } = render(<ExportModal {...defaultProps} />);
-    expect(container.firstChild).toHaveClass(defaultProps.className);
+    render(<ExportModal {...defaultProps} />);
+    expect(screen.getByRole('presentation')).toHaveClass(
+      defaultProps.className
+    );
   });
 
   const dataTestId = 'dataTestId';

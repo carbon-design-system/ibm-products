@@ -23,7 +23,8 @@
     "css",
     "es",
     "lib",
-    "scss"
+    "scss",
+    "flags.js"
   ],
   "keywords": [
     "carbon",

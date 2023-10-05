@@ -65,5 +65,5 @@
   tbody
   tr:hover
   + .#{variables.$block-class}__expanded-row {
-  background: var(--cds-layer-hover);
+  background: $layer-hover;
 }

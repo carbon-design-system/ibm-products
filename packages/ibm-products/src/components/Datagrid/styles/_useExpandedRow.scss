@@ -59,3 +59,15 @@
     fill: $layer-selected-inverse;
   }
 }
+
+.#{variables.$block-class}
+  .#{c4p-settings.$carbon-prefix}--data-table
+  tbody
+  tr:hover
+  + .#{variables.$block-class}__expanded-row,
+.#{variables.$block-class} .#{variables.$block-class}__expanded-row:hover,
+.#{variables.$block-class}
+  .#{variables.$block-class}__expandable-row--hover
+  td {
+  background: $layer-hover;
+}

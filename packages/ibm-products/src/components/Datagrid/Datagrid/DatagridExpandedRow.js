@@ -15,8 +15,28 @@ const DatagridExpandedRow =
   (ExpandedRowContentComponent) => (datagridState) => {
     const { row } = datagridState;
     const { expandedContentHeight } = row || {};
+
+    const toggleParentHoverClass = (event, eventType) => {
+      if (
+        event &&
+        event.target &&
+        event.target.parentNode.previousElementSibling
+      ) {
+        const parentNode = event.target.parentNode.previousElementSibling;
+        if (eventType === 'enter') {
+          parentNode.classList.add(`${blockClass}__expandable-row--hover`);
+        } else {
+          parentNode.classList.remove(`${blockClass}__expandable-row--hover`);
+        }
+      }
+    };
+
     return (
-      <div className={`${blockClass}__expanded-row`}>
+      <tr
+        className={`${blockClass}__expanded-row`}
+        onMouseEnter={(event) => toggleParentHoverClass(event, 'enter')}
+        onMouseLeave={(event) => toggleParentHoverClass(event)}
+      >
         <div
           className={`${blockClass}__expanded-row-content`}
           style={{
@@ -25,7 +45,7 @@ const DatagridExpandedRow =
         >
           {ExpandedRowContentComponent(datagridState)}
         </div>
-      </div>
+      </tr>
     );
   };
 

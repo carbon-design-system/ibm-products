@@ -59,6 +59,7 @@
   tbody
   tr:hover
   + .#{$block-class}__expanded-row,
-.#{$block-class} .#{$block-class}__expanded-row:hover {
+.#{$block-class} .#{$block-class}__expanded-row:hover,
+.#{$block-class} .#{$block-class}__expandable-row--hover td {
   background: $layer-hover;
 }

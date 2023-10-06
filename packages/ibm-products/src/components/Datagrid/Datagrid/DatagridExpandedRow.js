@@ -17,11 +17,7 @@ const DatagridExpandedRow =
     const { expandedContentHeight } = row || {};
 
     const toggleParentHoverClass = (event, eventType) => {
-      if (
-        event &&
-        event.target &&
-        event.target.parentNode.previousElementSibling
-      ) {
+      if (event?.target?.parentNode?.previousElementSibling) {
         const parentNode = event.target.parentNode.previousElementSibling;
         if (eventType === 'enter') {
           parentNode.classList.add(`${blockClass}__expandable-row--hover`);

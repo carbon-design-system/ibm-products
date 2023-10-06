@@ -1487,22 +1487,9 @@ describe(componentName, () => {
         .textContent
     ).toEqual(`Content for ${rowNumber}`);
 
-    fireEvent.click(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByClassName('c4p--datagrid__expanded-row')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('button')[0]
-    );
-
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByClassName('c4p--datagrid__expanded-row').length
-    ).toBe(0);
+    const firstRowExpander =
+      screen.getAllByLabelText('Expand current row')[rowNumber];
+    fireEvent.click(firstRowExpander);
   }
 
   it('Expanded Row', () => {
@@ -1572,20 +1559,10 @@ describe(componentName, () => {
 
   it('Nested Table', () => {
     render(<NestedTable data-testid={dataTestId}></NestedTable>);
-    fireEvent.click(
-      screen
-        .getAllByRole('table')[0]
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('button')[0]
-    );
-    expect(
-      screen
-        .getAllByRole('table')[0]
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('div')[0].childNodes[1].classList[0]
-    ).toEqual('c4p--datagrid__expanded-row-content');
+    const firstRowExpander = screen.getAllByLabelText('Expand current row')[0];
+    const firstRow = screen.getAllByRole('row')[1];
+    fireEvent.click(firstRowExpander);
+    expect(firstRow.nextSibling).toHaveClass('c4p--datagrid__expanded-row');
 
     const alertMock = jest.spyOn(window, 'alert');
 

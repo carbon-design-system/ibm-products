@@ -1,9 +1,8 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2020
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2020, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
@@ -13,15 +12,11 @@ const blockClass = `${pkg.prefix}--datagrid`;
 
 // eslint-disable-next-line react/prop-types
 const DatagridExpandedRow =
-  (PreviousRowRenderer, ExpandedRowContentComponent) => (datagridState) => {
+  (ExpandedRowContentComponent) => (datagridState) => {
     const { row } = datagridState;
     const { expandedContentHeight } = row || {};
-    if (!row.isExpanded) {
-      return PreviousRowRenderer(datagridState);
-    }
     return (
       <div className={`${blockClass}__expanded-row`}>
-        {PreviousRowRenderer(datagridState)}
         <div
           className={`${blockClass}__expanded-row-content`}
           style={{

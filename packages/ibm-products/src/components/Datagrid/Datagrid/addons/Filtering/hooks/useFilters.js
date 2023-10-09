@@ -1,3 +1,11 @@
+/*
+ * Licensed Materials - Property of IBM
+ * 5724-Q36
+ * (c) Copyright IBM Corp. 2023
+ * US Government Users Restricted Rights - Use, duplication or disclosure
+ * restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
 import {
   BATCH,
   CHECKBOX,
@@ -19,13 +27,6 @@ import {
   RadioButton,
   RadioButtonGroup,
 } from '@carbon/react';
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2023
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
- */
 import React, { useEffect, useRef, useState } from 'react';
 
 import OverflowCheckboxes from '../OverflowCheckboxes';

@@ -14,7 +14,8 @@
 
 .#{$block-class}-filter-panel__container {
   position: relative;
-  width: rem(320px);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  width: to-rem(320px);
   height: clamp(var(--filter-panel-min-height), 100%, 100vh);
   border-top: 1px $layer-accent-01 solid;
   background-color: $layer-01;
@@ -29,7 +30,8 @@
   top: -1px; // stylelint-disable-line
   left: 0;
   display: block;
-  width: rem(47px); // size of filter panel button
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  width: to-rem(47px); // size of filter panel button
   height: 1px;
   background-color: $layer-01;
   content: '';
@@ -95,7 +97,8 @@
   position: sticky;
   z-index: 1; // To layer action set on top of content behind when sticky
   bottom: 0;
-  height: rem(64px);
+  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  height: to-rem(64px);
   margin-top: auto;
 }
 

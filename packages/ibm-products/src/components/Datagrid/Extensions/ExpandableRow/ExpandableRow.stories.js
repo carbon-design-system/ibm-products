@@ -153,6 +153,8 @@ const sharedDatagridProps = {
     },
   ],
   expandedContentHeight: 96,
+  expanderButtonTitleExpanded: 'Collapse row',
+  expanderButtonTitleCollapsed: 'Expand row',
 };
 
 const ExpandedRows = ({ ...args }) => {
@@ -198,6 +200,9 @@ const expandableRowControlProps = {
   gridTitle: sharedDatagridProps.gridTitle,
   gridDescription: sharedDatagridProps.gridDescription,
   expandedContentHeight: sharedDatagridProps.expandedContentHeight,
+  expanderButtonTitleExpanded: sharedDatagridProps.expanderButtonTitleExpanded,
+  expanderButtonTitleCollapsed:
+    sharedDatagridProps.expanderButtonTitleCollapsed,
 };
 const expandableRowStoryName = 'With expandable row';
 export const ExpandableRowStory = prepareStory(BasicTemplateWrapper, {
@@ -206,6 +211,8 @@ export const ExpandableRowStory = prepareStory(BasicTemplateWrapper, {
     gridTitle: ARG_TYPES.gridTitle,
     gridDescription: ARG_TYPES.gridDescription,
     expandedContentHeight: ARG_TYPES.expandedContentHeight,
+    expanderButtonTitleExpanded: ARG_TYPES.expanderButtonTitleExpanded,
+    expanderButtonTitleCollapsed: ARG_TYPES.expanderButtonTitleCollapsed,
   },
   args: {
     ...expandableRowControlProps,

@@ -2,6 +2,7 @@ import { Button, Checkbox, FormGroup } from '@carbon/react';
 import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
+import { componentClass } from './FilterPanel';
 
 const OverflowCheckboxes = ({
   components,
@@ -51,8 +52,13 @@ const OverflowCheckboxes = ({
     <FormGroup {...components.FormGroup}>
       {firstFiveItems.map(renderCheckbox)}
       {showAllItems && restOfTheItems.map(renderCheckbox)}
-      <Button kind="ghost" onClick={() => setShowAllItems(!showAllItems)}>
-        {showAllItems ? 'Hide' : 'View'} all (
+      <Button
+        className={`${componentClass}__view-all-button`}
+        kind="ghost"
+        size="sm"
+        onClick={() => setShowAllItems(!showAllItems)}
+      >
+        {showAllItems ? 'View less' : 'View all'} (
         {filtersState[column].value.length})
       </Button>
     </FormGroup>

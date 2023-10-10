@@ -476,9 +476,9 @@ TearsheetShell.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget: PropTypes.node,
+  portalTarget: PropTypes.instanceOf(Element),
 
   /**
    * Specifies the width of the tearsheet, 'narrow' or 'wide'.

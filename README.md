@@ -1,11 +1,11 @@
 # Carbon for IBM Products
 
 > Carbon for IBM Products is an open source implementation of the closed source
-> [Carbon for Cloud & Cognitive pattern asset library (PAL)](https://pages.github.ibm.com/cdai-design/pal/).
+> [IBM Software pattern asset library (PAL)](https://pages.github.ibm.com/cdai-design/pal/).
 > These PAL designs build on the foundation of IBM’s open source Carbon Design
 > System and React implementation to offer components and patterns beyond the
 > typical component library. Carbon for IBM Products was previously known as
-> Carbon for IBM Cloud and Cognitive, and this name can still be encountered in
+> Carbon for Cloud and Cognitive, and this name can still be encountered in
 > various places and historical logs.
 
 [![All Contributors](https://img.shields.io/github/all-contributors/carbon-design-system/ibm-products?color=ee8449)](#contributors-)
@@ -38,8 +38,8 @@ npm:
 | Package name                                          | Description                                                                                                       |
 | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | [`@carbon/ibm-products`](./packages/ibm-products)     | A curated set of components and patterns, built on top of Carbon and designed by the Carbon for IBM Products team |
-| [`@carbon/ibm-cloud-cognitive-cdai`](./packages/cdai) | (V1 branch/tags only) Legacy and non-curated design implementations used in application integration               |
-| [`@carbon/ibm-security`](./packages/security)         | (V1 branch/tags only) Legacy and non-curated design implementations used in security                              |
+| [`@carbon/ibm-cloud-cognitive-cdai`](https://github.com/carbon-design-system/ibm-products/tree/main_v1/packages/cdai) | (**v1 only**) Legacy and non-curated design implementations used in application integration               |
+| [`@carbon/ibm-security`](https://github.com/carbon-design-system/ibm-products/tree/main_v1/packages/security)         | (**v1 only**) Legacy and non-curated design implementations used in security                              |
 
 Also the following additional utility packages are published on npm:
 

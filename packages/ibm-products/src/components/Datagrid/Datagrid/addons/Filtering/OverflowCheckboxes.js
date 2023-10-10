@@ -58,8 +58,9 @@ const OverflowCheckboxes = ({
         size="sm"
         onClick={() => setShowAllItems(!showAllItems)}
       >
-        {showAllItems ? 'View less' : 'View all'} (
-        {filtersState[column].value.length})
+        {showAllItems
+          ? 'View less'
+          : `View all (${filtersState[column].value.length})`}
       </Button>
     </FormGroup>
   );

@@ -153,6 +153,20 @@ useDatagrid({
         },
       },
       {
+        description:
+          'Disabling the resizable columns is possible by specifying `disableResizing: true` within the `useDatagrid` hook.',
+        source: {
+          language: 'jsx',
+          code: `
+useDatagrid({
+  columns,
+  data,
+  disableResizing: true,
+});
+          `,
+        },
+      },
+      {
         title: 'Rendering the table toolbar',
         image: (
           <img

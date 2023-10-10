@@ -44,6 +44,8 @@ const datagridState = useDatagrid(
   {
     columns,
     data,
+    expanderButtonTitleExpanded: 'Collapse row',
+    expanderButtonTitleCollapsed: 'Expand row',
   },
   useNestedRows
 );
@@ -225,6 +227,8 @@ export const NestedRowsUsageStory = prepareStory(BasicTemplateWrapper, {
     rowSize: ARG_TYPES.rowSize,
     rowSizes: ARG_TYPES.rowSizes,
     onRowSizeChange: ARG_TYPES.onRowSizeChange,
+    expanderButtonTitleExpanded: 'Collapse row',
+    expanderButtonTitleCollapsed: 'Expand row',
   },
   args: {
     ...nestedRowsControlProps,

@@ -204,9 +204,9 @@ Tearsheet.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget: PropTypes.node,
+  portalTarget: PropTypes.instanceOf(Element),
 
   /**
    * Specify a CSS selector that matches the DOM element that should be focused when the Modal opens

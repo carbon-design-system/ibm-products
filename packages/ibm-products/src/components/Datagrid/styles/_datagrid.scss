@@ -92,10 +92,10 @@
       &.#{c4p-settings.$carbon-prefix}--data-table--sm,
       &.#{c4p-settings.$carbon-prefix}--data-table--md {
         .#{$block-class}__cell {
-          /* stylelint-disable-next-line carbon/layout-token-use */
-          padding-top: rem(7px);
-          /* stylelint-disable-next-line carbon/layout-token-use */
-          padding-bottom: rem(6px);
+          /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+          padding-top: to-rem(7px);
+          /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+          padding-bottom: to-rem(6px);
         }
       }
 
@@ -123,8 +123,8 @@
       }
 
       .#{c4p-settings.$carbon-prefix}--table-column-checkbox {
-        /* stylelint-disable-next-line carbon/layout-token-use */
-        padding-top: rem(13px);
+        /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+        padding-top: to-rem(13px);
       }
     }
 

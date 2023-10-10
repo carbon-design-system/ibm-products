@@ -25,6 +25,7 @@ import {
   ModalBody,
   Theme,
 } from '@carbon/react';
+import { usePortalTarget } from '../../global/js/hooks/usePortalTarget';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--about-modal`;
@@ -52,6 +53,7 @@ export let AboutModal = React.forwardRef(
       modalAriaLabel,
       onClose,
       open,
+      portalTarget: portalTargetIn,
       title,
       version,
       // Collect any other property values passed in.
@@ -63,6 +65,7 @@ export let AboutModal = React.forwardRef(
     const bodyRef = useRef();
     const contentRef = useRef();
     const contentId = uuidv4();
+    const renderPortalUse = usePortalTarget(portalTargetIn);
 
     const handleResize = () => {
       setHasScrollingContent(
@@ -84,7 +87,7 @@ export let AboutModal = React.forwardRef(
     // Detect resize of the ModalBody to recalculate whether scrolling is enabled
     useResizeObserver(bodyRef, handleResize);
 
-    return (
+    return renderPortalUse(
       <ComposedModal
         {
           // Pass through any other property values as HTML attributes.
@@ -206,6 +209,11 @@ AboutModal.propTypes = {
    * Specifies whether the AboutModal is open or not.
    */
   open: PropTypes.bool,
+
+  /**
+   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   */
+  portalTarget: PropTypes.node,
 
   /**
    * Header text that provides the product name. The IBM Services logo

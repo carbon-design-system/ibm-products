@@ -39,7 +39,7 @@ export const DatagridContent = ({ datagridState, title }) => {
     CustomizeColumnsTearsheet,
     filterProps,
     fullHeightDatagrid,
-    verticalAlign = 'center',
+    verticalAlign = 'top',
     variableRowHeight,
     gridTitle,
     gridDescription,

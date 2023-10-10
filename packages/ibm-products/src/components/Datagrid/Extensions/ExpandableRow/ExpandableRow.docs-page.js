@@ -24,6 +24,8 @@ const App = () => {
       columns,
       data,
       ExpandedRowContentComponent: expansionRenderer,
+      expanderButtonTitleExpanded: 'Collapse row',
+      expanderButtonTitleCollapsed: 'Expand row', 
     },
     useExpandedRow
   );

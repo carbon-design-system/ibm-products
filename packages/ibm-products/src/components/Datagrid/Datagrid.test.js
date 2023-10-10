@@ -1371,17 +1371,16 @@ describe(componentName, () => {
   });
 
   function clickRow(rowNumber) {
-    const row = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr')[rowNumber];
-
-    const rowExpander = row.querySelector(
-      `button[aria-label="Expand current row"]`
+    const rows = screen.getAllByRole('row');
+    const bodyRows = rows.filter(
+      (r) =>
+        !r.classList.contains('c4p--datagrid__head') &&
+        !r.classList.contains('c4p--datagrid__expanded-row')
     );
-    fireEvent.click(rowExpander);
+    const row = bodyRows[rowNumber];
 
-    setTimeout(1000);
+    const rowExpander = row.querySelector(`button[aria-label="Expand row"]`);
+    fireEvent.click(rowExpander);
 
     expect(
       screen
@@ -1393,17 +1392,17 @@ describe(componentName, () => {
       screen
         .getByRole('table')
         .getElementsByTagName('tbody')[0]
-        .getElementsByClassName('c4p--datagrid__expanded-row')[0].lastChild
-        .textContent
+        .getElementsByClassName('c4p--datagrid__expanded-row')[0].textContent
     ).toEqual(`Content for ${rowNumber}`);
 
-    const firstRowExpander =
-      screen.getAllByLabelText('Expand current row')[rowNumber];
-    fireEvent.click(firstRowExpander);
+    const rowExpanderCollapse = row.querySelector(
+      `button[aria-label="Collapse row"]`
+    );
+    fireEvent.click(rowExpanderCollapse);
   }
 
   it('Expanded Row', async () => {
-    render(<ExpandedRow data-testid={dataTestId}></ExpandedRow>);
+    render(<ExpandedRow data-testid={dataTestId} />);
     clickRow(1);
     clickRow(4);
     clickRow(8);
@@ -1470,7 +1469,7 @@ describe(componentName, () => {
 
   it('Nested Table', async () => {
     render(<NestedTable data-testid={dataTestId}></NestedTable>);
-    const firstRowExpander = screen.getAllByLabelText('Expand current row')[0];
+    const firstRowExpander = screen.getAllByLabelText('Expand row')[0];
     const firstRow = screen.getAllByRole('row')[1];
     fireEvent.click(firstRowExpander);
     expect(firstRow.nextSibling).toHaveClass('c4p--datagrid__expanded-row');

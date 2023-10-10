@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.59.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.59.0...@carbon/ibm-products@1.59.1) (2023-10-10)
+
+
+### Bug Fixes
+
+* **Datagrid:** expandable row add background on row hover ([#3551](https://github.com/carbon-design-system/ibm-products/issues/3551)) ([036d579](https://github.com/carbon-design-system/ibm-products/commit/036d5795705da649745f26ad47be3ef1bd503698))
+* **Datagrid:** refactor expandable implementation ([#3527](https://github.com/carbon-design-system/ibm-products/issues/3527)) ([9a7cc01](https://github.com/carbon-design-system/ibm-products/commit/9a7cc01d988f9bf503546fbf26cc7b18f88ec276))
+* **Datagrid:** remove border for datagrid empty state ([#3540](https://github.com/carbon-design-system/ibm-products/issues/3540)) ([4f90e15](https://github.com/carbon-design-system/ibm-products/commit/4f90e15cd11b73e762641f7633e1c48cef478536))
+* DG pagination fixes v1 ([#3549](https://github.com/carbon-design-system/ibm-products/issues/3549)) ([15eadb4](https://github.com/carbon-design-system/ibm-products/commit/15eadb4c8aadbe115e8b20c1784fa205b3950cc7))
+* update checklist donut colors ([#3504](https://github.com/carbon-design-system/ibm-products/issues/3504)) ([eeea5d9](https://github.com/carbon-design-system/ibm-products/commit/eeea5d984e1e1f8564bbb716b6351baa0d698b5d))
+* update to Carbon 10 compatible versions to latest ([#3495](https://github.com/carbon-design-system/ibm-products/issues/3495)) ([0c41c26](https://github.com/carbon-design-system/ibm-products/commit/0c41c267edf1919355bd56f3e8b8968de5ba8465))
+
+
+
+
+
 # [1.59.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.58.0...@carbon/ibm-products@1.59.0) (2023-09-19)
 
 

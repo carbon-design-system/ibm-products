@@ -30,7 +30,7 @@ async function run(workspace) {
     packages
       .filter((pkg) => !packageDenyList.has(pkg.packageJson.name))
       .map(async ({ packageFolder }) => {
-        const README_PATH = path.join(packageFolder, 'docs', 'README.md');
+        const README_PATH = path.join(packageFolder, 'README.md');
         if (!fs.existsSync(README_PATH)) {
           return;
         }

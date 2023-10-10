@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.10.2...@carbon/ibm-products@2.11.0) (2023-10-10)
+
+
+### Bug Fixes
+
+* **ButtonSetWithOverflow:** fix duplicate id issue ([#3545](https://github.com/carbon-design-system/ibm-products/issues/3545)) ([eed0e4d](https://github.com/carbon-design-system/ibm-products/commit/eed0e4d19ce13704333ba41d64415ba85910f46e))
+* checkbox in column customisation ([#3542](https://github.com/carbon-design-system/ibm-products/issues/3542)) ([4b94fa8](https://github.com/carbon-design-system/ibm-products/commit/4b94fa88581b071ad287f1e120348342c28b3187))
+* datagrid empty state fixes ([#3528](https://github.com/carbon-design-system/ibm-products/issues/3528)) ([9df5e1d](https://github.com/carbon-design-system/ibm-products/commit/9df5e1db016a6234bff1fd650cb8f0e324bdebaf))
+* datagrid pagination review fixes ([#3492](https://github.com/carbon-design-system/ibm-products/issues/3492)) ([998a059](https://github.com/carbon-design-system/ibm-products/commit/998a0595cbc2120db1b3b503046754a45d1563e0))
+* **Datagrid:** expandable row add background on row hover ([#3550](https://github.com/carbon-design-system/ibm-products/issues/3550)) ([5084b0f](https://github.com/carbon-design-system/ibm-products/commit/5084b0f2b64ce22ab5d6a872ae105120a1a78f7a))
+* **Datagrid:** refactor expandable implementation ([#3525](https://github.com/carbon-design-system/ibm-products/issues/3525)) ([9677581](https://github.com/carbon-design-system/ibm-products/commit/9677581b6b15d3580f308cc9d790a80cbd083521))
+* invalid aria-label ([#3496](https://github.com/carbon-design-system/ibm-products/issues/3496)) ([3644522](https://github.com/carbon-design-system/ibm-products/commit/364452272b1000745d6e67ea704337447ce774ac))
+* Should our CSS use of carbon rem be to-rem ([#3558](https://github.com/carbon-design-system/ibm-products/issues/3558)) ([0c3839c](https://github.com/carbon-design-system/ibm-products/commit/0c3839ce49ef622ed2b303daee84fd1ce8d6e829))
+
+
+### Features
+
+* Modal portalTarget ([#3436](https://github.com/carbon-design-system/ibm-products/issues/3436)) ([a988d5c](https://github.com/carbon-design-system/ibm-products/commit/a988d5c11f9e03bb1cb3e6bcb473558e68f236c9))
+* with dnd kit ([#3513](https://github.com/carbon-design-system/ibm-products/issues/3513)) ([d0df0a2](https://github.com/carbon-design-system/ibm-products/commit/d0df0a2175c110d07b931b00d058dce8f7c94013))
+
+
+
+
+
 ## [2.10.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.10.1...@carbon/ibm-products@2.10.2) (2023-09-29)
 
 

@@ -50,6 +50,7 @@ export let EditTearsheet = forwardRef(
       title,
       verticalPosition = defaults.verticalPosition,
       onHandleModalClick,
+      influencer,
 
       // Collect any other property values passed in.
       ...rest
@@ -57,43 +58,41 @@ export let EditTearsheet = forwardRef(
     ref
   ) => {
     const [currentForm, setCurrentForm] = useState(0);
+    const [formTitles, setFormTitles] = useState([]);
     const contentRef = useRef();
 
     const handleCurrentForm = (form) => {
       setCurrentForm(form);
     };
 
-    const sideNavItems = [
-      { label: 'Topic Name' },
-      { label: 'Location' },
-      { label: 'Partitions' },
-      { label: 'Message retention' },
-    ];
-
-    const influencer = (
-      <div className="tearsheet-stories__dummy-influencer-block">
-        <SideNav
-          aria-label="Side navigation"
-          className={`${blockClass}__side-nav`}
-          expanded={true}
-          isFixedNav={false}
-        >
-          <SideNavItems>
-            {sideNavItems.map((item, index) => {
-              return (
-                <SideNavMenuItem
-                  key={index}
-                  onClick={() => handleCurrentForm(index)}
-                  isActive={currentForm === index}
-                >
-                  {item.label}
-                </SideNavMenuItem>
-              );
-            })}
-          </SideNavItems>
-        </SideNav>
-      </div>
-    );
+    // TODO
+    // - Implement override behavior
+    function defaultInfluencer() {
+      return(
+        <div className="tearsheet-stories__dummy-influencer-block">
+          <SideNav
+            aria-label="Side navigation"
+            className={`${blockClass}__side-nav`}
+            expanded={true}
+            isFixedNav={false}
+          >
+            <SideNavItems>
+              {formTitles.map((title, index) => {
+                return (
+                  <SideNavMenuItem
+                    key={index}
+                    onClick={() => handleCurrentForm(index)}
+                    isActive={currentForm === index}
+                  >
+                    {title}
+                  </SideNavMenuItem>
+                );
+              })}
+            </SideNavItems>
+          </SideNav>
+        </div>
+      );
+    }
 
     return (
       <TearsheetShell
@@ -114,7 +113,7 @@ export let EditTearsheet = forwardRef(
         className={cx(blockClass, className)}
         description={description}
         hasCloseIcon={false}
-        influencer={influencer}
+        influencer={influencer || defaultInfluencer()}
         influencerPosition="left"
         influencerWidth={influencerWidth}
         label={label}
@@ -130,6 +129,7 @@ export let EditTearsheet = forwardRef(
             <FormContext.Provider
               value={{
                 currentForm,
+                setFormTitles,
               }}
             >
               {React.Children.map(children, (child, index) => (

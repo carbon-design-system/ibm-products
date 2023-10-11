@@ -12,6 +12,7 @@ import { Column, FormGroup, Grid } from '@carbon/react';
 import { FormContext, FormNumberContext } from './EditTearsheet';
 import { pkg } from '../../settings';
 import pconsole from '../../global/js/utils/pconsole';
+import {useRetrieveFormTitles} from "../../global/js/hooks/useRetrieveFormTitles";
 
 const componentName = 'EditTearsheetForm';
 const blockClass = `${pkg.prefix}--tearsheet-edit__form`;
@@ -41,6 +42,7 @@ export let EditTearsheetForm = forwardRef(
   ) => {
     const formContext = useContext(FormContext);
     const formNumber = useContext(FormNumberContext);
+    useRetrieveFormTitles({formContext, formNumber, title});
 
     return formContext ? (
       <div

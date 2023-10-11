@@ -54,6 +54,7 @@ const CustomizeColumnsTearsheet = ({
   const [isDirty, setIsDirty] = useState(false);
 
   const onRequestClose = () => {
+    setColumnObjects(columnDefinitions);
     setIsTearsheetOpen(false);
   };
   const onRequestSubmit = () => {

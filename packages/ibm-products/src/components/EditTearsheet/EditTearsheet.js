@@ -50,7 +50,7 @@ export let EditTearsheet = forwardRef(
       title,
       verticalPosition = defaults.verticalPosition,
       onHandleModalClick,
-      influencer,
+      onFormChange,
 
       // Collect any other property values passed in.
       ...rest
@@ -61,12 +61,13 @@ export let EditTearsheet = forwardRef(
     const [formTitles, setFormTitles] = useState([]);
     const contentRef = useRef();
 
-    const handleCurrentForm = (form) => {
-      setCurrentForm(form);
+    const handleCurrentForm = (formIndex) => {
+      setCurrentForm(formIndex);
+      if (onFormChange) {
+          onFormChange(formIndex);
+      }
     };
 
-    // TODO
-    // - Implement override behavior
     function defaultInfluencer() {
       return(
         <div className="tearsheet-stories__dummy-influencer-block">
@@ -113,7 +114,7 @@ export let EditTearsheet = forwardRef(
         className={cx(blockClass, className)}
         description={description}
         hasCloseIcon={false}
-        influencer={influencer || defaultInfluencer()}
+        influencer={defaultInfluencer()}
         influencerPosition="left"
         influencerWidth={influencerWidth}
         label={label}
@@ -176,13 +177,6 @@ EditTearsheet.propTypes = {
   description: PropTypes.node,
 
   /**
-   * The content for the influencer section of the tearsheet, displayed
-   * alongside the main content. This is typically a menu, or filter, or
-   * progress indicator, or similar.
-   */
-  influencer: PropTypes.element,
-
-  /**
    * Used to set the size of the influencer
    */
   influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
@@ -200,6 +194,13 @@ EditTearsheet.propTypes = {
    * Returning `false` here prevents the modal from closing.
    */
   onClose: PropTypes.func,
+
+  /**
+   * An optional handler that is called when a user changes forms via clicking
+   * an influencer nav item.
+   * Returns the index of the selected form.
+   */
+  onFormChange: PropTypes.func,
 
   /**
    * Specifies whether the tearsheet is currently open.

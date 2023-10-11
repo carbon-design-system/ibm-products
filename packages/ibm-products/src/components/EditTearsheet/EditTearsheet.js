@@ -70,7 +70,7 @@ export let EditTearsheet = forwardRef(
 
     function defaultInfluencer() {
       return(
-        <div className="tearsheet-stories__dummy-influencer-block">
+        <div className={`${blockClass}__side-nav-wrapper`}>
           <SideNav
             aria-label="Side navigation"
             className={`${blockClass}__side-nav`}

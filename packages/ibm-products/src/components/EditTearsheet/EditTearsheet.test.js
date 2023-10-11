@@ -181,4 +181,21 @@ describe(componentName, () => {
     const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
     expect(editTearsheet).toHaveClass(className);
   });
+
+  it('renders the influencer with a nav item that matches the form title', async () => {
+    const { container } = renderEditTearsheet({...defaultProps});
+
+    expect(container.querySelector('.cds--side-nav__link-text')).toHaveTextContent(form1Title);
+    expect(screen.getByRole('heading', { name: form1Title })).toBeInTheDocument();
+  });
+
+  it('should call the provided callback function when the form is changed', async () => {
+    const onFormChange = jest.fn();
+    const { container } = renderEditTearsheet({...defaultProps, onFormChange });
+    const form2NavLink = container.querySelectorAll('.cds--side-nav__link')[2];
+
+    await act(() => click(form2NavLink));
+    expect(onFormChange).toHaveBeenCalledTimes(1);
+    expect(onFormChange).toHaveBeenCalledWith(2);
+  });
 });

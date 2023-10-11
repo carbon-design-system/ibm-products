@@ -49,6 +49,7 @@ export const handleColumnResizingEvent = (
 };
 
 export const stateReducer = (newState, action) => {
+  console.log(action);
   switch (action.type) {
     case INIT: {
       return {

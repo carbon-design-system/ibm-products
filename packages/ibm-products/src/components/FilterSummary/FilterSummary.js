@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { TagSet } from '../TagSet';
 import { pkg } from '../../settings';
+import { handleSingleFilterRemoval } from '../Datagrid/Datagrid/addons/Filtering/FilterProvider';
 
 const blockClass = `${pkg.prefix}--filter-summary`;
 
@@ -24,11 +25,14 @@ let FilterSummary = React.forwardRef(
     },
     ref
   ) => {
+    console.log(filters);
     const tagFilters = filters.map(({ key, value, ...rest }) => {
+      console.log(value, {...rest});
       return {
         ...rest,
         type: 'gray',
         label: renderLabel?.(key, value) ?? `${key}: ${value}`,
+        onClose: handleSingleFilterRemoval(key, value)
       };
     });
 

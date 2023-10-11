@@ -21,6 +21,7 @@ import cx from 'classnames';
 import { pkg } from '../../../settings';
 import { EditTearsheet } from '../EditTearsheet';
 import { EditTearsheetForm } from '../EditTearsheetForm';
+import {action} from "@storybook/addon-actions";
 
 const blockClass = `${pkg.prefix}--tearsheet-edit-multi-form`;
 
@@ -64,6 +65,10 @@ export const MultiFormEditTearsheet = ({
     setOpen(!open);
   };
 
+  const handleFormChange = () => {
+    action("handleFormChange")();
+  }
+
   return (
     <div>
       <style>{`.${blockClass} { opacity: 0 }`};</style>
@@ -81,6 +86,7 @@ export const MultiFormEditTearsheet = ({
         open={open}
         onHandleModalClick={handleModalClick}
         onClose={clearCreateData}
+        onFormChange={handleFormChange}
       >
         <EditTearsheetForm
           title="Topic name"

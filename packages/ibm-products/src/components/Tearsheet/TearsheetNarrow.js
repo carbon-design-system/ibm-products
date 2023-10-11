@@ -166,9 +166,9 @@ TearsheetNarrow.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget: PropTypes.node,
+  portalTarget: PropTypes.instanceOf(Element),
 
   /**
    * The main title of the tearsheet, displayed in the header area.

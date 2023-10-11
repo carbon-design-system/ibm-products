@@ -10,7 +10,10 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { Table, TableContainer } from '@carbon/react';
 import { carbon, pkg } from '../../../settings';
 
-import { CLEAR_FILTERS, CLEAR_SINGLE_FILTER } from './addons/Filtering/constants';
+import {
+  CLEAR_FILTERS,
+  CLEAR_SINGLE_FILTER,
+} from './addons/Filtering/constants';
 import DatagridBody from './DatagridBody';
 import DatagridHead from './DatagridHead';
 import DatagridToolbar from './DatagridToolbar';
@@ -144,7 +147,9 @@ export const DatagridContent = ({ datagridState, title }) => {
     }
   }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
 
-  useSubscribeToEventEmitter(CLEAR_SINGLE_FILTER, (id) => clearSingleFilter(id, setAllFilters, state));
+  useSubscribeToEventEmitter(CLEAR_SINGLE_FILTER, (id) =>
+    clearSingleFilter(id, setAllFilters, state)
+  );
 
   const renderFilterSummary = () =>
     state.filters.length > 0 && (

@@ -334,7 +334,9 @@ const useFilters = ({
   const cancel = () => {
     // Reverting to previous filters only applies when using batch actions
     if (updateMethod === BATCH) {
-      revertToPreviousFilters();
+      if (variation !== PANEL) {
+        revertToPreviousFilters();
+      }
       onCancel();
     }
   };

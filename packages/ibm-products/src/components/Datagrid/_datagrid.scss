@@ -31,6 +31,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
 .#{$block-class}__datagridWrap {
   display: block;
   width: 100%;
+
   :global(.#{c4p-settings.$carbon-prefix}--checkbox) {
     display: none;
   }
@@ -69,4 +70,12 @@ $block-class: #{c4p-settings.$pkg-prefix}--datagrid;
       overflow-x: unset;
     }
   }
+}
+
+// firefox fix for issue mentioned in 3442
+.#{$block-class}
+  .#{c4p-settings.$carbon-prefix}--menu-button__trigger:not(
+    .#{c4p-settings.$carbon-prefix}--btn--ghost
+  ) {
+  min-width: auto;
 }

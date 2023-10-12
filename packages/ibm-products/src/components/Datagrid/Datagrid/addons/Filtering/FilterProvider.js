@@ -97,7 +97,7 @@ const formatDateRange = (startDate, endDate) => {
   return `${startDateObj.toLocaleDateString()} - ${endDateObj.toLocaleDateString()}`;
 };
 
-const prepareFiltersForTags = (filters) => {
+const prepareFiltersForTags = (filters, renderDateLabel) => {
   const tags = [];
 
   filters.forEach(({ id, type, value }) => {
@@ -116,7 +116,9 @@ const prepareFiltersForTags = (filters) => {
       const [startDate, endDate] = value;
       tags.push({
         key: id,
-        value: formatDateRange(startDate, endDate),
+        value:
+          renderDateLabel?.(startDate, endDate) ??
+          formatDateRange(startDate, endDate),
         ...sharedFilterProps,
       });
     } else if (type === CHECKBOX) {
@@ -136,8 +138,9 @@ const prepareFiltersForTags = (filters) => {
   return tags;
 };
 
-export const FilterProvider = ({ children, filters }) => {
-  const filterTags = prepareFiltersForTags(filters);
+export const FilterProvider = ({ children, filters, filterProps }) => {
+  const { renderDateLabel } = filterProps || {};
+  const filterTags = prepareFiltersForTags(filters, renderDateLabel);
   const [panelOpen, setPanelOpen] = useState(false);
 
   const value = { filterTags, EventEmitter, panelOpen, setPanelOpen };
@@ -152,5 +155,6 @@ FilterProvider.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  filterProps: PropTypes.object,
   filters: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -57,9 +57,6 @@
   "devDependencies": {
     "@babel/cli": "^7.22.10",
     "@babel/core": "^7.22.10",
-    "@dnd-kit/core": "^6.0.8",
-    "@dnd-kit/sortable": "^7.0.2",
-    "@dnd-kit/utilities": "^3.2.1",
     "babel-preset-ibm-cloud-cognitive": "^0.14.39",
     "chalk": "^4.1.2",
     "change-case": "^4.1.2",
@@ -80,6 +77,9 @@
   "dependencies": {
     "@babel/runtime": "^7.22.10",
     "@carbon/telemetry": "^0.1.0",
+    "@dnd-kit/core": "^6.0.8",
+    "@dnd-kit/sortable": "^7.0.2",
+    "@dnd-kit/utilities": "^3.2.1",
     "framer-motion": "^6.5.1 < 7",
     "immutability-helper": "^3.1.1",
     "lodash": "^4.17.21",

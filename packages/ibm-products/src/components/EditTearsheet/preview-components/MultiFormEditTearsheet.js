@@ -21,7 +21,7 @@ import cx from 'classnames';
 import { pkg } from '../../../settings';
 import { EditTearsheet } from '../EditTearsheet';
 import { EditTearsheetForm } from '../EditTearsheetForm';
-import {action} from "@storybook/addon-actions";
+import { action } from '@storybook/addon-actions';
 
 const blockClass = `${pkg.prefix}--tearsheet-edit-multi-form`;
 
@@ -66,8 +66,8 @@ export const MultiFormEditTearsheet = ({
   };
 
   const handleFormChange = () => {
-    action("handleFormChange")();
-  }
+    action('handleFormChange')();
+  };
 
   return (
     <div>

@@ -64,12 +64,12 @@ export let EditTearsheet = forwardRef(
     const handleCurrentForm = (formIndex) => {
       setCurrentForm(formIndex);
       if (onFormChange) {
-          onFormChange(formIndex);
+        onFormChange(formIndex);
       }
     };
 
     function defaultInfluencer() {
-      return(
+      return (
         <div className={`${blockClass}__side-nav-wrapper`}>
           <SideNav
             aria-label="Side navigation"

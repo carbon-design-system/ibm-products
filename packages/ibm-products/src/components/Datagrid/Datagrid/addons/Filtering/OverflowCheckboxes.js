@@ -12,6 +12,8 @@ const OverflowCheckboxes = ({
   setFiltersState,
   type,
   applyFilters,
+  viewAllLabel = 'View all',
+  viewLessLabel = 'View less',
 }) => {
   const [showAllItems, setShowAllItems] = useState(false);
   const firstFiveItems = filtersState[column].value.slice(0, 5);
@@ -40,6 +42,13 @@ const OverflowCheckboxes = ({
     />
   );
 
+  const renderViewAllButtonText = () => {
+    /** This should render the text "View all ([amount of checkboxes])" or "View less" */
+    return showAllItems
+      ? viewLessLabel
+      : `${viewAllLabel} (${filtersState[column].value.length})`;
+  };
+
   return (
     <FormGroup {...components.FormGroup}>
       {firstFiveItems.map(renderCheckbox)}
@@ -50,9 +59,7 @@ const OverflowCheckboxes = ({
         size="sm"
         onClick={() => setShowAllItems(!showAllItems)}
       >
-        {showAllItems
-          ? 'View less'
-          : `View all (${filtersState[column].value.length})`}
+        {renderViewAllButtonText()}
       </Button>
     </FormGroup>
   );
@@ -65,6 +72,8 @@ OverflowCheckboxes.propTypes = {
   filtersState: PropTypes.object,
   setFiltersState: PropTypes.func,
   type: PropTypes.string,
+  viewAllLabel: PropTypes.string,
+  viewLessLabel: PropTypes.string,
 };
 
 export default OverflowCheckboxes;

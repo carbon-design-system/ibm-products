@@ -45,8 +45,8 @@ export default {
 const dummyCheckboxes = Array(25)
   .fill(null)
   .map((_, index) => ({
-    id: index,
-    labelText: 'Dummy checkbox',
+    id: `${index}`,
+    labelText: `Dummy checkbox ${index + 1}`,
     value: 'dummy-checkbox',
     disabled: true,
   }));

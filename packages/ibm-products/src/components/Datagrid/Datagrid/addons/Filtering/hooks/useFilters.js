@@ -32,6 +32,35 @@ import React, { useEffect, useRef, useState } from 'react';
 import OverflowCheckboxes from '../OverflowCheckboxes';
 import { getInitialStateFromFilters } from '../utils';
 
+export const handleCheckboxChange = ({
+  isSelected,
+  filtersState,
+  column,
+  option,
+  setFiltersState,
+  applyFilters,
+  type,
+}) => {
+  const checkboxCopy = filtersState[column].value;
+  const foundCheckbox = checkboxCopy.find(
+    (checkbox) => checkbox.value === option.value
+  );
+  foundCheckbox.selected = isSelected;
+  setFiltersState({
+    ...filtersState,
+    [column]: {
+      value: checkboxCopy,
+      type,
+    },
+  });
+  applyFilters({
+    column,
+    value: [...filtersState[column].value],
+    type,
+  });
+  option.onChange?.(isSelected);
+};
+
 const useFilters = ({
   updateMethod,
   filters = [],
@@ -200,24 +229,15 @@ const useFilters = ({
               key={option.id}
               {...option}
               onChange={(isSelected) => {
-                const checkboxCopy = filtersState[column].value;
-                const foundCheckbox = checkboxCopy.find(
-                  (checkbox) => checkbox.value === option.value
-                );
-                foundCheckbox.selected = isSelected;
-                setFiltersState({
-                  ...filtersState,
-                  [column]: {
-                    value: checkboxCopy,
-                    type,
-                  },
-                });
-                applyFilters({
+                handleCheckboxChange({
+                  isSelected,
+                  filtersState,
                   column,
-                  value: [...filtersState[column].value],
+                  option,
+                  setFiltersState,
+                  applyFilters,
                   type,
                 });
-                option.onChange?.(isSelected);
               }}
               checked={option.selected}
             />

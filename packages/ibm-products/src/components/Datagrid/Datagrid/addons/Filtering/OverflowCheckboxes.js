@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import { componentClass } from './FilterPanel';
+import { handleCheckboxChange } from './hooks/useFilters';
 
 const OverflowCheckboxes = ({
   components,
@@ -23,26 +24,17 @@ const OverflowCheckboxes = ({
     <Checkbox
       key={option.labelText}
       {...option}
-      onChange={(isSelected) => {
-        const checkboxCopy = filtersState[column].value;
-        const foundCheckbox = checkboxCopy.find(
-          (checkbox) => checkbox.value === option.value
-        );
-        foundCheckbox.selected = isSelected;
-        setFiltersState({
-          ...filtersState,
-          [column]: {
-            value: checkboxCopy,
-            type,
-          },
-        });
-        applyFilters({
+      onChange={(isSelected) =>
+        handleCheckboxChange({
+          isSelected,
+          filtersState,
           column,
-          value: [...filtersState[column].value],
+          option,
+          setFiltersState,
+          applyFilters,
           type,
-        });
-        option.onChange?.(isSelected);
-      }}
+        })
+      }
       checked={option.selected}
       disabled={option.disabled}
     />

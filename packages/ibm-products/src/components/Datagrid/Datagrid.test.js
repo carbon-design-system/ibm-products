@@ -2239,6 +2239,10 @@ describe('batch action testing', () => {
       screen.getByLabelText(getBatchActions()[0].label);
       screen.getByLabelText(getBatchActions()[1].label);
       const menuButton = screen.getByRole('button', { name: /More/i });
+      const cancelButton = screen.getByRole('button', { name: /Cancel/i });
+      const selectAllButton = screen.getByRole('button', {
+        name: /Select all/i,
+      });
       expect(menuButton).toBeInTheDocument();
       await act(() => click(menuButton));
       const options = Array.from(
@@ -2254,6 +2258,11 @@ describe('batch action testing', () => {
       remainingBatchActions.forEach((batchAction, index) => {
         expect(batchAction.label).toEqual(optionsText[index]);
       });
+
+      //coverage
+      fireEvent.click(options[0]);
+      fireEvent.click(cancelButton);
+      fireEvent.click(selectAllButton);
     });
   });
 });

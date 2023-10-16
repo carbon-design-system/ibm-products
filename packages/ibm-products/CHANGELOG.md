@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.59.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.59.0...@carbon/ibm-products@1.59.1) (2023-10-10)
+
+
+### Bug Fixes
+
+* **Datagrid:** expandable row add background on row hover ([#3551](https://github.com/carbon-design-system/ibm-products/issues/3551)) ([036d579](https://github.com/carbon-design-system/ibm-products/commit/036d5795705da649745f26ad47be3ef1bd503698))
+* **Datagrid:** refactor expandable implementation ([#3527](https://github.com/carbon-design-system/ibm-products/issues/3527)) ([9a7cc01](https://github.com/carbon-design-system/ibm-products/commit/9a7cc01d988f9bf503546fbf26cc7b18f88ec276))
+* **Datagrid:** remove border for datagrid empty state ([#3540](https://github.com/carbon-design-system/ibm-products/issues/3540)) ([4f90e15](https://github.com/carbon-design-system/ibm-products/commit/4f90e15cd11b73e762641f7633e1c48cef478536))
+* DG pagination fixes v1 ([#3549](https://github.com/carbon-design-system/ibm-products/issues/3549)) ([15eadb4](https://github.com/carbon-design-system/ibm-products/commit/15eadb4c8aadbe115e8b20c1784fa205b3950cc7))
+* update checklist donut colors ([#3504](https://github.com/carbon-design-system/ibm-products/issues/3504)) ([eeea5d9](https://github.com/carbon-design-system/ibm-products/commit/eeea5d984e1e1f8564bbb716b6351baa0d698b5d))
+* update to Carbon 10 compatible versions to latest ([#3495](https://github.com/carbon-design-system/ibm-products/issues/3495)) ([0c41c26](https://github.com/carbon-design-system/ibm-products/commit/0c41c267edf1919355bd56f3e8b8968de5ba8465))
+
+
+
+
+
+# [1.59.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.58.0...@carbon/ibm-products@1.59.0) (2023-09-19)
+
+
+### Bug Fixes
+
+* datagrid row size accessibility v1 ([#3479](https://github.com/carbon-design-system/ibm-products/issues/3479)) ([b64787b](https://github.com/carbon-design-system/ibm-products/commit/b64787b6f804700012e6854965757bcc34054d89))
+* **Datagrid:** add initial width value to `useResizeObserver` and add batch actions test (v1) ([#3378](https://github.com/carbon-design-system/ibm-products/issues/3378)) ([dece763](https://github.com/carbon-design-system/ibm-products/commit/dece763b2f916bd7e50d4e3394457b4917e2fd84))
+* update to Carbon 10 compatible versions to latest ([#3387](https://github.com/carbon-design-system/ibm-products/issues/3387)) ([34a6257](https://github.com/carbon-design-system/ibm-products/commit/34a6257288e792160fef634f2675eb7698a756f8))
+
+
+### Features
+
+* **createfullpage:** initialstep added  for v1 ([#3453](https://github.com/carbon-design-system/ibm-products/issues/3453)) ([9f4e30e](https://github.com/carbon-design-system/ibm-products/commit/9f4e30e1af681a485073471d42a12a02a1183d19))
+
+
+
+
+
 # [1.58.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.57.0...@carbon/ibm-products@1.58.0) (2023-09-12)
 
 

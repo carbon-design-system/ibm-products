@@ -40,7 +40,7 @@ const componentName = 'InlineTipButton';
 // };
 
 /**
- * TODO: A description of the component.
+ * TODO: A standard Carbon button, styled specifically for use inside InlineTip.
  */
 export let InlineTipButton = React.forwardRef(
   (
@@ -81,13 +81,6 @@ export let InlineTipButton = React.forwardRef(
     );
   }
 );
-
-// Return a placeholder if not released and not enabled by feature flag
-InlineTipButton = pkg.checkComponentEnabled(InlineTipButton, componentName);
-
-// The display name of the component, used by React. Note that displayName
-// is used in preference to relying on function.name.
-InlineTipButton.displayName = componentName;
 
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).

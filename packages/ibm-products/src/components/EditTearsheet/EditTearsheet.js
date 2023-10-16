@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,6 +29,7 @@ export const FormNumberContext = createContext(0);
 const defaults = {
   verticalPosition: 'normal',
   influencerWidth: 'narrow',
+  sideNavAriaLabel: 'Side navigation',
 };
 
 /**
@@ -50,6 +51,8 @@ export let EditTearsheet = forwardRef(
       title,
       verticalPosition = defaults.verticalPosition,
       onHandleModalClick,
+      onFormChange,
+      sideNavAriaLabel = defaults.sideNavAriaLabel,
 
       // Collect any other property values passed in.
       ...rest
@@ -57,43 +60,42 @@ export let EditTearsheet = forwardRef(
     ref
   ) => {
     const [currentForm, setCurrentForm] = useState(0);
+    const [formTitles, setFormTitles] = useState([]);
     const contentRef = useRef();
 
-    const handleCurrentForm = (form) => {
-      setCurrentForm(form);
+    const handleCurrentForm = (formIndex) => {
+      setCurrentForm(formIndex);
+      if (onFormChange) {
+        onFormChange(formIndex);
+      }
     };
 
-    const sideNavItems = [
-      { label: 'Topic Name' },
-      { label: 'Location' },
-      { label: 'Partitions' },
-      { label: 'Message retention' },
-    ];
-
-    const influencer = (
-      <div className="tearsheet-stories__dummy-influencer-block">
-        <SideNav
-          aria-label="Side navigation"
-          className={`${blockClass}__side-nav`}
-          expanded={true}
-          isFixedNav={false}
-        >
-          <SideNavItems>
-            {sideNavItems.map((item, index) => {
-              return (
-                <SideNavMenuItem
-                  key={index}
-                  onClick={() => handleCurrentForm(index)}
-                  isActive={currentForm === index}
-                >
-                  {item.label}
-                </SideNavMenuItem>
-              );
-            })}
-          </SideNavItems>
-        </SideNav>
-      </div>
-    );
+    function defaultInfluencer() {
+      return (
+        <div className={`${blockClass}__side-nav-wrapper`}>
+          <SideNav
+            aria-label={sideNavAriaLabel}
+            className={`${blockClass}__side-nav`}
+            expanded={true}
+            isFixedNav={false}
+          >
+            <SideNavItems>
+              {formTitles.map((title, index) => {
+                return (
+                  <SideNavMenuItem
+                    key={index}
+                    onClick={() => handleCurrentForm(index)}
+                    isActive={currentForm === index}
+                  >
+                    {title}
+                  </SideNavMenuItem>
+                );
+              })}
+            </SideNavItems>
+          </SideNav>
+        </div>
+      );
+    }
 
     return (
       <TearsheetShell
@@ -114,7 +116,7 @@ export let EditTearsheet = forwardRef(
         className={cx(blockClass, className)}
         description={description}
         hasCloseIcon={false}
-        influencer={influencer}
+        influencer={defaultInfluencer()}
         influencerPosition="left"
         influencerWidth={influencerWidth}
         label={label}
@@ -130,6 +132,7 @@ export let EditTearsheet = forwardRef(
             <FormContext.Provider
               value={{
                 currentForm,
+                setFormTitles,
               }}
             >
               {React.Children.map(children, (child, index) => (
@@ -176,13 +179,6 @@ EditTearsheet.propTypes = {
   description: PropTypes.node,
 
   /**
-   * The content for the influencer section of the tearsheet, displayed
-   * alongside the main content. This is typically a menu, or filter, or
-   * progress indicator, or similar.
-   */
-  influencer: PropTypes.element,
-
-  /**
    * Used to set the size of the influencer
    */
   influencerWidth: PropTypes.oneOf(['narrow', 'wide']),
@@ -202,6 +198,13 @@ EditTearsheet.propTypes = {
   onClose: PropTypes.func,
 
   /**
+   * An optional handler that is called when a user changes forms via clicking
+   * an influencer nav item.
+   * Returns the index of the selected form.
+   */
+  onFormChange: PropTypes.func,
+
+  /**
    * Specifies whether the tearsheet is currently open.
    */
   onHandleModalClick: PropTypes.func,
@@ -210,6 +213,11 @@ EditTearsheet.propTypes = {
    * Specifies whether the tearsheet is currently open.
    */
   open: PropTypes.bool,
+
+  /**
+   * Specifies the aria label for the SideNav from Carbon UIShell
+   */
+  sideNavAriaLabel: PropTypes.string,
 
   /**
    * The submit button text

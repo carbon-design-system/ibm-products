@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.0...@carbon/ibm-products@2.11.1) (2023-10-16)
+
+
+### Bug Fixes
+
+* datagrid actions review fixes ([#3579](https://github.com/carbon-design-system/ibm-products/issues/3579)) ([c9f5e2b](https://github.com/carbon-design-system/ibm-products/commit/c9f5e2bb72008e04ccfe7e6c8f9f2c90b36696f8))
+* **Datagrid:** expander title / aria-label updates ([#3564](https://github.com/carbon-design-system/ibm-products/issues/3564)) ([1bcff24](https://github.com/carbon-design-system/ibm-products/commit/1bcff24517b3d66d369ef6ae4f7759b7a479fabc))
+* **EditTearsheet:** Derive influencer nav items from form titles ([#3583](https://github.com/carbon-design-system/ibm-products/issues/3583)) ([7846c4b](https://github.com/carbon-design-system/ibm-products/commit/7846c4b657b2d0c1a7cb8dcb76bed823d6881fbd)), closes [#3574](https://github.com/carbon-design-system/ibm-products/issues/3574)
+* move dnd kit deps out of dev deps ([#3576](https://github.com/carbon-design-system/ibm-products/issues/3576)) ([a65ed6e](https://github.com/carbon-design-system/ibm-products/commit/a65ed6e1576d970c1feb519c0c1cfae9ede77b5a))
+* to rem usage ([#3570](https://github.com/carbon-design-system/ibm-products/issues/3570)) ([e9f938f](https://github.com/carbon-design-system/ibm-products/commit/e9f938fd236a1c99aa1989773979e43d90b2e77a))
+
+
+
+
+
 # [2.11.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.10.2...@carbon/ibm-products@2.11.0) (2023-10-10)
 
 

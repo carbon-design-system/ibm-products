@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,6 +29,7 @@ export const FormNumberContext = createContext(0);
 const defaults = {
   verticalPosition: 'normal',
   influencerWidth: 'narrow',
+  sideNavAriaLabel: 'Side navigation',
 };
 
 /**
@@ -51,6 +52,7 @@ export let EditTearsheet = forwardRef(
       verticalPosition = defaults.verticalPosition,
       onHandleModalClick,
       onFormChange,
+      sideNavAriaLabel,
 
       // Collect any other property values passed in.
       ...rest
@@ -72,7 +74,7 @@ export let EditTearsheet = forwardRef(
       return (
         <div className={`${blockClass}__side-nav-wrapper`}>
           <SideNav
-            aria-label="Side navigation"
+            aria-label={sideNavAriaLabel}
             className={`${blockClass}__side-nav`}
             expanded={true}
             isFixedNav={false}
@@ -211,6 +213,11 @@ EditTearsheet.propTypes = {
    * Specifies whether the tearsheet is currently open.
    */
   open: PropTypes.bool,
+
+  /**
+   * Specifies the aria label for the SideNav from Carbon UIShell
+   */
+  sideNavAriaLabel: PropTypes.string,
 
   /**
    * The submit button text

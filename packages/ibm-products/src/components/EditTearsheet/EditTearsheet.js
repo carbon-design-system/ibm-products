@@ -52,7 +52,7 @@ export let EditTearsheet = forwardRef(
       verticalPosition = defaults.verticalPosition,
       onHandleModalClick,
       onFormChange,
-      sideNavAriaLabel,
+      sideNavAriaLabel = defaults.sideNavAriaLabel,
 
       // Collect any other property values passed in.
       ...rest

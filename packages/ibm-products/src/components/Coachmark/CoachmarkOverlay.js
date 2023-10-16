@@ -7,7 +7,7 @@
 
 // Import portions of React that are needed.
 import React, { forwardRef, useRef } from 'react';
-
+import uuidv4 from '../../global/js/utils/uuidv4';
 // Other standard imports.
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -84,7 +84,7 @@ export let CoachmarkOverlay = forwardRef(
       overlay.style.top = `${y + movementY}px`;
       overlay.style.bottom = 'auto';
     }
-
+    const contentId = uuidv4();
     return (
       <div
         {...rest}
@@ -98,6 +98,7 @@ export let CoachmarkOverlay = forwardRef(
         )}
         ref={overlayRef}
         style={styledTune}
+        aria-labelledby={contentId}
         {...getDevtoolsProps(componentName)}
       >
         {isDraggable ? (
@@ -105,7 +106,7 @@ export let CoachmarkOverlay = forwardRef(
         ) : (
           <CoachmarkHeader onClose={onClose} />
         )}
-        <div className={`${blockClass}__body`} ref={ref}>
+        <div className={`${blockClass}__body`} ref={ref} id={contentId}>
           {children}
         </div>
         {isBeacon && <span className={`${blockClass}__caret`} />}

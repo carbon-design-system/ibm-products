@@ -81,6 +81,12 @@ export let Coachmark = forwardRef(
       }
     };
 
+    const handleTargetKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        handleClose();
+      }
+    };
+
     const handleTargetClick = (e) => {
       setTargetRect(e.target.getBoundingClientRect());
       setTargetOffset({ x: e.target.offsetLeft, y: e.target.offsetTop });
@@ -98,6 +104,8 @@ export let Coachmark = forwardRef(
     const contextValue = {
       buttonProps: {
         'aria-expanded': isOpen,
+        tabIndex: 0,
+        onKeyDown: handleTargetKeyDown,
         onClick: handleTargetClick,
         // Compensate for accidental open/close on double-click.
         // Only open on double-click.

@@ -60,9 +60,15 @@ export let CoachmarkFixed = React.forwardRef(
     const [targetRect, setTargetRect] = useState();
     const [targetOffset, setTargetOffset] = useState({ x: 0, y: 0 });
     const [fixedIsVisible, setFixedIsVisible] = useState(false);
-
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    );
     const handleClose = () => {
-      setFixedIsVisible(false);
+      if (prefersReducedMotion) {
+        setIsOpen(false);
+      } else {
+        setFixedIsVisible(false);
+      }
     };
 
     const handleTransitionEnd = (e) => {

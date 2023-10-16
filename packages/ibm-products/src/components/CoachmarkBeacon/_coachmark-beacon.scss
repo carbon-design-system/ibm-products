@@ -32,6 +32,9 @@
 
     &-default {
       .#{$block-class}__target {
+        &::before {
+          display: none;
+        }
         // the blue dot
         &::after {
           position: absolute;
@@ -43,6 +46,26 @@
           background-color: $blue-50;
           content: '';
         }
+
+        &:focus {
+          outline: transparent;
+
+          &::before {
+            position: absolute;
+            top: 7px;
+            left: 7px;
+            display: block;
+            width: 18px;
+            height: 18px;
+            border-radius: 100%;
+            content: '';
+            outline: $spacing-01 $focus solid;
+          }
+        }
+
+        // &:active {
+        //   outline: none;
+        // }
       }
     }
 

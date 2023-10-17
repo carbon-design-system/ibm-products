@@ -242,12 +242,8 @@ export const DraggableItemsList = ({
 DraggableItemsList.propTypes = {
   columns: PropTypes.array.isRequired,
   filterString: PropTypes.string.isRequired,
-  // focusIndex: PropTypes.number.isRequired,
-  // getNextIndex: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
   moveElement: PropTypes.func.isRequired,
   onSelectColumn: PropTypes.func.isRequired,
   setAriaRegionText: PropTypes.func.isRequired,
-  // setColumnsObject: PropTypes.func.isRequired,
-  // setFocusIndex: PropTypes.func.isRequired,
 };

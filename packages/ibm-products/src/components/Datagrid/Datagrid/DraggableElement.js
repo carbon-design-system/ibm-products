@@ -24,16 +24,6 @@ const DraggableElement = ({
   ariaLabel,
   isSticky,
   selected,
-  // index,
-  // listData,
-  // type,
-  // onGrab,
-  // onArrowKeyDown,
-  // isFocused,
-  // moveElement,
-  // positionLabel = 'Current position {index} of {total}',
-  // grabbedLabel = '{itemName} grabbed.',
-  // droppedLabel = '{itemName} dropped.',
 }) => {
   const {
     attributes,
@@ -103,19 +93,9 @@ DraggableElement.propTypes = {
   children: PropTypes.element.isRequired,
   classList: PropTypes.string,
   disabled: PropTypes.bool,
-  // droppedLabel: PropTypes.string,
-  // grabbedLabel: PropTypes.string,
   id: PropTypes.string.isRequired,
-  // index: PropTypes.number.isRequired,
-  // isFocused: PropTypes.bool.isRequired,
   isSticky: PropTypes.bool,
-  // listData: PropTypes.array.isRequired,
-  // moveElement: PropTypes.func.isRequired,
-  // onArrowKeyDown: PropTypes.func.isRequired,
-  // onGrab: PropTypes.func.isRequired,
-  // positionLabel: PropTypes.string,
   selected: PropTypes.bool,
-  // type: PropTypes.string.isRequired,
 };
 
 export default DraggableElement;

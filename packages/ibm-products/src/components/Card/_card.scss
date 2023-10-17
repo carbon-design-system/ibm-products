@@ -108,7 +108,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--card;
   background-color: $layer-hover-01;
 }
 
-#{$block-class}__icon:active {
+.#{$block-class}__icon:active {
   color: $link-primary-hover;
 }
 

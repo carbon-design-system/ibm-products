@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.1...@carbon/ibm-products@2.11.2) (2023-10-17)
+
+
+### Bug Fixes
+
+* **Datagrid:** reset col order in tearsheet onClose ([#3578](https://github.com/carbon-design-system/ibm-products/issues/3578)) ([b97cf0f](https://github.com/carbon-design-system/ibm-products/commit/b97cf0f906fc8e441db593e1df391ad4650c0633))
+* **Pattern-Saving:** Reversed the icons for default state (save) and success state(checkmark) ([#3571](https://github.com/carbon-design-system/ibm-products/issues/3571)) ([a5eadfb](https://github.com/carbon-design-system/ibm-products/commit/a5eadfb7d642b027b6e85e889c3934bed03396eb))
+
+
+
+
+
 ## [2.11.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.0...@carbon/ibm-products@2.11.1) (2023-10-16)
 
 

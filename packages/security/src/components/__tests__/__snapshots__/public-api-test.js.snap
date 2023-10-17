@@ -4583,8 +4583,9 @@ Map {
     "$$typeof": Symbol(react.forward_ref),
     "displayName": "HeaderPanel",
     "propTypes": {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
+      "children": {
+        "type": "node",
+      },
       "className": {
         "type": "string",
       },

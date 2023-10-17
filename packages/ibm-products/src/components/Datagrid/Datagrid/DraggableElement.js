@@ -32,7 +32,10 @@ const DraggableElement = ({
     setNodeRef,
     transform,
     transition,
-  } = useSortable({ id });
+  } = useSortable({
+    disabled,
+    id,
+  });
 
   const content = (
     <>

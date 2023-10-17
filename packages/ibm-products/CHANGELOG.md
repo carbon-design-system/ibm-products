@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.2...@carbon/ibm-products@2.11.3) (2023-10-17)
+
+
+### Bug Fixes
+
+* **Tearsheet:** address Element type issue ([#3621](https://github.com/carbon-design-system/ibm-products/issues/3621)) ([81e07df](https://github.com/carbon-design-system/ibm-products/commit/81e07df5ae4c6804fe47b6b6d47d3a999e0e83bd))
+
+
+
+
+
 ## [2.11.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.1...@carbon/ibm-products@2.11.2) (2023-10-17)
 
 

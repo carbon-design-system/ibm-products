@@ -23,6 +23,8 @@ import { ActionSet } from '../ActionSet';
 
 import { tearsheetHasCloseIcon, TearsheetShell } from './TearsheetShell';
 
+import { portalType } from './TearsheetShell';
+
 const componentName = 'Tearsheet';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -206,7 +208,7 @@ Tearsheet.propTypes = {
   /**
    * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget: PropTypes.instanceOf(Element),
+  portalTarget: portalType,
 
   /**
    * Specify a CSS selector that matches the DOM element that should be focused when the Modal opens

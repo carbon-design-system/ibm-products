@@ -1,0 +1,223 @@
+/* stylelint-disable declaration-no-important */
+
+//
+// Copyright IBM Corp. 2023, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+// Standard imports.
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '../../global/styles/project-settings' as c4p-settings;
+
+@mixin ellipsis-2-lines {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+}
+
+// @mixin checklist {
+// The block part of our conventional BEM class names (blockClass__E--M).
+$block-class: #{c4p-settings.$pkg-prefix}--checklist;
+
+// .#{$block-class} {
+.#{$block-class}__header {
+  display: flex;
+  padding: $spacing-05;
+  background-color: $layer-01;
+  gap: $spacing-03;
+}
+
+.#{$block-class}__chart {
+  // outer donut
+  position: relative;
+  width: $spacing-08;
+  min-width: $spacing-08;
+  height: $spacing-08;
+  align-self: center;
+}
+
+.#{$block-class}__chart::after {
+  // inner donut
+  position: absolute;
+  top: $spacing-02;
+  left: $spacing-02;
+  width: $spacing-07;
+  height: $spacing-07;
+  border-radius: 50%;
+  background-color: $layer-01;
+  content: '';
+}
+
+// Align __title and __chart-label vertically centered in the header.
+.#{$block-class}__titles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.#{$block-class}__title {
+  @include type-style('productive-heading-02');
+  @include ellipsis-2-lines();
+}
+
+.#{$block-class}__chart-label {
+  @include type-style('label-01');
+  @include ellipsis-2-lines();
+
+  color: $text-secondary;
+}
+
+.#{$block-class}__title + .#{$block-class}__chart-label {
+  margin-top: $spacing-01;
+}
+
+// open/close toggle
+.#{$block-class}__toggle {
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  min-height: 30px !important;
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  padding: 0 rem(6px) !important;
+  margin-top: calc(-1 * $spacing-03) !important;
+  margin-right: calc(-1 * $spacing-03) !important;
+  margin-left: auto !important;
+}
+
+.#{$block-class}__chevron {
+  color: $text-primary;
+  transform: rotate(0deg);
+  transition: all $duration-fast-02 motion(standard, productive);
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.#{$block-class}__closed .#{$block-class}__chevron {
+  transform: rotate(-180deg);
+}
+
+// Button to appear more like a link so it aligns better with the list text
+.#{$block-class}__button {
+  max-width: none !important;
+  min-height: auto !important;
+  // override bx--btn to allow two-line ellipsis
+  /* stylelint-disable-next-line declaration-property-value-disallowed-list */
+  flex-shrink: unset !important;
+  padding: 0 !important;
+  border: none !important;
+  background-color: transparent !important;
+  color: $link-primary !important;
+}
+// The CSS for the Carbon button's label
+// is incompatible with two-line ellipsis,
+// but a div inside a Carbon button works.
+.#{$block-class}__button div {
+  @include ellipsis-2-lines();
+}
+
+.#{$block-class}__button:hover {
+  background: transparent;
+  color: $link-primary-hover;
+  text-decoration: underline;
+}
+
+.#{$block-class}__button:active {
+  background: transparent;
+  color: $text-primary;
+  text-decoration: underline;
+}
+
+.#{$block-class}__button--error {
+  color: $text-error !important;
+}
+
+// container for animated content
+.#{$block-class}__content-outer {
+  overflow: hidden;
+}
+
+.#{$block-class}__content-inner {
+  height: 100%;
+  background-color: $layer-01;
+  transform: translate(0, 0);
+  transition: all $duration-fast-02 motion(standard, productive);
+
+  /* stylelint-disable-next-line max-nesting-depth */
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.#{$block-class}__closed .#{$block-class}__content-inner {
+  height: 0;
+  transform: translate(0, -100%);
+}
+
+.#{$block-class}__list-group {
+  padding: $spacing-05;
+  border-top: 1px solid $border-subtle;
+}
+
+.#{$block-class}__list-title {
+  @include type-style('body-short-01');
+  @include ellipsis-2-lines();
+
+  margin-bottom: $spacing-03;
+}
+
+.#{$block-class}__list-item {
+  display: flex;
+  margin-bottom: $spacing-03;
+
+  .#{$block-class}__list-item:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.#{$block-class}__icon {
+  /* stylelint-disable-next-line carbon/layout-token-use */
+  margin: rem(1px) $spacing-03 0 0;
+  color: $link-primary;
+
+  .#{$block-class}__icon--error {
+    color: $support-error;
+  }
+
+  .#{$block-class}__icon--disabled {
+    color: $icon-on-color-disabled;
+  }
+}
+
+.#{$block-class}__label {
+  @include type-style('body-short-01');
+  @include ellipsis-2-lines();
+
+  .#{$block-class}__label--checked,
+  .#{$block-class}__label--disabled,
+  .#{$block-class}__label--error {
+    color: $text-on-color-disabled;
+  }
+}
+
+.#{$block-class}__footer {
+  @include ellipsis-2-lines();
+
+  padding: $spacing-03 $spacing-05;
+  border-top: 1px solid $border-subtle;
+}
+// }
+// }
+
+// @include exports('checklist') {
+//   @include checklist;
+// }

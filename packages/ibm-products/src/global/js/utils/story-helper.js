@@ -221,6 +221,6 @@ export const storyDocsGuidelines = (csfFile) => {
 export const getSelectedCarbonTheme = () => {
   const themeId = document
     .querySelector('[storybook-carbon-theme]')
-    .getAttribute('storybook-carbon-theme');
+    ?.getAttribute('storybook-carbon-theme');
   return themeId === 'g90' || themeId === 'g100' ? 'dark' : 'light';
 };

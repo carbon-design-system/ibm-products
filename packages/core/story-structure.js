@@ -132,6 +132,10 @@ const s = [
           'c/SimpleHeader',
         ],
       },
+      {
+        n: 'Novice to pro',
+        s: ['c/Checklist'],
+      },
     ],
   },
   {

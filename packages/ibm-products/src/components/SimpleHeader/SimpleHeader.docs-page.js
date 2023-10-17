@@ -6,10 +6,10 @@ const DocsPage = () => {
   return (
     <StoryDocsPage
       blocks={[
-        {story: stories.simpleHeader,},
-        {story: stories.simpleHeaderWithBreadcrumbsOnly},
-        {story: stories.simpleHeaderWithTitleOnly},
-        {story: stories.simpleHeaderWithOverflowBreadcrumbs},
+        { story: stories.simpleHeader },
+        { story: stories.simpleHeaderWithBreadcrumbsOnly },
+        { story: stories.simpleHeaderWithTitleOnly },
+        { story: stories.simpleHeaderWithOverflowBreadcrumbs },
       ]}
     />
   );

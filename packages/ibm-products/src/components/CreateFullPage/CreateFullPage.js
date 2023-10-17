@@ -35,7 +35,10 @@ import {
 } from '../../global/js/hooks';
 import { lastIndexInArray } from '../../global/js/utils/lastIndexInArray';
 import { getNumberOfHiddenSteps } from '../../global/js/utils/getNumberOfHiddenSteps';
-import { SimpleHeader, overview_arialabel_required_if_breadcrumbs_exist } from '../SimpleHeader/SimpleHeader';
+import {
+  SimpleHeader,
+  overflowAriaLabel_required_if_breadcrumbs_exist,
+} from '../SimpleHeader/SimpleHeader';
 
 const blockClass = `${pkg.prefix}--create-full-page`;
 const componentName = 'CreateFullPage';
@@ -302,10 +305,10 @@ CreateFullPage.propTypes = {
     })
   ),
 
-  /** 
-   * Label for open/close overflow button used for breadcrumb items that do not fit 
+  /**
+   * Label for open/close overflow button used for breadcrumb items that do not fit
    */
-  breadcrumbsOverflowAriaLabel:  overview_arialabel_required_if_breadcrumbs_exist,
+  breadcrumbsOverflowAriaLabel: overflowAriaLabel_required_if_breadcrumbs_exist,
 
   /**
    * The cancel button text
@@ -357,15 +360,13 @@ CreateFullPage.propTypes = {
    */
   modalTitle: PropTypes.string.isRequired,
 
-
   /**
    * The next button text
    */
   nextButtonText: PropTypes.string.isRequired,
 
-
-  /** 
-   * A prop to omit the trailing slash for the breadcrumbs 
+  /**
+   * A prop to omit the trailing slash for the breadcrumbs
    */
   noTrailingSlash: PropTypes.bool,
 

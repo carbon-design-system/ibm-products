@@ -65,7 +65,7 @@ const SimpleHeader = ({
   );
 };
 
-export const overview_arialabel_required_if_breadcrumbs_exist = isRequiredIf(
+export const overflowAriaLabel_required_if_breadcrumbs_exist = isRequiredIf(
   PropTypes.string,
   (props) => props.breadcrumbs?.length > 0
 );
@@ -97,7 +97,7 @@ SimpleHeader.propTypes = {
   noTrailingSlash: PropTypes.bool,
 
   /** Label for open/close overflow button used for breadcrumb items that do not fit */
-  overflowAriaLabel: overview_arialabel_required_if_breadcrumbs_exist,
+  overflowAriaLabel: overflowAriaLabel_required_if_breadcrumbs_exist,
 
   /** Header title */
   title: PropTypes.string,

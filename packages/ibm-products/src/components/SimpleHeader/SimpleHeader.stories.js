@@ -20,7 +20,7 @@ const breadcrumbs = {
   'A single breadcrumb': [{ href: '/', key: '0', label: 'Home page' }],
   'Two breadcrumbs': [
     { key: '0', href: '/', label: 'Breadcrumb 1' },
-    { key: '1', href: '/', label: 'Breadcrumb 2'},
+    { key: '1', href: '/', label: 'Breadcrumb 2' },
     { key: '2', label: 'Breadcrumb 3', isCurrentPage: true },
   ],
 };
@@ -54,7 +54,7 @@ export const simpleHeader = prepareStory(Template, {
     noTrailingSlash: true,
     className: 'custom-classname',
     breadcrumbs: 2,
-    overflowAriaLabel: 'Open and close additional breadcrumb item list.'
+    overflowAriaLabel: 'Open and close additional breadcrumb item list.',
   },
 });
 
@@ -70,10 +70,9 @@ export const simpleHeaderWithBreadcrumbsOnly = prepareStory(Template, {
     noTrailingSlash: true,
     className: 'custom-classname',
     breadcrumbs: 2,
-    overflowAriaLabel: 'Open and close additional breadcrumb item list.'
+    overflowAriaLabel: 'Open and close additional breadcrumb item list.',
   },
 });
-
 
 export const simpleHeaderWithOverflowBreadcrumbs = prepareStory(Template, {
   args: {
@@ -81,6 +80,6 @@ export const simpleHeaderWithOverflowBreadcrumbs = prepareStory(Template, {
     className: 'custom-classname',
     breadcrumbs: 2,
     maxVisible: 2,
-    overflowAriaLabel: 'Open and close additional breadcrumb item list.'
+    overflowAriaLabel: 'Open and close additional breadcrumb item list.',
   },
 });

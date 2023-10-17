@@ -507,13 +507,14 @@ export const createFullPageWithHeader = prepareStory(Template, {
   args: {
     ...defaultFullPageProps,
     title: 'Page title',
-    breadcrumbsOverflowAriaLabel: 'Open and close additional breadcrumb item list.',
+    breadcrumbsOverflowAriaLabel:
+      'Open and close additional breadcrumb item list.',
     breadcrumbs: [
       { key: '0', label: 'Breadcrumb 1', href: '/', title: 'home page' },
-      { key: '1', label: 'Breadcrumb 2', href: '/', },
-      { key: '2', label: 'Breadcrumb 3', href:'/' },
+      { key: '1', label: 'Breadcrumb 2', href: '/' },
+      { key: '2', label: 'Breadcrumb 3', href: '/' },
       { key: '3', label: 'Breadcrumb 4', isCurrentPage: true },
     ],
-    maxVisibleBreadcrumbs: 3
+    maxVisibleBreadcrumbs: 3,
   },
 });

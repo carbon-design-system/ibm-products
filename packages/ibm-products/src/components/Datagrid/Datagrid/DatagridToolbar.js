@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -60,6 +60,18 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   // Render batch actions in ButtonMenu
   const renderBatchActionOverflow = () => {
     const minWidthBeforeOverflowIcon = 380;
+    const renderItem = (batchAction, index) => (
+      <ButtonMenuItem
+        key={`${batchAction.label}-${index}`}
+        itemText={batchAction.label}
+        onClick={() => {
+          batchAction.onClick();
+          if (batchAction.type === 'select_all') {
+            toggleAllRowsSelected(true);
+          }
+        }}
+      />
+    );
     // Do not render ButtonMenu when there are 3 or less items
     // and if there is enough available space to render all the items
     if (toolbarBatchActions?.length <= 3 && !displayAllInMenu) {
@@ -80,35 +92,10 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       >
         {toolbarBatchActions &&
           toolbarBatchActions.map((batchAction, index) => {
-            if (index < 2) {
-              if (displayAllInMenu) {
-                return (
-                  <ButtonMenuItem
-                    key={`${batchAction.label}-${index}`}
-                    itemText={batchAction.label}
-                    onClick={() => {
-                      batchAction.onClick();
-                      if (batchAction.type === 'select_all') {
-                        toggleAllRowsSelected(true);
-                      }
-                    }}
-                  />
-                );
-              }
-              return null;
+            if (index < 2 && !displayAllInMenu) {
+              return;
             }
-            return (
-              <ButtonMenuItem
-                key={`${batchAction.label}-${index}`}
-                itemText={batchAction.label}
-                onClick={() => {
-                  batchAction.onClick();
-                  if (batchAction.type === 'select_all') {
-                    toggleAllRowsSelected(true);
-                  }
-                }}
-              />
-            );
+            return renderItem(batchAction, index);
           })}
       </ButtonMenu>
     );

@@ -51,6 +51,16 @@ const SelectAll = (datagridState) => {
     : getToggleAllRowsSelectedProps;
   const { onChange, ...selectProps } = getProps();
   const { indeterminate } = selectProps || {};
+
+  const handleSelectAllChange = (event) => {
+    if (indeterminate) {
+      return onChange?.({
+        target: { checked: false },
+      });
+    }
+    return onChange?.(event);
+  };
+
   return (
     <div
       className={cx(
@@ -65,15 +75,7 @@ const SelectAll = (datagridState) => {
       <TableSelectAll
         {...selectProps}
         name={`${tableId}-select-all-checkbox-name`}
-        onSelect={(event) => {
-          if (indeterminate) {
-            onChange?.({
-              target: { checked: false },
-            });
-          } else {
-            onChange?.(event);
-          }
-        }}
+        onSelect={handleSelectAllChange}
         disabled={isFetching || selectProps.disabled}
         id={`${tableId}-select-all-checkbox-id`}
       />

@@ -121,17 +121,17 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 // The CSS for the Carbon button's label
 // is incompatible with two-line ellipsis,
 // but a div inside a Carbon button works.
-.#{$block-class}__button div {
+.#{$block-class}__button.cds--btn--primary div {
   @include ellipsis-2-lines();
 }
 
-.#{$block-class}__button:hover {
+.#{$block-class}__button.cds--btn--primary:hover {
   background: transparent;
   color: $link-primary-hover;
   text-decoration: underline;
 }
 
-.#{$block-class}__button:active {
+.#{$block-class}__button.cds--btn--primary:active {
   background: transparent;
   color: $text-primary;
   text-decoration: underline;

@@ -25,9 +25,11 @@ export let CardHeader = ({
   primaryButtonIcon,
   primaryButtonPlacement,
   primaryButtonText,
+  primaryButtonDisabled,
   description,
   hasActions = defaults.hasActions,
   label,
+  secondaryButtonDisabled,
   secondaryButtonHref,
   secondaryButtonIcon,
   secondaryButtonPlacement,
@@ -70,6 +72,7 @@ export let CardHeader = ({
                 renderIcon={secondaryButtonIcon}
                 href={secondaryButtonHref}
                 className={actionGhostButtonClass}
+                disabled={secondaryButtonDisabled}
               >
                 {secondaryButtonText}
               </Button>
@@ -81,6 +84,7 @@ export let CardHeader = ({
                 renderIcon={primaryButtonIcon}
                 onClick={onPrimaryButtonClick}
                 className={actionGhostButtonClass}
+                disabled={primaryButtonDisabled}
               >
                 {primaryButtonText}
               </Button>
@@ -104,9 +108,11 @@ CardHeader.propTypes = {
   noActionIcons: PropTypes.bool,
   onPrimaryButtonClick: PropTypes.func,
   onSecondaryButtonClick: PropTypes.func,
+  primaryButtonDisabled: PropTypes.bool,
   primaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   primaryButtonPlacement: PropTypes.oneOf(['top', 'bottom']),
   primaryButtonText: PropTypes.string,
+  secondaryButtonDisabled: PropTypes.bool,
   secondaryButtonHref: PropTypes.string,
   secondaryButtonIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
   secondaryButtonKind: PropTypes.oneOf(['secondary', 'ghost']),

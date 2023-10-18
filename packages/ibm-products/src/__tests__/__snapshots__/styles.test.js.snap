@@ -7618,14 +7618,12 @@ button.c4p--add-select__global-filter-toggle--open {
 .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--light-running,
 .c4p--status-icon--light.c4p--status-icon--light-running {
   fill: #198038;
-  transform: scaleY(-1);
 }
 
 .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--dark-running,
 .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--light.c4p--status-icon--dark-running,
 .c4p--status-icon--light.c4p--status-icon--dark-running {
   fill: #198038;
-  transform: scaleY(-1);
 }
 
 .cds--btn--ghost:not([disabled]) .c4p--status-icon--light.c4p--status-icon--light-pending,
@@ -7894,14 +7892,12 @@ button.c4p--add-select__global-filter-toggle--open {
 .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--light-running,
 .c4p--status-icon--dark.c4p--status-icon--light-running {
   fill: #24a148;
-  transform: scaleY(-1);
 }
 
 .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--dark-running,
 .cds--btn.cds--btn--icon-only.cds--tooltip__trigger .c4p--status-icon--dark.c4p--status-icon--dark-running,
 .c4p--status-icon--dark.c4p--status-icon--dark-running {
   fill: #24a148;
-  transform: scaleY(-1);
 }
 
 .cds--btn--ghost:not([disabled]) .c4p--status-icon--dark.c4p--status-icon--light-pending,

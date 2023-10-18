@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -80,22 +80,8 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       >
         {toolbarBatchActions &&
           toolbarBatchActions.map((batchAction, index) => {
-            if (index < 2) {
-              if (displayAllInMenu) {
-                return (
-                  <ButtonMenuItem
-                    key={`${batchAction.label}-${index}`}
-                    itemText={batchAction.label}
-                    onClick={() => {
-                      batchAction.onClick();
-                      if (batchAction.type === 'select_all') {
-                        toggleAllRowsSelected(true);
-                      }
-                    }}
-                  />
-                );
-              }
-              return null;
+            if (index < 2 && !displayAllInMenu) {
+              return;
             }
             return (
               <ButtonMenuItem

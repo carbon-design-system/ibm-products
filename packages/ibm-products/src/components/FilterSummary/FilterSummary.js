@@ -24,7 +24,8 @@ let FilterSummary = React.forwardRef(
     },
     ref
   ) => {
-    const tagFilters = filters.map(({ key, value }) => ({
+    const tagFilters = filters.map(({ key, value, ...rest }) => ({
+      ...rest,
       type: 'gray',
       label: renderLabel?.(key, value) ?? `${key}: ${value}`,
     }));

@@ -22,7 +22,12 @@ import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
 import FilterPanel from './addons/Filtering/FilterPanel';
 import { FilterSummary } from '../../FilterSummary';
 import { FilterContext } from './addons/Filtering';
-import { CLEAR_FILTERS } from './addons/Filtering/constants';
+import {
+  CLEAR_FILTERS,
+  CLEAR_SINGLE_FILTER,
+} from './addons/Filtering/constants';
+import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
+import { clearSingleFilter } from './addons/Filtering/FilterProvider';
 
 const { TableContainer, Table } = DataTable;
 
@@ -51,6 +56,7 @@ export const DatagridContent = ({ datagridState, title }) => {
     DatagridActions,
     totalColumnsWidth,
     gridRef,
+    setAllFilters,
     state,
     page,
     rows,
@@ -143,6 +149,10 @@ export const DatagridContent = ({ datagridState, title }) => {
       );
     }
   }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
+
+  useSubscribeToEventEmitter(CLEAR_SINGLE_FILTER, (id) =>
+    clearSingleFilter(id, setAllFilters, state)
+  );
 
   const renderFilterSummary = () =>
     state.filters.length > 0 && (

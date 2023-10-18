@@ -60,18 +60,6 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   // Render batch actions in ButtonMenu
   const renderBatchActionOverflow = () => {
     const minWidthBeforeOverflowIcon = 380;
-    const renderItem = (batchAction, index) => (
-      <ButtonMenuItem
-        key={`${batchAction.label}-${index}`}
-        itemText={batchAction.label}
-        onClick={() => {
-          batchAction.onClick();
-          if (batchAction.type === 'select_all') {
-            toggleAllRowsSelected(true);
-          }
-        }}
-      />
-    );
     // Do not render ButtonMenu when there are 3 or less items
     // and if there is enough available space to render all the items
     if (toolbarBatchActions?.length <= 3 && !displayAllInMenu) {
@@ -95,7 +83,18 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
             if (index < 2 && !displayAllInMenu) {
               return;
             }
-            return renderItem(batchAction, index);
+            return (
+              <ButtonMenuItem
+                key={`${batchAction.label}-${index}`}
+                itemText={batchAction.label}
+                onClick={() => {
+                  batchAction.onClick();
+                  if (batchAction.type === 'select_all') {
+                    toggleAllRowsSelected(true);
+                  }
+                }}
+              />
+            )
           })}
       </ButtonMenu>
     );

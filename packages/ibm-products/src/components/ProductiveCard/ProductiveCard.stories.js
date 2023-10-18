@@ -190,5 +190,6 @@ export const WithActionGhostButton = prepareStory(Template, {
     primaryButtonPlacement: 'top',
     primaryButtonText: 'Ghost button',
     primaryButtonIcon: (props) => <TrashCan size={16} {...props} />,
+    primaryButtonDisabled: true,
   },
 });

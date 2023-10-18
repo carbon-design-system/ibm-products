@@ -1,11 +1,11 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 import { types as tagTypes } from 'carbon-components-react/es/components/Tag/Tag';
 import { pkg } from '../../settings';
@@ -204,6 +204,44 @@ export const MultilineTags = prepareStory(Template, {
 export const HundredsOfTags = prepareStory(Template, {
   args: {
     tags: hundredsOfTags,
+    containerWidth: 500,
+    ...overflowAndModalStrings,
+  },
+});
+
+const TemplateWithClose = (argsIn) => {
+  const { containerWidth, allTagsModalTargetCustomDomNode, tags, ...args } = {
+    ...argsIn,
+  };
+  const [liveTags, setLiveTags] = useState(
+    tags.map((tag) => ({
+      ...tag,
+      filter: true,
+      onClose: () => handleTagClose(tag.label),
+    }))
+  );
+
+  const handleTagClose = (key) => {
+    setLiveTags((prev) => prev.filter((tag) => tag.label !== key));
+  };
+
+  const ref = useRef();
+  return (
+    <div style={{ width: containerWidth }} ref={ref}>
+      <TagSet
+        {...args}
+        tags={liveTags}
+        allTagsModalTarget={
+          allTagsModalTargetCustomDomNode ? ref.current : undefined
+        }
+      />
+    </div>
+  );
+};
+
+export const WithClose = prepareStory(TemplateWithClose, {
+  args: {
+    tags: manyTags,
     containerWidth: 500,
     ...overflowAndModalStrings,
   },

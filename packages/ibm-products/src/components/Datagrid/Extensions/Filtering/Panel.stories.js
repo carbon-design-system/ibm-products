@@ -346,6 +346,11 @@ export const PanelBatch = prepareStory(FilteringTemplateWrapper, {
       onPanelOpen: action('onPanelOpen'),
       onPanelClose: action('onPanelClose'),
       panelTitle: 'Filter',
+      renderDateLabel: (start, end) => {
+        const startDateObj = new Date(start);
+        const endDateObj = new Date(end);
+        return `${startDateObj.toLocaleDateString()} - ${endDateObj.toLocaleDateString()}`;
+      },
     },
   },
 });

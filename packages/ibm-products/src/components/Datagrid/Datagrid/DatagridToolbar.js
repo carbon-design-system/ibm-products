@@ -94,7 +94,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
                   }
                 }}
               />
-            )
+            );
           })}
       </ButtonMenu>
     );

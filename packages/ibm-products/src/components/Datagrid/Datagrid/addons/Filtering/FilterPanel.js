@@ -59,6 +59,9 @@ const FilterPanel = ({
   /** State */
   const [showDividerLine, setShowDividerLine] = useState(false);
 
+  /** Context */
+  const { panelOpen, setPanelOpen } = useContext(FilterContext);
+
   const {
     filtersState,
     prevFiltersObjectArrayRef,
@@ -75,6 +78,7 @@ const FilterPanel = ({
     variation: PANEL,
     reactTableFiltersState,
     onCancel,
+    panelOpen,
   });
 
   /** Refs */
@@ -93,9 +97,6 @@ const FilterPanel = ({
 
   /** Memos */
   const showActionSet = useMemo(() => updateMethod === BATCH, [updateMethod]);
-
-  /** Context */
-  const { panelOpen, setPanelOpen } = useContext(FilterContext);
 
   /** Methods */
   const closePanel = () => {

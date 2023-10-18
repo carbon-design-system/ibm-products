@@ -24,7 +24,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Button } from '@carbon/react/icons';
+import { Button } from '@carbon/react';
 import { ChevronUp } from '@carbon/icons-react';
 
 import { ChecklistIcon } from './ChecklistIcon';

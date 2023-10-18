@@ -124,11 +124,11 @@ export default {
  * TODO: Declare template(s) for one or more scenarios.
  */
 const Template = (args) => {
-  // const theme = getSelectedCarbonTheme();
+  const theme = getSelectedCarbonTheme();
 
   return (
     <div className={`${storyClass}__viewport`}>
-      <Checklist {...args} theme={'light'} />
+      <Checklist {...args} theme={theme} />
     </div>
   );
 };

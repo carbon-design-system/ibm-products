@@ -25,10 +25,10 @@ import { pkg /*, carbon */ } from '../../settings';
 // Carbon and package components we use.
 /* TODO: @import(s) of carbon components and other package components. */
 import {
-  CheckmarkOutline16,
-  CircleDash16,
-  Incomplete16,
-  Warning16,
+  CheckmarkOutline,
+  CircleDash,
+  Incomplete,
+  Warning,
 } from '@carbon/icons-react';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -60,18 +60,18 @@ export let ChecklistIcon = React.forwardRef(
 
     switch (kind) {
       case 'error':
-        Icon = Warning16;
+        Icon = Warning;
         break;
       case 'indeterminate':
-        Icon = Incomplete16;
+        Icon = Incomplete;
         break;
       case 'checked':
-        Icon = CheckmarkOutline16;
+        Icon = CheckmarkOutline;
         break;
 
       default:
         // "unchecked" or "disabled"
-        Icon = CircleDash16;
+        Icon = CircleDash;
         break;
     }
 
@@ -87,7 +87,7 @@ export let ChecklistIcon = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <Icon />
+        <Icon size={16} />
       </span>
     );
   }

@@ -129,6 +129,7 @@ const s = [
           'c/FilterSummary',
           'c/TooltipTrigger',
           'c/TearsheetShell',
+          'c/SimpleHeader',
         ],
       },
     ],

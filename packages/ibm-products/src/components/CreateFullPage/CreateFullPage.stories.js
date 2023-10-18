@@ -35,6 +35,15 @@ import {
 } from '@carbon/react';
 import DocsPage from './CreateFullPage.docs-page';
 
+const breadcrumbs = {
+  'No breadcrumb': null,
+  'A single breadcrumb': [{ href: '/', key: '0', label: 'Home page' }],
+  'Two breadcrumbs': [
+    { key: '0', href: '/', label: 'Home page' },
+    { key: '1', href: '/', label: 'Application name' },
+  ],
+};
+
 export default {
   title: getStoryTitle(CreateFullPage.displayName),
   component: CreateFullPage,
@@ -49,10 +58,20 @@ export default {
   decorators: [
     (story) => <div className={`${storyClass}__viewport`}>{story()}</div>,
   ],
+  argTypes: {
+    breadcrumbs: {
+      control: {
+        type: 'select',
+        labels: Object.keys(breadcrumbs),
+      },
+      options: Object.values(breadcrumbs).map((_k, i) => i),
+      mapping: Object.values(breadcrumbs),
+    },
+  },
 };
 
 const defaultFullPageProps = {
-  title: 'Create topic',
+  secondaryTitle: 'Create topic',
   nextButtonText: 'Next',
   backButtonText: 'Back',
   cancelButtonText: 'Cancel',
@@ -481,5 +500,21 @@ export const createFullPage = prepareStory(Template, {
 export const createFullPageWithSections = prepareStory(TemplateWithSections, {
   args: {
     ...defaultFullPageProps,
+  },
+});
+
+export const createFullPageWithHeader = prepareStory(Template, {
+  args: {
+    ...defaultFullPageProps,
+    title: 'Page title',
+    breadcrumbsOverflowAriaLabel:
+      'Open and close additional breadcrumb item list.',
+    breadcrumbs: [
+      { key: '0', label: 'Breadcrumb 1', href: '/', title: 'home page' },
+      { key: '1', label: 'Breadcrumb 2', href: '/' },
+      { key: '2', label: 'Breadcrumb 3', href: '/' },
+      { key: '3', label: 'Breadcrumb 4', isCurrentPage: true },
+    ],
+    maxVisibleBreadcrumbs: 3,
   },
 });

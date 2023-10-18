@@ -157,7 +157,7 @@ export let Checklist = React.forwardRef(
                 className={`${blockClass}__toggle`}
                 kind="ghost"
                 onClick={handleClickToggle}
-                size="small"
+                size="sm"
               >
                 <ChevronUp size={16} className={cx(`${blockClass}__chevron`)} />
               </Button>
@@ -200,7 +200,7 @@ export let Checklist = React.forwardRef(
                                 onClick={() => {
                                   item.onClick(item);
                                 }}
-                                size="small"
+                                size="sm"
                               >
                                 <div title={item.label}>{item.label}</div>
                               </Button>
@@ -232,7 +232,7 @@ export let Checklist = React.forwardRef(
                     `${blockClass}__view-all`
                   )}
                   onClick={handleClickViewAll}
-                  size="small"
+                  size="sm"
                 >
                   <div>{viewAllLabel}</div>
                 </Button>

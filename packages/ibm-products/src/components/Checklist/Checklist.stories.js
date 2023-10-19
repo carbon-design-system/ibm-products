@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-// TODO: import action to handle events if required.
 import { action } from '@storybook/addon-actions';
 
 import {
@@ -17,6 +16,7 @@ import {
 
 import { Checklist } from '.';
 import styles from './_storybook-styles.scss';
+import DocsPage from './Checklist.docs-page';
 
 const storyClass = 'checklist-stories';
 
@@ -116,6 +116,9 @@ export default {
   },
   parameters: {
     styles,
+    docs: {
+      page: DocsPage,
+    },
     layout: 'padded',
   },
 };

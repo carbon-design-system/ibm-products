@@ -77,14 +77,12 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
   margin-top: $spacing-01;
 }
 
-// open/close toggle, and override Ghost button styling
-.#{$block-class}__toggle.#{c4p-settings.$carbon-prefix}--btn--ghost {
-  width: 30px;
-  min-width: 30px;
-  height: 30px;
-  min-height: 30px;
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
-  padding: to-rem(6px);
+// TOGGLE
+// The <iconbutton> itself (class="...__toggle") is embedded inside two more tags,
+// which do not accept any classnames passed via the <iconbutton>.
+// So, we have to refer to it via it's "tooltip" wrapper element. :/
+.#{$block-class}__header .#{c4p-settings.$carbon-prefix}--tooltip {
+  height: 2rem;
   margin-top: calc(-1 * $spacing-03);
   margin-right: calc(-1 * $spacing-03);
   margin-left: auto;

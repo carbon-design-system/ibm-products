@@ -24,7 +24,7 @@ import uuidv4 from '../../global/js/utils/uuidv4';
 import { pkg } from '../../settings';
 
 // Carbon and package components we use.
-import { Button } from '@carbon/react';
+import { Button, IconButton } from '@carbon/react';
 import { ChevronUp } from '@carbon/react/icons';
 
 import { ChecklistIcon } from './ChecklistIcon';
@@ -55,6 +55,8 @@ const defaults = {
   showToggle: true,
   taskLists: [],
   theme: 'light',
+  toggleLabel: 'Toggle',
+  toggleLabelAlign: 'top',
 };
 
 /**
@@ -77,6 +79,8 @@ export let Checklist = React.forwardRef(
       taskLists = defaults.taskLists,
       theme = defaults.theme,
       title,
+      toggleLabel = defaults.toggleLabel,
+      toggleLabelAlign = defaults.toggleLabelAlign,
       viewAllLabel,
       ...rest
     },
@@ -150,17 +154,19 @@ export let Checklist = React.forwardRef(
             </div>
 
             {showToggle && (
-              <Button
+              <IconButton
+                align={toggleLabelAlign}
                 aria-controls={listContainerId}
                 aria-expanded={isOpen}
                 aria-label={checklistToggleAriaLabel}
                 className={`${blockClass}__toggle`}
                 kind="ghost"
+                label={toggleLabel}
                 onClick={handleClickToggle}
                 size="sm"
               >
                 <ChevronUp size={16} className={cx(`${blockClass}__chevron`)} />
-              </Button>
+              </IconButton>
             )}
           </header>
         )}
@@ -330,6 +336,23 @@ Checklist.propTypes = {
    * The title of the component.
    */
   title: PropTypes.string,
+  /**
+   * The label for the toggle's tooltip.
+   */
+  toggleLabel: PropTypes.string,
+  /**
+   * The alignment of the toggle's tooltip.
+   */
+  toggleLabelAlign: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'right',
+  ]),
   /**
    * If defined, will show and enable the "View all (#)" button at the bottom of the list.
    */

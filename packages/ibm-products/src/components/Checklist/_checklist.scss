@@ -78,7 +78,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 }
 
 // open/close toggle, and override Ghost button styling
-.#{$block-class}__toggle.cds--btn--ghost {
+.#{$block-class}__toggle.#{c4p-settings.$carbon-prefix}--btn--ghost {
   width: 30px;
   min-width: 30px;
   height: 30px;
@@ -105,9 +105,10 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
   transform: rotate(-180deg);
 }
 
-// Button to appear more like a link so it aligns better with the list text
-// Also, override Primary button styling
-.#{$block-class}__button.cds--btn--primary {
+// Button to appear more like a link so it aligns better with the list text.
+// Override Primary button styling to appear more like a link.
+// "Unset" some settings to allow an inner div to enable multiple lines and an ellipsis if req'd.
+.#{$block-class}__button.#{c4p-settings.$carbon-prefix}--btn--primary {
   max-width: none;
   min-height: auto;
   // override bx--btn to allow two-line ellipsis
@@ -121,17 +122,17 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 // The CSS for the Carbon button's label
 // is incompatible with two-line ellipsis,
 // but a div inside a Carbon button works.
-.#{$block-class}__button.cds--btn--primary div {
+.#{$block-class}__button.#{c4p-settings.$carbon-prefix}--btn--primary div {
   @include ellipsis-2-lines();
 }
 
-.#{$block-class}__button.cds--btn--primary:hover {
+.#{$block-class}__button.#{c4p-settings.$carbon-prefix}--btn--primary:hover {
   background: transparent;
   color: $link-primary-hover;
   text-decoration: underline;
 }
 
-.#{$block-class}__button.cds--btn--primary:active {
+.#{$block-class}__button.#{c4p-settings.$carbon-prefix}--btn--primary:active {
   background: transparent;
   color: $text-primary;
   text-decoration: underline;
@@ -166,7 +167,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 
 .#{$block-class}__list-group {
   padding: $spacing-05;
-  border-top: 1px solid $border-subtle;
+  border-top: 1px solid $border-subtle-01;
 }
 
 .#{$block-class}__list-title {
@@ -207,7 +208,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 .#{$block-class}__label--checked,
 .#{$block-class}__label--disabled,
 .#{$block-class}__label--error {
-  color: $text-on-color-disabled;
+  color: $text-placeholder;
 }
 
 .#{$block-class}__footer {

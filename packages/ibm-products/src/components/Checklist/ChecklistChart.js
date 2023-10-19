@@ -20,7 +20,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
-import { pkg /*, carbon */ } from '../../settings';
+import { pkg } from '../../settings';
 import clamp from 'lodash/clamp';
 
 // Carbon and package components we use.

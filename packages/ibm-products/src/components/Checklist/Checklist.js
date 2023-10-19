@@ -25,7 +25,7 @@ import { pkg } from '../../settings';
 
 // Carbon and package components we use.
 import { Button } from '@carbon/react';
-import { ChevronUp } from '@carbon/icons-react';
+import { ChevronUp } from '@carbon/react/icons';
 
 import { ChecklistIcon } from './ChecklistIcon';
 import { ChecklistChart } from './ChecklistChart';
@@ -201,11 +201,12 @@ export let Checklist = React.forwardRef(
                                   item.onClick(item);
                                 }}
                                 size="sm"
+                                title={item.label}
                               >
-                                <div title={item.label}>{item.label}</div>
+                                <div>{item.label}</div>
                               </Button>
                             ) : (
-                              <span
+                              <div
                                 className={cx(
                                   `${blockClass}__label`,
                                   `${blockClass}__label--${item.kind}`
@@ -213,7 +214,7 @@ export let Checklist = React.forwardRef(
                                 title={item.label}
                               >
                                 {item.label}
-                              </span>
+                              </div>
                             )}
                           </li>
                         );

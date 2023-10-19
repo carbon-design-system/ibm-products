@@ -129,7 +129,6 @@ $block-class: #{$pkg-prefix}--status-icon;
         } @else if $icon == running {
           // stylelint-disable-next-line carbon/theme-token-use
           fill: --clr($icon, $theme);
-          transform: scaleY(-1);
         } @else {
           // stylelint-disable-next-line carbon/theme-token-use
           fill: --clr($icon, $theme);

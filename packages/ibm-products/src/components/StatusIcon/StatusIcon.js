@@ -17,8 +17,9 @@ import {
   UnknownFilled,
   CheckmarkFilled,
   InformationSquareFilled,
-  Renew,
-  Time,
+  InProgress,
+  CheckmarkOutline,
+  Pending,
 } from '@carbon/react/icons';
 
 import { getDevtoolsProps } from '../../global/js/utils/devtools';
@@ -153,37 +154,45 @@ export let StatusIcon = forwardRef(
       },
       'in-progress': {
         sm: forwardRef((props, ref) => (
-          <Renew size={16} ref={ref} {...props} />
+          <InProgress size={16} ref={ref} {...props} />
         )),
         md: forwardRef((props, ref) => (
-          <Renew size={20} ref={ref} {...props} />
+          <InProgress size={20} ref={ref} {...props} />
         )),
         lg: forwardRef((props, ref) => (
-          <Renew size={24} ref={ref} {...props} />
+          <InProgress size={24} ref={ref} {...props} />
         )),
         xl: forwardRef((props, ref) => (
-          <Renew size={32} ref={ref} {...props} />
+          <InProgress size={32} ref={ref} {...props} />
         )),
       },
       running: {
         sm: forwardRef((props, ref) => (
-          <Renew size={16} ref={ref} {...props} />
+          <CheckmarkOutline size={16} ref={ref} {...props} />
         )),
         md: forwardRef((props, ref) => (
-          <Renew size={20} ref={ref} {...props} />
+          <CheckmarkOutline size={20} ref={ref} {...props} />
         )),
         lg: forwardRef((props, ref) => (
-          <Renew size={24} ref={ref} {...props} />
+          <CheckmarkOutline size={24} ref={ref} {...props} />
         )),
         xl: forwardRef((props, ref) => (
-          <Renew size={32} ref={ref} {...props} />
+          <CheckmarkOutline size={32} ref={ref} {...props} />
         )),
       },
       pending: {
-        sm: forwardRef((props, ref) => <Time size={16} ref={ref} {...props} />),
-        md: forwardRef((props, ref) => <Time size={20} ref={ref} {...props} />),
-        lg: forwardRef((props, ref) => <Time size={24} ref={ref} {...props} />),
-        xl: forwardRef((props, ref) => <Time size={32} ref={ref} {...props} />),
+        sm: forwardRef((props, ref) => (
+          <Pending size={16} ref={ref} {...props} />
+        )),
+        md: forwardRef((props, ref) => (
+          <Pending size={20} ref={ref} {...props} />
+        )),
+        lg: forwardRef((props, ref) => (
+          <Pending size={24} ref={ref} {...props} />
+        )),
+        xl: forwardRef((props, ref) => (
+          <Pending size={32} ref={ref} {...props} />
+        )),
       },
     };
 

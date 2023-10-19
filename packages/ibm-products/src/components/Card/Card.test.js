@@ -145,6 +145,32 @@ describe(componentName, () => {
     ).toBeVisible();
   });
 
+  it('render productive with disabled buttons', async () => {
+    const { click } = userEvent;
+    const primaryButtonClick = jest.fn();
+    const secondaryButtonClick = jest.fn();
+    const props = {
+      label: 'Label',
+      productive: true,
+      primaryButtonText: 'Ghost button',
+      primaryButtonDisabled: true,
+      onPrimaryButtonClick: primaryButtonClick,
+      actionsPlacement: 'bottom',
+      secondaryButtonText: 'Secondary button',
+      secondaryButtonDisabled: true,
+      onSecondaryButtonClick: secondaryButtonClick,
+    };
+    render(<Card {...props} />);
+    const primaryButtonElement = screen.getByText(/Ghost button/i);
+    const secondaryButtonElement = screen.getByText(/Secondary button/i);
+    expect(primaryButtonElement).toHaveAttribute('disabled');
+    expect(secondaryButtonElement).toHaveAttribute('disabled');
+    await act(() => click(primaryButtonElement));
+    expect(primaryButtonClick).toHaveBeenCalledTimes(0);
+    await act(() => click(secondaryButtonElement));
+    expect(secondaryButtonClick).toHaveBeenCalledTimes(0);
+  });
+
   it('renders productive with overflow', async () => {
     const { click } = userEvent;
     const onClick = jest.fn();

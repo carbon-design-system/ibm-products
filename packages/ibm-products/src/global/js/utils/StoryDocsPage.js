@@ -284,7 +284,7 @@ StoryDocsPage.propTypes = {
        * default language `jsx`
        */
       source: PropTypes.shape({
-        language: PropTypes.oneOf('javascript', 'css', 'jsx', 'json'),
+        language: PropTypes.oneOf(['javascript', 'css', 'jsx', 'json']),
         code: PropTypes.string,
       }),
     })

@@ -8,6 +8,6 @@
 * the equivalent javascript configuration.
 * See https://github.com/carbon-design-system/ibm-products/blob/main/packages/ibm-products/README.md#package-prefix */
 
-@use "@carbon/ibm-products/scss" with (
-  $pkg-prefix: "tst"
+@use '@carbon/ibm-products/scss' with (
+  $pkg-prefix: 'tst'
 );

@@ -244,12 +244,12 @@ StoryDocsPage.propTypes = {
   /**
    * location if any of guidelines on the PAL site, constructed by default
    */
-  altGuidelinesHref: PropTypes.oneOfType(
+  altGuidelinesHref: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(
       PropTypes.shape({ href: PropTypes.string, label: PropTypes.string })
-    )
-  ),
+    ),
+  ]),
   /**
    * Uses component name by default
    */

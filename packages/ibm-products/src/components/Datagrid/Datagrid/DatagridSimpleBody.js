@@ -16,7 +16,7 @@ const DatagridSimpleBody = (datagridState) => {
   const { getTableBodyProps, rows, prepareRow } = datagridState;
   return (
     <TableBody
-      {...getTableBodyProps({ role: false })}
+      {...getTableBodyProps({ role: 'none' })}
       className={cx(
         `${blockClass}__simple-body`,
         getTableBodyProps().className

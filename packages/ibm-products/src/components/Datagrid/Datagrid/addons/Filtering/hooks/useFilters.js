@@ -33,7 +33,7 @@ import OverflowCheckboxes from '../OverflowCheckboxes';
 import { getInitialStateFromFilters } from '../utils';
 
 export const handleCheckboxChange = ({
-  isSelected,
+  checked,
   filtersState,
   column,
   option,
@@ -45,7 +45,7 @@ export const handleCheckboxChange = ({
   const foundCheckbox = checkboxCopy.find(
     (checkbox) => checkbox.value === option.value
   );
-  foundCheckbox.selected = isSelected;
+  foundCheckbox.selected = checked;
   setFiltersState({
     ...filtersState,
     [column]: {
@@ -228,9 +228,9 @@ const useFilters = ({
             <Checkbox
               key={option.id}
               {...option}
-              onChange={(isSelected) => {
+              onChange={(_, { checked }) => {
                 handleCheckboxChange({
-                  isSelected,
+                  checked,
                   filtersState,
                   column,
                   option,

@@ -26,9 +26,9 @@ const OverflowCheckboxes = ({
     <Checkbox
       key={option.labelText}
       {...option}
-      onChange={(isSelected) =>
+      onChange={(_, { checked }) =>
         handleCheckboxChange({
-          isSelected,
+          checked,
           filtersState,
           column,
           option,

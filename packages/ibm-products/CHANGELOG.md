@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.2...@carbon/ibm-products@2.11.3) (2023-10-17)
+
+
+### Bug Fixes
+
+* **Tearsheet:** address Element type issue ([#3621](https://github.com/carbon-design-system/ibm-products/issues/3621)) ([81e07df](https://github.com/carbon-design-system/ibm-products/commit/81e07df5ae4c6804fe47b6b6d47d3a999e0e83bd))
+
+
+
+
+
+## [2.11.2](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.1...@carbon/ibm-products@2.11.2) (2023-10-17)
+
+
+### Bug Fixes
+
+* **Datagrid:** reset col order in tearsheet onClose ([#3578](https://github.com/carbon-design-system/ibm-products/issues/3578)) ([b97cf0f](https://github.com/carbon-design-system/ibm-products/commit/b97cf0f906fc8e441db593e1df391ad4650c0633))
+* **Pattern-Saving:** Reversed the icons for default state (save) and success state(checkmark) ([#3571](https://github.com/carbon-design-system/ibm-products/issues/3571)) ([a5eadfb](https://github.com/carbon-design-system/ibm-products/commit/a5eadfb7d642b027b6e85e889c3934bed03396eb))
+
+
+
+
+
+## [2.11.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.0...@carbon/ibm-products@2.11.1) (2023-10-16)
+
+
+### Bug Fixes
+
+* datagrid actions review fixes ([#3579](https://github.com/carbon-design-system/ibm-products/issues/3579)) ([c9f5e2b](https://github.com/carbon-design-system/ibm-products/commit/c9f5e2bb72008e04ccfe7e6c8f9f2c90b36696f8))
+* **Datagrid:** expander title / aria-label updates ([#3564](https://github.com/carbon-design-system/ibm-products/issues/3564)) ([1bcff24](https://github.com/carbon-design-system/ibm-products/commit/1bcff24517b3d66d369ef6ae4f7759b7a479fabc))
+* **EditTearsheet:** Derive influencer nav items from form titles ([#3583](https://github.com/carbon-design-system/ibm-products/issues/3583)) ([7846c4b](https://github.com/carbon-design-system/ibm-products/commit/7846c4b657b2d0c1a7cb8dcb76bed823d6881fbd)), closes [#3574](https://github.com/carbon-design-system/ibm-products/issues/3574)
+* move dnd kit deps out of dev deps ([#3576](https://github.com/carbon-design-system/ibm-products/issues/3576)) ([a65ed6e](https://github.com/carbon-design-system/ibm-products/commit/a65ed6e1576d970c1feb519c0c1cfae9ede77b5a))
+* to rem usage ([#3570](https://github.com/carbon-design-system/ibm-products/issues/3570)) ([e9f938f](https://github.com/carbon-design-system/ibm-products/commit/e9f938fd236a1c99aa1989773979e43d90b2e77a))
+
+
+
+
+
 # [2.11.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.10.2...@carbon/ibm-products@2.11.0) (2023-10-10)
 
 

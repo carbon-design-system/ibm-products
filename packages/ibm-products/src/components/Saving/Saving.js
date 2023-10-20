@@ -46,7 +46,7 @@ export let Saving = forwardRef(
       default: {
         text: defaultText,
         iconDescription: defaultIconDescription,
-        icon: (props) => <CheckmarkOutline size={16} {...props} />,
+        icon: (props) => <Save size={16} {...props} />,
       },
       ['in-progress']: {
         text: inProgressText,
@@ -56,7 +56,7 @@ export let Saving = forwardRef(
       success: {
         text: successText,
         iconDescription: successIconDescription,
-        icon: (props) => <Save size={16} {...props} />,
+        icon: (props) => <CheckmarkOutline size={16} {...props} />,
       },
       fail: {
         text: failText,

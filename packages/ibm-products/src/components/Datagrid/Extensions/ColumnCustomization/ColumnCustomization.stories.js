@@ -57,6 +57,7 @@ const defaultHeader = [
     Header: 'Row Index',
     accessor: (row, i) => i,
     id: 'rowIndex', // id is required when accessor is a function.
+    sticky: 'left',
   },
   {
     Header: 'First Name',

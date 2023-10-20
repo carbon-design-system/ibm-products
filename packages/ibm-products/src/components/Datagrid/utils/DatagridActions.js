@@ -146,7 +146,7 @@ export const DatagridActions = (datagridState) => {
           size="lg"
           id="columnSearch"
           persistent
-          placeHolderText={searchForAColumn}
+          placeholder={searchForAColumn}
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
         {renderFilterFlyout()}
@@ -202,7 +202,7 @@ export const DatagridActions = (datagridState) => {
           size="xl"
           id="columnSearch"
           persistent
-          placeHolderText={searchForAColumn}
+          placeholder={searchForAColumn}
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
         {renderFilterFlyout()}

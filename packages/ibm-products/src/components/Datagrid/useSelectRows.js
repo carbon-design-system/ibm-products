@@ -76,7 +76,7 @@ const SelectRow = (datagridState) => {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
-  const disabled = isFetching || row.getRowProps().disabled;
+  const selectDisabled = isFetching || row.getRowProps().disabled;
   const { onChange, ...selectProps } = row.getToggleRowSelectedProps();
   const cellProps = cell.getCellProps();
   const isFirstColumnStickyLeft =
@@ -104,7 +104,7 @@ const SelectRow = (datagridState) => {
           isFirstColumnStickyLeft && windowSize > 671,
       })}
       ariaLabel={`${tableId}-row-${row.index}`} // TODO: aria label should be i18n'ed
-      disabled={disabled}
+      disabled={selectDisabled}
     />
   );
 };

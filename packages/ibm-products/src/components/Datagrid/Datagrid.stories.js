@@ -511,7 +511,6 @@ export const BatchActions = () => {
         id: 'delete',
         itemText: 'Delete',
         icon: TrashCan,
-        isDelete: true,
         onClick: action('Clicked row action: delete'),
       },
     ];

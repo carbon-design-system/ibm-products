@@ -32,13 +32,13 @@ const getAriaSortValue = (
   }
   const { isSorted, isSortedDesc } = col || {};
   if (!isSorted) {
-    return defaultSortableLabelText || 'none';
+    return defaultSortableLabelText;
   }
   if (isSorted && !isSortedDesc) {
-    return ascendingSortableLabelText || 'ascending';
+    return ascendingSortableLabelText;
   }
   if (isSorted && isSortedDesc) {
-    return descendingSortableLabelText || 'descending';
+    return descendingSortableLabelText;
   }
 };
 
@@ -72,41 +72,22 @@ const useSortableColumns = (hooks) => {
     };
     const sortableColumns = visibleColumns.map((column) => {
       const icon = (col, props) => {
+        const iconProps = {
+          size: 16,
+          ...props,
+          className: `${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`,
+        };
         if (col?.isSorted) {
           switch (col.isSortedDesc) {
             case false:
-              return (
-                <ArrowUp
-                  size={16}
-                  {...props}
-                  className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
-                />
-              );
+              return <ArrowUp {...iconProps} />;
             case true:
-              return (
-                <ArrowDown
-                  size={16}
-                  {...props}
-                  className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
-                />
-              );
+              return <ArrowDown {...iconProps} />;
             default:
-              return (
-                <ArrowsVertical
-                  size={16}
-                  {...props}
-                  className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
-                />
-              );
+              return <ArrowsVertical {...iconProps} />;
           }
         }
-        return (
-          <ArrowsVertical
-            size={16}
-            {...props}
-            className={`${blockClass}__sortable-icon ${carbon.prefix}--btn__icon`}
-          />
-        );
+        return <ArrowsVertical {...iconProps} />;
       };
       const Header = (headerProp) =>
         column.disableSortBy === true ? (

@@ -5,30 +5,62 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+
+import {
+  BATCH,
+  CHECKBOX,
+  DATE,
+  DROPDOWN,
+  INSTANT,
+  NUMBER,
+  PANEL,
+  RADIO,
+} from '../constants';
 import {
   Checkbox,
   DatePicker,
   DatePickerInput,
   Dropdown,
   FormGroup,
+  Layer,
   NumberInput,
   RadioButton,
   RadioButtonGroup,
-  Layer,
 } from '@carbon/react';
-import {
-  INSTANT,
-  BATCH,
-  DATE,
-  CHECKBOX,
-  NUMBER,
-  RADIO,
-  DROPDOWN,
-  PANEL,
-} from '../constants';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+
+import OverflowCheckboxes from '../OverflowCheckboxes';
 import { getInitialStateFromFilters } from '../utils';
 import { usePreviousValue } from '../../../../../../global/js/hooks';
+
+export const handleCheckboxChange = ({
+  checked,
+  filtersState,
+  column,
+  option,
+  setFiltersState,
+  applyFilters,
+  type,
+}) => {
+  const checkboxCopy = filtersState[column].value;
+  const foundCheckbox = checkboxCopy.find(
+    (checkbox) => checkbox.value === option.value
+  );
+  foundCheckbox.selected = checked;
+  setFiltersState({
+    ...filtersState,
+    [column]: {
+      value: checkboxCopy,
+      type,
+    },
+  });
+  applyFilters({
+    column,
+    value: [...filtersState[column].value],
+    type,
+  });
+  option.onChange?.(checked);
+};
 
 const useFilters = ({
   updateMethod,
@@ -194,6 +226,44 @@ const useFilters = ({
       );
     }
 
+    const renderCheckboxes = () => {
+      if (variation === PANEL && filtersState[column].value.length > 10) {
+        return (
+          <OverflowCheckboxes
+            components={components}
+            type={type}
+            column={column}
+            setFiltersState={setFiltersState}
+            filtersState={filtersState}
+            applyFilters={applyFilters}
+          />
+        );
+      }
+
+      return (
+        <FormGroup {...components.FormGroup}>
+          {filtersState[column].value.map((option) => (
+            <Checkbox
+              key={option.id}
+              {...option}
+              onChange={(_, { checked }) => {
+                handleCheckboxChange({
+                  checked,
+                  filtersState,
+                  column,
+                  option,
+                  setFiltersState,
+                  applyFilters,
+                  type,
+                });
+              }}
+              checked={option.selected}
+            />
+          ))}
+        </FormGroup>
+      );
+    };
+
     switch (type) {
       case DATE:
         filter = (
@@ -243,37 +313,7 @@ const useFilters = ({
         );
         break;
       case CHECKBOX:
-        filter = (
-          <FormGroup {...components.FormGroup}>
-            {filtersState[column].value.map((option) => (
-              <Checkbox
-                key={option.labelText}
-                {...option}
-                onChange={(_, { checked: isSelected }) => {
-                  const checkboxCopy = filtersState[column].value;
-                  const foundCheckbox = checkboxCopy.find(
-                    (checkbox) => checkbox.value === option.value
-                  );
-                  foundCheckbox.selected = isSelected;
-                  setFiltersState({
-                    ...filtersState,
-                    [column]: {
-                      value: checkboxCopy,
-                      type,
-                    },
-                  });
-                  applyFilters({
-                    column,
-                    value: [...filtersState[column].value],
-                    type,
-                  });
-                  option.onChange?.(isSelected);
-                }}
-                checked={option.selected}
-              />
-            ))}
-          </FormGroup>
-        );
+        filter = renderCheckboxes();
         break;
       case RADIO:
         filter = (

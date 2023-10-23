@@ -27,7 +27,7 @@ import {
   RadioButton,
   RadioButtonGroup,
 } from '@carbon/react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import OverflowCheckboxes from '../OverflowCheckboxes';
 import { getInitialStateFromFilters } from '../utils';
@@ -59,7 +59,7 @@ export const handleCheckboxChange = ({
     value: [...filtersState[column].value],
     type,
   });
-  option.onChange?.(isSelected);
+  option.onChange?.(checked);
 };
 
 const useFilters = ({

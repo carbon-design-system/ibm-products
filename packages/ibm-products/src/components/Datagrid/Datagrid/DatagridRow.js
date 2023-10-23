@@ -111,7 +111,7 @@ const DatagridRow = (datagridState) => {
     <>
       <TableRow
         className={rowClassNames}
-        {...row.getRowProps({ role: 'none' })}
+        {...row.getRowProps()}
         key={row.id}
         onMouseEnter={hoverHandler}
         onMouseLeave={handleMouseLeave}
@@ -120,7 +120,7 @@ const DatagridRow = (datagridState) => {
         onKeyUp={handleOnKeyUp}
       >
         {row.cells.map((cell, index) => {
-          const cellProps = cell.getCellProps({ role: 'none' });
+          const cellProps = cell.getCellProps();
           const { children, ...restProps } = cellProps;
           const content = children || (
             <>

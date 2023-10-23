@@ -12,16 +12,12 @@ import {
 import styles from './_storybook-styles.scss';
 import { EditTearsheet } from './EditTearsheet';
 import DocsPage from './EditTearsheet.docs-page';
-import { EditTearsheetForm } from './EditTearsheetForm';
 import { MultiFormEditTearsheet } from './preview-components/MultiFormEditTearsheet';
 
 export default {
   title: getStoryTitle(EditTearsheet.displayName),
   component: EditTearsheet,
   tags: ['autodocs'],
-  subcomponents: {
-    EditTearsheetForm,
-  },
   argTypes: {
     description: { control: { type: 'text' } },
     label: { control: { type: 'text' } },

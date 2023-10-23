@@ -24,7 +24,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { getChildText } from '../../../utils/getChildText';
+import { getNodeTextContent } from '../../../../../global/js/utils/getNodeTextContent';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 const matchedColsById = (col1, col2) => col1 && col2 && col1.id === col2.id;
@@ -41,15 +41,15 @@ export const DraggableItemsList = ({
   const visibleCols = columns
     // hide the columns without Header, e.g the sticky actions, spacer
     .filter((colDef) => {
-      return !!getChildText(colDef.Header);
+      return !!getNodeTextContent(colDef.Header);
     })
     .filter(Boolean)
     .filter((colDef) => !colDef.isAction)
+    .filter((colDef) => colDef.id !== 'spacer')
     .filter((colDef) => {
       return (
         filterString.length === 0 ||
-        (getChildText(colDef.Header)?.toLowerCase().includes(filterString) &&
-          colDef.id !== 'spacer')
+        getNodeTextContent(colDef.Header)?.toLowerCase().includes(filterString)
       );
     });
 
@@ -82,7 +82,9 @@ export const DraggableItemsList = ({
       matchedColsById(col, over)
     );
 
-    const colTitle = getChildText(updatedDragCols[fromVisibleIndex].Header);
+    const colTitle = getNodeTextContent(
+      updatedDragCols[fromVisibleIndex].Header
+    );
 
     setAriaRegionText(
       `${colTitle} dropped. New position ${toVisibleIndex + 1} of ${
@@ -102,7 +104,7 @@ export const DraggableItemsList = ({
     const fromIndex = updatedDragCols.findIndex((col) =>
       matchedColsById(col, active)
     );
-    const colTitle = getChildText(updatedDragCols[fromIndex].Header);
+    const colTitle = getNodeTextContent(updatedDragCols[fromIndex].Header);
 
     setAriaRegionText(
       `${colTitle} grabbed. Current position ${fromIndex + 1} of ${
@@ -121,7 +123,7 @@ export const DraggableItemsList = ({
       matchedColsById(col, over)
     );
 
-    const colTitle = getChildText(updatedDragCols[fromIndex].Header);
+    const colTitle = getNodeTextContent(updatedDragCols[fromIndex].Header);
 
     setAriaRegionText(
       `${colTitle} grabbed. Original position ${fromIndex + 1}, new position ${
@@ -200,7 +202,7 @@ export const DraggableItemsList = ({
           strategy={verticalListSortingStrategy}
         >
           {visibleCols.map((colDef) => {
-            const colHeaderTitle = getChildText(colDef.Header);
+            const colHeaderTitle = getNodeTextContent(colDef.Header);
             const searchString = new RegExp('(' + filterString + ')');
             const res = filterString.length
               ? colHeaderTitle.toLowerCase().split(searchString)

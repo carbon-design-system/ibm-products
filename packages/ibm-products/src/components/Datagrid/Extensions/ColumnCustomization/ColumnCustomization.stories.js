@@ -20,8 +20,6 @@ import {
   useColumnOrder,
   useStickyColumn,
   useActionsColumn,
-  useSelectRows,
-  useSortableColumns,
 } from '../../index';
 import styles from '../../_storybook-styles.scss';
 import { DocsPage } from './ColumnCustomization.docs-page';
@@ -208,9 +206,7 @@ const ColumnCustomizationUsage = ({ ...args }) => {
       ...args.defaultGridProps,
     },
     useCustomizeColumns,
-    useColumnOrder,
-    useSelectRows,
-    useSortableColumns
+    useColumnOrder
   );
 
   // Warnings are ordinarily silenced in storybook, add this to test

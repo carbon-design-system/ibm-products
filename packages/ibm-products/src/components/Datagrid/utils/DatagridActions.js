@@ -178,7 +178,6 @@ export const DatagridActions = (datagridState) => {
         <RowSizeDropdown {...rowSizeDropdownProps} />
         <MenuButton
           label="Primary button"
-          renderIcon={ChevronDown}
           className={`${blockClass}__toolbar-options`}
         >
           <MenuItem

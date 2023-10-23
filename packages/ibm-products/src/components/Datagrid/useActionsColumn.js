@@ -84,7 +84,6 @@ const useActionsColumn = (hooks) => {
                               {...rest}
                               align={align || 'top'}
                               renderIcon={icon}
-                              light
                               iconDescription={itemText}
                               kind="ghost"
                               className={cx({
@@ -110,7 +109,6 @@ const useActionsColumn = (hooks) => {
                       <OverflowMenu
                         align="top-right"
                         size="sm"
-                        light
                         flipped
                         onClick={(e) => {
                           e.stopPropagation();

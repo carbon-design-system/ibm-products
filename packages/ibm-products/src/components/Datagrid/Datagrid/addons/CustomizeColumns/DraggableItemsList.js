@@ -40,9 +40,7 @@ export const DraggableItemsList = ({
   const draggableClass = `${blockClass}__draggable-item`;
   const visibleCols = columns
     // hide the columns without Header, e.g the sticky actions, spacer
-    .filter((colDef) => {
-      return !!getNodeTextContent(colDef.Header);
-    })
+    .filter((colDef) => getNodeTextContent(colDef.Header).trim().length !== 0)
     .filter(Boolean)
     .filter((colDef) => !colDef.isAction)
     .filter((colDef) => colDef.id !== 'spacer')

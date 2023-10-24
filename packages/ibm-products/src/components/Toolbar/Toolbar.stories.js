@@ -44,9 +44,6 @@ export default {
   title: getStoryTitle(Toolbar.displayName),
   component: Toolbar,
   tags: ['autodocs'],
-
-  subcomponents: { ToolbarGroup, ToolbarButton },
-
   parameters: {
     docs: {
       page: DocsPage,

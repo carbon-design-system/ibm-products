@@ -40,7 +40,6 @@ import {
 } from '@carbon/react/icons';
 import cx from 'classnames';
 
-import { ActionBarItem } from '../ActionBar';
 import { PageHeader } from './PageHeader';
 
 import {
@@ -399,7 +398,6 @@ export default {
   title: getStoryTitle(PageHeader.displayName),
   component: PageHeader,
   tags: ['autodocs'],
-  subcomponents: { ActionBarItem },
   parameters: { styles, layout: 'fullscreen' /* docs: { page: mdx } */ },
   decorators: [
     (story, { args }) => (

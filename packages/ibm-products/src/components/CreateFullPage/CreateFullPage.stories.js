@@ -48,7 +48,6 @@ export default {
   title: getStoryTitle(CreateFullPage.displayName),
   component: CreateFullPage,
   tags: ['autodocs'],
-  subcomponents: { CreateFullPageStep },
   parameters: {
     styles,
     layout: 'fullscreen',

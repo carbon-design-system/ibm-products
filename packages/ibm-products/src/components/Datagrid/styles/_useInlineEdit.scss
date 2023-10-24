@@ -112,7 +112,6 @@ $row-heights: (
     display: none;
   }
 
-  /* stylelint-disable-next-line */
   &:hover,
   &.#{$block-class}__inline-edit-button--active {
     .#{$block-class}__inline-edit-button-icon {

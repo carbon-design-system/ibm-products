@@ -33,13 +33,13 @@ const getAriaSortValue = (
   }
   const { isSorted, isSortedDesc } = col || {};
   if (!isSorted) {
-    return defaultSortableLabelText || 'none';
+    return defaultSortableLabelText;
   }
   if (isSorted && !isSortedDesc) {
-    return ascendingSortableLabelText || 'ascending';
+    return ascendingSortableLabelText;
   }
   if (isSorted && isSortedDesc) {
-    return descendingSortableLabelText || 'descending';
+    return descendingSortableLabelText;
   }
 };
 

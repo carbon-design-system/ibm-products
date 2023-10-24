@@ -108,18 +108,15 @@ $row-heights: (
     justify-content: flex-start;
   }
   // Always show renderIcon if inline edit columns are less than half of total columns
-  &:not(
-      .#{$block-class}__inline-edit-button--edit-less-than-half-of-total-cols
-    ) {
-    .#{$block-class}__inline-edit-button-icon {
-      display: none;
-    }
+  .#{$block-class}__inline-edit-button-icon {
+    display: none;
+  }
 
-    /* stylelint-disable-next-line */
-    &:hover {
-      .#{$block-class}__inline-edit-button-icon {
-        display: block;
-      }
+  /* stylelint-disable-next-line */
+  &:hover,
+  &.#{$block-class}__inline-edit-button--active {
+    .#{$block-class}__inline-edit-button-icon {
+      display: block;
     }
   }
 }

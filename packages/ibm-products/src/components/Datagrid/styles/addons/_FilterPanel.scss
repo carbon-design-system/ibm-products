@@ -135,3 +135,7 @@
   border-right: 1px solid $layer-accent-01;
   border-bottom: none;
 }
+
+.#{c4p-settings.$carbon-prefix}--btn.#{$block-class}-filter-panel__view-all-button {
+  margin-left: -$spacing-05;
+}

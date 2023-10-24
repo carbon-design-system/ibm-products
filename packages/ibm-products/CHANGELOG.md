@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.12.0...@carbon/ibm-products@2.12.1) (2023-10-24)
+
+
+### Bug Fixes
+
+* **CreateFullPage:** fix back button in full page ([#3677](https://github.com/carbon-design-system/ibm-products/issues/3677)) ([31f2a64](https://github.com/carbon-design-system/ibm-products/commit/31f2a64d19182b5196d4ff210060c36d27e31dda))
+* **Datagrid:** address issues with current approach to getting col titles for customize columns tearsheet ([#3669](https://github.com/carbon-design-system/ibm-products/issues/3669)) ([e9534a6](https://github.com/carbon-design-system/ibm-products/commit/e9534a6ac2cfcdd66c0a37f60482c14337bcf259))
+* **Datagrid:** do not always show edit icons ([#3674](https://github.com/carbon-design-system/ibm-products/issues/3674)) ([14684b8](https://github.com/carbon-design-system/ibm-products/commit/14684b871b172fceedc728cf3e4e1e11ad2dd6b0))
+* remove 'subcomponents' from storybook settings ([#3668](https://github.com/carbon-design-system/ibm-products/issues/3668)) ([2113ac4](https://github.com/carbon-design-system/ibm-products/commit/2113ac4b2bbda6d8df4d17fac80836d1dd57e841))
+* Storybook console error 'role=boolean' ([#3660](https://github.com/carbon-design-system/ibm-products/issues/3660)) ([35dfa96](https://github.com/carbon-design-system/ibm-products/commit/35dfa961d465abc3aa68fd7e40eccc80d0d30bf6))
+* Storybook warning "selectDisabled is not a valid prop for a DOM element" ([#3666](https://github.com/carbon-design-system/ibm-products/issues/3666)) ([1091875](https://github.com/carbon-design-system/ibm-products/commit/1091875d1bfbfa8b0c9cdfe46ea2ce2959999fad))
+
+
+
+
+
 # [2.12.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.3...@carbon/ibm-products@2.12.0) (2023-10-24)
 
 

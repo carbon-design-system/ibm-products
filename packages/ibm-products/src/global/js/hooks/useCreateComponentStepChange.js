@@ -79,10 +79,7 @@ export const useCreateComponentStepChange = ({
       }
     };
     const handlePrevious = async () => {
-      if (componentName === 'CreateFullPage') {
-        return;
-      }
-      setLoadingPrevious(true);
+      setLoadingPrevious?.(true);
       if (typeof onPrevious === 'function') {
         try {
           await onPrevious();

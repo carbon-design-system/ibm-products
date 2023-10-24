@@ -10701,6 +10701,16 @@ fieldset[disabled] .bx--form__helper-text {
   overflow-x: auto;
 }
 
+.bx--data-table-content:focus {
+  outline: 2px solid var(--cds-focus, #ffffff);
+  outline-offset: -2px;
+}
+@media screen and (prefers-contrast) {
+  .bx--data-table-content:focus {
+    outline-style: dotted;
+  }
+}
+
 .bx--data-table-header {
   padding: var(--cds-spacing-05, 1rem) 0 var(--cds-spacing-06, 1.5rem) var(--cds-spacing-05, 1rem);
   background: var(--cds-layer, #262626);
@@ -25057,25 +25067,10 @@ optgroup.bx--select-optgroup:disabled,
 .bx--snippet--multi .bx--snippet-container pre {
   padding-right: 2.5rem;
   padding-bottom: 1.5rem;
-  overflow-x: auto;
 }
 
 .bx--snippet--multi.bx--snippet--no-copy .bx--snippet-container pre {
   padding-right: 0;
-}
-
-.bx--snippet--multi.bx--snippet--expand .bx--snippet-container pre {
-  overflow-x: auto;
-}
-
-.bx--snippet--multi .bx--snippet-container pre::after {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 1rem;
-  height: 100%;
-  background-image: linear-gradient(to right, rgba(var(--cds-field-01, #262626), 0), var(--cds-field-01, #262626));
-  content: "";
 }
 
 .bx--snippet--multi .bx--snippet-container pre code {

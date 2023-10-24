@@ -179,7 +179,7 @@ export const dataSpreadsheet = prepareStory(Template, {
 export const largeDatasetSpreadsheet = prepareStory(LargeTemplate, {
   storyName: 'Large dataset',
   args: {
-    cellSize: 'large',
+    cellSize: 'lg',
     selectAllAriaLabel: 'Select all',
     spreadsheetAriaLabel: 'Example data spreadsheet',
   },

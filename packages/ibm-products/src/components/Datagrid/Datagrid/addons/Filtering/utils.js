@@ -36,11 +36,12 @@ export const getInitialStateFromFilters = (
   const setInitialState = ({ type, column, props }) => {
     if (type === CHECKBOX) {
       initialFilterState[column] = {
-        value: props.Checkbox.map(({ id, labelText, value }) => ({
+        value: props.Checkbox.map(({ id, labelText, value, ...rest }) => ({
           id,
           labelText,
           value,
           selected: false,
+          ...rest,
         })),
         type,
       };

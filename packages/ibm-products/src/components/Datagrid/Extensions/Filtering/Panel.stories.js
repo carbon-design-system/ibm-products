@@ -6,21 +6,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Datagrid, useDatagrid, useFiltering } from '../../index';
 import React, { useState } from 'react';
-import { Add } from '@carbon/react/icons';
-import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
-import { Datagrid, useDatagrid, useFiltering } from '../../index';
-import styles from '../../_storybook-styles.scss';
-import { DocsPage } from './Filtering.docs-page';
-import { makeData } from '../../utils/makeData';
+
 import { ARG_TYPES } from '../../utils/getArgTypes';
+import { Add } from '@carbon/react/icons';
 import { DatagridActions } from '../../utils/DatagridActions';
+import { DocsPage } from './Filtering.docs-page';
 import { StatusIcon } from '../../../StatusIcon';
+import { action } from '@storybook/addon-actions';
+import { makeData } from '../../utils/makeData';
 import { pkg } from '../../../../settings';
+import styles from '../../_storybook-styles.scss';
 
 export default {
   title: `${getStoryTitle(Datagrid.displayName)}/Extensions/Panel`,
@@ -39,6 +40,16 @@ export default {
     },
   },
 };
+
+// This is to show off the View all button in checkboxes
+const dummyCheckboxes = Array(25)
+  .fill(null)
+  .map((_, index) => ({
+    id: `${index}`,
+    labelText: `Dummy checkbox ${index + 1}`,
+    value: 'dummy-checkbox',
+    disabled: true,
+  }));
 
 const getBatchActions = () => {
   return [
@@ -1187,6 +1198,169 @@ export const PanelNoData = prepareStory(FilteringTemplateWrapper, {
                       labelText: 'Critical',
                       value: 'critical',
                     },
+                  ],
+                },
+              },
+            },
+          ],
+        },
+      ],
+      onPanelOpen: action('onPanelOpen'),
+      onPanelClose: action('onPanelClose'),
+      panelTitle: 'Filter',
+    },
+  },
+});
+
+export const PanelManyCheckboxes = prepareStory(FilteringTemplateWrapper, {
+  storyName: 'Filter panel with many checkboxes',
+  argTypes: {
+    gridTitle: ARG_TYPES.gridTitle,
+    gridDescription: ARG_TYPES.gridDescription,
+    useDenseHeader: ARG_TYPES.useDenseHeader,
+    filterProps: ARG_TYPES.filterProps,
+  },
+  args: {
+    featureFlags: ['Datagrid.useFiltering'],
+    gridTitle: 'Data table title',
+    gridDescription: 'Additional information if needed',
+    useDenseHeader: false,
+    emptyStateTitle: 'No filters match',
+    emptyStateDescription:
+      'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
+    filterProps: {
+      variation: 'panel',
+      updateMethod: 'instant',
+      primaryActionLabel: 'Apply',
+      secondaryActionLabel: 'Cancel',
+      panelIconDescription: `Open filters`,
+      closeIconDescription: 'Close panel',
+      sections: [
+        {
+          categoryTitle: 'Category title',
+          hasAccordion: true,
+          filters: [
+            {
+              filterLabel: 'Joined',
+              filter: {
+                type: 'date',
+                column: 'joined',
+                props: {
+                  DatePicker: {
+                    datePickerType: 'range',
+                  },
+                  DatePickerInput: {
+                    start: {
+                      id: 'date-picker-input-id-start',
+                      placeholder: 'mm/dd/yyyy',
+                      labelText: 'Joined start date',
+                    },
+                    end: {
+                      id: 'date-picker-input-id-end',
+                      placeholder: 'mm/dd/yyyy',
+                      labelText: 'Joined end date',
+                    },
+                  },
+                },
+              },
+            },
+            {
+              filterLabel: 'Status',
+              filter: {
+                type: 'dropdown',
+                column: 'status',
+                props: {
+                  Dropdown: {
+                    id: 'marital-status-dropdown',
+                    ariaLabel: 'Marital status dropdown',
+                    items: ['relationship', 'complicated', 'single'],
+                    label: 'Marital status',
+                    titleText: 'Marital status',
+                  },
+                },
+              },
+            },
+          ],
+        },
+        {
+          categoryTitle: 'Category title',
+          filters: [
+            {
+              filterLabel: 'Role',
+              filter: {
+                type: 'radio',
+                column: 'role',
+                props: {
+                  FormGroup: {
+                    legendText: 'Role',
+                  },
+                  RadioButtonGroup: {
+                    orientation: 'vertical',
+                    legend: 'Role legend',
+                    name: 'role-radio-button-group',
+                  },
+                  RadioButton: [
+                    {
+                      id: 'developer',
+                      labelText: 'Developer',
+                      value: 'developer',
+                    },
+                    {
+                      id: 'designer',
+                      labelText: 'Designer',
+                      value: 'designer',
+                    },
+                    {
+                      id: 'researcher',
+                      labelText: 'Researcher',
+                      value: 'researcher',
+                    },
+                  ],
+                },
+              },
+            },
+            {
+              filterLabel: 'Visits',
+              filter: {
+                type: 'number',
+                column: 'visits',
+                props: {
+                  NumberInput: {
+                    min: 0,
+                    id: 'visits-number-input',
+                    invalidText: 'A valid value is required',
+                    label: 'Visits',
+                    placeholder: 'Type a number amount of visits',
+                  },
+                },
+              },
+            },
+            {
+              filterLabel: 'Password strength',
+              filter: {
+                type: 'checkbox',
+                column: 'passwordStrength',
+                props: {
+                  FormGroup: {
+                    legendText: 'Password strength',
+                  },
+                  Checkbox: [
+                    {
+                      id: 'normal',
+                      labelText: 'Normal',
+                      value: 'normal',
+                    },
+                    {
+                      id: 'minor-warning',
+                      labelText: 'Minor warning',
+                      value: 'minor-warning',
+                    },
+                    {
+                      id: 'critical',
+                      labelText: 'Critical',
+                      value: 'critical',
+                    },
+                    ...dummyCheckboxes,
                   ],
                 },
               },

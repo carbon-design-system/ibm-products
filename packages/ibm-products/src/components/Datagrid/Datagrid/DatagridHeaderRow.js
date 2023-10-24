@@ -115,7 +115,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
 
   return (
     <TableRow
-      {...headerGroup.getHeaderGroupProps({ role: false })}
+      {...headerGroup.getHeaderGroupProps()}
       className={cx(
         `${blockClass}__head`,
         headerGroup.getHeaderGroupProps().className

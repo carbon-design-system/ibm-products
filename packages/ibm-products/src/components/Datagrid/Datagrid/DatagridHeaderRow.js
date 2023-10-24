@@ -12,18 +12,18 @@ import { TableHeader, TableRow } from '@carbon/react';
 import { px } from '@carbon/layout';
 import { selectionColumnId } from '../common-column-ids';
 import { pkg } from '../../../settings';
-import getColTitle from '../utils/getColTitle';
 import {
   handleColumnResizeEndEvent,
   handleColumnResizeStartEvent,
   handleColumnResizingEvent,
 } from './addons/stateReducer';
+import { getNodeTextContent } from '../../../global/js/utils/getNodeTextContent';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const getAccessibilityProps = (header) => {
   const props = {};
-  const title = getColTitle(header);
+  const title = getNodeTextContent(header.Header);
   if (title) {
     props.title = title;
   } else {
@@ -115,7 +115,7 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
 
   return (
     <TableRow
-      {...headerGroup.getHeaderGroupProps({ role: false })}
+      {...headerGroup.getHeaderGroupProps()}
       className={cx(
         `${blockClass}__head`,
         headerGroup.getHeaderGroupProps().className

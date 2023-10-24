@@ -408,6 +408,9 @@ const datagridState = useDatagrid(
   {
     columns,
     data,
+    ascendingSortableLabelText: 'none',
+    descendingSortableLabelText: 'ascending',
+    defaultSortableLabelText: 'descending',
   },
   useSortableColumns
 );

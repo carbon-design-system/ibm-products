@@ -13,7 +13,7 @@ const useDisableSelectRows = (hooks) => {
   const getRowProps = (props, { row, instance }) => [
     props,
     {
-      selectDisabled:
+      disabled:
         instance.shouldDisableSelectRow && instance.shouldDisableSelectRow(row),
     },
   ];

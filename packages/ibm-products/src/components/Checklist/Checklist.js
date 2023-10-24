@@ -60,9 +60,10 @@ const defaults = {
 };
 
 /**
- * The checklist component displays a list of items users should
- * complete (e.g. tasks, walkthroughs, etc.) in order to learn about
- * and/or onboard to a product.
+ * The Checklist tracks a user's progress much like Your Learning or
+ * WalkMe. Each item in the list can be clickable, and each item has
+ * an icon that defines the item's state as "not started", "in progress",
+ * and "complete".
  */
 export let Checklist = React.forwardRef(
   (

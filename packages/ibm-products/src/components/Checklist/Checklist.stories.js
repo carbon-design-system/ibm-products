@@ -109,6 +109,7 @@ const chartValue = numTasksCompleted / numTasks;
 export default {
   title: getStoryTitle(Checklist.displayName),
   component: Checklist,
+  tags: ['autodocs'],
   argTypes: {
     theme: {
       control: { type: null },

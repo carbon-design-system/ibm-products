@@ -10,6 +10,7 @@ import cx from 'classnames';
 import { pkg, carbon } from '../../settings';
 import { Button } from '@carbon/react';
 import { ArrowUp, ArrowDown, ArrowsVertical } from '@carbon/react/icons';
+import { SelectAll } from './Datagrid/DatagridSelectAll';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -109,8 +110,12 @@ const useSortableColumns = (hooks) => {
         );
       };
       const Header = (headerProp) =>
-        column.disableSortBy === true ? (
-          column.Header
+        column.disableSortBy === true || column.id === 'datagridSelection' ? (
+          column.disableSortBy ? (
+            column.Header
+          ) : (
+            <SelectAll {...instance} />
+          )
         ) : (
           <Button
             aria-sort={getAriaSortValue(headerProp?.column, {

@@ -47,7 +47,7 @@ export const DraggableItemsList = ({
     .filter((colDef) => {
       return (
         filterString.length === 0 ||
-        getNodeTextContent(colDef.Header)?.toLowerCase().includes(filterString)
+        getNodeTextContent(colDef.Header).toLowerCase().includes(filterString)
       );
     });
 

@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.12.0...@carbon/ibm-products@2.12.1) (2023-10-24)
+
+
+### Bug Fixes
+
+* **CreateFullPage:** fix back button in full page ([#3677](https://github.com/carbon-design-system/ibm-products/issues/3677)) ([31f2a64](https://github.com/carbon-design-system/ibm-products/commit/31f2a64d19182b5196d4ff210060c36d27e31dda))
+* **Datagrid:** address issues with current approach to getting col titles for customize columns tearsheet ([#3669](https://github.com/carbon-design-system/ibm-products/issues/3669)) ([e9534a6](https://github.com/carbon-design-system/ibm-products/commit/e9534a6ac2cfcdd66c0a37f60482c14337bcf259))
+* **Datagrid:** do not always show edit icons ([#3674](https://github.com/carbon-design-system/ibm-products/issues/3674)) ([14684b8](https://github.com/carbon-design-system/ibm-products/commit/14684b871b172fceedc728cf3e4e1e11ad2dd6b0))
+* remove 'subcomponents' from storybook settings ([#3668](https://github.com/carbon-design-system/ibm-products/issues/3668)) ([2113ac4](https://github.com/carbon-design-system/ibm-products/commit/2113ac4b2bbda6d8df4d17fac80836d1dd57e841))
+* Storybook console error 'role=boolean' ([#3660](https://github.com/carbon-design-system/ibm-products/issues/3660)) ([35dfa96](https://github.com/carbon-design-system/ibm-products/commit/35dfa961d465abc3aa68fd7e40eccc80d0d30bf6))
+* Storybook warning "selectDisabled is not a valid prop for a DOM element" ([#3666](https://github.com/carbon-design-system/ibm-products/issues/3666)) ([1091875](https://github.com/carbon-design-system/ibm-products/commit/1091875d1bfbfa8b0c9cdfe46ea2ce2959999fad))
+
+
+
+
+
+# [2.12.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.3...@carbon/ibm-products@2.12.0) (2023-10-24)
+
+
+### Bug Fixes
+
+* **ButtonMenu:** a11y timing out ([#3661](https://github.com/carbon-design-system/ibm-products/issues/3661)) ([eaaa6be](https://github.com/carbon-design-system/ibm-products/commit/eaaa6be94284d54991c0fdef6382579340103ecd))
+* Card CSS typo ([#3629](https://github.com/carbon-design-system/ibm-products/issues/3629)) ([5d9d5f8](https://github.com/carbon-design-system/ibm-products/commit/5d9d5f820cf632bb01f4e97fe11eac3b81557a78))
+* console error 'future React will block javascript: URLs' ([#3652](https://github.com/carbon-design-system/ibm-products/issues/3652)) ([f40d0c1](https://github.com/carbon-design-system/ibm-products/commit/f40d0c13efdcb17df0468b0de0852c2ee063132d))
+* console error 'Invalid argument supplied to oneOf(...), oneOfType(...)' ([#3651](https://github.com/carbon-design-system/ibm-products/issues/3651)) ([c5557e8](https://github.com/carbon-design-system/ibm-products/commit/c5557e810e92c2e36fac4209443295ab7827c858))
+* **create-full-page:** header extensions ([#3488](https://github.com/carbon-design-system/ibm-products/issues/3488)) ([42c16bf](https://github.com/carbon-design-system/ibm-products/commit/42c16bf2b7028c0488ce3afbe89a6ddd77f174f3))
+* **Datagrid:** add disabled/locked col drag functionality back ([#3598](https://github.com/carbon-design-system/ibm-products/issues/3598)) ([b36deb7](https://github.com/carbon-design-system/ibm-products/commit/b36deb710d0a72d015b087d8bff85e0b37ce3fa7))
+* **status icon:** updated icons ([#3482](https://github.com/carbon-design-system/ibm-products/issues/3482)) ([b5e5729](https://github.com/carbon-design-system/ibm-products/commit/b5e5729492859cedf8c45e97c560dbcd3e23938a))
+* Storybook error 'Invalid prop cellSize' ([#3653](https://github.com/carbon-design-system/ibm-products/issues/3653)) ([dd9f116](https://github.com/carbon-design-system/ibm-products/commit/dd9f11600055bb31e98667016a3f2515b30eda57))
+* Storybook error 'isDelete is not a DOM element' ([#3657](https://github.com/carbon-design-system/ibm-products/issues/3657)) ([f31a9af](https://github.com/carbon-design-system/ibm-products/commit/f31a9af27c23d32332682a3453829196993d1d8c))
+* Storybook error 'placeHolderText is not a DOM element' ([#3654](https://github.com/carbon-design-system/ibm-products/issues/3654)) ([d2cbb1a](https://github.com/carbon-design-system/ibm-products/commit/d2cbb1accc0c8fc057d4cf6cec82a5bb059ab9b6))
+* Storybook error "renderIcon is not a DOM element" ([#3656](https://github.com/carbon-design-system/ibm-products/issues/3656)) ([1b146e2](https://github.com/carbon-design-system/ibm-products/commit/1b146e2a741aa1d0916a9bf5de2ea1a9c90a814e))
+* Storybook warning 'light prop is deprecated' ([#3658](https://github.com/carbon-design-system/ibm-products/issues/3658)) ([f483d56](https://github.com/carbon-design-system/ibm-products/commit/f483d560ed006eba78475eea33a849f122fc7b51))
+
+
+### Features
+
+* **Datagrid:** adds view all feature for checkboxes ([#3560](https://github.com/carbon-design-system/ibm-products/issues/3560)) ([821c232](https://github.com/carbon-design-system/ibm-products/commit/821c2322f58cabe1c78f1866f318c8fd54eb12b0))
+* **Datagrid:** remove filter tags individually from `FilterSummary` ([#3582](https://github.com/carbon-design-system/ibm-products/issues/3582)) ([ad74bc6](https://github.com/carbon-design-system/ibm-products/commit/ad74bc65502e3c59d8a3cad6b19abfce6a1d98dd))
+
+
+
+
+
 ## [2.11.3](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.11.2...@carbon/ibm-products@2.11.3) (2023-10-17)
 
 

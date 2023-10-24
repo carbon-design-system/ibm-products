@@ -41,7 +41,6 @@ export default {
   title: getStoryTitle(EditFullPage.displayName),
   component: EditFullPage,
   tags: ['autodocs'],
-  subcomponents: { CreateFullPageStep },
   parameters: {
     styles,
     layout: 'fullscreen',

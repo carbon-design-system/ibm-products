@@ -42,6 +42,10 @@ export const getNodeTextContent = (node) => {
       return '';
     }
 
+    case 'function': {
+      return getNodeTextContent(node());
+    }
+
     default:
       // Ignore all other JavaScript types.
       return '';

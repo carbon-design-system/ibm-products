@@ -7,30 +7,31 @@
 
 /* eslint-disable react/jsx-key */
 
-import React, { useRef, useMemo, useContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Accordion, AccordionItem, Button, Search, Layer } from '@carbon/react';
-import { rem } from '@carbon/layout';
-import { pkg } from '../../../../../settings';
+import { Accordion, AccordionItem, Button, Layer, Search } from '@carbon/react';
 import { BATCH, CLEAR_FILTERS, INSTANT, PANEL } from './constants';
-import cx from 'classnames';
-import { motion } from 'framer-motion';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  panelVariants,
-  innerContainerVariants,
   actionSetVariants,
+  innerContainerVariants,
+  panelVariants,
 } from './motion/variants';
-import { Close } from '@carbon/react/icons';
-import { ActionSet } from '../../../../ActionSet';
-import { FilterContext } from '.';
 import {
   useFilters,
-  useSubscribeToEventEmitter,
   useShouldDisableButtons,
+  useSubscribeToEventEmitter,
 } from './hooks';
 
+import { ActionSet } from '../../../../ActionSet';
+import { Close } from '@carbon/react/icons';
+import { FilterContext } from '.';
+import PropTypes from 'prop-types';
+import cx from 'classnames';
+import { motion } from 'framer-motion';
+import { pkg } from '../../../../../settings';
+import { rem } from '@carbon/layout';
+
 const blockClass = `${pkg.prefix}--datagrid`;
-const componentClass = `${blockClass}-filter-panel`;
+export const componentClass = `${blockClass}-filter-panel`;
 
 const MotionActionSet = motion(ActionSet);
 

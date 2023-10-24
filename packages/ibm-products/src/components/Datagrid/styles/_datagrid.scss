@@ -360,8 +360,7 @@
 .#{$block-class}__simple-body {
   position: relative;
   display: table;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden auto;
   //makes thin scrollbar in chrome and firefox
   scrollbar-width: thin;
 }

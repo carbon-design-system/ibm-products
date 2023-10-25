@@ -190,6 +190,7 @@ const FilteringUsage = ({ defaultGridProps }) => {
   // Warnings are ordinarily silenced in storybook, add this to test
   pkg._silenceWarnings(false);
   // Enable feature flag for `useFiltering` hook
+  pkg.feature['Datagrid.useActionsColumn'] = true;
   pkg.feature['Datagrid.useFiltering'] = true;
   pkg._silenceWarnings(true);
 

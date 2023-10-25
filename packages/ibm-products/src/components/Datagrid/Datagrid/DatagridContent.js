@@ -160,6 +160,7 @@ export const DatagridContent = ({ datagridState, title }) => {
         className={`${blockClass}__filter-summary`}
         filters={filterTags}
         clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
+        renderLabel={filterProps.renderLabel}
       />
     );
 

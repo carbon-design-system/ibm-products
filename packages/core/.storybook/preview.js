@@ -156,4 +156,4 @@ const globals = {
   [CARBON_THEME_PARAM_KEY]: CARBON_THEMES.g10,
 };
 
-export default { argTypes, decorators, globals, parameters, Style };
+export default { argTypes, decorators, globals, parameters };

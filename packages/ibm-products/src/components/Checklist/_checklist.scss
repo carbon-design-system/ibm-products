@@ -195,7 +195,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 }
 
 .#{$block-class}__icon--disabled {
-  color: $icon-on-color-disabled;
+  color: $icon-disabled;
 }
 
 .#{$block-class}__label {
@@ -206,7 +206,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 .#{$block-class}__label--checked,
 .#{$block-class}__label--disabled,
 .#{$block-class}__label--error {
-  color: $text-placeholder;
+  color: $text-disabled;
 }
 
 .#{$block-class}__footer {

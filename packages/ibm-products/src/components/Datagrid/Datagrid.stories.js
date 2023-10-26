@@ -419,7 +419,7 @@ export const ActionsDropdown = () => {
             sm: 'Small',
             xs: 'Extra small',
           },
-          legendText: 'Row height',
+          legendText: 'Row settings',
         },
       },
     },

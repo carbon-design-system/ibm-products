@@ -159,8 +159,9 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                     onMouseMove={(event) => {
                       if (isResizing) {
                         const newWidth = getClientXPosition(event);
+                        const originalColMinWidth = originalCol.minWidth || 50;
                         // Sets a min width for resizing so at least one character from the column header is visible
-                        if (newWidth >= 50) {
+                        if (newWidth >= originalColMinWidth) {
                           handleColumnResizingEvent(dispatch, header, newWidth);
                         }
                       }
@@ -171,11 +172,12 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                     onKeyDown={(event) => {
                       const { key } = event;
                       if (key === 'ArrowLeft' || key === 'ArrowRight') {
+                        const originalColMinWidth = originalCol.minWidth || 90;
                         const currentColumnWidth =
                           columnWidths[header.id] ||
                           (datagridState.isTableSortable &&
-                          originalCol.width < 90
-                            ? 90
+                          originalCol.width < originalColMinWidth
+                            ? originalColMinWidth
                             : originalCol.width);
                         if (key === 'ArrowLeft') {
                           if (

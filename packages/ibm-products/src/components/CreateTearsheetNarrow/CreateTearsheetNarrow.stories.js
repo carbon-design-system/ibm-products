@@ -299,6 +299,5 @@ export const withMultipleForms = prepareStory(WithValidationTemplate, {
   storyName: withMultipleFormsStoryName,
   args: {
     ...defaultStoryProps,
-    multiForm: true,
   },
 });

@@ -1680,7 +1680,7 @@ describe(componentName, () => {
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
         )[1]
         .getElementsByTagName('div')[0].textContent
-    ).toEqual('Row height');
+    ).toEqual('Row settings');
 
     fireEvent.click(
       document.getElementsByClassName(
@@ -1701,7 +1701,7 @@ describe(componentName, () => {
           'bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right'
         )[0]
         .getElementsByTagName('legend')[0].textContent
-    ).toEqual('Row height');
+    ).toEqual('Row settings');
 
     var rowDropDown = [
       'Extra large',

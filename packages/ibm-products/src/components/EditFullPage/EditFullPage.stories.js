@@ -322,19 +322,20 @@ const TemplateWithSections = ({ ...args }) => {
                   />
                 )}
                 <div>
+                  <div>
+                    <DefinitionTooltip
+                      className={`${storyClass}__error--text`}
+                      size="sm"
+                      definition={
+                        'Once toggled on, an inline error notification will appear upon clicking next. This is an example usage of how to prevent the next step if some kind of error occurred during the `onNext` handler.'
+                      }
+                    >
+                      Simulate error
+                    </DefinitionTooltip>
+                  </div>
                   <Toggle
-                    className={`${storyClass}__error--toggle`}
                     id="simulated-error-toggle"
                     size="sm"
-                    labelText={
-                      <DefinitionTooltip
-                        definition={
-                          'Once toggled on, an inline error notification will appear upon clicking next. This is an example usage of how to prevent the next step if some kind of error occurred during the `onNext` handler.'
-                        }
-                      >
-                        Simulate error
-                      </DefinitionTooltip>
-                    }
                     onToggle={(event) => setShouldReject(event)}
                   />
                 </div>

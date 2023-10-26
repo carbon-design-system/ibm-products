@@ -26,7 +26,7 @@ import {
   NumberInput,
   InlineNotification,
   Toggle,
-  Tooltip,
+  DefinitionTooltip,
   RadioButtonGroup,
   RadioButton,
   FormGroup,
@@ -148,24 +148,21 @@ const Template = ({ ...args }) => {
                 />
               )}
               <div>
-                <Tooltip
-                  triggerClassName={`${storyClass}__tooltip`}
-                  direction="right"
-                  tabIndex={0}
-                >
-                  <p className={`${storyClass}__error--text`}>
-                    Once toggled on, an inline error notification will appear
-                    upon clicking next. This is an example usage of how to
-                    prevent the next step if some kind of error occurred during
-                    the `onNext` handler.
-                  </p>
-                </Tooltip>
+                <div>
+                  <DefinitionTooltip
+                    className={`${storyClass}__error--text`}
+                    size="sm"
+                    definition={
+                      'Once toggled on, an inline error notification will appear upon clicking next. This is an example usage of how to prevent the next step if some kind of error occurred during the `onNext` handler.'
+                    }
+                  >
+                    Simulate error
+                  </DefinitionTooltip>
+                </div>
                 <Toggle
-                  className={`${storyClass}__error--toggle`}
                   id="simulated-error-toggle"
                   size="sm"
-                  labelText="Simulate error"
-                  onClick={() => setShouldReject((prev) => !prev)}
+                  onToggle={(event) => setShouldReject(event)}
                 />
               </div>
               <Checkbox
@@ -347,23 +344,20 @@ const TemplateWithSections = ({ ...args }) => {
                   />
                 )}
                 <div>
-                  <Tooltip
-                    triggerClassName={`${storyClass}__tooltip`}
-                    direction="right"
-                    tabIndex={0}
-                  >
-                    <p className={`${storyClass}__error--text`}>
-                      Once toggled on, an inline error notification will appear
-                      upon clicking next. This is an example usage of how to
-                      prevent the next step if some kind of error occurred
-                      during the `onNext` handler.
-                    </p>
-                  </Tooltip>
+                  <div>
+                    <DefinitionTooltip
+                      className={`${storyClass}__error--text`}
+                      size="sm"
+                      definition={
+                        'Once toggled on, an inline error notification will appear upon clicking next. This is an example usage of how to prevent the next step if some kind of error occurred during the `onNext` handler.'
+                      }
+                    >
+                      Simulate error
+                    </DefinitionTooltip>
+                  </div>
                   <Toggle
-                    className={`${storyClass}__error--toggle`}
                     id="simulated-error-toggle"
                     size="sm"
-                    labelText="Simulate error"
                     onToggle={(event) => setShouldReject(event)}
                   />
                 </div>

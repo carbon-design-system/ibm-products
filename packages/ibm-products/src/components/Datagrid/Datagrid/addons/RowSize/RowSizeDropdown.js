@@ -5,20 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as React from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Settings } from '@carbon/react/icons';
 import { IconButton, Layer, Popover, PopoverContent } from '@carbon/react';
+import cx from 'classnames';
 import RowSizeRadioGroup from './RowSizeRadioGroup';
-import { pkg } from '../../../../../settings';
+import { pkg, carbon } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid__row-size`;
 
 const RowSizeDropdown = ({
   align = 'bottom-right',
-  legendText = 'Row height',
+  legendText = 'Row settings',
   ...props
 }) => {
+  const radioGroupRef = useRef();
   const [isOpen, setIsOpen] = React.useState(false);
 
   const onCloseHandler = () => {
@@ -37,8 +39,18 @@ const RowSizeDropdown = ({
     }
   };
 
+  useEffect(() => {
+    if (isOpen) {
+      const radioGroupParentElement = radioGroupRef?.current;
+      const checkedRadioChild = radioGroupParentElement.querySelector(
+        `.${carbon.prefix}--radio-button:checked`
+      );
+      checkedRadioChild?.focus();
+    }
+  }, [isOpen]);
+
   const onClickHandler = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
   return (
@@ -57,13 +69,19 @@ const RowSizeDropdown = ({
         kind="ghost"
         onClick={onClickHandler}
         label={legendText}
-        className={`${blockClass}-button`}
+        className={cx(`${blockClass}-button`, {
+          [`${blockClass}__row-settings-trigger--open`]: isOpen,
+        })}
       >
         <Settings size={16} />
       </IconButton>
       <PopoverContent>
         <Layer>
-          <RowSizeRadioGroup {...props} legendText={legendText} />
+          <RowSizeRadioGroup
+            ref={radioGroupRef}
+            {...props}
+            legendText={legendText}
+          />
         </Layer>
       </PopoverContent>
     </Popover>

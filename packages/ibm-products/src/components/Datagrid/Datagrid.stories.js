@@ -485,6 +485,11 @@ const getBatchActions = () => {
 
 export const BatchActions = () => {
   const [data] = useState(makeData(10));
+
+  pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
+  pkg.feature['Datagrid.useActionsColumn'] = true;
+  pkg._silenceWarnings(true);
+
   const columns = React.useMemo(
     () => [
       ...getColumns(data),
@@ -593,6 +598,11 @@ export const TopAlignment = () => {
 
 export const FrozenColumns = () => {
   const [data] = useState(makeData(10));
+
+  pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
+  pkg.feature['Datagrid.useActionsColumn'] = true;
+  pkg._silenceWarnings(true);
+
   const columns = React.useMemo(
     () => [
       ...getColumns(data),

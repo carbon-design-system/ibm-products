@@ -23,7 +23,7 @@ const RowSizeDropdown = ({ legendText = 'Row settings', ...props }) => {
   useEffect(() => {
     if (isOpen) {
       const radioGroupParentElement = radioGroupRef?.current;
-      const checkedRadioChild = radioGroupParentElement.querySelector(
+      const checkedRadioChild = radioGroupParentElement?.querySelector(
         `.${carbon.prefix}--radio-button:checked`
       );
       checkedRadioChild?.focus();

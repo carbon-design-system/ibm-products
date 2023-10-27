@@ -43,3 +43,38 @@
   height: $spacing-09;
   justify-content: center;
 }
+
+.#{variables.$block-class}
+  table.#{c4p-settings.$carbon-prefix}--data-table--xl.#{variables.$block-class}__vertical-align-center
+  td,
+.#{variables.$block-class}
+  table.#{c4p-settings.$carbon-prefix}--data-table--xl.#{variables.$block-class}__vertical-align-top
+  td {
+  align-items: flex-start;
+  padding-top: $spacing-05;
+  padding-bottom: $spacing-05;
+
+  &.#{variables.$block-class}__actions-column-cell {
+    padding-left: $spacing-03;
+  }
+}
+
+// Top align cell content for xl row size
+.#{variables.$block-class}
+  table.#{c4p-settings.$carbon-prefix}--data-table--xl.#{variables.$block-class}__vertical-align-center
+  th,
+.#{variables.$block-class}
+  table.#{c4p-settings.$carbon-prefix}--data-table--xl.#{variables.$block-class}__vertical-align-top
+  th {
+  .#{c4p-settings.$carbon-prefix}--table-header-label {
+    align-items: flex-start;
+  }
+}
+
+.#{variables.$block-class}
+  table.#{c4p-settings.$carbon-prefix}--data-table--xl.#{variables.$block-class}__vertical-align-center
+  .#{variables.$block-class}__checkbox-cell
+  th.cds--table-column-checkbox {
+  align-items: flex-start;
+  padding-top: $spacing-04;
+}

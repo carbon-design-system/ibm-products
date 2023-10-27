@@ -78,3 +78,7 @@
   align-items: flex-start;
   padding-top: $spacing-04;
 }
+
+.#{variables.$block-class}__row-size__row-settings-trigger--open.#{c4p-settings.$carbon-prefix}--btn--ghost {
+  background-color: $layer-02;
+}

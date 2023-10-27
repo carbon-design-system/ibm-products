@@ -1031,7 +1031,7 @@ PageHeader.propTypes = {
    * Sitting just below the title is this optional subtitle that provides additional context to
    * identify the current page.
    */
-  subtitle: PropTypes.string,
+  subtitle: PropTypes.node,
   /**
    * An array of tags to be shown as the final content in the PageHeader.
    *

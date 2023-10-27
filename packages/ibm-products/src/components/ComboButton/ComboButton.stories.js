@@ -22,9 +22,6 @@ export default {
   title: getStoryTitle(ComboButton.displayName),
   component: ComboButton,
   tags: ['autodocs'],
-  subcomponents: {
-    ComboButtonItem,
-  },
   parameters: {
     // styles
   },

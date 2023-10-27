@@ -5,29 +5,62 @@
  * US Government Users Restricted Rights - Use, duplication or disclosure
  * restricted by GSA ADP Schedule Contract with IBM Corp.
  */
-import React, { useState, useRef, useEffect } from 'react';
+
+import {
+  BATCH,
+  CHECKBOX,
+  DATE,
+  DROPDOWN,
+  INSTANT,
+  NUMBER,
+  PANEL,
+  RADIO,
+} from '../constants';
 import {
   Checkbox,
   DatePicker,
   DatePickerInput,
   Dropdown,
   FormGroup,
+  Layer,
   NumberInput,
   RadioButton,
   RadioButtonGroup,
-  Layer,
 } from '@carbon/react';
-import {
-  INSTANT,
-  BATCH,
-  DATE,
-  CHECKBOX,
-  NUMBER,
-  RADIO,
-  DROPDOWN,
-  PANEL,
-} from '../constants';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+
+import OverflowCheckboxes from '../OverflowCheckboxes';
 import { getInitialStateFromFilters } from '../utils';
+import { usePreviousValue } from '../../../../../../global/js/hooks';
+
+export const handleCheckboxChange = ({
+  checked,
+  filtersState,
+  column,
+  option,
+  setFiltersState,
+  applyFilters,
+  type,
+}) => {
+  const checkboxCopy = filtersState[column].value;
+  const foundCheckbox = checkboxCopy.find(
+    (checkbox) => checkbox.value === option.value
+  );
+  foundCheckbox.selected = checked;
+  setFiltersState({
+    ...filtersState,
+    [column]: {
+      value: checkboxCopy,
+      type,
+    },
+  });
+  applyFilters({
+    column,
+    value: [...filtersState[column].value],
+    type,
+  });
+  option.onChange?.(checked);
+};
 
 const useFilters = ({
   updateMethod,
@@ -36,6 +69,7 @@ const useFilters = ({
   variation,
   reactTableFiltersState,
   onCancel = () => {},
+  panelOpen,
 }) => {
   /** State */
   const [filtersState, setFiltersState] = useState(
@@ -46,10 +80,16 @@ const useFilters = ({
     reactTableFiltersState
   );
 
+  const previousState = usePreviousValue({ panelOpen });
+
   // When using batch actions we have to store the filters to then apply them later
   const prevFiltersRef = useRef(JSON.stringify(filtersState));
   const lastAppliedFilters = useRef(JSON.stringify(reactTableFiltersState));
   const prevFiltersObjectArrayRef = useRef(JSON.stringify(filtersObjectArray));
+
+  const holdingPrevFiltersRef = useRef();
+  const holdingLastAppliedFiltersRef = useRef([]);
+  const holdingPrevFiltersObjectArrayRef = useRef([]);
 
   /** Methods */
   // If the user decides to cancel or click outside the flyout, it reverts back to the filters that were
@@ -58,9 +98,19 @@ const useFilters = ({
     setFiltersState(JSON.parse(prevFiltersRef.current));
     setFiltersObjectArray(JSON.parse(prevFiltersObjectArrayRef.current));
     setAllFilters(JSON.parse(lastAppliedFilters.current));
+
+    // Set the temp prev refs, these will be used to populate the prev values once the
+    // panel opens again
+    holdingPrevFiltersRef.current = JSON.parse(prevFiltersRef.current);
+    holdingLastAppliedFiltersRef.current = JSON.parse(
+      prevFiltersObjectArrayRef.current
+    );
+    holdingPrevFiltersObjectArrayRef.current = JSON.parse(
+      lastAppliedFilters.current
+    );
   };
 
-  const reset = () => {
+  const reset = useCallback(() => {
     // When we reset we want the "initialFilters" to be an empty array
     const resetFiltersArray = [];
 
@@ -82,7 +132,7 @@ const useFilters = ({
     prevFiltersObjectArrayRef.current = JSON.stringify(
       initialFiltersObjectArray
     );
-  };
+  }, [filters, setAllFilters, variation]);
 
   const applyFilters = ({ column, value, type }) => {
     // If no end date is selected return because we need the end date to do computations
@@ -176,6 +226,44 @@ const useFilters = ({
       );
     }
 
+    const renderCheckboxes = () => {
+      if (variation === PANEL && filtersState[column].value.length > 10) {
+        return (
+          <OverflowCheckboxes
+            components={components}
+            type={type}
+            column={column}
+            setFiltersState={setFiltersState}
+            filtersState={filtersState}
+            applyFilters={applyFilters}
+          />
+        );
+      }
+
+      return (
+        <FormGroup {...components.FormGroup}>
+          {filtersState[column].value.map((option) => (
+            <Checkbox
+              key={option.id}
+              {...option}
+              onChange={(_, { checked }) => {
+                handleCheckboxChange({
+                  checked,
+                  filtersState,
+                  column,
+                  option,
+                  setFiltersState,
+                  applyFilters,
+                  type,
+                });
+              }}
+              checked={option.selected}
+            />
+          ))}
+        </FormGroup>
+      );
+    };
+
     switch (type) {
       case DATE:
         filter = (
@@ -225,37 +313,7 @@ const useFilters = ({
         );
         break;
       case CHECKBOX:
-        filter = (
-          <FormGroup {...components.FormGroup}>
-            {filtersState[column].value.map((option) => (
-              <Checkbox
-                key={option.labelText}
-                {...option}
-                onChange={(_, { checked: isSelected }) => {
-                  const checkboxCopy = filtersState[column].value;
-                  const foundCheckbox = checkboxCopy.find(
-                    (checkbox) => checkbox.value === option.value
-                  );
-                  foundCheckbox.selected = isSelected;
-                  setFiltersState({
-                    ...filtersState,
-                    [column]: {
-                      value: checkboxCopy,
-                      type,
-                    },
-                  });
-                  applyFilters({
-                    column,
-                    value: [...filtersState[column].value],
-                    type,
-                  });
-                  option.onChange?.(isSelected);
-                }}
-                checked={option.selected}
-              />
-            ))}
-          </FormGroup>
-        );
+        filter = renderCheckboxes();
         break;
       case RADIO:
         filter = (
@@ -330,6 +388,35 @@ const useFilters = ({
 
     return <React.Fragment key={column}>{filter}</React.Fragment>;
   };
+
+  /** This useEffect will properly handle the previous filters when the panel closes
+   * 1. If the panel closes we need to call the reset fn but also store the
+   * previous filters in a (new) temporary place.
+   * 2. When the panel opens again, take the values from the temporary place
+   * and populate the filter state with them
+   */
+  useEffect(() => {
+    if (!panelOpen && previousState?.panelOpen) {
+      setAllFilters(holdingLastAppliedFiltersRef.current);
+    }
+    if (panelOpen && !previousState?.panelOpen) {
+      if (
+        holdingPrevFiltersRef.current &&
+        holdingLastAppliedFiltersRef.current &&
+        holdingPrevFiltersObjectArrayRef.current
+      ) {
+        setFiltersState(holdingPrevFiltersRef.current);
+        setFiltersObjectArray(holdingLastAppliedFiltersRef.current);
+        setAllFilters(JSON.parse(prevFiltersObjectArrayRef.current));
+      }
+    }
+  }, [
+    panelOpen,
+    previousState,
+    previousState?.panelOpen,
+    reset,
+    setAllFilters,
+  ]);
 
   const cancel = () => {
     // Reverting to previous filters only applies when using batch actions

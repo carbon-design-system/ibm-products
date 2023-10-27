@@ -960,7 +960,9 @@ describe(componentName, () => {
     fireEvent.click(filterButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    const rowHeightButton = screen.getByRole('button', { name: /Row height/i });
+    const rowHeightButton = screen.getByRole('button', {
+      name: /Row settings/i,
+    });
     fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
@@ -1253,7 +1255,9 @@ describe(componentName, () => {
     fireEvent.click(filterButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    const rowHeightButton = screen.getByRole('button', { name: /Row height/i });
+    const rowHeightButton = screen.getByRole('button', {
+      name: /Row settings/i,
+    });
     fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
@@ -1609,11 +1613,13 @@ describe(componentName, () => {
     fireEvent.click(filterButton);
     expect(alertMock).toHaveBeenCalledTimes(1);
 
-    const rowHeightButton = screen.getByRole('button', { name: /Row height/i });
+    const rowHeightButton = screen.getByRole('button', {
+      name: /Row settings/i,
+    });
     fireEvent.click(rowHeightButton);
 
     expect(
-      screen.getByLabelText('Row height', { selector: 'button' })
+      screen.getByLabelText('Row settings', { selector: 'button' })
     ).toHaveClass(`c4p--datagrid__row-size-button--open`);
     expect(
       document.getElementsByClassName('c4p--datagrid__row-size-dropdown')
@@ -1624,7 +1630,7 @@ describe(componentName, () => {
           `${carbon.prefix}--radio-button-group ${carbon.prefix}--radio-button-group--vertical ${carbon.prefix}--radio-button-group--label-right`
         )[0]
         .getElementsByTagName('legend')[0].textContent
-    ).toEqual('Row height');
+    ).toEqual('Row settings');
 
     const rowDropDown = [
       'Extra large',
@@ -1991,7 +1997,9 @@ describe(componentName, () => {
       `${carbon.prefix}--tooltip-content`
     );
 
-    const rowHeightButton = screen.getByRole('button', { name: /Row height/i });
+    const rowHeightButton = screen.getByRole('button', {
+      name: /Row settings/i,
+    });
     fireEvent.click(rowHeightButton);
 
     const rowSizeDropDown = [
@@ -2239,6 +2247,10 @@ describe('batch action testing', () => {
       screen.getByLabelText(getBatchActions()[0].label);
       screen.getByLabelText(getBatchActions()[1].label);
       const menuButton = screen.getByRole('button', { name: /More/i });
+      const cancelButton = screen.getByRole('button', { name: /Cancel/i });
+      const selectAllButton = screen.getByRole('button', {
+        name: /Select all/i,
+      });
       expect(menuButton).toBeInTheDocument();
       await act(() => click(menuButton));
       const options = Array.from(
@@ -2254,6 +2266,11 @@ describe('batch action testing', () => {
       remainingBatchActions.forEach((batchAction, index) => {
         expect(batchAction.label).toEqual(optionsText[index]);
       });
+
+      //coverage
+      fireEvent.click(options[0]);
+      fireEvent.click(cancelButton);
+      fireEvent.click(selectAllButton);
     });
   });
 });

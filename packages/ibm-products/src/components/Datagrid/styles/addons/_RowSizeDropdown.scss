@@ -43,3 +43,8 @@
   height: $spacing-09;
   justify-content: center;
 }
+
+.#{variables.$block-class}
+  .#{variables.$block-class}__row-size__row-settings-trigger--open.#{c4p-settings.$carbon-prefix}--btn--ghost {
+  background-color: $layer-02;
+}

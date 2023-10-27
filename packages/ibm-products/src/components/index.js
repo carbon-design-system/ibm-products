@@ -81,3 +81,4 @@ export { EditTearsheet, EditTearsheetForm } from './EditTearsheet';
 export { EditTearsheetNarrow } from './EditTearsheetNarrow';
 export { EditFullPage } from './EditFullPage';
 export { EditUpdateCards } from './EditUpdateCards';
+export { Checklist } from './Checklist';

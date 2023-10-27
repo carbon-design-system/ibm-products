@@ -6,6 +6,7 @@
 //
 
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/react/scss/components/button/tokens' as *;
 @use '../../../global/styles/project-settings' as c4p-settings;
@@ -359,8 +360,7 @@
 .#{$block-class}__simple-body {
   position: relative;
   display: table;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden auto;
   //makes thin scrollbar in chrome and firefox
   scrollbar-width: thin;
 }

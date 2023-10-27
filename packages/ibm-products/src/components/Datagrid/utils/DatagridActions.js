@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -146,7 +146,7 @@ export const DatagridActions = (datagridState) => {
           size="lg"
           id="columnSearch"
           persistent
-          placeHolderText={searchForAColumn}
+          placeholder={searchForAColumn}
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
         {renderFilterFlyout()}
@@ -178,7 +178,6 @@ export const DatagridActions = (datagridState) => {
         <RowSizeDropdown {...rowSizeDropdownProps} />
         <MenuButton
           label="Primary button"
-          renderIcon={ChevronDown}
           className={`${blockClass}__toolbar-options`}
         >
           <MenuItem
@@ -202,7 +201,7 @@ export const DatagridActions = (datagridState) => {
           size="xl"
           id="columnSearch"
           persistent
-          placeHolderText={searchForAColumn}
+          placeholder={searchForAColumn}
           onChange={(e) => setGlobalFilter(e.target.value)}
         />
         {renderFilterFlyout()}

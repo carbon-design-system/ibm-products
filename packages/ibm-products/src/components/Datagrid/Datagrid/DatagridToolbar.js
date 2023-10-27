@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2022, 2023
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -80,8 +80,16 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     // Do not render ButtonMenu when there are 3 or less items
     // and if there is enough available space to render all the items
     if (toolbarBatchActions?.length <= 3 && !displayAllInMenu) {
-      return null;
+      return;
     }
+
+    const renderItem = (batchAction, index) => (
+      <MenuItem
+        key={`${batchAction.label}-${index}`}
+        label={batchAction.label}
+        onClick={(event) => onClickHandler(event, batchAction)}
+      />
+    );
 
     return (
       <MenuButton
@@ -93,38 +101,30 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
       >
         {toolbarBatchActions &&
           toolbarBatchActions.map((batchAction, index) => {
-            if (index < 2) {
-              if (displayAllInMenu) {
-                return (
-                  <MenuItem
-                    key={`${batchAction.label}-${index}`}
-                    label={batchAction.label}
-                    onClick={(event) => {
-                      batchAction.onClick(getSelectedRowData(), event);
-                      if (batchAction.type === 'select_all') {
-                        toggleAllRowsSelected(true);
-                      }
-                    }}
-                  />
-                );
-              }
-              return null;
+            if (index < 2 && !displayAllInMenu) {
+              return;
             }
-            return (
-              <MenuItem
-                key={`${batchAction.label}-${index}`}
-                label={batchAction.label}
-                onClick={(event) => {
-                  batchAction.onClick(getSelectedRowData(), event);
-                  if (batchAction.type === 'select_all') {
-                    toggleAllRowsSelected(true);
-                  }
-                }}
-              />
-            );
+            return renderItem(batchAction, index);
           })}
       </MenuButton>
     );
+  };
+
+  const onClickHandler = (event, batchAction) => {
+    batchAction.onClick(getSelectedRowData(), event);
+    if (batchAction.type === 'select_all') {
+      toggleAllRowsSelected(true);
+    }
+  };
+
+  const onCancelHandler = () => {
+    toggleAllRowsSelected(false);
+    setGlobalFilter(null);
+  };
+
+  const onSelectAllHandler = () => {
+    toggleAllRowsSelected(true);
+    onSelectAllRows?.(true);
   };
 
   // Only display the first two batch actions, the rest are
@@ -134,14 +134,8 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     <TableBatchActions
       shouldShowBatchActions={totalSelected > 0}
       totalSelected={totalSelected}
-      onCancel={() => {
-        toggleAllRowsSelected(false);
-        setGlobalFilter(null);
-      }}
-      onSelectAll={() => {
-        toggleAllRowsSelected(true);
-        onSelectAllRows?.(true);
-      }}
+      onCancel={onCancelHandler}
+      onSelectAll={onSelectAllHandler}
       totalCount={rows && rows.length}
     >
       {!displayAllInMenu &&
@@ -155,12 +149,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
               <TableBatchAction
                 key={`${batchAction.label}-${index}`}
                 renderIcon={batchAction.renderIcon}
-                onClick={(event) => {
-                  batchAction.onClick(getSelectedRowData(), event);
-                  if (batchAction.type === 'select_all') {
-                    toggleAllRowsSelected(true);
-                  }
-                }}
+                onClick={(event) => onClickHandler(event, batchAction)}
                 iconDescription={batchAction.label}
               >
                 {batchAction.label}

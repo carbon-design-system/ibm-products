@@ -57,6 +57,7 @@ const defaultHeader = [
     Header: 'Row Index',
     accessor: (row, i) => i,
     id: 'rowIndex', // id is required when accessor is a function.
+    sticky: 'left',
   },
   {
     Header: 'First Name',
@@ -257,6 +258,10 @@ export const ColumnCustomizationUsageStory = prepareStory(
 
 const ColumnCustomizationWithFixedColumn = ({ ...args }) => {
   const stickyHeaders = defaultHeader.slice(1, 15);
+
+  pkg._silenceWarnings(false);
+  pkg.feature['Datagrid.useActionsColumn'] = true;
+  pkg._silenceWarnings(true);
 
   const columns = React.useMemo(
     () => [

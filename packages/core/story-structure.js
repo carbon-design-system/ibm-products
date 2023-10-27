@@ -129,7 +129,12 @@ const s = [
           'c/FilterSummary',
           'c/TooltipTrigger',
           'c/TearsheetShell',
+          'c/SimpleHeader',
         ],
+      },
+      {
+        n: 'Novice to pro',
+        s: ['c/Checklist'],
       },
     ],
   },

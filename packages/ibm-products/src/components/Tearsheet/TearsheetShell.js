@@ -335,6 +335,11 @@ export const TearsheetShell = React.forwardRef(
 // is used in preference to relying on function.name.
 TearsheetShell.displayName = componentName;
 
+export const portalType =
+  typeof Element === 'undefined'
+    ? PropTypes.object
+    : PropTypes.instanceOf(Element);
+
 export const deprecatedProps = {
   /**
    * **Deprecated**
@@ -476,9 +481,9 @@ TearsheetShell.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget: PropTypes.node,
+  portalTarget: portalType,
 
   /**
    * Specifies the width of the tearsheet, 'narrow' or 'wide'.

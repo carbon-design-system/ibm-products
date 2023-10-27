@@ -20,9 +20,13 @@ const useFiltering = (hooks) => {
       date: (rows, id, [startDate, endDate]) => {
         return rows.filter((row) => {
           const rowValue = row.values[id];
+          const startDateObj =
+            typeof startDate === 'object' ? startDate : new Date(startDate);
+          const endDateObj =
+            typeof endDate === 'object' ? endDate : new Date(endDate);
           if (
-            rowValue.getTime() <= endDate.getTime() &&
-            rowValue.getTime() >= startDate.getTime()
+            rowValue.getTime() <= endDateObj.getTime() &&
+            rowValue.getTime() >= startDateObj.getTime()
           ) {
             // In date range
             return true;

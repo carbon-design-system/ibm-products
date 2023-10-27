@@ -32,6 +32,16 @@ describe('getNodeTextContent successfully returns a converted string', () => {
     );
     expect(result).toEqual('Hello there.');
   });
+
+  it('calls function if node is typeof function', () => {
+    const TestComponent = () => (
+      <div>
+        Hello <span>there</span>.
+      </div>
+    );
+    const result = getNodeTextContent(TestComponent);
+    expect(result).toEqual('Hello there.');
+  });
 });
 
 describe('getNodeTextContent exception handling', () => {

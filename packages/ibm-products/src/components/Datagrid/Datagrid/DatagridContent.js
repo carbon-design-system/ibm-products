@@ -10,7 +10,10 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { Table, TableContainer } from '@carbon/react';
 import { carbon, pkg } from '../../../settings';
 
-import { CLEAR_FILTERS } from './addons/Filtering/constants';
+import {
+  CLEAR_FILTERS,
+  CLEAR_SINGLE_FILTER,
+} from './addons/Filtering/constants';
 import DatagridBody from './DatagridBody';
 import DatagridHead from './DatagridHead';
 import DatagridToolbar from './DatagridToolbar';
@@ -23,6 +26,8 @@ import { handleGridKeyPress } from './addons/InlineEdit/handleGridKeyPress';
 import { px } from '@carbon/layout';
 import { useClickOutside } from '../../../global/js/hooks';
 import { useMultipleKeyTracking } from '../../DataSpreadsheet/hooks';
+import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
+import { clearSingleFilter } from './addons/Filtering/FilterProvider';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
@@ -49,6 +54,7 @@ export const DatagridContent = ({ datagridState, title }) => {
     DatagridActions,
     totalColumnsWidth,
     gridRef,
+    setAllFilters,
     state,
     page,
     rows,
@@ -140,6 +146,10 @@ export const DatagridContent = ({ datagridState, title }) => {
       );
     }
   }, [withInlineEdit, tableId, totalColumnsWidth, datagridState, gridActive]);
+
+  useSubscribeToEventEmitter(CLEAR_SINGLE_FILTER, (id) =>
+    clearSingleFilter(id, setAllFilters, state)
+  );
 
   const renderFilterSummary = () =>
     state.filters.length > 0 && (

@@ -9,6 +9,7 @@
 // stylelint-disable carbon/layout-token-use
 
 @use '@carbon/styles/scss/theme' as *;
+@use '@carbon/layout/scss/convert' as *;
 @use '@carbon/styles/scss/spacing' as *;
 @use '@carbon/styles/scss/type' as *;
 @use '@carbon/layout' as *;

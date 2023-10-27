@@ -67,15 +67,16 @@
   ],
   "words": [
     "aboutmodal",
-    "autodocs", // storybook
-    "automerge", // actions
     "actionbar",
     "apikey",
+    "autodocs",
+    "automerge",
     "buildhome",
     "checkmark",
     "codesandbox",
     "colindex",
     "columnheader",
+    "csstools",
     "dasharray",
     "data-testid",
     "datagrid",
@@ -127,6 +128,7 @@
     "tagset",
     "tearsheet",
     "tearsheets",
+    "techdocs",
     "textbox",
     "timeframe",
     "toggletip",

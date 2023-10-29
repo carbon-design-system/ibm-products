@@ -17,13 +17,13 @@ import {
   handleColumnResizeStartEvent,
   handleColumnResizingEvent,
 } from './addons/stateReducer';
-import getColTitle from '../utils/getColTitle';
+import { getNodeTextContent } from '../../../global/js/utils/getNodeTextContent';
 
 const blockClass = `${pkg.prefix}--datagrid`;
 
 const getAccessibilityProps = (header) => {
   const props = {};
-  const title = getColTitle(header);
+  const title = getNodeTextContent(header.Header);
   if (title) {
     props.title = title;
   } else {

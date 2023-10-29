@@ -1,9 +1,8 @@
-/*
- * Licensed Materials - Property of IBM
- * 5724-Q36
- * (c) Copyright IBM Corp. 2022
- * US Government Users Restricted Rights - Use, duplication or disclosure
- * restricted by GSA ADP Schedule Contract with IBM Corp.
+/**
+ * Copyright IBM Corp. 2022, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
@@ -21,12 +20,8 @@ export const InlineEditButton = ({
   nonEditCell,
   isActiveCell,
   columnConfig,
-  totalInlineEditColumns,
-  totalColumns,
   type,
 }) => {
-  const inlineEditColsLessThanHalfOfTotal =
-    totalInlineEditColumns < totalColumns / 2;
   return (
     <div
       className={cx(`${blockClass}__inline-edit-button`, {
@@ -35,8 +30,6 @@ export const InlineEditButton = ({
         [`${blockClass}__inline-edit-button--with-label-icon`]: LabelIcon,
         [`${blockClass}__inline-edit-button--non-edit`]: nonEditCell,
         [`${blockClass}__inline-edit-button--active`]: isActiveCell,
-        [`${blockClass}__inline-edit-button--edit-less-than-half-of-total-cols`]:
-          inlineEditColsLessThanHalfOfTotal,
         [`${blockClass}__inline-edit-button--${type}`]:
           type === 'date' || type === 'selection',
       })}
@@ -82,8 +75,6 @@ InlineEditButton.propTypes = {
   nonEditCell: PropTypes.bool,
   placeholder: PropTypes.string,
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  totalColumns: PropTypes.number,
-  totalInlineEditColumns: PropTypes.number,
   type: PropTypes.oneOf(['text', 'number', 'selection', 'date']),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };

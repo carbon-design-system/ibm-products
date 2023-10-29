@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Children, useEffect, useRef, useState } from 'react';
+import React, {
+  Children,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -84,24 +90,46 @@ export let CoachmarkStack = React.forwardRef(
       setSelectedItemNumber(itemNumber);
     };
 
-    const handleClose = (isParentCloseButton) => {
-      if (isParentCloseButton) {
-        // Trigger slide-out animation
-        setSelectedItemNumber(-1);
+    const escFunction = useCallback(
+      (event) => {
+        if (event.key === 'Escape') {
+          selectedItemNumber === 0 ? handleClose(true) : handleClose(false);
+        }
+      },
+      [handleClose, selectedItemNumber]
+    );
 
-        // Unmount after animation is complete
-        const timer = setTimeout(() => {
-          setIsOpen(false);
-          onClose();
-        }, delayMs);
-        return () => clearTimeout(timer);
-      } else {
-        // Unstack child
-        setSelectedItemNumber(0);
-      }
-    };
+    useEffect(() => {
+      document.addEventListener('keydown', escFunction, false);
+
+      return () => {
+        document.removeEventListener('keydown', escFunction, false);
+      };
+    }, [escFunction]);
+
+    const handleClose = useCallback(
+      (isParentCloseButton) => {
+        if (isParentCloseButton) {
+          // Trigger slide-out animation
+          setSelectedItemNumber(-1);
+
+          // Unmount after animation is complete
+          const timer = setTimeout(() => {
+            setIsOpen(false);
+            onClose();
+          }, delayMs);
+          return () => clearTimeout(timer);
+        } else {
+          // Unstack child
+          setSelectedItemNumber(0);
+        }
+      },
+      [onClose]
+    );
+
     const contextValue = {
       buttonProps: {
+        tabIndex: 0,
         'aria-expanded': isOpen,
         onClick: () => {
           setIsOpen(true);
@@ -126,7 +154,7 @@ export let CoachmarkStack = React.forwardRef(
     useEffect(() => {
       setTimeout(() => {
         if (stackHomeRef.current) {
-          setParentHeight(stackHomeRef.current.clientHeight);
+          setParentHeight(stackHomeRef.current.clientHeight + 16);
         }
       }, 0);
     }, [stackHomeRef]);
@@ -138,6 +166,7 @@ export let CoachmarkStack = React.forwardRef(
       }
       stackHomeRef.current.style.height = `${parentHeight}px`;
       if (!isOpen || targetSelectedItem < 0) {
+        stackHomeRef.current.focus();
         return;
       }
 
@@ -145,6 +174,7 @@ export let CoachmarkStack = React.forwardRef(
         stackedCoachmarkRefs.current[targetSelectedItem].clientHeight;
 
       stackHomeRef.current.style.height = `${targetHomeHeight}px`;
+      stackedCoachmarkRefs.current[targetSelectedItem].focus();
     }, [selectedItemNumber, isOpen, parentHeight]);
 
     const wrappedChildren = Children.map(childArray, (child, idx) => {
@@ -201,6 +231,7 @@ export let CoachmarkStack = React.forwardRef(
               isOpen && `${elementBlockClass}--is-visible`,
               mountedRef.current && `${elementBlockClass}--is-mounted`
             )}
+            isOpen={isOpen && selectedItemNumber < 1}
             description={description}
             media={media}
             navLinkLabels={navLinkLabels}

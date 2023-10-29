@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef, useEffect } from 'react';
 import pconsole from '../../global/js/utils/pconsole';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
@@ -34,6 +34,7 @@ export let CoachmarkStackHome = forwardRef(
     {
       className,
       description,
+      isOpen,
       media,
       navLinkLabels,
       onClickNavItem,
@@ -45,6 +46,14 @@ export let CoachmarkStackHome = forwardRef(
     },
     ref
   ) => {
+    const buttonFocusRef = useRef();
+
+    useEffect(() => {
+      if (isOpen && buttonFocusRef.current) {
+        buttonFocusRef.current.focus();
+      }
+    }, [isOpen]);
+
     if (!navLinkLabels) {
       return pconsole.warn(
         `${componentName} is a Novice to Pro internal component and is not intended for general use.`
@@ -109,7 +118,7 @@ export let CoachmarkStackHome = forwardRef(
             </ul>
             {closeButtonLabel && (
               <div className={`${overlayClass}__footer`}>
-                <Button size="sm" onClick={onClose}>
+                <Button size="sm" onClick={onClose} ref={buttonFocusRef}>
                   {closeButtonLabel}
                 </Button>
               </div>
@@ -148,6 +157,10 @@ CoachmarkStackHome.propTypes = {
    * The description of the Coachmark.
    */
   description: PropTypes.node.isRequired,
+  /**
+   * If the stack home is open.
+   */
+  isOpen: PropTypes.bool.isRequired,
   /**
    * The object describing an image in one of two shapes.
    *

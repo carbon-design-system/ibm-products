@@ -6,7 +6,7 @@
  */
 
 // Import portions of React that are needed.
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 // Other standard imports.
 import PropTypes from 'prop-types';
@@ -63,13 +63,13 @@ export let CoachmarkFixed = React.forwardRef(
     const prefersReducedMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     );
-    const handleClose = () => {
-      if (prefersReducedMotion) {
+    const handleClose = useCallback(() => {
+      if (prefersReducedMotion.matches) {
         setIsOpen(false);
       } else {
         setFixedIsVisible(false);
       }
-    };
+    }, [prefersReducedMotion.matches]);
 
     const handleTransitionEnd = (e) => {
       if (e.propertyName === 'transform' && !fixedIsVisible) {
@@ -86,9 +86,27 @@ export let CoachmarkFixed = React.forwardRef(
       setShouldResetPosition(true);
     };
 
+    const escFunction = useCallback(
+      (event) => {
+        if (event.key === 'Escape') {
+          handleClose();
+        }
+      },
+      [handleClose]
+    );
+
+    useEffect(() => {
+      document.addEventListener('keydown', escFunction, false);
+
+      return () => {
+        document.removeEventListener('keydown', escFunction, false);
+      };
+    }, [escFunction]);
+
     const contextValue = {
       buttonProps: {
         'aria-expanded': isOpen,
+        tabIndex: 0,
         onClick: handleTargetClick,
         // Compensate for accidental open/close on double-click.
         // Only open on double-click.

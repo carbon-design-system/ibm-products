@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, {
+  forwardRef,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 import cx from 'classnames';
 import PropTypes, { Component } from 'prop-types';
 import { createPortal } from 'react-dom';
@@ -66,11 +72,28 @@ export let Coachmark = forwardRef(
     const backupRef = useRef();
     const _coachmarkRef = ref || backupRef;
     const _overlayRef = overlayRef || overlayBackupRef;
+
     const closeOverlay = () => {
       setIsOpen(false);
     };
 
-    const handleClose = () => {
+    const escFunction = useCallback(
+      (event) => {
+        if (event.key === 'Escape') {
+          handleClose();
+        }
+      },
+      [handleClose]
+    );
+
+    useEffect(() => {
+      document.addEventListener('keydown', escFunction, false);
+
+      return () => {
+        document.removeEventListener('keydown', escFunction, false);
+      };
+    }, [escFunction]);
+    const handleClose = useCallback(() => {
       if (isStacked) {
         // If stacked, do not unmount,
         // only call its ("parent") onClose method.
@@ -79,13 +102,7 @@ export let Coachmark = forwardRef(
         setIsOpen(false);
         onClose();
       }
-    };
-
-    const handleTargetKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        handleClose();
-      }
-    };
+    }, [isStacked, onClose]);
 
     const handleTargetClick = (e) => {
       setTargetRect(e.target.getBoundingClientRect());
@@ -105,7 +122,6 @@ export let Coachmark = forwardRef(
       buttonProps: {
         'aria-expanded': isOpen,
         tabIndex: 0,
-        onKeyDown: handleTargetKeyDown,
         onClick: handleTargetClick,
         // Compensate for accidental open/close on double-click.
         // Only open on double-click.

@@ -53,6 +53,7 @@ export let CoachmarkOverlay = forwardRef(
     const coachmark = useCoachmark();
     const isBeacon = kind === COACHMARK_OVERLAY_KIND.TOOLTIP;
     const isDraggable = kind === COACHMARK_OVERLAY_KIND.FLOATING;
+    const isVisible = className && className.includes('is-visible');
     let styledTune = {};
     // TODO: check this... this feels like it should be in a hook with no dep array.
     if (isBeacon || isDraggable) {
@@ -85,6 +86,14 @@ export let CoachmarkOverlay = forwardRef(
       overlay.style.bottom = 'auto';
     }
     const contentId = uuidv4();
+    const modifyChildren = (child) => {
+      // make a CONST to inject
+      return React.cloneElement(child, { isVisible });
+    };
+    const getModifiedChildren = () => {
+      return React.Children.map(children, (child) => modifyChildren(child));
+    };
+
     return (
       <div
         {...rest}
@@ -99,6 +108,7 @@ export let CoachmarkOverlay = forwardRef(
         ref={overlayRef}
         style={styledTune}
         aria-labelledby={contentId}
+        tabIndex={-1}
         {...getDevtoolsProps(componentName)}
       >
         {isDraggable ? (
@@ -107,7 +117,7 @@ export let CoachmarkOverlay = forwardRef(
           <CoachmarkHeader onClose={onClose} />
         )}
         <div className={`${blockClass}__body`} ref={ref} id={contentId}>
-          {children}
+          {getModifiedChildren()}
         </div>
         {isBeacon && <span className={`${blockClass}__caret`} />}
       </div>

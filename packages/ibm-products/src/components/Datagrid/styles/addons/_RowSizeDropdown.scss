@@ -26,3 +26,44 @@
 
   box-shadow: 1px 4px 8px -3px $overlay-01, -1px 6px 8px -5px $overlay-01;
 }
+
+// Top align cell content for xl row size
+.#{$block-class}
+  table.#{$carbon-prefix}--data-table--xl.#{$block-class}__vertical-align-center
+  td,
+.#{$block-class}
+  table.#{$carbon-prefix}--data-table--xl.#{$block-class}__vertical-align-top
+  td {
+  align-items: flex-start;
+  padding-top: $spacing-05;
+  padding-bottom: $spacing-05;
+
+  &.#{$block-class}__actions-column-cell {
+    padding-left: $spacing-03;
+  }
+}
+
+// Top align header content for xl row size
+.#{$block-class}
+  table.#{$carbon-prefix}--data-table--xl.#{$block-class}__vertical-align-center
+  th,
+.#{$block-class}
+  table.#{$carbon-prefix}--data-table--xl.#{$block-class}__vertical-align-top
+  th {
+  .#{$carbon-prefix}--table-header-label {
+    align-items: flex-start;
+  }
+}
+
+// Top align checkbox row header for xl row size
+.#{$block-class}
+  table.#{$carbon-prefix}--data-table--xl.#{$block-class}__vertical-align-center
+  .#{$block-class}__checkbox-cell
+  th.#{$carbon-prefix}--table-column-checkbox {
+  align-items: flex-start;
+  padding-top: $spacing-04;
+}
+
+.#{$block-class}__row-size__row-settings-trigger--open.#{$carbon-prefix}--btn--ghost {
+  background-color: $ui-02;
+}

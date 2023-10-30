@@ -143,12 +143,13 @@ const HeaderRow = (datagridState, headRef, headerGroup) => {
                   [`${blockClass}__resizableColumn`]: header.getResizerProps,
                   [`${blockClass}__isResizing`]: header.isResizing,
                   [`${blockClass}__sortableColumn`]:
-                    datagridState.isTableSortable,
+                    datagridState.isTableSortable && header.id !== 'spacer',
                   [`${blockClass}__isSorted`]: header.isSorted,
                 },
                 header.getHeaderProps().className
               )}
               key={header.id}
+              aria-hidden={header.id === 'spacer' && 'true'}
               {...getAccessibilityProps(header)}
             >
               {header.render('Header')}

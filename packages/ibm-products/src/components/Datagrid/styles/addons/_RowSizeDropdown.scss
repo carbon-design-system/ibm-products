@@ -44,6 +44,7 @@
   justify-content: center;
 }
 
+// Top align cell content for xl row size
 .#{variables.$block-class}
   table.#{c4p-settings.$carbon-prefix}--data-table--xl.#{variables.$block-class}__vertical-align-center
   td,
@@ -59,7 +60,7 @@
   }
 }
 
-// Top align cell content for xl row size
+// Top align header content for xl row size
 .#{variables.$block-class}
   table.#{c4p-settings.$carbon-prefix}--data-table--xl.#{variables.$block-class}__vertical-align-center
   th,
@@ -71,6 +72,7 @@
   }
 }
 
+// Top align checkbox row header for xl row size
 .#{variables.$block-class}
   table.#{c4p-settings.$carbon-prefix}--data-table--xl.#{variables.$block-class}__vertical-align-center
   .#{variables.$block-class}__checkbox-cell

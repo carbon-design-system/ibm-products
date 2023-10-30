@@ -8,7 +8,7 @@
 import React from 'react';
 import { render, screen, waitFor, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
-import { pkg } from '../../settings';
+import { carbon, pkg } from '../../settings';
 import uuidv4 from '../../global/js/utils/uuidv4';
 import {
   expectWarn,
@@ -562,27 +562,24 @@ describe(componentName, () => {
   });
 
   it('renders an error icon if the step invalid prop is set to true', async () => {
-    const { container } = renderCreateFullPage({
+   renderCreateFullPage({
       ...defaultFullPageProps,
     });
-    expect(
-      container.querySelector(`.${blockClass}--progress__warning`)
-    ).not.toBeInTheDocument();
 
     expect(
       screen
         .getByRole('button', { description: 'Title 1' })
-        .querySelector('.cds--progress__warning')
+        .querySelector(`.${carbon.prefix}--progress__warning`)
     ).not.toBeInTheDocument();
     expect(
       screen
         .getByRole('button', { description: 'Title 2' })
-        .querySelector('.cds--progress__warning')
+        .querySelector(`.${carbon.prefix}--progress__warning`)
     ).not.toBeInTheDocument();
     expect(
       screen
         .getByRole('button', { description: 'Title 3' })
-        .querySelector('.cds--progress__warning')
+        .querySelector(`.${carbon.prefix}--progress__warning`)
     ).toBeInTheDocument();
   });
 });

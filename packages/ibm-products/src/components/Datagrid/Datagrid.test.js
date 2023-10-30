@@ -889,7 +889,7 @@ describe(componentName, () => {
   });
 
   it('check total column count', () => {
-    render(<BasicUsage data-testid={dataTestId} />);
+    render(<BasicUsage />);
     expect(screen.getAllByRole('columnheader').length).toEqual(
       defaultHeader.length
     );

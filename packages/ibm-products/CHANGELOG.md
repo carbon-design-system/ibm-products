@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.13.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.12.1...@carbon/ibm-products@2.13.0) (2023-10-27)
+
+
+### Bug Fixes
+
+* **Datagrid:** address incorrect order of fn args ([#3712](https://github.com/carbon-design-system/ibm-products/issues/3712)) ([2d1c87c](https://github.com/carbon-design-system/ibm-products/commit/2d1c87c0578168ead661a32283897d86d700bf21))
+* **Datagrid:** import filter summary styles from datagrid ([#3689](https://github.com/carbon-design-system/ibm-products/issues/3689)) ([4d32a6f](https://github.com/carbon-design-system/ibm-products/commit/4d32a6f6702bf6868d2aa00859273229fa372933))
+* sb warning - use actions column not enabled ([#3686](https://github.com/carbon-design-system/ibm-products/issues/3686)) ([e7dde77](https://github.com/carbon-design-system/ibm-products/commit/e7dde77d5d25860cb6fcb95cc16768b6fd0a3db8))
+* sb warning - use actions column not enabled ([#3693](https://github.com/carbon-design-system/ibm-products/issues/3693)) ([67954e3](https://github.com/carbon-design-system/ibm-products/commit/67954e31af36db33f5b2940988914607d3c85d51))
+* sb warning - use actions column not enabled ([#3695](https://github.com/carbon-design-system/ibm-products/issues/3695)) ([52f34ee](https://github.com/carbon-design-system/ibm-products/commit/52f34eec3d9464278c4608c0766416403ae8a4c7))
+* Storybook error 'multiForm is not a DOM element' ([#3698](https://github.com/carbon-design-system/ibm-products/issues/3698)) ([341d7d2](https://github.com/carbon-design-system/ibm-products/commit/341d7d217d597357a3f41e542d41d4692de82493))
+* Storybook error 'triggerclassname is not a DOM element' ([#3703](https://github.com/carbon-design-system/ibm-products/issues/3703)) ([fbb7429](https://github.com/carbon-design-system/ibm-products/commit/fbb7429e4c023f9a278a39caa3d047b4eb5f83a3))
+* Storybook error "labeltext of type object supplied to Toggle" ([#3700](https://github.com/carbon-design-system/ibm-products/issues/3700)) ([be992be](https://github.com/carbon-design-system/ibm-products/commit/be992bea7c7fccf098d98a6966690b129466564c))
+* update to Carbon 11 compatible versions to latest ([#3603](https://github.com/carbon-design-system/ibm-products/issues/3603)) ([847d4c0](https://github.com/carbon-design-system/ibm-products/commit/847d4c079d90742ca828dd83ed9402309bb20c54))
+
+
+### Features
+
+* new Checklist component ([#3626](https://github.com/carbon-design-system/ibm-products/issues/3626)) ([0499dcd](https://github.com/carbon-design-system/ibm-products/commit/0499dcd8c5e1e6f7dc4e91bc5d67b338f3bbb24d))
+
+
+
+
+
 ## [2.12.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.12.0...@carbon/ibm-products@2.12.1) (2023-10-24)
 
 

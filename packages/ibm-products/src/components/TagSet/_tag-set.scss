@@ -70,7 +70,7 @@ $block-class-modal: #{$block-class}-modal;
   }
 
   .#{$block-class-overflow}__tooltip
-    .#{$block-class-overflow}__tag-item
+    .#{$block-class-overflow}__tag-item--default
     .#{$carbon-prefix}--tag {
     border-radius: 0;
   }
@@ -127,13 +127,23 @@ $block-class-modal: #{$block-class}-modal;
       text-align: left;
     }
 
+    &.#{$carbon-prefix}--tooltip button {
+      padding-right: 0;
+    }
+
     .#{$block-class-overflow}__show-all-tags-link {
       display: inline-block;
       margin: $spacing-03 0 $spacing-02; // to match the tags
     }
 
-    .#{$block-class-overflow}__tag-item,
-    .#{$block-class-overflow}__tag-item .#{$carbon-prefix}--tag {
+    .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag
+      .#{$carbon-prefix}--tag {
+      background-color: $inverse-hover-ui;
+    }
+
+    .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default,
+    .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default
+      .#{$carbon-prefix}--tag {
       @include carbon--type-style('body-short-01');
 
       display: block;

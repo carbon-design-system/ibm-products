@@ -246,3 +246,12 @@ export const WithClose = prepareStory(TemplateWithClose, {
     ...overflowAndModalStrings,
   },
 });
+
+export const WithCloseAndOverflowTags = prepareStory(TemplateWithClose, {
+  args: {
+    tags: manyTags,
+    containerWidth: 500,
+    overflowType: 'tag',
+    ...overflowAndModalStrings,
+  },
+});

@@ -36,6 +36,7 @@ export const TagSetOverflow = React.forwardRef(
       overflowAlign = defaults.overflowAlign,
       overflowDirection = defaults.overflowDirection,
       overflowTags,
+      overflowType,
       showAllTagsLabel,
 
       // Collect any other property values passed in.
@@ -88,11 +89,28 @@ export const TagSetOverflow = React.forwardRef(
                     ? index < allTagsModalSearchThreshold
                     : index <= allTagsModalSearchThreshold
                 )
-                .map((tag, index) => (
-                  <li className={`${blockClass}__tag-item`} key={index}>
-                    {React.cloneElement(tag, { filter: false })}
-                  </li>
-                ))}
+                .map((tag, index) => {
+                  const tagProps = {};
+                  if (overflowType === 'tag') {
+                    tagProps.type = 'high-contrast';
+                  }
+                  if (overflowType === 'default') {
+                    tagProps.filter = false;
+                  }
+                  return (
+                    <li
+                      className={cx(`${blockClass}__tag-item`, {
+                        [`${blockClass}__tag-item--default`]:
+                          overflowType === 'default',
+                        [`${blockClass}__tag-item--tag`]:
+                          overflowType === 'tag',
+                      })}
+                      key={index}
+                    >
+                      {React.cloneElement(tag, tagProps)}
+                    </li>
+                  );
+                })}
             </ul>
             {overflowTags.length > allTagsModalSearchThreshold && (
               <Link
@@ -138,6 +156,10 @@ TagSetOverflow.propTypes = {
    * tags shown in overflow
    */
   overflowTags: PropTypes.arrayOf(PropTypes.object).isRequired,
+  /**
+   * Type of rendering displayed inside of the tag overflow component
+   */
+  overflowType: PropTypes.oneOf(['default', 'tag']),
   /**
    * label for the overflow show all tags link
    */

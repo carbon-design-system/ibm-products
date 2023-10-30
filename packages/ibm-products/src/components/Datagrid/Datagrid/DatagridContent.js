@@ -161,6 +161,7 @@ export const DatagridContent = ({ datagridState, title }) => {
         filters={filterTags}
         clearFilters={() => EventEmitter.dispatch(CLEAR_FILTERS)}
         renderLabel={filterProps.renderLabel}
+        overflowType="tag"
       />
     );
 

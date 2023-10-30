@@ -125,7 +125,7 @@ describe(TagSet.displayName, () => {
     expect(overflowVisible.length).toEqual(tags10.length);
   });
 
-  it.only('Renders overflow tags via overflowType prop', async () => {
+  it('Renders overflow tags via overflowType prop', async () => {
     window.innerWidth = tagWidth / 2;
 
     render(<TagSet tags={tags10} overflowType="tag" />);

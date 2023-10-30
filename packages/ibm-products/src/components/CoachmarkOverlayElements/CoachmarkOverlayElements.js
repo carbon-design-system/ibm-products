@@ -69,9 +69,11 @@ export let CoachmarkOverlayElements = React.forwardRef(
     }, []);
 
     useEffect(() => {
-      if (buttonFocusRef.current && isVisible) {
-        buttonFocusRef.current.focus();
-      }
+      setTimeout(() => {
+        if (buttonFocusRef.current && isVisible) {
+          buttonFocusRef.current.focus();
+        }
+      }, 100);
     }, [isVisible]);
 
     if (!coachmark) {

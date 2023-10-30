@@ -49,9 +49,11 @@ export let CoachmarkStackHome = forwardRef(
     const buttonFocusRef = useRef();
 
     useEffect(() => {
-      if (isOpen && buttonFocusRef.current) {
-        buttonFocusRef.current.focus();
-      }
+      setTimeout(() => {
+        if (isOpen && buttonFocusRef.current) {
+          buttonFocusRef.current.focus();
+        }
+      }, 100);
     }, [isOpen]);
 
     if (!navLinkLabels) {

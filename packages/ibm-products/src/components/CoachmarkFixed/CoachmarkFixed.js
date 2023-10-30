@@ -20,7 +20,9 @@ import { getDevtoolsProps } from '../../global/js/utils/devtools';
 import { pkg /*, carbon */ } from '../../settings';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
-const blockClass = `${pkg.prefix}--coachmark-fixed`;
+const coachmarkClass = `${pkg.prefix}--coachmark`;
+const blockClass = `${coachmarkClass}-fixed`;
+const overlayBlockClass = `${coachmarkClass}-overlay`;
 const componentName = 'CoachmarkFixed';
 
 const defaults = {
@@ -169,6 +171,10 @@ export let CoachmarkFixed = React.forwardRef(
                 onClose={handleClose}
                 onTransitionEnd={handleTransitionEnd}
                 theme={theme}
+                className={cx(
+                  fixedIsVisible && `${overlayBlockClass}--is-visible`,
+                  overlayBlockClass
+                )}
               >
                 {children}
               </CoachmarkOverlay>,

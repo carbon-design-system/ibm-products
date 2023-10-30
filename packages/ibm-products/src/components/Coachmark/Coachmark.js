@@ -24,6 +24,7 @@ import { pkg /*, carbon */ } from '../../settings';
 import { throttle } from 'lodash';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--coachmark`;
+const overlayBlockClass = `${blockClass}-overlay`;
 const componentName = 'Coachmark';
 
 const defaults = {
@@ -186,7 +187,10 @@ export let Coachmark = forwardRef(
                 kind={overlayKind}
                 onClose={handleClose}
                 theme={theme}
-                className={overlayClassName}
+                className={cx(
+                  overlayClassName,
+                  `${overlayBlockClass}--is-visible`
+                )}
               >
                 {children}
               </CoachmarkOverlay>,

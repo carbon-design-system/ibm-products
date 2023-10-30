@@ -33,6 +33,8 @@
     $caret-center: $caret-height; // use "center" for left-right calculations, and "height" for top-bottom calculations
     $distance-offset: $spacing-06; // see also ./utils/constants.js > distanceOffset
 
+    visibility: hidden;
+
     &--fixed {
       position: fixed;
       right: $spacing-05;
@@ -47,6 +49,7 @@
 
     &--is-visible {
       transform: translateY(0);
+      visibility: visible;
     }
 
     // CARET STYLING

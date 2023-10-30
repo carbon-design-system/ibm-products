@@ -140,11 +140,19 @@ $block-class-modal: #{$_block-class}-modal;
   }
 
   .#{$block-class-overflow}__tag-list {
+    display: flex;
+    flex-direction: column;
     margin-bottom: $spacing-03;
   }
 
-  .#{$block-class-overflow}__tag-item,
-  .#{$block-class-overflow}__tag-item .#{$carbon-prefix}--tag {
+  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--tag
+    .#{$carbon-prefix}--tag {
+    background-color: $background-inverse-hover;
+  }
+
+  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default,
+  .#{$block-class-overflow}__tag-item.#{$block-class-overflow}__tag-item--default
+    .#{$carbon-prefix}--tag {
     @include type.type-style('body-compact-01');
 
     display: block;

@@ -6397,10 +6397,15 @@ button.c4p--add-select__global-filter-toggle--open {
   color: var(--cds-text-inverse, #ffffff);
 }
 .c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-list {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 0.5rem;
 }
-.c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item,
-.c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item .cds--tag {
+.c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item.c4p--tag-set-overflow__tag-item--tag .cds--tag {
+  background-color: var(--cds-background-inverse-hover, #474747);
+}
+.c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item.c4p--tag-set-overflow__tag-item--default,
+.c4p--tag-set-overflow__tagset-popover .c4p--tag-set-overflow__tag-item.c4p--tag-set-overflow__tag-item--default .cds--tag {
   font-size: var(--cds-body-compact-01-font-size, 0.875rem);
   font-weight: var(--cds-body-compact-01-font-weight, 400);
   line-height: var(--cds-body-compact-01-line-height, 1.28572);

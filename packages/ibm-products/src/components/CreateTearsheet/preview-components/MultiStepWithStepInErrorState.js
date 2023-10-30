@@ -86,9 +86,7 @@ export const MultiStepWithStepInErrorState = ({
                 value={stepOneTextInputValue}
                 placeholder="Enter topic name"
                 onChange={(event) => {
-                  if (event.target.value.length) {
-                    setStepOneIsInvalid(false);
-                  }
+                  setStepOneIsInvalid(!event.target.value.length);
                   setStepOneTextInputValue(event.target.value);
                 }}
                 invalid={stepOneIsInvalid}

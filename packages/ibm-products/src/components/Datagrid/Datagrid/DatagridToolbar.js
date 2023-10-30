@@ -149,7 +149,7 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
               <TableBatchAction
                 key={`${batchAction.label}-${index}`}
                 renderIcon={batchAction.renderIcon}
-                onClick={(event) => onClickHandler(batchAction, event)}
+                onClick={(event) => onClickHandler(event, batchAction)}
                 iconDescription={batchAction.label}
               >
                 {batchAction.label}

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import { RadioButtonGroup, RadioButton } from '@carbon/react';
 import isArray from 'lodash/isArray';
@@ -13,54 +13,59 @@ import { pkg } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid__row-size`;
 
-const RowSizeRadioGroup = ({
-  rowSizes,
-  selectedOption,
-  datagridName,
-  onChange,
-  legendText,
-  rowSizeLabels = {
-    xl: 'Extra large',
-    lg: 'Large (default)',
-    md: 'Medium',
-    sm: 'Small',
-    xs: 'Extra small',
-  },
-}) => {
-  return (
-    <div className={`${blockClass}-dropdown`} role="presentation">
-      <RadioButtonGroup
-        legendText={legendText}
-        name="row-height-group"
-        orientation="vertical"
-        defaultSelected={getBackwardCompatibleRowSize(selectedOption)}
-        onChange={onChange}
-      >
-        {rowSizes &&
-          isArray(rowSizes) &&
-          rowSizes.map((option) => {
-            let labelText;
-            try {
-              labelText = option.labelText || rowSizeLabels[option.value];
-            } catch (e) {
-              labelText = option.value;
-            }
-            return (
-              <RadioButton
-                className={`${blockClass}-radio-button`}
-                key={option.value}
-                labelText={labelText}
-                value={option.value}
-                id={`${datagridName || 'datagrid'}--row-density--${
-                  option.value
-                }`}
-              />
-            );
-          })}
-      </RadioButtonGroup>
-    </div>
-  );
-};
+const RowSizeRadioGroup = forwardRef(
+  (
+    {
+      rowSizes,
+      selectedOption,
+      datagridName,
+      onChange,
+      legendText,
+      rowSizeLabels = {
+        xl: 'Extra large',
+        lg: 'Large (default)',
+        md: 'Medium',
+        sm: 'Small',
+        xs: 'Extra small',
+      },
+    },
+    ref
+  ) => {
+    return (
+      <div className={`${blockClass}-dropdown`} role="presentation" ref={ref}>
+        <RadioButtonGroup
+          legendText={legendText}
+          name="row-height-group"
+          orientation="vertical"
+          defaultSelected={getBackwardCompatibleRowSize(selectedOption)}
+          onChange={onChange}
+        >
+          {rowSizes &&
+            isArray(rowSizes) &&
+            rowSizes.map((option) => {
+              let labelText;
+              try {
+                labelText = option.labelText || rowSizeLabels[option.value];
+              } catch (e) {
+                labelText = option.value;
+              }
+              return (
+                <RadioButton
+                  className={`${blockClass}-radio-button`}
+                  key={option.value}
+                  labelText={labelText}
+                  value={option.value}
+                  id={`${datagridName || 'datagrid'}--row-density--${
+                    option.value
+                  }`}
+                />
+              );
+            })}
+        </RadioButtonGroup>
+      </div>
+    );
+  }
+);
 const getBackwardCompatibleRowSize = (rowSize) => {
   // TODO: deprecate this function in next major release (v8) on carbon-components-react
   const rowSizeMap = {

@@ -120,6 +120,7 @@ const renderCreateFullPage = ({
         title="Title 2"
         description="2"
         fieldsetLegendText="2"
+        invalid={false}
       >
         {stepFormField}
       </CreateFullPageStep>
@@ -127,6 +128,7 @@ const renderCreateFullPage = ({
         title="Title 3"
         description="3"
         onNext={rejectOnSubmitNext ? finalStepOnNextRejectFn : finalOnNextFn}
+        invalid
       >
         {stepFormField}
       </CreateFullPageStep>
@@ -557,5 +559,30 @@ describe(componentName, () => {
     });
     const headerSelector = container.querySelector(`.${blockClass}__header`);
     expect(headerSelector).not.toBeInTheDocument();
+  });
+
+  it('renders an error icon if the step invalid prop is set to true', async () => {
+    const { container } = renderCreateFullPage({
+      ...defaultFullPageProps,
+    });
+    expect(
+      container.querySelector(`.${blockClass}--progress__warning`)
+    ).not.toBeInTheDocument();
+
+    expect(
+      screen
+        .getByRole('button', { description: 'Title 1' })
+        .querySelector('.cds--progress__warning')
+    ).not.toBeInTheDocument();
+    expect(
+      screen
+        .getByRole('button', { description: 'Title 2' })
+        .querySelector('.cds--progress__warning')
+    ).not.toBeInTheDocument();
+    expect(
+      screen
+        .getByRole('button', { description: 'Title 3' })
+        .querySelector('.cds--progress__warning')
+    ).toBeInTheDocument();
   });
 });

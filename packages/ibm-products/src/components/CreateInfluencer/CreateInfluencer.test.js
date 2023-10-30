@@ -110,4 +110,35 @@ describe(CreateInfluencer.displayName, () => {
       container.querySelector(`.${blockClass}__title`)
     ).not.toBeInTheDocument();
   });
+
+  it('renders an error icon if the step invalid prop is set to true', async () => {
+    const { container } = renderComponent({
+      stepData: [
+        { title: 'Step 1', invalid: true, shouldIncludeStep: true },
+        { title: 'Step 2', invalid: false, shouldIncludeStep: true },
+        { title: 'Step 3', shouldIncludeStep: true },
+      ],
+      className: 'some-test-class-name',
+      currentStep: 1,
+    });
+    expect(
+      container.querySelector(`.${blockClass}--progress__warning`)
+    ).not.toBeInTheDocument();
+
+    expect(
+      screen
+        .getByRole('button', { description: 'Step 1' })
+        .querySelector('.cds--progress__warning')
+    ).toBeInTheDocument();
+    expect(
+      screen
+        .getByRole('button', { description: 'Step 2' })
+        .querySelector('.cds--progress__warning')
+    ).not.toBeInTheDocument();
+    expect(
+      screen
+        .getByRole('button', { description: 'Step 3' })
+        .querySelector('.cds--progress__warning')
+    ).not.toBeInTheDocument();
+  });
 });

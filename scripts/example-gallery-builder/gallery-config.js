@@ -57,55 +57,51 @@ const getExampleDirectoriesConfig = (
     const examplePath = path.join(directoryPath, dir);
     const configPath = path.join(examplePath, 'gallery.config.json');
 
-    const hasPackage = fs.existsSync(path.join(examplePath, 'package.json'));
+    let config;
+    const hasGalleryConfig = fs.existsSync(configPath);
 
-    if (hasPackage) {
-      let config;
-      const hasGalleryConfig = fs.existsSync(configPath);
-
-      if (hasGalleryConfig) {
-        const configRaw = fs.readFileSync(configPath);
-        config = JSON.parse(configRaw);
-      } else {
-        fs.writeFileSync(
-          // This should never happen
-          configPath,
-          `{
+    if (hasGalleryConfig) {
+      const configRaw = fs.readFileSync(configPath);
+      config = JSON.parse(configRaw);
+    } else {
+      fs.writeFileSync(
+        // This should never happen
+        configPath,
+        `{
   "label": "${dir} example"
 }`
-        );
-      }
-
-      // config can include label and thumbnail for package
-      const label = config?.label || dir;
-
-      // find a thumbnail if it exists
-      const thumbnail = [config?.thumbnail, 'thumbnail.png'].find((file) => {
-        if (!file) {
-          return false;
-        }
-
-        const filePath = path.join(examplePath, file);
-        return fs.existsSync(filePath);
-      });
-
-      const output = { ...config, label, directory: dir };
-
-      // have a thumbnail so add it to th config
-      if (thumbnail) {
-        // use basename of the thumbnailPath discarding any folders
-        const newThumbnailName = `${dir}--${path.basename(thumbnail)}`;
-
-        fs.copyFileSync(
-          path.join(examplePath, thumbnail),
-          path.join(galleryConfigDir, newThumbnailName)
-        );
-        output.thumbnail = `./${newThumbnailName}`;
-        output.key = getSanitizedDir(dir);
-      }
-
-      newConfig.push(output);
+      );
     }
+
+    // config can include label and thumbnail for package
+    const label = config?.label || dir;
+
+    // find a thumbnail if it exists
+    const thumbnail = [config?.thumbnail, 'thumbnail.png'].find((file) => {
+      if (!file) {
+        return false;
+      }
+
+      const filePath = path.join(examplePath, file);
+      return fs.existsSync(filePath);
+    });
+
+    const output = { ...config, label, directory: dir };
+
+    // have a thumbnail so add it to th config
+    if (thumbnail) {
+      // use basename of the thumbnailPath discarding any folders
+      const newThumbnailName = `${dir}--${path.basename(thumbnail)}`;
+
+      fs.copyFileSync(
+        path.join(examplePath, thumbnail),
+        path.join(galleryConfigDir, newThumbnailName)
+      );
+      output.thumbnail = `./${newThumbnailName}`;
+      output.key = getSanitizedDir(dir);
+    }
+
+    newConfig.push(output);
   });
 
   return newConfig;

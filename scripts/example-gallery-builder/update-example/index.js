@@ -54,6 +54,18 @@ const writeIbmProductsConfig = (path, pkgConfig) => {
   }
 };
 
+const depsToString = (depsObj) => {
+  if (!depsObj) return '';
+
+  const keys = Object.keys(depsObj);
+  if (keys.length === 0) return '';
+
+  return keys.reduce(
+    (acc, key) => acc + `,\n\t\t"${key}": "${depsObj[key]}"`,
+    ''
+  );
+};
+
 const updateExample = (name, config) => {
   /**
    * Location of variant files, only files that differ need
@@ -80,6 +92,12 @@ const updateExample = (name, config) => {
       substitutions.KEYWORDS = substitutions.STYLE_NAME;
     }
 
+    const pkgDeps = config['dependencies'];
+    const pkgDevDeps = config['devDependencies'];
+
+    substitutions.PKG_DEPS = depsToString(pkgDeps);
+    substitutions.PKG_DEV_DEPS = depsToString(pkgDevDeps);
+
     const pkgConfig = config['package-config'];
 
     // will there be config (written later)
@@ -104,6 +122,11 @@ const updateExample = (name, config) => {
     const examplePath = join('examples', 'carbon-for-ibm-products', name);
     const rootPath = process.cwd(); // join(__dirname, '../..');
 
+    const example_node_modules = join(rootPath, examplePath, 'node_modules');
+    if (fs.existsSync(example_node_modules)) {
+      fs.fmSync(example_node_modules, { recursive: true, force: true });
+    }
+
     sync(resolve(rootPath, examplePath, '**/*')).forEach((file) => {
       // Remove everything except
       // ./thumbnail.png
@@ -122,6 +145,7 @@ const updateExample = (name, config) => {
     const templatePath = join(__dirname, 'templates');
     sync(resolve(templatePath, '**/*')).forEach((template) => {
       const newFilename = compile(basename(template), substitutions);
+
       const relativeDir = relative(templatePath, dirname(template));
       const newPath = join(examplePath, relativeDir, newFilename);
 

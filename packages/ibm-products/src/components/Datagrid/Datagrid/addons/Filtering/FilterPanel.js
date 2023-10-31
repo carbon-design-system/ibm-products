@@ -52,6 +52,7 @@ const FilterPanel = ({
   searchLabelText = 'Filter search',
   searchPlaceholder = 'Find filters',
   reactTableFiltersState = [],
+  autoHideFilters = false,
 }) => {
   /** State */
   const [showDividerLine, setShowDividerLine] = useState(false);
@@ -76,6 +77,7 @@ const FilterPanel = ({
     reactTableFiltersState,
     onCancel,
     panelOpen,
+    autoHideFilters,
   });
 
   /** Refs */
@@ -273,6 +275,7 @@ const FilterPanel = ({
 };
 
 FilterPanel.propTypes = {
+  autoHideFilters: PropTypes.bool,
   closeIconDescription: PropTypes.string,
   filterPanelMinHeight: PropTypes.number,
   filterSections: PropTypes.array,

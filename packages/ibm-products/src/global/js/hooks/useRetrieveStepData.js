@@ -9,11 +9,12 @@ import { useEffect } from 'react';
 
 /**
  * This useEffect makes sure that every CreateTearsheetStep/CreateFullPageStep reports back it's
- * title, secondaryLabel, introStep, and shouldIncludeStep data so that it can be sent to the CreateInfluencer.
+ * title, secondaryLabel, introStep, invalid and shouldIncludeStep data so that it can be sent to the CreateInfluencer.
  * @param {object} useResetCreateComponent
  * @param {object} useResetCreateComponent.stepsContext
  * @param {number} useResetCreateComponent.stepNumber
  * @param {boolean} useResetCreateComponent.introStep
+ * @param {boolean} useResetCreateComponent.invalid
  * @param {boolean} useResetCreateComponent.shouldIncludeStep
  * @param {string} useResetCreateComponent.secondaryLabel
  * @param {string} useResetCreateComponent.title
@@ -22,6 +23,7 @@ export const useRetrieveStepData = ({
   stepsContext,
   stepNumber,
   introStep,
+  invalid,
   shouldIncludeStep,
   secondaryLabel,
   title,
@@ -33,6 +35,7 @@ export const useRetrieveStepData = ({
           title,
           secondaryLabel,
           introStep,
+          invalid,
           shouldIncludeStep,
         };
         const previousItem = prev[stepNumber - 1];
@@ -40,7 +43,8 @@ export const useRetrieveStepData = ({
           previousItem?.title !== stepItem.title ||
           previousItem?.secondaryLabel !== stepItem.secondaryLabel ||
           previousItem?.introStep !== stepItem.introStep ||
-          previousItem?.shouldIncludeStep !== stepItem.shouldIncludeStep
+          previousItem?.shouldIncludeStep !== stepItem.shouldIncludeStep ||
+          previousItem?.invalid !== stepItem.invalid
         ) {
           const clone = [...prev];
           clone[stepNumber - 1] = stepItem;
@@ -54,6 +58,7 @@ export const useRetrieveStepData = ({
     title,
     secondaryLabel,
     introStep,
+    invalid,
     stepsContext,
     stepNumber,
   ]);

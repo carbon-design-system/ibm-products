@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.14.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.13.0...@carbon/ibm-products@2.14.0) (2023-10-31)
+
+
+### Bug Fixes
+
+* **Datagrid:** semantically hide spacer col ([#3722](https://github.com/carbon-design-system/ibm-products/issues/3722)) ([28376e9](https://github.com/carbon-design-system/ibm-products/commit/28376e97aba4b15dfea5e111872ac4d8b1389ed3))
+* **Datagrid:** top align cell content for extra large row height ([#3709](https://github.com/carbon-design-system/ibm-products/issues/3709)) ([a9ce489](https://github.com/carbon-design-system/ibm-products/commit/a9ce4899180394cdd309d8a80ddda06977a1efac))
+* **TagSet:** remove only from tag set tests ([#3719](https://github.com/carbon-design-system/ibm-products/issues/3719)) ([d4edc78](https://github.com/carbon-design-system/ibm-products/commit/d4edc7823babea3d71a21882121df3b35144b311))
+
+
+### Features
+
+* **TagSet:** allow for tag rendering in overflow ([#3646](https://github.com/carbon-design-system/ibm-products/issues/3646)) ([cc793a3](https://github.com/carbon-design-system/ibm-products/commit/cc793a31cec978959f205f074f768c4ccbef31aa))
+
+
+
+
+
 # [2.13.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.12.1...@carbon/ibm-products@2.13.0) (2023-10-27)
 
 

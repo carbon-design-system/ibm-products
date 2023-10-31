@@ -80,6 +80,11 @@ const updateExample = (name, config) => {
       substitutions.KEYWORDS = substitutions.STYLE_NAME;
     }
 
+    const pkgDeps = config['package-deps'];
+    const pkgDevDeps = config['package-dev-deps'];
+    substitutions.PKG_DEPS = pkgDeps ? pkgDeps.join(`,\n\t`) : '';
+    substitutions.PKG_DEV_DEPS = pkgDeps ? pkgDeps.join(`,\n\t`) : '';
+
     const pkgConfig = config['package-config'];
 
     // will there be config (written later)

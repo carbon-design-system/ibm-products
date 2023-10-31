@@ -107,7 +107,7 @@ const useActionsColumn = (hooks) => {
                   {!isFetching && rowActions.length > 2 && (
                     <div>
                       <OverflowMenu
-                        align="top-right"
+                        align="left"
                         size="sm"
                         flipped
                         onClick={(e) => {

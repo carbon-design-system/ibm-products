@@ -195,6 +195,7 @@ export const DatagridContent = ({ datagridState, title }) => {
               {...getFilterFlyoutProps()}
               title={filterProps.panelTitle}
               filterSections={filterProps.sections}
+              autoHideFilters={filterProps.autoHideFilters}
             />
           )}
           <div className={`${blockClass}__table-container-inner`}>

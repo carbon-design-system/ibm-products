@@ -1230,6 +1230,7 @@ export const PanelManyCheckboxes = prepareStory(FilteringTemplateWrapper, {
     emptyStateDescription:
       'Data was not found with the current filters applied. Change filters or clear filters to see other results.',
     filterProps: {
+      autoHideFilters: true,
       variation: 'panel',
       updateMethod: 'instant',
       primaryActionLabel: 'Apply',

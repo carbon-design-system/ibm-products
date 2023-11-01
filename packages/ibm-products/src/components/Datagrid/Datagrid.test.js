@@ -865,6 +865,13 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
+  it('check total column count', () => {
+    render(<BasicUsage />);
+    expect(screen.getAllByRole('columnheader').length).toEqual(
+      defaultHeader.length
+    );
+  });
+
   it('renders a basic data grid component with devTools attribute', () => {
     render(<BasicUsage data-testid={dataTestId} />);
 

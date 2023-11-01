@@ -25,10 +25,10 @@
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 
-// .#{$block-class} {
 .#{$block-class}__header {
   display: flex;
   padding: $spacing-05;
+  border-bottom: 1px solid $border-subtle-01;
   background-color: $layer-01;
   gap: $spacing-03;
 }
@@ -78,8 +78,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 }
 
 // TOGGLE
-// The <iconbutton> itself (class="...__toggle") is embedded inside two more tags,
-// which do not accept any classnames passed via the <iconbutton>.
+// The <IconButton> itself (class="...__toggle") is embedded inside two more tags,
+// which do not accept any class names passed via the <IconButton>.
 // So, we have to refer to it via it's "tooltip" wrapper element. :/
 .#{$block-class}__header .#{c4p-settings.$carbon-prefix}--tooltip {
   height: 2rem;
@@ -107,6 +107,8 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 // Override Primary button styling to appear more like a link.
 // "Unset" some settings to allow an inner div to enable multiple lines and an ellipsis if req'd.
 .#{$block-class}__button.#{c4p-settings.$carbon-prefix}--btn--primary {
+  @include type-style('body-short-01');
+
   max-width: none;
   min-height: auto;
   // override bx--btn to allow two-line ellipsis
@@ -117,8 +119,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
   background-color: transparent;
   color: $link-primary;
 }
-// The CSS for the Carbon button's label
-// is incompatible with two-line ellipsis,
+// The CSS for the Carbon button's label is incompatible with two-line ellipsis,
 // but a div inside a Carbon button works.
 .#{$block-class}__button.#{c4p-settings.$carbon-prefix}--btn--primary div {
   @include ellipsis-2-lines();
@@ -134,11 +135,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
   background: transparent;
   color: $text-primary;
   text-decoration: underline;
-}
-
-.#{$block-class}__button--error {
-  /* stylelint-disable-next-line declaration-no-important */
-  color: $text-error !important;
 }
 
 // container for animated content
@@ -167,6 +163,9 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
   padding: $spacing-05;
   border-top: 1px solid $border-subtle-01;
 }
+.#{$block-class}__list-group:first-of-type {
+  border-top: none;
+}
 
 .#{$block-class}__list-title {
   @include type-style('body-short-01');
@@ -185,9 +184,14 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 }
 
 .#{$block-class}__icon {
-  /* stylelint-disable-next-line -- to-rem carbon replacement for rem */
+  /* stylelint-disable-next-line */
   margin: to-rem(1px) $spacing-03 0 0;
-  color: $link-primary;
+  color: $icon-primary;
+}
+
+.#{$block-class}__icon--checked,
+.#{$block-class}__icon--indeterminate {
+  color: $interactive;
 }
 
 .#{$block-class}__icon--error {
@@ -204,8 +208,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 }
 
 .#{$block-class}__label--checked,
-.#{$block-class}__label--disabled,
-.#{$block-class}__label--error {
+.#{$block-class}__label--disabled {
   color: $text-disabled;
 }
 
@@ -213,5 +216,5 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
   @include ellipsis-2-lines();
 
   padding: $spacing-03 $spacing-05;
-  border-top: 1px solid $border-subtle;
+  border-top: 1px solid $border-subtle-01;
 }

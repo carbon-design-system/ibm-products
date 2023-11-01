@@ -67,6 +67,7 @@
     "eslint-config-carbon": "^2.20.0",
     "husky": "^8.0.3",
     "jest": "^29.6.2",
+    "jest-canvas-mock": "^2.5.1",
     "json": "^11.0.0",
     "lerna": "^7.1.5",
     "lint-staged": "^14.0.0",

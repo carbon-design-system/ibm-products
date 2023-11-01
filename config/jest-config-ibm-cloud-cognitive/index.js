@@ -49,7 +49,7 @@ module.exports = {
   modulePathIgnorePatterns: ['<rootDir>/examples'],
   resolver: require.resolve('./setup/resolver.js'),
   reporters: ['default'],
-  setupFiles: [require.resolve('./setup/setupFiles')],
+  setupFiles: [require.resolve('./setup/setupFiles'), 'jest-canvas-mock'],
   setupFilesAfterEnv: [require.resolve('./setup/setupFilesAfterEnv')],
   testEnvironment: 'jsdom',
   testMatch: [

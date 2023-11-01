@@ -73,6 +73,8 @@ const updateGalleryConfig = () => {
   // update each example
   directories.forEach((dir) => {
     const config = mergedConfig.find((item) => item.directory === dir);
+    // log out and provide feedback as part of the update process.
+    console.log(`Checking / updating example: ${dir}`, config);
     updateExample(dir, config);
   });
 };

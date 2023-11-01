@@ -17,7 +17,7 @@ import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
 
 import { EmptyStateContent } from '../EmptyStateContent';
-import { NotFoundIllustration } from '../assets/NotFoundIllustration';
+import NotFoundIllustration from '../assets/NotFoundIllustration';
 import { defaults } from '../EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -61,7 +61,11 @@ export let NotFoundEmptyState = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <NotFoundIllustration theme={illustrationTheme} size={size} />
+        <NotFoundIllustration
+          theme={illustrationTheme}
+          size={size}
+          title={title}
+        />
         <EmptyStateContent
           action={action}
           link={link}

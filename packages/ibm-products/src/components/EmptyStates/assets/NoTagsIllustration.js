@@ -17,7 +17,7 @@ import uuidv4 from '../../../global/js/utils/uuidv4';
 // The block part of our conventional BEM class names (blockClass__E--M).
 const blockClass = `${pkg.prefix}--empty-state`;
 
-export const NoTagsIllustration = ({ theme, size, ...rest }) => {
+const NoTagsIllustration = ({ title, theme, size, ...rest }) => {
   const svgId = uuidv4();
 
   return (
@@ -35,6 +35,7 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
       ])}
       role="img"
     >
+      <title>{title}</title>
       {theme === 'dark' ? (
         <>
           <defs>
@@ -357,4 +358,7 @@ export const NoTagsIllustration = ({ theme, size, ...rest }) => {
 NoTagsIllustration.propTypes = {
   size: PropTypes.oneOf(['lg', 'sm']),
   theme: PropTypes.oneOf(['light', 'dark']),
+  title: PropTypes.string,
 };
+
+export default NoTagsIllustration;

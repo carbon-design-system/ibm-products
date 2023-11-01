@@ -20,6 +20,7 @@ export {
 export { CreateTearsheetNarrow } from './CreateTearsheetNarrow';
 export {
   EmptyState,
+  EmptyStateV2,
   ErrorEmptyState,
   NoDataEmptyState,
   NoTagsEmptyState,

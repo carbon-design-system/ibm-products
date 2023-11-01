@@ -17,7 +17,7 @@ import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
 
 import { EmptyStateContent } from '../EmptyStateContent';
-import { UnauthorizedIllustration } from '../assets/UnauthorizedIllustration';
+import UnauthorizedIllustration from '../assets/UnauthorizedIllustration';
 import { defaults } from '../EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -61,7 +61,11 @@ export let UnauthorizedEmptyState = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <UnauthorizedIllustration size={size} theme={illustrationTheme} />
+        <UnauthorizedIllustration
+          size={size}
+          theme={illustrationTheme}
+          title={title}
+        />
         <EmptyStateContent
           action={action}
           link={link}

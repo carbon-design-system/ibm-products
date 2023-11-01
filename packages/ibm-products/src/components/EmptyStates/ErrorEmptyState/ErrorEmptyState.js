@@ -17,7 +17,7 @@ import { getDevtoolsProps } from '../../../global/js/utils/devtools';
 import { pkg } from '../../../settings';
 
 import { EmptyStateContent } from '../EmptyStateContent';
-import { ErrorIllustration } from '../assets/ErrorIllustration';
+import ErrorIllustration from '../assets/ErrorIllustration';
 import { defaults } from '../EmptyState';
 
 // The block part of our conventional BEM class names (blockClass__E--M).
@@ -61,7 +61,11 @@ export let ErrorEmptyState = React.forwardRef(
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >
-        <ErrorIllustration theme={illustrationTheme} size={size} />
+        <ErrorIllustration
+          theme={illustrationTheme}
+          size={size}
+          title={title}
+        />
         <EmptyStateContent
           action={action}
           link={link}

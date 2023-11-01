@@ -31,6 +31,7 @@ const defaults = {
   // allTagsModalTarget: document.body,
   overflowAlign: 'center',
   overflowDirection: 'bottom',
+  overflowType: 'default',
 };
 
 export let TagSet = React.forwardRef(
@@ -45,6 +46,7 @@ export let TagSet = React.forwardRef(
       multiline,
       overflowAlign = defaults.overflowAlign,
       overflowClassName,
+      overflowType = defaults.overflowType,
       overflowDirection = defaults.overflowDirection,
       allTagsModalTitle,
       allTagsModalSearchLabel,
@@ -140,6 +142,7 @@ export let TagSet = React.forwardRef(
           onShowAllClick={handleShowAllClick}
           overflowTags={newOverflowTags}
           overflowAlign={overflowAlign}
+          overflowType={overflowType}
           overflowDirection={overflowDirection}
           showAllTagsLabel={showAllTagsLabel}
           key="displayed-tag-overflow"
@@ -151,6 +154,7 @@ export let TagSet = React.forwardRef(
     }, [
       displayCount,
       overflowAlign,
+      overflowType,
       overflowClassName,
       overflowDirection,
       showAllTagsLabel,
@@ -348,6 +352,10 @@ TagSet.propTypes = {
    * overflowDirection from the standard tooltip
    */
   overflowDirection: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+  /**
+   * Type of rendering displayed inside of the tag overflow component
+   */
+  overflowType: PropTypes.oneOf(['default', 'tag']),
   /**
    * label for the overflow show all tags link.
    *

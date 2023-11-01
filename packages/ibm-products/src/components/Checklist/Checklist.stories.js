@@ -22,6 +22,7 @@ const storyClass = 'checklist-stories';
 
 const taskLists = [
   {
+    title: 'Section label',
     tasks: [
       {
         kind: 'checked',

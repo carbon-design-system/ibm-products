@@ -208,8 +208,7 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
 }
 
 .#{$block-class}__label--checked,
-.#{$block-class}__label--disabled,
-.#{$block-class}__label--error {
+.#{$block-class}__label--disabled {
   color: $text-disabled;
 }
 

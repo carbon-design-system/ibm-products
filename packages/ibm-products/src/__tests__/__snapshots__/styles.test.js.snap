@@ -3275,7 +3275,7 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   visibility: hidden;
 }
 
-.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag-item .bx--tag {
+.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag-item--default .bx--tag {
   border-radius: 0;
 }
 
@@ -3319,12 +3319,18 @@ exports[`CSS export checks doesn't change the exported CSS for released componen
   min-width: initial;
   text-align: left;
 }
+.c4p--tag-set-overflow__tooltip.bx--tooltip button {
+  padding-right: 0;
+}
 .c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__show-all-tags-link {
   display: inline-block;
   margin: var(--cds-spacing-03, 0.5rem) 0 var(--cds-spacing-02, 0.25rem);
 }
-.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag-item,
-.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag-item .bx--tag {
+.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag-item.c4p--tag-set-overflow__tag-item--tag .bx--tag {
+  background-color: var(--cds-inverse-hover-ui, #4c4c4c);
+}
+.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag-item.c4p--tag-set-overflow__tag-item--default,
+.c4p--tag-set-overflow__tooltip .c4p--tag-set-overflow__tag-item.c4p--tag-set-overflow__tag-item--default .bx--tag {
   font-size: var(--cds-body-short-01-font-size, 0.875rem);
   font-weight: var(--cds-body-short-01-font-weight, 400);
   line-height: var(--cds-body-short-01-line-height, 1.28572);

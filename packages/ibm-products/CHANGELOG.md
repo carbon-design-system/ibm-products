@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.61.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.60.0...@carbon/ibm-products@1.61.0) (2023-10-31)
+
+
+### Bug Fixes
+
+* **Datagrid:** address col title issue in customize col tearsheet ([#3671](https://github.com/carbon-design-system/ibm-products/issues/3671)) ([15ade58](https://github.com/carbon-design-system/ibm-products/commit/15ade588ff592421b51870eb96dc517621a7a4cb))
+* **Datagrid:** do not always show edit icons for inline editing ([#3675](https://github.com/carbon-design-system/ibm-products/issues/3675)) ([bb1aa3c](https://github.com/carbon-design-system/ibm-products/commit/bb1aa3cf2034fbc9f70a373a45705d3b7872f15c))
+* **Datagrid:** import filter summary styles from datagrid ([#3690](https://github.com/carbon-design-system/ibm-products/issues/3690)) ([ad637c1](https://github.com/carbon-design-system/ibm-products/commit/ad637c1ebcf7cb4f753472e6ff3d606706424a66))
+* update to Carbon 10 compatible versions to latest ([#3659](https://github.com/carbon-design-system/ibm-products/issues/3659)) ([9e49ac7](https://github.com/carbon-design-system/ibm-products/commit/9e49ac7357549482b1d112e77a688076be6cdb41)), closes [#3671](https://github.com/carbon-design-system/ibm-products/issues/3671) [#3665](https://github.com/carbon-design-system/ibm-products/issues/3665)
+
+
+### Features
+
+* **Datagrid:** add renderLabel to filterProps and FilterSummary ([#3683](https://github.com/carbon-design-system/ibm-products/issues/3683)) ([058d9b8](https://github.com/carbon-design-system/ibm-products/commit/058d9b84e79f9c0c90fd8ec8622d998cfbe813d7))
+* **TagSet:** allow for tag rendering in overflow (v1) ([#3720](https://github.com/carbon-design-system/ibm-products/issues/3720)) ([aaac2f9](https://github.com/carbon-design-system/ibm-products/commit/aaac2f9ac585f9f57b52495e1a56a4badddd7ca0))
+
+
+
+
+
 # [1.60.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.59.1...@carbon/ibm-products@1.60.0) (2023-10-24)
 
 

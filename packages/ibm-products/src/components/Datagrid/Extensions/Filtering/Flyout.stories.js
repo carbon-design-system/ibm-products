@@ -286,7 +286,7 @@ const filters = [
     props: {
       Dropdown: {
         id: 'marital-status-dropdown',
-        ariaLabel: 'Marital status dropdown',
+        ['aria-label']: 'Marital status dropdown',
         items: ['relationship', 'complicated', 'single'],
         label: 'Marital status',
         titleText: 'Marital status',

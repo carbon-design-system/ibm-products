@@ -290,7 +290,7 @@ export const InlineEditCell = ({
       <Dropdown
         id={cellId}
         label={cellLabel || 'Dropdown menu options'}
-        ariaLabel={cellLabel || 'Dropdown menu options'}
+        aria-label={cellLabel || 'Dropdown menu options'}
         {...inputProps}
         hideLabel
         style={{

@@ -103,7 +103,7 @@ const SelectRow = (datagridState) => {
         [`${blockClass}__checkbox-cell-sticky-left`]:
           isFirstColumnStickyLeft && windowSize > 671,
       })}
-      ariaLabel={`${tableId}-row-${row.index}`} // TODO: aria label should be i18n'ed
+      aria-label={`${tableId}-row-${row.index}`} // TODO: aria label should be i18n'ed
       disabled={selectDisabled}
     />
   );

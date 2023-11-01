@@ -158,6 +158,7 @@ export let AddSelectRow = ({
               {hasModifiers && (
                 <Layer>
                   <Dropdown
+                    titleText={modifiers.label}
                     id={`add-select-modifier-${item.id}`}
                     type="inline"
                     items={modifiers.options}

@@ -30,6 +30,7 @@ import { useSubscribeToEventEmitter } from './addons/Filtering/hooks';
 import { clearSingleFilter } from './addons/Filtering/FilterProvider';
 
 const blockClass = `${pkg.prefix}--datagrid`;
+const gcClass = `${blockClass}__grid-container`;
 
 export const DatagridContent = ({ datagridState, title }) => {
   const { state: inlineEditState, dispatch } = useContext(InlineEditContext);
@@ -165,20 +166,16 @@ export const DatagridContent = ({ datagridState, title }) => {
   return (
     <>
       <TableContainer
-        className={cx(
-          `${blockClass}__grid-container`,
-          withVirtualScroll || fullHeightDatagrid
-            ? `${blockClass}__full-height`
-            : '',
-          DatagridPagination ? `${blockClass}__with-pagination` : '',
-          useDenseHeader ? `${blockClass}__dense-header` : '',
-          {
-            [`${blockClass}__grid-container-grid-active`]: gridActive,
-            [`${blockClass}__grid-container-inline-edit`]: withInlineEdit,
-            [`${blockClass}__grid-container-grid-active--without-toolbar`]:
-              withInlineEdit && !DatagridActions,
-          }
-        )}
+        className={cx(`${gcClass}`, {
+          [`${gcClass}-active`]: gridActive,
+          [`${gcClass}-active--without-toolbar`]:
+            withInlineEdit && !DatagridActions,
+          [`${gcClass}-inline-edit`]: withInlineEdit,
+          [`${blockClass}__full-height`]:
+            withVirtualScroll || fullHeightDatagrid,
+          [`${blockClass}__with-pagination`]: DatagridPagination,
+          [`${blockClass}__dense-header`]: useDenseHeader,
+        })}
         title={gridTitle}
         description={gridDescription}
       >

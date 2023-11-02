@@ -103,13 +103,13 @@ export let EditTearsheet = forwardRef(
         {...getDevtoolsProps(componentName)}
         actions={[
             {
-                key: 'create-action-button-submit',
+                key: 'edit-action-button-submit',
                 label: submitButtonText,
                 onClick: onRequestSubmit,
                 kind: 'primary',
             },
             {
-                key: 'create-action-button-cancel',
+                key: 'edit-action-button-cancel',
                 label: cancelButtonText,
                 onClick: onClose,
                 kind: 'ghost',

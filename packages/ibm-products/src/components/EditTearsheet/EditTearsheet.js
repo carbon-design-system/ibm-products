@@ -102,16 +102,18 @@ export let EditTearsheet = forwardRef(
         {...rest}
         {...getDevtoolsProps(componentName)}
         actions={[
-          {
-            label: submitButtonText,
-            onClick: onHandleModalClick,
-            kind: 'primary',
-          },
-          {
-            label: cancelButtonText,
-            onClick: onHandleModalClick,
-            kind: 'secondary',
-          },
+            {
+                key: 'create-action-button-submit',
+                label: submitButtonText,
+                onClick: onHandleModalClick,
+                kind: 'primary',
+            },
+            {
+                key: 'create-action-button-cancel',
+                label: cancelButtonText,
+                onClick: onClose,
+                kind: 'ghost',
+            }
         ]}
         className={cx(blockClass, className)}
         description={description}

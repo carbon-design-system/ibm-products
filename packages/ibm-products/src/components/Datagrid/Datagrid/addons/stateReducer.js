@@ -5,21 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { pkg } from '../../../../settings';
+
 const COLUMN_RESIZE_START = 'columnStartResizing';
 const COLUMN_RESIZING = 'columnResizing';
 const COLUMN_RESIZE_END = 'columnDoneResizing';
 const INIT = 'init';
-
-export const handleColumnResizeStartEvent = (dispatch, headerId) => {
-  dispatch({ type: COLUMN_RESIZE_START, payload: { headerId } });
-};
+const blockClass = `${pkg.prefix}--datagrid`;
 
 export const handleColumnResizeEndEvent = (
   dispatch,
   onColResizeEnd,
-  headerId
+  headerId,
+  isKeyEvent
 ) => {
-  dispatch({ type: COLUMN_RESIZE_END, payload: { onColResizeEnd, headerId } });
+  dispatch({
+    type: COLUMN_RESIZE_END,
+    payload: { onColResizeEnd, headerId, isKeyEvent },
+  });
 };
 
 export const handleColumnResizingEvent = (
@@ -57,7 +60,7 @@ export const stateReducer = (newState, action) => {
       };
     }
     case COLUMN_RESIZE_START: {
-      const { headerId } = action.payload;
+      const { headerId } = action.payload || {};
       return {
         ...newState,
         isResizing: headerId,
@@ -77,6 +80,7 @@ export const stateReducer = (newState, action) => {
           ([_, value]) => !isNaN(value)
         )
       );
+      const headerIdArray = newState.columnResizing.headerIdWidths || [];
       return {
         ...newState,
         isResizing: headerId,
@@ -87,12 +91,12 @@ export const stateReducer = (newState, action) => {
             ...cleanedWidths,
             ...newColumnWidth,
           },
-          headerIdWidths: [headerId, newWidth],
+          headerIdWidths: [...headerIdArray, [headerId, newWidth]],
         },
       };
     }
     case COLUMN_RESIZE_END: {
-      const { onColResizeEnd, headerId } = action.payload;
+      const { onColResizeEnd, headerId, isKeyEvent } = action.payload || {};
       const currentColumn = {};
       currentColumn[headerId] = newState.columnResizing.columnWidths[headerId];
       const allChangedColumns = newState.columnResizing.columnWidths;
@@ -100,9 +104,27 @@ export const stateReducer = (newState, action) => {
       if (isResizing) {
         onColResizeEnd?.(currentColumn, allChangedColumns);
       }
+      if (!isKeyEvent) {
+        if (typeof isKeyEvent === 'undefined') {
+          // Blur resizer input if it has focus and is not from a key event resize
+          if (
+            document.activeElement.classList.contains(
+              `${blockClass}__col-resizer-range`
+            )
+          ) {
+            document?.activeElement?.blur();
+          }
+          return;
+        }
+      }
       return {
         ...newState,
         isResizing: false,
+        columnResizing: {
+          ...newState.columnResizing,
+          isResizingColumn: false,
+          startX: null,
+        },
       };
     }
   }

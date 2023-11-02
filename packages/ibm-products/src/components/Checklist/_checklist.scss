@@ -207,7 +207,6 @@ $block-class: #{c4p-settings.$pkg-prefix}--checklist;
   @include ellipsis-2-lines();
 }
 
-.#{$block-class}__label--checked,
 .#{$block-class}__label--disabled {
   color: $text-disabled;
 }

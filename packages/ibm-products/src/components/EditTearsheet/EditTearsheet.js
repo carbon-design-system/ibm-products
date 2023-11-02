@@ -50,7 +50,7 @@ export let EditTearsheet = forwardRef(
       submitButtonText,
       title,
       verticalPosition = defaults.verticalPosition,
-      onHandleModalClick,
+      onRequestSubmit,
       onFormChange,
       sideNavAriaLabel = defaults.sideNavAriaLabel,
 
@@ -105,7 +105,7 @@ export let EditTearsheet = forwardRef(
             {
                 key: 'create-action-button-submit',
                 label: submitButtonText,
-                onClick: onHandleModalClick,
+                onClick: onRequestSubmit,
                 kind: 'primary',
             },
             {
@@ -206,10 +206,10 @@ EditTearsheet.propTypes = {
    */
   onFormChange: PropTypes.func,
 
-  /**
-   * Specifies whether the tearsheet is currently open.
-   */
-  onHandleModalClick: PropTypes.func,
+    /**
+     * Specify a handler for submitting the tearsheet.
+     */
+  onRequestSubmit: PropTypes.func.isRequired,
 
   /**
    * Specifies whether the tearsheet is currently open.

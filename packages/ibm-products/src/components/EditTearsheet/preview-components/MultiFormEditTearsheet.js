@@ -61,8 +61,14 @@ export const MultiFormEditTearsheet = ({
     setOpen(false);
   };
 
-  const handleModalClick = () => {
-    setOpen(!open);
+  const onClose = () => {
+    clearCreateData();
+    action('onClose')();
+  }
+
+  const onSubmit = () => {
+    setOpen(false);
+    action('onSubmit')();
   };
 
   const handleFormChange = () => {
@@ -72,7 +78,7 @@ export const MultiFormEditTearsheet = ({
   return (
     <div>
       <style>{`.${blockClass} { opacity: 0 }`};</style>
-      <Button onClick={handleModalClick}>
+      <Button onClick={() => setOpen(!open)}>
         {open ? 'Close EditTearsheet' : 'Open EditTearsheet'}
       </Button>
       <EditTearsheet
@@ -84,8 +90,8 @@ export const MultiFormEditTearsheet = ({
         description={description}
         title={title}
         open={open}
-        onHandleModalClick={handleModalClick}
-        onClose={clearCreateData}
+        onRequestSubmit={onSubmit}
+        onClose={onClose}
         onFormChange={handleFormChange}
       >
         <EditTearsheetForm

@@ -64,7 +64,7 @@ export const MultiFormEditTearsheet = ({
   const onClose = () => {
     clearCreateData();
     action('onClose')();
-  }
+  };
 
   const onSubmit = () => {
     setOpen(false);

@@ -102,18 +102,18 @@ export let EditTearsheet = forwardRef(
         {...rest}
         {...getDevtoolsProps(componentName)}
         actions={[
-            {
-                key: 'edit-action-button-submit',
-                label: submitButtonText,
-                onClick: onRequestSubmit,
-                kind: 'primary',
-            },
-            {
-                key: 'edit-action-button-cancel',
-                label: cancelButtonText,
-                onClick: onClose,
-                kind: 'ghost',
-            }
+          {
+            key: 'edit-action-button-submit',
+            label: submitButtonText,
+            onClick: onRequestSubmit,
+            kind: 'primary',
+          },
+          {
+            key: 'edit-action-button-cancel',
+            label: cancelButtonText,
+            onClick: onClose,
+            kind: 'ghost',
+          },
         ]}
         className={cx(blockClass, className)}
         description={description}
@@ -206,9 +206,9 @@ EditTearsheet.propTypes = {
    */
   onFormChange: PropTypes.func,
 
-    /**
-     * Specify a handler for submitting the tearsheet.
-     */
+  /**
+   * Specify a handler for submitting the tearsheet.
+   */
   onRequestSubmit: PropTypes.func.isRequired,
 
   /**

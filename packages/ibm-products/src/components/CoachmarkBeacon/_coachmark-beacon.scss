@@ -46,21 +46,6 @@
       }
     }
 
-    &-ring {
-      .#{$block-class}__center {
-        -webkit-mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='80px' height='80px' viewBox='008080'><pathfill='white' stroke='none' d='M0,0m37-2a404001010Zm128a1212011-10Z'/></svg>");
-        mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='80px' height='80px' viewBox='008080'><pathfill='white' stroke='none' d='M0,0m37-2a404001010Zm128a1212011-10Z'/></svg>");
-
-        circle {
-          /* stylelint-disable-next-line carbon/motion-easing-use */
-          animation: ring-ripple $beaconAnimationTime infinite;
-          @media (prefers-reduced-motion) {
-            animation: none;
-          }
-        }
-      }
-    }
-
     .#{$block-class}__target {
       // the hit area
       position: absolute;

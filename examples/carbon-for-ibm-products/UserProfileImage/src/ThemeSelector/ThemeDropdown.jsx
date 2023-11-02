@@ -17,7 +17,7 @@ export const ThemeDropdown = () => {
     <div className="carbon-theme-dropdown">
       <Dropdown
         direction="top"
-        ariaLabel="Theme dropdown"
+        aria-label="Theme dropdown"
         id="theme-dropdown"
         items={themeData}
         itemToString={(item) => (item ? item.text : '')}

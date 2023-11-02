@@ -184,6 +184,24 @@ describe(componentName, () => {
     expect(editTearsheet).not.toHaveClass('is-visible');
   });
 
+  it('calls the submit handler when the primary button is clicked', async () => {
+    render(
+      <EditTearsheet
+        {...{ ...defaultProps }}
+        onClose={onCloseReturnsTrue}
+        onRequestSubmit={onRequestSubmitFn}
+        open
+      />
+    );
+
+    const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
+    expect(editTearsheet).toHaveClass('is-visible');
+    const submitButton = screen.getByText('Save');
+
+    await act(() => click(submitButton));
+    expect(onRequestSubmitFn).toHaveBeenCalledTimes(1);
+  });
+
   it('applies className to the root node', async () => {
     renderEditTearsheet({ className });
     const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);

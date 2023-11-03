@@ -147,3 +147,18 @@ $block-class: #{$pkg-prefix}--datagrid;
     width: 100vw;
   }
 }
+
+.#{$carbon-prefix}--tooltip__trigger:hover
+  .#{$pkg-prefix}--status-icon--light.#{$pkg-prefix}--status-icon--light-minor-warning {
+  fill: $support-03;
+}
+
+.#{$carbon-prefix}--tooltip__trigger:hover
+  .#{$pkg-prefix}--status-icon--light.#{$pkg-prefix}--status-icon--light-normal {
+  fill: $support-02;
+}
+
+.#{$carbon-prefix}--tooltip__trigger:hover
+  .#{$pkg-prefix}--status-icon--light.#{$pkg-prefix}--status-icon--light-critical {
+  fill: $support-01;
+}

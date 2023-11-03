@@ -213,7 +213,7 @@ Guidebanner.propTypes = {
       );
     }
     React.Children.forEach(prop, (child) => {
-      if (child.type.name !== 'GuidebannerElement') {
+      if (child.type.displayName !== 'GuidebannerElement') {
         // If not GuidebannerElement, then show:
         // React component name(child.type?.name) or
         // HTML element name(child.type).

@@ -7,13 +7,19 @@
  */
 
 import React, { useState } from 'react';
+import { Tooltip } from '@carbon/react';
 import { Add } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
   getStoryTitle,
   prepareStory,
 } from '../../../../global/js/utils/story-helper';
-import { Datagrid, useDatagrid, useFiltering } from '../../index';
+import {
+  Datagrid,
+  useDatagrid,
+  useFiltering,
+  useColumnCenterAlign,
+} from '../../index';
 import styles from '../../_storybook-styles.scss';
 import { DocsPage } from './Filtering.docs-page';
 import { makeData } from '../../utils/makeData';
@@ -125,6 +131,8 @@ const FilteringUsage = ({ defaultGridProps }) => {
       Header: 'Password strength',
       accessor: 'passwordStrength',
       filter: 'checkbox',
+      centerAlignedColumn: true,
+      width: 160,
       Cell: ({ cell: { value } }) => {
         const iconProps = {
           size: 'sm',
@@ -134,16 +142,11 @@ const FilteringUsage = ({ defaultGridProps }) => {
         };
 
         return (
-          <span
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <StatusIcon {...iconProps} />
-            {iconProps.iconDescription}
-          </span>
+          <Tooltip label={iconProps.iconDescription}>
+            <button type="button" className="sb--tooltip-trigger">
+              <StatusIcon {...iconProps} />
+            </button>
+          </Tooltip>
         );
       },
     },
@@ -172,7 +175,8 @@ const FilteringUsage = ({ defaultGridProps }) => {
       emptyStateTitle,
       emptyStateDescription,
     },
-    useFiltering
+    useFiltering,
+    useColumnCenterAlign
   );
 
   // Warnings are ordinarily silenced in storybook, add this to test

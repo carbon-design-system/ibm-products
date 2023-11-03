@@ -6,8 +6,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Datagrid, useDatagrid, useFiltering } from '../../index';
 import React, { useState } from 'react';
+import { Tooltip } from '@carbon/react';
+import {
+  Datagrid,
+  useDatagrid,
+  useFiltering,
+  useColumnCenterAlign,
+} from '../../index';
 import {
   getStoryTitle,
   prepareStory,
@@ -137,6 +143,8 @@ const FilteringUsage = ({ defaultGridProps }) => {
       Header: 'Password strength',
       accessor: 'passwordStrength',
       filter: 'checkbox',
+      width: 160,
+      centerAlignedColumn: true,
       Cell: ({ cell: { value } }) => {
         const iconProps = {
           size: 'sm',
@@ -144,18 +152,12 @@ const FilteringUsage = ({ defaultGridProps }) => {
           kind: value,
           iconDescription: value,
         };
-
         return (
-          <span
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <StatusIcon {...iconProps} />
-            {iconProps.iconDescription}
-          </span>
+          <Tooltip label={iconProps.iconDescription}>
+            <button type="button" className="sb--tooltip-trigger">
+              <StatusIcon {...iconProps} />
+            </button>
+          </Tooltip>
         );
       },
     },
@@ -184,7 +186,8 @@ const FilteringUsage = ({ defaultGridProps }) => {
       emptyStateTitle,
       emptyStateDescription,
     },
-    useFiltering
+    useFiltering,
+    useColumnCenterAlign
   );
 
   // Warnings are ordinarily silenced in storybook, add this to test

@@ -95,7 +95,7 @@
       transition: all $duration--fast-02 motion(standard, productive);
 
       @media (prefers-reduced-motion: reduce) {
-        transition: none; 
+        transition: none;
       }
     }
 

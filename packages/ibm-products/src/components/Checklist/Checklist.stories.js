@@ -146,7 +146,7 @@ export const taskStates = prepareStory(Template, {
         ],
       },
       {
-         title: 'Checked state',
+        title: 'Checked state',
         tasks: [
           {
             kind: 'checked',

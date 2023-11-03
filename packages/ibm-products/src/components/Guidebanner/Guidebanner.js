@@ -219,7 +219,7 @@ Guidebanner.propTypes = {
         // HTML element name(child.type).
         error = new Error(
           `\`Guidebanner\` only accepts children of type \`GuidebannerElement\`, found \`${
-            child.type?.name || child.type
+            child.type?.displayName || child.type?.name || child.type
           }\` instead.`
         );
       }

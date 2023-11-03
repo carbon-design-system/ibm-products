@@ -48,7 +48,7 @@ export let NotFoundEmptyState = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(blockClass, className)}
+        className={cx(blockClass, className, `${blockClass}-type--notFound`)}
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >

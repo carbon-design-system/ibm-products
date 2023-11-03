@@ -48,7 +48,11 @@ export let NotificationsEmptyState = React.forwardRef(
           // Pass through any other property values as HTML attributes.
           ...rest
         }
-        className={cx(blockClass, className)}
+        className={cx(
+          blockClass,
+          className,
+          `${blockClass}-type--notifications`
+        )}
         ref={ref}
         {...getDevtoolsProps(componentName)}
       >

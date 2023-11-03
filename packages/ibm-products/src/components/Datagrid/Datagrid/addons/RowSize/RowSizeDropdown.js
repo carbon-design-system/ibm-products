@@ -5,19 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Settings16 } from '@carbon/icons-react';
 import { Button } from 'carbon-components-react';
 import cx from 'classnames';
 import RowSizeRadioGroup from './RowSizeRadioGroup';
-import { pkg } from '../../../../../settings';
+import { pkg, carbon } from '../../../../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid__row-size`;
 
-const RowSizeDropdown = ({ legendText = 'Row height', ...props }) => {
+const RowSizeDropdown = ({ legendText = 'Row settings', ...props }) => {
   const buttonRef = useRef(null);
+  const radioGroupRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      const radioGroupParentElement = radioGroupRef?.current;
+      const checkedRadioChild = radioGroupParentElement?.querySelector(
+        `.${carbon.prefix}--radio-button:checked`
+      );
+      checkedRadioChild?.focus();
+    }
+  }, [isOpen]);
 
   const onCloseHandler = () => {
     setIsOpen(false);
@@ -30,7 +41,7 @@ const RowSizeDropdown = ({ legendText = 'Row height', ...props }) => {
   };
 
   const onClickHandler = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
   const onKeyHandler = (e) => {
@@ -62,6 +73,7 @@ const RowSizeDropdown = ({ legendText = 'Row height', ...props }) => {
       />
       {isOpen && (
         <RowSizeRadioGroup
+          ref={radioGroupRef}
           {...props}
           legendText={legendText}
           buttonRef={buttonRef}

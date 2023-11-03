@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /**
  * Copyright IBM Corp. 2022, 2023
  *
@@ -231,7 +232,6 @@ const DatagridActions = (datagridState) => {
   );
 };
 
-// eslint-disable-next-line react/prop-types
 const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
   const updatePagination = ({ page, pageSize }) => {
     setPageSize(pageSize);
@@ -240,20 +240,16 @@ const DatagridPagination = ({ state, setPageSize, gotoPage, rows }) => {
 
   return (
     <Pagination
-      // eslint-disable-next-line react/prop-types
       page={state.pageIndex + 1} // react-table is zero-based
-      // eslint-disable-next-line react/prop-types
       pageSize={state.pageSize}
-      // eslint-disable-next-line react/prop-types
       pageSizes={state.pageSizes || [10, 20, 30, 40, 50]}
-      // eslint-disable-next-line react/prop-types
       totalItems={rows.length}
       onChange={updatePagination}
     />
   );
 };
 
-const EmptyUsage = ({ ...rest }) => {
+const EmptyUsage = ({ emptyStateType, ...rest }) => {
   const columns = React.useMemo(() => defaultHeader, []);
   const [data] = useState(makeData(0));
   const emptyStateTitle = 'Empty State Title';
@@ -268,6 +264,7 @@ const EmptyUsage = ({ ...rest }) => {
     emptyStateTitle,
     emptyStateDescription,
     emptyStateSize,
+    emptyStateType,
     illustrationTheme,
     DatagridActions,
     DatagridBatchActions,
@@ -417,7 +414,6 @@ const range = (len) => {
   return arr;
 };
 
-// eslint-disable-next-line react/prop-types
 const Wrapper = ({ children }) => (
   <div
     style={{
@@ -869,6 +865,13 @@ describe(componentName, () => {
     window.ResizeObserver = ResizeObserver;
   });
 
+  it('check total column count', () => {
+    render(<BasicUsage />);
+    expect(screen.getAllByRole('columnheader').length).toEqual(
+      defaultHeader.length
+    );
+  });
+
   it('renders a basic data grid component with devTools attribute', () => {
     render(<BasicUsage data-testid={dataTestId} />);
 
@@ -1096,55 +1099,25 @@ describe(componentName, () => {
 
   //Empty State
   it('renders an empty table', () => {
-    render(<EmptyUsage data-testid={dataTestId}></EmptyUsage>);
-    expect(
-      screen.getByRole('table').getElementsByTagName('tbody')[0].className
-    ).toEqual('c4p--datagrid__empty-state-body');
+    const { rerender } = render(<EmptyUsage data-testid={dataTestId} />);
+    screen.getByText('Empty State Title');
+    screen.getByText('Description test explaining why this card is empty.');
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-noData`
+    );
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr').length
-    ).toEqual(1);
+    rerender(<EmptyUsage emptyStateType="error" />);
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-error`
+    );
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0].textContent
-    ).toBeNull;
+    rerender(<EmptyUsage emptyStateType="notFound" />);
+    expect(screen.getByRole('img')).toHaveClass(
+      `${pkg.prefix}--empty-state__illustration-notFound`
+    );
 
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('svg')[0]
-    ).toBeDefined();
-
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('h3')[0].textContent
-    ).toEqual('Empty State Title');
-
-    expect(
-      screen
-        .getByRole('table')
-        .getElementsByTagName('tbody')[0]
-        .getElementsByTagName('tr')[0]
-        .getElementsByTagName('td')[0]
-        .getElementsByTagName('div')[0]
-        .getElementsByTagName('p')[0].textContent
-    ).toEqual('Description test explaining why this card is empty.');
+    rerender(<EmptyUsage emptyStateType="12345" />);
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });
 
   it('Initial Load', () => {
@@ -1714,7 +1687,7 @@ describe(componentName, () => {
           'bx--btn bx--btn--ghost bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center'
         )[1]
         .getElementsByTagName('div')[0].textContent
-    ).toEqual('Row height');
+    ).toEqual('Row settings');
 
     fireEvent.click(
       document.getElementsByClassName(
@@ -1735,7 +1708,7 @@ describe(componentName, () => {
           'bx--radio-button-group bx--radio-button-group--vertical bx--radio-button-group--label-right'
         )[0]
         .getElementsByTagName('legend')[0].textContent
-    ).toEqual('Row height');
+    ).toEqual('Row settings');
 
     var rowDropDown = [
       'Extra large',

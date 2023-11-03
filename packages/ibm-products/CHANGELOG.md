@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.61.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.60.0...@carbon/ibm-products@1.61.0) (2023-10-31)
+
+
+### Bug Fixes
+
+* **Datagrid:** address col title issue in customize col tearsheet ([#3671](https://github.com/carbon-design-system/ibm-products/issues/3671)) ([15ade58](https://github.com/carbon-design-system/ibm-products/commit/15ade588ff592421b51870eb96dc517621a7a4cb))
+* **Datagrid:** do not always show edit icons for inline editing ([#3675](https://github.com/carbon-design-system/ibm-products/issues/3675)) ([bb1aa3c](https://github.com/carbon-design-system/ibm-products/commit/bb1aa3cf2034fbc9f70a373a45705d3b7872f15c))
+* **Datagrid:** import filter summary styles from datagrid ([#3690](https://github.com/carbon-design-system/ibm-products/issues/3690)) ([ad637c1](https://github.com/carbon-design-system/ibm-products/commit/ad637c1ebcf7cb4f753472e6ff3d606706424a66))
+* update to Carbon 10 compatible versions to latest ([#3659](https://github.com/carbon-design-system/ibm-products/issues/3659)) ([9e49ac7](https://github.com/carbon-design-system/ibm-products/commit/9e49ac7357549482b1d112e77a688076be6cdb41)), closes [#3671](https://github.com/carbon-design-system/ibm-products/issues/3671) [#3665](https://github.com/carbon-design-system/ibm-products/issues/3665)
+
+
+### Features
+
+* **Datagrid:** add renderLabel to filterProps and FilterSummary ([#3683](https://github.com/carbon-design-system/ibm-products/issues/3683)) ([058d9b8](https://github.com/carbon-design-system/ibm-products/commit/058d9b84e79f9c0c90fd8ec8622d998cfbe813d7))
+* **TagSet:** allow for tag rendering in overflow (v1) ([#3720](https://github.com/carbon-design-system/ibm-products/issues/3720)) ([aaac2f9](https://github.com/carbon-design-system/ibm-products/commit/aaac2f9ac585f9f57b52495e1a56a4badddd7ca0))
+
+
+
+
+
+# [1.60.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.59.1...@carbon/ibm-products@1.60.0) (2023-10-24)
+
+
+### Bug Fixes
+
+* datagrid empty state fixes v1 ([#3544](https://github.com/carbon-design-system/ibm-products/issues/3544)) ([bdb3143](https://github.com/carbon-design-system/ibm-products/commit/bdb3143c67a495b0c951363c3fab2d5d00019622))
+* **Datagrid:** assign expected values for expanded/collapsed states ([#3569](https://github.com/carbon-design-system/ibm-products/issues/3569)) ([abda694](https://github.com/carbon-design-system/ibm-products/commit/abda694d425b885f17819ecc8bb78be8fb765178))
+* **Datagrid:** reset col order in tearsheet onClose ([#3577](https://github.com/carbon-design-system/ibm-products/issues/3577)) ([457d1fa](https://github.com/carbon-design-system/ibm-products/commit/457d1fad0f2f23e42b1ea25a6332ff7907eb196e))
+
+
+### Features
+
+* **Datagrid:** add individual filter removal support ([#3630](https://github.com/carbon-design-system/ibm-products/issues/3630)) ([c6ea24e](https://github.com/carbon-design-system/ibm-products/commit/c6ea24e19165716d4609eeab855a0167bf84f8ee))
+* **Datagrid:** replace `react-dnd` with `[@dnd-kit](https://github.com/dnd-kit)` ([#3616](https://github.com/carbon-design-system/ibm-products/issues/3616)) ([e7a3ee6](https://github.com/carbon-design-system/ibm-products/commit/e7a3ee67baa5dd0f9c71230b28b7c033e89db45e))
+
+
+
+
+
 ## [1.59.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.59.0...@carbon/ibm-products@1.59.1) (2023-10-10)
 
 

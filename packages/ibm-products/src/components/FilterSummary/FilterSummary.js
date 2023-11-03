@@ -21,10 +21,12 @@ let FilterSummary = React.forwardRef(
       clearFilters = () => {},
       filters = [],
       renderLabel = null,
+      overflowType = 'default',
     },
     ref
   ) => {
-    const tagFilters = filters.map(({ key, value }) => ({
+    const tagFilters = filters.map(({ key, value, ...rest }) => ({
+      ...rest,
       type: 'gray',
       label: renderLabel?.(key, value) ?? `${key}: ${value}`,
     }));
@@ -37,6 +39,7 @@ let FilterSummary = React.forwardRef(
           allTagsModalTitle="All tags"
           showAllTagsLabel="View all tags"
           tags={tagFilters}
+          overflowType={overflowType}
         />
         <Button kind="ghost" size="sm" onClick={clearFilters}>
           {clearFiltersText}
@@ -54,6 +57,7 @@ FilterSummary.propTypes = {
   clearFilters: PropTypes.func.isRequired,
   clearFiltersText: PropTypes.string,
   filters: PropTypes.arrayOf(PropTypes.object).isRequired,
+  overflowType: PropTypes.oneOf(['default', 'tag']),
   renderLabel: PropTypes.func,
 };
 

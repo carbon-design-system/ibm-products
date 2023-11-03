@@ -568,7 +568,6 @@ export const TopAlignment = () => {
   const columns = React.useMemo(() => getColumns(data).slice(0, 3), []);
   const datagridState = useDatagrid(
     {
-      disableResizing: true,
       columns,
       data,
       verticalAlign: 'top',

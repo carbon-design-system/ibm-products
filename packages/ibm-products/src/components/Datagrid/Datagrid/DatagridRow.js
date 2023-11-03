@@ -24,8 +24,7 @@ const rowHeights = {
 
 // eslint-disable-next-line react/prop-types
 const DatagridRow = (datagridState) => {
-  const { row, rowSize, withNestedRows, prepareRow, disableResizing } =
-    datagridState;
+  const { row, rowSize, withNestedRows, prepareRow } = datagridState;
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
     let size = 0;
@@ -112,7 +111,7 @@ const DatagridRow = (datagridState) => {
     <>
       <TableRow
         className={rowClassNames}
-        {...row.getRowProps({ role: false })}
+        {...row.getRowProps()}
         key={row.id}
         onMouseEnter={hoverHandler}
         onMouseLeave={handleMouseLeave}
@@ -121,7 +120,7 @@ const DatagridRow = (datagridState) => {
         onKeyUp={handleOnKeyUp}
       >
         {row.cells.map((cell, index) => {
-          const cellProps = cell.getCellProps({ role: false });
+          const cellProps = cell.getCellProps();
           const { children, ...restProps } = cellProps;
           const content = children || (
             <>
@@ -132,9 +131,6 @@ const DatagridRow = (datagridState) => {
           if (cell?.column?.id === selectionColumnId) {
             // directly render component without the wrapping TableCell
             return cell.render('Cell', { key: cell.column.id });
-          }
-          if (cell?.column?.id === 'spacer' && disableResizing) {
-            return null;
           }
           return (
             <TableCell

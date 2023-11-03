@@ -125,6 +125,26 @@ describe(TagSet.displayName, () => {
     expect(overflowVisible.length).toEqual(tags10.length);
   });
 
+  it('Renders overflow tags via overflowType prop', async () => {
+    window.innerWidth = tagWidth / 2;
+
+    render(<TagSet tags={tags10} overflowType="tag" />);
+
+    const overflow = screen.getByText('+10');
+    await act(() => userEvent.click(overflow));
+
+    const overflowVisible = screen.queryAllByText(/Tag [0-9]+/, {
+      // selector need to ignore sizing items
+      selector: `.${blockClassOverflow}__content *`,
+    });
+
+    overflowVisible.forEach((overflowItem) => {
+      expect(overflowItem.closest('li')).not.toHaveClass(
+        `${blockClassOverflow}__tag-item--default`
+      );
+    });
+  });
+
   it('Renders some as visible when space limited', async () => {
     const visibleTags = 5;
     window.innerWidth = tagWidth * (visibleTags + 1) + 1; // + 1 for overflow

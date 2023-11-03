@@ -6,5 +6,7 @@
         "DISPLAY_NAME": true
       }
     }
-  }
+  },
+  "dependencies": {},
+  "devDependencies": {}
 }

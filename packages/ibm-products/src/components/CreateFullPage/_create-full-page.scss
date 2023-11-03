@@ -12,9 +12,10 @@
 @use '../../global/styles/project-settings' as c4p-settings;
 
 // CreateFullPage uses the following IBM Products components:
-// ActionSet, CreateInfluencer
+// ActionSet, CreateInfluencer and SimpleHeader
 @use '../CreateInfluencer/index' as *;
 @use '../ActionSet/action-set' as *;
+@use '../SimpleHeader' as *;
 
 // The block part of our conventional BEM class names (blockClass__E--M).
 $block-class: #{c4p-settings.$pkg-prefix}--create-full-page;
@@ -30,6 +31,14 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   padding-top: $spacing-06;
   margin-right: 0;
   margin-left: 0;
+}
+
+.#{$block-class}__header {
+  position: sticky;
+  z-index: 9;
+  top: 0;
+  right: 0;
+  left: 0;
 }
 
 .#{$block-class} .#{$step-block-class}__step--hidden-step {
@@ -64,7 +73,7 @@ $step-block-class: #{c4p-settings.$pkg-prefix}--create-full-page__step;
   display: none;
 }
 
-.#{$block-class} {
+.#{$block-class}__influencer-and-body-container {
   display: flex;
   height: 100vh;
   padding: 0;

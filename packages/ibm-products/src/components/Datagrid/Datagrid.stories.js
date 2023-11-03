@@ -419,7 +419,7 @@ export const ActionsDropdown = () => {
             sm: 'Small',
             xs: 'Extra small',
           },
-          legendText: 'Row height',
+          legendText: 'Row settings',
         },
       },
     },
@@ -485,6 +485,11 @@ const getBatchActions = () => {
 
 export const BatchActions = () => {
   const [data] = useState(makeData(10));
+
+  pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
+  pkg.feature['Datagrid.useActionsColumn'] = true;
+  pkg._silenceWarnings(true);
+
   const columns = React.useMemo(
     () => [
       ...getColumns(data),
@@ -511,7 +516,6 @@ export const BatchActions = () => {
         id: 'delete',
         itemText: 'Delete',
         icon: TrashCan,
-        isDelete: true,
         onClick: action('Clicked row action: delete'),
       },
     ];
@@ -564,6 +568,7 @@ export const TopAlignment = () => {
   const columns = React.useMemo(() => getColumns(data).slice(0, 3), []);
   const datagridState = useDatagrid(
     {
+      disableResizing: true,
       columns,
       data,
       verticalAlign: 'top',
@@ -594,6 +599,11 @@ export const TopAlignment = () => {
 
 export const FrozenColumns = () => {
   const [data] = useState(makeData(10));
+
+  pkg._silenceWarnings(false); // warnings are ordinarily silenced in storybook, add this to test.
+  pkg.feature['Datagrid.useActionsColumn'] = true;
+  pkg._silenceWarnings(true);
+
   const columns = React.useMemo(
     () => [
       ...getColumns(data),

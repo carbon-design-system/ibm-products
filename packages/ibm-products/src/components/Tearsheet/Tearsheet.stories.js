@@ -24,7 +24,6 @@ import {
 } from '@carbon/react';
 
 import { Tearsheet, deprecatedProps } from './Tearsheet';
-import { TearsheetNarrow } from '.';
 import {
   actionsOptions,
   actionsLabels,
@@ -45,7 +44,6 @@ export default {
   title: getStoryTitle(Tearsheet.displayName),
   component: Tearsheet,
   tags: ['autodocs'],
-  subcomponents: { TearsheetNarrow },
   parameters: { styles /* docs: { page: mdx } */, layout: 'fullscreen' },
   argTypes: {
     ...getDeprecatedArgTypes(deprecatedProps),

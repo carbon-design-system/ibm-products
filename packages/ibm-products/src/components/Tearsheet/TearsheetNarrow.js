@@ -27,6 +27,8 @@ import {
   tearsheetShellWideProps as blocked,
 } from './TearsheetShell';
 
+import { portalType } from './TearsheetShell';
+
 const componentName = 'TearsheetNarrow';
 
 // NOTE: the component SCSS is not imported here: it is rolled up separately.
@@ -166,9 +168,9 @@ TearsheetNarrow.propTypes = {
   open: PropTypes.bool,
 
   /**
-   * The DOM node the tearsheet should be rendered within. Defaults to document.body.
+   * The DOM element that the tearsheet should be rendered within. Defaults to document.body.
    */
-  portalTarget: PropTypes.node,
+  portalTarget: portalType,
 
   /**
    * The main title of the tearsheet, displayed in the header area.

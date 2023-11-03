@@ -34,6 +34,7 @@ export let CreateFullPageStep = forwardRef(
       disableSubmit,
       includeStep = defaults.includeStep,
       introStep,
+      invalid,
       title,
       hasFieldset,
       fieldsetLegendText,
@@ -54,6 +55,7 @@ export let CreateFullPageStep = forwardRef(
     });
 
     useRetrieveStepData({
+      invalid,
       stepsContext,
       stepNumber,
       introStep,
@@ -196,6 +198,11 @@ CreateFullPageStep.propTypes = {
    * This prop can be used on the first step to mark it as an intro step, which will not render the progress indicator steps
    */
   introStep: PropTypes.bool,
+
+  /**
+   * This optional prop will indicate an error icon on the progress indicator step item
+   */
+  invalid: PropTypes.bool,
 
   /**
    * Optional function to be called on initial mount of a step.

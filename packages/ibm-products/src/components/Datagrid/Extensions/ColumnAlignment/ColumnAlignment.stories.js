@@ -7,6 +7,7 @@
  */
 
 import React, { useState } from 'react';
+import { Tooltip } from '@carbon/react';
 import { Edit, TrashCan } from '@carbon/react/icons';
 import { action } from '@storybook/addon-actions';
 import {
@@ -72,7 +73,7 @@ const defaultHeader = [
   {
     Header: 'Password strength',
     accessor: 'passwordStrength',
-    width: 100,
+    width: 160,
     centerAlignedColumn: true,
     Cell: ({ cell: { value } }) => {
       const iconProps = {
@@ -83,16 +84,11 @@ const defaultHeader = [
       };
 
       return (
-        <span
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <StatusIcon {...iconProps} />
-          {iconProps.iconDescription}
-        </span>
+        <Tooltip label={iconProps.iconDescription}>
+          <button type="button" className="sb--tooltip-trigger">
+            <StatusIcon {...iconProps} />
+          </button>
+        </Tooltip>
       );
     },
   },

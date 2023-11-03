@@ -562,7 +562,7 @@ describe(componentName, () => {
   });
 
   it('renders an error icon if the step invalid prop is set to true', async () => {
-   renderCreateFullPage({
+    renderCreateFullPage({
       ...defaultFullPageProps,
     });
 

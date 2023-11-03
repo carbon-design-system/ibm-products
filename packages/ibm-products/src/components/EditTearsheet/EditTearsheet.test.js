@@ -36,6 +36,7 @@ const form1Subtitle = uuidv4();
 
 const onCloseFn = jest.fn();
 const onCloseReturnsTrue = jest.fn(() => true);
+const onRequestSubmitFn = jest.fn();
 const ref = React.createRef();
 
 const defaultProps = {
@@ -47,13 +48,14 @@ const defaultProps = {
   label: '',
   influencerWidth: 'narrow',
   onClose: onCloseFn,
+  onRequestSubmit: onRequestSubmitFn,
   open: true,
   ref,
 };
 
 const renderEditTearsheet = ({ ...rest } = {}) =>
   render(
-    <EditTearsheet {...rest}>
+    <EditTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
       <EditTearsheetForm
         title={form1Title}
         fieldsetLegendText={form1Title}
@@ -80,7 +82,7 @@ const renderEditTearsheet = ({ ...rest } = {}) =>
 
 const renderEmptyEditTearsheet = ({ ...rest } = {}) =>
   render(
-    <EditTearsheet {...rest}>
+    <EditTearsheet onRequestSubmit={onRequestSubmitFn} {...rest}>
       <p>Child element that persists across all forms</p>
     </EditTearsheet>
   );
@@ -151,7 +153,12 @@ describe(componentName, () => {
   });
 
   it('adds additional props to the containing node', async () => {
-    render(<EditTearsheet data-testid={dataTestId}> </EditTearsheet>);
+    render(
+      <EditTearsheet
+        data-testid={dataTestId}
+        onRequestSubmit={onRequestSubmitFn}
+      ></EditTearsheet>
+    );
     screen.getByTestId(dataTestId);
   });
 
@@ -166,6 +173,7 @@ describe(componentName, () => {
       <EditTearsheet
         {...{ ...defaultProps }}
         onClose={onCloseReturnsTrue}
+        onRequestSubmit={onRequestSubmitFn}
         open
       />
     );
@@ -174,6 +182,24 @@ describe(componentName, () => {
     const closeButton = screen.getByTitle('Close');
     await act(() => click(closeButton));
     expect(editTearsheet).not.toHaveClass('is-visible');
+  });
+
+  it('calls the submit handler when the primary button is clicked', async () => {
+    render(
+      <EditTearsheet
+        {...{ ...defaultProps }}
+        onClose={onCloseReturnsTrue}
+        onRequestSubmit={onRequestSubmitFn}
+        open
+      />
+    );
+
+    const editTearsheet = document.querySelector(`.${carbon.prefix}--modal`);
+    expect(editTearsheet).toHaveClass('is-visible');
+    const submitButton = screen.getByText('Save');
+
+    await act(() => click(submitButton));
+    expect(onRequestSubmitFn).toHaveBeenCalledTimes(1);
   });
 
   it('applies className to the root node', async () => {

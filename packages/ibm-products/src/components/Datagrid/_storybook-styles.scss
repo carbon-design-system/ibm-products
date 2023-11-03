@@ -8,6 +8,7 @@
 @use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/tooltip';
 
 @use 'ALIAS_STORY_STYLE_CONFIG' as c4p-settings;
 
@@ -140,4 +141,17 @@ div[data-story-title*='#{$story-anchor}']
   > div:first-child {
   overflow: auto;
   width: 100%;
+}
+
+.sb--tooltip-trigger {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+  text-align: start;
 }

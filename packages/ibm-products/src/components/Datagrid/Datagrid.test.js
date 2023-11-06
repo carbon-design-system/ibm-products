@@ -1775,11 +1775,10 @@ describe(componentName, () => {
   ];
 
   const CustomAlignColumns = ({ customCols }) => {
-    const columns = React.useMemo(() => customCols, [customCols]);
     const [data] = useState(makeData(10));
     const datagridState = useDatagrid(
       {
-        columns,
+        columns: customCols,
         data,
       },
       useColumnRightAlign,

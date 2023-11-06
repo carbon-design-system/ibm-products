@@ -27,7 +27,12 @@ const componentName = 'GuidebannerElementButton';
 /**
  * One of two buttons styled specifically for the GuidebannerElement.
  */
-const GuidebannerElementButton = ({ children, className, type, ...rest }) => {
+export let GuidebannerElementButton = ({
+  children,
+  className,
+  type,
+  ...rest
+}) => {
   if (type === 'primary') {
     return (
       <Button
@@ -59,6 +64,16 @@ const GuidebannerElementButton = ({ children, className, type, ...rest }) => {
   );
 };
 
+// Return a placeholder if not released and not enabled by feature flag
+GuidebannerElementButton = pkg.checkComponentEnabled(
+  GuidebannerElementButton,
+  componentName
+);
+
+// The display name of the component, used by React. Note that displayName
+// is used in preference to relying on function.name.
+GuidebannerElementButton.displayName = componentName;
+
 // The types and DocGen commentary for the component props,
 // in alphabetical order (for consistency).
 // See https://www.npmjs.com/package/prop-types#usage.
@@ -81,5 +96,3 @@ GuidebannerElementButton.propTypes = {
 
   /* TODO: add types and DocGen for all props. */
 };
-
-export { GuidebannerElementButton };

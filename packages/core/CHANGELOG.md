@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.4.0...@carbon/ibm-cloud-cognitive-core@2.4.1) (2023-11-03)
+
+
+### Bug Fixes
+
+* update to Carbon 11 compatible versions to latest ([#3734](https://github.com/carbon-design-system/ibm-products/issues/3734)) ([f3a2c0e](https://github.com/carbon-design-system/ibm-products/commit/f3a2c0ee60ff49e56e62589f73a7fdfd2b8e2d2e))
+
+
+
+
+
 # [2.4.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-cloud-cognitive-core@2.3.2...@carbon/ibm-cloud-cognitive-core@2.4.0) (2023-10-27)
 
 

@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.15.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.14.0...@carbon/ibm-products@2.15.0) (2023-11-03)
+
+
+### Bug Fixes
+
+* change overflow menu's tooltip alignment to 'left' ([#3730](https://github.com/carbon-design-system/ibm-products/issues/3730)) ([4e3a4e8](https://github.com/carbon-design-system/ibm-products/commit/4e3a4e8aaf827db0efb02749392cec701fa1e770))
+* **Checklist:** update colors and story structures ([#3739](https://github.com/carbon-design-system/ibm-products/issues/3739)) ([c154555](https://github.com/carbon-design-system/ibm-products/commit/c154555e8987216ecdd3da91244b2e6c038db191))
+* **CreateTearsheet & CreateFullPage:** Influencer step error indicator extension ([#3717](https://github.com/carbon-design-system/ibm-products/issues/3717)) ([04654b2](https://github.com/carbon-design-system/ibm-products/commit/04654b26852e9db8495a81e1c9691327a14a4a16))
+* datagrid header review fixes ([#3743](https://github.com/carbon-design-system/ibm-products/issues/3743)) ([d1b68e3](https://github.com/carbon-design-system/ibm-products/commit/d1b68e31f01176d1ed0e2f5c20d8990f5a3cd672))
+* **Datagrid:** address resize end issues ([#3745](https://github.com/carbon-design-system/ibm-products/issues/3745)) ([ae15a37](https://github.com/carbon-design-system/ibm-products/commit/ae15a373c6637fbe2052fb2d35ab7fb5903640cc))
+* **Datagrid:** adhere to min width if provided ([#3707](https://github.com/carbon-design-system/ibm-products/issues/3707)) ([49458f8](https://github.com/carbon-design-system/ibm-products/commit/49458f8a8310f47306e19bf6a40352e73738f195))
+* **Datagrid:** correct number of items displayed when viewing all checkbox filters ([#3726](https://github.com/carbon-design-system/ibm-products/issues/3726)) ([21a99cf](https://github.com/carbon-design-system/ibm-products/commit/21a99cfc79ef83a00c849bf5924d63d7a500c3cf))
+* **EditTearsheet:** Correctly assign action handlers to associated buttons ([#3751](https://github.com/carbon-design-system/ibm-products/issues/3751)) ([2a0024d](https://github.com/carbon-design-system/ibm-products/commit/2a0024d90d0e0edfd7126a49d95be507d0db4e4b))
+* for gallery examples ([#3729](https://github.com/carbon-design-system/ibm-products/issues/3729)) ([72c600b](https://github.com/carbon-design-system/ibm-products/commit/72c600bc32cf73636e5085b6c31f1ea36c8a2e50))
+* update to Carbon 11 compatible versions to latest ([#3734](https://github.com/carbon-design-system/ibm-products/issues/3734)) ([f3a2c0e](https://github.com/carbon-design-system/ibm-products/commit/f3a2c0ee60ff49e56e62589f73a7fdfd2b8e2d2e))
+
+
+### Features
+
+* add prefix hook ([#3727](https://github.com/carbon-design-system/ibm-products/issues/3727)) ([36b51a9](https://github.com/carbon-design-system/ibm-products/commit/36b51a91b4741c49a2b7361c6d9dc6404f54f2d7))
+
+
+
+
+
 # [2.14.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.13.0...@carbon/ibm-products@2.14.0) (2023-10-31)
 
 

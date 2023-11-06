@@ -9,7 +9,6 @@
 import React, { useState, useEffect } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import uuidv4 from '../../global/js/utils/uuidv4';
-import { useDatagrid } from '.';
 import { makeData } from './utils/makeData';
 
 import { carbon, pkg } from '../../settings';
@@ -17,6 +16,7 @@ import { expectWarn, mockHTMLElement } from '../../global/js/utils/test-helper';
 import { Datagrid } from '.';
 
 import {
+  useDatagrid,
   useInfiniteScroll,
   useSelectRows,
   useDisableSelectRows,
@@ -31,6 +31,7 @@ import {
   useActionsColumn,
   useColumnOrder,
   useColumnRightAlign,
+  useColumnCenterAlign,
 } from '.';
 
 import {
@@ -57,6 +58,8 @@ import userEvent from '@testing-library/user-event';
 const dataTestId = uuidv4();
 
 const componentName = Datagrid.displayName;
+
+const blockClass = `${pkg.prefix}--datagrid`;
 
 const defaultHeader = [
   {
@@ -1863,67 +1866,106 @@ describe(componentName, () => {
     );
   });
 
-  const RightAlignedColumns = () => {
-    const columns = React.useMemo(
-      () => [
-        ...defaultHeader.slice(0, 3),
-        {
-          Header: 'Age',
-          accessor: 'age',
-          rightAlignedColumn: true,
-        },
-        {
-          Header: 'Visits',
-          accessor: 'visits',
-          rightAlignedColumn: true,
-        },
-      ],
-      []
-    );
+  const rightAlignedColumnsData = [
+    ...defaultHeader.slice(0, 3),
+    {
+      Header: 'Age',
+      accessor: 'age',
+      rightAlignedColumn: true,
+      disableSortBy: true,
+    },
+    {
+      Header: 'Visits',
+      accessor: 'visits',
+      rightAlignedColumn: true,
+    },
+  ];
+
+  const centerAlignedColumnsData = [
+    ...defaultHeader.slice(0, 3),
+    {
+      Header: 'Age',
+      accessor: 'age',
+      centerAlignedColumn: true,
+      disableSortBy: true,
+    },
+    {
+      Header: 'Visits',
+      accessor: 'visits',
+      centerAlignedColumn: true,
+    },
+  ];
+
+  const CustomAlignColumns = ({ customCols }) => {
     const [data] = useState(makeData(10));
     const datagridState = useDatagrid(
       {
-        columns,
+        columns: customCols,
         data,
       },
-      useColumnRightAlign
+      useColumnRightAlign,
+      useColumnCenterAlign
     );
 
     return <Datagrid datagridState={{ ...datagridState }} />;
   };
 
-  it('Right Aligned Columns', () => {
+  it('should render right aligned columns', () => {
     render(
-      <RightAlignedColumns data-testid={dataTestId}></RightAlignedColumns>
+      <CustomAlignColumns
+        customCols={rightAlignedColumnsData}
+        data-testid={dataTestId}
+      />
     );
-    const numRows = screen
-      .getByRole('table')
-      .getElementsByTagName('tbody')[0]
-      .getElementsByTagName('tr').length;
 
-    for (var i = 0; i < numRows; i++) {
-      expect(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('tr')
-          .item(i)
-          .getElementsByTagName('td')[3]
-          .getElementsByTagName('div')[0].classList[0]
-      ).toEqual('c4p--datagrid__right-align-cell-renderer');
-    }
+    const ageColIndex = rightAlignedColumnsData.findIndex(
+      (i) => i.accessor === 'age'
+    );
+    const visitsColIndex = rightAlignedColumnsData.findIndex(
+      (i) => i.accessor === 'visits'
+    );
 
-    for (var j = 0; j < numRows; j++) {
-      expect(
-        screen
-          .getByRole('table')
-          .getElementsByTagName('tbody')[0]
-          .getElementsByTagName('tr')
-          .item(j)
-          .getElementsByTagName('td')[4]
-          .getElementsByTagName('div')[0].classList[0]
-      ).toEqual('c4p--datagrid__right-align-cell-renderer');
-    }
+    const gridRows = screen.getAllByRole('row');
+    const bodyRows = gridRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const bodyAgeCell = bodyRows[0].childNodes[ageColIndex].firstChild;
+    const bodyVisitsCell = bodyRows[0].childNodes[visitsColIndex].firstChild;
+    expect(bodyAgeCell).toHaveClass(`${blockClass}__right-align-cell-renderer`);
+    expect(bodyAgeCell).toHaveClass(`sortDisabled`);
+    expect(bodyVisitsCell).toHaveClass(
+      `${blockClass}__right-align-cell-renderer`
+    );
+  });
+
+  it('should render center aligned columns', async () => {
+    render(
+      <CustomAlignColumns
+        customCols={centerAlignedColumnsData}
+        data-testid={dataTestId}
+      />
+    );
+
+    const ageColIndex = centerAlignedColumnsData.findIndex(
+      (i) => i.accessor === 'age'
+    );
+    const visitsColIndex = centerAlignedColumnsData.findIndex(
+      (i) => i.accessor === 'visits'
+    );
+
+    const gridRows = screen.getAllByRole('row');
+    const bodyRows = gridRows.filter(
+      (r) => !r.classList.contains(`${blockClass}__head`)
+    );
+    const bodyAgeCell = bodyRows[0].childNodes[ageColIndex].firstChild;
+    const bodyVisitsCell = bodyRows[0].childNodes[visitsColIndex].firstChild;
+    expect(bodyAgeCell).toHaveClass(
+      `${blockClass}__center-align-cell-renderer`
+    );
+    expect(bodyAgeCell).toHaveClass(`sortDisabled`);
+    expect(bodyVisitsCell).toHaveClass(
+      `${blockClass}__center-align-cell-renderer`
+    );
   });
 
   it('Row Size Dropdown', () => {

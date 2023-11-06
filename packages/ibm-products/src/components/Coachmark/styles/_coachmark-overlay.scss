@@ -19,6 +19,8 @@
   // The block part of our conventional BEM class names (blockClass__E--M).
   $block-class: #{$pkg-prefix}--coachmark-overlay;
   $carousel-class: #{$pkg-prefix}--carousel;
+  $close-btn-class: #{$block-class}--close-btn;
+  $draghandle-btn-class: #{$block-class}__handle;
 
   .#{$block-class} {
     position: absolute;
@@ -45,6 +47,12 @@
       @media (prefers-reduced-motion) {
         transition: none;
       }
+    }
+
+    &--is-a11ydragmode {
+      border-radius: 0;
+      box-shadow: 0 0 0 $spacing-02 $inverse-02;
+      outline: $spacing-01 solid $inverse-01;
     }
 
     &--is-visible {
@@ -237,13 +245,60 @@
       }
     }
 
+    // HEADER BUTTONS
+    &__handle {
+      position: relative;
+      flex-grow: 1;
+      padding: $spacing-02 0 0 $spacing-03;
+      border: 0;
+      background-color: transparent;
+      text-align: left;
+
+      &::before {
+        position: absolute;
+        top: $spacing-01;
+        left: $spacing-01;
+        width: calc($spacing-06 + $spacing-01);
+        height: calc($spacing-06 + $spacing-01);
+        content: '';
+      }
+
+      &:hover {
+        cursor: move;
+      }
+
+      &:focus {
+        border: none;
+        outline: none;
+
+        &::before {
+          border: 1px solid $inverse-01;
+          outline: 1px solid $blue-60; //$support-04
+        }
+      }
+    }
+
+    &--close-btn {
+      width: $spacing-07;
+      height: $spacing-07;
+      margin-left: auto !important;
+
+      svg > path {
+        margin: 0;
+        fill: $inverse-01 !important;
+      }
+
+      &:hover {
+        background-color: $inverse-hover-ui !important;
+      }
+    }
+
     // FOOTER
     &__footer {
       display: flex;
       align-items: center;
       justify-content: flex-end;
     }
-    /* ------------------ */
 
     // THEME
     &__light {
@@ -265,6 +320,10 @@
         }
 
         .#{$carbon-prefix}--btn--ghost {
+          border-color: transparent !important;
+          border-radius: 0;
+          outline: 1px solid transparent;
+
           &:hover {
             background-color: $inverse-hover-ui;
           }
@@ -272,6 +331,33 @@
           &:active {
             background-color: $active-secondary;
           }
+
+          &:focus {
+            box-shadow: inset 0 0 0 1px $inverse-02,
+              inset 0 0 0 $spacing-01 $white-0;
+          }
+        }
+      }
+      .#{$draghandle-btn-class} {
+        &:focus {
+          &::before {
+            border: 1px solid $white-0;
+            outline: 1px solid transparent;
+          }
+        }
+      }
+      .#{$close-btn-class} {
+        border-color: transparent !important;
+        border-radius: 0;
+        outline: 1px solid transparent;
+
+        &:active {
+          background-color: $active-secondary;
+        }
+
+        &:focus {
+          box-shadow: inset 0 0 0 1px $inverse-02,
+            inset 0 0 0 $spacing-01 $white-0;
         }
       }
     }
@@ -304,6 +390,8 @@
         }
 
         .#{$carbon-prefix}--btn--ghost {
+          border-color: transparent;
+
           &:hover {
             background-color: $inverse-hover-ui;
           }
@@ -313,9 +401,32 @@
           }
 
           &:focus {
-            box-shadow: inset 0 0 0 $spacing-01 $interactive-01,
-              inset 0 0 0 rem(3px) $interactive-03;
+            box-shadow: inset 0 0 0 1px $blue-60,
+              inset 0 0 0 $spacing-01 $white-0;
           }
+          // &:focus {
+          //   box-shadow: inset 0 0 0 $spacing-01 $interactive-01,
+          //     inset 0 0 0 rem(3px) $interactive-03;
+          // }
+        }
+      }
+      .#{$draghandle-btn-class} {
+        &:focus {
+          &::before {
+            border: 1px solid $white-0;
+            outline: 1px solid $blue-60;
+          }
+        }
+      }
+      .#{$close-btn-class} {
+        border-color: transparent;
+
+        &:focus {
+          box-shadow: inset 0 0 0 1px $blue-60, inset 0 0 0 $spacing-01 $white-0;
+        }
+
+        &:active {
+          background-color: $button-tertiary-active;
         }
       }
     }

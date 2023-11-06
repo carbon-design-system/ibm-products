@@ -122,7 +122,7 @@ export const floating = prepareStory(Template, {
         kind="tertiary"
         size="md"
         renderIcon={Launch16}
-        label="Show Information"
+        label="Show information"
       >
         Click Me
       </CoachmarkButton>

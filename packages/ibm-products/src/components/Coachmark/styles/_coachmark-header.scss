@@ -20,36 +20,21 @@
   .#{$block-class} {
     display: flex;
 
-    &--close-btn {
-      width: $spacing-07;
-      height: $spacing-07;
-      margin-left: auto !important;
+    // &__light {
+    //   #{$block-class}--close-btn {
+    //     &:active {
+    //       background-color: $active-secondary;
+    //     }
+    //   }
+    // }
 
-      svg > path {
-        margin: 0;
-        fill: $inverse-01 !important;
-      }
-
-      &:hover {
-        background-color: $inverse-hover-ui !important;
-      }
-    }
-
-    &__light {
-      #{$block-class}--close-btn {
-        &:active {
-          background-color: $active-secondary;
-        }
-      }
-    }
-
-    &__dark {
-      #{$block-class}--close-btn {
-        &:active {
-          background-color: $button-tertiary-active;
-        }
-      }
-    }
+    // &__dark {
+    //   #{$block-class}--close-btn {
+    //     &:active {
+    //       background-color: $button-tertiary-active;
+    //     }
+    //   }
+    // }
   }
 }
 

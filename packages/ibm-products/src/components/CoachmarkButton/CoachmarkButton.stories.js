@@ -51,7 +51,7 @@ const Template = (args) => {
       target={
         <CoachmarkButton
           kind="tertiary"
-          label="Show Information"
+          label="Show information"
           size="md"
           renderIcon={Launch16}
           {...args}

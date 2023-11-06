@@ -22,6 +22,13 @@ const useRowExpander = (hooks) => {
     const expanderColumn = {
       id: 'expander',
       Cell: ({ row }) => {
+        const expanderButtonProps = {
+          ...row.getToggleRowExpandedProps(),
+          onClick: (e) => {
+            e.stopPropagation(); // avoid triggering onRowClick
+            row.toggleRowExpanded();
+          },
+        };
         const {
           expanderButtonTitleExpanded = 'Collapse row',
           expanderButtonTitleCollapsed = 'Expand row',
@@ -39,7 +46,7 @@ const useRowExpander = (hooks) => {
                 `${carbon.prefix}--btn`,
                 `${carbon.prefix}--btn--ghost`
               )}
-              {...row.getToggleRowExpandedProps()}
+              {...expanderButtonProps}
               title={expanderTitle}
             >
               {row.isExpanded ? (

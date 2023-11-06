@@ -17,7 +17,7 @@ import { useResizeObserver } from '../../../global/js/hooks/useResizeObserver';
 import { pkg, carbon } from '../../../settings';
 import cx from 'classnames';
 
-const blockClass = `${pkg.prefix}--datagrid`;
+const blockClass = `${pkg.prefix}--datagrid__table-toolbar`;
 
 const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   const [displayAllInMenu, setDisplayAllInMenu] = useState(false);
@@ -31,7 +31,8 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     setGlobalFilter,
     rows,
   } = datagridState;
-  const totalSelected = Object.keys(selectedRowIds || {})?.length;
+  const selectedKeys = Object.keys(selectedRowIds || {});
+  const totalSelected = selectedKeys.length;
 
   // Get initial width of batch actions container,
   // used to measure when all items are put inside
@@ -58,24 +59,20 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
   }, [width, ref, initialListWidth]);
 
   const getSelectedRowData = () => {
-    const selectedRowIndexes = Object.keys(selectedRowIds);
-    const selectedRowData =
-      selectedRowIndexes && selectedRowIndexes.length
-        ? selectedRowIndexes.map((rowIndex) => {
-            const filteredRow = rows.filter(
-              (row) => row.index === parseInt(rowIndex)
-            );
-            if (filteredRow.length) {
-              return filteredRow[0];
-            }
-            return [];
-          })
-        : [];
-    return selectedRowData;
+    if (selectedKeys.length === 0) {
+      return [];
+    }
+    return selectedKeys.map((rowIndex) => {
+      const filteredRow = rows.filter(
+        (row) => row.index === parseInt(rowIndex)
+      );
+      return filteredRow.length ? filteredRow[0] : [];
+    });
   };
 
   // Render batch actions in ButtonMenu
   const renderBatchActionOverflow = () => {
+    const menuClass = `${blockClass}__button-menu`;
     const minWidthBeforeOverflowIcon = 380;
     // Do not render ButtonMenu when there are 3 or less items
     // and if there is enough available space to render all the items
@@ -94,18 +91,19 @@ const DatagridBatchActionsToolbar = (datagridState, width, ref) => {
     return (
       <MenuButton
         label="More"
-        className={cx(`${blockClass}__button-menu`, {
-          [`${blockClass}__button-menu--icon-only`]:
-            width <= minWidthBeforeOverflowIcon,
-        })}
+        className={cx([
+          menuClass,
+          {
+            [`${menuClass}-icon-only`]: width <= minWidthBeforeOverflowIcon,
+          },
+        ])}
       >
-        {toolbarBatchActions &&
-          toolbarBatchActions.map((batchAction, index) => {
-            if (index < 2 && !displayAllInMenu) {
-              return;
-            }
+        {toolbarBatchActions?.map((batchAction, index) => {
+          const hidden = index < 2 && !displayAllInMenu;
+          if (!hidden) {
             return renderItem(batchAction, index);
-          })}
+          }
+        })}
       </MenuButton>
     );
   };
@@ -168,15 +166,12 @@ const DatagridToolbar = (datagridState) => {
   const { DatagridActions, DatagridBatchActions, batchActions, rowSize } =
     datagridState;
 
-  const getRowHeight = rowSize ? rowSize : 'lg';
+  const getRowHeight = rowSize || 'lg';
 
   return batchActions && DatagridActions ? (
     <div
       ref={ref}
-      className={cx(
-        `${blockClass}__table-toolbar`,
-        `${blockClass}__table-toolbar--${getRowHeight}`
-      )}
+      className={cx([blockClass, `${blockClass}--${getRowHeight}`])}
     >
       <TableToolbar>
         {DatagridActions && DatagridActions(datagridState)}
@@ -185,7 +180,7 @@ const DatagridToolbar = (datagridState) => {
       </TableToolbar>
     </div>
   ) : DatagridActions ? (
-    <div className={`${blockClass}__table-toolbar`}>
+    <div className={blockClass}>
       <TableToolbar>
         {DatagridActions && DatagridActions(datagridState)}
         {DatagridBatchActions && DatagridBatchActions(datagridState)}

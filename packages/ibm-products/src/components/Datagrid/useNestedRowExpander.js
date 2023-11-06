@@ -24,8 +24,9 @@ const useNestedRowExpander = (hooks) => {
       Cell: ({ row }) => {
         const expanderButtonProps = {
           ...row.getToggleRowExpandedProps(),
-          onClick: (e) => {
-            e.stopPropagation(); // avoid triggering onRowClick
+          onClick: (event) => {
+            // Prevents `onRowClick` from being called if `useOnRowClick` is included
+            event.stopPropagation();
             row.toggleRowExpanded();
           },
         };

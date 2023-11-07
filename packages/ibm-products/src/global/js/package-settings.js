@@ -73,6 +73,7 @@ const defaults = {
 
     // Novice to pro components not yet reviewed and released:
     Checklist: false,
+    NonLinearReading: false,
   },
 
   // feature level flags

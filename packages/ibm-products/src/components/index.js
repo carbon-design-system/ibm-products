@@ -82,3 +82,4 @@ export { EditTearsheetNarrow } from './EditTearsheetNarrow';
 export { EditFullPage } from './EditFullPage';
 export { EditUpdateCards } from './EditUpdateCards';
 export { Checklist } from './Checklist';
+export { NonLinearReading } from './NonLinearReading';

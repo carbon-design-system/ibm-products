@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.61.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.61.0...@carbon/ibm-products@1.61.1) (2023-11-07)
+
+
+### Bug Fixes
+
+* **Datagrid:** address resize end issues ([#3746](https://github.com/carbon-design-system/ibm-products/issues/3746)) ([44a7aab](https://github.com/carbon-design-system/ibm-products/commit/44a7aab8774aa63c5999bd5debbfa87934846e74))
+* **Datagrid:** adhere to minWidth if provided ([#3706](https://github.com/carbon-design-system/ibm-products/issues/3706)) ([c362c6d](https://github.com/carbon-design-system/ibm-products/commit/c362c6dfab38021f12ed796248e6ce784410bc3f))
+* **Datagrid:** semantically hide spacer col ([#3723](https://github.com/carbon-design-system/ibm-products/issues/3723)) ([fc935c2](https://github.com/carbon-design-system/ibm-products/commit/fc935c225202d16364f38d8c1d1a70a1d6dad5e7))
+* **Datagrid:** stop propagation of expander click event ([#3770](https://github.com/carbon-design-system/ibm-products/issues/3770)) ([554c7c3](https://github.com/carbon-design-system/ibm-products/commit/554c7c326b605adf973d9327b2ff34cffe3ff547))
+* GuideBanner and InlineTip - export sub components ([#3762](https://github.com/carbon-design-system/ibm-products/issues/3762)) ([a0536ac](https://github.com/carbon-design-system/ibm-products/commit/a0536accabdccd5a3d6e501415dd535b2fa8e0eb))
+* remove 'ring' class ([#3750](https://github.com/carbon-design-system/ibm-products/issues/3750)) ([3eb94ba](https://github.com/carbon-design-system/ibm-products/commit/3eb94ba1704cd75b675bdd5f6a2dcb4f3634e262))
+
+
+
+
+
 # [1.61.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@1.60.0...@carbon/ibm-products@1.61.0) (2023-10-31)
 
 

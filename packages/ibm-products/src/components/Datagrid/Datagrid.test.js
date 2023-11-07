@@ -1143,7 +1143,7 @@ describe(componentName, () => {
     );
   });
 
-  it.only('renders Ten Thousand table entries', async () => {
+  it('renders Ten Thousand table entries', async () => {
     render(<TenThousandEntries data-testid={dataTestId} />);
 
     const tableBody =

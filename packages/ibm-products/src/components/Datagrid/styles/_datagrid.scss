@@ -81,7 +81,6 @@
     }
 
     &.#{$block-class}__variable-row-height {
-      &.#{c4p-settings.$carbon-prefix}--data-table--compact,
       &.#{c4p-settings.$carbon-prefix}--data-table--xs {
         .#{$block-class}__cell {
           padding-top: $spacing-01;
@@ -89,7 +88,6 @@
         }
       }
 
-      &.#{c4p-settings.$carbon-prefix}--data-table--short,
       &.#{c4p-settings.$carbon-prefix}--data-table--sm,
       &.#{c4p-settings.$carbon-prefix}--data-table--md {
         .#{$block-class}__cell {
@@ -100,7 +98,6 @@
         }
       }
 
-      &.#{c4p-settings.$carbon-prefix}--data-table--tall,
       &.#{c4p-settings.$carbon-prefix}--data-table--lg,
       &.#{c4p-settings.$carbon-prefix}--data-table--xl {
         .#{$block-class}__cell {
@@ -112,7 +109,6 @@
   }
 
   &.#{$block-class}__vertical-align-top {
-    &.#{c4p-settings.$carbon-prefix}--data-table--tall,
     &.#{c4p-settings.$carbon-prefix}--data-table--lg,
     &.#{c4p-settings.$carbon-prefix}--data-table--xl {
       .#{$block-class}__cell {
@@ -130,7 +126,6 @@
     }
 
     &.#{$block-class}__variable-row-height {
-      &.#{c4p-settings.$carbon-prefix}--data-table--tall,
       &.#{c4p-settings.$carbon-prefix}--data-table--lg,
       &.#{c4p-settings.$carbon-prefix}--data-table--xl {
         .#{$block-class}__cell {

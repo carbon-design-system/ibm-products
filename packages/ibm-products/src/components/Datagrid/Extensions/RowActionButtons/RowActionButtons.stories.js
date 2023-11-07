@@ -140,7 +140,7 @@ const RowActionButtons = ({ ...args }) => {
       {
         Header: '',
         accessor: 'actions',
-        sticky: 'right',
+        // sticky: 'right',
         isAction: true,
       },
     ],

@@ -354,15 +354,19 @@
 .#{$block-class}
   .#{$block-class}__carbon-row
   .#{$block-class}__actions-column-cell-non-sticky
-  .#{$block-class}__actions-column-contents {
-  visibility: hidden;
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only {
+  opacity: 0;
 }
 
 .#{$block-class}
   .#{$block-class}__carbon-row:hover
   .#{$block-class}__actions-column-cell-non-sticky
-  .#{$block-class}__actions-column-contents {
-  visibility: visible;
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only,
+.#{$block-class}
+  .#{$block-class}__carbon-row
+  .#{$block-class}__actions-column-cell-non-sticky
+  .#{c4p-settings.$carbon-prefix}--btn--icon-only:focus {
+  opacity: 1;
 }
 
 .#{$block-class}__head-hidden-select-all {

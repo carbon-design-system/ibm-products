@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.15.1](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.15.0...@carbon/ibm-products@2.15.1) (2023-11-07)
+
+
+### Bug Fixes
+
+* datagrid batch actions release review fixes ([#3771](https://github.com/carbon-design-system/ibm-products/issues/3771)) ([bf36dc9](https://github.com/carbon-design-system/ibm-products/commit/bf36dc9079b65746be70ab5896dc67baa4aad4d9))
+* **Datagrid:** stop propagation of row expander click event ([#3769](https://github.com/carbon-design-system/ibm-products/issues/3769)) ([2ac6864](https://github.com/carbon-design-system/ibm-products/commit/2ac6864bce9dad258264e5b570db2fe2825eae56))
+* replace prop from 'ariaLabel' to 'aria-label' ([#3765](https://github.com/carbon-design-system/ibm-products/issues/3765)) ([af02b7d](https://github.com/carbon-design-system/ibm-products/commit/af02b7d6976eadb6ed36e2aa26028410734d7352))
+* Storybook error "Failed prop type: req'd titleText is missing from Dropdown" ([#3764](https://github.com/carbon-design-system/ibm-products/issues/3764)) ([2b9414e](https://github.com/carbon-design-system/ibm-products/commit/2b9414e894c16670b609be476df6d9dffd2bbc41))
+
+
+
+
+
 # [2.15.0](https://github.com/carbon-design-system/ibm-products/compare/@carbon/ibm-products@2.14.0...@carbon/ibm-products@2.15.0) (2023-11-03)
 
 

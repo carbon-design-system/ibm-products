@@ -14,6 +14,7 @@ import { selectionColumnId } from './common-column-ids';
 import { pkg, carbon } from '../../settings';
 
 const blockClass = `${pkg.prefix}--datagrid`;
+const checkboxClass = `${pkg.prefix}--datagrid__checkbox-cell`;
 
 const useSelectRows = (hooks) => {
   useHighlightSelection(hooks);
@@ -39,17 +40,21 @@ const useSelectRows = (hooks) => {
 };
 
 const useHighlightSelection = (hooks) => {
-  const getRowProps = (props, { row }) => [
-    props,
-    {
-      className: cx(
-        `${blockClass}__carbon-row`,
-        row.getToggleRowSelectedProps().checked
-          ? `${carbon.prefix}--data-table--selected ${blockClass}__active-row`
-          : ''
-      ),
-    },
-  ];
+  const getRowProps = (props, { row }) => {
+    const { checked } = row.getToggleRowSelectedProps();
+    return [
+      props,
+      {
+        className: cx([
+          `${blockClass}__carbon-row`,
+          {
+            [`${carbon.prefix}--data-table--selected`]: checked,
+            [`${blockClass}__active-row`]: checked,
+          },
+        ]),
+      },
+    ];
+  };
   hooks.getRowProps.push(getRowProps);
 };
 
@@ -76,34 +81,41 @@ const SelectRow = (datagridState) => {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
+  const onSelectHandler = (e) => {
+    e.stopPropagation(); // avoid triggering onRowClick
+    if (radio) {
+      toggleAllRowsSelected(false);
+      if (onRadioSelect) {
+        onRadioSelect(row);
+      }
+    }
+    onChange(e);
+    onRowSelect?.(row, e);
+  };
+
   const selectDisabled = isFetching || row.getRowProps().disabled;
-  const { onChange, ...selectProps } = row.getToggleRowSelectedProps();
+  const { onChange, title, ...selectProps } = row.getToggleRowSelectedProps();
   const cellProps = cell.getCellProps();
   const isFirstColumnStickyLeft =
     columns[0]?.sticky === 'left' && withStickyColumn;
+  const rowId = `${tableId}-${row.index}`;
   return (
     <TableSelectRow
       {...cellProps}
       {...selectProps}
       radio={radio}
-      onSelect={(e) => {
-        e.stopPropagation(); // avoid triggering onRowClick
-        if (radio) {
-          toggleAllRowsSelected(false);
-          if (onRadioSelect) {
-            onRadioSelect(row);
-          }
-        }
-        onChange(e);
-        onRowSelect?.(row, e);
-      }}
-      id={`${tableId}-${row.index}`}
-      name={`${tableId}-${row.index}-name`}
-      className={cx(`${blockClass}__checkbox-cell`, cellProps.className, {
-        [`${blockClass}__checkbox-cell-sticky-left`]:
-          isFirstColumnStickyLeft && windowSize > 671,
-      })}
-      ariaLabel={`${tableId}-row-${row.index}`} // TODO: aria label should be i18n'ed
+      onSelect={onSelectHandler}
+      id={rowId}
+      name={`${rowId}-name`}
+      className={cx([
+        checkboxClass,
+        cellProps.className,
+        {
+          [`${checkboxClass}-sticky-left`]:
+            isFirstColumnStickyLeft && windowSize > 671,
+        },
+      ])}
+      ariaLabel={title}
       disabled={selectDisabled}
     />
   );

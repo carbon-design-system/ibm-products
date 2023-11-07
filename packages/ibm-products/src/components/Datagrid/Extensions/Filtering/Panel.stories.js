@@ -263,7 +263,7 @@ export const PanelBatch = prepareStory(FilteringTemplateWrapper, {
                 props: {
                   Dropdown: {
                     id: 'marital-status-dropdown',
-                    ariaLabel: 'Marital status dropdown',
+                    ['aria-label']: 'Marital status dropdown',
                     items: ['relationship', 'complicated', 'single'],
                     label: 'Marital status',
                     titleText: 'Marital status',
@@ -430,7 +430,7 @@ export const PanelInstant = prepareStory(FilteringTemplateWrapper, {
                 props: {
                   Dropdown: {
                     id: 'marital-status-dropdown',
-                    ariaLabel: 'Marital status dropdown',
+                    ['aria-label']: 'Marital status dropdown',
                     items: ['relationship', 'complicated', 'single'],
                     label: 'Marital status',
                     titleText: 'Marital status',
@@ -625,7 +625,7 @@ export const PanelWithInitialFilters = prepareStory(FilteringTemplateWrapper, {
                 props: {
                   Dropdown: {
                     id: 'marital-status-dropdown',
-                    ariaLabel: 'Marital status dropdown',
+                    ['aria-label']: 'Marital status dropdown',
                     items: ['relationship', 'complicated', 'single'],
                     label: 'Marital status',
                     titleText: 'Marital status',
@@ -787,7 +787,7 @@ export const PanelOnlyAccordions = prepareStory(FilteringTemplateWrapper, {
                 props: {
                   Dropdown: {
                     id: 'marital-status-dropdown',
-                    ariaLabel: 'Marital status dropdown',
+                    ['aria-label']: 'Marital status dropdown',
                     items: ['relationship', 'complicated', 'single'],
                     label: 'Marital status',
                     titleText: 'Marital status',
@@ -950,7 +950,7 @@ export const PanelNoAccordions = prepareStory(FilteringTemplateWrapper, {
                 props: {
                   Dropdown: {
                     id: 'marital-status-dropdown',
-                    ariaLabel: 'Marital status dropdown',
+                    ['aria-label']: 'Marital status dropdown',
                     items: ['relationship', 'complicated', 'single'],
                     label: 'Marital status',
                     titleText: 'Marital status',
@@ -1113,7 +1113,7 @@ export const PanelNoData = prepareStory(FilteringTemplateWrapper, {
                 props: {
                   Dropdown: {
                     id: 'marital-status-dropdown',
-                    ariaLabel: 'Marital status dropdown',
+                    ['aria-label']: 'Marital status dropdown',
                     items: ['relationship', 'complicated', 'single'],
                     label: 'Marital status',
                     titleText: 'Marital status',
@@ -1276,7 +1276,7 @@ export const PanelManyCheckboxes = prepareStory(FilteringTemplateWrapper, {
                 props: {
                   Dropdown: {
                     id: 'marital-status-dropdown',
-                    ariaLabel: 'Marital status dropdown',
+                    ['aria-label']: 'Marital status dropdown',
                     items: ['relationship', 'complicated', 'single'],
                     label: 'Marital status',
                     titleText: 'Marital status',

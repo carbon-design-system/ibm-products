@@ -141,7 +141,7 @@ function _Toolbar(args) {
       </ToolbarGroup>
 
       <ToolbarGroup>
-        <OverflowMenu ariaLabel="List" flipped>
+        <OverflowMenu aria-label="List" flipped>
           <OverflowMenuItem itemText="Color palette" />
           <OverflowMenuItem itemText="Text creation" />
           <OverflowMenuItem itemText="Bulleted list" />

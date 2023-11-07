@@ -161,7 +161,7 @@ export let CoachmarkOverlay = forwardRef(
           `${blockClass}__${theme}`,
           (isBeacon || isDraggable) && `${blockClass}--${coachmark.align}`,
           fixedIsVisible && `${blockClass}--is-visible`,
-          a11yDragMode && `${blockClass}--is-a11ydragmode`,
+          a11yDragMode && `${blockClass}--is-dragmode`,
           className
         )}
         ref={overlayRef}

@@ -134,8 +134,6 @@ export let CoachmarkOverlay = forwardRef(
         x + movementX,
         y + movementY
       );
-      // let targetX = x + movementX;
-      // let targetY = y + movementY;
 
       overlay.style.transform = 'none';
       overlay.style.position = 'fixed';
@@ -144,13 +142,6 @@ export let CoachmarkOverlay = forwardRef(
       overlay.style.bottom = 'auto';
     }
     const contentId = uuidv4();
-    const modifyChildren = (child) => {
-      // make a CONST to inject
-      return React.cloneElement(child, { isVisible });
-    };
-    const getModifiedChildren = () => {
-      return React.Children.map(children, (child) => modifyChildren(child));
-    };
 
     return (
       <div
@@ -182,7 +173,9 @@ export let CoachmarkOverlay = forwardRef(
           <CoachmarkHeader onClose={onClose} />
         )}
         <div className={`${blockClass}__body`} ref={ref} id={contentId}>
-          {getModifiedChildren()}
+          {React.Children.map(children, (child) =>
+            React.cloneElement(child, { isVisible })
+          )}
         </div>
         {isBeacon && <span className={`${blockClass}__caret`} />}
       </div>

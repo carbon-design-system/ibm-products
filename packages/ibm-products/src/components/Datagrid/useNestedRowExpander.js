@@ -21,6 +21,14 @@ const useNestedRowExpander = (hooks) => {
     const expanderColumn = {
       id: 'expander',
       Cell: ({ row }) => {
+        const expanderButtonProps = {
+          ...row.getToggleRowExpandedProps(),
+          onClick: (event) => {
+            // Prevents `onRowClick` from being called if `useOnRowClick` is included
+            event.stopPropagation();
+            row.toggleRowExpanded();
+          },
+        };
         const {
           expanderButtonTitleExpanded = 'Collapse row',
           expanderButtonTitleCollapsed = 'Expand row',
@@ -38,7 +46,7 @@ const useNestedRowExpander = (hooks) => {
                 `${carbon.prefix}--btn`,
                 `${carbon.prefix}--btn--ghost`
               )}
-              {...row.getToggleRowExpandedProps()}
+              {...expanderButtonProps}
               title={expanderTitle}
             >
               <ChevronRight16

@@ -32,7 +32,8 @@ const useInfiniteScroll = (hooks) => {
     const tableElement = document.querySelector(`#${tableId}`);
     const totalTableHeight = tableHeight || tableElement?.clientHeight;
 
-    const loadMoreThresholdValue = loadMoreThreshold || 200;
+    const loadMoreThresholdValue =
+      typeof loadMoreThreshold === 'number' ? loadMoreThreshold : 200;
 
     const emptyFetchData = () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps

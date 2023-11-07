@@ -12,7 +12,7 @@ import { selectionColumnId } from './common-column-ids';
 import SelectAllWithToggle from './Datagrid/DatagridSelectAllWithToggle';
 import { pkg } from '../../settings';
 
-const blockClass = `${pkg.prefix}--datagrid`;
+const blockClass = `${pkg.prefix}--datagrid__select-all`;
 
 const useSelectAllToggle = (hooks) => {
   useSelectAllWithToggleComponent(hooks);
@@ -54,8 +54,8 @@ const useAddClassNameToSelectRow = (hooks) => {
       return [
         props,
         {
-          className: cx(`${blockClass}__select-all-toggle-on`, {
-            [`${blockClass}__select-all-sticky-left`]:
+          className: cx(`${blockClass}-toggle-on`, {
+            [`${blockClass}-sticky-left`]:
               isFirstColumnStickyLeft && windowSize > 671,
           }),
         },

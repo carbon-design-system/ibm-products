@@ -2281,7 +2281,7 @@ describe('batch action testing', () => {
 
     it('renders batch action and checks for the appropriate rendering based on the current mocked widths', async () => {
       const { container } = render(<TestBatch />);
-      const firstCheckbox = screen.getAllByLabelText(/datagrid-table-id/)[0];
+      const firstCheckbox = screen.getAllByLabelText('Toggle Row Selected')[0];
       await act(() => click(firstCheckbox));
 
       expect(

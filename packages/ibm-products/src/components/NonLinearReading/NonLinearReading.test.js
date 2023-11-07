@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { render, screen } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
+import { render, screen, act } from '@testing-library/react'; // https://testing-library.com/docs/react-testing-library/intro
 import userEvent from '@testing-library/user-event';
 
 import { pkg } from '../../settings';
@@ -72,18 +72,21 @@ describe(componentName, () => {
     );
   });
 
-  it('shows extra content when button is toggled open', () => {
+  it('shows extra content when button is toggled open', async () => {
     const { container } = renderComponent();
     const button = container.querySelector('button');
-    click(button);
+    await act(() => click(button));
     expect(screen.queryByText(definition)).toBeInTheDocument();
   });
 
-  it('hides extra content when button is toggled closed', () => {
+  it('hides extra content when button is toggled closed', async () => {
     const { container } = renderComponent();
     const button = container.querySelector('button');
-    click(button);
-    click(button);
+    // render/expand content
+    await act(() => click(button));
+    expect(screen.queryByText(definition)).toBeInTheDocument();
+    // "unrender"/collapse content
+    await act(() => click(button));
     expect(screen.queryByText(definition)).not.toBeInTheDocument();
   });
 });

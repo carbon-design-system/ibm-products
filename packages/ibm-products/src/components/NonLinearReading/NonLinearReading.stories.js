@@ -8,7 +8,6 @@
 import React from 'react';
 
 import {
-  getSelectedCarbonTheme,
   getStoryTitle,
   prepareStory,
 } from '../../global/js/utils/story-helper';
@@ -50,8 +49,6 @@ export default {
 // TODO: Bug? Even if not used, `args` must be passed to enable "Show code" in the docs.
 // eslint-disable-next-line no-unused-vars
 const TemplateSingleLevel = (args) => {
-  const theme = getSelectedCarbonTheme();
-
   return (
     <div className={`${storyClass}__viewport`}>
       XDR Connect’s correlation
@@ -66,7 +63,6 @@ const TemplateSingleLevel = (args) => {
             , and streamline threat analysis.
           </>
         }
-        theme={theme}
       >
         engine,
       </NonLinearReading>{' '}
@@ -79,8 +75,6 @@ const TemplateSingleLevel = (args) => {
 // Even if not used, `args` must be passed to enable "Show code" in the docs.
 // eslint-disable-next-line no-unused-vars
 const TemplateMultipleLevel = (args) => {
-  const theme = getSelectedCarbonTheme();
-
   return (
     <div className={`${storyClass}__viewport`}>
       Findings are created by the alerts{' '}
@@ -93,7 +87,6 @@ const TemplateMultipleLevel = (args) => {
                   observables, tactics, and techniques, and to remove any
                   duplicate data, thereby streamlining the investigation for
                   you."
-              theme={theme}
             >
               correlate
             </NonLinearReading>{' '}
@@ -114,14 +107,12 @@ const TemplateMultipleLevel = (args) => {
                   itself. Bear in mind that each case can have multiple
                   findings, and every finding will have its own severity.
                 "
-              theme={theme}
             >
               threat intelligence service
             </NonLinearReading>
             to establish the severity of the artifacts.
           </>
         }
-        theme={theme}
       >
         ingested
       </NonLinearReading>{' '}
@@ -161,10 +152,10 @@ const TemplateWithGradientBackground = (args) => {
   );
 };
 
-export const SingleLevel = prepareStory(TemplateSingleLevel);
+export const singleLevel = prepareStory(TemplateSingleLevel);
 
-export const MultipleLevel = prepareStory(TemplateMultipleLevel);
+export const multipleLevel = prepareStory(TemplateMultipleLevel);
 
-export const WithGradientBackground = prepareStory(
+export const withGradientBackground = prepareStory(
   TemplateWithGradientBackground
 );

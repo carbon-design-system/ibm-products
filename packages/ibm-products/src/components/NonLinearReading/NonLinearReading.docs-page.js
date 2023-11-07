@@ -7,13 +7,13 @@ const DocsPage = () => (
   <StoryDocsPage
     blocks={[
       {
-        story: stories.SingleLevel,
+        story: stories.singleLevel,
       },
       {
-        story: stories.MultipleLevel,
+        story: stories.multipleLevel,
       },
       {
-        story: stories.WithGradientBackground,
+        story: stories.withGradientBackground,
       },
     ]}
   />

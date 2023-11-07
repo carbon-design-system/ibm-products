@@ -64,6 +64,25 @@
         }
       }
     }
+    .#{$block-class}__target {
+      // the hit area
+      position: absolute;
+      top: calc(-1 * $spacing-05);
+      left: calc(-1 * $spacing-05);
+      width: $spacing-07;
+      height: $spacing-07;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background-color: transparent;
+      cursor: pointer;
+
+      &[aria-expanded='true'] {
+        circle {
+          animation: none;
+        }
+      }
+    }
 
     &__center {
       position: absolute;

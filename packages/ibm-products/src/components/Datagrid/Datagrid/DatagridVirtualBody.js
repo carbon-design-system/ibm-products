@@ -104,13 +104,14 @@ const DatagridVirtualBody = (datagridState) => {
           {({ index, style }) => {
             const row = visibleRows[index];
             prepareRow(row);
+            const { key } = row.getRowProps();
             return (
               <div
                 style={{
                   ...style,
                 }}
               >
-                {row.RowRenderer({ ...datagridState, row })}
+                {row.RowRenderer({ ...datagridState, row, key })}
               </div>
             );
           }}

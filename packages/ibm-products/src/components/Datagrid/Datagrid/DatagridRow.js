@@ -24,7 +24,7 @@ const rowHeights = {
 
 // eslint-disable-next-line react/prop-types
 const DatagridRow = (datagridState) => {
-  const { row, rowSize, withNestedRows, prepareRow } = datagridState;
+  const { row, rowSize, withNestedRows, prepareRow, key } = datagridState;
 
   const getVisibleNestedRowCount = ({ isExpanded, subRows }) => {
     let size = 0;
@@ -108,7 +108,7 @@ const DatagridRow = (datagridState) => {
   });
 
   return (
-    <>
+    <React.Fragment key={key}>
       <TableRow
         className={rowClassNames}
         {...row.getRowProps()}
@@ -147,7 +147,7 @@ const DatagridRow = (datagridState) => {
         })}
       </TableRow>
       {renderExpandedRow()}
-    </>
+    </React.Fragment>
   );
 };
 

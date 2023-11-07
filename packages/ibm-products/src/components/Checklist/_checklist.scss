@@ -11,18 +11,6 @@
 @import '../../global/styles/project-settings';
 @import '../../global/styles/mixins';
 
-// Other Carbon settings.
-// TODO: @import 'carbon-components/scss/globals/grid/grid'; if needed
-
-// Checklist uses the following Carbon components:
-// TODO: @import(s) of Carbon component styles used by Checklist
-
-// Checklist uses the following Carbon for IBM Products components:
-// TODO: @import(s) of IBM Products component styles used by Checklist
-
-// Define all component styles in a mixin which is then exported using
-// the Carbon import-once mechanism.
-
 @mixin ellipsis-2-lines {
   display: -webkit-box;
   overflow: hidden;
@@ -39,6 +27,7 @@
     &__header {
       display: flex;
       padding: $spacing-05;
+      border-top: 1px solid $ui-03;
       background-color: $ui-01;
       gap: $spacing-03;
     }
@@ -114,7 +103,9 @@
       transform: rotate(-180deg);
     }
 
-    // Button to appear more like a link so it aligns better with the list text
+    // Button to appear more like a link so it aligns better with the list text.
+    // Override Primary button styling to appear more like a link.
+    // "Unset" some settings to allow an inner div to enable multiple lines and an ellipsis if req'd.
     &__button {
       max-width: none !important;
       min-height: auto !important;
@@ -126,8 +117,7 @@
       background-color: transparent !important;
       color: $link-01 !important;
 
-      // The CSS for the Carbon button's label
-      // is incompatible with two-line ellipsis,
+      // The CSS for the Carbon button's label is incompatible with two-line ellipsis,
       // but a div inside a Carbon button works.
       div {
         @include ellipsis-2-lines();
@@ -143,10 +133,6 @@
         background: transparent;
         color: $text-primary;
         text-decoration: underline;
-      }
-
-      &--error {
-        color: $text-error !important;
       }
     }
 
@@ -195,14 +181,18 @@
     &__icon {
       /* stylelint-disable-next-line carbon/layout-token-use */
       margin: rem(1px) $spacing-03 0 0;
-      color: $link-01;
+
+      &--checked,
+      &--indeterminate {
+        color: $link-01;
+      }
 
       &--error {
         color: $support-error;
       }
 
       &--disabled {
-        color: $disabled-03;
+        color: $disabled-02;
       }
     }
 
@@ -210,10 +200,8 @@
       @include carbon--type-style('body-short-01');
       @include ellipsis-2-lines();
 
-      &--checked,
-      &--disabled,
-      &--error {
-        color: $disabled-03;
+      &--disabled {
+        color: $disabled-02;
       }
     }
 

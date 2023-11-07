@@ -24,89 +24,46 @@ const storyClass = 'checklist-stories';
 
 const taskLists = [
   {
+    title: 'Section label',
     tasks: [
       {
         kind: 'checked',
-        label: 'Register for Sandbox trial',
-      },
-    ],
-  },
-  {
-    title: 'Investigate a threat',
-    tasks: [
-      {
-        kind: 'checked',
-        label: 'Explore an automated investigation',
-      },
-      {
-        kind: 'checked',
-        label: 'Visualize an attack',
-      },
-      {
-        kind: 'checked',
-        label: 'See recommended responses',
-      },
-    ],
-  },
-  {
-    title: 'Explore rapid search',
-    tasks: [
-      {
-        kind: 'indeterminate',
-        label: 'Search from a case',
-        onClick: action('task'),
-      },
-      {
-        kind: 'unchecked',
-        label: 'Run a KQL query',
-        onClick: action('task'),
-      },
-    ],
-  },
-  {
-    title: 'Explore threat analytics',
-    tasks: [
-      {
-        kind: 'unchecked',
-        label: 'View threat analytics dashboard',
-        onClick: action('task'),
-      },
-    ],
-  },
-  {
-    title: 'Manage data ingestion',
-    tasks: [
-      {
-        kind: 'unchecked',
-        label: 'Monitor data ingestion',
-      },
-      {
-        kind: 'error',
-        label: 'Register a data ingestion point',
+        label: 'Task name',
+        url: 'https://www.ibm.com/',
         onClick: (task) => {
           action('task')(task);
-          window.open(task.url, '_blank').focus();
+          // The onClick event returns all of the task's object's properties.
+          // E.g. console.log(task) returns:
+          // {
+          //   kind: 'checked',
+          //   label: 'Task name',
+          //   onClick: f(),
+          //   url: 'https://www.ibm.com/',
+          // }
         },
-        url: 'https://www.ibm.com/',
       },
       {
-        kind: 'disabled',
-        label: 'See data source integrations',
+        kind: 'indeterminate',
+        label: 'Task name',
+        onClick: (task) => {
+          action('task')(task);
+          // E.g. define your own inline code
+          // window.open('https://www.ibm.com/', '_blank').focus();
+        },
+      },
+      {
+        kind: 'unchecked',
+        label: 'Task name',
+        guid: '6B29FC40-CA47-1067-B31D-00DD010662DA',
+        onClick: (task) => {
+          action('task')(task);
+          // E.g. trigger your own callback
+          // handleClick(task.guid);
+        },
       },
     ],
   },
 ];
-
-// The flattened list of all tasks[] from taskLists.
-const allTasks = taskLists.map((obj) => obj.tasks).flat();
-// Total number of tasks.
-const numTasks = allTasks.length;
-// Count of tasks where 'kind'=checked.
-const numTasksCompleted = allTasks.filter(
-  (task) => task.kind === 'checked'
-).length;
-// chartValue as a percentage.
-const chartValue = numTasksCompleted / numTasks;
 
 export default {
   title: getStoryTitle(Checklist.displayName),
@@ -145,14 +102,17 @@ const Template = (args) => {
 
 export const checklist = prepareStory(Template, {
   args: {
-    // TODO: Component args - https://storybook.js.org/docs/react/writing-stories/args#Checklist-args
-    onClickViewAll: action('view all'),
-    onToggle: action('toggle'),
-    chartValue: chartValue,
-    chartLabel: `${parseInt(chartValue * 100)}% complete`,
+    onClickViewAll: () => {
+      action('view all')();
+    },
+    onToggle: (isOpen) => {
+      action(`toggle ${isOpen ? 'open' : 'closed'}`)();
+    },
+    chartValue: 0.15,
+    chartLabel: '15% complete',
     taskLists: taskLists,
-    title: 'Get started checklist',
-    viewAllLabel: `View all (${numTasks})`,
+    title: 'Checklist header',
+    viewAllLabel: `View all (10)`,
   },
 });
 
@@ -161,18 +121,16 @@ export const taskStates = prepareStory(Template, {
   args: {
     taskLists: [
       {
-        title: 'Unchecked tasks',
+        title: 'Unchecked state',
         tasks: [
           {
             kind: 'unchecked',
-            label:
-              'Any type of task with a callback function will render a clickable label.',
+            label: 'Task name',
             onClick: action('task'),
           },
           {
             kind: 'unchecked',
-            label:
-              'Tasks *without* a callback function will render plain text.',
+            label: 'Task name',
           },
         ],
       },
@@ -181,10 +139,10 @@ export const taskStates = prepareStory(Template, {
         tasks: [
           {
             kind: 'indeterminate',
-            label: 'Indeterminate',
+            label: 'Task name',
             onClick: action('task'),
           },
-          { kind: 'indeterminate', label: 'Indeterminate' },
+          { kind: 'indeterminate', label: 'Task name' },
         ],
       },
       {
@@ -192,48 +150,31 @@ export const taskStates = prepareStory(Template, {
         tasks: [
           {
             kind: 'checked',
-            label: 'Checked',
+            label: 'Task name',
             onClick: action('task'),
           },
-          { kind: 'checked', label: 'Checked' },
+          { kind: 'checked', label: 'Task name' },
         ],
       },
       {
         title: 'Disabled state',
         tasks: [
+          { kind: 'disabled', label: 'Task name' },
           {
             kind: 'disabled',
-            label: 'Disabled',
+            label: 'Task name',
             onClick: action('task'),
           },
-          { kind: 'disabled', label: 'Disabled' },
         ],
       },
       {
         title: 'Error state',
         tasks: [
+          { kind: 'error', label: 'Task name' },
           {
             kind: 'error',
-            label: 'Error',
+            label: 'Task name',
             onClick: action('task'),
-          },
-          { kind: 'error', label: 'Error' },
-        ],
-      },
-      {
-        title:
-          "A list's title will be truncated if too long otherwise it will never end. A list's title will be truncated if too long otherwise it will never end. A list's title will be truncated if too long otherwise it will never end.",
-        tasks: [
-          {
-            kind: 'unchecked',
-            label:
-              'A label will be truncated if too long otherwise it will never end. A label will be truncated if too long otherwise it will never end. A label will be truncated if too long otherwise it will never end.',
-            onClick: action('task'),
-          },
-          {
-            kind: 'unchecked',
-            label:
-              'A label will be truncated if too long otherwise it will never end. A label will be truncated if too long otherwise it will never end. A label will be truncated if too long otherwise it will never end.',
           },
         ],
       },
